@@ -32,12 +32,6 @@ namespace Z0
             get => "00000000000000000000000000000000 !\"#$%&0()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[0]^_`abcdefghijklmnopqrstuvwxyz{|}~0";
         }
 
-        public static ReadOnlySpan<char> AsciChars
-        {
-            [MethodImpl(Inline)]
-            get => AsciCharString;
-        }
-
         public static string LowercaseLetterString
         {
             [Op]

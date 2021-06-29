@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
 
     using api = Permute;
 

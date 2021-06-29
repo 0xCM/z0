@@ -105,5 +105,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(SegRef a, SegRef b)
             => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SegRef((MemoryAddress src, ByteSize size) src)
+            => new SegRef(src.src, src.size);
+
     }
 }

@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static Typed;
 
     public readonly ref struct Block256<N,T>
         where N : unmanaged, ITypeNat

@@ -13,14 +13,28 @@ namespace Z0
     partial struct TextTools
     {
         [MethodImpl(Inline), Op]
-        public static uint render(StringAddress src, ref uint i, Span<char> dst)
+        public static uint render(ReadOnlySpan<char> src, ref uint i, Span<byte> dst)
         {
             var i0=i;
-            ref var c = ref firstchar(src);
-            var j=0u;
-            while(c != 0)
-                seek(dst, i++) = skip(c, j++);
-            return j-1;
+            for(var j=0; j<src.Length; j++)
+                seek(dst,i++) = (byte)skip(src,j);
+            return i-i0;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(ReadOnlySpan<char> src, ref uint i, Span<char> dst)
+        {
+            var i0=i;
+            for(var j=0; j<src.Length; j++)
+                seek(dst,i++) = skip(src,j);
+            return i-i0;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(ReadOnlySpan<char> src, Span<byte> dst)
+        {
+            var i=0u;
+            return render(src, ref i, dst);
         }
 
         [MethodImpl(Inline), Op]

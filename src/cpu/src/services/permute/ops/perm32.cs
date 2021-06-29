@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static BitMasks.Literals;
-    using static Part;
+    using static Root;
+    using static Typed;
 
     partial struct Permute
     {

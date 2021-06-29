@@ -139,6 +139,10 @@ namespace Z0
         public static bool operator !=(SegRef<T> a, SegRef<T> b)
             => !a.Equals(b);
 
+        [MethodImpl(Inline)]
+        public static implicit operator SegRef<T>((MemoryAddress src, ByteSize size) src)
+            => new SegRef<T>(src.src, src.size);
+
         public static SegRef<T> Empty
             => default;
     }

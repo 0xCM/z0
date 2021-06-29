@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
@@ -19,7 +19,7 @@ namespace Z0
     {
         readonly Perm<T> perm;
 
-        static T nT => Numeric.force<T>(TypeNats.value<N>());
+        static T nT => NumericCast.force<T>(TypeNats.value<N>());
 
         static int n => (int)TypeNats.value<N>();
 

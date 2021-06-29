@@ -140,7 +140,7 @@ namespace Z0
             => new ArgPrefix(AsciCode.Dash);
 
         public static ArgPrefix FSlash
-            => new ArgPrefix(AsciCode.FSlash);
+            => new ArgPrefix(AsciCode.FS);
 
         public static ArgPrefix Space
             => new ArgPrefix(AsciCode.Space);

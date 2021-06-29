@@ -8,11 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
+    using static TextTools;
 
     using api = TextTools;
 
     public readonly struct StringAddress : IAddressable
     {
+        [MethodImpl(Inline), Op]
+        public static uint render(StringAddress src, ref uint i, Span<char> dst)
+        {
+            var i0=i;
+            ref var c = ref firstchar(src);
+            var j=0u;
+            while(c != 0 && i < dst.Length)
+                seek(dst, i++) = skip(c, j++);
+            return j-1;
+        }
+
         [MethodImpl(Inline), Op]
         public static StringAddress resource(string src)
             => new StringAddress(core.address(src));
@@ -47,11 +60,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Render(ref uint i, Span<char> dst)
-            => api.render(this, ref i, dst);
+            => render(this, ref i, dst);
 
         [MethodImpl(Inline)]
         public unsafe string Format()
-            => api.format(this);
+            => format(this);
 
         public override string ToString()
             => Format();

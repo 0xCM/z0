@@ -160,6 +160,9 @@ namespace Z0
         protected void Status<T>(T content)
             => Wf.Status(content);
 
+        protected void Status(ReadOnlySpan<char> src)
+            => Wf.Status(new string(src));
+
         protected void Status(string pattern, params object[] args)
             => Wf.Status(string.Format(pattern,args));
 
@@ -169,11 +172,14 @@ namespace Z0
         protected void Warn(string pattern, params object[] args)
             => Wf.Warn(string.Format(pattern,args));
 
-        protected void RowMsg<T>(T content)
+        protected void Row<T>(T content)
             => Wf.Row(content);
 
-        protected void RowMsg(string pattern, params object[] args)
+        protected void Row(string pattern, params object[] args)
             => Wf.Row(string.Format(pattern,args));
+
+        protected void Row(ReadOnlySpan<char> src)
+            => Wf.Row(new string(src));
 
         protected WfExecFlow<T> Running<T>(T msg, [Caller] string operation = null)
             where T : IMsgPattern

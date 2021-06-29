@@ -50,10 +50,6 @@ namespace Z0
         public static implicit operator Symbols<K>(SymCache<K> src)
             => src.Index;
 
-        [MethodImpl(Inline)]
-        public static implicit operator SymSource<K>(SymCache<K> src)
-            => new SymSource<K>(src.Index);
-
         static Symbols<K> Storage;
     }
 }

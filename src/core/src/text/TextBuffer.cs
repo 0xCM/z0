@@ -38,7 +38,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Clear()
-            => Target.Clear();
+        {
+            Target.Clear();
+        }
 
         [MethodImpl(Inline)]
         public void Append(string src)

@@ -1,555 +1,557 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
+// Copyright   :  (c) Chris Moore; 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using AC = AsciChar;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [CodeProvider(typeof(AC))]
-    public enum AsciCode : byte
+    using static Root;
+    using static core;
+
+    using AC = AsciCode;
+
+    public readonly struct AsciSym
     {
         /// <summary>
         /// The asci code for null
         /// </summary>
-        Null = 0,
+        public static AsciSymbol Null => AC.Null;
 
         /// <summary>
         /// Start of heading
         /// </summary>
-        SOH = 1,
+        public static AsciSymbol SOH => AC.SOH;
 
         /// <summary>
         /// Start of text
         /// </summary>
-        SOT = 2,
+        public static AsciSymbol SOT => AC.SOT;
 
         /// <summary>
         /// End of text
         /// </summary>
-        EOT = 3,
+        public static AsciSymbol EOT => AC.EOT;
 
         /// <summary>
         /// End of transmission
         /// </summary>
-        EOTR = 4,
+        public static AsciSymbol EOTR => AC.EOTR;
 
         /// <summary>
         /// Enquiry
         /// </summary>
-        ENQ = 5,
+        public static AsciSymbol ENQ => AC.ENQ;
 
         /// <summary>
         /// Acknowledgement
         /// </summary>
-        ACK = 6,
+        public static AsciSymbol ACK => AC.ACK;
 
         /// <summary>
-        /// Hell's bells, asci code 7
+        /// Hell's bells; asci code 7
         /// </summary>
-        Bell = 7,
+        public static AsciSymbol Bell => AC.Bell;
 
         /// <summary>
-        /// The backspace control symbol '\b', asci code 8
+        /// The backspace control symbol '\b'; asci code 8
         /// </summary>
-        BS = (byte)'\b',
+        public static AsciSymbol BS => AC.BS;
 
         /// <summary>
         /// The tab character code 9
         /// </summary>
-        [Symbol(AC.Tab)]
-        Tab = (byte)AC.Tab,
+        public static AsciSymbol Tab => AC.Tab;
 
         /// <summary>
         /// The vertical tab
         /// </summary>
-        [Symbol(AC.VTab)]
-        VTab = (byte)AC.VTab,
+        public static AsciSymbol VTab => AC.VTab;
 
         /// <summary>
         /// The line-feed character code 10
         /// </summary>
-        [Symbol(AC.LF)]
-        LF = (byte)AC.LF,
+        public static AsciSymbol LF => AC.LF;
 
         /// <summary>
         /// The form-feed control character
         /// </summary>
-        FF = (byte)AC.FF,
+        public static AsciSymbol FF => AC.FF;
 
         /// <summary>
         /// The line-feed character code 13
         /// </summary>
-        CR = (byte)AC.CR,
+        public static AsciSymbol CR => AC.CR;
 
         /// <summary>
         /// The ' ' character code 32
         /// </summary>
-        Space = (byte)AC.Space,
+        public static AsciSymbol Space => AC.Space;
 
         /// <summary>
         /// The '!' character code 33
         /// </summary>
-        Bang = (byte)AC.Bang,
+        public static AsciSymbol Bang => AC.Bang;
 
         /// <summary>
         /// The '"' character code 34
         /// </summary>
-        Quote = (byte)AC.DQuote,
+        public static AsciSymbol Quote => AC.Quote;
 
         /// <summary>
         /// The '#' character code 35
         /// </summary>
-        Hash = (byte)AC.Hash,
+        public static AsciSymbol Hash => AC.Hash;
 
         /// <summary>
         /// The '$' character code 36
         /// </summary>
-        Dollar = (byte)AC.Dollar,
+        public static AsciSymbol Dollar => AC.Dollar;
 
         /// <summary>
         /// The '%' character code 37
         /// </summary>
-        Percent = (byte)AC.Percent,
+        public static AsciSymbol Percent => AC.Percent;
 
         /// <summary>
         /// The '&' character code 38
         /// </summary>
-        Amp = (byte)AC.Amp,
+        public static AsciSymbol Amp => AC.Amp;
 
         /// <summary>
         /// The ''' character code 39
         /// </summary>
-        SQuote = (byte)AC.SQuote,
+        public static AsciSymbol SQuote => AC.SQuote;
 
         /// <summary>
         /// The '(' character code 40
         /// </summary>
-        LParen = (byte)AC.LParen,
+        public static AsciSymbol LParen => AC.LParen;
 
         /// <summary>
         /// The ')' character code 41
         /// </summary>
-        RParen = (byte)AC.RParen,
+        public static AsciSymbol RParen => AC.RParen;
 
         /// <summary>
         /// The '}' character code 41
         /// </summary>
-        RBrace = (byte)AC.RParen,
+        public static AsciSymbol RBrace => AC.RParen;
 
         /// <summary>
         /// The '*' character code 42
         /// </summary>
-        Mul = (byte)AC.Mul,
+        public static AsciSymbol Star => AC.Mul;
 
         /// <summary>
         /// The '+' character code 43
         /// </summary>
-        Plus = (byte)AC.Plus,
+        public static AsciSymbol Plus => AC.Plus;
 
         /// <summary>
-        /// The ,' character code 44
+        /// The ;' character code 44
         /// </summary>
-        Comma = (byte)AC.Comma,
+        public static AsciSymbol Comma => AC.Comma;
 
         /// <summary>
         /// The '-' character code 45
         /// </summary>
-        Dash = (byte)AC.Dash,
+        public static AsciSymbol Dash => AC.Dash;
 
         /// <summary>
         /// The '.' character code 46
         /// </summary>
-        Dot = (byte)AC.Dot,
+        public static AsciSymbol Dot => AC.Dot;
 
         /// <summary>
         /// The '/' character code 47
         /// </summary>
-        FS = (byte)AC.FS,
+        public static AsciSymbol FSlash => AC.FS;
 
         /// <summary>
         /// Specifies the asci code for the digit '0'
         /// </summary>
-        d0 = (byte)AC.d0,
+        public static AsciSymbol d0 => AC.d0;
 
         /// <summary>
         /// Specifies the asci code for the digit '1'
         /// </summary>
-        d1 = (byte)AC.d1,
+        public static AsciSymbol d1 => AC.d1;
 
         /// <summary>
         /// Specifies the asci code for the digit '2'
         /// </summary>
-        d2 = (byte)AC.d2,
+        public static AsciSymbol d2 => AC.d2;
 
         /// <summary>
         /// Specifies the asci code for the digit '3'
         /// </summary>
-        d3 = (byte)AC.d3,
+        public static AsciSymbol d3 => AC.d3;
 
         /// <summary>
         /// Specifies the asci code for the digit '4'
         /// </summary>
-        d4 = (byte)AC.d4,
+        public static AsciSymbol d4 => AC.d4;
 
         /// <summary>
         /// Specifies the asci code for the digit '5'
         /// </summary>
-        d5 = (byte)AC.d5,
+        public static AsciSymbol d5 => AC.d5;
 
         /// <summary>
         /// Specifies the asci code for the digit '6'
         /// </summary>
-        d6 = (byte)AC.d6,
+        public static AsciSymbol d6 => AC.d6;
 
         /// <summary>
         /// Specifies the asci code for the digit '7'
         /// </summary>
-        d7 = (byte)AC.d7,
+        public static AsciSymbol d7 => AC.d7;
 
         /// <summary>
         /// Specifies the asci code for the digit '8'
         /// </summary>
-        d8 = (byte)AC.d8,
+        public static AsciSymbol d8 => AC.d8;
 
         /// <summary>
         /// Specifies the asci code for the digit '9'
         /// </summary>
-        d9 = (byte)AC.d9,
+        public static AsciSymbol d9 => AC.d9;
 
         /// <summary>
         /// The 'a' symbol code 97
         /// </summary>
-        a = (byte)AC.a,
+        public static AsciSymbol a => AC.a;
 
         /// <summary>
         /// The 'b' symbol code 98
         /// </summary>
-        b = (byte)AC.b,
+        public static AsciSymbol b => AC.b;
 
         /// <summary>
         /// The 'c' symbol code 99
         /// </summary>
-        c = (byte)AC.c,
+        public static AsciSymbol c => AC.c;
 
         /// <summary>
         /// The 'd' symbol code 100
         /// </summary>
-        d = (byte)AC.d,
+        public static AsciSymbol d => AC.d;
 
         /// <summary>
         /// The 'e' symbol code 101
         /// </summary>
-        e = (byte)AC.e,
+        public static AsciSymbol e => AC.e;
 
         /// <summary>
         /// The 'f' symbol code 102
         /// </summary>
-        f = (byte)AC.f,
+        public static AsciSymbol f => AC.f;
 
         /// <summary>
         /// The 'g' symbol code 103
         /// </summary>
-        g = (byte)AC.g,
+        public static AsciSymbol g => AC.g;
 
         /// <summary>
         /// The 'h' symbol code 104
         /// </summary>
-        h = (byte)AC.h,
+        public static AsciSymbol h => AC.h;
 
         /// <summary>
         /// The 'i' symbol code 105
         /// </summary>
-        i = (byte)AC.i,
+        public static AsciSymbol i => AC.i;
 
         /// <summary>
         /// The 'j' symbol code 106
         /// </summary>
-        j = (byte)AC.j,
+        public static AsciSymbol j => AC.j;
 
         /// <summary>
         /// The 'k' symbol code 107
         /// </summary>
-        k = (byte)AC.k,
+        public static AsciSymbol k => AC.k;
 
         /// <summary>
         /// The 'l' symbol code 108
         /// </summary>
-        l = (byte)AC.l,
+        public static AsciSymbol l => AC.l;
 
         /// <summary>
         /// The 'm' symbol code 109
         /// </summary>
-        m = (byte)AC.m,
+        public static AsciSymbol m => AC.m;
 
         /// <summary>
         /// The 'n' symbol code 110
         /// </summary>
-        n = (byte)AC.n,
+        public static AsciSymbol n => AC.n;
 
         /// <summary>
         /// The 'o' symbol code 111
         /// </summary>
-        o = (byte)AC.o,
+        public static AsciSymbol o => AC.o;
 
         /// <summary>
         /// The 'p' symbol code 112
         /// </summary>
-        p = (byte)AC.p,
+        public static AsciSymbol p => AC.p;
 
         /// <summary>
         /// The 'q' symbol code 113
         /// </summary>
-        q = (byte)AC.q,
+        public static AsciSymbol q => AC.q;
 
         /// <summary>
         /// The 'r' symbol code 114
         /// </summary>
-        r = (byte)AC.r,
+        public static AsciSymbol r => AC.r;
 
         /// <summary>
         /// The 's' symbol code 115
         /// </summary>
-        s = (byte)AC.s,
+        public static AsciSymbol s => AC.s;
 
         /// <summary>
         /// The 't' symbol code 116
         /// </summary>
-        t = (byte)AC.t,
+        public static AsciSymbol t => AC.t;
 
         /// <summary>
         /// The 'u' symbol code 117
         /// </summary>
-        u = (byte)AC.u,
+        public static AsciSymbol u => AC.u;
 
         /// <summary>
         /// The 'v' symbol code 118
         /// </summary>
-        v = (byte)AC.v,
+        public static AsciSymbol v => AC.v;
 
         /// <summary>
         /// The 'w' symbol code 119
         /// </summary>
-        w = (byte)AC.w,
+        public static AsciSymbol w => AC.w;
 
         /// <summary>
         /// The 'x' symbol code 120
         /// </summary>
-        x = (byte)AC.x,
+        public static AsciSymbol x => AC.x;
 
         /// <summary>
         /// The 'y' symbol code 121
         /// </summary>
-        y = (byte)AC.y,
+        public static AsciSymbol y => AC.y;
 
         /// <summary>
         /// The 'z' symbol code 122
         /// </summary>
-        z = (byte)AC.z,
+        public static AsciSymbol z => AC.z;
 
         /// <summary>
         /// The 'A' symbol code 65
         /// </summary>
-        A = (byte)AC.A,
+        public static AsciSymbol A => AC.A;
 
         /// <summary>
         /// The 'B' symbol code 66
         /// </summary>
-        B = (byte)AC.B,
+        public static AsciSymbol B => AC.B;
 
         /// <summary>
         /// The 'C' symbol code 67
         /// </summary>
-        C = (byte)AC.C,
+        public static AsciSymbol C => AC.C;
 
         /// <summary>
         /// The 'D' symbol code 68
         /// </summary>
-        D = (byte)AC.D,
+        public static AsciSymbol D => AC.D;
 
         /// <summary>
         /// The 'E' symbol code 69
         /// </summary>
-        E = (byte)AC.E,
+        public static AsciSymbol E => AC.E;
 
         /// <summary>
         /// The 'F' symbol code 70
         /// </summary>
-        F = (byte)AC.F,
+        public static AsciSymbol F => AC.F;
 
         /// <summary>
         /// The 'G' symbol code 71
         /// </summary>
-        G = (byte)AC.G,
+        public static AsciSymbol G => AC.G;
 
         /// <summary>
         /// The 'H' symbol code 72
         /// </summary>
-        H = (byte)AC.H,
+        public static AsciSymbol H => AC.H;
 
         /// <summary>
         /// The 'I' symbol code 73
         /// </summary>
-        I = (byte)AC.I,
+        public static AsciSymbol I => AC.I;
 
         /// <summary>
         /// The 'J' symbol code 74
         /// </summary>
-        J = (byte)AC.J,
+        public static AsciSymbol J => AC.J;
 
         /// <summary>
         /// The 'K' symbol code 75
         /// </summary>
-        K = (byte)AC.K,
+        public static AsciSymbol K => AC.K;
 
         /// <summary>
         /// The 'L' symbol code 76
         /// </summary>
-        L = (byte)AC.L,
+        public static AsciSymbol L => AC.L;
 
         /// <summary>
         /// The 'M' symbol code 77
         /// </summary>
-        M = (byte)AC.M,
+        public static AsciSymbol M => AC.M;
 
         /// <summary>
         /// The 'N' symbol code 78
         /// </summary>
-        N = (byte)AC.N,
+        public static AsciSymbol N => AC.N;
 
         /// <summary>
         /// The 'O' symbol code 79
         /// </summary>
-        O = (byte)AC.O,
+        public static AsciSymbol O => AC.O;
 
         /// <summary>
         /// The 'P' symbol code 80
         /// </summary>
-        P = (byte)AC.P,
+        public static AsciSymbol P => AC.P;
 
         /// <summary>
         /// The 'Q' symbol code 81
         /// </summary>
-        Q = (byte)AC.Q,
+        public static AsciSymbol Q => AC.Q;
 
         /// <summary>
         /// The 'R' symbol code 82
         /// </summary>
-        R = (byte)AC.R,
+        public static AsciSymbol R => AC.R;
 
         /// <summary>
         /// The 'S' symbol code 83
         /// </summary>
-        S = (byte)AC.S,
+        public static AsciSymbol S => AC.S;
 
         /// <summary>
         /// The 'T' symbol code 84
         /// </summary>
-        T = (byte)AC.T,
+        public static AsciSymbol T => AC.T;
 
         /// <summary>
         /// The 'U' symbol code 85
         /// </summary>
-        U = (byte)AC.U,
+        public static AsciSymbol U => AC.U;
 
         /// <summary>
         /// The 'V' symbol code 86
         /// </summary>
-        V = (byte)AC.V,
+        public static AsciSymbol V => AC.V;
 
         /// <summary>
         /// The 'W' symbol code 87
         /// </summary>
-        W = (byte)AC.W,
+        public static AsciSymbol W => AC.W;
 
         /// <summary>
         /// The 'X' symbol code 88
         /// </summary>
-        X = (byte)AC.X,
+        public static AsciSymbol X => AC.X;
 
         /// <summary>
         /// The 'Y' symbol code 89
         /// </summary>
-        Y = (byte)AC.Y,
+        public static AsciSymbol Y => AC.Y;
 
         /// <summary>
         /// The 'Z' symbol code 90
         /// </summary>
-        Z = (byte)AC.Z,
+        public static AsciSymbol Z => AC.Z;
 
         /// <summary>
         /// The ':' character code 58
         /// </summary>
-        Colon = (byte)AC.Colon,
+        public static AsciSymbol Colon => AC.Colon;
 
         /// <summary>
-        /// The ,' character code 59
+        /// The ;' character code 59
         /// </summary>
-        Semicolon = (byte)AC.Semicolon,
+        public static AsciSymbol Semicolon => AC.Semicolon;
 
         /// <summary>
         /// The '@' character code 64
         /// </summary>
-        At = (byte)AC.At,
+        public static AsciSymbol At => AC.At;
 
         /// <summary>
         /// The backslash character code 92
         /// </summary>
-        BSlash = (byte)AC.BS,
+        public static AsciSymbol BSlash => AC.BS;
 
         /// <summary>
         /// The '^' character code 94
         /// </summary>
-        Caret = (byte)AC.Caret,
+        public static AsciSymbol Caret => AC.Caret;
 
         /// <summary>
         /// The '=' character code 61
         /// </summary>
-        Eq = (byte)AC.Eq,
+        public static AsciSymbol Eq => AC.Eq;
 
         /// <summary>
         /// The '>' character code 62
         /// </summary>
-        Gt = (byte)AC.GT,
+        public static AsciSymbol Gt => AC.Gt;
 
         /// <summary>
         /// The '{' character code 128
         /// </summary>
-        LBrace = (byte)AC.LBrace,
+        public static AsciSymbol LBrace => AC.LBrace;
 
         /// <summary>
         /// The '[' character code 91
         /// </summary>
-        LBracket = (byte)AC.LBracket,
+        public static AsciSymbol LBracket => AC.LBracket;
 
         /// <summary>
         /// The '<' character code 60
         /// </summary>
-        Lt = (byte)AC.LT,
+        public static AsciSymbol Lt => AC.Lt;
 
         /// <summary>
         /// The '|' character code 124
         /// </summary>
-        Pipe = (byte)AC.Pipe,
+        public static AsciSymbol Pipe => AC.Pipe;
 
         /// <summary>
         /// The '?' character code 63
         /// </summary>
-        Question = (byte)AC.Question,
+        public static AsciSymbol Question => AC.Question;
 
         /// <summary>
         /// The ']' character code 93
         /// </summary>
-        RBracket = (byte)AC.RBracket,
+        public static AsciSymbol RBracket => AC.RBracket;
 
         /// <summary>
         /// The '~' character code 126
         /// </summary>
-        Tilde = (byte)AC.Tilde,
+        public static AsciSymbol Tilde => AC.Tilde;
 
         /// <summary>
         /// The '~' character code 95
         /// </summary>
-        Underscore = (byte)AC.US,
+        public static AsciSymbol Underscore => AC.Underscore;
     }
 }
