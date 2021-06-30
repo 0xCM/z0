@@ -13,7 +13,6 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-
     [WfService]
     public abstract class AppService<H> : IAppService<H>
         where H : AppService<H>, new()
@@ -47,9 +46,6 @@ namespace Z0
 
         public virtual Type ContractType
             => typeof(H);
-
-        protected WfCmdBuilder CmdBuilder
-            => Wf.CmdBuilder();
 
         public Identifier HostName {get;}
 

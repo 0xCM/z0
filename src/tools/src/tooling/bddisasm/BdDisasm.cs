@@ -32,14 +32,14 @@ namespace Z0.Tools
             ToolPath = Workspace.External() + FS.folder(Id.Format()) + FS.folder(src) + FS.folder(build) + FS.file(Id.Format(), FS.Exe);
         }
 
-        public BdDisasmCmd Cmd(in AsmToolchainSpec spec, bool bitfields = false , bool details = false, Bitness mode = Bitness.b64)
+        public BdDisasmCmd Cmd(in AsmToolchainSpec spec, bool bitfields = false , bool details = false)
         {
             var dst = new BdDisasmCmd();
             dst.ToolPath = ToolPath;
             dst.BinPath = spec.BinPath;
             dst.EmitBitfields = bitfields;
             dst.EmitDetails = details;
-            dst.Mode = mode;
+            dst.AsmBitMode = spec.AsmBitMode;
             dst.OutputPath = spec.RawDisasmPath;
             return dst;
         }
@@ -85,7 +85,7 @@ namespace Z0.Tools
 
             seek(dst,i++) = Chars.Space;
             seek(dst,i++) = Specifier;
-            render(src.Mode, ref i, dst);
+            render(src.AsmBitMode, ref i, dst);
 
             seek(dst,i++) = Chars.Space;
             seek(dst,i++) = Specifier;

@@ -9,6 +9,9 @@ namespace Z0
 
     using static Root;
 
+    /// <summary>
+    /// Defines a tool execution specification
+    /// </summary>
     public struct ToolExecSpec : IToolCmd, IDataType<ToolExecSpec>
     {
         public CmdId CmdId {get;}

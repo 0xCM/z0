@@ -5,6 +5,7 @@
 namespace Z0.Tools
 {
     using System.Reflection;
+
     public readonly struct MsBuildImports
     {
         public Assembly MsBuildFramework
@@ -16,6 +17,7 @@ namespace Z0.Tools
         public Assembly MsBuildUtilities
             => typeof(Microsoft.Build.Utilities.MuxLogger).Assembly;
     }
+
     [ApiHost]
     public static class ProjectBuilds
     {
@@ -28,16 +30,16 @@ namespace Z0.Tools
         }
 
         [Op]
-        static FS.FilePath ProjectPath(this WfCmdBuilder src, in BuildCmdVars vars)
+        static FS.FilePath ProjectPath(this IEnvPaths src, in BuildCmdVars vars)
             => src.Env.ZDev + FS.folder("src") + FS.folder(vars.ProjectId) + FS.file(string.Format("z0.{0}", vars.ProjectId), FS.CsProj);
 
         [Op]
-        static FS.FilePath SolutionPath(this WfCmdBuilder src, in BuildCmdVars vars)
+        static FS.FilePath SolutionPath(this IEnvPaths src, in BuildCmdVars vars)
             => src.Env.ZDev + FS.file(string.Format("z0.{0}", vars.SlnId), FS.Sln);
 
         [Op]
-        static FS.FilePath LogPath(this WfCmdBuilder src, in BuildCmdVars vars)
-            => src.Db.BuildLogPath(FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Log));
+        static FS.FilePath LogPath(this IEnvPaths src, in BuildCmdVars vars)
+            => src.BuildLogPath(FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Log));
 
         [Op]
         public static string Identifier(this BuildProjectCmd src)
@@ -57,7 +59,7 @@ namespace Z0.Tools
         }
 
         [Op]
-        public static BuildProjectCmd Build(this WfCmdBuilder src, BuildCmdVars vars)
+        public static BuildProjectCmd Build(this IEnvPaths src, BuildCmdVars vars)
         {
             var dst = new BuildProjectCmd();
             dst.Verbosity = BuildLogVerbosity.detailed;
@@ -71,14 +73,6 @@ namespace Z0.Tools
             return dst;
         }
 
-        [Op]
-        public static BuildProjectCmd Build(this WfCmdBuilder src)
-        {
-            var vars = new BuildCmdVars();
-            vars.ProjectId = PartId.Machine.Format();
-            vars.SlnId = PartId.Machine.Format();
-            return src.Build(vars);
-        }
 
         [Op]
         static void render(in BuildProjectCmd src, ITextBuffer dst)

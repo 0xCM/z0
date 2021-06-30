@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Represents a method (value, not type) parameter
     /// </summary>
-    public readonly struct ClrParamInfo : ITextual
+    public readonly struct ClrParamInfo
     {
         public string Name {get;}
 
@@ -30,12 +30,5 @@ namespace Z0
             Position = pos;
             RefKind = refkind;
         }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => string.Format("{0} {1}", Type.Format(), Name);
-
-        public override string ToString()
-            => Format();
     }
 }

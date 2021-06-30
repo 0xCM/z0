@@ -13,34 +13,41 @@ namespace Z0
     {
         const string InvalidOption = "Option text invalid";
 
+        const string Blank = "The source text appears blank";
+
         [Op]
-        public static ParseResult<ToolExecSpec> parse(string src, string delimiter = EmptyString, char qualifier = ' ')
+        public static Outcome parse(string src, ArgProtocol protocol, out ToolExecSpec dst)
         {
-            var fail = ParseResult.unparsed<ToolExecSpec>(src);
-            var parts = TextTools.split(src, delimiter);
+            var parts = TextTools.split(src, protocol.Prefix);
             var count = parts.Length;
+            var result = Outcome.Success;
+            dst = default;
             ushort pos = 0;
             if(count != 0)
             {
                 ref readonly var part = ref first(parts);
-                var id = CmdId.from(part);
+                var id = cmdid(part);
                 var options = list<ToolCmdArg>();
                 for(var i=1; i<count; i++)
                 {
                     ref readonly var next = ref skip(parts,i);
-                    if(!TextTools.blank(next))
+                    if(!blank(next))
                     {
-                        var option = ToolArgs.parse(pos++,next, qualifier);
-                        if(option)
+                        result = parse(pos++, next, protocol.Qualifier, out var option);
+                        if(result)
                             options.Add(option.Value);
                         else
-                            return fail.WithReason(InvalidOption);
+                            break;
                     }
                 }
-                return ParseResult.parsed(src, new ToolExecSpec(id, options.ToArray()));
+                dst = new ToolExecSpec(id, options.ToArray());
+            }
+            else
+            {
+                result = (false, Blank);
             }
 
-            return fail;
+            return result;
         }
 
         [Op]
@@ -83,7 +90,7 @@ namespace Z0
             for(var i=0; i<kSrc; i++)
             {
                 ref readonly var match = ref skip(matches,i);
-                if(ArgPrefix.define(src) == match)
+                if(prefix(src) == match)
                 {
                     dst = match;
                     return true;
@@ -91,5 +98,26 @@ namespace Z0
             }
             return false;
         }
+
+        [Op]
+        public static Outcome parse(ushort pos, string src, ArgQualifier qualifier, out ToolCmdArg dst)
+        {
+            var result = Outcome.Success;
+            dst = default;
+            try
+            {
+                var i = src.IndexOf(qualifier);
+                if(i == NotFound)
+                    dst = new ToolCmdArg(pos, src);
+                else
+                    dst = new ToolCmdArg(pos, src.LeftOfIndex(i), src.RightOfIndex(i));
+            }
+            catch(Exception e)
+            {
+                result = e;
+            }
+            return result;
+        }
+
     }
 }

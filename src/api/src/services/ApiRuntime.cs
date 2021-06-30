@@ -110,7 +110,7 @@ namespace Z0
             var method = src.Method;
             dst.Address = src.BaseAddress;
             dst.Uri = src.OpUri;
-            dst.DisplaySig = MethodDisplaySig.from(method.Artifact());
+            dst.DisplaySig = Clr.display(method.Artifact());
             dst.Msil = src.Msil;
             return ref dst;
         }

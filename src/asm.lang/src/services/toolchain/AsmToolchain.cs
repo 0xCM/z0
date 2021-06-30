@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     public sealed class AsmToolchain : AppService<AsmToolchain>
     {
-        public Outcome Assemble(in AsmToolchainSpec spec)
+        Outcome Exec(in CmdLine cmd)
         {
             var stdout = list<string>();
             var errout = list<string>();
@@ -29,19 +29,24 @@ namespace Z0.Asm
                     errout.Add(data);
             }
 
-            var tool = Wf.Nasm();
-            var target = tool.OutFile(spec.BinPath, spec.BinKind);
-            var cmdline = tool.Command(spec.AsmPath, target, spec.ListPath);
-            var running = Wf.Running(cmdline);
-            var process = ScriptProcess.run(cmdline, OnStatus, OnError);
-            process.Wait();
-
-            Wf.Ran(running);
+            var cmdrun = Wf.Running(cmd);
+            var cmdproc = ScriptProcess.run(cmd, OnStatus, OnError);
+            cmdproc.Wait();
+            Wf.Ran(cmdrun);
 
             if(errout.Count == 0)
                 return true;
             else
                 return (false, errout.Delimit(Chars.NL).Format());
+        }
+
+        public Outcome Assemble(in AsmToolchainSpec spec)
+        {
+            var tool = Wf.Nasm();
+            var result = Exec(tool.Command(spec.AsmPath, tool.OutFile(spec.BinPath, ObjFileKind.bin), spec.ListPath));
+            if(result.Ok && spec.ObjKind != 0 && spec.ObjPath.IsNonEmpty)
+                result = Exec(tool.Command(spec.AsmPath, tool.OutFile(spec.ObjPath, spec.ObjKind)));
+            return result;
         }
 
         public ByteSize EmitHexText(ReadOnlySpan<byte> src, ushort rowsize, FS.FilePath dst)
@@ -99,22 +104,7 @@ namespace Z0.Asm
 
         public Outcome Run(in AsmToolchainSpec spec)
         {
-            var stdout = list<string>();
-            var counter = 0u;
             var outcome = Outcome.Success;
-
-            void OnStatus(in string data)
-            {
-                if(nonempty(data))
-                    stdout.Add(data);
-            }
-
-            void OnError(in string data)
-            {
-                if(nonempty(data))
-                    Wf.Error(data);
-            }
-
             outcome = Assemble(spec);
             if(outcome.Fail)
             {
@@ -136,9 +126,7 @@ namespace Z0.Asm
                 return outcome;
             }
 
-            outcome = ProcessDisassembly(spec);
-
-            return outcome;
+            return ProcessDisassembly(spec);
         }
 
         Outcome Run(CmdLine cmdline, FS.FilePath dst)

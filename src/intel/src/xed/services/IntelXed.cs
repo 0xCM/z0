@@ -225,8 +225,8 @@ namespace Z0.Asm
         public Symbols<IsaKind> IsaKinds()
             => Symbols.index<IsaKind>();
 
-        public Symbols<MachineMode> MachineModes()
-            => Symbols.index<MachineMode>();
+        public Symbols<XedMachineMode> MachineModes()
+            => Symbols.index<XedMachineMode>();
 
         public Symbols<OperandKind> OperandKinds()
             => Symbols.index<OperandKind>();
@@ -259,7 +259,7 @@ namespace Z0.Asm
             EmitSymbols<Extension>();
             EmitSymbols<IClass>();
             EmitSymbols<IsaKind>();
-            EmitSymbols<MachineMode>();
+            EmitSymbols<XedMachineMode>();
             EmitSymbols<Nonterminal>();
             EmitSymbols<OperandKind>();
             EmitSymbols<OperandWidthType>();

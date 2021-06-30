@@ -38,14 +38,11 @@ namespace Z0
             }
         }
 
-        WfCmdBuilder Builder;
-
         IWfDb Db;
 
         protected override Reactor Init(out int state)
         {
             state = 32;
-            Builder = Wf.CmdBuilder();
             Db = Wf.Db();
             return this;
         }
@@ -59,21 +56,14 @@ namespace Z0
             if(args.IsEmpty)
                 return;
 
+            var _cmd = new RunScriptCmd();
             var name =  first(args).Content;
             var a0 = args.Length >= 2 ? args[1].Content : EmptyString;
-            var a1 = args.Length >= 3 ? args[2].Content : EmptyString;
-            var a2 = args.Length >= 4 ? args[3].Content : EmptyString;
-            var a3 = args.Length >= 5 ? args[4].Content : EmptyString;
-
-            switch(name)
-            {
-                case RunScriptCmd.CmdName:
-                    Builder.RunScript(FS.path(a0)).RunDirect(Wf);
-                    break;
-                default:
-                    Wf.Error(string.Format("Processor for {0} not found", name));
-                    break;
-            }
+            _cmd.ScriptPath = FS.path(a0);
+            _cmd.RunDirect(Wf);
+            // var a1 = args.Length >= 3 ? args[2].Content : EmptyString;
+            // var a2 = args.Length >= 4 ? args[3].Content : EmptyString;
+            // var a3 = args.Length >= 5 ? args[4].Content : EmptyString;
         }
     }
 }

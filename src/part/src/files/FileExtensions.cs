@@ -223,5 +223,10 @@ namespace Z0
         /// </summary>
         public static FileExt Def => ext(def);
 
+        /// <summary>
+        /// Defines the <see cref='obj'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Obj => ext(obj);
+
     }
 }

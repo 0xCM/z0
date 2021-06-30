@@ -19,15 +19,4 @@ namespace Z0
         /// </summary>
         public FS.FilePath ScriptPath;
    }
-
-    public static partial class XTend
-    {
-        [MethodImpl(Inline), Op]
-        public static RunScriptCmd RunScript(this WfCmdBuilder builder, FS.FilePath path)
-        {
-            var cmd = new RunScriptCmd();
-            cmd.ScriptPath = path;
-            return cmd;
-        }
-    }
 }

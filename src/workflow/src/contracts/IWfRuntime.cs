@@ -84,9 +84,6 @@ namespace Z0
         WfFileFlow Flow(FS.FilePath dst)
                 => new WfFileFlow(this, dst, NextExecToken());
 
-        WfCmdBuilder CmdBuilder()
-            => new WfCmdBuilder(this);
-
         Task<CmdResult> Dispatch(ICmd cmd)
             => Task.Factory.StartNew(() => Router.Dispatch(cmd));
 

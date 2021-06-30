@@ -25,6 +25,12 @@ namespace Z0
             get => (ushort)Data.Count;
         }
 
+        public ref CmdArg this[ushort i]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[i];
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

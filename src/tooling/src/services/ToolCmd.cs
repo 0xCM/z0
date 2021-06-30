@@ -160,13 +160,6 @@ namespace Z0
         public static ref CmdExecStatus status(ScriptProcess process, ref CmdExecStatus dst)
             => ref process.Status(ref dst);
 
-        [MethodImpl(Inline), Factory]
-        public ArgQualifier qualifier(AsciCode src)
-            => new ArgQualifier(src);
-
-        [MethodImpl(Inline), Factory]
-        public ArgProtocol protocol(ArgPrefix prefix, AsciCode? qualifier = null)
-            => new ArgProtocol(prefix, qualifier ?? AsciCode.Space);
 
         [Op]
         public static ToolCmdSpec specify(FS.FilePath path, params ToolCmdArg[] args)

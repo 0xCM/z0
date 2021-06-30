@@ -13,14 +13,6 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".thread")]
-        Outcome ShowThread(CmdArgs args)
-        {
-            var id = Kernel32.GetCurrentThreadId();
-            Wf.Row(string.Format("ThreadId:{0}", id));
-            return true;
-        }
-
         void OnJobComplete()
         {
             ref readonly var context = ref first(recover<Amd64Context>(ContextBuffer.Allocated));

@@ -25,20 +25,7 @@ namespace Z0
             => AsmCmd.Dispatch(cmd);
 
         CmdSpec Next()
-        {
-            var input = term.prompt("cmd> ");
-            var i = input.IndexOf(Chars.Space);
-            var args = CmdArgs.Empty;
-            var name = input;
-            if(i != NotFound)
-            {
-                name = TextTools.left(input,i);
-                var right = TextTools.right(input,i);
-                if(nonempty(right))
-                    args = Cmd.args(right.Split(Chars.Space));
-            }
-            return Cmd.spec(name,args);
-        }
+            => Cmd.spec(term.prompt("cmd> "));
 
         protected override void Run()
         {

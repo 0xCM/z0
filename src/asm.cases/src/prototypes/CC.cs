@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.Intrinsics;
 
     using static core;
 
@@ -13,6 +14,21 @@ namespace Z0.Asm
         [ApiHost(prototypes + "cc")]
         public readonly struct CC
         {
+            [Op]
+            public static Vector128<uint> f_u32_u32_128x4u(uint a0, uint a1)
+            {
+                return Vector128.Create(a0,0u,a1,0u);
+            }
+
+            [Op]
+            public static unsafe void f_u32_u32_p32u(uint ecx, uint edx, uint* r8d)
+            {
+                r8d[0] = ecx*0x7;
+                r8d[1] = ecx*0xd;
+                r8d[2] = edx*0x11;
+                r8d[3] = edx*0x17;
+            }
+
             [Op]
             public static void f1x1(uint a0, out uint b0)
             {

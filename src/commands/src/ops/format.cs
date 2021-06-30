@@ -90,6 +90,17 @@ namespace Z0
             where K : unmanaged
                 => string.Format(pattern.Content, args.Select(a => a.Format()));
 
+        public static string format<K,T>(in ToolCmdArgs<K,T> src)
+            where K : unmanaged
+        {
+            var dst = TextTools.buffer();
+            var view = src.View;
+            var count = view.Length;
+            for(var i=0; i<count; i++)
+                dst.AppendLine(skip(src,i).Format());
+            return dst.Emit();
+        }
+
         [Op]
         public static string format(in ToolFlagSpec src)
             => src.Name.IsEmpty ? src.Index.ToString() : string.Format("{0}:{1}", src.Name, src.Index);

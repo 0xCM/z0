@@ -28,7 +28,7 @@ namespace Z0
             => CmdId.from<C>();
 
         ToolCmdArgs IToolCmd.Args
-            => ToolArgs.args((C)this);
+            => Cmd.toolargs((C)this);
     }
 
     [Free]

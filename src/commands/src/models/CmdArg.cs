@@ -13,17 +13,28 @@ namespace Z0
     {
         public ushort Index {get;}
 
-        public dynamic Value {get;}
+        public string Name {get;}
+
+        public string Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(ushort index, dynamic value)
+        public CmdArg(ushort index, string value)
         {
             Index = index;
             Value = value;
+            Name = EmptyString;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArg((int index, dynamic value) src)
+        public CmdArg(ushort index, string name, string value)
+        {
+            Index = index;
+            Value = value;
+            Name = name;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArg((int index, string value) src)
             => new CmdArg((ushort)src.index, src.value);
 
         public static CmdArg Empty

@@ -53,7 +53,7 @@ namespace Z0.Asm
             cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\windows.x64.Debug");
             cmd.TargetPath = Db.IndexTable("clrtests");
             cmd.FileUriMode = true;
-            cmd.WithExt(FS.Cmd);
+            cmd.Extensions = array(FS.Cmd);
             return cmd;
         }
 
@@ -386,12 +386,12 @@ namespace Z0.Asm
 
         void ShowOptions()
         {
+            var protocol = Cmd.protocol(Cmd.prefix('-','-'), ' ');
             const string @case = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
-            var result = Cmd.parse(@case);
-            if(result.Succeeded)
+            var result = Cmd.parse(@case, protocol, out var spec);
+            if(result.Ok)
             {
-                var value = result.Value;
-                Wf.Status(value.Format());
+                Wf.Status(spec.Format());
             }
             else
                 Wf.Error(result.Message);

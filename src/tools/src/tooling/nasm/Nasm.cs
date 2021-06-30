@@ -19,7 +19,7 @@ namespace Z0.Tools
 
         const PathSeparator Sep = PathSeparator.BS;
 
-        public NasmOutputFile OutFile(FS.FilePath path, AsmBinKind kind = AsmBinKind.bin)
+        public NasmOutputFile OutFile(FS.FilePath path, ObjFileKind kind = ObjFileKind.bin)
             => new NasmOutputFile(path, kind);
 
         public CmdLine Command(FS.FilePath src, NasmOutputFile dst)
@@ -35,7 +35,6 @@ namespace Z0.Tools
             return new CmdLine(string.Format(Pattern, Id, dst.Kind,
                 src.Format(Sep), dst.Path.Format(Sep), list.Path.Format(Sep)));
         }
-
 
         public static MsgPattern<Count> ParsingNasmListEntries => "Parsing list entries from {0} lines";
 

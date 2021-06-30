@@ -1,4 +1,0 @@
-| Opcode | Instruction | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                           |
-| E2 cb  | LOOP rel8   | D     | Valid       | Valid           | Decrement count; jump short if count ≠ 0.            |
-| E1 cb  | LOOPE rel8  | D     | Valid       | Valid           | Decrement count; jump short if count ≠ 0 and ZF = 1. |
-| E0 cb  | LOOPNE rel8 | D     | Valid       | Valid           | Decrement count; jump short if count ≠ 0 and ZF = 0. |

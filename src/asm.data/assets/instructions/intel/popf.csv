@@ -1,4 +1,0 @@
-| Opcode | Instruction | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                    |
-| 9D     | POPF        | ZO    | Valid       | Valid           | Pop top of stack into lower 16 bits of EFLAGS. |
-| 9D     | POPFD       | ZO    | N.E.        | Valid           | Pop top of stack into EFLAGS.                  |
-| 9D     | POPFQ       | ZO    | Valid       | N.E.            | Pop top of stack and zero-extend into RFLAGS.  |

@@ -6,7 +6,7 @@ namespace Z0.Tools
 {
     using static Toolsets;
 
-    public partial class Clang : ToolCmdBuilder<Clang>
+    public partial class Clang : CmdBuilder<Clang>
     {
         public Clang()
             : base(clang.name)

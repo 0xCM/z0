@@ -126,5 +126,13 @@ namespace Z0
         public const string current = nameof(current);
 
         public const string codegen = nameof(codegen);
+
+        public const string labs = nameof(labs);
+
+        public const string models = nameof(models);
+
+        public const string obj = nameof(obj);
+
+        public const string scripts = nameof(scripts);
     }
 }

@@ -18,10 +18,10 @@ namespace Z0
     {
         public FS.FilePath Path {get;}
 
-        public AsmBinKind Kind {get;}
+        public ObjFileKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public NasmOutputFile(FS.FilePath target, AsmBinKind kind)
+        public NasmOutputFile(FS.FilePath target, ObjFileKind kind)
         {
             Path = target;
             Kind = kind;

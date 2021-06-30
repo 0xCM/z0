@@ -14,12 +14,16 @@ namespace Z0.Asm
 
         public FS.FilePath BinPath;
 
-        public AsmBinKind BinKind;
+        public FS.FilePath ObjPath;
+
+        public ObjFileKind ObjKind;
 
         public FS.FilePath RawDisasmPath;
 
         public FS.FolderPath Analysis;
 
         public FS.FilePath ListPath;
+
+        public Bitness AsmBitMode;
     }
 }

@@ -18,6 +18,8 @@ namespace Z0
 
         public static ToolId cl => msdev.cl;
 
+        public static ToolId link => msdev.link;
+
         public static ToolId ildasm => msdev.ildasm;
 
         public static ToolId pdb2xml => msdev.pdb2xml;
@@ -28,11 +30,13 @@ namespace Z0
 
         public static ToolId ndisasm => asm.ndisasm;
 
-        public static ToolId xed => asm.xed;
-
         public static ToolId cult => asm.cult;
 
         public static ToolId bddiasm => asm.bddisasm;
+
+        public static ToolId xed => intel.xed;
+
+        public static ToolId sde => intel.sde;
 
         public readonly struct clang
         {
@@ -48,8 +52,6 @@ namespace Z0
             public static ToolId nasm => "nasm";
 
             public static ToolId ndisasm => "ndisasm";
-
-            public static ToolId xed => "xed";
 
             public static ToolId bddisasm => "bddisasm";
 
@@ -84,6 +86,8 @@ namespace Z0
 
             public static ToolId cl => "cl";
 
+            public static ToolId link => "link";
+
             public static ToolId ildasm => "ildasm";
 
             public static ToolId roslyn => "roslyn";
@@ -93,6 +97,14 @@ namespace Z0
             public static ToolId dia2dump => "dia2dump";
 
             public static ToolId dumpbin => "dumpbin";
+        }
+
+        public readonly struct intel
+        {
+            public static ToolId sde => "sde";
+
+            public static ToolId xed => "xed";
+
         }
     }
 }

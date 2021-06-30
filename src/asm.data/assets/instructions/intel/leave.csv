@@ -1,4 +1,0 @@
-| Opcode | Instruction | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                   |
-| C9     | LEAVE       | ZO    | Valid       | Valid           | Set SP to BP, then pop BP.    |
-| C9     | LEAVE       | ZO    | N.E.        | Valid           | Set ESP to EBP, then pop EBP. |
-| C9     | LEAVE       | ZO    | Valid       | N.E.            | Set RSP to RBP, then pop RBP. |

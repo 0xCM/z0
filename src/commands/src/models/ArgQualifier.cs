@@ -49,6 +49,10 @@ namespace Z0
         public static implicit operator ArgQualifier(AsciCode src)
             => new ArgQualifier(src);
 
+        [MethodImpl(Inline)]
+        public static implicit operator ArgQualifier(AsciSymbol src)
+            => new ArgQualifier(src);
+
         public static ArgQualifier Empty
             => new ArgQualifier(AsciCode.Null);
 

@@ -23,5 +23,22 @@ namespace Z0
             }
             return lookup.Seal();
         }
+
+        [Op]
+        public static bool lookup(ToolCmdArgs src, string name, out ToolCmdArg dst)
+        {
+            var count = src.Count;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var arg = ref src[i];
+                if(string.Equals(arg.Name, name, NoCase))
+                {
+                    dst=arg;
+                    return true;
+                }
+            }
+            dst = ToolCmdArg.Empty;
+            return false;
+        }
     }
 }

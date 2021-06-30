@@ -20,5 +20,21 @@ namespace Z0
         [Op, MethodImpl(Inline)]
         public static CmdSpec spec(string name, CmdArgs args)
             => new CmdSpec(name,args);
+
+        [Op]
+        public static CmdSpec spec(string input)
+        {
+            var i = input.IndexOf(Chars.Space);
+            var args = CmdArgs.Empty;
+            var name = input;
+            if(i != NotFound)
+            {
+                name = TextTools.left(input,i);
+                var right = TextTools.right(input,i);
+                if(nonempty(right))
+                    args = Cmd.args(right.Split(Chars.Space));
+            }
+            return new CmdSpec(name,args);
+        }
     }
 }

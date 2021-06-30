@@ -10,52 +10,9 @@ namespace Z0
     using static Root;
     using static core;
 
-    using ACC = AsciCode;
-
     [DataType]
     public readonly struct ArgPrefix : IDataTypeEquatable<ArgPrefix>
     {
-        /// <summary>
-        /// Creates a <see cref='ArgPrefix'/> from a specified character
-        /// </summary>
-        /// <param name="c0">The delimiter</param>
-        [MethodImpl(Inline), Op]
-        public static ArgPrefix define(char c0)
-            => new ArgPrefix((ACC)c0);
-
-        /// <summary>
-        /// Creates a <see cref='ArgPrefix'/> from two specified characters
-        /// </summary>
-        /// <param name="c0">The first part of the delimiter</param>
-        /// <param name="c1">The second part of the delimiter</param>
-        [MethodImpl(Inline), Op]
-        public static ArgPrefix prefix(char c0, char c1)
-            => new ArgPrefix((ACC)c0, (ACC)c1);
-
-        /// <summary>
-        /// Creates a <see cref='ArgPrefix'/> from the leading source element(s)
-        /// </summary>
-        /// <param name="src"></param>
-        [MethodImpl(Inline), Op]
-        public static ArgPrefix define(string src)
-            => define(chars(src));
-
-        /// <summary>
-        /// Creates a <see cref='ArgPrefix'/> from the leading source element(s)
-        /// </summary>
-        /// <param name="src"></param>
-        [MethodImpl(Inline), Op]
-        public static ArgPrefix define(ReadOnlySpan<char> src)
-        {
-            var count = src.Length;
-            if(count == 0)
-                return ArgPrefix.Empty;
-            else if(count == 1)
-                return new ArgPrefix((ACC)skip(src, 0));
-            else
-                return new ArgPrefix((ACC)skip(src, 0), (ACC)skip(src, 1));
-        }
-
         internal readonly AsciCode C0;
 
         internal readonly AsciCode C1;
@@ -120,7 +77,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ArgPrefix(string src)
-            => define(src);
+            => Cmd.prefix(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(ArgPrefix a, ArgPrefix b)

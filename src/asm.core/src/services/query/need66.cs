@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static OperatingMode;
+    using static MachineMode;
     using static OperandSize;
     using static AsmManuals;
 
@@ -20,9 +20,9 @@ namespace Z0.Asm
         /// <param name="default"></param>
         /// <param name="effective"></param>
         [Op, Doc(Amd + V3 + C1 + S2 + T2)]
-        public static bit need66(OperatingMode mode, OperandSize @default, OperandSize effective)
+        public static bit need66(MachineMode mode, OperandSize @default, OperandSize effective)
             => mode switch{
-                Mode64 => effective switch {
+                IA32e => effective switch {
                     W16 => 1,
                     W32 => 0,
                     W64 => 0,

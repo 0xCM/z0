@@ -31,11 +31,5 @@ namespace Z0
         public bool IsPointer;
 
         public bool IsArray;
-
-        public string Format()
-            => $"{Modifier}{DisplayName}";
-
-        public override string ToString()
-            => Format();
     }
 }

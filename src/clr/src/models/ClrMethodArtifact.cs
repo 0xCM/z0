@@ -23,7 +23,7 @@ namespace Z0
         public Index<string> TypeParameters;
 
         public MethodDisplaySig DisplaySig
-            => MethodDisplaySig.from(this);
+            => Clr.display(this);
 
         CliToken IClrArtifact.Token
             => Id;

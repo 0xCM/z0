@@ -76,5 +76,92 @@ namespace Z0.Asm
             iter(vars, v => Wf.Row(v));
             return true;
         }
+
+        [CmdOp(".thread")]
+        Outcome ShowThread(CmdArgs args)
+        {
+            var id = Kernel32.GetCurrentThreadId();
+            Wf.Row(string.Format("ThreadId:{0}", id));
+            return true;
+        }
+
+        [CmdOp(".datasheet")]
+        Outcome ShowDatasheet(CmdArgs args)
+        {
+            const string TitleMarker = "# ";
+            const string TableMarker = "## ";
+            const string Separator = "------";
+            const string TableTileFormat = "# Table {0}";
+            const string Rejoin = " | ";
+
+            var result = Outcome.Success;
+            var foundtable = false;
+            var parsingrows = false;
+            var rowcount = 0;
+            if(args.Length < 1)
+                return (false, "Argument not supplied");
+
+            var id = args[0].Value;
+            var path = Workspace.Datasheet(id);
+            if(!path.Exists)
+                return (false, $"No such file {path.ToUri()}");
+
+            using var reader = path.AsciLineReader();
+            while(reader.Next(out var line))
+            {
+                if((line.IsEmpty || line.StartsWith(Separator)) && !parsingrows)
+                    continue;
+
+                if(parsingrows && line.IsEmpty)
+                {
+                    foundtable = false;
+                    parsingrows = false;
+                    rowcount = 0;
+                    continue;
+                }
+
+                var content = line.Content;
+
+                if(parsingrows)
+                {
+                    var cols = content.SplitClean(Chars.Pipe);
+                    if(cols.Length  != 0)
+                    {
+                        Row(cols.Join(Rejoin));
+                        rowcount++;
+                    }
+                    continue;
+                }
+
+                if(foundtable && !parsingrows)
+                {
+                    var header = content.SplitClean(Chars.Pipe);
+                    if(header.Length == 0)
+                    {
+                        Warn(string.Format("Expected header"));
+                    }
+                    else
+                    {
+                        Wf.Row(header.Join(Rejoin));
+                        parsingrows = true;
+                    }
+                }
+
+                if(content.StartsWith(TitleMarker))
+                {
+                    var title = content.Remove(TitleMarker);
+                    Wf.Row(title);
+                }
+                else if(content.StartsWith(TableMarker))
+                {
+                    var name = content.Remove(TableMarker).Trim();
+                    Wf.Row(string.Format(TableTileFormat, name));
+                    foundtable = true;
+                }
+
+            }
+
+            return result;
+        }
     }
 }

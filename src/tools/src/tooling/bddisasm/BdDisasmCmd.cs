@@ -10,7 +10,7 @@ namespace Z0.Tools
 
         public FS.FilePath BinPath;
 
-        public Bitness Mode;
+        public Bitness AsmBitMode;
 
         public bool EmitBitfields;
 
