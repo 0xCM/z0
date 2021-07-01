@@ -184,6 +184,9 @@ namespace Z0
         protected void Row(string pattern, params object[] args)
             => Wf.Row(string.Format(pattern,args));
 
+        protected void Error<T>(T content)
+            => Wf.Error(content);
+
         protected void Row(ReadOnlySpan<char> src)
             => Wf.Row(new string(src));
 

@@ -23,11 +23,9 @@ namespace Z0.Asm
     {
         const char CommentMarker = Chars.Hash;
 
-        public bool ParseTableAsset()
+        public bool ParseTables(FS.FilePath src)
         {
-            var descriptor = AsmData.Assets.XedTables();
-            using var reader = descriptor.Utf8().Reader();
-            var counter = 0u;
+            using var reader = src.AsciLineReader();
             var line = TextLine.Empty;
             var seq = 0u;
             var opcount = z8;
@@ -35,7 +33,7 @@ namespace Z0.Asm
             var opseq = z8;
             var state = TableParserState.ParsingInstruction;
             var outcome = Outcome.Empty;
-            while(reader.ReadLine(++counter, out line))
+            while(reader.Next(out line))
             {
                 if(line.IsEmpty || line.StartsWith(CommentMarker))
                     continue;
@@ -131,7 +129,5 @@ namespace Z0.Asm
                 0 MEM0 EXPLICIT RW IMM_CONST INT
                 1 IMM0 EXPLICIT R IMM_CONST I8
                 2 REG0 SUPPRESSED W NT_LOOKUP_FN INVALID RFLAGS
-
         */
-
 }

@@ -311,8 +311,6 @@ namespace Z0.Asm
             log.Show(formatter.Format(header, RecordFormatKind.KeyValuePairs));
         }
 
-
-
         void EmitAsmAsssetCatalog()
         {
             var catalogs = Wf.Assets();
@@ -358,7 +356,7 @@ namespace Z0.Asm
             var parts = Wf.ApiCatalog.ComponentNames.ToHashSet();
             using var writer = dst.Writer();
             writer.WriteLine("digraph dependencies{");
-            writer.WriteLine(string.Format("label={0}", text.enquote("Assembly Dependencies")));
+            writer.WriteLine(string.Format("label={0}", RP.enquote("Assembly Dependencies")));
             for(var i=0; i<count; i++)
             {
                 ref readonly var x = ref skip(refs,i);
@@ -765,26 +763,6 @@ namespace Z0.Asm
             dst.Sort();
             iter(dst.ViewDeposited(), x => Wf.Row(x));
 
-        }
-
-        void MapChips()
-        {
-            var xed = Wf.IntelXed();
-            var path = xed.EmitChipIsaAsset();
-            var outcome = xed.ParseChipMap(path, out var map);
-            if(outcome.Fail)
-                Wf.Error(outcome.Message);
-            else
-            {
-                var kinds = map.Kinds;
-                var chips = map.Chips;
-                foreach(var c in chips)
-                {
-                    var mapped = map[c];
-                    var delimited = mapped.Delimit(Chars.Comma).Format();
-                    Wf.Row(string.Format("{0}:{1}", c, delimited));
-                }
-            }
         }
 
         void Dispatch(string cmd)

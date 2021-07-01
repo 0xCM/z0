@@ -31,7 +31,7 @@ namespace Z0.Asm
         public Index<NasmInstruction> ParseInstuctionAssets()
         {
             var ws = Wf.AsmWorkspace();
-            var src = ws.Curated("nasm-instructions", FS.Csv);
+            var src = ws.DataFile("nasm-instructions", FS.Csv);
             var lines = src.ReadTextLines();
             //var lines = Lines.read(AsmData.Assets.NasmInstructions().Utf8());
             var count = lines.Length;

@@ -27,14 +27,14 @@ namespace Z0.Asm
         public FS.FolderPath Output()
             => Root + FS.folder(".output");
 
-        public FS.FolderPath SourceRoot()
+        public FS.FolderPath AsmSources()
             => Root + FS.folder("asm");
 
         public FS.FolderPath Labs()
-            => SourceRoot() + FS.folder(labs);
+            => AsmSources() + FS.folder(labs);
 
         public FS.FolderPath Models()
-            => SourceRoot() + FS.folder(models);
+            => AsmSources() + FS.folder(models);
 
         public FS.FilePath SourceCode(string id, bool model)
             => model ? Models() + FS.file(id, FS.Asm) : Labs() + FS.file(id, FS.Asm);
@@ -42,32 +42,29 @@ namespace Z0.Asm
         public FS.FolderPath DocRoot()
             => Root + FS.folder(docs);
 
+        public FS.FolderPath DataRoot()
+            => Root + FS.folder(data);
+
+        public FS.FolderPath Datasets()
+            => DataRoot() + FS.folder(datasets);
+
+        public FS.FilePath DataFile(string id, FS.FileExt ext)
+            => Datasets() + FS.file(id,ext);
+
+        public FS.FolderPath Dataset(string id)
+            => Datasets() + FS.folder(id);
+
         public FS.FolderPath DumpBinOutDir()
             => Output() + FS.folder("dumpbin") + FS.folder(output);
 
         public FS.FolderPath Bin()
             => Output() + FS.folder(bin);
 
-        public FS.FolderPath Datasets()
-            => Root + FS.folder(data);
-
-        public FS.FolderPath CurationRoot()
-            => Datasets() + FS.folder("curated");
-
-        public FS.FilePath Curated(string id, FS.FileExt ext)
-            => CurationRoot() + FS.file(id,ext);
-
-        public FS.FolderPath Curated(string id)
-            => CurationRoot() + FS.folder(id);
-
-        public FS.FolderPath Dataset(string id)
-            => Datasets() + FS.folder(id);
-
         public FS.FolderPath Scripts()
             => Root + FS.folder(scripts);
 
         public FS.FolderPath Tables()
-            => Root + FS.folder(tables);
+            => DataRoot() + FS.folder(tables);
 
         public FS.FilePath Table(string id, FS.FileExt ext)
             => Tables() + FS.file(id,ext);
@@ -83,6 +80,12 @@ namespace Z0.Asm
 
         public FS.FolderPath DocExtracts()
             => DocRoot() + FS.folder(extracts);
+
+        public FS.FolderPath DataSources()
+            => DataRoot() + FS.folder(sources);
+
+        public FS.FolderPath DataSource(string id)
+            => DataSources() + FS.folder(id);
 
         public FS.FilePath Datasheet(string id)
             => DocRoot() + FS.folder("instructions") + FS.file(id,FS.Csv);

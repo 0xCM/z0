@@ -15,29 +15,24 @@ namespace Z0.Asm
 
         readonly Index<XedFormInfo> SummaryTarget;
 
-        readonly Asset TableSource;
-
-        readonly Asset SummarySource;
-
         readonly EventSignal Wf;
 
         XedSummaryParser(IEventSink sink, Span<TextLine> buffer, ushort count)
         {
             SummaryTarget = alloc<XedFormInfo>(count);
-            TableSource = AsmData.Assets.XedTables();
-            SummarySource = AsmData.Assets.XedInstructionSummary();
             Wf = EventSignal.create(sink, typeof(XedSummaryParser));
         }
 
-        public ReadOnlySpan<XedFormInfo> ParseSummaries()
+        public ReadOnlySpan<XedFormInfo> ParseSummaries(FS.FilePath src)
         {
-            using var reader = SummarySource.Utf8().Reader();
+            //using var reader = SummarySource.Utf8().Reader();
+            using var reader = src.AsciLineReader();
             var counter = 0u;
             var j = 0;
             var line = TextLine.Empty;
             var header = alloc<string>(XedFormInfo.FieldCount);
             ref var dst = ref SummaryTarget.First;
-            while(reader.ReadLine(++counter, out line))
+            while(reader.Next(out line))
             {
                 if(line.StartsWith(CommentMarker))
                     continue;

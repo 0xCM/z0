@@ -23,14 +23,6 @@ namespace Z0.Asm
             public Asset IntelIntrinsicsXml() => Asset("intel-intrinsics.xml");
 
             public Asset StanfordAsmCatalog() => Asset("stanford-asm-catalog.csv");
-
-            public Asset XedInstructionSummary() => Asset("xed-idata.txt");
-
-            public const string XedChipDataName = "xed-cdata.txt";
-
-            public Asset XedChipData() => Asset(XedChipDataName);
-
-            public Asset XedTables() => Asset("xed-tables.txt");
         }
     }
 }

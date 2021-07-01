@@ -42,15 +42,15 @@ namespace Z0.Asm
             return true;
         }
 
-        [CmdOp(".emit-xed-forms")]
-        Outcome EmitXedForms(CmdArgs args)
-        {
-            var parser = XedSummaryParser.create(Wf.EventSink);
-            var parsed = parser.ParseSummaries();
-            Status($"Parsed {parsed.Length} summaries");
-            Wf.IntelXed().EmitFormSummaries(parsed);
-            return true;
-        }
+        // [CmdOp(".emit-xed-forms")]
+        // Outcome ImportXedSummaries(CmdArgs args)
+        // {
+        //     var parser = XedSummaryParser.create(Wf.EventSink);
+        //     var parsed = parser.ParseSummaries();
+        //     Status($"Parsed {parsed.Length} summaries");
+        //     Wf.IntelXed().EmitFormSummaries(parsed);
+        //     return true;
+        // }
 
         void CheckCpuid()
         {

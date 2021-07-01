@@ -134,5 +134,7 @@ namespace Z0
         public const string obj = nameof(obj);
 
         public const string scripts = nameof(scripts);
+
+        public const string datasets = nameof(datasets);
     }
 }

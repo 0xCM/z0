@@ -17,16 +17,18 @@ namespace Z0.Asm
 
         XedChipIsaParser ChipIsaParser;
 
+        AsmWorkspace Workspace;
+
         protected override void OnInit()
         {
             Archive = new AsmCatalogArchive(Db.AsmCatalogRoot());
             ChipIsaParser = XedChipIsaParser.create(Wf);
+            Workspace = Wf.AsmWorkspace();
         }
 
         public void EmitCatalog()
         {
-            EmitSourceAssets();
-            EmitFormSummaries();
+            ImportFormSummaries();
             EmitFormDetails();
             EmitSymCatalog();
             var aspects = EmitFormAspects();
@@ -36,8 +38,11 @@ namespace Z0.Asm
         public ReadOnlySpan<string> MnemonicNames()
             => IClasses().Storage.Select(x => x.Expr.Text);
 
-        public Outcome ParseChipMap(FS.FilePath src, out ChipMap dst)
-            => ChipIsaParser.Parse(src, out dst);
+        public Outcome LoadChipMap(out ChipMap dst)
+        {
+            var src = Workspace.DataSource("xed") + FS.file("xed-cdata", FS.Txt);
+            return ChipIsaParser.Parse(src, out dst);
+        }
 
         public ReadOnlySpan<FormPartiton> Partition(Index<XedFormAspect> src)
         {
@@ -106,29 +111,6 @@ namespace Z0.Asm
 
             Wf.EmittedTable(emitting, count);
             return buffer;
-        }
-
-        public FS.FilePath EmitChipIsaAsset()
-        {
-            var asset = AsmData.Assets.XedChipData();
-            var path = Db.ExternalDataPath(FS.file(AsmData.AsmDataSources.XedChipDataName));
-            EmitChipIsaAsset(path);
-            return path;
-        }
-
-        public void EmitChipIsaAsset(FS.FilePath dst)
-        {
-            var asset = AsmData.Assets.XedChipData();
-            EmitAsset(asset,dst);
-        }
-
-        void EmitAsset(Asset src, FS.FilePath dst)
-        {
-            var flow = Wf.EmittingFile(dst);
-            Utf8.decode(src.ResBytes, out var content);
-            using var writer = dst.AsciWriter();
-            writer.Write(content);
-            Wf.EmittedFile(flow, content.Length);
         }
 
         public ReadOnlySpan<FormAspect> ComputeFormAspects()
@@ -283,21 +265,12 @@ namespace Z0.Asm
         }
 
         public FS.FilePath IDataSourcePath()
-            => Db.ExternalDataPath(FS.file("xed-idata", FS.Txt));
+            => Workspace.DataSource("xed") + FS.file("xed-idata", FS.Txt);
 
-        public void EmitSourceAssets()
-        {
-            var dst = IDataSourcePath();
-            var flow = Wf.EmittingFile(dst);
-            var data = AsmData.Assets.XedInstructionSummary().Utf8();
-            dst.Overwrite(data);
-            Wf.EmittedFile(flow, data.Length);
-        }
-
-        public void EmitFormSummaries()
+        public void ImportFormSummaries()
         {
             var parser = XedSummaryParser.create(Wf.EventSink);
-            var parsed = parser.ParseSummaries();
+            var parsed = parser.ParseSummaries(IDataSourcePath());
             EmitFormSummaries(parsed);
         }
 

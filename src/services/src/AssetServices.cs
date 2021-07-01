@@ -13,6 +13,15 @@ namespace Z0
         {
         }
 
+        public void EmitAsset(Asset src, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingFile(dst);
+            Utf8.decode(src.ResBytes, out var content);
+            using var writer = dst.AsciWriter();
+            writer.Write(content);
+            Wf.EmittedFile(flow, content.Length);
+        }
+
         public void EmitIndex<T>(Assets<T> assets, FS.FolderPath dir)
             where T : Assets<T>, new()
         {
