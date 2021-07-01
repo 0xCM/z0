@@ -18,19 +18,9 @@ namespace Z0.Asm
 
             public Asset AsmDbOperands() => Asset("asmdb.operands.csv");
 
-            public Asset CpuidBits() => Asset("cpuid-bits.csv");
-
             public Asset FeatureMnemonics() => Asset("feature-mnemonics.csv");
 
             public Asset IntelIntrinsicsXml() => Asset("intel-intrinsics.xml");
-
-            public Asset LlvmMnemonics() => Asset("llvm-mnemonics.txt");
-
-            public Asset NasmInstructions() => Asset("nasm-instructions.txt");
-
-            public Asset NasmCodes() => Asset("nasm-codes.txt");
-
-            public Asset NasmFlags() => Asset("nasm-flags.txt");
 
             public Asset StanfordAsmCatalog() => Asset("stanford-asm-catalog.csv");
 

@@ -12,7 +12,7 @@ namespace Z0.Asm
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct XedFormInfo : IRecord<XedFormInfo>
     {
-        public const string TableId = "xed-form-summary";
+        public const string TableId = "xed.form";
 
         public const byte FieldCount = 6;
 

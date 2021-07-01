@@ -51,6 +51,15 @@ namespace Z0.Asm
         public FS.FolderPath Datasets()
             => Root + FS.folder(data);
 
+        public FS.FolderPath CurationRoot()
+            => Datasets() + FS.folder("curated");
+
+        public FS.FilePath Curated(string id, FS.FileExt ext)
+            => CurationRoot() + FS.file(id,ext);
+
+        public FS.FolderPath Curated(string id)
+            => CurationRoot() + FS.folder(id);
+
         public FS.FolderPath Dataset(string id)
             => Datasets() + FS.folder(id);
 

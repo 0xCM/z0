@@ -13,6 +13,8 @@ namespace Z0.Asm
 
         public uint Index;
 
+        public Identifier Name;
+
         public string Value;
 
         public Hash32 Hash;

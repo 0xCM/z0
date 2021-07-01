@@ -29,10 +29,6 @@ namespace Z0
             => Asm.IntelXed.create(wf);
 
         [Op]
-        public static XedFormPipe XedFormPipe(this IWfRuntime wf)
-            => Asm.XedFormPipe.create(wf);
-
-        [Op]
         public static NasmCatalog NasmCatalog(this IWfRuntime wf)
             => Asm.NasmCatalog.create(wf);
 

@@ -1,7 +1,0 @@
-# https://docs.microsoft.com/en-us/cpp/build/x64-calling-convention?view=msvc-160
-| ParamType                                    | Fifth+ | Fourth | Third | Second | Leftmost | Example
-| floating-point                               | stack  | XMM3   | XMM2  | XMM1   | XMM0     |
-| integer                                      | stack  | R9     | R8    | RDX    | RCX      | func1(int a, int b, int c, int d, int e, int f) => [a:RCX, b:RDX, c:R8, d:R9, f:Stack, e:Stack]
-| Aggregates (8, 16, 32, or 64 bits) and __m64 | stack  | R9     | R8    | RDX    | RCX      |
-| Other aggregates, as pointers                | stack  | R9     | R8    | RDX    | RCX      |
-| __m128 , as a pointer                        | stack  | R9     | R8    | RDX    | RCX      |

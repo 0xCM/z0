@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
     using static core;
     using static XedModels;
 
@@ -36,9 +37,7 @@ namespace Z0.Asm
             => IClasses().Storage.Select(x => x.Expr.Text);
 
         public Outcome ParseChipMap(FS.FilePath src, out ChipMap dst)
-        {
-            return ChipIsaParser.Parse(src, out dst);
-        }
+            => ChipIsaParser.Parse(src, out dst);
 
         public ReadOnlySpan<FormPartiton> Partition(Index<XedFormAspect> src)
         {
@@ -76,13 +75,26 @@ namespace Z0.Asm
             {
                 ref var record = ref seek(buffer,i);
                 ref readonly var aspect = ref skip(aspects,i);
+                var value = aspect.Value;
+
+                if(TextTools.length(value) == 0)
+                    continue;
+
                 record.Index = i;
-                record.Value = aspect.Value;
+                record.Value = value;
+
+                ref readonly var c = ref first(value);
+                if(SymbolicQuery.digit(base16, c))
+                    record.Name = string.Format("x{0}", value);
+                else
+                    record.Name = value;
                 record.Hash = aspect.GetHashCode();
-                if(duplicates.TryGetValue(record.Hash, out var c))
-                    duplicates[record.Hash] = ++c;
+
+                if(duplicates.TryGetValue(record.Hash, out var dup))
+                    duplicates[record.Hash] = ++dup;
                 else
                     duplicates.Add(record.Hash, 0);
+
                 writer.WriteLine(formatter.Format(record));
             }
 
