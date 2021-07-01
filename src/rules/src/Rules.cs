@@ -12,6 +12,19 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Rules
     {
+        [MethodImpl(Inline)]
+        public static string enclose<S,T>(S content, Fence<T> fence)
+            => RP.adjacent(fence.Left, content, fence.Right);
+
+        /// <summary>
+        /// Encloses text within a bounding string
+        /// </summary>
+        /// <param name="content">The text to enclose</param>
+        /// <param name="sep">The left and right boundary</param>
+        [MethodImpl(Inline), Op]
+        public static string enclose(object content, string sep)
+            => string.Concat(sep,$"{content}",sep);
+
         const NumericKind Closure = UnsignedInts;
 
          public static string FormatPattern(VarContextKind vck)

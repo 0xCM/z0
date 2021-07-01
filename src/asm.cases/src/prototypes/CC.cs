@@ -96,14 +96,79 @@ namespace Z0.Asm
                 b1 = a1*0x16;
             }
 
+            [Op]
+            public static void f_8i_8i_8i_out8i_out8i_out8i(sbyte a0, sbyte a1, sbyte a2, out sbyte b0, out sbyte b1, out sbyte b2)
+            {
+                b0 = a0;
+                b1 = a1;
+                b2 = a2;
+            }
 
             [Op]
-            public static void f3x3(uint a0, uint a1, uint a2, out uint b0, out uint b1, out uint b2)
+            public static void f_8u_8u_8u_out8u_out8u_out8u(byte a0, byte a1, byte a2, out byte b0, out byte b1, out byte b2)
             {
-                b0 = a0*0x1111;
-                b1 = a1*0xFFCC;
-                b2 = a2*0xCCFF;
+                b0 = a0;
+                b1 = a1;
+                b2 = a2;
             }
+
+            [Op]
+            public static void f_16u_16u_16u_out16u_out16u_out16u(ushort a0, ushort a1, ushort a2, out ushort b0, out ushort b1, out ushort b2)
+            {
+                b0 = a0;
+                b1 = a1;
+                b2 = a2;
+            }
+
+            [Op]
+            public static void f_32u_32u_32u_out32u_out32u_out32u(uint a0, uint a1, uint a2, out uint b0, out uint b1, out uint b2)
+            {
+                b0 = a0;
+                b1 = a1;
+                b2 = a2;
+            }
+
+            [Op]
+            public static void f_64u_64u_64u_out64u_out64u_out64u(ulong a0, ulong a1, ulong a2, out ulong b0, out ulong b1, out ulong b2)
+            {
+                b0 = a0;
+                b1 = a1;
+                b2 = a2;
+            }
+
+            [Op]
+            public static void f_in8i_in8i_in8i_out8i_out8i_out8i(in sbyte a0, in sbyte a1, in sbyte a2, out sbyte b0, out sbyte b1, out sbyte b2)
+            {
+                b0 = a0;
+                b1 = a1;
+                b2 = a2;
+            }
+
+            [Op]
+            public static void f_in8u_in8u_in8u_out8u_out8u_out8u(in byte a0, in byte a1, in byte a2, out byte b0, out byte b1, out byte b2)
+            {
+                b0 = a0;
+                b1 = a1;
+                b2 = a2;
+            }
+
+            [Op]
+            public static unsafe void f_p8u_out8u_out8u_out8u(byte* a0, out byte b0, out byte b1, out byte b2)
+            {
+                b0 = a0[0];
+                b1 = a0[1];
+                b2 = a0[2];
+            }
+
+            [Op]
+            public static unsafe void f_p8u_out8u_out8u_out8u_out8u(byte* a0, out byte b0, out byte b1, out byte b2, out byte b3)
+            {
+                b0 = a0[0];
+                b1 = a0[1];
+                b2 = a0[2];
+                b3 = a0[3];
+            }
+
         }
     }
 }

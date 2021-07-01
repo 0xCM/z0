@@ -54,10 +54,6 @@ namespace Z0
             => Svc.ApiJit.create(wf);
 
         [Op]
-        public static ApiExtractPipe ApiExtractPipe(this IWfRuntime wf)
-            => Svc.ApiExtractPipe.create(wf);
-
-        [Op]
         public static ApiQuery ApiQuery(this IWfRuntime wf)
             => Svc.ApiQuery.create(wf);
 

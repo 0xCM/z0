@@ -33,7 +33,7 @@ namespace Z0.Asm
             get => Content.View;
         }
 
-        public string FormatPadded(sbyte padding = DefaultPadding)
+        public string FormatPadded(int padding = DefaultPadding)
             => string.Format(RP.pad(padding), Content);
 
         [MethodImpl(Inline)]
@@ -46,21 +46,6 @@ namespace Z0.Asm
         public override bool Equals(object src)
             => src is AsmExpr x && Equals(x);
 
-        public BinaryCode Serialize()
-        {
-            var count = Content.Length;
-            if(count != 0)
-            {
-                var buffer = alloc<byte>(Content.Length);
-                ref var dst = ref first(buffer);
-                var src = Content.View;
-                for(var i=0; i<count; i++)
-                    seek(dst,i) = (byte)skip(src,i);
-                return buffer;
-            }
-            else
-                return BinaryCode.Empty;
-        }
 
         public AsmExpr Replace(string src, string dst)
             => new AsmExpr(Content.Replace(src,dst));

@@ -145,11 +145,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public FileNameTS WithTimestamp(Timestamp? ts = null)
-                => new FileNameTS(this, ts ?? root.timestamp());
+                => new FileNameTS(this, ts ?? Timestamp.now());
 
             [MethodImpl(Inline)]
             public static FileName operator +(FileName a, FileExt b)
-                => new FileName(Z0.text.format("{0}.{1}", a.Name, b.Name));
+                => new FileName(string.Format("{0}.{1}", a.Name, b.Name));
 
             [MethodImpl(Inline)]
             public static bool operator ==(FileName a, FileName b)

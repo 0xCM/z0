@@ -136,7 +136,7 @@ namespace Z0.Asm
             var asmWriter = default(StreamWriter);
             var asmPath = FS.FilePath.Empty;
             var asmFlow = default(WfFileFlow);
-            var buffer = text.buffer();
+            var buffer = TextTools.buffer();
 
             for(var i=0; i<count; i++)
             {

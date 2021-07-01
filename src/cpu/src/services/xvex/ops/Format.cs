@@ -35,8 +35,8 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string Format<T>(this Vector512<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
-                => text.bracket(
-                        text.concat(
+                => RP.bracket(
+                        string.Concat(
                             gcpu.vspan(src).FormatList(sep, 0, pad, false),
                             sep, Chars.Space,
                             gcpu.vspan(src).FormatList(sep, 0, pad, false)
@@ -46,7 +46,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string FormatLanes<T>(this Vector256<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
-                => text.concat(
+                => string.Concat(
                     src.GetLower().Format(sep, pad), Chars.Space,
                     src.GetUpper().Format(sep, pad));
    }

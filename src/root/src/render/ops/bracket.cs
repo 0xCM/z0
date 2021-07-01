@@ -15,7 +15,8 @@ namespace Z0
         /// </summary>
         /// <param name="content">The content to enclose</param>
         [MethodImpl(Inline), Op]
-        public static string bracket(object content)
+        public static string bracket<T>(T content)
             => enclose($"{content}", Chars.LBracket, Chars.RBracket);
+
     }
 }

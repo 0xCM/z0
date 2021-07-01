@@ -11,6 +11,28 @@ namespace Z0
 
     public readonly struct ApiExtractBlock : IComparable<ApiExtractBlock>
     {
+        public static Outcome parse(string src, out ApiExtractBlock dst)
+        {
+            dst = ApiExtractBlock.Empty;
+            try
+            {
+                var parts = src.SplitClean(FieldDelimiter);
+                var parser = HexParsers.bytes();
+                if(parts.Length != 3)
+                    return (false, $"components = {parts.Length} != 3");
+
+                var address = HexParsers.scalar().Parse(parts[(byte)ApiExtractField.Base]).ValueOrDefault();
+                var uri = ApiUri.parse(parts[(byte)ApiExtractField.Uri].Trim()).ValueOrDefault();
+                var bytes = parts[(byte)ApiExtractField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
+                dst = new ApiExtractBlock(address, uri.Format(), bytes);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+        }
+
         /// <summary>
         /// The Extract's base address
         /// </summary>

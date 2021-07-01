@@ -19,7 +19,7 @@ namespace Z0
         public static string FormatVector<T>(this ReadOnlySpan<T> src, char sep = Chars.Comma)
         {
             var body = src.Map(x => x.ToString()).Join(sep);
-            return text.enclose(body, Rules.fence(Chars.Lt, Chars.Gt));
+            return Rules.enclose(body, Rules.fence(Chars.Lt, Chars.Gt));
         }
 
         /// <summary>

@@ -6,19 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
-    using static core;
 
     partial class text
     {
-        /// <summary>
-        /// Returns a string of length 1 that corresponds to the specified asci code
-        /// </summary>
-        /// <param name="code">The asci code</param>
         [MethodImpl(Inline), Op]
-        public static unsafe string @string(AsciCode code)
-            => new string(gptr<char>((char)code));
+        public static string concat(params object[] src)
+            => string.Concat(src);
 
+        /// <summary>
+        /// Concatenates a sequence of characters with no intervening delimiter
+        /// </summary>
+        /// <param name="src">The characters to concatenate</param>
+        [MethodImpl(Inline), Op]
+        public static string concat(IEnumerable<char> src)
+            => string.Concat(src);
     }
 }

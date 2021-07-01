@@ -34,58 +34,73 @@ namespace Z0.Asm
             Decoder = Wf.AsmDecoder();
         }
 
-        [MethodImpl(Inline), Op]
-        public Index<AsmDetailRow> Resequence(Index<AsmDetailRow> src)
-        {
-            var count = src.Length;
-            ref var row = ref src.First;
-            for(var i=0u; i<count;i++)
-                seek(row,i).Sequence = i;
-            return src;
-        }
+        public ReadOnlySpan<AsmDetailRow> Emit(ReadOnlySpan<ApiCodeBlock> src)
+            => Emit(src, Db.TableDir<AsmDetailRow>());
 
-        public ReadOnlySpan<AsmDetailRow> EmitAsmDetailRows(ReadOnlySpan<ApiCodeBlock> src)
-            => EmitAsmDetailRows(src, Db.TableDir<AsmDetailRow>());
-
-        public ReadOnlySpan<AsmDetailRow> EmitAsmDetailRows(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
+        public ReadOnlySpan<AsmDetailRow> Emit(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
         {
-            var rows = BuildAsmRows(src);
-            var rowsets = @readonly(rows.GroupBy(x => x.Mnemonic).Select(x => AsmEtl.rowset(x.Key, x.Array())).Array());
+            var rows = BuildRows(src);
+            var rowsets = rows.GroupBy(x => x.Mnemonic).Select(x => AsmEtl.rowset(x.Key, x.Array())).Array().ToReadOnlySpan();
             var count = rowsets.Length;
-            var etl = Wf.AsmEtl();
             for(var i=0; i<count; i++)
-                etl.Emit(skip(rowsets,i), dst);
+                Emit(skip(rowsets,i), dst);
             return rows;
         }
 
-        public Index<AsmDetailRow> BuildAsmRows(ReadOnlySpan<ApiCodeBlock> src)
+        Index<AsmDetailRow> BuildRows(ReadOnlySpan<ApiCodeBlock> src)
         {
             var count = src.Length;
             var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(count));
-            var rows = root.list<AsmDetailRow>();
+            var rows = list<AsmDetailRow>();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var block = ref skip(src,i);
-                rows.AddRange(BuildAsmRows(block));
+                rows.AddRange(BuildRows(block));
             }
 
             Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(rows.Count));
             return rows.ToArray();
         }
 
-        Index<AsmDetailRow> BuildAsmRows(in ApiCodeBlock src)
+        uint Emit(in AsmRowSet<AsmMnemonic> src, FS.FolderPath dir)
+            => Emit(src, DetailPath(dir, src));
+
+        uint Emit(in AsmRowSet<AsmMnemonic> src, FS.FilePath dst)
+        {
+            var count = src.Count;
+            if(count != 0)
+            {
+                var flow = Wf.EmittingTable<AsmDetailRow>(dst);
+                var records = span(src.Sequenced);
+                var formatter = Tables.formatter<AsmDetailRow>(AsmDetailRow.RenderWidths);
+                using var writer = dst.Writer();
+                writer.WriteLine(formatter.FormatHeader());
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var record = ref skip(records,i);
+                    writer.WriteLine(formatter.Format(record));
+                }
+                Wf.EmittedTable(flow, count);
+            }
+            return count;
+        }
+
+        FS.FilePath DetailPath(FS.FolderPath dir, in AsmRowSet<AsmMnemonic> src)
+            => Db.Table(dir, string.Format("{0}.{1}", Tables.identify<AsmDetailRow>(), src.Key));
+
+        Index<AsmDetailRow> BuildRows(in ApiCodeBlock src)
         {
             var outcome = Decoder.Decode(src, out var block);
             if(outcome)
-                return BuildAsmRows(src.Code, block);
+                return BuildRows(src.Code, block);
             else
             {
                 Wf.Error(outcome.Message);
-                return sys.empty<AsmDetailRow>();
+                return array<AsmDetailRow>();
             }
         }
 
-        Index<AsmDetailRow> BuildAsmRows(in CodeBlock code, IceInstruction[] src)
+        Index<AsmDetailRow> BuildRows(in CodeBlock code, IceInstruction[] src)
         {
             var bytes = span(code.Storage);
             var offset = z16;
@@ -96,30 +111,30 @@ namespace Z0.Asm
             {
                 ref readonly var instruction = ref src[i];
                 var size = (ushort)instruction.ByteLength;
-                FillAsmRow(code, new Address16(offset), bytes.Slice(offset, size), instruction, ref seek(dst,i));
+                Fill(code, new Address16(offset), bytes.Slice(offset, size), instruction, ref seek(dst,i));
                 offset += size;
             }
             return buffer;
         }
 
-        void FillAsmRow(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src, ref AsmDetailRow record)
+        void Fill(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src, ref AsmDetailRow dst)
         {
-            record.Sequence = (uint)NextSequence;
-            record.BlockAddress = code.BaseAddress;
-            record.IP = src.IP;
-            record.LocalOffset = offset;
-            record.GlobalOffset = NextOffset;
-            record.Mnemonic = src.AsmMnemonic;
-            record.OpCode = src.Specifier.OpCode;
-            record.Encoded = new BinaryCode(encoded.TrimEnd().ToArray());
-            record.Statement = src.FormattedInstruction;
-            record.Instruction = src.Specifier.Sig.Format();
-            record.CpuId = RP.embrace(src.CpuidFeatures.Select(x => x.ToString()).Join(","));
-            record.OpCodeId = src.Code.ToString();
+            dst.Sequence = (uint)NextSequence;
+            dst.BlockAddress = code.BaseAddress;
+            dst.IP = src.IP;
+            dst.LocalOffset = offset;
+            dst.GlobalOffset = NextOffset;
+            dst.Mnemonic = src.AsmMnemonic;
+            dst.OpCode = src.Specifier.OpCode;
+            dst.Encoded = new BinaryCode(encoded.TrimEnd().ToArray());
+            dst.Statement = src.FormattedInstruction;
+            dst.Instruction = src.Specifier.Sig.Format();
+            dst.CpuId = RP.embrace(src.CpuidFeatures.Select(x => x.ToString()).Join(","));
+            dst.OpCodeId = src.Code.ToString();
             if(Index.TryGetValue(src.AsmMnemonic, out var builder))
-                builder.Include(record);
+                builder.Include(dst);
             else
-                Index.Add(src.AsmMnemonic, ArrayBuilder.build(record));
+                Index.Add(src.AsmMnemonic, ArrayBuilder.build(dst));
         }
 
         int NextSequence

@@ -50,12 +50,6 @@ namespace Z0
         public static ApiUriScheme scheme(string src)
             => Enum.TryParse(typeof(ApiUriScheme), src, true, out var result) ? (ApiUriScheme)result : ApiUriScheme.None;
 
-        // public static ParseResult<ApiHostUri> host(FS.FileName src)
-        //     => ApiUri.host(src.WithoutExtension.Name.Replace(Chars.Dot, ApiUriDelimiters.UriPathSep));
-
-        // public static ParseResult<ApiHostUri> host(FS.FilePath src)
-        //     => ApiUri.host(src.FileName.WithoutExtension.Name.Replace(Chars.Dot, ApiUriDelimiters.UriPathSep));
-
         public static ParseResult<ApiHostUri> host(string src)
         {
             var failure = ParseResult.unparsed<ApiHostUri>(src);

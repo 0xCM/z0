@@ -4,5 +4,10 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="$(Root)" />
+    <ProjectReference Include="$(Sys)" />
+    <ProjectReference Include="$(Core)" />
+  </ItemGroup>
 
 </Project>

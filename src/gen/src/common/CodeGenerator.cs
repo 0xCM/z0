@@ -48,15 +48,15 @@ namespace Z0
         public const int MemberLevel = 2;
 
         public static string bracket(object content)
-            => text.bracket(content);
+            => RP.bracket(content);
 
         public static string args(params object[] src)
             => string.Join(Chars.Comma,src);
 
         public static string attrib(string name, params object[] arguments)
             => arguments.Length == 0
-            ? bracket(text.concat(name))
-            : bracket(text.concat(name, Chars.LParen, args(arguments), Chars.RParen));
+            ? bracket(name)
+            : bracket(string.Concat(name, Chars.LParen, args(arguments), Chars.RParen));
 
         protected CodeGenerator()
         {

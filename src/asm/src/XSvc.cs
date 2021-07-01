@@ -12,10 +12,6 @@ namespace Z0
     public static partial class XSvc
     {
         [Op]
-        public static AsmEtl AsmEtl(this IWfRuntime wf)
-            => Services.AsmEtl.create(wf);
-
-        [Op]
         public static AsmRowBuilder AsmRowBuilder(this IWfRuntime wf)
             => Services.AsmRowBuilder.create(wf);
 

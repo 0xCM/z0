@@ -26,9 +26,7 @@ namespace Z0
         }
 
         public uint MethodCount
-        {
-            get => (uint)Hosts.Select(x => (int)x.MethodCount).Storage.Sum();
-        }
+            => (uint)Hosts.Select(x => (int)x.MethodCount).Storage.Sum();
 
         public static ResolvedPart Empty
         {

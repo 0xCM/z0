@@ -69,7 +69,7 @@ namespace Z0.Asm
 
         public static string format(in AsmSig src)
         {
-            var dst = text.buffer();
+            var dst = TextTools.buffer();
             render(src, dst);
             return dst.Emit();
         }
@@ -349,8 +349,8 @@ namespace Z0.Asm
         public static uint render(in AsmEncodingInfo src, bool expression, bool asmsig, bool opcode, bool hex, bool bits, Span<char> dst)
         {
             var counter = 0u;
-            const byte ExprPadWidth = 46;
-            const sbyte ExprPad = -ExprPadWidth;
+            const byte ExprWidth = 46;
+            const sbyte ExprPad = -ExprWidth;
 
             if(expression)
             {

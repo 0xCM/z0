@@ -46,13 +46,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Delimit(F f, object content)
         {
-            State.Append(text.rspace(Delimiter));
+            State.Append(RP.rspace(Delimiter));
             State.Append(render(content).PadRight(width(f)));
         }
 
         public void DelimitField(F f, object content, char delimiter)
         {
-            State.Append(text.rspace(delimiter));
+            State.Append(RP.rspace(delimiter));
             State.Append(render(content).PadRight(width(f)));
         }
 

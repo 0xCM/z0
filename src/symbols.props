@@ -115,6 +115,7 @@
 
     <Tables>$(Src)tables/z0.tables.csproj</Tables>
     <Term>$(Src)term/z0.term.csproj</Term>
+    <Text>$(Src)text/z0.text.csproj</Text>
     <Time>$(Src)time/z0.time.csproj</Time>
     <Tools>$(Src)tools/z0.tools.csproj</Tools>
     <Tooling>$(Src)tooling/z0.tooling.csproj</Tooling>

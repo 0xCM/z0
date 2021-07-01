@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
@@ -11,11 +12,12 @@ namespace Z0
     partial class text
     {
         /// <summary>
-        /// Encloses text between '[' and ']' characters
+        /// Encloses text within a bounding string
         /// </summary>
-        /// <param name="content">The content to enclose</param>
+        /// <param name="content">The text to enclose</param>
+        /// <param name="sep">The left and right boundary</param>
         [MethodImpl(Inline), Op]
-        public static string bracket<T>(T content)
-            => enclose($"{content}", Chars.LBracket, Chars.RBracket);
+        public static string enclose(object content, string sep)
+            => string.Concat(sep,$"{content}",sep);
     }
 }

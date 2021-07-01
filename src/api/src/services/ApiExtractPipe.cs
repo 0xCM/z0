@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class ApiExtractPipe : AppService<ApiExtractPipe>
     {
@@ -21,52 +21,31 @@ namespace Z0
             var count = lines.Length;
             var flow = Wf.Running(string.Format("Reading extracts from {0}", src.ToUri()));
             var counter = 0u;
+            var result = Outcome.Success;
             for(var i=1u; i<count; i++)
             {
                 ref readonly var line = ref skip(lines,i);
-                if(Parse(line, out var block))
+                result = ApiExtractBlock.parse(line, out var block);
+                if(result.Ok)
                 {
                     dst.Add(block);
                     counter++;
                 }
                 else
-                    Wf.Warn($"Unable to process {line}");
+                    Wf.Warn(result.Message);
 
             }
             Wf.Ran(flow, string.Format("Read {0} extract blocks from {1}", counter, src.ToUri()));
             return counter;
         }
 
-        public Index<ApiExtractBlock> Load(FS.Files src)
+        public ReadOnlySpan<ApiExtractBlock> Load(FS.Files src)
         {
-            var dst = root.list<ApiExtractBlock>();
+            var dst = list<ApiExtractBlock>();
             var counter = 0u;
             foreach(var file in src)
-                counter += Load(file,dst);
-            return dst.ToArray();
-        }
-
-        public Outcome Parse(string src, out ApiExtractBlock dst)
-        {
-            dst = ApiExtractBlock.Empty;
-            try
-            {
-                var parts = src.SplitClean(FieldDelimiter);
-                var parser = HexParsers.bytes();
-                if(parts.Length != 3)
-                    return (false, $"components = {parts.Length} != 3");
-
-                var address = HexParsers.scalar().Parse(parts[(byte)ApiExtractField.Base]).ValueOrDefault();
-                var uri = ApiUri.parse(parts[(byte)ApiExtractField.Uri].Trim()).ValueOrDefault();
-                var bytes = parts[(byte)ApiExtractField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
-                dst = new ApiExtractBlock(address, uri.Format(), bytes);
-                return true;
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-                return e;
-            }
+                counter += Load(file, dst);
+            return dst.ViewDeposited();
         }
     }
 }

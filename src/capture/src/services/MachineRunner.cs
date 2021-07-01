@@ -38,11 +38,11 @@ namespace Z0
                     Emitted(Wf.ApiHexPacks().Emit(sorted));
 
                 if(options.EmitAsmRows)
-                    Emitted(Wf.AsmRowBuilder().EmitAsmDetailRows(blocks));
+                    Emitted(Wf.AsmRowBuilder().Emit(blocks));
 
                 if(options.EmitCallData)
                 {
-                    var routines = decoder.Decode(core.@readonly(blocks));
+                    var routines = decoder.Decode(@readonly(blocks));
                     if(options.EmitCallData)
                         Emitted(Wf.AsmCallPipe().EmitRows(routines));
                 }

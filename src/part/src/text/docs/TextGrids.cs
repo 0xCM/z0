@@ -15,30 +15,6 @@ namespace Z0
     [ApiHost]
     public readonly struct TextGrids
     {
-        public IEnumerable<TextRows> partition(TextGrid src, int offset, Func<TextRow,bool> f)
-        {
-            var part = list<TextRow>();
-            for(var i=offset; i<src.RowCount; i++)
-            {
-                var row = src[i];
-                if(f(row))
-                {
-                    yield return new TextRows(part.ToArray());
-                    part.Clear();
-                }
-                else
-                    part.Add(row);
-            }
-        }
-
-        public static void parse<T>(TextGrid src, Span<T> dst, Func<TextRow,T> parser)
-        {
-            var rows = src.RowData.View;
-            var count = rows.Length;
-            for(var i=0; i<count; i++)
-               seek(dst,i) = parser(skip(rows,i));
-        }
-
         public static Outcome load(FS.FilePath src, out TextGrid dst)
         {
             dst = TextGrid.Empty;

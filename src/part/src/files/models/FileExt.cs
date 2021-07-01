@@ -96,7 +96,7 @@ namespace Z0
             public string SearchPattern
             {
                 [MethodImpl(Inline)]
-                get => Z0.text.format("*.{0}", Name);
+                get => string.Format("*.{0}", Name);
             }
 
             [MethodImpl(Inline)]

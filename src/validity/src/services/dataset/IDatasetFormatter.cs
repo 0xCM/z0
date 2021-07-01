@@ -39,7 +39,7 @@ namespace Z0
 
         void Delimit(F f, object content)
         {
-            State.Append(text.rspace(Delimiter));
+            State.Append(RP.rspace(Delimiter));
             State.Append(Datasets.render(content).PadRight(width(f)));
         }
     }

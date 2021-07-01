@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static TextRules;
+    //using static TextRules;
     using static core;
 
     partial class text
@@ -18,13 +18,13 @@ namespace Z0
             => a == b;
 
         [MethodImpl(Inline), Op]
-        public static bit equals(in SegRef<char> a, string b)
+        public static bool equals(in SegRef<char> a, string b)
         {
             var count = a.Length;
             if(count != b.Length)
                 return false;
 
-            var match = bit.On;
+            var match = true;
             ref readonly var left = ref a.First;
             ref readonly var right = ref first(span(b));
             for(var i=0; i<count; i++)
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Op]
         public static bool equals(ReadOnlySpan<char> a, ReadOnlySpan<char> b)
-            => a.CompareTo(b, InvariantCulture) == 0;
+            => a.CompareTo(b, StringComparison.InvariantCulture) == 0;
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise

@@ -4,15 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    partial class text
+    partial struct RP
     {
         [MethodImpl(Inline), Op]
-        public static string rspace(object content)
-            => $"{content} ";
+        public static string squote(object src)
+            => enclose(src, CharText.SQuote);
     }
 }

@@ -6,23 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Root;
-    using static core;
 
     partial class text
     {
-        [MethodImpl(Inline), Op]
-        public static string concat(params object[] src)
-            => string.Concat(src);
-
         /// <summary>
-        /// Concatenates a sequence of characters with no intervening delimiter
+        /// Creates a <see cref='TextLine'/>
         /// </summary>
-        /// <param name="src">The characters to concatenate</param>
+        /// <param name="number">The line number</param>
+        /// <param name="src">The line text</param>
         [MethodImpl(Inline), Op]
-        public static string concat(IEnumerable<char> src)
-            => string.Concat(src);
+        public static TextLine line(uint number, string src)
+            => new TextLine(number, src);
+
+        [MethodImpl(Inline), Op]
+        public static TextLine line(uint number, TextRow src)
+            => new TextLine(number, src.RowText);
     }
 }

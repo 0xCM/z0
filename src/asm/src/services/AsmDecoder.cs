@@ -89,7 +89,7 @@ namespace Z0.Asm
                     if(i == 0)
                         ip = target[0].IP;
 
-                     instructions.Add(AsmEtl.ApiHostRoutine(ip, block, target.ToArray()));
+                     instructions.Add(AsmRoutines.hosted(ip, block, target.ToArray()));
                 }
                 else
                     Wf.Warn(outcome.Message);
@@ -231,7 +231,7 @@ namespace Z0.Asm
             dst = AsmRoutine.Empty;
             var outcome = Decode(src.Encoded, out var block);
             if(outcome)
-                dst = AsmEtl.routine(src, block);
+                dst = AsmRoutines.routine(src, block);
             return outcome;
         }
 
@@ -315,14 +315,14 @@ namespace Z0.Asm
                 var instruction = skip(instructions,i);
                 if(check)
                     CheckInstructionSize(instruction, offset, src);
-                seek(dst, i) = AsmEtl.summarize(@base, instruction, src.Encoded.Code, instruction.FormattedInstruction, offset);
+                seek(dst, i) = ApiInstructions.summarize(@base, instruction, src.Encoded.Code, instruction.FormattedInstruction, offset);
                 offset += (uint)instruction.ByteLength;
             }
 
             if(check)
                 CheckBlockLength(src);
 
-            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, AsmEtl.ToApiInstructions(src.Encoded, src.Decoded));
+            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, ApiInstructions.from(src.Encoded, src.Decoded));
         }
 
         static void CheckInstructionSize(in IceInstruction instruction, uint offset, in ApiBlockAsm src)
@@ -331,9 +331,19 @@ namespace Z0.Asm
                 core.@throw(SizeMismatch(instruction, offset, src));
         }
 
+        static uint size(in ApiBlockAsm src)
+        {
+            var result = 0u;
+            var instructions = src.Instructions;
+            var count = instructions.Length;
+            for(var i=0; i<count; i++)
+                result += (uint)skip(instructions,i).ByteLength;
+            return result;
+        }
+
         static void CheckBlockLength(in ApiBlockAsm src)
         {
-            var length = AsmEtl.size(src);
+            var length = size(src);
             if(length != src.Encoded.Length)
                 core.@throw(BadBlockLength(src,length));
         }

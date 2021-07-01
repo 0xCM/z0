@@ -45,14 +45,6 @@ namespace Z0
                 return encoding.GetString(pSrc, src.Length);
         }
 
-        /// <summary>
-        /// Creates a string from a UTF-16 span
-        /// </summary>
-        /// <param name="src">The data source</param>
-        public static unsafe string format(ReadOnlySpan<ushort> src)
-            => new string(recover<char>(src));
-
-
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<char> src)
             => new string(src);
@@ -76,10 +68,6 @@ namespace Z0
         [Op]
         public static string format(object src)
             => src is ITextual t ? t.Format() : src?.ToString() ?? "!!null!!";
-
-        [Op]
-        public static string format(object src, Type t, char delimiter, RenderWidth width)
-            => rpad(format("{0} {1}", delimiter, format(src)), width);
 
         public static string format<T>(string pattern, T a)
             => string.Format(pattern, a is ITextual t ? t.Format() : $"{a}");

@@ -54,7 +54,7 @@ namespace Z0.Asm
         [Op]
         public static ReadOnlySpan<string> instructions(AsmRoutine src, in AsmFormatConfig config)
         {
-            var summaries = AsmEtl.summarize(src);
+            var summaries = AsmRoutines.summarize(src);
             var count = summaries.Length;
             if(count == 0)
                 return default;

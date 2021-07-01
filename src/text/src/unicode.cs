@@ -6,13 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
-    using static Part;
+    using static Root;
 
     partial class text
     {
         [MethodImpl(Inline), Op]
-        public static string squote(object src)
-            => enclose(src, CharText.SQuote);
+        public static BinaryCode unicode(string src)
+            => Encoding.Unicode.GetBytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static BinaryCode unicode(string src, EndianBig endian)
+            => Encoding.BigEndianUnicode.GetBytes(src);
     }
 }

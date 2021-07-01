@@ -84,7 +84,7 @@ namespace Z0.Asm
         [Op]
         public Index<AsmCallRow> BuildRows(ReadOnlySpan<ApiInstruction> src)
         {
-            var calls = AsmEtl.filter(src, 0xE8);
+            var calls = ApiInstructions.filter(src, 0xE8);
             var count = calls.Length;
             var buffer = alloc<AsmCallRow>(count);
             ref var row = ref first(span(buffer));

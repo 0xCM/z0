@@ -93,6 +93,9 @@ public enum PartId : ulong
     [Symbol("containers")]
     Containers = 27,
 
+    [Symbol("text")]
+    Text = 28,
+
     [Symbol("gmath")]
     GMath = 34,
 
@@ -176,9 +179,6 @@ public enum PartId : ulong
 
     [Symbol("spanblocks")]
     SpanBlocks = 67,
-
-    [Symbol("related")]
-    Related = 68,
 
     [Symbol("minidump")]
     Minidump = 69,
@@ -297,14 +297,8 @@ public enum PartId : ulong
     [Symbol("validity")]
     Validity = 156,
 
-    [Symbol("xed")]
-    Xed = 160,
-
     [Symbol("cpu.dsl")]
     CpuDsl = 161,
-
-    [Symbol("asm.catalogs")]
-    AsmCatalogs = 162,
 
     [Symbol("services")]
     Services = 199,

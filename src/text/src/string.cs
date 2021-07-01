@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     partial class text
     {
+        /// <summary>
+        /// Returns a string of length 1 that corresponds to the specified asci code
+        /// </summary>
+        /// <param name="code">The asci code</param>
         [MethodImpl(Inline), Op]
-        public static BinaryCode unicode(string src)
-            => Encoding.Unicode.GetBytes(src);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryCode unicode(string src, EndianBig endian)
-            => Encoding.BigEndianUnicode.GetBytes(src);
+        public static unsafe string @string(AsciCode code)
+            => new string(gptr<char>((char)code));
     }
 }

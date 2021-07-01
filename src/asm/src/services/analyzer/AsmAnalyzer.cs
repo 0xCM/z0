@@ -15,11 +15,7 @@ namespace Z0
     {
         ApiHex ApiHex;
 
-        AsmDecoder Decoder;
-
         AsmRowBuilder AsmRows;
-
-        AsmStatementPipe Statements;
 
         AsmCallPipe Calls;
 
@@ -36,9 +32,7 @@ namespace Z0
         protected override void OnInit()
         {
             ApiHex = Wf.ApiHex();
-            Decoder = Wf.AsmDecoder();
             AsmRows = Wf.AsmRowBuilder();
-            Statements = Wf.AsmStatementPipe();
             Calls = Wf.AsmCallPipe();
             Jumps = Wf.AsmJmpPipe();
             Thumbprints = Wf.AsmThumbprints();
@@ -65,11 +59,18 @@ namespace Z0
                 EmitDetails(blocks, dst);
         }
 
+        public void Analyze(SortedSpan<AsmIndex> src, ApiPackArchive dst)
+        {
+            var root = dst.RootDir();
+            var blocks = CollectBlocks(root);
+            EmitThumbprints(src, root);
+        }
+
         void EmitDetails(ReadOnlySpan<ApiCodeBlock> src, ApiPackArchive dst)
         {
             var target = dst.AsmDetailDir();
             target.Clear();
-            var rows = AsmRows.EmitAsmDetailRows(src, target);
+            var rows = AsmRows.Emit(src, target);
         }
 
         ReadOnlySpan<AsmIndex> EmitStatementIndex(SortedSpan<ApiCodeBlock> src, ApiPackArchive dst)
@@ -80,18 +81,18 @@ namespace Z0
             return rows;
         }
 
-        public void Analyze(SortedSpan<AsmIndex> src, ApiPackArchive dst)
+        SortedSpan<AsmEncodingInfo> CollectDistinctEncodings(ReadOnlySpan<AsmIndex> src)
         {
-            var root = dst.RootDir();
-            var blocks = CollectBlocks(root);
-            EmitThumbprints(src, root);
+            var collecting = Wf.Running(Msg.CollectingBitstrings.Format(src.Length));
+            var collected = AsmEtl.encodings(src);
+            Wf.Ran(collecting, Msg.CollectedBitstrings.Format(collected.Count));
+            return collected;
         }
 
         void EmitThumbprints(SortedSpan<AsmIndex> src, FS.FolderPath dst)
         {
             var target = ThumbprintPath(dst);
-            var etl = Wf.AsmEtl();
-            var distinct = etl.CollectDistinctEncodings(src);
+            var distinct = CollectDistinctEncodings(src);
             Thumbprints.Emit(distinct, target);
         }
 
@@ -132,7 +133,7 @@ namespace Z0
         {
             var count = src.Length;
             var flow = Wf.Running(Msg.CollectingBlocks.Format(count));
-            var blocks = AsmEtl.blocks(src);
+            var blocks = AsmRoutines.blocks(src);
             Wf.Ran(flow, Msg.CollectedBlocks.Format(count));
             return blocks;
         }
