@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Part;
+    using static Root;
 
     readonly struct BuildLog : IBuildLog
     {

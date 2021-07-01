@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(AsmCore)"/>
-      <ProjectReference Include="$(Intel)"/>
+      <ProjectReference Include="$(Glue)"/>
+      <ProjectReference Include="$(Resources)"/>
       <ProjectReference Include="$(Events)"/>
       <ProjectReference Include="$(Workflow)"/>
   </ItemGroup>

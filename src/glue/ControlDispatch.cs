@@ -5,17 +5,9 @@
 namespace Z0
 {
     using System;
+    using static core;
 
-    readonly struct WorkflowCommandDispatcher
-    {
-        public static void dispatch(object[] args)
-        {
-
-        }
-
-    }
-
-    readonly struct ControlCommandDispatcher
+    public readonly struct ControlDispatch
     {
         public static void dispatch(ReadOnlySpan<string> args)
         {
@@ -40,7 +32,7 @@ namespace Z0
                         var output = runner.RunControlScript(name);
                         var processor = Tooling.processor(paths, script, handlers);
                         term.inform("Response");
-                        root.iter(output, x => processor.Process(x));
+                        iter(output, x => processor.Process(x));
                     }
                     else
                     {

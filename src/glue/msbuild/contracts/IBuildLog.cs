@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    [WfCmdKind]
-    public enum ToolCmdKind : byte
-    {
-        None = 0,
+    using System;
 
-        [Alias("update-help-index")]
-        UpdateToolHelpIndex,
+
+    public interface IBuildLog : ISink<BuildLogEntry>, IDisposable
+    {
+
     }
 }

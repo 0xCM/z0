@@ -10,9 +10,9 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmData
     {
-        public static AssetData Assets => AssetData.create();
+        public static AsmDataSources Assets => AsmDataSources.create();
 
-        public sealed class AssetData : Assets<AssetData>
+        public sealed class AsmDataSources : Assets<AsmDataSources>
         {
             public Asset AsmDbInstructions() => Asset("asmdb.instructions.csv");
 

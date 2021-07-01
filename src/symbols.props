@@ -71,6 +71,7 @@
     <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
 
     <Gen>$(Src)gen/z0.gen.csproj</Gen>
+    <Glue>$(Src)glue/z0.glue.csproj</Glue>
     <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
     <GVec>$(Src)gvec/z0.gvec.csproj</GVec>
 
@@ -78,8 +79,6 @@
     <Hex>$(Src)hex/z0.hex.csproj</Hex>
 
     <Interop>$(Src)interop/z0.interop.csproj</Interop>
-    <Intel>$(Src)intel/z0.intel.csproj</Intel>
-
     <Lang>$(Src)lang/z0.lang.csproj</Lang>
     <Logix>$(Src)logix/z0.logix.csproj</Logix>
 

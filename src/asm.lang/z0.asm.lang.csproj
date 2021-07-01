@@ -6,11 +6,11 @@
 
   <ItemGroup>
     <ProjectReference Include="$(AsmLangG)"/>
-    <ProjectReference Include="$(AsmCatalogs)"/>
     <ProjectReference Include="$(Workflow)" />
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(Gen)" />
+    <ProjectReference Include="$(Glue)" />
     <ProjectReference Include="$(Digital)" />
     <ProjectReference Include="$(AsmCore)" />
     <ProjectReference Include="$(BitFields)" />

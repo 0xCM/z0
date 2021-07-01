@@ -99,7 +99,7 @@ namespace Z0.Asm
         public FS.FilePath EmitChipIsaAsset()
         {
             var asset = AsmData.Assets.XedChipData();
-            var path = Db.ExternalDataPath(FS.file(AsmData.AssetData.XedChipDataName));
+            var path = Db.ExternalDataPath(FS.file(AsmData.AsmDataSources.XedChipDataName));
             EmitChipIsaAsset(path);
             return path;
         }

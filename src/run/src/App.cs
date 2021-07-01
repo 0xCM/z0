@@ -16,10 +16,9 @@ namespace Z0
             switch(kind)
             {
                 case CmdSwitchKind.Control:
-                    ControlCommandDispatcher.dispatch(args);
+                    ControlDispatch.dispatch(args);
                 break;
                 case CmdSwitchKind.Workflow:
-                    WorkflowCommandDispatcher.dispatch(args);
                 break;
                 default:
                     Reactor.dispatch(args);

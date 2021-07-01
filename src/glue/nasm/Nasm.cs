@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using Z0.Asm;
-
     [ApiHost]
     public sealed partial class Nasm : ToolService<Nasm>
     {

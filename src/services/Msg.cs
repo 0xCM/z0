@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public interface IBuildLog : ISink<BuildLogEntry>, IDisposable
+    struct Msg
     {
+        public static MsgPattern<FS.FileUri> LoadingSpanAccessors => "Loading respack accessors from {0}";
 
+        public static MsgPattern<Count,FS.FileUri> LoadedSpanAccessors => "Loaded {0} respack accessors from {1}";
     }
 }

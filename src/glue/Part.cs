@@ -2,15 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+[assembly: PartId(PartId.Glue)]
+
+namespace Z0.Parts
 {
-    using static Rules;
-
-    using Z0.Asm;
-
-    [ApiComplete]
-    partial struct Msg
+    public sealed class Glue : Part<Glue>
     {
+        public static PartAssets Assets = new PartAssets();
 
+        public sealed class PartAssets : Assets<PartAssets>
+        {
+
+        }
     }
 }

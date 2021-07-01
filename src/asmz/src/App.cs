@@ -315,8 +315,8 @@ namespace Z0.Asm
 
         void EmitAsmAsssetCatalog()
         {
-            var catalogs = Wf.AsmCatalogs();
-            catalogs.EmitAssets();
+            var catalogs = Wf.Assets();
+            catalogs.EmitIndex(AsmData.Assets, Db.Root);
         }
 
         void EmitCatalogAssets()

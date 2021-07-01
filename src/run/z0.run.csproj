@@ -18,5 +18,6 @@
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Term)" />
     <ProjectReference Include="$(Service)" />
+    <ProjectReference Include="$(Glue)" />
   </ItemGroup>
 </Project>

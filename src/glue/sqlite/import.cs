@@ -7,8 +7,7 @@ namespace Z0.Tools
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     partial struct Sqlite
     {
