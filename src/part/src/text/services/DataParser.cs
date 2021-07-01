@@ -231,7 +231,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out CliToken dst)
         {
-            var i = TextTools.index(src,Chars.Colon);
+            var i = text.index(src,Chars.Colon);
             var outcome = Outcome.Empty;
             dst = CliToken.Empty;
             if(i != NotFound)
@@ -240,7 +240,7 @@ namespace Z0
                 if(!outcome)
                     return outcome;
 
-                outcome = HexNumericParser.parse32u(TextTools.right(src,i), out var row);
+                outcome = HexNumericParser.parse32u(text.right(src,i), out var row);
                 if(!outcome)
                     return outcome;
 

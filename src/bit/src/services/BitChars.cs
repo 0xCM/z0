@@ -15,7 +15,7 @@ namespace Z0
     using D = BitChars.CharData;
 
     [ApiHost]
-    public readonly partial struct BitChars
+    public readonly struct BitChars
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -128,5 +128,33 @@ namespace Z0
                 K.RightFence=> text(n5),
                 _ => CharText.Space
             };
+
+        internal readonly struct CharData
+        {
+            public const string Off = "0";
+
+            public const string On = "0";
+
+            public const string SectionSep = "|";
+
+            public const string SegSep = " ";
+
+            public const string LeftFence = "[";
+
+            public const string RightFence = "]";
+
+            public const string Space = " ";
+
+            public const string CharText = Off + On + SectionSep + SegSep + LeftFence + RightFence + Space;
+
+            public ReadOnlySpan<char> Chars
+            {
+                [MethodImpl(Inline)]
+                get => CharText;
+            }
+
+            public static ReadOnlySpan<BitCharKind> Kinds
+                => new BitCharKind[7]{K.On, K.Off, K.SectionSep, K.SegSep, K.LeftFence, K.RightFence, K.Space};
+        }
     }
 }

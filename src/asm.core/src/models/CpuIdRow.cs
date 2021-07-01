@@ -14,6 +14,8 @@ namespace Z0.Asm
 
         public const byte FieldCount = 6;
 
+        public string Chip;
+
         public Hex32 Leaf;
 
         public Hex32 Subleaf;

@@ -33,7 +33,7 @@ namespace Z0
                     var info = new FieldDefInfo();
                     ref readonly var handle = ref skip(handles,j);
                     reader.Row(handle, ref row);
-                    info.Token = CliToken.from(handle);
+                    info.Token = Clr.token(handle);
                     info.Component = assname;
                     info.Attributes = row.Attributes;
                     info.CliSig = reader.Read(row.Signature);

@@ -41,7 +41,7 @@ namespace Z0.Asm
         public static Outcome parse(ReadOnlySpan<char> src, out ChapterPage dst)
         {
             dst = ChapterPage.Empty;
-            var i = index(src, Chars.Dash);
+            var i = text.index(src, Chars.Dash);
             if(i == NotFound)
                 return false;
 
@@ -60,7 +60,7 @@ namespace Z0.Asm
         public static Outcome parse(ReadOnlySpan<char> src, out ChapterNumber dst)
         {
             dst = ChapterNumber.Empty;
-            var i = index(src, Markers.ChapterNumber);
+            var i = text.index(src, Markers.ChapterNumber);
             if(i == NotFound)
                 return false;
 

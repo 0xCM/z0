@@ -4,11 +4,61 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
     using static BinaryBitLogicKind;
     using static math;
+    using static core;
 
     partial struct Prototypes
     {
+
+        [ApiHost(prototypes + dispatcher)]
+        public readonly struct Dispatcher
+        {
+           [Op]
+            public ulong Eval(ulong a, ulong b, BinaryBitLogicKind k, ReadOnlySpan<Func<ulong,ulong,ulong>> f)
+            {
+                switch(k)
+                {
+                    case False:
+                        return skip(f,0)(a,b);
+                    case And:
+                        return skip(f,1)(a,b);
+                    case CNonImpl:
+                        return skip(f,2)(a,b);
+                    case LProject:
+                        return skip(f,3)(a,b);
+                    case NonImpl:
+                        return skip(f,4)(a,b);
+                    case RProject:
+                        return skip(f,5)(a,b);
+                    case Xor:
+                        return skip(f,6)(a,b);
+                    case Or:
+                        return skip(f,7)(a,b);
+                    case Nor:
+                        return skip(f,8)(a,b);
+                    case Xnor:
+                        return skip(f,9)(a,b);
+                    case RNot:
+                        return skip(f,10)(a,b);
+                    case Impl:
+                        return skip(f,11)(a,b);
+                    case LNot:
+                        return skip(f,12)(a,b);
+                    case CImpl:
+                        return skip(f,13)(a,b);
+                    case Nand:
+                        return skip(f,14)(a,b);
+                    case True:
+                        return skip(f,15)(a,b);
+                }
+
+                return ulong.MaxValue;
+            }
+        }
+
         //[ApiHost(prototypes + dot + evaluator)]
         public readonly struct Evaluator
         {
@@ -347,7 +397,6 @@ namespace Z0.Asm
 
                 return 0;
             }
-
         }
 
         //[ApiHost(prototypes + evaluator + contracted)]

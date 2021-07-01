@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Asm;
-
-    using static Rules;
-
     [ApiComplete]
     partial struct Msg
     {
@@ -17,19 +13,9 @@ namespace Z0
 
         public static MsgPattern<Count> CreatingStatements => "Creating {0} statements";
 
-        //public static MsgPattern<Count> CreatedStatements => "Created {0} statements";
-
         public static MsgPattern<FS.FolderPath> ObliteratingDirectory => "Obliterating the directory {0}";
 
         public static MsgPattern<FS.FolderPath> ObliteratedDirectory => "Consigned the directory {0} to oblivion";
-
-        public static RenderPattern<Count> EmittingInstructionRecords => "Emitting {0} instruction tables";
-
-        public static RenderPattern<Count,Count> EmittedInstructionRecords => "Emitted a total of {0} records for {1} instruction tables";
-
-        public static MsgPattern<ApiHostUri,Count> RunningHostEmissionWorkflow => "Running {0} emission workflow for {1} members";
-
-        public static MsgPattern<Count,ApiHostUri> ParsedExtractBlocks => "Parsed {0} {1} extract blocks";
 
         public static MsgPattern<ApiHostUri> EmittingHostRoutines => "Emitting {0} routines";
 
@@ -38,12 +24,6 @@ namespace Z0
         public static MsgPattern<Count> CreatingAsmRowsFromBlocks => "Creating AsmRows for {0} blocks";
 
         public static MsgPattern<Count> CreatedAsmRowsFromBlocks => "Created {0} AsmRows";
-
-        public static MsgPattern<ApiHostUri> CreatingApiStatements => "Creating {0} host api statements";
-
-        public static MsgPattern<ApiHostUri,Count> CreatedApiStatements => "Created {0} {1} host api statement";
-
-        public static MsgPattern<Count,Count,FS.FileUri> ParsedStatements => "Parsed {0} full rows and {1} partial rows from {2}";
 
         public static MsgPattern<Count> DecodingParts => "Decoding {0} parts";
 
@@ -61,37 +41,7 @@ namespace Z0
 
         public static MsgPattern<Count> CollectedBitstrings => "Collecting {0} distinct bitstrings";
 
-        public static MsgPattern<FS.FileUri> LoadingStatements
-            => "Loading statements from {0}";
-
-        public static MsgPattern<Count,FS.FileUri> LoadedStatments
-            => "Loading {0} statements from {1}";
-
-        public static MsgPattern<Count,FS.FileUri> ProcessingStatments
-            => "Processing {0} statements from {1}";
-
-        public static MsgPattern<Count,FS.FileUri> ProcessedStatements
-            => "Processed {0} statements from {1}";
-
-        //public static MsgPattern<Count> CreatingStatements => "Creating statements for {0} routines";
-
-        public static MsgPattern<Count,ApiHostUri> CreatingHostStatements => "Creating {0} {1} routine productions";
-
         public static MsgPattern<Count,ApiHostUri> DecodedHostMembers => "Decoded {0} {1} members";
-
-        public static MsgPattern<AsmMnemonic> MonicCodeParseFailed => "Attempt to parse mnemonic code for {0} failed";
-
-        public static MsgPattern<string> CouldNotParseSigExpr => "Could not created a signature expression from {0}";
-
-        public static MsgPattern<Count,Count> UnexpectedFieldCount => "{0} fields were expected and yet {1} were found";
-
-        public static MsgPattern<FS.FileUri> CouldNotParseDocument => "Could not parse {0}";
-
-        public static MsgPattern<TextRow,string> CouldNotParseStatementRow => "Could not parse statement from {0}: {1}";
-
-        public static MsgPattern<Fence<char>> OpCodeFenceNotFound => "Op code fence {0} not found";
-
-        public static MsgPattern<Count,Count> CollectedThumbprints => "Collected {0} distinct thumbprints from {1} statements";
 
         public static MsgPattern<MemoryAddress> TraversingSegments => "Traversing memory segments above the process base address {0}";
 
@@ -104,14 +54,6 @@ namespace Z0
         public static MsgPattern<MemoryRange> TraversedRange => "Traversed {0}";
 
         public static MsgPattern<ByteSize,ProcessMemoryRegion> TraversedRegion => "Traversed {0} bytes from {0}";
-
-        public static MsgPattern<Count> ExtractingParts => "Extracting {0} parts";
-
-        public static MsgPattern<Count,Count> ExtractedParts => "Extracted {0} methods from {1} parts";
-
-        public static MsgPattern<DelimitedIndex<IPart>> RunningExtractWorkflow => "Running extract workflow for {0}";
-
-        public static MsgPattern<Count,Count> RanExtractWorkflow = "Extracted {0} host routines from {1} parts" ;
 
         public static MsgPattern<ApiHostUri> ExtractingHost => "Extracting {0} members";
 

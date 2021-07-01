@@ -68,6 +68,18 @@ namespace Z0.Asm
             }
 
             [Op]
+            public static void loop5x64u_f(ulong a0, ulong a1, ulong a2, ulong a3,ulong a4, Action<ulong,ulong,ulong,ulong,ulong> f)
+            {
+                for(var c0=0ul; c0<a0; c0++)
+                for(var c1=0ul; c1<a1; c1++)
+                for(var c2=0ul; c2<a2; c2++)
+                for(var c3=0ul; c3<a3; c3++)
+                for(var c4=0ul; c4<a4; c4++)
+                    f(c0,c1,c2,c3,c4);
+            }
+
+
+            [Op]
             public static void loop7(ulong a0, ulong a1, ulong a2, ulong a3, Func<ulong,ulong,ulong,ulong,ulong> f, Action<ulong> g)
             {
                 for(var c0=0ul; c0<a0; c0++)

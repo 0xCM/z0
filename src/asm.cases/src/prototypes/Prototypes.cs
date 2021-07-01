@@ -25,6 +25,8 @@ namespace Z0.Asm
 
         const string loops = nameof(loops);
 
+        const string dispatcher = nameof(dispatcher);
+
         const string branches = nameof(branches);
 
         const string extensions = nameof(extensions);

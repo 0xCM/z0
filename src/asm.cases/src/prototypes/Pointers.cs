@@ -53,7 +53,29 @@ namespace Z0.Asm
                 => math.mod(a,b);
 
             [MethodImpl(Inline), Op]
-            public static unsafe void copy16x64(ulong* pSrc, ulong* pDst)
+            public static unsafe void copy16x8i(sbyte* pSrc, sbyte* pDst)
+            {
+                byte i=0,j=0;
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+            }
+
+            [MethodImpl(Inline), Op]
+            public static unsafe void copy16x64u(ulong* pSrc, ulong* pDst)
             {
                 byte i=0,j=0;
                 pDst[i++] = pSrc[j++];
@@ -75,6 +97,28 @@ namespace Z0.Asm
 
             }
 
+            [MethodImpl(Inline), Op]
+            public static unsafe void copy16x32u(uint* pSrc, uint* pDst)
+            {
+                byte i=0,j=0;
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+                pDst[i++] = pSrc[j++];
+            }
+
             [Op]
             public static void f_32u_p8u_p8u_p8u_void(byte* pA, byte* pB, byte* pDst)
             {
@@ -88,7 +132,7 @@ namespace Z0.Asm
             }
 
             [Op]
-            public static void f_32u_p8u_p8u_p8u_void_calls(byte* pA, byte* pB, byte* pDst)
+            public static void f_p8u_p8u_p8u(byte* pA, byte* pB, byte* pDst)
             {
                 var i=0u;
                 pDst[i++] = and(pA[i], pB[i]);
@@ -100,7 +144,7 @@ namespace Z0.Asm
             }
 
             [Op]
-            public static void f_32u_p8i_p8i_p8i_void(sbyte* pA, sbyte* pB, sbyte* pDst)
+            public static void f_p8i_p8i_p8i(sbyte* pA, sbyte* pB, sbyte* pDst)
             {
                 var i=0u;
                 pDst[i++] = math.and(pA[i], pB[i]);
@@ -112,7 +156,7 @@ namespace Z0.Asm
             }
 
             [Op]
-            public static void f_32u_p16u_p16u_p16u_void(uint count, ushort* pA, ushort* pB, ushort* pDst)
+            public static void f_32u_p16u_p16u_p16u(uint count, ushort* pA, ushort* pB, ushort* pDst)
             {
                 for(var i=0u; i<count; i++)
                 {
@@ -257,7 +301,6 @@ namespace Z0.Asm
                 // 0077h vzeroupper                                    ; VZEROUPPER                       | VEX.128.0F.WIG 77                | 3   | c5 f8 77
                 // 007ah ret                                           ; RET                              | C3                               | 1   | c3
             }
-
         }
     }
 }

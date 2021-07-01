@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Reflection.Metadata;
+    using System.Reflection.Metadata.Ecma335;
 
     using static Root;
-
-    using api = Clr;
 
     /// <summary>
     /// Identifies a metadata element
@@ -19,63 +18,52 @@ namespace Z0
     [ApiHost]
     public readonly struct CliToken : ITextual, IEquatable<CliToken>, INullity, IComparable<CliToken>
     {
-        [MethodImpl(Inline), Op]
-        public static CliToken from(Handle src)
-        {
-            var data = CliHandleData.from(src);
-            return new CliToken(data.Table, data.RowId);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static CliToken from(EntityHandle src)
-            => core.@as<EntityHandle,CliToken>(src);
-
         readonly uint Data;
 
         [MethodImpl(Inline)]
-        internal CliToken(Type src)
+        public CliToken(Type src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(Assembly src)
+        public CliToken(Assembly src)
             : this(src.GetHashCode())
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(FieldInfo src)
+        public CliToken(FieldInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(PropertyInfo src)
+        public CliToken(PropertyInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(ParameterInfo src)
+        public CliToken(ParameterInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(MethodInfo src)
+        public CliToken(MethodInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal CliToken(Module src)
+        public CliToken(Module src)
             : this(src.MetadataToken)
         {
 
@@ -187,11 +175,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CliToken(Handle src)
-            => api.token(src);
+            => MetadataTokens.GetToken(src);
 
         [MethodImpl(Inline)]
         public static implicit operator CliToken(EntityHandle src)
-            => api.token(src);
+            => MetadataTokens.GetToken(src);
 
         public static CliToken Empty
             => default;

@@ -27,8 +27,8 @@ namespace Z0.Asm
         /// <param name="src">The data source</param>
         public static int placeholder(ReadOnlySpan<char> src)
         {
-            var i = TextTools.index(src," . . . .");
-            var j = TextTools.index(src,". . . . ");
+            var i = text.index(src," . . . .");
+            var j = text.index(src,". . . . ");
             if(i != NotFound && j != NotFound)
                 return min(i,j);
             else

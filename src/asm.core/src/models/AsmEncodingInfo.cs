@@ -11,14 +11,29 @@ namespace Z0.Asm
 
     public class AsmEncodingInfo : IEquatable<AsmEncodingInfo>, IComparable<AsmEncodingInfo>
     {
+        /// <summary>
+        /// The encoded statement
+        /// </summary>
         public AsmExpr Statement {get;}
 
+        /// <summary>
+        /// The signature to which the statement conforms
+        /// </summary>
 		public AsmSigExpr Sig {get;}
 
+        /// <summary>
+        /// The op code that deterimines the encoding
+        /// </summary>
         public AsmOpCodeExpr OpCode {get;}
 
+        /// <summary>
+        /// The encoded bytes
+        /// </summary>
         public AsmHexCode Encoded {get;}
 
+        /// <summary>
+        /// The encoded data represented as a bitstring
+        /// </summary>
         public AsmBitstring Bits {get;}
 
         [MethodImpl(Inline)]
@@ -30,10 +45,6 @@ namespace Z0.Asm
             Encoded = hex;
             Bits = bits;
         }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Bits.Format();
 
         public int CompareTo(AsmEncodingInfo src)
             => Statement.CompareTo(src.Statement);

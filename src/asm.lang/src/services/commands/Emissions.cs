@@ -4,8 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
     using static Root;
     using static core;
+    using static Typed;
 
     partial class AsmCmdService
     {
@@ -42,6 +45,40 @@ namespace Z0.Asm
             return true;
         }
 
+        [CmdOp(".emit-modrm-tables")]
+        Outcome EmitModRmTables(CmdArgs args)
+        {
+            const string Pattern = "{0,-3} | {1,-3} | {2,-3} | {3}";
+            var header = string.Format(Pattern, "mod", "reg", "r/m", "hex");
+            var workspace = Wf.AsmWorkspace();
+            var dst = workspace.Table("modrm", FS.Csv);
+            var flow = Wf.EmittingFile(dst);
+            var counter = 0u;
+            using var writer = dst.AsciWriter();
+            writer.WriteLine(header);
+            for(byte mod=0; mod <4; mod++)
+            {
+                for(byte reg=0; reg<8; reg++)
+                {
+                    for(byte rm=0; rm<8; rm++)
+                    {
+                        var code = math.or(math.sll(mod,6), math.sll(reg,3), rm);
+                        var row = string.Format(Pattern,
+                            BitRender.format(n2, mod),
+                            BitRender.format(n3, reg),
+                            BitRender.format(n3, rm),
+                            code.FormatHex(specifier:false)
+                            );
+
+                        writer.WriteLine(row);
+                        counter++;
+                    }
+                }
+            }
+            Wf.EmittedFile(flow,counter);
+            return true;
+        }
+
         // [CmdOp(".emit-xed-forms")]
         // Outcome ImportXedSummaries(CmdArgs args)
         // {
@@ -64,97 +101,10 @@ namespace Z0.Asm
             // core.iter(rows, row => Wf.Row(formatter.Format(row)));
         }
 
-        [CmdOp(".cpuid-data")]
-        Outcome CpuidData(CmdArgs args)
+        [CmdOp(".import-cpuid")]
+        Outcome ImportCpuid(CmdArgs args)
         {
-            //2 space-separated 32-bit hex numbers
-            const byte InLength = 2*8 + 1;
-
-            //4 32-bit hex numbers interspersed with spaces
-            const byte OutLength = 4*8 + 3;
-
-            const string Imply = " => ";
-
-            var dir = Workspace.Dataset("cpuid");
-            var files = dir.Files(FS.Def,true).ToReadOnlySpan();
-            var count = files.Length;
-            var outcome = Outcome.Success;
-
-            for(var i=0; i<count; i++)
-            {
-                if(outcome.Fail)
-                    break;
-
-                ref readonly var file = ref skip(files,i);
-                var chip = file.FolderName;
-                var records = list<CpuIdRow>();
-                var formatter = Tables.formatter<CpuIdRow>();
-                using var reader = file.AsciLineReader();
-                while(reader.Next(out var line))
-                {
-                    if(line.StartsWith(Chars.Hash))
-                        continue;
-
-                    var content = line.Content;
-                    var index = TextTools.index(content, Imply);
-                    if(index != NotFound)
-                    {
-                        Babble(string.Format("Parsing {0} {1}", chip, line));
-                        var row = new CpuIdRow();
-                        var input = TextTools.left(content, index);
-                        var iargs = input.Split(Chars.Space).ToReadOnlySpan();
-                        if(iargs.Length != 2)
-                        {
-                            outcome = (false, "Line did not split on marker");
-                            break;
-                        }
-
-                        outcome = DataParser.parse(skip(iargs,0), out row.Leaf);
-                        if(outcome.Fail)
-                        {
-                            outcome = (false, "Failed to parse eax");
-                            break;
-                        }
-
-                        if(skip(iargs,1).Contains(Chars.Star))
-                            row.Subleaf = uint.MaxValue;
-                        else
-                            outcome = DataParser.parse(skip(iargs,1), out row.Subleaf);
-
-                        if(outcome.Fail)
-                        {
-                            outcome = (false, "Failed to parse ecx");
-                            break;
-                        }
-
-                        var output = TextTools.right(content,index);
-                        if(output.Length < OutLength)
-                        {
-                            outcome = (false, "Output length too short");
-                            break;
-                        }
-
-                        var outvals = TextTools.slice(output, 0, OutLength).Split(Chars.Space).ToReadOnlySpan();
-                        if(outvals.Length < 4)
-                        {
-                            outcome = (false, string.Format("Output count = {0}, expected at least {1}", outvals.Length, OutLength));
-                            break;
-                        }
-
-                        outcome = DataParser.parse(skip(outvals,0), out row.Eax);
-                        outcome = DataParser.parse(skip(outvals,1), out row.Ebx);
-                        outcome = DataParser.parse(skip(outvals,2), out row.Ecx);
-                        outcome = DataParser.parse(skip(outvals,3), out row.Edx);
-
-                        if(outcome)
-                        {
-                            records.Add(row);
-                        }
-                    }
-                }
-           }
-
-            return outcome;
+            return Wf.AsmDataPipes().ImportCpuIdSources();
         }
     }
 }

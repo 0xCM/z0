@@ -69,6 +69,10 @@ namespace Z0.Asm
         public FS.FilePath Table(string id, FS.FileExt ext)
             => Tables() + FS.file(id,ext);
 
+        public FS.FilePath Table<T>()
+            where T : struct, IRecord<T>
+                => Tables() + FS.file(TableId.identify<T>().Format(), FS.Csv);
+
         public FS.FilePath Script(string id)
             => Scripts() + FS.file(id, FS.Cmd);
 
@@ -87,8 +91,8 @@ namespace Z0.Asm
         public FS.FolderPath DataSource(string id)
             => DataSources() + FS.folder(id);
 
-        public FS.FilePath Datasheet(string id)
-            => DocRoot() + FS.folder("instructions") + FS.file(id,FS.Csv);
+        public FS.FilePath InstInfo(string id)
+            => Dataset("instructions") + FS.file(id,FS.Csv);
 
         public FS.FolderPath DocExtractDir(string docid)
             => DocExtracts() + FS.folder(docid);

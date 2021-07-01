@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Linq;
-    using System.IO;
 
     using static Root;
     using static core;
@@ -43,7 +42,7 @@ namespace Z0.Asm
         {
             var file = AsmDetailFiles().FirstOrDefault(f => f.FileName.Contains(monic.ToString()));
             if(file.IsEmpty)
-                return sys.empty<AsmDetailRow>();
+                return array<AsmDetailRow>();
 
             var records = DataList.create<AsmDetailRow>(Pow2.T12);
             var count = LoadDetails(file, records);
@@ -69,7 +68,7 @@ namespace Z0.Asm
                     ref readonly var src = ref skip(rows,j);
                     if(src.CellCount != AsmDetailRow.FieldCount)
                         return (false, string.Format("Found {0} fields in {1} while {2} were expected", kCells, src, AsmDetailRow.FieldCount));
-                    var loaded = LoadRow(src, out AsmDetailRow row);
+                    var loaded = AsmParser.parse(src, out AsmDetailRow row);
                     if(!loaded)
                     {
                         Wf.Error(loaded.Message);
@@ -87,98 +86,6 @@ namespace Z0.Asm
             }
 
             return (true,kRows);
-        }
-
-        public ReadOnlySpan<CpuIdRow> LoadCpuIdRows(TextReader reader)
-        {
-            const byte FieldCount = CpuIdRow.FieldCount;
-            const char Delimiter = Chars.Pipe;
-
-            var header = TextGrids.header(reader.ReadLine(), Delimiter);
-            var count = header.Length;
-            if(count != FieldCount)
-            {
-                Wf.Error(Tables.FieldCountMismatch.Format(FieldCount,count));
-                return default;
-            }
-
-            var current = reader.ReadLine();
-            var dst = list<CpuIdRow>();
-            while(current != null)
-            {
-                var data = TextRow.parse(current,Chars.Pipe);
-                if(data.CellCount != FieldCount)
-                {
-                    Wf.Error(Tables.FieldCountMismatch.Format(FieldCount, data.CellCount));
-                    return default;
-                }
-
-                var result = AsmDataPipes.load(data, out CpuIdRow row);
-                if(result.Fail)
-                {
-                    Wf.Error(result.Message);
-                    return default;
-                }
-
-                dst.Add(row);
-
-                current = reader.ReadLine();
-            }
-            return dst.ViewDeposited();
-        }
-
-        Outcome LoadRow(TextRow src, out AsmDetailRow dst)
-        {
-            var input = src.Cells;
-            var i = 0;
-            var outcome = Outcome.Empty;
-            dst = default;
-            outcome = DataParser.parse(skip(input, i++), out dst.Sequence);
-            if(!outcome)
-                return outcome;
-
-            outcome = DataParser.parse(skip(input, i++), out dst.BlockAddress);
-            if(!outcome)
-                return outcome;
-
-            outcome = DataParser.parse(skip(input, i++), out dst.IP);
-            if(!outcome)
-                return outcome;
-
-            outcome = DataParser.parse(skip(input, i++), out dst.GlobalOffset);
-            if(!outcome)
-                return outcome;
-
-            outcome = DataParser.parse(skip(input, i++), out dst.LocalOffset);
-            if(!outcome)
-                return outcome;
-
-            dst.Mnemonic = new AsmMnemonic(skip(input, i++));
-
-            outcome = AsmParser.parse(skip(input, i++), out dst.OpCode);
-            if(!outcome)
-                return outcome;
-
-            outcome = DataParser.parse(skip(input, i++), out dst.Instruction);
-            if(!outcome)
-                return outcome;
-
-            outcome = DataParser.parse(skip(input, i++), out dst.Statement);
-            if(!outcome)
-                return outcome;
-
-            outcome = DataParser.parse(skip(input, i++), out dst.Encoded);
-            if(!outcome)
-                return outcome;
-
-            outcome = DataParser.parse(skip(input, i++), out dst.CpuId);
-            if(!outcome)
-                return outcome;
-
-            outcome = DataParser.parse(skip(input, i++), out dst.OpCodeId);
-            if(!outcome)
-                return outcome;
-            return true;
         }
 
         public void RenderRows(AsmMnemonicCode code, FS.FilePath dst)
@@ -206,7 +113,7 @@ namespace Z0.Asm
                             row.OpCode,
                             row.Encoded,
                             AsmBitstrings.format(row.Encoded),
-                            Semantic(row)
+                            AsmRender.semantic(row)
                         );
                         writer.WriteLine(rendered);
                     }
@@ -215,22 +122,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public string FormatRow(in AsmDetailRow src, FuncIn<AsmDetailRow,string> semantic)
-            => string.Format(RowPattern(),
-                            src.IP,
-                            src.Statement,
-                            src.BlockAddress,
-                            src.LocalOffset,
-                            src.Encoded.Length,
-                            src.Instruction,
-                            src.OpCode,
-                            src.Encoded,
-                            AsmBitstrings.format(src.Encoded),
-                            Semantic(src)
-                        );
-
-        [Op]
-        public string RowPattern(AsmMnemonicCode monic = default)
+        public static string RowPattern(AsmMnemonicCode monic = default)
         {
             var pattern = EmptyString;
             switch(monic)
@@ -243,41 +135,6 @@ namespace Z0.Asm
                     break;
             }
             return pattern;
-        }
-
-        [Op]
-        public string Semantic(in AsmDetailRow row)
-        {
-            var monic = AsmMnemonicCode.None;
-            if(!AsmParser.parse(row.Mnemonic, out monic))
-                return string.Format("The mnemonic {0} is not known", row.Mnemonic);
-
-            var encoded = row.Encoded;
-            var ip = row.IP;
-            var @base = row.BlockAddress;
-
-            switch(monic)
-            {
-                case AsmMnemonicCode.JMP:
-
-                if(JmpRel8.test(encoded))
-                    return string.Format("jmp(rel8,{0},{1}) -> {2}",
-                        JmpRel8.dx(encoded),
-                        JmpRel8.offset(@base, ip, encoded),
-                        JmpRel8.target(ip, encoded)
-                        );
-                else if(JmpRel32.test(encoded))
-                    return string.Format("jmp(rel32,{0},{1}) -> {2}",
-                        JmpRel32.dx(encoded).FormatMinimal(),
-                        JmpRel32.offset(@base, ip, encoded).FormatMinimal(),
-                        JmpRel32.target(ip, encoded)
-                        );
-                else if(Jmp64.test(encoded))
-                    return string.Format("jmp({0})", Jmp64.target(encoded));
-
-                break;
-            }
-            return EmptyString;
         }
     }
 }

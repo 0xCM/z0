@@ -11,7 +11,6 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Root;
-    using static core;
 
     partial struct Clr
     {

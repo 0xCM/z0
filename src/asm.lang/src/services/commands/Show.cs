@@ -8,6 +8,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static Typed;
 
     partial class AsmCmdService
     {
@@ -106,14 +107,15 @@ namespace Z0.Asm
             return outcome;
         }
 
-        [CmdOp(".datasheet")]
-        Outcome ShowDatasheet(CmdArgs args)
+        [CmdOp(".inst-info")]
+        Outcome ShowInstInfo(CmdArgs args)
         {
             const string TitleMarker = "# ";
             const string TableMarker = "## ";
             const string Separator = "------";
-            const string TableTileFormat = "# Table {0}";
+            const string TableTileFormat = "# {0}";
             const string Rejoin = " | ";
+            const char ColSep = Chars.Pipe;
 
             var result = Outcome.Success;
             var foundtable = false;
@@ -123,11 +125,11 @@ namespace Z0.Asm
                 return (false, "Argument not supplied");
 
             var id = args[0].Value;
-            var path = Workspace.Datasheet(id);
-            if(!path.Exists)
-                return (false, $"No such file {path.ToUri()}");
+            var src = Workspace.InstInfo(id);
+            if(!src.Exists)
+                return (false, FS.missing(src));
 
-            using var reader = path.AsciLineReader();
+            using var reader = src.AsciLineReader();
             while(reader.Next(out var line))
             {
                 if((line.IsEmpty || line.StartsWith(Separator)) && !parsingrows)
@@ -145,7 +147,7 @@ namespace Z0.Asm
 
                 if(parsingrows)
                 {
-                    var cols = content.SplitClean(Chars.Pipe);
+                    var cols = content.SplitClean(ColSep);
                     if(cols.Length  != 0)
                     {
                         Row(cols.Join(Rejoin));
@@ -156,14 +158,14 @@ namespace Z0.Asm
 
                 if(foundtable && !parsingrows)
                 {
-                    var header = content.SplitClean(Chars.Pipe);
+                    var header = content.SplitClean(ColSep);
                     if(header.Length == 0)
                     {
                         Warn(string.Format("Expected header"));
                     }
                     else
                     {
-                        Wf.Row(header.Join(Rejoin));
+                        Row(header.Join(Rejoin));
                         parsingrows = true;
                     }
                 }
@@ -171,15 +173,16 @@ namespace Z0.Asm
                 if(content.StartsWith(TitleMarker))
                 {
                     var title = content.Remove(TitleMarker);
-                    Wf.Row(title);
+                    Row(title);
                 }
                 else if(content.StartsWith(TableMarker))
                 {
                     var name = content.Remove(TableMarker).Trim();
-                    Wf.Row(string.Format(TableTileFormat, name));
+                    Row(Chars.Space);
+                    Row(string.Format(TableTileFormat, name));
+                    Row(RP.PageBreak120);
                     foundtable = true;
                 }
-
             }
 
             return result;

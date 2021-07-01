@@ -9,7 +9,11 @@ namespace Z0
     partial struct FS
     {
         [Op]
-        public static FileNotFoundException missing(FS.FilePath src)
-            => new FileNotFoundException(src.Name);
+        public static string missing(FS.FilePath src)
+            => Msg.DoesNotExist.Format(src);
+
+        [Op]
+        public static string missing(FS.FolderPath src)
+            => Msg.DirDoesNotExist.Format(src);
     }
 }

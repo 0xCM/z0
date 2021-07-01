@@ -13,27 +13,41 @@ namespace Z0
 	public partial struct BitPos
 	{
 		/// <summary>
-		/// A container-relative 0-based cell offset
+		/// Computes the order-invariant absolute distance between two positions
 		/// </summary>
-		public uint CellIndex;
+		/// <param name="a">The left position</param>
+		/// <param name="b">The right position</param>
+		[MethodImpl(Inline), Op]
+		public static uint delta(BitPos a, BitPos b)
+			=> ScalarCast.uint32(core.abs((long)a.LinearIndex - (long)b.LinearIndex));
 
-		/// <summary>
-		/// A cell-relative bit offset
-		/// </summary>
-		public ushort BitOffset;
-
-		/// <summary>
-		/// The bit-width of a cell
-		/// </summary>
-		public ushort CellWidth;
-
+        /// <summary>
+        /// Computes the cell index of a linear bit index
+        /// </summary>
+        /// <param name="w">The width of a storage cell</param>
+        /// <param name="index">The linear bit index</param>
 		[MethodImpl(Inline)]
-		public BitPos(ushort cellwidth, uint cellindex, ushort bitoffset)
-		{
-			CellWidth = cellwidth;
-			CellIndex = cellindex;
-			BitOffset = bitoffset;
-		}
+        public static ushort linear(ushort w, uint index)
+			=> ScalarCast.uint16(index/w);
+
+		/// <summary>
+		/// Computes a linear bit index from a cell index and cell-relative offset
+		/// </summary>
+		/// <param name="w">The cell width</param>
+		/// <param name="cellindex">The cell index</param>
+		/// <param name="offset">The cell-relative offset of the bit</param>
+		[MethodImpl(Inline)]
+		public static uint linear(ushort w, uint cellindex, ushort offset)
+			=> cellindex*w + offset;
+
+        /// <summary>
+        /// Computes the offset of a linear bit index over storage cells of specified width
+        /// </summary>
+        /// <param name="w">The cell width</param>
+        /// <param name="index">The linear bit index</param>
+		[MethodImpl(Inline), Op]
+        public static byte offset(ushort w, uint index)
+			=> ScalarCast.uint8(index % w);
 
 		/// <summary>
 		/// Defines a bit position predicated on the width of a storage cell and the 0-based linear bit index
@@ -72,6 +86,29 @@ namespace Z0
 		public static BitPos<T> FromBitIndex<T>(uint index)
 			where T : unmanaged
 				=> BitPos<T>.FromLinearIndex(index);
+
+        /// <summary>
+		/// A container-relative 0-based cell offset
+		/// </summary>
+		public uint CellIndex;
+
+		/// <summary>
+		/// A cell-relative bit offset
+		/// </summary>
+		public ushort BitOffset;
+
+		/// <summary>
+		/// The bit-width of a cell
+		/// </summary>
+		public ushort CellWidth;
+
+		[MethodImpl(Inline)]
+		public BitPos(ushort cellwidth, uint cellindex, ushort bitoffset)
+		{
+			CellWidth = cellwidth;
+			CellIndex = cellindex;
+			BitOffset = bitoffset;
+		}
 
 		/// <summary>
 		/// The linear/absolute bit index of the represented position

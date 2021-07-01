@@ -10,6 +10,7 @@ namespace Z0
     using System.Text;
 
     using static Root;
+    using static core;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
@@ -103,12 +104,6 @@ namespace Z0
         protected StreamWriter OpenAppLog(string name, FS.FileExt ext)
             => Db.AppLog(name,ext).Writer();
 
-        protected void Show(string name, FS.FileExt ext, Action<ShowLog> f)
-        {
-            using var log = ShowLog(NameShowLog(name,ext));
-            f(log);
-        }
-
         protected void ShowRecords<T>(ReadOnlySpan<T> src)
             where T : struct, IRecord<T>
         {
@@ -140,7 +135,7 @@ namespace Z0
             var count = src.Count;
             var symbols = src.View;
             for(var i=0; i<count; i++)
-                dst.Show(core.skip(symbols,i).Format());
+                dst.Show(skip(symbols,i).Format());
         }
 
         protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, Func<T,string> render, string title = EmptyString)
@@ -153,7 +148,7 @@ namespace Z0
                     log.Show(title);
 
                 for(var i=0; i<count; i++)
-                    log.Show(render(core.skip(src,i)));
+                    log.Show(render(skip(src,i)));
             }
         }
 

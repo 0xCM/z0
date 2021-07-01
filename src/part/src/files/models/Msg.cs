@@ -22,7 +22,6 @@ namespace Z0
             public static MsgPattern<FS.FileUri> Empty => "The file {0} is impty";
 
             public static MsgPattern<FS.FolderPath> DirDoesNotExist => "The directory {0} has gone missing";
-
         }
     }
 }

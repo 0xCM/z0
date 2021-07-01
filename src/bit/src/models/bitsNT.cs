@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
     using static Typed;
 
     public struct bits<N,T> : IBitContainer<bits<N,T>,N,T>

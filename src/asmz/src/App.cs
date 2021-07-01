@@ -892,37 +892,6 @@ namespace Z0.Asm
             return true;
         }
 
-        void CalcTables()
-        {
-            const string Pattern = "{0,-3} | {1,-3} | {2,-3} | {3}";
-            var header = string.Format(Pattern, "mod", "reg", "r/m", "hex");
-            var workspace = Wf.AsmWorkspace();
-            var dst = workspace.Table("modrm", FS.Csv);
-            var flow = Wf.EmittingFile(dst);
-            var counter = 0u;
-            using var writer = dst.AsciWriter();
-            writer.WriteLine(header);
-            for(byte mod=0; mod <4; mod++)
-            {
-                for(byte reg=0; reg<8; reg++)
-                {
-                    for(byte rm=0; rm<8; rm++)
-                    {
-                        var code = math.or(math.sll(mod,6), math.sll(reg,3), rm);
-                        var row = string.Format(Pattern,
-                            BitRender.format(n2, mod),
-                            BitRender.format(n3, reg),
-                            BitRender.format(n3, rm),
-                            code.FormatHex(specifier:false)
-                            );
-
-                        writer.WriteLine(row);
-                        counter++;
-                    }
-                }
-            }
-            Wf.EmittedFile(flow,counter);
-        }
         public void Run()
         {
             //EmitPdbDocInfo(PartId.Math);

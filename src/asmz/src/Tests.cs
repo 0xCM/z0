@@ -138,28 +138,6 @@ namespace Z0.Asm
             Wf.Row(indices.FormatList());
         }
 
-
-        void RenderMovzx()
-        {
-            static string semantic(in AsmDetailRow src)
-            {
-                return EmptyString;
-            }
-
-            var pipe = Wf.AsmRowPipe();
-            var code = AsmMnemonicCode.MOVZX;
-            var rows = @readonly(pipe.LoadDetails(code).OrderBy(x => x.Statement).Array());
-            var count = rows.Length;
-            var dst = Db.AppLog(code.ToString(),FS.Asm);
-            using var writer = dst.Writer();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(rows,i);
-                writer.WriteLine(pipe.FormatRow(row, semantic));
-            }
-        }
-
-
         public void DeriveMsil()
         {
             var pipe = Wf.MsilPipe();

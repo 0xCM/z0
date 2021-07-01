@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Concurrent;
 
     using static Root;
     using static core;
@@ -15,11 +16,10 @@ namespace Z0.Asm
     using SQ = SymbolicQuery;
     using SP = SymbolicParse;
     using SR = SymbolicRender;
+
     [ApiHost]
     public readonly struct AsmParser
     {
-        const string Implication = " => ";
-
         public static Outcome parse(ReadOnlySpan<AsciCode> src, out AsmExpr dst)
         {
             dst = AsmExpr.Empty;
@@ -43,10 +43,9 @@ namespace Z0.Asm
                 dst = asm.expr(monic, operands);
             }
 
-
             return outcome;
-
         }
+
         [Op]
         public static Outcome opcode(string src, out AsmOpCodeExpr dst)
         {
@@ -76,10 +75,6 @@ namespace Z0.Asm
                 return AsmSigExpr.Empty;
         }
 
-        static Fence<char> SigFence => (LParen, RParen);
-
-        static Fence<char> OpCodeFence => (Lt, Gt);
-
         [Op]
         public static Outcome form(string src, out AsmFormExpr dst)
         {
@@ -90,7 +85,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return (false, ParseComposer.FenceNotFound.Format(SigFence,src));
 
-            result = AsmParser.sig(sigexpr, out var sig);
+            result = sig(sigexpr, out var _sig);
             if(result.Fail)
                 return (false, Msg.CouldNotParseSigExpr.Format(sigexpr));
 
@@ -98,7 +93,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return (false, ParseComposer.FenceNotFound.Format(OpCodeFence, src));
 
-            dst = new AsmFormExpr(asm.opcode(opcode), sig);
+            dst = new AsmFormExpr(asm.opcode(opcode), _sig);
             return true;
         }
 
@@ -110,7 +105,7 @@ namespace Z0.Asm
                 return false;
 
             var trimmed = sig.Trim();
-            var i = TextTools.index(trimmed, Chars.Space);
+            var i = text.index(trimmed, Chars.Space);
             if(i == NotFound)
                 return false;
             else
@@ -127,13 +122,13 @@ namespace Z0.Asm
                 return true;
 
             var trimmed = src.Trim();
-            var i = TextTools.index(trimmed, Chars.Space);
+            var i = text.index(trimmed, Chars.Space);
             if(i == NotFound)
                 dst = asm.sig(asm.mnemonic(src), src);
             else
             {
-                var mnemonic = asm.mnemonic(TextTools.slice(trimmed,0,i));
-                var operands = TextTools.slice(trimmed, i + 1);
+                var mnemonic = asm.mnemonic(text.slice(trimmed,0,i));
+                var operands = text.slice(trimmed, i + 1);
                 dst = asm.sig(mnemonic, trimmed);
             }
             return true;
@@ -194,6 +189,31 @@ namespace Z0.Asm
             }
         }
 
+        public static Outcome<uint> parse(in TextGrid doc, ConcurrentBag<AsmApiStatement> dst)
+        {
+            const byte StatementFieldCount = AsmApiStatement.FieldCount;
+
+            var counter = 0u;
+            if(doc.Header.Labels.Length != StatementFieldCount)
+                return (false, AppMsg.FieldCountMismatch.Format(StatementFieldCount, doc.Header.Labels.Length));
+
+            var count = doc.RowCount;
+            var rows = doc.RowData.View;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                var result = parse(row, out AsmApiStatement statement);
+                if(result)
+                {
+                    dst.Add(statement);
+                    counter++;
+                }
+                else
+                    return result;
+            }
+            return counter;
+        }
+
         public static Outcome thumbprint(string src, out AsmThumbprint thumbprint)
         {
             thumbprint = AsmThumbprint.Empty;
@@ -242,9 +262,6 @@ namespace Z0.Asm
         public static Outcome parse(uint line, ReadOnlySpan<char> src, out AsmIndex dst)
             => parse(text.line(line, text.format(src)), out dst);
 
-        static MsgPattern<Count,Count,TextLine> FieldCountMismatch => "Expected {0} fields but found {1} in '{2}'";
-
-
         public static ref AsmFormRecord parse(in TextRow src, ref AsmFormRecord dst)
         {
             var i = 0;
@@ -289,7 +306,7 @@ namespace Z0.Asm
             if(outcome.Fail)
                 return (false, string.Format(ErrorPattern, nameof(dst.BlockOffset), src.LineNumber));
 
-            outcome += AsmParser.parse(skip(parts,i++), out dst.Expression);
+            outcome += parse(skip(parts,i++), out dst.Expression);
             if(outcome.Fail)
                 return (false, string.Format(ErrorPattern, nameof(dst.Expression), src.LineNumber));
 
@@ -297,7 +314,7 @@ namespace Z0.Asm
             if(outcome.Fail)
                 return (false, string.Format(ErrorPattern, nameof(dst.Encoded), src.LineNumber));
 
-            outcome += AsmParser.sig(skip(parts,i++), out dst.Sig);
+            outcome += sig(skip(parts,i++), out dst.Sig);
             if(outcome.Fail)
                 return (false, string.Format(ErrorPattern, nameof(dst.Sig), src.LineNumber));
 
@@ -312,5 +329,67 @@ namespace Z0.Asm
 
             return true;
         }
+
+        public static Outcome parse(TextRow src, out AsmDetailRow dst)
+        {
+            var input = src.Cells;
+            var i = 0;
+            var outcome = Outcome.Empty;
+            dst = default;
+            outcome = DataParser.parse(skip(input, i++), out dst.Sequence);
+            if(!outcome)
+                return outcome;
+
+            outcome = DataParser.parse(skip(input, i++), out dst.BlockAddress);
+            if(!outcome)
+                return outcome;
+
+            outcome = DataParser.parse(skip(input, i++), out dst.IP);
+            if(!outcome)
+                return outcome;
+
+            outcome = DataParser.parse(skip(input, i++), out dst.GlobalOffset);
+            if(!outcome)
+                return outcome;
+
+            outcome = DataParser.parse(skip(input, i++), out dst.LocalOffset);
+            if(!outcome)
+                return outcome;
+
+            dst.Mnemonic = new AsmMnemonic(skip(input, i++));
+
+            outcome = parse(skip(input, i++), out dst.OpCode);
+            if(!outcome)
+                return outcome;
+
+            outcome = DataParser.parse(skip(input, i++), out dst.Instruction);
+            if(!outcome)
+                return outcome;
+
+            outcome = DataParser.parse(skip(input, i++), out dst.Statement);
+            if(!outcome)
+                return outcome;
+
+            outcome = DataParser.parse(skip(input, i++), out dst.Encoded);
+            if(!outcome)
+                return outcome;
+
+            outcome = DataParser.parse(skip(input, i++), out dst.CpuId);
+            if(!outcome)
+                return outcome;
+
+            outcome = DataParser.parse(skip(input, i++), out dst.OpCodeId);
+            if(!outcome)
+                return outcome;
+            return true;
+        }
+
+        static Fence<char> SigFence => (LParen, RParen);
+
+        static Fence<char> OpCodeFence => (Lt, Gt);
+
+        static MsgPattern<Count,Count,TextLine> FieldCountMismatch => "Expected {0} fields but found {1} in '{2}'";
+
+        const string Implication = " => ";
     }
 }

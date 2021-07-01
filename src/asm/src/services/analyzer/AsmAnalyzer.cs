@@ -50,7 +50,7 @@ namespace Z0
                 EmitJumps(src, dst);
 
             if(Settings.EmitHostStatements)
-                EmitHostStatements(src, dst);
+                Wf.AsmStatementPipe().EmitHostStatements(src, dst);
 
             if(Settings.EmitStatementIndex)
                 EmitStatementIndex(blocks, dst);
@@ -101,33 +101,6 @@ namespace Z0
 
         void EmitJumps(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
             => Jumps.EmitRows(src, dst.JmpTarget());
-
-        uint CountStatements(ReadOnlySpan<AsmRoutine> src)
-        {
-            var count = src.Length;
-            var total = 0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var routine = ref skip(src,i);
-                total += (uint)routine.InstructionCount;
-            }
-            return total;
-        }
-
-        void EmitHostStatements(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
-        {
-            var pipe = Wf.AsmStatementPipe();
-            var total = CountStatements(src);
-            var running = Wf.Running(Msg.CreatingStatements.Format(total));
-            var buffer = span<AsmApiStatement>(total);
-            var count = src.Length;
-            var offset = 0u;
-            for(var i=0; i<count; i++)
-                offset += pipe.CreateStatementData(skip(src,i), slice(buffer, offset));
-            Wf.Ran(running, Msg.CreatedStatements.Format(total));
-
-            pipe.EmitHostStatements(buffer, dst.RootDir());
-        }
 
         SortedSpan<ApiCodeBlock> CollectBlocks(ReadOnlySpan<AsmRoutine> src)
         {

@@ -67,6 +67,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(BitChar a, BitChar b)
             => !a.Equals(b);
-
     }
 }

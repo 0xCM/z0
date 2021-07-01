@@ -23,6 +23,14 @@ namespace Z0.Asm
 
         const string To = " => ";
 
+        public static string format(in AsmApiStatement src)
+            => string.Format("{0} {1,-36} ; {2} => {3}",
+                        src.BlockOffset,
+                        src.Expression,
+                        string.Format("({0})<{1}>[{2}] => {3}", src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format()),
+                        AsmBitstrings.format(src.Encoded)
+                        );
+
         public static string format(in AsmDisassembly src)
         {
             var left = string.Format("{0,-12} {1,-64}", src.Offset, src.Statement);
@@ -441,12 +449,6 @@ namespace Z0.Asm
         public static string format(in ImmInfo src)
             => string.Concat(src.Value.FormatHex(zpad:false, prespec:false));
 
-        static HexFormatOptions HexSpec
-        {
-            [MethodImpl(Inline), Op]
-            get => HexFormatSpecs.options(zpad:false, specifier:false);
-        }
-
         [Op]
         public static string offset(ulong offset, DataWidth width)
             => width switch{
@@ -479,6 +481,42 @@ namespace Z0.Asm
         [Op]
         public static string format(in CallRel32 src)
             => string.Format("{0}:{1} -> {2}", src.ClientAddress, src.TargetDx, src.TargetAddress);
+
+
+        [Op]
+        public static string semantic(in AsmDetailRow row)
+        {
+            var monic = AsmMnemonicCode.None;
+            if(!AsmParser.parse(row.Mnemonic, out monic))
+                return string.Format("The mnemonic {0} is not known", row.Mnemonic);
+
+            var encoded = row.Encoded;
+            var ip = row.IP;
+            var @base = row.BlockAddress;
+
+            switch(monic)
+            {
+                case AsmMnemonicCode.JMP:
+
+                if(JmpRel8.test(encoded))
+                    return string.Format("jmp(rel8,{0},{1}) -> {2}",
+                        JmpRel8.dx(encoded),
+                        JmpRel8.offset(@base, ip, encoded),
+                        JmpRel8.target(ip, encoded)
+                        );
+                else if(JmpRel32.test(encoded))
+                    return string.Format("jmp(rel32,{0},{1}) -> {2}",
+                        JmpRel32.dx(encoded).FormatMinimal(),
+                        JmpRel32.offset(@base, ip, encoded).FormatMinimal(),
+                        JmpRel32.target(ip, encoded)
+                        );
+                else if(Jmp64.test(encoded))
+                    return string.Format("jmp({0})", Jmp64.target(encoded));
+
+                break;
+            }
+            return EmptyString;
+        }
 
         const string RexFieldPattern = "[W:{0} | R:{1} | X:{2} | B:{3}]";
     }

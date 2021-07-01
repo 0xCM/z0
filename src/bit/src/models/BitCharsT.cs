@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = BitChars;
-
     public struct BitChars<T>
         where T : unmanaged
     {
