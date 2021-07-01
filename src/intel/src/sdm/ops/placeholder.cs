@@ -13,27 +13,6 @@ namespace Z0.Asm
     partial struct IntelSdm
     {
         /// <summary>
-        /// Counts the number of placeholders in a specified line segment
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline), Op]
-        public static byte PlaceholderCount(ReadOnlySpan<char> src)
-        {
-            var counter = z8;
-            for(var i=0; i<src.Length - 1; i+=2)
-            {
-                ref readonly var c0 = ref skip(src, i);
-                ref readonly var c1 = ref skip(src, i + 1);
-                if(placeholder(c0,c1))
-                    counter++;
-                else
-                    break;
-
-            }
-            return counter;
-        }
-
-        /// <summary>
         /// Tests whether the specified input sequence is of the form ' .' or '. '
         /// </summary>
         /// <param name="c0">The first character in the placeholder sequence</param>
@@ -56,15 +35,30 @@ namespace Z0.Asm
                 return NotFound;
         }
 
-        public static void render(Placeholder src, ITextBuffer dst)
-        {
-            for(var i=0; i<src.Count; i++)
-                dst.AppendFormat("{0}{1}", Placeholder.Space, Placeholder.Dot);
-        }
-
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<Placeholder> placeholders(uint count)
             => slice(recover<Placeholder>(Placeholders), 0, count);
+
+        /// <summary>
+        /// Counts the number of placeholders in a specified line segment
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        static byte PlaceholderCount(ReadOnlySpan<char> src)
+        {
+            var counter = z8;
+            for(var i=0; i<src.Length - 1; i+=2)
+            {
+                ref readonly var c0 = ref skip(src, i);
+                ref readonly var c1 = ref skip(src, i + 1);
+                if(placeholder(c0,c1))
+                    counter++;
+                else
+                    break;
+
+            }
+            return counter;
+        }
 
         static ReadOnlySpan<byte> Placeholders
             => new byte[]{

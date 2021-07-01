@@ -10,29 +10,30 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        public struct ChapterNumber
+        public readonly struct PageFooter
         {
-            public byte Value;
+            public string Left0 {get;}
+
+            public string Left1 {get;}
+
+            public string Right0 {get;}
+
+            public string Right1 {get;}
 
             [MethodImpl(Inline)]
-            public ChapterNumber(byte number)
+            public PageFooter(string l0, string l1, string r0, string r1)
             {
-                Value = number;
+                Left0 = l0;
+                Left1 = l1;
+                Right0 = r0;
+                Right1 = r1;
             }
 
             public string Format()
-                => Value.ToString();
+                => string.Format("{0} {1} {2} {3}",Left0,Left1,Right0,Right1);
 
             public override string ToString()
                 => Format();
-
-            public static implicit operator ChapterNumber(byte src)
-                => new ChapterNumber(src);
-
-            public static implicit operator ChapterNumber(int src)
-                => new ChapterNumber((byte)src);
-
-            public static ChapterNumber Empty => default;
         }
     }
 }

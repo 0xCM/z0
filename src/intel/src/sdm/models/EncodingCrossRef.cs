@@ -12,18 +12,21 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
+        /// <summary>
+        /// Represents an entry in an encoding cross-reference table for an instruction
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public ref struct EncodingCrossRef
+        public struct EncodingCrossRef
         {
-            public ReadOnlySpan<char> Key;
+            public string Key;
 
-            public ReadOnlySpan<char> Operand1;
+            public string Operand1;
 
-            public ReadOnlySpan<char> Operand2;
+            public string Operand2;
 
-            public ReadOnlySpan<char> Operand3;
+            public string Operand3;
 
-            public ReadOnlySpan<char> Operand4;
+            public string Operand4;
         }
     }
 }

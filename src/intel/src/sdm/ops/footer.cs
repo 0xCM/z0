@@ -12,14 +12,8 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        /// <summary>
-        /// Represents an entry in an instruction's binary format table
-        /// </summary>
-        public struct InstructionFormat
-        {
-            public Marker Descriptor;
-
-            public string BitFormat;
-        }
+        [MethodImpl(Inline), Op]
+        internal static PageFooter footer(string l0, string l1, string r0, string r1)
+            => new PageFooter(l0,l1,r0,r1);
     }
 }

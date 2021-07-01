@@ -12,14 +12,8 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        /// <summary>
-        /// Represents an entry in an instruction's binary format table
-        /// </summary>
-        public struct InstructionFormat
-        {
-            public Marker Descriptor;
-
-            public string BitFormat;
-        }
+        [MethodImpl(Inline), Op]
+        public static DocLocation location(in VolPart v, in ChapterNumber c, in Page p)
+            => new DocLocation(v, c, p);
     }
 }

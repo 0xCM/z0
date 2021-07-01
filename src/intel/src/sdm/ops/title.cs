@@ -4,22 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
+    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static core;
     using static Root;
 
     partial struct IntelSdm
     {
-        /// <summary>
-        /// Represents an entry in an instruction's binary format table
-        /// </summary>
-        public struct InstructionFormat
-        {
-            public Marker Descriptor;
-
-            public string BitFormat;
-        }
+        [MethodImpl(Inline), Op]
+        public static TocTitle title(in CharBlock128 title, in ChapterPage page)
+            => new TocTitle(title, page);
     }
 }

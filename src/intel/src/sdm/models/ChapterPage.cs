@@ -19,6 +19,8 @@ namespace Z0.Asm
         {
             public const string RenderPattern = "{0}-{1}";
 
+            public const string Descriptor = "{ChapterNumber}-{PageNumber}";
+
             public ChapterNumber Chapter;
 
             public Page Page;
@@ -35,6 +37,9 @@ namespace Z0.Asm
 
             public override string ToString()
                 => Format();
+
+            public static implicit operator string(ChapterPage src)
+                => src.Format();
 
             public static ChapterPage Empty => new ChapterPage(0,0);
         }

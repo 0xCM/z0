@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct core
     {
-
         /// <summary>
         /// Selects a segment [offset, length(src) - 1] from a source span src:ReadOnlySpan[T]
         /// </summary>

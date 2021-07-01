@@ -31,5 +31,20 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bit digit(Base10 @base, char src)
             => digit(@base, (C)src);
+
+        /// <summary>
+        /// Returns the index of the first <see cref='Base10'/> digit found in the source
+        /// </summary>
+        /// <param name="base">The base selector</param>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static int digitIndex(Base10 @base, ReadOnlySpan<char> src)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                if(digit(base10, skip(src, i)))
+                    return i;
+            return NotFound;
+        }
     }
 }

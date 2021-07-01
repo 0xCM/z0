@@ -12,20 +12,21 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public ref struct InstructionInfo
+        [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
+        public struct InstructionRow : IRecord<InstructionRow>
         {
-            public ReadOnlySpan<char> OpCode;
+            public const string TableId = "sdm.instruction";
+            public string OpCode;
 
-            public ReadOnlySpan<char> Sig;
+            public string Sig;
 
-            public ReadOnlySpan<char> Encoding;
+            public string Encoding;
 
-            public ReadOnlySpan<char> Mode64;
+            public string Mode64;
 
-            public ReadOnlySpan<char> LegacyMode;
+            public string LegacyMode;
 
-            public ReadOnlySpan<char> Description;
+            public string Description;
         }
     }
 }

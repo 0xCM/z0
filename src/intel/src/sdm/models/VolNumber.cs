@@ -14,6 +14,10 @@ namespace Z0.Asm
         [StructLayout(LayoutKind.Sequential)]
         public struct VolNumber
         {
+            public const string Descriptor = "Vol. {Major}{Minor}";
+
+            public const string RenderPattern = "Vol. {0}{1}";
+
             public byte Major;
 
             public AsciCode Minor;
@@ -24,6 +28,15 @@ namespace Z0.Asm
                 Major = major;
                 Minor = minor;
             }
+
+            public string Format()
+                => string.Format(RenderPattern, Major, (char)Minor);
+
+            public override string ToString()
+                => Format();
+
+            public static implicit operator string (VolNumber src)
+                => src.Format();
         }
     }
 }

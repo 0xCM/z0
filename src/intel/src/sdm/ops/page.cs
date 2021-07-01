@@ -10,19 +10,18 @@ namespace Z0.Asm
     using static core;
     using static Root;
 
-    [ApiHost]
-    public readonly partial struct IntelSdm
+    partial struct IntelSdm
     {
         [MethodImpl(Inline), Op]
-        public static TableNumber table(ReadOnlySpan<char> src)
-            => new TableNumber(src);
+        public static ChapterPage page(in ChapterNumber chapter, in Page page)
+            => new ChapterPage(chapter, page);
 
         [MethodImpl(Inline), Op]
-        public static VolNumber vol(byte major, char minor)
-            => new VolNumber(major, (AsciCode)minor);
+        public static ChapterPage page(in ChapterNumber chapter, ushort page)
+            => new ChapterPage(chapter, page);
 
         [MethodImpl(Inline), Op]
-        public static Placeholder placeholder(char a, char b, byte count)
-            => new Placeholder(a,b,count);
+        public static SectionPage page(in SectionNumber section, in ChapterPage page)
+            => new SectionPage(section, page);
     }
 }

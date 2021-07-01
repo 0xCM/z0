@@ -15,7 +15,7 @@ namespace Z0.Asm
         /// EG:Vol. 2C 5-557
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack =1)]
-        public struct Location
+        public struct DocLocation
         {
             public VolPart Volume;
 
@@ -24,7 +24,7 @@ namespace Z0.Asm
             public Page Page;
 
             [MethodImpl(Inline)]
-            public Location(VolPart v, ChapterNumber c, Page p)
+            public DocLocation(VolPart v, ChapterNumber c, Page p)
             {
                 Volume = v;
                 Chapter = c;
