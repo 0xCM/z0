@@ -11,7 +11,7 @@ namespace Z0
 
     partial class PeReader
     {
-        public ReadOnlySpan<SectionHeaderInfo> ReadSectionHeaders()
+        public ReadOnlySpan<SectionHeaderInfo> ReadHeaderInfo()
         {
             var dst = list<SectionHeaderInfo>();
 

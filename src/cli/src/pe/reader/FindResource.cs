@@ -11,7 +11,7 @@ namespace Z0
     partial class PeReader
     {
         [Op]
-        public unsafe bool ResourceSearch(string name, out ResSeg dst)
+        public unsafe bool FindResource(string name, out ResSeg dst)
         {
             dst = default;
 

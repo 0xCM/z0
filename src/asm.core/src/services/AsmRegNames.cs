@@ -514,15 +514,15 @@ namespace Z0.Asm
             => GpRegChars;
 
         [MethodImpl(Inline), Op]
-        static ushort offsset(GpClass gp, RegIndexCode index, RegWidthIndex width)
+        static ushort offsset(GpClass gp, RegIndexCode index, RegWidthCode width)
         {
             var row = (uint)((uint)index*RowLength);
             var col = z32;
-            if(width == RegWidthIndex.W64)
+            if(width == RegWidthCode.W64)
                 col = 0;
-            else if(width == RegWidthIndex.W32)
+            else if(width == RegWidthCode.W32)
                 col = 4;
-            else if(width == RegWidthIndex.W16)
+            else if(width == RegWidthCode.W16)
                 col = 8;
             else
                 col = 12;
@@ -531,7 +531,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static RegName name(GpClass gp, RegIndexCode index, RegWidthIndex width)
+        public static RegName name(GpClass gp, RegIndexCode index, RegWidthCode width)
         {
             var gpchars = chars(gp);
             var data = 0ul;
@@ -564,7 +564,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static RegName name(RegOp src)
-            => name(GP, src.Index, (RegWidthIndex)(src.Bitfield & 0b111));
+            => name(GP, src.Index, (RegWidthCode)(src.Bitfield & 0b111));
     }
 
 /*

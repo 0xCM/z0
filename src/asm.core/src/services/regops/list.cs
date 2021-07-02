@@ -34,7 +34,7 @@ namespace Z0.Asm
             {
                 for(var w=3; w>=0; w--)
                 {
-                    seek(r,counter++) = AsmRegs.reg((RegWidthIndex)w, RegClass.GP, (RegIndexCode)i);
+                    seek(r,counter++) = AsmRegs.reg((RegWidthCode)w, RegClassCode.GP, (RegIndexCode)i);
                 }
             }
             return counter;

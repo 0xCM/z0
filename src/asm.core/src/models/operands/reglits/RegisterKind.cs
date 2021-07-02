@@ -5,8 +5,8 @@
 namespace Z0.Asm
 {
     using static RegIndexCode;
-    using static RegClass;
-    using static RegWidth;
+    using static RegClassCode;
+    using static RegWidthCode;
     using static RegFacets;
 
     using SR = SegRegKind;

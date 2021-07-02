@@ -28,7 +28,7 @@ namespace Z0
         {
             var srcPath = FS.path(src.Location);
             using var reader = PeTableReader.open(srcPath);
-            var records = reader.SystemStrings();
+            var records = reader.ReadSystemStringInfo();
             dst.AddRange(records);
             Db.EmitTable<CliSystemString>(records, src.GetSimpleName());
             return records.Count;

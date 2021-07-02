@@ -31,7 +31,7 @@ namespace Z0
             var flow = Wf.EmittingTable<CliBlob>(dst);
             using var reader = PeReader.create(src);
 
-            var rows = reader.ReadBlobDescriptions();
+            var rows = reader.ReadBlobInfo();
             var count = (uint)rows.Length;
             var formatter = Tables.formatter<CliBlob>(16);
 

@@ -15,8 +15,8 @@ namespace Z0.Asm
     {
         ref T this[RegIndexCode r] {get;}
 
-        RegWidth RegWidth
-            => (RegWidth)(ushort)width<T>();
+        RegWidthCode RegWidth
+            => (RegWidthCode)(ushort)width<T>();
     }
 
     public readonly struct HeapRegBanks
@@ -46,10 +46,10 @@ namespace Z0.Asm
                 Data = src;
             }
 
-            public RegWidth RegWidth
+            public RegWidthCode RegWidth
             {
                 [MethodImpl(Inline)]
-                get => RegWidth.W512;
+                get => RegWidthCode.W512;
             }
 
             public ref Cell512 this[RegIndexCode r]
@@ -103,10 +103,10 @@ namespace Z0.Asm
                 Data = src;
             }
 
-            public RegWidth RegWidth
+            public RegWidthCode RegWidth
             {
                 [MethodImpl(Inline)]
-                get => RegWidth.W256;
+                get => RegWidthCode.W256;
             }
 
             public ref Cell256 this[RegIndexCode r]
@@ -154,10 +154,10 @@ namespace Z0.Asm
                 Data = src;
             }
 
-            public RegWidth RegWidth
+            public RegWidthCode RegWidth
             {
                 [MethodImpl(Inline)]
-                get => RegWidth.W128;
+                get => RegWidthCode.W128;
             }
 
             public ref Cell128 this[RegIndexCode r]

@@ -448,7 +448,7 @@ namespace Z0.Asm
 
         void ShowRegOps()
         {
-            var reg = asm.reg(RegWidth.W32, RegClass.GP, RegIndexCode.r2);
+            var reg = asm.reg(RegWidthCode.W32, RegClassCode.GP, RegIndexCode.r2);
             Wf.Row(string.Format("{0}{1}/{2}", reg.Width, reg.Index, reg.RegClass));
         }
 

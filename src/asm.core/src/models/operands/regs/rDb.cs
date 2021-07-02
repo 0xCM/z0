@@ -8,8 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmCodes;
-    using static RegClasses;
 
     using I = RegIndexCode;
     using G = AsmOpTypes.rDb;
@@ -34,16 +32,16 @@ namespace Z0.Asm
             public override string ToString()
                 => Format();
 
-            public RegWidth Width
+            public RegWidthCode Width
             {
                 [MethodImpl(Inline)]
-                get => RegWidth.W64;
+                get => RegWidthCode.W64;
             }
 
-            public RegClass RegClass
+            public RegClassCode RegClass
             {
                 [MethodImpl(Inline)]
-                get => RegClass.DB;
+                get => RegClassCode.DB;
             }
 
             [MethodImpl(Inline)]

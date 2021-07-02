@@ -225,8 +225,8 @@ namespace Z0.Asm
         public Symbols<OperandKind> OperandKinds()
             => Symbols.index<OperandKind>();
 
-        public Symbols<RegClass> RegClasses()
-            => Symbols.index<RegClass>();
+        public Symbols<RegClassCode> RegClasses()
+            => Symbols.index<RegClassCode>();
 
         public Symbols<RegRole> RegRoles()
             => Symbols.index<RegRole>();
@@ -258,7 +258,7 @@ namespace Z0.Asm
             EmitSymbols<OperandKind>();
             EmitSymbols<OperandWidthType>();
             EmitSymbols<OperandVisibility>();
-            EmitSymbols<RegClass>();
+            EmitSymbols<RegClassCode>();
             EmitSymbols<RegId>();
             EmitSymbols<RegRole>();
             EmitSymbols<SizeIndicator>();

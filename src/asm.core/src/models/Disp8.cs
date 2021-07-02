@@ -9,26 +9,22 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct Disp8
+    public readonly struct Disp8 : IDisplacement<Disp8,byte>
     {
         /// <summary>
         /// The base displacement magnitude
         /// </summary>
         public byte Value {get;}
 
-        /// <summary>
-        /// The scale applied to the displacement
-        /// </summary>
-        public MemoryScale Scale {get;}
-
         [MethodImpl(Inline)]
-        public Disp8(byte value, ScaleFactor scale = ScaleFactor.S1)
+        public Disp8(byte @base)
         {
-            Scale = scale;
-            Value = value;
+            Value = @base;
         }
 
-        public bool IsEmpty
+        public byte Width => 8;
+
+        public bool IsNonZero
         {
             [MethodImpl(Inline)]
             get => Value == 0;
@@ -41,5 +37,9 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator byte(Disp8 src)
             => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Disp(Disp8 src)
+            => (src.Value,src.Width);
     }
 }

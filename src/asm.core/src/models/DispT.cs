@@ -11,20 +11,26 @@ namespace Z0.Asm
     using static core;
 
     public readonly struct Disp<T>
-        where T : unmanaged
+        where T : unmanaged, IDisplacement<T>
     {
-        public T Value {get;}
+        public T Source {get;}
 
         [MethodImpl(Inline)]
-        public Disp(T value)
+        public Disp(T src)
         {
-            Value = value;
+            Source = src;
         }
 
-        public DataWidth Width
+        public uint Base
         {
             [MethodImpl(Inline)]
-            get => core.width<T>();
+            get => bw32(Source.Value);
+        }
+
+        public byte Width
+        {
+            [MethodImpl(Inline)]
+            get => Source.Width;
         }
 
         [MethodImpl(Inline)]
@@ -53,6 +59,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator T(Disp<T> src)
-            => src.Value;
+            => src.Source;
     }
 }

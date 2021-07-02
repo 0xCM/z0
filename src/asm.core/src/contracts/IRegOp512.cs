@@ -12,15 +12,15 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp512 : IRegOp
     {
-        RegWidth IRegOp.Width
-            => RegWidth.W512;
+        RegWidthCode IRegOp.Width
+            => RegWidthCode.W512;
     }
 
     [Free]
     public interface IRegOp512<T> : IRegOp512, IRegOp<T>
         where T : unmanaged, IRegOp512<T>
     {
-        RegClass IRegOp.RegClass
-            => RegClass.ZMM;
+        RegClassCode IRegOp.RegClass
+            => RegClassCode.ZMM;
     }
 }

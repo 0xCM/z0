@@ -52,25 +52,25 @@ namespace Z0.Asm
             const ushort size = Count*2;
             var buffer = alloc<RegOp>(Count);
             ref var dst = ref first(buffer);
-            var @class = RegClass.GP;
+            var @class = RegClassCode.GP;
 
-            var w = RegWidth.W8;
+            var w = RegWidthCode.W8;
             for(var i=0; i<16; i++)
                 seek(dst,i) = AsmRegs.reg(w, @class, (RegIndexCode)i);
 
-            w = RegWidth.W16;
+            w = RegWidthCode.W16;
             for(var i=0; i<16; i++)
                 seek(dst,i) = AsmRegs.reg(w, @class, (RegIndexCode)i);
 
-            w = RegWidth.W32;
+            w = RegWidthCode.W32;
             for(var i=0; i<16; i++)
                 seek(dst,i) = AsmRegs.reg(w, @class, (RegIndexCode)i);
 
-            w = RegWidth.W64;
+            w = RegWidthCode.W64;
             for(var i=0; i<16; i++)
                 seek(dst,i) = AsmRegs.reg(w, @class, (RegIndexCode)i);
 
-            w = RegWidth.W8;
+            w = RegWidthCode.W8;
             for(var i=0; i<4; i++)
                 seek(dst,i) = AsmRegs.reg(w, @class, (RegIndexCode)i);
 

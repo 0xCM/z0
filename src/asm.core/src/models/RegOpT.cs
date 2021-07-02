@@ -26,13 +26,13 @@ namespace Z0.Asm
             get => Data.Index;
         }
 
-        public RegClass RegClass
+        public RegClassCode RegClass
         {
             [MethodImpl(Inline)]
             get => Data.RegClass;
         }
 
-        public RegWidth Width
+        public RegWidthCode Width
         {
             [MethodImpl(Inline)]
             get => Data.Width;

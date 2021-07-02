@@ -23,7 +23,7 @@ namespace Z0
                  var hType = skip(types, k);
                  var methods = @readonly(MD.GetTypeDefinition(hType).GetMethods().Array());
                  var methodCount = methods.Length;
-                 var definitions = @readonly(root.map(methods, m=> MD.GetMethodDefinition(m)));
+                 var definitions = @readonly(map(methods, m=> MD.GetMethodDefinition(m)));
                  for(var i=0u; i<methodCount; i++)
                  {
                     ref readonly var method = ref skip(methods,i);

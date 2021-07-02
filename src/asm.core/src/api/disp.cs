@@ -11,16 +11,55 @@ namespace Z0.Asm
 
     partial struct asm
     {
+        /// <summary>
+        /// Defines an 8-bit displacement
+        /// </summary>
+        /// <param name="src">The displacement magnitude</param>
         [MethodImpl(Inline), Op]
-        public static Disp8 disp(byte value, ScaleFactor scale = ScaleFactor.S1)
-            => new Disp8(value);
+        public static Disp8 dis8(byte src)
+            => new Disp8(src);
 
+        /// <summary>
+        /// Defines a 16-bit displacement
+        /// </summary>
+        /// <param name="src">The displacement magnitude</param>
         [MethodImpl(Inline), Op]
-        public static Disp16 disp(ushort value, ScaleFactor scale = ScaleFactor.S1)
-            => new Disp16(value);
+        public static Disp16 disp16(ushort src)
+            => new Disp16(src);
 
+        /// <summary>
+        /// Defines a 32-bit displacement
+        /// </summary>
+        /// <param name="src">The displacement magnitude</param>
         [MethodImpl(Inline), Op]
-        public static Disp32 disp(uint value, ScaleFactor scale = ScaleFactor.S1)
-            => new Disp32(value);
+        public static Disp32 disp32(uint src)
+            => new Disp32(src);
+
+        /// <summary>
+        /// Defines a displacement of specified magnitude and width
+        /// </summary>
+        /// <param name="w">The width selector</param>
+        /// <param name="value">The displacement magnitude</param>
+        [MethodImpl(Inline), Op]
+        public static Disp disp(W8 w, byte src)
+            => new Disp(src, 8);
+
+        /// <summary>
+        /// Defines a displacement of specified magnitude and width
+        /// </summary>
+        /// <param name="w">The width selector</param>
+        /// <param name="value">The displacement magnitude</param>
+        [MethodImpl(Inline), Op]
+        public static Disp disp(W16 w, ushort src)
+            => new Disp(src, 16);
+
+        /// <summary>
+        /// Defines a displacement of specified magnitude and width
+        /// </summary>
+        /// <param name="w">The width selector</param>
+        /// <param name="value">The displacement magnitude</param>
+        [MethodImpl(Inline), Op]
+        public static Disp disp(W16 w, uint src)
+            => new Disp(src, 32);
     }
 }

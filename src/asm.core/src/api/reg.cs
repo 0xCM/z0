@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static math;
 
     partial struct asm
     {
@@ -18,11 +17,8 @@ namespace Z0.Asm
                 => new RegOp<T>(src);
 
         [MethodImpl(Inline), Op]
-        public static RegOp reg(RegWidth width, RegClass @class, RegIndexCode r)
+        public static RegOp reg(RegWidthCode width, RegClassCode @class, RegIndexCode r)
             => AsmRegs.reg(width, @class, r);
 
-        [MethodImpl(Inline), Op]
-        public static RegOp reg(RegWidthIndex width, RegClass @class, RegIndexCode r)
-            => AsmRegs.reg(width, @class, r);
     }
 }

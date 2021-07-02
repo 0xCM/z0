@@ -32,16 +32,16 @@ namespace Z0.Asm
             public override string ToString()
                 => Format();
 
-            public RegWidth Width
+            public RegWidthCode Width
             {
                 [MethodImpl(Inline)]
-                get => RegWidth.W512;
+                get => RegWidthCode.W512;
             }
 
-            public RegClass RegClass
+            public RegClassCode RegClass
             {
                 [MethodImpl(Inline)]
-                get => RegClass.ZMM;
+                get => RegClassCode.ZMM;
             }
 
             [MethodImpl(Inline)]
@@ -484,6 +484,5 @@ namespace Z0.Asm
             public static implicit operator K(zmm31 src)
                 => (K)src.Index;
         }
-
     }
 }

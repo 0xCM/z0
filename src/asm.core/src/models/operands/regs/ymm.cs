@@ -31,16 +31,16 @@ namespace Z0.Asm
 
             public override string ToString()
                 => Format();
-            public RegWidth Width
+            public RegWidthCode Width
             {
                 [MethodImpl(Inline)]
-                get => RegWidth.W256;
+                get => RegWidthCode.W256;
             }
 
-            public RegClass RegClass
+            public RegClassCode RegClass
             {
                 [MethodImpl(Inline)]
-                get => RegClass.YMM;
+                get => RegClassCode.YMM;
             }
 
             [MethodImpl(Inline)]

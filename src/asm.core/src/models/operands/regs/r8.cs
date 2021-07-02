@@ -8,8 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmCodes;
-    using static RegClasses;
 
     using I = RegIndexCode;
     using G = AsmOpTypes.r8;
@@ -28,16 +26,16 @@ namespace Z0.Asm
                 Index = index;
             }
 
-            public RegWidth Width
+            public RegWidthCode Width
             {
                 [MethodImpl(Inline)]
-                get => RegWidth.W8;
+                get => RegWidthCode.W8;
             }
 
-            public RegClass RegClass
+            public RegClassCode RegClass
             {
                 [MethodImpl(Inline)]
-                get => RegClass.GP;
+                get => RegClassCode.GP;
             }
 
             public string Format()

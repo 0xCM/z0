@@ -24,7 +24,7 @@ namespace Z0
                 try
                 {
                     using var reader = PeTableReader.open(part.PartPath());
-                    var constants = reader.constants(ref counter);
+                    var constants = reader.Constants(ref counter);
                     var count = constants.Length;
                     for(var i=0; i<count; i++)
                         writer.WriteLine(formatter.Format(skip(constants,i)));

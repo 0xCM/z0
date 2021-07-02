@@ -12,7 +12,7 @@ namespace Z0.Asm
    public readonly struct RegClass<T> : IRegClass<T>
         where T : unmanaged, IRegClass<T>
     {
-        public RegClass Kind
+        public RegClassCode Kind
         {
             [MethodImpl(Inline)]
             get => Class.Kind;

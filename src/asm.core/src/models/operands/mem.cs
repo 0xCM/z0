@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct AsmOpTypes
     {
         /// <summary>
-        /// Defines a 128-bit memory operand
+        /// Defines a memory operend
         /// </summary>
         public struct mem<T> : IMemOp<mem<T>>
             where T : unmanaged

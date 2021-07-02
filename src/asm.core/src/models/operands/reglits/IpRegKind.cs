@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static RegWidth;
+    using static RegWidthCode;
     using static RegFacets;
-    using static RegClass;
+    using static RegClassCode;
 
     /// <summary>
     /// Classifies instruction pointer registers

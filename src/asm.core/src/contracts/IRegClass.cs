@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     public interface IRegClass
     {
-        RegClass Kind {get;}
+        RegClassCode Kind {get;}
     }
 
     public interface IRegClass<T> : IRegClass

@@ -9,23 +9,23 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct Disp32
+    public readonly struct Disp32 : IDisplacement<Disp32,uint>
     {
         public uint Value {get;}
 
-        /// <summary>
-        /// The scale applied to the displacement
-        /// </summary>
-        public MemoryScale Scale {get;}
-
         [MethodImpl(Inline)]
-        public Disp32(uint value, ScaleFactor scale = ScaleFactor.S1)
+        public Disp32(uint value)
         {
             Value = value;
-            Scale = scale;
         }
 
-        public bool IsEmpty
+        public byte Width
+        {
+            [MethodImpl(Inline)]
+            get => 32;
+        }
+
+        public bool IsNonZero
         {
             [MethodImpl(Inline)]
             get => Value == 0;
@@ -38,6 +38,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator uint(Disp32 src)
             => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Disp(Disp32 src)
+            => (src.Value,src.Width);
 
         public static Disp32 Empty
         {

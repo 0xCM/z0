@@ -14,7 +14,7 @@ namespace Z0.Asm
     [ApiHost]
     public class AsmSymbols
     {
-        readonly Symbols<AsmMnemonicCode> _MnemonicCodes;
+        readonly Symbols<AsmMnemonicCode> _Mnemonics;
 
         readonly Symbols<Gp8> _Gp8Regs;
 
@@ -54,39 +54,45 @@ namespace Z0.Asm
 
         readonly Symbols<OffsetToken> _Offsets;
 
+        readonly Symbols<RegWidthCode> _RegWidths;
+
+        readonly Symbols<RegIndexCode> _RegIndices;
+
+        readonly Symbols<RegClassCode> _RegClasses;
+
         public static AsmSymbols create()
             => new AsmSymbols();
 
-        static Symbols<K> symbols<K>()
-            where K : unmanaged, Enum
-                => Symbols.index<K>();
-
         AsmSymbols()
         {
-            _MnemonicCodes = symbols<AsmMnemonicCode>();
-            _Gp8Regs = symbols<Gp8>();
-            _Gp16Regs = symbols<Gp16>();
-            _Gp32Regs = symbols<Gp32>();
-            _Gp64Regs = symbols<Gp64>();
-            _KRegs = symbols<KReg>();
-            _XmmRegs = symbols<XmmReg>();
-            _YmmRegs = symbols<YmmReg>();
-            _ZmmRegs = symbols<ZmmReg>();
-            _MmxRegs = symbols<MmxReg>();
-            _JccCodes = symbols<JccCode>();
-            _SegRegs  = symbols<SegReg>();
-            _CrRegs = symbols<ControlReg>();
-            _FpuRegs = symbols<FpuReg>();
-            _DebugRegs = symbols<DebugReg>();
-            _BndRegs = symbols<BndReg>();
-            _TestRegs = symbols<TestReg>();
-            _SysPtrRegs = symbols<SPtrReg>();
-            _Offsets = symbols<OffsetToken>();
+            _Mnemonics = AsmCodes.Mnemonics();
+            _Gp8Regs = AsmCodes.Gp8Regs();
+            _Gp8HiRegs = AsmCodes.Gp8Regs(true);
+            _Gp16Regs = AsmCodes.Gp16Regs();
+            _Gp32Regs = AsmCodes.Gp32Regs();
+            _Gp64Regs = AsmCodes.Gp64Regs();
+            _KRegs = AsmCodes.MaskRegs();
+            _XmmRegs = AsmCodes.XmmRegs();
+            _YmmRegs = AsmCodes.YmmRegs();
+            _ZmmRegs = AsmCodes.ZmmRegs();
+            _MmxRegs = AsmCodes.MmxRegs();
+            _JccCodes = AsmCodes.JccCodes();
+            _SegRegs  = AsmCodes.SegRegs();
+            _CrRegs = AsmCodes.ControlRegs();
+            _FpuRegs = AsmCodes.FpuRegs();
+            _DebugRegs = AsmCodes.DebugRegs();
+            _BndRegs = AsmCodes.BndRegs();
+            _TestRegs = AsmCodes.TestRegs();
+            _SysPtrRegs = AsmCodes.SysPtrRegs();
+            _Offsets = AsmCodes.Offsets();
+            _RegIndices = AsmCodes.RegIndices();
+            _RegWidths = AsmCodes.RegWidths();
+            _RegClasses = AsmCodes.RegClasses();
         }
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<AsmMnemonicCode> Symbol(AsmMnemonicCode key)
-            => ref _MnemonicCodes[key];
+            => ref _Mnemonics[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<Gp8> Symbol(Gp8 key)
@@ -191,82 +197,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => ref _MmxRegs[key];
         }
-
-        [MethodImpl(Inline), Op]
-        public Symbols<Gp8> Gp8Regs()
-            => _Gp8Regs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<Gp8Hi> Gp8HiRegs()
-            => _Gp8HiRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<Gp16> Gp16Regs()
-            => _Gp16Regs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<Gp32> Gp32Regs()
-            => _Gp32Regs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<Gp64> Gp64Regs()
-            => _Gp64Regs;
-
-        [MethodImpl(Inline), Op]
-        public ReadOnlySpan<Sym<KReg>> KRegs()
-            => _KRegs.View;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<XmmReg> XmmRegs()
-            => _XmmRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<YmmReg> YmmRegs()
-            => _YmmRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<ZmmReg> ZmmRegs()
-            => _ZmmRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<MmxReg> MmxRegs()
-            => _MmxRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<BndReg> BndRegs()
-            => _BndRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<ControlReg> ControlRegs()
-            => _CrRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<SegReg> SegRegs()
-            => _SegRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<FpuReg> FpuRegs()
-            => _FpuRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<TestReg> TestRegs()
-            => _TestRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<SPtrReg> SysPtrRegs()
-            => _SysPtrRegs;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<AsmMnemonicCode> MnemonicCodes()
-            => _MnemonicCodes;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<JccCode> JccCodes()
-            => _JccCodes;
-
-        [MethodImpl(Inline), Op]
-        public Symbols<OffsetToken> Offsets()
-            => _Offsets;
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<Sym<K>> Regs<K>()

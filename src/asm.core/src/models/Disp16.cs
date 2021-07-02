@@ -9,26 +9,22 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct Disp16
+    public readonly struct Disp16 : IDisplacement<Disp16,ushort>
     {
         /// <summary>
         /// The base displacement magnitude
         /// </summary>
         public ushort Value {get;}
 
-        /// <summary>
-        /// The scale applied to the displacement
-        /// </summary>
-        public MemoryScale Scale {get;}
-
         [MethodImpl(Inline)]
-        public Disp16(ushort value, ScaleFactor scale = ScaleFactor.S1)
+        public Disp16(ushort value)
         {
             Value = value;
-            Scale = scale;
         }
 
-        public bool IsEmpty
+        public byte Width => 16;
+
+        public bool IsNonZero
         {
             [MethodImpl(Inline)]
             get => Value == 0;
@@ -41,5 +37,9 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator ushort(Disp16 src)
             => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Disp(Disp16 src)
+            => (src.Value,src.Width);
     }
 }

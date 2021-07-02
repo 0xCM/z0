@@ -8,7 +8,7 @@ namespace Z0.Asm
     /// Defines a <see cref='DataWidth' subset that corresponds to x86 register widths and
     /// </summary>
     [SymbolSource]
-    public enum RegWidth : byte
+    public enum RegWidthCode : byte
     {
         /// <summary>
         /// Specifies the width of an 8-bit register

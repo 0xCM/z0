@@ -36,13 +36,13 @@ namespace Z0.Asm
             get => AsmOpClass.R;
         }
 
-        public RegWidth Width
+        public RegWidthCode Width
         {
             [MethodImpl(Inline)]
             get => api.width(this);
         }
 
-        public RegClass RegClass
+        public RegClassCode RegClass
         {
             [MethodImpl(Inline)]
             get => api.@class(this);

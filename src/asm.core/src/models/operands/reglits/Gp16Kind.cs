@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     using static RegFacets;
     using static RegIndexCode;
-    using static RegClass;
-    using static RegWidth;
+    using static RegClassCode;
+    using static RegWidthCode;
 
     /// <summary>
     /// Defines classifiers for <see cref='GP'/> registers of width <see cref='W16'/>

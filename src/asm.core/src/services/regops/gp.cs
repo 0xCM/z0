@@ -13,14 +13,14 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static bool gp(RegOp r)
-            => r.RegClass == RegClass.GP;
+            => r.RegClass == RegClassCode.GP;
 
         [MethodImpl(Inline), Op]
-        public static bool gp(RegClass c)
-            => c == RegClass.GP;
+        public static bool gp(RegClassCode c)
+            => c == RegClassCode.GP;
 
         [MethodImpl(Inline), Op]
-        public static bool gp(RegOp r, RegWidth w)
+        public static bool gp(RegOp r, RegWidthCode w)
             => w == r.Width && gp(r);
     }
 }

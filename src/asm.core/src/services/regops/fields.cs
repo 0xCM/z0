@@ -13,20 +13,16 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static RegWidth width(RegWidthIndex wi)
-            => (RegWidth)Pow2.pow((byte)wi);
-
-        [MethodImpl(Inline), Op]
-        public static RegWidth width(RegOp src)
-            => width((RegWidthIndex)(src.Bitfield & 0b111));
+        public static RegWidthCode width(RegOp src)
+            => (RegWidthCode)(src.Bitfield & 0b111);
 
         /// <summary>
         /// Determines the register width from the kind
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static RegWidth width(RegKind src)
-            => (RegWidth)Bits.slice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.RegWidth);
+        public static RegWidthCode width(RegKind src)
+            => (RegWidthCode)Bits.slice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.RegWidth);
 
         /// <summary>
         /// Determines the register code from the kind
@@ -41,29 +37,29 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static RegClass @class(RegKind src)
-            => (RegClass)Bits.slice((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.RegClass);
+        public static RegClassCode @class(RegKind src)
+            => (RegClassCode)Bits.slice((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.RegClass);
 
         /// <summary>
         /// Determines the register class from the operand
         /// </summary>
         /// <param name="src">The register operand</param>
         [MethodImpl(Inline), Op]
-        public static RegClass @class(RegOp src)
-            => (RegClass)Bits.segment(src.Bitfield, 5, 9);
+        public static RegClassCode @class(RegOp src)
+            => (RegClassCode)Bits.segment(src.Bitfield, 5, 9);
 
         /// <summary>
-        /// Combines a <see cref='RegIndexCode'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegKind'/>
+        /// Combines a <see cref='RegIndexCode'/>, a <see cref='RegClassCode'/> and a <see cref='RegWidthCode'/> to produce a <see cref='RegKind'/>
         /// </summary>
         /// <param name="i">The register index</param>
         /// <param name="k">The register class</param>
         /// <param name="w">The register width</param>
         [MethodImpl(Inline), Op]
-        public static RegKind kind(RegIndexCode i, RegClass k, RegWidth w)
+        public static RegKind kind(RegIndexCode i, RegClassCode k, RegWidthCode w)
             => (RegKind)((uint)i  << IndexField | (uint)k << ClassField | (uint)w << WidthField);
 
         [MethodImpl(Inline), Op]
-        public static void split(RegKind src, out RegIndexCode c, out RegClass k, out RegWidth w)
+        public static void split(RegKind src, out RegIndexCode c, out RegClassCode k, out RegWidthCode w)
         {
             c = index(src);
             k = @class(src);

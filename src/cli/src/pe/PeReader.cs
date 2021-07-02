@@ -92,13 +92,11 @@ namespace Z0
             return dst;
         }
 
-
         public PEHeaders PeHeaders
         {
             [MethodImpl(Inline)]
             get => PE.PEHeaders;
         }
-
 
         public CorHeader CorHeader
         {

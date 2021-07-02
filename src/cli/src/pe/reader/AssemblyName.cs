@@ -6,16 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata.Ecma335;
+    using System.Reflection.Metadata;
+    using System.Reflection;
 
-    using static Root;
+    using static core;
 
-    using I = System.Reflection.Metadata.Ecma335.TableIndex;
-
-    partial class PeTableReader
+    partial class PeReader
     {
-        [MethodImpl(Inline), Op]
-        public static int ConstantCount(in PeStream state)
-            => state.Reader.GetTableRowCount(I.Constant);
+        [Op]
+        public AssemblyName AssemblyName()
+            => MD.GetAssemblyDefinition().GetAssemblyName();
     }
 }

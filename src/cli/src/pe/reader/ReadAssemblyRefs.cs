@@ -35,7 +35,7 @@ namespace Z0
         [Op]
         public ref AssemblyRefInfo ReadAssemblyRef(AssemblyReference src, ref AssemblyRefInfo dst)
         {
-            dst.Source = MD.GetAssemblyDefinition().GetAssemblyName();
+            dst.Source = AssemblyName();
             dst.Target = src.GetAssemblyName();
             dst.Token = CliReader().Read(src.PublicKeyOrToken);
             return ref dst;

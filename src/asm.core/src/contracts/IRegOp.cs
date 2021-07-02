@@ -23,7 +23,7 @@ namespace Z0.Asm
         /// <summary>
         /// The register classifier
         /// </summary>
-        RegClass RegClass {get;}
+        RegClassCode RegClass {get;}
 
         BitWidth ISized.Width
             => (uint)Width;
@@ -34,7 +34,7 @@ namespace Z0.Asm
         /// <summary>
         /// The width of the represented register operand
         /// </summary>
-        new RegWidth Width {get;}
+        new RegWidthCode Width {get;}
 
         string ITextual.Format()
             => GetType().Name;

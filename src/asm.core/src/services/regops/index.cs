@@ -12,10 +12,6 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static RegWidthIndex index(RegWidth width)
-            => (RegWidthIndex)Pow2.log((ushort)width);
-
-        [MethodImpl(Inline), Op]
         public static RegIndexCode index(RegOp src)
             =>(RegIndexCode)Bits.segment(src.Bitfield, 10, 15);
     }
