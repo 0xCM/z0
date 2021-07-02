@@ -2,20 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    [ApiHost]
-    public readonly partial struct asm
+    partial struct core
     {
-        const NumericKind Closure = UnsignedInts;
-
-        static ReadOnlySpan<byte> OperandSizeLookup => new byte[8]{1,1,0,0,2,2,2,2};
-
-        static ReadOnlySpan<byte> AddressSizeLookup => new byte[8]{2,1,2,1,2,1,2,1};
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T extract<T>(T? src)
+            where T : struct
+                => @as<T?,T>(src);
     }
 }

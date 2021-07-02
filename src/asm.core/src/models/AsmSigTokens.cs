@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmSigs
+    public readonly struct AsmSigTokens
     {
         public enum SigTokenKind : byte
         {
@@ -170,7 +170,7 @@ namespace Z0.Asm
         }
 
         [SymbolSource("Defines FPU-related symbols")]
-        public enum FpuKind
+        public enum FpuKind : byte
         {
             [Symbol("m16int", "Indicates a 16-bit integer memory operand in the context of an FPU integer instruction")]
             m16int,

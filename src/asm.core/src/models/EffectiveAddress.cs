@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
@@ -12,9 +13,25 @@ namespace Z0.Asm
     /// <summary>
     /// Represents an effective address as defined by Vol. 1 section 3.7.5
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Pack=1)]
-    public struct EffectiveAddress
+    [StructLayout(LayoutKind.Sequential, Pack=1), Record("asm.effective")]
+    public struct EffectiveAddress : IRecord<EffectiveAddress>
     {
+        [Flags]
+        public enum ComponentKind : byte
+        {
+            None = 0,
+
+            RegWidth = 1,
+
+            Base = 2,
+
+            Index = 4,
+
+            Scale = 8,
+
+            Disp = 16
+        }
+
         /// <summary>
         /// The common width of the base and index registers
         /// </summary>
@@ -23,12 +40,12 @@ namespace Z0.Asm
         /// <summary>
         /// The base register
         /// </summary>
-        public RegIndexCode Base;
+        public RegIndex Base;
 
         /// <summary>
         /// The index register
         /// </summary>
-        public RegIndexCode Index;
+        public RegIndex Index;
 
         /// <summary>
         /// The scale factor; one of 1, 2, 4, 8
@@ -39,5 +56,14 @@ namespace Z0.Asm
         /// An 8-bit, 16-bit or 32-bit displacement
         /// </summary>
         public Disp Disp;
+
+        /// <summary>
+        /// Specifies the components to include in computations/expressions
+        /// </summary>
+        public ComponentKind Components;
+
+        [MethodImpl(Inline)]
+        public bit Enabled(ComponentKind kind)
+            => (kind & Components) != 0;
     }
 }

@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         [Op]
         public static AsmBitstring bitstring(AsmHexCode src)
-            => new AsmBitstring(AsmBitstrings.format(src));
+            => new AsmBitstring(format(src));
 
         [Op]
         public static string format(AsmHexCode src, Span<char> buffer)
@@ -100,7 +100,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static uint encode(N3 n, AsmHexCode src, Span<BitChar> dst)
             => encode(n, src, 0u, dst);
-
 
         [MethodImpl(Inline), Op]
         public static uint encode(AsmHexCode src, uint offset, Span<BitChar> dst)

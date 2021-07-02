@@ -12,6 +12,12 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        Outcome ShowEffective(CmdArgs args)
+        {
+            //var e1 = asm.effective(w8,)
+            return true;
+        }
+
         [CmdOp(".modrm")]
         Outcome ShowModRmTable(CmdArgs args)
         {

@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines classifiers for <see cref='MASK'/> registers of width <see cref='W64'/>
     /// </summary>
-    public enum KRegKind : uint
+    public enum MaskRegKind : uint
     {
         K0 = r0 | MASK << ClassField | W64 << WidthField,
 

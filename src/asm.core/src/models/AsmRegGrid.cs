@@ -9,8 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmRegGrid<K>
-        where K : unmanaged
+    public readonly struct AsmRegGrid
     {
         readonly AsciSequence _Data;
 
@@ -38,9 +37,5 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmRegGrid(AsmRegGrid<K> src)
-            => new AsmRegGrid(src._Data, src.RowCount);
     }
 }

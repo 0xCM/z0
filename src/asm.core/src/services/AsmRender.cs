@@ -23,6 +23,17 @@ namespace Z0.Asm
 
         const string To = " => ";
 
+        [Op]
+        public static string delimited(Register src)
+        {
+            const string Sep = " | ";
+            const string Pattern = "[{0,-12} | {1,-8} | {2}]";
+            var index = Bitfields.format<RegIndexCode,byte>(src.Code, src.Name, 5);
+            var @class = Bitfields.format<RegClassCode,byte>(src.Class, src.Class.ToString(), 4);
+            var width = Enums.field<RegWidthCode,ushort>(src.Width, base10, "Width");
+            return string.Format(Pattern, index, @class, width);
+        }
+
         public static string format(in AsmApiStatement src)
             => string.Format("{0} {1,-36} ; {2} => {3}",
                         src.BlockOffset,

@@ -203,6 +203,74 @@ namespace Z0.Asm
             where K : unmanaged
                 => RegsGp<K>();
 
+        [Op]
+        public Symbols<Gp8> Gp8Regs()
+            => _Gp8Regs;
+
+        [Op]
+        public Symbols<Gp8Hi> Gp8Regs(bit hi)
+            => _Gp8HiRegs;
+
+        [Op]
+        public Symbols<Gp16> Gp16Regs()
+            => _Gp16Regs;
+
+        [Op]
+        public Symbols<Gp32> Gp32Regs()
+            => _Gp32Regs;
+
+        [Op]
+        public Symbols<Gp64> Gp64Regs()
+            => _Gp64Regs;
+
+        [Op]
+        public Symbols<XmmReg> XmmRegs()
+            => _XmmRegs;
+
+        [Op]
+        public Symbols<YmmReg> YmmRegs()
+            => _YmmRegs;
+
+        [Op]
+        public Symbols<ZmmReg> ZmmRegs()
+            => _ZmmRegs;
+
+        [Op]
+        public Symbols<KReg> MaskRegs()
+            => _KRegs;
+
+        [Op]
+        public Symbols<MmxReg> MmxRegs()
+            => _MmxRegs;
+
+        [Op]
+        public Symbols<BndReg> BndRegs()
+            => _BndRegs;
+
+        [Op]
+        public Symbols<ControlReg> ControlRegs()
+            => _CrRegs;
+
+        [Op]
+        public Symbols<DebugReg> DebugRegs()
+            => _DebugRegs;
+
+        [Op]
+        public Symbols<SegReg> SegRegs()
+            => _SegRegs;
+
+        [Op]
+        public Symbols<FpuReg> FpuRegs()
+            => _FpuRegs;
+
+        [Op]
+        public Symbols<TestReg> TestRegs()
+            => _TestRegs;
+
+        [Op]
+        public Symbols<SPtrReg> SysPtrRegs()
+            => _SysPtrRegs;
+
         [MethodImpl(Inline)]
         ReadOnlySpan<Sym<K>> RegsGp<K>()
             where K : unmanaged

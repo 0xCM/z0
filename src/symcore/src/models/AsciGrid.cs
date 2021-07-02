@@ -2,45 +2,42 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct AsmRegGrid<K>
-        where K : unmanaged
+    public readonly struct AsciGrid
     {
-        readonly AsciSequence _Data;
+        readonly AsciSequence Data;
 
-        public ushort RowCount {get;}
+        public uint RowCount {get;}
 
-        [MethodImpl(Inline)]
-        public AsmRegGrid(AsciSequence src, ushort rows)
+        public ushort RowWidth {get;}
+
+        internal AsciGrid(AsciSequence data, uint count, ushort width)
         {
-            _Data = src;
-            RowCount = rows;
+            Data = data;
+            RowCount = count;
+            RowWidth = width;
         }
 
         public ReadOnlySpan<byte> Rows
         {
             [MethodImpl(Inline)]
-            get => _Data.View;
+            get => Data.View;
         }
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Row(ushort index)
-            => AsmRegGrids.row(this,index);
+            => AsciSymbols.row(this,index);
 
         public string Format()
-            => _Data.Format();
+            => Data.Format();
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmRegGrid(AsmRegGrid<K> src)
-            => new AsmRegGrid(src._Data, src.RowCount);
     }
 }

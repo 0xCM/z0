@@ -14,7 +14,6 @@ namespace Z0.Asm
     using static Part;
     using static core;
     using static Toolsets;
-    using static AsmCodes;
 
     partial class App : AppService<App>
     {
@@ -865,31 +864,6 @@ namespace Z0.Asm
         {
             var cmd = Wf.AsmCmd();
             return cmd.Dispatch(name,args);
-        }
-
-        uint EmitGrid<T>(AsmRegGrid<T> src, StreamWriter writer)
-            where T: unmanaged
-        {
-            var count = src.RowCount;
-            for(byte i=0; i<count; i++)
-                writer.WriteLine(AsciSymbols.format(src.Row(i)));
-            return (uint)count;
-        }
-
-        Outcome EmitRegGrids()
-        {
-            var ws = Wf.AsmWorkspace();
-            var dst = ws.Table("regs",FS.Csv);
-            var counter = 0u;
-            var flow = Wf.EmittingFile(dst);
-            using var writer = dst.AsciWriter();
-            counter += EmitGrid(AsmRegGrids.grid(GP, w8),writer);
-            counter += EmitGrid(AsmRegGrids.grid(GP, w8,true),writer);
-            counter += EmitGrid(AsmRegGrids.grid(GP, w16),writer);
-            counter += EmitGrid(AsmRegGrids.grid(GP, w32),writer);
-            counter += EmitGrid(AsmRegGrids.grid(GP, w64),writer);
-            Wf.EmittedFile(flow,counter);
-            return true;
         }
 
         public void Run()

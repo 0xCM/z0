@@ -11,8 +11,16 @@ namespace Z0
     [ApiHost]
     public static class XSvc
     {
-        [Op]
+       [Op]
        public static AsmWorkspace AsmWorkspace(this IEnvProvider provider)
             => Svc.AsmWorkspace.create(provider.Env.AsmWorkspace);
+
+        [Op]
+        public static AsmRegGrids AsmRegGrids(this IServiceContext env)
+            => Svc.AsmRegGrids.create(env);
+
+        [Op]
+        public static AsmSymbols AsmSymbols(this IServiceContext env)
+            => Svc.AsmSymbols.create();
     }
 }

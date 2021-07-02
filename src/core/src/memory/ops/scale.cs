@@ -11,8 +11,12 @@ namespace Z0
 
     partial struct memory
     {
-        [MethodImpl(Inline), Op]
-        public static byte scale<T>()
-            => (byte)size<T>();
+        [MethodImpl(Inline)]
+        public static MemoryScale scale(byte value)
+            => scale((ScaleFactor)value);
+
+        [MethodImpl(Inline)]
+        public static MemoryScale scale(ScaleFactor factor)
+            => new MemoryScale(factor);
     }
 }

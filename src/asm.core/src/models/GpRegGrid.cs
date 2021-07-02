@@ -28,5 +28,23 @@ namespace Z0.Asm
             var length = kind == GpRegKind.Gp8Hi ? 4 : 16;
             return slice(Data.View, offset, length);
         }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsEmpty;
+        }
+
+        public static GpRegGrid Empty
+        {
+            [MethodImpl(Inline)]
+            get => new GpRegGrid(core.array<RegOp>());
+        }
     }
 }

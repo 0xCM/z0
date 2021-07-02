@@ -18,7 +18,7 @@ namespace Z0.Asm
     using G16 = Gp16Kind;
     using G32 = Gp32Kind;
     using G64 = Gp64Kind;
-    using M = KRegKind;
+    using M = MaskRegKind;
     using C = ControlRegKind;
     using D = DebugRegKind;
     using I = IpRegKind;

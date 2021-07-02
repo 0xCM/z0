@@ -8,14 +8,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
     using static core;
+    using static Typed;
 
-    [ApiHost]
-    public struct AsmLayouts
+    partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmLayout define(params AsmLayoutSlot[] slots)
+        public static AsmLayout layout(params AsmLayoutSlot[] slots)
         {
             var count = slots.Length;
             var storage = Cells.alloc(w128);
@@ -27,9 +26,5 @@ namespace Z0.Asm
                 seek(dst,i) = skip(src,i);
             return new AsmLayout(storage);
         }
-
-        [MethodImpl(Inline), Op]
-        public static AsmLayout init()
-            => new AsmLayout(Cell128.Empty);
     }
 }

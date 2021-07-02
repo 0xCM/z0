@@ -8,19 +8,16 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmOffsetLabel label(DataWidth w, ulong offset)
-            => new AsmOffsetLabel(w, offset);
+        public static AsmAddressSize addrsize(bit w, bit opsz, bit adsz)
+            => skip(AddressSizeLookup, BitNumbers.join(w, opsz, adsz));
 
         [MethodImpl(Inline), Op]
-        public static AsmLabel label(Identifier name)
-            => new AsmLabel(name);
-
-        [MethodImpl(Inline), Op]
-        public static AsmBlockLabel label(MemoryAddress address)
-            => new AsmBlockLabel(string.Format("_{0}", address));
+        public static AsmAddressSize addrsize(bit w, SizeOverrides sizes)
+            => addrsize(w,sizes.OperandOverride, sizes.AddressOverride);
     }
 }
