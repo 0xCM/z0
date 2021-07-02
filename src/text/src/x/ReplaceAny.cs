@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static memory;
-    using static Part;
+    using static core;
+    using static Root;
 
     partial class XText
     {

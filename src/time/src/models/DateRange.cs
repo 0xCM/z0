@@ -163,7 +163,7 @@ namespace Z0
             var dates = GetDates().Intersect(src.GetDates()).ToList();
             return dates.Any()
                 ? dates.Min().To(dates.Max())
-                : root.none<DateRange>();
+                : Option.none<DateRange>();
         }
 
         /// <summary>

@@ -17,7 +17,7 @@ namespace Z0
 
         public Name FuncName {get;}
 
-        public Index<TypeWidth> ArgWidths {get;}
+        public TypeWidth[] ArgWidths {get;}
 
         public TypeWidth ResultWidth {get;}
 

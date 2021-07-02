@@ -9,7 +9,7 @@ namespace Z0.Asm
     partial struct AsmCodes
     {
         /// <summary>
-        /// Defines the jcc condition codes as the bitfield [tttn] where ttt indicates
+        /// Defines the condition codes as the bitfield [tttn] where ttt indicates
         /// the condition being tested and n indicates where to use the condition (n=0)
         /// or its negation (n=1). For 1-byte primary opcodes, the tttn field is located
         /// in bits 3, 2, 1, and 0 of the opcode byte. For 2-byte primary opcodes, the tttn
@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// From Vol2D, appendix B.1.4.7
         /// </remarks>
         [SymbolSource]
-        public enum JccCode : byte
+        public enum ConditionCode : byte
         {
             /// <summary>
             /// Overflow

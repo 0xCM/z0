@@ -17,7 +17,7 @@ namespace Z0
 
         public OutputValue<A> Arg0;
 
-        public bit Success;
+        public bool Success;
 
         public TextBlock Message;
 
@@ -33,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Identifier, Claim, Success, Message, Arg0);
+            => string.Format(Identifier, Claim, Success, Message, Arg0);
 
         public override string ToString()
             => Format();

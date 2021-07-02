@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Text;
 
-    using static Part;
+    using static Root;
 
     partial class XText
     {

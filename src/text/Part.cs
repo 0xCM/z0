@@ -22,4 +22,10 @@ namespace Z0
     {
         const NumericKind Closure = Root.UnsignedInts;
     }
+
+    [ApiHost]
+    public static partial class XText
+    {
+
+    }
 }

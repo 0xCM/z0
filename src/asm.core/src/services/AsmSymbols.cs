@@ -50,7 +50,7 @@ namespace Z0.Asm
 
         readonly Symbols<TestReg> _TestRegs;
 
-        readonly Symbols<JccCode> _JccCodes;
+        readonly Symbols<ConditionCode> _ConditionCodes;
 
         readonly Symbols<OffsetToken> _Offsets;
 
@@ -76,7 +76,7 @@ namespace Z0.Asm
             _YmmRegs = AsmCodes.YmmRegs();
             _ZmmRegs = AsmCodes.ZmmRegs();
             _MmxRegs = AsmCodes.MmxRegs();
-            _JccCodes = AsmCodes.JccCodes();
+            _ConditionCodes = AsmCodes.JccCodes();
             _SegRegs  = AsmCodes.SegRegs();
             _CrRegs = AsmCodes.ControlRegs();
             _FpuRegs = AsmCodes.FpuRegs();
@@ -127,8 +127,8 @@ namespace Z0.Asm
             => ref _ZmmRegs[key];
 
         [MethodImpl(Inline), Op]
-        public ref readonly Sym<JccCode> Symbol(JccCode key)
-            => ref _JccCodes[key];
+        public ref readonly Sym<ConditionCode> Symbol(ConditionCode key)
+            => ref _ConditionCodes[key];
 
         [MethodImpl(Inline), Op]
         public ref readonly Sym<ControlReg> Symbol(ControlReg key)

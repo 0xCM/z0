@@ -13,9 +13,6 @@ namespace Z0.Asm
         /// <summary>
         /// Defines literals corresponding the bits in the RFLAGS register
         /// </summary>
-        /// <remarks>
-        /// 3-16 Vol 1 of Intel Manual
-        /// </remarks>
         [Flags]
         public enum RFlagBits : ulong
         {

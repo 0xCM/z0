@@ -8,106 +8,68 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
     using static AsmCodes;
 
+    using F = AsmCodes.RFlagBits;
     using I = AsmCodes.RFlagIndex;
 
     [ApiComplete]
     public struct StatusFlags
     {
-        bit _CF;
-
-        bit _PF;
-
-        bit _AF;
-
-        bit _OF;
-
-        bit _SF;
-
-        bit _ZF;
+        RFlagBits State;
 
         [MethodImpl(Inline)]
-        public StatusFlags(bit cf = default, bit pf = default, bit af = default, bit of = default, bit zf = default, bit sf = default)
+        public StatusFlags(RFlagBits state)
         {
-            _CF = cf;
-            _PF = pf;
-            _AF = af;
-            _ZF = zf;
-            _OF = of;
-            _SF = sf;
+            State = state;
         }
 
         [MethodImpl(Inline)]
         public bit CF()
-            => _CF;
+            => (State & F.CF) != 0;
 
         [MethodImpl(Inline)]
         public void CF(bit cf)
-            => _CF = cf;
+            => State = (F)bit.set((ulong)State, (byte)I.CF, cf);
 
         [MethodImpl(Inline)]
         public bit PF()
-            => _PF;
+            => (State & F.PF) != 0;
 
         [MethodImpl(Inline)]
         public void PF(bit pf)
-            => _PF = pf;
+            => State = (F)bit.set((ulong)State, (byte)I.PF, pf);
 
         [MethodImpl(Inline)]
         public bit AF()
-            => _AF;
+            => (State & F.AF) != 0;
 
         [MethodImpl(Inline)]
         public void AF(bit af)
-            => _AF = af;
+            => State = (F)bit.set((ulong)State, (byte)I.AF, af);
 
         [MethodImpl(Inline)]
         public bit OF()
-            => _OF;
+            => (State & F.OF) != 0;
 
         [MethodImpl(Inline)]
         public void OF(bit of)
-            => _OF = of;
+            => State = (F)bit.set((ulong)State, (byte)I.OF, of);
 
         [MethodImpl(Inline)]
         public bit SF()
-            => _SF;
+            => (State & F.SF) != 0;
 
         [MethodImpl(Inline)]
         public void SF(bit sf)
-            => _SF = sf;
+            => State = (F)bit.set((ulong)State, (byte)I.SF, sf);
 
         [MethodImpl(Inline)]
         public bit ZF()
-            => _ZF;
+            => (State & F.ZF) != 0;
 
         [MethodImpl(Inline)]
         public void ZF(bit zf)
-            => _ZF = zf;
-
-        [MethodImpl(Inline)]
-        public void Read(RFlagBits src)
-        {
-            _CF = bit.test((ulong)src, (byte)I.CF);
-            _PF = bit.test((ulong)src, (byte)I.PF);
-            _AF = bit.test((ulong)src, (byte)I.AF);
-            _OF = bit.test((ulong)src, (byte)I.OF);
-            _SF = bit.test((ulong)src, (byte)I.SF);
-            _ZF = bit.test((ulong)src, (byte)I.ZF);
-        }
-
-        [MethodImpl(Inline)]
-        public void Write(ref RFlagBits dst)
-        {
-            var src = u64(dst);
-            bit.set(ref src, (byte)I.CF, _CF);
-            bit.set(ref src, (byte)I.PF, _PF);
-            bit.set(ref src, (byte)I.AF, _AF);
-            bit.set(ref src, (byte)I.OF, _OF);
-            bit.set(ref src, (byte)I.SF, _SF);
-            bit.set(ref src, (byte)I.ZF, _ZF);
-        }
+            => State = (F)bit.set((ulong)State, (byte)I.ZF, zf);
     }
 }

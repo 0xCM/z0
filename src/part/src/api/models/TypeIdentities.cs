@@ -14,7 +14,7 @@ namespace Z0
     {
         public static ITypeIdentityProvider create(Type t, ITypeIdentityProvider fallback)
         {
-            var provider = root.none<ITypeIdentityProvider>();
+            var provider = Option.none<ITypeIdentityProvider>();
             if(t.Tagged<IdentityProviderAttribute>())
                 provider = attributed(t);
             else if(t.Reifies<ITypeIdentityProvider>())

@@ -15,6 +15,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AsciLine asci(ReadOnlySpan<byte> src, uint number, uint offset, uint length)
             => new AsciLine(number, offset, recover<AsciCode>(slice(src, offset, length)));
-
     }
 }

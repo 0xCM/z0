@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Interop)" />
     <ProjectReference Include="$(Rules)" />
+    <ProjectReference Include="$(Text)" />
   </ItemGroup>
 
 </Project>

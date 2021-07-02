@@ -49,7 +49,7 @@ namespace Z0
             => this;
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(IdentityText);
+            => IdentityText?.GetHashCode() ?? 0;
 
         public override bool Equals(object obj)
             => Identified.Same(obj);

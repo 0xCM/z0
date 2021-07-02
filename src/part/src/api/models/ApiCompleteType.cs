@@ -10,7 +10,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Root;
-    using static core;
 
     public class ApiCompleteType : IApiHost, IComparable<ApiCompleteType>
     {

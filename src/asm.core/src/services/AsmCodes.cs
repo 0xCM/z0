@@ -117,7 +117,7 @@ namespace Z0.Asm
             => _SysPtrRegs;
 
         [Op]
-        public static Symbols<JccCode> JccCodes()
+        public static Symbols<ConditionCode> JccCodes()
             => _JccCodes;
 
         [Op]
@@ -172,7 +172,7 @@ namespace Z0.Asm
 
         static Symbols<TestReg> _TestRegs;
 
-        static Symbols<JccCode> _JccCodes;
+        static Symbols<ConditionCode> _JccCodes;
 
         static Symbols<OffsetToken> _Offsets;
 
@@ -202,7 +202,7 @@ namespace Z0.Asm
             _Zmm = symbols<ZmmReg>();
             _KRegs = symbols<KReg>();
             _MmxRegs = symbols<MmxReg>();
-            _JccCodes = symbols<JccCode>();
+            _JccCodes = symbols<ConditionCode>();
             _SegRegs  = symbols<SegReg>();
             _CrRegs = symbols<ControlReg>();
             _FpuRegs = symbols<FpuReg>();

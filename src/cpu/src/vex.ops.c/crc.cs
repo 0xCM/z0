@@ -10,7 +10,7 @@ namespace Z0
     using CRC = System.Runtime.Intrinsics.X86.Sse42;
     using CRC64 = System.Runtime.Intrinsics.X86.Sse42.X64;
 
-    using static Part;
+    using static Root;
 
     partial struct cpu
     {

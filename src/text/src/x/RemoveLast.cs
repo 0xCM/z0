@@ -4,16 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Chars;
+    using System;
+
+    using static Root;
 
     partial class XText
     {
         /// <summary>
-        /// Removes whitespace characters from a string
+        /// Creates a new string from the first n - 1 characters of a string of length n
         /// </summary>
-        /// <param name="src">The source string</param>
+        /// <param name="s">The source string</param>
         [TextUtility]
-        public static string RemoveBlanks(this string src)
-            => src.RemoveAny(root.array(Space, LineFeed, NL, Tab));
+        public static string RemoveLast(this string s)
+            => string.IsNullOrWhiteSpace(s) ? EmptyString : s.Substring(0, s.Length - 1);
     }
 }

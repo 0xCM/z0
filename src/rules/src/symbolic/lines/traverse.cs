@@ -8,11 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Root;
-    using static core;
-
-    using SQ = SymbolicQuery;
-
     partial struct Lines
     {
         [Op]
