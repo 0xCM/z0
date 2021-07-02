@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial class text
     {
@@ -17,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The text to intern</param>
         [MethodImpl(Inline), Op]
-        public static MemoryAddress intern(string src)
+        public static StringAddress intern(string src)
             => address(string.Intern(src));
     }
 }

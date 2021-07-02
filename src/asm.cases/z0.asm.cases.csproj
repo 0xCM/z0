@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(AsmLang)"/>
+    <ProjectReference Include="$(AsmCore)"/>
+    <ProjectReference Include="$(AsmData)"/>
+    <ProjectReference Include="$(SpanBlocks)"/>
+    <ProjectReference Include="$(Cpu)"/>
   </ItemGroup>
 
   <ItemGroup>

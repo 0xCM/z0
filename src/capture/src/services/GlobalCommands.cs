@@ -119,7 +119,7 @@ namespace Z0
         [CmdOp("emit-intrinsics-catalog")]
         public Outcome EmitIntrinsicsCatalog(CmdArgs args)
         {
-            Wf.IntelIntrinsics().Emit();
+            Wf.IntelIntrinsicsPipe().Import();
             return true;
         }
 

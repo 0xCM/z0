@@ -9,12 +9,33 @@ namespace Z0.Asm
     using System.Runtime.InteropServices;
 
     using static Root;
+    using static core;
 
-    using api = AsmTextBuilder;
-
-    [StructLayout(LayoutKind.Sequential, Size=16, Pack =1)]
+    [StructLayout(LayoutKind.Sequential, Size=16, Pack =1), ApiHost]
     public readonly struct AsmText : IAsmText<AsmText>
     {
+        public static string format<T>(T src)
+            where T : unmanaged, IAsmText
+        {
+            Span<char> dst = stackalloc char[(int)src.Source.Length];
+            var i=0u;
+            var count = src.Render(ref i, dst);
+            return text.format(slice(dst,0,count));
+        }
+
+        [MethodImpl(Inline), Op, Closures(UInt8x16k)]
+        public static AsmText<T> asmtext<T>(ReadOnlySpan<T> src, AsmTextKind kind = default)
+            where T : unmanaged
+                =>  new AsmText<T>(text.address(src), kind);
+
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> asmtext(StringAddress src, AsmTextKind kind = default)
+            => new AsmText<byte>(src, kind);
+
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> asmtext(string src, AsmTextKind kind = default)
+            => asmtext(text.address(src), kind);
+
         public StringAddress Source {get;}
 
         public AsmTextKind Kind {get;}
@@ -35,17 +56,17 @@ namespace Z0.Asm
             => Source.Render(ref i, dst);
 
         public string Format()
-            => api.format(this);
+            => format(this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator AsmText(ReadOnlySpan<char> src)
-            => new AsmText(TextTools.address(src));
+            => new AsmText(text.address(src));
 
         [MethodImpl(Inline)]
         public static implicit operator AsmText(ReadOnlySpan<byte> src)
-            => new AsmText(TextTools.address(src));
+            => new AsmText(text.address(src));
     }
 }

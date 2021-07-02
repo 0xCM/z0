@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public asci(string src)
         {
-            var len = TextTools.length(src);
+            var len = text.length(src);
             if(len != 0)
             {
                 var buffer = alloc<byte>(len);

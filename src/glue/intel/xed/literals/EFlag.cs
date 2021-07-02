@@ -7,6 +7,9 @@ namespace Z0
 {
     partial struct XedModels
     {
+        /// <summary>
+        /// Mirrors the content of xed-flag-enum.txt data file
+        /// </summary>
         [SymbolSource(xed)]
         public enum EFlag : byte
         {

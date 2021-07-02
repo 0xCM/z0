@@ -8,7 +8,7 @@ namespace Z0
     partial struct XedModels
     {
         [SymbolSource(xed)]
-        public enum XedMachineMode : byte
+        public enum MachineMode : byte
         {
             None,
 

@@ -10,8 +10,6 @@ namespace Z0.Asm
 
     using static Root;
 
-    using api = AsmTextBuilder;
-
     [StructLayout(LayoutKind.Sequential, Size=16, Pack =1)]
     public readonly struct AsmText<T> : IAsmText<T>
         where T : unmanaged
@@ -36,7 +34,7 @@ namespace Z0.Asm
             => Source.Render(ref i, dst);
 
         public string Format()
-            => api.format(this);
+            => AsmText.format(this);
 
         public override string ToString()
             => Format();
@@ -51,6 +49,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmText<T>(ReadOnlySpan<char> src)
-            => api.asmtext(src.Recover<T>());
+            => AsmText.asmtext(src.Recover<T>());
     }
 }

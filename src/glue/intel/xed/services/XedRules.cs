@@ -8,62 +8,51 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.IO;
+    using Z0.Asm;
 
     using static Root;
     using static core;
     using static XedSourceMarkers;
 
     [ApiHost]
-    public class XedWf
+    public class XedRules : AppService<XedRules>
     {
-        public static XedWf create(IWfRuntime wf)
-            => new XedWf(wf);
+        AsmWorkspace Workspace;
 
-        readonly XedWfConfig Config;
+        XedDataSource Source;
 
-        readonly IWfRuntime Wf;
+        const string dataset = "xed.rules";
 
-        readonly XedDataSource Source;
+        XedParser SourceParser;
 
-        const string Subject = "xed";
-
-        readonly FS.FolderPath Root;
-
-        readonly XedParser SourceParser;
-
-        public XedWf(IWfRuntime wf)
+        protected override void Initialized()
         {
-            Wf = wf;
-            Config = new XedWfConfig(wf);
-            Source = new XedDataSource(Config.Source);
-            var db = Wf.Db();
-            Root = db.TableDir(Subject);
+            Workspace = Wf.AsmWorkspace();
+            Source = new XedDataSource(Workspace.DataSource(dataset));
             SourceParser = XedParser.Service;
         }
 
-        public void Dispose()
-        {
+        FS.FolderPath TargetDir()
+            => Workspace.ImportDir(dataset);
 
-        }
-
-        public void Run()
+        public void Import()
         {
-            Root.Clear(true);
+            //Root.Clear(true);
             var patterns = EmitInstructionPatterns();
             var summaries = EmitSummaries(patterns);
             EmitMnemonics(summaries);
             EmitRules();
         }
 
-        public Index<XedSummaryRow> LoadSummaries()
-            => LoadSummaries(SummaryPath);
+        public ReadOnlySpan<XedSummaryRow> LoadSummaries()
+            => LoadSummaries(SummaryTarget());
 
-        public Index<XedSummaryRow> LoadSummaries(FS.FilePath src)
+        public ReadOnlySpan<XedSummaryRow> LoadSummaries(FS.FilePath src)
         {
             var flow  = Wf.Running(string.Format("Loading summary records from {0}", src.ToUri()));
             var doc = TextGrids.parse(src).Require();
             var count = doc.RowCount;
-            var buffer = sys.alloc<XedSummaryRow>(count);
+            var buffer = alloc<XedSummaryRow>(count);
             if(count != 0)
             {
                 ref var dst = ref first(buffer);
@@ -118,13 +107,10 @@ namespace Z0
             return dst;
         }
 
-        FS.FilePath SummaryPath
-            => Root + FS.file("summary", FS.Csv);
-
         XedSummaryRow[] EmitSummaries(XedPattern[] src)
         {
             var records = sort(src).Map(p => BuildSummaryRow(p));
-            var target = SummaryPath;
+            var target = SummaryTarget();
             Tables.emit(@readonly(records), target);
             return records;
         }
@@ -146,14 +132,15 @@ namespace Z0
             var patterns = list<XedPattern>();
             var parser = XedParser.Service;
             var flow = Wf.EmittingFile(dst);
-            var parsed = span(parser.ParseInstructions(dst));
-            for(var j = 0; j<parsed.Length; j++)
+            var parsed = parser.ParseInstructions(dst);
+            var count = parsed.Length;
+            for(var j = 0; j<count; j++)
             {
                 ref readonly var doc = ref skip(parsed, j);
-                EmitInstructionPatterns(parsed, Config.InstructionDir + dst.FileName);
+                EmitInstructionPatterns(parsed, InstructionTarget(dst.FileName));
                 patterns.AddRange(XedParser.patterns(doc, out _));
             }
-            Wf.EmittedFile(flow, parsed.Length);
+            Wf.EmittedFile(flow, count);
             return patterns.ToArray();
         }
 
@@ -176,19 +163,16 @@ namespace Z0
         {
             var parser = XedParser.Service;
             var sources = Source.FunctionFiles.View;
-            var kSrc = sources.Length;
-
-            var ruleDir = Config.Target + FS.folder("rules");
-            var funcpath = Config.Target + FS.file("functions", FS.Txt);
-            using var funcwriter = funcpath.Writer();
-
-            for(var i=0; i<kSrc; i++)
+            var count = sources.Length;
+            var ruleDir = RuleTarget();
+            using var writer = FunctionTarget().Writer();
+            for(var i=0; i<count; i++)
             {
                 ref readonly var src = ref skip(sources,i);
                 var functions = parser.ParseFunctions(src);
                 if(functions.Length != 0)
                 {
-                    EmitFunctions(functions, funcwriter);
+                    EmitFunctions(functions, writer);
                     EmitRulesets(functions, ruleDir);
                 }
             }
@@ -222,14 +206,14 @@ namespace Z0
         {
             for(var i=0; i<src.Length; i++)
             {
-                ref readonly var f = ref src[i];
+                ref readonly var f = ref skip(src,i);
                 var body = f.Terms;
                 if(body.Length != 0)
                 {
                     writer.WriteLine(f.Description);
                     writer.WriteLine(Separator);
 
-                    for(var j = 0; j < body.Length; j++)
+                    for(var j = 0; j <body.Length; j++)
                         writer.WriteLine(body[j]);
 
                     if(i != src.Length - 1)
@@ -237,6 +221,10 @@ namespace Z0
                 }
             }
         }
+
+        static RenderPattern<object,object> IMPLY => "{0} -> {1}";
+
+        static RenderPattern<object,object> OR => "{0} | {1}";
 
         [Op]
         uint EmitRuleset(in XedRuleSet ruleset, StreamWriter writer)
@@ -256,7 +244,7 @@ namespace Z0
                         var opcount = SourceParser.ParseOperands(left, out var _operands);
                         var lhs = RP.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
                         var rhs = line.RightOfFirst(IMPLIES);
-                        writer.WriteLine(string.Format("{0} -> {1}", lhs, rhs));
+                        writer.WriteLine(IMPLY.Format(lhs,rhs));
                     }
                     else if(line.Contains(Bar))
                     {
@@ -264,7 +252,7 @@ namespace Z0
                         var opcount = SourceParser.ParseOperands(left, out var _operands);
                         var lhs = RP.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
                         var rhs = line.RightOfFirst(Bar);
-                        writer.WriteLine(string.Format("{0} | {1}", lhs, rhs));
+                        writer.WriteLine(OR.Format(lhs,rhs));
                     }
                     else if(line.Contains(SEQUENCE))
                     {
@@ -275,7 +263,7 @@ namespace Z0
                         while(k < kTerms - 1)
                         {
                             line = skip(content, ++k).Format().Trim();
-                            if(text.blank(line))
+                            if(blank(line))
                                 break;
 
                             writer.WriteLine(string.Format("{0,-2}: {1}", i++, line));
@@ -293,8 +281,22 @@ namespace Z0
         void EmitMnemonics(XedSummaryRow[] src)
         {
             var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
-            var dst = Root + FS.file("mnemonics", FS.Csv);
-            dst.Overwrite(upper);
+            MnemonicTarget().Overwrite(upper);
         }
+
+        FS.FilePath InstructionTarget(FS.FileName file)
+            => TargetDir()  + FS.folder("instructions") + file;
+
+        FS.FilePath MnemonicTarget()
+            => TargetDir() + FS.file("mnemonics", FS.Csv);
+
+        FS.FolderPath RuleTarget()
+            => TargetDir() + FS.folder("rules");
+
+        FS.FilePath FunctionTarget()
+            => TargetDir() + FS.file("functions", FS.Txt);
+
+        FS.FilePath SummaryTarget()
+            => TargetDir() + FS.file("summary", FS.Csv);
     }
 }

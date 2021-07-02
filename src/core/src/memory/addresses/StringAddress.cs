@@ -16,6 +16,16 @@ namespace Z0
     public readonly struct StringAddress : IAddressable
     {
         [MethodImpl(Inline), Op]
+        public static uint length(StringAddress src)
+        {
+            ref var c = ref firstchar(src);
+            var counter = 0u;
+            while(c != 0)
+                c = seek(c, counter++);
+            return counter - 1;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint render(StringAddress src, ref uint i, Span<char> dst)
         {
             var i0=i;
@@ -43,7 +53,7 @@ namespace Z0
         public uint Length
         {
             [MethodImpl(Inline)]
-            get => api.length(this);
+            get => length(this);
         }
 
         public uint Hash

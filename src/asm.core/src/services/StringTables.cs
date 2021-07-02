@@ -42,7 +42,7 @@ namespace Z0
             var count = src.Length;
             var offset = 0u;
             var offsets = alloc<T>(count);
-            var chars = alloc<char>(TextTools.length(src));
+            var chars = alloc<char>(text.length(src));
             ref var joined = ref first(chars);
             ref var cuts = ref first(offsets);
             var j = 0ul;

@@ -267,7 +267,7 @@ namespace Z0
         public static Outcome parse(string src, out BinaryCode dst)
         {
             var result = Outcome.Success;
-            var count = TextTools.length(src);
+            var count = text.length(src);
             if(count % 2 != 0)
                 return (false, $"An even number of nibbles was not provided in the source text {src}");
             var size = count/2;

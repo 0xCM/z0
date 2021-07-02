@@ -8,38 +8,59 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmTextBuilder;
+    using static AsmCaseKinds;
 
-    [ApiComplete]
-    public readonly struct OpCodeTestCases
+    partial class AsmCases
     {
-        const AsmTextKind CodeSig = AsmTextKind.OpCode | AsmTextKind.Sig;
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N0 n)
+            => opcode("24 ib | AND AL, imm8 | (AL/AX/EAX/RAX, imm8/16/32)");
 
-        const AsmTextKind CodeSigEnc = CodeSig | AsmTextKind.EncodingRule;
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N1 n)
+            => opcode("25 iw | AND AX, imm16 | (AL/AX/EAX/RAX, imm8/16/32)");
 
-        [MethodImpl(Inline)]
-        public static AsmText<byte> And(N0 n)
-            => asmtext("24 ib | AND AL, imm8 | (AL/AX/EAX/RAX, imm8/16/32)", CodeSigEnc);
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N2 n)
+            => opcode("25 id | AND EAX, imm32 | (AL/AX/EAX/RAX, imm8/16/32)");
 
-        [MethodImpl(Inline)]
-        public static AsmText<byte> And(N1 n)
-            => asmtext("25 iw | AND AX, imm16 | (AL/AX/EAX/RAX, imm8/16/32)", CodeSigEnc);
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N3 n)
+            => opcode(And3);
 
-        [MethodImpl(Inline)]
-        public static AsmText<byte> And(N2 n)
-            => asmtext("25 id | AND EAX, imm32 | (AL/AX/EAX/RAX, imm8/16/32)", CodeSigEnc);
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N4 n)
+            => opcode(And4);
 
-        [MethodImpl(Inline)]
-        public static AsmText<byte> And(N3 n)
-            => asmtext("REX.W + 25 id | AND RAX, imm32 | (AL/AX/EAX/RAX, imm8/16/32)", CodeSigEnc);
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N5 n)
+            => opcode(And5);
 
-        [MethodImpl(Inline)]
-        public static AsmText<byte> And(N4 n)
-            => asmtext("80 /4 ib | AND r/m8, imm8 | (ModRM:r/m (r, w), imm8/16/32)", CodeSigEnc);
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N6 n)
+            => opcode(And6);
 
-        [MethodImpl(Inline)]
-        public static AsmText<byte> And(N5 n)
-            => asmtext("REX + 80 /4 ib | AND r/m8, imm8 | (ModRM:r/m (r, w), imm8/16/32)", CodeSigEnc);
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N7 n)
+            => opcode(And7);
+
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N8 n)
+            => opcode(And8);
+
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N9 n)
+            => opcode(And9);
+
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> and(N10 n)
+            => opcode(And10);
+
+        public const string And3 = "REX.W + 25 id | AND RAX, imm32 | (AL/AX/EAX/RAX, imm8/16/32)";
+
+        public const string And4 = "80 /4 ib | AND r/m8, imm8 | (ModRM:r/m (r, w), imm8/16/32)";
+
+        public const string And5 = "REX + 80 /4 ib | AND r/m8, imm8 | (ModRM:r/m (r, w), imm8/16/32)";
 
         public const string And6 = "81 /4 iw | AND r/m16, imm16 | (ModRM:r/m (r, w), imm8/16/32)";
 
@@ -73,5 +94,4 @@ namespace Z0.Asm
 
         public const string And21 = "REX.W + 23 /r | AND r64, r/m64 | (ModRM:reg (r, w), ModRM:r/m (r))";
     }
-
 }

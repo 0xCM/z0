@@ -8,16 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    partial struct TextTools
+    partial class text
     {
         [MethodImpl(Inline), Op]
-        public static bool begins(string src, char match)
-            => length(src) != 0 && @char(src) == match;
-
-        [MethodImpl(Inline), Op]
-        public static bool begins(string src, string match)
-            => length(src) != 0 && src.StartsWith(match);
+        public static TextProp prop<T>(Name name, T value)
+            => new TextProp(name, string.Format("{0}", value));
     }
 }

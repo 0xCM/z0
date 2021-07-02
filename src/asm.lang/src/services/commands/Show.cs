@@ -92,26 +92,6 @@ namespace Z0.Asm
             return true;
         }
 
-        [CmdOp(".xed-chips")]
-        Outcome ShowXedChips(CmdArgs args)
-        {
-            var xed = Wf.IntelXed();
-            var outcome = xed.LoadChipMap(out var map);
-            if(outcome.Fail)
-                Error(outcome.Message);
-            else
-            {
-                var kinds = map.Kinds;
-                var chips = map.Chips;
-                foreach(var c in chips)
-                {
-                    var mapped = map[c];
-                    var delimited = mapped.Delimit(Chars.Comma).Format();
-                    Row(string.Format("{0}:{1}", c, delimited));
-                }
-            }
-            return outcome;
-        }
 
         [CmdOp(".inst-info")]
         Outcome ShowInstInfo(CmdArgs args)

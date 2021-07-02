@@ -1,24 +1,26 @@
 //-----------------------------------------------------------------------------
 // Copyright   : Intel Corporation, 2020
 // License     : Apache
-// Source      : xed-operand-storage.h
+// Source      : xed-cpuid-bit-enum.h
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     partial struct XedModels
     {
         [SymbolSource(xed)]
-        public enum EffectiveWidth : byte
+        public enum Mode : sbyte
         {
-            None = 0,
+            [Symbol("mode16")]
+            Mode16 = 0,
 
-            W8 = 8,
+            [Symbol("mode32")]
+            Mode32 = 1,
 
-            W16 = 16,
+            [Symbol("mode64")]
+            Mode64 = 2,
 
-            W32 = 32,
-
-            W64 = 64
+            [Symbol("not64")]
+            Not64 = ~Mode64
         }
     }
 }

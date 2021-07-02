@@ -28,7 +28,7 @@ namespace Z0
             dst = Index<char[]>.Empty;
             var result = Outcome.Success;
             var input = span(src);
-            var count = TextTools.length(src);
+            var count = text.length(src);
             var counter = 0u;
             var buckets = list<char[]>();
             var bucket = list<char>();

@@ -28,7 +28,9 @@ namespace Z0
 
         [Op]
         public unsafe static ResultCode from(Exception e)
-            => (uint)text.intern(e.ToString());
+        {
+            return new ResultCode(uint.MaxValue);
+        }
     }
 
     public readonly struct ResultCode

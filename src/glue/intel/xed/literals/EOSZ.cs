@@ -8,17 +8,25 @@ namespace Z0
     partial struct XedModels
     {
         [SymbolSource(xed)]
-        public enum EffectiveWidth : byte
+        public enum EOSZ : sbyte
         {
-            None = 0,
+            [Symbol("eosz8")]
+            W8 = 0,
 
-            W8 = 8,
+            [Symbol("eosz16")]
+            W16 = 1,
 
-            W16 = 16,
+            [Symbol("eosz32")]
+            W32 = 2,
 
-            W32 = 32,
+            [Symbol("eosz64")]
+            W64 = 3,
 
-            W64 = 64
+            [Symbol("not_eosz16")]
+            Not16 = ~W16,
+
+            [Symbol("eosznot64")]
+            Not64 = ~W64
         }
     }
 }

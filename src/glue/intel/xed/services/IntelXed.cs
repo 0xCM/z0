@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     public sealed class IntelXed : AppService<IntelXed>
     {
-        AsmCatalogArchive Archive;
+        const string dataset = "xed";
 
         XedChipIsaParser ChipIsaParser;
 
@@ -21,27 +21,58 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            Archive = new AsmCatalogArchive(Db.AsmCatalogRoot());
             ChipIsaParser = XedChipIsaParser.create(Wf);
             Workspace = Wf.AsmWorkspace();
         }
 
         public void EmitCatalog()
         {
+            ImportDir().Clear();
+
             ImportFormSummaries();
+            EmitChipMap();
             EmitFormDetails();
             EmitSymCatalog();
             var aspects = EmitFormAspects();
             Partition(aspects);
+
+            XedRules.create(Wf).Import();
         }
 
         public ReadOnlySpan<string> MnemonicNames()
             => IClasses().Storage.Select(x => x.Expr.Text);
 
         public Outcome LoadChipMap(out ChipMap dst)
+            => ChipIsaParser.Parse(ChipSourcePath(), out dst);
+
+        public Outcome EmitChipMap()
         {
-            var src = Workspace.DataSource("xed") + FS.file("xed-cdata", FS.Txt);
-            return ChipIsaParser.Parse(src, out dst);
+            const string RowFormat = "{0,-12} | {1,-24} | {2}";
+
+            var outcome = LoadChipMap(out var map);
+            if(outcome.Fail)
+                Error(outcome.Message);
+            else
+            {
+                var dst = ChipMapImportPath();
+                var emitting = Wf.EmittingFile(dst);
+                var counter = 0u;
+                var writer = dst.AsciWriter();
+                writer.WriteLine(string.Format(RowFormat, "Sequence", "ChipCode", "Isa"));
+                var kinds = map.Kinds;
+                var codes = map.Chips;
+                foreach(var code in codes)
+                {
+                    var mapped = map[code];
+                    foreach(var kind in mapped)
+                    {
+                        writer.WriteLine(string.Format(RowFormat, counter++ , code, kind));
+                    }
+                }
+                Wf.EmittedFile(emitting,counter);
+            }
+
+            return outcome;
         }
 
         public ReadOnlySpan<FormPartiton> Partition(Index<XedFormAspect> src)
@@ -70,11 +101,10 @@ namespace Z0.Asm
             var aspects = ComputeFormAspects();
             var count = (uint)aspects.Length;
             var buffer = alloc<XedFormAspect>(count);
-            var paths = new AsmCatalogArchive(Db.AsmCatalogRoot());
-            var path = paths.XedFormAspectPath();
+            var dst = FormAspectImportPath();
             var formatter = Tables.formatter<XedFormAspect>();
-            var emitting = Wf.EmittingTable<XedFormAspect>(path);
-            using var writer = path.Writer();
+            var emitting = Wf.EmittingTable<XedFormAspect>(dst);
+            using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0u; i<count; i++)
             {
@@ -82,7 +112,7 @@ namespace Z0.Asm
                 ref readonly var aspect = ref skip(aspects,i);
                 var value = aspect.Value;
 
-                if(TextTools.length(value) == 0)
+                if(text.length(value) == 0)
                     continue;
 
                 record.Index = i;
@@ -137,7 +167,7 @@ namespace Z0.Asm
        }
 
         public Index<XedFormDetail> EmitFormDetails()
-            => EmitFormDetails(Archive.XedFormDetailPath());
+            => EmitFormDetails(FormDetailImportPath());
 
         public Index<XedFormDetail> EmitFormDetails(FS.FilePath dst)
         {
@@ -167,12 +197,9 @@ namespace Z0.Asm
             return buffer;
         }
 
-        const string Subject = "xed";
-
         public FS.FilePath EmitSymIndex()
         {
-            var src = SymLiterals();
-            var dst = Archive.XedSymIndexPath();
+            var dst = SymbolImportPath();
             EmitSymIndex(dst);
             return dst;
         }
@@ -219,8 +246,8 @@ namespace Z0.Asm
         public Symbols<IsaKind> IsaKinds()
             => Symbols.index<IsaKind>();
 
-        public Symbols<XedMachineMode> MachineModes()
-            => Symbols.index<XedMachineMode>();
+        public Symbols<XedModels.MachineMode> MachineModes()
+            => Symbols.index<XedModels.MachineMode>();
 
         public Symbols<OperandKind> OperandKinds()
             => Symbols.index<OperandKind>();
@@ -253,7 +280,7 @@ namespace Z0.Asm
             EmitSymbols<Extension>();
             EmitSymbols<IClass>();
             EmitSymbols<IsaKind>();
-            EmitSymbols<XedMachineMode>();
+            EmitSymbols<XedModels.MachineMode>();
             EmitSymbols<Nonterminal>();
             EmitSymbols<OperandKind>();
             EmitSymbols<OperandWidthType>();
@@ -262,10 +289,12 @@ namespace Z0.Asm
             EmitSymbols<RegId>();
             EmitSymbols<RegRole>();
             EmitSymbols<SizeIndicator>();
+            EmitSymbols<PointerWidth>();
+            EmitSymbols<EAMode>();
+            EmitSymbols<SAMode>();
+            EmitSymbols<Mode>();
+            EmitSymbols<EOSZ>();
         }
-
-        public FS.FilePath IDataSourcePath()
-            => Workspace.DataSource("xed") + FS.file("xed-idata", FS.Txt);
 
         public void ImportFormSummaries()
         {
@@ -339,9 +368,10 @@ namespace Z0.Asm
         void EmitSymbols<K>()
             where K : unmanaged, Enum
         {
-            EmitSymbols(Symbols.index<K>().View, Db.AsmCatalogPath(Subject,
-                FS.file(string.Format("{0}.{1}", Subject,  typeof(K).Name.ToLower()), FS.Csv)));
+            var dst = ImportPath(FS.file(string.Format("{0}.{1}", dataset,  typeof(K).Name.ToLower()), FS.Csv));
+            EmitSymbols(Symbols.index<K>().View, dst);
         }
+
 
         void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
             where K : unmanaged
@@ -357,10 +387,6 @@ namespace Z0.Asm
                 Wf.EmittedFile(flow, count);
             }
         }
-
-        const char CommentMarker = Chars.Hash;
-
-        const char FieldDelimiter = Chars.Space;
 
         IFormType ParseIForm(string src)
         {
@@ -530,5 +556,39 @@ namespace Z0.Asm
                 partition.Complete = true;
             }
         }
+
+        FS.FolderPath ImportDir()
+           => Workspace.ImportDir(dataset);
+
+        FS.FolderPath SourceDir()
+           => Workspace.DataSource(dataset);
+
+        FS.FilePath IDataSourcePath()
+            => SourceDir() + FS.file("xed-idata", FS.Txt);
+
+        FS.FilePath XedTableSourcePath()
+            => SourceDir() + FS.file("xed-tables", FS.Txt);
+
+        FS.FilePath ChipSourcePath()
+            =>  SourceDir() + FS.file("xed-cdata", FS.Txt);
+
+        FS.FilePath ChipMapImportPath()
+            => Workspace.ImportDir(dataset) + FS.file("xed.chip-map", FS.Csv);
+
+        FS.FilePath ImportPath(FS.FileName file)
+             => ImportDir() + file;
+
+        FS.FilePath FormDetailImportPath()
+            => ImportDir() + FS.file("xed.forms.details", FS.Csv);
+
+        FS.FilePath SymbolImportPath()
+            => ImportDir() + FS.file("xed.symbols", FS.Csv);
+
+        FS.FilePath FormAspectImportPath()
+            => Workspace.ImportTable<XedFormAspect>("xed");
+
+        const char CommentMarker = Chars.Hash;
+
+        const char FieldDelimiter = Chars.Space;
     }
 }

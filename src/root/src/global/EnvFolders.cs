@@ -13,15 +13,19 @@ namespace Z0
 
         public const string bin = nameof(bin);
 
+        public const string cmd = nameof(cmd);
+
         public const string builds = nameof(builds);
 
-        public const string build = "build";
+        public const string build = nameof(build);
 
         public const string cil = nameof(cil);
 
         public const string cildata = nameof(cil) + dot + data;
 
         public const string dotbuild = dot + build;
+
+        public const string dotcmd = dot + cmd;
 
         public const string docs = nameof(docs);
 
@@ -69,7 +73,7 @@ namespace Z0
 
         public const string output = nameof(output);
 
-        public const string dotoutput = dot + output;
+        public const string dotout = dot + output;
 
         public const string input = nameof(input);
 
@@ -136,5 +140,7 @@ namespace Z0
         public const string scripts = nameof(scripts);
 
         public const string datasets = nameof(datasets);
+
+        public const string imported = nameof(imported);
     }
 }

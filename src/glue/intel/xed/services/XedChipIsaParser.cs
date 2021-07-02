@@ -18,7 +18,7 @@ namespace Z0.Asm
         public Outcome Parse(FS.FilePath src, out ChipMap dst)
         {
             dst = default;
-
+            var flow = Wf.Running(string.Format("Parsing {0}", src.ToUri()));
             var chip = ChipCode.None;
             var chips = dict<ChipCode,ChipIsaKinds>();
             using var reader = src.AsciLineReader();
@@ -61,16 +61,20 @@ namespace Z0.Asm
                             Wf.Row(string.Format("{0}: {1}", chip, kinds.Delimit(Chars.Comma)));
                     }
                 }
-
             }
 
             var allChips = ChipCodes().ToArray();
-            var buffer = new Index<ChipCode,IsaKinds>(alloc<IsaKinds>(allChips.Length));
-            for(var i=0; i<allChips.Length; i++)
+            var count = allChips.Length;
+            Wf.Ran(flow, string.Format("Parsed {0} chip codes", count));
+
+            var buffer = new Index<ChipCode,IsaKinds>(alloc<IsaKinds>(count));
+            for(var i=0; i<count; i++)
             {
                 var _code = (ChipCode)i;
                 if(chips.TryGetValue(_code, out var entry))
                     buffer[_code] = entry.Kinds;
+                else
+                    buffer[_code] = IsaKinds.Empty;
             }
             dst = new ChipMap(allChips,buffer);
             return true;

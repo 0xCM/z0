@@ -41,15 +41,6 @@ namespace Z0.Asm
             runner.RunToolPs(llvm.ml, "lex");
         }
 
-        void ShowCases()
-        {
-            var cases = AsmCases.create(Wf);
-            var mov = cases.MovCases().View;
-            var count = mov.Length;
-            for(var i=0; i<count; i++)
-                Wf.Row(skip(mov,i).Format());
-        }
-
         public static MsgPattern<T> DispatchingCmd<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";
 
@@ -154,8 +145,8 @@ namespace Z0.Asm
 
         public void RunOldXedWf()
         {
-            var xed = XedWf.create(Wf);
-            xed.Run();
+            var xed = XedRules.create(Wf);
+            xed.Import();
         }
 
         public void UnpackRespack()
@@ -646,10 +637,6 @@ namespace Z0.Asm
             parser.ParseDisassembly(src,dst);
         }
 
-        public void RunAsmCases()
-        {
-            var opcode = AsmCases.PINSRB.OpCodeSig();
-        }
 
         Index<AsciCode> IndexIdentifiers()
         {

@@ -67,15 +67,6 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static AsmSigExpr sig(string src)
-        {
-            if(sig(src, out var dst))
-                return dst;
-            else
-                return AsmSigExpr.Empty;
-        }
-
-        [Op]
         public static Outcome form(string src, out AsmFormExpr dst)
         {
             dst = AsmFormExpr.Empty;

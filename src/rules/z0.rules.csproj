@@ -12,6 +12,8 @@
     <ProjectReference Include="$(Bit)" />
     <ProjectReference Include="$(SymCore)" />
     <ProjectReference Include="$(Hex)" />
+    <ProjectReference Include="$(Text)" />
+
   </ItemGroup>
 
 </Project>

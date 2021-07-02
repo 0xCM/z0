@@ -31,7 +31,7 @@ namespace Z0
             Name = name;
             ReturnType = returns;
             Terms = terms;
-            Description =  text.concat("# ", SourceFile, Chars.FSlash, XedSourceMarkers.RuleHeader(Name), ReturnType);
+            Description =  string.Concat("# ", SourceFile, Chars.FSlash, XedSourceMarkers.RuleHeader(Name), ReturnType);
         }
     }
 }

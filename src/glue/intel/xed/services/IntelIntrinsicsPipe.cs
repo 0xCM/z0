@@ -13,47 +13,57 @@ namespace Z0.Asm
     using static XedModels;
     using static IntrinsicsModels;
 
-    public class IntelIntrinsics  : AppService<IntelIntrinsics>
+    public class IntelIntrinsicsPipe  : AppService<IntelIntrinsicsPipe>
     {
-        const string DocName = "intrinsics";
+        const string dataset = "intrinsics";
 
-        public ReadOnlySpan<Intrinsic> Emit()
-            => Emit(Db.CatalogDir("asm") + FS.folder("intrinsics"));
+        AsmWorkspace Workspace;
 
-        static FS.FolderName AlgFolder
-            => FS.folder("algorithms");
-
-        FS.FolderPath AlgDir(FS.FolderPath root)
-            => root + AlgFolder;
-
-        public ReadOnlySpan<Intrinsic> Emit(FS.FolderPath dst)
+        protected override void Initialized()
         {
-            var refpath = dst + FS.file(DocName, FS.Xml);
-            var src = doc();
-            refpath.Overwrite(src.Content);
-            var parsed = Parse(src);
-            var elements = parsed.View;
-            var count = elements.Length;
-            var logpath = dst + FS.file(DocName, FS.Log);
-            var flow = Wf.EmittingFile(logpath);
-            using var writer = logpath.Writer();
-            for(var i=0; i<count; i++)
-                writer.WriteLine(skip(elements,i).Format());
-            Wf.EmittedFile(flow, count);
+            Workspace = Wf.AsmWorkspace();
+        }
 
-            var algodir = AlgDir(dst);
-            algodir.Clear();
 
-            EmitSummary(parsed, dst + FS.file(DocName, FS.Csv));
-            EmitPseudoHeader(parsed, dst + FS.file(DocName, FS.ext("h")));
-            EmitAlogrithms(parsed, algodir);
+        public ReadOnlySpan<Intrinsic> Import()
+        {
+            //algDst.Clear();
+            var parsed = Parse();
+            EmitLog(parsed);
+            EmitTable(parsed);
+            EmitHeader(parsed);
+            EmitAlogrithms(parsed);
             return parsed;
         }
 
-        void EmitAlogrithms(ReadOnlySpan<Intrinsic> src, FS.FolderPath dst)
+        XmlDoc XmlSouceDoc()
+        {
+            var src = Workspace.DataSource(dataset) + FS.file("intel-intrinsics", FS.Xml);
+            return text.xml(src.ReadUtf8());
+        }
+
+        ReadOnlySpan<Intrinsic> Parse()
+            => Parse(XmlSouceDoc());
+
+        void EmitLog(ReadOnlySpan<Intrinsic> src)
         {
             var count = src.Length;
-            using var unknown =  (dst + FS.file("None",FS.Alg)).Writer();
+            var dst = Workspace.ImportDir(dataset) + FS.file(dataset, FS.Log);
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+                writer.WriteLine(skip(src,i).Format());
+            Wf.EmittedFile(flow, count);
+        }
+
+        void EmitAlogrithms(ReadOnlySpan<Intrinsic> src)
+        {
+            var dir = Workspace.ImportDir("intrinsics.alg");
+            dir.Clear();
+            var count = src.Length;
+
+            var flow = Wf.Running(string.Format("Emitting algorithms for {0} intrinsics to {1}", count, dir));
+            using var unknown =  (dir + FS.file("None",FS.Alg)).Writer();
             var xed = IFormType.None;
             var writer = default(StreamWriter);
             var path = FS.FilePath.Empty;
@@ -68,7 +78,7 @@ namespace Z0.Asm
                     if(xed == 0)
                     {
                         xed = ix.xed;
-                        path = dst + FS.file(xed.ToString(), FS.Alg);
+                        path = dir + FS.file(xed.ToString(), FS.Alg);
                         writer = path.Writer(true);
                     }
                     else
@@ -78,7 +88,7 @@ namespace Z0.Asm
                         {
                             writer.Flush();
                             writer.Dispose();
-                            path = dst + FS.file(xed.ToString(), FS.Alg);
+                            path = dir + FS.file(xed.ToString(), FS.Alg);
                             writer = path.Writer(true);
                         }
                     }
@@ -96,16 +106,18 @@ namespace Z0.Asm
                 writer.Flush();
                 writer.Dispose();
             }
+
+            Wf.Ran(flow, string.Format("Emitted {0} algoirthms", count));
         }
 
-        void EmitPseudoHeader(ReadOnlySpan<Intrinsic> src, FS.FilePath dst)
+        void EmitHeader(ReadOnlySpan<Intrinsic> src)
         {
+            var dst = Workspace.ImportDir(dataset) + FS.file(dataset, FS.H);
             var flow = Wf.EmittingFile(dst);
             var count = src.Length;
             using var writer = dst.Writer();
             for(var i=0; i<count; i++)
                 writer.WriteLine(string.Format("{0};", sig(skip(src,i))));
-
             Wf.EmittedFile(flow, count);
         }
 
@@ -124,51 +136,30 @@ namespace Z0.Asm
             }
         }
 
-        void EmitSummary(ReadOnlySpan<Intrinsic> src, FS.FilePath dst)
+        void EmitTable(ReadOnlySpan<Intrinsic> src)
         {
-            const string Pattern = "{0,-100} | {1,-48} | {2}";
+            var dst = Workspace.ImportDir(dataset) + FS.file("intrinsics", FS.Csv);
+            const string Pattern = "{0,-54} | {1,-54} | {2}";
             var flow = Wf.EmittingFile(dst);
             var count = src.Length;
+            var log = Workspace.ImportDir(dataset) + FS.file("unmatched", FS.Log);
+            using var unmatched = log.Writer();
             using var writer = dst.Writer();
-            writer.WriteLine(string.Format(Pattern, "Signature", "Intruction", "XedIForm"));
+            writer.WriteLine(string.Format(Pattern, "Intruction", "XedIForm", "Signature"));
             for(var i=0; i<count; i++)
             {
                 ref readonly var intrinsic = ref skip(src,i);
-                if(instruction(intrinsic, out var  ix))
-                    writer.WriteLine(string.Format(Pattern,
-                            sig(intrinsic), string.Format("{0} {1}", ix.name, ix.form), ix.xed));
+                if(instruction(intrinsic, out var ix))
+                    writer.WriteLine(string.Format(Pattern, string.Format("{0} {1}", ix.name, ix.form), ix.xed, sig(intrinsic)));
                 else
-                    writer.WriteLine(string.Format(Pattern, sig(intrinsic), EmptyString, EmptyString));
+                    unmatched.WriteLine(sig(intrinsic));
             }
 
             Wf.EmittedFile(flow, count);
         }
 
-        public static XmlDoc doc()
-            => text.xml(Resources.utf8(AsmData.Assets.IntelIntrinsicsXml()));
 
-        public Index<Intrinsic> Parse()
-            => Parse(doc());
-
-        static Intrinsic create()
-        {
-            var dst = new Intrinsic();
-            dst.tech = EmptyString;
-            dst.name = EmptyString;
-            dst.content = EmptyString;
-            dst.types = new InstructionTypes();
-            dst.CPUID = EmptyString;
-            dst.category = EmptyString;
-            dst.@return = Return.Empty;
-            dst.parameters = new Parameters();
-            dst.description = EmptyString;
-            dst.operation = new Operation(list<TextLine>());
-            dst.instructions = new Instructions();
-            dst.header = EmptyString;
-            return dst;
-        }
-
-        public Index<Intrinsic> Parse(XmlDoc src)
+        ReadOnlySpan<Intrinsic> Parse(XmlDoc src)
         {
             const ushort max = 7500;
             var entries = new Intrinsic[max];
@@ -280,6 +271,24 @@ namespace Z0.Asm
             element.form = reader[nameof(Instruction.form)];
             element.xed = Enums.parse(reader[nameof(Instruction.xed)], IFormType.None);
             dst.Add(element);
+        }
+
+        static Intrinsic create()
+        {
+            var dst = new Intrinsic();
+            dst.tech = EmptyString;
+            dst.name = EmptyString;
+            dst.content = EmptyString;
+            dst.types = new InstructionTypes();
+            dst.CPUID = EmptyString;
+            dst.category = EmptyString;
+            dst.@return = Return.Empty;
+            dst.parameters = new Parameters();
+            dst.description = EmptyString;
+            dst.operation = new Operation(list<TextLine>());
+            dst.instructions = new Instructions();
+            dst.header = EmptyString;
+            return dst;
         }
     }
 }

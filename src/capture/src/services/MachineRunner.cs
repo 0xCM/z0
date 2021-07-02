@@ -74,7 +74,7 @@ namespace Z0
                 }
 
                 if(options.EmitIntrinsicsInfo)
-                    Emitted(Wf.IntelIntrinsics().Emit());
+                    Emitted(Wf.IntelIntrinsicsPipe().Import());
 
                 if(options.EmitSymbolicLiterals)
                     Emitted(Wf.Symbolism().EmitLiterals());

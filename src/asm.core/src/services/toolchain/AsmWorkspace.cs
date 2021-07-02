@@ -12,6 +12,12 @@ namespace Z0.Asm
 
     public readonly struct AsmWorkspace : IFileArchive
     {
+        const string dumpbin = nameof(dumpbin);
+
+        const string instructions = nameof(instructions);
+
+        const string analysis = nameof(analysis);
+
         [MethodImpl(Inline)]
         public static AsmWorkspace create(FS.FolderPath root)
             => new AsmWorkspace(root);
@@ -25,25 +31,37 @@ namespace Z0.Asm
         }
 
         public FS.FolderPath Output()
-            => Root + FS.folder(".output");
+            => Root + FS.folder(dotout);
 
         public FS.FolderPath AsmSources()
             => Root + FS.folder("asm");
 
-        public FS.FolderPath Labs()
+        public FS.FolderPath AsmLabs()
             => AsmSources() + FS.folder(labs);
 
-        public FS.FolderPath Models()
+        public FS.FolderPath AsmModels()
             => AsmSources() + FS.folder(models);
 
-        public FS.FilePath SourceCode(string id, bool model)
-            => model ? Models() + FS.file(id, FS.Asm) : Labs() + FS.file(id, FS.Asm);
+        public FS.FilePath AsmSource(string id, bool model)
+            => model ? AsmModels() + FS.file(id, FS.Asm) : AsmLabs() + FS.file(id, FS.Asm);
 
         public FS.FolderPath DocRoot()
             => Root + FS.folder(docs);
 
         public FS.FolderPath DataRoot()
             => Root + FS.folder(data);
+
+        public FS.FolderPath ImportRoot()
+            => DataRoot() + FS.folder(imported);
+
+        public FS.FolderPath ImportDir(string id)
+            => ImportRoot() + FS.folder(id);
+
+        public FS.FilePath ImportPath(string id, FS.FileExt ext)
+            => ImportRoot() + FS.file(id,ext);
+
+        public FS.FilePath ImportPath(string dir, string id, FS.FileExt ext)
+            => ImportDir(dir) + FS.file(id,ext);
 
         public FS.FolderPath Datasets()
             => DataRoot() + FS.folder(datasets);
@@ -53,9 +71,6 @@ namespace Z0.Asm
 
         public FS.FolderPath Dataset(string id)
             => Datasets() + FS.folder(id);
-
-        public FS.FolderPath DumpBinOutDir()
-            => Output() + FS.folder("dumpbin") + FS.folder(output);
 
         public FS.FolderPath Bin()
             => Output() + FS.folder(bin);
@@ -71,7 +86,11 @@ namespace Z0.Asm
 
         public FS.FilePath Table<T>()
             where T : struct, IRecord<T>
-                => Tables() + FS.file(TableId.identify<T>().Format(), FS.Csv);
+                => Tables() + FS.file(TableId<T>(), FS.Csv);
+
+        public FS.FilePath ImportTable<T>(string dataset)
+            where T : struct, IRecord<T>
+                => ImportDir(dataset) + FS.file(TableId<T>(), FS.Csv);
 
         public FS.FilePath Script(string id)
             => Scripts() + FS.file(id, FS.Cmd);
@@ -92,7 +111,7 @@ namespace Z0.Asm
             => DataSources() + FS.folder(id);
 
         public FS.FilePath InstInfo(string id)
-            => Dataset("instructions") + FS.file(id,FS.Csv);
+            => Dataset(instructions) + FS.file(id,FS.Csv);
 
         public FS.FolderPath DocExtractDir(string docid)
             => DocExtracts() + FS.folder(docid);
@@ -107,19 +126,22 @@ namespace Z0.Asm
             => Disasm() + FS.folder("raw");
 
         public FS.FolderPath ImportedDisasm()
-            => Disasm() + FS.folder("imported");
+            => Disasm() + FS.folder(imported);
 
         public FS.FolderPath Analysis()
-            => Output() + FS.folder("analysis");
+            => Output() + FS.folder(analysis);
 
-        public FS.FolderPath Logs()
-            => Output() + FS.folder("log");
+        public FS.FolderPath OutLogs()
+            => Output() + FS.folder(logs);
+
+        public FS.FolderPath ImportLogs()
+            => ImportRoot() + FS.folder(logs);
 
         public FS.FolderPath Obj()
             => Output() + FS.folder(obj);
 
         public FS.FolderPath Control()
-            => Output() + FS.folder(".cmd");
+            => Output() + FS.folder(dotcmd);
 
         public FS.FolderPath External()
             => Root + FS.folder(external);
@@ -134,7 +156,7 @@ namespace Z0.Asm
             => Obj() + FS.file(id,FS.Obj);
 
         public FS.FilePath ListPath(string id)
-            => Lists() + FS.file(id, FS.ext("list.asm"));
+            => Lists() + FS.file(id, FS.AsmList);
 
         public FS.FilePath RawDisasmPath(string id, ToolId tool, FS.FileExt? ext = null)
             => RawDisasm() + FS.file(string.Format("{0}.{1}", id, tool), ext ?? FS.Asm);
@@ -147,7 +169,7 @@ namespace Z0.Asm
             var spec = new AsmToolchainSpec();
             spec.Assembler = assembler;
             spec.Disassembler = disassembler;
-            spec.AsmPath = SourceCode(id, model);
+            spec.AsmPath = AsmSource(id, model);
             spec.BinPath = BinPath(id);
             spec.ObjKind = ObjFileKind.win64;
             if(spec.ObjKind > ObjFileKind.bin)
@@ -158,5 +180,9 @@ namespace Z0.Asm
             spec.AsmBitMode = Bitness.b64;
             return spec;
         }
+
+        string TableId<T>()
+            where T : struct, IRecord<T>
+                => Z0.TableId.identify<T>().Identifier.Format();
     }
 }

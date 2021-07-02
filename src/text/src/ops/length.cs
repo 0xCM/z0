@@ -10,18 +10,8 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct TextTools
+    partial class text
     {
-        [MethodImpl(Inline), Op]
-        public static uint length(StringAddress src)
-        {
-            ref var c = ref firstchar(src);
-            var counter = 0u;
-            while(c != 0)
-                c = seek(c, counter++);
-            return counter - 1;
-        }
-
         /// <summary>
         /// Computes the combined length of the source entries
         /// </summary>

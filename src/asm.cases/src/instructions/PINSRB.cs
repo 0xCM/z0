@@ -8,24 +8,20 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmTextBuilder;
+    using static AsmCaseKinds;
 
     partial class AsmCases
     {
-        [ApiComplete]
-        public readonly struct PINSRB
-        {
-            [MethodImpl(Inline)]
-            public static AsmText<byte> OpCodeSig()
-                => asmtext("66 0F 3A 20 /r ib", AsmTextKind.OpCode);
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> pinsrb(N0 n, OpCodeCase kind)
+            => opcode("66 0F 3A 20 /r ib");
 
-            [MethodImpl(Inline)]
-            public static AsmText<byte> FormSig()
-                => asmtext("PINSRB xmm1, r32/m8, imm8", AsmTextKind.OpCode);
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> pinsrb(N0 n, SigCase kind)
+            => sig("PINSRB xmm1, r32/m8, imm8");
 
-            [MethodImpl(Inline)]
-            public static AsmText<byte> EncodingRule()
-                => asmtext("ModRM:reg (w) | ModRM:r/m (r) | imm8", AsmTextKind.EncodingRule);
-        }
+        [MethodImpl(Inline), Op]
+        public static AsmText<byte> pinsrb_rule(N0 n, RuleCase kind)
+            => rule("ModRM:reg (w) | ModRM:r/m (r) | imm8");
     }
 }

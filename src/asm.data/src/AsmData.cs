@@ -20,8 +20,6 @@ namespace Z0.Asm
 
             public Asset FeatureMnemonics() => Asset("feature-mnemonics.csv");
 
-            public Asset IntelIntrinsicsXml() => Asset("intel-intrinsics.xml");
-
             public Asset StanfordAsmCatalog() => Asset("stanford-asm-catalog.csv");
         }
     }

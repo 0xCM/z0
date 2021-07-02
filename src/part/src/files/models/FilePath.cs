@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
+    using System.Text;
 
     using static Root;
 
@@ -141,6 +142,15 @@ namespace Z0
 
             public string ReadText()
                 => File.ReadAllText(Name);
+
+            public string ReadUtf8()
+                => File.ReadAllText(Name, Encoding.UTF8);
+
+            public string ReadAsci()
+                => File.ReadAllText(Name, Encoding.ASCII);
+
+            public string ReadUnicode()
+                => File.ReadAllText(Name, Encoding.Unicode);
 
             public FilePath Timestamped()
                 => timestamped(this);

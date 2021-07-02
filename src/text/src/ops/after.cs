@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct TextTools
+    partial class text
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> after(ReadOnlySpan<char> src, char match)
@@ -17,6 +17,7 @@ namespace Z0
             var i =  src.IndexOf(match);
             return i != NotFound ? core.slice(src,i + 1) : default;
         }
+
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> after(ReadOnlySpan<char> src, ReadOnlySpan<char> match)

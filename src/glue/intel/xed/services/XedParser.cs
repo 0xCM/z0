@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -15,21 +16,7 @@ namespace Z0
 
     readonly struct XedParser
     {
-        [MethodImpl(Inline)]
-        static bool IsProp(in XedInstructionDoc src, int index, string Name)
-            => src[index].RowText.StartsWith(Name);
-
-        [MethodImpl(Inline)]
-        internal static string ExtractProp(TextRow src)
-            => src.RowText.RightOfFirst(M.PROP_DELIMITER).Trim();
-
-        [MethodImpl(Inline)]
-        internal static string ExtractProp(in XedInstructionDoc src, int index)
-            => ExtractProp(src[index]);
-
-        [Op]
-        internal static FS.FileName rulefile(FS.FileName src, string name)
-            => FS.file(text.format("{0}.{1}.{2}.{3}", "xed", "rules", src.WithoutExtension, name), FS.Txt);
+        public static XedParser Service => default;
 
         [Op]
         internal static string pattern(XedInstructionDoc src, string marker)
@@ -51,14 +38,14 @@ namespace Z0
         [Op]
         public static ref XedPattern[] patterns(in XedInstructionDoc src, out XedPattern[] dst)
         {
-            var patterns = root.list<XedPattern>();
+            var patterns = list<XedPattern>();
             var count = src.RowCount;
             var last = count - 1;
             for(var i=0; i<count; i++)
             {
-                if(IsProp(src, i, PATTERN) && i != last)
+                if(prop(src, i, PATTERN) && i != last)
                 {
-                    if(IsProp(src, i + 1, OPERANDS))
+                    if(prop(src, i + 1, OPERANDS))
                     {
                         var pattern = new XedPattern();
                         XedParser.ParsePattern(src, i, ref pattern);
@@ -112,20 +99,15 @@ namespace Z0
         public static TextBlock mod(in XedPattern src)
             => src.Parts.TryFind(x => x.StartsWith(MOD)).MapValueOrDefault(x => x.Unfence(Chars.LBracket, Chars.RBracket), EmptyString);
 
-        public static XedParser Service => default;
-
-        public XedDocRows LoadSource(FS.FilePath src)
-            => TextGrids.parse(src,TextDocFormat.Unstructured())
-                    .MapValueOrDefault(c => new XedDocRows(src, c.RowData), XedDocRows.Empty);
 
         public int ParseOperands(ReadOnlySpan<char> src, out Span<string> dst)
         {
-            var operands = root.list<string>();
+            var operands = list<string>();
             var length = src.Length;
             var current = EmptyString;
             for(var i=0; i<length; i++)
             {
-                ref readonly var c = ref skip(src,i);
+                ref readonly var c = ref core.skip(src, i);
                 if(Char.IsWhiteSpace(c))
                 {
                     if(text.nonempty(current))
@@ -147,23 +129,23 @@ namespace Z0
 
         public XedInstructionDoc ParseInstruction(XedDocRows src, in int idxStart, ref int ix)
         {
-            var rows = root.list<TextRow>();
+            var rows = list<TextRow>();
             var parsing = false;
             var count = src.RowCount;
             for(var i = idxStart; i<count; i++, ix++)
             {
                 var row = src[i];
 
-                if(Skip(row))
+                if(skip(row))
                     continue;
 
-                if(IsRightDelimiter(row))
+                if(rightDelimiter(row))
                 {   --ix;
                     break;
                 }
 
 
-                if(IsLeftDelimiter(row))
+                if(leftDelimiter(row))
                     parsing = true;
                 else if(parsing)
                     rows.Add(row);
@@ -172,61 +154,66 @@ namespace Z0
             return new XedInstructionDoc(rows.ToArray());
         }
 
-        XedInstructionDoc[] ParseInstructions(XedDocRows data, int ix)
+        uint ParseInstructions(XedDocRows data, List<XedInstructionDoc> dst)
         {
-            var dst = root.list<XedInstructionDoc>();
+            var counter = 0u;
             for(var i=0; i<data.RowCount; i++)
             {
                 var parsed = ParseInstruction(data, ++i, ref i);
                 if(parsed.IsNonEmpty)
+                {
                     dst.Add(parsed);
+                    counter++;
+                }
             }
-            return dst.ToArray();
+            return counter;
         }
 
-        public XedInstructionDoc[] ParseInstructions(FS.FilePath src)
+        public ReadOnlySpan<XedInstructionDoc> ParseInstructions(FS.FilePath src)
         {
-            var data = LoadSource(src);
-            for(var i=0; i<data.RowCount; i++)
+            var dst = list<XedInstructionDoc>();
+            var rows = LoadSource(src);
+            var count = rows.RowCount;
+            for(var i=0; i<count; i++)
             {
-                if(data[i].Format().ContainsAny(Instructions))
-                    return ParseInstructions(data, i);
+                ref readonly var row = ref rows[i];
+                if(row.Format().ContainsAny(Instructions))
+                {
+                    ParseInstructions(rows, dst);
+                    return dst.ViewDeposited();
+                }
+                // if(data[i].Format().ContainsAny(Instructions))
+                //     return ParseInstructions(data, i);
             }
-            return memory.array<XedInstructionDoc>();
+            return array<XedInstructionDoc>();
         }
-
-        static void Advance(ref int index)
-            => ++index;
-
-        static void Retreat(ref int index)
-            => --index;
 
         XedRuleSet ParseFunction(XedDocRows rows, ref int ix)
         {
             var title = rows[ix].RowText.LeftOfFirst(RuleMarker);
-            var body = root.list<string>();
+            var body = list<string>();
             var first = ix;
             for(var i = ix; i<rows.RowCount; i++)
             {
                 ref readonly var row = ref rows[ix];
-                var isHeader = Contains(row, RuleMarker);
+                var isHeader = contains(row, RuleMarker);
                 if(isHeader)
                 {
                     if(i != first)
                     {
-                        Retreat(ref ix);
+                        prior(ref ix);
                         break;
                     }
                     else
                     {
-                        Advance(ref ix);
+                        next(ref ix);
                         continue;
                     }
                 }
 
-                Advance(ref ix);
+                next(ref ix);
 
-                if(IsComment(row))
+                if(comment(row))
                     continue;
 
                 if(IsEmpty(row))
@@ -244,38 +231,61 @@ namespace Z0
 
         public XedRuleSet[] ParseFunctions(FS.FilePath src)
         {
-            var dst = root.list<XedRuleSet>();
+            var dst = list<XedRuleSet>();
             var data = LoadSource(src);
             var count = data.RowCount;
             for(var i=0; i<count; i++)
             {
                 var row = data[i];
-                if(Contains(data[i], RuleMarker))
+                if(contains(data[i], RuleMarker))
                     dst.Add(ParseFunction(data, ref i));
             }
 
             return dst.ToArray();
         }
 
-        bool IsLeftDelimiter(TextRow src)
+        static XedDocRows LoadSource(FS.FilePath src)
+            => TextGrids.parse(src,TextDocFormat.Unstructured()).MapValueOrDefault(c => new XedDocRows(src, c.RowData), XedDocRows.Empty);
+
+        static void next(ref int index)
+            => ++index;
+
+        static void prior(ref int index)
+            => --index;
+
+        static string ExtractProp(TextRow src)
+            => src.RowText.RightOfFirst(M.PROP_DELIMITER).Trim();
+
+        static string ExtractProp(in XedInstructionDoc src, int index)
+            => ExtractProp(src[index]);
+
+        static bool leftDelimiter(TextRow src)
             => src.RowText.Contains(FuncBodyBegin);
 
-        bool IsRightDelimiter(TextRow src)
+        static bool rightDelimiter(TextRow src)
             => src.RowText.Contains(FuncBodyEnd);
 
-        bool IsComment(TextRow src)
+        static bool comment(TextRow src)
             => src.RowText.StartsWith("#");
 
-        bool IsEmpty(TextRow src)
+        static bool IsEmpty(TextRow src)
             => text.blank(src.RowText);
 
-        bool IsSeqHeader(TextRow src)
+        static bool seqheader(TextRow src)
             => src.RowText.StartsWith(SEQUENCE);
 
-        bool Contains(TextRow src, string substring)
+        static bool contains(TextRow src, string substring)
             => src.RowText.ContainsAny(substring);
 
-        bool Skip(TextRow src)
-            => IsComment(src) || IsEmpty(src);
+        static bool skip(TextRow src)
+            => comment(src) || IsEmpty(src);
+
+        [MethodImpl(Inline)]
+        static bool prop(in XedInstructionDoc src, int index, string Name)
+            => src[index].RowText.StartsWith(Name);
+
+        [Op]
+        static FS.FileName rulefile(FS.FileName src, string name)
+            => FS.file(text.format("{0}.{1}.{2}.{3}", "xed", "rules", src.WithoutExtension, name), FS.Txt);
     }
 }
