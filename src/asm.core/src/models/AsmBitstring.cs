@@ -11,6 +11,9 @@ namespace Z0.Asm
 
     using api = AsmBitstrings;
 
+    /// <summary>
+    /// Defines a sequence of bits that specifies an instruction encoding
+    /// </summary>
     public readonly struct AsmBitstring
     {
         readonly TextBlock Data {get;}

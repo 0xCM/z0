@@ -49,7 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static void ThrowEmptySpanError()
-            => sys.@throw($"The span, it is empty");
+            => Errors.@throw($"The span, it is empty");
 
         [Op]
         public static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

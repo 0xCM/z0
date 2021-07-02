@@ -10,17 +10,10 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct bit
+    partial class XTend
     {
-
-
-        /// <summary>
-        /// Computes c := ~ (a & b)
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline), Nand]
-        public static bit nand(bit a, bit b)
-            => new bit(!(a.State & b.State));
+        [MethodImpl(Inline), Op]
+        public static unsafe Span<byte> Bytes(this ushort src)
+            => bytes(src);
     }
 }

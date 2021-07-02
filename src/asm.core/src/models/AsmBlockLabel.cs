@@ -9,6 +9,9 @@ namespace Z0.Asm
 
     using static Root;
 
+    /// <summary>
+    /// Represents a syntactically-valid label
+    /// </summary>
     public readonly struct AsmBlockLabel : IAsmLabel
     {
         public Identifier Name {get;}

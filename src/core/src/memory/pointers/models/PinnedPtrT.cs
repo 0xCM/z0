@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static core;
 
     public unsafe readonly struct PinnedPtr<T> : IDisposable
         where T : unmanaged

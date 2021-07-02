@@ -52,6 +52,10 @@ namespace Z0
             => Errors.@throw(new Exception($"The size {actual} is not aligned with {expect}:{FormatCallsite(caller,file,line)}"));
 
 
+        [MethodImpl(Inline), Op]
+        public static void ThrowEmptySpan()
+            => Errors.@throw($"The span, it is empty");
+
         const string Unknown = "???";
 
         const int UnknownInt = -1;
