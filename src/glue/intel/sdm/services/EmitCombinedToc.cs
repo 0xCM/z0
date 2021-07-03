@@ -10,25 +10,31 @@ namespace Z0.Asm
 
     partial class IntelSdmProcessor
     {
-        public void CreateCombinedToc()
+        Outcome EmitCombinedToc()
         {
-            var specs = LoadSplitSpecs();
-            var count = specs.Length;
-            var paths = span<FS.FilePath>(count);
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var spec = ref skip(specs,i);
-                if(spec.Unit.Contains("TOC"))
-                    seek(paths, counter++) = DocExtractPath(spec.Unit, FS.Txt);
-            }
+            var result = Outcome.Success;
+            var src = IndividualTocPaths();
+            if(src.IsEmpty)
+                return false;
 
-            var src = slice(paths,0,counter);
             var dst = CombinedTocPath();
-            iter(src, x => Wf.Row(x));
             var flow = Wf.Running(string.Format("Creating combined toc from {0} source files", src.Length));
             DocServices.CombineDocs(src, dst);
             Wf.Ran(flow);
+            return result;
         }
+
+        static bool IsTocPart(FS.FilePath src)
+        {
+            var f = src.FileName.Format();
+            if(src.Ext == FS.Txt)
+            {
+                var name = src.WithoutExtension.Format();
+                if(name.Contains(toc) && name.EndsWithDigit())
+                    return true;
+            }
+            return false;
+        }
+
     }
 }

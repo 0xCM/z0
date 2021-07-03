@@ -24,6 +24,18 @@ namespace Z0
             Data = src;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !Data.IsEmpty;
+        }
+
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]

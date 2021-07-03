@@ -130,6 +130,12 @@ namespace Z0
             get => new Outcome(true);
         }
 
+        public static Outcome Failure
+        {
+            [MethodImpl(Inline)]
+            get => new Outcome(false);
+        }
+
         public static Outcome Empty
         {
             [MethodImpl(Inline)]

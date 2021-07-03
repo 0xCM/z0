@@ -29,51 +29,69 @@ namespace Z0
             Source?.Dispose();
         }
 
-        const byte NumberWidth = TextLine.NumberWidth;
+        static bool IsNumbered(ReadOnlySpan<char> src)
+        {
+            if(src.Length < 9)
+                return false;
 
-        const char Delimiter = TextLine.Delimiter;
+            if(skip(src,8) != Chars.Colon)
+                return false;
+
+            for(var i=0; i<7; i++)
+            {
+                if(!char.IsDigit(skip(src,i)))
+                    return false;
+            }
+            return true;
+        }
 
         [Op]
-        static Outcome LineNumber(ReadOnlySpan<char> src, out uint dst)
+        static Outcome ParseLineNumber(ReadOnlySpan<char> src, out uint j, out uint dst)
         {
-            dst = uint.MaxValue;
-            var count = src.Length;
-            if(count >= 9)
-            {
-                ref readonly var c = ref skip(src,8);
-                if(c == Chars.Colon)
-                    return uint.TryParse(slice(src,0,8), out dst);
-            }
+            j=0;
+            dst = 0;
+            const char Delimiter = Chars.Colon;
+            const byte LastIndex = 8;
+            const byte ContentLength = 9;
+            if(!IsNumbered(src))
+                return false;
 
-            return false;
+            var result = Outcome.Failure;
+            var storage = CharBlock8.Null;
+            var buffer = storage.Data;
+
+            while(j++ <= LastIndex)
+            {
+                ref readonly var c = ref skip(src, j);
+                if(char.IsDigit(c))
+                    seek(buffer, j) = c;
+                else if(c == Delimiter && j==LastIndex)
+                {
+                    result = uint.TryParse(buffer, out dst);
+                    break;
+                }
+                else
+                    break;
+            }
+            return result;
         }
+
 
         public bool Next(out TextLine dst)
         {
-            var line = Source.ReadLine();
-            var data = span(line);
-            var result = true;
             dst = TextLine.Empty;
-
-            if(line == null)
+            var line = Source.ReadLine();
+            if(blank(line))
                 return false;
 
-            if(line != null)
-            {
-                Consumed++;
+            Consumed++;
 
-                var length = line.Length;
-                if(length == 0)
-                {
-                    dst = new TextLine(Consumed, EmptyString);
-                    return true;
-                }
-
-                if(LineNumber(data, out var number))
-                    dst = new TextLine(number, line.Substring(NumberWidth + 1));
-                else
-                    dst = new TextLine(Consumed, line);
-            }
+            var data = span(line);
+            var result = true;
+            if(ParseLineNumber(data, out var length, out var number))
+                dst = new TextLine(number, line.Substring((int)length));
+            else
+                dst = new TextLine(Consumed, line);
 
             return result;
         }

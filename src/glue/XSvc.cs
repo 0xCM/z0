@@ -13,8 +13,8 @@ namespace Z0
     public static class XSvc
     {
         [Op]
-        public static DocServices DocServices(this IWfRuntime context, DocProcessArchive archive)
-            => Z0.DocServices.create(context).WithArchive(archive);
+        public static DocServices DocServices(this IWfRuntime context)
+            => Asm.DocServices.create(context);
 
         [Op]
         public static IntelSdmProcessor IntelSdmProcessor(this IWfRuntime wf)

@@ -4,17 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
     partial class IntelSdmProcessor
     {
-        string VolumeMarker(byte vol)
-            => string.Format("Vol. {0}", vol);
-
-        Strings VolumeMarkers(byte min, byte max)
+        public Outcome EmitSplitSdm()
         {
-            var dst = Strings.create();
-            for(var i=min; i<=max; i++)
-                dst.Add(VolumeMarker(i));
-            return dst;
+            return DocServices.Split(SplitSpecs());
         }
     }
 }

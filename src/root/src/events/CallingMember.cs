@@ -56,7 +56,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format(RP.PSx3, CallerName, CallerLine, CallerFile);
+            => string.Format("{0} | {1}:{2}", CallerName, CallerFile, CallerLine);
 
         public override string ToString()
             => Format();

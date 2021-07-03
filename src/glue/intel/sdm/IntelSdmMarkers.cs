@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     using Markers = IntelSdmMarkers;
 
-
     public readonly struct IntelSdmMarkers
     {
         public const string ChapterNumber = "CHAPTER ";

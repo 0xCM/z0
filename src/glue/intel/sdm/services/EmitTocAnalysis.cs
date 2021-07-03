@@ -9,11 +9,29 @@ namespace Z0.Asm
 
     partial class IntelSdmProcessor
     {
-        void ProcessToc()
+        string VolumeMarker(byte vol)
+            => string.Format("Vol. {0}", vol);
+
+        Strings VolumeMarkers(byte min, byte max)
         {
+            var dst = Strings.create();
+            for(var i=min; i<=max; i++)
+                dst.Add(VolumeMarker(i));
+            return dst;
+        }
+
+        Outcome EmitTocAnalysis()
+        {
+            var result = Outcome.Success;
             var flow = Wf.Running();
             var vols = VolumeMarkers(1,4);
             var src = CombinedTocPath();
+            if(!src.Exists)
+            {
+                result = (false,FS.missing(src));
+                Wf.Error(result.Message);
+                return result;
+            }
             using var reader = src.LineReader();
             var buffer = text.buffer();
             var dst = ProcessLog("toc.combined");
@@ -66,6 +84,7 @@ namespace Z0.Asm
             }
 
             Wf.Ran(flow, string.Format("Collected {0} toc entries", entries.Count));
+            return result;
         }
     }
 }

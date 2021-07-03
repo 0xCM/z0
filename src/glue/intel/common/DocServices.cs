@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
 
@@ -11,23 +11,23 @@ namespace Z0
 
     public class DocServices : AppService<DocServices>
     {
-        DocProcessArchive Docs;
+        AsmWorkspace Workspace;
 
         public DocServices()
         {
         }
 
-        internal DocServices WithArchive(DocProcessArchive docs)
+        protected override void OnInit()
         {
-            Docs = docs;
-            return this;
+            Workspace = Wf.AsmWorkspace();
         }
 
-        public void Split(FS.FilePath specpath)
+        public Outcome Split(FS.FilePath specpath)
         {
             var specs = LoadSplitSpecs(specpath);
             var buffer = new CBag<LineRange>();
             iter(specs, spec => Split(spec, buffer));
+            return true;
         }
 
         public Outcome VerifyLinedDoc(FS.FilePath src)
@@ -56,19 +56,27 @@ namespace Z0
             return specs;
         }
 
-        public void CombineDocs(ReadOnlySpan<FS.FilePath> src, FS.FilePath dst)
+        public Outcome CombineDocs(ReadOnlySpan<FS.FilePath> src, FS.FilePath dst)
         {
             var count = src.Length;
+            var result = Outcome.Success;
             var flow = Wf.EmittingFile(dst);
             var counter = 0u;
             using var writer = dst.Writer();
             for(var i=0; i<count; i++)
             {
                 ref readonly var input = ref skip(src,i);
+                if(input.IsEmpty)
+                {
+                    result = (false,string.Format("A supplied source path at index {0} is empty", i));
+                    Wf.Error(result.Message);
+                    return result;
+                }
                 if(!input.Exists)
                 {
-                    Wf.Error(FS.Msg.DoesNotExist.Format(input));
-                    return;
+                    result = (false,FS.Msg.DoesNotExist.Format(input));
+                    Wf.Error(result.Message);
+                    return result;
                 }
 
                 var processing = Wf.Running(string.Format("Appending {0} to {1}", input.ToUri(), dst.ToUri()));
@@ -83,9 +91,12 @@ namespace Z0
                 Wf.Ran(processing);
             }
             Wf.EmittedFile(flow,counter);
+            return result;
         }
 
-        public bool CreateLinedDoc(FS.FilePath src, FS.FilePath dst)
+        static MsgPattern<Count,LineNumber,string> BadLineNumber => "BadLineNumber(counter{0} != line{1}, content{2})";
+
+        public Outcome CreateLinedDoc(FS.FilePath src, FS.FilePath dst)
         {
             var flow = Wf.Running(string.Format("{0} => {1}", src.ToUri(), dst.ToUri()));
             using var reader = src.LineReader();
@@ -95,7 +106,7 @@ namespace Z0
             {
                 if(counter != line.LineNumber)
                 {
-                    var msg = string.Format("{0} != {1}:{2}", counter, line.LineNumber, line.Content);
+                    var msg = BadLineNumber.Format(counter, line.LineNumber, line.Content);
                     Wf.Error(msg);
                     return false;
                 }
@@ -108,7 +119,7 @@ namespace Z0
 
         void Split(in DocSplitSpec spec, IReceiver<LineRange> dst)
         {
-            var src = RefDocPath(spec.DocId);
+            var src = SourceDoc(spec.DocId);
             using var reader = src.Reader();
             var counter = 1u;
             var count = spec.LastLine - spec.FirstLine + 1;
@@ -123,7 +134,7 @@ namespace Z0
                     seek(lines, i++) = Lines.line(counter, line);
             }
 
-            Emit(range, ExtractPath(spec.DocId, spec.Unit));
+            Emit(range, OutputPath(spec.DocId, spec.Unit));
             dst.Deposit(range);
         }
 
@@ -138,10 +149,10 @@ namespace Z0
             Wf.EmittedFile(emitting, count);
         }
 
-        FS.FilePath RefDocPath(string id)
-            => Docs.RefDoc(id, FS.Txt);
+        FS.FilePath SourceDoc(string id)
+            => Workspace.DataSource(id) + FS.file(id,FS.Txt);
 
-        FS.FilePath ExtractPath(string id, string unit)
-            => Docs.DocExtract(id, unit, FS.Txt);
+        FS.FilePath OutputPath(string id, string unit)
+            => Workspace.ImportDir(id) + FS.file(string.Format("{0}.{1}", id, unit), FS.Txt);
     }
 }

@@ -8,9 +8,9 @@ namespace Z0.Asm
 
     partial class IntelSdmProcessor
     {
-        public bool CreateLinedSdm()
+        Outcome EmitLinedSdm()
         {
-            var src = SdmRefPath();
+            var src = SourceDocPath();
             var dst = LinedSdmPath();
             var result = DocServices.CreateLinedDoc(src, dst);
             if(!result)

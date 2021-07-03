@@ -71,18 +71,6 @@ namespace Z0
             get => Content?.Length ?? 0;
         }
 
-        [MethodImpl(Inline)]
-        static string substring(string src, int startidx, int len)
-            => src?.Substring(startidx, len) ?? EmptyString;
-        [Op]
-        static string segment(string src, int i0, int i1)
-        {
-            var length = i1 - i0 + 1;
-            if(length < 0  || length - i0 > src.Length)
-                new Exception($"Cannot select the segment [{i0},{i1}] from the source string {src}");
-            return substring(src, i0, length);
-        }
-
         public TextBlock Trim()
             => IsNonEmpty ? Content.Trim() : TextBlock.Empty;
 

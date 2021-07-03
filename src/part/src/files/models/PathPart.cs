@@ -26,41 +26,48 @@ namespace Z0
             public PathPart(params char[] name)
                 => Text = new string(name);
 
-            public ReadOnlySpan<char> View
+            string TextData
             {
                 [MethodImpl(Inline)]
-                get => Text;
-            }
-
-            [MethodImpl(Inline)]
-            public string Format()
-                => Text?.Trim() ?? EmptyString;
-
-            [MethodImpl(Inline)]
-            public string Format(PathSeparator sep)
-                => FS.normalize(Text?.Trim() ?? EmptyString, sep);
-
-            [MethodImpl(Inline)]
-            public PathPart[] Split(char delimiter)
-                => Text.SplitClean(delimiter).Select(from);
-
-            public bool IsEmpty
-            {
-                [MethodImpl(Inline)]
-                get => Z0.text.empty(Text);
-            }
-
-            public bool IsNonEmpty
-            {
-                [MethodImpl(Inline)]
-                get => Z0.text.nonempty(Text) && Text.Length > 0;
+                get => Text ?? EmptyString;
             }
 
             public uint Length
             {
                 [MethodImpl(Inline)]
-                get => (uint)Text.Length;
+                get => (uint)TextData.Length;
             }
+
+            public ReadOnlySpan<char> View
+            {
+                [MethodImpl(Inline)]
+                get => TextData;
+            }
+
+            [MethodImpl(Inline)]
+            public string Format()
+                => TextData.Trim();
+
+            [MethodImpl(Inline)]
+            public string Format(PathSeparator sep)
+                => FS.normalize(Format(), sep);
+
+            [MethodImpl(Inline)]
+            public PathPart[] Split(char delimiter)
+                => TextData.SplitClean(delimiter).Select(from);
+
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Length == 0;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Length != 0;
+            }
+
 
             public static PathPart Empty
             {
@@ -73,33 +80,33 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public PathPart Replace(char src, char dst)
-                => Text.Replace(src,dst);
+                => TextData.Replace(src,dst);
 
             [MethodImpl(Inline)]
             public PathPart Replace(string src, string dst)
-                => Text.Replace(src,dst);
+                => TextData.Replace(src,dst);
 
             public override int GetHashCode()
-                => Text.GetHashCode();
+                => TextData.GetHashCode();
 
             [MethodImpl(Inline)]
             public bool Equals(PathPart src)
-                => string.Equals(Text, src.Text, NoCase);
+                => string.Equals(TextData, src.TextData, NoCase);
 
             public override bool Equals(object src)
                 => src is PathPart x && Equals(x);
 
             [MethodImpl(Inline)]
             public PathPart Remove(string substring)
-                => Text.Remove(substring);
+                => TextData.Remove(substring);
 
             [MethodImpl(Inline)]
             public bool Contains(string substring)
-                => Text.Contains(substring);
+                => TextData.Contains(substring);
 
             [MethodImpl(Inline)]
             public bool StartsWith(string substring)
-                => Text.StartsWith(substring);
+                => TextData.StartsWith(substring);
 
             /// <summary>
             /// Determines whether the filename, including the extension, ends with a specified substring
@@ -107,7 +114,7 @@ namespace Z0
             /// <param name="substring">The substring to match</param>
             [MethodImpl(Inline)]
             public bool EndsWith(string substring)
-                => Text.EndsWith(substring, NoCase);
+                => TextData.EndsWith(substring, NoCase);
 
             /// <summary>
             /// Determines whether the filename, including the extension, ends with a specified substring
@@ -115,18 +122,18 @@ namespace Z0
             /// <param name="substring">The substring to match</param>
             [MethodImpl(Inline)]
             public bool EndsWith(char c)
-                => Text.EndsWith(c);
+                => TextData.EndsWith(c);
 
             public PathPart RemoveLast()
             {
-                if(Text.Length > 0)
-                    return new PathPart(Text.Substring(0, Text.Length - 1));
+                if(Length > 0)
+                    return new PathPart(Text.Substring(0, (int)Length - 1));
                 else
                     return this;
             }
 
             public int CompareTo(PathPart src)
-                => (Text == null || src.Text == null) ? 0 : Text.CompareTo(src.Text);
+                => TextData.CompareTo(src.TextData);
 
             [MethodImpl(Inline)]
             public static bool operator ==(PathPart a, PathPart b)
@@ -146,7 +153,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator string(PathPart data)
-                => data.Text;
+                => data.TextData;
 
             [MethodImpl(Inline)]
             static PathPart from(string src)

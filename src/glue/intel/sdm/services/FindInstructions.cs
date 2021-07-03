@@ -80,7 +80,6 @@ namespace Z0.Asm
             return result;
         }
 
-
         static ReadOnlySpan<TextLine> MatchPattern(ReadOnlySpan<TextLine> src, LinePattern pattern)
         {
             var dst = list<TextLine>();
