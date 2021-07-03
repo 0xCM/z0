@@ -68,7 +68,7 @@ namespace Z0
 
             CurrentIndex++;
 
-            var parts = TextTools.split(line, FieldDelimiter);
+            var parts = text.split(line, FieldDelimiter);
             if(parts.Length != 2)
                 return false;
 

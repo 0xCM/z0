@@ -142,5 +142,7 @@ namespace Z0
         public const string datasets = nameof(datasets);
 
         public const string imported = nameof(imported);
+
+        public const string bitfields = nameof(bitfields);
     }
 }

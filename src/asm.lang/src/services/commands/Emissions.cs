@@ -26,7 +26,7 @@ namespace Z0.Asm
         {
             var dst = Db.AppLog("regnames", FS.Cs);
             using var writer = dst.AsciWriter();
-            var regs = AsmRegs.list(AsmCodes.GP);
+            var regs = AsmRegs.list(GP);
             var bytespan = SpanRes.specify("GpRegNames", recover<RegOp,byte>(regs).ToArray());
             writer.WriteLine(bytespan.Format());
             return true;
@@ -47,11 +47,39 @@ namespace Z0.Asm
             return true;
         }
 
+        [CmdOp(".emit-modrm-bits")]
+        Outcome EmitModRmFields(CmdArgs args)
+        {
+            var path = Workspace.Bitfield("modrm");
+            var flow = Wf.EmittingFile(path);
+            using var writer = path.AsciWriter();
+            var dst = span<char>(256*128);
+            var count = AsmRender.modRmBits(dst);
+            var rendered = slice(dst,0,count);
+            writer.Write(rendered);
+            Wf.EmittedFile(flow,count);
+            return true;
+        }
+
+        [CmdOp(".emit-rex-bits")]
+        Outcome EmitRexFields(CmdArgs args)
+        {
+            var path = Workspace.Bitfield("rex");
+            var flow = Wf.EmittingFile(path);
+            var bits = RexPrefix.Range();
+            using var writer = path.AsciWriter();
+            var buffer = text.buffer();
+            var count = AsmRender.RexTable(buffer);
+            writer.Write(buffer.Emit());
+            Wf.EmittedFile(flow,count);
+            return true;
+        }
+
         [CmdOp(".emit-modrm-tables")]
         Outcome EmitModRmTables(CmdArgs args)
         {
-            const string Pattern = "{0,-3} | {1,-3} | {2,-3} | {3}";
-            var header = string.Format(Pattern, "mod", "reg", "r/m", "hex");
+            const string Pattern = "{0,-3} | {1,-3} | {2,-3} | {3,-3} | {4}";
+            var header = string.Format(Pattern, "mod", "reg", "r/m", "hex", "bitstring");
             var workspace = Wf.AsmWorkspace();
             var dst = workspace.Table("modrm", FS.Csv);
             var flow = Wf.EmittingFile(dst);
@@ -65,13 +93,12 @@ namespace Z0.Asm
                     for(byte rm=0; rm<8; rm++)
                     {
                         var code = math.or(math.sll(mod,6), math.sll(reg,3), rm);
-                        var row = string.Format(Pattern,
-                            BitRender.format(n2, mod),
-                            BitRender.format(n3, reg),
-                            BitRender.format(n3, rm),
-                            code.FormatHex(specifier:false)
-                            );
-
+                        var fCode = code.FormatHex(specifier:false);
+                        var fMod = BitRender.format(n2, mod);
+                        var fReg = BitRender.format(n3, reg);
+                        var fRm = BitRender.format(n3, rm);
+                        var bitstring = string.Format("{0} {1} {2}", fMod, fReg, fRm);
+                        var row = string.Format(Pattern, fMod, fReg, fRm, fCode, bitstring);
                         writer.WriteLine(row);
                         counter++;
                     }

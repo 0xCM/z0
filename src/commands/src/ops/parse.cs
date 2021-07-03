@@ -18,7 +18,7 @@ namespace Z0
         [Op]
         public static Outcome parse(string src, ArgProtocol protocol, out ToolExecSpec dst)
         {
-            var parts = TextTools.split(src, protocol.Prefix);
+            var parts = text.split(src, protocol.Prefix);
             var count = parts.Length;
             var result = Outcome.Success;
             dst = default;

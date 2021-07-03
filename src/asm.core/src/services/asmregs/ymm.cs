@@ -12,19 +12,19 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         /// <summary>
-        /// Determines whether a specified operand references a general-purpose register
+        /// Determines whether a specified operand references a ymm register
         /// </summary>
         /// <param name="r">The operand</param>
         [MethodImpl(Inline), Op]
-        public static bit gp(RegOp r)
-            => gp(r.RegClass);
+        public static bit ymm(RegOp r)
+            => ymm(r.RegClass);
 
+        /// <summary>
+        /// Determines whether a specified class code designates a ymm register
+        /// </summary>
+        /// <param name="r">The operand</param>
         [MethodImpl(Inline), Op]
-        public static bit gp(RegClassCode c)
-            => c == RegClassCode.GP;
-
-        [MethodImpl(Inline), Op]
-        public static bit gp(RegOp r, RegWidthCode w)
-            => w == r.Width && gp(r);
+        public static bit ymm(RegClassCode c)
+            => c == RegClassCode.YMM;
     }
 }

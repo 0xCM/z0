@@ -9,9 +9,15 @@ namespace Z0.Asm
 
     using static Root;
 
-    [ApiHost]
-    public readonly partial struct AsmRegs
+    partial struct AsmRegs
     {
-
+        [MethodImpl(Inline), Op]
+        public static void split(RegKind src, out RegIndexCode c, out RegClassCode k, out RegWidthCode w, out BitSplitCode s)
+        {
+            c = index(src);
+            k = @class(src);
+            w = width(src);
+            s = (BitSplitCode)(byte)hi(src);
+        }
     }
 }

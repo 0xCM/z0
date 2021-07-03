@@ -15,9 +15,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static TocEntry toc(in SectionNumber sn, in TocTitle title)
             => new TocEntry(sn, title);
-
-        [MethodImpl(Inline), Op]
-        public static Toc toc(TocEntry[] src)
-            => new Toc(src);
     }
 }

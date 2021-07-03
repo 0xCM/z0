@@ -14,6 +14,7 @@ namespace Z0.Asm
     using static Part;
     using static core;
     using static Toolsets;
+    using static AsmCodes;
 
     partial class App : AppService<App>
     {
@@ -767,7 +768,7 @@ namespace Z0.Asm
 
         void ShowRegNames()
         {
-            var regs = AsmRegs.list(AsmCodes.GP);
+            var regs = AsmRegs.list(GP);
             iter(regs, reg => Wf.Row(reg));
             var bytespan = SpanRes.specify("GpRegNames", recover<RegOp,byte>(regs).ToArray());
             Wf.Row(bytespan.Format());

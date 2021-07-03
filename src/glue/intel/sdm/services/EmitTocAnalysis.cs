@@ -32,52 +32,56 @@ namespace Z0.Asm
                 Wf.Error(result.Message);
                 return result;
             }
+
             using var reader = src.LineReader();
             var buffer = text.buffer();
             var dst = ProcessLog("toc.combined");
             using var writer = dst.Writer();
-            var sn = SectionNumber.Empty;
             var cn = ChapterNumber.Empty;
             var tn = TableNumber.Empty;
             var title = TocTitle.Empty;
             var entry = TocEntry.Empty;
-            var _sn = SectionNumber.Empty;
             var entries = list<TocEntry>();
+            var _snbuffer = span<SectionNumber>(1);
+            ref var _sn = ref first(_snbuffer);
+            _sn = SectionNumber.Empty;
             while(reader.Next(out var line))
             {
-                if(vols.CoversAny(line.Content))
+                var content = line.Content;
+                var number = line.LineNumber;
+                if(vols.CoversAny(content))
                 {
-                    writer.WriteLine(string.Format("{0}:{1}", line.LineNumber, line.Content));
+                    writer.WriteLine(string.Format("{0}:{1}", number, content));
                     continue;
                 }
 
-                if(parse(line.Content, out cn))
+                if(parse(content, out cn))
                 {
-                    IntelSdm.render(line.LineNumber, cn, buffer);
+                    render(number, cn, buffer);
                     writer.WriteLine(buffer.Emit());
                     continue;
                 }
 
-                if(parse(line.Content, out sn))
+                if(parse(content, out SectionNumber sn))
                 {
-                    IntelSdm.render(line.LineNumber, sn, buffer);
                     _sn = sn;
+                    render(number, _sn, buffer);
                     writer.WriteLine(buffer.Emit());
                     continue;
                 }
 
-                if(parse(line.Content, out title))
+                if(parse(content, out title))
                 {
                     entry = toc(_sn, title);
                     entries.Add(entry);
-                    render(line.LineNumber, entry, buffer);
+                    render(number, entry, buffer);
                     writer.WriteLine(buffer.Emit());
                     continue;
                 }
 
-                if(parse(line.Content, out tn))
+                if(parse(content, out tn))
                 {
-                    render(line.LineNumber, tn, buffer);
+                    render(number, tn, buffer);
                     writer.WriteLine(buffer.Emit());
                     continue;
                 }

@@ -8,20 +8,20 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static RegFacets;
+    using static core;
 
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static RegIndexCode index(RegOp src)
-            =>(RegIndexCode)Bits.segment(src.Bitfield, 10, 15);
+        public static bit valid(RegIndexCode src)
+            => (uint)src <= 31;
 
         /// <summary>
-        /// Determines the register code from the kind
+        /// Determines whether a specified register index code is within the inclusive range [0,31]
         /// </summary>
-        /// <param name="src">The source kind</param>
+        /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public static RegIndexCode index(RegKind src)
-            => (RegIndexCode)Bits.slice((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.RegCode);
+        public static bit invalid(RegIndexCode src)
+            => (uint)src >= 32;
     }
 }

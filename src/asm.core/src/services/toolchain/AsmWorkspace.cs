@@ -152,6 +152,12 @@ namespace Z0.Asm
         public FS.FolderPath Lists()
             => Output() + FS.folder("list");
 
+        public FS.FolderPath Bitfields()
+            => DataRoot() + FS.folder(bitfields);
+
+        public FS.FilePath Bitfield(string id)
+            => Bitfields() + FS.file(id, FS.ext("bits"));
+
         public FS.FilePath ObjPath(string id)
             => Obj() + FS.file(id,FS.Obj);
 

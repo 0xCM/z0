@@ -8,10 +8,12 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static RegFacets;
 
-    [ApiHost]
-    public readonly partial struct AsmRegs
+    partial struct AsmRegs
     {
-
+        [MethodImpl(Inline), Op]
+        public static bit hi(RegKind src)
+            => ((uint)src & (uint)BitSplitCode.Hi) != 0;
     }
 }

@@ -12,16 +12,20 @@ namespace Z0.Asm
 
     partial struct AsmRegs
     {
+        /// <summary>
+        /// Determines the width of a specified operand
+        /// </summary>
+        /// <param name="src">The source operand</param>
         [MethodImpl(Inline), Op]
-        public static RegIndexCode index(RegOp src)
-            =>(RegIndexCode)Bits.segment(src.Bitfield, 10, 15);
+        public static RegWidthCode width(RegOp src)
+            => (RegWidthCode)(src.Bitfield & 0b111);
 
         /// <summary>
-        /// Determines the register code from the kind
+        /// Determines the width of the register represented by a specified kind
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static RegIndexCode index(RegKind src)
-            => (RegIndexCode)Bits.slice((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.RegCode);
+        public static RegWidthCode width(RegKind src)
+            => (RegWidthCode)Bits.slice((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.RegWidth);
     }
 }

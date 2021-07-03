@@ -233,7 +233,7 @@ namespace Z0
             if(!FenceParser.unfence(src, DataFence, out var data))
                 return (false, $"Line {src} does not contain data fence");
 
-            var segparts = TextTools.split(seg, SegSep);
+            var segparts = text.split(seg, SegSep);
             if(segparts.Length != 2)
                 return (false, $"Line {src} segement specifier does not have the required 2 components");
 

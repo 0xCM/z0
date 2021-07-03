@@ -25,45 +25,7 @@ namespace Z0.Asm
 
             public ushort D;
 
-            [MethodImpl(Inline)]
-            public SectionNumber(ushort a)
-                : this()
-            {
-                A = a;
-            }
-
-            [MethodImpl(Inline)]
-            public SectionNumber(ushort a, ushort b)
-                : this()
-            {
-                A = a;
-                B = b;
-            }
-
-            [MethodImpl(Inline)]
-            public SectionNumber(ushort a, ushort b, ushort c)
-                : this()
-            {
-                A = a;
-                B = b;
-                C = c;
-            }
-
-            [MethodImpl(Inline)]
-            public SectionNumber(ushort a, ushort b, ushort c, ushort d)
-                : this()
-            {
-                A = a;
-                B = b;
-                C = c;
-                D = d;
-            }
-
-            public byte Count
-            {
-                [MethodImpl(Inline)]
-                get => (byte)(core.u8(A !=0) + core.u8(B != 0) + core.u8(C != 0) + core.u8(D != 0));
-            }
+            public byte Count;
 
             public bool IsEmpty
             {

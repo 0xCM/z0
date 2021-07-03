@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Text)" />
   </ItemGroup>
 
 </Project>

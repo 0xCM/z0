@@ -30,7 +30,7 @@ namespace Z0
         public Outcome Parse(string src, out T[] dst)
         {
             dst = array<T>();
-            var components = TextTools.split(src, Delimiter, SplitClean);
+            var components = text.split(src, Delimiter, SplitClean);
             var count = components.Length;
             var result = Outcome.Success;
             if(count != 0)

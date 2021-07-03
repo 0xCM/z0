@@ -80,49 +80,55 @@ namespace Z0.Asm
             if(!IsSectionNumber(src))
                 return false;
 
-            var digits = split(src.ToString(), Chars.Dot);
+            var digits = text.split(src.ToString(), Chars.Dot);
             var count = digits.Length;
-            if(count == 0)
-                return false;
+            var result = Outcome.Failure;
             switch(count)
             {
                 case 1:
                     if(SP.parse(skip(digits, 0), out dst.A))
-                        return true;
+                    {
+                        dst.Count = 1;
+                        result = true;
+                    }
                     break;
 
                 case 2:
-                    if(
-                        SP.parse(skip(digits, 0), out dst.A) &&
-                        SP.parse(skip(digits, 1), out dst.B)
-                        )
-                    return true;
-                break;
+                        if(
+                            SP.parse(skip(digits, 0), out dst.A) &&
+                            SP.parse(skip(digits, 1), out dst.B))
+                        {
+                            dst.Count = 2;
+                            result = true;
+                        }
+                        break;
 
-                case 3:
-                    if(
+                case 3: if(
                         SP.parse(skip(digits, 0), out dst.A) &&
                         SP.parse(skip(digits, 1), out dst.B) &&
-                        SP.parse(skip(digits, 2), out dst.C)
-                        )
-                    return true;
-                break;
+                        SP.parse(skip(digits, 2), out dst.C))
+                        {
+                            dst.Count = 3;
+                            result = true;
+                        }
+                        break;
 
-                case 4:
-                    if(
+                case 4: if(
                         SP.parse(skip(digits, 0), out dst.A) &&
                         SP.parse(skip(digits, 1), out dst.B) &&
-                        SP.parse(skip(digits, 2), out dst.C)&&
-                        SP.parse(skip(digits, 3), out dst.D)
-                        )
-                    return true;
-                break;
+                        SP.parse(skip(digits, 2), out dst.C) &&
+                        SP.parse(skip(digits, 3), out dst.D))
+                        {
+                            dst.Count = 4;
+                            result = true;
+                        }
+                        break;
 
                 default:
-                    return false;
-
+                    break;
             }
-            return false;
+
+            return result;
         }
 
         public static Outcome parse(ReadOnlySpan<char> src, out TableNumber dst)

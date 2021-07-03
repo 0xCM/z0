@@ -18,26 +18,6 @@ namespace Z0.Asm
             return true;
         }
 
-        [CmdOp(".modrm")]
-        Outcome ShowModRmTable(CmdArgs args)
-        {
-            var dst = span<char>(256*128);
-            var count = AsmRender.ModRmBits(dst);
-            var result = slice(dst,0,count);
-            Wf.Row(result);
-            return true;
-        }
-
-        [CmdOp(".rexbits")]
-        Outcome ShowRexTable(CmdArgs args)
-        {
-            var bits = RexPrefix.Range();
-            using var log = OpenShowLog("rexbits");
-            var buffer = TextTools.buffer();
-            AsmRender.RexTable(buffer);
-            Show(buffer.Emit(), log);
-            return true;
-        }
 
         [CmdOp(".core")]
         Outcome ShowCurrentCore(CmdArgs args)

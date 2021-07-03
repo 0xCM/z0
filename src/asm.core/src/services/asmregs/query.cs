@@ -9,9 +9,14 @@ namespace Z0.Asm
 
     using static Root;
 
-    [ApiHost]
-    public readonly partial struct AsmRegs
+    partial struct AsmRegs
     {
-
+        /// <summary>
+        /// Defines a query source over a specified operand sequence
+        /// </summary>
+        /// <param name="src"></param>
+        [Op]
+        public static AsmRegQuery query(ReadOnlySpan<RegOp> src)
+            => new AsmRegQuery(src);
     }
 }

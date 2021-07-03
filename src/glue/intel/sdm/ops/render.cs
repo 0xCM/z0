@@ -11,11 +11,10 @@ namespace Z0.Asm
     using static Root;
 
     using Patterns = IntelSdmPatterns;
-    using Markers = IntelSdmMarkers;
 
     partial struct IntelSdm
     {
-        static void render(LineNumber line, ITextBuffer dst)
+        static void render(in LineNumber line, ITextBuffer dst)
         {
             dst.AppendFormat(string.Format("{0}:", line));
         }
@@ -28,7 +27,7 @@ namespace Z0.Asm
             render(cp, dst);
         }
 
-        public static void render(LineNumber line, in TocEntry src, ITextBuffer dst)
+        public static void render(in LineNumber line, in TocEntry src, ITextBuffer dst)
         {
             render(line, dst);
             dst.Append(src.Title.Content.String);
@@ -36,39 +35,33 @@ namespace Z0.Asm
             render(src.Section, src.Title.Page, dst);
         }
 
-        public static void render(in SectionPage src, ITextBuffer dst)
+        public static void render(in SectionPage sp, ITextBuffer dst)
         {
             dst.Append(Chars.LBracket);
-            render(src.Section, dst);
+            render(sp.Section, dst);
             dst.Append(Chars.Space);
-            render(src.Page, dst);
+            render(sp.Page, dst);
             dst.Append(Chars.RBracket);
         }
 
-        public static void render(in ChapterPage src, ITextBuffer dst)
+        public static void render(in ChapterPage cp, ITextBuffer dst)
         {
-            dst.AppendFormat(Patterns.ChapterPage, src.Chapter, src.Page);
+            dst.AppendFormat(Patterns.ChapterPage, cp.Chapter, cp.Page);
         }
 
-        public static void render(LineNumber line, in ChapterNumber src, ITextBuffer dst)
-        {
-            render(line, dst);
-            dst.AppendFormat(Patterns.ChapterNumber, src.Value);
-        }
-
-        public static void render(Placeholder src, ITextBuffer dst)
-        {
-            for(var i=0; i<src.Count; i++)
-                dst.AppendFormat("{0}{1}", Placeholder.Space, Placeholder.Dot);
-        }
-
-        public static void render(LineNumber line, in SectionNumber src, ITextBuffer dst)
+        public static void render(in LineNumber line, in ChapterNumber cn, ITextBuffer dst)
         {
             render(line, dst);
-            render(src, dst);
+            dst.AppendFormat(Patterns.ChapterNumber, cn.Value);
         }
 
-        public static void render(LineNumber line, in TableNumber src, ITextBuffer dst)
+        public static void render(in LineNumber line, in SectionNumber sn, ITextBuffer dst)
+        {
+            render(line, dst);
+            render(sn, dst);
+        }
+
+        public static void render(in LineNumber line, in TableNumber src, ITextBuffer dst)
         {
             render(line, dst);
             dst.AppendFormat("Table {0}", TextTools.format(src.String));
@@ -76,21 +69,34 @@ namespace Z0.Asm
 
         public static void render(in SectionNumber src, ITextBuffer dst)
         {
-            if(src.IsEmpty)
-            {
-                dst.Append("0.0.0.0");
-                return;
-            }
+            const string EmptyMarker = "<empty>";
+            const string N1Pattern = "{0}";
+            const string N2Pattern = "{0}.{1}";
+            const string N3Pattern = "{0}.{1}.{2}";
+            const string N4Pattern = "{0}.{1}.{2}.{3}";
+            const string OverflowMarker = "<overflow>";
 
-            var count = src.Count;
-            if(count >= 1)
-                dst.Append(src.A.ToString());
-            if(count >= 2)
-                dst.Append(string.Format(".{0}",src.B));
-            if(count >= 3)
-                dst.Append(string.Format(".{0}",src.C));
-            if(count >= 4)
-                dst.Append(string.Format(".{0}",src.D));
+            switch(src.Count)
+            {
+                case 0:
+                    dst.Append(EmptyMarker);
+                break;
+                case 1:
+                    dst.AppendFormat(N1Pattern, src.A);
+                break;
+                case 2:
+                    dst.AppendFormat(N2Pattern, src.A, src.B);
+                break;
+                case 3:
+                    dst.AppendFormat(N3Pattern, src.A, src.B, src.C);
+                break;
+                case 4:
+                    dst.AppendFormat(N4Pattern, src.A, src.B, src.C, src.D);
+                break;
+                default:
+                    dst.Append(OverflowMarker);
+                break;
+            }
         }
     }
 }

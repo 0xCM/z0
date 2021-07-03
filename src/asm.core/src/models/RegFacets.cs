@@ -27,6 +27,12 @@ namespace Z0.Asm
         /// </summary>
         public const ushort Hi = 1 << 15;
 
+        public const byte LastXmmIndex = 31;
+
+        public const byte LastYmmIndex = 31;
+
+        public const byte LastZmmIndex = 31;
+
         public enum FieldIndex : byte
         {
             /// <summary>

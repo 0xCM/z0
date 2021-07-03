@@ -199,12 +199,13 @@ namespace Z0.Asm
             return i;
         }
 
-        public static void RexTable(ITextBuffer dst)
+        public static uint RexTable(ITextBuffer dst)
         {
             var bits = RexPrefix.Range();
             var count = bits.Length;
             for(var i=0; i<count; i++)
                 dst.AppendLine(describe(skip(bits,i)));
+            return (uint)count;
         }
 
         public static string describe(RexPrefix src)
@@ -214,7 +215,7 @@ namespace Z0.Asm
             return $"{src.Encoded.FormatAsmHex()} | [{bits}] => {bitfield}";
         }
 
-        public static uint ModRmBits(Span<char> dst)
+        public static uint modRmBits(Span<char> dst)
         {
             var f0 = BitSeq.bits(n3);
             var f1 = BitSeq.bits(n3);

@@ -19,9 +19,9 @@ namespace Z0.Asm
             public TocTitle Title;
 
             [MethodImpl(Inline)]
-            public TocEntry(in SectionNumber section, in TocTitle toc)
+            public TocEntry(in SectionNumber sn, in TocTitle toc)
             {
-                Section = section;
+                Section = sn;
                 Title = toc;
             }
 

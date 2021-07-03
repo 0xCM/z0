@@ -49,7 +49,7 @@ namespace Z0
         public static NatKind Parse(string src)
         {
             var numeric = NumericParser.create<ulong>();
-            var parts = TextTools.split(src, IDI.SegSep);
+            var parts = text.split(src, IDI.SegSep);
             if(parts.Length == 3)
             {
                 numeric.Parse(skip(parts,0), out var m);

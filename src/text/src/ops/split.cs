@@ -5,17 +5,18 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static System.StringSplitOptions;
+    using static Root;
 
-    partial struct TextTools
+    partial class text
     {
         [Op]
         public static ReadOnlySpan<string> split(string src, char sep, bool clean = true)
-            => src.Split(sep,  clean ? RemoveEmptyEntries : None);
+            => src.Split(sep,  clean ? StringSplitOptions.RemoveEmptyEntries : StringSplitOptions.None);
 
         [Op]
         public static ReadOnlySpan<string> split(string src, string sep, bool clean = true)
-            => src.Split(sep, clean ? RemoveEmptyEntries : None);
+            => src.Split(sep, clean ? StringSplitOptions.RemoveEmptyEntries : StringSplitOptions.None);
     }
 }

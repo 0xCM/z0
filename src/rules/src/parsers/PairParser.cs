@@ -31,7 +31,7 @@ namespace Z0
         {
             var result = Outcome.Success;
             dst = default;
-            var components = TextTools.split(src, Delimiter, SplitClean);
+            var components = text.split(src, Delimiter, SplitClean);
             var count = components.Length;
             if(count == 2)
             {

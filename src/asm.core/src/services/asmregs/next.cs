@@ -10,8 +10,14 @@ namespace Z0.Asm
     using static Root;
     using static AsmOpTypes;
 
+    using T = AsmOpTypes;
+
     partial struct AsmRegs
     {
+        /// <summary>
+        /// Advances to the next <see cref='r8'/> register
+        /// </summary>
+        /// <param name="src"></param>
         [MethodImpl(Inline), Op]
         public static r8 next(r8 src)
         {
@@ -21,6 +27,10 @@ namespace Z0.Asm
                 return RegIndexCode.r0;
         }
 
+        /// <summary>
+        /// Advances to the next <see cref='T.r16'/> register, modulo 16
+        /// </summary>
+        /// <param name="src">The source register</param>
         [MethodImpl(Inline), Op]
         public static r16 next(r16 src)
         {
@@ -30,6 +40,10 @@ namespace Z0.Asm
                 return RegIndexCode.r0;
         }
 
+        /// <summary>
+        /// Advances to the next <see cref='T.r32'/> register, modulo 16
+        /// </summary>
+        /// <param name="src">The source register</param>
         [MethodImpl(Inline), Op]
         public static r32 next(r32 src)
         {
@@ -39,6 +53,10 @@ namespace Z0.Asm
                 return RegIndexCode.r0;
         }
 
+        /// <summary>
+        /// Advances to the next <see cref='r64'/> register, modulo 16
+        /// </summary>
+        /// <param name="src">The source register</param>
         [MethodImpl(Inline), Op]
         public static r64 next(r64 src)
         {
@@ -48,6 +66,10 @@ namespace Z0.Asm
                 return RegIndexCode.r0;
         }
 
+        /// <summary>
+        /// Advances to the next <see cref='T.xmm'/> register, modulo 32
+        /// </summary>
+        /// <param name="src">The source register</param>
         [MethodImpl(Inline), Op]
         public static xmm next(xmm src)
         {
@@ -57,6 +79,10 @@ namespace Z0.Asm
                 return RegIndexCode.r0;
         }
 
+        /// <summary>
+        /// Advances to the next <see cref='T.ymm'/> register, modulo 32
+        /// </summary>
+        /// <param name="src">The source register</param>
         [MethodImpl(Inline), Op]
         public static ymm next(ymm src)
         {
@@ -66,6 +92,10 @@ namespace Z0.Asm
                 return RegIndexCode.r0;
         }
 
+        /// <summary>
+        /// Advances to the next <see cref='T.zmm'/> register, modulo 32
+        /// </summary>
+        /// <param name="src">The source register</param>
         [MethodImpl(Inline), Op]
         public static zmm next(zmm src)
         {

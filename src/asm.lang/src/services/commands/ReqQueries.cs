@@ -10,6 +10,8 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static AsmCodes;
+
 
     partial class AsmCmdService
     {
@@ -54,7 +56,7 @@ namespace Z0.Asm
         [CmdOp(".regnames")]
         Outcome ShowRegs(CmdArgs args)
         {
-            var regs = AsmRegs.list(AsmCodes.GP);
+            var regs = AsmRegs.list(GP);
             iter(regs, reg => Wf.Row(reg));
             return true;
         }

@@ -21,7 +21,7 @@ namespace Z0.Asm
             => Kind = kind;
 
         [MethodImpl(Inline)]
-        public Register(RegIndexCode c, RegClassCode k, RegWidthCode w)
+        public Register(RegIndexCode c, RegClassCode k, RegWidthCode w, BitSplitCode s = 0)
             => Kind = api.kind(c, k, w);
 
         public RegIndexCode Code

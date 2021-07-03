@@ -195,7 +195,7 @@ namespace Z0
                 return false;
 
             var count = ProcessMemoryRegion.FieldCount;
-            var parts = TextTools.split(src,Chars.Pipe);
+            var parts = text.split(src,Chars.Pipe);
             if(parts.Length != ProcessMemoryRegion.FieldCount)
                 return (false, Tables.FieldCountMismatch.Format(parts.Length, count));
 
