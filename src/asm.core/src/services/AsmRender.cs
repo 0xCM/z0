@@ -494,7 +494,6 @@ namespace Z0.Asm
         public static string format(in CallRel32 src)
             => string.Format("{0}:{1} -> {2}", src.ClientAddress, src.TargetDx, src.TargetAddress);
 
-
         [Op]
         public static string semantic(in AsmDetailRow row)
         {
@@ -528,6 +527,26 @@ namespace Z0.Asm
                 break;
             }
             return EmptyString;
+        }
+
+        public static void bitfields(ReadOnlySpan<CpuIdRow> src, ITextBuffer dst)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                bitfield(skip(src,i), dst);
+        }
+
+        public static void bitfield(in CpuIdRow row, ITextBuffer dst)
+        {
+            var w = n8;
+            dst.AppendFormat("eax (in): {0} [{1}] | ", row.Leaf, row.Leaf.FormatBitstring(w));
+            dst.AppendFormat("ecx (in): {0} [{1}] | ", row.Subleaf, row.Subleaf.FormatBitstring(w));
+            dst.Append(" => ");
+            dst.AppendFormat("eax (out): {0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(w));
+            dst.AppendFormat("ebx (out): {0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(w));
+            dst.AppendFormat("ecx (out): {0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(w));
+            dst.AppendFormat("edx (out): {0} [{1}] ", row.Edx, row.Edx.FormatBitstring(w));
+            dst.AppendLine();
         }
 
         const string RexFieldPattern = "[W:{0} | R:{1} | X:{2} | B:{3}]";

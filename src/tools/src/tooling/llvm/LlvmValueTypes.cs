@@ -6,7 +6,6 @@ namespace Z0.Tools
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
@@ -78,5 +77,4 @@ namespace Z0.Tools
         public static ref v256i64 v256i64(Span<byte> src)
             => ref first<v256i64>(src);
     }
-
 }

@@ -16,6 +16,7 @@ namespace Z0.Asm
         public struct InstructionRow : IRecord<InstructionRow>
         {
             public const string TableId = "sdm.instruction";
+
             public string OpCode;
 
             public string Sig;

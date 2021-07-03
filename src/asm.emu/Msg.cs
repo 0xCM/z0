@@ -2,20 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Emu
+namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using static Root;
 
-    public class Core<T> : Core
-        where T : unmanaged
+    [ApiComplete]
+    struct Msg
     {
-        public Core(uint id)
-            : base(id)
-        {
 
-        }
     }
 }

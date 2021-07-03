@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using System;
-
     partial struct Llvm
     {
         [Tool]

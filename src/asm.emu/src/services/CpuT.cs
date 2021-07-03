@@ -2,25 +2,27 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Emu
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public unsafe abstract class CpuState<G,V>
-        where G : unmanaged
-        where V : unmanaged
+    public class Cpu<T> : Cpu
+        where T : unmanaged
     {
-        protected G* GpRegs;
+        Index<CpuCore<T>> _Cores;
 
-        protected V* VRegs;
-
-        protected CpuState()
+        [MethodImpl(Inline)]
+        internal Cpu(CpuCore<T>[] cores)
         {
+            _Cores = cores;
+        }
 
+        public CpuCore<T> Core(uint id)
+        {
+            return _Cores[id];
         }
     }
-
 }

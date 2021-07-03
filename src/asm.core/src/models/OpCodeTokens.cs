@@ -205,6 +205,5 @@ namespace Z0.Asm
             [Symbol("NFx", "Indicates the use of F2/F3 prefixes are not allowed with the instruction")]
             NFx = 1,
         }
-
     }
 }

@@ -2,13 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0.Emu
 {
     using System;
-    using System.Diagnostics;
+    using System.Runtime.CompilerServices;
 
-    public readonly partial struct Llvm
+    using static Root;
+
+    public abstract class CpuCore
     {
+        public uint CoreId {get;}
 
+        public CpuCore(uint id)
+        {
+            CoreId  = id;
+        }
     }
 }

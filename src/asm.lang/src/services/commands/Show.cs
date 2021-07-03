@@ -10,6 +10,8 @@ namespace Z0.Asm
     using static core;
     using static Typed;
 
+    using static IntelSdm;
+
     partial class AsmCmdService
     {
         Outcome ShowEffective(CmdArgs args)
@@ -72,7 +74,6 @@ namespace Z0.Asm
             return true;
         }
 
-
         [CmdOp(".inst-info")]
         Outcome ShowInstInfo(CmdArgs args)
         {
@@ -80,12 +81,14 @@ namespace Z0.Asm
             const string TableMarker = "## ";
             const string Separator = "------";
             const string TableTileFormat = "# {0}";
+            const string InstTitleFormat = "# Instruction {0}";
             const string Rejoin = " | ";
             const char ColSep = Chars.Pipe;
 
             var result = Outcome.Success;
             var foundtable = false;
             var parsingrows = false;
+            var tablekind = TableKind.None;
             var rowcount = 0;
             if(args.Length < 1)
                 return (false, "Argument not supplied");
@@ -94,6 +97,8 @@ namespace Z0.Asm
             var src = Workspace.InstInfo(id);
             if(!src.Exists)
                 return (false, FS.missing(src));
+
+            var info = default(InstructionInfo);
 
             using var reader = src.AsciLineReader();
             while(reader.Next(out var line))
@@ -110,7 +115,6 @@ namespace Z0.Asm
                 }
 
                 var content = line.Content;
-
                 if(parsingrows)
                 {
                     var cols = content.SplitClean(ColSep);
@@ -138,14 +142,14 @@ namespace Z0.Asm
 
                 if(content.StartsWith(TitleMarker))
                 {
-                    var title = content.Remove(TitleMarker);
-                    Row(title);
+                    info = InstructionInfo.init(content.Remove(TitleMarker));
+                    Row(string.Format(InstTitleFormat, info.Mnemonic.Format(MnemonicCase.Uppercase)));
                 }
                 else if(content.StartsWith(TableMarker))
                 {
-                    var name = content.Remove(TableMarker).Trim();
+                    tablekind = TableKinds.from(content.Remove(TableMarker).Trim());
                     Row(Chars.Space);
-                    Row(string.Format(TableTileFormat, name));
+                    Row(string.Format(TableTileFormat, tablekind));
                     Row(RP.PageBreak120);
                     foundtable = true;
                 }

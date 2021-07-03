@@ -24,6 +24,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static uint render(LowerCased @case, byte src, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            seek(dst, i++) = hexchar(@case, (byte)((byte)src >> 4));
+            seek(dst, i++) = hexchar(@case, (byte)((byte)src & 0xF));
+            return i - i0;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint render(LowerCased @case, Hex16 src, ref uint i, Span<char> dst)
         {
             var i0 = i;

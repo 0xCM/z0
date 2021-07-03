@@ -76,24 +76,22 @@ namespace Z0
             return result;
         }
 
-
         public bool Next(out TextLine dst)
         {
             dst = TextLine.Empty;
             var line = Source.ReadLine();
-            if(blank(line))
+            if(line == null)
                 return false;
 
             Consumed++;
 
             var data = span(line);
-            var result = true;
             if(ParseLineNumber(data, out var length, out var number))
                 dst = new TextLine(number, line.Substring((int)length));
             else
                 dst = new TextLine(Consumed, line);
 
-            return result;
+            return true;
         }
     }
 }

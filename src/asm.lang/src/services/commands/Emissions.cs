@@ -21,7 +21,7 @@ namespace Z0.Asm
             return true;
         }
 
-        [CmdOp(".regnames-save")]
+        [CmdOp(".emit-regnames")]
         Outcome EmitRegNames(CmdArgs args)
         {
             var dst = Db.AppLog("regnames", FS.Cs);
@@ -123,28 +123,6 @@ namespace Z0.Asm
             counter += grids.Emit(grids.Grid(GP, w64),writer);
             Wf.EmittedFile(flow,counter);
             return true;
-        }
-
-        // [CmdOp(".emit-xed-forms")]
-        // Outcome ImportXedSummaries(CmdArgs args)
-        // {
-        //     var parser = XedSummaryParser.create(Wf.EventSink);
-        //     var parsed = parser.ParseSummaries();
-        //     Status($"Parsed {parsed.Length} summaries");
-        //     Wf.IntelXed().EmitFormSummaries(parsed);
-        //     return true;
-        // }
-
-        void CheckCpuid()
-        {
-            // var descriptor = Parts.AsmCases.Assets.CpuIdRows();
-            // Utf8.decode(descriptor.ResBytes, out var content);
-            // var pipe = Wf.AsmRowPipe();
-            // using var reader = content.Reader();
-            // var rows = pipe.LoadCpuIdRows(reader);
-            // var formatter = rows.RecordFormatter(CpuIdRow.RenderWidths);
-            // Wf.Row(formatter.FormatHeader());
-            // core.iter(rows, row => Wf.Row(formatter.Format(row)));
         }
 
         [CmdOp(".import-cpuid")]

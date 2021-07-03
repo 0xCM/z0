@@ -4,193 +4,76 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
-
-    public enum AsmOpCodeId : ushort
-    {
-        /// <summary>
-        /// 24 ib | AND AL, imm8
-        /// </summary>
-        and_al_imm8,
-
-        /// <summary>
-        /// 25 iw | AND AX, imm16
-        /// </summary>
-        and_ax_imm16,
-
-        /// <summary>
-        /// 25 id | AND EAX, imm32
-        /// </summary>
-        and_eax_imm32,
-
-        /// <summary>
-        /// REX.W + 25 id | AND RAX, imm32
-        /// </summary>
-        and_rax_imm32,
-
-        /// <summary>
-        /// 80 /4 ib | AND r8, imm8
-        /// </summary>
-        and_r8_imm8,
-
-        /// <summary>
-        /// 80 /4 ib | AND m8, imm8
-        /// </summary>
-        and_m8_imm8,
-
-        /// <summary>
-        /// REX + 80 /4 ib | AND r8, imm8
-        /// </summary>
-        and_r8_imm8_rex,
-
-        /// <summary>
-        /// REX + 80 /4 ib | AND m8, imm8
-        /// </summary>
-        and_m8_imm8_rex,
-
-        /// <summary>
-        /// 81 /4 iw | AND r16, imm16
-        /// </summary>
-        and_r16_imm16,
-
-        /// <summary>
-        /// 81 /4 iw | AND m16, imm16
-        /// </summary>
-        and_m16_imm16,
-
-        /// <summary>
-        /// 81 /4 id | AND r32, imm32
-        /// </summary>
-        and_r32_imm32,
-
-        /// <summary>
-        /// 81 /4 id | AND m32, imm32
-        /// </summary>
-        and_m32_imm32,
-
-        /// <summary>
-        /// REX.W + 81 /4 id | AND r64, imm32
-        /// </summary>
-        and_r64_imm32,
-
-        /// <summary>
-        /// REX.W + 81 /4 id | AND m64, imm32
-        /// </summary>
-        and_m64_imm32,
-
-        /// <summary>
-        /// 83 /4 ib | AND r16, imm8
-        /// </summary>
-        and_r16_imm8,
-
-        /// <summary>
-        /// 83 /4 ib | AND m16, imm8
-        /// </summary>
-        and_m16_imm8,
-
-        /// <summary>
-        /// 83 /4 ib | AND r32, imm8
-        /// </summary>
-        amd_r32_imm8,
-
-        /// <summary>
-        /// 83 /4 ib | AND m32, imm8
-        /// </summary>
-        and_m32_imm8,
-
-        /// <summary>
-        /// REX.W + 83 /4 ib | AND r64, imm8
-        /// </summary>
-        and_r64_imm8,
-
-        /// <summary>
-        /// REX.W + 83 /4 ib | AND m64, imm8
-        /// </summary>
-        and_m64_imm8,
-
-        /// <summary>
-        /// 20 /r | AND r8, r8
-        /// </summary>
-        and_r8_r8,
-
-        /// <summary>
-        /// 20 /r | AND m8, r8
-        /// </summary>
-        and_m8_r8,
-
-        /// <summary>
-        /// REX + 20 /r AND r8, r8
-        /// </summary>
-        and_r8_r8_rex,
-
-        /// <summary>
-        /// REX + 20 /r | AND m8, r8
-        /// </summary>
-        and_m8_r8_rex,
-
-        /// <summary>
-        /// 21 /r | AND r16, r16
-        /// </summary>
-        and_r16_r16,
-
-        /// <summary>
-        /// 21 /r | AND m16, r16
-        /// </summary>
-        and_m16_r16,
-
-        /// <summary>
-        /// 21 /r | AND r32, r32
-        /// </summary>
-        and_r32_r32,
-
-        /// <summary>
-        /// 21 /r | AND m32, r32
-        /// </summary>
-        and_m32_r32,
-
-        /// <summary>
-        /// REX.W + 21 /r | AND r64, r64
-        /// </summary>
-        and_r64_r64,
-
-        /// <summary>
-        /// REX.W + 21 /r | AND m64, r64
-        /// </summary>
-        and_m64_r64,
-
-        /// <summary>
-        /// 22 /r | AND r8, r8
-        /// </summary>
-        and_r8_r8_x22,
-
-        /// <summary>
-        /// 22 /r | AND r8, m8
-        /// </summary>
-        and_r8_m8,
-
-        /// <summary>
-        /// 23 /r | AND r16, m16
-        /// </summary>
-        and_r16_m16,
-
-        /// <summary>
-        /// 23 /r | AND r32, m32
-        /// </summary>
-        and_r32_m32,
-
-        /// <summary>
-        /// REX.W + 23 /r | AND r64, m64
-        /// </summary>
-        and_r64_m64,
-    }
-
+    using static AsmCodes;
 
     [ApiHost]
     public readonly struct AsmOpCodes
     {
+        [MethodImpl(Inline), Op]
+        public static AsmOpCode<OffsetToken> cb(byte a0)
+            => asm.opcode(a0, OffsetToken.cb);
+
+        [MethodImpl(Inline), Op]
+        public static AsmOpCode<OffsetToken> cb(byte a0, byte a1)
+            => asm.opcode(uint32(a0) | (uint32(a1) << 8), OffsetToken.cb);
+
+        [MethodImpl(Inline), Op]
+        public static AsmOpCode<OffsetToken> cw(byte a0)
+            => asm.opcode(a0, OffsetToken.cw);
+
+        [MethodImpl(Inline), Op]
+        public static AsmOpCode<OffsetToken> cw(byte a0, byte a1)
+            => asm.opcode(uint32(a0) | (uint32(a1) << 8), OffsetToken.cw);
+
+        [MethodImpl(Inline), Op]
+        public static AsmOpCode<OffsetToken> cd(byte a0)
+            => asm.opcode(a0, OffsetToken.cd);
+
+        [MethodImpl(Inline), Op]
+        public static AsmOpCode<OffsetToken> cd(byte a0, byte a1)
+            => asm.opcode(uint32(a0) | (uint32(a1) << 8), OffsetToken.cd);
+
+        public static uint render<T>(AsmOpCode<T> src, Span<char> dst)
+            where T : unmanaged, Enum
+        {
+            var data = src.Bytes;
+            var i=0u;
+            ref readonly var b0 = ref skip(data,0);
+            Hex.render(LowerCase, b0, ref i, dst);
+
+            ref readonly var b1 = ref skip(data,1);
+            if(b1 !=0)
+            {
+                seek(dst,i++) = Chars.Space;
+                Hex.render(LowerCase, b1, ref i, dst);
+            }
+
+            ref readonly var b2 = ref skip(data,2);
+            if(b2 != 0)
+            {
+                seek(dst,i++) = Chars.Space;
+                Hex.render(LowerCase, b2, ref i, dst);
+            }
+
+            seek(dst,i++) = Chars.Space;
+            var symbol = Symbols.index<T>()[src.Kind].Expr.Format();
+            SymbolicTools.copy(symbol, ref i, dst);
+            return i;
+        }
+
+        public static string format<T>(AsmOpCode<T> src)
+            where T : unmanaged, Enum
+        {
+            var storage = CharBlock16.Null;
+            var buffer = storage.Data;
+            var length = render(src,buffer);
+            return text.format(slice(buffer,0,length));
+        }
 
         [MethodImpl(Inline), Op]
         public static AsmOpCode opcode(EscapePrefix escape, byte a)

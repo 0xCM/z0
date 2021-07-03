@@ -2,15 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0.Emu
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    partial struct Llvm
+    using static Root;
+
+    public class CpuCore<T> : CpuCore
+        where T : unmanaged
     {
-        public readonly struct ModuleNames
+        public CpuCore(uint id)
+            : base(id)
         {
-            public const string Analysis = nameof(Analysis);
+
         }
     }
 }

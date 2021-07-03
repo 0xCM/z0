@@ -66,11 +66,13 @@ namespace Z0
 
             public static ToolId llc => "llc";
 
+            public static ToolId lli => "lli";
+
+            public static ToolId objdump =>"llvm-objdump";
+
             public static ToolId ml => "llvm-ml";
 
             public static ToolId mc => "llvm-mc";
-
-            public static ToolId objdump => "llvm-objdump";
         }
 
         public readonly struct windows

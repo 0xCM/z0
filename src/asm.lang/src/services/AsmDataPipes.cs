@@ -15,54 +15,17 @@ namespace Z0.Asm
     public class AsmDataPipes : AppService<AsmDataPipes>
     {
         AsmWorkspace Workspace;
+
         protected override void Initialized()
         {
             Workspace = Wf.AsmWorkspace();
         }
 
-        public static Outcome load(TextRow src, out CpuIdRow dst)
+        public ReadOnlySpan<CpuIdRow> LoadCpuIdImports()
         {
-            var input = src.Cells;
-            var i = 0;
-            var outcome = Outcome.Success;
-            outcome += DataParser.parse(skip(input,i++), out dst.Chip);
-            outcome += DataParser.parse(skip(input,i++), out dst.Leaf);
-            outcome += DataParser.parse(skip(input,i++), out dst.Subleaf);
-            outcome += DataParser.parse(skip(input,i++), out dst.Eax);
-            outcome += DataParser.parse(skip(input,i++), out dst.Ebx);
-            outcome += DataParser.parse(skip(input,i++), out dst.Ecx);
-            outcome += DataParser.parse(skip(input,i++), out dst.Edx);
-            return outcome;
-        }
-
-        public static void describe(ReadOnlySpan<CpuIdRow> src, ITextBuffer dst)
-        {
-            var count = src.Length;
-            var j = 0u;
-            var w = n8;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(src,i);
-                describe(row, dst);
-            }
-        }
-
-        public static void describe(in CpuIdRow row, ITextBuffer dst)
-        {
-            var w = n8;
-            dst.AppendFormat("eax: {0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(w));
-            var ebx = row.Ebx.FormatBitstring(w);
-            dst.AppendFormat("ebx: {0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(w));
-            var ecx = row.Ecx.FormatBitstring(w);
-            dst.AppendFormat("ebx: {0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(w));
-            var edx = row.Edx.FormatBitstring(w);
-            dst.AppendFormat("edx: {0} [{1}]", row.Edx, row.Edx.FormatBitstring(w));
-        }
-
-        public ReadOnlySpan<CpuIdRow> LoadCpuIdTable(FS.FilePath src)
-        {
+            var src = Workspace.ImportTable<CpuIdRow>();
             using var reader = src.Reader();
-            return LoadCpuIdTable(reader);
+            return LoadCpuIdImports(reader);
         }
 
         public Outcome ImportCpuIdSources()
@@ -75,9 +38,9 @@ namespace Z0.Asm
 
             const string Imply = " => ";
 
-            var dir = Workspace.DataSource("cpuid");
-            var files = dir.Files(FS.Def,true).ToReadOnlySpan();
-            var count = files.Length;
+            var srcdir = Workspace.DataSource("sde.cpuid");
+            var srcfiles = srcdir.Files(FS.Def, true).ToReadOnlySpan();
+            var count = srcfiles.Length;
             var outcome = Outcome.Success;
             var records = list<CpuIdRow>();
 
@@ -86,7 +49,7 @@ namespace Z0.Asm
                 if(outcome.Fail)
                     break;
 
-                ref readonly var file = ref skip(files,i);
+                ref readonly var file = ref skip(srcfiles,i);
                 var chip = file.FolderName.Format();
                 var formatter = Tables.formatter<CpuIdRow>();
                 using var reader = file.AsciLineReader();
@@ -164,25 +127,36 @@ namespace Z0.Asm
 
             var deposited = records.ViewDeposited();
             if(outcome)
-            {
-                var dst = Workspace.Table<CpuIdRow>();
-                var emitting = Wf.EmittingTable<CpuIdRow>(dst);
-                var formatter = Tables.formatter<CpuIdRow>();
-                using var writer = dst.AsciWriter();
-                writer.WriteLine(formatter.FormatHeader());
-                var _count = deposited.Length;
-                for(var i=0; i<_count; i++)
-                    writer.WriteLine(formatter.Format(skip(deposited,i)));
-
-                Wf.EmittedTable(emitting, _count);
-            }
+                outcome = Emit(deposited);
             else
                 Error(outcome.Message);
 
             return outcome;
         }
 
-        ReadOnlySpan<CpuIdRow> LoadCpuIdTable(TextReader reader)
+        Outcome Emit(ReadOnlySpan<CpuIdRow> src)
+        {
+            var dst = Workspace.ImportTable<CpuIdRow>();
+            var emitting = Wf.EmittingTable<CpuIdRow>(dst);
+            var formatter = Tables.formatter<CpuIdRow>();
+            using var rowWriter = dst.AsciWriter();
+            rowWriter.WriteLine(formatter.FormatHeader());
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(src,i);
+                rowWriter.WriteLine(formatter.Format(row));
+            }
+            Wf.EmittedTable(emitting, count);
+
+            using var bitWriter = Workspace.Bitfield("cpuid").AsciWriter();
+            var buffer = text.buffer();
+            AsmRender.bitfields(src,buffer);
+            bitWriter.WriteLine(buffer.Emit());
+            return true;
+        }
+
+        ReadOnlySpan<CpuIdRow> LoadCpuIdImports(TextReader reader)
         {
             const byte FieldCount = CpuIdRow.FieldCount;
             const char Delimiter = Chars.Pipe;
@@ -191,7 +165,7 @@ namespace Z0.Asm
             var count = header.Length;
             if(count != FieldCount)
             {
-                Wf.Error(Tables.FieldCountMismatch.Format(FieldCount,count));
+                Error(Tables.FieldCountMismatch.Format(FieldCount,count));
                 return default;
             }
 
@@ -202,14 +176,14 @@ namespace Z0.Asm
                 var data = TextRow.parse(current,Chars.Pipe);
                 if(data.CellCount != FieldCount)
                 {
-                    Wf.Error(Tables.FieldCountMismatch.Format(FieldCount, data.CellCount));
+                    Error(Tables.FieldCountMismatch.Format(FieldCount, data.CellCount));
                     return default;
                 }
 
-                var result = AsmDataPipes.load(data, out CpuIdRow row);
+                var result = AsmParser.parse(data, out CpuIdRow row);
                 if(result.Fail)
                 {
-                    Wf.Error(result.Message);
+                    Error(result.Message);
                     return default;
                 }
 

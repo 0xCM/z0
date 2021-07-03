@@ -26,7 +26,6 @@ namespace Z0
                   .Concrete()
                   .Select(x => new SpanResAccessor(src.ApiHostUri(), x, ResKind(x.ReturnType)));
 
-
         /// <summary>
         /// Queries the source types for ByteSpan property getters
         /// </summary>

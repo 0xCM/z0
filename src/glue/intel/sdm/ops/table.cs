@@ -2,20 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Emu
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
+    using static core;
     using static Root;
 
-    public abstract class Core
+    partial struct IntelSdm
     {
-        public uint CoreId {get;}
-
-        public Core(uint id)
-        {
-            CoreId  = id;
-        }
+        [MethodImpl(Inline), Op]
+        public static TableNumber table(ReadOnlySpan<char> src)
+            => new TableNumber(src);
     }
 }

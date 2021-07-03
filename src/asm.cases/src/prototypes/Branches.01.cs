@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
     using static Prototypes.Branch01;
 
     partial struct Prototypes

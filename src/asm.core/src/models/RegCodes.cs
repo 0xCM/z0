@@ -842,5 +842,21 @@ namespace Z0.Asm
             [Symbol("mmx7")]
             mm7 = r7,
         }
+
+        /// <summary>
+        /// Specifies instruction pointer registers
+        /// </summary>
+        [SymbolSource]
+        public enum IpReg : byte
+        {
+            [Symbol("ip")]
+            IP,
+
+            [Symbol("eip")]
+            EIP,
+
+            [Symbol("rip")]
+            RIP,
+        }
     }
 }

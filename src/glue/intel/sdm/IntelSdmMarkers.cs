@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     using System;
 
     using static Root;
@@ -37,7 +36,7 @@ namespace Z0.Asm
 
         public const string InstructionPageFooter_A_Right_B = ChapterPage.Descriptor;
 
-        public readonly struct GpInstTable
+        public readonly struct InstructionTable
         {
             const string NL = "\r\n";
 

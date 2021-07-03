@@ -375,6 +375,21 @@ namespace Z0.Asm
             return true;
         }
 
+        public static Outcome parse(TextRow src, out CpuIdRow dst)
+        {
+            var input = src.Cells;
+            var i = 0;
+            var outcome = Outcome.Success;
+            outcome += DataParser.parse(skip(input,i++), out dst.Chip);
+            outcome += DataParser.parse(skip(input,i++), out dst.Leaf);
+            outcome += DataParser.parse(skip(input,i++), out dst.Subleaf);
+            outcome += DataParser.parse(skip(input,i++), out dst.Eax);
+            outcome += DataParser.parse(skip(input,i++), out dst.Ebx);
+            outcome += DataParser.parse(skip(input,i++), out dst.Ecx);
+            outcome += DataParser.parse(skip(input,i++), out dst.Edx);
+            return outcome;
+        }
+
         static Fence<char> SigFence => (LParen, RParen);
 
         static Fence<char> OpCodeFence => (Lt, Gt);

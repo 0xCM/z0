@@ -19,6 +19,13 @@ namespace Z0.Asm
             dst.AppendFormat(string.Format("{0}:", line));
         }
 
+        public static void render(in ModeSupport src, ITextBuffer dst)
+        {
+            var m32 = Symbols.index<Mode32Support>()[src.Mode32].Expr;
+            var m64 = Symbols.index<Mode64Support>()[src.Mode64].Expr;
+            dst.AppendFormat("{0}/{1}", m64, m32);
+        }
+
         public static void render(in SectionNumber sn, in ChapterPage cp, ITextBuffer dst)
         {
             dst.Append("Section ");

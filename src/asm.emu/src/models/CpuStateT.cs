@@ -2,17 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0.Asm
 {
-    using System;
-
-    partial struct Llvm
+    public unsafe abstract class CpuState<T>
+        where T : CpuState<T>, new()
     {
-        public readonly struct TestSubjects
+        protected CpuState()
         {
-            public const string AliasSet = nameof(AliasSet);
 
-            public const string AssumptionCache = nameof(AssumptionCache);
         }
     }
 }

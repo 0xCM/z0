@@ -264,6 +264,9 @@ public enum PartId : ulong
     [Symbol("asm.run")]
     AsmRun = 128,
 
+    [Symbol("asm.emu")]
+    AsmEmu = 129,
+
     [Symbol("capture")]
     Capture = 131,
 

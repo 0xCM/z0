@@ -40,6 +40,30 @@ namespace Z0.Asm
 
         public static BndClass BND => default;
 
+        public static string @byte() => "byte";
+
+        public static string word() => "word";
+
+        public static string dword() => "dword";
+
+        public static string qword() => "qword";
+
+        public static string xmmword() => "xmmword";
+
+        public static string ymmword() => "ymmword";
+
+        public static string zmmword() => "ymmword";
+
+        public static string ip() => "ip";
+
+        public static string eip() => "eip";
+
+        public static string rip() => "rip";
+
+        public static string ptr() => "ptr";
+
+        static ReadOnlySpan<char> Sizes => "word\0dword\0qword\0xmmword\0ymmword\0zmmword";
+
         [Op]
         public static Symbols<AsmMnemonicCode> Mnemonics()
             => _Mnemonics;

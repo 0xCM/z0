@@ -176,8 +176,8 @@ namespace Z0
         protected void Row<T>(T content)
             => Wf.Row(content);
 
-        protected void Row(string pattern, params object[] args)
-            => Wf.Row(string.Format(pattern,args));
+        // protected void Row(string pattern, params object[] args)
+        //     => Wf.Row(string.Format(pattern,args));
 
         protected void Error<T>(T content)
             => Wf.Error(content);

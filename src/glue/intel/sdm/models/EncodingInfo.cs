@@ -16,8 +16,10 @@ namespace Z0.Asm
         /// Represents an entry in an encoding cross-reference table for an instruction
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct EncodingCrossRef
+        public struct EncodingInfo
         {
+            public AsmMnemonic Mnemonic;
+
             public string Key;
 
             public string Operand1;

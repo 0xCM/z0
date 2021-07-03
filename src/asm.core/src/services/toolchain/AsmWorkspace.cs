@@ -12,8 +12,6 @@ namespace Z0.Asm
 
     public readonly struct AsmWorkspace : IFileArchive
     {
-        const string dumpbin = nameof(dumpbin);
-
         const string instructions = nameof(instructions);
 
         const string analysis = nameof(analysis);
@@ -84,9 +82,9 @@ namespace Z0.Asm
         public FS.FilePath Table(string id, FS.FileExt ext)
             => Tables() + FS.file(id,ext);
 
-        public FS.FilePath Table<T>()
+        public FS.FilePath ImportTable<T>()
             where T : struct, IRecord<T>
-                => Tables() + FS.file(TableId<T>(), FS.Csv);
+                => ImportRoot() + FS.file(TableId<T>(), FS.Csv);
 
         public FS.FilePath ImportTable<T>(string dataset)
             where T : struct, IRecord<T>

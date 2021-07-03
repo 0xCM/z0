@@ -8,7 +8,6 @@ namespace Z0
 
     sealed class ToolShell : AppService<ToolShell>
     {
-
         public void Run()
         {
             var assets = Wf.LlvmAssets();
@@ -16,7 +15,6 @@ namespace Z0
             TableShow(types);
         }
     }
-
 
     class App
     {

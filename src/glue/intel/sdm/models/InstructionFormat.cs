@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static core;
-    using static Root;
-
     partial struct IntelSdm
     {
         /// <summary>
@@ -17,6 +11,8 @@ namespace Z0.Asm
         /// </summary>
         public struct InstructionFormat
         {
+            public AsmMnemonic Mnemonic;
+
             public Marker Descriptor;
 
             public string BitFormat;

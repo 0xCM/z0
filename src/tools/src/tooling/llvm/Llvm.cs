@@ -9,7 +9,6 @@ namespace Z0.Tools
 
     using static Root;
 
-
     [ApiHost]
     public readonly partial struct Llvm
     {

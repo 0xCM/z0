@@ -19,7 +19,7 @@ namespace Z0
 
         [Op, MethodImpl(Inline)]
         public static CmdSpec spec(string name, CmdArgs args)
-            => new CmdSpec(name,args);
+            => new CmdSpec(name, args);
 
         [Op]
         public static CmdSpec spec(string input)

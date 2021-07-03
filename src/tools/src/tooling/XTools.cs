@@ -35,7 +35,5 @@ namespace Z0
         [Op]
         public static LlvmAssetCatalog LlvmAssets(this IWfRuntime wf)
             => Svc.LlvmAssetCatalog.create(wf);
-
-
     }
 }

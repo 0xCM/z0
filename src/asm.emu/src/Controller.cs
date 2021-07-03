@@ -12,9 +12,9 @@ namespace Z0.Emu
 
     public readonly struct Controller
     {
-        public static Core<T> core<T>(uint id)
+        public static CpuCore<T> core<T>(uint id)
             where T : unmanaged
-                => new Core<T>(id);
+                => new CpuCore<T>(id);
 
         public static Stack<T> stack<T>(Machine<T> m, uint capacity)
             where T : unmanaged
@@ -31,7 +31,7 @@ namespace Z0.Emu
 
         public static Cpu<T> cpu<T>(uint cores)
             where T : unmanaged
-                => new Cpu<T>(alloc<Core<T>>(cores));
+                => new Cpu<T>(alloc<CpuCore<T>>(cores));
 
         public static Machine<T> machine<T>(Cpu<T> cpu)
             where T : unmanaged

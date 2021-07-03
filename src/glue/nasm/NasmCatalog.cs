@@ -33,7 +33,6 @@ namespace Z0.Asm
             var ws = Wf.AsmWorkspace();
             var src = ws.DataFile("nasm-instructions", FS.Csv);
             var lines = src.ReadTextLines();
-            //var lines = Lines.read(AsmData.Assets.NasmInstructions().Utf8());
             var count = lines.Length;
             var section = EmptyString;
             var records = DataList.create<NasmInstruction>(7000);
