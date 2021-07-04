@@ -109,7 +109,7 @@ namespace Z0
             var typeDef = typeof(Func<,>).GetGenericTypeDefinition();
             var type = typeDef.MakeGenericType(array(paramInfo.ParameterType, method.ReturnType));
             var args = paramX(paramInfo.ParameterType, paramInfo.Name);
-            var call = Expression.Call(root.coalesce(host, x => constant(x)), method, args);
+            var call = Expression.Call(core.coalesce(host, x => constant(x)), method, args);
             var l = Expression.Lambda(type, call, args);
             var del = l.Compile();
             return x => del.DynamicInvoke(x);
@@ -134,7 +134,7 @@ namespace Z0
                 paramX(parameters[1].ParameterType, parameters[1].Name)
                 };
 
-            var call = Expression.Call(root.coalesce(host, x => constant(x)), method, args);
+            var call = Expression.Call(core.coalesce(host, x => constant(x)), method, args);
             var l = Expression.Lambda(type, call, args);
             var del = l.Compile();
             return (x,y) => del.DynamicInvoke(x,y);

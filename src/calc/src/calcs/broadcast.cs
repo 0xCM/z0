@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static memory;
+    using static core;
 
     partial struct Calcs
     {
@@ -119,7 +119,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var length = root.min(dst.CellCount, width<S>());
+            var length = core.min(dst.CellCount, width<S>());
             for(var i=0; i<length; i++)
                 dst[i] = gbits.testbit(src, (byte)i) ? enabled : default;
             return ref dst;
@@ -138,12 +138,11 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var length = root.min(dst.CellCount, width<S>());
+            var length = core.min(dst.CellCount, width<S>());
             for(var i=0; i<length; i++)
                 dst[i] = gbits.testbit(src,(byte)i) ? enabled : default;
             return ref dst;
         }
-
 
         [MethodImpl(Inline), Factory, Closures(Closure)]
         public static VBroadcast128<T> vbroadcast<T>(W128 w, T t = default)

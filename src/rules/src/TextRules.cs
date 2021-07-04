@@ -40,23 +40,5 @@ namespace Z0
             dst = default;
             return false;
         }
-
-        [ApiHost("text.rules.format")]
-        public readonly partial struct Format
-        {
-
-        }
-
-        [ApiHost("text.rules.factory")]
-        public readonly partial struct Factory
-        {
-
-        }
-
-        [ApiComplete("text.rules.data")]
-        public readonly partial struct Data
-        {
-
-        }
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct root
+    partial struct core
     {
         /// <summary>
         /// Transforms an input, branching on nullity evaluation

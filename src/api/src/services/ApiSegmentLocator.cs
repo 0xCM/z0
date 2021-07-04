@@ -17,8 +17,8 @@ namespace Z0
         {
             var count = methods.Length;
             var flow = Wf.Running(Msg.LocatingSegments.Format(count));
-            var buffer = sys.alloc<MethodSegment>(count);
-            var locations = root.hashset<ProcessSegment>();
+            var buffer = alloc<MethodSegment>(count);
+            var locations = hashset<ProcessSegment>();
             var segments  = src.Segments;
             ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)

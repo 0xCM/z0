@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public readonly struct TestInstance<C,T>
         where C : struct
         where T : struct

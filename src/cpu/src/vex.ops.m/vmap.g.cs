@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = root.min(cpu.vcount<S>(w128), cpu.vcount<T>(w128));
+            var xLen = min(cpu.vcount<S>(w128), cpu.vcount<T>(w128));
             var dstLen = cpu.vcount<T>(w128);
             var lhsData = a.ToSpan();
             var rhsData = b.ToSpan();
@@ -47,7 +47,7 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = root.min(cpu.vcount<S>(w128), cpu.vcount<T>(w128));
+            var xLen = min(cpu.vcount<S>(w128), cpu.vcount<T>(w128));
             var dstLen = cpu.vcount<T>(w128);
             var data = src.ToSpan();
             Span<T> dst = new T[dstLen];
@@ -67,7 +67,7 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = root.min(cpu.vcount<S>(w256), cpu.vcount<T>(w256));
+            var xLen = min(cpu.vcount<S>(w256), cpu.vcount<T>(w256));
             var dstLen = cpu.vcount<T>(w256);
             var data = src.ToSpan();
             Span<T> dst = new T[dstLen];
@@ -89,7 +89,7 @@ namespace Z0
             where S : unmanaged
         {
             var w = w256;
-            var xLen = root.min(cpu.vcount<S>(w), cpu.vcount<T>(w));
+            var xLen = min(cpu.vcount<S>(w), cpu.vcount<T>(w));
             var dstLen = cpu.vcount<T>(w);
             var lhsData = a.ToSpan();
             var rhsData = b.ToSpan();

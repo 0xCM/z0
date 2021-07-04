@@ -255,7 +255,7 @@ namespace Z0
         static int seq
         {
             [MethodImpl(Inline)]
-            get => root.atomic(ref _checkseq);
+            get => core.inc(ref _checkseq);
         }
     }
 }

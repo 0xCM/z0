@@ -7,11 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
-    public readonly struct TestCases
+    partial struct core
     {
-
+        [MethodImpl(Inline)]
+        public static T ifnull<T>(T input, T replace)
+            => input ?? replace;
     }
 }

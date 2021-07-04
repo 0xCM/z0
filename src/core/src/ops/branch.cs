@@ -7,7 +7,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct root
+    partial struct core
     {
         /// <summary>
         /// Executes one of two functions depending on the evaluation criterion

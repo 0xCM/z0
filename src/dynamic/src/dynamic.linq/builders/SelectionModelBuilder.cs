@@ -28,10 +28,10 @@ namespace Z0.DynamicModels
             var builder = new SelectionModelBuilder(X);
             var selection = new MemberSelection(builder.selections);
             var order = builder.orders.Count != 0
-                      ? root.some(new MemberOrdering(builder.orders))
-                      : root.none<MemberOrdering>();
+                      ? Option.some(new MemberOrdering(builder.orders))
+                      : Option.none<MemberOrdering>();
 
-            root.iter(builder.junctions, j => j.Flatten());
+            core.iter(builder.junctions, j => j.Flatten());
             var model = new SelectionModel(X, selection, order, builder.junctions , facets);
             return model;
         }

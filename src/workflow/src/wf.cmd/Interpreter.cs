@@ -187,7 +187,7 @@ namespace Z0
             while(true && Running)
             {
                 Dispatch();
-                root.delay(Frequency);
+                core.delay(Frequency);
             }
         }
 

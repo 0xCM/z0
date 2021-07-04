@@ -6,16 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
 
-    partial struct root
+    partial struct core
     {
-        /// <summary>
-        /// Allocates and optionally starts a system counter
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static SystemCounter counter(bool start = false)
-            => SystemCounters.counter(start);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Deferred<T> defer<T>(IEnumerable<T> src)
+            => new Deferred<T>(src);
     }
 }

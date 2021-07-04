@@ -27,6 +27,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ExecToken Dispense()
-            => new ExecToken((ulong)root.atomic(ref StartToken));
+            => new ExecToken((ulong)core.inc(ref StartToken));
     }
 }

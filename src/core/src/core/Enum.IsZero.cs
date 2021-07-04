@@ -10,15 +10,16 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct root
+    partial class XTend
     {
         [MethodImpl(Inline)]
-        public static void project<S,T>(ReadOnlySpan<S> a, ReadOnlySpan<T> b, Span<Paired<S,T>> dst)
-        {
-            var count = dst.Length;
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = root.paired(skip(a,i), skip(b,i));
-        }
+        public static bool IsZero<T>(this T src)
+            where T : unmanaged, Enum
+                => bw64(src) == 0;
 
+        [MethodImpl(Inline)]
+        public static bool IsNonZero<T>(this T src)
+            where T : unmanaged, Enum
+                => bw64(src) != 0;
     }
 }

@@ -14,13 +14,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Timestamp timestamp()
             => now();
-
-        [MethodImpl(Inline), Op]
-        public static Timestamp timestamp(ulong ticks)
-            => new Timestamp(ticks);
-
-        [MethodImpl(Inline), Op]
-        public static Timestamp timestamp(long ticks)
-            => new Timestamp((ulong)ticks);
     }
 }

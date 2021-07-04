@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     internal class TokenDispenser
     {
@@ -20,10 +20,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ExecToken NextExecToken()
-            => new ExecToken((ulong)root.atomic(ref StartToken));
+            => new ExecToken((ulong)core.inc(ref StartToken));
 
         [MethodImpl(Inline)]
         public ExecToken CloseExecToken(ExecToken src)
-            => src.Complete((ulong)root.atomic(ref EndToken));
+            => src.Complete((ulong)core.inc(ref EndToken));
     }
 }

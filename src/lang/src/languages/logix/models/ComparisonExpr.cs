@@ -50,14 +50,14 @@ namespace Z0
 
         public void SetVars(params ILogicExpr[] values)
         {
-            var count = root.min(_Vars.Length, values.Length);
+            var count = core.min(_Vars.Length, values.Length);
             for(var i=0; i<count; i++)
                 _Vars[i].Set(values[i]);
         }
 
         public byte SetVars(ILiteralLogicSeqExpr values)
         {
-            var count = root.min(VarCount, (byte)values.Length);
+            var count = core.min(VarCount, (byte)values.Length);
             for(var i=0; i<count; i++)
                 _Vars[i].Set(values[i]);
             return count;
@@ -65,7 +65,7 @@ namespace Z0
 
         public byte SetVars(params bit[] values)
         {
-            var count = root.min(VarCount, (byte)values.Length);
+            var count = core.min(VarCount, (byte)values.Length);
             for(var i=0; i<count; i++)
                 _Vars[i].Set(values[i]);
             return count;

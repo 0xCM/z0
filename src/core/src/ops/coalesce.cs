@@ -7,7 +7,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct root
+    partial struct core
     {
         /// <summary>
         /// Evaluates a function over a value if the value is not null; otherwise, returns the default result value

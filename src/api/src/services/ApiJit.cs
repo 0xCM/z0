@@ -172,6 +172,6 @@ namespace Z0
         }
 
         static HashSet<string> CommonExclusions
-            => root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
+            => core.hashset(core.array("ToString","GetHashCode", "Equals", "ToString"));
     }
 }

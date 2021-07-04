@@ -87,7 +87,7 @@ namespace Z0
             => Wf.RedirectEmissions(WfEmissionLog.create(name,dst));
 
         FS.FileName NameShowLog(string src, FS.FileExt ext)
-            => FS.file(root.controller().Id().PartName() + "." + HostName + "." + src, ext);
+            => FS.file(core.controller().Id().PartName() + "." + HostName + "." + src, ext);
 
         ShowLog ShowLog(FS.FileName file)
             => new ShowLog(Wf, Db.ShowLog(file));

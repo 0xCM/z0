@@ -17,6 +17,14 @@ namespace Z0
         public static Timestamp now()
             => DateTime.Now;
 
+        [MethodImpl(Inline), Op]
+        public static Timestamp ticks(ulong ticks)
+            => new Timestamp(ticks);
+
+        [MethodImpl(Inline), Op]
+        public static Timestamp ticks(long ticks)
+            => new Timestamp((ulong)ticks);
+
         readonly ulong Ticks;
 
         [MethodImpl(Inline)]

@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Deferred<T> deferred<T>(ISource src)
-            => root.defer(stream<T>(src));
+            => core.defer(stream<T>(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Deferred<T> deferred<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
-                => root.defer(stream<T>(src, domain, filter));
+                => core.defer(stream<T>(src, domain, filter));
     }
 }

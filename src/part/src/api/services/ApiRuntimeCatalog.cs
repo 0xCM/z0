@@ -204,7 +204,7 @@ namespace Z0
 
         public ReadOnlySpan<IPart> FindParts(params PartId[] parts)
         {
-            var selected = root.hashset(parts);
+            var selected = core.hashset(parts);
             return _Parts.Where(p => selected.Contains(p.Id));
        }
 

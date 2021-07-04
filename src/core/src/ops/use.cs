@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-
-    partial struct root
+    partial struct core
     {
         public static void use<T>(T resource, Action<T> worker)
             where T : IDisposable

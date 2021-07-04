@@ -177,7 +177,7 @@ namespace Z0.Asm
             var jit = Wf.ApiJit();
             var members = jit.JitCatalog(catalog);
             var flow = Wf.Running("Creating method table");
-            var table = MethodEntryPoints.create(root.controller().Id(), members);
+            var table = MethodEntryPoints.create(core.controller().Id(), members);
             Wf.Ran(flow, $"Created method table with {table.View.Length} entries");
         }
 

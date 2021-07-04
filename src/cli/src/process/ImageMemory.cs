@@ -138,7 +138,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void fill(ReadOnlySpan<ProcessModule> src, Span<ProcessModuleRow> dst)
         {
-            var count = root.min(src.Length, dst.Length);
+            var count = min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
                 fill(skip(src,i), ref seek(dst,i));
         }

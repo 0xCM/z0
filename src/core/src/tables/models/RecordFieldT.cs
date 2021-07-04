@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
 
@@ -18,7 +19,7 @@ namespace Z0
         /// <summary>
         /// The defining field
         /// </summary>
-        public ClrFieldAdapter Definition;
+        public FieldInfo Definition;
 
         /// <summary>
         /// The 0-based, declaration order of the field
@@ -37,7 +38,7 @@ namespace Z0
         /// <summary>
         /// The field datatype
         /// </summary>
-        public ClrTypeAdapter DataType
+        public Type DataType
         {
             [MethodImpl(Inline)]
             get => Definition.FieldType;
@@ -46,7 +47,7 @@ namespace Z0
         /// <summary>
         /// The declaring record type
         /// </summary>
-        public ClrTypeAdapter RecordType
+        public Type RecordType
         {
             [MethodImpl(Inline)]
             get => Definition.DeclaringType;

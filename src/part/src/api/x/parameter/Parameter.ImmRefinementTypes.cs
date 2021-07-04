@@ -15,6 +15,6 @@ namespace Z0
         /// <param name="src">The source parameter</param>
         [Op]
         public static Option<Type> ImmRefinementType(this ParameterInfo src)
-            => src.IsRefinedImmediate() ? root.some(src.ParameterType) : root.none<Type>();
+            => src.IsRefinedImmediate() ? Option.some(src.ParameterType) : Option.none<Type>();
     }
 }

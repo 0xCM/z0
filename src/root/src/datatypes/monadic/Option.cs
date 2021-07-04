@@ -16,6 +16,28 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+
+        /// <summary>
+        /// Defines the canonical option functor F:Option[A] -> Option[B] induced by a non-monadic dual f:A->B
+        /// </summary>
+        /// <param name="f">A non-monadic projector</param>
+        /// <typeparam name="A">The source type</typeparam>
+        /// <typeparam name="B">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static Func<Option<A>,Option<B>> fmap<A,B>(Func<A,B> f)
+            => x => x.TryMap(a => f(a));
+
+        /// <summary>
+        /// Implements the canonical bind operation
+        /// </summary>
+        /// <typeparam name="X">The source domain type</typeparam>
+        /// <typeparam name="Y">The target domain type</typeparam>
+        /// <param name="x">The point in the monadic space over X</param>
+        /// <param name="f">The function to apply to effect the bind</param>
+        [MethodImpl(Inline)]
+        public static Option<Y> bind<X,Y>(Option<X> x, Func<X,Option<Y>> f)
+            => x ? f(x.ValueOrDefault()) : Option.none<Y>();
+
         /// <summary>
         /// Creates an option from a reference type instance, returning a valued option if the
         /// refernce is not null; otherwise, returns none
