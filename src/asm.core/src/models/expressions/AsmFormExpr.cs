@@ -56,6 +56,10 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
+        [MethodImpl(Inline)]
+        public static implicit operator AsmFormExpr((AsmOpCodeExpr oc, AsmSigExpr sig) src)
+            => new AsmFormExpr(src.oc, src.sig);
+
         public static AsmFormExpr Empty
             => new AsmFormExpr(AsmOpCodeExpr.Empty, AsmSigExpr.Empty);
     }

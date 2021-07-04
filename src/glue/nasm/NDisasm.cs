@@ -21,7 +21,7 @@ namespace Z0.Tools
 
         }
 
-        public static CmdScript script(BitMode mode, FS.FilePath src, FS.FilePath dst)
+        public static CmdScript script(Bitness mode, FS.FilePath src, FS.FilePath dst)
         {
             const string Pattern = "{0} -b {1} -p intel {2} > {3}";
             var id = src.FileName.WithoutExtension.Format();
@@ -29,7 +29,7 @@ namespace Z0.Tools
             return Cmd.script(id, body);
         }
 
-        public FS.FilePath Job(BitMode mode, FS.FolderPath input, FS.FolderPath output)
+        public FS.FilePath Job(Bitness mode, FS.FolderPath input, FS.FolderPath output)
         {
             var src = input.Files(FS.Bin);
             var _scripts = scripts(mode, src, output);
@@ -51,7 +51,7 @@ namespace Z0.Tools
             return runner;
         }
 
-        public static ReadOnlySpan<CmdScript> scripts(BitMode mode, ReadOnlySpan<FS.FilePath> src, FS.FolderPath dst)
+        public static ReadOnlySpan<CmdScript> scripts(Bitness mode, ReadOnlySpan<FS.FilePath> src, FS.FolderPath dst)
         {
             var count = src.Length;
             var buffer = alloc<CmdScript>(count);

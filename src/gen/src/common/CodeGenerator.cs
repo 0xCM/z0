@@ -143,7 +143,7 @@ namespace Z0
 
 
         public static string FileHeader
-            => Format.lines(
+            => text.lines(
                 HeaderLine1,
                 HeaderLine2,
                 HeaderLine3,

@@ -41,12 +41,12 @@ namespace Z0.Asm
         static Outcome argerror(string value)
             => (false, $"The argument value '{value}' is invalid");
 
-        static CmdArg arg(in CmdArgs src, ushort index)
+        static CmdArg arg(in CmdArgs src, int index)
         {
             var count = src.Length;
             if(count < index - 1)
                 sys.@throw("Argument specification error");
-            return src[index];
+            return src[(ushort)index];
         }
     }
 }

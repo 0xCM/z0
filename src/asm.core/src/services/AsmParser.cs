@@ -297,9 +297,9 @@ namespace Z0.Asm
             if(outcome.Fail)
                 return (false, string.Format(ErrorPattern, nameof(dst.BlockOffset), src.LineNumber));
 
-            outcome += parse(skip(parts,i++), out dst.Expression);
+            outcome += parse(skip(parts,i++), out dst.Statement);
             if(outcome.Fail)
-                return (false, string.Format(ErrorPattern, nameof(dst.Expression), src.LineNumber));
+                return (false, string.Format(ErrorPattern, nameof(dst.Statement), src.LineNumber));
 
             outcome += AsmHexCode.parse(skip(parts,i++), out dst.Encoded);
             if(outcome.Fail)

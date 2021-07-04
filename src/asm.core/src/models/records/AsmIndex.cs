@@ -31,7 +31,7 @@ namespace Z0
 
         public Address16 BlockOffset;
 
-        public AsmExpr Expression;
+        public AsmExpr Statement;
 
         public AsmHexCode Encoded;
 

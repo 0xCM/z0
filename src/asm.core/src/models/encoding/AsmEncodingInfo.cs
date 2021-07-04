@@ -12,19 +12,14 @@ namespace Z0.Asm
     public class AsmEncodingInfo : IEquatable<AsmEncodingInfo>, IComparable<AsmEncodingInfo>
     {
         /// <summary>
+        /// The form used to produce the encoded bits from the statement
+        /// </summary>
+        public AsmFormExpr Form {get;}
+
+        /// <summary>
         /// The encoded statement
         /// </summary>
         public AsmExpr Statement {get;}
-
-        /// <summary>
-        /// The signature to which the statement conforms
-        /// </summary>
-		public AsmSigExpr Sig {get;}
-
-        /// <summary>
-        /// The op code that deterimines the encoding
-        /// </summary>
-        public AsmOpCodeExpr OpCode {get;}
 
         /// <summary>
         /// The encoded bytes
@@ -37,13 +32,30 @@ namespace Z0.Asm
         public AsmBitstring Bits {get;}
 
         [MethodImpl(Inline)]
-        public AsmEncodingInfo(AsmExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode hex, AsmBitstring bits)
+        public AsmEncodingInfo(AsmFormExpr form, AsmExpr statement, AsmHexCode hex, AsmBitstring bits)
         {
+            Form = form;
             Statement = statement;
-            Sig = sig;
-            OpCode = opcode;
             Encoded = hex;
             Bits = bits;
+        }
+
+        /// <summary>
+        /// The signature to which the statement conforms
+        /// </summary>
+		public AsmSigExpr Sig
+        {
+            [MethodImpl(Inline)]
+            get => Form.Sig;
+        }
+
+        /// <summary>
+        /// The op code that deterimines the encoding
+        /// </summary>
+        public AsmOpCodeExpr OpCode
+        {
+            [MethodImpl(Inline)]
+            get => Form.OpCode;
         }
 
         public int CompareTo(AsmEncodingInfo src)

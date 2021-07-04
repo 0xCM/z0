@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial class XText
+    partial class XTend
     {
         [MethodImpl(Inline)]
         static int width<E>(E field)

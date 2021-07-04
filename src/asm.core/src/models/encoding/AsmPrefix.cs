@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Root;
     using static AsmCodes;
-    using static core;
 
     /// <summary>
     /// [Kind[24,27] | Encoding]

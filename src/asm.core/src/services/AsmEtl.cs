@@ -40,12 +40,8 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static BinaryCode code(CodeBlock encoded, uint offset, byte size)
-            => slice(encoded.View, offset, size).ToArray();
-
-        [Op]
-        public static AsmEncodingInfo encoding(in AsmIndex src)
-            => new AsmEncodingInfo(src.Expression, src.Sig, src.OpCode, src.Encoded, AsmBitstrings.bitstring(src.Encoded));
+        public static BinaryCode code(in CodeBlock src, uint offset, byte size)
+            => slice(src.View, offset, size).ToArray();
 
         public static SortedSpan<AsmEncodingInfo> encodings(ReadOnlySpan<AsmIndex> src)
         {
@@ -55,7 +51,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(src,i);
-                if(collected.Add(encoding(statement)))
+                if(collected.Add(asm.encoding(statement)))
                     counter++;
             }
             return collected.Array().ToSortedSpan();

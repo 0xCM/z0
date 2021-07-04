@@ -5,7 +5,8 @@
 namespace Z0
 {
     using System;
-    partial class XText
+
+    partial class XTend
     {
         [TextUtility]
         public static ReadOnlySpan<TextLine> Lines(this string src, bool keepblank = false)

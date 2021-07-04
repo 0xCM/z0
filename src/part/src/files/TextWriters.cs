@@ -10,7 +10,13 @@ namespace Z0
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface ITextWriter
+    public readonly struct TextWriters
+    {
+        public static TextWriter asci(FS.FilePath src)
+            => TextWriterProxy.cover(src.AsciWriter());
+    }
+
+    public interface ITextWriter : IDisposable
     {
         IFormatProvider FormatProvider {get;}
 
@@ -59,11 +65,13 @@ namespace Z0
         void Write(ulong value);
 
         Task WriteAsync(char value);
-
     }
 
     public sealed class TextWriterProxy : TextWriter, ITextWriter
     {
+        public static TextWriter cover(TextWriter src)
+            => new TextWriterProxy(src);
+
         readonly TextWriter Target;
 
         TextWriterProxy(TextWriter dst)
@@ -100,18 +108,15 @@ namespace Z0
             Target.Write(value);
         }
 
-
         public override void Write(char[]? buffer)
         {
             Target.Write(buffer);
         }
 
-
         public override void Write(char[] buffer, int index, int count)
         {
             Target.Write(buffer, index, count);
         }
-
 
         public override void Write(decimal value)
         {

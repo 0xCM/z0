@@ -60,7 +60,7 @@ namespace Z0.Asm
                     statement.BlockOffset = blockOffset;
                     statement.IP = ip;
                     statement.OpUri = code.OpUri;
-                    statement.Expression = instruction.FormattedInstruction;
+                    statement.Statement = instruction.FormattedInstruction;
                     AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
                     statement.Encoded = AsmHexCode.load(slice(bytes, blockOffset, size));
                     statement.OpCode = opcode;

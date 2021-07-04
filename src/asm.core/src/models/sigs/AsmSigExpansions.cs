@@ -9,9 +9,8 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct AsmSigTokens
+    partial struct AsmSigExpansions
     {
-
         [SymSource]
         public enum GpRmExpansion : byte
         {
