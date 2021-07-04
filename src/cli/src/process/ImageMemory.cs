@@ -53,15 +53,15 @@ namespace Z0
 
         [Op]
         public static Index<ProcessMemoryRegion> regions()
-            => ImageMemory.pages(MemoryNode.snapshot().Describe());
+            => pages(MemoryNode.snapshot().Describe());
 
         [Op]
         public static Index<ProcessMemoryRegion> regions(int procid)
-            => ImageMemory.pages(MemoryNode.snapshot(procid).Describe());
+            => pages(MemoryNode.snapshot(procid).Describe());
 
         [Op]
         public static Index<ProcessMemoryRegion> regions(Process src)
-            => ImageMemory.pages(MemoryNode.snapshot(src.Id).Describe());
+            => pages(MemoryNode.snapshot(src.Id).Describe());
 
         public static Index<ProcessMemoryRegion> pages(ReadOnlySpan<MemoryRangeInfo> src)
         {

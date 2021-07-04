@@ -41,33 +41,17 @@ namespace Z0
         public static ApiPartCatalog catalog(Assembly src)
             => new ApiPartCatalog(src.Id(), src, complete(src), apihosts(src), SvcHostTypes(src));
 
-        /// <summary>
-        /// Searches an assembly for types tagged with the <see cref="ApiCompleteAttribute"/>
-        /// </summary>
-        /// <param name="src">The assembly to search</param>
-        [Op]
-        public static Index<ApiCompleteType> complete(Assembly src)
+        public static IApiCatalog catalog()
         {
-            var part = src.Id();
-            var types = span(src.GetTypes().Where(t => t.Tagged<ApiCompleteAttribute>()));
-            var count = types.Length;
-            var buffer = alloc<ApiCompleteType>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var type = ref skip(types,i);
-                var attrib = type.Tag<ApiCompleteAttribute>();
-                var name =  TextTools.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
-                var uri = new ApiHostUri(part, name);
-                var declared = type.DeclaredMethods();
-                seek(dst, i) = new ApiCompleteType(type, name, part, uri, declared, index(declared));
-            }
-            return buffer;
+            var control = core.controller();
+            var path = FS.path(control.Location);
+            var dir = path.FolderPath;
+            return catalog(dir);
         }
 
         public static IApiCatalog catalog(FS.FolderPath dir)
         {
-            var candidates = assemblies(dir,true).Where(x => x.Id() != 0).View;
+            var candidates = assemblies(dir, true).Where(x => x.Id() != 0);
             var count = candidates.Length;
             var parts = list<IPart>();
             for(var i=0; i<count; i++)

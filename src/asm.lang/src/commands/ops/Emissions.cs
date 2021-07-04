@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.IO;
-
     using static Root;
     using static core;
     using static Typed;

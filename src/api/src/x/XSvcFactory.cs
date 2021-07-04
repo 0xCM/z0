@@ -38,14 +38,6 @@ namespace Z0
             => Svc.ApiAssets.create(wf);
 
         [Op]
-        public static Symbolism Symbolism(this IWfRuntime wf)
-            => Svc.Symbolism.create(wf);
-
-        [Op]
-        public static ApiHex ApiHex(this IWfRuntime wf)
-            => Svc.ApiHex.create(wf);
-
-        [Op]
         public static ApiCatalogs ApiCatalogs(this IWfRuntime wf)
             => Svc.ApiCatalogs.create(wf);
 

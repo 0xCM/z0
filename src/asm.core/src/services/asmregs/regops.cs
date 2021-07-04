@@ -13,15 +13,26 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [Op]
-        public static ReadOnlySpan<RegOp> generate(RegClassCode @class, SortedSpan<RegWidthCode> widths)
+        public static ReadOnlySpan<RegOp> regops(RegClassCode @class, SortedSpan<RegWidthCode> widths)
         {
             var wCount = widths.Length;
             var view = widths.View;
-            var count = AsmRegs.count(@class)*wCount;
+            var count = regcount(@class)*wCount;
             var dst = alloc<RegOp>(count);
             for(var w=wCount-1; w>=0; w--)
-                list(@class, skip(view,w),  dst);
+                regops(@class, skip(view,w),  dst);
             return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint regops(RegClassCode @class, RegWidthCode w, Span<RegOp> dst)
+        {
+            ref var r = ref first(dst);
+            var count = regcount(@class);
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+                seek(r,counter++) = reg((RegWidthCode)w, @class, (RegIndexCode)i);
+            return counter;
         }
     }
 }

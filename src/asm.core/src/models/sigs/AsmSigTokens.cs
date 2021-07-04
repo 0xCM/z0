@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
     public readonly struct AsmSigTokens
     {
         const string group = "asmsigs";
@@ -50,19 +45,19 @@ namespace Z0.Asm
         [SymSource(group), Alias("gpReg", "gpregs", "gpreg")]
         public enum GpRegToken : byte
         {
-            [Symbol("reg", "A general-purpose register used for instructions when the width of the register does not matter to the semantics of the operation of the instruction. The register can be r16, r32, or r64.")]
+            [Symbol("reg", "A gp register used for instructions when the width of the register does not matter to the semantics of the operation of the instruction. The register can be r16, r32, or r64.")]
             reg,
 
-            [Symbol("al")]
+            [Symbol("al", "The al register")]
             al,
 
-            [Symbol("ax")]
+            [Symbol("ax", "The ax register")]
             ax,
 
-            [Symbol("eax")]
+            [Symbol("eax", "The eax register")]
             eax,
 
-            [Symbol("rax")]
+            [Symbol("rax", "The rax register")]
             rax,
 
             /// <summary>
@@ -86,7 +81,7 @@ namespace Z0.Asm
             /// <summary>
             ///  One of {rax, rcx, rdx, rbx, rsp, rbp, rsi rdi} or {r8w, r9w, r10w, r11w, r12w, r13w, r14w, r15w} when using REX.R and 64-bit mode.
             /// </summary>
-            [Symbol("r64", "One of the quadword general-purpose registers: {RAX RBX RCX RDX RDI RSI RBP RSP R8–R15}; These are available when using REX.R and 64-bit mode")]
+            [Symbol("r64", "A 64-bit gp register")]
             r64,
 
             [Symbol("r32a", "A first r32 register operand")]
@@ -329,14 +324,14 @@ namespace Z0.Asm
             [Symbol("rel8", "A relative address in the range from 128 bytes before the end of the instruction to 127 bytes after the end of the instruction")]
             rel8,
 
-            [Symbol("rel16", "A relative address within the same code segment as the instruction assembled. The rel16 symbol applies to instructions with an operand-size attribute of 16 bits")]
+            [Symbol("rel16", "A relative address within the same code segment as the instruction assembled, and applicable to instructions with an operand-size attribute of 16 bits")]
             rel16,
 
-            [Symbol("rel32", "A relative address within the same code segment as the instruction assembled. The rel32 symbol applies to instructions with an operand-size attribute of 32 bits")]
+            [Symbol("rel32", "A relative address within the same code segment as the instruction assembled. and applicable to instructions with an operand-size attribute of 32 bits")]
             rel32,
         }
 
-        [SymSource(group), Alias("farPtr")]
+        [SymSource(group), Alias("farptr")]
         public enum FarPtrToken : byte
         {
             [Symbol("m16:16", "A far pointer defined by a 16-bit segment selector an 16-bit offset")]

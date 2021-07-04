@@ -42,7 +42,7 @@ namespace Z0
             }
             else
             {
-                Wf.Warn(Msg.PdbNotFound.Format(name));
+                Warn(Msg.PdbNotFound.Format(name));
             }
 
             Wf.Ran(flow, string.Format("Read {0} pdb methods with {1} documents and {2} sequence points from {3}", stats.MethodCount, stats.DocCount, stats.SeqPointCount, name));

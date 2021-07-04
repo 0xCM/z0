@@ -13,7 +13,10 @@ namespace Z0
 
     partial struct ApiRuntimeLoader
     {
-        public static Index<Assembly> assemblies(FS.FolderPath dir, bool justParts)
+        public static Assembly[] assemblies(bool justParts = true)
+            => assemblies(location(),justParts);
+
+        public static Assembly[] assemblies(FS.FolderPath dir, bool justParts)
         {
             var dst = list<Assembly>();
             var candidates = managed(dir);
@@ -69,15 +72,8 @@ namespace Z0
             }
         }
 
-        // public static FS.FilePath path(Assembly src)
-        //     => FS.path(src.Location);
-
-        // public static FS.FolderPath dir(Assembly src)
-        //     => path(src).FolderPath;
-
         [Op]
         public static Assembly[] assemblies(FS.FilePath[] src)
             => src.Where(x => FS.managed(x)).Map(assembly).Where(x => x.IsSome()).Select(x => x.Value);
-
     }
 }

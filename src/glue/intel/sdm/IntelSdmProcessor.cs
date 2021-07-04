@@ -23,14 +23,19 @@ namespace Z0.Asm
 
         const string toc = nameof(toc);
 
+        const string unmapped = nameof(unmapped);
+
         DocServices DocServices;
 
         AsmWorkspace Workspace;
+
+        CharMapper CharMapper;
 
         protected override void OnInit()
         {
             Workspace = Wf.AsmWorkspace();
             DocServices = Wf.DocServices();
+            CharMapper = Wf.CharMapper();
         }
 
         public Outcome Run()

@@ -98,12 +98,6 @@ namespace Z0
         protected ShowLog ShowLog([Caller] string name = null, FS.FileExt? ext = null)
             => ShowLog(NameShowLog(name,ext ?? FS.Csv));
 
-        protected StreamWriter OpenShowLog(string name, FS.FileExt? ext = null)
-            => Db.ShowLog(NameShowLog(name, ext ?? FS.Csv)).Writer();
-
-        protected StreamWriter OpenAppLog(string name, FS.FileExt ext)
-            => Db.AppLog(name,ext).Writer();
-
         protected void ShowRecords<T>(ReadOnlySpan<T> src)
             where T : struct, IRecord<T>
         {
@@ -176,9 +170,6 @@ namespace Z0
         protected void Row<T>(T content)
             => Wf.Row(content);
 
-        // protected void Row(string pattern, params object[] args)
-        //     => Wf.Row(string.Format(pattern,args));
-
         protected void Error<T>(T content)
             => Wf.Error(content);
 
@@ -200,42 +191,47 @@ namespace Z0
             where T : IMsgPattern
                 => Wf.Ran(flow.WithMsg(string.Format("{0} | {1}/{2}", data, HostName, operation)));
 
-        protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, string title = EmptyString)
-            => ShowSpan(src, file, item => string.Format("{0}", item), title);
-
         protected void Show<T>(T data, StreamWriter dst)
         {
             dst.WriteLine(string.Format("{0}",data));
             Wf.Row(data);
         }
 
-        protected uint TableEmit<T>(ReadOnlySpan<T> src, FS.FilePath dst)
-            where T : struct, IRecord<T>
-        {
-            var flow = Wf.EmittingTable<T>(dst);
-            var spec = Tables.rowspec<T>();
-            var count = Tables.emit(src, spec, dst);
-            Wf.EmittedTable(flow,count);
-            return count;
-        }
-
-        protected void TableShow<T>(ReadOnlySpan<T> src)
+        protected void ShowTable<T>(ReadOnlySpan<T> src)
             where T : struct, IRecord<T>
         {
             Tables.emit(src, x => Wf.Row(x));
         }
 
-        protected uint TableEmit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
+        protected WfTableFlow<T> EmittingTable<T>(FS.FilePath dst)
+            where T : struct, IRecord<T>
+                => Wf.EmittingTable<T>(dst);
+
+        protected ExecToken EmittedTable<T>(WfTableFlow<T> flow, Count count, FS.FilePath? dst = null)
+            where T : struct, IRecord<T>
+                => Wf.EmittedTable(flow,count, dst);
+
+        protected uint Emit<T>(ReadOnlySpan<T> src, FS.FilePath dst)
             where T : struct, IRecord<T>
         {
-            var flow = Wf.EmittingTable<T>(dst);
-            var spec = Tables.rowspec<T>(widths, z16);
+            var flow = EmittingTable<T>(dst);
+            var spec = Tables.rowspec<T>();
             var count = Tables.emit(src, spec, dst);
-            Wf.EmittedTable(flow,count);
+            EmittedTable(flow,count);
             return count;
         }
 
-        protected uint TableEmit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, ushort rowpad, Encoding encoding, FS.FilePath dst)
+        protected uint Emit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
+            where T : struct, IRecord<T>
+        {
+            var flow = EmittingTable<T>(dst);
+            var spec = Tables.rowspec<T>(widths, z16);
+            var count = Tables.emit(src, spec, dst);
+            EmittedTable(flow,count);
+            return count;
+        }
+
+        protected uint Emit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, ushort rowpad, Encoding encoding, FS.FilePath dst)
             where T : struct, IRecord<T>
         {
             var flow = Wf.EmittingTable<T>(dst);

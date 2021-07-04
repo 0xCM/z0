@@ -81,7 +81,7 @@ namespace Z0
         public void Emit(MemoryRange src, StreamWriter dst, byte bpl = 40)
         {
             var formatter = HexDataFormatter.create(src.Min, bpl);
-            var data = memory.cover<byte>(src.Min, src.Size);
+            var data = cover<byte>(src.Min, src.Size);
             formatter.FormatLines(data, line => dst.WriteLine(line));
         }
 

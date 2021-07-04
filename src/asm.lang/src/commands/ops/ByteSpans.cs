@@ -6,11 +6,9 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using Windows;
 
     using static Root;
     using static core;
-    using static AsmCodes;
 
     partial class AsmCmdService
     {
@@ -34,6 +32,5 @@ namespace Z0.Asm
 
             return result;
         }
-
     }
 }

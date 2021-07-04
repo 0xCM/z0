@@ -12,7 +12,7 @@ namespace Z0
         {
             var assets = Wf.LlvmAssets();
             var types = assets.ValueTypes();
-            TableShow(types);
+            ShowTable(types);
         }
     }
 

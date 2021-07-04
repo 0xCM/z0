@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Describes a PE image from the perspective of process entry point

@@ -11,7 +11,7 @@ namespace Z0
         ReadOnlySpan<ProcessMemoryRegion> LogRegions(uint step)
         {
             var regions = ImageMemory.regions();
-            TableEmit(regions.View, Db.Table<ProcessMemoryRegion>(SegDir, step.ToString()));
+            Emit(regions.View, Db.Table<ProcessMemoryRegion>(SegDir, step.ToString()));
             return regions;
         }
     }

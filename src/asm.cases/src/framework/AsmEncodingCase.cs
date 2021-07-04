@@ -17,23 +17,18 @@ namespace Z0.Asm
 
         public TestCaseId Id {get;}
 
-        public AsmExprSet Expr {get;}
+        public AsmFormExpr Form {get;}
+
+        public AsmExpr Statement {get;}
 
         public AsmHexCode Code {get;}
 
         [MethodImpl(Inline)]
-        public AsmEncodingCase(TestCaseId id, AsmExprSet expr, AsmHexCode code)
-        {
-            Id= id;
-            Expr = expr;
-            Code = code;
-        }
-
-        [MethodImpl(Inline)]
-        public AsmEncodingCase(AsmMnemonicCode mnemonic, ushort seq, AsmExprSet expr, AsmHexCode code)
+        public AsmEncodingCase(AsmMnemonicCode mnemonic, ushort seq, AsmFormExpr form, AsmExpr statement, AsmHexCode code)
         {
             Id= identify(mnemonic, seq);
-            Expr = expr;
+            Form = form;
+            Statement = statement;
             Code = code;
         }
 
@@ -42,21 +37,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => Id.Segment<AsmMnemonicCode>(0,10);
         }
-
-        public void Render(AsmExprSet src, ITextBuffer dst)
-            => dst.AppendFormat("{0} ({1}) | {2}", src.OpCode.Format(), src.Sig.Format(), src.Statement.Format());
-
-        public string Format(AsmExprSet src)
-        {
-            var dst = text.buffer();
-            Render(src, dst);
-            return dst.Emit();
-        }
-
         public string Format()
         {
             var seq = Id.Segment<ushort>(11, 16);
-            return string.Format("{0}[{1:D4}] | {2} => {3}", Mnemonic, seq, Format(Expr), Code.Format());
+            return string.Format("{0}[{1:D4}] | {2} {3} => {4}", Mnemonic, seq, Form, Statement, Code.Format());
         }
 
         public override string ToString()

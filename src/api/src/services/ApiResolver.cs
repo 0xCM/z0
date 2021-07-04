@@ -119,7 +119,7 @@ namespace Z0
 
             dst.Sort();
             var path = Db.IndexTable<ApiMemberInfo>();
-            TableEmit(@readonly(dst), ApiMemberInfo.RenderWidths, path);
+            Emit(@readonly(dst), ApiMemberInfo.RenderWidths, path);
         }
 
         public uint Describe(in ResolvedPart src, Span<ApiMemberInfo> dst)
@@ -195,7 +195,7 @@ namespace Z0
             var buffer = span<ApiMemberInfo>(count);
             describe(_methods, buffer);
             Wf.Status(string.Format("{0} Collected descriptions for {1} method resolutions", Worker(), count));
-            TableEmit(@readonly(buffer), ApiMemberInfo.RenderWidths, Db.Table<ApiMemberInfo>(dir));
+            Emit(@readonly(buffer), ApiMemberInfo.RenderWidths, Db.Table<ApiMemberInfo>(dir));
             return buffer;
         }
 

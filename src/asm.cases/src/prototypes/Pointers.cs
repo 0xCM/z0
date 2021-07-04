@@ -52,6 +52,7 @@ namespace Z0.Asm
             public static byte mod(byte a, byte b)
                 => math.mod(a,b);
 
+
             [MethodImpl(Inline), Op]
             public static unsafe void copy16x8i(sbyte* pSrc, sbyte* pDst)
             {

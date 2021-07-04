@@ -11,6 +11,9 @@ namespace Z0.Asm
         FS.FilePath CharMapPath()
             => SourceRoot() + FS.file(charmap, FS.Config);
 
+        FS.FilePath UnmappedCharLog()
+            => Workspace.EtlLog(unmapped);
+
         FS.FilePath SplitSpecs()
             => SourceRoot() + FS.file(splits, FS.Csv);
 

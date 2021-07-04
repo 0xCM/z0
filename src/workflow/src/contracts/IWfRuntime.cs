@@ -180,7 +180,6 @@ namespace Z0
             return Ran(flow);
         }
 
-
         WfTableFlow<T> EmittingTable<T>(FS.FilePath dst)
             where T : struct, IRecord<T>
         {

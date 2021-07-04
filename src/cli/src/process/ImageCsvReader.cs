@@ -29,7 +29,6 @@ namespace Z0
         public ReadOnlySpan<ImageContentRecord> Load(FS.FilePath src)
         {
             var buffer = list<ImageContentRecord>();
-
             void Receive(in ImageContentRecord src)
             {
                 buffer.Add(src);

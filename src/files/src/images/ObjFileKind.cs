@@ -62,7 +62,7 @@ namespace Z0
         dbg = P2ᐞ15,
     }
 
-    public enum AsmBinIndex : byte
+    public enum ObjFileIndex : byte
     {
         bin = 0,
 

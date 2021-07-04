@@ -436,7 +436,6 @@ namespace Z0.Asm
             return Wf.ResPackEmitter().Emit(blocks.View,dst);
         }
 
-
         void ShowRegOps()
         {
             var reg = asm.reg(RegWidthCode.W32, RegClassCode.GP, RegIndexCode.r2);
@@ -475,7 +474,7 @@ namespace Z0.Asm
             }
 
             var sorted = @readonly(collection.ToArray().OrderBy(x => x.Encoded));
-            TableEmit(sorted, AsmIndex.RenderWidths, dst);
+            Emit(sorted, AsmIndex.RenderWidths, dst);
         }
 
         public void ShowVendorManuals(string vendor, FS.FileExt ext)

@@ -17,41 +17,21 @@ namespace Z0.Asm
 
             public ColumnKind Kind {get;}
 
+            public ushort ColWidth {get;}
+
             [MethodImpl(Inline)]
-            public TableColumn(string label, ColumnKind kind)
+            public TableColumn(string label, ColumnKind kind, ushort width)
             {
                 Label = label;
                 Kind = kind;
+                ColWidth = width;
             }
-        }
 
-        public enum ColumnKind : byte
-        {
-            None = 0,
+            public string Format()
+                => string.Format(RP.pad(-(int)ColWidth), Label);
 
-            [Symbol("OpCode")]
-            OpCode,
-
-            [Symbol("Instruction")]
-            Signature,
-
-            [Symbol("Op/En")]
-            EncodingRef,
-
-            [Symbol("CPUID Feature Flag")]
-            Cpuid,
-
-            [Symbol("64-bit Mode")]
-            Mode64,
-
-            [Symbol("Compat/Leg Mode")]
-            Mode32,
-
-            [Symbol("64/32 bit Mode Support")]
-            Mode64x32,
-
-            [Symbol("Description")]
-            Description,
+            public override string ToString()
+                => Format();
         }
     }
 }

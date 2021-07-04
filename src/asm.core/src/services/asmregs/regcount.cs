@@ -13,7 +13,7 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static byte count(RegClassCode @class, bit hi = default)
+        public static byte regcount(RegClassCode @class, bit hi = default)
             => Bytes.add(skip(RegClassCounts, (byte)@class), Bytes.mul((byte)hi,4));
 
         static ReadOnlySpan<byte> RegClassCounts

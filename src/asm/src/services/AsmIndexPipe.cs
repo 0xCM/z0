@@ -19,7 +19,6 @@ namespace Z0.Asm
             Decoder = Wf.AsmDecoder();
         }
 
-
         public SortedReadOnlySpan<AsmIndex> BuildIndex(SortedSpan<ApiCodeBlock> src)
         {
             var count = src.Length;
@@ -75,7 +74,7 @@ namespace Z0.Asm
         }
 
         public uint EmitIndex(SortedReadOnlySpan<AsmIndex> src, FS.FilePath dst)
-            => TableEmit(src.View, AsmIndex.RenderWidths, AsmIndex.RowPad, Encoding.ASCII, dst);
+            => Emit(src.View, AsmIndex.RenderWidths, AsmIndex.RowPad, Encoding.ASCII, dst);
 
         public ReadOnlySpan<AsmIndex> LoadIndex(FS.FilePath src)
         {

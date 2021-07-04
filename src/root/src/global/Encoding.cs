@@ -8,10 +8,12 @@ namespace Z0
 
     partial struct Root
     {
-        public static AsciEncoding AsciEncoding => default;
+        public static AsciPoints Asci => default;
 
-        public static Utf8Encoding Utf8Encoding => default;
+        public static Utf8Points Utf8 => default;
 
-        public static Utf16Encoding Utf16Encoding => default;
+        public static Utf16Points Utf16 => default;
+
+        public static UnicodePoints Unicode => default;
     }
 }

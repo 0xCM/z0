@@ -13,13 +13,15 @@ namespace Z0
     {
         None = 0,
 
-        Asci = 7,
+        Asci = 1,
 
-        Utf8 = 8,
+        Utf8 = 2,
 
-        Utf16 = 16,
+        Utf16 = 3,
 
-        Utf32 = 32
+        Utf32 = 4,
+
+        Unicode = 5,
     }
 
     public interface ITextEncodingKind

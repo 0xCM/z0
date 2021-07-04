@@ -458,10 +458,6 @@ namespace Z0.Asm
             => string.Concat(src.Source, " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
 
         [Op]
-        public static string format(in ImmInfo src)
-            => string.Concat(src.Value.FormatHex(zpad:false, prespec:false));
-
-        [Op]
         public static string offset(ulong offset, DataWidth width)
             => width switch{
                 DataWidth.W8 => ScalarCast.uint8(offset).FormatAsmHex(),

@@ -93,6 +93,22 @@ namespace Z0.Asm
         /// </summary>
         /// <remarks>
         /// ax, cx, dx, bx, sp, bp, si, di, r8w, r9w, r10w, r11w, r12w, r13w, r14w, r15w
+        /// ax
+        /// cx
+        /// dx
+        /// bx
+        /// sp
+        /// bp
+        /// si
+        /// di
+        /// r8w
+        /// r9w
+        /// r10w
+        /// r11w
+        /// r12w
+        /// r13w
+        /// r14w
+        /// r15w
         /// </remarks/>
         [SymSource, RegCode]
         public enum Gp16 : byte
@@ -151,6 +167,22 @@ namespace Z0.Asm
         /// </summary>
         /// <remarks>
         /// eax, ecx, edx, ebx, esp, ebp, esi, edi, r8d, r9d, r10d, r11d, r12d, r13d, r14d, r15d
+        /// eax
+        /// ecx
+        /// edx
+        /// ebx
+        /// esp
+        /// ebp
+        /// esi
+        /// edi
+        /// r8d
+        /// r9d
+        /// r10d
+        /// r11d
+        /// r12d
+        /// r13d
+        /// r14d
+        /// r15d
         /// </remarks/>
         [SymSource, RegCode]
         public enum Gp32 : byte
@@ -209,6 +241,22 @@ namespace Z0.Asm
         /// </summary>
         /// <remarks>
         /// rax, rcx, rdx, rbx, rsp, rbp, rsi, rdi, r8, r9, r10, r11, r12, r13, r14, r15
+        /// rax
+        /// rcx
+        /// rdx
+        /// rbx
+        /// rsp
+        /// rbp
+        /// rsi
+        /// rdi
+        /// r8
+        /// r9
+        /// r10
+        /// r11
+        /// r12
+        /// r13
+        /// r14
+        /// r15
         /// </remarks/>
         public enum Gp64 : byte
         {

@@ -16,5 +16,17 @@ namespace Z0
         [Op]
         public static AssetServices Assets(this IWfRuntime wf)
             => AssetServices.create(wf);
+
+        [Op]
+        public static CharMapper CharMapper(this IServiceContext context)
+            => Svc.CharMapper.create(context);
+
+        [Op]
+        public static Symbolism Symbolism(this IWfRuntime wf)
+            => Svc.Symbolism.create(wf);
+
+        [Op]
+        public static ApiHex ApiHex(this IWfRuntime wf)
+            => Svc.ApiHex.create(wf);
     }
 }

@@ -9,26 +9,38 @@ namespace Z0
     using System.Text;
 
     using static Root;
-    using static TextEncodings;
+
+    using K = TextEncodingKind;
 
     partial class XText
     {
         [MethodImpl(Inline), Op]
-        public static Encoding SystemEncoding(this AsciEncoding src)
+        public static Encoding SystemEncoding(this AsciPoints src)
             => Encoding.ASCII;
 
         [MethodImpl(Inline), Op]
-        public static Encoding SystemEncoding(this Utf8Encoding src)
+        public static Encoding SystemEncoding(this Utf8Points src)
             => Encoding.UTF8;
 
         [MethodImpl(Inline), Op]
-        public static Encoding SystemEncoding(this Utf16Encoding src)
+        public static Encoding SystemEncoding(this UnicodePoints src)
             => Encoding.Unicode;
 
         [MethodImpl(Inline), Op]
-        public static Encoding SystemEncoding(this TextEncodingKind kind)
-            =>  kind == TextEncodingKind.Asci ? Encoding.ASCII
-              : kind == TextEncodingKind.Utf8 ? Encoding.UTF8
+        public static Encoding SystemEncoding(this Utf16Points src)
+            => Encoding.BigEndianUnicode;
+
+        [MethodImpl(Inline), Op]
+        public static Encoding SystemEncoding(this Utf32Points src)
+            => Encoding.UTF32;
+
+        [MethodImpl(Inline), Op]
+        public static Encoding SystemEncoding(this K kind)
+            =>  kind == K.Asci ? Encoding.ASCII
+              : kind == K.Utf8 ? Encoding.UTF8
+              : kind == K.Utf16 ? Encoding.BigEndianUnicode
+              : kind == K.Unicode ? Encoding.Unicode
+              : kind == K.Utf32 ? Encoding.UTF32
               : Encoding.Unicode;
     }
 }

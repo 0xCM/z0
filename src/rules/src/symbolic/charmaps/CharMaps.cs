@@ -11,7 +11,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static TextEncodings;
 
     [ApiHost]
     public readonly struct CharMaps
@@ -51,7 +50,7 @@ namespace Z0
             Span<char> dst = stackalloc char[16];
             var i=0u;
             var count = render(src,ref i, dst);
-            return TextTools.format(slice(dst,0,count));
+            return text.format(slice(dst,0,count));
         }
 
         [Op]
@@ -60,17 +59,20 @@ namespace Z0
             Span<char> dst = stackalloc char[16];
             var i=0u;
             var count = render(src,ref i, dst);
-            return TextTools.format(slice(dst,0,count));
+            return text.format(slice(dst,0,count));
         }
 
-        public static CharMapEditor<AsciCode> editor(AsciEncoding target)
+        public static CharMapEditor<AsciCode> editor(AsciPoints src)
         {
             var editor = editor<AsciCode>();
             init(editor);
             return editor;
         }
 
-        public static CharMapEditor<char> editor(Utf16Encoding target)
+        public static CharMap<char> create(UnicodePoints src, AsciPoints dst)
+            => CharMaps.editor(src, dst).Seal();
+
+        public static CharMapEditor<char> editor(UnicodePoints src, AsciPoints dst)
         {
             var editor = editor<char>();
             init(editor);

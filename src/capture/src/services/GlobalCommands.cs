@@ -95,7 +95,7 @@ namespace Z0
         public Outcome EmitCilOpCodes(CmdArgs args)
         {
             var dst = Db.IndexTable<CilOpCode>();
-            TableEmit(Cil.opcodes(), dst);
+            Emit(Cil.opcodes(), dst);
             return true;
         }
 

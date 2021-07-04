@@ -45,7 +45,7 @@ namespace Z0.Asm
             root.iter(src, routine => instructions.AddRange(routine.Instructions));
             var calls = BuildRows(instructions.ViewDeposited()).ToSortedSpan();
             var count = calls.Length;
-            TableEmit(calls.View, AsmCallRow.RenderWidths, dst);
+            Emit(calls.View, AsmCallRow.RenderWidths, dst);
             return calls;
         }
 

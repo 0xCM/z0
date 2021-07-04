@@ -11,8 +11,6 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
 
-    using static TextEncodings;
-
     partial struct term
     {
         /// <summary>
@@ -86,7 +84,7 @@ namespace Z0
         /// Sets the terminal input and output encoding to UTF8
         /// </summary>
         /// <param name="kind">The encoding selector</param>
-        public static void encoding(Utf8Encoding kind)
+        public static void encoding(Utf8Points kind)
         {
             var e = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
             encoding(e);

@@ -11,14 +11,14 @@ namespace Z0
         AddressBank LogSegments(uint step)
         {
             var bank = ImageMemory.bank(Wf, LogRegions(step));
-            TableEmit(bank.Segments, Db.Table<ProcessSegment>(SegDir, step.ToString()));
+            Emit(bank.Segments, Db.Table<ProcessSegment>(SegDir, step.ToString()));
             return bank;
         }
 
         AddressBank LogSegments(uint step, ReadOnlySpan<ProcessMemoryRegion> regions)
         {
             var bank = ImageMemory.bank(Wf, regions);
-            TableEmit(bank.Segments, Db.Table<ProcessSegment>(SegDir, step.ToString()));
+            Emit(bank.Segments, Db.Table<ProcessSegment>(SegDir, step.ToString()));
             return bank;
         }
     }

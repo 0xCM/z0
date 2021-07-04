@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
     using static AsmCodes;
     using static AsmOpCodes;
 
@@ -46,19 +45,19 @@ namespace Z0.Asm
             /// <summary>
             /// AND EAX, imm32
             /// </summary>
-            [Symbol("25 id", "")]
+            [Symbol("25 id", "AND EAX, imm32")]
             and_eax_imm32,
 
             /// <summary>
             /// AND RAX, imm32
             /// </summary>
-            [Symbol("REX.W + 25 id", "")]
+            [Symbol("REX.W + 25 id", "AND RAX, imm32")]
             and_rax_imm32,
 
             /// <summary>
             /// AND r8, imm8
             /// </summary>
-            [Symbol("80 /4 ib", "")]
+            [Symbol("80 /4 ib", "AND r8, imm8")]
             and_r8_imm8,
 
             /// <summary>

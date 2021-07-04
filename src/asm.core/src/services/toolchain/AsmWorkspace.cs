@@ -52,6 +52,15 @@ namespace Z0.Asm
         public FS.FolderPath ImportRoot()
             => DataRoot() + FS.folder(imported);
 
+        public FS.FolderPath EtlLogs()
+            => DataRoot() + FS.folder(logs);
+
+        public FS.FilePath EtlLog(string id)
+            => EtlLogs() + FS.file(id,FS.Log);
+
+        public FS.FilePath EtlLog(string id, FS.FileExt ext)
+            => EtlLogs() + FS.file(id, ext);
+
         public FS.FolderPath ImportDir(string id)
             => ImportRoot() + FS.folder(id);
 

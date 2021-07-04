@@ -119,7 +119,7 @@ namespace Z0.Asm
             else if (IceOpTest.isBranch(kind))
                 SpecifyOperand(block, IceConverters.branch(block.BaseAddress, src, index), ref dst);
             else if(IceOpTest.isImm(kind))
-                SpecifyOperand(block, IceConverters.imminfo(src, index), ref dst);
+                {}
             else
                 SpecifyMysteryOperand(block, src,index, ref dst);
         }
@@ -142,10 +142,6 @@ namespace Z0.Asm
 
         }
 
-        void SpecifyOperand(in ApiCodeBlock block, in ImmInfo src, ref AsmInstructionDetail dst)
-        {
-
-        }
 
         void SpecifyMysteryOperand(in ApiCodeBlock block, in IceInstruction src, byte index, ref AsmInstructionDetail dst)
         {
