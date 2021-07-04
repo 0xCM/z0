@@ -11,18 +11,16 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using static AsmSigTokens;
-
     [StructLayout(LayoutKind.Sequential, Size=2)]
     public readonly struct AsmSigToken<K>
         where K : unmanaged
     {
-        public SigTokenKind Kind {get;}
+        public AsmSigTokenKind Kind {get;}
 
         readonly byte _Value;
 
         [MethodImpl(Inline)]
-        public AsmSigToken(SigTokenKind kind, K value)
+        public AsmSigToken(AsmSigTokenKind kind, K value)
         {
             Kind = kind;
             _Value = @as<K,byte>(value);
@@ -35,11 +33,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmSigToken<K>((SigTokenKind kind, K value) src)
+        public static implicit operator AsmSigToken<K>((AsmSigTokenKind kind, K value) src)
             => new AsmSigToken<K>(src.kind, src.value);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmSigToken(AsmSigToken<K> src)
-            => new AsmSigToken(src.Kind, src._Value);
+            => new AsmSigToken(src._Value, src.Kind);
     }
 }

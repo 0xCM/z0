@@ -10,7 +10,7 @@ namespace Z0
         /// <summary>
         /// These identifiers were derived from function declarations in the generated file 'xed-encoder.h'
         /// </summary>
-        [SymbolSource(xed)]
+        [SymSource(xed)]
         public enum EncodingGroup : byte
         {
             None,

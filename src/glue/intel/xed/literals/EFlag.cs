@@ -10,7 +10,7 @@ namespace Z0
         /// <summary>
         /// Mirrors the content of xed-flag-enum.txt data file
         /// </summary>
-        [SymbolSource(xed)]
+        [SymSource(xed)]
         public enum EFlag : byte
         {
             None,

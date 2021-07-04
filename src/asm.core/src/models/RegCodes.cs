@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <remarks>
         /// al, cl, dl, bl, spl, bpl, sil, dil, r8b, r9b, r10b, r11b, r12b, r13b, r14b, r15b
         /// </remarks/>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum Gp8 : byte
         {
             [Symbol("al")]
@@ -72,7 +72,7 @@ namespace Z0.Asm
         /// <remarks>
         /// ah, ch, dh, bh
         /// </remarks/>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum Gp8Hi : byte
         {
             [Symbol("ah")]
@@ -94,7 +94,7 @@ namespace Z0.Asm
         /// <remarks>
         /// ax, cx, dx, bx, sp, bp, si, di, r8w, r9w, r10w, r11w, r12w, r13w, r14w, r15w
         /// </remarks/>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum Gp16 : byte
         {
             [Symbol("ax")]
@@ -152,7 +152,7 @@ namespace Z0.Asm
         /// <remarks>
         /// eax, ecx, edx, ebx, esp, ebp, esi, edi, r8d, r9d, r10d, r11d, r12d, r13d, r14d, r15d
         /// </remarks/>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum Gp32 : byte
         {
             [Symbol("eax")]
@@ -264,7 +264,7 @@ namespace Z0.Asm
         /// <summary>
         /// Clasifies the gp reg codes
         /// </summary>
-        [SymbolSource]
+        [SymSource]
         public enum GpRegKind : byte
         {
             [Symbol("r8")]
@@ -289,7 +289,7 @@ namespace Z0.Asm
         /// <remarks>
         /// xmm0, xmm1, xmm2, xmm3, xmm4, xmm5, xmm6, xmm7, xmm8, xmm9, xmm10, xmm11, xmm12, xmm13, xmm14, xmm15, xmm16, xmm17, xmm18, xmm19, xmm20
         /// </remarks/>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum XmmReg : byte
         {
             [Symbol("xmm0")]
@@ -392,7 +392,7 @@ namespace Z0.Asm
         /// <summary>
         /// Specifies the YMM registers
         /// </summary>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum YmmReg : byte
         {
             [Symbol("ymm0")]
@@ -495,7 +495,7 @@ namespace Z0.Asm
          /// <summary>
         /// Specifies the ZMM registers
         /// </summary>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum ZmmReg : byte
         {
             [Symbol("zmm0")]
@@ -613,7 +613,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines accessible control register indices
         /// </summary>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum ControlReg : byte
         {
             [Symbol("CR0")]
@@ -644,7 +644,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines accessible debug register indices
         /// </summary>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum DebugReg : uint
         {
             [Symbol("DR0")]
@@ -675,7 +675,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines mask register indices
         /// </summary>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum KReg : byte
         {
             [Symbol("k0")]
@@ -703,7 +703,7 @@ namespace Z0.Asm
             k7 = r7
         }
 
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum TestReg : byte
         {
             [Symbol("TR0")]
@@ -731,7 +731,7 @@ namespace Z0.Asm
             tr7 = r7
         }
 
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum FpuReg : byte
         {
             [Symbol("ST(0)")]
@@ -759,7 +759,7 @@ namespace Z0.Asm
             st7 = r7,
         }
 
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum SegReg : byte
         {
             /// <summary>
@@ -799,7 +799,7 @@ namespace Z0.Asm
             gs = r5,
         }
 
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum SPtrReg : byte
         {
             [Symbol("GDTR","The global descriptor table register")]
@@ -815,7 +815,7 @@ namespace Z0.Asm
         /// <summary>
         /// Specifies the MMX registers
         /// </summary>
-        [SymbolSource, RegCode]
+        [SymSource, RegCode]
         public enum MmxReg : byte
         {
             [Symbol("mmx0")]
@@ -846,7 +846,7 @@ namespace Z0.Asm
         /// <summary>
         /// Specifies instruction pointer registers
         /// </summary>
-        [SymbolSource]
+        [SymSource]
         public enum IpReg : byte
         {
             [Symbol("ip")]

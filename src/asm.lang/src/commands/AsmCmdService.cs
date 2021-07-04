@@ -37,5 +37,16 @@ namespace Z0.Asm
             CodeBuffer.Dispose();
             ContextBuffer.Dispose();
         }
+
+        static Outcome argerror(string value)
+            => (false, $"The argument value '{value}' is invalid");
+
+        static CmdArg arg(in CmdArgs src, ushort index)
+        {
+            var count = src.Length;
+            if(count < index - 1)
+                sys.@throw("Argument specification error");
+            return src[index];
+        }
     }
 }

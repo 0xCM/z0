@@ -11,6 +11,10 @@ namespace Z0
 
     partial struct Symbols
     {
+        [MethodImpl(Inline), Op]
+        public static Sym symbol(SymIdentity id, SymKey index, Identifier type, ulong value, Identifier name, SymExpr expr, TextBlock? description = null, bool hidden = false)
+            => new Sym(id, index, type, value, name, expr, description, hidden);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Sym<T> symbol<T>(SymIdentity id, SymKey<T> index, Identifier name, T value, SymExpr expr, TextBlock description, bool hidden = false)
             where T : unmanaged

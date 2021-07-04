@@ -31,7 +31,7 @@ namespace Z0.Asm
     /// <summary>
     /// [RegisterCode:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]
     /// </summary>
-    [SymbolSource]
+    [SymSource]
     public enum RegKind : uint
     {
         None = 0,

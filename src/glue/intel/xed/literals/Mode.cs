@@ -7,7 +7,7 @@ namespace Z0
 {
     partial struct XedModels
     {
-        [SymbolSource(xed)]
+        [SymSource(xed)]
         public enum Mode : sbyte
         {
             [Symbol("mode16")]

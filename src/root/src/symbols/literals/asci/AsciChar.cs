@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// All of the asci symbols belong to us
     /// </summary>
-    [SymbolSource]
+    [SymSource]
     public enum AsciChar : ushort
     {
         /// <summary>

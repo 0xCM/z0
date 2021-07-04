@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [SymbolSource]
+    [SymSource]
     public enum Bitness : byte
     {
         None = 0,

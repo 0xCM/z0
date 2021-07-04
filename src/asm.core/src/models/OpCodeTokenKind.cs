@@ -12,28 +12,28 @@ namespace Z0.Asm
     {
         None = 0,
 
-        [SymbolClassifier(typeof(PrefixToken))]
+        [SymClass(typeof(PrefixToken))]
         Prefix = 1,
 
-        [SymbolClassifier(typeof(RexBToken))]
+        [SymClass(typeof(RexBToken))]
         RexBExtension = 2,
 
-        [SymbolClassifier(typeof(ModRmToken))]
+        [SymClass(typeof(ModRmToken))]
         RegOpCodeMod = 4,
 
-        [SymbolClassifier(typeof(SegOverrideToken))]
+        [SymClass(typeof(SegOverrideToken))]
         SegOverride = 8,
 
-        [SymbolClassifier(typeof(OffsetToken))]
+        [SymClass(typeof(OffsetToken))]
         Offset = 16,
 
-        [SymbolClassifier(typeof(ImmSizeToken))]
+        [SymClass(typeof(ImmSizeToken))]
         ImmSize = 32,
 
-        [SymbolClassifier(typeof(ExclusionToken))]
+        [SymClass(typeof(ExclusionToken))]
         Exclusion = 64,
 
-        [SymbolClassifier(typeof(PrefixToken))]
+        [SymClass(typeof(PrefixToken))]
         FpuDigit,
     }
 }

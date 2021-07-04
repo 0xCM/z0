@@ -11,14 +11,17 @@ namespace Z0
     using static core;
     using static CsPatterns;
 
+    [ApiHost]
     public readonly struct StringTables
     {
-        [MethodImpl(Inline)]
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<char> entry<T>(StringTable<T> src, T index)
             where T : unmanaged
                 => entry(src,bw64(index));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<char> entry<T>(StringTable<T> src, ulong i)
             where T : unmanaged
         {
@@ -55,6 +58,7 @@ namespace Z0
             return new StringTable<T>(name, new string(chars), offsets);
         }
 
+        [MethodImpl(Inline), Op]
         static ulong copy(ReadOnlySpan<char> src, ref ulong i, Span<char> dst)
         {
             var i0 = i;

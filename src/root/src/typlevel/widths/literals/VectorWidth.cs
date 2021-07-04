@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Defines a <see cref="DataWidth"/> subset that is constrained to widths that correspond to x86 vectorized registers
     /// </summary>
-    [SymbolSource]
+    [SymSource]
     public enum VectorWidth : ushort
     {
         /// <summary>

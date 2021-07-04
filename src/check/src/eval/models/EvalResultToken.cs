@@ -5,7 +5,7 @@
 namespace Z0
 {
 
-    [SymbolSource]
+    [SymSource]
     public enum EvalResultToken : byte
     {
         None,

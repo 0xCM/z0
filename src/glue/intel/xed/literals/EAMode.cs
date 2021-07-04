@@ -10,7 +10,7 @@ namespace Z0
         /// <summary>
         /// Derived from xed-state-bits.txt
         /// </summary>
-        [SymbolSource(xed)]
+        [SymSource(xed)]
         public enum EAMode : sbyte
         {
             [Symbol("eanot16")]

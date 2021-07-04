@@ -12,7 +12,6 @@ namespace Z0.Asm
     using static core;
     using static AsmCodes;
 
-
     partial class AsmCmdService
     {
         void OnJobComplete()

@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial struct AsmCodes
     {
-        [SymbolSource]
+        [SymSource]
         public enum RFlagToken : byte
         {
             [Symbol("cf", "Carry Flag; Enabled if an arithmetic operation generates a carry or a borrow out of the most-significant bit of the result; cleared otherwise. This flag indicates an overflow condition for unsigned-integer arithmetic. It is also used in multiple-precision arithmetic")]

@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     public readonly struct AddressingMode
     {
-        [SymbolSource]
+        [SymSource]
         public enum Kind : byte
         {
             [Symbol("m16b", "Specifies 16-bit addressing")]

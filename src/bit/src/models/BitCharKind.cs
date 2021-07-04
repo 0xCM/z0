@@ -6,7 +6,7 @@ namespace Z0
 {
     using CC = AsciCode;
 
-    [SymbolSource]
+    [SymSource]
     public enum BitCharKind : byte
     {
         [Symbol("0")]

@@ -34,7 +34,7 @@ namespace Z0.Asm
                 => Format();
         }
 
-        [SymbolSource]
+        [SymSource]
         public enum Mode64Support : byte
         {
             None,
@@ -58,7 +58,7 @@ namespace Z0.Asm
             NS
         }
 
-        [SymbolSource]
+        [SymSource]
         public enum Mode32Support : byte
         {
             None,

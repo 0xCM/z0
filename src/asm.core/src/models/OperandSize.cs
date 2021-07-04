@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    [Flags, SymbolSource]
+    [Flags, SymSource]
     public enum OperandSize : byte
     {
         [Symbol("w16")]

@@ -25,7 +25,7 @@ namespace Z0
         public static bool is_register(OperandKind kind)
             => kind >= REG0 && kind <= REG9;
 
-        [SymbolSource(xed)]
+        [SymSource(xed)]
         public enum OperandKind : byte
         {
             INVALID,

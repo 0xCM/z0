@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines reference literals that specify data bit-widths
     /// </summary>
-    [SymbolSource]
+    [SymSource]
     public enum DataWidth : ushort
     {
         /// <summary>

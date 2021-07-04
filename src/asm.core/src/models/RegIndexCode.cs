@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines register codes 0 .. 31
     /// </summary>
-    [SymbolSource]
+    [SymSource]
     public enum RegIndexCode : byte
     {
         [Symbol("r0")]

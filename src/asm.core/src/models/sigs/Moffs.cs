@@ -9,29 +9,33 @@ namespace Z0.Asm
     using static Root;
     using static AsmSigTokens;
 
+    using K = AsmSigTokenKind;
+
     partial class AsmSigs
     {
-        public readonly struct Rm
+        public readonly struct Moffs
         {
-            public RmKind Kind {get;}
+            public MoffsToken Token {get;}
 
             [MethodImpl(Inline)]
-            public Rm(RmKind kind)
+            public Moffs(MoffsToken token)
             {
-                Kind = kind;
+                Token = token;
             }
 
-            [MethodImpl(Inline)]
-            public static implicit operator Rm(RmKind src)
-                => new Rm(src);
+            public K Kind => K.Moffs;
 
             [MethodImpl(Inline)]
-            public static implicit operator RmKind(Rm src)
-                => src.Kind;
+            public static implicit operator Moffs(MoffsToken src)
+                => new Moffs(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator byte(Rm src)
-                => (byte)src.Kind;
+            public static implicit operator MoffsToken(Moffs src)
+                => src.Token;
+
+            [MethodImpl(Inline)]
+            public static implicit operator AsmSigToken(Moffs src)
+                => token(src.Kind, src);
         }
     }
 }

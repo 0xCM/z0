@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// Derived from xed-state-bits.txt
         /// </summary>
-        [SymbolSource(xed)]
+        [SymSource(xed)]
         public enum SAMode : sbyte
         {
             [Symbol("smode16")]

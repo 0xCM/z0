@@ -9,7 +9,7 @@ namespace Z0.Asm
         /// <summary>
         /// Unifies the legacy prefix codes
         /// </summary>
-        [SymbolSource]
+        [SymSource]
         public enum LegacyPrefixCode : byte
         {
             None = 0,

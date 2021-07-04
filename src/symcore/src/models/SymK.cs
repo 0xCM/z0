@@ -10,6 +10,8 @@ namespace Z0
     using static Root;
     using static core;
 
+    using api = Symbols;
+
     public class Sym<K> : ISym<K>
         where K : unmanaged
     {
@@ -81,6 +83,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator K(Sym<K> src)
             => src.Kind;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Sym(Sym<K> src)
+            => api.untyped(src);
 
         public static Sym<K> Empty
         {

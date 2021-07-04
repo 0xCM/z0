@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     partial struct AsmCodes
     {
-        [SymbolSource]
+        [SymSource]
         public enum BranchHintCode : byte
         {
             None = 0,

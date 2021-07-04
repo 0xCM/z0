@@ -9,7 +9,7 @@ namespace Z0
 
     using static Pow2x8;
 
-    [SymbolSource]
+    [SymSource]
     public enum ImmKind : byte
     {
         None = 0,

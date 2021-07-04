@@ -11,7 +11,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines the lock prefix code
         /// </summary>
-        [SymbolSource]
+        [SymSource]
         public enum LockPrefixCode : byte
         {
             None = 0,

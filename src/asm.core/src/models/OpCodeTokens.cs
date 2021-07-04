@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial struct AsmCodes
     {
-        [SymbolSource]
+        [SymSource]
         public enum PrefixToken : byte
         {
             [Symbol("66")]
@@ -49,7 +49,7 @@ namespace Z0.Asm
             W1 = 12,
         }
 
-        [SymbolSource]
+        [SymSource]
         public enum OffsetToken : byte
         {
             [Symbol("cb", "Indicates a 1-byte value follows the opcode to specify a code offset and/or new value for the code segment register")]
@@ -71,7 +71,7 @@ namespace Z0.Asm
             ct,
         }
 
-        [SymbolSource]
+        [SymSource]
         public enum SegOverrideToken : byte
         {
             [Symbol("cs", "CS segment override")]
@@ -96,7 +96,7 @@ namespace Z0.Asm
         /// <summary>
         /// "Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode."
         /// </summary>
-        [SymbolSource]
+        [SymSource]
         public enum ModRmToken : byte
         {
             [Symbol("/r", "Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand")]
@@ -127,7 +127,7 @@ namespace Z0.Asm
             r7,
         }
 
-        [SymbolSource("Indicates the lower 3 bits of the opcode byte is used to encode the register operand without a modR/M byte")]
+        [SymSource("Indicates the lower 3 bits of the opcode byte is used to encode the register operand without a modR/M byte")]
         public enum RexBToken
         {
             [Symbol("None", "Indicates that REX.B in not applicable")]
@@ -152,7 +152,7 @@ namespace Z0.Asm
             NE = 6,
         }
 
-        [SymbolSource("Specifies the size of an immediate operand in the context of an opcode specification")]
+        [SymSource("Specifies the size of an immediate operand in the context of an opcode specification")]
         public enum ImmSizeToken : byte
         {
             [Symbol("ib", "Indicates a 1-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.")]
@@ -168,7 +168,7 @@ namespace Z0.Asm
             io,
         }
 
-        [SymbolSource]
+        [SymSource]
         public enum FpuToken : byte
         {
             [Symbol("+0")]
@@ -196,7 +196,7 @@ namespace Z0.Asm
             i7,
         }
 
-        [SymbolSource]
+        [SymSource]
         public enum ExclusionToken
         {
             [Symbol("NP", " Indicates the use of 66/F2/F3 prefixes are not allowed with the instruction")]

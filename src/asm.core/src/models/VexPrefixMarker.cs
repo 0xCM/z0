@@ -9,7 +9,7 @@ namespace Z0.Asm
         /// <summary>
         /// Classfies vex prefix codes
         /// </summary>
-        [SymbolSource]
+        [SymSource]
         public enum VexPrefixMarker : byte
         {
             [Symbol("xC5", "The leading byte of a 2-byte vex prefix sequence")]

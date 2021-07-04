@@ -9,22 +9,19 @@ namespace Z0.Asm
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static core;
-
-    using static AsmSigTokens;
 
     [StructLayout(LayoutKind.Sequential, Size=2)]
     public readonly struct AsmSigToken
     {
-        public SigTokenKind Kind {get;}
-
         public byte Value {get;}
 
+        public AsmSigTokenKind Kind {get;}
+
         [MethodImpl(Inline)]
-        public AsmSigToken(SigTokenKind kind, byte value)
+        public AsmSigToken(byte value, AsmSigTokenKind kind)
         {
-            Kind = kind;
             Value = value;
+            Kind = kind;
         }
     }
 }

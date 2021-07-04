@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines the symbols that represent lowercase base-16 digits
     /// </summary>
-    [SymbolSource]
+    [SymSource]
     public enum HexSymLo : ushort
     {
         /// <summary>

@@ -7,30 +7,35 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static AsmSigTokens;
+
+    using K = AsmSigTokenKind;
 
     partial class AsmSigs
     {
         public readonly struct Imm
         {
-            public ImmKind Kind {get;}
+            public ImmToken Token {get;}
 
             [MethodImpl(Inline)]
-            public Imm(ImmKind kind)
+            public Imm(ImmToken token)
             {
-                Kind = kind;
+                Token = token;
             }
 
+            public K Kind => K.Imm;
+
             [MethodImpl(Inline)]
-            public static implicit operator Imm(ImmKind src)
+            public static implicit operator Imm(ImmToken src)
                 => new Imm(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator ImmKind(Imm src)
-                => src.Kind;
+            public static implicit operator ImmToken(Imm src)
+                => src.Token;
 
             [MethodImpl(Inline)]
-            public static implicit operator byte(Imm src)
-                => (byte)src.Kind;
+            public static implicit operator AsmSigToken(Imm src)
+                => token(src.Kind, src);
         }
     }
 }

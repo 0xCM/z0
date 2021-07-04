@@ -6,7 +6,7 @@ namespace Z0
 {
     partial struct XedModels
     {
-        [SymbolSource(xed)]
+        [SymSource(xed)]
         public enum SizeIndicator
         {
             None = 0,

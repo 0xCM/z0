@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines register class identifiers
     /// </summary>
-    [SymbolSource]
+    [SymSource]
     public enum RegClassCode : byte
     {
         None = 0,

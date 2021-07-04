@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// <remarks>
         /// From Vol2D, appendix B.1.4.7
         /// </remarks>
-        [SymbolSource]
+        [SymSource]
         public enum ConditionCode : byte
         {
             /// <summary>

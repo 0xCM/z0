@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial struct AsmCodes
     {
-        [SymbolSource]
+        [SymSource]
         public enum EscapeCode : ushort
         {
             None = 0,

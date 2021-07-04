@@ -8,10 +8,10 @@ namespace Z0
     {
         None = 0,
 
-        [Alias("control")]
+        [Symbol("control")]
         Control,
 
-        [Alias("wf")]
+        [Symbol("wf")]
         Workflow
     }
 

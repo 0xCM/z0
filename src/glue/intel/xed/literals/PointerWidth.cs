@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// Mirrors the content of xed-pointer-width.txt data file
         /// </summary>
-        [SymbolSource(xed), Flags]
+        [SymSource(xed), Flags]
         public enum PointerWidth
         {
             None = 0,
