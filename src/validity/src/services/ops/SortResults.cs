@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Part;
-
     partial class TestApp<A>
     {
         public TestCaseRecord[] SortResults()

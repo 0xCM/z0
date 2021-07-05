@@ -37,5 +37,8 @@ namespace Z0
                     return i;
             return NotFound;
         }
+
+        public static TextIndex index(ReadOnlySpan<char> src, TextMarker match)
+            => index(src, match.Content);
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-       /// <summary>
+        /// <summary>
         /// Creates a non-valued <see cref='ScriptVar'/>
         /// </summary>
         /// <param name="symbol">The variable symbol</param>

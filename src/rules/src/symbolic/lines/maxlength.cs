@@ -26,9 +26,7 @@ namespace Z0
             var current = 0u;
             for(var pos=0u; pos<size; pos++)
             {
-                ref readonly var a0 = ref skip(src, pos);
-                ref readonly var a1 = ref skip(src, pos + 1);
-                if(!SQ.eol(a0,a1))
+                if(!SQ.eol(skip(src, pos), skip(src, pos + 1)))
                     current++;
                 else
                 {
@@ -41,17 +39,20 @@ namespace Z0
             return max;
         }
 
+        /// <summary>
+        /// Finds the length of the line of greatest length using the <see cref='SQ.eol(char, char)'/> test
+        /// to partition the source
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static uint maxlength(ReadOnlySpan<char> src)
         {
-            var size = src.Length;
+            var count = src.Length;
             var max = 0u;
             var current = 0u;
-            for(var pos=0u; pos<size; pos++)
+            for(var pos=0u; pos<count; pos++)
             {
-                ref readonly var a0 = ref skip(src, pos);
-                ref readonly var a1 = ref skip(src, pos + 1);
-                if(!SQ.eol(a0,a1))
+                if(!SQ.eol(skip(src, pos), skip(src, pos + 1)))
                     current++;
                 else
                 {

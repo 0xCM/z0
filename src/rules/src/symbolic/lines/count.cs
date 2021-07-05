@@ -33,10 +33,6 @@ namespace Z0
             return counter;
         }
 
-        [MethodImpl(Inline), Op]
-        public static uint count(ReadOnlySpan<AsciCode> src)
-            => count(recover<AsciCode,byte>(src));
-
         /// <summary>
         /// Counts the number of lines represented in the source
         /// </summary>
@@ -55,5 +51,9 @@ namespace Z0
             }
             return counter;
         }
+
+        [MethodImpl(Inline), Op]
+        public static uint count(ReadOnlySpan<AsciCode> src)
+            => count(recover<AsciCode,byte>(src));
     }
 }

@@ -144,5 +144,7 @@ namespace Z0
         public const string imported = nameof(imported);
 
         public const string bitfields = nameof(bitfields);
+
+        public const string common = nameof(common);
     }
 }

@@ -23,5 +23,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> right(ReadOnlySpan<char> src, int index)
             => TextTools.right(src, index);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> right(ReadOnlySpan<char> src, TextIndex index)
+            => TextTools.right(src, index);
+
     }
 }

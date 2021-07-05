@@ -11,6 +11,10 @@ namespace Z0
 
     public readonly struct LineNumber : IDataTypeComparable<LineNumber>
     {
+        public const byte RenderLength = 9;
+
+        public const string RenderPattern = "{0:D8}:";
+
         public uint Value {get;}
 
         [MethodImpl(Inline)]

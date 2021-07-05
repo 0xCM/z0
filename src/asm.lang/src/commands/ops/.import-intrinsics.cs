@@ -12,16 +12,5 @@ namespace Z0.Asm
             Wf.IntelIntrinsicsPipe().Import();
             return true;
         }
-
-        [CmdOp(".import-chip-map")]
-        Outcome ImportChips(CmdArgs args)
-            => Wf.IntelXed().EmitChipMap();
-
-        [CmdOp(".import-xed")]
-        Outcome ImportXed(CmdArgs args)
-        {
-            Wf.IntelXed().EmitCatalog();
-            return true;
-        }
     }
 }

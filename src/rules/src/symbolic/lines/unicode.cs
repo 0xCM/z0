@@ -13,11 +13,11 @@ namespace Z0
     partial struct Lines
     {
         [MethodImpl(Inline), Op]
-        public static Utf16Line utf16(ReadOnlySpan<char> src, uint number, uint offset, uint chars)
-            => new Utf16Line(number, offset, slice(src, offset, chars));
+        public static UnicodeLine unicode(ReadOnlySpan<char> src, uint number, uint offset, uint chars)
+            => new UnicodeLine(number, offset, slice(src, offset, chars));
 
         [MethodImpl(Inline), Op]
-        public static Utf16Line utf16(ReadOnlySpan<byte> src, uint number, uint offset, uint chars)
-            => new Utf16Line(number, 0, slice(recover<char>(src), offset, chars));
+        public static UnicodeLine unicode(ReadOnlySpan<byte> src, uint number, uint offset, uint chars)
+            => new UnicodeLine(number, 0, slice(recover<char>(src), offset, chars));
     }
 }

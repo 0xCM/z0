@@ -49,20 +49,92 @@ namespace Z0.Asm
         public FS.FolderPath DataRoot()
             => Root + FS.folder(data);
 
+        /// <summary>
+        /// Defines a path of the form {CodeGenRoot} := {DataRoot}/codegen
+        /// </summary>
+        public FS.FolderPath CodeGenRoot()
+            => Root + FS.folder(codegen);
+
+        /// <summary>
+        /// Defines a path of the form {CodeGenRoot}/{id}
+        /// </summary>
+        /// <param name="dataset">A code gnerateion set identifier</param>
+        public FS.FolderPath CodeGenDir(string id)
+            =>  CodeGenRoot() + FS.folder(id);
+
+        /// <summary>
+        /// Defines a path of the form {CodeGenRoot}/{dir}/{id}.{ext}
+        /// </summary>
+        /// <param name="dir">A generation set identifier</param>
+        /// <param name="id">A file identifiere</param>
+        /// <param name="ext">The target language extension</param>
+        public FS.FilePath Generated(string dir, string id, FS.FileExt ext)
+            => CodeGenDir(dir) + FS.file(id,ext);
+
+        /// <summary>
+        /// Defines a path of the form {ImportRoot} := {DataRoot}/imported
+        /// </summary>
         public FS.FolderPath ImportRoot()
             => DataRoot() + FS.folder(imported);
 
+        /// <summary>
+        /// Defines a path of the form {EtlLogRoot} := {DataRoot}/logs
+        /// </summary>
         public FS.FolderPath EtlLogs()
             => DataRoot() + FS.folder(logs);
 
+        /// <summary>
+        /// Defines a path of the form {EtlLogRoot}/{dataset}
+        /// </summary>
+        /// <param name="dataset">A dataset identifier</param>
+        public FS.FolderPath EtlLogs(string dataset)
+            => EtlLogs() + FS.folder(dataset);
+
+        /// <summary>
+        /// Defines a path of the form {EtlLogRoot}/common/{id}.log
+        /// </summary>
+        /// <param name="id">A file identifier</param>
         public FS.FilePath EtlLog(string id)
-            => EtlLogs() + FS.file(id,FS.Log);
+            => EtlLogs(common) + FS.file(id, FS.Log);
 
+        /// <summary>
+        /// Defines a path of the form {EtlLogRoot}/{dataset}/{file}
+        /// </summary>
+        /// <param name="id">A file identifier</param>
+        public FS.FilePath EtlLog(string dataset, FS.FileName file)
+            => EtlLogs(dataset) + file;
+
+        /// <summary>
+        /// Defines a path of the form {EtlLogRoot}/common/{id}.{ext}
+        /// </summary>
+        /// <param name="id">A file identifier</param>
+        /// <param name="ext">A file extension</param>
         public FS.FilePath EtlLog(string id, FS.FileExt ext)
-            => EtlLogs() + FS.file(id, ext);
+            => EtlLogs(common) + FS.file(id, ext);
 
-        public FS.FolderPath ImportDir(string id)
-            => ImportRoot() + FS.folder(id);
+        /// <summary>
+        /// Defines a path of the form {EtlLogRoot}/{Dataset}/{id}.log
+        /// </summary>
+        /// <param name="dataset">The dataset identiier</param>
+        /// <param name="id">The file identifier</param>
+        public FS.FilePath EtlLog(string dataset, string id)
+            => EtlLogs(dataset) + FS.file(id, FS.Log);
+
+        /// <summary>
+        /// Defines a path of the form {EtlLogRoot}/{Dataset}/{id}.{ext}
+        /// </summary>
+        /// <param name="dataset">A dataset identiier</param>
+        /// <param name="id">A file identifier</param>
+        /// <param name="ext">Z file extension</param>
+        public FS.FilePath EtlLog(string dataset, string id, FS.FileExt ext)
+            => EtlLogs(dataset) + FS.file(id, ext);
+
+        /// <summary>
+        /// Defines a path of the form {ImportRoot}/{dataset}
+        /// </summary>
+        /// <param name="dataset">A dataset identiier</param>
+        public FS.FolderPath ImportDir(string dataset)
+            => ImportRoot() + FS.folder(dataset);
 
         public FS.FilePath ImportPath(string id, FS.FileExt ext)
             => ImportRoot() + FS.file(id,ext);

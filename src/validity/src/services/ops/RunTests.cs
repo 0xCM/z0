@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-
     partial class TestApp<A>
     {
         void RunTests(bool concurrent, Index<string> hosts)

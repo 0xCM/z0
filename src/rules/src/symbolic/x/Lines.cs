@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
 
+
     partial class XTend
     {
         [TextUtility]

@@ -17,7 +17,7 @@ namespace Z0
             => format(src.Content, buffer);
 
         [MethodImpl(Inline), Op]
-        public static string format(in Utf16Line src, Span<char> buffer)
+        public static string format(in UnicodeLine src, Span<char> buffer)
             => format(src.Content, buffer);
 
         [Op]
@@ -29,7 +29,7 @@ namespace Z0
         {
             var i=0u;
             var count = render(src, ref i, buffer);
-            var chars = core.slice(buffer,0,count);
+            var chars = slice(buffer,0,count);
             return new string(chars);
         }
 
@@ -38,7 +38,7 @@ namespace Z0
         {
             var i=0u;
             var count = render(src, ref i, buffer);
-            var chars = core.slice(buffer,0,count);
+            var chars = slice(buffer,0,count);
             return new string(chars);
         }
 

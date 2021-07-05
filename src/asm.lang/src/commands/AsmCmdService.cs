@@ -11,6 +11,8 @@ namespace Z0.Asm
 
     public sealed partial class AsmCmdService : AppCmdService<AsmCmdService>
     {
+        const string xed = nameof(xed);
+
         NativeBuffer CodeBuffer;
 
         NativeBuffer ContextBuffer;

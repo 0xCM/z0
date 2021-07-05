@@ -14,8 +14,7 @@ namespace Z0
         /// <summary>
         /// The 1-based document-relative line number
         /// </summary>
-        /// <value></value>
-        public uint LineNumber {get;}
+        public LineNumber LineNumber {get;}
 
         /// <summary>
         /// The document-relative index of the first character in the represented line
@@ -41,13 +40,36 @@ namespace Z0
             get => Content.Length;
         }
 
-        public string Format(Span<char> buffer)
-            => SymbolicRender.format(this, buffer);
+        public int RenderLength
+        {
+            [MethodImpl(Inline)]
+            get => Content.Length + LineNumber.RenderLength;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Length == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Length != 0;
+        }
 
         public string Format()
         {
-            Span<char> dst = stackalloc char[Content.Length];
-            return SymbolicRender.format(this, dst);
+            Span<char> buffer = stackalloc char[RenderLength];
+            var i=0u;
+            Lines.render(this, ref i, buffer);
+            return text.format(buffer);
+        }
+
+        public static AsciLine Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsciLine(0,0,default);
         }
     }
 }

@@ -28,6 +28,9 @@ namespace Z0
             return outcome;
         }
 
+        protected Outcome Dispatch(string command, params string[] args)
+            => Dispatch(command, Cmd.args(args));
+
         public Outcome Dispatch(string command)
         {
             var outcome = Dispatcher.Dispatch(command);

@@ -12,7 +12,7 @@ namespace Z0
     static class XTrace
     {
         public static int CasePadding
-            => Datasets.width(TestCaseField.CaseName);
+            => TestContext.fieldwidth(TestCaseField.CaseName);
 
         public static string TracePrefix(object title, Type host, string caller)
             => string.Concat(Part.ExecutingPart.Format(), Chars.FSlash, host.Name, Chars.FSlash, caller, Chars.LBrace, title, Chars.RBrace).PadRight(CasePadding);

@@ -39,6 +39,12 @@ namespace Z0
                 get => File.Exists(Name);
             }
 
+            public bool Missing
+            {
+                [MethodImpl(Inline)]
+                get => !Exists;
+            }
+
             public FileName FileName
             {
                 [MethodImpl(Inline)]

@@ -5,28 +5,76 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
+    using static Root;
     using static core;
 
     using SQ = SymbolicQuery;
 
     partial struct Lines
     {
+        /// <summary>
+        /// Reads a <see cref='AsciLine'/> from the data source
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="counter">The current line count</param>
+        /// <param name="pos">The source-relative offset</param>
+        /// <param name="dst">The target</param>
         [Op]
-        public static uint line(ReadOnlySpan<AsciCode> src, ref uint counter, ref uint pos, out AsciLine dst)
+        public static uint line(ReadOnlySpan<AsciCode> src, ref uint number, ref uint i, out AsciLine dst)
         {
-            var i0 = pos;
+            var i0 = i;
             dst = default;
-            var size = src.Length;
-            while(pos++ < size - 1)
+            var max = src.Length;
+            var length = 0u;
+            while(i++ < max - 1)
             {
-                ref readonly var a0 = ref skip(src, pos);
-                ref readonly var a1 = ref skip(src, pos + 1);
-                if(SQ.eol(a0,a1))
-                    dst = new AsciLine(++counter, i0, slice(src,i0, pos));
+                if(SQ.eol(skip(src, i), skip(src, i + 1)))
+                {
+                    length = i - i0;
+                    dst = new AsciLine(++number, i0, slice(src, i0, length));
+                    i+=2;
+                    break;
+                }
             }
 
-            return pos-i0;
+            return length;
+        }
+
+        /// <summary>
+        /// Reads a <see cref='UnicodeLine'/> from the data source
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="number">The current line count</param>
+        /// <param name="i">The source-relative offset</param>
+        /// <param name="dst">The target</param>
+        [Op]
+        public static uint line(ReadOnlySpan<char> src, ref uint number, ref uint i, out UnicodeLine dst)
+        {
+            var i0 = i;
+            dst = UnicodeLine.Empty;
+            var max = src.Length;
+            var length = 0u;
+            if(empty(src,i))
+            {
+                dst = new UnicodeLine(++number, i0, EmptyString);
+                i+=2;
+            }
+            else
+            {
+                while(i++ < max - 1)
+                {
+                    if(SQ.eol(skip(src, i), skip(src, i + 1)))
+                    {
+                        length = i - i0;
+                        dst = new UnicodeLine(++number, i0, slice(src, i0, length));
+                        i+=2;
+                        break;
+                    }
+                }
+            }
+            return length;
         }
     }
 }

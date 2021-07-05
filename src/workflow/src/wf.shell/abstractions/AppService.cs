@@ -203,6 +203,12 @@ namespace Z0
             Tables.emit(src, x => Wf.Row(x));
         }
 
+        protected WfFileFlow EmittingFile(FS.FilePath dst)
+            => Wf.EmittingFile(dst);
+
+        public ExecToken EmittedFile(WfFileFlow flow, Count count)
+            => Wf.EmittedFile(flow,count);
+
         protected WfTableFlow<T> EmittingTable<T>(FS.FilePath dst)
             where T : struct, IRecord<T>
                 => Wf.EmittingTable<T>(dst);

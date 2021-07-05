@@ -25,7 +25,6 @@ namespace Z0.Asm
 
         public ReadOnlySpan<XedFormInfo> ParseSummaries(FS.FilePath src)
         {
-            //using var reader = SummarySource.Utf8().Reader();
             using var reader = src.AsciLineReader();
             var counter = 0u;
             var j = 0;

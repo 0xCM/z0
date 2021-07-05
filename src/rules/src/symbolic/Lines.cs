@@ -28,12 +28,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void convert(in AsciLine src, Span<char> buffer, out Utf16Line dst)
+        public static void convert(in AsciLine src, Span<char> buffer, out UnicodeLine dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
                 seek(buffer, i) = (char)skip(src.Content,i);
-            dst = new Utf16Line(src.LineNumber, src.StartPos, buffer);
+            dst = new UnicodeLine(src.LineNumber, src.StartPos, buffer);
         }
     }
 }

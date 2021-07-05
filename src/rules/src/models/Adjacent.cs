@@ -92,7 +92,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Adjacent(Adjacent<S,T> src)
                 => new Adjacent(src.A, src.B);
-
         }
     }
 }

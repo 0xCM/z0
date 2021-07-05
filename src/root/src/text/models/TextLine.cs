@@ -134,7 +134,7 @@ namespace Z0
         }
 
         public string Format()
-            => string.Format("{0}:{1}", LineNumber,Content);
+            => string.Format("{0}:{1}", LineNumber, Content);
 
 
         public override string ToString()

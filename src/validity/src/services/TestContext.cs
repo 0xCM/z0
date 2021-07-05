@@ -12,12 +12,12 @@ namespace Z0
     using System.Reflection;
     using System.IO;
 
-    using static Part;
+    using static Root;
     using static SFx;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public abstract class TestContext
+    public abstract partial class TestContext
     {
         public bool DiagnosticMode {get; private set;}
 
