@@ -12,7 +12,9 @@ namespace Z0.Asm
 
         public static TextMarker File => text.marker("###FILE:");
 
-        public static TextMarker Comment => text.marker(Chars.Hash);
+        public static TextMarker FileComment => text.marker(Chars.Hash);
+
+        public static TextMarker InlineComment => text.marker("///<");
 
         public static TextMarker OpenSpec => text.marker(Chars.LBrace);
 

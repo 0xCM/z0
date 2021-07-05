@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
     using Windows;
 
     using static Root;
@@ -15,7 +17,7 @@ namespace Z0.Asm
 
         NativeBuffer CodeBuffer;
 
-        NativeBuffer ContextBuffer;
+        NativeBuffer _NativeBuffer;
 
         AsmCmdArbiter Arbiter;
 
@@ -26,8 +28,8 @@ namespace Z0.Asm
         public AsmCmdService()
         {
             CodeBuffer = Buffers.native(Pow2.T10);
-            ContextBuffer = Buffers.native(size<Amd64Context>());
-            Arbiter = AsmCmdArbiter.start(ContextBuffer);
+            _NativeBuffer = Buffers.native(size<Amd64Context>());
+            Arbiter = AsmCmdArbiter.start(_NativeBuffer);
             _SymTypes = Z0.SymTypes.Empty;
         }
 
@@ -40,7 +42,7 @@ namespace Z0.Asm
         {
             Arbiter.Dispose();
             CodeBuffer.Dispose();
-            ContextBuffer.Dispose();
+            _NativeBuffer.Dispose();
         }
 
         SymTypes SymTypes
@@ -51,6 +53,13 @@ namespace Z0.Asm
                     _SymTypes = Clr.symtypes(ApiRuntimeLoader.assemblies());
                 return _SymTypes;
             }
+        }
+
+        Span<byte> NativeBuffer(bool clear)
+        {
+            if(clear)
+                _NativeBuffer.Clear();
+            return _NativeBuffer.Allocated;
         }
 
         static Outcome argerror(string value)

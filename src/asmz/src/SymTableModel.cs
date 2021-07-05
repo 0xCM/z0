@@ -11,7 +11,6 @@ namespace Z0
     using static AsciCode;
     using static core;
 
-
     [ApiHost]
     public readonly struct SymTableModel
     {
@@ -26,7 +25,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AsciCode code(byte digit)
             => skip(DigitCodes,digit);
-
     }
-
 }

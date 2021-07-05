@@ -8,18 +8,13 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
 
     using static core;
+    using static Typed;
 
     partial struct Prototypes
     {
         [ApiHost(prototypes + "cc")]
         public readonly struct CC
         {
-            [Op]
-            public static Vector128<uint> f_u32_u32_128x4u(uint a0, uint a1)
-            {
-                return Vector128.Create(a0,0u,a1,0u);
-            }
-
             [Op]
             public static unsafe void f_u32_u32_p32u(uint ecx, uint edx, uint* r8d)
             {
@@ -28,6 +23,10 @@ namespace Z0.Asm
                 r8d[2] = edx*0x11;
                 r8d[3] = edx*0x17;
             }
+
+            [Op]
+            public static Vector128<uint> f_u32_u32_u32_u32_v128x32u(uint a0, uint a1, uint a2, uint a3)
+                => cpu.vparts(w128, a0,  a1, a2, a3);
 
             [Op]
             public static void f1x1(uint a0, out uint b0)

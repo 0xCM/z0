@@ -9,7 +9,19 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static Rules;
     using static XedMarkers;
+    using static XedEnclosures;
+
+    readonly struct XedEnclosures
+    {
+        public static string origin(string content)
+            => string.Format("origin<{0}>", content);
+
+        public static string comment(string content)
+            => string.Format("comment<{0}>", content);
+
+    }
 
     partial class AsmCmdService
     {
@@ -75,14 +87,19 @@ namespace Z0.Asm
                 i = text.index(content, XedMarkers.File);
                 if(i.IsNonEmpty)
                 {
-                    var filename = text.format(text.right(content, i + XedMarkers.File.Length));
-                    log.WriteLine(string.Format("{0} Origin<{1}>", Lines.format(line.LineNumber), filename));
+                    //var filename = text.format(text.right(content, i + XedMarkers.File.Length));
+                    //log.WriteLine(string.Format("{0} {1}", Lines.format(line.LineNumber), origin(filename)));
                     continue;
                 }
 
                 if(line.IsNonEmpty)
                 {
                     log.WriteLine(line.Format());
+                    // i = text.index(content, XedMarkers.InlineComment);
+                    // if(i.IsNonEmpty)
+                    //     log.WriteLine(line.LineNumber.Format() + ":" + text.format(text.left(content,i)) + comment(text.format(text.right(content, i + XedMarkers.InlineComment.Length)).Trim()));
+                    // else
+                    //     log.WriteLine(line.Format());
                     counter++;
                 }
             }

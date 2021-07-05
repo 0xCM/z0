@@ -9,8 +9,7 @@ namespace Z0
     using System.Text;
     using System.IO;
 
-    using static Part;
-    using static TextRules;
+    using static Root;
 
     public interface ICodeGenerator
     {

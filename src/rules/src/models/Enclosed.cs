@@ -14,14 +14,14 @@ namespace Z0
         /// <summary>
         /// Defines fenced content
         /// </summary>
-        public readonly struct Fenced : IRule<Fenced>
+        public readonly struct Enclosed : IRule<Enclosed>
         {
             public Fence Fence {get;}
 
             public dynamic Content {get;}
 
             [MethodImpl(Inline)]
-            public Fenced(Fence fence, dynamic content)
+            public Enclosed(Fence fence, dynamic content)
             {
                 Fence = fence;
                 Content = content;
@@ -37,14 +37,14 @@ namespace Z0
         /// <summary>
         /// Defines fenced content
         /// </summary>
-        public readonly struct Fenced<T> : IRule<Fenced<T>,T>
+        public readonly struct Enclosed<T> : IRule<Enclosed<T>,T>
         {
             public DelimitedIndex<T> Content {get;}
 
             public Fence<T> Fence {get;}
 
             [MethodImpl(Inline)]
-            public Fenced(DelimitedIndex<T> content, Fence<T> fence)
+            public Enclosed(DelimitedIndex<T> content, Fence<T> fence)
             {
                 Content = content;
                 Fence = fence;
@@ -60,14 +60,14 @@ namespace Z0
         /// <summary>
         /// Defines fenced content
         /// </summary>
-        public readonly struct Fenced<C,F> : IRule<Fenced<C,F>,C,F>
+        public readonly struct Enclosed<C,F> : IRule<Enclosed<C,F>,C,F>
         {
             public C Content {get;}
 
             public Fence<F> Fence {get;}
 
             [MethodImpl(Inline)]
-            public Fenced(C content, Fence<F> fence)
+            public Enclosed(C content, Fence<F> fence)
             {
                 Content = content;
                 Fence = fence;

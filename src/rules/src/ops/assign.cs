@@ -14,5 +14,18 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ScriptVar assign(ScriptVar src, string value)
             => var(src.Symbol, value);
+
+        /// <summary>
+        /// Defines an idiom to promote brevity of expression
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static bool assign<T>(in T src, out T dst)
+        {
+            dst = src;
+            return true;
+        }
     }
 }

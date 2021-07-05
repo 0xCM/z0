@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-
-    using static memory;
+    using static core;
 
     public struct EnumSpec
     {

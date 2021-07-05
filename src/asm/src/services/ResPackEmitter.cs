@@ -32,9 +32,9 @@ namespace Z0.Asm
         void RunScripts()
         {
             var runner = ScriptRunner.create(Db);
-            var build = runner.RunControlScript(ControlScriptNames.BuildRespack);
+            var build = runner.RunControlScript(ControlScripts.BuildRespack);
             iter(build, line => Wf.Row(line));
-            var pack = runner.RunControlScript(ControlScriptNames.PackRespack);
+            var pack = runner.RunControlScript(ControlScripts.PackRespack);
             iter(pack, line => Wf.Row(line));
         }
 

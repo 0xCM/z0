@@ -12,6 +12,5 @@ namespace Z0.Asm
             Wf.AsmModelGen().EmitRegNameProvider();
             return true;
         }
-
     }
 }

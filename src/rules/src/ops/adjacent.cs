@@ -11,19 +11,6 @@ namespace Z0
 
     partial struct Rules
     {
-        /// <summary>
-        /// Defines an idiom to promote brevity of expression
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        /// <typeparam name="T"></typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool assign<T>(in T src, out T dst)
-        {
-            dst = src;
-            return true;
-        }
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Adjacent<T> adjacent<T>(T a, T b)
             => new Adjacent<T>(a, b);

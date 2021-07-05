@@ -20,6 +20,21 @@ namespace Z0
             Dispatcher = Cmd.dispatcher(this);
         }
 
+        CmdSpec Next()
+            => Cmd.spec(term.prompt("cmd> "));
+
+        public void Run()
+        {
+            var input = Next();
+            while(input.Name != ".exit")
+            {
+                if(input.IsNonEmpty)
+                    Dispatch(input);
+
+                input = Next();
+            }
+
+        }
         public Outcome Dispatch(string command, CmdArgs args)
         {
             var outcome = Dispatcher.Dispatch(command,args);

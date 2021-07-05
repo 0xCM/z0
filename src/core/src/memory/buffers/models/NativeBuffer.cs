@@ -12,7 +12,6 @@ namespace Z0
 
     using api = Buffers;
 
-
     /// <summary>
     /// Represents a native buffer allocation
     /// </summary>

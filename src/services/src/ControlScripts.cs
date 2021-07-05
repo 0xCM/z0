@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct ControlScriptNames
+    public readonly struct ControlScripts
     {
         public static FS.FileName BuildRespack => FS.file("build-respack", FS.Cmd);
 

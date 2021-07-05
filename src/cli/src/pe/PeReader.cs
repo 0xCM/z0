@@ -78,10 +78,33 @@ namespace Z0
             Stream?.Dispose();
         }
 
-        public CoffHeaderRow ReadCoffHeader()
+        public PeFileInfo ReadPeInfo()
+        {
+            var pe = PE.PEHeaders.PEHeader;
+            var coff = PE.PEHeaders.CoffHeader;
+            var dst = new PeFileInfo();
+            dst.Machine = coff.Machine;
+            dst.ImageBase = pe.ImageBase;
+            dst.EntryPointOffset = pe.AddressOfEntryPoint;
+            dst.CodeOffset = pe.BaseOfCode;
+            dst.CodeSize = (uint)pe.SizeOfCode;
+            dst.DataOffset = pe.BaseOfData;
+            dst.ImageSize = (uint)pe.SizeOfImage;
+            dst.ExportDir = pe.ExportTableDirectory;
+            dst.ImportDir = pe.ImportTableDirectory;
+            dst.ResourceDir = pe.ResourceTableDirectory;
+            dst.RelocationDir = pe.BaseRelocationTableDirectory;
+            dst.ImportAddressDir = pe.ImportAddressTableDirectory;
+            dst.LoadConfigDir = pe.LoadConfigTableDirectory;
+            dst.DebugDir= pe.DebugTableDirectory;
+            dst.Characteristics = coff.Characteristics;
+            return dst;
+        }
+
+        public CoffInfo ReadCoffInfo()
         {
             var src = PeHeaders.CoffHeader;
-            var dst = new CoffHeaderRow();
+            var dst = new CoffInfo();
             dst.Characteristics = src.Characteristics;
             dst.Machine = src.Machine;
             dst.NumberOfSections = (ushort)src.NumberOfSections;

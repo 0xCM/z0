@@ -12,6 +12,5 @@ namespace Z0.Asm
             Wf.IntelXed().EmitCatalog();
             return true;
         }
-
     }
 }

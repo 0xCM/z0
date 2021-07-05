@@ -18,7 +18,7 @@ namespace Z0.Asm
 
         ReadOnlySpan<AsmByte> Bytes {get;}
 
-        uint4 Size {get;}
+        byte Size {get;}
     }
 
     public interface IAsmInstruction<T> : IAsmInstruction

@@ -5,7 +5,7 @@
 namespace Z0
 {
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public readonly partial struct ProjectModel

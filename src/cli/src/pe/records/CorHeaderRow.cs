@@ -18,23 +18,23 @@ namespace Z0
 
             public ushort MinorRuntimeVersion;
 
-            public DirectoryEntryRow MetadataDirectory;
+            public DirectoryInfo MetadataDirectory;
 
             public CorFlags Flags;
 
             public int EntryPointTokenOrRelativeVirtualAddress;
 
-            public DirectoryEntryRow ResourcesDirectory;
+            public DirectoryInfo ResourcesDirectory;
 
-            public DirectoryEntryRow StrongNameSignatureDirectory;
+            public DirectoryInfo StrongNameSignatureDirectory;
 
-            public DirectoryEntryRow CodeManagerTableDirectory;
+            public DirectoryInfo CodeManagerTableDirectory;
 
-            public DirectoryEntryRow VtableFixupsDirectory;
+            public DirectoryInfo VtableFixupsDirectory;
 
-            public DirectoryEntryRow ExportAddressTableJumpsDirectory;
+            public DirectoryInfo ExportAddressTableJumpsDirectory;
 
-            public DirectoryEntryRow ManagedNativeHeaderDirectory;
+            public DirectoryInfo ManagedNativeHeaderDirectory;
         }
     }
 }

@@ -43,10 +43,10 @@ namespace Z0.Asm
             get => Instruction.Mnemonic;
         }
 
-        public uint4 Size
+        public byte Size
         {
             [MethodImpl(Inline)]
-            get => (uint4)Data.Length;
+            get => (byte)Data.Length;
         }
 
         [MethodImpl(Inline)]

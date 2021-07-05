@@ -6,9 +6,6 @@ namespace Z0
 {
     using Z0.Asm;
 
-    using static Root;
-    using static core;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
@@ -21,28 +18,13 @@ namespace Z0
             AsmCmd = Wf.AsmCmd();
         }
 
-        Outcome Dispatch(CmdSpec cmd)
-            => AsmCmd.Dispatch(cmd);
-
-        CmdSpec Next()
-            => Cmd.spec(term.prompt("cmd> "));
-
-        protected override void Run()
-        {
-            var input = Next();
-            while(input.Name != ".exit")
-            {
-                if(input.IsNonEmpty)
-                    Dispatch(input);
-
-                input = Next();
-            }
-        }
-
         protected override void Disposing()
         {
             AsmCmd.Dispose();
         }
+
+        protected override void Run()
+            => AsmCmd.Run();
 
         public static void Main(params string[] args)
         {

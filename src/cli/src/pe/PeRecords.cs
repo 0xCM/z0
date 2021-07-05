@@ -13,9 +13,9 @@ namespace Z0
     public readonly partial struct PeRecords
     {
         [MethodImpl(Inline), Op]
-        public static DirectoryEntryRow directory(Address32 rva, uint size)
+        public static DirectoryInfo directory(Address32 rva, uint size)
         {
-            var dst = new DirectoryEntryRow();
+            var dst = new DirectoryInfo();
             dst.Rva = rva;
             dst.Size = size;
             return dst;

@@ -38,8 +38,8 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator Fenced<T,string>(FencedNumber<T> src)
-            => fenced(src.Value, src.Fence);
+        public static implicit operator Enclosed<T,string>(FencedNumber<T> src)
+            => enclose(src.Value, src.Fence);
     }
 
     public readonly struct FencedNumber
@@ -62,7 +62,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator Fenced<ulong,string>(FencedNumber src)
-            => fenced(src.Value, src.Fence);
+        public static implicit operator Enclosed<ulong,string>(FencedNumber src)
+            => enclose(src.Value, src.Fence);
     }
 }

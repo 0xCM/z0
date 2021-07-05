@@ -4,19 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using Windows;
-
     using static core;
 
     partial class AsmCmdService
     {
-        Outcome ShowEffective(CmdArgs args)
-        {
-            //var e1 = asm.effective(w8,)
-            return true;
-        }
-
-
         [CmdOp(".captured")]
         Outcome ShowCaptured(CmdArgs args)
         {
@@ -31,7 +22,5 @@ namespace Z0.Asm
             iter(entries, entry => Wf.Row(formatter.Format(entry)));
             return true;
         }
-
-
     }
 }

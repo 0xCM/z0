@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static MachineMode;
     using static OperandSize;
-    using static AsmManuals;
 
     partial struct AsmQuery
     {
@@ -19,7 +18,7 @@ namespace Z0.Asm
         /// <param name="mode"></param>
         /// <param name="default"></param>
         /// <param name="effective"></param>
-        [Op, Doc(Amd + V3 + C1 + S2 + T2)]
+        [Op]
         public static bit need66(MachineMode mode, OperandSize @default, OperandSize effective)
             => mode switch{
                 IA32e => effective switch {

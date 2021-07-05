@@ -286,22 +286,6 @@ namespace Z0.Asm
             clrmd.ParseDump();
         }
 
-        PeRecords.CoffHeaderRow ReadCoffHeader(FS.FilePath src)
-        {
-            using var reader = PeReader.create(src);
-            var header = reader.ReadCoffHeader();
-            return header;
-        }
-
-        void ShowCoffHeader(FS.FilePath src)
-        {
-            var header = ReadCoffHeader(src);
-            var formatter = header.Formatter();
-            var id = formatter.TableId;
-            using var log = ShowLog(string.Format("{0}.{1}", formatter.TableId, src.FileName), FS.Log);
-            log.Show(formatter.Format(header, RecordFormatKind.KeyValuePairs));
-        }
-
         void EmitAsmAsssetCatalog()
         {
             var catalogs = Wf.Assets();
@@ -491,41 +475,6 @@ namespace Z0.Asm
             }
         }
 
-        void ProcessManuals()
-        {
-            const char c = '•';
-
-            Wf.Row(string.Format("{0}:{1:x4}", c, (ushort)c));
-
-            var docs = Db.VendorManuals();
-            var files = docs.VendorDocs(VendorNames.Intel, FS.Txt).View;
-            var count = files.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var file = ref skip(files,i);
-                if(file.Size == 0)
-                    continue;
-
-                var flow = Wf.Running(string.Format("Processing {0}", file.ToUri()));
-
-                var positions = list<uint>();
-                using var map = file.MemoryMap();
-                var data = map.View();
-                var size = data.Length;
-                var unicodes = hashset<byte>();
-                for(var j=0u; j<size - 1; j++)
-                {
-                    ref readonly var b0 = ref skip(data, j);
-                    ref readonly var b1 = ref skip(data, j+1);
-                    if(SymbolicQuery.bullet(b0,b1))
-                    {
-                        positions.Add(j);
-                    }
-                }
-                Wf.Ran(flow);
-            }
-        }
-
         void EmitPdbDocInfo(PartId part)
         {
             var dst =Db.AppLog(string.Format("{0}.pdbinfo", part.Format()), FS.Csv);
@@ -593,7 +542,6 @@ namespace Z0.Asm
             return (success,string.Format("{0} {1} {2}", a, op, b));
         }
 
-
         void CheckCodeFactory()
         {
             // 4080C416                add spl,22
@@ -636,7 +584,6 @@ namespace Z0.Asm
             var dst = dir + FS.file("xxhsum", FS.Asm);
             parser.ParseDisassembly(src,dst);
         }
-
 
         Index<AsciCode> IndexIdentifiers()
         {
@@ -697,7 +644,6 @@ namespace Z0.Asm
             var spec = bytes.DefineAsciBytes("Uppercase", content);
             var data = spec.Format();
             Wf.Row(data);
-
         }
 
         void EmitSymbolIndex<E>(Identifier container)
@@ -748,7 +694,6 @@ namespace Z0.Asm
 
             dst.Sort();
             iter(dst.ViewDeposited(), x => Wf.Row(x));
-
         }
 
         void Dispatch(string cmd)
@@ -765,14 +710,6 @@ namespace Z0.Asm
             iter(args, arg => Dispatch(arg));
         }
 
-        void ShowRegNames()
-        {
-            var regs = AsmRegs.list(GP);
-            iter(regs, reg => Wf.Row(reg));
-            var bytespan = SpanRes.specify("GpRegNames", recover<RegOp,byte>(regs).ToArray());
-            Wf.Row(bytespan.Format());
-        }
-
         static void render(EventWrittenEventArgs src, ITextBuffer dst)
         {
             dst.AppendLine(src.EventName);
@@ -785,7 +722,6 @@ namespace Z0.Asm
                 var message = string.Concat(name,payload);
                 dst.AppendLine(message);
             }
-
         }
 
         static async void emit(EventWrittenEventArgs src, StreamWriter dst)
@@ -847,74 +783,9 @@ namespace Z0.Asm
             Wf.Row(table.Format());
         }
 
-        Outcome DispatchAsmCmd(string name, CmdArgs args = default)
-        {
-            var cmd = Wf.AsmCmd();
-            return cmd.Dispatch(name,args);
-        }
-
         public void Run()
         {
-            //EmitPdbDocInfo(PartId.Math);
             Dispatch();
-            //CalcTables();
-            //EmitRegGrids();
-            //ShowRexTable();
-            //CheckStringTables();
-            //EmitSymbolIndex<AsmSigTokens.Regs>("SigRegs")
-            // var part = PartId.Math;
-            // var log = Db.AppLog(string.Format("{0}.pdbinfo", part.Format()), FS.Csv);
-            // EmitPdbMethodInfo(part,log);
-
-            //RunAsmToolChain("and");
-            //ParseBdDisassembly();
-            //Wf.GlobalCommands().ShowCommands();
-            //ShowOps();
-            //ParseDisassembly();
-            //CheckDocProcessor();
-            //CheckAsciByteSpans();
-            //Wf.GlobalCommands().CaptureV2(CmdArgs.Empty);
-            //CaptureParts(PartId.AsmLang, PartId.AsmCases, PartId.AsmCore);
-            //EmitXedCatalog();
-            //CheckAsciLookups();
-            // var xpr = expression(AsmMnemonics.AND, AsmOp.al, AsmOp.imm8(0x16));
-            // Wf.Row(xpr);
-            //GenerateInstructionModels();
-            //iteri(LoadMnemonics(), (i,m) => Wf.Row(string.Format("{0:D3} {1}", i, m)));
-            //EmitXedCatalog();
-            //CheckTools();
-            //RunExtractWorkflow();
-            //ProcessStatementIndex();
-            //ParseDisassembly();
-            //CheckCodeFactory();
-            //EmitSymbolicliterals();
-            //EmitPartSelection();
-            //CompareBitstrings();
-            //EmitCliMetadata();
-            //CaptureParts(PartId.AsmCore);
-            //CheckCpuid();
-            //CheckRowFormat();
-            //RunExtractWorkflow();
-            //ProcessStatementIndex();
-            //ShowModRmTable();
-            //EmitSymbolicliterals();
-            //ListVendorManuals("intel", FS.Txt);
-            //EmitMethodDefs();
-            //EmitFieldDefs();
-            //EmitCilOpCodes();
-            //LoadHexPacks();
-            //CheckCpuid();
-            //Wf.AsmCatalogs().EmitAssetCatalog();
-            //CheckCpuid();
-            // var src = FS.path(@"C:\Dev\tooling\tools\nasm\avx2.obj");
-            // ShowCoffHeader(src);
-            //ParseDump();
-            //StatementRountTrip();
-            //TestBitfields();
-            //TestRel32();
-            //CaptureSelf();
-            // var dir = Db.AppLogDir();
-            // EmitAsmRows(dir);
         }
 
         public static void Main(params string[] args)
