@@ -180,12 +180,11 @@ namespace Z0
             where T : IMsgPattern
                 => Wf.Running(msg, string.Format("{0}/{1}", HostName, operation));
 
-        protected WfExecFlow<string> Running([Caller] string operation = null)
-            => Wf.Running(string.Format("{0}/{1}", HostName, operation));
+        protected WfExecFlow<string> Running([Caller] string msg = null)
+            => Wf.Running(string.Format("{0}/{1}", HostName, msg));
 
-        protected ExecToken Ran<T>(WfExecFlow<T> flow, [Caller] string operation = null)
-            where T : IMsgPattern
-                => Wf.Ran(flow.WithMsg(string.Format("{0}/{1}", HostName, operation)));
+        protected ExecToken Ran<T>(WfExecFlow<T> flow, [Caller] string msg = null)
+                => Wf.Ran(flow.WithMsg(string.Format("{0}/{1}", HostName, msg)));
 
         protected ExecToken Ran<T,D>(WfExecFlow<T> flow, D data, [Caller] string operation = null)
             where T : IMsgPattern

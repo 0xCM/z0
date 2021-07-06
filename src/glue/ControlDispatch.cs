@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+
     using static core;
 
     public readonly struct ControlDispatch
@@ -28,9 +29,9 @@ namespace Z0
                     var script = paths.ControlScript(name);
                     if(script.Exists)
                     {
-                        var runner = ScriptRunner.create(paths);
+                        var runner = paths.ScriptRunner();
                         var output = runner.RunControlScript(name);
-                        var processor = Tooling.processor(paths, script, handlers);
+                        var processor = CmdResultProcessor.create(script, handlers);
                         term.inform("Response");
                         iter(output, x => processor.Process(x));
                     }

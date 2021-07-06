@@ -59,7 +59,6 @@ namespace Z0
         public static XedTool XedTool(this IWfRuntime wf)
             => Tools.XedTool.create(wf);
 
-
         [Op]
         public static BdDisasm BdDisasm(this IServiceContext ctx)
             => Tools.BdDisasm.create(ctx);
@@ -72,6 +71,5 @@ namespace Z0
             seek(dst,1) = new RobocopyResultHandler(paths);
             return buffer;
         }
-
     }
 }

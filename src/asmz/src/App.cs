@@ -35,7 +35,7 @@ namespace Z0.Asm
 
         void RunScripts()
         {
-            var runner = ScriptRunner.create(Db);
+            var runner = Wf.ScriptRunner();
             runner.RunToolCmd(clang.name, "codegen");
             runner.RunToolCmd(clang.name, "parse");
             runner.RunToolPs(clang.name, "fast-math");

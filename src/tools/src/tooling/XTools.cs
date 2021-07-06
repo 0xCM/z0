@@ -16,13 +16,9 @@ namespace Z0
     [ApiHost]
     public static partial class XTools
     {
-        [Op]
-        public static ScriptRunner ScriptRunner(this IWfRuntime wf)
-            => Z0.ScriptRunner.create(wf.Db());
-
-        [Op]
-        public static ScriptRunner ScriptRunner(this IEnvPaths paths)
-            => Z0.ScriptRunner.create(paths);
+        // [Op]
+        // public static ScriptRunner ScriptRunner(this IWfRuntime wf)
+        //     => Z0.ScriptRunner.create(wf.Db());
 
         [Op]
         public static MsDocPipe MsDocs(this IWfRuntime wf)

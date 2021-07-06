@@ -16,7 +16,7 @@ namespace Z0.Tools
         {
             var @case = name.Format();
             using var log = ShowLog(Id.Format() + "." + @case, FS.Log);
-            var runner = ScriptRunner.create(Db);
+            var runner = Wf.ScriptRunner();
             var output = runner.RunToolCmd(Id, @case);
             iter(output, x => log.Show(x));
             var listpath = Listings().Where(l => l.Name.Contains(@case)).Single();

@@ -14,7 +14,6 @@ namespace Z0.Asm
         FS.FolderPath SourceDir
             => Db.PartSrcDir("respack") + FS.folder("content") + FS.folder("bytes");
 
-
         protected override void OnInit()
         {
         }
@@ -31,7 +30,8 @@ namespace Z0.Asm
 
         void RunScripts()
         {
-            var runner = ScriptRunner.create(Db);
+            //var runner = ScriptRunner.create(Db);
+            var runner = Wf.ScriptRunner();
             var build = runner.RunControlScript(ControlScripts.BuildRespack);
             iter(build, line => Wf.Row(line));
             var pack = runner.RunControlScript(ControlScripts.PackRespack);

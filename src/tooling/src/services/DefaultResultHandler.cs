@@ -6,16 +6,14 @@ namespace Z0
 {
     class DefaultResultHandler : IToolResultHandler
     {
-        readonly IEnvPaths Paths;
-
         public ToolId Tool => default;
 
         void Status(TextLine src)
             => term.babble(src);
 
-        public DefaultResultHandler(IEnvPaths paths)
+        public DefaultResultHandler()
         {
-            Paths = paths;
+
         }
 
         public bool Handle(TextLine src)

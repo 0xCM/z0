@@ -47,9 +47,6 @@ namespace Z0
             return this;
         }
 
-        public void Run(CmdLine src)
-            => Tooling.create(Wf).Run(src);
-
         public void Dispatch(CmdLine cmd)
         {
             var args = cmd.Parts;
@@ -61,9 +58,6 @@ namespace Z0
             var a0 = args.Length >= 2 ? args[1].Content : EmptyString;
             _cmd.ScriptPath = FS.path(a0);
             _cmd.RunDirect(Wf);
-            // var a1 = args.Length >= 3 ? args[2].Content : EmptyString;
-            // var a2 = args.Length >= 4 ? args[3].Content : EmptyString;
-            // var a3 = args.Length >= 5 ? args[4].Content : EmptyString;
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Z0.Lang
     public readonly partial struct lang
     {
         const Z0.NumericKind Closure = Z0.NumericKind.Unsigned;
-
     }
 
     partial struct Msg

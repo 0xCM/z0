@@ -6,9 +6,13 @@ namespace Z0
 {
     using System;
 
-    class CmdResultProcessor : ILineProcessor
+    public class CmdResultProcessor : ILineProcessor
     {
-        readonly IEnvPaths Paths;
+        public static ILineProcessor create(FS.FilePath script, Index<IToolResultHandler> handlers)
+            => new CmdResultProcessor(script, handlers);
+
+        public static ILineProcessor create(FS.FilePath script)
+            => new CmdResultProcessor(script);
 
         public FS.FilePath ScriptPath {get;}
 
@@ -18,13 +22,20 @@ namespace Z0
 
         Index<IToolResultHandler> KnownHandlers;
 
-        public CmdResultProcessor(IEnvPaths paths, FS.FilePath script, Index<IToolResultHandler> handlers)
+        public CmdResultProcessor(FS.FilePath script, Index<IToolResultHandler> handlers)
         {
-            Paths = paths;
             ScriptPath = script;
-            DefaultHandler = new DefaultResultHandler(Paths);
+            DefaultHandler = new DefaultResultHandler();
             CurrentHandler = DefaultHandler;
             KnownHandlers = handlers;
+        }
+
+        public CmdResultProcessor(FS.FilePath script)
+        {
+            ScriptPath = script;
+            DefaultHandler = new DefaultResultHandler();
+            CurrentHandler = DefaultHandler;
+            KnownHandlers = sys.empty<IToolResultHandler>();
         }
 
         void Switch(IToolResultHandler handler)
