@@ -9,6 +9,8 @@ namespace Z0
 
     using static Root;
 
+    using api = ApiSigs;
+
     public class ApiOperandSig
     {
         public Name Name {get;}
@@ -18,7 +20,7 @@ namespace Z0
         public Index<ApiSigModKind> Modifiers {get;}
 
         [MethodImpl(Inline)]
-        public ApiOperandSig(Name name, ApiTypeSig type, Index<ApiSigModKind> modifiers)
+        public ApiOperandSig(Name name, ApiTypeSig type, ApiSigModKind[] modifiers)
         {
             Name = name;
             Type = type;
@@ -28,7 +30,7 @@ namespace Z0
         public bool IsReturn
         {
             [MethodImpl(Inline)]
-            get => Name == ApiSigRender.ReturnIndicator;
+            get => api.returns(this);
         }
 
         public bool IsVoid

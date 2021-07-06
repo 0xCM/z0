@@ -9,21 +9,24 @@ namespace Z0
 
     using static Root;
 
-    /// <summary>
-    /// Defines an operand sequence
-    /// </summary>
-    public readonly struct RuleOperands
+    partial struct Rules
     {
-        public Index<RuleOperand> Values {get;}
-
-        [MethodImpl(Inline)]
-        public RuleOperands(params RuleOperand[] values)
-            => Values = values;
-
-        public byte Count
+        /// <summary>
+        /// Defines an operand sequence
+        /// </summary>
+        public readonly struct RuleOperands
         {
+            public Index<RuleOperand> Values {get;}
+
             [MethodImpl(Inline)]
-            get => (byte)Values.Count;
+            public RuleOperands(params RuleOperand[] values)
+                => Values = values;
+
+            public byte Count
+            {
+                [MethodImpl(Inline)]
+                get => (byte)Values.Count;
+            }
         }
     }
 }

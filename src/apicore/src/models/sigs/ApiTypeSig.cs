@@ -9,6 +9,8 @@ namespace Z0
 
     using static Root;
 
+    using api = ApiSigs;
+
     public class ApiTypeSig : ITextual
     {
         public Name TypeName {get;}
@@ -72,7 +74,7 @@ namespace Z0
         }
 
         public string Format()
-            => ApiSigRender.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();

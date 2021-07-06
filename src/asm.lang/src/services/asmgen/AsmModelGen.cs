@@ -7,9 +7,6 @@ namespace Z0.Asm
     using System;
 
     using T = AsmGenTarget;
-
-    using static CsPatterns;
-
     [ApiHost]
     public sealed partial class AsmModelGen : AppService<AsmModelGen>
     {
@@ -76,7 +73,7 @@ namespace Z0.Asm
 
         const string QualifiedAccessPattern = "{0}.{1}";
 
-        static string AsmNamespaceDecl() => NamespaceDecl(TargetNamespaceName);
+        static string NamespaceDecl() => CsPatterns.NamespaceDecl(TargetNamespaceName);
 
         const string ItemAssignPattern = "{0} = {1},";
 

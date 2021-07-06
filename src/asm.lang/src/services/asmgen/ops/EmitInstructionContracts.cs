@@ -13,7 +13,7 @@ namespace Z0.Asm
             RenderInstructionContracts(0,buffer);
 
             using var writer = dst.Writer();
-            writer.Write(Dev.SourceHeader());
+            writer.Write(CgRules.FileHeader());
             writer.Write(buffer.Emit());
 
             Wf.EmittedFile(flow,1);

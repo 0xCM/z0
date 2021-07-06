@@ -16,6 +16,7 @@
     <ProjectReference Include="$(Hex)" />
     <ProjectReference Include="$(Clr)" />
     <ProjectReference Include="$(SymCore)" />
+    <ProjectReference Include="$(Text)" />
   </ItemGroup>
 
 </Project>

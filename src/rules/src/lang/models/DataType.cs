@@ -2,21 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct DataType : IType
+    partial struct Rules
     {
-        public string Name {get;}
-
-        [MethodImpl(Inline)]
-        public DataType(string name)
+        public readonly struct DataType : IType
         {
-            Name = name;
+            public string Name {get;}
+
+            [MethodImpl(Inline)]
+            public DataType(string name)
+            {
+                Name = name;
+            }
         }
     }
 }

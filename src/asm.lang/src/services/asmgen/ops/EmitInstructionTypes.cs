@@ -45,7 +45,7 @@ namespace Z0.Asm
             buffer.IndentLine(margin, Close);
 
             using var writer = dst.Writer();
-            writer.Write(Dev.SourceHeader());
+            writer.Write(CgRules.FileHeader());
             writer.Write(buffer.Emit());
 
             Wf.EmittedFile(flow, monics.Length);

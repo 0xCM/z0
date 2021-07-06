@@ -162,21 +162,5 @@ namespace Z0
             dst.Platform = src.PlatformName;
             return ref dst;
         }
-
-        public static string SourceHeader(bool ts = true) => ts ?
-$@"//-----------------------------------------------------------------------------
-// Generated   :  {root.timestamp()}
-// Copyright   :  (c) Chris Moore, 2021
-// License     :  MIT
-//-----------------------------------------------------------------------------
-"
-:
-
-@"//-----------------------------------------------------------------------------
-// Generated
-// Copyright   :  (c) Chris Moore, 2021
-// License     :  MIT
-//-----------------------------------------------------------------------------
-";
     }
 }

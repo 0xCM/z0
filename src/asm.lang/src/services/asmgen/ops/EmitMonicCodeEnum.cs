@@ -17,18 +17,18 @@ namespace Z0.Asm
     {
         void EmitMonicEnum(ReadOnlySpan<string> monics, FS.FilePath dst)
         {
-            var flow = Wf.EmittingFile(dst);
+            var flow = EmittingFile(dst);
             var buffer = text.buffer();
             EmitMonicEnumLiterals(monics,0,buffer);
             using var writer = dst.Writer();
-            writer.Write(Dev.SourceHeader());
+            writer.Write(CgRules.FileHeader());
             writer.Write(buffer.Emit());
-            Wf.EmittedFile(flow, monics.Length);
+            EmittedFile(flow, monics.Length);
         }
 
         public static void EmitMonicEnumLiterals(ReadOnlySpan<string> monics, uint margin, ITextBuffer buffer)
         {
-            buffer.AppendLine(AsmNamespaceDecl());
+            buffer.AppendLine(NamespaceDecl());
             buffer.AppendLine(Open);
             margin += 4;
             buffer.IndentLine(margin, EnumDecl(TargetIdentifier(T.MonicCodeEnum), UShort()));

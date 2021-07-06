@@ -567,13 +567,13 @@ namespace Z0.Asm
 
         void CheckApiSigs()
         {
-            var t0 = ApiSigBuilder.type("uint");
-            var t1 = ApiSigBuilder.type("uint");
-            var t2 = ApiSigBuilder.type("bool");
-            var op0 = ApiSigBuilder.operand("a", t0);
-            var op1 = ApiSigBuilder.operand("b", t1);
-            var r = ApiSigBuilder.@return(t2);
-            Wf.Row(ApiSigBuilder.operation("equals", r, op0, op1));
+            var t0 = ApiSigs.type("uint");
+            var t1 = ApiSigs.type("uint");
+            var t2 = ApiSigs.type("bool");
+            var op0 = ApiSigs.operand("a", t0);
+            var op1 = ApiSigs.operand("b", t1);
+            var r = ApiSigs.@return(t2);
+            Wf.Row(ApiSigs.operation("equals", r, op0, op1));
         }
 
         ReadOnlySpan<byte> Input => new byte[]{0x44, 0x01, 0x58,0x04};

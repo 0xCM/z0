@@ -16,7 +16,7 @@ namespace Z0.Asm
         {
             var buffer = text.buffer();
             var margin = 0u;
-            buffer.AppendLine(AsmNamespaceDecl());
+            buffer.AppendLine(NamespaceDecl());
             buffer.AppendLine(Open);
             margin += Indent;
             buffer.IndentLine(margin, UsingCompilerServices);
@@ -38,7 +38,7 @@ namespace Z0.Asm
 
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            writer.Write(Dev.SourceHeader());
+            writer.Write(CgRules.FileHeader());
             writer.Write(buffer.Emit());
             Wf.EmittedFile(flow,src.Length);
         }

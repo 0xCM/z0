@@ -9,6 +9,8 @@ namespace Z0
 
     using static Root;
 
+    using api = ApiSigs;
+
     public class ApiOperationSig : ITextual
     {
         public Name Name {get;}
@@ -18,7 +20,7 @@ namespace Z0
         public Index<ApiOperandSig> Operands {get;}
 
         [MethodImpl(Inline)]
-        public ApiOperationSig(Name name, ApiOperandSig @return, Index<ApiOperandSig> operands)
+        public ApiOperationSig(Name name, ApiOperandSig @return, ApiOperandSig[] operands)
         {
             Name = name;
             Return = @return;
@@ -28,7 +30,7 @@ namespace Z0
         public uint OperandCount
         {
             [MethodImpl(Inline)]
-            get => Operands.Count;
+            get => (uint)Operands.Length;
         }
 
         public bool HasVoidReturn
@@ -49,7 +51,7 @@ namespace Z0
             get => Name.IsNonEmpty;
         }
         public string Format()
-            => ApiSigRender.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();

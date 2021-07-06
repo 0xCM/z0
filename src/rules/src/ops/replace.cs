@@ -33,7 +33,7 @@ namespace Z0
         {
             var src = spec.Source.View;
             var dst = spec.Target.View;
-            //root.require(src.Length == dst.Length, () => "Same lengths there must me");
+            Require.invariant(src.Length == dst.Length, () => "Same lengths there must me");
             var count = src.Length;
             var buffer = sys.alloc<Replace<T>>(count);
             ref var target = ref first(buffer);

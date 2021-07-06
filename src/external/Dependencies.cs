@@ -9,26 +9,26 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct GitRepoLink
+    public readonly struct CodeRepoLink
     {
         public string Http {get;}
 
         [MethodImpl(Inline)]
-        public GitRepoLink(string http)
+        public CodeRepoLink(string http)
         {
             Http = http;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator GitRepoLink(string src)
-            => new GitRepoLink(src);
+        public static implicit operator CodeRepoLink(string src)
+            => new CodeRepoLink(src);
     }
 
-    public readonly struct GitRepoLinks
+    public readonly struct CodeRepoLinks
     {
-        public static GitRepoLink DiaSymReaderXmlConverter => "https://github.com/dotnet/symreader-converter/src/Microsoft.DiaSymReader.Converter.Xml";
+        public static CodeRepoLink DiaSymReaderXmlConverter => "https://github.com/dotnet/symreader-converter/src/Microsoft.DiaSymReader.Converter.Xml";
 
-        public static GitRepoLink DiaSymReaderConverter => "https://github.com/dotnet/symreader-converter/src/Microsoft.DiaSymReader.Converter";
+        public static CodeRepoLink DiaSymReaderConverter => "https://github.com/dotnet/symreader-converter/src/Microsoft.DiaSymReader.Converter";
 
     }
 
@@ -50,9 +50,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ExternalModule(string name)
             => new ExternalModule(name);
-
     }
-
 
     public readonly struct ModuleArrow
     {

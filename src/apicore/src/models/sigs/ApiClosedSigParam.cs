@@ -21,7 +21,7 @@ namespace Z0
         public ApiTypeSig Closure {get;}
 
         [MethodImpl(Inline)]
-        internal ApiClosedSigParam(ushort position, string name, ApiTypeSig closure)
+        public ApiClosedSigParam(ushort position, string name, ApiTypeSig closure)
         {
             Position = position;
             Name = name;

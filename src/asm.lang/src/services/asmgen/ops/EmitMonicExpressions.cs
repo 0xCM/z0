@@ -21,14 +21,14 @@ namespace Z0.Asm
             var buffer = text.buffer();
             EmitMonicExpressions(monics,0,buffer);
             using var writer = dst.Writer();
-            writer.Write(Dev.SourceHeader());
+            writer.Write(CgRules.FileHeader());
             writer.Write(buffer.Emit());
             Wf.EmittedFile(flow, monics.Length);
         }
 
         public static void EmitMonicExpressions(ReadOnlySpan<string> monics, uint margin, ITextBuffer buffer)
         {
-            buffer.AppendLine(AsmNamespaceDecl());
+            buffer.AppendLine(NamespaceDecl());
             buffer.AppendLine(Open);
             margin += 4;
             buffer.IndentLine(margin, ApiCompleteAttrib());

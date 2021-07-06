@@ -19,7 +19,7 @@ namespace Z0.Asm
             var flow = Wf.EmittingFile(dst);
             var buffer = TextTools.buffer();
             var margin = 0u;
-            buffer.IndentLine(margin, AsmNamespaceDecl());
+            buffer.IndentLine(margin, NamespaceDecl());
             buffer.IndentLine(margin, Open());
             var count = EmitRegNameProvider(margin + 4, buffer);
             buffer.IndentLine(margin, Close());
