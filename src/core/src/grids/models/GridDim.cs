@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static core;
     using static CharText;
-
 
     /// <summary>
     /// Defines grid dimensions based on specification without parametrization

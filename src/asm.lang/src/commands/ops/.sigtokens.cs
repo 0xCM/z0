@@ -22,7 +22,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var symbol = ref skip(symbols,i);
-                Row(string.Format("{0,-6} | {1,-8} | {2, -8} | {3}", symbol.Key,  symbol.Name, symbol.Expr, symbol.Description));
+                Write(string.Format("{0,-6} | {1,-8} | {2, -8} | {3}", symbol.Key,  symbol.Name, symbol.Expr, symbol.Description));
             }
 
             return result;

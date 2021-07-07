@@ -12,18 +12,19 @@ namespace Z0
             if(count != 0)
                 term.inform(string.Format("Command-line: {0}", args.Delimit()));
 
-            var kind = CmdSwitch.kind(args);
-            switch(kind)
-            {
-                case CmdSwitchKind.Control:
-                    ControlDispatch.dispatch(args);
-                break;
-                case CmdSwitchKind.Workflow:
-                break;
-                default:
-                    Reactor.dispatch(args);
-                break;
-            }
+            ControlDispatch.dispatch(args);
+
+            // var kind = CmdSwitch.kind(args);
+            // switch(kind)
+            // {
+            //     case CmdSwitchKind.Control:
+            //     break;
+            //     case CmdSwitchKind.Workflow:
+            //     break;
+            //     default:
+            //         Reactor.dispatch(args);
+            //     break;
+            // }
         }
     }
 }

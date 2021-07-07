@@ -12,12 +12,65 @@ namespace Z0
     partial struct CellCalcs
     {
         /// <summary>
-        /// Computes the storage segment offset for a row/col coordinate
+        /// Computes the 0-based linear index determined by column width and a row/col coordinate
+        /// </summary>
+        /// <param name="colwidth">The bit-width of a grid column</param>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline), Op]
+        public static uint offset(uint colwidth, uint row, uint col)
+            => row*colwidth + col;
+
+        /// <summary>
+        /// Computes the 0-based linear index determined by column width and a row/col coordinate
+        /// </summary>
+        /// <param name="colwidth">The bit-width of a grid column</param>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline), Op]
+        public static uint offset<T>(GridDim<T> dim, uint row, uint col)
+            where T : unmanaged
+                => offset(core.uint32(dim.ColCount), row, col);
+
+        /// <summary>
+        /// Computes the 0-based linear index determined by a row/col coordinate
         /// </summary>
         /// <param name="row">The 0-based row index</param>
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline), Op]
-        public static int offset(in GridMetrics src, int row, int col)
-            => CellCalcs.linear(src, row,col) % src.CellWidth;
+        public static uint offset(in GridMetrics src, uint row, uint col)
+            => offset(src.ColCount, row, col);
+
+        /// <summary>
+        /// Computes the 0-based linear index determined by column width and a row/col coordinate
+        /// </summary>
+        /// <param name="colwidth">The bit-width of a grid column</param>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline), Op]
+        public static uint offset(GridDim dim, GridPoint point)
+            => point.Row*dim.ColCount + point.Col;
+
+        /// <summary>
+        /// Computes the 0-based linear index determined by column width and a row/col coordinate
+        /// </summary>
+        /// <param name="colwidth">The bit-width of a grid column</param>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline), Op]
+        public static uint offset(GridDim dim, uint row, uint col)
+            => offset(dim, (row,col));
+
+
+        /// <summary>
+        /// Computes the 0-based linear index determined by a row/col coordinate and natural column width
+        /// </summary>
+        /// <param name="row">The grid row</param>
+        /// <param name="col">The grid columns</param>
+        /// <typeparam name="N">The grid column type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint offset<W>(uint row, uint col, W w = default)
+            where W : unmanaged, IDataWidth
+                => (uint)row * (uint)Widths.data(w) + col;
     }
 }

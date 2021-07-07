@@ -4,12 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
     using static core;
-    using static XedMarkers;
 
     partial class AsmCmdService
     {
@@ -28,11 +23,10 @@ namespace Z0.Asm
             {
                 Lines.line(data, ref number, ref pos, out var line);
                 if(line.IsNonEmpty)
-                    Row(line.Format());
+                    Write(line.Format());
             }
 
             return true;
         }
-
    }
 }

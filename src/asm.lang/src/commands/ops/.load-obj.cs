@@ -20,7 +20,7 @@ namespace Z0.Asm
             using var reader = PeReader.create(src);
             var info = reader.ReadCoffInfo();
             var formatter = info.Formatter();
-            Row(formatter.Format(info, RecordFormatKind.KeyValuePairs));
+            Write(formatter.Format(info, RecordFormatKind.KeyValuePairs));
         }
     }
 }

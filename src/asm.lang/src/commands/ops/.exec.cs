@@ -31,7 +31,7 @@ namespace Z0.Asm
             var f = DynamicOperations.binop<ulong>(name, block);
             DynamicOperations.specify(a, b, ref f);
             DynamicOperations.run(ref f);
-            DynamicOperations.format(f, r => Row(r));
+            DynamicOperations.format(f, r => Write(r));
             return f.Result;
         }
     }

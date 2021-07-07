@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Threading.Tasks;
 
     using static Part;
     using static Regs;
@@ -38,7 +37,7 @@ namespace Z0.Asm
         public ulong Affinity;
     }
 
-    public class Engine : AppService<Engine>
+    public class Engine : AppCmdService<Engine>
     {
         const Byte CoreCount = Pow2.T06;
 
@@ -85,17 +84,43 @@ namespace Z0.Asm
         {
         }
 
+        [CmdOp(".test")]
+        Outcome Test(CmdArgs args)
+        {
+            ushort rows = 39;
+            ushort cols = 23;
+
+            var keys = LookupTables.keys(rows,cols);
+            for(var i=z16; i<rows; i++)
+            for(var j=z16; j<cols; j++)
+            {
+                ref readonly var key = ref keys[i,j];
+                Write(string.Format("({0},{1}) -> {2}", i, j, key));
+            }
+
+
+            return true;
+        }
+
         public void Configure(in EngineSettings src)
         {
             Settings = src;
             Allocate(src);
         }
 
-        protected override void OnInit()
+        protected override void Initialized()
         {
             var config = new EngineSettings();
             config.Affinity = BitMasks.lo<ulong>((byte)(Env.CpuCount - 1));
             Configure(config);
+        }
+
+        [CmdOp(".help")]
+        public Outcome Help(CmdArgs args)
+        {
+            Write("Not yet");
+
+            return true;
         }
 
         [MethodImpl(Inline), Op]
@@ -103,16 +128,6 @@ namespace Z0.Asm
         {
             var dst = math.mul(uint64(args.r0), uint64(args.r1));
             return dst;
-        }
-
-        public void Run(BinaryCode src)
-        {
-
-        }
-
-        public void Run(params AsmHexCode[] src)
-        {
-
         }
 
         [MethodImpl(Inline), Op]

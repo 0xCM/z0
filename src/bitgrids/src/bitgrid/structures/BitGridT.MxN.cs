@@ -81,14 +81,14 @@ namespace Z0
             get => (int)NatCalc.mul<M,N>();
         }
 
-        public bit this[int row, int col]
-        {
-            [MethodImpl(Inline)]
-            get => BitGrid.readbit(ColCount, in Head, row, col);
+        // public bit this[int row, int col]
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => BitGrid.readbit(ColCount, in Head, row, col);
 
-            [MethodImpl(Inline)]
-            set => BitGrid.setbit(ColCount, row, col, value, ref Head);
-        }
+        //     [MethodImpl(Inline)]
+        //     set => BitGrid.setbit(ColCount, row, col, value, ref Head);
+        // }
 
         /// <summary>
         /// Transfers 256-bit cpu vectors to/from blocked storage
@@ -103,7 +103,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void SetBit(int index, bit state)
+        public void SetBit(uint index, bit state)
             => BitGrid.setbit(index, state, ref Head);
 
         [MethodImpl(Inline)]

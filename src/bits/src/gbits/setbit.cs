@@ -47,5 +47,6 @@ namespace Z0
             var z = gmath.and(src, x);
             return gmath.and(z, y);
         }
+
     }
 }

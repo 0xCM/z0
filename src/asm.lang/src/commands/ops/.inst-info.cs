@@ -63,7 +63,7 @@ namespace Z0.Asm
 
                     if(valcount != 0)
                     {
-                        Row(values.Join(Rejoin));
+                        Write(values.Join(Rejoin));
                         rowcount++;
                     }
                     continue;
@@ -80,7 +80,7 @@ namespace Z0.Asm
                     {
                         cols = IntelSdm.columns(header);
                         var formatted = cols.Select(c => c.Format()).Join(Rejoin);
-                        Row(formatted);
+                        Write(formatted);
                         parsingrows = true;
                     }
                 }
@@ -88,14 +88,14 @@ namespace Z0.Asm
                 if(content.StartsWith(TitleMarker))
                 {
                     info = InstructionInfo.init(content.Remove(TitleMarker));
-                    Row(string.Format(InstTitleFormat, info.Mnemonic.Format(MnemonicCase.Uppercase)));
+                    Write(string.Format(InstTitleFormat, info.Mnemonic.Format(MnemonicCase.Uppercase)));
                 }
                 else if(content.StartsWith(TableMarker))
                 {
                     tablekind = TableKinds.from(content.Remove(TableMarker).Trim());
-                    Row(Chars.Space);
-                    Row(string.Format(TableTileFormat, tablekind));
-                    Row(RP.PageBreak120);
+                    Write(Chars.Space);
+                    Write(string.Format(TableTileFormat, tablekind));
+                    Write(RP.PageBreak120);
                     foundtable = true;
                 }
             }

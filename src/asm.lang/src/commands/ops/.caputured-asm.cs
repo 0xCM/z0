@@ -18,12 +18,12 @@ namespace Z0.Asm
             var packs = Wf.ApiPacks();
             var pack = packs.Last();
             var files = pack.CapturedAsm(id);
-            iter(files, file => Row(file.ToUri()));
+            iter(files, file => Write(file.ToUri()));
 
             var spath = pack.AsmStatementSummary();
             var stats = spath.FileStats();
             var formatter = stats.Formatter();
-            Row(formatter.FormatKvp(stats));
+            Write(formatter.FormatKvp(stats));
 
             return true;
         }

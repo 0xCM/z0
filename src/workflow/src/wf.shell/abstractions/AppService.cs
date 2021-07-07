@@ -132,17 +132,29 @@ namespace Z0
                 dst.Show(skip(symbols,i).Format());
         }
 
-        protected void ShowSpan<T>(ReadOnlySpan<T> src, FS.FileName file, Func<T,string> render, string title = EmptyString)
+        protected void Pipe<S,T>(ReadOnlySpan<S> src, Func<S,T> converter, string channel = null)
+            where T : ITextual
         {
             var count = src.Length;
-            if( count != 0)
+            if(count != 0)
             {
-                using var log = ShowLog(file);
-                if(text.nonempty(title))
-                    log.Show(title);
-
+                var dst = Db.AppLog(string.Format("{0}.{1}",Timestamp.now(), channel ?? typeof(T).Name));
+                using var writer = dst.AsciWriter();
                 for(var i=0; i<count; i++)
-                    log.Show(render(skip(src,i)));
+                    writer.WriteLine((converter(skip(src,i)).Format()));
+            }
+        }
+
+        protected void Pipe<T>(ReadOnlySpan<T> src, string channel = null)
+            where T : ITextual
+        {
+            var count = src.Length;
+            if(count != 0)
+            {
+                var dst = Db.AppLog(string.Format("{0}.{1}",Timestamp.now(), channel ?? typeof(T).Name));
+                using var writer = dst.AsciWriter();
+                for(var i=0; i<count; i++)
+                    writer.WriteLine(skip(src,i).Format());
             }
         }
 
@@ -167,14 +179,26 @@ namespace Z0
         protected void Warn(string pattern, params object[] args)
             => Wf.Warn(string.Format(pattern,args));
 
-        protected void Row<T>(T content)
+        protected void Write<T>(T content)
             => Wf.Row(content);
+
+        protected void Write(ReadOnlySpan<char> src)
+            => Wf.Row(new string(src));
+
+        protected void Write<T>(T src, StreamWriter dst)
+        {
+            dst.WriteLine(src.ToString());
+            Wf.Row(src);
+        }
+
+        protected void Write<T>(ReadOnlySpan<T> src)
+            where T : struct, IRecord<T>
+        {
+            Tables.emit(src, x => Wf.Row(x));
+        }
 
         protected void Error<T>(T content)
             => Wf.Error(content);
-
-        protected void Row(ReadOnlySpan<char> src)
-            => Wf.Row(new string(src));
 
         protected WfExecFlow<T> Running<T>(T msg, [Caller] string operation = null)
             where T : IMsgPattern
@@ -189,18 +213,6 @@ namespace Z0
         protected ExecToken Ran<T,D>(WfExecFlow<T> flow, D data, [Caller] string operation = null)
             where T : IMsgPattern
                 => Wf.Ran(flow.WithMsg(string.Format("{0} | {1}/{2}", data, HostName, operation)));
-
-        protected void Show<T>(T data, StreamWriter dst)
-        {
-            dst.WriteLine(string.Format("{0}",data));
-            Wf.Row(data);
-        }
-
-        protected void ShowTable<T>(ReadOnlySpan<T> src)
-            where T : struct, IRecord<T>
-        {
-            Tables.emit(src, x => Wf.Row(x));
-        }
 
         protected WfFileFlow EmittingFile(FS.FilePath dst)
             => Wf.EmittingFile(dst);

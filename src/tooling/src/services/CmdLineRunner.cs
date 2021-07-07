@@ -33,7 +33,7 @@ namespace Z0
                     {
                         var output = RunScript(path, log);
                         var processor = CmdResultProcessor.create(path, sys.empty<IToolResultHandler>());
-                        Row("Response");
+                        Write("Response");
                         iter(output, x => processor.Process(x));
                     }
                     else
@@ -95,6 +95,6 @@ namespace Z0
             => Error(src);
 
         void OnStatusEvent(in string src)
-            => Row(src);
+            => Write(src);
     }
 }

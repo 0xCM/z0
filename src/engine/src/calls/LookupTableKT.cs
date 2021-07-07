@@ -6,11 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
 
-    public readonly struct LookupTable<K,T>
+   public readonly struct LookupTable<K,T>
         where K : unmanaged
     {
         public MemoryAddress BaseAddress {get;}

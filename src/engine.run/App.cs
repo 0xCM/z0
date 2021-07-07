@@ -44,7 +44,7 @@ namespace Z0
         public void Run()
         {
             var engine = Engine.create(Wf);
-            engine.Run(AsmHexCode.Empty);
+            engine.Run();
         }
 
         void Configure()
@@ -112,7 +112,6 @@ namespace Z0
         {
             var checker = BitLogicChecker.create(Wf, Rng.@default());
             checker.Validate();
-
         }
 
         void BasicPageTest()
@@ -184,9 +183,6 @@ namespace Z0
                 Wf.Row(string.Format("{0:D6} {1}([{2}],[{3}]) = {4}", i, "f", a.V32u.FormatHex(), b.V32u.FormatHex(), result.V32u.FormatHex()));
             }
         }
-
-        public static void Main(string[] args)
-            => app(shell(args)).Run();
 
         static App app(IWfRuntime wf)
             => App.create(wf);

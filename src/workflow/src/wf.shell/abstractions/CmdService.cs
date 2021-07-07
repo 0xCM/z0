@@ -33,8 +33,8 @@ namespace Z0
 
                 input = Next();
             }
-
         }
+
         public Outcome Dispatch(string command, CmdArgs args)
         {
             var outcome = Dispatcher.Dispatch(command,args);

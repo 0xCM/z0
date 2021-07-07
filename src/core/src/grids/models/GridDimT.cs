@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    [StructLayout(LayoutKind.Sequential), DataType]
+    [StructLayout(LayoutKind.Sequential, Pack=1), DataType]
     public readonly struct GridDim<T> : IDataTypeEquatable<GridDim<T>>
         where T : unmanaged
     {
@@ -24,6 +24,12 @@ namespace Z0
         {
             RowCount = rows;
             ColCount = cols;
+        }
+
+        public ulong CellCount
+        {
+            [MethodImpl(Inline)]
+            get => u64(RowCount) * u64(ColCount);
         }
 
         /// <summary>
@@ -66,5 +72,4 @@ namespace Z0
         public static GridDim<T> Empty
             => default;
     }
-
 }

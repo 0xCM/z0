@@ -18,7 +18,7 @@ namespace Z0
                 var paths = EnvPaths.create();
                 var handlers = paths.ResultHandlers();
 
-                for(var i=1; i<count; i++)
+                for(var i=0; i<count; i++)
                 {
                     var name = FS.file(args[i]);
                     term.inform(name);

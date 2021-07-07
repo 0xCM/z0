@@ -16,7 +16,7 @@ namespace Z0.Asm
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var t = ref skip(src,i);
-                Row(t.Name);
+                Write(t.Name);
             }
 
             return result;
