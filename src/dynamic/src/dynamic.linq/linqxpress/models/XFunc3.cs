@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq.Expressions;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Wraps a delegate that implicitly converts into a LINQ expression

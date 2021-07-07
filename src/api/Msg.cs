@@ -9,10 +9,6 @@ namespace Z0
     {
         public static MsgPattern<Count,Count,string> FieldCountMismatch => "{0} fields were found while {1} were expected: {2}";
 
-        public static MsgPattern<Count> ProcessingApiHexFiles => "Processing {0} api hex files";
-
-        public static MsgPattern<Count> AccumulatedDescriptors => "Accumulated {0} descriptors";
-
         public static MsgPattern<ApiHostUri,uint,uint> IndexedHost => "{0,-30} | {1}/{2}";
 
         public static MsgPattern<uint> IndexingHosts => "Indexing {0} hosts";

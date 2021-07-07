@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static memory;
+    using static core;
 
     using System.IO;
 
@@ -14,15 +14,15 @@ namespace Z0
         public static Index<TextLine> lines(FilePath src)
         {
             if(!src.Exists)
-                return sys.empty<TextLine>();
+                return array<TextLine>();
 
             var data = @readonly(File.ReadAllLines(src.Name));
 
             var count = data.Length;
             if(count == 0)
-                return sys.empty<TextLine>();
+                return array<TextLine>();
 
-            var buffer = sys.alloc<TextLine>(count);
+            var buffer = alloc<TextLine>(count);
             ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
                 seek(dst,i) = text.line(i, skip(data,i));

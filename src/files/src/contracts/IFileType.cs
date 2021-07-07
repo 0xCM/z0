@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-    using api = FileTypes;
 
     [Free]
     public interface IFileType
@@ -17,9 +16,6 @@ namespace Z0
         FileKind FileKind {get;}
 
         FS.FileExt FileExt {get;}
-
-        FileType Untyped
-            => api.type(Rep, FileKind, FileExt);
     }
 
     [Free]

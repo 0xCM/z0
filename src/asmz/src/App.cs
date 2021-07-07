@@ -179,12 +179,6 @@ namespace Z0.Asm
             Wf.CliEmitter().EmitMetaBlocks();
         }
 
-        void ListFiles()
-        {
-            var catalog = Db.AsmCaptureRoot().Catalog();
-            catalog.Enumerate(path => Wf.Row(path.ToUri()));
-        }
-
         void CheckHeap()
         {
             const string Seg0 = "This";
@@ -432,33 +426,6 @@ namespace Z0.Asm
             var count = Hex.parse("80C116",buffer);
             var data = slice(buffer,0,count);
             Wf.Row(data.FormatHex());
-        }
-
-        void ProcessStatementIndex()
-        {
-            var counter = 0u;
-            var dst = Db.AppLog("statements.rex", FS.Csv);
-            var packs = Wf.ApiPacks();
-            var archive = packs.Archive();
-            var pipe = Wf.AsmIndexPipe();
-            var path = archive.StatementIndexPath();
-            var flow = Wf.Running(string.Format("Loading statement index from {0}", path.ToUri()));
-            var index = pipe.LoadIndex(path);
-            var count = index.Length;
-            Wf.Ran(flow, string.Format("Loded {0} statement records", index.Length));
-
-            var collection = list<AsmIndex>();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var s = ref skip(index,i);
-                if(AsmQuery.HasRexPrefix(s.OpCode))
-                {
-                    collection.Add(s);
-                }
-            }
-
-            var sorted = @readonly(collection.ToArray().OrderBy(x => x.Encoded));
-            Emit(sorted, AsmIndex.RenderWidths, dst);
         }
 
         public void ShowVendorManuals(string vendor, FS.FileExt ext)

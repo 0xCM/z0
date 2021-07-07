@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Root;
-    using static core;
-
     partial class AsmCmdService
     {
         [CmdOp(".load-obj")]

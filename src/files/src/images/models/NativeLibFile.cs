@@ -33,7 +33,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ImagePath(NativeLibFile src)
             => src.Path;
-
-
     }
 }

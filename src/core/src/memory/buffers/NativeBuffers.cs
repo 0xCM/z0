@@ -24,15 +24,6 @@ namespace Z0
 
         readonly uint TotalSize;
 
-        internal NativeBuffers(ByteSize segsize, byte segcount)
-        {
-            SegCount = segcount;
-            SegSize = segsize;
-            TotalSize = SegCount*SegSize;
-            Allocation = Buffers.native(TotalSize);
-            Tokens = Buffers.tokenize(Allocation.Handle, SegSize, SegCount);
-        }
-
         internal NativeBuffers(ByteSize segsize, byte segcount, NativeBuffer allocation, Index<BufferToken> tokens)
         {
             SegCount = segcount;

@@ -28,7 +28,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator FS.FilePath(ImagePath src)
             => src.Path;
-
     }
-
 }

@@ -34,7 +34,7 @@ namespace Z0
         uint LoadBuffer(uint offset, ReadOnlySpan<byte> src)
         {
             var i0 = offset;
-            var dst = CodeBuffer.Allocated;
+            var dst = CodeBuffer.Edit;
             var j=offset;
             for(var i=0; i<src.Length; i++)
                 seek(dst, offset++) = skip(src,i);

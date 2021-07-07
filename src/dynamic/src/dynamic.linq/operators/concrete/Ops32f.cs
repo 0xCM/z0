@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq.Expressions;
 
-    using static Part;
     using static LinqXFunc;
 
     partial struct ModelsDynamic

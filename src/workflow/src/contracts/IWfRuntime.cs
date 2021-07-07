@@ -61,10 +61,6 @@ namespace Z0
         IAppService AppService(Type host)
             => WfRuntime.service(host, this);
 
-        H AppService<H>()
-            where H : AppService<H>, new()
-                => WfRuntime.service<H>(this);
-
         IRuntimeArchive RuntimeArchive()
             => Z0.RuntimeArchive.create(Controller.ImageDir);
 
@@ -89,9 +85,6 @@ namespace Z0
 
         CmdResult Execute(ICmd cmd)
             => Router.Dispatch(cmd);
-
-        IWfRuntime WithHost(WfHost host)
-            => this;
 
         /// <summary>
         /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location

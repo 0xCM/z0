@@ -33,6 +33,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ImagePath(NativeExeFile src)
             => src.Path;
-
     }
 }

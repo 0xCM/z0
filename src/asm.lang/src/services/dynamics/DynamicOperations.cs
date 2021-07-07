@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static Typed;
 
     public struct BinaryOperator<T>
     {
@@ -33,7 +32,7 @@ namespace Z0.Asm
         public static SegRef load(ReadOnlySpan<byte> src, uint offset, in NativeBuffer dst)
         {
             var i0 = offset;
-            ref var target = ref seek(dst.Allocated, offset);
+            ref var target = ref seek(dst.Edit, offset);
             var location = address(target);
             for(var i=0; i<src.Length; i++)
                 seek(target, offset++) = skip(src,i);

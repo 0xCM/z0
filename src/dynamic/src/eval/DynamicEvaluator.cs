@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
 
     using static BufferSeqId;
-    using static memory;
+    using static core;
 
     public class DynamicEvaluator : IDisposable
     {

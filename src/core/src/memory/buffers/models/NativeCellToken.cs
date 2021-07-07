@@ -10,10 +10,10 @@ namespace Z0
     using static Root;
 
     /// <summary>
-    /// Describes a fixed-width allocated buffer
+    /// Describes a native allocation
     /// </summary>
     public readonly struct NativeCellToken<F> : IBufferToken<F>
-        where F : unmanaged, IDataCell
+        where F : unmanaged
     {
         public MemoryAddress Address {get;}
 

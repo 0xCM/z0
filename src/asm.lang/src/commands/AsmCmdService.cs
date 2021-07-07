@@ -59,7 +59,7 @@ namespace Z0.Asm
         {
             if(clear)
                 _NativeBuffer.Clear();
-            return _NativeBuffer.Allocated;
+            return _NativeBuffer.Edit;
         }
 
         static Outcome argerror(string value)

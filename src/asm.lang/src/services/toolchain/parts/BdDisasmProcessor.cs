@@ -11,7 +11,6 @@ namespace Z0.Asm
     using static Typed;
 
     using SQ = SymbolicQuery;
-    using SR = SymbolicRender;
 
     [ApiHost]
     public class BdDisasmProcessor : AppService<BdDisasmProcessor>
@@ -27,7 +26,7 @@ namespace Z0.Asm
             c = slice(content,49);
         }
 
-        Outcome ProcessLine2(ref AsciLine src, out AsmDisassembly dst)
+        Outcome ProcessLine(ref AsciLine src, out AsmDisassembly dst)
         {
             var outcome = Outcome.Success;
             dst = default;
@@ -63,62 +62,6 @@ namespace Z0.Asm
             return outcome;
         }
 
-        // Outcome ProcessLine(ref AsciLine src, out AsmDisassembly dst)
-        // {
-        //     var outcome = Outcome.Success;
-        //     dst = default;
-        //     if(src.Length < 2)
-        //         return outcome;
-
-        //     Row(src.Format());
-
-        //     var wscount = SQ.TrailingWhitespaceCount(src.Content);
-        //     var content = slice(src.Content, 0, src.Length - wscount);
-        //     if(Verbose)
-        //         term.babble(SR.format(content));
-
-        //     outcome = Hex.parse(slice(content, 0, 17), out ulong offset);
-        //     if(outcome.Fail)
-        //         return (false, "Unable to parse offset");
-
-        //     var remainder = slice(content, 18);
-        //     var i = SQ.index(remainder, AsciCode.Space);
-        //     if(i == NotFound)
-        //         return (false,"Hexcode not found");
-
-        //     var hexchars = slice(remainder,0,i);
-        //     remainder = slice(remainder, i);
-
-        //     var buffer = Cells.alloc(n128).Bytes;
-        //     var j=(uint)i;
-        //     var result = Hex.parse(hexchars, ref j, buffer);
-        //     if(result.Fail)
-        //         return (false,result.Message);
-
-        //     var size = result.Data;
-        //     if(size == 0)
-        //         return (false, "Hexcode was empty");
-
-        //     if(size > 15)
-        //         return (false, "Hexcode too big");
-
-        //     var hexcode = AsmHexCode.load(slice(buffer,0,size));
-        //     if(Verbose)
-        //         term.babble(string.Format("AsmHex:{0}", hexcode.Format()));
-
-        //     var _expr = slice(content,49);
-        //     if(Verbose)
-        //         term.babble(string.Format("Expr:{0}", SR.format(_expr)));
-
-
-        //     outcome = AsmParser.parse(_expr, out AsmExpr expr);
-        //     if(outcome.Fail)
-        //         return outcome;
-
-        //     dst = asm.disassembly(offset, expr, hexcode);
-        //     return true;
-        // }
-
         public ReadOnlySpan<AsmDisassembly> ParseDisassembly(FS.FilePath src, FS.FolderPath dir)
         {
             var flow = Running(string.Format("Parsing {0}", src.ToUri()));
@@ -148,7 +91,7 @@ namespace Z0.Asm
                     var line = Lines.asci(data, number++, linepos, length + 1);
                     if(line.Content.Length > 2)
                     {
-                        var outcome = ProcessLine2(ref line, out var row);
+                        var outcome = ProcessLine(ref line, out var row);
                         if(outcome.Fail)
                         {
                             Wf.Error(outcome.Message);

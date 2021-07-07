@@ -16,7 +16,7 @@ namespace Z0.Asm
     {
         void OnJobComplete()
         {
-            ref readonly var context = ref first(recover<Amd64Context>(_NativeBuffer.Allocated));
+            ref readonly var context = ref first(recover<Amd64Context>(_NativeBuffer.Edit));
             Wf.Row(EmptyString);
             Wf.Row(string.Format("RIP:{0:x}", context.Rip));
             Wf.Row(string.Format("LastBranchFromRip:{0:x}", context.LastBranchFromRip));

@@ -14,5 +14,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmComment comment(string src)
             => new AsmComment(src);
+
+        [MethodImpl(Inline), Op]
+        public static AsmBlockComment comment(ReadOnlySpan<TextLine> src)
+            => new AsmBlockComment(src);
     }
 }

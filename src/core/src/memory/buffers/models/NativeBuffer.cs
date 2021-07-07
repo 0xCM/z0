@@ -42,15 +42,21 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Clear()
-            => Allocated.Clear();
+            => Edit.Clear();
 
         /// <summary>
         /// Presents the allocation via a span
         /// </summary>
-        public unsafe Span<byte> Allocated
+        public unsafe Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => api.allocated(this);
+            get => api.edit(this);
+        }
+
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => Size;
         }
 
         [MethodImpl(Inline)]
@@ -63,7 +69,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Span<byte>(NativeBuffer src)
-            => src.Allocated;
+            => src.Edit;
 
         [MethodImpl(Inline)]
         public static implicit operator IntPtr(NativeBuffer src)

@@ -54,7 +54,7 @@ namespace Z0
         {
             var flow = wf.Creating(typeof(H).Name);
             Host = new WfSelfHost(typeof(H));
-            Wf = wf.WithHost(Host);
+            Wf = wf;
             Db = new WfDb(wf, wf.Env.Db);
             OnInit();
             Initialized();

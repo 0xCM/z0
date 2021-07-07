@@ -16,7 +16,6 @@ namespace Z0
 
         ApiJit ApiJit;
 
-
         protected override void OnInit()
         {
             ApiJit = Wf.ApiJit();

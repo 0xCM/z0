@@ -7,12 +7,9 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static core;
     using static SpanBlocks;
 
     public static class DynamicImmediate

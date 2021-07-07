@@ -21,7 +21,4 @@ namespace Z0.DynamicModels
         /// </summary>
         IReadOnlyList<object> Operands { get; }
     }
-
-
-
 }

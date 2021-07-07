@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Root;
 
     /// <summary>
@@ -16,6 +13,5 @@ namespace Z0
     public readonly partial struct Digital
     {
         const NumericKind Closure = UnsignedInts;
-
     }
 }

@@ -14,10 +14,6 @@ namespace Z0
             => Svc.ApiComments.create(wf);
 
         [Op]
-        public static ApiHexArchive ApiHexArchive(this IWfRuntime wf)
-            => Svc.ApiHexArchive.create(wf);
-
-        [Op]
         public static ApiRuntime ApiRuntime(this IWfRuntime wf)
             => Svc.ApiRuntime.create(wf);
 
@@ -50,10 +46,6 @@ namespace Z0
             => Svc.ApiQuery.create(wf);
 
         [Op]
-        public static ApiHexPacks ApiHexPacks(this IWfRuntime wf)
-            => Svc.ApiHexPacks.create(wf);
-
-        [Op]
         public static SymServices SymServices(this IWfRuntime wf)
             => Svc.SymServices.create(wf);
 
@@ -66,11 +58,11 @@ namespace Z0
             => Svc.ApiResolver.create(wf);
 
         [Op]
-        public static ApiPacks ApiPacks(this IWfRuntime wf)
-            => Svc.ApiPacks.create(wf);
-
-        [Op]
         public static ApiTypeCatalog ApiTypes(this IWfRuntime wf)
             => Svc.ApiTypeCatalog.create(wf);
+
+        [Op]
+        public static ApiPacks ApiPacks(this IWfRuntime wf)
+            => Svc.ApiPacks.create(wf);
     }
 }

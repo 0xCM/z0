@@ -15,11 +15,6 @@ namespace Z0
         public static FileType type(Type rep, FileKind kind, FS.FileExt ext)
             => new FileType(rep, kind, ext);
 
-        [MethodImpl(Inline), Op]
-        public static T type<T>()
-            where T : struct, IFileType<T>
-                => default(T);
-
         public static TypedFile untyped<T>(TypedFile<T> src)
             where T : struct, IFileType<T>
                 => new TypedFile(new FileType(src.Type.Rep, src.Type.FileKind, src.Type.FileExt), src.Location);

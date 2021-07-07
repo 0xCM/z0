@@ -28,7 +28,7 @@ namespace Z0
                 }
                 else
                 {
-
+                    Error(outcome.Message);
                 }
             }
             return buffer;

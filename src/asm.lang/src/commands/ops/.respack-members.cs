@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using Windows;
-
-    using static Root;
     using static core;
 
     partial class AsmCmdService

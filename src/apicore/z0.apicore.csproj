@@ -17,6 +17,7 @@
     <ProjectReference Include="$(Clr)" />
     <ProjectReference Include="$(SymCore)" />
     <ProjectReference Include="$(Text)" />
+    <ProjectReference Include="$(Hash)" />
   </ItemGroup>
 
 </Project>

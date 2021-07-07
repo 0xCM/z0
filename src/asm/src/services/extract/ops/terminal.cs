@@ -13,20 +13,6 @@ namespace Z0
 
     partial class ApiExtractor
     {
-        // public static ApiMemberExtract trim(ApiMemberExtract src)
-        // {
-        //     var block = src.Block;
-        //     var term = terminal(block.View);
-        //     if(term.TerminalFound)
-        //     {
-        //         var length = term.Offset + term.Modifier;
-        //         var data = slice(block.View, 0, length).ToArray();
-        //         return src.WithBlock(new ApiExtractBlock(src.BaseAddress, src.OpUri.Format(), data));
-        //     }
-        //     else
-        //         return src;
-        // }
-
         [Op]
         public static ExtractTermInfo terminal(ReadOnlySpan<byte> src)
         {

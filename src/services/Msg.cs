@@ -14,5 +14,8 @@ namespace Z0
 
         public static MsgPattern<Count> LoadedHexBlocks => "Loaded {0} hex blocks";
 
+        public static MsgPattern<Count> ProcessingApiHexFiles => "Processing {0} api hex files";
+
+        public static MsgPattern<Count> AccumulatedDescriptors => "Accumulated {0} descriptors";
     }
 }

@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
 
     using static Root;
     using static core;
@@ -282,6 +283,70 @@ namespace Z0.Asm
                 Wf.Error(outcome.Message);
                 return AsmInstructionBlock.Empty;
             }
+        }
+
+        public SortedReadOnlySpan<AsmIndex> BuildIndex(SortedSpan<ApiCodeBlock> src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return default;
+
+            var dst = list<AsmIndex>();
+            var counter = 0u;
+            var @base = src[0].BaseAddress;
+
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var code = ref src[i];
+                var decoded = Decode(code);
+                var instructions = decoded.Instructions;
+                var icount = instructions.Length;
+                if(icount == 0)
+                    continue;
+
+                var bytes = code.View;
+                var i0 = first(instructions);
+                var blockBase = (MemoryAddress)i0.IP;
+                var blockOffset = z16;
+                for(var j=0; j<icount; j++)
+                {
+                    var instruction = skip(instructions,j);
+                    var opcode = asm.opcode(instruction.OpCode.ToString());
+                    if(!opcode.IsValid)
+                        break;
+
+                    var statement = new AsmIndex();
+                    var size = (ushort)instruction.ByteLength;
+                    var specifier = instruction.Specifier;
+                    var ip = (MemoryAddress)instruction.IP;
+                    statement.Sequence = counter++;
+                    statement.GlobalOffset = (Address32)(ip - @base);
+                    statement.BlockAddress = blockBase;
+                    statement.BlockOffset = blockOffset;
+                    statement.IP = ip;
+                    statement.OpUri = code.OpUri;
+                    statement.Statement = instruction.FormattedInstruction;
+                    AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
+                    statement.Encoded = AsmHexCode.load(slice(bytes, blockOffset, size));
+                    statement.OpCode = opcode;
+                    statement.Bitstring = statement.Encoded;
+                    dst.Add(statement);
+
+                    blockOffset += size;
+                }
+            }
+
+            return Spans.sorted(dst.ViewDeposited());
+        }
+
+        public uint EmitIndex(SortedReadOnlySpan<AsmIndex> src, FS.FilePath dst)
+            => Emit(src.View, AsmIndex.RenderWidths, AsmIndex.RowPad, Encoding.ASCII, dst);
+
+        public ReadOnlySpan<AsmIndex> EmitIndex(SortedSpan<ApiCodeBlock> src, FS.FilePath dst)
+        {
+            var rows = BuildIndex(src);
+            EmitIndex(rows, dst);
+            return rows;
         }
 
         public ReadOnlySpan<AsmApiStatement> ParseStatementData(FS.FolderPath dir)

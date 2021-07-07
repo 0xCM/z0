@@ -10,7 +10,7 @@ namespace Z0.DynamicModels
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct Selector<T,Y>
     {

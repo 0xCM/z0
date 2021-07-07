@@ -8,11 +8,6 @@ namespace Z0
     public static class XSvc
     {
         [Op]
-        public static FileCatalog Catalog(this FS.FolderPath root)
-            => new FileCatalog(root);
-
-
-        [Op]
         public static ApiPackages ApiPackages(this IEnvPaths src)
             => src.PackageRoot();
     }

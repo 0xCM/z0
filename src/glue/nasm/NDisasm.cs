@@ -7,10 +7,7 @@ namespace Z0.Tools
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static core;
-
-    using Z0.Asm;
 
     [ApiHost]
     public sealed class NDisasm : ToolService<NDisasm>

@@ -28,5 +28,13 @@ namespace Z0
         [Op]
         public static ApiHex ApiHex(this IWfRuntime wf)
             => Svc.ApiHex.create(wf);
+
+        [Op]
+        public static ApiHexPacks ApiHexPacks(this IWfRuntime wf)
+            => Svc.ApiHexPacks.create(wf);
+
+        [Op]
+        public static ApiHexArchive ApiHexArchive(this IWfRuntime wf)
+            => Svc.ApiHexArchive.create(wf);
     }
 }

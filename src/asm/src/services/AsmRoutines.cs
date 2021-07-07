@@ -79,6 +79,5 @@ namespace Z0.Asm
             }
             return slice(dst,0,counter);
         }
-
     }
 }

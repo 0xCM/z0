@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Root;
-    using static core;
-
     using Asm;
 
     public sealed class AsmAnalyzer : AppService<AsmAnalyzer>
@@ -42,7 +39,7 @@ namespace Z0
         public void Analyze(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
         {
             var blocks = CollectBlocks(src);
-
+            var statements = Wf.AsmStatementPipe();
             if(Settings.EmitCalls)
                 EmitCalls(src, dst);
 
@@ -50,10 +47,10 @@ namespace Z0
                 EmitJumps(src, dst);
 
             if(Settings.EmitHostStatements)
-                Wf.AsmStatementPipe().EmitHostStatements(src, dst);
+                statements.EmitHostStatements(src, dst);
 
             if(Settings.EmitStatementIndex)
-                EmitStatementIndex(blocks, dst);
+                statements.EmitIndex(blocks, dst.StatementIndexPath());
 
             if(Settings.EmitAsmDetails)
                 EmitDetails(blocks, dst);
@@ -73,13 +70,17 @@ namespace Z0
             var rows = AsmRows.Emit(src, target);
         }
 
-        ReadOnlySpan<AsmIndex> EmitStatementIndex(SortedSpan<ApiCodeBlock> src, ApiPackArchive dst)
+        public SortedSpan<ApiCodeBlock> CollectBlocks(ReadOnlySpan<AsmRoutine> src)
         {
-            var pipe = Wf.AsmIndexPipe();
-            var rows = pipe.BuildIndex(src);
-            pipe.EmitIndex(rows, dst.StatementIndexPath());
-            return rows;
+            var count = src.Length;
+            var flow = Wf.Running(Msg.CollectingBlocks.Format(count));
+            var blocks = AsmRoutines.blocks(src);
+            Wf.Ran(flow, Msg.CollectedBlocks.Format(count));
+            return blocks;
         }
+
+        public SortedSpan<ApiCodeBlock> CollectBlocks(FS.FolderPath root)
+            => ApiHex.ReadBlocks(root).Storage.ToSortedSpan();
 
         SortedSpan<AsmEncodingInfo> CollectDistinctEncodings(ReadOnlySpan<AsmIndex> src)
         {
@@ -101,18 +102,6 @@ namespace Z0
 
         void EmitJumps(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
             => Jumps.EmitRows(src, dst.JmpTarget());
-
-        SortedSpan<ApiCodeBlock> CollectBlocks(ReadOnlySpan<AsmRoutine> src)
-        {
-            var count = src.Length;
-            var flow = Wf.Running(Msg.CollectingBlocks.Format(count));
-            var blocks = AsmRoutines.blocks(src);
-            Wf.Ran(flow, Msg.CollectedBlocks.Format(count));
-            return blocks;
-        }
-
-        SortedSpan<ApiCodeBlock> CollectBlocks(FS.FolderPath root)
-            => ApiHex.ReadBlocks(root).Storage.ToSortedSpan();
 
         FS.FilePath ThumbprintPath(FS.FolderPath dst)
             => dst + FS.file("asm.thumbprints", FS.Asm);

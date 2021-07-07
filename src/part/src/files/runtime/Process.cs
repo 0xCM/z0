@@ -10,7 +10,7 @@ namespace Z0
     using System.ComponentModel;
     using System.IO;
 
-    using static Part;
+    using static Root;
 
     using S = System.Diagnostics.Process;
     using D = System.Diagnostics;

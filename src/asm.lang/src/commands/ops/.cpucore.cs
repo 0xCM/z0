@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using Windows;
 
-    using static core;
-
     partial class AsmCmdService
     {
         [CmdOp(".cpucore")]

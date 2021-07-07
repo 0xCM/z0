@@ -169,31 +169,6 @@ namespace Z0
             }
         }
 
-        public void Check(W4 w)
-        {
-
-        }
-
-        public void Check(W5 w)
-        {
-
-        }
-
-        public void Check(W6 w)
-        {
-
-        }
-
-        public void Check(W7 w)
-        {
-
-        }
-
-        public void Check(W8 w)
-        {
-
-        }
-
         [MethodImpl(Inline)]
         public static FormatCheck<W,T> result<W,T>(W w, uint seq,  byte input, T number, string formatted)
             where T : unmanaged, IBitNumber

@@ -7,11 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static core;
-    using static Rules;
     using static XedMarkers;
-    using static XedEnclosures;
 
     readonly struct XedEnclosures
     {
@@ -20,7 +17,6 @@ namespace Z0.Asm
 
         public static string comment(string content)
             => string.Format("comment<{0}>", content);
-
     }
 
     partial class AsmCmdService

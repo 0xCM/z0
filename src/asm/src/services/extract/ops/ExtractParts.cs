@@ -28,7 +28,7 @@ namespace Z0
             {
                 var tasks = src.Select(BeginExtractPart);
                 Task.WaitAll(tasks);
-                root.iter(tasks, t => counter += t.Result);
+                iter(tasks, t => counter += t.Result);
             }
             else
             {

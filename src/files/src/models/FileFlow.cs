@@ -16,7 +16,7 @@ namespace Z0
         public TypedFile Target {get;}
 
         [MethodImpl(Inline)]
-        public FileFlow(FileType srcType, FS.FilePath src,  FileType dstType, FS.FilePath dst)
+        public FileFlow(FileType srcType, FS.FilePath src, FileType dstType, FS.FilePath dst)
         {
             Source = (srcType,src);
             Target = (dstType,dst);

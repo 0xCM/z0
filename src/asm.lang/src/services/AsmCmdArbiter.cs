@@ -174,7 +174,7 @@ namespace Z0.Asm
                 term.babble(string.Format("[{0}]:Capuring suspended thread context", executing, WorkerThreadId));
 
             ContextBuffer.Clear();
-            ref var context = ref @as<byte,Amd64Context>(first(ContextBuffer.Allocated));
+            ref var context = ref @as<byte,Amd64Context>(first(ContextBuffer.Edit));
             context.ContextFlags = ContextFlags.CONTEXT_ALL;
             outcome = Kernel32.GetThreadContext(WorkerHandle, gptr(context));
             if(outcome.Fail)

@@ -61,56 +61,15 @@ namespace Z0
             DatasetReceiver = new();
         }
 
-        void EmitProcessContext(IApiPack pack)
-        {
-            var flow = Wf.Running("Emitting process context");
-            var ts = pack.Timestamp;
-            if(!ts.IsNonZero)
-                ts = now();
-
-            var dir = pack.ContextRoot();
-            var process = Process.GetCurrentProcess();
-            var pipe = Wf.ProcessContextPipe();
-            var procparts = pipe.EmitPartitions(process, ts, dir);
-            var regions = pipe.EmitRegions(process, ts, dir);
-            pipe.EmitDump(process, pack.DumpPath(process, ts));
-            var dst = Paths.ApiCatalogPath(ts);
-            var members = ApiMembers.create(CollectedDatasets.SelectMany(x => x.Members));
-            var entries = Wf.ApiCatalogs().EmitApiCatalog(members,dst);
-            Wf.Ran(flow);
-        }
-
         void ClearTargets()
         {
             Paths.ExtractRoot().Clear();
             Paths.AsmSourceRoot().Clear(true);
         }
 
-        public void ResolveParts()
-        {
-            var parts = Wf.ApiCatalog.Parts.ToReadOnlySpan();
-            var count = parts.Length;
-            ResolvedParts = alloc<ResolvedPart>(count);
-            ref var dst = ref ResolvedParts.First;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var part = ref skip(parts,i);
-                var resolution = Resolver.ResolvePart(part);
-                seek(dst,i) = resolution;
-                Receivers.Raise(new PartResolvedEvent(resolution));
-            }
-        }
-
         public void ExtractParts()
         {
             ExtractParts(ResolvedParts, false);
-        }
-
-        void CollectRoutines()
-        {
-            CollectedDatasets = DatasetReceiver.Array();
-            Routines = CollectedDatasets.SelectMany(x => x.Routines.Where(r => r != null && r.IsNonEmpty));
-            Routines.Sort();
         }
 
         void EmitContext(IApiPack pack)

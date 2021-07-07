@@ -33,7 +33,7 @@ namespace Z0
         {
             try
             {
-                Execute(wf.WithHost(this));
+                Execute(wf);
             }
             catch(Exception e)
             {

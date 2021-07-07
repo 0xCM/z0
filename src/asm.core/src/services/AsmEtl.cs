@@ -13,6 +13,43 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmEtl
     {
+        public static ReadOnlySpan<AsmIndex> LoadStatementIndex(FS.FilePath src)
+        {
+            var dst = list<AsmIndex>();
+            var counter = 1u;
+
+            using var reader = src.Reader();
+            var header = reader.ReadLine();
+            var line = reader.ReadLine();
+            var result = Outcome.Success;
+            while(line != null && result.Ok)
+            {
+                result = AsmParser.parse(counter++, line, out var row);
+                if(result.Ok)
+                    dst.Add(row);
+
+                line = reader.ReadLine();
+            }
+
+            return dst.ViewDeposited();
+        }
+
+        public static void traverse(FS.FilePath src, Receiver<AsmIndex> dst)
+        {
+            var counter = 1u;
+            using var reader = src.Reader();
+            var header = reader.ReadLine();
+            var line = reader.ReadLine();
+            var result = Outcome.Success;
+            while(line != null && result.Ok)
+            {
+                result = AsmParser.parse(counter++, line, out var row);
+                if(result.Ok)
+                    dst(row);
+                line = reader.ReadLine();
+            }
+        }
+
         [MethodImpl(Inline), Op]
         public static void resequence(Span<AsmDetailRow> src)
         {

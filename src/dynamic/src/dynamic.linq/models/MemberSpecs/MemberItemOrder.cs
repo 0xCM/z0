@@ -9,7 +9,6 @@ namespace Z0.DynamicModels
 
     public class MemberItemOrder
     {
-
         public MemberItemOrder(MemberInfo Member, SortDirection Direction, int? Precedence = null)
         {
             this.Member = Member;
@@ -17,9 +16,9 @@ namespace Z0.DynamicModels
             this.Direction = Direction;
         }
 
-        public MemberInfo Member { get; }
+        public MemberInfo Member {get;}
 
-        public int? Precedence { get; }
+        public int? Precedence {get;}
 
         public SortDirection Direction { get; }
 

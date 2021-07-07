@@ -19,15 +19,4 @@ namespace Z0.Asm
             Kind = kind;
         }
     }
-
-    public enum AsmOperatorKind : byte
-    {
-        None  = 0,
-
-        [Symbol("+")]
-        Add,
-
-        [Symbol("-")]
-        Sub
-    }
 }

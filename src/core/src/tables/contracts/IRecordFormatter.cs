@@ -28,6 +28,9 @@ namespace Z0
 
         string Format(in T src, RecordFormatKind kind);
 
+        string FormatKvp(in T src)
+            => Format(src, RecordFormatKind.KeyValuePairs);
+
         TableId IRecordFormatter.TableId
             => default(T).TableId;
 

@@ -30,6 +30,6 @@ namespace Z0
         }
 
         public Task<uint> BeginExtractPart(ResolvedPart src)
-            => root.run(() => ExtractPart(src));
+            => run(() => ExtractPart(src));
     }
 }
