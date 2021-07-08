@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static core;
 
     partial struct CellDelegates
     {

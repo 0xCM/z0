@@ -159,6 +159,9 @@ public enum PartId : ulong
     [Symbol("calc.shell")]
     CalcShell = 56,
 
+    [Symbol("math.test")]
+    MathTest = 57,
+
     [Symbol("clr")]
     Clr = 60,
 
@@ -303,6 +306,16 @@ public enum PartId : ulong
     [Symbol("cpu.dsl")]
     CpuDsl = 161,
 
+    [Symbol("bits.test")]
+    BitsTest = 163,
+
+    [Symbol("logix.test")]
+    LogixTest = 164,
+
+    [Symbol("cpu.test")]
+    CpuTest = 165,
+
+
     [Symbol("services")]
     Services = 199,
 
@@ -333,14 +346,9 @@ public enum PartId : ulong
     [Symbol("part.test")]
     PartTest = Part | Test,
 
-    [Symbol("math.test")]
-    MathTest = Math | Test,
-
     [Symbol("asm.test")]
     AsmTest = Asm | Test,
 
-    [Symbol("bits.test")]
-    BitsTest = Bits | Test,
 
     [Symbol("polyrand.test")]
     PolyrandTest = Polyrand | Test,
@@ -351,17 +359,11 @@ public enum PartId : ulong
     [Symbol("libm.test")]
     LibMTest = LibM | Test,
 
-    [Symbol("logix.test")]
-    LogixTest = Logix | Test,
-
     [Symbol("machines.test")]
     MachinesTest = Machines | Test,
 
     [Symbol("mkl.test")]
     MklApiTest = Mkl | Test,
-
-    [Symbol("gvec.test")]
-    GVecTest = Cpu | Test,
 
     // ~ Classifiers
     // ~ -------------------------------------------------------------------------------

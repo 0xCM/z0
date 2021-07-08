@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
 
     using static Root;
 
@@ -32,7 +31,7 @@ namespace Z0
         /// <param name="value"></param>
         [MethodImpl(Inline), Op]
         public static ushort replace(ushort src, byte k0, byte k1, ushort value)
-            => math.or(math.sll(value, (byte)(k1 - k0)), disable(src,k0,k1));
+            => math.or(math.sll(value, (byte)(k1 - k0)), disable(src, k0,k1));
 
         /// <summary>
         /// Replaces an index-delimited source segment with a specified value

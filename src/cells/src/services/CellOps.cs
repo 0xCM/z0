@@ -12,13 +12,10 @@ namespace Z0
     using static Root;
     using static core;
 
-    using D = CellDelegates;
     using static CellDelegates;
 
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
     [ApiHost]
-    public readonly partial struct CellOps
+    public readonly struct CellOps
     {
         const NumericKind Closure = Integers;
 

@@ -38,7 +38,19 @@ namespace Z0
         /// <summary>
         /// Queries/manipulates bit at specified index
         /// </summary>
-        public bit this[int index]
+        public bit this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => Data[index] == 1;
+
+            [MethodImpl(Inline)]
+            set => Data[index] = (byte)value;
+        }
+
+        /// <summary>
+        /// Queries/manipulates bit at specified index
+        /// </summary>
+        public bit this[ulong index]
         {
             [MethodImpl(Inline)]
             get => Data[index] == 1;

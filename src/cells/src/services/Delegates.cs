@@ -102,7 +102,6 @@ namespace Z0
         public delegate bit UnaryPredicate<W,T>(T a)
             where W : unmanaged, ITypeWidth;
 
-
         [Free]
         public delegate T Projector<T>(in T src);
 

@@ -38,7 +38,27 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Interval<T> closed<T>(T min, T max)
             where T : unmanaged
-                => new Interval<T>(min,max, Closed);
+                => new Interval<T>(min, max, Closed);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Interval<T> lopen<T>(T min, T max)
+            where T : unmanaged
+                => new Interval<T>(min, max, IntervalKind.LeftOpen);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Interval<T> ropen<T>(T min, T max)
+            where T : unmanaged
+                => new Interval<T>(min, max, IntervalKind.RightOpen);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Interval<T> lclosed<T>(T min, T max)
+            where T : unmanaged
+                => new Interval<T>(min, max, IntervalKind.LeftClosed);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Interval<T> rclosed<T>(T min, T max)
+            where T : unmanaged
+                => new Interval<T>(min, max, IntervalKind.RightClosed);
 
         /// <summary>
         /// Defines an interval of specified sort

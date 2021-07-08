@@ -28,12 +28,8 @@ namespace Z0
 
         public IDataEventSink Sink {get;}
 
-        public void Deposit(IDataEvent e)
+        public void Deposit(IWfEvent e)
             => Sink.Deposit(e);
-
-        public void Deposit<S>(in S e)
-            where S : struct, IDataEvent
-                => Sink.Deposit(e);
 
         [MethodImpl(Inline)]
         public HubClientExample(IEventHub hub, IDataEventSink sink)
@@ -52,16 +48,17 @@ namespace Z0
 
     public readonly struct ExampleEvent1 : IDataEvent<ExampleEvent1>
     {
-        public string Id {get;}
 
         public BinaryCode Encoded {get;}
 
-        [MethodImpl(Inline)]
-        public ExampleEvent1 Define(string id, BinaryCode data)
-            => new ExampleEvent1(id,data);
+        public ulong Id {get;}
 
         [MethodImpl(Inline)]
-        public ExampleEvent1(string id, BinaryCode data)
+        public ExampleEvent1 Define(ulong id, BinaryCode data)
+            => new ExampleEvent1(id, data);
+
+        [MethodImpl(Inline)]
+        public ExampleEvent1(ulong id, BinaryCode data)
         {
             Id = id;
             Encoded = data;
@@ -71,15 +68,15 @@ namespace Z0
     public readonly struct ExampleEvent2 : IDataEvent<ExampleEvent2>
     {
         [MethodImpl(Inline)]
-        public ExampleEvent2 Define(string id, BinaryCode data)
+        public ExampleEvent2 Define(ulong id, BinaryCode data)
             => new ExampleEvent2(id, data);
 
-        public string Id {get;}
+        public ulong Id {get;}
 
         public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
-        public ExampleEvent2(string id, BinaryCode data)
+        public ExampleEvent2(ulong id, BinaryCode data)
         {
             Id = id;
             Encoded = data;
@@ -89,15 +86,15 @@ namespace Z0
     public readonly struct ExampleEvent3 : IDataEvent<ExampleEvent3>
     {
         [MethodImpl(Inline)]
-        public ExampleEvent3 Define(string id, BinaryCode data)
+        public ExampleEvent3 Define(ulong id, BinaryCode data)
             => new ExampleEvent3(id,data);
 
-        public string Id {get;}
+        public ulong Id {get;}
 
         public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
-        public ExampleEvent3(string id, BinaryCode data)
+        public ExampleEvent3(ulong id, BinaryCode data)
         {
             Id = id;
             Encoded = data;

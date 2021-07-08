@@ -8,17 +8,18 @@ namespace Z0
     using System.Linq;
 
     using static CheckPrimalSeq;
+    using static core;
 
     public class t_eventhub : UnitTest<t_eventhub>
     {
         public static BinaryCode code(params byte[] src)
             => src;
 
-        public const string E1 = "e1";
+        public const ulong E1 = 1;
 
-        public const string E2 = "e2";
+        public const ulong E2 = 2;
 
-        public const string E3 = "e3";
+        public const ulong E3 = 3;
 
         public static BinaryCode D1 => code(0,2,4,8);
 
@@ -28,7 +29,7 @@ namespace Z0
 
         public void test_1()
         {
-            var received = root.hashset<IDataEvent>();
+            var received = hashset<IDataEvent>();
             void Receiver(IDataEvent e)
             {
                 received.Add(e);

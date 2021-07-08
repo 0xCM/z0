@@ -14,21 +14,6 @@ namespace Z0
     public readonly struct BitParser
     {
         [Op]
-        public static bool semantic(string src, out bool dst)
-        {
-            if(semantic(src, out bit b))
-            {
-                dst = b;
-                return true;
-            }
-            else
-            {
-                dst = default;
-                return false;
-            }
-        }
-
-        [Op]
         public static bool semantic(string src, out bit dst)
         {
             const string On1 = "1";

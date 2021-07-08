@@ -85,7 +85,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out bool dst)
-            => BitParser.semantic(src, out dst);
+        {
+            dst = default;
+            var result = BitParser.semantic(src, out var b);
+            if(result)
+            {
+                dst = b;
+            }
+            return result;
+        }
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out bit dst)

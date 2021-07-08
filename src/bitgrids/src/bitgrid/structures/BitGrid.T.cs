@@ -74,14 +74,14 @@ namespace Z0
             get => Data.BlockCount;
         }
 
-        // public bit this[int row, int col]
-        // {
-        //     [MethodImpl(Inline)]
-        //     get => BitGrid.readbit(ColCount, in Head, row, col);
+        public bit this[int row, int col]
+        {
+            [MethodImpl(Inline)]
+            get => BitGrid.readbit(ColCount, in Head, row, col);
 
-        //     [MethodImpl(Inline)]
-        //     set => BitGrid.setbit(ColCount, row, col, value, ref Head);
-        // }
+            [MethodImpl(Inline)]
+            set => BitGrid.setbit((uint)ColCount, (uint)row, (uint)col, value, ref Head);
+        }
 
         [MethodImpl(Inline)]
         public void SetBit(uint index, bit state)

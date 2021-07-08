@@ -10,6 +10,8 @@
     <ProjectReference Include="$(Canonical)"/>
     <ProjectReference Include="$(Asm)"/>
     <ProjectReference Include="$(Polyrand)"/>
+    <ProjectReference Include="$(Cells)"/>
+    <ProjectReference Include="$(Commands)"/>
   </ItemGroup>
 
 </Project>

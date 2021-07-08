@@ -18,6 +18,11 @@ namespace Z0
             where T : unmanaged
                 => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % width<T>()));
 
+        [MethodImpl(Inline)]
+        public static bit readbit<T>(in T src, uint bitpos)
+            where T : unmanaged
+                => gbits.testbit(readcell(in src, (int)bitpos), (byte)(bitpos % width<T>()));
+
         /// <summary>
         /// Reads a cell determined by a linear bit position
         /// </summary>
