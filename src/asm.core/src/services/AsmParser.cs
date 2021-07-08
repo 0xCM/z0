@@ -390,6 +390,18 @@ namespace Z0.Asm
             return outcome;
         }
 
+        public static Outcome parse(string src, out AsmOffsetLabel dst)
+        {
+            dst = default;
+            var outcome = DataParser.parse(src.Remove(Chars.Colon), out Hex64 value);
+            if(outcome)
+            {
+                var effective = Bits.effwidth(value);
+                dst = asm.label(effective, value);
+            }
+            return outcome;
+        }
+
         static Fence<char> SigFence => (LParen, RParen);
 
         static Fence<char> OpCodeFence => (Lt, Gt);

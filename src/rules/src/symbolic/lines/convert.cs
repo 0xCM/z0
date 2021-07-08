@@ -13,7 +13,12 @@ namespace Z0
     partial struct Lines
     {
         [MethodImpl(Inline), Op]
-        public static AsciLine asci(ReadOnlySpan<byte> src, uint number, uint offset, uint length)
-            => new AsciLine(number, offset, recover<AsciSymbol>(slice(src, offset, length)));
+        public static void convert(in AsciLine src, Span<char> buffer, out UnicodeLine dst)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                seek(buffer, i) = (char)skip(src.Content,i);
+            dst = new UnicodeLine(src.LineNumber, src.StartPos, buffer);
+        }
     }
 }

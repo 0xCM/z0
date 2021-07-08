@@ -138,7 +138,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static string format<T>(T src, bool zpad, bool specifier, bool uppercase = false, bool prespec = true)
             where T : unmanaged
-                => format_u(src,zpad, specifier, uppercase, prespec);
+                => format_u(src, zpad, specifier, uppercase, prespec);
 
         [MethodImpl(Inline)]
         static string format_u<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)

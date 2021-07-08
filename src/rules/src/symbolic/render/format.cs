@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string format(in AsciLine src, Span<char> buffer)
-            => format(src.Content, buffer);
+            => format(src.Codes, buffer);
 
         [MethodImpl(Inline), Op]
         public static string format(in UnicodeLine src, Span<char> buffer)

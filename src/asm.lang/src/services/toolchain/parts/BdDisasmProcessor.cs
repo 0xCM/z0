@@ -20,10 +20,10 @@ namespace Z0.Asm
 
         static void chop(in AsciLine src, out ReadOnlySpan<AsciCode> a, out ReadOnlySpan<AsciCode> b, out ReadOnlySpan<AsciCode> c)
         {
-            var content = src.Content;
-            a = slice(content,0,17);
-            b = slice(content,17,31);
-            c = slice(content,49);
+            var codes = src.Codes;
+            a = slice(codes,0,17);
+            b = slice(codes,17,31);
+            c = slice(codes,49);
         }
 
         Outcome ProcessLine(ref AsciLine src, out AsmDisassembly dst)

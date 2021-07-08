@@ -27,11 +27,7 @@ namespace Z0
         /// <param name="code">The asci code</param>
         [MethodImpl(Inline), Op]
         static string @string(AsciCode code)
-        {
-            const string buffer = " ";
-            edit16c(buffer) = (char)code;
-            return buffer;
-        }
+            => new string((char)code,1);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(AsciCode src)

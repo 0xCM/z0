@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static core;
-
     using SR = SymbolicRender;
 
     partial struct Lines
@@ -30,7 +27,7 @@ namespace Z0
             var i0 = i;
             SR.render(format(src.LineNumber), ref i, dst);
             if(src.IsNonEmpty)
-                SR.render(src.Content, ref i, dst);
+                SR.render(src.Codes, ref i, dst);
             return i - i0;
         }
 

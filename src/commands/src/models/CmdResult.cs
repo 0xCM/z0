@@ -55,7 +55,6 @@ namespace Z0
             Payload = Succeeded;
         }
 
-
         [MethodImpl(Inline)]
         public static CmdResult FromOutcome<T>(CmdId id, Outcome<T> result)
             => new CmdResult(id, result.Ok, result.Message);

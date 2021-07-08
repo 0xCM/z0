@@ -25,5 +25,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool eol(C a0, C a1)
             => a0 == CR && a1 == LF;
+
+        [MethodImpl(Inline), Op]
+        public static bit eol(AsciSymbol a0, AsciSymbol a1)
+            => a0 == CR && a1 == LF;
     }
 }

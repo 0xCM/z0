@@ -25,6 +25,16 @@ namespace Z0
             => match >= min && match <= max;
 
         /// <summary>
+        /// Determines whether a specified asci character code is within a specified range
+        /// </summary>
+        /// <param name="min">The inclusive minimum code value</param>
+        /// <param name="max">The inclusive maximum code value</param>
+        /// <param name="match">The test value</param>
+        [MethodImpl(Inline), Op]
+        public static bit contains(byte min, byte max, byte match)
+            => match >= min && match <= max;
+
+        /// <summary>
         /// Determines whether a specified character is within a specified range
         /// </summary>
         /// <param name="min">The inclusive minimum code value</param>

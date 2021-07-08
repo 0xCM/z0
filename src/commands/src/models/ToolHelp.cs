@@ -12,23 +12,32 @@ namespace Z0
 
     public struct ToolHelp
     {
-        Index<dynamic> Data {get;}
+        public ToolId Tool {get;}
 
-        public ToolHelp(uint count)
+        public string Description {get;}
+
+        public string Document {get;}
+
+        readonly Index<CmdOptionInfo> _Options;
+
+        public ToolHelp(ToolId tool, string doc, string desc, CmdOptionInfo[] options)
         {
-            Data = alloc<dynamic>(count);
+            Tool = tool;
+            Document = doc;
+            Description = desc;
+            _Options = options;
         }
 
-        public ref dynamic this[uint index]
+        public ReadOnlySpan<CmdOptionInfo> Options
         {
             [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => _Options.View;
         }
 
-        public ReadOnlySpan<dynamic> View
+        public uint OptionCount
         {
             [MethodImpl(Inline)]
-            get => Data.Storage;
+            get => _Options.Count;
         }
     }
 }

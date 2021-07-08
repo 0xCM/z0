@@ -2,18 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    partial struct Lines
+    partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsciLine asci(ReadOnlySpan<byte> src, uint number, uint offset, uint length)
-            => new AsciLine(number, offset, recover<AsciSymbol>(slice(src, offset, length)));
+        public static AsmBlockLabel blocklabel(MemoryAddress address)
+            => new AsmBlockLabel(string.Format("_{0}", address));
     }
 }

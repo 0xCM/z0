@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public ref struct CallVector
+    using static Root;
+
+    partial struct Cmd
     {
-        public ReadOnlySpan<byte> Context;
-
-        public ReadOnlySpan<byte> Target;
-
-        public ReadOnlySpan<byte> OperandValues;
-
+        [MethodImpl(Inline), Op]
+        public static ToolHelp help(ToolId tool, string doc, string description, CmdOptionInfo[] options)
+            => new ToolHelp(tool, doc, description, options);
     }
 }

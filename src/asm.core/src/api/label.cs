@@ -12,15 +12,11 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmOffsetLabel label(DataWidth w, ulong offset)
-            => new AsmOffsetLabel(w, offset);
+        public static AsmOffsetLabel label(byte width, ulong value)
+            => new AsmOffsetLabel(width, value);
 
         [MethodImpl(Inline), Op]
         public static AsmLabel label(Identifier name)
             => new AsmLabel(name);
-
-        [MethodImpl(Inline), Op]
-        public static AsmBlockLabel label(MemoryAddress address)
-            => new AsmBlockLabel(string.Format("_{0}", address));
     }
 }

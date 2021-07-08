@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     /// <summary>
     /// Specifies a kinded option
@@ -65,19 +66,19 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => TextTools.empty(Name);
+            get => empty(Name);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => TextTools.nonempty(Name);
+            get => nonempty(Name);
         }
 
         public bool IsAnonymous
         {
             [MethodImpl(Inline)]
-            get => TextTools.empty(Name);
+            get => empty(Name);
         }
 
         [MethodImpl(Inline)]

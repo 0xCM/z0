@@ -11,8 +11,8 @@ namespace Z0
     public interface IDataBlock<T>
         where T : unmanaged, IDataBlock<T>
     {
-        Span<T> Data
-            => recover<byte,T>(bytes((T)this));
+        // Span<T> Data
+        //     => recover<byte,T>(bytes((T)this));
 
         ByteSize Size
             => size<T>();

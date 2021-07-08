@@ -12,7 +12,6 @@ namespace Z0.Asm
     using static core;
 
     using Fx = AsmInstructions;
-
     using H = HeapRegBanks;
 
     readonly struct EngineCore
@@ -84,8 +83,8 @@ namespace Z0.Asm
         {
         }
 
-        [CmdOp(".test")]
-        Outcome Test(CmdArgs args)
+        [CmdOp(".test-keys")]
+        Outcome TestKeys(CmdArgs args)
         {
             ushort rows = 39;
             ushort cols = 23;
@@ -96,9 +95,40 @@ namespace Z0.Asm
             {
                 ref readonly var key = ref keys[i,j];
                 Write(string.Format("({0},{1}) -> {2}", i, j, key));
+
             }
 
 
+            return true;
+        }
+
+        [CmdOp(".test")]
+        Outcome Test(CmdArgs args)
+        {
+            var src = FS.path(@"J:\dumps\images\machine.exe.asm");
+            const uint Skip = 5;
+            using var reader = AsciLineReader.open(src);
+            var counter = 0u;
+            var skipping = Skip != 0;
+            while(reader.Next(out var line))
+            {
+                counter++;
+
+                if(counter == Skip)
+                {
+                    skipping = false;
+                    Write(line.Format());
+                }
+
+                if(skipping)
+                    continue;
+
+                if(counter % 100000 == 0)
+                {
+                    Write(line.Format());
+                }
+
+            }
             return true;
         }
 

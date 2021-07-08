@@ -24,14 +24,28 @@ namespace Z0
         /// <summary>
         /// The line content
         /// </summary>
-        public ReadOnlySpan<AsciCode> Content {get;}
+        public ReadOnlySpan<AsciSymbol> Content {get;}
 
         [MethodImpl(Inline)]
-        public AsciLine(uint number, uint start, ReadOnlySpan<AsciCode> src)
+        public AsciLine(uint number, uint start, ReadOnlySpan<AsciSymbol> src)
         {
             LineNumber = number;
             StartPos = start;
             Content = src;
+        }
+
+        [MethodImpl(Inline)]
+        public AsciLine(uint number, uint start, ReadOnlySpan<byte> src)
+        {
+            LineNumber = number;
+            StartPos = start;
+            Content = core.recover<byte,AsciSymbol>(src);
+        }
+
+        public ReadOnlySpan<AsciCode> Codes
+        {
+            [MethodImpl(Inline)]
+            get => core.recover<AsciSymbol,AsciCode>(Content);
         }
 
         public int Length
@@ -58,6 +72,7 @@ namespace Z0
             get => Length != 0;
         }
 
+
         public string Format()
         {
             Span<char> buffer = stackalloc char[RenderLength];
@@ -69,7 +84,7 @@ namespace Z0
         public static AsciLine Empty
         {
             [MethodImpl(Inline)]
-            get => new AsciLine(0,0,default);
+            get => new AsciLine(0,0,default(ReadOnlySpan<byte>));
         }
     }
 }

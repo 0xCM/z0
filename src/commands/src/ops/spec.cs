@@ -25,16 +25,16 @@ namespace Z0
         public static CmdSpec spec(string input)
         {
             var i = input.IndexOf(Chars.Space);
-            var args = CmdArgs.Empty;
+            var _args = CmdArgs.Empty;
             var name = input;
             if(i != NotFound)
             {
-                name = TextTools.left(input,i);
-                var right = TextTools.right(input,i);
+                name = text.left(input,i);
+                var right = text.right(input,i);
                 if(nonempty(right))
-                    args = Cmd.args(right.Split(Chars.Space));
+                    _args = args(right.Split(Chars.Space));
             }
-            return new CmdSpec(name,args);
+            return new CmdSpec(name,_args);
         }
     }
 }

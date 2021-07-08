@@ -14,10 +14,6 @@ namespace Z0
     public readonly partial struct Lines
     {
         [MethodImpl(Inline), Op]
-        public static TextLine line(uint number, string content)
-            => new TextLine(number, content);
-
-        [MethodImpl(Inline), Op]
         public static uint lines(ReadOnlySpan<string> src, Span<TextLine> dst)
         {
             var count = (uint)src.Length;
@@ -25,15 +21,6 @@ namespace Z0
             for(var i=0; i<count; i++)
                 seek(dst,i) = new TextLine(counter++, skip(src,i));
             return count;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static void convert(in AsciLine src, Span<char> buffer, out UnicodeLine dst)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                seek(buffer, i) = (char)skip(src.Content,i);
-            dst = new UnicodeLine(src.LineNumber, src.StartPos, buffer);
         }
     }
 }

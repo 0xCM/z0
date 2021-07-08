@@ -24,7 +24,6 @@ namespace Z0.Asm
                 _LineBuffer = alloc<char>(256);
             }
 
-
             public uint LineCount(ReadOnlySpan<byte> src)
                 => Lines.count(src);
 
@@ -37,14 +36,14 @@ namespace Z0.Asm
             Outcome ProcessLine(ref AsciLine src, out AsmDisassembly dst)
             {
                 dst = default;
-                var i = SQ.index(src.Content, C.Colon);
+                var i = SQ.index(src.Codes, C.Colon);
                 if(i == NotFound)
                 {
                     return (false, MarkerCodeNotFound.Format(C.Colon));
                 }
 
-                var left = slice(src.Content,0, i);
-                var right = slice(src.Content, i + 1);
+                var left = slice(src.Codes, 0, i);
+                var right = slice(src.Codes, i + 1);
                 var j=0u;
                 var result = Hex.parse(left,out ulong offset);
                 if(result.Fail)
@@ -83,7 +82,7 @@ namespace Z0.Asm
                     {
                         var line = Lines.asci(src, number++, counter, length + 1);
 
-                        if(!SQ.contains(line.Content, C.Colon) || number < 4)
+                        if(!SQ.contains(line.Codes, C.Colon) || number < 4)
                         {
                             pos++;
                             length = 0;

@@ -2,18 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    partial struct Lines
+    public readonly ref struct AsmLine
     {
+        public AsciLine Data {get;}
+
+        public AsmLinePart Parts {get;}
+
         [MethodImpl(Inline), Op]
-        public static AsciLine asci(ReadOnlySpan<byte> src, uint number, uint offset, uint length)
-            => new AsciLine(number, offset, recover<AsciSymbol>(slice(src, offset, length)));
+        public AsmLine(AsciLine src, AsmLinePart parts)
+        {
+            Data = src;
+            Parts = parts;
+        }
     }
 }

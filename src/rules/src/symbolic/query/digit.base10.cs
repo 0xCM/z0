@@ -24,6 +24,15 @@ namespace Z0
             => contains(C.d0, C.d9, src);
 
         /// <summary>
+        /// Determines whether a code represents a decimal digit
+        /// </summary>
+        /// <param name="base">The base selector</param>
+        /// <param name="src">The value to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit digit(Base10 @base, byte src)
+            => contains((byte)C.d0, (byte)C.d9, src);
+
+        /// <summary>
         /// Determines whether the lower 8 bits of a <see cref='char'/> is a decimal digit
         /// </summary>
         /// <param name="base">The base selector</param>

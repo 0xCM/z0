@@ -42,6 +42,25 @@ namespace Z0.Asm
                         AsmBitstrings.format(src.Encoded)
                         );
 
+        [Op]
+        public static string format(AsmOffsetLabel src)
+        {
+            const string LabelPattern = "{0}:";
+            var width = src.OffsetWidth;
+            var value = src.OffsetValue;
+            var f = EmptyString;
+            if(width <= 8)
+                f = HexFormat.format(w8,(byte)value);
+            else if(width <= 16)
+                f = HexFormat.format(w16,(ushort)value);
+            else if(width <= 32)
+                f = HexFormat.format(w32,(uint)value);
+            else
+                f = HexFormat.format(w64,(ulong)value);
+
+            return string.Format(LabelPattern, f);
+        }
+
         public static string format(in AsmDisassembly src)
         {
             var left = string.Format("{0,-12} {1,-64}", src.Offset, src.Statement);

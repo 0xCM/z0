@@ -10,46 +10,41 @@ namespace Z0.Asm
     using static Root;
 
     /// <summary>
-    /// Defines an offset label in an assembly listing
+    /// Represents an line offset label
     /// </summary>
-    public readonly struct AsmOffsetLabel
+    public readonly struct AsmOffsetLabel : ITextual
     {
-        public ulong Offset {get;}
+        const ulong OffsetMask = 0xFF_FF_FF_FF_FF_FF_FF;
 
-        public DataWidth Width {get;}
+        const byte Cut = 56;
 
-        public AsmOffsetLabel(DataWidth width, ulong offset)
+        readonly ulong Data;
+
+        [MethodImpl(Inline)]
+        public AsmOffsetLabel(byte width, ulong offset)
         {
-            Offset = offset;
-            Width = width;
+            Data = ((ulong)width << Cut) | (offset & OffsetMask);
         }
 
-        public bool IsEmpty
+        public ulong OffsetValue
         {
             [MethodImpl(Inline)]
-            get => Width == 0;
+            get => Data & OffsetMask;
         }
 
-        public bool IsNonEmpty
+        /// <summary>
+        /// The offset bit-width
+        /// </summary>
+        public byte OffsetWidth
         {
             [MethodImpl(Inline)]
-            get => Width != 0;
+            get => (byte)((ulong)Data >> Cut);
         }
 
         public string Format()
-            => AsmRender.offset(Offset, Width);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();
-
-        public static AsmOffsetLabel Empty
-        {
-            [MethodImpl(Inline)]
-            get => new AsmOffsetLabel(0, 0);
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmLabel(AsmOffsetLabel src)
-            => new AsmLabel(src.Format());
     }
 }

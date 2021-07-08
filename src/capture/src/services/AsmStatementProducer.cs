@@ -71,7 +71,7 @@ namespace Z0.Asm
         {
             dst.AppendLine(asm.comment(src.Member.OpUri.Format()));
             dst.AppendLine(asm.comment(format(src.Base, src.CodeBlock.Code)));
-            dst.AppendLine(asm.label(src.Base));
+            dst.AppendLine(asm.blocklabel(src.Base));
         }
 
         static uint produce(in AsmMemberRoutine src, ITextBuffer dst)

@@ -54,6 +54,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new ArgProtocol(ArgPrefix.Empty, ArgQualifier.Space);
         }
-
     }
 }
