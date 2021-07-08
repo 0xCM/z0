@@ -19,9 +19,9 @@ namespace Z0
         /// <param name="source">The random source</param>
         /// <param name="domain">The domain of the random variable</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IDataStream<T> NonZStream<T>(this IDomainSource source, Interval<T> domain)
+        public static ISourceStream<T> NonZStream<T>(this IDomainSource source, Interval<T> domain)
             where T : unmanaged
-                => DataStreams.create<T>(source, domain, x => root.nonz(x));
+                => SourceStreams.create<T>(source, domain, x => root.nonz(x));
 
         /// <summary>
         /// Queries the source for the next nonzero value within a range

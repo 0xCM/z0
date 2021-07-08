@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     partial struct SFx
     {
@@ -26,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ValueProjector<T> projector<T>(Func<object,T> f)
             where T : struct
-                => projector(f, sys.alloc<T>(1));
+                => projector(f, alloc<T>(1));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ValueProjector<T> projector<T>(Func<ValueType,T> f)

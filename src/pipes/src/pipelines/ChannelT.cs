@@ -10,18 +10,16 @@ namespace Z0
     using static Root;
 
     /// <summary>
-    /// Defines a connection from a source <see cref='Pipe{S,T}'/> to a target <see cref='Pipe{T}'/>
+    /// Defines a connection from a source <see cref='Pipe{T}'/> to a target <see cref='Pipe{T}'/>
     /// </summary>
-    /// <typeparam name="S">The source input type</typeparam>
-    /// <typeparam name="T">The source output type/target input type</typeparam>
-    public readonly struct Conduit<S,T> : IConduit<Conduit<S,T>,S>
+    public readonly struct Channel<T> : IChannel<Channel<T>,T>
     {
-        readonly Pipe<S,T> Source;
+        readonly Pipe<T> Source;
 
         readonly Pipe<T> Target;
 
         [MethodImpl(Inline)]
-        public Conduit(Pipe<S,T> src, Pipe<T> dst)
+        internal Channel(Pipe<T> src, Pipe<T> dst)
         {
             Source = src;
             Target = dst;

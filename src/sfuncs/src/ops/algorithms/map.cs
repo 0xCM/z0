@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct SFx
     {
@@ -22,7 +22,7 @@ namespace Z0
             {
                 var p = pSrc;
                 for(var i=0u; i<count; i++)
-                    memory.seek(dst,i) = mapper.Map(p++);
+                    seek(dst,i) = mapper.Map(p++);
             }
         }
 

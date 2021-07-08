@@ -4,24 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial struct SFx
+    public readonly struct TableRelation
     {
-        public readonly struct Projector<S,T> : IProjector<S,T>
+        public Arrow<TableId> Direction {get;}
+
+        public TableRelationKind Kind {get;}
+
+        [MethodImpl(Inline)]
+        public TableRelation(Arrow<TableId> direction, TableRelationKind kind)
         {
-            readonly Func<S,T> Fx;
-
-            [MethodImpl(Inline)]
-            public Projector(Func<S,T> fx)
-                => Fx = fx;
-
-            [MethodImpl(Inline)]
-            public T Invoke(S a)
-                => Fx(a);
+            Direction = direction;
+            Kind = kind;
         }
     }
 }

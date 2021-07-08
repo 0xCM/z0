@@ -28,5 +28,9 @@ namespace Z0
         [Op]
         public static ProcessLauncher ProcessLauncher(this IWfRuntime paths)
             => Svc.ProcessLauncher.create(paths);
+
+        [Op]
+        public static ToolBase ToolBase(IServiceContext context, string name, FS.FolderPath root)
+            => Svc.ToolBase.create(context).Configure(name, root);
     }
 }

@@ -14,9 +14,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
-        public static IDataStream<T> Stream<T>(this IPolySource src)
+        public static ISourceStream<T> Stream<T>(this IPolySource src)
             where T : unmanaged
-                => DataStreams.create<T>(src);
+                => SourceStreams.create<T>(src);
 
         /// <summary>
         /// Produces a stream values from the source subject to a specified range and optional filter
@@ -25,9 +25,9 @@ namespace Z0
         /// <param name="domain">If specified, the domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IDataStream<T> Stream<T>(this IPolySource src, T min, T max)
+        public static ISourceStream<T> Stream<T>(this IPolySource src, T min, T max)
             where T : unmanaged
-                => DataStreams.create<T>(src, (min,max));
+                => SourceStreams.create<T>(src, (min,max));
 
         /// <summary>
         /// Produces a stream of values from the random source
@@ -36,9 +36,9 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IDataStream<T> Stream<T>(this IDomainSource src, Interval<T> domain)
+        public static ISourceStream<T> Stream<T>(this IDomainSource src, Interval<T> domain)
             where T : unmanaged
-                => DataStreams.create(src, domain);
+                => SourceStreams.create(src, domain);
 
         /// <summary>
         /// Produces a stream of values from the random source
@@ -47,9 +47,9 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IDataStream<T> Stream<T>(this IPolySource src, Interval<T> domain)
+        public static ISourceStream<T> Stream<T>(this IPolySource src, Interval<T> domain)
             where T : unmanaged
-                => DataStreams.create(src, domain);
+                => SourceStreams.create(src, domain);
 
         public static IEnumerable<T> Stream<T>(this IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
@@ -77,9 +77,9 @@ namespace Z0
         /// <param name="domain">If specified, the domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IDataStream<T> DataStream<T>(this ISource src)
+        public static ISourceStream<T> DataStream<T>(this ISource src)
             where T : unmanaged
-                => new DataStream<T>(src.Stream<T>());
+                => new SourceStream<T>(src.Stream<T>());
 
         /// <summary>
         /// Produces a stream values from the source subject to a specified range and optional filter
@@ -88,9 +88,9 @@ namespace Z0
         /// <param name="domain">If specified, the domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IDataStream<T> DataStream<T>(this IDomainSource src, T min, T max)
+        public static ISourceStream<T> DataStream<T>(this IDomainSource src, T min, T max)
             where T : unmanaged
-                => new DataStream<T>(src.Stream<T>((min,max)));
+                => new SourceStream<T>(src.Stream<T>((min,max)));
 
         /// <summary>
         /// Produces a stream values from the source subject to a specified range and optional filter
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="domain">If specified, the domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IDataStream<T> DataStream<T>(this IDomainSource src, Interval<T> domain)
+        public static ISourceStream<T> DataStream<T>(this IDomainSource src, Interval<T> domain)
             where T : unmanaged
                 => src.DataStream<T>(domain.Left, domain.Right);
 
@@ -110,8 +110,8 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IDataStream<T> DataStream<T>(this IDomainSource src, Interval<T> domain, Func<T,bool> filter)
+        public static ISourceStream<T> DataStream<T>(this IDomainSource src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => new DataStream<T>(src.Stream(domain, filter));
+                => new SourceStream<T>(src.Stream(domain, filter));
     }
 }

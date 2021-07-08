@@ -5,24 +5,12 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IConduit
-    {
-        void Flow();
-
-    }
-
-    [Free]
-    public interface IConduit<S> : IConduit
-    {
-    }
-
-    [Free]
-    public interface IConduit<H,S> : IConduit<S>
-        where H : IConduit<H,S>
+    public interface ISourceStream<T> : IEnumerable<T>, ISource<T>
     {
 
     }

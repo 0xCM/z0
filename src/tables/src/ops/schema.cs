@@ -12,12 +12,12 @@ namespace Z0
     partial struct Tables
     {
         [Op]
-        public static RecordSchema schema(Type src)
+        public static TableSchema schema(Type src)
         {
             var fields = @readonly(src.DeclaredInstanceFields());
             var count = fields.Length;
             if(count == 0)
-                return RecordSchema.Empty;
+                return TableSchema.Empty;
 
             var id = TableId.identify(src);
             var specs = sys.alloc<RecordFieldSpec>(count);
@@ -27,7 +27,7 @@ namespace Z0
                 ref readonly var field = ref skip(fields,i);
                 seek(spec,i) = new RecordFieldSpec(i, field.Name, field.FieldType.Name);
             }
-            return new RecordSchema(id, specs);
+            return new TableSchema(id, specs);
         }
     }
 }

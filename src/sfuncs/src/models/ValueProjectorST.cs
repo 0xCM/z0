@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     partial struct SFx
     {
@@ -23,11 +24,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T map(object src)
-                => Delegate(memory.unbox<S>(src));
+                => Delegate(unbox<S>(src));
 
             [MethodImpl(Inline)]
             public T map(ValueType src)
-                => Delegate(memory.unbox<S>(src));
+                => Delegate(unbox<S>(src));
 
             [MethodImpl(Inline)]
             public ref T Project(in S src)

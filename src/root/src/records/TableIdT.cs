@@ -37,5 +37,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator TableId(TableId<T> src)
             => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator TableId<T>(TableId src)
+            => new TableId<T>(src);
     }
 }

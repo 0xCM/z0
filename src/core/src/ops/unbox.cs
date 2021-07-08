@@ -7,16 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
 
-    partial struct Pipes
+    partial struct core
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Channel<T> connect<T>(Pipe<T> src, Pipe<T> dst)
-            => new Channel<T>(src,dst);
+        public static ref T unbox<T>(object src)
+            where T : struct
+                => ref Unbox<T>(src);
 
-        [MethodImpl(Inline)]
-        public static Channel<S,T> connect<S,T>(Pipe<S,T> src, Pipe<T> dst)
-            => new Channel<S,T>(src,dst);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T unbox<T>(Enum src)
+            where T : unmanaged
+                => ref Unbox<T>(src);
     }
 }

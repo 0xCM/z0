@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Record]
-    public struct ToolInfo : IRecord<ToolInfo>
+    public abstract class Table
     {
-        public ToolId ToolId;
+        public TableId Id {get;}
 
-        public Name ToolName;
+        protected Table(TableId id)
+        {
+            Id = id;
+        }
 
-        public CmdUsage Syntax;
-
-        public CmdOptionSpecs Options;
+        public abstract uint RowCount {get;}
     }
 }

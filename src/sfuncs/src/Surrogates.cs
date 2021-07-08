@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
+    using static Root;
 
-    [ApiHost(ApiNames.XSFx, true)]
+    [ApiHost]
     public static partial class XSFx
     {
 

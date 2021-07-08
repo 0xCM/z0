@@ -11,14 +11,14 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public readonly struct DataStreams
+    public readonly struct SourceStreams
     {
         const NumericKind Closure = NumericKind.U64;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IDataStream<T> create<T>(IEnumerable<T> src, ulong classifier = 0)
+        public static ISourceStream<T> create<T>(IEnumerable<T> src, ulong classifier = 0)
             where T : struct
-                => new DataStream<T>(src, classifier);
+                => new SourceStream<T>(src, classifier);
 
         /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source
@@ -26,17 +26,17 @@ namespace Z0
         /// <param name="src">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
         [Op, Closures(Closure)]
-        public static IDataStream<T> create<T>(IDomainSource src)
+        public static ISourceStream<T> create<T>(IDomainSource src)
             where T : unmanaged
                 => create(forever<T>(src));
 
         [Op, Closures(Closure)]
-        public static IDataStream<T> create<T>(IDomainSource src, T min, T max)
+        public static ISourceStream<T> create<T>(IDomainSource src, T min, T max)
             where T : unmanaged
                 => create(forever(src,min,max));
 
         [Op, Closures(Closure)]
-        public static IDataStream<T> create<T>(IDomainSource src, ClosedInterval<T> domain, Func<T,bool> filter = null)
+        public static ISourceStream<T> create<T>(IDomainSource src, ClosedInterval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
                 => create(forever(src, domain, filter));
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
         [Op, Closures(Closure)]
-        public static IDataStream<T> create<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
+        public static ISourceStream<T> create<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
                 => create(forever(src, domain, filter));
 

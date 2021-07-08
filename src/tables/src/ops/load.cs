@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
-    partial struct SFx
+    partial struct Tables
     {
         /// <summary>
-        /// Instantiates a service operation host
+        /// Creates a table populate with a specified dataset
         /// </summary>
-        /// <param name="host">The hosting type</param>
-        [MethodImpl(Inline), Op]
-        public static IFunc fx(Type host)
-            => (IFunc)Activator.CreateInstance(host);
+        /// <param name="src">The source data</param>
+        /// <typeparam name="T">The record type</typeparam>
+        public static Table<T> load<T>(T[] src)
+            where T : struct, IRecord<T>
+                => new Table<T>(src);
+
     }
 }

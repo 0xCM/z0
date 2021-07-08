@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     partial struct SFx
     {
@@ -19,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BoxedValueMap<T> boxed<T>(Func<object,T> f)
             where T : struct
-                => boxed(f, sys.alloc<T>(1));
+                => boxed(f, alloc<T>(1));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         static BoxedValueMap<T> boxed<T>(Func<object,T> f, T[] dst)

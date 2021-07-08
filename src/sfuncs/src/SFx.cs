@@ -10,6 +10,8 @@ namespace Z0
     using static Root;
     using static ApiUriDelimiters;
 
+    using Builder = ApiIdentityBuilder;
+
     [ApiHost]
     public readonly partial struct SFx
     {
@@ -29,7 +31,7 @@ namespace Z0
         public static string name<W,T>(Type host, IFunc f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => ApiIdentityBuilder.name<W,T>(host, ApiIdentityBuilder.build<W,T>(SFx.name(f)), true);
+                => Builder.name<W,T>(host, Builder.build<W,T>(SFx.name(f)), true);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -42,7 +44,7 @@ namespace Z0
         public static OpIdentity identity<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => ApiIdentityBuilder.build(opname, (TypeWidth)TypeNats.value<W>(), Numeric.kind<T>(), generic);
+                => Builder.build(opname, (TypeWidth)TypeNats.value<W>(), Numeric.kind<T>(), generic);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -52,7 +54,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [Op, Closures(AllNumeric)]
         public static OpIdentity identity<T>(string opname)
-            => ApiIdentityBuilder.NumericOp(opname, typeof(T).NumericKind());
+            => Builder.NumericOp(opname, typeof(T).NumericKind());
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -63,7 +65,7 @@ namespace Z0
         [Op, Closures(AllNumeric)]
         public static OpIdentity identity<T>(string opname, Vec128Kind<T> k)
             where T : unmanaged
-                => ApiIdentityBuilder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => Builder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -74,7 +76,7 @@ namespace Z0
         [Op, Closures(AllNumeric)]
         public static OpIdentity identity<T>(string opname, Vec256Kind<T> k)
             where T : unmanaged
-                => ApiIdentityBuilder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => Builder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -85,7 +87,7 @@ namespace Z0
         [Op, Closures(AllNumeric)]
         public static OpIdentity identity<T>(string opname, Vec512Kind<T> k)
             where T : unmanaged
-                => ApiIdentityBuilder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => Builder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
         const NumericKind Closure = NumericKind.I8 | NumericKind.U64;
     }
 }

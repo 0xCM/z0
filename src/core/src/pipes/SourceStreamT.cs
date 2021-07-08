@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Captures a random stream along with the generator classification
     /// </summary>
-    public readonly struct DataStream<T> : IDataStream<T>
+    public readonly struct SourceStream<T> : ISourceStream<T>
         where T : struct
     {
         readonly IEnumerable<T> Src;
@@ -23,7 +23,7 @@ namespace Z0
         readonly ulong Classifier;
 
         [MethodImpl(Inline)]
-        public DataStream(IEnumerable<T> src, ulong classifier = default)
+        public SourceStream(IEnumerable<T> src, ulong classifier = default)
         {
             Classifier = default;
             Src = src;

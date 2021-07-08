@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     partial struct SFx
     {
@@ -28,11 +29,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ref T Project(object src)
-                => ref memory.unbox<T>(Delegate((ValueType)src));
+                => ref unbox<T>(Delegate((ValueType)src));
 
             [MethodImpl(Inline)]
             public ref T Project(ValueType src)
-                => ref memory.unbox<T>(Delegate(src));
+                => ref unbox<T>(Delegate(src));
 
             ValueType IValueProjector.Project(ValueType src)
                 => Delegate(src);

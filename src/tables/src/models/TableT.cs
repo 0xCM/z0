@@ -9,27 +9,27 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Table<T> : ITable<T>
+    public class Table<T> : Table
         where T : struct, IRecord<T>
     {
-        readonly T[] Data;
+        Index<T> Data;
 
-        [MethodImpl(Inline)]
-        public Table(T[] rows)
+        public Table(T[] data)
+            : base(TableId.identify<T>())
         {
-            Data = rows;
+            Data = data;
         }
 
         public Span<T> Rows
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Edit;
         }
 
-        public uint RowCount
+        public override uint RowCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => Data.Count;
         }
     }
 }

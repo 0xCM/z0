@@ -9,20 +9,20 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct RecordSchema
+    public readonly struct TableSchema
     {
         public TableId Id {get;}
 
         public RecordFieldSpec[] Fields{get;}
 
         [MethodImpl(Inline)]
-        public RecordSchema(TableId id, RecordFieldSpec[] fields)
+        public TableSchema(TableId id, RecordFieldSpec[] fields)
         {
             Id = id;
             Fields = fields;
         }
 
-        public static RecordSchema Empty
+        public static TableSchema Empty
             => default;
     }
 }

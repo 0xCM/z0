@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Part;
+    using static Root;
 
     using BS = Z0.BitString;
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="minlen">The minimum length of the bitstring</param>
         /// <param name="maxlen">The maximum length of the bitstring</param>
-        public static IDataStream<BitString> BitStrings(this IPolySource random, int minlen, int maxlen)
+        public static ISourceStream<BitString> BitStrings(this IPolySource random, int minlen, int maxlen)
         {
             IEnumerable<BitString> produce()
             {
@@ -68,7 +68,7 @@ namespace Z0
                     yield return random.BitString(minlen, maxlen);
             }
 
-            return DataStreams.create(produce());
+            return SourceStreams.create(produce());
         }
     }
 }

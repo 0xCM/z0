@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     partial struct SFx
     {
@@ -38,7 +39,7 @@ namespace Z0
             }
 
             ValueType IValueProjector.Project(ValueType src)
-                => Project(memory.unbox<S>(src));
+                => Project(unbox<S>(src));
 
             [MethodImpl(Inline)]
             public static implicit operator ValueMap<S,T>(ProjectorProxy<S,T> src)

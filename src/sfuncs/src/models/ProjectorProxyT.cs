@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct SFx
     {
@@ -55,6 +55,5 @@ namespace Z0
             public static implicit operator BoxedValueMap<T>(ProjectorProxy<T> src)
                 => src.Project;
         }
-
     }
 }
