@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Typed;
+    using static Root;
 
     public class t_vconcat : t_inx<t_vconcat>
     {

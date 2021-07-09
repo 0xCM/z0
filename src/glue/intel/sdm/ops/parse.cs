@@ -47,7 +47,7 @@ namespace Z0.Asm
 
             var a = left(src,i);
             var b = right(src,i);
-            if(SP.uint8(a, out var cn) && SP.uint16(b, out var pn))
+            if(SP.uint8(base10, a, out var cn) && SP.uint16(base10, b, out var pn))
             {
                 dst = page(chapter(cn), pn);
                 return true;
@@ -65,7 +65,7 @@ namespace Z0.Asm
                 return false;
 
             var numeric = slice(src, i + Markers.ChapterNumber.Length);
-            if(SP.uint8(numeric, out var cn))
+            if(SP.uint8(base10,numeric, out var cn))
             {
                 dst = cn;
                 return true;
@@ -86,7 +86,7 @@ namespace Z0.Asm
             switch(count)
             {
                 case 1:
-                    if(SP.parse(skip(digits, 0), out dst.A))
+                    if(SP.parse(base10, skip(digits, 0), out dst.A))
                     {
                         dst.Count = 1;
                         result = true;
@@ -95,8 +95,8 @@ namespace Z0.Asm
 
                 case 2:
                         if(
-                            SP.parse(skip(digits, 0), out dst.A) &&
-                            SP.parse(skip(digits, 1), out dst.B))
+                            SP.parse(base10, skip(digits, 0), out dst.A) &&
+                            SP.parse(base10, skip(digits, 1), out dst.B))
                         {
                             dst.Count = 2;
                             result = true;
@@ -104,9 +104,9 @@ namespace Z0.Asm
                         break;
 
                 case 3: if(
-                        SP.parse(skip(digits, 0), out dst.A) &&
-                        SP.parse(skip(digits, 1), out dst.B) &&
-                        SP.parse(skip(digits, 2), out dst.C))
+                        SP.parse(base10, skip(digits, 0), out dst.A) &&
+                        SP.parse(base10, skip(digits, 1), out dst.B) &&
+                        SP.parse(base10, skip(digits, 2), out dst.C))
                         {
                             dst.Count = 3;
                             result = true;
@@ -114,10 +114,10 @@ namespace Z0.Asm
                         break;
 
                 case 4: if(
-                        SP.parse(skip(digits, 0), out dst.A) &&
-                        SP.parse(skip(digits, 1), out dst.B) &&
-                        SP.parse(skip(digits, 2), out dst.C) &&
-                        SP.parse(skip(digits, 3), out dst.D))
+                        SP.parse(base10, skip(digits, 0), out dst.A) &&
+                        SP.parse(base10, skip(digits, 1), out dst.B) &&
+                        SP.parse(base10, skip(digits, 2), out dst.C) &&
+                        SP.parse(base10, skip(digits, 3), out dst.D))
                         {
                             dst.Count = 4;
                             result = true;

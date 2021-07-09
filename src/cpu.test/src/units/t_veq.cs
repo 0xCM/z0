@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Typed;
+    using static Root;
 
     public class t_veq : t_inx<t_veq>
     {

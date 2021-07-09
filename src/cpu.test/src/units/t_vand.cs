@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Typed;
+    using static Root;
     using static core;
     using static cpu;
 

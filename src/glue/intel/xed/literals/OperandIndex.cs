@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
+// Copyright   : Intel Corporation, 2020
+// License     : Apache
 //-----------------------------------------------------------------------------
 namespace Z0
 {
@@ -9,9 +9,17 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost]
-    public static partial class Widths
+    partial struct XedModels
     {
-        const NumericKind Closure = UnsignedInts;
+        public enum OperandIndex : byte
+        {
+            Op0 = 0,
+
+            Op1 = 1,
+
+            Op2 = 2,
+
+            Op3 = 3
+        }
     }
 }

@@ -198,6 +198,6 @@ namespace Z0
 		/// Specifies the number of bits that can be placed in one segment
 		/// </summary>
 		public static ushort CellWidth
-			=> width<T>(Widths.w16);
+			=> width<T>(w16);
 	}
 }

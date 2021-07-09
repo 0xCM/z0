@@ -9,7 +9,6 @@
     using System.Collections.Generic;
 
     using static Root;
-    using static Widths;
 
     partial struct memory
     {

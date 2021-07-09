@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class t_bitspan_create : UnitTest<t_bitspan_create>
     {
@@ -366,7 +366,7 @@ namespace Z0
             {
                 var x = Random.BitVector<N,T>();
                 var y = x.ToBitSpan32();
-                Claim.eq(nat32i<N>(), x.Width);
+                Claim.eq(Typed.nat32i<N>(), x.Width);
                 Claim.eq(x.Width, y.Length);
                 for(var j=0; j<length; j++)
                     Claim.eq(x[j],y[j]);

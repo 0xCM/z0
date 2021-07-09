@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Typed;
+    using static Root;
+    using static core;
 
     public sealed class t_perm_ops : t_permute<t_perm_ops>
     {

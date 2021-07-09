@@ -4,7 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Typed;
+    using static Root;
+    using static core;
 
     public class t_vbroadcast : t_inx<t_vbroadcast>
     {

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Typed;
+    using static Root;
     using static AsmCodes;
 
     partial class AsmCmdService

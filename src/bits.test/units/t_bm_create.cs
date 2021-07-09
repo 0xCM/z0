@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static core;
-    using static Typed;
+    using static Root;
 
     public class t_bm_create : t_bits<t_bm_create>
     {

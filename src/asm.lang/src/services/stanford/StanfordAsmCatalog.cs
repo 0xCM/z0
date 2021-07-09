@@ -217,7 +217,7 @@ namespace Z0.Asm
             var i = 0;
             var cells = src.Cells;
             if(seq == null)
-                ScalarParser.parse(skip(cells,i++), out dst.Sequence);
+                ScalarParser.parse(base10, skip(cells,i++).Text, out dst.Sequence);
             else
                 dst.Sequence = seq.Value;
             dst.OpCode = skip(cells, i++);

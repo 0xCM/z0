@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static Root;
+
     public class t_vdec : t_inx<t_vdec>
     {
         public void vdec_check()

@@ -5,6 +5,7 @@
 namespace Z0
 {
     using static cpu;
+    using static Root;
 
     public class t_vmovemask : t_inx<t_vmovemask>
     {

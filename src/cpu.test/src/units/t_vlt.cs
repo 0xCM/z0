@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.Intrinsics;
-
-    using static Part;
+    using static Root;
 
     public class t_vlt : t_inx<t_vlt>
     {

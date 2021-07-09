@@ -39,7 +39,6 @@ namespace Z0
             return i != NotFound ? sys.substring(src, i + 1) : EmptyString;
         }
 
-
         [Op]
         public static string after(string src, string match)
         {

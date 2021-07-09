@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static Typed;
+    using static Root;
     using static Dimensions;
 
     partial class BitGrid

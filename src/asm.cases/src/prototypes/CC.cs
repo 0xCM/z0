@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
 
     using static core;
-    using static Typed;
+    using static Root;
 
     partial struct Prototypes
     {

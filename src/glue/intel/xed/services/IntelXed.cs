@@ -216,6 +216,9 @@ namespace Z0.Asm
         public Symbols<AddressWidth> AddressWidths()
             => Symbols.index<AddressWidth>();
 
+        public Symbols<OperandCategory> OperandTypes()
+            => Symbols.index<OperandCategory>();
+
         public Symbols<AttributeKind> AttributeKinds()
             => Symbols.index<AttributeKind>();
 

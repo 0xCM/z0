@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static BitMasks.Literals;
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
@@ -337,7 +337,7 @@ namespace Z0
             var t = default(T);
             var pn = n32;
 
-            Claim.eq(nat64u(pn), NatCalc.divT(w,t) * 2);
+            Claim.eq(Typed.nat64u(pn), NatCalc.divT(w,t) * 2);
 
             var left = gcpu.vinc(w, t);
             var right = gcpu.vadd(left, gmath.add(left.LastCell(), NumericLiterals.one<T>()));

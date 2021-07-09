@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static TextEncodings;
-
     partial struct Root
     {
         public static AsciPoints Asci => default;

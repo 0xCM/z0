@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static memory;
+    using static core;
 
     public class t_bb_extract : t_bits<t_bb_extract>
     {

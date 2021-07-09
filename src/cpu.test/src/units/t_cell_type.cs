@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Typed;
+    using static Root;
     using static core;
 
     public class t_cell_type : t_vectors<t_cell_type>

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class t_vgather : t_inx<t_vgather>
     {
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Interval<T> bounds<T>(uint n)
             where T : unmanaged
-                => (zero<T>(), Numeric.force<T>(n));
+                => (NumericLiterals.zero<T>(), Numeric.force<T>(n));
 
         public void vgather_check()
         {

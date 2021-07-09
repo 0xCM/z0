@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Typed;
+    using static Root;
     using static core;
 
     /// <summary>

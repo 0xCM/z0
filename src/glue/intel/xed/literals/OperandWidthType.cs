@@ -7,6 +7,9 @@ namespace Z0
 {
     partial struct XedModels
     {
+        /// <summary>
+        /// sources/xed/all-widths.txt
+        /// </summary>
         [SymSource(xed)]
         public enum OperandWidthType : byte
         {

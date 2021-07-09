@@ -5,129 +5,95 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
+    using static XedModels;
 
-    enum TableParserState : byte
+    using SQ = SymbolicQuery;
+    using SP = SymbolicParse;
+
+
+    public ref struct XedTableParser
     {
-        None,
+        public static XedTableParser create(IntelXed xed)
+            => new XedTableParser(xed);
 
-        ParsingInstruction,
+        IntelXed Xed;
 
-        ParsingOpCount,
+        Symbols<AttributeKind> Attributes;
 
-        ParsingOperand,
-    }
+        Symbols<Category> Categories;
 
-    public class XedTableParser : AppService<XedTableParser>
-    {
-        const char CommentMarker = Chars.Hash;
-
-        public bool ParseTables(FS.FilePath src)
+        public XedTableParser(IntelXed xed)
         {
-            using var reader = src.AsciLineReader();
-            var line = TextLine.Empty;
-            var seq = 0u;
-            var opcount = z8;
-            var succeeded = true;
-            var opseq = z8;
-            var state = TableParserState.ParsingInstruction;
-            var outcome = Outcome.Empty;
-            while(reader.Next(out line))
+            Xed = xed;
+            Attributes = xed.AttributeKinds();
+            Categories = xed.Categories();
+        }
+
+        public void Parse(FS.FilePath src)
+        {
+            using var reader = AsciLineReader.open(src);
+            var buffer = alloc<XedRuleTable>(Pow2.T13);
+            var dst = span(buffer);
+            var outcome = Outcome.Success;
+            var tables = 0u;
+            while(reader.Next(out var line))
             {
-                if(line.IsEmpty || line.StartsWith(CommentMarker))
+                if(line.IsEmpty)
                     continue;
 
-                if(state == TableParserState.ParsingOpCount)
+                var data = line.Codes;
+                for(var i=0; i<data.Length; i++)
                 {
-                    if(!byte.TryParse(line.Content.Trim(), out opcount))
-                    {
-                        Wf.Error(string.Format("Parsing operand count from {0} failed", line));
-                        succeeded = false;
+                    ref readonly var c = ref skip(data,i);
+                    if(SQ.hash(c))
                         break;
-                    }
-
-                    if(opcount != 0)
-                    {
-                        state = TableParserState.ParsingOperand;
-                    }
                 }
-                else if(state == TableParserState.ParsingOperand)
+
+                outcome = Parse(reader, ref seek(dst, tables++));
+                if(outcome.Fail)
                 {
-                    var _opseq = line.Content.Trim().LeftOfFirst(Chars.Space);
-                    if(!byte.TryParse(_opseq, out opseq))
-                    {
-                        Wf.Error(string.Format("Parsing operand sequence from {0} failed", line));
-                        succeeded = false;
-                        break;
-                    }
-
-                    outcome = default;
-                    if(!outcome)
-                    {
-                        Wf.Error(outcome.Message);
-                        succeeded = false;
-                        break;
-                    }
-
-                    if(opseq == opcount - 1)
-                    {
-                        state = TableParserState.ParsingInstruction;
-                    }
-                }
-                else if(state == TableParserState.ParsingInstruction)
-                {
-                    if(!line.StartsWith(seq.ToString()))
-                    {
-                        Wf.Error(string.Format("Parsing instruction sequence from {0} failed", line));
-                        succeeded = false;
-                        break;
-                    }
-
-                    outcome = default;
-                    if(!outcome)
-                    {
-                        Wf.Error(outcome.Message);
-                        succeeded = false;
-                        break;
-                    }
-
-                    state = TableParserState.ParsingOpCount;
-                    seq++;
-                }
-                else
-                {
-                    Wf.Error(string.Format("Invalid state {0}", state));
-                    succeeded = false;
                     break;
                 }
             }
-
-            return succeeded;
         }
+
+        Outcome Parse(AsciLineReader src, ref XedRuleTable dst)
+        {
+            var result = Outcome.Success;
+            while(src.Next(out var line))
+            {
+                if(line.IsEmpty)
+                    continue;
+
+                var data = line.Codes;
+                var length = data.Length;
+                var digits = SQ.digits(n16, base10, data);
+                if(digits.Length == 0)
+                    result = (false,"No digits found");
+                else
+                {
+                    SP.parse(base10, digits, out dst.Header.Sequence);
+                }
+            }
+
+
+            return result;
+        }
+
     }
-        /*
-            0 INVALID INVALID INVALID INVALID INVALID ATTRIBUTES:
-            0
-            1 FADD FADD_ST0_MEMmem32real X87_ALU X87 X87 ATTRIBUTES: NOTSX
-            3
-                0 REG0 IMPLICIT RW REG F80 ST(0)
-                1 MEM0 EXPLICIT R IMM_CONST F32
-                2 REG1 SUPPRESSED W REG INVALID X87STATUS
-            2 FADD FADD_ST0_X87 X87_ALU X87 X87 ATTRIBUTES: NOTSX
-            3
-                0 REG0 IMPLICIT RW REG F80 ST(0)
-                1 REG1 EXPLICIT R NT_LOOKUP_FN F80 X87
-                2 REG2 SUPPRESSED W REG INVALID X87STATUS
-            267 AND_LOCK AND_LOCK_MEMb_IMMb_82r4 LOGICAL BASE I86 ATTRIBUTES: BYTEOP HLE_ACQ_ABLE HLE_REL_ABLE LOCKED
-            3
-                0 MEM0 EXPLICIT RW IMM_CONST U8
-                1 IMM0 EXPLICIT R IMM_CONST U8
-                2 REG0 SUPPRESSED W NT_LOOKUP_FN INVALID RFLAGS
-            268 AND_LOCK AND_LOCK_MEMv_IMMb LOGICAL BASE I86 ATTRIBUTES: HLE_ACQ_ABLE HLE_REL_ABLE LOCKED SCALABLE
-            3
-                0 MEM0 EXPLICIT RW IMM_CONST INT
-                1 IMM0 EXPLICIT R IMM_CONST I8
-                2 REG0 SUPPRESSED W NT_LOOKUP_FN INVALID RFLAGS
-        */
+
+    /*
+    '{Sequence} {IClass} {IForm} {Category} {Extension} {Isa} ATTRIBUTES: (Attributes)*'
+    205 OR OR_MEMv_IMMb LOGICAL BASE I86 ATTRIBUTES: LOCKABLE SCALABLE
+    3
+        0 MEM0 | EXPLICIT | RW | IMM_CONST | INT
+        1 IMM0 | EXPLICIT | R | IMM_CONST | I8
+        2 REG0 | SUPPRESSED | W | NT_LOOKUP_FN | INVALID | RFLAGS
+
+    */
+
 }
