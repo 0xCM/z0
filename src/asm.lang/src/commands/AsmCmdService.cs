@@ -25,17 +25,41 @@ namespace Z0.Asm
 
         SymTypes _SymTypes;
 
+        ToolBase _Toolbase;
+
+        ToolId _Tool;
+
         public AsmCmdService()
         {
             CodeBuffer = Buffers.native(Pow2.T10);
             _NativeBuffer = Buffers.native(size<Amd64Context>());
             Arbiter = AsmCmdArbiter.start(_NativeBuffer);
             _SymTypes = Z0.SymTypes.Empty;
+            _Tool = ToolId.Empty;
+        }
+
+        ToolBase ToolBase()
+            => _Toolbase;
+
+        ToolId Tool()
+            => _Tool;
+
+        ToolId Tool(ToolId id)
+        {
+            _Tool = id;
+            return _Tool;
+        }
+
+        ToolBase ToolBase(string name, FS.FolderPath root)
+        {
+           _Toolbase.Configure(name,root);
+           return _Toolbase;
         }
 
         protected override void Initialized()
         {
             Workspace = Wf.AsmWorkspace();
+            _Toolbase = Wf.ToolBase("tools", FS.dir(@"C:\Dev\tooling\tools"));
         }
 
         protected override void Disposing()

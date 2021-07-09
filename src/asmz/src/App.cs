@@ -144,11 +144,6 @@ namespace Z0.Asm
             var packs = hex.LoadParsed(pack.HexPackRoot());
         }
 
-        public void RunOldXedWf()
-        {
-            var xed = XedRules.create(Wf);
-            xed.Import();
-        }
 
         public void UnpackRespack()
         {

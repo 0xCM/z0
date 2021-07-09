@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
@@ -15,6 +14,5 @@ namespace Z0
         public CharBlock16 GroupName;
 
         public CharBlock64 Description;
-
     }
 }

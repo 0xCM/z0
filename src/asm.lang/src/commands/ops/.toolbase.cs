@@ -6,12 +6,11 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".xed-emit-cat")]
-        Outcome EmitXedCatalog(CmdArgs args)
+        [CmdOp(".toolbase")]
+        Outcome SelectToolbase(CmdArgs args)
         {
-            Wf.IntelXed().EmitCatalog();
+            ToolBase(arg(args,0).Value, FS.dir(arg(args,1).Value));
             return true;
         }
-
     }
 }

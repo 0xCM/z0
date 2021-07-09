@@ -6,12 +6,13 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".xed-emit-cat")]
-        Outcome EmitXedCatalog(CmdArgs args)
+        [CmdOp(".xed-emit-inst")]
+        public Outcome RunOldXedWf(CmdArgs args)
         {
-            Wf.IntelXed().EmitCatalog();
+            // var importer = XedRules.create(Wf);
+            // var dst = Workspace.ImportDir(xed) + FS.file("instructions", FS.Txt);
+            // importer.EmitInstructions(dst);
             return true;
         }
-
     }
 }

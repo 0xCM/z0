@@ -244,5 +244,11 @@ namespace Z0
         /// Defines the 'def' literal
         /// </summary>
         public const string def = nameof(def);
+
+        /// <summary>
+        /// Defines the 'help' literal
+        /// </summary>
+        public const string help = nameof(help);
+
     }
 }

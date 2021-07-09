@@ -31,11 +31,32 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal ToolBase Configure(CharBlock16 name, FS.FolderPath root)
+        public ToolBase Configure(CharBlock16 name, FS.FolderPath root)
         {
             Name = name;
             Root = root;
             return this;
+        }
+
+        public FS.FolderPath ToolDir(ToolId tool)
+            => Root + FS.folder(tool.Format());
+
+        public FS.FolderPath ToolDocs(ToolId tool)
+            => ToolDir(tool) + FS.folder("docs");
+
+        public FS.FolderPath ToolBin(ToolId tool)
+            => ToolDir(tool) + FS.folder("bin");
+
+        public FS.FilePath ToolExe(ToolId tool)
+            => ToolBin(tool) + FS.file(tool.Format(), FS.Exe);
+
+        public FS.FilePath ToolCmd(ToolId tool)
+            => ToolBin(tool) + FS.file(tool.Format(), FS.Cmd);
+
+        public FS.FilePath HelpFile(ToolId tool)
+        {
+            var match = FS.file(tool.Format());
+            return ToolDir(tool).Files(FS.ext("help")).Where(f => f.FileName.WithoutExtension.Equals(match)).FirstOrDefault();
         }
 
         public Outcome WithTool(in ToolInfo src)
