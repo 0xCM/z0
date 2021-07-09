@@ -8,7 +8,7 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static AppErrorMsg;
+    using static ErrorMsg;
 
     using api = ClaimValidator;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;

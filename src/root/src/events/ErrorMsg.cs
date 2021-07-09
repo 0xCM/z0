@@ -15,8 +15,12 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     [ApiHost]
-    public static class AppErrorMsg
+    public static class ErrorMsg
     {
+        [MethodImpl(Inline), Op]
+        public static string FormatCallsite(string caller, string file, int? line)
+            => string.Format("{0} {1}:line {2}", caller, file, line);
+
         [Op]
         public static AppMsg FeatureUnsupported(object feature, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Fail($"Unsupported: {feature}", caller, file, line);
@@ -105,7 +109,7 @@ namespace Z0
 
         [Op]
         public static AppMsg InvariantFailure(object description, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Fail(description?.ToString() ?? "An required invariant was unsatisfied", caller,file,line);
+            => Fail(description?.ToString() ?? "An invariant was unsatisfied", caller, file, line);
 
         [Op]
         public static AppMsg InvariantFailure([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -129,6 +133,6 @@ namespace Z0
 
         [Op, MethodImpl(Inline)]
         static AppMsg Fail(string msg, string caller, string file, int? line)
-            => AppMsg.define($"{msg}; caller:{caller}; line:{line ?? 0}; file:{file}", LogLevel.Error);
+            => AppMsg.define($"{msg}; {FormatCallsite(caller,file,line)}", LogLevel.Error);
     }
 }

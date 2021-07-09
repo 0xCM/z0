@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
 
+    using static Intervals;
+
     public class t_partition : t_gmath<t_partition>
     {
         public void part_points_32i()
@@ -48,7 +50,7 @@ namespace Z0
 
         public void part0()
         {
-            var src = Interval.closed(5,12);
+            var src = closed(5,12);
             var dst = Partition.measured(src,1);
             var fmt = dst.Map(x => x.ToString()).Join(", ");
             Claim.eq(src.Length() + 1, dst.Length);
@@ -57,38 +59,44 @@ namespace Z0
 
         public void part1()
         {
-            var src = Interval.closed(5,20);
+            var src = closed(5,20);
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Join(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(Interval.lclosed(5,6), dst.First());
-            Claim.eq(Interval.lclosed(19,20), dst.Last());
+
+            var x = lclosed(5,6);
+            var y = new Interval<int>(5, true, 6, false);
+            Claim.eq(x,y);
+            Claim.eq("[5,6)", x.ToString());
+            Claim.eq("[5,6)", y.ToString());
+
+            Claim.eq(lclosed(5,6), dst.First());
+            Claim.eq(closed(19,20), dst.Last());
         }
 
         public void part2()
         {
-            var src = Interval.closed(5,20);
+            var src = closed(5,20);
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Join(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(Interval.lclosed(5,6), dst.First());
-            Claim.eq(Interval.closed(19,20), dst.Last());
+            Claim.eq(lclosed(5,6), dst.First());
+            Claim.eq(closed(19,20), dst.Last());
         }
 
         public void part3()
         {
-            var src = Interval.open(5,20);
+            var src = open(5,20);
             var dst = Partition.width(src,1);
             var fmt = dst.Map(x => x.ToString()).Join(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
-            Claim.eq(Interval.open(5,6), dst.First());
-            Claim.eq(Interval.lclosed(19,20), dst.Last());
+            Claim.eq(open(5,6), dst.First());
+            Claim.eq(lclosed(19,20), dst.Last());
         }
-
 
         public void part4()
         {
-            var src = Interval.rclosed(1,100);
+            var src = rclosed(1,100);
             var dst = Partition.measured(src,10);
             Claim.eq(10,dst.Length);
             Claim.eq(1, dst.First());
@@ -97,7 +105,7 @@ namespace Z0
 
         public void part6()
         {
-            var src = Interval.closed(1,103);
+            var src = closed(1,103);
             var dst = Partition.width(src,13);
             var fmt = dst.Map(x => x.Format()).Join(" + ");
             Claim.require(dst.Last().Closed);
@@ -106,7 +114,7 @@ namespace Z0
         protected void points_check<T>(T min, T max, T width)
             where T : unmanaged, IComparable<T>, IEquatable<T>
         {
-            var points = Partition.measured(Interval.open(min, max), width);
+            var points = Partition.measured(open(min, max), width);
             var len = gmath.sub(max,min);
             var deltaSum = Numeric.zero<T>();
             for(var i=0; i<points.Length - 1; i++)

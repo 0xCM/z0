@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Defines the matrix api surface
@@ -110,7 +110,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolySource random, Interval<T> domain, ref Block256<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(domain, nat32i<N>(), ref vector.Unsized[0]);
+                => random.Fill<T>(domain, Typed.nat32i<N>(), ref vector.Unsized[0]);
 
         /// <summary>
         /// Populates a vector of natural length with random values from the source
@@ -124,7 +124,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolySource random, ref Block256<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(nat32i<N>(), ref vector.Unsized[0]);
+                => random.Fill<T>(Typed.nat32i<N>(), ref vector.Unsized[0]);
 
         /// <summary>
         /// Produces a generic vector
@@ -172,7 +172,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var dst = Z0.RowVectors.alloc<N,T>();
-            random.Fill(Interval.closed(min,max), ref dst);
+            random.Fill(Intervals.closed(min,max), ref dst);
             return dst;
         }
 
@@ -235,7 +235,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolySource random, Interval<T> domain, ref RowVector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(domain, nat32i<N>(), ref vector.Storage[0]);
+                => random.Fill<T>(domain, Typed.nat32i<N>(), ref vector.Storage[0]);
 
         /// <summary>
         /// Populates a vector of natural length with random values from the source
@@ -249,7 +249,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolySource random, ref RowVector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(memory.nat32i<N>(), ref vector.Storage[0]);
+                => random.Fill<T>(Typed.nat32i<N>(), ref vector.Storage[0]);
 
         /// <summary>
         /// Effects a component-wise contraction on the source vector on a source vector of unsigned primal type,

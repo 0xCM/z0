@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public static class Markovian
     {
@@ -22,9 +22,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                random.MarkovSpan(memory.float32(dst));
+                random.MarkovSpan(float32(dst));
             else if(typeof(T) == typeof(double))
-                random.MarkovSpan(memory.float64(dst));
+                random.MarkovSpan(float64(dst));
             else
                 throw no<T>();
         }
@@ -84,7 +84,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var n = nat64u<N>();
+            var n = Typed.nat64u<N>();
             var data = SpanBlocks.alloc<T>(n256, n, n);
             for(var row=0u; row < n; row++)
                 random.MarkovSpan<T>(data.Slice((int)(row*n), (int)n));
@@ -96,7 +96,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var data = dst.Unsized;
-            var n = nat64u<N>();
+            var n = Typed.nat64u<N>();
             for(var row=0u; row < n; row++)
                 random.MarkovSpan<T>(data.Slice((int)(row*n), (int)n));
             return ref dst;
@@ -114,7 +114,7 @@ namespace Z0
             where T : unmanaged
         {
             var tol = .001;
-            var radius = Interval.closed(1 - tol,1 + tol);
+            var radius = Intervals.closed(1 - tol,1 + tol);
             for(var r = 0; r < (int)n.NatValue; r ++)
             {
                 var row = src.Row(r);
@@ -129,7 +129,7 @@ namespace Z0
         static void MarkovSpan(this IPolyrand random, Span<float> dst)
         {
             var length = dst.Length;
-            random.Fill(Interval.closed(1.0f,length << 4), length, ref dst[0]);
+            random.Fill(Intervals.closed(1.0f,length << 4), length, ref dst[0]);
             gAlg.fdiv(dst, dst.Avg()*length);
         }
 
@@ -137,7 +137,7 @@ namespace Z0
         static void MarkovSpan(this IPolyrand random, Span<double> dst)
         {
             var length = dst.Length;
-            random.Fill(Interval.closed(1.0, length << 4), length, ref dst[0]);
+            random.Fill(Intervals.closed(1.0, length << 4), length, ref dst[0]);
             gAlg.fdiv(dst, dst.Avg()*length);
         }
 
@@ -145,7 +145,7 @@ namespace Z0
         static RowVector256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
         {
             var dst = Z0.SpanBlocks.alloc<float>(n256, (uint)CellCalcs.blockcount<float>(n256, length));
-            random.Fill(Interval.closed(min,max), length, ref dst[0]);
+            random.Fill(Intervals.closed(min,max), length, ref dst[0]);
             gAlg.fdiv(dst.Storage, dst.Storage.Avg() * length);
             return dst;
         }
@@ -154,7 +154,7 @@ namespace Z0
         static RowVector256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
         {
             var dst = Z0.SpanBlocks.alloc<double>(n256, (uint)CellCalcs.blockcount<double>(n256, length));
-            random.Fill(Interval.closed(min,max), length, ref dst[0]);
+            random.Fill(Intervals.closed(min,max), length, ref dst[0]);
             gAlg.fdiv(dst.Storage, dst.Storage.Avg() * length);
             return dst;
         }

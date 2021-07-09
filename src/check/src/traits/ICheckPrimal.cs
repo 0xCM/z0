@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static AppErrorMsg;
+    using static ErrorMsg;
 
     using api = PrimalClaims;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;

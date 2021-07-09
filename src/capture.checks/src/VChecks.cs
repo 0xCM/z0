@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static AppErrorMsg;
+    using static ErrorMsg;
     using static ClaimResult;
 
     [ApiHost]

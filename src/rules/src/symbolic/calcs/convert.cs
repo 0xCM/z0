@@ -12,6 +12,7 @@ namespace Z0
 
     readonly partial struct SymbolicCalcs
     {
+        [MethodImpl(Inline), Op]
         public static uint convert(ReadOnlySpan<AsciCode> src, Span<char> dst)
         {
             var count = (uint)min(src.Length, dst.Length);
@@ -20,6 +21,7 @@ namespace Z0
             return count;
         }
 
+        [MethodImpl(Inline), Op]
         public static uint convert(ReadOnlySpan<char> src, Span<AsciCode> dst)
         {
             var count = (uint)min(src.Length, dst.Length);

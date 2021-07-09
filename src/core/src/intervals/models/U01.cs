@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a unit interval
@@ -18,13 +19,13 @@ namespace Z0
         public T Left
         {
             [MethodImpl(Inline)]
-            get => NumericLiterals.zero<T>();
+            get => zero<T>();
         }
 
         public T Right
         {
             [MethodImpl(Inline)]
-            get => NumericLiterals.one<T>();
+            get => one<T>();
         }
 
         [MethodImpl(Inline)]

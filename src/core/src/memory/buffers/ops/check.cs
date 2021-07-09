@@ -18,7 +18,7 @@ namespace Z0
             var srcSize = src.Length;
             var dstSize = dst.BufferSize;
             if(src.Length > dst.BufferSize)
-                Errors.@throw("The buffer is too small");
+                Errors.Throw("The buffer is too small");
         }
 
         [Op]
@@ -28,7 +28,7 @@ namespace Z0
             var srcSize = src.Length;
             var dstSize = dst.BufferSize;
             if(src.Length > dst.BufferSize)
-                Errors.@throw("The buffer is too small");
+                Errors.Throw("The buffer is too small");
         }
     }
 }

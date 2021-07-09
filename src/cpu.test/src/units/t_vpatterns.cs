@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static Root;
+    using static core;
+
     public class t_vpatterns : t_inx<t_vpatterns>
     {
         public void vunits_check()
@@ -68,18 +71,18 @@ namespace Z0
 
         void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(Calcs.vunits(w,t), gcpu.vbroadcast(w, NumericLiterals.one<T>()));
+                => CheckSVF.CheckPattern(Calcs.vunits(w,t), gcpu.vbroadcast(w, one<T>()));
 
         void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(Calcs.vunits(w,t), gcpu.vbroadcast(w, NumericLiterals.one<T>()));
+                => CheckSVF.CheckPattern(Calcs.vunits(w,t), gcpu.vbroadcast(w, one<T>()));
 
         void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(Calcs.vones(w,t), gcpu.vbroadcast(w, NumericLiterals.ones<T>()));
+                => CheckSVF.CheckPattern(Calcs.vones(w,t), gcpu.vbroadcast(w, ones<T>()));
 
         void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(Calcs.vones(w,t), gcpu.vbroadcast(w, NumericLiterals.ones<T>()));
+                => CheckSVF.CheckPattern(Calcs.vones(w,t), gcpu.vbroadcast(w, ones<T>()));
    }
 }

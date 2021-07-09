@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Part;
+    using static Root;
 
     public class t_vnonz : t_inx<t_vnonz>
     {
@@ -45,7 +45,7 @@ namespace Z0
         {
             var min = NumericLiterals.one<T>();
             var max = Limits.maxval(t);
-            var domain = Interval.closed(NumericLiterals.one<T>(), Limits.maxval<T>());
+            var domain = Intervals.closed(NumericLiterals.one<T>(), Limits.maxval<T>());
             var f = Calcs.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero(w,t)));
@@ -59,7 +59,7 @@ namespace Z0
         {
             var min = NumericLiterals.one<T>();
             var max = Limits.maxval(t);
-            var domain = Interval.closed(NumericLiterals.one<T>(), Limits.maxval<T>());
+            var domain = Intervals.closed(NumericLiterals.one<T>(), Limits.maxval<T>());
             var f = Calcs.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero<T>(w)));

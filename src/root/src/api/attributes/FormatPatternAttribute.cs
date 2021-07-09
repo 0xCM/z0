@@ -6,9 +6,10 @@ namespace Z0
 {
     using System;
 
-    public class FormatAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
+    public class FormatPatternAttribute : Attribute
     {
-        public FormatAttribute(string pattern)
+        public FormatPatternAttribute(string pattern)
         {
             Pattern = pattern;
         }

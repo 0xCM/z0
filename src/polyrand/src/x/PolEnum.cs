@@ -8,6 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+
     partial class XSource
     {
         /// <summary>
@@ -19,7 +20,7 @@ namespace Z0
             where E : unmanaged, Enum
         {
             var names = Enum.GetNames(typeof(E)).Mapi((index, name) => (index, name)).ToDictionary();
-            var domain = Z0.Interval.closed(0, names.Count);
+            var domain = Z0.Intervals.closed(0, names.Count);
             var stream = src.Stream(domain);
 
             while(true)
@@ -48,7 +49,7 @@ namespace Z0
             var excluded = exclusions.Select(x => x.ToString()).ToHashSet();
             var available = Enum.GetNames(typeof(E)).Where(n => !excluded.Contains(n)).ToArray();
             var names = available.Mapi((index, name) => (index, name)).ToDictionary();
-            var stream = src.Stream(Z0.Interval.closed(0, names.Count));
+            var stream = src.Stream(Z0.Intervals.closed(0, names.Count));
             var query = from item in stream select Enums.parse<E>(names[item]).Value;
             return query;
         }

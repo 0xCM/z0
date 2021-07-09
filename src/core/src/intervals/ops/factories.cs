@@ -10,24 +10,19 @@ namespace Z0
     using static Root;
     using static IntervalKind;
 
-    /// <summary>
-    /// Defines interval manipulation api
-    /// </summary>
-    [ApiHost]
-    public readonly struct Interval
+    partial struct Intervals
     {
-        const NumericKind Closure = UnsignedInts;
-
         /// <summary>
-        /// Defines an open interval (min,max)
+        /// Defines an interval of specified sort
         /// </summary>
-        /// <param name="min">The exclusive left endpoint</param>
-        /// <param name="max">The exclusive right endpoint</param>
-        /// <typeparam name="T">The numeric type over which the interval is defined</typeparam>
+        /// <param name="min">The left endpoint</param>
+        /// <param name="max">The right endpoint</param>
+        /// <param name="kind">The interval kind</param>
+        /// <typeparam name="T"></typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Interval<T> open<T>(T min, T max)
+        public static Interval<T> define<T>(T min, T max, IntervalKind kind)
             where T : unmanaged
-                => new Interval<T>(min,max, Open);
+                => new Interval<T>(min, max, kind);
 
         /// <summary>
         /// Defines a closed interval [min,max]
@@ -43,33 +38,32 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Interval<T> lopen<T>(T min, T max)
             where T : unmanaged
-                => new Interval<T>(min, max, IntervalKind.LeftOpen);
+                => new Interval<T>(min, max, LeftOpen);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Interval<T> ropen<T>(T min, T max)
             where T : unmanaged
-                => new Interval<T>(min, max, IntervalKind.RightOpen);
+                => new Interval<T>(min, max, RightOpen);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Interval<T> lclosed<T>(T min, T max)
             where T : unmanaged
-                => new Interval<T>(min, max, IntervalKind.LeftClosed);
+                => new Interval<T>(min, max, LeftClosed);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Interval<T> rclosed<T>(T min, T max)
             where T : unmanaged
-                => new Interval<T>(min, max, IntervalKind.RightClosed);
+                => new Interval<T>(min, max, RightClosed);
 
         /// <summary>
-        /// Defines an interval of specified sort
+        /// Defines an open interval (min,max)
         /// </summary>
-        /// <param name="min">The left endpoint</param>
-        /// <param name="max">The right endpoint</param>
-        /// <param name="kind">The interval kind</param>
-        /// <typeparam name="T"></typeparam>
+        /// <param name="min">The exclusive left endpoint</param>
+        /// <param name="max">The exclusive right endpoint</param>
+        /// <typeparam name="T">The numeric type over which the interval is defined</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Interval<T> define<T>(T min, T max, IntervalKind kind)
+        public static Interval<T> open<T>(T min, T max)
             where T : unmanaged
-                => new Interval<T>(min, max, kind);
+                => new Interval<T>(min,max, Open);
     }
 }

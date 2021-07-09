@@ -385,7 +385,7 @@ namespace Z0
                 var random = machine.Random;
                 var o = Fsm.observer(machine, ObserverTrace.Completions | ObserverTrace.Errors);
                 var events = machine.Triggers.ToArray();
-                var domain = Interval.closed(0, events.Length);
+                var domain = Intervals.closed(0, events.Length);
                 var eventstream = random.Stream(domain).Select(i => events[i]);
                 machine.Start();
                 while(!machine.Finished)

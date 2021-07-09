@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AppErrorMsg;
+    using static ErrorMsg;
     using static CheckLengths;
     using static CheckInvariant;
     using static ClaimValidator;
@@ -88,6 +88,7 @@ namespace Z0
                 if(a[i] != b[i])
                     throw failed(ClaimKind.Eq, ItemsNotEqual(i, a[i], b[i], caller, file, line));
         }
+
 
         /// <summary>
         /// Asserts content equality for two character spans

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static AppErrorMsg;
+    using static ErrorMsg;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;

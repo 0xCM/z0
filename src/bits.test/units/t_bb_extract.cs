@@ -8,14 +8,15 @@ namespace Z0
     using System.Linq;
 
     using static core;
+    using static Intervals;
 
     public class t_bb_extract : t_bits<t_bb_extract>
     {
         public void bb_extract_64()
         {
             var src = Random.Stream<ulong>().Take(RepCount).ToArray();
-            var lower = Random.Stream(Interval.closed<byte>(0,32)).Take(RepCount).ToArray();
-            var upper = Random.Stream(Interval.closed<byte>(32,64)).Take(RepCount).ToArray();
+            var lower = Random.Stream(closed<byte>(0,32)).Take(RepCount).ToArray();
+            var upper = Random.Stream(closed<byte>(32,64)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
                 var v1 = SpanBlocks.literals(n256,src[i]);
@@ -40,8 +41,8 @@ namespace Z0
         public void bb_extract_32()
         {
             var src = Random.Stream<uint>().Take(RepCount).ToArray();
-            var lower = Random.Stream(Interval.closed<byte>(0,16)).Take(RepCount).ToArray();
-            var upper = Random.Stream(Interval.closed<byte>(16,32)).Take(RepCount).ToArray();
+            var lower = Random.Stream(closed<byte>(0,16)).Take(RepCount).ToArray();
+            var upper = Random.Stream(closed<byte>(16,32)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
                 var v1 = SpanBlocks.literals(n256,src[i]);
@@ -57,8 +58,8 @@ namespace Z0
         public void bb_extract_16()
         {
             var src = Random.Stream<ushort>().Take(RepCount).ToArray();
-            var lower = Random.Stream(Interval.closed<byte>(0,8)).Take(RepCount).ToArray();
-            var upper = Random.Stream(Interval.closed<byte>(8,16)).Take(RepCount).ToArray();
+            var lower = Random.Stream(closed<byte>(0,8)).Take(RepCount).ToArray();
+            var upper = Random.Stream(closed<byte>(8,16)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
                 var v1 = SpanBlocks.literals(n256,src[i]);

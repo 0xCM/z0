@@ -7,8 +7,8 @@ namespace Z0
     using System;
 
     using static Root;
-    using static Typed;
     using static core;
+    using static Intervals;
 
     public class t_vpop : t_inx<t_vpop>
     {
@@ -101,8 +101,8 @@ namespace Z0
 
             void check()
             {
-                var zed = root.zero<T>();
-                var src = Random.SpanBlocks<T>(w, Interval.closed(zed, Numeric.maxval(t)),3);
+                var zed = zero<T>();
+                var src = Random.SpanBlocks<T>(w, closed(zed, Limits.maxval<T>()),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 
@@ -127,7 +127,7 @@ namespace Z0
             void check()
             {
                 var zed = default(T);
-                var src = Random.SpanBlocks<T>(w, Interval.closed(zed, Numeric.maxval(t)),3);
+                var src = Random.SpanBlocks<T>(w, closed(zed, Numeric.maxval(t)),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 

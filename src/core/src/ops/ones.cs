@@ -8,19 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    partial struct Intervals
+    partial struct core
     {
         /// <summary>
-        /// Defines an open interval (min,max)
+        /// Ones all bits each and every ... one
         /// </summary>
-        /// <param name="min">The exclusive left endpoint</param>
-        /// <param name="max">The exclusive right endpoint</param>
-        /// <typeparam name="T">The numeric type over which the interval is defined</typeparam>
+        /// <param name="t">A primal type representative</param>
+        /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Interval<T> open<T>(T min, T max)
+        public static T ones<T>()
             where T : unmanaged
-                => new Interval<T>(min,max, IntervalKind.Open);
+                => NumericLiterals.ones<T>();
     }
 }

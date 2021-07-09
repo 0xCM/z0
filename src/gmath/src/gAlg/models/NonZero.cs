@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     public readonly struct NonZero<T> : INonZero<NonZero<T>,T>, IEquatable<T>
         where T : unmanaged
@@ -17,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NonZero(T value)
         {
-            Value = gmath.nonz(value) ? value : NumericLiterals.ones<T>();
+            Value = gmath.nonz(value) ? value : ones<T>();
         }
 
         [MethodImpl(Inline)]

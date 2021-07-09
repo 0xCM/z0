@@ -11,9 +11,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    /// <summary>
-    /// Defines a <see cref='Partition{T}'/> segment
-    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct PartitionSegment<T>
         where T : unmanaged

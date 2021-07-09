@@ -20,7 +20,7 @@ namespace Z0
         public static Histogram<T> histogram<T>()
             where T : unmanaged, IComparable<T>
         {
-            var domain = Intervals.closed(Limits.minval<T>(), Limits.maxval<T>());
+            var domain = new ClosedInterval<T>(Limits.minval<T>(), Limits.maxval<T>());
             var grain = domain.Width;
             return histogram<T>(domain, generic<T>(domain.Width));
         }
@@ -30,7 +30,7 @@ namespace Z0
             where T : unmanaged, IComparable<T>
         {
             var parts = Intervals.partition(src,grain);
-            var counts = sys.alloc<uint>(parts.Length);
+            var counts = alloc<uint>(parts.Length);
             return new Histogram<T>(src, grain, parts, counts);
         }
     }

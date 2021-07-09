@@ -56,7 +56,7 @@ namespace Z0
         static IEnumerable<T> forever<T>(IDomainSource src, ClosedInterval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => filter != null
-                ? some(src, Interval.closed(domain.Min, domain.Max), filter)
+                ? some(src, Intervals.closed(domain.Min, domain.Max), filter)
                 : forever(src, domain);
 
         [Op, Closures(Closure)]

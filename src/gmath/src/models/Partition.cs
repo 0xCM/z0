@@ -8,6 +8,7 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static IntervalKind;
 
     public partial class Partition
     {
@@ -63,16 +64,16 @@ namespace Z0
                 var right = points[i + 1];
                 if(i == 0)
                     if(src.Open || src.LeftOpen)
-                        dst[i] =  model.New(left,right, IntervalKind.Open);
+                        dst[i] =  model.New(left,right, Open);
                     else
-                        dst[i] = model.New(left,right, IntervalKind.LeftClosed);
+                        dst[i] = model.New(left,right, LeftClosed);
                 else if(i == lastCycleIx)
                     if(src.Closed || src.RightClosed)
-                        dst[i] = model.New(left,right, IntervalKind.Closed);
+                        dst[i] = model.New(left,right, Closed);
                     else
-                        dst[i] = model.New(left,right, IntervalKind.LeftClosed);
+                        dst[i] = model.New(left,right, LeftClosed);
                 else
-                    dst[i] = model.New(left,right, IntervalKind.LeftClosed);
+                    dst[i] = model.New(left,right, LeftClosed);
             }
             return dst;
         }

@@ -35,7 +35,7 @@ namespace Z0
         [Op, Closures(AllNumeric)]
         public static T convert<T>(BoxedNumber src)
             where T : unmanaged
-                => (T)typeof(T).NumericKind().Rebox(src);
+                => (T)typeof(T).NumericKind().Rebox(src.Boxed);
 
         /// <summary>
         /// Puts an enum value into a (numeric) box

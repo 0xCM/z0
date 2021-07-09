@@ -83,7 +83,7 @@ namespace Z0
                     break;
 
                 default:
-                    Errors.@throw(string.Format("The content type {0} was not anticipated",contentType));
+                    Errors.Throw(string.Format("The content type {0} was not anticipated",contentType));
                     break;
             }
 

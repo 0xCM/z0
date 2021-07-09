@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static core;
+
     public class t_lsboff : t_bits<t_lsboff>
     {
         public void lsboff_8()
@@ -25,7 +27,7 @@ namespace Z0
             {
                 var a = Random.Next<T>();
                 var b0 = gbits.lsboff(a);
-                var b1 = gmath.and(gmath.sub(a, NumericLiterals.one<T>()), a);
+                var b1 = gmath.and(gmath.sub(a, one<T>()), a);
                 Claim.eq(b0, b1);
             }
         }

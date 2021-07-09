@@ -14,58 +14,65 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
+    [ApiHost]
     public readonly struct Errors
     {
+        [Op, Closures(UnsignedInts)]
+        public static T ThrowOrigin<T>([Caller] string caller = null, [File] string file = null, [Line]int? line = null)
+            => throw originate(caller, file, line);
+
         [Op]
-        public static void @throw(string msg)
+        static AppException originate([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new AppException(AppMsg.error("Mystery Error", caller, file, line));
+
+        [Op]
+        public static void Throw(string msg)
             => throw new Exception(msg);
 
         [Op]
-        public static void @throw(string msg, string caller, int? line, string path)
-            => throw new Exception(string.Format("{0}:{1} {2} {3}",msg, caller, line, path));
+        public static void Throw(string msg, string caller, int? line, string path)
+            => throw new Exception(string.Format("{0} | {2}", msg, ErrorMsg.FormatCallsite(caller, path, line)));
 
-
-        public static T @throw<T>(object msg)
+        [Op, Closures(UnsignedInts)]
+        public static T Throw<T>(object msg)
             => throw new Exception(msg?.ToString() ?? EmptyString);
 
         [Op]
-        public static void @throw(Exception e)
+        public static void Throw(Exception e)
+            => throw e;
+
+        [Op, Closures(UnsignedInts)]
+        public static T Throw<T>(Exception e)
             => throw e;
 
         [Op]
-        public static void @throw(object e)
+        public static void Throw(object e)
             => throw new Exception($"{e}");
 
         [Op]
-        public static void @throw(Func<string> f)
+        public static void Throw(Func<string> f)
             => throw new Exception(f());
 
-        public static T @throw<T>(Exception e)
-            => throw e;
+
+        [Op]
+        public static void Throw(object reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw AppException.define(reason, caller, file, line);
 
         [Op]
         public static void ThrowArgNull(object arg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Errors.@throw(ArgNull(arg,caller,file,line));
+            => Throw(ArgNull(arg,caller,file,line));
 
         [Op]
         public static void ThrowBadSize(int expect, int actual, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Errors.@throw(new Exception($"The size {actual} is not aligned with {expect}:{FormatCallsite(caller,file,line)}"));
+            => Throw(new Exception($"The size {actual} is not aligned with {expect}:{ErrorMsg.FormatCallsite(caller,file,line)}"));
 
-
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void ThrowEmptySpan()
-            => Errors.@throw($"The span, it is empty");
+            => Throw($"The span, it is empty");
 
-        const string Unknown = "???";
-
-        const int UnknownInt = -1;
 
         [Op]
         static ArgumentNullException ArgNull(object arg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new ArgumentNullException((arg?.ToString() ?? string.Empty) + FormatCallsite(caller, file,line));
-
-        [MethodImpl(Inline), Op]
-        static string FormatCallsite(string caller, string file, int? line)
-            => $"line {line ?? UnknownInt}, member {caller ?? Unknown} in file {file ?? Unknown}";
+            => new ArgumentNullException((arg?.ToString() ?? string.Empty) + ErrorMsg.FormatCallsite(caller, file,line));
     }
 }

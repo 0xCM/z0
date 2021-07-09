@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     public class t_tablespan : UnitTest<t_tablespan>
     {
@@ -19,7 +20,7 @@ namespace Z0
 
             for(var rep=0; rep<RepCount; rep++)
             {
-                var src = Random.TableSpan(n4, n3, Interval.closed(1,1000));
+                var src = Random.TableSpan(n4, n3, Intervals.closed(1,1000));
                 Claim.eq(src.Dim.I, m);
                 Claim.eq(src.Dim.J, n);
 
@@ -40,7 +41,7 @@ namespace Z0
 
             for(var rep=0; rep<RepCount; rep++)
             {
-                var src = Random.TableSpan(m, n, Interval.closed(1,1000));
+                var src = Random.TableSpan(m, n, Intervals.closed(1,1000));
                 Claim.eq(src.Dim.I, m);
                 Claim.eq(src.Dim.J, n);
 

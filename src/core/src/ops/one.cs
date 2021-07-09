@@ -9,17 +9,11 @@ namespace Z0
 
     using static Root;
 
-    partial struct Intervals
+    partial struct core
     {
-        /// <summary>
-        /// Defines a closed interval
-        /// </summary>
-        /// <param name="min">The inclusive lower bound</param>
-        /// <param name="max">The inclusive upper bound</param>
-        /// <typeparam name="T">The interval domain</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ClosedInterval<T> closed<T>(T min, T max)
+        public static T one<T>()
             where T : unmanaged
-                => new ClosedInterval<T>(min,max);
+                => NumericLiterals.one<T>();
     }
 }

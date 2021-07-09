@@ -31,7 +31,7 @@ namespace Z0
                 if(math.between( i % 6,3,5))
                     expect[i] = Bit32.On;
 
-            Claim.eq(expect.Content,actual.Content);
+            Claim.eq(expect.Content, actual.Content);
         }
 
         public void replicate_64u()

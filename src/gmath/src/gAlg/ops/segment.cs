@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClosedInterval<T> segment<T>(in Histogram<T> src, uint index)
             where T : unmanaged, IComparable<T>
-                => Intervals.closed(point(src, index-1), point(src, index));
+                => (point(src, index-1), point(src, index));
     }
 }

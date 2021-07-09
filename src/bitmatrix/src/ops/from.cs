@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged
         {
             if(src.RowCount != width<T>())
-                AppErrors.Throw($"{width<T>()} != {src.RowCount}");
+                Errors.Throw($"{width<T>()} != {src.RowCount}");
 
             return load(src.Storage);
         }

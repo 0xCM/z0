@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Ltz, Closures(Integers)]
         public static T ltz<T>(T a, T b)
             where T : unmanaged
-                => gmath.mul(NumericCast.force<T>((uint)gmath.lt(a,b)), NumericLiterals.ones<T>());
+                => gmath.mul(NumericCast.force<T>((uint)gmath.lt(a,b)), core.ones<T>());
     }
 }

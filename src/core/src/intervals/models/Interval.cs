@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         public static Interval<T> U01
-            => new Interval<T>(NumericLiterals.zero<T>(), NumericLiterals.one<T>(), K.Closed);
+            => new Interval<T>(zero<T>(), one<T>(), K.Closed);
 
         /// <summary>
         /// Defines a closed interval that subsumes all points representable by the primal type

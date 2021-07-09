@@ -148,7 +148,7 @@ namespace Z0
                     y[i] = r % x;
                 }
 
-                Claim.require(z == y);
+                Claim.eq(z,y);
             }
         }
 
@@ -163,7 +163,7 @@ namespace Z0
                 for(var i = 0; i<m.Order; i++)
                     z2[i] = m[i] % c;
 
-                Claim.require(z1 == z2);
+                Claim.eq(z1, z2);
             }
         }
 

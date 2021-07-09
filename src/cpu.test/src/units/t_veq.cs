@@ -5,6 +5,7 @@
 namespace Z0
 {
     using static Root;
+    using static core;
 
     public class t_veq : t_inx<t_veq>
     {
@@ -26,7 +27,6 @@ namespace Z0
             veq_check(w, z32i);
             veq_check(w, z64);
             veq_check(w, z64i);
-
         }
 
         void veq_check(W256 w)
@@ -72,7 +72,7 @@ namespace Z0
             var f = Calcs.veq<T>(w);
             var x = Random.SpanBlocks<T>(w, RepCount/cpu.vcount(w,t));
             var result = SpanBlocks.alloc<T>(w, x.BlockCount);
-            result.Fill(NumericLiterals.ones<T>());
+            result.Fill(ones<T>());
             CheckSVF.CheckExplicit(f,x,x,result, name);
         }
 
@@ -84,7 +84,7 @@ namespace Z0
             var f = Calcs.veq<T>(w);
             var x = Random.SpanBlocks<T>(w, RepCount/cpu.vcount(w,t));
             var result = SpanBlocks.alloc<T>(w, x.BlockCount);
-            result.Fill(NumericLiterals.ones<T>());
+            result.Fill(ones<T>());
             CheckSVF.CheckExplicit(f,x,x,result,name);
         }
 

@@ -23,10 +23,10 @@ namespace Z0
         void bitcopy_check<T>()
             where T : unmanaged
         {
-            var zed = NumericLiterals.zero<T>();
-            var lit = NumericLiterals.ones<T>();
+            var zed = zero<T>();
+            var lit = ones<T>();
             var min = byte.MinValue;
-            var max = (byte)memory.width<T>();
+            var max = (byte)width<T>();
 
             void check()
             {

@@ -25,19 +25,6 @@ namespace Z0
             where T : unmanaged
                 => uint64(src.Max);
 
-        /// <summary>
-        /// Computes the points that determine a partitioning predicated on partition width
-        /// </summary>
-        /// <param name="src">The source interval</param>
-        /// <param name="width">The partition width</param>
-        [MethodImpl(Inline), Op]
-        public static ulong[] partition(in ClosedInterval<ulong> src, ulong width)
-        {
-            var dst = alloc<ulong>((src.Width/width) + 1);
-            partition(src.Min,src.Max, width, dst);
-            return dst;
-        }
-
         public static string format<T>(ClosedIntervals<T> src)
             where T : unmanaged
         {
@@ -47,35 +34,6 @@ namespace Z0
                 dst.Append(src.Range(i).Format());
             dst.Append(">>");
             return dst.Emit();
-        }
-
-        /// <summary>
-        /// Computes a sequence of points that partitions an integral range
-        /// </summary>
-        /// <param name="min">The lower bound</param>
-        /// <param name="min">The upper bound</param>
-        /// <param name="width">The partition width</param>
-        /// <param name="dst">The target buffer</param>
-        [MethodImpl(Inline), Op]
-        public static void partition(ulong min, ulong max, ulong width, ulong[] dst)
-        {
-            var points = span(dst);
-            var count = points.Length;
-            var point = min;
-            var final = count - 1;
-
-            for(var i=0u; i<count; i++)
-            {
-                if(i == 0)
-                    seek(points,i) = min;
-                else if(i == final - 1)
-                    seek(points,i) = max;
-                else
-                    seek(points,i) = point;
-
-                if(i != final)
-                    point = add(point, width);
-            }
         }
     }
 }
