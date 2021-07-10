@@ -27,7 +27,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<T>();
-                var xPos = gbits.hipos(x);
+                var xPos = gbits.msb(x);
                 NumericClaims.lt(xPos, (byte)width<T>());
 
                 var xCount = gbits.nlz(x);

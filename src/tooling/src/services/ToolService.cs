@@ -14,31 +14,16 @@ namespace Z0
             Id = id;
         }
 
-        protected IEnvPaths Paths => Db;
+        protected FS.FolderPath Home
+            => Db.Toolsets() + FS.folder(Id.Format());
 
-        public FS.FolderPath InDir
-            => Paths.ToolInDir(Id);
+        protected IEnvPaths Paths => Db;
 
         public FS.FolderPath OutDir
             => Paths.ToolOutDir(Id);
 
-        public FS.FolderPath ScriptDir
-            => Paths.ToolScriptDir(Id);
-
-        public FS.Files Inputs()
-            => Paths.ToolInDir(Id).AllFiles;
-
-        public FS.Files Outputs()
-            => Paths.ToolOutDir(Id).AllFiles;
-
-        public FS.FilePath Script(FS.FileName name)
-            => ScriptDir + name;
-
         public FS.FilePath Script(FS.FolderPath dir, FS.FileName name)
             => dir + name;
-
-        public FS.FilePath Input(FS.FileName name)
-            => InDir + name;
 
         public FS.FilePath Output(FS.FileName name)
             => OutDir + name;
@@ -60,12 +45,6 @@ namespace Z0
 
         protected static FS.FileName binfile(Identifier src)
             => file(src, FS.Bin);
-
-        protected static FS.FileName logfile(Identifier src)
-            => file(src, FS.Log);
-
-        protected FS.FileName ToolFile(Identifier id, FS.FileExt ext)
-            => FS.file(string.Format("{0}.{1}", id, Id), ext);
 
         protected FS.FileName ToolFile(Identifier id,  Identifier discriminator, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}.{2}", id, Id, discriminator), ext);

@@ -29,6 +29,8 @@ namespace Z0.Asm
 
         ToolId _Tool;
 
+        ScriptRunner ScriptRunner;
+
         public AsmCmdService()
         {
             CodeBuffer = Buffers.native(Pow2.T10);
@@ -59,7 +61,8 @@ namespace Z0.Asm
         protected override void Initialized()
         {
             Workspace = Wf.AsmWorkspace();
-            _Toolbase = Wf.ToolBase("tools", FS.dir(@"C:\Dev\tooling\tools"));
+            _Toolbase = Wf.ToolBase("tools", Db.Toolsets());
+            ScriptRunner = Wf.ScriptRunner();
         }
 
         protected override void Disposing()

@@ -43,9 +43,9 @@ namespace Z0
 
     public sealed class BitCellAttribute : A { public BitCellAttribute() : base(K.BitCell) {} }
 
-    public sealed class LoPosAttribute : A { public LoPosAttribute() : base(K.LoPos) {} }
+    public sealed class LoPosAttribute : A { public LoPosAttribute() : base(K.Lsb) {} }
 
-    public sealed class HiPosAttribute : A { public HiPosAttribute() : base(K.HiPos) {} }
+    public sealed class MsbAttribute : A { public MsbAttribute() : base(K.Msb) {} }
 
     public sealed class HiSegAttribute : A { public HiSegAttribute() : base(K.HiSeg) {} }
 

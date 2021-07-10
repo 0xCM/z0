@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     partial struct gcpu
     {
@@ -21,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vcellref<T>(in Vector128<T> src, byte index)
             where T : unmanaged
-                => ref memory.add(vfirst(src), index);
+                => ref core.add(vfirst(src), index);
 
         /// <summary>
         /// Returns a reference to an index-identified cell
@@ -32,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vcellref<T>(in Vector256<T> src, byte index)
             where T : unmanaged
-                => ref memory.add(vfirst(src), index);
+                => ref core.add(vfirst(src), index);
 
         /// <summary>
         /// Returns a reference to an index-identified cell
@@ -43,6 +44,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vcellref<T>(in Vector512<T> src, byte index)
             where T : unmanaged
-                => ref memory.add(vfirst(src), index);
+                => ref core.add(vfirst(src), index);
     }
 }

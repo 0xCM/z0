@@ -29,6 +29,18 @@ namespace Z0
             _Value = value;
         }
 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.nonempty(Name);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.empty(Name);
+        }
+
         public string Value
         {
             [MethodImpl(Inline)]

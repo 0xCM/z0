@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), EffSize]
         public static byte effsize(ulong src)
-            => math.log2((byte)hipos(src));
+            => math.log2((byte)msb(src));
 
         /// <summary>
         /// Computes the minimum number of bytes required to represent a value

@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Text;
-    using System.Runtime.CompilerServices;
-
     using C = AsciCode;
 
     public readonly partial struct AsmProcessors

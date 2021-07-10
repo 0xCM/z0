@@ -9,7 +9,7 @@ namespace Z0.Tools
 
     using static DumpBin.Flag;
 
-    public partial struct DumpBin
+    public partial class DumpBin
     {
         const PathSeparator PS = PathSeparator.BS;
 

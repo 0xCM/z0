@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
 
     [StructLayout(LayoutKind.Sequential)]
     public struct Vector128x3<T>

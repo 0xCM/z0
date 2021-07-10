@@ -36,7 +36,7 @@ namespace Z0
         public static T replicate<T>(T src)
             where T : unmanaged
         {
-            var index = hipos(src);
+            var index = msb(src);
             var count = (byte)((int)width<T>() / (index + 1) +  1);
             var replicated = Bits.replicate(force<T,ulong>(src), 0, index, count);
             return force<T>(replicated);

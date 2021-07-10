@@ -46,9 +46,9 @@ namespace Z0
 
         BitCell = Id.BitCell,
 
-        LoPos = Id.LoPos,
+        Lsb = Id.Lsb,
 
-        HiPos = Id.HiPos,
+        Msb = Id.Msb,
 
         HiSeg = Id.HiSeg,
 

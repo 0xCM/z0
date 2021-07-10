@@ -8,6 +8,7 @@ namespace Z0.Tools
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
 
     public class Sde : ToolService<Sde>

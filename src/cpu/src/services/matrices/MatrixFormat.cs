@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public static class MatrixFormat
     {
@@ -54,8 +54,8 @@ namespace Z0
         {
             var width = cellwidth ?? src.ColFormatWidth();
             var sep = cellsep ?? '|';
-            var rows = (int)nat64u<M>();
-            var cols = (int)nat64u<N>();
+            var rows = (int)Typed.nat64u<M>();
+            var cols = (int)Typed.nat64u<N>();
             var sb = new StringBuilder();
             for(var row = 0; row < rows; row++)
             {
@@ -83,8 +83,8 @@ namespace Z0
         {
             var width = cellwidth ?? src.ColFormatWidth();
             var sep = cellsep ?? '|';
-            var rows = (int)nat64u<M>();
-            var cols = (int)nat64u<N>();
+            var rows = (int)Typed.nat64u<M>();
+            var cols = (int)Typed.nat64u<N>();
             var sb = new StringBuilder();
             for(var row = 0; row < rows; row++)
             {

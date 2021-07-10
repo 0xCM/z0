@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     /// <summary>
     /// Defines the vector api surface
@@ -127,7 +126,7 @@ namespace Z0
         public static Block256<N,T> blockalloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Block256<N,T>.Load(SpanBlocks.square<T>(n256, nat64u(n)));
+                => Block256<N,T>.Load(SpanBlocks.square<T>(n256, Typed.nat64u<N>()));
 
         /// <summary>
         /// Allocates a block vector optionally filled with a specified value

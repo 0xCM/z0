@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static BitMasks.Literals;
-    using static Typed;
 
     partial class Bits
     {

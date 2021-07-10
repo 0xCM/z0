@@ -11,14 +11,14 @@ namespace Z0.Tools
     using static core;
 
     [ApiHost]
-    public partial struct DumpBin
+    public partial class DumpBin : ToolService<DumpBin>
     {
         public Identifier ScriptId(CmdId cmd, FS.FileExt ext)
             => string.Format("{0}.{1}.{2}", Id, ext.Name, CmdSymbols[cmd].Expr);
 
         public Index<FS.FilePath> EmitScripts(FS.FolderPath src, FS.FolderPath dst)
         {
-            var paths = root.list<FS.FilePath>();
+            var paths = list<FS.FilePath>();
             var archive = ModuleArchive.create(src);
             var exe = archive.NativeExeFiles();
             var lib = archive.StaticLibs();
@@ -61,31 +61,20 @@ namespace Z0.Tools
             return path;
         }
 
-        readonly IWfRuntime Wf;
-
-        [Op]
-        public static DumpBin create(IWfRuntime wf)
-            => new DumpBin(wf, typeof(DumpBin));
-
-        public const string FlagPrefix = CharText.FS;
-
         const byte MaxVarCount = 12;
 
         const byte MaxVarIndex = MaxVarCount - 1;
 
         uint ArgIndex;
 
-        public ToolId Id {get;}
-
         public ToolCmdArgs<Flag,object> Args {get;}
 
         Symbols<CmdId> CmdSymbols {get;}
 
         [MethodImpl(Inline)]
-        internal DumpBin(IWfRuntime wf, ToolId id)
+        public DumpBin()
+            :base(Toolsets.dumpbin)
         {
-            Wf = wf;
-            Id = id;
             Args =  alloc<ToolCmdArg<Flag,object>>(MaxVarCount);
             ArgIndex = 0;
             CmdSymbols = Symbols.index<CmdId>();

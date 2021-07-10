@@ -4,16 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
     using static Root;
 
-    /// <summary>
-    /// Defines operators over square bit domains
-    /// </summary>
-    [ApiHost]
-    public partial class vlogic
+    partial struct Cmd
     {
-        static W256 w => default;
-
-        const NumericKind Closure = UnsignedInts;
+        [MethodImpl(Inline), Op]
+        public CmdVar var(string name, string value)
+            =>new CmdVar(name, value);
     }
 }

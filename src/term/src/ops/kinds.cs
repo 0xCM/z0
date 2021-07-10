@@ -51,7 +51,7 @@ namespace Z0
         public static void error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var msg = string.Empty.Build();
-            msg.AppendLine($"Failure occurred at {caller} {file} {line}");
+            msg.AppendLine($"Failure occurred at {caller} {file}:line {line}");
             msg.AppendLine(content?.ToString() ?? string.Empty);
             T.WriteError(AppMsg.define($"{msg.ToString()}", LogLevel.Error));
         }
@@ -64,7 +64,7 @@ namespace Z0
         public static void error(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var dst = text.build();
-            dst.AppendLine($"Failure trapped by {caller} at {file} {line}");
+            dst.AppendLine($"Failure trapped by {caller} at {file}:line {line}");
             dst.AppendLine(e?.ToString() ?? string.Empty);
             var msg = AppMsg.define($"{dst.ToString()}", LogLevel.Error);
             T.WriteError(msg);

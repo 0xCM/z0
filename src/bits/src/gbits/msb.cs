@@ -16,18 +16,18 @@ namespace Z0
         /// Computes the position of the highest enabled source bit, a number in the inclusive range [0 , bitsize[T] - 1]
         /// </summary>
         /// <param name="src">The source bit</param>
-        [MethodImpl(Inline), HiPos, Closures(Closure)]
-        public static byte hipos<T>(T src)
+        [MethodImpl(Inline), Msb, Closures(Closure)]
+        public static byte msb<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Bits.hipos(uint8(src));
+                return Bits.msb(uint8(src));
             else if(typeof(T) == typeof(ushort))
-                return Bits.hipos(uint16(src));
+                return Bits.msb(uint16(src));
             else if(typeof(T) == typeof(uint))
-                return Bits.hipos(uint32(src));
+                return Bits.msb(uint32(src));
             else if(typeof(T) == typeof(ulong))
-                return Bits.hipos(uint64(src));
+                return Bits.msb(uint64(src));
             else
                 throw no<T>();
         }

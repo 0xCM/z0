@@ -8,71 +8,40 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial class Bits
     {
         /// <summary>
-        /// Returns the state of the most significant bit
+        /// Computes the position of the highest enabled source bit, a number between 0 and 7
         /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static bit msb(byte src)
-            => testbit(src, 7);
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline), Msb]
+        public static byte msb(byte src)
+            => (byte)(width<byte>(w8) - 1 - nlz(src));
 
         /// <summary>
-        /// Returns the state of the most significant bit
+        /// Computes the position of the highest enabled source bit, a number between 0 and 15
         /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static bit msb(sbyte src)
-            => testbit(src, 7);
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline), Msb]
+        public static byte msb(ushort src)
+            => (byte)(width<ushort>(w8) - 1 - nlz(src));
 
         /// <summary>
-        /// Returns the state of the most significant bit
+        /// Computes the position of the highest enabled source bit, a number between 0 and 31
         /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static bit msb(ushort src)
-            => testbit(src, 15);
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline), Msb]
+        public static byte msb(uint src)
+            => (byte)(width<uint>(w8) - 1 - nlz(src));
 
         /// <summary>
-        /// Returns the state of the most significant bit
+        /// Computes the position of the highest enabled source bit, a number between 0 and 63
         /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static bit msb(short src)
-            => testbit(src, 15);
-
-        /// <summary>
-        /// Returns the state of the most significant bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static bit msb(uint src)
-            => testbit(src, 31);
-
-        /// <summary>
-        /// Returns the state of the most significant bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static bit msb(int src)
-            => testbit(src, 31);
-
-        /// <summary>
-        /// Returns the state of the most significant bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static bit msb(ulong src)
-            => testbit(src, 63);
-
-        /// <summary>
-        /// Returns the state of the most significant bit
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static bit msb(long src)
-            => testbit(src, 63);
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline), Msb]
+        public static byte msb(ulong src)
+            => (byte)(width<ulong>(w8) - 1 - nlz(src));
     }
 }

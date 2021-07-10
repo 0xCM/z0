@@ -39,6 +39,18 @@ namespace Z0
             => new ScriptProcess(command);
 
         [Op]
+        public static ScriptProcess run(CmdLine command, CmdVars vars)
+        {
+            var options = new ScriptProcessOptions();
+            foreach(var v in vars)
+            {
+                if(v.IsNonEmpty)
+                    options.AddEnvironmentVariable(v.Name,v.Value);
+            }
+            return new ScriptProcess(command, options);
+        }
+
+        [Op]
         public static ScriptProcess run(CmdLine command, Receiver<string> status, Receiver<string> error)
         {
             var options = new ScriptProcessOptions();
@@ -76,86 +88,6 @@ namespace Z0
         /// Gets the underlying process object.  Generally not used.
         /// </summary>
         public Process Process {get;}
-
-        [MethodImpl(Inline)]
-        public CmdExecStatus Status()
-        {
-            var dst = new CmdExecStatus();
-            Status(ref dst);
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public ref CmdExecStatus Status(ref CmdExecStatus dst)
-        {
-            dst.Id = Process.Id;
-            dst.StartTime = Process.StartTime;
-            dst.HasExited = Process.HasExited;
-            if(Finished)
-            {
-                dst.ExitTime = Process.ExitTime;
-                dst.Duration = dst.ExitTime - dst.StartTime;
-                dst.ExitCode = Process.ExitCode;
-            }
-            return ref dst;
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the process has exited.
-        /// </summary>
-        public bool Finished
-            => Process.HasExited;
-
-        /// <summary>
-        /// Gets the time the process started.
-        /// </summary>
-        public DateTime StartTime
-            => Process.StartTime;
-
-        /// <summary>
-        /// Gets the time the processed Exited.  (HasExited should be <see langword="true"/> before calling)
-        /// </summary>
-        public DateTime ExitTime
-            => Process.ExitTime;
-
-        /// <summary>
-        /// Gets the duration of the command (HasExited should be <see langword="true"/> before calling)
-        /// </summary>
-        public TimeSpan Duration
-            => ExitTime - StartTime;
-
-        /// <summary>
-        /// Gets the operating system ID for the subprocess.
-        /// </summary>
-        public int ProcessId
-            => Process.Id;
-
-        /// <summary>
-        /// Gets the process exit code for the subprocess.  (HasExited should be <see langword="true"/> before calling)
-        /// Often this does not need to be checked because Command.Run will throw an exception
-        /// if it is not zero.   However it is useful if the CommandOptions.NoThrow property
-        /// was set.
-        /// </summary>
-        public int ExitCode
-            => Process.ExitCode;
-
-        /// <summary>
-        /// Gets the standard output and standard error output from the command.  This
-        /// is accumulated in real time so it can vary if the process is still running.
-        /// This property is NOT available if the CommandOptions.OutputFile or CommandOptions.OutputStream
-        /// is specified since the output is being redirected there.   If a large amount of output is
-        /// expected (> 1Meg), the Run.AddOutputStream(Stream) is recommended for retrieving it since
-        /// the large string is never materialized at one time.
-        /// </summary>
-        public string Output
-        {
-            get
-            {
-                if (_outputStream != null)
-                    throw new Exception("Output not available if redirected to file or stream");
-                return _output.ToString();
-            }
-        }
 
         /// <summary>
         /// Launch a new command and returns the Command object that can be used to monitor
@@ -291,6 +223,86 @@ namespace Z0
         public ScriptProcess(CmdLine commandLine)
             : this(commandLine, new ScriptProcessOptions())
         {
+        }
+
+        [MethodImpl(Inline)]
+        public CmdExecStatus Status()
+        {
+            var dst = new CmdExecStatus();
+            Status(ref dst);
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public ref CmdExecStatus Status(ref CmdExecStatus dst)
+        {
+            dst.Id = Process.Id;
+            dst.StartTime = Process.StartTime;
+            dst.HasExited = Process.HasExited;
+            if(Finished)
+            {
+                dst.ExitTime = Process.ExitTime;
+                dst.Duration = dst.ExitTime - dst.StartTime;
+                dst.ExitCode = Process.ExitCode;
+            }
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the process has exited.
+        /// </summary>
+        public bool Finished
+            => Process.HasExited;
+
+        /// <summary>
+        /// Gets the time the process started.
+        /// </summary>
+        public DateTime StartTime
+            => Process.StartTime;
+
+        /// <summary>
+        /// Gets the time the processed Exited.  (HasExited should be <see langword="true"/> before calling)
+        /// </summary>
+        public DateTime ExitTime
+            => Process.ExitTime;
+
+        /// <summary>
+        /// Gets the duration of the command (HasExited should be <see langword="true"/> before calling)
+        /// </summary>
+        public TimeSpan Duration
+            => ExitTime - StartTime;
+
+        /// <summary>
+        /// Gets the operating system ID for the subprocess.
+        /// </summary>
+        public int ProcessId
+            => Process.Id;
+
+        /// <summary>
+        /// Gets the process exit code for the subprocess.  (HasExited should be <see langword="true"/> before calling)
+        /// Often this does not need to be checked because Command.Run will throw an exception
+        /// if it is not zero.   However it is useful if the CommandOptions.NoThrow property
+        /// was set.
+        /// </summary>
+        public int ExitCode
+            => Process.ExitCode;
+
+        /// <summary>
+        /// Gets the standard output and standard error output from the command.  This
+        /// is accumulated in real time so it can vary if the process is still running.
+        /// This property is NOT available if the CommandOptions.OutputFile or CommandOptions.OutputStream
+        /// is specified since the output is being redirected there.   If a large amount of output is
+        /// expected (> 1Meg), the Run.AddOutputStream(Stream) is recommended for retrieving it since
+        /// the large string is never materialized at one time.
+        /// </summary>
+        public string Output
+        {
+            get
+            {
+                if (_outputStream != null)
+                    throw new Exception("Output not available if redirected to file or stream");
+                return _output.ToString();
+            }
         }
 
         void HandleStdEvent(object sender, DataReceivedEventArgs e)

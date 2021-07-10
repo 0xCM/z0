@@ -108,14 +108,6 @@ namespace Z0
             return true;
         }
 
-        [CmdOp("update-tool-help")]
-        public Outcome UpdateToolHelpIndex(CmdArgs args)
-        {
-            var index = Wf.ToolCatalog().UpdateHelpIndex();
-            iter(index, entry => Wf.Row(entry.HelpPath));
-            return true;
-        }
-
         [CmdOp("emit-intrinsics-catalog")]
         public Outcome EmitIntrinsicsCatalog(CmdArgs args)
         {

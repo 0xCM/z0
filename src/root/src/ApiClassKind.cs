@@ -302,9 +302,9 @@ public enum ApiClassKind : ushort
 
     Lo,
 
-    HiPos,
+    Msb,
 
-    LoPos,
+    Lsb,
 
     Left,
 

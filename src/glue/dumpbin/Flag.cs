@@ -8,7 +8,7 @@ namespace Z0.Tools
 
     using static Pow2x32;
 
-    public partial struct DumpBin
+    public partial class DumpBin
     {
         public enum CmdId : byte
         {

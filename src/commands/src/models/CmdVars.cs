@@ -49,6 +49,22 @@ namespace Z0
             get => Data.Storage;
         }
 
+        public string Format()
+        {
+            var dst = text.buffer();
+            var count = Data.Count;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var item = ref this[i];
+                if(item.IsNonEmpty)
+                    dst.AppendLineFormat("set {0}={1}", item.Name, item.Value);
+            }
+            return dst.Emit();
+        }
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator CmdVars(CmdVar[] src)
             => new CmdVars(src);
@@ -56,5 +72,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdVar[](CmdVars src)
             => src.Storage;
+
+        public static CmdVars Empty
+        {
+            [MethodImpl(Inline)]
+            get => core.array<CmdVar>();
+        }
     }
 }

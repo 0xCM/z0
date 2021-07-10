@@ -28,11 +28,38 @@ namespace Z0.Asm
             Root = root;
         }
 
+        public FS.FolderPath Control()
+            => Root + FS.folder(dotcmd);
+
+        public FS.FolderPath DumpArchive()
+            => FS.dir("j:/dumps");
+
+        public FS.FilePath ArchiveDump(string id, FS.FileExt ext)
+            => DumpArchive() + FS.file(id, ext);
+
+        public FS.FolderPath ArchiveImageDumps()
+            => DumpArchive() + FS.folder(images);
+
+        public FS.FolderPath ArchiveImageDumps(string id)
+            => ArchiveImageDumps() + FS.folder(id);
+
+        /// <summary>
+        /// Defines a path of the form {Root}/.output
+        /// </summary>
         public FS.FolderPath Output()
             => Root + FS.folder(dotout);
 
+        /// <summary>
+        /// Defines a path of the form {Root}/asm
+        /// </summary>
         public FS.FolderPath AsmSources()
             => Root + FS.folder("asm");
+
+        /// <summary>
+        /// Defines a path of the form {Root}/cpp
+        /// </summary>
+        public FS.FolderPath CppSources()
+            => Root + FS.folder(cpp);
 
         public FS.FolderPath AsmLabs()
             => AsmSources() + FS.folder(labs);
@@ -60,7 +87,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="dataset">A code gnerateion set identifier</param>
         public FS.FolderPath CodeGenDir(string id)
-            =>  CodeGenRoot() + FS.folder(id);
+            => CodeGenRoot() + FS.folder(id);
 
         /// <summary>
         /// Defines a path of the form {CodeGenRoot}/{dir}/{id}.{ext}
@@ -142,6 +169,9 @@ namespace Z0.Asm
         public FS.FilePath ImportPath(string dir, string id, FS.FileExt ext)
             => ImportDir(dir) + FS.file(id,ext);
 
+        /// <summary>
+        /// Defines a path of the form {DataRoot}/datasets
+        /// </summary>
         public FS.FolderPath Datasets()
             => DataRoot() + FS.folder(datasets);
 
@@ -151,9 +181,15 @@ namespace Z0.Asm
         public FS.FolderPath Dataset(string id)
             => Datasets() + FS.folder(id);
 
+        /// <summary>
+        /// Defines a path of the form {Output}/bin
+        /// </summary>
         public FS.FolderPath Bin()
             => Output() + FS.folder(bin);
 
+        /// <summary>
+        /// Defines a path of the form {Root}/scripts
+        /// </summary>
         public FS.FolderPath Scripts()
             => Root + FS.folder(scripts);
 
@@ -198,14 +234,14 @@ namespace Z0.Asm
         public FS.FilePath DocExtract(string docid, string part, FS.FileExt ext)
             => DocExtractDir(docid) + FS.file(string.Format("{0}.{1}",docid, part), ext);
 
-        public FS.FolderPath Disasm()
+        public FS.FolderPath DisasmOut()
             => Output() + FS.folder("dis");
 
         public FS.FolderPath RawDisasm()
-            => Disasm() + FS.folder("raw");
+            => DisasmOut() + FS.folder("raw");
 
         public FS.FolderPath ImportedDisasm()
-            => Disasm() + FS.folder(imported);
+            => DisasmOut() + FS.folder(imported);
 
         public FS.FolderPath Analysis()
             => Output() + FS.folder(analysis);
@@ -216,11 +252,14 @@ namespace Z0.Asm
         public FS.FolderPath ImportLogs()
             => ImportRoot() + FS.folder(logs);
 
-        public FS.FolderPath Obj()
+        public FS.FolderPath ObjOut()
             => Output() + FS.folder(obj);
 
-        public FS.FolderPath Control()
-            => Output() + FS.folder(dotcmd);
+        public FS.FolderPath DumpOut()
+            => Output() + FS.folder(dumps);
+
+        public FS.FolderPath ExeOut()
+            => Output() + FS.folder(exe);
 
         public FS.FolderPath External()
             => Root + FS.folder(external);
@@ -238,7 +277,7 @@ namespace Z0.Asm
             => Bitfields() + FS.file(id, FS.ext("bits"));
 
         public FS.FilePath ObjPath(string id)
-            => Obj() + FS.file(id,FS.Obj);
+            => ObjOut() + FS.file(id,FS.Obj);
 
         public FS.FilePath ListPath(string id)
             => Lists() + FS.file(id, FS.AsmList);

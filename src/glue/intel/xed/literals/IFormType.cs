@@ -115,10 +115,15 @@ namespace Z0
             ADDPD_XMMpd_MEMpd=51,
 
             ADDPD_XMMpd_XMMpd=52,
+
             ADDPS_XMMps_MEMps=53,
+
             ADDPS_XMMps_XMMps=54,
+
             ADDSD_XMMsd_MEMsd=55,
+
             ADDSD_XMMsd_XMMsd=56,
+
             ADDSS_XMMss_MEMss=57,
 
             ADDSS_XMMss_XMMss=58,
