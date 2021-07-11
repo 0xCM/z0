@@ -5,19 +5,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
     partial struct XedModels
     {
         /// <summary>
         /// datafiles/xed-operand-types.txt
         /// </summary>
         [SymSource(xed)]
-        public enum OperandType : byte
+        public enum DataType : byte
         {
+            None = 0,
+
             [Symbol("i1")]
             I1,
 
@@ -38,6 +35,9 @@ namespace Z0
 
             [Symbol("u16")]
             U16,
+
+            [Symbol("u32")]
+            U32,
 
             [Symbol("u64")]
             U64,

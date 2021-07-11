@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
+    using static XedModels;
 
-    partial struct XedModels
+    partial struct XedRules
     {
         /// <summary>
         /// Creates a <see cref='AttributeVector'/> from a <see cref='AttributeKind'> sequence
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AttributeVector vector(ReadOnlySpan<AttributeKind> src)
         {
-            var length = min(src.Length,8);
+            var length = min(src.Length, 8);
             var data = 0ul;
             if(length != 0)
             {

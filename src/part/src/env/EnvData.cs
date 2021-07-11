@@ -76,11 +76,13 @@ namespace Z0
         public ulong CpuCount
             => Source.CpuCount;
 
+        public FS.FolderPath Workspaces
+            => Source.Workspaces;
+
         public FS.FolderPath AsmWorkspace
-            => Source.AsmWorkspace;
+            => Workspaces + FS.folder("asm");
 
         public FS.FolderPath Toolbase
-            => Source.AsmWorkspace;
-
+            => Source.Toolbase;
     }
 }

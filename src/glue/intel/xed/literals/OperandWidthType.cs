@@ -89,20 +89,28 @@ namespace Z0
 
             XQ,
 
+            [Symbol("zb")]
             ZB,
 
+            [Symbol("zw")]
             ZW,
 
+            [Symbol("zd")]
             ZD,
 
+            [Symbol("zq")]
             ZQ,
 
+            [Symbol("mb")]
             MB,
 
+            [Symbol("mw")]
             MW,
 
+            [Symbol("md")]
             MD,
 
+            [Symbol("mq")]
             MQ,
 
             [Symbol("m64int")]
@@ -211,28 +219,40 @@ namespace Z0
 
             PMMSZ32,
 
+            [Symbol("qq")]
             QQ,
 
+            [Symbol("yub")]
             YUB,
 
+            [Symbol("yuw")]
             YUW,
 
+            [Symbol("yud")]
             YUD,
 
+            [Symbol("yuq")]
             YUQ,
 
+            [Symbol("y128")]
             Y128,
 
+            [Symbol("yb")]
             YB,
 
+            [Symbol("yw")]
             YW,
 
+            [Symbol("yd")]
             YD,
 
+            [Symbol("yq")]
             YQ,
 
+            [Symbol("yps")]
             YPS,
 
+            [Symbol("ypd")]
             YPD,
 
             ZBF16,
@@ -288,6 +308,7 @@ namespace Z0
 
             TMEMCOL,
 
+            [Symbol("tv")]
             TV,
         }
     }

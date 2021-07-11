@@ -10,17 +10,12 @@ namespace Z0.Asm
         Outcome LoadObj(CmdArgs args)
         {
             var id = arg(args,0).Value;
-            var path = Workspace.ObjPath(id);
-            ShoeCoffInfo(path);
-            return true;
-        }
-
-        void ShoeCoffInfo(FS.FilePath src)
-        {
+            var src = Workspace.ObjPath(id);
             using var reader = PeReader.create(src);
             var info = reader.ReadCoffInfo();
             var formatter = info.Formatter();
             Write(formatter.Format(info, RecordFormatKind.KeyValuePairs));
+            return true;
         }
     }
 }

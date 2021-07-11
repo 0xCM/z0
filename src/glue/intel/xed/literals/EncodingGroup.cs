@@ -33,70 +33,103 @@ namespace Z0
 
             GPR64e,
 
+            [Symbol("ArAX()")]
             ArAX,
 
+            [Symbol("ArBX()")]
             ArBX,
 
+            [Symbol("ArCX()")]
             ArCX,
 
+            [Symbol("ArDX()")]
             ArDX,
 
+            [Symbol("ArSI()")]
             ArSI,
 
+            [Symbol("ArDI()")]
             ArDI,
 
+            [Symbol("ArSP()")]
             ArSP,
 
+            [Symbol("ArBP()")]
             ArBP,
 
+            [Symbol("SrSP()")]
             SrSP,
 
+            [Symbol("SrBP()")]
             SrBP,
 
+            [Symbol("Ar8()")]
             Ar8,
 
+            [Symbol("Ar9()")]
             Ar9,
 
+            [Symbol("Ar10()")]
             Ar10,
 
+            [Symbol("Ar11()")]
             Ar11,
 
+            [Symbol("Ar12()")]
             Ar12,
 
+            [Symbol("Ar13()")]
             Ar13,
 
+            [Symbol("Ar14()")]
             Ar14,
 
+            [Symbol("Ar15()")]
             Ar15,
 
+            [Symbol("rIP()")]
             rIP,
 
+            [Symbol("rIPa()")]
             rIPa,
 
+            [Symbol("OeAX()")]
             OeAX,
 
+            [Symbol("OrAX()")]
             OrAX,
 
+            [Symbol("OrDX()")]
             OrDX,
 
+            [Symbol("OrCX()")]
             OrCX,
 
+            [Symbol("OrBX()")]
             OrBX,
 
+            [Symbol("OrSP()")]
             OrSP,
 
+            [Symbol("OrBP()")]
             OrBP,
 
+            [Symbol("rFLAGS()")]
             rFLAGS,
 
+            [Symbol("MMX_R()")]
             MMX_R,
 
+            [Symbol("MMX_B()")]
             MMX_B,
 
+            [Symbol("GPRv_R()", "When used as the MODRM.REG register")]
             GPRv_R,
 
+            [Symbol("GPRv_SB()")]
             GPRv_SB,
 
+            [Symbol("GPRz_R()")]
             GPRz_R,
 
             GPRv_B,

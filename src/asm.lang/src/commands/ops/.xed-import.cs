@@ -32,7 +32,7 @@ namespace Z0.Asm
             for(var i=1; i<count; i++)
             {
 
-                outcome = Dispatch(CmdName,skip(src,i).Name);
+                outcome = Dispatch(CmdName, skip(src,i).Name);
                 if(outcome.Fail)
                     break;
             }

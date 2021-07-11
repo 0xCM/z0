@@ -8,22 +8,19 @@ namespace Z0
     partial struct XedModels
     {
         /// <summary>
-        /// Derived from xed-state-bits.txt
+        /// Defines symbols to represent effective addressing mode sizes, from all-state.txt
         /// </summary>
         [SymSource(xed)]
-        public enum EAMode : sbyte
+        public enum EASZ : sbyte
         {
-            [Symbol("eanot16")]
-            Not16 = 0,
+            [Symbol("eamode16"), Alias("a16")]
+            easz16 = 1,
 
-            [Symbol("eamode16")]
-            Mode16 = 1,
+            [Symbol("eamode32"), Alias("a32")]
+            easz32 = 2,
 
-            [Symbol("eamode32")]
-            Mode32 = 2,
-
-            [Symbol("eamode64")]
-            Mode64 = 3
+            [Symbol("eamode64"), Alias("a64")]
+            easz64 = 3,
         }
     }
 }

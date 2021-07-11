@@ -12,11 +12,14 @@ namespace Z0
         {
             INVALID,
 
-            EXPLICIT, ///< Shows up in operand encoding
+            [Symbol("EXPLICIT","Shows up in operand encoding")]
+            EXPLICIT,
 
-            IMPLICIT, ///< Part of the opcode, but listed as an operand
+            [Symbol("IMPLICIT","Part of the opcode, but listed as an operand")]
+            IMPLICIT,
 
-            SUPPRESSED, ///< Part of the opcode, but not typically listed as an operand
+            [Symbol("SUPPRESSED", "Part of the opcode, but not typically listed as an operand")]
+            SUPPRESSED,
 
             LAST
         }

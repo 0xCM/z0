@@ -51,9 +51,9 @@ namespace Z0
 
             public OperandCategory Category;
 
-            public OperandModifier Modifier;
+            public OperandAction Action;
 
-            public OperandType Type;
+            public DataType Type;
         }
 
         public HeaderRow Header;

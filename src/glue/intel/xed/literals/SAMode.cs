@@ -16,13 +16,13 @@ namespace Z0
         public enum SAMode : sbyte
         {
             [Symbol("smode16")]
-            Mode16 = 0,
+            smode16 = 0,
 
             [Symbol("smode32")]
-            Mode32 = 1,
+            smode32= 1,
 
             [Symbol("smode64")]
-            Mode64 = 3
+            smode64 = 3
         }
     }
 }

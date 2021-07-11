@@ -73,7 +73,7 @@ namespace Z0
 
         public const string output = nameof(output);
 
-        public const string dotout = dot + output;
+        public const string dotout = dot + "out";
 
         public const string input = nameof(input);
 

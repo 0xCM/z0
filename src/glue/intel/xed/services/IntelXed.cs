@@ -5,11 +5,15 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
     using static XedModels;
+    using static XedSourceMarkers;
 
     public sealed class IntelXed : AppService<IntelXed>
     {
@@ -19,28 +23,34 @@ namespace Z0.Asm
 
         AsmWorkspace Workspace;
 
+        XedParser SourceParser;
+
+        XedDataSource Source;
+
         protected override void OnInit()
         {
             ChipIsaParser = XedChipIsaParser.create(Wf);
             Workspace = Wf.AsmWorkspace();
+            SourceParser = XedParser.Service;
+            Source = new XedDataSource(Workspace.DataSource("xed.rules"));
         }
 
         public void EmitCatalog()
         {
             ImportDir().Clear();
-
             ImportFormSummaries();
             EmitChipMap();
             EmitFormDetails();
             EmitSymCatalog();
-            var aspects = EmitFormAspects();
-            Partition(aspects);
-
-            XedRules.create(Wf).Import();
+            Partition(EmitFormAspects());
+            var patterns = EmitInstructionPatterns();
+            var summaries = EmitSummaries(patterns);
+            EmitMnemonics(summaries);
+            EmitRules();
         }
 
         public ReadOnlySpan<string> MnemonicNames()
-            => IClasses().Storage.Select(x => x.Expr.Text);
+            => IClasses().Storage.Select(x => x.Expr.Text).ToArray();
 
         public Outcome LoadChipMap(out ChipMap dst)
             => ChipIsaParser.Parse(ChipSourcePath(), out dst);
@@ -65,9 +75,7 @@ namespace Z0.Asm
                 {
                     var mapped = map[code];
                     foreach(var kind in mapped)
-                    {
                         writer.WriteLine(string.Format(RowFormat, counter++ , code, kind));
-                    }
                 }
                 Wf.EmittedFile(emitting,counter);
             }
@@ -213,32 +221,11 @@ namespace Z0.Asm
             return src;
         }
 
-        public Symbols<AddressWidth> AddressWidths()
-            => Symbols.index<AddressWidth>();
-
-        public Symbols<OperandCategory> OperandTypes()
-            => Symbols.index<OperandCategory>();
-
         public Symbols<AttributeKind> AttributeKinds()
             => Symbols.index<AttributeKind>();
 
         public Symbols<Category> Categories()
             => Symbols.index<Category>();
-
-        public Symbols<ChipCode> ChipCodes()
-            => Symbols.index<ChipCode>();
-
-        public Symbols<CpuidBit> CpuidBits()
-            => Symbols.index<CpuidBit>();
-
-        public Symbols<EFlag> EFlags()
-            => Symbols.index<EFlag>();
-
-        public Symbols<Extension> Extensions()
-            => Symbols.index<Extension>();
-
-        public Symbols<EncodingGroup> EncodingGroups()
-            => Symbols.index<EncodingGroup>();
 
         public Symbols<IClass> IClasses()
             => Symbols.index<IClass>();
@@ -246,29 +233,6 @@ namespace Z0.Asm
         public Symbols<IFormType> IFormTypes()
             => Symbols.index<IFormType>();
 
-        public Symbols<IsaKind> IsaKinds()
-            => Symbols.index<IsaKind>();
-
-        public Symbols<XedModels.MachineMode> MachineModes()
-            => Symbols.index<XedModels.MachineMode>();
-
-        public Symbols<OperandKind> OperandKinds()
-            => Symbols.index<OperandKind>();
-
-        public Symbols<RegClassCode> RegClasses()
-            => Symbols.index<RegClassCode>();
-
-        public Symbols<RegRole> RegRoles()
-            => Symbols.index<RegRole>();
-
-        public Symbols<RegId> Registers()
-            => Symbols.index<RegId>();
-
-        public Symbols<Nonterminal> Nonterminals()
-            => Symbols.index<Nonterminal>();
-
-        public Symbols<SizeIndicator> SizeIndicators()
-            => Symbols.index<SizeIndicator>();
 
         public void EmitSymCatalog()
         {
@@ -278,25 +242,31 @@ namespace Z0.Asm
             EmitSymbols<Category>();
             EmitSymbols<ChipCode>();
             EmitSymbols<CpuidBit>();
+            EmitSymbols<EASZ>();
             EmitSymbols<EFlag>();
             EmitSymbols<EncodingGroup>();
+            EmitSymbols<EOSZ>();
             EmitSymbols<Extension>();
+            EmitSymbols<FlagAction>();
             EmitSymbols<IClass>();
+            EmitSymbols<IFormType>();
             EmitSymbols<IsaKind>();
-            EmitSymbols<XedModels.MachineMode>();
+            EmitSymbols<Mode>();
+            EmitSymbols<MachineMode>();
             EmitSymbols<Nonterminal>();
+            EmitSymbols<OpCodeMap>();
+            EmitSymbols<OperandAction>();
+            EmitSymbols<OperandCategory>();
+            EmitSymbols<OperandTypeKind>();
             EmitSymbols<OperandKind>();
-            EmitSymbols<OperandWidthType>();
             EmitSymbols<OperandVisibility>();
+            EmitSymbols<OperandWidthType>();
+            EmitSymbols<PointerWidth>();
             EmitSymbols<RegClassCode>();
             EmitSymbols<RegId>();
             EmitSymbols<RegRole>();
-            EmitSymbols<SizeIndicator>();
-            EmitSymbols<PointerWidth>();
-            EmitSymbols<EAMode>();
             EmitSymbols<SAMode>();
-            EmitSymbols<Mode>();
-            EmitSymbols<EOSZ>();
+            EmitSymbols<SizeIndicator>();
         }
 
         public void ImportFormSummaries()
@@ -443,7 +413,7 @@ namespace Z0.Asm
         {
             var parts = src.SplitClean(Chars.Colon);
             var count = parts.Length;
-            return count != 0 ? parts.Select(ParseAttribute) : sys.empty<AttributeKind>();
+            return count != 0 ? parts.Select(ParseAttribute).ToArray() : array<AttributeKind>();
         }
 
         XedFormDetail LoadDetail(ushort index, XedFormInfo src)
@@ -455,36 +425,6 @@ namespace Z0.Asm
             var isa = ParseIsaKind(src.IsaSet);
             var ext = ParseExtension(src.Extension);
             return new XedFormDetail((ushort)index, id, iclass, category, attributes, isa, ext);
-        }
-
-        static Outcome ParseSummary(TextLine src, out XedFormInfo dst)
-        {
-            dst = default;
-            var parts = src.Split(FieldDelimiter);
-            var count = parts.Length;
-            if(count != XedFormInfo.FieldCount)
-                return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
-            var i = 0;
-            dst.Class = skip(parts,i++);
-            dst.Extension = skip(parts,i++);
-            dst.Category = skip(parts,i++);
-            dst.Form = skip(parts,i++);
-            dst.IsaSet = skip(parts,i++);
-            dst.Attributes = skip(parts,i++);
-            return true;
-        }
-
-        static Outcome ParseSourceHeader(TextLine src, Span<string> dst)
-        {
-            var parts = src.Split(FieldDelimiter);
-            var count = parts.Length;
-            if(count != XedFormInfo.FieldCount)
-                return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
-
-            for(var i=0; i<count; i++)
-                seek(dst,i) = skip(parts,i);
-
-            return true;
         }
 
         public ReadOnlySpan<FormPartiton> ComputePartitions()
@@ -499,6 +439,26 @@ namespace Z0.Asm
             for(ushort i=0; i<count; i++)
                 Partition(classes, i, skip(forms,i), ref seek(dst,i));
             Wf.Ran(flow, Msg.PartitionedIForms.Format(count));
+            return buffer;
+        }
+
+        public ReadOnlySpan<XedSummaryRow> LoadSummaries()
+            => LoadSummaries(SummaryTarget());
+
+        public ReadOnlySpan<XedSummaryRow> LoadSummaries(FS.FilePath src)
+        {
+            var flow  = Wf.Running(string.Format("Loading summary records from {0}", src.ToUri()));
+            var doc = TextGrids.parse(src).Require();
+            var count = doc.RowCount;
+            var buffer = alloc<XedSummaryRow>(count);
+            if(count != 0)
+            {
+                ref var dst = ref first(buffer);
+                for(var i=0; i<count; i++)
+                    LoadSummaryRow(doc[i], ref seek(dst, i));
+            }
+
+            Wf.Ran(flow, string.Format("Loaded {0} records from {1}", count, src.ToUri()));
             return buffer;
         }
 
@@ -590,8 +550,274 @@ namespace Z0.Asm
         FS.FilePath FormAspectImportPath()
             => Workspace.ImportTable<XedFormAspect>("xed");
 
+        FS.FolderPath TargetDir()
+            => Workspace.ImportDir("xed.rules");
+
+        FS.FilePath InstructionTarget(FS.FileName file)
+            => TargetDir()  + FS.folder("instructions") + file;
+
+        FS.FilePath MnemonicTarget()
+            => TargetDir() + FS.file("mnemonics", FS.Csv);
+
+        FS.FolderPath RuleTarget()
+            => TargetDir() + FS.folder("rules");
+
+        FS.FilePath FunctionTarget()
+            => TargetDir() + FS.file("functions", FS.Txt);
+
+        FS.FilePath SummaryTarget()
+            => TargetDir() + FS.file("summary", FS.Csv);
+
         const char CommentMarker = Chars.Hash;
 
         const char FieldDelimiter = Chars.Space;
+
+        static bool LoadSummaryRow(in TextRow src, ref XedSummaryRow dst)
+        {
+            if(src.CellCount == 10)
+            {
+                var i=0;
+                dst.Class = src[i++];
+                dst.Category = src[i++];
+                dst.Extension = src[i++];
+                dst.IsaSet = src[i++];
+                dst.IForm = src[i++];
+                dst.BaseCode = HexByteParser.Service.ParseData(src[i++]).Value ?? BinaryCode.Empty;
+                dst.Mod = src[i++];
+                dst.Reg = src[i++];
+                dst.Pattern = src[i++];
+                dst.Operands = src[i++];
+                return true;
+            }
+
+            return false;
+        }
+
+        [Op]
+        internal static XedPattern[] sort(XedPattern[] src)
+            => (src as IEnumerable<XedPattern>).OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).Array();
+
+        [Op]
+        static XedSummaryRow BuildSummaryRow(in XedPattern src)
+        {
+            var modidx = src.Parts.TryFind(x => x.StartsWith(MODIDX)).MapValueOrDefault(x => x.RightOfFirst(ASSIGN).Trim(), EmptyString);
+            var dst = new XedSummaryRow();
+            dst.Class = src.Class;
+            dst.Category = src.Category;
+            dst.Extension = src.Extension;
+            dst.IsaSet = src.IsaSet;
+            dst.IForm = src.IForm;
+            dst.BaseCode = XedParser.code(src);
+            dst.Mod = XedParser.mod(src);
+            dst.Reg = XedParser.reg(src);
+            dst.Pattern = src.PatternText;
+            dst.Operands = src.OperandText;
+            return dst;
+        }
+
+        static Outcome ParseSummary(TextLine src, out XedFormInfo dst)
+        {
+            dst = default;
+            var parts = src.Split(FieldDelimiter);
+            var count = parts.Length;
+            if(count != XedFormInfo.FieldCount)
+                return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
+            var i = 0;
+            dst.Class = skip(parts,i++);
+            dst.Extension = skip(parts,i++);
+            dst.Category = skip(parts,i++);
+            dst.Form = skip(parts,i++);
+            dst.IsaSet = skip(parts,i++);
+            dst.Attributes = skip(parts,i++);
+            return true;
+        }
+
+        static Outcome ParseSourceHeader(TextLine src, Span<string> dst)
+        {
+            var parts = src.Split(FieldDelimiter);
+            var count = parts.Length;
+            if(count != XedFormInfo.FieldCount)
+                return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
+
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(parts,i);
+
+            return true;
+        }
+
+        XedSummaryRow[] EmitSummaries(XedPattern[] src)
+        {
+            var records = sort(src).Map(p => BuildSummaryRow(p));
+            var target = SummaryTarget();
+            Tables.emit(@readonly(records), target);
+            return records;
+        }
+
+        Index<XedPattern> EmitInstructionPatterns()
+        {
+            var patterns = list<XedPattern>();
+            var parser = XedParser.Service;
+            var files = Source.InstructionFiles.View;
+            var count = files.Length;
+            for(var i=0; i<count; i++)
+                EmitInstructionPatterns(skip(files,i), patterns);
+
+            return patterns.ToArray();
+        }
+
+        void EmitInstructionPatterns(FS.FilePath dst, List<XedPattern> patterns)
+        {
+            var parser = XedParser.Service;
+            var flow = Wf.EmittingFile(dst);
+            var parsed = parser.ParseInstructions(dst);
+            var count = parsed.Length;
+            for(var j = 0; j<count; j++)
+            {
+                ref readonly var doc = ref skip(parsed, j);
+                EmitInstructionPatterns(parsed, InstructionTarget(dst.FileName));
+                patterns.AddRange(XedParser.patterns(doc, out _));
+            }
+            Wf.EmittedFile(flow, count);
+        }
+
+        [Op]
+        void EmitInstructionPatterns(ReadOnlySpan<XedInstructionDoc> src, FS.FilePath dst)
+        {
+            using var writer = dst.Writer();
+            for(var i=0; i<src.Length; i++)
+            {
+                var rows = src[i];
+                for(var j = 0; j < rows.RowCount; j++)
+                    writer.WriteLine(rows[j].RowText);
+                if(i != src.Length - 1)
+                    writer.WriteLine(Separator);
+            }
+        }
+
+        [Op]
+        void EmitRules()
+        {
+            var parser = XedParser.Service;
+            var sources = Source.FunctionFiles.View;
+            var count = sources.Length;
+            var ruleDir = RuleTarget();
+            using var writer = FunctionTarget().Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var src = ref skip(sources,i);
+                var functions = parser.ParseFunctions(src);
+                if(functions.Length != 0)
+                {
+                    EmitFunctions(functions, writer);
+                    EmitRulesets(functions, ruleDir);
+                }
+            }
+        }
+
+        [Op]
+        void EmitRulesets(ReadOnlySpan<XedRuleSet> src, FS.FolderPath dir)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return;
+
+            var dst = dir + first(src).SourceFile;
+            var emitting = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                if(i != 0)
+                    writer.WriteLine();
+
+                counter += EmitRuleset(skip(src,i), writer);
+            }
+
+            Wf.EmittedFile(emitting, counter);
+        }
+
+        [Op]
+        void EmitFunctions(ReadOnlySpan<XedRuleSet> src, StreamWriter writer)
+        {
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var f = ref skip(src,i);
+                var body = f.Terms;
+                if(body.Length != 0)
+                {
+                    writer.WriteLine(f.Description);
+                    writer.WriteLine(Separator);
+
+                    for(var j = 0; j <body.Length; j++)
+                        writer.WriteLine(body[j]);
+
+                    if(i != src.Length - 1)
+                        writer.WriteLine();
+                }
+            }
+        }
+
+        static RenderPattern<object,object> IMPLY => "{0} -> {1}";
+
+        static RenderPattern<object,object> OR => "{0} | {1}";
+
+        [Op]
+        uint EmitRuleset(in XedRuleSet ruleset, StreamWriter writer)
+        {
+            var content = ruleset.Terms.View;
+            var kTerms = (uint)content.Length;
+
+            if(kTerms != 0)
+            {
+                writer.WriteLine(ruleset.Description);
+                for(var k=0; k<kTerms; k++)
+                {
+                    var line = skip(content, k).Format();
+                    if(line.Contains(IMPLIES))
+                    {
+                        var left = line.LeftOfFirst(IMPLIES);
+                        var opcount = SourceParser.ParseOperands(left, out var _operands);
+                        var lhs = RP.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
+                        var rhs = line.RightOfFirst(IMPLIES);
+                        writer.WriteLine(IMPLY.Format(lhs,rhs));
+                    }
+                    else if(line.Contains(Bar))
+                    {
+                        var left = line.LeftOfFirst(Bar);
+                        var opcount = SourceParser.ParseOperands(left, out var _operands);
+                        var lhs = RP.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
+                        var rhs = line.RightOfFirst(Bar);
+                        writer.WriteLine(OR.Format(lhs,rhs));
+                    }
+                    else if(line.Contains(SEQUENCE))
+                    {
+                        var name = line.RightOfFirst(SEQUENCE);
+                        writer.WriteLine($"{SEQUENCE}: {name}");
+                        writer.WriteLine(Separator);
+                        var i=0;
+                        while(k < kTerms - 1)
+                        {
+                            line = skip(content, ++k).Format().Trim();
+                            if(blank(line))
+                                break;
+
+                            writer.WriteLine(string.Format("{0,-2}: {1}", i++, line));
+                        }
+
+                        writer.WriteLine();
+                    }
+                    else
+                        writer.WriteLine(line + " >.<");
+                }
+            }
+            return kTerms;
+        }
+
+        void EmitMnemonics(XedSummaryRow[] src)
+        {
+            var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
+            MnemonicTarget().Overwrite(upper);
+        }
     }
 }

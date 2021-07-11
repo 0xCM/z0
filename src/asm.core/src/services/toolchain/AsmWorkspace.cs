@@ -43,8 +43,18 @@ namespace Z0.Asm
         public FS.FolderPath ArchiveImageDumps(string id)
             => ArchiveImageDumps() + FS.folder(id);
 
+        public FS.FilePath ToolPath(ToolId id)
+        {
+            if(id == Toolsets.bddiasm)
+                return FS.path(@"j:\source\bddisasm\build\bddisasm.exe");
+            else if(id == Toolsets.nasm)
+                return FS.path(@"c:\tools\nasm\nasm.exe");
+            else
+                throw no(id);
+        }
+
         /// <summary>
-        /// Defines a path of the form {Root}/.output
+        /// Defines a path of the form {Root}/.out
         /// </summary>
         public FS.FolderPath Output()
             => Root + FS.folder(dotout);

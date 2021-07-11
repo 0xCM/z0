@@ -231,7 +231,7 @@ public enum PartId : ulong
     [Symbol("libm")]
     LibM = 113,
 
-    [Symbol("libm")]
+    [Symbol("glue")]
     Glue = 114,
 
     [Symbol("machines")]

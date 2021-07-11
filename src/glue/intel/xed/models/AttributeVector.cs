@@ -12,20 +12,24 @@ namespace Z0
 
     partial struct XedModels
     {
-        public readonly struct AttributeVector
+        public struct AttributeVector
         {
-            readonly ulong Data;
+            readonly Cell128 Data;
 
             [MethodImpl(Inline)]
-            internal AttributeVector(ulong data)
+            internal AttributeVector(Cell128 data)
             {
                 Data = data;
             }
 
-            public AttributeKind Component(byte index)
+            [MethodImpl(Inline)]
+            public bit Test(AttributeKind index)
             {
-                var offset = (byte)(8*index);
-                return (AttributeKind)Bits.slice(Data,offset,8);
+                var i = (byte)index;
+                if((byte)index <= 63)
+                    return bit.test(Data.Lo, i);
+                else
+                    return (bit.test(Data.Hi, (byte)(i - 64)));
             }
         }
     }

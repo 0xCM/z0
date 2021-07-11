@@ -13,32 +13,25 @@ namespace Z0
         [SymSource(xed)]
         public enum FlagAction
         {
-            ///< undefined (treated as a write)
-            [Symbol("u")]
+            [Symbol("u", "undefined (treated as a write)")]
             FLAG_ACTION_u,
 
-            ///< test (read)
-            [Symbol("tst")]
+            [Symbol("tst", "test (read)")]
             FLAG_ACTION_tst,
 
-            ///< modification (write)
-            [Symbol("mod")]
+            [Symbol("mod", "modification (write)")]
             FLAG_ACTION_mod,
 
-            ///< value will be zero (write)
-            [Symbol("0")]
+            [Symbol("0", "value will be zero (write)")]
             FLAG_ACTION_0,
 
-            ///< value comes from the stack (write)
-            [Symbol("pop")]
+            [Symbol("pop", "value comes from the stack (write)")]
             FLAG_ACTION_pop,
 
-            ///< value comes from AH (write)
-            [Symbol("ah")]
+            [Symbol("ah", "value comes from AH (write)")]
             FLAG_ACTION_ah,
 
-            ///< value will be 1 (write)
-            [Symbol("1")]
+            [Symbol("1", "value will be 1 (write)")]
             FLAG_ACTION_1,
         }
     }

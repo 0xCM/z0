@@ -15,8 +15,6 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var path = Workspace.DataSource(xed) + FS.file("xed-tables", FS.Txt);
-
-
             return result;
         }
     }

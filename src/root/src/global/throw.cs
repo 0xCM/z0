@@ -27,8 +27,8 @@ namespace Z0
         public static NotSupportedException no<T>()
             => new NotSupportedException($"The type {typeof(T).Name} is not supported");
 
-        public static NotSupportedException no()
-            => new NotSupportedException();
+        public static NotSupportedException no(object msg)
+            => new NotSupportedException(msg.ToString());
 
         public static T no<S,T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Unsupported.raise<S,T>(caller, file, line);

@@ -9,7 +9,8 @@ namespace Z0.Asm
         [CmdOp(".toolbase")]
         Outcome SelectToolbase(CmdArgs args)
         {
-            ToolBase(arg(args,0).Value, FS.dir(arg(args,1).Value));
+            var selected = ToolBase(arg(args,0).Value, FS.dir(arg(args,1).Value));
+            Write(string.Format("Toolbase {0} selected", selected.Root));
             return true;
         }
     }

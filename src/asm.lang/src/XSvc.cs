@@ -56,6 +56,5 @@ namespace Z0
         [Op]
         public static AsmDataPipes AsmDataPipes(this IWfRuntime context)
             => Svc.AsmDataPipes.create(context);
-
     }
 }

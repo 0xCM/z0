@@ -20,7 +20,7 @@ namespace Z0
             Mode64 = 2,
 
             [Symbol("not64")]
-            Not64 = ~Mode64
+            Not64 = Mode16 | Mode32,
         }
     }
 }

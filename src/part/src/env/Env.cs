@@ -51,7 +51,7 @@ namespace Z0
             dst.VendorDocs = dir(N.VendorDocs);
             dst.CapturePacks = dir(N.CapturePacks);
             dst.CpuCount = number(N.CpuCount);
-            dst.AsmWorkspace = dir(N.AsmWorkspace);
+            dst.Workspaces = dir(N.Workspaces);
             dst.Toolbase = dir(N.Toolbase);
         }
 
@@ -93,7 +93,7 @@ namespace Z0
 
         public EnvVar<ulong> CpuCount;
 
-        public EnvDirVar AsmWorkspace;
+        public EnvDirVar Workspaces;
 
         public EnvDirVar Toolbase;
 

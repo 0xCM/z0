@@ -11,7 +11,7 @@ namespace Z0.Asm
         [Alias("all-chip-models")]
         ChipModels,
 
-        [Alias("all-conversion-table")]
+        [Alias("all-conversion-tables")]
         ConversionTables,
 
         [Alias("all-cpuid")]

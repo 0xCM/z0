@@ -182,8 +182,6 @@ namespace Z0
                     ParseInstructions(rows, dst);
                     return dst.ViewDeposited();
                 }
-                // if(data[i].Format().ContainsAny(Instructions))
-                //     return ParseInstructions(data, i);
             }
             return array<XedInstructionDoc>();
         }
@@ -270,9 +268,6 @@ namespace Z0
 
         static bool IsEmpty(TextRow src)
             => text.blank(src.RowText);
-
-        static bool seqheader(TextRow src)
-            => src.RowText.StartsWith(SEQUENCE);
 
         static bool contains(TextRow src, string substring)
             => src.RowText.ContainsAny(substring);

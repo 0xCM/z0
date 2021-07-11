@@ -12,17 +12,23 @@ namespace Z0
         {
             None,
 
-            NORMAL, //< Register is a normal register
+            [Symbol("NORMAL", "Register is a normal register")]
+            NORMAL,
 
-            SEGREG0, //< The segment register associated with the first memop
+            [Symbol("SEGREG0", "The segment register associated with the first memop")]
+            SEGREG0,
 
-            SEGREG1, //< The segment register associated with the second memop
+            [Symbol("SEGREG1", "The segment register associated with the second memop")]
+            SEGREG1,
 
-            BASE0, //< The base register associated with the first memop
+            [Symbol("BASE0", "The base register associated with the first memop")]
+            BASE0,
 
-            BASE1, //< The base register associated with the second memop
+            [Symbol("BASE1", "The base register associated with the second memop")]
+            BASE1,
 
-            INDEX, //< The index register associated with the first memop
+            [Symbol("INDEX", "The index register associated with the first memop")]
+            INDEX,
         }
     }
 }

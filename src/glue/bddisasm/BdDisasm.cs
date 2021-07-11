@@ -29,7 +29,7 @@ namespace Z0.Tools
         protected override void Initialized()
         {
             Workspace = AsmWorkspace.create(Env.AsmWorkspace);
-            ToolPath = Workspace.External() + FS.folder(Id.Format()) + FS.folder(src) + FS.folder(build) + FS.file(Id.Format(), FS.Exe);
+            ToolPath = Workspace.ToolPath(Toolsets.bddiasm);
         }
 
         public BdDisasmCmd Cmd(in AsmToolchainSpec spec, bool bitfields = false , bool details = false)
