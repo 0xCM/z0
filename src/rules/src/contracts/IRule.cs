@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static Rules;
+
     public interface IRule
     {
         Type RuleType => GetType();

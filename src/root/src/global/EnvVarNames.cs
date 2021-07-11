@@ -46,5 +46,7 @@ namespace Z0
         public const string CpuCount = "NUMBER_OF_PROCESSORS";
 
         public const string AsmWorkspace = "AsmWorkspace";
+
+        public const string Toolbase = "Toolbase";
     }
 }

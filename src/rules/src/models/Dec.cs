@@ -2,24 +2,27 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct Dec : IExpr<Dec>
+    partial struct Rules
     {
-        public IScope Scope {get;}
-
-        public long Step {get;}
-
-        [MethodImpl(Inline)]
-        public Dec(IScope scope, long step)
+        public readonly struct Dec
         {
-            Scope = scope;
-            Step = step;
+            public IScope Scope {get;}
+
+            public long Step {get;}
+
+            [MethodImpl(Inline)]
+            public Dec(IScope scope, long step)
+            {
+                Scope = scope;
+                Step = step;
+            }
         }
     }
 }

@@ -102,8 +102,11 @@ namespace Z0
         }
 
         [Op]
-        public static string format(in ToolFlagSpec src)
-            => src.Name.IsEmpty ? src.Index.ToString() : string.Format("{0}:{1}", src.Name, src.Index);
+        public static string format(in CmdFlagSpec src, ArgPrefix? prefix = null)
+        {
+            var pre = prefix ?? ArgPrefix.DoubleDash;
+            return string.Format("{0}{1}", pre, src.Name);
+        }
 
         [Formatter]
         public static string format(ArgPrefix src)

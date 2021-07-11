@@ -8,11 +8,11 @@ namespace Z0
 
     public interface IType
     {
-        string Name {get;}
+        string Name  => "";
     }
 
     public interface IType<T> : IType
-        where T : struct, IType<T>
+        where T : IType<T>, new()
     {
 
     }

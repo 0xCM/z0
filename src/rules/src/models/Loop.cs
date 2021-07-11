@@ -2,18 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
-    public readonly struct Loop : ILoop
+    using Z0.Lang;
+
+    partial struct Rules
     {
-        public IScope Scope {get;}
-
-        public StatementBlock Body {get;}
-
-        public Loop(IScope scope, StatementBlock block)
+        public readonly struct Loop : ILoop
         {
-            Scope = scope;
-            Body = block;
+            public IScope Scope {get;}
+
+            public StatementBlock Body {get;}
+
+            public Loop(IScope scope, StatementBlock block)
+            {
+                Scope = scope;
+                Body = block;
+            }
         }
     }
 }

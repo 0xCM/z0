@@ -80,7 +80,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendFlag<A>(A value)
         {
-            Args[Index] = Cmd.flag(Index, value, Dash);
+            Args[Index] = Cmd.argdef(Index, value, Dash);
             Index++;
             return (T)this;
         }
@@ -88,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendFlag<A>(A value, ArgPrefix prefix)
         {
-            Args[Index] = Cmd.flag(Index, value, prefix);
+            Args[Index] = Cmd.argdef(Index, value, prefix);
             Index++;
             return (T)this;
         }
@@ -96,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendFlag<A>(string name, A value, ArgPrefix prefix)
         {
-            Args[Index] = Cmd.flag(Index, name, value, prefix);
+            Args[Index] = Cmd.argdef(Index, name, value, prefix);
             Index++;
             return (T)this;
         }
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendFlag<A>(string name, A value)
         {
-            Args[Index] = Cmd.flag(Index, name, value, DefaultPrefix);
+            Args[Index] = Cmd.argdef(Index, name, value, DefaultPrefix);
             Index++;
             return (T)this;
         }

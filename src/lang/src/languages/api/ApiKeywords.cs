@@ -295,11 +295,6 @@ namespace Z0
         public static ApiKeyword u512() => "u512";
 
         /// <summary>
-        /// Specifies a variable
-        /// </summary>
-        public static ApiKeyword var() => Var;
-
-        /// <summary>
         /// Specifies a bit-width
         /// </summary>
         public static ApiKeyword width() => Width;

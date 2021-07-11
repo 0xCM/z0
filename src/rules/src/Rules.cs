@@ -12,7 +12,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Rules
     {
-        const NumericKind Closure = UnsignedInts;
+        const Z0.NumericKind Closure = UnsignedInts;
 
          public static string FormatPattern(VarContextKind vck)
             => VarContextKinds.FormatPattern(vck);

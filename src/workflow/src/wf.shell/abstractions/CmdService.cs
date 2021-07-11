@@ -21,7 +21,7 @@ namespace Z0
         }
 
         CmdSpec Next()
-            => Cmd.spec(term.prompt("cmd> "));
+            => Cmd.cmdspec(term.prompt("cmd> "));
 
         public void Run()
         {

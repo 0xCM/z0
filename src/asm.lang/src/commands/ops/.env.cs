@@ -11,7 +11,7 @@ namespace Z0.Asm
         [CmdOp(".env")]
         Outcome ShowEnv(CmdArgs args)
         {
-            var vars = SystemEnv.vars();
+            var vars = Z0.Env.vars();
             iter(vars, v => Wf.Row(v));
             return true;
         }

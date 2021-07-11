@@ -12,20 +12,13 @@ namespace Z0
     partial struct Rules
     {
         /// <summary>
-        /// Creates a non-valued <see cref='ScriptVar'/>
+        /// Defines a <see cref='Var'/>
         /// </summary>
-        /// <param name="symbol">The variable symbol</param>
+        /// <param name="scope">The variable scope</param>
+        /// <param name="name">The variable name</param>
+        /// <param name="type">The sort of value the variable can hold</param>
         [MethodImpl(Inline), Op]
-        public static ScriptVar var(VarSymbol symbol)
-            => new ScriptVar(symbol);
-
-        /// <summary>
-        /// Creates a valued <see cref='ScriptVar'/>
-        /// </summary>
-        /// <param name="symbol">The variable symbol</param>
-        /// <param name="value">The variable value</param>
-        [MethodImpl(Inline), Op]
-        public static ScriptVar var(VarSymbol symbol, string value)
-            => new ScriptVar(symbol, value);
+        public static Var var(IScope scope, string name, DataType type)
+            => new Var(scope,name,type);
     }
 }

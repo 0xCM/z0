@@ -12,6 +12,6 @@ namespace Z0.Lang
     {
         T Value {get;}
 
-        ConstantKind Kind {get;}
+        Rules.ConstantKind Kind {get;}
     }
 }

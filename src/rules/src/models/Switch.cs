@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Switch : IStatement
+        public readonly struct Switch
         {
             public IScope Scope {get;}
 

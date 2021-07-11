@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     using api = AsciBlocks;
+
     public readonly struct AsciBlock<N>
         where N : unmanaged, ITypeNat
     {
@@ -34,6 +34,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
+
         public Span<AsciCode> Edit
         {
             [MethodImpl(Inline)]

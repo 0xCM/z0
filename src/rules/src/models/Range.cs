@@ -11,40 +11,28 @@ namespace Z0
 
     partial struct Rules
     {
-        /// <summary>
-        /// Defines a stewise-contiguous sequence of scalar values, available on-demand, that satisfy upper/lower bound constraints
-        /// </summary>
-        /// <typeparam name="T">The scalar type</typeparam>
-        public readonly struct Range<T> : IRule<Range<T>,T>
+        public readonly struct Range : IDataType<Range>
         {
-            /// <summary>
-            /// The min value in the range
-            /// </summary>
-            public T Min {get;}
+            public long Min {get;}
 
-            /// <summary>
-            /// The max value in the range
-            /// </summary>
-            public T Max {get;}
-
-            /// <summary>
-            /// The distance between successive range points
-            /// </summary>
-            public T Step {get;}
+            public long Max {get;}
 
             [MethodImpl(Inline)]
-            public Range(T min, T max, T step)
+            public Range(long min, long max)
             {
                 Min = min;
                 Max = max;
-                Step = step;
             }
 
             public string Format()
-                => "{" + $"{Min}...{Max}" + "}" + "[" + $"{Step}" + "]";
+                => string.Format("[{0},{1}]", Min, Max);
 
             public override string ToString()
                 => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Range((long min, long max) src)
+                => new Range(src.min, src.max);
         }
     }
 }

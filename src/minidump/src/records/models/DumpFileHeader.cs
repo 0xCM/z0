@@ -32,7 +32,7 @@ namespace Z0
 
             public ulong Timestamp;
 
-            public Flags64<MinidumpType> Properties;
+            public MinidumpType Properties;
         }
     }
 }
