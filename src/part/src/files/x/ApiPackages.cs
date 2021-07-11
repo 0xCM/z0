@@ -4,8 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost]
-    public static class XSvc
+    partial class XFs
     {
+        [Op]
+        public static ApiPackages ApiPackages(this IEnvPaths src)
+            => src.PackageRoot();
     }
 }

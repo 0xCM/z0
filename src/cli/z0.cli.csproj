@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Asci)" />
     <ProjectReference Include="$(Minidump)" />
     <ProjectReference Include="$(Interop)" />
-    <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(BitNumbers)" />
   </ItemGroup>
 
