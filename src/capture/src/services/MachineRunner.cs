@@ -14,63 +14,39 @@ namespace Z0
         public void Run(WorkflowOptions options)
         {
             var parts = Wf.ApiCatalog.PartIdentities;
-            var partList = Seq.delimit(Chars.Comma, 0, parts);
             var partCount = parts.Length;
-            var flow = Wf.Running(RunningMachine.Format(partCount, partList));
-            var hex = Wf.ApiHex();
-            var decoder = Wf.AsmDecoder();
+            var flow = Wf.Running(RunningMachine.Format(partCount, Seq.delimit(Chars.Comma, 0, parts)));
             try
             {
-                var blocks = hex.ReadBlocks().Storage;
+                var blocks = Wf.ApiHex().ReadBlocks().Storage;
                 var partitioned = CodeBlocks.hosted(@readonly(blocks));
                 var sorted = blocks.ToSortedSpan();
 
-                if(options.EmitHexIndex)
-                    hex.EmitIndex(blocks);
-
-                if(options.DryRun)
-                {
-                    Wf.Ran(flow);
-                    return;
-                }
-
-                if(options.EmitHexPack)
-                    Wf.ApiHexPacks().Emit(sorted);
+                if(options.EmitAsmStatements)
+                    Wf.AsmStatementPipe().EmitHostStatements(partitioned, Db.AsmStatementRoot());
 
                 if(options.EmitAsmRows)
                     Wf.AsmRowBuilder().Emit(blocks);
 
-                if(options.EmitCallData)
-                {
-                    var routines = decoder.Decode(@readonly(blocks));
-                    if(options.EmitCallData)
-                        Wf.AsmCallPipe().EmitRows(routines);
-                }
+                if(options.EmitHexIndex)
+                    Wf.ApiHex().EmitIndex(blocks);
+
+                if(options.EmitHexPack)
+                    Wf.ApiHexPacks().Emit(sorted);
 
                 if(options.EmitResBytes)
                     Wf.ResPackEmitter().Emit(blocks);
 
-                if(options.EmitStatements)
-                {
-                    var pipe = Wf.AsmStatementPipe();
-                    pipe.EmitHostStatements(partitioned, Db.AsmStatementRoot());
-                }
-
-                var apidata = Wf.ApiCatalogs();
+                var catalogs = Wf.ApiCatalogs();
 
                 if(options.CorrelateMembers)
-                    apidata.Correlate();
+                    catalogs.Correlate();
 
                 if(options.EmitApiClasses)
-                    apidata.EmitApiClasses();
+                    catalogs.EmitApiClasses();
 
-                if(options.EmitAsmCatalogs)
-                {
-                    var etl = Wf.StanfordCatalog();
-                    etl.ExportAsset();
-                    etl.ImportExported();
+                if(options.EmitXedCatalogs)
                     Wf.IntelXed().EmitCatalog();
-                }
 
                 if(options.EmitIntrinsicsInfo)
                     Wf.IntelIntrinsicsPipe().Import();
@@ -84,18 +60,45 @@ namespace Z0
                 if(options.CollectApiDocs)
                     Wf.ApiComments().Collect();
 
-                var assets = Wf.ApiAssets();
-
                 if(options.EmitAssetIndex)
-                    assets.EmitAssetIndex();
+                    Wf.ApiAssets().EmitAssetIndex();
 
                 if(options.EmitAssetContent)
-                    assets.EmitAssetContent();
+                    Wf.ApiAssets().EmitAssetContent();
 
                 if(options.ProcessCultFiles)
                     Wf.CultProcessor().Run();
 
-                Wf.CliEmitter().EmitMetadaSets(options);
+                var cli = Wf.CliEmitter();
+                if(options.EmitAssemblyRefs)
+                    cli.EmitAssemblyRefs();
+
+                if(options.EmitFieldMetadata)
+                    cli.EmitFieldMetadata();
+
+                if(options.EmitApiMetadump)
+                    cli.EmitApiMetadump();
+
+                if(options.EmitSectionHeaders)
+                    cli.EmitSectionHeaders();
+
+                if(options.EmitMsilMetadata)
+                    cli.EmitMsilMetadata();
+
+                if(options.EmitCliStrings)
+                {
+                    cli.EmitUserStrings();
+                    cli.EmitSystemStringInfo();
+                }
+
+                if(options.EmitCliConstants)
+                    cli.EmitConstants();
+
+                if(options.EmitCliBlobs)
+                    cli.EmitBlobs();
+
+                if(options.EmitImageContent)
+                    cli.EmitImageContent();
 
             }
             catch(Exception e)
@@ -103,7 +106,7 @@ namespace Z0
                 Wf.Error(e);
             }
 
-            Wf.Ran(flow, RanMachine.Format(partCount, partList));
+            Wf.Ran(flow, partCount);
         }
     }
 }

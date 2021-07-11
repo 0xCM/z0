@@ -61,5 +61,9 @@ namespace Z0
         [Op]
         public static ApiPacks ApiPacks(this IWfRuntime wf)
             => Svc.ApiPacks.create(wf);
+
+        [Op]
+        public static ApiResPackEmitter ResPackEmitter(this IWfRuntime wf)
+            => Svc.ApiResPackEmitter.create(wf);
     }
 }

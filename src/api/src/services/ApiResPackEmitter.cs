@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
 
     using static CodeGenerator;
     using static core;
 
-    public sealed class ResPackEmitter : AppService<ResPackEmitter>
+    public sealed class ApiResPackEmitter : AppService<ApiResPackEmitter>
     {
         FS.FolderPath SourceDir
             => Db.PartSrcDir("respack") + FS.folder("content") + FS.folder("bytes");

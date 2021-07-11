@@ -61,9 +61,6 @@ namespace Z0
         IAppService AppService(Type host)
             => WfRuntime.service(host, this);
 
-        IRuntimeArchive RuntimeArchive()
-            => Z0.RuntimeArchive.create(Controller.ImageDir);
-
         Assembly[] Components
             => Context.ApiParts.Components;
 

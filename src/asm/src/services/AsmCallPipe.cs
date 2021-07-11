@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Linq;
+    using System.Collections.Generic;
 
     using static core;
 
@@ -42,7 +43,7 @@ namespace Z0.Asm
         public SortedSpan<AsmCallRow> EmitRows(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
         {
             var instructions = list<ApiInstruction>();
-            root.iter(src, routine => instructions.AddRange(routine.Instructions));
+            iter(src, routine => instructions.AddRange(routine.Instructions));
             var calls = BuildRows(instructions.ViewDeposited()).ToSortedSpan();
             var count = calls.Length;
             Emit(calls.View, AsmCallRow.RenderWidths, dst);
@@ -51,7 +52,7 @@ namespace Z0.Asm
 
         public ReadOnlySpan<AsmCallRow> EmitRows(ReadOnlySpan<ApiPartRoutines> src, FS.FolderPath dst)
         {
-            var rows = root.datalist<AsmCallRow>();
+            var rows = list<AsmCallRow>();
             var count = src.Length;
             for(var i=0; i<count; i++)
             {
@@ -59,10 +60,10 @@ namespace Z0.Asm
                 var path = Db.Table(dst, AsmCallRow.TableId, routines.Part);
                 EmitRows(routines, rows, path);
             }
-            return rows.View();
+            return rows.ViewDeposited();
         }
 
-        void EmitRows(in ApiPartRoutines src, DataList<AsmCallRow> rows, FS.FilePath dst)
+        void EmitRows(in ApiPartRoutines src, List<AsmCallRow> rows, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<AsmCallRow>(dst);
             using var writer = dst.Writer();

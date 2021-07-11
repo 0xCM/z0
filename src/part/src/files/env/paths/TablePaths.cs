@@ -194,13 +194,6 @@ namespace Z0
             where T : struct, IRecord<T>
                 => IndexTable(typeof(T));
 
-        FS.FilePath IndexTable(Type t, string discriminator)
-            => IndexDir(t) + FS.file(TableId(t) + discriminator, DefaultTableExt);
-
-        FS.FilePath IndexTable<T>(string discriminator, Timestamp ts)
-            where T : struct, IRecord<T>
-                => IndexDir(typeof(T)) + FS.file(TableId<T>() + "." + ts.Format(), DefaultTableExt);
-
         FS.FilePath IndexTable<T>(string discriminator)
             where T : struct, IRecord<T>
                 => IndexDir(typeof(T)) + FS.file(TableId<T>() + "." + discriminator, DefaultTableExt);
@@ -208,6 +201,10 @@ namespace Z0
         FS.FileName TableFileName<T>(string id)
             where T : struct, IRecord<T>
                 => FS.file(string.Format("{0}.{1}", TableId<T>(), id), DefaultTableExt);
+
+        FS.FilePath TablePath<T>()
+            where T : struct, IRecord<T>
+                => TableRoot() + FS.file(TableId<T>(), DefaultTableExt);
 
         FS.FileExt DefaultTableExt
              => FS.Csv;

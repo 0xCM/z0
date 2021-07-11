@@ -12,6 +12,12 @@ namespace Z0
     using static Root;
     using static FS;
 
+    partial class XTend
+    {
+        public static IRuntimeArchive RuntimeArchive(this Assembly src)
+            => new RuntimeArchive(FS.path(src.Location).FolderPath);
+    }
+
     [ApiHost]
     public readonly struct RuntimeArchive : IRuntimeArchive
     {

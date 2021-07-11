@@ -16,18 +16,18 @@ namespace Z0
 
         public void EmitSectionHeaders()
         {
-            EmitSectionHeaders(Wf.RuntimeArchive());
+            EmitSectionHeaders(controller().RuntimeArchive());
         }
 
         public void EmitSectionHeaders(IRuntimeArchive src)
         {
             var db = Wf.Db();
             var dir = db.TableDir<SectionHeaderInfo>();
-            EmitSectionHeaders(src.DllFiles, db.Table(SectionHeaderInfo.TableId, "dll"));
-            EmitSectionHeaders(src.ExeFiles, db.Table(SectionHeaderInfo.TableId, "exe"));
+            EmitSectionHeaders(src.DllFiles.View, db.Table(SectionHeaderInfo.TableId, "dll"));
+            EmitSectionHeaders(src.ExeFiles.View, db.Table(SectionHeaderInfo.TableId, "exe"));
         }
 
-        public Outcome<Count> EmitSectionHeaders(FS.Files src, FS.FilePath dst)
+        public Outcome<Count> EmitSectionHeaders(ReadOnlySpan<FS.FilePath> src, FS.FilePath dst)
         {
             var total = Count.Zero;
             var formatter = Tables.formatter<SectionHeaderInfo>(SectionHeaderWidths);

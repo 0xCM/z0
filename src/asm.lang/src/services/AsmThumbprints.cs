@@ -16,6 +16,9 @@ namespace Z0.Asm
         public ReadOnlySpan<AsmThumbprint> Load()
             => Load(DefaultPath());
 
+        public void Emit(SortedSpan<AsmIndex> src, FS.FilePath dst)
+            => Emit(AsmEtl.DistinctEncodings(src), dst);
+
         public ReadOnlySpan<AsmThumbprint> Load(FS.FilePath src)
         {
             var dst = list<AsmThumbprint>();

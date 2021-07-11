@@ -33,6 +33,12 @@ namespace Z0
         public FS.FolderPath PartDir(PartId part)
             => Root + FS.folder(part);
 
+        public FS.FolderPath Dumps()
+            => RootDir() + FS.folder("dumps");
+
+        public FS.FolderPath Dumps(string id)
+            => Dumps() + FS.folder(id);
+
         public FS.FolderPath CaptureRoot()
             => Root + FS.folder(capture);
 
@@ -41,6 +47,12 @@ namespace Z0
 
         public FS.FolderPath AsmSourceRoot()
             => CaptureRoot() + FS.folder(asm);
+
+        public FS.FolderPath CodeGenRoot()
+            => Root + FS.folder("codegen");
+
+        public FS.FolderPath CodeGenDir(string id)
+            => CodeGenRoot() + FS.folder(id);
 
         public FS.FolderPath AsmSourceDir(PartId part)
             => AsmSourceRoot() + FS.folder(part);
@@ -74,6 +86,12 @@ namespace Z0
 
         public FS.FilePath JmpTarget()
             => TableDir() + FS.file("asm.jumps", FS.Csv);
+
+        public FS.FilePath TablePath<T>()
+            where T : struct, IRecord<T>
+                => TableDir() + FS.file(TableId.identify<T>().Format(), FS.Csv);
+        public FS.FilePath TablePath(string id)
+            => TableDir() + FS.file(id, FS.Csv);
 
         public FS.FolderPath AsmDetailDir()
             => TableDir() + FS.folder("asm.details");

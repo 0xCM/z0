@@ -31,9 +31,8 @@ namespace Z0
         public ApiCodeBlocks ReadBlocks()
             => ReadBlocks(Db.ParsedExtractPaths());
 
-        [Op]
-        public ApiCodeBlocks ReadBlocks(FS.FolderPath root)
-            => ReadBlocks(Db.ParsedExtractPaths(root));
+        public SortedSpan<ApiCodeBlock> ReadBlocks(FS.FolderPath root)
+            => ReadBlocks(Db.ParsedExtractPaths(root)).Storage.ToSortedSpan();
 
         [Op]
         ApiCodeBlock LoadBlock(ApiHexRow src)

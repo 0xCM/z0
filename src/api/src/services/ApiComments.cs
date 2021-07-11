@@ -56,7 +56,7 @@ namespace Z0
 
         static Dictionary<FS.FilePath, Dictionary<string,string>> pull(IWfRuntime wf)
         {
-            var archive = wf.RuntimeArchive();
+            var archive = core.controller().RuntimeArchive();
             var paths = archive.XmlFiles;
             var dst = new Dictionary<FS.FilePath, Dictionary<string,string>>();
             var t = default(ApiComment);

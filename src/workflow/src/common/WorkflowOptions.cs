@@ -24,7 +24,7 @@ namespace Z0
 
         public Setting<bool> EmitCliConstants;
 
-        public Setting<bool> EmitApiMetadata;
+        public Setting<bool> EmitApiMetadump;
 
         public Setting<bool> EmitApiClasses;
 
@@ -32,7 +32,7 @@ namespace Z0
 
         public Setting<bool> EmitSymbolicLiterals;
 
-        public Setting<bool> EmitAsmCatalogs;
+        public Setting<bool> EmitXedCatalogs;
 
         public Setting<bool> EmitAsmRows;
 
@@ -42,7 +42,7 @@ namespace Z0
 
         public Setting<bool> EmitIntrinsicsInfo;
 
-        public Setting<bool> EmitStatements;
+        public Setting<bool> EmitAsmStatements;
 
         public Setting<bool> CorrelateMembers;
 
@@ -60,8 +60,6 @@ namespace Z0
 
         public Setting<bool> ProcessCultFiles;
 
-        public Setting<bool> DryRun;
-
         public static WorkflowOptions @default()
         {
             var dst = new WorkflowOptions();
@@ -73,26 +71,25 @@ namespace Z0
             dst.EmitCliBlobs = true;
             dst.EmitCliConstants = true;
             dst.EmitFieldMetadata = true;
-            dst.EmitAsmCatalogs = true;
+            dst.EmitXedCatalogs = true;
             dst.EmitAsmRows = true;
             dst.EmitResBytes = true;
             dst.EmitAsmAnalysis = true;
             dst.EmitIntrinsicsInfo = true;
-            dst.EmitStatements = true;
-            dst.EmitApiMetadata = true;
+            dst.EmitAsmStatements = true;
+            dst.EmitApiMetadump = true;
             dst.CorrelateMembers = true;
             dst.EmitAssetIndex = true;
             dst.EmitAssetContent = false;
             dst.EmitSymbolicLiterals = true;
             dst.EmitApiBitMasks = true;
             dst.EmitHexIndex = true;
-            dst.EmitCallData = true;
-            dst.EmitJmpData = true;
+            dst.EmitCallData = false;
+            dst.EmitJmpData = false;
             dst.EmitHexPack = true;
             dst.ProcessCultFiles = false;
             dst.EmitAssemblyRefs = true;
             dst.EmitApiClasses = true;
-            dst.DryRun = false;
             return dst;
         }
 

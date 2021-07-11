@@ -51,19 +51,15 @@ namespace Z0.Asm
         {
             var count = src.Length;
             var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(count));
-            var rows = list<AsmDetailRow>();
+            var dst = list<AsmDetailRow>();
             for(var i=0u; i<count; i++)
-            {
-                ref readonly var block = ref skip(src,i);
-                rows.AddRange(BuildRows(block));
-            }
-
-            Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(rows.Count));
-            return rows.ToArray();
+                dst.AddRange(BuildRows(skip(src,i)));
+            Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(dst.Count));
+            return dst.ToArray();
         }
 
-        uint Emit(in AsmRowSet<AsmMnemonic> src, FS.FolderPath dir)
-            => Emit(src, DetailPath(dir, src));
+        uint Emit(in AsmRowSet<AsmMnemonic> src, FS.FolderPath dst)
+            => Emit(src, DetailPath(dst, src));
 
         uint Emit(in AsmRowSet<AsmMnemonic> src, FS.FilePath dst)
         {

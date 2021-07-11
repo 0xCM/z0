@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    public class ResPackUnpacker : AppService<ResPackUnpacker>
+    public class ApiResPackUnpacker : AppService<ApiResPackUnpacker>
     {
         public void Emit(FS.FolderPath dst)
         {
@@ -23,7 +23,7 @@ namespace Z0.Asm
             var accessors = provider.ResPackAccessors();
             var count = accessors.Length;
             var decoder = Wf.AsmDecoder();
-            var buffer = TextTools.buffer();
+            var buffer = text.buffer();
             var sequence = 0u;
             var segments = list<MemorySeg>(30000);
             var asmFlow = Wf.EmittingFile(asmpath);
@@ -67,7 +67,7 @@ namespace Z0.Asm
                 hexwriter.Write(string.Format(" ## {0:X} ## {1:X}", imm64, imm32));
                 hexwriter.WriteLine();
 
-                segments.Add(ResourceCapture.capture(accessor));
+                segments.Add(SpanRes.capture(accessor));
                 sequence++;
             }
 

@@ -20,12 +20,8 @@ namespace Z0
             => Services.ApiHostAsmEmitter.create(wf);
 
         [Op]
-        public static ResPackEmitter ResPackEmitter(this IWfRuntime wf)
-            => Services.ResPackEmitter.create(wf);
-
-        [Op]
-        public static ResPackUnpacker ResPackUnpacker(this IWfRuntime wf)
-            => Services.ResPackUnpacker.create(wf);
+        public static ApiResPackUnpacker ResPackUnpacker(this IWfRuntime wf)
+            => Services.ApiResPackUnpacker.create(wf);
 
         [Op]
         public static AsmJmpPipe AsmJmpPipe(this IWfRuntime wf)

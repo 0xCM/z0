@@ -37,7 +37,6 @@ namespace Z0
             Wf.ImageCsvReader().Load(src);
         }
 
-
         [Op]
         public MemoryRange EmitImageContent(Assembly src)
         {

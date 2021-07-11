@@ -80,7 +80,7 @@ namespace Z0.Asm
         public static BinaryCode code(in CodeBlock src, uint offset, byte size)
             => slice(src.View, offset, size).ToArray();
 
-        public static SortedSpan<AsmEncodingInfo> encodings(ReadOnlySpan<AsmIndex> src)
+        public static SortedSpan<AsmEncodingInfo> DistinctEncodings(ReadOnlySpan<AsmIndex> src)
         {
             var collected = hashset<AsmEncodingInfo>();
             var count = src.Length;

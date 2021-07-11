@@ -4,13 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static core;
+
     partial class AsmCmdService
     {
         [CmdOp(".emit-cli-headers")]
         Outcome EmitCliHeaders(CmdArgs args)
         {
             var svc = Wf.CliEmitter();
-            svc.EmitSectionHeaders(Wf.RuntimeArchive());
+            svc.EmitSectionHeaders(controller().RuntimeArchive());
             return true;
         }
     }

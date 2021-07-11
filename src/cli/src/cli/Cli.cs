@@ -10,8 +10,6 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection;
     using System.Reflection.PortableExecutable;
-    using System.Reflection.Metadata.Ecma335;
-    using Microsoft.CodeAnalysis;
 
     using static Root;
     using static core;
@@ -21,6 +19,9 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op]
+        public static CliArchive archive(FS.FolderPath root)
+            => new CliArchive(root);
 
         [MethodImpl(Inline), Op]
         public static MetadataReaderState state(Assembly src)

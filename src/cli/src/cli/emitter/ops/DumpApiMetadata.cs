@@ -40,38 +40,30 @@ namespace Z0
             }
         }
 
+        public void EmitMetadadump(FS.FolderPath src, FS.FolderPath dst)
+        {
+            var paths = src.AllFiles.Where(f => f.Is(FS.Exe) || f.Is(FS.Dll)).Where(f => Cli.valid(f));
+            foreach(var path in paths)
+                EmitMetadump(path, dst + FS.file(path.FileName.Format(), FS.Txt));
+        }
+
         public void EmitApiMetadump()
         {
-            var dir = Db.TableDir("image.metadump");
-            dir.Clear();
+            var dst = Db.TableDir("image.metadump");
+            EmitApiMetadump(dst);
+        }
+
+        public void EmitApiMetadump(FS.FolderPath dst)
+        {
+            dst.Clear();
             var components = Wf.ApiCatalog.Components.View;
             var count = components.Length;
             for(var i=0; i<count; i++)
             {
                 var component = skip(components,i);
                 var source = FS.path(component.Location);
-                var target = dir + FS.file(source.FileName.Format(), FS.Txt);
+                var target = dst + FS.file(source.FileName.Format(), FS.Txt);
                 EmitMetadump(source,target);
-            }
-        }
-
-        public void EmitMetadadump(bool externals = true)
-        {
-            if(externals)
-            {
-                var dstdir = Db.TableDir("image.metadump.external");
-                dstdir.Clear();
-                var srcdir = Db.RuntimeRoot();
-                var files = srcdir.AllFiles.Where(f => f.Is(FS.Exe) || f.Is(FS.Dll));
-                foreach(var src in files)
-                {
-                    var dst = dstdir + FS.file(src.FileName.Format(), FS.Txt);
-                    EmitMetadump(src,dst);
-                }
-            }
-            else
-            {
-                EmitApiMetadump();
             }
         }
     }

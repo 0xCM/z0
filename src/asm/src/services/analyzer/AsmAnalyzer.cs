@@ -20,8 +20,6 @@ namespace Z0
 
         AsmAnalyzerSettings Settings;
 
-        AsmThumbprints Thumbprints;
-
         public AsmAnalyzer()
         {
         }
@@ -32,7 +30,6 @@ namespace Z0
             AsmRows = Wf.AsmRowBuilder();
             Calls = Wf.AsmCallPipe();
             Jumps = Wf.AsmJmpPipe();
-            Thumbprints = Wf.AsmThumbprints();
             AsmAnalyzerSettings.@default(out Settings);
         }
 
@@ -56,13 +53,6 @@ namespace Z0
                 EmitDetails(blocks, dst);
         }
 
-        public void Analyze(SortedSpan<AsmIndex> src, ApiPackArchive dst)
-        {
-            var root = dst.RootDir();
-            var blocks = CollectBlocks(root);
-            EmitThumbprints(src, root);
-        }
-
         void EmitDetails(ReadOnlySpan<ApiCodeBlock> src, ApiPackArchive dst)
         {
             var target = dst.AsmDetailDir();
@@ -79,31 +69,10 @@ namespace Z0
             return blocks;
         }
 
-        public SortedSpan<ApiCodeBlock> CollectBlocks(FS.FolderPath root)
-            => ApiHex.ReadBlocks(root).Storage.ToSortedSpan();
-
-        SortedSpan<AsmEncodingInfo> CollectDistinctEncodings(ReadOnlySpan<AsmIndex> src)
-        {
-            var collecting = Wf.Running(Msg.CollectingBitstrings.Format(src.Length));
-            var collected = AsmEtl.encodings(src);
-            Wf.Ran(collecting, Msg.CollectedBitstrings.Format(collected.Count));
-            return collected;
-        }
-
-        void EmitThumbprints(SortedSpan<AsmIndex> src, FS.FolderPath dst)
-        {
-            var target = ThumbprintPath(dst);
-            var distinct = CollectDistinctEncodings(src);
-            Thumbprints.Emit(distinct, target);
-        }
-
         void EmitCalls(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
             => Calls.EmitRows(src, dst.AsmCallsPath());
 
         void EmitJumps(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
             => Jumps.EmitRows(src, dst.JmpTarget());
-
-        FS.FilePath ThumbprintPath(FS.FolderPath dst)
-            => dst + FS.file("asm.thumbprints", FS.Asm);
     }
 }

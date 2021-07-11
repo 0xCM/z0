@@ -147,7 +147,7 @@ namespace Z0.Asm
 
         public void UnpackRespack()
         {
-            var unpacker = ResPackUnpacker.create(Wf);
+            var unpacker = ApiResPackUnpacker.create(Wf);
             unpacker.Emit(Db.AppLogDir());
         }
 

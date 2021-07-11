@@ -56,7 +56,7 @@ namespace Z0
             if(options.EmitFieldMetadata)
                 EmitFieldMetadata();
 
-            if(options.EmitApiMetadata)
+            if(options.EmitApiMetadump)
                 EmitApiMetadump();
 
             if(options.EmitSectionHeaders)
