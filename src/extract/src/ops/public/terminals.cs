@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
     using static core;
 
-    partial class ApiExtractor
+    partial struct ApiExtracts
     {
         [Op]
         public static uint terminals(ReadOnlySpan<ApiMemberCode> src, Span<MemoryBlock> dst)
@@ -21,7 +22,7 @@ namespace Z0
                 ref readonly var extract = ref skip(src,i);
                 var term = terminal(extract.Encoded.View);
                 if(term.TerminalFound)
-                    seek(dst, j++) = block(extract, term);
+                    seek(dst, j++) = memblock(extract, term);
             }
             return j;
         }

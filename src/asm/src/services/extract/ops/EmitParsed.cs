@@ -18,7 +18,7 @@ namespace Z0
 
             var dst = Paths.ParsedExtractPath(host);
             var blocks = alloc<MemoryBlock>(count);
-            var found = terminals(src, blocks);
+            var found = ApiExtracts.terminals(src, blocks);
             var packed = Z0.HexPacks.pack(blocks);
             HexPacks.Emit(packed, dst);
             Wf.Status(string.Format("Identified {0} terminals from {1} methods", found, count));

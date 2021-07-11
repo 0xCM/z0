@@ -8,9 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
-    using static SFx;
-    using static memory;
+    using static core;
 
     public class ImmSpecializer : AppService<ImmSpecializer>
     {

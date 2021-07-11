@@ -7,13 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
     using static core;
     using static ExtractTermData;
 
-    partial class ApiExtractor
+    partial struct ApiExtracts
     {
-        [Op]
-        public static MemoryBlock block(in ApiMemberCode src, ExtractTermInfo term)
+       [Op]
+        public static MemoryBlock memblock(in ApiMemberCode src, ExtractTermInfo term)
         {
             if(!term.TerminalFound)
                 return MemoryBlock.Empty;

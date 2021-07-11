@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
     using System.IO;
     using System.Collections.Generic;
+    using System.Reflection;
 
     using Z0.Asm;
 
@@ -50,6 +51,7 @@ namespace Z0
             return captured;
         }
 
+
         public Index<AsmHostRoutines> CaptureParts(Index<PartId> parts)
         {
             using var flow = Wf.Running();
@@ -81,6 +83,12 @@ namespace Z0
             }
             return dst.ViewDeposited();
         }
+
+        // public AsmMemberRoutine CaptureMember(MethodInfo src, Span<byte> buffer)
+        // {
+        //     var block = ApiExtracts.extract(src,buffer);
+
+        // }
 
         public ReadOnlySpan<AsmHostRoutines> CaptureMembers(ApiMembers src, FS.FolderPath dst)
         {
@@ -127,7 +135,7 @@ namespace Z0
         public Index<AsmHostRoutines> CaptureCatalog(IApiPartCatalog src)
         {
             if(src.IsEmpty)
-                return sys.empty<AsmHostRoutines>();
+                return array<AsmHostRoutines>();
 
             var dst = list<AsmHostRoutines>();
             dst.Add(CaptureTypes(src.ApiTypes));

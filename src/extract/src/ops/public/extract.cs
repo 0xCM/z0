@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
     using static core;
@@ -38,6 +39,41 @@ namespace Z0
             var size = extract(src.EntryPoint, buffer);
             var block = new ApiExtractBlock(src.EntryPoint, src.Uri.Format(), slice(buffer,0, size).ToArray());
             return new ApiMemberExtract(src.ToApiMember(), block);
+        }
+
+        [Op]
+        public static ApiExtractBlock extract(MethodInfo src, Span<byte> buffer)
+        {
+            var resolution = ApiResolver.method(src);
+            var result = extract2(resolution.EntryPoint, buffer);
+            if(result > 0)
+                return new ApiExtractBlock(resolution.EntryPoint, resolution.Uri.Format(), slice(buffer, 0, result));
+            else
+                return new ApiExtractBlock(resolution.EntryPoint, resolution.Uri.Format(), buffer.ToArray());
+        }
+
+        [Op]
+        public static ApiExtractBlock extract2(in ResolvedMethod src, Span<byte> buffer)
+        {
+            var result = extract2(src.EntryPoint, buffer);
+            if(result > 0)
+                return new ApiExtractBlock(src.EntryPoint, src.Uri.Format(), slice(buffer, 0, result));
+            else
+                return new ApiExtractBlock(src.EntryPoint, src.Uri.Format(), buffer.ToArray());
+        }
+
+        [Op]
+        static unsafe int extract2(MemoryAddress src, Span<byte> dst)
+        {
+            var reader = MemoryReader.create(src.Pointer<byte>(), dst.Length);
+            var counter = 0;
+            while(reader.Read(ref seek(dst, counter++)))
+            {
+                var term = terminal(slice(dst,0,counter));
+                if(term.TerminalFound)
+                    return counter + term.Modifier;
+            }
+            return NotFound;
         }
     }
 }

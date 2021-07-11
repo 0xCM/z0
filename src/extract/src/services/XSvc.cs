@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
-
     [ApiHost]
-    public static partial class XSvc
+    public static class XSvc
     {
-
-
+        [Op]
+        public static ApiResolver ApiResolver(this IWfRuntime wf)
+            => Z0.ApiResolver.create(wf);
     }
 }

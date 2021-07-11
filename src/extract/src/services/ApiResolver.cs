@@ -71,6 +71,10 @@ namespace Z0
             return count;
         }
 
+        /// <summary>
+        /// Resolves the methods defined in a specifed set of parts
+        /// </summary>
+        /// <param name="src">The source parts</param>
         public static ReadOnlySpan<ResolvedMethod> methods(ReadOnlySpan<ResolvedPart> src)
         {
             var dst = list<ResolvedMethod>();
@@ -84,6 +88,19 @@ namespace Z0
                 }
             }
             return dst.ViewDeposited();
+        }
+
+        /// <summary>
+        /// Resolves a specified method
+        /// </summary>
+        /// <param name="src">The source method</param>
+        public static ResolvedMethod method(MethodInfo src)
+        {
+            var diviner = MultiDiviner.Service;
+            var host = ApiHostUri.from(src.DeclaringType);
+            var uri = ApiUri.define(ApiUriScheme.Located, host, src.Name, diviner.Identify(src));
+            var resolved = new ResolvedMethod(src, uri, ClrJit.jit(src));
+            return resolved;
         }
 
         public ReadOnlySpan<ApiMemberInfo> Describe(in ResolvedPart src)

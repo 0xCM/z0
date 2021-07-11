@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    readonly struct ExtractTermData
+    public readonly struct ExtractTermData
     {
         const byte SBB = 0x19;
 

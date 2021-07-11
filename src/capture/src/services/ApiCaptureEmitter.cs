@@ -63,16 +63,15 @@ namespace Z0
             var routines = AsmHostRoutines.Empty;
             try
             {
-                var db = Wf.Db();
                 var flow = Wf.Running(Msg.RunningHostEmissionWorkflow.Format(host,src.Count));
-                var extracts = EmitExtracts(host, src, db.RawExtractPath(dst, host));
+                var extracts = EmitExtracts(host, src, Db.RawExtractPath(dst, host));
                 var parsed = ParseExtracts(host, src);
                 if(parsed.Length != 0)
                 {
                     EmitApiHex(host, parsed, dst);
-                    EmitMsilData(host, parsed, db.CilDataPath(dst, host));
-                    EmitMsilCode(host, parsed, db.CilCodePath(dst, host));
-                    routines = DecodeMembers(host, parsed, src, db.AsmCapturePath(dst,host));
+                    EmitMsilData(host, parsed, Db.CilDataPath(dst, host));
+                    EmitMsilCode(host, parsed, Db.CilCodePath(dst, host));
+                    routines = DecodeMembers(host, parsed, src, Db.AsmCapturePath(dst,host));
                 }
                 Wf.Ran(flow);
             }

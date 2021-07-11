@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     using api = ApiExtracts;
 
@@ -25,7 +24,8 @@ namespace Z0
             get
             {
                 Span<byte> buffer = _Buffer;
-                return clear(buffer);
+                buffer.Clear();
+                return buffer;
             }
         }
 

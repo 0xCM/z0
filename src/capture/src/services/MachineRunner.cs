@@ -14,7 +14,7 @@ namespace Z0
         public void Run(WorkflowOptions options)
         {
             var parts = Wf.ApiCatalog.PartIdentities;
-            var partList = Seq.delimit(Chars.Comma, 0, Wf.ApiCatalog.PartIdentities);
+            var partList = Seq.delimit(Chars.Comma, 0, parts);
             var partCount = parts.Length;
             var flow = Wf.Running(RunningMachine.Format(partCount, partList));
             var hex = Wf.ApiHex();
@@ -26,7 +26,7 @@ namespace Z0
                 var sorted = blocks.ToSortedSpan();
 
                 if(options.EmitHexIndex)
-                    Emitted(hex.EmitIndex(blocks));
+                    hex.EmitIndex(blocks);
 
                 if(options.DryRun)
                 {
@@ -35,63 +35,62 @@ namespace Z0
                 }
 
                 if(options.EmitHexPack)
-                    Emitted(Wf.ApiHexPacks().Emit(sorted));
+                    Wf.ApiHexPacks().Emit(sorted);
 
                 if(options.EmitAsmRows)
-                    Emitted(Wf.AsmRowBuilder().Emit(blocks));
+                    Wf.AsmRowBuilder().Emit(blocks);
 
                 if(options.EmitCallData)
                 {
                     var routines = decoder.Decode(@readonly(blocks));
                     if(options.EmitCallData)
-                        Emitted(Wf.AsmCallPipe().EmitRows(routines));
+                        Wf.AsmCallPipe().EmitRows(routines);
                 }
 
                 if(options.EmitResBytes)
-                    Emitted(Wf.ResPackEmitter().Emit(blocks));
+                    Wf.ResPackEmitter().Emit(blocks);
 
                 if(options.EmitStatements)
                 {
                     var pipe = Wf.AsmStatementPipe();
-                    var statements = pipe.EmitHostStatements(partitioned, Db.AsmStatementRoot());
-                    Emitted(statements);
+                    pipe.EmitHostStatements(partitioned, Db.AsmStatementRoot());
                 }
 
                 var apidata = Wf.ApiCatalogs();
 
                 if(options.CorrelateMembers)
-                    Emitted(apidata.Correlate());
+                    apidata.Correlate();
 
                 if(options.EmitApiClasses)
-                    Emitted(apidata.EmitApiClasses());
+                    apidata.EmitApiClasses();
 
                 if(options.EmitAsmCatalogs)
                 {
                     var etl = Wf.StanfordCatalog();
-                    Emitted(etl.ExportAsset());
-                    Emitted(etl.ImportExported());
+                    etl.ExportAsset();
+                    etl.ImportExported();
                     Wf.IntelXed().EmitCatalog();
                 }
 
                 if(options.EmitIntrinsicsInfo)
-                    Emitted(Wf.IntelIntrinsicsPipe().Import());
+                    Wf.IntelIntrinsicsPipe().Import();
 
                 if(options.EmitSymbolicLiterals)
-                    Emitted(Wf.Symbolism().EmitLiterals());
+                    Wf.Symbolism().EmitLiterals();
 
                 if(options.EmitApiBitMasks)
-                    Emitted(Wf.ApiBitMasks().Emit());
+                    Wf.ApiBitMasks().Emit();
 
                 if(options.CollectApiDocs)
-                    Emitted(Wf.ApiComments().Collect());
+                    Wf.ApiComments().Collect();
 
                 var assets = Wf.ApiAssets();
 
                 if(options.EmitAssetIndex)
-                    Emitted(assets.EmitAssetIndex());
+                    assets.EmitAssetIndex();
 
                 if(options.EmitAssetContent)
-                    Emitted(assets.EmitAssetContent());
+                    assets.EmitAssetContent();
 
                 if(options.ProcessCultFiles)
                     Wf.CultProcessor().Run();
@@ -105,23 +104,6 @@ namespace Z0
             }
 
             Wf.Ran(flow, RanMachine.Format(partCount, partList));
-        }
-
-        void Emitted<T>(ReadOnlySpan<T> src)
-        {
-
-        }
-
-        void Emitted<T>(in T src)
-        {
-
-        }
-
-
-        Index<T> Emitted<T>(Index<T> src)
-        {
-
-            return src;
         }
     }
 }
