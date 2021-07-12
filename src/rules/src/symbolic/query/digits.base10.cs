@@ -10,6 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
+
     using C = AsciCode;
 
     partial struct SymbolicQuery
