@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static Numeric;
+    using static Root;
+    using static NumericCast;
 
     /// <summary>
     /// Defines a natural bitvector over a primal cell
@@ -25,7 +25,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        internal T Data;
+        T Data;
 
         /// <summary>
         /// Initializes a bitvector with the lo N bits of a scalar source
@@ -67,7 +67,7 @@ namespace Z0
         /// <summary>
         /// The scalar representation of the vector
         /// </summary>
-        public T Content
+        public T State
         {
             [MethodImpl(Inline)]
             get => Data;

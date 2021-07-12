@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public static class Gf512
     {
@@ -17,7 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitVector16 mul(BitVector16 a, BitVector16 b)
-            => cpu.clmulr(n16, a.Content,b.Content,Redux.Content);
+            => cpu.clmulr(n16, a.State,b.State,Redux.State);
 
         /// <summary>
         /// Computes the full multiplication table for GF512

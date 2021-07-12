@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Inc, Closures(Closure)]
         public static BitVector<T> inc<T>(BitVector<T> x)
             where T : unmanaged
-                => gmath.inc(x.Data);
+                => gmath.inc(x.State);
 
         /// <summary>
         /// Arithmetically increments the source vector
@@ -30,6 +30,6 @@ namespace Z0
         public static BitVector<N,T> inc<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.inc(x.Data);
+                => gmath.inc(x.State);
     }
 }

@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static bit parity<T>(BitVector<T> src)
             where T : unmanaged
-                => odd(gbits.pop(src.Data));
+                => odd(gbits.pop(src.State));
 
         /// <summary>
         /// Computes the parity of a natural bitvector, which is 1 if an odd number of its components are enabled and 0 otherwise
@@ -35,15 +35,7 @@ namespace Z0
         public static bit parity<N,T>(BitVector<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => odd(gbits.pop(src.Data));
+                => math.odd(gbits.pop(src.State));
 
-        /// <summary>
-        /// Computes the parity of the source vector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static bit parity<N,T>(in BitVector128<N,T> src)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => odd(pop(src));
     }
 }

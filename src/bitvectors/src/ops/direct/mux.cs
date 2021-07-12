@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class BitVector
     {
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The input from which a bit will be selected</param>
         [MethodImpl(Inline), Op]
         public static bit mux(BitVector8 src,BitVector4 control)
-            => src[control.Data];
+            => src[control.State];
 
         /// <summary>
         /// Uses the four bits of the control operand to select one of 16 bits from the input operand
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="control">Specifies the output selection</param>
         [MethodImpl(Inline), Op]
         public static bit mux(BitVector16 src, BitVector4 control)
-            => src[control.Data];
+            => src[control.State];
 
         /// <summary>
         /// Uses the first 5 bits of the control operand to select one of 32 bits from the input operand
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="control">Specifies the output selection</param>
         [MethodImpl(Inline), Op]
         public static bit mux(BitVector32 src, BitVector8 control)
-            => src[control.Data];
+            => src[control.State];
 
         /// <summary>
         /// Uses the first 6 bits of the control operand to select one of 64 bits from the input operand
@@ -55,6 +55,6 @@ namespace Z0
         /// <param name="control">Specifies the output selection</param>
         [MethodImpl(Inline), Op]
         public static bit mux(BitVector64 src, BitVector8 control)
-            => src[control.Data];
+            => src[control.State];
     }
 }

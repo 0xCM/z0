@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a 4-bit bitvector
@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
-        public byte Content
+        public byte State
         {
             [MethodImpl(Inline)]
             get => Data;

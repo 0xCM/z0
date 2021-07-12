@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static memory;
     using static SFx;
     using static ApiClassKind;
 
@@ -19,6 +18,11 @@ namespace Z0
         public static Nor<T> nor<T>()
             where T : unmanaged
                 => default(Nor<T>);
+
+        [MethodImpl(Inline), Factory(Nor), Closures(UnsignedInts)]
+        public static BvNor<T> bvnor<T>()
+            where T : unmanaged
+                => sfunc<BvNor<T>>();
 
         [MethodImpl(Inline), Factory(Nor), Closures(Closure)]
         public static VNor128<T> vnor<T>(W128 w, T t = default)

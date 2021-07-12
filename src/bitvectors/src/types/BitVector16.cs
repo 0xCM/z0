@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a 16-bit bitvector
@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
-        public ushort Content
+        public ushort State
         {
             [MethodImpl(Inline)]
             get => Data;

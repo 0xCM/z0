@@ -109,5 +109,15 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(char src)
             => NumericCast.force<T>(src);
+
+        /// <summary>
+        /// If possible, applies the conversion S -> T
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static T convert<S,T>(S src)
+            => NumericCast.force<S,T>(src);
     }
 }

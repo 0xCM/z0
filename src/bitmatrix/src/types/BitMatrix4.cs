@@ -60,7 +60,7 @@ namespace Z0
         {
             ushort result = 0;
             for(var i=0; i<N; i++)
-                result |= (ushort)(i == row ? value.Content << 4*i : this[row]);
+                result |= (ushort)(i == row ? value.State << 4*i : this[row]);
             Data = result;
         }
 

@@ -71,5 +71,9 @@ namespace Z0
             seek(dst,1) = new RobocopyResultHandler(paths);
             return buffer;
         }
+
+        [Op]
+        public static XedTableParser XedTableParser(this IWfRuntime wf)
+            => Tools.XedTableParser.create(wf);
     }
 }

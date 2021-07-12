@@ -228,7 +228,7 @@ namespace Z0
             where T : struct, IRecord<T>
                 => Wf.EmittedTable(flow,count, dst);
 
-        protected uint Emit<T>(ReadOnlySpan<T> src, FS.FilePath dst)
+        protected uint EmitRows<T>(ReadOnlySpan<T> src, FS.FilePath dst)
             where T : struct, IRecord<T>
         {
             var flow = EmittingTable<T>(dst);
@@ -238,7 +238,7 @@ namespace Z0
             return count;
         }
 
-        protected uint Emit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
+        protected uint EmitRows<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
             where T : struct, IRecord<T>
         {
             var flow = EmittingTable<T>(dst);
@@ -248,7 +248,7 @@ namespace Z0
             return count;
         }
 
-        protected uint Emit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, ushort rowpad, Encoding encoding, FS.FilePath dst)
+        protected uint EmitRows<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, ushort rowpad, Encoding encoding, FS.FilePath dst)
             where T : struct, IRecord<T>
         {
             var flow = Wf.EmittingTable<T>(dst);

@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor, Closures(Closure)]
         public static BitVector<T> xnor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.xnor(x.Data, y.Data);
+                => gmath.xnor(x.State, y.State);
 
         /// <summary>
         /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
@@ -32,7 +32,7 @@ namespace Z0
         public static BitVector<N,T> xnor<N,T>(BitVector<N,T> x, BitVector<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.xor(x.Data, y.Data);
+                => gmath.xor(x.State, y.State);
 
         /// <summary>
         /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
@@ -44,6 +44,6 @@ namespace Z0
         public static BitVector128<N,T> xnor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gcpu.vxnor(x.Data,y.Data);
+                => gcpu.vxnor(x.State,y.State);
     }
 }

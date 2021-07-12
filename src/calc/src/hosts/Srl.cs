@@ -74,7 +74,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, byte count, Span<T> dst)
-                => Calcs.srl(src, count, dst);
+                => gAlg.srl(src, count, dst);
         }
 
         [Closures(Integers), Srlv]
@@ -83,7 +83,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, ReadOnlySpan<byte> counts, Span<T> dst)
-                => Calcs.srlv(src,counts,dst);
+                => gAlg.srlv(src,counts,dst);
         }
 
         [Closures(Integers), Srl]

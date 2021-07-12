@@ -189,8 +189,6 @@ namespace Z0
             XMM_STATE_R,
 
             XMM_STATE_W,
-
-            LAST
         }
     }
 }

@@ -14,6 +14,31 @@ namespace Z0
     partial struct CalcHosts
     {
         [Closures(AllNumeric), Sub]
+        public readonly struct Sub<T>  : IBinaryOp<T>, IBinarySpanOp<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly T Invoke(T a, T b) => gmath.sub(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
+                => Calcs.sub(lhs,rhs,dst);
+        }
+
+        [Closures(UnsignedInts), Sub]
+        public readonly struct BvSub<T> : IBvBinaryOp<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b)
+                => BitVector.sub(a,b);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gmath.sub(a,b);
+        }
+
+        [Closures(AllNumeric), Sub]
         public readonly struct VSub128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
@@ -39,17 +64,6 @@ namespace Z0
                 => gmath.sub(a,b);
         }
 
-        [Closures(AllNumeric), Sub]
-        public readonly struct Sub<T>  : IBinaryOp<T>, IBinarySpanOp<T>
-            where T : unmanaged
-        {
-            [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.sub(a,b);
-
-            [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => Calcs.sub(lhs,rhs,dst);
-        }
 
         [Closures(AllNumeric), Sub]
         public readonly struct Sub128<T> : IBlockedBinaryOp128<T>

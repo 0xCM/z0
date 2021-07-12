@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class BitVector
     {
@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector4 dec(BitVector4 x)
         {
-            if(x.Data > 0)
+            if(x.State > 0)
                 return x.Data--;
             else
                 return  0xF;
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitVector8 dec(BitVector8 x)
-            => gmath.dec(x.Data);
+            => gmath.dec(x.State);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitVector16 dec(BitVector16 x)
-            => gmath.dec(x.Data);
+            => gmath.dec(x.State);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitVector32 dec(BitVector32 x)
-            => gmath.dec(x.Data);
+            => gmath.dec(x.State);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitVector64 dec(BitVector64 x)
-            => gmath.dec(x.Data);
+            => gmath.dec(x.State);
 
     }
 }

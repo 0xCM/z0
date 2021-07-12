@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
+    using static core;
 
     /// <summary>
     /// Defines a 32-bit bitvector
@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
-        public readonly uint Content
+        public readonly uint State
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -61,7 +61,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(Data);
+            get => bytes(Data);
         }
 
         /// <summary>

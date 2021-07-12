@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static BitSeq;
 
     /// <summary>
     /// Defines operations over character digits
@@ -19,30 +18,30 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void chars(Base10 @base, ushort src, out char c1, out char c0)
         {
-            c1 = (char)symbol(digit(@base, src, Bit1));
-            c0 = (char)symbol(digit(@base, src, Bit0));
+            c1 = (char)symbol(digit(@base, src, 1));
+            c0 = (char)symbol(digit(@base, src, 0));
         }
 
         [MethodImpl(Inline), Op]
         public static void chars(Base10 @base, uint src, out char c3, out char c2, out char c1, out char c0)
         {
-            c3 = (char)symbol(digit(@base, src, Bit3));
-            c2 = (char)symbol(digit(@base, src, Bit2));
-            c1 = (char)symbol(digit(@base, src, Bit1));
-            c0 = (char)symbol(digit(@base, src, Bit0));
+            c3 = (char)symbol(digit(@base, src, 3));
+            c2 = (char)symbol(digit(@base, src, 2));
+            c1 = (char)symbol(digit(@base, src, 1));
+            c0 = (char)symbol(digit(@base, src, 0));
         }
 
         [MethodImpl(Inline), Op]
         public static void chars(Base10 @base, ulong src, out char c7, out char c6, out char c5, out char c4, out char c3, out char c2, out char c1, out char c0)
         {
-            c7 = (char)symbol(digit(@base, src, Bit7));
-            c6 = (char)symbol(digit(@base, src, Bit6));
-            c5 = (char)symbol(digit(@base, src, Bit5));
-            c4 = (char)symbol(digit(@base, src, Bit4));
-            c3 = (char)symbol(digit(@base, src, Bit3));
-            c2 = (char)symbol(digit(@base, src, Bit2));
-            c1 = (char)symbol(digit(@base, src, Bit1));
-            c0 = (char)symbol(digit(@base, src, Bit0));
+            c7 = (char)symbol(digit(@base, src, 7));
+            c6 = (char)symbol(digit(@base, src, 6));
+            c5 = (char)symbol(digit(@base, src, 5));
+            c4 = (char)symbol(digit(@base, src, 4));
+            c3 = (char)symbol(digit(@base, src, 3));
+            c2 = (char)symbol(digit(@base, src, 2));
+            c1 = (char)symbol(digit(@base, src, 1));
+            c0 = (char)symbol(digit(@base, src, 0));
         }
 
         [MethodImpl(Inline), Op]

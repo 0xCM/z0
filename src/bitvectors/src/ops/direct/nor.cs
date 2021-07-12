@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class BitVector
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline), Nor]
         public static BitVector4 nor(BitVector4 x, BitVector4 y)
-            => gmath.nor(x.Data, y.Data);
+            => gmath.nor(x.State, y.State);
 
         /// <summary>
         /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline), Nor]
         public static BitVector8 nor(BitVector8 x, BitVector8 y)
-            => gmath.nor(x.Data, y.Data);
+            => gmath.nor(x.State, y.State);
 
         /// <summary>
         /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline), Nor]
         public static BitVector16 nor(BitVector16 x, BitVector16 y)
-            => gmath.nor(x.Data, y.Data);
+            => gmath.nor(x.State, y.State);
 
         /// <summary>
         /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline), Nor]
         public static BitVector32 nor(BitVector32 x, BitVector32 y)
-            => gmath.nor(x.Data, y.Data);
+            => gmath.nor(x.State, y.State);
 
         /// <summary>
         /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
@@ -54,6 +54,6 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline), Nor]
         public static BitVector64 nor(BitVector64 x, BitVector64 y)
-            => gmath.nor(x.Data, y.Data);
+            => gmath.nor(x.State, y.State);
    }
 }

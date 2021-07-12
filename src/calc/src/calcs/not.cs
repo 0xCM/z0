@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static memory;
     using static SFx;
     using static ApiClassKind;
 
@@ -19,6 +18,11 @@ namespace Z0
         public static Not<T> not<T>()
             where T : unmanaged
                 => default(Not<T>);
+
+        [MethodImpl(Inline), Factory(Not), Closures(UnsignedInts)]
+        public static BvNot<T> bvnot<T>()
+            where T : unmanaged
+                => sfunc<BvNot<T>>();
 
         [MethodImpl(Inline), Factory(Not), Closures(Closure)]
         public static VNot128<T> vnot<T>(W128 w)

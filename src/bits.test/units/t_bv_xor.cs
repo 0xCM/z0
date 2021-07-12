@@ -17,7 +17,7 @@ namespace Z0
         void bvxor_check<T>(T t = default)
             where T : unmanaged
         {
-            var f = BvSvc.xor<T>();
+            var f = Calcs.bvxor<T>();
 
             void check()
             {
@@ -26,8 +26,8 @@ namespace Z0
                     var x = Random.BitVector<T>();
                     var y = Random.BitVector<T>();
                     var result = f.Invoke(x,y);
-                    var expect = f.Invoke(x.Content,y.Content);
-                    Claim.eq(expect,result.Content);
+                    var expect = f.Invoke(x.State,y.State);
+                    Claim.eq(expect,result.State);
                 }
 
             }

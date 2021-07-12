@@ -7,11 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
     using static ApiClassKind;
-    using static memory;
-    using static SFx;
 
     partial struct Calcs
     {

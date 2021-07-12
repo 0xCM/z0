@@ -19,6 +19,11 @@ namespace Z0
             where T : unmanaged
                 => default(Or<T>);
 
+        [MethodImpl(Inline), Factory(Or), Closures(UnsignedInts)]
+        public static BvOr<T> bvor<T>()
+            where T : unmanaged
+                => sfunc<BvOr<T>>();
+
         [MethodImpl(Inline), Factory(Or), Closures(Closure)]
         public static VOr128<T> vor<T>(W128 w)
             where T : unmanaged

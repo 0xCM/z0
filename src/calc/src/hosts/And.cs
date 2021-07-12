@@ -35,6 +35,19 @@ namespace Z0
                 => Calcs.and(l,r,dst);
         }
 
+        [Closures(UnsignedInts), And]
+        public readonly struct BvAnd<T> : IBvBinaryOp<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b)
+                => BitVector.and(a,b);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gmath.and(a,b);
+        }
+
         [Closures(Integers), And]
         public readonly struct VAnd128<T> : IBinaryOp128D<T>
             where T : unmanaged

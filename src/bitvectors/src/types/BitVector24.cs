@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
+    using static core;
 
     /// <summary>
     /// Defines a 32-bit bitvector
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector24(uint src)
-            => this.Data = src & MaxValue;
+            => Data = src & MaxValue;
 
         /// <summary>
         /// Initializes the vector
@@ -55,12 +55,12 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector24(ushort lo, byte hi)
-            => this.Data = (uint)lo | (uint)hi << 16;
+            => Data = (uint)lo | (uint)hi << 16;
 
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
-        public readonly uint Scalar
+        public readonly uint State
         {
             [MethodImpl(Inline)]
             get => Data;

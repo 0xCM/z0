@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Bit)" />

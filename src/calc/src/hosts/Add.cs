@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static Typed;
     using static SFx;
 
     using K = ApiClasses;
@@ -29,6 +28,19 @@ namespace Z0
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
                 => Calcs.add(a, b, dst);
+        }
+
+        [Closures(Closure), Add]
+        public readonly struct BvAdd<T> : IBvBinaryOp<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b)
+                => BitVector.add(a,b);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gmath.add(a,b);
         }
 
         [Closures(AllNumeric), Add]

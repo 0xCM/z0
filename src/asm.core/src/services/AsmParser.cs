@@ -151,13 +151,13 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static Outcome parse(in TextRow src, out AsmApiStatement dst)
+        public static Outcome parse(in TextRow src, out AsmHostStatement dst)
         {
             var result = Outcome.Success;
             var count = src.CellCount;
             var cells = src.Cells;
             var i=0;
-            if(count == AsmApiStatement.FieldCount)
+            if(count == AsmHostStatement.FieldCount)
             {
                 result += DataParser.parse(skip(cells, i++), out dst.BlockAddress);
                 result += DataParser.parse(skip(cells, i++), out dst.IP);
@@ -180,9 +180,9 @@ namespace Z0.Asm
             }
         }
 
-        public static Outcome<uint> parse(in TextGrid doc, ConcurrentBag<AsmApiStatement> dst)
+        public static Outcome<uint> parse(in TextGrid doc, ConcurrentBag<AsmHostStatement> dst)
         {
-            const byte StatementFieldCount = AsmApiStatement.FieldCount;
+            const byte StatementFieldCount = AsmHostStatement.FieldCount;
 
             var counter = 0u;
             if(doc.Header.Labels.Length != StatementFieldCount)
@@ -193,7 +193,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                var result = parse(row, out AsmApiStatement statement);
+                var result = parse(row, out AsmHostStatement statement);
                 if(result)
                 {
                     dst.Add(statement);
@@ -247,32 +247,32 @@ namespace Z0.Asm
                 return (false, $"Could not locate the signature fence {SigFence}");
         }
 
-        public static Outcome parse(uint line, string src, out AsmIndex dst)
+        public static Outcome parse(uint line, string src, out AsmGlobal dst)
             => parse(new TextLine(line, src), out dst);
 
-        public static Outcome parse(uint line, ReadOnlySpan<char> src, out AsmIndex dst)
+        public static Outcome parse(uint line, ReadOnlySpan<char> src, out AsmGlobal dst)
             => parse(text.line(line, text.format(src)), out dst);
 
         public static ref AsmFormRecord parse(in TextRow src, ref AsmFormRecord dst)
         {
             var i = 0;
             DataParser.parse(src[i++], out dst.Seq);
-            AsmParser.opcode(src[i++], out dst.OpCode);
-            AsmParser.sig(src[i++], out dst.Sig);
-            AsmParser.form(src[i++], out dst.FormExpr);
+            opcode(src[i++], out dst.OpCode);
+            sig(src[i++], out dst.Sig);
+            form(src[i++], out dst.FormExpr);
             return ref dst;
         }
 
-        public static Outcome parse(TextLine src, out AsmIndex dst)
+        public static Outcome parse(TextLine src, out AsmGlobal dst)
         {
             const string ErrorPattern = "Error parsing {0} on line {1}";
             var parts = src.Split(Chars.Pipe).Map(x => x.Trim());
             var count = parts.Length;
             var outcome = Outcome.Success;
-            if(count != AsmIndex.FieldCount)
+            if(count != AsmGlobal.FieldCount)
             {
                 dst = default;
-                return (false, FieldCountMismatch.Format(AsmIndex.FieldCount, count, src));
+                return (false, FieldCountMismatch.Format(AsmGlobal.FieldCount, count, src));
             }
             dst = default;
             var i=0u;

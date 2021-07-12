@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     using L = BitMasks.Literals;
 
@@ -70,7 +70,7 @@ namespace Z0
                 for(int j=0, k = 0; j<64; j+=2, k++)
                     z[k] = x[j];
 
-                Claim.eq(z.Content, y.Content);
+                Claim.eq(z.State, y.State);
             }
 
             for(var i=0; i<RepCount; i++)
@@ -82,7 +82,7 @@ namespace Z0
                 for(int j=1, k = 0; j<64; j+=2, k++)
                     z[k] = x[j];
 
-                Claim.eq(z.Content, y.Content);
+                Claim.eq(z.State, y.State);
             }
         }
 

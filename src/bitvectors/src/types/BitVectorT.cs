@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a generic bitvector over a primal cell
@@ -17,7 +17,7 @@ namespace Z0
     public struct BitVector<T> : IBitVector<BitVector<T>,T>
         where T : unmanaged
     {
-        internal T Data;
+        T Data;
 
         [MethodImpl(Inline)]
         internal BitVector(T src)
@@ -26,7 +26,7 @@ namespace Z0
         /// <summary>
         /// Specifies the data over which the vector is defined
         /// </summary>
-        public readonly T Content
+        public readonly T State
         {
             [MethodImpl(Inline)]
             get => Data;

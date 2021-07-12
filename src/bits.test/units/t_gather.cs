@@ -14,7 +14,7 @@ namespace Z0
             var y2 = BitMasks.scatter(x2, m2).ToBitVector32();
             var bv = m2.ToBitVector32();
 
-            Claim.eq(y2.Content, bv.Content);
+            Claim.eq(y2.State, bv.State);
             for(var i=0; i<y2.Width; i++)
                 Claim.eq(y2[i], i % 8 == 0 ? bit.On : bit.Off);
         }
@@ -38,7 +38,7 @@ namespace Z0
             {
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();
-                Claim.eq(RefOps.gather(src, mask), gbits.gather(src, mask));
+                Claim.eq(BitRefs.gather(src, mask), gbits.gather(src, mask));
             }
         }
     }

@@ -28,6 +28,19 @@ namespace Z0
                 => Calcs.xor(l,r,dst);
         }
 
+        [Closures(UnsignedInts), Xor]
+        public readonly struct BvXor<T> : IBvBinaryOp<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b)
+                => BitVector.xor(a,b);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gmath.xor(a,b);
+        }
+
         [Closures(Integers), Xor]
         public readonly struct VXor128<T> : IBinaryOp128D<T>
             where T : unmanaged

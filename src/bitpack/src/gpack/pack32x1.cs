@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static NumericCast;
 
     partial struct gpack
     {
@@ -23,13 +22,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(BitPack.pack1x8(src));
+                return convert<T>(BitPack.pack1x8(src));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(BitPack.pack1x16(src));
+                return convert<T>(BitPack.pack1x16(src));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BitPack.pack1x32(src));
+                return convert<T>(BitPack.pack1x32(src));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BitPack.pack1x64(src));
+                return convert<T>(BitPack.pack1x64(src));
             else
                 return pack32x1_i<T>(src);
         }
@@ -39,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return force<T>(BitPack.pack1x8(src));
+                return convert<T>(BitPack.pack1x8(src));
             else if(typeof(T) == typeof(short))
-                return force<T>(BitPack.pack1x16(src));
+                return convert<T>(BitPack.pack1x16(src));
             else if(typeof(T) == typeof(int))
-                return force<T>(BitPack.pack1x32(src));
+                return convert<T>(BitPack.pack1x32(src));
             else if(typeof(T) == typeof(long))
-                return force<T>(BitPack.pack1x64(src));
+                return convert<T>(BitPack.pack1x64(src));
             else
                 throw no<T>();
         }

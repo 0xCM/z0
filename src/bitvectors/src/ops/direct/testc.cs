@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class BitVector
     {
@@ -16,27 +16,27 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline),TestC]
         public static bit testc(BitVector8 src)
-            => (byte.MaxValue & src.Data) == byte.MaxValue;
+            => (byte.MaxValue & src.State) == byte.MaxValue;
 
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
         /// </summary>
         [MethodImpl(Inline),TestC]
         public static bit testc(BitVector16 src)
-            => (ushort.MaxValue & src.Data) == ushort.MaxValue;
+            => (ushort.MaxValue & src.State) == ushort.MaxValue;
 
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
         /// </summary>
         [MethodImpl(Inline),TestC]
         public static bit testc(BitVector32 src)
-            => (uint.MaxValue & src.Data) == uint.MaxValue;
+            => (uint.MaxValue & src.State) == uint.MaxValue;
 
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
         /// </summary>
         [MethodImpl(Inline),TestC]
         public static bit testc(BitVector64 src)
-            => (ulong.MaxValue & src.Data) == ulong.MaxValue;
+            => (ulong.MaxValue & src.State) == ulong.MaxValue;
     }
 }

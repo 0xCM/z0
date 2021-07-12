@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
-
     /// <summary>
     /// Primitive polynomials for GF reduction
     /// </summary>
@@ -87,7 +81,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var n = nat32i<N>();
+            var n = Typed.nat32i<N>();
             switch(n)
             {
                 case 2:

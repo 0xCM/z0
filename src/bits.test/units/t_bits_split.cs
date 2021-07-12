@@ -46,7 +46,7 @@ namespace Z0
                 {
                     var dst = (byte)0;
                     var pos = (byte)(Pow2.pow(i) - 1);
-                    RefOps.pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
+                    BitRefs.pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
 
                     byte j = 0;
                     Claim.require(gbits.bitmatch(dst, j++, x0, pos));

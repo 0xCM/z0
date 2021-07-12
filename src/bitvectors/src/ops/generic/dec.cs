@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitVector<T> dec<T>(BitVector<T> x)
             where T : unmanaged
-                => gmath.dec(x.Data);
+                => gmath.dec(x.State);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -30,6 +30,6 @@ namespace Z0
         public static BitVector<N,T> dec<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.dec(x.Data);
+                => gmath.dec(x.State);
     }
 }

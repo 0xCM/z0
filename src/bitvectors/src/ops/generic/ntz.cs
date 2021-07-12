@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Nlz, Closures(Closure)]
         public static T ntz<T>(in BitVector<T> x)
             where T : unmanaged
-                => gbits.ntz(x.Data);
+                => gbits.ntz(x.State);
 
         /// <summary>
         /// Counts the number of trailing zero bits
@@ -27,7 +27,7 @@ namespace Z0
         public static T ntz<N,T>(in BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.ntz(x.Data);
+                => gbits.ntz(x.State);
 
         /// <summary>
         /// Counts the number of trailing zeros
@@ -39,9 +39,9 @@ namespace Z0
         {
             var lo = x.Lo;
             if(lo != 0)
-                return generic<T>(gbits.ntz(lo.Data));
+                return generic<T>(gbits.ntz(lo.State));
             else
-                return generic<T>(gmath.add(gbits.ntz(x.Hi.Data), 64ul));
+                return generic<T>(gmath.add(gbits.ntz(x.Hi.State), 64ul));
         }
     }
 }

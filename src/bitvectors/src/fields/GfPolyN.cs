@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Represents a base-2 polynomial of degree N. The represented polynomial is of the form
@@ -21,12 +21,12 @@ namespace Z0
     {
         readonly ulong Data;
 
-        public static byte degree => (byte)nat64u<N>();
+        public static byte degree => (byte)Typed.nat64u<N>();
 
         public static GfPoly<N,T> Zero => default;
 
         public static implicit operator T(GfPoly<N,T> src)
-            => Numeric.force<T>(src.Data);
+            => convert<T>(src.Data);
 
         public GfPoly(params byte[] exponents)
         {
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public GfPoly(T src)
         {
-            Data = Numeric.force<T,ulong>(src);;
+            Data = convert<T,ulong>(src);;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         public T Scalar
         {
             [MethodImpl(Inline)]
-            get => Numeric.force<T>(Data);
+            get => convert<T>(Data);
         }
 
         /// <summary>

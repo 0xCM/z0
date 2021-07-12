@@ -8,45 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
     using static core;
-    using static cpu;
     using static BitMasks;
 
     partial struct BitPack
     {
-        /// <summary>
-        /// Distributes 32 packed source bits to the least significant bit of 32 corresponding target bytes
-        /// </summary>
-        /// <param name="src">The packed source bits</param>
-        /// <param name="dst">The target buffer</param>
-        [MethodImpl(Inline), Op]
-        public static ref byte unpack1x8x32(uint src, ref byte dst)
-        {
-            var m = lsb<ulong>(n8,n1);
-            seek64(dst, 0) = scatter((ulong)(byte)src, m);
-            seek64(dst, 1) = scatter((ulong)((byte)(src >> 8)), m);
-            seek64(dst, 2) = scatter((ulong)((byte)(src >> 16)), m);
-            seek64(dst, 3) = scatter((ulong)((byte)(src >> 24)), m);
-            return ref dst;
-        }
-
-        /// <summary>
-        /// Unpacks 8 source bits over 8 32-bit target segments
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="buffer">The intermediate buffer</param>
-        /// <param name="dst">The target buffer</param>
-        [MethodImpl(Inline), Op]
-        public static void unpack1x8(byte src, Span<uint> dst)
-        {
-            var buffer = z64;
-            ref var tmp = ref uint8(ref buffer);
-            ref var lead = ref first(dst);
-            unpack1x8(src, ref tmp);
-            vinflate8x256x32u(tmp).StoreTo(ref lead);
-        }
-
         /// <summary>
         /// Distributes each packed source bit to the least significant bit of the corresponding target byte
         /// </summary>
@@ -55,14 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack1x8(byte src, Span<byte> dst)
             => seek64(first(dst), 0) = scatter((ulong)(byte)src, lsb<ulong>(n8,n1));
-
-        [MethodImpl(Inline), Unpack]
-        public static ref ulong unpack1x8x32(uint src, ref ulong dst)
-        {
-            unpack1x8x16((ushort)src, ref dst);
-            unpack1x16((ushort)(src >> 16), ref seek8(dst, 16));
-            return ref dst;
-        }
 
         /// <summary>
         /// Sends each source bit to to least bit of each 8-bit segment in the target

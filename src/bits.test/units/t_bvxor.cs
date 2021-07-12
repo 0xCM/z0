@@ -249,7 +249,7 @@ namespace Z0
                 ClaimNumeric.lteq(BitVector.effwidth(y),width);
 
                 var z = x ^ y;
-                ClaimNumeric.eq(gmath.xor(x.Content, y.Content), z.Content);
+                ClaimNumeric.eq(gmath.xor(x.State, y.State), z.State);
 
                 var xbs = x.ToBitString().Truncate(width);
                 Claim.eq(width, xbs.Length);

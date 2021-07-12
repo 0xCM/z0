@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Rotl, Closures(Closure)]
         public static BitVector<T> rotl<T>(BitVector<T> x, byte offset)
             where T : unmanaged
-                => gbits.rotl(x.Data,offset);
+                => gbits.rotl(x.State,offset);
 
         /// <summary>
         /// Rotates source bits leftward
@@ -32,7 +32,7 @@ namespace Z0
         public static BitVector<N,T> rotl<N,T>(BitVector<N,T> x, byte offset)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.rotl(x.Data, offset, x.Width);
+                => gbits.rotl(x.State, offset, x.Width);
 
         /// <summary>
         /// Rotates source bits leftward
@@ -44,6 +44,6 @@ namespace Z0
         public static BitVector128<N,T> rotl<N,T>(in BitVector128<N,T> src, byte offset)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gcpu.vrotlx(src.Data, offset);
+                => gcpu.vrotlx(src.State, offset);
     }
 }

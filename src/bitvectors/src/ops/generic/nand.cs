@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static BitVector<T> nand<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.nand(x.Data, y.Data);
+                => gmath.nand(x.State, y.State);
 
         /// <summary>
         /// Computes z := ~(x & y) for bitvectors x and y
@@ -32,7 +32,7 @@ namespace Z0
         public static BitVector<N,T> nand<N,T>(BitVector<N,T> x, BitVector<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.nand(x.Data, y.Data);
+                => gmath.nand(x.State, y.State);
 
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
@@ -43,6 +43,6 @@ namespace Z0
         public static BitVector128<N,T> nand<N,T>(BitVector128<N,T> x, BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gcpu.vnand(x.Data, y.Data);
+                => gcpu.vnand(x.State, y.State);
    }
 }

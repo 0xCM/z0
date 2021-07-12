@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class XBv
     {
@@ -53,6 +53,6 @@ namespace Z0
         public static BitVector<N,T> ToNatural<N,T>(this BitVector<T> src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitVector.natural<N,T>(src.Content);
+                => BitVector.natural<N,T>(src.State);
     }
 }

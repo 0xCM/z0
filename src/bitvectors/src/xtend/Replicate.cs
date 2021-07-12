@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class XBv
     {
@@ -41,7 +41,7 @@ namespace Z0
         public static BitVector128<N,T> Replicate<N,T>(this BitVector128<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitVector.replicate(src);
+                => BitVector128.replicate(src);
 
         /// <summary>
         /// Creates a copy of the vector

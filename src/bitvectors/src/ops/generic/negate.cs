@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class BitVector
     {
@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Negate, Closures(Closure)]
         public static BitVector<T> negate<T>(BitVector<T> x)
             where T : unmanaged
-                => gmath.negate(x.Data);
+                => gmath.negate(x.State);
 
         /// <summary>
         /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
@@ -30,7 +30,7 @@ namespace Z0
         public static BitVector<N,T> negate<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.negate(x.Data);
+                => gmath.negate(x.State);
 
         /// <summary>
         /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
@@ -41,6 +41,6 @@ namespace Z0
         public static BitVector128<N,T> negate<N,T>(in BitVector128<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gcpu.vnegate(x.Data);
+                => gcpu.vnegate(x.State);
     }
 }

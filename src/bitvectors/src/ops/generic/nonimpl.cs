@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), NonImpl, Closures(Closure)]
         public static BitVector<T> nonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gbits.nonimpl(x.Data, y.Data);
+                => gbits.nonimpl(x.State, y.State);
 
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
@@ -31,7 +31,7 @@ namespace Z0
         public static BitVector<N,T> nonimpl<N,T>(BitVector<N,T> x, BitVector<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.nonimpl(x.Data, y.Data);
+                => gbits.nonimpl(x.State, y.State);
 
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
@@ -42,6 +42,6 @@ namespace Z0
         public static BitVector128<N,T> nonimpl<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gcpu.vnonimpl(x.Data, y.Data);
+                => gcpu.vnonimpl(x.State, y.State);
     }
 }

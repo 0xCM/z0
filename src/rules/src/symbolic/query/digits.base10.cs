@@ -15,44 +15,6 @@ namespace Z0
     partial struct SymbolicQuery
     {
         /// <summary>
-        /// Determines whether an asci span segment defines a sequence of decimal digits
-        /// </summary>
-        /// <param name="base">The base selector</param>
-        /// <param name="src">The data source</param>
-        /// <param name="offset">The source offset</param>
-        /// <param name="count">The sequence length</param>
-        [MethodImpl(Inline), Op]
-        public static bit digits(Base10 @base, ReadOnlySpan<C> src, uint offset, uint count)
-        {
-            for(var i=offset; i<count+offset; i++)
-            {
-                ref readonly var c = ref skip(src,i);
-                if(!digit(@base, c))
-                    return false;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Determines whether a character span segment defines a sequence of decimal digits
-        /// </summary>
-        /// <param name="base">The base selector</param>
-        /// <param name="src">The data source</param>
-        /// <param name="offset">The source offset</param>
-        /// <param name="count">The sequence length</param>
-        [MethodImpl(Inline), Op]
-        public static bit digits(Base10 @base, ReadOnlySpan<char> src, uint offset, uint count)
-        {
-            for(var i=offset; i<count+offset; i++)
-            {
-                ref readonly var c = ref skip(src,i);
-                if(!digit(@base, c))
-                    return false;
-            }
-            return true;
-        }
-
-        /// <summary>
         /// Extracts a contiguous digit sequence from a specified source and writes the elements to a specified target,
         /// and returns the number of digits extracted to the caller
         /// </summary>
@@ -126,6 +88,44 @@ namespace Z0
             var dst = storage.Data;
             var count = digits(base10, src, dst);
             return count == 0 ? default : slice(dst,0,count);
+        }
+
+        /// <summary>
+        /// Determines whether an asci span segment defines a sequence of decimal digits
+        /// </summary>
+        /// <param name="base">The base selector</param>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
+        /// <param name="count">The sequence length</param>
+        [MethodImpl(Inline), Op]
+        public static bit digits(Base10 @base, ReadOnlySpan<C> src, uint offset, uint count)
+        {
+            for(var i=offset; i<count+offset; i++)
+            {
+                ref readonly var c = ref skip(src,i);
+                if(!digit(@base, c))
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Determines whether a character span segment defines a sequence of decimal digits
+        /// </summary>
+        /// <param name="base">The base selector</param>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The source offset</param>
+        /// <param name="count">The sequence length</param>
+        [MethodImpl(Inline), Op]
+        public static bit digits(Base10 @base, ReadOnlySpan<char> src, uint offset, uint count)
+        {
+            for(var i=offset; i<count+offset; i++)
+            {
+                ref readonly var c = ref skip(src,i);
+                if(!digit(@base, c))
+                    return false;
+            }
+            return true;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Z0
         {
             ushort result = 0;
             for(var i=0; i<rows.Length; i++)
-                result |= (ushort)(rows[i].Content << 4*i);
+                result |= (ushort)(rows[i].State << 4*i);
             return result;
         }
 

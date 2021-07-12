@@ -14,7 +14,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [Op]
-        public static AsmEncodingInfo encoding(in AsmIndex src)
+        public static AsmEncodingInfo encoding(in AsmGlobal src)
             => new AsmEncodingInfo((src.OpCode, src.Sig), src.Statement, src.Encoded, AsmBitstrings.bitstring(src.Encoded));
 
         [Op]

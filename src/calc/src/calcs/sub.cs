@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static memory;
     using static SFx;
     using static ApiClassKind;
 
@@ -19,6 +18,11 @@ namespace Z0
         public static Sub<T> sub<T>()
             where T : unmanaged
                 => default;
+
+        [MethodImpl(Inline), Factory(Sub), Closures(UnsignedInts)]
+        public static BvSub<T> bvsub<T>()
+            where T : unmanaged
+                => sfunc<BvSub<T>>();
 
         [MethodImpl(Inline), Factory(Sub), Closures(Closure)]
         public static Sub128<T> sub<T>(W128 w)

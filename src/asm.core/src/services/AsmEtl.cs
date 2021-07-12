@@ -11,11 +11,87 @@ namespace Z0.Asm
     using static core;
 
     [ApiHost]
-    public readonly struct AsmEtl
+    public class AsmEtl : Service<AsmEtl>
     {
-        public static ReadOnlySpan<AsmIndex> LoadStatementIndex(FS.FilePath src)
+        public ReadOnlySpan<AsmThumbprint> LoadThumbprints(FS.FilePath src)
         {
-            var dst = list<AsmIndex>();
+            var dst = list<AsmThumbprint>();
+            using var reader = src.Reader();
+            while(!reader.EndOfStream)
+            {
+                var data = reader.ReadLine();
+                var statement = asm.expr(data.LeftOfFirst(Chars.Semicolon));
+                var tpResult = AsmParser.thumbprint(data, out var thumbprint);
+                if(tpResult)
+                    dst.Add(thumbprint);
+                else
+                    Error(tpResult.Message);
+            }
+            return dst.ToArray();
+        }
+
+        public ReadOnlySpan<TextLine> EmitThumbprints(SortedSpan<AsmEncodingInfo> src, FS.FilePath dst)
+        {
+            var count = src.Length;
+            var emitting = Emitting(dst);
+            var lines = span<TextLine>(count);
+            using var writer = dst.Writer();
+            for(var i=0u; i<count; i++)
+            {
+                var content = AsmRender.thumbprint(skip(src,i));
+                writer.WriteLine(content);
+                seek(lines,i) = (i,content);
+            }
+            Emitted(emitting, count);
+            return lines;
+        }
+
+        public void EmitThumbprints(SortedSpan<AsmGlobal> src, FS.FilePath dst)
+            => EmitThumbprints(DistinctEncodings(src), dst);
+
+        public void EmitThumbprints(ReadOnlySpan<AsmThumbprint> src, FS.FilePath dst)
+        {
+            var flow = Emitting(dst);
+            var count = src.Length;
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+                writer.WriteLine(AsmRender.format(skip(src,i)));
+            Emitted(flow, count);
+        }
+
+        public ReadOnlySpan<TextLine> EmitThumbprints(SortedSpan<AsmThumbprint> src, FS.FilePath dst)
+        {
+            var count = src.Length;
+            var emitting = Emitting(dst);
+            var lines = span<TextLine>(count);
+            using var writer = dst.Writer();
+            for(var i=0u; i<count; i++)
+            {
+                var content = AsmRender.thumbprint(skip(src,i), true);
+                writer.WriteLine(content);
+                seek(lines,i) = (i,content);
+            }
+            Emitted(emitting, count);
+            return lines;
+        }
+
+        public SortedSpan<AsmThumbprint> DistinctThumbprints(ReadOnlySpan<AsmHostStatement> src)
+        {
+            var distinct = hashset<AsmThumbprint>();
+            iter(src, s => distinct.Add(asm.thumbprint(s)));
+            return distinct.Array().ToSortedSpan();
+        }
+
+        public SortedSpan<AsmThumbprint> EmitThumbprints(ReadOnlySpan<AsmHostStatement> src, FS.FilePath dst)
+        {
+            var distinct = DistinctThumbprints(src);
+            EmitThumbprints(distinct, dst);
+            return distinct;
+        }
+
+        public static ReadOnlySpan<AsmGlobal> LoadGlobalAsm(FS.FilePath src)
+        {
+            var dst = list<AsmGlobal>();
             var counter = 1u;
 
             using var reader = src.Reader();
@@ -34,7 +110,7 @@ namespace Z0.Asm
             return dst.ViewDeposited();
         }
 
-        public static void traverse(FS.FilePath src, Receiver<AsmIndex> dst)
+        public static void traverse(FS.FilePath src, Receiver<AsmGlobal> dst)
         {
             var counter = 1u;
             using var reader = src.Reader();
@@ -80,7 +156,7 @@ namespace Z0.Asm
         public static BinaryCode code(in CodeBlock src, uint offset, byte size)
             => slice(src.View, offset, size).ToArray();
 
-        public static SortedSpan<AsmEncodingInfo> DistinctEncodings(ReadOnlySpan<AsmIndex> src)
+        public static SortedSpan<AsmEncodingInfo> DistinctEncodings(ReadOnlySpan<AsmGlobal> src)
         {
             var collected = hashset<AsmEncodingInfo>();
             var count = src.Length;

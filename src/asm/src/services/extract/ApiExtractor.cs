@@ -38,7 +38,7 @@ namespace Z0
 
         Index<ResolvedPart> ResolvedParts;
 
-        Index<AsmRoutine> Routines;
+        Index<AsmRoutine> SortedRoutines;
 
         AsmFormatConfig FormatConfig;
 
@@ -46,7 +46,7 @@ namespace Z0
         {
             Identity = MultiDiviner.Service;
             Buffer = ApiExtracts.buffer();
-            Routines = array<AsmRoutine>();
+            SortedRoutines = array<AsmRoutine>();
             ResolvedParts = array<ResolvedPart>();
             FormatConfig = AsmFormatConfig.@default(out var _);
         }
@@ -81,7 +81,7 @@ namespace Z0
         void EmitAnalyses(IApiPack pack)
         {
             if(pack.Settings.Analyze)
-                Wf.AsmAnalyzer().Analyze(Routines, Paths);
+                Wf.AsmAnalyzer().Analyze(SortedRoutines, Paths);
         }
 
         void RunWorkflow(IApiPack pack)

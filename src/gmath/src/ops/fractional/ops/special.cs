@@ -65,6 +65,15 @@ namespace Z0
                 throw no<T>();
         }
 
+        [MethodImpl(Inline), Sqrt, Closures(Floats)]
+        public static Span<T> sqrt<T>(Span<T> src)
+            where T : unmanaged
+        {
+            for(var i=0; i<src.Length; i++)
+                seek(src,i) = sqrt(skip(src,i));
+            return src;
+        }
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T cos<T>(T src)
             where T : unmanaged

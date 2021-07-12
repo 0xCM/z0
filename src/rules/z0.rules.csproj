@@ -13,6 +13,7 @@
     <ProjectReference Include="$(SymCore)" />
     <ProjectReference Include="$(Hex)" />
     <ProjectReference Include="$(Text)" />
+    <ProjectReference Include="$(BitMasks)" />
 
   </ItemGroup>
 

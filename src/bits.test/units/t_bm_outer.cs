@@ -21,7 +21,7 @@ namespace Z0
             var A = BitMatrix.alloc(n32,n1,0u);
             for(var i=0; i<A.RowCount; i++)
                 A[i,0] = u[i];
-            var B = BitMatrix.init(v.Content,n1,n32);
+            var B = BitMatrix.init(v.State,n1,n32);
             var C = BitMatrix.mul(A,B).AsSquare();
 
             Claim.require(C == z);

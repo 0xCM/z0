@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class BitVector
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline), Op]
         public static BitVector4 enable(BitVector4 x, byte index)
-            => Bits.enable(x.Data, index);
+            => Bits.enable(x.State, index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline), Op]
         public static BitVector8 enable(BitVector8 x, byte index)
-            => Bits.enable(x.Data, index);
+            => Bits.enable(x.State, index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline), Op]
         public static BitVector16 enable(BitVector16 x, byte index)
-            => Bits.enable(x.Data, index);
+            => Bits.enable(x.State, index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline), Op]
         public static BitVector32 enable(BitVector32 x, byte index)
-            => Bits.enable(x.Data, index);
+            => Bits.enable(x.State, index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -49,6 +49,6 @@ namespace Z0
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline), Op]
         public static BitVector64 enable(BitVector64 x, byte index)
-            => Bits.enable(x.Data, index);
+            => Bits.enable(x.State, index);
     }
 }

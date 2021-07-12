@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
     using static TypedLogicSpec;
 
     public class t_bitwise_expr : UnitTest<t_bitwise_expr, ICheckVectorBits>
@@ -274,7 +274,7 @@ namespace Z0.Logix
                     z0[i] = BL(va[i],vb[i],vc[i]);
 
                 var z3 = SC(sa, sb, sc);
-                if(!NumericLogixOps.same(z3, z0.Content))
+                if(!NumericLogixOps.same(z3, z0.State))
                     Claim.failed($"Evalutation of ternary op {id} failed");
 
                 var v1 = gcpu.vbroadcast(w256,sa);
@@ -324,7 +324,7 @@ namespace Z0.Logix
                 T expect = NumericLogixHost.eval(op,a,b);
                 T result1 = LogicEngine.eval(expr);
                 //T result2 = BitVectorOpApi.eval(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
-                var result2 = BitVectorLogix.Service.EvalDirect(op, BitVector.alloc(a),BitVector.alloc(b)).Content;
+                var result2 = BitVectorLogix.Service.EvalDirect(op, BitVector.alloc(a),BitVector.alloc(b)).State;
                 Claim.eq(expect, result1);
                 Claim.eq(expect, result2);
             }

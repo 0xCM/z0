@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial struct asm
     {
@@ -21,7 +20,7 @@ namespace Z0.Asm
             => new AsmThumbprint(statement, form.Sig, form.OpCode, encoded);
 
         [MethodImpl(Inline),Op]
-        public static AsmThumbprint thumbprint(in AsmApiStatement src)
+        public static AsmThumbprint thumbprint(in AsmHostStatement src)
             => thumbprint(src.Expression, src.Sig, src.OpCode, src.Encoded);
     }
 }

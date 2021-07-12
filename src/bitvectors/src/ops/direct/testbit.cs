@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
         public static bit testbit(BitVector8 x, byte pos)
-            => bit.test(x.Data, pos);
+            => bit.test(x.State, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
         public static bit testbit(BitVector16 x, byte pos)
-            => bit.test(x.Data, pos);
+            => bit.test(x.State, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
         public static bit testbit(BitVector32 x, byte pos)
-            => bit.test(x.Data, pos);
+            => bit.test(x.State, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -49,6 +49,6 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
         public static bit testbit(BitVector64 x, byte pos)
-            => bit.test(x.Data, pos);
+            => bit.test(x.State, pos);
     }
 }

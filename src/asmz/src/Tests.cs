@@ -633,12 +633,6 @@ namespace Z0.Asm
             return jumpers.ToArray();
         }
 
-        void ShowThumprintCatalog()
-        {
-            var pipe = Wf.AsmThumbprints();
-            pipe.ShowThumprintCatalog();
-        }
-
         void ShowXedInstructions()
         {
             var pipe = Wf.IntelXed();

@@ -18,11 +18,11 @@ namespace Z0
             => (C)src == C.Hash;
 
         [MethodImpl(Inline), Op]
-        public static bit hash(C src)
-            => src == C.Hash;
+        public static bit hash(char src)
+            => src == (char)C.Hash;
 
         [MethodImpl(Inline), Op]
-        public static bit hash(char src)
+        public static bit hash(AsciSymbol src)
             => src == (char)C.Hash;
     }
 }

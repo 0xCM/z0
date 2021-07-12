@@ -8,13 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
     using static SFx;
 
     using K = ApiClasses;
 
     partial struct CalcHosts
     {
+        [Closures(UnsignedInts), Nor]
+        public readonly struct BvNor<T> : IBvBinaryOp<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b)
+                => BitVector.nor(a,b);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gmath.nor(a,b);
+        }
+
         [Closures(Integers)]
         public readonly struct VNor128<T> : IBinaryOp128D<T>
             where T : unmanaged

@@ -16,22 +16,22 @@ namespace Z0
     public struct BitVector32<T> : IBitVector<BitVector32<T>, T>
         where T : unmanaged
     {
-        public T Content {get;}
+        public T State {get;}
 
         [MethodImpl(Inline)]
         public BitVector32(T src)
-            => Content = src;
+            => State = src;
 
         uint Untyped
         {
             [MethodImpl(Inline)]
-            get => @as<T,uint>(Content);
+            get => @as<T,uint>(State);
         }
 
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => bytes(Content);
+            get => bytes(State);
         }
 
         [MethodImpl(Inline)]
@@ -39,8 +39,8 @@ namespace Z0
             => Untyped == other.Untyped;
 
         public string Format(BitFormat config)
-            => BitRender.formatter<T>(config).Format(Content);
+            => BitRender.formatter<T>(config).Format(State);
         public string Format()
-            => BitRender.formatter<T>().Format(Content);
+            => BitRender.formatter<T>().Format(State);
     }
 }

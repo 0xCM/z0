@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     partial class BitVector
     {
@@ -16,17 +15,17 @@ namespace Z0
         /// Converts the vector to a bitspan representation
         /// </summary>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitSpan32 bitspan<T>(BitVector<T> src, int? maxbits = null)
+        public static BitSpan32 bitspan32<T>(BitVector<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitSpans32.from(src.Data, maxbits ?? 0);
+                => BitSpans32.from(src.State, maxbits ?? 0);
 
         /// <summary>
         /// Converts the vector to a bitspan representation
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitSpan32 bitspan<N,T>(BitVector<N,T> x)
+        public static BitSpan32 bitspan32<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitSpans32.from(x.Data, nat32i<N>());
+                => BitSpans32.from(x.State, Typed.nat32i<N>());
     }
 }

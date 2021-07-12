@@ -27,7 +27,7 @@ namespace Z0
             => Claims.eq(x, y, caller, file, line);
 
         void eq(BitVector64 x, BitVector64 y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Primal.eq(x.Content, y.Content, caller, file, line);
+            => Primal.eq(x.State, y.State, caller, file, line);
 
         void eq<T>(BitVector<T> x, BitVector<T> y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
     using static SFx;
 
     using K = ApiClasses;
@@ -25,6 +25,19 @@ namespace Z0
 
             public OpIdentity Id
                 => SFx.identity<T>(Name);
+
+            [MethodImpl(Inline)]
+            public bit Invoke(T a, T b)
+                => gbits.dot(a,b);
+        }
+
+        [Closures(UnsignedInts), Dot]
+        public readonly struct BvDot<T> : IBvBinaryPred<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly bit Invoke(BitVector<T> a, BitVector<T> b)
+                => BitVector.dot(a,b);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b)

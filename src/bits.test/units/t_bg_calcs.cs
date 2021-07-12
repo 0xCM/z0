@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class t_bg_calcs : t_bits<t_bg_calcs>
     {
@@ -85,7 +85,7 @@ namespace Z0
             Span<byte> data = stackalloc byte[8];
             data.Fill(0b10101010);
 
-            ref readonly var src = ref memory.first64u(data);
+            ref readonly var src = ref first64u(data);
             var spec = CellCalcs.gridspec(n8, n8, byte.MinValue);
             var map = spec.Map();
             var state = bit.Off;

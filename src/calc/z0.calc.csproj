@@ -10,6 +10,7 @@
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Check)" />
+    <ProjectReference Include="$(BitVectors)" />
   </ItemGroup>
 
 </Project>

@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static SFx;
 
     using BL = ByteLogic;
@@ -18,6 +18,18 @@ namespace Z0
 
     partial struct CalcHosts
     {
+        [Closures(UnsignedInts), Not]
+        public readonly struct BvNot<T> : IBvUnaryOp<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly BitVector<T> Invoke(BitVector<T> a)
+                => BitVector.not(a);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a) => gmath.not(a);
+        }
+
         [Closures(Integers), Not]
         public readonly struct VNot128<T> : IUnaryOp128D<T>
             where T : unmanaged

@@ -55,6 +55,7 @@ namespace Z0.Asm
         public Outcome LoadChipMap(out ChipMap dst)
             => ChipIsaParser.Parse(ChipSourcePath(), out dst);
 
+
         public Outcome EmitChipMap()
         {
             const string RowFormat = "{0,-12} | {1,-24} | {2}";
@@ -269,24 +270,34 @@ namespace Z0.Asm
             EmitSymbols<SizeIndicator>();
         }
 
+        FS.FilePath SummarySourcePath()
+            => SourceDir() + FS.file("xed-idata", FS.Txt);
+
         public void ImportFormSummaries()
         {
-            var parser = XedSummaryParser.create(Wf.EventSink);
-            var parsed = parser.ParseSummaries(IDataSourcePath());
-            EmitFormSummaries(parsed);
+            var parser = XedFormSummaryParser.create(Wf.EventSink);
+            var parsed = parser.ParseSummaries(SummarySourcePath());
+            var dst = Db.CatalogTable<XedFormInfo>("asm", "xed");
+            ImportFormSummaries(parsed,dst);
         }
 
-        public void EmitFormSummaries(ReadOnlySpan<XedFormInfo> src)
+        public void ImportFormSummaries(FS.FilePath src, FS.FilePath dst)
         {
-            var dst = Db.CatalogTable<XedFormInfo>("asm", "xed");
+            var parser = XedFormSummaryParser.create(Wf.EventSink);
+            var parsed = parser.ParseSummaries(src);
+            ImportFormSummaries(parsed,dst);
+        }
+
+        public void ImportFormSummaries(ReadOnlySpan<XedFormInfo> src, FS.FilePath dst)
+        {
             var flow = Wf.EmittingTable<XedFormInfo>(dst);
-            var count = Tables.emit(src,dst);
+            var count = Tables.emit(src,dst,XedFormInfo.RenderWidths);
             Wf.EmittedTable(flow,count);
         }
 
         public Index<XedFormInfo> LoadFormSummaries()
         {
-            var src = IDataSourcePath();
+            var src = SummarySourcePath();
             var flow = Wf.Running("Loading xed instruction summaries");
             using var reader = src.Reader();
             var counter = 0u;
@@ -525,9 +536,6 @@ namespace Z0.Asm
 
         FS.FolderPath SourceDir()
            => Workspace.DataSource(dataset);
-
-        FS.FilePath IDataSourcePath()
-            => SourceDir() + FS.file("xed-idata", FS.Txt);
 
         FS.FilePath XedTableSourcePath()
             => SourceDir() + FS.file("xed-tables", FS.Txt);

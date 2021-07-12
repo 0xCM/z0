@@ -11,34 +11,34 @@ namespace Z0
     {
         public static string FormatBlocked<T>(this BitVector<T> src, int width)
             where T : unmanaged
-                => FormatBits.blocked(src.Content, width);
+                => FormatBits.blocked(src.State, width);
 
         public static string FormatBlocked(this BitVector8 src, int width)
-            => FormatBits.blocked(src.Content, width);
+            => FormatBits.blocked(src.State, width);
 
         public static string FormatBlocked(this BitVector16 src, int width)
-            => FormatBits.blocked(src.Content, width);
+            => FormatBits.blocked(src.State, width);
 
         public static string FormatBlocked(this BitVector32 src, int width)
-            => FormatBits.blocked(src.Content, width);
+            => FormatBits.blocked(src.State, width);
 
         public static string FormatBlocked(this BitVector64 src, int width)
-            => FormatBits.blocked(src.Content, width);
+            => FormatBits.blocked(src.State, width);
 
         public static string FormatBlocked<T>(this BitVector<T> src, BitFormat config)
             where T : unmanaged
-                => FormatBits.blocked(src.Content, config);
+                => FormatBits.blocked(src.State, config);
 
         public static string FormatBlocked(this BitVector8 src, BitFormat config)
-            => FormatBits.blocked(src.Content, config);
+            => FormatBits.blocked(src.State, config);
 
         public static string FormatBlocked(this BitVector16 src, BitFormat config)
-            => FormatBits.blocked(src.Content, config);
+            => FormatBits.blocked(src.State, config);
 
         public static string FormatBlocked(this BitVector32 src, BitFormat config)
-            => FormatBits.blocked(src.Content, config);
+            => FormatBits.blocked(src.State, config);
 
         public static string FormatBlocked(this BitVector64 src, BitFormat config)
-            => FormatBits.blocked(src.Content, config);
+            => FormatBits.blocked(src.State, config);
     }
 }

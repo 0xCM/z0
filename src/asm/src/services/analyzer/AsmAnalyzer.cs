@@ -47,7 +47,7 @@ namespace Z0
                 statements.EmitHostStatements(src, dst);
 
             if(Settings.EmitStatementIndex)
-                statements.EmitIndex(blocks, dst.StatementIndexPath());
+                statements.EmitIndex(src, dst.StatementIndexPath());
 
             if(Settings.EmitAsmDetails)
                 EmitDetails(blocks, dst);

@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static memory;
     using static SFx;
     using static ApiClassKind;
 
@@ -19,6 +18,11 @@ namespace Z0
         public static Nand<T> nand<T>()
             where T : unmanaged
                 => default(Nand<T>);
+
+        [MethodImpl(Inline), Factory(Nand), Closures(UnsignedInts)]
+        public static BvNand<T> bvnand<T>()
+            where T : unmanaged
+                => sfunc<BvNand<T>>();
 
         [MethodImpl(Inline), Factory(Nand), Closures(Closure)]
         public static VNand128<T> vnand<T>(W128 w)

@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Rotr, Closures(Closure)]
         public static BitVector<T> rotr<T>(BitVector<T> x, byte offset)
             where T : unmanaged
-                => gbits.rotr(x.Content, offset);
+                => gbits.rotr(x.State, offset);
 
         /// <summary>
         /// Rotates source bits rightward
@@ -32,7 +32,7 @@ namespace Z0
         public static BitVector<N,T> rotr<N,T>(BitVector<N,T> x, byte offset)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.rotr(x.Content, offset, (byte)x.Width);
+                => gbits.rotr(x.State, offset, (byte)x.Width);
 
         /// <summary>
         /// Rotates source bits rightward
@@ -44,6 +44,6 @@ namespace Z0
         public static BitVector128<N,T> rotr<N,T>(in BitVector128<N,T> x, byte offset)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gcpu.vrotrx(x.Content, offset);
+                => gcpu.vrotrx(x.State, offset);
     }
 }

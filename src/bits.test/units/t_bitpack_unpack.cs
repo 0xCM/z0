@@ -8,14 +8,14 @@ namespace Z0
 
     public class t_bitpack_unpack : t_bits<t_bitpack_unpack>
     {
-       public void unpack_64x1()
+        public void unpack_64x1()
         {
             Span<byte> dst = stackalloc byte[64];
 
             for(var i=0; i< RepCount; i++)
             {
                 var src = Random.Next<ulong>();
-                BitPack.unpack1x64(src, dst);
+                BitPack.unpack1x64x8(src, dst);
                 var bitsPC = dst.PopCount();
                 var bytes = memory.bytes(src);
                 var bytesPC = bytes.PopCount();

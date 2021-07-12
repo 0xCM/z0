@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), MsbOff]
         public static BitVector4 cut(BitVector4 src, byte pos)
-            => gbits.cut(src.Data, pos);
+            => gbits.cut(src.State, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), MsbOff]
         public static BitVector8 cut(BitVector8 src, byte pos)
-            => gbits.cut(src.Data, pos);
+            => gbits.cut(src.State, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), MsbOff]
         public static BitVector16 cut(BitVector16 src, byte pos)
-            => gbits.cut(src.Data, pos);
+            => gbits.cut(src.State, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), MsbOff]
         public static BitVector32 cut(BitVector32 src, byte pos)
-            => gbits.cut(src.Data, pos);
+            => gbits.cut(src.State, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
@@ -49,6 +49,6 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), MsbOff]
         public static BitVector64 cut(BitVector64 src, byte pos)
-            => gbits.cut(src.Data, pos);
+            => gbits.cut(src.State, pos);
     }
 }

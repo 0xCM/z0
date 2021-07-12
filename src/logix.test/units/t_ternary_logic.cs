@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class t_ternary_logic : t_logix<t_ternary_logic>
     {
@@ -64,7 +64,7 @@ namespace Z0
                 var a = Random.BitVector<T>();
                 var b = Random.BitVector<T>();
                 var c = Random.BitVector<T>();
-                BitVector<T> x = NumericLogixOps.select(a.Content, b.Content, c.Content);
+                BitVector<T> x = NumericLogixOps.select(a.State, b.State, c.State);
                 for(var j=0; j<x.Width; j++)
                     Claim.eq(x[j], BitLogix.select(a[j],b[j],c[j]));
             }
@@ -142,7 +142,7 @@ namespace Z0
                     u[j] = bitlogix.Evaluate(kind, a[j], b[j], c[j]);
 
 
-                BitVector<T> v = NumericLogixHost.eval(kind, a.Content, b.Content, c.Content);
+                BitVector<T> v = NumericLogixHost.eval(kind, a.State, b.State, c.State);
 
                 if(u != v)
                     Notify($"Equivalence failed for ternary op {kind}:{TypeIdentity.numeric<T>()}");

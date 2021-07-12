@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
     using static SFx;
 
     partial struct CalcHosts
@@ -71,6 +71,5 @@ namespace Z0
             public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> c, in SpanBlock256<T> dst)
                 => ref zip(a,b,c,dst, Calcs.vselect<T>(w256));
         }
-
     }
 }

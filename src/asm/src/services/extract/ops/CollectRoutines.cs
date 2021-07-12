@@ -14,8 +14,8 @@ namespace Z0
         void CollectRoutines()
         {
             CollectedDatasets = DatasetReceiver.Array();
-            Routines = CollectedDatasets.SelectMany(x => x.Routines.Where(r => r != null && r.IsNonEmpty));
-            Routines.Sort();
+            SortedRoutines = CollectedDatasets.SelectMany(x => x.Routines.Where(r => r != null && r.IsNonEmpty));
+            SortedRoutines.Sort();
         }
     }
 }

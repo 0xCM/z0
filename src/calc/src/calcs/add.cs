@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
     using static SFx;
     using static ApiClassKind;
@@ -18,6 +18,11 @@ namespace Z0
         public static Add<T> add<T>()
             where T : unmanaged
                 => default;
+
+        [MethodImpl(Inline), Factory(Add), Closures(UnsignedInts)]
+        public static BvAdd<T> bvadd<T>()
+            where T : unmanaged
+                => sfunc<BvAdd<T>>();
 
         [MethodImpl(Inline), Factory(Add), Closures(Closure)]
         public static Add128<T> add<T>(W128 w)

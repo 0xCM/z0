@@ -46,5 +46,4 @@ namespace Z0
             where T : unmanaged
                 => generic<T>(cpu.vload(n, first(src)));
     }
-
 }

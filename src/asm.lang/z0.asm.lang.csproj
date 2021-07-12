@@ -13,7 +13,6 @@
     <ProjectReference Include="$(Glue)" />
     <ProjectReference Include="$(Digital)" />
     <ProjectReference Include="$(AsmCore)" />
-    <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Resources)" />
     <ProjectReference Include="$(SymCore)" />

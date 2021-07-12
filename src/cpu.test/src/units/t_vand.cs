@@ -67,7 +67,7 @@ namespace Z0
 
         void vand_bench<T>(W128 w, T t)
             where T : unmanaged
-                => vbinop_bench(w, Calcs.vand(w,t),t);
+                => vbinop_bench(w, Calcs.vand<T>(w),t);
 
         void vand_bench(W256 w)
         {
@@ -79,7 +79,7 @@ namespace Z0
 
         void vand_bench<T>(W256 w, T t)
             where T : unmanaged
-                => vbinop_bench(w, Calcs.vand(w,t),t);
+                => vbinop_bench(w, Calcs.vand<T>(w),t);
 
         static bit vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged

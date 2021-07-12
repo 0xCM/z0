@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     public ref struct AsciLine
     {
@@ -39,13 +40,13 @@ namespace Z0
         {
             LineNumber = number;
             StartPos = start;
-            Content = core.recover<byte,AsciSymbol>(src);
+            Content = recover<byte,AsciSymbol>(src);
         }
 
         public ReadOnlySpan<AsciCode> Codes
         {
             [MethodImpl(Inline)]
-            get => core.recover<AsciSymbol,AsciCode>(Content);
+            get => recover<AsciSymbol,AsciCode>(Content);
         }
 
         public int Length
@@ -72,6 +73,17 @@ namespace Z0
             get => Length != 0;
         }
 
+        public ref readonly AsciSymbol this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref skip(Content,index);
+        }
+
+        public ref readonly AsciSymbol this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref skip(Content,index);
+        }
 
         public string Format()
         {

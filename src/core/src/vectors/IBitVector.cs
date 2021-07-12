@@ -29,10 +29,10 @@ namespace Z0
         /// <summary>
         /// The value over which the bitvector is defined
         /// </summary>
-        T Content {get;}
+        T State {get;}
 
         Span<byte> IBitVector.Bytes
-            => bytes(Content);
+            => bytes(State);
 
         TypeWidth Width
             => (TypeWidth)width<T>();

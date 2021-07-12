@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    [ApiHost("api")]
+    [ApiHost]
     public partial class BitVector
     {
         const NumericKind Closure = UnsignedInts;

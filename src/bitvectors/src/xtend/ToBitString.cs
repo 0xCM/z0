@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class XBv
     {
@@ -18,7 +18,7 @@ namespace Z0
         public static BitString ToBitString<N,T>(this BitVector128<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitString.load(src.Data, src.Width);
+                => BitString.load(src.State, src.Width);
 
         /// <summary>
         /// Converts the vector content to a bitring representation

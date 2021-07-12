@@ -12,7 +12,7 @@ namespace Z0
             {
                 var a = Random.BitVector(n16);
                 var b = cpu.vmovemask(BitMasks.vmask128x8u(a));
-                Claim.eq(b,a.Content);
+                Claim.eq(b,a.State);
             }
         }
 
@@ -22,7 +22,7 @@ namespace Z0
             {
                 var a = Random.BitVector(n32);
                 var b = cpu.vmovemask(BitMasks.vmask256x8u(a));
-                Claim.eq(b,a.Content);
+                Claim.eq(b,a.State);
             }
         }
     }

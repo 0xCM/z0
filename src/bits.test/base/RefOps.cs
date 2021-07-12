@@ -7,10 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
-    public readonly partial struct RefOps
+    /// <summary>
+    /// Defines reference implementations for various bitfunction definitions
+    /// </summary>
+    [ApiHost]
+    public readonly struct BitRefs
     {
         [Op]
         public static ref byte pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7, byte pos, ref byte dst)
@@ -40,7 +44,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="mask">The scatter spec</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Closures(UnsignedInts)]
         public static T gather<T>(T src, T mask)
             where T : unmanaged
         {
@@ -63,6 +67,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">The mask that identifies the bits to gather</param>
         /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        [MethodImpl(Inline), Op]
         static byte gather(byte src, byte mask)
         {
             var dst = (byte)0;
@@ -84,6 +89,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">The mask that identifies the bits to gather</param>
         /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        [MethodImpl(Inline), Op]
         static ushort gather(ushort src, ushort mask)
         {
             var dst = (ushort)0;
@@ -105,6 +111,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">The mask that identifies the bits to gather</param>
         /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        [MethodImpl(Inline), Op]
         static uint gather(uint src, uint mask)
         {
             var dst = 0u;
@@ -126,6 +133,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">The mask that identifies the bits to gather</param>
         /// <remark>Algorithm adapted from Arndt, Matters Computational </remark>
+        [MethodImpl(Inline), Op]
         static ulong gather(ulong src, ulong mask)
         {
             var dst = 0ul;
@@ -140,24 +148,88 @@ namespace Z0
             return dst;
         }
 
-
         // The algorithms for the functions below were taken from https://github.com/lemire/SIMDCompressionAndIntersection/blob/master/src/bitpacking.cpp
-        public static unsafe void part32x4_ref(uint src, Span<byte> dst)
+        [MethodImpl(Inline), Op]
+        public static unsafe void part32x4(uint src, Span<byte> dst)
         {
             for(int i = 0, j=0; i<32; i +=4, j++)
                 dst[j] = (byte)(((src) >> i) % (1u << 4));
         }
 
+        [MethodImpl(Inline), Op]
         public static unsafe void unpack32x4(uint* pSrc, uint* pDst)
         {
             for(var inner = 0; inner < 32; inner +=4)
                 *(pDst++) = ((*pSrc) >> inner) % (1u << 4);
         }
 
+        [MethodImpl(Inline), Op]
         public static unsafe void fastunpack4(uint* pSrc, uint* pDst)
         {
            for(var outer = 0; outer<4; ++outer)
                 unpack32x4(pSrc++,pDst);
         }
+
+
+        /// <summary>
+        /// From the book "Hackers Delight"
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static uint compress(uint x, uint m)
+        {
+            uint mk, mp, mv, t;
+            int i;
+
+            x = x & m;           // Clear irrelevant bits.
+            mk = ~m << 1;        // We will count 0's to right.
+
+            for (i = 0; i<5; i++)
+            {
+                mp = mk ^ (mk << 1);              // Parallel suffix.
+                mp = mp ^ (mp << 2);
+                mp = mp ^ (mp << 4);
+                mp = mp ^ (mp << 8);
+                mp = mp ^ (mp << 16);
+                mv = mp & m;                      // Bits to move.
+                m = m ^ mv | (mv >> (1 << i));    // Compress m.
+                t = x & mv;
+                x = x ^ t | (t >> (1 << i));      // Compress x.
+                mk = mk & ~mp;
+            }
+            return x;
+        }
+
+         /// <summary>
+        /// From the book "Hackers Delight"
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static uint compress_left(uint x, uint m)
+        {
+            uint mk, mp, mv, t;
+            int i;
+
+            x = x & m;           // Clear irrelevant bits.
+            mk = ~m >> 1;        // We will count 0's to left.
+
+            for (i = 0; i < 5; i++)
+            {
+                mp = mk ^ (mk >> 1);              // Parallel prefix.
+                mp = mp ^ (mp >> 2);
+                mp = mp ^ (mp >> 4);
+                mp = mp ^ (mp >> 8);
+                mp = mp ^ (mp >> 16);
+                mv = mp & m;                      // Bits to move.
+                m = m ^ mv | (mv << (1 << i));    // Compress m.
+                t = x & mv;
+                x = x ^ t | (t << (1 << i));      // Compress x.
+                mk = mk & ~mp;
+            }
+            return x;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint SAG(uint x, uint m)
+            => compress_left(x, m) | compress(x, ~m);
+
     }
 }

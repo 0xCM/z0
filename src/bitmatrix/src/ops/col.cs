@@ -19,7 +19,7 @@ namespace Z0
         {
             byte col = 0;
             for(var r = 0; r < BitMatrix4.N; r++)
-                col = bit.set(col, (byte)r, bit.test(A[r].Content, (byte)index));
+                col = bit.set(col, (byte)r, bit.test(A[r].State, (byte)index));
             return col;
         }
 

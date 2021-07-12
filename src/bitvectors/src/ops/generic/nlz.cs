@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline), Nlz, Closures(Closure)]
         public static int nlz<T>(BitVector<T> x)
             where T : unmanaged
-                => gbits.nlz(x.Data);
+                => gbits.nlz(x.State);
 
         /// <summary>
         /// Counts the number of leading zero bits
@@ -26,6 +26,6 @@ namespace Z0
         public static int nlz<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.nlz(x.Data) - x.Width;
+                => gbits.nlz(x.State) - x.Width;
     }
 }

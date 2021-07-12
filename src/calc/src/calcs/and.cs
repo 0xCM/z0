@@ -19,6 +19,11 @@ namespace Z0
             where T : unmanaged
                 => default(And<T>);
 
+        [MethodImpl(Inline), Factory(And), Closures(UnsignedInts)]
+        public static BvAnd<T> bvand<T>()
+            where T : unmanaged
+                => sfunc<BvAnd<T>>();
+
         [MethodImpl(Inline), Factory(And), Closures(Closure)]
         public static VAnd128<T> vand<T>(W128 w, T t = default)
             where T : unmanaged

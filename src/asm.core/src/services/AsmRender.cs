@@ -34,7 +34,7 @@ namespace Z0.Asm
             return string.Format(Pattern, index, @class, width);
         }
 
-        public static string format(in AsmApiStatement src)
+        public static string format(in AsmHostStatement src)
             => string.Format("{0} {1,-36} ; {2} => {3}",
                         src.BlockOffset,
                         src.Expression,

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
     using static core;
     using static cpu;
 
@@ -20,10 +19,10 @@ namespace Z0
         /// <param name="src">The packed source bits</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static ref byte unpack1x64(ulong src, ref byte dst)
+        public static ref byte unpack1x64x8(ulong src, ref byte dst)
         {
-            unpack1x8x32((uint)src, ref dst);
-            unpack1x8x32((uint)(src >> 32), ref seek(dst, 32));
+            unpack1x32x32((uint)src, ref dst);
+            unpack1x32x32((uint)(src >> 32), ref seek(dst, 32));
             return ref dst;
         }
 
@@ -33,7 +32,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Unpack]
-        public static void unpack1x64(ulong src, Span<byte> dst)
+        public static void unpack1x64x8(ulong src, Span<byte> dst)
             => unpack1x64(src, ref first64u(dst));
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
         public static void unpack1x64(ulong src, Span<bit> dst)
-            => unpack1x64(src, ref u8(first(dst)));
+            => unpack1x64x8(src, ref u8(first(dst)));
 
         /// <summary>
         /// Unpacks 64 source bits over 64 32-bit target segments
@@ -52,7 +51,7 @@ namespace Z0
         /// <param name="buffer">The intermediate buffer</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
-        public static void unpack1x64(ulong src, Span<uint> dst)
+        public static void unpack1x64x32(ulong src, Span<uint> dst)
         {
             var buffer = z64;
             ref var tmp = ref uint8(ref buffer);
@@ -78,12 +77,32 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void unpack1x64_2(ulong src, Span<uint> dst)
+        public static void unpack1x64x32_2(ulong src, Span<uint> dst)
+        {
+            var buffer = ByteBlocks.alloc(n64);
+            ref var tmp = ref first(slice(dst,56,8).Recover<uint,byte>());
+            ref var target = ref first(dst);
+
+            unpack1x32x32((uint)src, ref tmp);
+            vinflate8x256x32u(tmp, 0, ref target, 0);
+            vinflate8x256x32u(tmp, 1, ref target, 1);
+            vinflate8x256x32u(tmp, 2, ref target, 2);
+            vinflate8x256x32u(tmp, 3, ref target, 3);
+
+            unpack1x32x32((uint)(src >> 32), ref tmp);
+            vinflate8x256x32u(tmp, 0, ref target, 4);
+            vinflate8x256x32u(tmp, 1, ref target, 5);
+            vinflate8x256x32u(tmp, 2, ref target, 6);
+            vinflate8x256x32u(tmp, 3, ref target, 7);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void unpack1x64x32_3(ulong src, Span<uint> dst)
         {
             var buffer = ByteBlocks.alloc(n64);
             ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
             ref var target = ref first(dst);
-            unpack1x64(src, ref tmp);
+            unpack1x64x8(src, ref tmp);
             vinflate8x256x32u(tmp, 0, ref target);
             vinflate8x256x32u(tmp, 1, ref target);
             vinflate8x256x32u(tmp, 2, ref target);
@@ -94,31 +113,12 @@ namespace Z0
             vinflate8x256x32u(tmp, 7, ref target);
         }
 
-        [MethodImpl(Inline), Op]
-        public static void unpack1x8x64(ulong src, Span<uint> dst)
-        {
-            var buffer = ByteBlocks.alloc(n64);
-            ref var tmp = ref first(slice(dst,56,8).Recover<uint,byte>());
-            ref var target = ref first(dst);
-
-            unpack1x8x32((uint)src, ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target, 0);
-            vinflate8x256x32u(tmp, 1, ref target, 1);
-            vinflate8x256x32u(tmp, 2, ref target, 2);
-            vinflate8x256x32u(tmp, 3, ref target, 3);
-
-            unpack1x8x32((uint)(src >> 32), ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target, 4);
-            vinflate8x256x32u(tmp, 1, ref target, 5);
-            vinflate8x256x32u(tmp, 2, ref target, 6);
-            vinflate8x256x32u(tmp, 3, ref target, 7);
-        }
 
         [MethodImpl(Inline), Unpack]
         public static ref ulong unpack1x64(ulong src, ref ulong dst)
         {
             unpack1x8x32((uint)src, ref dst);
-            unpack1x8x32((uint)(src >> 32), ref seek8(dst, 32));
+            unpack1x32x32((uint)(src >> 32), ref seek8(dst, 32));
             return ref dst;
         }
 
@@ -132,7 +132,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly SpanBlock512<byte> unpack1x64(ulong src, in SpanBlock512<byte> dst, int block)
         {
-            unpack1x64(src, dst.CellBlock(block));
+            unpack1x64x8(src, dst.CellBlock(block));
             return ref dst;
         }
     }

@@ -16,34 +16,34 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Nlz]
         public static int nlz(BitVector4 x)
-            => Bits.nlz(x.Data) - x.Width;
+            => Bits.nlz(x.State) - x.Width;
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline), Nlz]
         public static int nlz(BitVector8 x)
-            => Bits.nlz(x.Data);
+            => Bits.nlz(x.State);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline), Nlz]
         public static int nlz(BitVector16 x)
-            => Bits.nlz(x.Data);
+            => Bits.nlz(x.State);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline), Nlz]
         public static int nlz(BitVector32 x)
-            => Bits.nlz(x.Data);
+            => Bits.nlz(x.State);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline), Nlz]
         public static int nlz(BitVector64 x)
-            => Bits.nlz(x.Data);
+            => Bits.nlz(x.State);
     }
 }

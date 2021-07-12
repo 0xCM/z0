@@ -14,6 +14,7 @@ namespace Z0
 
     partial class BitSpans32
     {
+
         /// <summary>
         /// Creates a bitspan from a primal source
         /// </summary>

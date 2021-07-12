@@ -28,6 +28,19 @@ namespace Z0
                 => Calcs.or(l,r,dst);
         }
 
+        [Closures(Closure), Or]
+        public readonly struct BvOr<T> : IBvBinaryOp<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b)
+                => BitVector.or(a,b);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gmath.or(a,b);
+        }
+
         [Closures(Integers), Or]
         public readonly struct VOr128<T> : IBinaryOp128D<T>, IClassified<K,T>
             where T : unmanaged

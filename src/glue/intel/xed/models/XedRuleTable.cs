@@ -12,10 +12,55 @@ namespace Z0
 
     public struct XedRuleTable
     {
+        public enum TableRowKind : byte
+        {
+            None,
+
+            Instruction,
+
+            OpCount,
+
+            Operand,
+
+            Comment,
+        }
+
+        public readonly ref struct TableRow
+        {
+            public TableRowKind Kind {get;}
+
+            readonly AsciLine Data;
+
+            [MethodImpl(Inline)]
+            internal TableRow(TableRowKind kind, AsciLine data)
+            {
+                Kind = kind;
+                Data = data;
+            }
+
+            public LineNumber LineNumber
+            {
+                [MethodImpl(Inline)]
+                get => Data.LineNumber;
+            }
+
+            public ReadOnlySpan<AsciSymbol> Content
+            {
+                [MethodImpl(Inline)]
+                get => Data.Content;
+            }
+
+            public static TableRow Empty
+            {
+                [MethodImpl(Inline)]
+                get => new TableRow(0,AsciLine.Empty);
+            }
+        }
+
         /// <summary>
         /// Captures data given in the form '{Sequence} {IClass} {IForm} {Category} {Extension} {Isa} ATTRIBUTES: (Attributes)*'
         /// </summary>
-        public struct HeaderRow
+        public struct InstructionRow
         {
             /// <summary>
             /// Surrogate key
@@ -56,9 +101,9 @@ namespace Z0
             public DataType Type;
         }
 
-        public HeaderRow Header;
+        public InstructionRow Instruction;
 
-        public byte OperandCount;
+        public byte OpCount;
 
         public OperandRow Op1;
 
@@ -67,6 +112,5 @@ namespace Z0
         public OperandRow Op3;
 
         public OperandRow Op4;
-
     }
 }

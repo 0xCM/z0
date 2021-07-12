@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline), Inc]
         public static BitVector4 inc(BitVector4 x)
         {
-            if(x.Data < 0xF)
+            if(x.State < 0xF)
                 return x.Data++;
             else
                 return BitVector4.Zero;
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Inc]
         public static BitVector8 inc(BitVector8 x)
-            => math.inc(x.Data);
+            => math.inc(x.State);
 
         /// <summary>
         /// Increments the source vector
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Inc]
         public static BitVector16 inc(BitVector16 x)
-            => math.inc(x.Data);
+            => math.inc(x.State);
 
         /// <summary>
         /// Increments the source vector
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Inc]
         public static BitVector32 inc(BitVector32 x)
-            => math.inc(x.Data);
+            => math.inc(x.State);
 
         /// <summary>
         /// Increments the source vector
@@ -50,6 +50,6 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Inc]
         public static BitVector64 inc(BitVector64 x)
-            => math.inc(x.Data);
+            => math.inc(x.State);
     }
 }

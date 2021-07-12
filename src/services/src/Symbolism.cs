@@ -56,7 +56,7 @@ namespace Z0
         {
             var flow = Wf.EmittingTable<SymLiteral>(dst);
             var rows = Symbols.literals(src);
-            Emit(rows, SymLiteral.RenderWidths, dst);
+            EmitRows(rows, SymLiteral.RenderWidths, dst);
             return rows;
         }
 

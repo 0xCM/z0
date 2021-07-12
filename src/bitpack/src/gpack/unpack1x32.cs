@@ -23,13 +23,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                BitPack.unpack1x8(uint8(src), dst);
+                BitPack.unpack1x8x32(uint8(src), dst);
             else if(typeof(T) == typeof(ushort))
                 BitPack.unpack1x16(uint16(src), dst);
             else if(typeof(T) == typeof(uint))
                 BitPack.unpack1x32(uint32(src), dst);
             else if(typeof(T) == typeof(ulong))
-                BitPack.unpack1x64(uint64(src), dst);
+                BitPack.unpack1x64x32(uint64(src), dst);
             else
                 throw no<T>();
         }
@@ -47,7 +47,7 @@ namespace Z0
             var bytes = src.Bytes();
             ref readonly var input = ref first(bytes);
             for(var block=0; block<blockcount; block++)
-                BitPack.unpack1x8(skip(input, block), dst.CellBlock(block));
+                BitPack.unpack1x8x32(skip(input, block), dst.CellBlock(block));
         }
 
         /// <summary>

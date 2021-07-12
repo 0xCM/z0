@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public struct BitVector8 : IBitVector<BitVector8,byte>
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
-        public byte Content
+        public byte State
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -41,7 +41,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(Data);
+            get => core.bytes(Data);
         }
 
         /// <summary>

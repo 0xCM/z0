@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class XBv
     {
@@ -15,6 +15,6 @@ namespace Z0
         public static BitSpan32 ToBitSpan32<N,T>(this BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitVector.bitspan(x);
+                => BitVector.bitspan32(x);
     }
 }

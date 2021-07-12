@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitVector<T> enable<T>(BitVector<T> x, byte index)
             where T : unmanaged
-                => gbits.enable(x.Data, index);
+                => gbits.enable(x.State, index);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -28,6 +28,6 @@ namespace Z0
         public static BitVector<N,T> enable<N,T>(BitVector<N,T> x, byte index)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.enable(x.Data, index);
+                => gbits.enable(x.State, index);
     }
 }

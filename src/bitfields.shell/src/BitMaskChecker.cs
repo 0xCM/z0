@@ -11,7 +11,6 @@ namespace Z0
     using static BitChecks;
     using static core;
     using static BitMasks;
-    using static Typed;
 
     [ApiHost]
     public class BitMaskChecker : AppService<BitMaskChecker>

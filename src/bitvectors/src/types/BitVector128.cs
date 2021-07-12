@@ -9,8 +9,144 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
     using static cpu;
+    using static BitVector128;
+
+    public readonly struct BitVector128
+    {
+        /// <summary>
+        /// Defines a 128-bit bitvector of natural width
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        /// <param name="a">The scalar source data</param>
+        /// <typeparam name="N">The width type</typeparam>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> define<N,T>(N n, Vector128<T> x)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new BitVector128<N,T>(x);
+
+        /// <summary>
+        /// Computes the sum of two 128-bit integers
+        /// </summary>
+        /// <param name="x">The first integer, represented via paired hi/lo components</param>
+        /// <param name="y">The second integer, represented via paired hi/lo components</param>
+        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> add<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var sum = cpu.vadd(gcpu.v64u(x.State), gcpu.v64u(y.State));
+            bit carry = x.Lo > cpu.vcell(sum,0);
+            return  core.generic<T>(cpu.vadd(sum, cpu.vbroadcast(w128, (ulong)carry)));
+        }
+
+        /// <summary>
+        /// Computes the bitvector z := x & y from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> and<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => gcpu.vand(x.State, y.State);
+
+        /// <summary>
+        /// Computes the bitvector z := x ^ y from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> or<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => gcpu.vor(x.State,y.State);
+
+        /// <summary>
+        /// Computes the bitvector z := x ^ y from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> xor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => gcpu.vxor(x.State,y.State);
+
+        /// <summary>
+        /// Computes the converse nonimplication, z := x & ~y, for bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> cnonimpl<N,T>(BitVector128<N,T> x, BitVector128<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gcpu.vcnonimpl(x.State, y.State);
+
+        /// <summary>
+        /// Counts the number of enabled bits in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint pop<N,T>(in BitVector128<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gbits.pop(x.State.AsUInt64().GetElement(0)) + gbits.pop(x.State.AsUInt64().GetElement(1));
+
+        /// <summary>
+        /// Computes the Hamming distance between bitvectors
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint hamming<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => pop(xor(x,y));
+
+        /// <summary>
+        /// Computes the parity of the source vector
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bit parity<N,T>(in BitVector128<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => math.odd(pop(src));
+
+
+        /// <summary>
+        /// Computes the scalar product between two bitvectors
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static bit dot<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => parity(and(x,y));
+
+       /// <summary>
+        /// Creates a copy of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> replicate<N,T>(in BitVector128<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => src.State;
+    }
 
     /// <summary>
     /// Defines a natural bitvector over an intrinsic vector
@@ -35,7 +171,7 @@ namespace Z0
         /// <summary>
         /// The scalar representation of the vector
         /// </summary>
-        public Vector128<T> Content
+        public Vector128<T> State
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -127,7 +263,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector128<N,T> operator &(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            => BitVector.and(x,y);
+            => and(x,y);
 
         /// <summary>
         /// Computes the bitwise AND between the operands
@@ -136,7 +272,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector128<N,T> operator |(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            => BitVector.or(x,y);
+            => or(x,y);
 
         /// <summary>
         /// Computes the bitwise XOR between the operands
@@ -145,7 +281,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector128<N,T> operator ^(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            => BitVector.xor(x,y);
+            => xor(x,y);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -154,7 +290,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static bit operator %(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            => BitVector.dot(x,y);
+            => dot(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
