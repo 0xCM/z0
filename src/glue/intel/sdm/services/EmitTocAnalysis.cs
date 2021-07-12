@@ -20,7 +20,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        Outcome EmitTocAnalysis()
+        public Outcome EmitAnalysis()
         {
             var result = Outcome.Success;
             var flow = Wf.Running();
@@ -33,10 +33,11 @@ namespace Z0.Asm
                 return result;
             }
 
-            using var reader = src.LineReader();
+            var encoding = TextEncodingKind.Unicode;
+            using var reader = src.LineReader(encoding);
             var buffer = text.buffer();
             var dst = ProcessLog("toc.combined");
-            using var writer = dst.Writer();
+            using var writer = dst.Writer(encoding);
             var cn = ChapterNumber.Empty;
             var tn = TableNumber.Empty;
             var title = TocTitle.Empty;

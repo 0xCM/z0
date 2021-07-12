@@ -8,38 +8,53 @@ namespace Z0.Asm
 
     partial class IntelSdmProcessor
     {
+        public ReadOnlySpan<FS.FilePath> SdmUnicodeSources()
+            => (RefDocRoot()+ FS.folder(txt)).Files(FS.Txt).Where(f => f.Contains(unicode));
+
+        FS.FolderPath ImportRoot()
+            => Workspace.ImportDir(dataset);
+
         FS.FilePath CharMapPath()
-            => SourceRoot() + FS.file(charmap, FS.Config);
+            => Workspace.Settings("sdm.charmap", FS.Config);
 
         FS.FilePath UnmappedCharLog()
             => Workspace.EtlLog(unmapped);
 
         FS.FilePath SplitSpecs()
-            => SourceRoot() + FS.file(splits, FS.Csv);
+            => Workspace.Settings("sdm.splits", FS.Csv);
 
         FS.FilePath ProcessLog(string name)
             => LogRoot() + FS.file(name, FS.Log);
 
+        FS.FileName SdmUnicodeFile()
+            => FS.file("intel-sdm-unicode", FS.Txt);
+
+        FS.FileName SdmUnicodeFile(byte vol)
+            => FS.file(string.Format("intel-sdm-vol{0}-{1}", vol, unicode), FS.Txt);
+
+        FS.FolderPath RefDocRoot()
+            => Workspace.RefDocs();
+
+        FS.FolderPath RefDocRoot(string id)
+            => RefDocRoot() + FS.folder(id);
+
+        FS.FilePath SdmUnicodePath()
+            => RefDocRoot(txt)  + SdmUnicodeFile();
+
+        FS.FilePath SdmUnicodePath(byte vol)
+            => RefDocRoot(txt)  + SdmUnicodeFile(vol);
+
         FS.FilePath LinedSdmPath()
-            => ImportRoot() + FS.file(string.Format("{0}.{1}", dataset, lined), FS.Txt);
+            => ImportRoot() + FS.file(string.Format("intel-sdm-{0}", lined), FS.Txt);
 
-        FS.FilePath SourceDocPath()
-            => Workspace.DataSource(dataset) + FS.file(dataset, FS.Txt);
-
-        FS.FolderPath ImportRoot()
-            => Workspace.ImportDir(dataset);
+        FS.FilePath LinedSdmPath(byte vol)
+            => ImportRoot() + FS.file(string.Format("intel-sdm-vol{0}-{1}", vol, lined), FS.Txt);
 
         FS.FolderPath LogRoot()
             => Workspace.ImportDir(datasetlogs);
 
-        FS.FolderPath SourceRoot()
-            => Workspace.DataSource(dataset);
-
-        FS.FilePath ImportPath(string id, FS.FileExt ext)
-            => ImportRoot() + FS.file(string.Format("{0}.{1}", dataset, id), ext);
-
         FS.FilePath CombinedTocPath()
-            => ImportPath(toc, FS.Txt);
+            => Workspace.ImportDir("sdm") + FS.file("sdm.toc", FS.Txt);
 
         SortedSpan<FS.FilePath> IndividualTocPaths()
             => ImportRoot().AllFiles.Where(f => IsTocPart(f)).Array().ToSortedSpan();

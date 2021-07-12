@@ -25,15 +25,15 @@ namespace Z0
         /// Creates an overwriting and caller-disposed stream writer that targets a specified path
         /// </summary>
         /// <param name="dst">The file path</param>
-        [MethodImpl(Inline), Op]
-        public static StreamWriter writer(FS.FilePath dst)
-            => writer(dst, FileWriteMode.Overwrite, Encoding.UTF8);
+        [Op]
+        public static StreamWriter writer(FS.FilePath dst, TextEncodingKind encoding)
+            => writer(dst, FileWriteMode.Overwrite, encoding.ToSystemEncoding());
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static StreamWriter writer(FS.FilePath dst, Encoding encoding)
             => writer(dst, FileWriteMode.Overwrite, Encoding.UTF8);
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static StreamWriter writer(FS.FilePath dst, FileWriteMode mode)
             => writer(dst, mode, Encoding.UTF8);
     }

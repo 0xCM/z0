@@ -213,6 +213,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out FS.FileName dst)
+        {
+            dst = FS.file(src);
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
         public static bool parse(string src, Bounded<int> bounds, out int dst, out Outcome outcome)
             => Rules.parse(src,bounds, out dst, out outcome);
 

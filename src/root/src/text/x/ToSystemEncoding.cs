@@ -15,27 +15,27 @@ namespace Z0
     partial class XText
     {
         [MethodImpl(Inline), Op]
-        public static Encoding SystemEncoding(this AsciPoints src)
+        public static Encoding ToSystemEncoding(this AsciPoints src)
             => Encoding.ASCII;
 
         [MethodImpl(Inline), Op]
-        public static Encoding SystemEncoding(this Utf8Points src)
+        public static Encoding ToSystemEncoding(this Utf8Points src)
             => Encoding.UTF8;
 
         [MethodImpl(Inline), Op]
-        public static Encoding SystemEncoding(this UnicodePoints src)
+        public static Encoding ToSystemEncoding(this UnicodePoints src)
             => Encoding.Unicode;
 
         [MethodImpl(Inline), Op]
-        public static Encoding SystemEncoding(this Utf16Points src)
+        public static Encoding ToSystemEncoding(this Utf16Points src)
             => Encoding.BigEndianUnicode;
 
         [MethodImpl(Inline), Op]
-        public static Encoding SystemEncoding(this Utf32Points src)
+        public static Encoding ToSystemEncoding(this Utf32Points src)
             => Encoding.UTF32;
 
         [MethodImpl(Inline), Op]
-        public static Encoding SystemEncoding(this K kind)
+        public static Encoding ToSystemEncoding(this K kind)
             =>  kind == K.Asci ? Encoding.ASCII
               : kind == K.Utf8 ? Encoding.UTF8
               : kind == K.Utf16 ? Encoding.BigEndianUnicode

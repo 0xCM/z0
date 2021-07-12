@@ -10,16 +10,17 @@ namespace Z0.Asm
 
     partial class IntelSdmProcessor
     {
-        Outcome EmitCombinedToc()
+        public Outcome EmitCombinedToc()
         {
             var result = Outcome.Success;
             var src = IndividualTocPaths();
             if(src.IsEmpty)
                 return false;
+            var encoding = pair(TextEncodingKind.Unicode,TextEncodingKind.Unicode);
 
             var dst = CombinedTocPath();
             var flow = Wf.Running(string.Format("Creating combined toc from {0} source files", src.Length));
-            DocServices.CombineDocs(src, dst);
+            DocServices.CombineDocs(src, dst, encoding);
             Wf.Ran(flow);
             return result;
         }

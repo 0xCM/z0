@@ -21,7 +21,11 @@ namespace Z0.Asm
 
         const string charmap = nameof(charmap);
 
+        const string unicode = nameof(unicode);
+
         const string toc = nameof(toc);
+
+        const string txt = nameof(txt);
 
         const string unmapped = nameof(unmapped);
 
@@ -38,13 +42,18 @@ namespace Z0.Asm
             CharMapper = Wf.CharMapper();
         }
 
+        public void ClearTargets()
+        {
+            ImportRoot().Clear();
+        }
+
         public Outcome Run()
         {
             var result = Outcome.Success;
 
             try
             {
-                ImportRoot().Clear();
+                ClearTargets();
 
                 result = EmitCharMaps();
                 if(result.Fail)
@@ -54,7 +63,7 @@ namespace Z0.Asm
                 if(result.Fail)
                     return result;
 
-                result = EmitSplitSdm();
+                result = EmitSdmSplits();
                 if(result.Fail)
                     return result;
 
@@ -62,7 +71,7 @@ namespace Z0.Asm
                 if(result.Fail)
                     return result;
 
-                result = EmitTocAnalysis();
+                result = EmitAnalysis();
                 if(result.Fail)
                     return result;
             }

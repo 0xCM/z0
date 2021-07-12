@@ -80,6 +80,12 @@ namespace Z0.Asm
         public FS.FilePath AsmSource(string id, bool model)
             => model ? AsmModels() + FS.file(id, FS.Asm) : AsmLabs() + FS.file(id, FS.Asm);
 
+        public FS.FolderPath Settings()
+            => DataRoot() + FS.folder(settings);
+
+        public FS.FilePath Settings(string id, FS.FileExt ext)
+            => Settings() + FS.file(id,ext);
+
         public FS.FolderPath DocRoot()
             => Root + FS.folder(docs);
 
@@ -223,8 +229,8 @@ namespace Z0.Asm
         public FS.FolderPath RefDocs()
             => DocRoot() + FS.folder(refs);
 
-        public FS.FilePath RefDoc(string docid, FS.FileExt ext)
-            => RefDocs() + FS.file(docid, ext);
+        public FS.FolderPath RefDocs(string id)
+            => RefDocs() + FS.folder(id);
 
         public FS.FolderPath DocExtracts()
             => DocRoot() + FS.folder(extracts);

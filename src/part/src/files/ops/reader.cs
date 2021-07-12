@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct FS
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static StreamReader reader(FS.FilePath src, Encoding encoding)
             => new StreamReader(src.Name.Format(), encoding);
 
@@ -21,8 +21,8 @@ namespace Z0
         /// Creates a reader initialized with the source file; caller-disposal required
         /// </summary>
         /// <param name="src">The file path</param>
-        [MethodImpl(Inline), Op]
-        public static StreamReader reader(FS.FilePath src)
-            => reader(src, Encoding.UTF8);
+        [Op]
+        public static StreamReader reader(FS.FilePath src, TextEncodingKind encoding)
+            => reader(src, encoding.ToSystemEncoding());
     }
 }

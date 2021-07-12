@@ -356,7 +356,6 @@ namespace Z0.Asm
             EmitSymbols(Symbols.index<K>().View, dst);
         }
 
-
         void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
             where K : unmanaged
         {

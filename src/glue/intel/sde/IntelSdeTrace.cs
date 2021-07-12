@@ -2,13 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
-
-    using System;
-    using Z0.Asm;
-
-    public readonly struct SdeTrace
+    public readonly struct IntelSdeTrace
     {
         public struct Instruction
         {

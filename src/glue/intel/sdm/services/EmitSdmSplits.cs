@@ -2,21 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static core;
-
-
-    public class Sde : ToolService<Sde>
+    partial class IntelSdmProcessor
     {
-        public Sde()
-            :base(Toolsets.sde)
+        public Outcome EmitSdmSplits()
         {
-
+            return DocServices.Split(SplitSpecs());
         }
     }
 }

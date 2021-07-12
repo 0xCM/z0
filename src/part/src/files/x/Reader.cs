@@ -26,8 +26,16 @@ namespace Z0
             => FS.reader(src, encoding);
 
         [Op]
+        public static StreamReader Reader(this FS.FilePath src, TextEncodingKind encoding)
+            => FS.reader(src, encoding);
+
+        [Op]
         public static LineReader LineReader(this FS.FilePath src)
             => src.Reader(Encoding.UTF8).ToLineReader();
+
+        [Op]
+        public static LineReader LineReader(this FS.FilePath src, TextEncodingKind encoding)
+            => src.Reader(encoding).ToLineReader();
 
         [Op]
         public static LineReader LineReader(this FS.FilePath src, Encoding encoding)

@@ -5,18 +5,36 @@
 namespace Z0.Asm
 {
     using System;
+    using static core;
 
     partial class IntelSdmProcessor
     {
-        Outcome EmitLinedSdm()
+        public Outcome EmitLinedSdm(byte vol)
         {
-            var src = SourceDocPath();
-            var dst = LinedSdmPath();
-            var result = DocServices.CreateLinedDoc(src, dst);
+            var src = SdmUnicodePath(vol);
+            var dst = LinedSdmPath(vol);
+            var encoding = pair(TextEncodingKind.Unicode,TextEncodingKind.Unicode);
+            var result = DocServices.CreateLinedDoc(src, dst, encoding);
             if(!result)
                 return false;
 
-            var verified = DocServices.VerifyLinedDoc(dst);
+            var verified = DocServices.VerifyLinedDoc(dst, encoding.Right);
+            if(verified.Fail)
+                Wf.Error(verified.Message);
+
+            return verified;
+        }
+
+        public Outcome EmitLinedSdm()
+        {
+            var encoding = pair(TextEncodingKind.Unicode,TextEncodingKind.Unicode);
+            var src = SdmUnicodePath();
+            var dst = LinedSdmPath();
+            var result = DocServices.CreateLinedDoc(src, dst, encoding);
+            if(!result)
+                return false;
+
+            var verified = DocServices.VerifyLinedDoc(dst, encoding.Right);
             if(verified.Fail)
                 Wf.Error(verified.Message);
 
