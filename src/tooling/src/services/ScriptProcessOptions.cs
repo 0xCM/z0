@@ -56,7 +56,7 @@ namespace Z0
         static void OnStaus(in string src)
         {
             if(nonempty(src))
-                term.inform(src);
+                term.babble(src);
         }
 
         static void OnError(in string src)

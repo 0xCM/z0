@@ -16,6 +16,10 @@ namespace Z0.Asm
 
         const string analysis = nameof(analysis);
 
+        const string intrinsics = nameof(intrinsics);
+
+        const string alg = nameof(alg);
+
         [MethodImpl(Inline)]
         public static AsmWorkspace create(FS.FolderPath root)
             => new AsmWorkspace(root);
@@ -258,6 +262,15 @@ namespace Z0.Asm
 
         public FS.FolderPath ImportedDisasm()
             => DisasmOut() + FS.folder(imported);
+
+        public FS.FolderPath IntrinsicImportDir()
+            => ImportRoot() + FS.folder(intrinsics);
+
+        public FS.FolderPath AlgImportDir()
+            => ImportRoot() + FS.folder(string.Format("{0}.{1}", intrinsics, alg));
+
+        public ReadOnlySpan<FS.FilePath> AlgImportPaths(string match)
+            => AlgImportDir().Files(FS.Alg).Where(f => f.Contains(match));
 
         public FS.FolderPath Analysis()
             => Output() + FS.folder(analysis);

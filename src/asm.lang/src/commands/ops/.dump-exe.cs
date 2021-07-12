@@ -15,7 +15,6 @@ namespace Z0.Asm
             var vars = Cmd.vars(3);
             var exeout = Workspace.ExeOut();
             var dumpout = Workspace.DumpOut();
-
             vars[0] = ("SrcFile", "app2.exe");
             vars[1] = ("SrcDir", exeout.Format(PathSeparator.BS));
             vars[2] = ("DstDir", dumpout.Format(PathSeparator.BS));

@@ -15,16 +15,20 @@ namespace Z0
         {
             None,
 
+            [Symbol("asz", "Varies with effective address width and may be one of [2 | 4 | 8]")]
             ASZ,
 
+            [Symbol("ssz", "Varies with stack address width and may be one of [2 | 4 | 8]")]
             SSZ,
 
             PSEUDO,
 
             PSEUDOX87,
 
+            [Symbol("a16")]
             A16,
 
+            [Symbol("a32")]
             A32,
 
             [Symbol("b")]

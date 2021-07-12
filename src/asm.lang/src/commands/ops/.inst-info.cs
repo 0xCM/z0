@@ -55,7 +55,7 @@ namespace Z0.Asm
                 var content = line.Content;
                 if(parsingrows)
                 {
-                    var values  = content.SplitClean(ColSep);
+                    var values = content.SplitClean(ColSep);
                     var valcount = values.Length;
 
                     if(valcount != cols.Count)
@@ -63,6 +63,7 @@ namespace Z0.Asm
 
                     if(valcount != 0)
                     {
+
                         Write(values.Join(Rejoin));
                         rowcount++;
                     }
@@ -71,16 +72,16 @@ namespace Z0.Asm
 
                 if(foundtable && !parsingrows)
                 {
-                    var header = content.SplitClean(ColSep);
-                    if(header.Length == 0)
+                    var labels =  content.SplitClean(ColSep);
+                    if(labels.Length == 0)
                     {
                         Warn(string.Format("Expected header"));
                     }
                     else
                     {
-                        cols = IntelSdm.columns(header);
-                        var formatted = cols.Select(c => c.Format()).Join(Rejoin);
-                        Write(formatted);
+                        var header = IntelSdm.header(tablekind, labels);
+                        cols = IntelSdm.columns(header.Labels);
+                        Write(header.Format());
                         parsingrows = true;
                     }
                 }

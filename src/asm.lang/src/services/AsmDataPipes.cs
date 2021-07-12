@@ -10,7 +10,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static Typed;
 
     public class AsmDataPipes : AppService<AsmDataPipes>
     {

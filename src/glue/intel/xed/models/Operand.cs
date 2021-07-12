@@ -125,14 +125,14 @@ namespace Z0
             public byte default_seg;
 
             /// <summary>
-            /// Effective address width id: [0 -> 0, 1 -> 16b, 2 -> 32b, 3 -> 64b]
+            /// Effective address width id
             /// </summary>
-            public byte easz;
+            public EASZ easz;
 
             /// <summary>
-            /// Effective operand width id: [0 -> 8b, 1 -> 16b, 2 -> 32b, 3 -> 64b]
+            /// Effective operand width id
             /// </summary>
-            public byte eosz;
+            public EOSZ eosz;
 
             public byte first_f2f3;
 
@@ -264,7 +264,7 @@ namespace Z0
 
             public ushort seg1;
 
-            public ushort iclass;
+            public IClass iclass;
 
             public ushort mem_width;
 

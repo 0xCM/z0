@@ -106,6 +106,9 @@ namespace Z0
 
             KMASK,
 
+            /// <summary>
+            /// Indicates an instruction can be encoded with the lock prefix
+            /// </summary>
             LOCKABLE,
 
             LOCKED,

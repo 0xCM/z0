@@ -37,17 +37,35 @@ namespace Z0
         ReadOnlySpan<TextLine> RunScript(FS.FilePath src, ScriptId script, CmdVars? vars)
             => Run(new CmdLine(src.Format(PathSeparator.BS)), script, vars);
 
-        public ReadOnlySpan<TextLine> RunCmd(CmdLine cmd, CmdVars? vars = null)
+        public ReadOnlySpan<TextLine> RunCmd(CmdLine cmd, CmdVars vars)
         {
             try
             {
-                var process = vars != null ? ScriptProcess.run(cmd, vars.Value) : ScriptProcess.run(cmd);
+                var process = ScriptProcess.run(cmd, vars);
                 process.Wait();
                 return Lines.read(process.Output);
             }
             catch(Exception e)
             {
                 term.error(e);
+                return default;
+            }
+        }
+
+        public ReadOnlySpan<TextLine> RunCmd(CmdLine cmd, Action<Exception> errhandle = null)
+        {
+            try
+            {
+                var process =  ScriptProcess.run(cmd);
+                process.Wait();
+                return Lines.read(process.Output);
+            }
+            catch(Exception e)
+            {
+                if(errhandle != null)
+                    errhandle(e);
+                else
+                    term.error(e);
                 return default;
             }
         }

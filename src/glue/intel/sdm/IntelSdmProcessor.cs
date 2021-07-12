@@ -59,6 +59,22 @@ namespace Z0.Asm
                 if(result.Fail)
                     return result;
 
+                result = EmitLinedSdm(1);
+                if(result.Fail)
+                    return result;
+
+                result = EmitLinedSdm(2);
+                if(result.Fail)
+                    return result;
+
+                result = EmitLinedSdm(3);
+                if(result.Fail)
+                    return result;
+
+                result = EmitLinedSdm(4);
+                if(result.Fail)
+                    return result;
+
                 result = EmitLinedSdm();
                 if(result.Fail)
                     return result;
@@ -74,6 +90,7 @@ namespace Z0.Asm
                 result = EmitAnalysis();
                 if(result.Fail)
                     return result;
+
             }
             catch(Exception e)
             {

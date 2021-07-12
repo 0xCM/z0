@@ -13,6 +13,8 @@ namespace Z0
         [SymSource(xed)]
         public enum EASZ : sbyte
         {
+            None = 0,
+
             [Symbol("eamode16"), Alias("a16")]
             easz16 = 1,
 

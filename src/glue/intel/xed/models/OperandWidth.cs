@@ -25,6 +25,5 @@ namespace Z0
             public static implicit operator OperandWidth(OperandWidthType type)
                 => new OperandWidth(type);
         }
-
     }
 }

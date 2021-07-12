@@ -15,7 +15,7 @@ namespace Z0.Asm
             if(tool.IsEmpty)
                 return (false, "A tool has not been selected");
 
-            var path = @base.ToolDocs(tool) + FS.file(tool.Format(), FS.Help);
+            var path = @base.Docs(tool) + FS.file(tool.Format(), FS.Help);
             if(path.Exists)
             {
                 Write(path.ReadText());

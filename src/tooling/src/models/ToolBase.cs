@@ -41,11 +41,17 @@ namespace Z0
         public FS.FolderPath ToolDir(ToolId tool)
             => Root + FS.folder(tool.Format());
 
-        public FS.FolderPath ToolDocs(ToolId tool)
+        public FS.FolderPath Docs(ToolId tool)
             => ToolDir(tool) + FS.folder("docs");
+
+        public FS.FolderPath Scripts(ToolId tool)
+            => ToolDir(tool) + FS.folder("scripts");
 
         public FS.FolderPath ToolBin(ToolId tool)
             => ToolDir(tool) + FS.folder("bin");
+
+        public FS.FilePath Script(ToolId tool, string id)
+            => Scripts(tool) + FS.file(id,FS.Cmd);
 
         public FS.FilePath ToolExe(ToolId tool)
             => ToolBin(tool) + FS.file(tool.Format(), FS.Exe);
