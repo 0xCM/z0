@@ -10,22 +10,10 @@ namespace Z0.Asm
     using static Root;
     using static AsmMem;
     using static Regs;
-    using static Typed;
 
     [ApiComplete]
     public readonly ref partial struct AsmMachine
     {
-        [Op]
-        public static AsmMachine create()
-            => new AsmMachine(new RegBank(RegBanks.zmm(), RegBanks.gp64()));
-
-        readonly RegBank Regs;
-
-        [MethodImpl(Inline)]
-        internal AsmMachine(RegBank regs)
-        {
-            Regs = regs;
-        }
 
         /// <summary>
         /// 88 / r | MOV r8,r8 | Move r8 to r8
@@ -35,7 +23,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public void mov(r8 dst, r8 src)
         {
-            Regs[w8, dst.Index] = Regs[w8, src.Index];
+
         }
 
         /// <summary>
@@ -46,7 +34,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public void mov(r16 dst, r16 src)
         {
-            Regs[w16, dst.Index] = Regs[w16, src.Index];
+
         }
 
         /// <summary>
@@ -57,7 +45,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public void mov(r32 dst, r32 src)
         {
-            Regs[w32, dst.Index] = Regs[w32, src.Index];
+
         }
 
         /// <summary>
@@ -68,31 +56,31 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public void mov(r64 dst, r64 src)
         {
-            Regs[w64, dst.Index] = Regs[w64, src.Index];
+
         }
 
         [MethodImpl(Inline)]
         public void mov(ref m8 dst, r8 src)
         {
-            dst = Regs[w8, src.Index];
+
         }
 
         [MethodImpl(Inline), Op]
         public void mov(ref m16 dst, r16 src)
         {
-            dst = Regs[w16, src.Index];
+
         }
 
         [MethodImpl(Inline), Op]
         public void mov(ref m32 dst, r32 src)
         {
-            dst = Regs[w32, src.Index];
+
         }
 
         [MethodImpl(Inline), Op]
         public void mov(ref m64 dst, r64 src)
         {
-            dst = Regs[w64, src.Index];
+
         }
 
         /// <summary>
@@ -103,7 +91,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public void mov(ref r8 dst, Imm8 src)
         {
-            Regs[w8, dst.Index] = src.Content;
+
         }
 
         /// <summary>
@@ -114,7 +102,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public void mov(r16 dst, Imm16 src)
         {
-            Regs[w16, dst.Index] = src.Content;
+
         }
 
         /// <summary>
@@ -125,7 +113,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public void mov(r32 dst, Imm32 src)
         {
-            Regs[w32, dst.Index] = src.Content;
+
         }
 
         /// <summary>
@@ -136,7 +124,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public void mov(r64 dst, Imm64 src)
         {
-            Regs[w64, dst.Index] = src.Content;
+
         }
     }
 }

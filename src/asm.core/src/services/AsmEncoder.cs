@@ -11,7 +11,6 @@ namespace Z0.Asm
     using static System.Runtime.Intrinsics.X86.Sse3;
     using static Root;
     using static core;
-    using static Typed;
     using static AsmCodes;
 
     using K = RexPrefixCode;

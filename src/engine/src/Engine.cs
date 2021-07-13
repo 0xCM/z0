@@ -12,24 +12,7 @@ namespace Z0.Asm
     using static core;
 
     using Fx = AsmInstructions;
-    using H = HeapRegBanks;
 
-    readonly struct EngineCore
-    {
-        public byte CoreNumber {get;}
-
-        [MethodImpl(Inline)]
-        public EngineCore(byte number)
-        {
-            CoreNumber = number;
-        }
-
-        public string Format()
-            => string.Format("Core {0}", CoreNumber);
-
-        public override string ToString()
-            => Format();
-    }
 
     public struct EngineSettings
     {
@@ -38,46 +21,11 @@ namespace Z0.Asm
 
     public class Engine : AppCmdService<Engine>
     {
-        const Byte CoreCount = Pow2.T06;
-
-        Index<EngineCore> Cores;
-
-        Index<H.GpRegBank> GpRegData;
-
-        Index<H.ZmmRegBank> ZmmRegData;
-
-        Index<H.MaskRegBank> MaskRegData;
-
         EngineSettings Settings;
 
-        [MethodImpl(Inline)]
-        ref H.GpRegBank GpRegs(byte index)
-            => ref GpRegData[index];
+        public static RegMachine machine()
+            => new RegMachine(RegBanks.allocate(w64,w512));
 
-        [MethodImpl(Inline)]
-        ref H.ZmmRegBank ZmmRegs(byte index)
-            => ref ZmmRegData[index];
-
-        [MethodImpl(Inline)]
-        ref H.MaskRegBank MaskRegs(byte index)
-            => ref MaskRegData[index];
-
-        void Allocate(in EngineSettings src)
-        {
-            var flow = Running(AllocatingCores.Capture(Bits.pop(Settings.Affinity)));
-            Cores = alloc<EngineCore>(CoreCount);
-            GpRegData = alloc<H.GpRegBank>(CoreCount);
-            ZmmRegData = alloc<H.ZmmRegBank>(CoreCount);
-            MaskRegData = alloc<H.MaskRegBank>(CoreCount);
-
-            for(byte i=0; i<CoreCount; i++)
-            {
-                GpRegs(i) = new H.GpRegBank(alloc<Cell64>(16));
-                ZmmRegs(i) = new H.ZmmRegBank(alloc<Cell512>(32));
-                MaskRegs(i) = new H.MaskRegBank(alloc<Cell64>(8));
-            }
-            Ran(flow);
-        }
 
         public Engine()
         {
@@ -135,7 +83,7 @@ namespace Z0.Asm
         public void Configure(in EngineSettings src)
         {
             Settings = src;
-            Allocate(src);
+
         }
 
         protected override void Initialized()
