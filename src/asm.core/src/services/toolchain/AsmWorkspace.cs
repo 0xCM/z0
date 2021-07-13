@@ -64,10 +64,16 @@ namespace Z0.Asm
             => Root + FS.folder(dotout);
 
         /// <summary>
-        /// Defines a path of the form {Root}/asm
+        /// Defines a path of the form {Root}/sources
+        /// </summary>
+        public FS.FolderPath Sources()
+            => Root + FS.folder(sources);
+
+        /// <summary>
+        /// Defines a path of the form {Sources}/asm
         /// </summary>
         public FS.FolderPath AsmSources()
-            => Root + FS.folder("asm");
+            => Sources() + FS.folder("asm");
 
         /// <summary>
         /// Defines a path of the form {Root}/cpp
@@ -75,14 +81,14 @@ namespace Z0.Asm
         public FS.FolderPath CppSources()
             => Root + FS.folder(cpp);
 
-        public FS.FolderPath AsmLabs()
-            => AsmSources() + FS.folder(labs);
+        public FS.FilePath AsmPath(string id)
+            => AsmSources() + FS.file(id, FS.Asm);
 
-        public FS.FolderPath AsmModels()
-            => AsmSources() + FS.folder(models);
+        public FS.FolderPath HexDir()
+            => Output() + FS.folder(hex);
 
-        public FS.FilePath AsmSource(string id, bool model)
-            => model ? AsmModels() + FS.file(id, FS.Asm) : AsmLabs() + FS.file(id, FS.Asm);
+        public FS.FilePath HexPath(string id)
+            => HexDir() + FS.file(id, FS.Hex);
 
         public FS.FolderPath Settings()
             => DataRoot() + FS.folder(settings);
@@ -257,12 +263,6 @@ namespace Z0.Asm
         public FS.FolderPath DisasmOut()
             => Output() + FS.folder("dis");
 
-        public FS.FolderPath RawDisasm()
-            => DisasmOut() + FS.folder("raw");
-
-        public FS.FolderPath ImportedDisasm()
-            => DisasmOut() + FS.folder(imported);
-
         public FS.FolderPath IntrinsicImportDir()
             => ImportRoot() + FS.folder(intrinsics);
 
@@ -311,26 +311,25 @@ namespace Z0.Asm
         public FS.FilePath ListPath(string id)
             => Lists() + FS.file(id, FS.AsmList);
 
-        public FS.FilePath RawDisasmPath(string id, ToolId tool, FS.FileExt? ext = null)
-            => RawDisasm() + FS.file(string.Format("{0}.{1}", id, tool), ext ?? FS.Asm);
+        public FS.FilePath DisasmPath(string id, ToolId tool, FS.FileExt? ext = null)
+            => DisasmOut() + FS.file(string.Format("{0}.{1}", id, tool), ext ?? FS.Asm);
 
-        public FS.FilePath ImportedDisasmPath(string id, ToolId tool, FS.FileExt? ext = null)
-            => RawDisasm() + FS.file(string.Format("{0}.{1}", id, tool), ext ?? FS.Asm);
-
-        public AsmToolchainSpec ToolchainSpec(ToolId assembler, ToolId disassembler, string id, bool model = true)
+        public AsmToolchainSpec ToolchainSpec(ToolId assembler, ToolId disassembler, string id)
         {
             var spec = new AsmToolchainSpec();
             spec.Assembler = assembler;
             spec.Disassembler = disassembler;
-            spec.AsmPath = AsmSource(id, model);
+            spec.AsmPath = AsmPath(id);
             spec.BinPath = BinPath(id);
+            spec.HexPath = HexPath(id);
             spec.ObjKind = ObjFileKind.win64;
-            if(spec.ObjKind > ObjFileKind.bin)
-                spec.ObjPath = ObjPath(id);
-            spec.RawDisasmPath = RawDisasmPath(id, disassembler);
+            spec.DisasmPath = DisasmPath(id, disassembler);
             spec.Analysis = Analysis();
             spec.ListPath = ListPath(id);
             spec.AsmBitMode = Bitness.b64;
+            if(spec.ObjKind > ObjFileKind.bin)
+                spec.ObjPath = ObjPath(id);
+
             return spec;
         }
 

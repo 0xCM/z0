@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static SFx;
-
     public sealed class SpanPipe<S,T> : SpanPipe<SpanPipe<S,T>,S,T>
     {
 

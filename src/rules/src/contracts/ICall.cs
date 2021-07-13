@@ -4,12 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using static Rules;
 
     public interface ICall
     {
-        IOperation Target {get;}
+        IScopedOp Target {get;}
 
         Index<OperandValue> Operands {get;}
     }

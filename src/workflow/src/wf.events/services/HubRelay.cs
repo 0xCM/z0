@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a sink that forwards deposits to a receiver
     /// </summary>
-    public readonly struct HubRelay : IDataEventSink
+    public readonly struct HubRelay : IWfEventSink
     {
         readonly EventReceiver Receiver;
 

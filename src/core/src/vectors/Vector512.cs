@@ -10,7 +10,49 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static Typed;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    /// <summary>
+    /// Characterizes a vectorized binary operator over 256-bit operands
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [Free, SFx]
+    public interface IBinaryOp512<T> : IBinaryOp<Vector512<T>>, IFunc512<T>
+        where T : unmanaged
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized binary operator over 256-bit operands that is accompanied by componentwise decomposition/evaluation
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [Free, SFx]
+    public interface IBinaryOp512D<T> : IBinaryOp512<T>, IBinaryOp<T>
+        where T : unmanaged
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a vectorized binary operator over 256-bit operands that accepts an 8-bit immediate
+    /// </summary>
+    /// <typeparam name="T">The vector component type</typeparam>
+    [Free, SFx]
+    public interface IBinaryImm8Op512<T> : IBinaryImm8Op<Vector512<T>>, IFunc512<T>
+        where T : unmanaged
+    {
+
+    }
+
+    [Free, SFx]
+    public interface IEmitter512<T> : ISFxEmitter<Vector512<T>>, IFunc512<T>
+        where T : unmanaged
+    {
+
+    }
+
 
     [StructLayout(LayoutKind.Sequential, Size = 64), Vector(TypeWidth.W512)]
     public readonly struct Vector512<T>

@@ -9,8 +9,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static SFx;
-
     public struct VPipe128<P,S,T> : ISpanPipe128<S,T>
         where P : IVMap128<S,T>
         where S : unmanaged

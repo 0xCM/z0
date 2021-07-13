@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static SFx;
-    using static Part;
+    using static Root;
     using static cpu;
 
 
@@ -201,7 +201,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         void CheckPattern<F,T>(F f, Vector128<T> expect)
             where T : unmanaged
-            where F : SFx.IEmitter128<T>
+            where F : IEmitter128<T>
         {
             var succeeded = true;
             var casename = SFx.name(f);
@@ -233,7 +233,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         void CheckPattern<F,T>(F f, Vector256<T> expect)
             where T : unmanaged
-            where F : SFx.IEmitter256<T>
+            where F : IEmitter256<T>
         {
             var succeeded = true;
             var casename = SFx.name(f);

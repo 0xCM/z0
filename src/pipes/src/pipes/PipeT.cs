@@ -14,10 +14,10 @@ namespace Z0
     {
         readonly PipeBuffer<T> Buffer;
 
-        readonly IProjector<T> Projector;
+        readonly ISFxProjector<T> Projector;
 
         [MethodImpl(Inline)]
-        internal Pipe(IPipeline pipes, PipeBuffer<T> buffer, IProjector<T> projector)
+        internal Pipe(IPipeline pipes, PipeBuffer<T> buffer, ISFxProjector<T> projector)
         {
             Buffer = buffer;
             Projector = projector;

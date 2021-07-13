@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct SFx
     {
-        public readonly struct Projector<T> : IProjector<T>
+        public readonly struct Projector<T> : ISFxProjector<T>
         {
             readonly System.Func<T,T> Fx;
 

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
     using static SFx;
 
     public readonly struct VEmitter128<T> : IEmitter128<T>

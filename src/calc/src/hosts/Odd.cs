@@ -8,14 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static SFx;
 
     using K = ApiClasses;
 
     partial struct CalcHosts
     {
         [Closures(Integers), Odd]
-        public readonly struct Odd<T> : IFunc<T,bit>, SFx.IUnarySpanPred<T>
+        public readonly struct Odd<T> : IFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

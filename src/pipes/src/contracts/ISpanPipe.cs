@@ -6,8 +6,6 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static SFx;
-
     [Free]
     public interface ISpanPipe<S,T> : IPipe, ISpanMap<S,T>
     {

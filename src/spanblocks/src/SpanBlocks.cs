@@ -29,7 +29,6 @@ namespace Z0
         public delegate ref readonly SpanBlock64<T> UnarySpanOp64<T>(in SpanBlock64<T> src, in SpanBlock64<T> dst)
             where T : unmanaged;
 
-
         [Free]
         public delegate ref readonly SpanBlock256<T> UnarySpanOp256<T>(in SpanBlock256<T> src, in SpanBlock256<T> dst)
             where T : unmanaged;

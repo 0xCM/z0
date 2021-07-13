@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IEventHubClient : IDataEventSink
+    public interface IEventHubClient : IWfEventSink
     {
         IEventHub Hub {get;}
 

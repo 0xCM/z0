@@ -19,7 +19,7 @@ namespace Z0
             => new EventHub(capacity);
 
         [MethodImpl(Inline), Op]
-        public static EventHubClient client(IEventHub hub, IDataEventSink sink, Action connect, Action exec)
+        public static EventHubClient client(IEventHub hub, IWfEventSink sink, Action connect, Action exec)
             => new EventHubClient(hub, sink, connect, exec);
 
         /// <summary>
@@ -56,13 +56,13 @@ namespace Z0
                 => subscribe(hub, new HubRelay(receiver), model);
 
         [MethodImpl(Inline), Op]
-        public static bool subscribe(EventHub hub, EventReceiver receiver, IDataEvent model)
+        public static bool subscribe(EventHub hub, EventReceiver receiver, IAppEvent model)
             => hub.Index.TryAdd(model.GetType(), new HubRelay(receiver));
 
         [MethodImpl(Inline)]
         public static bool subscribe<S,E>(EventHub hub, S sink, E model)
             where E : struct, IWfEvent
-            where S : IDataEventSink
+            where S : IWfEventSink
                 => hub.Index.TryAdd(typeof(E), sink);
 
         [MethodImpl(Inline), Op, Closures(Closure)]

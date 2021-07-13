@@ -9,14 +9,13 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static SFx;
 
     using K = ApiClasses;
 
     partial struct CalcHosts
     {
         [Closures(Integers), Even]
-        public readonly struct Even<T> : IFunc<T,bit>, SFx.IUnarySpanPred<T>
+        public readonly struct Even<T> : IFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

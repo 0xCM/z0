@@ -17,6 +17,17 @@ namespace Z0.Asm
             var flow = EmittingFile(dst);
             using var writer = dst.AsciWriter();
             var regs = AsmRegs.list(GP);
+            var count = regs.Length;
+            var buffer = text.buffer();
+            for(var i=0; i<count; i++)
+            {
+                if(i != 0 && i%4 == 0)
+                    buffer.AppendLine();
+
+                ref readonly var reg = ref skip(regs,i);
+                buffer.AppendFormat("{0,-6}", reg);
+            }
+            Write(buffer.Emit());
             var bytespan = SpanRes.specify("GpRegNames", recover<RegOp,byte>(regs).ToArray());
             writer.WriteLine(bytespan.Format());
             EmittedFile(flow, regs.Length);

@@ -83,13 +83,13 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static RegName name(GpClass gp, RegIndexCode index, RegWidthCode width)
         {
-            var gpchars = chars(gp);
             var data = 0ul;
             var i0 = offsset(gp,index,width);
-            data = first(recover<ulong>(core.slice(gpchars,i0,RegLength)));
+            data = first(recover<ulong>(core.slice(chars(gp),i0,RegLength)));
             return new RegName(data);
         }
 
+        [MethodImpl(Inline), Op]
         static byte length(ReadOnlySpan<char> src)
         {
             var count = src.Length;

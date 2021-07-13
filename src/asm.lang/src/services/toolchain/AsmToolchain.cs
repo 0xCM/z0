@@ -82,8 +82,7 @@ namespace Z0.Asm
         {
             var outpath = src.BinPath;
             var data = outpath.ReadBytes();
-            var dst = src.Analysis + (outpath.FileName + FS.Hex);
-            EmitHexText(data,40,dst);
+            EmitHexText(data,40,src.HexPath);
             return true;
         }
 
@@ -98,7 +97,7 @@ namespace Z0.Asm
         public Outcome ProcessDisassembly(in AsmToolchainSpec spec)
         {
             var parser = Wf.DbDiasmProcessor();
-            parser.ParseDisassembly(spec.RawDisasmPath, spec.Analysis);
+            parser.ParseDisassembly(spec.DisasmPath, spec.Analysis);
             return true;
         }
 

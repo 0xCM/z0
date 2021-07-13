@@ -10,6 +10,8 @@ namespace Z0.Asm
 
         public ToolId Disassembler;
 
+        public FS.FolderPath Analysis;
+
         public FS.FilePath AsmPath;
 
         public FS.FilePath BinPath;
@@ -18,9 +20,9 @@ namespace Z0.Asm
 
         public ObjFileKind ObjKind;
 
-        public FS.FilePath RawDisasmPath;
+        public FS.FilePath DisasmPath;
 
-        public FS.FolderPath Analysis;
+        public FS.FilePath HexPath;
 
         public FS.FilePath ListPath;
 

@@ -44,7 +44,7 @@ namespace Z0
         {
             var blocks = src.BlockCount;
             var result = bit.On;
-            for(var block = 0; block < blocks; block++)
+            for(var block=0; block<blocks; block++)
                 result &= f.Invoke(src.LoadVector(block));
             return result;
         }

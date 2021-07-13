@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IEventBroker : IDisposable, IMultiSink
+    public interface IEventBroker : ISink<IWfEvent> , ISink<IAppEvent>, ISink<IAppMsg>,  IDisposable
     {
         Outcome Subscribe<E>(Action<E> receiver, E model = default)
             where E : IAppEvent;

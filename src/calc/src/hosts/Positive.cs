@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static SFx;
 
     using K = ApiClasses;
@@ -15,7 +15,7 @@ namespace Z0
     partial struct CalcHosts
     {
         [Closures(AllNumeric), Positive]
-        public readonly struct PositiveOp<T> : IFunc<T,bit>, SFx.IUnarySpanPred<T>
+        public readonly struct PositiveOp<T> : IFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

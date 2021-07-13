@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
 
     /// <summary>
     /// Represents a register index from the domain [0,31]

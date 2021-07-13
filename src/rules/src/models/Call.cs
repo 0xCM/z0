@@ -9,18 +9,16 @@ namespace Z0
 
     using static Root;
 
-    using Z0.Lang;
-
     partial struct Rules
     {
         public readonly struct Call : ICall
         {
-            public IOperation Target {get;}
+            public IScopedOp Target {get;}
 
             public Index<OperandValue> Operands {get;}
 
             [MethodImpl(Inline)]
-            public Call(IOperation target, params OperandValue[] args)
+            public Call(IScopedOp target, params OperandValue[] args)
             {
                 Target = target;
                 Operands = args;

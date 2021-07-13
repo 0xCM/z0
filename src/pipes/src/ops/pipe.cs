@@ -15,7 +15,7 @@ namespace Z0
         static T identity<T>(T src)
             => src;
 
-        public static SpanPipe<S,T> pipe<S,T>(IPipeline pipes, SFx.ISpanMap<S,T> map)
+        public static SpanPipe<S,T> pipe<S,T>(IPipeline pipes, ISpanMap<S,T> map)
             => SpanPipe<S,T>.create(pipes).With(map);
 
         [Op, Closures(Closure)]
@@ -23,18 +23,18 @@ namespace Z0
             => pipe(pipes, new PipeBuffer<T>(), new SFx.Projector<T>(identity));
 
         [Op, Closures(Closure)]
-        public static Pipe<T> pipe<T>(IPipeline pipes, SFx.IProjector<T> projector)
+        public static Pipe<T> pipe<T>(IPipeline pipes, ISFxProjector<T> projector)
             => pipe(pipes, new PipeBuffer<T>(), projector);
 
-        public static Pipe<S,T> pipe<S,T>(IPipeline pipes, SFx.IProjector<S,T> projector)
+        public static Pipe<S,T> pipe<S,T>(IPipeline pipes, ISFxProjector<S,T> projector)
             => pipe<S,T>(pipes, new PipeBuffer<S>(), projector);
 
         [MethodImpl(Inline)]
-        internal static Pipe<S,T> pipe<S,T>(IPipeline pipes, PipeBuffer<S> buffer, SFx.IProjector<S,T> fx)
+        internal static Pipe<S,T> pipe<S,T>(IPipeline pipes, PipeBuffer<S> buffer, ISFxProjector<S,T> fx)
             => new Pipe<S,T>(pipes, buffer, fx);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        internal static Pipe<T> pipe<T>(IPipeline pipes, PipeBuffer<T> buffer, SFx.IProjector<T> projector)
+        internal static Pipe<T> pipe<T>(IPipeline pipes, PipeBuffer<T> buffer, ISFxProjector<T> projector)
             => new Pipe<T>(pipes, buffer, projector);
 
         [MethodImpl(Inline)]

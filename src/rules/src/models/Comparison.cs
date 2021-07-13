@@ -9,10 +9,9 @@ namespace Z0
 
     using static Root;
 
-    using Z0.Lang;
     partial struct Rules
     {
-        public readonly struct Comparison : IPredicate<Comparison>
+        public readonly struct Comparison
         {
             public OperandSpec Left {get;}
 

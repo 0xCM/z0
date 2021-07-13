@@ -40,7 +40,7 @@ namespace Z0.Tools
             dst.EmitBitfields = bitfields;
             dst.EmitDetails = details;
             dst.AsmBitMode = spec.AsmBitMode;
-            dst.OutputPath = spec.RawDisasmPath;
+            dst.OutputPath = spec.DisasmPath;
             return dst;
         }
 

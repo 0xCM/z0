@@ -14,11 +14,11 @@ namespace Z0
 
     public readonly struct EventHub : IEventHub
     {
-        internal readonly Dictionary<Type,IDataEventSink> Index;
+        internal readonly Dictionary<Type,IWfEventSink> Index;
 
         [MethodImpl(Inline)]
         internal EventHub(int capacity)
-            => Index = new Dictionary<Type,IDataEventSink>(capacity);
+            => Index = new Dictionary<Type,IWfEventSink>(capacity);
 
         [MethodImpl(Inline)]
         public void Subscribe<E>(E e, EventReceiver<E> receiver)
@@ -31,7 +31,7 @@ namespace Z0
                 => api.subscribe(this, receiver, e);
 
         [MethodImpl(Inline)]
-        public void Subscribe(IDataEvent e, EventReceiver receiver)
+        public void Subscribe(IAppEvent e, EventReceiver receiver)
             => api.subscribe(this, receiver, e);
 
         [MethodImpl(Inline)]

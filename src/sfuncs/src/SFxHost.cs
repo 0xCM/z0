@@ -10,8 +10,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static SFx;
-
     /// <summary>
     /// Defines service provider implementation predicated on service factory and enclosure types
     /// </summary>

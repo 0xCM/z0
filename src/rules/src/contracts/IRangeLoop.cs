@@ -8,7 +8,7 @@ namespace Z0
 
     using Z0.Lang;
 
-    public interface IRangeLoop : ILoop
+    public interface IRangeLoop : IScopedLoop
     {
         Rules.Range Range {get;}
 

@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
+    using static SFx;
 
     partial struct CalcHosts
     {
-        public readonly struct VOnes128<T> : SFx.IEmitter128<T>
+        public readonly struct VOnes128<T> : IEmitter128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -20,7 +21,7 @@ namespace Z0
                 => gcpu.vones<T>(w128);
         }
 
-        public readonly struct VOnes256<T> : SFx.IEmitter256<T>
+        public readonly struct VOnes256<T> : IEmitter256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

@@ -42,7 +42,7 @@ namespace Z0
         }
 
         [Closures(AllNumeric), Nonz]
-        public readonly struct Nonz<T> : IFunc<T,bit>, SFx.IUnarySpanPred<T>
+        public readonly struct Nonz<T> : IFunc<T,bit>, IUnarySpanPred<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

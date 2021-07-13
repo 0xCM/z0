@@ -8,7 +8,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Loop : ILoop
+        public readonly struct Loop : IScopedLoop
         {
             public IScope Scope {get;}
 
