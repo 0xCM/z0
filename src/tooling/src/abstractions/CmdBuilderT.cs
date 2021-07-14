@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    public abstract class CmdBuilder<T> : AppService<T>, ICmdBuilder
+    public abstract class CmdBuilder<T> : Service<T>, ICmdBuilder
         where T : CmdBuilder<T>, new()
     {
         protected Index<ToolCmdArg> Args;

@@ -23,13 +23,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => sys.empty(Id);
+            get => string.IsNullOrEmpty(Id);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => sys.nonempty(Id);
+            get => !string.IsNullOrWhiteSpace(Id);
         }
 
         [MethodImpl(Inline)]

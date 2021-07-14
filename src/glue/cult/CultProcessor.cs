@@ -38,7 +38,7 @@ namespace Z0.Tools
             AsmLines = new();
             HexCharBuffer = sys.alloc<char>(HexBufferLength);
             HexParser = HexParsers.bytes();
-            Tool = Toolsets.cult;
+            Tool = Toolspace.cult;
             InputFile = FS.FilePath.Empty;
         }
 
@@ -58,7 +58,7 @@ namespace Z0.Tools
 
         public Outcome<uint> Run()
         {
-            return Run(InputFile.IsEmpty ? Db.ToolOutput(Toolsets.cult, "cult", FS.Asm) : InputFile);
+            return Run(InputFile.IsEmpty ? Db.ToolOutput(Toolspace.cult, "cult", FS.Asm) : InputFile);
         }
 
         public Outcome<uint> Run(FS.FilePath src)

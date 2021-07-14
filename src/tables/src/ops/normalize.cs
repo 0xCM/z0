@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct Tables
     {
+        [Op]
         public static Outcome<Count> normalize(Asset src, string delimiter, ReadOnlySpan<byte> widths, FS.FilePath dst)
         {
             var data = text.utf8(src.Bytes());
@@ -21,6 +22,7 @@ namespace Z0
             return Tables.normalize(data, delimiter, widths, dst);
         }
 
+        [Op]
         public static Outcome<Count> normalize(string data, string delimiter, ReadOnlySpan<byte> widths, FS.FilePath dst)
         {
             var result = TextGrids.parse(data, out var doc);

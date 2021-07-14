@@ -9,54 +9,44 @@ namespace Z0
 
     using static Root;
     using static core;
+    using api = Tables;
 
-    public readonly struct RecordFormatter
+    public sealed class RecordFormatter : IRecordFormatter
     {
-        public static string header(in RowFormatSpec rowspec)
-            => rowspec.Header.Format();
+        public static IRecordFormatter formatter(Type type, ushort rowpad = 0)
+            => new RecordFormatter(type, EmptyString, default, rowpad);
 
-        public static uint cells<T>(in RowFormatSpec rowspec, in DynamicRow<T> row, Span<string> dst)
-            where T : struct, IRecord<T>
+        public static IRecordFormatter formatter(Type type, ReadOnlySpan<byte> widths, ushort rowpad = 0)
+            => new RecordFormatter(type, EmptyString, widths, rowpad);
+
+        public static IRecordFormatter formatter(Type type, string name, ushort rowpad = 0)
+            => new RecordFormatter(type, name, default, rowpad);
+
+        internal RecordFormatter(Type type, string name, ReadOnlySpan<byte> widths, ushort rowpad)
         {
-            var values = @readonly(row.Cells);
-            var specs = rowspec.Cells.View;
-            var count = (uint)min(specs.Length,values.Length);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var value = ref skip(values,i);
-                ref readonly var spec = ref skip(specs,i);
-                var cellpad = spec.Width.Pattern();
-                seek(dst, i) = string.Format(cellpad, spec.Pattern.Format(value));
-            }
-
-            return count;
+            RecordType = type;
+            TableId = text.empty(name) ? api.identify(type) : api.identify(type,name);
+            FormatSpec = widths.IsEmpty ? api.rowspec(type,api.DefaultFieldWidth,rowpad) : api.rowspec(type, widths, rowpad);
         }
 
-        public static string format<T>(in RowFormatSpec rowspec, in DynamicRow<T> src)
-            where T : struct, IRecord<T>
+        public Type RecordType {get;}
+
+        public TableId TableId {get;}
+
+        public RowFormatSpec FormatSpec {get;}
+
+        public string Format(IRecord src)
         {
-            var content = string.Format(rowspec.Pattern, src.Cells);
-            var pad = rowspec.RowPad;
-            if(pad == 0)
-                return content;
-            else
-                return content.PadRight(pad);
+            throw new NotImplementedException();
         }
 
-        public static string pairs<T>(in RowAdapter<T> src)
-            where T : struct, IRecord<T>
+        public string Format(IRecord src, RecordFormatKind kind)
         {
-            const char RowSep = Chars.Comma;
-            const char ValSep = Chars.Eq;
-            const string KVRP = "{0,-48}: {1}" + Eol;
-
-            var dst = text.buffer();
-            var cells = src.Cells;
-            var count = cells.Length;
-            var fields = src.Fields.View;
-            for(var i=0; i<count; i++)
-                dst.AppendFormat(KVRP, skip(fields,i).Name, skip(cells,i));
-            return dst.Emit();
+            throw new NotImplementedException();
         }
+
+        public string FormatHeader()
+            => FormatSpec.Header.Format();
+
     }
 }

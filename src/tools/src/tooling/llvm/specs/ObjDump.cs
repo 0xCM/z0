@@ -8,7 +8,7 @@ namespace Z0.Tools
     {
         public struct ObjDump : ITool<ObjDump>
         {
-            public ToolId Id => Toolsets.llvm.objdump;
+            public ToolId Id => Toolspace.llvm_objdump;
         }
 
         [Cmd]

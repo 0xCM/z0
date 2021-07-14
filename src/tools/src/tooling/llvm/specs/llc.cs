@@ -7,7 +7,7 @@ namespace Z0.Tools
     public partial class llc : CmdBuilder<llc>
     {
         public llc()
-            : base(Toolsets.llvm.llc)
+            : base(Toolspace.llvm_llc)
         {
 
         }

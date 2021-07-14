@@ -9,9 +9,10 @@ namespace Z0
     using System.IO;
 
     using static Root;
+    using static Tables;
 
     public class TableReader<T> : IDisposable
-        where T : struct, IRecord<T>
+        where T : struct
     {
         readonly StreamReader Stream;
 
@@ -19,7 +20,7 @@ namespace Z0
 
         uint Counter;
 
-        readonly RecordParseFunction<T> Parser;
+        readonly Tables.RowParser<T> Parser;
 
         public TableReader(FS.FilePath src, bool header = true)
         {
@@ -30,7 +31,7 @@ namespace Z0
             Parser = DefaultParser;
         }
 
-        public TableReader(FS.FilePath src, RecordParseFunction<T> parser, bool header = true)
+        public TableReader(FS.FilePath src, Tables.RowParser<T> parser, bool header = true)
         {
             Stream = src.Reader();
             if(header)

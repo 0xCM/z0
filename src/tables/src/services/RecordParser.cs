@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     public readonly struct RecordParser<T> : IRecordParser<T>
-        where T : struct, IRecord<T>
+        where T : struct
     {
         public char FieldDelimiter {get;}
 

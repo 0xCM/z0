@@ -8,10 +8,10 @@ namespace Z0
     using System.Reflection;
 
     using static core;
-    using static Root;
 
     partial struct Tables
     {
+        [Op]
         public static ReadOnlySpan<ReflectedTable> discover(ReadOnlySpan<Assembly> src)
         {
             var count = src.Length;
@@ -21,6 +21,7 @@ namespace Z0
             return dst.View();
         }
 
+        [Op]
         public static ReadOnlySpan<ReflectedTable> discover(Assembly src)
         {
             var types = @readonly(src.Types().Tagged<RecordAttribute>());
@@ -30,6 +31,7 @@ namespace Z0
             return dst.View();
         }
 
+        [Op]
         static uint discover(Assembly src, DataList<ReflectedTable> dst)
         {
             var types = @readonly(src.Types().Tagged<RecordAttribute>());

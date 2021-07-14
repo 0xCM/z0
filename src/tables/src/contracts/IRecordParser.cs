@@ -10,7 +10,7 @@ namespace Z0
     }
 
     public interface IRecordParser<T> : IRecordParser
-        where T : struct, IRecord<T>
+        where T : struct
     {
         Outcome ParseHeader(string src, out RowHeader dst);
 

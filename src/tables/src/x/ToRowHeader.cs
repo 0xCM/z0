@@ -6,16 +6,10 @@ namespace Z0
 {
     using System;
 
-    public interface IRecordEmitter : IDisposable
+    partial class XTend
     {
-        void EmitHeader();
-    }
-
-    public interface IRecordEmitter<T> : IRecordEmitter
-        where T : struct, IRecord<T>
-    {
-        void Emit(in T src);
-
-        void Emit(ReadOnlySpan<T> src);
+        [Op]
+        public static RowHeader ToRowHeader(this TextDocHeader src, string delimiter, ReadOnlySpan<byte> widths)
+            => Tables.header(src,delimiter,widths);
     }
 }

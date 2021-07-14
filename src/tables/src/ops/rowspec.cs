@@ -20,6 +20,20 @@ namespace Z0
         public static RowFormatSpec rowspec(RowHeader header, CellFormatSpec[] cells, ushort rowpad = 0)
             => new RowFormatSpec(header, cells, pattern(cells, header.Delimiter), rowpad);
 
+        [Op, Closures(Closure)]
+        public static RowFormatSpec rowspec(Type record, ReadOnlySpan<byte> widths, ushort rowpad = 0)
+        {
+            var _header = header(record, widths);
+            return rowspec(_header, _header.Cells.Select(x => x.CellFormat), rowpad);
+        }
+
+        [Op, Closures(Closure)]
+        public static RowFormatSpec rowspec(Type record, byte width = DefaultFieldWidth, ushort rowpad = 0)
+        {
+            var _header = header(record, width);
+            return rowspec(_header, _header.Cells.Select(x => x.CellFormat), rowpad);
+        }
+
         /// <summary>
         /// Defines a <see cref='RowFormatSpec'/>
         /// </summary>
@@ -43,18 +57,6 @@ namespace Z0
             where T : struct
         {
             var _header = header<T>(fieldwidth);
-            return rowspec(_header, _header.Cells.Select(x => x.CellFormat), rowpad);
-        }
-
-        /// <summary>
-        /// Defines a <see cref='RowFormatSpec'/>
-        /// </summary>
-        /// <param name="record">The record type</param>
-        /// <param name="fieldwidth">The uniform field width</param>
-        [Op, Closures(Closure)]
-        public static RowFormatSpec rowspec(Type record, byte fieldwidth = DefaultFieldWidth, ushort rowpad = 0)
-        {
-            var _header = header(record, fieldwidth);
             return rowspec(_header, _header.Cells.Select(x => x.CellFormat), rowpad);
         }
     }

@@ -8,10 +8,12 @@ namespace Z0.Tools
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     [ApiHost]
     public readonly partial struct Llvm
     {
+
         [MethodImpl(Inline), Op]
         public static Llvm tool(IEnvPaths paths)
             => new Llvm(paths);

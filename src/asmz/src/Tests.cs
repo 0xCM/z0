@@ -277,7 +277,7 @@ namespace Z0.Asm
         {
             var producer = Wf.AsmStatementProducer();
             var hosts = NestedHosts(typeof(Prototypes));
-            var count = producer.Produce(Toolsets.nasm, hosts);
+            var count = producer.Produce(Toolspace.nasm, hosts);
         }
 
         void ShowRegKinds(RegKind src, ShowLog dst)
@@ -454,7 +454,7 @@ namespace Z0.Asm
 
         void ConvertPdbXml()
         {
-            var dir = Db.ToolOutDir(Toolsets.pdb2xml);
+            var dir = Db.ToolOutDir(Toolspace.pdb2xml);
             var file = PartId.Math.Component(FS.Pdb, FS.Xml);
             var srcPath = dir + file;
             var buffer = text.buffer();

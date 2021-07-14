@@ -14,7 +14,7 @@ namespace Z0
     public class IntelSde : ToolService<IntelSde>
     {
         public IntelSde()
-            :base(Toolsets.sde)
+            :base(Toolspace.sde)
         {
 
         }

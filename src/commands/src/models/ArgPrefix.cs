@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     [DataType]
     public readonly struct ArgPrefix : IDataTypeEquatable<ArgPrefix>

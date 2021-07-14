@@ -12,6 +12,7 @@ namespace Z0
 
     partial struct Tables
     {
+        [Op, Closures(Closure)]
         public static ReadOnlySpan<FieldValue> values<T>(in T src)
             where T : struct
         {
@@ -21,6 +22,7 @@ namespace Z0
             return dst;
         }
 
+        [Op, Closures(Closure)]
         public static void values<T>(in T src, Span<FieldValue> dst)
             where T : struct
         {
@@ -28,9 +30,8 @@ namespace Z0
             values(src, fields, dst);
         }
 
-        [Op, Closures(Closure)]
         public static FieldValue<S>[] values<S,T>(S src)
-            where S : struct, IRecord<S>
+            where S : struct
         {
             var fields = @readonly(typeof(S).DeclaredInstanceFields());
             var buffer = alloc<FieldValue<S>>(fields.Length);
@@ -46,6 +47,7 @@ namespace Z0
             return buffer;
         }
 
+        [Op, Closures(Closure)]
         public static FieldValues<T> values<T>(in T src, FieldInfo[] fields)
             where T : struct
         {

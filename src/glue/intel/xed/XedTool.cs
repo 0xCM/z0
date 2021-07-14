@@ -14,7 +14,7 @@ namespace Z0.Tools
             => id.ToString();
 
         public XedTool()
-            : base(Toolsets.xed)
+            : base(Toolspace.xed)
         {
 
         }

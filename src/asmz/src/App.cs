@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     using static Part;
     using static core;
-    using static Toolsets;
+    using static Toolspace;
     using static AsmCodes;
 
     partial class App : AppService<App>
@@ -36,10 +36,10 @@ namespace Z0.Asm
         void RunScripts()
         {
             var runner = Wf.ScriptRunner();
-            runner.RunToolCmd(clang.name, "codegen");
-            runner.RunToolCmd(clang.name, "parse");
-            runner.RunToolPs(clang.name, "fast-math");
-            runner.RunToolPs(llvm.ml, "lex");
+            runner.RunToolCmd(clang, "codegen");
+            runner.RunToolCmd(clang, "parse");
+            runner.RunToolPs(clang, "fast-math");
+            runner.RunToolPs(llvm_ml, "lex");
         }
 
         public static MsgPattern<T> DispatchingCmd<T>()
@@ -284,7 +284,7 @@ namespace Z0.Asm
         void EmitCatalogAssets()
         {
             const byte fieldCount = 4;
-            var delimiter = Tables.DefaultDelimiter;
+            var delimiter = " | ";
             var widths = new byte[fieldCount]{14,14,14,64};
             var dst = Db.AppLog("assets.features", FS.Csv);
             var assets = AsmData.Assets;

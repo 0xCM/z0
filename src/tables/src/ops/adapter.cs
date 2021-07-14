@@ -16,17 +16,18 @@ namespace Z0
         /// </summary>
         /// <param name="fields">The record fields</param>
         /// <typeparam name="T">The record type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static RowAdapter<T> adapter<T>(in RecordFields fields)
-            where T : struct, IRecord<T>
+            where T : struct
                 => new RowAdapter<T>(fields);
 
         /// <summary>
         /// Creates a <see cref='RowAdapter{T}'/> predicated a specified <typeparamref name='T'/>
         /// </summary>
         /// <typeparam name="T">The row type</typeparam>
+        [Op, Closures(Closure)]
         public static RowAdapter<T> adapter<T>()
-            where T : struct, IRecord<T>
+            where T : struct
                 => adapter<T>(fields<T>());
     }
 }

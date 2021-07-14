@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines a 64-bit immediate value
     /// </summary>
-    [DataType(TypeKind.Imm64, "imm64")]
+    [DataType("imm64")]
     public readonly struct Imm64 : IImm<Imm64,ulong>
     {
         [MethodImpl(Inline)]

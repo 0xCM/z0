@@ -10,6 +10,8 @@
     <ProjectReference Include="$(Minidump)" />
     <ProjectReference Include="$(Interop)" />
     <ProjectReference Include="$(BitNumbers)" />
+    <ProjectReference Include="$(Tables)" />
+
   </ItemGroup>
 
 </Project>

@@ -220,6 +220,27 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out FS.FolderPath dst)
+        {
+            dst = FS.dir(src);
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out FS.FilePath dst)
+        {
+            dst = FS.path(src);
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out FS.FileExt dst)
+        {
+            dst = FS.ext(src);
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
         public static bool parse(string src, Bounded<int> bounds, out int dst, out Outcome outcome)
             => Rules.parse(src,bounds, out dst, out outcome);
 
@@ -275,6 +296,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out MemoryRange dst)
             => MemoryRangeParser.parse(src, out dst);
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out ToolId dst)
+        {
+            dst = src;
+            return true;
+        }
 
         [MethodImpl(Inline)]
         public static Outcome parse<T>(string src, out Setting<T> dst, char delimiter = Chars.Colon)

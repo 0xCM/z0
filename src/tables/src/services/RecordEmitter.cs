@@ -12,7 +12,7 @@ namespace Z0
     using static core;
 
     public readonly struct RecordEmitter<T> : IRecordEmitter<T>
-        where T : struct, IRecord<T>
+        where T : struct
     {
         public FS.FilePath Target {get;}
 

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     public class Table<T> : Table
-        where T : struct, IRecord<T>
+        where T : struct
     {
         Index<T> Data;
 

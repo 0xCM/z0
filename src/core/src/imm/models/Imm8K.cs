@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a refined 8-bit immediate value
     /// </summary>
-    [DataType(TypeKind.Imm8K,"imm8r")]
+    [DataType("imm8{k}")]
     public readonly struct Imm8<K> : IImm<Imm8<K>,K>
         where K : unmanaged
     {

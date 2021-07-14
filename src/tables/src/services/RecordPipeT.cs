@@ -11,7 +11,7 @@ namespace Z0
     using static core;
 
     public abstract class RecordPipe<T>
-        where T : struct, IRecord<T>
+        where T : struct
     {
         protected RecordPipe()
         {

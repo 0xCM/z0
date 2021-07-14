@@ -18,6 +18,7 @@ namespace Z0
         public static ReflectedTable reflected(Type type, TableId id, RecordField[] fields, LayoutKind? kind = null, CharSet? charset = null, byte? pack = null, uint? size = null)
             => new ReflectedTable(type, id, fields, kind, charset, pack, size);
 
+        [Op]
         public static ReflectedTable reflected(Type type)
         {
             var layout = type.Tag<StructLayoutAttribute>();

@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using static Toolsets;
+    using static Toolspace;
 
     public class Clang : CmdBuilder<Clang>
     {
         public Clang()
-            : base(clang.name)
+            : base(clang)
         {
 
         }

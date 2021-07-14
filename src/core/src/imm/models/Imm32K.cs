@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a refined 32-bit immediate value
     /// </summary>
-    [DataType(TypeKind.Imm32K, "imm32k")]
+    [DataType("imm32{k}")]
     public readonly struct Imm32<K> : IImm<Imm32<K>, K>
         where K : unmanaged
     {

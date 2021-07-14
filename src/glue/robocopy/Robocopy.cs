@@ -9,6 +9,6 @@ namespace Z0.Tools
     [ApiHost]
     public sealed partial class Robocopy : AppService<Robocopy>, ITool<Robocopy>
     {
-        public ToolId Id => Toolsets.nasm;
+        public ToolId Id => Toolspace.nasm;
     }
 }

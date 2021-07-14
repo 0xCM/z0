@@ -15,7 +15,7 @@ namespace Z0.Asm
 
             var toolchain = Wf.AsmToolchain();
             var srcId = (string)args.First.Value;
-            var spec = Workspace.ToolchainSpec(Toolsets.nasm, Toolsets.bddiasm, srcId);
+            var spec = Workspace.ToolchainSpec(Toolspace.nasm, Toolspace.bddiasm, srcId);
             if(count > 1)
             {
                 Enums.parse(args[1].Value, out spec.AsmBitMode);

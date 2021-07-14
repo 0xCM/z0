@@ -19,7 +19,7 @@ namespace Z0
         }
     }
 
-    public abstract class Tool<T,C> : Tool<T>, ITool<T,C>
+    public abstract class Tool<T,C> : Tool<T>, ICmdLineTool<T,C>
         where T : Tool<T,C>,new()
         where C : IToolCmd
     {
@@ -49,7 +49,7 @@ namespace Z0
                 var buffer = Buffer();
                 var i = 0u;
                 var length = Render(src, ref i, buffer);
-                var content = TextTools.format(slice(buffer,0, length));
+                var content = text.format(slice(buffer,0, length));
                 return new CmdLine(content);
             }
         }

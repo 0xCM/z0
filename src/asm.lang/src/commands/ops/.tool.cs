@@ -10,7 +10,7 @@
             Outcome SelectTool(CmdArgs args)
             {
                 ToolId tool = arg(args,0).Value;
-                var dir = ToolBase().ToolDir(tool);
+                var dir = ToolBase().Home(tool);
                 Outcome outcome = dir.Exists;
                 if(outcome)
                 {

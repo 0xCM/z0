@@ -14,19 +14,15 @@ namespace Z0
     {
         public DataTypeAttribute()
         {
-
+            Specifiers = Array.Empty<string>();
         }
 
-        public DataTypeAttribute(TypeKind kind, params object[] synonyms)
+        public DataTypeAttribute(params string[] specifiers)
         {
-
+            Specifiers = specifiers;
         }
 
-        public DataTypeAttribute(params object[] synonyms)
-        {
+        public string[] Specifiers {get;}
 
-        }
-
-        public TypeKind Kind{get;}
     }
 }

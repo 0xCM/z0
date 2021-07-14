@@ -10,7 +10,7 @@ namespace Z0.Tools
         readonly BitFormatter<byte> BitFormat;
 
         public Nasm()
-            : base(Toolsets.nasm)
+            : base(Toolspace.nasm)
         {
             BitFormat = BitRender.formatter<byte>(4);
         }

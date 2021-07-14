@@ -21,7 +21,7 @@ namespace Z0.Tools
         public FS.FilePath ToolPath {get; set;}
 
         public BdDisasm()
-            : base(Toolsets.bddiasm)
+            : base(Toolspace.bddiasm)
         {
 
         }
@@ -29,7 +29,7 @@ namespace Z0.Tools
         protected override void Initialized()
         {
             Workspace = AsmWorkspace.create(Env.AsmWorkspace);
-            ToolPath = Workspace.ToolPath(Toolsets.bddiasm);
+            ToolPath = Workspace.ToolPath(Toolspace.bddiasm);
         }
 
         public BdDisasmCmd Cmd(in AsmToolchainSpec spec, bool bitfields = false , bool details = false)

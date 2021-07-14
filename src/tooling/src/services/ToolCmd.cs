@@ -17,6 +17,32 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [Op]
+        public static ref CmdRuleInfo rule(IEnvPaths paths, ref CmdRuleInfo data)
+        {
+            data.CmdRoot = paths.ToolExeRoot() +  data.CmdRootName;
+            data.CmdName = FS.file(data.CmdHost.Format(), data.ScriptType);
+            data.CmdOutName = FS.file(string.Format("{0}.{1}", data.CmdHost, data.CmdArgName), FS.Log);
+            data.CmdOutDir = paths.ToolOutDir(data.CmdHost);
+            data.CmdOutPath = data.CmdOutDir + FS.file(data.CmdHost);
+            data.ToolArgs = string.Format("{0}{0}", data.ArgPrefix, data.CmdArgName);
+            data.CmdPath = data.CmdRoot + FS.file(data.CmdHost.Format(), data.ScriptType);
+            data.CmdExecSpec = string.Format("{0} {1}", data.CmdPath, data.ToolArgs);
+            return ref data;
+        }
+
+        [Op]
+        public static ref CmdRuleInfo rule(IEnvPaths paths, ref CmdRuleInfo data,
+            string root = null, string name = null, string arg = null, ArgPrefix? prefix = null, string type = null)
+        {
+            data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);
+            data.CmdArgName = arg == null ? data.CmdArgName : (Name)arg;
+            data.ArgPrefix = prefix != null ? prefix.Value: data.ArgPrefix;
+            data.ScriptType = type == null ? data.ScriptType : FS.ext(type);
+            rule(paths, ref data);
+            return ref data;
+        }
+
         [Op, Closures(UInt64k)]
         public static ToolExecSpec untype<T>(in T spec)
             where T : struct
@@ -63,35 +89,6 @@ namespace Z0
             return ref dst;
         }
 
-        /// <summary>
-        /// Populates a <see cref='ToolCmdArg'/> structure from a specified source
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="K">The option kind type</typeparam>
-        /// <typeparam name="T">The option value type</typeparam>
-        [MethodImpl(Inline)]
-        public static ToolCmdArg untype<K,T>(in ToolCmdArg<K,T> src)
-            where K : unmanaged
-        {
-            var dst = new ToolCmdArg();
-            untype(src,ref dst);
-            return dst;
-        }
-
-        /// <summary>
-        /// Populates a <see cref='ToolCmdArg'/> structure from a specified source
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="dst">The data target</param>
-        /// <typeparam name="K">The option kind type</typeparam>
-        /// <typeparam name="T">The option value type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref ToolCmdArg untype<K,T>(in ToolCmdArg<K,T> src, ref ToolCmdArg dst)
-            where K : unmanaged
-        {
-            dst = new ToolCmdArg(src.Kind.ToString(), src.Value.ToString());
-            return ref dst;
-        }
 
         [MethodImpl(Inline)]
         public static CmdJob<T> job<T>(string name, T spec)

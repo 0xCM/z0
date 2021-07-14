@@ -8,15 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+
     partial struct Tables
     {
         /// <summary>
         /// Computes the <see cref='TableId'/> of a parametrically-identified record
         /// </summary>
         /// <typeparam name="T">The record type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static TableId identify<T>()
-            where T : struct, IRecord<T>
+            where T : struct
                 => TableId.identify<T>();
+
+        [Op]
+        public static TableId identify(Type type)
+            => TableId.identify(type);
+
+        [Op]
+        public static TableId identify(Type type, string name)
+            => TableId.identify(type, name);
     }
 }

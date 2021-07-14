@@ -17,19 +17,19 @@ namespace Z0
         /// <typeparam name="T">The record type</typeparam>
         [MethodImpl(Inline)]
         public static TableId identify<T>()
-            where T : struct, IRecord<T>
+            where T : struct
                 => identify(typeof(T));
 
         [MethodImpl(Inline)]
         public static TableId identify<T>(string name)
-            where T : struct, IRecord<T>
+            where T : struct
                 => identify(typeof(T), name);
 
         /// <summary>
         /// Computes the <see cref='TableId'/> of a specified record type
         /// </summary>
         /// <param name="src">The record type</typeparam>
-        [Op]
+        [MethodImpl(Inline)]
         public static TableId identify(Type src)
             => src.Tag<RecordAttribute>().MapValueOrElse(
                     a => new TableId(a.TableId, src.FullName),
@@ -40,7 +40,7 @@ namespace Z0
             => new TableId(name, src.FullName);
 
         [MethodImpl(Inline)]
-        public static TableId identify(string identity, string name)
+        public static TableId define(string identity, string name)
             => new TableId(name, identity);
 
         public Name Identifier {get;}

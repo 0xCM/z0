@@ -22,17 +22,17 @@ namespace Z0
     }
 
     public interface IRecordFormatter<T> : IRecordFormatter
-        where T : struct, IRecord<T>
+        where T : struct
     {
         string Format(in T src);
 
         string Format(in T src, RecordFormatKind kind);
 
+        TableId IRecordFormatter.TableId
+            => TableId.identify(typeof(T));
+
         string FormatKvp(in T src)
             => Format(src, RecordFormatKind.KeyValuePairs);
-
-        TableId IRecordFormatter.TableId
-            => default(T).TableId;
 
         string IRecordFormatter.Format(IRecord src)
             => Format((T)src);

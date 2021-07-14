@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     public abstract class Report<T>
-        where T : struct, IRecord<T>
+        where T : struct
     {
         protected Index<T> Rows {get; set;}
 

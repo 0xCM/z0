@@ -10,9 +10,8 @@ namespace Z0
     using static Root;
     using static NumericCast;
     using static core;
-    using static Typed;
 
-    [DataType(TypeKind.ImmT, "immT")]
+    [DataType("imm{t}")]
     public readonly struct Imm<T> : IImm<Imm<T>,T>
         where T : unmanaged
     {

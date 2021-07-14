@@ -73,7 +73,7 @@ namespace Z0.Tools
 
         [MethodImpl(Inline)]
         public DumpBin()
-            :base(Toolsets.dumpbin)
+            :base(Toolspace.dumpbin)
         {
             Args =  alloc<ToolCmdArg<Flag,object>>(MaxVarCount);
             ArgIndex = 0;

@@ -6,7 +6,12 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+
     [Free]
-    public delegate Outcome RecordParseFunction<T>(TextLine src, out T dst)
-        where T : struct, IRecord<T>;
+    public interface ICmdLineTool<T,C> : ITool<T>
+        where T : ITool<T>, new()
+        where C : IToolCmd
+    {
+        CmdLine CmdLine(in C src);
+    }
 }

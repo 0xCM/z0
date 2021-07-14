@@ -8,9 +8,6 @@ namespace Z0
 
     partial struct Tables
     {
-        public static ReadOnlySpan<string> fields(string src, char delimiter)
-            => src.Trim().SplitClean(delimiter);
-
         /// <summary>
         /// Discerns a <see cref='RecordFields'/> for a parametrically-identified record type
         /// </summary>

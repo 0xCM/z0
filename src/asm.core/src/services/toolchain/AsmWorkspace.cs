@@ -49,9 +49,9 @@ namespace Z0.Asm
 
         public FS.FilePath ToolPath(ToolId id)
         {
-            if(id == Toolsets.bddiasm)
+            if(id == Toolspace.bddiasm)
                 return FS.path(@"j:\source\bddisasm\build\bddisasm.exe");
-            else if(id == Toolsets.nasm)
+            else if(id == Toolspace.nasm)
                 return FS.path(@"c:\tools\nasm\nasm.exe");
             else
                 throw no(id);

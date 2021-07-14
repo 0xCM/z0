@@ -14,8 +14,9 @@ namespace Z0
         /// </summary>
         /// <param name="formatter">The record formatter</param>
         /// <typeparam name="T">The record type</typeparam>
+        [Op, Closures(Closure)]
         public static IRecordEmitter<T> emitter<T>(ReadOnlySpan<byte> widths, FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
                 => emitter<T>(formatter<T>(widths), dst);
 
         /// <summary>
@@ -23,8 +24,9 @@ namespace Z0
         /// </summary>
         /// <param name="formatter">The record formatter</param>
         /// <typeparam name="T">The record type</typeparam>
+        [Op, Closures(Closure)]
         public static IRecordEmitter<T> emitter<E,T>(FS.FilePath dst, ushort rowpad = 0)
-            where T : struct, IRecord<T>
+            where T : struct
             where E : unmanaged, Enum
                 => emitter<T>(formatter<E,T>(rowpad), dst);
 
@@ -33,8 +35,9 @@ namespace Z0
         /// </summary>
         /// <param name="formatter">The record formatter</param>
         /// <typeparam name="T">The record type</typeparam>
+        [Op, Closures(Closure)]
         public static IRecordEmitter<T> emitter<T>(IRecordFormatter<T> formatter, FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
                 => new RecordEmitter<T>(formatter, dst);
     }
 }

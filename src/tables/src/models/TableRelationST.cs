@@ -10,8 +10,8 @@ namespace Z0
     using static Root;
 
     public readonly struct TableRelation<S,T>
-        where S : struct, IRecord<S>
-        where T : struct, IRecord<T>
+        where S : struct
+        where T : struct
     {
         public Arrow<S,T> Direction {get;}
 

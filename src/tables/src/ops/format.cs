@@ -13,9 +13,41 @@ namespace Z0
 
     partial struct Tables
     {
+        [Op, Closures(Closure)]
+        public static string format<T>(ref RecordFormatter<T> formatter, in T src)
+            where T : struct
+        {
+            adapt(src, ref formatter.Adapter);
+            return format(formatter.FormatSpec, formatter.Adapter.Adapted);
+        }
+
+        [Op, Closures(Closure)]
         public static string format<T>(in T src)
-            where T : struct, IRecord<T>
-                => Tables.formatter<T>().Format(src);
+            where T : struct
+                => formatter<T>().Format(src);
+
+        [Op, Closures(Closure)]
+        public static string format<T>(ref RecordFormatter<T> formatter, in T src, RecordFormatKind kind)
+            where T : struct
+        {
+            adapt(src, ref formatter.Adapter);
+            if(kind == RecordFormatKind.Tablular)
+                return format(formatter.FormatSpec, formatter.Adapter.Adapted);
+            else
+                return pairs(formatter.Adapter);
+        }
+
+        [Op, Closures(Closure)]
+        public static string format<T>(in RowFormatSpec rowspec, in DynamicRow<T> src)
+            where T : struct
+        {
+            var content = string.Format(rowspec.Pattern, src.Cells);
+            var pad = rowspec.RowPad;
+            if(pad == 0)
+                return content;
+            else
+                return content.PadRight(pad);
+        }
 
         [Op]
         public static string format(ListedFiles src)
@@ -39,7 +71,7 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void format(ListedFiles src, Span<string> dst)
         {
             var count = src.Count;
@@ -58,7 +90,7 @@ namespace Z0
         /// <param name="src">The source header</param>
         public static string format(RowHeader src)
         {
-            var dst = new StringBuilder();
+            var dst = text.buffer();
             for(var i=0; i<src.Count; i++)
             {
                 if(i != 0)

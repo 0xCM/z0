@@ -8,7 +8,7 @@ namespace Z0
     {
         readonly IEnvPaths Paths;
 
-        public ToolId Tool => Toolsets.robocopy;
+        public ToolId Tool => Toolspace.robocopy;
 
         void Status(TextLine src)
             => term.babble(src);

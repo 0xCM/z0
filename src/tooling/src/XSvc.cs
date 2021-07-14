@@ -10,10 +10,6 @@ namespace Z0
     public static class XSvc
     {
         [Op]
-        public static ToolCatalog ToolCatalog(this IWfRuntime wf)
-            => Svc.ToolCatalog.create(wf);
-
-        [Op]
         public static CmdLineRunner CmdLineRunner(this IWfRuntime wf)
             => Svc.CmdLineRunner.create(wf);
 

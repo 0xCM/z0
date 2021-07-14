@@ -11,6 +11,19 @@ namespace Z0
 
     partial struct Tables
     {
+        [Op]
+        public static RowHeader header(TextDocHeader src, string delimiter, ReadOnlySpan<byte> widths)
+        {
+            var labels = src.Labels.View;
+            var count = min(labels.Length,widths.Length);
+            var cells = new HeaderCell[count];
+            ref var dst = ref first(cells);
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = new HeaderCell(i,skip(labels,i), skip(widths,i));
+            return new RowHeader(cells, delimiter);
+        }
+
+        [Op]
         public static Outcome header(string src, char delimiter, out RowHeader dst)
         {
             if(text.empty(src))
