@@ -71,8 +71,8 @@ namespace Z0
         public static string format<T>(in StringTable<T> src, uint margin = 0)
             where T : unmanaged
         {
-            var dst = TextTools.buffer();
-            emit(margin,src,dst);
+            var dst = text.buffer();
+            emit(margin, src, dst);
             return dst.Emit();
         }
 

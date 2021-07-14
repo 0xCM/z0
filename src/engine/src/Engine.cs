@@ -88,7 +88,7 @@ namespace Z0.Asm
         {
             var src = FS.path(@"J:\dumps\images\machine.exe.asm");
             const uint Skip = 5;
-            using var reader = AsciLineReader.open(src);
+            using var reader = FS.AsciLineReader(src);
             var counter = 0u;
             var skipping = Skip != 0;
             while(reader.Next(out var line))

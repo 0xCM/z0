@@ -31,10 +31,10 @@ namespace Z0
             Value = value;
         }
 
-        public SettingValue NonGeneric
+        public Setting NonGeneric
         {
             [MethodImpl(Inline)]
-            get => new SettingValue(Name, Value.ToString());
+            get => new Setting(Name, Value.ToString());
         }
 
         public string Format()
@@ -47,7 +47,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator SettingValue(Setting<T> src)
+        public static implicit operator Setting(Setting<T> src)
             => src.NonGeneric;
 
         [MethodImpl(Inline)]

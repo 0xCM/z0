@@ -13,9 +13,14 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential), Record(TableId)]
     public struct ToolConfig : IRecord<ToolConfig>
     {
-        public const string TableId = "tool.configs";
+        public const string TableId = "tool.config";
 
-        public const byte FieldCount = 8;
+        public const byte FieldCount = 12;
+
+        /// <summary>
+        /// The group to which the tool belongs, if any
+        /// </summary>
+        public CharBlock16 ToolGroup;
 
         /// <summary>
         /// The tool identifier
@@ -56,5 +61,20 @@ namespace Z0
         /// The tool script directory with default location {ToolHome}/scripts
         /// </summary>
         public FS.FolderPath ToolScripts;
+
+        /// <summary>
+        /// The path to the tool configuration log, typically {ToolLogs}/config.log
+        /// </summary>
+        public FS.FilePath ToolConfigLog;
+
+        /// <summary>
+        /// The path to the tool command log, typically {ToolLogs}/{ToolId}-cmd.log
+        /// </summary>
+        public FS.FilePath ToolCmdLog;
+
+        /// <summary>
+        /// The path to the tool execution log, typically {ToolLogs}/{ToolId}-run.log
+        /// </summary>
+        public FS.FilePath ToolRunLog;
     }
 }

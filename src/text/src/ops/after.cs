@@ -18,7 +18,6 @@ namespace Z0
             return i != NotFound ? core.slice(src,i + 1) : default;
         }
 
-
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> after(ReadOnlySpan<char> src, ReadOnlySpan<char> match)
         {

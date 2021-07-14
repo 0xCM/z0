@@ -12,6 +12,14 @@ namespace Z0
 
     public sealed partial class ToolBase : Service<ToolBase>
     {
+        const string config = nameof(config);
+
+        const string docs = nameof(docs);
+
+        const string logs = nameof(logs);
+
+        const string scripts = nameof(scripts);
+
         public FS.FolderPath Root {get; private set;}
 
         Index<ToolConfig> _Tools;
@@ -41,13 +49,21 @@ namespace Z0
             => Root + FS.folder(tool.Format());
 
         public FS.FolderPath Docs(ToolId tool)
-            => Home(tool) + FS.folder("docs");
+            => Home(tool) + FS.folder(docs);
+
+        public FS.FolderPath Logs(ToolId tool)
+            => Home(tool) + FS.folder(logs);
 
         public FS.FolderPath Scripts(ToolId tool)
-            => Home(tool) + FS.folder("scripts");
+            => Home(tool) + FS.folder(scripts);
 
         public FS.FilePath Script(ToolId tool, string id)
             => Scripts(tool) + FS.file(id,FS.Cmd);
 
+        public FS.FilePath ConfigScript(ToolId tool)
+            => Home(tool) + FS.file(config, FS.Cmd);
+
+        public FS.FilePath ConfigLog(ToolId tool)
+            => Logs(tool) + FS.file(config, FS.Log);
     }
 }

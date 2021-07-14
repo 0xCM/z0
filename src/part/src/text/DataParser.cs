@@ -304,6 +304,41 @@ namespace Z0
             return true;
         }
 
+        public static Outcome parse(string src, out Setting<string> dst)
+        {
+            if(sys.empty(src))
+            {
+                dst = default;
+                return (false, "!!Empty!!");
+            }
+            else
+            {
+                var i = src.IndexOf(Chars.Colon);
+                if(i == NotFound)
+                {
+                    dst = default;
+                    return (false, "Setting delimiter not found");
+                }
+                else
+                {
+                    if(i == 0)
+                        dst = new Setting<string>(EmptyString, text.slice(src,i+1));
+                    else
+                        dst = new Setting<string>(text.slice(src,0, i), text.slice(src,i+1));
+                    return true;
+                }
+            }
+        }
+
+        [MethodImpl(Inline)]
+        public static Outcome block<T>(string src, out T block)
+            where T : unmanaged, ICharBlock<T>
+        {
+            block = default;
+            CharBlocks.init(src,out block);
+            return true;
+        }
+
         [MethodImpl(Inline)]
         public static Outcome parse<T>(string src, out Setting<T> dst, char delimiter = Chars.Colon)
         {
@@ -320,14 +355,14 @@ namespace Z0
 
                 if(typeof(T) == typeof(string))
                 {
-                    dst = Settings.define(name, generic<T>(input));
+                    dst = (name, generic<T>(input));
                     return true;
                 }
                 else if (typeof(T) == typeof(bool))
                 {
                     if(DataParser.parse(input, out bool value))
                     {
-                        dst = Settings.define(name, generic<T>(value));
+                        dst = (name, generic<T>(value));
                         return true;
                     }
                 }
@@ -335,26 +370,26 @@ namespace Z0
                 {
                     if(DataParser.parse(input, out bit u1))
                     {
-                        dst = Settings.define(name, generic<T>(u1));
+                        dst = (name, generic<T>(u1));
                         return true;
                     }
                 }
                 else if(DataParser.numeric(input, out T g))
                 {
-                    dst = Settings.define(name, g);
+                    dst = (name, g);
                     return true;
                 }
                 else if(typeof(T).IsEnum)
                 {
                     if(Enums.parse(typeof(T), src, out object o))
                     {
-                        dst = Settings.define(name, (T)o);
+                        dst = (name, (T)o);
                         return true;
                     }
                 }
                 else if(src.Length == 1 && typeof(T) == typeof(char))
                 {
-                    dst = Settings.define(name, generic<T>(name[0]));
+                    dst = (name, generic<T>(name[0]));
                     return true;
                 }
             }

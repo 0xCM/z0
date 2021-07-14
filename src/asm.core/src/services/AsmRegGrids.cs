@@ -12,6 +12,8 @@ namespace Z0.Asm
     using static core;
     using static RegClasses;
 
+    using S = Symbols;
+
     [ApiComplete]
     public class AsmRegGrids : Service<AsmRegGrids>
     {
@@ -57,7 +59,7 @@ namespace Z0.Asm
         public static AsciSequence asci<T>(W8 w, in Sym<T> symbol)
             where T : unmanaged
         {
-            var seq = AsciSymbols.seq(w, n5, symbol);
+            var seq = S.seq(w, n5, symbol.Expr, symbol.Kind);
             Require.equal(RowWidth, seq.Length);
             return seq;
         }
@@ -154,7 +156,7 @@ namespace Z0.Asm
             for(var i=0; i<rows; i++)
             {
                 ref readonly var symbol = ref skip(symbols,i);
-                offset += AsciSymbols.encode(w8, n5, symbol, offset, dst);
+                offset += S.asci(w8, n5, symbol.Expr, symbol.Kind, offset, dst);
                 seek(dst, offset++) = (byte)AsciControl.CR;
                 seek(dst, offset++) = (byte)AsciControl.LF;
             }

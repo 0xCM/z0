@@ -24,7 +24,12 @@ namespace Z0
             => string.Format(RP.Setting, src.Name, src.Value);
 
         public static string format(Setting src, bool json)
-            => new SettingValue(src.Name, src.Value).Format(json);
+        {
+            if(json)
+                return string.Concat(src.Name.Enquote(), Chars.Colon, Chars.Space, src.Value.Enquote());
+            else
+                return format(minicore.ifempty(src.Name, "<anonymous>"), src.Value);
+        }
 
         /// <summary>
         /// Renders a k/v pair as a setting
@@ -36,13 +41,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format<K,V>(K key, V value)
             => string.Format(RP.Setting, key, value);
-
-        public static string format(SettingValue src, bool json)
-        {
-            if(json)
-                return string.Concat(src.Name.Enquote(), Chars.Colon, Chars.Space, src.Value.Enquote());
-            else
-                return format(minicore.ifempty(src.Name, "<anonymous>"), src.Value);
-        }
     }
 }

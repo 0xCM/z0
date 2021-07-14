@@ -83,7 +83,7 @@ namespace Z0
         }
 
         public IEnumerable<ISetting> All
-            => from p in Pairs select new SettingValue(p.Key, p.Value) as ISetting;
+            => from p in Pairs select new Setting(p.Key, p.Value) as ISetting;
 
         public string this[string name]
             => Setting(name).ValueOrDefault(string.Empty);
@@ -119,15 +119,15 @@ namespace Z0
         static IEnumerable<string> SettingNames<S>()
             => SettingMembers<S>().Select(m => m.Name);
 
-        static IEnumerable<SettingValue> PropSettings<S>(object src)
+        static IEnumerable<Setting> PropSettings<S>(object src)
             where S : ISettingSource<S>, new()
-                => SettingProperties<S>().Select(p => new SettingValue(p.Name, p.GetValue(src)?.ToString() ?? EmptyString));
+                => SettingProperties<S>().Select(p => new Setting(p.Name, p.GetValue(src)?.ToString() ?? EmptyString));
 
-        static IEnumerable<SettingValue> FieldSettings<S>(object src)
+        static IEnumerable<Setting> FieldSettings<S>(object src)
             where S : ISettingSource<S>, new()
-                => SettingFields<S>().Select(p => new SettingValue(p.Name, p.GetValue(src)?.ToString() ?? EmptyString));
+                => SettingFields<S>().Select(p => new Setting(p.Name, p.GetValue(src)?.ToString() ?? EmptyString));
 
-        public static IEnumerable<SettingValue> SettingValues<S>(object src)
+        public static IEnumerable<Setting> Settings<S>(object src)
             where S : ISettingSource<S>, new()
                 => PropSettings<S>(src).Union(FieldSettings<S>(src));
 

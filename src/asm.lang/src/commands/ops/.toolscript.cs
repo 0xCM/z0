@@ -20,16 +20,7 @@ namespace Z0.Asm
             if(!script.Exists)
                 return (false, FS.missing(script));
 
-            var result = Outcome.Success;
-            void OnError(Exception e)
-            {
-                result = e;
-            }
-
-            var cmd = Cmd.cmdline(script.Format(PathSeparator.BS));
-            var response = ScriptRunner.RunCmd(cmd, OnError);
-
-            return result;
+            return RunScript(script, out var _);
         }
     }
 }

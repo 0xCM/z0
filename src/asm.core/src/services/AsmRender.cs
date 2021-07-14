@@ -74,7 +74,7 @@ namespace Z0.Asm
             var dst = CharBlock32.Null.Data;
             var i=0u;
             var count = render(src, ref i, dst);
-            return TextTools.format(dst, count);
+            return text.format(dst, count);
         }
 
         public static uint render<T>(in RegExpr<T> src, ref uint i, Span<char> dst)

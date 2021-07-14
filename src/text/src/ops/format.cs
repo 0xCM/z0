@@ -10,13 +10,12 @@ namespace Z0
 
     using static Root;
     using static RP;
-    using static core;
 
     partial class text
     {
         [Op]
-        public static string @string(ReadOnlySpan<char> src)
-            => new string(src);
+        public static string format(ReadOnlySpan<char> src, uint length)
+            => new string(core.slice(src,0, length));
 
         /// <summary>
         /// Creates a string from a span, via UTF8 encoding

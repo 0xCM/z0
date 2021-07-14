@@ -46,15 +46,18 @@ namespace Z0.Asm
         ToolId Tool()
             => _Tool;
 
-        ToolId Tool(ToolId id)
+        ToolId SelectTool(ToolId id)
         {
             _Tool = id;
             return _Tool;
         }
 
+        ToolId SelectedTool()
+            => _Tool;
+
         ToolBase ToolBase(string name, FS.FolderPath root)
         {
-           _Toolbase.Configure(name,root);
+           _Toolbase.Configure(name, root);
            return _Toolbase;
         }
 
@@ -87,6 +90,20 @@ namespace Z0.Asm
             if(clear)
                 _NativeBuffer.Clear();
             return _NativeBuffer.Edit;
+        }
+
+        Outcome RunScript(FS.FilePath src, out ReadOnlySpan<TextLine> response)
+        {
+            var result = Outcome.Success;
+
+            void OnError(Exception e)
+            {
+                result = e;
+            }
+
+            var cmd = Cmd.cmdline(src.Format(PathSeparator.BS));
+            response = ScriptRunner.RunCmd(cmd, OnError);
+            return result;
         }
 
         static Outcome argerror(string value)

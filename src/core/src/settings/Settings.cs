@@ -10,38 +10,42 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public readonly partial struct Settings
+    public readonly partial struct Settings : IIndex<Setting>, ILookup<string,Setting>, ISettingsSet<Settings>
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static Outcome parse(string src, out Setting<string> dst)
-        {
-            if(sys.empty(src))
-            {
-                dst = default;
-                return (false, "!!Empty!!");
-            }
-            else
-            {
-                var i = src.IndexOf(Chars.Colon);
-                if(i == NotFound)
-                {
-                    dst = default;
-                    return (false, "Setting delimiter not found");
-                }
-                else
-                {
-                    if(i == 0)
-                        dst = new Setting<string>(EmptyString, TextTools.slice(src,i+1));
-                    else
-                        dst = new Setting<string>(TextTools.slice(src,0, i), TextTools.slice(src,i+1));
-                    return true;
-                }
-            }
-        }
+        readonly Index<Setting> Data;
+
+        [MethodImpl(Inline)]
+        public Settings(Setting[] src)
+            => Data = src;
+
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Setting<T> empty<T>()
             => Setting<T>.Empty;
+
+        public Setting[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
+
+        public bool Lookup(string key, out Setting value)
+            => search(this,key,out value);
+
+        public string Format()
+            => format(Data);
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Settings(Setting[] src)
+            => new Settings(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Setting[](Settings src)
+            => src.Storage;
     }
 }

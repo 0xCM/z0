@@ -21,6 +21,10 @@ namespace Z0
         public static StreamReader Reader(this FS.FilePath src)
             => FS.reader(src, Encoding.UTF8);
 
+        [MethodImpl(Inline), Op]
+        public static LineReader ToLineReader(this StreamReader src)
+            => new LineReader(src);
+
         [Op]
         public static StreamReader Reader(this FS.FilePath src, Encoding encoding)
             => FS.reader(src, encoding);
@@ -38,12 +42,12 @@ namespace Z0
             => src.Reader(encoding).ToLineReader();
 
         [Op]
-        public static LineReader LineReader(this FS.FilePath src, Encoding encoding)
-            => src.Reader(encoding).ToLineReader();
-
-        [Op]
         public static StreamReader AsciReader(this FS.FilePath src)
             => FS.reader(src, Encoding.ASCII);
+
+        [Op]
+        public static StreamReader UnicodeReader(this FS.FilePath src)
+            => FS.reader(src, Encoding.Unicode);
 
         [Op]
         public static LineReader AsciLineReader(this FS.FilePath src)
@@ -60,9 +64,5 @@ namespace Z0
         [Op]
         public static StreamReader Utf16Reader(this FS.FilePath src)
             => FS.reader(src, Encoding.Unicode);
-
-        [MethodImpl(Inline), Op]
-        public static LineReader ToLineReader(this StreamReader src)
-            => new LineReader(src);
     }
 }

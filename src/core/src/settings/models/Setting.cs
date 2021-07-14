@@ -11,7 +11,7 @@ namespace Z0
 
     using api = Settings;
 
-    public readonly struct Setting : ITextual
+    public readonly struct Setting : ISetting
     {
         public string Name {get;}
 
