@@ -9,8 +9,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Part;
-
     partial struct Sources
     {
         [Op, Closures(Closure)]
@@ -29,11 +27,11 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Pairs<T> pairs<T>(ISource src, Span<Pair<T>> dst)
             where T : struct
-                => memory.deposit(pairs<T>(src).Take(dst.Length),dst);
+                => deposit(pairs<T>(src).Take(dst.Length),dst);
 
         [Op, Closures(Closure)]
         public static Pairs<T> pairs<T>(ISource src, Pair<T>[] dst)
             where T : struct
-                => memory.deposit(pairs<T>(src).Take(dst.Length), dst);
+                => deposit(pairs<T>(src).Take(dst.Length), dst);
     }
 }

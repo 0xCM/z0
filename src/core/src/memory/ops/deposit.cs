@@ -6,7 +6,6 @@
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Root;
 
@@ -180,22 +179,6 @@
             ref var cell = ref @as<T,ulong>(src);
             dst = cell;
             return ref cell;
-        }
-
-        /// <summary>
-        /// Fills a caller-supplied span with data produced by a T-enumerable
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="dst">The target</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> deposit<T>(IEnumerable<T> src, Span<T> dst)
-        {
-            var i = 0u;
-            var e = sys.enumerator(src);
-            while(sys.next(e) && i < dst.Length)
-                seek(dst,i) = sys.current(e);
-            return dst;
         }
 
         [Op]

@@ -32,8 +32,14 @@ namespace Z0.Asm
         public RegSeqSpec(uint id, uint count, ByteSize size)
         {
             Id = id;
-            RegSize = size;
             RegCount = count;
+            RegSize = size;
         }
+
+        public string Format()
+            => string.Format("{0}x{1}", RegCount, RegSize.Bits);
+
+        public override string ToString()
+            => Format();
     }
 }

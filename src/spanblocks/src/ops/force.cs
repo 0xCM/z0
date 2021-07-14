@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
 
     partial struct SpanBlocks
     {
@@ -18,7 +17,6 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
         public static SpanBlock256<T> force<S,T>(SpanBlock256<S> src)
             where T : unmanaged
             where S : unmanaged

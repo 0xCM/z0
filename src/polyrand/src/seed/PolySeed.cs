@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Part;
-    using static NumericCast;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a permanent/immutable seed store to support pseudorandom reproducibility
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Configured<T>(T index)
             where T : unmanaged
-                => TakeSingle<T>(force<T,int>(index));
+                => TakeSingle<T>(NumericCast.force<T,int>(index));
 
         public static IEnumerable<ulong> ToU64Stream(this IEnumerable<Guid> guids)
         {
@@ -85,7 +85,7 @@ namespace Z0
             where T : unmanaged
         {
             VerifyIndex<T>(offset* Unsafe.SizeOf<T>() + length* Unsafe.SizeOf<T>());
-            return memory.recover<T>(Bytes, offset, length);
+            return recover<T>(Bytes, offset, length);
         }
 
         /// <summary>

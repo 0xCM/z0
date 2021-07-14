@@ -8,7 +8,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [ApiHost("api")]
+    [ApiHost]
     public readonly partial struct SpanBlocks
     {
         const NumericKind Closure = UnsignedInts;

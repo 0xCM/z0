@@ -71,7 +71,6 @@ namespace Z0
             return BoxedNumber.Empty;
         }
 
-
         /// <summary>
         /// In the box
         /// </summary>

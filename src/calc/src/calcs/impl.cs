@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -20,12 +19,12 @@ namespace Z0
                 => default(Impl<T>);
 
         [MethodImpl(Inline), Factory(Impl), Closures(Closure)]
-        public static VImpl128<T> vimpl<T>(W128 w, T t = default)
+        public static VImpl128<T> vimpl<T>(W128 w)
             where T : unmanaged
                 => default(VImpl128<T>);
 
         [MethodImpl(Inline), Factory(Impl), Closures(Closure)]
-        public static VImpl256<T> vimpl<T>(W256 w, T t = default)
+        public static VImpl256<T> vimpl<T>(W256 w)
             where T : unmanaged
                 => default(VImpl256<T>);
 
@@ -42,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Impl, Closures(Closure)]
         public static Span<T> impl<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
-                => apply(impl<T>(), a, b, dst);
+                => SFx.apply(impl<T>(), a, b, dst);
 
         [MethodImpl(Inline), Impl, Closures(Closure)]
         public static ref readonly SpanBlock128<T> impl<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

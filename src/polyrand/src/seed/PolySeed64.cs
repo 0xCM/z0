@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     [ApiComplete]
     public static class PolySeed64
@@ -17,8 +18,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong lookup(uint i)
         {
-            var index = root.min(i, Count - 1);
-            return memory.cell<ulong>(RawBytes, (int)(index*8));
+            var index = min(i, Count - 1);
+            return cell<ulong>(RawBytes, (int)(index*8));
         }
 
         public static ulong Seed00 => lookup(0);

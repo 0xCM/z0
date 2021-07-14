@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct Calcs
     {
@@ -16,7 +16,7 @@ namespace Z0
         public static Span<T> floor<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
-            var count = math.min(src.Length, dst.Length);
+            var count = core.min(src.Length, dst.Length);
             ref var output = ref first(dst);
             ref readonly var input = ref first(src);
             for(var i =0; i<count; i++)
@@ -39,6 +39,6 @@ namespace Z0
         [MethodImpl(Inline), Floor, Closures(Floats)]
         public static Span<T> floor<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => floor(src, memory.span<T>(src.Length));
+                => floor(src, core.span<T>(src.Length));
     }
 }

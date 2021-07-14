@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
-
     partial struct Sources
     {
         [Op, Closures(Closure)]

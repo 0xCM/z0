@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static SFx;
+    using static Root;
     using static CalcHosts;
     using static ApiClassKind;
 
@@ -42,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Lt, Closures(Closure)]
         public static Span<bit> lt<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
             where T : unmanaged
-                => apply(Calcs.lt<T>(), a, b, dst);
+                => SFx.apply(Calcs.lt<T>(), a, b, dst);
 
         [MethodImpl(Inline), Lt, Closures(Closure)]
         public static ref readonly SpanBlock128<T> lt<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

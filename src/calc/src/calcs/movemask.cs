@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
     using static ApiClassKind;
 
     partial struct Calcs
     {
-
         [MethodImpl(Inline), Op(MoveMask), Closures(Closure)]
         public static VMoveMask128<T> vmovemask<T>(W128 w, T t = default)
             where T : unmanaged
@@ -33,6 +32,5 @@ namespace Z0
         public static VMoveIMask256<T> vmoveimask<T>(W256 w)
             where T : unmanaged
                 => default(VMoveIMask256<T>);
-
     }
 }

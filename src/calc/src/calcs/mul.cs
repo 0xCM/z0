@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static memory;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -23,7 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Factory(Mul), Closures(Closure)]
         public static Span<T> mul<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => apply(Calcs.mul<T>(), l, r, dst);
-
+                => SFx.apply(Calcs.mul<T>(), l, r, dst);
     }
 }

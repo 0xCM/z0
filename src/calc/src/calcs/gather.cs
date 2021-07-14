@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static SFx;
     using static CalcHosts;
     using static ApiClassKind;
 
@@ -17,11 +16,11 @@ namespace Z0
         [MethodImpl(Inline), Factory(EffWidth), Closures(UnsignedInts)]
         public static BvEffWidth<T> bveffwidth<T>()
             where T : unmanaged
-                => sfunc<BvEffWidth<T>>();
+                => SFx.sfunc<BvEffWidth<T>>();
 
         [MethodImpl(Inline), Factory, Closures(UnsignedInts)]
         public static BvGather<T> bvgather<T>()
             where T : unmanaged
-                => sfunc<BvGather<T>>();
+                => SFx.sfunc<BvGather<T>>();
     }
 }

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
     using static core;
 
     public struct CellEmitter<F> : ICellValues<F>, IEmitter<F>

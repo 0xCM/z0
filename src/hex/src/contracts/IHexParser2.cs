@@ -13,7 +13,6 @@ namespace Z0
     public interface IHexParser2<T> : IHexParser2, IDataParser2<T>
         where T : unmanaged
     {
-
         Type ITransformer2.SourceType
             => typeof(string);
 

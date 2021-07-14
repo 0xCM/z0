@@ -34,6 +34,6 @@ namespace Z0
         ref T Project(in S src);
 
         ref T IValueProjector<T>.Project(object src)
-            => ref Project(core.unbox<T>(src));
+            => ref Project((T)src);
     }
 }

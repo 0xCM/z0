@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
     using static HexFormatSpecs;
 
     partial struct Hex
@@ -72,21 +71,6 @@ namespace Z0
             if(spec == HexSpecKind.PostSpec)
                 postspec(ref i, dst);
             return i - i0;
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void render<T>(LowerCased @case, in T src, Span<char> dst)
-            where T : struct
-        {
-            var count = size<T>();
-            ref readonly var bytes = ref @as<T,byte>(src);
-            var j = min(count*2 - 1, dst.Length);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = (char)code(n4, @case, d);
-                seek(dst, j--) = (char)code(n4, @case, Bytes.srl(d, 4));
-            }
         }
 
         [MethodImpl(Inline), Op]

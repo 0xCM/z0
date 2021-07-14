@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -42,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Gt, Closures(Closure)]
         public static Span<bit> gt<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
             where T : unmanaged
-                => apply(gt<T>(), a, b, dst);
+                => SFx.apply(gt<T>(), a, b, dst);
 
         [MethodImpl(Inline), Gt, Closures(Closure)]
         public static ref readonly SpanBlock128<T> gt<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

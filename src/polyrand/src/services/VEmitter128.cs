@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static SFx;
 
     public readonly struct VEmitter128<T> : IEmitter128<T>
         where T : unmanaged

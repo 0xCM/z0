@@ -26,7 +26,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public ref RegAlloc RegAlloc(uint seq)
+        public ref RegAlloc Allocation(uint seq)
             => ref Allocated[seq];
 
         public void Dispose()
@@ -37,7 +37,13 @@ namespace Z0.Asm
         public ref RegAlloc this[uint seq]
         {
             [MethodImpl(Inline)]
-            get => ref RegAlloc(seq);
+            get => ref Allocation(seq);
+        }
+
+        public Span<RegAlloc> Allocations
+        {
+            [MethodImpl(Inline)]
+            get => Allocated.Edit;
         }
     }
 }

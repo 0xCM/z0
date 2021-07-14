@@ -27,7 +27,7 @@ namespace Z0.Asm
         public RegSeqSpec Definition
         {
             [MethodImpl(Inline)]
-            get => new RegSeqSpec(Id,RegSize,RegCount);
+            get => new RegSeqSpec(Id,RegCount, RegSize);
         }
 
         [MethodImpl(Inline)]
@@ -47,7 +47,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public MemoryAddress RegAddress(uint index)
             => BaseAddress + RegSize*index;
-
-
     }
 }

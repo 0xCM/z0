@@ -21,14 +21,47 @@ namespace Z0.Asm
 
     public class Engine : AppCmdService<Engine>
     {
-        EngineSettings Settings;
-
         public static RegMachine machine()
             => new RegMachine(RegBanks.allocate(w64,w512));
 
+        EngineSettings Settings;
+
+        RegBank Registers;
 
         public Engine()
         {
+            Registers = RegBanks.allocate(w64,w512);
+        }
+
+        [CmdOp(".regs")]
+        Outcome Regs(CmdArgs args)
+        {
+            var file = Registers.File;
+            var allocations = Registers.Allocations;
+            var count = allocations.Length;
+            var output = text.buffer();
+            var offset = Address16.Zero;
+            for(var i=0; i<count; i++)
+            {
+                ref var a = ref seek(allocations,i);
+                var def = a.Definition;
+                Write(string.Format("{0}:{1}", a.BaseAddress, def.Format()));
+                for(var j=0u; j<def.RegCount; j++)
+                {
+                    var address = a.RegAddress(j);
+                    var content = cover<byte>(address, def.RegSize);
+                    output.AppendFormat("[reg{0:D2}:{1}:{2}] ", j, offset, address.Format());
+                    for(var k=0; k<def.RegSize; k++)
+                    {
+                        ref var cell = ref seek(content,k);
+                        output.Append(cell.FormatHex(specifier:false));
+                    }
+                    Write(output.Emit());
+                    offset += (Address16)(ulong)def.RegSize;
+                }
+
+            }
+            return true;
         }
 
         [CmdOp(".test-keys")]
@@ -93,14 +126,6 @@ namespace Z0.Asm
             Configure(config);
         }
 
-        [CmdOp(".help")]
-        public Outcome Help(CmdArgs args)
-        {
-            Write("Not yet");
-
-            return true;
-        }
-
         [MethodImpl(Inline), Op]
         public rax Exec(Fx.Imul fx, RegVec<rcx,rdx> args)
         {
@@ -130,7 +155,5 @@ namespace Z0.Asm
             const string FormatPattern = "fx:{0} subfx:{1} => eax:{2} ebx:{3} ecx:{4} edx:{5}";
             return text.format(FormatPattern, src.Fx, src.SubFx, src.Eax, src.Ebx, src.Ecx, src.Edx);
         }
-
-        public static MsgPattern<Count> AllocatingCores => "Allocating {0} cores";
     }
 }

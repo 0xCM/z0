@@ -34,9 +34,7 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(LowerCased @case, char src)
-            => number(src)
-            ? (HexDigit)((XF)src - NumberOffset)
-            : (HexDigit)((XF)src - LetterOffsetLo);
+            => number(src) ? (HexDigit)((XF)src - NumberOffset) : (HexDigit)((XF)src - LetterOffsetLo);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -44,9 +42,7 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(UpperCased @case, char src)
-            => number(src)
-            ? (HexDigit)((XF)src - NumberOffset)
-            : (HexDigit)((XF)src - LetterOffsetUp);
+            => number(src) ? (HexDigit)((XF)src - NumberOffset) : (HexDigit)((XF)src - LetterOffsetUp);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -54,9 +50,7 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymLo src)
-            => number(src)
-            ? (HexDigit)((XF)src - NumberOffset)
-            : (HexDigit)((XF)src - LetterOffsetLo);
+            => number(src) ? (HexDigit)((XF)src - NumberOffset) : (HexDigit)((XF)src - LetterOffsetLo);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by an uppercase hex symbol
@@ -64,8 +58,6 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymUp src)
-            => number(src)
-            ? (HexDigit)((XF)src - NumberOffset)
-            : (HexDigit)((XF)src - LetterOffsetUp);
+            => number(src) ? (HexDigit)((XF)src - NumberOffset) : (HexDigit)((XF)src - LetterOffsetUp);
     }
 }

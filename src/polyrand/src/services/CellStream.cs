@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
+    using static Root;
 
     class CellStream<F,W,T> : ICellStream<F,W,T>
         where F : unmanaged, IDataCell

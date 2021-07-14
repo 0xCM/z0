@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Part;
+    using static Root;
 
     partial struct Sources
     {
@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Triples<T> triples<T>(ISource src, Span<Triple<T>> dst, T t = default)
             where T : struct
-                => memory.deposit(triplestream<T>(src).Take(dst.Length),dst);
+                => deposit(triplestream<T>(src).Take(dst.Length),dst);
     }
 }

@@ -54,7 +54,7 @@ namespace Z0.Asm
         [Op]
         public static RegBank allocate(RegFile file)
         {
-            ref readonly var specs = ref file.Seq(0);
+            ref readonly var specs = ref file.Spec(0);
             var count = file.SeqCount;
             var size = ByteSize.Zero;
             for(var i=0; i<count; i++)
@@ -64,6 +64,7 @@ namespace Z0.Asm
             }
 
             var buffer = Buffers.native(size);
+            buffer.Clear();
             var @base = buffer.Address;
             var address = @base;
             var allocations = alloc<RegAlloc>(count);

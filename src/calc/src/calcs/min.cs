@@ -19,12 +19,12 @@ namespace Z0
                 => default(Min<T>);
 
         [MethodImpl(Inline), Factory(Min), Closures(Closure)]
-        public static VMin128<T> vmin<T>(W128 w, T t = default)
+        public static VMin128<T> vmin<T>(W128 w)
             where T : unmanaged
                 => default;
 
         [MethodImpl(Inline), Factory(Min), Closures(Closure)]
-        public static VMin256<T> vmin<T>(W256 w, T t = default)
+        public static VMin256<T> vmin<T>(W256 w)
             where T : unmanaged
                 => default;
 

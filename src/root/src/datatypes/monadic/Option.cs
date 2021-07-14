@@ -16,6 +16,14 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        /// <summary>
+        /// Implements the canonical join operation that reduces the monadic depth by one level
+        /// </summary>
+        /// <param name="src">The optional option</param>
+        /// <typeparam name="T">The encapsulated value</typeparam>
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static Option<T> reduce<T>(Option<Option<T>> src)
+            => src.ValueOrDefault(Option.none<T>());
 
         /// <summary>
         /// Defines the canonical option functor F:Option[A] -> Option[B] induced by a non-monadic dual f:A->B

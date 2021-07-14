@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
 
-    using static memory;
+    using static core;
 
     partial struct Sources
     {

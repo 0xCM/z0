@@ -34,8 +34,14 @@ namespace Z0.Asm
             Data = specs;
         }
 
+        public Span<RegSeqSpec> Specs
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
         [MethodImpl(Inline)]
-        public ref RegSeqSpec Seq(uint seq)
+        public ref RegSeqSpec Spec(uint seq)
             => ref Data[seq];
     }
 }

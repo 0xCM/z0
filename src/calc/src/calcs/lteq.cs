@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -22,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), LtEq, Closures(Integers)]
         public static Span<bit> lteq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
             where T : unmanaged
-                => apply(Calcs.lteq<T>(), a, b, dst);
+                => SFx.apply(Calcs.lteq<T>(), a, b, dst);
     }
 }

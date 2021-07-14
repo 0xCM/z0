@@ -45,7 +45,7 @@ namespace Z0
         public Option<object> ConvertToTarget(object incoming)
         {
             var kind = (incoming?.GetType() ?? typeof(void)).NumericKind();
-            return kind.IsSome() ? BoxedNumber.define(incoming, kind) : root.none<BoxedNumber>();
+            return kind.IsSome() ? BoxedNumber.define(incoming, kind) : Option.none<BoxedNumber>();
         }
     }
 }

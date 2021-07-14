@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct Sources
     {
@@ -41,7 +41,7 @@ namespace Z0
             {
                 var data = src.Next<ulong>();
                 for(byte i=0; i<64; i++)
-                    yield return Numeric.force<byte,T>((byte)bit.test(data,i));
+                    yield return NumericCast.force<byte,T>((byte)bit.test(data,i));
             }
         }
 

@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static memory;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -44,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Inc, Closures(Closure)]
         public static Span<T> inc<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => apply(Calcs.inc<T>(), src, dst);
+                => SFx.apply(inc<T>(), src, dst);
 
         [MethodImpl(Inline), Inc, Closures(Closure)]
         public static ref readonly SpanBlock128<T> inc<T>(in SpanBlock128<T> a, in SpanBlock128<T> dst)

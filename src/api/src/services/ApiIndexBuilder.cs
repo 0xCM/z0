@@ -26,8 +26,8 @@ namespace Z0
 
         public ApiIndexBuilder()
         {
-            CodeAddress = root.dict<MemoryAddress,ApiCodeBlock>();
-            AddressUri = root.dict<MemoryAddress,OpUri>();
+            CodeAddress = core.dict<MemoryAddress,ApiCodeBlock>();
+            AddressUri = core.dict<MemoryAddress,OpUri>();
             UriCode = new UriCode();
             Product = ApiBlockIndex.Empty;
         }
