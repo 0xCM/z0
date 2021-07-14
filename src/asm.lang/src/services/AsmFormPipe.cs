@@ -162,9 +162,9 @@ namespace Z0.Asm
             }
         }
 
-        protected override Outcome ParseRow(string src, out AsmFormRecord dst)
+        protected override Outcome ParseRow(TextLine src, out AsmFormRecord dst)
         {
-            var parts = Cells(src);
+            var parts = Cells(src.Content);
             var count = parts.Length;
             if(count == FieldCount)
             {

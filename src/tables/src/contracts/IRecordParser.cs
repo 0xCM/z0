@@ -12,8 +12,8 @@ namespace Z0
     public interface IRecordParser<T> : IRecordParser
         where T : struct
     {
-        Outcome ParseHeader(string src, out RowHeader dst);
+        Outcome ParseHeader(TextLine src, out RowHeader dst);
 
-        Outcome ParseRow(string src, out T dst);
+        Outcome ParseRow(TextLine src, out T dst);
     }
 }

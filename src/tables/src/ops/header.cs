@@ -24,9 +24,9 @@ namespace Z0
         }
 
         [Op]
-        public static Outcome header(string src, char delimiter, out RowHeader dst)
+        public static Outcome header(TextLine src, char delimiter, byte fields, out RowHeader dst)
         {
-            if(text.empty(src))
+            if(src.IsEmpty)
             {
                 dst = RowHeader.Empty;
                 return (false,"The source text is empty");
@@ -35,8 +35,11 @@ namespace Z0
             {
                 try
                 {
-                    var parts = text.split(src, delimiter, false);
+                    var parts = src.Split(delimiter, false);
                     var count = parts.Length;
+                    if(count != fields)
+                        return (false, Tables.FieldCountMismatch.Format(fields, dst.Length));
+
                     var cells = alloc<HeaderCell>(count);
                     ref var cell = ref first(cells);
                     for(var i=0u; i<count; i++)

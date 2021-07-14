@@ -21,7 +21,7 @@ namespace Z0
             Fields = Tables.fields<T>();
             FieldCount = Fields.Count;
             Formatter = Tables.formatter<T>();
-            Parser = Tables.parser<T>(ParseRow, FieldDelimiter);
+            Parser = Tables.parser<T>(ParseRow, (byte)FieldCount, FieldDelimiter);
         }
 
         protected char FieldDelimiter {get;}
@@ -42,7 +42,7 @@ namespace Z0
         protected ref readonly string NextCell(ReadOnlySpan<string> src, ref uint i)
             => ref skip(src, i++);
 
-        protected virtual Outcome ParseRow(string src, out T dst)
+        protected virtual Outcome ParseRow(TextLine src, out T dst)
         {
             dst = default;
             return false;

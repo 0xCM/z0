@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Root;
-    using static core;
-
     partial class AsmCmdService
     {
         [CmdOp(".import-xed-forms")]
@@ -15,7 +12,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var svc = Wf.IntelXed();
             var src = Workspace.DataSource(xed) + FS.file("xed-idata", FS.Txt);
-            var dst = Workspace.ImportDir(xed) + FS.file("xed.idata", FS.Csv);
+            var dst = Workspace.ImportTable<XedFormInfo>();
             svc.ImportFormSummaries(src,dst);
             return result;
         }

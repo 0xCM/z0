@@ -222,16 +222,18 @@ namespace Z0.Asm
         public FS.FolderPath Tables()
             => DataRoot() + FS.folder(tables);
 
+        public FS.FolderPath ImportTables()
+            => ImportRoot() + FS.folder("tables");
+
         public FS.FilePath Table(string id, FS.FileExt ext)
             => Tables() + FS.file(id,ext);
 
         public FS.FilePath ImportTable<T>()
             where T : struct, IRecord<T>
-                => ImportRoot() + FS.file(TableId<T>(), FS.Csv);
+                => ImportTables() + FS.file(TableId<T>(), FS.Csv);
 
-        public FS.FilePath ImportTable<T>(string dataset)
-            where T : struct, IRecord<T>
-                => ImportDir(dataset) + FS.file(TableId<T>(), FS.Csv);
+        public FS.FilePath ImportTable(string id)
+            => ImportTables() + FS.file(id, FS.Csv);
 
         public FS.FilePath Script(string id)
             => Scripts() + FS.file(id, FS.Cmd);

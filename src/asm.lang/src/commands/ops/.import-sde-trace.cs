@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using Z0.Tools;
-
     partial class AsmCmdService
     {
         [CmdOp(".import-sde-trace")]

@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-
         [CmdOp(".algs")]
         Outcome Algs(CmdArgs args)
         {

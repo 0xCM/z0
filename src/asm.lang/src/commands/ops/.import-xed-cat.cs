@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".emit-xed-cat")]
+        [CmdOp(".import-xed-cat")]
         Outcome EmitXedCatalog(CmdArgs args)
         {
             Wf.IntelXed().EmitCatalog();

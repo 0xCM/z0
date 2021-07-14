@@ -29,5 +29,20 @@ namespace Z0
 
             return count;
         }
+
+        public static Outcome cells(TextLine src, char delimiter, byte fields, out ReadOnlySpan<string> dst)
+        {
+            var cells = src.Split(Chars.Pipe, true);
+            dst = default;
+            if(cells.Length != fields)
+            {
+                return (false, Tables.FieldCountMismatch.Format(fields, cells.Length));
+            }
+            else
+            {
+                dst = cells;
+                return true;
+            }
+        }
     }
 }

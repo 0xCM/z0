@@ -6,9 +6,6 @@ namespace Z0.Asm
 {
     using Z0.Tools;
 
-    using static Root;
-    using static core;
-
     partial class AsmCmdService
     {
         [CmdOp(".import-xed-tables")]

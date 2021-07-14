@@ -11,6 +11,5 @@ namespace Z0
         [Free]
         public delegate Outcome RowParser<T>(TextLine src, out T dst)
             where T : struct;
-
     }
 }

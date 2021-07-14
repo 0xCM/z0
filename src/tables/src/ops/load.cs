@@ -22,6 +22,25 @@ namespace Z0
             where T : struct
                 => new Table<T>(src);
 
+        public static ReadOnlySpan<T> load<T>(FS.FilePath src, IRecordParser<T> parser)
+            where T : struct
+        {
+            var dst = list<T>();
+            using var reader = src.Utf8LineReader();
+            if(reader.Next(out var header))
+            {
+                while(reader.Next(out var line))
+                {
+                    var result = parser.ParseRow(line, out var row);
+                    if(result)
+                        dst.Add(row);
+                    else
+                        break;
+                }
+            }
+            return dst.ViewDeposited();
+        }
+
         [Op, Closures(Closure)]
         public static void load<T>(in RecordField[] fields, uint index, in T src, ref DynamicRow<T> dst)
             where T : struct

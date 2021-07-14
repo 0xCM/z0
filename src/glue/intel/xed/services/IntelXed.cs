@@ -37,7 +37,6 @@ namespace Z0.Asm
 
         public void EmitCatalog()
         {
-            ImportDir().Clear();
             ImportFormSummaries();
             EmitChipMap();
             EmitFormDetails();
@@ -54,7 +53,6 @@ namespace Z0.Asm
 
         public Outcome LoadChipMap(out ChipMap dst)
             => ChipIsaParser.Parse(ChipSourcePath(), out dst);
-
 
         public Outcome EmitChipMap()
         {
@@ -175,18 +173,17 @@ namespace Z0.Asm
             return distinct.Array().Sort();
        }
 
-        public Index<XedFormDetail> EmitFormDetails()
-            => EmitFormDetails(FormDetailImportPath());
+        public ReadOnlySpan<XedFormDetail> EmitFormDetails()
+            => EmitFormDetails(Workspace.ImportTable<XedFormDetail>());
 
-        public Index<XedFormDetail> EmitFormDetails(FS.FilePath dst)
+        public ReadOnlySpan<XedFormDetail> EmitFormDetails(FS.FilePath dst)
         {
-            var records = LoadFormDetails();
-            var src = records.View;
+            var src = LoadFormDetails();
             var count = src.Length;
             var flow = Wf.EmittingFile(dst);
-            Tables.emit(records.View, dst, XedFormDetail.FieldWidths);
+            Tables.emit(src, dst, XedFormDetail.FieldWidths);
             Wf.EmittedFile(flow, count);
-            return records;
+            return src;
         }
 
         public Index<SymLiteral> SymLiterals()
@@ -195,7 +192,15 @@ namespace Z0.Asm
             return Symbols.literals(src);
         }
 
-        public Index<XedFormDetail> LoadFormDetails()
+        public ReadOnlySpan<XedFormDetail> LoadFormImports()
+        {
+            var src = Workspace.ImportTable<XedFormDetail>();
+
+            //Tables.load<XedFormDetail>()
+            return default;
+        }
+
+        public ReadOnlySpan<XedFormDetail> LoadFormDetails()
         {
             var summaries = LoadFormSummaries().View;
             var count = summaries.Length;
@@ -204,6 +209,17 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 seek(dst,i) = LoadDetail((ushort)i, skip(summaries,i));
             return buffer;
+        }
+
+        XedFormDetail LoadDetail(ushort index, XedFormInfo src)
+        {
+            var id = ParseIForm(src.Form);
+            var iclass = ParseIClass(src.Class);
+            var category = ParseCategory(src.Category);
+            var attributes = ParseAttributes(src.Attributes);
+            var isa = ParseIsaKind(src.IsaSet);
+            var ext = ParseExtension(src.Extension);
+            return new XedFormDetail((ushort)index, id, iclass, category, attributes, isa, ext);
         }
 
         public FS.FilePath EmitSymIndex()
@@ -222,18 +238,11 @@ namespace Z0.Asm
             return src;
         }
 
-        public Symbols<AttributeKind> AttributeKinds()
-            => Symbols.index<AttributeKind>();
-
-        public Symbols<Category> Categories()
-            => Symbols.index<Category>();
-
         public Symbols<IClass> IClasses()
             => Symbols.index<IClass>();
 
         public Symbols<IFormType> IFormTypes()
             => Symbols.index<IFormType>();
-
 
         public void EmitSymCatalog()
         {
@@ -277,7 +286,7 @@ namespace Z0.Asm
         {
             var parser = XedFormSummaryParser.create(Wf.EventSink);
             var parsed = parser.ParseSummaries(SummarySourcePath());
-            var dst = Db.CatalogTable<XedFormInfo>("asm", "xed");
+            var dst = Workspace.ImportTable<XedFormInfo>();
             ImportFormSummaries(parsed,dst);
         }
 
@@ -352,8 +361,7 @@ namespace Z0.Asm
         void EmitSymbols<K>()
             where K : unmanaged, Enum
         {
-            var dst = ImportPath(FS.file(string.Format("{0}.{1}", dataset,  typeof(K).Name.ToLower()), FS.Csv));
-            EmitSymbols(Symbols.index<K>().View, dst);
+            EmitSymbols(Symbols.index<K>().View, Workspace.ImportTable(string.Format("{0}.{1}", dataset,  typeof(K).Name.ToLower())));
         }
 
         void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
@@ -371,7 +379,7 @@ namespace Z0.Asm
             }
         }
 
-        IFormType ParseIForm(string src)
+        static IFormType ParseIForm(string src)
         {
             if(Enum.TryParse<IFormType>(src, out var dst))
                 return dst;
@@ -379,7 +387,7 @@ namespace Z0.Asm
                 return 0;
         }
 
-        IsaKind ParseIsaKind(string src)
+        static IsaKind ParseIsaKind(string src)
         {
             if(Enum.TryParse<IsaKind>(src, out var dst))
                 return dst;
@@ -387,7 +395,7 @@ namespace Z0.Asm
                 return 0;
         }
 
-        IClass ParseIClass(string src)
+        static IClass ParseIClass(string src)
         {
             if(Enum.TryParse<IClass>(src, out var dst))
                 return dst;
@@ -395,7 +403,7 @@ namespace Z0.Asm
                 return 0;
         }
 
-        Category ParseCategory(string src)
+        static Category ParseCategory(string src)
         {
             if(Enum.TryParse<Category>(src, out var dst))
                 return dst;
@@ -403,7 +411,7 @@ namespace Z0.Asm
                 return 0;
         }
 
-        AttributeKind ParseAttribute(string src)
+        static AttributeKind ParseAttribute(string src)
         {
             if(Enum.TryParse<AttributeKind>(src, out var dst))
                 return dst;
@@ -411,7 +419,7 @@ namespace Z0.Asm
                 return 0;
         }
 
-        Extension ParseExtension(string src)
+        static Extension ParseExtension(string src)
         {
             if(Enum.TryParse<Extension>(src, out var dst))
                 return dst;
@@ -419,23 +427,13 @@ namespace Z0.Asm
                 return 0;
         }
 
-        Index<AttributeKind> ParseAttributes(string src)
+        static Index<AttributeKind> ParseAttributes(string src)
         {
             var parts = src.SplitClean(Chars.Colon);
             var count = parts.Length;
             return count != 0 ? parts.Select(ParseAttribute).ToArray() : array<AttributeKind>();
         }
 
-        XedFormDetail LoadDetail(ushort index, XedFormInfo src)
-        {
-            var id = ParseIForm(src.Form);
-            var iclass = ParseIClass(src.Class);
-            var category = ParseCategory(src.Category);
-            var attributes = ParseAttributes(src.Attributes);
-            var isa = ParseIsaKind(src.IsaSet);
-            var ext = ParseExtension(src.Extension);
-            return new XedFormDetail((ushort)index, id, iclass, category, attributes, isa, ext);
-        }
 
         public ReadOnlySpan<FormPartiton> ComputePartitions()
         {
@@ -543,19 +541,13 @@ namespace Z0.Asm
             =>  SourceDir() + FS.file("xed-cdata", FS.Txt);
 
         FS.FilePath ChipMapImportPath()
-            => Workspace.ImportDir(dataset) + FS.file("xed.chip-map", FS.Csv);
-
-        FS.FilePath ImportPath(FS.FileName file)
-             => ImportDir() + file;
-
-        FS.FilePath FormDetailImportPath()
-            => ImportDir() + FS.file("xed.forms.details", FS.Csv);
+            => Workspace.ImportTable("xed.chip-map");
 
         FS.FilePath SymbolImportPath()
-            => ImportDir() + FS.file("xed.symbols", FS.Csv);
+            => Workspace.ImportTable("xed.symbols");
 
         FS.FilePath FormAspectImportPath()
-            => Workspace.ImportTable<XedFormAspect>("xed");
+            => Workspace.ImportTable<XedFormAspect>();
 
         FS.FolderPath TargetDir()
             => Workspace.ImportDir("xed.rules");
