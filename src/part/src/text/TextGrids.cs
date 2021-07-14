@@ -20,7 +20,7 @@ namespace Z0
             if(!src.Exists)
                 return (false, $"No such file {src}");
 
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var attempt =  parse(reader);
             if(attempt)
             {
@@ -75,7 +75,7 @@ namespace Z0
         {
             var dst = bag<TextGrid>();
             iter(src, path => {
-                using var reader = path.Reader();
+                using var reader = path.Utf8Reader();
                 var attempt = parse(reader);
                 if(attempt)
                     dst.Add(attempt.Value);
@@ -237,7 +237,7 @@ namespace Z0
 
         public static ParseResult<string,TextGrid> parse(FS.FilePath src, TextDocFormat? format = null)
         {
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             return parse(reader, format).Select(doc => ParseResult.parsed(src.Name.Format(), doc)).Value;
         }
 

@@ -9,7 +9,7 @@ namespace Z0
         public static TextFileStats stats(FS.FilePath src)
         {
             var dst = new TextFileStats();
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var line = reader.ReadLine();
             while(line != null)
             {

@@ -75,7 +75,7 @@ namespace Z0.Tools
 
             var output = span<CultRecord>(BatchSize);
             var input = span<TextLine>(BatchSize);
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var counter = 0u;
             var current = 0;
             var max = BatchSize - 1;

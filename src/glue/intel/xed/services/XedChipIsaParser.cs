@@ -21,7 +21,7 @@ namespace Z0.Asm
             var flow = Wf.Running(string.Format("Parsing {0}", src.ToUri()));
             var chip = ChipCode.None;
             var chips = dict<ChipCode,ChipIsaKinds>();
-            using var reader = src.AsciLineReader();
+            using var reader = src.LineReader(TextEncodingKind.Asci);
             while(reader.Next(out var line))
             {
                 if(line.StartsWith(Chars.Hash))

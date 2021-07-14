@@ -38,7 +38,7 @@ namespace Z0.Asm
             var cols = Index<TableColumn>.Empty;
             var rows = list<TableRow>();
             var rowidx = z16;
-            using var reader = src.AsciLineReader();
+            using var reader = src.LineReader(TextEncodingKind.Asci);
             while(reader.Next(out var line))
             {
                 if((line.IsEmpty || line.StartsWith(Separator)) && !parsingrows)

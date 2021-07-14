@@ -52,7 +52,7 @@ namespace Z0.Asm
         {
             var dst = list<TextLine>();
             var src = LinedSdmPath();
-            using var reader = src.LineReader();
+            using var reader = src.LineReader(TextEncodingKind.Utf8);
             while(reader.Next(out var line))
                 dst.Add(line);
             return dst.ViewDeposited();

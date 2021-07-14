@@ -38,7 +38,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(input,i);
-                using var reader = path.Reader();
+                using var reader = path.Utf8Reader();
                 while(!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
@@ -66,7 +66,7 @@ namespace Z0
         {
             var flow = Wf.Running(src.ToUri());
             var dst = DataList.create<MsilMetadata>();
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var fields = reader.ReadLine().SplitClean(Chars.Pipe);
             if(fields.Length != MsilMetadata.FieldCount)
             {

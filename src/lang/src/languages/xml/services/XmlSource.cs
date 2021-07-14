@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public XmlSource(FS.FilePath path)
         {
-            Source = path.Reader();
+            Source = path.Utf8Reader();
             var settings = new SysXml.XmlReaderSettings();
             Reader = SysXml.XmlReader.Create(Source, settings);
             TriggerCompletion = false;

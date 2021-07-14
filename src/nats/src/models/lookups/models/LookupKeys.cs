@@ -11,6 +11,9 @@ namespace Z0
 
     using api = LookupTables;
 
+    /// <summary>
+    /// Defines a <see cref='LookupKey'/> sequence over a 2-d grid
+    /// </summary>
     public readonly struct LookupKeys
     {
         public GridDim<ushort> Dim {get;}

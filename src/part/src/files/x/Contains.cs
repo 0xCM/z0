@@ -18,7 +18,7 @@ namespace Z0
         public static bool Contains(this FS.FilePath file, string match, out uint lineNumber)
         {
             lineNumber = 0u;
-            using var reader = file.Reader();
+            using var reader = file.Utf8Reader();
             while(!reader.EndOfStream)
             {
                 var lineText = reader.ReadLine();
@@ -39,7 +39,7 @@ namespace Z0
         public static bool Contains(this FS.FilePath file, Func<string,bool> predicate, out uint lineNumber)
         {
             lineNumber = 0u;
-            using var reader = file.Reader();
+            using var reader = file.Utf8Reader();
             while(!reader.EndOfStream)
             {
                 var lineText = reader.ReadLine();

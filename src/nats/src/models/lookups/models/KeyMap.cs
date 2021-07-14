@@ -11,6 +11,9 @@ namespace Z0
 
     using api = LookupTables;
 
+    /// <summary>
+    /// Associates a <see cref='LoookupKey'/> with a <typeparamref name='T'/> value
+    /// </summary>
     public readonly struct KeyMap<T> : ITextual
     {
         public LookupKey Key {get;}

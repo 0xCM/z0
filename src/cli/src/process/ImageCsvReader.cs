@@ -45,7 +45,7 @@ namespace Z0
             if(!src.Exists)
                 Root.@throw(new FileNotFoundException(src.ToUri().Format()));
 
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var size = src.Size;
             var header = reader.ReadLine();
             var record = default(ImageContentRecord);

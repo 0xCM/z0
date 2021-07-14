@@ -299,7 +299,7 @@ namespace Z0.Asm
         {
             var src = SummarySourcePath();
             var flow = Wf.Running("Loading xed instruction summaries");
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var counter = 0u;
             var header = alloc<string>(XedFormInfo.FieldCount);
             var succeeded = true;

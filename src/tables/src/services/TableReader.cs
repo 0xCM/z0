@@ -24,7 +24,7 @@ namespace Z0
 
         public TableReader(FS.FilePath src, bool header = true)
         {
-            Stream = src.Reader();
+            Stream = src.Utf8Reader();
             if(header)
             HeaderText = header ? Stream.ReadLine() : EmptyString;
             Counter = 1;
@@ -33,7 +33,7 @@ namespace Z0
 
         public TableReader(FS.FilePath src, Tables.RowParser<T> parser, bool header = true)
         {
-            Stream = src.Reader();
+            Stream = src.Utf8Reader();
             if(header)
             HeaderText = header ? Stream.ReadLine() : EmptyString;
             Counter = 1;

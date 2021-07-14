@@ -46,7 +46,7 @@ namespace Z0
             var @base = ImageMemory.@base(src);
             var formatter = HexDataFormatter.create(@base, rowsize);
             var path = FS.path(src.Location);
-            using var stream = path.Reader();
+            using var stream = path.Utf8Reader();
             using var reader = stream.BinaryReader();
             using var writer = dst.Writer();
             writer.WriteLine(string.Concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));

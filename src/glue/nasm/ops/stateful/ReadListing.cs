@@ -16,7 +16,7 @@ namespace Z0.Tools
         {
             var flow = Wf.Running(ReadingNasmListing.Format(src));
             var dst = list<NasmListLine>();
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var i = 1u;
             while(!reader.EndOfStream)
                 dst.Add(new NasmListLine(new TextLine(i++, reader.ReadLine())));

@@ -23,7 +23,7 @@ namespace Z0.Asm
         public ReadOnlySpan<CpuIdRow> LoadCpuIdImports()
         {
             var src = Workspace.ImportTable<CpuIdRow>();
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             return LoadCpuIdImports(reader);
         }
 
@@ -51,7 +51,7 @@ namespace Z0.Asm
                 ref readonly var file = ref skip(srcfiles,i);
                 var chip = file.FolderName.Format();
                 var formatter = Tables.formatter<CpuIdRow>();
-                using var reader = file.AsciLineReader();
+                using var reader = file.LineReader(TextEncodingKind.Asci);
                 while(reader.Next(out var line))
                 {
                     if(line.StartsWith(Chars.Hash))

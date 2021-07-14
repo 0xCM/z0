@@ -183,7 +183,7 @@ namespace Z0
             var size  = ByteSize.Zero;
             var lines = list<MemoryBlock>();
             var counter = z16;
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var data = reader.ReadLine();
             while(result.Ok && text.nonempty(data))
             {

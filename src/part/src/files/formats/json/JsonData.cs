@@ -96,7 +96,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static T materialize<T>(FS.FilePath src)
         {
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var data = reader.ReadToEnd();
             return materialize<T>(data);
         }

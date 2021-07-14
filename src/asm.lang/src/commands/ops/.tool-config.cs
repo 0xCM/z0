@@ -16,7 +16,7 @@ namespace Z0.Asm
             var script = ToolBase().ConfigScript(tool);
             result = RunScript(script, out var _);
             var logpath = ToolBase().ConfigLog(tool);
-            using var reader = FS.AsciLineReader(logpath);
+            using var reader = logpath.AsciLineReader();
             while(reader.Next(out var line))
             {
                 Write(line.Format());

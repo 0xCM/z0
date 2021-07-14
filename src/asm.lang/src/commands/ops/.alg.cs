@@ -18,7 +18,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(paths,i);
-                using var reader = FS.AsciLineReader(path);
+                using var reader = path.AsciLineReader();
                 while(reader.Next(out var line))
                 {
                     Write(line.Format());

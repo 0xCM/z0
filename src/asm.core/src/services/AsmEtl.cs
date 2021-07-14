@@ -16,7 +16,7 @@ namespace Z0.Asm
         public ReadOnlySpan<AsmThumbprint> LoadThumbprints(FS.FilePath src)
         {
             var dst = list<AsmThumbprint>();
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             while(!reader.EndOfStream)
             {
                 var data = reader.ReadLine();
@@ -94,7 +94,7 @@ namespace Z0.Asm
             var dst = list<AsmGlobal>();
             var counter = 1u;
 
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var header = reader.ReadLine();
             var line = reader.ReadLine();
             var result = Outcome.Success;
@@ -113,7 +113,7 @@ namespace Z0.Asm
         public static void traverse(FS.FilePath src, Receiver<AsmGlobal> dst)
         {
             var counter = 1u;
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             var header = reader.ReadLine();
             var line = reader.ReadLine();
             var result = Outcome.Success;

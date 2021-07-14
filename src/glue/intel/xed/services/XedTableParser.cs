@@ -74,7 +74,7 @@ namespace Z0.Tools
 
         public ReadOnlySpan<XedRuleTable> Parse(FS.FilePath src)
         {
-            using var reader = FS.AsciLineReader(src);
+            using var reader = src.AsciLineReader();
             var buffer = alloc<XedRuleTable>(Pow2.T13);
             var dst = span(buffer);
             var outcome = Outcome.Success;

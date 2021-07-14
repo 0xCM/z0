@@ -27,7 +27,7 @@ namespace Z0
 
         bool DefinesFunctions(FS.FilePath file)
         {
-            using var reader = file.Reader();
+            using var reader = file.Utf8Reader();
             while(!reader.EndOfStream)
             {
                 var line = reader.ReadLine();

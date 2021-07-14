@@ -17,7 +17,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var path = Workspace.DataSource(xed) + FS.file("xed-tables", FS.Txt);
             var parser = Wf.XedTableParser();
-            using var reader = FS.AsciLineReader(path);
+            using var reader = path.AsciLineReader();
             while(reader.Next(out var line))
             {
                 result = XedTableParser.parse(line, out var row);

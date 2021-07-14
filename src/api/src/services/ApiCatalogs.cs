@@ -52,7 +52,7 @@ namespace Z0
         public ReadOnlySpan<ApiCatalogEntry> LoadApiCatalog(FS.FilePath src)
         {
             var rows = list<ApiCatalogEntry>();
-            using var reader = src.Reader();
+            using var reader = src.Utf8Reader();
             reader.ReadLine();
             var line = reader.ReadLine();
             while(line != null)

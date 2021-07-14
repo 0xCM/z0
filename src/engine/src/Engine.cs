@@ -76,7 +76,6 @@ namespace Z0.Asm
             {
                 ref readonly var key = ref keys[i,j];
                 Write(string.Format("({0},{1}) -> {2}", i, j, key));
-
             }
 
 
@@ -88,7 +87,7 @@ namespace Z0.Asm
         {
             var src = FS.path(@"J:\dumps\images\machine.exe.asm");
             const uint Skip = 5;
-            using var reader = FS.AsciLineReader(src);
+            using var reader = src.AsciLineReader();
             var counter = 0u;
             var skipping = Skip != 0;
             while(reader.Next(out var line))

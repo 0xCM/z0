@@ -18,7 +18,7 @@ namespace Z0
             var map = CharMaps.create(Root.Unicode, target);
             var flow = Running(string.Format("Searching {0} for unmapped characters", src.ToUri()));
             var unmapped = hashset<char>();
-            using var reader = src.LineReader();
+            using var reader = src.LineReader(TextEncodingKind.Utf8);
             while(reader.Next(out var line))
                 CharMaps.unmapped(map, line.Data, unmapped);
             var pairs = unmapped.Map(x => paired((Hex16)x,x)).OrderBy(x => x.Left).ToReadOnlySpan();

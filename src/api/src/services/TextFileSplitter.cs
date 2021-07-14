@@ -16,7 +16,7 @@ namespace Z0
             try
             {
                 var flow = Wf.Running(Msg.SplittingFile.Format(spec.SourceFile.ToUri(), spec.MaxLineCount));
-                using var reader = spec.SourceFile.Reader();
+                using var reader = spec.SourceFile.Utf8Reader();
                 var paths = root.list<FS.FilePath>();
                 var subcount = 0u;
                 var linecount = 0u;

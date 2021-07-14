@@ -18,28 +18,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The file path</param>
         [Op]
-        public static StreamReader Reader(this FS.FilePath src)
+        public static StreamReader Utf8Reader(this FS.FilePath src)
             => FS.reader(src, Encoding.UTF8);
-
-        [MethodImpl(Inline), Op]
-        public static LineReader ToLineReader(this StreamReader src)
-            => new LineReader(src);
-
-        [Op]
-        public static StreamReader Reader(this FS.FilePath src, Encoding encoding)
-            => FS.reader(src, encoding);
 
         [Op]
         public static StreamReader Reader(this FS.FilePath src, TextEncodingKind encoding)
             => FS.reader(src, encoding);
-
-        [Op]
-        public static LineReader LineReader(this FS.FilePath src)
-            => src.Reader(Encoding.UTF8).ToLineReader();
-
-        [Op]
-        public static LineReader LineReader(this FS.FilePath src, TextEncodingKind encoding)
-            => src.Reader(encoding).ToLineReader();
 
         [Op]
         public static StreamReader AsciReader(this FS.FilePath src)
@@ -50,19 +34,23 @@ namespace Z0
             => FS.reader(src, Encoding.Unicode);
 
         [Op]
-        public static LineReader AsciLineReader(this FS.FilePath src)
-            => src.AsciReader().ToLineReader();
-
-        [Op]
-        public static StreamReader Utf8Reader(this FS.FilePath src)
-            => FS.reader(src, Encoding.UTF8);
+        public static AsciLineReader AsciLineReader(this FS.FilePath src)
+            => new AsciLineReader(src.AsciReader());
 
         [Op]
         public static LineReader Utf8LineReader(this FS.FilePath src)
-            => src.Utf8Reader().ToLineReader();
+            => new LineReader(src.Utf8Reader());
 
         [Op]
-        public static StreamReader Utf16Reader(this FS.FilePath src)
-            => FS.reader(src, Encoding.Unicode);
+        public static UnicodeLineReader UnicodeLineReader(this FS.FilePath src)
+            => new UnicodeLineReader(src.UnicodeReader());
+
+        [MethodImpl(Inline), Op]
+        public static LineReader ToLineReader(this StreamReader src)
+            => new LineReader(src);
+
+        [Op]
+        public static LineReader LineReader(this FS.FilePath src, TextEncodingKind encoding)
+            => src.Reader(encoding).ToLineReader();
     }
 }

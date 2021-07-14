@@ -25,7 +25,6 @@ namespace Z0
                 if(counter != line.LineNumber)
                 {
                     var msg = BadLineNumber.Format(counter, line.LineNumber, line.Content);
-                    //Wf.Error(msg);
                     outcome = (false,msg);
                     break;
                 }
