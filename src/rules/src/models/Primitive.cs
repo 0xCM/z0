@@ -11,8 +11,15 @@ namespace Z0
 
     partial struct Rules
     {
-        [MethodImpl(Inline), Op]
-        public static DataType datatype(string name)
-            => new DataType(name);
+        public readonly struct Primitive
+        {
+            internal readonly uint Index;
+
+            [MethodImpl(Inline)]
+            internal Primitive(uint index)
+            {
+                Index = index;
+            }
+        }
     }
 }

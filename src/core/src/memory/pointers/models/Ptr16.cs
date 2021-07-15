@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Pointers;
 
@@ -22,6 +23,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public Ptr16(ushort* src)
             => P = src;
+
+        public ref ushort this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(P,index);
+        }
+
+        public ref ushort this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(P,index);
+        }
 
         public readonly MemoryAddress Address
         {

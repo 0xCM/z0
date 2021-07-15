@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Pointers;
 
@@ -18,6 +19,18 @@ namespace Z0
     public unsafe struct Ptr64 : IPtr<ulong>
     {
         public ulong* P;
+
+        public ref ulong this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(P,index);
+        }
+
+        public ref ulong this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(P,index);
+        }
 
         [MethodImpl(Inline)]
         public Ptr64(ulong* src)

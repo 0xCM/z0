@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Pointers;
 
@@ -29,6 +30,18 @@ namespace Z0
             get => P;
         }
 
+        public ref T this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(P,index);
+        }
+
+        public ref T this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(P,index);
+        }
+
         public uint Hash
         {
             [MethodImpl(Inline)]
@@ -38,6 +51,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(Ptr<T> src)
             => P == src.P;
+
+        public override bool Equals(object src)
+            => src is Ptr<T> p && Equals(p);
 
         public string Format()
             => Address.Format();
@@ -59,6 +75,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Ptr<T> operator --(Ptr<T> x)
             => api.prior(x);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Ptr<T> a, Ptr<T> b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Ptr<T> a, Ptr<T> b)
+            => !a.Equals(b);
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(Ptr<T> src)

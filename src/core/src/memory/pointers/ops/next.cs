@@ -21,6 +21,35 @@ namespace Z0
             return ref dst;
         }
 
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static bool next<T>(ref IndexPtr<T> ptr)
+            where T : unmanaged
+        {
+            if(ptr.Position < ptr.Count)
+            {
+                ptr.Position++;
+                return true;
+            }
+            else
+                return false;
+        }
+
+        [MethodImpl(Inline)]
+        public static bool next<T>(ref IndexPtr<T> ptr, out T dst)
+            where T : unmanaged
+        {
+            if(next(ref ptr))
+            {
+                dst = ptr.Cell;
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
         /// <summary>
         /// Advances the source by a uint
         /// </summary>

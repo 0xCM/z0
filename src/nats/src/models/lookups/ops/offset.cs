@@ -8,11 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    partial struct Rules
+    partial struct LookupTables
     {
+       [MethodImpl(Inline), Op]
+        public static uint offset(GridDim<ushort> dim, ushort row, ushort col)
+            => CellCalcs.offset(dim,row,col);
+
         [MethodImpl(Inline), Op]
-        public static DataType datatype(string name)
-            => new DataType(name);
+        public static uint offset(GridDim<ushort> dim, LookupKey key)
+            => CellCalcs.offset(dim,key.Row(), key.Col());
     }
 }

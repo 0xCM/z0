@@ -13,21 +13,20 @@ namespace Z0
 
     public readonly struct LookupTable<T>
     {
-        readonly Index<T> Values;
+        readonly Index<T> Cells;
 
         readonly GridDim<ushort> Dim;
 
         [MethodImpl(Inline)]
-        internal LookupTable(GridDim<ushort> dim, T[] values)
+        internal LookupTable(GridDim<ushort> dim, T[] cells)
         {
             Dim = dim;
-            Require.invariant(values.Length == dim.RowCount * dim.ColCount);
-            Values = values;
+            Cells = cells;
         }
 
         [MethodImpl(Inline)]
         public ref T Value(LookupKey key)
-            => ref Values[api.offset(Dim,key)];
+            => ref Cells[api.offset(Dim,key)];
 
         [MethodImpl(Inline)]
         public KeyMap<T> Map(LookupKey key)

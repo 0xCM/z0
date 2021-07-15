@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Pointers;
 
@@ -18,6 +19,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public PChar(char* src)
             => P = src;
+
+        public ref char this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(P,index);
+        }
+
+        public ref char this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(P,index);
+        }
 
         public readonly MemoryAddress Address
         {

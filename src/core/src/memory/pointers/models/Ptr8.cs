@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Pointers;
 
@@ -27,6 +28,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => P;
+        }
+
+        public ref byte this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(P,index);
+        }
+
+        public ref byte this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(P,index);
         }
 
         public uint Hash

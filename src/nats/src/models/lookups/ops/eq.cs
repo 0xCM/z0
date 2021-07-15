@@ -8,11 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    partial struct Rules
+    partial struct LookupTables
     {
         [MethodImpl(Inline), Op]
-        public static DataType datatype(string name)
-            => new DataType(name);
+        public static bool eq(LookupKey a, LookupKey b)
+            => data(a) == data(b);
+
+        [MethodImpl(Inline), Op]
+        public static uint hash(LookupKey src)
+            => data(src);
     }
 }

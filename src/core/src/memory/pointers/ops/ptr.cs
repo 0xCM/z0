@@ -6,13 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static System.Runtime.CompilerServices.Unsafe;
 
+    using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
     using static core;
 
     unsafe partial struct Pointers
     {
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static IndexPtr<T> ptr<T>(Index<T> src, uint pos)
+            where T : unmanaged
+                => new IndexPtr<T>(address(src).Pointer<T>(), src.Count, pos);
+
         /// <summary>
         /// Creates a representation over a specified generic pointer
         /// </summary>

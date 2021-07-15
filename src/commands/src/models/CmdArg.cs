@@ -34,6 +34,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static implicit operator string(CmdArg arg)
+            => arg.Value;
+
+        [MethodImpl(Inline)]
         public static implicit operator CmdArg((int index, string value) src)
             => new CmdArg((ushort)src.index, src.value);
 

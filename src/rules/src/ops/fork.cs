@@ -12,6 +12,10 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Field field(uint index, Identifier name, DataType type)
+            => new Field(index,name,type);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Fork<C> fork<C>(C criterion)
             => new Fork<C>(criterion);
     }

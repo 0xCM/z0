@@ -64,23 +64,6 @@ namespace Z0.Asm
             return true;
         }
 
-        [CmdOp(".test-keys")]
-        Outcome TestKeys(CmdArgs args)
-        {
-            ushort rows = 39;
-            ushort cols = 23;
-
-            var keys = LookupTables.keys(rows,cols);
-            for(var i=z16; i<rows; i++)
-            for(var j=z16; j<cols; j++)
-            {
-                ref readonly var key = ref keys[i,j];
-                Write(string.Format("({0},{1}) -> {2}", i, j, key));
-            }
-
-
-            return true;
-        }
 
         [CmdOp(".test")]
         Outcome Test(CmdArgs args)

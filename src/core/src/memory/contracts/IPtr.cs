@@ -17,6 +17,10 @@ namespace Z0
     {
         new T* Target {get;}
 
+        ref T this[long index]{get;}
+
+        ref T this[ulong index]{get;}
+
         void* IPtr.Target
             => Target;
     }

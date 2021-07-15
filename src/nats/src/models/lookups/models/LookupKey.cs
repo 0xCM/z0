@@ -16,10 +16,6 @@ namespace Z0
     public readonly struct LookupKey : ITextual
     {
         [MethodImpl(Inline)]
-        public static LookupKey define(ushort row, ushort col)
-            => @as<uint,LookupKey>((uint)row | ((uint)col) << 16);
-
-        [MethodImpl(Inline)]
         public ushort Row()
             => (ushort)(data(this));
 
@@ -39,8 +35,14 @@ namespace Z0
             get => data(this) != Unspecified;
         }
 
+        [MethodImpl(Inline)]
+        public bool Equals(LookupKey src)
+            => api.eq(this,src);
+
+        [MethodImpl(Inline)]
         public string Format()
             => api.format(this);
+
 
         public override string ToString()
             => Format();
@@ -52,6 +54,14 @@ namespace Z0
         [MethodImpl(Inline)]
         static LookupKey key(uint src)
             => @as<uint,LookupKey>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator LookupKey((ushort row, ushort col) src)
+            => api.key(src.row, src.col);
+
+        [MethodImpl(Inline)]
+        public static implicit operator LookupKey(Pair<ushort> src)
+            => api.key(src.Left, src.Right);
 
         const uint Unspecified = uint.MaxValue;
 
