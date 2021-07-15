@@ -17,7 +17,7 @@ namespace Z0
 
             public IForm Form;
 
-            public Index<string> Aspects;
+            public DelimitedIndex<string> Aspects;
 
             public IClass Class;
 

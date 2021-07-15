@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
-
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial struct cpu
     {
@@ -30,17 +29,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector512<ushort> vinflate512x16u(Vector256<byte> src)
              => (vlo256x16u(src), vhi256x16u(src));
-
-        /// <summary>
-        /// VPMOVZXBW ymm, m128
-        /// 32x8u -> 32x16u
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="lo">The lo target</param>
-        /// <param name="hi">The hi target</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector512<ushort> vinflate512x16u(in SpanBlock256<byte> src, uint offset)
-            => (v16u(ConvertToVector256Int16(gptr(src[offset]))),
-                v16u(ConvertToVector256Int16(gptr(src[offset],16))));
     }
 }

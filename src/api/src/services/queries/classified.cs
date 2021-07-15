@@ -19,7 +19,7 @@ namespace Z0
             where K : unmanaged
                 => ApiHostMethods.load(src,(from m in ApiHostMethods.load(src).Storage.Tagged(typeof(OpKindAttribute))
                 let a = m.Tag<OpKindAttribute>().Require()
-                where a.ClassId.ToString() == k.ToString()
+                where a.ApiClass.ToString() == k.ToString()
                     select m).Array());
 
         /// <summary>

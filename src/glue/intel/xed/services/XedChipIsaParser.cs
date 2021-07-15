@@ -34,32 +34,23 @@ namespace Z0.Asm
                         Wf.Row(line);
 
                     var name = line.Left(i).Trim();
-                    if(text.blank(name))
+                    if(blank(name))
                         continue;
 
                     if(Enums.parse<ChipCode>(name, out chip))
                     {
                         if(!chips.TryAdd(chip, new ChipIsaKinds(chip)))
-                            return (false,string.Format("Duplicate chip code {0}", chip));
-
-                        if(Verbose)
-                            Wf.Babble(string.Format("Including {0}", chip));
+                            return (false, DuplicateChipCode.Format(chip));
                     }
                     else
-                    {
-                        return (false,string.Format("Code for chip {0} not found", name));
-                    }
+                        return (false, ChipCodeNotFound.Format(name));
                 }
                 else
                 {
                     var kinds = line.Content.SplitClean(Chars.Tab).Trim().Select(x => Enums.parse<IsaKind>(x,IsaKind.None)).Where(x => x != 0);
                     chips[chip].Add(kinds);
                     if(chips.TryGetValue(chip, out var entry))
-                    {
                         entry.Add(kinds);
-                        if(Verbose)
-                            Wf.Row(string.Format("{0}: {1}", chip, kinds.Delimit(Chars.Comma)));
-                    }
                 }
             }
 
@@ -82,5 +73,10 @@ namespace Z0.Asm
 
         ReadOnlySpan<ChipCode> ChipCodes()
             => Symbols.index<ChipCode>().Kinds;
+
+        static MsgPattern<ChipCode> DuplicateChipCode => "Duplicate chip code {0}";
+
+
+        static MsgPattern<string> ChipCodeNotFound => "Code for chip {0} not found";
     }
 }

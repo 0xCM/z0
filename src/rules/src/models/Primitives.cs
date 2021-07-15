@@ -35,14 +35,13 @@ namespace Z0
                 Names = core.alloc<CharBlock16>(Capacity);
             }
 
-            internal static Primitive define(uint key, string name)
-            {
-                Keys[Pos] = key;
-                Names[Pos] = name;
-                inc(ref Pos);
-                return new Primitive(key);
-            }
+            // internal static Primitive define(uint key, string name)
+            // {
+            //     Keys[Pos] = key;
+            //     Names[Pos] = name;
+            //     inc(ref Pos);
+            //     return new Primitive(key);
+            // }
         }
-
     }
 }

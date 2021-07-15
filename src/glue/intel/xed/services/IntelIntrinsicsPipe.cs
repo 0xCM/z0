@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Xml;
     using System.IO;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -136,27 +137,63 @@ namespace Z0.Asm
             }
         }
 
-        void EmitTable(ReadOnlySpan<Intrinsic> src)
+
+        ReadOnlySpan<IntelIntrinsic> Summarize(ReadOnlySpan<Intrinsic> src, List<Intrinsic> unmatched)
         {
-            var dst = Workspace.ImportDir(dataset) + FS.file("intrinsics", FS.Csv);
-            const string Pattern = "{0,-54} | {1,-54} | {2}";
-            var flow = Wf.EmittingFile(dst);
             var count = src.Length;
-            var log = Workspace.ImportDir(dataset) + FS.file("unmatched", FS.Log);
-            using var unmatched = log.Writer();
-            using var writer = dst.Writer();
-            writer.WriteLine(string.Format(Pattern, "Intruction", "XedIForm", "Signature"));
+            var dst = list<IntelIntrinsic>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var intrinsic = ref skip(src,i);
                 if(instruction(intrinsic, out var ix))
-                    writer.WriteLine(string.Format(Pattern, string.Format("{0} {1}", ix.name, ix.form), ix.xed, sig(intrinsic)));
+                {
+                    var record = new IntelIntrinsic();
+                    record.Instruction = string.Format("{0} {1}", ix.name, ix.form);
+                    record.IForm = ix.xed;
+                    record.Signature = sig(intrinsic);
+                    dst.Add(record);
+                }
                 else
-                    unmatched.WriteLine(sig(intrinsic));
+                    unmatched.Add(intrinsic);
+                    //writer.WriteLine(string.Format(Pattern, string.Format("{0} {1}", ix.name, ix.form), ix.xed, sig(intrinsic)));
             }
-
-            Wf.EmittedFile(flow, count);
+            return dst.ViewDeposited();
         }
+
+        void EmitTable(ReadOnlySpan<Intrinsic> src)
+        {
+            var dst = Workspace.ImportTable<IntelIntrinsic>();
+            var flow = Wf.EmittingFile(dst);
+            var log = Workspace.ImportDir(dataset) + FS.file("unmatched", FS.Log);
+            using var unmatched = log.Writer();
+            var _unmatched = list<Intrinsic>();
+            var rows = Summarize(src, _unmatched);
+            iter(_unmatched, u=> unmatched.WriteLine(sig(u)));
+            Tables.emit(rows,IntelIntrinsic.RenderWidths,dst);
+            Wf.EmittedFile(flow, rows.Length);
+        }
+
+        // void EmitTable(ReadOnlySpan<Intrinsic> src)
+        // {
+        //     var dst = Workspace.ImportDir(dataset) + FS.file("intrinsics", FS.Csv);
+        //     const string Pattern = "{0,-54} | {1,-54} | {2}";
+        //     var flow = Wf.EmittingFile(dst);
+        //     var count = src.Length;
+        //     var log = Workspace.ImportDir(dataset) + FS.file("unmatched", FS.Log);
+        //     using var unmatched = log.Writer();
+        //     using var writer = dst.Writer();
+        //     writer.WriteLine(string.Format(Pattern, "Intruction", "XedIForm", "Signature"));
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var intrinsic = ref skip(src,i);
+        //         if(instruction(intrinsic, out var ix))
+        //             writer.WriteLine(string.Format(Pattern, string.Format("{0} {1}", ix.name, ix.form), ix.xed, sig(intrinsic)));
+        //         else
+        //             unmatched.WriteLine(sig(intrinsic));
+        //     }
+
+        //     Wf.EmittedFile(flow, count);
+        // }
 
 
         ReadOnlySpan<Intrinsic> Parse(XmlDoc src)

@@ -15,6 +15,6 @@ namespace Z0
         /// <param name="src">The method to study</param>
         [Op]
         public static ApiClass apiclass(MethodInfo src)
-            =>  src.Tagged<OpKindAttribute>() ? src.Tag<OpKindAttribute>().Require().ClassId : ApiClassKind.None;
+            =>  src.Tagged<OpKindAttribute>() ? src.Tag<OpKindAttribute>().Require().ApiClass : ApiClassKind.None;
     }
 }

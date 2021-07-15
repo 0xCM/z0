@@ -43,9 +43,7 @@ namespace Z0.Asm
 
             var hashes = entries.Map(x => x.HashCode).ToArray().ToHashSet();
             if(hashes.Count != count)
-            {
                 Warn(string.Format("There should be {0} distinct hash codes and yet there are {1}", count, hashes.Count));
-            }
 
             for(var i=0; i<count; i++)
             {

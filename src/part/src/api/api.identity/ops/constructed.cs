@@ -22,7 +22,7 @@ namespace Z0
                 Throw.e(AppErrors.NonGenericMethod(src));
 
             var id = EmptyString;
-            id += name(src);
+            id += src.Name;
             id += IDI.PartSep;
             id += IDI.Generic;
             id += TypeArgIdentity(src);

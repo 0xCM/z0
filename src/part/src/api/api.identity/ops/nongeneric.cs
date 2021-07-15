@@ -21,7 +21,7 @@ namespace Z0
                 Throw.e(AppErrors.GenericMethod(src));
 
             var id = EmptyString;
-            id += name(src);
+            id += src.Name;
             id += IDI.PartSep;
             id += sequential(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, ValueParamIdentities(src));
             return ApiUri.opid(id);

@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static Typed;
 
     public class Tests : AppService<Tests>
     {
@@ -636,7 +635,7 @@ namespace Z0.Asm
         void ShowXedInstructions()
         {
             var pipe = Wf.IntelXed();
-            var records = pipe.LoadFormSummaries().View;
+            var records = pipe.LoadFormSources().View;
             var count = records.Length;
             if(count !=0 )
             {

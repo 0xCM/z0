@@ -37,15 +37,16 @@ namespace Z0.Asm
 
         public void EmitCatalog()
         {
-            ImportFormSummaries();
+            //ImportFormSummaries();
             EmitChipMap();
-            EmitFormDetails();
+            ImportForms();
             EmitSymCatalog();
-            Partition(EmitFormAspects());
-            var patterns = EmitInstructionPatterns();
-            var summaries = EmitSummaries(patterns);
-            EmitMnemonics(summaries);
-            EmitRules();
+            var aspects = EmitFormAspects();
+            var partition = Partition(aspects);
+            // var patterns = EmitInstructionPatterns();
+            // var summaries = EmitSummaries(patterns);
+            // EmitMnemonics(summaries);
+            // EmitRules();
         }
 
         public ReadOnlySpan<string> MnemonicNames()
@@ -173,15 +174,15 @@ namespace Z0.Asm
             return distinct.Array().Sort();
        }
 
-        public ReadOnlySpan<XedFormDetail> EmitFormDetails()
-            => EmitFormDetails(Workspace.ImportTable<XedFormDetail>());
+        public ReadOnlySpan<XedFormImport> EmitFormDetails()
+            => EmitFormDetails(Workspace.ImportTable<XedFormImport>());
 
-        public ReadOnlySpan<XedFormDetail> EmitFormDetails(FS.FilePath dst)
+        public ReadOnlySpan<XedFormImport> EmitFormDetails(FS.FilePath dst)
         {
-            var src = LoadFormDetails();
+            var src = LoadImportedForms();
             var count = src.Length;
             var flow = Wf.EmittingFile(dst);
-            Tables.emit(src, dst, XedFormDetail.FieldWidths);
+            Tables.emit(src, dst, XedFormImport.RenderWidths);
             Wf.EmittedFile(flow, count);
             return src;
         }
@@ -190,36 +191,6 @@ namespace Z0.Asm
         {
             var src = typeof(XedModels).GetNestedTypes().Enums();
             return Symbols.literals(src);
-        }
-
-        public ReadOnlySpan<XedFormDetail> LoadFormImports()
-        {
-            var src = Workspace.ImportTable<XedFormDetail>();
-
-            //Tables.load<XedFormDetail>()
-            return default;
-        }
-
-        public ReadOnlySpan<XedFormDetail> LoadFormDetails()
-        {
-            var summaries = LoadFormSummaries().View;
-            var count = summaries.Length;
-            var buffer = alloc<XedFormDetail>(count);
-            var dst = span(buffer);
-            for(var i=0; i<count; i++)
-                seek(dst,i) = LoadDetail((ushort)i, skip(summaries,i));
-            return buffer;
-        }
-
-        XedFormDetail LoadDetail(ushort index, XedFormInfo src)
-        {
-            var id = ParseIForm(src.Form);
-            var iclass = ParseIClass(src.Class);
-            var category = ParseCategory(src.Category);
-            var attributes = ParseAttributes(src.Attributes);
-            var isa = ParseIsaKind(src.IsaSet);
-            var ext = ParseExtension(src.Extension);
-            return new XedFormDetail((ushort)index, id, iclass, category, attributes, isa, ext);
         }
 
         public FS.FilePath EmitSymIndex()
@@ -279,40 +250,84 @@ namespace Z0.Asm
             EmitSymbols<SizeIndicator>();
         }
 
-        FS.FilePath SummarySourcePath()
-            => SourceDir() + FS.file("xed-idata", FS.Txt);
-
-        public void ImportFormSummaries()
+        public ReadOnlySpan<XedFormImport> ImportForms()
         {
-            var parser = XedFormSummaryParser.create(Wf.EventSink);
-            var parsed = parser.ParseSummaries(SummarySourcePath());
-            var dst = Workspace.ImportTable<XedFormInfo>();
-            ImportFormSummaries(parsed,dst);
+            var src = LoadFormSources().View;
+            var dst = Workspace.ImportTable<XedFormImport>();
+            var flow = Wf.EmittingTable<XedFormImport>(dst);
+            var parser = XedFormImportParser.create();
+            var formatter = Tables.formatter<XedFormImport>(XedFormImport.RenderWidths);
+            var count = src.Length;
+            var result = Outcome.Success;
+            var rows = list<XedFormImport>();
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=z16; i<count; i++)
+            {
+                result = parser.Parse(skip(src,i), i, out var import);
+                if(result)
+                {
+                    import.Index = i;
+                    writer.WriteLine(formatter.Format(import));
+                    rows.Add(import);
+                }
+                else
+                {
+                    Error(result.Message);
+                    break;
+                }
+            }
+
+            return result ? rows.ViewDeposited() : default;
         }
 
-        public void ImportFormSummaries(FS.FilePath src, FS.FilePath dst)
+        public ReadOnlySpan<XedFormImport> LoadImportedForms()
         {
-            var parser = XedFormSummaryParser.create(Wf.EventSink);
-            var parsed = parser.ParseSummaries(src);
-            ImportFormSummaries(parsed,dst);
+            var parser = XedFormImportParser.create();
+            var src = Workspace.ImportTable<XedFormImport>();
+            var counter = 0u;
+            var outcome = Outcome.Success;
+            var dst = list<XedFormImport>();
+            using var reader = src.Utf8Reader();
+            reader.ReadLine();
+            while(!reader.EndOfStream)
+            {
+                var line = reader.ReadLine(counter);
+
+                if(line.StartsWith(CommentMarker))
+                    continue;
+
+                if(line.IsEmpty)
+                    continue;
+
+                outcome = parser.ParseRow(line, out var row);
+                if(outcome)
+                {
+                    dst.Add(row);
+                }
+                else
+                {
+                    Wf.Error(outcome.Message);
+                    break;
+                }
+
+                counter++;
+            }
+            if(outcome)
+                return dst.ViewDeposited();
+            else
+                return default;
         }
 
-        public void ImportFormSummaries(ReadOnlySpan<XedFormInfo> src, FS.FilePath dst)
+        public Index<XedFormSource> LoadFormSources()
         {
-            var flow = Wf.EmittingTable<XedFormInfo>(dst);
-            var count = Tables.emit(src,dst,XedFormInfo.RenderWidths);
-            Wf.EmittedTable(flow,count);
-        }
-
-        public Index<XedFormInfo> LoadFormSummaries()
-        {
-            var src = SummarySourcePath();
+            var src = FormSourcePath();
             var flow = Wf.Running("Loading xed instruction summaries");
             using var reader = src.Utf8Reader();
             var counter = 0u;
-            var header = alloc<string>(XedFormInfo.FieldCount);
+            var header = alloc<string>(XedFormSource.FieldCount);
             var succeeded = true;
-            var records = list<XedFormInfo>();
+            var records = list<XedFormSource>();
             while(!reader.EndOfStream)
             {
                 var line = reader.ReadLine(counter);
@@ -335,7 +350,7 @@ namespace Z0.Asm
                 }
                 else
                 {
-                   var dst = new XedFormInfo();
+                   var dst = new XedFormSource();
                    var outcome = ParseSummary(line, out dst);
                    if(outcome)
                    {
@@ -378,62 +393,6 @@ namespace Z0.Asm
                 Wf.EmittedFile(flow, count);
             }
         }
-
-        static IFormType ParseIForm(string src)
-        {
-            if(Enum.TryParse<IFormType>(src, out var dst))
-                return dst;
-            else
-                return 0;
-        }
-
-        static IsaKind ParseIsaKind(string src)
-        {
-            if(Enum.TryParse<IsaKind>(src, out var dst))
-                return dst;
-            else
-                return 0;
-        }
-
-        static IClass ParseIClass(string src)
-        {
-            if(Enum.TryParse<IClass>(src, out var dst))
-                return dst;
-            else
-                return 0;
-        }
-
-        static Category ParseCategory(string src)
-        {
-            if(Enum.TryParse<Category>(src, out var dst))
-                return dst;
-            else
-                return 0;
-        }
-
-        static AttributeKind ParseAttribute(string src)
-        {
-            if(Enum.TryParse<AttributeKind>(src, out var dst))
-                return dst;
-            else
-                return 0;
-        }
-
-        static Extension ParseExtension(string src)
-        {
-            if(Enum.TryParse<Extension>(src, out var dst))
-                return dst;
-            else
-                return 0;
-        }
-
-        static Index<AttributeKind> ParseAttributes(string src)
-        {
-            var parts = src.SplitClean(Chars.Colon);
-            var count = parts.Length;
-            return count != 0 ? parts.Select(ParseAttribute).ToArray() : array<AttributeKind>();
-        }
-
 
         public ReadOnlySpan<FormPartiton> ComputePartitions()
         {
@@ -528,45 +487,6 @@ namespace Z0.Asm
             }
         }
 
-        FS.FolderPath ImportDir()
-           => Workspace.ImportDir(dataset);
-
-        FS.FolderPath SourceDir()
-           => Workspace.DataSource(dataset);
-
-        FS.FilePath XedTableSourcePath()
-            => SourceDir() + FS.file("xed-tables", FS.Txt);
-
-        FS.FilePath ChipSourcePath()
-            =>  SourceDir() + FS.file("xed-cdata", FS.Txt);
-
-        FS.FilePath ChipMapImportPath()
-            => Workspace.ImportTable("xed.chip-map");
-
-        FS.FilePath SymbolImportPath()
-            => Workspace.ImportTable("xed.symbols");
-
-        FS.FilePath FormAspectImportPath()
-            => Workspace.ImportTable<XedFormAspect>();
-
-        FS.FolderPath TargetDir()
-            => Workspace.ImportDir("xed.rules");
-
-        FS.FilePath InstructionTarget(FS.FileName file)
-            => TargetDir()  + FS.folder("instructions") + file;
-
-        FS.FilePath MnemonicTarget()
-            => TargetDir() + FS.file("mnemonics", FS.Csv);
-
-        FS.FolderPath RuleTarget()
-            => TargetDir() + FS.folder("rules");
-
-        FS.FilePath FunctionTarget()
-            => TargetDir() + FS.file("functions", FS.Txt);
-
-        FS.FilePath SummaryTarget()
-            => TargetDir() + FS.file("summary", FS.Csv);
-
         const char CommentMarker = Chars.Hash;
 
         const char FieldDelimiter = Chars.Space;
@@ -614,13 +534,13 @@ namespace Z0.Asm
             return dst;
         }
 
-        static Outcome ParseSummary(TextLine src, out XedFormInfo dst)
+        static Outcome ParseSummary(TextLine src, out XedFormSource dst)
         {
             dst = default;
             var parts = src.Split(FieldDelimiter);
             var count = parts.Length;
-            if(count != XedFormInfo.FieldCount)
-                return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
+            if(count != XedFormSource.FieldCount)
+                return(false, $"Line splits into {count} parts, not {XedFormSource.FieldCount} as required");
             var i = 0;
             dst.Class = skip(parts,i++);
             dst.Extension = skip(parts,i++);
@@ -635,8 +555,8 @@ namespace Z0.Asm
         {
             var parts = src.Split(FieldDelimiter);
             var count = parts.Length;
-            if(count != XedFormInfo.FieldCount)
-                return(false, $"Line splits into {count} parts, not {XedFormInfo.FieldCount} as required");
+            if(count != XedFormSource.FieldCount)
+                return(false, $"Line splits into {count} parts, not {XedFormSource.FieldCount} as required");
 
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(parts,i);
@@ -818,5 +738,44 @@ namespace Z0.Asm
             var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
             MnemonicTarget().Overwrite(upper);
         }
+
+        FS.FilePath FormSourcePath()
+            => SourceDir() + FS.file("xed-idata", FS.Txt);
+
+        FS.FolderPath SourceDir()
+           => Workspace.DataSource(dataset);
+
+        FS.FilePath XedTableSourcePath()
+            => SourceDir() + FS.file("xed-tables", FS.Txt);
+
+        FS.FilePath ChipSourcePath()
+            =>  SourceDir() + FS.file("xed-cdata", FS.Txt);
+
+        FS.FilePath ChipMapImportPath()
+            => Workspace.ImportTable("xed.chip-map");
+
+        FS.FilePath SymbolImportPath()
+            => Workspace.ImportTable("xed.symbols");
+
+        FS.FilePath FormAspectImportPath()
+            => Workspace.ImportTable<XedFormAspect>();
+
+        FS.FolderPath TargetDir()
+            => Workspace.ImportDir("xed.rules");
+
+        FS.FilePath InstructionTarget(FS.FileName file)
+            => TargetDir()  + FS.folder("instructions") + file;
+
+        FS.FilePath MnemonicTarget()
+            => TargetDir() + FS.file("mnemonics", FS.Csv);
+
+        FS.FolderPath RuleTarget()
+            => TargetDir() + FS.folder("rules");
+
+        FS.FilePath FunctionTarget()
+            => TargetDir() + FS.file("functions", FS.Txt);
+
+        FS.FilePath SummaryTarget()
+            => TargetDir() + FS.file("summary", FS.Csv);
     }
 }

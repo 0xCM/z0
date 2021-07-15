@@ -59,6 +59,36 @@ namespace Z0
             get => Data;
         }
 
+        public ReadOnlySpan<T> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
+        }
+
+        public ref T First
+        {
+            [MethodImpl(Inline)]
+            get => ref Data.First;
+        }
+
+        public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
+        public ref T this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => Render(Data, Delimiter, CellPad);

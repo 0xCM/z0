@@ -15,10 +15,13 @@ namespace Z0
         {
             None,
 
+            [Symbol("GPR8_R()")]
             GPR8_R,
 
+            [Symbol("GPR8_B()")]
             GPR8_B,
 
+            [Symbol("GPR8_SB()")]
             GPR8_SB,
 
             SEGe,
@@ -132,20 +135,28 @@ namespace Z0
             [Symbol("GPRz_R()")]
             GPRz_R,
 
+            [Symbol("GPRv_B()")]
             GPRv_B,
 
+            [Symbol("GPRz_B()")]
             GPRz_B,
 
+            [Symbol("GPRy_B()")]
             GPRy_B,
 
+            [Symbol("GPRy_R()")]
             GPRy_R,
 
+            [Symbol("GPR64_R()")]
             GPR64_R,
 
+            [Symbol("GPR64_B()")]
             GPR64_B,
 
+            [Symbol("GPR64_SB()")]
             GPR64_SB,
 
+            [Symbol("GPR64_X()")]
             GPR64_X,
 
             GPR32_R,
@@ -352,6 +363,7 @@ namespace Z0
 
             ZMM_N3_32,
 
+            [Symbol("ZMM_N3_64()")]
             ZMM_N3_64,
 
             TMM_R,

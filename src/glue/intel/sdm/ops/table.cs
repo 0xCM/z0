@@ -13,7 +13,7 @@ namespace Z0.Asm
     partial struct IntelSdm
     {
         [MethodImpl(Inline), Op]
-        public static TableNumber table(ReadOnlySpan<char> src)
-            => new TableNumber(src);
+        public static Table table(TableHeader header, TableRow[] rows)
+            => new Table(header,rows);
     }
 }

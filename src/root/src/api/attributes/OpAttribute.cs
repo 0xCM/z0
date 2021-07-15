@@ -9,35 +9,22 @@ using Z0;
 /// </summary>
 public class OpAttribute : ApiPartAttribute
 {
-    public string GroupName {get;}
+    public string ApiGroup {get;}
 
-    public ApiClassKind ClassId {get;}
-
-    public ulong ClassData {get;}
+    public ApiClassKind ApiClass {get;}
 
     public OpAttribute()
     {
-        GroupName = "";
+        ApiGroup = "";
     }
 
-    public OpAttribute(ApiClassKind id, ulong data)
+    public OpAttribute(ApiClassKind @class)
     {
-        ClassId = id;
-        ClassData = data;
-    }
-
-    public OpAttribute(ApiClassKind id)
-        : base((ulong)id)
-    {
-        ClassId = id;
-
+        ApiClass = @class;
     }
 
     public OpAttribute(string group)
     {
-        GroupName = group;
+        ApiGroup = group;
     }
-
-    public override string ToString()
-        => GroupName;
 }

@@ -28,6 +28,14 @@ namespace Z0
             return count;
         }
 
+        [MethodImpl(Inline), Op]
+        public static int encode(N16 n, ReadOnlySpan<char> src, Span<byte> dst)
+        {
+            var v256x16u = vcore.vload(w256, recover<ushort>(src));
+
+            return 16;
+        }
+
         /// <summary>
         /// Encodes a single character
         /// </summary>

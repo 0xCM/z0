@@ -38,6 +38,8 @@ namespace Z0.Asm
             var cols = Index<TableColumn>.Empty;
             var rows = list<TableRow>();
             var rowidx = z16;
+            var table = TableBuilder.create();
+            var tables = list<Table>();
             using var reader = src.LineReader(TextEncodingKind.Asci);
             while(reader.Next(out var line))
             {
@@ -46,6 +48,7 @@ namespace Z0.Asm
 
                 if(parsingrows && line.IsEmpty)
                 {
+                    table.IfNonEmpty(() => tables.Add(Pipe(table.Emit())));
                     foundtable = false;
                     parsingrows = false;
                     rowcount = 0;
@@ -63,7 +66,7 @@ namespace Z0.Asm
 
                     if(valcount != 0)
                     {
-
+                        table.WithRow(values);
                         Write(values.Join(Rejoin));
                         rowcount++;
                     }
@@ -81,6 +84,7 @@ namespace Z0.Asm
                     {
                         var header = IntelSdm.header(tablekind, labels);
                         cols = IntelSdm.columns(header.Labels);
+                        table.WithHeader(header);
                         Write(header.Format());
                         parsingrows = true;
                     }
@@ -100,6 +104,8 @@ namespace Z0.Asm
                     foundtable = true;
                 }
             }
+
+            table.IfNonEmpty(() => tables.Add(Pipe(table.Emit())));
 
             return result;
         }

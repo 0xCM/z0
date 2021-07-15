@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct IntelSdm
     {
         [MethodImpl(Inline), Op]
-        public static TableCell cell(TableKind table, ColumnKind colkind, ushort rowidx, ushort colidx, string content)
-            => new TableCell(table, colkind, rowidx, colidx, content);
+        public static TableCell cell(string content)
+            => new TableCell(content);
     }
 }

@@ -79,7 +79,7 @@ namespace Z0
             var src = this;
             var msil = ClrDynamic.msil(src.EntryPoint, src.Uri, src.Method);
             dst.EntryPoint = src.EntryPoint;
-            dst.ApiKind = src.Method.KindId();
+            dst.ApiKind = src.Method.ApiClass();
             dst.CliSig = msil.CliSig;
             dst.DisplaySig = src.Method.DisplaySig().Format();
             dst.Token = msil.Token;

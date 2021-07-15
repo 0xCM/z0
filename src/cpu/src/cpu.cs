@@ -11,19 +11,22 @@ namespace Z0
     [ApiHost]
     public readonly partial struct cpu
     {
+        const string inflate = ApiGroupNames.inflate;
+
         const NumericKind Closure = UnsignedInts;
     }
 
     [ApiHost]
     public readonly partial struct gcpu
     {
+        const string inflate = ApiGroupNames.inflate;
+
         const NumericKind Closure = UnsignedInts;
     }
 
     public static partial class XTend
     {
         const NumericKind Closure = UnsignedInts;
-
     }
 
     partial struct z

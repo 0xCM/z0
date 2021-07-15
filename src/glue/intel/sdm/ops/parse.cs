@@ -140,7 +140,7 @@ namespace Z0.Asm
             var i = Markers.index(src, Markers.TableNumber);
             if(i != NotFound)
             {
-                dst = table(slice(src, i + Markers.TableNumber.Length));
+                dst = tablenumber(slice(src, i + Markers.TableNumber.Length));
                 return true;
             }
             return false;

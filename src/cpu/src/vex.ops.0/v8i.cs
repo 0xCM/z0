@@ -55,17 +55,4 @@ namespace Z0
             where T : unmanaged
                 => gcpu.v8i(x);
     }
-
-    partial struct z
-    {
-        [MethodImpl(Inline)]
-        public static Vector128<sbyte> v8i<T>(Vector128<T> x)
-            where T : unmanaged
-                => gcpu.v8i(x);
-
-        [MethodImpl(Inline)]
-        public static Vector256<sbyte> v8i<T>(Vector256<T> x)
-            where T : unmanaged
-                => gcpu.v8i(x);
-    }
 }

@@ -11,20 +11,23 @@ namespace Z0.Asm
 
     partial struct IntelSdm
     {
-        public readonly struct TableRow
+        public struct TableRow
         {
-            public TableKind TableKind {get;}
-
-            public ushort Index {get;}
+            internal uint _Seq;
 
             readonly Index<TableCell> _Cells;
 
             [MethodImpl(Inline)]
-            internal TableRow(TableKind table, ushort index, TableCell[] cells)
+            internal TableRow(uint index, TableCell[] cells)
             {
-                TableKind = table;
-                Index = index;
+                _Seq = index;
                 _Cells = cells;
+            }
+
+            public uint Sequence
+            {
+                [MethodImpl(Inline)]
+                get => _Seq;
             }
 
             public Span<TableCell> Cells

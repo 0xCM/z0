@@ -18,7 +18,13 @@ namespace Z0.Asm
 
         const string intrinsics = nameof(intrinsics);
 
+        const string imported = nameof(imported);
+
         const string alg = nameof(alg);
+
+        const string images = nameof(images);
+
+        const string stage = nameof(stage);
 
         [MethodImpl(Inline)]
         public static AsmWorkspace create(FS.FolderPath root)
@@ -128,7 +134,7 @@ namespace Z0.Asm
         /// Defines a path of the form {ImportRoot} := {DataRoot}/imported
         /// </summary>
         public FS.FolderPath ImportRoot()
-            => DataRoot() + FS.folder(imported);
+            => DataRoot() + FS.folder(EnvFolders.imported);
 
         /// <summary>
         /// Defines a path of the form {EtlLogRoot} := {DataRoot}/logs
@@ -222,14 +228,28 @@ namespace Z0.Asm
         public FS.FolderPath Tables()
             => DataRoot() + FS.folder(tables);
 
-        public FS.FolderPath ImportTables()
-            => ImportRoot() + FS.folder("tables");
-
         public FS.FilePath Table(string id, FS.FileExt ext)
             => Tables() + FS.file(id,ext);
 
-        public FS.FilePath ImportTable<T>()
+        public FS.FilePath Table<T>()
+            where T : struct
+                => Table(TableId<T>(), FS.Csv);
+
+        public FS.FilePath Table<T>(FS.FileExt ext)
             where T : struct, IRecord<T>
+                => Table(TableId<T>(), ext);
+
+        public FS.FolderPath ImportTables()
+            => Tables() + FS.folder(imported);
+
+        public FS.FolderPath SourceTables()
+            => Tables() + FS.folder(sources);
+
+       public FS.FolderPath StageTables()
+            => Tables() + FS.folder(stage);
+
+        public FS.FilePath ImportTable<T>()
+            where T : struct
                 => ImportTables() + FS.file(TableId<T>(), FS.Csv);
 
         public FS.FilePath ImportTable(string id)
@@ -336,7 +356,7 @@ namespace Z0.Asm
         }
 
         string TableId<T>()
-            where T : struct, IRecord<T>
+            where T : struct
                 => Z0.TableId.identify<T>().Identifier.Format();
     }
 }

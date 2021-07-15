@@ -15,6 +15,6 @@ namespace Z0
         /// <param name="m">The source method</param>
         [Op]
         public static bool IsKinded(this MethodInfo m)
-            => m.KindId() != 0;
+            => m.ApiClass() != 0;
     }
 }

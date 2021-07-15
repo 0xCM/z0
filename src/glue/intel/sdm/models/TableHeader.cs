@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct IntelSdm
     {
@@ -39,6 +40,9 @@ namespace Z0.Asm
 
             public override string ToString()
                 => Format();
+
+            public static TableHeader Empty
+                => new TableHeader(0,array<ColumnKind>(), array<string>());
         }
     }
 }

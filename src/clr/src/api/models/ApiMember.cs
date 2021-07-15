@@ -28,7 +28,7 @@ namespace Z0
         public ApiMember(OpUri uri, MethodInfo method, MemoryAddress address)
         {
             OpUri = uri;
-            ApiClass = method.KindId();
+            ApiClass = method.ApiClass();
             Method = Require.notnull(method);
             Msil = ClrDynamic.msil(address, uri, method);
             Metadata = method.Artifact();
@@ -38,6 +38,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => OpUri.OpId;
+        }
+
+        public string Group
+        {
+            [MethodImpl(Inline)]
+            get => Method.ApiGroup();
         }
 
         public MemoryAddress BaseAddress

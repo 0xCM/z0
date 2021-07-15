@@ -8,6 +8,7 @@ namespace Z0.Asm
 
     using Windows;
 
+    using static IntelSdm;
     using static Root;
     using static core;
 
@@ -104,6 +105,13 @@ namespace Z0.Asm
             var cmd = Cmd.cmdline(src.Format(PathSeparator.BS));
             response = ScriptRunner.RunCmd(cmd, OnError);
             return result;
+        }
+
+        ref readonly Table Pipe(in Table src)
+        {
+            var msg = string.Format("Dispatching {0} {1} rows", src.RowCount, src.Kind);
+            Status(msg);
+            return ref src;
         }
 
         static Outcome argerror(string value)

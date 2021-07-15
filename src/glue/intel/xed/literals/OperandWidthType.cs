@@ -85,10 +85,13 @@ namespace Z0
 
             X128,
 
+            [Symbol("xb")]
             XB,
 
+            [Symbol("xw")]
             XW,
 
+            [Symbol("xd")]
             XD,
 
             XQ,

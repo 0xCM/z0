@@ -16,6 +16,6 @@ namespace Z0
         /// <param name="kind">The kind to match</param>
         [Op]
         public static MethodInfo[] OfKind(this MethodInfo[] src, ApiClassKind kind)
-            => from m in src where m.KindId() == kind select m;
+            => from m in src where m.ApiClass() == kind select m;
     }
 }

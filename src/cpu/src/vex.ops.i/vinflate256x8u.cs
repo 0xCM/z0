@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static BitMasks.Literals;
 
     partial struct cpu
     {
@@ -19,11 +18,6 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vinflate256x8u(uint src, byte index)
-        {
-            var m = Lsb64x8x1 << index;
-            var lo = v8u(vparts(BitMasks.maskpart(src, 0, m), BitMasks.maskpart(src, 8, m)));
-            var hi = v8u(vparts(BitMasks.maskpart(src, 16, m), BitMasks.maskpart(src, 24, m)));
-            return cpu.vconcat(lo,hi);
-        }
+            => vmap32x1(src,index, out Vector256<byte> dst);
     }
 }

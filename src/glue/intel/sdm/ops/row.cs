@@ -12,7 +12,15 @@ namespace Z0.Asm
     partial struct IntelSdm
     {
         [MethodImpl(Inline), Op]
-        public static TableRow row(TableKind table, ushort index, TableCell[] cells)
-            => new TableRow(table, index, cells);
+        public static TableRow row(uint seq, TableCell[] cells)
+            => new TableRow(seq, cells);
+
+        [MethodImpl(Inline), Op]
+        public static TableRow row(TableCell[] cells)
+            => new TableRow(0, cells);
+
+        [MethodImpl(Inline), Op]
+        public static TableRow row(string[] cells)
+            => new TableRow(0, cells.Select(cell));
     }
 }
