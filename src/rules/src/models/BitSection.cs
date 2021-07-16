@@ -15,12 +15,12 @@ namespace Z0
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct BitSection : IRuleDataType<BitSection>
         {
-            public ushort MinIndex {get;}
+            public uint MinIndex {get;}
 
-            public ushort MaxIndex {get;}
+            public uint MaxIndex {get;}
 
             [MethodImpl(Inline)]
-            public BitSection(ushort min, ushort max)
+            public BitSection(uint min, uint max)
             {
                 MinIndex = min;
                 MaxIndex = max;

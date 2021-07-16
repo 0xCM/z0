@@ -2,20 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct RangeIterator
+    partial struct Rules
     {
-        public long Step {get;}
-
-        [MethodImpl(Inline)]
-        public RangeIterator(long step)
+        public readonly struct RangeIterator
         {
-            Step = step;
+            public long Step {get;}
+
+            [MethodImpl(Inline)]
+            public RangeIterator(long step)
+            {
+                Step = step;
+            }
         }
     }
 }

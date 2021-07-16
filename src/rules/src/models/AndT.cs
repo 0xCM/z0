@@ -4,24 +4,29 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
     partial struct Rules
     {
-        public readonly struct Alt : IRule<Alt>
+        /// <summary>
+        /// Conjunction
+        /// </summary>
+        public readonly struct And<T> : IRule<And<T>,T>
         {
-            public One Left {get;}
-
-            public One Right {get;}
+            public Index<T> Elements {get;}
 
             [MethodImpl(Inline)]
-            public Alt(One left, One right)
+            public And(Index<T> src)
             {
-                Left = left;
-                Right = right;
+                Elements = src;
             }
+
+            [MethodImpl(Inline)]
+            public static implicit operator And(And<T> src)
+                => new And(src.Elements.Select(x => (dynamic)x));
         }
     }
 }

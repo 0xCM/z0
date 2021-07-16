@@ -8,8 +8,6 @@ namespace Z0
 
     using static Root;
 
-    using Z0.Lang;
-
     partial struct Rules
     {
         public readonly struct RangeLoop : IRangeLoop

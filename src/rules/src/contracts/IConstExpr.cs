@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
-    using Z0.Lang;
-
     /// <summary>
     /// Characterizes a reified constant value
     /// </summary>

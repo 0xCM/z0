@@ -4,15 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct Rules
     {
         [MethodImpl(Inline), Op]
-        public static IntrinsicOperator @operator(string name, string notation, OperatorKind kind)
-            => new IntrinsicOperator(name, notation, kind);
+        public static char indicator(BasicTypeKind src)
+            => src switch {
+                BasicTypeKind.Float => 'f',
+                BasicTypeKind.Signed => 'i',
+                BasicTypeKind.Unsigned => 'u',
+                _ => Chars.Null,
+            };
     }
 }

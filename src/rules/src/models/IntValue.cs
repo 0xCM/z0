@@ -9,21 +9,37 @@ namespace Z0
 
     using static Root;
 
-    using Z0.Lang;
-
     partial struct Rules
     {
-        public readonly struct IntValue : INumericValue<IntegerKind>
+        public readonly struct IntValue : IBlittable
         {
             public IntegerKind Kind {get;}
 
-            public byte[] Content {get;}
+            public byte[] Data {get;}
 
             [MethodImpl(Inline)]
-            public IntValue(IntegerKind kind, byte[] def)
+            public IntValue(IntegerKind kind, byte[] data)
             {
                 Kind = kind;
-                Content = def;
+                Data = data;
+            }
+
+            public ReadOnlySpan<byte> View
+            {
+                [MethodImpl(Inline)]
+                get => Data;
+            }
+
+            public Span<byte> Edit
+            {
+                [MethodImpl(Inline)]
+                get => Data;
+            }
+
+            public BitWidth Width
+            {
+                [MethodImpl(Inline)]
+                get => Data.Length*8;
             }
         }
     }

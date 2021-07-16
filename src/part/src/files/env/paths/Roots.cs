@@ -10,11 +10,8 @@ namespace Z0
     {
         FS.FolderPath DataRoot()
             => Env.DataRoot;
-        FS.FolderPath Toolsets()
-            => FS.dir(@"C:\Dev\tooling\tools");
-
-        FS.FolderPath DataRoot(FS.FolderPath root)
-            => root;
+        FS.FolderPath ToolWs()
+            => Env.ToolWs;
 
         FS.FolderPath DbRoot()
             => Env.Db;

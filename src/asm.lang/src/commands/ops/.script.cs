@@ -4,17 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     partial class AsmCmdService
     {
-        [CmdOp(".toolscript")]
-        public Outcome ToolScript(CmdArgs args)
+        [CmdOp(".script")]
+        public Outcome Script(CmdArgs args)
         {
             var tool = args.IsNonEmpty ? (ToolId)arg(args,0).Value : Tool();
             var tools = ToolBase();
             if(tool.IsEmpty)
-                return (false, "A tool has not been selected");
+                return (false, NoToolSelected.Format());
 
             var script = tools.Script(tool, arg(args,1).Value);
             if(!script.Exists)

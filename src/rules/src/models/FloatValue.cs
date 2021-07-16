@@ -6,24 +6,39 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using static Root;
-
-    using Z0.Lang;
 
     partial struct Rules
     {
-        public readonly struct FloatValue : INumericValue<FloatKind>
+        public readonly struct FloatValue : IBlittable
         {
             public FloatKind Kind {get;}
 
-            public byte[] Content {get;}
+            readonly byte[] Data;
 
             [MethodImpl(Inline)]
-            public FloatValue(FloatKind kind, byte[] def)
+            public FloatValue(FloatKind kind, byte[] data)
             {
                 Kind = kind;
-                Content = def;
+                Data = data;
+            }
+
+            public ReadOnlySpan<byte> View
+            {
+                [MethodImpl(Inline)]
+                get => Data;
+            }
+
+            public Span<byte> Edit
+            {
+                [MethodImpl(Inline)]
+                get => Data;
+            }
+
+            public BitWidth Width
+            {
+                [MethodImpl(Inline)]
+                get => Data.Length*8;
             }
         }
     }

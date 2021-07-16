@@ -33,6 +33,5 @@ namespace Z0
 
         public ReadOnlySpan<SpanResAccessor> ResPackAccessors(FS.FilePath src)
             => SpanAccessors(src);
-
     }
 }

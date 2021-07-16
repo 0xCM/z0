@@ -19,7 +19,7 @@ namespace Z0
             => Index<RuleOperand>.Empty;
     }
 
-    public interface IRule<R> : IRule
+    public interface IRule<R> : IRule, IRuleModel<R>
         where R : struct, IRule<R>
     {
         Type IRule.RuleType

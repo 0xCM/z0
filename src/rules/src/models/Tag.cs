@@ -4,24 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
 
     partial struct Rules
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public readonly struct CpuVector : IRuleDataType<CpuVector>
+        public readonly struct Tag : IRule<Tag>
         {
-            public VectorKind Kind {get;}
+            public string Content {get;}
 
-            public string Name => Kind.ToString();
+            public ulong Kind {get;}
 
             [MethodImpl(Inline)]
-            public CpuVector(VectorKind kind)
+            public Tag(string content, ulong kind)
             {
+                Content = content;
                 Kind = kind;
             }
         }

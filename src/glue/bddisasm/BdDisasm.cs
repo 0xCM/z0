@@ -11,7 +11,6 @@ namespace Z0.Tools
     using static core;
     using static Root;
     using static SymbolicTools;
-    using static EnvFolders;
 
     [ApiHost]
     public sealed partial class BdDisasm : Tool<BdDisasm, BdDisasmCmd>, IAsmTool
@@ -28,7 +27,7 @@ namespace Z0.Tools
 
         protected override void Initialized()
         {
-            Workspace = AsmWorkspace.create(Env.AsmWorkspace);
+            Workspace = AsmWorkspace.create(Env.AsmWs);
             ToolPath = Workspace.ToolPath(Toolspace.bddiasm);
         }
 

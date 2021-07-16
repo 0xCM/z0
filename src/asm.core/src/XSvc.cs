@@ -13,7 +13,7 @@ namespace Z0
     {
        [Op]
        public static AsmWorkspace AsmWorkspace(this IEnvProvider provider)
-            => Svc.AsmWorkspace.create(provider.Env.AsmWorkspace);
+            => Svc.AsmWorkspace.create(provider.Env.AsmWs);
 
         [Op]
         public static AsmRegGrids AsmRegGrids(this IServiceContext ctx)

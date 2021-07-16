@@ -6,20 +6,25 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
 
     partial struct Rules
     {
-        public readonly struct DataCell : IRuleDataType<DataCell>
+        public readonly struct IntrinsicOperator
         {
-            public DataWidth Width {get;}
+            public string Name {get;}
+
+            public string Notation {get;}
+
+            public OperatorKind Kind {get;}
 
             [MethodImpl(Inline)]
-            public DataCell(DataWidth width)
+            public IntrinsicOperator(string name, string notation, OperatorKind kind)
             {
-                Width = width;
+                Name = name;
+                Notation  = notation;
+                Kind = kind;
             }
         }
     }

@@ -51,8 +51,7 @@ namespace Z0
             dst.VendorDocs = dir(N.VendorDocs);
             dst.CapturePacks = dir(N.CapturePacks);
             dst.CpuCount = number(N.CpuCount);
-            dst.Workspaces = dir(N.Workspaces);
-            dst.Toolbase = dir(N.Toolbase);
+            dst.DevWs = dir(N.DevWs);
         }
 
         public EnvDirVar ZDev;
@@ -93,9 +92,7 @@ namespace Z0
 
         public EnvVar<ulong> CpuCount;
 
-        public EnvDirVar Workspaces;
-
-        public EnvDirVar Toolbase;
+        public EnvDirVar DevWs;
 
         public EnvData Data
             => new EnvData(this);

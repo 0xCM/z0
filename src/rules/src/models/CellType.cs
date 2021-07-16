@@ -4,23 +4,27 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
     partial struct Rules
     {
-        public readonly struct Alt : IRule<Alt>
+        /// <summary>
+        /// Defines a primitive cell type
+        /// </summary>
+        public readonly struct CellType : IRuleDataType<CellType>
         {
-            public One Left {get;}
+            public BasicTypeKind Kind {get;}
 
-            public One Right {get;}
+            public BitWidth Width {get;}
 
             [MethodImpl(Inline)]
-            public Alt(One left, One right)
+            public CellType(BasicTypeKind kind, BitWidth width)
             {
-                Left = left;
-                Right = right;
+                Kind = kind;
+                Width = width;
             }
         }
     }

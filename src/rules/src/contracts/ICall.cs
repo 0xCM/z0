@@ -12,4 +12,9 @@ namespace Z0
 
         Index<OperandValue> Operands {get;}
     }
+
+    partial struct Rules
+    {
+
+    }
 }

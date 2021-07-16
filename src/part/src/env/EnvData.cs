@@ -77,12 +77,12 @@ namespace Z0
             => Source.CpuCount;
 
         public FS.FolderPath Workspaces
-            => Source.Workspaces;
+            => Source.DevWs;
 
-        public FS.FolderPath AsmWorkspace
+        public FS.FolderPath AsmWs
             => Workspaces + FS.folder("asm");
 
-        public FS.FolderPath Toolbase
-            => Source.Toolbase;
+        public FS.FolderPath ToolWs
+            => Workspaces + FS.folder("tools");
     }
 }

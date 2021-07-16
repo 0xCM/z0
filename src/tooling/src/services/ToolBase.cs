@@ -20,6 +20,8 @@ namespace Z0
 
         const string scripts = nameof(scripts);
 
+        const string samples = nameof(samples);
+
         public FS.FolderPath Root {get; private set;}
 
         Index<ToolConfig> _Tools;
@@ -28,7 +30,6 @@ namespace Z0
 
         uint Capacity;
 
-        public CharBlock16 Name {get; private set;}
 
         public ToolBase()
         {
@@ -38,9 +39,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ToolBase Configure(CharBlock16 name, FS.FolderPath root)
+        public ToolBase Configure(FS.FolderPath root)
         {
-            Name = name;
             Root = root;
             return this;
         }
@@ -56,6 +56,9 @@ namespace Z0
 
         public FS.FolderPath Scripts(ToolId tool)
             => Home(tool) + FS.folder(scripts);
+
+        public FS.FolderPath Samples(ToolId tool)
+            => Home(tool) + FS.folder(samples);
 
         public FS.FilePath Script(ToolId tool, string id)
             => Scripts(tool) + FS.file(id,FS.Cmd);

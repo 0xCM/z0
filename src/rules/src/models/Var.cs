@@ -4,23 +4,27 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
     partial struct Rules
     {
-        public readonly struct Alt : IRule<Alt>
+        public readonly struct Var
         {
-            public One Left {get;}
+            public IScope Scope {get;}
 
-            public One Right {get;}
+            public string Name {get;}
+
+            public DataType Type {get;}
 
             [MethodImpl(Inline)]
-            public Alt(One left, One right)
+            public Var(IScope scope, string name, DataType type)
             {
-                Left = left;
-                Right = right;
+                Scope = scope;
+                Type = type;
+                Name = name;
             }
         }
     }

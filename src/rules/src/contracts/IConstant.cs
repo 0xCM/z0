@@ -2,8 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
+    using static Rules;
+
     /// <summary>
     /// Characterizes a constant value
     /// </summary>
@@ -12,6 +14,6 @@ namespace Z0.Lang
     {
         T Value {get;}
 
-        Rules.ConstantKind Kind {get;}
+        ConstantKind Kind {get;}
     }
 }

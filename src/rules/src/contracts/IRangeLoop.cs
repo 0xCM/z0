@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using Z0.Lang;
+    using static Rules;
 
     public interface IRangeLoop : IScopedLoop
     {

@@ -4,15 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
     partial class AsmCmdService
     {
-        [CmdOp(".toolbase")]
-        Outcome SelectToolbase(CmdArgs args)
+        [CmdOp(".samples")]
+        Outcome ToolSamples(CmdArgs args)
+            => RunTool(args, ToolSamples);
+
+        Outcome ToolSamples(ToolId tool, CmdArgs args)
         {
-            var name = arg(args,0).Value;
-            var root = FS.dir(arg(args,1).Value);
-            var selected = _Toolbase.Configure(name, root);
-            Write(string.Format("Toolbase {0} selected", selected.Root));
+            var dir = ToolBase().Scripts(tool);
+            var files = Pipe(dir.AllFiles.View);
             return true;
         }
     }

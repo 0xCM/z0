@@ -41,6 +41,10 @@ namespace Z0
         public static void Throw(Exception e)
             => throw e;
 
+        [Op]
+        public static void Throw(AppException e)
+            => throw e;
+
         [Op, Closures(UnsignedInts)]
         public static T Throw<T>(Exception e)
             => throw e;
@@ -53,10 +57,13 @@ namespace Z0
         public static void Throw(Func<string> f)
             => throw new Exception(f());
 
+        [Op]
+        public static AppException Originate(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.define(msg, caller, file, line);
 
         [Op]
-        public static void Throw(object reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw AppException.define(reason, caller, file, line);
+        public static void ThrowWithOrigin(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => Throw(Originate(msg, caller,file,line));
 
         [Op]
         public static void ThrowArgNull(object arg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

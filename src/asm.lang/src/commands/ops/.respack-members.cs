@@ -4,12 +4,30 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
     using static core;
 
     partial class AsmCmdService
     {
+        [CmdOp(".respack-info")]
+        Outcome RespackInfo(CmdArgs args)
+        {
+            var provider = Wf.ApiResProvider();
+            var path = Pipe(provider.ResPackPath());
+            var accessors = provider.ResPackAccessors();
+            Write(string.Format("Count:{0}", accessors.Length));
+            return true;
+        }
+
+        ref readonly FS.FilePath Pipe(in FS.FilePath src)
+        {
+            Write(string.Format("Path:{0}",src));
+            return ref src;
+        }
+
         [CmdOp(".respack-members")]
-        Outcome ShowResPackMembers(CmdArgs args)
+        Outcome RespackMembers(CmdArgs args)
         {
             var provider = Wf.ApiResProvider();
             var accessors = provider.ResPackAccessors();

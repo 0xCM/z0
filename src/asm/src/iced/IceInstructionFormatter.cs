@@ -30,7 +30,7 @@ namespace Z0.Asm
                 RipRelativeAddresses = true,
                 SignedMemoryDisplacements = true,
                 ShowSymbolAddress = true,
-                SignedImmediateOperands = true,
+                SignedImmediateOperands = false,
             };
 
         [MethodImpl(Inline)]

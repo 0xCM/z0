@@ -59,16 +59,10 @@ namespace Z0.Asm
         ToolId SelectedTool()
             => _Tool;
 
-        ToolBase ToolBase(string name, FS.FolderPath root)
-        {
-           _Toolbase.Configure(name, root);
-           return _Toolbase;
-        }
-
         protected override void Initialized()
         {
             Workspace = Wf.AsmWorkspace();
-            _Toolbase = Wf.ToolBase("tools", Db.Toolsets());
+            _Toolbase = Wf.ToolBase(Db.ToolWs());
             ScriptRunner = Wf.ScriptRunner();
         }
 
@@ -101,7 +95,7 @@ namespace Z0.Asm
             var size = src.Length;
             var buffer = NativeBuffer(true);
             if(size > buffer.Length)
-                return (false,string.Format("Input exceeds capacity"));
+                return (false,CapacityExceeded.Format());
             for(var i=0; i<size; i++)
                 seek(buffer,i) = skip(src,i);
             return true;
@@ -121,10 +115,30 @@ namespace Z0.Asm
             return result;
         }
 
+        Outcome RunTool(CmdArgs args, Func<ToolId,CmdArgs,Outcome> f)
+        {
+            var tool = args.IsNonEmpty ? (ToolId)arg(args,0).Value : Tool();
+            if(tool.IsEmpty)
+                return (false, NoToolSelected.Format());
+            else
+                return f(tool, args);
+        }
+
         ref readonly Table Pipe(in Table src)
         {
             var msg = string.Format("Dispatching {0} {1} rows", src.RowCount, src.Kind);
             Status(msg);
+            return ref src;
+        }
+
+        ref readonly ReadOnlySpan<T> Pipe<T>(in ReadOnlySpan<T> src)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var input = ref skip(src,i);
+                Write(input.ToString());
+            }
             return ref src;
         }
 
@@ -134,12 +148,20 @@ namespace Z0.Asm
         static CmdArg arg(in CmdArgs src, int index)
         {
             if(src.IsEmpty)
-                sys.@throw("The argument list is empty");
+                sys.@throw(EmptyArgList.Format());
 
             var count = src.Length;
             if(count < index - 1)
-                sys.@throw("Argument specification error");
+                sys.@throw(ArgSpecError.Format());
             return src[(ushort)index];
         }
+
+        static MsgPattern NoToolSelected => "No tool selected";
+
+        static MsgPattern EmptyArgList => "No arguments specified";
+
+        static MsgPattern ArgSpecError => "Argument specification error";
+
+        static MsgPattern CapacityExceeded => "Capacity exceeded";
     }
 }

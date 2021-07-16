@@ -27,6 +27,5 @@ namespace Z0
 
             Float512 = Float | W.W512,
         }
-
     }
 }

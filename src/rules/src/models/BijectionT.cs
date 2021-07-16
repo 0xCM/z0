@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
@@ -29,30 +28,6 @@ namespace Z0
             }
 
             public Pair<T> this[uint i]
-            {
-                [MethodImpl(Inline)]
-                get => (Source[i], Target[i]);
-            }
-        }
-
-        /// <summary>
-        /// Represents a bijective correspondence between two sequences
-        /// </summary>
-        public readonly struct Bijection<S,T> : IRule<Bijection<S,T>,S,T>
-        {
-            public Index<S> Source {get;}
-
-            public Index<T> Target {get;}
-
-            [MethodImpl(Inline)]
-            public Bijection(Index<S> src, Index<T> dst)
-            {
-                //root.require(src.Length == dst.Length, () => "Equality of length there must be");
-                Source = src;
-                Target = dst;
-            }
-
-            public Paired<S,T> this[uint i]
             {
                 [MethodImpl(Inline)]
                 get => (Source[i], Target[i]);

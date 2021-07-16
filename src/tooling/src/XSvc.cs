@@ -26,7 +26,7 @@ namespace Z0
             => Svc.ProcessLauncher.create(paths);
 
         [Op]
-        public static ToolBase ToolBase(this IServiceContext context, string name, FS.FolderPath root)
-            => Svc.ToolBase.create(context).Configure(name, root);
+        public static ToolBase ToolBase(this IServiceContext context, FS.FolderPath root)
+            => Svc.ToolBase.create(context).Configure(root);
     }
 }

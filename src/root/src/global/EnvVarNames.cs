@@ -45,8 +45,6 @@ namespace Z0
 
         public const string CpuCount = "NUMBER_OF_PROCESSORS";
 
-        public const string Workspaces = "DevWs";
-
-        public const string Toolbase = "Toolbase";
+        public const string DevWs = "DevWs";
     }
 }

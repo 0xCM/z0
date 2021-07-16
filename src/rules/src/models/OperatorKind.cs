@@ -2,40 +2,43 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
-    public enum OperatorKind
+    partial struct Rules
     {
-        None = 0,
+        public enum OperatorKind : byte
+        {
+            None = 0,
 
-        Not,
+            Not,
 
-        And,
+            And,
 
-        Or,
+            Or,
 
-        Xor,
+            Xor,
 
-        Assign,
+            Assign,
 
-        Add,
+            Add,
 
-        Sub,
+            Sub,
 
-        Eq,
+            Eq,
 
-        Neq,
+            Neq,
 
-        Gt,
+            Gt,
 
-        GtEq,
+            GtEq,
 
-        Lt,
+            Lt,
 
-        LtEq,
+            LtEq,
 
-        Inc,
+            Inc,
 
-        Dec,
+            Dec,
+        }
     }
 }

@@ -11,21 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Annotation : IRule<Annotation>
-        {
-            public string Content {get;}
-
-            public ulong Kind {get;}
-
-            [MethodImpl(Inline)]
-            public Annotation(string content, ulong kind)
-            {
-                Content = content;
-                Kind = kind;
-            }
-        }
-
-        public readonly struct Annotation<K> : IRule<Annotation<K>,K>
+        public readonly struct Tag<K> : IRule<Tag<K>,K>
             where K : unmanaged
         {
             public string Content {get;}
@@ -33,7 +19,7 @@ namespace Z0
             public K Kind {get;}
 
             [MethodImpl(Inline)]
-            public Annotation(string content, K kind)
+            public Tag(string content, K kind)
             {
                 Content = content;
                 Kind = kind;

@@ -13,6 +13,19 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Bijection<T> bijection<T>(Index<T> src, Index<T> dst)
-            => new Bijection<T>(src, dst);
+        {
+            if(src.Length != dst.Length)
+                Errors.ThrowWithOrigin(string.Format("{0} != {1}", src.Length, dst.Length));
+            return new Bijection<T>(src, dst);
+        }
+
+        [MethodImpl(Inline)]
+        public static Bijection<S,T> bijection<S,T>(Index<S> src, Index<T> dst)
+        {
+            if(src.Length != dst.Length)
+                Errors.ThrowWithOrigin(string.Format("{0} != {1}", src.Length, dst.Length));
+            return new Bijection<S,T>(src, dst);
+        }
+
     }
 }
