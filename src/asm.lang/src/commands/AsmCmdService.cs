@@ -32,6 +32,8 @@ namespace Z0.Asm
 
         ScriptRunner ScriptRunner;
 
+        ByteSize _NativeSize;
+
         public AsmCmdService()
         {
             CodeBuffer = Buffers.native(Pow2.T10);
@@ -39,6 +41,7 @@ namespace Z0.Asm
             Arbiter = AsmCmdArbiter.start(_NativeBuffer);
             _SymTypes = Z0.SymTypes.Empty;
             _Tool = ToolId.Empty;
+            _NativeSize = 0;
         }
 
         ToolBase ToolBase()
@@ -91,6 +94,17 @@ namespace Z0.Asm
             if(clear)
                 _NativeBuffer.Clear();
             return _NativeBuffer.Edit;
+        }
+
+        Outcome NativeLoad(ReadOnlySpan<byte> src)
+        {
+            var size = src.Length;
+            var buffer = NativeBuffer(true);
+            if(size > buffer.Length)
+                return (false,string.Format("Input exceeds capacity"));
+            for(var i=0; i<size; i++)
+                seek(buffer,i) = skip(src,i);
+            return true;
         }
 
         Outcome RunScript(FS.FilePath src, out ReadOnlySpan<TextLine> response)

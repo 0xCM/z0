@@ -49,7 +49,7 @@ namespace Z0
             LoadBuffer(0,min64u_64u_64u);
             var pCode = CodeBuffer.Address.Pointer<byte>();
             var name = "min64u";
-            var f = BinaryOpDynamics.binop<ulong>(name, pCode);
+            var f = BinaryOpDynamics.create<ulong>(name, pCode);
             var a = 4ul;
             var b = 12ul;
             var c = f(a,b);

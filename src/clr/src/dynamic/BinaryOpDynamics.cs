@@ -19,7 +19,7 @@ namespace Z0
 
         public static unsafe DynamicOp<BinaryOp<T>> dynop<T>(Identifier name, ReadOnlySpan<byte> f)
         {
-            var emitted = emit<T>(name, (MemoryAddress)Buffers.liberate(f), out var method);
+            var emitted = create<T>(name, (MemoryAddress)Buffers.liberate(f), out var method);
             return (method,emitted);
         }
 
@@ -36,29 +36,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T eval<T>(Identifier name, ReadOnlySpan<byte> f, T x, T y)
             where T : unmanaged
-        {
-            var binop = create<T>(name, f);
-            return binop(x,y);
-        }
-        public static unsafe BinaryOp<T> binop<T>(Identifier name, byte* pCode)
-        {
-            var emitted = emit<T>(name, (MemoryAddress)pCode, out var method);
-            return emitted;
-        }
+                => create<T>(name, f)(x, y);
+
+        [Op, Closures(UInt64k)]
+        public static unsafe BinaryOp<T> create<T>(Identifier name, byte* pCode)
+            => create<T>(name, (MemoryAddress)pCode, out _);
 
         [Op, Closures(UInt64k)]
         public static unsafe BinaryOp<T> create<T>(OpIdentity id, ReadOnlySpan<byte> code)
-            => emit<T>(id.Format(), Buffers.liberate(code), out var _);
+            => create<T>(id.Format(), Buffers.liberate(code), out _);
 
         [Op, Closures(UInt64k)]
         public static unsafe BinaryOp<T> create<T>(Identifier name, ReadOnlySpan<byte> f)
-            => emit<T>(name, (MemoryAddress)Buffers.liberate(f), out var method);
+            => create<T>(name, (MemoryAddress)Buffers.liberate(f), out _);
 
-        static unsafe BinaryOp<T> emit<T>(Identifier name, MemoryAddress f, out DynamicMethod method)
+        static unsafe BinaryOp<T> create<T>(Identifier name, MemoryAddress f, out DynamicMethod method)
         {
             var tFunc = typeof(BinaryOp<T>);
             var tOperand = typeof(T);
-            var args = sys.array(tOperand, tOperand);
+            var args = array(tOperand, tOperand);
             method = new DynamicMethod(name, tOperand, args, tFunc.Module);
             var g = method.GetILGenerator();
             g.Emit(OpCodes.Ldarg_0);

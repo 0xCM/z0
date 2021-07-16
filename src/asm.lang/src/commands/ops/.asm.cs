@@ -14,14 +14,19 @@ namespace Z0.Asm
                 return (false, "No arguments were supplied");
 
             var toolchain = Wf.AsmToolchain();
-            var srcId = (string)args.First.Value;
-            var spec = Workspace.ToolchainSpec(Toolspace.nasm, Toolspace.bddiasm, srcId);
+            var id = (string)args.First.Value;
+            var spec = Workspace.ToolchainSpec(Toolspace.nasm, Toolspace.bddiasm, id);
             if(count > 1)
-            {
                 Enums.parse(args[1].Value, out spec.AsmBitMode);
-            }
 
-            return toolchain.Run(spec);
+            var result = toolchain.Run(spec);
+            if(result)
+            {
+                var path = Workspace.BinPath(id);
+                var data = path.ReadBytes().ToReadOnlySpan();
+                NativeLoad(data);
+            }
+            return result;
         }
     }
 }
