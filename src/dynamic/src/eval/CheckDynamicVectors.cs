@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static Typed;
     using static CellDelegates;
 
     public readonly struct CheckDynamicVectors

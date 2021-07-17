@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using static core;
 
     public class EvalControl : IEvalControl
@@ -58,25 +57,6 @@ namespace Z0
 
             Wf.Status($"Found {identities.Count} common operation identifiers");
 
-
-            // var joined = ApiIndex.join(members,operations);
-            // Wf.Status($"Joined {joined.Count} members with executable code");
-
-            // var code = ops.CreateIndex(members, operations);
-            // var count = code.EntryCount;
-
-            // Wf.Status($"Created code index with {count} members");
-
-            // if(count != 0)
-            // {
-            //     Wf.Status($"Evaluating {count} {host} operations");
-
-            //     foreach(var api in code.UnaryOperators)
-            //         Dispatcher.Dispatch(buffers, api, OperatorClasses.unary());
-
-            //     foreach(var api in code.BinaryOperators)
-            //         Dispatcher.Dispatch(buffers, api, OperatorClasses.binary());
-            // }
 
             Wf.Ran(flow);
         }

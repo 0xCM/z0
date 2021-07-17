@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static SFx;
-
     public interface IHalfAdder
     {
         ConstPair<bit> Invoke(bit a, bit b);

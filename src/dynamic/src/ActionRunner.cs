@@ -17,19 +17,17 @@ namespace Z0
         public void Invoke(in DynamicAction action)
             => action.Invoke();
 
-        public ExecToken Run(in DynamicAction fx)
+        public void Run(in DynamicAction fx)
         {
-            // var flow = Wf.Running(fx.Id);
-            // try
-            // {
-            //     fx.Invoke();
-            //     return Wf.Ran(flow, fx.Id);
-            // }
-            // catch(Exception e)
-            // {
-            //     return Wf.Error(flow, e);
-            // }
-            return default;
+            var flow = Wf.Running(fx.Id);
+            try
+            {
+                fx.Invoke();
+            }
+            catch(Exception e)
+            {
+                Error(e);
+            }
         }
 
         public EvalResult Measure(in DynamicAction fx)

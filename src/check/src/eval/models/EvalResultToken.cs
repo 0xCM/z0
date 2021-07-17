@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     [SymSource]
     public enum EvalResultToken : byte
     {
@@ -28,5 +27,4 @@ namespace Z0
         [Symbol(">=")]
         GtEq
     }
-
 }

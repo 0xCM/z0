@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static SFx;
-
     /// <summary>
     /// Characterizes a logic gate that receives 3 bits
     /// </summary>

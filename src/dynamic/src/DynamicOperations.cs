@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
-
 
     [ApiHost]
     public unsafe readonly struct DynamicOperations
@@ -67,7 +66,7 @@ namespace Z0.Asm
             var spec = new EmitterSpec<T>();
             spec.Name = name;
             spec.Definition = block;
-            spec.Operation = EmitterDynamics.create<T>(spec.Name, block.Address.Pointer<byte>());
+            spec.Operation = DynamicEmitter.emitter<T>(spec.Name, block.Address.Pointer<byte>());
             return spec;
         }
 

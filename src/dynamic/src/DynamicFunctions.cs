@@ -38,8 +38,8 @@ namespace Z0
         {
             var method = new DynamicMethod(id, result, args, functype.Module);
             var g = BodyEmitter.Emit(method);
-            var address = memory.address(buffer);
-            g.Emit(OpCodes.Ldc_I8, (long)memory.address(buffer));
+            var address = core.address(buffer);
+            g.Emit(OpCodes.Ldc_I8, (long)address);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, result, args);
             g.Emit(OpCodes.Ret);
             return CellDelegates.define(id, address, method, method.CreateDelegate(functype));

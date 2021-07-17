@@ -6,6 +6,6 @@ namespace Z0
 {
     public interface IActionRunner
     {
-        ExecToken Run(in DynamicAction fx);
+        void Run(in DynamicAction fx);
     }
 }

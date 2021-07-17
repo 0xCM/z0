@@ -18,6 +18,7 @@
     <ProjectReference Include="$(SymCore)" />
     <ProjectReference Include="$(Services)" />
     <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Dynamic)" />
   </ItemGroup>
 
    <ItemGroup>

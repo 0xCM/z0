@@ -7,19 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static BufferSeqId;
 
     public static partial class XTend
     {
-        public static IEvalControl EvalControl(this IWfRuntime wf, IDomainSource source = null, uint? buffersize = null)
-            => Evaluate.control(wf, source ?? Rng.@default(), wf.Db().ParsedExtractRoot(), buffersize ?? Pow2.T14);
-
         public static IEvalDispatcher EvalDispatcher(this IWfRuntime wf, IDomainSource source = null, uint? buffersize = null)
             => Evaluate.dispatcher(wf, source ?? Rng.@default(), buffersize ?? Pow2.T14);
-
-        public static IEvalExecutor EvalExecutor(this IWfRuntime wf, IDomainSource source = null)
-            => Evaluate.executor(wf, source ?? Rng.@default());
     }
 
     [ApiHost]
@@ -63,7 +57,7 @@ namespace Z0
                     term.print(msg);
 
                 var f = exchange.Member.Method.CreateDelegate<UnaryOp<T>>();
-                var g = GenericDynamic.unary<T>(buffer, code.Encoded);
+                var g = DynamicEmitter.unaryop<T>(buffer, code.Encoded);
                 var reps = exchange.PointCount;
                 for(var i=0; i<reps; i++)
                 {
@@ -90,7 +84,7 @@ namespace Z0
                     term.print(msg);
 
                 var f = exchange.Member.Method.CreateDelegate<BinaryOp<T>>();
-                var g = GenericDynamic.binary<T>(buffer, code.Encoded);
+                var g = DynamicEmitter.binaryop<T>(buffer, code.Encoded);
                 var reps = exchange.PointCount;
                 for(var i=0; i<reps; i++)
                 {

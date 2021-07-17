@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Reflection;
 
-    using static SFx;
-
     public readonly struct V128Imm8UnaryResolver<T> : IImm8UnaryResolver128<T>
         where T : unmanaged
     {
