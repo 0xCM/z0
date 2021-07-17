@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines <see cref='SEG'/> register classifiers
     /// </summary>
-    public enum SegRegKind : uint
+    public enum SegRegKind : ushort
     {
         /// <summary>
         /// Code segment register; contains the segment offset address of the executing instruction in a code segment

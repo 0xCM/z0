@@ -11,7 +11,7 @@ namespace Z0.Asm
     /// <summary>
     /// Classifies instruction pointer registers
     /// </summary>
-    public enum IpRegKind : uint
+    public enum IpRegKind : ushort
     {
         IP = IPTR << ClassField | W16 << WidthField,
 

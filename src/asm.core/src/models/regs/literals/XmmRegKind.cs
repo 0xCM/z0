@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines <see cref='XMM'/> register classifiers
     /// </summary>
-    public enum XmmRegKind : uint
+    public enum XmmRegKind : ushort
     {
         XMM0 = r0 | XMM << ClassField | W128 << WidthField,
 

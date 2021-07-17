@@ -12,7 +12,12 @@ namespace Z0
     {
         public void EmitConstants()
         {
-            var target = Db.IndexTable<ConstantFieldInfo>();
+            EmitConstants(Db.IndexRoot());
+        }
+
+        public void EmitConstants(FS.FolderPath dir)
+        {
+            var target = Tables.path<ConstantFieldInfo>(dir);
             var flow = Wf.EmittingTable<ConstantFieldInfo>(target);
             var formatter = Tables.formatter<ConstantFieldInfo>();
             var counter = 0u;

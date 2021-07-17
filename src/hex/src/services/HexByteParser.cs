@@ -30,9 +30,9 @@ namespace Z0
                 var s0 = src.Trim();
                 var len = s0.Length;
                 if(HexFormatSpecs.HasPreSpec(s0))
-                    s0 = sys.substring(s0, len - PreSpec.Length);
+                    s0 = text.substring(s0, len - PreSpec.Length);
                 else if(HexFormatSpecs.HasPostSpec(s0))
-                    s0 = sys.substring(s0, 0, len - PostSpec.Length);
+                    s0 = text.substring(s0, 0, len - PostSpec.Length);
                 var blocks = split(s0, Chars.Space).View;
                 var count = blocks.Length;
                 var buffer = alloc<byte>(count);

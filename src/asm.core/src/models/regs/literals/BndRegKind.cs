@@ -9,7 +9,7 @@ namespace Z0.Asm
     using static RegClassCode;
     using static RegWidthCode;
 
-    public enum BndRegKind : uint
+    public enum BndRegKind : ushort
     {
         DR0 = r0 | BND << ClassField | W128 << WidthField,
 

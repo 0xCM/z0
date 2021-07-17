@@ -10,9 +10,11 @@ namespace Z0
     /// <summary>
     /// Captures a dependency relationship between two assemblies
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), Record(TableId)]
     public struct AssemblyRefInfo : IComparableRecord<AssemblyRefInfo>
     {
+        public const string TableId = "clr.assembly-refs";
+
         public AssemblyName Source;
 
         public AssemblyName Target;

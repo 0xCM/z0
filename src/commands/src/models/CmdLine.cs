@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextTools.delimit(Data.View, Chars.Space, 0);
+            => text.delimit(Data.View, Chars.Space, 0);
 
         public override string ToString()
             => Format();

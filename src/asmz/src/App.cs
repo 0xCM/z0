@@ -98,10 +98,6 @@ namespace Z0.Asm
             Wf.ApiJit().JitCatalog();
         }
 
-        void EmitNasmInstructions()
-        {
-            Wf.NasmCatalog().EmitInstructionCatalog();
-        }
 
         void MapMemory()
         {
@@ -596,16 +592,6 @@ namespace Z0.Asm
                     writer.Write((char)c);
             }
             Wf.EmittedFile(emitting, lines);
-        }
-
-        void EmitAsciByteSpan(string content)
-        {
-            var lookups = Wf.AsciLookups();
-            var bytes = Wf.AsciBytes();
-            var dst = TextTools.buffer();
-            var spec = bytes.DefineAsciBytes("Uppercase", content);
-            var data = spec.Format();
-            Wf.Row(data);
         }
 
         void EmitSymbolIndex<E>(Identifier container)

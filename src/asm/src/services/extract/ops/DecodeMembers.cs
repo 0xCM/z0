@@ -24,7 +24,7 @@ namespace Z0
                 if(outcome)
                 {
                     seek(dst,i) = decoded;
-                    Receivers.Raise(new MemberDecodedEvent(member, decoded));
+                    Channel.Raise(new MemberDecodedEvent(member, decoded));
                 }
                 else
                 {

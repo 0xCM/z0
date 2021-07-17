@@ -49,13 +49,8 @@ namespace Z0
         ProcessingFile,
 
         ProcessedFile,
-
-        Row,
+        Data,
 
         Rows,
-
-        ToolRunning,
-
-        ToolRan,
     }
 }

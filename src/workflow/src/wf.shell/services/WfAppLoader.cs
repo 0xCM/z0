@@ -12,21 +12,20 @@ namespace Z0
 
     public readonly struct WfAppLoader
     {
-
         [Op]
         public static Index<ICmdReactor> reactors(IWfRuntime wf)
         {
             var types = wf.Components.Types();
             var reactors = types.Concrete().Tagged<CmdReactorAttribute>().Select(t => (ICmdReactor)Activator.CreateInstance(t));
-            core.iter(reactors, r => r.Init(wf));
+            iter(reactors, r => r.Init(wf));
             return reactors;
         }
 
         public static IWfRuntime load()
-            => create(ApiRuntimeLoader.parts(core.controller()), array<string>());
+            => create(ApiRuntimeLoader.parts(controller()), array<string>());
 
         public static IWfRuntime load(string[] args)
-            => create(ApiRuntimeLoader.parts(core.controller(), args), args);
+            => create(ApiRuntimeLoader.parts(controller(), args), args);
 
         public static IWfRuntime load(PartId[] parts, string[] args)
             => create(ApiRuntimeLoader.parts(parts), args);
@@ -50,12 +49,9 @@ namespace Z0
             return ctx;
         }
 
-        static IWfRuntime runtime(WfContext ctx)
-            => new WfRuntime(new WfInit(ctx, Loggers.configure(ctx.ControlId, ctx.Paths.Root), ctx.PartIdentities));
-
         static IWfRuntime create(IApiParts parts, string[] args)
         {
-            term.inform(AppMsg.status($"Beginning runtime initialization at {now()}"));
+            term.inform(InitializingRuntime.Format(now()));
 
             var clock = Time.counter(true);
             var verbose = true;
@@ -64,18 +60,22 @@ namespace Z0
             if(verbose)
             {
                 var enclosed = Rules.enclose(text.join(RP.CommaJoin, ctx.PartIdentities), TextRules.fence(Chars.LBrace, Chars.RBrace));
-                var prop = TextProp.define("Parts", Rules.format(enclosed));
-                term.inform(AppMsg.status(prop));
+                term.inform(AppMsg.status(TextProp.define("Parts", Rules.format(enclosed))));
             }
 
-            var wf = runtime(ctx);
+            var init = new WfInit(ctx, Loggers.configure(ctx.ControlId, ctx.Paths.Root), ctx.PartIdentities);
+            var wf = new WfRuntime(init);
             var react = reactors(wf);
             if(react.IsNonEmpty)
                 wf.Router.Enlist(react);
 
-            term.inform(AppMsg.status($"Finished runtime intialization at {now()} in {clock.Elapsed()}"));
+            term.inform(AppMsg.status(InitializedRuntime.Format(now(), clock.Elapsed())));
 
             return wf;
         }
+
+        static MsgPattern<Timestamp> InitializingRuntime => "Initializing runtime at {0}";
+
+        static MsgPattern<Timestamp,Duration> InitializedRuntime => "Initialized runtime at {0} in {1}";
     }
 }

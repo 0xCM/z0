@@ -16,15 +16,19 @@ namespace Z0
 
         public void EmitSectionHeaders()
         {
-            EmitSectionHeaders(controller().RuntimeArchive());
+            EmitSectionHeaders(controller().RuntimeArchive(), Db.IndexRoot());
         }
 
-        public void EmitSectionHeaders(IRuntimeArchive src)
+        public void EmitSectionHeaders(FS.FolderPath dir)
+        {
+            EmitSectionHeaders(controller().RuntimeArchive(), dir);
+        }
+
+        public void EmitSectionHeaders(IRuntimeArchive src, FS.FolderPath dir)
         {
             var db = Wf.Db();
-            var dir = db.TableDir<SectionHeaderInfo>();
-            EmitSectionHeaders(src.DllFiles.View, db.Table(SectionHeaderInfo.TableId, "dll"));
-            EmitSectionHeaders(src.ExeFiles.View, db.Table(SectionHeaderInfo.TableId, "exe"));
+            EmitSectionHeaders(src.DllFiles.View, Tables.path<SectionHeaderInfo>(dir,"dll"));
+            EmitSectionHeaders(src.ExeFiles.View, Tables.path<SectionHeaderInfo>(dir, "exe"));
         }
 
         public Outcome<Count> EmitSectionHeaders(ReadOnlySpan<FS.FilePath> src, FS.FilePath dst)

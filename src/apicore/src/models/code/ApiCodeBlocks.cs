@@ -23,6 +23,8 @@ namespace Z0
             Data = code.OrderBy(x => x.BaseAddress);
         }
 
+        public SortedReadOnlySpan<ApiCodeBlock> Sorted()
+            => Spans.sorted(@readonly(Data));
         public ApiCodeBlock[] Storage
         {
             [MethodImpl(Inline)]

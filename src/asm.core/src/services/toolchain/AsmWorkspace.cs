@@ -273,6 +273,9 @@ namespace Z0.Asm
         public FS.FolderPath DataSource(string id)
             => DataSources() + FS.folder(id);
 
+        public FS.FilePath DataSource(string id, FS.FileExt ext)
+            => DataSources() + FS.file(id,ext);
+
         public FS.FilePath InstInfo(string id)
             => Dataset(instructions) + FS.file(id,FS.Csv);
 

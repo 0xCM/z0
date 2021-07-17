@@ -39,7 +39,7 @@ namespace Z0.Lang
             public void Render(uint indent, ITextBuffer dst)
             {
                 dst.IndentLine(indent,"/// <summary>");
-                dst.IndentLineFormat(indent,"/// {0}", TextTools.ifempty(Content, "Undocumented"));
+                dst.IndentLineFormat(indent,"/// {0}", text.ifempty(Content, "Undocumented"));
                 dst.IndentLine(indent,"/// </summary>");
             }
 

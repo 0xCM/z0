@@ -9,7 +9,7 @@ namespace Z0.Asm
     using static RegClassCode;
     using static RegWidthCode;
 
-    public enum TestRegKind : uint
+    public enum TestRegKind : ushort
     {
         TR0 = r0 | MASK << ClassField | W64 << WidthField,
 

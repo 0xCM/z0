@@ -12,7 +12,7 @@ namespace Z0.Asm
         Outcome EmitCliHeaders(CmdArgs args)
         {
             var svc = Wf.CliEmitter();
-            svc.EmitSectionHeaders(controller().RuntimeArchive());
+            svc.EmitSectionHeaders(controller().RuntimeArchive(), DstDir());
             return true;
         }
     }

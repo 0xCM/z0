@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines classifiers for <see cref='GP'/> registers of width <see cref='W8'/>
     /// </summary>
-    public enum Gp8Kind : uint
+    public enum Gp8Kind : ushort
     {
         AL = r0 | (GP << ClassField) | (W8 << WidthField),
 

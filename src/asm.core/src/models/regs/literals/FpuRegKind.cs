@@ -9,7 +9,7 @@ namespace Z0.Asm
     using static RegClassCode;
     using static RegWidthCode;
 
-    public enum FpuRegKind : uint
+    public enum FpuRegKind : ushort
     {
         ST0 = r0 | ST << ClassField | W80 << WidthField,
 

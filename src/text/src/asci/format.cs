@@ -17,13 +17,20 @@ namespace Z0
             => format(seq.Storage.ToReadOnlySpan());
 
         [Op]
+        public static string format(in ReadOnlySpan<byte> src, Span<char> buffer)
+        {
+            var len = src.Length;
+            for(var i=0u; i<len; i++)
+                seek(buffer, i) = (char)skip(src,i);
+            return text.format(slice(buffer,0,len));
+        }
+
+        [Op]
         public static string format(in ReadOnlySpan<byte> src)
         {
             var len = src.Length;
             var dst = span(alloc<char>(len));
-            for(var i=0u; i<len; i++)
-                seek(dst, i) = (char)skip(src,i);
-            return text.format(dst);
+            return format(src, dst);
         }
     }
 }

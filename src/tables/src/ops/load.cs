@@ -12,16 +12,6 @@ namespace Z0
 
     partial struct Tables
     {
-        /// <summary>
-        /// Creates a table populate with a specified dataset
-        /// </summary>
-        /// <param name="src">The source data</param>
-        /// <typeparam name="T">The record type</typeparam>
-        [Op, Closures(Closure)]
-        public static Table<T> load<T>(T[] src)
-            where T : struct
-                => new Table<T>(src);
-
         public static ReadOnlySpan<T> load<T>(FS.FilePath src, IRecordParser<T> parser)
             where T : struct
         {

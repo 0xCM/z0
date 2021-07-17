@@ -20,10 +20,13 @@ namespace Z0
 
         readonly FileStream Emissions;
 
+        readonly FS.FilePath Target;
+
         internal WfEmissionLog(FS.FilePath dst)
         {
-            dst.EnsureParentExists().Delete();
-            Emissions = dst.Stream();
+            Target = dst;
+            Target.EnsureParentExists().Delete();
+            Emissions = Target.Stream();
         }
 
         public void Dispose()

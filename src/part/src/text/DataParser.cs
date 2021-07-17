@@ -267,7 +267,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out CliToken dst)
         {
-            var i = text.index(src,Chars.Colon);
+            var i = text.index(src, Chars.Colon);
             var outcome = Outcome.Empty;
             dst = CliToken.Empty;
             if(i != NotFound)

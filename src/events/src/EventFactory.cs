@@ -20,11 +20,6 @@ namespace Z0
 
         const string HandlerNotFound = "Handler for {0} not found";
 
-        public static EventFlow<S,T> flow<S,T>(S src, T dst)
-            where S : IInitialEvent<S>, new()
-            where T : ITerminalEvent<T>, new()
-                => new (src,dst);
-
         /// <summary>
         /// Creates a <see cref='BabbleEvent{T}'/> message
         /// </summary>
@@ -163,7 +158,6 @@ namespace Z0
         public static EmittedTableEvent emittedTable(WfStepId step, TableId table, FS.FilePath dst)
             => new EmittedTableEvent(step, table, dst);
 
-
         [Op, Closures(Closure)]
         public static EmittedTableEvent<T> emittedTable<T>(WfStepId step, FS.FilePath dst)
             where  T : struct, IRecord<T>
@@ -187,13 +181,9 @@ namespace Z0
             where H : IWfHost<H>, new()
                 => new RunningEvent<T>(host.StepId, data, ct);
 
-        [MethodImpl(Inline)]
-        public static RowEvent<T> row<T>(T data)
-            => new RowEvent<T>(data);
-
-        [MethodImpl(Inline)]
-        public static RowsEvent<T> rows<T>(T data)
-            => new RowsEvent<T>(data);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static DataEvent<T> data<T>(T data)
+            => new DataEvent<T>(data);
 
         /// <summary>
         /// Defines a <see cref='CreatedEvent{T}'/> event

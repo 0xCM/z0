@@ -9,7 +9,7 @@ namespace Z0.Asm
     using static RegClassCode;
     using static RegWidthCode;
 
-    public enum SysPtrRegKind : uint
+    public enum SysPtrRegKind : ushort
     {
         GDTR = r0 | SPTR << ClassField | W64 << WidthField,
 

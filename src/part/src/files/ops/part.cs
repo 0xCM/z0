@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
+    using static Root;
 
     partial struct FS
     {
@@ -14,7 +14,7 @@ namespace Z0
             if(i == NotFound)
                 return default;
             else
-                return ApiPartIdParser.single(TextTools.segment(src.Name.Text,0, i - 1));
+                return ApiPartIdParser.single(text.segment(src.Name.Text,0, i - 1));
         }
     }
 }

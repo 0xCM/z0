@@ -58,9 +58,6 @@ namespace Z0
 
         void RedirectEmissions(IWfEmissionLog dst);
 
-        IAppService AppService(Type host)
-            => WfRuntime.service(host, this);
-
         Assembly[] Components
             => Context.ApiParts.Components;
 
@@ -137,21 +134,6 @@ namespace Z0
             }
         }
 
-        bool Check<T>(Outcome<T> outcome, out T payload)
-        {
-            if(outcome.Fail)
-            {
-                Error(outcome.Message);
-                payload = default;
-                return false;
-            }
-            else
-            {
-                payload = outcome.Data;
-                return true;
-            }
-        }
-
         void Disposed()
         {
             if(Verbosity.IsBabble())
@@ -220,47 +202,14 @@ namespace Z0
             return Flow(data);
         }
 
-       void Row<T>(T data)
-            => Raise(EventFactory.row(data));
-
-
-        void Row(ReadOnlySpan<char> src)
-            => Row<string>(text.format(src));
-
-        void Row<T>(uint index, T data)
-            => Row(string.Format("{0:D4}: {1}", index, data));
-
-        void Row<T>(int index, T data)
-            => Row(string.Format("{0:D4}: {1}", index, data));
-
-        void Row<K,T>(uint index, K kind, T data)
-            => Row(string.Format("{0:D4}: {1,-12} | {2}", index, kind, data));
-
-        void Row<K,T>(int index, K kind, T data)
-            => Row(string.Format("{0:D4}: {1,-12} | {2}", index, kind, data));
-
-        void Rows<T>(T[] src)
-            => Rows(@readonly(src), EmptyString);
-
-        void Rows<T>(T[] src, string label)
-            => Rows(@readonly(src), label);
+        void Row<T>(T data)
+            => Raise(EventFactory.data(data));
 
         void Rows<T>(ReadOnlySpan<T> src)
-            => Rows(src, EmptyString);
-
-        void Rows<T>(ReadOnlySpan<T> src, string label)
         {
-            if(src.Length != 0)
-            {
-                var buffer = text.buffer();
-                var count = src.Length;
-                if(text.nonempty(label))
-                    buffer.AppendLineFormat("Rowset {0}", label);
-
-                for(var i=0; i<count; i++)
-                    buffer.AppendLine(skip(src,i));
-                Raise(EventFactory.rows(buffer.Emit()));
-            }
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                Raise(EventFactory.data(skip(src,i)));
         }
     }
 }

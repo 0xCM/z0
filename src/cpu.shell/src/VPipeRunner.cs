@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         static EventSignal signal(IWfRuntime wf)
-            => EventSignal.create(wf.EventSink, typeof(VPipeTests));
+            => EventSignals.signal(wf.EventSink, typeof(VPipeTests));
 
         [MethodImpl(Inline), Op]
         static VMap01 mapper()

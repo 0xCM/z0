@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines flag register classifiers
     /// </summary>
-    public enum FlagRegKind : uint
+    public enum FlagRegKind : ushort
     {
         /// <summary>
         /// Indicates the 16-bit FLAGS register

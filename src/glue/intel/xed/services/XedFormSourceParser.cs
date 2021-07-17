@@ -20,7 +20,7 @@ namespace Z0.Asm
         XedFormSourceParser(IEventSink sink, Span<TextLine> buffer, ushort count)
         {
             SummaryTarget = alloc<XedFormSource>(count);
-            Wf = EventSignal.create(sink, typeof(XedFormSourceParser));
+            Wf = EventSignals.signal(sink, typeof(XedFormSourceParser));
         }
 
         public ReadOnlySpan<XedFormSource> ParseSummaries(FS.FilePath src)

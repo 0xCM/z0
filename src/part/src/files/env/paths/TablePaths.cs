@@ -138,32 +138,14 @@ namespace Z0
             where T : struct, IRecord<T>
                 => FS.file(string.Format("{0}.{1}", TableId<T>(), part.Format()), ext ?? DefaultTableExt);
 
-        /// <summary>
-        /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}/{TableId}.{part}.{host}.{ext}
-        /// </summary>
-        /// <param name="host">The host uri</param>
-        /// <param name="ext">The file extension</param>
-        /// <typeparam name="T">The record type</typeparam>
         FS.FilePath Table<T>(ApiHostUri host, FS.FileExt? ext = null)
             where T : struct, IRecord<T>
                 => TableDir<T>(host.Part) + TableFile<T>(host, ext);
 
-        /// <summary>
-        /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}/{TableId}.{part}.{ext}
-        /// </summary>
-        /// <param name="part">The part id</param>
-        /// <typeparam name="T">The record type</typeparam>
         FS.FilePath Table<T>(PartId part, FS.FileExt? ext = null)
             where T : struct, IRecord<T>
                 => TableDir<T>() + FS.folder(part.Format()) + TableFile<T>(part, ext);
 
-        /// <summary>
-        /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}.{subject}/{TableId}.{part}.{host}.{ext}
-        /// </summary>
-        /// <param name="subject">The subject name</param>
-        /// <param name="host">The host uri</param>
-        /// <param name="ext">The file extension</param>
-        /// <typeparam name="T">The record type</typeparam>
         FS.FilePath Table<T>(string subject, ApiHostUri host, FS.FileExt? ext = null)
             where T : struct, IRecord<T>
                 => TableDir<T>(subject) + TableFile<T>(host, ext);
@@ -174,15 +156,8 @@ namespace Z0
         FS.FilePath Table<S>(FS.FolderPath dir, S subject)
             => dir + FS.file(subject.ToString(), DefaultTableExt);
 
-        FS.FolderPath IndexDir(Type t)
-            => IndexRoot() + FS.folder(TableId(t));
-
         FS.FolderPath IndexDir(string subject)
             => IndexRoot() + FS.folder(subject);
-
-        FS.FolderPath IndexDir<T>()
-            where T : struct, IRecord<T>
-                => IndexRoot() + FS.folder(TableId<T>());
 
         FS.FilePath IndexTable(string id)
             => IndexRoot() + FS.file(id, DefaultTableExt);
@@ -194,17 +169,9 @@ namespace Z0
             where T : struct, IRecord<T>
                 => IndexTable(typeof(T));
 
-        FS.FilePath IndexTable<T>(string discriminator)
-            where T : struct, IRecord<T>
-                => IndexDir(typeof(T)) + FS.file(TableId<T>() + "." + discriminator, DefaultTableExt);
-
         FS.FileName TableFileName<T>(string id)
             where T : struct, IRecord<T>
                 => FS.file(string.Format("{0}.{1}", TableId<T>(), id), DefaultTableExt);
-
-        FS.FilePath TablePath<T>()
-            where T : struct, IRecord<T>
-                => TableRoot() + FS.file(TableId<T>(), DefaultTableExt);
 
         FS.FileExt DefaultTableExt
              => FS.Csv;
@@ -218,14 +185,6 @@ namespace Z0
 
         FS.FolderPath AppTableDir(Type t)
             => AppTableRoot + TableFolder(t);
-
-        FS.FilePath AppTablePath<T>(string subject, FS.FileExt? ext = null)
-            where T : struct, IRecord<T>
-        {
-            var id = TableId<T>();
-            var dir = AppTableDir<T>();
-            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? FS.Csv);
-        }
 
         FS.FilePath AppTablePath<T>(FS.FileExt? ext = null)
             where T : struct, IRecord<T>

@@ -10,43 +10,52 @@ namespace Z0.Asm
         public enum PrefixToken : byte
         {
             [Symbol("66")]
-            x66 = 0,
+            x66,
 
             [Symbol("F2")]
-            F2 = 1,
+            F2,
 
             [Symbol("F3")]
-            F3 = 2,
+            F3,
 
             [Symbol("0F")]
-            x0F = 3,
+            x0F,
 
             [Symbol("0F38")]
-            x0F38 = 4,
+            x0F38,
 
             [Symbol("VEX")]
-            VEX = 5,
+            VEX,
 
             [Symbol("REX")]
-            Rex = 6,
+            Rex,
 
             [Symbol("REX.W")]
-            RexW = 7,
+            RexW,
+
+            [Symbol("REX.R", "Modifies the ModR/M reg field when that field encodes a GPR, SSE, control or debug register. REX.R is ignored when ModR/M specifies other registers or defines an extended opcode")]
+            RexR,
+
+            [Symbol("REX.X", "Modifies the SIB index field")]
+            RexX,
+
+            [Symbol("REX.B", "Modifies the base in the ModR/M r/m field or SIB base field; or it modifies the opcode reg field used for accessing GPRs")]
+            RexB,
 
             [Symbol("LZ")]
-            LZ = 8,
+            LZ,
 
             [Symbol("LIG")]
-            LIG = 9,
+            LIG,
 
             [Symbol("WIG")]
-            WIG = 10,
+            WIG,
 
             [Symbol("W0")]
-            W0 = 11,
+            W0,
 
             [Symbol("W1")]
-            W1 = 12,
+            W1,
         }
 
         [SymSource]

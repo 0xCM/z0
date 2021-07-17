@@ -13,16 +13,38 @@ namespace Z0
 
     partial class CliEmitter
     {
-        public FS.FilePath AssemblyRefsPath()
-            => Db.IndexTable<AssemblyRefInfo>();
-
         public FS.FilePath MemberRefsPath(Assembly src)
             => Db.Table<MemberRefInfo>(src.GetSimpleName());
 
-        public void EmitAssemblyRefs(FS.Files src)
-            => EmitAssemblyRefs(src, AssemblyRefsPath());
+        public void EmitAssemblyRefs(FS.Files src, FS.FolderPath dst)
+            => EmitAssemblyRefs(src, Tables.path<AssemblyRefInfo>(dst));
 
-        public void EmitAssemblyRefs(FS.Files input, FS.FilePath dst)
+        public void EmitAssemblyRefs()
+        {
+            var dst = Db.IndexRoot();
+            var src = Wf.ApiCatalog.Components.View;
+            EmitAssemblyRefs(src, dst);
+        }
+
+        public void EmitAssemblyRefs(ReadOnlySpan<Assembly> src, FS.FilePath dst)
+        {
+            var count = src.Length;
+            var counter = 0u;
+            var flow = Wf.EmittingTable<AssemblyRefInfo>(dst);
+            var formatter = Tables.formatter<AssemblyRefInfo>(48);
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+                counter += EmitAssemblyRefs(skip(src,i), formatter, writer);
+            Wf.EmittedTable(flow, counter);
+        }
+
+        public void EmitAssemblyRefs(ReadOnlySpan<Assembly> src, FS.FolderPath dir)
+        {
+            EmitAssemblyRefs(src, Tables.path<AssemblyRefInfo>(dir));
+        }
+
+        void EmitAssemblyRefs(FS.Files input, FS.FilePath dst)
         {
             var sources = input.View;
             var srcCount = sources.Length;
@@ -58,21 +80,6 @@ namespace Z0
 
             }
             return counter;
-        }
-
-        public void EmitAssemblyRefs()
-        {
-            var components = Wf.ApiCatalog.Components.View;
-            var count = components.Length;
-            var counter = 0u;
-            var dst = AssemblyRefsPath();
-            var flow = Wf.EmittingTable<AssemblyRefInfo>(dst);
-            var formatter = Tables.formatter<AssemblyRefInfo>(48);
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-                counter += EmitAssemblyRefs(skip(components,i), formatter, writer);
-            Wf.EmittedTable(flow, counter);
         }
     }
 }

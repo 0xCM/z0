@@ -13,7 +13,7 @@ namespace Z0.Asm
     partial struct IntelSdm
     {
         [MethodImpl(Inline), Op]
-        public static TableColumn column(string label, ColumnKind kind)
+        public static TableColumn column(string label, ColumnType kind)
             => new TableColumn(label.Trim(), kind, (ushort)label.Length);
 
         [Op]
@@ -22,7 +22,7 @@ namespace Z0.Asm
             var kinds = Symbols.index<ColumnKind>();
             var result = kinds.Lookup(label.Trim(), out var sym);
             var kind = result ? sym.Kind : ColumnKind.None;
-            return column(label, kind);
+            return column(label, label);
         }
 
         public static Index<TableColumn> columns(ReadOnlySpan<string> src)

@@ -11,7 +11,7 @@ namespace Z0
     using static core;
     using static Rules;
 
-    [ApiHost("text.rules")]
+    [ApiHost]
     public readonly partial struct TextRules
     {
         const NumericKind Closure = UnsignedInts;
@@ -23,8 +23,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Fence<string> fence(string left, string right)
             => Rules.fence(left,right);
-
-        public const StringComparison InvariantCulture = StringComparison.InvariantCulture;
 
         public static bool eval(string src, Adjacent<char, OneOf<char>> rule, out Adjacent<char> dst)
         {

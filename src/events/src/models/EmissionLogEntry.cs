@@ -33,5 +33,4 @@ namespace Z0
 
         Emitted = 2
     }
-
 }

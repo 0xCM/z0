@@ -20,35 +20,20 @@ namespace Z0
         FS.FolderPath CmdLogRoot()
             => LogRoot() + FS.folder(commands);
 
-        FS.FolderPath CmdLogRoot(FS.FolderPath root)
-            => LogRoot(root) + FS.folder(commands);
-
         FS.FolderPath BuildLogRoot()
             => LogRoot() + FS.folder(dotbuild);
-
-        FS.FolderPath BuildLogRoot(FS.FolderPath root)
-            => LogRoot(root) + FS.folder(dotbuild);
 
         FS.FilePath BuildLogPath(FS.FileName src)
             => BuildLogRoot() + src;
 
-        FS.FilePath BuildLogPath(FS.FolderPath root, FS.FileName src)
-            => BuildLogRoot(root) + src;
-
         FS.FolderPath AppLogRoot()
             => LogRoot() + FS.folder(apps);
-
-        FS.FolderPath AppLogRoot(FS.FolderPath root)
-            => LogRoot(root) + FS.folder(apps);
 
         FS.FolderPath AppLogDir()
             => AppLogRoot() + FS.folder(AppName);
 
         FS.FolderPath AppLogDir(string id)
             => AppLogDir() + FS.folder(id);
-
-        FS.FolderPath AppLogDir(FS.FolderPath root)
-            => AppLogRoot(root) + FS.folder(AppName);
 
         FS.FolderPath StepLogRoot()
             => LogRoot() + FS.folder(steps);
@@ -57,7 +42,7 @@ namespace Z0
             => AppLogDir() + FS.file(id, FS.Log);
 
         FS.FilePath AppLog(string id, FS.FileExt ext)
-            => AppLogDir() + FS.file(id,ext);
+            => AppLogDir() + FS.file(id, ext);
 
         FS.FilePath CmdLog(ScriptId id)
             => CmdLogRoot() + (id.IsDiscriminated
@@ -78,11 +63,5 @@ namespace Z0
 
         FS.FilePath StepLogPath<T>(WfStepId step, T subject, FS.FileExt ext)
             => StepLogRoot() + FS.file(string.Format("{0}.{1}", step.Format(), subject), ext);
-
-        StepLog StepLog(WfStepId step, FS.FileExt ext)
-            => new StepLog(StepLogPath(step,ext));
-
-        StepLog StepLog<T>(WfStepId step, T subject, FS.FileExt ext)
-            => new StepLog(StepLogPath(step,subject,ext));
     }
 }

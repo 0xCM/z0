@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Concurrent;
-    using System.Diagnostics;
 
     using Z0.Asm;
 
@@ -24,7 +23,7 @@ namespace Z0
 
         ApiHexPacks HexPacks;
 
-        ApiExtractChannel Receivers;
+        ApiExtractChannel Channel;
 
         ConcurrentBag<ApiHostDataset> DatasetReceiver;
 
@@ -57,7 +56,7 @@ namespace Z0
             Resolver = Wf.ApiResolver();
             Decoder = Wf.AsmDecoder();
             HexPacks = Wf.ApiHexPacks();
-            Receivers = new ApiExtractChannel();
+            Channel = new ApiExtractChannel();
             DatasetReceiver = new();
         }
 
@@ -97,21 +96,6 @@ namespace Z0
         FS.FolderPath SegDir
             => Db.TableDir("segments");
 
-        FS.FolderPath BinDir
-            => Db.TableDir("image.bin");
-
-        void RunExtractor(ReadOnlySpan<PartId> src)
-        {
-            var s0 = LogSegments(0);
-            var resolved = Resolver.ResolveParts(src);
-            var methods = Resolver.LogResolutions(resolved, SegDir);
-            var regions = LogRegions(1);
-            var s1 = LogSegments(1, regions);
-            var locator = Wf.ApiSegmentLocator();
-            var segments = locator.LocateSegments(s1, methods, SegDir);
-            Wf.SegmentTraverser().Traverse(segments, BinDir);
-        }
-
         ApiCollection CollectAll()
         {
             var collection = new ApiCollection();
@@ -121,9 +105,9 @@ namespace Z0
 
         internal ApiCollection Run(ApiExtractChannel receivers, IApiPack pack)
         {
-            Receivers = receivers;
+            Channel = receivers;
             Paths = ApiPackArchive.create(pack.Root);
-            RedirectEmissions("extractor", pack.Root);
+            RedirectEmissions("capture", pack.Root);
             RunWorkflow(pack);
             return CollectAll();
         }

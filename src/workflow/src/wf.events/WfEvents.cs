@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     readonly struct WfEvents
@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         internal static EventSignal signal(IWfRuntime wf)
-            => EventSignal.create(wf.EventSink, wf.Host, wf.Ct);
+            => EventSignals.signal(wf.EventSink, wf.Host);
 
         [Op]
         public static void format(ErrorEvent<Exception> error, StringBuilder dst)

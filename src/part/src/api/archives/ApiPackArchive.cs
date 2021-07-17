@@ -99,8 +99,11 @@ namespace Z0
         public FS.FilePath ThumbprintPath()
             => IndexRoot() + FS.file("thumbprints", FS.Asm);
 
+        // public FS.FilePath ApiCatalogPath()
+        //     => ContextRoot().Files(FS.Csv).Where(x => x.FileName.StartsWith("api.catalog")).Single();
+
         public FS.FilePath ApiCatalogPath()
-            => ContextRoot().Files(FS.Csv).Where(x => x.FileName.StartsWith("api.catalog")).Single();
+            => TableDir() + FS.file(TableId.identify<ApiCatalogEntry>().Format(), FS.Csv);
 
         public FS.FilePath ApiCatalogPath(Timestamp ts)
             => ContextRoot() + FS.file(string.Format("{0}.{1}", TableId.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);

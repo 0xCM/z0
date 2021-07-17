@@ -17,7 +17,7 @@ namespace Z0
     {
         [Op]
         public static string name(IFunc f)
-            => TextTools.ifempty(f.GetType().Tag<OpKindAttribute>()
+            => text.ifempty(f.GetType().Tag<OpKindAttribute>()
                    .MapValueOrDefault(a => f.GetType().DisplayName(), f.GetType().DisplayName()),  f.GetType().DisplayName());
 
         [MethodImpl(Inline), Op]

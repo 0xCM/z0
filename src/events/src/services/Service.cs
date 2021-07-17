@@ -41,14 +41,14 @@ namespace Z0
             Context = ctx;
             Env = ctx.Env;
             Paths = new EnvPaths(Env);
-            Signal = EventSignal.create(ctx.EventSink, typeof(H));
+            Signal = EventSignals.signal(ctx.EventSink, typeof(H));
             Initialized();
         }
 
         protected virtual void Initialized() {}
 
 
-        protected RowEvent<T> Row<T>(T src)
+        protected DataEvent<T> Row<T>(T src)
         {
             return Signal.Row(src);
         }

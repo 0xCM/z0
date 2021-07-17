@@ -22,13 +22,12 @@ namespace Z0.Asm
             options.EmitCliBlobs = false;
             options.EmitCliConstants = false;
             options.EmitCliStrings = false;
-            options.EmitAssemblyRefs = false;
+            options.EmitAssemblyRefs = true;
+            options.EmitApiMetadump = false;
 
-
-            var blocks = Wf.ApiHex().ReadBlocks().Storage;
-            var partitioned = CodeBlocks.hosted(@readonly(blocks));
-            var sorted = blocks.ToSortedSpan();
-
+            var blocks = Wf.ApiHex().ReadBlocks();
+            var partitioned = CodeBlocks.hosted(blocks.View);
+            var sorted = blocks.Sorted();
             var archive = Wf.ApiPacks().Archive();
 
             if(options.EmitHexIndex)
@@ -38,7 +37,7 @@ namespace Z0.Asm
                 Wf.ApiHexPacks().Emit(sorted, archive.TablePath<HexPacked>());
 
             if(options.EmitResBytes)
-                Wf.ResPackEmitter().Emit(blocks, archive.CodeGenDir("respack"));
+                Wf.ResPackEmitter().Emit(blocks.View, archive.CodeGenDir("respack"));
 
             var catalogs = Wf.ApiCatalogs();
 
@@ -74,7 +73,7 @@ namespace Z0.Asm
 
             var cli = Wf.CliEmitter();
             if(options.EmitAssemblyRefs)
-                cli.EmitAssemblyRefs();
+                cli.EmitAssemblyRefs(Wf.Components, archive.TablePath<AssemblyRefInfo>());
 
             if(options.EmitFieldMetadata)
                 cli.EmitFieldMetadata();
@@ -83,7 +82,7 @@ namespace Z0.Asm
                 cli.EmitApiMetadump(archive.Dumps("cli.metadata"));
 
             if(options.EmitSectionHeaders)
-                cli.EmitSectionHeaders();
+                cli.EmitSectionHeaders(archive.TableDir());
 
             if(options.EmitMsilMetadata)
                 cli.EmitMsilMetadata();
@@ -95,7 +94,7 @@ namespace Z0.Asm
             }
 
             if(options.EmitCliConstants)
-                cli.EmitConstants();
+                cli.EmitConstants(archive.TableDir());
 
             if(options.EmitCliBlobs)
                 cli.EmitBlobs();

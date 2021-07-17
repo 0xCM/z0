@@ -38,7 +38,7 @@ namespace Z0
                     break;
                 }
             }
-            return found != -1 ? sys.substring(src, 0, found) : src;
+            return found != -1 ? text.substring(src, 0, found) : src;
         }
     }
 }

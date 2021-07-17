@@ -19,8 +19,6 @@ namespace Z0
 
         readonly ConcurrentQueue<IWfEvent> Storage = new();
 
-        readonly CorrelationToken Ct = CorrelationToken.create(controller().Id());
-
         readonly Action<IWfEvent> Receiver;
 
         readonly EventSignal Signal;
@@ -31,21 +29,21 @@ namespace Z0
         {
             Host = host ?? GetType();
             Receiver = e => {};
-            Signal = EventSignal.create(this, Host, Ct);
+            Signal = EventSignals.signal(this, Host);
         }
 
         internal EventQueue(Action<IWfEvent> receiver, Type host = null)
         {
             Host = host ?? GetType();
             Receiver = receiver;
-            Signal = EventSignal.create(this, Host, Ct);
+            Signal = EventSignals.signal(this, Host);
         }
 
         public void Deposit(IWfEvent e)
         {
             if(e != null)
             {
-                root.run(() => Receiver.Invoke(e));
+                run(() => Receiver.Invoke(e));
                 Storage.Enqueue(e);
             }
             else
@@ -62,17 +60,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Emit(out IWfEvent e)
             => Storage.TryDequeue(out e);
-
-        public void Babble<T>(T content)
-            => Deposit(EventFactory.babble(Host, content));
-
-        public void Status<T>(T content)
-            => Deposit(EventFactory.status(Host, content));
-
-        public void Warn<T>(T content)
-            => Deposit(EventFactory.warn(Host, content));
-
-        public void Error<T>(T content, EventOrigin origin)
-            => Deposit(EventFactory.error(Host, content, origin));
     }
 }

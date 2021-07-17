@@ -12,7 +12,7 @@ namespace Z0
 
     partial class text
     {
-       [Op]
+        [Op]
         public static string replace(string src, char a, char b)
             => src.Replace(a,b);
 
@@ -25,15 +25,17 @@ namespace Z0
                     seek(src,i) = b;
         }
 
-        [MethodImpl(Inline), Op]
-        public static void replace(ReadOnlySpan<char> src, char a, char b, Span<char> dst)
+        [Op]
+        public static ReadOnlySpan<char> replace(ReadOnlySpan<char> src, char a, char b)
         {
             var count = src.Length;
+            var dst = span<char>(count);
             for(var i=0; i<count; i++)
             {
                 ref readonly var c = ref skip(src,i);
                 seek(dst,i) = equals(c,a) ? b : c;
             }
+            return dst;
         }
     }
 }

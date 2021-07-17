@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines classifiers for <see cref='GP'/> registers of width <see cref='W64'/>
     /// </summary>
-    public enum Gp64Kind : uint
+    public enum Gp64Kind : ushort
     {
         RAX = r0 | (GP << ClassField) | (W64 << WidthField),
 

@@ -8,34 +8,54 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     public readonly struct AsciGrid
     {
-        readonly AsciSequence Data;
+        [Op, Closures(UInt8k)]
+        public static ReadOnlySpan<byte> row<T>(in AsciGrid<T> src, ushort index)
+            where T : unmanaged
+        {
+            var offset = index*src.RowWidth;
+            return slice(src.Rows, offset, src.RowWidth);
+        }
 
-        public uint RowCount {get;}
+        [Op, Closures(UInt8k)]
+        public static ReadOnlySpan<byte> row(in AsciGrid src, ushort index)
+        {
+            var offset = index*src.RowWidth;
+            return slice(src.Rows, offset, src.RowWidth);
+        }
+
+        readonly AsciSequence _Data;
 
         public ushort RowWidth {get;}
 
-        public AsciGrid(AsciSequence data, uint count, ushort width)
+        public ushort RowCount
         {
-            Data = data;
-            RowCount = count;
+            [MethodImpl(Inline)]
+            get => (ushort)(_Data.Length/RowWidth);
+        }
+
+        [MethodImpl(Inline)]
+        public AsciGrid(AsciSequence src, ushort width)
+        {
+            _Data = src;
             RowWidth = width;
         }
 
         public ReadOnlySpan<byte> Rows
         {
             [MethodImpl(Inline)]
-            get => Data.View;
+            get => _Data.View;
         }
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Row(ushort index)
-            => text.row(this,index);
+            => row(this, index);
 
         public string Format()
-            => Data.Format();
+            => _Data.Format();
 
         public override string ToString()
             => Format();

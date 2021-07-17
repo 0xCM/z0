@@ -20,7 +20,7 @@ namespace Z0.Asm
                 ref readonly var member = ref skip(members,j);
                 var name = member.Name;
                 var tag = member.Definition.Tag<SymbolAttribute>();
-                var symbol = TextTools.ifempty(tag.MapValueOrDefault(t => t.Symbol, name),name);
+                var symbol = text.ifempty(tag.MapValueOrDefault(t => t.Symbol, name),name);
                 var func = PublicOneLineFunc(String(), name, Empty(), RP.enquote(symbol));
                 dst.IndentLine(margin, func);
                 dst.AppendLine();

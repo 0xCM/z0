@@ -44,21 +44,6 @@ namespace Z0.Asm
             }
         }
 
-
-        public ListFilesCmd EmitFileListCmdSample()
-        {
-            var cmd = new ListFilesCmd();
-            cmd.ListName = "tests";
-            cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\windows.x64.Debug");
-            cmd.TargetPath = Db.IndexTable("clrtests");
-            cmd.FileUriMode = true;
-            cmd.Extensions = array(FS.Cmd);
-            return cmd;
-        }
-
-        CmdResult EmitFileList()
-            => Wf.Router.Dispatch(EmitFileListCmdSample());
-
         void RenderJmp()
         {
             var code = AsmMnemonicCode.JMP;

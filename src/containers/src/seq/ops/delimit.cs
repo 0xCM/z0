@@ -34,6 +34,6 @@ namespace Z0
 
         [Op, Closures(Closure)]
         static string unspaced<T>(ReadOnlySpan<T> src, char delimiter, int pad)
-            => TextTools.delimit(src, delimiter, pad,false);
+            => text.delimit(src, delimiter, pad,false);
     }
 }

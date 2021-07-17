@@ -113,7 +113,7 @@ namespace Z0
         {
             var dst = CharBlock32.Null;
             decode(src, ref dst.First);
-            var length = TextTools.index(dst, '\0');
+            var length = text.index(dst.Data, '\0');
             if(length == NotFound)
                 return dst.Data;
             else

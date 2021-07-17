@@ -31,15 +31,14 @@ namespace Z0
         public ApiCodeBlocks ReadBlocks()
             => ReadBlocks(Db.ParsedExtractPaths());
 
-        public SortedSpan<ApiCodeBlock> ReadBlocks(FS.FolderPath root)
-            => ReadBlocks(Db.ParsedExtractPaths(root)).Storage.ToSortedSpan();
+        public ApiCodeBlocks ReadBlocks(FS.FolderPath src)
+            => ReadBlocks(Db.ParsedExtractPaths(src));
 
         [Op]
         ApiCodeBlock LoadBlock(ApiHexRow src)
         {
             if(src.Uri.IsEmpty)
                 Wf.Warn(string.Format("The operation uri for method based at {0} is empty", src.Address));
-
             return new ApiCodeBlock(src.Address, src.Uri, src.Data);
         }
 
@@ -170,7 +169,7 @@ namespace Z0
                 return content;
             }
             else
-                return sys.empty<ApiHexRow>();
+                return array<ApiHexRow>();
         }
 
         [Op]
@@ -187,7 +186,7 @@ namespace Z0
                 return rows;
             }
             else
-                return sys.empty<ApiHexRow>();
+                return array<ApiHexRow>();
         }
 
         [Op]
@@ -215,7 +214,7 @@ namespace Z0
         {
             var data = @readonly(src.ReadLines().Storage.Skip(1));
             var count = data.Length;
-            var buffer = root.list<ApiHexRow>(count);
+            var buffer = list<ApiHexRow>(count);
             var j=0;
             for(var i=0; i<count; i++)
             {
@@ -268,22 +267,35 @@ namespace Z0
         }
 
         [Op]
-        public Index<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src)
+        public ReadOnlySpan<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src)
         {
             var dst = Db.IndexFile(ApiHexIndexRow.TableId);
             return EmitIndex(src, dst);
         }
 
         [Op]
-        public Index<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src, FS.FilePath dst)
+        public ReadOnlySpan<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src, FS.FilePath dst)
+        {
+            Array.Sort(src.Storage);
+            return EmitIndex(Spans.sorted(src.View), dst);
+        }
+
+        [Op]
+        public ReadOnlySpan<ApiHexIndexRow> EmitIndex(ApiCodeBlocks src, FS.FilePath dst)
+        {
+            return EmitIndex(Spans.sorted(src.View), dst);
+        }
+
+        [Op]
+        ReadOnlySpan<ApiHexIndexRow> EmitIndex(SortedReadOnlySpan<ApiCodeBlock> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<ApiHexIndexRow>(dst);
-            Array.Sort(src.Storage);
             var blocks = src.View;
             var count = blocks.Length;
-            var buffer = sys.alloc<ApiHexIndexRow>(count);
+            var buffer = alloc<ApiHexIndexRow>(count);
             var target = span(buffer);
-            using var emitter = Tables.emitter<ApiHexIndexRow>(sys.array<byte>(10, 16, 20, 20, 20, 120), dst);
+            var parts = PartNames.lookup();
+            using var emitter = Tables.emitter<ApiHexIndexRow>(array<byte>(10, 16, 20, 20, 20, 120), dst);
             emitter.EmitHeader();
             for(var i=0u; i<count; i++)
             {
@@ -291,7 +303,8 @@ namespace Z0
                 ref var record = ref seek(target, i);
                 record.Seqence = i;
                 record.Address = block.BaseAddress;
-                record.Component = block.OpUri.Part.Format();
+                parts.TryGetValue(block.OpUri.Part, out var name);
+                record.Component = name.IsEmpty ? block.OpUri.Part.Format() : name.Format();
                 record.HostName = block.OpUri.Host.HostName;
                 record.MethodName = block.OpId.Name;
                 record.Uri = block.OpUri;

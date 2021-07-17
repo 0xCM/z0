@@ -36,21 +36,21 @@ namespace Z0
         public static string after(string src, char match)
         {
             var i = src.IndexOf(match);
-            return i != NotFound ? sys.substring(src, i + 1) : EmptyString;
+            return i != NotFound ? text.substring(src, i + 1) : EmptyString;
         }
 
         [Op]
         public static string after(string src, string match)
         {
             var i = src.IndexOf(match);
-            return i != -1 ? sys.substring(src, i + match.Length) : EmptyString;
+            return i != -1 ? text.substring(src, i + match.Length) : EmptyString;
         }
 
         [Op]
         public static bool after(string src, string match, out string result)
         {
             var i = src.IndexOf(match);
-            result = i == NotFound ? EmptyString : sys.substring(src, i + match.Length);
+            result = i == NotFound ? EmptyString : text.substring(src, i + match.Length);
             return i != NotFound;
         }
     }

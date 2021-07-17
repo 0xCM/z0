@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Classifies the accessible control registers
     /// </summary>
-    public enum ControlRegKind : uint
+    public enum ControlRegKind : ushort
     {
         CR0 = r0 | CR << ClassField | W64 << WidthField,
 

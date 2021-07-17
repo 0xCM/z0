@@ -11,6 +11,8 @@ namespace Z0
     using static Rules;
     using static core;
 
+    using SQ = SymbolicQuery;
+
     public readonly struct FenceParser : IParseFunction<string>
     {
         /// <summary>
@@ -23,9 +25,9 @@ namespace Z0
         public static bool unfence(string src, Fence<char> fence, out string dst)
         {
             dst = EmptyString;
-            if(!SymbolicQuery.blank(src) && SymbolicQuery.fenced(src, fence, out var location))
+            if(!SQ.blank(src) && SQ.fenced(src, fence, out var location))
             {
-                dst = TextTools.segment(src, location.Left + 1,  location.Right - 1);
+                dst = text.segment(src, location.Left + 1,  location.Right - 1);
                 return true;
             }
             return false;
@@ -40,12 +42,12 @@ namespace Z0
         [Op]
         public static string unfence(string src, Fence<string> fence)
         {
-            (var i0, var i1) = SymbolicQuery.indices(src, fence);
+            (var i0, var i1) = SQ.indices(src, fence);
             if(i0 != NotFound && i1 != NotFound &&(i0 < i1))
             {
                 var start = i0 + fence.Left.Length;
                 var length = i1 - start;
-                return TextTools.slice(src, start, length);
+                return text.slice(src, start, length);
             }
 
             return EmptyString;

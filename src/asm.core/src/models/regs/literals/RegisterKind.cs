@@ -28,11 +28,8 @@ namespace Z0.Asm
     using TR = TestRegKind;
     using SPTR = SysPtrRegKind;
 
-    /// <summary>
-    /// [RegisterCode:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]
-    /// </summary>
     [SymSource]
-    public enum RegKind : uint
+    public enum RegKind : ushort
     {
         None = 0,
 

@@ -7,7 +7,7 @@ namespace Z0.Asm
     partial class AsmCmdService
     {
         [CmdOp(".asm")]
-        Outcome ToolChain(CmdArgs args)
+        Outcome Assemble(CmdArgs args)
         {
             var count = args.Length;
             if(count ==0)
@@ -23,8 +23,8 @@ namespace Z0.Asm
             if(result)
             {
                 var path = Workspace.BinPath(id);
-                var data = path.ReadBytes().ToReadOnlySpan();
-                NativeLoad(data);
+                _Assembled = path.ReadBytes();
+                RoutineName = id;
             }
             return result;
         }

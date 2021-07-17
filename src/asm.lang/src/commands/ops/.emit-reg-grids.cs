@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-       [CmdOp(".emit-reg-grids")]
+        [CmdOp(".emit-reg-grids")]
         Outcome EmitRegGrids(CmdArgs args)
         {
             var dst = Workspace.Table("regs",FS.Csv);
@@ -17,7 +17,7 @@ namespace Z0.Asm
             var flow = Wf.EmittingFile(dst);
             var grids = Wf.AsmRegGrids();
             using var writer = dst.AsciWriter();
-            counter += grids.Emit(grids.Grid(GP, w8),writer);
+            counter += grids.Emit(grids.Grid(GP, w8), writer);
             counter += grids.Emit(grids.Grid(GP, w8,true), writer);
             counter += grids.Emit(grids.Grid(GP, w16),writer);
             counter += grids.Emit(grids.Grid(GP, w32),writer);

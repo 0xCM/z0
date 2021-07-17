@@ -12,24 +12,13 @@ namespace Z0
 
     public class EventSignal
     {
-        [MethodImpl(Inline)]
-        public static EventSignal create(IEventSink sink, WfHost host, CorrelationToken ct = default)
-            => new EventSignal(sink, host, ct);
-
-        [MethodImpl(Inline)]
-        public static EventSignal create(IEventSink sink, Type host, CorrelationToken ct = default)
-            => new EventSignal(sink, host, ct);
-
         readonly IEventSink Sink;
-
-        readonly CorrelationToken Ct;
 
         readonly WfHost Source;
 
         [MethodImpl(Inline)]
-        EventSignal(IEventSink sink, WfHost src, CorrelationToken ct)
+        internal EventSignal(IEventSink sink, WfHost src)
         {
-            Ct = ct;
             Source = src;
             Sink = sink;
         }
@@ -104,11 +93,19 @@ namespace Z0
              return e;
         }
 
-        public void Creating<T>(T data)
-            => Raise(creating(Source, data));
+        public CreatingEvent<T> Creating<T>(T data)
+        {
+            var e = creating(Source, data);
+            Raise(e);
+            return e;
+        }
 
-        public void Created<T>(T data)
-            => Raise(created(Source, data));
+        public CreatedEvent<T> Created<T>(T data)
+        {
+            var e = created(Source, data);
+            Raise(e);
+            return e;
+        }
 
         public EmittingTableEvent EmittingTable(Type type, FS.FilePath dst)
         {
@@ -141,13 +138,19 @@ namespace Z0
             return e;
         }
 
-        public void EmittedTable(Type type, Count count, FS.FilePath dst)
+        public EmittedTableEvent EmittedTable(Type type, Count count, FS.FilePath dst)
         {
-            Raise(emittedTable(Source, TableId.identify(type), count, dst));
+            var e = emittedTable(Source, TableId.identify(type), count, dst);
+            Raise(e);
+            return e;
         }
 
-        public void EmittedTable(Type type, FS.FilePath dst)
-            => Raise(emittedTable(Source, TableId.identify(type), dst));
+        public EmittedTableEvent EmittedTable(Type type, FS.FilePath dst)
+        {
+            var e = emittedTable(Source, TableId.identify(type), dst);
+            Raise(e);
+            return e;
+        }
 
         public EmittingFileEvent EmittingFile(FS.FilePath dst)
         {
@@ -259,9 +262,9 @@ namespace Z0
         public WarnEvent<T> Warn<T>(T content)
             => Warn(Source, content);
 
-        public RowEvent<T> Row<T>(T data)
+        public DataEvent<T> Row<T>(T data)
         {
-            var e = row(data);
+            var e = EventFactory.data(data);
             Raise(e);
             return e;
         }

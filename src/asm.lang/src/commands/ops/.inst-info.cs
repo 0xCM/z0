@@ -82,10 +82,8 @@ namespace Z0.Asm
                     }
                     else
                     {
-                        var header = IntelSdm.header(tablekind, labels);
-                        cols = IntelSdm.columns(header.Labels);
-                        table.WithHeader(header);
-                        Write(header.Format());
+                        cols = IntelSdm.columns(labels);
+                        Write(text.intersperse(labels, Chars.Pipe));
                         parsingrows = true;
                     }
                 }

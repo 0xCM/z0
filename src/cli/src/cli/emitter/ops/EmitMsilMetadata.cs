@@ -23,14 +23,6 @@ namespace Z0
             return total;
         }
 
-        public void ClearMsilMetadata()
-        {
-            MsilDir().Clear();
-        }
-
-        public FS.FolderPath MsilDir()
-            => Db.TableDir<MsilMetadata>();
-
         public FS.FilePath MsilPath(Assembly src)
             => Db.Table<MsilMetadata>(src.GetSimpleName());
 

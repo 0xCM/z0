@@ -19,7 +19,7 @@ namespace Z0
             if(count == 0)
                 return 0;
             var dst = Paths.AsmPath(host);
-            var flow = Wf.EmittingFile(dst);
+            var flow = EmittingFile(dst);
             using var writer = dst.Writer();
             for(var i=0; i<count; i++)
             {
@@ -31,7 +31,7 @@ namespace Z0
                 writer.Write(formatted);
                 counter++;
             }
-            Wf.EmittedFile(flow, counter);
+            EmittedFile(flow, counter);
 
             return counter;
         }

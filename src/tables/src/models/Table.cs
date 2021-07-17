@@ -4,15 +4,31 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class Table
-    {
-        public TableId Id {get;}
+    using System;
+    using System.Runtime.CompilerServices;
 
-        protected Table(TableId id)
+    using static Root;
+
+    public readonly struct Table
+    {
+        readonly Index<TableRow> Data;
+
+        [MethodImpl(Inline)]
+        public Table(TableRow[] rows)
         {
-            Id = id;
+            Data = rows;
         }
 
-        public abstract uint RowCount {get;}
+        public Span<TableRow> Rows
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
+        public uint RowCount
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
     }
 }

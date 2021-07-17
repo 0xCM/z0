@@ -33,7 +33,6 @@ namespace Z0
             AsciBytes = Context.AsciBytes();
         }
 
-
         public void EmitAsciBytes(uint indent, Identifier name, string data, ITextBuffer dst)
             => Render(indent, AsciBytes.DefineAsciBytes(name,data), dst);
 

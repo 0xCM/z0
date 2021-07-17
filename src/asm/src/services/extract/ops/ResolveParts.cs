@@ -22,7 +22,7 @@ namespace Z0
                 ref readonly var part = ref skip(parts,i);
                 var resolution = Resolver.ResolvePart(part);
                 seek(dst,i) = resolution;
-                Receivers.Raise(new PartResolvedEvent(resolution));
+                Channel.Raise(new PartResolvedEvent(resolution));
             }
         }
     }

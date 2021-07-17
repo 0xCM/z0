@@ -36,5 +36,9 @@ namespace Z0
         [Op]
         public static ApiHexArchive ApiHexArchive(this IWfRuntime wf)
             => Svc.ApiHexArchive.create(wf);
+
+        [Op]
+        public static AsciBytes AsciBytes(this IServiceContext context)
+            => Svc.AsciBytes.create(context);
     }
 }

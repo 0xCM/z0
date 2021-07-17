@@ -37,7 +37,7 @@ namespace Z0
         public void CreateLink(Timestamp ts)
         {
             var outcome = Archives.Link(ts);
-            if(Wf.Check(outcome, out var data))
+            if(Check(outcome, out var data))
                 Wf.Status(string.Format("Created symlink {0} -> {1}", data.Source, data.Target));
         }
 

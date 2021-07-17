@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     using Z0.Asm;
 
@@ -58,29 +57,11 @@ namespace Z0
         {
             var stack = StackMachines.create(Pow2.T08);
             stack.Push(2);
-            Queue.Status(stack.state());
+            Queue.Deposit(EventFactory.data(stack.state()));
             stack.Push(4);
-            Queue.Status(stack.state());
+            Queue.Deposit(EventFactory.data(stack.state()));
             stack.Push(6);
-            Queue.Status(stack.state());
-        }
-
-        void LoadBlocks()
-        {
-            var hex = Wf.ApiHexPacks();
-            var packs = hex.LoadParsed(AssetRoot);
-            // var entries = packs.Entries;
-            // var outcount = entries.Length;
-
-            // for(var i=0; i<outcount; i++)
-            // {
-            //     ref readonly var entry = ref skip(entries,i);
-            //     var path = entry.Key;
-            //     var blocks = entry.Value.Blocks;
-            //     var count = blocks.Length;
-            //     var host = path.FileName.Format().Remove(".extracts.parsed.xpack").Replace(".","/");
-            //     Wf.Row(string.Format("Loaded {0} {1} blocks from {2}", count, host, path.ToUri()));
-            // }
+            Queue.Deposit(EventFactory.data(stack.state()));
         }
 
         Task<uint> RunMachine(uint cycles)

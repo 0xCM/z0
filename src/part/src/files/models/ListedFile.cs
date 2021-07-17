@@ -15,11 +15,11 @@ namespace Z0
     [Record(TableId)]
     public struct ListedFile : ITextual, IRecord<ListedFile>
     {
-        public const string TableId = "listed-file";
+        public const string TableId = "files";
 
         public uint Index;
 
-        public FS.FilePath Path;
+        public FS.FileUri Path;
 
         [MethodImpl(Inline)]
         public ListedFile(uint index, FS.FilePath path)

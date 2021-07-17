@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    using Windows;
-
     using static IntelSdm;
     using static Root;
     using static core;
@@ -18,9 +16,9 @@ namespace Z0.Asm
 
         NativeBuffer CodeBuffer;
 
-        NativeBuffer _NativeBuffer;
+        ByteSize CodeSize;
 
-        AsmCmdArbiter Arbiter;
+        Identifier RoutineName;
 
         AsmWorkspace Workspace;
 
@@ -28,20 +26,40 @@ namespace Z0.Asm
 
         ToolBase _Toolbase;
 
-        ToolId _Tool;
-
         ScriptRunner ScriptRunner;
 
-        ByteSize _NativeSize;
+        ToolId _Tool;
+
+        FS.FolderPath _SrcDir;
+
+        FS.FileName _SrcFile;
+
+        FS.FolderPath _DstDir;
+
+        FS.FolderPath WsOutDir;
+
+        byte[] _Assembled;
 
         public AsmCmdService()
         {
             CodeBuffer = Buffers.native(Pow2.T10);
-            _NativeBuffer = Buffers.native(size<Amd64Context>());
-            Arbiter = AsmCmdArbiter.start(_NativeBuffer);
+            RoutineName = Identifier.Empty;
             _SymTypes = Z0.SymTypes.Empty;
             _Tool = ToolId.Empty;
-            _NativeSize = 0;
+            CodeSize = 0;
+            _SrcDir = FS.FolderPath.Empty;
+            _DstDir = FS.FolderPath.Empty;
+            _SrcFile = FS.FileName.Empty;
+            _Assembled = array<byte>();
+        }
+
+        protected override void Initialized()
+        {
+            Workspace = Wf.AsmWorkspace();
+            _Toolbase = Wf.ToolBase(Db.ToolWs());
+            ScriptRunner = Wf.ScriptRunner();
+            WsOutDir = Db.DevWs() + FS.folder(".out");
+            _DstDir = WsOutDir;
         }
 
         ToolBase ToolBase()
@@ -49,6 +67,33 @@ namespace Z0.Asm
 
         ToolId Tool()
             => _Tool;
+
+        FS.FolderPath SrcDir()
+            => _SrcDir;
+
+        FS.FileName SrcFile()
+            => _SrcFile;
+
+        FS.FolderPath DstDir()
+            => _DstDir;
+
+        FS.FolderPath SrcDir(FS.FolderPath value)
+        {
+            _SrcDir = value;
+            return _SrcDir;
+        }
+
+        FS.FileName SrcFile(FS.FileName value)
+        {
+            _SrcFile = value;
+            return _SrcFile;
+        }
+
+        FS.FolderPath DstDir(FS.FolderPath value)
+        {
+            _DstDir = value;
+            return _DstDir;
+        }
 
         ToolId SelectTool(ToolId id)
         {
@@ -59,18 +104,10 @@ namespace Z0.Asm
         ToolId SelectedTool()
             => _Tool;
 
-        protected override void Initialized()
-        {
-            Workspace = Wf.AsmWorkspace();
-            _Toolbase = Wf.ToolBase(Db.ToolWs());
-            ScriptRunner = Wf.ScriptRunner();
-        }
 
         protected override void Disposing()
         {
-            Arbiter.Dispose();
             CodeBuffer.Dispose();
-            _NativeBuffer.Dispose();
         }
 
         SymTypes SymTypes
@@ -83,21 +120,18 @@ namespace Z0.Asm
             }
         }
 
-        Span<byte> NativeBuffer(bool clear)
+        Outcome LoadRoutine(string name, ReadOnlySpan<byte> src)
         {
-            if(clear)
-                _NativeBuffer.Clear();
-            return _NativeBuffer.Edit;
-        }
-
-        Outcome NativeLoad(ReadOnlySpan<byte> src)
-        {
+            RoutineName = name;
+            CodeBuffer.Clear();
             var size = src.Length;
-            var buffer = NativeBuffer(true);
-            if(size > buffer.Length)
+            if(size > CodeBuffer.Size)
                 return (false,CapacityExceeded.Format());
+
+            var buffer = CodeBuffer.Edit;
             for(var i=0; i<size; i++)
                 seek(buffer,i) = skip(src,i);
+            CodeSize = size;
             return true;
         }
 
@@ -126,8 +160,13 @@ namespace Z0.Asm
 
         ref readonly Table Pipe(in Table src)
         {
-            var msg = string.Format("Dispatching {0} {1} rows", src.RowCount, src.Kind);
-            Status(msg);
+            //Status(DispatchingRows.Format(src.RowCount, src.Kind));
+            return ref src;
+        }
+
+        ref readonly FS.FilePath Pipe(in FS.FilePath src)
+        {
+            Write(string.Format("Path:{0}",src));
             return ref src;
         }
 
@@ -140,6 +179,15 @@ namespace Z0.Asm
                 Write(input.ToString());
             }
             return ref src;
+        }
+
+        void List(FS.FolderPath src)
+        {
+            var files = FileArchives.list(src);
+            iter(files.View, file => Write(file.Path));
+
+            var dst = WsOutDir + FS.file(string.Format("{0}.list", src.FolderName), FS.Csv);
+            Tables.emit(files.View, dst);
         }
 
         static Outcome argerror(string value)
@@ -163,5 +211,7 @@ namespace Z0.Asm
         static MsgPattern ArgSpecError => "Argument specification error";
 
         static MsgPattern CapacityExceeded => "Capacity exceeded";
+
+        static MsgPattern<Count,TableKind> DispatchingRows => "Dispatching {0} {1} rows";
     }
 }

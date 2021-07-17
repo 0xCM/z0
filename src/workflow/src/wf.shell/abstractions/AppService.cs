@@ -84,7 +84,7 @@ namespace Z0
         }
 
         protected void RedirectEmissions(string name, FS.FolderPath dst)
-            => Wf.RedirectEmissions(WfEmissionLog.create(name,dst));
+            => Wf.RedirectEmissions(WfEmissionLog.create(name, dst));
 
         FS.FileName NameShowLog(string src, FS.FileExt ext)
             => FS.file(core.controller().Id().PartName() + "." + HostName + "." + src, ext);
@@ -97,30 +97,6 @@ namespace Z0
 
         protected ShowLog ShowLog([Caller] string name = null, FS.FileExt? ext = null)
             => ShowLog(NameShowLog(name,ext ?? FS.Csv));
-
-        protected void ShowRecords<T>(ReadOnlySpan<T> src)
-            where T : struct, IRecord<T>
-        {
-            var id = Tables.identify<T>();
-            var count = src.Length;
-            if(count ==0)
-            {
-                Wf.Warn($"No {id} records were provided");
-                return;
-            }
-            var dst = Db.AppLogDir() + FS.file(id.Format(), FS.Csv);
-            var flow = Wf.EmittingTable<T>(dst);
-            var formatter = Tables.formatter<T>();
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                var formatted = formatter.Format(core.skip(src,i));
-                writer.WriteLine(formatted);
-                Wf.Row(formatted);
-            }
-            Wf.EmittedTable(flow, count);
-        }
 
         [Op,Closures(UInt64k)]
         protected void ShowSymbols<T>(Symbols<T> src, ShowLog dst)
@@ -151,10 +127,25 @@ namespace Z0
             var count = src.Length;
             if(count != 0)
             {
-                var dst = Db.AppLog(string.Format("{0}.{1}",Timestamp.now(), channel ?? typeof(T).Name));
+                var dst = Db.AppLog(string.Format("{0}.{1}", Timestamp.now(), channel ?? typeof(T).Name));
                 using var writer = dst.AsciWriter();
                 for(var i=0; i<count; i++)
                     writer.WriteLine(skip(src,i).Format());
+            }
+        }
+
+        protected bool Check<T>(Outcome<T> outcome, out T payload)
+        {
+            if(outcome.Fail)
+            {
+                Error(outcome.Message);
+                payload = default;
+                return false;
+            }
+            else
+            {
+                payload = outcome.Data;
+                return true;
             }
         }
 

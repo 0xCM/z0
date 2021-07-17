@@ -21,9 +21,12 @@ namespace Z0.Asm
 
         GpRegGrid _GpGrid;
 
+        Index<char> _Buffer;
+
         public AsmRegGrids()
         {
             _GpGrid = GpRegGrid.Empty;
+            _Buffer = alloc<char>(256);
         }
 
         protected override void Initialized()
@@ -39,52 +42,23 @@ namespace Z0.Asm
 
         const byte BinWidth = 5;
 
-        const byte EolWidth = 2;
-
         const byte RowWidth = IndexWidth + 1 + SymbolWidth + 1 + HexWidth + 1 + BinWidth;
 
-        const byte ColCount = 4;
+        Span<char> Buffer()
+            => _Buffer.Clear();
 
-        const string RenderPattern = "{0,-2} {1,-4} {2,-2} {3,-5}";
-
-        public uint Emit(in AsmRegGrid src, StreamWriter dst)
+        public uint Emit(in AsciGrid src, StreamWriter dst)
         {
             var count = src.RowCount;
             for(byte i=0; i<count; i++)
-                dst.WriteLine(AsciSymbols.format(src.Row(i)));
+                dst.WriteLine(AsciSymbols.format(src.Row(i), Buffer()));
             return (uint)count;
-        }
-
-        [Op, Closures(UInt8k)]
-        public static AsciSequence asci<T>(W8 w, in Sym<T> symbol)
-            where T : unmanaged
-        {
-            var seq = S.seq(w, n5, symbol.Expr, symbol.Kind);
-            Require.equal(RowWidth, seq.Length);
-            return seq;
-        }
-
-        [Op, Closures(UInt8k)]
-        public static ReadOnlySpan<byte> row<T>(in AsmRegGrid<T> src, ushort index)
-            where T : unmanaged
-        {
-            var offset = index*(RowWidth + 2);
-            return slice(src.Rows,offset, RowWidth);
-        }
-
-        [Op, Closures(UInt8k)]
-        public static ReadOnlySpan<byte> row(in AsmRegGrid src, ushort index)
-        {
-            var offset = index*(RowWidth + 2);
-            return slice(src.Rows,offset, RowWidth);
         }
 
         public GpRegGrid GpGrid()
         {
             if(_GpGrid.IsEmpty)
-            {
                 _GpGrid = gp();
-            }
             return _GpGrid;
         }
 
@@ -120,47 +94,28 @@ namespace Z0.Asm
             return new GpRegGrid(buffer);
         }
 
-        [Op]
-        public AsmRegGrid Grid(GpClass gp, W8 w)
-            => asci(Symbols.Gp8Regs());
+        public AsciGrid Grid(GpClass gp, W8 w)
+            => S.grid(Symbols.Gp8Regs(), RowWidth);
 
-        public AsmRegGrid Grid(GpClass gp, W8 w, bit hi)
-            => asci(Symbols.Gp8Regs(hi));
+        public AsciGrid Grid(GpClass gp, W8 w, bit hi)
+            => S.grid(Symbols.Gp8Regs(hi), RowWidth);
 
-        public AsmRegGrid Grid(GpClass gp, W16 w)
-            => asci(Symbols.Gp16Regs());
+        public AsciGrid Grid(GpClass gp, W16 w)
+            => S.grid(Symbols.Gp16Regs(), RowWidth);
 
-        public AsmRegGrid Grid(GpClass gp, W32 w)
-            => asci(Symbols.Gp32Regs());
+        public AsciGrid Grid(GpClass gp, W32 w)
+            => S.grid(Symbols.Gp32Regs(), RowWidth);
 
-        public AsmRegGrid Grid(GpClass gp, W64 w)
-            => asci(Symbols.Gp64Regs());
+        public AsciGrid Grid(GpClass gp, W64 w)
+            => S.grid(Symbols.Gp64Regs(), RowWidth);
 
-        public AsmRegGrid Grid(XmmClass xmm)
-            => asci(Symbols.XmmRegs());
+        public AsciGrid Grid(XmmClass xmm)
+            => S.grid(Symbols.XmmRegs(), RowWidth);
 
-        public AsmRegGrid Grid(YmmClass xmm)
-            => asci(Symbols.YmmRegs());
+        public AsciGrid Grid(YmmClass xmm)
+            => S.grid(Symbols.YmmRegs(),RowWidth);
 
-        public AsmRegGrid Grid(ZmmClass xmm)
-            => asci(Symbols.ZmmRegs());
-
-        static AsmRegGrid<T> asci<T>(Symbols<T> src)
-            where T : unmanaged
-        {
-            var symbols = src.View;
-            var rows = symbols.Length;
-            var size = rows*RowWidth + rows*2;
-            var dst = alloc<byte>(size);
-            var offset = 0u;
-            for(var i=0; i<rows; i++)
-            {
-                ref readonly var symbol = ref skip(symbols,i);
-                offset += S.asci(w8, n5, symbol.Expr, symbol.Kind, offset, dst);
-                seek(dst, offset++) = (byte)AsciControl.CR;
-                seek(dst, offset++) = (byte)AsciControl.LF;
-            }
-            return new AsmRegGrid<T>(AsciSymbols.seq(dst), (byte)rows);
-        }
+        public AsciGrid Grid(ZmmClass xmm)
+            => S.grid(Symbols.ZmmRegs(), RowWidth);
     }
 }

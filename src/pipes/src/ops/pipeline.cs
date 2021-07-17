@@ -8,20 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static SFx;
 
     partial struct Pipes
     {
-        public static Pipeline<S,T> pipeline<S,T>(EventSignal signal, IEmitter<S> emitter, IProjector<S,T> projector, IReceiver<T> receiver)
-        {
-            var connection = new Pipeline<S,T>(signal);
-            connection.Emitter = emitter;
-            connection.Projector = projector;
-            connection.Receiver = receiver;
-            connection.Connected = true;
-            return connection;
-        }
-
         [MethodImpl(Inline)]
         public static BlockPipeline128<S,T> pipeline<S,T>(IPipeline pipes, IBlockSource128<S> src, IBlockProjector128<S,T> map, IBlockSink128<T> dst)
             where S : unmanaged

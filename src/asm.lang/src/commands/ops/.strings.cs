@@ -24,7 +24,7 @@ namespace Z0.Asm
                 Require.equal(s0,s1);
             }
 
-            Wf.Row(table.Format());
+            Write(table.Format());
             return result;
         }
    }

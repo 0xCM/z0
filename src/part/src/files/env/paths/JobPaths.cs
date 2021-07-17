@@ -13,8 +13,5 @@ namespace Z0
 
         FS.FolderPath JobQueue()
             => JobRoot() + FS.folder(queue);
-
-        FS.FilePath JobPath(FS.FileName file)
-            => JobQueue() + file;
     }
 }

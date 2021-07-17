@@ -10,6 +10,13 @@ namespace Z0
     {
         FS.FolderPath DataRoot()
             => Env.DataRoot;
+
+        FS.FolderPath DevWs()
+            => Env.DevWs;
+
+        FS.FolderPath AsmWs()
+            => Env.AsmWs;
+
         FS.FolderPath ToolWs()
             => Env.ToolWs;
 

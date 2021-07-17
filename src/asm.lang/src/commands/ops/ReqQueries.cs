@@ -14,22 +14,22 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        void OnJobComplete()
-        {
-            ref readonly var context = ref first(recover<Amd64Context>(_NativeBuffer.Edit));
-            Wf.Row(EmptyString);
-            Wf.Row(string.Format("RIP:{0:x}", context.Rip));
-            Wf.Row(string.Format("LastBranchFromRip:{0:x}", context.LastBranchFromRip));
-            Wf.Row(string.Format("RAX:{0:x}", context.Rax));
-            Wf.Row(string.Format("RCX:{0:x}", context.Rcx));
-            Wf.Row(string.Format("RDX:{0:x}", context.Rdx));
-            Wf.Row(string.Format("RBX:{0:x}", context.Rbx));
-            Wf.Row(string.Format("EFlags:{0:x}", context.EFlags.FormatBits()));
-        }
+        // void OnJobComplete()
+        // {
+        //     ref readonly var context = ref first(recover<Amd64Context>(_NativeBuffer.Edit));
+        //     Wf.Row(EmptyString);
+        //     Wf.Row(string.Format("RIP:{0:x}", context.Rip));
+        //     Wf.Row(string.Format("LastBranchFromRip:{0:x}", context.LastBranchFromRip));
+        //     Wf.Row(string.Format("RAX:{0:x}", context.Rax));
+        //     Wf.Row(string.Format("RCX:{0:x}", context.Rcx));
+        //     Wf.Row(string.Format("RDX:{0:x}", context.Rdx));
+        //     Wf.Row(string.Format("RBX:{0:x}", context.Rbx));
+        //     Wf.Row(string.Format("EFlags:{0:x}", context.EFlags.FormatBits()));
+        // }
 
         void SubmitJob(Action job)
         {
-            Arbiter.Enque(job, OnJobComplete);
+            //Arbiter.Enque(job, OnJobComplete);
         }
 
         static uint CountA;

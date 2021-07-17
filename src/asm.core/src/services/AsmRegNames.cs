@@ -47,25 +47,50 @@ namespace Z0.Asm
 
         const string R15 = "r15 r15dr15wr15b";
 
+        const string XmmText = "xmm1 xmm2 xmm3 xmm4 xmm5 xmm6 xmm7 xmm8 xmm9 xmm10xmm11xmm12xmm13xmm14xmm15xmm16xmm17xmm18xmm19xmm20xmm21xmm22xmm23xmm24xmm25xmm26xmm27xmm28xmm29xmm30xmm31";
+
+        const string YmmText = "ymm1 ymm2 ymm3 ymm4 ymm5 ymm6 ymm7 ymm8 ymm9 ymm10ymm11ymm12ymm13ymm14ymm15ymm16ymm17ymm18ymm19ymm20ymm21ymm22ymm23ymm24ymm25ymm26ymm27ymm28ymm29ymm30ymm31";
+
+        const string ZmmText = "zmm1 zmm2 zmm3 zmm4 zmm5 zmm6 zmm7 zmm8 zmm9 zmm10zmm11zmm12zmm13zmm14zmm15zmm16zmm17zmm18zmm19zmm20zmm21zmm22zmm23zmm24zmm25zmm26zmm27zmm28zmm29zmm30zmm31";
+
         const string GpRegText = R0 + R1 + R2 + R3 + R4 + R5 + R6 + R7 + R8 + R9 + R10 + R11 + R12 + R13 + R14 + R15;
 
-        const byte RegLength = 4;
-
-        const byte RowLength = 4*RegLength;
-
-        const byte GpRowCount = 16;
-
-        const ushort GpRegsLength = RowLength*GpRowCount;
-
-        static ReadOnlySpan<char> GpRegChars => GpRegText;
+        [MethodImpl(Inline), Op]
+        static ReadOnlySpan<char> chars(GpClass k)
+            => GpRegText;
 
         [MethodImpl(Inline), Op]
-        static ReadOnlySpan<char> chars(GpClass gp)
-            => GpRegChars;
+        static ReadOnlySpan<char> chars(XmmClass k)
+            => XmmText;
+
+        [MethodImpl(Inline), Op]
+        static ReadOnlySpan<char> chars(YmmClass k)
+            => YmmText;
+
+        [MethodImpl(Inline), Op]
+        static ReadOnlySpan<char> chars(ZmmClass k)
+            => ZmmText;
+
+        const byte VRegWidth = 5;
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> chars(XmmClass k, RegIndexCode index)
+            => slice(chars(k),((byte)index)*VRegWidth, VRegWidth);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> chars(YmmClass k, RegIndexCode index)
+            => slice(chars(k),((byte)index)*VRegWidth, VRegWidth);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> chars(ZmmClass k, RegIndexCode index)
+            => slice(chars(k),((byte)index)*VRegWidth, VRegWidth);
 
         [MethodImpl(Inline), Op]
         static ushort offsset(GpClass gp, RegIndexCode index, RegWidthCode width)
         {
+            const byte RegLength = 4;
+            const byte RowLength = 4*RegLength;
+
             var row = (uint)((uint)index*RowLength);
             var col = z32;
             if(width == RegWidthCode.W64)
@@ -83,11 +108,19 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static RegName name(GpClass gp, RegIndexCode index, RegWidthCode width)
         {
+            const byte RegLength = 4;
             var data = 0ul;
-            var i0 = offsset(gp,index,width);
-            data = first(recover<ulong>(core.slice(chars(gp),i0,RegLength)));
+            var i0 = offsset(gp, index, width);
+            data = first(recover<ulong>(slice(chars(gp),i0, RegLength)));
             return new RegName(data);
         }
+
+        // [MethodImpl(Inline), Op]
+        // public static RegName name(XmmClass k, RegIndexCode index)
+        // {
+        //     var storage = 0ul;
+        //     var src = chars(k,index);
+        // }
 
         [MethodImpl(Inline), Op]
         static byte length(ReadOnlySpan<char> src)
