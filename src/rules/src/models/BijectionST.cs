@@ -8,20 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct Rules
     {
         /// <summary>
         /// Represents a bijective correspondence between two sequences
         /// </summary>
-        public readonly struct Bijection<S,T> : IRule<Bijection<S,T>,S,T>
+        public readonly ref struct Bijection<S,T>
         {
-            public Index<S> Source {get;}
+            public ReadOnlySpan<S> Source {get;}
 
-            public Index<T> Target {get;}
+            public ReadOnlySpan<T> Target {get;}
 
             [MethodImpl(Inline)]
-            public Bijection(Index<S> src, Index<T> dst)
+            public Bijection(ReadOnlySpan<S> src, ReadOnlySpan<T> dst)
             {
                 Source = src;
                 Target = dst;
@@ -30,7 +31,7 @@ namespace Z0
             public Paired<S,T> this[uint i]
             {
                 [MethodImpl(Inline)]
-                get => (Source[i], Target[i]);
+                get => (skip(Source,i), skip(Target,i));
             }
         }
     }

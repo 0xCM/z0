@@ -4,25 +4,27 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct Rules
     {
         /// <summary>
         /// Represents a bijective correspondence between two sequences of homogenous type
         /// </summary>
-        public readonly struct Bijection<T> : IRule<Bijection<T>,T>
+        public readonly ref struct Bijection<T>
         {
-            public Index<T> Source {get;}
+            public ReadOnlySpan<T> Source {get;}
 
-            public Index<T> Target {get;}
+            public ReadOnlySpan<T> Target {get;}
 
             [MethodImpl(Inline)]
-            public Bijection(Index<T> src, Index<T> dst)
+            public Bijection(ReadOnlySpan<T> src, ReadOnlySpan<T> dst)
             {
-                //root.require(src.Length == dst.Length, () => "Equality of length there must be");
                 Source = src;
                 Target = dst;
             }
@@ -30,7 +32,7 @@ namespace Z0
             public Pair<T> this[uint i]
             {
                 [MethodImpl(Inline)]
-                get => (Source[i], Target[i]);
+                get => (skip(Source,i), skip(Target,i));
             }
         }
     }

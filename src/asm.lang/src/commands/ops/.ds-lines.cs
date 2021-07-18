@@ -16,7 +16,7 @@ namespace Z0.Asm
             if(path.Missing)
                 return (false, FS.missing(path));
 
-            var data = span(path.ReadText());
+            var data = path.ReadText();
             var number = 0u;
             var pos = 0u;
             while(pos < data.Length)

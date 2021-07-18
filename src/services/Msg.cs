@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    struct Msg
+    partial struct Msg
     {
         public static MsgPattern<FS.FileUri> LoadingSpanAccessors => "Loading respack accessors from {0}";
 
@@ -17,5 +17,12 @@ namespace Z0
         public static MsgPattern<Count> ProcessingApiHexFiles => "Processing {0} api hex files";
 
         public static MsgPattern<Count> AccumulatedDescriptors => "Accumulated {0} descriptors";
+
+        public static MsgPattern<FS.FileUri,Count> SplittingFile
+            => "Splitting {0} into parts with a maximum of {1} lines each";
+
+        public static MsgPattern<Count,FS.FileUri,Count> FinishedFileSplit
+            => "Partitioned {0} lines from {1} into {2} parts";
+
     }
 }

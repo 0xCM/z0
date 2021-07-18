@@ -73,7 +73,7 @@ namespace Z0.Tools
                 else
                     dst.AppendFormat("{0}{1,-48}", RenderDelimiter, EmptyString);
 
-                    dst.AppendFormat("{0}{1}", RenderDelimiter, src.SourceText);
+                dst.AppendFormat("{0}{1}", RenderDelimiter, src.SourceText);
             }
         }
     }

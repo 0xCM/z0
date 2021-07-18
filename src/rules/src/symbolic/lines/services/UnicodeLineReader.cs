@@ -32,7 +32,7 @@ namespace Z0
         public bool Next(out UnicodeLine dst)
         {
             dst = UnicodeLine.Empty;
-            var line = Source.ReadLine().ToReadOnlySpan();
+            var line = Source.ReadLine();
             if(line == null)
                 return false;
 
@@ -40,7 +40,7 @@ namespace Z0
 
             var data = span(line);
             if(Lines.parse(data, out var length, out var number))
-                dst = new UnicodeLine(number, slice(line, (int)length));
+                dst = new UnicodeLine(number, text.slice(line, (int)length));
             else
                 dst = new UnicodeLine(Consumed, line);
 

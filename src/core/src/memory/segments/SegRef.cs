@@ -33,6 +33,13 @@ namespace Z0
             get => cover<byte>(BaseAddress, Length);
         }
 
+        public ReadOnlySpan<byte> View
+        {
+            [MethodImpl(Inline)]
+            get => cover<byte>(BaseAddress, Length);
+        }
+
+
         public uint Length
         {
             [MethodImpl(Inline)]

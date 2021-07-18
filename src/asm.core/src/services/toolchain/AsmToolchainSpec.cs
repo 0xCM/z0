@@ -27,5 +27,7 @@ namespace Z0.Asm
         public FS.FilePath ListPath;
 
         public Bitness AsmBitMode;
+
+        public bool EmitDebugInfo;
     }
 }

@@ -15,36 +15,22 @@ namespace Z0
     partial struct Lines
     {
         [Op]
-        public static Outcome parse(ReadOnlySpan<char> src, out uint j, out LineNumber dst)
+        public static Outcome parse(ReadOnlySpan<char> src, out uint consumed, out LineNumber dst)
         {
-            j=0;
-            dst = 0;
-            const char Delimiter = Chars.Colon;
-            const byte LastIndex = 8;
-            const byte ContentLength = 9;
-            if(!numbered(src))
+            consumed = 0;
+            dst = default;
+            var i = text.index(src,Chars.Colon);
+            if(i == NotFound)
                 return false;
 
-            var result = Outcome.Failure;
-            var storage = CharBlock8.Null;
-            var buffer = storage.Data;
-
-            while(j++ <= LastIndex)
+            if(uint.TryParse(slice(src,0, i), out var n))
             {
-                ref readonly var c = ref skip(src, j);
-                if(char.IsDigit(c))
-                    seek(buffer, j) = c;
-                else if(c == Delimiter && j==LastIndex)
-                {
-                    result = uint.TryParse(buffer, out var n);
-                    if(result)
-                        dst = n;
-                    break;
-                }
-                else
-                    break;
+                consumed = (uint)(i + 1);
+                dst = n;
+                return true;
             }
-            return result;
+
+            return false;
         }
 
         [Op]

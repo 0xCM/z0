@@ -11,28 +11,28 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct VectorType : IRuleDataType<VectorType>
-        {
-            public CellType CellType {get;}
+        // public readonly struct VectorType : IRuleDataType<VectorType>
+        // {
+        //     public CellType CellType {get;}
 
-            public uint CellCount {get;}
+        //     public uint CellCount {get;}
 
-            [MethodImpl(Inline)]
-            public VectorType(CellType type, uint length)
-            {
-                CellType = type;
-                CellCount = length;
-            }
+        //     [MethodImpl(Inline)]
+        //     public VectorType(CellType type, uint length)
+        //     {
+        //         CellType = type;
+        //         CellCount = length;
+        //     }
 
-            public BitWidth Width
-            {
-                [MethodImpl(Inline)]
-                get => CellType.Width*CellCount;
-            }
+        //     public BitWidth Width
+        //     {
+        //         [MethodImpl(Inline)]
+        //         get => CellType.Width*CellCount;
+        //     }
 
-            [MethodImpl(Inline)]
-            public static implicit operator VectorType((CellType type, uint length) src)
-                => new VectorType(src.type, src.length);
-        }
+        //     [MethodImpl(Inline)]
+        //     public static implicit operator VectorType((CellType type, uint length) src)
+        //         => new VectorType(src.type, src.length);
+        // }
     }
 }

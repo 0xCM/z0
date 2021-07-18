@@ -20,18 +20,31 @@ namespace Z0.Tools
         public NasmOutputFile OutFile(FS.FilePath path, ObjFileKind kind = ObjFileKind.bin)
             => new NasmOutputFile(path, kind);
 
-        public CmdLine Command(FS.FilePath src, NasmOutputFile dst)
+        public CmdLine Command(FS.FilePath src, NasmOutputFile dst, NasmDebugOptions debug = default)
         {
-            const string Pattern = "{0} -f {1} {2} -o {3}";
-            return new CmdLine(string.Format(Pattern, Id, dst.Kind,
-                src.Format(Sep), dst.Path.Format(Sep)));
+            const string Pattern = "{0} -f {1} {2} -o {3} {4}";
+
+            return new CmdLine(string.Format(Pattern,
+                Id,
+                dst.Kind,
+                src.Format(Sep),
+                dst.Path.Format(Sep),
+                render(debug)
+                ));
         }
 
-        public CmdLine Command(FS.FilePath src, NasmOutputFile dst, NasmListFile list)
+        public CmdLine Command(FS.FilePath src, NasmOutputFile dst, NasmListFile list, NasmDebugOptions debug = default)
         {
-            const string Pattern = "{0} -f {1} {2} -o {3} -l {4}";
-            return new CmdLine(string.Format(Pattern, Id, dst.Kind,
-                src.Format(Sep), dst.Path.Format(Sep), list.Path.Format(Sep)));
+            const string Pattern = "{0} -f {1} {2} -o {3} -l {4} {5}";
+
+            return new CmdLine(string.Format(Pattern,
+                Id,
+                dst.Kind,
+                src.Format(Sep),
+                dst.Path.Format(Sep),
+                list.Path.Format(Sep),
+                render(debug)
+                ));
         }
 
         public static MsgPattern<Count> ParsingNasmListEntries => "Parsing list entries from {0} lines";

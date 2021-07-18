@@ -352,6 +352,7 @@ namespace Z0.Asm
             spec.Analysis = Analysis();
             spec.ListPath = ListPath(id);
             spec.AsmBitMode = Bitness.b64;
+            spec.EmitDebugInfo = true;
             if(spec.ObjKind > ObjFileKind.bin)
                 spec.ObjPath = ObjPath(id);
 

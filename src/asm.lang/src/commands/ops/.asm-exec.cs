@@ -10,10 +10,12 @@ namespace Z0.Asm
         Outcome AsmExec(CmdArgs args)
         {
             CodeBuffer.Clear();
-            var block = DynamicOperations.load(_Assembled, 0, CodeBuffer);
-            var f = DynamicOperations.binop<ulong>(RoutineName, block);
-            var output = f.Operation.Invoke(3,4);
-            Write(string.Format("{0}({1},{2})={3}", f.Name, 3, 4, output));
+            var block = DFx.load(_Assembled, 0, CodeBuffer);
+            var f = DFx.emitter<byte>(RoutineName, block);
+            Write(string.Format("Evaluating: {0}[{1}]={2}", RoutineName, block.Size, RP.embrace(block.View.FormatHex())));
+            // var f = DynamicOperations.binop<ulong>(RoutineName, block);
+            var output = f.Operation.Invoke();
+            Write(string.Format("Evaluated: {0}() -> {1}", f.Name, output));
             return true;
         }
     }

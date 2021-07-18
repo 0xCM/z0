@@ -17,7 +17,6 @@ namespace Z0.Asm
                 counter++;
             }
 
-
             Write(string.Format("The source data {0} has {1} lines", path.ToUri(), counter));
 
             return true;

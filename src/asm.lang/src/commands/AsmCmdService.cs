@@ -38,6 +38,8 @@ namespace Z0.Asm
 
         FS.FolderPath WsOutDir;
 
+        FS.Files  _SrcList;
+
         byte[] _Assembled;
 
         public AsmCmdService()
@@ -51,6 +53,7 @@ namespace Z0.Asm
             _DstDir = FS.FolderPath.Empty;
             _SrcFile = FS.FileName.Empty;
             _Assembled = array<byte>();
+            _SrcList = array<FS.FilePath>();
         }
 
         protected override void Initialized()
@@ -62,11 +65,28 @@ namespace Z0.Asm
             _DstDir = WsOutDir;
         }
 
+        protected override void Disposing()
+        {
+            CodeBuffer.Dispose();
+        }
+
+
         ToolBase ToolBase()
             => _Toolbase;
 
         ToolId Tool()
             => _Tool;
+
+
+        FS.Files SrcList()
+            => _SrcList;
+
+        FS.Files SrcList(FS.Files src)
+        {
+            _SrcList = src;
+            iter(src.View, f => Write(f));
+            return src;
+        }
 
         FS.FolderPath SrcDir()
             => _SrcDir;
@@ -104,11 +124,6 @@ namespace Z0.Asm
         ToolId SelectedTool()
             => _Tool;
 
-
-        protected override void Disposing()
-        {
-            CodeBuffer.Dispose();
-        }
 
         SymTypes SymTypes
         {
@@ -190,25 +205,8 @@ namespace Z0.Asm
             Tables.emit(files.View, dst);
         }
 
-        static Outcome argerror(string value)
-            => (false, $"The argument value '{value}' is invalid");
-
-        static CmdArg arg(in CmdArgs src, int index)
-        {
-            if(src.IsEmpty)
-                sys.@throw(EmptyArgList.Format());
-
-            var count = src.Length;
-            if(count < index - 1)
-                sys.@throw(ArgSpecError.Format());
-            return src[(ushort)index];
-        }
-
         static MsgPattern NoToolSelected => "No tool selected";
 
-        static MsgPattern EmptyArgList => "No arguments specified";
-
-        static MsgPattern ArgSpecError => "Argument specification error";
 
         static MsgPattern CapacityExceeded => "Capacity exceeded";
 

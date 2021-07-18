@@ -44,8 +44,11 @@ namespace Z0.Asm
         {
             var tool = Wf.Nasm();
             var result = Exec(tool.Command(spec.AsmPath, tool.OutFile(spec.BinPath, ObjFileKind.bin), spec.ListPath));
-            if(result.Ok && spec.ObjKind != 0 && spec.ObjPath.IsNonEmpty)
-                result = Exec(tool.Command(spec.AsmPath, tool.OutFile(spec.ObjPath, spec.ObjKind)));
+            if(result.Ok && CanEmitObj(spec))
+            {
+                var debug = CalcDebugOptions(spec);
+                result = Exec(tool.Command(spec.AsmPath, tool.OutFile(spec.ObjPath, spec.ObjKind), debug));
+            }
             return result;
         }
 
@@ -157,5 +160,29 @@ namespace Z0.Asm
             else
                 return (false, errout.Delimit(Chars.NL).Format());
        }
+
+        NasmDebugOptions CalcDebugOptions(in AsmToolchainSpec spec)
+        {
+            if(!spec.EmitDebugInfo)
+                return 0;
+
+            var options = NasmDebugOptions.g;
+
+            if(spec.ObjKind == ObjFileKind.bin)
+                return options;
+
+            if(spec.ObjKind == ObjFileKind.obj)
+            {
+                if((byte)spec.AsmBitMode <= 32)
+                    return options | NasmDebugOptions.Win32DbgFormat;
+                else
+                    return options | NasmDebugOptions.Win64DbgFormat;
+            }
+
+            return options;
+        }
+
+        bool CanEmitObj(in AsmToolchainSpec spec)
+            => spec.ObjKind != 0 && spec.ObjKind != ObjFileKind.bin && spec.ObjPath.IsNonEmpty;
     }
 }

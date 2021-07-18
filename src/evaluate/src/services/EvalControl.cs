@@ -8,6 +8,9 @@ namespace Z0
 
     public class EvalControl : IEvalControl
     {
+        public static IEvalControl create(IWfRuntime wf, IDomainSource source, FS.FolderPath root, uint bufferSize)
+            => new EvalControl(wf, source, root, bufferSize);
+
         readonly IWfRuntime Wf;
 
         readonly byte BufferCount;

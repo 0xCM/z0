@@ -17,25 +17,24 @@ namespace Z0
             => new Replace<T>(src,dst);
 
         [Op, Closures(Closure)]
-        public static Index<Replace<T>> replace<T>(Index<T> src, T dst)
+        public static Span<Replace<T>> replace<T>(Span<T> src, T dst)
         {
             var count = src.Length;
             var buffer = sys.alloc<Replace<T>>(count);
             ref var target = ref first(buffer);
-            ref readonly var input = ref src.First;
+            ref readonly var input = ref first(src);
             for(var i=0; i<count; i++)
                 seek(target,i) = replace(skip(input,i), dst);
             return buffer;
         }
 
         [Op, Closures(Closure)]
-        public static Index<Replace<T>> replace<T>(Bijection<T> spec)
+        public static Span<Replace<T>> replace<T>(in Bijection<T> spec)
         {
-            var src = spec.Source.View;
-            var dst = spec.Target.View;
-            Require.invariant(src.Length == dst.Length, () => "Same lengths there must me");
+            var src = spec.Source;
+            var dst = spec.Target;
             var count = src.Length;
-            var buffer = sys.alloc<Replace<T>>(count);
+            var buffer = alloc<Replace<T>>(count);
             ref var target = ref first(buffer);
             ref readonly var input = ref first(src);
             ref readonly var output = ref first(dst);
@@ -45,7 +44,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static Index<Replace<T>> replace<T>(Index<T> src, Index<T> dst)
+        public static Span<Replace<T>> replace<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> dst)
             => replace(bijection<T>(src,dst));
     }
 }

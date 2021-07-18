@@ -18,11 +18,11 @@ namespace Z0.Asm
             var name = "min64u";
             var a = 4ul;
             var b = 12ul;
-            var block = DynamicOperations.load(min64u_64u_64u, 0, CodeBuffer);
-            var f = DynamicOperations.binop<ulong>(name, block);
-            DynamicOperations.specify(a, b, ref f);
-            var result = DynamicOperations.invoke(f);
-            Write(DynamicOperations.format(f, result));
+            var block = DFx.load(min64u_64u_64u, 0, CodeBuffer);
+            var f = DFx.binop<ulong>(name, block);
+            DFx.specify(a, b, ref f);
+            var result = DFx.invoke(f);
+            Write(DFx.format(f, result));
             return true;
         }
     }

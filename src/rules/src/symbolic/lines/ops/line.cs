@@ -54,12 +54,13 @@ namespace Z0
         /// <param name="i">The source-relative offset</param>
         /// <param name="dst">The target</param>
         [Op]
-        public static uint line(ReadOnlySpan<char> src, ref uint number, ref uint i, out UnicodeLine dst)
+        public static uint line(string src, ref uint number, ref uint i, out UnicodeLine dst)
         {
             var i0 = i;
             dst = UnicodeLine.Empty;
             var max = src.Length;
             var length = 0u;
+            var data = span(src);
             if(empty(src,i))
             {
                 dst = new UnicodeLine(++number, i0, EmptyString);
@@ -69,10 +70,10 @@ namespace Z0
             {
                 while(i++ < max - 1)
                 {
-                    if(SQ.eol(skip(src, i), skip(src, i + 1)))
+                    if(SQ.eol(skip(data, i), skip(data, i + 1)))
                     {
                         length = i - i0;
-                        dst = new UnicodeLine(++number, i0, slice(src, i0, length));
+                        dst = new UnicodeLine(++number, i0, text.slice(src, i0, length));
                         i+=2;
                         break;
                     }

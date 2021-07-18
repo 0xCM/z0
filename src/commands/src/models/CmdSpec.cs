@@ -35,6 +35,32 @@ namespace Z0
             get => nonempty(Name);
         }
 
+        public string Format()
+        {
+            if(IsEmpty)
+                return EmptyString;
+
+            var dst = text.buffer();
+            dst.Append(Name);
+            var count = Args.Length;
+            for(ushort i=0; i<count; i++)
+            {
+                ref readonly var arg = ref Args[i];
+                if(nonempty(arg.Name))
+                {
+                    dst.Append(Chars.Space);
+                    dst.Append(arg.Name);
+                }
+
+                if(nonempty(arg.Value))
+                {
+                    dst.Append(Chars.Space);
+                    dst.Append(arg.Value);
+                }
+            }
+            return dst.Emit();
+        }
+
         public static CmdSpec Empty
         {
             [MethodImpl(Inline)]

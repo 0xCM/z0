@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public readonly struct Loggers
@@ -25,8 +25,8 @@ namespace Z0
             => new WorkerLog(config);
 
         [MethodImpl(Inline), Op]
-        public static IWorkerLog worker(PartId control, FS.FolderPath root)
-            => worker(configure(control, root));
+        public static IWorkerLog worker(PartId control, FS.FolderPath logdir)
+            => worker(configure(control, logdir));
 
         [MethodImpl(Inline), Op]
         public static IWfEventLog events(WfLogConfig config)

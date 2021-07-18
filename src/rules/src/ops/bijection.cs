@@ -12,7 +12,7 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bijection<T> bijection<T>(Index<T> src, Index<T> dst)
+        public static Bijection<T> bijection<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> dst)
         {
             if(src.Length != dst.Length)
                 Errors.ThrowWithOrigin(string.Format("{0} != {1}", src.Length, dst.Length));
@@ -20,12 +20,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Bijection<S,T> bijection<S,T>(Index<S> src, Index<T> dst)
+        public static Bijection<S,T> bijection<S,T>(ReadOnlySpan<S> src, ReadOnlySpan<T> dst)
         {
             if(src.Length != dst.Length)
                 Errors.ThrowWithOrigin(string.Format("{0} != {1}", src.Length, dst.Length));
             return new Bijection<S,T>(src, dst);
         }
-
     }
 }

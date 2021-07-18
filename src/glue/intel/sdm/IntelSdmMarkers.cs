@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
 
     using static Root;
-    using static IntelSdm;
 
     using Markers = IntelSdmMarkers;
 
@@ -29,12 +28,6 @@ namespace Z0.Asm
             else
                 return index;
         }
-
-        public const string InstructionPageFooter_A_Left = "{Mnemonic} — {FullName}";
-
-        public const string InstructionPageFooter_A_Right_A = VolNumber.Descriptor;
-
-        public const string InstructionPageFooter_A_Right_B = ChapterPage.Descriptor;
 
         public readonly struct InstructionTable
         {

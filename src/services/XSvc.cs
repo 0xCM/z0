@@ -40,5 +40,8 @@ namespace Z0
         [Op]
         public static AsciBytes AsciBytes(this IServiceContext context)
             => Svc.AsciBytes.create(context);
+
+        public static FileSplitter FileSplitter(this IWfRuntime wf)
+            => Svc.FileSplitter.create(wf);
     }
 }

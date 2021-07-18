@@ -5,25 +5,26 @@
 namespace Z0
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public ref struct UnicodeLine
+    public struct UnicodeLine : IComparable<UnicodeLine>
     {
         public LineNumber LineNumber {get;}
 
-        public ReadOnlySpan<char> Content {get;}
+        public string Content {get;}
 
         [MethodImpl(Inline)]
-        public UnicodeLine(uint number, uint start, ReadOnlySpan<char> src)
+        public UnicodeLine(uint number, uint start, string src)
         {
             LineNumber = number;
             Content = src;
         }
 
         [MethodImpl(Inline)]
-        public UnicodeLine(uint number, ReadOnlySpan<char> src)
+        public UnicodeLine(uint number, string src)
         {
             LineNumber = number;
             Content = src;
@@ -57,10 +58,17 @@ namespace Z0
         public string Format()
             => Lines.format(this);
 
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public int CompareTo(UnicodeLine other)
+            => LineNumber.CompareTo(other.LineNumber);
+
         public static UnicodeLine Empty
         {
             [MethodImpl(Inline)]
-            get => new UnicodeLine(0,0,default);
+            get => new UnicodeLine(0,0,EmptyString);
         }
     }
 }

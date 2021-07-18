@@ -12,13 +12,5 @@ namespace Z0
 
     partial struct Rules
     {
-        [MethodImpl(Inline), Op]
-        public static char indicator(BasicTypeKind src)
-            => src switch {
-                BasicTypeKind.Float => 'f',
-                BasicTypeKind.Signed => 'i',
-                BasicTypeKind.Unsigned => 'u',
-                _ => Chars.Null,
-            };
     }
 }

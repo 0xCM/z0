@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -15,10 +16,25 @@ namespace Z0
     {
         CmdDispatcher Dispatcher;
 
+        IWorkerLog Witness;
+
+        protected AppCmdService()
+        {
+
+        }
+
         protected override void OnInit()
         {
             Dispatcher = Cmd.dispatcher(this);
+            Witness = Loggers.worker(controller().Id(), Db.ControlRoot());
         }
+
+        protected override void Disposing()
+        {
+            base.Disposing();
+            Witness?.Dispose();
+        }
+
 
         CmdSpec Next()
             => Cmd.cmdspec(term.prompt("cmd> "));
@@ -29,29 +45,13 @@ namespace Z0
             while(input.Name != ".exit")
             {
                 if(input.IsNonEmpty)
+                {
+                    Witness.LogStatus(input.Format());
                     Dispatch(input);
+                }
 
                 input = Next();
             }
-        }
-
-        public Outcome Dispatch(string command, CmdArgs args)
-        {
-            var outcome = Dispatcher.Dispatch(command,args);
-            if(outcome.Fail)
-                Wf.Error(outcome.Message);
-            return outcome;
-        }
-
-        protected Outcome Dispatch(string command, params string[] args)
-            => Dispatch(command, Cmd.args(args));
-
-        public Outcome Dispatch(string command)
-        {
-            var outcome = Dispatcher.Dispatch(command);
-            if(outcome.Fail)
-                Wf.Error(outcome.Message);
-            return outcome;
         }
 
         public Outcome Dispatch(CmdSpec cmd)
@@ -74,5 +74,43 @@ namespace Z0
             iter(Supported, reg => Wf.Row(reg));
             return true;
         }
+
+        protected static Outcome argerror(string value)
+            => (false, $"The argument value '{value}' is invalid");
+
+        protected static CmdArg arg(in CmdArgs src, int index)
+        {
+            if(src.IsEmpty)
+                sys.@throw(EmptyArgList.Format());
+
+            var count = src.Length;
+            if(count < index - 1)
+                sys.@throw(ArgSpecError.Format());
+            return src[(ushort)index];
+        }
+
+        protected bool Arg(in CmdArgs src, int index, out CmdArg value)
+        {
+            value = default;
+            if(src.IsEmpty)
+            {
+                Error(EmptyArgList.Format());
+                return false;
+            }
+
+            var count = src.Length;
+            if(count < index - 1)
+            {
+                Error(ArgSpecError.Format());
+                return false;
+            }
+
+            value = src[(ushort)index];
+            return true;
+        }
+
+        static MsgPattern EmptyArgList => "No arguments specified";
+
+        static MsgPattern ArgSpecError => "Argument specification error";
     }
 }

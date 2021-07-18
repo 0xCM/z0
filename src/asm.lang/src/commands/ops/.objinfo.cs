@@ -11,6 +11,8 @@ namespace Z0.Asm
         {
             var id = arg(args,0).Value;
             var src = Workspace.ObjPath(id);
+            if(!src.Exists)
+                return (false,FS.missing(src));
             using var reader = PeReader.create(src);
             var info = reader.ReadCoffInfo();
             var formatter = info.Formatter();

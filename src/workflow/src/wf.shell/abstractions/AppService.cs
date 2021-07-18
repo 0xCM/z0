@@ -193,17 +193,17 @@ namespace Z0
 
         protected WfExecFlow<T> Running<T>(T msg, [Caller] string operation = null)
             where T : IMsgPattern
-                => Wf.Running(msg, string.Format("{0}/{1}", HostName, operation));
+                => Wf.Running(msg, string.Format("{0,-16} | {1}", HostName, operation));
 
         protected WfExecFlow<string> Running([Caller] string msg = null)
-            => Wf.Running(string.Format("{0}/{1}", HostName, msg));
+            => Wf.Running(string.Format("{0} | {1,-16}", HostName, msg));
 
         protected ExecToken Ran<T>(WfExecFlow<T> flow, [Caller] string msg = null)
-                => Wf.Ran(flow.WithMsg(string.Format("{0}/{1}", HostName, msg)));
+                => Wf.Ran(flow.WithMsg(string.Format("{0,-16} | {1}", HostName, msg)));
 
         protected ExecToken Ran<T,D>(WfExecFlow<T> flow, D data, [Caller] string operation = null)
             where T : IMsgPattern
-                => Wf.Ran(flow.WithMsg(string.Format("{0} | {1}/{2}", data, HostName, operation)));
+                => Wf.Ran(flow.WithMsg(string.Format("{0} | {1,-16} | {2}", data, HostName, operation)));
 
         protected WfFileFlow EmittingFile(FS.FilePath dst)
             => Wf.EmittingFile(dst);
