@@ -266,7 +266,7 @@ namespace Z0.Asm
             return k;
         }
 
-        public static uint bitfield(ModRm src, ref uint i, Span<char> dst)
+        public static uint bitfield(ModRmByte src, ref uint i, Span<char> dst)
         {
             var i0 = i;
             const string ModRM = "ModRM";
@@ -461,7 +461,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(Sib src)
+        public static string format(SibByte src)
         {
             var dst = TextTools.buffer();
             dst.Append(src.Base().Format());

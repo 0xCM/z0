@@ -18,9 +18,9 @@ namespace Z0.Asm
 
         public SegOverride Seg;
 
-        public SizeOverride Operand;
+        public SizeOverrideCode Operand;
 
-        public SizeOverride Address;
+        public SizeOverrideCode Address;
 
         public AsmCodes.LockPrefixCode Lock
         {

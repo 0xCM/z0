@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using REP = AsmCodes.RepeatPrefix;
     using L = AsmCodes.LockPrefixCode;
-    using SZ = AsmCodes.SizeOverride;
+    using SZ = AsmCodes.SizeOverrideCode;
     using SG = AsmCodes.SegOverride;
 
     [ApiHost]

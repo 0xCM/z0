@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct TextGrid : IIndex<TextRow>
+    public readonly struct TextGrid
     {
         public Index<TextRow> RowData {get;}
 
@@ -17,7 +17,9 @@ namespace Z0
 
         public TextDocHeader Header {get;}
 
-        public uint LineCount {get;}
+        public uint RowCount {get;}
+
+        public uint ColCount {get;}
 
         [MethodImpl(Inline)]
         public TextGrid(TextDocFormat format, TextDocHeader header, uint count, params TextRow[] rows)
@@ -25,7 +27,8 @@ namespace Z0
             RowData = rows;
             Header = header;
             Format = format;
-            LineCount = count;
+            RowCount = count;
+            ColCount = RowData.IsEmpty ? 0u : (uint)RowData.First.CellCount;
         }
 
         public ReadOnlySpan<TextRow> Rows
@@ -52,11 +55,6 @@ namespace Z0
             get => ref RowData[index];
         }
 
-        public int RowCount
-        {
-            [MethodImpl(Inline)]
-            get => Rows.Length;
-        }
 
         public int Length
         {
@@ -73,13 +71,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => LineCount == 0;
+            get => RowCount == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => LineCount != 0;
+            get => RowCount != 0;
         }
 
         public static TextGrid Empty

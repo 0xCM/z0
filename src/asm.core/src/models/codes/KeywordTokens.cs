@@ -9,7 +9,7 @@ namespace Z0.Asm
     partial struct AsmCodes
     {
         [SymSource]
-        public enum SizeKeyword : byte
+        public enum SizeKeywordToken : byte
         {
             /// <summary>
             /// 8 bits

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    using F = VsibField;
+    using F = AsmCodes.VsibField;
 
     /// <summary>
     /// Represents a VSIB address

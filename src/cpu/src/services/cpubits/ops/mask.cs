@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct CpuBits
+    partial struct vbits
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T mask<T>(in Bitfield256<T> src, byte index)

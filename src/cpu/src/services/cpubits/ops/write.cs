@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct CpuBits
+    partial struct vbits
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void write<T>(T src, byte index, ref Bitfield256<T> dst)

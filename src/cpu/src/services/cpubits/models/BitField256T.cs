@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    using api = CpuBits;
+    using api = vbits;
 
     public struct Bitfield256<T>
         where T : unmanaged

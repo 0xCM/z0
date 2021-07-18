@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using static core;
 
     public struct EnumSpec
@@ -25,9 +27,10 @@ namespace Z0
         public Index<string> Symbols;
     }
 
+
     public class EnumGenerator : CodeGenerator<EnumSpec>
     {
-        public override void Generate(in EnumSpec spec, ITextBuffer dst)
+        public override Outcome Generate(in EnumSpec spec, ITextBuffer dst)
         {
             var kw = NumericKinds.kind(spec.DataType).Keyword();
             var counter = 0ul;
@@ -46,6 +49,10 @@ namespace Z0
                 dst.AppendLineFormat("    {0} = {1}", name, value);
             }
             dst.AppendLine("}");
+
+            return true;
         }
+
+
     }
 }

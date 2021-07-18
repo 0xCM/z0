@@ -36,37 +36,37 @@ namespace Z0.Asm
             /// <summary>
             /// Below, not above or equal
             /// </summary>
-            [Symbol("B|NAE", "Below, not Above or Equal")]
+            [Symbol("B|NAE", "Below | Not Above or Equal")]
             B = b0010,
 
             /// <summary>
             /// Not Below
             /// </summary>
-            [Symbol("NB|AE", "Not Below")]
+            [Symbol("NB|AE", "Not Below | Above or Equal")]
             NB = b0011,
 
             /// <summary>
             /// Equal; Zero
             /// </summary>
-            [Symbol("E|Z", "Equal; Zero")]
+            [Symbol("E|Z", "Equal | Zero")]
             E = b0100,
 
             /// <summary>
             /// Not Equal; Not Zero
             /// </summary>
-            [Symbol("NE|NZ", "Not Equal; Not Zero")]
+            [Symbol("NE|NZ", "Not Equal | Not Zero")]
             NE = b0101,
 
             /// <summary>
             /// Below or equal, Not above
             /// </summary>
-            [Symbol("BE|NA", "Below or Equal; Not Above")]
+            [Symbol("BE|NA", "Below or Equal | Not Above")]
             BE = b0110,
 
             /// <summary>
             /// Not below or equal, Above
             /// </summary>
-            [Symbol("NBE|A", "Not Below or Equal; Above")]
+            [Symbol("NBE|A", "Not Below or Equal | Above")]
             NBE = b0111,
 
             /// <summary>
@@ -84,37 +84,37 @@ namespace Z0.Asm
             /// <summary>
             /// Parity Even
             /// </summary>
-            [Symbol("P|PE", "Parity (even)")]
+            [Symbol("P|PE", "Parity | Parity Even")]
             P = b1010,
 
             /// <summary>
             /// Parity Odd
             /// </summary>
-            [Symbol("NP|PO", "Not Parity (odd)")]
+            [Symbol("NP|PO", "Not Parity | Parity Odd)")]
             NP = b1011,
 
             /// <summary>
             /// Less than; Not greater than or equal to
             /// </summary>
-            [Symbol("L|NGE", "Less Than; Not Greater Than or Equal")]
+            [Symbol("L|NGE", "Less Than | Not Greater Than or Equal")]
             L = b1100,
 
             /// <summary>
             /// Not less than, Greater than or equal to
             /// </summary>
-            [Symbol("NL|GE", "Not Less Than; Greater Than or Equal")]
+            [Symbol("NL|GE", "Not Less Than | Greater Than or Equal")]
             NL = b1101,
 
             /// <summary>
             /// Less than or equal to, Not greater than
             /// </summary>
-            [Symbol("LE|NG", "Less Than or Equal|Not Greater Than")]
+            [Symbol("LE|NG", "Less Than or Equal | Not Greater Than")]
             LE = b1110,
 
             /// <summary>
             /// Not less than or equal to, Greater than
             /// </summary>
-            [Symbol("NLE|G", "Not Less Than or Equal; Greater Than")]
+            [Symbol("NLE|G", "Not Less Than or Equal | Greater Than")]
             NLE = b1111,
         }
     }

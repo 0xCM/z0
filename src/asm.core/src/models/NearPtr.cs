@@ -28,6 +28,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator NearPtr(MemoryAddress src)
             => new NearPtr(src);
-
     }
 }

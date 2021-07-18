@@ -7,6 +7,21 @@ namespace Z0.Asm
     partial struct AsmCodes
     {
         [SymSource]
+        public enum RelKind : byte
+        {
+            None = 0,
+
+            [Symbol("rel8")]
+            Rel8,
+
+            [Symbol("rel16")]
+            Rel16,
+
+            [Symbol("rel32")]
+            Rel32
+        }
+
+        [SymSource]
         public enum PrefixToken : byte
         {
             [Symbol("66")]
@@ -178,7 +193,7 @@ namespace Z0.Asm
         }
 
         [SymSource]
-        public enum FpuToken : byte
+        public enum FpuDigitToken : byte
         {
             [Symbol("+0")]
             i0,

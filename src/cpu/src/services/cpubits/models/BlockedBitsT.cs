@@ -21,7 +21,7 @@ namespace Z0
 
         public readonly uint BlockCount {get;}
 
-        internal readonly SpanBlock64<T> Data;
+        readonly SpanBlock64<T> Data;
 
         public Span<byte> Bytes
         {

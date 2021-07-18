@@ -7,7 +7,7 @@
   <ItemGroup>
       <ProjectReference Include="$(Part)" />
       <ProjectReference Include="$(BitNumbers)" />
-      <ProjectReference Include="$(BitMasks)" />
+      <ProjectReference Include="$(Bits)" />
       <ProjectReference Include="$(AsmData)" />
       <ProjectReference Include="$(Commands)" />
       <ProjectReference Include="$(Events)" />

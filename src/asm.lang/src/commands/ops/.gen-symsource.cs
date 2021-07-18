@@ -4,15 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Hex8Seq;
+    using static core;
 
-    partial struct AsmCodes
+    partial class AsmCmdService
     {
-        public enum BndPrefixCode : byte
+        Outcome GenEnum(CmdArgs src)
         {
-            None = 0,
 
-            BND = xf2
+            return true;
         }
     }
 }

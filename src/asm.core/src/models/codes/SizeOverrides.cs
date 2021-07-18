@@ -46,14 +46,14 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<SizeOverride> Parts()
+        public ReadOnlySpan<SizeOverrideCode> Parts()
             => slice(_Parts,Join, 2);
 
-        static ReadOnlySpan<SizeOverride> _Parts => new SizeOverride[]{
-            SizeOverride.None, SizeOverride.None,
-            SizeOverride.None, SizeOverride.ADSZ,
-            SizeOverride.OPSZ, SizeOverride.None,
-            SizeOverride.OPSZ, SizeOverride.ADSZ,
+        static ReadOnlySpan<SizeOverrideCode> _Parts => new SizeOverrideCode[]{
+            SizeOverrideCode.None, SizeOverrideCode.None,
+            SizeOverrideCode.None, SizeOverrideCode.ADSZ,
+            SizeOverrideCode.OPSZ, SizeOverrideCode.None,
+            SizeOverrideCode.OPSZ, SizeOverrideCode.ADSZ,
             };
     }
 }

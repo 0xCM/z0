@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a blocked primal matrix of natural dimensions
@@ -27,13 +27,13 @@ namespace Z0
         /// The number of matrix rows
         /// </summary>
         public static int Rows
-            => (int)nat64u<M>();
+            => (int)Typed.nat64u<M>();
 
         /// <summary>
         /// The number of matrix colums
         /// </summary>
         public static int Cols
-            => (int)nat64u<N>();
+            => (int)Typed.nat64u<N>();
 
         /// <summary>
         /// The total number of matrix cells

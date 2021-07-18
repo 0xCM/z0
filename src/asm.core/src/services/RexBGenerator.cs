@@ -12,13 +12,13 @@ namespace Z0.Asm
     using static AsmCodes;
 
     /// <summary>
-    /// Generates <see cref='RexBCode'/> tables
+    /// Generates <see cref='RexB'/> tables
     /// </summary>
     public sealed class RexBGenerator : AsmModelFactory<RexBGenerator>
     {
         // RexBBits:[Index[00000] | Token[000]]
-        public static RexBCode rexb(RexBToken token, RegIndexCode r)
-            => new RexBCode(token,r);
+        public static RexB rexb(RexBToken token, RegIndexCode r)
+            => new RexB(token,r);
 
         Symbols<RexBToken> _Tokens;
 
@@ -61,9 +61,9 @@ namespace Z0.Asm
             get => _Tokens.Kinds;
         }
 
-        public ReadOnlySpan<RexBCode> Generate()
+        public ReadOnlySpan<RexB> Generate()
         {
-            var dst = span<RexBCode>(256);
+            var dst = span<RexB>(256);
             var i=0u;
             var counter = 0u;
             counter += IncludeGp8(ref i, dst);
@@ -74,7 +74,7 @@ namespace Z0.Asm
             return slice(dst,0,counter);
         }
 
-        byte IncludeGp8(ref uint i, Span<RexBCode> dst)
+        byte IncludeGp8(ref uint i, Span<RexB> dst)
         {
             const byte RegCount = 16;
             var i0 = i;
@@ -89,7 +89,7 @@ namespace Z0.Asm
             return (byte)(i - i0);
         }
 
-        byte IncludeGp16(ref uint i, Span<RexBCode> dst)
+        byte IncludeGp16(ref uint i, Span<RexB> dst)
         {
             const byte RegCount = 16;
             var i0 = i;
@@ -104,7 +104,7 @@ namespace Z0.Asm
             return (byte)(i - i0);
         }
 
-        byte IncludeGp32(ref uint i, Span<RexBCode> dst)
+        byte IncludeGp32(ref uint i, Span<RexB> dst)
         {
             const byte RegCount = 16;
             var i0 = i;
@@ -118,7 +118,7 @@ namespace Z0.Asm
             return (byte)(i - i0);
         }
 
-        byte IncludeGp64(ref uint i, Span<RexBCode> dst)
+        byte IncludeGp64(ref uint i, Span<RexB> dst)
         {
             const byte RegCount = 16;
             var i0 = i;
@@ -132,7 +132,7 @@ namespace Z0.Asm
             return (byte)(i - i0);
         }
 
-        byte IncludeGp8Hi(ref uint i, Span<RexBCode> dst)
+        byte IncludeGp8Hi(ref uint i, Span<RexB> dst)
         {
             const byte RegCount = 4;
             var i0 = i;

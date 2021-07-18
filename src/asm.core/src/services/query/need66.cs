@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static MachineMode;
+    using static MachineModeKind;
     using static OperandSize;
 
     partial struct AsmQuery
@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <param name="default"></param>
         /// <param name="effective"></param>
         [Op]
-        public static bit need66(MachineMode mode, OperandSize @default, OperandSize effective)
+        public static bit need66(MachineModeKind mode, OperandSize @default, OperandSize effective)
             => mode switch{
                 IA32e => effective switch {
                     W16 => 1,

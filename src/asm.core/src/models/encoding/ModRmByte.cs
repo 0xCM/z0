@@ -13,12 +13,12 @@ namespace Z0.Asm
     /// ModRM[mod[7:6] | reg[5:3] | r/m[2:0]]
     /// </summary>
     [ApiComplete]
-    public struct ModRm
+    public struct ModRmByte
     {
         byte Data;
 
         [MethodImpl(Inline)]
-        public ModRm(byte src)
+        public ModRmByte(byte src)
             => Data = src;
 
         /// <summary>
@@ -76,17 +76,17 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static ModRm operator ^(ModRm a, ModRm b)
-            => new ModRm(math.xor(a.Data, b.Data));
+        public static ModRmByte operator ^(ModRmByte a, ModRmByte b)
+            => new ModRmByte(math.xor(a.Data, b.Data));
 
         [MethodImpl(Inline)]
-        public static ModRm operator |(ModRm a, ModRm b)
-            => new ModRm(math.or(a.Data, b.Data));
+        public static ModRmByte operator |(ModRmByte a, ModRmByte b)
+            => new ModRmByte(math.or(a.Data, b.Data));
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(ModRm src)
+        public static implicit operator byte(ModRmByte src)
             => src.Encoded;
 
-        public static ModRm Empty => default;
+        public static ModRmByte Empty => default;
     }
 }

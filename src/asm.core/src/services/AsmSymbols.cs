@@ -76,7 +76,7 @@ namespace Z0.Asm
             _YmmRegs = AsmCodes.YmmRegs();
             _ZmmRegs = AsmCodes.ZmmRegs();
             _MmxRegs = AsmCodes.MmxRegs();
-            _ConditionCodes = AsmCodes.JccCodes();
+            _ConditionCodes = AsmCodes.ConditionCodes();
             _SegRegs  = AsmCodes.SegRegs();
             _CrRegs = AsmCodes.ControlRegs();
             _FpuRegs = AsmCodes.FpuRegs();

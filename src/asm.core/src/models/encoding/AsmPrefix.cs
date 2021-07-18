@@ -11,6 +11,7 @@ namespace Z0.Asm
     using static AsmCodes;
 
     /// <summary>
+    /// Represents a prefix encoding
     /// [Kind[24,27] | Encoding]
     /// </summary>
     public struct AsmPrefix

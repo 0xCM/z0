@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct CpuBits
+    partial struct vbits
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte segwidth<T>(in Bitfield256<T> src, byte index)

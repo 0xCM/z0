@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
 
     // SIB[Scale[6,7] | Index[3,5] | Base[0,2]]
-    public struct Sib
+    public struct SibByte
     {
         byte Data;
 
@@ -41,7 +41,7 @@ namespace Z0.Asm
             get => !IsEmpty;
         }
 
-        public static Sib Empty
+        public static SibByte Empty
             => default;
     }
 }

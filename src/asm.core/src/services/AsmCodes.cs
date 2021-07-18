@@ -141,7 +141,7 @@ namespace Z0.Asm
             => _SysPtrRegs;
 
         [Op]
-        public static Symbols<ConditionCode> JccCodes()
+        public static Symbols<ConditionCode> ConditionCodes()
             => _JccCodes;
 
         [Op]

@@ -8,20 +8,6 @@ namespace Z0.Asm
 
     partial struct AsmCodes
     {
-        [SymSource]
-        public enum RelKind : byte
-        {
-            None = 0,
-
-            [Symbol("rel8")]
-            Rel8,
-
-            [Symbol("rel16")]
-            Rel16,
-
-            [Symbol("rel32")]
-            Rel32
-        }
 
         public readonly struct Rel8 : IAsmRel<Rel8>
         {

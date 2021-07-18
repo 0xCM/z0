@@ -9,12 +9,12 @@ namespace Z0.Asm
     using static Root;
     using static AsmCodes;
 
-    public readonly struct AddressSizeOverride : IAsmPrefix<SizeOverride>
+    public readonly struct AddressSizeOverride : IAsmPrefix<SizeOverrideCode>
     {
-        public SizeOverride Code {get;}
+        public SizeOverrideCode Code {get;}
 
         [MethodImpl(Inline)]
-        public AddressSizeOverride(SizeOverride code)
+        public AddressSizeOverride(SizeOverrideCode code)
         {
             Code = code;
         }

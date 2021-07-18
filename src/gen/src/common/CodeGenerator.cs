@@ -207,6 +207,6 @@ namespace Z0
 
     public abstract class CodeGenerator<C> : CodeGenerator
     {
-        public abstract void Generate(in C config, ITextBuffer dst);
+        public abstract Outcome Generate(in C config, ITextBuffer dst);
     }
 }

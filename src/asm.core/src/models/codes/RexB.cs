@@ -10,12 +10,12 @@ namespace Z0.Asm
     using static Root;
     using static AsmCodes;
 
-    public struct RexBCode
+    public struct RexB
     {
         readonly byte Value;
 
         [MethodImpl(Inline)]
-        internal RexBCode(RexBToken token, RegIndexCode r)
+        internal RexB(RexBToken token, RegIndexCode r)
         {
             Value = math.or((byte)token, math.sll((byte)r,3));
         }

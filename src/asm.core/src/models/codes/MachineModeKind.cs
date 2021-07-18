@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// See Vol I.3.1
     /// </remarks>
     [Flags]
-    public enum MachineMode : byte
+    public enum MachineModeKind : byte
     {
         None = 0,
 

@@ -13,6 +13,9 @@ namespace Z0.Asm
     using F = AsmCodes.RFlagBits;
     using I = AsmCodes.RFlagIndex;
 
+    /// <summary>
+    /// Defines the state of a <see cref='F'/> join
+    /// </summary>
     [ApiComplete]
     public struct StatusFlags
     {

@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Math)" />
-    <ProjectReference Include="$(BitMasks)" />
+    <ProjectReference Include="$(Bits)" />
     <ProjectReference Include="$(BitNumbers)" />
   </ItemGroup>
 

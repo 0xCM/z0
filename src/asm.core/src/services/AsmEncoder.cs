@@ -13,18 +13,18 @@ namespace Z0.Asm
     using static core;
     using static AsmCodes;
 
-    using K = RexPrefixCode;
+    using K = AsmCodes.RexPrefixCode;
 
     [ApiHost]
     public readonly struct AsmEncoder
     {
         // RexBBits:[Index[00000] | Token[000]]
-        public static RexBCode rexb(RexBToken token, RegIndexCode r)
-            => new RexBCode(token,r);
+        public static RexB rexb(RexBToken token, RegIndexCode r)
+            => new RexB(token,r);
 
         [MethodImpl(Inline), Op]
-        public static ModRm modrm(byte src)
-            => new ModRm(src);
+        public static ModRmByte modrm(byte src)
+            => new ModRmByte(src);
 
         [MethodImpl(Inline), Op]
         public static MandatoryPrefix mandatory(MandatoryPrefixCode code)
@@ -54,7 +54,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static ModRm modrm(uint3 r1, uint3 r2)
+        public static ModRmByte modrm(uint3 r1, uint3 r2)
             => modrm(r1, r2, uint2.Max);
 
         [MethodImpl(Inline), Op]
@@ -62,8 +62,8 @@ namespace Z0.Asm
             => math.or((byte)RexPrefixCode.Base, (byte)wrxb);
 
         [MethodImpl(Inline), Op]
-        public static ModRm modrm(uint3 rm, uint3 reg, uint2 mod)
-            => new ModRm(Bits.join((rm, 0), (reg, 3), (mod, 6)));
+        public static ModRmByte modrm(uint3 rm, uint3 reg, uint2 mod)
+            => new ModRmByte(Bits.join((rm, 0), (reg, 3), (mod, 6)));
 
         [MethodImpl(Inline), Op]
         public static ref AsmHexCode rex(uint4 wrxb, uint4 index, ref AsmHexCode dst)

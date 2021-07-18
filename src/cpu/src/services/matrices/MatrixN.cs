@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     /// <summary>
     /// Defines a primal square matrix of natural order
@@ -24,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The square matrix dimension
         /// </summary>
-        public static int Order => (int)nat64u<N>();
+        public static int Order => (int)Typed.nat64u<N>();
 
         /// <summary>
         /// The total number of allocated elements

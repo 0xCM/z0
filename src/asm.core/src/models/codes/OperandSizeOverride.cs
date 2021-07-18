@@ -11,10 +11,10 @@ namespace Z0.Asm
 
     public readonly struct OperandSizeOverride : IAsmPrefix<OperandSizeOverride>
     {
-        public SizeOverride Code {get;}
+        public SizeOverrideCode Code {get;}
 
         [MethodImpl(Inline)]
-        public OperandSizeOverride(SizeOverride code)
+        public OperandSizeOverride(SizeOverrideCode code)
         {
             Code = code;
         }

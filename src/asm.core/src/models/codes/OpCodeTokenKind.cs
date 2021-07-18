@@ -9,32 +9,48 @@ namespace Z0.Asm
     using static AsmCodes;
 
     [Flags]
-    public enum OpCodeTokenKind : byte
+    public enum OpCodeTokenKind : ushort
     {
         None = 0,
 
-        [SymClass(typeof(PrefixToken))]
+        /// <summary>
+        /// Classifies <see cref='PrefixToken'/> tokens
+        /// </summary>
         Prefix = 1,
 
-        [SymClass(typeof(RexBToken))]
+        /// <summary>
+        /// Classifies <see cref='RexBToken'/> tokens
+        /// </summary>
         RexBExtension = 2,
 
-        [SymClass(typeof(ModRmToken))]
+        /// <summary>
+        /// Classifies <see cref='ModRmToken'/> tokens
+        /// </summary>
         RegOpCodeMod = 4,
 
-        [SymClass(typeof(SegOverrideToken))]
+        /// <summary>
+        /// Classifies <see cref='SegOverrideToken'/> tokens
+        /// </summary>
         SegOverride = 8,
 
-        [SymClass(typeof(OffsetToken))]
+        /// <summary>
+        /// Classifies <see cref='OffsetToken'/> tokens
+        /// </summary>
         Offset = 16,
 
-        [SymClass(typeof(ImmSizeToken))]
+        /// <summary>
+        /// Classifies <see cref='ImmSizeToken'/> tokens
+        /// </summary>
         ImmSize = 32,
 
-        [SymClass(typeof(ExclusionToken))]
+        /// <summary>
+        /// Classifies <see cref='ExclusionToken'/> tokens
+        /// </summary>
         Exclusion = 64,
 
-        [SymClass(typeof(PrefixToken))]
-        FpuDigit,
+        /// <summary>
+        /// Classifies <see cref='FpuDigitToken'/> tokens
+        /// </summary>
+        FpuDigit = 128,
     }
 }

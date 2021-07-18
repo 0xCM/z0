@@ -10,33 +10,20 @@ namespace Z0.Asm
 
     public readonly struct AddressingMode
     {
-        [SymSource]
-        public enum Kind : byte
-        {
-            [Symbol("m16b", "Specifies 16-bit addressing")]
-            Mode16,
-
-            [Symbol("m32b", "Specifies 32-bit addressing")]
-            Mode32,
-
-            [Symbol("m64b", "Specifies 64-bit addressing")]
-            Mode64,
-        }
-
-        public Kind Value {get;}
+        public AddressingKind Value {get;}
 
         [MethodImpl(Inline)]
-        public AddressingMode(Kind kind)
+        public AddressingMode(AddressingKind kind)
         {
             Value = kind;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator AddressingMode(Kind src)
+        public static implicit operator AddressingMode(AddressingKind src)
             => new AddressingMode(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Kind(AddressingMode src)
+        public static implicit operator AddressingKind(AddressingMode src)
             => src.Value;
 
         [MethodImpl(Inline)]
