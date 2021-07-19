@@ -4,8 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public readonly struct AsmPatterns
+    partial class AsmCmdService
     {
-
+        [CmdOp(".emit-respack")]
+        Outcome EmitRespPack(CmdArgs args)
+        {
+            Wf.ResPackEmitter().Emit();
+            return true;
+        }
     }
 }

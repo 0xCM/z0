@@ -13,35 +13,37 @@ namespace Z0
 
     public class PartNames
     {
-        public static IReadOnlyDictionary<PartId,PartName> lookup()
-            => _Instance._Lookup;
+        public static IReadOnlyDictionary<PartId,PartName> NameLookup()
+            => _Instance.IdNames;
+
+        public static bool FindId(string symbol, out PartId id)
+            => _Instance.SymbolIds.TryGetValue(symbol, out id);
 
         static PartNames _Instance;
 
-        Dictionary<PartId,PartName> _Lookup;
+        Dictionary<PartId,PartName> IdNames;
 
-        static Dictionary<PartId,PartName> names()
-        {
-            var fields = typeof(PartId).LiteralFields().ToReadOnlySpan();
-            var dst = new Dictionary<PartId,PartName>();
-            foreach(var f in fields)
-            {
-                var key = (PartId)f.GetRawConstantValue();
-                var name = f.Tag<SymbolAttribute>().MapValueOrElse(a => a.Symbol, () => f.Name);
-                var pn = new PartName(key,name);
-                dst.TryAdd(key,pn);
-            }
-            return dst;
-        }
+
+        Dictionary<string,PartId> SymbolIds;
 
         static PartNames()
         {
-            _Instance = new PartNames(names());
+            _Instance = new PartNames();
         }
 
-        PartNames(Dictionary<PartId,PartName> src)
+        PartNames()
         {
-            _Lookup = src;
+            var fields = typeof(PartId).LiteralFields().ToReadOnlySpan();
+            IdNames = new Dictionary<PartId,PartName>();
+            SymbolIds = new Dictionary<string,PartId>();
+            foreach(var f in fields)
+            {
+                var id = (PartId)f.GetRawConstantValue();
+                var symbol = f.Tag<SymbolAttribute>().MapValueOrElse(a => a.Symbol, () => f.Name);
+                var name = new PartName(id,symbol);
+                IdNames.TryAdd(id,name);
+                SymbolIds.TryAdd(symbol,id);
+            }
         }
     }
 }

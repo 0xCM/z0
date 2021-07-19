@@ -11,10 +11,6 @@ namespace Z0
     public static class XSvc
     {
         [Op]
-        public static ApiCaptureArchive ApiCaptureArchive(this IWfRuntime wf)
-            => Z0.ApiCaptureArchive.create(wf);
-
-        [Op]
         public static ApiCaptureService ApiCapture(this IWfRuntime wf)
             => Z0.ApiCaptureService.create(wf);
 

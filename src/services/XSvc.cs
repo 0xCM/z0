@@ -43,5 +43,9 @@ namespace Z0
 
         public static FileSplitter FileSplitter(this IWfRuntime wf)
             => Svc.FileSplitter.create(wf);
+
+        [Op]
+        public static ApiCaptureArchive ApiCaptureArchive(this IWfRuntime wf)
+            => Z0.ApiCaptureArchive.create(wf);
     }
 }

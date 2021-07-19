@@ -294,7 +294,7 @@ namespace Z0
             var count = blocks.Length;
             var buffer = alloc<ApiHexIndexRow>(count);
             var target = span(buffer);
-            var parts = PartNames.lookup();
+            var parts = PartNames.NameLookup();
             using var emitter = Tables.emitter<ApiHexIndexRow>(array<byte>(10, 16, 20, 20, 20, 120), dst);
             emitter.EmitHeader();
             for(var i=0u; i<count; i++)

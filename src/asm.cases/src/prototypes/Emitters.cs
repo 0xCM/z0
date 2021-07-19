@@ -5,11 +5,11 @@
 namespace Z0.Asm
 {
     using System;
+
     using static core;
 
     partial struct Prototypes
     {
-
         [ApiHost(prototypes + "emitters")]
         public unsafe struct Emitters
         {
@@ -179,6 +179,5 @@ namespace Z0.Asm
                 }
             }
         }
-
     }
 }

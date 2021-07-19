@@ -89,20 +89,18 @@ namespace Z0
             return src[(ushort)index];
         }
 
-        protected bool Arg(in CmdArgs src, int index, out CmdArg value)
+        protected Outcome Arg(in CmdArgs src, int index, out CmdArg value)
         {
             value = default;
             if(src.IsEmpty)
             {
-                Error(EmptyArgList.Format());
-                return false;
+                return (false,EmptyArgList.Format());
             }
 
             var count = src.Length;
             if(count < index - 1)
             {
-                Error(ArgSpecError.Format());
-                return false;
+                return (false, ArgSpecError.Format());
             }
 
             value = src[(ushort)index];

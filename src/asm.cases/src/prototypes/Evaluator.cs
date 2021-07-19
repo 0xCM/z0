@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     partial struct Prototypes
     {
-
         [ApiHost(prototypes + dispatcher)]
         public readonly struct Dispatcher
         {

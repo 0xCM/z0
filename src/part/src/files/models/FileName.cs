@@ -39,7 +39,6 @@ namespace Z0
                 get => HasExtension ? FS.ext(Path.GetExtension(Name)) : FileExt.Empty;
             }
 
-
             public bool IsEmpty
             {
                 [MethodImpl(Inline)]

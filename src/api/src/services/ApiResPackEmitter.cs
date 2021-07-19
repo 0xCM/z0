@@ -30,7 +30,6 @@ namespace Z0
 
         void RunScripts()
         {
-            //var runner = ScriptRunner.create(Db);
             var runner = Wf.ScriptRunner();
             var build = runner.RunControlScript(ControlScripts.BuildRespack);
             iter(build, line => Wf.Row(line));

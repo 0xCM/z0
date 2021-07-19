@@ -48,7 +48,7 @@ namespace Z0
                         Wf.EmittedFile(emitting, subcount);
                         path = NextPath(spec, ref splitcount);
                         paths.Add(path);
-                        writer = path.Writer();
+                        writer = path.Writer(spec.TargetEncoding);
                         linecount += subcount;
                         subcount = 0;
                         emitting = Wf.EmittingFile(path);
