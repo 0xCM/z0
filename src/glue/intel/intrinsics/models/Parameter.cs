@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class IntrinsicsModels
+    public partial class IntrinsicsModels
     {
         public struct Parameter : ITextual
         {

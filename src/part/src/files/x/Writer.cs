@@ -35,10 +35,6 @@ namespace Z0
             => FS.writer(dst, FileWriteMode.Overwrite, Encoding.ASCII);
 
         [Op]
-        public static StreamWriter Writer(this FS.FilePath dst, FileWriteMode mode, Encoding encoding)
-            => FS.writer(dst, mode, encoding);
-
-        [Op]
         public static void AppendLines(this FS.FilePath dst, string src)
             => File.AppendAllLines(dst.EnsureParentExists().Name, core.array(src), Encoding.UTF8);
 

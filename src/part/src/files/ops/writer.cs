@@ -21,20 +21,12 @@ namespace Z0
         public static StreamWriter writer(FS.FilePath dst, FileWriteMode mode, Encoding encoding)
             => new StreamWriter(dst.EnsureParentExists().Name.Format(), mode == FileWriteMode.Append, encoding);
 
-        /// <summary>
-        /// Creates an overwriting and caller-disposed stream writer that targets a specified path
-        /// </summary>
-        /// <param name="dst">The file path</param>
         [Op]
         public static StreamWriter writer(FS.FilePath dst, TextEncodingKind encoding)
             => writer(dst, FileWriteMode.Overwrite, encoding.ToSystemEncoding());
 
         [Op]
-        public static StreamWriter writer(FS.FilePath dst, Encoding encoding)
-            => writer(dst, FileWriteMode.Overwrite, Encoding.UTF8);
-
-        [Op]
-        public static StreamWriter writer(FS.FilePath dst, FileWriteMode mode)
-            => writer(dst, mode, Encoding.UTF8);
+        public static StreamWriter writer(FS.FilePath dst, FileWriteMode mode, TextEncodingKind encoding)
+            => writer(dst, mode, encoding.ToSystemEncoding());
     }
 }

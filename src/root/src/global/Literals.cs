@@ -38,6 +38,8 @@ namespace Z0
 
         public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;
 
+        public const char ListDelimiter = Chars.Comma;
+
         /// <summary>
         /// Specifies the <see cref='CC.StdCall'/> calling convention where the
         /// callee is responsible for stack management

@@ -4,13 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-    partial class IntrinsicsModels
+    partial class AsmCmdService
     {
-
+        [CmdOp(".dump-obj")]
+        Outcome DumpObj(CmdArgs args)
+        {
+            return DumpModule(FileModuleKind.Obj);
+        }
     }
 }

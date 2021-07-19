@@ -6,10 +6,10 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".dump-exe")]
-        Outcome DumpExe(CmdArgs args)
+        [CmdOp(".dump-dll")]
+        Outcome DumpDll(CmdArgs args)
         {
-            return DumpModule(FileModuleKind.Exe);
+            return DumpModule(FileModuleKind.Dll);
         }
     }
 }

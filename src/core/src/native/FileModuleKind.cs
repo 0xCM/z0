@@ -34,7 +34,7 @@ namespace Z0
         /// <summary>
         /// Classifies a file as a module that does not require a managed execution context for use
         /// </summary>
-        Native =  P2ᐞ03,
+        Native = P2ᐞ03,
 
         /// <summary>
         /// Classifies a file as a module that requires a managed execution context for use
@@ -45,6 +45,11 @@ namespace Z0
         /// Classifies a file as a hybrid module that contains both IL and managed code
         /// </summary>
         Hybrid = P2ᐞ05,
+
+        /// <summary>
+        /// Classifies an object file
+        /// </summary>
+        Obj = P2ᐞ06,
 
         /// <summary>
         /// Classifies a file as a <see cref='Native'/> <see cref='Dll' />

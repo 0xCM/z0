@@ -10,12 +10,6 @@ namespace Z0
     using static Root;
     using static FormatFunctions;
 
-    partial class XTend
-    {
-        public static DelimitedIndex<T> Delimited<T>(this T[] src, char delimiter = Chars.Comma)
-            => new DelimitedIndex<T>(src, delimiter);
-    }
-
     public readonly struct DelimitedIndex<T> : IIndex<T>, ITextual
     {
         public Index<T> Data {get;}
@@ -27,7 +21,7 @@ namespace Z0
         readonly FormatCells<T> Render;
 
         [MethodImpl(Inline)]
-        public DelimitedIndex(Index<T> src, char delimiter = FieldDelimiter, int pad = 0)
+        public DelimitedIndex(Index<T> src, char delimiter = ListDelimiter, int pad = 0)
         {
             Data = src;
             Delimiter = delimiter;
@@ -36,7 +30,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public DelimitedIndex(T[] src, char delimiter = FieldDelimiter, int pad = 0)
+        public DelimitedIndex(T[] src, char delimiter = ListDelimiter, int pad = 0)
         {
             Data = src;
             Delimiter = delimiter;
@@ -45,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public DelimitedIndex(T[] src, FormatCells<T> fx, char delimiter = FieldDelimiter, int pad = 0)
+        public DelimitedIndex(T[] src, FormatCells<T> fx, char delimiter = ListDelimiter, int pad = 0)
         {
             Data = src;
             Delimiter = delimiter;

@@ -205,8 +205,46 @@ namespace Z0.Asm
             Tables.emit(files.View, dst);
         }
 
-        static MsgPattern NoToolSelected => "No tool selected";
+        Outcome DumpModule(FileModuleKind kind)
+        {
+            var script = kind switch{
+                FileModuleKind.Obj => "dump-obj",
+                FileModuleKind.Exe => "dump-exe",
+                FileModuleKind.Lib => "dump-lib",
+                FileModuleKind.Dll => "dump-dll",
+                _ => EmptyString
+            };
 
+
+            var ext = kind switch{
+                FileModuleKind.Dll => FS.Dll,
+                FileModuleKind.Obj => FS.Obj,
+                FileModuleKind.Exe => FS.Exe,
+                FileModuleKind.Lib => FS.Lib,
+                _ => FS.FileExt.Empty
+            };
+
+
+            if(empty(script))
+                return (false, string.Format("{0} not supported", kind));
+
+            var cmd = Cmd.cmdline(ToolBase().Script(Toolspace.dumpbin, script).Format(PathSeparator.BS));
+            var input = SrcDir().Files(ext).ToReadOnlySpan();
+            var count = input.Length;
+            var vars = Cmd.vars(
+                ("SrcDir", SrcDir().Format(PathSeparator.BS)),
+                ("DstDir", DstDir().Format(PathSeparator.BS))
+                );
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(input,i);
+                vars[2] = ("SrcFile", path.FileName.Format());
+                var response = ScriptRunner.RunCmd(cmd, vars);
+            }
+            return true;
+        }
+
+        static MsgPattern NoToolSelected => "No tool selected";
 
         static MsgPattern CapacityExceeded => "Capacity exceeded";
 

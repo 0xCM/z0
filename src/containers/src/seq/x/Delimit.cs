@@ -23,23 +23,23 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static DelimitedIndex<T> Delimit<T>(this T[] src, char delimiter = FieldDelimiter, int pad = 0)
+        public static DelimitedIndex<T> Delimit<T>(this T[] src, char delimiter = ListDelimiter, int pad = 0)
             => new DelimitedIndex<T>(src, delimiter, pad);
 
         [MethodImpl(Inline)]
-        public static DelimitedIndex<T> Delimit<T>(this IEnumerable<T> src, char delimiter = FieldDelimiter, int pad = 0)
+        public static DelimitedIndex<T> Delimit<T>(this IEnumerable<T> src, char delimiter = ListDelimiter, int pad = 0)
             => new DelimitedIndex<T>(src.Array(), delimiter, pad);
 
         [MethodImpl(Inline)]
-        public static DelimitedSpan<T> Delimit<T>(this ReadOnlySpan<T> src, char delimiter = FieldDelimiter, int pad = 0)
+        public static DelimitedSpan<T> Delimit<T>(this ReadOnlySpan<T> src, char delimiter = ListDelimiter, int pad = 0)
             => Seq.delimit(delimiter, pad, src);
 
         [MethodImpl(Inline)]
-        public static DelimitedSpan<T> Delimit<T>(this Span<T> src, char delimiter = FieldDelimiter, int pad = 0)
+        public static DelimitedSpan<T> Delimit<T>(this Span<T> src, char delimiter = ListDelimiter, int pad = 0)
             => Seq.delimit(delimiter, pad, src);
 
         [MethodImpl(Inline)]
-        public static DelimitedIndex<T> Delimit<T>(this IIndex<T> src, char delimiter = Chars.Comma, int pad = 0)
+        public static DelimitedIndex<T> Delimit<T>(this IIndex<T> src, char delimiter = ListDelimiter, int pad = 0)
             => new DelimitedIndex<T>(src.Storage, delimiter, pad);
 
         public static void Delimit<T>(this StringBuilder sb, string content, char delimiter, int pad)
@@ -56,7 +56,7 @@ namespace Z0
         }
 
 
-        public static void Delimit<F,T>(this StringBuilder sb, F field, T content, char delimiter = FieldDelimiter)
+        public static void Delimit<F,T>(this StringBuilder sb, F field, T content, char delimiter = ListDelimiter)
             where F : unmanaged, Enum
             where T : ITextual
         {
@@ -64,7 +64,7 @@ namespace Z0
             sb.Append($"{content.Format()}".PadRight(width(field)));
         }
 
-        public static void Delimit<F>(this StringBuilder sb, F field, object content, char delimiter = FieldDelimiter)
+        public static void Delimit<F>(this StringBuilder sb, F field, object content, char delimiter = ListDelimiter)
             where F : unmanaged, Enum
         {
             sb.Append(RP.rspace(delimiter));

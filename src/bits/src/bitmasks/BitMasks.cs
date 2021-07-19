@@ -20,7 +20,6 @@ namespace Z0
 
         public readonly struct Specs
         {
-
             [MethodImpl(Inline)]
             public static JsbMask<F,D,T> jsb<F,D,T>(F f = default, D d = default, T t = default)
                 where F : unmanaged, ITypeNat

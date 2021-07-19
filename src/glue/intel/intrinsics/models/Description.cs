@@ -20,7 +20,7 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public Description(string src)
             {
-                Content = src.Replace("\r\n", " ");
+                Content = src.Replace('\t', ' ');
             }
 
             public string Format()
@@ -32,6 +32,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator Description(string src)
                 => new Description(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator string(Description src)
+                => src.Content;
         }
     }
 }

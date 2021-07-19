@@ -13,15 +13,23 @@ namespace Z0.Asm
     {
         public const string TableId = "intel.intrinsics";
 
-        public const byte FieldCount = 3;
+        public const byte FieldCount = 7;
+
+        public string Name;
+
+        public DelimitedIndex<string> CpuId;
+
+        public DelimitedIndex<string> Types;
+
+        public string Category;
+
+        public string Signature;
 
         public string Instruction;
 
         public IFormType IForm;
 
-        public string Signature;
-
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{56,56,120};
+            => new byte[FieldCount]{42,32,32,32,120,56,120};
     }
 }

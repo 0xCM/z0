@@ -12,14 +12,14 @@ namespace Z0.Asm
 
     partial class IntrinsicsModels
     {
-        public struct CpuId : ITextual
+        public struct Category : ITextual
         {
-            public const string ElementName = "CPUID";
+            public const string ElementName = "category";
 
             public string Content;
 
             [MethodImpl(Inline)]
-            public CpuId(string src)
+            public Category(string src)
             {
                 Content = src;
             }
@@ -29,6 +29,7 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => nonempty(Content);
             }
+
             public string Format()
                 => Content;
 
@@ -36,8 +37,12 @@ namespace Z0.Asm
                 => Content;
 
             [MethodImpl(Inline)]
-            public static implicit operator CpuId(string src)
-                => new CpuId(src);
+            public static implicit operator Category(string src)
+                => new Category(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator string(Category src)
+                => src.Content;
         }
     }
 }

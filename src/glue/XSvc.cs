@@ -21,8 +21,8 @@ namespace Z0
             => Asm.IntelSdmProcessor.create(wf);
 
         [Op]
-        public static IntelIntrinsicsPipe IntelIntrinsicsPipe(this IWfRuntime wf)
-            => Asm.IntelIntrinsicsPipe.create(wf);
+        public static IntelIntrinsics IntelIntrinsicsPipe(this IWfRuntime wf)
+            => Asm.IntelIntrinsics.create(wf);
 
         [Op]
         public static IntelXed IntelXed(this IWfRuntime wf)

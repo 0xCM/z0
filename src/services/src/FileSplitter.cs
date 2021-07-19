@@ -16,8 +16,8 @@ namespace Z0
             var writer = default(StreamWriter);
             try
             {
-                var flow = Wf.Running(Msg.SplittingFile.Format(spec.SourcePath.ToUri(), spec.MaxLineCount));
-                using var reader = spec.SourcePath.Utf8Reader();
+                var flow = Wf.Running(Msg.SplittingFile.Format(spec.SourcePath.ToUri(), spec.TargetEncoding, spec.MaxLineCount));
+                using var reader = spec.SourcePath.Reader(spec.TargetEncoding);
                 var paths = list<FS.FilePath>();
                 var subcount = 0u;
                 var linecount = 0u;

@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0.Asm
 {
-    public partial class llc : CmdBuilder<llc>
+    partial class AsmCmdService
     {
-        public llc()
-            : base(Toolspace.llvm_llc)
+        [CmdOp(".dump-lib")]
+        Outcome DumpLib(CmdArgs args)
         {
-
+            return DumpModule(FileModuleKind.Lib);
         }
     }
 }

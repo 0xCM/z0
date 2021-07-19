@@ -17,10 +17,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [Op]
-        public static BitSpan parse(string src)
+        public static BitSpan parse(ReadOnlySpan<char> src)
         {
-            var input = span(src);
-            var count = input.Length;
+            var count = src.Length;
             var dst = load(span<bit>(count));
             parse(src, dst);
             return dst;
@@ -31,10 +30,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
-        public static void parse(string src, BitSpan dst)
+        public static void parse(ReadOnlySpan<char> src, BitSpan dst)
         {
             ref var target = ref dst.First;
-            var input = span(src);
+            var input = src;
             var count = min(input.Length, dst.BitCount);
             var lastix = count - 1;
             for(var i=0; i<=lastix; i++)

@@ -13,6 +13,18 @@ namespace Z0.Tools
     [ApiHost]
     public readonly partial struct Llvm
     {
+        public readonly struct InstructionSets
+        {
+            public const string sse2 = "sse2";
+
+            public const string sse41 = "sse4.1";
+
+            public const string avx = "avx";
+
+            public const string avx2 = "avx2";
+
+            public const string avx512f = "avx512f";
+        }
 
         [MethodImpl(Inline), Op]
         public static Llvm tool(IEnvPaths paths)

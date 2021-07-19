@@ -55,6 +55,12 @@ namespace Z0
             get => (ModuleKind & FileModuleKind.Native) != 0;
         }
 
+        public bool IsObj
+        {
+            [MethodImpl(Inline)]
+            get => (ModuleKind & FileModuleKind.Obj) != 0;
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator ImagePath(FileModule src)
             => src.Path;

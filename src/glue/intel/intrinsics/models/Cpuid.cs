@@ -6,20 +6,25 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
 
     partial class IntrinsicsModels
     {
-        public struct Category : ITextual
+        public class CpuIdMembership : List<CpuId>
         {
-            public const string ElementName = "category";
+
+        }
+        public struct CpuId : ITextual
+        {
+            public const string ElementName = "CPUID";
 
             public string Content;
 
             [MethodImpl(Inline)]
-            public Category(string src)
+            public CpuId(string src)
             {
                 Content = src;
             }
@@ -29,7 +34,6 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => nonempty(Content);
             }
-
             public string Format()
                 => Content;
 
@@ -37,8 +41,12 @@ namespace Z0.Asm
                 => Content;
 
             [MethodImpl(Inline)]
-            public static implicit operator Category(string src)
-                => new Category(src);
+            public static implicit operator CpuId(string src)
+                => new CpuId(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator string(CpuId src)
+                => src.Format();
         }
     }
 }

@@ -27,25 +27,25 @@ namespace Z0
         public static implicit operator BitMask<T>(T invariant)
             => new BitMask<T>(invariant);
 
-        // [MethodImpl(Inline)]
-        // public static BitMask<T> operator &(BitMask<T> a, T b)
-        // {
-        //     a.Blend = gmath.and(a.Invariant, gmath.and(a.Blend, b));
-        //     return a;
-        // }
+        [MethodImpl(Inline)]
+        public static BitMask<T> operator &(BitMask<T> a, T b)
+        {
+            a.Blend = gmath.and(a.Invariant, gmath.and(a.Blend, b));
+            return a;
+        }
 
-        // [MethodImpl(Inline)]
-        // public static BitMask<T> operator |(BitMask<T> a, T b)
-        // {
-        //     a.Blend = gmath.and(a.Invariant, gmath.or(a.Blend, b));
-        //     return a;
-        // }
+        [MethodImpl(Inline)]
+        public static BitMask<T> operator |(BitMask<T> a, T b)
+        {
+            a.Blend = gmath.and(a.Invariant, gmath.or(a.Blend, b));
+            return a;
+        }
 
-        // [MethodImpl(Inline)]
-        // public static BitMask<T> operator ^(BitMask<T> a, T b)
-        // {
-        //     a.Blend = gmath.and(a.Invariant, gmath.xor(a.Blend, b));
-        //     return a;
-        // }
+        [MethodImpl(Inline)]
+        public static BitMask<T> operator ^(BitMask<T> a, T b)
+        {
+            a.Blend = gmath.and(a.Invariant, gmath.xor(a.Blend, b));
+            return a;
+        }
     }
 }

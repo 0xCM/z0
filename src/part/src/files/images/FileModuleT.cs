@@ -31,6 +31,7 @@ namespace Z0
                 FileModuleKind.Dll => FS.Dll,
                 FileModuleKind.Exe => FS.Exe,
                 FileModuleKind.Lib => FS.Lib,
+                FileModuleKind.Obj => FS.Obj,
                 _ =>  FS.FileExt.Empty
             };
 

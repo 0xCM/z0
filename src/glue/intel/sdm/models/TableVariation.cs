@@ -4,12 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmCmdService
+    partial struct IntelSdm
     {
-        [CmdOp(".dump-exe")]
-        Outcome DumpExe(CmdArgs args)
+        public enum TableVariation : byte
         {
-            return DumpModule(FileModuleKind.Exe);
+            [Symbol("v0")]
+            V0,
+
+            [Symbol("v1")]
+            V1,
+
+            [Symbol("v2")]
+            V2
         }
     }
 }

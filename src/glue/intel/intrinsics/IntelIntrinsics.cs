@@ -14,7 +14,7 @@ namespace Z0.Asm
     using static XedModels;
     using static IntrinsicsModels;
 
-    public class IntelIntrinsicsPipe  : AppService<IntelIntrinsicsPipe>
+    public class IntelIntrinsics  : AppService<IntelIntrinsics>
     {
         const string dataset = "intrinsics";
 
@@ -25,10 +25,8 @@ namespace Z0.Asm
             Workspace = Wf.AsmWorkspace();
         }
 
-
         public ReadOnlySpan<Intrinsic> Import()
         {
-            //algDst.Clear();
             var parsed = Parse();
             EmitLog(parsed);
             EmitTable(parsed);
@@ -137,64 +135,45 @@ namespace Z0.Asm
             }
         }
 
-
-        ReadOnlySpan<IntelIntrinsic> Summarize(ReadOnlySpan<Intrinsic> src, List<Intrinsic> unmatched)
+        void Summarize(ReadOnlySpan<Intrinsic> src, List<IntelIntrinsic> dst)
         {
             var count = src.Length;
-            var dst = list<IntelIntrinsic>();
             for(var i=0; i<count; i++)
             {
-                ref readonly var intrinsic = ref skip(src,i);
-                if(instruction(intrinsic, out var ix))
-                {
-                    var record = new IntelIntrinsic();
-                    record.Instruction = string.Format("{0} {1}", ix.name, ix.form);
-                    record.IForm = ix.xed;
-                    record.Signature = sig(intrinsic);
-                    dst.Add(record);
-                }
-                else
-                    unmatched.Add(intrinsic);
-                    //writer.WriteLine(string.Format(Pattern, string.Format("{0} {1}", ix.name, ix.form), ix.xed, sig(intrinsic)));
+                Fill(skip(src,i),out var record);
+                dst.Add(record);
             }
-            return dst.ViewDeposited();
+        }
+
+        void Fill(in Intrinsic src, out IntelIntrinsic dst)
+        {
+            dst.Name = src.name;
+            dst.CpuId = src.CPUID.Map(x => x.Content);
+            dst.Types = src.types.Map(x => x.Content);
+            dst.Category = src.category;
+            dst.Signature = sig(src);
+
+            if(instruction(src, out var ix))
+            {
+                dst.Instruction = string.Format("{0} {1}", ix.name, ix.form);
+                dst.IForm = ix.xed;
+            }
+            else
+            {
+                dst.Instruction = EmptyString;
+                dst.IForm = default;
+            }
         }
 
         void EmitTable(ReadOnlySpan<Intrinsic> src)
         {
             var dst = Workspace.ImportTable<IntelIntrinsic>();
-            var flow = Wf.EmittingFile(dst);
-            var log = Workspace.ImportDir(dataset) + FS.file("unmatched", FS.Log);
-            using var unmatched = log.Writer();
-            var _unmatched = list<Intrinsic>();
-            var rows = Summarize(src, _unmatched);
-            iter(_unmatched, u=> unmatched.WriteLine(sig(u)));
-            Tables.emit(rows,IntelIntrinsic.RenderWidths,dst);
-            Wf.EmittedFile(flow, rows.Length);
+            var flow = Wf.EmittingTable<IntelIntrinsic>(dst);
+            var rows = list<IntelIntrinsic>();
+            Summarize(src, rows);
+            var count = Tables.emit(rows.ViewDeposited(), IntelIntrinsic.RenderWidths,dst);
+            EmittedTable(flow,count);
         }
-
-        // void EmitTable(ReadOnlySpan<Intrinsic> src)
-        // {
-        //     var dst = Workspace.ImportDir(dataset) + FS.file("intrinsics", FS.Csv);
-        //     const string Pattern = "{0,-54} | {1,-54} | {2}";
-        //     var flow = Wf.EmittingFile(dst);
-        //     var count = src.Length;
-        //     var log = Workspace.ImportDir(dataset) + FS.file("unmatched", FS.Log);
-        //     using var unmatched = log.Writer();
-        //     using var writer = dst.Writer();
-        //     writer.WriteLine(string.Format(Pattern, "Intruction", "XedIForm", "Signature"));
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         ref readonly var intrinsic = ref skip(src,i);
-        //         if(instruction(intrinsic, out var ix))
-        //             writer.WriteLine(string.Format(Pattern, string.Format("{0} {1}", ix.name, ix.form), ix.xed, sig(intrinsic)));
-        //         else
-        //             unmatched.WriteLine(sig(intrinsic));
-        //     }
-
-        //     Wf.EmittedFile(flow, count);
-        // }
-
 
         ReadOnlySpan<Intrinsic> Parse(XmlDoc src)
         {
@@ -229,7 +208,7 @@ namespace Z0.Asm
                         break;
 
                         case CpuId.ElementName:
-                            read(reader, ref entries[i].CPUID);
+                            read(reader, entries[i].CPUID);
                         break;
 
                         case IntrinsicsModels.Category.ElementName:
@@ -264,8 +243,8 @@ namespace Z0.Asm
                 dst.Content.Add(line);
         }
 
-        static void read(XmlReader reader, ref CpuId dst)
-            => dst.Content = reader.ReadInnerXml();
+        static void read(XmlReader reader, CpuIdMembership dst)
+            => dst.Add(reader.ReadInnerXml());
 
         static void read(XmlReader reader, ref IntrinsicsModels.Category dst)
             => dst.Content = reader.ReadInnerXml();
@@ -317,7 +296,7 @@ namespace Z0.Asm
             dst.name = EmptyString;
             dst.content = EmptyString;
             dst.types = new InstructionTypes();
-            dst.CPUID = EmptyString;
+            dst.CPUID = new CpuIdMembership();
             dst.category = EmptyString;
             dst.@return = Return.Empty;
             dst.parameters = new Parameters();
@@ -326,6 +305,54 @@ namespace Z0.Asm
             dst.instructions = new Instructions();
             dst.header = EmptyString;
             return dst;
+        }
+
+        internal static void render(Operation src, ITextBuffer dst)
+        {
+            if(src.Content != null)
+                iter(src.Content, x => dst.AppendLine("  " + x.Content));
+        }
+
+        internal static string format(Instruction src)
+             => string.Format("# Instruction: {0} {1}\r\n", src.name, src.form) + string.Format("# Iform: {0}", src.xed);
+
+        internal static void render(Instructions src, ITextBuffer dst)
+            => iter(src, x => dst.AppendLine(format(x)));
+
+        internal static string sig(Intrinsic src)
+            => string.Format("{0} {1}({2})", src.@return,  src.name,  string.Join(", ", src.parameters.ToArray()));
+
+        internal static void body(Intrinsic src, ITextBuffer dst)
+        {
+            dst.AppendLine("{");
+            render(src.operation, dst);
+            dst.AppendLine("}");
+        }
+
+        internal static string format(Intrinsic src)
+        {
+            var dst = text.buffer();
+            overview(src, dst);
+            body(src, dst);
+            return dst.Emit();
+        }
+
+        internal static void overview(Intrinsic src, ITextBuffer dst)
+        {
+            dst.AppendLine(string.Format("# Intrinsic: {0}", sig(src)));
+
+            var classes = list<string>(3);
+            if(nonempty(src.tech))
+                classes.Add(src.tech);
+            if(src.CPUID.Count != 0)
+                classes.Add(string.Join(Chars.Comma, src.CPUID));
+            if(src.category.IsNonEmpty)
+                classes.Add(src.category.Content);
+            if(classes.Count != 0)
+                dst.AppendLineFormat("# Classification: {0}", string.Join(", ", classes));
+
+            render(src.instructions, dst);
+            dst.AppendLineFormat("# Description: {0}", src.description);
         }
     }
 }

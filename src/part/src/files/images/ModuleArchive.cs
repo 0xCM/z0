@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
+    using static FileModuleKind;
     using static Root;
 
     [Service]
@@ -45,8 +46,18 @@ namespace Z0
         public Index<FileModule> ArchiveFiles()
             => modules().Array();
 
+        public Index<FileModule> ObjFiles()
+            => obj_files().Array();
+
         public bool IsManaged(FS.FilePath src, out AssemblyName name)
             => FS.managed(src, out name);
+
+        IEnumerable<FileModule> obj_files()
+        {
+            foreach(var path in Root.Files(true))
+                if(path.Is(FS.Obj))
+                    yield return new NativeLibFile(path);
+        }
 
         IEnumerable<FileModule> dll_managed()
         {

@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using api = IntelIntrinsics;
+
     partial class IntrinsicsModels
     {
         public struct Intrinsic
@@ -18,7 +20,7 @@ namespace Z0.Asm
 
             public InstructionTypes types;
 
-            public CpuId CPUID;
+            public CpuIdMembership CPUID;
 
             public Category category;
 
@@ -35,7 +37,7 @@ namespace Z0.Asm
             public Header header;
 
             public string Format()
-                => IntrinsicsModels.format(this);
+                => api.format(this);
 
             public override string ToString()
                 => Format();

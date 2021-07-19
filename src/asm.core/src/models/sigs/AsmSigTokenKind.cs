@@ -44,6 +44,8 @@ namespace Z0.Asm
 
         FarPtr,
 
-        MemPair
+        MemPair,
+
+        Vsib,
     }
 }

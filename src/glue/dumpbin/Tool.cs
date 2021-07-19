@@ -23,29 +23,28 @@ namespace Z0.Tools
             var exe = archive.NativeExeFiles();
             var lib = archive.StaticLibs();
             var dll = archive.NativeDllFiles();
+            var obj = archive.ObjFiles();
             var sid = Identifier.Empty;
             var cmd = DumpBin.CmdId.None;
             var ext = FS.FileExt.Empty;
 
-            ext = FS.Dll;
-
             cmd = DumpBin.CmdId.EmitHeaders;
-            paths.Add(EmitScript(cmd,dll, ext, dst));
+            paths.Add(EmitScript(cmd, dll, FS.Dll, dst));
 
             cmd = DumpBin.CmdId.EmitAsm;
-            paths.Add(EmitScript(cmd,dll,ext, dst));
+            paths.Add(EmitScript(cmd, dll, FS.Dll, dst));
 
             cmd = DumpBin.CmdId.EmitRawData;
-            paths.Add(EmitScript(cmd,dll,ext, dst));
+            paths.Add(EmitScript(cmd, dll,FS.Dll, dst));
 
             cmd = DumpBin.CmdId.EmitRelocations;
-            paths.Add(EmitScript(cmd,dll,ext, dst));
+            paths.Add(EmitScript(cmd, dll, FS.Dll, dst));
 
             cmd = DumpBin.CmdId.EmitLoadConfig;
-            paths.Add(EmitScript(cmd,dll,ext, dst));
+            paths.Add(EmitScript(cmd, dll, FS.Dll, dst));
 
             cmd = DumpBin.CmdId.EmitExports;
-            paths.Add(EmitScript(cmd,dll,ext, dst));
+            paths.Add(EmitScript(cmd, dll, FS.Dll, dst));
 
             return paths.ToArray();
         }

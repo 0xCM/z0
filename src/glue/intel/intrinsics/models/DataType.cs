@@ -20,6 +20,7 @@ namespace Z0.Asm
             {
                 Name = src;
             }
+
             public string Format()
                 => Name;
 
