@@ -157,7 +157,6 @@ namespace Z0
         public static ref CmdExecStatus status(ScriptProcess process, ref CmdExecStatus dst)
             => ref process.Status(ref dst);
 
-
         [Op]
         public static ToolCmdSpec specify(FS.FilePath path, params ToolCmdArg[] args)
         {

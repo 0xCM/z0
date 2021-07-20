@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Serialize()
-            => text.utf16(Content);
+            => text.utf8(Content);
 
         [MethodImpl(Inline)]
         public string Format()

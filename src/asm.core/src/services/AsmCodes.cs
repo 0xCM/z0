@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static RegClasses;
+    using static AsmOpCodes;
 
     [ApiHost]
     public readonly partial struct AsmCodes
@@ -145,7 +146,7 @@ namespace Z0.Asm
             => _JccCodes;
 
         [Op]
-        public static Symbols<OffsetToken> Offsets()
+        public static Symbols<DispToken> Offsets()
             => _Offsets;
 
         [Op]
@@ -198,7 +199,7 @@ namespace Z0.Asm
 
         static Symbols<ConditionCode> _JccCodes;
 
-        static Symbols<OffsetToken> _Offsets;
+        static Symbols<DispToken> _Offsets;
 
         static Symbols<RegWidthCode> _RegWidths;
 
@@ -234,7 +235,7 @@ namespace Z0.Asm
             _BndRegs = symbols<BndReg>();
             _TestRegs = symbols<TestReg>();
             _SysPtrRegs = symbols<SPtrReg>();
-            _Offsets = symbols<OffsetToken>();
+            _Offsets = symbols<DispToken>();
             _RegWidths = symbols<RegWidthCode>();
             _RegIndices = symbols<RegIndexCode>();
             _RegClasses = symbols<RegClassCode>();

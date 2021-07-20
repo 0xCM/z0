@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".dump-exe")]
         Outcome DumpExe(CmdArgs args)
         {
-            return DumpModule(FileModuleKind.Exe);
+            return DumpModules(FileModuleKind.Exe);
         }
     }
 }

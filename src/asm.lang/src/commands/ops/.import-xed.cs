@@ -19,7 +19,7 @@ namespace Z0.Asm
         Outcome ImportXedTables(CmdArgs args)
         {
             var result = Outcome.Success;
-            var path = Workspace.DataSource(xed) + FS.file("xed-tables", FS.Txt);
+            var path = Workspace.DataSource("xed") + FS.file("xed-tables", FS.Txt);
             var parser = Wf.XedTableParser();
             using var reader = path.AsciLineReader();
             while(reader.Next(out var line))

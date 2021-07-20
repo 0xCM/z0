@@ -18,7 +18,6 @@ namespace Z0.Blit
     {
         T _Storage;
 
-
         [MethodImpl(Inline)]
         public BitSeq(T data)
         {

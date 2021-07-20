@@ -14,12 +14,12 @@ namespace Z0
         /// <summary>
         /// The left bitfield index
         /// </summary>
-        public byte LeftIndex {get;}
+        public uint LeftIndex {get;}
 
         /// <summary>
         /// The right bitfield index
         /// </summary>
-        public byte RightIndex {get;}
+        public uint RightIndex {get;}
 
         public BitFieldAttribute()
         {
@@ -30,7 +30,7 @@ namespace Z0
         /// Specifies the bitfield section [0..right]
         /// </summary>
         /// <param name="right">The inclusive right bitfield index</param>
-        public BitFieldAttribute(byte right)
+        public BitFieldAttribute(uint right)
         {
             LeftIndex = 0;
             RightIndex = right;
@@ -41,12 +41,10 @@ namespace Z0
         /// </summary>
         /// <param name="left">The inclusive left bitfield index</param>
         /// <param name="right">The inclusive right bitfield index</param>
-        public BitFieldAttribute(byte left, byte right)
+        public BitFieldAttribute(uint left, uint right)
         {
             LeftIndex = left;
             RightIndex = right;
         }
-
-
     }
 }

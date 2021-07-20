@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmCodes;
+    using static AsmSigTokens;
 
     public interface IAsmRel : ITextual
     {
-        RelKind Kind {get;}
+        RelToken Kind {get;}
 
         string Name {get;}
 

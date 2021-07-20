@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".dump-obj")]
         Outcome DumpObj(CmdArgs args)
         {
-            return DumpModule(FileModuleKind.Obj);
+            return DumpModules(FileModuleKind.Obj);
         }
     }
 }

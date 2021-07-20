@@ -42,12 +42,5 @@ namespace Z0
             return new string(chars);
         }
 
-        [Op]
-        public static string format(BitfieldSeg src, Span<char> buffer)
-        {
-            var offset = 0u;
-            var count = render(src,ref offset, buffer);
-            return new string(slice(buffer, 0u, count));
-        }
     }
 }

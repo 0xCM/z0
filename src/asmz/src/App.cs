@@ -14,7 +14,6 @@ namespace Z0.Asm
     using static Part;
     using static core;
     using static Toolspace;
-    using static AsmCodes;
 
     partial class App : AppService<App>
     {

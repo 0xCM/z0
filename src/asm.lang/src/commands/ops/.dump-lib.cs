@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".dump-lib")]
         Outcome DumpLib(CmdArgs args)
         {
-            return DumpModule(FileModuleKind.Lib);
+            return DumpModules(FileModuleKind.Lib);
         }
     }
 }

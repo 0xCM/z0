@@ -1,0 +1,26 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0.Asm
+{
+    using System;
+
+    using static core;
+
+    public interface IAsmBitfield
+    {
+        BitfieldModel Model {get;}
+    }
+
+    public abstract class AsmBitfield<T> : IAsmBitfield
+        where T : ITokenSet, new()
+    {
+        protected AsmBitfield(string fieldname)
+        {
+            Model = BitfieldSpecs.bitfield(fieldname, new T().Types());
+        }
+
+        public BitfieldModel Model {get;}
+    }
+}

@@ -8,6 +8,46 @@ namespace Z0.Asm
     {
         const string group = "asmsigs";
 
+        public readonly struct Rel8 : IAsmRel<Rel8>
+        {
+            public RelToken Kind => RelToken.rel8;
+
+            public string Name => "rel8";
+
+            public string Format()
+                => Name;
+
+            public override string ToString()
+                => Format();
+        }
+
+        public readonly struct Rel16: IAsmRel<Rel16>
+        {
+            public RelToken Kind => RelToken.rel16;
+
+            public string Name => "rel16";
+
+            public string Format()
+                => Name;
+
+            public override string ToString()
+                => Format();
+        }
+
+        public readonly struct Rel32: IAsmRel<Rel32>
+        {
+            public RelToken Kind => RelToken.rel32;
+
+            public string Name => "rel32";
+
+            public string Format()
+                => Name;
+
+            public override string ToString()
+                => Format();
+        }
+
+
         [SymSource(group), Alias("decorator")]
         public enum DecoratorToken : byte
         {

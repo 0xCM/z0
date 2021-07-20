@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
     using static Chars;
     using static core;
 
@@ -118,7 +117,7 @@ namespace Z0.Asm
             var i=0u;
             Hex.render(LowerCase,src.Offset, ref i, dst);
             seek(dst,i++) = Chars.Space;
-            SymbolicTools.copy(src.Statement.Data, ref i, dst);
+            text.copy(src.Statement.Data, ref i, dst);
             return i;
         }
 
@@ -251,14 +250,14 @@ namespace Z0.Asm
                 seek(dst, k++) = Chars.Space;
 
                 var bits = modrm.Encoded.FormatBits() + "b";
-                SymbolicTools.copy(bits, ref k, dst);
+                text.copy(bits, ref k, dst);
 
                 seek(dst, k++) = Chars.Space;
                 seek(dst, k++) = Chars.Eq;
                 seek(dst, k++) = Chars.Space;
 
                 var hex = modrm.Encoded.FormatAsmHex(2);
-                SymbolicTools.copy(hex, ref k, dst);
+                text.copy(hex, ref k, dst);
 
                 seek(dst,k++) = (char)AsciControl.CR;
                 seek(dst,k++) = (char)AsciControl.LF;
@@ -304,7 +303,7 @@ namespace Z0.Asm
         }
 
         static void copy(ReadOnlySpan<char> src,ref uint i, Span<char> dst)
-            => SymbolicTools.copy(src, ref i, dst);
+            => text.copy(src, ref i, dst);
 
         [Op]
         public static string rescomment(OpUri uri, BinaryCode src)

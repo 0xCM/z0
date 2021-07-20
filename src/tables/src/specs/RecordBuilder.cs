@@ -39,7 +39,7 @@ namespace Z0
             => new RecordSpec(type, Fields);
 
         [MethodImpl(Inline), Op]
-        public static MemberFieldSpec field(Name name, Name type, ushort position, ushort offset = default)
+        public static MemberFieldSpec field(Identifier name, Identifier type, ushort position, ushort offset = default)
             => new MemberFieldSpec(name, type, position, offset);
 
         [Op]
@@ -51,18 +51,18 @@ namespace Z0
             => mb.DefineType(fullName, attributes, typeof(ValueType));
 
         [Op]
-        public static FieldBuilder field(TypeBuilder tb, StringAddress name, StringAddress type, Address16? offset = null)
+        public static FieldBuilder field(TypeBuilder tb, Identifier name, Identifier type, uint? offset = null)
         {
             var fb = tb.DefineField(name.Format(), Type.GetType(type.Format()), FieldAttributes.Public);
             if(offset != null)
-                fb.SetOffset(offset.Value);
+                fb.SetOffset((int)offset.Value);
             return fb;
         }
 
         [Op]
-        public static ModuleBuilder module(Name name)
+        public static ModuleBuilder module(ClrAssemblyName name)
         {
-            var ab = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(name), AssemblyBuilderAccess.Run);
+            var ab = AssemblyBuilder.DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
             return ab.DefineDynamicModule("Primary");
         }
 
@@ -91,7 +91,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The record definition</param>
         [MethodImpl(NotInline),Op]
-        public static Type type(Name assname, RecordSpec spec)
+        public static Type type(ClrAssemblyName assname, RecordSpec spec)
             => build(module(assname), spec);
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The record definition</param>
         [MethodImpl(NotInline), Op]
-        public static Type[] types(Name assname, params RecordSpec[] specs)
+        public static Type[] types(ClrAssemblyName assname, params RecordSpec[] specs)
         {
             var count = specs.Length;
             var buffer = alloc<Type>(count);

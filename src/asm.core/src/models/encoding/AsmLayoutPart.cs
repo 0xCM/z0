@@ -13,7 +13,7 @@ namespace Z0.Asm
 
         Imm = 1,
 
-        Dx = 2,
+        Disp = 2,
 
         Sib = 3,
 

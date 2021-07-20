@@ -53,7 +53,7 @@ namespace Z0
             where T : unmanaged
         {
             ref readonly var spec = ref skip(src.SegSpecs,i);
-            return gbits.segment(src.State, spec.Min, spec.Max);
+            return gbits.segment(src.State, (byte)spec.Min, (byte)spec.Max);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -62,7 +62,7 @@ namespace Z0
             where K : unmanaged
         {
             ref readonly var spec = ref skip(src.SegSpecs,i);
-            return gbits.segment(src.State, spec.Min, spec.Max);
+            return gbits.segment(src.State, (byte)spec.Min, (byte)spec.Max);
         }
     }
 }

@@ -12,12 +12,16 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static AsmCodes;
+    using static AsmOpCodes;
+    using static MachineModeKind;
+    using static OperandSize;
 
     using K = AsmCodes.RexPrefixCode;
 
     [ApiHost]
     public readonly struct AsmEncoder
     {
+
         // RexBBits:[Index[00000] | Token[000]]
         public static RexB rexb(RexBToken token, RegIndexCode r)
             => new RexB(token,r);
@@ -121,6 +125,82 @@ namespace Z0.Asm
             writer.Write8(a1);
             return load(writer);
         }
+
+        /// <summary>
+        /// Determines whether a 66h prefix is required to indicate an operand-size override
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <param name="default"></param>
+        /// <param name="effective"></param>
+        [Op]
+        public static bit need66(MachineModeKind mode, OperandSize @default, OperandSize effective)
+            => mode switch{
+                IA32e => effective switch {
+                    W16 => 1,
+                    W32 => 0,
+                    W64 => 0,
+                    _ => 0,
+                },
+
+                Compatibilty => effective switch {
+                    W16 => @default switch{
+                        W16 => 1,
+                        W32 => 0,
+                        _ => 0,
+                    },
+
+                    W32 => @default switch{
+                        W16 => 0,
+                        W32 => 1,
+                        _ => 0,
+                    },
+
+                    _ => 0
+                },
+
+                Protected => effective switch {
+                    W16 => @default switch {
+                        W16 => 1,
+                        W32 => 0,
+                        _ => 0,
+                    },
+                    W32 => @default switch {
+                        W16 => 0,
+                        W32 => 1,
+                        _ => 0,
+                    },
+                    _ => 0
+                },
+
+                Virtual8086 => effective switch {
+                    W16 => @default switch {
+                        W16 => 1,
+                        W32 => 0,
+                        _ => 0,
+                    },
+                    W32 => @default switch {
+                        W16 => 0,
+                        W32 => 1,
+                        _ => 0,
+                    },
+                    _ => 0
+                },
+
+                Real => effective switch {
+                    W16 => @default switch {
+                        W16 => 1,
+                        W32 => 0,
+                        _ => 0,
+                    },
+                    W32 => @default switch {
+                        W16 => 0,
+                        W32 => 1,
+                        _ => 0,
+                    },
+                    _ => 0
+                },
+              _ => 0
+            };
 
         [MethodImpl(Inline), Op]
         static Span<byte> buffer()

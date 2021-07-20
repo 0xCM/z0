@@ -14,10 +14,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmOpCodeExpr opcode(string src)
             => new AsmOpCodeExpr(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static AsmOpCode<T> opcode<T>(uint @base, T kind)
-            where T : unmanaged, Enum
-                => new AsmOpCode<T>(@base,kind);
     }
 }

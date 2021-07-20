@@ -12,22 +12,6 @@ namespace Z0.Asm
 
     partial struct Prototypes
     {
-        [ApiHost(prototypes + "opcodes")]
-        public readonly struct OpCodes
-        {
-            [MethodImpl(Inline), Op]
-            public static AsmOpCode<OffsetToken> jo_rel8()
-                => cb(0x70);
-
-            [MethodImpl(Inline), Op]
-            public static AsmOpCode<OffsetToken> jo_rel16()
-                => cw(0x0F, 0x80);
-
-            [MethodImpl(Inline), Op]
-            public static AsmOpCode<OffsetToken> jo_rel32()
-                => cd(0x0F, 0x80);
-        }
-
         public enum AsmOpCodeId : ushort
         {
             /// <summary>

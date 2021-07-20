@@ -65,7 +65,7 @@ namespace Z0.Tools
             }
 
             if(nonempty(b))
-                copy(b, ref i, dst);
+                text.copy(b, ref i, dst);
 
             return i - i0;
         }
@@ -80,7 +80,7 @@ namespace Z0.Tools
             const string Exi = "exi";
 
             var tool = src.ToolPath.Format(PathSeparator.BS);
-            copy(tool, ref i, dst);
+            text.copy(tool, ref i, dst);
 
             seek(dst,i++) = Chars.Space;
             seek(dst,i++) = Specifier;
@@ -90,20 +90,20 @@ namespace Z0.Tools
             seek(dst,i++) = Specifier;
             seek(dst,i++) = Chars.f;
             seek(dst,i++) = Chars.Space;
-            copy(src.BinPath.Format(PathSeparator.BS), ref i, dst);
+            text.copy(src.BinPath.Format(PathSeparator.BS), ref i, dst);
 
             if(src.EmitBitfields)
             {
                 seek(dst,i++) = Chars.Space;
                 seek(dst,i++) = Specifier;
-                copy(Bits, ref i, dst);
+                text.copy(Bits, ref i, dst);
             }
 
             if(src.EmitDetails)
             {
                 seek(dst,i++) = Chars.Space;
                 seek(dst,i++) = Specifier;
-                copy(Exi, ref i, dst);
+                text.copy(Exi, ref i, dst);
             }
 
             return i - i0;

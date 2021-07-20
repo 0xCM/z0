@@ -15,6 +15,69 @@ namespace Z0.Asm
         [ApiHost(prototypes + dispatcher)]
         public readonly struct Dispatcher
         {
+            [Op]
+            public static void eval(ReadOnlySpan<BinaryBitLogicKind> ops, ReadOnlySpan<Pair<ulong>> args, Span<ulong> dst)
+            {
+                var count = math.min(ops.Length, args.Length);
+                for(var i=0; i<count; i++)
+                {
+                    var op = skip(ops,i);
+                    (var a, var b)  = skip(args,i);
+
+                    switch(op)
+                    {
+                    case False:
+                        seek(dst,i) = 0;
+                        break;
+                    case And:
+                        seek(dst,i) = math.and(a,b);
+                        break;
+                    case CNonImpl:
+                        seek(dst,i) = math.cnonimpl(a,b);
+                        break;
+                    case LProject:
+                        seek(dst,i) = math.left(a,b);
+                        break;
+                    case NonImpl:
+                        seek(dst,i) = math.nonimpl(a,b);
+                        break;
+                    case RProject:
+                        seek(dst,i) = math.right(a,b);
+                        break;
+                    case Xor:
+                        seek(dst,i) = math.xor(a,b);
+                        break;
+                    case Or:
+                        seek(dst,i) = math.or(a,b);
+                        break;
+                    case Nor:
+                        seek(dst,i) = math.nor(a,b);
+                        break;
+                    case Xnor:
+                        seek(dst,i) = math.xnor(a,b);
+                        break;
+                    case RNot:
+                        seek(dst,i) = math.rnot(a,b);
+                        break;
+                    case Impl:
+                        seek(dst,i) = math.impl(a,b);
+                        break;
+                    case LNot:
+                        seek(dst,i) = math.lnot(a,b);
+                        break;
+                    case CImpl:
+                        seek(dst,i) = math.cimpl(a,b);
+                        break;
+                    case Nand:
+                        seek(dst,i) = math.nand(a,b);
+                        break;
+                    case True:
+                        seek(dst,i) = 1;
+                        break;
+                    }
+                }
+            }
+
            [Op]
             public ulong Eval(ulong a, ulong b, BinaryBitLogicKind k, ReadOnlySpan<Func<ulong,ulong,ulong>> f)
             {

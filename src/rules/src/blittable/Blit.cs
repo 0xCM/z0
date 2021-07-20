@@ -60,6 +60,5 @@ namespace Z0.Blit
 
         static ReadOnlySpan<TypeKind> TypeKinds
             => new TypeKind[TypeKindCount]{K.Unknown,K.Unsigned,K.Signed,K.Float,K.Char,K.Enum,K.Vector,K.Array,K.Tensor,K.Domain,K.Sequence};
-
     }
 }

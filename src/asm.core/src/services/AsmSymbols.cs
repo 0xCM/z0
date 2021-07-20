@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static AsmCodes;
+    using static AsmOpCodes;
 
     [ApiHost]
     public class AsmSymbols
@@ -52,7 +53,7 @@ namespace Z0.Asm
 
         readonly Symbols<ConditionCode> _ConditionCodes;
 
-        readonly Symbols<OffsetToken> _Offsets;
+        readonly Symbols<DispToken> _Offsets;
 
         readonly Symbols<RegWidthCode> _RegWidths;
 

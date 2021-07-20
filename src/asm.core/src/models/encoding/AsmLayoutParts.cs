@@ -11,9 +11,9 @@ namespace Z0.Asm
             public AsmLayoutPart Kind => AsmLayoutPart.Imm;
         }
 
-        public readonly struct Dx : IAsmLayoutPart<Dx>
+        public readonly struct Disp : IAsmLayoutPart<Disp>
         {
-            public AsmLayoutPart Kind => AsmLayoutPart.Dx;
+            public AsmLayoutPart Kind => AsmLayoutPart.Disp;
         }
 
         public readonly struct Sib : IAsmLayoutPart<Sib>

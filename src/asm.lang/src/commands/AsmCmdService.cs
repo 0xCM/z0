@@ -10,10 +10,51 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
+    public class ShellState
+    {
+        FS.FolderPath _SrcDir;
+
+        FS.FolderPath _DstDir;
+
+        ToolId _Tool;
+
+        public ToolId Tool()
+            => _Tool;
+
+        public ToolId Tool(ToolId id)
+        {
+            _Tool = id;
+            return _Tool;
+        }
+
+        public FS.FolderPath SrcDir()
+            => _SrcDir;
+
+        public FS.FolderPath DstDir()
+            => _DstDir;
+
+        public FS.FolderPath SrcDir(FS.FolderPath value)
+        {
+            _SrcDir = value;
+            return _SrcDir;
+        }
+
+        public FS.FolderPath DstDir(FS.FolderPath value)
+        {
+            _DstDir = value;
+            return _DstDir;
+        }
+
+        public ShellState()
+        {
+            _SrcDir = FS.FolderPath.Empty;
+            _DstDir = FS.FolderPath.Empty;
+            _Tool = default;
+        }
+    }
+
     public sealed partial class AsmCmdService : AppCmdService<AsmCmdService>
     {
-        const string xed = nameof(xed);
-
         NativeBuffer CodeBuffer;
 
         ByteSize CodeSize;
@@ -28,13 +69,7 @@ namespace Z0.Asm
 
         ScriptRunner ScriptRunner;
 
-        ToolId _Tool;
-
-        FS.FolderPath _SrcDir;
-
         FS.FileName _SrcFile;
-
-        FS.FolderPath _DstDir;
 
         FS.FolderPath WsOutDir;
 
@@ -42,18 +77,19 @@ namespace Z0.Asm
 
         byte[] _Assembled;
 
+        ShellState State;
+
         public AsmCmdService()
         {
-            CodeBuffer = Buffers.native(Pow2.T10);
+            State = new ShellState();
+            CodeBuffer = Buffers.native(Pow2.T14);
             RoutineName = Identifier.Empty;
             _SymTypes = Z0.SymTypes.Empty;
-            _Tool = ToolId.Empty;
             CodeSize = 0;
-            _SrcDir = FS.FolderPath.Empty;
-            _DstDir = FS.FolderPath.Empty;
             _SrcFile = FS.FileName.Empty;
             _Assembled = array<byte>();
             _SrcList = array<FS.FilePath>();
+
         }
 
         protected override void Initialized()
@@ -62,7 +98,7 @@ namespace Z0.Asm
             _Toolbase = Wf.ToolBase(Db.ToolWs());
             ScriptRunner = Wf.ScriptRunner();
             WsOutDir = Db.DevWs() + FS.folder(".out");
-            _DstDir = WsOutDir;
+            State.DstDir(WsOutDir);
         }
 
         protected override void Disposing()
@@ -70,16 +106,14 @@ namespace Z0.Asm
             CodeBuffer.Dispose();
         }
 
-
         ToolBase ToolBase()
             => _Toolbase;
 
         ToolId Tool()
-            => _Tool;
+            => State.Tool();
 
-
-        FS.Files SrcList()
-            => _SrcList;
+        ToolId Tool(ToolId id)
+            => State.Tool(id);
 
         FS.Files SrcList(FS.Files src)
         {
@@ -89,41 +123,16 @@ namespace Z0.Asm
         }
 
         FS.FolderPath SrcDir()
-            => _SrcDir;
-
-        FS.FileName SrcFile()
-            => _SrcFile;
+            => State.SrcDir();
 
         FS.FolderPath DstDir()
-            => _DstDir;
+            => State.DstDir();
 
         FS.FolderPath SrcDir(FS.FolderPath value)
-        {
-            _SrcDir = value;
-            return _SrcDir;
-        }
-
-        FS.FileName SrcFile(FS.FileName value)
-        {
-            _SrcFile = value;
-            return _SrcFile;
-        }
+            => State.SrcDir(value);
 
         FS.FolderPath DstDir(FS.FolderPath value)
-        {
-            _DstDir = value;
-            return _DstDir;
-        }
-
-        ToolId SelectTool(ToolId id)
-        {
-            _Tool = id;
-            return _Tool;
-        }
-
-        ToolId SelectedTool()
-            => _Tool;
-
+            => State.DstDir(value);
 
         SymTypes SymTypes
         {
@@ -205,7 +214,18 @@ namespace Z0.Asm
             Tables.emit(files.View, dst);
         }
 
-        Outcome DumpModule(FileModuleKind kind)
+        ReadOnlySpan<TextLine> DumpObj(FS.FilePath src, FS.FolderPath dst)
+        {
+            var cmd = Cmd.cmdline(ToolBase().Script(Toolspace.dumpbin, "dump-obj").Format(PathSeparator.BS));
+            var vars = Cmd.vars(
+                ("SrcDir", src.FolderPath.Format(PathSeparator.BS)),
+                ("DstDir", dst.Format(PathSeparator.BS)),
+                ("SrcFile", src.FileName.Format())
+                );
+            return ScriptRunner.RunCmd(cmd, vars);
+        }
+
+        Outcome DumpModules(FileModuleKind kind)
         {
             var script = kind switch{
                 FileModuleKind.Obj => "dump-obj",
@@ -247,7 +267,5 @@ namespace Z0.Asm
         static MsgPattern NoToolSelected => "No tool selected";
 
         static MsgPattern CapacityExceeded => "Capacity exceeded";
-
-        static MsgPattern<Count,TableKind> DispatchingRows => "Dispatching {0} {1} rows";
     }
 }

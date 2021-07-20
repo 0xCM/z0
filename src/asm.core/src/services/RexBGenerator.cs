@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static AsmCodes;
+    using static AsmOpCodes;
 
     /// <summary>
     /// Generates <see cref='RexB'/> tables

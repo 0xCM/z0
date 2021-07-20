@@ -24,7 +24,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var s = ref skip(index,i);
-                if(AsmQuery.HasRexPrefix(s.OpCode))
+                if(AsmOpCodes.HasRexPrefix(s.OpCode))
                 {
                     collection.Add(s);
                 }

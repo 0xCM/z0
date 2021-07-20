@@ -45,7 +45,6 @@ namespace Z0.Asm
         public override bool Equals(object src)
             => src is AsmExpr x && Equals(x);
 
-
         public AsmExpr Replace(string src, string dst)
             => new AsmExpr(Content.Replace(src,dst));
 

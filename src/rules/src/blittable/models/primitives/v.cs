@@ -58,7 +58,7 @@ namespace Z0.Blit
         BitWidth IPrimitive.ContentWidth
             => Data.Length;
 
-       TypeKind IPrimitive.TypeKind
+        TypeKind IPrimitive.TypeKind
             => TypeKind.Unsigned;
     }
 
@@ -66,7 +66,6 @@ namespace Z0.Blit
         where T : unmanaged
     {
         readonly T[] Data;
-
 
         [MethodImpl(Inline)]
         internal vector(T[] data)

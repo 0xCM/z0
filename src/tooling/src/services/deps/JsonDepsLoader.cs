@@ -76,10 +76,6 @@ namespace Z0
         public static JsonDeps from(JsonText src)
             => new JsonDeps(context(src));
 
-        // [Op]
-        // public static JsonDeps from(Assembly src)
-        //     => new JsonDeps(context(json(src)));
-
         [Op]
         public static JsonDeps from(Assembly src)
             => new JsonDeps(DependencyContext.Load(src));

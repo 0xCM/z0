@@ -22,7 +22,6 @@ namespace Z0
 
         public ClrEnumRecord[] Records;
 
-
         [MethodImpl(Inline)]
         public EmitEnumsStep(IWfRuntime wf, WfHost host, ClrAssemblyAdapter src)
         {

@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Blit
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-    using static core;
-
     public struct f0<T> : IPrimitive<T>
         where T : unmanaged
     {
