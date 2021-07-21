@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Test
 {
-    using static Part;
+    using static Root;
 
     public class t_matrix_writer : UnitTest<t_matrix_writer>
     {

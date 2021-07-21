@@ -62,7 +62,7 @@ namespace Z0
             Name = name;
             Value = value;
             Protocol = protocol;
-            Classifier = ArgPartKind.Position |  ArgPartKind.Prefix | ArgPartKind.Name | ArgPartKind.Qualifier | ArgPartKind.Value;
+            Classifier = ArgPartKind.Position | ArgPartKind.Prefix | ArgPartKind.Name | ArgPartKind.Qualifier | ArgPartKind.Value;
             IsFlag = flag;
         }
 

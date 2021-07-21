@@ -10,6 +10,9 @@ namespace Z0
     using static Root;
     using static Typed;
 
+    /// <summary>
+    /// Defines a fixed-width packed bitvector of width N over a T-storage cell
+    /// </summary>
     public struct bits<N,T> : IBitContainer<bits<N,T>,N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
@@ -22,10 +25,10 @@ namespace Z0
             Storage = src;
         }
 
-        public ushort Width
+        public uint Width
         {
             [MethodImpl(Inline)]
-            get => nat16u<N>();
+            get => nat32u<N>();
         }
 
         public T Value
@@ -35,7 +38,7 @@ namespace Z0
         }
 
         public string Format()
-            => BitRender.gformat(Storage, Width);
+            => BitRender.gformat(Storage, (ushort)Width);
 
         public override string ToString()
             => Format();

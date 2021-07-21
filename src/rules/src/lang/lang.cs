@@ -6,12 +6,6 @@ namespace Z0.Lang
 {
     using System;
 
-    [ApiHost("lang.api")]
-    public readonly partial struct lang
-    {
-        const Z0.NumericKind Closure = Z0.NumericKind.Unsigned;
-    }
-
     partial struct Msg
     {
         static RenderPattern<S,Type> TransformFailedPattern<S>()

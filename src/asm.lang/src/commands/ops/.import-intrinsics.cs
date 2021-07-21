@@ -6,10 +6,10 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".import-intrinsics")]
+        [CmdOp(".emit-intrinsics")]
         public Outcome ImportIntrinsics(CmdArgs args)
         {
-            Wf.IntelIntrinsicsPipe().Import();
+            Wf.IntelIntrinsicsPipe().Emit();
             return true;
         }
     }

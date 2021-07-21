@@ -37,10 +37,9 @@ namespace Z0.Asm
             return default;
         }
 
-        public ReadOnlySpan<NasmInstruction> ParseSource()
+        public ReadOnlySpan<NasmInstruction> ParseInstructions(FS.FilePath src)
         {
             const uint FirstLine = 70;
-            var src = Workspace.DataSource("nasm-instructions", FS.Txt);
             var lines = slice(src.ReadTextLines(), FirstLine);
             var count = lines.Length;
             var section = EmptyString;
@@ -69,24 +68,23 @@ namespace Z0.Asm
             }
 
             return slice(buffer, 0, j);
+
         }
 
-        public ReadOnlySpan<NasmInstruction> ImportInstructions(FS.FilePath dst)
+        public ReadOnlySpan<NasmInstruction> EmitInstructions(FS.FilePath src, FS.FilePath dst)
         {
-            var src = ParseSource();
-            var count = src.Length;
+            var instructions = ParseInstructions(src);
+            var count = instructions.Length;
             if(count != 0)
             {
                 var flow = Wf.EmittingTable<NasmInstruction>(dst);
-                var emitted = Tables.emit(src, dst, NasmInstruction.RenderWidths);
+                var emitted = Tables.emit(instructions, dst, NasmInstruction.RenderWidths);
                 Wf.EmittedTable(flow, emitted);
-                return src;
+                return instructions;
             }
             else
                 return default;
         }
 
-        public ReadOnlySpan<NasmInstruction> ImportInstructions()
-            => ImportInstructions(Workspace.ImportTable<NasmInstruction>());
     }
 }

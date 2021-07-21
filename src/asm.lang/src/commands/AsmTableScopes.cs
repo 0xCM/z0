@@ -2,12 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    partial class XFs
+    public readonly struct AsmTableScopes
     {
-        [Op]
-        public static ApiPackages ApiPackages(this IEnvPaths src)
-            => src.PackageRoot();
+        public static Scope IntelSdm => "intel.sdm";
+
+        public static Scope IntelXed => "intel.xed";
     }
 }

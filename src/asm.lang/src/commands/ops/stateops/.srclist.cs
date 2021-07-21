@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static core;
-
     partial class AsmCmdService
     {
         [CmdOp(".srclist")]
@@ -17,10 +12,10 @@ namespace Z0.Asm
             if(args.Count !=0)
             {
                 if(Arg(args,0,out var pattern))
-                    SrcList(SrcDir().Files(pattern.Value,false));
+                    Files(SrcDir().Files(pattern.Value,false));
             }
             else
-                SrcList(SrcDir().AllFiles);
+                Files(SrcDir().AllFiles);
             return true;
         }
     }

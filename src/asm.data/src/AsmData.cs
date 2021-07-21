@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     [ApiHost]
     public readonly partial struct AsmData
     {
@@ -17,8 +14,6 @@ namespace Z0.Asm
             public Asset AsmDbInstructions() => Asset("asmdb.instructions.csv");
 
             public Asset AsmDbOperands() => Asset("asmdb.operands.csv");
-
-            public Asset FeatureMnemonics() => Asset("feature-mnemonics.csv");
 
             public Asset StanfordAsmCatalog() => Asset("stanford-asm-catalog.csv");
         }

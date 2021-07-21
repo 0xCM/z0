@@ -27,6 +27,10 @@ namespace Z0
 
         [Op]
         public static ToolBase ToolBase(this IServiceContext context, FS.FolderPath root)
-            => Svc.ToolBase.create(context).Configure(root);
+            => Svc.ToolBase.create(context).WithRoot(root);
+
+        [Op]
+        public static ProjectBase ProjectBase(this IServiceContext context, FS.FolderPath root)
+            => Svc.ProjectBase.create(context).WithRoot(root);
     }
 }

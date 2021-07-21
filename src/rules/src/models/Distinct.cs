@@ -11,7 +11,6 @@ namespace Z0
         public readonly struct Distinct : IRule<Distinct>
         {
 
-
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ namespace Z0
             if(parseResult.Fail)
                 return parseResult;
 
-            return Tables.normalize(data, delimiter, widths, dst);
+            return normalize(data, delimiter, widths, dst);
         }
 
         [Op]

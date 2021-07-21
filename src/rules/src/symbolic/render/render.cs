@@ -9,12 +9,20 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static SymbolicTools;
 
     partial struct SymbolicRender
     {
         [MethodImpl(Inline), Op]
         public static uint render(ReadOnlySpan<AsciCode> src, ref uint i, Span<char> dst)
+        {
+            var count = (uint)src.Length;
+            for(var j=0; j<count; j++)
+                seek(dst,i++) = (char)skip(src,j);
+            return count;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render(ReadOnlySpan<AsciSymbol> src, ref uint i, Span<char> dst)
         {
             var count = (uint)src.Length;
             for(var j=0; j<count; j++)

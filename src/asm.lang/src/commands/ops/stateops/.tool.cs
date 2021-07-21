@@ -9,16 +9,25 @@ namespace Z0.Asm
         [CmdOp(".tool")]
         Outcome SelectTool(CmdArgs args)
         {
-            ToolId tool = arg(args,0).Value;
-            var dir = ToolBase().Home(tool);
-            Outcome outcome = dir.Exists;
-            if(outcome)
+            var outcome = Outcome.Success;
+            if(args.Length == 0)
             {
-                Tool(tool);
-                Write(string.Format("{0} selected", tool));
+                Write(Tool());
             }
             else
-                outcome = (false, $"The tool {tool} is not defined in the current toolbase");
+            {
+                ToolId id = arg(args,0).Value;
+                var dir = ToolBase().Home(id);
+                outcome = dir.Exists;
+                if(outcome)
+                {
+                    Tool(id);
+                    Write(string.Format("{0} selected", id));
+                }
+                else
+                    outcome = (false, UndefinedTool.Format(id));
+            }
+
             return outcome;
         }
     }

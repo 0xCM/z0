@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".dstdir-list")]
         Outcome DstDirList(CmdArgs args)
         {
-            List(DstDir());
+            List(OutDir());
             return true;
         }
     }

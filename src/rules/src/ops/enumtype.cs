@@ -6,8 +6,6 @@ namespace Z0
 {
     using static Root;
 
-    using Z0.Lang;
-
     partial struct Rules
     {
         [Op, Closures(Closure)]

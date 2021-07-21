@@ -8,8 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Text;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class t_masks : t_bits<t_masks>
     {

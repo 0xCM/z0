@@ -22,37 +22,29 @@ namespace Z0
 		/// <summary>
 		/// The container-relative 0-based offset of the segment
 		/// </summary>
-		public ushort CellIndex;
+		public uint CellIndex;
 
 		/// <summary>
 		/// The segment-relative offset of the bit
 		/// </summary>
-		public ushort BitOffset;
-
-		/// <summary>
-		/// Constructs a bit position from a linear/absolute index
-		/// </summary>
-		/// <param name="bitindex">The linear index</param>
-		[MethodImpl(Inline)]
-		public static BitPos<T> FromLinearIndex(uint bitindex)
-			=> new BitPos<T>(BitPos.linear(CellWidth, bitindex), BitPos.offset(CellWidth, bitindex));
+		public uint BitOffset;
 
 		[MethodImpl(Inline)]
-		public BitPos(ushort cellindex, ushort bitoffset)
+		public BitPos(uint cellindex, uint bitoffset)
 		{
 			CellIndex = cellindex;
 			BitOffset = bitoffset;
 		}
 
-		public int LinearIndex
+		public uint LinearIndex
 		{
 			[MethodImpl(Inline)]
 			get => CellIndex * CellWidth + BitOffset;
 		}
 
 		[MethodImpl(Inline)]
-		public int CountTo(BitPos<T> src)
-			=> Math.Abs(LinearIndex - src.LinearIndex) + 1;
+		public uint CountTo(BitPos<T> src)
+			=> (uint)math.abs((long)LinearIndex - (long)src.LinearIndex) + 1;
 
 		[MethodImpl(Inline)]
         public void Add(uint src)
@@ -65,11 +57,11 @@ namespace Z0
 		[MethodImpl(Inline)]
         public void Sub(uint rhs)
         {
-            var newindex = ScalarCast.uint32(LinearIndex - rhs);
+            var newindex = LinearIndex - rhs;
             if(newindex > 0)
 			{
-				CellIndex = linear(CellWidth,newindex);
-				BitOffset = offset(CellWidth,newindex);
+				CellIndex = linear(CellWidth, newindex);
+				BitOffset = offset(CellWidth, newindex);
 			}
 			else
 			{
@@ -87,7 +79,7 @@ namespace Z0
             {
                 if(CellIndex != 0)
                 {
-                    BitOffset = (byte)(CellWidth - 1);
+                    BitOffset = (CellWidth - 1);
                     --CellIndex;
                 }
             }
@@ -137,7 +129,7 @@ namespace Z0
 		}
 
 		[MethodImpl(Inline)]
-		public static int operator -(BitPos<T> a, BitPos<T> b)
+		public static uint operator -(BitPos<T> a, BitPos<T> b)
 		{
 			return a.CountTo(b);
 		}
@@ -181,11 +173,11 @@ namespace Z0
 			=> lhs.LinearIndex >= rhs.LinearIndex;
 
 		[MethodImpl(Inline)]
-        public static implicit operator BitPos<T>((ushort cellindex, byte bitoffset) x)
+        public static implicit operator BitPos<T>((uint cellindex, uint bitoffset) x)
             => new BitPos<T>(x.cellindex, x.bitoffset);
 
 		[MethodImpl(Inline)]
-		public static BitPos<T> Define(ushort cellindex, byte bitoffset)
+		public static BitPos<T> Define(uint cellindex, uint bitoffset)
 			=> new BitPos<T>(cellindex, bitoffset);
 
         /// <summary>
@@ -197,7 +189,7 @@ namespace Z0
 		/// <summary>
 		/// Specifies the number of bits that can be placed in one segment
 		/// </summary>
-		public static ushort CellWidth
-			=> width<T>(w16);
+		public static uint CellWidth
+			=> width<T>();
 	}
 }

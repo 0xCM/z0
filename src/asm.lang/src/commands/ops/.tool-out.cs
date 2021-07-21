@@ -6,14 +6,13 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".dstdir")]
-        Outcome DstDir(CmdArgs args)
+        [CmdOp(".tool-out", "Displays the path of a tool output directory")]
+        Outcome ToolOut(CmdArgs args)
         {
-            if(args.Length == 0)
-                Write(DstDir());
-            else
-                Write(DstDir(FS.dir(arg(args,0).Value)));
-            return true;
+            var result = ToolOutDir(args, out var dir);
+            if(result)
+                Write(dir);
+            return result;
         }
     }
 }

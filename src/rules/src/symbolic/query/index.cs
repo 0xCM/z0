@@ -31,5 +31,15 @@ namespace Z0
                     return i;
             return NotFound;
         }
+
+        [MethodImpl(Inline), Op]
+        public static int index(ReadOnlySpan<AsciSymbol> src, C match)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                if(skip(src,i) == match)
+                    return i;
+            return NotFound;
+        }
     }
 }

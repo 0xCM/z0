@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using static core;
 
+    using SR = SymbolicRender;
+
     partial class AsmCmdService
     {
         [CmdOp(".algs")]
@@ -17,10 +19,12 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(paths,i);
+                Write(string.Format("# Source:{0}", path));
+                Write(string.Format("# {0}",RP.PageBreak120));
                 using var reader = path.AsciLineReader();
                 while(reader.Next(out var line))
                 {
-                    Write(line.Format());
+                    Write(SR.format(line.Content));
                 }
             }
             return true;

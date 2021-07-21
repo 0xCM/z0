@@ -9,7 +9,9 @@ namespace Z0.Asm
         [CmdOp(".import-nasm-data")]
         Outcome EmitNasmInstructions(CmdArgs args)
         {
-            Wf.NasmCatalog().ImportInstructions();
+            var src = Workspace.DataSource("nasm-instructions", FS.Txt);
+            var dst = TablePath<NasmInstruction>();
+            Wf.NasmCatalog().EmitInstructions(src, dst);
             return true;
         }
     }

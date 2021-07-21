@@ -8,6 +8,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        const string Scope1 = "intel.sdm";
+
         [CmdOp(".check-digit-parser")]
         public Outcome CheckDigitParser(CmdArgs args)
         {

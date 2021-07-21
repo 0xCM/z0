@@ -17,80 +17,80 @@ namespace Z0
         [Op]
         public static Outcome parse(string src, out MemoryAddress dst)
         {
-            var attempt = HexNumericParser.parse64u(src);
-            if(attempt)
+            var result = HexNumericParser.parse64u(src, out var a);
+            if(result)
             {
-                dst = attempt.Value;
+                dst = a;
                 return true;
             }
             else
             {
                 dst = MemoryAddress.Zero;
-                return false;
+                return result;
             }
         }
 
         [Op]
         public static Outcome parse(string src, out Address64 dst)
         {
-            var attempt = HexNumericParser.parse64u(src);
-            if(attempt)
+            var result = HexNumericParser.parse64u(src, out var a);
+            if(result)
             {
-                dst = attempt.Value;
+                dst = a;
                 return true;
             }
             else
             {
                 dst = Address64.Zero;
-                return false;
+                return result;
             }
         }
 
         [Op]
         public static Outcome parse(string src, out Address32 dst)
         {
-            var attempt = HexNumericParser.parse32u(src);
-            if(attempt)
+            var result = HexNumericParser.parse32u(src, out var a);
+            if(result)
             {
-                dst = attempt.Value;
+                dst = a;
                 return true;
             }
             else
             {
                 dst = Address32.Zero;
-                return false;
+                return result;
             }
         }
 
         [Op]
         public static Outcome parse(string src, out Address16 dst)
         {
-            var attempt = HexNumericParser.parse16u(src);
-            if(attempt)
+            var result = HexNumericParser.parse16u(src, out var a);
+            if(result)
             {
-                dst = attempt.Value;
+                dst = a;
                 return true;
             }
             else
             {
                 dst = Address16.Zero;
-                return false;
+                return result;
             }
         }
 
         [Op]
         public static Outcome parse(string src, out Address8 dst)
         {
-            var attempt = HexNumericParser.parse8u(src);
-            if(attempt)
+            var result = HexNumericParser.parse8u(src, out var a);
+            if(result)
             {
-                dst = attempt.Value;
+                dst = a;
                 return true;
             }
             else
             {
                 dst = Address8.Zero;
-                return false;
+                return result;
             }
         }
     }

@@ -4,13 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
     partial class AsmCmdService
     {
-        Outcome GenEnum(CmdArgs src)
+        [CmdOp(".emit-xed-tables")]
+        Outcome EmitXedTables(CmdArgs args)
         {
-
+            var dst = Tables().Dir(AsmTableScopes.IntelXed);
+            dst.Clear();
+            Wf.IntelXed().EmitTables(dst);
             return true;
         }
     }

@@ -22,10 +22,23 @@ namespace Z0
 
         [Op]
         public static string format(ReadOnlySpan<AsciCode> src)
-            => format(src,span<char>(src.Length));
+            => format(src, span<char>(src.Length));
+
+        [Op]
+        public static string format(ReadOnlySpan<AsciSymbol> src)
+            => format(src, span<char>(src.Length));
 
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<AsciCode> src, Span<char> buffer)
+        {
+            var i=0u;
+            var count = render(src, ref i, buffer);
+            var chars = slice(buffer,0,count);
+            return new string(chars);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static string format(ReadOnlySpan<AsciSymbol> src, Span<char> buffer)
         {
             var i=0u;
             var count = render(src, ref i, buffer);
@@ -41,6 +54,5 @@ namespace Z0
             var chars = slice(buffer,0,count);
             return new string(chars);
         }
-
     }
 }

@@ -10,7 +10,7 @@ namespace Z0.Asm
         Outcome DstSubDir(CmdArgs args)
         {
             var folder = FS.folder(arg(args,0).Value);
-            Write(DstDir(DstDir() + folder));
+            Write(OutDir(OutDir() + folder));
             return true;
         }
     }

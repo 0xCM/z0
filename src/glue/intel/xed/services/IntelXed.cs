@@ -37,16 +37,30 @@ namespace Z0.Asm
 
         public void EmitCatalog()
         {
+            var dir = Workspace.ImportRoot() + FS.folder("intel.xed");
             //ImportFormSummaries();
-            EmitChipMap();
-            ImportForms();
-            EmitSymCatalog();
-            var aspects = EmitFormAspects();
+            EmitChipMap(dir);
+            ImportForms(dir);
+            EmitSymCatalog(dir);
+            var aspects = EmitFormAspects(dir);
             var partition = Partition(aspects);
-            // var patterns = EmitInstructionPatterns();
-            // var summaries = EmitSummaries(patterns);
-            // EmitMnemonics(summaries);
-            // EmitRules();
+        }
+
+        public void EmitTables(FS.FolderPath dst)
+        {
+            EmitChipMap(dst);
+            ImportForms(dst);
+            EmitSymCatalog(dst);
+            var aspects = EmitFormAspects(dst);
+            EmitPartitions(Partition(aspects), dst);
+        }
+
+        void EmitPartitions(ReadOnlySpan<FormPartition> src, FS.FolderPath dst)
+        {
+            var path = Tables.path<FormPartition>(dst);
+            var flow = EmittingTable<FormPartition>(path);
+            var count = Tables.emit(src, path, FormPartition.RenderWidths);
+            EmittedTable(flow,count);
         }
 
         public ReadOnlySpan<string> MnemonicNames()
@@ -55,7 +69,7 @@ namespace Z0.Asm
         public Outcome LoadChipMap(out ChipMap dst)
             => ChipIsaParser.Parse(ChipSourcePath(), out dst);
 
-        public Outcome EmitChipMap()
+        public Outcome EmitChipMap(FS.FolderPath dir)
         {
             const string RowFormat = "{0,-12} | {1,-24} | {2}";
 
@@ -64,7 +78,7 @@ namespace Z0.Asm
                 Error(outcome.Message);
             else
             {
-                var dst = ChipMapImportPath();
+                var dst = ChipMapTablePath(dir);
                 var emitting = Wf.EmittingFile(dst);
                 var counter = 0u;
                 var writer = dst.AsciWriter();
@@ -83,7 +97,7 @@ namespace Z0.Asm
             return outcome;
         }
 
-        public ReadOnlySpan<FormPartiton> Partition(Index<XedFormAspect> src)
+        public ReadOnlySpan<FormPartition> Partition(Index<XedFormAspect> src)
         {
             var aix = src.Select(x => (x.Value, x.Index)).ToDictionary();
             var parts = ComputePartitions();
@@ -103,13 +117,13 @@ namespace Z0.Asm
             return parts;
         }
 
-        public Index<XedFormAspect> EmitFormAspects()
+        public Index<XedFormAspect> EmitFormAspects(FS.FolderPath dir)
         {
             var duplicates = dict<Hash32,uint>();
             var aspects = ComputeFormAspects();
             var count = (uint)aspects.Length;
             var buffer = alloc<XedFormAspect>(count);
-            var dst = FormAspectImportPath();
+            var dst = FormAspectImportPath(dir);
             var formatter = Tables.formatter<XedFormAspect>();
             var emitting = Wf.EmittingTable<XedFormAspect>(dst);
             using var writer = dst.Writer();
@@ -153,7 +167,7 @@ namespace Z0.Asm
 
         public ReadOnlySpan<FormAspect> ComputeFormAspects()
         {
-            var types = IFormTypes();
+            var types = Symbols.index<IFormType>();
             var count = types.Count;
             var forms = types.View;
             var distinct = hashset<FormAspect>();
@@ -193,9 +207,9 @@ namespace Z0.Asm
             return Symbols.literals(src);
         }
 
-        public FS.FilePath EmitSymIndex()
+        public FS.FilePath EmitSymIndex(FS.FolderPath dir)
         {
-            var dst = SymbolImportPath();
+            var dst = SymbolImportPath(dir);
             EmitSymIndex(dst);
             return dst;
         }
@@ -212,48 +226,45 @@ namespace Z0.Asm
         public Symbols<IClass> IClasses()
             => Symbols.index<IClass>();
 
-        public Symbols<IFormType> IFormTypes()
-            => Symbols.index<IFormType>();
-
-        public void EmitSymCatalog()
+        public void EmitSymCatalog(FS.FolderPath dir)
         {
-            EmitSymIndex();
-            EmitSymbols<AddressWidth>();
-            EmitSymbols<AttributeKind>();
-            EmitSymbols<Category>();
-            EmitSymbols<ChipCode>();
-            EmitSymbols<CpuidBit>();
-            EmitSymbols<EASZ>();
-            EmitSymbols<EFlag>();
-            EmitSymbols<EncodingGroup>();
-            EmitSymbols<EOSZ>();
-            EmitSymbols<Extension>();
-            EmitSymbols<FlagAction>();
-            EmitSymbols<IClass>();
-            EmitSymbols<IFormType>();
-            EmitSymbols<IsaKind>();
-            EmitSymbols<Mode>();
-            EmitSymbols<MachineModeKind>();
-            EmitSymbols<Nonterminal>();
-            EmitSymbols<OpCodeMap>();
-            EmitSymbols<OperandAction>();
-            EmitSymbols<OperandCategory>();
-            EmitSymbols<OperandTypeKind>();
-            EmitSymbols<OperandKind>();
-            EmitSymbols<OperandVisibility>();
-            EmitSymbols<OperandWidthType>();
-            EmitSymbols<PointerWidth>();
-            EmitSymbols<RegClassCode>();
-            EmitSymbols<RegId>();
-            EmitSymbols<RegRole>();
-            EmitSymbols<SAMode>();
-            EmitSymbols<SizeIndicator>();
+            EmitSymIndex(dir);
+            EmitSymbols<AddressWidth>(dir);
+            EmitSymbols<AttributeKind>(dir);
+            EmitSymbols<Category>(dir);
+            EmitSymbols<ChipCode>(dir);
+            EmitSymbols<CpuidBit>(dir);
+            EmitSymbols<EASZ>(dir);
+            EmitSymbols<EFlag>(dir);
+            EmitSymbols<EncodingGroup>(dir);
+            EmitSymbols<EOSZ>(dir);
+            EmitSymbols<Extension>(dir);
+            EmitSymbols<FlagAction>(dir);
+            EmitSymbols<IClass>(dir);
+            EmitSymbols<IFormType>(dir);
+            EmitSymbols<IsaKind>(dir);
+            EmitSymbols<Mode>(dir);
+            EmitSymbols<MachineModeKind>(dir);
+            EmitSymbols<Nonterminal>(dir);
+            EmitSymbols<OpCodeMap>(dir);
+            EmitSymbols<OperandAction>(dir);
+            EmitSymbols<OperandCategory>(dir);
+            EmitSymbols<OperandTypeKind>(dir);
+            EmitSymbols<OperandKind>(dir);
+            EmitSymbols<OperandVisibility>(dir);
+            EmitSymbols<OperandWidthType>(dir);
+            EmitSymbols<PointerWidth>(dir);
+            EmitSymbols<RegClassCode>(dir);
+            EmitSymbols<RegId>(dir);
+            EmitSymbols<RegRole>(dir);
+            EmitSymbols<SAMode>(dir);
+            EmitSymbols<SizeIndicator>(dir);
         }
 
-        public ReadOnlySpan<XedFormImport> ImportForms()
+        public ReadOnlySpan<XedFormImport> ImportForms(FS.FolderPath dir)
         {
             var src = LoadFormSources().View;
-            var dst = Workspace.ImportTable<XedFormImport>();
+            var dst = dir + FS.file(Tables.identify<XedFormImport>().Format(), FS.Csv);
             var flow = Wf.EmittingTable<XedFormImport>(dst);
             var parser = XedFormImportParser.create();
             var formatter = Tables.formatter<XedFormImport>(XedFormImport.RenderWidths);
@@ -373,10 +384,13 @@ namespace Z0.Asm
             return records.ToArray();
         }
 
-        void EmitSymbols<K>()
+        void EmitSymbols<K>(FS.FolderPath dir)
             where K : unmanaged, Enum
         {
-            EmitSymbols(Symbols.index<K>().View, Workspace.ImportTable(string.Format("{0}.{1}", dataset,  typeof(K).Name.ToLower())));
+            var name = string.Format("{0}.{1}", dataset, typeof(K).Name.ToLower());
+            var symbols = Symbols.index<K>().View;
+            var path = dir + FS.file(name,FS.Csv);
+            EmitSymbols(symbols, path);
         }
 
         void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
@@ -394,12 +408,12 @@ namespace Z0.Asm
             }
         }
 
-        public ReadOnlySpan<FormPartiton> ComputePartitions()
+        public ReadOnlySpan<FormPartition> ComputePartitions()
         {
             var types  = Symbols.index<IFormType>();
             var classes = Symbols.index<IClass>();
             var count = types.Count;
-            var buffer = alloc<FormPartiton>(count);
+            var buffer = alloc<FormPartition>(count);
             ref var dst = ref first(buffer);
             var flow = Wf.Running(Msg.PartitioningIForms.Format(count));
             var forms = types.View;
@@ -429,32 +443,15 @@ namespace Z0.Asm
             return buffer;
         }
 
-        void Partition(in Symbols<IClass> classes, ushort index, IFormType src, ref FormPartiton dst)
+        void Partition(in Symbols<IClass> classes, ushort index, IFormType src, ref FormPartition dst)
         {
             dst.Index = index;
             dst.Form = src;
+            dst.Aspects = array<string>();
             var candidates = span(src.ToString().Split(Chars.Underscore));
             if(candidates.Length <= 1)
                 return;
-
             dst.Aspects = slice(candidates,1).ToArray();
-            ref var parts = ref dst.Aspects.First;
-            var count = dst.Aspects.Count;
-
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var part = ref skip(parts,i);
-                if(i ==0)
-                {
-                    if(!Match(classes, part, out dst.Class))
-                    {
-                        dst.Complete = false;
-                        continue;
-                    }
-                }
-                else
-                    Complete(ref dst);
-            }
         }
 
         bool Match(in Symbols<IClass> classes, SymExpr src, out IClass dst)
@@ -471,21 +468,6 @@ namespace Z0.Asm
             }
         }
 
-        void Complete(ref FormPartiton partition)
-        {
-            var count = partition.AspectCount;
-            if(count == 0)
-                partition.Complete = true;
-            else
-            {
-                ref var parts = ref partition.Aspects[1];
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var part = ref skip(parts,i);
-                }
-                partition.Complete = true;
-            }
-        }
 
         const char CommentMarker = Chars.Hash;
 
@@ -751,14 +733,14 @@ namespace Z0.Asm
         FS.FilePath ChipSourcePath()
             =>  SourceDir() + FS.file("xed-cdata", FS.Txt);
 
-        FS.FilePath ChipMapImportPath()
-            => Workspace.ImportTable("xed.chip-map");
+        FS.FilePath ChipMapTablePath(FS.FolderPath dir)
+            => dir + FS.file("xed.chip-map", FS.Csv);
 
-        FS.FilePath SymbolImportPath()
-            => Workspace.ImportTable("xed.symbols");
+        FS.FilePath SymbolImportPath(FS.FolderPath dir)
+            => dir + FS.file("xed.symbols", FS.Csv);
 
-        FS.FilePath FormAspectImportPath()
-            => Workspace.ImportTable<XedFormAspect>();
+        FS.FilePath FormAspectImportPath(FS.FolderPath dir)
+            => dir + FS.file(Tables.identify<XedFormAspect>().Format(),FS.Csv);
 
         FS.FolderPath TargetDir()
             => Workspace.ImportDir("xed.rules");

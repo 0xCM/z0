@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-
     public readonly struct AsmTokens
     {
         internal sealed class OpCodes : TokenSet<OpCodes>

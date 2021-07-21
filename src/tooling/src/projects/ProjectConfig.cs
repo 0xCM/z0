@@ -4,13 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class ToolBase
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
+
+    public struct ProjectConfig
     {
-        [Op]
-        public static string format(in ToolConfig src)
-        {
-            var formatter = Tables.formatter<ToolConfig>();
-            return formatter.Format(src, RecordFormatKind.KeyValuePairs);
-        }
+
+
     }
 }

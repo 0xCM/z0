@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Workflow)" />
+    <ProjectReference Include="$(Services)" />
   </ItemGroup>
 
 </Project>

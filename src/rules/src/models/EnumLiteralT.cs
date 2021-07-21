@@ -8,13 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using Z0.Lang;
-
     using static Root;
 
     partial struct Rules
     {
-
         [StructLayout(LayoutKind.Sequential)]
         public struct EnumLiteral<T>
         {

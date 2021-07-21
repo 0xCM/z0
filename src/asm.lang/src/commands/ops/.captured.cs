@@ -18,7 +18,7 @@ namespace Z0.Asm
             var current = available.Last;
             var archive = packs.Archive(current.Root);
             var entries = catalog.LoadApiCatalog(archive.ContextRoot());
-            var formatter = Tables.formatter<ApiCatalogEntry>();
+            var formatter = Z0.Tables.formatter<ApiCatalogEntry>();
             iter(entries, entry => Wf.Row(formatter.Format(entry)));
             return true;
         }

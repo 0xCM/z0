@@ -12,7 +12,7 @@ namespace Z0.Asm
         Outcome SymbolTypes(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = SymTypes.View;
+            var src = Clr.symtypes(ApiRuntimeLoader.assemblies()).View;
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var t = ref skip(src,i);

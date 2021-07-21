@@ -8,13 +8,6 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".import-xed")]
-        Outcome EmitXedCatalog(CmdArgs args)
-        {
-            Wf.IntelXed().EmitCatalog();
-            return true;
-        }
-
         [CmdOp(".import-xed-tables")]
         Outcome ImportXedTables(CmdArgs args)
         {

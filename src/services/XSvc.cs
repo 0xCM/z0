@@ -47,5 +47,10 @@ namespace Z0
         [Op]
         public static ApiCaptureArchive ApiCaptureArchive(this IWfRuntime wf)
             => Z0.ApiCaptureArchive.create(wf);
+
+        [Op]
+        public static ApiPackages ApiPackages(this IEnvPaths src)
+            => src.PackageRoot();
+
     }
 }

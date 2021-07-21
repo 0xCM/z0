@@ -61,48 +61,5 @@ namespace Z0.Asm
         static ReadOnlySpan<SG> SegOverrideCodes
             => new SG[]{SG.CS, SG.DS, SG.ES, SG.FS, SG.GS, SG.SS};
 
-        // [MethodImpl(Inline), Op]
-        // public static AsmOpCode opcode(DispToken disp)
-        //     => new AsmOpCode((uint)disp);
-
-        // [MethodImpl(Inline), Op]
-        // public static AsmOpCode opcode(EscapePrefix escape, byte a)
-        //     => new AsmOpCode((uint32(a) << 8) | ((uint)escape));
-
-        // [MethodImpl(Inline), Op]
-        // public static AsmOpCode opcode(EscapePrefix escape, byte a, byte b)
-        //     => new AsmOpCode((uint32(a) << 16) | (uint32(b) << 8) | escape);
-
-        // [MethodImpl(Inline), Op]
-        // public static AsmOpCode opcode(MandatoryPrefix mandatory, EscapePrefix escape, byte a)
-        //     => new AsmOpCode((uint32(a) << 16) | ((uint)escape) << 8 | (uint)mandatory);
-
-        // [MethodImpl(Inline), Op]
-        // public static AsmOpCode opcode(MandatoryPrefix mandatory, EscapePrefix escape, byte a, byte b)
-        //     => new AsmOpCode((uint32(a) << 24) | (uint32(b) << 16) | ((uint)escape) << 8 | (uint)mandatory);
-
-        // /// <summary>
-        // /// Example: XOR r/m32, imm8 | 83 /6 ib
-        // /// Example: AND r/m8,imm8 | 80 /4 ib
-        // /// </summary>
-        // /// <param name="b0">The first opcode byte</param>
-        // /// <param name="ext">The register field digit</param>
-        // /// <param name="iz">The imm size</param>
-        // [MethodImpl(Inline), Op]
-        // public static AsmOpCode opcode(byte b0, ModRmDigit ext, ImmSize iz)
-        //     => opcode(b0, (byte)ext, (byte)iz, TokenKind.RexBExtension | TokenKind.ImmSize);
-
-        // [MethodImpl(Inline), Op]
-        // public static AsmOpCode opcode(byte b0, ImmSize iz)
-        //     => opcode(b0,(byte)iz, 0, TokenKind.ImmSize);
-
-        // [MethodImpl(Inline), Op]
-        // public static AsmOpCode opcode(byte b0, byte b1, byte b2, TokenKind b3)
-        //     => new AsmOpCode(
-        //         bw32(b0) |
-        //         (bw32(b1) << 8) |
-        //         (bw32(b2) << 16) |
-        //         (bw32(b3) << 24)
-        //         );
     }
 }

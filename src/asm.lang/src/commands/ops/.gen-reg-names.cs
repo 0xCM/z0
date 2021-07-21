@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".gen-regnames")]
+        [CmdOp(".gen-reg-names")]
         Outcome EmitRegNames(CmdArgs args)
         {
             var dst = Workspace.Generated("common","regnames", FS.Cs);

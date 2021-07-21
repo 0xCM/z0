@@ -10,22 +10,25 @@ namespace Z0
     using static Root;
     using static core;
 
+    /// <summary>
+    /// Defines a fixed-width packed bitvector where the width is given by width{T}
+    /// </summary>
     public struct bits<T> : IBitContainer<bits<T>,T>
         where T : unmanaged
     {
         T Storage;
 
-        public ushort Width {get; private set;}
+        public uint Width {get; private set;}
 
         [MethodImpl(Inline)]
         public bits(T src)
         {
             Storage = src;
-            Width = (ushort)width<T>();
+            Width = width<T>();
         }
 
         [MethodImpl(Inline)]
-        public bits(T src, ushort width)
+        public bits(T src, uint width)
         {
             Storage = src;
             Width = width;
@@ -38,7 +41,7 @@ namespace Z0
         }
 
         public string Format()
-            => BitRender.gformat(Storage, Width);
+            => BitRender.gformat(Storage, (ushort)Width);
 
         public override string ToString()
             => Format();

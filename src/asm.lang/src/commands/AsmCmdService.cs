@@ -6,52 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
-    using static IntelSdm;
     using static Root;
     using static core;
-
-    public class ShellState
-    {
-        FS.FolderPath _SrcDir;
-
-        FS.FolderPath _DstDir;
-
-        ToolId _Tool;
-
-        public ToolId Tool()
-            => _Tool;
-
-        public ToolId Tool(ToolId id)
-        {
-            _Tool = id;
-            return _Tool;
-        }
-
-        public FS.FolderPath SrcDir()
-            => _SrcDir;
-
-        public FS.FolderPath DstDir()
-            => _DstDir;
-
-        public FS.FolderPath SrcDir(FS.FolderPath value)
-        {
-            _SrcDir = value;
-            return _SrcDir;
-        }
-
-        public FS.FolderPath DstDir(FS.FolderPath value)
-        {
-            _DstDir = value;
-            return _DstDir;
-        }
-
-        public ShellState()
-        {
-            _SrcDir = FS.FolderPath.Empty;
-            _DstDir = FS.FolderPath.Empty;
-            _Tool = default;
-        }
-    }
 
     public sealed partial class AsmCmdService : AppCmdService<AsmCmdService>
     {
@@ -63,17 +19,7 @@ namespace Z0.Asm
 
         AsmWorkspace Workspace;
 
-        SymTypes _SymTypes;
-
-        ToolBase _Toolbase;
-
         ScriptRunner ScriptRunner;
-
-        FS.FileName _SrcFile;
-
-        FS.FolderPath WsOutDir;
-
-        FS.Files  _SrcList;
 
         byte[] _Assembled;
 
@@ -84,21 +30,19 @@ namespace Z0.Asm
             State = new ShellState();
             CodeBuffer = Buffers.native(Pow2.T14);
             RoutineName = Identifier.Empty;
-            _SymTypes = Z0.SymTypes.Empty;
             CodeSize = 0;
-            _SrcFile = FS.FileName.Empty;
             _Assembled = array<byte>();
-            _SrcList = array<FS.FilePath>();
-
         }
 
         protected override void Initialized()
         {
             Workspace = Wf.AsmWorkspace();
-            _Toolbase = Wf.ToolBase(Db.ToolWs());
             ScriptRunner = Wf.ScriptRunner();
-            WsOutDir = Db.DevWs() + FS.folder(".out");
-            State.DstDir(WsOutDir);
+            State.ToolBase(Wf.ToolBase(Db.ToolWs()));
+            State.OutDir(FS.dir("j:/ws/.out"));
+            State.ProjectBase(Wf.ProjectBase(FS.dir("j:/projects")));
+            State.Project("default");
+            State.Tables(Db.DevWs() + FS.folder("tables"));
         }
 
         protected override void Disposing()
@@ -107,7 +51,16 @@ namespace Z0.Asm
         }
 
         ToolBase ToolBase()
-            => _Toolbase;
+            => State.ToolBase();
+
+        ProjectBase Projects()
+            => State.Projects();
+
+        ProjectId Project(ProjectId id)
+            => State.Project(id);
+
+        ProjectId Project()
+            => State.Project();
 
         ToolId Tool()
             => State.Tool();
@@ -115,9 +68,15 @@ namespace Z0.Asm
         ToolId Tool(ToolId id)
             => State.Tool(id);
 
-        FS.Files SrcList(FS.Files src)
+        FS.Files Files()
+            => State.Files();
+
+        FS.Files Files(FS.FileExt ext)
+            => State.Files().Where(f => f.Is(ext));
+
+        FS.Files Files(FS.Files src)
         {
-            _SrcList = src;
+            State.Files(src);
             iter(src.View, f => Write(f));
             return src;
         }
@@ -125,23 +84,37 @@ namespace Z0.Asm
         FS.FolderPath SrcDir()
             => State.SrcDir();
 
-        FS.FolderPath DstDir()
-            => State.DstDir();
+        FS.FolderPath OutDir()
+            => State.OutDir();
 
         FS.FolderPath SrcDir(FS.FolderPath value)
             => State.SrcDir(value);
 
-        FS.FolderPath DstDir(FS.FolderPath value)
-            => State.DstDir(value);
+        FS.FolderPath OutDir(FS.FolderPath value)
+            => State.OutDir(value);
 
-        SymTypes SymTypes
+        TableArchive Tables()
+            => State.Tables();
+
+        TableArchive Tables(FS.FolderPath root)
+            => State.Tables(root);
+
+        FS.FilePath TablePath<T>()
+            where T : struct
+                => Tables().Path<T>();
+
+        Outcome ToolOutDir(CmdArgs args, out FS.FolderPath dir)
         {
-            get
+            dir = FS.FolderPath.Empty;
+            if(args.Length == 0)
+                return (false, ToolUnspecified.Format());
+
+            if(Arg(args,0, out var id))
             {
-                if(_SymTypes.IsEmpty)
-                    _SymTypes = Clr.symtypes(ApiRuntimeLoader.assemblies());
-                return _SymTypes;
+                dir = OutDir() + FS.folder(id.Value);
+                return true;
             }
+            return false;
         }
 
         Outcome LoadRoutine(string name, ReadOnlySpan<byte> src)
@@ -210,8 +183,8 @@ namespace Z0.Asm
             var files = FileArchives.list(src);
             iter(files.View, file => Write(file.Path));
 
-            var dst = WsOutDir + FS.file(string.Format("{0}.list", src.FolderName), FS.Csv);
-            Tables.emit(files.View, dst);
+            var dst = State.OutDir() + FS.file(string.Format("{0}.list", src.FolderName), FS.Csv);
+            Z0.Tables.emit(files.View, dst);
         }
 
         ReadOnlySpan<TextLine> DumpObj(FS.FilePath src, FS.FolderPath dst)
@@ -253,7 +226,7 @@ namespace Z0.Asm
             var count = input.Length;
             var vars = Cmd.vars(
                 ("SrcDir", SrcDir().Format(PathSeparator.BS)),
-                ("DstDir", DstDir().Format(PathSeparator.BS))
+                ("DstDir", OutDir().Format(PathSeparator.BS))
                 );
             for(var i=0; i<count; i++)
             {
@@ -267,5 +240,11 @@ namespace Z0.Asm
         static MsgPattern NoToolSelected => "No tool selected";
 
         static MsgPattern CapacityExceeded => "Capacity exceeded";
+
+        static MsgPattern ToolUnspecified => "Tool unspecified";
+
+        static MsgPattern<ToolId> UndefinedTool => "Undefined tool:{0}";
+
+        static MsgPattern<ProjectId> UndefinedProject => "Undefined project:{0}";
     }
 }

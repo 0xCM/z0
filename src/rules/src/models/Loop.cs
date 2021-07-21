@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Z0.Lang;
-
     partial struct Rules
     {
         public readonly struct Loop : IScopedLoop

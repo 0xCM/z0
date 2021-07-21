@@ -276,23 +276,6 @@ namespace Z0.Asm
             catalogs.EmitIndex(AsmData.Assets, Db.Root);
         }
 
-        void EmitCatalogAssets()
-        {
-            const byte fieldCount = 4;
-            var delimiter = " | ";
-            var widths = new byte[fieldCount]{14,14,14,64};
-            var dst = Db.AppLog("assets.features", FS.Csv);
-            var assets = AsmData.Assets;
-            var features = assets.FeatureMnemonics();
-            var emitting = Wf.EmittingFile(dst);
-            var result = Tables.normalize(features, delimiter, widths, dst);
-            if(result.Fail)
-                Wf.Error(result.Message);
-            else
-                Wf.EmittedFile(emitting, result.Data);
-        }
-
-
         void ShowMemory()
         {
             var info = WinMem.basic();

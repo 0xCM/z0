@@ -25,7 +25,7 @@ namespace Z0.Asm
             Workspace = Wf.AsmWorkspace();
         }
 
-        public ReadOnlySpan<Intrinsic> Import()
+        public ReadOnlySpan<Intrinsic> Emit()
         {
             var parsed = Parse();
             EmitLog(parsed);

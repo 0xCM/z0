@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
     using static SFx;
     using static ApiClassKind;
@@ -41,6 +41,6 @@ namespace Z0
         [MethodImpl(Inline), BitSeg, Closures(Closure)]
         public static T bitseg<T>(in SpanBlock256<T> src, int i0, int i1)
             where T : unmanaged
-                => gbits.segment(src.Storage, gbits.bitpos<T>(i0), gbits.bitpos<T>(i1));
+                => gbits.segment(src.Storage, BitPos.position<T>((uint)i0), BitPos.position<T>((uint)i1));
     }
 }

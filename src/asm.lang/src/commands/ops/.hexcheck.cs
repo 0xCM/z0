@@ -37,7 +37,7 @@ namespace Z0.Asm
             var entries = slice(lookup.Symbols, 0,symbols.EntryCount);
             var dst = Db.AppLog("addresses.lookup", FS.Csv);
             var emitting = Wf.EmittingTable<MemorySymbol>(dst);
-            var emitted = Tables.emit(entries, dst);
+            var emitted = Z0.Tables.emit(entries, dst);
             Wf.EmittedTable(emitting,emitted);
             var found = 0;
 

@@ -107,7 +107,7 @@ namespace Z0.Asm
 
         void Split(in DocSplitSpec spec, IReceiver<LineRange> dst)
         {
-            var src = Workspace.RefDocs("txt") + FS.file(spec.DocId,FS.Txt);
+            var src = Workspace.SourceDocs("txt") + FS.file(spec.DocId,FS.Txt);
             using var reader = src.Reader(TextEncodingKind.Unicode);
             var counter = 1u;
             var count = spec.LastLine - spec.FirstLine + 1;

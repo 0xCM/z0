@@ -42,11 +42,10 @@ namespace Z0
         public static T setnb<T>(T src, byte pos, bit state)
             where T : unmanaged
         {
-            var x = gmath.negate(gmath.sll(NumericLiterals.one<T>(), pos));
+            var x = gmath.negate(gmath.sll(one<T>(), pos));
             var y = NumericCast.force<uint,T>((uint)state << pos);
             var z = gmath.and(src, x);
             return gmath.and(z, y);
         }
-
     }
 }

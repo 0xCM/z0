@@ -11,7 +11,7 @@ namespace Z0
     {
         Name Identifier {get;}
 
-        Name Identity {get;}
+        //Name Identity {get;}
         string ITextual.Format()
             => Identifier.Format();
     }

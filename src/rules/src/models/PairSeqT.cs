@@ -11,23 +11,6 @@ namespace Z0
 
     partial struct Rules
     {
-        /// <summary>
-        /// Defines a sequence of dynamically-typed pairs with arbitrary homogeneity
-        /// </summary>
-        public readonly struct PairSeq
-        {
-            public readonly Index<Paired<dynamic,dynamic>> Terms {get;}
-
-            [MethodImpl(Inline)]
-            public PairSeq(Index<Paired<dynamic,dynamic>> src)
-            {
-                Terms = src;
-            }
-
-            [MethodImpl(Inline)]
-            public static implicit operator PairSeq(Paired<dynamic,dynamic>[] src)
-                => new PairSeq(src);
-        }
 
         /// <summary>
         /// Defines a sequence of homogenous T-pairs

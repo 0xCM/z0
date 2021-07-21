@@ -9,12 +9,8 @@ namespace Z0.Asm
         [CmdOp(".tool-help")]
         Outcome ToolHelp(CmdArgs args)
         {
-            var tool = args.IsNonEmpty ? (ToolId)arg(args,0).Value : Tool();
+            var tool = (ToolId)arg(args,0).Value;
             var @base = ToolBase();
-            var result = Outcome.Failure;
-            if(tool.IsEmpty)
-                return (false, "A tool has not been selected");
-
             var path = @base.Docs(tool) + FS.file(tool.Format(), FS.Help);
             if(path.Exists)
             {

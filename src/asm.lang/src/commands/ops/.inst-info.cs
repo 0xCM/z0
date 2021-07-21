@@ -29,8 +29,8 @@ namespace Z0.Asm
             if(args.Length < 1)
                 return (false, "Argument not supplied");
 
-            var id = args[0].Value;
-            var src = Workspace.InstInfo(id);
+            var id = TableId.define(arg(args,0).Value);
+            var src = Tables().Path(AsmTableScopes.IntelSdm, id);
             if(!src.Exists)
                 return (false, FS.missing(src));
 

@@ -2,33 +2,36 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
-    /// <summary>
-    /// Defines comment classifiers
-    /// </summary>
-    public enum CommentKind : byte
+    partial struct Rules
     {
-        None,
-
         /// <summary>
-        /// Comment follows code on same line
+        /// Defines comment classifiers
         /// </summary>
-        PostFix,
+        public enum CommentKind : byte
+        {
+            None,
 
-        /// <summary>
-        /// Comment is self-contained within a line of code
-        /// </summary>
-        Embedded,
+            /// <summary>
+            /// Comment follows code on same line
+            /// </summary>
+            PostFix,
 
-        /// <summary>
-        /// Comment occupies an enire line
-        /// </summary>
-        FullLine,
+            /// <summary>
+            /// Comment is self-contained within a line of code
+            /// </summary>
+            Embedded,
 
-        /// <summary>
-        /// Comment occupies multiple lines
-        /// </summary>
-        MultiLine,
+            /// <summary>
+            /// Comment occupies an enire line
+            /// </summary>
+            FullLine,
+
+            /// <summary>
+            /// Comment occupies multiple lines
+            /// </summary>
+            MultiLine,
+        }
     }
 }

@@ -8,10 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
 	[ApiHost]
-	public partial struct BitPos
+	public struct BitPos
 	{
+        const NumericKind Closure = UnsignedInts;
+
 		/// <summary>
 		/// Computes the order-invariant absolute distance between two positions
 		/// </summary>
@@ -27,8 +30,8 @@ namespace Z0
         /// <param name="w">The width of a storage cell</param>
         /// <param name="index">The linear bit index</param>
 		[MethodImpl(Inline)]
-        public static ushort linear(ushort w, uint index)
-			=> ScalarCast.uint16(index/w);
+        public static uint linear(uint w, uint index)
+			=> index/w;
 
 		/// <summary>
 		/// Computes a linear bit index from a cell index and cell-relative offset
@@ -37,7 +40,7 @@ namespace Z0
 		/// <param name="cellindex">The cell index</param>
 		/// <param name="offset">The cell-relative offset of the bit</param>
 		[MethodImpl(Inline)]
-		public static uint linear(ushort w, uint cellindex, ushort offset)
+		public static uint linear(uint w, uint cellindex, uint offset)
 			=> cellindex*w + offset;
 
         /// <summary>
@@ -46,7 +49,7 @@ namespace Z0
         /// <param name="w">The cell width</param>
         /// <param name="index">The linear bit index</param>
 		[MethodImpl(Inline), Op]
-        public static byte offset(ushort w, uint index)
+        public static byte offset(uint w, uint index)
 			=> ScalarCast.uint8(index % w);
 
 		/// <summary>
@@ -55,7 +58,7 @@ namespace Z0
         /// <param name="w">The storage cell width</param>
 		/// <param name="index">The linear bit index</param>
 		[MethodImpl(Inline), Op]
-		public static BitPos init(ushort w, uint index)
+		public static BitPos init(uint w, uint index)
 			=> new BitPos(w, linear(w, index), offset(w, index));
 
 		/// <summary>
@@ -65,7 +68,7 @@ namespace Z0
 		/// <param name="cellindex">The container-relative cell index</param>
 		/// <param name="offset">The cell-relative bit offset</param>
 		[MethodImpl(Inline), Op]
-		public static BitPos FromCellIndex(ushort w, ushort cellindex, ushort offset)
+		public static BitPos FromCellIndex(uint w, uint cellindex, uint offset)
 			=> new BitPos(w, cellindex, offset);
 
 		/// <summary>
@@ -74,18 +77,35 @@ namespace Z0
 		/// <param name="cellindex">The container-relative cell index</param>
 		/// <param name="offset">The cell-relative bit offset</param>
 		[MethodImpl(Inline), Op, Closures(UnsignedInts)]
-		public static BitPos<T> FromCellIndex<T>(ushort cellindex, byte offset)
+		public static BitPos<T> FromCellIndex<T>(uint cellindex, uint offset)
 			where T : unmanaged
-				=> BitPos<T>.Define((ushort)cellindex, offset);
+				=> BitPos<T>.Define(cellindex, offset);
 
-		/// <summary>
-		/// Defines a bit position predicated on a parametric cell type and linear bit index
-		/// </summary>
-		/// <param name="index">The linear bit index</param>
-		[MethodImpl(Inline), Op, Closures(UnsignedInts)]
-		public static BitPos<T> FromBitIndex<T>(uint index)
-			where T : unmanaged
-				=> BitPos<T>.FromLinearIndex(index);
+        /// <summary>
+        /// Defines a bit position, relative to a T-valued sequence, predicated on a linear index
+        /// </summary>
+        /// <param name="index">The sequence-relative index of the target bit</param>
+        /// <typeparam name="T">The sequence element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static BitPos<T> position<T>(uint index)
+            where T : unmanaged
+				=> new BitPos<T>(BitPos.linear(width<T>(), index), BitPos.offset(width<T>(), index));
+
+        /// <summary>
+        /// Defines a bit position, relative to a T-valued sequence, predicated on a linear index
+        /// </summary>
+		/// <param name="index">The linear index</param>
+        /// <param name="cell">The cell index</param>
+        /// <param name="offset">The cell-relative offset</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+		public static void bitpos<T>(uint index, out uint cell, out uint offset)
+            where T : unmanaged
+        {
+            var w = width<T>(w16);
+			cell = BitPos.linear(w, index);
+            offset = BitPos.offset(w, index);
+        }
 
         /// <summary>
 		/// A container-relative 0-based cell offset
@@ -95,15 +115,15 @@ namespace Z0
 		/// <summary>
 		/// A cell-relative bit offset
 		/// </summary>
-		public ushort BitOffset;
+		public uint BitOffset;
 
 		/// <summary>
 		/// The bit-width of a cell
 		/// </summary>
-		public ushort CellWidth;
+		public uint CellWidth;
 
 		[MethodImpl(Inline)]
-		public BitPos(ushort cellwidth, uint cellindex, ushort bitoffset)
+		public BitPos(uint cellwidth, uint cellindex, uint bitoffset)
 		{
 			CellWidth = cellwidth;
 			CellIndex = cellindex;
@@ -122,7 +142,7 @@ namespace Z0
 		[MethodImpl(Inline), Op]
         public void Add(uint bitindex)
         {
-            var newindex = (uint)(LinearIndex + bitindex);
+            var newindex = LinearIndex + bitindex;
             CellIndex = linear(CellWidth,newindex);
             BitOffset = offset(CellWidth, newindex);
         }
@@ -152,7 +172,7 @@ namespace Z0
             {
                 if(CellIndex != 0)
                 {
-                    BitOffset = (byte)(CellWidth - 1);
+                    BitOffset = CellWidth - 1;
                     --CellIndex;
                 }
             }

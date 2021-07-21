@@ -20,7 +20,6 @@ namespace Z0.Blit
 
        TypeKind IPrimitive.TypeKind
             => TypeKind.Unsigned;
-
     }
 
     public struct u1<T> : IPrimitive<T>
@@ -218,5 +217,4 @@ namespace Z0.Blit
        TypeKind IPrimitive.TypeKind
             => TypeKind.Unsigned;
     }
-
 }

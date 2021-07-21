@@ -263,6 +263,20 @@ namespace Z0.Asm
             return ref dst;
         }
 
+        public static Outcome parse(in AsciLine src, out AsmLabel label, out AsmExpr expr)
+        {
+            label = AsmLabel.Empty;
+            var content = src.Content;
+            var i = SQ.index(content, AsciCode.Colon);
+            if(i < 0)
+                return false;
+
+            label = new AsmLabel(SR.format(SQ.left(content, i)).Trim());
+            expr = SR.format(SQ.right(content, i)).Trim();
+
+            return true;
+        }
+
         public static Outcome parse(TextLine src, out AsmGlobal dst)
         {
             const string ErrorPattern = "Error parsing {0} on line {1}";
@@ -393,14 +407,17 @@ namespace Z0.Asm
         public static Outcome parse(string src, out AsmOffsetLabel dst)
         {
             dst = default;
-            var outcome = DataParser.parse(src.Remove(Chars.Colon), out Hex64 value);
-            if(outcome)
+            var result = DataParser.parse(src, out Hex64 value);
+            if(result)
             {
                 var effective = Bits.effwidth(value);
                 dst = asm.label(effective, value);
             }
-            return outcome;
+            return result;
         }
+
+        public static Outcome parse(AsmLabel src, out AsmOffsetLabel dst)
+            => parse(src.Format(), out dst);
 
         static Fence<char> SigFence => (LParen, RParen);
 

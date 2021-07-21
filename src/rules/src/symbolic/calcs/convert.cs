@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    readonly partial struct SymbolicCalcs
+    partial struct SymbolicCalcs
     {
         [MethodImpl(Inline), Op]
         public static uint convert(ReadOnlySpan<AsciCode> src, Span<char> dst)

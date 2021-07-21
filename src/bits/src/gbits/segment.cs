@@ -90,7 +90,7 @@ namespace Z0
         [MethodImpl(Inline), BitSeg, Closures(Closure)]
         public static T segment<T>(Span<T> src, byte i0, byte i1)
             where T : unmanaged
-                => segment(src, bitpos<T>(i0), bitpos<T>(i1));
+                => segment(src, BitPos.position<T>((uint)i0), BitPos.position<T>((uint)i1));
 
         [MethodImpl(Inline)]
         static T segment_i<T>(T src, byte i0, byte i1)

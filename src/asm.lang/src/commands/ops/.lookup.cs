@@ -16,7 +16,7 @@ namespace Z0.Asm
             if(outcome.Fail)
                 return outcome;
 
-            outcome = DataParser.parse(arg(args,0), out ushort cols);
+            outcome = DataParser.parse(arg(args,1), out ushort cols);
             if(outcome.Fail)
                 return outcome;
 

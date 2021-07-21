@@ -20,11 +20,19 @@ namespace Z0.Asm
 
         const string imported = nameof(imported);
 
+        const string sources = nameof(sources);
+
         const string alg = nameof(alg);
 
         const string images = nameof(images);
 
         const string stage = nameof(stage);
+
+        const string src = nameof(src);
+
+        const string bits = nameof(bits);
+
+        const string docs = nameof(docs);
 
         [MethodImpl(Inline)]
         public static AsmWorkspace create(FS.FolderPath root)
@@ -63,6 +71,9 @@ namespace Z0.Asm
                 throw no(id);
         }
 
+        public FS.FolderPath DataSources()
+            => FS.dir("c:/dev/ws") + FS.folder(sources);
+
         /// <summary>
         /// Defines a path of the form {Root}/.out
         /// </summary>
@@ -70,25 +81,25 @@ namespace Z0.Asm
             => Root + FS.folder(dotout);
 
         /// <summary>
-        /// Defines a path of the form {Root}/sources
+        /// Defines a path of the form {Root}/src
         /// </summary>
-        public FS.FolderPath Sources()
-            => Root + FS.folder(sources);
+        public FS.FolderPath Src()
+            => Root + FS.folder(src);
 
         /// <summary>
-        /// Defines a path of the form {Sources}/asm
+        /// Defines a path of the form {Src}/asm
         /// </summary>
-        public FS.FolderPath AsmSources()
-            => Sources() + FS.folder("asm");
+        public FS.FolderPath AsmSrc()
+            => Src() + FS.folder("asm");
 
         /// <summary>
         /// Defines a path of the form {Root}/cpp
         /// </summary>
-        public FS.FolderPath CppSources()
+        public FS.FolderPath CppSrc()
             => Root + FS.folder(cpp);
 
         public FS.FilePath AsmPath(string id)
-            => AsmSources() + FS.file(id, FS.Asm);
+            => AsmSrc() + FS.file(id, FS.Asm);
 
         public FS.FolderPath HexDir()
             => Output() + FS.folder(hex);
@@ -242,12 +253,6 @@ namespace Z0.Asm
         public FS.FolderPath ImportTables()
             => Tables() + FS.folder(imported);
 
-        public FS.FolderPath SourceTables()
-            => Tables() + FS.folder(sources);
-
-       public FS.FolderPath StageTables()
-            => Tables() + FS.folder(stage);
-
         public FS.FilePath ImportTable<T>()
             where T : struct
                 => ImportTables() + FS.file(TableId<T>(), FS.Csv);
@@ -258,17 +263,11 @@ namespace Z0.Asm
         public FS.FilePath Script(string id)
             => Scripts() + FS.file(id, FS.Cmd);
 
-        public FS.FolderPath RefDocs()
-            => DocRoot() + FS.folder(refs);
+        public FS.FolderPath SourceDocs()
+            => DataSources()  + FS.folder("docs");
 
-        public FS.FolderPath RefDocs(string id)
-            => RefDocs() + FS.folder(id);
-
-        public FS.FolderPath DocExtracts()
-            => DocRoot() + FS.folder(extracts);
-
-        public FS.FolderPath DataSources()
-            => DataRoot() + FS.folder(sources);
+        public FS.FolderPath SourceDocs(string id)
+            => SourceDocs() + FS.folder(id);
 
         public FS.FolderPath DataSource(string id)
             => DataSources() + FS.folder(id);
@@ -278,12 +277,6 @@ namespace Z0.Asm
 
         public FS.FilePath InstInfo(string id)
             => Dataset(instructions) + FS.file(id,FS.Csv);
-
-        public FS.FolderPath DocExtractDir(string docid)
-            => DocExtracts() + FS.folder(docid);
-
-        public FS.FilePath DocExtract(string docid, string part, FS.FileExt ext)
-            => DocExtractDir(docid) + FS.file(string.Format("{0}.{1}",docid, part), ext);
 
         public FS.FolderPath DisasmOut()
             => Output() + FS.folder("dis");
@@ -328,7 +321,7 @@ namespace Z0.Asm
             => DataRoot() + FS.folder(bitfields);
 
         public FS.FilePath Bitfield(string id)
-            => Bitfields() + FS.file(id, FS.ext("bits"));
+            => Bitfields() + FS.file(id, FS.ext(bits));
 
         public FS.FilePath ObjPath(string id)
             => ObjOut() + FS.file(id,FS.Obj);

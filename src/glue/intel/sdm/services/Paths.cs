@@ -33,7 +33,7 @@ namespace Z0.Asm
             => FS.file(string.Format("intel-sdm-vol{0}-{1}", vol, unicode), FS.Txt);
 
         FS.FolderPath RefDocRoot()
-            => Workspace.RefDocs();
+            => Workspace.SourceDocs();
 
         FS.FolderPath RefDocRoot(string id)
             => RefDocRoot() + FS.folder(id);
