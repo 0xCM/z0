@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IDiscreteGroup<S> : IGroupLike<S>
         where S : IDiscreteGroup<S>, new()
     {
-        
+
     }
 
     /// <summary>

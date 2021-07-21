@@ -74,10 +74,11 @@ namespace Z0.Asm
         FS.Files Files(FS.FileExt ext)
             => State.Files().Where(f => f.Is(ext));
 
-        FS.Files Files(FS.Files src)
+        FS.Files Files(FS.Files src, bool write = true)
         {
             State.Files(src);
-            iter(src.View, f => Write(f));
+            if(write)
+                iter(src.View, f => Write(f));
             return src;
         }
 
@@ -109,13 +110,13 @@ namespace Z0.Asm
             if(args.Length == 0)
                 return (false, ToolUnspecified.Format());
 
-            if(Arg(args,0, out var id))
-            {
-                dir = OutDir() + FS.folder(id.Value);
-                return true;
-            }
-            return false;
+            var id = arg(args,0).Value;
+            dir = OutDir() + FS.folder(id);
+            return true;
         }
+
+        FS.FolderPath ToolOutDir(ToolId tool)
+            => OutDir() + FS.folder(tool.Format());
 
         Outcome LoadRoutine(string name, ReadOnlySpan<byte> src)
         {
@@ -157,7 +158,7 @@ namespace Z0.Asm
 
         ref readonly Table Pipe(in Table src)
         {
-            //Status(DispatchingRows.Format(src.RowCount, src.Kind));
+
             return ref src;
         }
 
@@ -187,17 +188,6 @@ namespace Z0.Asm
             Z0.Tables.emit(files.View, dst);
         }
 
-        ReadOnlySpan<TextLine> DumpObj(FS.FilePath src, FS.FolderPath dst)
-        {
-            var cmd = Cmd.cmdline(ToolBase().Script(Toolspace.dumpbin, "dump-obj").Format(PathSeparator.BS));
-            var vars = Cmd.vars(
-                ("SrcDir", src.FolderPath.Format(PathSeparator.BS)),
-                ("DstDir", dst.Format(PathSeparator.BS)),
-                ("SrcFile", src.FileName.Format())
-                );
-            return ScriptRunner.RunCmd(cmd, vars);
-        }
-
         Outcome DumpModules(FileModuleKind kind)
         {
             var script = kind switch{
@@ -217,21 +207,22 @@ namespace Z0.Asm
                 _ => FS.FileExt.Empty
             };
 
-
             if(empty(script))
                 return (false, string.Format("{0} not supported", kind));
 
             var cmd = Cmd.cmdline(ToolBase().Script(Toolspace.dumpbin, script).Format(PathSeparator.BS));
-            var input = SrcDir().Files(ext).ToReadOnlySpan();
+            var input = Files(ext).View;
             var count = input.Length;
-            var vars = Cmd.vars(
-                ("SrcDir", SrcDir().Format(PathSeparator.BS)),
-                ("DstDir", OutDir().Format(PathSeparator.BS))
-                );
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(input,i);
-                vars[2] = ("SrcFile", path.FileName.Format());
+                var outdir = ToolOutDir(Toolspace.dumpbin);
+                var vars = Cmd.vars(
+                    ("SrcDir", path.FolderPath.Format(PathSeparator.BS)),
+                    ("SrcFile", path.FileName.Format()),
+                    ("DstDir", ToolOutDir(Toolspace.dumpbin).Format(PathSeparator.BS))
+                    );
+
                 var response = ScriptRunner.RunCmd(cmd, vars);
             }
             return true;

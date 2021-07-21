@@ -15,17 +15,26 @@ namespace Z0
     {
         List<TableRow> Rows;
 
+        TableColumn[] Cols;
+
         public static TableBuilder create()
             => new TableBuilder();
 
         public TableBuilder()
         {
             Rows = new();
+            Cols = array<TableColumn>();
         }
 
         public TableBuilder WithRow(in TableRow row)
         {
             Rows.Add(row);
+            return this;
+        }
+
+        public TableBuilder WithColumns(TableColumn[] cols)
+        {
+            Cols = cols;
             return this;
         }
 
@@ -63,7 +72,7 @@ namespace Z0
             ref var row = ref first(rows);
             for(var i=0u; i<count; i++)
                 seek(row,i)._Seq = i;
-            var dst = new Table(rows);
+            var dst = new Table(Cols, rows);
             Clear();
             return dst;
         }

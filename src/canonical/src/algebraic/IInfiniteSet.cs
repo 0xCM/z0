@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Defines attributes common to set representations
     /// </summary>

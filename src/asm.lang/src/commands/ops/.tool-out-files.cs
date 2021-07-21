@@ -12,8 +12,8 @@ namespace Z0.Asm
             var result = ToolOutDir(args, out var dir);
             if(result)
             {
-                if(Arg(args,1, out var pattern))
-                    Files(dir.Files(pattern,true));
+                if(args.Length > 1)
+                    Files(dir.Files(arg(args,1).Value,true));
                 else
                     Files(dir.Files(true));
             }

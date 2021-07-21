@@ -83,6 +83,7 @@ namespace Z0.Asm
                     else
                     {
                         cols = IntelSdm.columns(labels);
+                        table.WithColumns(cols);
                         Write(text.intersperse(labels, Chars.Pipe));
                         parsingrows = true;
                     }

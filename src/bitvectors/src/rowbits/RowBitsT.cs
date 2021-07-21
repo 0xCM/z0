@@ -6,8 +6,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Defines a sequence of generic bitvectors, interpreted as rows, for which the width is determined by the bitvector primal type

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
- 
     /// <summary>
     /// Characterizes commutative operations
     /// </summary>

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     partial class XBv
     {
         public static string FormatBlocked<T>(this BitVector<T> src, int width)

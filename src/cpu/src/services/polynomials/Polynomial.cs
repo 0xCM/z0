@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     /// <summary>
     /// Represents a polynomial
@@ -25,7 +24,8 @@ namespace Z0
         /// <summary>
         /// The canonical zero polynomial - with one term of order 0 with coefficient 0
         /// </summary>
-        public static Polynomial<T> Zero => new Polynomial<T>(sys.empty<Monomial<T>>());
+        public static Polynomial<T> Zero
+            => new Polynomial<T>(sys.empty<Monomial<T>>());
 
         /// <summary>
         /// Initializes a polynomial from a dense sequence of monomials

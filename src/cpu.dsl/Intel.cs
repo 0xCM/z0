@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Vdsl
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
-
     [ApiHost]
     public readonly partial struct Intel
     {

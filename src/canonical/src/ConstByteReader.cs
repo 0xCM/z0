@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public unsafe readonly partial struct ConstBytesReader
     {
         public static ReadOnlySpan<Utf8Point> Utf8Points
         {
             [MethodImpl(Inline)]
-            get => memory.recover<byte,Utf8Point>(ConstBytes256.Storage.Seg(n7, n0));
+            get => core.recover<byte,Utf8Point>(ConstBytes256.Storage.Seg(n7, n0));
         }
 
         readonly ConstBytes256 Data;

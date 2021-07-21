@@ -8,12 +8,8 @@ namespace Z0.Asm
     {
         [CmdOp(".samples")]
         Outcome ToolSamples(CmdArgs args)
-            => RunTool(args, ToolSamples);
-
-        Outcome ToolSamples(ToolId tool, CmdArgs args)
         {
-            var dir = ToolBase().Scripts(tool);
-            var files = Pipe(dir.AllFiles.View);
+            Files(ToolBase().Samples(arg(args,0).Value).AllFiles);
             return true;
         }
     }

@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-    using static AsmCodes;
-    using static AsmOpCodes;
-
     partial struct Prototypes
     {
         public enum AsmOpCodeId : ushort

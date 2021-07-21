@@ -4,16 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IDecrementableOps<T> 
+    public interface IDecrementableOps<T>
         where T : unmanaged
     {
-        T Dec(T x);        
+        T Dec(T x);
     }
 
     public interface IIncrementableOps<T>
         where T : unmanaged
     {
-        T Inc(T x);        
+        T Inc(T x);
     }
 
     /// <summary>
@@ -23,8 +23,6 @@ namespace Z0
     public interface IStepwiseOps<T> : IIncrementableOps<T>, IDecrementableOps<T>
         where T : unmanaged
     {
-        
+
     }
-
-
 }

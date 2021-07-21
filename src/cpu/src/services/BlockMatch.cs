@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static int test(SpanBlock128<byte> src, byte match)
+        public static int cellmatch(SpanBlock128<byte> src, byte match)
         {
             var ones = gcpu.vones<byte>(w128);
             for(var i=0; i<src.BlockCount; i++)
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static int test<T>(SpanBlock128<T> src, T match)
+        public static int cellmatch<T>(SpanBlock128<T> src, T match)
             where T : unmanaged
         {
             var w = w128;
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static int test<T>(SpanBlock256<T> src, T match)
+        public static int cellmatch<T>(SpanBlock256<T> src, T match)
             where T : unmanaged
         {
             var w = w256;
@@ -85,22 +85,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void test<T>(SpanBlock128<T> src, T match, out BlockSearch128<T> result)
+        public static void cellmatch<T>(SpanBlock128<T> src, T match, out BlockSearch128<T> result)
             where T : unmanaged
         {
             result.Searched = src;
             result.Target = match;
-            result.MatchingBlock = test(src,match);
+            result.MatchingBlock = cellmatch(src,match);
             result.Found = result.MatchingBlock != NotFound;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void test<T>(SpanBlock256<T> src, T match, out BlockSearch256<T> result)
+        public static void cellmatch<T>(SpanBlock256<T> src, T match, out BlockSearch256<T> result)
             where T : unmanaged
         {
             result.Searched = src;
             result.Target = match;
-            result.MatchingBlock = test(src,match);
+            result.MatchingBlock = cellmatch(src,match);
             result.Found = result.MatchingBlock != NotFound;
         }
 

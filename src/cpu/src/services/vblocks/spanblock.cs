@@ -9,16 +9,15 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static Typed;
 
-    partial struct gcpu
+    partial struct vblocks
     {
         /// <summary>
         /// Deposits vector content to a stack-allocated data block
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static SpanBlock128<T> spanblock<T>(Vector128<T> src)
             where T : unmanaged
         {
@@ -34,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static SpanBlock256<T> spanblock<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -50,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static SpanBlock512<T> spanblock<T>(Vector512<T> src)
             where T : unmanaged
         {
