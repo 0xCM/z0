@@ -205,6 +205,32 @@ namespace Z0.Asm
             return counter;
         }
 
+        public static Outcome<uint> parse(in TextGrid doc, Span<AsmHostStatement> dst)
+        {
+            const byte StatementFieldCount = AsmHostStatement.FieldCount;
+
+            var counter = 0u;
+            if(doc.Header.Labels.Length != StatementFieldCount)
+                return (false, AppMsg.FieldCountMismatch.Format(StatementFieldCount, doc.Header.Labels.Length));
+
+            var count = min(doc.RowCount,dst.Length);
+            var rows = doc.RowData.View;
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                var result = parse(row, out AsmHostStatement statement);
+                if(result)
+                {
+                    seek(dst,i) = statement;
+                    counter++;
+                }
+                else
+                    return result;
+            }
+            return counter;
+        }
+
         public static Outcome thumbprint(string src, out AsmThumbprint thumbprint)
         {
             thumbprint = AsmThumbprint.Empty;

@@ -50,5 +50,8 @@ namespace Z0
 
         FS.FilePath AsmStatementSummary()
             => Root + FS.file("asm.statements", FS.Csv);
+
+        ApiPackArchive Archive()
+            => ApiPackArchive.create(Root);
     }
 }

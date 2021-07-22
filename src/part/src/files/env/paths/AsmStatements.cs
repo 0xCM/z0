@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static EnvFolders;
-
     partial interface IEnvPaths
     {
         FS.FolderPath AsmStatementRoot()
@@ -25,8 +23,5 @@ namespace Z0
 
         FS.FilePath AsmStatementPath(FS.FolderPath root, ApiHostUri host, FS.FileExt ext)
             => AsmStatementDir(root, host.Part) + HostFile(host, ext);
-
-        FS.FileName AsmFileName(OpIdentity id)
-            => LegalFileName(id, FS.Asm);
     }
 }

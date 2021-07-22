@@ -17,14 +17,11 @@ namespace Z0.Asm
     {
         AsmDecoder Decoder;
 
-        AsmThumbprints Thumbprints;
-
         ApiHex ApiHex;
 
         protected override void OnInit()
         {
             Decoder = Wf.AsmDecoder();
-            Thumbprints = Wf.AsmThumbprints();
             ApiHex = Wf.ApiHex();
         }
 
@@ -396,13 +393,6 @@ namespace Z0.Asm
         public uint EmitIndex(SortedReadOnlySpan<AsmGlobal> src, FS.FilePath dst)
             => EmitRows(src.View, AsmGlobal.RenderWidths, AsmGlobal.RowPad, Encoding.ASCII, dst);
 
-        // public ReadOnlySpan<AsmIndex> EmitIndex(SortedSpan<ApiCodeBlock> src, FS.FilePath dst)
-        // {
-        //     var rows = BuildIndex(src);
-        //     EmitIndex(rows, dst);
-        //     return rows;
-        // }
-
         public ReadOnlySpan<AsmGlobal> EmitIndex(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
         {
             var rows = BuildIndex(src);
@@ -410,7 +400,27 @@ namespace Z0.Asm
             return rows;
         }
 
-        public ReadOnlySpan<AsmHostStatement> ParseStatementData(FS.FolderPath dir)
+        public ReadOnlySpan<AsmHostStatement> LoadHostStatements(FS.FilePath src)
+        {
+            var result = TextGrids.load(src, out var doc);
+            if(!result)
+            {
+                Error(result.Message);
+                return default;
+            }
+            else
+            {
+                var dst = span<AsmHostStatement>(doc.RowCount);
+                var count = AsmParser.parse(doc,dst);
+                if(count)
+                    return slice(dst,0, count.Data);
+
+                Error(count.Message);
+                return default;
+            }
+        }
+
+        public ReadOnlySpan<AsmHostStatement> LoadHostStatements(FS.FolderPath dir)
         {
             var files = dir.EnumerateFiles(FS.Csv, true).Array();
             var flow = Wf.Running(ParsingStatements.Format(files.Length,dir));

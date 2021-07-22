@@ -45,7 +45,7 @@ namespace Z0
         public FS.FolderPath IndexRoot()
             => Root;
 
-        public FS.FolderPath AsmSourceRoot()
+        public FS.FolderPath AsmRoot()
             => CaptureRoot() + FS.folder(asm);
 
         public FS.FolderPath CodeGenRoot()
@@ -54,8 +54,8 @@ namespace Z0
         public FS.FolderPath CodeGenDir(string id)
             => CodeGenRoot() + FS.folder(id);
 
-        public FS.FolderPath AsmSourceDir(PartId part)
-            => AsmSourceRoot() + FS.folder(part);
+        public FS.FolderPath AsmDir(PartId part)
+            => AsmRoot() + FS.folder(part);
 
         public FS.FolderPath ExtractRoot()
             => CaptureRoot() + FS.folder(extracts);
@@ -66,8 +66,11 @@ namespace Z0
         public FS.FilePath ParsedExtractPath(ApiHostUri host)
             => ExtractRoot() + FS.file(host, "extracts.parsed", FS.XPack);
 
-        public FS.FilePath AsmPath(ApiHostUri host)
-            =>  AsmSourceDir(host.Part) + FS.file(host, FS.Asm);
+        public FS.FilePath AsmSrcPath(ApiHostUri host)
+            => AsmDir(host.Part) + FS.file(host, FS.Asm);
+
+        public FS.FilePath AsmDataPath(ApiHostUri host)
+            => AsmDir(host.Part) + FS.file(host, FS.Csv);
 
         public FS.FolderPath ContextRoot()
             => CaptureRoot() + FS.folder(context);

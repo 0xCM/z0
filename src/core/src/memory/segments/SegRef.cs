@@ -88,6 +88,11 @@ namespace Z0
         public bool Equals(SegRef src)
             => src.Address == Address && src.Size == Size;
 
+        [MethodImpl(Inline)]
+        public unsafe T* Pointer<T>()
+            where T : unmanaged
+                => BaseAddress.Pointer<T>();
+
         public string Format()
             => string.Format("{0}:{1}", BaseAddress, Length);
 

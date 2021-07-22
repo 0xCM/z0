@@ -8,8 +8,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Workflow)" />
-    <ProjectReference Include="$(AsmLang)" />
     <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(Tooling)" />
+    <ProjectReference Include="$(AsmLang)" />
   </ItemGroup>
 
 </Project>

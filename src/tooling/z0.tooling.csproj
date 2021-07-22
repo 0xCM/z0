@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Cli)" />
     <ProjectReference Include="$(Commands)" />
     <ProjectReference Include="$(Rules)" />
+    <ProjectReference Include="$(Services)" />
   </ItemGroup>
 
   <ItemGroup>

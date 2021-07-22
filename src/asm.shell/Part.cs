@@ -13,10 +13,12 @@ namespace Z0.Parts
     }
 }
 
-namespace Z0
+namespace Z0.Asm
 {
     public static partial class XTend
     {
-
+        [Op]
+        public static AsmCmdService AsmCmd(this IWfRuntime context)
+            => AsmCmdService.create(context);
     }
 }

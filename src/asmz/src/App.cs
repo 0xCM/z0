@@ -261,7 +261,7 @@ namespace Z0.Asm
             var pipe = Wf.AsmStatementPipe();
             var root = Db.AppLogDir("statements");
             pipe.EmitHostStatements(blocks, root);
-            var parsed = pipe.ParseStatementData(root);
+            var parsed = pipe.LoadHostStatements(root);
         }
 
         public void ParseDump()

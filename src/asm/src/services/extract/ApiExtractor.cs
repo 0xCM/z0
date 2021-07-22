@@ -63,7 +63,7 @@ namespace Z0
         void ClearTargets()
         {
             Paths.ExtractRoot().Clear();
-            Paths.AsmSourceRoot().Clear(true);
+            Paths.AsmRoot().Clear(true);
         }
 
         public void ExtractParts()
