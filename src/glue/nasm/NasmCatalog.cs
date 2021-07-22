@@ -15,7 +15,7 @@ namespace Z0.Asm
 
         protected override void Initialized()
         {
-            Workspace = Wf.AsmWorkspace();
+            Workspace = Wf.AsmWs();
 
         }
 

@@ -38,14 +38,16 @@ namespace Z0.Asm
 
         protected override void Initialized()
         {
-            Workspace = Wf.AsmWorkspace();
+            Workspace = Wf.AsmWs();
             ScriptRunner = Wf.ScriptRunner();
             ApiPack = Wf.ApiPacks().Current();
+            State.WsRoot(Wf.Env.DevWs);
             State.OutDir(State.OutRoot(FS.dir("j:/ws/.out")));
             State.ToolBase(Wf.ToolBase(Db.ToolWs()));
             State.ProjectBase(Wf.ProjectBase(FS.dir("j:/projects")));
             State.Project("default");
             State.Tables(Db.DevWs() + FS.folder("tables"));
+            State.Workspace(Wf.AsmWs());
         }
 
         protected override void Disposing()

@@ -34,6 +34,33 @@ namespace Z0.Asm
 
         FS.FolderPath _OutRoot;
 
+        IWorkspace _Workspace;
+
+        FS.FolderPath _WsRoot;
+
+        [MethodImpl(Inline)]
+        public FS.FolderPath WsRoot()
+            => _WsRoot;
+
+        [MethodImpl(Inline)]
+        public FS.FolderPath WsRoot(FS.FolderPath src)
+        {
+            _WsRoot = src;
+            return WsRoot();
+        }
+
+
+        [MethodImpl(Inline)]
+        public IWorkspace Workspace()
+            => _Workspace;
+
+        [MethodImpl(Inline)]
+        public IWorkspace Workspace(IWorkspace ws)
+        {
+            _Workspace = ws;
+            return Workspace();
+        }
+
         [MethodImpl(Inline)]
         public FS.FolderPath OutRoot()
             => _OutRoot;
@@ -160,6 +187,7 @@ namespace Z0.Asm
             _SrcDir = FS.FolderPath.Empty;
             _DstDir = FS.FolderPath.Empty;
             _OutRoot = FS.FolderPath.Empty;
+            _WsRoot = FS.FolderPath.Empty;
             _Tool = default;
             _DataSource = FS.FilePath.Empty;
             _Files = array<FS.FilePath>();
@@ -171,5 +199,6 @@ namespace Z0.Asm
 
         public FS.FolderPath OutDir(FS.FolderName value)
             => OutDir(OutRoot() + value);
+
     }
 }

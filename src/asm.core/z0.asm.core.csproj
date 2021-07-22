@@ -13,7 +13,6 @@
       <ProjectReference Include="$(Events)" />
       <ProjectReference Include="$(Rules)" />
       <ProjectReference Include="$(AsmLangG)" />
-
   </ItemGroup>
 
    <ItemGroup>

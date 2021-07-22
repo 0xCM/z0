@@ -30,7 +30,7 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             ChipIsaParser = XedChipIsaParser.create(Wf);
-            Workspace = Wf.AsmWorkspace();
+            Workspace = Wf.AsmWs();
             SourceParser = XedParser.Service;
             Source = new XedDataSource(Workspace.DataSource("xed.rules"));
         }

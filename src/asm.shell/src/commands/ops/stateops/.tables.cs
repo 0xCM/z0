@@ -10,10 +10,12 @@ namespace Z0.Asm
         Outcome ListTables(CmdArgs args)
         {
             var outcome = Outcome.Success;
-            if(args.Count !=0)
-                State.Tables(FS.dir(arg(args,0)));
-            Write(State.Tables().Root);
-            return true;
+            var dir = State.WsRoot() + FS.folder("tables");
+            if(args.Count == 0)
+                Files(dir.Files(FS.Csv, true));
+            else
+                Files(dir.Files(arg(args,0).Value, FS.Csv, true));
+            return outcome;
         }
     }
 }

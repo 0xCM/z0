@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            Workspace = Wf.AsmWorkspace();
+            Workspace = Wf.AsmWs();
         }
 
         public Outcome Split(FS.FilePath specpath)

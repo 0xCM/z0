@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static EnvFolders;
 
-    public readonly struct AsmWorkspace : IFileArchive
+    public struct AsmWorkspace : IWorkspace<AsmWorkspace>
     {
         const string instructions = nameof(instructions);
 
@@ -38,12 +38,27 @@ namespace Z0.Asm
         public static AsmWorkspace create(FS.FolderPath root)
             => new AsmWorkspace(root);
 
-        public FS.FolderPath Root {get;}
+        FS.FolderPath _WsRoot;
+
+        public FS.FolderPath Root
+        {
+            [MethodImpl(Inline)]
+            get => _WsRoot;
+        }
 
         [MethodImpl(Inline)]
         AsmWorkspace(FS.FolderPath root)
         {
-            Root = root;
+            _WsRoot = root;
+        }
+
+        public FS.FolderPath WsRoot()
+            => _WsRoot;
+
+        public FS.FolderPath WsRoot(FS.FolderPath src)
+        {
+            _WsRoot = src;
+            return WsRoot();
         }
 
         public FS.FolderPath Control()

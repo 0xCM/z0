@@ -10,10 +10,12 @@ namespace Z0
     /// Characterizes a file system repository
     /// </summary>
     [Free]
-    public interface IFileArchive
+    public interface IFileArchive : ITextual
     {
         FS.FolderPath Root {get;}
 
+        string ITextual.Format()
+            => Root.Format();
         Deferred<FS.FilePath> Files()
             => Root.EnumerateFiles(true);
 
