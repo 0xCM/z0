@@ -4,18 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static core;
+
     partial class AsmCmdService
     {
-        [CmdOp(".emit-rex-bits")]
-        Outcome EmitRexFields(CmdArgs args)
+        [CmdOp(".gen-modrm-bits")]
+        Outcome GenModRmBits(CmdArgs args)
         {
-            var path = Workspace.Bitfield("rex");
+            var path = GenWs().Path("bitfields", "modrm", FS.ext("bits"));
             var flow = Wf.EmittingFile(path);
-            var bits = RexPrefix.Range();
             using var writer = path.AsciWriter();
-            var buffer = text.buffer();
-            var count = AsmRender.RexTable(buffer);
-            writer.Write(buffer.Emit());
+            var dst = span<char>(256*128);
+            var count = AsmRender.modRmBits(dst);
+            var rendered = slice(dst,0,count);
+            writer.Write(rendered);
             Wf.EmittedFile(flow,count);
             return true;
         }

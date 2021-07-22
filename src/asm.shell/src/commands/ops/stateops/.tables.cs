@@ -10,7 +10,7 @@ namespace Z0.Asm
         Outcome ListTables(CmdArgs args)
         {
             var outcome = Outcome.Success;
-            var dir = State.WsRoot() + FS.folder("tables");
+            var dir = TableWs().Root;
             if(args.Count == 0)
                 Files(dir.Files(FS.Csv, true));
             else

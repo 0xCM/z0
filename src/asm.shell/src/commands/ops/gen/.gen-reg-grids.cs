@@ -9,10 +9,10 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".emit-reg-grids")]
+        [CmdOp(".gen-reg-grids")]
         Outcome EmitRegGrids(CmdArgs args)
         {
-            var dst = Workspace.Table("regs",FS.Csv);
+            var dst = GenWs().Path("regs",FS.Csv);
             var counter = 0u;
             var flow = Wf.EmittingFile(dst);
             var grids = Wf.AsmRegGrids();

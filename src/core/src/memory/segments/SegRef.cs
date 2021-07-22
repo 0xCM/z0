@@ -24,7 +24,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Span<T> As<T>()
+        ref byte self()
+            => ref first(bytes(this));
+
+        [MethodImpl(Inline)]
+        public ref SegRef<T> As<T>()
+            where T : unmanaged
+                => ref @as<byte,SegRef<T>>(self());
+
+        [MethodImpl(Inline)]
+        public Span<T> Data<T>()
             => cover<T>(BaseAddress, Length/size<T>());
 
         public Span<byte> Edit
@@ -38,7 +47,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => cover<byte>(BaseAddress, Length);
         }
-
 
         public uint Length
         {
@@ -121,6 +129,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator SegRef((MemoryAddress src, ByteSize size) src)
             => new SegRef(src.src, src.size);
-
     }
 }

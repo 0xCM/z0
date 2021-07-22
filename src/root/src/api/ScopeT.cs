@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct Scope<T>
     {
-        public Name<T> Name {get;}
+        public T Name {get;}
 
         [MethodImpl(Inline)]
         public Scope(T name)

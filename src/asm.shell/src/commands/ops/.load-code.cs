@@ -16,7 +16,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var id = arg(args,0).Value;
-            var path = Workspace.BinPath(id);
+            var path = AsmWs.BinPath(id);
             var data = path.ReadBytes().ToReadOnlySpan();
             var size = data.Length;
             var msg = string.Format("Read {0} bytes from {1}", size, path.ToUri());

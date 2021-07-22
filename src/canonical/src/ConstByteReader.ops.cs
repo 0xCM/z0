@@ -17,32 +17,6 @@ namespace Z0
         public static MemorySeg[] refs(ConstBytes256 src)
              => src.SegRefs();
 
-        [Op]
-        public static void addresses(Index<MemorySeg> src, Span<MemoryAddress> dst)
-        {
-            var view = src.View;
-            var kSegs = view.Length;
-            for(var i=0u; i<kSegs; i++)
-            {
-                ref readonly var segment = ref skip(view,i);
-                var length = segment.Length;
-                var data = segment.Load();
-                if(data.Length == length)
-                {
-                    for(var j = 0u; j<length; j++)
-                    {
-                        ref readonly var cell = ref skip(data,j);
-                        if(j == 0)
-                        {
-                            var a = memory.address(cell);
-                            if(segment.BaseAddress == a)
-                                seek(dst,i) = a;
-                        }
-                    }
-                }
-            }
-        }
-
         [MethodImpl(Inline), Op]
         public static ref readonly byte cell(ConstBytes256 src, byte n, int i)
         {
@@ -63,7 +37,7 @@ namespace Z0
             else if(n == 7)
                 return ref cell(src, n7, i);
             else
-                return ref memory.first(src.SegZ);
+                return ref core.first(src.SegZ);
         }
 
         [MethodImpl(Inline)]
@@ -74,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly byte first<N>(ConstBytes256 src, N n)
             where N : unmanaged, ITypeNat
-                => ref memory.first(span(src, n));
+                => ref core.first(span(src, n));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> leads(ConstBytes256 src)
@@ -85,7 +59,7 @@ namespace Z0
         {
             var sources = store.View;
             var results = sys.alloc<MemoryAddress>(sources.Length);
-            addresses(store,results);
+            core.addresses(store,results);
             return results;
         }
 

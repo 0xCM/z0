@@ -33,6 +33,18 @@ namespace Z0
         public FS.FolderPath PartDir(PartId part)
             => Root + FS.folder(part);
 
+        public FS.FolderPath StatementRoot()
+            => AsmTableRoot() + FS.folder("asm.statements");
+
+        public FS.FilePath StatementIndexPath()
+            => RootDir() + FS.file("asm.statements", FS.Csv);
+
+        public FS.FolderPath Statements(PartId part)
+            => StatementRoot() + FS.folder(part.Format());
+
+        public FS.FilePath Statements(ApiHostUri host)
+            => Statements(host.Part) + FS.file(host.HostName, FS.Csv);
+
         public FS.FolderPath Dumps()
             => RootDir() + FS.folder("dumps");
 
@@ -75,9 +87,6 @@ namespace Z0
         public FS.FolderPath ContextRoot()
             => CaptureRoot() + FS.folder(context);
 
-        public FS.FilePath StatementIndexPath()
-            => RootDir() + FS.file("asm.statements", FS.Csv);
-
         public FS.FilePath ThumbprintPath(FS.FolderPath dst)
             => dst + FS.file("asm.thumbprints", FS.Asm);
 
@@ -101,9 +110,6 @@ namespace Z0
 
         public FS.FilePath ThumbprintPath()
             => IndexRoot() + FS.file("thumbprints", FS.Asm);
-
-        // public FS.FilePath ApiCatalogPath()
-        //     => ContextRoot().Files(FS.Csv).Where(x => x.FileName.StartsWith("api.catalog")).Single();
 
         public FS.FilePath ApiCatalogPath()
             => TableDir() + FS.file(TableId.identify<ApiCatalogEntry>().Format(), FS.Csv);

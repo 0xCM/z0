@@ -24,6 +24,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public ref SegRef Slot(uint index)
+            => ref Segments[index];
+
+
+        [MethodImpl(Inline), Closures(UnsignedInts)]
+        public ref SegRef<T> Slot<T>(uint index)
+            where T : unmanaged
+                => ref Segments[index].As<T>();
+
+        [MethodImpl(Inline)]
         public ByteSize Size(uint index)
             => Segments[index].Size;
 

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System.Runtime.CompilerServices;
 
@@ -70,6 +70,17 @@ namespace Z0.Asm
                 return string.Format(Pattern1,Host);
             else
                 return string.Format(Pattern2, Host, Operation);
+        }
+
+        public string MatchPattern()
+        {
+            if(Host.IsEmpty && string.IsNullOrEmpty(Operation))
+                return EmptyString;
+
+            if(Host.IsEmpty)
+                return Operation;
+
+            return string.Format("{0}.{1}", Host.Part.Format(), Host.HostName);
         }
 
         public override string ToString()

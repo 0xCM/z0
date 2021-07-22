@@ -12,7 +12,7 @@ namespace Z0.Asm
         Outcome Stringtable(CmdArgs args)
         {
             var result = Outcome.Success;
-            var path = args.Length == 0 ? State.DataSource() : Workspace.DataSources() + FS.file(arg(args,0).Value);
+            var path = args.Length == 0 ? State.DataSource() : AsmWs.DataSources() + FS.file(arg(args,0).Value);
             var input = path.ReadLines().View;
             var name = path.FileName.WithoutExtension.Format();
             var table = StringTables.create<byte>(name, input);

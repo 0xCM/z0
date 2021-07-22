@@ -13,7 +13,7 @@ namespace Z0
     /// <typeparam name="T">The content type</typeparam>
     public interface ISegRef<T> : IMemorySegment
     {
-        Span<S> As<S>();
+        Span<S> Data<S>();
 
         new ref T Cell(int index);
 

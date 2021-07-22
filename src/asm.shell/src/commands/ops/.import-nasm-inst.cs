@@ -12,7 +12,7 @@ namespace Z0.Asm
         [CmdOp(".import-nasm-inst")]
         Outcome EmitNasmInstructions(CmdArgs args)
         {
-            var src = Workspace.DataSource("nasm-instructions", FS.Txt);
+            var src = AsmWs.DataSource("nasm-instructions", FS.Txt);
             var dst = State.Tables().Path<NasmInstruction>(AsmTableScopes.Nasm);
             Wf.NasmCatalog().ImportInstructions(src, dst);
             return true;
@@ -27,6 +27,5 @@ namespace Z0.Asm
             iter(records, r => Write(formatter.Format(r)));
             return true;
         }
-
     }
 }

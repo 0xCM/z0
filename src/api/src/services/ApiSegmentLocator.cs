@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     public class ApiSegmentLocator : AppService<ApiSegmentLocator>
     {
@@ -70,5 +69,4 @@ namespace Z0
             return locations.Array().Sort();
         }
     }
-
 }

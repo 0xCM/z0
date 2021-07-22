@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         Identifier RoutineName;
 
-        AsmWorkspace Workspace;
+        AsmWorkspace AsmWs;
 
         ScriptRunner ScriptRunner;
 
@@ -38,7 +38,7 @@ namespace Z0.Asm
 
         protected override void Initialized()
         {
-            Workspace = Wf.AsmWs();
+            AsmWs = Wf.AsmWs();
             ScriptRunner = Wf.ScriptRunner();
             ApiPack = Wf.ApiPacks().Current();
             State.WsRoot(Wf.Env.DevWs);
@@ -54,6 +54,24 @@ namespace Z0.Asm
         {
             CodeBuffer.Dispose();
         }
+
+        Workspace WsDefine(Scope scope)
+            => new Workspace(Wf.Env.DevWs + FS.folder(scope.Name));
+
+        Workspace ImportWs()
+            => WsDefine(WsScopes.imports);
+
+        Workspace GenWs()
+            => WsDefine(WsScopes.gen);
+
+        Workspace LogWs()
+            => WsDefine(WsScopes.logs);
+
+        Workspace TableWs()
+            => WsDefine(WsScopes.tables);
+
+        Workspace SourcesWs()
+            => WsDefine(WsScopes.sources);
 
         FS.Files Files(FS.FileExt ext)
             => State.Files().Where(f => f.Is(ext));

@@ -38,7 +38,7 @@ namespace Z0
         [Op]
         public static string list(ApiKey src)
         {
-            var dst = TextTools.buffer();
+            var dst = text.buffer();
             var data = span16u(src.Data);
             var j = 0;
             var k = 0;

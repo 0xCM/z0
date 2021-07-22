@@ -35,5 +35,4 @@ namespace Z0
         public bool Equals(ResourceAddress src)
             => Location.Equals(src.Location);
     }
-
 }

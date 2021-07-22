@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".sources")]
         Outcome Sources(CmdArgs args)
         {
-            Write(Workspace.DataSources());
+            Write(SourcesWs().Root);
             return true;
         }
     }

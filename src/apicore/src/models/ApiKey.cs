@@ -5,13 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static Root;
     using static core;
-    using static Typed;
 
     /// <summary>
     /// Defines a 128-bit bitfield that identifies an api operation along with its operands

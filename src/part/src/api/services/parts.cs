@@ -32,7 +32,7 @@ namespace Z0
         {
             if(args.Length != 0)
             {
-                var identifiers = ApiPartIdParser.parse(args);
+                var identifiers = ApiParsers.parts(args);
                 if(identifiers.Length != 0)
                     return new ApiParts(control, identifiers.ToArray());
                 else

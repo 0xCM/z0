@@ -148,15 +148,6 @@ namespace Z0
             => CodeGenRoot() + FS.folder(id);
 
         /// <summary>
-        /// Defines a path of the form {CodeGenRoot}/{dir}/{id}.{ext}
-        /// </summary>
-        /// <param name="dir">A generation set identifier</param>
-        /// <param name="id">A file identifiere</param>
-        /// <param name="ext">The target language extension</param>
-        public FS.FilePath Generated(string dir, string id, FS.FileExt ext)
-            => CodeGenDir(dir) + FS.file(id,ext);
-
-        /// <summary>
         /// Defines a path of the form {ImportRoot} := {DataRoot}/imported
         /// </summary>
         public FS.FolderPath ImportRoot()

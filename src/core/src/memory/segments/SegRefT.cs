@@ -31,7 +31,7 @@ namespace Z0
         public Span<T> Data
         {
             [MethodImpl(Inline)]
-            get => Segment.As<T>();
+            get => Segment.Data<T>();
         }
 
         public Span<byte> Buffer
@@ -92,10 +92,6 @@ namespace Z0
             get => ref Cell(index);
         }
 
-        [MethodImpl(Inline)]
-        public Span<S> As<S>()
-            => Segment.As<S>();
-
         public uint Hash
         {
             [MethodImpl(Inline)]
@@ -114,6 +110,9 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
+
+        Span<S> ISegRef<T>.Data<S>()
+            => Segment.Data<S>();
 
         /// <summary>
         /// Dereferences the reference

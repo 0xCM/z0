@@ -8,12 +8,12 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".emit-modrm-tables")]
-        Outcome EmitModRmTables(CmdArgs args)
+        [CmdOp(".gen-modrm-table")]
+        Outcome GenModRmTable(CmdArgs args)
         {
             const string Pattern = "{0,-3} | {1,-3} | {2,-3} | {3,-3} | {4}";
             var header = string.Format(Pattern, "mod", "reg", "r/m", "hex", "bitstring");
-            var dst = Workspace.Table("modrm", FS.Csv);
+            var dst = GenWs().Path("modrm", FS.Csv);
             var flow = Wf.EmittingFile(dst);
             var counter = 0u;
             using var writer = dst.AsciWriter();

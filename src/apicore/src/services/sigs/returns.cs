@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Root;
     using static core;
@@ -16,7 +15,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool returns(ApiOperandSig src)
             => src.Name == ReturnIndicator;
-
 
         [MethodImpl(Inline), Op]
         public static ApiOperandSig @return(ApiTypeSig type, params ApiSigModKind[] modifiers)

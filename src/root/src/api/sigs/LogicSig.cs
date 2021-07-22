@@ -12,13 +12,13 @@ namespace Z0
     public readonly struct LogicSig
     {
         public static string sig(ULK kind)
-            => string.Concat(format(kind), Chars.Colon, nameof(bit));
+            => string.Concat(format(kind), Chars.Colon, "bit");
 
         public static string sig(BLK kind)
-            => string.Concat(format(kind), Chars.Colon, nameof(bit));
+            => string.Concat(format(kind), Chars.Colon, "bit");
 
         public static string sig(TLK kind)
-            => string.Concat(format(kind), Chars.Colon, nameof(bit));
+            => string.Concat(format(kind), Chars.Colon, "bit");
 
         public static string sig<T>(ULK kind)
              where T : unmanaged

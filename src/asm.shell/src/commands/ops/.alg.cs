@@ -14,7 +14,8 @@ namespace Z0.Asm
         Outcome Algs(CmdArgs args)
         {
             var match = arg(args,0).Value;
-            var paths = Workspace.AlgImportPaths(match);
+            var imports = WsDefine(WsScopes.imports).Subdir("intrinsics.alg");
+            var paths = imports.Files(match,FS.Alg, false).View;
             var count = paths.Length;
             for(var i=0; i<count; i++)
             {
@@ -29,5 +30,6 @@ namespace Z0.Asm
             }
             return true;
         }
+
     }
 }

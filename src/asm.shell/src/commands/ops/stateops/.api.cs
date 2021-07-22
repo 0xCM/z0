@@ -20,13 +20,13 @@ namespace Z0.Asm
                 if(i > 0)
                 {
                     var components = input.Split(Chars.FSlash);
-                    result = ApiPartIdParser.parse(text.left(input,i), out part);
+                    result = ApiParsers.part(text.left(input,i), out part);
                     if(result)
                         path = ApiPath.define(part, text.right(input,i));
                 }
                 else
                 {
-                    result = ApiPartIdParser.parse(input, out part);
+                    result = ApiParsers.part(input, out part);
                     if(result)
                         path = ApiPath.define(part);
                 }
@@ -45,5 +45,6 @@ namespace Z0.Asm
 
             return result;
         }
+
     }
 }

@@ -10,7 +10,7 @@ namespace Z0.Asm
         Outcome ObjInfo(CmdArgs args)
         {
             var id = arg(args,0).Value;
-            var src = Workspace.ObjPath(id);
+            var src = AsmWs.ObjPath(id);
             if(!src.Exists)
                 return (false,FS.missing(src));
             using var reader = PeReader.create(src);

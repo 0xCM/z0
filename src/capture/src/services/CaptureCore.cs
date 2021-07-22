@@ -56,19 +56,40 @@ namespace Z0.Asm
         //     }
         // }
 
+        const string CaptureAddressMismatch = "The parsed address does not match the extration address";
+
+        [MethodImpl(Inline)]
+        static ApiCaptureResult capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
+            => ApiExtracts.divine(exchange.Buffer, id, src.ToPointer<byte>());
+
+        [Op]
+        static ApiCaptureBlock capture(OpIdentity id, MethodInfo method, CodeBlock raw, CodeBlock parsed, ExtractTermCode term)
+        {
+            var dst = new ApiCaptureBlock();
+            dst.Raw = raw;
+            dst.Parsed = parsed;
+            dst.Method = method;
+            Require.invariant(raw.BaseAddress == parsed.BaseAddress, () => CaptureAddressMismatch);
+            dst.OpUri = ApiUri.hex(method.DeclaringType.ApiHostUri(), method.Name, id);
+            dst.TermCode = term;
+            dst.Msil = ClrDynamic.msil(parsed.BaseAddress, dst.OpUri, method);
+            dst.CliSig = Clr.sig(method);
+            return dst;
+        }
+
         public Option<ApiCaptureBlock> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
         {
             try
             {
                 var pSrc = ClrJit.jit(src).Address;
                 var summary = capture(exchange, id, pSrc);
-                return CodeBlocks.capture(id, src.Source, summary.Pair.Raw, summary.Pair.Parsed, summary.TermCode);
+                return capture(id, src.Source, summary.Pair.Raw, summary.Pair.Parsed, summary.TermCode);
             }
             catch(Exception e)
             {
-                term.error($"Capture service failure");
-                term.error(e);
-                return root.none<ApiCaptureBlock>();
+                Error("Capture service failure");
+                Error(e);
+                return Option.none<ApiCaptureBlock>();
             }
         }
 
@@ -111,8 +132,6 @@ namespace Z0.Asm
         // static ApiCaptureResult capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
         //     => ApiExtracts.divine(exchange.Buffer, id, (byte*)Unsafe.AsPointer(ref src));
 
-        [MethodImpl(Inline)]
-        static ApiCaptureResult capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
-            => ApiExtracts.divine(exchange.Buffer, id, src.ToPointer<byte>());
+
     }
 }

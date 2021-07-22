@@ -362,7 +362,7 @@ namespace Z0
             var count = components.Length;
             if(count >= 2)
             {
-                if(ApiPartIdParser.parse(first(components), out var part))
+                if(ApiParsers.part(first(components), out var part))
                 {
                     host =  new ApiHostUri(part, slice(components,1).Join(Chars.Dot));
                     return true;

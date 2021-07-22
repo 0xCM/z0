@@ -198,7 +198,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> edit<T>(SegRef src)
-            => src.As<T>();
+            => src.Data<T>();
 
         /// <summary>
         /// Covers a memory segment with a span
