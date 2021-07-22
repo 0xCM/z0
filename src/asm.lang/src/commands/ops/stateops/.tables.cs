@@ -7,14 +7,13 @@ namespace Z0.Asm
     partial class AsmCmdService
     {
         [CmdOp(".tables")]
-        Outcome Tables(CmdArgs args)
+        Outcome ListTables(CmdArgs args)
         {
             var outcome = Outcome.Success;
             if(args.Count !=0)
-                Tables(FS.dir(arg(args,0)));
-            Write(Tables().Root);
+                TA(FS.dir(arg(args,0)));
+            Write(TA().Root);
             return true;
         }
-
     }
 }

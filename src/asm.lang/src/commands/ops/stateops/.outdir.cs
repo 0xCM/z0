@@ -6,12 +6,13 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".import-nasm-data")]
-        Outcome EmitNasmInstructions(CmdArgs args)
+        [CmdOp(".outdir")]
+        Outcome DstDir(CmdArgs args)
         {
-            var src = Workspace.DataSource("nasm-instructions", FS.Txt);
-            var dst = TablePath<NasmInstruction>();
-            Wf.NasmCatalog().EmitInstructions(src, dst);
+            if(args.Length == 0)
+                Write(OutDir());
+            else
+                Write(OutDir(FS.dir(arg(args,0).Value)));
             return true;
         }
     }

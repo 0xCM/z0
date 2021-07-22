@@ -24,19 +24,6 @@ namespace Z0
             Dispatcher = Cmd.dispatcher(this);
         }
 
-        [CmdOp("show-commands")]
-        public Outcome ShowCommands(CmdArgs args)
-        {
-            var ops = Cmd.cmdops(Wf.Components).View;
-            var count = ops.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var op = ref skip(ops,i);
-                Wf.Row(op);
-            }
-            return true;
-        }
-
         [CmdOp("emit-metadata-sets")]
         public Outcome EmitMetadataSets(CmdArgs args)
         {

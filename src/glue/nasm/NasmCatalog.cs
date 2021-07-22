@@ -71,14 +71,14 @@ namespace Z0.Asm
 
         }
 
-        public ReadOnlySpan<NasmInstruction> EmitInstructions(FS.FilePath src, FS.FilePath dst)
+        public ReadOnlySpan<NasmInstruction> ImportInstructions(FS.FilePath src, FS.FilePath dst)
         {
             var instructions = ParseInstructions(src);
             var count = instructions.Length;
             if(count != 0)
             {
                 var flow = Wf.EmittingTable<NasmInstruction>(dst);
-                var emitted = Tables.emit(instructions, dst, NasmInstruction.RenderWidths);
+                var emitted = Tables.emit(instructions, NasmInstruction.RenderWidths, TextEncodingKind.Unicode, dst);
                 Wf.EmittedTable(flow, emitted);
                 return instructions;
             }
@@ -86,5 +86,34 @@ namespace Z0.Asm
                 return default;
         }
 
+        public ReadOnlySpan<NasmInstruction> LoadInstructionImports(FS.FilePath src)
+        {
+            using var reader = src.UnicodeLineReader();
+            var counter = 0u;
+            var dst = list<NasmInstruction>();
+            while(reader.Next(out var line))
+            {
+                var splits = line.Content.Split(Chars.Pipe);
+                var count = splits.Length;
+                if(count != NasmInstruction.FieldCount)
+                    Error(Tables.FieldCountMismatch.Format(NasmInstruction.FieldCount, count));
+
+                if(counter != 0)
+                {
+                    var j=0u;
+                    var record = new NasmInstruction();
+                    DataParser.parse(skip(splits,j++), out record.Sequence);
+                    record.Mnemonic = skip(splits,j++);
+                    record.Operands = skip(splits,j++);
+                    record.Encoding = skip(splits,j++);
+                    record.Flags = skip(splits,j++);
+                    dst.Add(record);
+                }
+
+                counter++;
+
+            }
+            return dst.ViewDeposited();
+        }
     }
 }

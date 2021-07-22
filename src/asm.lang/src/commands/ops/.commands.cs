@@ -4,12 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static core;
+
     partial class AsmCmdService
     {
-        [CmdOp(".dump-exe")]
-        Outcome DumpExe(CmdArgs args)
+        [CmdOp(".commands")]
+        Outcome Commands(CmdArgs args)
         {
-            return DumpModules(args, FileModuleKind.Exe);
+            var commands = Cmd.cmdops(GetType());
+            iter(commands, cmd => Write(cmd.Format()));
+            return true;
         }
     }
 }

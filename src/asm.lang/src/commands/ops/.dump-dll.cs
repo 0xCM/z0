@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".dump-dll")]
         Outcome DumpDll(CmdArgs args)
         {
-            return DumpModules(FileModuleKind.Dll);
+            return DumpModules(args, FileModuleKind.Dll);
         }
     }
 }

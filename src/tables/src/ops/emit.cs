@@ -48,15 +48,26 @@ namespace Z0
                 dst(f.Format(skip(src,i)));
         }
 
+
+        [Op, Closures(Closure)]
+        public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, TextEncodingKind encoding, FS.FilePath dst)
+            where T : struct
+                => emit(src, spec, encoding.ToSystemEncoding(), dst);
+
         [Op, Closures(Closure)]
         public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, FS.FilePath dst)
             where T : struct
-                => emit(src, spec, Encoding.UTF8, dst);
+                => emit(src, spec, TextEncodingKind.Utf8, dst);
 
         [Op, Closures(Closure)]
         public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
             where T : struct
                 => emit(src, rowspec<T>(widths, z16), Encoding.UTF8, dst);
+
+        [Op, Closures(Closure)]
+        public static Count emit<T>(ReadOnlySpan<T> src,  ReadOnlySpan<byte> widths, TextEncodingKind encoding, FS.FilePath dst)
+            where T : struct
+                => emit(src, rowspec<T>(widths, z16), encoding.ToSystemEncoding(), dst);
 
         [Op, Closures(Closure)]
         public static Count emit<T>(ReadOnlySpan<T> src, Encoding encoding, FS.FilePath dst)

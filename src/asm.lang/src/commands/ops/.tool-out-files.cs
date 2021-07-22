@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".tool-out-files", "Reads and broadcasts the file paths within a tool output directory")]
+        [CmdOp(".tool-out-files", "Tool-specific Output Files -> State")]
         public Outcome ToolOutFiles(CmdArgs args)
         {
             var result = ToolOutDir(args, out var dir);

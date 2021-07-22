@@ -26,14 +26,28 @@ namespace Z0
             => Root + FS.folder(scope.Format());
 
         public FS.FilePath Path(Scope scope, TableId id)
-            => Dir(scope) + FS.file(id.Format(), FS.Csv);
+            => Dir(scope) + Name(id);
 
         public FS.FilePath Path(TableId id)
-            => Root + FS.file(id.Format(), FS.Csv);
+            => Root + Name(id);
 
         public FS.FilePath Path<T>()
             where T : struct
-                => Root + FS.file(Tables.identify<T>().Format(), FS.Csv);
+                => Root + Name<T>();
 
+        public FS.FilePath Path<T>(Scope scope)
+            where T : struct
+                => Dir(scope) + Name<T>();
+
+        public FS.FileName Name<T>()
+            where T : struct
+                => FS.file(Tables.identify<T>().Format(), FS.Csv);
+
+        public FS.FileName Name(TableId id)
+            => FS.file(id.Format(), FS.Csv);
+
+
+        public FS.FileName Name(TableId id, string suffix)
+            => FS.file(string.Format("{0}.{1}", id, suffix), FS.Csv);
     }
 }

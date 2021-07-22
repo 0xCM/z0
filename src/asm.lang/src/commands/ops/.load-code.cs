@@ -16,7 +16,7 @@ namespace Z0.Asm
             var size = data.Length;
             var msg = string.Format("Read {0} bytes from {1}", size, path.ToUri());
             Status(msg);
-            result = LoadRoutine(id, data);
+            result = LoadCodeBuffer(id, data);
             if(result)
                 Write(string.Format("Injected data into execution buffer: {0}", data.FormatHex()));
             return result;

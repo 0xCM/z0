@@ -115,13 +115,6 @@ namespace Z0.Asm
             return new RegName(data);
         }
 
-        // [MethodImpl(Inline), Op]
-        // public static RegName name(XmmClass k, RegIndexCode index)
-        // {
-        //     var storage = 0ul;
-        //     var src = chars(k,index);
-        // }
-
         [MethodImpl(Inline), Op]
         static byte length(ReadOnlySpan<char> src)
         {

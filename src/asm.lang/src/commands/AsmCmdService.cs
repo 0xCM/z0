@@ -94,15 +94,15 @@ namespace Z0.Asm
         FS.FolderPath OutDir(FS.FolderPath value)
             => State.OutDir(value);
 
-        TableArchive Tables()
+        TableArchive TA()
             => State.Tables();
 
-        TableArchive Tables(FS.FolderPath root)
+        TableArchive TA(FS.FolderPath root)
             => State.Tables(root);
 
-        FS.FilePath TablePath<T>()
+        FS.FilePath TAPath<T>()
             where T : struct
-                => Tables().Path<T>();
+                => TA().Path<T>();
 
         Outcome ToolOutDir(CmdArgs args, out FS.FolderPath dir)
         {
@@ -118,7 +118,7 @@ namespace Z0.Asm
         FS.FolderPath ToolOutDir(ToolId tool)
             => OutDir() + FS.folder(tool.Format());
 
-        Outcome LoadRoutine(string name, ReadOnlySpan<byte> src)
+        Outcome LoadCodeBuffer(string name, ReadOnlySpan<byte> src)
         {
             RoutineName = name;
             CodeBuffer.Clear();
@@ -188,7 +188,10 @@ namespace Z0.Asm
             Z0.Tables.emit(files.View, dst);
         }
 
-        Outcome DumpModules(FileModuleKind kind)
+        FS.FolderPath ToolOutDir(CmdArgs args, ToolId tool)
+            => args.Length > 0 ? OutDir() + FS.folder(arg(args,0).Value) : ToolOutDir(tool);
+
+        Outcome DumpModules(CmdArgs args, FileModuleKind kind)
         {
             var script = kind switch{
                 FileModuleKind.Obj => "dump-obj",
@@ -198,29 +201,21 @@ namespace Z0.Asm
                 _ => EmptyString
             };
 
-
-            var ext = kind switch{
-                FileModuleKind.Dll => FS.Dll,
-                FileModuleKind.Obj => FS.Obj,
-                FileModuleKind.Exe => FS.Exe,
-                FileModuleKind.Lib => FS.Lib,
-                _ => FS.FileExt.Empty
-            };
-
             if(empty(script))
                 return (false, string.Format("{0} not supported", kind));
 
-            var cmd = Cmd.cmdline(ToolBase().Script(Toolspace.dumpbin, script).Format(PathSeparator.BS));
-            var input = Files(ext).View;
+            var tool = Toolspace.dumpbin;
+            var outdir = ToolOutDir(args, tool);
+            var cmd = Cmd.cmdline(ToolBase().Script(tool, script).Format(PathSeparator.BS));
+            var input = Files().View;
             var count = input.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(input,i);
-                var outdir = ToolOutDir(Toolspace.dumpbin);
                 var vars = Cmd.vars(
                     ("SrcDir", path.FolderPath.Format(PathSeparator.BS)),
                     ("SrcFile", path.FileName.Format()),
-                    ("DstDir", ToolOutDir(Toolspace.dumpbin).Format(PathSeparator.BS))
+                    ("DstDir", outdir.Format(PathSeparator.BS))
                     );
 
                 var response = ScriptRunner.RunCmd(cmd, vars);

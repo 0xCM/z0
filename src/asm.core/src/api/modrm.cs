@@ -12,11 +12,17 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmMnemonic mnemonic(string src)
-            => new AsmMnemonic(src);
+        public static ModRmByte modrm(byte mod, byte reg, byte rm)
+        {
+            var dst = ModRmByte.Empty;
+            dst.Rm(rm);
+            dst.Reg(reg);
+            dst.Mod(mod);
+            return dst;
+        }
 
-        [Op]
-        public static AsmMnemonic mnemonic(ReadOnlySpan<char> src)
-            => new AsmMnemonic(text.format(src));
+        [MethodImpl(Inline), Op]
+        public static ModRmByte modrm(byte mod, RegIndex reg, RegIndex rm)
+            => modrm(mod, (byte)reg,(byte)rm);
     }
 }

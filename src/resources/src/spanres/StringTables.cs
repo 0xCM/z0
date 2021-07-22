@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<char> entry<T>(StringTable<T> src, T index)
             where T : unmanaged
-                => entry(src,bw64(index));
+                => entry(src, bw64(index));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<char> entry<T>(StringTable<T> src, ulong i)

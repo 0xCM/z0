@@ -2,21 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial struct asm
+    public readonly struct CmdFlag
     {
-        [MethodImpl(Inline), Op]
-        public static AsmMnemonic mnemonic(string src)
-            => new AsmMnemonic(src);
+        public ushort Index {get;}
 
-        [Op]
-        public static AsmMnemonic mnemonic(ReadOnlySpan<char> src)
-            => new AsmMnemonic(text.format(src));
+        public bit State {get;}
+
+        [MethodImpl(Inline)]
+        public CmdFlag(ushort index, bit state)
+        {
+            Index = index;
+            State = state;
+        }
     }
 }

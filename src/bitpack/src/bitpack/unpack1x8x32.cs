@@ -10,11 +10,9 @@ namespace Z0
     using static Root;
     using static core;
     using static cpu;
-    using static BitMasks;
 
     partial struct BitPack
     {
-
         [MethodImpl(Inline), Unpack]
         public static ref ulong unpack1x8x32(uint src, ref ulong dst)
         {

@@ -21,16 +21,29 @@ namespace Z0
         public static Index<CmdOp> cmdops(Assembly[] src)
         {
             var methods = src.Methods().Tagged<CmdOpAttribute>();
-            var count = methods.Length;
-            var buffer = alloc<CmdOp>(count);
-            ref var dst = ref first(buffer);
+            var buffer = alloc<CmdOp>(methods.Length);
+            cmdops(methods,buffer);
+            return buffer;
+        }
+
+        [Op]
+        public static Index<CmdOp> cmdops(Type src)
+        {
+            var methods = src.Methods().Tagged<CmdOpAttribute>();
+            var buffer = alloc<CmdOp>(methods.Length);
+            cmdops(methods,buffer);
+            return buffer;
+        }
+
+        static void cmdops(ReadOnlySpan<MethodInfo> src, Span<CmdOp> dst)
+        {
+            var count = src.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var method = ref skip(methods,i);
+                ref readonly var method = ref skip(src,i);
                 var tag = method.Tag<CmdOpAttribute>().Require();
                 seek(dst,i) = cmdop(tag.CommandName, method);
             }
-            return buffer;
         }
     }
 }

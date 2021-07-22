@@ -6,13 +6,15 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".out")]
-        Outcome DstDir(CmdArgs args)
+        [CmdOp(".outfiles", "Output Files -> State")]
+        public Outcome OutFiles(CmdArgs args)
         {
-            if(args.Length == 0)
-                Write(OutDir());
+            var dir = OutDir() + FS.folder(arg(args,0).Value);
+
+            if(args.Length > 1)
+                Files(dir.Files(arg(args,1).Value,true));
             else
-                Write(OutDir(FS.dir(arg(args,0).Value)));
+                Files(dir.Files(true));
             return true;
         }
     }

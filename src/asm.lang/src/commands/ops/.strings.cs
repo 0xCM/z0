@@ -14,7 +14,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var name = "Counts";
             var input = @readonly(new string[]{"one","two","three", "four", "five", "six", "seven", "eight", "nine","ten"});
-            var table = StringTables.create<byte>(name,input);
+            var table = StringTables.create<byte>(name, input);
             var count = Require.equal(input.Length, (int)table.EntryCount);
             for(var i=0; i<count; i++)
             {

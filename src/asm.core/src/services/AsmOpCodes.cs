@@ -60,6 +60,5 @@ namespace Z0.Asm
 
         static ReadOnlySpan<SG> SegOverrideCodes
             => new SG[]{SG.CS, SG.DS, SG.ES, SG.FS, SG.GS, SG.SS};
-
     }
 }

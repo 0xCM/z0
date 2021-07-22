@@ -31,5 +31,18 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Pair<int> indices(string src, string first, string second)
             => pair(src.IndexOf(first), src.IndexOf(second));
+
+        [MethodImpl(Inline), Op]
+        public static uint indices(ReadOnlySpan<char> src, char c, Span<uint> dst)
+        {
+            var max = (uint)dst.Length;
+            var j = 0u;
+            for(var i=0u; i<src.Length && j < max; i++)
+            {
+                if(skip(src,i) == c)
+                    seek(dst, j++) = i;
+            }
+            return j;
+        }
     }
 }

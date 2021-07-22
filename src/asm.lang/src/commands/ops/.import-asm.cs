@@ -6,9 +6,6 @@ namespace Z0.Asm
 {
     using static core;
 
-    using SQ = SymbolicQuery;
-    using SR = SymbolicRender;
-
     partial class AsmCmdService
     {
         [CmdOp(".import-asm")]

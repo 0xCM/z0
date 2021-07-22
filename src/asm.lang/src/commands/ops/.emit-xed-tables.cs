@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".emit-xed-tables")]
         Outcome EmitXedTables(CmdArgs args)
         {
-            var dst = Tables().Dir(AsmTableScopes.IntelXed);
+            var dst = TA().Dir(AsmTableScopes.IntelXed);
             dst.Clear();
             Wf.IntelXed().EmitTables(dst);
             return true;

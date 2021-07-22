@@ -9,5 +9,7 @@ namespace Z0.Asm
         public static Scope IntelSdm => "intel.sdm";
 
         public static Scope IntelXed => "intel.xed";
+
+        public static Scope Nasm => "nasm";
     }
 }

@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".llc-obj")]
+        [CmdOp(".llc-obj", "llc -> obj")]
         public Outcome LlcObj(CmdArgs args)
         {
             var outcome = Outcome.Success;
