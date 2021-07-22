@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     public readonly struct NamedValues
     {
-        public static NamedValues<T> empty<T>()
-            => new NamedValues<T>(NamedValue.empty<T>());
+        [MethodImpl(Inline)]
+        public static NamedValues<V> empty<V>()
+            => new NamedValues<V>();
     }
 
     public readonly struct NamedValues<T>
@@ -41,6 +41,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data;
         }
+
         public ReadOnlySpan<NamedValue<T>> View
         {
             [MethodImpl(Inline)]
@@ -53,18 +54,6 @@ namespace Z0
             get => Data;
         }
 
-        public ref NamedValue<T> this[string name]
-        {
-            [MethodImpl(Inline)]
-            get => ref Data[Index(name)];
-        }
-
-        public ref NamedValue<T> this[uint index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Data[index];
-        }
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -75,19 +64,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Count != 0;
-        }
-
-        [MethodImpl(Inline)]
-        uint Index(string name)
-        {
-            var view = View;
-            for(var i=0u; i<Count; i++)
-            {
-                ref readonly var x = ref skip(view,i);
-                if(x.Name == name)
-                    return i;
-            }
-            return 0;
         }
 
         [MethodImpl(Inline)]

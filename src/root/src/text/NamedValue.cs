@@ -10,10 +10,6 @@ namespace Z0
 
     public readonly struct NamedValue
     {
-        [MethodImpl(Inline)]
-        public static NamedValue<V> empty<V>()
-            => new NamedValue<V>(EmptyString, default(V));
-
         /// <summary>
         /// The name of the value
         /// </summary>
@@ -22,10 +18,10 @@ namespace Z0
         /// <summary>
         /// The named value
         /// </summary>
-        public dynamic Value {get;}
+        public string Value {get;}
 
         [MethodImpl(Inline)]
-        public NamedValue(string name, dynamic value)
+        public NamedValue(string name, string value)
         {
             Name = name;
             Value = value;
@@ -37,10 +33,14 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        [MethodImpl(Inline)]
+        public static implicit operator NamedValue((string name, string value) src)
+            => new NamedValue(src.name, src.value);
+
         public static NamedValue Empty
         {
             [MethodImpl(Inline)]
-            get => new NamedValue(EmptyString, 0u);
+            get => new NamedValue(EmptyString, EmptyString);
         }
     }
 }

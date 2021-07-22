@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static ClrEnumCode ecode<E>(E e = default)
+        public static ClrEnumCode ecode<E>()
             where E : unmanaged, Enum
                 => (ClrEnumCode)default(E).GetTypeCode();
 

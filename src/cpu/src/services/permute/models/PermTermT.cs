@@ -26,14 +26,6 @@ namespace Z0
         public readonly T Target;
 
         [MethodImpl(Inline)]
-        public static implicit operator PermTerm<T>((T src, T dst) x)
-            => new PermTerm<T>(x.src, x.dst);
-
-        [MethodImpl(Inline)]
-        public static implicit operator (T src, T dst)(PermTerm<T> x)
-            => (x.Source, x.Target);
-
-        [MethodImpl(Inline)]
         public PermTerm(T src, T dst)
         {
             this.Source = src;
@@ -56,5 +48,13 @@ namespace Z0
 
         public override string ToString()
             => $"{Source} -> {Target}";
+
+        [MethodImpl(Inline)]
+        public static implicit operator PermTerm<T>((T src, T dst) x)
+            => new PermTerm<T>(x.src, x.dst);
+
+        [MethodImpl(Inline)]
+        public static implicit operator (T src, T dst)(PermTerm<T> x)
+            => (x.Source, x.Target);
     }
 }

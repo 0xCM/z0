@@ -11,7 +11,7 @@ namespace Z0
     using static core;
 
     [ApiHost]
-    public readonly struct NumbericFormat
+    public readonly struct NumericFormats
     {
         [MethodImpl(Inline), Op,Closures(Integers)]
         public static string format<T>(T src, Base2 b, int? digits = null)
@@ -50,11 +50,11 @@ namespace Z0
             => src.FormatHex(false, false);
 
         [MethodImpl(Inline), Op]
-        public static string Format(byte src, Base2 @base, int? digits = null)
+        public static string format(byte src, Base2 @base, int? digits = null)
             => BitRender.gformat(src, digits);
 
         [MethodImpl(Inline), Op]
-        public static string Format(byte src, Base8 @base, int? digits = null)
+        public static string format(byte src, Base8 @base, int? digits = null)
             => Convert.ToString(src, 8);
 
         [MethodImpl(Inline), Op]
@@ -66,7 +66,7 @@ namespace Z0
             => src.FormatHex(false, false);
 
         [MethodImpl(Inline), Op]
-        public static string Format(short src, Base2 @base, int? digits = null)
+        public static string format(short src, Base2 @base, int? digits = null)
             => BitRender.gformat(src, digits);
 
         [MethodImpl(Inline), Op]
@@ -82,7 +82,7 @@ namespace Z0
             => src.FormatHex(false, false);
 
         [MethodImpl(Inline), Op]
-        public static string Format(ushort src, Base2 @base, int? digits = null)
+        public static string format(ushort src, Base2 @base, int? digits = null)
             => BitRender.gformat(src,digits);
 
         [MethodImpl(Inline), Op]
@@ -173,8 +173,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string Format(byte src, NumericBaseKind @base, int? digits = null)
            => @base switch{
-               NumericBaseKind.Base2 => Format(src, base2, digits),
-               NumericBaseKind.Base8 => Format(src, base8, digits),
+               NumericBaseKind.Base2 => format(src, base2, digits),
+               NumericBaseKind.Base8 => format(src, base8, digits),
                NumericBaseKind.Base16 => Format(src, base16, digits),
                 _ => Format(src, base10, digits),
             };
@@ -182,7 +182,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string Format(short src, NumericBaseKind @base, int? digits = null)
            => @base switch{
-               NumericBaseKind.Base2 => Format(src, base2, digits),
+               NumericBaseKind.Base2 => format(src, base2, digits),
                NumericBaseKind.Base8 => Format(src, base8, digits),
                NumericBaseKind.Base16 => Format(src, base16, digits),
                 _ => Format(src, base10, digits),
@@ -191,7 +191,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string Format(ushort src, NumericBaseKind @base, int? digits = null)
            => @base switch{
-               NumericBaseKind.Base2 => Format(src, base2, digits),
+               NumericBaseKind.Base2 => format(src, base2, digits),
                NumericBaseKind.Base8 => Format(src, base8, digits),
                NumericBaseKind.Base16 => Format(src, base16, digits),
                 _ => Format(src, base10, digits),
@@ -302,9 +302,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Format(uint8(src),n, digits);
+                return format(uint8(src),n, digits);
             else if(typeof(T) == typeof(ushort))
-                return Format(uint16(src),n, digits);
+                return format(uint16(src),n, digits);
             else if(typeof(T) == typeof(uint))
                 return Format(uint32(src),n, digits);
             else if(typeof(T) == typeof(ulong))
@@ -320,7 +320,7 @@ namespace Z0
             if(typeof(T) == typeof(sbyte))
                 return format(int8(src),n, digits);
             else if(typeof(T) == typeof(short))
-                return Format(int16(src),n, digits);
+                return format(int16(src),n, digits);
             else if(typeof(T) == typeof(int))
                 return Format(int32(src),n, digits);
             else if(typeof(T) == typeof(long))
@@ -334,7 +334,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Format(uint8(src),n, digits);
+                return format(uint8(src),n, digits);
             else if(typeof(T) == typeof(ushort))
                 return Format(uint16(src),n, digits);
             else if(typeof(T) == typeof(uint))

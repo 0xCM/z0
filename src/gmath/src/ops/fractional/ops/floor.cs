@@ -10,9 +10,9 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Calcs
+    partial struct gfp
     {
-        [MethodImpl(Inline), Floor, Closures(Floats)]
+       [MethodImpl(Inline), Floor, Closures(Floats)]
         public static Span<T> floor<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {

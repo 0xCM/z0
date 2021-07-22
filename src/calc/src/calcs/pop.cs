@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
     using static CalcHosts;
     using static SFx;
     using static ApiClassKind;
@@ -29,6 +28,5 @@ namespace Z0
         public static VPop256<T> vpop<T>(W256 w, T t = default)
             where T : unmanaged
                 => default(VPop256<T>);
-
     }
 }

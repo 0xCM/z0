@@ -28,6 +28,8 @@ namespace Z0.Asm
 
         FS.Files _Files;
 
+        FS.FilePath _DataSource;
+
         [MethodImpl(Inline)]
         public ToolId Tool()
             => _Tool;
@@ -37,6 +39,17 @@ namespace Z0.Asm
         {
             _Tool = id;
             return Tool();
+        }
+
+        [MethodImpl(Inline)]
+        public FS.FilePath DataSource()
+            => _DataSource;
+
+        [MethodImpl(Inline)]
+        public FS.FilePath DataSource(FS.FilePath src)
+        {
+            _DataSource = src;
+            return DataSource();
         }
 
         [MethodImpl(Inline)]
@@ -121,6 +134,7 @@ namespace Z0.Asm
             _SrcDir = FS.FolderPath.Empty;
             _DstDir = FS.FolderPath.Empty;
             _Tool = default;
+            _DataSource = FS.FilePath.Empty;
             _Files = array<FS.FilePath>();
         }
     }

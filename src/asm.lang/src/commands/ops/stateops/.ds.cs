@@ -6,11 +6,12 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".src-subdir")]
-        Outcome SrcSubDir(CmdArgs args)
+        [CmdOp(".ds")]
+        Outcome Ds(CmdArgs args)
         {
-            var folder = FS.folder(arg(args,0).Value);
-            Write(SrcDir(SrcDir() + folder));
+            if(args.Count != 0)
+                DataSource(Workspace.DataSources() + FS.file(arg(args,0).Value));
+            Write(DataSource());
             return true;
         }
     }

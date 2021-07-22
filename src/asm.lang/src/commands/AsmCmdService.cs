@@ -39,7 +39,7 @@ namespace Z0.Asm
             Workspace = Wf.AsmWorkspace();
             ScriptRunner = Wf.ScriptRunner();
             State.ToolBase(Wf.ToolBase(Db.ToolWs()));
-            State.OutDir(FS.dir("j:/ws/.out"));
+            State.OutDir(OutRoot());
             State.ProjectBase(Wf.ProjectBase(FS.dir("j:/projects")));
             State.Project("default");
             State.Tables(Db.DevWs() + FS.folder("tables"));
@@ -82,17 +82,20 @@ namespace Z0.Asm
             return src;
         }
 
+        FS.FolderPath OutRoot()
+            => FS.dir("j:/ws/.out");
+
         FS.FolderPath SrcDir()
             => State.SrcDir();
 
         FS.FolderPath OutDir()
             => State.OutDir();
 
+        FS.FolderPath OutDir(FS.FolderName value)
+            => State.OutDir(OutRoot() + value);
+
         FS.FolderPath SrcDir(FS.FolderPath value)
             => State.SrcDir(value);
-
-        FS.FolderPath OutDir(FS.FolderPath value)
-            => State.OutDir(value);
 
         TableArchive TA()
             => State.Tables();
@@ -103,6 +106,12 @@ namespace Z0.Asm
         FS.FilePath TAPath<T>()
             where T : struct
                 => TA().Path<T>();
+
+        FS.FilePath DataSource()
+            => State.DataSource();
+
+        FS.FilePath DataSource(FS.FilePath src)
+            => State.DataSource(src);
 
         Outcome ToolOutDir(CmdArgs args, out FS.FolderPath dir)
         {

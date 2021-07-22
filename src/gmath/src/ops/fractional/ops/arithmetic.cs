@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial class gfp
+    partial struct gfp
     {
         [MethodImpl(Inline), Add, Closures(Closure)]
         public static T add<T>(T a, T b)

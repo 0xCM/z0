@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial class gfp
+    partial struct gfp
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T pow<T>(T b, uint exp)

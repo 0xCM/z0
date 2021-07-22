@@ -8,12 +8,11 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".ds-lines")]
+        [CmdOp(".lines")]
         Outcome DsLines(CmdArgs args)
         {
-            var dir = Workspace.DataSource(arg(args,0).Value);
-            var path = dir + FS.file(arg(args,1).Value);
-            if(path.Missing)
+            var path = DataSource();
+            if(path.IsEmpty || !path.Exists)
                 return (false, FS.missing(path));
 
             var data = path.ReadText();

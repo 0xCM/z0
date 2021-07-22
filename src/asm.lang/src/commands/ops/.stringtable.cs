@@ -8,12 +8,13 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".strings")]
-        Outcome CheckStringTables(CmdArgs args)
+        [CmdOp(".stringtable")]
+        Outcome Stringtable(CmdArgs args)
         {
             var result = Outcome.Success;
-            var name = "Counts";
-            var input = @readonly(new string[]{"one","two","three", "four", "five", "six", "seven", "eight", "nine","ten"});
+            var path = args.Length == 0 ? DataSource() : Workspace.DataSources() + FS.file(arg(args,0).Value);
+            var input = path.ReadLines().View;
+            var name = path.FileName.WithoutExtension.Format();
             var table = StringTables.create<byte>(name, input);
             var count = Require.equal(input.Length, (int)table.EntryCount);
             for(var i=0; i<count; i++)

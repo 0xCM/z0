@@ -7,7 +7,7 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public static partial class gfp
+    public partial struct gfp
     {
         const NumericKind Closure = Floats;
     }

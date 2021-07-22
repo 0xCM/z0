@@ -12,7 +12,7 @@ namespace Z0.Asm
         public Outcome LlcObj(CmdArgs args)
         {
             var outcome = Outcome.Success;
-            var iset = args.Length != 0 ? arg(args,0).Value : "+avx512f";
+            var iset = args.Length != 0 ? arg(args,0).Value : "avx512f";
             var input = Files().View;
             var output = list<FS.FilePath>();
 

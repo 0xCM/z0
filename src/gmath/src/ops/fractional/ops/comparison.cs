@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial class gfp
+    partial struct gfp
     {
         [MethodImpl(Inline), Nonz, Closures(Floats)]
         public static bit nonz<T>(T a)

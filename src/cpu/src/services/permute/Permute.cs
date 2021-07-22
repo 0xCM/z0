@@ -12,7 +12,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
@@ -21,7 +20,6 @@ namespace Z0
     public readonly partial struct Permute
     {
         const NumericKind Closure = UnsignedInts;
-
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> shuffles(NatPerm<N16> src)

@@ -132,6 +132,5 @@ namespace Z0
         public static ref ulong e64u<E>(in E eVal)
             where E : unmanaged
                 => ref scalar<E,ulong>(eVal);
-
     }
 }

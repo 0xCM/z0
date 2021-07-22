@@ -34,7 +34,7 @@ namespace Z0
             where T : unmanaged
         {
             var data = Enums.scalar<E,T>(src);
-            return string.Concat(name, Chars.Colon, NumbericFormat.format(data, @base));
+            return string.Concat(name, Chars.Colon, NumericFormats.format(data, @base));
         }
 
         [MethodImpl(Inline)]

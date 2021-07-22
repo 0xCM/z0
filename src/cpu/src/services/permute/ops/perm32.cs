@@ -10,7 +10,6 @@ namespace Z0
 
     using static BitMasks.Literals;
     using static Root;
-    using static Typed;
 
     partial struct Permute
     {

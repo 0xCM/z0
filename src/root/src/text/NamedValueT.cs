@@ -47,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator NamedValue(NamedValue<V> src)
-            => new NamedValue(src.Name, src.Value);
+            => new NamedValue(src.Name, src.Value?.ToString() ?? EmptyString);
 
         public string Format()
             => $"{Name}:={Value}";
@@ -66,7 +66,7 @@ namespace Z0
         public static NamedValue<V> Empty
         {
             [MethodImpl(Inline)]
-            get => NamedValue.empty<V>();
+            get => new NamedValue<V>(EmptyString, default);
         }
     }
 }

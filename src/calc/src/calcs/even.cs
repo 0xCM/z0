@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CalcHosts;
-    using static memory;
     using static SFx;
     using static ApiClassKind;
 
@@ -24,6 +23,5 @@ namespace Z0
         public static Span<bit> even<T>(ReadOnlySpan<T> src, Span<bit> dst)
             where T : unmanaged
                 => apply(Calcs.even<T>(), src,dst);
-
     }
 }

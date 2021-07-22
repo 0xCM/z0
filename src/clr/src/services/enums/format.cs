@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using F = NumbericFormat;
+    using F = NumericFormats;
 
     using NK = ClrEnumCode;
 
@@ -18,10 +18,10 @@ namespace Z0
         public static string format<E>(E src, Base2 n, int? digits = null)
             where E : unmanaged, Enum
                 => ecode<E>() switch {
-                    NK.U8 => F.Format(e8u(src), n, digits),
+                    NK.U8 => F.format(e8u(src), n, digits),
                     NK.I8 => F.format(e8i(src), n, digits),
-                    NK.I16 => F.Format(e16i(src), n, digits),
-                    NK.U16 => F.Format(e16u(src), n, digits),
+                    NK.I16 => F.format(e16i(src), n, digits),
+                    NK.U16 => F.format(e16u(src), n, digits),
                     NK.I32 => F.Format(e32i(src), n, digits),
                     NK.U32 => F.Format(e32u(src), n, digits),
                     NK.I64 => F.Format(e64i(src), n, digits),
@@ -32,7 +32,7 @@ namespace Z0
         public static string format<E>(E src, Base8 n)
             where E : unmanaged, Enum
                 => ecode<E>() switch {
-                    NK.U8 => F.Format(e8u(src), n),
+                    NK.U8 => F.format(e8u(src), n),
                     NK.I8 => F.format(e8i(src), n),
                     NK.I16 => F.Format(e16i(src), n),
                     NK.U16 => F.Format(e16u(src), n),

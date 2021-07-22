@@ -6,11 +6,10 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".dst-subdir")]
-        Outcome DstSubDir(CmdArgs args)
+        [CmdOp(".outdir-list")]
+        Outcome DstDirList(CmdArgs args)
         {
-            var folder = FS.folder(arg(args,0).Value);
-            Write(OutDir(OutDir() + folder));
+            List(OutDir());
             return true;
         }
     }

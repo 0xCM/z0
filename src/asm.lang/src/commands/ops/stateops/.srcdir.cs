@@ -10,7 +10,13 @@ namespace Z0.Asm
         Outcome SrcDir(CmdArgs args)
         {
             if(args.Length == 0)
-                Write(SrcDir());
+            {
+                var dir = SrcDir();
+                if(dir.IsNonEmpty)
+                    Write(dir);
+                else
+                    Write("! Source directory unspecified");
+            }
             else
                 Write(SrcDir(FS.dir(arg(args,0).Value)));
             return true;

@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
-    partial struct Calcs
+    partial struct gfp
     {
         [MethodImpl(Inline), Ceil, Closures(Floats)]
         public static Span<T> ceil<T>(ReadOnlySpan<T> src, Span<T> dst)
