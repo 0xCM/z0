@@ -2,14 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    public unsafe abstract class CpuState<T>
-        where T : CpuState<T>, new()
+    public class CpuCore
     {
-        protected CpuState()
-        {
+        public uint Number {get;}
 
+        public CpuCore(uint id)
+        {
+            Number  = id;
         }
     }
 }

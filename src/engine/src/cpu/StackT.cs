@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Emu
+namespace Z0
 {
     using System.Runtime.CompilerServices;
 
@@ -59,6 +59,5 @@ namespace Z0.Emu
             else
                 return true;
         }
-
     }
 }

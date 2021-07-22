@@ -2,22 +2,26 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Emu
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct Inst<T>
+    public class CpuModel<T>
         where T : unmanaged
     {
-        public T Encoded {get;}
+        Index<CpuCore<T>> _Cores;
 
         [MethodImpl(Inline)]
-        public Inst(T src)
+        internal CpuModel(CpuCore<T>[] cores)
         {
-            Encoded = src;
+            _Cores = cores;
         }
+
+        [MethodImpl(Inline)]
+        public ref CpuCore<T> Core(uint id)
+            => ref _Cores[id];
     }
 }

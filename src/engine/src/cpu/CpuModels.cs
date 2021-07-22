@@ -10,31 +10,27 @@ namespace Z0.Emu
     using static Root;
     using static core;
 
-    public readonly struct Controller
+    public readonly struct CpuModels
     {
         public static CpuCore<T> core<T>(uint id)
             where T : unmanaged
                 => new CpuCore<T>(id);
 
-        public static Stack<T> stack<T>(Machine<T> m, uint capacity)
+        public static Stack<T> stack<T>(CpuMachine<T> m, uint capacity)
             where T : unmanaged
         {
             var buffer = allocate<T>(m,capacity);
             return new Stack<T>(buffer);
         }
 
-        public static T[] allocate<T>(Machine<T> m, uint count)
+        public static T[] allocate<T>(CpuMachine<T> m, uint count)
             where T : unmanaged
         {
             return alloc<T>(count);
         }
 
-        public static Cpu<T> cpu<T>(uint cores)
+        public static CpuModel<T> cpu<T>(uint cores)
             where T : unmanaged
-                => new Cpu<T>(alloc<CpuCore<T>>(cores));
-
-        public static Machine<T> machine<T>(Cpu<T> cpu)
-            where T : unmanaged
-                => new Machine<T>(cpu);
+                => new CpuModel<T>(alloc<CpuCore<T>>(cores));
     }
 }
