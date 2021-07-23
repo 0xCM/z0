@@ -15,7 +15,6 @@ namespace Z0.Tools
     using SQ = SymbolicQuery;
     using SP = SymbolicParse;
 
-
     [ApiHost]
     public class XedTableParser : AppService<XedTableParser>
     {

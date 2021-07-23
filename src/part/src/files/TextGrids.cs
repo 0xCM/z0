@@ -194,7 +194,7 @@ namespace Z0
                     }
                 }
 
-                var doc = new TextGrid(fmt, docheader ? docheader.Value : TextDocHeader.Empty, counter, rows.ToArray());
+                var doc = new TextGrid(fmt, docheader ? docheader.Value : TextDocHeader.Empty, rows.ToArray());
                 return ParseResult.parsed(string.Empty, doc);
             }
             catch(Exception e)

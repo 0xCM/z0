@@ -2,11 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using static core;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    partial class AsmCmdService
+    public readonly struct Toolchains
     {
+
+
     }
+
 }

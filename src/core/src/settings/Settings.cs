@@ -20,7 +20,6 @@ namespace Z0
         public Settings(Setting[] src)
             => Data = src;
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Setting<T> empty<T>()
             => Setting<T>.Empty;

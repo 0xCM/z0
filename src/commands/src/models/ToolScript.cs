@@ -9,10 +9,17 @@ namespace Z0
 
     using static Root;
 
-    partial struct Cmd
+    public readonly struct ToolScript
     {
-        [MethodImpl(Inline), Op]
-        public static ToolHelp help(ToolId tool, string doc, string description, CmdOption[] options)
-            => new ToolHelp(tool, doc, description, options);
+        public ToolId Tool {get;}
+
+        public TextBlock Content {get;}
+
+        [MethodImpl(Inline)]
+        public ToolScript(ToolId tool, TextBlock content)
+        {
+            Tool = tool;
+            Content = content;
+        }
     }
 }

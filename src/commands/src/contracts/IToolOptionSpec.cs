@@ -16,7 +16,7 @@ namespace Z0
     {
         ArgProtocol Protocol {get;}
 
-        string Purpose => string.Empty;
+        string Description => string.Empty;
     }
 
     /// <summary>

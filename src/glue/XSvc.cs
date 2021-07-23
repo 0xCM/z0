@@ -57,7 +57,7 @@ namespace Z0
 
         [Op]
         public static XedTool XedTool(this IWfRuntime wf)
-            => Tools.XedTool.create(wf);
+            => Z0.XedTool.create(wf);
 
         [Op]
         public static BdDisasm BdDisasm(this IServiceContext ctx)

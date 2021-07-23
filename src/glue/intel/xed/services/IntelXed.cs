@@ -27,22 +27,26 @@ namespace Z0.Asm
 
         XedDataSource Source;
 
+        FS.FolderPath XedTables;
+
+        FS.FolderPath XedSources;
+
         protected override void OnInit()
         {
             ChipIsaParser = XedChipIsaParser.create(Wf);
             Workspace = Wf.AsmWs();
             SourceParser = XedParser.Service;
             Source = new XedDataSource(Workspace.DataSource("xed.rules"));
+            XedTables = Wf.Env.DevWs + FS.folder("tables") + FS.folder("intel.xed");
+            XedSources = Wf.Env.DevWs + FS.folder("sources") + FS.folder("xed");
         }
 
         public void EmitCatalog()
         {
-            var dir = Workspace.ImportRoot() + FS.folder("intel.xed");
-            //ImportFormSummaries();
-            EmitChipMap(dir);
-            ImportForms(dir);
-            EmitSymCatalog(dir);
-            var aspects = EmitFormAspects(dir);
+            EmitChipMap(XedTables);
+            ImportForms(XedTables);
+            EmitSymCatalog(XedTables);
+            var aspects = EmitFormAspects(XedTables);
             var partition = Partition(aspects);
         }
 
@@ -189,11 +193,9 @@ namespace Z0.Asm
        }
 
         public ReadOnlySpan<XedFormImport> EmitFormDetails()
-            => EmitFormDetails(Workspace.ImportTable<XedFormImport>());
-
-        public ReadOnlySpan<XedFormImport> EmitFormDetails(FS.FilePath dst)
         {
-            var src = LoadImportedForms();
+            var dst =XedTables + FS.file(Tables.identify<XedFormImport>().Format(), FS.Csv);
+            var src = LoadFormImports();
             var count = src.Length;
             var flow = Wf.EmittingFile(dst);
             Tables.emit(src, dst, XedFormImport.RenderWidths);
@@ -292,7 +294,7 @@ namespace Z0.Asm
             return result ? rows.ViewDeposited() : default;
         }
 
-        public ReadOnlySpan<XedFormImport> LoadImportedForms()
+        public ReadOnlySpan<XedFormImport> LoadFormImports()
         {
             var parser = XedFormImportParser.create();
             var src = Workspace.ImportTable<XedFormImport>();
@@ -424,7 +426,7 @@ namespace Z0.Asm
         }
 
         public ReadOnlySpan<XedSummaryRow> LoadSummaries()
-            => LoadSummaries(SummaryTarget());
+            => LoadSummaries(SummaryTable());
 
         public ReadOnlySpan<XedSummaryRow> LoadSummaries(FS.FilePath src)
         {
@@ -454,20 +456,37 @@ namespace Z0.Asm
             dst.Aspects = slice(candidates,1).ToArray();
         }
 
-        bool Match(in Symbols<IClass> classes, SymExpr src, out IClass dst)
-        {
-            if(classes.Lookup(src, out var sym))
-            {
-                dst = sym.Kind;
-                return true;
-            }
-            else
-            {
-                dst = default;
-                return false;
-            }
-        }
+        // bool Match(in Symbols<IClass> classes, SymExpr src, out IClass dst)
+        // {
+        //     if(classes.Lookup(src, out var sym))
+        //     {
+        //         dst = sym.Kind;
+        //         return true;
+        //     }
+        //     else
+        //     {
+        //         dst = default;
+        //         return false;
+        //     }
+        // }
 
+        FS.FilePath FormSourcePath()
+            => XedSources + FS.file("xed-idata", FS.Txt);
+
+        FS.FilePath ChipSourcePath()
+            => XedSources + FS.file("xed-cdata", FS.Txt);
+
+        FS.FilePath ChipMapTablePath(FS.FolderPath dir)
+            => dir + FS.file("xed.chip-map", FS.Csv);
+
+        FS.FilePath SymbolImportPath(FS.FolderPath dir)
+            => dir + FS.file("xed.symbols", FS.Csv);
+
+        FS.FilePath FormAspectImportPath(FS.FolderPath dir)
+            => dir + FS.file(Tables.identify<XedFormAspect>().Format(),FS.Csv);
+
+        FS.FilePath SummaryTable()
+            => XedTables + FS.file("summary", FS.Csv);
 
         const char CommentMarker = Chars.Hash;
 
@@ -546,218 +565,196 @@ namespace Z0.Asm
             return true;
         }
 
-        XedSummaryRow[] EmitSummaries(XedPattern[] src)
-        {
-            var records = sort(src).Map(p => BuildSummaryRow(p));
-            var target = SummaryTarget();
-            Tables.emit(@readonly(records), target);
-            return records;
-        }
+        // XedSummaryRow[] EmitSummaries(XedPattern[] src)
+        // {
+        //     var records = sort(src).Map(p => BuildSummaryRow(p));
+        //     var target = SummaryTarget();
+        //     Tables.emit(@readonly(records), target);
+        //     return records;
+        // }
 
-        Index<XedPattern> EmitInstructionPatterns()
-        {
-            var patterns = list<XedPattern>();
-            var parser = XedParser.Service;
-            var files = Source.InstructionFiles.View;
-            var count = files.Length;
-            for(var i=0; i<count; i++)
-                EmitInstructionPatterns(skip(files,i), patterns);
+        // Index<XedPattern> EmitInstructionPatterns()
+        // {
+        //     var patterns = list<XedPattern>();
+        //     var parser = XedParser.Service;
+        //     var files = Source.InstructionFiles.View;
+        //     var count = files.Length;
+        //     for(var i=0; i<count; i++)
+        //         EmitInstructionPatterns(skip(files,i), patterns);
 
-            return patterns.ToArray();
-        }
+        //     return patterns.ToArray();
+        // }
 
-        void EmitInstructionPatterns(FS.FilePath dst, List<XedPattern> patterns)
-        {
-            var parser = XedParser.Service;
-            var flow = Wf.EmittingFile(dst);
-            var parsed = parser.ParseInstructions(dst);
-            var count = parsed.Length;
-            for(var j = 0; j<count; j++)
-            {
-                ref readonly var doc = ref skip(parsed, j);
-                EmitInstructionPatterns(parsed, InstructionTarget(dst.FileName));
-                patterns.AddRange(XedParser.patterns(doc, out _));
-            }
-            Wf.EmittedFile(flow, count);
-        }
+        // void EmitInstructionPatterns(FS.FilePath dst, List<XedPattern> patterns)
+        // {
+        //     var parser = XedParser.Service;
+        //     var flow = Wf.EmittingFile(dst);
+        //     var parsed = parser.ParseInstructions(dst);
+        //     var count = parsed.Length;
+        //     for(var j = 0; j<count; j++)
+        //     {
+        //         ref readonly var doc = ref skip(parsed, j);
+        //         EmitInstructionPatterns(parsed, InstructionTarget(dst.FileName));
+        //         patterns.AddRange(XedParser.patterns(doc, out _));
+        //     }
+        //     Wf.EmittedFile(flow, count);
+        // }
 
-        [Op]
-        void EmitInstructionPatterns(ReadOnlySpan<XedInstructionDoc> src, FS.FilePath dst)
-        {
-            using var writer = dst.Writer();
-            for(var i=0; i<src.Length; i++)
-            {
-                var rows = src[i];
-                for(var j = 0; j < rows.RowCount; j++)
-                    writer.WriteLine(rows[j].RowText);
-                if(i != src.Length - 1)
-                    writer.WriteLine(Separator);
-            }
-        }
+        // [Op]
+        // void EmitInstructionPatterns(ReadOnlySpan<XedInstructionDoc> src, FS.FilePath dst)
+        // {
+        //     using var writer = dst.Writer();
+        //     for(var i=0; i<src.Length; i++)
+        //     {
+        //         var rows = src[i];
+        //         for(var j = 0; j < rows.RowCount; j++)
+        //             writer.WriteLine(rows[j].RowText);
+        //         if(i != src.Length - 1)
+        //             writer.WriteLine(Separator);
+        //     }
+        // }
 
-        [Op]
-        void EmitRules()
-        {
-            var parser = XedParser.Service;
-            var sources = Source.FunctionFiles.View;
-            var count = sources.Length;
-            var ruleDir = RuleTarget();
-            using var writer = FunctionTarget().Writer();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var src = ref skip(sources,i);
-                var functions = parser.ParseFunctions(src);
-                if(functions.Length != 0)
-                {
-                    EmitFunctions(functions, writer);
-                    EmitRulesets(functions, ruleDir);
-                }
-            }
-        }
+        // [Op]
+        // void EmitRules()
+        // {
+        //     var parser = XedParser.Service;
+        //     var sources = Source.FunctionFiles.View;
+        //     var count = sources.Length;
+        //     var ruleDir = RuleTarget();
+        //     using var writer = FunctionTarget().Writer();
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var src = ref skip(sources,i);
+        //         var functions = parser.ParseFunctions(src);
+        //         if(functions.Length != 0)
+        //         {
+        //             EmitFunctions(functions, writer);
+        //             EmitRulesets(functions, ruleDir);
+        //         }
+        //     }
+        // }
 
-        [Op]
-        void EmitRulesets(ReadOnlySpan<XedRuleSet> src, FS.FolderPath dir)
-        {
-            var count = src.Length;
-            if(count == 0)
-                return;
+        // [Op]
+        // void EmitRulesets(ReadOnlySpan<XedRuleSet> src, FS.FolderPath dir)
+        // {
+        //     var count = src.Length;
+        //     if(count == 0)
+        //         return;
 
-            var dst = dir + first(src).SourceFile;
-            var emitting = Wf.EmittingFile(dst);
-            using var writer = dst.Writer();
+        //     var dst = dir + first(src).SourceFile;
+        //     var emitting = Wf.EmittingFile(dst);
+        //     using var writer = dst.Writer();
 
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-            {
-                if(i != 0)
-                    writer.WriteLine();
+        //     var counter = 0u;
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         if(i != 0)
+        //             writer.WriteLine();
 
-                counter += EmitRuleset(skip(src,i), writer);
-            }
+        //         counter += EmitRuleset(skip(src,i), writer);
+        //     }
 
-            Wf.EmittedFile(emitting, counter);
-        }
+        //     Wf.EmittedFile(emitting, counter);
+        // }
 
-        [Op]
-        void EmitFunctions(ReadOnlySpan<XedRuleSet> src, StreamWriter writer)
-        {
-            for(var i=0; i<src.Length; i++)
-            {
-                ref readonly var f = ref skip(src,i);
-                var body = f.Terms;
-                if(body.Length != 0)
-                {
-                    writer.WriteLine(f.Description);
-                    writer.WriteLine(Separator);
+        // [Op]
+        // void EmitFunctions(ReadOnlySpan<XedRuleSet> src, StreamWriter writer)
+        // {
+        //     for(var i=0; i<src.Length; i++)
+        //     {
+        //         ref readonly var f = ref skip(src,i);
+        //         var body = f.Terms;
+        //         if(body.Length != 0)
+        //         {
+        //             writer.WriteLine(f.Description);
+        //             writer.WriteLine(Separator);
 
-                    for(var j = 0; j <body.Length; j++)
-                        writer.WriteLine(body[j]);
+        //             for(var j = 0; j <body.Length; j++)
+        //                 writer.WriteLine(body[j]);
 
-                    if(i != src.Length - 1)
-                        writer.WriteLine();
-                }
-            }
-        }
+        //             if(i != src.Length - 1)
+        //                 writer.WriteLine();
+        //         }
+        //     }
+        // }
 
-        static RenderPattern<object,object> IMPLY => "{0} -> {1}";
+        // static RenderPattern<object,object> IMPLY => "{0} -> {1}";
 
-        static RenderPattern<object,object> OR => "{0} | {1}";
+        // static RenderPattern<object,object> OR => "{0} | {1}";
 
-        [Op]
-        uint EmitRuleset(in XedRuleSet ruleset, StreamWriter writer)
-        {
-            var content = ruleset.Terms.View;
-            var kTerms = (uint)content.Length;
+        // [Op]
+        // uint EmitRuleset(in XedRuleSet ruleset, StreamWriter writer)
+        // {
+        //     var content = ruleset.Terms.View;
+        //     var kTerms = (uint)content.Length;
 
-            if(kTerms != 0)
-            {
-                writer.WriteLine(ruleset.Description);
-                for(var k=0; k<kTerms; k++)
-                {
-                    var line = skip(content, k).Format();
-                    if(line.Contains(IMPLIES))
-                    {
-                        var left = line.LeftOfFirst(IMPLIES);
-                        var opcount = SourceParser.ParseOperands(left, out var _operands);
-                        var lhs = RP.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
-                        var rhs = line.RightOfFirst(IMPLIES);
-                        writer.WriteLine(IMPLY.Format(lhs,rhs));
-                    }
-                    else if(line.Contains(Bar))
-                    {
-                        var left = line.LeftOfFirst(Bar);
-                        var opcount = SourceParser.ParseOperands(left, out var _operands);
-                        var lhs = RP.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
-                        var rhs = line.RightOfFirst(Bar);
-                        writer.WriteLine(OR.Format(lhs,rhs));
-                    }
-                    else if(line.Contains(SEQUENCE))
-                    {
-                        var name = line.RightOfFirst(SEQUENCE);
-                        writer.WriteLine($"{SEQUENCE}: {name}");
-                        writer.WriteLine(Separator);
-                        var i=0;
-                        while(k < kTerms - 1)
-                        {
-                            line = skip(content, ++k).Format().Trim();
-                            if(blank(line))
-                                break;
+        //     if(kTerms != 0)
+        //     {
+        //         writer.WriteLine(ruleset.Description);
+        //         for(var k=0; k<kTerms; k++)
+        //         {
+        //             var line = skip(content, k).Format();
+        //             if(line.Contains(IMPLIES))
+        //             {
+        //                 var left = line.LeftOfFirst(IMPLIES);
+        //                 var opcount = SourceParser.ParseOperands(left, out var _operands);
+        //                 var lhs = RP.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
+        //                 var rhs = line.RightOfFirst(IMPLIES);
+        //                 writer.WriteLine(IMPLY.Format(lhs,rhs));
+        //             }
+        //             else if(line.Contains(Bar))
+        //             {
+        //                 var left = line.LeftOfFirst(Bar);
+        //                 var opcount = SourceParser.ParseOperands(left, out var _operands);
+        //                 var lhs = RP.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
+        //                 var rhs = line.RightOfFirst(Bar);
+        //                 writer.WriteLine(OR.Format(lhs,rhs));
+        //             }
+        //             else if(line.Contains(SEQUENCE))
+        //             {
+        //                 var name = line.RightOfFirst(SEQUENCE);
+        //                 writer.WriteLine($"{SEQUENCE}: {name}");
+        //                 writer.WriteLine(Separator);
+        //                 var i=0;
+        //                 while(k < kTerms - 1)
+        //                 {
+        //                     line = skip(content, ++k).Format().Trim();
+        //                     if(blank(line))
+        //                         break;
 
-                            writer.WriteLine(string.Format("{0,-2}: {1}", i++, line));
-                        }
+        //                     writer.WriteLine(string.Format("{0,-2}: {1}", i++, line));
+        //                 }
 
-                        writer.WriteLine();
-                    }
-                    else
-                        writer.WriteLine(line + " >.<");
-                }
-            }
-            return kTerms;
-        }
+        //                 writer.WriteLine();
+        //             }
+        //             else
+        //                 writer.WriteLine(line + " >.<");
+        //         }
+        //     }
+        //     return kTerms;
+        // }
 
-        void EmitMnemonics(XedSummaryRow[] src)
-        {
-            var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
-            MnemonicTarget().Overwrite(upper);
-        }
+        // void EmitMnemonics(XedSummaryRow[] src)
+        // {
+        //     var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
+        //     MnemonicTarget().Overwrite(upper);
+        // }
 
-        FS.FilePath FormSourcePath()
-            => SourceDir() + FS.file("xed-idata", FS.Txt);
+        // FS.FolderPath TargetDir()
+        //     => Workspace.ImportDir("xed.rules");
 
-        FS.FolderPath SourceDir()
-           => Workspace.DataSource(dataset);
+        // FS.FilePath InstructionTarget(FS.FileName file)
+        //     => TargetDir()  + FS.folder("instructions") + file;
 
-        FS.FilePath XedTableSourcePath()
-            => SourceDir() + FS.file("xed-tables", FS.Txt);
+        // FS.FilePath MnemonicTarget()
+        //     => TargetDir() + FS.file("mnemonics", FS.Csv);
 
-        FS.FilePath ChipSourcePath()
-            =>  SourceDir() + FS.file("xed-cdata", FS.Txt);
+        // FS.FolderPath RuleTarget()
+        //     => TargetDir() + FS.folder("rules");
 
-        FS.FilePath ChipMapTablePath(FS.FolderPath dir)
-            => dir + FS.file("xed.chip-map", FS.Csv);
+        // FS.FilePath FunctionTarget()
+        //     => TargetDir() + FS.file("functions", FS.Txt);
 
-        FS.FilePath SymbolImportPath(FS.FolderPath dir)
-            => dir + FS.file("xed.symbols", FS.Csv);
 
-        FS.FilePath FormAspectImportPath(FS.FolderPath dir)
-            => dir + FS.file(Tables.identify<XedFormAspect>().Format(),FS.Csv);
-
-        FS.FolderPath TargetDir()
-            => Workspace.ImportDir("xed.rules");
-
-        FS.FilePath InstructionTarget(FS.FileName file)
-            => TargetDir()  + FS.folder("instructions") + file;
-
-        FS.FilePath MnemonicTarget()
-            => TargetDir() + FS.file("mnemonics", FS.Csv);
-
-        FS.FolderPath RuleTarget()
-            => TargetDir() + FS.folder("rules");
-
-        FS.FilePath FunctionTarget()
-            => TargetDir() + FS.file("functions", FS.Txt);
-
-        FS.FilePath SummaryTarget()
-            => TargetDir() + FS.file("summary", FS.Csv);
     }
 }

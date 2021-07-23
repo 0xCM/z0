@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".import-sde-trace")]
         public Outcome ImportSdeTrace(CmdArgs args)
         {
-            var path = AsmWs.ArchiveDump("sde-data", FS.Log);
+            var path = State.OutDir("sde") + FS.file(arg(args,0).Value, FS.Log);
             using var reader = path.AsciLineReader();
             var counter = 0u;
             while(reader.Next(out var line))

@@ -48,10 +48,10 @@ namespace Z0.Asm
         public ReadOnlySpan<AsmHostStatement> EmitHostStatements()
             => EmitHostStatements(Db.AsmStatementRoot());
 
-        public ReadOnlySpan<AsmHostStatement> EmitHostStatements(FS.FolderPath root)
+        public ReadOnlySpan<AsmHostStatement> EmitHostStatements(FS.FolderPath dst)
         {
             var blocks = CodeBlocks.hosted(ApiHex.ReadBlocks().View);
-            return EmitHostStatements(blocks, root);
+            return EmitHostStatements(blocks, dst);
         }
 
         public ReadOnlySpan<AsmHostStatement> EmitHostStatements(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath root)
@@ -144,12 +144,12 @@ namespace Z0.Asm
                 if(i == 0)
                 {
                     host = uri.Host;
-                    tablePath = TablePath(host, root);
+                    tablePath = AsmTablePath(host, root);
                     tableWriter = tablePath.Writer();
                     tableWriter.WriteLine(formatter.FormatHeader());
 
                     tableFlow = Wf.EmittingTable<AsmHostStatement>(tablePath);
-                    asmPath = AsmPath(host, root);
+                    asmPath = AsmSrcPath(host, root);
                     asmWriter = asmPath.Writer();
                     asmFlow = Wf.EmittingFile(asmPath);
                 }
@@ -282,7 +282,6 @@ namespace Z0.Asm
             }
         }
 
-
         public SortedReadOnlySpan<AsmGlobal> BuildIndex(ReadOnlySpan<AsmRoutine> src)
         {
             var count = src.Length;
@@ -400,52 +399,6 @@ namespace Z0.Asm
             return rows;
         }
 
-        public ReadOnlySpan<AsmHostStatement> LoadHostStatements(FS.FilePath src)
-        {
-            var result = TextGrids.load(src, out var doc);
-            if(!result)
-            {
-                Error(result.Message);
-                return default;
-            }
-            else
-            {
-                var dst = span<AsmHostStatement>(doc.RowCount);
-                var count = AsmParser.parse(doc,dst);
-                if(count)
-                    return slice(dst,0, count.Data);
-
-                Error(count.Message);
-                return default;
-            }
-        }
-
-        public ReadOnlySpan<AsmHostStatement> LoadHostStatements(FS.FolderPath dir)
-        {
-            var files = dir.EnumerateFiles(FS.Csv, true).Array();
-            var flow = Wf.Running(ParsingStatements.Format(files.Length,dir));
-            var dst = bag<AsmHostStatement>();
-            var docs = TextGrids.load(files);
-            var counter = 0u;
-            foreach(var doc in docs)
-            {
-                var parsing = Wf.Running(ParsingStatementRows.Format(doc.RowCount));
-                var count = AsmParser.parse(doc, dst);
-                if(count.Fail)
-                    Wf.Error(count.Message);
-                else
-                {
-                    var scount = count.Data;
-                    Wf.Ran(parsing, ParsedStatementRows.Format(scount));
-                    counter += scount;
-                }
-            }
-
-            Wf.Ran(flow, ParsedStatements.Format(counter));
-
-            return dst.ToArray();
-        }
-
         void ClearTarget()
         {
             var dir = Db.TableDir<AsmHostStatement>();
@@ -468,20 +421,12 @@ namespace Z0.Asm
             dst.WriteLine(AsmBlockSeparator);
         }
 
-        FS.FilePath AsmPath(ApiHostUri host, FS.FolderPath? root = null)
+        FS.FilePath AsmSrcPath(ApiHostUri host, FS.FolderPath? root = null)
             => root == null ? Db.AsmStatementPath(host, FS.Asm) : Db.AsmStatementPath(root.Value, host, FS.Asm);
 
-        FS.FilePath TablePath(ApiHostUri host, FS.FolderPath? root = null)
+        FS.FilePath AsmTablePath(ApiHostUri host, FS.FolderPath? root = null)
             => root == null ? Db.AsmStatementPath(host, FS.Csv) : Db.AsmStatementPath(root.Value, host,FS.Csv);
 
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
-
-        public static MsgPattern<Count,FS.FolderPath> ParsingStatements => "Parsing statements from {0} files from {1}";
-
-        public static MsgPattern<Count> ParsedStatements => "Parsed {0} total statements";
-
-        public static MsgPattern<Count> ParsingStatementRows => "Parsing {0} rows";
-
-        public static MsgPattern<Count> ParsedStatementRows => "Parsing {0} rows";
     }
 }

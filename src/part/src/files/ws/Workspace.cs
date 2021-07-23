@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static EnvFolders;
-
     public struct Workspace : IWorkspace<Workspace>
     {
         FS.FolderPath _WsRoot;
@@ -17,6 +14,11 @@ namespace Z0
         public Workspace(FS.FolderPath root)
         {
             _WsRoot = root;
+        }
+
+        public Identifier Name
+        {
+            get => _WsRoot.FolderName.Format();
         }
 
         public FS.FolderPath Root

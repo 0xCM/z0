@@ -59,13 +59,13 @@ namespace Z0.Asm
             return Wf.Router.Dispatch(spec);
         }
 
-        ToolScript<XedCase> CreateXedCase(string opcode)
+        ToolScript CreateXedCase(string opcode)
         {
             var tool = Wf.XedTool();
             var dir = Db.CaseDir("asm.assembled", opcode);
             var dst = dir + FS.file(string.Format("{0}.{1}", opcode, tool.Id), FS.Cmd);
             var @case = tool.DefineCase(opcode.ToString(), dir);
-            return tool.CreateScript(@case, dst);
+            return tool.CreateScript(@case);
         }
 
         void RunFunctionWorkflows()
@@ -261,7 +261,7 @@ namespace Z0.Asm
             var pipe = Wf.AsmStatementPipe();
             var root = Db.AppLogDir("statements");
             pipe.EmitHostStatements(blocks, root);
-            var parsed = pipe.LoadHostStatements(root);
+            var parsed = Wf.AsmDataPipes().LoadHostStatements(root);
         }
 
         public void ParseDump()

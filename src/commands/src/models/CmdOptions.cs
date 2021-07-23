@@ -12,12 +12,12 @@ namespace Z0
     /// <summary>
     /// Defines a <see cref='CommandOptionSpec'/> index
     /// </summary>
-    public readonly struct CmdOptionSpecs : IIndex<CmdOptionSpecs,ushort,CmdOptionSpec>
+    public readonly struct CmdOptions : IIndex<CmdOptions,ushort,CmdOption>
     {
-        readonly Index<CmdOptionSpec> Data;
+        readonly Index<CmdOption> Data;
 
         [MethodImpl(Inline)]
-        public CmdOptionSpecs(CmdOptionSpec[] src)
+        public CmdOptions(CmdOption[] src)
             => Data = src;
 
         public uint Count
@@ -26,13 +26,13 @@ namespace Z0
             get => Data.Count;
         }
 
-        public ref CmdOptionSpec this[ushort index]
+        public ref CmdOption this[ushort index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
 
-        public CmdOptionSpec[] Storage
+        public CmdOption[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -45,11 +45,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdOptionSpecs(CmdOptionSpec[] src)
-            => new CmdOptionSpecs(src);
+        public static implicit operator CmdOptions(CmdOption[] src)
+            => new CmdOptions(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdOptionSpec[](CmdOptionSpecs src)
+        public static implicit operator CmdOption[](CmdOptions src)
             => src.Storage;
     }
 }

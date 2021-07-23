@@ -75,7 +75,7 @@ namespace Z0
         }
 
         protected ToolCmdSpec CreateSpec()
-            => ToolCmd.specify(ToolPath, Args);
+            => Tooling.spec(ToolPath, Args);
 
         [MethodImpl(Inline)]
         protected T AppendFlag<A>(A value)

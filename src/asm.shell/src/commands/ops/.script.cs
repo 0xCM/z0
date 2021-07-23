@@ -26,7 +26,6 @@ namespace Z0.Asm
             return RunScript(script, out var _);
         }
 
-
         Outcome RunScript(FS.FilePath src, out ReadOnlySpan<TextLine> response)
         {
             var result = Outcome.Success;
@@ -34,6 +33,7 @@ namespace Z0.Asm
             void OnError(Exception e)
             {
                 result = e;
+                Error(e);
             }
 
             var cmd = Cmd.cmdline(src.Format(PathSeparator.BS));

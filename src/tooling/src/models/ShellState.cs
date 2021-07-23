@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System.Runtime.CompilerServices;
 
@@ -197,8 +197,7 @@ namespace Z0.Asm
         public FS.FolderPath ToolOutDir(ToolId tool)
             => OutDir() + FS.folder(tool.Format());
 
-        public FS.FolderPath OutDir(FS.FolderName value)
-            => OutDir(OutRoot() + value);
-
+        public FS.FolderPath OutDir(string id)
+            => OutDir(OutRoot() + FS.folder(id));
     }
 }

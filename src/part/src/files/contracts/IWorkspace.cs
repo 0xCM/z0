@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface IWorkspace : IFileArchive
     {
-
+        Identifier Name {get;}
     }
 
     public interface IWorkspace<T> : IWorkspace
@@ -15,5 +15,8 @@ namespace Z0
         FS.FolderPath WsRoot();
 
         FS.FolderPath WsRoot(FS.FolderPath src);
+
+        Identifier IWorkspace.Name
+            => WsRoot().FolderName.Format();
     }
 }

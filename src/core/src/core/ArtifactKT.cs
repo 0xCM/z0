@@ -9,21 +9,23 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ToolScript<T>
+    public readonly struct Artifact<K,T>
+        where K : unmanaged
+        where T : unmanaged
     {
-        public T Data {get;}
+        public K Kind {get;}
 
-        public FS.FilePath ScriptPath {get;}
+        public T Locator {get;}
 
         [MethodImpl(Inline)]
-        public ToolScript(T @case, FS.FilePath path)
+        public Artifact(K kind, T locator)
         {
-            Data = @case;
-            ScriptPath = path;
+            Kind = kind;
+            Locator = locator;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ToolScript<T>((T @case, FS.FilePath path) src)
-            => new ToolScript<T>(src.@case, src.path);
+        public static implicit operator Artifact<K,T>((K kind, T locator) src)
+            => new Artifact<K,T>(src.kind, src.locator);
     }
 }

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     [Record(TableId)]
     public struct XedCase : IRecord<XedCase>

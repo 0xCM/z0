@@ -263,9 +263,6 @@ namespace Z0
             where T : struct
                 => ImportTables() + FS.file(TableId<T>(), FS.Csv);
 
-        public FS.FilePath ImportTable(string id)
-            => ImportTables() + FS.file(id, FS.Csv);
-
         public FS.FilePath Script(string id)
             => Scripts() + FS.file(id, FS.Cmd);
 

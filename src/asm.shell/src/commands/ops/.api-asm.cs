@@ -49,12 +49,27 @@ namespace Z0.Asm
                 files = archive.StatementRoot().Files(FS.Csv,true);
             else
             {
-                ApiParsers.path(arg(args,0).Value, out var path);
-                var pattern = path.MatchPattern();
+                result = ApiParsers.part(arg(args,0).Value, out var part);
+                if(result)
+                {
+                    files = (archive.StatementRoot() + FS.folder(part.Format())).Files(FS.Csv);
+                }
             }
 
-            if(result)
+            var count = files.Length;
+            var pipes = Wf.AsmDataPipes();
+            if(result && files.Length != 0)
+            {
+                ref readonly var src = ref first(files);
+
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var file = ref skip(src,i);
+                    var statements = pipes.LoadHostStatements(file);
+                    Write(string.Format("Absorbed {0} {1} statements", statements.Count, file));
+                }
                 Files(files);
+            }
             return result;
         }
 
@@ -76,6 +91,5 @@ namespace Z0.Asm
 
             return true;
         }
-
     }
 }

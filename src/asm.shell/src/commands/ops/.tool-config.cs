@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static core;
+
     partial class AsmCmdService
     {
         [CmdOp(".tool-config")]
-        Outcome ShowToolConfig(CmdArgs args)
+        Outcome ConfigureTool(CmdArgs args)
         {
             var result = Outcome.Success;
             ToolId tool = arg(args,0).Value;

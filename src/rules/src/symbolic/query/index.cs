@@ -41,5 +41,9 @@ namespace Z0
                     return i;
             return NotFound;
         }
+
+        [MethodImpl(Inline), Op]
+        public static int index(ReadOnlySpan<AsciSymbol> src, char match)
+            => index(src,(C)match);
     }
 }

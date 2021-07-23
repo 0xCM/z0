@@ -12,14 +12,9 @@ namespace Z0
 
     partial struct Cmd
     {
-        [MethodImpl(Inline), Formatter, Closures(Closure)]
-        public static string format<K>(in CmdOptionSpec<K> src)
-            where K : unmanaged
-                => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
-
         [MethodImpl(Inline), Formatter]
-        public static string format(CmdOptionSpec src)
-            => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
+        public static string format(CmdOption src)
+            => src.IsEmpty ? EmptyString : string.Format("{0,-32}:{1}",src.Name, src.Description);
 
         [Op]
         public static string format(in CmdScript src)

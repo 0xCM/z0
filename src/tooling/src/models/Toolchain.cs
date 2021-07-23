@@ -9,10 +9,19 @@ namespace Z0
 
     using static Root;
 
-    partial struct Cmd
+    public class Toolchain
     {
-        [MethodImpl(Inline), Op]
-        public static ToolHelp help(ToolId tool, string doc, string description, CmdOption[] options)
-            => new ToolHelp(tool, doc, description, options);
+        Index<ToolId> _Tools;
+
+        internal Toolchain(ToolId[] tools)
+        {
+            _Tools = tools;
+        }
+
+        public ReadOnlySpan<ToolId> Tools
+        {
+            [MethodImpl(Inline)]
+            get => _Tools.View;
+        }
     }
 }

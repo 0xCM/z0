@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     public readonly struct CmdJob<T> : ITextual
-        where T : struct, ITextual
+        where T : struct
     {
         public Name Name {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Spec.Format();
+            => Spec.ToString();
 
         public override string ToString()
             => Format();

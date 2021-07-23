@@ -9,22 +9,22 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct CmdOptionSpecs<K> : IIndexedView<CmdOptionSpecs<K>,ushort,CmdOptionSpec<K>>
+    public readonly struct CmdOptions<K> : IIndexedView<CmdOptions<K>,ushort,CmdOption<K>>
         where K : unmanaged
     {
-        readonly Index<CmdOptionSpec<K>> Data;
+        readonly Index<CmdOption<K>> Data;
 
         [MethodImpl(Inline)]
-        public CmdOptionSpecs(CmdOptionSpec<K>[] src)
+        public CmdOptions(CmdOption<K>[] src)
             => Data = src;
 
-        public CmdOptionSpec<K>[] Storage
+        public CmdOption<K>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ReadOnlySpan<CmdOptionSpec<K>> View
+        public ReadOnlySpan<CmdOption<K>> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
@@ -37,7 +37,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdOptionSpecs<K>(CmdOptionSpec<K>[] src)
-            => new CmdOptionSpecs<K>(src);
+        public static implicit operator CmdOptions<K>(CmdOption<K>[] src)
+            => new CmdOptions<K>(src);
     }
 }

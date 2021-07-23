@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static EnvFolders;
     using static core;
 
     public sealed class Workspaces
@@ -17,7 +16,7 @@ namespace Z0
         {
             var roots = env.Env.DevWs.SubDirs().View;
             var count = roots.Length;
-            var buffer = core.alloc<IWorkspace>(count);
+            var buffer = alloc<IWorkspace>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
                 seek(dst,i) = new Workspace(skip(roots,i));
@@ -29,6 +28,20 @@ namespace Z0
         internal Workspaces(IWorkspace[] src)
         {
             Data = src;
+        }
+
+        public bool Workspace(Identifier name, out IWorkspace ws)
+        {
+            foreach(var candidate in Data)
+            {
+                if(candidate.Name == name)
+                {
+                    ws = candidate;
+                    return true;
+                }
+            }
+            ws = default;
+            return false;
         }
     }
 }

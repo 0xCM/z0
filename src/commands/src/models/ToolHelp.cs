@@ -17,9 +17,9 @@ namespace Z0
 
         public string Document {get;}
 
-        readonly Index<CmdOptionInfo> _Options;
+        readonly Index<CmdOption> _Options;
 
-        public ToolHelp(ToolId tool, string doc, string desc, CmdOptionInfo[] options)
+        public ToolHelp(ToolId tool, string doc, string desc, CmdOption[] options)
         {
             Tool = tool;
             Document = doc;
@@ -27,7 +27,7 @@ namespace Z0
             _Options = options;
         }
 
-        public ReadOnlySpan<CmdOptionInfo> Options
+        public ReadOnlySpan<CmdOption> Options
         {
             [MethodImpl(Inline)]
             get => _Options.View;

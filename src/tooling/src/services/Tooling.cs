@@ -12,10 +12,49 @@ namespace Z0
     using static Root;
     using static core;
 
+    using SQ = SymbolicQuery;
+    using SR = SymbolicRender;
+
     [ApiHost]
-    public readonly partial struct ToolCmd
+    public readonly struct Tooling
     {
         const NumericKind Closure = UnsignedInts;
+
+        [Op]
+        public static ToolCmdSpec spec(FS.FilePath path, params ToolCmdArg[] args)
+        {
+            var dst = new ToolCmdSpec();
+            dst.ToolPath = path;
+            dst.Args = args.Select(x => x.Format());
+            dst.EnvVars = NamedValues.empty<string>();
+            dst.WorkingDir = FS.dir(Environment.CurrentDirectory);
+            return dst;
+        }
+
+        public static Settings settings(FS.FilePath src)
+        {
+            var dst = list<Setting>();
+            using var reader = src.AsciLineReader();
+            while(reader.Next(out var line))
+            {
+                var content = line.Content;
+                var length = content.Length;
+                if(length != 0)
+                {
+                    if(SQ.hash(first(content)))
+                        continue;
+
+                    var i = SQ.index(content, Chars.Colon);
+                    if(i > 0)
+                    {
+                        var name = SR.format(SQ.left(content,i));
+                        var value = SR.format(SQ.right(content,i));
+                        dst.Add(new Setting(name,value));
+                    }
+                }
+            }
+            return dst.ToArray();
+        }
 
         [Op]
         public static ref CmdRuleInfo rule(IEnvPaths paths, ref CmdRuleInfo data)
@@ -89,12 +128,6 @@ namespace Z0
             return ref dst;
         }
 
-
-        [MethodImpl(Inline)]
-        public static CmdJob<T> job<T>(string name, T spec)
-            where T : struct, ITextual
-                => new CmdJob<T>(name, spec);
-
         public static FS.FilePath enqueue<T>(CmdJob<T> job, IWfDb db)
             where T : struct, ITextual
         {
@@ -102,19 +135,6 @@ namespace Z0
             dst.Overwrite(job.Format());
             return dst;
         }
-
-        /// <summary>
-        /// Creates a <see cref='ToolCmdArgs'/> collection from an array
-        /// </summary>
-        /// <param name="src">The source array</param>
-        [MethodImpl(Inline), Op]
-        public static ScriptPattern pattern(string id, string spec)
-            => new ScriptPattern(id, spec);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ScriptPattern<K> pattern<K>(K id, string content)
-            where K : unmanaged
-                => new ScriptPattern<K>(id,content);
 
         public static async Task<int> start(ToolCmdSpec spec, Action<string> status, Action<string> error)
         {
@@ -156,16 +176,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref CmdExecStatus status(ScriptProcess process, ref CmdExecStatus dst)
             => ref process.Status(ref dst);
-
-        [Op]
-        public static ToolCmdSpec specify(FS.FilePath path, params ToolCmdArg[] args)
-        {
-            var dst = new ToolCmdSpec();
-            dst.ToolPath = path;
-            dst.Args = args.Select(x => x.Format());
-            dst.EnvVars = NamedValues.empty<string>();
-            dst.WorkingDir = FS.dir(Environment.CurrentDirectory);
-            return dst;
-        }
     }
 }

@@ -15,12 +15,12 @@ namespace Z0
 
         public CmdFlagSpecs Flags {get;}
 
-        public CmdOptionSpecs Options {get;}
+        public CmdOptions Options {get;}
 
         public CmdUsage Usage {get;}
 
         [MethodImpl(Inline)]
-        public ToolSpec(ToolId id, CmdFlagSpec[] flags, CmdOptionSpec[] options, CmdUsage usage)
+        public ToolSpec(ToolId id, CmdFlagSpec[] flags, CmdOption[] options, CmdUsage usage)
         {
             Id = id;
             Flags = flags;

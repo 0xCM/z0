@@ -12,7 +12,7 @@ namespace Z0.Asm
             if(args.Length == 0)
                 Write(State.OutDir());
             else
-                Write(State.OutDir(FS.folder(arg(args,0).Value)));
+                Write(State.OutDir(arg(args,0).Value));
             return true;
         }
     }

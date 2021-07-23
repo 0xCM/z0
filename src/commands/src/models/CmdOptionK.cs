@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Specifies a kinded option
     /// </summary>
-    public readonly struct CmdOptionSpec<K> : IToolOptionSpec<K>
+    public readonly struct CmdOption<K> : IToolOptionSpec<K>
         where K : unmanaged
     {
         /// <summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// <summary>
         /// A description for the option, if available
         /// </summary>
-        public string Purpose {get;}
+        public string Description {get;}
 
         /// <summary>
         /// The option protocol
@@ -37,29 +37,29 @@ namespace Z0
         public ArgProtocol Protocol {get;}
 
         [MethodImpl(Inline)]
-        public CmdOptionSpec(K kind)
+        public CmdOption(K kind)
         {
             Name = kind.ToString();
             Kind = kind;
-            Purpose = EmptyString;
+            Description = EmptyString;
             Protocol = new ArgProtocol(ArgPrefix.Default);
         }
 
         [MethodImpl(Inline)]
-        public CmdOptionSpec(string name, K kind)
+        public CmdOption(string name, K kind)
         {
             Name = name;
             Kind = kind;
-            Purpose = EmptyString;
+            Description = EmptyString;
             Protocol = new ArgProtocol(ArgPrefix.Default);
         }
 
         [MethodImpl(Inline)]
-        public CmdOptionSpec(string name, K kind, string purpose, ArgProtocol protocol)
+        public CmdOption(string name, K kind, string purpose, ArgProtocol protocol)
         {
             Name = name;
             Kind = kind;
-            Purpose = purpose;
+            Description = purpose;
             Protocol = protocol;
         }
 
@@ -89,16 +89,16 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdOptionSpec(CmdOptionSpec<K> src)
-            => new CmdOptionSpec(src.Name, src.Purpose, src.Protocol);
+        public static implicit operator CmdOption(CmdOption<K> src)
+            => new CmdOption(src.Name, src.Description, src.Protocol);
 
         /// <summary>
         /// Specifies the empty option
         /// </summary>
-        public static CmdOptionSpec<K> Empty
+        public static CmdOption<K> Empty
         {
             [MethodImpl(Inline)]
-            get => new CmdOptionSpec<K>(EmptyString, default(K));
+            get => new CmdOption<K>(EmptyString, default(K));
         }
     }
 }

@@ -20,6 +20,52 @@ namespace Z0.Asm
             Workspace = Wf.AsmWs();
         }
 
+        public Index<AsmHostStatement> LoadHostStatements(FS.FilePath src)
+        {
+            var result = TextGrids.load(src, out var doc);
+            if(!result)
+            {
+                Error(result.Message);
+                return default;
+            }
+            else
+            {
+                var dst = alloc<AsmHostStatement>(doc.RowCount);
+                var count = AsmParser.parse(doc, dst);
+                if(count)
+                    return dst;
+
+                Error(count.Message);
+                return default;
+            }
+        }
+
+        public Index<AsmHostStatement> LoadHostStatements(FS.FolderPath dir)
+        {
+            var files = dir.EnumerateFiles(FS.Csv, true).Array();
+            var flow = Wf.Running(ParsingStatements.Format(files.Length,dir));
+            var dst = bag<AsmHostStatement>();
+            var docs = TextGrids.load(files);
+            var counter = 0u;
+            foreach(var doc in docs)
+            {
+                var parsing = Wf.Running(ParsingStatementRows.Format(doc.RowCount));
+                var count = AsmParser.parse(doc, dst);
+                if(count.Fail)
+                    Wf.Error(count.Message);
+                else
+                {
+                    var scount = count.Data;
+                    Wf.Ran(parsing, ParsedStatementRows.Format(scount));
+                    counter += scount;
+                }
+            }
+
+            Wf.Ran(flow, ParsedStatements.Format(counter));
+
+            return dst.ToArray();
+        }
+
         public ReadOnlySpan<CpuIdRow> LoadCpuIdImports()
         {
             var src = Workspace.ImportTable<CpuIdRow>();
@@ -193,5 +239,14 @@ namespace Z0.Asm
 
             return dst.ViewDeposited();
         }
+
+
+        public static MsgPattern<Count,FS.FolderPath> ParsingStatements => "Parsing statements from {0} files from {1}";
+
+        public static MsgPattern<Count> ParsedStatements => "Parsed {0} total statements";
+
+        public static MsgPattern<Count> ParsingStatementRows => "Parsing {0} rows";
+
+        public static MsgPattern<Count> ParsedStatementRows => "Parsing {0} rows";
     }
 }

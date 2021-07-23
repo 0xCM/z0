@@ -18,7 +18,7 @@ namespace Z0.Asm
     using SR = SymbolicRender;
 
     [ApiHost]
-    public readonly struct AsmParser
+    public readonly partial struct AsmParser
     {
         public static Outcome parse(ReadOnlySpan<AsciCode> src, out AsmExpr dst)
         {
@@ -150,36 +150,6 @@ namespace Z0.Asm
             }
         }
 
-        [Op]
-        public static Outcome parse(in TextRow src, out AsmHostStatement dst)
-        {
-            var result = Outcome.Success;
-            var count = src.CellCount;
-            var cells = src.Cells;
-            var i=0;
-            if(count == AsmHostStatement.FieldCount)
-            {
-                result += DataParser.parse(skip(cells, i++), out dst.BlockAddress);
-                result += DataParser.parse(skip(cells, i++), out dst.IP);
-                result += DataParser.parse(skip(cells, i++), out dst.BlockOffset);
-                dst.Expression = asm.expr(skip(cells, i++));
-                dst.Encoded = AsmHexCode.parse(skip(cells, i++));
-                result += sig(skip(cells, i++), out dst.Sig);
-                dst.OpCode = asm.opcode(skip(cells, i++));
-                dst.Bitstring = dst.Encoded;
-                if(!DataParser.parse(skip(cells, i++), out dst.OpUri))
-                    return (false, $"Failed to parse uri text <{skip(cells,i)}>");
-
-                return true;
-            }
-            else
-            {
-                dst = default;
-                var msg = $"Wrong number of cells in row {src}";
-                return (false,msg);
-            }
-        }
-
         public static Outcome<uint> parse(in TextGrid doc, ConcurrentBag<AsmHostStatement> dst)
         {
             const byte StatementFieldCount = AsmHostStatement.FieldCount;
@@ -207,28 +177,22 @@ namespace Z0.Asm
 
         public static Outcome<uint> parse(in TextGrid doc, Span<AsmHostStatement> dst)
         {
-            const byte StatementFieldCount = AsmHostStatement.FieldCount;
+            const byte FieldCount = AsmHostStatement.FieldCount;
 
             var counter = 0u;
-            if(doc.Header.Labels.Length != StatementFieldCount)
-                return (false, AppMsg.FieldCountMismatch.Format(StatementFieldCount, doc.Header.Labels.Length));
+            if(doc.Header.Labels.Length != FieldCount)
+                return (false, AppMsg.FieldCountMismatch.Format(FieldCount, doc.Header.Labels.Length));
 
-            var count = min(doc.RowCount,dst.Length);
+            var count = (uint)min(doc.RowCount, dst.Length);
             var rows = doc.RowData.View;
-
             for(var i=0; i<count; i++)
             {
-                ref readonly var row = ref skip(rows,i);
-                var result = parse(row, out AsmHostStatement statement);
-                if(result)
-                {
-                    seek(dst,i) = statement;
-                    counter++;
-                }
-                else
+                ref readonly var row = ref skip(rows, i);
+                var result = parse(row, out seek(dst, i));
+                if(result.Fail)
                     return result;
             }
-            return counter;
+            return count;
         }
 
         public static Outcome thumbprint(string src, out AsmThumbprint thumbprint)

@@ -2,8 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
+    using Z0.Tools;
+
     public sealed partial class XedTool : ToolService<XedTool>
     {
         const string SummaryFlags = "-isa-set -64";
@@ -49,12 +51,11 @@ namespace Z0.Tools
             dst.AppendLine("%CmdSpec% > %DetailPath%");
         }
 
-        public ToolScript<XedCase> CreateScript(XedCase src, FS.FilePath dst)
+        public ToolScript CreateScript(XedCase src)
         {
             var buffer = text.buffer();
-            AppendScript(src,buffer);
-            dst.Overwrite(buffer.Emit());
-            return (src, dst);
+            AppendScript(src, buffer);
+            return new ToolScript(Toolspace.xed, buffer.Emit());
         }
     }
 }

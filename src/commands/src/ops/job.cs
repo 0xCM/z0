@@ -11,8 +11,9 @@ namespace Z0
 
     partial struct Cmd
     {
-        [MethodImpl(Inline), Op]
-        public static ToolHelp help(ToolId tool, string doc, string description, CmdOption[] options)
-            => new ToolHelp(tool, doc, description, options);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmdJob<T> job<T>(string name, T spec)
+            where T : struct
+                => new CmdJob<T>(name, spec);
     }
 }

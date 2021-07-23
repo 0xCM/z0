@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a command option
     /// </summary>
-    public readonly struct CmdOptionSpec : IToolOptionSpec
+    public readonly struct CmdOption : IToolOptionSpec
     {
         /// <summary>
         /// The option name
@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The option's use
         /// </summary>
-        public string Purpose {get;}
+        public string Description {get;}
 
         /// <summary>
         /// The option protocol
@@ -31,26 +31,26 @@ namespace Z0
         public ArgProtocol Protocol {get;}
 
         [MethodImpl(Inline)]
-        public CmdOptionSpec(string name)
+        public CmdOption(string name)
         {
             Name = name;
-            Purpose = EmptyString;
+            Description = EmptyString;
             Protocol = new ArgProtocol(ArgPrefix.Default);
         }
 
         [MethodImpl(Inline)]
-        public CmdOptionSpec(string name, string purpose)
+        public CmdOption(string name, string purpose)
         {
             Name = name;
-            Purpose = purpose;
+            Description = purpose;
             Protocol = new ArgProtocol(ArgPrefix.Default);
         }
 
         [MethodImpl(Inline)]
-        public CmdOptionSpec(string name, string purpose, ArgProtocol protocol)
+        public CmdOption(string name, string purpose, ArgProtocol protocol)
         {
             Name = name;
-            Purpose = purpose;
+            Description = purpose;
             Protocol = protocol;
         }
 
@@ -80,13 +80,13 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdOptionSpec(string src)
-            => new CmdOptionSpec(src);
+        public static implicit operator CmdOption(string src)
+            => new CmdOption(src);
 
-        public static CmdOptionSpec Empty
+        public static CmdOption Empty
         {
             [MethodImpl(Inline)]
-            get => new CmdOptionSpec(EmptyString);
+            get => new CmdOption(EmptyString);
         }
     }
 }

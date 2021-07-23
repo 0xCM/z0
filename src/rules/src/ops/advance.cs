@@ -9,10 +9,10 @@ namespace Z0
 
     using static Root;
 
-    partial struct Cmd
+    partial struct Rules
     {
-        [MethodImpl(Inline), Op]
-        public static ToolHelp help(ToolId tool, string doc, string description, CmdOption[] options)
-            => new ToolHelp(tool, doc, description, options);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static AdvanceTo<T> advance<T>(Marker<T> marker)
+            => new AdvanceTo<T>(marker);
     }
 }

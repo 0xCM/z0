@@ -22,12 +22,12 @@ namespace Z0
         public uint ColCount {get;}
 
         [MethodImpl(Inline)]
-        public TextGrid(TextDocFormat format, TextDocHeader header, uint count, params TextRow[] rows)
+        public TextGrid(TextDocFormat format, TextDocHeader header, params TextRow[] rows)
         {
             RowData = rows;
             Header = header;
             Format = format;
-            RowCount = count;
+            RowCount = RowData.Count;
             ColCount = RowData.IsEmpty ? 0u : (uint)RowData.First.CellCount;
         }
 
@@ -55,7 +55,6 @@ namespace Z0
             get => ref RowData[index];
         }
 
-
         public int Length
         {
             [MethodImpl(Inline)]
@@ -81,6 +80,6 @@ namespace Z0
         }
 
         public static TextGrid Empty
-            => new TextGrid(TextDocFormat.Empty, default, 0, sys.empty<TextRow>());
+            => new TextGrid(TextDocFormat.Empty, default, sys.empty<TextRow>());
     }
 }
