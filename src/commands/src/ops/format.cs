@@ -13,8 +13,8 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline), Formatter]
-        public static string format(CmdOption src)
-            => src.IsEmpty ? EmptyString : string.Format("{0,-32}:{1}",src.Name, src.Description);
+        public static string format(CmdOptionSpec src)
+            => src.IsEmpty ? EmptyString : string.Format("{0,-32}:{1}", src.Name, src.Description);
 
         [Op]
         public static string format(in CmdScript src)
@@ -97,13 +97,9 @@ namespace Z0
         }
 
         [Op]
-        public static string format(in CmdFlagSpec src, ArgPrefix? prefix = null)
-        {
-            var pre = prefix ?? ArgPrefix.DoubleDash;
-            return string.Format("{0}{1}", pre, src.Name);
-        }
+        public static string format(in CmdFlagSpec src)
+            => string.Format("{0:D3} {1,-34} {2}", src.Index, src.Name, src.Description);
 
-        [Formatter]
         public static string format(ArgPrefix src)
         {
             var len = src.Length;

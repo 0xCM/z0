@@ -7,8 +7,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using System.Runtime.CompilerServices;
-
     partial struct Rules
     {
         public static string format<F,C>(Enclosed<F,C> rule)
@@ -17,6 +15,9 @@ namespace Z0
             render(rule,buffer);
             return buffer.Emit();
         }
+
+        public static void render<F,C>(Enclosed<F,C> rule, ITextBuffer dst)
+            => dst.AppendFormat("{0}{1}{2}", rule.Fence.Left, rule.Content, rule.Fence.Right);
 
         [Op]
         public static string format(IVar var, char assign)

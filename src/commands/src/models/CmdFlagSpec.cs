@@ -22,13 +22,19 @@ namespace Z0
         /// <summary>
         /// The flag name
         /// </summary>
-        public AsciBlock<N32> Name {get;}
+        public string Name {get;}
+
+        /// <summary>
+        /// The flag description
+        /// </summary>
+        public string Description {get;}
 
         [MethodImpl(Inline)]
-        public CmdFlagSpec(AsciBlock<N32> name, ushort index)
+        public CmdFlagSpec(ushort index, string name, string desc)
         {
             Index = index;
             Name = name;
+            Description = desc;
         }
 
         public string Format()

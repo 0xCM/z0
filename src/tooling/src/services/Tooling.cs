@@ -20,6 +20,39 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        public static ReadOnlySpan<CmdFlagSpec> flags(FS.FilePath src)
+        {
+            var k = z16;
+            var dst = list<CmdFlagSpec>();
+            using var reader = src.AsciLineReader();
+            while(reader.Next(out var line))
+            {
+                var content = line.Content;
+                var i = SQ.index(content, AsciCode.Colon);
+                var name = SR.format(SQ.left(content,i)).Trim();
+                var desc = SR.format(SQ.right(content,i)).Trim();
+                var flag = Cmd.flagspec(k++, name, desc);
+                dst.Add(flag);
+            }
+            return dst.ViewDeposited();
+        }
+
+        public static ReadOnlySpan<CmdOptionSpec> options(FS.FilePath src)
+        {
+            var dst = list<CmdOptionSpec>();
+            using var reader = src.AsciLineReader();
+            while(reader.Next(out var line))
+            {
+                var content = line.Content;
+                var i = SQ.index(content, AsciCode.Colon);
+                var name = SR.format(SQ.left(content,i)).Trim();
+                var desc = SR.format(SQ.right(content,i)).Trim();
+                var flag = Cmd.option(name, desc);
+                dst.Add(flag);
+            }
+            return dst.ViewDeposited();
+        }
+
         [Op]
         public static Outcome parse(string src, out ToolConfig dst)
         {

@@ -67,7 +67,7 @@ namespace Z0
         }
 
         public FS.FilePath EmitSettings<T>(T settings)
-            where T : ISettingsSet<T>, new()
+            where T : ISettings<T>, new()
         {
             var dst = Paths.SettingsPath(typeof(T).Name);
             dst.Overwrite(settings.Format());

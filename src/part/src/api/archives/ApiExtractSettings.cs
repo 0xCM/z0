@@ -9,7 +9,7 @@ namespace Z0
     using static Root;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ApiExtractSettings :  ISettingsSet<ApiExtractSettings>
+    public struct ApiExtractSettings :  ISettings<ApiExtractSettings>
     {
         public static Outcome timestamp(FS.FolderPath src, out Timestamp dst)
         {
@@ -21,13 +21,13 @@ namespace Z0
             return Time.parse(fmt.RightOfIndex(idx), out dst);
         }
 
-        public Setting<FS.FolderPath> ExtractRoot;
+        public FS.FolderPath ExtractRoot;
 
-        public Setting<bool> EmitContext;
+        public bool EmitContext;
 
-        public Setting<bool> Analyze;
+        public bool Analyze;
 
-        public Setting<bool> EmitStatements;
+        public bool EmitStatements;
 
         public Timestamp Timestamp;
 

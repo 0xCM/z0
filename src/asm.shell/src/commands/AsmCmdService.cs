@@ -73,7 +73,7 @@ namespace Z0.Asm
         TableWs TableWs()
             => DevWs.Tables();
 
-        IWorkspace SourcesWs()
+        IWorkspace Sources()
             => DevWs.Sources();
 
         ProjectWs Projects()

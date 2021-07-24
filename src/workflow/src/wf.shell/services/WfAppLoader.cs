@@ -59,7 +59,7 @@ namespace Z0
             var ctx = context(control, parts, args);
             if(verbose)
             {
-                var enclosed = Rules.enclose(text.join(RP.CommaJoin, ctx.PartIdentities), TextRules.fence(Chars.LBrace, Chars.RBrace));
+                var enclosed = Rules.enclose(text.join(RP.CommaJoin, ctx.PartIdentities), Rules.fence(Chars.LBrace, Chars.RBrace));
                 term.inform(AppMsg.status(TextProp.define("Parts", Rules.format(enclosed))));
             }
 

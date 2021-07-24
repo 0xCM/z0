@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public readonly partial struct Settings : IIndex<Setting>, ILookup<string,Setting>, ISettingsSet<Settings>
+    public readonly partial struct Settings : IIndex<Setting>, ILookup<string,Setting>
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -28,6 +28,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data.Storage;
+        }
+
+        public Span<Setting> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
+        public ReadOnlySpan<Setting> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
         }
 
         public bool Lookup(string key, out Setting value)

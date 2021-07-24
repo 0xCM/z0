@@ -52,6 +52,9 @@ namespace Z0
         public FS.FolderPath Samples(ToolId id)
             => Home(id) + FS.folder(samples);
 
+        public FS.FilePath Script(string id)
+            => Root + FS.file(id,FS.Cmd);
+
         public FS.FilePath Script(ToolId tool, string id)
             => Scripts(tool) + FS.file(id,FS.Cmd);
 

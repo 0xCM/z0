@@ -12,7 +12,7 @@ namespace Z0
     partial struct Rules
     {
         /// <summary>
-        /// Defines a rule r:seq[T] -> seq[T] that requires a specified sequence element, if found, is replaced with another
+        /// Defines a rule r:seq[T] -> seq[T] that defines a sequence element that, if found, is replaced with another
         /// </summary>
         public readonly struct Replace<T> : IRule<Replace<T>,T>
         {

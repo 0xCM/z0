@@ -93,14 +93,6 @@ namespace Z0
                 => Name.StartsWith(substring);
 
             /// <summary>
-            /// Determines whether the filename, including the extension, ends with a specified substring
-            /// </summary>
-            /// <param name="substring">The substring to match</param>
-            [MethodImpl(Inline)]
-            public bool EndsWith(string substring)
-                => Name.EndsWith(substring);
-
-            /// <summary>
             /// Determines whether the filename, including the extension, contains a specified substring
             /// </summary>
             /// <param name="substring">The substring to match</param>
@@ -122,8 +114,6 @@ namespace Z0
                 => src is FileName x && Equals(x);
 
             const string ExtPattern = "{0}.{1}";
-
-            const string Pattern = "{0}";
 
             /// <summary>
             /// Converts this filename to a <see cref='FilePath'/>

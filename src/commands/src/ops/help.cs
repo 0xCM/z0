@@ -12,7 +12,7 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline), Op]
-        public static ToolHelp help(ToolId tool, string doc, string description, CmdOption[] options)
+        public static ToolHelp help(ToolId tool, string doc, string description, CmdOptionSpec[] options)
             => new ToolHelp(tool, doc, description, options);
     }
 }

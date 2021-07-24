@@ -4,8 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SQ = SymbolicQuery;
-    using SR = SymbolicRender;
+    using System;
+
+    using static Root;
+    using static core;
 
     partial class AsmCmdService
     {
@@ -19,15 +21,15 @@ namespace Z0.Asm
             var path = @base.Docs(tool) + list;
             if(path.Exists)
             {
-                using var reader = path.AsciLineReader();
-                while(reader.Next(out var line))
+                if(path.FileName.Contains("-bits"))
                 {
-                    var content = line.Content;
-                    var i = SQ.index(content, AsciCode.Colon);
-                    var name = SQ.left(content,i);
-                    var desc = SQ.right(content,i);
-                    var option = Cmd.option(SR.format(name).Trim(), SR.format(desc).Trim());
-                    Write(option.Format());
+                    var flags = Tooling.flags(path);
+                    iter(flags, f => Write(f.Format()));
+                }
+                else
+                {
+                    var options = Tooling.options(path);
+                    iter(options, f => Write(f.Format()));
                 }
             }
             else

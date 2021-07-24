@@ -4,10 +4,31 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using api = Settings;
 
-    public interface ISettings
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface ISettings : ITextual
     {
-        Func<ISettings> Factory {get;}
+        Identifier Name
+            => GetType().Name;
+
+        Settings Settings
+            => api.from(this);
+
+        string ITextual.Format()
+            => Settings.Format();
+    }
+
+    [Free]
+    public interface ISettings<S> : ISettings
+        where S : ISettings<S>
+    {
+        Identifier ISettings.Name
+            => typeof(S).Name;
+
+        Settings ISettings.Settings
+            => api.from((S)this);
     }
 }

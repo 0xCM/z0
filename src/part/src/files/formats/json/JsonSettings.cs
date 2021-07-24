@@ -120,28 +120,25 @@ namespace Z0
             => SettingMembers<S>().Select(m => m.Name);
 
         static IEnumerable<Setting> PropSettings<S>(object src)
-            where S : ISettingSource<S>, new()
-                => SettingProperties<S>().Select(p => new Setting(p.Name, p.GetValue(src)?.ToString() ?? EmptyString));
+            => SettingProperties<S>().Select(p => new Setting(p.Name, p.GetValue(src)?.ToString() ?? EmptyString));
 
         static IEnumerable<Setting> FieldSettings<S>(object src)
-            where S : ISettingSource<S>, new()
-                => SettingFields<S>().Select(p => new Setting(p.Name, p.GetValue(src)?.ToString() ?? EmptyString));
+            => SettingFields<S>().Select(p => new Setting(p.Name, p.GetValue(src)?.ToString() ?? EmptyString));
 
         public static IEnumerable<Setting> Settings<S>(object src)
-            where S : ISettingSource<S>, new()
-                => PropSettings<S>(src).Union(FieldSettings<S>(src));
+            => PropSettings<S>(src).Union(FieldSettings<S>(src));
 
         public static void Save<S>(S src, FS.FilePath dst)
-            where S : ISettingSource<S>, new()
+            where S : ISettingsProvider
         {
             const string indent = "    ";
 
-            var settings = src.Settings.ToArray();
+            var settings = src.Settings.View;
             if(settings.Length != 0)
             {
                 using var writer = dst.Writer();
                 writer.WriteLine(LBrace);
-                for(var i = 0; i< settings.Length; i++)
+                for(var i = 0; i<settings.Length; i++)
                 {
                     var line = indent + settings[i].Format();
                     if(i != settings.Length - 1)
@@ -150,21 +147,6 @@ namespace Z0
                 }
                 writer.WriteLine(RBrace);
             }
-        }
-
-        public static string Format(IEnumerable<ISetting> settings)
-        {
-            var dst = new StringBuilder();
-            var src = settings.ToArray();
-            for(var i=0; i<src.Length; i++)
-            {
-                var line = src[i].Format();
-                if(i != src.Length - 1)
-                    line += Chars.Comma;
-
-                dst.AppendLine(line);
-            }
-            return dst.ToString();
         }
 
         public static IJsonSettings Empty

@@ -8,7 +8,5 @@ namespace Z0.Asm
         where T : AsmModelFactory<T>,new()
     {
 
-
     }
-
 }

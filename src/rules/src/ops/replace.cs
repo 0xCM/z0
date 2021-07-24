@@ -28,6 +28,11 @@ namespace Z0
             return buffer;
         }
 
+        /// <summary>
+        /// Transforms a bijection into a sequence of replacement rules
+        /// </summary>
+        /// <param name="spec"></param>
+        /// <typeparam name="T"></typeparam>
         [Op, Closures(Closure)]
         public static Span<Replace<T>> replace<T>(in Bijection<T> spec)
         {

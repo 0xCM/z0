@@ -14,7 +14,6 @@ namespace Z0.Asm
             var outcome = Outcome.Success;
             var input = State.Files().View;
             var output = list<FS.FilePath>();
-
             var isets = array("avx512f", "avx2", "avx");
 
             foreach(var file in input)
@@ -28,7 +27,7 @@ namespace Z0.Asm
                         ("SrcDir", file.FolderPath.Format(PathSeparator.BS))
                         );
 
-                    var cmd = Cmd.cmdline(State.Tools().Script(Toolspace.llvm_llc, "emit-obj").Format(PathSeparator.BS));
+                    var cmd = Cmd.cmdline(State.Tools().Script(Toolspace.llc, "emit-obj").Format(PathSeparator.BS));
                     var response = ScriptRunner.RunCmd(cmd, vars);
                     var outfile = Lines.prop(response,"DstPath");
                     if(text.nonempty(outfile))

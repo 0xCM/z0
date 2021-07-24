@@ -10,12 +10,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static Rules;
-    using static Chars;
-
-    using SQ = SymbolicQuery;
-    using SP = SymbolicParse;
-    using SR = SymbolicRender;
 
     partial struct AsmParser
     {
@@ -56,6 +50,51 @@ namespace Z0.Asm
                 return (false, $"Failed to parse uri text <{skip(cells,i)}>");
 
             return true;
+        }
+
+        public static Outcome<uint> parse(in TextGrid doc, ConcurrentBag<AsmHostStatement> dst)
+        {
+            const byte StatementFieldCount = AsmHostStatement.FieldCount;
+
+            var counter = 0u;
+            if(doc.Header.Labels.Length != StatementFieldCount)
+                return (false, AppMsg.FieldCountMismatch.Format(StatementFieldCount, doc.Header.Labels.Length));
+
+            var count = doc.RowCount;
+            var rows = doc.RowData.View;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                var result = parse(row, out AsmHostStatement statement);
+                if(result)
+                {
+                    dst.Add(statement);
+                    counter++;
+                }
+                else
+                    return result;
+            }
+            return counter;
+        }
+
+        public static Outcome<uint> parse(in TextGrid doc, Span<AsmHostStatement> dst)
+        {
+            const byte FieldCount = AsmHostStatement.FieldCount;
+
+            var counter = 0u;
+            if(doc.Header.Labels.Length != FieldCount)
+                return (false, AppMsg.FieldCountMismatch.Format(FieldCount, doc.Header.Labels.Length));
+
+            var count = (uint)min(doc.RowCount, dst.Length);
+            var rows = doc.RowData.View;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows, i);
+                var result = parse(row, out seek(dst, i));
+                if(result.Fail)
+                    return result;
+            }
+            return count;
         }
     }
 }

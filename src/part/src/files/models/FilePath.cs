@@ -174,14 +174,6 @@ namespace Z0
             /// </summary>
             /// <param name="substring">The substring to match</param>
             [MethodImpl(Inline)]
-            public bool EndsWith(string substring)
-                => FileName.EndsWith(substring);
-
-            /// <summary>
-            /// Determines whether the filename, including the extension, ends with a specified substring
-            /// </summary>
-            /// <param name="substring">The substring to match</param>
-            [MethodImpl(Inline)]
             public bool Contains(string substring)
                 => FileName.Contains(substring);
 

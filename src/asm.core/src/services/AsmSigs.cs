@@ -19,7 +19,6 @@ namespace Z0.Asm
         public static Type[] TokenTypes()
             => typeof(AsmSigTokens).GetNestedTypes().Enums();
 
-
         public static Outcome TokenType(string name, out Type dst)
         {
             var src = TokenTypes().ToReadOnlySpan();

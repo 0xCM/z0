@@ -34,22 +34,56 @@ namespace Z0
 
         public readonly struct Symbol
         {
-            internal byte Seg {get;}
-
-            internal byte Idx {get;}
+            public ushort Key {get;}
 
             [MethodImpl(Inline)]
-            public Symbol(byte seg, byte idx)
+            public Symbol(ushort index)
             {
-                Seg = seg;
-                Idx = idx;
+                Key = index;
             }
 
             public string Format()
-                => string.Format("({0},{1})", Seg, Idx);
+                => Key.ToString();
 
             public override string ToString()
                 => Format();
+        }
+
+
+        public struct SymbolStore<T>
+        {
+            readonly Index<T> Data;
+
+            uint k;
+
+            internal SymbolStore(ushort capacity)
+            {
+                Data = alloc<T>(capacity);
+                k = 0;
+            }
+
+            [MethodImpl(Inline)]
+            public T Extract(in Symbol src)
+            {
+                return Data[src.Key];
+            }
+
+            [MethodImpl(Inline)]
+            public bit Deposit(in T src, out Symbol dst)
+            {
+                if(k < Data.Length - 1)
+                {
+                    Data[k] = src;
+                    dst = new Symbol((ushort)k);
+                    k++;
+                    return true;
+                }
+                else
+                {
+                    dst = default;
+                    return false;
+                }
+            }
         }
 
         public readonly ref struct BitVector
@@ -84,6 +118,27 @@ namespace Z0
                 => api.format(this);
         }
 
+        public struct BitVector<T>
+            where T : unmanaged
+        {
+            Domain Domain;
+
+            T Bits;
+
+            [MethodImpl(Inline)]
+            public BitVector(Domain d, T bits)
+            {
+                Domain = d;
+                Bits = bits;
+            }
+
+            public uint Width
+            {
+                [MethodImpl(Inline)]
+                get => Domain.Width;
+            }
+        }
+
         public readonly struct State<T>
             where T : unmanaged
         {
@@ -101,12 +156,6 @@ namespace Z0
                 get => B;
             }
 
-            public string Format(Domain d)
-                => api.format(d, this);
-
-            public string Format()
-                => api.format(api.dmax<T>(), this);
-
             [MethodImpl(Inline)]
             public static implicit operator State<T>(T src)
                 => new State<T>(src);
@@ -117,6 +166,13 @@ namespace Z0
     public readonly partial struct dfa
     {
         const NumericKind Closure = UnsignedInts;
+
+        public static SymbolStore<T> symstore<T>(ushort capacity)
+            => new SymbolStore<T>(capacity);
+
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static bit deposit<T>(in T src, ref SymbolStore<T> dst, out Symbol s)
+            => dst.Deposit(src, out s);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static State<T> state<T>(T src)
@@ -207,29 +263,34 @@ namespace Z0
             return new BitVector(slice(buffer,0,width));
         }
 
-        [Op]
-        public static BitVector bitvector(Domain d, State<ushort> src)
-            => bitvector<ushort>(d,src);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static BitVector<T> bitvector<T>(Domain d, T src)
+            where T : unmanaged
+                => new BitVector<T>(d, src);
+
+        [MethodImpl(Inline), Op]
+        public static BitVector<ushort> bitvector(Domain d, State<ushort> src)
+            => bitvector(d, src.Content);
+
+        [MethodImpl(Inline), Op]
+        public static BitVector<uint> bitvector(Domain d, State<uint> src)
+            => bitvector(d, src.Content);
+
+        [MethodImpl(Inline), Op]
+        public static BitVector<ulong> bitvector(Domain d, State<ulong> src)
+            => bitvector(d, src.Content);
+
+        [MethodImpl(Inline), Op]
+        public static BitVector<Cell128> bitvector(Domain d, State<Cell128> src)
+            => bitvector(d, src.Content);
+
+        [MethodImpl(Inline), Op]
+        public static BitVector<Cell256> bitvector(Domain d, State<Cell256> src)
+            => bitvector(d, src.Content);
 
         [Op]
-        public static BitVector bitvector(Domain d, State<uint> src)
-            => bitvector<uint>(d,src);
-
-        [Op]
-        public static BitVector bitvector(Domain d, State<ulong> src)
-            => bitvector<ulong>(d,src);
-
-        [Op]
-        public static BitVector bitvector(Domain d, State<Cell128> src)
-            => bitvector<Cell128>(d,src);
-
-        [Op]
-        public static BitVector bitvector(Domain d, State<Cell256> src)
-            => bitvector<Cell256>(d,src);
-
-        [Op]
-        public static BitVector bitvector(Domain d, State<Cell512> src)
-            => bitvector<Cell512>(d,src);
+        public static BitVector<Cell512> bitvector(Domain d, State<Cell512> src)
+            => bitvector(d, src.Content);
 
         [Op, Closures(Closure)]
         public static BitVector bitvector<T>(Domain d, State<T> src)
@@ -489,35 +550,6 @@ namespace Z0
             var k=0u;
             for(byte i=0; i<d.Width; i++)
                 seek(dst,i) = bit.test(src,i);
-        }
-
-        [MethodImpl(Inline)]
-        static void unpack(ulong src, Domain d, Span<bit> dst)
-        {
-            for(byte i=0; i<d.Width; i++)
-                seek(dst,i) = bit.test(src,i);
-        }
-
-        [MethodImpl(Inline)]
-        static uint unpack(ReadOnlySpan<byte> input, long count, Span<bit> dst)
-        {
-            var k=0u;
-            var size = input.Length;
-            for(var i=0; i<size; i++)
-            {
-                ref readonly var b = ref skip(input,i);
-                for(byte j=0; j<8 && k<count; j++, k++)
-                    seek(dst,k) = bit.test(b,j);
-            }
-
-            return k;
-        }
-
-        [Op, Closures(Closure)]
-        public static string format<T>(Domain d, State<T> src)
-            where T : unmanaged
-        {
-            return format(bitvector(d,src));
         }
 
         [MethodImpl(Inline), Op]

@@ -4,19 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public struct AsmAnalyzerSettings : ISettingsSet<AsmAnalyzerSettings>
+    public struct AsmAnalyzerSettings : ISettings<AsmAnalyzerSettings>
     {
-        public Setting<bool> EmitCalls;
+        public bool EmitCalls;
 
-        public Setting<bool> EmitJumps;
+        public bool EmitJumps;
 
-        public Setting<bool> EmitAsmDetails;
+        public bool EmitAsmDetails;
 
-        public Setting<bool> EmitStatementIndex;
+        public bool EmitStatementIndex;
 
-        public Setting<bool> EmitHostStatements;
+        public bool EmitHostStatements;
 
-        public Setting<bool> EmitBitstringIndex;
+        public bool EmitBitstringIndex;
 
         public static ref AsmAnalyzerSettings @default(out AsmAnalyzerSettings dst)
         {

@@ -22,7 +22,7 @@ namespace Z0.Asm
             {
                 ref readonly var symbol = ref skip(forms,i);
                 var expr = symbol.Expr;
-                if(expr.Text.Contains(match,StringComparison.InvariantCultureIgnoreCase))
+                if(expr.Text.Contains(match, StringComparison.InvariantCultureIgnoreCase))
                 {
                     Write(symbol.Expr);
                 }

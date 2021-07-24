@@ -8,6 +8,7 @@ namespace Z0
 
     partial class XText
     {
+
         [TextUtility]
         public static string FormatCount(this byte src, int zpad = 3)
             => src.ToString().PadLeft(zpad, '0').PadLeft(zpad + 1, Chars.Space) + Chars.Space;

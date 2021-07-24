@@ -4,61 +4,61 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public struct WorkflowOptions : ISettingsSet<WorkflowOptions>
+    public struct WorkflowOptions : ISettings<WorkflowOptions>
     {
-        public Setting<bool> EmitAssetIndex;
+        public bool EmitAssetIndex;
 
-        public Setting<bool> CollectApiDocs;
+        public bool CollectApiDocs;
 
-        public Setting<bool> EmitImageContent;
+        public bool EmitImageContent;
 
-        public Setting<bool> EmitSectionHeaders;
+        public bool EmitSectionHeaders;
 
-        public Setting<bool> EmitMsilMetadata;
+        public bool EmitMsilMetadata;
 
-        public Setting<bool> EmitCliStrings;
+        public bool EmitCliStrings;
 
-        public Setting<bool> EmitCliBlobs;
+        public bool EmitCliBlobs;
 
-        public Setting<bool> EmitAssemblyRefs;
+        public bool EmitAssemblyRefs;
 
-        public Setting<bool> EmitCliConstants;
+        public bool EmitCliConstants;
 
-        public Setting<bool> EmitApiMetadump;
+        public bool EmitApiMetadump;
 
-        public Setting<bool> EmitApiClasses;
+        public bool EmitApiClasses;
 
-        public Setting<bool> EmitFieldMetadata;
+        public bool EmitFieldMetadata;
 
-        public Setting<bool> EmitSymbolicLiterals;
+        public bool EmitSymbolicLiterals;
 
-        public Setting<bool> EmitXedCatalogs;
+        public bool EmitXedCatalogs;
 
-        public Setting<bool> EmitAsmRows;
+        public bool EmitAsmRows;
 
-        public Setting<bool> EmitResBytes;
+        public bool EmitResBytes;
 
-        public Setting<bool> EmitAsmAnalysis;
+        public bool EmitAsmAnalysis;
 
-        public Setting<bool> EmitIntrinsicsInfo;
+        public bool EmitIntrinsicsInfo;
 
-        public Setting<bool> EmitAsmStatements;
+        public bool EmitAsmStatements;
 
-        public Setting<bool> CorrelateMembers;
+        public bool CorrelateMembers;
 
-        public Setting<bool> EmitAssetContent;
+        public bool EmitAssetContent;
 
-        public Setting<bool> EmitApiBitMasks;
+        public bool EmitApiBitMasks;
 
-        public Setting<bool> EmitHexIndex;
+        public bool EmitHexIndex;
 
-        public Setting<bool> EmitCallData;
+        public bool EmitCallData;
 
-        public Setting<bool> EmitJmpData;
+        public bool EmitJmpData;
 
-        public Setting<bool> EmitHexPack;
+        public bool EmitHexPack;
 
-        public Setting<bool> ProcessCultFiles;
+        public bool ProcessCultFiles;
 
         public static WorkflowOptions @default()
         {
@@ -94,6 +94,6 @@ namespace Z0
         }
 
         public override string ToString()
-            => (this as ISettingsSet).Format();
+            => (this as ISettings).Format();
     }
 }

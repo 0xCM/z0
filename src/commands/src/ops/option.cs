@@ -16,8 +16,8 @@ namespace Z0
         /// </summary>
         /// <param name="name">The option name</param>
         [MethodImpl(Inline), Factory]
-        public static CmdOption option(string name)
-            => new CmdOption(name);
+        public static CmdOptionSpec option(string name)
+            => new CmdOptionSpec(name);
 
         /// <summary>
         /// Creates a meaningful option
@@ -25,8 +25,8 @@ namespace Z0
         /// <param name="name">The option name</param>
         /// <param name="description">What does it do?</param>
         [MethodImpl(Inline), Factory]
-        public static CmdOption option(string name, string description)
-            => new CmdOption(name, description);
+        public static CmdOptionSpec option(string name, string description)
+            => new CmdOptionSpec(name, description);
 
         /// <summary>
         /// Creates a meaningful option with non-default protocol
@@ -35,8 +35,8 @@ namespace Z0
         /// <param name="purpose">The option's significance</param>
         /// <param name="purpose">The invocation protocol</param>
         [MethodImpl(Inline), Factory]
-        public static CmdOption option(string name, string purpose, ArgPrefix prefix)
-            => new CmdOption(name, purpose, prefix);
+        public static CmdOptionSpec option(string name, string purpose, ArgPrefix prefix)
+            => new CmdOptionSpec(name, purpose, prefix);
 
         /// <summary>
         /// Creates a meaningful option with non-default protocol
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="purpose">The option's significance</param>
         /// <param name="purpose">The invocation protocol</param>
         [MethodImpl(Inline), Factory]
-        public static CmdOption option(string name, string purpose, ArgProtocol protocol)
-            => new CmdOption(name, purpose, protocol);
+        public static CmdOptionSpec option(string name, string purpose, ArgProtocol protocol)
+            => new CmdOptionSpec(name, purpose, protocol);
     }
 }

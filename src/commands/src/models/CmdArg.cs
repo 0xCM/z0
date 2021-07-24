@@ -33,6 +33,9 @@ namespace Z0
             Name = name;
         }
 
+        public override string ToString()
+            => Value ?? EmptyString;
+
         [MethodImpl(Inline)]
         public static implicit operator string(CmdArg arg)
             => arg.Value;

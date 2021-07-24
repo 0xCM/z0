@@ -20,5 +20,8 @@ namespace Z0
 
         public static CmdLine dir(string src)
             => dir(FS.dir(src));
+
+        public static CmdLine cmd(string spec)
+            => string.Format("cmd.exe /c {0}", spec);
     }
 }

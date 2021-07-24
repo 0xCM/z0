@@ -52,7 +52,7 @@ namespace Z0
 
         public static ToolId llvm_tblgen => "llvm_tblgen";
 
-        public static ToolId llvm_llc => "llc";
+        public static ToolId llc => "llc";
 
         public static ToolId llvm_objdump =>"llvm-objdump";
     }

@@ -12,7 +12,7 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline), Op]
-        public static CmdFlagSpec flagspec(string name, ushort index)
-            => new CmdFlagSpec(name, index);
+        public static CmdFlagSpec flagspec(ushort index, string name, string desc)
+            => new CmdFlagSpec(index, name, desc);
     }
 }

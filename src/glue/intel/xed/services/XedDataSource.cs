@@ -37,18 +37,6 @@ namespace Z0
             return false;
         }
 
-        public FS.Files InstructionFiles
-            => Files.Where(DefinesInstructions);
 
-        static FS.FileExt Cfg => FS.ext("cfg");
-
-        public FS.Files ConfigFiles
-            => Files.Where(Cfg);
-
-        public FS.Files FunctionFiles
-            => Files.Where(DefinesFunctions);
-
-        public FS.Files EnumFiles
-            => Files.Where(f => f.FileName.EndsWith("enum"));
     }
 }

@@ -47,7 +47,9 @@ namespace Z0.Asm
                 return (false, string.Format("{0} not supported", kind));
 
             var tool = Toolspace.dumpbin;
-            var outdir = ToolOutDir(args, tool);
+            var project = State.Project();
+            var rootdir = ToolOutDir(args, tool);
+            var outdir = project.IsNonEmpty ? rootdir + FS.folder(project.Format()) : rootdir;
             var cmd = Cmd.cmdline(State.Tools().Script(tool, script).Format(PathSeparator.BS));
             var input = State.Files().View;
             var count = input.Length;

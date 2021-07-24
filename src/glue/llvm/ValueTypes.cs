@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -23,19 +23,19 @@ namespace Z0.Tools
         ByteSize Size => size<T>();
     }
 
-    public struct ValueTypeInfo
-    {
-        public StringAddress Name;
-
-        public BitWidth Width;
-    }
-
     /// <summary>
     /// Derived from ValueTypes.td
     /// </summary>
-    public readonly struct ValueTypes
+    public readonly struct LlvmValueTypes
     {
         const LayoutKind Layout = LayoutKind.Sequential;
+
+        public struct ValueTypeInfo
+        {
+            public StringAddress Name;
+
+            public BitWidth Width;
+        }
 
         /// <summary>
         ///  1 x i64 vector value

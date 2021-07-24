@@ -13,12 +13,12 @@ namespace Z0
     {
         public string Name {get;}
 
-        public ColumnType Type {get;}
+        public string Type {get;}
 
         public ushort ColWidth {get;}
 
         [MethodImpl(Inline)]
-        public TableColumn(string name, ColumnType type, ushort width)
+        public TableColumn(string name, string type, ushort width)
         {
             Name = name;
             Type = type;
