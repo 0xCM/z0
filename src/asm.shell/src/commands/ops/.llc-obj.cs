@@ -28,7 +28,7 @@ namespace Z0.Asm
                         ("SrcDir", file.FolderPath.Format(PathSeparator.BS))
                         );
 
-                    var cmd = Cmd.cmdline(State.ToolBase().Script(Toolspace.llvm_llc, "emit-obj").Format(PathSeparator.BS));
+                    var cmd = Cmd.cmdline(State.Tools().Script(Toolspace.llvm_llc, "emit-obj").Format(PathSeparator.BS));
                     var response = ScriptRunner.RunCmd(cmd, vars);
                     var outfile = Lines.prop(response,"DstPath");
                     if(text.nonempty(outfile))

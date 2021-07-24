@@ -11,10 +11,12 @@ namespace Z0
     using static Root;
     using static core;
 
+    using B = ByteBlock512;
+
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock512 : IDataBlock<ByteBlock512>
+    public struct ByteBlock512 : IDataBlock<B>
     {
-        public const ushort Size = Pow2.T09;
+        public const ushort Size = 512;
 
         ByteBlock256 A;
 
@@ -42,7 +44,6 @@ namespace Z0
             where T : unmanaged
                 => recover<T>(Bytes);
 
-        public static ByteBlock512 Empty => default;
-
+        public static B Empty => default;
    }
 }

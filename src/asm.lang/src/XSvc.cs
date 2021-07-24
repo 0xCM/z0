@@ -49,7 +49,6 @@ namespace Z0
         public static AsmToolchain AsmToolchain(this IWfRuntime context)
             => Svc.AsmToolchain.create(context);
 
-
         [Op]
         public static AsmDataPipes AsmDataPipes(this IWfRuntime context)
             => Svc.AsmDataPipes.create(context);

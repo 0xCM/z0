@@ -10,9 +10,7 @@ namespace Z0
     {
         public void Run()
         {
-            var assets = Wf.LlvmAssets();
-            var types = assets.ValueTypes();
-            Write(types);
+
         }
     }
 

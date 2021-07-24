@@ -6,6 +6,6 @@ namespace Z0.Asm
 {
     public interface IAsmTool
     {
-        AsmWorkspace Workspace {get;}
+        AsmWs Workspace {get;}
     }
 }

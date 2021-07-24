@@ -11,11 +11,13 @@ namespace Z0
     using static Root;
     using static core;
 
+    using B = ByteBlock5;
+
     /// <summary>
     /// 5 bytes of storage
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock5 : IDataBlock<ByteBlock5>
+    public struct ByteBlock5 : IDataBlock<B>
     {
         public const ushort Size = 5;
 
@@ -39,5 +41,7 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        public static B Empty => default;
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static EnvFolders;
 
-    public struct AsmWorkspace : IWorkspace<AsmWorkspace>
+    public sealed class AsmWs : IWorkspace<AsmWs>
     {
         const string instructions = nameof(instructions);
 
@@ -26,8 +26,6 @@ namespace Z0
 
         const string images = nameof(images);
 
-        const string stage = nameof(stage);
-
         const string src = nameof(src);
 
         const string bits = nameof(bits);
@@ -35,8 +33,8 @@ namespace Z0
         const string docs = nameof(docs);
 
         [MethodImpl(Inline)]
-        public static AsmWorkspace create(FS.FolderPath root)
-            => new AsmWorkspace(root);
+        public static AsmWs create(FS.FolderPath root)
+            => new AsmWs(root);
 
         FS.FolderPath _WsRoot;
 
@@ -47,7 +45,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        AsmWorkspace(FS.FolderPath root)
+        AsmWs(FS.FolderPath root)
         {
             _WsRoot = root;
         }
@@ -141,13 +139,6 @@ namespace Z0
             => Root + FS.folder(codegen);
 
         /// <summary>
-        /// Defines a path of the form {CodeGenRoot}/{id}
-        /// </summary>
-        /// <param name="dataset">A code gnerateion set identifier</param>
-        public FS.FolderPath CodeGenDir(string id)
-            => CodeGenRoot() + FS.folder(id);
-
-        /// <summary>
         /// Defines a path of the form {ImportRoot} := {DataRoot}/imported
         /// </summary>
         public FS.FolderPath ImportRoot()
@@ -179,31 +170,6 @@ namespace Z0
         /// <param name="id">A file identifier</param>
         public FS.FilePath EtlLog(string dataset, FS.FileName file)
             => EtlLogs(dataset) + file;
-
-        /// <summary>
-        /// Defines a path of the form {EtlLogRoot}/common/{id}.{ext}
-        /// </summary>
-        /// <param name="id">A file identifier</param>
-        /// <param name="ext">A file extension</param>
-        public FS.FilePath EtlLog(string id, FS.FileExt ext)
-            => EtlLogs(common) + FS.file(id, ext);
-
-        /// <summary>
-        /// Defines a path of the form {EtlLogRoot}/{Dataset}/{id}.log
-        /// </summary>
-        /// <param name="dataset">The dataset identiier</param>
-        /// <param name="id">The file identifier</param>
-        public FS.FilePath EtlLog(string dataset, string id)
-            => EtlLogs(dataset) + FS.file(id, FS.Log);
-
-        /// <summary>
-        /// Defines a path of the form {EtlLogRoot}/{Dataset}/{id}.{ext}
-        /// </summary>
-        /// <param name="dataset">A dataset identiier</param>
-        /// <param name="id">A file identifier</param>
-        /// <param name="ext">Z file extension</param>
-        public FS.FilePath EtlLog(string dataset, string id, FS.FileExt ext)
-            => EtlLogs(dataset) + FS.file(id, ext);
 
         /// <summary>
         /// Defines a path of the form {ImportRoot}/{dataset}

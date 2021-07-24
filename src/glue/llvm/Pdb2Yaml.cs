@@ -7,13 +7,13 @@ namespace Z0.Tools
     partial struct Llvm
     {
         [Tool]
-        public readonly struct Lli : ITool<Lli>
+        public readonly struct Obj2Yaml : ITool<Obj2Yaml>
         {
-            public ToolId Id => "lli";
+            public ToolId Id => Toolspace.obj2yaml;
         }
 
         [Cmd]
-        public struct LliCmd : IToolCmd<LliCmd,Lli>
+        public struct Obj2YamlCmd : IToolCmd<Obj2YamlCmd,Obj2Yaml>
         {
 
         }

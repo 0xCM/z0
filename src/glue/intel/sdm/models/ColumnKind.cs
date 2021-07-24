@@ -34,6 +34,18 @@ namespace Z0.Asm
 
             [Symbol("Description")]
             Description,
+
+            [Symbol("Operand 1")]
+            Op1,
+
+            [Symbol("Operand 2")]
+            Op2,
+
+            [Symbol("Operand 3")]
+            Op3,
+
+            [Symbol("Operand 4")]
+            Op4
         }
     }
 }

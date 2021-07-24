@@ -12,7 +12,7 @@ namespace Z0.Tools
     using static ValueTypes;
 
     [ApiHost]
-    public readonly partial struct LlvmValues
+    public readonly struct LlvmValues
     {
         [MethodImpl(Inline), Op]
         internal static StringAddress name(string src)

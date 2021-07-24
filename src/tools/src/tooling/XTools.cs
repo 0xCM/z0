@@ -14,9 +14,5 @@ namespace Z0
         [Op]
         public static MsDocPipe MsDocs(this IWfRuntime wf)
             => Svc.MsDocPipe.create(wf);
-
-        [Op]
-        public static LlvmAssetCatalog LlvmAssets(this IWfRuntime wf)
-            => Svc.LlvmAssetCatalog.create(wf);
     }
 }

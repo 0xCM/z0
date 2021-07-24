@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public class NasmCatalog : AppService<NasmCatalog>
     {
-        AsmWorkspace Workspace;
+        AsmWs Workspace;
 
         protected override void Initialized()
         {

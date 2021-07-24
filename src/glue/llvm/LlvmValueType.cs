@@ -13,11 +13,11 @@ namespace Z0
 
         public const byte FieldCount = 4;
 
-        public StringAddress Name;
+        public string Name;
 
         public ushort Width;
 
-        public StringAddress Description;
+        public string Description;
 
         public bool Emit;
     }

@@ -11,16 +11,18 @@ namespace Z0
     using static Root;
     using static core;
 
+    using B = ByteBlock8;
+
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock8 : IDataBlock<ByteBlock8>
+    public struct ByteBlock8 : IDataBlock<B>
     {
-        public const ushort Size = Pow2.T03;
+        public const ushort Size = 8;
 
         public static N8 N => default;
 
-        ByteBlock4 A;
+        ByteBlock7 A;
 
-        ByteBlock4 B;
+        ByteBlock1 B;
 
         public Span<byte> Bytes
         {
@@ -40,14 +42,13 @@ namespace Z0
                 => recover<T>(Bytes);
 
         [MethodImpl(Inline)]
-        public static implicit operator ByteBlock8(ulong src)
-            => @as<ulong,ByteBlock8>(src);
+        public static implicit operator B(ulong src)
+            => @as<ulong,B>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ulong(ByteBlock8 src)
-            => @as<ByteBlock8,ulong>(src);
+        public static implicit operator ulong(B src)
+            => @as<B,ulong>(src);
 
-        public static ByteBlock8 Empty => default;
-
+        public static B Empty => default;
     }
 }

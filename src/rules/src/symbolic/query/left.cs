@@ -13,6 +13,15 @@ namespace Z0
     partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> left(ReadOnlySpan<char> src, int index)
+        {
+            if(index < src.Length)
+                return slice(src, 0, index);
+            else
+                return default;
+        }
+
+        [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCode> left(ReadOnlySpan<AsciCode> src, int index)
         {
             if(index < src.Length)
@@ -26,24 +35,6 @@ namespace Z0
         {
             if(index < src.Length)
                 return slice(src, 0, index);
-            else
-                return default;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciCode> right(ReadOnlySpan<AsciCode> src, int index)
-        {
-            if(index < src.Length - 1)
-                return slice(src, index + 1);
-            else
-                return default;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<AsciSymbol> right(ReadOnlySpan<AsciSymbol> src, int index)
-        {
-            if(index < src.Length - 1)
-                return slice(src, index + 1);
             else
                 return default;
         }

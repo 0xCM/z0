@@ -31,7 +31,7 @@ namespace Z0.Asm
 
         DocServices DocServices;
 
-        AsmWorkspace Workspace;
+        AsmWs Workspace;
 
         CharMapper CharMapper;
 

@@ -11,25 +11,18 @@ namespace Z0.Tools
     using static core;
 
     [ApiHost]
-    public sealed class LlvmAssetCatalog : AppService<LlvmAssetCatalog>
+    public sealed class LlvmTooling : AppService<LlvmTooling>
     {
-        LlvmAssets _Assets;
-
-        public LlvmAssetCatalog()
+        public LlvmTooling()
         {
-            _Assets = LlvmAssets.create();
-        }
 
-        sealed class LlvmAssets : Assets<LlvmAssets>
-        {
-            public Asset LlvmValueTypes() => Asset("ValueTypes-Fixed.csv");
         }
-
 
         public ReadOnlySpan<LlvmValueType> ValueTypes()
         {
             const byte FieldCount = LlvmValueType.FieldCount;
-            var outcome = TextGrids.resource(_Assets.LlvmValueTypes(), out var doc);
+            var path = FS.FilePath.Empty;
+            var outcome = TextGrids.load(path, out var doc);
             if(outcome.Fail)
             {
                 Wf.Error(outcome.Message);

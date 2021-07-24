@@ -8,11 +8,15 @@ namespace Z0
     public static class XWs
     {
        [Op]
-       public static AsmWorkspace AsmWs(this IEnvProvider provider)
-            => Z0.AsmWorkspace.create(provider.Env.AsmWs);
+       public static AsmWs AsmWs(this IEnvProvider provider)
+            => Z0.AsmWs.create(provider.Env.AsmWs);
 
        [Op]
-       public static Workspaces DevWs(this IEnvProvider provider)
-            => Z0.Workspaces.dev(provider);
+       public static DevWs DevWs(this IEnvProvider provider)
+            => Z0.DevWs.create(provider.Env.DevWs);
+
+        [Op]
+        public static ProjectWs ProjectBase(this IServiceContext context, FS.FolderPath root)
+            => ProjectWs.create(root);
     }
 }

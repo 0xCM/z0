@@ -75,5 +75,9 @@ namespace Z0
         [Op]
         public static XedTableParser XedTableParser(this IWfRuntime wf)
             => Tools.XedTableParser.create(wf);
+
+        [Op]
+        public static LlvmTooling Llvm(this IWfRuntime wf)
+            => LlvmTooling.create(wf);
     }
 }

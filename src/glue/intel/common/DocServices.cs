@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public class DocServices : AppService<DocServices>
     {
-        AsmWorkspace Workspace;
+        AsmWs Workspace;
 
         public DocServices()
         {

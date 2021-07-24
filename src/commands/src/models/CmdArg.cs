@@ -11,14 +11,14 @@ namespace Z0
 
     public readonly struct CmdArg
     {
-        public ushort Index {get;}
+        public uint Index {get;}
 
         public string Name {get;}
 
         public string Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(ushort index, string value)
+        public CmdArg(uint index, string value)
         {
             Index = index;
             Value = value;
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(ushort index, string name, string value)
+        public CmdArg(uint index, string name, string value)
         {
             Index = index;
             Value = value;

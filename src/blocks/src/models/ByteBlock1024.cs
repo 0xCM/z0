@@ -11,10 +11,12 @@ namespace Z0
     using static Root;
     using static core;
 
+    using B = ByteBlock1024;
+
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock1024 : IDataBlock<ByteBlock1024>
+    public struct ByteBlock1024 : IDataBlock<B>
     {
-        public const ushort Size = Pow2.T10;
+        public const ushort Size = 1024;
 
         ByteBlock512 A;
 

@@ -11,13 +11,15 @@ namespace Z0
     using static Root;
     using static core;
 
+    using B = ByteBlock64;
+
     /// <summary>
     /// Covers 64 bytes of storage
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock64 : IDataBlock<ByteBlock64>
+    public struct ByteBlock64 : IDataBlock<B>
     {
-        public const ushort Size = Pow2.T06;
+        public const ushort Size = 64;
 
         ByteBlock32 A;
 
@@ -47,6 +49,6 @@ namespace Z0
             where T : unmanaged
                 => recover<T>(Bytes);
 
-        public static ByteBlock64 Empty => default;
+        public static B Empty => default;
     }
 }

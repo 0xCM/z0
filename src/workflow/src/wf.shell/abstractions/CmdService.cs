@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -46,12 +45,18 @@ namespace Z0
             {
                 if(input.IsNonEmpty)
                 {
-                    Witness.LogStatus(input.Format());
+                    Witness.LogStatus(string.Format("cmd> {0}",input.Format()));
                     Dispatch(input);
                 }
 
                 input = Next();
             }
+        }
+
+        protected void Out(string data)
+        {
+            Witness.LogStatus(string.Format("out> {0}", data));
+            Write(data);
         }
 
         public Outcome Dispatch(CmdSpec cmd)

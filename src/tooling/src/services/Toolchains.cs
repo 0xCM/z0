@@ -9,8 +9,7 @@ namespace Z0
 
     public readonly struct Toolchains
     {
-
-
+        public static ToolchainRule rule(ToolId tool, FS.FilePath src, CmdArgs args, FS.FilePath dst)
+            => new ToolchainRule(tool,src,args,dst);
     }
-
 }

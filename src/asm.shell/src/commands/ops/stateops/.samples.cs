@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".samples")]
         Outcome ToolSamples(CmdArgs args)
         {
-            Files(State.ToolBase().Samples(arg(args,0).Value).AllFiles);
+            Files(State.Tools().Samples(arg(args,0).Value).AllFiles);
             return true;
         }
     }

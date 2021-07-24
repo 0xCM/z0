@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         Identifier RoutineName;
 
-        AsmWorkspace AsmWs;
+        AsmWs AsmWs;
 
         ScriptRunner ScriptRunner;
 
@@ -26,6 +26,8 @@ namespace Z0.Asm
         ShellState State;
 
         IApiPack ApiPack;
+
+        DevWs DevWs;
 
         public AsmCmdService()
         {
@@ -38,16 +40,11 @@ namespace Z0.Asm
 
         protected override void Initialized()
         {
-            AsmWs = Wf.AsmWs();
+            DevWs = Wf.DevWs();
+            AsmWs = DevWs.Asm();
             ScriptRunner = Wf.ScriptRunner();
             ApiPack = Wf.ApiPacks().Current();
-            State.WsRoot(Wf.Env.DevWs);
-            State.OutDir(State.OutRoot(FS.dir("j:/ws/.out")));
-            State.ToolBase(Wf.ToolBase(Db.ToolWs()));
-            State.ProjectBase(Wf.ProjectBase(FS.dir("j:/projects")));
-            State.Project("default");
-            State.Tables(Db.DevWs() + FS.folder("tables"));
-            State.Workspace(Wf.AsmWs());
+            State.DevWs(DevWs);
         }
 
         protected override void Disposing()
@@ -58,20 +55,29 @@ namespace Z0.Asm
         Workspace WsDefine(Scope scope)
             => new Workspace(Wf.Env.DevWs + FS.folder(scope.Name));
 
-        Workspace ImportWs()
-            => WsDefine(WsScopes.imports);
+        IWorkspace ImportWs()
+            => DevWs.Imports();
 
-        Workspace GenWs()
-            => WsDefine(WsScopes.gen);
+        IWorkspace GenWs()
+            => DevWs.Gen();
 
-        Workspace LogWs()
-            => WsDefine(WsScopes.logs);
+        IWorkspace OutWs()
+            => DevWs.Output();
 
-        Workspace TableWs()
-            => WsDefine(WsScopes.tables);
+        IWorkspace LogWs()
+            => DevWs.Logs();
 
-        Workspace SourcesWs()
-            => WsDefine(WsScopes.sources);
+        ToolWs Tools()
+            => DevWs.Tools();
+
+        TableWs TableWs()
+            => DevWs.Tables();
+
+        IWorkspace SourcesWs()
+            => DevWs.Sources();
+
+        ProjectWs Projects()
+            => DevWs.Projects();
 
         FS.Files Files(FS.FileExt ext)
             => State.Files().Where(f => f.Is(ext));

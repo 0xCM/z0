@@ -10,11 +10,9 @@ namespace Z0
     }
 
     public interface IWorkspace<T> : IWorkspace
-        where T : IWorkspace<T>, new()
+        where T : IWorkspace<T>
     {
-        FS.FolderPath WsRoot();
-
-        FS.FolderPath WsRoot(FS.FolderPath src);
+        FS.FolderPath WsRoot() => Root;
 
         Identifier IWorkspace.Name
             => WsRoot().FolderName.Format();

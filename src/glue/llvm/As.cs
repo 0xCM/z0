@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using System;
-
     partial struct Llvm
     {
         [Tool]
         public readonly struct As : ITool<As>
         {
-            public ToolId Id => ToolNames.@as;
+            public ToolId Id => Toolspace.llvm_as;
         }
 
         [Cmd]

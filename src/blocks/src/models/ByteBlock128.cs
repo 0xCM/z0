@@ -11,13 +11,15 @@ namespace Z0
     using static Root;
     using static core;
 
+    using B = ByteBlock128;
+
     /// <summary>
     /// Covers 128 bytes = 1024 bits of stack-allocated storage
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock128 : IDataBlock<ByteBlock128>
+    public struct ByteBlock128 : IDataBlock<B>
     {
-        public const ushort Size = Pow2.T07;
+        public const ushort Size = 128;
 
         ByteBlock64 A;
 
@@ -40,6 +42,6 @@ namespace Z0
             where T : unmanaged
                 => recover<T>(Bytes);
 
-        public static ByteBlock128 Empty => default;
+        public static B Empty => default;
    }
 }

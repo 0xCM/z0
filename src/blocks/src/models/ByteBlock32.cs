@@ -7,17 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Root;
     using static core;
+
+    using B = ByteBlock32;
 
     /// <summary>
     /// Covers 32 bytes = 256 bits of stack-allocated storage
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock32 : IDataBlock<ByteBlock32>
+    public struct ByteBlock32 : IDataBlock<B>
     {
-        public const ushort Size = Pow2.T05;
+        public const ushort Size = 32;
 
         public static N32 N => default;
 
@@ -54,6 +57,18 @@ namespace Z0
             where T : unmanaged
                 => recover<T>(Bytes);
 
-        public static ByteBlock32 Empty => default;
+       [MethodImpl(Inline)]
+        public static implicit operator Vector256<byte>(B src)
+            => vcore.vload(default(W256), src.Bytes);
+
+        [MethodImpl(Inline)]
+        public static implicit operator B(Vector256<byte> src)
+        {
+            var dst = Empty;
+            vcore.vstore(src, dst.Bytes);
+            return dst;
+        }
+
+        public static B Empty => default;
     }
 }

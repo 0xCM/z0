@@ -4,18 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using System;
-
     partial struct Llvm
     {
         [Tool]
-        public readonly struct PdbToYaml : ITool<PdbToYaml>
+        public struct TblGen : ITool<TblGen>
         {
-            public ToolId Id => ToolNames.pdb2yaml;
+            public ToolId Id => Toolspace.llvm_tblgen;
         }
 
         [Cmd]
-        public struct PdbToYamlCmd : IToolCmd<PdbToYamlCmd,PdbToYaml>
+        public struct TableGenCmd : IToolCmd<TableGenCmd,TblGen>
         {
 
         }

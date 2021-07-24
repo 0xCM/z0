@@ -48,7 +48,7 @@ namespace Z0.Asm
 
             var tool = Toolspace.dumpbin;
             var outdir = ToolOutDir(args, tool);
-            var cmd = Cmd.cmdline(State.ToolBase().Script(tool, script).Format(PathSeparator.BS));
+            var cmd = Cmd.cmdline(State.Tools().Script(tool, script).Format(PathSeparator.BS));
             var input = State.Files().View;
             var count = input.Length;
             for(var i=0; i<count; i++)

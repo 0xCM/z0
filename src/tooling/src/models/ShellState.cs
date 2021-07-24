@@ -14,15 +14,7 @@ namespace Z0
     {
         FS.FolderPath _SrcDir;
 
-        FS.FolderPath _DstDir;
-
-        ToolBase _ToolBase;
-
-        TableArchive _Tables;
-
         ToolId _Tool;
-
-        ProjectBase _ProjectBase;
 
         ProjectId _Project;
 
@@ -32,44 +24,17 @@ namespace Z0
 
         ApiPath _Api;
 
-        FS.FolderPath _OutRoot;
+        DevWs _DevWs;
 
-        IWorkspace _Workspace;
-
-        FS.FolderPath _WsRoot;
-
-        [MethodImpl(Inline)]
-        public FS.FolderPath WsRoot()
-            => _WsRoot;
-
-        [MethodImpl(Inline)]
-        public FS.FolderPath WsRoot(FS.FolderPath src)
+        public DevWs DevWs()
         {
-            _WsRoot = src;
-            return WsRoot();
+            return _DevWs;
         }
 
-
-        [MethodImpl(Inline)]
-        public IWorkspace Workspace()
-            => _Workspace;
-
-        [MethodImpl(Inline)]
-        public IWorkspace Workspace(IWorkspace ws)
+        public DevWs DevWs(DevWs ws)
         {
-            _Workspace = ws;
-            return Workspace();
-        }
-
-        [MethodImpl(Inline)]
-        public FS.FolderPath OutRoot()
-            => _OutRoot;
-
-        [MethodImpl(Inline)]
-        public FS.FolderPath OutRoot(FS.FolderPath src)
-        {
-            _OutRoot = src;
-            return OutRoot();
+            _DevWs = ws;
+            return DevWs();
         }
 
         [MethodImpl(Inline)]
@@ -110,15 +75,8 @@ namespace Z0
             => _Project;
 
         [MethodImpl(Inline)]
-        public ToolBase ToolBase()
-            => _ToolBase;
-
-        [MethodImpl(Inline)]
-        public ToolBase ToolBase(ToolBase src)
-        {
-            _ToolBase = src;
-            return ToolBase();
-        }
+        public ToolWs Tools()
+            => DevWs().Tools();
 
         [MethodImpl(Inline)]
         public ProjectId Project(ProjectId id)
@@ -128,15 +86,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProjectBase Projects()
-            => _ProjectBase;
-
-        [MethodImpl(Inline)]
-        public ProjectBase ProjectBase(ProjectBase src)
-        {
-            _ProjectBase = src;
-            return Projects();
-        }
+        public ProjectWs Projects()
+            => DevWs().Projects();
 
         [MethodImpl(Inline)]
         public FS.FolderPath SrcDir()
@@ -144,20 +95,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public FS.FolderPath OutDir()
-            => _DstDir;
+            => DevWs().Output().Root;
 
         [MethodImpl(Inline)]
         public FS.FolderPath SrcDir(FS.FolderPath value)
         {
             _SrcDir = value;
             return SrcDir();
-        }
-
-        [MethodImpl(Inline)]
-        public FS.FolderPath OutDir(FS.FolderPath value)
-        {
-            _DstDir = value;
-            return OutDir();
         }
 
         [MethodImpl(Inline)]
@@ -172,22 +116,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public TableArchive Tables()
-            => _Tables;
-
-        [MethodImpl(Inline)]
-        public TableArchive Tables(FS.FolderPath root)
-        {
-            _Tables = TableArchive.create(root);
-            return Tables();
-        }
+        public TableWs Tables()
+            => DevWs().Tables();
 
         public ShellState()
         {
             _SrcDir = FS.FolderPath.Empty;
-            _DstDir = FS.FolderPath.Empty;
-            _OutRoot = FS.FolderPath.Empty;
-            _WsRoot = FS.FolderPath.Empty;
             _Tool = default;
             _DataSource = FS.FilePath.Empty;
             _Files = array<FS.FilePath>();
@@ -195,9 +129,9 @@ namespace Z0
         }
 
         public FS.FolderPath ToolOutDir(ToolId tool)
-            => OutDir() + FS.folder(tool.Format());
+            => DevWs().Output().Subdir(tool.Format());
 
         public FS.FolderPath OutDir(string id)
-            => OutDir(OutRoot() + FS.folder(id));
+            => DevWs().Output().Subdir(id);
     }
 }

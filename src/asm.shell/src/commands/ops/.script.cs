@@ -15,7 +15,7 @@ namespace Z0.Asm
         public Outcome Script(CmdArgs args)
         {
             var tool = args.IsNonEmpty ? (ToolId)arg(args,0).Value : State.Tool();
-            var tools = State.ToolBase();
+            var tools = State.Tools();
             if(tool.IsEmpty)
                 return (false, NoToolSelected.Format());
 

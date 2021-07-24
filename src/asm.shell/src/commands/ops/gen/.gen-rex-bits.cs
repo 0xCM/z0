@@ -32,7 +32,7 @@ namespace Z0.Asm
             const byte CellWidth = 8;
             const uint CellCount = 256;
             Span<char> buffer = stackalloc char[CellWidth];
-            var dst = GenWs().WsRoot() + FS.file("bitseq", FS.Cs);
+            var dst = GenWs().Root + FS.file("bitseq", FS.Cs);
             var flow = EmittingFile(dst);
             using var writer = dst.AsciWriter();
             writer.WriteLine("    public readonly struct GeneratedBits");

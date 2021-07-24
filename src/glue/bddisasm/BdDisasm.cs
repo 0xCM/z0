@@ -15,7 +15,7 @@ namespace Z0.Tools
     [ApiHost]
     public sealed partial class BdDisasm : Tool<BdDisasm, BdDisasmCmd>, IAsmTool
     {
-        public AsmWorkspace Workspace {get; private set;}
+        public AsmWs Workspace {get; private set;}
 
         public FS.FilePath ToolPath {get; set;}
 
@@ -27,7 +27,7 @@ namespace Z0.Tools
 
         protected override void Initialized()
         {
-            Workspace = AsmWorkspace.create(Env.AsmWs);
+            Workspace = AsmWs.create(Env.AsmWs);
             ToolPath = Workspace.ToolPath(Toolspace.bddiasm);
         }
 

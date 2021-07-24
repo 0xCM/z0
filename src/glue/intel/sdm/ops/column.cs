@@ -21,8 +21,8 @@ namespace Z0.Asm
         {
             var kinds = Symbols.index<ColumnKind>();
             var result = kinds.Lookup(label.Trim(), out var sym);
-            var kind = result ? sym.Kind : ColumnKind.None;
-            return column(label, label);
+            var kind = result ? sym.Expr.Format() : string.Format("!{0}!", label);
+            return column(label, kind);
         }
 
         public static Index<TableColumn> columns(ReadOnlySpan<string> src)

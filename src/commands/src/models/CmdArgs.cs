@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct CmdArgs : IIndex<CmdArg>
     {
-        readonly Index<ushort,CmdArg> Data;
+        readonly Index<CmdArg> Data;
 
         [MethodImpl(Inline)]
         public CmdArgs(CmdArg[] src)
@@ -19,10 +19,10 @@ namespace Z0
             Data = src;
         }
 
-        public ushort Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => (ushort)Data.Count;
+            get => Data.Count;
         }
 
         public ref CmdArg this[ushort i]

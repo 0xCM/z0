@@ -13,7 +13,7 @@ namespace Z0.Asm
             if(tool.IsEmpty)
                 return (false, NoToolSelected.Format());
 
-            var dir = State.ToolBase().Scripts(tool);
+            var dir = State.Tools().Scripts(tool);
             var files = Pipe(dir.AllFiles.View);
             return true;
         }

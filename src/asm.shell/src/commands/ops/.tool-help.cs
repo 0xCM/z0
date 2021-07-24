@@ -10,7 +10,7 @@ namespace Z0.Asm
         Outcome ToolHelp(CmdArgs args)
         {
             var tool = (ToolId)arg(args,0).Value;
-            var @base = State.ToolBase();
+            var @base = State.Tools();
             var path = @base.Docs(tool) + FS.file(tool.Format(), FS.Help);
             if(path.Exists)
             {

@@ -84,7 +84,7 @@ namespace Z0.Asm
                     {
                         cols = IntelSdm.columns(labels);
                         table.WithColumns(cols);
-                        Write(text.intersperse(labels, Chars.Pipe));
+                        Write(text.intersperse(cols.Select(x => x.Format()), Chars.Pipe));
                         parsingrows = true;
                     }
                 }

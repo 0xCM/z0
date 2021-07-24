@@ -21,6 +21,34 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [Op]
+        public static Outcome parse(string src, out ToolConfig dst)
+        {
+            dst = default;
+            var result = Outcome.Success;
+            var lines = Lines.read(src);
+            if(lines.Length < ToolConfig.FieldCount)
+                return (false, Tables.FieldCountMismatch.Format(ToolConfig.FieldCount, lines.Length));
+
+            var i=0;
+            DataParser.block(skip(lines, i++).Content, out dst.ToolGroup);
+            DataParser.parse(skip(lines, i++).Content, out dst.ToolId);
+            DataParser.parse(skip(lines, i++).Content, out dst.ToolExe);
+            DataParser.parse(skip(lines, i++).Content, out dst.InstallBase);
+
+            DataParser.parse(skip(lines, i++).Content, out dst.ToolPath);
+            DataParser.parse(skip(lines, i++).Content, out dst.ToolHome);
+            DataParser.parse(skip(lines, i++).Content, out dst.ToolLogs);
+            DataParser.parse(skip(lines, i++).Content, out dst.ToolDocs);
+
+            DataParser.parse(skip(lines, i++).Content, out dst.ToolScripts);
+            DataParser.parse(skip(lines, i++).Content, out dst.ToolConfigLog);
+            DataParser.parse(skip(lines, i++).Content, out dst.ToolCmdLog);
+            DataParser.parse(skip(lines, i++).Content, out dst.ToolRunLog);
+
+            return result;
+        }
+
+        [Op]
         public static ToolCmdSpec spec(FS.FilePath path, params ToolCmdArg[] args)
         {
             var dst = new ToolCmdSpec();
@@ -56,31 +84,31 @@ namespace Z0
             return dst.ToArray();
         }
 
-        [Op]
-        public static ref CmdRuleInfo rule(IEnvPaths paths, ref CmdRuleInfo data)
-        {
-            data.CmdRoot = paths.ToolExeRoot() +  data.CmdRootName;
-            data.CmdName = FS.file(data.CmdHost.Format(), data.ScriptType);
-            data.CmdOutName = FS.file(string.Format("{0}.{1}", data.CmdHost, data.CmdArgName), FS.Log);
-            data.CmdOutDir = paths.ToolOutDir(data.CmdHost);
-            data.CmdOutPath = data.CmdOutDir + FS.file(data.CmdHost);
-            data.ToolArgs = string.Format("{0}{0}", data.ArgPrefix, data.CmdArgName);
-            data.CmdPath = data.CmdRoot + FS.file(data.CmdHost.Format(), data.ScriptType);
-            data.CmdExecSpec = string.Format("{0} {1}", data.CmdPath, data.ToolArgs);
-            return ref data;
-        }
+        // [Op]
+        // public static ref CmdRuleInfo rule(IEnvPaths paths, ref CmdRuleInfo data)
+        // {
+        //     data.CmdRoot = paths.ToolExeRoot() +  data.CmdRootName;
+        //     data.CmdName = FS.file(data.CmdHost.Format(), data.ScriptType);
+        //     data.CmdOutName = FS.file(string.Format("{0}.{1}", data.CmdHost, data.CmdArgName), FS.Log);
+        //     data.CmdOutDir = paths.ToolOutDir(data.CmdHost);
+        //     data.CmdOutPath = data.CmdOutDir + FS.file(data.CmdHost);
+        //     data.ToolArgs = string.Format("{0}{0}", data.ArgPrefix, data.CmdArgName);
+        //     data.CmdPath = data.CmdRoot + FS.file(data.CmdHost.Format(), data.ScriptType);
+        //     data.CmdExecSpec = string.Format("{0} {1}", data.CmdPath, data.ToolArgs);
+        //     return ref data;
+        // }
 
-        [Op]
-        public static ref CmdRuleInfo rule(IEnvPaths paths, ref CmdRuleInfo data,
-            string root = null, string name = null, string arg = null, ArgPrefix? prefix = null, string type = null)
-        {
-            data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);
-            data.CmdArgName = arg == null ? data.CmdArgName : (Name)arg;
-            data.ArgPrefix = prefix != null ? prefix.Value: data.ArgPrefix;
-            data.ScriptType = type == null ? data.ScriptType : FS.ext(type);
-            rule(paths, ref data);
-            return ref data;
-        }
+        // [Op]
+        // public static ref CmdRuleInfo rule(IEnvPaths paths, ref CmdRuleInfo data,
+        //     string root = null, string name = null, string arg = null, ArgPrefix? prefix = null, string type = null)
+        // {
+        //     data.CmdRootName = root == null ? data.CmdRootName : FS.folder(root);
+        //     data.CmdArgName = arg == null ? data.CmdArgName : (Name)arg;
+        //     data.ArgPrefix = prefix != null ? prefix.Value: data.ArgPrefix;
+        //     data.ScriptType = type == null ? data.ScriptType : FS.ext(type);
+        //     rule(paths, ref data);
+        //     return ref data;
+        // }
 
         [Op, Closures(UInt64k)]
         public static ToolExecSpec untype<T>(in T spec)

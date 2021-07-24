@@ -4,17 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using System;
-
     partial struct Llvm
     {
-        public readonly struct ToolNames
+        [Tool]
+        public readonly struct Lli : ITool<Lli>
         {
-            public const string @as = "llvm-as";
+            public ToolId Id => Toolspace.llvm_lli;
+        }
 
-            public const string tblgen = "llvm-tblgen";
+        [Cmd]
+        public struct LliCmd : IToolCmd<LliCmd,Lli>
+        {
 
-            public const string pdb2yaml = "pdb2yaml";
         }
     }
 }

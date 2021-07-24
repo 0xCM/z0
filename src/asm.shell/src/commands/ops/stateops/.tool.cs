@@ -17,7 +17,7 @@ namespace Z0.Asm
             else
             {
                 ToolId id = arg(args,0).Value;
-                var dir = State.ToolBase().Home(id);
+                var dir = State.Tools().Home(id);
                 outcome = dir.Exists;
                 if(outcome)
                 {

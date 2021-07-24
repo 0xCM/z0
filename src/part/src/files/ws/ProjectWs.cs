@@ -11,8 +11,12 @@ namespace Z0
     using static Root;
     using static core;
 
-    public sealed class ProjectBase : Service<ProjectBase>, IFileArchive
+    public sealed class ProjectWs : IWorkspace<ProjectWs>
     {
+        [MethodImpl(Inline)]
+        public static ProjectWs create(FS.FolderPath root)
+            => new ProjectWs(root);
+
         const string docs = nameof(docs);
 
         const string logs = ".logs";
@@ -25,14 +29,18 @@ namespace Z0
 
         public FS.FolderPath Root {get; private set;}
 
+        public Identifier Name
+        {
+            [MethodImpl(Inline)]
+            get => "projects";
+        }
+
         Dictionary<ProjectId,ProjectConfig> ConfigLookup;
 
-        IRecordFormatter<ProjectConfig> ConfigFormatter;
-
-        public ProjectBase()
+        public ProjectWs(FS.FolderPath root)
         {
+            Root = root;
             ConfigLookup = dict<ProjectId,ProjectConfig>();
-            ConfigFormatter = Tables.formatter<ProjectConfig>();
         }
 
         public FS.FolderPath Home(ProjectId id)
@@ -80,11 +88,9 @@ namespace Z0
         public void Configure(ProjectId id, in ProjectConfig src)
             => ConfigLookup[id] = src;
 
-        [MethodImpl(Inline)]
-        internal ProjectBase WithRoot(FS.FolderPath root)
+        public FS.FolderPath WsRoot()
         {
-            Root = root;
-            return this;
+            return Root;
         }
     }
 }

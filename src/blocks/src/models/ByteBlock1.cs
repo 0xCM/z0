@@ -11,12 +11,14 @@ namespace Z0
     using static Root;
     using static core;
 
-    [StructLayout(LayoutKind.Sequential, Pack =1)]
-    public struct ByteBlock1 : IDataBlock<ByteBlock1>
+    using B = ByteBlock1;
+
+    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
+    public struct ByteBlock1 : IDataBlock<B>
     {
         public static N1 N => default;
 
-        public const ushort Size = Pow2.T00;
+        public const ushort Size = 1;
 
         byte A;
 
@@ -32,11 +34,13 @@ namespace Z0
                 => recover<T>(Bytes);
 
         [MethodImpl(Inline)]
-        public static implicit operator ByteBlock1(byte src)
-            => @as<uint,ByteBlock1>(src);
+        public static implicit operator B(byte src)
+            => @as<uint,B>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(ByteBlock1 src)
-            => @as<ByteBlock1,byte>(src);
+        public static implicit operator byte(B src)
+            => @as<B,byte>(src);
+
+        public static B Empty => default;
     }
 }

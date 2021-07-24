@@ -11,10 +11,12 @@ namespace Z0
     using static Root;
     using static core;
 
+    using B = ByteBlock4096;
+
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock4096 : IDataBlock<ByteBlock4096>
+    public struct ByteBlock4096 : IDataBlock<B>
     {
-        public const ushort Size = Pow2.T12;
+        public const ushort Size = 4096;
 
         ByteBlock2048 A;
 
@@ -41,5 +43,7 @@ namespace Z0
         public ReadOnlySpan<T> View<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        public static B Empty => default;
    }
 }

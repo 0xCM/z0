@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     public class AsmDataPipes : AppService<AsmDataPipes>
     {
-        AsmWorkspace Workspace;
+        AsmWs Workspace;
 
         protected override void Initialized()
         {

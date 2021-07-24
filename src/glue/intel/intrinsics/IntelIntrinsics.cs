@@ -18,7 +18,7 @@ namespace Z0.Asm
     {
         const string dataset = "intrinsics";
 
-        AsmWorkspace Workspace;
+        AsmWs Workspace;
 
         protected override void Initialized()
         {

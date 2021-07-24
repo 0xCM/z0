@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         XedChipIsaParser ChipIsaParser;
 
-        AsmWorkspace Workspace;
+        AsmWs Workspace;
 
         XedParser SourceParser;
 

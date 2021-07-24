@@ -4,13 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
-
-    using static Root;
-    using static core;
-
     public class DotNet : AppService<DotNet>
     {
         public void DumpImages(byte major = 3, byte minor = 1, byte revision = 12)
