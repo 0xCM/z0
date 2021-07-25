@@ -12,7 +12,7 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public readonly struct Fsm
@@ -365,7 +365,7 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         [MethodImpl(Inline)]
-        public static FsmObserver<E,S> observer<E,S>(Fsm<E,S> fsm, ObserverTrace? tracing = null)
+        public static FsmObserver<E,S> observer<E,S>(Fsm<E,S> fsm, FsmTrace? tracing = null)
             => new FsmObserver<E,S>(fsm, tracing);
 
         /// <summary>
@@ -383,7 +383,7 @@ namespace Z0
             try
             {
                 var random = machine.Random;
-                var o = Fsm.observer(machine, ObserverTrace.Completions | ObserverTrace.Errors);
+                var o = Fsm.observer(machine, FsmTrace.Completions | FsmTrace.Errors);
                 var events = machine.Triggers.ToArray();
                 var domain = Intervals.closed(0, events.Length);
                 var eventstream = random.Stream(domain).Select(i => events[i]);

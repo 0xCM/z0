@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Represents an line offset label
     /// </summary>
-    public readonly struct AsmOffsetLabel : ITextual
+    public readonly struct AsmOffsetLabel : IAsmOffsetLabel
     {
         const ulong OffsetMask = 0xFF_FF_FF_FF_FF_FF_FF;
 
@@ -24,6 +24,12 @@ namespace Z0.Asm
         public AsmOffsetLabel(byte width, ulong offset)
         {
             Data = ((ulong)width << Cut) | (offset & OffsetMask);
+        }
+
+        public AsmLinePart TokenKind
+        {
+            [MethodImpl(Inline)]
+            get => AsmLinePart.OffsetLabel;
         }
 
         public ulong OffsetValue

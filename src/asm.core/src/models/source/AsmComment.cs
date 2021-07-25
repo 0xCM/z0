@@ -9,13 +9,19 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmComment : ISyntaxPart<AsmComment>
+    public readonly struct AsmComment : IAsmLineToken, ISyntaxPart<AsmComment>
     {
         public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
         public AsmComment(TextBlock text)
             => Content = text;
+
+        public AsmLinePart TokenKind
+        {
+            [MethodImpl(Inline)]
+            get => AsmLinePart.Comment;
+        }
 
         [MethodImpl(Inline)]
         public string Format()

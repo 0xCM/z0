@@ -9,9 +9,15 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmExpr : IEquatable<AsmExpr>
+    public readonly struct AsmExpr : IAsmLineToken, IEquatable<AsmExpr>
     {
         public TextBlock Content {get;}
+
+        public AsmLinePart TokenKind
+        {
+            [MethodImpl(Inline)]
+            get => AsmLinePart.Statement;
+        }
 
         const sbyte DefaultPadding = -46;
 
@@ -62,14 +68,17 @@ namespace Z0.Asm
 
         public bool IsValid
         {
+            [MethodImpl(Inline)]
             get => IsNonEmpty && !Content.Text.StartsWith("(bad)");
         }
 
         public bool IsInvalid
         {
+            [MethodImpl(Inline)]
             get => IsEmpty || Content.Text.StartsWith("(bad)");
         }
 
+        [MethodImpl(Inline)]
         public int CompareTo(AsmExpr src)
             => Content.CompareTo(src.Content);
 

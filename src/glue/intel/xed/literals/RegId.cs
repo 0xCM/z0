@@ -578,8 +578,6 @@ namespace Z0
 
             ZMM31,
 
-            LAST,
-
             [AsmPseudoReg]
             BNDCFG_FIRST=BNDCFGU,
 

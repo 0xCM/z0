@@ -10,7 +10,6 @@ namespace Z0.Tools
 
     using static core;
     using static Root;
-    using static SymbolicTools;
 
     [ApiHost]
     public sealed partial class BdDisasm : Tool<BdDisasm, BdDisasmCmd>, IAsmTool

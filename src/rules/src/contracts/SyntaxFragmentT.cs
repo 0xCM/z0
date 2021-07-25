@@ -39,5 +39,4 @@ namespace Z0
         public static implicit operator SyntaxFragment(SyntaxFragment<T> src)
             => new SyntaxFragment(src.Location, src.Format());
     }
-
 }

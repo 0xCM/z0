@@ -48,16 +48,16 @@ namespace Z0.Asm
             return outcome;
         }
 
-        public static Outcome parse(in AsciLine src, out AsmLabel label, out AsmExpr expr)
+        public static Outcome parse(in AsciLine src, out AsmBlockLabel label, out AsmExpr expr)
         {
-            label = AsmLabel.Empty;
+            label = AsmBlockLabel.Empty;
             var content = src.Content;
             var i = SQ.index(content, AsciCode.Colon);
             if(i < 0)
                 return false;
 
-            label = new AsmLabel(SR.format(SQ.left(content, i)).Trim());
-            expr = SR.format(SQ.right(content, i)).Trim();
+            label = new AsmBlockLabel(SR.format(SQ.left(content, i)).Trim());
+            expr = SR.format(SQ.right(content, i)).Replace(Chars.Tab,Chars.Space).Trim();
 
             return true;
         }

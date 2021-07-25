@@ -12,7 +12,7 @@ namespace Z0.Asm
         Outcome Stringtable(CmdArgs args)
         {
             var result = Outcome.Success;
-            var path = Sources().Path("strings", arg(args,0).Value, FS.Txt);
+            var path = SouceWs().Path("strings", arg(args,0).Value, FS.Txt);
             var input = path.ReadLines().View;
             var name = path.FileName.WithoutExtension.Format();
             var table = StringTables.create<byte>(name, input);

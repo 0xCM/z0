@@ -41,16 +41,21 @@ namespace Z0.Asm
                         AsmBitstrings.format(src.Encoded)
                         );
 
+        public static string format(AsmBlockLabel src)
+        {
+            return src.Name.IsEmpty ? EmptyString : string.Format("{0}:", src.Name);
+        }
+
         [Op]
         public static string format(AsmOffsetLabel src)
         {
-            const string LabelPattern = "{0}:";
+            const string LabelPattern = "{0}h ";
             var width = src.OffsetWidth;
             var value = src.OffsetValue;
             var f = EmptyString;
-            if(width <= 8)
-                f = HexFormat.format(w8,(byte)value);
-            else if(width <= 16)
+            // if(width <= 8)
+            //     f = HexFormat.format(w8,(byte)value);
+            if(width <= 16)
                 f = HexFormat.format(w16,(ushort)value);
             else if(width <= 32)
                 f = HexFormat.format(w32,(uint)value);

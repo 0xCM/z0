@@ -17,6 +17,12 @@ namespace Z0.Asm
         public AsmLabel(Identifier name)
             => Name = name;
 
+        public AsmLinePart TokenKind
+        {
+            [MethodImpl(Inline)]
+            get => AsmLinePart.Label;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

@@ -2,13 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System;
-
-    public interface IDfaState<S>
-        where S : IEquatable<S>
+    public interface IAsmLineToken : ITextual
     {
-        S Value {get;}
+        AsmLinePart TokenKind {get;}
     }
 }

@@ -4,7 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmCmdService
+    public interface IAsmOffsetLabel : IAsmLineToken
     {
+        ulong OffsetValue {get;}
+
+        byte OffsetWidth {get;}
     }
 }

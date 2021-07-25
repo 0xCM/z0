@@ -17,9 +17,8 @@ namespace Z0.Asm
                 spec = string.Format("dir {0}\\{1} /s/b", location.Format(PathSeparator.BS), arg(args,1));
             else
                 spec = string.Format("dir {0} /s/b", location.Format(PathSeparator.BS));
-            var cmd = WinCmd.cmd(spec);
-            var runner = Wf.CmdLineRunner();
-            var response = runner.Run(cmd);
+
+            var response = RunWinCmd(spec);
             var count = response.Length;
             var paths = alloc<FS.FilePath>(count);
             for(var i=0; i<count; i++)

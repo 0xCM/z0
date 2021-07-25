@@ -51,9 +51,7 @@ namespace Z0.Asm
             {
                 result = ApiParsers.part(arg(args,0).Value, out var part);
                 if(result)
-                {
                     files = (archive.StatementRoot() + FS.folder(part.Format())).Files(FS.Csv);
-                }
             }
 
             var count = files.Length;
@@ -61,7 +59,6 @@ namespace Z0.Asm
             if(result && files.Length != 0)
             {
                 ref readonly var src = ref first(files);
-
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var file = ref skip(src,i);

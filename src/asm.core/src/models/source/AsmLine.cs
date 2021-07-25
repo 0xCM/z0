@@ -9,17 +9,17 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly ref struct AsmLine
+    public readonly struct AsmLine
     {
-        public AsciLine Data {get;}
-
-        public AsmLinePart Parts {get;}
+        public Index<IAsmLineToken> Tokens {get;}
 
         [MethodImpl(Inline), Op]
-        public AsmLine(AsciLine src, AsmLinePart parts)
+        public AsmLine(Index<IAsmLineToken> src)
         {
-            Data = src;
-            Parts = parts;
+            Tokens = src;
         }
+
+        public string Format()
+            => string.Concat(Tokens.Select(x => x.Format()));
     }
 }

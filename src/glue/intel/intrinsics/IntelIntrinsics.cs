@@ -98,7 +98,6 @@ namespace Z0.Asm
                 if(writer == null)
                     writer = unknown;
 
-                //writer.WriteLine(sig(intrinsic));
                 writer.WriteLine(buffer.Emit());
             }
 
@@ -120,21 +119,6 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 writer.WriteLine(string.Format("{0};", sig(skip(src,i))));
             Wf.EmittedFile(flow, count);
-        }
-
-        static bool instruction(Intrinsic src, out Instruction dst)
-        {
-            var instructions = src.instructions;
-            if(instructions.Count!=0)
-            {
-                dst = instructions[0];
-                return true;
-            }
-            else
-            {
-                dst = default;
-                return false;
-            }
         }
 
         void Summarize(ReadOnlySpan<Intrinsic> src, List<IntelIntrinsic> dst)
@@ -238,6 +222,21 @@ namespace Z0.Asm
             return slice(span(entries),0,i).ToArray();
         }
 
+        static bool instruction(Intrinsic src, out Instruction dst)
+        {
+            var instructions = src.instructions;
+            if(instructions.Count!=0)
+            {
+                dst = instructions[0];
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
         static void read(XmlReader reader, ref Operation dst)
         {
             var content = reader.ReadInnerXml().Replace(XmlEntities.gt, ">").Replace(XmlEntities.lt, "<");
@@ -309,26 +308,25 @@ namespace Z0.Asm
             return dst;
         }
 
-        internal static void render(Operation src, ITextBuffer dst)
+        static void render(Operation src, ITextBuffer dst)
         {
             if(src.Content != null)
                 iter(src.Content, x => dst.AppendLine("  " + x.Content));
         }
 
-        internal static string format(Instruction src)
+        static string format(Instruction src)
              => string.Format("# Instruction: {0} {1}\r\n", src.name, src.form) + string.Format("# Iform: {0}", src.xed);
 
-        internal static void render(Instructions src, ITextBuffer dst)
+        static void render(Instructions src, ITextBuffer dst)
             => iter(src, x => dst.AppendLine(format(x)));
 
-        internal static string sig(Intrinsic src)
+        static string sig(Intrinsic src)
             => string.Format("{0} {1}({2})", src.@return,  src.name,  string.Join(", ", src.parameters.ToArray()));
 
-        internal static void sig(Intrinsic src, ITextBuffer dst)
+        static void sig(Intrinsic src, ITextBuffer dst)
             => dst.AppendLine(sig(src));
 
-
-        internal static void body(Intrinsic src, ITextBuffer dst)
+        static void body(Intrinsic src, ITextBuffer dst)
         {
             dst.AppendLine("{");
             render(src.operation, dst);
@@ -344,7 +342,7 @@ namespace Z0.Asm
             return dst.Emit();
         }
 
-        internal static void overview(Intrinsic src, ITextBuffer dst)
+        static void overview(Intrinsic src, ITextBuffer dst)
         {
             dst.AppendLine(string.Format("# Intrinsic: {0}", sig(src)));
 

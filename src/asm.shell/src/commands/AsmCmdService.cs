@@ -73,7 +73,7 @@ namespace Z0.Asm
         IWorkspace TableWs()
             => Ws.Tables();
 
-        IWorkspace Sources()
+        IWorkspace SouceWs()
             => Ws.Sources();
 
         ProjectWs Projects()
@@ -120,6 +120,9 @@ namespace Z0.Asm
             }
             return ref src;
         }
+
+        ReadOnlySpan<TextLine> RunWinCmd(string spec)
+            => Wf.CmdLineRunner().Run(WinCmd.cmd(spec));
 
         static MsgPattern NoToolSelected => "No tool selected";
 

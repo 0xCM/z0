@@ -15,7 +15,7 @@ namespace Z0
     {
         readonly Fsm<E,S> Machine;
 
-        readonly ObserverTrace Tracing;
+        readonly FsmTrace Tracing;
 
         readonly int ReceiptEmitRate;
 
@@ -27,14 +27,14 @@ namespace Z0
 
         ulong ReceiptCount;
 
-        public FsmObserver(Fsm<E,S> machine, ObserverTrace? tracing = null, int? receiptEmitRate = null)
+        public FsmObserver(Fsm<E,S> machine, FsmTrace? tracing = null, int? receiptEmitRate = null)
         {
             Machine = machine;
             machine.Transitioned += OnTransition;
             machine.Oops += OnError;
             machine.InputReceipt += OnReceipt;
             machine.Completed += OnComplete;
-            Tracing = tracing  ?? ObserverTrace.All;
+            Tracing = tracing  ?? FsmTrace.All;
             ReceiptEmitRate = receiptEmitRate ?? (int)Pow2.T20;
             TransitionCount = 0;
             CompletionCount = 0;

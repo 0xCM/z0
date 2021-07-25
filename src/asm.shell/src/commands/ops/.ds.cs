@@ -10,7 +10,7 @@ namespace Z0.Asm
         Outcome Ds(CmdArgs args)
         {
             if(args.Count != 0)
-                State.DataSource(Sources().Root + FS.file(arg(args,0).Value));
+                State.DataSource(SouceWs().Root + FS.file(arg(args,0).Value));
             Write(State.DataSource());
             return true;
         }

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     class FsmContext : IFsmContext
     {
         public IPolyrand Random {get;}

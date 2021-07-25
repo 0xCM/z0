@@ -36,7 +36,6 @@ namespace Z0.Asm
                         Status(string.Format("Emitted {0}", outpath.Format()));
                         output.Add(outpath);
                     }
-
                 }
             }
 

@@ -20,8 +20,6 @@ namespace Z0
 
             [Symbol("SUPPRESSED", "Part of the opcode, but not typically listed as an operand")]
             SUPPRESSED,
-
-            LAST
         }
     }
 }

@@ -5,108 +5,39 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static core;
-
-    using P = AsmLinePart;
-
-    public enum AsmLinePart : byte
+    [Flags]
+    public enum AsmLinePart : ushort
     {
         None = 0,
 
+        // iIdentifier:
+        BlockLabel = 1,
+
         // 0005h
-        OffsetLabel = 1,
+        OffsetLabel = 2,
 
         // mov rax,[rcx]
-        Statement = 2,
+        Statement = 4,
 
         // ; ...
-        Comment = 4,
+        Comment = 8,
 
-        CodeSize = 8,
+        CodeSize = 16,
 
         // 48 8b 01
-        HexCode = 16,
+        HexCode = 32,
 
         // MOV r64, r/m64
-        Sig = 32,
+        Sig = 64,
 
         // REX.W 8B /r
-        OpCode = 64,
+        OpCode = 128,
 
         // 0000 1010 ..
-        BitCode = 128,
-    }
+        BitCode = 256,
 
-    [ApiHost]
-    public readonly struct AsmLineParts
-    {
-        [Op]
-        public static ReadOnlySpan<AsmLinePart> parts(AsmLinePart src)
-        {
-            var storage = ByteBlock8.Empty;
-            var dst = recover<AsmLinePart>(storage.Bytes);
-            var i = 0;
-
-            if(OffsetLabel(src))
-                seek(dst,i++) = P.OffsetLabel;
-
-            if(Statement(src))
-                seek(dst,i++) = P.Statement;
-
-            if(Comment(src))
-                seek(dst,i++) = P.Comment;
-
-            if(CodeSize(src))
-                seek(dst,i++) = P.CodeSize;
-
-            if(HexCode(src))
-                seek(dst,i++) = P.HexCode;
-
-            if(Sig(src))
-                seek(dst,i++) = P.Sig;
-
-            if(OpCode(src))
-                seek(dst,i++) = P.OpCode;
-
-            if(BitCode(src))
-                seek(dst,i++) = P.BitCode;
-
-            return slice(dst,0,i);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static bit OffsetLabel(AsmLinePart src)
-            => (src & AsmLinePart.OffsetLabel) != 0;
-
-        [MethodImpl(Inline), Op]
-        public static bit Statement(AsmLinePart src)
-            => (src & AsmLinePart.Statement) != 0;
-
-        [MethodImpl(Inline), Op]
-        public static bit Comment(AsmLinePart src)
-            => (src & AsmLinePart.Comment) != 0;
-
-        [MethodImpl(Inline), Op]
-        public static bit CodeSize(AsmLinePart src)
-            => (src & AsmLinePart.CodeSize) != 0;
-
-        [MethodImpl(Inline), Op]
-        public static bit HexCode(AsmLinePart src)
-            => (src & AsmLinePart.HexCode) != 0;
-
-        [MethodImpl(Inline), Op]
-        public static bit Sig(AsmLinePart src)
-            => (src & AsmLinePart.Sig) != 0;
-
-        [MethodImpl(Inline), Op]
-        public static bit OpCode(AsmLinePart src)
-            => (src & AsmLinePart.OpCode) != 0;
-
-        [MethodImpl(Inline), Op]
-        public static bit BitCode(AsmLinePart src)
-            => (src & AsmLinePart.BitCode) != 0;
+        // A label of some sort
+        Label = 512,
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    using T = ObserverTrace;
+    using T = FsmTrace;
 
     public static class FsmX
     {
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="trace">The trace specification</param>
         [MethodImpl(Inline)]
-        public static bool TraceTransitions(this ObserverTrace trace)
+        public static bool TraceTransitions(this FsmTrace trace)
             => (trace & T.Transitions) == T.Transitions;
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="trace">The trace specification</param>
         [MethodImpl(Inline)]
-        public static bool TraceEvents(this ObserverTrace trace)
+        public static bool TraceEvents(this FsmTrace trace)
             => (trace & T.Events) == T.Events;
 
         /// <summary>
@@ -46,14 +46,14 @@ namespace Z0
         /// </summary>
         /// <param name="trace">The trace specification</param>
         [MethodImpl(Inline)]
-        public static bool TraceCompletions(this ObserverTrace trace)
+        public static bool TraceCompletions(this FsmTrace trace)
             => (trace & T.Completions) == T.Completions;
 
         /// <summary>
         /// Specifies whether an observer should be notified when an error condition is detected
         /// </summary>
         /// <param name="trace">The trace specification</param>
-        public static bool TraceErrors(this ObserverTrace trace)
+        public static bool TraceErrors(this FsmTrace trace)
             => (trace & T.Errors) == T.Errors;
     }
 }

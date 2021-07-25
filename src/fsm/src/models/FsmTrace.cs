@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [Flags]
-    public enum ObserverTrace
+    public enum FsmTrace
     {
         None = 0,
 
@@ -20,5 +20,5 @@ namespace Z0
         Errors = 8,
 
         All = Transitions | Events | Completions | Errors
-    } 
+    }
 }

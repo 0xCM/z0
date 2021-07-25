@@ -20,6 +20,12 @@ namespace Z0.Asm
         public AsmBlockLabel(Identifier name)
             => Name = name;
 
+        public AsmLinePart TokenKind
+        {
+            [MethodImpl(Inline)]
+            get => AsmLinePart.BlockLabel;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -33,7 +39,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            =>  Name.IsEmpty ? EmptyString : string.Format("{0}:", Name);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();
