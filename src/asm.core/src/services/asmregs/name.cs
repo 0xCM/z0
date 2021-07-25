@@ -8,16 +8,15 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static math;
 
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static RegOp reg(RegWidthCode width, RegClassCode @class, RegIndexCode r)
-            => new RegOp(or((byte)width, sll((ushort)@class, 5), sll((ushort)r, 10)));
+        public static RegName name(RegOp src)
+            => AsmRegNames.name(src);
 
         [MethodImpl(Inline), Op]
-        public static RegOp reg(RegKind kind)
-            => new RegOp((ushort)kind);
+        public static string format(RegName src)
+            => AsmRegNames.format(src);
     }
 }

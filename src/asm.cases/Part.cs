@@ -13,8 +13,6 @@ namespace Z0.Parts
 
 namespace Z0
 {
-    using Z0.Asm;
-
     [ApiHost]
     public static partial class XTend
     {

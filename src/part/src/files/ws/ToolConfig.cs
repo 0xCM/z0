@@ -15,12 +15,17 @@ namespace Z0
     {
         public const string TableId = "tool.config";
 
-        public const byte FieldCount = 12;
+        public const byte FieldCount = 15;
+
+        /// <summary>
+        /// The tool control base directory
+        /// </summary>
+        public FS.FolderPath Toolbase;
 
         /// <summary>
         /// The group to which the tool belongs, if any
         /// </summary>
-        public CharBlock16 ToolGroup;
+        public string ToolGroup;
 
         /// <summary>
         /// The tool identifier
@@ -68,13 +73,23 @@ namespace Z0
         public FS.FilePath ToolConfigLog;
 
         /// <summary>
+        /// The path to the tool execution log, typically {ToolLogs}/{ToolId}-run.log
+        /// </summary>
+        public FS.FilePath ToolRunLog;
+
+        /// <summary>
         /// The path to the tool command log, typically {ToolLogs}/{ToolId}-cmd.log
         /// </summary>
         public FS.FilePath ToolCmdLog;
 
         /// <summary>
-        /// The path to the tool execution log, typically {ToolLogs}/{ToolId}-run.log
+        /// The path to the primary tool help file, typically {ToolHome}/docs/{ToolId}.help
         /// </summary>
-        public FS.FilePath ToolRunLog;
+        public FS.FilePath ToolHelpPath;
+
+        /// <summary>
+        /// The path to the defalt tool output directory
+        /// </summary>
+        public FS.FilePath ToolOut;
     }
 }

@@ -75,7 +75,7 @@ namespace Z0
             => _Project;
 
         [MethodImpl(Inline)]
-        public ToolWs Tools()
+        public IToolWs Tools()
             => DevWs().Tools();
 
         [MethodImpl(Inline)]

@@ -14,7 +14,6 @@ namespace Z0.Asm
     [ApiComplete]
     public readonly ref partial struct AsmMachine
     {
-
         /// <summary>
         /// 88 / r | MOV r8,r8 | Move r8 to r8
         /// </summary>

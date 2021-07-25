@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    public readonly struct Disp<T>
+    public readonly struct Disp<T> : IDisplacement
         where T : unmanaged, IDisplacement<T>
     {
         public T Source {get;}
@@ -21,7 +21,7 @@ namespace Z0.Asm
             Source = src;
         }
 
-        public uint Base
+        public uint Value
         {
             [MethodImpl(Inline)]
             get => bw32(Source.Value);

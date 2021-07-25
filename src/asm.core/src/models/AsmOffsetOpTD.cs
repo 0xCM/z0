@@ -10,10 +10,11 @@ namespace Z0.Asm
     using static Root;
 
     /// <summary>
-    /// Represents an expression of the form BaseReg + IndexReg*Scale + Displacement
+    /// Represents an operand expression of the form BaseReg + IndexReg*Scale + Displacement
     /// </summary>
-    public readonly struct RegExpr<T>
+    public readonly struct AsmOffsetOp<T,D>
         where T : unmanaged, IRegOp
+        where D : unmanaged, IDisplacement
     {
         public T Base {get;}
 
@@ -21,15 +22,15 @@ namespace Z0.Asm
 
         public MemoryScale Scale {get;}
 
-        public uint Dx {get;}
+        public D Disp {get;}
 
         [MethodImpl(Inline)]
-        public RegExpr(T @base, T index, MemoryScale scale, uint dx)
+        public AsmOffsetOp(T @base, T index, MemoryScale scale, D disp)
         {
             Base = @base;
             Index = index;
             Scale = scale;
-            Dx = dx;
+            Disp = disp;
         }
 
         public string Format()

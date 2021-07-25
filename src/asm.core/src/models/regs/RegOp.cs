@@ -57,13 +57,17 @@ namespace Z0.Asm
         public RegName Name
         {
             [MethodImpl(Inline)]
-            get => AsmRegNames.name(this);
+            get => api.name(this);
         }
         public string Format()
-            => AsmRegNames.format(Name);
+            => api.format(Name);
 
 
         public override string ToString()
             =>  Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator RegOp(RegKind kind)
+            => new RegOp((ushort)kind);
     }
 }

@@ -11,8 +11,6 @@ namespace Z0.Asm
     {
         uint Value {get;}
 
-        //MemoryScale Scale {get;}
-
         byte Width {get;}
     }
 

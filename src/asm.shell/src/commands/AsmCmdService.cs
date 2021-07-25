@@ -67,7 +67,7 @@ namespace Z0.Asm
         IWorkspace LogWs()
             => Ws.Logs();
 
-        ToolWs Tools()
+        IToolWs ToolWs()
             => Ws.Tools();
 
         IWorkspace TableWs()

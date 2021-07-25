@@ -6,6 +6,10 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
+   <ItemGroup>
+    <EmbeddedResource Include="assets/**/*.*" />
+   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="$(Workflow)" />
     <ProjectReference Include="$(Dynamic)" />

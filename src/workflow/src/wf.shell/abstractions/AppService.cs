@@ -170,8 +170,12 @@ namespace Z0
         protected void Warn(string pattern, params object[] args)
             => Wf.Warn(string.Format(pattern,args));
 
-        protected void Write<T>(T content)
-            => Wf.Row(content);
+        protected void Write<T>(T content, bool emphasis = false)
+        {
+            if(emphasis)
+                Wf.RowStatus(content);
+            else Wf.Row(content);
+        }
 
         protected void RowStatus<T>(T content)
             => Wf.RowStatus(content);

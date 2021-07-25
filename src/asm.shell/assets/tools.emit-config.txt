@@ -1,0 +1,17 @@
+@echo off
+echo # tool.config=%ToolId% >> %ToolConfigLog%
+echo Toolbase:%Toolbase% >> %ToolConfigLog%
+echo ToolGroup:%ToolGroup% >> %ToolConfigLog%
+echo ToolId:%ToolId% >> %ToolConfigLog%
+echo ToolExe:%ToolExe% >> %ToolConfigLog%
+echo InstallBase:%InstallBase% >> %ToolConfigLog%
+echo ToolPath:%ToolPath% >> %ToolConfigLog%
+echo ToolHome:%ToolHome% >> %ToolConfigLog%
+echo ToolLogs:%ToolLogs% >> %ToolConfigLog%
+echo ToolDocs:%ToolDocs% >> %ToolConfigLog%
+echo ToolScripts:%ToolScripts% >> %ToolConfigLog%
+echo ToolConfigLog:%ToolConfigLog% >> %ToolConfigLog%
+echo ToolRunLog:%ToolRunLog% >> %ToolConfigLog%
+echo ToolCmdLog:%ToolCmdLog% >> %ToolConfigLog%
+echo ToolHelpPath:%ToolHelpPath% >> %ToolConfigLog%
+echo ToolOut:%ToolOut% >> %ToolConfigLog%

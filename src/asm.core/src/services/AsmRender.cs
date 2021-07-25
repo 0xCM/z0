@@ -72,8 +72,9 @@ namespace Z0.Asm
             return string.Format("{0}{1}", left, right);
         }
 
-        public static string format<T>(in RegExpr<T> src)
+        public static string format<T,D>(in AsmOffsetOp<T,D> src)
             where T : unmanaged, IRegOp
+            where D : unmanaged, IDisplacement
         {
             var dst = CharBlock32.Null.Data;
             var i=0u;
@@ -81,8 +82,26 @@ namespace Z0.Asm
             return text.format(dst, count);
         }
 
-        public static uint render<T>(in RegExpr<T> src, ref uint i, Span<char> dst)
+        public static string format<D>(in AsmOffsetOp<D> src)
+            where D : unmanaged, IDisplacement
+        {
+            var dst = CharBlock32.Null.Data;
+            var i=0u;
+            var count = render(src, ref i, dst);
+            return text.format(dst, count);
+        }
+
+        public static string format(in AsmOffsetOp src)
+        {
+            var dst = CharBlock32.Null.Data;
+            var i=0u;
+            var count = render(src, ref i, dst);
+            return text.format(dst, count);
+        }
+
+        public static uint render<D,T>(in AsmOffsetOp<T,D> src, ref uint i, Span<char> dst)
             where T : unmanaged, IRegOp
+            where D : unmanaged, IDisplacement
         {
             var i0 = i;
             var @base = src.Base.Format();
@@ -100,10 +119,65 @@ namespace Z0.Asm
                 }
             }
 
-            if(src.Dx != 0)
+            if(src.Disp.Value != 0)
             {
                 seek(dst,i++) = Chars.Plus;
-                copy(src.Dx.ToString("x") + "h", ref i, dst);
+                copy(src.Disp.Value.ToString("x") + "h", ref i, dst);
+            }
+
+            return i - i0;
+        }
+
+        public static uint render<D>(in AsmOffsetOp<D> src, ref uint i, Span<char> dst)
+            where D : unmanaged, IDisplacement
+        {
+            var i0 = i;
+            var @base = src.Base.Format();
+            var index = src.Index.Format();
+            copy(@base, ref i, dst);
+            var scale = src.Scale.Format();
+            if(src.Scale.IsNonZero)
+            {
+                seek(dst,i++) = Chars.Plus;
+                copy(index, ref i, dst);
+                if(src.Scale.IsNonUnital)
+                {
+                    seek(dst,i++) = Chars.Star;
+                    copy(scale,ref i, dst);
+                }
+            }
+
+            if(src.Disp.Value != 0)
+            {
+                seek(dst,i++) = Chars.Plus;
+                copy(src.Disp.Value.ToString("x") + "h", ref i, dst);
+            }
+
+            return i - i0;
+        }
+
+        public static uint render(in AsmOffsetOp src, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            var @base = src.Base.Format();
+            var index = src.Index.Format();
+            copy(@base, ref i, dst);
+            var scale = src.Scale.Format();
+            if(src.Scale.IsNonZero)
+            {
+                seek(dst,i++) = Chars.Plus;
+                copy(index, ref i, dst);
+                if(src.Scale.IsNonUnital)
+                {
+                    seek(dst,i++) = Chars.Star;
+                    copy(scale,ref i, dst);
+                }
+            }
+
+            if(src.Disp.Value != 0)
+            {
+                seek(dst,i++) = Chars.Plus;
+                copy(src.Disp.Value.ToString("x") + "h", ref i, dst);
             }
 
             return i - i0;

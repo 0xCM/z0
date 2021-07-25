@@ -62,21 +62,28 @@ namespace Z0
             if(lines.Length < ToolConfig.FieldCount)
                 return (false, Tables.FieldCountMismatch.Format(ToolConfig.FieldCount, lines.Length));
 
+
+
+            var settings = Settings.parse(slice(lines,1));
             var i=0;
-            DataParser.block(skip(lines, i++).Content, out dst.ToolGroup);
-            DataParser.parse(skip(lines, i++).Content, out dst.ToolId);
-            DataParser.parse(skip(lines, i++).Content, out dst.ToolExe);
-            DataParser.parse(skip(lines, i++).Content, out dst.InstallBase);
 
-            DataParser.parse(skip(lines, i++).Content, out dst.ToolPath);
-            DataParser.parse(skip(lines, i++).Content, out dst.ToolHome);
-            DataParser.parse(skip(lines, i++).Content, out dst.ToolLogs);
-            DataParser.parse(skip(lines, i++).Content, out dst.ToolDocs);
+            DataParser.parse(skip(settings, i++).Value, out dst.Toolbase);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolGroup);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolId);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolExe);
+            DataParser.parse(skip(settings, i++).Value, out dst.InstallBase);
 
-            DataParser.parse(skip(lines, i++).Content, out dst.ToolScripts);
-            DataParser.parse(skip(lines, i++).Content, out dst.ToolConfigLog);
-            DataParser.parse(skip(lines, i++).Content, out dst.ToolCmdLog);
-            DataParser.parse(skip(lines, i++).Content, out dst.ToolRunLog);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolPath);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolHome);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolLogs);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolDocs);
+
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolScripts);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolConfigLog);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolRunLog);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolCmdLog);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolHelpPath);
+            DataParser.parse(skip(settings, i++).Value, out dst.ToolOut);
 
             return result;
         }

@@ -32,8 +32,8 @@ namespace Z0
                 var j = SQ.index(content, Chars.Colon);
                 if(j > 0)
                 {
-                    var name = SQ.left(content, j).Format();
-                    var value = SQ.right(content, j).Format();
+                    var name = SQ.left(content, j).Format().Trim();
+                    var value = SQ.right(content, j).Format().Trim();
                     seek(dst,counter++) = Settings.setting(name,value);
                 }
             }

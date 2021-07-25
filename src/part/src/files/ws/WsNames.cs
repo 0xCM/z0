@@ -23,5 +23,13 @@ namespace Z0
         public const string gen = "gen";
 
         public const string control = "control";
+
+        public const string config = nameof(config);
+
+        public const string docs = nameof(docs);
+
+        public const string scripts = nameof(scripts);
+
+        public const string samples = nameof(samples);
     }
 }

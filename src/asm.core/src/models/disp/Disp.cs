@@ -14,7 +14,7 @@ namespace Z0.Asm
     /// Represents an 8-bit, 16-bit or 32-bit displacement
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack =1)]
-    public readonly struct Disp
+    public readonly struct Disp : IDisplacement
     {
         public uint Value {get;}
 

@@ -11,21 +11,11 @@ namespace Z0
     using static Root;
     using static core;
 
-    public sealed class ToolWs : IWorkspace<ToolWs>
+    public sealed class ToolWs : IToolWs, IWorkspace<ToolWs>
     {
         [MethodImpl(Inline)]
         public static ToolWs create(FS.FolderPath root)
             => new ToolWs(root);
-
-        const string config = nameof(config);
-
-        const string docs = nameof(docs);
-
-        const string logs = nameof(logs);
-
-        const string scripts = nameof(scripts);
-
-        const string samples = nameof(samples);
 
         public FS.FolderPath Root {get; private set;}
 
@@ -36,33 +26,6 @@ namespace Z0
             Root = root;
             ConfigLookup = dict<ToolId,ToolConfig>();
         }
-
-        public FS.FolderPath Home(ToolId id)
-            => Root + FS.folder(id.Format());
-
-        public FS.FolderPath Docs(ToolId id)
-            => Home(id) + FS.folder(docs);
-
-        public FS.FolderPath Logs(ToolId id)
-            => Home(id) + FS.folder(logs);
-
-        public FS.FolderPath Scripts(ToolId id)
-            => Home(id) + FS.folder(scripts);
-
-        public FS.FolderPath Samples(ToolId id)
-            => Home(id) + FS.folder(samples);
-
-        public FS.FilePath Script(string id)
-            => Root + FS.file(id,FS.Cmd);
-
-        public FS.FilePath Script(ToolId tool, string id)
-            => Scripts(tool) + FS.file(id,FS.Cmd);
-
-        public FS.FilePath ConfigScript(ToolId id)
-            => Home(id) + FS.file(config, FS.Cmd);
-
-        public FS.FilePath ConfigLog(ToolId id)
-            => Logs(id) + FS.file(config, FS.Log);
 
         public bool Settings(ToolId id, out ToolConfig dst)
             => ConfigLookup.TryGetValue(id, out dst);
