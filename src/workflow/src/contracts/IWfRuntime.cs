@@ -205,11 +205,7 @@ namespace Z0
         void Row<T>(T data)
             => Raise(EventFactory.data(data));
 
-        void Rows<T>(ReadOnlySpan<T> src)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                Raise(EventFactory.data(skip(src,i)));
-        }
+        void RowStatus<T>(T data)
+            => Raise(EventFactory.data(data, true));
     }
 }

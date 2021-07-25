@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using Z0.Tools;
 
-    using static Part;
+    using static Root;
     using static core;
     using static Toolspace;
 
@@ -89,7 +89,7 @@ namespace Z0.Asm
 
         public void ProccessCultFiles()
         {
-            Wf.CultProcessor().Run();
+            Wf.CultProcessor().Process();
         }
 
         void JitApiCatalog()

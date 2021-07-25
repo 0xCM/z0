@@ -9,8 +9,16 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        [CmdOp(".emit-pe-headers")]
+        Outcome EmitSectionHeaders(CmdArgs args)
+        {
+            var service = Wf.CliEmitter();
+            service.EmitSectionHeaders();
+            return true;
+        }
+
         [CmdOp(".dfa-states")]
-        public Outcome DfaStates(CmdArgs args)
+        Outcome DfaStates(CmdArgs args)
         {
             var width = arg(args,0).To8u();
             var domain = dfa.domain(width);
@@ -31,7 +39,7 @@ namespace Z0.Asm
         }
 
         [CmdOp(".dfa-symbols")]
-        public Outcome DfaSymbols(CmdArgs args)
+        Outcome DfaSymbols(CmdArgs args)
         {
             var store = dfa.symstore<string>(24);
             store.Deposit("abc", out var s1);

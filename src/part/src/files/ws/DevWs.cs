@@ -36,7 +36,7 @@ namespace Z0
         public ToolWs Tools()
             => ToolWs.create(_WsRoot + FS.folder(tools));
 
-        public TableWs Tables()
+        public IWorkspace Tables()
             => TableWs.create(_WsRoot + FS.folder(tables));
 
         public IWorkspace Control()

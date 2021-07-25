@@ -20,13 +20,22 @@ namespace Z0
 
         public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair => FlairKind.Data;
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
         public DataEvent(T data)
         {
             EventId = EventName;
             Payload = data;
+            Flair = FlairKind.Data;
+        }
+
+        [MethodImpl(Inline)]
+        public DataEvent(T data, FlairKind flair)
+        {
+            EventId = EventName;
+            Payload = data;
+            Flair = flair;
         }
 
         [MethodImpl(Inline)]

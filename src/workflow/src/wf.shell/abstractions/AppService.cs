@@ -173,6 +173,9 @@ namespace Z0
         protected void Write<T>(T content)
             => Wf.Row(content);
 
+        protected void RowStatus<T>(T content)
+            => Wf.RowStatus(content);
+
         protected void Write(ReadOnlySpan<char> src)
             => Wf.Row(new string(src));
 

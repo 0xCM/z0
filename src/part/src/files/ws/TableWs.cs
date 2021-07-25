@@ -17,7 +17,6 @@ namespace Z0
 
         FS.FolderPath _WsRoot;
 
-
         [MethodImpl(Inline)]
         TableWs(FS.FolderPath root)
         {
@@ -33,48 +32,24 @@ namespace Z0
         public FS.FolderPath WsRoot()
             => _WsRoot;
 
-        public FS.FolderPath WsRoot(FS.FolderPath src)
-        {
-            _WsRoot = src;
-            return WsRoot();
-        }
+        // public FS.FilePath Path(string id, FS.FileExt ext)
+        //     => Root + FS.file(id,ext);
 
-        public FS.FilePath Path(string id, FS.FileExt ext)
-            => Root + FS.file(id,ext);
+        // public FS.FilePath Table(Scope scope, TableId id)
+        //     => Subdir(scope) + TableName(id);
 
-        public FS.FilePath Path<T>(FS.FileExt ext)
-            where T : struct, IRecord<T>
-                => Path(TableId<T>().Format(), ext);
+        // public FS.FilePath Table<T>(Scope scope)
+        //     where T : struct
+        //         => Subdir(scope) + TableName<T>();
 
-        public FS.FilePath Path(Scope scope, TableId id)
-            => Subdir(scope) + Name(id);
+        // public FS.FileName TableName<T>()
+        //     where T : struct
+        //         => FS.file(Z0.TableId.identify<T>().Format(), FS.Csv);
 
-        public FS.FilePath Path(TableId id)
-            => Root + Name(id);
+        // public FS.FileName TableName(TableId id)
+        //     => FS.file(id.Format(), FS.Csv);
 
-        public FS.FilePath Path<T>()
-            where T : struct
-                => Path(TableId<T>().Format(), FS.Csv);
-
-        public FS.FilePath Path<T>(Scope scope)
-            where T : struct
-                => Subdir(scope) + Name<T>();
-
-        public FS.FileName Name<T>()
-            where T : struct
-                => FS.file(TableId<T>().Format(), FS.Csv);
-
-        public FS.FileName Name(TableId id)
-            => FS.file(id.Format(), FS.Csv);
-
-        public FS.FileName Name(TableId id, string suffix)
-            => FS.file(string.Format("{0}.{1}", id, suffix), FS.Csv);
-
-        TableId TableId<T>()
-            where T : struct
-                => Z0.TableId.identify<T>();
-
-        public FS.FolderPath Subdir(Scope scope)
-            => Root + FS.folder(scope.Format());
+        // public FS.FolderPath Subdir(Scope scope)
+        //     => Root + FS.folder(scope.Format());
     }
 }

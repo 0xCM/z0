@@ -18,11 +18,11 @@ namespace Z0.Asm
     {
         const string dataset = "intrinsics";
 
-        AsmWs Workspace;
+        DevWs Ws;
 
         protected override void Initialized()
         {
-            Workspace = Wf.AsmWs();
+            Ws = Wf.DevWs();
         }
 
         public ReadOnlySpan<Intrinsic> Emit()
@@ -37,7 +37,7 @@ namespace Z0.Asm
 
         XmlDoc XmlSouceDoc()
         {
-            var src = Workspace.DataSource(dataset) + FS.file("intel-intrinsics", FS.Xml);
+            var src = Ws.Sources().Subdir(dataset) + FS.file("intel-intrinsics", FS.Xml);
             return text.xml(src.ReadUtf8());
         }
 
@@ -47,7 +47,7 @@ namespace Z0.Asm
         void EmitLog(ReadOnlySpan<Intrinsic> src)
         {
             var count = src.Length;
-            var dst = Workspace.ImportDir(dataset) + FS.file(dataset, FS.Log);
+            var dst = Ws.Imports().Subdir(dataset) + FS.file(dataset, FS.Log);
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             for(var i=0; i<count; i++)
@@ -57,12 +57,12 @@ namespace Z0.Asm
 
         void EmitAlogrithms(ReadOnlySpan<Intrinsic> src)
         {
-            var dir = Workspace.ImportDir("intrinsics.alg");
+            var dir = Ws.Imports().Subdir("intrinsics.alg");
             dir.Clear();
             var count = src.Length;
 
-            var flow = Wf.Running(string.Format("Emitting algorithms for {0} intrinsics to {1}", count, dir));
-            using var unknown =  (dir + FS.file("None",FS.Alg)).Writer();
+            var flow = Wf.Running(Msg.EmittingAlgorithsm.Format(count, dir));
+            using var unknown =  (dir + FS.file("_None", FS.Alg)).Writer();
             var xed = IFormType.None;
             var writer = default(StreamWriter);
             var path = FS.FilePath.Empty;
@@ -71,6 +71,8 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var intrinsic = ref skip(src,i);
+                overview(intrinsic, buffer);
+                sig(intrinsic, buffer);
                 body(intrinsic, buffer);
                 if(instruction(intrinsic, out var ix) && ix.xed != 0)
                 {
@@ -96,7 +98,7 @@ namespace Z0.Asm
                 if(writer == null)
                     writer = unknown;
 
-                writer.WriteLine(sig(intrinsic));
+                //writer.WriteLine(sig(intrinsic));
                 writer.WriteLine(buffer.Emit());
             }
 
@@ -106,12 +108,12 @@ namespace Z0.Asm
                 writer.Dispose();
             }
 
-            Wf.Ran(flow, string.Format("Emitted {0} algoirthms", count));
+            Wf.Ran(flow, Msg.EmittedAlgorithms.Format(count));
         }
 
         void EmitHeader(ReadOnlySpan<Intrinsic> src)
         {
-            var dst = Workspace.ImportDir(dataset) + FS.file(dataset, FS.H);
+            var dst = Ws.Imports().Subdir(dataset) + FS.file(dataset, FS.H);
             var flow = Wf.EmittingFile(dst);
             var count = src.Length;
             using var writer = dst.Writer();
@@ -167,7 +169,7 @@ namespace Z0.Asm
 
         void EmitTable(ReadOnlySpan<Intrinsic> src)
         {
-            var dst = Workspace.ImportTable<IntelIntrinsic>();
+            var dst = Ws.Imports().Table<IntelIntrinsic>();
             var flow = Wf.EmittingTable<IntelIntrinsic>(dst);
             var rows = list<IntelIntrinsic>();
             Summarize(src, rows);
@@ -322,6 +324,10 @@ namespace Z0.Asm
         internal static string sig(Intrinsic src)
             => string.Format("{0} {1}({2})", src.@return,  src.name,  string.Join(", ", src.parameters.ToArray()));
 
+        internal static void sig(Intrinsic src, ITextBuffer dst)
+            => dst.AppendLine(sig(src));
+
+
         internal static void body(Intrinsic src, ITextBuffer dst)
         {
             dst.AppendLine("{");
@@ -333,6 +339,7 @@ namespace Z0.Asm
         {
             var dst = text.buffer();
             overview(src, dst);
+            dst.AppendLine(sig(src));
             body(src, dst);
             return dst.Emit();
         }

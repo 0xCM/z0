@@ -8,8 +8,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".show-env")]
-        Outcome ShowEnv(CmdArgs args)
+        [CmdOp(".show-env-vars")]
+        Outcome ShowEnvVars(CmdArgs args)
         {
             var vars = Z0.Env.vars();
             iter(vars, v => Write(v));

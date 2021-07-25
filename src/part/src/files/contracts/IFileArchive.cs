@@ -17,6 +17,8 @@ namespace Z0
         FS.FolderPath Subdir(string name)
             => Root + FS.folder(name);
 
+        FS.FolderPath Subdir(Scope scope)
+            => Root + FS.folder(scope.Format());
         string ITextual.Format()
             => Root.Format();
 
@@ -42,5 +44,44 @@ namespace Z0
         /// <param name="ext">The target extension</param>
         FS.FilePath Path(string id, FS.FileExt ext)
             => Root + FS.file(id,ext);
+
+        FS.FilePath Table(Scope scope, TableId id)
+            => Subdir(scope) + TableName(id);
+
+        FS.FilePath Table(Scope scope, TableId id, string suffix)
+            => Subdir(scope) + TableName(id,suffix);
+
+        FS.FilePath Table(TableId id)
+            => Root + TableName(id);
+
+        FS.FileName TableName(TableId id)
+            => FS.file(id.Format(), FS.Csv);
+
+        FS.FileName TableName(TableId id, string suffix)
+            => FS.file(string.Format("{0}.{1}", id, suffix), FS.Csv);
+
+        FS.FilePath Table<T>(FS.FileExt ext)
+            where T : struct, IRecord<T>
+                => Path(Z0.TableId.identify<T>().Format(), ext);
+
+        FS.FilePath Table<T>()
+            where T : struct
+                => Path(Z0.TableId.identify<T>().Format(), FS.Csv);
+
+        FS.FilePath Table<T>(Scope scope)
+            where T : struct
+                => Subdir(scope) + TableName<T>();
+
+        FS.FilePath Table<T>(Scope scope, string suffix)
+            where T : struct
+                => Subdir(scope) + TableName<T>(suffix);
+
+        FS.FileName TableName<T>()
+            where T : struct
+                => FS.file(Z0.TableId.identify<T>().Format(), FS.Csv);
+
+        FS.FileName TableName<T>(string suffix)
+            where T : struct
+                => TableName(Z0.TableId.identify<T>(), suffix);
     }
 }

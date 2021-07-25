@@ -116,7 +116,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public TableWs Tables()
+        public IWorkspace Tables()
             => DevWs().Tables();
 
         public ShellState()

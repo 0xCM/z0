@@ -30,7 +30,7 @@ namespace Z0.Asm
                 return (false, "Argument not supplied");
 
             var id = TableId.define(arg(args,0).Value);
-            var src = State.Tables().Path(AsmTableScopes.IntelSdm, id);
+            var src = State.Tables().Table(AsmTableScopes.IntelSdm, id);
             if(!src.Exists)
                 return (false, FS.missing(src));
 

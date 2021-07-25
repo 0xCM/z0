@@ -96,7 +96,7 @@ namespace Z0
             dst.RelocationDir = pe.BaseRelocationTableDirectory;
             dst.ImportAddressDir = pe.ImportAddressTableDirectory;
             dst.LoadConfigDir = pe.LoadConfigTableDirectory;
-            dst.DebugDir= pe.DebugTableDirectory;
+            dst.DebugDir = pe.DebugTableDirectory;
             dst.Characteristics = coff.Characteristics;
             return dst;
         }

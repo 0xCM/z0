@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".emit-intrinsics")]
+        [CmdOp(".import-intrinsics")]
         public Outcome ImportIntrinsics(CmdArgs args)
         {
             Wf.IntelIntrinsicsPipe().Emit();

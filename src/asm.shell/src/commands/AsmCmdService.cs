@@ -27,7 +27,7 @@ namespace Z0.Asm
 
         IApiPack ApiPack;
 
-        DevWs DevWs;
+        DevWs Ws;
 
         public AsmCmdService()
         {
@@ -40,11 +40,11 @@ namespace Z0.Asm
 
         protected override void Initialized()
         {
-            DevWs = Wf.DevWs();
-            AsmWs = DevWs.Asm();
+            Ws = Wf.DevWs();
+            AsmWs = Ws.Asm();
             ScriptRunner = Wf.ScriptRunner();
             ApiPack = Wf.ApiPacks().Current();
-            State.DevWs(DevWs);
+            State.DevWs(Ws);
         }
 
         protected override void Disposing()
@@ -56,28 +56,28 @@ namespace Z0.Asm
             => new Workspace(Wf.Env.DevWs + FS.folder(scope.Name));
 
         IWorkspace ImportWs()
-            => DevWs.Imports();
+            => Ws.Imports();
 
         IWorkspace GenWs()
-            => DevWs.Gen();
+            => Ws.Gen();
 
         IWorkspace OutWs()
-            => DevWs.Output();
+            => Ws.Output();
 
         IWorkspace LogWs()
-            => DevWs.Logs();
+            => Ws.Logs();
 
         ToolWs Tools()
-            => DevWs.Tools();
+            => Ws.Tools();
 
-        TableWs TableWs()
-            => DevWs.Tables();
+        IWorkspace TableWs()
+            => Ws.Tables();
 
         IWorkspace Sources()
-            => DevWs.Sources();
+            => Ws.Sources();
 
         ProjectWs Projects()
-            => DevWs.Projects();
+            => Ws.Projects();
 
         FS.Files Files(FS.FileExt ext)
             => State.Files().Where(f => f.Is(ext));
@@ -130,5 +130,7 @@ namespace Z0.Asm
         static MsgPattern<ToolId> UndefinedTool => "Undefined tool:{0}";
 
         static MsgPattern<ProjectId> UndefinedProject => "Undefined project:{0}";
+
+        static MsgPattern<Count,FS.FileUri> EmittedQueryResults => "Directed {0} query result rows to {1}";
     }
 }

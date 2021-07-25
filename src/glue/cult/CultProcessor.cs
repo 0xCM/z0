@@ -26,11 +26,13 @@ namespace Z0.Tools
 
         IHexParser2<byte> HexParser;
 
-        FS.FolderPath CatalogRoot;
+        FS.FolderPath TargetRoot;
 
         ToolId Tool;
 
         FS.FilePath InputFile;
+
+        DevWs Ws;
 
         public CultProcessor()
         {
@@ -44,24 +46,21 @@ namespace Z0.Tools
 
         protected override void OnInit()
         {
-            CatalogRoot = Db.CatalogDir("asm") + FS.folder(Tool.Format());
-            DetailRoot = CatalogRoot + FS.folder("details");
+            Ws = Wf.DevWs();
+            TargetRoot = Ws.Imports().Subdir(Tool);
+            DetailRoot = TargetRoot + FS.folder("details");
+            InputFile = Ws.Sources().Path(Tool.Format(), FS.Asm);
+            SummaryPath = TargetRoot + FS.file(Tool.Format() + ".summary", FS.Csv);
         }
 
-        public void Inject(in FS.FilePath context)
+        FS.FilePath SummaryPath;
+
+        public Outcome<uint> Process()
         {
-            InputFile = context;
+            return Process(InputFile);
         }
 
-        FS.FilePath SummaryPath
-            => CatalogRoot + FS.file(Tool.Format() + ".summary", FS.Csv);
-
-        public Outcome<uint> Run()
-        {
-            return Run(InputFile.IsEmpty ? Db.ToolOutput(Toolspace.cult, "cult", FS.Asm) : InputFile);
-        }
-
-        public Outcome<uint> Run(FS.FilePath src)
+        public Outcome<uint> Process(FS.FilePath src)
         {
             if(!src.Exists)
             {
@@ -69,9 +68,9 @@ namespace Z0.Tools
                 return 0;
             }
 
-            DetailRoot.Clear();
-            Summaries.Clear();
-            AsmLines.Clear();
+            // DetailRoot.Clear();
+             Summaries.Clear();
+             AsmLines.Clear();
 
             var output = span<CultRecord>(BatchSize);
             var input = span<TextLine>(BatchSize);

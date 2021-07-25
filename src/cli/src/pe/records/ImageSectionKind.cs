@@ -47,6 +47,5 @@ namespace Z0
             [Symbol(".cormeta")]
             ClrMetadata,
         }
-
     }
 }

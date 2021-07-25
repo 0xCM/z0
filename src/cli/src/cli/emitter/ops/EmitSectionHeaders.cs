@@ -40,9 +40,6 @@ namespace Z0
             writer.WriteLine(formatter.FormatHeader());
             foreach(var file in src)
             {
-                if(!Cli.valid(file))
-                    continue;
-
                 using var reader = PeReader.create(file);
                 var headers = reader.ReadHeaderInfo();
                 var count = headers.Length;

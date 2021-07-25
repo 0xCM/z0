@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.IO;
-    using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
@@ -21,24 +19,18 @@ namespace Z0.Asm
 
         XedChipIsaParser ChipIsaParser;
 
-        AsmWs Workspace;
-
-        XedParser SourceParser;
-
-        XedDataSource Source;
-
         FS.FolderPath XedTables;
 
         FS.FolderPath XedSources;
 
+        DevWs Ws;
+
         protected override void OnInit()
         {
             ChipIsaParser = XedChipIsaParser.create(Wf);
-            Workspace = Wf.AsmWs();
-            SourceParser = XedParser.Service;
-            Source = new XedDataSource(Workspace.DataSource("xed.rules"));
-            XedTables = Wf.Env.DevWs + FS.folder("tables") + FS.folder("intel.xed");
-            XedSources = Wf.Env.DevWs + FS.folder("sources") + FS.folder("xed");
+            Ws = Wf.DevWs();
+            XedTables = Ws.Tables().Subdir("intel.xed");
+            XedSources = Ws.Sources().Subdir("xed");
         }
 
         public void EmitCatalog()
@@ -297,7 +289,7 @@ namespace Z0.Asm
         public ReadOnlySpan<XedFormImport> LoadFormImports()
         {
             var parser = XedFormImportParser.create();
-            var src = Workspace.ImportTable<XedFormImport>();
+            var src = Ws.Tables().Table<XedFormImport>("intel.xed");
             var counter = 0u;
             var outcome = Outcome.Success;
             var dst = list<XedFormImport>();

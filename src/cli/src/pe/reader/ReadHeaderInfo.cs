@@ -13,29 +13,27 @@ namespace Z0
     {
         public ReadOnlySpan<SectionHeaderInfo> ReadHeaderInfo()
         {
-            var dst = list<SectionHeaderInfo>();
-
-            if(PE.HasMetadata)
+            var headers = PeHeaders;
+            var pe = headers.PEHeader;
+            var sections = SectionHeaders;
+            var count = sections.Length;
+            var buffer = alloc<SectionHeaderInfo>(count);
+            ref var target = ref first(buffer);
+            for(var i=0; i<count; i++)
             {
-                var headers = PeHeaders;
-                var sections = SectionHeaders;
-
-                foreach(var section in sections)
-                {
-                    var record = default(SectionHeaderInfo);
-                    record.File = Source.FileName;
-                    record.EntryPoint = (Address32)headers.PEHeader.AddressOfEntryPoint;
-                    record.CodeBase = (Address32)headers.PEHeader.BaseOfCode;
-                    record.GptRva = (Address32)headers.PEHeader.GlobalPointerTableDirectory.RelativeVirtualAddress;
-                    record.GptSize = (ByteSize)headers.PEHeader.GlobalPointerTableDirectory.Size;
-                    record.SectionAspects = section.SectionCharacteristics;
-                    record.SectionName = section.Name;
-                    record.RawDataAddress = (Address32)section.PointerToRawData;
-                    record.RawDataSize = (uint)section.SizeOfRawData;
-                    dst.Add(record);
-                }
+                ref readonly var section = ref skip(sections,i);
+                ref var record = ref seek(target,i);
+                record.File = Source.FileName;
+                record.EntryPoint = (Address32)pe.AddressOfEntryPoint;
+                record.CodeBase = (Address32)pe.BaseOfCode;
+                record.GptRva = (Address32)pe.GlobalPointerTableDirectory.RelativeVirtualAddress;
+                record.GptSize = (ByteSize)pe.GlobalPointerTableDirectory.Size;
+                record.SectionAspects = section.SectionCharacteristics;
+                record.SectionName = section.Name;
+                record.RawDataAddress = (Address32)section.PointerToRawData;
+                record.RawDataSize = (uint)section.SizeOfRawData;
             }
-            return dst.ViewDeposited();
+            return buffer;
         }
     }
 }

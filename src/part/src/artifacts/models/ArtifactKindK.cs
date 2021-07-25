@@ -9,23 +9,28 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Artifact<K,T>
+    /// <summary>
+    /// Defines an artifact classifier
+    /// </summary>
+    public readonly struct ArtifactKind<K> : IArtifactKind<K>
         where K : unmanaged
-        where T : unmanaged
     {
         public K Kind {get;}
 
-        public T Locator {get;}
-
         [MethodImpl(Inline)]
-        public Artifact(K kind, T locator)
+        public ArtifactKind(K kind)
         {
             Kind = kind;
-            Locator = locator;
         }
 
+        public string Format()
+            => Kind.ToString();
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
-        public static implicit operator Artifact<K,T>((K kind, T locator) src)
-            => new Artifact<K,T>(src.kind, src.locator);
+        public static implicit operator ArtifactKind<K>(K kind)
+            => new ArtifactKind<K>(kind);
     }
 }

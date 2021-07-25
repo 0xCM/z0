@@ -67,7 +67,7 @@ namespace Z0
                     Wf.ApiAssets().EmitAssetContent();
 
                 if(options.ProcessCultFiles)
-                    Wf.CultProcessor().Run();
+                    Wf.CultProcessor().Process();
 
                 var cli = Wf.CliEmitter();
                 if(options.EmitAssemblyRefs)

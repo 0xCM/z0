@@ -33,5 +33,6 @@ namespace Z0
         Processed = ConsoleColor.Magenta,
 
         Data = ConsoleColor.DarkGray,
+        StatusData = ConsoleColor.Cyan,
     }
 }
