@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-
     public abstract class StateMachine<S,T> : IDisposable
     {
         protected S State;
@@ -39,12 +38,5 @@ namespace Z0.Asm
         {
 
         }
-    }
-
-
-    public readonly struct StateMachines
-    {
-
-
     }
 }

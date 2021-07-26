@@ -8,8 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmMem;
-    using static Regs;
+    using static MemModels;
+    using static RegModels;
+    using static CpuModels;
 
     [ApiComplete]
     public readonly ref partial struct AsmMachine

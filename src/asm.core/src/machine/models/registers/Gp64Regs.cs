@@ -1,0 +1,44 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0.Asm
+{
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static Cells;
+    using static core;
+
+    partial struct RegModels
+    {
+        public readonly struct Gp64Regs
+        {
+            readonly RegAlloc Alloc;
+
+            [MethodImpl(Inline)]
+            internal Gp64Regs(RegAlloc src)
+                => Alloc = src;
+
+            [MethodImpl(Inline)]
+            public ref Cell8 r8(RegIndexCode i)
+                => ref lo8(r64(i));
+
+            [MethodImpl(Inline)]
+            public ref Cell16 r16(RegIndexCode i)
+                => ref lo16(r64(i));
+
+            [MethodImpl(Inline)]
+            public ref Cell32 r32(RegIndexCode i)
+                => ref lo32(r64(i));
+
+            [MethodImpl(Inline)]
+            public ref Cell64 r64(RegIndexCode i)
+            {
+                var address = Alloc.RegAddress((byte)i);
+                var data = cover<Cell64>(address,1);
+                return ref first(data);
+            }
+        }
+    }
+}

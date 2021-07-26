@@ -8,11 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    public readonly struct StackMachines
+    partial struct CpuModels
     {
-        [MethodImpl(Inline)]
-        public static StackMachine create(uint capacity)
-            => new StackMachine(capacity);
     }
 }

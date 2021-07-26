@@ -4,15 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
-    using static Root;
-
-    public readonly struct StackMachines
+    public readonly partial struct FunctionModels
     {
-        [MethodImpl(Inline)]
-        public static StackMachine create(uint capacity)
-            => new StackMachine(capacity);
+
     }
 }

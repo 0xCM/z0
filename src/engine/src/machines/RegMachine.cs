@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
+    using static RegModels;
+
     public sealed class RegMachine : StateMachine<RegBank>
     {
         internal RegMachine(RegBank bank)
