@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IAsmLabel : IAsmLineToken, ITextual, INullity
+    public interface IAsmLabel : ITextual, INullity
     {
         Identifier Name {get;}
     }

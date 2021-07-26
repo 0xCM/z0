@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Root;
     using static XedModels;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]

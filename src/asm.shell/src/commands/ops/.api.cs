@@ -20,9 +20,9 @@ namespace Z0.Asm
                 if(i > 0)
                 {
                     var components = input.Split(Chars.FSlash);
-                    result = ApiParsers.part(text.left(input,i), out part);
+                    result = ApiParsers.part(text.left(input, i), out part);
                     if(result)
-                        path = ApiPath.define(part, text.right(input,i));
+                        path = ApiPath.define(part, text.right(input, i));
                 }
                 else
                 {
@@ -45,6 +45,5 @@ namespace Z0.Asm
 
             return result;
         }
-
     }
 }

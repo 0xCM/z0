@@ -16,13 +16,15 @@ namespace Z0
 
         readonly Index<TableColumn> _Cols;
 
+        public uint Kind {get;}
+
         [MethodImpl(Inline)]
-        public Table(TableColumn[] cols, TableRow[] rows)
+        public Table(uint kind, TableColumn[] cols, TableRow[] rows)
         {
+            Kind = kind;
             Data = rows;
             _Cols = cols;
         }
-
 
         public Span<TableRow> Rows
         {

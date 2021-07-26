@@ -18,11 +18,11 @@ namespace Z0
 
         public const string imports = "imports";
 
-        public const string logs = "logs";
+        public const string logs = nameof(logs);
 
         public const string gen = "gen";
 
-        public const string control = "control";
+        public const string control = nameof(control);
 
         public const string config = nameof(config);
 
@@ -31,5 +31,9 @@ namespace Z0
         public const string scripts = nameof(scripts);
 
         public const string samples = nameof(samples);
+
+        public const string inventory = nameof(inventory);
+
+        public const string dumps = nameof(dumps);
     }
 }

@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using static Root;
     using static core;
+    using static WsNames;
 
     partial class AsmCmdService
     {
@@ -49,7 +50,7 @@ namespace Z0.Asm
             var tool = Toolspace.dumpbin;
             var project = State.Project();
             var rootdir = ToolOutDir(args, tool);
-            var outdir = project.IsNonEmpty ? rootdir + FS.folder(project.Format()) : rootdir;
+            var outdir = ProjectOutDir(dumps);
             var cmd = Cmd.cmdline(State.Tools().Script(tool, script).Format(PathSeparator.BS));
             var input = State.Files().View;
             var count = input.Length;
@@ -66,5 +67,8 @@ namespace Z0.Asm
             }
             return true;
         }
+
+        FS.FolderPath ProjectOutDir(string id)
+            => OutWs().Root + FS.folder("projects") + FS.folder(State.Project().Format()) + FS.folder(id);
     }
 }

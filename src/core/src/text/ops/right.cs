@@ -19,23 +19,37 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string right(string src, int index)
         {
-            var length = src.Length;
-            var last = length - 1;
-            var offset = index + 1;
-            if(offset < last && offset >= 0)
-                return slice(src,offset);
+            if(index < src.Length - 1)
+                return slice(src, index + 1);
             else
-                return EmptyString;
+                return default;
         }
+
+        // {
+        //     var length = src.Length;
+        //     var last = length - 1;
+        //     var offset = index + 1;
+        //     if(offset < last && offset >= 0)
+        //         return slice(src,offset);
+        //     else
+        //         return EmptyString;
+        // }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> right(ReadOnlySpan<char> src, int index)
         {
-            var offset = index + 1;
-            if(src.Length < offset)
-                return default;
+            if(index < src.Length - 1)
+                return core.slice(src, index + 1);
             else
-                return core.slice(src, offset);
+                return default;
         }
+
+        // {
+        //     var offset = index + 1;
+        //     if(src.Length < offset)
+        //         return default;
+        //     else
+        //         return core.slice(src, offset);
+        // }
     }
 }

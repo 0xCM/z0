@@ -9,20 +9,22 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmLineToken<T>
+    public readonly struct AsmDirective
     {
-        public T Content {get;}
+        public AsmDirectiveKind Kind {get;}
+
+        public Index<string> Operands {get;}
 
         [MethodImpl(Inline)]
-        public AsmLineToken(T content, AsmLinePart kind)
+        public AsmDirective(AsmDirectiveKind kind, string[] operands)
         {
-            Content = content;
+            Kind = kind;
+            Operands = operands;
         }
+    }
 
-        public string Format()
-            => Content.ToString();
+    public enum AsmDirectiveKind : byte
+    {
 
-        public override string ToString()
-            => Format();
     }
 }

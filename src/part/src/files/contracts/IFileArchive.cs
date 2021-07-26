@@ -6,6 +6,9 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using static EnvFolders;
+
+
     /// <summary>
     /// Characterizes a file system repository
     /// </summary>
@@ -27,6 +30,12 @@ namespace Z0
 
         Deferred<FS.FilePath> Files(FS.FileExt ext)
             => Root.EnumerateFiles(ext, true);
+
+        FS.FolderPath Datasets()
+            => Root + FS.folder(datasets);
+
+        FS.FolderPath Dataset(Scope scope)
+            => Datasets() + FS.folder(scope.Format());
 
         /// <summary>
         /// Defines a path of the form {Root}/{subdir}/{id}.{ext}

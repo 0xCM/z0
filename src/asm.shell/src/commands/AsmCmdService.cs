@@ -29,6 +29,10 @@ namespace Z0.Asm
 
         DevWs Ws;
 
+        NasmCatalog NasmCatalog;
+
+        IntelSdmProcessor SdmProcessor;
+
         public AsmCmdService()
         {
             State = new ShellState();
@@ -44,6 +48,8 @@ namespace Z0.Asm
             AsmWs = Ws.Asm();
             ScriptRunner = Wf.ScriptRunner();
             ApiPack = Wf.ApiPacks().Current();
+            NasmCatalog = Wf.NasmCatalog();
+            SdmProcessor = Wf.IntelSdmProcessor();
             State.DevWs(Ws);
         }
 
@@ -73,7 +79,7 @@ namespace Z0.Asm
         IWorkspace TableWs()
             => Ws.Tables();
 
-        IWorkspace SouceWs()
+        IWorkspace Sources()
             => Ws.Sources();
 
         ProjectWs Projects()

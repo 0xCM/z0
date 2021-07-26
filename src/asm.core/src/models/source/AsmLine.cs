@@ -11,15 +11,15 @@ namespace Z0.Asm
 
     public readonly struct AsmLine
     {
-        public Index<IAsmLineToken> Tokens {get;}
+        public Index<object> Tokens {get;}
 
         [MethodImpl(Inline), Op]
-        public AsmLine(Index<IAsmLineToken> src)
+        public AsmLine(Index<object> src)
         {
             Tokens = src;
         }
 
         public string Format()
-            => string.Concat(Tokens.Select(x => x.Format()));
+            => string.Concat(Tokens.Select(x => x.ToString()));
     }
 }

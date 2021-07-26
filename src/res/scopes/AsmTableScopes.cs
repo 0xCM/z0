@@ -6,7 +6,9 @@ namespace Z0
 {
     public readonly struct AsmTableScopes
     {
-        public static Scope IntelSdm => "intel.sdm";
+        public static Scope Sdm => "intel.sdm";
+
+        public static Scope SdmInstructions => "intel.sdm.instructions";
 
         public static Scope IntelXed => "intel.xed";
 

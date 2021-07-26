@@ -22,6 +22,7 @@
       <ProjectReference Include="$(Clr)"/>
       <ProjectReference Include="$(Tooling)"/>
       <ProjectReference Include="$(Services)"/>
+      <ProjectReference Include="$(Res)"/>
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
+    using static Root;
     using static core;
 
     partial class IntelSdmProcessor

@@ -17,13 +17,22 @@ namespace Z0
 
         TableColumn[] Cols;
 
-        public static TableBuilder create()
-            => new TableBuilder();
+        uint Kind;
 
-        public TableBuilder()
+        public static TableBuilder create(uint kind = 0)
+            => new TableBuilder(kind);
+
+        public TableBuilder(uint kind)
         {
+            Kind = kind;
             Rows = new();
             Cols = array<TableColumn>();
+        }
+
+        public TableBuilder WithKind(uint kind)
+        {
+            Kind = kind;
+            return this;
         }
 
         public TableBuilder WithRow(in TableRow row)
@@ -40,13 +49,13 @@ namespace Z0
 
         public TableBuilder WithRow(TableCell[] cells)
         {
-            Rows.Add(new TableRow(0,cells));
+            Rows.Add(new TableRow(0, cells));
             return this;
         }
 
         public TableBuilder WithRow(string[] cells)
         {
-            Rows.Add(new TableRow(0,cells.Select(x => new TableCell(x))));
+            Rows.Add(new TableRow(0, cells.Select(x => new TableCell(x))));
             return this;
         }
 
@@ -72,7 +81,7 @@ namespace Z0
             ref var row = ref first(rows);
             for(var i=0u; i<count; i++)
                 seek(row,i)._Seq = i;
-            var dst = new Table(Cols, rows);
+            var dst = Tables.table(Kind, Cols.Replicate(), rows);
             Clear();
             return dst;
         }
@@ -80,6 +89,8 @@ namespace Z0
         public TableBuilder Clear()
         {
             Rows.Clear();
+            Cols.Clear();
+            Kind = 0;
             return this;
         }
 

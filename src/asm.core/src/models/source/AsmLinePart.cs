@@ -11,7 +11,7 @@ namespace Z0.Asm
     {
         None = 0,
 
-        // iIdentifier:
+        // identifier:
         BlockLabel = 1,
 
         // 0005h
@@ -39,5 +39,11 @@ namespace Z0.Asm
 
         // A label of some sort
         Label = 512,
+
+        // [0x48,0x8b,0x01]
+        HexArray = 1024,
+
+        // .xyx a,b,c
+        Directive = 2048
     }
 }

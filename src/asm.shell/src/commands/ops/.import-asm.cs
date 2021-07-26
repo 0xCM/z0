@@ -15,18 +15,27 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var paths = Files(FS.Asm);
-            var dst = list<AsmLine>();
+            var lines = list<AsmLine>();
+            var counter = 0u;
+            var dst = ImportWs().Path("asm", "test", FS.Asm);
+            using var writer = dst.AsciWriter();
             foreach(var path in paths)
             {
-                dst.Clear();
-                var count = ImportAsm(path,dst);
-                Write(string.Format("{0}[{1}]:",path.ToUri(), count));
-                iter(dst, token => Write(token.Format()));
+                lines.Clear();
+                var count = ImportAsm(path, lines);
+                counter += count;
+                var desc = string.Format("{0}[{1}]:", path.ToUri(), count);
+                writer.WriteLine(string.Format("; {0}", desc));
+                iter(lines, line => writer.WriteLine(line.Format()));
             }
+            Write(string.Format("Imported {0} asm lines to {1}", counter, dst));
             return result;
         }
 
-        // .tool-out-files dumpbin *.asm
+        // .project ll
+        // .outfiles dumps/*.asm
+        // .import-asm
+
         uint ImportAsm(FS.FilePath src, List<AsmLine> dst)
         {
             var counter = 0u;
@@ -37,14 +46,14 @@ namespace Z0.Asm
                 {
                     if(AsmParser.parse(label, out AsmOffsetLabel offset))
                     {
-                        dst.Add(asm.line(offset,expr));
+                        dst.Add(asm.line(offset, expr));
                         counter++;
                     }
                     else
                     {
                         if(expr.IsNonEmpty)
                         {
-                            dst.Add(asm.line(label,expr));
+                            dst.Add(asm.line(label, expr));
                             counter++;
                         }
                         else

@@ -14,7 +14,6 @@ namespace Z0.Asm
 
     partial struct FunctionModels
     {
-
         [Op]
         public static string format(in AsmComment src)
             => src.Content.IsNonEmpty ? string.Format("; {0}",src.Content) : EmptyString;
@@ -86,6 +85,5 @@ namespace Z0.Asm
                 return ref dst;
             }
         }
-
     }
 }

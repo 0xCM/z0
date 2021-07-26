@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Represents an line offset label
     /// </summary>
-    public readonly struct AsmOffsetLabel : IAsmOffsetLabel
+    public readonly struct AsmOffsetLabel
     {
         const ulong OffsetMask = 0xFF_FF_FF_FF_FF_FF_FF;
 

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Globalization;
 
+    using static Root;
     using static System.StringSplitOptions;
     using static HexFormatSpecs;
     using static core;
@@ -21,6 +22,13 @@ namespace Z0
         [Op]
         static Index<string> split(string src, char sep, bool clean = true)
             => src.Split(sep,  clean ? RemoveEmptyEntries : None);
+
+        [Op]
+        public static bool one(string src, out byte dst)
+        {
+            var s = src.Replace("0x",EmptyString,true,null).Replace('h',Chars.Space).Trim();
+            return byte.TryParse(src, NumberStyles.HexNumber,null, out dst);
+        }
 
         [Op]
         public static bool parse(string src, out byte[] dst)
@@ -49,6 +57,12 @@ namespace Z0
                 return false;
             }
         }
+
+        // [Op]
+        // public static bool parse(string src, out byte dst)
+        // {
+
+        // }
 
         public ParseResult<byte> Parse(string src)
         {

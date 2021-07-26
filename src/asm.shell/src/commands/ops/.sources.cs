@@ -7,9 +7,9 @@ namespace Z0.Asm
     partial class AsmCmdService
     {
         [CmdOp(".sources")]
-        Outcome Sources(CmdArgs args)
+        Outcome ShowSources(CmdArgs args)
         {
-            Write(SouceWs().Root);
+            Write(Sources().Root);
             return true;
         }
     }

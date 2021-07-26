@@ -29,8 +29,8 @@ namespace Z0
             => Asm.IntelXed.create(wf);
 
         [Op]
-        public static NasmCatalog NasmCatalog(this IWfRuntime wf)
-            => Asm.NasmCatalog.create(wf);
+        public static XedParsers XedParsers(this IWfRuntime wf)
+            => Asm.XedParsers.create(wf);
 
         [Op]
         public static Nasm Nasm(this IWfRuntime wf)
@@ -71,10 +71,6 @@ namespace Z0
             seek(dst,1) = new RobocopyResultHandler(paths);
             return buffer;
         }
-
-        [Op]
-        public static XedTableParser XedTableParser(this IWfRuntime wf)
-            => Tools.XedTableParser.create(wf);
 
         [Op]
         public static LlvmTooling Llvm(this IWfRuntime wf)

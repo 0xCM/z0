@@ -11,13 +11,10 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static XedModels;
-    using static XedSourceMarkers;
 
     public sealed class IntelXed : AppService<IntelXed>
     {
         const string dataset = "xed";
-
-        XedChipIsaParser ChipIsaParser;
 
         FS.FolderPath XedTables;
 
@@ -25,12 +22,25 @@ namespace Z0.Asm
 
         DevWs Ws;
 
+        XedParsers Parsers;
+
+        public static ReadOnlySpan<XedDataset> datasets()
+        {
+            var src = typeof(XedDatasetKind).LiteralFields().ToReadOnlySpan();
+            var count = src.Length;
+            var buffer = alloc<XedDataset>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = new XedDataset(skip(src,i));
+            return buffer;
+        }
+
         protected override void OnInit()
         {
-            ChipIsaParser = XedChipIsaParser.create(Wf);
             Ws = Wf.DevWs();
             XedTables = Ws.Tables().Subdir("intel.xed");
             XedSources = Ws.Sources().Subdir("xed");
+            Parsers = Wf.XedParsers();
         }
 
         public void EmitCatalog()
@@ -63,7 +73,7 @@ namespace Z0.Asm
             => IClasses().Storage.Select(x => x.Expr.Text).ToArray();
 
         public Outcome LoadChipMap(out ChipMap dst)
-            => ChipIsaParser.Parse(ChipSourcePath(), out dst);
+            => Parsers.ParseChipMap(ChipSourcePath(), out dst);
 
         public Outcome EmitChipMap(FS.FolderPath dir)
         {
@@ -260,7 +270,6 @@ namespace Z0.Asm
             var src = LoadFormSources().View;
             var dst = dir + FS.file(Tables.identify<XedFormImport>().Format(), FS.Csv);
             var flow = Wf.EmittingTable<XedFormImport>(dst);
-            var parser = XedFormImportParser.create();
             var formatter = Tables.formatter<XedFormImport>(XedFormImport.RenderWidths);
             var count = src.Length;
             var result = Outcome.Success;
@@ -269,7 +278,7 @@ namespace Z0.Asm
             writer.WriteLine(formatter.FormatHeader());
             for(var i=z16; i<count; i++)
             {
-                result = parser.Parse(skip(src,i), i, out var import);
+                result = Parsers.Parse(skip(src,i), i, out var import);
                 if(result)
                 {
                     import.Index = i;
@@ -288,7 +297,6 @@ namespace Z0.Asm
 
         public ReadOnlySpan<XedFormImport> LoadFormImports()
         {
-            var parser = XedFormImportParser.create();
             var src = Ws.Tables().Table<XedFormImport>("intel.xed");
             var counter = 0u;
             var outcome = Outcome.Success;
@@ -305,7 +313,7 @@ namespace Z0.Asm
                 if(line.IsEmpty)
                     continue;
 
-                outcome = parser.ParseRow(line, out var row);
+                outcome = Parsers.ParseFormImport(line, out var row);
                 if(outcome)
                 {
                     dst.Add(row);
@@ -448,20 +456,6 @@ namespace Z0.Asm
             dst.Aspects = slice(candidates,1).ToArray();
         }
 
-        // bool Match(in Symbols<IClass> classes, SymExpr src, out IClass dst)
-        // {
-        //     if(classes.Lookup(src, out var sym))
-        //     {
-        //         dst = sym.Kind;
-        //         return true;
-        //     }
-        //     else
-        //     {
-        //         dst = default;
-        //         return false;
-        //     }
-        // }
-
         FS.FilePath FormSourcePath()
             => XedSources + FS.file("xed-idata", FS.Txt);
 
@@ -505,27 +499,27 @@ namespace Z0.Asm
             return false;
         }
 
-        [Op]
-        internal static XedPattern[] sort(XedPattern[] src)
-            => (src as IEnumerable<XedPattern>).OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).Array();
+        // [Op]
+        // internal static XedPattern[] sort(XedPattern[] src)
+        //     => (src as IEnumerable<XedPattern>).OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).Array();
 
-        [Op]
-        static XedSummaryRow BuildSummaryRow(in XedPattern src)
-        {
-            var modidx = src.Parts.TryFind(x => x.StartsWith(MODIDX)).MapValueOrDefault(x => x.RightOfFirst(ASSIGN).Trim(), EmptyString);
-            var dst = new XedSummaryRow();
-            dst.Class = src.Class;
-            dst.Category = src.Category;
-            dst.Extension = src.Extension;
-            dst.IsaSet = src.IsaSet;
-            dst.IForm = src.IForm;
-            dst.BaseCode = XedParser.code(src);
-            dst.Mod = XedParser.mod(src);
-            dst.Reg = XedParser.reg(src);
-            dst.Pattern = src.PatternText;
-            dst.Operands = src.OperandText;
-            return dst;
-        }
+        // [Op]
+        // static XedSummaryRow BuildSummaryRow(in XedPattern src)
+        // {
+        //     var modidx = src.Parts.TryFind(x => x.StartsWith(MODIDX)).MapValueOrDefault(x => x.RightOfFirst(ASSIGN).Trim(), EmptyString);
+        //     var dst = new XedSummaryRow();
+        //     dst.Class = src.Class;
+        //     dst.Category = src.Category;
+        //     dst.Extension = src.Extension;
+        //     dst.IsaSet = src.IsaSet;
+        //     dst.IForm = src.IForm;
+        //     dst.BaseCode = XedParser.code(src);
+        //     dst.Mod = XedParser.mod(src);
+        //     dst.Reg = XedParser.reg(src);
+        //     dst.Pattern = src.PatternText;
+        //     dst.Operands = src.OperandText;
+        //     return dst;
+        // }
 
         static Outcome ParseSummary(TextLine src, out XedFormSource dst)
         {
@@ -746,7 +740,5 @@ namespace Z0.Asm
 
         // FS.FilePath FunctionTarget()
         //     => TargetDir() + FS.file("functions", FS.Txt);
-
-
     }
 }

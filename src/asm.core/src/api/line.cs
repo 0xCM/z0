@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmLine line(params IAsmLineToken[] src)
+        public static AsmLine line(params object[] src)
             => new AsmLine(src);
     }
 }

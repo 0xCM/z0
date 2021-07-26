@@ -14,6 +14,11 @@ namespace Z0
     public static class XSvc
     {
         [Op]
+        public static NasmCatalog NasmCatalog(this IWfRuntime wf)
+            => Svc.NasmCatalog.create(wf);
+
+
+        [Op]
         public static AsmRowPipe AsmRowPipe(this IWfRuntime wf)
             => Svc.AsmRowPipe.create(wf);
 

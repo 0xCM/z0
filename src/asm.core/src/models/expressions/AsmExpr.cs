@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmExpr : IAsmLineToken, IEquatable<AsmExpr>
+    public readonly struct AsmExpr : IEquatable<AsmExpr>
     {
         public TextBlock Content {get;}
 

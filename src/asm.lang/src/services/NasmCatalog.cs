@@ -11,11 +11,11 @@ namespace Z0.Asm
 
     public class NasmCatalog : AppService<NasmCatalog>
     {
-        AsmWs Workspace;
+        DevWs Ws;
 
         protected override void Initialized()
         {
-            Workspace = Wf.AsmWs();
+            Ws = Wf.DevWs();
 
         }
 
@@ -68,7 +68,13 @@ namespace Z0.Asm
             }
 
             return slice(buffer, 0, j);
+        }
 
+        public ReadOnlySpan<NasmInstruction> ImportInstructions()
+        {
+            var src = Ws.Sources().Path("nasm-instructions", FS.Txt);
+            var dst = Ws.Tables().Table<NasmInstruction>(AsmTableScopes.Nasm);
+            return ImportInstructions(src,dst);
         }
 
         public ReadOnlySpan<NasmInstruction> ImportInstructions(FS.FilePath src, FS.FilePath dst)
@@ -84,6 +90,12 @@ namespace Z0.Asm
             }
             else
                 return default;
+        }
+
+        public ReadOnlySpan<NasmInstruction> LoadInstructionImports()
+        {
+            var src = Ws.Tables().Table<NasmInstruction>(AsmTableScopes.Nasm);
+            return LoadInstructionImports(src);
         }
 
         public ReadOnlySpan<NasmInstruction> LoadInstructionImports(FS.FilePath src)

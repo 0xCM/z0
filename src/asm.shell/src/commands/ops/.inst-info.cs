@@ -4,107 +4,44 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
     using static Root;
     using static core;
-    using static IntelSdm;
 
     partial class AsmCmdService
     {
         [CmdOp(".inst-info")]
         Outcome ShowInstInfo(CmdArgs args)
         {
-            const string TitleMarker = "# ";
-            const string TableMarker = "## ";
-            const string Separator = "------";
-            const string TableTileFormat = "# {0}";
-            const string InstTitleFormat = "# Instruction {0}";
-            const string Rejoin = " | ";
-            const char ColSep = Chars.Pipe;
-
             var result = Outcome.Success;
-            var foundtable = false;
-            var parsingrows = false;
-            var tablekind = TableKind.None;
-            var rowcount = 0;
+
             if(args.Length < 1)
                 return (false, "Argument not supplied");
 
             var id = TableId.define(arg(args,0).Value);
-            var src = State.Tables().Table(AsmTableScopes.IntelSdm, id);
+            var src = Sources().Dataset(AsmTableScopes.SdmInstructions) + FS.file(id.Format(), FS.Csv);
             if(!src.Exists)
                 return (false, FS.missing(src));
 
-            var info = default(InstructionInfo);
-            var cols = Index<TableColumn>.Empty;
-            var rows = list<TableRow>();
-            var rowidx = z16;
-            var table = TableBuilder.create();
-            var tables = list<Table>();
-            using var reader = src.LineReader(TextEncodingKind.Asci);
-            while(reader.Next(out var line))
+            var tables = SdmProcessor.ReadInstructionTables(src);
+            var tCount = tables.Length;
+            for(var i=0; i<tCount; i++)
             {
-                if((line.IsEmpty || line.StartsWith(Separator)) && !parsingrows)
-                    continue;
+                ref readonly var table = ref skip(tables,i);
+                var cols = table.Cols.Map(x => x.Format()).ToArray();
 
-                if(parsingrows && line.IsEmpty)
+                var header = string.Join(" | ", cols);
+                Write(header);
+                var rows = table.Rows;
+                var rCount = rows.Length;
+                for(var j=0; j<rCount; j++)
                 {
-                    table.IfNonEmpty(() => tables.Add(Pipe(table.Emit())));
-                    foundtable = false;
-                    parsingrows = false;
-                    rowcount = 0;
-                    continue;
-                }
-
-                var content = line.Content;
-                if(parsingrows)
-                {
-                    var values = content.SplitClean(ColSep);
-                    var valcount = values.Length;
-
-                    if(valcount != cols.Count)
-                        Warn($"{valcount} != {cols.Count}");
-
-                    if(valcount != 0)
-                    {
-                        table.WithRow(values);
-                        Write(values.Join(Rejoin));
-                        rowcount++;
-                    }
-                    continue;
-                }
-
-                if(foundtable && !parsingrows)
-                {
-                    var labels =  content.SplitClean(ColSep);
-                    if(labels.Length == 0)
-                    {
-                        Warn(string.Format("Expected header"));
-                    }
-                    else
-                    {
-                        cols = IntelSdm.columns(labels);
-                        table.WithColumns(cols);
-                        Write(text.intersperse(cols.Select(x => x.Format()), Chars.Pipe));
-                        parsingrows = true;
-                    }
-                }
-
-                if(content.StartsWith(TitleMarker))
-                {
-                    info = InstructionInfo.init(content.Remove(TitleMarker));
-                    Write(string.Format(InstTitleFormat, info.Mnemonic.Format(MnemonicCase.Uppercase)));
-                }
-                else if(content.StartsWith(TableMarker))
-                {
-                    tablekind = TableKinds.from(content.Remove(TableMarker).Trim());
-                    Write(Chars.Space);
-                    Write(string.Format(TableTileFormat, tablekind));
-                    Write(RP.PageBreak120);
-                    foundtable = true;
+                    ref readonly var row = ref skip(rows,j);
+                    var cells = row.Cells.Map(x => x.Content.ToString()).ToArray();
+                    Write(string.Join(" | ", cells));
                 }
             }
-
-            table.IfNonEmpty(() => tables.Add(Pipe(table.Emit())));
 
             return result;
         }
