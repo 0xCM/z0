@@ -13,12 +13,6 @@ namespace Z0.Asm
     {
         public TextBlock Content {get;}
 
-        public AsmLinePart TokenKind
-        {
-            [MethodImpl(Inline)]
-            get => AsmLinePart.Statement;
-        }
-
         const sbyte DefaultPadding = -46;
 
         [MethodImpl(Inline)]

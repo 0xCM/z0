@@ -17,19 +17,19 @@ namespace Z0.Asm
         /// <summary>
         /// A general-purpose register of width <see cref='W8'/>, <see cref='W16'/>, <see cref='W32'/> or <see cref='W64'/>
         /// </summary>
-        [Symbol("gp")]
+        [Symbol("gp", "A general purpose register of bit-width 8,16,32 or 64")]
         GP = 1,
 
         /// <summary>
         /// Identifies a segment register
         /// </summary>
-        [Symbol("seg")]
+        [Symbol("seg", "A segment regitser")]
         SEG = 2,
 
         /// <summary>
         /// An flag register of width <see cref='W16'/>, <see cref='W32'/> or <see cref='W64'/>
         /// </summary>
-        [Symbol("flags")]
+        [Symbol("flags", "A system flags register of bit-width 16,32 or 64")]
         FLAG = 3,
 
         /// <summary>
@@ -97,5 +97,11 @@ namespace Z0.Asm
         /// </summary>
         [Symbol("mmx")]
         MMX = 14,
+
+        /// <summary>
+        /// Classifies a 64-bit extended control register
+        /// </summary>
+        [Symbol("xcr")]
+        XCR = 15,
     }
 }

@@ -4,15 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial struct asm
+    public readonly partial struct AsmAlgorithms
     {
-        [MethodImpl(Inline), Op]
-        public static AsmExprSet pack(AsmOpCodeExpr opcode, AsmSigExpr sig, AsmExpr statement)
-            => new AsmExprSet(new AsmFormExpr(opcode, sig), statement);
+
     }
+
 }

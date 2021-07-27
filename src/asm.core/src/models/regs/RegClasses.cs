@@ -121,5 +121,13 @@ namespace Z0.Asm
             public static implicit operator K(MmxClass src)
                 => src.Kind;
         }
+
+        public readonly struct XControlClass : IRegClass<XControlClass>
+        {
+            public K Kind => K.XCR;
+
+            public static implicit operator K(XControlClass src)
+                => src.Kind;
+        }
     }
 }

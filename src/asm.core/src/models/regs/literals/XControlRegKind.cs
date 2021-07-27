@@ -4,9 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    [ApiHost]
-    public readonly partial struct AsmRegs
-    {
+    using static RegFacets;
+    using static RegIndexCode;
+    using static RegClassCode;
+    using static RegWidthCode;
 
+    public enum XControlRegKind : ushort
+    {
+        XCR0 = r0 | XCR << ClassField | W64 << WidthField,
     }
 }

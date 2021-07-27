@@ -33,6 +33,8 @@ namespace Z0.Asm
 
         IntelSdmProcessor SdmProcessor;
 
+        AsmRegSets RegSets;
+
         public AsmCmdService()
         {
             State = new ShellState();
@@ -50,6 +52,7 @@ namespace Z0.Asm
             ApiPack = Wf.ApiPacks().Current();
             NasmCatalog = Wf.NasmCatalog();
             SdmProcessor = Wf.IntelSdmProcessor();
+            RegSets = Wf.AsmRegSets();
             State.DevWs(Ws);
         }
 

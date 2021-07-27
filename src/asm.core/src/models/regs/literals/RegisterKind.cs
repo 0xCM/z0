@@ -20,6 +20,7 @@ namespace Z0.Asm
     using G64 = Gp64Kind;
     using M = MaskRegKind;
     using C = ControlRegKind;
+    using XCR = XControlRegKind;
     using D = DebugRegKind;
     using I = IpRegKind;
     using B = BndRegKind;
@@ -590,5 +591,7 @@ namespace Z0.Asm
         LDTR = SPTR.LDTR,
 
         IDTR = SPTR.IDTR,
+
+        XCR0 = XCR.XCR0,
     }
 }

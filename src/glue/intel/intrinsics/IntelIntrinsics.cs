@@ -31,7 +31,7 @@ namespace Z0.Asm
             EmitLog(parsed);
             EmitTable(parsed);
             EmitHeader(parsed);
-            EmitAlogrithms(parsed);
+            //EmitAlogrithms(parsed);
             return parsed;
         }
 

@@ -119,7 +119,6 @@ namespace Z0.Asm
         public static bit test(K src, K match)
             => (src & match) == match;
 
-
         [MethodImpl(Inline), Op]
         public static ref AsmHexCode encode(RexPrefix a0, ref AsmHexCode dst)
         {

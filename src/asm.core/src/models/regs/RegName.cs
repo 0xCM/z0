@@ -19,7 +19,28 @@ namespace Z0.Asm
             Data = data;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data != 0;
+        }
+
         public string Format()
             => AsmRegNames.format(this);
+
+        public override string ToString()
+            => Format();
+
+        public static RegName Empty
+        {
+            [MethodImpl(Inline)]
+            get => new RegName(0);
+        }
     }
 }

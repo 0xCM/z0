@@ -12,8 +12,8 @@ namespace Z0
     public static class XSvc
     {
         [Op]
-        public static AsmRegGrids AsmRegGrids(this IServiceContext ctx)
-            => Svc.AsmRegGrids.create(ctx);
+        public static AsmRegSets AsmRegSets(this IServiceContext ctx)
+            => Svc.AsmRegSets.create(ctx);
 
         [Op]
         public static AsmSymbols AsmSymbols(this IServiceContext ctx)

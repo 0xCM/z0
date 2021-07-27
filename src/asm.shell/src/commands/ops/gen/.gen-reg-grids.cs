@@ -15,13 +15,12 @@ namespace Z0.Asm
             var dst = GenWs().Path("regs",FS.Csv);
             var counter = 0u;
             var flow = Wf.EmittingFile(dst);
-            var grids = Wf.AsmRegGrids();
             using var writer = dst.AsciWriter();
-            counter += grids.Emit(grids.Grid(GP, w8), writer);
-            counter += grids.Emit(grids.Grid(GP, w8,true), writer);
-            counter += grids.Emit(grids.Grid(GP, w16),writer);
-            counter += grids.Emit(grids.Grid(GP, w32),writer);
-            counter += grids.Emit(grids.Grid(GP, w64),writer);
+            counter += RegSets.Emit(RegSets.Grid(GP, w8), writer);
+            counter += RegSets.Emit(RegSets.Grid(GP, w8,true), writer);
+            counter += RegSets.Emit(RegSets.Grid(GP, w16),writer);
+            counter += RegSets.Emit(RegSets.Grid(GP, w32),writer);
+            counter += RegSets.Emit(RegSets.Grid(GP, w64),writer);
             Wf.EmittedFile(flow,counter);
             return true;
         }

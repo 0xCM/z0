@@ -15,7 +15,7 @@ namespace Z0.Asm
     using S = Symbols;
 
     [ApiComplete]
-    public class AsmRegGrids : Service<AsmRegGrids>
+    public class AsmRegSets : Service<AsmRegSets>
     {
         AsmSymbols Symbols;
 
@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         Index<char> _Buffer;
 
-        public AsmRegGrids()
+        public AsmRegSets()
         {
             _GpGrid = GpRegGrid.Empty;
             _Buffer = alloc<char>(256);
@@ -94,28 +94,56 @@ namespace Z0.Asm
             return new GpRegGrid(buffer);
         }
 
-        public AsciGrid Grid(GpClass gp, W8 w)
+        public AsciGrid Grid(GpClass k, W8 w)
             => S.grid(Symbols.Gp8Regs(), RowWidth);
 
-        public AsciGrid Grid(GpClass gp, W8 w, bit hi)
+        public AsciGrid Grid(GpClass k, W8 w, bit hi)
             => S.grid(Symbols.Gp8Regs(hi), RowWidth);
 
-        public AsciGrid Grid(GpClass gp, W16 w)
+        public AsciGrid Grid(GpClass k, W16 w)
             => S.grid(Symbols.Gp16Regs(), RowWidth);
 
-        public AsciGrid Grid(GpClass gp, W32 w)
+        public AsciGrid Grid(GpClass k, W32 w)
             => S.grid(Symbols.Gp32Regs(), RowWidth);
 
-        public AsciGrid Grid(GpClass gp, W64 w)
+        public AsciGrid Grid(GpClass k, W64 w)
             => S.grid(Symbols.Gp64Regs(), RowWidth);
 
-        public AsciGrid Grid(XmmClass xmm)
+        public AsciGrid Grid(XmmClass k)
             => S.grid(Symbols.XmmRegs(), RowWidth);
 
-        public AsciGrid Grid(YmmClass xmm)
+        public AsciGrid Grid(YmmClass k)
             => S.grid(Symbols.YmmRegs(),RowWidth);
 
-        public AsciGrid Grid(ZmmClass xmm)
+        public AsciGrid Grid(ZmmClass k)
             => S.grid(Symbols.ZmmRegs(), RowWidth);
+
+        public AsciGrid Grid(MaskClass k)
+            => S.grid(Symbols.ZmmRegs(), RowWidth);
+
+        public AsciGrid XmmGrid()
+            => Grid(default(XmmClass));
+
+        public AsciGrid YmmGrid()
+            => Grid(default(YmmClass));
+
+        public AsciGrid ZmmGrid()
+            => Grid(default(ZmmClass));
+
+        public AsciGrid MaskGrid()
+            => Grid(default(MaskClass));
+
+        public RegSet Set(MaskClass k)
+        {
+            const byte count = 8;
+            var buffer = alloc<RegOp>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = AsmRegs.reg(RegWidthCode.W64, k, (RegIndexCode)i);
+            return buffer;
+        }
+
+        public RegSet MaskSet()
+            => Set(default(MaskClass));
     }
 }

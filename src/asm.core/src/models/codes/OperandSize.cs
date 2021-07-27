@@ -21,7 +21,6 @@ namespace Z0.Asm
         Mode64=3,
     }
 
-
     [Flags, SymSource]
     public enum OperandSize : byte
     {

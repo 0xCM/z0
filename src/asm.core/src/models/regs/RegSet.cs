@@ -8,43 +8,42 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
     using static AsmCodes;
 
-    public readonly struct GpRegGrid
+    public readonly struct RegSet
     {
         Index<RegOp> Data {get;}
 
         [MethodImpl(Inline)]
-        internal GpRegGrid(RegOp[] src)
+        public RegSet(RegOp[] src)
         {
             Data = src;
         }
 
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        public ref readonly RegOp this[uint i]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[i];
+        }
+
+        public ReadOnlySpan<RegOp> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
+        }
+
         [MethodImpl(Inline)]
-        public ReadOnlySpan<RegOp> Row(GpRegKind kind)
-        {
-            var offset = (byte)kind * 16;
-            var length = kind == GpRegKind.Gp8Hi ? 4 : 16;
-            return slice(Data.View, offset, length);
-        }
+        public RegSet Replicate()
+            => new RegSet(Data);
 
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data.IsEmpty;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data.IsEmpty;
-        }
-
-        public static GpRegGrid Empty
-        {
-            [MethodImpl(Inline)]
-            get => new GpRegGrid(array<RegOp>());
-        }
+        [MethodImpl(Inline)]
+        public static implicit operator RegSet(RegOp[] src)
+            => new RegSet(src);
     }
 }

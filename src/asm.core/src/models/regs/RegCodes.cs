@@ -689,6 +689,13 @@ namespace Z0.Asm
             cr7 = r7,
         }
 
+        [SymSource, RegCode]
+        public enum ExtendedControlReg : byte
+        {
+            [Symbol("XCR0")]
+            xcr0 = r0,
+        }
+
         /// <summary>
         /// Defines accessible debug register indices
         /// </summary>
