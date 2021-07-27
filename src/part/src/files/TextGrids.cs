@@ -14,6 +14,20 @@ namespace Z0
     [ApiHost]
     public readonly struct TextGrids
     {
+        public static Outcome load(FS.FilePath src, uint width, out FixedTextGrid dst)
+        {
+            try
+            {
+                dst = FixedTextGrid.load(width,src.ReadUnicode());
+                return true;
+            }
+            catch(Exception e)
+            {
+                dst = default;
+                return e;
+            }
+        }
+
         public static Outcome load(FS.FilePath src, out TextGrid dst)
         {
             dst = TextGrid.Empty;

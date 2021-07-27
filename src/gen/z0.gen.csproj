@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Lang)" />
     <ProjectReference Include="$(Workflow)" />
     <ProjectReference Include="$(Tools)" />
+    <ProjectReference Include="$(Rules)" />
   </ItemGroup>
 
 </Project>

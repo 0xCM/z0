@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         [MethodImpl(Inline), Op]
         public static bool IsFunction(this MethodInfo m)
-            => ! m.HasVoidReturn();
+            => !m.HasVoidReturn();
 
         /// <summary>
         /// Determines the number of parameters defined by a method

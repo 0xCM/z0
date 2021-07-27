@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-     using Z0.Lang;
-
     using static Root;
     using static core;
     using static CsPatterns;
@@ -44,9 +42,9 @@ namespace Z0
         public static void symrender<T>(uint indent, SymSpanSpec<T> spec, ITextBuffer dst, bool compact)
             where T : unmanaged
         {
-            var payload = TextTools.buffer();
+            var payload = text.buffer();
             sympayload(indent, spec, payload, compact);
-            var left = TextTools.buffer();
+            var left = text.buffer();
             var modifiers = spec.IsStatic ? string.Format("{0} {1}", @public, @static) : @public;
             left.Append(modifiers);
             left.Append(Chars.Space);
@@ -54,7 +52,7 @@ namespace Z0
             left.Append(Chars.Space);
             left.Append(spec.Name);
 
-            var right = TextTools.buffer();
+            var right = text.buffer();
             right.Append(string.Concat(string.Format("new {0}", spec.CellType), RP.bracket(spec.Data.Length), payload.Emit()));
 
             var assignment = ExpressionBody.Format(left.Emit(), right.Emit());

@@ -10,8 +10,39 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    [ApiHost]
+    public readonly partial struct Loops
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void run<T>(in Loop<uint,T> loop, ReadOnlySpan<T> src)
+        {
+            for(var i=loop.Min; i<loop.Max; i+= loop.Step)
+                loop.Receiver(i, skip(src,i));
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe void run<T>(uint min, uint max, uint step, T* pSrc, Action<uint,T> dst)
+            where T : unmanaged
+        {
+            for(var i=min; i<max; i+= step)
+                dst(i, skip(pSrc,i));
+        }
+
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe void run<T>(ReadOnlySpan<T> src, Action<uint,T> dst)
+            where T : unmanaged
+        {
+            for(var i=0u; i<src.Length; i++)
+                dst(i, skip(src,i));
+        }
+
+        public static Loop<K,T> define<T,K>(K min, K max, K step, Action<K,T> receiver)
+            where K : unmanaged
+                => new Loop<K,T>(min, max, step, receiver);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref Accrue<I> run<I>(Loop<I> loop, ref Accrue<I> dst)
             where I : unmanaged, IComparable<I>
@@ -24,7 +55,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Loop<I> loop<I>(Interval<I> bounds, I? step = null)
+        public static Loop<I> define<I>(Interval<I> bounds, I? step = null)
             where I : unmanaged, IComparable<I>
        {
             var dst = new Loop<I>();
@@ -37,7 +68,7 @@ namespace Z0
        }
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static void loop<T>(Pair<T> limits, Func<T,T> f, Action<T> g)
+        public static void run<T>(Pair<T> limits, Func<T,T> f, Action<T> g)
             where T : unmanaged
         {
             var min = limits.Left;
@@ -51,7 +82,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static void loop<T>(in T min, in T max, Action<T> f, in T step)
+        public static void run<T>(in T min, in T max, Action<T> f, in T step)
             where T : unmanaged
         {
             var i = min;

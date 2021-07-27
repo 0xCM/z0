@@ -14,6 +14,9 @@ namespace Z0
     public abstract class TokenSet<T> : ITokenSet
         where T : TokenSet<T>, new()
     {
+        public static T create()
+            => new T();
+
         public abstract Type[] Types();
     }
 }

@@ -4,15 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Root;
     using static core;
 
     partial struct SpanRes
     {
+        [Op]
         public static ApiHostRes calculate(ApiHostBlocks src)
         {
             var count = src.Length;

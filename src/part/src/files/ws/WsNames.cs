@@ -39,5 +39,21 @@ namespace Z0
         public const string lang = nameof(lang);
 
         public const string output = ".out";
+
+        public const string src = nameof(src);
+
+        public const string obj = nameof(obj);
+
+        public const string exe = nameof(exe);
+
+        public const string bin = nameof(bin);
+
+        public const string listing = nameof(listing);
+
+        public const string list = nameof(list);
+
+        public const string dis = nameof(dis);
+
+        public const string admin = ".admin";
     }
 }

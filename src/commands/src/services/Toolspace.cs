@@ -40,6 +40,8 @@ namespace Z0
 
         public static ToolId clang => "clang";
 
+        public static ToolId clang_cl => "clang-cl";
+
         public static ToolId llvm_as => "llvm-as";
 
         public static ToolId obj2yaml => "obj2yaml";

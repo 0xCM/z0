@@ -12,7 +12,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
     using static ProjectModel;
 
     [ApiHost]
@@ -23,14 +22,14 @@ namespace Z0
         [Op]
         public static Project resbytes()
         {
-            var itemBuffer = sys.alloc<ProjectItem>(4);
+            var itemBuffer = alloc<ProjectItem>(4);
             var items = span(itemBuffer);
             seek(items,0) = resource("asm/**/*.asm");
             seek(items,1) = resource("docs/**/*.csv");
             seek(items,2) = resource("index/**/*.csv");
             seek(items,3) = resource("metadata/**/*.csv");
 
-            var propBuffer = sys.alloc<Property>(4);
+            var propBuffer = alloc<Property>(4);
             var props = span(propBuffer);
             seek(props,0) = library();
             seek(props,1) = netcoreapp(n3);

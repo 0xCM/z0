@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Root;
     using static core;
@@ -25,7 +23,7 @@ namespace Z0
         [Op]
         public static MemorySeg capture(SpanResAccessor accessor)
         {
-            var def = SpanRes.definition(accessor);
+            var def = definition(accessor);
             var address = MemoryAddress.Zero;
             var size = ByteSize.Zero;
             for(var i=0; i<MemberSegCount; i++)

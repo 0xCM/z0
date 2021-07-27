@@ -10,9 +10,8 @@ namespace Z0
     using static Root;
     using static core;
 
-    public class SymSpecLoader : AppService<SymSpecLoader>
+    public class SymSpecLoader : Service<SymSpecLoader>
     {
-
         // Index    | Kind         | Name | Expression | Value | Description
         // Name     | Description
         // Name     | Expression   | Description
@@ -48,15 +47,9 @@ namespace Z0
                 {
                     ref readonly var col = ref skip(cells,j);
                 }
-
-
-
             }
-
 
             return outcome;
         }
-
     }
-
 }

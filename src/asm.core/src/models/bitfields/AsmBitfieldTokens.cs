@@ -2,12 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    partial struct AsmCodes
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+
+    public readonly struct AsmBitfieldTokens
     {
         [SymSource]
-        public enum RFlagToken : byte
+        public enum RFlags : byte
         {
             [Symbol("cf", "Carry Flag; Enabled if an arithmetic operation generates a carry or a borrow out of the most-significant bit of the result; cleared otherwise. This flag indicates an overflow condition for unsigned-integer arithmetic. It is also used in multiple-precision arithmetic")]
             CF,

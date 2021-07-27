@@ -4,55 +4,76 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static core;
 
-    public struct EnumSpec
+    public class EnumGenerator : CodeGenerator
     {
-        public Identifier Name;
-
-        public ClrEnumKind DataType;
-
-        public bool Flags;
-
-        public TextBlock Description;
-
-        public Index<Identifier> Names;
-
-        public Index<ulong> Values;
-
-        public Index<string> Descriptions;
-
-        public Index<string> Symbols;
-    }
-
-
-    public class EnumGenerator : CodeGenerator<EnumSpec>
-    {
-        public override Outcome Generate(in EnumSpec spec, ITextBuffer dst)
+        public Outcome Generate(uint offset, in EnumSpec spec, ITextBuffer dst)
         {
             var kw = NumericKinds.kind(spec.DataType).Keyword();
             var counter = 0ul;
+            var indent = offset;
             var names = spec.Names.View;
             var count = names.Length;
-            var values = spec.Values.View;
+            var values = spec.Values.IsNonEmpty;
+            if(values)
+                Require.equal(count, spec.Values.Length);
+
+            var symbols = spec.Symbols.IsNonEmpty;
+            if(symbols)
+                Require.equal(count, spec.Symbols.Length);
+
+            var descriptions = spec.Descriptions.IsNonEmpty;
+            if(descriptions)
+                Require.equal(count, spec.Descriptions.Length);
+
+            if(spec.Description.IsNonEmpty)
+                CSharp.comment(spec.Description).Render(indent, dst);
 
             if(spec.Flags)
-                dst.AppendLine("[Flags]");
-            dst.AppendFormat("public enum {0} : {1}", spec.Name, kw);
-            dst.AppendLine("{");
+                dst.IndentLine(indent,"[Flags]");
+
+            if(spec.SymbolSource)
+            {
+                if(spec.Group.IsNonEmpty)
+                    dst.IndentLineFormat(indent,"[SymSource(\"{0}\")]", spec.Group);
+                else
+                    dst.IndentLine(indent,"[SymSource]");
+            }
+
+            dst.IndentLineFormat(indent, "public enum {0} : {1}", spec.Name, kw);
+            dst.IndentLine(indent,"{");
+            indent += 4;
+
             for(var i=0; i<count; i++)
             {
                 var name = skip(names,i);
-                var value = values.Length != 0 ? skip(values,i) : counter++;
-                dst.AppendLineFormat("    {0} = {1}", name, value);
+                var description = "";
+                var value = (ulong)i;
+                var symbol = "";
+                if(values)
+                    value = spec.Values[i];
+                if(symbols)
+                    symbol = spec.Symbols[i];
+                if(descriptions)
+                    description = spec.Descriptions[i];
+
+                if(nonempty(description))
+                    CSharp.comment(description).Render(indent, dst);
+
+                if(nonempty(symbol))
+                {
+                    if(nonempty(description))
+                        dst.IndentLineFormat(indent, "", "[Symbol(\"{0}\",\"{1}\")]", symbol, description);
+                    else
+                        dst.IndentLineFormat(indent, "", "[Symbol(\"{0}\")]", symbol);
+                }
+                dst.IndentLineFormat(indent, "{0} = {1},", name, value);
             }
-            dst.AppendLine("}");
+            indent -= 4;
+            dst.IndentLine(indent,"}");
 
             return true;
         }
-
-
     }
 }

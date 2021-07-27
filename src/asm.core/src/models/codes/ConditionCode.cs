@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using static BitSeq;
 
+
     partial struct AsmCodes
     {
         /// <summary>

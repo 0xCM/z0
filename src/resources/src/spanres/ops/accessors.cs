@@ -9,12 +9,9 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
-    using static core;
 
     partial struct SpanRes
     {
-
-
         /// <summary>
         /// Queries the source type for ByteSpan property getters
         /// </summary>

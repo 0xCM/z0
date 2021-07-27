@@ -52,6 +52,11 @@ namespace Z0.Asm
             /// Classifies <see cref='FpuDigitToken'/> tokens
             /// </summary>
             FpuDigit = 128,
+
+            /// <summary>
+            /// Classifies <see cref='MaskToken'/> tokens
+            /// </summary>
+            Mask = 256,
         }
 
         [FieldSeg(0,4), SymSource]
@@ -185,7 +190,7 @@ namespace Z0.Asm
         }
 
         [FieldSeg(4,3), SymSource("Indicates the lower 3 bits of the opcode byte is used to encode the register operand without a modR/M byte")]
-        public enum RexBToken
+        public enum RexBToken : byte
         {
             [Symbol("None", "Indicates that REX.B in not applicable")]
             None = 0,
@@ -261,6 +266,16 @@ namespace Z0.Asm
 
             [Symbol("NFx", "Indicates the use of F2/F3 prefixes are not allowed with the instruction")]
             NFx = 1,
+        }
+
+        [SymSource]
+        public enum MaskToken : byte
+        {
+            [Symbol("{k1}", "Indicates a mask register used as instruction writemask for instructions that do not allow zeroing-masking but support merging-masking")]
+            Mask,
+
+            [Symbol("{k1}{z}", "Indicates a mask register used as instruction writemask")]
+            WriteMask,
         }
     }
 }

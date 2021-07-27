@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmOpTypes;
 
     partial struct asm
     {
@@ -20,6 +19,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static RegOp reg(RegWidthCode width, RegClassCode @class, RegIndexCode r)
             => AsmRegs.reg(width, @class, r);
-
     }
 }

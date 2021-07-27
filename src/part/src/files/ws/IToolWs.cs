@@ -34,5 +34,8 @@ namespace Z0
 
         FS.FilePath ConfigLog(ToolId id)
             => Logs(id) + FS.file(config, FS.Log);
+
+        FS.FilePath Inventory()
+            =>  Root + FS.folder(admin) + FS.file(inventory, FS.Txt);
     }
 }

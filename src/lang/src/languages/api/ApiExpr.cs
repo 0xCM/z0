@@ -15,7 +15,6 @@ namespace Z0
     public abstract class ApiExpr<T> : ApiExpr, IApiExpr<T>
         where T : struct
     {
-
         public abstract T Content {get;}
 
         protected sealed override dynamic Untyped

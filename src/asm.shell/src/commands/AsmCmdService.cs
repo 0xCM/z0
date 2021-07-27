@@ -35,6 +35,8 @@ namespace Z0.Asm
 
         AsmRegSets RegSets;
 
+        AsmEnv AsmEnv;
+
         public AsmCmdService()
         {
             State = new ShellState();
@@ -53,6 +55,7 @@ namespace Z0.Asm
             NasmCatalog = Wf.NasmCatalog();
             SdmProcessor = Wf.IntelSdmProcessor();
             RegSets = Wf.AsmRegSets();
+            AsmEnv = Wf.AsmEnv();
             State.DevWs(Ws);
         }
 
@@ -117,11 +120,6 @@ namespace Z0.Asm
                 return f(tool, args);
         }
 
-        ref readonly Table Pipe(in Table src)
-        {
-            return ref src;
-        }
-
         ref readonly FS.FilePath Pipe(in FS.FilePath src)
         {
             Write(string.Format("Path:{0}",src));
@@ -141,6 +139,38 @@ namespace Z0.Asm
 
         ReadOnlySpan<TextLine> RunWinCmd(string spec)
             => Wf.CmdLineRunner().Run(WinCmd.cmd(spec));
+
+        Outcome RunScript(FS.FilePath src, out ReadOnlySpan<TextLine> response)
+        {
+            var result = Outcome.Success;
+
+            void OnError(Exception e)
+            {
+                result = e;
+                Error(e);
+            }
+
+            var cmd = Cmd.cmdline(src.Format(PathSeparator.BS));
+            response = ScriptRunner.RunCmd(cmd, OnError);
+            return result;
+        }
+
+        Outcome ToolOutDir(CmdArgs args, out FS.FolderPath dir)
+        {
+            dir = FS.FolderPath.Empty;
+            if(args.Length == 0)
+                return (false, ToolUnspecified.Format());
+
+            var id = arg(args,0).Value;
+            dir = OutRoot() + FS.folder(id);
+            return true;
+        }
+
+        FS.FolderPath ToolOutDir(ToolId tool)
+            => Ws.Output().Subdir(tool.Format());
+
+        FS.FolderPath ToolOutDir(CmdArgs args, ToolId tool)
+            => args.Length > 0 ? OutRoot() + FS.folder(arg(args,0).Value) : ToolOutDir(tool);
 
         static MsgPattern NoToolSelected => "No tool selected";
 

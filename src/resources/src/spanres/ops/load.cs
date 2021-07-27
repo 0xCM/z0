@@ -20,9 +20,5 @@ namespace Z0
             var size = slice(data, 22, 4).TakeUInt32();
             return new SpanResInfo(src, address, size);
         }
-
-        [MethodImpl(Inline), Op]
-        public static unsafe ReadOnlySpan<byte> description(SpanResAccessor src, byte size = 29)
-            => cover<byte>(Resources.jit(src.Member), size);
     }
 }

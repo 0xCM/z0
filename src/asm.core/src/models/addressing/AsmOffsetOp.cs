@@ -36,10 +36,5 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
-
-        // public static AsmOffsetOp Empty
-        // {
-        //     get => new AsmOffsetOp(RegKind.None,RegKind.None,Disp.Empty,0);
-        // }
     }
 }

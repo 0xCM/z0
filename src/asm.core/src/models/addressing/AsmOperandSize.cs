@@ -24,7 +24,6 @@ namespace Z0.Asm
         public static implicit operator AsmOperandSize(byte index)
             => new AsmOperandSize(index);
 
-
         static ReadOnlySpan<byte> Widths => new byte[3]{16,32,64};
     }
 }

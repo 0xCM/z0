@@ -204,9 +204,4 @@ namespace Z0
             dst.WriteLine();
         }
     }
-
-    public abstract class CodeGenerator<C> : CodeGenerator
-    {
-        public abstract Outcome Generate(in C config, ITextBuffer dst);
-    }
 }

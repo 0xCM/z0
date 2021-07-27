@@ -13,27 +13,19 @@ namespace Z0
     partial class text
     {
         [MethodImpl(Inline), Op]
-        public static BinaryCode utf7(string src, EndianBig endian)
-            => Encoding.UTF7.GetBytes(src);
-
-        [MethodImpl(Inline), Op]
         public static BinaryCode utf8(string src)
             => Encoding.UTF8.GetBytes(src);
-
-        [MethodImpl(Inline), Op]
-        public static BinaryCode utf32(string src)
-            => Encoding.UTF32.GetBytes(src);
-
-        [MethodImpl(Inline), Op]
-        public static string utf7(ReadOnlySpan<byte> src)
-            => Encoding.UTF7.GetString(src);
 
         [MethodImpl(Inline), Op]
         public static string utf8(ReadOnlySpan<byte> src)
             => Encoding.UTF8.GetString(src);
 
         [MethodImpl(Inline), Op]
-        public static string utf32(ReadOnlySpan<byte> src)
-            => Encoding.UTF32.GetString(src);
+        public static void utf8(ReadOnlySpan<byte> src, Span<char> dst)
+            => Encoding.UTF8.GetChars(src,dst);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe string utf8(byte* pSrc, ByteSize size)
+            => Encoding.UTF8.GetString(pSrc,size);
     }
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Root;

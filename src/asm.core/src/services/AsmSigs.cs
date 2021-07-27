@@ -17,39 +17,7 @@ namespace Z0.Asm
         const NumericKind Closure = UnsignedInts;
 
         public static Type[] TokenTypes()
-            => typeof(AsmSigTokens).GetNestedTypes().Enums();
-
-        public static Outcome TokenType(string name, out Type dst)
-        {
-            var src = TokenTypes().ToReadOnlySpan();
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var type = ref skip(src,i);
-                if(type.Name == name)
-                {
-                    dst = type;
-                    return true;
-                }
-
-                var attrib = type.Tag<AliasAttribute>();
-                if(attrib)
-                {
-                    var candidates = attrib.Value.AliasList.ToReadOnlySpan();
-                    for(var j=0; j<candidates.Length; j++)
-                    {
-                        ref readonly var candidate = ref skip(candidates,j);
-                        if(candidate == name)
-                        {
-                            dst = type;
-                            return true;
-                        }
-                    }
-                }
-            }
-            dst = default;
-            return false;
-        }
+            => AsmTokens.Sigs.create().Types();
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static AsmSigToken<K> token<K>(AsmSigTokenKind kind, K value)

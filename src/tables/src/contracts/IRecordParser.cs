@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     public interface IRecordParser
     {
-        char FieldDelimiter => Chars.Pipe;
+
     }
 
     public interface IRecordParser<T> : IRecordParser
@@ -15,5 +17,15 @@ namespace Z0
         Outcome ParseHeader(TextLine src, out RowHeader dst);
 
         Outcome ParseRow(TextLine src, out T dst);
+    }
+
+    public class RecordParserAtribute : Attribute
+    {
+        public RecordParserAtribute(Type record)
+        {
+            RecordType = record;
+        }
+
+        public Type RecordType {get;}
     }
 }

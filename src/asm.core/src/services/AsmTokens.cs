@@ -8,10 +8,28 @@ namespace Z0.Asm
 
     public readonly struct AsmTokens
     {
-        internal sealed class OpCodes : TokenSet<OpCodes>
+        public sealed class OpCodes : TokenSet<OpCodes>
         {
             public override Type[] Types()
                 => typeof(AsmOpCodes).GetNestedTypes().Enums().Tagged<SymSourceAttribute>();
+        }
+
+        public sealed class Sigs : TokenSet<Sigs>
+        {
+            public override Type[] Types()
+                => typeof(AsmSigTokens).GetNestedTypes().Enums().Tagged<SymSourceAttribute>();
+        }
+
+        public sealed class Codes : TokenSet<Codes>
+        {
+            public override Type[] Types()
+                => typeof(AsmCodes).GetNestedTypes().Enums().Tagged<SymSourceAttribute>();
+        }
+
+        public sealed class Bitfields : TokenSet<Bitfields>
+        {
+            public override Type[] Types()
+                => typeof(AsmBitfieldTokens).GetNestedTypes().Enums().Tagged<SymSourceAttribute>();
         }
     }
 }

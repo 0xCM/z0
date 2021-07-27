@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    public abstract class XmlSourceReader<T>
-        where T : IXmlSource
+    using static Root;
+
+    public static class XSvc
     {
-        protected T Source {get;}
-
-        protected XmlSourceReader(T source)
-        {
-            Source = source;
-        }
+        public static AsmEnv AsmEnv(this IServiceContext context)
+            => Z0.AsmEnv.create(context);
     }
 }

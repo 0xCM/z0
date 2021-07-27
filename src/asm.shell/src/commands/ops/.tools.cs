@@ -17,7 +17,7 @@ namespace Z0.Asm
             var subdirs = ws.Root.SubDirs();
             var counter = 0u;
             var formatter = Tables.formatter<ToolConfig>();
-            var dst = ws.Root + FS.folder(".cmd") + FS.file(inventory, FS.Txt);
+            var dst = ws.Inventory();
             using var writer = dst.AsciWriter();
             foreach(var dir in subdirs)
             {

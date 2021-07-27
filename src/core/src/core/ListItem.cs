@@ -8,6 +8,11 @@ namespace Z0
 
     using static Root;
 
+    public readonly struct ListItem
+    {
+
+    }
+
     public readonly struct ListItem<T>
     {
         public uint Index {get;}
