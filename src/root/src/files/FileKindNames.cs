@@ -250,5 +250,10 @@ namespace Z0
         /// </summary>
         public const string help = nameof(help);
 
+        /// <summary>
+        /// Defines the 'list' literal
+        /// </summary>
+        public const string list = nameof(list);
+
     }
 }

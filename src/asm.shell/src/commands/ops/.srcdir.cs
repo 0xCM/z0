@@ -11,14 +11,14 @@ namespace Z0.Asm
         {
             if(args.Length == 0)
             {
-                var dir = State.SrcDir();
+                var dir = State.CurrentDir();
                 if(dir.IsNonEmpty)
                     Write(dir);
                 else
                     Write("! Source directory unspecified");
             }
             else
-                Write(State.SrcDir(FS.dir(arg(args,0).Value)));
+                Write(State.CurrentDir(FS.dir(arg(args,0).Value)));
             return true;
         }
     }

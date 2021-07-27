@@ -17,7 +17,7 @@ namespace Z0.Asm
             else
             {
                 ProjectId id = arg(args,0).Value;
-                var dir = State.Projects().Home(id);
+                var dir = ProjectHome(id);
                 outcome = dir.Exists;
                 if(outcome)
                 {

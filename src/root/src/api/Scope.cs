@@ -19,6 +19,18 @@ namespace Z0
             Name = src;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => string.IsNullOrEmpty(Name);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !string.IsNullOrEmpty(Name);
+        }
+
         public ReadOnlySpan<string> Parts
         {
             [MethodImpl(Inline)]
@@ -34,5 +46,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Scope(string src)
             => new Scope(src);
+
+        public static Scope Empty
+        {
+            [MethodImpl(Inline)]
+            get => new Scope(EmptyString);
+        }
     }
 }

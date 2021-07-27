@@ -6,12 +6,11 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".ds")]
-        Outcome Ds(CmdArgs args)
+        [CmdOp(".datasource", "Selects a data source from the 'sources' workspace")]
+        public Outcome DataSource(CmdArgs args)
         {
-            if(args.Count != 0)
-                State.DataSource(Sources().Root + FS.file(arg(args,0).Value));
-            Write(State.DataSource());
+            var scope = arg(args,0).Value;
+            Write(State.DataSource(Ws.Sources().Subdir(scope)));
             return true;
         }
     }

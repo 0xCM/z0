@@ -12,10 +12,10 @@ namespace Z0.Asm
             if(args.Count !=0)
             {
                 if(Arg(args,0,out var pattern))
-                    Files(State.SrcDir().Files(pattern.Value,false));
+                    Files(State.CurrentDir().Files(pattern.Value,false));
             }
             else
-                Files(State.SrcDir().AllFiles);
+                Files(State.CurrentDir().AllFiles);
             return true;
         }
     }

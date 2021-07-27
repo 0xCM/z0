@@ -38,12 +38,14 @@ namespace Z0
                 => new MemoryAddress(pSrc);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemoryAddress address<T>(Span<T> src)
-            => Unsafe.As<T,ulong>(ref first(src));
+        public static unsafe MemoryAddress address<T>(Span<T> src)
+            => new MemoryAddress(pvoid(first(src)));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe MemoryAddress address<T>(ReadOnlySpan<T> src)
-            => Unsafe.As<T,ulong>(ref MemoryMarshal.GetReference(src));
+            => new MemoryAddress(pvoid(first(src)));
+
+            //Unsafe.As<T,ulong>(ref MemoryMarshal.GetReference(src));
 
         /// <summary>
         /// Derives the address of a <see cref='Type'/> from the value of its <see cref='Type.TypeHandle' />

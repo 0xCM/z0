@@ -19,6 +19,11 @@ namespace Z0
         public static FileExt AsmList => ext("list.asm");
 
         /// <summary>
+        /// Defines the <see cref='list'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt List => ext(list);
+
+        /// <summary>
         /// Defines the <see cref='bin'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Bin => ext(bin);

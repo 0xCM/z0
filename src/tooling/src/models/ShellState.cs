@@ -20,21 +20,39 @@ namespace Z0
 
         FS.Files _Files;
 
-        FS.FilePath _DataSource;
+        FS.FolderPath _DataSource;
 
         ApiPath _Api;
 
-        DevWs _DevWs;
+        DevWs Ws;
 
-        public DevWs DevWs()
+        Arrow<Scope> _Channel;
+
+        DevWs DevWs()
         {
-            return _DevWs;
+            return Ws;
         }
 
         public DevWs DevWs(DevWs ws)
         {
-            _DevWs = ws;
+            Ws = ws;
             return DevWs();
+        }
+
+        [MethodImpl(Inline)]
+        public Arrow<Scope> Channel()
+            => _Channel;
+
+        public Arrow<Scope> Channel(Arrow<Scope> channel)
+        {
+            _Channel = channel;
+            return Channel();
+        }
+
+        public Arrow<Scope> Channel(Scope src, Scope dst)
+        {
+            _Channel = (src,dst);
+            return Channel();
         }
 
         [MethodImpl(Inline)]
@@ -60,23 +78,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public FS.FilePath DataSource()
+        public FS.FolderPath DataSource()
             => _DataSource;
 
         [MethodImpl(Inline)]
-        public FS.FilePath DataSource(FS.FilePath src)
+        public FS.FolderPath DataSource(FS.FolderPath dir)
         {
-            _DataSource = src;
+            _DataSource = dir;
             return DataSource();
         }
 
         [MethodImpl(Inline)]
         public ProjectId Project()
             => _Project;
-
-        [MethodImpl(Inline)]
-        public IToolWs Tools()
-            => DevWs().Tools();
 
         [MethodImpl(Inline)]
         public ProjectId Project(ProjectId id)
@@ -86,22 +100,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProjectWs Projects()
-            => DevWs().Projects();
-
-        [MethodImpl(Inline)]
-        public FS.FolderPath SrcDir()
+        public FS.FolderPath CurrentDir()
             => _SrcDir;
 
         [MethodImpl(Inline)]
-        public FS.FolderPath OutDir()
-            => DevWs().Output().Root;
-
-        [MethodImpl(Inline)]
-        public FS.FolderPath SrcDir(FS.FolderPath value)
+        public FS.FolderPath CurrentDir(FS.FolderPath value)
         {
             _SrcDir = value;
-            return SrcDir();
+            return CurrentDir();
         }
 
         [MethodImpl(Inline)]
@@ -115,23 +121,14 @@ namespace Z0
             return Files();
         }
 
-        [MethodImpl(Inline)]
-        public IWorkspace Tables()
-            => DevWs().Tables();
-
         public ShellState()
         {
             _SrcDir = FS.FolderPath.Empty;
             _Tool = default;
-            _DataSource = FS.FilePath.Empty;
+            _DataSource = FS.FolderPath.Empty;
             _Files = array<FS.FilePath>();
             _Api = ApiPath.Empty;
+            _Channel = (Scope.Empty,Scope.Empty);
         }
-
-        public FS.FolderPath ToolOutDir(ToolId tool)
-            => DevWs().Output().Subdir(tool.Format());
-
-        public FS.FolderPath OutDir(string id)
-            => DevWs().Output().Subdir(id);
     }
 }

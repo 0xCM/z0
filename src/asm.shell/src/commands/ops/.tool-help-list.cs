@@ -17,7 +17,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var tool = (ToolId)arg(args,0).Value;
             var list = FS.file(arg(args,1).Value, FS.Txt);
-            var @base = State.Tools();
+            var @base = ToolWs();
             var path = @base.Docs(tool) + list;
             if(path.Exists)
             {

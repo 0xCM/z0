@@ -6,26 +6,12 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".tool-out", "Displays the path of a tool output directory")]
+        [CmdOp(".tool-out-dir", "Displays the path of a tool output directory")]
         Outcome ToolOut(CmdArgs args)
         {
             var result = ToolOutDir(args, out var dir);
             if(result)
                 Write(dir);
-            return result;
-        }
-
-        [CmdOp(".tool-out-files", "Tool-specific Output Files -> State")]
-        public Outcome ToolOutFiles(CmdArgs args)
-        {
-            var result = ToolOutDir(args, out var dir);
-            if(result)
-            {
-                if(args.Length > 1)
-                    Files(dir.Files(arg(args,1).Value,true));
-                else
-                    Files(dir.Files(true));
-            }
             return result;
         }
 
@@ -36,11 +22,14 @@ namespace Z0.Asm
                 return (false, ToolUnspecified.Format());
 
             var id = arg(args,0).Value;
-            dir = State.OutDir() + FS.folder(id);
+            dir = OutRoot() + FS.folder(id);
             return true;
         }
 
+        public FS.FolderPath ToolOutDir(ToolId tool)
+            => Ws.Output().Subdir(tool.Format());
+
         FS.FolderPath ToolOutDir(CmdArgs args, ToolId tool)
-            => args.Length > 0 ? State.OutDir() + FS.folder(arg(args,0).Value) : State.ToolOutDir(tool);
+            => args.Length > 0 ? OutRoot() + FS.folder(arg(args,0).Value) : ToolOutDir(tool);
     }
 }

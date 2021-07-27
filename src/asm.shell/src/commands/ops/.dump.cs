@@ -51,7 +51,7 @@ namespace Z0.Asm
             var project = State.Project();
             var rootdir = ToolOutDir(args, tool);
             var outdir = ProjectOutDir(dumps);
-            var cmd = Cmd.cmdline(State.Tools().Script(tool, script).Format(PathSeparator.BS));
+            var cmd = Cmd.cmdline(ToolWs().Script(tool, script).Format(PathSeparator.BS));
             var input = State.Files().View;
             var count = input.Length;
             for(var i=0; i<count; i++)

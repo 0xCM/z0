@@ -35,5 +35,9 @@ namespace Z0
         public const string inventory = nameof(inventory);
 
         public const string dumps = nameof(dumps);
+
+        public const string lang = nameof(lang);
+
+        public const string output = ".out";
     }
 }

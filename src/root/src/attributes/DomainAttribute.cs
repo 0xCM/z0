@@ -2,15 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    partial class AsmCmdService
+    using System;
+
+    public class DomainAttribute : Attribute
     {
-        [CmdOp(".samples")]
-        Outcome ToolSamples(CmdArgs args)
+        public DomainAttribute(Type src)
         {
-            Files(ToolWs().Samples(arg(args,0).Value).AllFiles);
-            return true;
+            PointSource = src;
         }
+
+        public Type PointSource {get;}
     }
 }

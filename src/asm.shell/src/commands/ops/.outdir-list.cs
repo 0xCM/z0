@@ -11,7 +11,7 @@ namespace Z0.Asm
         [CmdOp(".outdir-list")]
         Outcome DstDirList(CmdArgs args)
         {
-            List(State.OutDir());
+            List(OutRoot());
             return true;
         }
 
@@ -20,7 +20,7 @@ namespace Z0.Asm
             var files = FileArchives.list(src);
             iter(files.View, file => Write(file.Path));
 
-            var dst = State.OutDir() + FS.file(string.Format("{0}.list", src.FolderName), FS.Csv);
+            var dst = OutRoot() + FS.file(string.Format("{0}.list", src.FolderName), FS.Csv);
             Z0.Tables.emit(files.View, dst);
         }
     }

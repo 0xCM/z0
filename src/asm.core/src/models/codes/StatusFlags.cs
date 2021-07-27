@@ -23,9 +23,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public StatusFlags(RFlagBits state)
-        {
-            State = state;
-        }
+            => State = state;
+
+        [MethodImpl(Inline)]
+        public StatusFlags(StatusFlagBits state)
+            => State = (RFlagBits)state;
 
         [MethodImpl(Inline)]
         public bit CF()
@@ -74,5 +76,21 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public void ZF(bit zf)
             => State = (F)bit.set((ulong)State, (byte)I.ZF, zf);
+
+        [MethodImpl(Inline)]
+        public static implicit operator StatusFlags(RFlagBits src)
+            => new StatusFlags(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator RFlagBits(StatusFlags src)
+            => src.State;
+
+        [MethodImpl(Inline)]
+        public static implicit operator StatusFlags(StatusFlagBits src)
+            => new StatusFlags(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator StatusFlagBits(StatusFlags src)
+            => (StatusFlagBits)src.State;
     }
 }

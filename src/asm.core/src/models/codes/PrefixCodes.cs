@@ -111,16 +111,16 @@ namespace Z0.Asm
             None = 0,
 
             [Symbol("ES", "Seg override prefix, x26")]
-            ES = SegOverride.ES,
+            ES = SegOverrideCode.ES,
 
             [Symbol("CS", "Seg override prefix, x2E")]
-            CS = SegOverride.CS,
+            CS = SegOverrideCode.CS,
 
             [Symbol("BT", "Branch hint prefix, x2E")]
             BT = BranchHintCode.BT,
 
             [Symbol("DS", "Seg override prefix, x3E")]
-            DS = SegOverride.DS,
+            DS = SegOverrideCode.DS,
 
             [Symbol("BNT", "Branch hint prefix, x3E")]
             BNT = BranchHintCode.BNT,
@@ -129,10 +129,10 @@ namespace Z0.Asm
             OPSZ = SizeOverrideCode.OPSZ,
 
             [Symbol("FS", "Seg override prefix, x64")]
-            FS = SegOverride.FS,
+            FS = SegOverrideCode.FS,
 
             [Symbol("GS", "Seg override prefix, x65")]
-            GS = SegOverride.GS,
+            GS = SegOverrideCode.GS,
 
             [Symbol("x66", "Mandatory prefix, x66")]
             x66 = MandatoryPrefixCode.x66,
@@ -141,7 +141,7 @@ namespace Z0.Asm
             ADSZ = SizeOverrideCode.ADSZ,
 
             [Symbol("SS", "Seg override prefix, x36")]
-            SS = SegOverride.SS,
+            SS = SegOverrideCode.SS,
 
             [Symbol("LOCK", "Lock prefix, xF0")]
             LOCK = LockPrefixCode.LOCK,
@@ -153,10 +153,10 @@ namespace Z0.Asm
             F3 = MandatoryPrefixCode.F3,
 
             [Symbol("REPNZ", "Repeat prefix, xF2")]
-            REPNZ = RepeatPrefix.REPNZ,
+            REPNZ = RepeatPrefixCode.REPNZ,
 
             [Symbol("REPZ", "Repeat prefix, xF3")]
-            REPZ = RepeatPrefix.REPZ,
+            REPZ = RepeatPrefixCode.REPZ,
 
             [Symbol("BND", "BND prefix, xF2")]
             BND = BndPrefixCode.BND,
@@ -185,11 +185,10 @@ namespace Z0.Asm
             AddressSizeOverride = P2ᐞ06
         }
 
-
         /// <summary>
         /// The segment override codes as specified by Intel Vol II, 2.1.1
         /// </summary>
-        public enum SegOverride : byte
+        public enum SegOverrideCode : byte
         {
             None = 0,
 
@@ -334,7 +333,7 @@ namespace Z0.Asm
         }
 
         [SymSource]
-        public enum RepeatPrefix : byte
+        public enum RepeatPrefixCode : byte
         {
             None = 0,
 
@@ -345,26 +344,38 @@ namespace Z0.Asm
             REPZ = xf3,
         }
 
+        /// <summary>
+        /// Classifies prefix domains
+        /// </summary>
         public enum PrefixKind : byte
         {
             None = 0,
 
+            [Domain(typeof(SegOverrideCode))]
+
             SegOverride = 2,
 
+            [Domain(typeof(SizeOverrideCode))]
             SizeOverride = 3,
 
+            [Domain(typeof(EscapeCode))]
             Escape = 4,
 
+            [Domain(typeof(LockPrefixCode))]
             Lock = 5,
 
+            [Domain(typeof(BndPrefixCode))]
             Bnd = 6,
 
+            [Domain(typeof(BranchHintCode))]
             BranchHint = 7,
 
-            Repeat = 8,
+            [Domain(typeof(RepeatPrefixCode))]
+            Rep = 8,
 
             Mandatory = 9,
 
+            [Domain(typeof(RexPrefixCode))]
             Rex = 10,
 
             Vex = 11,

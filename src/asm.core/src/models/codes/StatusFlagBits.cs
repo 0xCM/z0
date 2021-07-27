@@ -13,16 +13,22 @@ namespace Z0.Asm
         [Flags]
         public enum StatusFlagBits : ulong
         {
+            [Symbol("cf", "Carry Flag")]
             CF = RF.CF,
 
+            [Symbol("pf", "Parity Flag")]
             PF = RF.PF,
 
+            [Symbol("af", "Adjust/Carry Flag")]
             AF = RF.AF,
 
+            [Symbol("zf", "Zero Flag")]
             ZF = RF.ZF,
 
+            [Symbol("sf", "Sign Flag")]
             SF = RF.SF,
 
+            [Symbol("of", "Overflow Flag")]
             OF = RF.OF,
         }
     }

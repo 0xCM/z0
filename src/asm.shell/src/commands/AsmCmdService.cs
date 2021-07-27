@@ -70,6 +70,12 @@ namespace Z0.Asm
         IWorkspace OutWs()
             => Ws.Output();
 
+        FS.FolderPath OutDir(string id)
+            => OutWs().Subdir(id);
+
+        public FS.FolderPath OutRoot()
+            => OutWs().Root;
+
         IWorkspace LogWs()
             => Ws.Logs();
 
@@ -84,6 +90,9 @@ namespace Z0.Asm
 
         ProjectWs Projects()
             => Ws.Projects();
+
+        FS.FolderPath ProjectHome(ProjectId id)
+            => Projects().Home(id);
 
         FS.Files Files(FS.FileExt ext)
             => State.Files().Where(f => f.Is(ext));
