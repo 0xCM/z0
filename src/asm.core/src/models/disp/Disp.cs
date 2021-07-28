@@ -16,15 +16,15 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential, Pack =1)]
     public readonly struct Disp : IDisplacement
     {
-        public uint Value {get;}
+        public int Value {get;}
 
-        public byte Width {get;}
+        public byte StorageWidth {get;}
 
         [MethodImpl(Inline)]
-        public Disp(uint value, byte width)
+        public Disp(int value, byte width)
         {
             Value = value;
-            Width = width;
+            StorageWidth = width;
         }
 
         public bool IsNonZero
@@ -34,7 +34,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Disp((uint value, byte width) src)
+        public static implicit operator Disp((int value, byte width) src)
             => new Disp(src.value,src.width);
 
         public static Disp Empty => default;

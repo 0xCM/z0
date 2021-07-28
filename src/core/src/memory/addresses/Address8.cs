@@ -13,7 +13,7 @@ namespace Z0
     using W = W8;
     using T = System.Byte;
 
-    public readonly struct Address8 : IAddress<A,W,T>
+    public readonly struct Address8 : IAddress<A,T>
     {
         public T Location {get;}
 

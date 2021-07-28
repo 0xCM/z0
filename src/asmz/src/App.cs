@@ -255,14 +255,6 @@ namespace Z0.Asm
             Wf.Row(dx);
         }
 
-        void StatementRountTrip()
-        {
-            var blocks = Wf.ApiHex().ReadBlocks().View;
-            var pipe = Wf.AsmStatementPipe();
-            var root = Db.AppLogDir("statements");
-            pipe.EmitHostStatements(blocks, root);
-            var parsed = Wf.AsmDataPipes().LoadHostStatements(root);
-        }
 
         public void ParseDump()
         {

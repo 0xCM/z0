@@ -38,6 +38,10 @@ namespace Z0
             return true;
         }
 
+        [MethodImpl(Inline)]
+        public static HexArray load(byte[] src)
+            => new HexArray(src);
+
         readonly Index<byte> Data;
 
         [MethodImpl(Inline)]

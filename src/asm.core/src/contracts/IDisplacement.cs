@@ -9,9 +9,9 @@ namespace Z0.Asm
     [Free]
     public interface IDisplacement
     {
-        uint Value {get;}
+        int Value {get;}
 
-        byte Width {get;}
+        byte StorageWidth {get;}
     }
 
     [Free]
@@ -20,11 +20,8 @@ namespace Z0.Asm
     {
         new T Value {get;}
 
-        byte IDisplacement.Width
+        byte IDisplacement.StorageWidth
             => core.width<T>();
-
-        uint IDisplacement.Value
-            => core.bw32(Value);
     }
 
     [Free]

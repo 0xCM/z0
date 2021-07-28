@@ -2,11 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    [ApiHost]
-    public readonly partial struct XedModels
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
+
+    partial struct CpuModels
     {
-        const string xed = nameof(xed);
+        public abstract class CpuDispatcher<T>
+        {
+
+
+        }
     }
 }

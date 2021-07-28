@@ -18,7 +18,7 @@ namespace Z0.Asm
 
         readonly string _Name;
 
-        internal XedDataset(FieldInfo field)
+        public XedDataset(FieldInfo field)
         {
             Field = field;
             _Kind =  (XedDatasetKind)field.GetRawConstantValue();

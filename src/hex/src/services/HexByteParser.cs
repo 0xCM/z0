@@ -126,7 +126,7 @@ namespace Z0
         {
             try
             {
-                dst = src.Split(Chars.Space).Select(x => byte.Parse(x, NumberStyles.HexNumber));
+                dst = src.Trim().Split(Chars.Space).Select(x => byte.Parse(x, NumberStyles.HexNumber));
                 return true;
             }
             catch(Exception e)

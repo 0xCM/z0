@@ -13,7 +13,7 @@ namespace Z0
     using W = W64;
     using T = System.UInt64;
 
-    public readonly struct Address64 : IAddress<A,W,T>
+    public readonly struct Address64 : IAddress<A,T>
     {
         public T Location {get;}
 

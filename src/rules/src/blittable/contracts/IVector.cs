@@ -8,10 +8,25 @@ namespace Z0.Blit
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface IVector<N,T>
-        where N : unmanaged
+    /// <summary>
+    /// Defines a finite sequence of primal values
+    /// </summary>
+    /// <typeparam name="T">The storage cell type</typeparam>
+    [Free]
+    public interface IVector<T> : IPrimitive<T>
         where T : unmanaged
     {
+        /// <summary>
+        /// The vector dimension/length
+        /// </summary>
+        uint N {get;}
 
+        /// <summary>
+        /// Access a vector component i where i=0,...,N-1
+        /// </summary>
+        ref T this[uint i] {get;}
+
+        TypeKind IPrimitive.TypeKind
+            => TypeKind.Vector;
     }
 }

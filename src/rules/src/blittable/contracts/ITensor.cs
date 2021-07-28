@@ -9,20 +9,24 @@ namespace Z0.Blit
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IPrimitive
+    public interface ITensor<T> : IPrimitive<T>
+        where T : unmanaged
     {
-        BitWidth ContentWidth {get;}
+        byte Arity {get;}
 
-        BitWidth StorageWidth {get;}
-
-        TypeKind TypeKind {get;}
+        TypeKind IPrimitive.TypeKind
+            => TypeKind.Tensor;
     }
 
     [Free]
-    public interface IPrimitive<S> : IPrimitive
-        where S : unmanaged
+    public interface ITensor<N,T> : ITensor<T>
+        where N : unmanaged, ITypeNat
+        where T : unmanaged
     {
+        byte ITensor<T>.Arity
+            => Typed.nat8u<N>();
+
         BitWidth IPrimitive.StorageWidth
-            => core.width<S>();
+            => Arity*core.width<T>();
     }
 }

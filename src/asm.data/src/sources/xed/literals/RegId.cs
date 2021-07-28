@@ -578,172 +578,116 @@ namespace Z0
 
             ZMM31,
 
-            [AsmPseudoReg]
             BNDCFG_FIRST=BNDCFGU,
 
-            [AsmPseudoReg]
             BNDCFG_LAST=BNDCFGU,
 
-            [AsmPseudoReg]
             BNDSTAT_FIRST=BNDSTATUS,
 
-            [AsmPseudoReg]
             BNDSTAT_LAST=BNDSTATUS,
 
-            [AsmPseudoReg]
             BOUND_FIRST=BND0,
 
-            [AsmPseudoReg]
             BOUND_LAST=BND3,
 
-            [AsmPseudoReg]
             CR_FIRST=CR0,
 
-            [AsmPseudoReg]
             CR_LAST=CR15,
 
-            [AsmPseudoReg]
             DR_FIRST=DR0,
 
-            [AsmPseudoReg]
             DR_LAST=DR7,
 
-            [AsmPseudoReg]
             FLAGS_FIRST=FLAGS,
 
-            [AsmPseudoReg]
             FLAGS_LAST=RFLAGS,
 
-            [AsmPseudoReg]
             GPR16_FIRST=AX,
 
-            [AsmPseudoReg]
             GPR16_LAST=R15W,
 
-            [AsmPseudoReg]
             GPR32_FIRST=EAX,
 
-            [AsmPseudoReg]
             GPR32_LAST=R15D,
 
-            [AsmPseudoReg]
             GPR64_FIRST=RAX,
 
-            [AsmPseudoReg]
             GPR64_LAST=R15,
 
-            [AsmPseudoReg]
             GPR8_FIRST=AL,
 
-            [AsmPseudoReg]
             GPR8_LAST=R15B,
 
-            [AsmPseudoReg]
             GPR8h_FIRST=AH,
 
-            [AsmPseudoReg]
             GPR8h_LAST=BH,
 
-            [AsmPseudoReg]
             INVALID_FIRST=None,
 
-            [AsmPseudoReg]
             INVALID_LAST=ERROR,
 
-            [AsmPseudoReg]
             IP_FIRST=RIP,
 
-            [AsmPseudoReg]
             IP_LAST=IP,
 
-            [AsmPseudoReg]
             MASK_FIRST=K0,
 
-            [AsmPseudoReg]
             MASK_LAST=K7,
 
-            [AsmPseudoReg]
             MMX_FIRST=MMX0,
 
-            [AsmPseudoReg]
             MMX_LAST=MMX7,
 
-            [AsmPseudoReg]
             MSR_FIRST=SSP,
 
-            [AsmPseudoReg]
             MSR_LAST=IA32_U_CET,
 
-            [AsmPseudoReg]
             MXCSR_FIRST=MXCSR,
 
-            [AsmPseudoReg]
             MXCSR_LAST=MXCSR,
 
-            [AsmPseudoReg]
             PSEUDO_FIRST=STACKPUSH,
 
-            [AsmPseudoReg]
             PSEUDO_LAST=TILECONFIG,
 
-            [AsmPseudoReg]
             PSEUDOX87_FIRST=X87CONTROL,
 
-            [AsmPseudoReg]
             PSEUDOX87_LAST=X87LASTDP,
 
-            [AsmPseudoReg]
             SR_FIRST=ES,
 
-            [AsmPseudoReg]
             SR_LAST=GS,
 
-            [AsmPseudoReg]
             TMP_FIRST=TMP0,
 
-            [AsmPseudoReg]
             TMP_LAST=TMP15,
 
-            [AsmPseudoReg]
             TREG_FIRST=TMM0,
 
-            [AsmPseudoReg]
             TREG_LAST=TMM7,
 
-            [AsmPseudoReg]
             UIF_FIRST=UIF,
 
-            [AsmPseudoReg]
             UIF_LAST=UIF,
 
-            [AsmPseudoReg]
             X87_FIRST=ST0,
 
-            [AsmPseudoReg]
             X87_LAST=ST7,
 
-            [AsmPseudoReg]
             XCR_FIRST=XCR0,
 
-            [AsmPseudoReg]
             XCR_LAST=XCR0,
 
-            [AsmPseudoReg]
             XMM_FIRST=XMM0,
 
-            [AsmPseudoReg]
             XMM_LAST=XMM31,
 
-            [AsmPseudoReg]
             YMM_FIRST=YMM0,
 
-            [AsmPseudoReg]
             YMM_LAST=YMM31,
 
-            [AsmPseudoReg]
             ZMM_FIRST=ZMM0,
 
-            [AsmPseudoReg]
             ZMM_LAST=ZMM31
         }
     }

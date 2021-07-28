@@ -32,7 +32,7 @@ namespace Z0
             readonly AsciLine Data;
 
             [MethodImpl(Inline)]
-            internal TableRow(TableRowKind kind, AsciLine data)
+            public TableRow(TableRowKind kind, AsciLine data)
             {
                 Kind = kind;
                 Data = data;

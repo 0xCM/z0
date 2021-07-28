@@ -26,6 +26,5 @@ namespace Z0.Asm
             public ref CpuCore<T> Core(uint id)
                 => ref _Cores[id];
         }
-
     }
 }

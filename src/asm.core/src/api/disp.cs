@@ -16,7 +16,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The displacement magnitude</param>
         [MethodImpl(Inline), Op]
-        public static Disp8 dis8(byte src)
+        public static Disp8 dis8(sbyte src)
             => new Disp8(src);
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The displacement magnitude</param>
         [MethodImpl(Inline), Op]
-        public static Disp16 disp16(ushort src)
+        public static Disp16 disp16(short src)
             => new Disp16(src);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The displacement magnitude</param>
         [MethodImpl(Inline), Op]
-        public static Disp32 disp32(uint src)
+        public static Disp32 disp32(int src)
             => new Disp32(src);
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0.Asm
         /// <param name="w">The width selector</param>
         /// <param name="value">The displacement magnitude</param>
         [MethodImpl(Inline), Op]
-        public static Disp disp(W8 w, byte src)
+        public static Disp disp(W8 w, sbyte src)
             => new Disp(src, 8);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0.Asm
         /// <param name="w">The width selector</param>
         /// <param name="value">The displacement magnitude</param>
         [MethodImpl(Inline), Op]
-        public static Disp disp(W16 w, ushort src)
+        public static Disp disp(W16 w, short src)
             => new Disp(src, 16);
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0.Asm
         /// <param name="w">The width selector</param>
         /// <param name="value">The displacement magnitude</param>
         [MethodImpl(Inline), Op]
-        public static Disp disp(W16 w, uint src)
+        public static Disp disp(W16 w, int src)
             => new Disp(src, 32);
     }
 }

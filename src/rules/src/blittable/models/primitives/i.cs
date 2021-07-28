@@ -10,33 +10,33 @@ namespace Z0.Blit
     using static Root;
     using static core;
 
-    public struct i0<T> : IPrimitive<T>
+    public struct i0<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 0;
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i1<T> : IPrimitive<T>
+    public struct i1<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 1;
 
         public T Storage;
 
+        [MethodImpl(Inline)]
+        public i1(T src)
+        {
+            Storage = src;
+        }
+
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i2<T> : IPrimitive<T>
+    public struct i2<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 2;
@@ -45,12 +45,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i3<T> : IPrimitive<T>
+    public struct i3<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 3;
@@ -59,12 +56,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i4<T> : IPrimitive<T>
+    public struct i4<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 4;
@@ -73,12 +67,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i5<T> : IPrimitive<T>
+    public struct i5<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 5;
@@ -87,12 +78,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i6<T> : IPrimitive<T>
+    public struct i6<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 6;
@@ -101,12 +89,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i7<T> : IPrimitive<T>
+    public struct i7<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 7;
@@ -115,12 +100,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i8<T> : IPrimitive<T>
+    public struct i8<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 8;
@@ -129,13 +111,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
-
     }
 
-    public struct i16<T> : IPrimitive<T>
+    public struct i16<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 16;
@@ -144,12 +122,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i32<T> : IPrimitive<T>
+    public struct i32<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 32;
@@ -158,12 +133,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i64<T> : IPrimitive<T>
+    public struct i64<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 64;
@@ -172,12 +144,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i128<T> : IPrimitive<T>
+    public struct i128<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 128;
@@ -186,12 +155,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i256<T> : IPrimitive<T>
+    public struct i256<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 256;
@@ -200,12 +166,9 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 
-    public struct i512<T> : IPrimitive<T>
+    public struct i512<T> : ISigned<T>
         where T : unmanaged
     {
         public const ulong Width = 512;
@@ -214,8 +177,5 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
     }
 }

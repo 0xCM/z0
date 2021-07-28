@@ -10,22 +10,27 @@ namespace Z0.Blit
     using static Root;
     using static core;
 
-    public struct v0<T> : IPrimitive<T>
+    /// <summary>
+    /// Represents the empty vector
+    /// </summary>
+    public struct v0<T> : IVector<T>
         where T : unmanaged
     {
         public const ulong Width = 0;
 
+        public ref T this[uint i]
+            => throw new Exception("I do not exist");
+
+        public uint N => 0;
+
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-       TypeKind IPrimitive.TypeKind
-            => TypeKind.Unsigned;
     }
 
     /// <summary>
-    /// Defines a finite sequence of 1-bit values
+    /// Represents a finite sequence of 1-bit values
     /// </summary>
-    public struct v1<T> : IPrimitive<T>
+    public struct v1<T> : IVector<T>
         where T : unmanaged
     {
         readonly Index<T> Data;
@@ -42,7 +47,7 @@ namespace Z0.Blit
             get => ref Cell(index);
         }
 
-        public uint Dim
+        public uint N
         {
             [MethodImpl(Inline)]
             get => Data.Count;
@@ -53,25 +58,194 @@ namespace Z0.Blit
             => ref Data[index];
 
         BitWidth IPrimitive.StorageWidth
-            => Data.Length*size<T>();
+            => Data.Length*width<T>();
 
         BitWidth IPrimitive.ContentWidth
-            => Data.Length;
-
-        TypeKind IPrimitive.TypeKind
-            => TypeKind.Unsigned;
+            => Data.Length*1;
     }
 
-    public struct vector<T>
+    /// <summary>
+    /// Represents a finite sequence of 16-bit values
+    /// </summary>
+    public struct v8<T> : IVector<T>
         where T : unmanaged
     {
-        readonly T[] Data;
+        readonly Index<T> Data;
 
         [MethodImpl(Inline)]
-        internal vector(T[] data)
+        internal v8(T[] cells)
         {
-            Data = data;
+            Data = cells;
         }
 
+        public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(index);
+        }
+
+        public uint N
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        [MethodImpl(Inline)]
+        public ref T Cell(uint index)
+            => ref Data[index];
+
+        BitWidth IPrimitive.StorageWidth
+            => Data.Length*width<T>();
+
+        BitWidth IPrimitive.ContentWidth
+            => Data.Length*8;
+    }
+
+    /// <summary>
+    /// Represents a finite sequence of 16-bit values
+    /// </summary>
+    public struct v16<T> : IVector<T>
+        where T : unmanaged
+    {
+        readonly Index<T> Data;
+
+        [MethodImpl(Inline)]
+        internal v16(T[] cells)
+        {
+            Data = cells;
+        }
+
+        public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(index);
+        }
+
+        public uint N
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        [MethodImpl(Inline)]
+        public ref T Cell(uint index)
+            => ref Data[index];
+
+        BitWidth IPrimitive.StorageWidth
+            => Data.Length*width<T>();
+
+        BitWidth IPrimitive.ContentWidth
+            => Data.Length*16;
+    }
+
+    /// <summary>
+    /// Represents a finite sequence of 32-bit values
+    /// </summary>
+    public struct v32<T> : IVector<T>
+        where T : unmanaged
+    {
+        readonly Index<T> Data;
+
+        [MethodImpl(Inline)]
+        internal v32(T[] cells)
+        {
+            Data = cells;
+        }
+
+        public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(index);
+        }
+
+        public uint N
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        [MethodImpl(Inline)]
+        public ref T Cell(uint index)
+            => ref Data[index];
+
+        BitWidth IPrimitive.StorageWidth
+            => Data.Length*width<T>();
+
+        BitWidth IPrimitive.ContentWidth
+            => Data.Length*32;
+    }
+
+    /// <summary>
+    /// Represents a finite sequence of 64-bit values
+    /// </summary>
+    public struct v64<T> : IVector<T>
+        where T : unmanaged
+    {
+        readonly Index<T> Data;
+
+        [MethodImpl(Inline)]
+        internal v64(T[] cells)
+        {
+            Data = cells;
+        }
+
+        public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(index);
+        }
+
+        public uint N
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        [MethodImpl(Inline)]
+        public ref T Cell(uint index)
+            => ref Data[index];
+
+        BitWidth IPrimitive.StorageWidth
+            => Data.Length*width<T>();
+
+        BitWidth IPrimitive.ContentWidth
+            => Data.Length*64;
+    }
+
+    /// <summary>
+    /// Represents a finite sequence of 128-bit values
+    /// </summary>
+    public struct v128<T> : IVector<T>
+        where T : unmanaged
+    {
+        readonly Index<T> Data;
+
+        [MethodImpl(Inline)]
+        internal v128(T[] cells)
+        {
+            Data = cells;
+        }
+
+        public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(index);
+        }
+
+        public uint N
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        [MethodImpl(Inline)]
+        public ref T Cell(uint index)
+            => ref Data[index];
+
+        BitWidth IPrimitive.StorageWidth
+            => Data.Length*width<T>();
+
+        BitWidth IPrimitive.ContentWidth
+            => Data.Length*128;
     }
 }

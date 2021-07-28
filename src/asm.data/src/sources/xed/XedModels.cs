@@ -9,10 +9,15 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static XedModels;
 
-    partial struct XedRules
+    using T = XedModels.DataType;
+    using W = DataWidth;
+
+    [ApiHost]
+    public readonly partial struct XedModels
     {
+        const string xed = nameof(xed);
+
         /// <summary>
         /// Creates a <see cref='AttributeVector'/> from a <see cref='AttributeKind'> sequence
         /// </summary>
@@ -31,5 +36,26 @@ namespace Z0
             }
             return new AttributeVector(data);
         }
+
+        [Op]
+        public static DataWidth width(DataType src)
+            => src switch {
+                T.I1 => W.W1,
+                T.I8 => W.W8,
+                T.I16 => W.W16,
+                T.I32 => W.W32,
+                T.I64 => W.W64,
+                T.U8 => W.W8,
+                T.U16 => W.W16,
+                T.U32 => W.W32,
+                T.U64 => W.W64,
+                T.U128 => W.W128,
+                T.U256 => W.W256,
+                T.F32 => W.W32,
+                T.F64 => W.W64,
+                T.F80 => W.W80,
+                T.B80 => W.W80,
+                _ => 0
+            };
     }
 }

@@ -10,9 +10,7 @@ namespace Z0.Blit
     using static Root;
     using static core;
     using static AsciCode;
-    using static Rules;
 
-    using C = AsciCode;
     using K = TypeKind;
 
     [ApiHost]
@@ -28,17 +26,6 @@ namespace Z0.Blit
         public static TypeKind typekind(byte index)
             => skip(TypeKinds,index);
 
-        // [MethodImpl(Inline), Op]
-        // public static TypeKind typekind(TypeIndicator src)
-        // {
-
-        // }
-
-        // static Bijection<AsciCode,TypeKind> biject()
-        // {
-
-        // }
-
         static ReadOnlySpan<byte> SymbolIndex
             => new byte[TypeKindCount*2]{
                 (byte)Question,0,
@@ -53,7 +40,6 @@ namespace Z0.Blit
                 (byte)d,9,
                 (byte)s,10
                 };
-
 
         static ReadOnlySpan<AsciCode> IndicatorSymbols
             => new AsciCode[TypeKindCount]{Question,u,i,f,c,e,v,a,t,d,s};

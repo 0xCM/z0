@@ -9,20 +9,11 @@ namespace Z0.Blit
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IPrimitive
+    public interface ISigned<T> : IPrimitive<T>
+        where T : unmanaged
     {
-        BitWidth ContentWidth {get;}
-
-        BitWidth StorageWidth {get;}
-
-        TypeKind TypeKind {get;}
+        TypeKind IPrimitive.TypeKind
+            => TypeKind.Tensor;
     }
 
-    [Free]
-    public interface IPrimitive<S> : IPrimitive
-        where S : unmanaged
-    {
-        BitWidth IPrimitive.StorageWidth
-            => core.width<S>();
-    }
 }

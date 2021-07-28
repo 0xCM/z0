@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    public unsafe readonly struct MemoryAddress : IAddress<ulong>, IComparable<MemoryAddress>, IEquatable<MemoryAddress>
+    public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,ulong>
     {
         public ulong Location {get;}
 

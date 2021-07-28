@@ -148,6 +148,10 @@ namespace Z0
             => (uint)src.Content;
 
         [MethodImpl(Inline)]
+        public static explicit operator ushort(ByteSize src)
+            => (ushort)src.Content;
+
+        [MethodImpl(Inline)]
         public static implicit operator ulong(ByteSize src)
             => src.Content;
 

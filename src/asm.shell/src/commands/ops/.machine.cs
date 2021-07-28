@@ -4,12 +4,41 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
     using static core;
 
     partial class AsmCmdService
     {
         [CmdOp(".machine")]
         Outcome RunMachine(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var proj = "z0";
+            var subject = "statements";
+            var outdir = Projects().Out(proj) + FS.folder(subject);
+            var apihex = Wf.ApiHex();
+            var emitter = Wf.AsmStatementPipe();
+            var loader = Wf.AsmDataPipes();
+
+            var blocks = apihex.ReadBlocks().View;
+            var count = blocks.Length;
+            for(var i=0; i<20; i++)
+            {
+                ref readonly var block = ref skip(blocks,i);
+                var uri = block.OpUri;
+                var code = block.Encoded;
+                var array = HexArray.load(code);
+                var fmt = string.Format("{0}:{1}", uri, array);
+                Write(fmt);
+            }
+
+            // emitter.EmitHostStatements(blocks, outdir);
+            // var parsed = loader.LoadHostStatements(outdir);
+
+            return result;
+        }
+
+        Outcome RunMachine2(CmdArgs args)
         {
             var options = WorkflowOptions.@default();
             options.EmitXedCatalogs = false;

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Address<W,T> : IAddress<W,T>
+    public readonly struct Address<W,T> : IAddress<Address<W,T>,T>
         where W : unmanaged, INumericWidth
         where T : unmanaged
     {

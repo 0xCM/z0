@@ -192,26 +192,32 @@ namespace Z0
         [Op]
         public ReadOnlySpan<ApiHexRow> ReadRows(FS.FilePath src)
         {
-            var data = @readonly(src.ReadLines().Storage.Skip(1));
-            var count = data.Length;
-            var dst = list<ApiHexRow>(count);
+            var data = src.ReadLines().Storage.ToReadOnlySpan();
+            var header = first(data);
+            var count = data.Length - 1;
+            var buffer = alloc<ApiHexRow>(count);
+            ref var dst = ref first(buffer);
             var flow = Wf.Running(string.Format("Reading hex rows from {0}", src.ToUri()));
             for(var i=0; i<count; i++)
             {
-                var input = skip(data,i);
-                if(ParseRow(input, out var row))
-                    dst.Add(row);
+                var input = skip(data, i + 1);
+                var result = ParseRow(input, out var row);
+                if(result)
+                    seek(dst,i) = row;
                 else
-                    Wf.Error(string.Format("Unable to parse {0}", input));
+                {
+                    Wf.Error(string.Format("{0}:{1}", src.ToUri(), result.Message));
+                    return default;
+                }
             }
-            var result = dst.ViewDeposited();
-            Wf.Ran(flow,string.Format("Read {0} hex rows from {1}", result.Length, src.ToUri()));
-            return result;
+            Wf.Ran(flow,string.Format("Read {0} hex rows from {1}", buffer.Length, src.ToUri()));
+            return buffer;
         }
 
         [Op]
         public Count ReadRows(FS.FilePath src, DataList<ApiHexRow> dst)
         {
+            var result = Outcome.Success;
             var data = @readonly(src.ReadLines().Storage.Skip(1));
             var count = data.Length;
             var buffer = list<ApiHexRow>(count);
@@ -219,52 +225,74 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 var input = skip(data,i);
-                if(ParseRow(input, out var row))
+
+                result = ParseRow(input, out var row);
+                if(result)
                 {
                     dst.Add(row);
                     j++;
                 }
                 else
-                    Wf.Error(string.Format("Parse failure for source text {0}", input));
+                {
+                    Wf.Error(result.Message);
+                    return 0;
+                }
             }
             return count;
         }
 
         [Op]
-        public bool ParseRow(string src, out ApiHexRow dst)
+        public Outcome ParseRow(string src, out ApiHexRow dst)
         {
             dst = new ApiHexRow();
+            var result = Outcome.Success;
             try
             {
                 if(empty(src))
-                {
-                    Wf.Error("No text!");
-                    return false;
-                }
+                    return (false, "No text!");
 
-                var fields = text.slice(src,1).SplitClean(FieldDelimiter);
-                if(fields.Length !=  (uint)ApiHexRow.FieldCount)
-                {
-                    Wf.Error($"Found {fields.Length} but {ApiHexRow.FieldCount} are required");
-                    return false;
-                }
+                var fields = src.SplitClean(FieldDelimiter);
+                var count = fields.Length;
+                if(count !=  (uint)ApiHexRow.FieldCount)
+                    return (false,Tables.FieldCountMismatch.Format(ApiHexRow.FieldCount, count));
 
                 var index = 0;
-                DataParser.parse(fields[index++], out dst.Seq);
-                DataParser.parse(fields[index++], out dst.SourceSeq);
-                DataParser.parse(fields[index++], out dst.Address);
-                DataParser.parse(fields[index++], out dst.Length);
-                DataParser.eparse(fields[index++], out dst.TermCode);
-                DataParser.parse(fields[index++], out dst.Uri);
-                DataParser.parse(fields[index++], out dst.Data);
-                return true;
+                result = DataParser.parse(fields[index++], out dst.Seq);
+                if(result.Fail)
+                    return (false, ParseFailure.Format(nameof(dst.Data), fields[index-1]));
+
+                result = DataParser.parse(fields[index++], out dst.SourceSeq);
+                if(result.Fail)
+                    return (false, ParseFailure.Format(nameof(dst.Data), fields[index-1]));
+
+                result = DataParser.parse(fields[index++], out dst.Address);
+                if(result.Fail)
+                    return (false, ParseFailure.Format(nameof(dst.Data), fields[index-1]));
+
+                result = DataParser.parse(fields[index++], out dst.Length);
+                if(result.Fail)
+                    return (false, ParseFailure.Format(nameof(dst.Data), fields[index-1]));
+
+                result = DataParser.eparse(fields[index++], out dst.TermCode);
+                if(result.Fail)
+                    return (false, ParseFailure.Format(nameof(dst.Data), fields[index-1]));
+
+                result = DataParser.parse(fields[index++], out dst.Uri);
+                if(result.Fail)
+                    return (false, ParseFailure.Format(nameof(dst.Data), fields[index-1]));
+
+                result = DataParser.parse(fields[index++], out dst.Data);
+                if(result.Fail)
+                    return (false, ParseFailure.Format(nameof(dst.Data), fields[index-1]));
+                return result;
             }
             catch(Exception e)
             {
-                Wf.Error(e);
-                return false;
+                return e;
             }
         }
+
+        static MsgPattern<Name,string> ParseFailure => DataParser.ParseFailure;
 
         [Op]
         public ReadOnlySpan<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src)

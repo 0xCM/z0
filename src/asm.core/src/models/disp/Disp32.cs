@@ -9,17 +9,17 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct Disp32 : IDisplacement<Disp32,uint>
+    public readonly struct Disp32 : IDisplacement<Disp32,int>
     {
-        public uint Value {get;}
+        public int Value {get;}
 
         [MethodImpl(Inline)]
-        public Disp32(uint value)
+        public Disp32(int value)
         {
             Value = value;
         }
 
-        public byte Width
+        public byte StorageWidth
         {
             [MethodImpl(Inline)]
             get => 32;
@@ -31,17 +31,31 @@ namespace Z0.Asm
             get => Value == 0;
         }
 
+        public string Format()
+            => Value.ToString();
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator Disp32(uint src)
+            => new Disp32((int)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Disp32(int src)
             => new Disp32(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(Disp32 src)
-            => src.Value;
+        public static explicit operator uint(Disp32 src)
+            => (uint)src.Value;
 
         [MethodImpl(Inline)]
         public static implicit operator Disp(Disp32 src)
-            => (src.Value,src.Width);
+            => new Disp(src.Value, src.StorageWidth);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Disp32(long src)
+            => new Disp32((int)src);
 
         public static Disp32 Empty
         {

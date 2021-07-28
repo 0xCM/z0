@@ -21,17 +21,23 @@ namespace Z0.Asm
             Source = src;
         }
 
-        public uint Value
+        public int Value
         {
             [MethodImpl(Inline)]
-            get => bw32(Source.Value);
+            get => int32(Source.Value);
         }
 
-        public byte Width
+        public byte StorageWidth
         {
             [MethodImpl(Inline)]
-            get => Source.Width;
+            get => Source.StorageWidth;
         }
+
+        public string Format()
+            => Value.ToString();
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator Disp<T>(byte src)
@@ -39,23 +45,23 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator Disp<T>(Disp8 src)
-            => new Disp<T>(@as<byte,T>(src.Value));
+            => new Disp<T>(@as<sbyte,T>(src.Value));
 
         [MethodImpl(Inline)]
-        public static implicit operator Disp<T>(ushort src)
-            => new Disp<T>(@as<ushort,T>(src));
+        public static implicit operator Disp<T>(short src)
+            => new Disp<T>(@as<short,T>(src));
 
         [MethodImpl(Inline)]
         public static implicit operator Disp<T>(Disp16 src)
-            => new Disp<T>(@as<ushort,T>(src.Value));
+            => new Disp<T>(@as<short,T>(src.Value));
 
         [MethodImpl(Inline)]
-        public static implicit operator Disp<T>(uint src)
-            => new Disp<T>(@as<uint,T>(src));
+        public static implicit operator Disp<T>(int src)
+            => new Disp<T>(@as<int,T>(src));
 
         [MethodImpl(Inline)]
         public static implicit operator Disp<T>(Disp32 src)
-            => new Disp<T>(@as<uint,T>(src.Value));
+            => new Disp<T>(@as<int,T>(src.Value));
 
         [MethodImpl(Inline)]
         public static implicit operator T(Disp<T> src)

@@ -15,6 +15,9 @@ namespace Z0
     [ApiHost]
     public readonly struct DataParser
     {
+
+        public static MsgPattern<Name,string> ParseFailure => "Parse failure {0}:{1}";
+
         public static Outcome parse(TextLine src, out SymLiteral dst)
         {
             var outcome = Outcome.Success;

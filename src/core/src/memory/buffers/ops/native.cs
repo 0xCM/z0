@@ -18,6 +18,22 @@ namespace Z0
             => new NativeBuffer((liberate(Marshal.AllocHGlobal((int)size), (int)size), size));
 
         /// <summary>
+        /// Allocates a <see cref='NativeBuffer'/> sequence
+        /// </summary>
+        /// <param name="sizes">The respective buffer sizes</param>
+        [Op]
+        public static NativeBufferSeq native(ByteSize[] sizes)
+        {
+            var count = sizes.Length;
+            var dst = new NativeBuffer[count];
+            for(var i=0; i<count; i++)
+                core.seek(dst,i) = native(core.skip(sizes,i));
+            var seq = new NativeBufferSeq(dst);
+            seq.Clear();
+            return seq;
+        }
+
+        /// <summary>
         /// Allocates a native buffer
         /// </summary>
         /// <param name="size">The buffer length in bytes</param>

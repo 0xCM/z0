@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
@@ -39,14 +40,35 @@ namespace Z0.Asm
 
         CmdLineRunner CmdRunner;
 
+        NativeBufferSeq _Buffers;
+
+        AddressMap _AddressMap;
+
+        const ushort BufferSize = Pow2.T14;
+
+        const byte BufferCount = 4;
+
         public AsmCmdService()
         {
             State = new ShellState();
-            CodeBuffer = Buffers.native(Pow2.T14);
+            CodeBuffer = Buffers.native(BufferSize);
+            _Buffers = Buffers.native(new ByteSize[BufferCount]{BufferSize,BufferSize,BufferSize,BufferSize});
+            _AddressMap = AddressMap.cover(_Buffers);
             RoutineName = Identifier.Empty;
             CodeSize = 0;
             _Assembled = array<byte>();
         }
+
+        AddressMap AddressMap
+        {
+            [MethodImpl(Inline)]
+            get => _AddressMap;
+        }
+
+
+        [MethodImpl(Inline)]
+        ref readonly NativeBufferSeq Memory()
+            => ref _Buffers;
 
         protected override void Initialized()
         {

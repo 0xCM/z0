@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using static Root;
-    using static core;
     using static XedModels;
     using static XedModels.RegId;
     using static XedModels.EASZ;

@@ -49,7 +49,6 @@ namespace Z0
         public static ReadOnlySpan<T> view<T>(MemoryRange src)
             => core.cover(src.Min.Ref<T>(), cells<T>(src));
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void store<T>(ReadOnlySpan<SegRef> src, Span<T> dst)
             where T : struct

@@ -55,18 +55,6 @@ namespace Z0
             => IDI.Vector;
 
         /// <summary>
-        /// Identifies the block type partition
-        /// </summary>
-        public static TypeIndicator Block
-            => IDI.Block;
-
-        /// <summary>
-        /// Identifies the generic type partition
-        /// </summary>
-        public static TypeIndicator Generic
-            => IDI.Generic;
-
-        /// <summary>
         /// Specifies whether the indicator is non-indicating
         /// </summary>
         public bool IsEmpty

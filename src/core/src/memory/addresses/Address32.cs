@@ -13,7 +13,7 @@ namespace Z0
     using W = W32;
     using T = System.UInt32;
 
-    public readonly struct Address32 : IAddress<A,W,T>
+    public readonly struct Address32 : IAddress<A,T>
     {
         public T Location {get;}
 

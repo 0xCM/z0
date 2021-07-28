@@ -9,20 +9,20 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct Disp8 : IDisplacement<Disp8,byte>
+    public readonly struct Disp8 : IDisplacement<Disp8,sbyte>
     {
         /// <summary>
         /// The base displacement magnitude
         /// </summary>
-        public byte Value {get;}
+        public sbyte Value {get;}
 
         [MethodImpl(Inline)]
-        public Disp8(byte @base)
+        public Disp8(sbyte @base)
         {
             Value = @base;
         }
 
-        public byte Width => 8;
+        public byte StorageWidth => 8;
 
         public bool IsNonZero
         {
@@ -30,16 +30,36 @@ namespace Z0.Asm
             get => Value == 0;
         }
 
+        int IDisplacement.Value
+        {
+            [MethodImpl(Inline)]
+            get => Value;
+        }
+
+        public string Format()
+            => Value.ToString();
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator Disp8(byte src)
+            => new Disp8((sbyte)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Disp8(sbyte src)
             => new Disp8(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(Disp8 src)
+        public static explicit operator byte(Disp8 src)
+            => (byte)src.Value;
+
+        [MethodImpl(Inline)]
+        public static explicit operator sbyte(Disp8 src)
             => src.Value;
 
         [MethodImpl(Inline)]
         public static implicit operator Disp(Disp8 src)
-            => (src.Value,src.Width);
+            => (src.Value,src.StorageWidth);
     }
 }

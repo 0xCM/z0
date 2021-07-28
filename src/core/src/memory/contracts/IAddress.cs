@@ -20,16 +20,8 @@ namespace Z0
             => Location.Equals(default(T));
     }
 
-    public interface IAddress<W,T> : IAddress<T>
-        where W : unmanaged, IDataWidth
-        where T : unmanaged
-    {
-
-    }
-
-    public interface IAddress<F,W,T> : IAddress<W,T>, INullary<F>, IEquatable<F>, IComparable<F>
-        where W : unmanaged, IDataWidth
-        where F : struct, IAddress<F,W,T>
+    public interface IAddress<F,T> : IAddress<T>, INullary<F>, IEquatable<F>, IComparable<F>
+        where F : unmanaged, IAddress<F,T>
         where T : unmanaged
     {
 
