@@ -8,17 +8,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct asm
     {
         public static Outcome hexbytes(string src, out BinaryCode dst)
-        {
-            var result = HexByteParser.ParseData(src, out var _dst);
-            if(result)
-                dst = _dst.Storage;
-            else
-                dst = BinaryCode.Empty;
-            return result;
-        }
+            => HexByteParser.hexbytes(src, out dst);
     }
 }

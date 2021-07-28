@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     partial class AsmCmdService
     {

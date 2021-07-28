@@ -36,6 +36,7 @@ namespace Z0.Asm
 
         Outcome DumpModules(CmdArgs args, FileModuleKind kind)
         {
+            var result = Outcome.Success;
             var script = kind switch{
                 FileModuleKind.Obj => "dump-obj",
                 FileModuleKind.Exe => "dump-exe",
@@ -57,15 +58,20 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(input,i);
-                var vars = Cmd.vars(
-                    ("SrcDir", path.FolderPath.Format(PathSeparator.BS)),
-                    ("SrcFile", path.FileName.Format()),
-                    ("DstDir", outdir.Format(PathSeparator.BS))
-                    );
 
-                var response = ScriptRunner.RunCmd(cmd, vars);
+                var vars = PathVars.create();
+                vars.DstDir = outdir;
+                vars.SrcDir = path.FolderPath;
+                vars.SrcFile = path.FileName;
+                // var vars = Cmd.vars(
+                //     ("SrcDir", path.FolderPath.Format(PathSeparator.BS)),
+                //     ("SrcFile", path.FileName.Format()),
+                //     ("DstDir", outdir.Format(PathSeparator.BS))
+                //     );
+
+                result = ScriptRunner.RunCmd(cmd, vars.ToCmdVars(), out _);
             }
-            return true;
+            return result;
         }
 
         FS.FolderPath ProjectOutDir(string id)

@@ -176,14 +176,14 @@ namespace Z0
             return total;
         }
 
-        public static Outcome<HexPack> load(FS.FilePath src)
+        public static Outcome load(FS.FilePath src, out HexPack dst)
         {
             var result = Outcome<HexPack>.Success;
             var unpacked = Outcome<ByteSize>.Success;
             var size  = ByteSize.Zero;
             var lines = list<MemoryBlock>();
             var counter = z16;
-            using var reader = src.Utf8Reader();
+            using var reader = src.AsciReader();
             var data = reader.ReadLine();
             while(result.Ok && text.nonempty(data))
             {
@@ -200,8 +200,9 @@ namespace Z0
 
             if(result.Fail)
                 return result;
-            else
-                return new HexPack(lines.ToArray());
+
+            dst = new HexPack(lines.ToArray());
+            return true;
         }
 
         public static Outcome<ByteSize> unpack(ushort index, string src, out MemoryBlock dst)

@@ -5,9 +5,9 @@
 namespace Z0.Asm
 {
     using System;
+
     using static Root;
     using static core;
-    using static WsNames;
     using static TmpTables;
     using static Relations;
 
@@ -24,8 +24,6 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        const byte PointCount = 5;
-
         [CmdOp(".ft")]
         unsafe Outcome FT(CmdArgs args)
         {
@@ -61,9 +59,7 @@ namespace Z0.Asm
             y = (char)ft.Fx(x);
             Write(arrow(x,y));
 
-
             return true;
         }
-
     }
 }

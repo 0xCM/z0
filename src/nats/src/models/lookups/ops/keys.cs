@@ -24,6 +24,7 @@ namespace Z0
             keys(rows,cols,dst);
             return new LookupKeys((rows,cols),dst);
         }
+
         [MethodImpl(Inline), Op]
         public static void keys(ushort rows, ushort cols, Span<LookupKey> dst)
         {

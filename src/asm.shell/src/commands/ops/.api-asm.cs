@@ -65,7 +65,7 @@ namespace Z0.Asm
                     var statements = pipes.LoadHostStatements(file);
                     Write(string.Format("Absorbed {0} {1} statements", statements.Count, file));
                 }
-                Files(files);
+                Files(files,false);
             }
             return result;
         }
@@ -77,11 +77,11 @@ namespace Z0.Asm
             var outcome = ApiParsers.part(part.Value, out var id);
             if(outcome.Fail)
                 return outcome;
-            var pack = Wf.ApiPacks().Current();
-            var files = pack.CapturedAsm(id);
+
+            var files = ApiPack.CapturedAsm(id);
             iter(files, file => Write(file.ToUri()));
 
-            var spath = pack.AsmStatementSummary();
+            var spath = ApiPack.AsmStatementSummary();
             var stats = spath.FileStats();
             var formatter = stats.Formatter();
             Write(formatter.FormatKvp(stats));

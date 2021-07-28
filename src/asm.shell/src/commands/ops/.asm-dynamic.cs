@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".asm-exec")]
+        [CmdOp(".asm-dynamic")]
         Outcome AsmExec(CmdArgs args)
         {
             CodeBuffer.Clear();

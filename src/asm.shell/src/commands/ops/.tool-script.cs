@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     partial class AsmCmdService
     {
         [CmdOp(".tool-script")]

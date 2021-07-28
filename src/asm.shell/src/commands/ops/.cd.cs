@@ -4,15 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
     partial class AsmCmdService
     {
-        [CmdOp(".show-env-vars")]
-        Outcome ShowEnvVars(CmdArgs args)
+        [CmdOp(".cd")]
+        Outcome ChangeDir(CmdArgs args)
         {
-            var vars = Z0.Env.vars();
-            iter(vars, v => Write(v));
+            var dst = FS.dir(arg(args,0).Value);
+            if(!dst.Exists)
+                return (false, FS.missing(dst));
+
+            State.CurrentDir(dst);
+
+            Write(dst);
             return true;
         }
     }

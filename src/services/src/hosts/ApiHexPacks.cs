@@ -109,11 +109,11 @@ namespace Z0
 
         static void load(FS.FilePath src, Lookup<FS.FilePath,HexPack> success, Lookup<FS.FilePath,Outcome> fail)
         {
-            var pack = HexPacks.load(src);
-            if(pack.Fail)
-                fail.Add(src, pack);
+            var result = HexPacks.load(src, out var pack);
+            if(result.Fail)
+                fail.Add(src, result);
             else
-                success.Add(src, pack.Data);
+                success.Add(src, pack);
         }
     }
 }

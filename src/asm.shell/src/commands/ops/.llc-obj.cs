@@ -23,7 +23,6 @@ namespace Z0.Asm
                     var vars = Cmd.vars(
                         ("SrcFile", file.FileName.Format()),
                         ("iset", iset),
-                        //("mcpu", "skylake-avx512"),
                         ("SrcDir", file.FolderPath.Format(PathSeparator.BS))
                         );
 

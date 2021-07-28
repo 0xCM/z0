@@ -295,6 +295,9 @@ namespace Z0
         public FS.FilePath ObjPath(string id)
             => ObjOut() + FS.file(id,FS.Obj);
 
+        public FS.FilePath ExePath(string id)
+            => ExeOut() + FS.file(id,FS.Exe);
+
         public FS.FilePath ListPath(string id)
             => Lists() + FS.file(id, FS.AsmList);
 

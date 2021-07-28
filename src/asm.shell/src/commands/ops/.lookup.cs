@@ -26,9 +26,12 @@ namespace Z0.Asm
             {
                 ref readonly var key = ref keys[i,j];
                 LookupKey expect = (i,j);
+                if(!expect.Equals(key))
+                    return (false, "Test failed");
 
-                Write(string.Format("({0},{1}) -> {2}", i, j, key));
+                //Write(string.Format("({0},{1}) -> {2}", i, j, key));
             }
+            Write("Success");
 
             return true;
         }

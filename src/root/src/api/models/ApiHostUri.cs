@@ -21,6 +21,9 @@ namespace Z0
         public static ApiHostUri from(Type t)
             => new ApiHostUri(t.Assembly.Id(), hostname(t));
 
+        public static ApiHostUri define(PartId part, string host)
+            => new ApiHostUri(part,host);
+
         public PartId Part {get;}
 
         public string HostName {get;}

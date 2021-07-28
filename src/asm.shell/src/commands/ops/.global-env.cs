@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static core;
+
     partial class AsmCmdService
     {
-        [CmdOp(".respack-info")]
-        Outcome RespackInfo(CmdArgs args)
+        [CmdOp(".global-env")]
+        Outcome ShowEnvVars(CmdArgs args)
         {
-            var provider = Wf.ApiResProvider();
-            var path = provider.ResPackPath();
-            var accessors = provider.ResPackAccessors();
-            Write(string.Format("Count:{0}", accessors.Length));
+            var vars = Z0.Env.vars();
+            iter(vars, v => Write(v));
             return true;
         }
     }

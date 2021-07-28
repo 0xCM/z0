@@ -22,9 +22,13 @@ namespace Z0.Asm
             var result = toolchain.Run(spec);
             if(result)
             {
-                var path = AsmWs.BinPath(id);
-                _Assembled = path.ReadBytes();
+                var binfile = AsmWs.BinPath(id);
+                var objfile = AsmWs.ObjPath(id);
+                var asmfile = AsmWs.AsmPath(id);
+                _Assembled = binfile.ReadBytes();
                 RoutineName = id;
+                Files(new FS.FilePath[]{binfile,objfile,asmfile}, false);
+                LlvmObjDump(CmdArgs.Empty);
             }
             return result;
         }

@@ -250,7 +250,7 @@ namespace Z0
             var result = HexByteParser.ParseData(src, out var data);
             if(result)
             {
-                dst = data.Storage;
+                dst = data;
                 return result;
             }
             else

@@ -18,7 +18,6 @@ namespace Z0.Asm
             var input = Files(FS.List).View;
             var count = input.Length;
             var formatter = Tables.formatter<ListItemRecord>(ListItemRecord.RenderWidths);
-
             for(var i=0; i<count; i++)
             {
                 ref readonly var src = ref skip(input,i);
@@ -34,7 +33,7 @@ namespace Z0.Asm
                     var row = member.ToRecord(name);
                     writer.WriteLine(formatter.Format(row));
                 }
-                Status(string.Format("{0} -> {1}", src.ToUri(), dst.ToUri()));
+                Status(FS.flow(src,dst));
             }
 
             return true;

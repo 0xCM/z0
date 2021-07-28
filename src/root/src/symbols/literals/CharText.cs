@@ -399,5 +399,10 @@ namespace Z0
         /// The Right-Bracket fence idiom
         /// </summary>
         public const string fRB = "[";
+
+        /// <summary>
+        /// The canonical eol marker
+        /// </summary>
+        public const string EOL = "\r\n";
     }
 }

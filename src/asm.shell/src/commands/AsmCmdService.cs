@@ -37,6 +37,8 @@ namespace Z0.Asm
 
         AsmEnv AsmEnv;
 
+        CmdLineRunner CmdRunner;
+
         public AsmCmdService()
         {
             State = new ShellState();
@@ -56,6 +58,7 @@ namespace Z0.Asm
             SdmProcessor = Wf.IntelSdmProcessor();
             RegSets = Wf.AsmRegSets();
             AsmEnv = Wf.AsmEnv();
+            CmdRunner = Wf.CmdLineRunner();
             State.DevWs(Ws);
         }
 
@@ -120,12 +123,6 @@ namespace Z0.Asm
                 return f(tool, args);
         }
 
-        ref readonly FS.FilePath Pipe(in FS.FilePath src)
-        {
-            Write(string.Format("Path:{0}",src));
-            return ref src;
-        }
-
         ref readonly ReadOnlySpan<T> Pipe<T>(in ReadOnlySpan<T> src)
         {
             var count = src.Length;
@@ -137,8 +134,8 @@ namespace Z0.Asm
             return ref src;
         }
 
-        ReadOnlySpan<TextLine> RunWinCmd(string spec)
-            => Wf.CmdLineRunner().Run(WinCmd.cmd(spec));
+        Outcome RunWinCmd(string spec, out ReadOnlySpan<TextLine> dst)
+            => CmdRunner.Run(WinCmd.cmd(spec), out dst);
 
         Outcome RunScript(FS.FilePath src, out ReadOnlySpan<TextLine> response)
         {

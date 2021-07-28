@@ -36,6 +36,6 @@ namespace Z0
             => Logs(id) + FS.file(config, FS.Log);
 
         FS.FilePath Inventory()
-            =>  Root + FS.folder(admin) + FS.file(inventory, FS.Txt);
+            => Root + FS.folder(admin) + FS.file(inventory, FS.Txt);
     }
 }

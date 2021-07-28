@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -13,6 +14,37 @@ namespace Z0.Asm
     [ApiHost]
     public class AsmEtl : Service<AsmEtl>
     {
+        public static uint load(FS.FilePath src, List<AsmLine> dst)
+        {
+            var counter = 0u;
+            using var reader = src.AsciLineReader();
+            while(reader.Next(out var line))
+            {
+                if(AsmParser.parse(line, out AsmBlockLabel label, out AsmExpr expr))
+                {
+                    if(AsmParser.parse(label, out AsmOffsetLabel offset))
+                    {
+                        dst.Add(asm.line(offset, expr));
+                        counter++;
+                    }
+                    else
+                    {
+                        if(expr.IsNonEmpty)
+                        {
+                            dst.Add(asm.line(label, expr));
+                            counter++;
+                        }
+                        else
+                        {
+                            dst.Add(asm.line(label));
+                            counter++;
+                        }
+                    }
+                }
+            }
+            return counter;
+        }
+
         public ReadOnlySpan<AsmThumbprint> LoadThumbprints(FS.FilePath src)
         {
             var dst = list<AsmThumbprint>();

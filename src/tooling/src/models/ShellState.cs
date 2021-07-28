@@ -12,7 +12,7 @@ namespace Z0
     [ApiComplete]
     public class ShellState
     {
-        FS.FolderPath _SrcDir;
+        FS.FolderPath _CurrentDir;
 
         ToolId _Tool;
 
@@ -24,19 +24,11 @@ namespace Z0
 
         ApiPath _Api;
 
-        DevWs Ws;
-
         Arrow<Scope> _Channel;
 
-        DevWs DevWs()
+        public void DevWs(DevWs ws)
         {
-            return Ws;
-        }
-
-        public DevWs DevWs(DevWs ws)
-        {
-            Ws = ws;
-            return DevWs();
+            _CurrentDir = ws.Tools().Root;
         }
 
         [MethodImpl(Inline)]
@@ -101,12 +93,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public FS.FolderPath CurrentDir()
-            => _SrcDir;
+            => _CurrentDir;
 
         [MethodImpl(Inline)]
         public FS.FolderPath CurrentDir(FS.FolderPath value)
         {
-            _SrcDir = value;
+            _CurrentDir = value;
             return CurrentDir();
         }
 
@@ -123,7 +115,7 @@ namespace Z0
 
         public ShellState()
         {
-            _SrcDir = FS.FolderPath.Empty;
+            _CurrentDir = FS.FolderPath.Empty;
             _Tool = default;
             _DataSource = FS.FolderPath.Empty;
             _Files = array<FS.FilePath>();

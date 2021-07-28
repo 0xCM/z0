@@ -52,6 +52,22 @@ namespace Z0
             }
         }
 
+        public Outcome RunCmd(CmdLine cmd, CmdVars vars, out ReadOnlySpan<TextLine> dst)
+        {
+            dst = default;
+            try
+            {
+                var process = ScriptProcess.run(cmd, vars);
+                process.Wait();
+                dst = Lines.read(process.Output);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+        }
+
         public ReadOnlySpan<TextLine> RunCmd(CmdLine cmd, Action<Exception> errhandle = null)
         {
             try

@@ -243,5 +243,10 @@ namespace Z0
         /// </summary>
         public static FileExt Help => ext(help);
 
+        /// <summary>
+        /// Defines the <see cref='s'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt S => ext("s");
+
     }
 }

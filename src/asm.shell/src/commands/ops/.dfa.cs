@@ -60,7 +60,6 @@ namespace Z0.Asm
             var e5 = store.Extract(s5);
             Write(e1 + e2 + e3 + e4 + e5);
             return true;
-
         }
     }
 }

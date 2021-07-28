@@ -10,6 +10,9 @@ namespace Z0
     using static Root;
     using static core;
 
+    /// <summary>
+    /// Function definition via point-map specification
+    /// </summary>
     public readonly partial struct FunctionTables
     {
         [Op]

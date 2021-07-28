@@ -11,7 +11,6 @@ namespace Z0
     using static Root;
     using static core;
 
-
     [ApiHost]
     public readonly struct FixedLineFormats
     {
@@ -29,6 +28,5 @@ namespace Z0
                 total += skip(segs,i).Length;
             return (ushort)total;
         }
-
     }
 }

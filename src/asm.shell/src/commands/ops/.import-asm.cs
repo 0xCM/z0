@@ -22,7 +22,7 @@ namespace Z0.Asm
             foreach(var path in paths)
             {
                 lines.Clear();
-                var count = ImportAsm(path, lines);
+                var count = AsmEtl.load(path, lines);
                 counter += count;
                 var desc = string.Format("{0}[{1}]:", path.ToUri(), count);
                 writer.WriteLine(string.Format("; {0}", desc));
@@ -35,37 +35,5 @@ namespace Z0.Asm
         // .project ll
         // .outfiles dumps/*.asm
         // .import-asm
-
-        uint ImportAsm(FS.FilePath src, List<AsmLine> dst)
-        {
-            var counter = 0u;
-            using var reader = src.AsciLineReader();
-            while(reader.Next(out var line))
-            {
-                if(AsmParser.parse(line, out AsmBlockLabel label, out AsmExpr expr))
-                {
-                    if(AsmParser.parse(label, out AsmOffsetLabel offset))
-                    {
-                        dst.Add(asm.line(offset, expr));
-                        counter++;
-                    }
-                    else
-                    {
-                        if(expr.IsNonEmpty)
-                        {
-                            dst.Add(asm.line(label, expr));
-                            counter++;
-                        }
-                        else
-                        {
-                            dst.Add(asm.line(label));
-                            counter++;
-
-                        }
-                    }
-                }
-            }
-            return counter;
-        }
     }
 }

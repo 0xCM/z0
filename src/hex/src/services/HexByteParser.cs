@@ -19,16 +19,32 @@ namespace Z0
         public static HexByteParser Service
             => default(HexByteParser);
 
+        public static Outcome hexbytes(string src, out BinaryCode dst)
+        {
+            dst = BinaryCode.Empty;
+            var result = Outcome.Success;
+            var parts = src.Replace(CharText.EOL, CharText.Space).SplitClean(Chars.Space).ToReadOnlySpan();
+            var count = parts.Length;
+            var buffer = alloc<byte>(count);
+            ref var target = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(parts,i);
+                result = HexNumericParser.parse8u(part, out seek(target,i));
+                if(result.Fail)
+                {
+                    result = (false, string.Format("The source value '{0}' could not be parsed", part));
+                    return result;
+                }
+
+            }
+            dst = buffer;
+            return result;
+        }
+
         [Op]
         static Index<string> split(string src, char sep, bool clean = true)
             => src.Split(sep,  clean ? RemoveEmptyEntries : None);
-
-        [Op]
-        public static bool one(string src, out byte dst)
-        {
-            var s = src.Replace("0x",EmptyString,true,null).Replace('h',Chars.Space).Trim();
-            return byte.TryParse(src, NumberStyles.HexNumber,null, out dst);
-        }
 
         [Op]
         public static bool parse(string src, out byte[] dst)
@@ -58,12 +74,6 @@ namespace Z0
             }
         }
 
-        // [Op]
-        // public static bool parse(string src, out byte dst)
-        // {
-
-        // }
-
         public ParseResult<byte> Parse(string src)
         {
             try
@@ -75,7 +85,6 @@ namespace Z0
                 return ParseResult.unparsed<byte>(src, e);
             }
         }
-
 
         /// <summary>
         /// Parses a single hex digit
@@ -113,16 +122,16 @@ namespace Z0
         /// Parses a space-delimited sequence of hex text
         /// </summary>
         /// <param name="src">The space-delimited hex</param>
-        public static Outcome ParseData(string src, out Index<byte> dst)
+        public static Outcome ParseData(string src, out byte[] dst)
         {
             try
             {
-                dst = src.SplitClean(Chars.Space).Select(x => byte.Parse(x, NumberStyles.HexNumber));
+                dst = src.Split(Chars.Space).Select(x => byte.Parse(x, NumberStyles.HexNumber));
                 return true;
             }
             catch(Exception e)
             {
-                dst = Index<byte>.Empty;
+                dst = Array.Empty<byte>();
                 return (e,$"Input:{src}");
             }
         }
@@ -135,10 +144,7 @@ namespace Z0
             => byte.Parse(ClearSpecs(src), NumberStyles.HexNumber);
 
         ParseResult<char,byte> IParser2<char,byte>.Parse(char src)
-        {
-            var result = Parse(src);
-            return Parser.lift<char,byte>(result);
-        }
+            => Parser.lift<char,byte>(Parse(src));
 
         public ParseResult Parse(object src)
         {

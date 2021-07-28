@@ -18,7 +18,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return (false, string.Format("The input {0} is not a rel32 call"));
 
-            Write(string.Format("{0} => {1:x8}", input, disp));
+            Write(string.Format("{0} => disp{1:x8}", input, disp));
 
             return result;
         }

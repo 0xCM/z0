@@ -28,6 +28,5 @@ namespace Z0
             var i = offset(src.Dim, row, col);
             return ref skip(data,i);
         }
-
     }
 }

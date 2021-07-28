@@ -69,7 +69,7 @@ namespace Z0
             }
         }
 
-        public ReadOnlySpan<TextLine> Run(CmdLine cmd)
+        public Outcome Run(CmdLine cmd, out ReadOnlySpan<TextLine> dst)
         {
             var log = Db.AppLog("cmdline");
             using var writer = log.AsciWriter();
@@ -78,13 +78,13 @@ namespace Z0
                 var process = ScriptProcess.run(cmd, OnStatusEvent, OnErrorEvent).Wait();
                 var lines =  Lines.read(process.Output);
                 core.iter(lines, line => writer.WriteLine(line));
-                return lines;
+                dst = lines;
+                return true;
             }
             catch(Exception e)
             {
-                Error(e);
-                writer.WriteLine(e.ToString());
-                return default;
+                dst = default;
+                return e;
             }
         }
 
