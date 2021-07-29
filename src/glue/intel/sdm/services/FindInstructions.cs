@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static core;
 
     using static IntelSdm;
+    using static SdmModels;
 
     partial class IntelSdmProcessor
     {
@@ -31,13 +32,13 @@ namespace Z0.Asm
             var count = lines.Length;
             var flow = EmittingFile(log);
             using var logger = log.Writer();
-            var matched = MatchPattern(lines, TableHeaderPatterns.HP(n0));
+            var matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n0));
             iter(matched, x => dst.Add(x));
-            matched = MatchPattern(lines, TableHeaderPatterns.HP(n1));
+            matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n1));
             iter(matched, x => dst.Add(x));
-            matched = MatchPattern(lines, TableHeaderPatterns.HP(n2));
+            matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n2));
             iter(matched, x => dst.Add(x));
-            matched = MatchPattern(lines, TableHeaderPatterns.HP(n3));
+            matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n3));
             iter(matched, x => dst.Add(x));
 
             var result = dst.ToSortedSpan();

@@ -10,18 +10,27 @@ namespace Z0.Asm
     using static core;
     using static Root;
     using static TextTools;
+    using static SdmModels;
 
-    using Markers = IntelSdmMarkers;
     using SP = ScalarParser;
     using SQ = SymbolicQuery;
 
     partial struct IntelSdm
     {
+        public static int index(ReadOnlySpan<char> src, string marker)
+        {
+            var index = src.IndexOf(marker);
+            if(index > CommonMarkers.TableNumber.Length)
+                return NotFound;
+            else
+                return index;
+        }
+
         public static Outcome parse(ReadOnlySpan<char> src, out TocTitle dst)
         {
             dst = TocTitle.Empty;
             var page = ChapterPage.Empty;
-            if(!src.Contains(Markers.TocTitle, NoCase))
+            if(!src.Contains(CommonMarkers.TocTitle, NoCase))
                 return false;
 
             var i = placeholder(src);
@@ -60,11 +69,11 @@ namespace Z0.Asm
         public static Outcome parse(ReadOnlySpan<char> src, out ChapterNumber dst)
         {
             dst = ChapterNumber.Empty;
-            var i = text.index(src, Markers.ChapterNumber);
+            var i = text.index(src, CommonMarkers.ChapterNumber);
             if(i == NotFound)
                 return false;
 
-            var numeric = slice(src, i + Markers.ChapterNumber.Length);
+            var numeric = slice(src, i + CommonMarkers.ChapterNumber.Length);
             if(SP.uint8(base10,numeric, out var cn))
             {
                 dst = cn;
@@ -137,10 +146,10 @@ namespace Z0.Asm
             const char NumberEnd = Chars.Dot;
             dst = TableNumber.Empty;
 
-            var i = Markers.index(src, Markers.TableNumber);
+            var i = index(src, CommonMarkers.TableNumber);
             if(i != NotFound)
             {
-                dst = tablenumber(slice(src, i + Markers.TableNumber.Length));
+                dst = tablenumber(slice(src, i + CommonMarkers.TableNumber.Length));
                 return true;
             }
             return false;

@@ -5,13 +5,9 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     using static core;
-    using static Root;
-
-    using static IntelSdm;
+    using static SdmModels;
 
     partial class IntelSdmProcessor
     {

@@ -39,27 +39,6 @@ namespace Z0.Asm
         public ReadOnlySpan<Placeholder> placeholders(uint count)
             => slice(recover<Placeholder>(Placeholders), 0, count);
 
-        /// <summary>
-        /// Counts the number of placeholders in a specified line segment
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline), Op]
-        static byte PlaceholderCount(ReadOnlySpan<char> src)
-        {
-            var counter = z8;
-            for(var i=0; i<src.Length - 1; i+=2)
-            {
-                ref readonly var c0 = ref skip(src, i);
-                ref readonly var c1 = ref skip(src, i + 1);
-                if(placeholder(c0,c1))
-                    counter++;
-                else
-                    break;
-
-            }
-            return counter;
-        }
-
         static ReadOnlySpan<byte> Placeholders
             => new byte[]{
                 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,

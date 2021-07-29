@@ -9,8 +9,9 @@ namespace Z0.Asm
 
     using static core;
     using static Root;
+    using static SdmModels;
 
-    using Patterns = IntelSdmPatterns;
+    using Patterns = SdmModels.PagePatterns;
 
     partial struct IntelSdm
     {

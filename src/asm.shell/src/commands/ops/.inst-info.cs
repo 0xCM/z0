@@ -8,6 +8,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static SdmModels;
 
     partial class AsmCmdService
     {
@@ -29,8 +30,10 @@ namespace Z0.Asm
             for(var i=0; i<tCount; i++)
             {
                 ref readonly var table = ref skip(tables,i);
+                var kind = (SdmTableKind)table.Kind;
+                Write(string.Format("{0} Table", kind.ToString()));
+                Write(RP.PageBreak120);
                 var cols = table.Cols.Map(x => x.Format()).ToArray();
-
                 var header = string.Join(" | ", cols);
                 Write(header);
                 var rows = table.Rows;

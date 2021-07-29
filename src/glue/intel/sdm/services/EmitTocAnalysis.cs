@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using static core;
     using static IntelSdm;
+    using static SdmModels;
 
     partial class IntelSdmProcessor
     {

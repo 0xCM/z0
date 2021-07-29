@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     public interface IReg256<T> : IReg<W256,T>
         where T : unmanaged
     {

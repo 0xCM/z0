@@ -18,10 +18,10 @@ namespace Z0
 
         PartCodeIndex PartIndex;
 
-        UriCode UriCode;
+        ApiCodeLookup UriCode;
 
         [MethodImpl(Inline)]
-        public ApiBlockIndex(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex parts, UriCode code)
+        public ApiBlockIndex(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex parts, ApiCodeLookup code)
         {
             CodeAddresses = memories;
             UriLocations = memuri;
@@ -170,7 +170,7 @@ namespace Z0
         public static ApiBlockIndex Empty
         {
             [MethodImpl(Inline)]
-            get => new ApiBlockIndex(PartCodeAddresses.Empty, PartUriAddresses.Empty, PartCodeIndex.Empty, UriCode.Empty);
+            get => new ApiBlockIndex(PartCodeAddresses.Empty, PartUriAddresses.Empty, PartCodeIndex.Empty, ApiCodeLookup.Empty);
         }
     }
 }

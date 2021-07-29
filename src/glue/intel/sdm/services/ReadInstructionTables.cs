@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static IntelSdm;
+    using static SdmModels;
 
     partial class IntelSdmProcessor
     {
@@ -24,9 +24,8 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var foundtable = false;
             var parsingrows = false;
-            var tablekind = TableKind.None;
+            var tablekind = SdmTableKind.None;
             var rowcount = 0;
-            var info = default(InstructionInfo);
             var cols = Index<TableColumn>.Empty;
             var rows = list<TableRow>();
             var rowidx = z16;
@@ -66,7 +65,7 @@ namespace Z0.Asm
 
                 if(foundtable && !parsingrows)
                 {
-                    var labels =  content.SplitClean(ColSep);
+                    var labels = content.SplitClean(ColSep);
                     if(labels.Length == 0)
                         Warn(string.Format("Expected header"));
 
@@ -78,9 +77,7 @@ namespace Z0.Asm
                     }
                 }
 
-                if(content.StartsWith(TitleMarker))
-                    info = InstructionInfo.init(content.Remove(TitleMarker));
-                else if(content.StartsWith(TableMarker))
+                if(content.StartsWith(TableMarker))
                 {
                     tablekind = TableKinds.from(content.Remove(TableMarker).Trim());
                     table.Clear();

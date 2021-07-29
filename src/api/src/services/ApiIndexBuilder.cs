@@ -22,13 +22,13 @@ namespace Z0
 
         Dictionary<MemoryAddress,OpUri> AddressUri;
 
-        UriCode UriCode;
+        ApiCodeLookup UriCode;
 
         public ApiIndexBuilder()
         {
             CodeAddress = core.dict<MemoryAddress,ApiCodeBlock>();
             AddressUri = core.dict<MemoryAddress,OpUri>();
-            UriCode = new UriCode();
+            UriCode = new ApiCodeLookup();
             Product = ApiBlockIndex.Empty;
         }
 
