@@ -12,7 +12,7 @@ namespace Z0.Asm
         Outcome AsmCleanse(CmdArgs args)
         {
             var result = Outcome.Success;
-            var tool = Toolspace.llc;
+            var tool = Toolspace.llvm_mc;
             var cmd = Cmd.cmdline(ToolWs().Script(tool, "cleanse").Format(PathSeparator.BS));
             var src = Files(FS.S).View;
             var count = src.Length;
@@ -24,6 +24,7 @@ namespace Z0.Asm
                 vars.DstDir = outdir;
                 vars.SrcDir = path.FolderPath;
                 vars.SrcFile = path.FileName;
+                vars.SrcId = path.FileName.WithoutExtension.Format();
                 result = ScriptRunner.RunCmd(cmd, vars.ToCmdVars(), out _);
                 if(result.Fail)
                     break;
