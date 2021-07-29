@@ -94,7 +94,7 @@ namespace Z0
 
             public OperandVisibility Visibility;
 
-            public OperandCategory Category;
+            public LookupKind Category;
 
             public OperandAction Action;
 

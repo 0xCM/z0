@@ -5,35 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static Root;
-    using static core;
     using static WsNames;
-
-    public interface IDomainEnv
-    {
-        Identifier Name {get;}
-
-        ReadOnlySpan<FS.FolderPath> Folders {get;}
-    }
-
-    public interface IDomainEnv<T> : IDomainEnv
-        where T : IDomainEnv<T>
-    {
-        Identifier IDomainEnv.Name
-            => typeof(T).Name;
-    }
-
-    public readonly struct DomainEnv
-    {
-        public static FS.FolderPath[] folders(IDomainEnv src)
-        {
-            var methods = src.GetType().Methods().Returns<FS.FolderPath>().WithArity(0).Concrete();
-            return methods.Select(m => (FS.FolderPath)m.Invoke(src,null));
-        }
-    }
 
     public class AsmEnv : IDomainEnv<AsmEnv>
     {

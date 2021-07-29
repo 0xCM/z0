@@ -10,8 +10,11 @@ namespace Z0.Asm
     using static core;
     using static SdmModels;
 
-    partial class IntelSdmProcessor
+    partial class IntelSdm
     {
+        public static Index<TableColumn> columns(ReadOnlySpan<string> src)
+            => Tables.columns<ColumnKind>(src);
+
         public ReadOnlySpan<Table> ReadInstructionTables(FS.FilePath src)
         {
             const string TitleMarker = "# ";
@@ -71,7 +74,7 @@ namespace Z0.Asm
 
                     if(labels.Length != 0)
                     {
-                        cols = IntelSdm.columns(labels);
+                        cols = columns(labels);
                         table.WithColumns(cols);
                         parsingrows = true;
                     }

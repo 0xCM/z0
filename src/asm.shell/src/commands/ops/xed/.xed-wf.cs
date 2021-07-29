@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
     partial class AsmCmdService
     {
-        [CmdOp(".run-xed-workflow")]
+        [CmdOp(".xed-wf", "Executes the XED etl workflow")]
         Outcome EmitXedTables(CmdArgs args)
         {
             var dst = TableWs().Subdir(AsmTableScopes.IntelXed);
@@ -16,7 +14,5 @@ namespace Z0.Asm
             Wf.IntelXed().EmitTables(dst);
             return true;
         }
-
-        // .xed-isa CASCADE_LAKE
     }
 }

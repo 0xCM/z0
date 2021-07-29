@@ -16,15 +16,14 @@ namespace Z0.Asm
             if(!symbols.Lookup(chipName, out var chip))
                 return (false, string.Format("Chip '{0}' not found", chipName));
 
-            var xed = Wf.IntelXed();
-            var result = xed.LoadChipMap(out var map);
+            var result = Xed.LoadChipMap(out var map);
             if(result.Fail)
                 return result;
 
             var kinds = map[chip].ToHashSet();
 
             var matches = list<XedFormImport>();
-            var forms = xed.LoadFormImports();
+            var forms = Xed.LoadForms();
             var count = forms.Length;
             for(var i=0; i<count; i++)
             {

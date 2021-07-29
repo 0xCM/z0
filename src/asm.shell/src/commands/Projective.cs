@@ -14,47 +14,88 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Projective
     {
+        /// <summary>
+        /// Characterizes a projector
+        /// </summary>
+        /// <typeparam name="S">The source element type</typeparam>
+        /// <typeparam name="T">The target element type</typeparam>
+        public interface IProjector<S,T>
+        {
+            /// <summary>
+            /// Projects elements from a specified source into a specified target
+            /// </summary>
+            /// <param name="src">The data source</param>
+            /// <param name="dst">The data target</param>
+            /// <returns>The count of projected elements, if successful; otherwise an error specification</returns>
+            Outcome<uint> Project(ReadOnlySpan<S> src, Span<T> dst);
+        }
+
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline)]
+        public static Outcome<uint> apply<S,T>(Projector<S,T> p, ReadOnlySpan<S> src, Span<T> dst)
+        {
+            var count = (uint)min(src.Length,dst.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = p.F(skip(src,i));
+            return count;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static DomainKey domain(uint kind, uint id)
+            => new DomainKey(kind,id);
+
+        [MethodImpl(Inline), Op]
+        public static SourceKey source(DomainKey domain, uint id)
+            => new SourceKey(domain,id);
+
+        [MethodImpl(Inline), Op]
+        public static TargetKey target(DomainKey domain, uint id)
+            => new TargetKey(domain,id);
+
+        [MethodImpl(Inline), Op]
+        public static ProjectionKey projection(uint id, SourceKey src, TargetKey dst)
+            => new ProjectionKey(id, src, dst);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Domain<D> domain<D>(D descriptor)
+        public static DomainKey<D> domain<D>(D descriptor)
             where D : unmanaged
-                => new Domain<D>(descriptor);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Source untype<T>(Source<T> src, Func<Source<T>,uint> f)
-            => new Source(src.Domain, f(src));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Target untype<T>(Target<T> src, Func<Target<T>,uint> f)
-            => new Target(src.Domain, f(src));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Source<T> source<T>(Domain d, T rep)
-            => new Source<T>(d,rep);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Target<T> target<T>(Domain d, T rep)
-            => new Target<T>(d,rep);
+                => new DomainKey<D>(descriptor);
 
         [MethodImpl(Inline)]
-        public static Projection<S,T> projection<S,T>(uint id, Source<T> src, Target<T> dst)
-            => new Projection<S,T>(id,src,dst);
+        public static Projector<S,T> projector<S,T>(Func<S,T> f)
+            => new Projector<S,T>(f);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static SourceKey untype<T>(SourceKey<T> src, Func<SourceKey<T>,uint> f)
+            => new SourceKey(src.Domain, f(src));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static TargetKey untype<T>(TargetKey<T> src, Func<TargetKey<T>,uint> f)
+            => new TargetKey(src.Domain, f(src));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static SourceKey<T> source<T>(DomainKey d, T rep)
+            => new SourceKey<T>(d,rep);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static TargetKey<T> target<T>(DomainKey d, T rep)
+            => new TargetKey<T>(d,rep);
 
         [MethodImpl(Inline)]
-        public static Projection projection(uint id, Source src, Target dst)
-            => new Projection(id, src, dst);
+        public static ProjectionKey<S,T> projection<S,T>(uint id, SourceKey<T> src, TargetKey<T> dst)
+            => new ProjectionKey<S,T>(id,src,dst);
 
         [MethodImpl(Inline)]
-        public static Projection untype<S,T>(Projection<S,T> p, Func<Source<T>,uint> f, Func<Target<T>,uint> g)
+        public static ProjectionKey untype<S,T>(ProjectionKey<S,T> p, Func<SourceKey<T>,uint> f, Func<TargetKey<T>,uint> g)
         {
             var src = untype(p.Source,f);
             var dst = untype(p.Target,g);
-            return new Projection(p.Id,src,dst);
+            return new ProjectionKey(p.Id,src,dst);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Domain untyped<D>(Domain<D> d)
+        public static DomainKey untyped<D>(DomainKey<D> d)
             where D : unmanaged
         {
             var k = 0u;
@@ -81,119 +122,123 @@ namespace Z0
                 k = skip32(data,0);
                 i = skip32(data,4);
             }
-            return new Domain(k,i);
-        }
-
-        [MethodImpl(Inline)]
-        public static Projector<S,T> projector<S,T>(Func<S,T> f)
-            => new Projector<S,T>(f);
-
-        [MethodImpl(Inline)]
-        public static Outcome<uint> project<S,T>(Projector<S,T> p, ReadOnlySpan<S> src, Span<T> dst)
-        {
-            var count = (uint)min(src.Length,dst.Length);
-            for(var i=0; i<count; i++)
-                seek(dst,i) = p.F(skip(src,i));
-            return count;
+            return new DomainKey(k,i);
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public readonly struct Domain
+        public readonly struct DomainKey
         {
             public uint Kind {get;}
 
             public uint Id {get;}
 
             [MethodImpl(Inline)]
-            public Domain(uint kind, uint id)
+            public DomainKey(uint kind, uint id)
             {
                 Id = id;
                 Kind = kind;
             }
         }
 
-        public readonly struct Domain<D>
+        /// <summary>
+        /// Describes a domain, in 64 bits or less
+        /// </summary>
+        public readonly struct DomainKey<D>
             where D : unmanaged
         {
             public D Descriptor {get;}
 
             [MethodImpl(Inline)]
-            public Domain(D d)
+            public DomainKey(D d)
             {
                 Descriptor = d;
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator Domain(Domain<D> src)
+            public static implicit operator DomainKey(DomainKey<D> src)
                 => untyped(src);
         }
 
-        public readonly struct Source
+        /// <summary>
+        /// Identifies a domain-relative source
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct SourceKey
         {
-            public Domain Domain {get;}
+            public DomainKey Domain {get;}
 
             public uint Id {get;}
 
             [MethodImpl(Inline)]
-            public Source(Domain d, uint id)
+            public SourceKey(DomainKey d, uint id)
             {
                 Domain = d;
                 Id = id;
             }
         }
 
-        public readonly struct Source<T>
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct SourceKey<S>
         {
-            public Domain Domain {get;}
+            public DomainKey Domain {get;}
 
-            public T Rep {get;}
+            public S Rep {get;}
 
             [MethodImpl(Inline)]
-            public Source(Domain d, T rep)
+            public SourceKey(DomainKey d, S rep)
             {
                 Domain = d;
                 Rep = rep;
             }
         }
 
-        public readonly struct Target
+        /// <summary>
+        /// Identifies a domain-relative target
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct TargetKey
         {
-            public Domain Domain {get;}
+            public DomainKey Domain {get;}
 
             public uint Id {get;}
 
             [MethodImpl(Inline)]
-            public Target(Domain d, uint id)
+            public TargetKey(DomainKey d, uint id)
             {
                 Domain = d;
                 Id = id;
             }
         }
 
-        public readonly struct Target<T>
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct TargetKey<T>
         {
-            public Domain Domain {get;}
+            public DomainKey Domain {get;}
 
             public T Rep {get;}
 
             [MethodImpl(Inline)]
-            public Target(Domain d, T rep)
+            public TargetKey(DomainKey d, T rep)
             {
                 Domain = d;
                 Rep = rep;
             }
         }
 
-        public readonly struct Projection
+        /// <summary>
+        /// Identifies a projection
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct ProjectionKey
         {
+            public SourceKey Source {get;}
+
+            public TargetKey Target {get;}
+
             public uint Id {get;}
 
-            public Source Source {get;}
-
-            public Target Target {get;}
-
             [MethodImpl(Inline)]
-            public Projection(uint id, Source src, Target dst)
+            public ProjectionKey(uint id, SourceKey src, TargetKey dst)
             {
                 Id = id;
                 Source = src;
@@ -201,16 +246,20 @@ namespace Z0
             }
         }
 
-        public readonly struct Projection<S,T>
+        /// <summary>
+        /// Identifies a projection
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public readonly struct ProjectionKey<S,T>
         {
+            public SourceKey<T> Source {get;}
+
+            public TargetKey<T> Target {get;}
+
             public uint Id {get;}
 
-            public Source<T> Source {get;}
-
-            public Target<T> Target {get;}
-
             [MethodImpl(Inline)]
-            public Projection(uint id, Source<T> src, Target<T> dst)
+            public ProjectionKey(uint id, SourceKey<T> src, TargetKey<T> dst)
             {
                 Id = id;
                 Source = src;
@@ -218,23 +267,19 @@ namespace Z0
             }
         }
 
-        public interface IProjector<S,T>
-        {
-            Outcome<uint> Project(ReadOnlySpan<S> src, Span<T> dst);
-        }
-
+        /// <summary>
+        /// A default projection effector
+        /// </summary>
         public readonly struct Projector<S,T> : IProjector<S,T>
         {
             internal readonly Func<S,T> F;
 
             [MethodImpl(Inline)]
             internal Projector(Func<S,T> f)
-            {
-                F = f;
-            }
+                => F = f;
 
             public Outcome<uint> Project(ReadOnlySpan<S> src, Span<T> dst)
-                => project(this,src,dst);
+                => apply(this,src,dst);
         }
     }
 }

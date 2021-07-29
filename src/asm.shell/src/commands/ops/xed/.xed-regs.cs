@@ -4,14 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static core;
+
     partial class AsmCmdService
     {
-        [CmdOp(".sdm")]
-        Outcome ProcessSdm(CmdArgs args)
+        [CmdOp(".xed-regs")]
+        Outcome XedRegs(CmdArgs args)
         {
-            var sdm = Wf.IntelSdm();
-            var lines = sdm.MatchHeaderPatterns(SdmModels.VolDigit.V2);
-            return true;
+            var result = Outcome.Success;
+            var src = Xed.Registers();
+            WriteSyms(src);
+            return result;
         }
     }
 }

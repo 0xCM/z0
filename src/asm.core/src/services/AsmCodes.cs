@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static RegClasses;
     using static AsmOpCodes;
+    using static RegSymbols;
 
     [ApiHost]
     public readonly partial struct AsmCodes

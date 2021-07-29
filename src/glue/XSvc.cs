@@ -17,11 +17,11 @@ namespace Z0
             => Asm.DocServices.create(context);
 
         [Op]
-        public static IntelSdmProcessor IntelSdmProcessor(this IWfRuntime wf)
-            => Asm.IntelSdmProcessor.create(wf);
+        public static IntelSdm IntelSdm(this IWfRuntime wf)
+            => Asm.IntelSdm.create(wf);
 
         [Op]
-        public static IntelIntrinsics IntelIntrinsicsPipe(this IWfRuntime wf)
+        public static IntelIntrinsics IntelIntrinsics(this IWfRuntime wf)
             => Asm.IntelIntrinsics.create(wf);
 
         [Op]

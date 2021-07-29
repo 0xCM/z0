@@ -30,7 +30,13 @@ namespace Z0
             QWord = 8,
 
             [Symbol("x")]
-            XmmWord = 16
+            XmmWord = 16,
+
+            [Symbol("y")]
+            YmmWord = 32,
+
+            [Symbol("z")]
+            ZmmWord = 64
         }
     }
 }

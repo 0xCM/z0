@@ -9,15 +9,16 @@ namespace Z0.Asm
 
     using static Root;
 
+    /// <summary>
+    /// Defines a register name
+    /// </summary>
     public readonly struct RegName
     {
         readonly ulong Data;
 
         [MethodImpl(Inline)]
         internal RegName(ulong data)
-        {
-            Data = data;
-        }
+            => Data = data;
 
         public bool IsEmpty
         {

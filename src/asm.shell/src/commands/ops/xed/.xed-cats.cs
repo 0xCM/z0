@@ -6,12 +6,14 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".sdm")]
-        Outcome ProcessSdm(CmdArgs args)
+        [CmdOp(".xed-cats")]
+        Outcome XedCategories(CmdArgs args)
         {
-            var sdm = Wf.IntelSdm();
-            var lines = sdm.MatchHeaderPatterns(SdmModels.VolDigit.V2);
-            return true;
+            var result = Outcome.Success;
+
+            var src = Xed.Categories();
+            WriteSyms(src);
+            return result;
         }
     }
 }

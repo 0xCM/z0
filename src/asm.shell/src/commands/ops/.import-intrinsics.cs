@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".import-intrinsics")]
         public Outcome ImportIntrinsics(CmdArgs args)
         {
-            Wf.IntelIntrinsicsPipe().Emit();
+            Wf.IntelIntrinsics().Emit();
             return true;
         }
     }

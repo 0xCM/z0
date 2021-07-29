@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using static SdmModels;
-
-    partial class IntelSdmProcessor
+    partial class IntelSdm
     {
         public Outcome EmitSdmSplits()
         {

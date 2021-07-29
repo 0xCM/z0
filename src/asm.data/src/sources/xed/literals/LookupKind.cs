@@ -8,7 +8,7 @@ namespace Z0
     partial struct XedModels
     {
         [SymSource(xed)]
-        public enum OperandCategory : byte
+        public enum LookupKind : byte
         {
             INVALID,
 

@@ -11,6 +11,9 @@ namespace Z0.Asm
 
     using api = AsmRegs;
 
+    /// <summary>
+    /// Represents a register
+    /// </summary>
     [DataType]
     public readonly struct Register : IDataTypeEquatable<Register>
     {
@@ -21,7 +24,7 @@ namespace Z0.Asm
             => Kind = kind;
 
         [MethodImpl(Inline)]
-        public Register(RegIndexCode c, RegClassCode k, RegWidthCode w, BitSplitCode s = 0)
+        public Register(RegIndexCode c, RegClassCode k, RegWidthCode w)
             => Kind = api.kind(c, k, w);
 
         public RegIndexCode Code

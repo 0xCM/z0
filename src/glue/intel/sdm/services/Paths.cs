@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    partial class IntelSdmProcessor
+    partial class IntelSdm
     {
         public ReadOnlySpan<FS.FilePath> SdmUnicodeSources()
             => (RefDocRoot()+ FS.folder(txt)).Files(FS.Txt).Where(f => f.Contains(unicode));

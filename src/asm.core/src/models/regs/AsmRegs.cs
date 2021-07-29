@@ -7,6 +7,5 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmRegs
     {
-
     }
 }

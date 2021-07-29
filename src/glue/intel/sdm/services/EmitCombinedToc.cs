@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     using static core;
 
-    partial class IntelSdmProcessor
+    partial class IntelSdm
     {
         public Outcome EmitCombinedToc()
         {

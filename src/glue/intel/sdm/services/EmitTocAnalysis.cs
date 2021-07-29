@@ -5,10 +5,10 @@
 namespace Z0.Asm
 {
     using static core;
-    using static IntelSdm;
+    using static SdmParsers;
     using static SdmModels;
 
-    partial class IntelSdmProcessor
+    partial class IntelSdm
     {
         string VolumeMarker(byte vol)
             => string.Format("Vol. {0}", vol);

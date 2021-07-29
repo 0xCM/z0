@@ -49,7 +49,7 @@ namespace Z0
                     Wf.IntelXed().EmitCatalog();
 
                 if(options.EmitIntrinsicsInfo)
-                    Wf.IntelIntrinsicsPipe().Emit();
+                    Wf.IntelIntrinsics().Emit();
 
                 if(options.EmitSymbolicLiterals)
                     Wf.Symbolism().EmitLiterals();

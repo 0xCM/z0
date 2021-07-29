@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     using static AsmMnemonicCode;
-    using static AsmCodes;
+    using static RegSymbols;
 
     partial struct AsmExpresions
     {

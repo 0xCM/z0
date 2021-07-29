@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     using static Root;
 
-    partial class IntelSdmProcessor
+    partial class IntelSdm
     {
         public Outcome EmitCharMaps()
         {

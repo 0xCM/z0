@@ -10,16 +10,16 @@ namespace Z0
 
     using static Root;
 
-    public class ToolEnv
+    public class ToolConfigs
     {
-        public static ToolEnv create(ToolConfig[] tools)
-            => new ToolEnv(tools);
+        public static ToolConfigs create(ToolConfig[] src)
+            => new ToolConfigs(src);
 
         readonly Index<ToolConfig> _Tools;
 
         readonly Dictionary<ToolId,ToolConfig> Lookup;
 
-        internal ToolEnv(ToolConfig[] tools)
+        internal ToolConfigs(ToolConfig[] tools)
         {
             _Tools = tools;
             Lookup = tools.Select(t => (t.ToolId, t)).ToDictionary();

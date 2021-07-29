@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".show-tool-env")]
+        [CmdOp(".tool-env")]
         Outcome ShowToolEnv(CmdArgs args)
         {
             var path = ToolWs().Script("show-env-config");

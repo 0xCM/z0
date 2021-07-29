@@ -49,7 +49,7 @@ namespace Z0
         [CmdOp("process-intel-sdm")]
         public Outcome ProcessIntelSdm(CmdArgs args)
         {
-            Wf.IntelSdmProcessor().Run();
+            Wf.IntelSdm().Run();
             return true;
         }
 
@@ -98,7 +98,7 @@ namespace Z0
         [CmdOp("emit-intrinsics-catalog")]
         public Outcome EmitIntrinsicsCatalog(CmdArgs args)
         {
-            Wf.IntelIntrinsicsPipe().Emit();
+            Wf.IntelIntrinsics().Emit();
             return true;
         }
 

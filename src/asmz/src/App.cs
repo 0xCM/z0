@@ -79,7 +79,7 @@ namespace Z0.Asm
         }
 
         public ReadOnlySpan<string> LoadMnemonics()
-            => Wf.IntelXed().MnemonicNames();
+            => Wf.IntelXed().ClassNames();
 
         void EmitRuntimeMembers()
         {

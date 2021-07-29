@@ -130,7 +130,7 @@ namespace Z0
             var pack = service.Current();
             var files = pack.Files(FS.Csv).Yield();
             var counting = Wf.Running(string.Format("Counting lines in {0} files from {1}", files.Length, pack.Root));
-            var counts = TextFiles.linecounts(files);
+            var counts = FS.linecounts(files);
             iter(counts, c => Wf.Row(c.Format()));
             Wf.Ran(counting, string.Format("Counted lines in {0} files", files.Length));
             return counts;
