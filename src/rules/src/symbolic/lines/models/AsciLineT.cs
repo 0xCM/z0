@@ -9,54 +9,48 @@ namespace Z0
 
     using static Root;
 
-    public struct UnicodeLine : IComparable<UnicodeLine>
+    public readonly struct AsciLine<T>
+        where T : unmanaged
     {
         public LineNumber LineNumber {get;}
 
-        public string Content {get;}
+        readonly Index<T> Data;
 
         [MethodImpl(Inline)]
-        public UnicodeLine(uint number, uint start, string src)
+        public AsciLine(uint number, T[] src)
         {
             LineNumber = number;
-            Content = src;
+            Data = src;
         }
 
-        [MethodImpl(Inline)]
-        public UnicodeLine(uint number, string src)
-        {
-            LineNumber = number;
-            Content = src;
-        }
-
-        public ReadOnlySpan<char> View
+        public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get => Content;
+            get => Data.View;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => Data.Length;
         }
 
         public int RenderLength
         {
             [MethodImpl(Inline)]
-            get => Content.Length + LineNumber.RenderLength;
+            get => Data.Length + LineNumber.RenderLength;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Length == 0;
+            get => Data.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Length != 0;
+            get => Data.IsNonEmpty;
         }
 
         public string Format()
@@ -65,14 +59,10 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        [MethodImpl(Inline)]
-        public int CompareTo(UnicodeLine other)
-            => LineNumber.CompareTo(other.LineNumber);
-
-        public static UnicodeLine Empty
+        public static AsciLine<T> Empty
         {
             [MethodImpl(Inline)]
-            get => new UnicodeLine(0,0,EmptyString);
+            get => new AsciLine<T>(0,core.array<T>());
         }
     }
 }

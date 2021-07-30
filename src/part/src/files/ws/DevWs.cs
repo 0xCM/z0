@@ -18,10 +18,13 @@ namespace Z0
 
         FS.FolderPath _WsRoot;
 
+        FS.FolderPath _OutRoot;
+
         [MethodImpl(Inline)]
         DevWs(FS.FolderPath root)
         {
             _WsRoot = root;
+            _OutRoot = FS.dir("j:/ws/.out");
         }
 
         public FS.FolderPath Root
@@ -43,7 +46,7 @@ namespace Z0
             => ControlWs.create(_WsRoot + FS.folder(control));
 
         public ProjectWs Projects()
-            => ProjectWs.create(_WsRoot + FS.folder(projects));
+            => ProjectWs.create(_WsRoot + FS.folder(projects), _OutRoot + FS.folder(projects));
 
         public IWorkspace Sources()
             => SourcesWs.create(_WsRoot + FS.folder(sources));
@@ -55,7 +58,7 @@ namespace Z0
             => GenWs.create(_WsRoot + FS.folder(gen));
 
         public IWorkspace Output()
-            => OutputWs.create(FS.dir("j:/ws/.out"));
+            => OutputWs.create(_OutRoot);
 
         public IWorkspace Imports()
             => ImportsWs.create(_WsRoot + FS.folder(imports));

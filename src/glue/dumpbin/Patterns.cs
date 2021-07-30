@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -21,9 +21,9 @@ namespace Z0.Tools
             switch(id)
             {
                 case CmdId.EmitAsm:
-                    return ext(DISASM) + ext(NOBYTES) + FS.Asm;
+                    return ext(DISASM) + FS.Asm;
                 case CmdId.EmitRawData:
-                    return ext(RAWDATA) + FS.Log;
+                    return ext(RAWDATA) + FS.Hex;
                 case CmdId.EmitHeaders:
                     return ext(HEADERS) + FS.Log;
                 case CmdId.EmitRelocations:

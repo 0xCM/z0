@@ -31,8 +31,9 @@ namespace Z0.Blit
     }
 
     /// <summary>
-    /// Represents a finite sequence of 1-bit values
+    /// Represents a finite sequence of 1-bit values covered byte <typeparamref='T'/> storage cells
     /// </summary>
+    /// <typeparam name="T">The storage cell type</param>
     public struct v1<T> : IVector<T>
         where T : unmanaged
     {
@@ -74,7 +75,7 @@ namespace Z0.Blit
     }
 
     /// <summary>
-    /// Represents a finite sequence of 16-bit values
+    /// Represents a finite sequence of 8-bit values
     /// </summary>
     public struct v8<T> : IVector<T>
         where T : unmanaged

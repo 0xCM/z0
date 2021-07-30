@@ -2,28 +2,27 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Blit
+namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Root;
 
-    public readonly struct Name<T> : IName<Name<T>,T>
-        where T : unmanaged
+    public struct LineReaderState
     {
-        public T Storage {get;}
+        public readonly StreamReader Source;
 
-        public uint Length {get;}
+        public uint LineCount;
 
-        public byte PointSize {get;}
+        public uint Offset;
 
         [MethodImpl(Inline)]
-        public Name(T data, uint length, byte psz)
+        public LineReaderState(StreamReader src)
         {
-            Storage= data;
-            Length = length;
-            PointSize = psz;
+            Source = src;
+            LineCount = 0;
+            Offset = 0;
         }
     }
 }

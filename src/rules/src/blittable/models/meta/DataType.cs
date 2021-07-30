@@ -19,11 +19,11 @@ namespace Z0.Blit
         public uint StorageWidth {get;}
 
         [MethodImpl(Inline)]
-        public DataType(TypeKind kind, BitWidth cwidth, BitWidth swidth)
+        public DataType(TypeKind kind, BitWidth content, BitWidth storage)
         {
             Kind = kind;
-            ContentWidth = cwidth;
-            StorageWidth = swidth;
+            ContentWidth = content;
+            StorageWidth = storage;
         }
     }
 }

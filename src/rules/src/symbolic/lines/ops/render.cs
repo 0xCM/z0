@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using SR = SymbolicRender;
+    using static core;
 
     partial struct Lines
     {
@@ -28,6 +29,17 @@ namespace Z0
             SR.render(format(src.LineNumber), ref i, dst);
             if(src.IsNonEmpty)
                 SR.render(src.Codes, ref i, dst);
+            return i - i0;
+        }
+
+        [Op]
+        public static uint render<T>(in AsciLine<T> src, ref uint i, Span<char> dst)
+            where T : unmanaged
+        {
+            var i0 = i;
+            SR.render(format(src.LineNumber), ref i, dst);
+            if(src.IsNonEmpty)
+                SR.render(recover<T,AsciCode>(src.View), ref i, dst);
             return i - i0;
         }
 

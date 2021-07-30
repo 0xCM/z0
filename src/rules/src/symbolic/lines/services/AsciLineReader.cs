@@ -54,7 +54,7 @@ namespace Z0
 
             LineCount++;
 
-            if(Lines.parse(data, out var length, out var number))
+            if(Lines.number(data, out var length, out var number))
                 dst = new AsciLine(number, slice(data, (int)length));
             else
                 dst = new AsciLine(LineCount, data);

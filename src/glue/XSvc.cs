@@ -53,7 +53,7 @@ namespace Z0
 
         [Op]
         public static DumpBin DumpBin(this IWfRuntime wf)
-            => Tools.DumpBin.create(wf);
+            => Z0.DumpBin.create(wf);
 
         [Op]
         public static XedTool XedTool(this IWfRuntime wf)

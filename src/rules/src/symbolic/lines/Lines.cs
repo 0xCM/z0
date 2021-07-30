@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static Root;
+
     [ApiHost]
     public readonly partial struct Lines
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

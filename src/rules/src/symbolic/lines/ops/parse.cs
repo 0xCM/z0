@@ -15,7 +15,7 @@ namespace Z0
     partial struct Lines
     {
         [Op]
-        public static Outcome parse(ReadOnlySpan<char> src, out uint consumed, out LineNumber dst)
+        public static Outcome number(ReadOnlySpan<char> src, out uint consumed, out LineNumber dst)
         {
             consumed = 0;
             dst = default;
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [Op]
-        public static Outcome parse(ReadOnlySpan<byte> src, out uint j, out LineNumber dst)
+        public static Outcome number(ReadOnlySpan<byte> src, out uint j, out LineNumber dst)
         {
             j=0;
             dst = 0;

@@ -81,5 +81,40 @@ namespace Z0
             }
             return length;
         }
+
+        /// <summary>
+        /// Reads a <see cref='UnicodeLine'/> from the data source
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="number">The current line count</param>
+        /// <param name="i">The source-relative offset</param>
+        /// <param name="dst">The target</param>
+        [Op]
+        public static uint line(string src, ref uint number, ref uint i, out AsciLine<byte> dst)
+        {
+            var i0 = i;
+            dst = AsciLine<byte>.Empty;
+            var max = src.Length;
+            var length = 0u;
+            var data = span(src);
+            if(empty(src,i))
+            {
+                i+=2;
+            }
+            else
+            {
+                while(i++ < max - 1)
+                {
+                    if(SQ.eol(skip(data, i), skip(data, i + 1)))
+                    {
+                        length = i - i0;
+                        dst = asci(++number, text.asci(text.slice(src, i0, length)).Storage);
+                        i+=2;
+                        break;
+                    }
+                }
+            }
+            return length;
+        }
     }
 }

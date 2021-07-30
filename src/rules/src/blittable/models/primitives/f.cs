@@ -4,19 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Blit
 {
-    public struct f0<T> : IPrimitive<T>
+    public struct f0<T> : IFloat<T>
         where T : unmanaged
     {
         public const ulong Width = 0;
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-        TypeKind IPrimitive.TypeKind
-            => TypeKind.Float;
     }
 
-    public struct f16<T> : IPrimitive<T>
+    public struct f16<T> : IFloat<T>
         where T : unmanaged
     {
         public const ulong Width = 16;
@@ -25,34 +22,28 @@ namespace Z0.Blit
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-        TypeKind IPrimitive.TypeKind
-            => TypeKind.Float;
     }
 
-    public struct f32<T> : IPrimitive<T>
+    public struct f32<T> : IFloat<T>
         where T : unmanaged
     {
         public const ulong Width = 32;
+
         public T Storage;
 
         BitWidth IPrimitive.ContentWidth
             => Width;
 
-        TypeKind IPrimitive.TypeKind
-            => TypeKind.Float;
     }
 
-    public struct f64<T> : IPrimitive<T>
+    public struct f64<T> : IFloat<T>
         where T : unmanaged
     {
         public const ulong Width = 64;
+
         public T Storage;
 
         BitWidth IPrimitive.ContentWidth
             => Width;
-
-        TypeKind IPrimitive.TypeKind
-            => TypeKind.Float;
     }
 }

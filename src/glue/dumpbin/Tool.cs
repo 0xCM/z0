@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -48,6 +48,7 @@ namespace Z0.Tools
 
             return paths.ToArray();
         }
+
 
         FS.FilePath EmitScript(CmdId cmd, FileModule[] src, FS.FileExt ext, FS.FolderPath dst)
         {

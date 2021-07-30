@@ -14,8 +14,8 @@ namespace Z0
     public sealed class ProjectWs : IWorkspace<ProjectWs>
     {
         [MethodImpl(Inline)]
-        public static ProjectWs create(FS.FolderPath root)
-            => new ProjectWs(root);
+        public static ProjectWs create(FS.FolderPath src, FS.FolderPath dst)
+            => new ProjectWs(src,dst);
 
         const string docs = nameof(docs);
 
@@ -29,6 +29,8 @@ namespace Z0
 
         public FS.FolderPath Root {get; private set;}
 
+        FS.FolderPath OutRoot;
+
         public Identifier Name
         {
             [MethodImpl(Inline)]
@@ -37,9 +39,10 @@ namespace Z0
 
         Dictionary<ProjectId,ProjectConfig> ConfigLookup;
 
-        public ProjectWs(FS.FolderPath root)
+        public ProjectWs(FS.FolderPath src, FS.FolderPath dst)
         {
-            Root = root;
+            Root = src;
+            OutRoot = dst;
             ConfigLookup = dict<ProjectId,ProjectConfig>();
         }
 
@@ -47,10 +50,19 @@ namespace Z0
             => Root + FS.folder(id.Format());
 
         public FS.FolderPath Out(ProjectId id)
-            => Home(id) + FS.folder(output);
+            => OutRoot + FS.folder(id.Format());
 
         public FS.Files OutFiles(ProjectId id)
             => Out(id).Files(true);
+
+        public FS.Files OutFiles(ProjectId id, FS.FileExt ext)
+            => Out(id).Files(ext, true);
+
+        public FS.Files OutFiles(ProjectId id, FS.FolderName subdir)
+            => (Out(id) + subdir).Files(true);
+
+        public FS.Files OutFiles(ProjectId id, FS.FolderName subdir, FS.FileExt ext)
+            => (Out(id) + subdir).Files(ext,true);
 
         public FS.FolderPath Docs(ProjectId id)
             => Home(id) + FS.folder(docs);

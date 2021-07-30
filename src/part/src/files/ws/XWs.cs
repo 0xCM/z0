@@ -14,9 +14,5 @@ namespace Z0
        [Op]
        public static DevWs DevWs(this IEnvProvider provider)
             => Z0.DevWs.create(provider.Env.DevWs);
-
-        [Op]
-        public static ProjectWs ProjectBase(this IServiceContext context, FS.FolderPath root)
-            => ProjectWs.create(root);
     }
 }

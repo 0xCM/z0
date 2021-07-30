@@ -4,21 +4,44 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static WsNames;
-
     partial class AsmCmdService
     {
         [CmdOp(".outfiles")]
         public Outcome OutFiles(CmdArgs args)
         {
-            var project = State.Project();
-            var dir = project.IsEmpty ? OutWs().Root : OutWs().Subdir(projects) + FS.folder(project.Format());
-            Write(string.Format("Searching {0}", dir.Format()));
-            if(args.Length == 0)
-                Files(dir.Files(true));
+            var result = Outcome.Success;
+            ProjectId id = arg(args,0).Value;
+            if(args.Length == 2)
+            {
+                var filter = arg(args,1).Value;
+                if(filter.StartsWith(Chars.Dot))
+                {
+                    var ext = FS.ext(text.slice(filter,1));
+                    Files(Projects().OutFiles(id,ext));
+                }
+                else
+                {
+                    var folder = FS.folder(filter);
+                    Files(Projects().OutFiles(id,folder));
+                }
+            }
+            else if(args.Length == 3)
+            {
+                var folder = FS.folder(arg(args,1).Value);
+                var filter = arg(args,2).Value;
+                if(!filter.StartsWith(Chars.Dot))
+                    return (false, "File extension filter expected");
+                var ext = FS.ext(text.slice(filter,1));
+                Files(Projects().OutFiles(id,folder,ext));
+            }
             else
-                Files(dir.Files(arg(args,0).Value,true));
-            return true;
+                Files(Projects().OutFiles(id));
+            return result;
         }
+
+        //.outfiles ll
+        //.outfiles ll .obj
+        //.outfiles ll dumps
+        //.outfiles ll dumps .rawdata.hex
     }
 }

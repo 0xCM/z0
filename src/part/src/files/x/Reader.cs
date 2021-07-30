@@ -38,6 +38,10 @@ namespace Z0
             => new AsciLineReader(src.AsciReader());
 
         [Op]
+        public static AsciLineReader<byte> AsciLineReader2(this FS.FilePath src)
+            => new AsciLineReader<byte>(src.AsciReader());
+
+        [Op]
         public static LineReader Utf8LineReader(this FS.FilePath src)
             => new LineReader(src.Utf8Reader());
 

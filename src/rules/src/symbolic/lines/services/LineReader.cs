@@ -39,7 +39,7 @@ namespace Z0
             Consumed++;
 
             var data = span(line);
-            if(Lines.parse(data, out var length, out var number))
+            if(Lines.number(data, out var length, out var number))
                 dst = new TextLine(number, line.Substring((int)length));
             else
                 dst = new TextLine(Consumed, line);
