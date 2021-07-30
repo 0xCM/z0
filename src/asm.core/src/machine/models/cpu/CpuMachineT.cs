@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     partial struct CpuModels
     {
-
         public class CpuCore
         {
             public uint Number {get;}

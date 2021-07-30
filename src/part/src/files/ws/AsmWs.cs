@@ -102,8 +102,11 @@ namespace Z0
         /// <summary>
         /// Defines a path of the form {Src}/asm
         /// </summary>
-        public FS.FolderPath AsmSrc()
+        public FS.FolderPath AsmLibSrc()
             => Src() + FS.folder("asm");
+
+        public FS.FolderPath AsmAppSrc()
+            => Src() + FS.folder("apps");
 
         /// <summary>
         /// Defines a path of the form {Root}/cpp
@@ -111,8 +114,11 @@ namespace Z0
         public FS.FolderPath CppSrc()
             => Root + FS.folder(cpp);
 
+        public FS.FilePath AppPath(string id)
+            => AsmAppSrc() + FS.file(id,FS.Asm);
+
         public FS.FilePath AsmPath(string id)
-            => AsmSrc() + FS.file(id, FS.Asm);
+            => AsmLibSrc() + FS.file(id, FS.Asm);
 
         public FS.FolderPath HexDir()
             => Output() + FS.folder(hex);
@@ -321,6 +327,25 @@ namespace Z0
             if(spec.ObjKind > ObjFileKind.bin)
                 spec.ObjPath = ObjPath(id);
 
+            return spec;
+        }
+
+        public AsmToolchainSpec ToolchainSpec(ToolId assembler, ToolId disassembler, FS.FilePath src)
+        {
+            var spec = new AsmToolchainSpec();
+            var id = src.FileName.WithoutExtension.Format();
+            spec.Assembler = assembler;
+            spec.Disassembler = disassembler;
+            spec.AsmPath = src;
+            spec.BinPath = BinPath(id);
+            spec.HexPath = HexPath(id);
+            spec.ObjKind = ObjFileKind.win64;
+            spec.DisasmPath = DisasmPath(id, disassembler);
+            spec.Analysis = Analysis();
+            spec.ListPath = ListPath(id);
+            spec.AsmBitMode = Bitness.b64;
+            spec.EmitDebugInfo = true;
+            spec.ObjPath = ObjPath(id);
             return spec;
         }
 

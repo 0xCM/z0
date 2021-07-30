@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".outfiles", "Output Files -> State")]
+        [CmdOp(".outfiles")]
         public Outcome OutFiles(CmdArgs args)
         {
             var project = State.Project();

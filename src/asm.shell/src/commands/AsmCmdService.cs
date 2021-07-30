@@ -46,6 +46,8 @@ namespace Z0.Asm
 
         IntelXed Xed;
 
+        AsmToolchain AsmToolchain;
+
         const ushort BufferSize = Pow2.T14;
 
         const byte BufferCount = 4;
@@ -84,6 +86,7 @@ namespace Z0.Asm
             AsmEnv = Wf.AsmEnv();
             CmdRunner = Wf.CmdLineRunner();
             Xed = Wf.IntelXed();
+            AsmToolchain = Wf.AsmToolchain();
             State.DevWs(Ws);
         }
 
@@ -159,28 +162,21 @@ namespace Z0.Asm
             return src;
         }
 
-        Outcome RunTool(CmdArgs args, Func<ToolId,CmdArgs,Outcome> f)
+        void ReceiveCmdStatus(in string src)
         {
-            var tool = args.IsNonEmpty ? (ToolId)arg(args,0).Value : State.Tool();
-            if(tool.IsEmpty)
-                return (false, NoToolSelected.Format());
-            else
-                return f(tool, args);
+
         }
 
-        ref readonly ReadOnlySpan<T> Pipe<T>(in ReadOnlySpan<T> src)
+        void ReceiveCmdError(in string src)
         {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var input = ref skip(src,i);
-                Write(input.ToString());
-            }
-            return ref src;
+            Error(src);
         }
 
-        Outcome RunWinCmd(string spec, out ReadOnlySpan<TextLine> dst)
-            => CmdRunner.Run(WinCmd.cmd(spec), out dst);
+        Outcome Run(CmdLine cmd, CmdVars vars, out ReadOnlySpan<TextLine> response)
+            => ScriptRunner.RunCmd(cmd, vars, ReceiveCmdStatus, ReceiveCmdError,  out response);
+
+        Outcome RunWinCmd(string spec, out ReadOnlySpan<TextLine> response)
+            => CmdRunner.Run(WinCmd.cmd(spec), out response);
 
         Outcome RunScript(FS.FilePath src, out ReadOnlySpan<TextLine> response)
         {

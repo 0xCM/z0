@@ -16,17 +16,10 @@ namespace Z0.Asm
     {
         public MemoryAddress Base {get;}
 
-        public AsmSymbol Identity {get;}
+        public string Identity {get;}
 
         [MethodImpl(Inline)]
         public AsmCaller(MemoryAddress address, string identity)
-        {
-            Base = address;
-            Identity = identity;
-        }
-
-        [MethodImpl(Inline)]
-        public AsmCaller(MemoryAddress address, AsmSymbol identity)
         {
             Base = address;
             Identity = identity;

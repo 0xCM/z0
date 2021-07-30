@@ -64,8 +64,6 @@ namespace Z0.Asm
 
         public static string ptr() => "ptr";
 
-        static ReadOnlySpan<char> Sizes => "word\0dword\0qword\0xmmword\0ymmword\0zmmword";
-
         [Op]
         public static Symbols<AsmMnemonicCode> Mnemonics()
             => _Mnemonics;

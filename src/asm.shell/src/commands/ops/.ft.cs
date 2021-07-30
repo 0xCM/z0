@@ -17,9 +17,9 @@ namespace Z0.Asm
     {
         const byte PointCount = 5;
 
-        public static ReadOnlySpan<C> RPC => new C[PointCount]{C.Base,C.B,C.X,C.R,C.W};
+        public static ReadOnlySpan<C> Source => new C[PointCount]{C.Base,C.B,C.X,C.R,C.W};
 
-        public static ReadOnlySpan<AsciCode> RPCA => new AsciCode[PointCount]{AsciCode.Bang, AsciCode.B, AsciCode.X, AsciCode.R, AsciCode.W};
+        public static ReadOnlySpan<AsciCode> Target => new AsciCode[PointCount]{AsciCode.Bang, AsciCode.B, AsciCode.X, AsciCode.R, AsciCode.W};
     }
 
     partial class AsmCmdService
@@ -27,13 +27,10 @@ namespace Z0.Asm
         [CmdOp(".ft")]
         unsafe Outcome FT(CmdArgs args)
         {
-            var src = recover<C,byte>(RPC);
-            var dst = recover<AsciCode,byte>(RPCA);
-            var ax = address(first(RPC));
-            var pAx = ax.Pointer<byte>();
-            var ay = address(first(RPCA));
-            var pAy = ay.Pointer<byte>();
-
+            var src = recover<C,byte>(Source);
+            var dst = recover<AsciCode,byte>(Target);
+            var ax = address(first(Source));
+            var ay = address(first(Target));
             var ft = FunctionTables.f8(ax, ay).Define(src, dst);
 
             byte x = 0;

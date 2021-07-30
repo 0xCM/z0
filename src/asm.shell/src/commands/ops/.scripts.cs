@@ -14,7 +14,7 @@ namespace Z0.Asm
                 return (false, NoToolSelected.Format());
 
             var dir = ToolWs().Scripts(tool);
-            var files = Pipe(dir.AllFiles.View);
+            Files(dir.AllFiles);
             return true;
         }
     }

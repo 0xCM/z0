@@ -22,10 +22,10 @@ namespace Z0.Asm
         /// <summary>
         /// The target's identifier
         /// </summary>
-        public AsmSymbol Identity {get;}
+        public string Identity {get;}
 
         [MethodImpl(Inline)]
-        public AsmCallee(MemoryAddress @base, AsmSymbol identity)
+        public AsmCallee(MemoryAddress @base, string identity)
         {
             Identity = identity;
             Base = @base;

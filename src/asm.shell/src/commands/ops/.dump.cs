@@ -59,16 +59,10 @@ namespace Z0.Asm
             {
                 ref readonly var path = ref skip(input,i);
 
-                var vars = PathVars.create();
+                var vars = WsVars.create();
                 vars.DstDir = outdir;
                 vars.SrcDir = path.FolderPath;
                 vars.SrcFile = path.FileName;
-                // var vars = Cmd.vars(
-                //     ("SrcDir", path.FolderPath.Format(PathSeparator.BS)),
-                //     ("SrcFile", path.FileName.Format()),
-                //     ("DstDir", outdir.Format(PathSeparator.BS))
-                //     );
-
                 result = ScriptRunner.RunCmd(cmd, vars.ToCmdVars(), out _);
             }
             return result;

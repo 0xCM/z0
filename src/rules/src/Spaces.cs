@@ -12,7 +12,7 @@ namespace Z0
     using static core;
 
     [ApiHost]
-    public readonly partial struct Projective
+    public readonly partial struct Spaces
     {
         /// <summary>
         /// Characterizes a projector

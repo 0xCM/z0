@@ -52,6 +52,22 @@ namespace Z0
             }
         }
 
+        public Outcome RunCmd(CmdLine cmd, CmdVars vars, Receiver<string> status, Receiver<string> error, out ReadOnlySpan<TextLine> dst)
+        {
+            dst = default;
+            try
+            {
+                var process = ScriptProcess.run(cmd, vars, status, error);
+                process.Wait();
+                dst = Lines.read(process.Output);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+        }
+
         public Outcome RunCmd(CmdLine cmd, CmdVars vars, out ReadOnlySpan<TextLine> dst)
         {
             dst = default;
@@ -72,7 +88,7 @@ namespace Z0
         {
             try
             {
-                var process =  ScriptProcess.run(cmd);
+                var process = ScriptProcess.run(cmd);
                 process.Wait();
                 return Lines.read(process.Output);
             }

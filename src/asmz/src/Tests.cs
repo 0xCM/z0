@@ -368,7 +368,7 @@ namespace Z0.Asm
             const ulong Displacement = 0xfc632176;
             var instruction = array<byte>(0xe8, 0x76, 0x21, 0x63, 0xfc);
             MemoryAddress Encoded =  0x7ffc52e94420;
-            MemoryAddress nextIp = asm.nextip(FunctionBase,  InstructionOffset, InstructionSize);
+            MemoryAddress nextIp = asm.nextip(FunctionBase, InstructionOffset, InstructionSize);
             MemoryAddress target = nextIp + Displacement;
         }
 

@@ -42,11 +42,21 @@ namespace Z0
         public static ScriptProcess run(CmdLine command, CmdVars vars)
         {
             var options = new ScriptProcessOptions();
-            foreach(var v in vars)
-            {
-                if(v.IsNonEmpty)
-                    options.AddEnvironmentVariable(v.Name,v.Value);
-            }
+            include(vars, options);
+            // foreach(var v in vars)
+            // {
+            //     if(v.IsNonEmpty)
+            //         options.AddEnvironmentVariable(v.Name,v.Value);
+            // }
+            return new ScriptProcess(command, options);
+        }
+
+        [Op]
+        public static ScriptProcess run(CmdLine command, CmdVars vars, Receiver<string> status, Receiver<string> error)
+        {
+            var options = new ScriptProcessOptions();
+            include(vars, options);
+            options.WithReceivers(status, error);
             return new ScriptProcess(command, options);
         }
 
@@ -55,7 +65,7 @@ namespace Z0
         {
             var options = new ScriptProcessOptions();
             options.WithReceivers(status, error);
-            return new ScriptProcess(command,options);
+            return new ScriptProcess(command, options);
         }
 
         [MethodImpl(Inline), Op]
@@ -68,6 +78,15 @@ namespace Z0
             var options = new ScriptProcessOptions(dst);
             options.WithReceivers(status, error);
             return new ScriptProcess(command, options);
+        }
+
+        static void include(CmdVars src, ScriptProcessOptions dst)
+        {
+            foreach(var v in src)
+            {
+                if(v.IsNonEmpty)
+                    dst.AddEnvironmentVariable(v.Name,v.Value);
+            }
         }
 
         readonly CmdLine _commandLine;

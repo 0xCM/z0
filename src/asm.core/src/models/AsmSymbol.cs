@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmSymbol : ITextual
+    public readonly struct AsmSymbol
     {
         readonly TextBlock Data;
 
@@ -18,15 +18,5 @@ namespace Z0.Asm
         {
             Data = src;
         }
-
-        public string Format()
-            => string.Format("({0})", Data);
-
-        public override string ToString()
-            => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmSymbol(string src)
-            => new AsmSymbol(src);
     }
 }

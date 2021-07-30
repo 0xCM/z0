@@ -10,20 +10,14 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    public readonly struct AsmInstruction<T> : IAsmInstruction<T>
-        where T : unmanaged, ITypedInstruction<T>
+    public readonly struct AsmInstruction<T>
+        where T : unmanaged
     {
         public T Instruction {get;}
 
         [MethodImpl(Inline)]
         public AsmInstruction(T encoded)
             => Instruction = encoded;
-
-        public AsmHexCode Encoded
-        {
-            [MethodImpl(Inline)]
-            get => Instruction.Encoded;
-        }
 
         public ReadOnlySpan<byte> Data
         {
@@ -35,12 +29,6 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => recover<AsmByte>(Data);
-        }
-
-        public AsmMnemonicCode Mnemonic
-        {
-            [MethodImpl(Inline)]
-            get => Instruction.Mnemonic;
         }
 
         public byte Size

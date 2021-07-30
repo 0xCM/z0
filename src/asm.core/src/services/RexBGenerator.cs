@@ -146,6 +146,5 @@ namespace Z0.Asm
             }
             return (byte)(i - i0);
         }
-
     }
 }

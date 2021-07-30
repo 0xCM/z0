@@ -28,9 +28,8 @@ namespace Z0.Asm
                 LookupKey expect = (i,j);
                 if(!expect.Equals(key))
                     return (false, "Test failed");
-
-                //Write(string.Format("({0},{1}) -> {2}", i, j, key));
             }
+
             Write("Success");
 
             return true;

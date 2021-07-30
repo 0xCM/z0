@@ -6,10 +6,10 @@ namespace Z0.Asm
 {
     using static Root;
 
-    public struct PathVars
+    public struct WsVars
     {
-        public static PathVars create()
-            => new PathVars();
+        public static WsVars create()
+            => new WsVars();
 
         public FS.FolderPath SrcDir;
 

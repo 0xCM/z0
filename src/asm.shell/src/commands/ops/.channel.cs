@@ -8,8 +8,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".channel", "Defines a directect channel from a source workspace to a target workspace")]
-        Outcome GetOrSetChannel(CmdArgs args)
+        [CmdOp(".channel", "Defines a directect channel from one workspace to another")]
+        Outcome SpecifyChannel(CmdArgs args)
         {
             if(args.Length == 0)
             {

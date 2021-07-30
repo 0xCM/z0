@@ -24,11 +24,11 @@ namespace Z0.Asm
             => new AsmCallSite(caller, offset, size);
 
         [MethodImpl(Inline), Op]
-        public static AsmCaller caller(MemoryAddress @base, AsmSymbol symbol)
+        public static AsmCaller caller(MemoryAddress @base, string symbol)
             => new AsmCaller(@base, symbol);
 
         [MethodImpl(Inline), Op]
-        public static AsmCallee callee(MemoryAddress @base, AsmSymbol symbol)
+        public static AsmCallee callee(MemoryAddress @base, string symbol)
             => new AsmCallee(@base, symbol);
     }
 }

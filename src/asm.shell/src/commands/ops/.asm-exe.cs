@@ -16,7 +16,7 @@ namespace Z0.Asm
 
             var result = Outcome.Success;
             var id = arg(args,0).Value;
-            var asm = AsmWs.AsmPath(id);
+            var asm = AsmWs.AppPath(id);
             var obj = AsmWs.ObjPath(id);
             var exe = AsmWs.ExePath(id);
 

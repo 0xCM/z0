@@ -4,13 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static core;
+
     partial class AsmCmdService
     {
-        [CmdOp(".samples")]
-        Outcome ToolSamples(CmdArgs args)
+        [CmdOp(".files")]
+        Outcome ShowFiles(CmdArgs args)
         {
-            Files(ToolWs().Samples(arg(args,0).Value).AllFiles);
-            return true;
+            var result = Outcome.Success;
+            var files = State.Files();
+            iter(files, file => Write(file.ToUri()));
+            return result;
         }
     }
 }
