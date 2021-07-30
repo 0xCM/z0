@@ -83,7 +83,16 @@ namespace Z0.Blit
         [Symbol("s")]
         Sequence = 10,
 
+        /// <summary>
+        /// Indicates an homogenous tensor
+        /// </summary>
         [Symbol("z")]
         Cube = 11,
+
+        /// <summary>
+        /// Indicates a type that represents an identifier, unique within some scope
+        /// </summary>
+        [Symbol("q")]
+        Name = 12,
     }
 }

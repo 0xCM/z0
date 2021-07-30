@@ -16,7 +16,7 @@ namespace Z0.Blit
     [ApiHost]
     public readonly partial struct TypeSystem
     {
-        const byte TypeKindCount = 11;
+        const byte TypeKindCount = 13;
 
         [MethodImpl(Inline), Op]
         public static TypeIndicator indicator(TypeKind src)
@@ -24,7 +24,7 @@ namespace Z0.Blit
 
         [MethodImpl(Inline), Op]
         public static TypeKind typekind(byte index)
-            => skip(TypeKinds,index);
+            => skip(TypeKinds, index);
 
         static ReadOnlySpan<byte> SymbolIndex
             => new byte[TypeKindCount*2]{
@@ -38,13 +38,43 @@ namespace Z0.Blit
                 (byte)a,7,
                 (byte)t,8,
                 (byte)d,9,
-                (byte)s,10
+                (byte)s,10,
+                (byte)z,11,
+                (byte)q,12,
                 };
 
         static ReadOnlySpan<AsciCode> IndicatorSymbols
-            => new AsciCode[TypeKindCount]{Question,u,i,f,c,e,v,a,t,d,s};
+            => new AsciCode[TypeKindCount]{
+                Question,
+                u,
+                i,
+                f,
+                c,
+                e,
+                v,
+                a,
+                t,
+                d,
+                s,
+                z,
+                q,
+                };
 
         static ReadOnlySpan<TypeKind> TypeKinds
-            => new TypeKind[TypeKindCount]{K.Unknown,K.Unsigned,K.Signed,K.Float,K.Char,K.Enum,K.Vector,K.Array,K.Tensor,K.Domain,K.Sequence};
+            => new TypeKind[TypeKindCount]{
+                K.Unknown,
+                K.Unsigned,
+                K.Signed,
+                K.Float,
+                K.Char,
+                K.Enum,
+                K.Vector,
+                K.Array,
+                K.Tensor,
+                K.Domain,
+                K.Sequence,
+                K.Cube,
+                K.Name,
+                };
     }
 }

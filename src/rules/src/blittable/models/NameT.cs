@@ -10,15 +10,21 @@ namespace Z0.Blit
     using static Root;
     using static core;
 
-    public readonly struct Name<T>
+    public readonly struct Name<T> : IName<Name<T>,T>
         where T : unmanaged
     {
         public T Storage {get;}
 
+        public uint Length {get;}
+
+        public byte PointSize {get;}
+
         [MethodImpl(Inline)]
-        public Name(T data)
+        public Name(T data, uint length, byte psz)
         {
             Storage= data;
+            Length = length;
+            PointSize = psz;
         }
     }
 }

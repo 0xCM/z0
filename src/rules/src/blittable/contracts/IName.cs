@@ -6,29 +6,32 @@ namespace Z0.Blit
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface ITensor : IPrimitive
+    [Free]
+    public interface IName : IPrimitive
     {
-        byte Arity {get;}
-
         TypeKind IPrimitive.TypeKind
-            => TypeKind.Tensor;
+            => TypeKind.Name;
     }
 
     [Free]
-    public interface ITensor<T> : ITensor, IPrimitive<T>
+    public interface IName<T> : IName
         where T : unmanaged
     {
+
     }
 
-    [Free]
-    public interface ITensor<N,T> : ITensor<T>
-        where N : unmanaged, ITypeNat
+    public interface IName<F,T> : IName<T>
         where T : unmanaged
+        where F : unmanaged, IName<F,T>
     {
-        byte ITensor.Arity
-            => Typed.nat8u<N>();
+        uint Length {get;}
+
+        byte PointSize {get;}
 
         BitWidth IPrimitive.StorageWidth
-            => Arity*core.width<T>();
+            => core.width<F>();
+
+        BitWidth IPrimitive.ContentWidth
+            => Length*PointSize;
     }
 }

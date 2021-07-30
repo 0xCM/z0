@@ -23,6 +23,9 @@ namespace Z0.Blit
 
         public uint N => 0;
 
+        public Span<T> Cells
+            => default;
+
         BitWidth IPrimitive.ContentWidth
             => Width;
     }
@@ -39,6 +42,12 @@ namespace Z0.Blit
         internal v1(T[] cells)
         {
             Data = cells;
+        }
+
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
         }
 
         public ref T this[uint index]
@@ -78,6 +87,12 @@ namespace Z0.Blit
             Data = cells;
         }
 
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
         public ref T this[uint index]
         {
             [MethodImpl(Inline)]
@@ -115,6 +130,12 @@ namespace Z0.Blit
             Data = cells;
         }
 
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
         public ref T this[uint index]
         {
             [MethodImpl(Inline)]
@@ -126,6 +147,7 @@ namespace Z0.Blit
             [MethodImpl(Inline)]
             get => Data.Count;
         }
+
 
         [MethodImpl(Inline)]
         public ref T Cell(uint index)
@@ -152,6 +174,11 @@ namespace Z0.Blit
             Data = cells;
         }
 
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
         public ref T this[uint index]
         {
             [MethodImpl(Inline)]
@@ -187,6 +214,12 @@ namespace Z0.Blit
         internal v64(T[] cells)
         {
             Data = cells;
+        }
+
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
         }
 
         public ref T this[uint index]
@@ -226,6 +259,12 @@ namespace Z0.Blit
             Data = cells;
         }
 
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
         public ref T this[uint index]
         {
             [MethodImpl(Inline)]
@@ -243,9 +282,53 @@ namespace Z0.Blit
             => ref Data[index];
 
         BitWidth IPrimitive.StorageWidth
-            => Data.Length*width<T>();
+            => Cells.Length*width<T>();
 
         BitWidth IPrimitive.ContentWidth
-            => Data.Length*128;
+            => Cells.Length*128;
     }
+
+    /// <summary>
+    /// Represents a finite sequence of 128-bit values
+    /// </summary>
+    public struct v256<T> : IVector<T>
+        where T : unmanaged
+    {
+        readonly Index<T> Data;
+
+        [MethodImpl(Inline)]
+        internal v256(T[] cells)
+        {
+            Data = cells;
+        }
+
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
+        public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(index);
+        }
+
+        public uint N
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        [MethodImpl(Inline)]
+        public ref T Cell(uint index)
+            => ref Data[index];
+
+        BitWidth IPrimitive.StorageWidth
+            => Cells.Length*width<T>();
+
+        BitWidth IPrimitive.ContentWidth
+            => Cells.Length*256;
+    }
+
 }

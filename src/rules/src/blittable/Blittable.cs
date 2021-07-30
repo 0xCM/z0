@@ -13,11 +13,31 @@ namespace Z0
     using static core;
 
     [ApiHost]
-    public readonly partial struct Blittable
+    public readonly partial struct BZ
     {
         const NumericKind Closure = UnsignedInts;
 
         const byte TypeKindCount = 11;
+
+        [MethodImpl(Inline), Op]
+        public static SmallName name(ReadOnlySpan<char> src)
+        {
+            var present = 0u;
+            for(var i=0; i<present; i++)
+            {
+                if(skip(src,i) != 0)
+                    present++;
+                else
+                    break;
+            }
+            var length = min(present,SmallName.MaxLength);
+            var storage = Cell128.Empty;
+            var dst = storage.Bytes;
+            for(var i=0; i<length; i++)
+                seek(dst,i) = (byte)skip(src,i);
+            seek(dst,15) = (byte)length;
+            return new SmallName(storage);
+        }
 
         [MethodImpl(Inline), Op]
         public static u1<bit> u1(bit src)

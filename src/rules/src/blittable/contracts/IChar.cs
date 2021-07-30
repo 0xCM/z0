@@ -4,17 +4,30 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Blit
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface ISigned : IPrimitive
+    [Free]
+    public interface IChar : IPrimitive
     {
         TypeKind IPrimitive.TypeKind
-            => TypeKind.Signed;
+            => TypeKind.Char;
     }
 
     [Free]
-    public interface ISigned<T> : ISigned, IPrimitive<T>
+    public interface IChar<T> : IChar, IPrimitive<T>
         where T : unmanaged
     {
+
+
+    }
+
+    [Free]
+    public interface IChar<F,T> : IChar<T>
+        where T : unmanaged
+        where F : unmanaged, IChar<F,T>
+    {
+
     }
 }

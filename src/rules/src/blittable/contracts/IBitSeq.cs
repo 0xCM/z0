@@ -9,13 +9,20 @@ namespace Z0.Blit
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IBitSeq
+    public interface IBitSeq : IPrimitive
     {
         Span<byte> Edit {get;}
 
         ReadOnlySpan<byte> View {get;}
 
-        BitWidth Width => View.Length*8;
+        TypeKind IPrimitive.TypeKind
+            => TypeKind.Sequence;
+
+        BitWidth IPrimitive.ContentWidth
+            => View.Length*8;
+
+        BitWidth IPrimitive.StorageWidth
+            => View.Length*8;
     }
 
     [Free]
@@ -23,5 +30,9 @@ namespace Z0.Blit
         where T : unmanaged
     {
         T Storage {get;}
+
+
+        BitWidth IPrimitive.StorageWidth
+            => core.width<T>();
     }
 }

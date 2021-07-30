@@ -8,7 +8,6 @@ namespace Z0.Blit
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     public readonly struct TypeIndicator
     {
@@ -19,5 +18,9 @@ namespace Z0.Blit
         {
             Symbol = symbol;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator char(TypeIndicator src)
+            => src.Symbol;
     }
 }
