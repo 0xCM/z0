@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    partial struct AsmOpCodes
+    public readonly struct AsmOpCodeTokens
     {
         [Flags]
         public enum TokenKind : ushort
@@ -14,9 +14,9 @@ namespace Z0.Asm
             None = 0,
 
             /// <summary>
-            /// Classifies <see cref='PrefixToken'/> tokens
+            /// Classifies <see cref='LegacyPrefixToken'/> tokens
             /// </summary>
-            Prefix = 1,
+            LegacyPrefix = 1,
 
             /// <summary>
             /// Classifies <see cref='RexBToken'/> tokens
@@ -59,27 +59,20 @@ namespace Z0.Asm
             Mask = 256,
         }
 
-        [FieldSeg(0,4), SymSource]
-        public enum PrefixToken : byte
+        public enum TokenIndex : byte
         {
-            [Symbol("66")]
-            x66,
+            LegacyPrefix = 0,
 
-            [Symbol("F2")]
-            F2,
+            Disp = 1,
 
-            [Symbol("F3")]
-            F3,
+            SegOverride = 2,
 
-            [Symbol("0F")]
-            x0F,
+            ModRmDigit = 3,
+        }
 
-            [Symbol("0F38")]
-            x0F38,
-
-            [Symbol("VEX")]
-            VEX,
-
+        [SymSource]
+        public enum RexToken : byte
+        {
             [Symbol("REX")]
             Rex,
 
@@ -94,6 +87,16 @@ namespace Z0.Asm
 
             [Symbol("REX.B", "Modifies the base in the ModR/M r/m field or SIB base field; or it modifies the opcode reg field used for accessing GPRs")]
             RexB,
+        }
+
+        [SymSource]
+        public enum EVexToken : byte
+        {
+            [Symbol("VEX")]
+            VEX,
+
+            [Symbol("VEX")]
+            EVEX,
 
             [Symbol("LZ")]
             LZ,
@@ -109,6 +112,34 @@ namespace Z0.Asm
 
             [Symbol("W1")]
             W1,
+
+            [Symbol("128")]
+            W128,
+
+            [Symbol("256")]
+            W256,
+
+            [Symbol("512")]
+            W512,
+        }
+
+        [FieldSeg(0,4), SymSource]
+        public enum LegacyPrefixToken : byte
+        {
+            [Symbol("66")]
+            x66,
+
+            [Symbol("F2")]
+            F2,
+
+            [Symbol("F3")]
+            F3,
+
+            [Symbol("0F")]
+            x0F,
+
+            [Symbol("0F38")]
+            x0F38,
         }
 
         [FieldSeg(1,3), SymSource]
@@ -277,5 +308,5 @@ namespace Z0.Asm
             [Symbol("{k1}{z}", "Indicates a mask register used as instruction writemask")]
             WriteMask,
         }
-    }
+   }
 }

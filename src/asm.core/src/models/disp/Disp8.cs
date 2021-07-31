@@ -37,7 +37,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => Value.ToString();
+            => Value.ToString("x");
 
         public override string ToString()
             => Format();
@@ -51,7 +51,7 @@ namespace Z0.Asm
             => new Disp8(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator byte(Disp8 src)
+        public static implicit operator byte(Disp8 src)
             => (byte)src.Value;
 
         [MethodImpl(Inline)]

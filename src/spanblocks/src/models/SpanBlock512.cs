@@ -165,6 +165,10 @@ namespace Z0
         public ref T BlockLead(int index)
             => ref add(First, index*BlockLength);
 
+        [MethodImpl(Inline)]
+        public ref T BlockLead(uint index)
+            => ref add(First, index*BlockLength);
+
         /// <summary>
         /// Retrieves the lower 256 bits of an index-identified block
         /// </summary>

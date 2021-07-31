@@ -31,7 +31,7 @@ namespace Z0.Asm
             => Value;
 
         public string Format()
-            => Value.ToString();
+            => Value.ToString("x");
 
         public override string ToString()
             => Format();
@@ -49,7 +49,7 @@ namespace Z0.Asm
             => new Disp16(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator ushort(Disp16 src)
+        public static implicit operator ushort(Disp16 src)
             => (ushort)src.Value;
 
         [MethodImpl(Inline)]

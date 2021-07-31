@@ -32,7 +32,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => Value.ToString();
+            => Value.ToString("x");
 
         public override string ToString()
             => Format();
@@ -46,7 +46,7 @@ namespace Z0.Asm
             => new Disp32(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator uint(Disp32 src)
+        public static implicit operator uint(Disp32 src)
             => (uint)src.Value;
 
         [MethodImpl(Inline)]

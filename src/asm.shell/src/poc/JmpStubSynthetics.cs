@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Root;
     using static core;
     using static AsmRegOps;
 
-    public class JmpStubSynthetics : AppService<JmpStubSynthetics>
+    public class JmpStubs : AppService<JmpStubs>
     {
         Index<MemoryRange> Trampolines;
 
@@ -22,7 +17,7 @@ namespace Z0.Asm
 
         const uint SlotCount = 256;
 
-        public JmpStubSynthetics()
+        public JmpStubs()
         {
             Trampolines = alloc<MemoryRange>(SlotCount);
             Payloads = alloc<Cell128>(SlotCount);
@@ -33,8 +28,8 @@ namespace Z0.Asm
         public bool Create<T>(byte slot)
             where T : unmanaged
         {
-             var ep = new JmpStubSynthetic<T>();
-            Trampolines[slot] = ep.Init();
+             var stub = new JmpStubSynthetic<T>();
+            Trampolines[slot] = stub.Init();
             return Trampolines[slot].IsNonEmpty;
         }
 
@@ -43,19 +38,47 @@ namespace Z0.Asm
             Wf.Status($"Received {a0}");
         }
 
+        public Index<ApiCodeBlock> Search()
+        {
+            var jumpers = list<ApiCodeBlock>();
+            var buffer = list<ApiCodeBlock>();
+            var hex = Wf.ApiHex();
+            var files = hex.Files().View;
+            var flow = Wf.Running(string.Format("Searching {0} hex files", files.Length));
+            for(var i=0; i<files.Length; i++)
+            {
+                var file = skip(files,i);
+                Write(string.Format("Searching {0}", file.ToUri()));
+                buffer.Clear();
+                var count = hex.ReadBlocks(file, buffer);
+                var k = 0;
+                for(var j=0; j<count; j++)
+                {
+                    var block = buffer[j];
+                    if(JmpRel32.test(block.Encoded))
+                    {
+                        jumpers.Add(block);
+                        k++;
+                    }
+                }
+                if(k != 0)
+                    Status(string.Format("Collected {0} potential jump stubs from {1}", k, file.ToUri()));
+
+            }
+            Wf.Ran(flow, string.Format("Collected {0} potential jump stubs", jumpers.Count));
+            return jumpers.ToArray();
+        }
+
         [Op]
         public ref readonly Cell128 EncodeDispatch(byte slot, MemoryAddress target)
         {
             var address = Trampolines[slot];
             ref var payload = ref Payloads[slot];
             var mov = asm.mov(rcx, target).Content.Bytes;
-            //var jmp = AsmEncoderPrototype.jmp(rcx).Content.Bytes;
             var dst = payload.Bytes;
             var j=0;
             for(var i=0; i< mov.Length; i++)
                 seek(dst,j++) = skip(mov,i);
-            // for(var i=0; i< jmp.Length; i++)
-            //     seek(dst,j++) = skip(jmp,i);
             return ref payload;
         }
 

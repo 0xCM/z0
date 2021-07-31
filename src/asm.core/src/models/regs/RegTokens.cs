@@ -6,8 +6,29 @@ namespace Z0.Asm
 {
     using static RegIndexCode;
 
-    public readonly struct RegSymbols
+    public readonly struct RegTokens
     {
+        /// <summary>
+        /// Clasifies the gp reg codes
+        /// </summary>
+        public enum GpRegKind : byte
+        {
+            [Symbol("r8")]
+            Gp8 = 0,
+
+            [Symbol("r16")]
+            Gp16 = 1,
+
+            [Symbol("r32")]
+            Gp32 = 2,
+
+            [Symbol("r64")]
+            Gp64 = 3,
+
+            [Symbol("r8i")]
+            Gp8Hi = 4,
+        }
+
         /// <summary>
         /// Specifies the GP 8-bit (lo) registers
         /// </summary>
@@ -15,7 +36,7 @@ namespace Z0.Asm
         /// al, cl, dl, bl, spl, bpl, sil, dil, r8b, r9b, r10b, r11b, r12b, r13b, r14b, r15b
         /// </remarks/>
         [SymSource, RegCode]
-        public enum Gp8 : byte
+        public enum Gp8Reg : byte
         {
             [Symbol("al")]
             al = r0,
@@ -73,7 +94,7 @@ namespace Z0.Asm
         /// ah, ch, dh, bh
         /// </remarks/>
         [SymSource, RegCode]
-        public enum Gp8Hi : byte
+        public enum Gp8HiReg : byte
         {
             [Symbol("ah")]
             ah = r0,
@@ -95,7 +116,7 @@ namespace Z0.Asm
         /// ax, cx, dx, bx, sp, bp, si, di, r8w, r9w, r10w, r11w, r12w, r13w, r14w, r15w
         /// </remarks/>
         [SymSource, RegCode]
-        public enum Gp16 : byte
+        public enum Gp16Reg : byte
         {
             [Symbol("ax")]
             ax = r0,
@@ -153,7 +174,7 @@ namespace Z0.Asm
         /// eax, ecx, edx, ebx, esp, ebp, esi, edi, r8d, r9d, r10d, r11d, r12d, r13d, r14d, r15d
         /// </remarks/>
         [SymSource, RegCode]
-        public enum Gp32 : byte
+        public enum Gp32Reg : byte
         {
             [Symbol("eax")]
             eax = r0,
@@ -210,7 +231,7 @@ namespace Z0.Asm
         /// <remarks>
         /// rax, rcx, rdx, rbx, rsp, rbp, rsi, rdi, r8, r9, r10, r11, r12, r13, r14, r15
         /// </remarks/>
-        public enum Gp64 : byte
+        public enum Gp64Reg : byte
         {
             [Symbol("rax")]
             rax = r0,
@@ -261,27 +282,6 @@ namespace Z0.Asm
             r15q = r15,
         }
 
-        /// <summary>
-        /// Clasifies the gp reg codes
-        /// </summary>
-        [SymSource]
-        public enum GpRegKind : byte
-        {
-            [Symbol("r8")]
-            Gp8 = 0,
-
-            [Symbol("r16")]
-            Gp16 = 1,
-
-            [Symbol("r32")]
-            Gp32 = 2,
-
-            [Symbol("r64")]
-            Gp64 = 3,
-
-            [Symbol("r8i")]
-            Gp8Hi = 4,
-        }
 
         /// <summary>
         /// Specifies the XMM registers
@@ -642,7 +642,7 @@ namespace Z0.Asm
         }
 
         [SymSource, RegCode]
-        public enum ExtendedControlReg : byte
+        public enum XControlReg : byte
         {
             [Symbol("XCR0")]
             xcr0 = r0,
@@ -865,6 +865,5 @@ namespace Z0.Asm
             [Symbol("rip")]
             RIP,
         }
-
     }
 }

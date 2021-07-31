@@ -55,5 +55,8 @@ namespace Z0
         public const string dis = nameof(dis);
 
         public const string admin = ".admin";
+
+        public const string queries = nameof(queries);
+
     }
 }

@@ -8,8 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static RegClasses;
-    using static AsmOpCodes;
-    using static RegSymbols;
+    using static RegTokens;
 
     [ApiHost]
     public readonly partial struct AsmCodes
@@ -73,23 +72,23 @@ namespace Z0.Asm
             => _RegCodeTypes.Storage;
 
         [Op]
-        public static Symbols<Gp8> Gp8Regs()
+        public static Symbols<Gp8Reg> Gp8Regs()
             => _Gp8;
 
         [Op]
-        public static Symbols<Gp8Hi> Gp8Regs(bit hi)
+        public static Symbols<Gp8HiReg> Gp8Regs(bit hi)
             => _Gp8Hi;
 
         [Op]
-        public static Symbols<Gp16> Gp16Regs()
+        public static Symbols<Gp16Reg> Gp16Regs()
             => _Gp16;
 
         [Op]
-        public static Symbols<Gp32> Gp32Regs()
+        public static Symbols<Gp32Reg> Gp32Regs()
             => _Gp32;
 
         [Op]
-        public static Symbols<Gp64> Gp64Regs()
+        public static Symbols<Gp64Reg> Gp64Regs()
             => _Gp64;
 
         [Op]
@@ -141,14 +140,6 @@ namespace Z0.Asm
             => _SysPtrRegs;
 
         [Op]
-        public static Symbols<ConditionCode> ConditionCodes()
-            => _JccCodes;
-
-        [Op]
-        public static Symbols<DispToken> Offsets()
-            => _Offsets;
-
-        [Op]
         public static Symbols<RegWidthCode> RegWidths()
             => _RegWidths;
 
@@ -162,15 +153,15 @@ namespace Z0.Asm
 
         static Symbols<AsmMnemonicCode> _Mnemonics;
 
-        static Symbols<Gp8> _Gp8;
+        static Symbols<Gp8Reg> _Gp8;
 
-        static Symbols<Gp8Hi> _Gp8Hi;
+        static Symbols<Gp8HiReg> _Gp8Hi;
 
-        static Symbols<Gp16> _Gp16;
+        static Symbols<Gp16Reg> _Gp16;
 
-        static Symbols<Gp32> _Gp32;
+        static Symbols<Gp32Reg> _Gp32;
 
-        static Symbols<Gp64> _Gp64;
+        static Symbols<Gp64Reg> _Gp64;
 
         static Symbols<XmmReg> _Xmm;
 
@@ -196,10 +187,6 @@ namespace Z0.Asm
 
         static Symbols<TestReg> _TestRegs;
 
-        static Symbols<ConditionCode> _JccCodes;
-
-        static Symbols<DispToken> _Offsets;
-
         static Symbols<RegWidthCode> _RegWidths;
 
         static Symbols<RegIndexCode> _RegIndices;
@@ -216,17 +203,16 @@ namespace Z0.Asm
         {
             _Mnemonics = symbols<AsmMnemonicCode>();
             _RegCodeTypes = typeof(AsmCodes).GetNestedTypes().Tagged<RegCodeAttribute>();
-            _Gp8 = symbols<Gp8>();
-            _Gp8Hi = symbols<Gp8Hi>();
-            _Gp16 = symbols<Gp16>();
-            _Gp32 = symbols<Gp32>();
-            _Gp64 = symbols<Gp64>();
+            _Gp8 = symbols<Gp8Reg>();
+            _Gp8Hi = symbols<Gp8HiReg>();
+            _Gp16 = symbols<Gp16Reg>();
+            _Gp32 = symbols<Gp32Reg>();
+            _Gp64 = symbols<Gp64Reg>();
             _Xmm = symbols<XmmReg>();
             _Ymm = symbols<YmmReg>();
             _Zmm = symbols<ZmmReg>();
             _KRegs = symbols<KReg>();
             _MmxRegs = symbols<MmxReg>();
-            _JccCodes = symbols<ConditionCode>();
             _SegRegs  = symbols<SegReg>();
             _CrRegs = symbols<ControlReg>();
             _FpuRegs = symbols<FpuReg>();
@@ -234,7 +220,6 @@ namespace Z0.Asm
             _BndRegs = symbols<BndReg>();
             _TestRegs = symbols<TestReg>();
             _SysPtrRegs = symbols<SPtrReg>();
-            _Offsets = symbols<DispToken>();
             _RegWidths = symbols<RegWidthCode>();
             _RegIndices = symbols<RegIndexCode>();
             _RegClasses = symbols<RegClassCode>();

@@ -575,66 +575,6 @@ namespace Z0.Asm
 
         }
 
-        void CheckEntryPoints()
-        {
-            const ulong Target = 0x7ffa77aa1460;
-
-            var points = JmpStubSynthetics.create(Wf);
-            if(points.Create<ulong>(0))
-            {
-                var encoded = points.EncodeDispatch(0,Target);
-                Wf.Status(encoded.FormatHexData());
-            }
-        }
-
-        public Index<ApiCodeBlock> Jumpers()
-        {
-            var jumpers = root.list<ApiCodeBlock>();
-            var buffer = root.list<ApiCodeBlock>();
-            var hex = Wf.ApiHex();
-            var files = hex.Files().View;
-            var flow = Wf.Running(string.Format("Processing {0} hex files", files.Length));
-            for(var i=0; i<files.Length; i++)
-            {
-                var file = skip(files,i);
-                var reading = Wf.Running(string.Format("Processing {0}", file.ToUri()));
-                buffer.Clear();
-                var count = hex.ReadBlocks(file, buffer);
-                var k = 0;
-                for(var j=0; j<count; j++)
-                {
-                    var block = buffer[j];
-                    if(JmpRel32.test(block.Encoded))
-                    {
-                        jumpers.Add(block);
-                        k++;
-                    }
-                }
-                Wf.Ran(reading, string.Format("Collected {0} jump stub candidates from {1}", k, file.ToUri()));
-
-            }
-            Wf.Ran(flow, string.Format("Collected {0} jump stub candidates", jumpers.Count));
-            return jumpers.ToArray();
-        }
-
-        void ShowXedInstructions()
-        {
-            var pipe = Wf.IntelXed();
-            var records = pipe.LoadFormSources().View;
-            var count = records.Length;
-            if(count !=0 )
-            {
-                using var log = ShowLog("xed-instructions", FS.Csv);
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var record = ref skip(records,i);
-                    var id = record.Form;
-                    var components = id.Split(Chars.Underscore).Delimit(Chars.Pipe, -16);
-                    log.Show(string.Format("{0,-64} | {1}", id, components));
-                }
-            }
-        }
-
         void ListDescriptors()
         {
             var descriptors = ApiCode.descriptors(Wf);

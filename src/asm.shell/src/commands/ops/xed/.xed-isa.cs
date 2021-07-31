@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using static core;
+    using static WsNames;
 
     partial class AsmCmdService
     {
@@ -32,7 +33,7 @@ namespace Z0.Asm
                     matches.Add(form);
             }
 
-            var dst = Ws.Output().Table<XedFormImport>("queries", chip.Kind.ToString());
+            var dst = Ws.Output().Table<XedFormImport>(queries, chip.Kind.ToString());
             var formatter = Tables.formatter<XedFormImport>();
             var rows = Tables.emit(matches.ViewDeposited(), XedFormImport.RenderWidths, dst);
             Write(EmittedQueryResults.Format(rows,dst));

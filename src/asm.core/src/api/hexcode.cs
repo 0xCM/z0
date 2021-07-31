@@ -7,7 +7,12 @@ namespace Z0.Asm
     partial struct asm
     {
         [Op]
-        public static Outcome hexbytes(string src, out BinaryCode dst)
-            => HexByteParser.hexbytes(src, out dst);
+        public static AsmHexCode hexcode(string src)
+        {
+            if(AsmHexCode.parse(src, out var dst))
+                return dst;
+            else
+                return AsmHexCode.Empty;
+        }
     }
 }

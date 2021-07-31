@@ -8,8 +8,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".check-digit-parser")]
-        public Outcome CheckDigitParser(CmdArgs args)
+        [CmdOp(".test-digit-parser")]
+        public Outcome TestDigitParser(CmdArgs args)
         {
             var cases = DigitParserCases.positive();
             var results = DigitParserCases.run(cases).View;

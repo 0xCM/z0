@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static RegSymbols;
+    using static RegTokens;
 
     public readonly struct GpRegGrid
     {

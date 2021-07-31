@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmOpCodes;
+    using static AsmOpCodeTokens;
 
     /// <summary>
     /// Represents a register digit 0..7 that occurs within an op code expression

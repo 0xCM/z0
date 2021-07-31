@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndexCode;
     using G = AsmOpTypes.zmm;
-    using K = RegSymbols.ZmmReg;
+    using K = RegTokens.ZmmReg;
     using api = AsmRegs;
 
     partial struct AsmOpTypes

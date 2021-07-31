@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".hexcheck")]
+        [CmdOp(".test-mem-lookup")]
         public Outcome CheckMemoryLookup(CmdArgs args)
         {
             var capacity = Pow2.T16;

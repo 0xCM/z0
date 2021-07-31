@@ -210,6 +210,18 @@ namespace Z0.Asm
         FS.FolderPath ToolOutDir(CmdArgs args, ToolId tool)
             => args.Length > 0 ? OutRoot() + FS.folder(arg(args,0).Value) : ToolOutDir(tool);
 
+        void EmitRecords<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
+            where T : struct
+        {
+            var count = Tables.emit(src, dst, widths);
+            RecordsEmitted(count, dst);
+        }
+
+        void RecordsEmitted(Count count, FS.FilePath dst)
+        {
+            Write(string.Format("Emitted {0} records to {1}", count, dst.ToUri()));
+        }
+
         static MsgPattern NoToolSelected => "No tool selected";
 
         static MsgPattern CapacityExceeded => "Capacity exceeded";

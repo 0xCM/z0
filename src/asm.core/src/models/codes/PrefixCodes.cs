@@ -15,6 +15,44 @@ namespace Z0.Asm
     partial struct AsmCodes
     {
         /// <summary>
+        /// Classifies prefix domains
+        /// </summary>
+        public enum PrefixKind : byte
+        {
+            None = 0,
+
+            [Domain(typeof(SegOverrideCode))]
+
+            SegOverride = 2,
+
+            [Domain(typeof(SizeOverrideCode))]
+            SizeOverride = 3,
+
+            [Domain(typeof(EscapeCode))]
+            Escape = 4,
+
+            [Domain(typeof(LockPrefixCode))]
+            Lock = 5,
+
+            [Domain(typeof(BndPrefixCode))]
+            Bnd = 6,
+
+            [Domain(typeof(BranchHintCode))]
+            BranchHint = 7,
+
+            [Domain(typeof(RepeatPrefixCode))]
+            Rep = 8,
+
+            [Domain(typeof(MandatoryPrefixCode))]
+            Mandatory = 9,
+
+            [Domain(typeof(RexPrefixCode))]
+            Rex = 10,
+
+            Vex = 11,
+        }
+
+        /// <summary>
         /// Partitions legacy prefixes according to Intel V2.2-1
         /// </summary>
         [Flags]
@@ -64,6 +102,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines the mandatory prefix codes as specified by Intel Vol II, 2.1.2
         /// </summary>
+        [SymSource]
         public enum MandatoryPrefixCode : byte
         {
             None = 0,
@@ -237,6 +276,7 @@ namespace Z0.Asm
             ADSZ = x67,
         }
 
+        [SymSource]
         public enum VsibField : byte
         {
             /// <summary>
@@ -342,43 +382,6 @@ namespace Z0.Asm
 
             [Symbol("f3")]
             REPZ = xf3,
-        }
-
-        /// <summary>
-        /// Classifies prefix domains
-        /// </summary>
-        public enum PrefixKind : byte
-        {
-            None = 0,
-
-            [Domain(typeof(SegOverrideCode))]
-
-            SegOverride = 2,
-
-            [Domain(typeof(SizeOverrideCode))]
-            SizeOverride = 3,
-
-            [Domain(typeof(EscapeCode))]
-            Escape = 4,
-
-            [Domain(typeof(LockPrefixCode))]
-            Lock = 5,
-
-            [Domain(typeof(BndPrefixCode))]
-            Bnd = 6,
-
-            [Domain(typeof(BranchHintCode))]
-            BranchHint = 7,
-
-            [Domain(typeof(RepeatPrefixCode))]
-            Rep = 8,
-
-            Mandatory = 9,
-
-            [Domain(typeof(RexPrefixCode))]
-            Rex = 10,
-
-            Vex = 11,
         }
     }
 }

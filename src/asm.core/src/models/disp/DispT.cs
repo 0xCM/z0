@@ -34,7 +34,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => Value.ToString();
+            => Value.ToString("x");
 
         public override string ToString()
             => Format();

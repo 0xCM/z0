@@ -26,11 +26,11 @@ namespace Z0.Asm
             => first(recover<uint>(slice(src,1, 4)));
 
         [MethodImpl(Inline), Op]
-        public static uint dx(MemoryAddress ip, MemoryAddress target)
+        public static Disp32 disp32(MemoryAddress ip, MemoryAddress target)
         {
             var @base = ip + InstructionSize;
-            var dx = (uint)(@base - target);
-            return dx;
+            var dx = (long)@base - (long)target;
+            return (Disp32)dx;
         }
 
         [MethodImpl(Inline), Op]
@@ -43,15 +43,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static Address32 offset(MemoryAddress block, MemoryAddress ip, ReadOnlySpan<byte> src)
             => (Address32)(target(ip,src) - block);
-
-        [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(MemoryAddress ip, MemoryAddress target)
-        {
-            var encoding = AsmHexCode.Empty;
-            var dst = encoding.Bytes;
-            seek(dst,0) = OpCode;
-            first(recover<Address32>(slice(dst,1, 4))) = dx(ip,target);
-            return encoding;
-        }
     }
 }

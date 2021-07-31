@@ -14,7 +14,7 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static AsmOperandSize opsize(bit w, bit opsz, bit adsz)
-            => skip(OperandSizeLookup, BitNumbers.join(w, opsz, adsz));
+            => skip(OperandSizes, BitNumbers.join(w, opsz, adsz));
 
         [MethodImpl(Inline), Op]
         public static AsmOperandSize opsize(bit w, SizeOverrides sizes)
