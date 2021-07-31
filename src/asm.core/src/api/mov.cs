@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static AsmInstructions;
-    using static AsmOpTypes;
+    using static AsmOperands;
     using static AsmCodes;
 
     partial struct asm

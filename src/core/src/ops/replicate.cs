@@ -2,17 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial struct asm
+    partial struct core
     {
         [MethodImpl(Inline), Op]
-        public static AsmBranchInfo branch(MemoryAddress @base, MemoryAddress ip, byte fxSize, in AsmBranchTarget target)
-            => new AsmBranchInfo(@base, ip, target, offset(ip, fxSize, target.Address));
+        public static Span<byte> replicate(MemoryRange src)
+        {
+            Span<byte> dst = alloc<byte>(src.Size);
+            copy(src, dst);
+            return dst;
+        }
     }
 }

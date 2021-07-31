@@ -5,9 +5,9 @@
 namespace Z0.Asm
 {
     using static AsmMnemonicCode;
-    using static AsmOpTypes;
+    using static AsmOperands;
 
-    partial struct AsmExpresions
+    partial struct AsmLang
     {
         [Op]
         public AsmExpr cmp(r8 a0, Imm8 a1)

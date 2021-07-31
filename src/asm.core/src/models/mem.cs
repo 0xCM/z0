@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct AsmOpTypes
+    partial struct AsmOperands
     {
         /// <summary>
         /// Defines a memory operend

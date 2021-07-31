@@ -24,7 +24,7 @@ namespace Z0.Asm
 
         void Emit(ITokenSet src)
         {
-            var dst = Ws.Output().Table<SymToken>(queries, src.SetName);
+            var dst = Ws.Output().Table<SymToken>(queries, src.Name);
             var tokens = Symbols.tokens(src.Types());
             EmitRecords(tokens, SymToken.RenderWidths, dst);
         }

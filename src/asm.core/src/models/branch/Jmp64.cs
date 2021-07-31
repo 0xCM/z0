@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsmOpTypes;
+    using static AsmOperands;
 
 //| FF /4       | JMP r/m64    | M     | Valid       | N.E.            | Jump near, absolute indirect, RIP = 64-Bit offset from register or memory                     |
 

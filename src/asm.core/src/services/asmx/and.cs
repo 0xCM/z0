@@ -5,9 +5,9 @@
 namespace Z0.Asm
 {
     using static AsmMnemonicCode;
-    using static AsmOpTypes;
+    using static AsmOperands;
 
-    partial struct AsmExpresions
+    partial struct AsmLang
     {
         // 22 /r            | AND r8, r/m8     | RM    | Valid       | Valid           | r8 AND r/m8.                              |
         [Op]
@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         // 80 /4 ib         | AND r/m8, imm8   | MI    | Valid       | Valid           | r/m8 AND imm8.
         [Op]
-        public AsmExpr and(r8 a0, Imm<byte> imm8)
+        public AsmExpr and(r8 a0, Imm8 imm8)
             => Produce(S[AND], S[a0], imm8);
     }
 }

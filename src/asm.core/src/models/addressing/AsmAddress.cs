@@ -12,20 +12,18 @@ namespace Z0.Asm
     /// <summary>
     /// Represents an operand expression of the form BaseReg + IndexReg*Scale + Displacement
     /// </summary>
-    public readonly struct AsmOffsetOp<T,D>
-        where T : unmanaged, IRegOp
-        where D : unmanaged, IDisplacement
+    public readonly struct AsmAddress
     {
-        public T Base {get;}
+        public RegOp Base {get;}
 
-        public T Index {get;}
+        public RegOp Index {get;}
 
         public MemoryScale Scale {get;}
 
-        public D Disp {get;}
+        public Disp Disp {get;}
 
         [MethodImpl(Inline)]
-        public AsmOffsetOp(T @base, T index, MemoryScale scale, D disp)
+        public AsmAddress(RegOp @base, RegOp index, MemoryScale scale, Disp disp)
         {
             Base = @base;
             Index = index;

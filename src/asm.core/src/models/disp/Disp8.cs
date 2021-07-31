@@ -9,6 +9,9 @@ namespace Z0.Asm
 
     using static Root;
 
+    /// <summary>
+    /// Defines a signed 8-bit displacement
+    /// </summary>
     public readonly struct Disp8 : IDisplacement<Disp8,sbyte>
     {
         /// <summary>

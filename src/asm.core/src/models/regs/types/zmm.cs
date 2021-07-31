@@ -10,11 +10,11 @@ namespace Z0.Asm
     using static Root;
 
     using I = RegIndexCode;
-    using G = AsmOpTypes.zmm;
+    using G = AsmOperands.zmm;
     using K = RegTokens.ZmmReg;
     using api = AsmRegs;
 
-    partial struct AsmOpTypes
+    partial struct AsmOperands
     {
         public readonly struct zmm : IRegOp256<zmm>
         {

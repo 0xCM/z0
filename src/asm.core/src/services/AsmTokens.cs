@@ -10,7 +10,7 @@ namespace Z0.Asm
     {
         public sealed class OpCodes : TokenSet<OpCodes>
         {
-            public override string SetName
+            public override string Name
                 => "asm.opcodes";
 
             public override Type[] Types()
@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public sealed class Sigs : TokenSet<Sigs>
         {
-            public override string SetName
+            public override string Name
                 => "asm.sigs";
 
             public override Type[] Types()
@@ -28,7 +28,7 @@ namespace Z0.Asm
 
         public sealed class Codes : TokenSet<Codes>
         {
-            public override string SetName
+            public override string Name
                 => "asm.codes";
 
             public override Type[] Types()
@@ -37,7 +37,7 @@ namespace Z0.Asm
 
         public sealed class Bitfields : TokenSet<Bitfields>
         {
-            public override string SetName
+            public override string Name
                 => "asm.bitfields";
 
             public override Type[] Types()
@@ -46,7 +46,7 @@ namespace Z0.Asm
 
         public sealed class Regs : TokenSet<Regs>
         {
-            public override string SetName
+            public override string Name
                 => "asm.regs";
 
             public override Type[] Types()
@@ -55,7 +55,7 @@ namespace Z0.Asm
 
         public sealed class Conditions : TokenSet<Conditions>
         {
-            public override string SetName
+            public override string Name
                 => "asm.cc";
 
             public override Type[] Types()

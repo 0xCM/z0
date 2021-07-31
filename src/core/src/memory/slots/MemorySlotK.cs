@@ -10,6 +10,7 @@ namespace Z0
     using static Root;
 
     using api = MemorySlot;
+
     public struct MemorySlot<K>
         where K : unmanaged
     {

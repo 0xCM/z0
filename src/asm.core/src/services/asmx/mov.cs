@@ -7,7 +7,7 @@ namespace Z0.Asm
     using static AsmMnemonicCode;
     using static RegTokens;
 
-    partial struct AsmExpresions
+    partial struct AsmLang
     {
         [Op]
         public AsmExpr mov(Gp64Reg a0, Imm64 a1)

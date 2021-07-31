@@ -20,7 +20,6 @@ namespace Z0.Asm
             for(var i=0; i<j; i++)
             {
                 ref readonly var candidate = ref skip(src,i);
-
                 if(invalid(candidate.Index))
                     continue;
 

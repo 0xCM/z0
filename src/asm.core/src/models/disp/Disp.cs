@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Root;
 
     /// <summary>
-    /// Represents an 8-bit, 16-bit or 32-bit displacement
+    /// Defines an 8, 16, or 32-bit signed displacement
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack =1)]
     public readonly struct Disp : IDisplacement

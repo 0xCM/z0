@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
+    using static Typed;
 
     partial class BitMatrix
     {
@@ -27,7 +28,7 @@ namespace Z0
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0u; i<srcBitCount; i++)
-                memory.copy(src, ref seek(dst, i*srcCellCount), (int)srcCellCount);
+                core.copy(src, ref seek(dst, i*srcCellCount), (int)srcCellCount);
             return matrix;
         }
 
@@ -47,10 +48,9 @@ namespace Z0
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0u; i< srcBitCount; i++)
-                memory.copy(src, ref seek(dst, i*srcCellCount), (int)srcCellCount);
+                core.copy(src, ref seek(dst, i*srcCellCount), (int)srcCellCount);
             return matrix;
         }
-
 
         /// <summary>
         /// Creates a new primal bitmatrix where each row is initialized to a common source vector

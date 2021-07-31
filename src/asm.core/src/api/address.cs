@@ -8,42 +8,32 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmOpTypes;
+    using static AsmOperands;
 
     using C = AsmMnemonicCode;
     using K = JmpKind;
 
     partial struct asm
     {
-        /// <summary>
-        /// Defines an IP offset relative to a specified base address, instruction size and target address
-        /// </summary>
-        /// <param name="base">The base address</param>
-        /// <param name="size">The size, in bytes, of the call/branch/jmp instruction</param>
-        /// <param name="dst">The call/branch/jmp target</param>
         [MethodImpl(Inline), Op]
-        public static MemoryAddress offset(MemoryAddress src, byte fxSize, MemoryAddress dst)
-            => (MemoryAddress)(dst - (src + fxSize));
+        public static AsmAddress address(RegOp @base, RegOp index, MemoryScale scale, Disp disp = default)
+            => AsmAddressing.address(@base,index,scale,disp);
 
         [MethodImpl(Inline), Op]
-        public static AsmOffsetOp offset(RegOp @base, RegOp index, Disp disp = default, MemoryScale? scale = null)
-            => new AsmOffsetOp(@base,index, disp, scale ?? ScaleFactor.S1);
+        public static AsmAddress address(r8 @base, r8 index, MemoryScale scale, Disp8 disp = default)
+            => AsmAddressing.address(@base,index,scale,disp);
 
         [MethodImpl(Inline), Op]
-        public static AsmOffsetOp<r8,Disp8> offset(r8 @base, r8 index, byte disp = default, MemoryScale? scale = null)
-            => new AsmOffsetOp<r8,Disp8>(@base,index, scale ?? ScaleFactor.S1, disp);
+        public static AsmAddress address(r16 @base, r16 index, MemoryScale scale, Disp16 disp = default)
+            => AsmAddressing.address(@base,index,scale,disp);
 
         [MethodImpl(Inline), Op]
-        public static AsmOffsetOp<r16,Disp16> offset(r16 @base, r16 index, ushort disp = default, MemoryScale? scale = null)
-            => new AsmOffsetOp<r16,Disp16>(@base,index, scale ?? ScaleFactor.S1, disp);
+        public static AsmAddress address(r32 @base, r32 index, MemoryScale scale, Disp32 disp = default)
+            => AsmAddressing.address(@base,index,scale,disp);
 
         [MethodImpl(Inline), Op]
-        public static AsmOffsetOp<r32,Disp32> offset(r32 @base, r32 index, uint disp = default, MemoryScale? scale = null)
-            => new AsmOffsetOp<r32,Disp32>(@base,index, scale ?? ScaleFactor.S1, disp);
-
-        [MethodImpl(Inline), Op]
-        public static AsmOffsetOp<r64,Disp32> offset(r64 @base, r64 index, uint disp = default, MemoryScale? scale = null)
-            => new AsmOffsetOp<r64,Disp32>(@base,index, scale ?? ScaleFactor.S1, disp);
+        public static AsmAddress address(r64 @base, r64 index, MemoryScale scale, Disp32 disp = default)
+            => AsmAddressing.address(@base,index,scale,disp);
 
         [Op]
         static ref JmpKind classify(AsmMnemonicCode src, out JmpKind kind)

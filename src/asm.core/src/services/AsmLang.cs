@@ -6,15 +6,21 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
 
+    /// <summary>
+    /// Defines asm lanaguage artifacts and productions
+    /// </summary>
     [ApiHost]
-    public partial struct AsmExpresions
+    public partial struct AsmLang
     {
-        public static AsmExpresions create()
-            => new AsmExpresions(new char[128]);
+        const NumericKind Closure = UnsignedInts;
+
+        public static AsmLang create()
+            => new AsmLang(new char[128]);
 
         readonly AsmSymbols S;
 
@@ -28,7 +34,7 @@ namespace Z0.Asm
 
         byte Position;
 
-        AsmExpresions(Index<char> buffer)
+        AsmLang(Index<char> buffer)
         {
             Buffer = buffer;
             S = AsmSymbols.create();
@@ -131,6 +137,71 @@ namespace Z0.Asm
             var len = data.Length;
             for(var i=0; i<len; i++)
                 Buffer[Position++] = skip(data,i);
+        }
+
+        // 3 bits
+        internal enum ScaleFactor : byte
+        {
+            S0 = 1,
+
+            S1 = 2,
+
+            S3 = 3,
+
+            S4 = 4
+        }
+
+        // 3 bits
+        internal enum OpIndex : byte
+        {
+            S0 = 1,
+
+            S1 = 2,
+
+            S3 = 3,
+
+            S4 = 4
+        }
+
+
+        [StructLayout(LayoutKind.Sequential, Size = 1)]
+        internal readonly struct OpInfo
+        {
+
+        }
+
+        [MethodImpl(Inline), Op]
+        internal static OpInfo join(OpIndex index, ScaleFactor scale)
+            => to(emath.or(index, emath.srl8(scale, 3)), out OpInfo _);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        internal static ref Cell<T> cell<T>(ref Statement src, byte offset)
+            where T : unmanaged
+                => ref first(recover<Cell<T>>(slice(src.Bytes,offset)));
+
+        [MethodImpl(Inline), Op]
+        internal static ref AsmMnemonicCode mnemonic(ref Statement src)
+            => ref mnemonic(src.Bytes);
+
+        [MethodImpl(Inline), Op]
+        internal static ref AsmMnemonicCode mnemonic(Span<byte> src)
+            => ref first(recover<AsmMnemonicCode>(src));
+
+        public struct Statement
+        {
+            internal Cell256 Data;
+
+            internal Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => Data.Bytes;
+            }
+
+            public ref AsmMnemonicCode Mnemonic
+            {
+                [MethodImpl(Inline)]
+                get => ref mnemonic(Bytes);
+            }
         }
     }
 }

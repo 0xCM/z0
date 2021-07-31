@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
     public interface IAsmBitfield
     {
         BitfieldModel Model {get;}

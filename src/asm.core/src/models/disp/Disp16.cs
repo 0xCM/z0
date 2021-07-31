@@ -9,6 +9,9 @@ namespace Z0.Asm
 
     using static Root;
 
+    /// <summary>
+    /// Defines a signed 16-bit displacement
+    /// </summary>
     public readonly struct Disp16 : IDisplacement<Disp16,short>
     {
         public short Value {get;}

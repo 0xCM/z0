@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     [ApiHost]
-    public readonly partial struct AsmOpTypes
+    public readonly partial struct AsmOperands
     {
 
     }

@@ -9,6 +9,9 @@ namespace Z0.Asm
 
     using static Root;
 
+    /// <summary>
+    /// Defines a signed 32-bit displacement
+    /// </summary>
     public readonly struct Disp32 : IDisplacement<Disp32,int>
     {
         public int Value {get;}

@@ -10,6 +10,9 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
+    /// <summary>
+    /// Defines a parametric displacement that may resolve to an 8-bit, 16-bit or 32-bit signed displacement
+    /// </summary>
     public readonly struct Disp<T> : IDisplacement
         where T : unmanaged, IDisplacement<T>
     {

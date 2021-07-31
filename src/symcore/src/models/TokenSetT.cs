@@ -6,13 +6,6 @@ namespace Z0
 {
     using System;
 
-    public interface ITokenSet
-    {
-        Type[] Types();
-
-        string SetName {get;}
-    }
-
     public abstract class TokenSet<T> : ITokenSet
         where T : TokenSet<T>, new()
     {
@@ -21,7 +14,7 @@ namespace Z0
 
         public abstract Type[] Types();
 
-        public virtual string SetName
+        public virtual string Name
             => typeof(T).Name;
     }
 }

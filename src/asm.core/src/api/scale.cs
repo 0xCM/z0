@@ -30,5 +30,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static MemoryScale scale(byte factor)
             => new MemoryScale((ScaleFactor)factor);
+
+        [MethodImpl(Inline), Op]
+        public static MemoryScale scale(ScaleFactor factor)
+            => new MemoryScale(factor);
     }
 }

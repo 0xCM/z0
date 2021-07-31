@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using R = AsmOpTypes;
+    using R = AsmOperands;
 
     /// <summary>
     /// Defines accessors for supported register operands
