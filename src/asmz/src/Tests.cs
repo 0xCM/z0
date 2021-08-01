@@ -44,13 +44,6 @@ namespace Z0.Asm
             }
         }
 
-        void RenderJmp()
-        {
-            var code = AsmMnemonicCode.JMP;
-            var pipe = Wf.AsmRowPipe();
-            var dst = Db.AppLog(code.ToString(), FS.Asm);
-            pipe.RenderRows(code, dst);
-        }
 
         void CheckSettingsParser()
         {

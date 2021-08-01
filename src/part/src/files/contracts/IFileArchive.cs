@@ -28,6 +28,15 @@ namespace Z0
         Deferred<FS.FilePath> Files()
             => Root.EnumerateFiles(true);
 
+        FS.FolderPath Queries()
+            => Root + FS.folder("queries");
+
+        FS.FolderPath Queries(Scope scope)
+            => Queries() + FS.folder(scope.Format());
+
+        FS.FilePath QueryOut(string id, FS.FileExt ext)
+            => Queries() + FS.file(id,ext);
+
         Deferred<FS.FilePath> Files(FS.FileExt ext)
             => Root.EnumerateFiles(ext, true);
 

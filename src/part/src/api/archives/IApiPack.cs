@@ -42,10 +42,10 @@ namespace Z0
         FS.FolderPath AsmCaptureDir(PartId id)
             => AsmCaptureRoot() + FS.folder(id.Format());
 
-        FS.FilePath CapturedAsm(ApiHostUri host)
+        FS.FilePath AsmCapture(ApiHostUri host)
             => AsmCaptureDir(host.Part) + FS.file(string.Format("{0}.{1}", host.Part.Format(), host.HostName), FS.Asm);
 
-        ReadOnlySpan<FS.FilePath> CapturedAsm(PartId id)
+        FS.Files AsmCapturePaths(PartId id)
             => AsmCaptureDir(id).Files(FS.Asm);
 
         FS.FilePath AsmStatementSummary()

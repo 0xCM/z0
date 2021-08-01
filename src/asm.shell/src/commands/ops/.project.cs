@@ -22,7 +22,7 @@ namespace Z0.Asm
                 if(outcome)
                 {
                     State.Project(id);
-                    Write(string.Format("{0} protject selected", id));
+                    Write(string.Format("{0} project selected", id));
                     var src = Projects().SrcFiles(id);
                     Files(src);
                 }

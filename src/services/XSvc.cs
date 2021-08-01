@@ -10,6 +10,14 @@ namespace Z0
     public static class XSvc
     {
         [Op]
+        public static HexCsvReader HexCsvReader(this IWfRuntime wf)
+            => Svc.HexCsvReader.create(wf);
+
+        [Op]
+        public static HexCsvWriter HexCsvWriter(this IWfRuntime wf)
+            => Svc.HexCsvWriter.create(wf);
+
+        [Op]
         public static ApiResProvider ApiResProvider(this IWfRuntime wf)
             => Svc.ApiResProvider.create(wf);
 

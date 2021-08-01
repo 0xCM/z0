@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static WsNames;
+    using static WsAtoms;
 
     public class AsmEnv : IDomainEnv<AsmEnv>
     {
@@ -55,7 +55,7 @@ namespace Z0
             => Root + FS.folder(bin);
 
         public FS.FolderPath Listing()
-            => Root + FS.folder(listing);
+            => Root + FS.folder("listing");
 
         public FS.FolderPath Dis()
             => Root + FS.folder(dis);

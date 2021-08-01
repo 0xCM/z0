@@ -18,10 +18,6 @@ namespace Z0
             => Svc.MsilPipe.create(wf);
 
         [Op]
-        public static ImageCsvReader ImageCsvReader(this IWfRuntime wf)
-            => Svc.ImageCsvReader.create(wf);
-
-        [Op]
         public static AppModules AppModules(this IWfRuntime wf)
             => Svc.AppModules.create(wf);
 

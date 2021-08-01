@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using static core;
 
-    using static WsNames;
+    using static WsAtoms;
 
     partial class AsmCmdService
     {
@@ -24,13 +24,13 @@ namespace Z0.Asm
                 var configCmd = dir + FS.file(config, FS.Cmd);
                 if(configCmd.Exists)
                 {
-                    var log =  dir + FS.folder(logs) + FS.file(config, FS.Log);
-                    if(log.Exists)
+                    var config =  dir + FS.folder(logs) + FS.file(WsAtoms.config, FS.Log);
+                    if(config.Exists)
                     {
-                        var result = Tooling.parse(log.ReadText(), out var c);
+                        var result = Tooling.parse(config.ReadText(), out var c);
                         if(result.Fail)
                         {
-                            Write(result.Message);
+                            Error(string.Format("{0}:{1}", config.ToUri(), result.Message));
                             continue;
                         }
 
@@ -49,7 +49,7 @@ namespace Z0.Asm
                 }
             }
 
-            Write(string.Format("{0} tools available", counter));
+            Write(string.Format("{0} tools available: {1}", counter, dst.ToUri()));
             return true;
         }
     }

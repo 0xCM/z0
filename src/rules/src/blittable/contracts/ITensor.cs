@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Blit
+namespace Z0.BZ
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -10,8 +10,8 @@ namespace Z0.Blit
     {
         byte Arity {get;}
 
-        TypeKind IPrimitive.TypeKind
-            => TypeKind.Tensor;
+        BlittableKind IPrimitive.TypeKind
+            => BlittableKind.Tensor;
     }
 
     [Free]

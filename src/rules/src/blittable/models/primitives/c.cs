@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Blit
+namespace Z0.BZ
 {
     /// <summary>
     /// Represents the empty character

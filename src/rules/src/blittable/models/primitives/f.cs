@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Blit
+namespace Z0.BZ
 {
     public struct f0<T> : IFloat<T>
         where T : unmanaged

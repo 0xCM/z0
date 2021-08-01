@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Blit
+namespace Z0.BZ
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -13,7 +13,7 @@ namespace Z0.Blit
 
         BitWidth StorageWidth {get;}
 
-        TypeKind TypeKind {get;}
+        BlittableKind TypeKind {get;}
     }
 
     [Free]

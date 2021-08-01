@@ -15,6 +15,10 @@ namespace Z0
         public static string pad(int pad)
             => "{0," + pad.ToString() + "}";
 
+        [MethodImpl(Inline), Op]
+        public static string pad(uint slot, int pad)
+            => "{" + slot.ToString() + "," + pad.ToString() + "}";
+
         /// <summary>
         /// The end-of-line escape sequence
         /// </summary>

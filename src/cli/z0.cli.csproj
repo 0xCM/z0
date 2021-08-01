@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Interop)" />
     <ProjectReference Include="$(BitNumbers)" />
     <ProjectReference Include="$(Tables)" />
+    <ProjectReference Include="$(Services)" />
 
   </ItemGroup>
 

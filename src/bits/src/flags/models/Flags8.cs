@@ -18,7 +18,6 @@ namespace Z0
 
         K Data;
 
-
         [MethodImpl(Inline)]
         public Flags8(K value)
             => Data = value;

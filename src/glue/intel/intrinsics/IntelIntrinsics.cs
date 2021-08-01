@@ -16,7 +16,7 @@ namespace Z0.Asm
 
     public class IntelIntrinsics  : AppService<IntelIntrinsics>
     {
-        const string dataset = "intrinsics";
+        const string dataset = "intel.intrinsics";
 
         DevWs Ws;
 
@@ -28,26 +28,25 @@ namespace Z0.Asm
         public ReadOnlySpan<Intrinsic> Emit()
         {
             var parsed = Parse();
-            EmitLog(parsed);
+            EmitAlgorithms(parsed);
             EmitTable(parsed);
             EmitHeader(parsed);
-            //EmitAlogrithms(parsed);
             return parsed;
         }
 
         XmlDoc XmlSouceDoc()
         {
-            var src = Ws.Sources().Subdir(dataset) + FS.file("intel-intrinsics", FS.Xml);
+            var src = Ws.Sources().Dataset(dataset) + FS.file(dataset, FS.Xml);
             return text.xml(src.ReadUtf8());
         }
 
         ReadOnlySpan<Intrinsic> Parse()
             => Parse(XmlSouceDoc());
 
-        void EmitLog(ReadOnlySpan<Intrinsic> src)
+        void EmitAlgorithms(ReadOnlySpan<Intrinsic> src)
         {
             var count = src.Length;
-            var dst = Ws.Imports().Subdir(dataset) + FS.file(dataset, FS.Log);
+            var dst = Ws.Imports().Subdir(dataset) + FS.file("intrinsics.algorithms", FS.Txt);
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             for(var i=0; i<count; i++)
@@ -55,64 +54,9 @@ namespace Z0.Asm
             Wf.EmittedFile(flow, count);
         }
 
-        void EmitAlogrithms(ReadOnlySpan<Intrinsic> src)
-        {
-            var dir = Ws.Imports().Subdir("intrinsics.alg");
-            dir.Clear();
-            var count = src.Length;
-
-            var flow = Wf.Running(Msg.EmittingAlgorithsm.Format(count, dir));
-            using var unknown =  (dir + FS.file("_None", FS.Alg)).Writer();
-            var xed = IFormType.None;
-            var writer = default(StreamWriter);
-            var path = FS.FilePath.Empty;
-            var buffer = text.buffer();
-
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var intrinsic = ref skip(src,i);
-                overview(intrinsic, buffer);
-                sig(intrinsic, buffer);
-                body(intrinsic, buffer);
-                if(instruction(intrinsic, out var ix) && ix.xed != 0)
-                {
-                    if(xed == 0)
-                    {
-                        xed = ix.xed;
-                        path = dir + FS.file(xed.ToString(), FS.Alg);
-                        writer = path.Writer(true);
-                    }
-                    else
-                    {
-                        xed = ix.xed;
-                        if(!writer.Equals(unknown))
-                        {
-                            writer.Flush();
-                            writer.Dispose();
-                            path = dir + FS.file(xed.ToString(), FS.Alg);
-                            writer = path.Writer(true);
-                        }
-                    }
-                }
-
-                if(writer == null)
-                    writer = unknown;
-
-                writer.WriteLine(buffer.Emit());
-            }
-
-            if(writer != null)
-            {
-                writer.Flush();
-                writer.Dispose();
-            }
-
-            Wf.Ran(flow, Msg.EmittedAlgorithms.Format(count));
-        }
-
         void EmitHeader(ReadOnlySpan<Intrinsic> src)
         {
-            var dst = Ws.Imports().Subdir(dataset) + FS.file(dataset, FS.H);
+            var dst = Ws.Imports().Subdir(dataset) + FS.file("intrinsics.declarations", FS.H);
             var flow = Wf.EmittingFile(dst);
             var count = src.Length;
             using var writer = dst.Writer();
@@ -153,7 +97,7 @@ namespace Z0.Asm
 
         void EmitTable(ReadOnlySpan<Intrinsic> src)
         {
-            var dst = Ws.Imports().Table<IntelIntrinsic>();
+            var dst = Ws.Tables().Table<IntelIntrinsic>();
             var flow = Wf.EmittingTable<IntelIntrinsic>(dst);
             var rows = list<IntelIntrinsic>();
             Summarize(src, rows);
@@ -322,9 +266,6 @@ namespace Z0.Asm
 
         static string sig(Intrinsic src)
             => string.Format("{0} {1}({2})", src.@return,  src.name,  string.Join(", ", src.parameters.ToArray()));
-
-        static void sig(Intrinsic src, ITextBuffer dst)
-            => dst.AppendLine(sig(src));
 
         static void body(Intrinsic src, ITextBuffer dst)
         {

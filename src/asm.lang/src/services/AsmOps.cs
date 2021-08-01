@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     [ApiHost]
     public static partial class XAsm
     {

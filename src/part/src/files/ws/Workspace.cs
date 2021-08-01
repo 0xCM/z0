@@ -7,10 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
+
     public struct Workspace : IWorkspace<Workspace>
     {
         FS.FolderPath _WsRoot;
 
+        [MethodImpl(Inline)]
         public Workspace(FS.FolderPath root)
         {
             _WsRoot = root;
@@ -18,12 +21,15 @@ namespace Z0
 
         public FS.FolderPath Root
         {
+            [MethodImpl(Inline)]
             get => _WsRoot;
         }
 
+        [MethodImpl(Inline)]
         public FS.FolderPath WsRoot()
             => _WsRoot;
 
+        [MethodImpl(Inline)]
         public FS.FolderPath WsRoot(FS.FolderPath src)
         {
             _WsRoot = src;

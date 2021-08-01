@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
 
     using T = AsmGenTarget;
+
     [ApiHost]
     public sealed partial class AsmModelGen : AppService<AsmModelGen>
     {

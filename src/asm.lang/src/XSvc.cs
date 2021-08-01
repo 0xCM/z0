@@ -17,10 +17,9 @@ namespace Z0
         public static NasmCatalog NasmCatalog(this IWfRuntime wf)
             => Svc.NasmCatalog.create(wf);
 
-
         [Op]
-        public static AsmRowPipe AsmRowPipe(this IWfRuntime wf)
-            => Svc.AsmRowPipe.create(wf);
+        public static AsmTables AsmTables(this IWfRuntime wf)
+            => Svc.AsmTables.create(wf);
 
         [Op]
         public static StanfordAsmCatalog StanfordCatalog(this IWfRuntime wf)
@@ -53,9 +52,5 @@ namespace Z0
         [Op]
         public static AsmToolchain AsmToolchain(this IWfRuntime context)
             => Svc.AsmToolchain.create(context);
-
-        [Op]
-        public static AsmDataPipes AsmDataPipes(this IWfRuntime context)
-            => Svc.AsmDataPipes.create(context);
     }
 }

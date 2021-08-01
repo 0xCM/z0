@@ -2,13 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Blit
+namespace Z0.BZ
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
+
+    using api = Blit;
 
     /// <summary>
     /// Represents the empty vector

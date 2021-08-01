@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Blit
+namespace Z0.BZ
 {
     using System;
 
@@ -32,7 +32,7 @@ namespace Z0.Blit
 
         Span<T> Cells {get;}
 
-        TypeKind IPrimitive.TypeKind
-            => TypeKind.Vector;
+        BlittableKind IPrimitive.TypeKind
+            => BlittableKind.Vector;
     }
 }

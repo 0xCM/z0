@@ -17,7 +17,6 @@ namespace Z0.Asm
             var outdir = Projects().Out(proj) + FS.folder(subject);
             var apihex = Wf.ApiHex();
             var emitter = Wf.AsmStatementPipe();
-            var loader = Wf.AsmDataPipes();
 
             var blocks = apihex.ReadBlocks().View;
             var count = blocks.Length;

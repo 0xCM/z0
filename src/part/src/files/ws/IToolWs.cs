@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static WsNames;
+    using static WsAtoms;
 
     public interface IToolWs : IWorkspace
     {

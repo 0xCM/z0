@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Blit
+namespace Z0.BZ
 {
     using System;
 
@@ -11,8 +11,8 @@ namespace Z0.Blit
     [Free]
     public interface IChar : IPrimitive
     {
-        TypeKind IPrimitive.TypeKind
-            => TypeKind.Char;
+        BlittableKind IPrimitive.TypeKind
+            => BlittableKind.Char;
     }
 
     [Free]

@@ -12,7 +12,7 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op]
-        public static Declaration<Bitvector> bitvector(string name, uint width)
-            => new Declaration<Bitvector>(name, new Bitvector(width));
+        public static Declaration<BitvectorType> bitvector(string name, uint width)
+            => new Declaration<BitvectorType>(name, new BitvectorType(width));
     }
 }

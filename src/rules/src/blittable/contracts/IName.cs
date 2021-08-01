@@ -2,15 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Blit
+namespace Z0.BZ
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IName : IPrimitive
     {
-        TypeKind IPrimitive.TypeKind
-            => TypeKind.Name;
+        BlittableKind IPrimitive.TypeKind
+            => BlittableKind.Name;
     }
 
     [Free]

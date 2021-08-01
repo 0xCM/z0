@@ -16,7 +16,7 @@ namespace Z0
     {
         public void ClearImageContent()
         {
-            var dir = Db.TableDir<ImageContentRecord>();
+            var dir = Db.TableDir<HexCsv>();
             var flow = Wf.Running($"Clearing content from <{dir}>");
             var dst = list<FS.FilePath>();
             dir.Clear(dst);
@@ -34,15 +34,15 @@ namespace Z0
 
         public void LoadImageContent(FS.FilePath src)
         {
-            Wf.ImageCsvReader().Load(src);
+            Wf.HexCsvReader().Load(src);
         }
 
         [Op]
         public MemoryRange EmitImageContent(Assembly src)
         {
-            var rowsize = ImageContentRecord.RowDataSize;
-            var dst = Db.Table(ImageContentRecord.TableId, src.GetSimpleName());
-            var flow = Wf.EmittingTable<ImageContentRecord>(dst);
+            var rowsize = HexCsv.RowDataSize;
+            var dst = Db.Table("image.content", src.GetSimpleName());
+            var flow = Wf.EmittingTable<HexCsv>(dst);
             var @base = ImageMemory.@base(src);
             var formatter = HexDataFormatter.create(@base, rowsize);
             var path = FS.path(src.Location);
@@ -65,7 +65,7 @@ namespace Z0
                 k = Read(reader, buffer);
             }
 
-            Wf.EmittedTable<ImageContentRecord>(flow, lines);
+            Wf.EmittedTable<HexCsv>(flow, lines);
             return (@base, @base + offset);
         }
 

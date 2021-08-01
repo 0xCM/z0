@@ -11,12 +11,6 @@ namespace Z0
 
     partial struct Flags
     {
-        [MethodImpl(Inline)]
-        public static Flags<N,T> flags<N,T>(N n, T value)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => new Flags<N,T>(value);
-
         [MethodImpl(Inline), Op]
         public static Flags<Pow2x3> create(Pow2x3 src)
             => new Flags<Pow2x3>(src);
@@ -80,8 +74,5 @@ namespace Z0
         public static Flags64<K> flags64<K>(K state)
             where K : unmanaged
                 => new Flags64<K>(state);
-
-
-
     }
 }

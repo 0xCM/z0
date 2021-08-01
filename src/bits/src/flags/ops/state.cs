@@ -73,6 +73,5 @@ namespace Z0
             else
                 return bit.test(u64(src.State), (byte)Pow2.log(u64(flag)));
         }
-
     }
 }

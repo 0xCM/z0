@@ -72,7 +72,7 @@ namespace Z0.Asm
 
         public ReadOnlySpan<NasmInstruction> ImportInstructions()
         {
-            var src = Ws.Sources().Path("nasm-instructions", FS.Txt);
+            var src = Ws.Sources().Dataset(AsmTableScopes.Nasm) + FS.file("nasm.instructions", FS.Txt);
             var dst = Ws.Tables().Table<NasmInstruction>(AsmTableScopes.Nasm);
             return ImportInstructions(src,dst);
         }

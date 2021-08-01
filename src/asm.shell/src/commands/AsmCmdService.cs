@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static WsAtoms;
 
     public sealed partial class AsmCmdService : AppCmdService<AsmCmdService>
     {
@@ -47,6 +48,8 @@ namespace Z0.Asm
         IntelXed Xed;
 
         AsmToolchain AsmToolchain;
+
+        AsmTables AsmTables;
 
         const ushort BufferSize = Pow2.T14;
 
@@ -87,6 +90,7 @@ namespace Z0.Asm
             CmdRunner = Wf.CmdLineRunner();
             Xed = Wf.IntelXed();
             AsmToolchain = Wf.AsmToolchain();
+            AsmTables = Wf.AsmTables();
             State.DevWs(Ws);
         }
 
@@ -202,6 +206,13 @@ namespace Z0.Asm
             var id = arg(args,0).Value;
             dir = OutRoot() + FS.folder(id);
             return true;
+        }
+
+        void EmitTokens(ITokenSet src)
+        {
+            var dst = Ws.Output().Table<SymToken>(queries, src.Name);
+            var tokens = Symbols.tokens(src.Types());
+            EmitRecords(tokens, SymToken.RenderWidths, dst);
         }
 
         FS.FolderPath ToolOutDir(ToolId tool)

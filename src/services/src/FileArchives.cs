@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="wf">The workflow source</param>
         [Op]
         public static IFileArchive tables(IEnvPaths paths)
-            => new FileArchive(paths.TableDir<ImageContentRecord>());
+            => new FileArchive(paths.TableDir<HexCsv>());
 
         /// <summary>
         /// Creates an archive over the runtime directory

@@ -2,15 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Blit
+namespace Z0.BZ
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IFloat : IPrimitive
     {
-        TypeKind IPrimitive.TypeKind
-            => TypeKind.Float;
+        BlittableKind IPrimitive.TypeKind
+            => BlittableKind.Float;
     }
 
     [Free]

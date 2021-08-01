@@ -547,23 +547,34 @@ namespace Z0.Asm
             return EmptyString;
         }
 
-        public static void bitfields(ReadOnlySpan<CpuIdRow> src, ITextBuffer dst)
+        public static void regvals(ReadOnlySpan<CpuIdRow> src, ITextBuffer dst)
         {
+            const sbyte ColWidth = 47;
+            const byte ColCount = 6;
+            var slots = array(RP.pad(0,-ColWidth), RP.pad(1,-ColWidth), RP.pad(2,-ColWidth), RP.pad(3,-ColWidth), RP.pad(4,-ColWidth), RP.pad(5,-ColWidth));
+            var pattern = string.Format("{0} | {1} | {2} | {3} | {4} | {5}", slots);
+            var header = string.Format(pattern, "eax(in)", "ecx(in)", "eax(out)", "ebx(out)", "ecx(out)", "edx(out)");
+            dst.AppendLine(header);
             var count = src.Length;
             for(var i=0; i<count; i++)
-                bitfield(skip(src,i), dst);
+                regvals(skip(src,i), dst);
         }
 
-        public static void bitfield(in CpuIdRow row, ITextBuffer dst)
+        public static void regvals(in CpuIdRow row, ITextBuffer dst)
         {
             var w = n8;
-            dst.AppendFormat("eax (in): {0} [{1}] | ", row.Leaf, row.Leaf.FormatBitstring(w));
-            dst.AppendFormat("ecx (in): {0} [{1}] | ", row.Subleaf, row.Subleaf.FormatBitstring(w));
-            dst.Append(" => ");
-            dst.AppendFormat("eax (out): {0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(w));
-            dst.AppendFormat("ebx (out): {0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(w));
-            dst.AppendFormat("ecx (out): {0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(w));
-            dst.AppendFormat("edx (out): {0} [{1}] ", row.Edx, row.Edx.FormatBitstring(w));
+            // eax(in)
+            dst.AppendFormat("{0} [{1}] | ", row.Leaf, row.Leaf.FormatBitstring(w));
+            // ecx(in)
+            dst.AppendFormat("{0} [{1}] | ", row.Subleaf, row.Subleaf.FormatBitstring(w));
+            // eax(out)
+            dst.AppendFormat("{0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(w));
+            // ebx(out)
+            dst.AppendFormat("{0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(w));
+            // ecx(out)
+            dst.AppendFormat("{0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(w));
+            // edx(out)
+            dst.AppendFormat("{0} [{1}] ", row.Edx, row.Edx.FormatBitstring(w));
             dst.AppendLine();
         }
 
