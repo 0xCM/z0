@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
     using static Root;
 
     partial class text
     {
-        public static int hash(string src)
-            => (src ?? EmptyString).GetHashCode();
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> chars(string src)
+            => src;
     }
 }

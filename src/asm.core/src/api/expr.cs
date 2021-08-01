@@ -22,6 +22,6 @@ namespace Z0.Asm
 
         [Op]
         public static AsmExpr expr(AsmMnemonic monic, ReadOnlySpan<char> operands)
-            => new AsmExpr(string.Format("{0} {1}", monic.Format(MnemonicCase.Lowercase), TextTools.format(operands)));
+            => new AsmExpr(string.Format("{0} {1}", monic.Format(MnemonicCase.Lowercase), text.format(operands)));
     }
 }

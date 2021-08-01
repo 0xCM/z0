@@ -15,184 +15,66 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmRegNames
     {
-        const string R0 = "rax eax ax  al  ";
-
-        const string R1 = "rcx ecx cx  cl  ";
-
-        const string R2 = "rdx edx dx  dl  ";
-
-        const string R3 = "rbx ebx bx  bl  ";
-
-        const string R4 = "rsp esp sp  spl ";
-
-        const string R5 = "rbp ebp bp  bpl ";
-
-        const string R6 = "rsi esi si  sil ";
-
-        const string R7 = "rdi edi di  dil ";
-
-        const string R8 = "r8  r8d r8w r8b ";
-
-        const string R9 = "r9  r9d r9w r9b ";
-
-        const string R10 = "r10 r10dr10wr10b";
-
-        const string R11 = "r11 r11dr11wr11b";
-
-        const string R12 = "r12 r12dr12wr12b";
-
-        const string R13 = "r13 r13dr13wr13b";
-
-        const string R14 = "r14 r14dr14wr14b";
-
-        const string R15 = "r15 r15dr15wr15b";
-
-        const string KRegText = "k0k1k2k3k4k5k6k7";
-
-        const string XmmText = "xmm1 xmm2 xmm3 xmm4 xmm5 xmm6 xmm7 xmm8 xmm9 xmm10xmm11xmm12xmm13xmm14xmm15xmm16xmm17xmm18xmm19xmm20xmm21xmm22xmm23xmm24xmm25xmm26xmm27xmm28xmm29xmm30xmm31";
-
-        const string YmmText = "ymm1 ymm2 ymm3 ymm4 ymm5 ymm6 ymm7 ymm8 ymm9 ymm10ymm11ymm12ymm13ymm14ymm15ymm16ymm17ymm18ymm19ymm20ymm21ymm22ymm23ymm24ymm25ymm26ymm27ymm28ymm29ymm30ymm31";
-
-        const string ZmmText = "zmm1 zmm2 zmm3 zmm4 zmm5 zmm6 zmm7 zmm8 zmm9 zmm10zmm11zmm12zmm13zmm14zmm15zmm16zmm17zmm18zmm19zmm20zmm21zmm22zmm23zmm24zmm25zmm26zmm27zmm28zmm29zmm30zmm31";
-
-        const string GpRegText = R0 + R1 + R2 + R3 + R4 + R5 + R6 + R7 + R8 + R9 + R10 + R11 + R12 + R13 + R14 + R15;
-
-        const byte VRegLength = 5;
-
-        const byte KRegLength = 2;
-
-        const byte GpRegLength = 4;
-
-        [MethodImpl(Inline), Op]
-        static ReadOnlySpan<char> chars(GpClass k)
-            => GpRegText;
-
-        [MethodImpl(Inline), Op]
-        static ReadOnlySpan<char> chars(XmmClass k)
-            => XmmText;
-
-        [MethodImpl(Inline), Op]
-        static ReadOnlySpan<char> chars(YmmClass k)
-            => YmmText;
-
-        [MethodImpl(Inline), Op]
-        static ReadOnlySpan<char> chars(ZmmClass k)
-            => ZmmText;
-
-        [MethodImpl(Inline), Op]
-        static ReadOnlySpan<char> chars(MaskClass k)
-            => KRegText;
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(MaskClass k, RegIndexCode index)
-            => slice(chars(k),((byte)index)*KRegLength, KRegLength);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(XmmClass k, RegIndexCode index)
-            => slice(chars(k),((byte)index)*VRegLength, VRegLength);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(YmmClass k, RegIndexCode index)
-            => slice(chars(k),((byte)index)*VRegLength, VRegLength);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(ZmmClass k, RegIndexCode index)
-            => slice(chars(k),((byte)index)*VRegLength, VRegLength);
-
-        [MethodImpl(Inline), Op]
-        static ushort offsset(GpClass k, RegIndexCode index, RegWidthCode width)
-        {
-            const byte RowLength = 4*GpRegLength;
-            var row = (uint)((uint)index*RowLength);
-            var col = z32;
-            if(width == RegWidthCode.W64)
-                col = 0;
-            else if(width == RegWidthCode.W32)
-                col = 4;
-            else if(width == RegWidthCode.W16)
-                col = 8;
-            else
-                col = 12;
-
-            return (ushort)(row + col);
-        }
-
-        [MethodImpl(Inline), Op]
-        static ushort offsset(MaskClass k, RegIndexCode index)
-            => (ushort)((uint)index*KRegLength);
-
-        [MethodImpl(Inline), Op]
-        static ushort offsset(XmmClass k, RegIndexCode index)
-            => (ushort)((uint)index*VRegLength);
-
-        [MethodImpl(Inline), Op]
-        static ushort offsset(YmmClass k, RegIndexCode index)
-            => (ushort)((uint)index*VRegLength);
-
-        [MethodImpl(Inline), Op]
-        static ushort offsset(ZmmClass k, RegIndexCode index)
-            => (ushort)((uint)index*VRegLength);
-
         [MethodImpl(Inline), Op]
         public static RegName name(XmmClass k, RegIndexCode index)
         {
-            var i0 = offsset(k, index);
-            var data = first(recover<ulong>(slice(chars(k), i0, VRegLength)));
-            return new RegName(data);
+            const byte RegLength = 5;
+            const string Data = "xmm1 xmm2 xmm3 xmm4 xmm5 xmm6 xmm7 xmm8 xmm9 xmm10xmm11xmm12xmm13xmm14xmm15xmm16xmm17xmm18xmm19xmm20xmm21xmm22xmm23xmm24xmm25xmm26xmm27xmm28xmm29xmm30xmm31";
+            var i0 = (ushort)((uint)index*RegLength);
+            return new RegName(first(recover<ulong>(slice(text.chars(Data), i0, RegLength))));
         }
 
         [MethodImpl(Inline), Op]
         public static RegName name(YmmClass k, RegIndexCode index)
         {
-            var i0 = offsset(k, index);
-            var data = first(recover<ulong>(slice(chars(k), i0, VRegLength)));
-            return new RegName(data);
+            const byte RegLength = 5;
+            const string Data = "ymm1 ymm2 ymm3 ymm4 ymm5 ymm6 ymm7 ymm8 ymm9 ymm10ymm11ymm12ymm13ymm14ymm15ymm16ymm17ymm18ymm19ymm20ymm21ymm22ymm23ymm24ymm25ymm26ymm27ymm28ymm29ymm30ymm31";
+            var i0 = (ushort)((uint)index*RegLength);
+            return new RegName(first(recover<ulong>(slice(text.chars(Data), i0, RegLength))));
         }
 
         [MethodImpl(Inline), Op]
         public static RegName name(ZmmClass k, RegIndexCode index)
         {
-            var i0 = offsset(k, index);
-            var data = first(recover<ulong>(slice(chars(k), i0, VRegLength)));
-            return new RegName(data);
+            const byte RegLength = 5;
+            const string Data = "zmm1 zmm2 zmm3 zmm4 zmm5 zmm6 zmm7 zmm8 zmm9 zmm10zmm11zmm12zmm13zmm14zmm15zmm16zmm17zmm18zmm19zmm20zmm21zmm22zmm23zmm24zmm25zmm26zmm27zmm28zmm29zmm30zmm31";
+            var i0 = (ushort)((uint)index*RegLength);
+            return new RegName(first(recover<ulong>(slice(text.chars(Data), i0, RegLength))));
         }
 
         [MethodImpl(Inline), Op]
         public static RegName name(MaskClass k, RegIndexCode index)
         {
-            var i0 = offsset(k, index);
-            var data = first(recover<uint>(slice(chars(k), i0, KRegLength)));
-            return new RegName(data);
+            const byte RegLength = 2;
+            const string Data = "k0k1k2k3k4k5k6k7";
+            var i0 = (ushort)((uint)index*RegLength);
+            return new RegName(first(recover<uint>(slice(text.chars(Data), i0, RegLength))));
         }
 
         [MethodImpl(Inline), Op]
         public static RegName name(GpClass k, RegIndexCode index, RegWidthCode width)
         {
             const byte RegLength = 4;
+            const string R0 = "rax eax ax  al  ";
+            const string R1 = "rcx ecx cx  cl  ";
+            const string R2 = "rdx edx dx  dl  ";
+            const string R3 = "rbx ebx bx  bl  ";
+            const string R4 = "rsp esp sp  spl ";
+            const string R5 = "rbp ebp bp  bpl ";
+            const string R6 = "rsi esi si  sil ";
+            const string R7 = "rdi edi di  dil ";
+            const string R8 = "r8  r8d r8w r8b ";
+            const string R9 = "r9  r9d r9w r9b ";
+            const string R10 = "r10 r10dr10wr10b";
+            const string R11 = "r11 r11dr11wr11b";
+            const string R12 = "r12 r12dr12wr12b";
+            const string R13 = "r13 r13dr13wr13b";
+            const string R14 = "r14 r14dr14wr14b";
+            const string R15 = "r15 r15dr15wr15b";
+            const string Data = R0 + R1 + R2 + R3 + R4 + R5 + R6 + R7 + R8 + R9 + R10 + R11 + R12 + R13 + R14 + R15;
             var data = 0ul;
             var i0 = offsset(k, index, width);
-            data = first(recover<ulong>(slice(chars(k), i0, RegLength)));
-            return new RegName(data);
-        }
-
-        [MethodImpl(Inline), Op]
-        static byte length(ReadOnlySpan<char> src)
-        {
-            var count = src.Length;
-            byte i=0;
-            for(i=0; i<count; i++)
-            {
-                ref readonly var c = ref skip(src,i);
-                if(c == 0)
-                    break;
-
-                if(c == Chars.Space)
-                {
-                    i++;
-                    break;
-                }
-            }
-            return i;
+            return new RegName(first(recover<ulong>(slice(text.chars(Data), i0, RegLength))));
         }
 
         [MethodImpl(Inline), Op]
@@ -221,6 +103,45 @@ namespace Z0.Asm
                     return name(MASK, src.Index);
             }
             return RegName.Empty;
+        }
+
+        [MethodImpl(Inline), Op]
+        static ushort offsset(GpClass k, RegIndexCode index, RegWidthCode width)
+        {
+            const byte RegLength = 4;
+            const byte RowLength = 4*RegLength;
+            var row = (uint)((uint)index*RowLength);
+            var col = z32;
+            if(width == RegWidthCode.W64)
+                col = 0;
+            else if(width == RegWidthCode.W32)
+                col = 4;
+            else if(width == RegWidthCode.W16)
+                col = 8;
+            else
+                col = 12;
+
+            return (ushort)(row + col);
+        }
+
+        [MethodImpl(Inline), Op]
+        static byte length(ReadOnlySpan<char> src)
+        {
+            var count = src.Length;
+            byte i=0;
+            for(i=0; i<count; i++)
+            {
+                ref readonly var c = ref skip(src,i);
+                if(c == 0)
+                    break;
+
+                if(c == Chars.Space)
+                {
+                    i++;
+                    break;
+                }
+            }
+            return i;
         }
     }
 }

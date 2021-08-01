@@ -36,7 +36,7 @@ namespace Z0.Asm
             {
                 var monic = asm.mnemonic(SR.format(remainder).Trim());
                 var operands = Span<char>.Empty;
-                dst = asm.expr(monic,operands);
+                dst = asm.expr(monic, operands);
             }
             else
             {

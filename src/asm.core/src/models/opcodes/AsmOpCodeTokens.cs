@@ -4,70 +4,64 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     public readonly struct AsmOpCodeTokens
     {
-        [Flags]
-        public enum TokenKind : ushort
+        public enum TokenKind : byte
         {
-            None = 0,
+            /// <summary>
+            /// Classifies the 256 literal hex bytes [0xOO, 0x01, ..., 0xFF]
+            /// </summary>
+            HexByte,
 
             /// <summary>
             /// Classifies <see cref='LegacyPrefixToken'/> tokens
             /// </summary>
-            LegacyPrefix = 1,
+            LegacyPrefix,
 
             /// <summary>
             /// Classifies <see cref='RexBToken'/> tokens
             /// </summary>
-            RexBExtension = 2,
+            RexBExtension,
 
             /// <summary>
             /// Classifies <see cref='ModRmDigitToken'/> tokens
             /// </summary>
-            RegOpCodeMod = 4,
+            RegOpCodeMod,
 
             /// <summary>
             /// Classifies <see cref='SegOverrideToken'/> tokens
             /// </summary>
-            SegOverride = 8,
+            SegOverride,
 
             /// <summary>
             /// Classifies <see cref='DispToken'/> tokens
             /// </summary>
-            Disp = 16,
+            Disp,
 
             /// <summary>
             /// Classifies <see cref='ImmSizeToken'/> tokens
             /// </summary>
-            ImmSize = 32,
+            ImmSize,
 
             /// <summary>
             /// Classifies <see cref='ExclusionToken'/> tokens
             /// </summary>
-            Exclusion = 64,
+            Exclusion,
 
             /// <summary>
             /// Classifies <see cref='FpuDigitToken'/> tokens
             /// </summary>
-            FpuDigit = 128,
+            FpuDigit,
 
             /// <summary>
             /// Classifies <see cref='MaskToken'/> tokens
             /// </summary>
-            Mask = 256,
-        }
+            Mask,
 
-        public enum TokenIndex : byte
-        {
-            LegacyPrefix = 0,
-
-            Disp = 1,
-
-            SegOverride = 2,
-
-            ModRmDigit = 3,
+            /// <summary>
+            /// Classifies <see cref='OperatorToken'/> tokens
+            /// </summary>
+            Operator,
         }
 
         [SymSource]
@@ -293,10 +287,10 @@ namespace Z0.Asm
         public enum ExclusionToken
         {
             [Symbol("NP", " Indicates the use of 66/F2/F3 prefixes are not allowed with the instruction")]
-            NP = 0,
+            NP,
 
             [Symbol("NFx", "Indicates the use of F2/F3 prefixes are not allowed with the instruction")]
-            NFx = 1,
+            NFx,
         }
 
         [SymSource]
@@ -307,6 +301,13 @@ namespace Z0.Asm
 
             [Symbol("{k1}{z}", "Indicates a mask register used as instruction writemask")]
             WriteMask,
+        }
+
+        [SymSource]
+        public enum OperatorToken : byte
+        {
+            [Symbol("+")]
+            Plus,
         }
    }
 }

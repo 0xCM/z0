@@ -163,7 +163,6 @@ namespace Z0.Asm
             S4 = 4
         }
 
-
         [StructLayout(LayoutKind.Sequential, Size = 1)]
         internal readonly struct OpInfo
         {

@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static RegClasses;
     using static RegTokens;
@@ -40,28 +39,6 @@ namespace Z0.Asm
         public static MaskClass MASK => default;
 
         public static BndClass BND => default;
-
-        public static string @byte() => "byte";
-
-        public static string word() => "word";
-
-        public static string dword() => "dword";
-
-        public static string qword() => "qword";
-
-        public static string xmmword() => "xmmword";
-
-        public static string ymmword() => "ymmword";
-
-        public static string zmmword() => "ymmword";
-
-        public static string ip() => "ip";
-
-        public static string eip() => "eip";
-
-        public static string rip() => "rip";
-
-        public static string ptr() => "ptr";
 
         [Op]
         public static Symbols<AsmMnemonicCode> Mnemonics()
