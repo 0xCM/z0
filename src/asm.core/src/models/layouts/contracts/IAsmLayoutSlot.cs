@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IAsmLayoutPart
-    {
-        AsmLayoutPart Kind {get;}
-    }
+    using static AsmLayouts;
 
-    public interface IAsmLayoutPart<T> : IAsmLayoutPart
-        where T : unmanaged, IAsmLayoutPart<T>
+    public interface IAsmLayoutSlot
     {
+        SlotKind Kind {get;}
 
+        byte Position {get;}
     }
 }

@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using static core;
     using static AsmRegOps;
+    using static AsmEncodings;
 
     public class JmpStubs : AppService<JmpStubs>
     {
@@ -74,7 +75,7 @@ namespace Z0.Asm
         {
             var address = Trampolines[slot];
             ref var payload = ref Payloads[slot];
-            var mov = asm.mov(rcx, target).Content.Bytes;
+            var mov = Moves.mov(rcx, target).Content.Bytes;
             var dst = payload.Bytes;
             var j=0;
             for(var i=0; i< mov.Length; i++)

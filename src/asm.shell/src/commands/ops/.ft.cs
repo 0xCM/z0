@@ -9,7 +9,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static TmpTables;
-    using static Relations;
 
     using C = AsmCodes.RexPrefixCode;
 
@@ -17,9 +16,11 @@ namespace Z0.Asm
     {
         const byte PointCount = 5;
 
-        public static ReadOnlySpan<C> Source => new C[PointCount]{C.Base,C.B,C.X,C.R,C.W};
+        public static ReadOnlySpan<C> Source
+            => new C[PointCount]{C.Base,C.B,C.X,C.R,C.W};
 
-        public static ReadOnlySpan<AsciCode> Target => new AsciCode[PointCount]{AsciCode.Bang, AsciCode.B, AsciCode.X, AsciCode.R, AsciCode.W};
+        public static ReadOnlySpan<AsciCode> Target
+            => new AsciCode[PointCount]{AsciCode.Bang, AsciCode.B, AsciCode.X, AsciCode.R, AsciCode.W};
     }
 
     partial class AsmCmdService
@@ -28,33 +29,24 @@ namespace Z0.Asm
         unsafe Outcome FT(CmdArgs args)
         {
             var src = recover<C,byte>(Source);
-            var dst = recover<AsciCode,byte>(Target);
-            var ax = address(first(Source));
-            var ay = address(first(Target));
-            var ft = FunctionTables.f8(ax, ay).Define(src, dst);
+            Blit.fx8<AsciCode>(src, Target, out var f);
 
             byte x = 0;
-            char y = '\0';
 
             x = skip(src,0);
-            y = (char)ft.Fx(x);
-            Write(arrow(x,y));
+            Write(f.map(x));
 
             x = skip(src,1);
-            y = (char)ft.Fx(x);
-            Write(arrow(x,y));
+            Write(f.map(x));
 
             x = skip(src,2);
-            y = (char)ft.Fx(x);
-            Write(arrow(x,y));
+            Write(f.map(x));
 
             x = skip(src,3);
-            y = (char)ft.Fx(x);
-            Write(arrow(x,y));
+            Write(f.map(x));
 
             x = skip(src,4);
-            y = (char)ft.Fx(x);
-            Write(arrow(x,y));
+            Write(f.map(x));
 
             return true;
         }

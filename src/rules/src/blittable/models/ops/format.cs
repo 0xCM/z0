@@ -46,5 +46,13 @@ namespace Z0
             buffer.Reverse();
             return text.format(buffer);
         }
+
+        public static string format<S,T>(in map<S,T> m)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            const string Pattern = "{0} -> {1}";
+            return string.Format(Pattern, m.Source, m.Target);
+        }
     }
 }

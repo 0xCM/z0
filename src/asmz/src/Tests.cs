@@ -365,17 +365,6 @@ namespace Z0.Asm
             MemoryAddress target = nextIp + Displacement;
         }
 
-        void CheckRel32()
-        {
-            const ulong FunctionBase = 0x7ffc56862280;
-            const ushort InstructionOffset = 0x25;
-            const uint Displacement = 0xfc632176;
-
-            MemoryAddress client = FunctionBase + InstructionOffset;
-            var call = asm.call(client,Displacement);
-            Wf.Status(AsmRender.format(call));
-        }
-
         static void TestCmdLine(params string[] args)
         {
             var cmd1 = new CmdLine("cmd /c dir j:\\");

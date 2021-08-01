@@ -16,10 +16,6 @@ namespace Z0.Asm
             => new AsmCallInfo(callsite, target);
 
         [MethodImpl(Inline), Op]
-        public static CallRel32 call(MemoryAddress client, uint dx)
-            => new CallRel32(client, dx);
-
-        [MethodImpl(Inline), Op]
         public static AsmCallSite callsite(AsmCaller caller, Address16 offset, uint4 size)
             => new AsmCallSite(caller, offset, size);
 

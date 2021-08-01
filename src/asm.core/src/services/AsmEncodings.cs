@@ -4,10 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IAsmLayoutSlot
-    {
-        AsmLayoutPart Kind {get;}
+    using System;
+    using System.Runtime.CompilerServices;
 
-        byte Position {get;}
+    public readonly partial struct AsmEncodings
+    {
+
     }
 }

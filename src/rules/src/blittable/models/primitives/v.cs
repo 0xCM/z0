@@ -333,5 +333,4 @@ namespace Z0.BZ
         BitWidth IPrimitive.ContentWidth
             => Cells.Length*256;
     }
-
 }

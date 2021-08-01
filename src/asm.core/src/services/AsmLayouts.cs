@@ -7,23 +7,24 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static core;
+    using static Root;
 
-    partial struct asm
+    [ApiHost]
+    public readonly partial struct AsmLayouts
     {
         [MethodImpl(Inline), Op]
-        public static AsmLayout layout(params AsmLayoutSlot[] slots)
+        public static LayoutSpec specify(params Slot[] slots)
         {
             var count = slots.Length;
             var storage = Cells.alloc(w128);
             var buffer = storage.Bytes;
-            seek(buffer, AsmLayout.MaxSlotCount) = (byte)count;
-            var dst = recover<AsmLayoutSlot>(buffer);
+            seek(buffer, LayoutSpec.MaxSlotCount) = (byte)count;
+            var dst = recover<Slot>(buffer);
             var src = @readonly(slots);
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(src,i);
-            return new AsmLayout(storage);
+            return new LayoutSpec(storage);
         }
     }
 }

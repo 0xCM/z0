@@ -97,5 +97,8 @@ namespace Z0.BZ
 
         [Symbol("bv")]
         BitVector = 13,
+
+        [Symbol("fx")]
+        Function = 14,
     }
 }

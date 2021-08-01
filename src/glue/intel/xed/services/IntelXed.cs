@@ -24,8 +24,6 @@ namespace Z0.Asm
             return buffer;
         }
 
-        const string dataset = "xed";
-
         FS.FolderPath XedTables;
 
         FS.FolderPath XedSources;
@@ -38,7 +36,7 @@ namespace Z0.Asm
         {
             Ws = Wf.DevWs();
             XedTables = Ws.Tables().Subdir("intel.xed");
-            XedSources = Ws.Sources().Subdir("xed");
+            XedSources = Ws.Sources().Dataset("xed.primary");
             Parsers = Wf.XedParsers();
         }
 
@@ -445,7 +443,7 @@ namespace Z0.Asm
         void EmitSymbols<K>(FS.FolderPath dir)
             where K : unmanaged, Enum
         {
-            var name = string.Format("{0}.{1}", dataset, typeof(K).Name.ToLower());
+            var name = string.Format("xed.{0}", typeof(K).Name.ToLower());
             var symbols = Symbols.index<K>().View;
             var path = dir + FS.file(name,FS.Csv);
             EmitSymbols(symbols, path);

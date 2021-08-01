@@ -154,6 +154,39 @@ namespace Z0.BZ
             => Width;
     }
 
+    public struct u8 : IUnsigned<byte>
+    {
+        public const ulong Width = 8;
+
+        public byte Storage;
+
+        [MethodImpl(Inline)]
+        public u8(byte src)
+        {
+            Storage = src;
+        }
+
+        BitWidth IPrimitive.ContentWidth
+            => Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator u8(u8<byte> src)
+            => new u8(src.Storage);
+
+        [MethodImpl(Inline)]
+        public static implicit operator u8<byte>(u8 src)
+            => new u8<byte>(src.Storage);
+
+        [MethodImpl(Inline)]
+        public static implicit operator u8(byte src)
+            => new u8(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(u8 src)
+            => src.Storage;
+
+    }
+
     public struct u16<T> : IUnsigned<T>
         where T : unmanaged
     {

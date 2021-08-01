@@ -9,8 +9,6 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static core;
-
 
     partial struct asm
     {

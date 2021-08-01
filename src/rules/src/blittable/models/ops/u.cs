@@ -42,8 +42,8 @@ namespace Z0
             => new u6<byte>(src);
 
         [MethodImpl(Inline), Op]
-        public static u8<byte> u8(byte src)
-            => new u8<byte>(src);
+        public static u8 u8(byte src)
+            => new u8(src);
 
         [MethodImpl(Inline), Op]
         public static u16<ushort> u16(ushort src)

@@ -8,7 +8,6 @@ namespace Z0.BZ
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     public struct i0<T> : ISigned<T>
         where T : unmanaged

@@ -10,19 +10,16 @@ namespace Z0
     using static Root;
     using static core;
 
+    using blit = Z0.BZ;
+
     using Z0.BZ;
 
     partial struct Blit
     {
-        [MethodImpl(Inline), Op]
-        public static uint bits(uint width, ulong src, Span<bit> dst)
-        {
-            var input = src;
-            var storage = 0ul;
-            var count = (uint)min(width, dst.Length);
-            for(byte i=0; i<count; i++)
-                seek(dst,i) = bit.test(input,i);
-            return count;
-        }
+        [MethodImpl(Inline)]
+        public static map<S,T> map<S,T>(S src, T dst)
+            where S : unmanaged
+            where T : unmanaged
+                => new map<S,T>(src,dst);
     }
 }

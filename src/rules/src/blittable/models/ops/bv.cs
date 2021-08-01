@@ -20,16 +20,48 @@ namespace Z0
                 => new bv<T>(width, src);
 
         [MethodImpl(Inline), Op]
-        public static bv<ushort> bv16(uint width, ushort src)
-            => bv<ushort>(width, src);
+        public static bv1 bv1(byte src)
+            => new bv1(src);
 
         [MethodImpl(Inline), Op]
-        public static bv<uint> bv32(uint width, uint src)
-            => bv<uint>(width, src);
+        public static bv2 bv2(byte src)
+            => new bv2(src);
 
         [MethodImpl(Inline), Op]
-        public static bv<ulong> bv64(uint width, ulong src)
-            => bv<ulong>(width, src);
+        public static bv3 bv3(byte src)
+            => new bv3(src);
+
+        [MethodImpl(Inline), Op]
+        public static bv4 bv4(byte src)
+            => new bv4(src);
+
+        [MethodImpl(Inline), Op]
+        public static bv5 bv5(byte src)
+            => new bv5(src);
+
+        [MethodImpl(Inline), Op]
+        public static bv6 bv6(byte src)
+            => new bv6(src);
+
+        [MethodImpl(Inline), Op]
+        public static bv7 bv7(byte src)
+            => new bv7(src);
+
+        [MethodImpl(Inline), Op]
+        public static bv8 bv8(byte src)
+            => new bv8(src);
+
+        [MethodImpl(Inline), Op]
+        public static bv16 bv16(ushort src)
+            => new bv16(src);
+
+        [MethodImpl(Inline), Op]
+        public static bv32 bv32(uint src)
+            => new bv32(src);
+
+        [MethodImpl(Inline), Op]
+        public static bv64 bv64(ulong src)
+            => new bv64(src);
 
         [MethodImpl(Inline), Op]
         public static bv<Cell128> bv128(uint width, Cell128 src)

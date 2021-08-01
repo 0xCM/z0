@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.BZ
 {
-    using System;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
