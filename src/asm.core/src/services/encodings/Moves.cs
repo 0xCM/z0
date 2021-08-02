@@ -40,7 +40,7 @@ namespace Z0.Asm
             {
                 const string OpCode = "0F B6 /r";
                 var encoding = AsmHexCode.Empty;
-                encoding.Cell(0) = asm.modrm(0,dst.Index, src.Index);
+                encoding.Cell(0) = AsmEncoder.modrm(dst.Index, src.Index,0);
                 encoding.Cell(1) = 0xB6;
                 encoding.Cell(2) = 0x0F;
                 encoding.Cell(3) = 0x66;
@@ -54,8 +54,10 @@ namespace Z0.Asm
             /// <param name="dst">The target register</param>
             /// <param name="src">The memory source</param>
             /// <typeparam name="T">The target register type</typeparam>
-            public static AsmHexCode movzx(r16 dst, m8 src)
-                => default;
+            public static byte movzx(r16 dst, m8 src, ref byte hex)
+            {
+                return 0;
+            }
 
             /// <summary>
             /// 0F B6 /r | MOVZX r32, r8 | Move byte to doubleword, zero-extension.
@@ -65,8 +67,10 @@ namespace Z0.Asm
             /// <typeparam name="T">The target register type</typeparam>
             /// <typeparam name="S">The source register type</typeparam>
             [MethodImpl(Inline), Op]
-            public static AsmHexCode movzx(r32 dst, r8 src)
-                => default;
+            public static byte movzx(r32 dst, r8 src, ref byte hex)
+            {
+                return 0;
+            }
 
             /// <summary>
             /// 0F B6 /r | MOVZX r32, m8 | Move byte to doubleword, zero-extension.
@@ -74,8 +78,10 @@ namespace Z0.Asm
             /// <param name="dst">The target register</param>
             /// <param name="src">The source register</param>
             /// <typeparam name="T">The target register type</typeparam>
-            public static AsmHexCode movzx(r32 dst, m8 src)
-                => default;
+            public static byte movzx(r32 dst, m8 src, ref byte hex)
+            {
+                return 0;
+            }
 
             /// <summary>
             /// REX.W + 0F B6 /r | MOVZX r64, r8 | Move byte to quadword, zero-extension.
@@ -85,8 +91,10 @@ namespace Z0.Asm
             /// <typeparam name="T">The target register type</typeparam>
             /// <typeparam name="S">The source register type</typeparam>
             [MethodImpl(Inline), Op]
-            public static AsmHexCode movzx(r64 dst, r8 src)
-                => default;
+            public static byte movzx(r64 dst, r8 src, ref byte hex)
+            {
+                return 0;
+            }
 
             /// <summary>
             /// REX.W + 0F B6 /r | MOVZX r64, m8 | Move byte to quadword, zero-extension.
@@ -94,8 +102,10 @@ namespace Z0.Asm
             /// <param name="dst">The target register</param>
             /// <param name="src">The source register</param>
             /// <typeparam name="T">The target register type</typeparam>
-            public static AsmHexCode movzx(r64 dst, m8 src)
-                => default;
+            public static byte movzx(r64 dst, m8 src, ref byte hex)
+            {
+                return 0;
+            }
 
             /// <summary>
             /// 0F B7 /r | MOVZX r32, r16 | Move word to doubleword, zero-extension.
@@ -105,8 +115,10 @@ namespace Z0.Asm
             /// <typeparam name="T">The target register type</typeparam>
             /// <typeparam name="S">The source register type</typeparam>
             [MethodImpl(Inline), Op]
-            public static AsmHexCode movzx(r32 dst, r16 src)
-                => default;
+            public static byte movzx(r32 dst, r16 src, ref byte hex)
+            {
+                return 0;
+            }
 
             /// <summary>
             /// 0F B7 /r | MOVZX r32, m16 | Move word to doubleword, zero-extension.
@@ -115,8 +127,10 @@ namespace Z0.Asm
             /// <param name="src">The source register</param>
             /// <typeparam name="T">The target register type</typeparam>
             [MethodImpl(Inline), Op]
-            public static AsmHexCode movzx(r32 dst, m16 src)
-                => default;
+            public static byte movzx(r32 dst, m16 src, ref byte hex)
+            {
+                return 0;
+            }
 
             /// <summary>
             /// REX.W + 0F B7 /r | MOVZX r64, m16 | Move word to quadword, zero-extension.
@@ -125,8 +139,24 @@ namespace Z0.Asm
             /// <param name="src">The source register</param>
             /// <typeparam name="T">The target register type</typeparam>
             [MethodImpl(Inline), Op]
-            public static AsmHexCode movzx(r64 dst, m16 src)
-                => default;
+            public static byte movzx(r64 dst, m16 src, ref byte hex)
+            {
+                return 0;
+            }
+
+            /// <summary>
+            /// EVEX.128.F3.0F38.W0 30 /r | VPMOVWB xmm1/m64 {k1}{z}, xmm2
+            /// </summary>
+            /// <param name="xmm1"></param>
+            /// <param name="k"></param>
+            /// <param name="z"></param>
+            /// <param name="xmm2"></param>
+            /// <param name="hex"></param>
+            [MethodImpl(Inline), Op]
+            public static byte vmpovwb(xmm xmm1, rK k, bit z, xmm xmm2, ref byte hex)
+            {
+                return 0;
+            }
         }
     }
 }

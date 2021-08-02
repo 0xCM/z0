@@ -36,5 +36,4 @@ namespace Z0.Asm
             get => Bits.effsize(Offset)*8;
         }
     }
-
 }

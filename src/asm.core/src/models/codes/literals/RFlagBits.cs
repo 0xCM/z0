@@ -13,7 +13,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines literals corresponding the bits in the RFLAGS register
         /// </summary>
-        [Flags]
+        [Flags,SymSource]
         public enum RFlagBits : ulong
         {
             /// <summary>

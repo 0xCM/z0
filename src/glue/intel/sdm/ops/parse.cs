@@ -30,7 +30,7 @@ namespace Z0.Asm
         /// Finds the beginning of the toc entry placeholders
         /// </summary>
         /// <param name="src">The data source</param>
-        public static int placeholder(ReadOnlySpan<char> src)
+        public static int placeholder(string src)
         {
             var i = text.index(src," . . . .");
             var j = text.index(src,". . . . ");
@@ -49,7 +49,7 @@ namespace Z0.Asm
                 return index;
         }
 
-        public static Outcome parse(ReadOnlySpan<char> src, out TocTitle dst)
+        public static Outcome parse(string src, out TocTitle dst)
         {
             dst = TocTitle.Empty;
             var page = ChapterPage.Empty;
@@ -70,7 +70,7 @@ namespace Z0.Asm
             return false;
         }
 
-        public static Outcome parse(ReadOnlySpan<char> src, out ChapterPage dst)
+        public static Outcome parse(string src, out ChapterPage dst)
         {
             dst = ChapterPage.Empty;
             var i = text.index(src, Chars.Dash);
@@ -89,7 +89,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static Outcome parse(ReadOnlySpan<char> src, out ChapterNumber dst)
+        public static Outcome parse(string src, out ChapterNumber dst)
         {
             dst = ChapterNumber.Empty;
             var i = text.index(src, CommonMarkers.ChapterNumber);
@@ -106,7 +106,7 @@ namespace Z0.Asm
             return false;
         }
 
-        public static Outcome parse(ReadOnlySpan<char> src, out SectionNumber dst)
+        public static Outcome parse(string src, out SectionNumber dst)
         {
             dst = SectionNumber.Empty;
             if(!IsSectionNumber(src))
@@ -163,7 +163,7 @@ namespace Z0.Asm
             return result;
         }
 
-        public static Outcome parse(ReadOnlySpan<char> src, out TableNumber dst)
+        public static Outcome parse(string src, out TableNumber dst)
         {
             const char DigitSep = Chars.Dash;
             const char NumberEnd = Chars.Dot;

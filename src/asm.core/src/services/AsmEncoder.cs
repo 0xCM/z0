@@ -12,8 +12,8 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static AsmCodes;
-    using static MachineModeKind;
-    using static OperandSize;
+    using static AsmCodes.MachineModeKind;
+    using static AsmCodes.OperandSize;
     using static AsmOpCodeTokens;
 
     using K = AsmCodes.RexPrefixCode;
@@ -27,8 +27,20 @@ namespace Z0.Asm
             => new RexB(token,r);
 
         [MethodImpl(Inline), Op]
-        public static ModRmByte modrm(byte src)
-            => new ModRmByte(src);
+        public static ModRm modrm(byte src)
+            => new ModRm(src);
+
+        [MethodImpl(Inline), Op]
+        public static ModRm modrm(byte rm, byte reg, byte mod)
+            => new ModRm(Bits.join((rm, 0), (reg, 3), (mod, 6)));
+
+        [MethodImpl(Inline), Op]
+        public static ModRm modrm(RegIndex r1, RegIndex r2)
+            => modrm((byte)r1, (byte)r2, 0b11);
+
+        [MethodImpl(Inline), Op]
+        public static ModRm modrm(RegIndex rm, RegIndex reg, byte mod)
+            => modrm((byte)rm, (byte)reg, mod);
 
         [MethodImpl(Inline), Op]
         public static MandatoryPrefix mandatory(MandatoryPrefixCode code)
@@ -51,31 +63,12 @@ namespace Z0.Asm
             => new AsmPrefix(0);
 
         [MethodImpl(Inline), Op]
-        public static ref AsmPrefix modrm(uint3 rm, uint3 reg, uint2 mod, ref AsmPrefix dst)
-        {
-            dst.Content(modrm(rm,reg,mod));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ModRmByte modrm(uint3 r1, uint3 r2)
-            => modrm(r1, r2, uint2.Max);
-
-        [MethodImpl(Inline), Op]
         public static RexPrefix rex(uint4 wrxb)
             => math.or((byte)RexPrefixCode.Base, (byte)wrxb);
 
         [MethodImpl(Inline), Op]
-        public static ModRmByte modrm(uint3 rm, uint3 reg, uint2 mod)
-            => new ModRmByte(Bits.join((rm, 0), (reg, 3), (mod, 6)));
-
-        [MethodImpl(Inline), Op]
-        public static ref AsmHexCode rex(uint4 wrxb, uint4 index, ref AsmHexCode dst)
-        {
-            dst.Cell(index) = rex(wrxb);
-            dst.Cell(15) = 1;
-            return ref dst;
-        }
+        public static Sib sib(uint3 @base, uint3 index, uint2 scale)
+            => new Sib(Bits.join((scale, 0), (index, 3), (@base, 6)));
 
         [MethodImpl(Inline), Op]
         public static BranchHint hint(bit bt)
@@ -123,6 +116,14 @@ namespace Z0.Asm
             writer.Write8(a0);
             writer.Write8(a1);
             return load(writer);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static byte encode(Hex8 a0, Imm8 a1, ref byte hex)
+        {
+            seek(hex,0) = a0;
+            seek(hex,1) = a1;
+            return 2;
         }
 
         /// <summary>

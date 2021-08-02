@@ -5,8 +5,10 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
 
     using static Root;
+    using static core;
 
     partial struct Cmd
     {
@@ -14,7 +16,18 @@ namespace Z0
         public static CmdMethodLookup lookup(object host)
         {
             var type = host.GetType();
-            var methods = type.InstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
+            var methods = dict<string,MethodInfo>();
+            var src = type.InstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x));
+            foreach(var (name, method) in src)
+            {
+                if(!methods.TryAdd(name,method))
+                {
+                    term.warn(string.Format("Duplicate command:{0}", name));
+                }
+            }
+
+            //var methods = type.InstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
+
             var lookup = CmdMethodLookup.create();
             foreach(var (name,method) in methods)
             {
@@ -23,6 +36,5 @@ namespace Z0
             }
             return lookup.Seal();
         }
-
     }
 }

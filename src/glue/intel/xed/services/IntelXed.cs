@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static AsmCodes;
     using static XedModels;
 
     public sealed class IntelXed : AppService<IntelXed>
@@ -137,7 +138,7 @@ namespace Z0.Asm
         public Index<XedFormSource> LoadFormSources()
         {
             var src = FormSourcePath();
-            var flow = Wf.Running("Loading xed instruction summaries");
+            var flow = Wf.Running(Tables.processing(Tables.identify<XedFormSource>(),src));
             using var reader = src.Utf8Reader();
             var counter = 0u;
             var header = alloc<string>(XedFormSource.FieldCount);
@@ -183,7 +184,7 @@ namespace Z0.Asm
             }
 
             if(succeeded)
-                Wf.Ran(flow, $"Imported {counter} records from {src.ToUri()}");
+                Wf.Ran(flow, Tables.imported(counter, src));
 
             return records.ToArray();
         }
@@ -226,16 +227,16 @@ namespace Z0.Asm
             return outcome;
         }
 
-        public ReadOnlySpan<XedFormImport> EmitFormDetails()
-        {
-            var dst = XedTables + FS.file(Tables.identify<XedFormImport>().Format(), FS.Csv);
-            var src = LoadForms();
-            var count = src.Length;
-            var flow = Wf.EmittingFile(dst);
-            Tables.emit(src, dst, XedFormImport.RenderWidths);
-            Wf.EmittedFile(flow, count);
-            return src;
-        }
+        // public ReadOnlySpan<XedFormImport> EmitFormDetails()
+        // {
+        //     var dst = XedTables + FS.file(Tables.identify<XedFormImport>().Format(), FS.Csv);
+        //     var src = LoadForms();
+        //     var count = src.Length;
+        //     var flow = Wf.EmittingFile(dst);
+        //     Tables.emit(src, dst, XedFormImport.RenderWidths);
+        //     Wf.EmittedFile(flow, count);
+        //     return src;
+        // }
 
         public void EmitSymCatalog(FS.FolderPath dir)
         {

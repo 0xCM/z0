@@ -6,13 +6,11 @@ namespace Z0.Tools
 {
     using System;
 
-    using Z0.Asm;
-
     using static core;
     using static Root;
 
     [ApiHost]
-    public sealed partial class BdDisasm : Tool<BdDisasm, BdDisasmCmd>, IAsmTool
+    public sealed partial class BdDisasm : Tool<BdDisasm, BdDisasmCmd>
     {
         public AsmWs Workspace {get; private set;}
 

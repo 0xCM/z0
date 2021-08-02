@@ -71,6 +71,10 @@ namespace Z0
         public string Format()
             => api.format(this);
 
+        public string Format(uint margin)
+            => api.format(this, margin);
+
+
         public override string ToString()
             => Format();
     }

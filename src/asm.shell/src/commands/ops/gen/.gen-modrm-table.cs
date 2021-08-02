@@ -13,7 +13,7 @@ namespace Z0.Asm
         {
             const string Pattern = "{0,-3} | {1,-3} | {2,-3} | {3,-3} | {4}";
             var header = string.Format(Pattern, "mod", "reg", "r/m", "hex", "bitstring");
-            var dst = GenWs().Path("modrm", FS.Csv);
+            var dst = Gen().Path("modrm", FS.Csv);
             var flow = Wf.EmittingFile(dst);
             var counter = 0u;
             using var writer = dst.AsciWriter();

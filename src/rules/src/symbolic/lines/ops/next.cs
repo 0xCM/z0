@@ -32,6 +32,27 @@ namespace Z0
             return true;
         }
 
+        [Op]
+        public static bool next(ref LineReaderState state, out AsciLine<char> dst)
+        {
+            dst = AsciLine<char>.Empty;
+            var line = state.Source.ReadLine();
+            if(line == null)
+                return false;
+
+            var data = line.ToCharArray();
+            state.LineCount++;
+
+            if(Lines.number(data, out var length, out var number))
+                dst = new AsciLine<char>(number, data);
+            else
+                dst = new AsciLine<char>(state.LineCount, data);
+
+            state.Offset+=length;
+
+            return true;
+        }
+
         public static bool next<T>(ref LineReaderState State, Span<byte> buffer, out AsciLine<T> dst)
             where T : unmanaged
         {

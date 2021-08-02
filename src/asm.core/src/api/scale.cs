@@ -12,22 +12,6 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static MemoryScale scale(N1 n)
-            => new MemoryScale(ScaleFactor.S1);
-
-        [MethodImpl(Inline), Op]
-        public static MemoryScale scale(N2 n)
-            => new MemoryScale(ScaleFactor.S2);
-
-        [MethodImpl(Inline), Op]
-        public static MemoryScale scale(N4 n)
-            => new MemoryScale(ScaleFactor.S4);
-
-        [MethodImpl(Inline), Op]
-        public static MemoryScale scale(N8 n)
-            => new MemoryScale(ScaleFactor.S8);
-
-        [MethodImpl(Inline), Op]
         public static MemoryScale scale(byte factor)
             => new MemoryScale((ScaleFactor)factor);
 

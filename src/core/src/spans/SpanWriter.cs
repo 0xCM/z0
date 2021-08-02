@@ -37,26 +37,47 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Write8(byte src)
-            => seek(Data, Position++) = src;
+        public byte Write8(byte src)
+        {
+            seek(Data, Position++) = src;
+            return 1;
+        }
 
         [MethodImpl(Inline)]
-        public void Write16(ushort src)
-            => cell16(Data, Position += 2) = src;
+        public byte Write16(ushort src)
+        {
+            cell16(Data, Position += 2) = src;
+            return 2;
+        }
 
         [MethodImpl(Inline)]
-        public void Write32(uint src)
-            => cell32(Data, Position += 4) = src;
+        public byte Write16(byte lo, byte hi)
+        {
+            seek(Data, Position++) = lo;
+            seek(Data, Position++) = hi;
+            return 2;
+        }
 
         [MethodImpl(Inline)]
-        public void Write64(ulong src)
-            => cell64(Data, Position += 8) = src;
+        public byte Write32(uint src)
+        {
+            cell32(Data, Position += 4) = src;
+            return 4;
+        }
 
         [MethodImpl(Inline)]
-        public void Write<T>(in T src)
+        public byte Write64(ulong src)
+        {
+            cell64(Data, Position += 8) = src;
+            return 8;
+        }
+
+        [MethodImpl(Inline)]
+        public ByteSize Write<T>(in T src)
             where T : unmanaged
         {
             cell<T>(Data, Position += size<T>()) = src;
+            return size<T>();
         }
     }
 }

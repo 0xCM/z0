@@ -54,15 +54,11 @@ namespace Z0
             => core.slice(src,0,offset).IndexOfAny(a,b);
 
         [Op]
-        public static int index(ReadOnlySpan<char> src, ReadOnlySpan<char> match)
+        public static int index(string src, string match)
             => src.IndexOf(match);
 
         [Op]
         public static int index(ReadOnlySpan<char> src, int offset, ReadOnlySpan<char> match)
             => core.slice(src, 0, offset).IndexOf(match);
-
-        [Op]
-        public static TextIndex index(ReadOnlySpan<char> src, TextMarker match)
-            => index(src, match.Content);
     }
 }

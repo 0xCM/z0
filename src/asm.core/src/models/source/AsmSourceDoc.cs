@@ -11,21 +11,18 @@ namespace Z0.Asm
 
     public readonly struct AsmSourceDoc
     {
-        public AsmSyntaxKind Syntax {get;}
-
         public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmSourceDoc(AsmSyntaxKind syntax, string content)
+        public AsmSourceDoc(string content)
         {
             Content = content;
-            Syntax = syntax;
         }
 
         public static AsmSourceDoc Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmSourceDoc(0,EmptyString);
+            get => new AsmSourceDoc(EmptyString);
         }
     }
 }

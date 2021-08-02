@@ -15,7 +15,7 @@ namespace Z0.Asm
         [CmdOp(".gen-rex-bits")]
         Outcome EmitRexFields(CmdArgs args)
         {
-            var path = GenWs().Path("bitfields", "rex", FS.ext("bits"));
+            var path = Gen().Path("bitfields", "rex", FS.ext("bits"));
             var flow = Wf.EmittingFile(path);
             var bits = RexPrefix.Range();
             using var writer = path.AsciWriter();
@@ -32,7 +32,7 @@ namespace Z0.Asm
             const byte CellWidth = 8;
             const uint CellCount = 256;
             Span<char> buffer = stackalloc char[CellWidth];
-            var dst = GenWs().Root + FS.file("bitseq", FS.Cs);
+            var dst = Gen().Root + FS.file("bitseq", FS.Cs);
             var flow = EmittingFile(dst);
             using var writer = dst.AsciWriter();
             writer.WriteLine("    public readonly struct GeneratedBits");

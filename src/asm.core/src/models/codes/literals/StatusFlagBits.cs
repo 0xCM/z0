@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     partial struct AsmCodes
     {
-        [Flags]
+        [Flags,SymSource]
         public enum StatusFlagBits : ulong
         {
             [Symbol("cf", "Carry Flag")]

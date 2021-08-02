@@ -8,6 +8,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static AsmCodes;
 
     /// <summary>
     /// Characterizes a register operand representation

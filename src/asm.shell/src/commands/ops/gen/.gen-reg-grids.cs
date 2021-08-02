@@ -12,7 +12,7 @@ namespace Z0.Asm
         [CmdOp(".gen-reg-grids")]
         Outcome EmitRegGrids(CmdArgs args)
         {
-            var dst = GenWs().Path("regs",FS.Csv);
+            var dst = Gen().Path("regs",FS.Csv);
             var counter = 0u;
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.AsciWriter();

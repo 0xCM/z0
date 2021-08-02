@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="title">The name/context of the error</param>
         public static void error(Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            var dst = text.build();
+            var dst = new StringBuilder();
             dst.AppendLine($"Failure trapped by {caller} at {file}:line {line}");
             dst.AppendLine(e?.ToString() ?? string.Empty);
             var msg = AppMsg.define($"{dst.ToString()}", LogLevel.Error);

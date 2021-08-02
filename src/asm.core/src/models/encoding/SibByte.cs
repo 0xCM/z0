@@ -10,18 +10,40 @@ namespace Z0.Asm
     using static Root;
 
     // SIB[Scale[6,7] | Index[3,5] | Base[0,2]]
-    public struct SibByte
+    [ApiComplete]
+    public struct Sib
     {
         byte Data;
 
-        public uint3 Base()
+        [MethodImpl(Inline)]
+        public Sib(byte src)
+        {
+            Data = src;
+        }
+
+        [MethodImpl(Inline)]
+        public byte Base()
             => Bits.segment(Data, 0, 2);
 
-        public uint3 Index()
+        [MethodImpl(Inline)]
+        public void Base(byte b)
+            => Data = Bits.replace(Data, 0, 2, b);
+
+        [MethodImpl(Inline)]
+        public byte Index()
             => Bits.segment(Data, 3, 5);
 
-        public uint2 Scale()
+        [MethodImpl(Inline)]
+        public void Index(byte i)
+            => Data = Bits.replace(Data, 3, 5, i);
+
+        [MethodImpl(Inline)]
+        public byte Scale()
             => Bits.segment(Data, 6, 7);
+
+        [MethodImpl(Inline)]
+        public void Scale(byte s)
+            => Data = Bits.replace(Data, 6, 7, s);
 
         public MemoryScale ScaleFactor
         {
@@ -41,7 +63,7 @@ namespace Z0.Asm
             get => !IsEmpty;
         }
 
-        public static SibByte Empty
+        public static Sib Empty
             => default;
     }
 }

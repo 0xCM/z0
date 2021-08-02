@@ -45,11 +45,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Arrow<S,T,K>(Tripled<S,T,K> src)
-            => new Arrow<S,T,K>(src.First, src.Second, src.Third);
+        public static implicit operator Arrow<S,T,K>((K k, S s, T t) src)
+            => new Arrow<S,T,K>(src.s, src.t, src.k);
 
         [MethodImpl(Inline)]
-        public static implicit operator Tripled<K,S,T>(Arrow<S,T,K> x)
+        public static implicit operator (K k, S s, T t)(Arrow<S,T,K> x)
             => (x.Kind, x.Source, x.Target);
     }
 }

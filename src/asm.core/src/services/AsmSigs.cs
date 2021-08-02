@@ -9,15 +9,11 @@ namespace Z0.Asm
 
     using static Root;
     using static AsmSigTokens;
-    using static core;
 
     [ApiHost]
     public partial class AsmSigs : Service<AsmSigs>
     {
         const NumericKind Closure = UnsignedInts;
-
-        public static Type[] TokenTypes()
-            => AsmTokens.Sigs.create().Types();
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static AsmSigToken<K> token<K>(AsmSigTokenKind kind, K value)

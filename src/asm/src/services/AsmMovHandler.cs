@@ -57,7 +57,7 @@ namespace Z0.Asm
         void Handle(Imm64 src, IceRegister dst)
         {
             if(HasCapacity)
-                Entry(Index++) = Relations.arrow(src, dst);
+                Entry(Index++) = arrow(src, dst);
         }
     }
 }

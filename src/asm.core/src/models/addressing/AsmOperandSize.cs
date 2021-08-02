@@ -15,7 +15,7 @@ namespace Z0.Asm
         public byte Width {get;}
 
         [MethodImpl(Inline)]
-        public AsmOperandSize(uint3 index)
+        public AsmOperandSize(uint2 index)
         {
             Width = skip(Widths,index);
         }

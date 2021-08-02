@@ -14,7 +14,7 @@ namespace Z0.Asm
     {
         public const string TableId = "asm.assembled";
 
-        public uint SourceLine;
+        public LineNumber SourceLine;
 
         public MemoryAddress Offset;
 

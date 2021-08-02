@@ -19,25 +19,21 @@ namespace Z0.Asm
         public readonly partial struct Jumps
         {
             [MethodImpl(Inline), Op]
-            public static AsmHexCode jo(Hex8 cb)
+            public static byte jo(Hex8 cb, ref byte hex)
             {
                 const byte OpCode = 0x70;
-                var dst = new AsmHexCode(OpCode);
-                dst[1] = cb;
-                dst[15] = 2;
-                return dst;
+                seek(hex,0) = OpCode;
+                seek(hex,1) = cb;
+                return 2;
             }
 
             [MethodImpl(Inline), Op]
-            public static AsmHexCode jo(Hex32 cb)
+            public static byte jo(Hex32 cb, ref byte hex)
             {
                 const ushort OpCode = 0x7080;
-                var dst = new AsmHexCode(OpCode);
-                ref var x = ref seek(dst.Bytes,1);
-                ref var y = ref @as<byte,Hex32>(x);
-                y = cb;
-                dst[15] = 6;
-                return dst;
+                seek16(hex,0) = OpCode;
+                seek32(hex,1) = cb;
+                return 6;
             }
 
             /// <summary>

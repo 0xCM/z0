@@ -39,10 +39,6 @@ namespace Z0
             => new Arrow<T>(x.src,x.dst);
 
         [MethodImpl(Inline)]
-        public static implicit operator Arrow<T>(Pair<T> x)
-            => new Arrow<T>(x.Left,x.Right);
-
-        [MethodImpl(Inline)]
         public static implicit operator (T src, T dst)(Arrow<T> a)
             => (a.Source, a.Target);
     }

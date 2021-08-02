@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Rules)" />
     <ProjectReference Include="$(Clr)" />
     <ProjectReference Include="$(bit)" />
+    <ProjectReference Include="$(Term)" />
   </ItemGroup>
 
 </Project>

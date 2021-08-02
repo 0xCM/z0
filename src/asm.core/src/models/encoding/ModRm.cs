@@ -13,12 +13,12 @@ namespace Z0.Asm
     /// ModRM[mod[7:6] | reg[5:3] | r/m[2:0]]
     /// </summary>
     [ApiComplete]
-    public struct ModRmByte
+    public struct ModRm
     {
         byte Data;
 
         [MethodImpl(Inline)]
-        public ModRmByte(byte src)
+        public ModRm(byte src)
             => Data = src;
 
         /// <summary>
@@ -33,12 +33,15 @@ namespace Z0.Asm
             => Data = Bits.replace(Data, 0, 2, rm);
 
         /// <summary>
-        /// Reads bits [5:3] of the modrm byte that specifies a register operand or extends the operation encoding
+        /// Reads bits [5:3], which specifies a register operand or extends the operation encoding
         /// </summary>
         [MethodImpl(Inline)]
         public byte Reg()
             => Bits.segment(Data, 3, 5);
 
+        /// <summary>
+        /// Specifies bits [5:3], which specifies a register operand or extends the operation encoding
+        /// </summary>
         [MethodImpl(Inline)]
         public void Reg(byte reg)
             => Data = Bits.replace(Data, 3, 5, reg);
@@ -76,17 +79,17 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static ModRmByte operator ^(ModRmByte a, ModRmByte b)
-            => new ModRmByte(math.xor(a.Data, b.Data));
+        public static ModRm operator ^(ModRm a, ModRm b)
+            => new ModRm(math.xor(a.Data, b.Data));
 
         [MethodImpl(Inline)]
-        public static ModRmByte operator |(ModRmByte a, ModRmByte b)
-            => new ModRmByte(math.or(a.Data, b.Data));
+        public static ModRm operator |(ModRm a, ModRm b)
+            => new ModRm(math.or(a.Data, b.Data));
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(ModRmByte src)
+        public static implicit operator byte(ModRm src)
             => src.Encoded;
 
-        public static ModRmByte Empty => default;
+        public static ModRm Empty => default;
     }
 }

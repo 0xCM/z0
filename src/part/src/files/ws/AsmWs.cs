@@ -93,6 +93,9 @@ namespace Z0
         public FS.FolderPath Output()
             => Root + FS.folder(dotout);
 
+        public FS.FolderPath OutDir(string id)
+            => Output() + FS.folder(id);
+
         /// <summary>
         /// Defines a path of the form {Root}/src
         /// </summary>

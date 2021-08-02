@@ -4,12 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public enum BranchTargetKind : byte
+    partial struct AsmCodes
     {
-        None = 0,
+        public enum BranchTargetKind : byte
+        {
+            None = 0,
 
-        Near = 1,
+            Near = 1,
 
-        Far = 2
+            Far = 2
+        }
     }
 }

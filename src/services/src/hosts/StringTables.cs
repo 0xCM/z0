@@ -17,9 +17,24 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static StringTableRow row<T>(in StringTable<T> src, uint index)
+            where T : unmanaged
+                => new StringTableRow(src.Name, index, text.format(src[index]));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint rows<T>(in StringTable<T> src, uint offset, Span<StringTableRow> dst)
+            where T : unmanaged
+        {
+            var j=0u;
+            for(var i=offset; i<src.EntryCount && j<dst.Length; i++)
+                seek(dst,j++) = row(src,i);
+            return j;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<char> entry<T>(StringTable<T> src, T index)
             where T : unmanaged
-                => entry(src, bw64(index));
+                => entry(src, bw32(index));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<char> entry<T>(StringTable<T> src, ulong i)
@@ -56,6 +71,28 @@ namespace Z0
                 copy(entry, ref j, chars);
             }
             return new StringTable<T>(name, new string(chars), offsets);
+        }
+
+        public static StringTable<uint> from(FS.FilePath src, string name, char? delimiter = null)
+        {
+            var lines = src.ReadLines().View;
+            var buffer = list<string>();
+            for(var i=0; i<lines.Length; i++)
+            {
+                ref readonly var line = ref skip(lines,i);
+                buffer.AddRange(line.SplitClean(delimiter.Value).Select(x => x.Trim()));
+            }
+            var entries = buffer.ViewDeposited();
+            var table = StringTables.create<uint>(name, entries);
+            var count = Require.equal(buffer.Count, (int)table.EntryCount);
+            for(var i=0; i<count; i++)
+            {
+                var data = table[i];
+                ref readonly var s0 = ref skip(entries,i);
+                var s1 = new string(data);
+                Require.equal(s0, s1);
+            }
+            return table;
         }
 
         [MethodImpl(Inline), Op]

@@ -11,7 +11,6 @@ namespace Z0.Asm
     {
         RegWidthCode IRegOp.Width
             => RegWidthCode.W256;
-
     }
 
     [Free]

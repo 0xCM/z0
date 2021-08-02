@@ -4,14 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public enum AsmSyntaxKind : byte
+    partial class AsmCmdService
     {
-        None = 0,
-
-        Intel = 1,
-
-        Nasm = 2,
-
-        Hybrid = 3,
-    }
+        [CmdOp(".stringtables")]
+        Outcome EmitStringtables(CmdArgs args)
+            => EmitStringtables();
+   }
 }

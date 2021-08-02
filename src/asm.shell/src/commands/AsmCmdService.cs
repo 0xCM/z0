@@ -119,13 +119,10 @@ namespace Z0.Asm
             }
         }
 
-        Workspace WsDefine(Scope scope)
-            => new Workspace(Wf.Env.DevWs + FS.folder(scope.Name));
-
-        IWorkspace ImportWs()
+        IWorkspace Imports()
             => Ws.Imports();
 
-        IWorkspace GenWs()
+        IWorkspace Gen()
             => Ws.Gen();
 
         IWorkspace OutWs()

@@ -44,5 +44,8 @@ namespace Z0
 
         public bool Next(out AsciLine<byte> dst)
             => api.next(ref State, out dst);
+
+        public bool Next(out AsciLine<char> dst)
+            => api.next(ref State, out dst);
     }
 }

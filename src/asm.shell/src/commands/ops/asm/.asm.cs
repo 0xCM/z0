@@ -27,7 +27,7 @@ namespace Z0.Asm
                 _Assembled = binfile.ReadBytes();
                 RoutineName = id;
                 Files(new FS.FilePath[]{binfile, objfile, asmfile}, false);
-                LlvmObjDump(CmdArgs.Empty);
+                DumpObjects(objfile, AsmWs.DumpOut().Create());
             }
             return result;
         }

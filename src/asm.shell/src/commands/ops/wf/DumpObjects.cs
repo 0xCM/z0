@@ -38,5 +38,26 @@ namespace Z0.Asm
 
             return result;
         }
+
+        Outcome DumpObjects(FS.FilePath src, FS.FolderPath dst)
+        {
+            var tool = Toolspace.llvm_objdump;
+            var cmd = Cmd.cmdline(ToolWs().Script(tool, "run").Format(PathSeparator.BS));
+            var vars = WsVars.create();
+            vars.DstDir = dst;
+            vars.SrcDir = src.FolderPath;
+            vars.SrcFile = src.FileName;
+            var result = Run(cmd, vars.ToCmdVars(), out var lines);
+            if(result)
+            {
+                var len = lines.Length;
+                for(var j=0; j<len; j++)
+                {
+                    if(CmdResponse.parse(skip(lines,j).Content, out var x))
+                        Write(x);
+                }
+            }
+            return result;
+        }
     }
 }

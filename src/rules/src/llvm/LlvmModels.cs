@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
+// Copyright   :  (c) LLVM Project
+// License     :  Apache-2.0 WITH LLVM-exceptions
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    public interface IAsmTool
+    public readonly partial struct LlvmModels
     {
-        AsmWs Workspace {get;}
+
     }
 }

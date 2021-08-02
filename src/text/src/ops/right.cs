@@ -20,6 +20,16 @@ namespace Z0
         public static string right(string src, int index)
             => TextTools.right(src, index);
 
+        [Op]
+        public static string right(string src, string marker)
+        {
+            var i = index(src,marker);
+            if(i>0)
+                return right(src,i + marker.Length - 1);
+            else
+                return EmptyString;
+        }
+
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> right(ReadOnlySpan<char> src, int index)
             => TextTools.right(src, index);

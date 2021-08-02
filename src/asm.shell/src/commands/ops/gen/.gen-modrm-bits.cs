@@ -11,7 +11,7 @@ namespace Z0.Asm
         [CmdOp(".gen-modrm-bits")]
         Outcome GenModRmBits(CmdArgs args)
         {
-            var path = GenWs().Path("bitfields", "modrm", FS.ext("bits"));
+            var path = Gen().Path("bitfields", "modrm", FS.ext("bits"));
             var flow = Wf.EmittingFile(path);
             using var writer = path.AsciWriter();
             var dst = span<char>(256*128);

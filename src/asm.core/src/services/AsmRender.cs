@@ -23,7 +23,7 @@ namespace Z0.Asm
         const string To = " => ";
 
         [Op]
-        public static string delimited(Register src)
+        public static string bitfield(Register src)
         {
             const string Sep = " | ";
             const string Pattern = "[{0,-12} | {1,-8} | {2}]";
@@ -42,9 +42,7 @@ namespace Z0.Asm
                         );
 
         public static string format(AsmBlockLabel src)
-        {
-            return src.Name.IsEmpty ? EmptyString : string.Format("{0}:", src.Name);
-        }
+            => src.Name.IsEmpty ? EmptyString : string.Format("{0}:", src.Name);
 
         [Op]
         public static string format(AsmOffsetLabel src)
@@ -53,8 +51,6 @@ namespace Z0.Asm
             var width = src.OffsetWidth;
             var value = src.OffsetValue;
             var f = EmptyString;
-            // if(width <= 8)
-            //     f = HexFormat.format(w8,(byte)value);
             if(width <= 16)
                 f = HexFormat.format(w16,(ushort)value);
             else if(width <= 32)
@@ -71,7 +67,6 @@ namespace Z0.Asm
             var right = asm.comment(string.Format("{0,-32} {1}", src.Code, src.Bitstring));
             return string.Format("{0}{1}", left, right);
         }
-
 
         public static string format(in AsmAddress src)
         {
@@ -269,7 +264,7 @@ namespace Z0.Asm
             return k;
         }
 
-        public static uint bitfield(ModRmByte src, ref uint i, Span<char> dst)
+        public static uint bitfield(ModRm src, ref uint i, Span<char> dst)
         {
             var i0 = i;
             const string ModRM = "ModRM";
@@ -300,6 +295,44 @@ namespace Z0.Asm
             copy(Rm, ref i, dst);
             seek(dst, i++) = Open;
             BitRender.render(n3, src.Rm(), ref i, dst);
+            seek(dst, i++) = Close;
+
+            seek(dst, i++) = Close;
+            return i - i0;
+        }
+
+        // SIB[Scale[6,7] | Index[3,5] | Base[0,2]]
+        public static uint bitfield(Sib src, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            const string ModRM = "SIB";
+            const string Base = "Base";
+            const string Index = "Index";
+            const string Scale = "Scale";
+            copy(ModRM, ref i, dst);
+            seek(dst, i++) = Open;
+
+            copy(Base, ref i, dst);
+            seek(dst, i++) = Open;
+            BitRender.render(n3, src.Base(), ref i, dst);
+            seek(dst, i++) = Close;
+
+            seek(dst, i++) = Chars.Space;
+            seek(dst, i++) = Chars.Pipe;
+            seek(dst, i++) = Chars.Space;
+
+            copy(Index, ref i, dst);
+            seek(dst, i++) = Open;
+            BitRender.render(n3, src.Index(), ref i, dst);
+            seek(dst, i++) = Close;
+
+            seek(dst, i++) = Chars.Space;
+            seek(dst, i++) = Chars.Pipe;
+            seek(dst, i++) = Chars.Space;
+
+            copy(Scale, ref i, dst);
+            seek(dst, i++) = Open;
+            BitRender.render(n2, src.Scale(), ref i, dst);
             seek(dst, i++) = Close;
 
             seek(dst, i++) = Close;
@@ -463,17 +496,6 @@ namespace Z0.Asm
             }
         }
 
-        [Op]
-        public static string format(SibByte src)
-        {
-            var dst = TextTools.buffer();
-            dst.Append(src.Base().Format());
-            dst.Append(Chars.Space);
-            dst.Append(src.Index().Format());
-            dst.Append(Chars.Space);
-            dst.Append(src.Scale().Format());
-            return dst.ToString();
-        }
 
         [Op]
         public static string format(in AsmBranchInfo src)

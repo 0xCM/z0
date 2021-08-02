@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmSourceDoc doc(AsmSyntaxKind syntax, string content)
-            => new AsmSourceDoc(syntax, content);
+        public static AsmSourceDoc doc(string content)
+            => new AsmSourceDoc(content);
     }
 }

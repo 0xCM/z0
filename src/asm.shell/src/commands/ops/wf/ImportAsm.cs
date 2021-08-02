@@ -14,7 +14,7 @@ namespace Z0.Asm
             var paths = Files(FS.Asm);
             var lines = list<AsmLine>();
             var counter = 0u;
-            var dst = ImportWs().Path("asm", "test", FS.Asm);
+            var dst = Imports().Path("asm", "test", FS.Asm);
             using var writer = dst.AsciWriter();
             foreach(var path in paths)
             {

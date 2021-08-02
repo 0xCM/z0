@@ -15,9 +15,9 @@ namespace Z0.Asm
         public byte Width {get;}
 
         [MethodImpl(Inline)]
-        public AsmAddressSize(uint3 index)
+        public AsmAddressSize(uint2 index)
         {
-            Width = skip(Widths,index);
+            Width = skip(Widths, index);
         }
 
         [MethodImpl(Inline)]
