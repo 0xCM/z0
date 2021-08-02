@@ -48,9 +48,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string Format(this PartId id)
             => Root.format(id);
-
-        [MethodImpl(Inline), Op]
-        public static string[] Componentize(this PartId id)
-            => Root.componentize(id);
     }
 }

@@ -48,7 +48,7 @@ namespace Z0
         }
 
         public string Format()
-            => string.Format("{0}:[{1},{2}]", SegName, Min, Max);
+            => string.Format("{0}[{1},{2}]", SegName, Min, Max);
 
         public override string ToString()
             => Format();

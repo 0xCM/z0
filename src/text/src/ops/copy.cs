@@ -44,6 +44,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static uint copy(string src, ref char dst)
+        {
+            var input = src.ToSpan();
+            var count = input.Length;
+            for(var i=0; i<count; i++)
+                seek(dst, i++) = skip(input,i);
+            return (uint)count;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint copy(ReadOnlySpan<char> src, ref uint i, Span<char> dst)
         {
             var count = src.Length;

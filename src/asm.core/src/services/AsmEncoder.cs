@@ -68,7 +68,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static Sib sib(uint3 @base, uint3 index, uint2 scale)
-            => new Sib(Bits.join((scale, 0), (index, 3), (@base, 6)));
+            => new Sib(Bits.join((scale, 0), (index, 2), (@base, 6)));
 
         [MethodImpl(Inline), Op]
         public static BranchHint hint(bit bt)

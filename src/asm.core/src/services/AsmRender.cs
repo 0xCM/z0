@@ -22,16 +22,6 @@ namespace Z0.Asm
 
         const string To = " => ";
 
-        [Op]
-        public static string bitfield(Register src)
-        {
-            const string Sep = " | ";
-            const string Pattern = "[{0,-12} | {1,-8} | {2}]";
-            var index = Bitfields.format<RegIndexCode,byte>(src.Code, src.Name, 5);
-            var @class = Bitfields.format<RegClassCode,byte>(src.Class, src.Class.ToString(), 4);
-            var width = Enums.field<RegWidthCode,ushort>(src.Width, base10, "Width");
-            return string.Format(Pattern, index, @class, width);
-        }
 
         public static string format(in AsmHostStatement src)
             => string.Format("{0} {1,-36} ; {2} => {3}",
@@ -81,23 +71,23 @@ namespace Z0.Asm
             var i0 = i;
             var @base = src.Base.Format();
             var index = src.Index.Format();
-            copy(@base, ref i, dst);
+            text.copy(@base, ref i, dst);
             var scale = src.Scale.Format();
             if(src.Scale.IsNonZero)
             {
                 seek(dst,i++) = Chars.Plus;
-                copy(index, ref i, dst);
+                text.copy(index, ref i, dst);
                 if(src.Scale.IsNonUnital)
                 {
                     seek(dst,i++) = Chars.Star;
-                    copy(scale,ref i, dst);
+                    text.copy(scale,ref i, dst);
                 }
             }
 
             if(src.Disp.Value != 0)
             {
                 seek(dst,i++) = Chars.Plus;
-                copy(src.Disp.Value.ToString("x") + "h", ref i, dst);
+                text.copy(src.Disp.Value.ToString("x") + "h", ref i, dst);
             }
 
             return i - i0;
@@ -232,112 +222,6 @@ namespace Z0.Asm
             return $"{src.Encoded.FormatAsmHex()} | [{bits}] => {bitfield}";
         }
 
-        public static uint modRmBits(Span<char> dst)
-        {
-            var f0 = BitSeq.bits(n3);
-            var f1 = BitSeq.bits(n3);
-            var f2 = BitSeq.bits(n2);
-            var k=0u;
-            for(var c=0u; c<f2.Length; c++)
-            for(var b=0u; b<f1.Length; b++)
-            for(var a=0u; a<f0.Length; a++)
-            {
-                var modrm = AsmEncoder.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
-                bitfield(modrm, ref k, dst);
-                seek(dst, k++) = Chars.Space;
-                seek(dst, k++) = Chars.Eq;
-                seek(dst, k++) = Chars.Space;
-
-                var bits = modrm.Encoded.FormatBits() + "b";
-                text.copy(bits, ref k, dst);
-
-                seek(dst, k++) = Chars.Space;
-                seek(dst, k++) = Chars.Eq;
-                seek(dst, k++) = Chars.Space;
-
-                var hex = modrm.Encoded.FormatAsmHex(2);
-                text.copy(hex, ref k, dst);
-
-                seek(dst,k++) = (char)AsciControl.CR;
-                seek(dst,k++) = (char)AsciControl.LF;
-            }
-            return k;
-        }
-
-        public static uint bitfield(ModRm src, ref uint i, Span<char> dst)
-        {
-            var i0 = i;
-            const string ModRM = "ModRM";
-            const string Mod = "mod";
-            const string Reg = "reg";
-            const string Rm = "r/m";
-            copy(ModRM, ref i, dst);
-            seek(dst, i++) = Open;
-
-            copy(Mod, ref i, dst);
-            seek(dst, i++) = Open;
-            BitRender.render(n2, src.Mod(), ref i, dst);
-            seek(dst, i++) = Close;
-
-            seek(dst, i++) = Chars.Space;
-            seek(dst, i++) = Chars.Pipe;
-            seek(dst, i++) = Chars.Space;
-
-            copy(Reg, ref i, dst);
-            seek(dst, i++) = Open;
-            BitRender.render(n3, src.Reg(), ref i, dst);
-            seek(dst, i++) = Close;
-
-            seek(dst, i++) = Chars.Space;
-            seek(dst, i++) = Chars.Pipe;
-            seek(dst, i++) = Chars.Space;
-
-            copy(Rm, ref i, dst);
-            seek(dst, i++) = Open;
-            BitRender.render(n3, src.Rm(), ref i, dst);
-            seek(dst, i++) = Close;
-
-            seek(dst, i++) = Close;
-            return i - i0;
-        }
-
-        // SIB[Scale[6,7] | Index[3,5] | Base[0,2]]
-        public static uint bitfield(Sib src, ref uint i, Span<char> dst)
-        {
-            var i0 = i;
-            const string ModRM = "SIB";
-            const string Base = "Base";
-            const string Index = "Index";
-            const string Scale = "Scale";
-            copy(ModRM, ref i, dst);
-            seek(dst, i++) = Open;
-
-            copy(Base, ref i, dst);
-            seek(dst, i++) = Open;
-            BitRender.render(n3, src.Base(), ref i, dst);
-            seek(dst, i++) = Close;
-
-            seek(dst, i++) = Chars.Space;
-            seek(dst, i++) = Chars.Pipe;
-            seek(dst, i++) = Chars.Space;
-
-            copy(Index, ref i, dst);
-            seek(dst, i++) = Open;
-            BitRender.render(n3, src.Index(), ref i, dst);
-            seek(dst, i++) = Close;
-
-            seek(dst, i++) = Chars.Space;
-            seek(dst, i++) = Chars.Pipe;
-            seek(dst, i++) = Chars.Space;
-
-            copy(Scale, ref i, dst);
-            seek(dst, i++) = Open;
-            BitRender.render(n2, src.Scale(), ref i, dst);
-            seek(dst, i++) = Close;
-
-            seek(dst, i++) = Close;
-            return i - i0;
-        }
 
         static void copy(ReadOnlySpan<char> src,ref uint i, Span<char> dst)
             => text.copy(src, ref i, dst);

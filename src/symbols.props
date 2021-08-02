@@ -33,8 +33,9 @@
     <BitSpans>$(Src)bitspans/z0.bitspans.csproj</BitSpans>
     <BitMatrix>$(Src)bitmatrix/z0.bitmatrix.csproj</BitMatrix>
     <BitSvc>$(Src)bitsvc/z0.bitsvc.csproj</BitSvc>
-    <Blocked>$(Src)blocked/z0.blocked.csproj</Blocked>
     <BitMasks>$(Src)bitmasks/z0.bitmasks.csproj</BitMasks>
+    <Blittable>$(Src)blittable/z0.blittable.csproj</Blittable>
+    <Blocked>$(Src)blocked/z0.blocked.csproj</Blocked>
 
     <Calc>$(Src)calc/z0.calc.csproj</Calc>
     <Capture>$(Src)capture/z0.capture.csproj</Capture>

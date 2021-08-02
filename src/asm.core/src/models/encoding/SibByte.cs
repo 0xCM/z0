@@ -51,6 +51,12 @@ namespace Z0.Asm
             get => Pow2.pow8u(Scale());
         }
 
+        public byte Encoded
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

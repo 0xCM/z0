@@ -36,7 +36,7 @@ namespace Z0
             => ZRoot() + FS.folder(src) + FS.folder(id);
 
         FS.FolderPath PartSrcDir(PartId id)
-            => ZRoot() + FS.folder(src) + FS.folder(id.Componentize().Join('.'));
+            => ZRoot() + FS.folder(src) + FS.folder(id.Format());
 
         FS.FilePath PartSrcFile(PartId id, FS.FileName name)
             => PartSrcDir(id) + FS.folder(src) + name;

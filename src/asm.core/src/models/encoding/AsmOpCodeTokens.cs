@@ -11,7 +11,26 @@ namespace Z0.Asm
             /// <summary>
             /// Classifies the 256 literal hex bytes [0xOO, 0x01, ..., 0xFF]
             /// </summary>
-            HexByte,
+            [Symbol("literal")]
+            Literal,
+
+            /// <summary>
+            /// Classifies <see cref='RexToken'/> tokens
+            /// </summary>
+            [Symbol("rex")]
+            Rex,
+
+            /// <summary>
+            /// Classifies <see cref='VexToken'/> tokens
+            /// </summary>
+            [Symbol("vex")]
+            Vex,
+
+            /// <summary>
+            /// Classifies <see cref='EvexToken'/> tokens
+            /// </summary>
+            [Symbol("evex")]
+            Evex,
 
             /// <summary>
             /// Classifies <see cref='LegacyPrefixToken'/> tokens
@@ -21,6 +40,7 @@ namespace Z0.Asm
             /// <summary>
             /// Classifies <see cref='RexBToken'/> tokens
             /// </summary>
+            [Symbol("rex(b)")]
             RexBExtension,
 
             /// <summary>
@@ -36,6 +56,7 @@ namespace Z0.Asm
             /// <summary>
             /// Classifies <see cref='DispToken'/> tokens
             /// </summary>
+            [Symbol("disp")]
             Disp,
 
             /// <summary>
@@ -84,12 +105,40 @@ namespace Z0.Asm
         }
 
         [SymSource]
-        public enum EVexToken : byte
+        public enum VexToken : byte
         {
             [Symbol("VEX")]
             VEX,
 
             [Symbol("VEX")]
+            EVEX,
+
+            [Symbol("LZ")]
+            LZ,
+
+            [Symbol("LIG")]
+            LIG,
+
+            [Symbol("WIG")]
+            WIG,
+
+            [Symbol("W0")]
+            W0,
+
+            [Symbol("W1")]
+            W1,
+
+            [Symbol("128")]
+            W128,
+
+            [Symbol("256")]
+            W256,
+        }
+
+        [SymSource]
+        public enum EvexToken : byte
+        {
+            [Symbol("EVEX")]
             EVEX,
 
             [Symbol("LZ")]

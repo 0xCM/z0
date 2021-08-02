@@ -35,21 +35,6 @@ namespace Z0
             where S : unmanaged
                 => new fx8<S,T>(src, dst);
 
-        [Op]
-        public static ref fx8 fx8(ref fx8 f, ReadOnlySpan<byte> src, ReadOnlySpan<byte> dst)
-        {
-            f.SrcMap.Clear();
-            var count = min(min(src.Length, dst.Length), blit.fx8.Capacity);
-            f.Size = (uint)count;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var x = ref skip(src,i);
-                ref readonly var y = ref skip(dst,i);
-                f.SrcMap[x] = (byte)i;
-            }
-            return ref f;
-        }
-
         /// <summary>
         /// Defines a function fx8:u8->T
         /// </summary>

@@ -3,8 +3,6 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 
-using Z0;
-
 /// <summary>
 /// Defines identifiers for assemblies that comprise this ... monstrosity?
 /// </summary>
@@ -96,8 +94,23 @@ public enum PartId : ulong
     [Symbol("text")]
     Text = 28,
 
+    [Symbol("blittable")]
+    Blittable = 29,
+
+    OpenSlot0 = 30,
+
+    OpenSlot1 = 31,
+
+    OpenSlot2 = 32,
+
+    OpenSlot3 = 33,
+
     [Symbol("gmath")]
     GMath = 34,
+
+    OpenSlot4 = 35,
+
+    OpenSlot5 = 36,
 
     [Symbol("calc")]
     Calc = 37,
@@ -163,220 +176,174 @@ public enum PartId : ulong
     MathTest = 57,
 
     [Symbol("clr")]
-    Clr = 60,
+    Clr = 58,
 
     [Symbol("cli")]
-    Cli = 61,
+    Cli = 59,
 
     [Symbol("canonical")]
-    Canonical = 62,
+    Canonical = 60,
 
     [Symbol("symbolic")]
-    Symbolic = 63,
+    Symbolic = 61,
 
     [Symbol("tables")]
-    Tables = 65,
+    Tables = 62,
 
     [Symbol("gather")]
-    Gather = 66,
+    Gather = 63,
 
     [Symbol("spanblocks")]
-    SpanBlocks = 67,
+    SpanBlocks = 64,
 
     [Symbol("minidump")]
-    Minidump = 69,
+    Minidump = 65,
 
     [Symbol("bits")]
-    Bits = 70,
+    Bits = 66,
 
     [Symbol("engine")]
-    Engine = 71,
+    Engine = 67,
 
     [Symbol("symcore")]
-    SymCore = 72,
+    SymCore = 68,
 
     [Symbol("cli.shell")]
-    CliShell = 73,
+    CliShell = 69,
 
     [Symbol("engine.run")]
-    EngineRun = 74,
+    EngineRun = 70,
 
     [Symbol("bitvectors")]
-    BitVectors = 100,
+    BitVectors = 71,
 
     [Symbol("bitspans")]
-    BitSpans = 102,
+    BitSpans = 72,
 
     [Symbol("bitstrings")]
-    BitStrings = 103,
+    BitStrings = 73,
 
     [Symbol("bitgrids")]
-    BitGrids = 104,
+    BitGrids = 74,
 
     [Symbol("bitpack")]
-    BitPack = 105,
+    BitPack = 75,
 
     [Symbol("bitfields")]
-    BitFields = 107,
+    BitFields = 76,
 
     [Symbol("bitfields.shell")]
-    BitFieldsShell = 108,
+    BitFieldsShell = 77,
 
     [Symbol("bitmatrix")]
-    BitMatrix = 110,
+    BitMatrix = 78,
 
     [Symbol("logix")]
-    Logix = 112,
+    Logix = 79,
 
     [Symbol("libm")]
-    LibM = 113,
+    LibM = 80,
 
     [Symbol("glue")]
-    Glue = 114,
+    Glue = 81,
 
     [Symbol("machines")]
-    Machines = 115,
+    Machines = 82,
 
     [Symbol("nats")]
-    Nats = 119,
+    Nats = 83,
 
     [Symbol("mkl")]
-    Mkl = 120,
+    Mkl = 84,
 
     [Symbol("stats")]
-    Stats = 121,
+    Stats = 85,
 
     [Symbol("dynamic")]
-    Dynamic = 122,
+    Dynamic = 86,
 
     [Symbol("asm")]
-    Asm = 123,
+    Asm = 87,
 
     [Symbol("asm.lang")]
-    AsmLang = 124,
+    AsmLang = 88,
 
-    [Symbol("asm.lang.g")]
-    AsmLangG = 125,
 
     [Symbol("asm.core")]
-    AsmCore = 126,
+    AsmCore = 89,
 
     [Symbol("asm.cases")]
-    AsmCases = 127,
+    AsmCases = 90,
 
     [Symbol("asm.run")]
-    AsmRun = 128,
+    AsmRun = 91,
 
     [Symbol("asm.emu")]
-    AsmEmu = 129,
+    AsmEmu = 92,
 
     [Symbol("capture")]
-    Capture = 131,
+    Capture = 93,
 
     [Symbol("evaluate")]
-    Evaluate = 132,
+    Evaluate = 94,
 
     [Symbol("extract")]
-    Extract = 134,
+    Extract = 95,
 
     [Symbol("bitnumbers")]
-    BitNumbers = 135,
+    BitNumbers = 96,
 
     [Symbol("bitnumbers.shell")]
-    BitNumbersShell = 136,
+    BitNumbersShell = 97,
 
     [Symbol("circuits")]
-    Circuits = 144,
+    Circuits = 98,
 
     [Symbol("workers")]
-    Workers = 145,
-
-    [Symbol("apps")]
-    Apps = 150,
+    Workers = 99,
 
     [Symbol("capture.checks")]
-    CaptureChecks = 151,
+    CaptureChecks = 100,
 
     [Symbol("dynamic.shell")]
-    DynamicShell = 152,
+    DynamicShell = 101,
 
     [Symbol("validity")]
-    Validity = 156,
+    Validity = 102,
 
     [Symbol("cpu.dsl")]
-    CpuDsl = 161,
+    CpuDsl = 103,
 
     [Symbol("bits.test")]
-    BitsTest = 163,
+    BitsTest = 104,
 
     [Symbol("logix.test")]
-    LogixTest = 164,
+    LogixTest = 105,
 
     [Symbol("cpu.test")]
-    CpuTest = 165,
-
+    CpuTest = 106,
 
     [Symbol("services")]
-    Services = 199,
-
-    // ~ 200
-    // ~ -------------------------------------------------------------------------------
+    Services = 107,
 
     [Symbol("run")]
-    Run = 200,
+    Run = 108,
 
     [Symbol("machine")]
-    Machine = 201,
+    Machine = 109,
 
     [Symbol("contral")]
-    Control = 202,
+    Control = 110,
 
     [Symbol("gen.shell")]
-    GenApp = 203,
+    GenApp = 111,
 
     [Symbol("asmz")]
-    AsmZ = 204,
+    AsmZ = 112,
 
-    // ~ Test
+    // ~ Generated
     // ~ -------------------------------------------------------------------------------
 
-    [Symbol("core.test")]
-    CoreTest = Core | Test,
-
-    [Symbol("part.test")]
-    PartTest = Part | Test,
-
-    [Symbol("asm.test")]
-    AsmTest = Asm | Test,
-
-
-    [Symbol("polyrand.test")]
-    PolyrandTest = Polyrand | Test,
-
-    [Symbol("symbolic.test")]
-    SymbolicTest = Symbolic | Test,
-
-    [Symbol("libm.test")]
-    LibMTest = LibM | Test,
-
-    [Symbol("machines.test")]
-    MachinesTest = Machines | Test,
-
-    [Symbol("mkl.test")]
-    MklApiTest = Mkl | Test,
-
-    // ~ Classifiers
-    // ~ -------------------------------------------------------------------------------
-
-    [Ignore]
-    Checkers = byte.MaxValue + 1,
-
-    [Ignore]
-    Shell = ushort.MaxValue  + 1,
-
-    [Ignore]
-    Svc = Shell << 1,
-
-    [Ignore]
-    Test = Shell << 2,
+    [Symbol("asm.lang.g")]
+    AsmLangG = 200,
 }

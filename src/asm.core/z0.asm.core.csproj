@@ -12,6 +12,7 @@
       <ProjectReference Include="$(Commands)" />
       <ProjectReference Include="$(Events)" />
       <ProjectReference Include="$(Rules)" />
+      <ProjectReference Include="$(Blittable)" />
       <ProjectReference Include="$(AsmLangG)" />
   </ItemGroup>
 

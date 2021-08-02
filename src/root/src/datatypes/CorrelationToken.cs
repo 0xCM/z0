@@ -40,7 +40,7 @@ namespace Z0
             => Value.CompareTo(other.Value);
 
         public string Format()
-            => Root.format(Value, 10);
+            => Value.Format();
 
         public override string ToString()
             => Format();
