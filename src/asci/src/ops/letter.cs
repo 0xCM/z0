@@ -9,6 +9,8 @@ namespace Z0
 
     using static Root;
 
+    using C = AsciCode;
+
     partial struct Asci
     {
         /// <summary>
@@ -17,7 +19,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool letter(UpperCased @case, char c)
-            => (ushort)c >= (ushort)AsciFacets.FirstUpperSym  && (ushort)c <= (ushort)AsciFacets.LastUpperSym;
+            => (C)c >= AsciCodeFacets.MinUpperLetter && (C)c <= AsciCodeFacets.MaxUpperLetter;
 
         /// <summary>
         /// Tests whether a character is a lowercase asci letter character
@@ -25,7 +27,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool letter(LowerCased @case, char c)
-            => (ushort)c >= (ushort)AsciLetterLo.First  && (ushort)c <= (ushort)AsciLetterLo.Last;
+            => (C)c >= AsciCodeFacets.MinLowerLetter && (C)c <= AsciCodeFacets.MaxLowerLetter;
 
         /// <summary>
         /// Tests whether a character is an asci letter character

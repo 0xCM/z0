@@ -62,8 +62,6 @@ namespace Z0
             if(lines.Length < ToolConfig.FieldCount)
                 return (false, Tables.FieldCountMismatch.Format(ToolConfig.FieldCount, lines.Length));
 
-
-
             var settings = Settings.parse(slice(lines,1));
             var i=0;
 

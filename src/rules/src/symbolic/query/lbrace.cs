@@ -14,11 +14,11 @@ namespace Z0
     partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
-        public static bit lbrace(char src)
-            => C.LBrace == (C)src;
+        public static bit lbrace(C src)
+            => src == C.LBrace;
 
         [MethodImpl(Inline), Op]
-        public static bit lbrace(C src)
-            => C.LBrace == src;
+        public static bit lbrace(char src)
+            => src == (char)C.LBrace;
     }
 }

@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using S = AsciSymSymbol;
+    using S = AsciCharSymbol;
 
     [CodeProvider(typeof(S))]
-    public enum AsciSymCode : byte
+    public enum AsciSymbolCode : byte
     {
         /// <summary>
         /// The '&' character code 38

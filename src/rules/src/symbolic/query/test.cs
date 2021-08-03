@@ -14,11 +14,11 @@ namespace Z0
     partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
-        public static bool test(char src, OneOf<char> match)
+        public static bit test(char src, OneOf<char> match)
             => contains(match.Elements, src);
 
         [Op]
-        public static bool test(string src, OneOf<string> match, out int index)
+        public static bit test(string src, OneOf<string> match, out int index)
         {
             var count = match.Count;
             var elements = match.Elements.View;

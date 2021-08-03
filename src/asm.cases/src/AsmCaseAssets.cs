@@ -6,6 +6,6 @@ namespace Z0
 {
     public sealed class AsmCaseAssets : Assets<AsmCaseAssets>
     {
-        public Asset Switch() => Asset("asmcases.prototypes.switch.casm");
+        public Asset Switch() => Asset("asmcases.prototypes.switch.asm");
     }
 }

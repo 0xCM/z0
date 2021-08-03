@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool IsWhitespace(this char src)
         {
-            var data = AsciWhitespaceCodes.Data;
+            var data = AsciChars.WhitespaceCodes;
             var count = data.Length;
             var match = (C)src;
             for(var i=0; i<count; i++)

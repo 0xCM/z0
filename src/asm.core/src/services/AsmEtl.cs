@@ -70,7 +70,7 @@ namespace Z0.Asm
             using var writer = dst.Writer();
             for(var i=0u; i<count; i++)
             {
-                var content = AsmRender.thumbprint(skip(src,i));
+                var content = AsmRender.thumbprint(SortedSpans.skip(src,i));
                 writer.WriteLine(content);
                 seek(lines,i) = (i,content);
             }
@@ -99,7 +99,7 @@ namespace Z0.Asm
             using var writer = dst.Writer();
             for(var i=0u; i<count; i++)
             {
-                var content = AsmRender.thumbprint(skip(src,i), true);
+                var content = AsmRender.thumbprint(SortedSpans.skip(src,i), true);
                 writer.WriteLine(content);
                 seek(lines,i) = (i,content);
             }

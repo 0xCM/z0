@@ -27,5 +27,21 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref sbyte i8<T>(in T src)
             => ref @as<T,sbyte>(src);
+
+        [MethodImpl(Inline), Op]
+        public static ref sbyte i8(Span<byte> src)
+            => ref @as<byte,sbyte>(first(src));
+
+        [MethodImpl(Inline), Op]
+        public static ref sbyte i8(Span<byte> src, uint offset)
+            => ref @as<byte,sbyte>(skip(src, offset));
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly sbyte i8(ReadOnlySpan<byte> src)
+            => ref @as<byte,sbyte>(first(src));
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly sbyte i8(ReadOnlySpan<byte> src, uint offset)
+            => ref @as<byte,sbyte>(skip(src, offset));
     }
 }

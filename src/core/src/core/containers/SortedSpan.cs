@@ -8,66 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    public readonly ref struct SortedSpan<T>
+    [ApiHost]
+    public readonly struct SortedSpans
     {
-        readonly Span<T> Data;
+        const NumericKind Closure = UnsignedInts;
 
-        internal SortedSpan(T[] src)
-        {
-            Data = src;
-        }
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T skip<T>(SortedSpan<T> src, ulong count)
+            where T : IComparable<T>
+                => ref core.skip(src.View, count);
 
-        internal SortedSpan(Span<T> src)
-        {
-            Data = src;
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data.IsEmpty;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => !Data.IsEmpty;
-        }
-
-        public ReadOnlySpan<T> View
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public uint Count
-        {
-            [MethodImpl(Inline)]
-            get => (uint)Data.Length;
-        }
-
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Data.Length;
-        }
-
-        public ref readonly T this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => ref skip(Data,index);
-        }
-
-        public ref readonly T this[uint index]
-        {
-            [MethodImpl(Inline)]
-            get => ref skip(Data,index);
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(SortedSpan<T> src)
-            => src.View;
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T skip<T>(SortedSpan<T> src, long count)
+            where T : IComparable<T>
+                => ref core.skip(src.View, count);
     }
 }

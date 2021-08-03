@@ -9,10 +9,15 @@ namespace Z0.Asm
         public enum TokenKind : byte
         {
             /// <summary>
+            /// Classifies the untoken
+            /// </summary>
+            None = 0,
+
+            /// <summary>
             /// Classifies the 256 literal hex bytes [0xOO, 0x01, ..., 0xFF]
             /// </summary>
             [Symbol("literal")]
-            Literal,
+            Byte,
 
             /// <summary>
             /// Classifies <see cref='RexToken'/> tokens
@@ -44,7 +49,7 @@ namespace Z0.Asm
             RexBExtension,
 
             /// <summary>
-            /// Classifies <see cref='ModRmDigitToken'/> tokens
+            /// Classifies <see cref='ModRmToken'/> tokens
             /// </summary>
             RegOpCodeMod,
 
@@ -85,6 +90,25 @@ namespace Z0.Asm
             Operator,
         }
 
+        [FieldSeg(0,4), SymSource]
+        public enum LegacyPrefixToken : byte
+        {
+            [Symbol("66")]
+            x66,
+
+            [Symbol("F2")]
+            F2,
+
+            [Symbol("F3")]
+            F3,
+
+            [Symbol("0F")]
+            x0F,
+
+            [Symbol("0F38")]
+            x0F38,
+        }
+
         [SymSource]
         public enum RexToken : byte
         {
@@ -109,9 +133,6 @@ namespace Z0.Asm
         {
             [Symbol("VEX")]
             VEX,
-
-            [Symbol("VEX")]
-            EVEX,
 
             [Symbol("LZ")]
             LZ,
@@ -166,25 +187,7 @@ namespace Z0.Asm
             W512,
         }
 
-        [FieldSeg(0,4), SymSource]
-        public enum LegacyPrefixToken : byte
-        {
-            [Symbol("66")]
-            x66,
-
-            [Symbol("F2")]
-            F2,
-
-            [Symbol("F3")]
-            F3,
-
-            [Symbol("0F")]
-            x0F,
-
-            [Symbol("0F38")]
-            x0F38,
-        }
-
+        // "cb\0" + "cw\0" + "cd\0" + "cp\0" + "c0\0" + "ct\0"
         [FieldSeg(1,3), SymSource]
         public enum DispToken : byte
         {
@@ -233,7 +236,7 @@ namespace Z0.Asm
         /// "Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode."
         /// </summary>
         [FieldSeg(3,4), SymSource]
-        public enum ModRmDigitToken : byte
+        public enum ModRmToken : byte
         {
             [Symbol("/r", "Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand")]
             r,
@@ -357,6 +360,9 @@ namespace Z0.Asm
         {
             [Symbol("+")]
             Plus,
+
+            [Symbol(".")]
+            Dot,
         }
    }
 }

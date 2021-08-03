@@ -14,7 +14,7 @@ namespace Z0
     using static core;
 
     [ApiHost]
-    public readonly struct VMask
+    public readonly struct vmask
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -741,9 +741,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(D) == typeof(N1))
-                return veven(w, n2, n1, t);
+                return veven<T>(w, n2, n1);
             else if(typeof(D) == typeof(N2))
-                return veven(w, n2, n2, t);
+                return veven<T>(w, n2, n2);
             else
                 throw no<D>();
         }
@@ -821,6 +821,74 @@ namespace Z0
         public static Vector256<T> veven<T>(W256 w, N2 f, N2 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, even<T>(f,d));
+
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> veven(W128 w)
+            => veven<byte>(w, n2, n2);
+
+        [MethodImpl(Inline), Op]
+        public static Vector256<byte> veven(W256 w)
+            => veven<byte>(w, n2, n2);
+
+        /// <summary>
+        /// [10101010]
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector128<T> vodd<T>(W128 w, N2 f, N1 d)
+            where T : unmanaged
+                => gcpu.vbroadcast(w, odd<T>(f,d));
+
+        /// <summary>
+        /// [10101010]
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector256<T> vodd<T>(W256 w, N2 f, N1 d)
+            where T : unmanaged
+                => gcpu.vbroadcast(w, odd<T>(f,d));
+
+        /// <summary>
+        /// [11001100]
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector128<T> vodd<T>(W128 w, N2 f, N2 d)
+            where T : unmanaged
+                => gcpu.vbroadcast(w, odd<T>(f,d));
+
+        /// <summary>
+        /// [11001100]
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="f">The repetition frequency</param>
+        /// <param name="d">The bit density</param>
+        /// <param name="t">A component type representative</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector256<T> vodd<T>(W256 w, N2 f, N2 d)
+            where T : unmanaged
+                => gcpu.vbroadcast(w, odd<T>(f,d));
+
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> vodd(W128 w)
+            => vodd<byte>(w, n2, n2);
+
+        [MethodImpl(Inline), Op]
+        public static Vector256<byte> vodd(W256 w)
+            => vodd<byte>(w, n2, n2);
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> hexbins(W128 w)

@@ -14,10 +14,10 @@ namespace Z0.Asm
     /// </summary>
     public struct ModRmDigit
     {
-        public ModRmDigitToken _Code;
+        public ModRmToken _Code;
 
         [MethodImpl(Inline)]
-        public ModRmDigit(ModRmDigitToken code)
+        public ModRmDigit(ModRmToken code)
             => _Code = code;
 
         public byte Encoded
@@ -26,18 +26,18 @@ namespace Z0.Asm
             get => (byte)_Code;
         }
 
-        public ModRmDigitToken Code()
+        public ModRmToken Code()
             => _Code;
 
-        public void Code(ModRmDigitToken code)
+        public void Code(ModRmToken code)
             => _Code = code;
 
         [MethodImpl(Inline)]
         public static implicit operator ModRmDigit(byte src)
-            => new ModRmDigit((ModRmDigitToken)src);
+            => new ModRmDigit((ModRmToken)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ModRmDigit(ModRmDigitToken src)
+        public static implicit operator ModRmDigit(ModRmToken src)
             => new ModRmDigit(src);
 
         [MethodImpl(Inline)]

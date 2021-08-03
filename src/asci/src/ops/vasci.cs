@@ -27,6 +27,6 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(sbyte offset, sbyte count)
-            => slice(recover<char>(AsciCharData.CharBytes), offset, count);
+            => slice(recover<char>(AsciChars.CharBytes), offset, count);
     }
 }

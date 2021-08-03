@@ -5,9 +5,11 @@
 namespace Z0.Asm
 {
     using System;
+
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct asm
     {
@@ -52,6 +54,15 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static Disp8 disp8(long src)
             => new Disp8((sbyte)src);
+
+        /// <summary>
+        /// Computs an 8-bit displacement from specified source bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The offset to begin displacement extraction</param>
+        [MethodImpl(Inline), Op]
+        public static Disp8 disp8(BinaryCode src, byte offset)
+            => i8(slice(src.View, offset));
 
         /// <summary>
         /// Computes an 8-bit displacement relative to a specified instruction pointer and target address
@@ -110,6 +121,15 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static Disp32 disp32(long src)
             => new Disp32((int)src);
+
+        /// <summary>
+        /// Computs a 32-bit displacement from specified source bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The offset to begin displacement extraction</param>
+        [MethodImpl(Inline), Op]
+        public static Disp32 disp32(BinaryCode src, byte offset)
+            => i32(slice(src.View, offset));
 
         /// <summary>
         /// Computes a 32-bit displacement relative to a specified instruction pointer and target address

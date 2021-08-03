@@ -84,7 +84,7 @@ namespace Z0
         /// Sets the terminal input and output encoding to UTF8
         /// </summary>
         /// <param name="kind">The encoding selector</param>
-        public static void encoding(Utf8Points kind)
+        public static void utf8encoding()
         {
             var e = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
             encoding(e);

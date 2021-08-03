@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     using C = AsciCode;
-    using F = AsciFacets;
+    using F = AsciCodeFacets;
 
     partial struct SymbolicQuery
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bool lowercase(C src)
-            => contains(F.MinLowerCode, F.MaxLowerCode, src);
+            => contains(F.MinLowerLetter, F.MaxLowerLetter, src);
 
         /// <summary>
         /// Determines whether the code of a specified character is one of <see cref='AsciLetterLoCode'/>
@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bool lowercase(char src)
-            => contains((char)F.MinLowerCode, (char)F.MaxLowerCode, src);
+            => contains((char)F.MinLowerLetter, (char)F.MaxLowerLetter, src);
     }
 }

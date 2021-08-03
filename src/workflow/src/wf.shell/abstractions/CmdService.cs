@@ -53,12 +53,6 @@ namespace Z0
             }
         }
 
-        protected void Out(string data)
-        {
-            Witness.LogStatus(string.Format("out> {0}", data));
-            Write(data);
-        }
-
         public Outcome Dispatch(CmdSpec cmd)
         {
             var outcome = Dispatcher.Dispatch(cmd.Name, cmd.Args);

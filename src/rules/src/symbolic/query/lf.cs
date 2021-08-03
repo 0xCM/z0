@@ -16,17 +16,17 @@ namespace Z0
         /// <summary>
         /// Tests whether a character code represents <see cref='AsciChar.LF'/>
         /// </summary>
-        /// <param name="c">The character to test</param>
+        /// <param name="src">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bit lf(C c)
-            => C.LF == c;
+        public static bit lf(C src)
+            => C.LF == src;
 
         /// <summary>
         /// Tests whether a source character is a <see cref='AsciChar.LF'/>
         /// </summary>
-        /// <param name="c">The character to test</param>
+        /// <param name="src">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bit lf(char c)
-            => (char)C.LF == c;
+        public static bit lf(char src)
+            => (char)C.LF == src;
     }
 }

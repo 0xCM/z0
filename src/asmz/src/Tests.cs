@@ -44,43 +44,15 @@ namespace Z0.Asm
             }
         }
 
-
-        void CheckSettingsParser()
-        {
-            var a = "A:603";
-            DataParser.parse(a, out Setting<ushort> _a);
-            Wf.Row(_a);
-
-
-            var b = "B:true";
-            DataParser.parse(b, out Setting<bool> _b);
-            Wf.Row(_b);
-        }
-
         const byte FieldCount = 2;
 
         public static ReadOnlySpan<byte> SlotWidths
             => new byte[FieldCount]{8,32};
 
-        public static byte labels(Span<string> dst)
-        {
-            var j=z8;
-            seek(dst,j++) = "Index";
-            seek(dst,j++) = "IClass";
-            return j;
-        }
-
         public static string pattern()
         {
             var sbuffer = span<char>(1024);
             return text.format(slice(sbuffer, 0, text.slot(SlotWidths, Chars.Pipe, sbuffer)));
-        }
-
-        public static Index<string> headers()
-        {
-            var buffer = alloc<string>(FieldCount);
-            labels(buffer);
-            return buffer;
         }
 
         void CollectMemStats()
@@ -158,17 +130,6 @@ namespace Z0.Asm
             Wf.Ran(flow, $"Created method table with {table.View.Length} entries");
         }
 
-        public void CheckAsciTables()
-        {
-            var buffer = span<char>(128);
-            Wf.Row(Z0.Asci.format(AsciTables.letters(LowerCase).Codes, buffer));
-            buffer.Clear();
-            Wf.Row(Z0.Asci.format(AsciTables.letters(UpperCase).Codes, buffer));
-            buffer.Clear();
-            Wf.Row(Z0.Asci.format(AsciTables.digits().Codes, buffer));
-            buffer.Clear();
-        }
-
         void CheckMullo(IDomainSource Source)
         {
             var @class = ApiClassKind.MulLo;
@@ -212,29 +173,6 @@ namespace Z0.Asm
             iter(fields, f => Wf.Row(f.Name + ": " + f.FieldType.Name));
         }
 
-        public bool parse32u(ReadOnlySpan<char> input, out uint dst)
-        {
-            const byte MaxDigitCount = 8;
-            var storage = 0ul;
-            var output = recover<uint4>(bytes(storage));
-            dst = 0;
-            var count = core.min(input.Length, MaxDigitCount);
-            var j=0;
-            var outcome = true;
-            for(var i=count-1; i>=0; i--)
-            {
-                ref readonly var c = ref skip(input,i);
-                if(DigitParser.digit(@base16, c, out var d))
-                    seek(output, j++) = d;
-                else
-                    return false;
-            }
-
-            for(var k=0; k<j; k++)
-                dst |= ((uint)skip(output, k) << k*4);
-            return true;
-        }
-
         static Index<ApiHostUri> NestedHosts(Type src)
         {
             var dst = list<ApiHostUri>();
@@ -263,28 +201,6 @@ namespace Z0.Asm
                 dst.Show(src);
         }
 
-
-        void CheckBitSpans()
-        {
-            var options = BitFormat.Default.WithBlockWidth(4);
-            var v1 = VMask.veven<byte>(w128,n2,n1);
-            var b1 = v1.ToBitSpan();
-            Wf.Row(b1.Format(options));
-        }
-
-        void CheckBitView()
-        {
-            var m1 = BitMasks.odd<ulong>();
-            var bits = BitView.create(m1);
-            Wf.Row($"1: {bits.View(w1, 0)}");
-            Wf.Row($"2: {bits.View(w2, 0)}");
-            Wf.Row($"3: {bits.View(w3, 0)}");
-            Wf.Row($"4: {bits.View(w4, 0)}");
-            Wf.Row($"5: {bits.View(w5, 0)}");
-            Wf.Row($"6: {bits.View(w6, 0)}");
-            Wf.Row($"7: {bits.View(w7, 0)}");
-            Wf.Row($"8: {bits.View(w8, 0)}");
-        }
 
         void ShowOptions()
         {

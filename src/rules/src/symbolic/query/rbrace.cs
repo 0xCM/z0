@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bool rbrace(C src)
+        public static bit rbrace(C src)
             => src == C.RBrace;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bool rbrace(char src)
+        public static bit rbrace(char src)
             => src == (char)C.RBrace;
     }
 }

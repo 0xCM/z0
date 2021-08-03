@@ -16,32 +16,32 @@ namespace Z0
         Null = '\0',
 
         /// <summary>
-        /// Start of heading
+        /// Start of heading, asci code 1
         /// </summary>
         SOH = 1,
 
         /// <summary>
-        /// Start of text
+        /// Start of text, asci code 2
         /// </summary>
         SOT = 2,
 
         /// <summary>
-        /// End of text
+        /// End of text, asci code 3
         /// </summary>
         EOT = 3,
 
         /// <summary>
-        /// End of transmission
+        /// End of transmission, asci code 4
         /// </summary>
         EOTR = 4,
 
         /// <summary>
-        /// Enquiry
+        /// Enquiry, asci code 5
         /// </summary>
         ENQ = 5,
 
         /// <summary>
-        /// Acknowledgement
+        /// Acknowledgement, asci code 6
         /// </summary>
         ACK = 6,
 
@@ -81,7 +81,7 @@ namespace Z0
         CR = '\r',
 
         /// <summary>
-        /// The delete control symbol
+        /// The delete control character, asci code 127
         /// </summary>
         Del = (byte)sbyte.MaxValue
     }

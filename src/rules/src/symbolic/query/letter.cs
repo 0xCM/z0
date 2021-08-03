@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     using C = AsciCode;
 
@@ -28,6 +27,6 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bool letter(char src)
-            => letter((C)src);
+            => lowercase(src) || uppercase(src);
     }
 }

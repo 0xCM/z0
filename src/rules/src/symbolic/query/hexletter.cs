@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bool hexletter(C src)
+        public static bit hexletter(C src)
             => hexletter(LowerCase, src) || hexletter(UpperCase, src);
 
         [MethodImpl(Inline), Op]
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bool hexletter(char src)
+        public static bit hexletter(char src)
             => hexletter(LowerCase, src) || hexletter(UpperCase, src);
    }
 }

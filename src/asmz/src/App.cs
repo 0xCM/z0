@@ -68,11 +68,6 @@ namespace Z0.Asm
             return tool.CreateScript(@case);
         }
 
-        void RunFunctionWorkflows()
-        {
-            FunctionWorkflows.run(Wf);
-        }
-
         public void EmitApiImageContent()
         {
             Wf.CliEmitter().EmitImageContent();
@@ -137,13 +132,6 @@ namespace Z0.Asm
             var pack = svc.List().Last;
             var hex = Wf.ApiHexPacks();
             var packs = hex.LoadParsed(pack.HexPackRoot());
-        }
-
-
-        public void UnpackRespack()
-        {
-            var unpacker = ApiResPackUnpacker.create(Wf);
-            unpacker.Emit(Db.AppLogDir());
         }
 
         public MemoryFile OpenResPack()
@@ -235,13 +223,8 @@ namespace Z0.Asm
         }
 
         [Op]
-        static Address32 rel32dx(BinaryCode src)
-        {
-            var opcode = src.First;
-            Require.invariant(opcode == 0xe8, () => $"Expected an opcode of e8h, but instead there is {opcode.FormatAsmHex()}");
-            var bytes = slice(src.View, 1);
-            return core.u32(bytes);
-        }
+        static Address32 rel32(BinaryCode src, byte skip)
+            => core.u32(slice(src.View, skip));
 
         void TestRel32()
         {
@@ -251,10 +234,9 @@ namespace Z0.Asm
             var nip = ip + sz;
             var code = new byte[]{0xe8, 0x25, 0xe4, 0xb2, 0x5f};
             const string Statement = "0036h call 7fff92427890h; e8 25 e4 b2 5f";
-            var dx = rel32dx(code);
+            var dx = rel32(code,1);
             Wf.Row(dx);
         }
-
 
         public void ParseDump()
         {

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     using C = AsciCode;
-    using F = AsciFacets;
+    using F = AsciCodeFacets;
 
     partial struct SymbolicQuery
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bool uppercase(C src)
-            => contains(F.MinUpperCode, F.MaxUpperCode, src);
+            => contains(F.MinUpperLetter, F.MaxUpperLetter, src);
 
         /// <summary>
         /// Determines whether the code of a specified character is one of <see cref='AsciLetterUpCode'/>
@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bool uppercase(char src)
-            => contains((char)F.MinUpperCode, (char)F.MaxUpperCode, src);
+            => contains((char)F.MinUpperLetter, (char)F.MaxUpperLetter, src);
     }
 }

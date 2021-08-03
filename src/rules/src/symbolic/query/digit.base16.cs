@@ -64,7 +64,7 @@ namespace Z0
             => lowerhex(src) || upperhex(src);
 
         /// <summary>
-        /// Determines whether the lower 8 bits of a <see cref='char'/> is a hex digit
+        /// Determines whether the lower 8 bits of a <see cref='char'/> is in [0..9 | a..f | A..F]
         /// </summary>
         /// <param name="base">The base selector</param>
         /// <param name="src">The value to test</param>

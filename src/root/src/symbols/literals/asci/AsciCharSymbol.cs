@@ -5,7 +5,7 @@
 namespace Z0
 {
     [SymSource]
-    public enum AsciSymSymbol : ushort
+    public enum AsciCharSymbol : ushort
     {
         /// <summary>
         /// The '&' character

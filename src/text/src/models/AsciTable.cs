@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static AsciCharData;
+    using static AsciChars;
 
     public readonly struct AsciTable
     {
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="count">Tne number of codes to select</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCode> codes(sbyte offset, sbyte count)
-            => recover<AsciCode>(slice(AsciCharData.CodeBytes, offset, count));
+            => recover<AsciCode>(slice(AsciChars.CodeBytes, offset, count));
 
         public AsciTableKind Kind {get;}
 

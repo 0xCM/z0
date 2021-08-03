@@ -11,11 +11,11 @@ namespace Z0
     public sealed class CharMapper : Service<CharMapper>
     {
         public SortedReadOnlySpan<Paired<Hex16,char>> Unmapped(FS.FilePath src, in CharMap<char> map)
-            => Unmapped(src, Asci);
+            => Unmapped(src, TextEncodings.Asci);
 
         public SortedReadOnlySpan<Paired<Hex16,char>> Unmapped(FS.FilePath src, AsciPoints target)
         {
-            var map = CharMaps.create(Root.Unicode, target);
+            var map = CharMaps.create(TextEncodings.Unicode, target);
             var flow = Running(string.Format("Searching {0} for unmapped characters", src.ToUri()));
             var unmapped = hashset<char>();
             using var reader = src.LineReader(TextEncodingKind.Utf8);

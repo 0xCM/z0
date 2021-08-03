@@ -17,7 +17,7 @@ namespace Z0
         {
             var count = (uint)min(src.Length, dst.Length);
             for(var i=0; i<count; i++)
-                seek(dst,i) = Bytes.and((byte)skip(src,i), AsciFacets.MaxCodeValue);
+                seek(dst,i) = Bytes.and((byte)skip(src,i), AsciCodeFacets.MaxCodeValue);
             return count;
         }
 
@@ -26,7 +26,7 @@ namespace Z0
         {
             var count = (uint)min(src.Length, max);
             for(var i=0; i<count; i++)
-                seek(dst,i) = Bytes.and((byte)skip(src,i), AsciFacets.MaxCodeValue);
+                seek(dst,i) = Bytes.and((byte)skip(src,i), AsciCodeFacets.MaxCodeValue);
             return count;
         }
 

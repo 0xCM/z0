@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The inclusive upper bound</param>
         [MethodImpl(Inline), Op]
-        public static bool between(C src, C min, C max)
+        public static bit between(C src, C min, C max)
             => src >= min && src <= max;
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The inclusive upper bound</param>
         [MethodImpl(Inline), Op]
-        public static bool between(char src, char min, char max)
-            => between((C)src, (C)min, (C)max);
+        public static bit between(char src, char min, char max)
+            => src >= min && src <= max;
     }
 }

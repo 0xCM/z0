@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint size(string src)
-            => (uint)src.Length*scale<char>();
+            => (uint)src.Length*size<char>();
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte size<T>(W8 w)

@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bit cr(C src)
-            => C.CR == src;
+            => src == C.CR;
 
         /// <summary>
         /// Tests whether a source character is a <see cref='AsciChar.CR'/>
@@ -23,6 +23,6 @@ namespace Z0
         /// <param name="src">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bit cr(char src)
-            => (char)C.CR == src;
+            => src == (char)C.CR;
     }
 }

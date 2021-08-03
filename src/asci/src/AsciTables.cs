@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using F = AsciFacets;
+    using F = AsciCodeFacets;
 
     [ApiHost]
     public readonly struct AsciTables
@@ -28,10 +28,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static AsciTable letters(LowerCased @case)
-            => table(AsciTableKind.LowerLetters, F.MinLowerCode, F.MaxLowerCode);
+            => table(AsciTableKind.LowerLetters, F.MinLowerLetter, F.MaxLowerLetter);
 
         [MethodImpl(Inline), Op]
         public static AsciTable letters(UpperCased @case)
-            => table(AsciTableKind.UpperLetters, F.MinUpperCode, F.MaxUpperCode);
+            => table(AsciTableKind.UpperLetters, F.MinUpperLetter, F.MaxUpperLetter);
     }
 }

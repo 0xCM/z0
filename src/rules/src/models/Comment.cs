@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
 
-
     partial struct Rules
     {
         public readonly struct Comment

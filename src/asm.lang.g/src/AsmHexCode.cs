@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
+
     [ApiHost]
     public struct AsmHexCode : IDataTypeComparable<AsmHexCode>
     {

@@ -20,7 +20,7 @@ namespace Z0.Tools
         public static int run(string[] argv)
         {
             var options = ExePipeOptions.init();
-            term.encoding(Utf8);
+            term.utf8encoding();
 
             foreach (var a in argv)
             {
