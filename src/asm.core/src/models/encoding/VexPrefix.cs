@@ -12,6 +12,18 @@ namespace Z0.Asm
 
     public readonly struct VexPrefix
     {
+        readonly uint Data;
 
+        internal VexPrefix(byte b0, byte b1)
+        {
+            Data = (uint)b0 | ((uint)b1 << 8) | (2 << 16);
+        }
+
+
+        public byte Size
+        {
+            [MethodImpl(Inline)]
+            get => (byte)(Data >> 24);
+        }
     }
 }

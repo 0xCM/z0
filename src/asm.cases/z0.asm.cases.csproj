@@ -9,6 +9,7 @@
     <ProjectReference Include="$(AsmData)"/>
     <ProjectReference Include="$(SpanBlocks)"/>
     <ProjectReference Include="$(Cpu)"/>
+    <ProjectReference Include="$(Cells)"/>
   </ItemGroup>
 
   <ItemGroup>

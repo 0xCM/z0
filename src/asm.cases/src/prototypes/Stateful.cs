@@ -19,7 +19,7 @@ namespace Z0.Asm
         {
             [Op]
             public static CellIO<ulong> io()
-                => CellCopy.io(Store0x64,Store1x64);
+                => CellIO.io(Store0x64,Store1x64);
 
             [FixedAddressValueType]
             static Cells<ulong> Store0x64;

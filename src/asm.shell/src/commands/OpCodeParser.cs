@@ -17,6 +17,107 @@ namespace Z0.Asm
 
     public readonly partial struct Machines
     {
+
+        struct CharParserState<T>
+            where T : unmanaged
+        {
+            public uint Step;
+
+            public uint Position;
+
+            public T LastAction;
+
+            public Index<char> Received;
+
+            public bit Finished;
+
+            uint _Marker;
+
+            [MethodImpl(Inline)]
+            public void Mark()
+            {
+                _Marker = Position;
+            }
+
+            [MethodImpl(Inline)]
+            public uint Marker()
+                => _Marker;
+
+            [MethodImpl(Inline)]
+            public void Store(char c)
+                => Received[Position++] = c;
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<char> Marked()
+            {
+                var length = Position - _Marker;
+                if(length > 0)
+                    return slice(Received.View, _Marker, length);
+                else
+                    return default;
+            }
+
+            public uint Capacity
+            {
+                [MethodImpl(Inline)]
+                get => Received.Count;
+            }
+
+            [MethodImpl(Inline)]
+            public ref readonly char Current()
+                => ref Received[Position - 1];
+
+            [MethodImpl(Inline)]
+            public ref readonly char Prior()
+                => ref Received[Position - 2];
+
+            public void Clear()
+            {
+                Step = 0;
+                Position = 0;
+                LastAction = default;
+                Finished = 0;
+                _Marker = 0;
+                Received.Clear();
+            }
+        }
+
+        public struct VecCode
+        {
+            public bit L0;
+
+            public bit L1;
+        }
+
+        public sealed class VexCodeParser : CharParser
+        {
+            const string VexTokens =
+                "VEX\0" +
+                "LZ\0" +
+                "LIG\0" +
+                "WIG\0" +
+                "W0\0" +
+                "W1\0" +
+                "W128\0" +
+                "W256\0";
+
+
+            public override bit Accept(char src)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override bit Finished()
+            {
+                throw new NotImplementedException();
+            }
+
+            protected override void Reset()
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public sealed class OpCodeParser : CharParser
         {
             const string LegacyPrefixTokens =
@@ -127,16 +228,6 @@ namespace Z0.Asm
 
                 return matched;
             }
-
-            const string VexTokens =
-                "VEX\0" +
-                "LZ\0" +
-                "LIG\0" +
-                "WIG\0" +
-                "W0\0" +
-                "W1\0" +
-                "W128\0" +
-                "W256\0";
 
             const string EVexTokens =
                 "EVEX\0" +
@@ -271,70 +362,8 @@ namespace Z0.Asm
                 ParsedWhitespace,
             }
 
-            struct ParserState
-            {
-                public uint Step;
 
-                public uint Position;
-
-                public ParserAction LastAction;
-
-                public Index<char> Received;
-
-                public bit Finished;
-
-                uint _Marker;
-
-                [MethodImpl(Inline)]
-                public void Mark()
-                {
-                    _Marker = Position;
-                }
-
-                [MethodImpl(Inline)]
-                public uint Marker()
-                    => _Marker;
-
-                [MethodImpl(Inline)]
-                public void Store(char c)
-                    => Received[Position++] = c;
-
-                [MethodImpl(Inline)]
-                public ReadOnlySpan<char> Marked()
-                {
-                    var length = Position - _Marker;
-                    if(length > 0)
-                        return slice(Received.View, _Marker, length);
-                    else
-                        return default;
-                }
-
-                public uint Capacity
-                {
-                    [MethodImpl(Inline)]
-                    get => Received.Count;
-                }
-
-                [MethodImpl(Inline)]
-                public ref readonly char Current()
-                    => ref Received[Position - 1];
-
-                [MethodImpl(Inline)]
-                public ref readonly char Prior()
-                    => ref Received[Position - 2];
-
-                public void Clear()
-                {
-                    Step = 0;
-                    Position = 0;
-                    LastAction = 0;
-                    Finished = 0;
-                    _Marker = 0;
-                    Received.Clear();
-                }
-            }
-
-            ParserState State;
+            CharParserState<ParserAction> State;
 
             public OpCodeParser()
             {
