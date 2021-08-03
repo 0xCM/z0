@@ -11,14 +11,14 @@ namespace Z0
     using static Root;
     using static core;
 
-    public struct LiteralCover
+    public struct CoveredLiterals
     {
         public ValueType Cover;
 
         public FieldInfo[] Covered {get;}
 
         [MethodImpl(Inline)]
-        public LiteralCover(ValueType cover, FieldInfo[] covered)
+        public CoveredLiterals(ValueType cover, FieldInfo[] covered)
         {
             Cover = cover;
             Covered = covered;

@@ -24,7 +24,7 @@ namespace Z0
                 => src.LiteralFields().Where(f => f.FieldType == typeof(T) && f.Tagged<BinaryLiteralAttribute>()).Select(x => (T)x.GetRawConstantValue());
 
         [MethodImpl(Inline), Op]
-        public static void values(in LiteralCover src, Span<object> dst)
+        public static void values(in CoveredLiterals src, Span<object> dst)
             => src.WriteValues(dst);
 
         [MethodImpl(Inline)]

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Describes a comparison operation
     /// </summary>
-    public readonly struct ComparisonOperation
+    public readonly struct ComparisonOperator
     {
         /// <summary>
         /// The sort of comparison effected by the operator
@@ -35,7 +35,7 @@ namespace Z0
         public Type ResultType {get;}
 
         [MethodImpl(Inline)]
-        public ComparisonOperation(ComparisonKind kind, byte arity, Type tOperand, Type tResult)
+        public ComparisonOperator(ComparisonKind kind, byte arity, Type tOperand, Type tResult)
         {
             Kind = kind;
             Arity = arity;

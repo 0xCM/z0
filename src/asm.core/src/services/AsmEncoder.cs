@@ -12,36 +12,12 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static AsmCodes;
-    using static AsmCodes.MachineModeKind;
-    using static AsmCodes.OperandSize;
-    using static AsmOpCodeTokens;
 
     using K = AsmCodes.RexPrefixCode;
 
     [ApiHost]
-    public readonly struct AsmEncoder
+    public readonly partial struct AsmEncoder
     {
-        // RexBBits:[Index[00000] | Token[000]]
-        [MethodImpl(Inline), Op]
-        public static RexB rexb(RexBToken token, RegIndexCode r)
-            => new RexB(token,r);
-
-        [MethodImpl(Inline), Op]
-        public static ModRm modrm(byte src)
-            => new ModRm(src);
-
-        [MethodImpl(Inline), Op]
-        public static ModRm modrm(byte rm, byte reg, byte mod)
-            => new ModRm(Bits.join((rm, 0), (reg, 3), (mod, 6)));
-
-        [MethodImpl(Inline), Op]
-        public static ModRm modrm(RegIndex r1, RegIndex r2)
-            => modrm((byte)r1, (byte)r2, 0b11);
-
-        [MethodImpl(Inline), Op]
-        public static ModRm modrm(RegIndex rm, RegIndex reg, byte mod)
-            => modrm((byte)rm, (byte)reg, mod);
-
         [MethodImpl(Inline), Op]
         public static MandatoryPrefix mandatory(MandatoryPrefixCode code)
             => new MandatoryPrefix(code);
@@ -49,10 +25,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static Vsib vsib(byte src)
             => new Vsib(src);
-
-        [MethodImpl(Inline), Op]
-        public static RexPrefix rex()
-            => (byte)RexPrefixCode.Base;
 
         [MethodImpl(Inline), Op]
         public static BndPrefix bnd()
@@ -63,24 +35,8 @@ namespace Z0.Asm
             => new AsmPrefix(0);
 
         [MethodImpl(Inline), Op]
-        public static RexPrefix rex(uint4 wrxb)
-            => math.or((byte)RexPrefixCode.Base, (byte)wrxb);
-
-        [MethodImpl(Inline), Op]
-        public static Sib sib(uint3 @base, uint3 index, uint2 scale)
-            => new Sib(Bits.join((scale, 0), (index, 2), (@base, 6)));
-
-        [MethodImpl(Inline), Op]
         public static BranchHint hint(bit bt)
             => bt ? BranchHintCode.BT : BranchHintCode.BNT;
-
-        [MethodImpl(Inline), Op]
-        public static RexPrefix rex(bit w, bit r, bit x, bit b)
-        {
-            var bx = math.slor((byte)b, 0, (byte)x, 1);
-            var rw = math.slor((byte)r, 2, (byte)w, 3);
-            return math.or(bx, rw, rex());
-        }
 
         [MethodImpl(Inline), Op]
         public static SizeOverrides sizes(bit opsz, bit adsz)
@@ -125,82 +81,6 @@ namespace Z0.Asm
             seek(hex,1) = a1;
             return 2;
         }
-
-        /// <summary>
-        /// Determines whether a 66h prefix is required to indicate an operand-size override
-        /// </summary>
-        /// <param name="mode"></param>
-        /// <param name="default"></param>
-        /// <param name="effective"></param>
-        [Op]
-        public static bit need66(MachineModeKind mode, OperandSize @default, OperandSize effective)
-            => mode switch{
-                IA32e => effective switch {
-                    W16 => 1,
-                    W32 => 0,
-                    W64 => 0,
-                    _ => 0,
-                },
-
-                Compatibilty => effective switch {
-                    W16 => @default switch{
-                        W16 => 1,
-                        W32 => 0,
-                        _ => 0,
-                    },
-
-                    W32 => @default switch{
-                        W16 => 0,
-                        W32 => 1,
-                        _ => 0,
-                    },
-
-                    _ => 0
-                },
-
-                Protected => effective switch {
-                    W16 => @default switch {
-                        W16 => 1,
-                        W32 => 0,
-                        _ => 0,
-                    },
-                    W32 => @default switch {
-                        W16 => 0,
-                        W32 => 1,
-                        _ => 0,
-                    },
-                    _ => 0
-                },
-
-                Virtual8086 => effective switch {
-                    W16 => @default switch {
-                        W16 => 1,
-                        W32 => 0,
-                        _ => 0,
-                    },
-                    W32 => @default switch {
-                        W16 => 0,
-                        W32 => 1,
-                        _ => 0,
-                    },
-                    _ => 0
-                },
-
-                Real => effective switch {
-                    W16 => @default switch {
-                        W16 => 1,
-                        W32 => 0,
-                        _ => 0,
-                    },
-                    W32 => @default switch {
-                        W16 => 0,
-                        W32 => 1,
-                        _ => 0,
-                    },
-                    _ => 0
-                },
-              _ => 0
-            };
 
         [MethodImpl(Inline), Op]
         static Span<byte> buffer()

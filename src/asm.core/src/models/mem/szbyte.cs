@@ -7,22 +7,25 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static AsmCodes;
 
     partial struct AsmOperands
     {
-        public readonly struct szbyte
+        public readonly struct @byte
         {
             public AsmAddress Target {get;}
 
+            public AsmSizeKind Kind => AsmSizeKind.@byte;
+
             [MethodImpl(Inline)]
-            public szbyte(AsmAddress dst)
+            public @byte(AsmAddress dst)
             {
                 Target = dst;
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator szbyte(AsmAddress dst)
-                => new szbyte(dst);
+            public static implicit operator @byte(AsmAddress dst)
+                => new @byte(dst);
         }
     }
 }

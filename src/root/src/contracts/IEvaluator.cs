@@ -4,8 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IDynamicFactories
+    using System;
+
+    public interface IEvaluator
     {
 
+    }
+
+    public interface IEvaluator<T> : IEvaluator
+    {
+        void Evaluate(ReadOnlySpan<T> src);
     }
 }

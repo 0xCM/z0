@@ -4,11 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using static core;
 
-    public class EvalControl : IEvalControl
+    public class EvalControl : IEvaluator<PartId>
     {
-        public static IEvalControl create(IWfRuntime wf, IDomainSource source, FS.FolderPath root, uint bufferSize)
+        public static IEvaluator<PartId> create(IWfRuntime wf, IDomainSource source, FS.FolderPath root, uint bufferSize)
             => new EvalControl(wf, source, root, bufferSize);
 
         readonly IWfRuntime Wf;
@@ -75,18 +77,18 @@ namespace Z0
 
         bool Enabled => false;
 
-        public void Execute(params PartId[] parts)
+        public void Evaluate(ReadOnlySpan<PartId> parts)
         {
             if(Enabled)
             {
-                var catalogs = ApiGlobal.PartCatalogs(parts).View;
+                var catalogs = ApiGlobal.PartCatalogs(parts.ToArray()).View;
                 var count = catalogs.Length;
                 var flow = Wf.Running($"Evaluating {count} parts");
                 using var buffers = Buffers.native(BufferSize, BufferCount);
                 for(var i=0; i<count; i++)
                     ExecuteCatalog(skip(catalogs,i));
 
-                iter(ApiGlobal.PartCatalogs(parts), ExecuteCatalog);
+                iter(ApiGlobal.PartCatalogs(parts.ToArray()), ExecuteCatalog);
             }
         }
     }

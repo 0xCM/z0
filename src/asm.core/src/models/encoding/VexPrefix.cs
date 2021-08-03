@@ -10,20 +10,42 @@ namespace Z0.Asm
     using static Root;
     using static AsmCodes;
 
-    public readonly struct VexPrefix
-    {
-        readonly uint Data;
+    using K = AsmCodes.VexPrefixKind;
 
-        internal VexPrefix(byte b0, byte b1)
+    public struct VexPrefix
+    {
+        uint Data;
+
+        [MethodImpl(Inline)]
+        internal VexPrefix(K k)
         {
-            Data = (uint)b0 | ((uint)b1 << 8) | (2 << 16);
+            Data = (byte)k;
         }
 
+        [MethodImpl(Inline)]
+        internal VexPrefix(K k, byte b1)
+        {
+            Data = math.join((byte)k,b1,0,2);
+        }
+
+        [MethodImpl(Inline)]
+        internal VexPrefix(K k, byte b1, byte b2)
+        {
+            Data = math.join((byte)k,b1,b2,3);
+        }
 
         public byte Size
         {
             [MethodImpl(Inline)]
             get => (byte)(Data >> 24);
         }
+
+        [MethodImpl(Inline)]
+        public K Kind()
+            => (K)Data;
+
+        [MethodImpl(Inline)]
+        public void Kind(K k)
+            => Data = Bytes.inject((byte)k,0, ref Data);
     }
 }

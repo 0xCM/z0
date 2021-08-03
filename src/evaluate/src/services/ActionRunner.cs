@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public sealed class ActionRunner : AppService<ActionRunner>, IActionRunner
+    public sealed class ActionRunner : Service<ActionRunner>, IActionRunner
     {
         int seq;
 
@@ -19,7 +19,7 @@ namespace Z0
 
         public void Run(in DynamicAction fx)
         {
-            var flow = Wf.Running(fx.Id);
+            var flow = Running(fx.Id);
             try
             {
                 fx.Invoke();

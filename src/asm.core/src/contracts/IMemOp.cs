@@ -14,7 +14,7 @@ namespace Z0.Asm
     [Free]
     public interface IMemOp : IAsmOp
     {
-        SizeKeywordToken Qualifier => default;
+        AsmSizeKind Qualifier => default;
     }
 
     [Free]
@@ -33,8 +33,8 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 1;
 
-        SizeKeywordToken IMemOp.Qualifier
-            => SizeKeywordToken.@byte;
+        AsmSizeKind IMemOp.Qualifier
+            => AsmSizeKind.@byte;
     }
 
     public interface IMemOp8<T> : IMemOp8, IMemOp<T>
@@ -56,8 +56,8 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 2;
 
-        SizeKeywordToken IMemOp.Qualifier
-            => SizeKeywordToken.word;
+        AsmSizeKind IMemOp.Qualifier
+            => AsmSizeKind.word;
     }
 
     public interface IMemOp16<T> : IMemOp16, IMemOp<T>
@@ -79,8 +79,8 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 4;
 
-        SizeKeywordToken IMemOp.Qualifier
-            => SizeKeywordToken.dword;
+        AsmSizeKind IMemOp.Qualifier
+            => AsmSizeKind.dword;
     }
 
     public interface IMemOp32<T> : IMemOp32, IMemOp<T>
@@ -101,8 +101,8 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 8;
 
-        SizeKeywordToken IMemOp.Qualifier
-            => SizeKeywordToken.qword;    }
+        AsmSizeKind IMemOp.Qualifier
+            => AsmSizeKind.qword;    }
 
     public interface IMemOp64<T> : IMemOp64, IMemOp<T>
         where T : unmanaged, IMemOp64<T>
@@ -122,8 +122,8 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 16;
 
-        SizeKeywordToken IMemOp.Qualifier
-            => SizeKeywordToken.xmmword;
+        AsmSizeKind IMemOp.Qualifier
+            => AsmSizeKind.xmmword;
     }
 
     public interface IMemOp128<T> : IMemOp128, IMemOp<T>
@@ -144,8 +144,8 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 32;
 
-        SizeKeywordToken IMemOp.Qualifier
-            => SizeKeywordToken.ymmword;
+        AsmSizeKind IMemOp.Qualifier
+            => AsmSizeKind.ymmword;
     }
 
     public interface IMemOp256<T> :  IMemOp256, IMemOp<T>
@@ -166,8 +166,8 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 64;
 
-        SizeKeywordToken IMemOp.Qualifier
-            => SizeKeywordToken.zmmword;
+        AsmSizeKind IMemOp.Qualifier
+            => AsmSizeKind.zmmword;
     }
 
     public interface IMemOp512<T> : IMemOp512, IMemOp<T>

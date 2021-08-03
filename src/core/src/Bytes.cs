@@ -18,6 +18,89 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         /// <summary>
+        /// Extracts an index-identified source byte
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="index">The byte relative index</param>
+        [MethodImpl(Inline), Op]
+        public static byte extract(ushort src, byte index)
+            => (byte)(src >> (index*8));
+
+        /// <summary>
+        /// Extracts an index-identified source byte
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="index">The byte relative index</param>
+        [MethodImpl(Inline), Op]
+        public static byte extract(uint src, byte index)
+            => (byte)(src >> (index*8));
+
+        /// <summary>
+        /// Extracts an index-identified source byte
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="index">The byte relative index</param>
+        [MethodImpl(Inline), Op]
+        public static byte extract(ulong src, byte index)
+            => (byte)(src >> (index*8));
+
+        /// <summary>
+        /// Overwrites an index-identified byte in the target
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="index">The byte relative index</param>
+        /// <param name="src">The target</param>
+        [MethodImpl(Inline), Op]
+        public static ref uint inject(in byte src, byte index, ref uint dst)
+        {
+            dst &= (0xFFu << (index*3));
+            dst &= (~(uint)src);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Overwrites an index-identified byte in the target
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="index">The byte relative index</param>
+        /// <param name="src">The target</param>
+        [MethodImpl(Inline), Op]
+        public static ref ulong inject(in byte src, byte index, ref ulong dst)
+        {
+            dst &= (0xFFul << (index*3));
+            dst &= (~(ulong)src);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Returns a readonly reference to an index-identified source byte
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="index">The 0-based, byte-relative index</param>
+        /// <typeparam name="T">The data type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly byte view<T>(in T src, byte index)
+            where T : unmanaged
+        {
+            ref readonly var data = ref @as<T,byte>(src);
+            return ref skip(data,index);
+        }
+
+        /// <summary>
+        /// Returns a mutable reference to an index-identified source byte
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="index">The 0-based, byte-relative index</param>
+        /// <typeparam name="T">The data type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref byte edit<T>(ref T src, byte index)
+            where T : unmanaged
+        {
+            ref var data = ref @as<T,byte>(src);
+            return ref seek(data,index);
+        }
+
+        /// <summary>
         /// Determines whether cell[i] == a0 && cell[i+i] == a1
         /// </summary>
         /// <param name="src">The data source</param>

@@ -8,8 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Reflection.Emit;
 
-    using static Part;
-
     partial class Dynop
     {
         [Op]

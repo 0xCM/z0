@@ -302,7 +302,7 @@ namespace Z0.Asm
         /// Classfies vex prefix codes
         /// </summary>
         [SymSource]
-        public enum VexPrefixMarker : byte
+        public enum VexPrefixKind : byte
         {
             [Symbol("xC5", "The leading byte of a 2-byte vex prefix sequence")]
             xC5 = H.xc5,

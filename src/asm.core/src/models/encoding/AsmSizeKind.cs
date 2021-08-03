@@ -12,25 +12,25 @@ namespace Z0.Asm
             None=0,
 
             [Symbol("byte")]
-            Byte,
+            @byte,
 
             [Symbol("word")]
-            Word,
+            word,
 
-            [Symbol("xmmword")]
-            DWord,
+            [Symbol("dword")]
+            dword,
 
             [Symbol("qword")]
-            QWord,
+            qword,
 
             [Symbol("xmmword")]
-            XmmWord,
+            xmmword,
 
             [Symbol("ymmword")]
-            YmmWord,
+            ymmword,
 
             [Symbol("zmmword")]
-            ZmmWord,
+            zmmword,
         }
     }
 }

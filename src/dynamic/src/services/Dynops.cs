@@ -8,8 +8,10 @@ namespace Z0
 
     public readonly struct Dynops
     {
-        public static IDynexus Dynexus => Z0.Dynexus.service();
+        public static IDynexus Dynexus
+            => Z0.Dynexus.service();
 
-        const NumericKind Closure = UInt64k;
+        public static IImmInjectors ImmInjectors
+            => ImmInjectorFactory.service();
     }
 }

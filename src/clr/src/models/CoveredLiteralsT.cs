@@ -10,15 +10,15 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct LiteralCover<C> : ILiteralCover<LiteralCover<C>>
-        where C : struct, ILiteralCover<C>
+    public readonly struct CoveredLiterals<C> : ICoveredLiterals<CoveredLiterals<C>>
+        where C : struct, ICoveredLiterals<C>
     {
         public C Cover {get;}
 
         public FieldInfo[] Covered {get;}
 
         [MethodImpl(Inline)]
-        public LiteralCover(C src, FieldInfo[] covered)
+        public CoveredLiterals(C src, FieldInfo[] covered)
         {
             Cover = src;
             Covered = typeof(C).Fields();

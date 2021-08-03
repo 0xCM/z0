@@ -8,11 +8,15 @@ namespace Z0.Asm
 
     using static Root;
 
+    using static AsmCodes;
+
     partial struct AsmOperands
     {
         public readonly struct ymmword
         {
             public AsmAddress Target {get;}
+
+            public AsmSizeKind Kind => AsmSizeKind.ymmword;
 
             [MethodImpl(Inline)]
             public ymmword(AsmAddress reg)

@@ -2,9 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    struct Msg
+    public readonly partial struct AsmSyntax
     {
+
     }
 }

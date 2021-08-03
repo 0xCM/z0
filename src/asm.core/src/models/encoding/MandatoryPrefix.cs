@@ -12,38 +12,30 @@ namespace Z0.Asm
 
     public struct MandatoryPrefix : IAsmPrefix<MandatoryPrefixCode>
     {
-        MandatoryPrefixCode _Code;
+        public MandatoryPrefixCode Kind {get;}
 
         [MethodImpl(Inline)]
         public MandatoryPrefix(MandatoryPrefixCode src)
         {
-            _Code = src;
+            Kind = src;
         }
 
         public byte Encoded
         {
             [MethodImpl(Inline)]
-            get => (byte)_Code;
+            get => (byte)Kind;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => _Code == 0;
+            get => Kind == 0;
         }
-
-        [MethodImpl(Inline)]
-        public MandatoryPrefix Code()
-            => _Code;
-
-        [MethodImpl(Inline)]
-        public void Code(MandatoryPrefixCode src)
-            => _Code = src;
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => _Code != 0;
+            get => Kind != 0;
         }
 
         public override string ToString()
@@ -58,10 +50,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator MandatoryPrefixCode(MandatoryPrefix src)
-            => src._Code;
+            => src.Kind;
 
         [MethodImpl(Inline)]
         public static implicit operator byte(MandatoryPrefix src)
-            => (byte)src._Code;
+            => (byte)src.Kind;
     }
 }

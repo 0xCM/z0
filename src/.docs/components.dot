@@ -1,0 +1,36 @@
+digraph Components {
+
+    bit -> core
+    bitnumbers -> symcore
+    bits -> gmath
+    blittable -> blocks
+    blittable -> cells
+    blocks -> text
+    blocks -> bit
+    cells -> bit
+    clr -> containers
+    clr -> bit
+    containers -> cells
+    core -> sys -> root
+    gmath -> clr
+    gmath -> nats
+    gmath -> math
+    hash -> core
+    hex -> blocks
+    hex -> text
+    math -> bit
+    nats -> text
+    relations -> core
+    rules -> bits
+    spanblocks -> cells
+    spanblocks -> nats
+    symcore -> containers
+    symcore -> clr
+    symcore -> bit
+    symcore -> text
+    term -> root
+    text -> core
+
+
+
+}

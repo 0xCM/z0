@@ -9,7 +9,7 @@ namespace Z0.Asm
     partial struct AsmCodes
     {
         [Flags, SymSource]
-        public enum OperandSize : byte
+        public enum OpszKind : byte
         {
             [Symbol("w16")]
             W16 = (byte)DataWidth.W16,

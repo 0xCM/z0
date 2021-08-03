@@ -13,16 +13,16 @@ namespace Z0
     partial struct ClrLiterals
     {
         [MethodImpl(Inline), Op]
-        public static LiteralCover cover(ValueType src)
-            => new LiteralCover(src, src.GetType().Fields());
+        public static CoveredLiterals cover(ValueType src)
+            => new CoveredLiterals(src, src.GetType().Fields());
 
         [MethodImpl(Inline), Op]
-        public static LiteralCover cover(ValueType src, FieldInfo[] fields)
-            => new LiteralCover(src,fields);
+        public static CoveredLiterals cover(ValueType src, FieldInfo[] fields)
+            => new CoveredLiterals(src,fields);
 
         [MethodImpl(Inline)]
-        public static LiteralCover<C> cover<C>(C src)
-            where C : struct, ILiteralCover<C>
-                => new LiteralCover<C>(src, typeof(C).Fields());
+        public static CoveredLiterals<C> cover<C>(C src)
+            where C : struct, ICoveredLiterals<C>
+                => new CoveredLiterals<C>(src, typeof(C).Fields());
     }
 }

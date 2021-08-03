@@ -8,12 +8,15 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static AsmCodes;
 
     partial struct AsmOperands
     {
         public readonly struct xmmword
         {
             public AsmAddress Target {get;}
+
+            public AsmSizeKind Kind => AsmSizeKind.xmmword;
 
             [MethodImpl(Inline)]
             public xmmword(AsmAddress target)

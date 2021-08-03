@@ -9,12 +9,15 @@ namespace Z0.Asm
     using static Root;
     using static AsmCodes;
 
-    public readonly struct OperandSizeOverride : IAsmPrefix<OperandSizeOverride>
+    /// <summary>
+    /// Operand size override
+    /// </summary>
+    public readonly struct Opsz : IAsmPrefix<Opsz>
     {
         public SizeOverrideCode Code {get;}
 
         [MethodImpl(Inline)]
-        public OperandSizeOverride(SizeOverrideCode code)
+        public Opsz(SizeOverrideCode code)
         {
             Code = code;
         }
@@ -32,9 +35,9 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator SizeOverrides(OperandSizeOverride src)
+        public static implicit operator SizeOverrides(Opsz src)
             =>new SizeOverrides(src.Code !=0, false);
 
-        public static OperandSizeOverride Empty => default;
+        public static Opsz Empty => default;
     }
 }
