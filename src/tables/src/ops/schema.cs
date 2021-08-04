@@ -24,7 +24,7 @@ namespace Z0
             for(ushort i=0; i<count; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                seek(spec,i) = new RecordFieldSpec(i, field.Name, field.FieldType.Name);
+                seek(spec,i) = new RecordFieldSpec(i, RecordFields.name(field), field.FieldType.Name);
             }
             return new TableSchema(id, specs);
         }

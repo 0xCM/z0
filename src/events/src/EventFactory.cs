@@ -138,12 +138,12 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static EmittingTableEvent<T> emittingTable<T>(WfStepId step, FS.FilePath dst)
-            where  T : struct, IRecord<T>
+            where  T : struct
                 => new EmittingTableEvent<T>(step, dst);
 
         [Op, Closures(Closure)]
         public static EmittedTableEvent<T> emittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
-            where  T : struct, IRecord<T>
+            where  T : struct
                 => new EmittedTableEvent<T>(step, count, dst);
 
         [Op]
@@ -160,7 +160,7 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static EmittedTableEvent<T> emittedTable<T>(WfStepId step, FS.FilePath dst)
-            where  T : struct, IRecord<T>
+            where  T : struct
                 => new EmittedTableEvent<T>(step, dst);
 
         [MethodImpl(Inline)]

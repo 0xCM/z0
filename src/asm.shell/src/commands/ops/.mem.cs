@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
     partial class AsmCmdService
     {
         [CmdOp(".mem")]
         public Outcome Mem(CmdArgs args)
         {
-            var map = AddressMap;
+            var map = NativeAddressMap;
             var buffer = text.buffer();
             map.Describe(buffer);
             Write(buffer.Emit());

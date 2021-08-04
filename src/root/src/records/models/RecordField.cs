@@ -25,11 +25,14 @@ namespace Z0
         /// </summary>
         public FieldInfo Definition {get;}
 
+        readonly string _Name;
+
         [MethodImpl(Inline)]
-        public RecordField(ushort index, FieldInfo def)
+        public RecordField(ushort index, FieldInfo def, string name)
         {
             FieldIndex = index;
             Definition = def;
+            _Name = name;
         }
 
         public bool IsEmpty
@@ -50,7 +53,7 @@ namespace Z0
         public string Name
         {
             [MethodImpl(Inline)]
-            get => Definition?.Name ?? EmptyString;
+            get => _Name ?? EmptyString;
         }
 
         /// <summary>

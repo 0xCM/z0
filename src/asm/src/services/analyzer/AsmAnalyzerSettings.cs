@@ -12,7 +12,7 @@ namespace Z0
 
         public bool EmitAsmDetails;
 
-        public bool EmitStatementIndex;
+        public bool EmitProcessAsm;
 
         public bool EmitHostStatements;
 
@@ -23,7 +23,7 @@ namespace Z0
             dst.EmitCalls = true;
             dst.EmitJumps = true;
             dst.EmitAsmDetails = true;
-            dst.EmitStatementIndex = true;
+            dst.EmitProcessAsm = true;
             dst.EmitHostStatements = true;
             dst.EmitBitstringIndex = true;
             return ref dst;

@@ -5,10 +5,11 @@
 namespace Z0.Asm
 {
     using static core;
+
     partial class AsmCmdService
     {
-        [CmdOp(".asm-hex")]
-        Outcome AsmHex(CmdArgs args)
+        [CmdOp(".asm-hex-array")]
+        Outcome AsmHexArray(CmdArgs args)
         {
             var result = Outcome.Success;
             var src = AsmWs.HexDir().Files(FS.Hex).ToReadOnlySpan();

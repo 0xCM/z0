@@ -193,7 +193,7 @@ namespace Z0.Asm
             Wf.EmittedFile(asmFlow,counter);
         }
 
-        uint CountStatements(ReadOnlySpan<AsmRoutine> src)
+        public static uint CountInstructions(ReadOnlySpan<AsmRoutine> src)
         {
             var count = src.Length;
             var total = 0u;
@@ -205,7 +205,7 @@ namespace Z0.Asm
         public void EmitHostStatements(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
         {
             var pipe = Wf.AsmStatementPipe();
-            var total = CountStatements(src);
+            var total = CountInstructions(src);
             var running = Wf.Running(Msg.CreatingStatements.Format(total));
             var buffer = span<AsmHostStatement>(total);
             var count = src.Length;
@@ -270,28 +270,18 @@ namespace Z0.Asm
             return count;
         }
 
-        AsmInstructionBlock Decode(in ApiCodeBlock src)
+        public SortedReadOnlySpan<ProcessAsm> BuildProcessAsm(ReadOnlySpan<AsmRoutine> src)
         {
-            var outcome = Decoder.Decode(src, out var decoded);
-            if(outcome)
-                return decoded;
-            else
-            {
-                Wf.Error(outcome.Message);
-                return AsmInstructionBlock.Empty;
-            }
-        }
-
-        public SortedReadOnlySpan<AsmGlobal> BuildIndex(ReadOnlySpan<AsmRoutine> src)
-        {
-            var count = src.Length;
-            if(count == 0)
+            var kRountines = src.Length;
+            if(kRountines == 0)
                 return default;
 
-            var dst = list<AsmGlobal>();
+            var total = CountInstructions(src);
+            var buffer = span<ProcessAsm>(total);
+            ref var dst = ref first(buffer);
             var counter = 0u;
             var @base = skip(src,0).BaseAddress;
-            for(var i=0u; i<count; i++)
+            for(var i=0u; i<kRountines; i++)
             {
                 ref readonly var routine = ref skip(src,i);
                 var instructions = routine.Instructions.View;
@@ -310,7 +300,7 @@ namespace Z0.Asm
                     if(!opcode.IsValid)
                         break;
 
-                    var statement = new AsmGlobal();
+                    var statement = new ProcessAsm();
                     var size = (ushort)instruction.ByteLength;
                     var specifier = instruction.Specifier;
                     var ip = (MemoryAddress)instruction.IP;
@@ -325,23 +315,32 @@ namespace Z0.Asm
                     statement.Encoded = AsmHexCode.load(slice(bytes, blockOffset, size));
                     statement.OpCode = opcode;
                     statement.Bitstring = statement.Encoded;
-                    dst.Add(statement);
+                    seek(buffer,counter) = statement;
 
                     blockOffset += size;
                 }
-
             }
-            return Spans.sorted(dst.ViewDeposited());
 
+            return Spans.sorted(@readonly(slice(buffer,0,counter)));
         }
 
-        public SortedReadOnlySpan<AsmGlobal> BuildIndex(SortedSpan<ApiCodeBlock> src)
+        public uint EmitProcessAsm(SortedReadOnlySpan<ProcessAsm> src, FS.FilePath dst)
+            => EmitRows(src.View, ProcessAsm.RenderWidths, ProcessAsm.RowPad, Encoding.ASCII, dst);
+
+        public ReadOnlySpan<ProcessAsm> EmitProcessAsm(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
+        {
+            var rows = BuildProcessAsm(src);
+            EmitProcessAsm(rows, dst);
+            return rows;
+        }
+
+        public SortedReadOnlySpan<ProcessAsm> BuildProcessAsm(SortedSpan<ApiCodeBlock> src)
         {
             var count = src.Length;
             if(count == 0)
                 return default;
 
-            var dst = list<AsmGlobal>();
+            var dst = list<ProcessAsm>();
             var counter = 0u;
             var @base = src[0].BaseAddress;
 
@@ -365,7 +364,7 @@ namespace Z0.Asm
                     if(!opcode.IsValid)
                         break;
 
-                    var statement = new AsmGlobal();
+                    var statement = new ProcessAsm();
                     var size = (ushort)instruction.ByteLength;
                     var specifier = instruction.Specifier;
                     var ip = (MemoryAddress)instruction.IP;
@@ -389,15 +388,18 @@ namespace Z0.Asm
             return Spans.sorted(dst.ViewDeposited());
         }
 
-        public uint EmitIndex(SortedReadOnlySpan<AsmGlobal> src, FS.FilePath dst)
-            => EmitRows(src.View, AsmGlobal.RenderWidths, AsmGlobal.RowPad, Encoding.ASCII, dst);
-
-        public ReadOnlySpan<AsmGlobal> EmitIndex(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
+        AsmInstructionBlock Decode(in ApiCodeBlock src)
         {
-            var rows = BuildIndex(src);
-            EmitIndex(rows, dst);
-            return rows;
+            var outcome = Decoder.Decode(src, out var decoded);
+            if(outcome)
+                return decoded;
+            else
+            {
+                Wf.Error(outcome.Message);
+                return AsmInstructionBlock.Empty;
+            }
         }
+
 
         void ClearTarget()
         {

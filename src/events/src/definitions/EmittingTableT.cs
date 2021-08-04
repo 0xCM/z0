@@ -11,7 +11,7 @@ namespace Z0
 
     [Event(Kind)]
     public readonly struct EmittingTableEvent<T> : IInitialEvent<EmittingTableEvent<T>>
-        where  T : struct, IRecord<T>
+        where  T : struct
     {
         public const string EventName = GlobalEvents.EmittingTable;
 

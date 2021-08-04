@@ -11,7 +11,7 @@ namespace Z0
     /// Defines an IP location with context
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack=1)]
-    public struct AsmGlobalRef : IRecord<AsmGlobalRef>
+    public struct ProcessAsmRef : IRecord<ProcessAsmRef>
     {
         public const string TableId = "asm.global.ref";
 

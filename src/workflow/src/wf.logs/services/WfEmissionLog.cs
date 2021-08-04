@@ -55,7 +55,7 @@ namespace Z0
         }
 
         public ref readonly WfTableFlow<T> LogEmission<T>(in WfTableFlow<T> flow)
-            where T : struct, IRecord<T>
+            where T : struct
         {
             try
             {

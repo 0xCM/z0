@@ -219,15 +219,15 @@ namespace Z0
             => Wf.EmittedFile(flow,count);
 
         protected WfTableFlow<T> EmittingTable<T>(FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
                 => Wf.EmittingTable<T>(dst);
 
         protected ExecToken EmittedTable<T>(WfTableFlow<T> flow, Count count, FS.FilePath? dst = null)
-            where T : struct, IRecord<T>
+            where T : struct
                 => Wf.EmittedTable(flow,count, dst);
 
         protected uint EmitRows<T>(ReadOnlySpan<T> src, FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
         {
             var flow = EmittingTable<T>(dst);
             var spec = Tables.rowspec<T>();
@@ -237,7 +237,7 @@ namespace Z0
         }
 
         protected uint EmitRows<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
         {
             var flow = EmittingTable<T>(dst);
             var spec = Tables.rowspec<T>(widths, z16);
@@ -247,7 +247,7 @@ namespace Z0
         }
 
         protected uint EmitRows<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, ushort rowpad, Encoding encoding, FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
         {
             var flow = Wf.EmittingTable<T>(dst);
             var spec = Tables.rowspec<T>(widths, rowpad);

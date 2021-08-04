@@ -46,8 +46,8 @@ namespace Z0
             if(Settings.EmitHostStatements)
                 statements.EmitHostStatements(src, dst);
 
-            if(Settings.EmitStatementIndex)
-                statements.EmitIndex(src, dst.StatementIndexPath());
+            if(Settings.EmitProcessAsm)
+                statements.EmitProcessAsm(src, dst.ProcessAsmPath());
 
             if(Settings.EmitAsmDetails)
                 EmitDetails(blocks, dst);

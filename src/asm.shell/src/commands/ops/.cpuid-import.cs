@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".import-cpuid")]
+        [CmdOp(".cpuid-import")]
         Outcome ImportCpuid(CmdArgs args)
         {
             return AsmTables.ImportCpuIdSources();

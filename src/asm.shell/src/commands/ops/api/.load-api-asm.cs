@@ -8,8 +8,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".api-asm-data")]
-        Outcome ApiAsmData(CmdArgs args)
+        [CmdOp(".load-api-asm")]
+        Outcome LoadApiAsm(CmdArgs args)
         {
             var result = Outcome.Success;
             var archive = Wf.ApiPacks().Archive();

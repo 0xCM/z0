@@ -78,7 +78,7 @@ namespace Z0.Asm
             return lines;
         }
 
-        public void EmitThumbprints(SortedSpan<AsmGlobal> src, FS.FilePath dst)
+        public void EmitThumbprints(SortedSpan<ProcessAsm> src, FS.FilePath dst)
             => EmitThumbprints(DistinctEncodings(src), dst);
 
         public void EmitThumbprints(ReadOnlySpan<AsmThumbprint> src, FS.FilePath dst)
@@ -121,28 +121,29 @@ namespace Z0.Asm
             return distinct;
         }
 
-        public static ReadOnlySpan<AsmGlobal> LoadGlobalAsm(FS.FilePath src)
+        public static uint LoadProcessAsm(FS.FilePath src, Span<ProcessAsm> dst)
         {
-            var dst = list<AsmGlobal>();
             var counter = 1u;
-
+            var i = 0u;
+            var max = dst.Length;
             using var reader = src.Utf8Reader();
             var header = reader.ReadLine();
             var line = reader.ReadLine();
             var result = Outcome.Success;
             while(line != null && result.Ok)
             {
-                result = AsmParser.parse(counter++, line, out var row);
-                if(result.Ok)
-                    dst.Add(row);
+                result = AsmParser.parse(counter++, line, out seek(dst,i));
+                if(result.Fail)
+                    return i;
+                else
+                    i++;
 
                 line = reader.ReadLine();
             }
-
-            return dst.ViewDeposited();
+            return i;
         }
 
-        public static void traverse(FS.FilePath src, Receiver<AsmGlobal> dst)
+        public static void traverse(FS.FilePath src, Receiver<ProcessAsm> dst)
         {
             var counter = 1u;
             using var reader = src.Utf8Reader();
@@ -188,7 +189,7 @@ namespace Z0.Asm
         public static BinaryCode code(in CodeBlock src, uint offset, byte size)
             => slice(src.View, offset, size).ToArray();
 
-        public static SortedSpan<AsmEncodingInfo> DistinctEncodings(ReadOnlySpan<AsmGlobal> src)
+        public static SortedSpan<AsmEncodingInfo> DistinctEncodings(ReadOnlySpan<ProcessAsm> src)
         {
             var collected = hashset<AsmEncodingInfo>();
             var count = src.Length;

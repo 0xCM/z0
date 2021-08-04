@@ -36,7 +36,7 @@ namespace Z0
         public FS.FolderPath StatementRoot()
             => AsmTableRoot() + FS.folder("asm.statements");
 
-        public FS.FilePath StatementIndexPath()
+        public FS.FilePath ProcessAsmPath()
             => RootDir() + FS.file("asm.statements", FS.Csv);
 
         public FS.FolderPath Statements(PartId part)

@@ -11,7 +11,7 @@ namespace Z0.Asm
     partial struct AsmParser
     {
         [Op]
-        public static Outcome code(AsmMnemonic src, out AsmMnemonicCode dst)
+        public static Outcome code(in AsmMnemonic src, out AsmMnemonicCode dst)
         {
             if(Enum.TryParse(typeof(AsmMnemonicCode), src.Format(), true, out var _code))
             {

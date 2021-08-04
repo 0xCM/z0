@@ -288,9 +288,31 @@ namespace Z0.Asm
 
         Outcome Emit(ReadOnlySpan<CpuIdRow> src)
         {
+            var result = EmitRows(src);
+            if(result)
+                result = EmitBits(src);
+            return result;
+        }
+
+        Outcome EmitBits(ReadOnlySpan<CpuIdRow> src)
+        {
+            var result = Outcome.Success;
+            var dst = Ws.Tables().Path("asm.cpuid.bits", FS.Csv);
+            var flow = EmittingFile(dst);
+            using var writer = dst.AsciWriter();
+            var buffer = text.buffer();
+            AsmRender.regvals(src, buffer);
+            writer.WriteLine(buffer.Emit());
+            EmittedFile(flow,src.Length);
+            return result;
+        }
+
+        Outcome EmitRows(ReadOnlySpan<CpuIdRow> src)
+        {
+            var result = Outcome.Success;
             var dst = Ws.Tables().Table<CpuIdRow>();
-            var emitting = Wf.EmittingTable<CpuIdRow>(dst);
-            var formatter = Tables.formatter<CpuIdRow>();
+            var flow = Wf.EmittingTable<CpuIdRow>(dst);
+            var formatter = Tables.formatter<CpuIdRow>(CpuIdRow.RenderWidths);
             using var rowWriter = dst.AsciWriter();
             rowWriter.WriteLine(formatter.FormatHeader());
             var count = src.Length;
@@ -299,13 +321,8 @@ namespace Z0.Asm
                 ref readonly var row = ref skip(src,i);
                 rowWriter.WriteLine(formatter.Format(row));
             }
-            Wf.EmittedTable(emitting, count);
-
-            using var bitWriter = Ws.Tables().Path("asm.cpuid.bits", FS.Csv).AsciWriter();
-            var buffer = text.buffer();
-            AsmRender.regvals(src, buffer);
-            bitWriter.WriteLine(buffer.Emit());
-            return true;
+            Wf.EmittedTable(flow, count);
+            return result;
         }
 
         ReadOnlySpan<CpuIdRow> LoadCpuIdImports(TextReader reader)

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     public readonly struct WfTableFlow<T>
-        where T : struct, IRecord<T>
+        where T : struct
     {
         readonly IWfRuntime Wf;
 

@@ -29,11 +29,7 @@ namespace Z0
         /// <summary>
         /// The field name
         /// </summary>
-        public string Name
-        {
-            [MethodImpl(Inline)]
-            get => Definition.Name;
-        }
+        public string Name;
 
         /// <summary>
         /// The field datatype
@@ -55,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator RecordField(RecordField<T> src)
-            => new RecordField(src.FieldIndex, src.Definition);
+            => new RecordField(src.FieldIndex, src.Definition, src.Name);
 
         [MethodImpl(Inline)]
         public static implicit operator RecordField<T>(RecordField src)
@@ -63,6 +59,7 @@ namespace Z0
             var dst = new RecordField<T>();
             dst.Definition = src.Definition;
             dst.FieldIndex = src.FieldIndex;
+            dst.Name = src.Name;
             return dst;
         }
     }

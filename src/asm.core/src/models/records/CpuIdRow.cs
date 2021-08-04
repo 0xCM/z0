@@ -12,7 +12,7 @@ namespace Z0.Asm
     {
         public const string TableId = "asm.cpuid";
 
-        public const byte FieldCount = 6;
+        public const byte FieldCount = 7;
 
         public string Chip;
 
@@ -29,6 +29,6 @@ namespace Z0.Asm
         public Hex32 Edx;
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{12,12,12,12,12,12};
+            => new byte[FieldCount]{12,12,12,12,12,12,12};
     }
 }

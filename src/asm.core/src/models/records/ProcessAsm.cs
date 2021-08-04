@@ -13,7 +13,7 @@ namespace Z0
     using static Root;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct AsmGlobal : IRecord<AsmGlobal>, IComparable<AsmGlobal>
+    public struct ProcessAsm : IRecord<ProcessAsm>, IComparable<ProcessAsm>, IAsmHexProvider<ProcessAsm>
     {
         public const string TableId = "asm.global";
 
@@ -59,16 +59,23 @@ namespace Z0
         public OpUri OpUri;
 
         [MethodImpl(Inline)]
-        public int CompareTo(AsmGlobal src)
+        public ref readonly AsmHexCode AsmHex(out AsmHexCode hex)
+        {
+            hex = Encoded;
+            return ref hex;
+        }
+
+        [MethodImpl(Inline)]
+        public int CompareTo(ProcessAsm src)
             => IP.CompareTo(src.IP);
 
         public override int GetHashCode()
             => (int)Sequence;
 
         [MethodImpl(Inline)]
-        public AsmGlobalRef GetRef()
+        public ProcessAsmRef GetRef()
         {
-            var dst = new AsmGlobalRef();
+            var dst = new ProcessAsmRef();
             dst.Sequence = Sequence;
             dst.GlobalOffset = GlobalOffset;
             dst.BlockAddress = BlockAddress;

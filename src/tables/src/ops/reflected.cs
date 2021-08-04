@@ -23,7 +23,7 @@ namespace Z0
         {
             var layout = type.Tag<StructLayoutAttribute>();
             var id = TableId.identify(type);
-            var _fields = fields(type);
+            var _fields = RecordFields.discover(type);
             LayoutKind? kind = null;
             CharSet? charset = null;
             byte? pack = null;

@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".api-asm-query")]
+        [CmdOp(".api-qasm-monic")]
         Outcome QueryApiAsm(CmdArgs args)
         {
             var result = Outcome.Success;

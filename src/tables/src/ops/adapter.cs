@@ -28,6 +28,6 @@ namespace Z0
         [Op, Closures(Closure)]
         public static RowAdapter<T> adapter<T>()
             where T : struct
-                => adapter<T>(fields<T>());
+                => adapter<T>(RecordFields.discover<T>());
     }
 }

@@ -23,8 +23,6 @@ namespace Z0.Asm
 
         ScriptRunner ScriptRunner;
 
-        byte[] _Assembled;
-
         ShellState State;
 
         IApiPack ApiPack;
@@ -41,48 +39,54 @@ namespace Z0.Asm
 
         CmdLineRunner CmdRunner;
 
-        NativeBufferSeq _Buffers;
-
-        AddressMap _AddressMap;
-
         IntelXed Xed;
 
         AsmToolchain AsmToolchain;
 
         AsmTables AsmTables;
 
-        const ushort BufferSize = Pow2.T14;
+        ApiPacks ApiPacks;
 
-        const byte BufferCount = 4;
+        NativeBufferSeq _NativeBuffers;
+
+        AddressMap _NativeAddressMap;
+
+        Index<ProcessAsm> _AsmGlobals;
+
+        Index<ProcessAsm> _AsmGlobalSelection;
+
+        byte[] _Assembled;
+
+
+        const ushort _NativeBufferSize = Pow2.T14;
+
+        const byte _NativeBufferCount = 4;
+
+        const uint _AsmGlobalCapacity = 720000;
+
+        uint _AsmGlobalCount;
 
         public AsmCmdService()
         {
             State = new ShellState();
-            CodeBuffer = Buffers.native(BufferSize);
-            _Buffers = Buffers.native(new ByteSize[BufferCount]{BufferSize,BufferSize,BufferSize,BufferSize});
-            _AddressMap = AddressMap.cover(_Buffers);
+            CodeBuffer = Buffers.native(_NativeBufferSize);
+            _NativeBuffers = Buffers.native(new ByteSize[_NativeBufferCount]{_NativeBufferSize,_NativeBufferSize,_NativeBufferSize,_NativeBufferSize});
+            _NativeAddressMap = AddressMap.cover(_NativeBuffers);
             RoutineName = Identifier.Empty;
             CodeSize = 0;
             _Assembled = array<byte>();
+            _AsmGlobals = Index<ProcessAsm>.Empty;
+            _AsmGlobalSelection = Index<ProcessAsm>.Empty;
         }
 
-        AddressMap AddressMap
-        {
-            [MethodImpl(Inline)]
-            get => _AddressMap;
-        }
-
-
-        [MethodImpl(Inline)]
-        ref readonly NativeBufferSeq Memory()
-            => ref _Buffers;
 
         protected override void Initialized()
         {
             Ws = Wf.DevWs();
             AsmWs = Ws.Asm();
             ScriptRunner = Wf.ScriptRunner();
-            ApiPack = Wf.ApiPacks().Current();
+            ApiPacks = Wf.ApiPacks();
+            ApiPack = ApiPacks.Current();
             NasmCatalog = Wf.NasmCatalog();
             SdmProcessor = Wf.IntelSdm();
             RegSets = Wf.AsmRegSets();
@@ -92,12 +96,42 @@ namespace Z0.Asm
             AsmToolchain = Wf.AsmToolchain();
             AsmTables = Wf.AsmTables();
             State.DevWs(Ws);
+
         }
 
         protected override void Disposing()
         {
             CodeBuffer.Dispose();
         }
+
+        AddressMap NativeAddressMap
+        {
+            [MethodImpl(Inline)]
+            get => _NativeAddressMap;
+        }
+
+        [MethodImpl(Inline)]
+        uint AsmGlobalCount()
+            => _AsmGlobalCount;
+
+        [MethodImpl(Inline)]
+        void AsmGlobalCount(uint count)
+        {
+            _AsmGlobalCount = min(count, _AsmGlobalCapacity);
+        }
+
+        Span<ProcessAsm> AsmGlobals()
+        {
+            if(_AsmGlobals.IsEmpty)
+            {
+                _AsmGlobals = alloc<ProcessAsm>(_AsmGlobalCapacity);
+            }
+            return _AsmGlobals;
+        }
+
+        [MethodImpl(Inline)]
+        ref readonly NativeBufferSeq NativeBuffers()
+            => ref _NativeBuffers;
 
         void WriteSyms<K>(Symbols<K> src)
             where K : unmanaged
@@ -218,6 +252,18 @@ namespace Z0.Asm
         FS.FolderPath ToolOutDir(CmdArgs args, ToolId tool)
             => args.Length > 0 ? OutRoot() + FS.folder(arg(args,0).Value) : ToolOutDir(tool);
 
+        void Write<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths)
+            where T : struct
+        {
+            var formatter = Tables.formatter<T>(widths);
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var record = ref skip(src,i);
+                Write(formatter.Format(record));
+            }
+        }
+
         void EmitRecords<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
             where T : struct
         {
@@ -225,12 +271,42 @@ namespace Z0.Asm
             RecordsEmitted(count, dst);
         }
 
+        uint QueryOut<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, string id)
+            where T : struct
+        {
+            var dst = OutWs().QueryOut(id, FS.Csv);
+            return EmitRows(src, widths, dst);
+        }
+
+        [MethodImpl(Inline)]
+        Span<ProcessAsm> AsmGlobalSelection()
+            => _AsmGlobalSelection.Edit;
+
+        Outcome LoadAsmGlobal(out ReadOnlySpan<ProcessAsm> dst)
+        {
+            var result = Outcome.Success;
+            var count = AsmGlobalCount();
+            if(count != 0)
+            {
+                dst = AsmGlobals();
+                return result;
+            }
+            var archive = ApiPacks.Archive();
+            var path = archive.ProcessAsmPath();
+            var buffer = AsmGlobals();
+            Write(string.Format("Loading global asm from {0}", path.ToUri()));
+            count = AsmEtl.LoadProcessAsm(path, buffer);
+            AsmGlobalCount(count);
+            dst = buffer;
+            _AsmGlobalSelection = alloc<ProcessAsm>(count);
+            Write(string.Format("Loaded {0} global asm records from {1}", count, path.ToUri()));
+            return result;
+        }
+
         void RecordsEmitted(Count count, FS.FilePath dst)
         {
             Write(string.Format("Emitted {0} records to {1}", count, dst.ToUri()));
         }
-
-        static MsgPattern NoToolSelected => "No tool selected";
 
         static MsgPattern CapacityExceeded => "Capacity exceeded";
 

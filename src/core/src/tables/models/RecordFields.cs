@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
     using static core;
@@ -20,6 +21,9 @@ namespace Z0
             where T : struct
                 => discover(typeof(T));
 
+        public static string name(FieldInfo def)
+            => def.Tag<LabelAttribute>().MapValueOrDefault(a => a.Label, def.Name);
+
         /// <summary>
         /// Discerns a <see cref='RecordFields'/> for a specified record type
         /// </summary>
@@ -27,12 +31,15 @@ namespace Z0
         [Op]
         public static RecordField[] discover(Type src)
         {
-            var fields = @readonly(src.DeclaredPublicInstanceFields());
+            var fields = src.DeclaredPublicInstanceFields().ToReadOnlySpan();
             var count = fields.Length;
             var buffer = sys.alloc<RecordField>(count);
             ref var dst = ref first(buffer);
             for(var i=z16; i<count; i++)
-                seek(dst, i) = new RecordField(i, skip(fields, i));
+            {
+                ref readonly var f = ref skip(fields,i);
+                seek(dst, i) = new RecordField(i, f, name(f));
+            }
             return buffer;
         }
 

@@ -9,46 +9,15 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-
-    using REP = AsmCodes.RepeatPrefixCode;
-    using L = AsmCodes.LockPrefixCode;
     using SZ = AsmCodes.SizeOverrideCode;
     using SG = AsmCodes.SegOverrideCode;
 
     [ApiHost]
-    public readonly partial struct AsmOpCodes
+    public readonly struct AsmOpCodes
     {
-        const byte MinRexCode = 0x40;
-
-        const byte MaxRexCode = 0x4F;
-
-        [MethodImpl(Inline), Op]
-        public static bit HasRexPrefix(in AsmOpCodeExpr src)
-            => src.Data.Contains("REX", StringComparison.InvariantCultureIgnoreCase);
-
         [MethodImpl(Inline), Op]
         public static bit IsCallRel32(ReadOnlySpan<byte> src, uint offset)
             => (offset + 4) <= src.Length && skip(src, offset) == 0xE8;
-
-        [MethodImpl(Inline), Op]
-        public static bit HasRexPrefix(AsmOpCode src)
-            => IsRexPrefix(src.Lead);
-
-        [MethodImpl(Inline), Op]
-        public static bit HasRexPrefix(AsmHexCode src)
-            => IsRexPrefix(skip(src.Bytes,0));
-
-        [MethodImpl(Inline), Op]
-        public static bit IsRexPrefix(byte src)
-            => math.between(src, MinRexCode, MaxRexCode);
-
-        [MethodImpl(Inline), Op]
-        public static bit HasRepeatPrefix(AsmOpCode src)
-            => emath.oneof(src.Lead, REP.REPNZ, REP.REPZ);
-
-        [MethodImpl(Inline), Op]
-        public static bit HasLockPrefix(AsmOpCode src)
-            => emath.same(L.LOCK, src.Lead);
 
         [MethodImpl(Inline), Op]
         public static bit HasSegOverride(AsmOpCode src)

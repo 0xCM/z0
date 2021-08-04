@@ -9,8 +9,6 @@ namespace Z0
     using System.Threading.Tasks;
 
     using static WfEvents;
-    using static Root;
-    using static core;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -68,7 +66,7 @@ namespace Z0
             => new WfExecFlow<T>(this, data, NextExecToken());
 
         WfTableFlow<T> TableFlow<T>(FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
                 => new WfTableFlow<T>(this, dst, NextExecToken());
 
         WfFileFlow Flow(FS.FilePath dst)
@@ -153,14 +151,14 @@ namespace Z0
         }
 
         WfTableFlow<T> EmittingTable<T>(FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
         {
             signal(this).EmittingTable<T>(dst);
             return Emissions.LogEmission(TableFlow<T>(dst));
         }
 
         ExecToken EmittedTable<T>(WfTableFlow<T> flow, Count count, FS.FilePath? dst = null)
-            where T : struct, IRecord<T>
+            where T : struct
         {
             var completed = Ran(flow);
             var counted = flow.WithCount(count).WithToken(completed);

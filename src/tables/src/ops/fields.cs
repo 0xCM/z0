@@ -15,7 +15,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static RecordField[] fields<T>()
             where T : struct
-                => fields(typeof(T));
+                => RecordFields.discover<T>();
 
         /// <summary>
         /// Discerns a <see cref='RecordFields'/> for a specified record type

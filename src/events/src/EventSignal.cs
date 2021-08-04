@@ -115,7 +115,7 @@ namespace Z0
         }
 
         public EmittingTableEvent<T> EmittingTable<T>(FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
         {
             var e = emittingTable<T>(Source, dst);
             Raise(e);
@@ -123,7 +123,7 @@ namespace Z0
         }
 
         public EmittedTableEvent<T> EmittedTable<T>(Count count, FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
         {
             var e = emittedTable<T>(Source, count, dst);
             Raise(e);
@@ -131,7 +131,7 @@ namespace Z0
         }
 
         public EmittedTableEvent<T> EmittedTable<T>(FS.FilePath dst)
-            where T : struct, IRecord<T>
+            where T : struct
         {
             var e = emittedTable<T>(Source, dst);
             Raise(e);

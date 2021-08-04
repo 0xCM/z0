@@ -10,7 +10,7 @@ namespace Z0
 
     [Event(Kind)]
     public class EmittedTableEvent<T> : ITerminalEvent<EmittedTableEvent<T>>
-        where  T : struct, IRecord<T>
+        where  T : struct
     {
         public const string EventName = GlobalEvents.EmittedTable;
 
