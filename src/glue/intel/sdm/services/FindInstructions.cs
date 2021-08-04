@@ -12,21 +12,21 @@ namespace Z0.Asm
 
     partial class IntelSdm
     {
-        public ReadOnlySpan<TextLine> ReadLinedSdm()
-        {
-            var dst = list<TextLine>();
-            var src = LinedSdmPath();
-            using var reader = src.LineReader(TextEncodingKind.Utf8);
-            while(reader.Next(out var line))
-                dst.Add(line);
-            return dst.ViewDeposited();
-        }
+        // ReadOnlySpan<TextLine> ReadLinedSdm()
+        // {
+        //     var dst = list<TextLine>();
+        //     var src = SdmImportPath();
+        //     using var reader = src.LineReader(TextEncodingKind.Utf8);
+        //     while(reader.Next(out var line))
+        //         dst.Add(line);
+        //     return dst.ViewDeposited();
+        // }
 
         public SortedSpan<UnicodeLine> MatchHeaderPatterns(VolDigit vol)
         {
             var dst = bag<UnicodeLine>();
             var log = ProcessLog("instructions");
-            var lines = ReadLinedVolume(vol);
+            var lines = LoadImportedVolume(vol);
             var count = lines.Length;
             var flow = EmittingFile(log);
             using var logger = log.Writer();

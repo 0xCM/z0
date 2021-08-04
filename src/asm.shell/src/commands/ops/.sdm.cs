@@ -10,8 +10,9 @@ namespace Z0.Asm
         Outcome ProcessSdm(CmdArgs args)
         {
             var sdm = Wf.IntelSdm();
-            var lines = sdm.MatchHeaderPatterns(SdmModels.VolDigit.V2);
-            return true;
+            var result = sdm.Process();
+            //var lines = sdm.MatchHeaderPatterns(SdmModels.VolDigit.V2);
+            return result;
         }
     }
 }

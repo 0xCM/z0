@@ -49,7 +49,7 @@ namespace Z0
         [CmdOp("process-intel-sdm")]
         public Outcome ProcessIntelSdm(CmdArgs args)
         {
-            Wf.IntelSdm().Run();
+            Wf.IntelSdm().Process();
             return true;
         }
 

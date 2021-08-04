@@ -4,21 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using System.Reflection;
-
-
-    public readonly struct MsBuildImports
-    {
-        public Assembly MsBuildFramework
-            => typeof(Microsoft.Build.Framework.BuildEngineResult).Assembly;
-
-        public Assembly MsBuildTasks
-            => typeof(Microsoft.Build.Tasks.AssignCulture).Assembly;
-
-        public Assembly MsBuildUtilities
-            => typeof(Microsoft.Build.Utilities.MuxLogger).Assembly;
-    }
-
     [ApiHost]
     public static class ProjectBuilds
     {

@@ -85,9 +85,25 @@ namespace Z0.Asm
         public static void render(in LineNumber line, in TocEntry src, ITextBuffer dst)
         {
             render(line, dst);
+            render(src, dst);
+        }
+
+        [Op]
+        public static void render(in TocEntry src, ITextBuffer dst)
+        {
             dst.Append(src.Title.Content.String);
             dst.Append(" -> ");
             render(src.Section, src.Title.Page, dst);
+        }
+
+        [Op]
+        public static void render(in TocTitle src, ITextBuffer dst)
+        {
+            dst.Append(src.Content.String);
+            dst.Append(Chars.Space);
+            dst.Append("Page(");
+            render(src.Page, dst);
+            dst.Append(")");
         }
 
         [Op]
@@ -158,6 +174,30 @@ namespace Z0.Asm
                     dst.Append(OverflowMarker);
                 break;
             }
+        }
+
+        [Op]
+        public static string format(in SectionNumber src)
+        {
+            var dst = text.buffer();
+            render(src,dst);
+            return dst.Emit();
+        }
+
+        [Op]
+        public static string format(in TocEntry src)
+        {
+            var dst = text.buffer();
+            render(src, dst);
+            return dst.Emit();
+        }
+
+        [Op]
+        public static string format(in TocTitle src)
+        {
+            var dst = text.buffer();
+            render(src, dst);
+            return dst.Emit();
         }
     }
 }

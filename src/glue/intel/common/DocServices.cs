@@ -11,15 +11,16 @@ namespace Z0.Asm
 
     public class DocServices : AppService<DocServices>
     {
-        AsmWs Workspace;
+        DevWs Ws;
 
         public DocServices()
         {
+
         }
 
         protected override void OnInit()
         {
-            Workspace = Wf.AsmWs();
+            Ws = Wf.DevWs();
         }
 
         public Outcome Split(FS.FilePath specpath)
@@ -107,7 +108,13 @@ namespace Z0.Asm
 
         void Split(in DocSplitSpec spec, IReceiver<LineRange> dst)
         {
-            var src = Workspace.SourceDocs("txt") + FS.file(spec.DocId,FS.Txt);
+            var src = Ws.Sources().Dataset("intel.pubs") + FS.file(spec.DocId, FS.Txt);
+            if(!src.Exists)
+            {
+                Error(FS.missing(src));
+                return;
+            }
+
             using var reader = src.Reader(TextEncodingKind.Unicode);
             var counter = 1u;
             var count = spec.LastLine - spec.FirstLine + 1;
@@ -122,7 +129,8 @@ namespace Z0.Asm
                     seek(lines, i++) = Lines.line(counter, line);
             }
 
-            Emit(range, Workspace.ImportDir("sdm") + FS.file(string.Format("{0}-{1}", spec.DocId, spec.Unit), FS.Txt));
+            var path = Ws.Imports().Subdir("intel.sdm") +  FS.file(string.Format("{0}-{1}", spec.DocId, spec.Unit), FS.Txt);
+            Emit(range, path);
             dst.Deposit(range);
         }
 

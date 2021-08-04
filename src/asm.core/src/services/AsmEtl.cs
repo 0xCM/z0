@@ -121,7 +121,7 @@ namespace Z0.Asm
             return distinct;
         }
 
-        public static uint LoadProcessAsm(FS.FilePath src, Span<ProcessAsm> dst)
+        public static Outcome<uint> LoadProcessAsm(FS.FilePath src, Span<ProcessAsm> dst)
         {
             var counter = 1u;
             var i = 0u;
@@ -134,7 +134,7 @@ namespace Z0.Asm
             {
                 result = AsmParser.parse(counter++, line, out seek(dst,i));
                 if(result.Fail)
-                    return i;
+                    return result;
                 else
                     i++;
 

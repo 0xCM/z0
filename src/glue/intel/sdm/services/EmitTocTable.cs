@@ -21,12 +21,12 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Outcome EmitAnalysis()
+        public Outcome EmitTocRecords()
         {
             var result = Outcome.Success;
             var flow = Wf.Running();
             var vols = VolumeMarkers(1,4);
-            var src = CombinedTocPath();
+            var src = TocImportPath();
             if(!src.Exists)
             {
                 result = (false,FS.missing(src));
@@ -89,7 +89,8 @@ namespace Z0.Asm
                 }
             }
 
-            Wf.Ran(flow, string.Format("Collected {0} toc entries", entries.Count));
+            var rowcount = EmitRows(entries.ViewDeposited(), TocEntryTable());
+            Wf.Ran(flow, string.Format("Collected {0} toc entries", rowcount));
             return result;
         }
     }

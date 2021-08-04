@@ -11,17 +11,16 @@ namespace Z0.Asm
         [CmdOp(".asm-exe")]
         Outcome AsmExe(CmdArgs args)
         {
-            const string ObjPattern = @"c:\tools\nasm\nasm.exe -f win64 {0} -o {1}";
             const string LinkPattern = @"j:\source\llvm\llvm-project\build\bin\clang-cl.exe  /MT {0} /link /entry:main /subsystem:console kernel32.lib /out:{1}";
 
             var result = Outcome.Success;
             var id = arg(args,0).Value;
+
             var asm = AsmWs.AppPath(id);
             var obj = AsmWs.ObjPath(id);
             var exe = AsmWs.ExePath(id);
 
-            var cmd1 = string.Format(ObjPattern, asm, obj);
-            result = RunWinCmd(cmd1, out _);
+            result = BuildAsmObj(id, AsmWs.AsmAppSrc(), AsmWs.ObjOut());
             if(result.Fail)
                 return result;
 

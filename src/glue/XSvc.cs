@@ -9,6 +9,12 @@ namespace Z0
 
     using static core;
 
+    public static partial class XTend
+    {
+
+
+    }
+
     [ApiHost]
     public static class XSvc
     {

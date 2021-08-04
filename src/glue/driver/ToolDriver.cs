@@ -2,11 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    partial class IntelSdm
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
+
+    public sealed class ToolDriver : AppService<ToolDriver>
     {
-        public Outcome EmitSdmSplits()
-            => DocServices.Split(SplitSpecs());
+
     }
 }

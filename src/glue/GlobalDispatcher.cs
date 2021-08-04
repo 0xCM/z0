@@ -8,7 +8,7 @@ namespace Z0
 
     using static core;
 
-    public readonly struct ControlDispatch
+    public readonly struct GlobalDispatcher
     {
         public static void dispatch(ReadOnlySpan<string> args)
         {

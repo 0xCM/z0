@@ -51,7 +51,7 @@ namespace Z0.Asm
 
         AddressMap _NativeAddressMap;
 
-        Index<ProcessAsm> _AsmGlobals;
+        Index<ProcessAsm> _ProcessAsm;
 
         Index<ProcessAsm> _AsmGlobalSelection;
 
@@ -62,7 +62,7 @@ namespace Z0.Asm
 
         const byte _NativeBufferCount = 4;
 
-        const uint _AsmGlobalCapacity = 720000;
+        const uint _ProcessAsmCapacity = 720000;
 
         uint _AsmGlobalCount;
 
@@ -75,7 +75,7 @@ namespace Z0.Asm
             RoutineName = Identifier.Empty;
             CodeSize = 0;
             _Assembled = array<byte>();
-            _AsmGlobals = Index<ProcessAsm>.Empty;
+            _ProcessAsm = Index<ProcessAsm>.Empty;
             _AsmGlobalSelection = Index<ProcessAsm>.Empty;
         }
 
@@ -111,22 +111,20 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        uint AsmGlobalCount()
+        uint ProcessAsmCount()
             => _AsmGlobalCount;
 
         [MethodImpl(Inline)]
-        void AsmGlobalCount(uint count)
+        void ProcessAsmCount(uint count)
         {
-            _AsmGlobalCount = min(count, _AsmGlobalCapacity);
+            _AsmGlobalCount = min(count, _ProcessAsmCapacity);
         }
 
-        Span<ProcessAsm> AsmGlobals()
+        Span<ProcessAsm> ProcessAsm()
         {
-            if(_AsmGlobals.IsEmpty)
-            {
-                _AsmGlobals = alloc<ProcessAsm>(_AsmGlobalCapacity);
-            }
-            return _AsmGlobals;
+            if(_ProcessAsm.IsEmpty)
+                _ProcessAsm = alloc<ProcessAsm>(_ProcessAsmCapacity);
+            return _ProcessAsm;
         }
 
         [MethodImpl(Inline)]
@@ -174,6 +172,9 @@ namespace Z0.Asm
         IToolWs ToolWs()
             => Ws.Tools();
 
+        FS.FilePath ToolScript(ToolId tool, string script)
+            => ToolWs().Script(tool, script);
+
         IWorkspace TableWs()
             => Ws.Tables();
 
@@ -208,7 +209,7 @@ namespace Z0.Asm
         }
 
         Outcome Run(CmdLine cmd, CmdVars vars, out ReadOnlySpan<TextLine> response)
-            => ScriptRunner.RunCmd(cmd, vars, ReceiveCmdStatus, ReceiveCmdError,  out response);
+            => ScriptRunner.RunCmd(cmd, vars, ReceiveCmdStatus, ReceiveCmdError, out response);
 
         Outcome RunWinCmd(string spec, out ReadOnlySpan<TextLine> response)
             => CmdRunner.Run(WinCmd.cmd(spec), out response);
@@ -282,24 +283,39 @@ namespace Z0.Asm
         Span<ProcessAsm> AsmGlobalSelection()
             => _AsmGlobalSelection.Edit;
 
-        Outcome LoadAsmGlobal(out ReadOnlySpan<ProcessAsm> dst)
+        Outcome BuildAsmObj(string id, FS.FolderPath src, FS.FolderPath dst)
         {
+            const string ScriptId = "emit-obj";
             var result = Outcome.Success;
-            var count = AsmGlobalCount();
-            if(count != 0)
+            var vars = Cmd.vars(
+                ("SrcId", id),
+                ("SrcDir", src.Format(PathSeparator.BS)),
+                ("DstDir", dst.Format(PathSeparator.BS))
+                );
+            var cmd = cmdline(ToolScript(Toolspace.nasm, ScriptId));
+            return Run(cmd, vars, out var response);
+        }
+
+        Outcome LoadProcessAsm(out ReadOnlySpan<ProcessAsm> dst)
+        {
+            if(ProcessAsmCount() != 0)
             {
-                dst = AsmGlobals();
-                return result;
+                dst = ProcessAsm();
+                return true;
             }
-            var archive = ApiPacks.Archive();
-            var path = archive.ProcessAsmPath();
-            var buffer = AsmGlobals();
-            Write(string.Format("Loading global asm from {0}", path.ToUri()));
-            count = AsmEtl.LoadProcessAsm(path, buffer);
-            AsmGlobalCount(count);
+            dst = default;
+            var path = ApiPacks.Archive().ProcessAsmPath();
+            var buffer = ProcessAsm();
+            Write(string.Format("Loading process asm from {0}", path.ToUri()));
+            var result = AsmEtl.LoadProcessAsm(path, buffer);
+            if(result.Fail)
+                return result;
+
+            var count = result.Data;
+            ProcessAsmCount(count);
             dst = buffer;
             _AsmGlobalSelection = alloc<ProcessAsm>(count);
-            Write(string.Format("Loaded {0} global asm records from {1}", count, path.ToUri()));
+            Write(string.Format("Loaded {0} process asm records from {1}", count, path.ToUri()));
             return result;
         }
 
@@ -307,6 +323,9 @@ namespace Z0.Asm
         {
             Write(string.Format("Emitted {0} records to {1}", count, dst.ToUri()));
         }
+
+        static CmdLine cmdline(FS.FilePath script)
+            => Cmd.cmdline(script.Format(PathSeparator.BS));
 
         static MsgPattern CapacityExceeded => "Capacity exceeded";
 

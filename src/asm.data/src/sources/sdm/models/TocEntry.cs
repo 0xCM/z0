@@ -11,9 +11,11 @@ namespace Z0.Asm
 
     partial struct SdmModels
     {
-        [StructLayout(LayoutKind.Sequential, Pack =1)]
-        public struct TocEntry
+        [StructLayout(LayoutKind.Sequential, Pack =1), Record(TableId)]
+        public struct TocEntry : IRecord<TocEntry>
         {
+            public const string TableId ="intel.sdm.toc-entries";
+
             public SectionNumber Section;
 
             public TocTitle Title;
@@ -24,6 +26,12 @@ namespace Z0.Asm
                 Section = sn;
                 Title = toc;
             }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
 
             public static TocEntry Empty => default;
         }

@@ -7,6 +7,7 @@ namespace Z0
     public interface IWorkspace : IFileArchive
     {
         Identifier Name {get;}
+
     }
 
     public interface IWorkspace<T> : IWorkspace

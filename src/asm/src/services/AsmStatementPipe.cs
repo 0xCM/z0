@@ -321,7 +321,7 @@ namespace Z0.Asm
                 }
             }
 
-            return Spans.sorted(@readonly(slice(buffer,0,counter)));
+            return Spans.sorted(@readonly(slice(buffer,1,counter)));
         }
 
         public uint EmitProcessAsm(SortedReadOnlySpan<ProcessAsm> src, FS.FilePath dst)

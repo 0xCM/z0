@@ -11,12 +11,12 @@ namespace Z0.Asm
         public Outcome EmitCombinedToc()
         {
             var result = Outcome.Success;
-            var src = IndividualTocPaths();
+            var src = TocPaths();
             if(src.IsEmpty)
-                return false;
-            var encoding = pair(TextEncodingKind.Unicode,TextEncodingKind.Unicode);
+                return (false, "Found no toc's to combine");
 
-            var dst = CombinedTocPath();
+            var encoding = pair(TextEncodingKind.Unicode, TextEncodingKind.Unicode);
+            var dst = TocImportPath();
             var flow = Wf.Running(string.Format("Creating combined toc from {0} source files", src.Length));
             DocServices.CombineDocs(src, dst, encoding);
             Wf.Ran(flow);

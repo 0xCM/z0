@@ -25,6 +25,12 @@ namespace Z0.Asm
                 Page = page;
             }
 
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
+
             public static TocTitle Empty => default;
         }
     }

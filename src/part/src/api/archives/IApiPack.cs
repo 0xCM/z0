@@ -13,10 +13,10 @@ namespace Z0
     {
         Timestamp Timestamp {get;}
 
-        ApiExtractSettings Settings {get;}
+        ApiExtractSettings ExtractSettings {get;}
 
         FS.FolderPath IFileArchive.Root
-            => Settings.ExtractRoot;
+            => ExtractSettings.ExtractRoot;
 
         FS.FolderPath DumpRoot()
             => Root + FS.folder(dumps);

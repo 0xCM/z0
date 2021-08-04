@@ -9,45 +9,31 @@ namespace Z0.Asm
     [ApiHost]
     public partial class IntelSdm : AppService<IntelSdm>
     {
-        const string dataset ="sdm";
-
-        const string logs = nameof(logs);
-
-        const string datasetlogs = dataset + "." + logs;
-
-        const string splits = nameof(splits);
-
         const string lined = nameof(lined);
-
-        const string charmap = nameof(charmap);
 
         const string unicode = nameof(unicode);
 
         const string toc = nameof(toc);
 
-        const string txt = nameof(txt);
-
-        const string unmapped = nameof(unmapped);
-
         DocServices DocServices;
 
-        AsmWs Workspace;
+        DevWs Ws;
 
         CharMapper CharMapper;
 
         protected override void OnInit()
         {
-            Workspace = Wf.AsmWs();
             DocServices = Wf.DocServices();
             CharMapper = Wf.CharMapper();
+            Ws = Wf.DevWs();
         }
 
         public void ClearTargets()
         {
-            ImportRoot().Clear();
+            ImportDir().Clear();
         }
 
-        public Outcome Run()
+        public Outcome Process()
         {
             var result = Outcome.Success;
 
@@ -59,23 +45,19 @@ namespace Z0.Asm
                 if(result.Fail)
                     return result;
 
-                result = EmitLinedSdm(1);
+                result = ImportVolume(1);
                 if(result.Fail)
                     return result;
 
-                result = EmitLinedSdm(2);
+                result = ImportVolume(2);
                 if(result.Fail)
                     return result;
 
-                result = EmitLinedSdm(3);
+                result = ImportVolume(3);
                 if(result.Fail)
                     return result;
 
-                result = EmitLinedSdm(4);
-                if(result.Fail)
-                    return result;
-
-                result = EmitLinedSdm();
+                result = ImportVolume(4);
                 if(result.Fail)
                     return result;
 
@@ -87,7 +69,7 @@ namespace Z0.Asm
                 if(result.Fail)
                     return result;
 
-                result = EmitAnalysis();
+                result = EmitTocRecords();
                 if(result.Fail)
                     return result;
 

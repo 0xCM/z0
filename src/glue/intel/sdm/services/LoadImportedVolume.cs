@@ -11,9 +11,9 @@ namespace Z0.Asm
 
     partial class IntelSdm
     {
-        public ReadOnlySpan<UnicodeLine> ReadLinedVolume(VolDigit digit)
+        public ReadOnlySpan<UnicodeLine> LoadImportedVolume(VolDigit digit)
         {
-            var path = LinedSdmPath((byte)digit);
+            var path = SdmImportPath((byte)digit);
             if(!path.Exists)
             {
                 Error(FS.missing(path));

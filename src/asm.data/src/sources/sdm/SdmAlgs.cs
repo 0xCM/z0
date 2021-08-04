@@ -20,14 +20,6 @@ namespace Z0.Asm
             => new Comment(src);
 
 
-        readonly struct Tokens
-        {
-            public const string EQ = "=";
-
-            public const string NEQ = "!=";
-
-        }
-
         public readonly struct Comparison
         {
             readonly uint Data;

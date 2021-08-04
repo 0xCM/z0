@@ -15,7 +15,7 @@ namespace Z0.Asm
             const string qid = "statements.rex";
 
             var counter = 0u;
-            var result = LoadAsmGlobal(out var records);
+            var result = LoadProcessAsm(out var records);
             if(!result)
                 return result;
 
@@ -24,8 +24,28 @@ namespace Z0.Asm
             var i = 0u;
             var count = AsmPrefixTests.rex(records, ref i, buffer);
             var filtered = slice(buffer,0,count);
-            QueryOut(@readonly(filtered), ProcessAsm.RenderWidths, qid);
+            QueryOut(@readonly(filtered), Z0.ProcessAsm.RenderWidths, qid);
             return result;
         }
+
+        [CmdOp(".api-qasm-vex")]
+        Outcome AsmQueryVex(CmdArgs args)
+        {
+            const string qid = "statements.vex";
+
+            var counter = 0u;
+            var result = LoadProcessAsm(out var records);
+            if(!result)
+                return result;
+
+            var buffer = AsmGlobalSelection();
+            buffer.Clear();
+            var i = 0u;
+            var count = AsmPrefixTests.vex(records, ref i, buffer);
+            var filtered = slice(buffer,0,count);
+            QueryOut(@readonly(filtered), Z0.ProcessAsm.RenderWidths, qid);
+            return result;
+        }
+
     }
 }

@@ -73,13 +73,13 @@ namespace Z0
 
         void EmitContext(IApiPack pack)
         {
-            if(pack.Settings.EmitContext)
+            if(pack.ExtractSettings.EmitContext)
                 EmitProcessContext(pack);
         }
 
         void EmitAnalyses(IApiPack pack)
         {
-            if(pack.Settings.Analyze)
+            if(pack.ExtractSettings.Analyze)
                 Wf.AsmAnalyzer().Analyze(SortedRoutines, Paths);
         }
 
