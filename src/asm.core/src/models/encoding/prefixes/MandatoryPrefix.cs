@@ -8,42 +8,34 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmCodes;
+    using static AsmPrefixCodes;
 
-    public struct BranchHint : IAsmPrefix<BranchHintCode>
+    public struct MandatoryPrefix : IAsmPrefix<MandatoryPrefixCode>
     {
-        BranchHintCode _Code;
+        public MandatoryPrefixCode Kind {get;}
 
         [MethodImpl(Inline)]
-        public BranchHint(BranchHintCode src)
+        public MandatoryPrefix(MandatoryPrefixCode src)
         {
-            _Code = src;
+            Kind = src;
         }
 
         public byte Encoded
         {
             [MethodImpl(Inline)]
-            get => (byte)_Code;
+            get => (byte)Kind;
         }
-
-        [MethodImpl(Inline)]
-        public BranchHintCode Code()
-            => _Code;
-
-        [MethodImpl(Inline)]
-        public void Code(BranchHintCode src)
-            => _Code = src;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => _Code == 0;
+            get => Kind == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => _Code != 0;
+            get => Kind != 0;
         }
 
         public override string ToString()
@@ -53,15 +45,15 @@ namespace Z0.Asm
             => Encoded.FormatHex();
 
         [MethodImpl(Inline)]
-        public static implicit operator BranchHint(BranchHintCode src)
-            => new BranchHint(src);
+        public static implicit operator MandatoryPrefix(MandatoryPrefixCode src)
+            => new MandatoryPrefix(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BranchHintCode(BranchHint src)
-            => src.Code();
+        public static implicit operator MandatoryPrefixCode(MandatoryPrefix src)
+            => src.Kind;
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(BranchHint src)
-            => (byte)src._Code;
+        public static implicit operator byte(MandatoryPrefix src)
+            => (byte)src.Kind;
     }
 }

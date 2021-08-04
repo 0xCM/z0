@@ -5,16 +5,21 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Collections.Generic;
-
-    using static Root;
 
     public class PartNames
     {
         public static IReadOnlyDictionary<PartId,PartName> NameLookup()
             => _Instance.IdNames;
+
+        public static PartName name(PartId id)
+        {
+            var lookup = NameLookup();
+            if(lookup.TryGetValue(id, out var name))
+                return name;
+            else
+                return new PartName(id, id.ToString().ToLower());
+        }
 
         public static bool FindId(string symbol, out PartId id)
             => _Instance.SymbolIds.TryGetValue(symbol, out id);
@@ -22,7 +27,6 @@ namespace Z0
         static PartNames _Instance;
 
         Dictionary<PartId,PartName> IdNames;
-
 
         Dictionary<string,PartId> SymbolIds;
 
@@ -40,7 +44,7 @@ namespace Z0
             {
                 var id = (PartId)f.GetRawConstantValue();
                 var symbol = f.Tag<SymbolAttribute>().MapValueOrElse(a => a.Symbol, () => f.Name);
-                var name = new PartName(id,symbol);
+                var name = new PartName(id, symbol);
                 IdNames.TryAdd(id,name);
                 SymbolIds.TryAdd(symbol,id);
             }

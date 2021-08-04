@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmCodes;
+    using static AsmPrefixCodes;
 
     public struct BndPrefix : IAsmPrefix<BndPrefixCode>
     {
@@ -59,6 +59,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator byte(BndPrefix src)
             => (byte)src._Code;
-
     }
 }

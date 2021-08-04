@@ -13,7 +13,7 @@ namespace Z0.Asm
         Outcome XedIsa(CmdArgs args)
         {
             var chipName = arg(args,0).Value;
-            var symbols = Symbols.index<XedModels.ChipCode>();
+            var symbols = Xed.ChipCodes();
             if(!symbols.Lookup(chipName, out var chip))
                 return (false, string.Format("Chip '{0}' not found", chipName));
 
@@ -22,7 +22,6 @@ namespace Z0.Asm
                 return result;
 
             var kinds = map[chip].ToHashSet();
-
             var matches = list<XedFormImport>();
             var forms = Xed.LoadForms();
             var count = forms.Length;
@@ -37,7 +36,6 @@ namespace Z0.Asm
             var formatter = Tables.formatter<XedFormImport>();
             var rows = Tables.emit(matches.ViewDeposited(), XedFormImport.RenderWidths, dst);
             Write(EmittedQueryResults.Format(rows,dst));
-
             return true;
         }
     }

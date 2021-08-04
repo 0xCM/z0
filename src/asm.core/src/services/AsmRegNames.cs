@@ -20,8 +20,7 @@ namespace Z0.Asm
         {
             const byte RegLength = 5;
             const string Data = "xmm1 xmm2 xmm3 xmm4 xmm5 xmm6 xmm7 xmm8 xmm9 xmm10xmm11xmm12xmm13xmm14xmm15xmm16xmm17xmm18xmm19xmm20xmm21xmm22xmm23xmm24xmm25xmm26xmm27xmm28xmm29xmm30xmm31";
-            var i0 = (ushort)((uint)index*RegLength);
-            return new RegName(first(recover<ulong>(slice(text.chars(Data), i0, RegLength))));
+            return new RegName(first(recover<ulong>(slice(text.chars(Data), offset(RegLength, index), RegLength))));
         }
 
         [MethodImpl(Inline), Op]
@@ -123,6 +122,10 @@ namespace Z0.Asm
 
             return (ushort)(row + col);
         }
+
+        [MethodImpl(Inline), Op]
+        static ushort offset(byte width, RegIndexCode index)
+            => (ushort)((uint)index*width);
 
         [MethodImpl(Inline), Op]
         static byte length(ReadOnlySpan<char> src)

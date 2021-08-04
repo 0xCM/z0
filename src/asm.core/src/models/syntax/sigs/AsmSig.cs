@@ -11,12 +11,12 @@ namespace Z0.Asm
 
     public readonly struct AsmSig
     {
-        public AsmMnemonic Mnemonic {get;}
+        public AsmMnemonicCode Mnemonic {get;}
 
         public Index<AsmSigOp> Operands {get;}
 
         [MethodImpl(Inline)]
-        public AsmSig(AsmMnemonic monic, Index<AsmSigOp> operands)
+        public AsmSig(AsmMnemonicCode monic, Index<AsmSigOp> operands)
         {
             Mnemonic = monic;
             Operands = operands;
@@ -25,25 +25,19 @@ namespace Z0.Asm
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Mnemonic.IsEmpty;
+            get => Mnemonic == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Mnemonic.IsNonEmpty;
+            get => Mnemonic != 0;
         }
-
-        public string Format()
-            => AsmRender.format(this);
-
-        public override string ToString()
-            => Format();
 
         public static AsmSig Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmSig(AsmMnemonic.Empty, sys.empty<AsmSigOp>());
+            get => new AsmSig(0, sys.empty<AsmSigOp>());
         }
     }
 }

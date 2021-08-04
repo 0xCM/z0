@@ -8,34 +8,42 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmCodes;
+    using static AsmPrefixCodes;
 
-    public struct MandatoryPrefix : IAsmPrefix<MandatoryPrefixCode>
+    public struct BranchHintPrefix : IAsmPrefix<BranchHintCode>
     {
-        public MandatoryPrefixCode Kind {get;}
+        BranchHintCode _Code;
 
         [MethodImpl(Inline)]
-        public MandatoryPrefix(MandatoryPrefixCode src)
+        public BranchHintPrefix(BranchHintCode src)
         {
-            Kind = src;
+            _Code = src;
         }
 
         public byte Encoded
         {
             [MethodImpl(Inline)]
-            get => (byte)Kind;
+            get => (byte)_Code;
         }
+
+        [MethodImpl(Inline)]
+        public BranchHintCode Code()
+            => _Code;
+
+        [MethodImpl(Inline)]
+        public void Code(BranchHintCode src)
+            => _Code = src;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Kind == 0;
+            get => _Code == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Kind != 0;
+            get => _Code != 0;
         }
 
         public override string ToString()
@@ -45,15 +53,15 @@ namespace Z0.Asm
             => Encoded.FormatHex();
 
         [MethodImpl(Inline)]
-        public static implicit operator MandatoryPrefix(MandatoryPrefixCode src)
-            => new MandatoryPrefix(src);
+        public static implicit operator BranchHintPrefix(BranchHintCode src)
+            => new BranchHintPrefix(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MandatoryPrefixCode(MandatoryPrefix src)
-            => src.Kind;
+        public static implicit operator BranchHintCode(BranchHintPrefix src)
+            => src.Code();
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(MandatoryPrefix src)
-            => (byte)src.Kind;
+        public static implicit operator byte(BranchHintPrefix src)
+            => (byte)src._Code;
     }
 }

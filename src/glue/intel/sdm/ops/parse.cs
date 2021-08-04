@@ -43,7 +43,7 @@ namespace Z0.Asm
         public static int index(ReadOnlySpan<char> src, string marker)
         {
             var index = src.IndexOf(marker);
-            if(index > CommonMarkers.TableNumber.Length)
+            if(index > Markers.TableNumber.Length)
                 return NotFound;
             else
                 return index;
@@ -53,7 +53,7 @@ namespace Z0.Asm
         {
             dst = TocTitle.Empty;
             var page = ChapterPage.Empty;
-            if(!src.Contains(CommonMarkers.TocTitle, NoCase))
+            if(!src.Contains(Markers.TocTitle, NoCase))
                 return false;
 
             var i = placeholder(src);
@@ -92,11 +92,11 @@ namespace Z0.Asm
         public static Outcome parse(string src, out ChapterNumber dst)
         {
             dst = ChapterNumber.Empty;
-            var i = text.index(src, CommonMarkers.ChapterNumber);
+            var i = text.index(src, Markers.ChapterNumber);
             if(i == NotFound)
                 return false;
 
-            var numeric = slice(src, i + CommonMarkers.ChapterNumber.Length);
+            var numeric = slice(src, i + Markers.ChapterNumber.Length);
             if(SP.uint8(base10,numeric, out var cn))
             {
                 dst = cn;
@@ -169,10 +169,10 @@ namespace Z0.Asm
             const char NumberEnd = Chars.Dot;
             dst = TableNumber.Empty;
 
-            var i = index(src, CommonMarkers.TableNumber);
+            var i = index(src, Markers.TableNumber);
             if(i != NotFound)
             {
-                dst = tablenumber(slice(src, i + CommonMarkers.TableNumber.Length));
+                dst = tablenumber(slice(src, i + Markers.TableNumber.Length));
                 return true;
             }
             return false;

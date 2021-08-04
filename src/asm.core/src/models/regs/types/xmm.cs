@@ -26,8 +26,11 @@ namespace Z0.Asm
                 Index = index;
             }
 
+            public RegName Name
+                => AsmRegNames.name(this);
+
             public string Format()
-                => ((K)Index).ToString();
+                => Name.Format();
 
             public override string ToString()
                 => Format();

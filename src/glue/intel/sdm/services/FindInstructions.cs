@@ -22,28 +22,28 @@ namespace Z0.Asm
         //     return dst.ViewDeposited();
         // }
 
-        public SortedSpan<UnicodeLine> MatchHeaderPatterns(VolDigit vol)
-        {
-            var dst = bag<UnicodeLine>();
-            var log = ProcessLog("instructions");
-            var lines = LoadImportedVolume(vol);
-            var count = lines.Length;
-            var flow = EmittingFile(log);
-            using var logger = log.Writer();
-            var matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n0));
-            iter(matched, x => dst.Add(x));
-            matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n1));
-            iter(matched, x => dst.Add(x));
-            matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n2));
-            iter(matched, x => dst.Add(x));
-            matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n3));
-            iter(matched, x => dst.Add(x));
+        // public SortedSpan<UnicodeLine> MatchHeaderPatterns(VolDigit vol)
+        // {
+        //     var dst = bag<UnicodeLine>();
+        //     var log = ProcessLog("instructions");
+        //     var lines = LoadImportedVolume(vol);
+        //     var count = lines.Length;
+        //     var flow = EmittingFile(log);
+        //     using var logger = log.Writer();
+        //     var matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n0));
+        //     iter(matched, x => dst.Add(x));
+        //     matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n1));
+        //     iter(matched, x => dst.Add(x));
+        //     matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n2));
+        //     iter(matched, x => dst.Add(x));
+        //     matched = MatchPattern(lines, OpCodeHeaderPatterns.HP(n3));
+        //     iter(matched, x => dst.Add(x));
 
-            var result = dst.ToSortedSpan();
-            iter(result, r => logger.WriteLine(r));
-            EmittedFile(flow, result.Length);
-            return result;
-        }
+        //     var result = dst.ToSortedSpan();
+        //     iter(result, r => logger.WriteLine(r));
+        //     EmittedFile(flow, result.Length);
+        //     return result;
+        // }
 
         ReadOnlySpan<UnicodeLine> MatchPattern(ReadOnlySpan<UnicodeLine> src, LinePattern pattern)
         {

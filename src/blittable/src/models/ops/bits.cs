@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using Z0.BZ;
-
     partial struct Blit
     {
         [MethodImpl(Inline), Op]

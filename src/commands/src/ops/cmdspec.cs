@@ -23,22 +23,6 @@ namespace Z0
         public static CmdSpec cmdspec(string name, CmdArgs args)
             => new CmdSpec(name, args);
 
-        // [Op]
-        // public static CmdSpec cmdspec(string input)
-        // {
-        //     var i = input.IndexOf(Chars.Space);
-        //     var _args = CmdArgs.Empty;
-        //     var name = input;
-        //     if(i != NotFound)
-        //     {
-        //         name = text.left(input,i);
-        //         var right = text.right(input,i);
-        //         if(nonempty(right))
-        //             _args = args(right.Split(Chars.Space));
-        //     }
-        //     return new CmdSpec(name,_args);
-        // }
-
         [Op]
         public static CmdSpec cmdspec(ReadOnlySpan<char> input)
         {

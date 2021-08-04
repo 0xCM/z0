@@ -296,7 +296,7 @@ namespace Z0.Asm
             xmm0 = r0,
 
             [Symbol("xmm1")]
-            XMM1 = r1,
+            xmm1 = r1,
 
             [Symbol("xmm2")]
             xmm2 = r2,

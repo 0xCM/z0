@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct SymbolicTools
+    partial class text
     {
         [MethodImpl(Inline), Op]
         public static uint lowercase(ref uint i, ReadOnlySpan<char> src, Span<char> dst)

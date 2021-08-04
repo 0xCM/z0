@@ -15,7 +15,9 @@ namespace Z0.BZ
     public readonly struct name<T> : IName<name<T>,T>
         where T : unmanaged
     {
-        public static uint MaxLength(byte psz) => size<T>()*psz - 1;
+        [MethodImpl(Inline)]
+        public static uint MaxLength(byte psz)
+            => size<T>()*psz - 1;
 
         public T Storage {get;}
 

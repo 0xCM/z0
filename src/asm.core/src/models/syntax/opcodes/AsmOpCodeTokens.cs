@@ -154,6 +154,12 @@ namespace Z0.Asm
 
             [Symbol("256")]
             W256,
+
+            [Symbol("vvvv", "Indicates non-destructive source register encoding")]
+            vvvv,
+
+            [Symbol("mmmmm", "In a 3-byte vex prefix, indicates the least 5 bits of the middle byte")]
+            mmmmm,
         }
 
         [SymSource]
@@ -185,6 +191,8 @@ namespace Z0.Asm
 
             [Symbol("512")]
             W512,
+
+
         }
 
         // "cb\0" + "cw\0" + "cd\0" + "cp\0" + "c0\0" + "ct\0"

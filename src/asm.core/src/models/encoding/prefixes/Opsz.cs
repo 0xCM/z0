@@ -7,17 +7,17 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmCodes;
+    using static AsmPrefixCodes;
 
     /// <summary>
-    /// Address size override
+    /// Operand size override
     /// </summary>
-    public readonly struct Adsz : IAsmPrefix<SizeOverrideCode>
+    public readonly struct Opsz : IAsmPrefix<Opsz>
     {
         public SizeOverrideCode Code {get;}
 
         [MethodImpl(Inline)]
-        public Adsz(SizeOverrideCode code)
+        public Opsz(SizeOverrideCode code)
         {
             Code = code;
         }
@@ -35,9 +35,9 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator SizeOverrides(Adsz src)
-            => new SizeOverrides(false, src.Code !=0);
+        public static implicit operator SizeOverrides(Opsz src)
+            =>new SizeOverrides(src.Code !=0, false);
 
-        public static Adsz Empty => default;
+        public static Opsz Empty => default;
     }
 }

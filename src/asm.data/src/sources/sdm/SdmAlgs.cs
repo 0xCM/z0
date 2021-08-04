@@ -40,6 +40,7 @@ namespace Z0.Asm
             {
                 Content = src;
             }
+
             public string Format()
                 => format(this);
 

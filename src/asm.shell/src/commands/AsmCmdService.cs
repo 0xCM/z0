@@ -57,7 +57,6 @@ namespace Z0.Asm
 
         byte[] _Assembled;
 
-
         const ushort _NativeBufferSize = Pow2.T14;
 
         const byte _NativeBufferCount = 4;
@@ -79,7 +78,6 @@ namespace Z0.Asm
             _AsmGlobalSelection = Index<ProcessAsm>.Empty;
         }
 
-
         protected override void Initialized()
         {
             Ws = Wf.DevWs();
@@ -96,7 +94,6 @@ namespace Z0.Asm
             AsmToolchain = Wf.AsmToolchain();
             AsmTables = Wf.AsmTables();
             State.DevWs(Ws);
-
         }
 
         protected override void Disposing()
@@ -131,7 +128,7 @@ namespace Z0.Asm
         ref readonly NativeBufferSeq NativeBuffers()
             => ref _NativeBuffers;
 
-        void WriteSyms<K>(Symbols<K> src)
+        Outcome WriteSyms<K>(Symbols<K> src)
             where K : unmanaged
         {
             const string Pattern1 = "{0,-4} {1}";
@@ -149,6 +146,7 @@ namespace Z0.Asm
                 else
                     Write(string.Format(Pattern2, key, name, expr));
             }
+            return true;
         }
 
         IWorkspace Imports()

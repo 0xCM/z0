@@ -4,14 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static AsmOperands;
     partial class AsmCmdService
     {
-        [CmdOp(".xed-attribs")]
-        Outcome XedAttribs(CmdArgs args)
+        [CmdOp(".asm-regs")]
+        Outcome ShowAsmRegs(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = Xed.Attributes();
-            WriteSyms(src);
+            xmm r = AsmRegOps.xmm0;
+            var counter = 0;
+            while(counter++ < 36)
+            {
+                Write(r++);
+            }
+
             return result;
         }
     }

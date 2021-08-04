@@ -17,9 +17,11 @@ namespace Z0
 
         IWorkerLog Witness;
 
+        string Mode;
+
         protected AppCmdService()
         {
-
+            Mode = EmptyString;
         }
 
         protected override void OnInit()
@@ -34,9 +36,35 @@ namespace Z0
             Witness?.Dispose();
         }
 
+        string Prompt()
+            => text.empty(Mode) ? "cmd> " : string.Format("cmd {0}> ",Mode);
+
+        [CmdOp(".mode")]
+        Outcome SetMode(CmdArgs args)
+        {
+            if(args.Count == 0)
+                return (false, "Mode name unspecified");
+
+            Mode = arg(args,0);
+            return true;
+        }
 
         CmdSpec Next()
-            => Cmd.cmdspec(term.prompt("cmd> "));
+        {
+            var input = term.prompt(Prompt());
+            if(nonempty(Mode))
+            {
+                if(input == ".mode-exit")
+                {
+                    Mode = EmptyString;
+                    return CmdSpec.Empty;
+                }
+
+                input = string.Format(".mode-{0}-", input);
+            }
+
+            return Cmd.cmdspec(input);
+        }
 
         public void Run()
         {
@@ -45,7 +73,7 @@ namespace Z0
             {
                 if(input.IsNonEmpty)
                 {
-                    Witness.LogStatus(string.Format("cmd> {0}",input.Format()));
+                    Witness.LogStatus(string.Format("{0} {1}", Prompt(), input.Format()));
                     Dispatch(input);
                 }
 
@@ -65,13 +93,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Dispatcher.Supported;
-        }
-
-        [CmdOp(".cmdlist")]
-        Outcome ShowCommands(CmdArgs args)
-        {
-            iter(Supported, reg => Wf.Row(reg));
-            return true;
         }
 
         protected static Outcome argerror(string value)

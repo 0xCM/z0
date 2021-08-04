@@ -6,13 +6,12 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Root;
     using static core;
 
-    using REP = AsmCodes.RepeatPrefixCode;
-    using L = AsmCodes.LockPrefixCode;
+    using REP = AsmPrefixCodes.RepeatPrefixCode;
+    using L = AsmPrefixCodes.LockPrefixCode;
 
     [ApiHost]
     public readonly struct AsmPrefixTests

@@ -10,9 +10,9 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using RFI = AsmCodes.RexFieldIndex;
+    using RFI = AsmPrefixCodes.RexFieldIndex;
 
-    using static AsmCodes;
+    using static AsmPrefixCodes;
 
     /// <summary>
     /// REX = [ 0100 | REX.W:4 | R:3 | X:2 | B:1 ]

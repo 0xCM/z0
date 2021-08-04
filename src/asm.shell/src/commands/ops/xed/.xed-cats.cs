@@ -8,12 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".xed-cats")]
         Outcome XedCategories(CmdArgs args)
-        {
-            var result = Outcome.Success;
-
-            var src = Xed.Categories();
-            WriteSyms(src);
-            return result;
-        }
+            => WriteSyms(Xed.Categories());
     }
 }

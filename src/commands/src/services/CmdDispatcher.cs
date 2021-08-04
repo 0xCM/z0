@@ -21,8 +21,8 @@ namespace Z0
         public ReadOnlySpan<string> Supported
             => Lookup.Specs;
 
-        public Outcome Dispatch(CmdSpec cmd)
-            => Dispatch(cmd.Name, cmd.Args);
+        public Outcome Dispatch(string command)
+            => Dispatch(command, CmdArgs.Empty);
 
         public Outcome Dispatch(string command, CmdArgs args)
         {
@@ -38,8 +38,5 @@ namespace Z0
                 return e;
             }
         }
-
-        public Outcome Dispatch(string command)
-            => Dispatch(command, CmdArgs.Empty);
     }
 }

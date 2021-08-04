@@ -53,6 +53,9 @@ namespace Z0.Asm
         public Symbols<Extension> IsaExtensions()
             => Symbols.index<Extension>();
 
+        public Symbols<ChipCode> ChipCodes()
+            => Symbols.index<ChipCode>();
+
         public Symbols<AttributeKind> Attributes()
             => Symbols.index<AttributeKind>();
 
@@ -80,25 +83,25 @@ namespace Z0.Asm
         public Outcome LoadChipMap(out ChipMap dst)
             => Parsers.ParseChipMap(ChipSourcePath(), out dst);
 
-        public Index<XedSummaryRow> LoadSummaries()
-            => LoadSummaries(SummaryTable());
+        // public Index<XedSummaryRow> LoadSummaries()
+        //     => LoadSummaries(SummaryTable());
 
-        public Index<XedSummaryRow> LoadSummaries(FS.FilePath src)
-        {
-            var flow  = Wf.Running(string.Format("Loading summary records from {0}", src.ToUri()));
-            var doc = TextGrids.parse(src).Require();
-            var count = doc.RowCount;
-            var buffer = alloc<XedSummaryRow>(count);
-            if(count != 0)
-            {
-                ref var dst = ref first(buffer);
-                for(var i=0; i<count; i++)
-                    LoadSummaryRow(doc[i], ref seek(dst, i));
-            }
+        // public Index<XedSummaryRow> LoadSummaries(FS.FilePath src)
+        // {
+        //     var flow  = Wf.Running(string.Format("Loading summary records from {0}", src.ToUri()));
+        //     var doc = TextGrids.parse(src).Require();
+        //     var count = doc.RowCount;
+        //     var buffer = alloc<XedSummaryRow>(count);
+        //     if(count != 0)
+        //     {
+        //         ref var dst = ref first(buffer);
+        //         for(var i=0; i<count; i++)
+        //             LoadSummaryRow(doc[i], ref seek(dst, i));
+        //     }
 
-            Wf.Ran(flow, string.Format("Loaded {0} records from {1}", count, src.ToUri()));
-            return buffer;
-        }
+        //     Wf.Ran(flow, string.Format("Loaded {0} records from {1}", count, src.ToUri()));
+        //     return buffer;
+        // }
 
         public ReadOnlySpan<XedFormImport> LoadForms()
         {
@@ -197,7 +200,6 @@ namespace Z0.Asm
             var aspects = EmitOperandKinds(XedTables);
             var partition = Partition(aspects);
         }
-
 
         public Outcome EmitChipMap(FS.FolderPath dir)
         {
@@ -491,33 +493,33 @@ namespace Z0.Asm
         FS.FilePath OperandKindImportPath(FS.FolderPath dir)
             => dir + FS.file(Tables.identify<XedOperandKind>().Format(), FS.Csv);
 
-        FS.FilePath SummaryTable()
-            => XedTables + FS.file("summary", FS.Csv);
+        // FS.FilePath SummaryTable()
+        //     => XedTables + FS.file("summary", FS.Csv);
 
         const char CommentMarker = Chars.Hash;
 
         const char FieldDelimiter = Chars.Space;
 
-        static bool LoadSummaryRow(in TextRow src, ref XedSummaryRow dst)
-        {
-            if(src.CellCount == 10)
-            {
-                var i=0;
-                dst.Class = src[i++];
-                dst.Category = src[i++];
-                dst.Extension = src[i++];
-                dst.IsaSet = src[i++];
-                dst.IForm = src[i++];
-                dst.BaseCode = HexByteParser.Service.ParseData(src[i++]).Value ?? BinaryCode.Empty;
-                dst.Mod = src[i++];
-                dst.Reg = src[i++];
-                dst.Pattern = src[i++];
-                dst.Operands = src[i++];
-                return true;
-            }
+        // static bool LoadSummaryRow(in TextRow src, ref XedSummaryRow dst)
+        // {
+        //     if(src.CellCount == 10)
+        //     {
+        //         var i=0;
+        //         dst.Class = src[i++];
+        //         dst.Category = src[i++];
+        //         dst.Extension = src[i++];
+        //         dst.IsaSet = src[i++];
+        //         dst.IForm = src[i++];
+        //         dst.BaseCode = HexByteParser.Service.ParseData(src[i++]).Value ?? BinaryCode.Empty;
+        //         dst.Mod = src[i++];
+        //         dst.Reg = src[i++];
+        //         dst.Pattern = src[i++];
+        //         dst.Operands = src[i++];
+        //         return true;
+        //     }
 
-            return false;
-        }
+        //     return false;
+        // }
 
         static Outcome ParseSummary(TextLine src, out XedFormSource dst)
         {

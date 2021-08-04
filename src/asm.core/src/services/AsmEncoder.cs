@@ -11,9 +11,9 @@ namespace Z0.Asm
     using static System.Runtime.Intrinsics.X86.Sse3;
     using static Root;
     using static core;
-    using static AsmCodes;
+    using static AsmPrefixCodes;
 
-    using K = AsmCodes.RexPrefixCode;
+    using K = AsmPrefixCodes.RexPrefixCode;
 
     [ApiHost]
     public readonly partial struct AsmEncoder
@@ -35,7 +35,7 @@ namespace Z0.Asm
             => new AsmPrefix(0);
 
         [MethodImpl(Inline), Op]
-        public static BranchHint hint(bit bt)
+        public static BranchHintPrefix hint(bit bt)
             => bt ? BranchHintCode.BT : BranchHintCode.BNT;
 
         [MethodImpl(Inline), Op]

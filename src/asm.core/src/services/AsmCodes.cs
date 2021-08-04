@@ -12,10 +12,6 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmCodes
     {
-        public static RexPrefixCode RexW => RexPrefixCode.W;
-
-        public static RexPrefixCode RexB => RexPrefixCode.B;
-
         public static GpClass GP => default;
 
         public static SegClass SEG => default;

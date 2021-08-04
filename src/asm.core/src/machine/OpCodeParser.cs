@@ -17,7 +17,6 @@ namespace Z0.Asm
 
     public readonly partial struct Machines
     {
-
         struct CharParserState<T>
             where T : unmanaged
         {
@@ -101,238 +100,20 @@ namespace Z0.Asm
                 "W128\0" +
                 "W256\0";
 
-
             public override bit Accept(char src)
-            {
-                throw new NotImplementedException();
-            }
+                => default;
 
             public override bit Finished()
-            {
-                throw new NotImplementedException();
-            }
+                => default;
 
             protected override void Reset()
             {
-                throw new NotImplementedException();
+
             }
         }
 
         public sealed class OpCodeParser : CharParser
         {
-            const string LegacyPrefixTokens =
-                "66\0" +
-                "F2\0" +
-                "F3\0" +
-                "0F\0" +
-                "0F38\0";
-
-            const string ModRMTokens =
-                "/r\0" +
-                "/0\0" +
-                "/1\0" +
-                "/2\0" +
-                "/3\0" +
-                "/4\0" +
-                "/5\0" +
-                "/6\0" +
-                "/7\0";
-
-            const string RexPrefixTokens =
-                "REX\0" +
-                "REX.W\0" +
-                "REX.R\0" +
-                "REX.X\0" +
-                "REX.B\0";
-
-            const string RexBTokens =
-                "+rb\0" +
-                "+rw\0" +
-                "+rd\0" +
-                "+ro\0" +
-                "N.A.\0" +
-                "N.E\0";
-
-            static bit match(ReadOnlySpan<char> src, out RexBToken dst)
-            {
-                var matched = bit.Off;
-                var length = src.Length;
-                dst = default;
-                if(length < 3)
-                    return matched;
-
-                ref readonly var c0 = ref skip(src,0);
-                ref readonly var c1 = ref skip(src,1);
-                ref readonly var c2 = ref skip(src,2);
-
-                switch(length)
-                {
-                    case 3:
-                        switch(c0)
-                        {
-                            case '+':
-                                switch(c1)
-                                {
-                                    case 'r':
-                                        switch(c2)
-                                        {
-                                            case 'b':
-                                                dst = RexBToken.rb;
-                                                matched = true;
-                                            break;
-                                            case 'w':
-                                                dst = RexBToken.rw;
-                                                matched = true;
-                                            break;
-                                            case 'd':
-                                                dst = RexBToken.rd;
-                                                matched = true;
-                                            break;
-                                            case 'o':
-                                                dst = RexBToken.ro;
-                                                matched = true;
-                                            break;
-                                        }
-                                    break;
-                                }
-                            break;
-                        }
-
-                    break;
-                    case 4:
-                        ref readonly var c3 = ref skip(src,3);
-                        switch(c0)
-                        {
-                            case 'N':
-                            switch(c1)
-                            {
-                                case '.':
-                                switch(c2)
-                                {
-                                    case 'A':
-                                        dst = RexBToken.NA;
-                                        matched = true;
-                                    break;
-                                    case 'E':
-                                        dst = RexBToken.NE;
-                                        matched = true;
-                                    break;
-                                }
-                                break;
-                            }
-                            break;
-                        }
-
-                    break;
-                }
-
-                return matched;
-            }
-
-            const string EVexTokens =
-                "EVEX\0" +
-                "VEX\0" +
-                "LZ\0" +
-                "LIG\0" +
-                "WIG\0" +
-                "W0\0" +
-                "W1\0" +
-                "W128\0" +
-                "W256\0" +
-                "W512\0";
-
-            const string DispTokens =
-                "cb\0" +
-                "cw\0" +
-                "cd\0" +
-                "cp\0" +
-                "c0\0" +
-                "ct\0";
-
-            static bit match(ReadOnlySpan<char> src,  out DispToken dst)
-            {
-                dst = default;
-                var matched = bit.Off;
-                if(src.Length < 2)
-                    return matched;
-
-                ref readonly var c0 = ref skip(src,0);
-                ref readonly var c1 = ref skip(src,1);
-                switch(c0)
-                {
-                    case 'c':
-                    switch(c1)
-                    {
-                        case 'b':
-                            dst = DispToken.cb;
-                            matched = true;
-                        break;
-
-                        case 'w':
-                            dst = DispToken.cw;
-                            matched = true;
-                        break;
-
-                        case 'd':
-                            dst = DispToken.cd;
-                            matched = true;
-                        break;
-
-                        case 'p':
-                            dst = DispToken.cp;
-                            matched = true;
-                        break;
-
-                        case 'o':
-                            dst = DispToken.co;
-                            matched = true;
-                        break;
-
-                        case 't':
-                            dst = DispToken.cb;
-                            matched = true;
-                        break;
-                    }
-                    break;
-                }
-
-                return matched;
-            }
-
-            const string SegOverrideTokens =
-                "CS\0" +
-                "SS\0" +
-                "DS\0" +
-                "ES\0" +
-                "FS\0" +
-                "GS\0";
-
-            const string ImmSizeTokens =
-                "ib\0" +
-                "iw\0" +
-                "id\0" +
-                "io\0";
-
-            static string[] FpuDigitTokens = new string[]
-            {
-                "+0\0" +
-                "+1\0" +
-                "+2\0" +
-                "+3\0" +
-                "+4\0" +
-                "+5\0" +
-                "+6\0" +
-                "+7\0"
-            };
-
-            const string MaskTokens =
-                "{k1}\0" +
-                "{k1}{z}\0";
-
-            const string ExclusionTokens =
-                "NP\0" +
-                "NFx\0";
-
             enum AtomKind : byte
             {
                 None = 0,

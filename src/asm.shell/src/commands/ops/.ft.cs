@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static core;
     using static TmpTables;
 
-    using C = AsmCodes.RexPrefixCode;
+    using C = AsmPrefixCodes.RexPrefixCode;
 
     public readonly struct TmpTables
     {

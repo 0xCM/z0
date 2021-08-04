@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static Root;
 
-    using Patterns = SdmModels.PagePatterns;
-
     [ApiHost]
     public readonly partial struct SdmModels
     {

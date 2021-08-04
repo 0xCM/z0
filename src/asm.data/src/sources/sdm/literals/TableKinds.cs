@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static SdmModels;
-
     partial struct SdmModels
     {
         public readonly struct TableKinds

@@ -10,10 +10,14 @@ namespace Z0.Asm
     using static Pow2x8;
 
     using H = Hex8Seq;
-    using K = AsmCodes.LegacyPrefixKind;
+    using K = AsmPrefixCodes.LegacyPrefixKind;
 
-    partial struct AsmCodes
+    public readonly struct AsmPrefixCodes
     {
+        public static RexPrefixCode RexW => RexPrefixCode.W;
+
+        public static RexPrefixCode RexB => RexPrefixCode.B;
+
         /// <summary>
         /// Classifies prefix domains
         /// </summary>
@@ -50,23 +54,6 @@ namespace Z0.Asm
             Rex = 10,
 
             Vex = 11,
-        }
-
-        /// <summary>
-        /// Partitions legacy prefixes according to Intel V2.2-1
-        /// </summary>
-        [Flags]
-        public enum LegacyPrefixGroup : byte
-        {
-            None = 0,
-
-            Group1 = K.Lock | K.Repeat | K.Bnd,
-
-            Group2 = K.SegOverride | K.BranchHint,
-
-            Group3 = K.OperandSizeOverride,
-
-            Group4 = K.AddressSizeOverride,
         }
 
         /// <summary>
@@ -382,6 +369,23 @@ namespace Z0.Asm
 
             [Symbol("f3")]
             REPZ = xf3,
+        }
+
+        /// <summary>
+        /// Partitions legacy prefixes according to Intel V2.2-1
+        /// </summary>
+        [Flags]
+        public enum LegacyPrefixGroup : byte
+        {
+            None = 0,
+
+            Group1 = K.Lock | K.Repeat | K.Bnd,
+
+            Group2 = K.SegOverride | K.BranchHint,
+
+            Group3 = K.OperandSizeOverride,
+
+            Group4 = K.AddressSizeOverride,
         }
     }
 }

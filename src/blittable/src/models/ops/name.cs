@@ -25,7 +25,7 @@ namespace Z0
                 else
                     break;
             }
-            var length = min(present,name128.MaxLength);
+            var length = min(present, name128.MaxLength);
             var storage = Cell128.Empty;
             var dst = storage.Bytes;
             for(var i=0; i<length; i++)

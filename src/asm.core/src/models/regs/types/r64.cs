@@ -85,9 +85,15 @@ namespace Z0.Asm
         {
             public I Index => I.r0;
 
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
+
             [MethodImpl(Inline)]
             public static implicit operator G(rax src)
-                => new G(src.Index);
+                => src.Generalized;
 
             [MethodImpl(Inline)]
             public static implicit operator K(rax src)
@@ -97,6 +103,12 @@ namespace Z0.Asm
         public struct rcx : IRegOp64<rcx>
         {
             public I Index => I.r1;
+
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
 
             [MethodImpl(Inline)]
             public static implicit operator G(rcx src)
@@ -111,6 +123,12 @@ namespace Z0.Asm
         {
             public I Index => I.r2;
 
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
+
             [MethodImpl(Inline)]
             public static implicit operator G(rdx src)
                 => new G(src.Index);
@@ -123,6 +141,12 @@ namespace Z0.Asm
         public struct rbx : IRegOp64<rbx>
         {
             public I Index => I.r3;
+
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
 
             [MethodImpl(Inline)]
             public static implicit operator G(rbx src)
@@ -137,6 +161,13 @@ namespace Z0.Asm
         {
             public I Index => I.r4;
 
+
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
+
             [MethodImpl(Inline)]
             public static implicit operator G(rsi src)
                 => new G(src.Index);
@@ -149,6 +180,12 @@ namespace Z0.Asm
         public struct rdi : IRegOp64<rdi>
         {
             public I Index => I.r5;
+
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
 
             [MethodImpl(Inline)]
             public static implicit operator G(rdi src)
@@ -163,6 +200,12 @@ namespace Z0.Asm
         {
             public I Index => I.r6;
 
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
+
             [MethodImpl(Inline)]
             public static implicit operator G(rsp src)
                 => new G(src.Index);
@@ -175,6 +218,12 @@ namespace Z0.Asm
         public struct rbp : IRegOp64<rbp>
         {
             public I Index => I.r7;
+
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
 
             [MethodImpl(Inline)]
             public static implicit operator G(rbp src)
@@ -189,6 +238,12 @@ namespace Z0.Asm
         {
             public I Index => I.r8;
 
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
+
             [MethodImpl(Inline)]
             public static implicit operator G(r8q src)
                 => new G(src.Index);
@@ -201,6 +256,12 @@ namespace Z0.Asm
         public struct r9q : IRegOp64<r9q>
         {
             public I Index => I.r9;
+
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
 
             [MethodImpl(Inline)]
             public static implicit operator G(r9q src)
@@ -215,6 +276,12 @@ namespace Z0.Asm
         {
             public I Index => I.r10;
 
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
+
             [MethodImpl(Inline)]
             public static implicit operator G(r10q src)
                 => new G(src.Index);
@@ -227,6 +294,12 @@ namespace Z0.Asm
         public struct r11q : IRegOp64<r11q>
         {
             public I Index => I.r11;
+
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
 
             [MethodImpl(Inline)]
             public static implicit operator G(r11q src)
@@ -241,6 +314,12 @@ namespace Z0.Asm
         {
             public I Index => I.r12;
 
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
+
             [MethodImpl(Inline)]
             public static implicit operator G(r12q src)
                 => new G(src.Index);
@@ -253,6 +332,12 @@ namespace Z0.Asm
         public struct r13q : IRegOp64<r13q>
         {
             public I Index => I.r13;
+
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
 
             [MethodImpl(Inline)]
             public static implicit operator G(r13q src)
@@ -267,6 +352,12 @@ namespace Z0.Asm
         {
             public I Index => I.r14;
 
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
+
             [MethodImpl(Inline)]
             public static implicit operator G(r14q src)
                 => new G(src.Index);
@@ -280,6 +371,12 @@ namespace Z0.Asm
         public struct r15q : IRegOp64<r15q>
         {
             public I Index => I.r15;
+
+            public G Generalized
+            {
+                [MethodImpl(Inline)]
+                get => new G(Index);
+            }
 
             [MethodImpl(Inline)]
             public static implicit operator G(r15q src)

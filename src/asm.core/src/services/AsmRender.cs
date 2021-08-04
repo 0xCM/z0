@@ -93,13 +93,6 @@ namespace Z0.Asm
             return i - i0;
         }
 
-        public static string format(in AsmSig src)
-        {
-            var dst = TextTools.buffer();
-            render(src, dst);
-            return dst.Emit();
-        }
-
         [Op]
         public static uint render(in AsmDisassembly src, Span<char> dst)
         {
@@ -125,13 +118,13 @@ namespace Z0.Asm
             switch(@case)
             {
                 case MnemonicCase.Lowercase:
-                    SymbolicTools.lowercase(ref i, data, dst);
+                    text.lowercase(ref i, data, dst);
                 break;
                 case MnemonicCase.Uppercase:
-                    SymbolicTools.uppercase(ref i, data, dst);
+                    text.uppercase(ref i, data, dst);
                 break;
                 case MnemonicCase.Captialized:
-                    SymbolicTools.lowercase(ref i, data, dst);
+                    text.lowercase(ref i, data, dst);
                     seek(dst, i0) = skip(data,0).ToUpper();
                 break;
 
@@ -152,20 +145,6 @@ namespace Z0.Asm
             var i=0u;
             render(src, @case, ref i, dst);
             return text.format(dst);
-        }
-
-        public static void render(in AsmSig src, ITextBuffer dst)
-        {
-            var operands = src.Operands.View;
-            var count = operands.Length;
-            var monic = src.Mnemonic;
-            dst.AppendFormat("{0} ", monic.Format(MnemonicCase.Lowercase));
-            for(var i=0; i<count; i++)
-            {
-                dst.Append(skip(operands,i).Expr.Format());
-                if(i != count - 1)
-                    dst.Append(Chars.Comma);
-            }
         }
 
         [Op]
@@ -222,10 +201,6 @@ namespace Z0.Asm
             return $"{src.Encoded.FormatAsmHex()} | [{bits}] => {bitfield}";
         }
 
-
-        static void copy(ReadOnlySpan<char> src,ref uint i, Span<char> dst)
-            => text.copy(src, ref i, dst);
-
         [Op]
         public static string rescomment(OpUri uri, BinaryCode src)
             => string.Format("; {0}", SpanRes.format(SpanRes.specify(uri, src)));
@@ -265,7 +240,7 @@ namespace Z0.Asm
         [Op]
         public static string format(MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatConfig config)
         {
-            var dst = TextTools.buffer();
+            var dst = text.buffer();
             render(@base, src, config, dst);
             return dst.ToString();
         }
@@ -359,31 +334,6 @@ namespace Z0.Asm
             var statement = string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatPadded(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
             return string.Format("{0} => {1}", statement, AsmBitstrings.format(src.Encoded));
         }
-
-        [Op]
-        public static string format(AsmMnemonic monic, ReadOnlySpan<AsmSigOpExpr> operands)
-        {
-            var dst = text.buffer();
-            render(monic, operands, dst);
-            return dst.Emit();
-        }
-
-        [Op]
-        public static void render(AsmMnemonic monic, ReadOnlySpan<AsmSigOpExpr> operands, ITextBuffer dst)
-        {
-            dst.Append(monic.Format(MnemonicCase.Uppercase));
-            var opcount = operands.Length;
-            if(opcount != 0)
-            {
-                dst.Append(Chars.Space);
-                dst.Append(operands.Delimit(Chars.Comma).Format());
-            }
-        }
-
-
-        [Op]
-        public static string format(in AsmBranchInfo src)
-            => string.Concat(src.Source, " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
 
         [Op]
         public static string offset(ulong offset, DataWidth width)

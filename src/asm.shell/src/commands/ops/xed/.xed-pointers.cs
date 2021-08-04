@@ -6,8 +6,13 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".xed-regs")]
-        Outcome XedRegs(CmdArgs args)
-            => WriteSyms(Xed.Registers());
+        [CmdOp(".xed-pointers")]
+        Outcome XedPointers(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var src = Xed.PointerWidths();
+            WriteSyms(src);
+            return result;
+        }
     }
 }

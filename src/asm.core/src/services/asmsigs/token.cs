@@ -9,17 +9,11 @@ namespace Z0.Asm
 
     using static Root;
 
-    /// <summary>
-    /// Represents an operand in the context of an instruction signature
-    /// </summary>
-    public readonly struct AsmSigOp
+    partial class AsmSigs
     {
-        readonly byte Data;
-
-        [MethodImpl(Inline)]
-        internal AsmSigOp(byte data)
-        {
-            Data = data;
-        }
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static AsmSigToken<K> token<K>(AsmSigTokenKind kind, K value)
+            where K : unmanaged
+                => new AsmSigToken<K>(kind,value);
     }
 }

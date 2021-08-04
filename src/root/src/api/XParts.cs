@@ -45,8 +45,8 @@ namespace Z0
         public static bool IsPart(this AssemblyName src)
             => src.SimpleName().StartsWith("z0.");
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string Format(this PartId id)
-            => Root.format(id);
+            => PartNames.name(id).Format();
     }
 }
