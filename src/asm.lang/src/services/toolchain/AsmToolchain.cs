@@ -12,6 +12,46 @@ namespace Z0.Asm
 
     public sealed class AsmToolchain : AppService<AsmToolchain>
     {
+        public Outcome Run(in AsmToolchainSpec spec)
+        {
+            var outcome = Outcome.Success;
+            EnsurePaths(spec);
+            outcome = Assemble(spec);
+            if(outcome.Fail)
+            {
+                Wf.Error(outcome.Message);
+                return outcome;
+            }
+
+            outcome = ProcessAssembly(spec);
+            if(outcome.Fail)
+            {
+                Wf.Error(outcome.Message);
+                return outcome;
+            }
+
+            outcome = Disassemble(spec);
+            if(outcome.Fail)
+            {
+                Wf.Error(outcome.Message);
+                return outcome;
+            }
+
+            return ProcessDisassembly(spec);
+        }
+
+        void EnsurePaths(in AsmToolchainSpec spec)
+        {
+            spec.Analysis.Create();
+            spec.AsmPath.FolderPath.Create();
+            spec.BinPath.FolderPath.Create();
+            spec.ObjPath.FolderPath.Create();
+            spec.DisasmPath.FolderPath.Create();
+            spec.HexPath.FolderPath.Create();
+            spec.HexArrayPath.FolderPath.Create();
+            spec.ListPath.FolderPath.Create();
+        }
+
         Outcome Exec(in CmdLine cmd)
         {
             var stdout = list<string>();
@@ -40,7 +80,7 @@ namespace Z0.Asm
                 return (false, errout.Delimit(Chars.NL).Format());
         }
 
-        public Outcome Assemble(in AsmToolchainSpec spec)
+        Outcome Assemble(in AsmToolchainSpec spec)
         {
             var tool = Wf.Nasm();
             var result = Exec(tool.Command(spec.AsmPath, tool.OutFile(spec.BinPath, ObjFileKind.bin), spec.ListPath));
@@ -52,7 +92,7 @@ namespace Z0.Asm
             return result;
         }
 
-        public ByteSize EmitHexText(ReadOnlySpan<byte> src, ushort rowsize, FS.FilePath dst)
+        ByteSize EmitHexText(ReadOnlySpan<byte> src, ushort rowsize, FS.FilePath dst)
         {
             const char Delimiter = Chars.Pipe;
             var @base = MemoryAddress.Zero;
@@ -81,15 +121,27 @@ namespace Z0.Asm
             return size;
         }
 
-        public Outcome ProcessAssembly(in AsmToolchainSpec src)
+        ByteSize EmitHexArray(byte[] src, FS.FilePath dst)
+        {
+            var array = Hex.hexarray(src);
+            var size = src.Length;
+            var flow = EmittingFile(dst);
+            using var writer = dst.AsciWriter();
+            writer.WriteLine(array.Format(false));
+            EmittedFile(flow, size);
+            return size;
+        }
+
+        Outcome ProcessAssembly(in AsmToolchainSpec src)
         {
             var outpath = src.BinPath;
             var data = outpath.ReadBytes();
             EmitHexText(data,40,src.HexPath);
+            EmitHexArray(data,src.HexArrayPath);
             return true;
         }
 
-        public Outcome Disassemble(in AsmToolchainSpec spec)
+        Outcome Disassemble(in AsmToolchainSpec spec)
         {
             var tool = Wf.BdDisasm();
             var cmd = tool.Cmd(spec);
@@ -97,38 +149,12 @@ namespace Z0.Asm
             return Run(cmdline, cmd.OutputPath);
         }
 
-        public Outcome ProcessDisassembly(in AsmToolchainSpec spec)
+        Outcome ProcessDisassembly(in AsmToolchainSpec spec)
         {
             var parser = Wf.DbDiasmProcessor();
             parser.ParseDisassembly(spec.DisasmPath, spec.Analysis);
+
             return true;
-        }
-
-        public Outcome Run(in AsmToolchainSpec spec)
-        {
-            var outcome = Outcome.Success;
-            outcome = Assemble(spec);
-            if(outcome.Fail)
-            {
-                Wf.Error(outcome.Message);
-                return outcome;
-            }
-
-            outcome = ProcessAssembly(spec);
-            if(outcome.Fail)
-            {
-                Wf.Error(outcome.Message);
-                return outcome;
-            }
-
-            outcome = Disassemble(spec);
-            if(outcome.Fail)
-            {
-                Wf.Error(outcome.Message);
-                return outcome;
-            }
-
-            return ProcessDisassembly(spec);
         }
 
         Outcome Run(CmdLine cmdline, FS.FilePath dst)

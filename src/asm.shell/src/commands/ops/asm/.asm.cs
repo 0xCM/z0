@@ -24,10 +24,15 @@ namespace Z0.Asm
                 var binfile = AsmWs.BinPath(id);
                 var objfile = AsmWs.ObjPath(id);
                 var asmfile = AsmWs.AsmPath(id);
+                var hexfile = AsmWs.HexArrayPath(id);
+                var dumps = AsmWs.DumpOut().Create();
                 _Assembled = binfile.ReadBytes();
                 RoutineName = id;
-                Files(new FS.FilePath[]{binfile, objfile, asmfile}, false);
-                DumpObjects(objfile, AsmWs.DumpOut().Create());
+                Files(new FS.FilePath[]{binfile, objfile, asmfile, hexfile}, false);
+                result = LlvmObjDump(objfile, dumps);
+                if(!result)
+                    return result;
+                result = LlvmMcDisasm(hexfile, dumps);
             }
             return result;
         }

@@ -11,31 +11,19 @@ namespace Z0
         FS.FolderPath ControlRoot()
             => Env.Control;
 
-        FS.FolderPath ToolScriptRoot()
-            => DevRoot(tooling) + FS.folder(tools);
-
-        FS.FolderPath ToolExeRoot()
-            => DbRoot() + FS.folder(tools);
+        FS.FolderPath Tools()
+            => Env.ToolWs;
 
         FS.FolderPath ToolDataRoot()
             => DbRoot() + FS.folder(tools);
 
-        FS.FolderPath ToolScriptDir(ToolId tool)
-            => ToolScriptRoot() + FS.folder(tool.Format());
+        FS.FolderPath ToolScripts(ToolId tool)
+            => Tools() + FS.folder(tool.Format()) + FS.folder(scripts);
 
         FS.FolderPath ToolOutDir(ToolId tool)
             => ToolDataRoot() + FS.folder(tool.Format()) + FS.folder(output);
 
-        FS.FilePath ToolOutput(ToolId tool, string id, FS.FileExt ext)
-            => ToolOutDir(tool) + FS.file(id, ext);
-
-        FS.FolderPath ToolInDir(ToolId tool)
-            => ToolDataRoot() + FS.folder(tool.Format()) + FS.folder(input);
-
-        FS.FilePath ToolInput(ToolId tool,FS.FileName file)
-            => ToolInDir(tool) + file;
-
         FS.FilePath ToolScript(ToolId tool, ScriptId script, FS.FileExt? ext = null)
-            => ToolScriptDir(tool) + FS.file(script.Format(), ext ?? FS.Cmd);
+            => ToolScripts(tool) + FS.file(script.Format(), ext ?? FS.Cmd);
     }
 }

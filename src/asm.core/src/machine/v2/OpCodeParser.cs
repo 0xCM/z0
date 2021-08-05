@@ -11,11 +11,12 @@ namespace Z0.Asm
     using static core;
     using static AsciCode;
     using static AsmOpCodeTokens;
+    using static Machines;
 
     using AC = AsciCode;
     using SQ = SymbolicQuery;
 
-    public readonly partial struct Machines
+    public readonly struct OpCodeMachine
     {
         struct CharParserState<T>
             where T : unmanaged
@@ -103,9 +104,6 @@ namespace Z0.Asm
             public override bit Accept(char src)
                 => default;
 
-            public override bit Finished()
-                => default;
-
             protected override void Reset()
             {
 
@@ -154,9 +152,6 @@ namespace Z0.Asm
 
             protected override void Reset()
                 => State.Clear();
-
-            public override bit Finished()
-                => State.Finished;
 
             TokenKind Classify(ReadOnlySpan<char> src)
             {

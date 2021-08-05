@@ -25,7 +25,7 @@ namespace Z0.Asm
                 ref readonly var block = ref skip(blocks,i);
                 var uri = block.OpUri;
                 var code = block.Encoded;
-                var array = HexArray.load(code);
+                var array = Hex.hexarray(code);
                 var fmt = string.Format("{0}:{1}", uri, array);
                 Write(fmt);
             }

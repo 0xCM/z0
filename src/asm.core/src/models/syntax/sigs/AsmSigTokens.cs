@@ -113,7 +113,7 @@ namespace Z0.Asm
             r16,
 
             /// <summary>
-            ///  One of {eax, ecx, edx, ebx, esp, ebp, esi edi} or {r8w, r9w, r10w, r11w, r12w, r13w, r14w, r15w} when using REX.R and 64-bit mode.
+            ///  One of {eax, ecx, edx, ebx, esp, ebp, esi edi} or {r8d, r9d, r10d, r11d, r12d, r13d, r14d, r15d} when using REX.R and 64-bit mode.d
             /// </summary>
             [Symbol("r32", "A 32-bit gp register")]
             r32,

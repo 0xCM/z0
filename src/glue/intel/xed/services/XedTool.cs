@@ -81,11 +81,18 @@ namespace Z0
             dst.AppendLine("%CmdSpec% > %DetailPath%");
         }
 
-        public ToolScript CreateScript(XedCase src)
+        // public ToolScript CreateScript(XedCase src)
+        // {
+        //     var buffer = text.buffer();
+        //     AppendScript(src, buffer);
+        //     return new ToolScript(Toolspace.xed, buffer.Emit());
+        // }
+
+        public string CreateScript(XedCase src)
         {
             var buffer = text.buffer();
             AppendScript(src, buffer);
-            return new ToolScript(Toolspace.xed, buffer.Emit());
+            return buffer.Emit();
         }
     }
 }

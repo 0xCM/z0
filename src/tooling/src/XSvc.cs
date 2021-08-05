@@ -5,6 +5,7 @@
 namespace Z0
 {
     using Svc = Z0;
+    using System;
 
     [ApiHost]
     public static class XSvc
@@ -24,5 +25,11 @@ namespace Z0
         [Op]
         public static ProcessLauncher ProcessLauncher(this IWfRuntime paths)
             => Svc.ProcessLauncher.create(paths);
+    }
+
+    public static partial class XTend
+    {
+        public static ReadOnlySpan<TextLine> RunToolCmd(this IServiceContext context, ToolScript script)
+            => context.ScriptRunner().RunToolCmd(script);
     }
 }

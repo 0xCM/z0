@@ -39,7 +39,7 @@ namespace Z0.Asm
             return counter;
         }
 
-        public uint Produce(ToolId consumer, params ApiHostUri[] hosts)
+        public uint Produce(FS.FolderPath dst, ToolId consumer, params ApiHostUri[] hosts)
         {
             var options = CaptureWorkflowOptions.None;
             var routines = Capture.run(Wf, hosts, options).View;
@@ -48,8 +48,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var hr = ref skip(routines,i);
-                var dst = Db.ToolInput(consumer, FS.file(hr.Host, FS.Asm));
-                counter += Produce(skip(routines,i).View, dst);
+                counter += Produce(skip(routines,i).View, dst + FS.file(hr.Host, FS.Asm));
             }
             return counter;
         }

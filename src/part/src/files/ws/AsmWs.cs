@@ -126,8 +126,11 @@ namespace Z0
         public FS.FolderPath HexDir()
             => Output() + FS.folder(hex);
 
-        public FS.FilePath HexPath(string id)
+        public FS.FilePath AsmHexPath(string id)
             => HexDir() + FS.file(id, FS.Hex);
+
+        public FS.FilePath HexArrayPath(string id)
+            => HexDir() + FS.file(string.Format("{0}.array",id), FS.Hex);
 
         public FS.FolderPath Settings()
             => DataRoot() + FS.folder(settings);
@@ -320,7 +323,8 @@ namespace Z0
             spec.Disassembler = disassembler;
             spec.AsmPath = AsmPath(id);
             spec.BinPath = BinPath(id);
-            spec.HexPath = HexPath(id);
+            spec.HexPath = AsmHexPath(id);
+            spec.HexArrayPath = HexArrayPath(id);
             spec.ObjKind = ObjFileKind.win64;
             spec.DisasmPath = DisasmPath(id, disassembler);
             spec.Analysis = Analysis();
@@ -341,7 +345,8 @@ namespace Z0
             spec.Disassembler = disassembler;
             spec.AsmPath = src;
             spec.BinPath = BinPath(id);
-            spec.HexPath = HexPath(id);
+            spec.HexPath = AsmHexPath(id);
+            spec.HexArrayPath = HexArrayPath(id);
             spec.ObjKind = ObjFileKind.win64;
             spec.DisasmPath = DisasmPath(id, disassembler);
             spec.Analysis = Analysis();

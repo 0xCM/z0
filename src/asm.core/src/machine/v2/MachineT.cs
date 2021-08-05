@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,9 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using SQ = SymbolicQuery;
-
-    public readonly partial struct Machines
+    partial struct Machines
     {
         public abstract class Machine<T>
         {
@@ -34,21 +32,7 @@ namespace Z0.Asm
 
             public abstract bit Accept(T src);
 
-            public abstract bit Finished();
-
             protected abstract void Reset();
-        }
-
-        public abstract class CharParser : Machine<char>
-        {
-            protected bit HexDigit(char src)
-                => SQ.hexdigit(src);
-
-            protected bit Whitespace(char src)
-                => SQ.whitespace(src);
-
-            protected bit LineTerm(char src)
-                => SQ.whitespace(src);
         }
     }
 }

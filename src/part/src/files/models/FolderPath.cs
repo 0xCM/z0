@@ -158,7 +158,7 @@ namespace Z0
             /// <param name="dst">The target path</param>
             public FolderPath Create()
             {
-                if(!Directory.Exists(Name))
+                if(IsNonEmpty && !Exists)
                     Directory.CreateDirectory(Name);
                 return this;
             }
@@ -167,7 +167,7 @@ namespace Z0
             /// Specifies whether the represented directory actually exists within the file system
             /// </summary>
             public bool Exists
-                => Directory.Exists(Name);
+                => IsNonEmpty ? Directory.Exists(Name) : false;
 
             public DirectoryInfo Info
             {

@@ -170,8 +170,8 @@ namespace Z0.Asm
         IToolWs ToolWs()
             => Ws.Tools();
 
-        FS.FilePath ToolScript(ToolId tool, string script)
-            => ToolWs().Script(tool, script);
+        FS.FilePath ToolScript(ToolId tool, string id)
+            => ToolWs().Script(tool, id);
 
         IWorkspace TableWs()
             => Ws.Tables();
@@ -206,8 +206,24 @@ namespace Z0.Asm
             Error(src);
         }
 
+        void ParseCmdResponse(ReadOnlySpan<TextLine> src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                Warn("No response to parse");
+
+            for(var i=0; i<count; i++)
+            {
+                if(CmdResponse.parse(skip(src,i).Content, out var response))
+                    Write(response);
+            }
+        }
+
         Outcome Run(CmdLine cmd, CmdVars vars, out ReadOnlySpan<TextLine> response)
             => ScriptRunner.RunCmd(cmd, vars, ReceiveCmdStatus, ReceiveCmdError, out response);
+
+        Outcome Run(ToolScript spec, out ReadOnlySpan<TextLine> response)
+            => ScriptRunner.RunCmd(spec, ReceiveCmdStatus, ReceiveCmdError, out response);
 
         Outcome RunWinCmd(string spec, out ReadOnlySpan<TextLine> response)
             => CmdRunner.Run(WinCmd.cmd(spec), out response);
@@ -281,6 +297,18 @@ namespace Z0.Asm
         Span<ProcessAsm> AsmGlobalSelection()
             => _AsmGlobalSelection.Edit;
 
+        Outcome BuildAsmExe(string id)
+        {
+            const string ScriptId = "build-exe";
+            var result = Outcome.Success;
+            var script = AsmWs.Script(ScriptId);
+            var vars = Cmd.vars(
+                ("SrcId", id)
+                );
+            var cmd = Cmd.cmdline(script.Format(PathSeparator.BS));
+            return Run(cmd, vars, out var response);
+        }
+
         Outcome BuildAsmObj(string id, FS.FolderPath src, FS.FolderPath dst)
         {
             const string ScriptId = "emit-obj";
@@ -290,7 +318,7 @@ namespace Z0.Asm
                 ("SrcDir", src.Format(PathSeparator.BS)),
                 ("DstDir", dst.Format(PathSeparator.BS))
                 );
-            var cmd = cmdline(ToolScript(Toolspace.nasm, ScriptId));
+            var cmd = Cmd.cmdline(ToolScript(Toolspace.nasm, ScriptId).Format(PathSeparator.BS));
             return Run(cmd, vars, out var response);
         }
 

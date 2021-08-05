@@ -13,13 +13,16 @@ namespace Z0
     {
         public ToolId Tool {get;}
 
-        public TextBlock Content {get;}
+        public ScriptId Script {get;}
+
+        public CmdVars Vars {get;}
 
         [MethodImpl(Inline)]
-        public ToolScript(ToolId tool, TextBlock content)
+        public ToolScript(ToolId tool, ScriptId script, CmdVars vars)
         {
             Tool = tool;
-            Content = content;
+            Script = script;
+            Vars = vars;
         }
     }
 }

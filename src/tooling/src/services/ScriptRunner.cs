@@ -25,6 +25,9 @@ namespace Z0
         public ReadOnlySpan<TextLine> RunControlScript(FS.FileName name, CmdVars? vars = null)
             => RunScript(Paths.ControlScript(name), new ScriptId(name.Name), vars);
 
+        public ReadOnlySpan<TextLine> RunToolCmd(ToolScript src)
+            => RunToolScript(src.Tool, src.Script, ToolScriptKind.Cmd, src.Vars);
+
         public ReadOnlySpan<TextLine> RunToolCmd(ToolId tool, ScriptId script, CmdVars? vars = null)
             => RunToolScript(tool, script, ToolScriptKind.Cmd, vars);
 
@@ -49,6 +52,26 @@ namespace Z0
             {
                 term.error(e);
                 return default;
+            }
+        }
+
+        public Outcome RunCmd(ToolScript script, Receiver<string> status, Receiver<string> error, out ReadOnlySpan<TextLine> dst)
+        {
+            dst = default;
+            try
+            {
+                var kind = ToolScriptKind.Cmd;
+                var path = ScriptFile(script, kind);
+                if(!path.Exists)
+                    return (false,FS.missing(path));
+                var process = ScriptProcess.run(CmdLine(path, kind), script.Vars, status, error);
+                process.Wait();
+                dst = Lines.read(process.Output);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return e;
             }
         }
 
@@ -129,6 +152,16 @@ namespace Z0
                 _ => FS.FileExt.Empty
             };
             return Paths.ToolScript(tool, script, x);
+        }
+
+        FS.FilePath ScriptFile(ToolScript spec, ToolScriptKind kind)
+        {
+            var x = kind switch{
+                ToolScriptKind.Cmd => FS.Cmd,
+                ToolScriptKind.Ps => FS.Ps1,
+                _ => FS.FileExt.Empty
+            };
+            return Paths.ToolScript(spec.Tool, spec.Script, x);
         }
 
         CmdLine CmdLine(FS.FilePath path, ToolScriptKind kind)

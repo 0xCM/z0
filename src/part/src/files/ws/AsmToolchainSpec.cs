@@ -24,6 +24,8 @@ namespace Z0
 
         public FS.FilePath HexPath;
 
+        public FS.FilePath HexArrayPath;
+
         public FS.FilePath ListPath;
 
         public Bitness AsmBitMode;

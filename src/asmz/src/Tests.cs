@@ -192,7 +192,7 @@ namespace Z0.Asm
         {
             var producer = Wf.AsmStatementProducer();
             var hosts = NestedHosts(typeof(Prototypes));
-            var count = producer.Produce(Toolspace.nasm, hosts);
+            var count = producer.Produce(FS.FolderPath.Empty, Toolspace.nasm, hosts);
         }
 
         void ShowRegKinds(RegKind src, ShowLog dst)
