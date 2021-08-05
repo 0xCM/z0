@@ -59,13 +59,15 @@ namespace Z0.Asm
             return Wf.Router.Dispatch(spec);
         }
 
-        ToolScript CreateXedCase(string opcode)
+        string CreateXedCase(string opcode)
         {
             var tool = Wf.XedTool();
             var dir = Db.CaseDir("asm.assembled", opcode);
             var dst = dir + FS.file(string.Format("{0}.{1}", opcode, tool.Id), FS.Cmd);
             var @case = tool.DefineCase(opcode.ToString(), dir);
-            return tool.CreateScript(@case);
+            var content = tool.CreateScript(@case);
+            return content;
+            //return new ToolScript(Toolspace.xed, opcode, ;
         }
 
         public void EmitApiImageContent()

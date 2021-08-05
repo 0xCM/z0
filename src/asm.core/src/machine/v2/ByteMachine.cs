@@ -7,8 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Root;
     using static core;
+
+    using static Asm.AsmEncodings;
 
     [ApiComplete]
     public sealed class ByteMachine
@@ -24,7 +28,7 @@ namespace Z0
             Buffer = bss;
             Pos = 0;
             Max = Buffer.TotalSize - 1;
-            Fill(0xFF);
+            Fill(Interrupt.int3());
         }
 
         [MethodImpl(Inline)]
@@ -42,12 +46,24 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Reset()
         {
-            Fill(0xFF);
+            Fill(Interrupt.int3());
         }
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<byte> State()
-            => Cells;
+        public uint Accepted(Span<byte> dst)
+        {
+            var max = Capacity;
+            var j=0u;
+            for(var i=0u; i<max; i++)
+            {
+                ref readonly var input = ref Cell(i);
+                if(!Interrupt.int3(input))
+                    seek(dst,j++) = input;
+                else
+                    break;
+            }
+            return j;
+        }
 
         [MethodImpl(Inline)]
         Span<byte> Segment(uint index)

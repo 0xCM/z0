@@ -12,9 +12,8 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline)]
-        public static CmpEval<T> eval<T>(T pred, bit eval)
-            where T : ICmpPred
-                => new CmpEval<T>(pred,eval);
+        public static CmpEval<T> eval<T>(CmpPred<T> pred, bit eval)
+            => new CmpEval<T>(pred, eval);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static EQ<T> eq<T>(T a, T b)
@@ -40,28 +39,28 @@ namespace Z0
         public static LTE<T> lte<T>(T a, T b)
             => new LTE<T>(a,b);
 
-        [MethodImpl(Inline)]
-        public static CmpEval<EQ<T>> eq<T>(T a, T b, bit result)
-            => eval(eq(a,b),result);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmpEval<T> eq<T>(T a, T b, bit result)
+            => eval<T>(eq(a,b),result);
 
-        [MethodImpl(Inline)]
-        public static CmpEval<NEQ<T>> neq<T>(T a, T b, bit result)
-            => eval(neq(a,b),result);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmpEval<T> neq<T>(T a, T b, bit result)
+            => eval<T>(neq(a,b),result);
 
-        [MethodImpl(Inline)]
-        public static CmpEval<LT<T>> lt<T>(T a, T b, bit result)
-            => eval(lt(a,b),result);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmpEval<T> lt<T>(T a, T b, bit result)
+            => eval<T>(lt(a,b),result);
 
-        [MethodImpl(Inline)]
-        public static CmpEval<LTE<T>> lte<T>(T a, T b, bit result)
-            => eval(lte(a,b),result);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmpEval<T> lte<T>(T a, T b, bit result)
+            => eval<T>(lte(a,b),result);
 
-        [MethodImpl(Inline)]
-        public static CmpEval<GT<T>> gt<T>(T a, T b, bit result)
-            => eval(gt(a,b),result);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmpEval<T> gt<T>(T a, T b, bit result)
+            => eval<T>(gt(a,b),result);
 
-        [MethodImpl(Inline)]
-        public static CmpEval<GTE<T>> gte<T>(T a, T b, bit result)
-            => eval(gte(a,b),result);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmpEval<T> gte<T>(T a, T b, bit result)
+            => eval<T>(gte(a,b),result);
     }
 }

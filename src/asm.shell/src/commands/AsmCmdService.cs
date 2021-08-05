@@ -55,6 +55,8 @@ namespace Z0.Asm
 
         Index<ProcessAsm> _AsmGlobalSelection;
 
+        IPolyrand Random;
+
         byte[] _Assembled;
 
         const ushort _NativeBufferSize = Pow2.T14;
@@ -93,6 +95,7 @@ namespace Z0.Asm
             Xed = Wf.IntelXed();
             AsmToolchain = Wf.AsmToolchain();
             AsmTables = Wf.AsmTables();
+            Random = Rng.wyhash64();
             State.DevWs(Ws);
         }
 

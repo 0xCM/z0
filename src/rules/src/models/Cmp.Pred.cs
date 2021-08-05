@@ -4,32 +4,34 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
     partial struct Rules
     {
-        public readonly struct CmpEval<T>
-            where T : ICmpPred
+        public readonly struct CmpPred<T> : ICmpPred<CmpPred<T>,T>
         {
-            public T Pred {get;}
+            public T A {get;}
 
-            public bit Eval {get;}
+            public T B {get;}
+
+            public CmpKind Kind {get;}
 
             [MethodImpl(Inline)]
-            public CmpEval(T pred, bit eval)
+            public CmpPred(T a, T b, CmpKind kind)
             {
-                Pred = pred;
-                Eval = eval;
+                A = a;
+                B = b;
+                Kind = kind;
             }
 
             public string Format()
-                => string.Format("{0}={1}", Pred.Format(), Eval);
+                => CmpPreds.format(this);
 
             public override string ToString()
                 => Format();
+
         }
     }
 }

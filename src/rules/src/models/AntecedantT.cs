@@ -26,7 +26,7 @@ namespace Z0
             }
 
             public bool Equals(Antecedant<A> src)
-                => Rules.equals(this,src);
+                => Rules.match(this,src);
         }
     }
 }

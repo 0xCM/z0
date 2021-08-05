@@ -31,5 +31,9 @@ namespace Z0
         /// <param name="count">The maximum number of bytes to produce</param>
         public static IEnumerable<byte> Bytes(this ISource src, uint count)
             => Sources.bytes(src, count);
+
+        public static Span<byte> Bytes(this ISource src, Span<byte> dst)
+            => Sources.bytes(src, dst);
+
     }
 }

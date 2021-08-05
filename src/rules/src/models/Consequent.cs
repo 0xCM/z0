@@ -26,7 +26,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public bool Equals(Consequent src)
-                => equals(this, src);
+                => match(this, src);
         }
 
         public readonly struct Consequent<C> : IRule<Consequent<C>,C>

@@ -30,7 +30,7 @@ namespace Z0
             }
 
             public bool Equals(Proposition<A,C> src)
-                => Rules.equals(this, src);
+                => Rules.match(this, src);
         }
     }
 }

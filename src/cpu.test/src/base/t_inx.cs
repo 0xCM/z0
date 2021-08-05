@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
-    using static SFx;
+    using static Root;
+    using static core;
 
     /// <summary>
     /// Base type for intrinsic tests

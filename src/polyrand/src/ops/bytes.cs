@@ -39,7 +39,7 @@ namespace Z0
             for(var j=0; j<count; j+=8)
             {
                 var src = source.Next<ulong>();
-                memory.deposit(src, bytes);
+                core.deposit(src, bytes);
                 for(var k=0; k<8; k++, counter++)
                 {
                     if(counter == count)
@@ -52,5 +52,12 @@ namespace Z0
 
         public static IEnumerable<byte> bytes(ISource source, uint count)
             => bytes(source, (int)count);
+
+        [Op]
+        public static Span<byte> bytes(ISource source, Span<byte> dst)
+        {
+            source.Fill(dst);
+            return dst;
+        }
     }
 }
