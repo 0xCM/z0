@@ -14,7 +14,8 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
+        /// __m256i _mm256_cvtepi8_epi16 (__m128i a)
+        /// VPMOVSXBW ymm, xmm/m128
         /// 16x8u -> 16x16i
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -24,7 +25,8 @@ namespace Z0
             => ConvertToVector256Int16(vhi(src));
 
         /// <summary>
-        /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
+        /// __m256i _mm256_cvtepu8_epi16 (__m128i a)
+        /// VPMOVZXBW ymm, xmm
         /// 16x8u -> 16x16i
         /// </summary>
         /// <param name="src">The source vector</param>

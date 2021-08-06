@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bool uppercase(C src)
+        public static bit uppercase(C src)
             => contains(F.MinUpperLetter, F.MaxUpperLetter, src);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bool uppercase(char src)
+        public static bit uppercase(char src)
             => contains((char)F.MinUpperLetter, (char)F.MaxUpperLetter, src);
     }
 }

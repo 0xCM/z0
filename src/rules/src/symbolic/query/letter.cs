@@ -28,5 +28,21 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool letter(char src)
             => lowercase(src) || uppercase(src);
+
+        /// <summary>
+        /// Tests whether a character is an uppercase asci letter character
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline), Op]
+        public static bool letter(UpperCased @case, char c)
+            => (C)c >= AsciCodeFacets.MinUpperLetter && (C)c <= AsciCodeFacets.MaxUpperLetter;
+
+        /// <summary>
+        /// Tests whether a character is a lowercase asci letter character
+        /// </summary>
+        /// <param name="c">The character to test</param>
+        [MethodImpl(Inline), Op]
+        public static bool letter(LowerCased @case, char c)
+            => (C)c >= AsciCodeFacets.MinLowerLetter && (C)c <= AsciCodeFacets.MaxLowerLetter;
     }
 }

@@ -15,7 +15,8 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        /// __m128i _mm_mpsadbw_epu8 (__m128i a, __m128i b, const int imm8) MPSADBW xmm, xmm/m128, imm8
+        /// __m128i _mm_mpsadbw_epu8 (__m128i a, __m128i b, const int imm8)
+        /// MPSADBW xmm, xmm/m128, imm8
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
@@ -25,7 +26,8 @@ namespace Z0
             => MultipleSumAbsoluteDifferences(a,b,mask);
 
         /// <summary>
-        /// __m256i _mm256_mpsadbw_epu8 (__m256i a, __m256i b, const int imm8) VMPSADBW ymm, ymm, ymm/m256, imm8
+        /// __m256i _mm256_mpsadbw_epu8 (__m256i a, __m256i b, const int imm8)
+        /// VMPSADBW ymm, ymm, ymm/m256, imm8
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>

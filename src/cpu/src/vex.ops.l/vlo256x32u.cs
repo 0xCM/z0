@@ -15,7 +15,8 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
+        ///  __m256i _mm256_cvtepu8_epi32 (__m128i a)
+        /// VPMOVZXBD ymm, xmm
         /// Zero extends 8 8-bit integers from the low 8 bytes of the source to 8 32-bit integers in the target
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -25,7 +26,8 @@ namespace Z0
             => v32u(ConvertToVector256Int32(src));
 
         /// <summary>
-        /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
+        /// __m256i _mm256_cvtepi16_epi32 (__m128i a)
+        /// VPMOVSXWD ymm, xmm/m128
         /// 8x16u -> 8x32u
         /// </summary>
         /// <param name="src">The source vector</param>

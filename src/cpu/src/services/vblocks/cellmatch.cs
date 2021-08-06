@@ -9,11 +9,8 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost]
-    public readonly struct BlockMatch
+    partial struct vblocks
     {
-        const NumericKind Closure = UnsignedInts;
-
         /// <summary>
         /// Returns the index of the block, if any that contains a cell that is equal to a specified match value
         /// </summary>
@@ -25,7 +22,7 @@ namespace Z0
             var ones = gcpu.vones<byte>(w128);
             for(var i=0; i<src.BlockCount; i++)
             {
-                var a = cpu.vload(src,i);
+                var a = vblocks.vload(src,i);
                 var b = cpu.vbroadcast(w128, match);
                 var c = cpu.veq(a,b);
                 var d = cpu.vtestz(c,ones);

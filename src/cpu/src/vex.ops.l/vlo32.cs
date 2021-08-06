@@ -16,7 +16,8 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
+        /// int _mm_cvtsi128_si32 (__m128i a)
+        /// MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="wDst">The target width</param>
@@ -25,7 +26,8 @@ namespace Z0
             => ConvertToInt32(src);
 
         /// <summary>
-        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
+        /// int _mm_cvtsi128_si32 (__m128i a)
+        /// MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="wDst">The target width</param>

@@ -14,7 +14,8 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
+        /// __m256i _mm256_cvtepu16_epi64 (__m128i a)
+        /// VPMOVZXWQ ymm, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width selector</param>
@@ -23,7 +24,8 @@ namespace Z0
             => v64u(ConvertToVector256Int64(vshi(src)));
 
         /// <summary>
-        /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
+        /// __m256i _mm256_cvtepi32_epi64 (__m128i a)
+        /// VPMOVSXDQ ymm, xmm/m128
         /// 4x32u -> 4x64u
         /// </summary>
         /// <param name="src">The source vector</param>

@@ -11,7 +11,6 @@ namespace Z0
     using static Root;
     using static core;
     using static vcore;
-    using static Typed;
 
     partial struct Asci
     {
@@ -36,7 +35,6 @@ namespace Z0
             seek(dst, 3) = (char)(byte)(src.Storage >> 24);
             return core.cover(dst, asci4.Size);
         }
-
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci8 src)

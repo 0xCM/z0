@@ -17,7 +17,8 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        /// __m128i _mm_hsub_epi16 (__m128i a, __m128i b) PHSUBW xmm, xmm/m128
+        /// __m128i _mm_hsub_epi16 (__m128i a, __m128i b)
+        /// PHSUBW xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -26,7 +27,8 @@ namespace Z0
             => HorizontalSubtract(x, y);
 
         /// <summary>
-        /// __m128i _mm_hsub_epi32 (__m128i a, __m128i b) PHSUBD xmm, xmm/m128
+        /// __m128i _mm_hsub_epi32 (__m128i a, __m128i b)
+        /// PHSUBD xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -35,7 +37,8 @@ namespace Z0
             => HorizontalSubtract(x, y);
 
         /// <summary>
-        /// __m256i _mm256_hsub_epi16 (__m256i a, __m256i b) VPHSUBW ymm, ymm, ymm/m256
+        /// __m256i _mm256_hsub_epi16 (__m256i a, __m256i b)
+        /// VPHSUBW ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -44,7 +47,8 @@ namespace Z0
             => HorizontalSubtract(x, y);
 
         /// <summary>
-        /// __m256i _mm256_hsub_epi32 (__m256i a, __m256i b) VPHSUBD ymm, ymm, ymm/m256
+        /// __m256i _mm256_hsub_epi32 (__m256i a, __m256i b)
+        /// VPHSUBD ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -53,7 +57,8 @@ namespace Z0
             => HorizontalSubtract(x, y);
 
         /// <summary>
-        /// __m128 _mm_hsub_ps (__m128 a, __m128 b) HSUBPS xmm, xmm/m128
+        /// __m128 _mm_hsub_ps (__m128 a, __m128 b)
+        /// HSUBPS xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -62,7 +67,8 @@ namespace Z0
             => HorizontalSubtract(x, y);
 
         /// <summary>
-        /// __m128d _mm_hsub_pd (__m128d a, __m128d b) HSUBPD xmm, xmm/m128
+        /// __m128d _mm_hsub_pd (__m128d a, __m128d b)
+        /// HSUBPD xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

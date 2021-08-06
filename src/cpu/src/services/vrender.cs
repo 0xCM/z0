@@ -17,13 +17,6 @@ namespace Z0
     {
         const NumericKind Closure = UInt64k;
 
-        public static void bits(Vector128<byte> src, Span<char> dst)
-        {
-            var a = vinflate256x8u(vcell(src,1), 0);
-             var x = vlo256x16u(a);
-             var y = vhi256x16u(a);
-        }
-
         [Op, Closures(Closure)]
         public static void outcome<T>(SpanBlock128<T> x, SpanBlock128<T> y, Vector128<T> expect, Vector128<T> actual, Vector128<T> result, ITextBuffer dst)
             where T : unmanaged

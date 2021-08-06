@@ -35,10 +35,6 @@ namespace Z0.Asm
 
         const string @switch = nameof(@switch);
 
-        const string nested = nameof(nested);
-
-        const string vcopy = nameof(vcopy);
-
         const string calls = nameof(calls);
 
         const string targets = nameof(targets);

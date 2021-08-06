@@ -15,7 +15,8 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        /// __m256i _mm256_cvtepu16_epi32 (__m128i a) VPMOVZXWD ymm, xmm
+        /// __m256i _mm256_cvtepu16_epi32 (__m128i a)
+        /// VPMOVZXWD ymm, xmm
         /// 8x16u -> 8x32u
         /// </summary>
         /// <param name="src">The source vector</param>

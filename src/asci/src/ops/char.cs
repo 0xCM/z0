@@ -32,14 +32,6 @@ namespace Z0
             => (char)code(src,index);
 
         [MethodImpl(Inline), Op]
-        public static char @char(UpperCased @case, HexDigit digit)
-            => (char)Hex.code(@case, digit);
-
-        [MethodImpl(Inline), Op]
-        public static char @char(LowerCased @case, HexDigit digit)
-            => (char)Hex.code(@case, digit);
-
-        [MethodImpl(Inline), Op]
         public static char @char(AsciSymbol src)
             => (char)src;
     }

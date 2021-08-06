@@ -16,7 +16,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
     using static Root;
-    using static Typed;
 
     partial struct cpu
     {

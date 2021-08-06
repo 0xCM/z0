@@ -15,7 +15,8 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
+        /// __m128i _mm_cvtepi8_epi16 (__m128i a)
+        /// PMOVSXBW xmm, xmm/m64
         /// 8x8i -> 8x16i
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -25,7 +26,8 @@ namespace Z0
             => ConvertToVector128Int16(vshi(src));
 
         /// <summary>
-        /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
+        /// __m128i _mm_cvtepu8_epi16 (__m128i a)
+        /// PMOVZXBW xmm, xmm/m64
         /// 8x8u -> 8x16i
         /// src[i] -> dst[i], i = 8,.., 15
         /// </summary>
@@ -36,7 +38,8 @@ namespace Z0
             =>  ConvertToVector128Int16(vshi(src));
 
         /// <summary>
-        /// __m128i _mm_cvtepi16_epi32 (__m128i a) PMOVSXWD xmm, xmm/m64
+        /// __m128i _mm_cvtepi16_epi32 (__m128i a)
+        /// PMOVSXWD xmm, xmm/m64
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width selector</param>

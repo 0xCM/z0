@@ -41,17 +41,6 @@ namespace Z0
             => new asci4(AsciSymbols.pack((AsciCode)a, (AsciCode)b, (AsciCode)c, (AsciCode)d, out var _ ));
 
         /// <summary>
-        /// Converts 16 source characters to 16 asci codes
-        /// </summary>
-        /// <param name="src">The source data</param>
-        /// <param name="offset">The source offset</param>
-        /// <param name="count">The number of source characters to convert</param>
-        /// <param name="dst">The receiving buffer</param>
-        [MethodImpl(Inline), Op]
-        public static void encode(in char src, uint offset, N16 count, ref AsciCode dst)
-            => cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, skip(src, offset))), ref @byte(dst));
-
-        /// <summary>
         /// Populates an asci target with a specified number of source characters
         /// </summary>
         /// <param name="src">The data source</param>

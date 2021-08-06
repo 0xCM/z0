@@ -14,7 +14,8 @@ namespace Z0
     {
         /// <summary>
         /// src[0..7] -> r/m8[0..31]
-        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
+        /// int _mm_cvtsi128_si32 (__m128i a)
+        /// MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <remarks>
@@ -26,7 +27,8 @@ namespace Z0
 
         /// <summary>
         /// src[0..7] -> r/m8[0..31]
-        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
+        /// int _mm_cvtsi128_si32 (__m128i a)
+        /// MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <remarks>
