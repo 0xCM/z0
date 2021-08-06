@@ -14,6 +14,10 @@ namespace Z0
     partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
+        public static bit cr(byte src)
+            => (byte)C.CR == src;
+
+        [MethodImpl(Inline), Op]
         public static bit cr(C src)
             => src == C.CR;
 

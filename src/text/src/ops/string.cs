@@ -20,8 +20,5 @@ namespace Z0
         public static unsafe string @string(AsciCode code)
             => new string(gptr<char>((char)code));
 
-        [Op]
-        public static string @string(ReadOnlySpan<char> src)
-            => new string(src);
     }
 }

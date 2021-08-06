@@ -8,19 +8,25 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     public readonly struct Table
     {
-        readonly Index<TableRow> Data;
+        [MethodImpl(Inline), Op]
+        public static Table define(string src, uint kind, TableColumn[] cols, TableRow[] rows)
+            => new Table(src,kind, cols, rows);
 
-        readonly Index<TableColumn> _Cols;
+        readonly TableRow[] Data;
+
+        readonly TableColumn[] _Cols;
+
+        public string Source {get;}
 
         public uint Kind {get;}
 
         [MethodImpl(Inline)]
-        public Table(uint kind, TableColumn[] cols, TableRow[] rows)
+        public Table(string src, uint kind, TableColumn[] cols, TableRow[] rows)
         {
+            Source = src;
             Kind = kind;
             Data = rows;
             _Cols = cols;
@@ -29,19 +35,19 @@ namespace Z0
         public Span<TableRow> Rows
         {
             [MethodImpl(Inline)]
-            get => Data.Edit;
+            get => Data;
         }
 
         public Span<TableColumn> Cols
         {
             [MethodImpl(Inline)]
-            get => _Cols.Edit;
+            get => _Cols;
         }
 
         public uint RowCount
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => (uint)Data.Length;
         }
     }
 }

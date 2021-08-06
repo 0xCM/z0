@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Adjacent : IRuleModel<Adjacent>
+        public readonly struct Adjacent : IRule<Adjacent>
         {
             public dynamic A {get;}
 

@@ -17,11 +17,9 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 5
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Pack=2)]
+    [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)Size)]
     public struct CharBlock5 : ICharBlock<CharBlock5>
     {
-        public static N5 N => default;
-
         CharBlock4 Lo;
 
         CharBlock1 Hi;

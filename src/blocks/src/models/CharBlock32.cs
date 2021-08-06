@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 32x16u
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Pack=2)]
+    [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)Size)]
     public struct CharBlock32  : ICharBlock<B>
     {
         public static N32 N => default;
@@ -42,7 +42,7 @@ namespace Z0
         public ReadOnlySpan<char> String
         {
             [MethodImpl(Inline)]
-            get => text.@string(Data);
+            get => TextTools.@string(Data);
         }
 
         /// <summary>

@@ -4,14 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IRuleModel
+    using System;
+
+    public interface IEvaluation
     {
 
     }
 
-    public interface IRuleModel<R> : IRuleModel
-        where R : struct, IRuleModel<R>
+    public interface IEvaluation<S,T> : IEvaluation
     {
+        S Source {get;}
 
+        T Result {get;}
     }
 }

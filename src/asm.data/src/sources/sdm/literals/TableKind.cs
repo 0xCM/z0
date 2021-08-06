@@ -20,7 +20,13 @@ namespace Z0.Asm
             BinaryFormat,
 
             [Symbol("Intrinsics")]
-            Intrinsics
+            Intrinsics,
+
+            [Symbol("Notes")]
+            Notes,
+
+            [Symbol("Numbered")]
+            Numbered,
         }
     }
 }

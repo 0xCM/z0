@@ -20,8 +20,6 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential, Pack=2)]
     public struct CharBlock256 : ICharBlock<B>
     {
-        public static N256 N => default;
-
         CharBlock128 Lo;
 
         CharBlock128 Hi;

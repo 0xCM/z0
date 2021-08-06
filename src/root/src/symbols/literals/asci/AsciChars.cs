@@ -71,7 +71,7 @@ namespace Z0
             => new AsciCode[FA.UpperLetterCount]{A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z};
 
         public static ReadOnlySpan<AsciCode> WhitespaceCodes
-            => new AsciCode[6]{AK.Space, AK.LF, AK.CR, AK.FF, AK.Tab, AK.VTab};
+            => new AsciCode[6]{AK.Space, AK.NL, AK.CR, AK.FF, AK.Tab, AK.VTab};
 
         public static ReadOnlySpan<char> UpperLetterChars
             => "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

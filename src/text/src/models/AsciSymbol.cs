@@ -159,5 +159,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(C a, C b)
             => a.Code != b.Code;
+
+        [MethodImpl(Inline)]
+        public static bool operator <(C a, C b)
+            => a.Code < b.Code;
+
+        [MethodImpl(Inline)]
+        public static bool operator >(C a, C b)
+            => a.Code > b.Code;
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(C a, C b)
+            => a.Code <= b.Code;
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(C a, C b)
+            => a.Code >= b.Code;
     }
 }

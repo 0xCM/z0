@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bit whitespace(C c)
-            => space(c) || tab(c) || cr(c) || lf(c) || vtab(c);
+            => space(c) || tab(c) || cr(c) || nl(c) || vtab(c);
 
         /// <summary>
         /// Determines whether an asci code defines a whitespace character
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bit whitespace(char c)
-            => space(c) || tab(c) || cr(c) || lf(c) || vtab(c);
+            => space(c) || tab(c) || cr(c) || nl(c) || vtab(c);
 
         /// <summary>
         /// Returns true if only asci whitspace chacter codes are present

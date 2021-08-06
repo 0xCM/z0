@@ -19,12 +19,15 @@ namespace Z0
 
         uint Kind;
 
-        public static TableBuilder create(uint kind = 0)
-            => new TableBuilder(kind);
+        string Source;
+
+        public static TableBuilder create()
+            => new TableBuilder(0);
 
         public TableBuilder(uint kind)
         {
             Kind = kind;
+            Source = EmptyString;
             Rows = new();
             Cols = array<TableColumn>();
         }
@@ -32,6 +35,12 @@ namespace Z0
         public TableBuilder WithKind(uint kind)
         {
             Kind = kind;
+            return this;
+        }
+
+        public TableBuilder WithSource(string src)
+        {
+            Source = src;
             return this;
         }
 
@@ -63,7 +72,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-                Rows.Add(core.skip(src,i));
+                Rows.Add(skip(src,i));
             return this;
         }
 
@@ -80,8 +89,8 @@ namespace Z0
             var count = rows.Length;
             ref var row = ref first(rows);
             for(var i=0u; i<count; i++)
-                seek(row,i)._Seq = i;
-            var dst = Tables.table(Kind, Cols.Replicate(), rows);
+                seek(row,i).Seq = i;
+            var dst = Table.define(Source, Kind, Cols.Replicate(), rows);
             Clear();
             return dst;
         }

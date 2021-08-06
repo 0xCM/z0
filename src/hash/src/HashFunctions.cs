@@ -37,7 +37,7 @@ namespace Z0
             {
                 ref readonly var input = ref skip(src,i);
                 var computed = hasher.Compute(f(input));
-                seek(dst,i) = (input,computed);
+                seek(dst,i) = (input, computed);
                 accumulator.Add(computed);
             }
             var collisions = count - (uint)accumulator.Count;

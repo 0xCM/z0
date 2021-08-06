@@ -462,12 +462,12 @@ namespace Z0.Asm
         }
 
         //[ApiHost(prototypes + evaluator + contracted)]
-        public readonly struct ContractedEvaluator : IEvaluator
+        public readonly struct ContractedEvaluator : IEvalContract
         {
             readonly Evaluator E;
 
             [Op]
-            public static IEvaluator create()
+            public static IEvalContract create()
                 => new ContractedEvaluator(new Evaluator());
 
             ContractedEvaluator(Evaluator e)
@@ -557,7 +557,7 @@ namespace Z0.Asm
         }
 
 
-        public interface IEvaluator
+        public interface IEvalContract
         {
             sbyte Eval(sbyte a, sbyte b, BinaryBitLogicKind k);
 

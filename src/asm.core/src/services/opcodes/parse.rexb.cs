@@ -12,14 +12,6 @@ namespace Z0.Asm
 
     partial struct AsmOpCodes
     {
-        const string RexBTokens =
-            "+rb\0" +
-            "+rw\0" +
-            "+rd\0" +
-            "+ro\0" +
-            "N.A.\0" +
-            "N.E\0";
-
         [Op]
         public static bit parse(ReadOnlySpan<char> src, out RexBToken dst)
         {

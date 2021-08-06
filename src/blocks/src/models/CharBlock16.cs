@@ -20,8 +20,6 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)Size)]
     public struct CharBlock16 : ICharBlock<B>
     {
-        public static N16 N => default;
-
         CharBlock8 Lo;
 
         CharBlock8 Hi;
@@ -51,7 +49,7 @@ namespace Z0
         public ReadOnlySpan<char> String
         {
             [MethodImpl(Inline)]
-            get => text.@string(Data);
+            get => TextTools.@string(Data);
         }
 
         public uint Capacity

@@ -16,7 +16,6 @@ namespace Z0
         MemoryAddress Base();
 
         MemCapacity Capacity();
-
     }
 
     [Free]

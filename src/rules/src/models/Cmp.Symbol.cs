@@ -6,7 +6,7 @@ namespace Z0
 {
     partial struct Rules
     {
-        [ApiComplete("rules.cmp.symbol")]
+        [ApiComplete("cmp.symbol")]
         public readonly struct CmpSymbol
         {
             public static string EQ => "==";

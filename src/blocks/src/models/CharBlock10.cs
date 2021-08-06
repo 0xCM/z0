@@ -14,11 +14,9 @@ namespace Z0
     using api = CharBlocks;
     using B = CharBlock10;
 
-    [StructLayout(LayoutKind.Sequential, Pack=2)]
+    [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)Size)]
     public struct CharBlock10 : ICharBlock<B>
     {
-        public static N10 N => default;
-
         CharBlock8 Lo;
 
         CharBlock2 Hi;

@@ -285,7 +285,14 @@ namespace Z0.Asm
         void EmitRecords<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
             where T : struct
         {
-            var count = Tables.emit(src, dst, widths);
+            var count = Tables.emit(src, widths, dst);
+            RecordsEmitted(count, dst);
+        }
+
+        void EmitAsciRecords<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
+            where T : struct
+        {
+            var count = Tables.emit(src, widths, TextEncodingKind.Asci, dst);
             RecordsEmitted(count, dst);
         }
 

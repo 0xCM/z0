@@ -9,6 +9,15 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        [CmdOp(".tokenize")]
+        Outcome TestTokenize(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var tokens = AsmOpCodes.VexTokens();
+            iter(tokens, t => Write(t));
+
+            return result;
+        }
         [CmdOp(".test-bitview")]
         Outcome CheckBitView(CmdArgs args)
         {

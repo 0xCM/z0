@@ -17,11 +17,9 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 13x16u
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Pack=2)]
+    [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)Size)]
     public struct CharBlock13 : ICharBlock<B>
     {
-        public static N13 N => default;
-
         CharBlock12 Lo;
 
         CharBlock1 Hi;
@@ -64,7 +62,7 @@ namespace Z0
         }
 
         public string Format()
-            => TextTools.format(String);
+            => text.format(String);
 
         public override string ToString()
             => Format();
@@ -81,6 +79,14 @@ namespace Z0
         public static implicit operator B(ReadOnlySpan<char> src)
             => api.init(src, out B dst);
 
+        /// <summary>
+        /// The block capacity
+        /// </summary>
         public const ushort CharCount = 13;
+
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
     }
 }

@@ -6,10 +6,11 @@ namespace Z0
 {
     using System;
     using System.IO;
+    using System.Text;
 
     partial class XFs
     {
         public static BinaryWriter BinaryWriter(this FS.FilePath dst)
-            => new BinaryWriter(File.Open(dst.EnsureParentExists().Name, FileMode.Create));
+            => new BinaryWriter(File.Open(dst.EnsureParentExists().Name, FileMode.Create), Encoding.ASCII);
     }
 }

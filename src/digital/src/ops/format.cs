@@ -20,7 +20,7 @@ namespace Z0
         {
             Span<char> dst = stackalloc char[src.Length];
             render(src,dst);
-            return text.@string(dst);
+            return text.format(dst);
         }
 
         [Op]
@@ -28,7 +28,7 @@ namespace Z0
         {
             Span<char> dst = stackalloc char[src.Length];
             render(src,dst);
-            return text.@string(dst);
+            return text.format(dst);
         }
 
         public static string format<C>(C @case, ReadOnlySpan<HexDigit> src)

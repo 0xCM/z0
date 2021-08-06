@@ -14,19 +14,27 @@ namespace Z0
     partial struct SymbolicQuery
     {
         /// <summary>
-        /// Tests whether a character code represents <see cref='AsciChar.LF'/>
+        /// Tests whether a character code represents <see cref='AsciChar.NL'/>
         /// </summary>
         /// <param name="src">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bit lf(C src)
-            => C.LF == src;
+        public static bit nl(byte src)
+            => (byte)C.NL == src;
 
         /// <summary>
-        /// Tests whether a source character is a <see cref='AsciChar.LF'/>
+        /// Tests whether a character code represents <see cref='AsciChar.NL'/>
         /// </summary>
         /// <param name="src">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bit lf(char src)
-            => (char)C.LF == src;
+        public static bit nl(C src)
+            => C.NL == src;
+
+        /// <summary>
+        /// Tests whether a source character is a <see cref='AsciChar.NL'/>
+        /// </summary>
+        /// <param name="src">The character to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit nl(char src)
+            => (char)C.NL == src;
     }
 }

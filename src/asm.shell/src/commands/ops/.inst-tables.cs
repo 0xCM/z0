@@ -6,12 +6,12 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".receivers")]
-        Outcome Receivers(CmdArgs args)
+        [CmdOp(".inst-tables", "Loads the instruction table files into the context")]
+        Outcome InstTables(CmdArgs args)
         {
             var result = Outcome.Success;
-
-
+            var src = Sources().Dataset(AsmTableScopes.SdmInstructions).Files(FS.Csv);
+            Files(src);
             return result;
         }
     }

@@ -17,8 +17,6 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential, Pack=2)]
     public struct CharBlock8 : ICharBlock<B>
     {
-        public static N8 N => default;
-
         CharBlock4 Lo;
 
         CharBlock4 Hi;

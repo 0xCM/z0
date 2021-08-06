@@ -10,17 +10,17 @@ namespace Z0.Asm
 
     partial struct SdmModels
     {
-        public readonly struct EncodingExpr
+        public readonly struct EncodingOperand
         {
-            public EncodingRuleKind RuleKind {get;}
+            public byte OpNumber {get;}
 
-            public byte RuleId {get;}
+            public CharBlock32 OpExpr {get;}
 
             [MethodImpl(Inline)]
-            public EncodingExpr(EncodingRuleKind kind, byte id)
+            public EncodingOperand(byte number, CharBlock32 expr)
             {
-                RuleKind = kind;
-                RuleId = id;
+                OpNumber = number;
+                OpExpr = expr;
             }
         }
     }

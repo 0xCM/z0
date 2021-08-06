@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Cells)" />
-
   </ItemGroup>
 
 </Project>

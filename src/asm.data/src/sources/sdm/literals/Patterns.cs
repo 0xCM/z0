@@ -6,7 +6,8 @@ namespace Z0.Asm
 {
     partial struct SdmModels
     {
-        public readonly struct Patterns
+        [ApiHost("sdm.patterns")]
+        public readonly partial struct Patterns
         {
             public static string[] Operands = new string[]
             {
@@ -91,7 +92,7 @@ namespace Z0.Asm
                 "zmm3/m512/m64bcst",
             };
 
-            public static string[] OcHeader0= new string[9]{
+            public static string[] OcHeader0 = new string[9]{
                 "Opcode",
                 "Instruction",
                 "Op/",
@@ -132,22 +133,12 @@ namespace Z0.Asm
                 "Description"
                 };
 
-            public static string[] EncodingHeader = new string[5]{
+            public static string[] EncodingHeader0 = new string[5]{
                 "Op/En",
                 "Operand 1",
                 "Operand 2",
                 "Operand 3",
                 "Operand 4"
-                };
-
-            public static readonly string[] ModRM = new string[]{
-                "ModRM:r/m (r)",
-                "ModRM:r/m (w)",
-                "ModRM:r/m (r, ModRM:[7:6] must be 11b)",
-                "ModRM:r/m (w, ModRM:[7:6] must not be 11b)",
-                "ModRM:reg (r)",
-                "ModRM:reg (w)",
-                "ModRM:reg (r,w)"
                 };
 
             public static readonly string[] Reg = new string[]{
@@ -179,7 +170,7 @@ namespace Z0.Asm
                 "EVEX.RXB",
                 };
 
-            public static readonly string[] Arithmetic = new string[]{
+            public static readonly string[] OpCodeArithmetic = new string[]{
                 "opcode + rd (w)",
                 "opcode + rd (r)",
                 "opcode + rd (r, w)",

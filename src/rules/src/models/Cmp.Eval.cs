@@ -14,23 +14,23 @@ namespace Z0
         /// <summary>
         /// Captures a comparison predicate along with its evaluation
         /// </summary>
-        public readonly struct CmpEval<T>
+        public readonly struct CmpEval<T> : IEvaluation<CmpPred<T>,bit>
         {
             /// <summary>
             /// The evaluated predicate
             /// </summary>
-            public CmpPred<T> Pred {get;}
+            public CmpPred<T> Source {get;}
 
             /// <summary>
             /// The evaluation result
             /// </summary>
-            public bit Eval {get;}
+            public bit Result {get;}
 
             [MethodImpl(Inline)]
             public CmpEval(CmpPred<T> pred, bit eval)
             {
-                Pred = pred;
-                Eval = eval;
+                Source = pred;
+                Result = eval;
             }
 
             public string Format()
@@ -38,6 +38,10 @@ namespace Z0
 
             public override string ToString()
                 => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator CmpEval<T>((CmpPred<T> src, bit result) x)
+                => new CmpEval<T>(x.src, x.result);
         }
     }
 }

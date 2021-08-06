@@ -22,16 +22,6 @@ namespace Z0.Asm
                 Mode64 = m64;
                 Mode32 = m32;
             }
-
-            // public string Format()
-            // {
-            //     var buffer = text.buffer();
-            //     render(this,buffer);
-            //     return buffer.Emit();
-            // }
-
-            // public override string ToString()
-            //     => Format();
         }
     }
 }

@@ -496,9 +496,9 @@ namespace Z0
         VTab = '\v',
 
         /// <summary>
-        /// The line-feed character
+        /// The new-line character
         /// </summary>
-        LF = '\n',
+        NL = '\n',
 
         /// <summary>
         /// The carriage-return character

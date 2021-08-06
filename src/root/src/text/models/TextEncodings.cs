@@ -36,11 +36,6 @@ namespace Z0
         public K Kind => K.Unicode;
     }
 
-    public readonly struct Utf16Points : ITextEncodingKind<Utf16Points>
-    {
-        public K Kind => K.Utf16;
-    }
-
     public readonly struct Utf32Points : ITextEncodingKind<Utf32Points>
     {
         public K Kind => K.Utf32;

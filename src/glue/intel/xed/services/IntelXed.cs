@@ -287,7 +287,7 @@ namespace Z0.Asm
         {
             var path = Tables.path<FormOperands>(dst);
             var flow = EmittingTable<FormOperands>(path);
-            var count = Tables.emit(src, path, FormOperands.RenderWidths);
+            var count = Tables.emit(src, FormOperands.RenderWidths, path);
             EmittedTable(flow,count);
         }
 

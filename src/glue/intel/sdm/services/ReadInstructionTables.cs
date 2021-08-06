@@ -15,6 +15,7 @@ namespace Z0.Asm
         public static Index<TableColumn> columns(ReadOnlySpan<string> src)
             => Tables.columns<ColumnKind>(src);
 
+
         public ReadOnlySpan<Table> ReadInstructionTables(FS.FilePath src)
         {
             const string TitleMarker = "# ";
@@ -24,6 +25,7 @@ namespace Z0.Asm
             const string InstTitleFormat = "# Instruction {0}";
             const string Rejoin = " | ";
             const char ColSep = Chars.Pipe;
+
             var result = Outcome.Success;
             var foundtable = false;
             var parsingrows = false;
@@ -50,6 +52,13 @@ namespace Z0.Asm
                 }
 
                 var content = line.Content;
+
+                if(content.StartsWith(TitleMarker))
+                {
+                    table.WithSource(content.Remove(TableMarker).Trim());
+                    continue;
+                }
+
                 if(parsingrows)
                 {
                     var values = content.SplitClean(ColSep);
@@ -82,7 +91,7 @@ namespace Z0.Asm
 
                 if(content.StartsWith(TableMarker))
                 {
-                    tablekind = TableKinds.from(content.Remove(TableMarker).Trim());
+                    tablekind = SdmParsers.tablekind(content.Remove(TableMarker).Trim());
                     table.Clear();
                     table.WithKind((uint)tablekind);
                     foundtable = true;

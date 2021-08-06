@@ -67,10 +67,10 @@ namespace Z0
         VTab = (byte)AC.VTab,
 
         /// <summary>
-        /// The line-feed character code 10
+        /// The new-line character code 10
         /// </summary>
-        [Symbol(AC.LF)]
-        LF = (byte)AC.LF,
+        [Symbol(AC.NL)]
+        NL = (byte)AC.NL,
 
         /// <summary>
         /// The form-feed control character
@@ -78,7 +78,7 @@ namespace Z0
         FF = (byte)AC.FF,
 
         /// <summary>
-        /// The line-feed character code 13
+        /// The carriage-return character code 13
         /// </summary>
         CR = (byte)AC.CR,
 

@@ -12,7 +12,7 @@ namespace Z0
     partial struct Tables
     {
         [MethodImpl(Inline), Op]
-        public static Table table(uint kind, TableColumn[] cols, TableRow[] rows)
-            => new Table(kind, cols, rows);
+        public static Table table(string src, uint kind, TableColumn[] cols, TableRow[] rows)
+            => new Table(src,kind, cols, rows);
     }
 }

@@ -57,6 +57,5 @@ namespace Z0.Asm
                 Files(files);
             return result;
         }
-
     }
 }

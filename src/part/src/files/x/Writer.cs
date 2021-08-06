@@ -12,27 +12,36 @@ namespace Z0
     {
         [Op]
         public static StreamWriter Writer(this FS.FilePath dst, bool append)
-            => FS.writer(dst, append ? FileWriteMode.Append : FileWriteMode.Overwrite, Encoding.UTF8);
-
-        [Op]
-        public static StreamWriter Writer(this FS.FilePath dst, bool append, Encoding encoding)
-            => FS.writer(dst, append ? FileWriteMode.Append : FileWriteMode.Overwrite, encoding);
+            => FileWriters.writer(dst, append ? FileWriteMode.Append : FileWriteMode.Overwrite, Encoding.UTF8);
 
         [Op]
         public static StreamWriter Writer(this FS.FilePath dst)
-            => FS.writer(dst, FileWriteMode.Overwrite, Encoding.UTF8);
+            => FileWriters.writer(dst, FileWriteMode.Overwrite, Encoding.UTF8);
 
         [Op]
         public static StreamWriter Writer(this FS.FilePath dst, Encoding encoding)
-            => FS.writer(dst, FileWriteMode.Overwrite, encoding);
+            => FileWriters.writer(dst, FileWriteMode.Overwrite, encoding);
 
         [Op]
         public static StreamWriter Writer(this FS.FilePath dst, TextEncodingKind encoding)
-            => FS.writer(dst, encoding);
+            => encoding switch {
+                TextEncodingKind.Asci => FileWriters.asci(dst),
+                TextEncodingKind.Utf8 => FileWriters.utf8(dst),
+                TextEncodingKind.Unicode => FileWriters.unicode(dst),
+                _ => FileWriters.unicode(dst)
+            };
 
         [Op]
         public static StreamWriter AsciWriter(this FS.FilePath dst)
-            => FS.writer(dst, FileWriteMode.Overwrite, Encoding.ASCII);
+            => FileWriters.asci(dst);
+
+        [Op]
+        public static StreamWriter UnicodeWriter(this FS.FilePath dst)
+            => FileWriters.unicode(dst);
+
+        [Op]
+        public static StreamWriter Utf8Writer(this FS.FilePath dst)
+            => FileWriters.utf8(dst);
 
         [Op]
         public static void AppendLines(this FS.FilePath dst, string src)

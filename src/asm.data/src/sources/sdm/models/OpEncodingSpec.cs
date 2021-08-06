@@ -4,18 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
+    using static Root;
+
     partial struct SdmModels
     {
-        public enum TableVariation : byte
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct OpEncodingSpec
         {
-            [Symbol("v0")]
-            V0,
+            public byte OpNumber;
 
-            [Symbol("v1")]
-            V1,
-
-            [Symbol("v2")]
-            V2
+            public CharBlock32 OpExpr;
         }
     }
 }

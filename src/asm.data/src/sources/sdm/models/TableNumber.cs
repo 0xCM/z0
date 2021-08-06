@@ -14,8 +14,6 @@ namespace Z0.Asm
     {
         public readonly struct TableNumber
         {
-            public const string Marker = "Table ";
-
             readonly CharBlock8 Storage;
 
             [MethodImpl(Inline)]
@@ -41,6 +39,12 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => new TableNumber(EmptyString);
             }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
         }
     }
 }

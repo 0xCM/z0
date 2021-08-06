@@ -11,17 +11,15 @@ namespace Z0
 
     public enum TextEncodingKind : byte
     {
-        None = 0,
+        None,
 
-        Asci = 1,
+        Asci,
 
-        Utf8 = 2,
+        Utf8,
 
-        Utf16 = 3,
+        Unicode,
 
-        Utf32 = 4,
-
-        Unicode = 5,
+        Utf32,
     }
 
     public interface ITextEncodingKind

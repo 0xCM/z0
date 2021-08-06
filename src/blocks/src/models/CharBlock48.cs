@@ -20,8 +20,6 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)Size)]
     public struct CharBlock48  : ICharBlock<B>
     {
-        public static N48 N => default;
-
         /// <summary>
         /// The block content presented as an editable buffer
         /// </summary>
@@ -38,7 +36,7 @@ namespace Z0
         public ReadOnlySpan<char> String
         {
             [MethodImpl(Inline)]
-            get => text.@string(Data);
+            get => TextTools.@string(Data);
         }
 
         /// <summary>

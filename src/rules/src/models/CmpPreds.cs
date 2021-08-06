@@ -6,7 +6,7 @@ namespace Z0
 {
     partial struct Rules
     {
-        [ApiHost("rules.cmp.preds")]
+        [ApiHost("cmp.preds")]
         public readonly struct CmpPreds
         {
             const Z0.NumericKind Closure = Root.UnsignedInts;
@@ -30,7 +30,7 @@ namespace Z0
 
             [Op, Closures(Closure)]
             public static string format<T>(CmpEval<T> src)
-                => string.Format("{0}:{1}", format(src.Pred), src.Eval ? "true" : "false");
+                => string.Format("{0}:{1}", format(src.Source), src.Result ? "true" : "false");
         }
     }
 }

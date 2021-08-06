@@ -6,22 +6,22 @@ namespace Z0.Asm
 {
     using System.Runtime.InteropServices;
 
-    partial struct SdmModels
+    using static SdmModels;
+
+    partial struct SdmRecords
     {
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct EncodingRecord
         {
-            public uint OpCodeId;
-
             public EncodingCrossRef XRef;
 
-            public EncodingExpr Operand1;
+            public OpEncodingSpec Operand1;
 
-            public EncodingExpr Operand2;
+            public OpEncodingSpec Operand2;
 
-            public EncodingExpr Operand3;
+            public OpEncodingSpec Operand3;
 
-            public EncodingExpr Operand4;
+            public OpEncodingSpec Operand4;
         }
     }
 }

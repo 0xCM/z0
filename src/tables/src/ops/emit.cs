@@ -14,6 +14,11 @@ namespace Z0
     partial struct Tables
     {
         [Op, Closures(Closure)]
+        public static Count emit<T>(ReadOnlySpan<T> src, StreamWriter dst)
+            where T : struct
+                => emit(src,Tables.rowspec<T>(DefaultFieldWidth), dst);
+
+        [Op, Closures(Closure)]
         public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, StreamWriter dst)
             where T : struct
         {
@@ -24,11 +29,6 @@ namespace Z0
             dst.WriteLine(formatter.Format(skip(src,i)));
             return count;
         }
-
-        [Op, Closures(Closure)]
-        public static Count emit<T>(ReadOnlySpan<T> src, StreamWriter dst)
-            where T : struct
-                => emit(src,Tables.rowspec<T>(DefaultFieldWidth),dst);
 
         [Op, Closures(Closure)]
         public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, Encoding encoding, FS.FilePath dst)
@@ -48,7 +48,6 @@ namespace Z0
                 dst(f.Format(skip(src,i)));
         }
 
-
         [Op, Closures(Closure)]
         public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, TextEncodingKind encoding, FS.FilePath dst)
             where T : struct
@@ -58,11 +57,6 @@ namespace Z0
         public static Count emit<T>(ReadOnlySpan<T> src, RowFormatSpec spec, FS.FilePath dst)
             where T : struct
                 => emit(src, spec, TextEncodingKind.Utf8, dst);
-
-        [Op, Closures(Closure)]
-        public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
-            where T : struct
-                => emit(src, rowspec<T>(widths, z16), Encoding.UTF8, dst);
 
         [Op, Closures(Closure)]
         public static Count emit<T>(ReadOnlySpan<T> src,  ReadOnlySpan<byte> widths, TextEncodingKind encoding, FS.FilePath dst)

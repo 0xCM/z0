@@ -9,24 +9,23 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    public struct TableRow
     {
-        public interface ICmpPred : ITextual
+        public uint Seq;
+
+        readonly TableCell[] _Cells;
+
+        [MethodImpl(Inline)]
+        public TableRow(uint index, TableCell[] cells)
         {
-            CmpKind Kind {get;}
+            Seq = index;
+            _Cells = cells;
         }
 
-        public interface ICmpPred<T> : ICmpPred
+        public Span<TableCell> Cells
         {
-            T A {get;}
-
-            T B {get;}
-        }
-
-        public interface ICmpPred<F,T> : ICmpPred<T>
-            where F : ICmpPred<F,T>
-        {
-
+            [MethodImpl(Inline)]
+            get => _Cells;
         }
     }
 }

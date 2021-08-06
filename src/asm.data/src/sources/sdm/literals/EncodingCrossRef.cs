@@ -4,26 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+
+
     partial struct SdmModels
     {
-        public enum EncodingCrossRef : byte
+        public readonly struct EncodingCrossRef
         {
-            None,
+            public CharBlock4 Identifier {get;}
 
-            [Symbol("A")]
-            A,
+            [MethodImpl(Inline)]
+            public EncodingCrossRef(CharBlock4 identifier)
+            {
+                Identifier = identifier;
+            }
 
-            [Symbol("B")]
-            B,
-
-            [Symbol("C")]
-            C,
-
-            [Symbol("RVM")]
-            RVM,
-
-            [Symbol("MVR")]
-            MVR
+            [MethodImpl(Inline)]
+            public static implicit operator EncodingCrossRef(string src)
+                => new EncodingCrossRef(src);
         }
     }
 }

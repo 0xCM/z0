@@ -11,7 +11,7 @@ namespace Z0
     {
         Space = C.Space,
 
-        NL = C.LF,
+        NL = C.NL,
 
         CR = C.CR,
 

@@ -7,20 +7,11 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static core;
     using static AsmOpCodeTokens;
 
     partial struct AsmOpCodes
     {
-        const string DispTokens =
-            "cb\0" +
-            "cw\0" +
-            "cd\0" +
-            "cp\0" +
-            "c0\0" +
-            "ct\0";
-
         [Op]
         public static bit parse(ReadOnlySpan<char> src, out DispToken dst)
         {

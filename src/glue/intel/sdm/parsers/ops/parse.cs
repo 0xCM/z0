@@ -17,6 +17,17 @@ namespace Z0.Asm
 
     partial struct SdmParsers
     {
+        [Op]
+        public static SdmTableKind tablekind(string name)
+            => name switch {
+                "OpCodes" => SdmTableKind.OpCodes,
+                "Encoding" => SdmTableKind.Encoding,
+                "BinaryFormat" => SdmTableKind.BinaryFormat,
+                "Intrinsics" => SdmTableKind.Intrinsics,
+                "Notes" => SdmTableKind.Intrinsics,
+                _ => SdmParsers.parse(name, out TableNumber dst) ? SdmTableKind.Numbered : SdmTableKind.None
+            };
+
         /// <summary>
         /// Tests whether the specified input sequence is of the form ' .' or '. '
         /// </summary>
@@ -57,13 +68,13 @@ namespace Z0.Asm
                 return false;
 
             var i = placeholder(src);
-            var remainder = right(src,i);
+            var remainder = text.right(src,i);
             var d = SQ.digitIndex(base10, remainder);
             var input = slice(remainder, d);
 
             if(parse(input, out page))
             {
-                dst = title(left(src,i), page);
+                dst = title(text.left(src,i), page);
                 return true;
             }
 
@@ -77,8 +88,8 @@ namespace Z0.Asm
             if(i == NotFound)
                 return false;
 
-            var a = left(src,i);
-            var b = right(src,i);
+            var a = text.left(src,i);
+            var b = text.right(src,i);
             if(SP.uint8(base10, a, out var cn) && SP.uint16(base10, b, out var pn))
             {
                 dst = page(chapter(cn), pn);
@@ -176,6 +187,20 @@ namespace Z0.Asm
                 return true;
             }
             return false;
+        }
+
+        [Op]
+        public static Outcome parse(string src, out TableTitle dst)
+        {
+            dst = TableTitle.Empty;
+            var result = Outcome.Success;
+            result = parse(src, out dst.Table);
+            if(!result)
+                return result;
+
+            var i = index(src, Markers.TableNumber);
+            dst.Label = text.left(src, i + Markers.TableNumber.Length).Trim();
+            return result;
         }
 
         [Op]

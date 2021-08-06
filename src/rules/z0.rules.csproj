@@ -16,7 +16,7 @@
     <ProjectReference Include="$(Bits)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Cells)" />
-
+    <ProjectReference Include="$(Blittable)" />
   </ItemGroup>
 
 </Project>

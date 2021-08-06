@@ -67,7 +67,7 @@ namespace Z0
         /// <summary>
         /// The line-feed character code 10
         /// </summary>
-        public static AsciSymbol LF => AC.LF;
+        public static AsciSymbol NL => AC.NL;
 
         /// <summary>
         /// The form-feed control character
@@ -75,7 +75,7 @@ namespace Z0
         public static AsciSymbol FF => AC.FF;
 
         /// <summary>
-        /// The line-feed character code 13
+        /// The carriage-return character code 13
         /// </summary>
         public static AsciSymbol CR => AC.CR;
 

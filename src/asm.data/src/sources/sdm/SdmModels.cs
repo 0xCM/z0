@@ -25,6 +25,10 @@ namespace Z0.Asm
             => new TableNumber(src);
 
         [MethodImpl(Inline), Op]
+        public static TableTitle title(in TableNumber table, ReadOnlySpan<char> label)
+            => new TableTitle(table, label);
+
+        [MethodImpl(Inline), Op]
         public static TocTitle title(in CharBlock128 title, in ChapterPage page)
             => new TocTitle(title, page);
 
@@ -49,8 +53,8 @@ namespace Z0.Asm
             => new SectionPage(section, page);
 
         [MethodImpl(Inline), Op]
-        public static PageFooter footer(string l0, string l1, string r0, string r1)
-            => new PageFooter(l0,l1,r0,r1);
+        public static PageFooter footer(in CharBlock16 l0, in CharBlock16 l1, in CharBlock16 r0, in CharBlock16 r1)
+            => new PageFooter(l0, l1, r0, r1);
 
         [MethodImpl(Inline), Op]
         public static VolPartNumber volpart(byte major, char minor)
@@ -105,13 +109,21 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static void render(in SectionPage sp, ITextBuffer dst)
+        public static void render(in SectionPage src, ITextBuffer dst)
         {
             dst.Append(Chars.LBracket);
-            render(sp.Section, dst);
+            render(src.Section, dst);
             dst.Append(Chars.Space);
-            render(sp.Page, dst);
+            render(src.Page, dst);
             dst.Append(Chars.RBracket);
+        }
+
+        [Op]
+        public static string format(in SectionPage src)
+        {
+            var dst = text.buffer();
+            render(src,dst);
+            return dst.Emit();
         }
 
         [Op]
@@ -135,10 +147,28 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static void render(in LineNumber line, in TableNumber src, ITextBuffer dst)
+        public static string format(in TableNumber src)
+            => text.format(src.String);
+
+        [Op]
+        public static void render(in LineNumber line, in TableNumber table, ITextBuffer dst)
         {
             render(line, dst);
-            dst.AppendFormat("Table {0}", TextTools.format(src.String));
+            dst.AppendFormat("Table {0}", format(table));
+        }
+
+        [Op]
+        public static void render(in TableTitle src, ITextBuffer dst)
+        {
+            dst.AppendFormat("{0}. {1}", format(src.Table), text.format(src.Label.String));
+        }
+
+        [Op]
+        public static string format(in TableTitle src)
+        {
+            var dst = text.buffer();
+            render(src,dst);
+            return dst.Emit();
         }
 
         [Op]

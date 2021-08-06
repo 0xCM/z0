@@ -14,16 +14,16 @@ namespace Z0.Asm
         [StructLayout(LayoutKind.Sequential, Pack =1)]
         public readonly struct PageFooter
         {
-            public string Left0 {get;}
+            public CharBlock16 Left0 {get;}
 
-            public string Left1 {get;}
+            public CharBlock16 Left1 {get;}
 
-            public string Right0 {get;}
+            public CharBlock16 Right0 {get;}
 
-            public string Right1 {get;}
+            public CharBlock16 Right1 {get;}
 
             [MethodImpl(Inline)]
-            public PageFooter(string l0, string l1, string r0, string r1)
+            public PageFooter(CharBlock16 l0, CharBlock16 l1, CharBlock16 r0, CharBlock16 r1)
             {
                 Left0 = l0;
                 Left1 = l1;

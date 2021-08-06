@@ -23,6 +23,12 @@ namespace Z0.Asm
                 Section = section;
                 Page = page;
             }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
         }
     }
 }

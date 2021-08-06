@@ -18,6 +18,203 @@ namespace Z0.Asm
 
     public readonly struct OpCodeMachine
     {
+        enum ParserAction : byte
+        {
+            None = 0,
+
+            ParsedDigit,
+
+            ParsedLetter,
+
+            ParsedOperator,
+
+            ParsedWhitespace,
+        }
+
+        enum AtomKind : byte
+        {
+            None = 0,
+
+            Digit,
+
+            // '+', '.'
+            Operator,
+
+            Whitespace,
+
+            HexChar,
+
+            Other,
+        }
+
+        [Op]
+        static TokenKind classify(ReadOnlySpan<char> src)
+        {
+            var length = src.Length;
+            var kind = TokenKind.None;
+            switch(length)
+            {
+                case 1:
+                    kind = classify(n1, src);
+                    break;
+                case 2:
+                    kind = classify(n2, src);
+                    break;
+                case 3:
+                    kind = classify(n3, src);
+                    break;
+                case 4:
+                    kind = classify(n4, src);
+                    break;
+                case 5:
+                    kind = classify(n5, src);
+                    break;
+                case 6:
+                    kind = classify(n6, src);
+                    break;
+                case 7:
+                    kind = classify(n7, src);
+                    break;
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Classifies tokens of length 1
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="src"></param>
+        [Op]
+        static TokenKind classify(N1 n, ReadOnlySpan<char> src)
+        {
+            return 0;
+        }
+
+        /// <summary>
+        /// Classifies tokens of length 2
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="src"></param>
+        [Op]
+        static TokenKind classify(N2 n, ReadOnlySpan<char> src)
+        {
+            ref readonly var c0 = ref skip(src,0);
+            ref readonly var c1 = ref skip(src,1);
+            if(SQ.hexdigit(skip(src,0)) && SQ.hexdigit(skip(src,1)))
+                return TokenKind.Byte;
+            switch(c0)
+            {
+                case 'a':
+                break;
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Classifies tokens of length 3
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="src"></param>
+        [Op]
+        static TokenKind classify(N3 n, ReadOnlySpan<char> src)
+        {
+            return 0;
+        }
+
+        /// <summary>
+        /// Classifies tokens of length 4
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="src"></param>
+        [Op]
+        static TokenKind classify(N4 n, ReadOnlySpan<char> src)
+        {
+            return 0;
+        }
+
+        /// <summary>
+        /// Classifies tokens of length 5
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="src"></param>
+        [Op]
+        static TokenKind classify(N5 n, ReadOnlySpan<char> src)
+        {
+            return 0;
+        }
+
+        /// <summary>
+        /// Classifies tokens of length 6
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="src"></param>
+        [Op]
+        static TokenKind classify(N6 n, ReadOnlySpan<char> src)
+        {
+            return 0;
+        }
+
+        /// <summary>
+        /// Classifies tokens of length 7
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="src"></param>
+        [Op]
+        static TokenKind classify(N7 n, ReadOnlySpan<char> src)
+        {
+            return 0;
+        }
+
+        [Op]
+        static AtomKind classify(char src)
+        {
+            var kind = AtomKind.Other;
+            switch((AsciCode)src)
+            {
+                case AC.Space:
+                case NL:
+                case CR:
+                case FF:
+                case Tab:
+                case VTab:
+                    kind = AtomKind.Whitespace;
+                    break;
+                case d0:
+                case d1:
+                case d2:
+                case d3:
+                case d4:
+                case d5:
+                case d6:
+                case d7:
+                case d8:
+                case d9:
+                    kind = AtomKind.Digit;
+                    break;
+                case FS:
+                case Plus:
+                case Dot:
+                    kind = AtomKind.Operator;
+                    break;
+                case a:
+                case b:
+                case c:
+                case d:
+                case e:
+                case f:
+                case A:
+                case B:
+                case C:
+                case D:
+                case E:
+                case F:
+                    kind = AtomKind.HexChar;
+                    break;
+            }
+            return kind;
+        }
+
         struct CharParserState<T>
             where T : unmanaged
         {
@@ -112,36 +309,6 @@ namespace Z0.Asm
 
         public sealed class OpCodeParser : CharParser
         {
-            enum AtomKind : byte
-            {
-                None = 0,
-
-                Digit,
-
-                // '+', '.'
-                Operator,
-
-                Whitespace,
-
-                HexChar,
-
-                Other,
-            }
-
-            enum ParserAction : byte
-            {
-                None = 0,
-
-                ParsedDigit,
-
-                ParsedLetter,
-
-                ParsedOperator,
-
-                ParsedWhitespace,
-            }
-
-
             CharParserState<ParserAction> State;
 
             public OpCodeParser()
@@ -153,130 +320,18 @@ namespace Z0.Asm
             protected override void Reset()
                 => State.Clear();
 
-            TokenKind Classify(ReadOnlySpan<char> src)
-            {
-                var length = src.Length;
-                var kind = TokenKind.None;
-                switch(length)
-                {
-                    case 1:
-                        kind = Classify(n1, src);
-                        break;
-                    case 2:
-                        kind = Classify(n2, src);
-                        break;
-                    case 3:
-                        kind = Classify(n3, src);
-                        break;
-                    case 4:
-                        kind = Classify(n4, src);
-                        break;
-                    case 5:
-                        kind = Classify(n5, src);
-                        break;
-                    case 6:
-                        kind = Classify(n6, src);
-                        break;
-                    case 7:
-                        kind = Classify(n7, src);
-                        break;
-                }
-
-                return 0;
-            }
-
-            /// <summary>
-            /// Classifies tokens of length 1
-            /// </summary>
-            /// <param name="n"></param>
-            /// <param name="src"></param>
-            TokenKind Classify(N1 n, ReadOnlySpan<char> src)
-            {
-                return 0;
-            }
-
-            /// <summary>
-            /// Classifies tokens of length 2
-            /// </summary>
-            /// <param name="n"></param>
-            /// <param name="src"></param>
-            TokenKind Classify(N2 n, ReadOnlySpan<char> src)
-            {
-                ref readonly var c0 = ref skip(src,0);
-                ref readonly var c1 = ref skip(src,1);
-
-                if(SQ.hexdigit(skip(src,0)) && SQ.hexdigit(skip(src,1)))
-                    return TokenKind.Byte;
-                switch(c0)
-                {
-                    case 'a':
-                    break;
-                }
-                return 0;
-            }
-
-            /// <summary>
-            /// Classifies tokens of length 3
-            /// </summary>
-            /// <param name="n"></param>
-            /// <param name="src"></param>
-            TokenKind Classify(N3 n, ReadOnlySpan<char> src)
-            {
-                return 0;
-            }
-
-            /// <summary>
-            /// Classifies tokens of length 4
-            /// </summary>
-            /// <param name="n"></param>
-            /// <param name="src"></param>
-            TokenKind Classify(N4 n, ReadOnlySpan<char> src)
-            {
-                return 0;
-            }
-
-            /// <summary>
-            /// Classifies tokens of length 5
-            /// </summary>
-            /// <param name="n"></param>
-            /// <param name="src"></param>
-            TokenKind Classify(N5 n, ReadOnlySpan<char> src)
-            {
-                return 0;
-            }
-
-            /// <summary>
-            /// Classifies tokens of length 6
-            /// </summary>
-            /// <param name="n"></param>
-            /// <param name="src"></param>
-            TokenKind Classify(N6 n, ReadOnlySpan<char> src)
-            {
-                return 0;
-            }
-
-            /// <summary>
-            /// Classifies tokens of length 7
-            /// </summary>
-            /// <param name="n"></param>
-            /// <param name="src"></param>
-            TokenKind Classify(N7 n, ReadOnlySpan<char> src)
-            {
-                return 0;
-            }
-
             void Collect()
             {
                 var collected = State.Marked();
                 if(collected.Length > 0)
                 {
-                    Classify(collected);
+                    classify(collected);
                 }
             }
 
             void Step()
             {
-                switch(Classify(State.Current()))
+                switch(OpCodeMachine.classify(State.Current()))
                 {
                     case AtomKind.Whitespace:
                         Collect();
@@ -299,54 +354,6 @@ namespace Z0.Asm
                 }
 
                 return accepted;
-            }
-
-            static AtomKind Classify(char src)
-            {
-                var kind = AtomKind.Other;
-                switch((AsciCode)src)
-                {
-                    case AC.Space:
-                    case LF:
-                    case CR:
-                    case FF:
-                    case Tab:
-                    case VTab:
-                        kind = AtomKind.Whitespace;
-                        break;
-                    case d0:
-                    case d1:
-                    case d2:
-                    case d3:
-                    case d4:
-                    case d5:
-                    case d6:
-                    case d7:
-                    case d8:
-                    case d9:
-                        kind = AtomKind.Digit;
-                        break;
-                    case FS:
-                    case Plus:
-                    case Dot:
-                        kind = AtomKind.Operator;
-                        break;
-                    case a:
-                    case b:
-                    case c:
-                    case d:
-                    case e:
-                    case f:
-                    case A:
-                    case B:
-                    case C:
-                    case D:
-                    case E:
-                    case F:
-                        kind = AtomKind.HexChar;
-                        break;
-                }
-                return kind;
             }
         }
     }

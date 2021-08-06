@@ -8,9 +8,9 @@ namespace Z0
 
     using static core;
 
-    public class EvalControl : IEvaluator<PartId>
+    public class EvalControl
     {
-        public static IEvaluator<PartId> create(IWfRuntime wf, IDomainSource source, FS.FolderPath root, uint bufferSize)
+        public static EvalControl create(IWfRuntime wf, IDomainSource source, FS.FolderPath root, uint bufferSize)
             => new EvalControl(wf, source, root, bufferSize);
 
         readonly IWfRuntime Wf;

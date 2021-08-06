@@ -19,10 +19,32 @@ namespace Z0
         /// <param name="index"></param>
         [Op]
         public static string left(string src, int index)
-            => TextTools.left(src, index);
+        {
+            var length = src?.Length ?? 0;
+            if(length == 0 || index < 0 || index > length - 1)
+                return EmptyString;
+            else
+                return slice(src, 0, index);
+        }
+
+        [Op]
+        public static string left(string src, char c)
+        {
+            var i = index(src,c);
+            if(i>0)
+                return left(src,i);
+            else
+                return EmptyString;
+        }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> left(ReadOnlySpan<char> src, int index)
-            => TextTools.left(src, index);
+        {
+            var length = src.Length;
+            if(length == 0 || index < 0 || index > length - 1)
+                return default;
+            else
+                return core.slice(src,0,index);
+        }
     }
 }

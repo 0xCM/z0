@@ -66,7 +66,7 @@ namespace Z0
 
         [Op]
         public static string format(object src)
-            => src is ITextual t ? t.Format() : src?.ToString() ?? "!!null!!";
+            => src is null ? "<null>" : src.ToString();
 
         public static string format<T>(string pattern, T a)
             => string.Format(pattern, a is ITextual t ? t.Format() : $"{a}");
