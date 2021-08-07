@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Pipes
+    partial struct BlockPipes
     {
         [MethodImpl(Inline)]
         public static BlockPipeline128<S,T> pipeline<S,T>(IPipeline pipes, IBlockSource128<S> src, IBlockProjector128<S,T> map, IBlockSink128<T> dst)

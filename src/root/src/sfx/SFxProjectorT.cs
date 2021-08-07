@@ -9,14 +9,16 @@ namespace Z0
 
     using static Root;
 
-    partial struct Pipes
+    public readonly struct SFxProjector<T> : ISFxProjector<T>
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Channel<T> connect<T>(Pipe<T> src, Pipe<T> dst)
-            => new Channel<T>(src,dst);
+        readonly System.Func<T,T> Fx;
 
         [MethodImpl(Inline)]
-        public static Channel<S,T> connect<S,T>(Pipe<S,T> src, Pipe<T> dst)
-            => new Channel<S,T>(src,dst);
+        public SFxProjector(System.Func<T,T> fx)
+            => Fx = fx;
+
+        [MethodImpl(Inline)]
+        public T Invoke(T a)
+            => Fx(a);
     }
 }

@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static SFx;
 
     [ApiHost]
     public readonly struct VPipeTests
@@ -24,7 +23,7 @@ namespace Z0
 
         [Op]
         public static Paired<uint,ByteSize> run(W128 w, BlockSource01 source, VMap01 mapper, BlockSink01 sink)
-            => Pipes.vpipeline(w128, source, mapper, sink, z8, z8).Run();
+            => BlockPipes.vpipeline(w128, source, mapper, sink, z8, z8).Run();
 
         [MethodImpl(Inline), Op]
         static EventSignal signal(IWfRuntime wf)

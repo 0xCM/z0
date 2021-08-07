@@ -46,7 +46,7 @@ namespace Z0.Asm
         public RegIndex Prior()
             => (byte)Code > 0 ? (byte)((byte)Code - 1) : 31;
         public string Format()
-            => BitRender.format(n5,Encoded);
+            => BitRender.format5(n5,Encoded);
 
        public override string ToString()
             => Format();

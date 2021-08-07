@@ -19,7 +19,7 @@ namespace Z0
         readonly Pipe<T> Target;
 
         [MethodImpl(Inline)]
-        internal Channel(Pipe<T> src, Pipe<T> dst)
+        public Channel(Pipe<T> src, Pipe<T> dst)
         {
             Source = src;
             Target = dst;

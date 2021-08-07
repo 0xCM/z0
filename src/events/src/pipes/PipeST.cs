@@ -8,26 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static SFx;
 
-    public readonly struct Pipe<T> : IPipe<T>
+    public readonly struct Pipe<S,T> : IPipe<S,T>
     {
-        readonly PipeBuffer<T> Buffer;
+        readonly PipeBuffer<S> Buffer;
 
-        readonly ISFxProjector<T> Projector;
+        readonly ISFxProjector<S,T> Projector;
 
         [MethodImpl(Inline)]
-        internal Pipe(IPipeline pipes, PipeBuffer<T> buffer, ISFxProjector<T> projector)
+        public Pipe(IPipeline pipes, PipeBuffer<S> buffer, ISFxProjector<S,T> projector)
         {
             Buffer = buffer;
             Projector = projector;
         }
 
         [MethodImpl(Inline)]
-        public void Deposit(T src)
+        public void Deposit(S src)
             => Buffer.Enqueue(src);
 
-        [MethodImpl(Inline)]
         public bool Emit(out T dst)
         {
             if(Buffer.TryDequeue(out var src))

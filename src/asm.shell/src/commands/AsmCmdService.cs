@@ -191,6 +191,18 @@ namespace Z0.Asm
         FS.Files Files(FS.FileExt ext)
             => State.Files().Where(f => f.Is(ext));
 
+        FS.FilePath TablePath<T>()
+            where T : struct
+                => TableWs().Table<T>(FS.Csv);
+
+        FS.FilePath TablePath<T>(Scope scope)
+            where T : struct
+                => TableWs().Table<T>(scope);
+
+        FS.FilePath TablePath<T>(Scope scope, string suffix)
+            where T : struct
+                => TableWs().Table<T>(scope, suffix);
+
         FS.Files Files(FS.Files src, bool write = true)
         {
             State.Files(src);
@@ -300,7 +312,7 @@ namespace Z0.Asm
             where T : struct
         {
             var dst = OutWs().QueryOut(id, FS.Csv);
-            return EmitRows(src, widths, dst);
+            return TableEmit(src, widths, dst);
         }
 
         [MethodImpl(Inline)]
@@ -316,19 +328,6 @@ namespace Z0.Asm
                 ("SrcId", id)
                 );
             var cmd = Cmd.cmdline(script.Format(PathSeparator.BS));
-            return Run(cmd, vars, out var response);
-        }
-
-        Outcome BuildAsmObj(string id, FS.FolderPath src, FS.FolderPath dst)
-        {
-            const string ScriptId = "emit-obj";
-            var result = Outcome.Success;
-            var vars = Cmd.vars(
-                ("SrcId", id),
-                ("SrcDir", src.Format(PathSeparator.BS)),
-                ("DstDir", dst.Format(PathSeparator.BS))
-                );
-            var cmd = Cmd.cmdline(ToolScript(Toolspace.nasm, ScriptId).Format(PathSeparator.BS));
             return Run(cmd, vars, out var response);
         }
 
@@ -359,9 +358,6 @@ namespace Z0.Asm
         {
             Write(string.Format("Emitted {0} records to {1}", count, dst.ToUri()));
         }
-
-        static CmdLine cmdline(FS.FilePath script)
-            => Cmd.cmdline(script.Format(PathSeparator.BS));
 
         static MsgPattern CapacityExceeded => "Capacity exceeded";
 

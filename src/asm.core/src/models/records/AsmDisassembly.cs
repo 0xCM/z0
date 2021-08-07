@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         public const byte FieldCount = 4;
 
-        public Hex64 Offset;
+        public MemoryAddress Offset;
 
         public AsmExpr Statement;
 
@@ -25,7 +25,7 @@ namespace Z0.Asm
         public AsmBitstring Bitstring;
 
         [MethodImpl(Inline)]
-        public AsmDisassembly(Hex64 offset, AsmExpr expr, AsmHexCode code, AsmBitstring bs)
+        public AsmDisassembly(MemoryAddress offset, AsmExpr expr, AsmHexCode code, AsmBitstring bs)
         {
             Offset = offset;
             Statement = expr;
@@ -34,7 +34,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmDisassembly(Hex64 offset, AsmExpr expr)
+        public AsmDisassembly(MemoryAddress offset, AsmExpr expr)
         {
             Offset = offset;
             Statement = expr;
@@ -42,8 +42,6 @@ namespace Z0.Asm
             Bitstring = AsmBitstring.Empty;
         }
 
-
         public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{12,64,32,32};
-
     }
 }

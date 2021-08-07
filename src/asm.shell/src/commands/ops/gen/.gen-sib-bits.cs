@@ -34,7 +34,7 @@ namespace Z0.Asm
                         var b1 = skip(f1, j);
                         var b2 = skip(f2, k);
                         var bits = BitNumbers.join(b0,b1,b2);
-                        BitRender.render(n8, bits, ref m, dst);
+                        BitRender.render8(bits, ref m, dst);
                         seek(dst,m++) = (char)AsciControl.CR;
                         seek(dst,m++) = (char)AsciControl.LF;
                     }

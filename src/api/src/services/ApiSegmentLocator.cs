@@ -64,7 +64,7 @@ namespace Z0
                 }
             }
 
-            var located = EmitRows(@readonly(buffer), MethodSegment.RenderWidths, Db.Table<MethodSegment>(dir));
+            var located = TableEmit(@readonly(buffer), MethodSegment.RenderWidths, Db.Table<MethodSegment>(dir));
             Wf.Ran(flow, Msg.LocatedSegments.Format(located, count));
             return locations.Array().Sort();
         }

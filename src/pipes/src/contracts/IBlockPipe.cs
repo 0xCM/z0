@@ -16,6 +16,21 @@ namespace Z0
     }
 
     [Free]
+    public interface ISpanPipe128<S,T> : ISpanPipe<W128,S,T>
+        where S : unmanaged
+        where T : unmanaged
+    {
+        uint Flow(in SpanBlock128<S> src, in SpanBlock128<T> dst);
+    }
+
+    [Free]
+    public interface ISpanPipe256<S,T> : ISpanPipe<W256,S,T>
+        where S : unmanaged
+        where T : unmanaged
+    {
+        uint Flow(in SpanBlock256<S> src, in SpanBlock256<T> dst);
+    }
+    [Free]
     public interface IBlockPipe128<S,T> : IBlockPipe<W128,S,T>, IBlockSource128<S>, IBlockSink128<T>
         where S : unmanaged
         where T : unmanaged

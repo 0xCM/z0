@@ -10,7 +10,6 @@ namespace Z0
     public interface IChannel
     {
         void Flow();
-
     }
 
     [Free]

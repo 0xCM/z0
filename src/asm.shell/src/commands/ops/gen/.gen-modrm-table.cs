@@ -26,9 +26,9 @@ namespace Z0.Asm
                     {
                         var code = math.or(math.sll(mod,6), math.sll(reg,3), rm);
                         var fCode = code.FormatHex(specifier:false);
-                        var fMod = BitRender.format(n2, mod);
-                        var fReg = BitRender.format(n3, reg);
-                        var fRm = BitRender.format(n3, rm);
+                        var fMod = BitRender.format2(mod);
+                        var fReg = BitRender.format3(reg);
+                        var fRm = BitRender.format3(rm);
                         var bitstring = string.Format("{0} {1} {2}", fMod, fReg, fRm);
                         var row = string.Format(Pattern, fMod, fReg, fRm, fCode, bitstring);
                         writer.WriteLine(row);

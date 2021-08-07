@@ -22,7 +22,7 @@ namespace Z0
         {
             const string RenderPattern = "{0,-2} {1,-4} {2,-2} {3,-5}";
             var index = u8(kind);
-            var bits = BitRender.format(n, index);
+            var bits = BitRender.format5(n, index);
             var hex = index.FormatHex(specifier:false);
             var desc = string.Format(RenderPattern,index, symbol, hex, bits);
             var width = desc.Length;
@@ -35,7 +35,7 @@ namespace Z0
         {
             const string RenderPattern = "{0,-2} {1,-4} {2,-2} {3,-5}";
             var index = u8(kind);
-            var bits = BitRender.format(n, index);
+            var bits = BitRender.format5(n, index);
             var hex = index.FormatHex(specifier:false);
             var desc = string.Format(RenderPattern,index, symbol, hex, bits);
             var width = desc.Length;

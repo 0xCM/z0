@@ -12,11 +12,11 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmDisassembly disassembly(Hex64 offset, AsmExpr statement)
+        public static AsmDisassembly disassembly(MemoryAddress offset, AsmExpr statement)
             => new AsmDisassembly(offset, statement);
 
         [Op]
-        public static AsmDisassembly disassembly(Hex64 offset, AsmExpr statement, AsmHexCode code)
+        public static AsmDisassembly disassembly(MemoryAddress offset, AsmExpr statement, AsmHexCode code)
             => new AsmDisassembly(offset, statement, code, bitstring(code));
     }
 }

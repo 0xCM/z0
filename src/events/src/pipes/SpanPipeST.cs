@@ -8,7 +8,6 @@ namespace Z0
 
     public sealed class SpanPipe<S,T> : SpanPipe<SpanPipe<S,T>,S,T>
     {
-
         ISpanMap<S,T> Map;
 
         public SpanPipe()
@@ -18,7 +17,7 @@ namespace Z0
 
         uint Counter;
 
-        internal SpanPipe<S,T> With(ISpanMap<S,T> map)
+        public SpanPipe<S,T> With(ISpanMap<S,T> map)
         {
             Map = map;
             return this;

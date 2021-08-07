@@ -231,7 +231,7 @@ namespace Z0
                 => Table(TableId<T>(), FS.Csv);
 
         public FS.FilePath Table<T>(FS.FileExt ext)
-            where T : struct, IRecord<T>
+            where T : struct
                 => Table(TableId<T>(), ext);
 
         public FS.FolderPath ImportTables()

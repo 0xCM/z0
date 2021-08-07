@@ -82,7 +82,7 @@ namespace Z0
             => FS.file(string.Format("{0}.{1}", id, suffix), FS.Csv);
 
         FS.FilePath Table<T>(FS.FileExt ext)
-            where T : struct, IRecord<T>
+            where T : struct
                 => Path(Z0.TableId.identify<T>().Format(), ext);
 
         FS.FilePath Table<T>()

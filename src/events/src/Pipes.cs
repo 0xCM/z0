@@ -9,9 +9,55 @@ namespace Z0
     using System.IO;
 
     using static Root;
+    using static core;
 
-    partial struct Pipes
+    [ApiHost]
+    public readonly struct Pipes
     {
+        const NumericKind Closure = AllNumeric;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Channel<T> connect<T>(Pipe<T> src, Pipe<T> dst)
+            => new Channel<T>(src,dst);
+
+        [MethodImpl(Inline)]
+        public static Channel<S,T> connect<S,T>(Pipe<S,T> src, Pipe<T> dst)
+            => new Channel<S,T>(src,dst);
+
+        [Op, Closures(Closure)]
+        public static void flow<T>(ReadOnlySpan<T> src, ReadOnlySpan<IReceiver<T>> dst)
+        {
+            var kSources = src.Length;
+            var kTargets = dst.Length;
+            for(var i=0; i<kSources; i++)
+            {
+                ref readonly var input = ref skip(src,i);
+                for(var j=0; j<kTargets; j++)
+                    skip(dst,j).Deposit(input);
+            }
+        }
+
+        [Op, Closures(Closure)]
+        public static uint flow<T>(Pipe<T> src, Pipe<T> dst)
+        {
+            var count = 0u;
+            while(src.Emit(out var cell))
+            {
+                dst.Deposit(cell);
+                count++;
+            }
+            return count;
+        }
+
+        [Op, Closures(Closure)]
+        public static uint flow<T>(ReadOnlySpan<T> src, Pipe<T> dst)
+        {
+            var count = (uint)src.Length;
+            for(var i=0; i<count; i++)
+                dst.Deposit(skip(src,i));
+            return count;
+        }
+
         /// <summary>
         /// Creates a <see cref='Sink{T}'/> from a <see cref='Receiver{T}'/>
         /// </summary>

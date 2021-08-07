@@ -9,23 +9,24 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Pipe<S,T> : IPipe<S,T>
+    public readonly struct Pipe<T> : IPipe<T>
     {
-        readonly PipeBuffer<S> Buffer;
+        readonly PipeBuffer<T> Buffer;
 
-        readonly ISFxProjector<S,T> Projector;
+        readonly ISFxProjector<T> Projector;
 
         [MethodImpl(Inline)]
-        internal Pipe(IPipeline pipes, PipeBuffer<S> buffer, ISFxProjector<S,T> projector)
+        public Pipe(IPipeline pipes, PipeBuffer<T> buffer, ISFxProjector<T> projector)
         {
             Buffer = buffer;
             Projector = projector;
         }
 
         [MethodImpl(Inline)]
-        public void Deposit(S src)
+        public void Deposit(T src)
             => Buffer.Enqueue(src);
 
+        [MethodImpl(Inline)]
         public bool Emit(out T dst)
         {
             if(Buffer.TryDequeue(out var src))

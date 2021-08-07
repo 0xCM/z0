@@ -8,7 +8,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Pipes
+    partial struct BlockPipes
     {
         [MethodImpl(Inline)]
         public static void run<S,T>(BlockPipeline128<S,T> pipes, uint count, in SpanBlock128<T> buffer)

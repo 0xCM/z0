@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    using api = Pipes;
+    using api = BlockPipes;
 
     public struct BlockPipeline256<S,T>
         where S : unmanaged

@@ -9,44 +9,9 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
-    partial struct Pipes
+    partial struct BlockPipes
     {
-        [Op, Closures(Closure)]
-        public static void flow<T>(ReadOnlySpan<T> src, ReadOnlySpan<IReceiver<T>> dst)
-        {
-            var kSources = src.Length;
-            var kTargets = dst.Length;
-            for(var i=0; i<kSources; i++)
-            {
-                ref readonly var input = ref skip(src,i);
-                for(var j=0; j<kTargets; j++)
-                    skip(dst,j).Deposit(input);
-            }
-        }
-
-        [Op, Closures(Closure)]
-        public static uint flow<T>(Pipe<T> src, Pipe<T> dst)
-        {
-            var count = 0u;
-            while(src.Emit(out var cell))
-            {
-                dst.Deposit(cell);
-                count++;
-            }
-            return count;
-        }
-
-        [Op, Closures(Closure)]
-        public static uint flow<T>(ReadOnlySpan<T> src, Pipe<T> dst)
-        {
-            var count = (uint)src.Length;
-            for(var i=0; i<count; i++)
-                dst.Deposit(skip(src,i));
-            return count;
-        }
-
         [MethodImpl(Inline)]
         public static void flow<P,S,T>(BlockPipe128<S,T> pipe, P projector)
             where S : unmanaged

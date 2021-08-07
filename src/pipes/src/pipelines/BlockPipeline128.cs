@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using api = Pipes;
+    using api = BlockPipes;
 
     public struct BlockPipeline128<S,T>
         where S : unmanaged

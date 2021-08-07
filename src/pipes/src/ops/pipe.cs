@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static SFx;
 
-    partial struct Pipes
+    partial struct BlockPipes
     {
         static T identity<T>(T src)
             => src;
@@ -20,7 +19,7 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static Pipe<T> pipe<T>(IPipeline pipes)
-            => pipe(pipes, new PipeBuffer<T>(), new SFx.Projector<T>(identity));
+            => pipe(pipes, new PipeBuffer<T>(), new SFxProjector<T>(identity));
 
         [Op, Closures(Closure)]
         public static Pipe<T> pipe<T>(IPipeline pipes, ISFxProjector<T> projector)

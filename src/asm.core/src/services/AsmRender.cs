@@ -16,12 +16,9 @@ namespace Z0.Asm
     {
         const char Open = Chars.LBracket;
 
-        const string Sep = " | ";
-
         const char Close = Chars.RBracket;
 
         const string To = " => ";
-
 
         public static string format(in AsmHostStatement src)
             => string.Format("{0} {1,-36} ; {2} => {3}",
@@ -97,7 +94,7 @@ namespace Z0.Asm
         public static uint render(in AsmDisassembly src, Span<char> dst)
         {
             var i=0u;
-            Hex.render(LowerCase,src.Offset, ref i, dst);
+            Hex.render(LowerCase,(Hex64)src.Offset, ref i, dst);
             seek(dst,i++) = Chars.Space;
             text.copy(src.Statement.Data, ref i, dst);
             return i;
@@ -107,44 +104,6 @@ namespace Z0.Asm
         {
             var count = render(src,buffer);
             return text.format(slice(buffer,0,count));
-        }
-
-        public static uint render(in AsmMnemonic src, MnemonicCase @case, ref uint i, Span<char> dst)
-        {
-            if(src.IsEmpty)
-                return 0;
-            var i0 = i;
-            var data = src.Data;
-            switch(@case)
-            {
-                case MnemonicCase.Lowercase:
-                    text.lowercase(ref i, data, dst);
-                break;
-                case MnemonicCase.Uppercase:
-                    text.uppercase(ref i, data, dst);
-                break;
-                case MnemonicCase.Captialized:
-                    text.lowercase(ref i, data, dst);
-                    seek(dst, i0) = skip(data,0).ToUpper();
-                break;
-
-            }
-
-            return i - i0;
-        }
-
-        [Op]
-        public static string format(in AsmMnemonic src, MnemonicCase @case)
-        {
-            var data = src.Data;
-            var count = data.Length;
-            if(count == 0)
-                return EmptyString;
-
-            Span<char> dst = stackalloc char[count];
-            var i=0u;
-            render(src, @case, ref i, dst);
-            return text.format(dst);
         }
 
         [Op]
@@ -163,9 +122,33 @@ namespace Z0.Asm
             return i - i0;
         }
 
+        [MethodImpl(Inline), Op]
+        public static uint hexbytes(Hex64 src, Span<char> dst)
+        {
+            var i=0u;
+            var data = bytes(src);
+            var count = data.Length;
+            for(var j=0; j<count; j++)
+            {
+                ref readonly var b = ref skip(data, j);
+                Hex.render(LowerCase, (Hex8)b, ref i, dst);
+                if(j != count - 1)
+                    seek(dst, i++) = Chars.Space;
+            }
+            return i;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static CharBlock24 hexbytes(Hex64 src)
+        {
+            var dst = CharBlock24.Null;
+            hexbytes(src, dst.Data);
+            return dst;
+        }
+
         [Op]
         public static string bits(RexPrefix src)
-            => text.format(BitRender.render(n8, n4, src.Encoded));
+            => text.format(BitRender.render8x4(src.Encoded));
 
         [Op]
         public static string bitfield(RexPrefix src)
@@ -196,7 +179,7 @@ namespace Z0.Asm
 
         public static string describe(RexPrefix src)
         {
-            var bits = text.format(BitRender.render(n8, n4, src.Encoded));
+            var bits = text.format(BitRender.render8x4(src.Encoded));
             var bitfield = string.Format(RexFieldPattern, src.W(), src.R(), src.X(), src.B());
             return $"{src.Encoded.FormatAsmHex()} | [{bits}] => {bitfield}";
         }
@@ -321,7 +304,7 @@ namespace Z0.Asm
                 for(var i=0; i<To.Length; i++)
                     seek(dst,counter++) = skip(_to,i);
 
-                counter += AsmBitstrings.render(n8, n4, src.Encoded, counter, dst);
+                counter += AsmBitstrings.render8x4(n8, n4, src.Encoded, counter, dst);
             }
 
             return counter;

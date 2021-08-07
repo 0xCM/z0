@@ -13,74 +13,74 @@ namespace Z0
     partial struct BitRender
     {
         [MethodImpl(Inline), Op]
-        public static string format(N2 n, byte src)
+        public static string format2(byte src)
         {
             var i=0u;
             var buffer = CharBlock2.Null;
             var dst = buffer.Data;
-            render(n, src, ref i, dst);
+            render2(n2, src, ref i, dst);
             return new string(dst);
         }
 
         [Op]
-        public static string format(N3 n, byte src)
+        public static string format3(byte src)
         {
             var buffer = CharBlock3.Null.Data;
             var i=0u;
-            var count = render(n, src, ref i, buffer);
+            var count = render3(n3, src, ref i, buffer);
             return new string(slice(buffer,0,count));
         }
 
         [Op]
-        public static string format(N4 n, byte src)
+        public static string format4(byte src)
         {
             var buffer = CharBlock4.Null.Data;
             var i=0u;
-            var count = render(n, src, ref i, buffer);
+            var count = render4(n4, src, ref i, buffer);
             return new string(slice(buffer,0,count));
         }
 
         [Op]
-        public static string format(N5 n, byte src)
+        public static string format5(N5 n, byte src)
         {
             var buffer = CharBlock5.Null.Data;
             var i=0u;
-            var count = render(n, src, ref i, buffer);
+            var count = render5(n5, src, ref i, buffer);
             return new string(slice(buffer,0,count));
         }
 
         [Op]
-        public static string format(N6 n, byte src)
+        public static string format6(byte src)
         {
             var buffer = CharBlock6.Null.Data;
             var i=0u;
-            var count = render(n, src, ref i, buffer);
+            var count = render6(n6, src, ref i, buffer);
             return new string(slice(buffer,0,count));
         }
 
         [Op]
-        public static string format(N7 n, byte src)
+        public static string format7(byte src)
         {
             var buffer = CharBlock7.Null.Data;
             var i=0u;
-            var count = render(n, src, ref i, buffer);
+            var count = render7(n7, src, ref i, buffer);
             return new string(slice(buffer,0,count));
         }
 
         [Op]
-        public static string format(N8 n, byte src)
+        public static string format8(byte src)
         {
             var buffer = CharBlock8.Null.Data;
             var i=0u;
-            var count = render(n, src, ref i, buffer);
+            var count = render8(src, ref i, buffer);
             return new string(slice(buffer,0,count));
         }
 
         [Op]
-        public static string format(N32 n, N8 w, uint src)
+        public static string format32x8(uint src)
         {
             var buffer = CharBlock64.Null.Data;
-            var count = render(n, w, src, 0, buffer);
+            var count = render32x8(src, 0, buffer);
             return new string(slice(buffer,0,count));
         }
 
@@ -90,7 +90,7 @@ namespace Z0
             var dst = span<char>(count);
             dst.Fill(Chars.D0);
 
-            BitRender.render8x8(src, config.MaxBitCount, dst);
+            render8x8(src, config.MaxBitCount, dst);
 
             dst.Reverse();
 

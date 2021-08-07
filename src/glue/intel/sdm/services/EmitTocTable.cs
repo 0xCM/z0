@@ -89,7 +89,7 @@ namespace Z0.Asm
                 }
             }
 
-            var rowcount = EmitRows(entries.ViewDeposited(), TocEntryTable());
+            var rowcount = TableEmit(entries.ViewDeposited(), TocEntryTable());
             Wf.Ran(flow, string.Format("Collected {0} toc entries", rowcount));
             return result;
         }

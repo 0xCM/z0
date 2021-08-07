@@ -20,9 +20,6 @@ namespace Z0
             var flow = Wf.Running();
             CheckFormatting();
             BitfieldChecks.create(Wf).Run();
-            //CheckCredits.create(Wf).Run();
-            //var buffer = text.buffer();
-            //BitMaskChecker.create(Wf).Run(Rng.@default());
             Wf.Ran(flow);
         }
 
@@ -34,11 +31,10 @@ namespace Z0
             var bf = Bitfields.create(m);
             var bytes = bf.Bytes;
             var buffer = CharBlock128.Null;
-            var count = BitRender.render(n4, bytes, buffer.Data);
+            var count = BitRender.render4(bytes, buffer.Data);
             var chars = slice(buffer.Data,0,count);
             var fmt = text.format(chars);
             Wf.Row(fmt);
-
         }
     }
 }

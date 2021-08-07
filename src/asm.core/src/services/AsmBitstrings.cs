@@ -35,35 +35,35 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N8 n, N4 w, AsmHexCode src, uint offset, Span<char> dst)
+        public static uint render8x4(N8 n, N4 w, AsmHexCode src, uint offset, Span<char> dst)
         {
             var input = src.Bytes;
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render(n, w, skip(input, i), offset, dst);
+                offset += BitRender.render8x4(skip(input, i), offset, dst);
             return offset - 1;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N8 n, N4 w, AsmHexCode src, uint offset, Span<AsciCode> dst)
+        public static uint render8x4(N8 n, N4 w, AsmHexCode src, uint offset, Span<AsciCode> dst)
         {
             var input = src.Bytes;
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render(n, w, skip(input, i), offset, dst);
+                offset += BitRender.render8x4(skip(input, i), offset, dst);
             return offset - 1;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N8 n, N3 w, AsmHexCode src, uint offset, Span<AsciCode> dst)
+        public static uint render8x3(N8 n, N3 w, AsmHexCode src, uint offset, Span<AsciCode> dst)
         {
             var input = src.Bytes;
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render(n, w, skip(input, i), offset, dst);
+                offset += BitRender.render8x3(skip(input, i), offset, dst);
             return offset - 1;
         }
 
@@ -74,7 +74,7 @@ namespace Z0.Asm
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render(n8, n3, skip(input, i), offset, dst);
+                offset += BitRender.render8x3(skip(input, i), offset, dst);
             return offset - 1;
         }
 
@@ -107,7 +107,7 @@ namespace Z0.Asm
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render(n8, w4, skip(input, i), offset, dst);
+                offset += BitRender.render8x4(skip(input, i), offset, dst);
             return offset - 1;
         }
 
@@ -149,7 +149,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static uint render(AsmHexCode src, Span<char> dst)
-            => render(n8, n4, src, 0u, dst);
+            => render8x4(n8, n4, src, 0u, dst);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> render(AsmHexCode src)

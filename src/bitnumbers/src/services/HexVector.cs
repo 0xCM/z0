@@ -14,7 +14,7 @@ namespace Z0
     partial class XTend
     {
         public static string FormatBitstring(this Hex32 src, N8 n)
-            => BitRender.format(n32,n8, src);
+            => BitRender.format32x8(src);
     }
 
     [ApiHost]
@@ -70,10 +70,10 @@ namespace Z0
 
         public static uint bitstring<N>(HexVector8<N> src, uint offset, Span<char> dst)
             where N : unmanaged, ITypeNat
-                => BitRender.render<N>(n8, n8, src.Bytes, offset, dst);
+                => BitRender.render8x8<N>(n8, n8, src.Bytes, offset, dst);
 
         [Op]
         public static uint bitstring(Hex32 src, N8 n, uint offset, Span<char> dst)
-            => BitRender.render(n32, n, src.Value, offset, dst);
+            => BitRender.render32x8(src.Value, offset, dst);
     }
 }

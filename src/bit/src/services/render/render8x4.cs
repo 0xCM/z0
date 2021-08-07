@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct BitRender
     {
-        public static ReadOnlySpan<char> render(N8 n, N4 w, byte src)
+        public static ReadOnlySpan<char> render8x4(byte src)
         {
             var dst = CharBlock16.Null.Data;
             var i = 0u;
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N8 n, N4 w, byte src, uint offset, Span<char> dst)
+        public static uint render8x4(byte src, uint offset, Span<char> dst)
         {
             var i=offset;
             seek(dst, i++) = bitchar(src, 7);
@@ -43,11 +43,11 @@ namespace Z0
             seek(dst, i++) = bitchar(src, 1);
             seek(dst, i++) = bitchar(src, 0);
             i += separate(i, dst);
-            return n + 2u;
+            return 8 + 2u;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N8 n, N4 w, byte src, uint offset, Span<AsciCode> dst)
+        public static uint render8x4(byte src, uint offset, Span<AsciCode> dst)
         {
             var i=offset;
             seek(dst, i++) = code(src, 7);
@@ -60,11 +60,11 @@ namespace Z0
             seek(dst, i++) = code(src, 1);
             seek(dst, i++) = code(src, 0);
             i += separate(i, dst);
-            return n + 2u;
+            return 8 + 2u;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N8 n, N4 w, byte src, uint offset, Span<BitChar> dst)
+        public static uint render8x4(byte src, uint offset, Span<BitChar> dst)
         {
             var i=offset;
             seek(dst, i++) = bit.test(src, 7);
@@ -77,21 +77,21 @@ namespace Z0
             seek(dst, i++) = bit.test(src, 1);
             seek(dst, i++) = bit.test(src, 0);
             seek(dst, i++) = BitChars.SegSep;
-            return n + 2u;
+            return 8 + 2u;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N4 w, ReadOnlySpan<byte> src, Span<char> dst)
+        public static uint render4(ReadOnlySpan<byte> src, Span<char> dst)
         {
             var size = src.Length;
             var j = 0u;
-
+            var w = w4;
             for(var i=size-1; i >= 0; i--)
             {
                 ref readonly var input = ref skip(src,i);
-                render(w, hi(input), ref j, dst);
+                render4(w, hi(input), ref j, dst);
                 j+= separate(j, dst);
-                render(w, lo(input), ref j, dst);
+                render4(w, lo(input), ref j, dst);
                 if(i != 0)
                     j += separate(j, dst);
             }

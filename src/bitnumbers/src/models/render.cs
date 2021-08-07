@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     using C = AsciCode;
 
@@ -25,50 +24,50 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint render(uint2 src, ref uint i, Span<C> dst)
-            => BitRender.render(n2, src, ref i, dst);
+            => BitRender.render2(n2, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint2 src, ref uint i, Span<char> dst)
-            => BitRender.render(n2, src, ref i, dst);
+            => BitRender.render2(n2, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint3 src, ref uint i, Span<C> dst)
-            => BitRender.render(n3, src, ref i, dst);
+            => BitRender.render3(n3, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint3 src, ref uint i, Span<char> dst)
-            => BitRender.render(n3, src, ref i, dst);
+            => BitRender.render3(n3, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint4 src, ref uint i, Span<C> dst)
-            => BitRender.render(n4, src, ref i, dst);
+            => BitRender.render4(n4, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint4 src, ref uint i, Span<char> dst)
-            => BitRender.render(n4, src, ref i, dst);
+            => BitRender.render4(n4, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint5 src, ref uint i, Span<C> dst)
-            => BitRender.render(n5, src, ref i, dst);
+            => BitRender.render5(n5, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint5 src, ref uint i, Span<char> dst)
-            => BitRender.render(n5, src, ref i, dst);
+            => BitRender.render5(n5, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint6 src, ref uint i, Span<C> dst)
-            => BitRender.render(n6, src, ref i, dst);
+            => BitRender.render6(n6, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint6 src, ref uint i, Span<char> dst)
-            => BitRender.render(n6, src, ref i, dst);
+            => BitRender.render6(n6, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint7 src, ref uint i, Span<C> dst)
-            => BitRender.render(n7, src, ref i, dst);
+            => BitRender.render7(n7, src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint7 src, ref uint i, Span<char> dst)
-            => BitRender.render(n7, src, ref i, dst);
+            => BitRender.render7(n7, src, ref i, dst);
     }
 }

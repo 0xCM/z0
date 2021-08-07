@@ -81,7 +81,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         ref byte Cell(uint index)
-            =>  ref Bss.cell(Buffer, index);
+            => ref Bss.cell(Buffer, index);
 
         [MethodImpl(Inline)]
         void Fill(byte src)
@@ -89,6 +89,87 @@ namespace Z0
             var count = Buffer.CellCount;
             for(var i=0u; i<count; i++)
                 Cell(i) = src;
+        }
+
+        [MethodImpl(Inline)]
+        void ExtractToken(ReadOnlySpan<byte> src, out CharBlock16 dst)
+        {
+            dst = CharBlock16.Null;
+            var count = min(src.Length, 16);
+            ref var target = ref u16(dst);
+
+            for(var i=0; i<count; i++)
+                seek(target,i) = (char)skip(src,i);
+        }
+
+        bit Accumulate(byte src)
+        {
+            var c = (char)src;
+            var seg = Buffer.Segment(1);
+            var count = skip(seg,24);
+            switch(c)
+            {
+                case ' ':
+                    if(count > 0)
+                    {
+                        ExtractToken(slice(seg,0,count), out var dst);
+                        return true;
+                    }
+                break;
+                case 'a':
+                break;
+                case 'b':
+                break;
+                case 'c':
+                break;
+                case 'd':
+                break;
+                case 'e':
+                break;
+                case 'f':
+                break;
+                case 'g':
+                break;
+                case 'h':
+                break;
+                case 'i':
+                break;
+                case 'j':
+                break;
+                case 'k':
+                break;
+                case 'l':
+                break;
+                case 'm':
+                break;
+                case 'n':
+                break;
+                case 'o':
+                break;
+                case 'p':
+                break;
+                case 'q':
+                break;
+                case 'r':
+                break;
+                case 's':
+                break;
+                case 't':
+                break;
+                case 'u':
+                break;
+                case 'v':
+                break;
+                case 'w':
+                break;
+                case 'x':
+                break;
+                case 'y':
+                break;
+                case 'z':
+                break;
+            }
+            return false;
         }
     }
 }

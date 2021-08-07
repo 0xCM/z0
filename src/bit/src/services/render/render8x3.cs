@@ -13,7 +13,7 @@ namespace Z0
     partial struct BitRender
     {
         [MethodImpl(Inline), Op]
-        public static uint render(N8 n, N3 w, byte src, uint offset, Span<char> dst)
+        public static uint render8x3(N8 n, N3 w, byte src, uint offset, Span<char> dst)
         {
             var i= offset;
             seek(dst, i++) = bitchar(src, 7);
@@ -27,12 +27,11 @@ namespace Z0
             seek(dst, i++) = bitchar(src, 1);
             seek(dst, i++) = bitchar(src, 0);
             separate(i++, dst);
-            return n + 3u;
+            return 8 + 3u;
         }
 
-
         [MethodImpl(Inline), Op]
-        public static uint render(N8 n, N3 w, byte src, uint offset, Span<AsciCode> dst)
+        public static uint render8x3(byte src, uint offset, Span<AsciCode> dst)
         {
             var i= offset;
             seek(dst, i++) = code(src, 7);
@@ -46,11 +45,11 @@ namespace Z0
             seek(dst, i++) = code(src, 1);
             seek(dst, i++) = code(src, 0);
             separate(i++, dst);
-            return n + 3u;
+            return 8 + 3u;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N8 n, N3 w, byte src, uint offset, Span<BitChar> dst)
+        public static uint render8x3(byte src, uint offset, Span<BitChar> dst)
         {
             var i= offset;
             seek(dst, i++) = bit.test(src, 7);
@@ -64,7 +63,7 @@ namespace Z0
             seek(dst, i++) = bit.test(src, 1);
             seek(dst, i++) = bit.test(src, 0);
             seek(dst, i++) = BitChars.SegSep;
-            return n + 3u;
+            return 8 + 3u;
         }
     }
 }

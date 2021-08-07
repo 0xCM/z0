@@ -39,7 +39,6 @@ namespace Z0.Asm
                         counter += SdmRecords.fill(table, current);
                     }
                 }
-
             }
 
             var rows = slice(buffer,0,counter);
@@ -47,7 +46,7 @@ namespace Z0.Asm
                 seek(rows,i).OpCodeId = i + 1;
             var outpath = TableWs().Table<OpCodeRecord>();
             using var writer = outpath.AsciWriter();
-            EmitRows(@readonly(rows), OpCodeRecord.RenderWidths, writer, outpath);
+            TableEmit(@readonly(rows), OpCodeRecord.RenderWidths, writer, outpath);
             return result;
         }
     }

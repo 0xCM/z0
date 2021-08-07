@@ -7,7 +7,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static SFx;
 
     public struct VPipeline128<B,M,R,S,T>
         where R : IBlockSink128<R,T>
@@ -32,7 +31,7 @@ namespace Z0
             Blocks = blocks;
             Mapper = mapper;
             Receiver = receiver;
-            Pipe = Pipes.vpipe<M,S,T>(W, mapper);
+            Pipe = BlockPipes.vpipe<M,S,T>(W, mapper);
         }
 
         [MethodImpl(Inline)]

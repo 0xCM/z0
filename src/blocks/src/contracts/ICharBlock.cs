@@ -8,7 +8,7 @@ namespace Z0
 
     using static core;
 
-    public interface ICharBlock<T> : ITextual
+    public interface ICharBlock<T> : ITextual, IComparable<T>, IEquatable<T>, IBlittable<T>
         where T : unmanaged, ICharBlock<T>
     {
         Span<char> Data {get;}
@@ -19,6 +19,17 @@ namespace Z0
 
         uint Capacity {get;}
 
+        Span<byte> IBlittable.Edit
+            => recover<byte>(Data);
+
+        ReadOnlySpan<byte> IBlittable.View
+            => recover<byte>(Data);
+
+        int IComparable<T>.CompareTo(T src)
+            => Data.SequenceCompareTo(src.Data);
+
+        bool IEquatable<T>.Equals(T src)
+            => Data.SequenceEqual(src.Data);
         ref char First
             => ref first(Data);
     }

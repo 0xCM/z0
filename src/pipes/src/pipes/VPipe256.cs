@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static SFx;
 
     public struct VPipe256<P,S,T> : ISpanPipe256<S,T>
         where P : IVMap256<S,T>

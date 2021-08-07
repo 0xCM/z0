@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
+    using static Root;
 
     [ApiHost]
-    public readonly partial struct Pipes
+    public readonly partial struct BlockPipes
     {
         const NumericKind Closure = AllNumeric;
     }
