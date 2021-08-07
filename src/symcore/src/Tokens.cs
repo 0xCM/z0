@@ -9,8 +9,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using SQ = SymbolicQuery;
-
     [ApiHost]
     public readonly struct Tokens
     {
@@ -27,7 +25,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var c = ref skip(src,i);
-                if(SQ.nil(c))
+                if(c == '\0')
                 {
                     if(t!=0)
                     {
