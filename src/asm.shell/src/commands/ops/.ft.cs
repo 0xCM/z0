@@ -29,7 +29,7 @@ namespace Z0.Asm
         unsafe Outcome FT(CmdArgs args)
         {
             var src = recover<C,byte>(Source);
-            Blit.fx8<AsciCode>(src, Target, out var f);
+            Blit.Factory.fx8<AsciCode>(src, Target, out var f);
 
             byte x = 0;
 

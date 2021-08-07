@@ -8,6 +8,13 @@ namespace Z0.Asm
 
     public readonly struct ConditionCodes
     {
+        public enum ConditionAction : byte
+        {
+            Jmp,
+
+            Mov
+        }
+
         /// <summary>
         /// Defines the condition codes as the bitfield [tttn] where ttt indicates
         /// the condition being tested and n indicates where to use the condition (n=0)

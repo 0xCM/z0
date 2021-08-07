@@ -23,7 +23,7 @@ namespace Z0.Asm
                 => "asm.sigs";
 
             public override Type[] Types()
-                => typeof(AsmSigTokens).GetNestedTypes().Enums().Tagged<SymSourceAttribute>();
+                => typeof(AsmSigs).GetNestedTypes().Enums().Tagged<SymSourceAttribute>();
         }
 
         public sealed class Codes : TokenSet<Codes>
@@ -33,15 +33,6 @@ namespace Z0.Asm
 
             public override Type[] Types()
                 => typeof(AsmCodes).GetNestedTypes().Enums().Tagged<SymSourceAttribute>();
-        }
-
-        public sealed class Bitfields : TokenSet<Bitfields>
-        {
-            public override string Name
-                => "asm.bitfields";
-
-            public override Type[] Types()
-                => typeof(BitfieldTokens).GetNestedTypes().Enums().Tagged<SymSourceAttribute>();
         }
 
         public sealed class Regs : TokenSet<Regs>

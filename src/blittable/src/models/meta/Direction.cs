@@ -2,29 +2,32 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.BZ
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct Direction
+    partial struct Blit
     {
-        public ParamDirection Kind {get;}
-
-        [MethodImpl(Inline)]
-        public Direction(ParamDirection kind)
+        public readonly struct Direction
         {
-            Kind = kind;
+            public ParamDirection Kind {get;}
+
+            [MethodImpl(Inline)]
+            public Direction(ParamDirection kind)
+            {
+                Kind = kind;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator Direction(ParamDirection src)
+                => new Direction(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator ParamDirection(Direction src)
+                => src.Kind;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Direction(ParamDirection src)
-            => new Direction(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ParamDirection(Direction src)
-            => src.Kind;
     }
 }

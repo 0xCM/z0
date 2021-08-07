@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public readonly struct AsmSigTokens
+    partial class AsmSigs
     {
         const string group = "asmsigs";
 

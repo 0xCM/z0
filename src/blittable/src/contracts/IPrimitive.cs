@@ -2,25 +2,28 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.BZ
+namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface IPrimitive
+    partial struct Blit
     {
-        BitWidth ContentWidth {get;}
+        [Free]
+        public interface IPrimitive
+        {
+            BitWidth ContentWidth {get;}
 
-        BitWidth StorageWidth {get;}
+            BitWidth StorageWidth {get;}
 
-        BlittableKind TypeKind {get;}
-    }
+            BlittableKind TypeKind {get;}
+        }
 
-    [Free]
-    public interface IPrimitive<S> : IPrimitive
-        where S : unmanaged
-    {
-        BitWidth IPrimitive.StorageWidth
-            => core.width<S>();
+        [Free]
+        public interface IPrimitive<S> : IPrimitive
+            where S : unmanaged
+        {
+            BitWidth IPrimitive.StorageWidth
+                => core.width<S>();
+        }
     }
 }

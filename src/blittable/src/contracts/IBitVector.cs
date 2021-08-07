@@ -2,29 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.BZ
+namespace Z0
 {
-    using System;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface IBitVector : IPrimitive
+    partial struct Blit
     {
-        BlittableKind IPrimitive.TypeKind
-            => BlittableKind.BitVector;
-    }
-    [Free]
-    public interface IBitVector<T> : IBitVector, IPrimitive<T>
-        where T : unmanaged
-    {
-
-    }
-
-    [Free]
-    public interface IScalarBits<T> : IBitVector<T>
-        where T : unmanaged
-    {
-        bit this[byte i] {get;set;}
+        [Free]
+        public interface IBitVector : IPrimitive
+        {
+            BlittableKind IPrimitive.TypeKind
+                => BlittableKind.BitVector;
+        }
     }
 }

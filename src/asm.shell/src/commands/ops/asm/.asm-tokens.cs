@@ -13,7 +13,6 @@ namespace Z0.Asm
             EmitTokens(AsmTokens.OpCodes.create());
             EmitTokens(AsmTokens.Sigs.create());
             EmitTokens(AsmTokens.Codes.create());
-            EmitTokens(AsmTokens.Bitfields.create());
             EmitTokens(AsmTokens.Regs.create());
             EmitTokens(AsmTokens.Conditions.create());
 

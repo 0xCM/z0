@@ -27,6 +27,10 @@ namespace Z0.Asm
             => Tokens.tokenize<DispToken>(RexBTokenSpec);
 
         [Op]
+        public static ReadOnlySpan<Token<LegacyPrefixToken>> LegacyPrefixTokens()
+            => Tokens.tokenize<LegacyPrefixToken>(LegacyPrefixTokenSpec);
+
+        [Op]
         public static ReadOnlySpan<Token<ModRmToken>> ModRmTokens()
             => Tokens.tokenize<ModRmToken>(ModRMTokenSpec);
 

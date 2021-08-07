@@ -120,6 +120,14 @@ namespace Z0.Asm
         public AsciGrid Grid(MaskClass k)
             => S.grid(Symbols.ZmmRegs(), RowWidth);
 
+        public ReadOnlySpan<RegOp> XmmRegs()
+        {
+            var dst = span<RegOp>(32);
+            for(var i=0; i<32; i++)
+                seek(dst,i) = AsmRegs.reg(RegWidthCode.W128, RegClassCode.XMM, (RegIndexCode)i);
+            return dst;
+        }
+
         public AsciGrid XmmGrid()
             => Grid(default(XmmClass));
 

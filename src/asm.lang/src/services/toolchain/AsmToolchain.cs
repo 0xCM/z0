@@ -136,7 +136,7 @@ namespace Z0.Asm
         {
             var outpath = src.BinPath;
             var data = outpath.ReadBytes();
-            EmitHexText(data,40,src.HexPath);
+            EmitHexText(data, 40, src.HexPath);
             EmitHexArray(data,src.HexArrayPath);
             return true;
         }
@@ -153,7 +153,6 @@ namespace Z0.Asm
         {
             var parser = Wf.DbDiasmProcessor();
             parser.ParseDisassembly(spec.DisasmPath, spec.Analysis);
-
             return true;
         }
 

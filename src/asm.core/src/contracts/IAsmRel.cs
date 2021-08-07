@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmSigTokens;
+    using static AsmSigs;
 
     public interface IAsmRel : ITextual
     {

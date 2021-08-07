@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using bv = Z0.BZ.bv;
+    using bv = Blit.bv;
 
     public readonly struct DfaState<T>
         where T : unmanaged

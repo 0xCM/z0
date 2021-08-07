@@ -61,7 +61,7 @@ namespace Z0.Asm
             get => api.name(this);
         }
         public string Format()
-            => api.format(Name);
+            => Name.Format();
 
 
         public override string ToString()
