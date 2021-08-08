@@ -10,27 +10,16 @@ namespace Z0
     using static Root;
     using static EnvFolders;
 
+    public sealed class AsmWsScripts : WsScripts<AsmWsScripts>
+    {
+        public ScriptId llc_builds => "llc-builds";
+    }
+
     public sealed class AsmWs : IWorkspace<AsmWs>
     {
-        const string instructions = nameof(instructions);
-
         const string analysis = nameof(analysis);
 
-        const string intrinsics = nameof(intrinsics);
-
-        const string imported = nameof(imported);
-
-        const string sources = nameof(sources);
-
-        const string alg = nameof(alg);
-
         const string images = nameof(images);
-
-        const string src = nameof(src);
-
-        const string bits = nameof(bits);
-
-        const string docs = nameof(docs);
 
         [MethodImpl(Inline)]
         public static AsmWs create(FS.FolderPath root)
@@ -38,20 +27,26 @@ namespace Z0
 
         FS.FolderPath _WsRoot;
 
+        EnvData _Env;
+
+        [MethodImpl(Inline)]
+        AsmWs(FS.FolderPath root)
+        {
+            _WsRoot = root;
+            _Env = Env.load().Data;
+        }
+
         public FS.FolderPath Root
         {
             [MethodImpl(Inline)]
             get => _WsRoot;
         }
 
-        [MethodImpl(Inline)]
-        AsmWs(FS.FolderPath root)
-        {
-            _WsRoot = root;
-        }
-
         public FS.FolderPath WsRoot()
             => _WsRoot;
+
+        FS.FolderPath DevWs
+            => _Env.DevWs;
 
         public FS.FolderPath WsRoot(FS.FolderPath src)
         {
@@ -85,16 +80,16 @@ namespace Z0
         }
 
         public FS.FolderPath DataSources()
-            => FS.dir("c:/dev/ws") + FS.folder(sources);
+            => DevWs + FS.folder(WsNames.sources);
 
         /// <summary>
         /// Defines a path of the form {Root}/.out
         /// </summary>
-        public FS.FolderPath Output()
+        public FS.FolderPath OutDir()
             => Root + FS.folder(dotout);
 
         public FS.FolderPath OutDir(string id)
-            => Output() + FS.folder(id);
+            => OutDir() + FS.folder(id);
 
         /// <summary>
         /// Defines a path of the form {Root}/src
@@ -111,20 +106,11 @@ namespace Z0
         public FS.FolderPath AsmAppSrc()
             => Src() + FS.folder("apps");
 
-        /// <summary>
-        /// Defines a path of the form {Root}/cpp
-        /// </summary>
-        public FS.FolderPath CppSrc()
-            => Root + FS.folder(cpp);
-
-        public FS.FilePath AppPath(string id)
-            => AsmAppSrc() + FS.file(id,FS.Asm);
-
         public FS.FilePath AsmPath(string id)
             => AsmLibSrc() + FS.file(id, FS.Asm);
 
         public FS.FolderPath HexDir()
-            => Output() + FS.folder(hex);
+            => OutDir() + FS.folder(hex);
 
         public FS.FilePath AsmHexPath(string id)
             => HexDir() + FS.file(id, FS.Hex);
@@ -132,23 +118,8 @@ namespace Z0
         public FS.FilePath HexArrayPath(string id)
             => HexDir() + FS.file(string.Format("{0}.array",id), FS.Hex);
 
-        public FS.FolderPath Settings()
-            => DataRoot() + FS.folder(settings);
-
-        public FS.FilePath Settings(string id, FS.FileExt ext)
-            => Settings() + FS.file(id,ext);
-
-        public FS.FolderPath DocRoot()
-            => Root + FS.folder(docs);
-
         public FS.FolderPath DataRoot()
             => Root + FS.folder(data);
-
-        /// <summary>
-        /// Defines a path of the form {CodeGenRoot} := {DataRoot}/codegen
-        /// </summary>
-        public FS.FolderPath CodeGenRoot()
-            => Root + FS.folder(codegen);
 
         /// <summary>
         /// Defines a path of the form {ImportRoot} := {DataRoot}/imported
@@ -157,68 +128,16 @@ namespace Z0
             => DataRoot() + FS.folder(EnvFolders.imported);
 
         /// <summary>
-        /// Defines a path of the form {EtlLogRoot} := {DataRoot}/logs
-        /// </summary>
-        public FS.FolderPath EtlLogs()
-            => DataRoot() + FS.folder(logs);
-
-        /// <summary>
-        /// Defines a path of the form {EtlLogRoot}/{dataset}
-        /// </summary>
-        /// <param name="dataset">A dataset identifier</param>
-        public FS.FolderPath EtlLogs(string dataset)
-            => EtlLogs() + FS.folder(dataset);
-
-        /// <summary>
-        /// Defines a path of the form {EtlLogRoot}/common/{id}.log
-        /// </summary>
-        /// <param name="id">A file identifier</param>
-        public FS.FilePath EtlLog(string id)
-            => EtlLogs(common) + FS.file(id, FS.Log);
-
-        /// <summary>
-        /// Defines a path of the form {EtlLogRoot}/{dataset}/{file}
-        /// </summary>
-        /// <param name="id">A file identifier</param>
-        public FS.FilePath EtlLog(string dataset, FS.FileName file)
-            => EtlLogs(dataset) + file;
-
-        /// <summary>
-        /// Defines a path of the form {ImportRoot}/{dataset}
-        /// </summary>
-        /// <param name="dataset">A dataset identiier</param>
-        public FS.FolderPath ImportDir(string dataset)
-            => ImportRoot() + FS.folder(dataset);
-
-        public FS.FilePath ImportPath(string id, FS.FileExt ext)
-            => ImportRoot() + FS.file(id,ext);
-
-        public FS.FilePath ImportPath(string dir, string id, FS.FileExt ext)
-            => ImportDir(dir) + FS.file(id,ext);
-
-        /// <summary>
         /// Defines a path of the form {DataRoot}/datasets
         /// </summary>
         public FS.FolderPath Datasets()
             => DataRoot() + FS.folder(datasets);
 
-        public FS.FilePath DataFile(string id, FS.FileExt ext)
-            => Datasets() + FS.file(id,ext);
-
-        public FS.FolderPath Dataset(string id)
-            => Datasets() + FS.folder(id);
-
         /// <summary>
         /// Defines a path of the form {Output}/bin
         /// </summary>
         public FS.FolderPath Bin()
-            => Output() + FS.folder(bin);
-
-        /// <summary>
-        /// Defines a path of the form {Root}/scripts
-        /// </summary>
-        public FS.FolderPath Scripts()
-            => Root + FS.folder(scripts);
+            => OutDir() + FS.folder(bin);
 
         public FS.FolderPath Tables()
             => DataRoot() + FS.folder(tables);
@@ -234,75 +153,26 @@ namespace Z0
             where T : struct
                 => Table(TableId<T>(), ext);
 
-        public FS.FolderPath ImportTables()
-            => Tables() + FS.folder(imported);
-
-        public FS.FilePath ImportTable<T>()
-            where T : struct
-                => ImportTables() + FS.file(TableId<T>(), FS.Csv);
-
-        public FS.FilePath Script(string id)
-            => Scripts() + FS.file(id, FS.Cmd);
-
-        public FS.FolderPath SourceDocs()
-            => DataSources()  + FS.folder("docs");
-
-        public FS.FolderPath SourceDocs(string id)
-            => SourceDocs() + FS.folder(id);
-
-        public FS.FolderPath DataSource(string id)
-            => DataSources() + FS.folder(id);
-
-        public FS.FilePath DataSource(string id, FS.FileExt ext)
-            => DataSources() + FS.file(id,ext);
-
-        public FS.FilePath InstInfo(string id)
-            => Dataset(instructions) + FS.file(id,FS.Csv);
-
         public FS.FolderPath DisasmOut()
-            => Output() + FS.folder("dis");
-
-        public FS.FolderPath IntrinsicImportDir()
-            => ImportRoot() + FS.folder(intrinsics);
-
-        public FS.FolderPath AlgImportDir()
-            => ImportRoot() + FS.folder(string.Format("{0}.{1}", intrinsics, alg));
-
-        public ReadOnlySpan<FS.FilePath> AlgImportPaths(string match)
-            => AlgImportDir().Files(FS.Alg).Where(f => f.Contains(match));
+            => OutDir() + FS.folder("dis");
 
         public FS.FolderPath Analysis()
-            => Output() + FS.folder(analysis);
-
-        public FS.FolderPath OutLogs()
-            => Output() + FS.folder(logs);
-
-        public FS.FolderPath ImportLogs()
-            => ImportRoot() + FS.folder(logs);
+            => OutDir() + FS.folder(analysis);
 
         public FS.FolderPath ObjOut()
-            => Output() + FS.folder(obj);
+            => OutDir() + FS.folder(obj);
 
         public FS.FolderPath DumpOut()
-            => Output() + FS.folder(dumps);
+            => OutDir() + FS.folder(dumps);
 
         public FS.FolderPath ExeOut()
-            => Output() + FS.folder(exe);
-
-        public FS.FolderPath External()
-            => Root + FS.folder(external);
+            => OutDir() + FS.folder(exe);
 
         public FS.FilePath BinPath(string id)
             =>  Bin() + FS.file(id, FS.Bin);
 
         public FS.FolderPath Lists()
-            => Output() + FS.folder("list");
-
-        public FS.FolderPath Bitfields()
-            => DataRoot() + FS.folder(bitfields);
-
-        public FS.FilePath Bitfield(string id)
-            => Bitfields() + FS.file(id, FS.ext(bits));
+            => OutDir() + FS.folder("list");
 
         public FS.FilePath ObjPath(string id)
             => ObjOut() + FS.file(id,FS.Obj);

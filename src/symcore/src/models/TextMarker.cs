@@ -9,13 +9,16 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct TextMarker
+    public class TextMarker
     {
+        public string Name {get;}
+
         public string Content {get;}
 
         [MethodImpl(Inline)]
-        public TextMarker(string content)
+        public TextMarker(string id, string content)
         {
+            Name = id;
             Content = content;
         }
 

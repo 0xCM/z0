@@ -19,6 +19,14 @@ namespace Z0
             => src.GetProperties(BF_Static);
 
         /// <summary>
+        /// Gets the static properties of specified type declared by a specified type
+        /// </summary>
+        /// <param name="this">The type to examine</param>
+        /// <param name="proptype">The property type to match</param>
+        public static PropertyInfo[] StaticProperties(this Type src, Type proptype)
+            => src.GetProperties(BF_Static).Where(p => p.PropertyType == proptype);
+
+        /// <summary>
         /// Gets the static methods defined on a specified type
         /// </summary>
         /// <param name="this">The type to examine</param>

@@ -14,10 +14,11 @@ namespace Z0
             Id = id;
         }
 
-        protected FS.FolderPath Home
-            => Db.ToolWs() + FS.folder(Id.Format());
 
         protected IEnvPaths Paths => Db;
+
+        protected FS.FolderPath Home
+            => Db.DevWs() + FS.folder("tools") + FS.folder(Id.Format());
 
         public FS.FolderPath OutDir
             => Paths.ToolOutDir(Id);

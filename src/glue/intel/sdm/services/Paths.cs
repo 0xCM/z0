@@ -17,7 +17,7 @@ namespace Z0.Asm
         public FS.Files ImportPaths()
             => ImportDir().AllFiles;
 
-        public FS.FilePath SdmImportPath(byte vol)
+        public FS.FilePath SdmDstPath(byte vol)
             => ImportDir() + FS.file(string.Format("intel-sdm-vol{0}-{1}", vol, lined), FS.Txt);
 
         public FS.FilePath TocImportPath()

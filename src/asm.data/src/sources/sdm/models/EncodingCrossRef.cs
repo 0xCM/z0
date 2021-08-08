@@ -4,33 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
     using System.Runtime.CompilerServices;
 
-    using static core;
     using static Root;
 
     partial struct SdmModels
     {
-        public readonly struct Marker
+        public readonly struct EncodingCrossRef
         {
-            public string Content {get;}
+            public CharBlock4 Identifier {get;}
 
             [MethodImpl(Inline)]
-            public Marker(string src)
+            public EncodingCrossRef(CharBlock4 identifier)
             {
-                Content = src;
-            }
-
-            public byte Length
-            {
-                [MethodImpl(Inline)]
-                get => (byte)Content.Length;
+                Identifier = identifier;
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator Marker(string src)
-                => new Marker(src);
+            public static implicit operator EncodingCrossRef(string src)
+                => new EncodingCrossRef(src);
         }
     }
 }

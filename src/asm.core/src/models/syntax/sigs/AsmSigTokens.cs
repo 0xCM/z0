@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+
+    using M = SdmModels.SigMarkers;
+
     partial class AsmSigs
     {
         const string group = "asmsigs";
@@ -53,23 +56,23 @@ namespace Z0.Asm
         {
             None = 0,
 
-            [Symbol("{K}")]
-            OpMask,
+            [Symbol(M.k1)]
+            k1,
 
-            [Symbol("{z}")]
-            ZMask,
+            [Symbol(M.z)]
+            z,
 
-            [Symbol("{sae}")]
-            Sae,
+            [Symbol(M.sae)]
+            sae,
 
-            [Symbol("{er}")]
-            Er,
+            [Symbol(M.er)]
+            er,
 
-            [Symbol("bcast32")]
-            BCast32,
+            [Symbol(M.bcast32)]
+            bcast32,
 
-            [Symbol("bcast64")]
-            BCast64,
+            [Symbol(M.bcast64)]
+            bcast64,
         }
 
         [SymSource(group), Alias("sysReg", "sysregs", "sysreg")]

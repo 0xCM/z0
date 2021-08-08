@@ -13,8 +13,7 @@ namespace Z0.Asm
     partial class IntelSdm
     {
         public static Index<TableColumn> columns(ReadOnlySpan<string> src)
-            => Tables.columns<ColumnKind>(src);
-
+            => Tables.columns<SdmColumnKind>(src);
 
         public ReadOnlySpan<Table> ReadInstructionTables(FS.FilePath src)
         {

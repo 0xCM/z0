@@ -6,21 +6,16 @@ namespace Z0.Asm
 {
     partial struct SdmModels
     {
-        public enum Mode64x32Kind
+        /// <summary>
+        /// Represents an entry in an instruction's binary format table
+        /// </summary>
+        public struct BinaryFormat
         {
-            None = 0,
+            public AsmMnemonic Mnemonic;
 
-            [Symbol("V/V")]
-            VV,
+            public TextMarker Marker;
 
-            [Symbol("V/N. E.")]
-            VNE,
-
-            [Symbol("V 1 /V")]
-            V1V,
-
-            [Symbol("V/I 2")]
-            VI2,
+            public string BitFormat;
         }
     }
 }

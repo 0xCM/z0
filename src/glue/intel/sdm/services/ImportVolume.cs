@@ -4,40 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
     partial class IntelSdm
     {
         public Outcome ImportVolume(byte vol)
         {
+            var result = Outcome.Success;
             var src = SdmSrcPath(vol);
-            var dst = SdmImportPath(vol);
-            var encoding = pair(TextEncodingKind.Unicode, TextEncodingKind.Unicode);
-            var result = DocServices.CreateLinedDoc(src, dst, encoding);
-            if(!result)
-                return false;
-
-            var verified = DocServices.VerifyLinedDoc(dst, encoding.Right);
-            if(verified.Fail)
-                Wf.Error(verified.Message);
-
-            return verified;
+            var dst = SdmDstPath(vol);
+            var emitting = EmittingFile(dst);
+            var counter = 0u;
+            using var reader = src.UnicodeLineReader();
+            using var writer = dst.UnicodeWriter();
+            while(reader.Next(out var line))
+            {
+                writer.WriteLine(line.Format());
+                counter++;
+            }
+            EmittedFile(emitting,counter);
+            return result;
         }
-
-        // public Outcome EmitLinedSdm()
-        // {
-        //     var encoding = pair(TextEncodingKind.Unicode,TextEncodingKind.Unicode);
-        //     var src = SdmSrcPath();
-        //     var dst = SdmImportPath();
-        //     var result = DocServices.CreateLinedDoc(src, dst, encoding);
-        //     if(!result)
-        //         return false;
-
-        //     var verified = DocServices.VerifyLinedDoc(dst, encoding.Right);
-        //     if(verified.Fail)
-        //         Wf.Error(verified.Message);
-
-        //     return verified;
-        // }
     }
 }

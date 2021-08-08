@@ -8,10 +8,6 @@ namespace Z0
     public static class XWs
     {
        [Op]
-       public static AsmWs AsmWs(this IEnvProvider provider)
-            => Z0.AsmWs.create(provider.Env.AsmWs);
-
-       [Op]
        public static DevWs DevWs(this IEnvProvider provider)
             => Z0.DevWs.create(provider.Env.DevWs);
     }

@@ -8,10 +8,9 @@ namespace Z0.Asm
     {
         public interface IEncodingRule
         {
-            EncodingRuleKind RuleKind {get;}
-
             byte RuleId {get;}
 
+            EncodingClass Class {get;}
         }
 
         public interface IEncodingRule<T> : IEncodingRule
@@ -24,7 +23,10 @@ namespace Z0.Asm
             where T : struct, IEncodingRule<T>
             where K : unmanaged
         {
+            K Kind {get;}
 
+            byte IEncodingRule.RuleId
+                => core.bw8(Kind);
         }
     }
 }

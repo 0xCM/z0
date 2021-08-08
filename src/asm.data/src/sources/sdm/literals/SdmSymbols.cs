@@ -4,13 +4,63 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static SdmModels.EncodingMarkers;
+
+
     partial struct SdmModels
     {
-        [ApiHost("sdm.patterns")]
-        public readonly partial struct Patterns
+        public readonly partial struct SdmSymbols
         {
-            public static string[] Operands = new string[]
+            public const string RegSpecial = "AL/AX/EAX/RAX";
+
+            public static string[] LegacyMode = new string[]{
+                "Valid",
+                "N.E.",
+            };
+
+            public enum LegacyModeKind : byte
             {
+                Valid,
+
+                NE,
+            }
+
+            public enum Mode64Kind : byte
+            {
+
+                Valid,
+
+                NE,
+
+                VNE,
+            }
+
+            public static string[] Mode64 = new string[]{
+                "Valid",
+                "N.E.",
+                "V/N.E.",
+            };
+
+            public enum Mode64x32Kind
+            {
+                VV,
+
+                VNE,
+
+                V1V,
+
+                VI2,
+            }
+
+            public static string[] Mode64x32 = new string[]{
+                "V/V",
+                "V/N. E.",
+                "V 1 /V",
+                "V/I 2"
+            };
+
+
+            public static string[] Operands = new string[]{
                 "AL",
                 "AX",
                 "EAX",
@@ -92,65 +142,23 @@ namespace Z0.Asm
                 "zmm3/m512/m64bcst",
             };
 
-            public static string[] OcHeader0 = new string[9]{
-                "Opcode",
-                "Instruction",
-                "Op/",
-                "En",
-                "64-Bit",
-                "Mode",
-                "Compat/",
-                "Leg Mode",
-                "Description"
-                };
-
-            public static string[] OcHeader1 = new string[11]{
-                "Opcode/",
-                "Instruction",
-                "Op/",
-                "En",
-                "64/32",
-                "-bit",
-                "Mode",
-                "CPUID",
-                "Feature",
-                "Flag",
-                "Description"
-                };
-
-            public static string[] OpCodeHeader2 = new string[12]{
-                "Opcode/",
-                "Instruction",
-                "Op /",
-                "En",
-                "64/32",
-                "bit",
-                "Mode",
-                "Support",
-                "CPUID",
-                "Feature",
-                "Flag",
-                "Description"
-                };
-
-            public static string[] EncodingHeader0 = new string[5]{
-                "Op/En",
-                "Operand 1",
-                "Operand 2",
-                "Operand 3",
-                "Operand 4"
-                };
-
-            public static readonly string[] Reg = new string[]{
-                "AL/AX/EAX/RAX"
-                };
-
             public static readonly string[] Imm = new string[]{
                 "imm8",
                 "imm8/r",
                 "imm8/16/32",
                 "imm8/16/32/64",
                 };
+
+            public static string[] ModRM = new string[]{
+                EncodingMarkers.ModRM + RmR,
+                EncodingMarkers.ModRM + RmW,
+                EncodingMarkers.ModRM + RmRW,
+                EncodingMarkers.ModRM + RegR,
+                EncodingMarkers.ModRM + RegW,
+                EncodingMarkers.ModRM + RegRW,
+                EncodingMarkers.ModRM + RmRMust11,
+                EncodingMarkers.ModRM + RmWNot11,
+            };
 
             public static readonly string[] Vex = new string[]{
                 "VEX.vvvv",
@@ -194,38 +202,6 @@ namespace Z0.Asm
                 "(EVEX.U1.512 encoded version)",
                 "(EVEX.512 encoded version)"
             };
-
-
-            /// <summary>
-            /// {Chapter}-{Page} Vol. {Vol}
-            /// </summary>
-            public const string PageNumber = "{0}-{1} Vol. {2}";
-
-            /// <summary>
-            /// {Mnemonic} — {Description}
-            /// </summary>
-            public const string MnemonicTitle = "{0} — {1}";
-
-            /// <summary>
-            /// {0}/{1}
-            /// </summary>
-            public const string MultiMnemonicTitle1 = "{Mnemonic}/{0}";
-
-            /// <summary>
-            /// {0}/{1}/{2}
-            /// </summary>
-            public const string MultiMnemonicTitle2 = "{0}/{1}/{2}";
-
-            /// <summary>
-            /// {0}/{1}/{2}/{3}
-            /// </summary>
-            public const string MultiMnemonicTitle3 = "{0}/{1}/{2}/{3}";
-
-            public const string ChapterNumber = "CHAPTER " + "{0}";
-
-            public const string TableNumber = "Table " + "{0}";
-
-            public const string ChapterPage = "{0}-{1}";
         }
     }
 }

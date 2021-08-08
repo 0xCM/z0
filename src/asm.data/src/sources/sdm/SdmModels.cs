@@ -9,6 +9,9 @@ namespace Z0.Asm
 
     using static Root;
 
+    using static SdmModels.EncodingMarkers;
+    using K = SdmModels.ModRmKind;
+
     [ApiHost]
     public readonly partial struct SdmModels
     {
@@ -129,14 +132,14 @@ namespace Z0.Asm
         [Op]
         public static void render(in ChapterPage cp, ITextBuffer dst)
         {
-            dst.AppendFormat(Patterns.ChapterPage, cp.Chapter, cp.Page);
+            dst.AppendFormat(ContentPatterns.ChapterPage, cp.Chapter, cp.Page);
         }
 
         [Op]
         public static void render(in LineNumber line, in ChapterNumber cn, ITextBuffer dst)
         {
             render(line, dst);
-            dst.AppendFormat(Patterns.ChapterNumber, cn.Value);
+            dst.AppendFormat(ContentPatterns.ChapterNumber, cn.Value);
         }
 
         [Op]
@@ -226,6 +229,52 @@ namespace Z0.Asm
             var dst = text.buffer();
             render(src, dst);
             return dst.Emit();
+        }
+
+        [Op]
+        public static bit parse(string src, out ModRmKind dst)
+        {
+            dst = 0;
+            var i = text.index(src, ModRM);
+            if(i < 0)
+                return false;
+
+            var content = text.right(src,Chars.Colon);
+            switch(src)
+            {
+                case RmR:
+                    dst = K.RmR;
+                break;
+
+                case RmW:
+                    dst = K.RmW;
+                break;
+
+                case RmRW:
+                    dst = K.RmRW;
+                break;
+
+                case RegR:
+                    dst = K.RegR;
+                break;
+
+                case RegW:
+                    dst = K.RegW;
+                break;
+
+                case RegRW:
+                    dst = K.RegRW;
+                break;
+
+                case RmRMust11:
+                    dst = K.RmRMust11;
+                break;
+
+                case RmWNot11:
+                    dst = K.RmWNot11;
+                break;
+            }
+            return dst != 0;
         }
     }
 }

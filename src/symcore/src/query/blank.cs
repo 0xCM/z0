@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The string to evaluate</param>
         [MethodImpl(Inline), Op]
-        public static bool blank(string src)
+        public static bit blank(string src)
             => string.IsNullOrWhiteSpace(src);
     }
 }

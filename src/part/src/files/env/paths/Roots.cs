@@ -14,12 +14,6 @@ namespace Z0
         FS.FolderPath DevWs()
             => Env.DevWs;
 
-        FS.FolderPath AsmWs()
-            => Env.AsmWs;
-
-        FS.FolderPath ToolWs()
-            => Env.ToolWs;
-
         FS.FolderPath DbRoot()
             => Env.Db;
 

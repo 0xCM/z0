@@ -8,16 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    partial class text
+    public readonly struct TextMatch
     {
-        [MethodImpl(Inline), Op]
-        public static TextMarker marker(string src)
-            => new TextMarker(src);
+        public TextMarker Marker {get;}
 
-        [MethodImpl(Inline), Op]
-        public static TextMarker marker(char src)
-            => new TextMarker(src.ToString());
+        public LineOffset Match {get;}
+
+        [MethodImpl(Inline)]
+        public TextMatch(TextMarker marker, LineOffset match)
+        {
+            Marker = marker;
+            Match = match;
+        }
     }
 }

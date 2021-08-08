@@ -31,7 +31,7 @@ namespace Z0.Asm
 
         NasmCatalog NasmCatalog;
 
-        IntelSdm SdmProcessor;
+        IntelSdm SdmSvc;
 
         AsmRegSets RegSets;
 
@@ -88,7 +88,7 @@ namespace Z0.Asm
             ApiPacks = Wf.ApiPacks();
             ApiPack = ApiPacks.Current();
             NasmCatalog = Wf.NasmCatalog();
-            SdmProcessor = Wf.IntelSdm();
+            SdmSvc = Wf.IntelSdm();
             RegSets = Wf.AsmRegSets();
             AsmEnv = Wf.AsmEnv();
             CmdRunner = Wf.CmdLineRunner();
@@ -323,7 +323,7 @@ namespace Z0.Asm
         {
             const string ScriptId = "build-exe";
             var result = Outcome.Success;
-            var script = AsmWs.Script(ScriptId);
+            var script = (AsmWs as IWorkspace).Script(ScriptId);
             var vars = Cmd.vars(
                 ("SrcId", id)
                 );

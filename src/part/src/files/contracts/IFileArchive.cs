@@ -17,9 +17,6 @@ namespace Z0
     {
         FS.FolderPath Root {get;}
 
-        FS.FilePath Settings(string id, FS.FileExt ext)
-            => Root + FS.folder("settings") + FS.file(id, ext);
-
         FS.FolderPath Subdir(string name)
             => Root + FS.folder(name);
 

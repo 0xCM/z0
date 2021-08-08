@@ -2,21 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial struct asm
+    partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
-        public static AsmOffsetLabel label(byte width, ulong value)
-            => new AsmOffsetLabel(width, value);
-
-        [MethodImpl(Inline), Op]
-        public static AsmLabel label(in CharBlock32 name, Hex64 offset = default)
-            => new AsmLabel(name, offset);
+        public static TextMarker marker(string id, string src)
+            => new TextMarker(id, src);
     }
 }

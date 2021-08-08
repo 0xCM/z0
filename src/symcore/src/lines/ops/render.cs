@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using SR = SymbolicRender;
     using static core;
+
+    using SR = SymbolicRender;
 
     partial struct Lines
     {

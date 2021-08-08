@@ -12,6 +12,40 @@ namespace Z0
 
     partial struct Lines
     {
+        /// <summary>
+        /// Seaches the input for a line-marker sequence
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="markers">The marker sequence</param>
+        [Op]
+        public static ReadOnlySpan<UnicodeLine> match(ReadOnlySpan<UnicodeLine> src, TextMarkers markers)
+        {
+            var lCount = src.Length;
+            var mCount = markers.Count;
+            var dst = list<UnicodeLine>();
+            var tmp = list<UnicodeLine>();
+            var parts = markers.View;
+            for(var i=0; i<lCount; i++)
+            {
+                for(var j=0; j<mCount && i<lCount; j++, i++)
+                {
+                    ref readonly var line = ref skip(src,i);
+                    if(line.Content.StartsWith(skip(parts,j).Content))
+                        tmp.Add(line);
+                    else
+                    {
+                        tmp.Clear();
+                        break;
+                    }
+                }
+
+                if(tmp.Count == mCount)
+                    dst.AddRange(tmp);
+
+            }
+
+            return dst.ViewDeposited();
+        }
         [Op]
         public static bool next(ref LineReaderState state, out AsciLine<byte> dst)
         {

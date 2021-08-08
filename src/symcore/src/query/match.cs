@@ -2,21 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial struct asm
+    partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
-        public static AsmOffsetLabel label(byte width, ulong value)
-            => new AsmOffsetLabel(width, value);
+        public static bit match(char a, char b)
+            => a == b;
 
         [MethodImpl(Inline), Op]
-        public static AsmLabel label(in CharBlock32 name, Hex64 offset = default)
-            => new AsmLabel(name, offset);
+        public static bit match(Pair<char> a, Pair<char> b)
+            => match(a.Left, b.Left) && match(a.Right, b.Right);
     }
 }

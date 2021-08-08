@@ -9,13 +9,18 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmLabel : IAsmLabel
+    public readonly struct AsmLabel
     {
-        public Identifier Name {get;}
+        public CharBlock32 Name {get;}
+
+        public Hex64 Offset {get;}
 
         [MethodImpl(Inline)]
-        public AsmLabel(Identifier name)
-            => Name = name;
+        public AsmLabel(in CharBlock32 name, Hex64 offset = default)
+        {
+            Name = name;
+            Offset = offset;
+        }
 
         public AsmLinePart TokenKind
         {
@@ -23,32 +28,10 @@ namespace Z0.Asm
             get => AsmLinePart.Label;
         }
 
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Name.IsEmpty;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Name.IsNonEmpty;
-        }
-
         public string Format()
-            => Name;
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();
-
-        public static AsmLabel Empty
-        {
-            [MethodImpl(Inline)]
-            get => new AsmLabel(Identifier.Empty);
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmLabel(string src)
-            => new AsmLabel(src);
     }
 }

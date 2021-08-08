@@ -10,10 +10,27 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using SQ = SymbolicQuery;
 
     [ApiHost]
     public class AsmEtl : Service<AsmEtl>
     {
+        static bit label(string src, out AsmLabel dst)
+        {
+            dst = default;
+            var i = text.index(src, Chars.Colon);
+            if(i > 0)
+            {
+                var data = text.left(src,i).Trim();
+                var digits = SQ.digitcount(base16, data);
+                var hex = Hex64.Zero;
+                if(digits != 0)
+                {
+                    DataParser.parse(text.slice(data,0,digits), out hex);
+                }
+            }
+            return false;
+        }
         public static uint load(FS.FilePath src, List<AsmLine> dst)
         {
             var counter = 0u;

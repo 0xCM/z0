@@ -201,10 +201,13 @@ namespace Z0.Asm
             return i;
         }
 
+        public static string format(in AsmLabel src)
+            => string.Format("{0} {1}:", src.Offset, src.Name);
+
         public static string format(in AsmSourceLine src)
         {
             if(src.Label.IsNonEmpty)
-                return string.Format("{0}:", src.Label.Name);
+                return string.Format("{0}:", src.Label);
             else if(src.Statement.IsNonEmpty)
             {
                 if(src.Comment.IsNonEmpty)

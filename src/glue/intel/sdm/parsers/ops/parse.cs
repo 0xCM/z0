@@ -54,7 +54,7 @@ namespace Z0.Asm
         public static int index(ReadOnlySpan<char> src, string marker)
         {
             var index = src.IndexOf(marker);
-            if(index > Markers.TableNumber.Length)
+            if(index > ContentMarkers.TableNumber.Length)
                 return NotFound;
             else
                 return index;
@@ -64,7 +64,7 @@ namespace Z0.Asm
         {
             dst = TocTitle.Empty;
             var page = ChapterPage.Empty;
-            if(!src.Contains(Markers.TocTitle, NoCase))
+            if(!src.Contains(ContentMarkers.TocTitle, NoCase))
                 return false;
 
             var i = placeholder(src);
@@ -103,11 +103,11 @@ namespace Z0.Asm
         public static Outcome parse(string src, out ChapterNumber dst)
         {
             dst = ChapterNumber.Empty;
-            var i = text.index(src, Markers.ChapterNumber);
+            var i = text.index(src, ContentMarkers.ChapterNumber);
             if(i == NotFound)
                 return false;
 
-            var numeric = slice(src, i + Markers.ChapterNumber.Length);
+            var numeric = slice(src, i + ContentMarkers.ChapterNumber.Length);
             if(SP.uint8(base10,numeric, out var cn))
             {
                 dst = cn;
@@ -180,10 +180,10 @@ namespace Z0.Asm
             const char NumberEnd = Chars.Dot;
             dst = TableNumber.Empty;
 
-            var i = index(src, Markers.TableNumber);
+            var i = index(src, ContentMarkers.TableNumber);
             if(i != NotFound)
             {
-                dst = tablenumber(slice(src, i + Markers.TableNumber.Length));
+                dst = tablenumber(slice(src, i + ContentMarkers.TableNumber.Length));
                 return true;
             }
             return false;
@@ -198,8 +198,8 @@ namespace Z0.Asm
             if(!result)
                 return result;
 
-            var i = index(src, Markers.TableNumber);
-            dst.Label = text.left(src, i + Markers.TableNumber.Length).Trim();
+            var i = index(src, ContentMarkers.TableNumber);
+            dst.Label = text.left(src, i + ContentMarkers.TableNumber.Length).Trim();
             return result;
         }
 

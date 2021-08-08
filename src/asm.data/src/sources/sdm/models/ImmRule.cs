@@ -23,7 +23,7 @@ namespace Z0.Asm
                 Data = data;
             }
 
-            public EncodingRuleKind RuleKind => EncodingRuleKind.Imm;
+            public EncodingClass Class => EncodingClass.Imm;
 
             public bit Imm8() => (Data & 1) != 0;
 

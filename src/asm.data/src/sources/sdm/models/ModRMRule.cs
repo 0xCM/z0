@@ -10,18 +10,18 @@ namespace Z0.Asm
 
     partial struct SdmModels
     {
-        public readonly struct ModRMRule : IEncodingRule<ModRMRule>
+        public readonly struct ModRmRule : IEncodingRule<ModRmRule,ModRmKind>
         {
-            public byte RuleId {get;}
+            public ModRmKind Kind {get;}
 
             [MethodImpl(Inline)]
-            public ModRMRule(byte id)
+            public ModRmRule(ModRmKind id)
             {
-                RuleId = id;
+                Kind = id;
             }
 
-            public EncodingRuleKind RuleKind
-                => EncodingRuleKind.ModRM;
+            public EncodingClass Class
+                => EncodingClass.ModRm;
         }
     }
 }

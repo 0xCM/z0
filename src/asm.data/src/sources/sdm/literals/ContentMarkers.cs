@@ -6,23 +6,16 @@ namespace Z0.Asm
 {
     partial struct SdmModels
     {
-        public enum EncodingRuleKind : byte
+        public readonly struct ContentMarkers
         {
-            None = 0,
+            [TextMarker]
+            public const string ChapterNumber = "CHAPTER ";
 
-            ExplicitRegs,
+            [TextMarker]
+            public const string TableNumber = "Table ";
 
-            Imm,
-
-            ModRM,
-
-            Vex,
-
-            Evex,
-
-            Vsib,
-
-            Arithmetic
+            [TextMarker]
+            public const string TocTitle = " . . . . . . . . . .";
         }
     }
 }

@@ -20,8 +20,8 @@ namespace Z0.Asm
                 RuleId = id;
             }
 
-            public EncodingRuleKind RuleKind
-                => EncodingRuleKind.Vsib;
+            public EncodingClass Class
+                => EncodingClass.Vsib;
         }
     }
 }

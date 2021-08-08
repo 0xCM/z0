@@ -25,7 +25,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var inpath = ref skip(src,i);
-                var tables = SdmProcessor.ReadInstructionTables(inpath);
+                var tables = SdmSvc.ReadInstructionTables(inpath);
                 var id = inpath.FileName.WithoutExtension.Format();
                 for(var j=0; j<tables.Length; j++)
                 {
