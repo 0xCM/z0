@@ -42,25 +42,11 @@ namespace Z0
                 if(i != 0)
                     counter += separate(counter + offset, dst);
 
-                counter += render8(n8, cell, counter + offset, dst);
+                counter += render8(cell, counter + offset, dst);
             }
             seek(dst, counter + offset) = Chars.Gt;
             counter++;
             return counter;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint render8(N8 n, byte src, uint offset, Span<char> dst)
-        {
-            seek(dst, offset++) = bitchar(src, 7);
-            seek(dst, offset++) = bitchar(src, 6);
-            seek(dst, offset++) = bitchar(src, 5);
-            seek(dst, offset++) = bitchar(src, 4);
-            seek(dst, offset++) = bitchar(src, 3);
-            seek(dst, offset++) = bitchar(src, 2);
-            seek(dst, offset++) = bitchar(src, 1);
-            seek(dst, offset++) = bitchar(src, 0);
-            return n;
         }
 
         [MethodImpl(Inline), Op]

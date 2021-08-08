@@ -15,7 +15,7 @@ namespace Z0
         partial struct Operate
         {
             [Op]
-            public static string format(name64 src)
+            public static string format(in name64 src)
             {
                 Span<char> dst = stackalloc char[name64.MaxLength];
                 var count = src.Length;
@@ -26,7 +26,7 @@ namespace Z0
             }
 
             [Op]
-            public static string format(name128 src)
+            public static string format(in name128 src)
             {
                 Span<char> dst = stackalloc char[name128.MaxLength];
                 var count = src.Length;

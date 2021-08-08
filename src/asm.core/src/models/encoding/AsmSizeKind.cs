@@ -4,33 +4,28 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct AsmCodes
+    [SymSource]
+    public enum AsmSizeKind : byte
     {
-        [SymSource]
-        public enum AsmSizeKind : byte
-        {
-            None=0,
+        [Symbol("byte")]
+        @byte = 0,
 
-            [Symbol("byte")]
-            @byte,
+        [Symbol("word")]
+        word = 1,
 
-            [Symbol("word")]
-            word,
+        [Symbol("dword")]
+        dword = 2,
 
-            [Symbol("dword")]
-            dword,
+        [Symbol("qword")]
+        qword = 3,
 
-            [Symbol("qword")]
-            qword,
+        [Symbol("xmmword")]
+        xmmword = 4,
 
-            [Symbol("xmmword")]
-            xmmword,
+        [Symbol("ymmword")]
+        ymmword = 5,
 
-            [Symbol("ymmword")]
-            ymmword,
-
-            [Symbol("zmmword")]
-            zmmword,
-        }
+        [Symbol("zmmword")]
+        zmmword = 6,
     }
 }

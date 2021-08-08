@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render3(N3 n, byte src, ref uint i, Span<AsciCode> dst)
+        public static uint render3(byte src, ref uint i, Span<AsciCode> dst)
         {
             var i0 = i;
             seek(dst, i++) = code(src, 2);

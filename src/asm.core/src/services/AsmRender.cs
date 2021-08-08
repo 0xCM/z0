@@ -148,7 +148,7 @@ namespace Z0.Asm
 
         [Op]
         public static string bits(RexPrefix src)
-            => text.format(BitRender.render8x4(src.Encoded));
+            => text.format(BitRender.render4x4(src.Encoded));
 
         [Op]
         public static string bitfield(RexPrefix src)
@@ -179,7 +179,7 @@ namespace Z0.Asm
 
         public static string describe(RexPrefix src)
         {
-            var bits = text.format(BitRender.render8x4(src.Encoded));
+            var bits = text.format(BitRender.render4x4(src.Encoded));
             var bitfield = string.Format(RexFieldPattern, src.W(), src.R(), src.X(), src.B());
             return $"{src.Encoded.FormatAsmHex()} | [{bits}] => {bitfield}";
         }

@@ -53,6 +53,5 @@ namespace Z0
         /// Specifies 7 base 8
         /// </summary>
         o7 = 0x7,
-
    }
 }

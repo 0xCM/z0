@@ -28,7 +28,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(N8 n, byte src, ref uint i, Span<AsciCode> dst)
+        public static uint render8(byte src, ref uint i, Span<AsciCode> dst)
         {
             var i0  = i;
             seek(dst, i++) = code(src, 7);
@@ -40,6 +40,20 @@ namespace Z0
             seek(dst, i++) = code(src, 1);
             seek(dst, i++) = code(src, 0);
             return i - i0;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render8(byte src, uint offset, Span<char> dst)
+        {
+            seek(dst, offset++) = bitchar(src, 7);
+            seek(dst, offset++) = bitchar(src, 6);
+            seek(dst, offset++) = bitchar(src, 5);
+            seek(dst, offset++) = bitchar(src, 4);
+            seek(dst, offset++) = bitchar(src, 3);
+            seek(dst, offset++) = bitchar(src, 2);
+            seek(dst, offset++) = bitchar(src, 1);
+            seek(dst, offset++) = bitchar(src, 0);
+            return 8;
         }
     }
 }

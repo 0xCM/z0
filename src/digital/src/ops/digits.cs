@@ -329,6 +329,27 @@ namespace Z0
             return 8;
         }
 
+        [MethodImpl(Inline), Op]
+        public static uint digits(byte src, Span<OctalDigit> dst)
+        {
+            seek(dst,0) = (OctalDigit)Bits.segment(src, 0, 2);
+            seek(dst,1) = (OctalDigit)Bits.segment(src, 3, 5);
+            seek(dst,2) = (OctalDigit)Bits.segment(src, 6, 7);
+            return 3;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint digits(ushort src, Span<OctalDigit> dst)
+        {
+            seek(dst,0) = (OctalDigit)Bits.segment(src, 0, 2);
+            seek(dst,1) = (OctalDigit)Bits.segment(src, 3, 5);
+            seek(dst,2) = (OctalDigit)Bits.segment(src, 6, 8);
+            seek(dst,3) = (OctalDigit)Bits.segment(src, 9, 11);
+            seek(dst,4) = (OctalDigit)Bits.segment(src, 12, 14);
+            seek(dst,5) = (OctalDigit)Bits.segment(src, 15, 16);
+            return 3;
+        }
+
         /// <summary>
         /// Computes the digits corresponding to each 3-bit segment of the permutation spec
         /// </summary>

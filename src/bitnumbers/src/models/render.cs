@@ -24,15 +24,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint render(uint2 src, ref uint i, Span<C> dst)
-            => BitRender.render2(n2, src, ref i, dst);
+            => BitRender.render2(src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint2 src, ref uint i, Span<char> dst)
-            => BitRender.render2(n2, src, ref i, dst);
+            => BitRender.render2(src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint3 src, ref uint i, Span<C> dst)
-            => BitRender.render3(n3, src, ref i, dst);
+            => BitRender.render3(src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint3 src, ref uint i, Span<char> dst)
@@ -56,11 +56,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint render(uint6 src, ref uint i, Span<C> dst)
-            => BitRender.render6(n6, src, ref i, dst);
+            => BitRender.render6(src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint6 src, ref uint i, Span<char> dst)
-            => BitRender.render6(n6, src, ref i, dst);
+            => BitRender.render6(src, ref i, dst);
 
         [MethodImpl(Inline), Op]
         public static uint render(uint7 src, ref uint i, Span<C> dst)

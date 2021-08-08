@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Bit)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Cells)" />
+    <ProjectReference Include="$(SymCore)" />
   </ItemGroup>
 
 </Project>

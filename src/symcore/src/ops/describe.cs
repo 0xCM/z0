@@ -12,21 +12,14 @@ namespace Z0
 
     partial struct Symbols
     {
-        /// <summary>
-        /// Extracts the symbol expressions from a source buffer and deposits them in a caller-supplied target
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        /// <typeparam name="T"></typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint expressions<T>(Symbols<T> src, Span<SymExpr> dst)
+        public static void describe<T>(Symbols<T> src, Span<TextBlock> dst)
             where T : unmanaged
         {
-            var count = src.Length;
+            var count = min(src.Length,dst.Length);
             var view = src.View;
-            for(var i=0; i<count; i++)
-                seek(dst,i) = skip(view,i).Expr;
-            return (uint)count;
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = src[i].Description;
         }
     }
 }

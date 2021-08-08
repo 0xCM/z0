@@ -4,15 +4,27 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
     using static BitSeq;
 
     public readonly struct ConditionCodes
     {
-        public enum ConditionAction : byte
+        public enum ActionCode : byte
         {
-            Jmp,
+            None =0,
 
-            Mov
+            Jmp = 1,
+
+            Mov = 2
+        }
+
+        public readonly struct ConditionFacets
+        {
+            public const byte ConditionCount = 16;
+
+            public const byte Jcc8Base = 0x70;
+
+            public const byte Jcc32Base = 0x80;
         }
 
         /// <summary>
@@ -228,8 +240,6 @@ namespace Z0.Asm
         [SymSource]
         public enum Jcc8 : byte
         {
-            None = 0,
-
             [Symbol("jo", "Jump short if overflow (OF=1)")]
             JO = 0x70,
 
@@ -282,8 +292,6 @@ namespace Z0.Asm
         [SymSource]
         public enum Jcc32 : byte
         {
-            None = 0,
-
             [Symbol("jo", "Jump near if overflow (OF=1)")]
             JO = 0x80,
 
@@ -336,8 +344,6 @@ namespace Z0.Asm
         [SymSource]
         public enum Jcc8Alt : byte
         {
-            None = 0,
-
             [Symbol("jo", "Jump short if overflow (OF=1)")]
             JO = 0x70,
 
@@ -390,8 +396,6 @@ namespace Z0.Asm
         [SymSource]
         public enum Jcc32Alt : byte
         {
-            None = 0,
-
             [Symbol("jo", "Jump near if overflow (OF=1)")]
             JO = 0x80,
 

@@ -12,12 +12,9 @@ namespace Z0.Asm
 
     partial struct asm
     {
-        [MethodImpl(Inline), Op]
-        public static AsmExpr expr(string src)
-            => new AsmExpr(src.Trim());
-
-        [Op]
-        public static AsmExpr expr(AsmMnemonic monic, ReadOnlySpan<char> operands)
-            => new AsmExpr(string.Format("{0} {1}", monic.Format(MnemonicCase.Lowercase), text.format(operands)));
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static JccInfo<K> jcc<K>(K kind, name64 name, AsmSize size)
+            where K : unmanaged
+                => new JccInfo<K>(kind, name, size);
     }
 }

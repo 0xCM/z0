@@ -108,7 +108,7 @@ namespace Z0.Asm
 
             text.copy(Mod, ref i, dst);
             seek(dst, i++) = Open;
-            BitRender.render2(n2, src.Mod(), ref i, dst);
+            BitRender.render2(src.Mod(), ref i, dst);
             seek(dst, i++) = Close;
 
             seek(dst, i++) = Sep;

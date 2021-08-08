@@ -41,7 +41,7 @@ namespace Z0.Asm
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render8x4(skip(input, i), offset, dst);
+                offset += BitRender.render4x4(skip(input, i), offset, dst);
             return offset - 1;
         }
 
@@ -52,7 +52,7 @@ namespace Z0.Asm
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render8x4(skip(input, i), offset, dst);
+                offset += BitRender.render4x4(skip(input, i), offset, dst);
             return offset - 1;
         }
 
@@ -63,7 +63,7 @@ namespace Z0.Asm
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render8x3(skip(input, i), offset, dst);
+                offset += BitRender.render3x3x2(skip(input, i), offset, dst);
             return offset - 1;
         }
 
@@ -74,7 +74,7 @@ namespace Z0.Asm
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render8x3(skip(input, i), offset, dst);
+                offset += BitRender.render3x3x2(skip(input, i), offset, dst);
             return offset - 1;
         }
 
@@ -107,7 +107,7 @@ namespace Z0.Asm
             var size = (int)src.Size;
             var length = min(size, dst.Length);
             for(var i=0; i<length; i++)
-                offset += BitRender.render8x4(skip(input, i), offset, dst);
+                offset += BitRender.render4x4(skip(input, i), offset, dst);
             return offset - 1;
         }
 

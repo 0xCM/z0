@@ -18,7 +18,7 @@ namespace Z0
             var i=0u;
             var buffer = CharBlock2.Null;
             var dst = buffer.Data;
-            render2(n2, src, ref i, dst);
+            render2(src, ref i, dst);
             return new string(dst);
         }
 
@@ -54,7 +54,7 @@ namespace Z0
         {
             var buffer = CharBlock6.Null.Data;
             var i=0u;
-            var count = render6(n6, src, ref i, buffer);
+            var count = render6(src, ref i, buffer);
             return new string(slice(buffer,0,count));
         }
 
@@ -80,9 +80,13 @@ namespace Z0
         public static string format32x8(uint src)
         {
             var buffer = CharBlock64.Null.Data;
-            var count = render32x8(src, 0, buffer);
+            var count = render8x8x8x8(src, 0, buffer);
             return new string(slice(buffer,0,count));
         }
+
+        [Op]
+        public static string format4x4(byte src)
+            => text.format(render4x4(src));
 
         public static string format(ReadOnlySpan<byte> src, in BitFormat config)
         {

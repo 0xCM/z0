@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct BitRender
     {
-        public static ReadOnlySpan<char> render8x4(byte src)
+        public static ReadOnlySpan<char> render4x4(byte src)
         {
             var dst = CharBlock16.Null.Data;
             var i = 0u;
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x4(byte src, uint offset, Span<char> dst)
+        public static uint render4x4(byte src, uint offset, Span<char> dst)
         {
             var i=offset;
             seek(dst, i++) = bitchar(src, 7);
@@ -47,7 +47,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x4(byte src, uint offset, Span<AsciCode> dst)
+        public static uint render4x4(byte src, uint offset, Span<AsciCode> dst)
         {
             var i=offset;
             seek(dst, i++) = code(src, 7);
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x4(byte src, uint offset, Span<BitChar> dst)
+        public static uint render4x4(byte src, uint offset, Span<BitChar> dst)
         {
             var i=offset;
             seek(dst, i++) = bit.test(src, 7);
@@ -81,7 +81,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render4(ReadOnlySpan<byte> src, Span<char> dst)
+        public static uint render4x4(ReadOnlySpan<byte> src, Span<char> dst)
         {
             var size = src.Length;
             var j = 0u;

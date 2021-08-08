@@ -11,6 +11,7 @@ namespace Z0
     using static core;
 
     using F = Blit.Factory;
+    using O = Blit.Operate;
 
     partial struct Blit
     {
@@ -71,6 +72,30 @@ namespace Z0
                 get => (uint)(Storage >> 56)&0xFF;
             }
 
+            public string Format()
+                => O.format(this);
+
+            public override string ToString()
+                => Format();
+
+            [MethodImpl(Inline)]
+            public bool Equals(name64 src)
+                => O.eq(this,src);
+
+            public override bool Equals(object src)
+                => src is name64 n ? Equals(n) : false;
+
+            public override int GetHashCode()
+                => (int)O.hash(this);
+
+            [MethodImpl(Inline)]
+            public static bool operator ==(name64 a, name64 b)
+                => a.Equals(b);
+
+            [MethodImpl(Inline)]
+            public static bool operator !=(name64 a, name64 b)
+                => !a.Equals(b);
+
             [MethodImpl(Inline)]
             public static implicit operator name64(string src)
                 => F.name(W,src);
@@ -112,6 +137,12 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => Storage.Cell(w8, 15);
             }
+
+            public string Format()
+                => O.format(this);
+
+            public override string ToString()
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator name128(string src)

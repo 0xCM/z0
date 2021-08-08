@@ -74,6 +74,6 @@ namespace Z0
 
         [Op]
         public static uint bitstring(Hex32 src, N8 n, uint offset, Span<char> dst)
-            => BitRender.render32x8(src.Value, offset, dst);
+            => BitRender.render8x8x8x8(src.Value, offset, dst);
     }
 }

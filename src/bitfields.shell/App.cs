@@ -31,7 +31,7 @@ namespace Z0
             var bf = Bitfields.create(m);
             var bytes = bf.Bytes;
             var buffer = CharBlock128.Null;
-            var count = BitRender.render4(bytes, buffer.Data);
+            var count = BitRender.render4x4(bytes, buffer.Data);
             var chars = slice(buffer.Data,0,count);
             var fmt = text.format(chars);
             Wf.Row(fmt);
