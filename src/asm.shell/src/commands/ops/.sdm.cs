@@ -38,7 +38,6 @@ namespace Z0.Asm
             return result;
         }
 
-
         void DisplayMatches(ReadOnlySpan<UnicodeLine> src, TextMarker marker,  ReadOnlySpan<TextMatch> matches)
         {
             foreach(var m in matches)
@@ -47,8 +46,8 @@ namespace Z0.Asm
                 Write(line);
             }
             Write(string.Format("Matched {0} {1} markers", matches.Length, marker.Name));
-
         }
+
         ReadOnlySpan<TextMatch> SdmMarkers(N5 n, ReadOnlySpan<UnicodeLine> src, TextMarker marker)
         {
             var matches = list<TextMatch>();

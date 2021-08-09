@@ -45,7 +45,13 @@ namespace Z0.Asm
 
         AsmTables AsmTables;
 
+        AsmLoader AsmLoader;
+
         ApiPacks ApiPacks;
+
+        ApiHexPacks HexPacks;
+
+        ApiPackArchive ApiArchive;
 
         NativeBufferSeq _NativeBuffers;
 
@@ -54,6 +60,8 @@ namespace Z0.Asm
         Index<ProcessAsm> _ProcessAsm;
 
         Index<ProcessAsm> _AsmGlobalSelection;
+
+        CliMemoryMap ResPack;
 
         IPolyrand Random;
 
@@ -78,6 +86,7 @@ namespace Z0.Asm
             _Assembled = array<byte>();
             _ProcessAsm = Index<ProcessAsm>.Empty;
             _AsmGlobalSelection = Index<ProcessAsm>.Empty;
+            ResPack = CliMemoryMap.Empty;
         }
 
         protected override void Initialized()
@@ -96,12 +105,23 @@ namespace Z0.Asm
             AsmToolchain = Wf.AsmToolchain();
             AsmTables = Wf.AsmTables();
             Random = Rng.wyhash64();
+            ApiArchive = ApiPack.Archive();
+            AsmLoader = Wf.AsmLoader();
+            HexPacks = Wf.ApiHexPacks();
             State.DevWs(Ws);
         }
 
         protected override void Disposing()
         {
             CodeBuffer.Dispose();
+            ResPack.Dispose();
+        }
+
+        CliMemoryMap OpenResPack()
+        {
+            if(ResPack.IsEmpty)
+                ResPack = CliMemoryMap.create(Db.Package("respack") + FS.file("z0.respack", FS.Dll));
+            return ResPack;
         }
 
         AddressMap NativeAddressMap

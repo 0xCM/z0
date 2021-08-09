@@ -136,6 +136,13 @@ namespace Z0
         public Index<T> Reverse()
             => Index.reverse(Data);
 
+        public Index<T> Sort<Y>(Y comparer = default)
+            where Y : unmanaged, IComparer<T>
+        {
+            Array.Sort(Storage,comparer);
+            return this;
+        }
+
         [MethodImpl(Inline)]
         public bool Search(Func<T,bool> predicate, out T found)
             => Index.search(this, predicate, out found);

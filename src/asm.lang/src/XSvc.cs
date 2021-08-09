@@ -22,16 +22,16 @@ namespace Z0
             => Svc.AsmTables.create(wf);
 
         [Op]
+        public static AsmLoader AsmLoader(this IServiceContext wf)
+            => Svc.AsmLoader.create(wf);
+
+        [Op]
         public static StanfordAsmCatalog StanfordCatalog(this IWfRuntime wf)
             => Svc.StanfordAsmCatalog.create(wf);
 
         [Op]
         public static AsmDbCatalog AsmDbCatalog(this IWfRuntime wf)
             => Svc.AsmDbCatalog.create(wf);
-
-        [Op]
-        public static AsmThumbprints AsmThumbprints(this IWfRuntime wf)
-            => Svc.AsmThumbprints.create(wf);
 
         [Op]
         public static AsmFormPipe AsmFormPipe(this IWfRuntime wf)

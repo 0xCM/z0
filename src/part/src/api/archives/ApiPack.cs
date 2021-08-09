@@ -13,7 +13,7 @@ namespace Z0
     {
         public ApiExtractSettings ExtractSettings {get;}
 
-        FS.FolderPath Root
+        public FS.FolderPath Root
             => ExtractSettings.ExtractRoot;
 
         [MethodImpl(Inline)]

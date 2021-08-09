@@ -20,7 +20,7 @@ namespace Z0
         public ReadOnlySpan<char> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data ?? EmptyString;
         }
 
         public string Text

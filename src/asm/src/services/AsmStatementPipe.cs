@@ -116,7 +116,7 @@ namespace Z0.Asm
             return statements;
         }
 
-        public void EmitHostStatements(ReadOnlySpan<AsmHostStatement> src, FS.FolderPath? root = null)
+        public void EmitHostStatements(ReadOnlySpan<AsmHostStatement> src, FS.FolderPath root)
         {
             ClearTarget();
 
@@ -163,13 +163,13 @@ namespace Z0.Asm
                     Wf.EmittedFile(asmFlow, counter);
 
                     host = statement.OpUri.Host;
-                    tablePath = root == null ? Db.AsmStatementPath(host, FS.Csv) : Db.AsmStatementPath(root.Value, host,FS.Csv);
+                    tablePath = Db.AsmStatementPath(root, host,FS.Csv);
 
                     tableWriter = tablePath.Writer();
                     tableWriter.WriteLine(formatter.FormatHeader());
                     tableFlow = Wf.EmittingTable<AsmHostStatement>(tablePath);
 
-                    asmPath = root == null ? Db.AsmStatementPath(host, FS.Asm) : Db.AsmStatementPath(root.Value, host, FS.Asm);
+                    asmPath = Db.AsmStatementPath(root, host, FS.Asm);
                     asmWriter = asmPath.Writer();
                     asmFlow = Wf.EmittingFile(asmPath);
 
@@ -400,20 +400,12 @@ namespace Z0.Asm
             }
         }
 
-
         void ClearTarget()
         {
             var dir = Db.TableDir<AsmHostStatement>();
             var flow = Wf.Running(Msg.ObliteratingDirectory.Format(dir));
             dir.Delete();
             Wf.Ran(flow, Msg.ObliteratedDirectory.Format(dir));
-        }
-
-        FS.FilePath ThumbprintPath(FS.FolderPath? root = null)
-        {
-            var tpDefaultPath = Db.TableDir<AsmHostStatement>() + FS.file("thumbprints", FS.Asm);
-            var tpPath = root == null ? tpDefaultPath : Db.TableDir<AsmHostStatement>(root.Value) + FS.file("thumbprints", FS.Asm);
-            return tpPath;
         }
 
         static void EmitAsmBlockHeader(in AsmHostStatement first, StreamWriter dst)
@@ -423,11 +415,14 @@ namespace Z0.Asm
             dst.WriteLine(AsmBlockSeparator);
         }
 
-        FS.FilePath AsmSrcPath(ApiHostUri host, FS.FolderPath? root = null)
-            => root == null ? Db.AsmStatementPath(host, FS.Asm) : Db.AsmStatementPath(root.Value, host, FS.Asm);
+        FS.FilePath ThumbprintPath(FS.FolderPath root)
+            => root + FS.file("thumbprints", FS.Asm);
 
-        FS.FilePath AsmTablePath(ApiHostUri host, FS.FolderPath? root = null)
-            => root == null ? Db.AsmStatementPath(host, FS.Csv) : Db.AsmStatementPath(root.Value, host,FS.Csv);
+        FS.FilePath AsmSrcPath(ApiHostUri host, FS.FolderPath root)
+            => Db.AsmStatementPath(root, host, FS.Asm);
+
+        FS.FilePath AsmTablePath(ApiHostUri host, FS.FolderPath root)
+            => Db.AsmStatementPath(root, host,FS.Csv);
 
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
     }

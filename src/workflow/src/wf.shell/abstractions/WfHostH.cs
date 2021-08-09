@@ -37,7 +37,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                wf.Error(StepId, e);
+                wf.Error(e);
             }
         }
 

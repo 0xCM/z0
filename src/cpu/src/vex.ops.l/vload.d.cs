@@ -151,7 +151,8 @@ namespace Z0
             => LoadDquVector256(gptr(src));
 
         /// <summary>
-        ///  __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+        ///  __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
+        /// VLDDQU ymm, m256
         /// </summary>
         /// <param name="w">The width selector</param>
         /// <param name="src">The data source</param>
@@ -160,7 +161,8 @@ namespace Z0
             => LoadDquVector256(gptr(src));
 
         /// <summary>
-        ///  __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+        ///  __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
+        /// VLDDQU ymm, m256
         /// </summary>
         /// <param name="w">The width selector</param>
         /// <param name="src">The data source</param>
@@ -169,7 +171,8 @@ namespace Z0
             => LoadDquVector256(gptr(src));
 
         /// <summary>
-        ///  __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+        ///  __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
+        /// VLDDQU ymm, m256
         /// </summary>
         /// <param name="w">The width selector</param>
         /// <param name="src">The data source</param>
@@ -178,7 +181,8 @@ namespace Z0
             => LoadDquVector256(gptr(src));
 
         /// <summary>
-        ///  __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
+        ///  __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
+        /// VLDDQU ymm, m256
         /// </summary>
         /// <param name="w">The width selector</param>
         /// <param name="src">The data source</param>

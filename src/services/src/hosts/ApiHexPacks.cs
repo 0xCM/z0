@@ -16,7 +16,7 @@ namespace Z0
 
         public Lookup<FS.FilePath,HexPack> Load(FS.Files src)
         {
-            var flow = Wf.Running(string.Format("Loading {0} packs", src.Length));
+            var flow = Running(string.Format("Loading {0} packs", src.Length));
             var lookup = new Lookup<FS.FilePath,HexPack>();
             var errors = new Lookup<FS.FilePath,Outcome>();
             iter(src, path => load(path, lookup, errors), true);
@@ -31,11 +31,11 @@ namespace Z0
                 var blocks = entry.Value.Blocks;
                 var blockCount = (uint)blocks.Length;
                 var host = path.FileName.Format().Remove(".extracts.parsed.xpack").Replace(".","/");
-                Wf.Babble(string.Format("Loaded {0} blocks from {1}", blockCount, path.FileName));
+                Write(string.Format("Loaded {0} blocks from {1}", blockCount, path.ToUri()));
                 counter += blockCount;
             }
 
-            Wf.Ran(flow, string.Format("Loaded {0} total blocks", counter));
+            Ran(flow, string.Format("Loaded {0} total blocks", counter));
 
             return result;
         }
@@ -54,7 +54,7 @@ namespace Z0
             if(validate)
             {
                 var buffer = span<HexDigit>(BufferLength);
-                var flow = Wf.Running("Validating pack");
+                var flow = Running("Validating pack");
                 for(var i=0; i<count; i++)
                 {
                     buffer.Clear();
@@ -62,11 +62,11 @@ namespace Z0
                     var outcome = Hex.digits(pack.Data,buffer);
                     if(!outcome)
                     {
-                        Wf.Error("Reconstitution failed");
+                        Error("Reconstitution failed");
                         break;
                     }
                 }
-                Wf.Ran(flow,$"Validated {count} packs");
+                Ran(flow,$"Validated {count} packs");
             }
 
             return packs;
@@ -78,32 +78,32 @@ namespace Z0
             var _dst = dst ?? Db.TableRoot() + FS.file("apihex", FS.ext("xpack"));
             var result = Pack(blocks, validate);
             var packed = result.View;
-            var emitting = Wf.EmittingFile(_dst);
+            var emitting = EmittingFile(_dst);
             using var writer = _dst.Writer();
             var count = packed.Length;
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(packed,i).Format());
-            Wf.EmittedFile(emitting, count);
+            EmittedFile(emitting, count);
             return result;
         }
 
         [Op]
         public ByteSize Emit(in HexPack src, FS.FilePath dst)
         {
-            var flow = Wf.EmittingFile(dst);
+            var flow = EmittingFile(dst);
             using var writer = dst.Writer();
             var total = HexPacks.emit(src, writer);
-            Wf.EmittedFile(flow, (uint)total);
+            EmittedFile(flow, (uint)total);
             return total;
         }
 
         [Op]
         public ByteSize Emit(in MemoryBlock src, FS.FilePath dst)
         {
-            var flow = Wf.EmittingFile(dst);
+            var flow = EmittingFile(dst);
             using var writer = dst.Writer();
             var total = HexPacks.emit(HexPacks.pack(src), writer);
-            Wf.EmittedFile(flow, (uint)total);
+            EmittedFile(flow, (uint)total);
             return total;
         }
 

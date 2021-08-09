@@ -83,7 +83,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public unsafe static MetadataReaderProvider ReaderProvider(byte* pSrc, ByteSize size)
+        unsafe static MetadataReaderProvider ReaderProvider(byte* pSrc, ByteSize size)
             => MetadataReaderProvider.FromMetadataImage(pSrc, size);
 
         [MethodImpl(Inline), Op]

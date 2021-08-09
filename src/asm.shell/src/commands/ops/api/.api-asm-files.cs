@@ -11,51 +11,21 @@ namespace Z0.Asm
         [CmdOp(".api-asm-files")]
         Outcome ApiAsmFiles(CmdArgs args)
         {
-            var part = arg(args,0);
-            var outcome = ApiParsers.part(part.Value, out var id);
-            if(outcome.Fail)
-                return outcome;
-
-            var paths = LoadApiAsmPaths(id);
-            var spath = ApiPack.AsmStatementSummary();
-            var stats = spath.FileStats();
-            var formatter = stats.Formatter();
-            Write(formatter.FormatKvp(stats));
-
-            return true;
-        }
-
-        FS.Files LoadApiAsmPaths(PartId part)
-            => Files(ApiPack.AsmCapturePaths(part));
-
-        Outcome ApiAsmFiles2(CmdArgs args)
-        {
             var result = Outcome.Success;
-            var archive = Wf.ApiPacks().Archive();
-            var files = array<FS.FilePath>();
-            if(args.Count == 0)
-                files = archive.AsmRoot().Files(FS.Asm, true);
-            else
+            var pairs = ApiArchive.StatementTablePairs().View;
+            var count = pairs.Length;
+            for(var i=0; i<count; i++)
             {
-                var a = arg(args,0).Value;
-                var i = text.index(a,Chars.FSlash);
-                if(i > 0)
-                {
-                    result = ApiParsers.part(text.left(a,i), out var part);
-                    if(result)
-                    {
-                        var uri = new ApiHostUri(part, text.right(a,i));
-                        files = array(archive.Statements(uri));
-                    }
-                }
-                else
-                {
-                    files = (archive.AsmRoot() + FS.folder(a)).Files(FS.Asm,true);
-                }
+                (var csv, var asm) = skip(pairs,i);
+                Write(string.Format("{0} | {1}", csv.ToUri(), asm.ToUri()));
+
             }
-            if(result)
-                Files(files);
+
             return result;
         }
+
+        FS.Files ApiAsmPaths(PartId part)
+            => Files(ApiPack.AsmCapturePaths(part));
+
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
             if(count == 0)
                 return 0;
 
-            var dst = Paths.ParsedExtractPath(host);
+            var dst = Paths.ParsedHexPath(host);
             var blocks = alloc<MemoryBlock>(count);
             var found = ApiExtracts.terminals(src, blocks);
             var packed = Z0.HexPacks.pack(blocks);

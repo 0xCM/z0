@@ -14,11 +14,12 @@ namespace Z0.Asm
             var provider = Wf.ApiResProvider();
             var accessors = provider.ResPackAccessors();
             var count = accessors.Length;
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
-                ref readonly var access = ref skip(accessors,i);
-                var row = string.Format("{0,-12} | {1, -24} | {2}", access.Host.Part, access.Host.HostName, access.Member.DisplaySig());
-                Wf.Row(row);
+                ref readonly var accessor = ref skip(accessors,i);
+                var seg = SpanRes.capture(accessor);
+                var def = CapturedAccessor.define(i, accessor, seg);
+                Write(def);
             }
             return true;
         }

@@ -17,6 +17,12 @@ namespace Z0
     {
         FS.FolderPath Root {get;}
 
+        FS.FolderName PartFolder(PartId id)
+            => FS.folder(id.Format());
+
+        FS.FileName HostFile(ApiHostUri host, FS.FileExt ext)
+            => FS.file(string.Format("{0}.{1}", host.Part.Format(), host.HostName), ext);
+
         FS.FolderPath Subdir(string name)
             => Root + FS.folder(name);
 

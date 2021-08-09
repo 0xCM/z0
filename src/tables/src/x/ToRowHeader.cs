@@ -10,6 +10,6 @@ namespace Z0
     {
         [Op]
         public static RowHeader ToRowHeader(this TextDocHeader src, string delimiter, ReadOnlySpan<byte> widths)
-            => Tables.header(src,delimiter,widths);
+            => Tables.header(src, delimiter, widths);
     }
 }

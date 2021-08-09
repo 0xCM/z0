@@ -38,9 +38,7 @@ namespace Z0.Asm
                 dst = default;
                 var i = SQ.index(src.Codes, C.Colon);
                 if(i == NotFound)
-                {
                     return (false, MarkerCodeNotFound.Format(C.Colon));
-                }
 
                 var left = slice(src.Codes, 0, i);
                 var right = slice(src.Codes, i + 1);
@@ -81,7 +79,6 @@ namespace Z0.Asm
                     if(SQ.eol(a0,a1))
                     {
                         var line = Lines.asci(src, number++, counter, length + 1);
-
                         if(!SQ.contains(line.Codes, C.Colon) || number < 4)
                         {
                             pos++;

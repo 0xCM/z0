@@ -19,12 +19,12 @@ namespace Z0
 
         public ReadOnlySpan<SpanResAccessor> SpanAccessors(FS.FilePath src)
         {
-            var flow = Wf.Running(LoadingSpanAccessors.Format(src));
+            var flow = Running(LoadingSpanAccessors.Format(src));
             if(!src.Exists)
-                Throw.sourced(FS.Msg.DoesNotExist.Format(src));
+                Throw.sourced(FS.missing(src));
             var assembly = Assembly.LoadFrom(src.Name);
             var loaded = SpanRes.accessors(assembly);
-            Wf.Ran(flow, LoadedSpanAccessors.Format(loaded.Count, src));
+            Ran(flow, LoadedSpanAccessors.Format(loaded.Count, src));
             return loaded;
         }
 

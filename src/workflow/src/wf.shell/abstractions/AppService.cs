@@ -162,7 +162,7 @@ namespace Z0
             => Wf.Status(new string(src));
 
         protected void Status(string pattern, params object[] args)
-            => Wf.Status(string.Format(pattern,args));
+            => Wf.Status(string.Format(pattern, args));
 
         protected void Warn<T>(T content)
             => Wf.Warn(content);
@@ -175,18 +175,6 @@ namespace Z0
             if(emphasis)
                 Wf.RowStatus(content);
             else Wf.Row(content);
-        }
-
-        protected void RowStatus<T>(T content)
-            => Wf.RowStatus(content);
-
-        protected void Write(ReadOnlySpan<char> src)
-            => Wf.Row(new string(src));
-
-        protected void Write<T>(T src, StreamWriter dst)
-        {
-            dst.WriteLine(src.ToString());
-            Wf.Row(src);
         }
 
         protected void Write<T>(ReadOnlySpan<T> src)

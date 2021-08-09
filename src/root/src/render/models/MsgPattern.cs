@@ -18,9 +18,15 @@ namespace Z0
         {
             PatternText = src;
         }
+
+
         public string Format(params object[] src)
         {
             var count = src?.Length ?? 0;
+
+            if(count == 0)
+                return PatternText;
+
             var items = new string[count];
             for(var i=0; i<count; i++)
                 items[i] = string.Format("<{0}>", src[i]);

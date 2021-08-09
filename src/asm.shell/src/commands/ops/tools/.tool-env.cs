@@ -15,7 +15,7 @@ namespace Z0.Asm
             var cmd = Cmd.cmdline(path.Format(PathSeparator.BS));
             var response = ScriptRunner.RunCmd(cmd);
             var settings = Settings.parse(response);
-            iter(settings, s => RowStatus(s));
+            iter(settings, s => Write(s));
             return true;
         }
     }

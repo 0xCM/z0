@@ -55,7 +55,7 @@ namespace Z0
 
         void EmitDetails(ReadOnlySpan<ApiCodeBlock> src, ApiPackArchive dst)
         {
-            var target = dst.AsmDetailDir();
+            var target = dst.DetailTables();
             target.Clear();
             var rows = AsmRows.Emit(src, target);
         }

@@ -5,14 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
 
-    partial struct TextTools
+    partial class text
     {
         [Op, Closures(Closure)]
-        public static void parse<T>(TextGrid src, Span<T> dst, Func<TextRow,T> parser)
+        public static void parse<T>(in TextGrid src, Span<T> dst, Func<TextRow,T> parser)
         {
             var rows = src.RowData.View;
             var count = rows.Length;

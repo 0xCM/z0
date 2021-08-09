@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci2 src)
-            => foundnot(search(src, AsciNone), src.Capacity);
+            => foundnot(search(src, z8), src.Capacity);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci4 src)
-            => foundnot(index(src, AsciNone), src.Capacity);
+            => foundnot(index(src, z8), src.Capacity);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci8 src)
-            => foundnot(index(src, AsciNone), src.Capacity);
+            => foundnot(index(src, z8), src.Capacity);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci16 src)
-            => foundnot(index(src, AsciNone), src.Capacity);
+            => foundnot(index(src, z8), src.Capacity);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci32 src)
-            => foundnot(index(src, AsciNone), src.Capacity);
+            => foundnot(index(src, z8), src.Capacity);
 
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any
@@ -58,6 +58,6 @@ namespace Z0
         /// <param name="src">The asci source</param>
         [MethodImpl(Inline), Op]
         public static int length(in asci64 src)
-            => foundnot(index(src, AsciNone), src.Capacity);
+            => foundnot(index(src, z8), src.Capacity);
     }
 }

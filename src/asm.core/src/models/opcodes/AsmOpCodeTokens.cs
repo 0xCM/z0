@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static Root;
+
     public readonly struct AsmOpCodeTokens
     {
         public enum TokenKind : byte
@@ -126,6 +128,9 @@ namespace Z0.Asm
 
             [Symbol("REX.B", "Modifies the base in the ModR/M r/m field or SIB base field; or it modifies the opcode reg field used for accessing GPRs")]
             RexB,
+
+            [Symbol(".")]
+            Sep,
         }
 
         [SymSource]
@@ -160,6 +165,9 @@ namespace Z0.Asm
 
             [Symbol("mmmmm", "In a 3-byte vex prefix, indicates the least 5 bits of the middle byte")]
             mmmmm,
+
+            [Symbol(".")]
+            Sep,
         }
 
         [SymSource]
@@ -191,6 +199,9 @@ namespace Z0.Asm
 
             [Symbol("512")]
             W512,
+
+            [Symbol(".")]
+            Sep,
         }
 
         // "cb\0" + "cw\0" + "cd\0" + "cp\0" + "c0\0" + "ct\0"

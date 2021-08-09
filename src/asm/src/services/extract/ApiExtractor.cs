@@ -33,8 +33,6 @@ namespace Z0
 
         byte[] Buffer;
 
-        IMultiDiviner Identity {get;}
-
         Index<ResolvedPart> ResolvedParts;
 
         Index<AsmRoutine> SortedRoutines;
@@ -43,7 +41,6 @@ namespace Z0
 
         public ApiExtractor()
         {
-            Identity = MultiDiviner.Service;
             Buffer = ApiExtracts.buffer();
             SortedRoutines = array<AsmRoutine>();
             ResolvedParts = array<ResolvedPart>();
@@ -62,8 +59,8 @@ namespace Z0
 
         void ClearTargets()
         {
-            Paths.ExtractRoot().Clear();
-            Paths.AsmRoot().Clear(true);
+            Paths.HexPackRoot().Clear();
+            Paths.AsmCaptureRoot().Clear(true);
         }
 
         public void ExtractParts()

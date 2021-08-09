@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     public class ApiResPackUnpacker : AppService<ApiResPackUnpacker>
     {
-        public void Emit(FS.FolderPath dst)
+        public ReadOnlySpan<MemorySeg> Emit(FS.FolderPath dst)
         {
             var asmpath = dst + FS.file("respack",FS.Asm);
             var hexpath = asmpath.ChangeExtension(FS.Hex);
@@ -34,12 +34,11 @@ namespace Z0.Asm
             {
                 var seqlabel = sequence.ToString("d6") + ": ";
                 ref readonly var accessor = ref skip(accessors,i);
-                var raw = SpanRes.definition(accessor).ToArray();
-                var bytes = @readonly(raw);
-                var decoded = decoder.Decode(raw, MemoryAddress.Zero).View;
+                var bytes = SpanRes.definition(accessor);
+                var decoded = decoder.Decode(bytes.ToArray(), MemoryAddress.Zero).View;
                 var name = accessor.DeclaringType.Name + "/" + accessor.Member.Name;
                 asmwriter.WriteLine(asm.comment(seqlabel + name));
-                AsmFormatter.render(raw, decoded, buffer);
+                AsmFormatter.render(bytes, decoded, buffer);
                 asmwriter.Write(buffer.Emit());
 
                 var offset = z16;
@@ -73,8 +72,9 @@ namespace Z0.Asm
 
             Wf.EmittedFile(asmFlow, sequence);
             Wf.EmittedFile(hexFlow, sequence);
-
-            EmitProps(segments.ViewDeposited(), dst + FS.file("respack.data", FS.XPack));
+            var deposited = segments.ViewDeposited();
+            EmitProps(deposited, dst + FS.file("respack.data", FS.XPack));
+            return deposited;
         }
 
         void EmitProps(ReadOnlySpan<MemorySeg> src, FS.FilePath dst)
@@ -87,7 +87,7 @@ namespace Z0.Asm
             {
                 ref readonly var seg = ref skip(src,i);
                 buffer.Clear();
-                writer.WriteLine(HexPacks.linepack(seg,i, buffer));
+                writer.WriteLine(HexPacks.linepack(seg, i, buffer));
             }
             Wf.EmittedFile(flow, count);
         }

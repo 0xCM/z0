@@ -128,19 +128,6 @@ namespace Z0.Asm
             }
         }
 
-        public void LoadHexPacks()
-        {
-            var svc = Wf.ApiPacks();
-            var pack = svc.List().Last;
-            var hex = Wf.ApiHexPacks();
-            var packs = hex.LoadParsed(pack.HexPackRoot());
-        }
-
-        public MemoryFile OpenResPack()
-        {
-            var path = Wf.Db().Package("respack") + FS.file("z0.respack", FS.Dll);
-            return MemoryFiles.map(path);
-        }
 
         void ResolveApi(params PartId[] parts)
         {
@@ -363,20 +350,6 @@ namespace Z0.Asm
             return Wf.ResPackEmitter().Emit(blocks.View,dst);
         }
 
-        void ShowRegOps()
-        {
-            var reg = asm.reg(RegWidthCode.W32, RegClassCode.GP, RegIndexCode.r2);
-            Wf.Row(string.Format("{0}{1}/{2}", reg.Width, reg.Index, reg.RegClass));
-        }
-
-        void CompareBitstrings()
-        {
-            var buffer = Cells.alloc(n128).Bytes;
-            var count = Hex.parse("80C116",buffer);
-            var data = slice(buffer,0,count);
-            Wf.Row(data.FormatHex());
-        }
-
         public void ShowVendorManuals(string vendor, FS.FileExt ext)
         {
             var docs = Db.VendorManuals();
@@ -501,56 +474,6 @@ namespace Z0.Asm
             parser.ParseDisassembly(src,dst);
         }
 
-        Index<AsciCode> IndexIdentifiers()
-        {
-            var symbols = Symbols.index<XedModels.IFormType>().View;
-            var count = symbols.Length;
-            var size = ByteSize.Zero;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var s = ref skip(symbols,i);
-                var id = s.Kind;
-                var name = s.Name;
-                size += ((uint)name.Length + 1);
-            }
-
-            var buffer = alloc<AsciCode>(size);
-
-            Wf.Status(string.Format("Allocated {0} bytes for {1} symbols", size, count));
-
-            ref var dst = ref first(buffer);
-            var k=0;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var s = ref skip(symbols,i);
-                var name = @span(s.Name);
-                for(var j=0; j<name.Length; j++)
-                    seek(dst,k++) = (AsciCode)skip(name,j);
-                seek(dst,k++) = AsciCode.Null;
-            }
-            return buffer;
-        }
-
-        public void Emit(ReadOnlySpan<AsciCode> src, FS.FilePath dst)
-        {
-            var emitting = Wf.EmittingFile(dst);
-            using var writer = dst.AsciWriter();
-            var i=0;
-            var lines = 0u;
-            var count = src.Length;
-            while(i++<count)
-            {
-                ref readonly var c = ref skip(src,i);
-                if(c == AsciCode.Null)
-                {
-                    writer.WriteLine();
-                    lines++;
-                }
-                else
-                    writer.Write((char)c);
-            }
-            Wf.EmittedFile(emitting, lines);
-        }
 
         void EmitSymbolIndex<E>(Identifier container)
             where E : unmanaged, Enum

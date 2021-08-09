@@ -15,38 +15,42 @@ namespace Z0.Asm
         {
             public const string TableId = "sdm.opcodes";
 
-            public const byte FieldCount = 10;
+            public const byte FieldCount = 14;
 
             public uint OpCodeId;
 
             public CharBlock16 Mnemonic;
 
-            public CharBlock48 Expr;
+            public CharBlock48 OpCode;
 
             public CharBlock64 Sig;
 
             public CharBlock8 EncXRef;
 
-            //public Mode64Kind Mode64;
+            public CharBlock8 Mode64;
 
-            public CharBlock8 Mode64Expr;
+            public CharBlock8 LegacyMode;
 
-            //public LegacyModeKind LegacyMode;
+            public CharBlock8 Mode64x32;
 
-            public CharBlock8 LegacyModeExpr;
+            public CharBlock16 CpuId;
 
-            //public Mode64x32Kind Mode64x32;
+            public bit Rex;
 
-            public CharBlock8 Mode64x32Expr;
+            public bit RexW;
 
-            //public CpuIdFeature CpuId;
+            public bit Vex;
 
-            public CharBlock16 CpuIdExpr;
+            public bit Evex;
 
             public CharBlock256 Description;
 
             public static ReadOnlySpan<byte> RenderWidths
-                => new byte[FieldCount]{12,16,48,64,8,8,8,8,16,255};
+                => new byte[FieldCount]{
+                    12,16,48,64,
+                    10,10,10,10,
+                    16,6,6,6,6,
+                    255};
         }
     }
 }

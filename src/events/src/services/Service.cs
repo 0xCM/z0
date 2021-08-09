@@ -50,7 +50,7 @@ namespace Z0
 
         protected DataEvent<T> Row<T>(T src)
         {
-            return Signal.Row(src);
+            return Signal.Data(src);
         }
 
 

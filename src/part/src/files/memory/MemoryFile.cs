@@ -29,18 +29,31 @@ namespace Z0
         internal MemoryFile(FS.FilePath path)
         {
             Path = path;
-            File = MemoryMappedFile.CreateFromFile(path.Name, FileMode.Open, null, 0);
-            Accessor = File.CreateViewAccessor(0, 0);
-            var @base = default(byte*);
-            Accessor.SafeMemoryMappedViewHandle.AcquirePointer(ref @base);
-            Base = @base;
-            Size = (ulong)Path.Info.Length;
+            if(Path.IsNonEmpty)
+            {
+                File = MemoryMappedFile.CreateFromFile(path.Name, FileMode.Open, null, 0);
+                Accessor = File.CreateViewAccessor(0, 0);
+                var @base = default(byte*);
+                Accessor.SafeMemoryMappedViewHandle.AcquirePointer(ref @base);
+                Base = @base;
+                Size = (ulong)Path.Info.Length;
+            }
+            else
+            {
+                File = default;
+                Accessor = default;
+                Size = 0;
+                Base = null;
+            }
         }
 
         public void Dispose()
         {
-            Accessor?.Dispose();
-            File?.Dispose();
+            if(IsNonEmpty)
+            {
+                Accessor?.Dispose();
+                File?.Dispose();
+            }
         }
 
         public MemoryAddress BaseAddress
@@ -61,12 +74,16 @@ namespace Z0
             get => Base != null;
         }
 
+        [MethodImpl(Inline)]
+        public MemorySeg Segment()
+            => new MemorySeg(Base,Size);
+
         public MemoryFileInfo Description
             => api.describe(this);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> View(ulong offset, ByteSize size)
-            => core.view(BaseAddress, offset, size);
+            => view(BaseAddress, offset, size);
 
         /// <summary>
         /// Presents file content as a readonly sequence of <see cref='byte'/> cells
@@ -117,5 +134,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(MemoryFile src)
             => BaseAddress.CompareTo(src.BaseAddress);
+
+        public static MemoryFile Empty
+        {
+            [MethodImpl(Inline)]
+            get => new MemoryFile(FS.FilePath.Empty);
+        }
     }
 }

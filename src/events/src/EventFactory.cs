@@ -183,7 +183,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static DataEvent<T> data<T>(T data, bool status = false)
-            => status ? new DataEvent<T>(data,FlairKind.StatusData) : new DataEvent<T>(data);
+            => status ? new DataEvent<T>(data, FlairKind.StatusData) : new DataEvent<T>(data);
 
         /// <summary>
         /// Defines a <see cref='CreatedEvent{T}'/> event

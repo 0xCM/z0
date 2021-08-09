@@ -6,12 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
     /// <summary>
     /// The hex bits found at the end of a uri
     /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
     public readonly struct ApiCodeBlock : IComparable<ApiCodeBlock>
     {
         /// <summary>

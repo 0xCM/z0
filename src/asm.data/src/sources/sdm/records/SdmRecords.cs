@@ -10,6 +10,9 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
+    using M = SdmModels.EncodingMarkers;
+    using SQ = SymbolicQuery;
+
     [ApiHost]
     public readonly partial struct SdmRecords
     {
@@ -36,7 +39,11 @@ namespace Z0.Asm
                     switch(col.Name)
                     {
                         case "Opcode":
-                        target.Expr = content;
+                        target.OpCode = content;
+                        target.Rex = SQ.match(n3, content, M.Rex) >= 0;
+                        target.RexW = SQ.match(n5,content, M.RexW) >= 0;
+                        target.Vex = SQ.match(n4, content, M.Vex) >= 0;
+                        target.Evex = SQ.match(n5,content, M.Evex) >= 0;
                         break;
 
                         case "Instruction":
@@ -50,19 +57,19 @@ namespace Z0.Asm
                         break;
 
                         case "Compat/Leg Mode":
-                            target.LegacyModeExpr = content;
+                            target.LegacyMode = content;
                         break;
 
                         case "64-bit Mode":
-                            target.Mode64Expr = content;
+                            target.Mode64 = content;
                         break;
 
                         case "64/32 bit Mode Support":
-                            target.Mode64x32Expr = content;
+                            target.Mode64x32 = content;
                         break;
 
                         case "CPUID Feature Flag":
-                            target.CpuIdExpr = content;
+                            target.CpuId = content;
                         break;
 
                         case "Description":

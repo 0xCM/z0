@@ -19,6 +19,63 @@ namespace Z0.Asm
     public readonly partial struct AsmOpCodes
     {
         [Op]
+        public static bit search(ReadOnlySpan<char> src, out ModRmToken dst)
+        {
+            dst = default;
+            var count = src.Length;
+            var level = 0;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var c = ref skip(src,i);
+                switch(level)
+                {
+                    case 0:
+                        switch(c)
+                        {
+                            case '/':
+                                level++;
+                            break;
+                        }
+                    break;
+                    case 1:
+                    switch(c)
+                    {
+                        case 'r':
+                            dst = ModRmToken.r;
+                            return true;
+                        case '0':
+                            dst = ModRmToken.r0;
+                            return true;
+                        case '1':
+                            dst = ModRmToken.r1;
+                            return true;
+                        case '2':
+                            dst = ModRmToken.r2;
+                            return true;
+                        case '3':
+                            dst = ModRmToken.r3;
+                            return true;
+                        case '4':
+                            dst = ModRmToken.r4;
+                            return true;
+                        case '5':
+                            dst = ModRmToken.r5;
+                            return true;
+                        case '6':
+                            dst = ModRmToken.r6;
+                            return true;
+                        case '7':
+                            dst = ModRmToken.r7;
+                            return true;
+                    }
+
+                    break;
+                }
+            }
+            return false;
+        }
+
+        [Op]
         public static ReadOnlySpan<Token<DispToken>> DispTokens()
             => Tokens.tokenize<DispToken>(DispTokenSpec);
 

@@ -24,7 +24,7 @@ namespace Z0
             var pipe = Wf.ProcessContextPipe();
             var procparts = pipe.EmitPartitions(process, ts, dir);
             var regions = pipe.EmitRegions(process, ts, dir);
-            pipe.EmitDump(process, pack.DumpPath(process, ts));
+            pipe.EmitDump(process, pack.ProcDumpPath(process, ts));
             EmitApiCatalog(ts);
             Wf.Ran(flow);
         }

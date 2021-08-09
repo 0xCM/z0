@@ -16,6 +16,9 @@ namespace Z0
     [ApiHost, Free]
     public unsafe partial class CliMemoryMap : IDisposable
     {
+        public static CliMemoryMap create(FS.FilePath src)
+            => new CliMemoryMap(src);
+
         readonly MemoryFile Source;
 
         public PEReader PE {get;}
@@ -28,30 +31,55 @@ namespace Z0
 
         public PEMemoryBlock MtadataBlock {get;}
 
-        public CliMemoryMap(IWfRuntime wf, FS.FilePath src)
+        public CliMemoryMap(FS.FilePath src)
         {
-            Source = MemoryFiles.map(src);
-            BasePointer = Source.BaseAddress.Pointer<byte>();
-            PE = new PEReader(BasePointer, (int)Source.Size);
-            ImageSize = Source.Size;
-            MD = PE.GetMetadataReader();
-            MtadataBlock = PE.GetMetadata();
+            if(src.IsNonEmpty)
+            {
+                Source = MemoryFiles.map(src);
+                BasePointer = Source.BaseAddress.Pointer<byte>();
+                PE = new PEReader(BasePointer, (int)Source.Size);
+                ImageSize = Source.Size;
+                MD = PE.GetMetadataReader();
+                MtadataBlock = PE.GetMetadata();
+            }
+            else
+            {
+                Source = MemoryFile.Empty;
+            }
         }
-
-        public static CliMemoryMap create(IWfRuntime wf, FS.FilePath src)
-            => new CliMemoryMap(wf,src);
 
 
         public void Dispose()
         {
-            PE.Dispose();
-            Source.Dispose();
+            if(IsNonEmpty)
+            {
+                PE.Dispose();
+                Source.Dispose();
+            }
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Source.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Source.IsNonEmpty;
         }
 
         public DirectoryEntry ResourceDirectory
         {
             [MethodImpl(Inline)]
             get => PeHeaders.PEHeader.ResourceTableDirectory;
+        }
+
+        public MemorySeg ResourceSegment
+        {
+            [MethodImpl(Inline)]
+            get => new MemorySeg(((MemoryAddress)ResourceDirectory.RelativeVirtualAddress).Pointer<byte>(), ResourceDirectory.Size);
         }
 
         public PEHeaders PeHeaders
@@ -78,12 +106,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe ReadOnlySpan<byte> Read(PEMemoryBlock src)
-            => memory.cover<byte>(src.Pointer, (uint)src.Length);
+            => core.cover<byte>(src.Pointer, (uint)src.Length);
 
         public ReadOnlySpan<byte> Resources
         {
             [MethodImpl(Inline)]
             get => Read(SectonData(ResourceDirectory));
         }
+
+        public static CliMemoryMap Empty
+            => new CliMemoryMap(FS.FilePath.Empty);
     }
 }

@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static int length(ReadOnlySpan<byte> src)
-            => foundnot(search(src, AsciNone), src.Length);
+            => foundnot(search(src, z8), src.Length);
     }
 }

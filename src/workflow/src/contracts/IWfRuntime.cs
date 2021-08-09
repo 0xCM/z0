@@ -106,31 +106,12 @@ namespace Z0
         void Warn<T>(T content)
             => signal(this).Warn(content);
 
-        void Error(WfStepId step, Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
-            => signal(this).Error(step, e, EventFactory.originate("WorkflowError", caller, file, line));
 
         void Error(Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
             => signal(this).Error(e, EventFactory.originate("WorkflowError", caller, file, line));
 
         void Error<T>(T data, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
             => signal(this).Error(data, EventFactory.originate("WorkflowError", caller, file, line));
-
-        /// <summary>
-        /// If outcome indicates failure, raises an eror and returns false; otherwise returns true
-        /// </summary>
-        /// <param name="outcome">The outcome to test</param>
-        bool Check(Outcome outcome)
-        {
-            if(outcome.Fail)
-            {
-                Error(outcome.Message);
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
 
         void Disposed()
         {
@@ -173,12 +154,6 @@ namespace Z0
             return Emissions.LogEmission(Flow(dst));
         }
 
-        WfFileFlow EmittingFile<T>(FS.FilePath dst, T payload)
-        {
-            signal(this).EmittingFile(payload, dst);
-            return Emissions.LogEmission(Flow(dst));
-        }
-
         ExecToken EmittedFile(WfFileFlow flow, Count count)
         {
             var completed = Ran(flow);
@@ -201,9 +176,44 @@ namespace Z0
         }
 
         void Row<T>(T data)
-            => Raise(EventFactory.data(data));
+            => signal(this).Data(data);
+            //=> Raise(EventFactory.data(data));
 
         void RowStatus<T>(T data)
-            => Raise(EventFactory.data(data, true));
+            => signal(this).Data(data, true);
+            //=> Raise(EventFactory.data(data, true));
+
+        void Babble<T>(WfHost host, T data)
+            => signal(this, host).Babble(data);
+
+        void Status<T>(WfHost host,T data)
+            => signal(this, host).Status(data);
+
+        void Warn<T>(WfHost host, T content)
+            => signal(this, host).Warn(content);
+
+        void Error<T>(WfHost host, T data, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
+            => signal(this).Error(data, EventFactory.originate("WorkflowError", caller, file, line));
+
+        WfFileFlow EmittingFile(WfHost host, FS.FilePath dst)
+        {
+            signal(this,host).EmittingFile(dst);
+            return Emissions.LogEmission(Flow(dst));
+        }
+
+        ExecToken EmittedFile(WfHost host, WfFileFlow flow, Count count)
+        {
+            var completed = Ran(flow);
+            var counted = flow.WithCount(count).WithToken(completed);
+            signal(this, host).EmittedFile(count, counted.Target);
+            Emissions.LogEmission(counted);
+            return completed;
+        }
+
+        WfExecFlow<string> Running(WfHost host, [Caller] string operation = null)
+        {
+            signal(this, host).Running(operation);
+            return Flow(operation);
+        }
     }
 }

@@ -45,10 +45,11 @@ namespace Z0.Asm
 
             result = DataParser.parse(skip(cells, i++), out dst.OpUri);
             if(result.Fail)
-                return (false, $"Failed to parse uri text <{skip(cells,i)}>");
+                return (false, AppMsg.UriParseFailure.Format(skip(cells,i-1)));
 
-            return true;
+            return result;
         }
+
 
         public static Outcome<uint> parse(in TextGrid doc, ConcurrentBag<AsmHostStatement> dst)
         {

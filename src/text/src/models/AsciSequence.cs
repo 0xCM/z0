@@ -36,7 +36,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static int length(ReadOnlySpan<byte> src)
-            => foundnot(search(src, AsciNone), src.Length);
+            => foundnot(search(src, 0), src.Length);
 
         public static string format(in AsciSequence seq)
             => format(seq.Storage.ToReadOnlySpan());

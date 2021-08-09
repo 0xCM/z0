@@ -10,10 +10,11 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-
     [ApiHost]
     public struct AsmHexCode : IDataTypeComparable<AsmHexCode>
     {
+        public const uint StorageSize = 16;
+
         public const byte SizeIndex = 15;
 
         Cell128 Data;

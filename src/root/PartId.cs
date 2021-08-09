@@ -6,7 +6,7 @@
 /// <summary>
 /// Defines identifiers for assemblies that comprise this ... monstrosity?
 /// </summary>
-public enum PartId : ulong
+public enum PartId : byte
 {
     None = 0,
 

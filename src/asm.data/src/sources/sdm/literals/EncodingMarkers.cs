@@ -98,25 +98,25 @@ namespace Z0.Asm
             /// REX
             /// </summary>
             [TextMarker]
-            public const string REX = "REX";
+            public const string Rex = "REX";
 
             /// <summary>
             /// REX.W
             /// </summary>
             [TextMarker]
-            public const string RexW = REX + dot + W;
+            public const string RexW = Rex + dot + W;
 
             /// <summary>
             /// REX.B
             /// </summary>
             [TextMarker]
-            public const string RexB = REX + dot + B;
+            public const string RexB = Rex + dot + B;
 
             [TextMarker]
-            public const string VEX = "VEX" + dot;
+            public const string Vex = "VEX" + dot;
 
             [TextMarker]
-            public const string EVEX = "EVEX" + dot;
+            public const string Evex = "EVEX.";
 
             [TextMarker]
             public const string rw = "(r,w)";

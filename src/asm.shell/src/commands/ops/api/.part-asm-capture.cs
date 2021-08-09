@@ -8,15 +8,14 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".api-asm")]
-        Outcome ApiAsm(CmdArgs args)
+        [CmdOp(".part-asm-capture")]
+        Outcome PartAsmCapture(CmdArgs args)
         {
-            var part = arg(args,0);
-            var outcome = ApiParsers.part(part.Value, out var id);
+            var outcome = ApiParsers.part(arg(args,0).Value, out var part);
             if(outcome.Fail)
                 return outcome;
 
-            LoadApiAsmPaths(id);
+            Files(ApiArchive.AsmCapturePaths(part));
             return ReadAsciLines();
         }
     }

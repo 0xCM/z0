@@ -21,7 +21,7 @@ namespace Z0.Asm
         public uint Produce(ReadOnlySpan<AsmMemberRoutine> src, FS.FilePath dst)
         {
             var count = src.Length;
-            var flow = Wf.EmittingFile(dst, Msg.CreatingStatements.Format(count));
+            var flow = Wf.EmittingFile(dst);
             var buffer = text.buffer();
             var counter = 0u;
             using var writer = dst.Writer();

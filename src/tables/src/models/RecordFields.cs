@@ -28,7 +28,6 @@ namespace Z0
         /// Discerns a <see cref='RecordFields'/> for a specified record type
         /// </summary>
         /// <param name="src">The record type</typeparam>
-        [Op]
         public static RecordField[] discover(Type src)
         {
             var fields = src.DeclaredPublicInstanceFields().ToReadOnlySpan();

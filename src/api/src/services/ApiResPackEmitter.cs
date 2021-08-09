@@ -45,7 +45,7 @@ namespace Z0
 
         ReadOnlySpan<ApiHostRes> Emit(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath dst)
         {
-            var flow = Wf.Running();
+            var flow = Running();
             var count = src.Length;
             var counter = 0u;
             var buffer = alloc<ApiHostRes>(count);
@@ -60,7 +60,7 @@ namespace Z0
 
             RunScripts();
 
-            Wf.Ran(flow);
+            Ran(flow);
 
             return buffer;
         }
@@ -68,23 +68,23 @@ namespace Z0
         ReadOnlySpan<ApiHostRes> Emit(ApiBlockIndex index, FS.FolderPath dst)
         {
             var emissions = list<ApiHostRes>();
-            var flow = Wf.Running();
+            var flow = Running();
             dst.Clear();
             foreach(var host in index.NonemptyHosts)
             {
                 var emitted = Emit(index.HostCodeBlocks(host), dst);
                 emissions.Add(emitted);
             }
-            Wf.Ran(flow);
+            Ran(flow);
             return emissions.ViewDeposited();
         }
 
         ApiHostRes Emit(in ApiHostBlocks src, FS.FolderPath dst)
         {
             var target = dst + ApiFiles.filename(src.Host, FS.Cs);
-            var flow = Wf.EmittingFile(target);
+            var flow = EmittingFile(target);
             var emission = Emit(src, target);
-            Wf.EmittedFile(flow, emission.Count);
+            EmittedFile(flow, emission.Count);
             return emission;
         }
 
@@ -92,7 +92,7 @@ namespace Z0
         {
             if(empty(src.Host.HostName))
             {
-                Wf.Warn(string.Format("Cannot emit {0} because host name is undefined", target.ToUri()));
+                Warn(string.Format("Cannot emit {0} because host name is undefined", target.ToUri()));
                 return ApiHostRes.Empty;
             }
 

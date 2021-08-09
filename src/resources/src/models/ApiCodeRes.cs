@@ -6,39 +6,42 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Root;
+    using static core;
 
-    public readonly struct SpanResAccessor
+    public readonly struct ApiCodeRes
     {
-        public MethodInfo Member {get;}
+        public ApiHostKey Host {get;}
 
-        public SpanResKind Kind {get;}
+        public Index<BinaryResSpec> Data {get;}
 
         [MethodImpl(Inline)]
-        public SpanResAccessor(MethodInfo member, SpanResKind format)
+        public ApiCodeRes(ApiHostKey key, BinaryResSpec[] src)
         {
-            Member = member;
-            Kind = format;;
+            Host = key;
+            Data = src;
         }
 
-        public Type DeclaringType
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Member?.DeclaringType ?? EmptyVessels.EmptyType;
+            get => Data.Count;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Member == null || EmptyVessels.IsEmpty(Member);
+            get => Data.IsEmpty;
         }
 
-        public bool IsNonEmpty
+        public ref readonly BinaryResSpec this[int index]
         {
             [MethodImpl(Inline)]
-            get => !IsEmpty;
+            get => ref Data[index];
         }
+
+        public static ApiCodeRes Empty
+            => new ApiCodeRes(ApiHostKey.Empty, array<BinaryResSpec>());
     }
 }
