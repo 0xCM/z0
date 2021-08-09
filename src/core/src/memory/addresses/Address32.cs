@@ -15,6 +15,8 @@ namespace Z0
 
     public readonly struct Address32 : IAddress<A,T>
     {
+        public const uint StorageSize = PrimalSizes.U32;
+
         public T Location {get;}
 
         [MethodImpl(Inline)]

@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static MemorySections;
 
     using SQ = SymbolicQuery;
 
@@ -16,7 +17,7 @@ namespace Z0
     public readonly partial struct Machines
     {
         [MethodImpl(Inline), Op]
-        public static ByteMachine machine(N8 n, in BssEntry buffer)
+        public static ByteMachine machine(N8 n, in SectionEntry buffer)
             => new ByteMachine(buffer);
 
         public abstract class CharParser : Machine<char>

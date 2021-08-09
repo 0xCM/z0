@@ -12,6 +12,8 @@ namespace Z0
 
     public unsafe readonly struct MemoryAddress : IAddress<MemoryAddress,ulong>
     {
+        public const uint StorageSize = PrimalSizes.U64;
+
         public ulong Location {get;}
 
         [MethodImpl(Inline)]

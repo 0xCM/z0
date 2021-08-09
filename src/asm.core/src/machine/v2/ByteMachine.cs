@@ -11,17 +11,18 @@ namespace Z0
     using static core;
 
     using static Asm.AsmEncodings;
+    using static MemorySections;
 
     [ApiComplete]
     public sealed class ByteMachine
     {
-        BssEntry Buffer;
+        SectionEntry Buffer;
 
         uint Pos;
 
         uint Max;
 
-        public ByteMachine(in BssEntry bss)
+        public ByteMachine(in SectionEntry bss)
         {
             Buffer = bss;
             Pos = 0;
@@ -81,7 +82,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         ref byte Cell(uint index)
-            => ref Bss.cell(Buffer, index);
+            => ref MemorySections.cell(Buffer, index);
 
         [MethodImpl(Inline)]
         void Fill(byte src)
@@ -102,74 +103,5 @@ namespace Z0
                 seek(target,i) = (char)skip(src,i);
         }
 
-        bit Accumulate(byte src)
-        {
-            var c = (char)src;
-            var seg = Buffer.Segment(1);
-            var count = skip(seg,24);
-            switch(c)
-            {
-                case ' ':
-                    if(count > 0)
-                    {
-                        ExtractToken(slice(seg,0,count), out var dst);
-                        return true;
-                    }
-                break;
-                case 'a':
-                break;
-                case 'b':
-                break;
-                case 'c':
-                break;
-                case 'd':
-                break;
-                case 'e':
-                break;
-                case 'f':
-                break;
-                case 'g':
-                break;
-                case 'h':
-                break;
-                case 'i':
-                break;
-                case 'j':
-                break;
-                case 'k':
-                break;
-                case 'l':
-                break;
-                case 'm':
-                break;
-                case 'n':
-                break;
-                case 'o':
-                break;
-                case 'p':
-                break;
-                case 'q':
-                break;
-                case 'r':
-                break;
-                case 's':
-                break;
-                case 't':
-                break;
-                case 'u':
-                break;
-                case 'v':
-                break;
-                case 'w':
-                break;
-                case 'x':
-                break;
-                case 'y':
-                break;
-                case 'z':
-                break;
-            }
-            return false;
-        }
-    }
+   }
 }

@@ -6,14 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
     /// <summary>
     /// Defines an inclusive address range
     /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
     public readonly struct MemoryRange : IMemoryRange<MemoryRange>
     {
+        public const uint StorageSize = 2*MemoryAddress.StorageSize;
+
         [MethodImpl(Inline)]
         public static MemoryRange define(MemoryAddress min, MemoryAddress max)
             => new MemoryRange(min,max);

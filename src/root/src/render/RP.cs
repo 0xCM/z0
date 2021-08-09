@@ -33,5 +33,10 @@ namespace Z0
         /// </summary>
         [RenderPattern("{0} -> {1}")]
         public const string ArrowAxB = "{0} -> {1}";
+
+        [MethodImpl(Inline)]
+        static object denullify(object src)
+            => src ?? "<null>";
+
     }
 }

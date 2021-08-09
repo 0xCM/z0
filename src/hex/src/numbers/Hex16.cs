@@ -15,6 +15,8 @@ namespace Z0
 
     public readonly struct Hex16 : IHexNumber<H,W,K>
     {
+        public const uint StorageSize = PrimalSizes.U16;
+
         public K Value {get;}
 
         [MethodImpl(Inline)]

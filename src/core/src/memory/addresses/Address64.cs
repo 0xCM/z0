@@ -15,6 +15,8 @@ namespace Z0
 
     public readonly struct Address64 : IAddress<A,T>
     {
+        public const uint StorageSize = PrimalSizes.U64;
+
         public T Location {get;}
 
         [MethodImpl(Inline)]
