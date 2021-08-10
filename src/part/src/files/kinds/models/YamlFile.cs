@@ -9,12 +9,12 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct CodeFile : IFile
+    public readonly struct YamlFile : IFile
     {
         public FS.FilePath Path {get;}
 
         [MethodImpl(Inline)]
-        public CodeFile(FS.FilePath path)
+        public YamlFile(FS.FilePath path)
         {
             Path = path;
         }
