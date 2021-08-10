@@ -8,12 +8,7 @@ namespace Z0
     public static class XSvc
     {
         [Op]
-        public static AppServiceCache Services(this IWfRuntime src)
+        public static AppServiceCache AppServiceCache(this IWfRuntime src)
             => Z0.AppServiceCache.create(src);
-
-        // [Op]
-        // public static IRuntimeArchive RuntimeArchive(this IWfRuntime wf)
-        //     => Z0.RuntimeArchive.create(wf.Controller.ImageDir);
-
     }
 }

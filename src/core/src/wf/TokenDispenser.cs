@@ -9,21 +9,21 @@ namespace Z0
 
     using static Root;
 
-    internal class TokenDispenser
+    public class TokenDispenser
     {
         static long StartToken;
 
         static long EndToken;
 
-        public static TokenDispenser acquire()
+        public static TokenDispenser create()
             => new TokenDispenser();
 
         [MethodImpl(Inline)]
-        public ExecToken NextExecToken()
+        public ExecToken Open()
             => new ExecToken((ulong)core.inc(ref StartToken));
 
         [MethodImpl(Inline)]
-        public ExecToken CloseExecToken(ExecToken src)
+        public ExecToken Close(ExecToken src)
             => src.Complete((ulong)core.inc(ref EndToken));
     }
 }

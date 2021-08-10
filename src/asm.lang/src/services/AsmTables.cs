@@ -34,7 +34,7 @@ namespace Z0.Asm
         {
             var records = DataList.create<AsmDetailRow>(Pow2.T18);
             var paths = AsmDetailFiles().View;
-            var flow = Wf.Running(string.Format("Loading {0} asm recordsets", paths.Length));
+            var flow = Running(string.Format("Loading {0} asm recordsets", paths.Length));
             var count = paths.Length;
             var counter = 0u;
             for(var i=0; i<count; i++)
@@ -45,7 +45,7 @@ namespace Z0.Asm
                     counter += result.Data;
             }
 
-            Wf.Ran(flow, string.Format("Loaded {0} total asm instruction rows", counter));
+            Ran(flow, string.Format("Loaded {0} total asm instruction rows", counter));
             return records.Emit();
         }
 
@@ -63,7 +63,7 @@ namespace Z0.Asm
         Outcome<Count> LoadDetails(FS.FilePath path, DataList<AsmDetailRow> dst)
         {
             var rowtype = path.FileName.WithoutExtension.Format().RightOfLast(Chars.Dot);
-            var flow = Wf.Running(string.Format("Loading {0} rows from {1}", rowtype, path.ToUri()));
+            var flow = Running(string.Format("Loading {0} rows from {1}", rowtype, path.ToUri()));
             var result = TextGrids.load(path, out var doc);
             var kRows = 0;
             if(result)
@@ -82,18 +82,18 @@ namespace Z0.Asm
                     var loaded = AsmParser.parse(src, out AsmDetailRow row);
                     if(!loaded)
                     {
-                        Wf.Error(loaded.Message);
+                        Error(loaded.Message);
                         return false;
                     }
 
                     dst.Add(row);
                 }
 
-                Wf.Ran(flow, string.Format("Loaded {0} {1} rows from {2}", kRows, rowtype, path.ToUri()));
+                Ran(flow, string.Format("Loaded {0} {1} rows from {2}", kRows, rowtype, path.ToUri()));
             }
             else
             {
-                Wf.Error(result.Message);
+                Error(result.Message);
             }
 
             return (true,kRows);

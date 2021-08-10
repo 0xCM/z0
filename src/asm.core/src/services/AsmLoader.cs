@@ -51,6 +51,28 @@ namespace Z0.Asm
             return dst.ToArray();
         }
 
+        public static Outcome<uint> LoadProcessAsm(FS.FilePath src, Span<ProcessAsm> dst)
+        {
+            var counter = 1u;
+            var i = 0u;
+            var max = dst.Length;
+            using var reader = src.Utf8Reader();
+            var header = reader.ReadLine();
+            var line = reader.ReadLine();
+            var result = Outcome.Success;
+            while(line != null && result.Ok)
+            {
+                result = AsmParser.parse(counter++, line, out seek(dst,i));
+                if(result.Fail)
+                    return result;
+                else
+                    i++;
+
+                line = reader.ReadLine();
+            }
+            return i;
+        }
+
         static Index<Outcome<uint>> parse(ReadOnlySpan<TextGrid> src, ConcurrentBag<AsmHostStatement> dst)
         {
             var results = bag<Outcome<uint>>();

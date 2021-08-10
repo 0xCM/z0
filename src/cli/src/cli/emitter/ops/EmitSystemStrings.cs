@@ -30,7 +30,7 @@ namespace Z0
             using var reader = PeTableReader.open(srcPath);
             var records = reader.ReadSystemStringInfo();
             dst.AddRange(records);
-            Db.EmitTable<CliSystemString>(records, src.GetSimpleName());
+            TableEmit(records.View, Paths.TableDir<CliSystemString>() + Paths.TableFile<CliSystemString>(src.GetSimpleName()));
             return records.Count;
         }
     }

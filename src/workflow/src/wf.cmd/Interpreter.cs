@@ -34,7 +34,7 @@ namespace Z0
             CommandQueue = new ConcurrentQueue<string>();
             ExecLog = new ConcurrentDictionary<ulong,ExecToken>();
             DispatchKeys = new ConcurrentBag<Guid>();
-            Tokenizer = WfTokenProvider.create();
+            Tokens = TokenDispenser.create();
             Running = false;
             Initialized = false;
         }
@@ -49,15 +49,13 @@ namespace Z0
 
         bool Initialized;
 
-        //IWorkerLog WorkerLog;
-
         Process Worker;
 
         Task SpinTask;
 
         ExecToken Token;
 
-        WfTokenProvider Tokenizer;
+        TokenDispenser Tokens;
 
         readonly ConcurrentQueue<string> CommandQueue;
 
@@ -174,7 +172,7 @@ namespace Z0
             {
                 if(CommandQueue.TryDequeue(out var cmd))
                 {
-                    var token = Tokenizer.Dispense();
+                    var token = Tokens.Open();
                     ExecLog[token.StartSeq] = token;
                     Worker.StandardInput.WriteLine(cmd);
                     Dispatch();

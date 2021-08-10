@@ -6,27 +6,27 @@ namespace Z0
 {
     public struct CliEmissionOptions
     {
-        public Setting<bool> EmitAssemblyRefs;
+        public bool EmitAssemblyRefs;
 
-        public Setting<bool> EmitSectionHeaders;
+        public bool EmitSectionHeaders;
 
-        public Setting<bool> EmitMsilMetadata;
+        public bool EmitMsilMetadata;
 
-        public Setting<bool> EmitCliConstants;
+        public bool EmitCliConstants;
 
-        public Setting<bool> EmitCliStrings;
+        public bool EmitCliStrings;
 
-        public Setting<bool> EmitCliBlobs;
+        public bool EmitCliBlobs;
 
-        public Setting<bool> EmitApiMetadata;
+        public bool EmitApiMetadump;
 
-        public Setting<bool> EmitImageContent;
+        public bool EmitImageContent;
 
-        public Setting<bool> EmitFieldMetadata;
+        public bool EmitFieldMetadata;
 
-        public Setting<bool> EmitRowStats;
+        public bool EmitCliRowStats;
 
-        public Setting<bool> EmitMethodDefs;
+        public bool EmitMethodDefs;
 
         public static CliEmissionOptions @default()
         {
@@ -38,9 +38,9 @@ namespace Z0
             dst.EmitCliBlobs = true;
             dst.EmitCliConstants = true;
             dst.EmitFieldMetadata = true;
-            dst.EmitApiMetadata = true;
+            dst.EmitApiMetadump = true;
             dst.EmitAssemblyRefs = true;
-            dst.EmitRowStats = true;
+            dst.EmitCliRowStats = true;
             dst.EmitMethodDefs = true;
             return dst;
         }

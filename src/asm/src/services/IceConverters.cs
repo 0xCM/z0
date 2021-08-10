@@ -31,13 +31,18 @@ namespace Z0.Asm
             => () => access(src);
 
         [Op]
-        public static AsmFormExpr form(Iced.Instruction src)
+        public static AsmFormExpr specifier(Iced.Instruction src)
         {
-            var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
+            var ocinfo = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
             return asm.form(
-                ocConform(iceOpCode.ToOpCodeString()),
-                asm.sig(src.Mnemonic.ToString(), iceOpCode.ToInstructionString()));
+                ocxpr(ocinfo.ToOpCodeString()),
+                asm.sig(src.Mnemonic.ToString(),
+                ocinfo.ToInstructionString())
+                );
         }
+
+        static AsmOpCodeExpr ocxpr(string src)
+            => asm.opcode(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
 
         [MethodImpl(Inline), Op]
         public static IceOpAccess[] access(Iced.InstructionInfo src)
@@ -63,7 +68,7 @@ namespace Z0.Asm
                 UsedMemory = UsedMemory(info),
                 UsedRegisters = UsedRegisters(info),
                 Access = OpAccessDefer(info),
-                Specifier = form(src),
+                Specifier = specifier(src),
                 ByteLength = src.ByteLength,
                 ConditionCode = Thaw(src.ConditionCode),
                 CodeSize = Thaw(src.CodeSize),
@@ -242,7 +247,7 @@ namespace Z0.Asm
                 OpCode = src.OpCode,
                 OperandSize = src.OperandSize,
                 OpCount = src.OpCount,
-                OpCodeString = ocConform(src.ToOpCodeString()).Format(),
+                OpCodeString = ocxpr(src.ToOpCodeString()).Format(),
                 InstructionString = src.ToInstructionString(),
                 Op0Kind = Thaw(src.Op0Kind),
                 Op1Kind = Thaw(src.Op1Kind),
@@ -415,8 +420,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         static IceTupleType Thaw(Iced.TupleType src)
             => (IceTupleType)src;
-
-        static AsmOpCodeExpr ocConform(string src)
-            => asm.opcode(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
     }
 }

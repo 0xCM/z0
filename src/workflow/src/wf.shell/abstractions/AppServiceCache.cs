@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-
-    using static Part;
 
     public sealed class AppServiceCache : AppService<AppServiceCache>
     {

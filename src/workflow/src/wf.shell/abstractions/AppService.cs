@@ -45,6 +45,8 @@ namespace Z0
 
         public EnvData Env => Wf.Env;
 
+        protected IEnvPaths Paths => Wf.EnvPaths;
+
         public virtual Type ContractType
             => typeof(H);
 
@@ -77,12 +79,6 @@ namespace Z0
             Wf = wf;
         }
 
-        protected ITextBuffer TextBuffer()
-        {
-            _TextBuffer.Clear();
-            return _TextBuffer;
-        }
-
         protected void RedirectEmissions(string name, FS.FolderPath dst)
             => Wf.RedirectEmissions(WfEmissionLog.create(name, dst));
 
@@ -97,16 +93,6 @@ namespace Z0
 
         protected ShowLog ShowLog([Caller] string name = null, FS.FileExt? ext = null)
             => ShowLog(NameShowLog(name,ext ?? FS.Csv));
-
-        [Op,Closures(UInt64k)]
-        protected void ShowSymbols<T>(Symbols<T> src, ShowLog dst)
-            where T : unmanaged
-        {
-            var count = src.Count;
-            var symbols = src.View;
-            for(var i=0; i<count; i++)
-                dst.Show(skip(symbols,i).Format());
-        }
 
         protected void Pipe<S,T>(ReadOnlySpan<S> src, Func<S,T> converter, string channel = null)
             where T : ITextual

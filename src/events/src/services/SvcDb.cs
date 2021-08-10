@@ -4,19 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public sealed class WfDb : AppService<WfDb>, IWfDb
+    sealed class SvcDb : Service<SvcDb>, IWfDb
     {
         public FS.FolderPath Root {get; private set;}
 
-        public WfDb()
+        public SvcDb()
         {
-
-        }
-
-        internal WfDb(IWfRuntime wf, FS.FolderPath root)
-            : base(wf)
-        {
-            Root = root;
+            Root = FS.FolderPath .Empty;
         }
 
         protected override void Initialized()

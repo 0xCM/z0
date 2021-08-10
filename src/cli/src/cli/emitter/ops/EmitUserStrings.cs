@@ -30,7 +30,7 @@ namespace Z0
         {
             var reader = CliReader.read(src);
             var records = reader.ReadUserStringInfo();
-            Db.EmitTable<CliUserString>(records, src.GetSimpleName());
+            TableEmit(records, Paths.TableDir<CliUserString>() + Paths.TableFile<CliUserString>(src.GetSimpleName()));
             return records;
         }
     }

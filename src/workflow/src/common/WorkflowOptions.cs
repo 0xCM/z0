@@ -60,6 +60,10 @@ namespace Z0
 
         public bool ProcessCultFiles;
 
+        public bool EmitMethodDefs;
+
+        public bool EmitCliRowStats;
+
         public static WorkflowOptions @default()
         {
             var dst = new WorkflowOptions();
@@ -90,6 +94,8 @@ namespace Z0
             dst.ProcessCultFiles = false;
             dst.EmitAssemblyRefs = true;
             dst.EmitApiClasses = true;
+            dst.EmitMethodDefs = true;
+            dst.EmitCliRowStats = true;
             return dst;
         }
 

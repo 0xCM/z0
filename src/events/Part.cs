@@ -25,6 +25,16 @@ namespace Z0
     {
     }
 
+    [ApiHost]
+    public static partial class XSvc
+    {
+        public static IWfDb SvcDb(IServiceContext context)
+            => Z0.SvcDb.create(context);
+
+        public static IWfDb SvcDb(IServiceContext context, FS.FolderPath root)
+            => Z0.SvcDb.create(context).Relocate(root);
+    }
+
     partial struct Msg
     {
         public static MsgPattern<ToolId> ToolHelpNotFound => "Tool {0} help not found";

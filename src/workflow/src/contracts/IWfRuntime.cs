@@ -106,7 +106,6 @@ namespace Z0
         void Warn<T>(T content)
             => signal(this).Warn(content);
 
-
         void Error(Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
             => signal(this).Error(e, EventFactory.originate("WorkflowError", caller, file, line));
 

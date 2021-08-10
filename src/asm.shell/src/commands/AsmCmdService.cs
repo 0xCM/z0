@@ -63,6 +63,7 @@ namespace Z0.Asm
 
         CliMemoryMap ResPack;
 
+
         IPolyrand Random;
 
         IWorkspace ApiWs;
@@ -365,7 +366,7 @@ namespace Z0.Asm
             var path = ApiPacks.Archive().ProcessAsmPath();
             var buffer = ProcessAsm();
             Write(string.Format("Loading process asm from {0}", path.ToUri()));
-            var result = AsmEtl.LoadProcessAsm(path, buffer);
+            var result = AsmLoader.LoadProcessAsm(path, buffer);
             if(result.Fail)
                 return result;
 

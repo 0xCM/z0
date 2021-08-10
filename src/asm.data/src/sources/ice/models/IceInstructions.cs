@@ -18,7 +18,7 @@ namespace Z0.Asm
         public CodeBlock Encoded {get;}
 
         [MethodImpl(Inline)]
-        internal IceInstructions(List<IceInstruction> data, CodeBlock code)
+        public IceInstructions(List<IceInstruction> data, CodeBlock code)
         {
             Data = data;
             Encoded = code;

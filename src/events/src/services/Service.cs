@@ -30,9 +30,11 @@ namespace Z0
             return service;
         }
 
-        protected EnvPaths Paths {get; private set;}
+        protected IEnvPaths Paths {get; private set;}
 
         protected IServiceContext Context {get; private set;}
+
+        protected IServiceContext Wf => Context;
 
         EventSignal Signal;
 

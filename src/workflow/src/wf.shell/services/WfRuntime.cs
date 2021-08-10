@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfRuntime(IWfInit config)
         {
-            Tokens = TokenDispenser.acquire();
+            Tokens = TokenDispenser.create();
             Env = Z0.Env.load().Data;
             Context = config.Shell;
             Id = config.ControlId;
@@ -88,27 +88,27 @@ namespace Z0
 
         public ExecToken Ran(WfExecFlow src)
         {
-            var token = Tokens.CloseExecToken(src.Token);
+            var token = Tokens.Close(src.Token);
             return token;
         }
 
         public ExecToken Ran<T>(WfExecFlow<T> src)
         {
-            var token = Tokens.CloseExecToken(src.Token);
+            var token = Tokens.Close(src.Token);
             WfEvents.signal(this).Ran(src.Data);
             return token;
         }
 
         public ExecToken Ran<T,D>(WfExecFlow<T> src, D data)
         {
-            var token = Tokens.CloseExecToken(src.Token);
+            var token = Tokens.Close(src.Token);
             WfEvents.signal(this).Ran(data);
             return token;
         }
 
         [MethodImpl(Inline)]
         public ExecToken NextExecToken()
-            => Tokens.NextExecToken();
+            => Tokens.Open();
 
 
         public void Dispose()
