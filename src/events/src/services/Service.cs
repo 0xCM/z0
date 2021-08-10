@@ -94,6 +94,16 @@ namespace Z0
             return Signal.Ran(data);
         }
 
+        protected RanEvent<T> Ran<T>(RunningEvent<T> e)
+        {
+            return Signal.Ran(e.Payload.Data);
+        }
+
+        protected RanEvent<RunningEvent> Ran(RunningEvent e)
+        {
+            return Signal.Ran(e);
+        }
+
         protected ProcessedFileEvent Processed(ProcessingFileEvent e)
         {
             return Signal.Processed(e.SourcePath);

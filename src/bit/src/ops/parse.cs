@@ -8,16 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static CreditModel;
+    using static core;
 
-    partial class CreditBits
+    partial struct bit
     {
         [MethodImpl(Inline), Op]
-        public static CreditContentType type(ContentRef src)
+        public static uint parse(ReadOnlySpan<char> src, Span<bit> dst)
         {
-            var isolated = (ushort)((ushort)(ContentField.Type) & (ushort)src);
-            var value = isolated >> (byte)ContentLevel.Type;
-            return (CreditContentType)value;
+            var count = (uint)min(src.Length,dst.Length);
+            var lastix = count - 1;
+            for(var i=0; i<= lastix; i++)
+               seek(dst, lastix - i) = skip(src,i) == bit.Zero ? bit.Off : bit.On;
+            return count;
         }
     }
 }

@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(Validity)" />
   </ItemGroup>
 
 </Project>

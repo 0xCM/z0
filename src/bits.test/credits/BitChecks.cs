@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct BitChecks
@@ -26,11 +26,11 @@ namespace Z0
         [MethodImpl(Inline), Closures(Closure)]
         public static bit eq<T>(T x, T y)
             where T : unmanaged
-                => gmath.eq(x,y);
+                => math.eq(bw64(x),bw64(y));
 
         [MethodImpl(Inline), Closures(Closure)]
-        public static BitVector64 bveq<T>(T x, T y, byte index)
-            where T : unmanaged, Enum
-                => (ulong)@byte(emath.eq<T>(x,y)) << index;
+        public static ulong biteq<T>(T x, T y, byte index)
+            where T : unmanaged
+                => (ulong)@byte(eq<T>(x,y)) << index;
     }
 }

@@ -138,8 +138,8 @@ namespace Z0
         void EmitReport(ITextBuffer src)
         {
             Wf.Row(src.Emit());
-
         }
+
         [Op]
         void CheckHiMasks()
         {
