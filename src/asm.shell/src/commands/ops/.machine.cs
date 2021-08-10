@@ -14,7 +14,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var proj = "z0";
             var subject = "statements";
-            var outdir = Projects().Out(proj) + FS.folder(subject);
+            var outdir = ProjectWs.Out(proj) + FS.folder(subject);
             var apihex = Wf.ApiHex();
             var emitter = Wf.AsmStatementPipe();
 

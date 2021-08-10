@@ -136,7 +136,7 @@ namespace Z0
 
         public void bitslice_32()
         {
-            var x = BitMasks.Literals.Even32x2;
+            var x = BitMasks.BitMaskLiterals.Even32x2;
             var y = x.ToBitSpan32();
             var t = z32;
 

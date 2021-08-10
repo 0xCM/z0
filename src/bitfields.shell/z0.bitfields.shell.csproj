@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Bit)" />
     <ProjectReference Include="$(Blocks)" />
+    <ProjectReference Include="$(Services)" />
   </ItemGroup>
 
 </Project>

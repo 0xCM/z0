@@ -17,12 +17,12 @@ namespace Z0.Asm
                 if(filter.StartsWith(Chars.Dot))
                 {
                     var ext = FS.ext(text.slice(filter,1));
-                    Files(Projects().OutFiles(id,ext));
+                    Files(ProjectWs.OutFiles(id,ext));
                 }
                 else
                 {
                     var folder = FS.folder(filter);
-                    Files(Projects().OutFiles(id,folder));
+                    Files(ProjectWs.OutFiles(id,folder));
                 }
             }
             else if(args.Length == 3)
@@ -32,10 +32,10 @@ namespace Z0.Asm
                 if(!filter.StartsWith(Chars.Dot))
                     return (false, "File extension filter expected");
                 var ext = FS.ext(text.slice(filter,1));
-                Files(Projects().OutFiles(id,folder,ext));
+                Files(ProjectWs.OutFiles(id,folder,ext));
             }
             else
-                Files(Projects().OutFiles(id));
+                Files(ProjectWs.OutFiles(id));
             return result;
         }
 

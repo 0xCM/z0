@@ -69,6 +69,6 @@ namespace Z0.Asm
         }
 
         FS.FolderPath ProjectOutDir(string id)
-            => OutWs().Root + FS.folder("projects") + FS.folder(State.Project().Format()) + FS.folder(id);
+            => OutWs.Root + FS.folder("projects") + FS.folder(State.Project().Format()) + FS.folder(id);
     }
 }

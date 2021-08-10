@@ -18,9 +18,22 @@ namespace Z0
         public static LiteralProvider provider(Type src, LiteralUsage usage = default)
             => new LiteralProvider(src,usage);
 
+        [Op]
+        public static string format(in ApiLiteralValue src)
+        {
+            var content = src.Data switch
+            {
+                RP.WinEol => "<weol>",
+                RP.LinuxEol => "<leol>",
+                RP.AsciNull => "<ascinull>",
+                _ => src.Data
+            };
+            return RP.ticks(content);
+        }
 
         public static string format(in ApiLiteral src)
             => string.Format("{0,-16} | {1,-16} | {2,-12} | {3}", src.Source, src.Name, src.Kind, value(src));
+
         [Op]
         public static ApiLiteralValue value(in ApiLiteral src)
         {

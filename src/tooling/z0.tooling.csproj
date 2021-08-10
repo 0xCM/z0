@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Commands)" />
     <ProjectReference Include="$(Rules)" />
     <ProjectReference Include="$(Services)" />
+    <ProjectReference Include="$(Ws)" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    public sealed class ToolWs : IToolWs, IWorkspace<ToolWs>
+    public sealed class ToolWs : IWorkspace<ToolWs>
     {
         [MethodImpl(Inline)]
         public static ToolWs create(FS.FolderPath root)

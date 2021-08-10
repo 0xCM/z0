@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static BitMasks.Literals;
+    using static BitMaskLiterals;
     using static Root;
     using static core;
 

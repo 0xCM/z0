@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static BitMasks.Literals;
+    using static BitMaskLiterals;
 
     partial class BitVector
     {

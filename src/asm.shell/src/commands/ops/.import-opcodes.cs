@@ -17,7 +17,7 @@ namespace Z0.Asm
         Outcome InstTableImport(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = Sources().Dataset(AsmTableScopes.SdmInstructions).Files(FS.Csv).ToReadOnlySpan();
+            var src = DataSources.Dataset(AsmTableScopes.SdmInstructions).Files(FS.Csv).ToReadOnlySpan();
             var count = src.Length;
             var kinds = Symbols.index<SdmTableKind>();
             var buffer = span<OpCodeRecord>(4000);

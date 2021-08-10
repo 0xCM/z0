@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     using static CreditModel;
     using static CreditModel.Vendor;
     using static CreditModel.Volume;
@@ -16,7 +12,6 @@ namespace Z0
     using static CreditModel.Topic;
     using static CreditModel.Appendix;
     using static CreditModel.ContentNumber;
-    using static CreditModel.ContentType;
 
     public class t_docref : t_bits<t_docref>
     {
@@ -71,7 +66,7 @@ namespace Z0
             Claim.eq(tr.Level0, d2);
             Claim.eq(tr.Level1, d3);
             Claim.eq(tr.Level2, d1);
-            Claim.eq(tr.ContentType, CreditModel.ContentType.Table);
+            Claim.eq(tr.ContentType, CreditModel.CreditContentType.Table);
         }
 
         public void t_docref_bitfield()

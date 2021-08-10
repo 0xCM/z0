@@ -18,7 +18,7 @@ namespace Z0.Asm
                 return (false, "Argument not supplied");
 
             var id = TableId.define(arg(args,0).Value);
-            var src = Sources().Dataset(AsmTableScopes.SdmInstructions) + FS.file(id.Format(), FS.Csv);
+            var src = DataSources.Dataset(AsmTableScopes.SdmInstructions) + FS.file(id.Format(), FS.Csv);
             if(!src.Exists)
                 return (false, FS.missing(src));
 

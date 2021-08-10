@@ -110,6 +110,6 @@ namespace Z0
             return Wf.EmittedTable<BitMaskInfo>(flow, count, dst);
         }
 
-        static Type DefaultProvider => typeof(BitMasks.Literals);
+        static Type DefaultProvider => typeof(BitMaskLiterals);
     }
 }

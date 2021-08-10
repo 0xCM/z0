@@ -8,6 +8,8 @@ namespace Z0
 
     using static Root;
 
+    using api = ApiLiterals;
+
     public readonly struct ApiLiteralValue
     {
         public string Data {get;}
@@ -19,7 +21,7 @@ namespace Z0
         }
 
         public string Format()
-            => RP.ticks(Data);
+            => api.format(this);
 
         public override string ToString()
             => Format();

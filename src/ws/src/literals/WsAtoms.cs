@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    [LiteralProvider]
     public readonly struct WsAtoms
     {
         public const string tools = "tools";
@@ -58,5 +59,6 @@ namespace Z0
 
         public const string queries = nameof(queries);
 
+        public const string api = nameof(api);
     }
 }

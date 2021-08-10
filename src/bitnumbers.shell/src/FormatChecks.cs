@@ -65,8 +65,8 @@ namespace Z0
 
         void CheckNibbleSpan()
         {
-            var m0 =  Cells.cell64(BitMasks.Literals.Even64);
-            var m1 = Cells.cell64(BitMasks.Literals.Lsb63x3x1);
+            var m0 =  Cells.cell64(BitMaskLiterals.Even64);
+            var m1 = Cells.cell64(BitMaskLiterals.Lsb63x3x1);
             var storage = Cells.join(m0,m1);
             var bytes = storage.Bytes;
             var bits = BitRender.render8x8(bytes);

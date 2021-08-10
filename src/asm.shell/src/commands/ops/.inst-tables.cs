@@ -10,7 +10,7 @@ namespace Z0.Asm
         Outcome InstTables(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = Sources().Dataset(AsmTableScopes.SdmInstructions).Files(FS.Csv);
+            var src = DataSources.Dataset(AsmTableScopes.SdmInstructions).Files(FS.Csv);
             Files(src);
             return result;
         }

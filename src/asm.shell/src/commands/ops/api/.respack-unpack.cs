@@ -10,7 +10,7 @@ namespace Z0.Asm
         Outcome UnpackRespack(CmdArgs args)
         {
             var unpacker = ApiResPackUnpacker.create(Wf);
-            var dst = OutWs().Subdir("respack");
+            var dst = OutWs.Subdir("respack");
             unpacker.Emit(dst);
             return true;
         }

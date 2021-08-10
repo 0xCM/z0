@@ -13,7 +13,7 @@ namespace Z0
     using static Root;
     using static cpu;
 
-    using M = BitMasks.Literals;
+    using M = BitMaskLiterals;
 
     public class t_vblend : t_inx<t_vblend>
     {

@@ -14,7 +14,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return result;
 
-            var dst = OutWs().Queries() + FS.file(string.Format("qpi.asm.{0}", code), FS.Csv);
+            var dst = OutWs.Queries() + FS.file(string.Format("qpi.asm.{0}", code), FS.Csv);
             var count = AsmTables.RenderRows(code, dst);
             RecordsEmitted(count,dst);
             return result;

@@ -7,7 +7,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using L = BitMasks.Literals;
+    using L = BitMasks.BitMaskLiterals;
 
     public class t_bitmix : t_bits<t_bitmix>
     {

@@ -11,7 +11,7 @@ namespace Z0.Asm
         [CmdOp(".datasets")]
         Outcome Datasets(CmdArgs args)
         {
-            var src = Sources().Datasets().SubDirs();
+            var src = DataSources.Datasets().SubDirs();
             iter(src, dir => Write(dir));
             return true;
         }

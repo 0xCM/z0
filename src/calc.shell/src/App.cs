@@ -10,8 +10,7 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
-    using Masks = BitMasks.Literals;
+    using Masks = BitMaskLiterals;
 
     class App : WfApp<App>
     {

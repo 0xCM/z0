@@ -13,7 +13,7 @@ namespace Z0.Asm
         Outcome ImportLists(CmdArgs args)
         {
             var dataset = arg(args,0).Value;
-            var input = Sources().Dataset(dataset).Files(FS.List);
+            var input = DataSources.Dataset(dataset).Files(FS.List);
             var count = input.Length;
             var formatter = Tables.formatter<ListItemRecord>(ListItemRecord.RenderWidths);
             for(var i=0; i<count; i++)

@@ -33,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ulong maskpart(uint src, byte offset)
-            => scatter((ulong)((byte)(src >> offset)), Literals.Msb64x8x1);
+            => scatter((ulong)((byte)(src >> offset)), BitMaskLiterals.Msb64x8x1);
 
         [MethodImpl(Inline), Op]
         public static ulong maskpart(uint src, byte offset, ulong mask)

@@ -15,7 +15,7 @@ namespace Z0.Asm
             var tool = (ToolId)arg(args,0).Value;
             var list = FS.file(arg(args,1).Value, FS.Txt);
             var @base = ToolWs();
-            var path = @base.Docs(tool) + list;
+            var path = @base.ToolDocs(tool) + list;
             if(path.Exists)
             {
                 if(path.FileName.Contains("-bits"))

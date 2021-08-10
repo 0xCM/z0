@@ -11,7 +11,7 @@ namespace Z0
     using static core;
     using static cpu;
     using static BitMasks;
-    using static BitMasks.Literals;
+    using static BitMaskLiterals;
 
     partial struct BitPack
     {

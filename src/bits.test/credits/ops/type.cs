@@ -13,11 +13,11 @@ namespace Z0
     partial class CreditBits
     {
         [MethodImpl(Inline), Op]
-        public static ContentType type(ContentRef src)
+        public static CreditContentType type(ContentRef src)
         {
             var isolated = (ushort)((ushort)(ContentField.Type) & (ushort)src);
             var value = isolated >> (byte)ContentLevel.Type;
-            return (ContentType)value;
+            return (CreditContentType)value;
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Z0
     using static Perm16L;
     using static Perm8L;
 
+    [LiteralProvider]
     public readonly struct PermLits
     {
         public const Perm16L Perm16Identity =

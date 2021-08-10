@@ -15,47 +15,47 @@ namespace Z0.Asm
         {
             [Op]
             public static byte emit8u_0()
-                => BitMasks.Literals.Central8x4x2;
+                => BitMaskLiterals.Central8x4x2;
 
             [Op]
             public static byte emit8u_1()
-                => BitMasks.Literals.Central8x8x2;
+                => BitMaskLiterals.Central8x8x2;
 
             [Op]
             public static ushort emit16u_0()
-                => BitMasks.Literals.Central16x4x2;
+                => BitMaskLiterals.Central16x4x2;
 
             [Op]
             public static ushort emit16u_1()
-                => BitMasks.Literals.Central16x8x2;
+                => BitMaskLiterals.Central16x8x2;
 
             [Op]
             public static ushort emit16u_2()
-                => BitMasks.Literals.Central16x16x8;
+                => BitMaskLiterals.Central16x16x8;
 
             [Op]
             public static uint emit32u_0()
-                => BitMasks.Literals.Central32x4x2;
+                => BitMaskLiterals.Central32x4x2;
 
             [Op]
             public static uint emit32u_1()
-                => BitMasks.Literals.Central32x8x2;
+                => BitMaskLiterals.Central32x8x2;
 
             [Op]
             public static uint emit32u_2()
-                => BitMasks.Literals.Central32x16x8;
+                => BitMaskLiterals.Central32x16x8;
 
             [Op]
             public static ulong emit64u_0()
-                => BitMasks.Literals.Central64x4x2;
+                => BitMaskLiterals.Central64x4x2;
 
             [Op]
             public static ulong emit64u_1()
-                => BitMasks.Literals.Central64x8x2;
+                => BitMaskLiterals.Central64x8x2;
 
             [Op]
             public static ulong emit64u_2()
-                => BitMasks.Literals.Central64x16x8;
+                => BitMaskLiterals.Central64x16x8;
 
         }
 

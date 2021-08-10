@@ -8,13 +8,27 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static BitChecks;
     using static core;
     using static BitMasks;
 
     [ApiHost]
     public class BitMaskChecker : AppService<BitMaskChecker>
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Closures(Closure)]
+        public static ref ulong eq<T>(T x, T y, ref byte index, ref ulong dst)
+            where T : unmanaged
+        {
+            dst = (ulong)@byte(gmath.eq(x,y)) << index++;
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Closures(Closure)]
+        public static bit eq<T>(T x, T y)
+            where T : unmanaged
+                => gmath.eq(x,y);
+
         uint SuccessCount;
 
         uint FailureCount;
@@ -63,10 +77,10 @@ namespace Z0
             Cases16 = source.Fill(z8, width<ushort>(w8), alloc<byte>(Reps));
             Cases32 = source.Fill(z8, width<uint>(w8), alloc<byte>(Reps));
             Cases64 = source.Fill(z8, width<uint>(w8), alloc<byte>(Reps));
-            Literals8 = ClrLiterals.tagged<byte>(Part.base2, typeof(BitMasks.Literals));
-            Literals16 = ClrLiterals.tagged<ushort>(Part.base2, typeof(BitMasks.Literals));
-            Literals32 = ClrLiterals.tagged<uint>(Part.base2, typeof(BitMasks.Literals));
-            Literals64 = ClrLiterals.tagged<ulong>(Part.base2, typeof(BitMasks.Literals));
+            Literals8 = ClrLiterals.tagged<byte>(Part.base2, typeof(BitMaskLiterals));
+            Literals16 = ClrLiterals.tagged<ushort>(Part.base2, typeof(BitMaskLiterals));
+            Literals32 = ClrLiterals.tagged<uint>(Part.base2, typeof(BitMaskLiterals));
+            Literals64 = ClrLiterals.tagged<ulong>(Part.base2, typeof(BitMaskLiterals));
             HiMaskResults8 = alloc<CheckHiMaskResult<byte>>(Reps);
             HiMaskResults16 = alloc<CheckHiMaskResult<ushort>>(Reps);
             HiMaskResults32 = alloc<CheckHiMaskResult<uint>>(Reps);

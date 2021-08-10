@@ -97,7 +97,8 @@ public enum PartId : byte
     [Symbol("blittable")]
     Blittable = 29,
 
-    OpenSlot0 = 30,
+    [Symbol("ws")]
+    Ws = 30,
 
     OpenSlot1 = 31,
 

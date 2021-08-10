@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static BitMasks.Literals;
+    using static BitMaskLiterals;
 
     partial struct cpu
     {

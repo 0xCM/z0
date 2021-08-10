@@ -12,7 +12,7 @@ namespace Z0.Asm
         Outcome LlvmAsmDocs(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = Sources().Dataset("llvm.tblgen.docs") + FS.file("X86.gen-instr-docs",FS.Txt);
+            var src = DataSources.Dataset("llvm.tblgen.docs") + FS.file("X86.gen-instr-docs",FS.Txt);
             var current = TextLine.Empty;
             var prior = TextLine.Empty;
             var counter = 0u;

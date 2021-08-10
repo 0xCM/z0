@@ -25,8 +25,8 @@ namespace Z0
 
         void CheckFormatting()
         {
-            var m0 = BitMasks.Literals.b00001111x32;
-            var m1 = BitMasks.Literals.Even32;
+            var m0 = BitMaskLiterals.b00001111x32;
+            var m1 = BitMaskLiterals.Even32;
             var m = (ulong)m0 | ((ulong)m1 << 32);
             var bf = Bitfields.create(m);
             var bytes = bf.Bytes;

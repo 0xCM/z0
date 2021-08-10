@@ -20,7 +20,7 @@ namespace Z0
     using static CreditModel.Appendix;
     using static CreditModel.ContentNumber;
 
-    using CT = CreditModel.ContentType;
+    using CT = CreditModel.CreditContentType;
 
     [ApiHost]
     public class CheckCredits : AppService<CheckCredits>

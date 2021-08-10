@@ -33,6 +33,9 @@ namespace Z0
             get => _WsRoot;
         }
 
+        public IWorkspace Api()
+            => ApiWs.create(_WsRoot + FS.folder(api));
+
         public AsmWs Asm()
             => AsmWs.create(_WsRoot + FS.folder(asm));
 

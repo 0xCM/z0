@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
     using static BitMasks;
-    using static BitMasks.Literals;
+    using static BitMaskLiterals;
     using static core;
 
     [ApiHost]

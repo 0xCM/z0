@@ -11,7 +11,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             ProjectId id = arg(args,0).Value;
-            Files(Projects().SrcFiles(id));
+            Files(ProjectWs.SrcFiles(id));
             return result;
         }
     }

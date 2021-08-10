@@ -122,6 +122,7 @@
     <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>
 
     <Workflow>$(Src)workflow/z0.workflow.csproj</Workflow>
+    <Ws>$(Src)ws/z0.ws.csproj</Ws>
 
     <Xed>$(Src)xed/z0.xed.csproj</Xed>
   </PropertyGroup>

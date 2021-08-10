@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static CreditModel;
 
     using E = ContentRef;
@@ -57,7 +57,7 @@ namespace Z0
         /// <summary>
         /// The type of referenced content
         /// </summary>
-        public ContentType ContentType
+        public CreditContentType ContentType
         {
             [MethodImpl(Inline)]
             get => api.type(this);

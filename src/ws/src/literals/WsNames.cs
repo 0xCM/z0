@@ -6,6 +6,7 @@ namespace Z0
 {
     using A = WsAtoms;
 
+    [LiteralProvider]
     public readonly struct WsNames
     {
         public const string tools = A.tools;
@@ -31,5 +32,7 @@ namespace Z0
         public const string queries = A.queries;
 
         public const string imports = A.imports;
+
+        public const string api = A.api;
     }
 }

@@ -8,15 +8,16 @@ namespace Z0
 
     using static Root;
 
+    [LiteralProvider]
+    public readonly partial struct BitMaskLiterals
+    {
+
+    }
+
     [ApiHost]
     public partial class BitMasks
     {
         const NumericKind Closure = UnsignedInts;
-
-        public readonly partial struct Literals
-        {
-
-        }
 
         public readonly struct Specs
         {

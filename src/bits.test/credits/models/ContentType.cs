@@ -9,7 +9,7 @@ namespace Z0
         /// <summary>
         /// Defines content type classifiers, and occupies at most 3 bits
         /// </summary>
-        public enum ContentType : byte
+        public enum CreditContentType : byte
         {
             /// <summary>
             /// Text content

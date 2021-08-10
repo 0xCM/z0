@@ -22,6 +22,6 @@ namespace Z0
 
         public ApiLiteralValue Value;
 
-        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{16,16,12,1};
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{32,16,12,1};
     }
 }

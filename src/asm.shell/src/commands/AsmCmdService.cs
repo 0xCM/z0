@@ -19,6 +19,8 @@ namespace Z0.Asm
 
         Identifier RoutineName;
 
+        DevWs Ws;
+
         AsmWs AsmWs;
 
         ScriptRunner ScriptRunner;
@@ -26,8 +28,6 @@ namespace Z0.Asm
         ShellState State;
 
         IApiPack ApiPack;
-
-        DevWs Ws;
 
         NasmCatalog NasmCatalog;
 
@@ -64,6 +64,16 @@ namespace Z0.Asm
         CliMemoryMap ResPack;
 
         IPolyrand Random;
+
+        IWorkspace ApiWs;
+
+        IWorkspace OutWs;
+
+        IWorkspace LogWs;
+
+        ProjectWs ProjectWs;
+
+        IWorkspace DataSources;
 
         byte[] _Assembled;
 
@@ -108,6 +118,11 @@ namespace Z0.Asm
             ApiArchive = ApiPack.Archive();
             AsmLoader = Wf.AsmLoader();
             HexPacks = Wf.ApiHexPacks();
+            ApiWs = Ws.Api();
+            OutWs = Ws.Output();
+            LogWs = Ws.Logs();
+            ProjectWs = Ws.Projects();
+            DataSources = Ws.Sources();
             State.DevWs(Ws);
         }
 
@@ -178,19 +193,13 @@ namespace Z0.Asm
         IWorkspace Gen()
             => Ws.Gen();
 
-        IWorkspace OutWs()
-            => Ws.Output();
-
         FS.FolderPath OutDir(string id)
-            => OutWs().Subdir(id);
+            => OutWs.Subdir(id);
 
         public FS.FolderPath OutRoot()
-            => OutWs().Root;
+            => OutWs.Root;
 
-        IWorkspace LogWs()
-            => Ws.Logs();
-
-        IToolWs ToolWs()
+        IWorkspace ToolWs()
             => Ws.Tools();
 
         FS.FilePath ToolScript(ToolId tool, string id)
@@ -199,14 +208,8 @@ namespace Z0.Asm
         IWorkspace TableWs()
             => Ws.Tables();
 
-        IWorkspace Sources()
-            => Ws.Sources();
-
-        ProjectWs Projects()
-            => Ws.Projects();
-
         FS.FolderPath ProjectHome(ProjectId id)
-            => Projects().Home(id);
+            => ProjectWs.Home(id);
 
         FS.Files Files(FS.FileExt ext)
             => State.Files().Where(f => f.Is(ext));
@@ -331,7 +334,7 @@ namespace Z0.Asm
         uint QueryOut<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, string id)
             where T : struct
         {
-            var dst = OutWs().QueryOut(id, FS.Csv);
+            var dst = OutWs.QueryOut(id, FS.Csv);
             return TableEmit(src, widths, dst);
         }
 
