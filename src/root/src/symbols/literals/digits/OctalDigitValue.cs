@@ -5,49 +5,48 @@
 namespace Z0
 {
     /// <summary>
-    /// Defines the symbols that represent base-8 digits
+    /// Defines literals corresponding to base-8 digits
     /// </summary>
-    [SymSource]
-    public enum OctalSym : ushort
+    public enum OctalDigitValue : byte
     {
         /// <summary>
-        /// Specifies 0 base 8, asci code 48
+        /// Specifies 0 base 8
         /// </summary>
-        o0 = '0',
+        o0 = 0x0,
 
         /// <summary>
-        /// Specifies 1 base 8, asci code 49
+        /// Specifies 1 base 8
         /// </summary>
-        o1 = '1',
+        o1 = 0x1,
 
         /// <summary>
-        /// Specifies 2 base 8, asci code 50
+        /// Specifies 2 base 8
         /// </summary>
-        o2 = '2',
+        o2 = 0x2,
 
         /// <summary>
-        /// Specifies 3 base 8, asci code 51
+        /// Specifies 3 base 8
         /// </summary>
-        o3 = '3',
+        o3 = 0x3,
 
         /// <summary>
-        /// Specifies 4 base 8, asci code 52
+        /// Specifies 4 base 8
         /// </summary>
-        o4 = '4',
+        o4 = 0x4,
 
         /// <summary>
         /// Specifies 5 base 8
         /// </summary>
-        o5 = '5',
+        o5 = 0x5,
 
         /// <summary>
         /// Specifies 6 base 8
         /// </summary>
-        o6 = '6',
+        o6 = 0x6,
 
         /// <summary>
         /// Specifies 7 base 8
         /// </summary>
-        o7 = '7',
-    }
+        o7 = 0x7,
+   }
 }

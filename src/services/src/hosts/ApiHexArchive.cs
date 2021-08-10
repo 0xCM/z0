@@ -46,7 +46,7 @@ namespace Z0
         public Index<ApiCodeBlock> Read(ApiHostUri host)
         {
             var file = FS.file(host.Part, host.HostName, Ext);
-            var path = Paths().Where(f => f.FileName.Name == file.Name).FirstOrDefault(FS.FilePath.Empty);
+            var path = BlockPaths().Where(f => f.FileName.Name == file.Name).FirstOrDefault(FS.FilePath.Empty);
             if(path.IsEmpty)
             {
                 Wf.Warn(FS.missing(path));
@@ -123,7 +123,7 @@ namespace Z0
             }
         }
 
-        FS.Files Paths()
+        FS.Files BlockPaths()
             => Root.Files(Ext, true);
     }
 }

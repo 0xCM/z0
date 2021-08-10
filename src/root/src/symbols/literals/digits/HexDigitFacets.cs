@@ -7,33 +7,32 @@ namespace Z0
 
     public readonly struct HexDigitFacets
     {
-        public const HexCode MinScalarCode = HexCode.x0;
+        public const HexDigitCode MinScalarCode = HexDigitCode.x0;
 
-        public const HexCode MaxScalarCode = HexCode.x9;
+        public const HexDigitCode MaxScalarCode = HexDigitCode.x9;
 
-        public const HexCode MinLetterCodeL = HexCode.a;
+        public const HexDigitCode MinLetterCodeL = HexDigitCode.a;
 
-        public const HexCode MaxLetterCodeL = HexCode.f;
+        public const HexDigitCode MaxLetterCodeL = HexDigitCode.f;
 
-        public const HexCode MinLetterCodeU = HexCode.A;
+        public const HexDigitCode MinLetterCodeU = HexDigitCode.A;
 
-        public const HexCode MaxLetterCodeU = HexCode.F;
+        public const HexDigitCode MaxLetterCodeU = HexDigitCode.F;
 
-        public const HexSym MinScalarSymbol = HexSym.x0;
+        public const HexDigitSym MinScalarSymbol = HexDigitSym.x0;
 
-        public const HexSym MaxScalarSymbol = HexSym.x9;
+        public const HexDigitSym MaxScalarSymbol = HexDigitSym.x9;
 
-        public const HexSym MinLetterSymbolL = HexSym.a;
+        public const HexDigitSym MinLetterSymbolL = HexDigitSym.a;
 
-        public const HexSym MaxLetterSymbolL = HexSym.f;
+        public const HexDigitSym MaxLetterSymbolL = HexDigitSym.f;
 
-        public const HexSym MinLetterSymbolU = HexSym.A;
+        public const HexDigitSym MinLetterSymbolU = HexDigitSym.A;
 
-        public const HexSym MaxLetterSymbolU = HexSym.F;
+        public const HexDigitSym MaxLetterSymbolU = HexDigitSym.F;
 
-        public const HexDigit MinDigit = HexDigit.x0;
+        public const HexDigitValue MinDigit = HexDigitValue.x0;
 
-        public const HexDigit MaxDigit = HexDigit.F;
-
+        public const HexDigitValue MaxDigit = HexDigitValue.F;
     }
 }

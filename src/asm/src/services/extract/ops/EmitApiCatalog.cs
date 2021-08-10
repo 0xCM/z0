@@ -10,7 +10,7 @@ namespace Z0
     {
         ReadOnlySpan<ApiCatalogEntry> EmitApiCatalog(Timestamp ts)
         {
-            var dst = Paths.ApiCatalogPath();
+            var dst = PackArchive.ApiCatalogPath();
             var members = ApiMembers.create(CollectedDatasets.SelectMany(x => x.Members));
             return Wf.ApiCatalogs().EmitApiCatalog(members, dst);
         }

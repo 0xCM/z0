@@ -10,8 +10,8 @@ namespace Z0
     using static Root;
     using static core;
 
-    using D = DecimalDigit;
-    using X = HexDigit;
+    using D = DecimalDigitValue;
+    using X = HexDigitValue;
 
     /// <summary>
     /// Defines operations over character digits
@@ -200,7 +200,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<DecimalDigit> digits(ReadOnlySpan<char> src, Span<DecimalDigit> dst)
+        public static Span<DecimalDigitValue> digits(ReadOnlySpan<char> src, Span<DecimalDigitValue> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
@@ -217,41 +217,41 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(byte src, Span<BinaryDigit> dst)
+        public static void digits(byte src, Span<BinaryDigitValue> dst)
         {
-            seek(dst, 0) = (BinaryDigit)((0b00000001 & src) >> 0);
-            seek(dst, 1) = (BinaryDigit)((0b00000010 & src) >> 1);
-            seek(dst, 2) = (BinaryDigit)((0b00000100 & src) >> 2);
-            seek(dst, 3) = (BinaryDigit)((0b00001000 & src) >> 3);
-            seek(dst, 4) = (BinaryDigit)((0b00010000 & src) >> 4);
-            seek(dst, 5) = (BinaryDigit)((0b00100000 & src) >> 5);
-            seek(dst, 6) = (BinaryDigit)((0b01000000 & src) >> 6);
-            seek(dst, 7) = (BinaryDigit)((0b10000000 & src) >> 7);
+            seek(dst, 0) = (BinaryDigitValue)((0b00000001 & src) >> 0);
+            seek(dst, 1) = (BinaryDigitValue)((0b00000010 & src) >> 1);
+            seek(dst, 2) = (BinaryDigitValue)((0b00000100 & src) >> 2);
+            seek(dst, 3) = (BinaryDigitValue)((0b00001000 & src) >> 3);
+            seek(dst, 4) = (BinaryDigitValue)((0b00010000 & src) >> 4);
+            seek(dst, 5) = (BinaryDigitValue)((0b00100000 & src) >> 5);
+            seek(dst, 6) = (BinaryDigitValue)((0b01000000 & src) >> 6);
+            seek(dst, 7) = (BinaryDigitValue)((0b10000000 & src) >> 7);
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ushort src, Span<BinaryDigit> dst)
+        public static void digits(ushort src, Span<BinaryDigitValue> dst)
         {
             digits((byte)src, dst);
             digits((byte)(src >> 8), slice(dst, 8));
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(uint src, Span<BinaryDigit> dst)
+        public static void digits(uint src, Span<BinaryDigitValue> dst)
         {
             digits((ushort)src,dst);
             digits((ushort)(src >> 16), slice(dst,16));
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ulong src, Span<BinaryDigit> dst)
+        public static void digits(ulong src, Span<BinaryDigitValue> dst)
         {
             digits((uint)src,dst);
             digits((uint)(src >> 32), slice(dst, 32));
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<bit> src, Span<BinaryDigit> dst)
+        public static void digits(ReadOnlySpan<bit> src, Span<BinaryDigitValue> dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
@@ -295,7 +295,7 @@ namespace Z0
             => digits(src, NatSpans.alloc<N4,byte>());
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<BinarySym> src, Span<BinaryDigit> dst)
+        public static void digits(ReadOnlySpan<BinaryDigitSym> src, Span<BinaryDigitValue> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
@@ -307,7 +307,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static uint digits(Perm8L src, Span<OctalDigit> dst)
+        public static uint digits(Perm8L src, Span<OctalDigitValue> dst)
             => digits((uint)src, dst);
 
         /// <summary>
@@ -315,38 +315,38 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static uint digits(uint src, Span<OctalDigit> dst)
+        public static uint digits(uint src, Span<OctalDigitValue> dst)
         {
             //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
-            seek(dst,0) = (OctalDigit)Bits.segment(src, 0, 2);
-            seek(dst,1) = (OctalDigit)Bits.segment(src, 3, 5);
-            seek(dst,2) = (OctalDigit)Bits.segment(src, 6, 8);
-            seek(dst,3) = (OctalDigit)Bits.segment(src, 9, 11);
-            seek(dst,4) = (OctalDigit)Bits.segment(src, 12, 14);
-            seek(dst,5) = (OctalDigit)Bits.segment(src, 15, 17);
-            seek(dst,6) = (OctalDigit)Bits.segment(src, 18, 20);
-            seek(dst,7) = (OctalDigit)Bits.segment(src, 21, 23);
+            seek(dst,0) = (OctalDigitValue)Bits.segment(src, 0, 2);
+            seek(dst,1) = (OctalDigitValue)Bits.segment(src, 3, 5);
+            seek(dst,2) = (OctalDigitValue)Bits.segment(src, 6, 8);
+            seek(dst,3) = (OctalDigitValue)Bits.segment(src, 9, 11);
+            seek(dst,4) = (OctalDigitValue)Bits.segment(src, 12, 14);
+            seek(dst,5) = (OctalDigitValue)Bits.segment(src, 15, 17);
+            seek(dst,6) = (OctalDigitValue)Bits.segment(src, 18, 20);
+            seek(dst,7) = (OctalDigitValue)Bits.segment(src, 21, 23);
             return 8;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint digits(byte src, Span<OctalDigit> dst)
+        public static uint digits(byte src, Span<OctalDigitValue> dst)
         {
-            seek(dst,0) = (OctalDigit)Bits.segment(src, 0, 2);
-            seek(dst,1) = (OctalDigit)Bits.segment(src, 3, 5);
-            seek(dst,2) = (OctalDigit)Bits.segment(src, 6, 7);
+            seek(dst,0) = (OctalDigitValue)Bits.segment(src, 0, 2);
+            seek(dst,1) = (OctalDigitValue)Bits.segment(src, 3, 5);
+            seek(dst,2) = (OctalDigitValue)Bits.segment(src, 6, 7);
             return 3;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint digits(ushort src, Span<OctalDigit> dst)
+        public static uint digits(ushort src, Span<OctalDigitValue> dst)
         {
-            seek(dst,0) = (OctalDigit)Bits.segment(src, 0, 2);
-            seek(dst,1) = (OctalDigit)Bits.segment(src, 3, 5);
-            seek(dst,2) = (OctalDigit)Bits.segment(src, 6, 8);
-            seek(dst,3) = (OctalDigit)Bits.segment(src, 9, 11);
-            seek(dst,4) = (OctalDigit)Bits.segment(src, 12, 14);
-            seek(dst,5) = (OctalDigit)Bits.segment(src, 15, 16);
+            seek(dst,0) = (OctalDigitValue)Bits.segment(src, 0, 2);
+            seek(dst,1) = (OctalDigitValue)Bits.segment(src, 3, 5);
+            seek(dst,2) = (OctalDigitValue)Bits.segment(src, 6, 8);
+            seek(dst,3) = (OctalDigitValue)Bits.segment(src, 9, 11);
+            seek(dst,4) = (OctalDigitValue)Bits.segment(src, 12, 14);
+            seek(dst,5) = (OctalDigitValue)Bits.segment(src, 15, 16);
             return 3;
         }
 
@@ -354,9 +354,9 @@ namespace Z0
         /// Computes the digits corresponding to each 3-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        public static Span<OctalDigit> digits(Perm8L src)
+        public static Span<OctalDigitValue> digits(Perm8L src)
         {
-            var dst = alloc<OctalDigit>(8);
+            var dst = alloc<OctalDigitValue>(8);
             digits(src, dst);
             return dst;
         }
@@ -366,7 +366,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static uint digits(Perm16L src, Span<HexDigit> dst)
+        public static uint digits(Perm16L src, Span<HexDigitValue> dst)
         {
             var scalar = (ulong)src;
             seek(dst,0) = (X)Bits.segment(scalar, 0, 3);
@@ -392,9 +392,9 @@ namespace Z0
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        public static Span<HexDigit> digits(Perm16L src)
+        public static Span<HexDigitValue> digits(Perm16L src)
         {
-            var dst = alloc<HexDigit>(16);
+            var dst = alloc<HexDigitValue>(16);
             digits(src, dst);
             return dst;
         }

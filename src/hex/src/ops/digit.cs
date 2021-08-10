@@ -15,16 +15,16 @@ namespace Z0
     partial struct Hex
     {
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(char src)
+        public static HexDigitValue digit(char src)
         {
             if(number(src))
-                return (HexDigit)((HexSymFacet)src - NumberOffset);
+                return (HexDigitValue)((HexSymFacet)src - NumberOffset);
             else
             {
                 if(test(UpperCase, src))
-                    return (HexDigit)((XF)src - LetterOffsetUp);
+                    return (HexDigitValue)((XF)src - LetterOffsetUp);
                 else
-                    return (HexDigit)((XF)src - LetterOffsetLo);
+                    return (HexDigitValue)((XF)src - LetterOffsetLo);
             }
         }
 
@@ -33,31 +33,31 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(LowerCased @case, char src)
-            => number(src) ? (HexDigit)((XF)src - NumberOffset) : (HexDigit)((XF)src - LetterOffsetLo);
+        public static HexDigitValue digit(LowerCased @case, char src)
+            => number(src) ? (HexDigitValue)((XF)src - NumberOffset) : (HexDigitValue)((XF)src - LetterOffsetLo);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(UpperCased @case, char src)
-            => number(src) ? (HexDigit)((XF)src - NumberOffset) : (HexDigit)((XF)src - LetterOffsetUp);
+        public static HexDigitValue digit(UpperCased @case, char src)
+            => number(src) ? (HexDigitValue)((XF)src - NumberOffset) : (HexDigitValue)((XF)src - LetterOffsetUp);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(HexSymLo src)
-            => number(src) ? (HexDigit)((XF)src - NumberOffset) : (HexDigit)((XF)src - LetterOffsetLo);
+        public static HexDigitValue digit(HexLowerSym src)
+            => number(src) ? (HexDigitValue)((XF)src - NumberOffset) : (HexDigitValue)((XF)src - LetterOffsetLo);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by an uppercase hex symbol
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(HexSymUp src)
-            => number(src) ? (HexDigit)((XF)src - NumberOffset) : (HexDigit)((XF)src - LetterOffsetUp);
+        public static HexDigitValue digit(HexUpperSym src)
+            => number(src) ? (HexDigitValue)((XF)src - NumberOffset) : (HexDigitValue)((XF)src - LetterOffsetUp);
     }
 }

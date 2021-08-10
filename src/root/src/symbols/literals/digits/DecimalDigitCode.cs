@@ -4,13 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using S = DecimalSym;
+    using S = DecimalDigitSym;
 
     /// <summary>
     /// Defines the symbols that represent the base-10 digits
     /// </summary>
     [CodeProvider]
-    public enum DecimalCode : byte
+    public enum DecimalDigitCode : byte
     {
         None = 0,
 

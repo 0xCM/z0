@@ -14,39 +14,39 @@ namespace Z0
     partial struct Hex
     {
         [MethodImpl(Inline), Op]
-        public static HexSym symbol(LowerCased casing, byte index)
-            => (HexSym)(index < LowerSymbolCount ? skip(LowerSymbols, index) : HexSymLo.None);
+        public static HexDigitSym symbol(LowerCased casing, byte index)
+            => (HexDigitSym)(index < LowerSymbolCount ? skip(LowerSymbols, index) : HexLowerSym.None);
 
         [MethodImpl(Inline), Op]
-        public static HexSym symbol(UpperCased casing, byte index)
-            => (HexSym)(index < UpperSymbolCount ? skip(UpperSymbols, index) : HexSymUp.None);
+        public static HexDigitSym symbol(UpperCased casing, byte index)
+            => (HexDigitSym)(index < UpperSymbolCount ? skip(UpperSymbols, index) : HexUpperSym.None);
 
         [MethodImpl(Inline), Op]
-        public static HexSym symbol(LowerCased casing, Hex3Seq src)
-            => symbol(casing, (HexDigit)src);
+        public static HexDigitSym symbol(LowerCased casing, Hex3Seq src)
+            => symbol(casing, (HexDigitValue)src);
 
         [MethodImpl(Inline), Op]
-        public static HexSym symbol(UpperCased casing, Hex3Seq src)
-            => symbol(casing, (HexDigit)src);
+        public static HexDigitSym symbol(UpperCased casing, Hex3Seq src)
+            => symbol(casing, (HexDigitValue)src);
 
         [MethodImpl(Inline), Op]
-        public static HexSym symbol(LowerCased casing, Hex4Seq src)
-            => symbol(casing, (HexDigit)src);
+        public static HexDigitSym symbol(LowerCased casing, Hex4Seq src)
+            => symbol(casing, (HexDigitValue)src);
 
         [MethodImpl(Inline), Op]
-        public static HexSym symbol(UpperCased casing, Hex4Seq src)
-            => symbol(casing, (HexDigit)src);
+        public static HexDigitSym symbol(UpperCased casing, Hex4Seq src)
+            => symbol(casing, (HexDigitValue)src);
 
         [MethodImpl(Inline), Op]
-        public static HexSym symbol(UpperCased @case, HexDigit src)
-            => (HexSym)code(@case, src);
+        public static HexDigitSym symbol(UpperCased @case, HexDigitValue src)
+            => (HexDigitSym)code(@case, src);
 
         [MethodImpl(Inline), Op]
-        public static HexSym symbol(LowerCased @case, HexDigit src)
-            => (HexSym)code(@case, src);
+        public static HexDigitSym symbol(LowerCased @case, HexDigitValue src)
+            => (HexDigitSym)code(@case, src);
 
         [MethodImpl(Inline)]
-        public static HexSym symbol<C>(C @case, HexDigit src)
+        public static HexDigitSym symbol<C>(C @case, HexDigitValue src)
             where C : unmanaged, ILetterCase
         {
             if(typeof(C) == typeof(LowerCased))
@@ -58,7 +58,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static HexSym symbol<C>(C @case, byte index)
+        public static HexDigitSym symbol<C>(C @case, byte index)
             where C : unmanaged, ILetterCase
         {
             if(typeof(C) == typeof(LowerCased))

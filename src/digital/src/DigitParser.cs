@@ -56,52 +56,52 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static bool digit(Base2 @base, char c, out BinaryDigit dst)
+        public static bool digit(Base2 @base, char c, out BinaryDigitValue dst)
         {
             if(Digital.test(@base, c))
             {
-                dst = (BinaryDigit)((BinaryDigitCode)c - B.MinCode);
+                dst = (BinaryDigitValue)((BinaryDigitCode)c - B.MinCode);
                 return true;
             }
             else
             {
-                dst = (BinaryDigit)0xFF;
+                dst = (BinaryDigitValue)0xFF;
                 return true;
             }
         }
 
         [MethodImpl(Inline), Op]
-        public static bool digit(Base8 @base, char c,  out OctalDigit dst)
+        public static bool digit(Base8 @base, char c,  out OctalDigitValue dst)
         {
             if(Digital.test(@base, c))
             {
-                dst = (OctalDigit)((OctalCode)c - O.MinCode);
+                dst = (OctalDigitValue)((OctalDigitCode)c - O.MinCode);
                 return true;
             }
             else
             {
-                dst = (OctalDigit)0xFF;
+                dst = (OctalDigitValue)0xFF;
                 return true;
             }
         }
 
         [MethodImpl(Inline), Op]
-        public static bool digit(Base10 @base, char c, out DecimalDigit dst)
+        public static bool digit(Base10 @base, char c, out DecimalDigitValue dst)
         {
             if(Digital.test(@base, c))
             {
-                dst = (DecimalDigit)((DecimalCode)c - D.MinCode);
+                dst = (DecimalDigitValue)((DecimalDigitCode)c - D.MinCode);
                 return true;
             }
             else
             {
-                dst = (DecimalDigit)0xFF;
+                dst = (DecimalDigitValue)0xFF;
                 return true;
             }
         }
 
         [MethodImpl(Inline), Op]
-        public static bool digit(Base16 @base, char c, out HexDigit dst)
+        public static bool digit(Base16 @base, char c, out HexDigitValue dst)
             => Hex.parse(c, out dst);
     }
 }

@@ -6,13 +6,11 @@ namespace Z0.Asm
 {
     using System;
 
-    using static AsmOpCodeTokens;
     using static Root;
     using static core;
 
     partial struct AsmParser
     {
-
         [Op]
         public static Outcome code(in AsmMnemonic src, out AsmMnemonicCode dst)
         {

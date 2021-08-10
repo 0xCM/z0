@@ -13,7 +13,7 @@ namespace Z0
 
     using X = HexDigitFacets;
     using C = AsciChar;
-    using D = HexDigit;
+    using D = HexDigitValue;
 
     partial struct Hex
     {
@@ -76,7 +76,7 @@ namespace Z0
                 if(whitespace(c) || specifier(c))
                     continue;
 
-                if(parse(c, out HexDigit d))
+                if(parse(c, out HexDigitValue d))
                 {
                     if(hi == byte.MaxValue)
                         hi = (byte)d;
@@ -94,7 +94,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static byte combine(HexDigit lo, HexDigit hi)
+        public static byte combine(HexDigitValue lo, HexDigitValue hi)
             => (byte)((byte)hi << 4 | (byte)lo);
 
         [Op]
@@ -103,6 +103,42 @@ namespace Z0
             var lead = recover<AsciCode,byte>(src);
             var _offset = System.Text.Encoding.ASCII.GetString(lead);
             return ulong.TryParse(_offset, System.Globalization.NumberStyles.HexNumber, null, out dst);
+        }
+
+        [Op]
+        public static Outcome parse(ReadOnlySpan<AsciCode> src, out Hex16 dst)
+        {
+            dst = default;
+            var lead = recover<AsciCode,byte>(src);
+            var _offset = System.Text.Encoding.ASCII.GetString(lead);
+            var result = ushort.TryParse(_offset, System.Globalization.NumberStyles.HexNumber, null, out var n);
+            if(result)
+                dst = n;
+            return result;
+        }
+
+        [Op]
+        public static Outcome parse(ReadOnlySpan<AsciCode> src, out Hex32 dst)
+        {
+            dst = default;
+            var lead = recover<AsciCode,byte>(src);
+            var _offset = System.Text.Encoding.ASCII.GetString(lead);
+            var result = uint.TryParse(_offset, System.Globalization.NumberStyles.HexNumber, null, out var n);
+            if(result)
+                dst = n;
+            return result;
+        }
+
+        [Op]
+        public static Outcome parse(ReadOnlySpan<AsciCode> src, out Hex64 dst)
+        {
+            dst = default;
+            var lead = recover<AsciCode,byte>(src);
+            var _offset = System.Text.Encoding.ASCII.GetString(lead);
+            var result = ulong.TryParse(_offset, System.Globalization.NumberStyles.HexNumber, null, out var n);
+            if(result)
+                dst = n;
+            return result;
         }
 
         [Op]
@@ -120,7 +156,7 @@ namespace Z0
                 if(whitespace(c) || specifier(c))
                     continue;
 
-                if(parse(c, out HexDigit d))
+                if(parse(c, out HexDigitValue d))
                 {
                     if(hi == byte.MaxValue)
                         hi = (byte)d;
@@ -139,33 +175,33 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static bool parse(AsciCode c, out HexDigit dst)
+        public static bool parse(AsciCode c, out HexDigitValue dst)
         {
             if(scalar(c))
             {
-                dst = (HexDigit)((HexCode)c - X.MinScalarCode);
+                dst = (HexDigitValue)((HexDigitCode)c - X.MinScalarCode);
                 return true;
             }
             else if(upper(c))
             {
-                dst = (HexDigit)((HexCode)c - X.MinLetterCodeU + 0xA);
+                dst = (HexDigitValue)((HexDigitCode)c - X.MinLetterCodeU + 0xA);
                 return true;
             }
             else if(lower(c))
             {
-                dst = (HexDigit)((HexCode)c - X.MinLetterCodeL + 0xa);
+                dst = (HexDigitValue)((HexDigitCode)c - X.MinLetterCodeL + 0xa);
                 return true;
             }
-            dst = (HexDigit)byte.MaxValue;
+            dst = (HexDigitValue)byte.MaxValue;
             return false;
         }
 
         [MethodImpl(Inline), Op]
-        public static bool parse(char c, out HexDigit dst)
+        public static bool parse(char c, out HexDigitValue dst)
             => parse((AsciCode)c, out dst);
 
         [Op]
-        public static bool parse(AsciChar src, out HexDigit dst)
+        public static bool parse(AsciChar src, out HexDigitValue dst)
         {
             switch(src)
             {

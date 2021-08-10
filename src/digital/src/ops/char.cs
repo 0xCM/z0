@@ -12,23 +12,23 @@ namespace Z0
     partial struct Digital
     {
         [MethodImpl(Inline), Op]
-        public static char @char(BinaryDigit src)
+        public static char @char(BinaryDigitValue src)
             => (char)symbol(src);
 
         [MethodImpl(Inline), Op]
-        public static char @char(OctalDigit src)
+        public static char @char(OctalDigitValue src)
             => (char)symbol(src);
 
         [MethodImpl(Inline), Op]
-        public static char @char(DecimalDigit src)
+        public static char @char(DecimalDigitValue src)
             => (char)symbol(src);
 
         [MethodImpl(Inline), Op]
-        public static char @char(UpperCased @case, HexDigit src)
+        public static char @char(UpperCased @case, HexDigitValue src)
             => Hex.hexchar(@case,src);
 
         [MethodImpl(Inline), Op]
-        public static char @char(LowerCased @case, HexDigit src)
+        public static char @char(LowerCased @case, HexDigitValue src)
             => Hex.hexchar(@case,src);
     }
 }

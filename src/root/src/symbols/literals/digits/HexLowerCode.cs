@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using S = HexSymLo;
+    using S = HexLowerSym;
 
     /// <summary>
     /// Defines identiiers for the ASCI codes that correspond to the lowercase hex digits
     /// </summary>
-    public enum HexCodeLo : byte
+    public enum HexLowerCode : byte
     {
         /// <summary>
         /// The hex code with no code
@@ -25,12 +25,12 @@ namespace Z0
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x1 = (byte)S.x1,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x2 = (byte)S.x2,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
@@ -55,12 +55,12 @@ namespace Z0
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x7 = (byte)S.x7,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x8 = (byte)S.x8,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
@@ -94,6 +94,6 @@ namespace Z0
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
-        f = (byte)S.f, 
+        f = (byte)S.f,
     }
 }

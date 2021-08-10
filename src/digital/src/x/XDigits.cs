@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
-        public static Span<OctalDigit> ToDigits(this Perm8L src)
+        public static Span<OctalDigitValue> ToDigits(this Perm8L src)
             => Digital.digits(src);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline)]
-        public static Span<HexDigit> ToDigits(this Perm16L src)
+        public static Span<HexDigitValue> ToDigits(this Perm16L src)
             => Digital.digits(src);
     }
 }

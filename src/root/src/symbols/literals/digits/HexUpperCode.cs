@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using S = HexSymUp;
+    using S = HexUpperSym;
 
     /// <summary>
     /// Defines identifiers for the ASCI codes that correspond to the uppercase hex digits
     /// </summary>
-    public enum HexCodeUp : byte
+    public enum HexUpperCode : byte
     {
         /// <summary>
         /// The code with no name
@@ -25,12 +25,12 @@ namespace Z0
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x1 = (byte)S.x1,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x2 = (byte)S.x2,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
@@ -55,12 +55,12 @@ namespace Z0
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x7 = (byte)S.x7,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         x8 = (byte)S.x8,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>

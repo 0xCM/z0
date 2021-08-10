@@ -53,7 +53,7 @@ namespace Z0
             var size = HexPacks.pack(blocks, packs, chars);
             if(validate)
             {
-                var buffer = span<HexDigit>(BufferLength);
+                var buffer = span<HexDigitValue>(BufferLength);
                 var flow = Running("Validating pack");
                 for(var i=0; i<count; i++)
                 {

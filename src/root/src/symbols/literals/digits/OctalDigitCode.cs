@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using S = OctalSym;
+    using S = OctalDigitSym;
 
-    public enum OctalCode : byte
+    public enum OctalDigitCode : byte
     {
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit

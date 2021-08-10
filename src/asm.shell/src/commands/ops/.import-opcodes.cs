@@ -20,7 +20,8 @@ namespace Z0.Asm
             var src = DataSources.Dataset(AsmTableScopes.SdmInstructions).Files(FS.Csv).ToReadOnlySpan();
             var count = src.Length;
             var kinds = Symbols.index<SdmTableKind>();
-            var buffer = span<OpCodeRecord>(4000);
+            Index<OpCodeRecord> storage = alloc<OpCodeRecord>(4000);
+            var buffer = storage.Edit;
             var counter = 0u;
             for(var i=0; i<count; i++)
             {
@@ -35,13 +36,14 @@ namespace Z0.Asm
                     Write(string.Format("{0,-16} | {1,-12} | {2}", id, symbol.Expr, table.Source));
                     if(kind == SdmTableKind.OpCodes)
                     {
-                        var current = slice(buffer,counter);
+                        var current = slice(buffer, counter);
                         counter += SdmRecords.fill(table, current);
                     }
                 }
             }
 
-            var rows = slice(buffer,0,counter);
+            var rows = span(slice(buffer,0,counter).ToArray().Sort());
+
             for(var i=0u; i<rows.Length; i++)
                 seek(rows,i).OpCodeId = i + 1;
             var outpath = TableWs().Table<OpCodeRecord>();

@@ -15,11 +15,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static char hexchar(UpperCased @case, byte value)
-            => (char)symbol(@case, (HexDigit)value);
+            => (char)symbol(@case, (HexDigitValue)value);
 
         [MethodImpl(Inline), Op]
         public static char hexchar(LowerCased @case, byte value)
-            => (char)symbol(@case, (HexDigit)value);
+            => (char)symbol(@case, (HexDigitValue)value);
 
         [MethodImpl(Inline), Op]
         public static char hexchar(UpperCased @case, Hex3 src)
@@ -107,21 +107,21 @@ namespace Z0
         }
 
         /// <summary>
-        /// Retrieves the character corresponding to a specified <see cref='HexDigit'/>
+        /// Retrieves the character corresponding to a specified <see cref='HexDigitValue'/>
         /// </summary>
         /// <param name="case">The case specifier</param>
         /// <param name="value">The digit value</param>
         [MethodImpl(Inline), Op]
-        public static char hexchar(LowerCased @case, HexDigit value)
+        public static char hexchar(LowerCased @case, HexDigitValue value)
             => (char)Hex.symbol(@case, value);
 
         /// <summary>
-        /// Retrieves the character corresponding to a specified <see cref='HexDigit'/>
+        /// Retrieves the character corresponding to a specified <see cref='HexDigitValue'/>
         /// </summary>
         /// <param name="case">The case specifier</param>
         /// <param name="value">The digit value</param>
         [MethodImpl(Inline), Op]
-        public static char hexchar(UpperCased @case, HexDigit value)
+        public static char hexchar(UpperCased @case, HexDigitValue value)
             => (char)Hex.symbol(@case, value);
 
         [MethodImpl(Inline), Op]

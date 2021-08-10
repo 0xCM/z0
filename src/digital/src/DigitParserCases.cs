@@ -42,19 +42,19 @@ namespace Z0
             var j=0;
 
             for(byte i=0; i<b2d; i++)
-                seek(dst,j++) = new DigitParserCase(base2, Digital.@char((BinaryDigit)i), i);
+                seek(dst,j++) = new DigitParserCase(base2, Digital.@char((BinaryDigitValue)i), i);
 
             for(byte i=0; i<b8d; i++)
-                seek(dst,j++) = new DigitParserCase(base8, Digital.@char((OctalDigit)i), i);
+                seek(dst,j++) = new DigitParserCase(base8, Digital.@char((OctalDigitValue)i), i);
 
             for(byte i=0; i<b10d; i++)
-                seek(dst,j++) = new DigitParserCase(base10, Digital.@char((DecimalDigit)i), i);
+                seek(dst,j++) = new DigitParserCase(base10, Digital.@char((DecimalDigitValue)i), i);
 
             for(byte i=0; i<b16d; i++)
-                seek(dst,j++) = new DigitParserCase(base16, Digital.@char(LowerCase, (HexDigit)i), i);
+                seek(dst,j++) = new DigitParserCase(base16, Digital.@char(LowerCase, (HexDigitValue)i), i);
 
             for(byte i=0; i<b16d; i++)
-                seek(dst,j++) = new DigitParserCase(base16, Digital.@char(UpperCase, (HexDigit)i), i);
+                seek(dst,j++) = new DigitParserCase(base16, Digital.@char(UpperCase, (HexDigitValue)i), i);
 
             return buffer;
         }

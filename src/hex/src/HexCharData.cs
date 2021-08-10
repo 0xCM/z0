@@ -10,10 +10,10 @@ namespace Z0
     using static Root;
     using static core;
 
-    using HCL = HexCodeLo;
-    using HCU = HexCodeUp;
-    using HSU = HexSymUp;
-    using HSL = HexSymLo;
+    using HCL = HexLowerCode;
+    using HCU = HexUpperCode;
+    using HSU = HexUpperSym;
+    using HSL = HexLowerSym;
 
     /// <summary>
     /// Defines codes and symbol datasets for hex digits

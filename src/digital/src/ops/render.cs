@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source digits</param>
         [MethodImpl(Inline), Op]
-        public static void render(ReadOnlySpan<BinaryDigit> src, Span<char> dst)
+        public static void render(ReadOnlySpan<BinaryDigitValue> src, Span<char> dst)
         {
             for(var i=0u; i<src.Length; i++)
                 seek(dst,i) = (char)symbol(skip(src,i));
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source digits</param>
         [MethodImpl(Inline), Op]
-        public static void render(ReadOnlySpan<DecimalDigit> src, Span<char> dst)
+        public static void render(ReadOnlySpan<DecimalDigitValue> src, Span<char> dst)
         {
             for(var i = 0u; i< src.Length; i++)
                 seek(dst,i) = (char)symbol(skip(src,i));
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source digits</param>
         [MethodImpl(Inline)]
-        public static void render<C>(C @case, ReadOnlySpan<HexDigit> src, Span<char> dst)
+        public static void render<C>(C @case, ReadOnlySpan<HexDigitValue> src, Span<char> dst)
             where C : unmanaged, ILetterCase
                 => Hex.render(@case, src,dst);
 

@@ -12,27 +12,27 @@ namespace Z0
     partial struct Digital
     {
         [MethodImpl(Inline), Op]
-        public static BinarySym symbol(BinaryDigit src)
-            => (BinarySym)(src + (byte)BinarySymFacet.First);
+        public static BinaryDigitSym symbol(BinaryDigitValue src)
+            => (BinaryDigitSym)(src + (byte)BinarySymFacet.First);
 
         [MethodImpl(Inline), Op]
-        public static OctalSym symbol(OctalDigit src)
-            => (OctalSym)((byte)src + (byte)OctalSymFacet.First);
+        public static OctalDigitSym symbol(OctalDigitValue src)
+            => (OctalDigitSym)((byte)src + (byte)OctalSymFacet.First);
 
         [MethodImpl(Inline), Op]
-        public static BinarySym symbol(Base2 @base, byte src)
-            => (BinarySym)(src + (byte)BinarySymFacet.First);
+        public static BinaryDigitSym symbol(Base2 @base, byte src)
+            => (BinaryDigitSym)(src + (byte)BinarySymFacet.First);
 
         [MethodImpl(Inline), Op]
-        public static DecimalSym symbol(DecimalDigit src)
-            => (DecimalSym)((byte)src + DecimalSymFacet.First);
+        public static DecimalDigitSym symbol(DecimalDigitValue src)
+            => (DecimalDigitSym)((byte)src + DecimalSymFacet.First);
 
         [MethodImpl(Inline), Op]
-        public static HexSym symbol(UpperCased @case, HexDigit src)
+        public static HexDigitSym symbol(UpperCased @case, HexDigitValue src)
             => Hex.symbol(@case, src);
 
         [MethodImpl(Inline), Op]
-        public static HexSym symbol(LowerCased @case, HexDigit src)
+        public static HexDigitSym symbol(LowerCased @case, HexDigitValue src)
             => Hex.symbol(@case, src);
     }
 }

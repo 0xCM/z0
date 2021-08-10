@@ -20,7 +20,7 @@ namespace Z0
     partial struct Digital
     {
         /// <summary>
-        /// Determines whether a character can be interpreted as a <see cref='OctalCode'/> or <see cref='OctalSym'/>
+        /// Determines whether a character can be interpreted as a <see cref='OctalDigitCode'/> or <see cref='OctalDigitSym'/>
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
@@ -28,47 +28,47 @@ namespace Z0
             => (BinaryDigitCode)c >= B.MinCode && (BinaryDigitCode)c <= B.MaxCode;
 
         /// <summary>
-        /// Determines whether a byte can be interpreted as a <see cref='OctalDigit'/>
+        /// Determines whether a byte can be interpreted as a <see cref='OctalDigitValue'/>
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool test(Base2 @base, byte c)
-            => (BinaryDigit)c >= B.MinDigit && (BinaryDigit)c <= B.MaxDigit;
+            => (BinaryDigitValue)c >= B.MinDigit && (BinaryDigitValue)c <= B.MaxDigit;
 
         /// <summary>
-        /// Determines whether a character can be interpreted as a <see cref='OctalCode'/> or <see cref='OctalSym'/>
+        /// Determines whether a character can be interpreted as a <see cref='OctalDigitCode'/> or <see cref='OctalDigitSym'/>
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool test(Base8 @base, char c)
-            => (OctalCode)c >= O.MinCode && (OctalCode)c <= O.MaxCode;
+            => (OctalDigitCode)c >= O.MinCode && (OctalDigitCode)c <= O.MaxCode;
 
         /// <summary>
-        /// Determines whether a byte can be interpreted as a <see cref='OctalDigit'/>
+        /// Determines whether a byte can be interpreted as a <see cref='OctalDigitValue'/>
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool test(Base8 @base, byte c)
-            => (OctalDigit)c >= O.MinDigit && (OctalDigit)c <= O.MaxDigit;
+            => (OctalDigitValue)c >= O.MinDigit && (OctalDigitValue)c <= O.MaxDigit;
 
         /// <summary>
-        /// Determines whether a character can be interpreted as a <see cref='DecimalCode'/> or <see cref='DecimalSym'/>
+        /// Determines whether a character can be interpreted as a <see cref='DecimalDigitCode'/> or <see cref='DecimalDigitSym'/>
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool test(Base10 @base, char c)
-            => (DecimalCode)c >= D.MinCode && (DecimalCode)c <= D.MaxCode;
+            => (DecimalDigitCode)c >= D.MinCode && (DecimalDigitCode)c <= D.MaxCode;
 
         /// <summary>
-        /// Determines whether a character can be interpreted as a <see cref='DecimalDigit'/>
+        /// Determines whether a character can be interpreted as a <see cref='DecimalDigitValue'/>
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool test(Base10 @base, byte c)
-            => (DecimalDigit)c >= D.MinDigit && (DecimalDigit)c <= D.MaxDigit;
+            => (DecimalDigitValue)c >= D.MinDigit && (DecimalDigitValue)c <= D.MaxDigit;
 
         /// <summary>
-        /// Determines whether a character can be interpreted as a <see cref='HexDigit'/>
+        /// Determines whether a character can be interpreted as a <see cref='HexDigitValue'/>
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool scalar(Base16 @base, char c)
-            => (HexCode)c >= X.MinScalarCode && (HexCode)c <= X.MaxScalarCode;
+            => (HexDigitCode)c >= X.MinScalarCode && (HexDigitCode)c <= X.MaxScalarCode;
 
         /// <summary>
         /// Determines whether a character corresponds to one of the uppercase hex code characters
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool upper(Base16 @base, char c)
-            => (HexCode)c >= X.MinLetterCodeU && (HexCode)c <= X.MaxLetterCodeU;
+            => (HexDigitCode)c >= X.MinLetterCodeU && (HexDigitCode)c <= X.MaxLetterCodeU;
 
         /// <summary>
         /// Determines whether a character corresponds to one of the lowercase hex code characters
@@ -97,6 +97,6 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool lower(Base16 @base, char c)
-            => (HexCode)c >= X.MinLetterCodeL && (HexCode)c <= X.MaxLetterCodeL;
+            => (HexDigitCode)c >= X.MinLetterCodeL && (HexDigitCode)c <= X.MaxLetterCodeL;
     }
 }

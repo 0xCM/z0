@@ -74,7 +74,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render(ReadOnlySpan<HexCode> src, Span<char> dst)
+        public static uint render(ReadOnlySpan<HexDigitCode> src, Span<char> dst)
         {
             var j=0u;
             var count = src.Length;
@@ -109,7 +109,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source digits</param>
         [MethodImpl(Inline)]
-        public static uint render<C>(C @case, ReadOnlySpan<HexDigit> src, Span<char> dst)
+        public static uint render<C>(C @case, ReadOnlySpan<HexDigitValue> src, Span<char> dst)
             where C : unmanaged, ILetterCase
         {
             var count = (uint)src.Length;

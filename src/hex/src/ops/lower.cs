@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool lower(AsciCode c)
-            => (HexCode)c >= X.MinLetterCodeL && (HexCode)c <= X.MaxLetterCodeL;
+            => (HexDigitCode)c >= X.MinLetterCodeL && (HexDigitCode)c <= X.MaxLetterCodeL;
 
         /// <summary>
         /// Determines whether a character corresponds to one of the lowercase hex code characters

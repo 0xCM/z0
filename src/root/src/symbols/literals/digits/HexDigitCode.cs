@@ -4,14 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Lo = HexSymLo;
-    using Up = HexSymUp;
+    using Lo = HexLowerSym;
+    using Up = HexUpperSym;
 
     /// <summary>
     /// Defines identifiers for the ASCI codes that correspond to both upper/lower-case hex digits
     /// </summary>
     [CodeProvider(typeof(Lo), typeof(Up))]
-    public enum HexCode : byte
+    public enum HexDigitCode : byte
     {
         /// <summary>
         /// The hex code with no code

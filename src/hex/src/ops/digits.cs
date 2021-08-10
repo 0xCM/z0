@@ -13,17 +13,17 @@ namespace Z0
     partial struct Hex
     {
         [Op, Closures(Closure)]
-        public static Index<HexCodeLo> digits<T>(in T src, LowerCased @case)
+        public static Index<HexLowerCode> digits<T>(in T src, LowerCased @case)
             where T : struct
         {
             var count = size<T>();
-            var dst = alloc<HexCodeLo>(count*2);
+            var dst = alloc<HexLowerCode>(count*2);
             digits(src,dst);
             return dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void digits<T>(in T src, Span<HexCodeLo> dst)
+        public static void digits<T>(in T src, Span<HexLowerCode> dst)
             where T : struct
         {
             var count = size<T>();
@@ -38,7 +38,7 @@ namespace Z0
         }
 
         [Op]
-        public static Outcome<uint> digits(ReadOnlySpan<char> src, Span<HexDigit> dst)
+        public static Outcome<uint> digits(ReadOnlySpan<char> src, Span<HexDigitValue> dst)
         {
             var j=0u;
             var count = min(src.Length, dst.Length);
@@ -51,7 +51,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<HexSymLo> src, Span<HexDigit> dst)
+        public static void digits(ReadOnlySpan<HexLowerSym> src, Span<HexDigitValue> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
@@ -59,7 +59,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<HexSymUp> src, Span<HexDigit> dst)
+        public static void digits(ReadOnlySpan<HexUpperSym> src, Span<HexDigitValue> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)

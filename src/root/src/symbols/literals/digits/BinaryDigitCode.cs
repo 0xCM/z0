@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using S = BinarySym;
+    using S = BinaryDigitSym;
 
     [CodeProvider]
     public enum BinaryDigitCode : byte

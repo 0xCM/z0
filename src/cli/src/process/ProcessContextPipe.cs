@@ -15,11 +15,11 @@ namespace Z0
 
     public partial class ProcessContextPipe : AppService<ProcessContextPipe>
     {
-        public ProcessContextPaths Paths {get; private set;}
+        public ProcessContextPaths ContextPaths {get; private set;}
 
         protected override void OnInit()
         {
-            Paths = Db.CaptureContextRoot();
+            ContextPaths = Db.CaptureContextRoot();
         }
 
         public MemorySymbols SymbolizeDetails(in ProcessContext src)
@@ -50,13 +50,13 @@ namespace Z0
 
         public void EmitHashes(in ProcessContext src, FS.FolderPath dst)
         {
-            Paths = dst;
+            ContextPaths = dst;
             var summaries = SymbolizeSummaries(src);
-            var summarypath = Paths.ProcessPartitionHashPath(src.ProcessName, src.Timestamp, src.Subject);
+            var summarypath = ContextPaths.ProcessPartitionHashPath(src.ProcessName, src.Timestamp, src.Subject);
             EmitHashes(summaries.Addresses, summarypath);
 
             var details = SymbolizeDetails(src);
-            var detailpath = Paths.MemoryRegionHashPath(src.ProcessName, src.Timestamp, src.Subject);
+            var detailpath = ContextPaths.MemoryRegionHashPath(src.ProcessName, src.Timestamp, src.Subject);
             EmitHashes(details.Addresses, detailpath);
         }
 
@@ -88,7 +88,7 @@ namespace Z0
 
         public ProcessContext Emit(FS.FolderPath dst, Timestamp ts, Identifier subject = default, PCK flag = PCK.All)
         {
-            Paths = dst;
+            ContextPaths = dst;
 
             var selection = flags(flag);
             if(selection.IsEmpty)
@@ -108,12 +108,12 @@ namespace Z0
             context.Subject = subject;
             if(selection.EmitSummary)
             {
-                context.PartitionPath = Paths.ProcessPartitionPath(process, ts);
+                context.PartitionPath = ContextPaths.ProcessPartitionPath(process, ts);
                 context.Partitions = EmitPartitions(process, context.PartitionPath);
             }
             if(selection.EmitDetail)
             {
-                context.RegionPath = Paths.MemoryRegionPath(process, ts);
+                context.RegionPath = ContextPaths.MemoryRegionPath(process, ts);
                 context.Regions = EmitRegions(process, context.RegionPath);
             }
             if(selection.EmitDump)

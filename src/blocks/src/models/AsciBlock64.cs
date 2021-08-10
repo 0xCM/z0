@@ -14,6 +14,8 @@ namespace Z0
     using A = AsciBlock64;
     using B = ByteBlock64;
 
+    using api = AsciBlocks;
+
     /// <summary>
     /// Defines 64 bytes of storage
     /// </summary>
@@ -48,6 +50,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator B(A src)
             => @as<A,B>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator A(ReadOnlySpan<AsciCode> src)
+            => api.load(src, out A _);
 
         public static A Empty => default;
     }

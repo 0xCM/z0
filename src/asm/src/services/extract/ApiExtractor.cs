@@ -29,7 +29,7 @@ namespace Z0
 
         Index<ApiHostDataset> CollectedDatasets;
 
-        ApiPackArchive Paths;
+        ApiPackArchive PackArchive;
 
         byte[] Buffer;
 
@@ -59,8 +59,8 @@ namespace Z0
 
         void ClearTargets()
         {
-            Paths.HexPackRoot().Clear();
-            Paths.AsmCaptureRoot().Clear(true);
+            PackArchive.HexPackRoot().Clear();
+            PackArchive.AsmCaptureRoot().Clear(true);
         }
 
         public void ExtractParts()
@@ -77,7 +77,7 @@ namespace Z0
         void EmitAnalyses(IApiPack pack)
         {
             if(pack.ExtractSettings.Analyze)
-                Wf.AsmAnalyzer().Analyze(SortedRoutines, Paths);
+                Wf.AsmAnalyzer().Analyze(SortedRoutines, PackArchive);
         }
 
         void RunWorkflow(IApiPack pack)
@@ -103,7 +103,7 @@ namespace Z0
         internal ApiCollection Run(ApiExtractChannel receivers, IApiPack pack)
         {
             Channel = receivers;
-            Paths = ApiPackArchive.create(pack.Root);
+            PackArchive = ApiPackArchive.create(pack.Root);
             RedirectEmissions("capture", pack.Root);
             RunWorkflow(pack);
             return CollectAll();

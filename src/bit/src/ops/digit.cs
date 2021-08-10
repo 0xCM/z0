@@ -12,7 +12,7 @@ namespace Z0
     partial struct bit
     {
         [MethodImpl(Inline), Op]
-        public static BinaryDigit digit(bit src)
-            => (BinaryDigit)(byte)src;
+        public static BinaryDigitValue digit(bit src)
+            => (BinaryDigitValue)(byte)src;
     }
 }

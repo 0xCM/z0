@@ -8,25 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    using X = HexDigitFacets;
-
-    partial struct Hex
+    partial struct SymbolicQuery
     {
         /// <summary>
-        /// Determines whether a character corresponds to one of the uppercase hex code characters
+        /// Tests whether a specified character is the ':' character
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool upper(AsciCode c)
-            => (HexDigitCode)c >= X.MinLetterCodeU && (HexDigitCode)c <= X.MaxLetterCodeU;
+        public static bit colon(char c)
+            => (char)AsciCode.Colon == c;
 
         /// <summary>
-        /// Determines whether a character corresponds to one of the uppercase hex code characters
+        /// Tests whether a specified code represents the ':' character
         /// </summary>
-        /// <param name="c">The character to test</param>
+        /// <param name="c">The code to test</param>
         [MethodImpl(Inline), Op]
-        public static bool upper(char c)
-            => upper((AsciCode)c);
+        public static bit colon(AsciCode c)
+            => AsciCode.Colon == c;
     }
 }

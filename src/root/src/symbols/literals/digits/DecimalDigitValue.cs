@@ -8,7 +8,7 @@ namespace Z0
     /// Defines literals that correspond to base-10 digits
     /// </summary>
     [CodeProvider]
-    public enum DecimalDigit : byte
+    public enum DecimalDigitValue : byte
     {
         /// <summary>
         /// Specifies the absence of a digit

@@ -13,7 +13,7 @@ namespace Z0
     {
         public Index<ProcessMemoryRegion> LoadRegions()
         {
-            var paths = Paths.MemoryRegionPaths();
+            var paths = ContextPaths.MemoryRegionPaths();
             if(paths.Length != 0)
             {
                 var path = paths[paths.Length - 1];

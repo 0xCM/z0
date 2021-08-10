@@ -19,7 +19,7 @@ namespace Z0
         public Index<ProcessPartition> EmitPartitions(Process process, Timestamp ts)
         {
             var summaries = ImageMemory.partitions(ImageMemory.locate(process));
-            var dst = Paths.ProcessPartitionPath(process, ts);
+            var dst = ContextPaths.ProcessPartitionPath(process, ts);
             EmitPartitions(summaries,dst);
             return summaries;
         }
@@ -27,7 +27,7 @@ namespace Z0
         public Index<ProcessPartition> EmitPartitions(Process process, Timestamp ts, FS.FolderPath dir)
         {
             var summaries = ImageMemory.partitions(ImageMemory.locate(process));
-            var dst = Paths.ProcessPartitionPath(dir, process, ts);
+            var dst = ContextPaths.ProcessPartitionPath(dir, process, ts);
             EmitPartitions(summaries, dst);
             return summaries;
         }

@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool scalar(AsciCode c)
-            => (HexCode)c >= X.MinScalarCode && (HexCode)c <= X.MaxScalarCode;
+            => (HexDigitCode)c >= X.MinScalarCode && (HexDigitCode)c <= X.MaxScalarCode;
 
         /// <summary>
         /// Determines whether a character corresponds to one of the lower hex codes

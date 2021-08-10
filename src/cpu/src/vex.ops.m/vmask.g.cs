@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="index">An integer between 0 and 7</param>
         [MethodImpl(Inline), MoveIMask, Closures(Closure)]
-        public static ushort vmask16u<T>(Vector128<T> src, [Imm] HexDigit index)
+        public static ushort vmask16u<T>(Vector128<T> src, [Imm] HexDigitValue index)
             where T : unmanaged
                 => (ushort)MoveMask(v8u(cpu.vsll(v64u(src), (byte)(7 - index))));
     }

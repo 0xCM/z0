@@ -5,88 +5,94 @@
 namespace Z0
 {
     /// <summary>
-    /// Defines literals that correspond to the base-16 digits
+    /// Defines the symbols that represent lowercase base-16 digits
     /// </summary>
-    public enum HexDigit : byte
+    [SymSource]
+    public enum HexLowerSym : ushort
     {
         /// <summary>
-        /// Specifies 0 base 16
+        /// The unprintable symbol
         /// </summary>
-        x0 = 0x0,
+        None = 0,
 
         /// <summary>
-        /// Specifies 1 base 16
+        /// Specifies 0 base 16, asci code 48
         /// </summary>
-        x1 = 0x1,
+        x0 = '0',
 
         /// <summary>
-        /// Specifies 2 base 16
+        /// Specifies 1 base 16, asci code 49
         /// </summary>
-        x2 = 0x2,
+        x1 = '1',
 
         /// <summary>
-        /// Specifies 3 base 16
+        /// Specifies 2 base 16, asci code 50
         /// </summary>
-        x3 = 0x3,
+        x2 = '2',
 
         /// <summary>
-        /// Specifies 4 base 16
+        /// Specifies 3 base 16, asci code 51
         /// </summary>
-        x4 = 0x4,
+        x3 = '3',
+
+        /// <summary>
+        /// Specifies 4 base 16, asci code 52
+        /// </summary>
+        x4 = '4',
 
         /// <summary>
         /// Specifies 5 base 16
         /// </summary>
-        x5 = 0x5,
+        x5 = '5',
 
         /// <summary>
         /// Specifies 6 base 16
         /// </summary>
-        x6 = 0x6,
+        x6 = '6',
 
         /// <summary>
         /// Specifies 7 base 16
         /// </summary>
-        x7 = 0x7,
+        x7 = '7',
 
         /// <summary>
         /// Specifies 8 base 16
         /// </summary>
-        x8 = 0x8,
+        x8 = '8',
 
         /// <summary>
         /// Specifies 9 base 16
         /// </summary>
-        x9 = 0x9,
+        x9 = '9',
 
         /// <summary>
-        /// Specifies 10 base 16
+        /// Specifies 10 base 16, asci code 97
         /// </summary>
-        A = 0xA,
+        a = 'a',
 
         /// <summary>
-        /// Specifies 11 base 16
+        /// Specifies 10 base 16, asci code 98
         /// </summary>
-        B = 0xB,
+        b = 'b',
 
         /// <summary>
-        /// Specifies 12 base 16
+        /// Specifies 10 base 16, asci code 99
         /// </summary>
-        C = 0xC,
+        c = 'c',
 
         /// <summary>
-        /// Specifies 13 base 16
+        /// Specifies 10 base 16, asci code 100
         /// </summary>
-        D = 0xD,
+        d = 'd',
 
         /// <summary>
-        /// Specifies 14 base 16
+        /// Specifies 10 base 16, asci code 101
         /// </summary>
-        E = 0xE,
+        e = 'e',
 
         /// <summary>
-        /// Specifies 15 base 16
+        /// Specifies 10 base 16, asci code 102
         /// </summary>
-        F = 0xF,
+        f = 'f',
     }
 }

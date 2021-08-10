@@ -6,8 +6,8 @@ namespace Z0
 {
     public enum PathSeparator : ushort
     {
-        FS = AsciCharSymbol.FS,
+        FS = '/',
 
-        BS = AsciCharSymbol.BS,
+        BS = '\\',
     }
 }

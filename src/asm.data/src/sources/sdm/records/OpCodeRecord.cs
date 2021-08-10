@@ -5,13 +5,14 @@
 namespace Z0.Asm
 {
     using System;
-
     using System.Runtime.InteropServices;
+
+    using static Root;
 
     partial struct SdmRecords
     {
         [StructLayout(LayoutKind.Sequential), Record(TableId)]
-        public struct OpCodeRecord : IRecord<OpCodeRecord>
+        public struct OpCodeRecord : IRecord<OpCodeRecord>, IComparable<OpCodeRecord>
         {
             public const string TableId = "sdm.opcodes";
 
@@ -51,6 +52,9 @@ namespace Z0.Asm
                     10,10,10,10,
                     16,6,6,6,6,
                     255};
+
+            public int CompareTo(OpCodeRecord src)
+                => Sig.String.CompareTo(src.Sig.String, NoCase);
         }
     }
 }

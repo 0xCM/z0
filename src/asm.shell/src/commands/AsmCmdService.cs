@@ -63,7 +63,6 @@ namespace Z0.Asm
 
         CliMemoryMap ResPack;
 
-
         IPolyrand Random;
 
         IWorkspace ApiWs;
@@ -212,8 +211,20 @@ namespace Z0.Asm
         FS.FolderPath ProjectHome(ProjectId id)
             => ProjectWs.Home(id);
 
+        FS.Files Files()
+            => State.Files();
+
         FS.Files Files(FS.FileExt ext)
             => State.Files().Where(f => f.Is(ext));
+
+        FS.Files Files(FS.FileExt a, FS.FileExt b)
+            => State.Files().Where(f => f.Is(a) || f.Is(b));
+
+        FS.Files Files(FS.FileExt a, FS.FileExt b, FS.FileExt c)
+            => State.Files().Where(f => f.Is(a) || f.Is(b) || f.Is(c));
+
+        FS.Files Files(FS.FileExt a, FS.FileExt b, FS.FileExt c, FS.FileExt d)
+            => State.Files().Where(f => f.Is(a) || f.Is(b) || f.Is(c) || f.Is(d));
 
         FS.FilePath TablePath<T>()
             where T : struct

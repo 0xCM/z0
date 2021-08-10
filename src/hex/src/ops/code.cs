@@ -22,8 +22,8 @@ namespace Z0
         /// <param name="index">The digit value</param>
         /// <remarks>movzx eax,dl -> movsxd rax,eax -> mov rdx,28b57e0aca9h -> movzx eax,byte ptr [rax+rdx] </remarks>
         [MethodImpl(Inline), Op]
-        public static HexCode code(UpperCased @case, HexDigit digit)
-            => (HexCode)skip(H.UpperCodes, (byte)digit);
+        public static HexDigitCode code(UpperCased @case, HexDigitValue digit)
+            => (HexDigitCode)skip(H.UpperCodes, (byte)digit);
 
         /// <summary>
         /// Returns the lower-case hex code for a specified digit
@@ -32,23 +32,23 @@ namespace Z0
         /// <param name="index">The digit value</param>
         /// <remarks>movzx eax,dl -> movsxd rax,eax -> mov rdx,28b57e0aed9h -> movzx eax,byte ptr [rax+rdx]</remarks>
         [MethodImpl(Inline), Op]
-        public static HexCode code(LowerCased @case, HexDigit digit)
-            => (HexCode)skip(H.LowerCodes, (byte)digit);
+        public static HexDigitCode code(LowerCased @case, HexDigitValue digit)
+            => (HexDigitCode)skip(H.LowerCodes, (byte)digit);
 
         /// <summary>
         /// Returns the hex character code for a specified value of at most 4 bits
         /// </summary>
         /// <param name="src">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
-        public static HexCodeUp code(N4 n, UpperCased upper, byte src)
-            => (HexCodeUp)skip(first(UpperHexDigits), src);
+        public static HexUpperCode code(N4 n, UpperCased upper, byte src)
+            => (HexUpperCode)skip(first(UpperHexDigits), src);
 
         /// <summary>
         /// Returns the hex character code for a <see cref='uint4'/> value
         /// </summary>
         /// <param name="src">The value to be hex-encoded</param>
         [MethodImpl(Inline), Op]
-        public static HexCodeLo code(N4 n, LowerCased lower, byte src)
-            => (HexCodeLo)skip(first(LowerHexDigits), src);
+        public static HexLowerCode code(N4 n, LowerCased lower, byte src)
+            => (HexLowerCode)skip(first(LowerHexDigits), src);
    }
 }

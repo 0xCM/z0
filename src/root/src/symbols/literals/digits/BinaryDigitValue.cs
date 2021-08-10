@@ -5,24 +5,24 @@
 namespace Z0
 {
     /// <summary>
-    /// Defines the symbols that represent the base-2 digits
+    /// Defines literals that correspond to base-2 digits
     /// </summary>
-    [SymSource]
-    public enum BinarySym : ushort
+    [CodeProvider]
+    public enum BinaryDigitValue : byte
     {
         /// <summary>
-        /// The symbolic void
+        /// Specifies the absence of a digit
         /// </summary>
-        None = 0,
+        None = 0xFF,
 
         /// <summary>
-        /// Specifies 0 base 2, asci code 48
+        /// Specifies 0 base 2
         /// </summary>
-        b0 = '0',
+        b0 = 0,
 
         /// <summary>
-        /// Specifies 1 base 2, asci code 49
+        /// Specifies 1 base 2
         /// </summary>
-        b1 = '1',
+        b1 = 1,
     }
 }

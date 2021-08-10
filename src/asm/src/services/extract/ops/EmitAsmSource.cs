@@ -18,7 +18,7 @@ namespace Z0
             var count = (uint)src.Length;
             if(count == 0)
                 return 0;
-            var dst = Paths.AsmSrcPath(host);
+            var dst = PackArchive.AsmSrcPath(host);
             var flow = EmittingFile(dst);
             using var writer = dst.Writer();
             for(var i=0; i<count; i++)

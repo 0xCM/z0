@@ -89,8 +89,8 @@ namespace Z0.Asm
                 var hex = modrm.Encoded.FormatAsmHex(2);
                 text.copy(hex, ref k, dst);
 
-                seek(dst,k++) = (char)AsciControl.CR;
-                seek(dst,k++) = (char)AsciControl.LF;
+                seek(dst,k++) = (char)AsciControlSym.CR;
+                seek(dst,k++) = (char)AsciControlSym.LF;
             }
             return k;
         }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using S = AsciControl;
+    using S = AsciControlSym;
 
     /// <summary>
     /// Defines asci control codes

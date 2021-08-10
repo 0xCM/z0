@@ -2,11 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    public interface IAsciBlock<T> : IDataBlock<T>
-        where T : unmanaged, IAsciBlock<T>
+    public struct ObjDumpLine
     {
-        ref byte First {get;}
+        public Hex64 Offset;
+
+        public AsciBlock32 LabelName;
+
+        public AsmHexCode Encoding;
+
+        public AsciBlock64 Instruction;
     }
 }

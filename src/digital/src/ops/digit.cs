@@ -40,27 +40,27 @@ namespace Z0
             => (DF)c >= DF.First && (DF)c <= DF.Last;
 
         [MethodImpl(Inline), Op]
-        public static BinaryDigit digit(BinarySym s)
-            => (BinaryDigit)((BF)s - BF.First);
+        public static BinaryDigitValue digit(BinaryDigitSym s)
+            => (BinaryDigitValue)((BF)s - BF.First);
 
         [MethodImpl(Inline), Op]
-        public static OctalDigit digit(OctalSym s)
-            => (OctalDigit)(s - OctalSym.o0);
+        public static OctalDigitValue digit(OctalDigitSym s)
+            => (OctalDigitValue)(s - OctalDigitSym.o0);
 
         [MethodImpl(Inline), Op]
-        public static DecimalDigit digit(DecimalSym s)
-            => (DecimalDigit)((DF)s - DF.First);
+        public static DecimalDigitValue digit(DecimalDigitSym s)
+            => (DecimalDigitValue)((DF)s - DF.First);
 
         [MethodImpl(Inline), Op]
-        public static BinaryDigit digit(Base2 @base, char c)
-            => (BinaryDigit)((BF)c - BF.First);
+        public static BinaryDigitValue digit(Base2 @base, char c)
+            => (BinaryDigitValue)((BF)c - BF.First);
 
         [MethodImpl(Inline), Op]
-        public static OctalDigit digit(Base8 @base, char c)
-            => (OctalDigit)((OctalSym)c - OctalSym.o0);
+        public static OctalDigitValue digit(Base8 @base, char c)
+            => (OctalDigitValue)((OctalDigitSym)c - OctalDigitSym.o0);
 
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(Base16 @base, char src)
+        public static HexDigitValue digit(Base16 @base, char src)
             => Hex.digit(src);
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(Base16 @base, LowerCased @case, char src)
+        public static HexDigitValue digit(Base16 @base, LowerCased @case, char src)
             => Hex.digit(@case, src);
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(Base16 @base, UpperCased @case, char src)
+        public static HexDigitValue digit(Base16 @base, UpperCased @case, char src)
             => Hex.digit(@case, src);
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(HexSymLo src)
+        public static HexDigitValue digit(HexLowerSym src)
             => Hex.digit(src);
 
         /// <summary>
@@ -92,12 +92,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
-        public static HexDigit digit(HexSymUp src)
+        public static HexDigitValue digit(HexUpperSym src)
             => Hex.digit(src);
 
         [MethodImpl(Inline), Op]
-        public static DecimalDigit digit(Base10 @base, char c)
-            => (DecimalDigit)((DF)c - DF.First);
+        public static DecimalDigitValue digit(Base10 @base, char c)
+            => (DecimalDigitValue)((DF)c - DF.First);
 
         /// <summary>
         /// Extracts an index-identified encoded digit
@@ -106,8 +106,8 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="index">An integer in the inclusive range [0, 1] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
-        public static DecimalDigit digit(Base10 @base, ushort src, byte index)
-            => (DecimalDigit)(F & (src >> index*4));
+        public static DecimalDigitValue digit(Base10 @base, ushort src, byte index)
+            => (DecimalDigitValue)(F & (src >> index*4));
 
         /// <summary>
         /// Extracts an index-identified encoded digit
@@ -116,8 +116,8 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="index">An integer in the inclusive range [0, 3] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
-        public static DecimalDigit digit(Base10 @base, uint src, byte index)
-            => (DecimalDigit)(F & (src >> index*4));
+        public static DecimalDigitValue digit(Base10 @base, uint src, byte index)
+            => (DecimalDigitValue)(F & (src >> index*4));
 
         /// <summary>
         /// Extracts an index-identified encoded digit
@@ -126,7 +126,7 @@ namespace Z0
         /// <param name="src">The digit source</param>
         /// <param name="index">An integer in the inclusive range [0, 7] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
-        public static DecimalDigit digit(Base10 @base, ulong src, byte index)
-            => (DecimalDigit)(F & (src >> index*4));
+        public static DecimalDigitValue digit(Base10 @base, ulong src, byte index)
+            => (DecimalDigitValue)(F & (src >> index*4));
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     /// Defines the symbols that represent the base-10 digits
     /// </summary>
     [SymSource]
-    public enum DecimalSym : ushort
+    public enum DecimalDigitSym : ushort
     {
         /// <summary>
         /// The code with no substance

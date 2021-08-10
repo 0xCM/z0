@@ -16,6 +16,20 @@ namespace Z0
     [ApiHost]
     public readonly struct AsciBlocks
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T load<T>(ReadOnlySpan<AsciCode> src, out T dst)
+            where T : unmanaged, IAsciBlock<T>
+        {
+            dst = default(T);
+            var count = min(src.Length,dst.Size);
+            ref var target = ref @as<AsciCode>(dst.First);
+            for(var i=0; i<count; i++)
+                seek(target,i) = skip(src,i);
+            return ref dst;
+        }
+
         public static AsciBlock<N> alloc<N>(N n = default)
             where N : unmanaged, ITypeNat
         {

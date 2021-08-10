@@ -16,7 +16,7 @@ namespace Z0
     partial struct Digital
     {
         [Op]
-        public static string format(ReadOnlySpan<BinaryDigit> src)
+        public static string format(ReadOnlySpan<BinaryDigitValue> src)
         {
             Span<char> dst = stackalloc char[src.Length];
             render(src,dst);
@@ -24,14 +24,14 @@ namespace Z0
         }
 
         [Op]
-        public static string format(ReadOnlySpan<DecimalDigit> src)
+        public static string format(ReadOnlySpan<DecimalDigitValue> src)
         {
             Span<char> dst = stackalloc char[src.Length];
             render(src,dst);
             return text.format(dst);
         }
 
-        public static string format<C>(C @case, ReadOnlySpan<HexDigit> src)
+        public static string format<C>(C @case, ReadOnlySpan<HexDigitValue> src)
             where C : unmanaged, ILetterCase
         {
             Span<char> buffer = stackalloc char[src.Length];
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static string format<C>(C @case, ReadOnlySpan<HexDigit> src, Span<char> buffer)
+        public static string format<C>(C @case, ReadOnlySpan<HexDigitValue> src, Span<char> buffer)
             where C : unmanaged, ILetterCase
         {
             var count = Hex.render(@case, src, buffer);

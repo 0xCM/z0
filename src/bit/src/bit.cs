@@ -361,11 +361,11 @@ namespace Z0
             => new bit((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryDigit(bit src)
-            => (BinaryDigit)((byte)src);
+        public static implicit operator BinaryDigitValue(bit src)
+            => (BinaryDigitValue)((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator bit(BinaryDigit src)
+        public static implicit operator bit(BinaryDigitValue src)
             => (byte)src;
 
         [MethodImpl(Inline)]

@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static DecimalSym;
+    using static DecimalDigitSym;
 
     /// <summary>
-    /// Defines <see cref='DecimalSym' /> classifiers
+    /// Defines <see cref='DecimalDigitSym' /> classifiers
     /// </summary>
-    [FacetProvider(typeof(DecimalSym))]
+    [FacetProvider(typeof(DecimalDigitSym))]
     public enum DecimalSymFacet : ushort
     {
         /// <summary>

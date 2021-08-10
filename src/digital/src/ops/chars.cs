@@ -90,7 +90,7 @@ namespace Z0
             => chars(base10, src);
 
         [MethodImpl(Inline), Op]
-        public static void chars(ReadOnlySpan<BinaryDigit> src, Span<char> dst)
+        public static void chars(ReadOnlySpan<BinaryDigitValue> src, Span<char> dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)

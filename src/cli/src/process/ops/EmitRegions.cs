@@ -19,7 +19,7 @@ namespace Z0
         public Index<ProcessMemoryRegion> EmitRegions(Process process, Timestamp ts)
         {
             var regions = ImageMemory.regions(process);
-            var dst = Paths.MemoryRegionPath(process,ts);
+            var dst = ContextPaths.MemoryRegionPath(process,ts);
             EmitRegions(regions,dst);
             return regions;
         }
@@ -27,7 +27,7 @@ namespace Z0
         public Index<ProcessMemoryRegion> EmitRegions(Process process, Timestamp ts, FS.FolderPath dir)
         {
             var regions = ImageMemory.regions(process);
-            var dst = Paths.MemoryRegionPath(process, ts, dir);
+            var dst = ContextPaths.MemoryRegionPath(process, ts, dir);
             EmitRegions(regions,dst);
             return regions;
         }

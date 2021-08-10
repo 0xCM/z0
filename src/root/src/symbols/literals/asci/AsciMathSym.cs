@@ -5,7 +5,7 @@
 namespace Z0
 {
     [SymSource]
-    public enum AsciMath : ushort
+    public enum AsciMathSym : ushort
     {
         /// <summary>
         /// The '=' character

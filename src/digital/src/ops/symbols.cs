@@ -13,7 +13,7 @@ namespace Z0
     partial struct Digital
     {
         [MethodImpl(Inline), Op]
-        public static void symbols(ReadOnlySpan<BinaryDigit> src, Span<BinarySym> dst)
+        public static void symbols(ReadOnlySpan<BinaryDigitValue> src, Span<BinaryDigitSym> dst)
         {
             var len = src.Length;
             for(var i = 0u; i<len; i++)
@@ -21,7 +21,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void symbols(ReadOnlySpan<OctalDigit> src, Span<OctalSym> dst)
+        public static void symbols(ReadOnlySpan<OctalDigitValue> src, Span<OctalDigitSym> dst)
         {
             var len = src.Length;
             for(var i = 0u; i<len; i++)
@@ -29,7 +29,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void symbols(ReadOnlySpan<DecimalDigit> src, Span<DecimalSym> dst)
+        public static void symbols(ReadOnlySpan<DecimalDigitValue> src, Span<DecimalDigitSym> dst)
         {
             var len = src.Length;
             for(var i = 0u; i<len; i++)

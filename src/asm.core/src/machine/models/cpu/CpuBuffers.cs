@@ -26,9 +26,9 @@ namespace Z0.Asm
                 where T : unmanaged
                     => new CpuBuffer<N,W,T>(new T[nat64u<N>()]);
 
-            readonly CpuBuffer<N64,W8,HexCode> step;
+            readonly CpuBuffer<N64,W8,HexDigitCode> step;
 
-            readonly CpuBuffer<N64,W8,HexCode> run;
+            readonly CpuBuffer<N64,W8,HexDigitCode> run;
 
             readonly char[] log;
 
@@ -36,19 +36,19 @@ namespace Z0.Asm
             internal CpuBuffers(uint size)
             {
                 log = alloc<char>(size);
-                step = buffer<N64,W8,HexCode>();
-                run = buffer<N64,W8,HexCode>();
+                step = buffer<N64,W8,HexDigitCode>();
+                run = buffer<N64,W8,HexDigitCode>();
             }
 
             [MethodImpl(Inline), Op]
-            public Span<HexCode> Step()
+            public Span<HexDigitCode> Step()
             {
                 step.Clear(w128);
                 return step.Edit;
             }
 
             [MethodImpl(Inline), Op]
-            public Span<HexCode> Run()
+            public Span<HexDigitCode> Run()
                 => run.Edit;
 
             [MethodImpl(Inline), Op]

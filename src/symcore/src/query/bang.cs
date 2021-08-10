@@ -9,24 +9,22 @@ namespace Z0
 
     using static Root;
 
-    using X = HexDigitFacets;
-
-    partial struct Hex
+    partial struct SymbolicQuery
     {
         /// <summary>
-        /// Determines whether a character corresponds to one of the uppercase hex code characters
+        /// Tests whether a specified character is the '!' character
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool upper(AsciCode c)
-            => (HexDigitCode)c >= X.MinLetterCodeU && (HexDigitCode)c <= X.MaxLetterCodeU;
+        public static bit bang(char c)
+            => (char)AsciCode.Bang == c;
 
         /// <summary>
-        /// Determines whether a character corresponds to one of the uppercase hex code characters
+        /// Tests whether a specified code represents the '!' character
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool upper(char c)
-            => upper((AsciCode)c);
+        public static bit bang(AsciCode c)
+            => AsciCode.Bang == c;
     }
 }

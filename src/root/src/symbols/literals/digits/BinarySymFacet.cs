@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static BinarySym;
+    using static BinaryDigitSym;
 
     /// <summary>
-    /// Defines <see cref='BinarySym' /> classiefiers
+    /// Defines <see cref='BinaryDigitSym' /> classiefiers
     /// </summary>
-    [FacetProvider(typeof(BinarySym))]
+    [FacetProvider(typeof(BinaryDigitSym))]
     public enum BinarySymFacet : ushort
     {
         /// <summary>

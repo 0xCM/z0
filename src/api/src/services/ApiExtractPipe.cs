@@ -12,7 +12,7 @@ namespace Z0
 
     public class ApiExtractPipe : AppService<ApiExtractPipe>
     {
-        public FS.Files Paths()
+        public FS.Files RawExtractPaths()
             => Db.RawExtractPaths();
 
         public uint Load(FS.FilePath src, List<ApiExtractBlock> dst)

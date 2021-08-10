@@ -6,8 +6,8 @@ namespace Z0
 {
     public enum OctalSymFacet : ushort
     {
-        First = OctalSym.o0,
+        First = OctalDigitSym.o0,
 
-        Last = OctalSym.o7
+        Last = OctalDigitSym.o7
     }
 }

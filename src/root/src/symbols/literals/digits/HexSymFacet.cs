@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static HexSymLo;
-    using static HexSymUp;
+    using static HexLowerSym;
+    using static HexUpperSym;
 
-    using L = HexSymLo;
+    using L = HexLowerSym;
 
-    [FacetProvider(typeof(HexSym))]
+    [FacetProvider(typeof(HexDigitSym))]
     public enum HexSymFacet : ushort
     {
         /// <summary>

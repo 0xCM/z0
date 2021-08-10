@@ -8,15 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    partial struct CharBlocks
+    partial struct SymbolicQuery
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T init<T>(ReadOnlySpan<char> src, out T dst)
-            where T : unmanaged, ICharBlock<T>
-        {
-            dst = default;
-            return ref text.copy(src, ref dst);
-        }
+        [MethodImpl(Inline), Op]
+        public static bit lt(char c)
+            => (char)AsciCode.Lt == c;
+
+        [MethodImpl(Inline), Op]
+        public static bit lt(AsciCode c)
+            => AsciCode.Lt == c;
     }
 }
