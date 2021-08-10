@@ -101,7 +101,10 @@ namespace Z0
         [Symbol(dmp, "A windows dump file")]
         Dmp,
 
-        [Symbol(bin, "A binary file of some sort, usually flat")]
+        /// <summary>
+        /// A binary file that contains a sequence of bytes
+        /// </summary>
+        [Symbol(bin, "A binary file that contains a sequence of bytes")]
         Bin,
 
         [Symbol(cmd, "A windows batch file")]
@@ -124,5 +127,8 @@ namespace Z0
 
         [Symbol(cpp, "A cpp source file")]
         Cpp,
+
+        [Symbol(h, "A C/C++ header file")]
+        H,
     }
 }

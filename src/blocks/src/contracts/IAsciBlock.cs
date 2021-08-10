@@ -4,10 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct RP
+    public interface IAsciBlock<T> : IDataBlock<T>
+        where T : unmanaged, IAsciBlock<T>
     {
-        [Op]
-        public static string digits(byte n)
-            => embrace($"0:D{n}");
+
     }
 }

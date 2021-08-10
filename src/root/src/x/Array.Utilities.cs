@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost]
+    //[ApiHost]
     public readonly struct ArrayUtil
     {
         const NumericKind Closure = UnsignedInts;

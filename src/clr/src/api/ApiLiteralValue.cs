@@ -4,34 +4,29 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct TypedFile<T>
-        where T : struct, IFileType<T>
+    public readonly struct ApiLiteralValue
     {
-        public FS.FilePath Location {get;}
-
-        public T Type => default;
+        public string Data {get;}
 
         [MethodImpl(Inline)]
-        public TypedFile(FS.FilePath path)
+        public ApiLiteralValue(string src)
         {
-            Location = path;
-        }
-
-        public FS.PathPart Name
-        {
-            [MethodImpl(Inline)]
-            get => Location.Name;
+            Data = src;
         }
 
         public string Format()
-            => Location.ToUri().Format();
+            => RP.ticks(Data);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+
+        public static implicit operator ApiLiteralValue(string src)
+            => new ApiLiteralValue(src);
     }
 }

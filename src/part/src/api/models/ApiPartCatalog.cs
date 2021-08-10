@@ -85,8 +85,8 @@ namespace Z0
         public bool IsEmpty
             => (OperationHosts.Length + ApiTypes.Count) == 0;
 
-        public FS.FilePath ComponentPath
-            => FS.path(Component.Location);
+        public string ComponentPath
+            => FS.path(Component.Location).Format(PathSeparator.BS);
 
         public bool Host(ApiHostUri uri, out IApiHost host)
             => ApiHosts.Host(uri, out host);

@@ -4,8 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiExtractReader
+    partial struct RP
     {
-        Index<ApiExtractBlock> Read(FS.FilePath src);
+        /// <summary>
+        /// Defines a literal that represents a null value
+        /// </summary>
+        public const string Null = "<null>";
     }
 }

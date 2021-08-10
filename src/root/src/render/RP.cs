@@ -8,16 +8,10 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost]
+    [ApiHost, LiteralProvider]
     public readonly partial struct RP
     {
-        [MethodImpl(Inline), Op]
-        public static string pad(int pad)
-            => "{0," + pad.ToString() + "}";
-
-        [MethodImpl(Inline), Op]
-        public static string pad(uint slot, int pad)
-            => "{" + slot.ToString() + "," + pad.ToString() + "}";
+        const NumericKind Closure = UnsignedInts;
 
         /// <summary>
         /// The end-of-line escape sequence
@@ -33,10 +27,6 @@ namespace Z0
         /// </summary>
         [RenderPattern("{0} -> {1}")]
         public const string ArrowAxB = "{0} -> {1}";
-
-        [MethodImpl(Inline)]
-        static object denullify(object src)
-            => src ?? "<null>";
 
     }
 }

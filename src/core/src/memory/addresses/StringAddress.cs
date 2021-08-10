@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
@@ -15,6 +16,8 @@ namespace Z0
 
     public readonly struct StringAddress : IAddressable
     {
+        public const uint StorageSize = MemoryAddress.StorageSize;
+
         [MethodImpl(Inline), Op]
         public static uint length(StringAddress src)
         {

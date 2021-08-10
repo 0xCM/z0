@@ -10,13 +10,8 @@ namespace Z0
 
     partial struct RP
     {
-        [Op]
-        public static string enquote(string src)
-        {
-            if(!string.IsNullOrWhiteSpace(src))
-                return string.Concat(Chars.Quote, src, Chars.Quote);
-            else
-                return EmptyString;
-        }
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string denullify<T>(T src)
+            => src is null ? Null : src.ToString();
     }
 }

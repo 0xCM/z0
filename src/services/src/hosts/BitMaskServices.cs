@@ -12,7 +12,6 @@ namespace Z0
 
     using NBI = NumericBaseIndicator;
 
-
     public sealed class BitMaskServices : AppService<BitMaskServices>
     {
         public static Index<BitMaskInfo> descriptions(Type src)

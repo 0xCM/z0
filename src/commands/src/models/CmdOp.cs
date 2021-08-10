@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct CmdOp
     {
-        readonly ByteBlock32 _Name;
+        readonly AsciBlock32 _Name;
 
         public CliToken MethodId {get;}
 

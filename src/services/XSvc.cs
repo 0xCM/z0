@@ -10,6 +10,10 @@ namespace Z0
     public static class XSvc
     {
         [Op]
+        public static BitMaskServices ApiBitMasks(this IWfRuntime wf)
+            => Svc.BitMaskServices.create(wf);
+
+        [Op]
         public static HexCsvReader HexCsvReader(this IWfRuntime wf)
             => Svc.HexCsvReader.create(wf);
 
@@ -54,10 +58,15 @@ namespace Z0
 
         [Op]
         public static ApiCaptureArchive ApiCaptureArchive(this IWfRuntime wf)
-            => Z0.ApiCaptureArchive.create(wf);
+            => Svc.ApiCaptureArchive.create(wf);
 
         [Op]
         public static ApiPackages ApiPackages(this IEnvPaths src)
             => src.PackageRoot();
+
+
+        [Op]
+        public static SymServices SymServices(this IWfRuntime wf)
+            => Svc.SymServices.create(wf);
     }
 }

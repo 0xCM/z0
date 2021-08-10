@@ -75,7 +75,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in ByteBlock4 src)
+        public static ReadOnlySpan<char> decode(in AsciBlock4 src)
         {
             var storage = 0ul;
             ref var dst = ref @as<ulong,char>(storage);
@@ -88,28 +88,28 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void decode(in ByteBlock8 src, ref char dst)
+        public static void decode(in AsciBlock8 src, ref char dst)
         {
             var decoded = vinflate256x16u(vbytes(w128, src));
             vstore(decoded.GetLower(), ref @as<char,ushort>(dst));
         }
 
         [MethodImpl(Inline), Op]
-        public static void decode(in ByteBlock16 src, ref char dst)
+        public static void decode(in AsciBlock16 src, ref char dst)
         {
            var decoded = vinflate256x16u(src.First);
            vstore(decoded, ref @as<char,ushort>(dst));
         }
 
         [MethodImpl(Inline), Op]
-        public static void decode(in ByteBlock32 src, ref char dst)
+        public static void decode(in AsciBlock32 src, ref char dst)
         {
             decode(src.Lo, ref dst);
             decode(src.Hi, ref seek(dst, 16));
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in ByteBlock32 src)
+        public static ReadOnlySpan<char> decode(in AsciBlock32 src)
         {
             var dst = CharBlock32.Null;
             decode(src, ref dst.First);
@@ -121,7 +121,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> decode(in ByteBlock64 src)
+        public static ReadOnlySpan<char> decode(in AsciBlock64 src)
         {
             ref var storage = ref src.First;
             var v1 = vload(w256, storage);
@@ -134,34 +134,34 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ByteBlock4 encode(N4 n, ReadOnlySpan<char> src)
+        public static AsciBlock4 encode(N4 n, ReadOnlySpan<char> src)
         {
-            var dst = ByteBlock4.Empty;
+            var dst = AsciBlock4.Empty;
             var count = min(n,src.Length);
             encode(src, slice(dst.Bytes,0,count));
             return dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ByteBlock8 encode(N8 n, ReadOnlySpan<char> src)
+        public static AsciBlock8 encode(N8 n, ReadOnlySpan<char> src)
         {
-            var dst = ByteBlock8.Empty;
+            var dst = AsciBlock8.Empty;
             var count = min(n,src.Length);
             encode(src, slice(dst.Bytes,0,count));
             return dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ByteBlock16 encode(N16 n, ReadOnlySpan<char> src)
+        public static AsciBlock16 encode(N16 n, ReadOnlySpan<char> src)
         {
-            var dst = ByteBlock16.Empty;
+            var dst = AsciBlock16.Empty;
             var count = min(n,src.Length);
             encode(src, slice(dst.Bytes,0,count));
             return dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref ByteBlock16 encode(ReadOnlySpan<char> src, out ByteBlock16 dst)
+        public static ref AsciBlock16 encode(ReadOnlySpan<char> src, out AsciBlock16 dst)
         {
             dst = default;
             var count = min(ByteBlock16.N, src.Length);
@@ -170,16 +170,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ByteBlock32 encode(N32 n, ReadOnlySpan<char> src)
+        public static AsciBlock32 encode(N32 n, ReadOnlySpan<char> src)
         {
-            var dst = ByteBlock32.Empty;
+            var dst = AsciBlock32.Empty;
             var count = min(n,src.Length);
             encode(src, slice(dst.Bytes,0,count));
             return dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref ByteBlock32 encode(ReadOnlySpan<char> src, out ByteBlock32 dst)
+        public static ref AsciBlock32 encode(ReadOnlySpan<char> src, out AsciBlock32 dst)
         {
             dst = default;
             var count = min(ByteBlock32.N, src.Length);

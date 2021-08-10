@@ -371,7 +371,7 @@ namespace Z0.Asm
             var catalog = Wf.ApiCatalog.PartCatalogs(part).Single();
             var assembly = catalog.Component;
             var module = assembly.ManifestModule;
-            using var source = modules.SymbolSource(catalog.ComponentPath);
+            using var source = modules.SymbolSource(FS.path(catalog.ComponentPath));
             Wf.Row(string.Format("{0} | {1}", source.PePath, source.PdbPath));
 
             var pdbReader = Wf.PdbReader(source);
@@ -406,23 +406,6 @@ namespace Z0.Asm
             Wf.EmittedFile(emitting, counter);
         }
 
-        void CheckProvidedLiterals()
-        {
-            var service = Wf.ApiTypes();
-            var providers = service.LiteralProviders();
-            var count = providers.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var provider = ref skip(providers,i);
-                Wf.Row(provider.Name);
-                var literals = service.Literals(provider);
-                for(var j=0; j<literals.Length; j++)
-                {
-                    ref readonly var literal = ref skip(literals,j);
-                    Wf.Row(literal.Format());
-                }
-            }
-        }
 
         public static Outcome require(string a, string b)
         {

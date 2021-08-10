@@ -6,8 +6,14 @@ namespace Z0
 {
     partial struct RP
     {
-        [Op]
-        public static string digits(byte n)
-            => embrace($"0:D{n}");
+        /// <summary>
+        /// Defines the '`' literal
+        /// </summary>
+        public const string Tick = "`";
+
+        /// <summary>
+        /// Defines the '``' literal
+        /// </summary>
+        public const string Ticks = "``";
     }
 }

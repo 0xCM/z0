@@ -7,31 +7,30 @@ namespace Z0
     [LiteralProvider]
     public readonly struct FileKindNames
     {
-        const string sep = ".";
-
-        const string x = nameof(x);
-
-        const string p = nameof(p);
-
-        /// <summary>
-        /// Defines the 'txt' literal
-        /// </summary>
-        public const string txt = nameof(txt);
-
         /// <summary>
         /// Defines the 'alg' literal
         /// </summary>
         public const string alg = nameof(alg);
 
         /// <summary>
-        /// Defines the 'il' literal
-        /// </summary>
-        public const string il = nameof(il);
-
-        /// <summary>
         /// Defines the 'asm' literal
         /// </summary>
         public const string asm = nameof(asm);
+
+        /// <summary>
+        /// Defines the 'bat' literal
+        /// </summary>
+        public const string bat = nameof(bat);
+
+        /// <summary>
+        /// Defines the 'bin' literal
+        /// </summary>
+        public const string bin = nameof(bin);
+
+        /// <summary>
+        /// Defines the 'c' literal
+        /// </summary>
+        public const string c = nameof(c);
 
         /// <summary>
         /// Defines the 'csv' literal
@@ -49,9 +48,19 @@ namespace Z0
         public const string cil = nameof(cil);
 
         /// <summary>
+        /// Defines the 'config' literal
+        /// </summary>
+        public const string config = nameof(config);
+
+        /// <summary>
         /// Defines the 'cpp' literal
         /// </summary>
         public const string cpp = nameof(cpp);
+
+        /// <summary>
+        /// Defines the 'def' literal
+        /// </summary>
+        public const string def = nameof(def);
 
         /// <summary>
         /// Defines the 'dll' literal
@@ -59,9 +68,19 @@ namespace Z0
         public const string dll = nameof(dll);
 
         /// <summary>
-        /// Defines the 'xpack' literal
+        /// Defines the 'dot' literal
         /// </summary>
-        public const string xpack = nameof(xpack);
+        public const string dot = nameof(dot);
+
+        /// <summary>
+        /// Defines the 'i' literal
+        /// </summary>
+        public const string i = nameof(i);
+
+        /// <summary>
+        /// Defines the 'il' literal
+        /// </summary>
+        public const string il = nameof(il);
 
         /// <summary>
         /// Defines the 'json' literal
@@ -69,29 +88,14 @@ namespace Z0
         public const string json = nameof(json);
 
         /// <summary>
-        /// Defines the 'config' literal
-        /// </summary>
-        public const string config = nameof(config);
-
-        /// <summary>
         /// Defines the 'pdb' literal
         /// </summary>
         public const string pdb = nameof(pdb);
 
         /// <summary>
-        /// Defines the 'xml' literal
-        /// </summary>
-        public const string xml = nameof(xml);
-
-        /// <summary>
         /// Defines the 'exe' literal
         /// </summary>
         public const string exe = nameof(exe);
-
-        /// <summary>
-        /// Defines the 'bin' literal
-        /// </summary>
-        public const string bin = nameof(bin);
 
         /// <summary>
         /// Defines the 'hex' literal
@@ -107,6 +111,11 @@ namespace Z0
         /// Defines the 'obj' literal
         /// </summary>
         public const string obj = nameof(obj);
+
+        /// <summary>
+        /// Defines the 'txt' literal
+        /// </summary>
+        public const string txt = nameof(txt);
 
         /// <summary>
         /// Defines the 'status' literal
@@ -132,16 +141,6 @@ namespace Z0
         /// Defines the 'md' literal
         /// </summary>
         public const string md = nameof(md);
-
-        /// <summary>
-        /// Defines the 'x.csv' literal
-        /// </summary>
-        public const string xcsv = x + sep + csv;
-
-        /// <summary>
-        /// Defines the 'p.csv' literal
-        /// </summary>
-        public const string pcsv = p + sep + csv;
 
         /// <summary>
         /// Defines the 'idx' literal
@@ -184,21 +183,6 @@ namespace Z0
         public const string cfg = nameof(cfg);
 
         /// <summary>
-        /// Defines the 'deps.json' literal
-        /// </summary>
-        public const string djson = deps + sep + json;
-
-        /// <summary>
-        /// Defines the 'config.json' literal
-        /// </summary>
-        public const string cjson = config + sep + json;
-
-        /// <summary>
-        /// Defines the 'bat' literal
-        /// </summary>
-        public const string bat = nameof(bat);
-
-        /// <summary>
         /// Defines the 'ps1' literal
         /// </summary>
         public const string ps1 = nameof(ps1);
@@ -207,11 +191,6 @@ namespace Z0
         /// Defines the 'dmp' literal
         /// </summary>
         public const string dmp = nameof(dmp);
-
-        /// <summary>
-        /// Defines the 'zip' literal
-        /// </summary>
-        public const string zip = nameof(zip);
 
         /// <summary>
         /// Defines the 'sh' literal
@@ -229,22 +208,11 @@ namespace Z0
         public const string settings = nameof(settings);
 
         /// <summary>
-        /// Defines the 'dot' literal
-        /// </summary>
-        public const string dot = nameof(dot);
-
-        /// <summary>
         /// Defines the 'sql' literal
         /// </summary>
         public const string sql = nameof(sql);
 
-        public const string ildata = il + sep + csv;
-
         /// <summary>
-        /// Defines the 'def' literal
-        /// </summary>
-        public const string def = nameof(def);
-
         /// <summary>
         /// Defines the 'help' literal
         /// </summary>
@@ -255,5 +223,49 @@ namespace Z0
         /// </summary>
         public const string list = nameof(list);
 
+        /// <summary>
+        /// Defines the 'xpack' literal
+        /// </summary>
+        public const string xpack = nameof(xpack);
+
+        /// <summary>
+        /// Defines the 'xml' literal
+        /// </summary>
+        public const string xml = nameof(xml);
+
+        /// <summary>
+        /// Defines the 'zip' literal
+        /// </summary>
+        public const string zip = nameof(zip);
+
+        const string sep = ".";
+
+        const string x = nameof(x);
+
+        const string p = nameof(p);
+
+        /// <summary>
+        /// Defines the 'deps.json' literal
+        /// </summary>
+        public const string djson = deps + sep + json;
+
+        /// <summary>
+        /// Defines the 'config.json' literal
+        /// </summary>
+        public const string cjson = config + sep + json;
+
+        /// il.csv
+        /// </summary>
+        public const string ildata = il + sep + csv;
+
+        /// <summary>
+        /// Defines the 'x.csv' literal
+        /// </summary>
+        public const string xcsv = x + sep + csv;
+
+        /// <summary>
+        /// Defines the 'p.csv' literal
+        /// </summary>
+        public const string pcsv = p + sep + csv;
     }
 }

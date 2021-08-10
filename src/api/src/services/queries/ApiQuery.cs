@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
+    using static core;
 
     [ApiHost]
     public partial class ApiQuery : AppService<ApiQuery>
@@ -62,25 +63,6 @@ namespace Z0
         [Op]
         public static MethodInfo[] methods(in ApiCompleteType src, HashSet<string> exclusions)
             => src.HostType.DeclaredMethods().Unignored().NonGeneric().Exclude(exclusions);
-
-        [Op]
-        public static ApiHostInfo hostinfo(Type t)
-        {
-            var methods = t.DeclaredMethods();
-            return new ApiHostInfo(t, t.ApiHostUri(), t.Assembly.Id(), methods, index(methods));
-        }
-
-        [Op]
-        public static ApiHostInfo hostinfo<T>()
-            => hostinfo(typeof(T));
-
-        /// <summary>
-        /// Searches an assembly for types tagged with the <see cref="FunctionalServiceAttribute"/>
-        /// </summary>
-        /// <param name="src">The assembly to search</param>
-        [Op]
-        public static Type[] svchosts(Assembly src)
-            => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>());
 
         [Op]
         static Dictionary<string,MethodInfo> index(Index<MethodInfo> methods)

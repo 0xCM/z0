@@ -57,6 +57,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string enclose(char content, string left, string right)
             => string.Concat(left, content, right);
-
     }
 }

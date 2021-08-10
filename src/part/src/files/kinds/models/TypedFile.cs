@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct TypedFile : ITypedFile<TypedFile,FileType>
+    public readonly struct TypedFile
     {
         public FileType Type {get;}
 

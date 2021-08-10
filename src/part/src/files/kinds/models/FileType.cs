@@ -9,20 +9,15 @@ namespace Z0
 
     using static Root;
 
-    using api = FileTypes;
-
-    public readonly struct FileType : IFileType
+    public readonly struct FileType
     {
-        public Type Rep {get;}
-
         public FileKind FileKind {get;}
 
-        public FS.FileExt FileExt {get;}
+        public AsciBlock16 FileExt {get;}
 
         [MethodImpl(Inline)]
-        public FileType(Type rtt, FileKind kind, FS.FileExt ext)
+        public FileType(FileKind kind, AsciBlock16 ext)
         {
-            Rep = rtt;
             FileKind = kind;
             FileExt = ext;
         }
@@ -30,18 +25,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => FileExt.IsEmpty || FileKind == 0;
-        }
-
-        public string Description
-        {
-            get => api.describe(this);
+            get => FileKind == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => FileExt.IsNonEmpty && FileKind != 0;
+            get => FileKind != 0;
         }
 
         public string Format()
@@ -53,10 +43,7 @@ namespace Z0
         public static FileType Empty
         {
             [MethodImpl(Inline)]
-            get => new FileType(typeof(void), FileKind.None, FS.FileExt.Empty);
+            get => new FileType(FileKind.None, AsciBlock16.Empty);
         }
-
-        public string Wildcard()
-            => api.wildcard(this);
     }
 }

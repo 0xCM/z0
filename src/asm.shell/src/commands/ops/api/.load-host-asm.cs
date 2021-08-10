@@ -5,8 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
+
     using static core;
 
     partial class AsmCmdService
@@ -15,7 +14,7 @@ namespace Z0.Asm
         Outcome LoadApiAsm(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = AsmLoader.LoadHostStatements(ApiArchive.StatementTables()).Sort(new HostAsmComparer()).View;
+            var src = AsmLoader.LoadHostStatements(ApiArchive.StatementTables()).Sort().View;
             var count = src.Length;
             var buffer = alloc<AsmDataBlock>(count);
             ref var dst = ref first(buffer);
@@ -43,7 +42,7 @@ namespace Z0.Asm
             return result;
         }
 
-        public void Emit(ReadOnlySpan<AsciCode> src, FS.FilePath dst)
+        void Emit(ReadOnlySpan<AsciCode> src, FS.FilePath dst)
         {
             var emitting = EmittingFile(dst);
             using var writer = dst.AsciWriter();
@@ -63,12 +62,5 @@ namespace Z0.Asm
             }
             EmittedFile(emitting, lines);
         }
-
-    }
-
-    readonly struct HostAsmComparer : IComparer<AsmHostStatement>
-    {
-        public int Compare(AsmHostStatement x, AsmHostStatement y)
-            => x.IP.CompareTo(y.IP);
     }
 }

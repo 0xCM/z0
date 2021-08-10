@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
+
+    using api = ApiLiterals;
 
     /// <summary>
     /// Encodes a literal value and, optionally, it's purpose
@@ -15,38 +17,36 @@ namespace Z0
     /// <remarks>
     /// The <see cref='decimal'/> type is not supported; the <see cref='string'/> type is supported via addressing
     /// </remarks>
-    public readonly struct ProvidedLiteral : ITextual
+    [StructLayout(LayoutKind.Sequential,Pack=1,Size=(int)StorageSize), Blittable(StorageSize)]
+    public readonly struct ApiLiteral : ITextual
     {
+        public const uint StorageSize = 2*StringAddress.StorageSize + PrimalSizes.U64 + PrimalSizes.U8;
+
+        public StringAddress Source {get;}
+
         public StringAddress Name {get;}
 
         public ulong Content {get;}
 
         public ClrLiteralKind Kind {get;}
 
-        public LiteralUsage Usage {get;}
-
         [MethodImpl(Inline)]
-        public ProvidedLiteral(StringAddress name, ulong content, ClrLiteralKind clr, LiteralUsage usage= default)
+        public ApiLiteral(StringAddress source, StringAddress name, ulong content, ClrLiteralKind clr)
         {
+            Source = source;
             Name = name;
             Content = content;
             Kind = clr;
-            Usage = usage;
         }
 
+        public ApiLiteralValue Value()
+            => api.value(this);
+
+        public ApiLiteralSpec Specify()
+            => api.specify(this);
+
         public string Format()
-        {
-            var c = EmptyString;
-            if(Kind == ClrLiteralKind.String)
-            {
-                c = ((StringAddress)Content).Format();
-            }
-            else
-            {
-                c = Content.ToString();
-            }
-            return string.Format("{0,-32} {1}:{2}", Name, c, Kind);
-        }
+            => api.format(this);
 
         public override string ToString()
             => Format();

@@ -12,9 +12,11 @@ namespace Z0
     /// <summary>
     /// Covers a value that can be interpreted as a compile-time literal constant
     /// </summary>
-    public readonly struct ProvidedLiteral<T> : ILiteralValue<T>
+    public readonly struct ApiLiteral<T> : ILiteralValue<T>
         where T : unmanaged, IEquatable<T>
     {
+        public StringAddress Source {get;}
+
         public StringAddress Name {get;}
 
         public T Value {get;}
@@ -24,8 +26,9 @@ namespace Z0
         public LiteralUsage Usage {get;}
 
         [MethodImpl(Inline)]
-        public ProvidedLiteral(StringAddress name, T value, ClrLiteralKind kind, LiteralUsage usage = default)
+        public ApiLiteral(StringAddress source,  StringAddress name, T value, ClrLiteralKind kind, LiteralUsage usage = default)
         {
+            Source = source;
             Name = name;
             Value = value;
             Kind = kind;
@@ -33,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(ProvidedLiteral<T> src)
+        public bool Equals(ApiLiteral<T> src)
             => Value.Equals(src.Value) && Kind == src.Kind && Usage == src.Usage;
 
         [MethodImpl(Inline)]
@@ -47,9 +50,9 @@ namespace Z0
             => Value.GetHashCode();
 
         public override bool Equals(object src)
-            => src is ProvidedLiteral<T> v && Equals(v);
+            => src is ApiLiteral<T> v && Equals(v);
 
-        public static ProvidedLiteral<T> Empty
+        public static ApiLiteral<T> Empty
             => default;
     }
 }

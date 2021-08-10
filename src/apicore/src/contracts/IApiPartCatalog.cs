@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         Index<MethodInfo> Methods {get;}
 
-        FS.FilePath ComponentPath {get;}
+        string ComponentPath {get;}
 
         bool Host(ApiHostUri uri, out IApiHost host);
 

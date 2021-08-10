@@ -47,6 +47,17 @@ namespace Z0
             get => Data.View;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsEmpty;
+        }
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty;
+        }
+
         public string Format()
             => api.format(this);
 
