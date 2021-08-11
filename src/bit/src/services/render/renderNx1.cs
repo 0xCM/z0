@@ -13,7 +13,7 @@ namespace Z0
     partial struct BitRender
     {
         [MethodImpl(Inline), Op]
-        public static uint render(ReadOnlySpan<bit> src, Span<char> dst, uint offset)
+        public static uint renderNx1(ReadOnlySpan<bit> src, Span<char> dst, uint offset)
         {
             var j = 0u;
             var k = min(src.Length + offset, dst.Length);
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void render(ReadOnlySpan<bit> src, Span<char> dst)
+        public static void renderNx1(ReadOnlySpan<bit> src, Span<char> dst)
         {
             var count = min(src.Length,dst.Length);
             for(var i=0u; i<count; i++)
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void render(ReadOnlySpan<bit> src, Span<AsciCode> dst)
+        public static void renderNx1(ReadOnlySpan<bit> src, Span<AsciCode> dst)
         {
             var count = min(src.Length,dst.Length);
             for(var i=0u; i<count; i++)

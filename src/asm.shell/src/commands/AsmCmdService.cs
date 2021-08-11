@@ -11,6 +11,26 @@ namespace Z0.Asm
     using static core;
     using static WsAtoms;
 
+    public class AsmShellState : ShellState
+    {
+        Index<SdmOpCodeRecord> _OpCodes;
+
+        public AsmShellState()
+        {
+            _OpCodes = array<SdmOpCodeRecord>();
+        }
+
+        [MethodImpl(Inline)]
+        public void OpCodes(SdmOpCodeRecord[] src)
+        {
+            _OpCodes = src;
+        }
+
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<SdmOpCodeRecord> OpCodes()
+            => _OpCodes.View;
+    }
+
     public sealed partial class AsmCmdService : AppCmdService<AsmCmdService>
     {
         NativeBuffer CodeBuffer;
@@ -25,7 +45,7 @@ namespace Z0.Asm
 
         ScriptRunner ScriptRunner;
 
-        ShellState State;
+        AsmShellState State;
 
         IApiPack ApiPack;
 
@@ -87,7 +107,7 @@ namespace Z0.Asm
 
         public AsmCmdService()
         {
-            State = new ShellState();
+            State = new AsmShellState();
             CodeBuffer = Buffers.native(_NativeBufferSize);
             _NativeBuffers = Buffers.native(new ByteSize[_NativeBufferCount]{_NativeBufferSize,_NativeBufferSize,_NativeBufferSize,_NativeBufferSize});
             _NativeAddressMap = AddressMap.cover(_NativeBuffers);
@@ -304,11 +324,37 @@ namespace Z0.Asm
             return true;
         }
 
+        Outcome LoadOpcodes()
+        {
+            var result = Outcome.Success;
+            var srcpath = TableWs().Table<SdmOpCodeRecord>();
+            var lines = srcpath.ReadLines().View;
+            result = TextGrids.load(lines, out var grid);
+            if(result.Fail)
+                return result;
+            var count = grid.RowCount;
+
+            var dst = alloc<SdmOpCodeRecord>(count);
+            result = AsmParser.parse(grid,dst);
+            if(result.Fail)
+                return result;
+
+            State.OpCodes(dst);
+
+            return result;
+        }
+
         void EmitTokens(ITokenSet src)
         {
             var dst = Ws.Output().Table<SymToken>(queries, src.Name);
             var tokens = Symbols.tokens(src.Types());
             EmitRecords(tokens, SymToken.RenderWidths, dst);
+            var count = tokens.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var token = ref skip(tokens,i);
+                Write(string.Format("{0,-16}: {1,-14} - {2}", token.TokenType.Format().Replace("Token", EmptyString), token.Expr, token.Description));
+            }
         }
 
         FS.FolderPath ToolOutDir(ToolId tool)

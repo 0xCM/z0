@@ -291,11 +291,11 @@ namespace Z0.Asm
         [SymSource]
         public enum VexPrefixKind : byte
         {
-            [Symbol("xC5", "The leading byte of a 2-byte vex prefix sequence")]
-            xC5 = H.xc5,
-
             [Symbol("xC4", "The leading byte of a 3-byte vex prefix sequence")]
             xC4 = H.xc4,
+
+            [Symbol("xC5", "The leading byte of a 2-byte vex prefix sequence")]
+            xC5 = H.xc5,
         }
 
         /// <summary>

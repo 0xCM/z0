@@ -50,6 +50,12 @@ namespace Z0
             get => (ushort)(Value >> 16);
         }
 
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => Value;
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(H src)
             => Value == src.Value;

@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
@@ -50,7 +51,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal VexPrefix(K k, byte b1, byte b2)
         {
-            Data = math.join((byte)k,b1,b2,3);
+            Data = math.join((byte)k, b1, b2,3);
         }
 
         public byte Size
@@ -66,5 +67,24 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public void Kind(K k)
             => Data = Bytes.inject((byte)k,0, ref Data);
+
+
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct VexPrefix16
+        {
+            public byte B0;
+
+            public byte B1;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct VecPrefix24
+        {
+            public byte B0;
+
+            public byte B1;
+
+            public byte B2;
+        }
     }
 }

@@ -110,7 +110,7 @@ namespace Z0
             var vector = HexVector.create(w8, vBuffer, n10);
             var hex = vector.Format();
             var cBuffer = CharBlocks.alloc(n128).Data;
-            var len = BitRender.render8x8<N10>(n8, n8, vector.Bytes, 0u, cBuffer);
+            var len = BitRender.render8x8<N10>(vector.Bytes, 0u, cBuffer);
             var s = new string(slice(cBuffer,0,len));
             Wf.Row(hex);
             Wf.Row(s);
@@ -118,7 +118,7 @@ namespace Z0
             var buf2 = CharBlocks.alloc(n128).Data;
             var x2 = first(recover<uint>(MovSpec.Slice(0,4)));
             Wf.Row(x2.FormatHexBytes());
-            var l2 = BitRender.render8x8x8x8(x2,0,buf2);
+            var l2 = BitRender.render32x8(x2,0,buf2);
             var s2 = new string(slice(buf2, 0, l2));
             Wf.Row(l2);
             Wf.Row(s2);

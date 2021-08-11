@@ -15,8 +15,8 @@ namespace Z0
     partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
-        public static int index(ReadOnlySpan<char> src, ReadOnlySpan<char> match)
-            => src.IndexOf(match);
+        public static int index(ReadOnlySpan<char> src, ReadOnlySpan<char> match, bool cased = true)
+            => src.IndexOf(match, cased ? Cased : NoCase);
 
         [MethodImpl(Inline), Op]
         public static int index(ReadOnlySpan<char> src, char match)

@@ -9,52 +9,60 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct SdmRecords
+    [StructLayout(LayoutKind.Sequential), Record(TableId), Blittable]
+    public struct SdmOpCodeRecord : IRecord<SdmOpCodeRecord>, IComparable<SdmOpCodeRecord>
     {
-        [StructLayout(LayoutKind.Sequential), Record(TableId)]
-        public struct OpCodeRecord : IRecord<OpCodeRecord>, IComparable<OpCodeRecord>
-        {
-            public const string TableId = "sdm.opcodes";
+        public const string TableId = "sdm.opcodes";
 
-            public const byte FieldCount = 14;
+        public const byte FieldCount = 14;
 
-            public uint OpCodeId;
+        public const uint StorageSize =
+            PrimalSizes.U32 +
+            CharBlock16.Size +
+            CharBlock48.Size +
+            CharBlock64.Size +
+            4*CharBlock8.StorageSize +
+            CharBlock16.Size +
+            4*bit.StorageSize +
+            CharBlock254.StorageSize
+            ;
 
-            public CharBlock16 Mnemonic;
+        public uint OpCodeId;
 
-            public CharBlock48 OpCode;
+        public CharBlock16 Mnemonic;
 
-            public CharBlock64 Sig;
+        public CharBlock48 OpCode;
 
-            public CharBlock8 EncXRef;
+        public CharBlock64 Sig;
 
-            public CharBlock8 Mode64;
+        public CharBlock8 EncXRef;
 
-            public CharBlock8 LegacyMode;
+        public CharBlock8 Mode64;
 
-            public CharBlock8 Mode64x32;
+        public CharBlock8 LegacyMode;
 
-            public CharBlock16 CpuId;
+        public CharBlock8 Mode64x32;
 
-            public bit Rex;
+        public CharBlock16 CpuId;
 
-            public bit RexW;
+        public bit Rex;
 
-            public bit Vex;
+        public bit RexW;
 
-            public bit Evex;
+        public bit Vex;
 
-            public CharBlock256 Description;
+        public bit Evex;
 
-            public static ReadOnlySpan<byte> RenderWidths
-                => new byte[FieldCount]{
-                    12,16,48,64,
-                    10,10,10,10,
-                    16,6,6,6,6,
-                    255};
+        public CharBlock254 Description;
 
-            public int CompareTo(OpCodeRecord src)
-                => Sig.String.CompareTo(src.Sig.String, NoCase);
-        }
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{
+                12,16,48,64,
+                10,10,10,10,
+                16,6,6,6,6,
+                254};
+
+        public int CompareTo(SdmOpCodeRecord src)
+            => Sig.String.CompareTo(src.Sig.String, NoCase);
     }
 }

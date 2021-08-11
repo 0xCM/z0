@@ -45,6 +45,19 @@ namespace Z0
         public Hex2(byte src)
             => Value = (K)src & KMax;
 
+        public bool IsZero
+        {
+             [MethodImpl(Inline)]
+             get => Value == 0;
+        }
+
+        public bool IsNonZero
+        {
+             [MethodImpl(Inline)]
+             get => Value != 0;
+        }
+
+
         [MethodImpl(Inline)]
         public bool Equals(H src)
             => Value == src.Value;

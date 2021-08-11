@@ -29,5 +29,9 @@ namespace Z0
         [Op]
         public static string FormatHexBytes(this ulong src)
             => HexFormat.bytes(src);
+
+        public static string FormatHexBytes<T>(this T src)
+            where T : unmanaged
+                => HexFormat.bytes(src);
     }
 }

@@ -175,16 +175,46 @@ namespace Z0
         public const string Spaced84 = Spaced80 + Spaced4;
 
         /// <summary>
+        /// Defines a string consisting of 100 spaces
+        /// </summary>
+        [RenderLiteral(Spaced100, 100)]
+        public const string Spaced100 = Spaced50 + Spaced50;
+
+        /// <summary>
         /// Defines a string consisting of 128 spaces
         /// </summary>
         [RenderLiteral(Spaced128, 128)]
         public const string Spaced128 = Spaced64 + Spaced64;
 
         /// <summary>
+        /// Defines a string consisting of 200 spaces
+        /// </summary>
+        [RenderLiteral(Spaced200, 200)]
+        public const string Spaced200 = Spaced100 + Spaced100;
+
+        /// <summary>
+        /// Defines a string consisting of Spaced250 spaces
+        /// </summary>
+        [RenderLiteral(Spaced250, 250)]
+        public const string Spaced250 = Spaced200 + Spaced50;
+
+        /// <summary>
+        /// Defines a string consisting of 252 spaces
+        /// </summary>
+        [RenderLiteral(Spaced252, 252)]
+        public const string Spaced252 = Spaced250 + Spaced2;
+
+        /// <summary>
+        /// Defines a string consisting of 254 spaces
+        /// </summary>
+        [RenderLiteral(Spaced254, 254)]
+        public const string Spaced254 = Spaced252 + Spaced2;
+
+        /// <summary>
         /// Defines a string consisting of 256 spaces
         /// </summary>
         [RenderLiteral(Spaced256, 256)]
-        public const string Spaced256 = Spaced128 + Spaced128;
+        public const string Spaced256 = Spaced254 + Spaced2;
 
         /// <summary>
         /// Defines a string consisting of 512 spaces

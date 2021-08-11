@@ -70,10 +70,10 @@ namespace Z0
 
         public static uint bitstring<N>(HexVector8<N> src, uint offset, Span<char> dst)
             where N : unmanaged, ITypeNat
-                => BitRender.render8x8<N>(n8, n8, src.Bytes, offset, dst);
+                => BitRender.render8x8<N>(src.Bytes, offset, dst);
 
         [Op]
         public static uint bitstring(Hex32 src, N8 n, uint offset, Span<char> dst)
-            => BitRender.render8x8x8x8(src.Value, offset, dst);
+            => BitRender.render32x8(src.Value, offset, dst);
     }
 }

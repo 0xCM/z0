@@ -20,6 +20,13 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)Size)]
     public struct CharBlock24  : ICharBlock<B>
     {
+       public const ushort CharCount = 24;
+
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint Size = CharCount * 2;
+
         /// <summary>
         /// The block content presented as an editable buffer
         /// </summary>
@@ -79,11 +86,5 @@ namespace Z0
 
         public static B Null => default;
 
-        public const ushort CharCount = 24;
-
-        /// <summary>
-        /// The size of the block, in bytes
-        /// </summary>
-        public const uint Size = CharCount * 2;
     }
 }

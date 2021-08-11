@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Root;
-
     public readonly struct AsmOpCodeTokens
     {
         public enum TokenKind : byte
@@ -204,7 +202,6 @@ namespace Z0.Asm
             Sep,
         }
 
-        // "cb\0" + "cw\0" + "cd\0" + "cp\0" + "c0\0" + "ct\0"
         [FieldSeg(1,3), SymSource]
         public enum DispToken : byte
         {
@@ -255,10 +252,10 @@ namespace Z0.Asm
         [FieldSeg(3,4), SymSource]
         public enum ModRmToken : byte
         {
-            [Symbol("/r", "Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand")]
+            [Symbol("/r", "The ModR/M byte of the instruction contains a register operand and an r/m operand")]
             r,
 
-            [Symbol("/0", "Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode")]
+            [Symbol("/0", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode")]
             r0,
 
             [Symbol("/1", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 1 provides an extension to the instruction's opcode")]

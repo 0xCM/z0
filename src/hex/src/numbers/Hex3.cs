@@ -49,6 +49,17 @@ namespace Z0
         public bool Equals(H src)
             => Value == src.Value;
 
+        public bool IsZero
+        {
+             [MethodImpl(Inline)]
+             get => Value == 0;
+        }
+
+        public bool IsNonZero
+        {
+             [MethodImpl(Inline)]
+             get => Value != 0;
+        }
         public uint Hash
         {
             [MethodImpl(Inline)]

@@ -21,6 +21,16 @@ namespace Z0
     public struct CharBlock48  : ICharBlock<B>
     {
         /// <summary>
+        /// The block capacity
+        /// </summary>
+        public const ushort CharCount = 48;
+
+        /// <summary>
+        /// The block storage size
+        /// </summary>
+        public const uint Size = CharCount * 2;
+
+        /// <summary>
         /// The block content presented as an editable buffer
         /// </summary>
         public Span<char> Data
@@ -79,11 +89,5 @@ namespace Z0
 
         public static B Null => default;
 
-        public const ushort CharCount = 48;
-
-        /// <summary>
-        /// The size of the block, in bytes
-        /// </summary>
-        public const uint Size = CharCount * 2;
     }
 }

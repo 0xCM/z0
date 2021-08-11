@@ -9,18 +9,17 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static SdmModels;
-    using static SdmRecords;
 
     partial class AsmCmdService
     {
-        [CmdOp(".import-opcodes", "Imports the known instruction tables")]
-        Outcome InstTableImport(CmdArgs args)
+        [CmdOp(".opcodes-import")]
+        Outcome ImportOpcodes(CmdArgs args)
         {
             var result = Outcome.Success;
             var src = DataSources.Dataset(AsmTableScopes.SdmInstructions).Files(FS.Csv).ToReadOnlySpan();
             var count = src.Length;
             var kinds = Symbols.index<SdmTableKind>();
-            Index<OpCodeRecord> storage = alloc<OpCodeRecord>(4000);
+            Index<SdmOpCodeRecord> storage = alloc<SdmOpCodeRecord>(4000);
             var buffer = storage.Edit;
             var counter = 0u;
             for(var i=0; i<count; i++)
@@ -46,9 +45,9 @@ namespace Z0.Asm
 
             for(var i=0u; i<rows.Length; i++)
                 seek(rows,i).OpCodeId = i + 1;
-            var outpath = TableWs().Table<OpCodeRecord>();
-            using var writer = outpath.AsciWriter();
-            TableEmit(@readonly(rows), OpCodeRecord.RenderWidths, writer, outpath);
+            var outpath = TableWs().Table<SdmOpCodeRecord>();
+            using var writer = outpath.UnicodeWriter();
+            TableEmit(@readonly(rows), SdmOpCodeRecord.RenderWidths, writer, outpath);
             return result;
         }
     }

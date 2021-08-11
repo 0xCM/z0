@@ -36,14 +36,13 @@ namespace Z0.Asm
                 var _jcc = asm.jcc(code, name, AsmSizeKind.@byte);
                 var _jccAlt = asm.jcc(codeAlt, nameAlt, AsmSizeKind.@byte);
 
-                var fmt = string.Format(Pattern, _jcc.Name, _jcc.Size.Width, HexFormat.asmhex(_jcc.Encoding), BitRender.format4x4(_jcc.Encoding), info);
-                var fmtAlt = string.Format(Pattern, _jccAlt.Name, _jccAlt.Size.Width, HexFormat.asmhex(_jccAlt.Encoding), BitRender.format4x4(_jccAlt.Encoding), info);
+                var fmt = string.Format(Pattern, _jcc.Name, _jcc.Size.Width, HexFormat.asmhex(_jcc.Encoding), BitRender.format8x4(_jcc.Encoding), info);
+                var fmtAlt = string.Format(Pattern, _jccAlt.Name, _jccAlt.Size.Width, HexFormat.asmhex(_jccAlt.Encoding), BitRender.format8x4(_jccAlt.Encoding), info);
 
                 Write(fmt);
                 if(name != nameAlt)
                     Write(fmtAlt);
             }
-
 
             return result;
         }

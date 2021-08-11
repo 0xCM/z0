@@ -27,9 +27,9 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint render8x8(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
-            => render8x8(n8, n8, src, src.Length, maxbits, dst);
+            => render8x8(src, src.Length, maxbits, dst);
 
-        public static uint render8x8<N>(N8 n, N8 w, ReadOnlySpan<byte> src, uint offset, Span<char> dst)
+        public static uint render8x8<N>(ReadOnlySpan<byte> src, uint offset, Span<char> dst)
             where N : unmanaged, ITypeNat
         {
             var counter = 0u;
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x8(N8 n, N8 w, byte src, uint maxbits, uint j, Span<char> dst)
+        public static uint render8x8(byte src, uint maxbits, uint j, Span<char> dst)
         {
             for(byte i=0; i<8; i++, j++)
             {
@@ -63,12 +63,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x8(N8 n, N8 w, ReadOnlySpan<byte> src, int count, uint maxbits, Span<char> dst)
+        public static uint render8x8(ReadOnlySpan<byte> src, int count, uint maxbits, Span<char> dst)
         {
             var k=0u;
             for(var i=0u; i<count; i++)
             {
-                k += render8x8(n, w, skip(src,i), maxbits, k, dst);
+                k += render8x8(skip(src,i), maxbits, k, dst);
                 if(k >= maxbits)
                     break;
             }

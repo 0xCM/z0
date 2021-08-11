@@ -50,6 +50,12 @@ namespace Z0
             get => (uint)(Value >> 32);
         }
 
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => alg.hash.calc(Value);
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(H src)
             => Value == src.Value;
@@ -70,7 +76,7 @@ namespace Z0
             => Format();
 
         public override int GetHashCode()
-            => Value.GetHashCode();
+            => (int)Hash;
 
         [MethodImpl(Inline)]
         public static implicit operator H(K src)

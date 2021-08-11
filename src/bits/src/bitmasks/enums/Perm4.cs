@@ -7,146 +7,175 @@ namespace Z0
     /// <summary>
     /// Identifies 4-element permutations
     /// </summary>
+    [SymSource]
     public enum Perm4L : byte
-    {                
+    {
         /// <summary>
         /// Identifies the first of four permutation symbols
         /// </summary>
+        [Symbol("A")]
         A = Perm4Sym.A,
 
         /// <summary>
         /// Identifies the second of four permutation symbols
         /// </summary>
+        [Symbol("B")]
         B = Perm4Sym.B,
 
         /// <summary>
         /// Identifies the third of four permutation symbols
         /// </summary>
+        [Symbol("C")]
         C = Perm4Sym.C,
 
         /// <summary>
         /// Identifies the fourth of four permutation symbols
         /// </summary>
+        [Symbol("D")]
         D = Perm4Sym.D,
-        
+
         /// <summary>
         /// ABCD -> ABCD
         /// </summary>
+        [Symbol("ABCD -> ABCD")]
         ABCD = A | B << 2 | C << 4 | D << 6,
 
         /// <summary>
         /// ABCD -> ABDC
         /// </summary>
+        [Symbol("ABCD -> ABDC")]
         ABDC = A | (B << 2) | (D << 4) | (C << 6),
-        
+
         /// <summary>
         /// ABCD -> ACBD
         /// </summary>
-        ACBD = A | (C << 2) | (B << 4) | (D << 6), 
+        [Symbol("ABCD -> ACBD")]
+        ACBD = A | (C << 2) | (B << 4) | (D << 6),
 
         /// <summary>
         /// ABCD -> ACDB
         /// </summary>
-        ACDB = A | (C << 2) | (D << 4) | (B << 6), 
+        [Symbol("ABCD -> ACDB")]
+        ACDB = A | (C << 2) | (D << 4) | (B << 6),
 
         /// <summary>
         /// ABCD -> ADBC
         /// </summary>
-        ADBC = A | (D << 2) | (B << 4) | (C << 6), 
+        [Symbol("ABCD -> ADBC")]
+        ADBC = A | (D << 2) | (B << 4) | (C << 6),
 
         /// <summary>
         /// ABCD -> ADCB
         /// </summary>
-        ADCB = A | (D << 2) | (C << 4) | (B << 6), 
+        [Symbol("ABCD -> ADCB")]
+        ADCB = A | (D << 2) | (C << 4) | (B << 6),
 
         /// <summary>
         /// ABCD -> BACD
         /// </summary>
-        BACD = B | (A << 2) | (C << 4) | (D << 6), 
+        [Symbol("ABCD -> BACD")]
+        BACD = B | (A << 2) | (C << 4) | (D << 6),
 
         /// <summary>
         /// ABCD -> BADC
         /// </summary>
-        BADC = B | (A << 2) | (D << 4) | (C << 6), 
+        [Symbol("ABCD -> BADC")]
+        BADC = B | (A << 2) | (D << 4) | (C << 6),
 
         /// <summary>
         /// ABCD -> BCAD
         /// </summary>
-        BCAD = B | C << 2 | A << 4 | D << 6, 
+        [Symbol("ABCD -> BCAD")]
+        BCAD = B | C << 2 | A << 4 | D << 6,
 
         /// <summary>
         /// ABCD -> BCDA
         /// </summary>
-        BCDA = B | (C << 2) | (D << 4) | (A << 6), 
+        [Symbol("ABCD -> BCDA")]
+        BCDA = B | (C << 2) | (D << 4) | (A << 6),
 
         /// <summary>
         /// ABCD -> BDAC
         /// </summary>
-        BDAC = B | (D << 2) | (A << 4) | (C << 6), 
+        [Symbol("ABCD -> BDAC")]
+        BDAC = B | (D << 2) | (A << 4) | (C << 6),
 
         /// <summary>
         /// ABCD -> BDCA
         /// </summary>
-        BDCA = B | (D << 2) | (C << 4) | (A << 6), 
+        [Symbol("ABCD -> BDCA")]
+        BDCA = B | (D << 2) | (C << 4) | (A << 6),
 
         /// <summary>
         /// ABCD -> CABD
         /// </summary>
-        CABD = C | (A << 2) | (B << 4) | (D << 6), 
+        [Symbol("ABCD -> CABD")]
+        CABD = C | (A << 2) | (B << 4) | (D << 6),
 
         /// <summary>
         /// ABCD -> CADB
         /// </summary>
-        CADB = C | (A << 2) | (D << 4) | (B << 6), 
+        [Symbol("ABCD -> CADB")]
+        CADB = C | (A << 2) | (D << 4) | (B << 6),
 
         /// <summary>
         /// ABCD -> CBAD
         /// </summary>
-        CBAD = C | (B << 2) | (A << 4) | (D << 6), 
+        [Symbol("ABCD -> CBAD")]
+        CBAD = C | (B << 2) | (A << 4) | (D << 6),
 
         /// <summary>
         /// ABCD -> CBDA
         /// </summary>
-        CBDA = C | (B << 2) | (D << 4) | (A << 6), 
+        [Symbol("ABCD -> CBDA")]
+        CBDA = C | (B << 2) | (D << 4) | (A << 6),
 
         /// <summary>
         /// ABCD -> CDAB
         /// </summary>
-        CDAB = C | (D << 2) | (A << 4) | (B << 6), 
+        [Symbol("ABCD -> CDAB")]
+        CDAB = C | (D << 2) | (A << 4) | (B << 6),
 
         /// <summary>
         /// ABCD -> CDBA
         /// </summary>
-        CDBA = C | (D << 2) | (B << 4) | (A << 6), 
+        [Symbol("ABCD -> CDBA")]
+        CDBA = C | (D << 2) | (B << 4) | (A << 6),
 
         /// <summary>
         /// ABCD -> DABC
         /// </summary>
-        DABC = D | (A << 2) | (B << 4) | (C << 6), 
+        [Symbol("ABCD -> DABC")]
+        DABC = D | (A << 2) | (B << 4) | (C << 6),
 
         /// <summary>
         /// ABCD -> DACB
         /// </summary>
-        DACB = D | (A << 2) | (C << 4) | (B << 6), 
+        [Symbol("ABCD -> DACB")]
+        DACB = D | (A << 2) | (C << 4) | (B << 6),
 
         /// <summary>
         /// ABCD -> DBAC
         /// </summary>
-        DBAC = D | (B << 2) | (A << 4) | (C << 6), 
+        [Symbol("ABCD -> DBAC")]
+        DBAC = D | (B << 2) | (A << 4) | (C << 6),
 
         /// <summary>
         /// ABCD -> DBCA
         /// </summary>
-        DBCA = D | (B << 2) | (C << 4) | (A << 6), 
+        [Symbol("ABCD -> DBCA")]
+        DBCA = D | (B << 2) | (C << 4) | (A << 6),
 
         /// <summary>
         /// ABCD -> DCAB
         /// </summary>
-        DCAB = D | (C << 2) | (A << 4) | (B << 6), 
+        [Symbol("ABCD -> DCAB")]
+        DCAB = D | (C << 2) | (A << 4) | (B << 6),
 
         /// <summary>
         /// ABCD -> DCBA
         /// </summary>
-        DCBA = D | C << 2 | B << 4 | A << 6, 
+        [Symbol("ABCD -> DCBA")]
+        DCBA = D | C << 2 | B << 4 | A << 6,
     }
 }

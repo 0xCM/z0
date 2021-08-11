@@ -25,7 +25,7 @@ namespace Z0.Asm
             if(count != ProcessAsm.FieldCount)
             {
                 dst = default;
-                return (false, FieldCountMismatch.Format(ProcessAsm.FieldCount, count, src));
+                return (false, AppMsg.FieldCountMismatch.Format(ProcessAsm.FieldCount, count));
             }
             dst = default;
             var i=0u;

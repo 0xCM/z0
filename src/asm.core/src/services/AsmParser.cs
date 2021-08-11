@@ -14,8 +14,6 @@ namespace Z0.Asm
 
         static Fence<char> OpCodeFence => (Lt, Gt);
 
-        static MsgPattern<Count,Count,TextLine> FieldCountMismatch => "Expected {0} fields but found {1} in '{2}'";
-
         const string Implication = " => ";
     }
 }

@@ -17,7 +17,7 @@ namespace Z0.Asm
     public readonly partial struct SdmRecords
     {
         [Op]
-        public static uint fill(Table src, Span<OpCodeRecord> dst)
+        public static uint fill(Table src, Span<SdmOpCodeRecord> dst)
         {
             var counter = 0u;
             var rows = src.Rows;

@@ -13,7 +13,7 @@ namespace Z0
     partial struct BitRender
     {
         [MethodImpl(Inline), Op]
-        public static uint render3x3x2(byte src, uint offset, Span<char> dst)
+        public static uint render8x3x3x2(byte src, uint offset, Span<char> dst)
         {
             var i= offset;
             seek(dst, i++) = bitchar(src, 7);
@@ -31,15 +31,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> render3x3x2(byte src)
+        public static ReadOnlySpan<char> render8x3x3x2(byte src)
         {
             var dst = CharBlock16.Null.Data;
-            var count = render3x3x2(src,0,dst);
+            var count = render8x3x3x2(src,0,dst);
             return slice(dst,0,count);
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render3x3x2(byte src, uint offset, Span<AsciCode> dst)
+        public static uint render8x3x3x2(byte src, uint offset, Span<AsciCode> dst)
         {
             var i= offset;
             seek(dst, i++) = code(src, 7);
@@ -57,7 +57,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render3x3x2(byte src, uint offset, Span<BitChar> dst)
+        public static uint render8x3x3x2(byte src, uint offset, Span<BitChar> dst)
         {
             var i= offset;
             seek(dst, i++) = bit.test(src, 7);

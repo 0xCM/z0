@@ -20,6 +20,32 @@ namespace Z0.Asm
 
         const string To = " => ";
 
+        const NumericKind Closure = UnsignedInts;
+
+        [Op]
+        public static string format<T>(NamedRegValue<T> src)
+            where T : unmanaged
+                => string.Format("{0}{1}",
+                string.Format(RP.pad(-(AsmRegNames.length(src.Name) + 2)), src.Name),
+                src.Value.FormatHexBytes()
+                );
+
+        [Op,Closures(Closure)]
+        public static string bits<T>(NamedRegValue<T> src)
+            where T : unmanaged
+        {
+            if(size<T>() == 1)
+                return new string(BitRender.render8(u8(src.Value)));
+            else if(size<T>() == 2)
+                return new string(BitRender.render16x8(u16(src.Value)));
+            else if(size<T>() == 4)
+                return new string(BitRender.render32x8(u32(src.Value)));
+            else if(size<T>() == 8)
+                return new string(BitRender.render64x8(u64(src.Value)));
+            else
+                return EmptyString;
+        }
+
         public static string format(in AsmHostStatement src)
             => string.Format("{0} {1,-36} ; {2} => {3}",
                         src.BlockOffset,
@@ -148,7 +174,7 @@ namespace Z0.Asm
 
         [Op]
         public static string bits(RexPrefix src)
-            => text.format(BitRender.render4x4(src.Encoded));
+            => text.format(BitRender.render8x4(src.Encoded));
 
         [Op]
         public static string bitfield(RexPrefix src)
@@ -179,7 +205,7 @@ namespace Z0.Asm
 
         public static string describe(RexPrefix src)
         {
-            var bits = text.format(BitRender.render4x4(src.Encoded));
+            var bits = text.format(BitRender.render8x4(src.Encoded));
             var bitfield = string.Format(RexFieldPattern, src.W(), src.R(), src.X(), src.B());
             return $"{src.Encoded.FormatAsmHex()} | [{bits}] => {bitfield}";
         }

@@ -5,10 +5,8 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.IO;
     using System.Linq;
-    using System.Collections.Concurrent;
 
     using static Root;
     using static core;

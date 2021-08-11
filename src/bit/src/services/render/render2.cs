@@ -22,15 +22,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> render2(byte src)
-        {
-            var dst = CharBlock2.Null.Data;
-            var i=0u;
-            render2(src, ref i, dst);
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
         public static uint render2(byte src, ref uint i, Span<AsciCode> dst)
         {
             var i0 = i;

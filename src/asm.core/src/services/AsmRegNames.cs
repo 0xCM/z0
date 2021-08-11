@@ -85,6 +85,21 @@ namespace Z0.Asm
             return new string(slice(chars,0,length(chars)));
         }
 
+        [MethodImpl(Inline), Op]
+        public static byte length(RegName src)
+        {
+            var data = bytes(src);
+            var result = z8;
+            for(var i=0; i<data.Length; i++)
+            {
+                if(skip(data,i) != 0)
+                    result++;
+                else
+                    break;
+            }
+            return result;
+        }
+
         [Op]
         public static RegName name(RegOp src)
         {

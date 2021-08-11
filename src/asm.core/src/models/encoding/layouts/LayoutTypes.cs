@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     partial struct AsmLayouts
     {
         public readonly struct LayoutTypes
@@ -54,6 +53,11 @@ namespace Z0.Asm
                 public SlotKind Kind => SlotKind.VexC5;
             }
 
+            public readonly struct VexC4 : IAsmLayoutPart<VexC4>
+            {
+                public SlotKind Kind => SlotKind.VexC4;
+            }
+
             public readonly struct RxbSelect : IAsmLayoutPart<RxbSelect>
             {
                 public SlotKind Kind => SlotKind.RxbSelect;
@@ -62,11 +66,6 @@ namespace Z0.Asm
             public readonly struct Vex : IAsmLayoutPart<Vex>
             {
                 public SlotKind Kind => SlotKind.Vex;
-            }
-
-            public readonly struct Xop : IAsmLayoutPart<Xop>
-            {
-                public SlotKind Kind => SlotKind.Xop;
             }
         }
     }

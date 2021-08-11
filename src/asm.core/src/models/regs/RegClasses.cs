@@ -4,129 +4,157 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using K = RegClassCode;
+    using CC = RegClassCode;
 
     public readonly struct RegClasses
     {
+        public static GpClass Gp => default;
+
+        public static SegClass Seg => default;
+
+        public static FlagClass Flag => default;
+
+        public static MaskClass KReg => default;
+
+        public static ControlClass Cr => default;
+
+        public static XControlClass XCr => default;
+
+        public static DebugClass Db => default;
+
+        public static XmmClass Xmm => default;
+
+        public static YmmClass Ymm => default;
+
+        public static ZmmClass Zmm => default;
+
+        public static IPtrClass IP => default;
+
+        public static SPtrClass SP => default;
+
+        public static BndClass Bnd => default;
+
+        public static StClass St => default;
+
         public readonly struct GpClass : IRegClass<GpClass>
         {
-            public K Kind => K.GP;
+            public CC Kind => CC.GP;
 
-            public static implicit operator K(GpClass src)
+            public static implicit operator CC(GpClass src)
                 => src.Kind;
         }
 
         public readonly struct SegClass : IRegClass<SegClass>
         {
-            public K Kind => K.SEG;
+            public CC Kind => CC.SEG;
 
-            public static implicit operator K(SegClass src)
+            public static implicit operator CC(SegClass src)
                 => src.Kind;
         }
 
         public readonly struct FlagClass : IRegClass<FlagClass>
         {
-            public K Kind => K.FLAG;
+            public CC Kind => CC.FLAG;
 
-            public static implicit operator K(FlagClass src)
+            public static implicit operator CC(FlagClass src)
                 => src.Kind;
         }
 
         public readonly struct ControlClass : IRegClass<ControlClass>
         {
-            public K Kind => K.CR;
+            public CC Kind => CC.CR;
 
-            public static implicit operator K(ControlClass src)
+            public static implicit operator CC(ControlClass src)
                 => src.Kind;
         }
 
         public readonly struct DebugClass : IRegClass<DebugClass>
         {
-            public K Kind => K.DB;
+            public CC Kind => CC.DB;
 
-            public static implicit operator K(DebugClass src)
+            public static implicit operator CC(DebugClass src)
                 => src.Kind;
         }
 
         public readonly struct IPtrClass : IRegClass<IPtrClass>
         {
-            public K Kind => K.IPTR;
+            public CC Kind => CC.IPTR;
 
-            public static implicit operator K(IPtrClass src)
+            public static implicit operator CC(IPtrClass src)
                 => src.Kind;
         }
 
         public readonly struct SPtrClass : IRegClass<SPtrClass>
         {
-            public K Kind => K.SPTR;
+            public CC Kind => CC.SPTR;
 
-            public static implicit operator K(SPtrClass src)
+            public static implicit operator CC(SPtrClass src)
                 => src.Kind;
         }
 
         public readonly struct XmmClass : IRegClass<XmmClass>
         {
-            public K Kind => K.XMM;
+            public CC Kind => CC.XMM;
 
 
-            public static implicit operator K(XmmClass src)
+            public static implicit operator CC(XmmClass src)
                 => src.Kind;
 
         }
 
         public readonly struct YmmClass : IRegClass<YmmClass>
         {
-            public K Kind => K.YMM;
+            public CC Kind => CC.YMM;
 
-            public static implicit operator K(YmmClass src)
+            public static implicit operator CC(YmmClass src)
                 => src.Kind;
         }
 
         public readonly struct ZmmClass : IRegClass<ZmmClass>
         {
-            public K Kind => K.ZMM;
+            public CC Kind => CC.ZMM;
 
-            public static implicit operator K(ZmmClass src)
+            public static implicit operator CC(ZmmClass src)
                 => src.Kind;
         }
 
         public readonly struct MaskClass : IRegClass<MaskClass>
         {
-            public K Kind => K.MASK;
+            public CC Kind => CC.MASK;
 
-            public static implicit operator K(MaskClass src)
+            public static implicit operator CC(MaskClass src)
                 => src.Kind;
         }
 
         public readonly struct BndClass : IRegClass<BndClass>
         {
-            public K Kind => K.BND;
+            public CC Kind => CC.BND;
 
-            public static implicit operator K(BndClass src)
+            public static implicit operator CC(BndClass src)
                 => src.Kind;
         }
 
         public readonly struct StClass : IRegClass<StClass>
         {
-            public K Kind => K.ST;
+            public CC Kind => CC.ST;
 
-            public static implicit operator K(StClass src)
+            public static implicit operator CC(StClass src)
                 => src.Kind;
         }
 
         public readonly struct MmxClass : IRegClass<MmxClass>
         {
-            public K Kind => K.MMX;
+            public CC Kind => CC.MMX;
 
-            public static implicit operator K(MmxClass src)
+            public static implicit operator CC(MmxClass src)
                 => src.Kind;
         }
 
         public readonly struct XControlClass : IRegClass<XControlClass>
         {
-            public K Kind => K.XCR;
+            public CC Kind => CC.XCR;
 
-            public static implicit operator K(XControlClass src)
+            public static implicit operator CC(XControlClass src)
                 => src.Kind;
         }
     }

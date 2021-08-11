@@ -55,5 +55,14 @@ namespace Z0
             seek(dst, offset++) = bitchar(src, 0);
             return 8;
         }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> render8(byte src)
+        {
+            var buffer = CharBlock8.Null.Data;
+            var i=0u;
+            var count = render8(src, ref i, buffer);
+            return slice(buffer,0,count);
+        }
     }
 }

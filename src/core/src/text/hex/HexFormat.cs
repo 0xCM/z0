@@ -12,7 +12,7 @@ namespace Z0
     using static HexFormatSpecs;
 
     [ApiHost]
-    public readonly partial struct HexFormat
+    public readonly struct HexFormat
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -125,6 +125,10 @@ namespace Z0
         [Op]
         public static string bytes(ulong src)
             => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        public static string bytes<T>(T src)
+            where T : unmanaged
+                => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
 
         [MethodImpl(Inline), Op]
         public static string format<W,T>(T value, W w = default, bool postspec = false)

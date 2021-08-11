@@ -13,7 +13,7 @@ namespace Z0
     partial struct BitRender
     {
         [MethodImpl(Inline), Op]
-        public static uint render3(N3 n, byte src, ref uint i, Span<char> dst)
+        public static uint render3(byte src, ref uint i, Span<char> dst)
         {
             var i0 = i;
             seek(dst, i++) = bitchar(src, 2);

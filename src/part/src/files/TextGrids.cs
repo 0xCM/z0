@@ -28,11 +28,30 @@ namespace Z0
             }
         }
 
+        public static Outcome load(FS.FilePath src, TextEncodingKind encoding, out TextGrid dst)
+        {
+            dst = TextGrid.Empty;
+            if(!src.Exists)
+                return (false,FS.missing(src));
+
+            using var reader = src.Reader(encoding);
+            var result =  parse(reader);
+            if(result)
+            {
+                dst = result.Value;
+                return true;
+            }
+            else
+            {
+                return (false, string.Format("Unable to parse grid: {0}", result.Message));
+            }
+        }
+
         public static Outcome load(FS.FilePath src, out TextGrid dst)
         {
             dst = TextGrid.Empty;
             if(!src.Exists)
-                return (false, $"No such file {src}");
+                return (false,FS.missing(src));
 
             using var reader = src.Utf8Reader();
             var attempt =  parse(reader);
@@ -157,6 +176,62 @@ namespace Z0
                 dst = default;
                 return (false,result.Message?.ToString());
             }
+        }
+
+        public static Outcome load(ReadOnlySpan<string> src, out TextGrid dst)
+        {
+            dst = TextGrid.Empty;
+            var result = Outcome.Success;
+            var rows = list<TextRow>();
+            var counter = 1u;
+            var fmt = TextDocFormat.Structured();
+            var comment = fmt.CommentPrefix;
+            var rowsep = fmt.RowBlockSep;
+            var count = src.Length;
+            Option<TextDocHeader> docheader = default;
+
+            try
+            {
+                for(var i=0; i<count; i++)
+                {
+                    var data = skip(src,i).Trim();
+
+                    if(text.blank(data))
+                        continue;
+
+                    counter++;
+
+                    var line = new TextLine(counter, data);
+                    var lead = line[0];
+
+                    // skip comments
+                    if(lead == comment)
+                        continue;
+
+                    // skip row separators
+                    if(line.Content.StartsWith(rowsep))
+                        continue;
+
+                    if(fmt.HasHeader && docheader.IsNone() && rows.Count == 0)
+                    {
+                        if(TextGrids.header(line, fmt, out var _docheader))
+                            docheader = _docheader;
+                    }
+                    else
+                    {
+                        if(row(line,fmt, out var _row))
+                            rows.Add(_row);
+                    }
+                }
+
+                dst = new TextGrid(fmt, docheader ? docheader.Value : TextDocHeader.Empty, rows.ToArray());
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+
+            return result;
         }
 
         /// <summary>

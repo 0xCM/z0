@@ -52,6 +52,18 @@ namespace Z0
         public override bool Equals(object src)
             => src is H c && Equals(c);
 
+        public bool IsZero
+        {
+             [MethodImpl(Inline)]
+             get => Value == 0;
+        }
+
+        public bool IsNonZero
+        {
+             [MethodImpl(Inline)]
+             get => Value != 0;
+        }
+
         public uint Hash
         {
             [MethodImpl(Inline)]

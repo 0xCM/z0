@@ -13,29 +13,29 @@ namespace Z0.Asm
         {
             None = 0,
 
-            Imm = 1,
+            Imm,
 
-            Disp = 2,
+            Disp,
 
-            Sib = 3,
+            Sib,
 
-            ModRm = 4,
+            ModRm,
 
-            OpCode = 5,
+            OpCode,
 
-            Escape = 6,
+            Escape,
 
-            RexPrefix = 7,
+            RexPrefix,
 
-            LegacyPrefix = 8,
+            LegacyPrefix,
 
-            VexC5 = 9,
+            VexC4,
 
-            RxbSelect = 10,
+            VexC5,
 
-            Vex = 11,
+            RxbSelect,
 
-            Xop = 12
+            Vex,
         }
     }
 }

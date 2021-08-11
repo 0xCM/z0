@@ -14,9 +14,19 @@ namespace Z0
     using api = CharBlocks;
     using B = CharBlock10;
 
-    [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)Size)]
+    [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)StorageSize)]
     public struct CharBlock10 : ICharBlock<B>
     {
+        /// <summary>
+        /// The block capacity
+        /// </summary>
+        public const ushort CharCount = 10;
+
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint StorageSize = CharCount * 2;
+
         CharBlock8 Lo;
 
         CharBlock2 Hi;
@@ -79,16 +89,5 @@ namespace Z0
         public static B Empty => RP.Spaced10;
 
         public static B Null => default;
-
-
-        /// <summary>
-        /// The block capacity
-        /// </summary>
-        public const ushort CharCount = 10;
-
-        /// <summary>
-        /// The size of the block, in bytes
-        /// </summary>
-        public const uint Size = CharCount * 2;
     }
 }

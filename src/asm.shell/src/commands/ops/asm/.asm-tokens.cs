@@ -10,11 +10,8 @@ namespace Z0.Asm
         Outcome Tokens(CmdArgs args)
         {
             var result = Outcome.Success;
-            EmitTokens(AsmTokens.OpCodes.create());
-            EmitTokens(AsmTokens.Sigs.create());
             EmitTokens(AsmTokens.Codes.create());
             EmitTokens(AsmTokens.Regs.create());
-            EmitTokens(AsmTokens.Conditions.create());
 
             return result;
         }

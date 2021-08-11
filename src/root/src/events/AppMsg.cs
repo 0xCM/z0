@@ -24,6 +24,8 @@ namespace Z0
         public static MsgPattern<Count,Count> FieldCountMismatch
             => "The target requires {0} fields but {1} were found in the source";
 
+        public static MsgPattern<string,string> ParseFailure
+            => "Parsing {0} from {1} failed";
         public static MsgPattern<string> UriParseFailure
             => "Coult not parse '{0}' as a uri";
         public static StatusMsg<T> status<T>(T data)
