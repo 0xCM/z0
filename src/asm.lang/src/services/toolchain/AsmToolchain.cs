@@ -42,14 +42,14 @@ namespace Z0.Asm
 
         void EnsurePaths(in AsmToolchainSpec spec)
         {
-            spec.Analysis.Create();
-            spec.AsmPath.FolderPath.Create();
-            spec.BinPath.FolderPath.Create();
-            spec.ObjPath.FolderPath.Create();
-            spec.DisasmPath.FolderPath.Create();
-            spec.HexPath.FolderPath.Create();
-            spec.HexArrayPath.FolderPath.Create();
-            spec.ListPath.FolderPath.Create();
+            // spec.Analysis.Create();
+            // spec.AsmPath.FolderPath.Create();
+            // spec.BinPath.FolderPath.Create();
+            // spec.ObjPath.FolderPath.Create();
+            // spec.DisasmPath.FolderPath.Create();
+            // spec.HexPath.FolderPath.Create();
+            // spec.HexArrayPath.FolderPath.Create();
+            // spec.ListPath.FolderPath.Create();
         }
 
         Outcome Exec(in CmdLine cmd)

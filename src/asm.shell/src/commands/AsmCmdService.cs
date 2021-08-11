@@ -11,26 +11,6 @@ namespace Z0.Asm
     using static core;
     using static WsAtoms;
 
-    public class AsmShellState : ShellState
-    {
-        Index<SdmOpCodeRecord> _OpCodes;
-
-        public AsmShellState()
-        {
-            _OpCodes = array<SdmOpCodeRecord>();
-        }
-
-        [MethodImpl(Inline)]
-        public void OpCodes(SdmOpCodeRecord[] src)
-        {
-            _OpCodes = src;
-        }
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<SdmOpCodeRecord> OpCodes()
-            => _OpCodes.View;
-    }
-
     public sealed partial class AsmCmdService : AppCmdService<AsmCmdService>
     {
         NativeBuffer CodeBuffer;

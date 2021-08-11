@@ -46,6 +46,7 @@ namespace Z0
 
             return dst.ViewDeposited();
         }
+
         [Op]
         public static bool next(ref LineReaderState state, out AsciLine<byte> dst)
         {

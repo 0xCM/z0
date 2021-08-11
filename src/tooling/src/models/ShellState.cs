@@ -26,14 +26,28 @@ namespace Z0
 
         Arrow<Scope> _Channel;
 
+        IWorkspace _Workspace;
+
+        DevWs Ws;
+
         public void DevWs(DevWs ws)
         {
-            _CurrentDir = ws.Tools().Root;
+            Ws = ws;
+            _Workspace = ws;
+            _CurrentDir = ws.Root;
         }
 
         [MethodImpl(Inline)]
         public Arrow<Scope> Channel()
             => _Channel;
+
+        [MethodImpl(Inline)]
+        public IWorkspace Workspace()
+            => _Workspace;
+
+        [MethodImpl(Inline)]
+        public Outcome Workspace(string name)
+            => Ws.Select(name, out _Workspace);
 
         public Arrow<Scope> Channel(Arrow<Scope> channel)
         {

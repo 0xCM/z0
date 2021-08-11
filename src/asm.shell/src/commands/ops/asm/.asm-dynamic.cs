@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System.Runtime.InteropServices;
-
-    using static Root;
-
     partial class AsmCmdService
     {
         [CmdOp(".asm-dynamic")]
@@ -23,12 +19,5 @@ namespace Z0.Asm
             Write(string.Format("Evaluated: {0}() -> {1}", f.Name, output));
             return true;
         }
-    }
-
-
-    public readonly struct DelegateBindings
-    {
-        // [UnmanagedFunctionPointer(StdCall)]
-        // public delegate bool cpuid(in uint index, in uint leaf, out uint eax, out uint ebx, out uint ecx, out uint edx);
     }
 }

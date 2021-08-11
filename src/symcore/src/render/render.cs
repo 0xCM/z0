@@ -22,6 +22,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static uint render(ReadOnlySpan<AsciCode> src, Span<char> dst)
+        {
+            var count = min((uint)src.Length, (uint)dst.Length);
+            for(var j=0; j<count; j++)
+                seek(dst,j) = (char)skip(src,j);
+            return count;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint render(ReadOnlySpan<AsciSymbol> src, ref uint i, Span<char> dst)
         {
             var count = (uint)src.Length;

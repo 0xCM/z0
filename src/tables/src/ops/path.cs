@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
 
     partial struct Tables
     {
@@ -49,16 +46,5 @@ namespace Z0
 
         public static FS.FilePath subpath<S>(FS.FolderPath dir, TableId id, S subject)
             => dir + FS.folder(id.Format()) + FS.file(string.Format(EnvFolders.qualified, id, subject), FS.Csv);
-
-        public static FS.FilePath subpath<S>(FS.FolderPath dir, Type t, S subject)
-            => subpath(dir, identify(t), subject);
-
-
-        // public static FS.FilePath subpath<T>(FS.FolderPath dir, string subject)
-        //     where T : struct
-        // {
-        //     var id = identify<T>();
-        //     return subdir<T>(dir) + FS.file(string.Format("{0}.{1}", id, subject), FS.Csv);
-        // }
     }
 }

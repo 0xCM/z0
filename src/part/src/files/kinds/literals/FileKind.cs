@@ -72,6 +72,12 @@ namespace Z0
         XCsv,
 
         /// <summary>
+        /// A symbol table file
+        /// </summary>
+        [Symbol(sym,"A  symbol table as emitted by llvm-nm ")]
+        Sym,
+
+        /// <summary>
         /// Text-formatted x86-encoded/executable data
         /// </summary>
         [Symbol(pcsv,"Text-formatted x86-encoded/executable data")]

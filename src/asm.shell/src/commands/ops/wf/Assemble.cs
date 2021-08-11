@@ -31,10 +31,5 @@ namespace Z0.Asm
 
             return DumpObjects();
         }
-
-        /// <summary>
-        /// SrcPath,DstPath
-        /// </summary>
-        const string LlvmMcAssemblePattern = @"j:\source\llvm\llvm-project\build\bin\llvm-mc.exe --assemble --filetype=obj --incremental-linker-compatible --mcpu=skylake-avx512 --target-abi=regcall --triple=x86_64-pc-windows-msvc --x86-asm-syntax=intel --output-asm-variant=1 --print-imm-hex {0} -o {1}";
     }
 }

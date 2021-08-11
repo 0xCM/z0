@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
     partial class AsmCmdService
     {
         [CmdOp(".part-asm-capture")]

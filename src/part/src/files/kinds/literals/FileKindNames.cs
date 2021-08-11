@@ -48,6 +48,11 @@ namespace Z0
         public const string cil = nameof(cil);
 
         /// <summary>
+        /// Defines the 'cmd' literal
+        /// </summary>
+        public const string cmd = nameof(cmd);
+
+        /// <summary>
         /// Defines the 'config' literal
         /// </summary>
         public const string config = nameof(config);
@@ -71,6 +76,16 @@ namespace Z0
         /// Defines the 'dot' literal
         /// </summary>
         public const string dot = nameof(dot);
+
+        /// <summary>
+        /// Defines the 'help' literal
+        /// </summary>
+        public const string help = nameof(help);
+
+        /// <summary>
+        /// Defines the 'hex' literal
+        /// </summary>
+        public const string hex = nameof(hex);
 
         /// <summary>
         /// Defines the 'i' literal
@@ -98,9 +113,9 @@ namespace Z0
         public const string exe = nameof(exe);
 
         /// <summary>
-        /// Defines the 'hex' literal
+        /// Defines the 'list' literal
         /// </summary>
-        public const string hex = nameof(hex);
+        public const string list = nameof(list);
 
         /// <summary>
         /// Defines the 'log' literal
@@ -111,11 +126,6 @@ namespace Z0
         /// Defines the 'obj' literal
         /// </summary>
         public const string obj = nameof(obj);
-
-        /// <summary>
-        /// Defines the 'txt' literal
-        /// </summary>
-        public const string txt = nameof(txt);
 
         /// <summary>
         /// Defines the 'status' literal
@@ -131,11 +141,6 @@ namespace Z0
         /// Defines the 'lib' literal
         /// </summary>
         public const string lib = nameof(lib);
-
-        /// <summary>
-        /// Defines the 'cmd' literal
-        /// </summary>
-        public const string cmd = nameof(cmd);
 
         /// <summary>
         /// Defines the 'md' literal
@@ -193,6 +198,11 @@ namespace Z0
         public const string dmp = nameof(dmp);
 
         /// <summary>
+        /// Defines the 's' literal
+        /// </summary>
+        public const string s = nameof(s);
+
+        /// <summary>
         /// Defines the 'sh' literal
         /// </summary>
         public const string sh = nameof(sh);
@@ -208,20 +218,19 @@ namespace Z0
         public const string settings = nameof(settings);
 
         /// <summary>
+        /// Defines the 'sym' literal
+        /// </summary>
+        public const string sym = nameof(sym);
+
+        /// <summary>
         /// Defines the 'sql' literal
         /// </summary>
         public const string sql = nameof(sql);
 
         /// <summary>
-        /// <summary>
-        /// Defines the 'help' literal
+        /// Defines the 'txt' literal
         /// </summary>
-        public const string help = nameof(help);
-
-        /// <summary>
-        /// Defines the 'list' literal
-        /// </summary>
-        public const string list = nameof(list);
+        public const string txt = nameof(txt);
 
         /// <summary>
         /// Defines the 'xpack' literal

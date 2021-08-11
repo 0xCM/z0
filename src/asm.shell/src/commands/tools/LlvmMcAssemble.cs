@@ -4,17 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
     partial class AsmCmdService
     {
-        [CmdOp(".asm-env")]
-        Outcome ShowAsmEnv(CmdArgs args)
+        Outcome LlvmMcAssemble(FS.FilePath src, FS.FolderPath dst)
         {
-            var folders = AsmEnv.Folders;
-            iter(folders, f => Write(f));
-
-            return true;
+            var script = LlvmMc.Scripts.Assemble(src.FolderPath, src.FileName, dst);
+            var result = Run(script, out var response);
+            if(result)
+                ParseCmdResponse(response);
+            return result;
         }
     }
 }

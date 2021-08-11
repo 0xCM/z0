@@ -42,6 +42,11 @@ namespace Z0
             => new AsciLineReader<byte>(src.AsciReader());
 
         [Op]
+        public static AsciLineReader<T> AsciLineReader2<T>(this FS.FilePath src)
+            where T : unmanaged
+                => new AsciLineReader<T>(src.AsciReader());
+
+        [Op]
         public static LineReader Utf8LineReader(this FS.FilePath src)
             => new LineReader(src.Utf8Reader());
 
