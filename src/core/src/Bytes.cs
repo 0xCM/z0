@@ -101,6 +101,54 @@ namespace Z0
         }
 
         /// <summary>
+        /// Converts an input sequence to a 16-bit unsigned integer
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Op]
+        public static uint convert(ReadOnlySpan<byte> src, W16 w)
+        {
+            var n = max(src.Length, 2);
+            var dst = z16;
+            var b = bytes(dst);
+            for(var k=0; k<n; k++)
+                seek(b,k) = skip(src,k);
+            return dst;
+        }
+
+        /// <summary>
+        /// Converts an input sequence to a 32-bit unsigned integer
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Op]
+        public static uint convert(ReadOnlySpan<byte> src, W32 w)
+        {
+            var n = max(src.Length, 4);
+            var dst = 0u;
+            var b = bytes(dst);
+            for(var k=0; k<n; k++)
+                seek(b,k) = skip(src,k);
+            return dst;
+        }
+
+        /// <summary>
+        /// Converts an input sequence to a 64-bit unsigned integer
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Op]
+        public static ulong convert(ReadOnlySpan<byte> src, W64 w)
+        {
+            var n = max(src.Length, 8);
+            var dst = 0ul;
+            var b = bytes(dst);
+            for(var k=0; k<n; k++)
+                seek(b,k) = skip(src,k);
+            return dst;
+        }
+
+        /// <summary>
         /// Determines whether cell[i] == a0 && cell[i+i] == a1
         /// </summary>
         /// <param name="src">The data source</param>

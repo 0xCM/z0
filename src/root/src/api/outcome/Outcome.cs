@@ -16,8 +16,9 @@ namespace Z0
     /// </summary>
     public readonly struct Outcome : IOutcome
     {
-        public static Outcome combine(Outcome a, Outcome b)
-            => a.Fail ? a : b;
+        [MethodImpl(Inline)]
+        internal static Outcome combine(Outcome a, Outcome b)
+            => (a.Ok && b.Ok, string.Format("{0}\r\r{1}",a.Message, b.Message));
 
         public bool Ok {get;}
 
@@ -92,8 +93,10 @@ namespace Z0
                 throw new Exception(Message ?? "An eggregious blunder");
         }
 
-        [MethodImpl(Inline)]
         public static Outcome operator +(Outcome a, Outcome b)
+            => combine(a,b);
+
+        public static Outcome operator &(Outcome a, Outcome b)
             => combine(a,b);
 
         [MethodImpl(Inline)]

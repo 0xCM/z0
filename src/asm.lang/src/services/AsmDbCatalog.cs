@@ -16,10 +16,12 @@ namespace Z0.Asm
     {
         public AsmDbSourceDocs SourceDocs()
         {
+            var igrid = TextGrid.Empty;
+            var ogrid = TextGrid.Empty;
             var assets = AsmData.Assets;
-            if(TextGrids.resource(assets.AsmDbInstructions(), TextDocFormat.Structured(), out var instructions)
-            && (TextGrids.resource(assets.AsmDbOperands(), TextDocFormat.Structured(), out var operands)))
-                return new AsmDbSourceDocs(instructions,operands);
+            if(TextGrids.resource(assets.AsmDbInstructions(), TextDocFormat.Structured(), out igrid)
+            && (TextGrids.resource(assets.AsmDbOperands(), TextDocFormat.Structured(), out ogrid)))
+                return new AsmDbSourceDocs(igrid,ogrid);
             else
                 return AsmDbSourceDocs.Empty;
         }

@@ -14,12 +14,13 @@ namespace Z0
         [ParseFunction]
         public static bool Parse(string s, out GridDim dst)
         {
+            var n = 0u;
             var parts = @readonly(s.Split('x'));
             var parser = NumericParser.create<uint>();
             dst = default;
             if(parts.Length == 2)
             {
-                if(parser.Parse(skip(parts,0), out var m) && parser.Parse(skip(parts,1), out var n))
+                if(parser.Parse(skip(parts,0), out var m) && parser.Parse(skip(parts,1), out n))
                 {
                     dst = new GridDim(m, n);
                     return true;
