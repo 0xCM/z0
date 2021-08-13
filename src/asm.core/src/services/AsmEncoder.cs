@@ -18,6 +18,20 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmEncoder
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [Op]
+        public static AsmEncodingInfo describe(in ProcessAsm src)
+            => new AsmEncodingInfo((src.OpCode, src.Sig), src.Statement, src.Encoded, AsmBitstrings.bitstring(src.Encoded));
+
+        [Op]
+        public static AsmEncodingInfo describe(in AsmFormExpr form, in AsmExpr statement, in AsmHexCode encoded)
+            => new AsmEncodingInfo(form, statement, encoded, AsmBitstrings.bitstring(encoded));
+
+        [MethodImpl(Inline), Op]
+        public static AsmEncodingInfo describe(in AsmFormExpr form, in AsmExpr statement, in AsmHexCode encoded, in AsmBitstring bitstring)
+            => new AsmEncodingInfo(form, statement, encoded, bitstring);
+
         [MethodImpl(Inline), Op]
         public static MandatoryPrefix mandatory(MandatoryPrefixCode code)
             => new MandatoryPrefix(code);

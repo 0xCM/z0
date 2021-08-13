@@ -9,8 +9,11 @@ namespace Z0.Asm
 
     using static Root;
 
+    [Blittable(StorageSize)]
     public readonly struct AsmSize
     {
+        public const uint StorageSize = PrimalSizes.U8;
+
         public AsmSizeKind Kind {get;}
 
         public BitWidth Width

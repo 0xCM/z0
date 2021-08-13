@@ -11,13 +11,37 @@ namespace Z0
 
     public class ApiHexPacks : AppService<ApiHexPacks>
     {
-        public Lookup<FS.FilePath,HexPack> LoadParsed(FS.FolderPath src)
+        public static Outcome load(FS.FilePath src, out MemoryBlocks dst)
+            => HexPacks.load(src, out dst);
+
+        public Lookup<FS.FilePath,MemoryBlocks> LoadParsed(FS.FolderPath src)
             => Load(src.Files(".parsed", FS.XPack, true));
 
-        public Lookup<FS.FilePath,HexPack> Load(FS.Files src)
+        public MemoryBlocks LoadBlocks(FS.FolderPath root)
+        {
+            var entries = LoadParsed(root).Entries;
+            var count = entries.Length;
+            var buffer = list<MemoryBlock>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var entry = ref skip(entries,i);
+                ref readonly var pack = ref entry.Value;
+                var blocks = pack.View;
+                for(var j=0; j<blocks.Length; j++)
+                {
+                    ref readonly var block = ref skip(blocks,j);
+                    buffer.Add(block);
+                }
+            }
+
+            buffer.Sort();
+            return new MemoryBlocks(buffer.ToArray());
+        }
+
+        public Lookup<FS.FilePath,MemoryBlocks> Load(FS.Files src)
         {
             var flow = Running(string.Format("Loading {0} packs", src.Length));
-            var lookup = new Lookup<FS.FilePath,HexPack>();
+            var lookup = new Lookup<FS.FilePath,MemoryBlocks>();
             var errors = new Lookup<FS.FilePath,Outcome>();
             iter(src, path => load(path, lookup, errors), true);
             var result = lookup.Seal();
@@ -28,7 +52,7 @@ namespace Z0
             {
                 ref readonly var entry = ref skip(entries,i);
                 var path = entry.Key;
-                var blocks = entry.Value.Blocks;
+                var blocks = entry.Value.View;
                 var blockCount = (uint)blocks.Length;
                 var host = path.FileName.Format().Remove(".extracts.parsed.xpack").Replace(".","/");
                 Write(string.Format("Loaded {0} blocks from {1}", blockCount, path.ToUri()));
@@ -88,7 +112,7 @@ namespace Z0
         }
 
         [Op]
-        public ByteSize Emit(in HexPack src, FS.FilePath dst)
+        public ByteSize Emit(in MemoryBlocks src, FS.FilePath dst)
         {
             var flow = EmittingFile(dst);
             using var writer = dst.Writer();
@@ -107,7 +131,7 @@ namespace Z0
             return total;
         }
 
-        static void load(FS.FilePath src, Lookup<FS.FilePath,HexPack> success, Lookup<FS.FilePath,Outcome> fail)
+        static void load(FS.FilePath src, Lookup<FS.FilePath,MemoryBlocks> success, Lookup<FS.FilePath,Outcome> fail)
         {
             var result = HexPacks.load(src, out var pack);
             if(result.Fail)

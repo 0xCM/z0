@@ -19,7 +19,7 @@ namespace Z0
             if(!ts.IsNonZero)
                 ts = now();
 
-            var dir = pack.ContextRoot();
+            var dir = pack.Archive().ContextRoot();
             var process = Process.GetCurrentProcess();
             var pipe = Wf.ProcessContextPipe();
             var procparts = pipe.EmitPartitions(process, ts, dir);

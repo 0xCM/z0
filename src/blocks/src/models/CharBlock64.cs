@@ -17,9 +17,19 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 64x16u
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size= (int)Size, Pack=2)]
+    [StructLayout(LayoutKind.Sequential, Size= (int)SZ, Pack=2)]
     public struct CharBlock64 : ICharBlock<B>
     {
+        /// <summary>
+        /// The block capacity
+        /// </summary>
+        public const ushort CharCount = 64;
+
+        /// <summary>
+        /// The size of the block, in bytes
+        /// </summary>
+        public const uint SZ = CharCount * 2;
+
         CharBlock32 Lo;
 
         CharBlock32 Hi;
@@ -80,11 +90,6 @@ namespace Z0
 
         public static B Null => default;
 
-        public const ushort CharCount = 64;
 
-        /// <summary>
-        /// The size of the block, in bytes
-        /// </summary>
-        public const uint Size = CharCount * 2;
     }
 }

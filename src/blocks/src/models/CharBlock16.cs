@@ -17,15 +17,18 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 16x16u
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)Size)]
+    [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)SZ)]
     public struct CharBlock16 : ICharBlock<B>
     {
+        /// <summary>
+        /// The block capacity
+        /// </summary>
         public const ushort CharCount = 16;
 
         /// <summary>
         /// The size of the block, in bytes
         /// </summary>
-        public const uint Size = CharCount * 2;
+        public const uint SZ = CharCount*2;
 
         CharBlock8 Lo;
 

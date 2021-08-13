@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     using static AsmCodes;
     using static AsmCodes.MachineModeKind;
     using static AsmCodes.OpszKind;

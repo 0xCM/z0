@@ -42,19 +42,6 @@ namespace Z0.Asm
             result = AsmParser.parse(b, out AsmHexCode hexcode);
             if(result.Fail)
                 return result;
-            // var buffer = Cells.alloc(n128).Bytes;
-            // var j=0u;
-            // var result = Hex.parse(b, ref j, buffer);
-            // if(result.Fail)
-            //     return result;
-
-            // var size = result.Data;
-            // if(size == 0)
-            //     return (false, "Hexcode was empty");
-
-            // var hexcode = AsmHexCode.load(slice(buffer,0,size));
-            // if(Verbose)
-            //     term.babble(string.Format("AsmHex:{0}", hexcode.Format()));
 
             result = AsmParser.parse(c, out AsmExpr expr);
             if(result.Fail)

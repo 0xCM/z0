@@ -14,13 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct MemoryBlock : IComparable<MemoryBlock>
     {
-        [Op]
-        public static unsafe MemoryBlock snapshot(byte* pSrc, ByteSize size)
-        {
-            var slice = MemorySpan.create(pSrc,size);
-            return new MemoryBlock(slice.Origin, slice.Edit.ToArray());
-        }
-
         public MemoryRange Origin {get;}
 
         readonly BinaryCode Data;

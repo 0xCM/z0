@@ -9,13 +9,13 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsmCodes;
+    using static AsmRegCodes;
     using static AsmOpCodeTokens;
 
     /// <summary>
     /// Generates <see cref='RexB'/> tables
     /// </summary>
-    public sealed class RexBGenerator : AsmModelFactory<RexBGenerator>
+    public sealed class RexBGenerator : Service<RexBGenerator>
     {
         // RexBBits:[Index[00000] | Token[000]]
         public static RexB rexb(RexBToken token, RegIndexCode r)

@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     using static Root;
-    using static AsmCodes;
+    using static RegClasses;
 
     partial class AsmCmdService
     {
@@ -16,11 +16,11 @@ namespace Z0.Asm
             var counter = 0u;
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.AsciWriter();
-            counter += RegSets.Emit(RegSets.Grid(GP, w8), writer);
-            counter += RegSets.Emit(RegSets.Grid(GP, w8,true), writer);
-            counter += RegSets.Emit(RegSets.Grid(GP, w16),writer);
-            counter += RegSets.Emit(RegSets.Grid(GP, w32),writer);
-            counter += RegSets.Emit(RegSets.Grid(GP, w64),writer);
+            counter += RegSets.Emit(RegSets.Grid(Gp, w8), writer);
+            counter += RegSets.Emit(RegSets.Grid(Gp, w8,true), writer);
+            counter += RegSets.Emit(RegSets.Grid(Gp, w16),writer);
+            counter += RegSets.Emit(RegSets.Grid(Gp, w32),writer);
+            counter += RegSets.Emit(RegSets.Grid(Gp, w64),writer);
             Wf.EmittedFile(flow,counter);
             return true;
         }

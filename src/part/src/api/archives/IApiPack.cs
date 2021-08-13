@@ -13,22 +13,10 @@ namespace Z0
 
         ApiExtractSettings ExtractSettings {get;}
 
-        // FS.FolderPath IFileArchive.Root
-        //     => Archive().Root;
-
         ApiPackArchive Archive()
             => ApiPackArchive.create(Root);
 
         FS.FilePath ProcDumpPath(Process process, Timestamp ts)
             => Archive().ProcDumpPath(process, ts);
-
-        FS.FolderPath HexPackRoot()
-            => Archive().HexPackRoot();
-
-        FS.FolderPath ContextRoot()
-            => Archive().ContextRoot();
-
-        FS.Files AsmCapturePaths(PartId part)
-            => Archive().AsmCapturePaths(part);
     }
 }

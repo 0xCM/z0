@@ -72,6 +72,31 @@ namespace Z0
             return ParseResult.parsed(src, new ApiHostUri(owner, host));
         }
 
+        public static Outcome host(string src, out ApiHostUri dst)
+        {
+            var result = Outcome.Success;
+            dst = ApiHostUri.Empty;
+            if(blank(src))
+                return (false, "Empty input");
+
+            var parts = src.SplitClean(ApiUriDelimiters.UriPathSep);
+            var count = parts.Length;
+            if(count != 2)
+                return (false,string.Concat("Component count ", count," != ", 2));
+
+            Enum.TryParse(skip(parts,0), true, out PartId part);
+            if(part == 0)
+                return (false, string.Format("Invalid part '{0}'", skip(parts,0)));
+
+            var host = skip(parts,1);
+            if(blank(host))
+                return (false, "Host unspecified");
+
+            dst = new ApiHostUri(part,host);
+
+            return result;
+        }
+
         [Op]
         public static OpIdentity opid(string src)
         {

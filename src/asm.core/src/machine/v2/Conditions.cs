@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
@@ -15,6 +14,7 @@ namespace Z0.Asm
 
     using static Blit;
 
+    [ApiComplete]
     public sealed class Conditions
     {
         static Lazy<Conditions> _Instance;
@@ -27,39 +27,39 @@ namespace Z0.Asm
         public static Conditions create()
             => _Instance.Value;
 
-        Index<Condition> _ConditionCodes;
+        Index<Condition> _CC;
+
+        Index<ConditionAlt> _CCAlt;
 
         Index<Jcc8> _Jcc8Codes;
 
-        Index<Jcc32> _Jcc32Codes;
-
-        Index<ConditionAlt> _AltConditionCodes;
-
         Index<Jcc8Alt> _AltJcc8Codes;
+
+        Index<Jcc32> _Jcc32Codes;
 
         Index<Jcc32Alt> _AltJcc32Codes;
 
         Index<name64> _ConditionNames;
 
-        Index<TextBlock> _ConditionInfo;
-
         Index<name64> _AltConditionNames;
+
+        Index<TextBlock> _ConditionInfo;
 
         Index<TextBlock> _AltConditionInfo;
 
         Index<name64> _Jcc8Names;
 
-        Index<TextBlock> _Jcc8Info;
-
         Index<name64> _AltJcc8Names;
+
+        Index<TextBlock> _Jcc8Info;
 
         Index<TextBlock> _AltJcc8Info;
 
         Index<name64> _Jcc32Names;
 
-        Index<TextBlock> _Jcc32Info;
-
         Index<name64> _AltJcc32Names;
+
+        Index<TextBlock> _Jcc32Info;
 
         Index<TextBlock> _AltJcc32Info;
 
@@ -67,97 +67,99 @@ namespace Z0.Asm
         {
             Alloc();
             Load();
-
-            AltAlloc();
-            AltLoad();
         }
 
         void Alloc()
         {
-            _ConditionNames = alloc<name64>(ConditionCount);
-            _ConditionInfo = alloc<TextBlock>(ConditionCount);
-            _ConditionCodes = alloc<Condition>(ConditionCount);
+            _CC = alloc<Condition>(ConditionCount);
+            _CCAlt = alloc<ConditionAlt>(ConditionCount);
 
-            _Jcc8Names = alloc<name64>(ConditionCount);
-            _Jcc8Info = alloc<TextBlock>(ConditionCount);
             _Jcc8Codes = alloc<Jcc8>(ConditionCount);
-
-            _Jcc32Names = alloc<name64>(ConditionCount);
-            _Jcc32Info = alloc<TextBlock>(ConditionCount);
-            _Jcc32Codes = alloc<Jcc32>(ConditionCount);
-        }
-
-        void AltAlloc()
-        {
-            _AltConditionNames = alloc<name64>(ConditionCount);
-            _AltConditionInfo = alloc<TextBlock>(ConditionCount);
-            _AltConditionCodes = alloc<ConditionAlt>(ConditionCount);
-
-            _AltJcc8Names = alloc<name64>(ConditionCount);
-            _AltJcc8Info = alloc<TextBlock>(ConditionCount);
             _AltJcc8Codes = alloc<Jcc8Alt>(ConditionCount);
 
-            _AltJcc32Names = alloc<name64>(ConditionCount);
-            _AltJcc32Info = alloc<TextBlock>(ConditionCount);
+            _ConditionNames = alloc<name64>(ConditionCount);
+            _AltConditionNames = alloc<name64>(ConditionCount);
+
+            _ConditionInfo = alloc<TextBlock>(ConditionCount);
+            _AltConditionInfo = alloc<TextBlock>(ConditionCount);
+
+            _Jcc32Codes = alloc<Jcc32>(ConditionCount);
             _AltJcc32Codes = alloc<Jcc32Alt>(ConditionCount);
+
+            _Jcc8Names = alloc<name64>(ConditionCount);
+            _AltJcc8Names = alloc<name64>(ConditionCount);
+
+            _Jcc8Info = alloc<TextBlock>(ConditionCount);
+            _AltJcc8Info = alloc<TextBlock>(ConditionCount);
+
+            _Jcc32Names = alloc<name64>(ConditionCount);
+            _AltJcc32Names = alloc<name64>(ConditionCount);
+
+            _Jcc32Info = alloc<TextBlock>(ConditionCount);
+            _AltJcc32Info = alloc<TextBlock>(ConditionCount);
         }
 
         void Load()
         {
-            var conditions = Symbols.index<Condition>();
-            Require.equal((uint)conditions.Length, ConditionCount);
-            Factory.names(conditions, _ConditionNames.Edit);
-            Symbols.describe(conditions, _ConditionInfo.Edit);
-            Symbols.kinds(conditions, _ConditionCodes.Edit);
+            var ccA = Symbols.index<Condition>();
+            Require.equal((uint)ccA.Length, ConditionCount);
+            Factory.names(ccA, _ConditionNames.Edit);
+            Symbols.describe(ccA, _ConditionInfo.Edit);
+            Symbols.kinds(ccA, _CC.Edit);
 
-            var jcc8 = Symbols.index<Jcc8>();
-            Require.equal(jcc8.Count, ConditionCount);
-            Factory.names(jcc8, _Jcc8Names.Edit);
-            Symbols.describe(jcc8, _Jcc8Info.Edit);
-            Symbols.kinds(jcc8, _Jcc8Codes.Edit);
+            var ccB = Symbols.index<ConditionAlt>();
+            Require.equal((uint)ccB.Length, ConditionCount);
+            Factory.names(ccB, _AltConditionNames.Edit);
+            Symbols.describe(ccB, _AltConditionInfo.Edit);
+            Symbols.kinds(ccB, _CCAlt.Edit);
 
-            var jcc32 = Symbols.index<Jcc32>();
-            Require.equal(jcc32.Count, ConditionCount);
-            Factory.names(jcc32, _Jcc32Names.Edit);
-            Symbols.describe(jcc32, _Jcc32Info.Edit);
-            Symbols.kinds(jcc32, _Jcc32Codes.Edit);
-        }
+            var jcc8a = Symbols.index<Jcc8>();
+            Require.equal(jcc8a.Count, ConditionCount);
+            Factory.names(jcc8a, _Jcc8Names.Edit);
+            Symbols.describe(jcc8a, _Jcc8Info.Edit);
+            Symbols.kinds(jcc8a, _Jcc8Codes.Edit);
 
-        void AltLoad()
-        {
-            var conditions = Symbols.index<ConditionAlt>();
-            Require.equal((uint)conditions.Length, ConditionCount);
-            Factory.names(conditions, _AltConditionNames.Edit);
-            Symbols.describe(conditions, _AltConditionInfo.Edit);
-            Symbols.kinds(conditions, _AltConditionCodes.Edit);
+            var jcc8b = Symbols.index<Jcc8Alt>();
+            Require.equal(jcc8b.Count, ConditionCount);
+            Factory.names(jcc8b, _AltJcc8Names.Edit);
+            Symbols.describe(jcc8b, _AltJcc8Info.Edit);
+            Symbols.kinds(jcc8b, _AltJcc8Codes.Edit);
 
-            var jcc8 = Symbols.index<Jcc8Alt>();
-            Require.equal(jcc8.Count, ConditionCount);
-            Factory.names(jcc8, _AltJcc8Names.Edit);
-            Symbols.describe(jcc8, _AltJcc8Info.Edit);
-            Symbols.kinds(jcc8, _AltJcc8Codes.Edit);
+            var jcc32a = Symbols.index<Jcc32>();
+            Require.equal(jcc32a.Count, ConditionCount);
+            Factory.names(jcc32a, _Jcc32Names.Edit);
+            Symbols.describe(jcc32a, _Jcc32Info.Edit);
+            Symbols.kinds(jcc32a, _Jcc32Codes.Edit);
 
-            var jcc32 = Symbols.index<Jcc32Alt>();
-            Require.equal(jcc32.Count, ConditionCount);
-            Factory.names(jcc32, _AltJcc32Names.Edit);
-            Symbols.describe(jcc32, _AltJcc32Info.Edit);
-            Symbols.kinds(jcc32, _AltJcc32Codes.Edit);
+            var jcc32b = Symbols.index<Jcc32Alt>();
+            Require.equal(jcc32b.Count, ConditionCount);
+            Factory.names(jcc32b, _AltJcc32Names.Edit);
+            Symbols.describe(jcc32b, _AltJcc32Info.Edit);
+            Symbols.kinds(jcc32b, _AltJcc32Codes.Edit);
         }
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<Jcc8> JccCodes(W8 w)
+        public ReadOnlySpan<Condition> ConditionCodes(N0 n)
+            => _CC.View;
+
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<ConditionAlt> ConditionCodes(N1 n)
+            => _CCAlt.View;
+
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<Jcc8> JccCodes(W8 w, N0 n)
             => _Jcc8Codes.View;
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<Jcc8Alt> JccAltCodes(W8 w)
+        public ReadOnlySpan<Jcc8Alt> JccCodes(W8 w, N1 n)
             => _AltJcc8Codes.View;
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<Jcc32> JccCodes(W32 w)
+        public ReadOnlySpan<Jcc32> JccCodes(W32 w, N0 n)
             => _Jcc32Codes.View;
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<Jcc32Alt> JccAltCodes(W32 w)
+        public ReadOnlySpan<Jcc32Alt> JccCodes(W32 w, N1 n)
             => _AltJcc32Codes.View;
 
         [MethodImpl(Inline)]

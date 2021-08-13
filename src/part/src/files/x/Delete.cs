@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
     using System.Collections.Generic;
+    using static core;
 
     partial class XFs
     {
@@ -34,14 +35,14 @@ namespace Z0
             catch(Exception e)
             {
                 Console.Error.WriteLine($"{e}");
-                return root.none<int>();
+                return Option.none<int>();
             }
         }
 
         public static void Delete(this FS.FolderPath[] paths)
-            => root.iter(paths, path => path.Delete(true));
+            => iter(paths, path => path.Delete(true));
 
         public static void Delete(this IEnumerable<FS.FolderPath> paths)
-            => root.iter(paths, path => path.Delete(true));
+            => iter(paths, path => path.Delete(true));
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmEncodings;
+    using static AsmEncoder;
 
     partial class AsmCmdService
     {

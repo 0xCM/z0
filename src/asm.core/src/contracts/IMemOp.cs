@@ -15,6 +15,8 @@ namespace Z0.Asm
     public interface IMemOp : IAsmOp
     {
         AsmSizeKind Qualifier => default;
+
+        AsmAddress Address {get;}
     }
 
     [Free]
@@ -102,7 +104,8 @@ namespace Z0.Asm
             => 8;
 
         AsmSizeKind IMemOp.Qualifier
-            => AsmSizeKind.qword;    }
+            => AsmSizeKind.qword;
+    }
 
     public interface IMemOp64<T> : IMemOp64, IMemOp<T>
         where T : unmanaged, IMemOp64<T>

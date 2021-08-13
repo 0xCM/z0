@@ -9,8 +9,8 @@ namespace Z0.Asm
 
     using static Root;
 
-    using static SdmModels.EncodingMarkers;
-    using K = SdmModels.ModRmKind;
+    using static SdmModels.EncodingSigs;
+    using K = SdmModels.ModRmEncKind;
 
     [ApiHost]
     public readonly partial struct SdmModels
@@ -232,45 +232,45 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static bit parse(string src, out ModRmKind dst)
+        public static bit parse(string src, out ModRmEncKind dst)
         {
             dst = 0;
-            var i = text.index(src, ModRM);
+            var i = text.index(src, ModRm);
             if(i < 0)
                 return false;
 
             var content = text.right(src,Chars.Colon);
             switch(src)
             {
-                case RmR:
+                case ModRm_RmR:
                     dst = K.RmR;
                 break;
 
-                case RmW:
+                case ModRm_RmW:
                     dst = K.RmW;
                 break;
 
-                case RmRW:
+                case ModRm_RmRW:
                     dst = K.RmRW;
                 break;
 
-                case RegR:
+                case ModRm_RegR:
                     dst = K.RegR;
                 break;
 
-                case RegW:
+                case ModRm_RegW:
                     dst = K.RegW;
                 break;
 
-                case RegRW:
+                case ModRm_RegRW:
                     dst = K.RegRW;
                 break;
 
-                case RmRMust11:
+                case ModRm_RmR11:
                     dst = K.RmRMust11;
                 break;
 
-                case RmWNot11:
+                case ModRm_RmWNot11:
                     dst = K.RmWNot11;
                 break;
             }

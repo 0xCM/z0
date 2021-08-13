@@ -20,8 +20,6 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential, Size= (int)Size, Pack=2)]
     public struct CharBlock80 : ICharBlock<B>
     {
-        public static N80 N => default;
-
         public Span<char> Data
         {
             [MethodImpl(Inline)]

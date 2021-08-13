@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using static Root;
     using static core;
-    using static AsmCodes;
 
     partial class AsmCmdService
     {
@@ -16,7 +15,7 @@ namespace Z0.Asm
             var dst = Gen().Path("cs","regnames", FS.Cs);
             var flow = EmittingFile(dst);
             using var writer = dst.AsciWriter();
-            var regs = AsmRegs.list(GP);
+            var regs = AsmRegs.list(RegClasses.Gp);
             var count = regs.Length;
             var buffer = text.buffer();
             for(var i=0; i<count; i++)

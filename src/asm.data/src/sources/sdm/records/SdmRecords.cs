@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using M = SdmModels.EncodingMarkers;
+    using M = SdmModels.EncodingSigs;
     using SQ = SymbolicQuery;
 
     [ApiHost]

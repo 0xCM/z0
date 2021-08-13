@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 254x16u
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)StorageSize)]
+    [StructLayout(LayoutKind.Sequential, Pack=2, Size=(int)SZ)]
     public struct CharBlock254  : ICharBlock<B>
     {
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// The block storage size
         /// </summary>
-        public const uint StorageSize = CharCount * 2;
+        public const uint SZ = CharCount*2;
 
         /// <summary>
         /// The block content presented as an editable buffer

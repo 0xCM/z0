@@ -6,59 +6,6 @@ namespace Z0.Asm
 {
     partial struct SdmModels
     {
-        public enum SdmTableKind : byte
-        {
-            None = 0,
-
-            [Symbol("OpCodes")]
-            OpCodes,
-
-            [Symbol("Encoding")]
-            Encoding,
-
-            [Symbol("BinaryFormat")]
-            BinaryFormat,
-
-            [Symbol("Intrinsics")]
-            Intrinsics,
-
-            [Symbol("Notes")]
-            Notes,
-
-            [Symbol("Numbered")]
-            Numbered,
-        }
-
-        [SymSource]
-        public enum SdmColumnKind : byte
-        {
-            None = 0,
-
-            OpCode,
-
-            Signature,
-
-            EncodingRef,
-
-            Cpuid,
-
-            Mode64,
-
-            Mode32,
-
-            Mode64x32,
-
-            Description,
-
-            Op1,
-
-            Op2,
-
-            Op3,
-
-            Op4
-        }
-
         public readonly struct TableMarkers
         {
             public static string[] OcHeader0 = new string[9]{

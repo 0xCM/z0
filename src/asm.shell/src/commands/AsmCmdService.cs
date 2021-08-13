@@ -35,8 +35,6 @@ namespace Z0.Asm
 
         AsmRegSets RegSets;
 
-        AsmEnv AsmEnv;
-
         CmdLineRunner CmdRunner;
 
         IntelXed Xed;
@@ -49,9 +47,11 @@ namespace Z0.Asm
 
         ApiPacks ApiPacks;
 
-        ApiHexPacks HexPacks;
+        ApiHexPacks ApiHexPacks;
 
         ApiPackArchive ApiArchive;
+
+        ApiCatalogs ApiCatalogs;
 
         NativeBufferSeq _NativeBuffers;
 
@@ -59,7 +59,7 @@ namespace Z0.Asm
 
         Index<ProcessAsm> _ProcessAsm;
 
-        Index<ProcessAsm> _AsmGlobalSelection;
+        Index<ProcessAsm> _ProcessAsmSelection;
 
         CliMemoryMap ResPack;
 
@@ -81,9 +81,7 @@ namespace Z0.Asm
 
         const byte _NativeBufferCount = 4;
 
-        const uint _ProcessAsmCapacity = 720000;
-
-        uint _AsmGlobalCount;
+        uint _ProcessAsmCount;
 
         public AsmCmdService()
         {
@@ -95,7 +93,7 @@ namespace Z0.Asm
             CodeSize = 0;
             _Assembled = array<byte>();
             _ProcessAsm = Index<ProcessAsm>.Empty;
-            _AsmGlobalSelection = Index<ProcessAsm>.Empty;
+            _ProcessAsmSelection = Index<ProcessAsm>.Empty;
             ResPack = CliMemoryMap.Empty;
         }
 
@@ -106,23 +104,23 @@ namespace Z0.Asm
             ScriptRunner = Wf.ScriptRunner();
             ApiPacks = Wf.ApiPacks();
             ApiPack = ApiPacks.Current();
+            ApiArchive = ApiPack.Archive();
             NasmCatalog = Wf.NasmCatalog();
             SdmSvc = Wf.IntelSdm();
             RegSets = Wf.AsmRegSets();
-            AsmEnv = Wf.AsmEnv();
             CmdRunner = Wf.CmdLineRunner();
             Xed = Wf.IntelXed();
             AsmToolchain = Wf.AsmToolchain();
             AsmTables = Wf.AsmTables();
             Random = Rng.wyhash64();
-            ApiArchive = ApiPack.Archive();
             AsmLoader = Wf.AsmLoader();
-            HexPacks = Wf.ApiHexPacks();
+            ApiHexPacks = Wf.ApiHexPacks();
             ApiWs = Ws.Api();
             OutWs = Ws.Output();
             LogWs = Ws.Logs();
             ProjectWs = Ws.Projects();
             DataSources = Ws.Sources();
+            ApiCatalogs = Wf.ApiCatalogs();
             State.DevWs(Ws);
         }
 
@@ -147,20 +145,24 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         uint ProcessAsmCount()
-            => _AsmGlobalCount;
+            => _ProcessAsmCount;
 
         [MethodImpl(Inline)]
-        void ProcessAsmCount(uint count)
+        uint ProcessAsmCount(uint count)
         {
-            _AsmGlobalCount = min(count, _ProcessAsmCapacity);
+            _ProcessAsmCount = count;
+            return ProcessAsmCount();
         }
 
-        Span<ProcessAsm> ProcessAsm()
+        Span<ProcessAsm> ProcessAsmBuffer()
         {
             if(_ProcessAsm.IsEmpty)
-                _ProcessAsm = alloc<ProcessAsm>(_ProcessAsmCapacity);
+                _ProcessAsm = AllocProcessAsm();
             return _ProcessAsm;
         }
+
+        ProcessAsm[] AllocProcessAsm()
+            => alloc<ProcessAsm>(AsmLoader.ProcessAsmCount(ProcessAsmPath()));
 
         [MethodImpl(Inline)]
         ref readonly NativeBufferSeq NativeBuffers()
@@ -242,7 +244,7 @@ namespace Z0.Asm
         {
             State.Files(src);
             if(write)
-                iter(src.View, f => Write(f));
+                iter(src.View, f => Write(f.ToUri()));
             return src;
         }
 
@@ -373,12 +375,14 @@ namespace Z0.Asm
             where T : struct
         {
             var dst = OutWs.QueryOut(id, FS.Csv);
-            return TableEmit(src, widths, dst);
+            var count = TableEmit(src, widths, dst);
+            Write(string.Format("Emitted {0}", dst.Format(PathSeparator.BS)));
+            return count;
         }
 
         [MethodImpl(Inline)]
-        Span<ProcessAsm> AsmGlobalSelection()
-            => _AsmGlobalSelection.Edit;
+        Span<ProcessAsm> AsmSelection()
+            => _ProcessAsmSelection.Edit;
 
         Outcome BuildAsmExe(string id)
         {
@@ -392,27 +396,30 @@ namespace Z0.Asm
             return Run(cmd, vars, out var response);
         }
 
-        Outcome LoadProcessAsm(out ReadOnlySpan<ProcessAsm> dst)
+        FS.FilePath ProcessAsmPath()
+            => ApiArchive.ProcessAsmPath();
+
+        ReadOnlySpan<ProcessAsm> ProcessAsm()
         {
             if(ProcessAsmCount() != 0)
             {
-                dst = ProcessAsm();
-                return true;
+                return ProcessAsmBuffer();
             }
-            dst = default;
-            var path = ApiPacks.Archive().ProcessAsmPath();
-            var buffer = ProcessAsm();
+
+            var path = ProcessAsmPath();
+            var buffer = ProcessAsmBuffer();
             Write(string.Format("Loading process asm from {0}", path.ToUri()));
             var result = AsmLoader.LoadProcessAsm(path, buffer);
             if(result.Fail)
-                return result;
+            {
+                Error(result.Message);
+                return default;
+            }
 
-            var count = result.Data;
-            ProcessAsmCount(count);
-            dst = buffer;
-            _AsmGlobalSelection = alloc<ProcessAsm>(count);
+            var count = ProcessAsmCount(result.Data);
+            _ProcessAsmSelection = alloc<ProcessAsm>(count);
             Write(string.Format("Loaded {0} process asm records from {1}", count, path.ToUri()));
-            return result;
+            return ProcessAsmBuffer();
         }
 
         void RecordsEmitted(Count count, FS.FilePath dst)

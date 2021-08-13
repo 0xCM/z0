@@ -18,14 +18,12 @@ namespace Z0.Asm
             {
                 (var csv, var asm) = skip(pairs,i);
                 Write(string.Format("{0} | {1}", csv.ToUri(), asm.ToUri()));
-
             }
 
             return result;
         }
 
         FS.Files ApiAsmPaths(PartId part)
-            => Files(ApiPack.AsmCapturePaths(part));
-
+            => Files(ApiArchive.AsmCapturePaths(part));
     }
 }

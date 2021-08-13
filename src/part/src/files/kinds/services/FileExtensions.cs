@@ -252,5 +252,11 @@ namespace Z0
         /// Defines the <see cref='sym'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Sym => ext(sym);
+
+        /// <summary>
+        /// Defines the <see cref='xarray'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt XArray => ext(xarray);
+
     }
 }

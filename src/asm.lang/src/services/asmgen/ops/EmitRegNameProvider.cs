@@ -35,7 +35,7 @@ namespace Z0.Asm
             dst.IndentLine(margin, Open());
             margin +=4;
             var counter = 0u;
-            var types = AsmCodes.RegCodeTypes().ToReadOnlySpan();
+            var types = AsmRegCodes.RegCodeTypes().ToReadOnlySpan();
             for(var i=0; i<types.Length; i++)
             {
                 ref readonly var type = ref skip(types,i);

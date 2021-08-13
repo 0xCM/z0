@@ -73,11 +73,12 @@ namespace Z0.Asm
             Wf.EmittedFile(asmFlow, sequence);
             Wf.EmittedFile(hexFlow, sequence);
             var deposited = segments.ViewDeposited();
-            EmitProps(deposited, dst + FS.file("respack.data", FS.XPack));
+            EmitHexPack(deposited, dst + FS.file("respack", FS.XPack));
+            EmitHexArrays(deposited, dst + FS.file("respack", FS.ext("xarray")));
             return deposited;
         }
 
-        void EmitProps(ReadOnlySpan<MemorySeg> src, FS.FilePath dst)
+        void EmitHexPack(ReadOnlySpan<MemorySeg> src, FS.FilePath dst)
         {
             var flow= Wf.EmittingFile(dst);
             var count = src.Length;
@@ -88,6 +89,21 @@ namespace Z0.Asm
                 ref readonly var seg = ref skip(src,i);
                 buffer.Clear();
                 writer.WriteLine(HexPacks.linepack(seg, i, buffer));
+            }
+            Wf.EmittedFile(flow, count);
+        }
+
+        void EmitHexArrays(ReadOnlySpan<MemorySeg> src, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingFile(dst);
+            var count = src.Length;
+            var buffer = alloc<char>(Pow2.T16);
+            using var writer = dst.Writer();
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var seg = ref skip(src,i);
+                buffer.Clear();
+                writer.WriteLine(HexPacks.arraypack(seg, i, buffer));
             }
             Wf.EmittedFile(flow, count);
         }

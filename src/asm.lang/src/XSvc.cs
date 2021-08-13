@@ -30,10 +30,6 @@ namespace Z0
             => Svc.StanfordAsmCatalog.create(wf);
 
         [Op]
-        public static AsmDbCatalog AsmDbCatalog(this IWfRuntime wf)
-            => Svc.AsmDbCatalog.create(wf);
-
-        [Op]
         public static AsmFormPipe AsmFormPipe(this IWfRuntime wf)
             => Svc.AsmFormPipe.create(wf);
 

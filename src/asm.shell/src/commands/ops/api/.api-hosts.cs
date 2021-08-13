@@ -13,7 +13,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
-            var src = ApiPack.HexPackRoot();
+            var src = ApiArchive.HexPackRoot();
             var ext = FS.ext(FS.ext("parsed"), FS.XPack);
             var files = src.Files(ext).ToReadOnlySpan();
             var count = files.Length;

@@ -22,6 +22,19 @@ namespace Z0.Asm
 
         const NumericKind Closure = UnsignedInts;
 
+
+        [Op]
+        public static string format(in Jcc8Conditions src, bit alt)
+        {
+            const string Pattern = "{0,-4} rel{1} [{2}:{3}b] => {4}";
+            var dst = EmptyString;
+            if(alt)
+                dst =  string.Format(Pattern, src.Alt.Name, src.Alt.Size.Width, HexFormat.asmhex(src.Alt.Encoding), BitRender.format8x4(src.Alt.Encoding), src.AltInfo);
+            else
+                dst = string.Format(Pattern, src.Primary.Name, src.RelWidth, HexFormat.asmhex(src.Encoding), text.format(src.EncodedBits), src.PrimaryInfo);
+            return dst;
+        }
+
         [Op]
         public static string format<T>(NamedRegValue<T> src)
             where T : unmanaged
@@ -432,17 +445,17 @@ namespace Z0.Asm
         {
             var w = n8;
             // eax(in)
-            dst.AppendFormat("{0} [{1}] | ", row.Leaf, row.Leaf.FormatBitstring(w));
+            dst.AppendFormat("{0} [{1}] | ", row.Leaf, row.Leaf.FormatBits(w));
             // ecx(in)
-            dst.AppendFormat("{0} [{1}] | ", row.Subleaf, row.Subleaf.FormatBitstring(w));
+            dst.AppendFormat("{0} [{1}] | ", row.Subleaf, row.Subleaf.FormatBits(w));
             // eax(out)
-            dst.AppendFormat("{0} [{1}] | ", row.Eax, row.Eax.FormatBitstring(w));
+            dst.AppendFormat("{0} [{1}] | ", row.Eax, row.Eax.FormatBits(w));
             // ebx(out)
-            dst.AppendFormat("{0} [{1}] | ", row.Ebx, row.Ebx.FormatBitstring(w));
+            dst.AppendFormat("{0} [{1}] | ", row.Ebx, row.Ebx.FormatBits(w));
             // ecx(out)
-            dst.AppendFormat("{0} [{1}] | ", row.Ecx, row.Ecx.FormatBitstring(w));
+            dst.AppendFormat("{0} [{1}] | ", row.Ecx, row.Ecx.FormatBits(w));
             // edx(out)
-            dst.AppendFormat("{0} [{1}] ", row.Edx, row.Edx.FormatBitstring(w));
+            dst.AppendFormat("{0} [{1}] ", row.Edx, row.Edx.FormatBits(w));
             dst.AppendLine();
         }
 

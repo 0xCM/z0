@@ -8,7 +8,6 @@ namespace Z0
 
     using static EnvFolders;
 
-
     /// <summary>
     /// Characterizes a file system repository
     /// </summary>

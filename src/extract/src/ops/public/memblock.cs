@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct ApiExtracts
     {
-       [Op]
+        [Op]
         public static MemoryBlock memblock(in ApiMemberCode src, ExtractTermInfo term)
         {
             if(!term.TerminalFound)
@@ -21,14 +21,14 @@ namespace Z0
 
             var kind = term.Kind;
             var size = ByteSize.Zero;
-            var modifier = skip(TermModifiers,(byte)kind);
+            var modifier = skip(TermModifiers, (byte)kind);
             if(kind == ExtractTermKind.Term5A)
                 size = term.Offset + modifier;
             else
                 size = term.Offset;
 
             var origin = new MemoryRange(src.Address, size);
-            var data = slice(src.Encoded.View,0, size);
+            var data = slice(src.Encoded.View, 0, size);
             return new MemoryBlock(origin, data.ToArray());
         }
     }

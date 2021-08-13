@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using static Asm.AsmEncodings;
+    using static Asm.AsmEncoder;
     using static MemorySections;
 
     [ApiComplete]

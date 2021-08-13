@@ -71,6 +71,12 @@ namespace Z0
             get => Encoded.OpUri;
         }
 
+        public ByteSize Size
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Length;
+        }
+
         public byte[] Storage
         {
             [MethodImpl(Inline)]

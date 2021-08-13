@@ -41,27 +41,27 @@ namespace Z0
             _Buffer = alloc<char>(Pow2.T08);
         }
 
-        void Check1(IPolySource src)
-        {
-            SourceCount = Pow2.T12;
-            _Data = src.Bytes(SourceCount).Array();
-            var data = _Data.Edit;
+        // void Check1(IPolySource src)
+        // {
+        //     SourceCount = Pow2.T12;
+        //     _Data = src.Bytes(SourceCount).Array();
+        //     var data = _Data.Edit;
 
-            var n = n4;
-            var w = w8;
-            var cSize = w/8;
-            var vSize = cSize*4;
+        //     var n = n4;
+        //     var w = w8;
+        //     var cSize = w/8;
+        //     var vSize = cSize*4;
 
-            var SampleCount = 24;
+        //     var SampleCount = 24;
 
-            for(var i=0; i<SampleCount; i++)
-            {
-                var segment = slice(data, i*vSize, vSize);
-                var vector = HexVector.create(n, w, segment);
-                Show(vector);
-            }
+        //     for(var i=0; i<SampleCount; i++)
+        //     {
+        //         var segment = slice(data, i*vSize, vSize);
+        //         var vector = HexVector.create(n, w, segment);
+        //         Show(vector);
+        //     }
 
-        }
+        // }
 
         void CheckNibbleSpan()
         {
@@ -103,26 +103,26 @@ namespace Z0
         static ReadOnlySpan<byte> MovSpec
             => new byte[10]{0x48, 0xb8, 0x98, 0x2e, 0x94, 0xf3, 0x93, 0x02, 0x00, 0x00};
 
-        void Check2()
-        {
-            var vBuffer = Cells.alloc(w128).Bytes;
-            MovSpec.CopyTo(vBuffer);
-            var vector = HexVector.create(w8, vBuffer, n10);
-            var hex = vector.Format();
-            var cBuffer = CharBlocks.alloc(n128).Data;
-            var len = BitRender.render8x8<N10>(vector.Bytes, 0u, cBuffer);
-            var s = new string(slice(cBuffer,0,len));
-            Wf.Row(hex);
-            Wf.Row(s);
+        // void Check2()
+        // {
+        //     var vBuffer = Cells.alloc(w128).Bytes;
+        //     MovSpec.CopyTo(vBuffer);
+        //     var vector = HexVector.create(w8, vBuffer, n10);
+        //     var hex = vector.Format();
+        //     var cBuffer = CharBlocks.alloc(n128).Data;
+        //     var len = BitRender.render8x8<N10>(vector.Bytes, 0u, cBuffer);
+        //     var s = new string(slice(cBuffer,0,len));
+        //     Wf.Row(hex);
+        //     Wf.Row(s);
 
-            var buf2 = CharBlocks.alloc(n128).Data;
-            var x2 = first(recover<uint>(MovSpec.Slice(0,4)));
-            Wf.Row(x2.FormatHexBytes());
-            var l2 = BitRender.render32x8(x2,0,buf2);
-            var s2 = new string(slice(buf2, 0, l2));
-            Wf.Row(l2);
-            Wf.Row(s2);
-        }
+        //     var buf2 = CharBlocks.alloc(n128).Data;
+        //     var x2 = first(recover<uint>(MovSpec.Slice(0,4)));
+        //     Wf.Row(x2.FormatHexBytes());
+        //     var l2 = BitRender.render32x8(x2,0,buf2);
+        //     var s2 = new string(slice(buf2, 0, l2));
+        //     Wf.Row(l2);
+        //     Wf.Row(s2);
+        // }
 
         public void Show(HexVector8<N4> src)
         {

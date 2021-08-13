@@ -51,12 +51,27 @@ namespace Z0.Asm
             return dst.ToArray();
         }
 
+        public static uint ProcessAsmCount(FS.FilePath src)
+        {
+            var counter = 0u;
+            using var reader = src.AsciReader();
+            var header = reader.ReadLine();
+            var line = reader.ReadLine();
+            while(line != null)
+            {
+                counter++;
+                line = reader.ReadLine();
+            }
+
+            return counter;
+        }
+
         public static Outcome<uint> LoadProcessAsm(FS.FilePath src, Span<ProcessAsm> dst)
         {
             var counter = 1u;
             var i = 0u;
             var max = dst.Length;
-            using var reader = src.Utf8Reader();
+            using var reader = src.AsciReader();
             var header = reader.ReadLine();
             var line = reader.ReadLine();
             var result = Outcome.Success;

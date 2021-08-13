@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmCodes;
 
     partial struct AsmOperands
     {
@@ -27,6 +26,27 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator xmmword(AsmAddress dst)
                 => new xmmword(dst);
+        }
+
+        public readonly struct m128 : IMemOp128<m128>
+        {
+            public AsmAddress Address {get;}
+
+            public AsmSizeKind Qualifier
+            {
+                [MethodImpl(Inline)]
+                get => AsmSizeKind.xmmword;
+            }
+
+            [MethodImpl(Inline)]
+            public m128(AsmAddress address)
+            {
+                Address = address;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator m128(AsmAddress src)
+                => new m128(src);
         }
     }
 }

@@ -18,13 +18,13 @@ namespace Z0.Asm
 
         public const uint StorageSize =
             PrimalSizes.U32 +
-            CharBlock16.Size +
-            CharBlock48.Size +
-            CharBlock64.Size +
+            CharBlock16.SZ +
+            CharBlock48.SZ +
+            CharBlock64.SZ +
             4*CharBlock8.StorageSize +
-            CharBlock16.Size +
+            CharBlock16.SZ +
             4*bit.StorageSize +
-            CharBlock254.StorageSize
+            CharBlock254.SZ
             ;
 
         public uint OpCodeId;

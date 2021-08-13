@@ -11,33 +11,32 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Rules;
 
     [ApiHost]
     public readonly struct HexPacks
     {
         const char SegSep = Chars.Colon;
 
-        const char DataSep = Chars.Eq;
-
         const string HexPackLine = "x{0:x}[{1:D5}:{2:D5}]=<{3}>";
+
+        const string ArrayPackLine = "x{0:x}[{1:D5}:{2:D5}]={3}";
 
         static Fence<char> SegFence = ('[',']');
 
         static Fence<char> DataFence = ('<', '>');
 
         [Op]
-        public static HexPack pack(MemoryBlock src)
-            => new HexPack(core.array(src));
+        public static MemoryBlocks pack(MemoryBlock src)
+            => new MemoryBlocks(core.array(src));
 
         [Op]
-        public static HexPack pack(Index<MemoryBlock> src)
+        public static MemoryBlocks pack(Index<MemoryBlock> src)
         {
             var count = src.Length;
             if(count == 0)
-                return HexPack.Empty;
+                return MemoryBlocks.Empty;
             src.Sort();
-            return new HexPack(src);
+            return new MemoryBlocks(src);
         }
 
         [Op]
@@ -60,7 +59,7 @@ namespace Z0
         }
 
         [Op]
-        public static HexPack pack(ReadOnlySpan<ApiExtractBlock> src)
+        public static MemoryBlocks pack(ReadOnlySpan<ApiExtractBlock> src)
         {
             var count = src.Length;
             var buffer = alloc<MemoryBlock>(count);
@@ -68,11 +67,11 @@ namespace Z0
         }
 
         [Op]
-        public static HexPack pack(ReadOnlySpan<ApiCodeBlock> src)
+        public static MemoryBlocks pack(ReadOnlySpan<ApiCodeBlock> src)
         {
             var count = src.Length;
             if(count == 0)
-                return HexPack.Empty;
+                return MemoryBlocks.Empty;
             var buffer = alloc<MemoryBlock>(count);
 
             ref var dst = ref first(buffer);
@@ -83,15 +82,15 @@ namespace Z0
             }
 
             buffer.Sort();
-            return new HexPack(buffer);
+            return new MemoryBlocks(buffer);
         }
 
         [Op]
-        public static HexPack pack(ReadOnlySpan<ApiMemberExtract> src)
+        public static MemoryBlocks pack(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
             if(count == 0)
-                return HexPack.Empty;
+                return MemoryBlocks.Empty;
             var buffer = alloc<MemoryBlock>(count);
 
             ref var dst = ref first(buffer);
@@ -103,15 +102,15 @@ namespace Z0
             }
 
             buffer.Sort();
-            return new HexPack(buffer);
+            return new MemoryBlocks(buffer);
         }
 
         [Op]
-        public static HexPack pack(ReadOnlySpan<ApiExtractBlock> src, Index<MemoryBlock> buffer)
+        public static MemoryBlocks pack(ReadOnlySpan<ApiExtractBlock> src, Index<MemoryBlock> buffer)
         {
             var count = src.Length;
             if(count == 0)
-                return HexPack.Empty;
+                return MemoryBlocks.Empty;
 
             ref var dst = ref buffer.First;
             for(var i=0; i<count; i++)
@@ -122,44 +121,28 @@ namespace Z0
             }
 
             buffer.Sort();
-            return new HexPack(buffer);
+            return new MemoryBlocks(buffer);
         }
 
-        [MethodImpl(Inline), Op]
-        public static uint charpack(ReadOnlySpan<byte> src, Span<char> dst)
-        {
-            var j = 0u;
-            var count = min(src.Length, dst.Length);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var b = ref skip(src,i);
-                seek(dst,j++) = Hex.hexchar(LowerCase, b, 1);
-                seek(dst,j++) = Hex.hexchar(LowerCase, b, 0);
-            }
-            return j;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static MemoryBlock max(ReadOnlySpan<MemoryBlock> src)
-        {
-            var max = MemoryBlock.Empty;
-            var count = src.Length;
-            if(count == 0)
-                return max;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(src,i);
-                if(block.Size > max.Size)
-                    max = block;
-            }
-            return max;
-        }
+        // [MethodImpl(Inline), Op]
+        // public static uint charpack(ReadOnlySpan<byte> src, Span<char> dst)
+        // {
+        //     var j = 0u;
+        //     var count = min(src.Length, dst.Length);
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var b = ref skip(src,i);
+        //         seek(dst,j++) = Hex.hexchar(LowerCase, b, 1);
+        //         seek(dst,j++) = Hex.hexchar(LowerCase, b, 0);
+        //     }
+        //     return j;
+        // }
 
         [Op]
-        public static ByteSize emit(in HexPack src, StreamWriter dst)
+        public static ByteSize emit(in MemoryBlocks src, StreamWriter dst)
         {
-            var blocks = src.Blocks;
-            var maxsz = max(blocks).Size;
+            var blocks = src.View;
+            var maxsz = Buffers.maxblock(blocks).Size;
             var count = blocks.Length;
             var buffer = span<char>(maxsz*2);
             var total = 0u;
@@ -167,7 +150,7 @@ namespace Z0
             {
                 buffer.Clear();
                 ref readonly var block = ref skip(blocks,i);
-                var charcount = charpack(block.View, buffer);
+                var charcount = Hex.charpack(block.View, buffer);
                 var formatted = text.format(slice(buffer,0, charcount));
                 var size = (uint)block.Size;
                 dst.WriteLine(string.Format(HexPackLine, block.BaseAddress, i, size, formatted));
@@ -176,9 +159,9 @@ namespace Z0
             return total;
         }
 
-        public static Outcome load(FS.FilePath src, out HexPack dst)
+        public static Outcome load(FS.FilePath src, out MemoryBlocks dst)
         {
-            var result = Outcome<HexPack>.Success;
+            var result = Outcome<MemoryBlocks>.Success;
             var unpacked = Outcome<ByteSize>.Success;
             var size  = ByteSize.Zero;
             var lines = list<MemoryBlock>();
@@ -201,7 +184,7 @@ namespace Z0
             if(result.Fail)
                 return result;
 
-            dst = new HexPack(lines.ToArray());
+            dst = new MemoryBlocks(lines.ToArray());
             return true;
         }
 
@@ -259,7 +242,6 @@ namespace Z0
             if(segsize != code.Length)
                 return (false, $"Expected {segsize} bytes but parsed {code.Length}");
 
-
             dst = new MemoryBlock(@base, segsize, code);
 
             return segsize;
@@ -270,7 +252,7 @@ namespace Z0
             var result = Outcome.Success;
             var count = text.length(src);
             if(count % 2 != 0)
-                return (false, $"An even number of nibbles was not provided in the source text {src}");
+                return (false, UnevenNibbles.Format(src));
             var size = count/2;
             var buffer = alloc<byte>(size);
             var input = span(src);
@@ -293,9 +275,27 @@ namespace Z0
         public static string linepack(in MemorySeg src, uint index, Span<char> buffer)
         {
             var memspan = src.ToSpan();
-            var count = charpack(memspan.View, buffer);
+            var count = Hex.charpack(memspan.View, buffer);
             var chars = slice(buffer, 0, count);
-            return string.Format(HexPackLine, memspan.BaseAddress, index, memspan.Size, text.format(chars));
+            return string.Format(HexPackLine, memspan.BaseAddress, index, (uint)memspan.Size, text.format(chars));
+        }
+
+        [Op]
+        public static string arraypack(in MemorySeg src, uint index, Span<char> buffer)
+        {
+            var memory = src.ToSpan();
+            var count = Hex.hexarray(memory.View, buffer);
+            var chars = slice(buffer, 0, count);
+            return string.Format(ArrayPackLine, memory.BaseAddress, index, (uint)memory.Size, text.format(chars));
+        }
+
+        [Op]
+        public static string arraypack(in MemoryBlock src, uint index, Span<char> buffer)
+        {
+            var memory = src.View;
+            var count = Hex.hexarray(memory, buffer);
+            var chars = slice(buffer, 0, count);
+            return string.Format(ArrayPackLine, src.BaseAddress, index, (uint)src.Size, text.format(chars));
         }
 
         [Op]
@@ -310,7 +310,7 @@ namespace Z0
             {
                 buffer.Clear();
                 ref readonly var seg = ref skip(segs,i);
-                var charcount = charpack(seg.View, buffer);
+                var charcount = Hex.charpack(seg.View, buffer);
                 var formatted = text.format(slice(buffer,0, charcount));
                 var size = (uint)seg.Size;
                 dst.WriteLine(string.Format(HexPackLine, seg.BaseAddress, i, size, formatted));
@@ -338,5 +338,7 @@ namespace Z0
                 seek(target, div) = new MemorySeg(@base + offset, mod);
             return emit(buffer, dst);
         }
+
+        static MsgPattern<string> UnevenNibbles => "An even number of nibbles was not provided in the source text '{0}'";
     }
 }

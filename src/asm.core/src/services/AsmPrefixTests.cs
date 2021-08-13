@@ -37,12 +37,20 @@ namespace Z0.Asm
             => src == 0xC4 || src == 0xC5;
 
         [MethodImpl(Inline), Op]
+        public static bit vex(uint src)
+            => (byte)src == 0xC4 || (byte)src == 0xC5;
+
+        [MethodImpl(Inline), Op]
         public static bit rex(in AsmHexCode src)
             => rex(skip(src.Bytes,0));
 
         [MethodImpl(Inline), Op]
         public static bit vex(in AsmHexCode src)
             => vex(skip(src.Bytes,0));
+
+        [MethodImpl(Inline), Op]
+        public static bit evex(uint src)
+            => (byte)src == 0x62;
 
         [MethodImpl(Inline), Op]
         public static bit repeat(AsmOpCode src)

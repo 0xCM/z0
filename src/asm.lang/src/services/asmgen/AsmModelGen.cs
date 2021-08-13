@@ -37,13 +37,13 @@ namespace Z0.Asm
         [Op]
         public void GenModels(ReadOnlySpan<string> src, FS.FolderPath dst)
         {
-            var flow = Wf.Running();
+            var flow = Running();
             EmitInstructionContracts(GetTargetPath(T.InstructionContracts, dst));
             EmitMonicExpressions(src, GetTargetPath(AsmGenTarget.MonicExpression, dst));
             EmitMonicEnum(src, GetTargetPath(AsmGenTarget.MonicCodeEnum, dst));
             EmitInstructionTypes(src, GetTargetPath(T.InstructionTypes, dst));
             EmitStatementBuilder(src, GetTargetPath(T.StatementBuilder, dst));
-            Wf.Ran(flow);
+            Ran(flow);
         }
 
         [Op]

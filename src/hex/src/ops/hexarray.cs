@@ -16,6 +16,27 @@ namespace Z0
         public static HexArray hexarray(byte[] src)
             => new HexArray(src);
 
+        [MethodImpl(Inline), Op]
+        public static uint hexarray(ReadOnlySpan<byte> src, Span<char> dst)
+        {
+            var j = 0u;
+            var count = src.Length;
+            var max = dst.Length;
+            seek(dst,j++) = Chars.LBracket;
+            for(var i=0; i<count && j<max; i++)
+            {
+                ref readonly var b = ref skip(src,i);
+                seek(dst,j++) = Chars.D0;
+                seek(dst,j++) = Chars.x;
+                seek(dst,j++) = Hex.hexchar(LowerCase, b, 1);
+                seek(dst,j++) = Hex.hexchar(LowerCase, b, 0);
+                if(i != count-1)
+                    seek(dst,j++) = Chars.Comma;
+            }
+            seek(dst,j++) = Chars.RBracket;
+            return j;
+        }
+
         public static Outcome hexarray(string src, out HexArray dst)
         {
             dst = HexArray.Empty;

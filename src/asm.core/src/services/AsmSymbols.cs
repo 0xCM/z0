@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static RegTokens;
+    using static SdmModels;
 
     [ApiHost]
     public class AsmSymbols
@@ -56,32 +57,35 @@ namespace Z0.Asm
 
         readonly Symbols<RegClassCode> _RegClasses;
 
+        readonly Symbols<ModRmEncKind> _ModRmEncKind;
+
         public static AsmSymbols create()
             => new AsmSymbols();
 
         AsmSymbols()
         {
-            _Mnemonics = AsmCodes.Mnemonics();
-            _Gp8Regs = AsmCodes.Gp8Regs();
-            _Gp8HiRegs = AsmCodes.Gp8Regs(true);
-            _Gp16Regs = AsmCodes.Gp16Regs();
-            _Gp32Regs = AsmCodes.Gp32Regs();
-            _Gp64Regs = AsmCodes.Gp64Regs();
-            _KRegs = AsmCodes.MaskRegs();
-            _XmmRegs = AsmCodes.XmmRegs();
-            _YmmRegs = AsmCodes.YmmRegs();
-            _ZmmRegs = AsmCodes.ZmmRegs();
-            _MmxRegs = AsmCodes.MmxRegs();
-            _SegRegs  = AsmCodes.SegRegs();
-            _CrRegs = AsmCodes.ControlRegs();
-            _FpuRegs = AsmCodes.FpuRegs();
-            _DebugRegs = AsmCodes.DebugRegs();
-            _BndRegs = AsmCodes.BndRegs();
-            _TestRegs = AsmCodes.TestRegs();
-            _SysPtrRegs = AsmCodes.SysPtrRegs();
-            _RegIndices = AsmCodes.RegIndices();
-            _RegWidths = AsmCodes.RegWidths();
-            _RegClasses = AsmCodes.RegClasses();
+            _Mnemonics = Symbols.index<AsmMnemonicCode>();
+            _Gp8Regs = AsmRegCodes.Gp8Regs();
+            _Gp8HiRegs = AsmRegCodes.Gp8Regs(true);
+            _Gp16Regs = AsmRegCodes.Gp16Regs();
+            _Gp32Regs = AsmRegCodes.Gp32Regs();
+            _Gp64Regs = AsmRegCodes.Gp64Regs();
+            _KRegs = AsmRegCodes.MaskRegs();
+            _XmmRegs = AsmRegCodes.XmmRegs();
+            _YmmRegs = AsmRegCodes.YmmRegs();
+            _ZmmRegs = AsmRegCodes.ZmmRegs();
+            _MmxRegs = AsmRegCodes.MmxRegs();
+            _SegRegs  = AsmRegCodes.SegRegs();
+            _CrRegs = AsmRegCodes.ControlRegs();
+            _FpuRegs = AsmRegCodes.FpuRegs();
+            _DebugRegs = AsmRegCodes.DebugRegs();
+            _BndRegs = AsmRegCodes.BndRegs();
+            _TestRegs = AsmRegCodes.TestRegs();
+            _SysPtrRegs = AsmRegCodes.SysPtrRegs();
+            _RegIndices = AsmRegCodes.RegIndices();
+            _RegWidths = AsmRegCodes.RegWidths();
+            _RegClasses = AsmRegCodes.RegClasses();
+            _ModRmEncKind = Symbols.index<ModRmEncKind>();
         }
 
         [MethodImpl(Inline), Op]

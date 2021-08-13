@@ -47,6 +47,8 @@ namespace Z0
         {
             public const byte MaxLength = 7;
 
+            public const uint StorageSize = PrimalSizes.U64;
+
             public ulong Storage;
 
             public byte PointSize
@@ -111,6 +113,8 @@ namespace Z0
 
         public struct name128 : IName<name128,Cell128>
         {
+            public const uint StorageSize = 16;
+
             public const byte MaxLength = 15;
 
             public static W128 W => default;

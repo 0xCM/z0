@@ -15,7 +15,6 @@ namespace Z0
     [ApiHost]
     public readonly struct DataParser
     {
-
         public static MsgPattern<Name,string> ParseFailure => "Parse failure {0}:{1}";
 
         public static Outcome parse(TextLine src, out SymLiteral dst)
@@ -204,7 +203,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out StringAddress dst)
         {
-            dst = TextTools.address(src);
+            dst = text.address(src);
             return true;
         }
 

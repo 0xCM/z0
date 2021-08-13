@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static RegClasses;
-    using static AsmCodes;
 
     [ApiHost]
     public readonly struct AsmRegNames
@@ -106,15 +105,15 @@ namespace Z0.Asm
             switch(src.RegClass)
             {
                 case RegClassCode.GP:
-                    return name(GP, src.Index, (RegWidthCode)(src.Bitfield & 0b111));
+                    return name(Gp, src.Index, (RegWidthCode)(src.Bitfield & 0b111));
                 case RegClassCode.XMM:
-                    return name(XMM, src.Index);
+                    return name(Xmm, src.Index);
                 case RegClassCode.YMM:
-                    return name(YMM, src.Index);
+                    return name(Ymm, src.Index);
                 case RegClassCode.ZMM:
-                    return name(ZMM, src.Index);
+                    return name(Zmm, src.Index);
                 case RegClassCode.MASK:
-                    return name(MASK, src.Index);
+                    return name(KReg, src.Index);
             }
             return RegName.Empty;
         }

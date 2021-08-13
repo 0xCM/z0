@@ -203,5 +203,39 @@ namespace Z0
             }
             return result;
         }
+
+        /// <summary>
+        /// Matches a 4-byte sequence
+        /// </summary>
+        /// <param name="n">The match count selector</param>
+        /// <param name="input">The input token</param>
+        bit Match(N4 n, byte input)
+        {
+            var result = bit.Off;
+            switch(Matched)
+            {
+                case 0:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 1:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 2:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 3:
+                    if(input == Term(Matched))
+                        result = bit.On;
+                        Matched++;
+                break;
+                default:
+                    Matched = 0;
+                    break;
+            }
+            return result;
+        }
     }
 }

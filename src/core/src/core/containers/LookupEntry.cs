@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct LookupEntry<K,V>
     {
-        public K Key {get;}
+        public readonly K Key;
 
-        public V Value {get;}
+        public readonly V Value;
 
         [MethodImpl(Inline)]
         public LookupEntry(K key, V value)

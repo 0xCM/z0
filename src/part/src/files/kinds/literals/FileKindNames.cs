@@ -238,6 +238,11 @@ namespace Z0
         public const string xpack = nameof(xpack);
 
         /// <summary>
+        /// Defines the 'xarray' literal
+        /// </summary>
+        public const string xarray = nameof(xarray);
+
+        /// <summary>
         /// Defines the 'xml' literal
         /// </summary>
         public const string xml = nameof(xml);

@@ -22,7 +22,7 @@ namespace Z0.Asm
         static bool comment(string src)
             => src.Length > 0 && src[0] == Chars.Semicolon;
 
-        static ReadOnlySpan<char> encoding(ReadOnlySpan<char> src)
+        static ReadOnlySpan<char> encoding(string src)
             => text.replace(text.between(src, Chars.LBracket, Chars.RBracket), Chars.Tab,Chars.Space).Trim();
 
         static ReadOnlySpan<char> operands(ReadOnlySpan<char> src)

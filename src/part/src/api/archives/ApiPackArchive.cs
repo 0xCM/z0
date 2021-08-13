@@ -40,6 +40,9 @@ namespace Z0
         public FS.FolderPath StatementTables()
             => CaptureTables() + FS.folder("asm.statements");
 
+        public FS.FilePath ApiCatalog()
+            => Root + FS.folder(tables) + FS.file(TableId.identify<ApiCatalogEntry>().Format(),FS.Csv);
+
         public FS.Files TableAsmPaths()
             => StatementTables().Files(FS.Asm, true);
 
@@ -76,6 +79,9 @@ namespace Z0
                 seek(dst,i) = (skip(csv,i),skip(asm,i));
             return buffer;
         }
+
+        public FS.FilePath Thumbprints()
+            => RootDir() + FS.file("thumbprints", FS.Asm);
 
         public FS.FolderPath Dumps()
             => RootDir() + FS.folder(dumps);
