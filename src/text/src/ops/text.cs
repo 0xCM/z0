@@ -23,6 +23,7 @@ namespace Z0
         /// </summary>
         public const StringComparison Cased = StringComparison.InvariantCulture;
 
+
         [Op]
         public static ITextBuffer buffer()
             => TextTools.buffer();

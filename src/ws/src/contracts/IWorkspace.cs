@@ -10,21 +10,6 @@ namespace Z0
     {
         Identifier Name {get;}
 
-        FS.FolderPath ScriptDir()
-            => Root + FS.folder(scripts);
-
-        FS.FilePath Script(ScriptId id)
-            => ScriptDir()+ FS.file(id.Format(), FS.Cmd);
-
-        FS.FilePath Script(string id)
-            => Root + FS.file(id,FS.Cmd);
-
-        FS.FolderPath Docs()
-            => Root + FS.folder(docs);
-
-        FS.FolderPath Docs(string id)
-            => Docs() + FS.folder(id);
-
         /// <summary>
         /// Defines a path of the form {Root}/.out
         /// </summary>
@@ -33,6 +18,39 @@ namespace Z0
 
         FS.FolderPath OutDir(string id)
             => OutDir() + FS.folder(id);
+
+        FS.FolderPath ScriptDir()
+            => Root + FS.folder(scripts);
+
+        FS.FilePath Script(string id)
+            => ScriptDir() + FS.file(id,FS.Cmd);
+
+        FS.FolderPath Docs()
+            => Root + FS.folder(docs);
+
+        FS.FolderPath Docs(string id)
+            => Docs() + FS.folder(id);
+
+        FS.FolderPath Bin()
+            => OutDir() + FS.folder(bin);
+
+        FS.FilePath BinPath(string id)
+            =>  Bin() + FS.file(id, FS.Bin);
+
+        FS.FolderPath HexDir()
+            => OutDir() + FS.folder(hex);
+
+        FS.FolderPath ObjOut()
+            => OutDir() + FS.folder(obj);
+
+        FS.FilePath ObjPath(string id)
+            => ObjOut() + FS.file(id,FS.Obj);
+
+        FS.FolderPath ExeOut()
+            => OutDir() + FS.folder(exe);
+
+        FS.FilePath ExePath(string id)
+            => ExeOut() + FS.file(id,FS.Exe);
 
         FS.FolderPath Settings()
             => Root + FS.folder("settings");

@@ -211,10 +211,10 @@ namespace Z0
             if(result.Fail)
                 return (false, $"{result.Message} | Could not parse address from '{src}'");
 
-            if(!FenceParser.unfence(src, SegFence, out var seg))
+            if(!text.unfence(src, SegFence, out var seg))
                 return (false, $"Line {src} does not contain segment fence");
 
-            if(!FenceParser.unfence(src, DataFence, out var data))
+            if(!text.unfence(src, DataFence, out var data))
                 return (false, $"Line {src} does not contain data fence");
 
             var segparts = text.split(seg, SegSep);

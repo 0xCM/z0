@@ -28,7 +28,7 @@ namespace Z0.Asm
             {
                 ref readonly var path = ref skip(lists,i);
                 var name = text.right(path.FileName.WithoutExtension.Format(), "print-enums-");
-                var table = StringTables.from(path, name, delimiter);
+                var table = stringtable(path, name, delimiter);
 
                 var spec = StringTables.specify("Z0.LL.Data", table);
                 StringTables.emit(spec,cswriter);
@@ -44,6 +44,28 @@ namespace Z0.Asm
 
             Write(string.Format("{0}: Artifact generation complete", arrow("*", csdst.ToUri())));
             return result;
+        }
+
+        public static StringTable stringtable(FS.FilePath src, string name, char? delimiter = null)
+        {
+            var lines = src.ReadLines().View;
+            var buffer = list<string>();
+            for(var i=0; i<lines.Length; i++)
+            {
+                ref readonly var line = ref skip(lines,i);
+                buffer.AddRange(line.SplitClean(delimiter.Value).Select(x => x.Trim()));
+            }
+            var entries = buffer.ViewDeposited();
+            var table = StringTables.create(name, entries);
+            var count = Require.equal(buffer.Count, (int)table.EntryCount);
+            for(var i=0u; i<count; i++)
+            {
+                var data = table[i];
+                ref readonly var s0 = ref skip(entries,i);
+                var s1 = new string(data);
+                Require.equal(s0, s1);
+            }
+            return table;
         }
 
         Outcome EmitStringTable(StringTableSpec spec)

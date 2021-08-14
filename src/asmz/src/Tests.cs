@@ -281,16 +281,6 @@ namespace Z0.Asm
             MemoryAddress target = nextIp + Displacement;
         }
 
-        static void TestCmdLine(params string[] args)
-        {
-            var cmd1 = new CmdLine("cmd /c dir j:\\");
-            var cmd2 = new CmdLine("llvm-mc --help");
-            using var wf = WfAppLoader.load(args).WithSource(Rng.@default());
-            var process = ScriptProcess.run(cmd2).Wait();
-            var output = process.Output;
-            wf.Status(output);
-        }
-
         void CheckFlags()
         {
             var flags = Clr.@enum<MinidumpRecords.MinidumpType>();
@@ -365,17 +355,6 @@ namespace Z0.Asm
             using var xml = XmlSource.create(srcPath);
             xml.Read(handlers);
             Wf.EmittedFile(flow,1);
-        }
-
-        public void Display(CmdLine cmd)
-        {
-            Wf.Status(cmd.Format());
-        }
-
-        public void DisplayConfig()
-        {
-            Wf.Status(Wf.Settings.FormatList());
-            Wf.Status(Db.Root);
         }
 
         public void RunPipes()
@@ -470,7 +449,6 @@ namespace Z0.Asm
             var bits = text.format(chars);
             Wf.Row(InputBits);
             Wf.Row(bits);
-
         }
 
         void ListDescriptors()
@@ -496,24 +474,6 @@ namespace Z0.Asm
             var blocks = Wf.ApiCatalogs().Correlate();
             var f1 = CodeBlocks.filter(blocks,ApiClassKind.And);
             root.iter(f1,f => Wf.Row(f.Uri));
-        }
-
-        void CheckApiHexArchive()
-        {
-            var part = PartId.Math;
-            Wf.ApiCatalog.FindComponent(part, out var component);
-            var catalog = ApiRuntimeLoader.catalog(component);
-
-            void accept(in ApiCodeBlock block)
-            {
-                if(catalog.Host(block.OpUri.Host, out var host))
-                {
-                    Wf.Row(string.Format("{0} | {1}", host.HostUri, block.OpUri));
-                }
-            }
-
-            var archive = Wf.ApiHexArchive();
-            archive.CodeBlocks(part, accept);
         }
     }
 }

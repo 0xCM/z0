@@ -27,7 +27,7 @@ namespace Z0.Asm
 
             // For thumbprints that include a bitstring such as 0001 0000 0000 1111
             var C = parts.Length > 2 ? skip(parts,2) : EmptyString;
-            if(FenceParser.unfence(A, SigFence, out var sigexpr))
+            if(text.unfence(A, SigFence, out var sigexpr))
             {
                 result = AsmParser.sig(sigexpr, out var sig);
                 if(result.Fail)
@@ -35,7 +35,7 @@ namespace Z0.Asm
 
                     AsmParser.code(sig.Mnemonic, out var monic);
 
-                    if(FenceParser.unfence(A, OpCodeFence, out var opcode))
+                    if(text.unfence(A, OpCodeFence, out var opcode))
                     {
                         if(AsmHexCode.parse(B, out var encoded))
                         {

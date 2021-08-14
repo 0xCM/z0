@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         DevWs Ws;
 
-        AsmWs AsmWs;
+        IAsmWorkspace AsmWs;
 
         ScriptRunner ScriptRunner;
 
@@ -271,29 +271,20 @@ namespace Z0.Asm
             }
         }
 
-        Outcome Run(CmdLine cmd, CmdVars vars, out ReadOnlySpan<TextLine> response)
+        Outcome RunCmdLine(CmdLine cmd, CmdVars vars, out ReadOnlySpan<TextLine> response)
             => ScriptRunner.RunCmd(cmd, vars, ReceiveCmdStatus, ReceiveCmdError, out response);
 
-        Outcome Run(ToolScript spec, out ReadOnlySpan<TextLine> response)
+        Outcome RunScript(ToolScript spec, out ReadOnlySpan<TextLine> response)
             => ScriptRunner.RunCmd(spec, ReceiveCmdStatus, ReceiveCmdError, out response);
 
         Outcome RunWinCmd(string spec, out ReadOnlySpan<TextLine> response)
             => CmdRunner.Run(WinCmd.cmd(spec), out response);
 
+        Outcome RunScript(FS.FilePath src, CmdVars vars, out ReadOnlySpan<TextLine> response)
+            => ScriptRunner.RunCmd(Cmd.cmdline(src.Format(PathSeparator.BS)), vars, ReceiveCmdStatus, ReceiveCmdError, out response);
+
         Outcome RunScript(FS.FilePath src, out ReadOnlySpan<TextLine> response)
-        {
-            var result = Outcome.Success;
-
-            void OnError(Exception e)
-            {
-                result = e;
-                Error(e);
-            }
-
-            var cmd = Cmd.cmdline(src.Format(PathSeparator.BS));
-            response = ScriptRunner.RunCmd(cmd, OnError);
-            return result;
-        }
+            => ScriptRunner.RunCmd(Cmd.cmdline(src.Format(PathSeparator.BS)), CmdVars.Empty, ReceiveCmdStatus, ReceiveCmdError, out response);
 
         Outcome ToolOutDir(CmdArgs args, out FS.FolderPath dir)
         {
@@ -311,23 +302,8 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var etl = AsmEtl.create(Wf);
             var srcpath = TableWs().Table<SdmOpCodeRecord>();
-
             result = etl.LoadSdmOpCodes(srcpath, out dst);
-            // if(result.Fail)
-            //     return result;
-
-            // dst = sys.empty<SdmOpCodeRecord>();
-            // var lines = srcpath.ReadLines().View;
-            // result = TextGrids.load(lines, out var grid);
-            // var count = grid.RowCount;
-
-            // dst = alloc<SdmOpCodeRecord>(count);
-            // result = AsmParser.parse(grid,dst);
-            // if(result.Fail)
-            //     return result;
-
             State.OpCodes(dst);
-
             return result;
         }
 
@@ -356,10 +332,7 @@ namespace Z0.Asm
             var formatter = Tables.formatter<T>(widths);
             var count = src.Length;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(src,i);
-                Write(formatter.Format(record));
-            }
+                Write(formatter.Format(skip(src,i)));
         }
 
         void EmitRecords<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
@@ -398,7 +371,7 @@ namespace Z0.Asm
                 ("SrcId", id)
                 );
             var cmd = Cmd.cmdline(script.Format(PathSeparator.BS));
-            return Run(cmd, vars, out var response);
+            return RunCmdLine(cmd, vars, out var response);
         }
 
         FS.FilePath ProcessAsmPath()
@@ -431,6 +404,7 @@ namespace Z0.Asm
         {
             Write(string.Format("Emitted {0} records to {1}", count, dst.ToUri()));
         }
+
 
         static MsgPattern CapacityExceeded => "Capacity exceeded";
 

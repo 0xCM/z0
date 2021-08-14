@@ -7,6 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.llvm;
+
     using static Root;
     using static core;
 
@@ -19,8 +21,8 @@ namespace Z0.Asm
     public readonly partial struct AsmOpCodes
     {
         [MethodImpl(Inline), Op]
-        public static AsmOpCode define(ushort literal)
-            => new AsmOpCode(literal,0);
+        public static AsmOpCode define(ushort sdmkey, MC.AsmId asmid, uint encoding)
+            => new AsmOpCode(sdmkey, asmid, encoding);
 
         [Op]
         public static bit search(ReadOnlySpan<char> src, out ModRmToken dst)

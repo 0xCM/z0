@@ -8,6 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
+    using Z0.llvm;
+
     using static Root;
     using static core;
 
@@ -16,18 +18,18 @@ namespace Z0.Asm
     {
         public const uint SZ = 2*PrimalSizes.U16 + PrimalSizes.U32;
 
-        ushort Kind;
+        public ushort SdmKey;
 
-        ushort Literal;
+        public MC.AsmId AsmId;
 
-        uint Field;
+        public uint Encoding;
 
         [MethodImpl(Inline)]
-        public AsmOpCode(ushort literal, uint field)
+        public AsmOpCode(ushort key, MC.AsmId asmid, uint encoding)
         {
-            Kind = 0;
-            Literal = literal;
-            Field = field;
+            AsmId = 0;
+            SdmKey = key;
+            Encoding = encoding;
         }
 
         public ref byte Lead
@@ -39,19 +41,19 @@ namespace Z0.Asm
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Field == 0;
+            get => Encoding == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Field != 0;
+            get => Encoding != 0;
         }
 
         Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => slice(bytes(Field),0, 3);
+            get => slice(bytes(Encoding),0, 3);
         }
 
         public static AsmOpCode Empty

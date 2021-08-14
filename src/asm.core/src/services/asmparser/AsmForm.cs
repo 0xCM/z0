@@ -12,17 +12,17 @@ namespace Z0.Asm
             dst = AsmFormExpr.Empty;
             var result = Outcome.Success;
 
-            result = FenceParser.unfence(src, SigFence, out var sigexpr);
+            result = text.unfence(src, SigFence, out var sigexpr);
             if(result.Fail)
-                return (false, ParseComposer.FenceNotFound.Format(SigFence,src));
+                return (false, FenceNotFound.Format(SigFence,src));
 
             result = sig(sigexpr, out var _sig);
             if(result.Fail)
                 return (false, Msg.CouldNotParseSigExpr.Format(sigexpr));
 
-            result = FenceParser.unfence(src, OpCodeFence, out var opcode);
+            result = text.unfence(src, OpCodeFence, out var opcode);
             if(result.Fail)
-                return (false, ParseComposer.FenceNotFound.Format(OpCodeFence, src));
+                return (false, FenceNotFound.Format(OpCodeFence, src));
 
             dst = new AsmFormExpr(asm.opcode(opcode), _sig);
             return true;
@@ -37,5 +37,7 @@ namespace Z0.Asm
             form(src[i++], out dst.FormExpr);
             return ref dst;
         }
+
+        public static MsgPattern<Fence<char>,string> FenceNotFound => "No content fenced with {0} exists int the input text '{1}'";
     }
 }

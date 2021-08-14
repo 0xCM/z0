@@ -137,28 +137,6 @@ namespace Z0
             return create(name,strings);
         }
 
-        public static StringTable from(FS.FilePath src, string name, char? delimiter = null)
-        {
-            var lines = src.ReadLines().View;
-            var buffer = list<string>();
-            for(var i=0; i<lines.Length; i++)
-            {
-                ref readonly var line = ref skip(lines,i);
-                buffer.AddRange(line.SplitClean(delimiter.Value).Select(x => x.Trim()));
-            }
-            var entries = buffer.ViewDeposited();
-            var table = create(name, entries);
-            var count = Require.equal(buffer.Count, (int)table.EntryCount);
-            for(var i=0u; i<count; i++)
-            {
-                var data = table[i];
-                ref readonly var s0 = ref skip(entries,i);
-                var s1 = new string(data);
-                Require.equal(s0, s1);
-            }
-            return table;
-        }
-
         public static string format(in StringTable src, uint margin = 0)
         {
             var dst = text.buffer();

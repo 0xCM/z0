@@ -7,11 +7,13 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.llvm;
+
     using static Root;
     using static core;
     using static Pow2x64;
-
     using static AsmOperands;
+    using AsmId = llvm.MC.AsmId;
 
     public struct GpState
     {
@@ -64,9 +66,7 @@ namespace Z0.Asm
             R32 = (uint*)R64;
             R16 = (ushort*)R64;
             R8 = (byte*)R64;
-
         }
-
 
         public void State(ITextBuffer dst)
         {
@@ -135,10 +135,16 @@ namespace Z0.Asm
         ref Cell128 reg128(RegIndex index)
             => ref @as<Cell512,Cell128>(reg512(index));
 
-        // public void movzx(r16 dst, r8 src)
-        // {
 
-        // }
+        public void run(AsmInstruction asm)
+        {
+            var id = asm.OpCode.AsmId;
+            switch(id)
+            {
+                case AsmId.MOV8ri:
+                break;
+            }
+        }
 
         public void Dispose()
         {

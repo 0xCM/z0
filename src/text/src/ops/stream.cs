@@ -9,6 +9,8 @@ namespace Z0
     using System.IO;
     using System.Text;
 
+    using static Root;
+
     partial class text
     {
         [Op]

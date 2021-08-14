@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct MethodSlot
     {
-        public Name Name {get;}
-
         public MemoryAddress Address {get;}
+
+        public Name Name {get;}
 
         [MethodImpl(Inline)]
         public MethodSlot(Name name, MemoryAddress address)
@@ -21,5 +21,11 @@ namespace Z0
             Name = name;
             Address = address;
         }
+
+        public string Format()
+            => string.Format("{0}: {1}", Address, Name);
+
+        public override string ToString()
+            => Format();
     }
 }

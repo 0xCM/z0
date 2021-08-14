@@ -60,5 +60,7 @@ namespace Z0
         public const string queries = nameof(queries);
 
         public const string api = nameof(api);
+
+        public const string hex = nameof(hex);
     }
 }

@@ -38,6 +38,5 @@ namespace Z0.Asm
             RegName(index) = name;
             RegVal(index) = value;
         }
-
     }
 }
