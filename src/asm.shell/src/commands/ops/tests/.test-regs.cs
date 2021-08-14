@@ -6,15 +6,18 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".respack-info")]
-        Outcome RespackInfo(CmdArgs args)
+        [CmdOp(".test-regs")]
+        Outcome TestRegs(CmdArgs args)
         {
             var result = Outcome.Success;
-            var provider = Wf.ApiResProvider();
-            var path = provider.ResPackPath();
-            var accessors = provider.ResPackAccessors();
-            Write(string.Format("Count:{0}", accessors.Length));
+
+            var machine = RegMachine.create();
+            var buffer = text.buffer();
+            machine.State(buffer);
+            Write(buffer.Emit());
+
             return result;
         }
+
     }
 }

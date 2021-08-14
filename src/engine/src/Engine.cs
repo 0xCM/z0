@@ -68,9 +68,6 @@ namespace Z0.Asm
 
     public class Engine : AppCmdService<Engine>
     {
-        public static RegMachine machine()
-            => new RegMachine(RegBanks.allocate(w64,w512));
-
         EngineSettings Settings;
 
         RegBank Registers;

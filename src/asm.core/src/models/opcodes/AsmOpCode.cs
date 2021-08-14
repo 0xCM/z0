@@ -6,19 +6,26 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
 
+    [StructLayout(LayoutKind.Sequential, Pack=1, Size =(int)SZ), Blittable(SZ)]
     public struct AsmOpCode
     {
-        uint Literal;
+        public const uint SZ = 2*PrimalSizes.U16 + PrimalSizes.U32;
+
+        ushort Kind;
+
+        ushort Literal;
 
         uint Field;
 
         [MethodImpl(Inline)]
-        public AsmOpCode(uint literal, uint field)
+        public AsmOpCode(ushort literal, uint field)
         {
+            Kind = 0;
             Literal = literal;
             Field = field;
         }

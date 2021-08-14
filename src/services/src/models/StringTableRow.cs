@@ -37,6 +37,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{24,12,8};
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{24,12,8};
     }
 }

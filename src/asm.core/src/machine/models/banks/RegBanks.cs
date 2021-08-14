@@ -15,20 +15,20 @@ namespace Z0.Asm
     public readonly struct RegBanks
     {
         [MethodImpl(Inline), Op]
-        public static Gp64Regs gp64(RegAlloc src)
-            => new Gp64Regs(src);
+        public static GpRegAlloc gp64(RegAlloc src)
+            => new GpRegAlloc(src);
 
         [MethodImpl(Inline), Op]
-        public static XmmRegs xmm(RegAlloc src)
-            => new XmmRegs(src);
+        public static XmmRegAlloc xmm(RegAlloc src)
+            => new XmmRegAlloc(src);
 
         [MethodImpl(Inline), Op]
-        public static YmmRegs ymm(RegAlloc src)
-            => new YmmRegs(src);
+        public static YmmRegAlloc ymm(RegAlloc src)
+            => new YmmRegAlloc(src);
 
         [MethodImpl(Inline), Op]
-        public static ZmmRegs zmm(RegAlloc src)
-            => new ZmmRegs(src);
+        public static ZmmRegAlloc zmm(RegAlloc src)
+            => new ZmmRegAlloc(src);
 
         static long FileSeqKeys;
 

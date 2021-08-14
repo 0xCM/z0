@@ -306,20 +306,25 @@ namespace Z0.Asm
             return true;
         }
 
-        Outcome LoadOpcodes()
+        Outcome LoadOpcodes(out SdmOpCodeRecord[] dst)
         {
             var result = Outcome.Success;
+            var etl = AsmEtl.create(Wf);
             var srcpath = TableWs().Table<SdmOpCodeRecord>();
-            var lines = srcpath.ReadLines().View;
-            result = TextGrids.load(lines, out var grid);
-            if(result.Fail)
-                return result;
-            var count = grid.RowCount;
 
-            var dst = alloc<SdmOpCodeRecord>(count);
-            result = AsmParser.parse(grid,dst);
-            if(result.Fail)
-                return result;
+            result = etl.LoadSdmOpCodes(srcpath, out dst);
+            // if(result.Fail)
+            //     return result;
+
+            // dst = sys.empty<SdmOpCodeRecord>();
+            // var lines = srcpath.ReadLines().View;
+            // result = TextGrids.load(lines, out var grid);
+            // var count = grid.RowCount;
+
+            // dst = alloc<SdmOpCodeRecord>(count);
+            // result = AsmParser.parse(grid,dst);
+            // if(result.Fail)
+            //     return result;
 
             State.OpCodes(dst);
 

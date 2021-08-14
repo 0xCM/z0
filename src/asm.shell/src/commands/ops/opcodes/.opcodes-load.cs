@@ -9,11 +9,11 @@ namespace Z0.Asm
         [CmdOp(".opcodes-load")]
         Outcome LoadOpcodes(CmdArgs args)
         {
-            var result = LoadOpcodes();
+            var result = LoadOpcodes(out var opcodes);
             if(result.Fail)
                 return result;
 
-            Write(string.Format("Absorbed {0} opcodes", State.OpCodes().Length));
+            Write(string.Format("Absorbed {0} opcodes", opcodes.Length));
 
             return result;
         }

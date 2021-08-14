@@ -14,6 +14,24 @@ namespace Z0.Asm
     [ApiHost]
     public class AsmEtl : Service<AsmEtl>
     {
+        public Outcome LoadSdmOpCodes(FS.FilePath src, out SdmOpCodeRecord[] dst)
+        {
+            var result = Outcome.Success;
+            dst = sys.empty<SdmOpCodeRecord>();
+            var lines = src.ReadLines().View;
+            result = TextGrids.load(lines, out var grid);
+            if(result.Fail)
+                return result;
+            var count = grid.RowCount;
+
+            dst = alloc<SdmOpCodeRecord>(count);
+            result = AsmParser.parse(grid,dst);
+            if(result.Fail)
+                return result;
+
+            return result;
+        }
+
         public static void traverse(FS.FilePath src, Receiver<ProcessAsm> dst)
         {
             var counter = 1u;

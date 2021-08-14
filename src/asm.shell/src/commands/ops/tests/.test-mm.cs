@@ -23,6 +23,7 @@ namespace Z0.Asm
             result &= Match(2, first32u(MatchTarget1), MatchInput);
             result &= Match(3, first32u(MatchTarget2), MatchInput);
             result &= Match(1, first32u(MatchTarget3), MatchInput);
+            result &= Match(3, first32u(MatchTarget4), MatchInput);
             return result ? (true, "Pass") : (false, "Fail");
         }
 
@@ -50,6 +51,9 @@ namespace Z0.Asm
         static ReadOnlySpan<byte> MatchTarget2 => new byte[4]{0x48,0x16,0x19,0x00};
 
         static ReadOnlySpan<byte> MatchTarget3 => new byte[4]{0x19,0x00,0x00,0x00};
+
+        static ReadOnlySpan<byte> MatchTarget4 => new byte[4]{0xCC,0x00,0x19,0x00};
+
 
         static ReadOnlySpan<byte> MatchInput => new byte[]{
             0x52,0x21,0x18,0x00,

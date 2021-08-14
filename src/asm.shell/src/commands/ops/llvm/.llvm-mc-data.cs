@@ -15,7 +15,6 @@ namespace Z0.Asm
         [CmdOp(".llvm-mc-data")]
         Outcome LlvmMcData(CmdArgs args)
         {
-            const string Example = "00 00 00 04 96 10 4c ce";
             var result = Outcome.Success;
             var calcs = MC.calcs();
             var count = calcs.AsmCount;

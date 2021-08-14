@@ -8,9 +8,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-
-        [CmdOp(".symtables")]
-        Outcome SymTables(CmdArgs args)
+        [CmdOp(".objsyms")]
+        Outcome ObjSyms(CmdArgs args)
         {
             var result = Outcome.Success;
             var src = Files(FS.Sym).View;

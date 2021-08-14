@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".stringtables")]
+        [CmdOp(".llvm-strings")]
         Outcome EmitStringtables(CmdArgs args)
-            => EmitStringtables();
+            => EmitLlvmStringTables();
    }
 }

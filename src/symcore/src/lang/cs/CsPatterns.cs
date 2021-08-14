@@ -184,6 +184,39 @@ namespace Z0
         public static string UsingCompilerServices()
             => L.UsingCompilerServices;
 
+        public static string Constant(string name, byte src)
+            => string.Format("public const byte {0} = {1};", name, src);
+
+        public static string Constant(string name, sbyte src)
+            => string.Format("public const sbyte {0} = {1};", name, src);
+
+        public static string Constant(string name, short src)
+            => string.Format("public const short {0} = {1};", name, src);
+
+        public static string Constant(string name, ushort src)
+            => string.Format("public const ushort {0} = {1};", name, src);
+
+        public static string Constant(string name, int src)
+            => string.Format("public const int {0} = {1};", name, src);
+
+        public static string Constant(string name, uint src)
+            => string.Format("public const uint {0} = {1};", name, src);
+
+        public static string Constant(string name, long src)
+            => string.Format("public const long {0} = {1};", name, src);
+
+        public static string Constant(string name, ulong src)
+            => string.Format("public const ulong {0} = {1};", name, src);
+
+        public static string Constant(string name, string src)
+            => string.Format("public const string {0} = \"{1}\";", name, src);
+
+        public static string Constant(string name, char src)
+            => string.Format("public const char {0} = '{1}';", name, src);
+
+        public static string Constant(string name, Enum src)
+            => string.Format("public const {0} {1} = {0}.{2};", src.GetType().Name, name, src);
+
         public static string EnumDecl(string name, string @base)
             => string.Format(L.EnumDeclPattern, name, @base);
 

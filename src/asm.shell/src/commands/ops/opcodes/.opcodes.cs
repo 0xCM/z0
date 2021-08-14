@@ -20,7 +20,7 @@ namespace Z0.Asm
             var opcodes = State.OpCodes();
             if(opcodes.Length == 0)
             {
-                result = LoadOpcodes();
+                result = LoadOpcodes(out _);
                 if(result.Fail)
                     return result;
 

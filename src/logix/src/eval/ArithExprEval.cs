@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
 
-    using static Part;
+    using static Root;
     using static LogicSig;
 
     using UAR = ApiUnaryArithmeticClass;

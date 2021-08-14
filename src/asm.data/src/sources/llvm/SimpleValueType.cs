@@ -15,11 +15,17 @@ namespace Z0
             // If you change this numbering, you must change the values in
             // ValueTypes.td as well!
             Other          =   1,   // This is a non-standard value
+
             i1             =   2,   // This is a 1 bit integer value
+
             i8             =   3,   // This is an 8 bit integer value
+
             i16            =   4,   // This is a 16 bit integer value
+
             i32            =   5,   // This is a 32 bit integer value
+
             i64            =   6,   // This is a 64 bit integer value
+
             i128           =   7,   // This is a 128 bit integer value
 
             FIRST_INTEGER_VALUETYPE = i1,

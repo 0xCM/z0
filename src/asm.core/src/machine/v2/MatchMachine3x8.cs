@@ -136,7 +136,7 @@ namespace Z0
             switch(Matched)
             {
                 case 0:
-                    if(input == Term(0))
+                    if(input == Term(Matched))
                         Matched = 1;
                         result = bit.On;
                 break;
@@ -158,11 +158,11 @@ namespace Z0
             switch(Matched)
             {
                 case 0:
-                    if(input == Term(0))
+                    if(input == Term(Matched))
                         Matched = 1;
                 break;
                 case 1:
-                    if(input == Term(1))
+                    if(input == Term(Matched))
                         Matched = 1;
                         result = bit.On;
                 break;
@@ -185,15 +185,15 @@ namespace Z0
             switch(Matched)
             {
                 case 0:
-                    if(input == Term(0))
+                    if(input == Term(Matched))
                         Matched = 1;
                 break;
                 case 1:
-                    if(input == Term(1))
+                    if(input == Term(Matched))
                         Matched = 2;
                 break;
                 case 2:
-                    if(input == Term(2))
+                    if(input == Term(Matched))
                         Matched = 3;
                         result = bit.On;
                 break;
@@ -227,6 +227,86 @@ namespace Z0
                         Matched++;
                 break;
                 case 3:
+                    if(input == Term(Matched))
+                        result = bit.On;
+                        Matched++;
+                break;
+                default:
+                    Matched = 0;
+                    break;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Matches a 5-byte sequence
+        /// </summary>
+        /// <param name="n">The match count selector</param>
+        /// <param name="input">The input token</param>
+        bit Match(N5 n, byte input)
+        {
+            var result = bit.Off;
+            switch(Matched)
+            {
+                case 0:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 1:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 2:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 3:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 4:
+                    if(input == Term(Matched))
+                        result = bit.On;
+                        Matched++;
+                break;
+                default:
+                    Matched = 0;
+                    break;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Matches a 6-byte sequence
+        /// </summary>
+        /// <param name="n">The match count selector</param>
+        /// <param name="input">The input token</param>
+        bit Match(N6 n, byte input)
+        {
+            var result = bit.Off;
+            switch(Matched)
+            {
+                case 0:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 1:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 2:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 3:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 4:
+                    if(input == Term(Matched))
+                        Matched++;
+                break;
+                case 5:
                     if(input == Term(Matched))
                         result = bit.On;
                         Matched++;
