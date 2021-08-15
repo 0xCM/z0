@@ -118,42 +118,13 @@ namespace Z0.Asm
                     row.Instruction,
                     row.OpCode,
                     row.Encoded,
-                    AsmBitstrings.format(row.Encoded),
+                    AsmBits.format8x4(row.Encoded),
                     AsmRender.semantic(row)
                 );
                 writer.WriteLine(rendered);
             }
             return (uint)count;
         }
-
-
-        // public Index<AsmHostStatement> LoadHostStatements(FS.FolderPath dir)
-        // {
-        //     var files = dir.EnumerateFiles(FS.Csv, true).Array();
-        //     var flow = Running(LoadingStatements.Format(dir));
-        //     var dst = bag<AsmHostStatement>();
-        //     Status(LoadingDocs.Format(files.Length));
-        //     var docs = TextGrids.load(files);
-        //     var counter = 0u;
-
-        //     Status(ParsingDocs.Format(docs.Length));
-        //     var results = parse(docs, dst);
-        //     foreach(var result in results)
-        //         result.OnSuccess(count => counter+=count).OnFailure(msg => Error(msg));
-
-        //     Ran(flow, ParsedStatements.Format(counter));
-
-        //     return dst.ToArray();
-        // }
-
-        // static Index<Outcome<uint>> parse(ReadOnlySpan<TextGrid> src, ConcurrentBag<AsmHostStatement> dst)
-        // {
-        //     var results = bag<Outcome<uint>>();
-        //     iter(src, doc => {
-        //         results.Add(AsmParser.parse(doc, dst));
-        //     }, true);
-        //     return results.ToArray();
-        // }
 
         public ReadOnlySpan<CpuIdRow> LoadCpuIdImports()
         {

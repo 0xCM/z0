@@ -29,13 +29,5 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 seek(dst,i) = skip(src,i).ToChar();
         }
-
-        [MethodImpl(Inline), Op]
-        public static void renderNx1(ReadOnlySpan<bit> src, Span<AsciCode> dst)
-        {
-            var count = min(src.Length,dst.Length);
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = skip(src,i).ToCharCode();
-        }
     }
 }

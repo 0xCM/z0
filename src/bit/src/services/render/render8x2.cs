@@ -29,14 +29,5 @@ namespace Z0
             render8x2(src, ref i, dst);
             return dst;
         }
-
-        [MethodImpl(Inline), Op]
-        public static uint render8x2(byte src, ref uint i, Span<AsciCode> dst)
-        {
-            var i0 = i;
-            seek(dst, i++) = code(src, 1);
-            seek(dst, i++) = code(src, 0);
-            return i - i0;
-        }
     }
 }

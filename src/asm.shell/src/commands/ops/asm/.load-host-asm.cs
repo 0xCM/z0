@@ -31,36 +31,5 @@ namespace Z0.Asm
 
             return result;
         }
-
-        [CmdOp(".gen-token-specs")]
-        Outcome GenTokenSpecs(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var src = Z0.Tokens.concat(Symbols.index<AsmOpCodeTokens.ModRmToken>());
-            var dst = Db.AppLog("tokens", FS.List);
-            Emit(src,dst);
-            return result;
-        }
-
-        void Emit(ReadOnlySpan<AsciCode> src, FS.FilePath dst)
-        {
-            var emitting = EmittingFile(dst);
-            using var writer = dst.AsciWriter();
-            var i=0;
-            var lines = 0u;
-            var count = src.Length;
-            while(i++<count)
-            {
-                ref readonly var c = ref skip(src,i);
-                if(c == AsciCode.Null)
-                {
-                    writer.WriteLine();
-                    lines++;
-                }
-                else
-                    writer.Write((char)c);
-            }
-            EmittedFile(emitting, lines);
-        }
     }
 }

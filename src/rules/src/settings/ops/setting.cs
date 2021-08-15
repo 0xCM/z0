@@ -34,7 +34,7 @@ namespace Z0
                 {
                     var name = SQ.left(content, j).Format().Trim();
                     var value = SQ.right(content, j).Format().Trim();
-                    seek(dst,counter++) = Settings.setting(name,value);
+                    seek(dst, counter++) = Settings.setting(name,value);
                 }
             }
             return slice(buffer,0,counter);

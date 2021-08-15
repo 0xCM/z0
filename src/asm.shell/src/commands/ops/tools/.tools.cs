@@ -38,7 +38,7 @@ namespace Z0.Asm
                         var title = string.Format("# {0}", c.ToolId);
                         var sep = string.Format("# {0}", RP.PageBreak80);
 
-                        Write(title,true);
+                        Write(title, FlairKind.Status);
                         Write(sep);
                         Write(settings);
                         writer.WriteLine(title);

@@ -156,20 +156,30 @@ namespace Z0
         protected void Warn(string pattern, params object[] args)
             => Wf.Warn(string.Format(pattern,args));
 
-        protected void Write<T>(T content, bool emphasis = false)
+        protected void Write<T>(T content)
+            => Wf.Row(content, null);
+
+        protected void Write<T>(T content, FlairKind flair)
+            => Wf.Row(content,flair);
+
+        protected void Write<T>(string name, T value, FlairKind? flair = null)
+            => Wf.Row(RP.attrib(name, value), flair);
+
+        protected void Write<T>(ReadOnlySpan<T> src, FlairKind? flair = null)
         {
-            if(emphasis)
-                Wf.RowStatus(content);
-            else Wf.Row(content);
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                Write(skip(src,i), flair ?? FlairKind.Data);
         }
 
-        protected void Write<T>(ReadOnlySpan<T> src)
-            where T : struct, IRecord<T>
+        protected void Write<T>(Span<T> src, FlairKind? flair = null)
         {
-            Tables.emit(src, x => Wf.Row(x));
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                Write(skip(src,i), flair ?? FlairKind.Data);
         }
 
-        protected void Error<T>(T content)
+        protected virtual void Error<T>(T content)
             => Wf.Error(content);
 
         protected WfExecFlow<T> Running<T>(T msg, [Caller] string operation = null)

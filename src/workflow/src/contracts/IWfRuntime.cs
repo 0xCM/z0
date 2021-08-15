@@ -174,13 +174,8 @@ namespace Z0
             return Flow(data);
         }
 
-        void Row<T>(T data)
-            => signal(this).Data(data);
-            //=> Raise(EventFactory.data(data));
-
-        void RowStatus<T>(T data)
-            => signal(this).Data(data, true);
-            //=> Raise(EventFactory.data(data, true));
+        void Row<T>(T data, FlairKind? flair = null)
+            => signal(this).Data(data,flair);
 
         void Babble<T>(WfHost host, T data)
             => signal(this, host).Babble(data);

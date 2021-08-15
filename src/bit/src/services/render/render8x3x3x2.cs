@@ -13,9 +13,9 @@ namespace Z0
     partial struct BitRender
     {
         [MethodImpl(Inline), Op]
-        public static uint render8x3x3x2(byte src, uint offset, Span<char> dst)
+        public static uint render8x3x3x2(byte src, ref uint i, Span<char> dst)
         {
-            var i= offset;
+            var i0 = i;
             seek(dst, i++) = bitchar(src, 7);
             seek(dst, i++) = bitchar(src, 6);
             seek(dst, i++) = bitchar(src, 5);
@@ -27,51 +27,27 @@ namespace Z0
             seek(dst, i++) = bitchar(src, 1);
             seek(dst, i++) = bitchar(src, 0);
             separate(i++, dst);
-            return 8 + 3u;
+            return i-i0;
         }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> render8x3x3x2(byte src)
         {
             var dst = CharBlock16.Null.Data;
-            var count = render8x3x3x2(src,0,dst);
+            var i=0u;
+            var count = render8x3x3x2(src,ref i, dst);
             return slice(dst,0,count);
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x3x3x2(byte src, uint offset, Span<AsciCode> dst)
+        public static uint render8x3x3x2(ReadOnlySpan<byte> src, ref uint i, Span<char> dst)
         {
-            var i= offset;
-            seek(dst, i++) = code(src, 7);
-            seek(dst, i++) = code(src, 6);
-            seek(dst, i++) = code(src, 5);
-            separate(i++, dst);
-            seek(dst, i++) = code(src, 4);
-            seek(dst, i++) = code(src, 3);
-            seek(dst, i++) = code(src, 2);
-            separate(i++, dst);
-            seek(dst, i++) = code(src, 1);
-            seek(dst, i++) = code(src, 0);
-            separate(i++, dst);
-            return 8 + 3u;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint render8x3x3x2(byte src, uint offset, Span<BitChar> dst)
-        {
-            var i= offset;
-            seek(dst, i++) = bit.test(src, 7);
-            seek(dst, i++) = bit.test(src, 6);
-            seek(dst, i++) = bit.test(src, 5);
-            seek(dst, i++) = BitChars.SegSep;
-            seek(dst, i++) = bit.test(src, 4);
-            seek(dst, i++) = bit.test(src, 3);
-            seek(dst, i++) = bit.test(src, 2);
-            seek(dst, i++) = BitChars.SegSep;
-            seek(dst, i++) = bit.test(src, 1);
-            seek(dst, i++) = bit.test(src, 0);
-            seek(dst, i++) = BitChars.SegSep;
-            return 8 + 3u;
+            var i0 = i;
+            var size = (int)src.Length;
+            var length = min(size, dst.Length);
+            for(var j=0; j<length; j++)
+                render8x3x3x2(skip(src, j), ref i, dst);
+            return i - i0;
         }
     }
 }

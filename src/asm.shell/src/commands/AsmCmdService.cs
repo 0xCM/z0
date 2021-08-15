@@ -75,6 +75,8 @@ namespace Z0.Asm
 
         IWorkspace DataSources;
 
+        AsmTools AsmToolSvc;
+
         byte[] _Assembled;
 
         const ushort _NativeBufferSize = Pow2.T14;
@@ -121,6 +123,7 @@ namespace Z0.Asm
             ProjectWs = Ws.Projects();
             DataSources = Ws.Sources();
             ApiCatalogs = Wf.ApiCatalogs();
+            AsmToolSvc = Wf.AsmTools();
             State.DevWs(Ws);
         }
 
@@ -129,6 +132,12 @@ namespace Z0.Asm
             CodeBuffer.Dispose();
             ResPack.Dispose();
         }
+
+        protected override void Error<T>(T content)
+        {
+            Write(content, FlairKind.Error);
+        }
+
 
         CliMemoryMap OpenResPack()
         {
@@ -250,7 +259,7 @@ namespace Z0.Asm
 
         void ReceiveCmdStatus(in string src)
         {
-
+            //Write(src);
         }
 
         void ReceiveCmdError(in string src)
@@ -286,6 +295,40 @@ namespace Z0.Asm
         Outcome RunScript(FS.FilePath src, out ReadOnlySpan<TextLine> response)
             => ScriptRunner.RunCmd(Cmd.cmdline(src.Format(PathSeparator.BS)), CmdVars.Empty, ReceiveCmdStatus, ReceiveCmdError, out response);
 
+        Outcome RunAsmScript(string asmid, ScriptId script)
+        {
+            var result = Outcome.Success;
+            var fence = Rules.fence(Chars.LParen,Chars.RParen);
+            var vars = WsVars.create();
+            var path = AsmWs.Script(script);
+            if(!path.Exists)
+                return (false, FS.missing(path));
+
+            vars.SrcId = asmid;
+            result = RunScript(path, vars.ToCmdVars(), out var response);
+            var count = response.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var r = ref skip(response,i);
+                if(r.IsEmpty)
+                    continue;
+
+                var j = text.index(r.Content, Chars.Colon);
+                if(j >= 0)
+                {
+                    var tool = text.left(r.Content,j);
+                    var flow = text.right(r.Content,j);
+                    j = text.index(flow, "--");
+                    if(j>=0)
+                    {
+                        var src = text.left(flow,j).Trim();
+                        var dst = text.right(flow,j + 2).Trim();
+                        Write(string.Format("{0}:{1} -> {2}", tool, src, dst));
+                    }
+                }
+            }
+            return result;
+        }
         Outcome ToolOutDir(CmdArgs args, out FS.FolderPath dir)
         {
             dir = FS.FolderPath.Empty;

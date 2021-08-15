@@ -12,6 +12,7 @@ namespace Z0
     using static core;
 
     using B = ByteBlock256;
+    using api = ByteBlocks;
 
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock256 : IDataBlock<B>
@@ -32,6 +33,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref first(Bytes);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => api.empty(this);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !api.empty(this);
         }
 
         [MethodImpl(Inline)]

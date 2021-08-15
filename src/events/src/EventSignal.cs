@@ -262,9 +262,9 @@ namespace Z0
         public WarnEvent<T> Warn<T>(T content)
             => Warn(Source, content);
 
-        public DataEvent<T> Data<T>(T data, bool status = false)
+        public DataEvent<T> Data<T>(T data, FlairKind? flair = null)
         {
-            var e = EventFactory.data(data, status);
+            var e = EventFactory.data(data, flair);
             Raise(e);
             return e;
         }

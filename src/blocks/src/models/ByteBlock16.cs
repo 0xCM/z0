@@ -13,6 +13,7 @@ namespace Z0
     using static core;
 
     using B = ByteBlock16;
+    using api = ByteBlocks;
 
     /// <summary>
     /// Defines 16 bytes of storage
@@ -40,6 +41,18 @@ namespace Z0
             get => ref first(Bytes);
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => api.empty(this);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !api.empty(this);
+        }
+
         [MethodImpl(Inline)]
         public Span<T> Storage<T>()
             where T : unmanaged
@@ -56,6 +69,7 @@ namespace Z0
             vcore.vstore(src, dst.Bytes);
             return dst;
         }
+
         public static B Empty => default;
     }
 }

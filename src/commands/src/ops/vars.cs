@@ -4,14 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
     using static core;
 
     partial struct Cmd
     {
-        internal const byte MaxVarCount = 32;
+        internal const ushort MaxVarCount = 255;
 
         [Op]
-        public static CmdVars vars(byte count)
+        public static CmdVars vars(ushort count)
             => new CmdVar[count];
 
         public static CmdVars vars(params Pair<string>[] src)
@@ -23,6 +27,9 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline), Op]
+        public static CmdVars vars(CmdVar[] src)
+            => src;
 
         [Op]
         public static CmdVars vars()

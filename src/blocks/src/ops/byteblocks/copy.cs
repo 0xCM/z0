@@ -12,6 +12,24 @@ namespace Z0
 
     partial class ByteBlocks
     {
+        [MethodImpl(Inline)]
+        public static bool empty<T>(in T src)
+            where T : unmanaged, IDataBlock<T>
+        {
+            var b = src.Bytes;
+            var count = b.Length;
+            var empty = true;
+            for(var i=0; i<count; i++)
+            {
+                if(skip(b,i) != 0)
+                {
+                    empty=false;
+                    break;
+                }
+            }
+            return empty;
+        }
+
         [MethodImpl(Inline), Op]
         public static ref ByteBlock2 copy(ReadOnlySpan<byte> src, ref ByteBlock2 dst)
         {

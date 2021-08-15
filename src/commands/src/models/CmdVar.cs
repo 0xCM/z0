@@ -54,6 +54,9 @@ namespace Z0
             return this;
         }
 
+        public bool Evaluated
+            => IsNonEmpty && (text.index(_Value,'%') < 0 && text.index(_Value,'$') < 0);
+
         [MethodImpl(Inline)]
         public string Format()
             => _Value;

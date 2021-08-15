@@ -182,8 +182,8 @@ namespace Z0
                 => new RunningEvent<T>(host.StepId, data, ct);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DataEvent<T> data<T>(T data, bool status = false)
-            => status ? new DataEvent<T>(data, FlairKind.StatusData) : new DataEvent<T>(data);
+        public static DataEvent<T> data<T>(T data, FlairKind? flair = null)
+            => flair.HasValue ? new DataEvent<T>(data, flair.Value) : new DataEvent<T>(data);
 
         /// <summary>
         /// Defines a <see cref='CreatedEvent{T}'/> event

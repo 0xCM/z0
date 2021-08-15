@@ -12,10 +12,11 @@ namespace Z0
     using static core;
 
     using B = ByteBlock19;
+    using api = ByteBlocks;
 
 
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock19 : IDataBlock<ByteBlock19>
+    public struct ByteBlock19 : IDataBlock<B>
     {
         public const ushort Size = 19;
 
@@ -35,7 +36,19 @@ namespace Z0
             get => ref first(Bytes);
         }
 
-        [MethodImpl(Inline)]
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => api.empty(this);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !api.empty(this);
+        }
+
+       [MethodImpl(Inline)]
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);

@@ -12,6 +12,7 @@ namespace Z0
     using static core;
 
     using B = ByteBlock80;
+    using api = ByteBlocks;
 
     /// <summary>
     /// Covers 80 bytes of storage
@@ -37,7 +38,19 @@ namespace Z0
             get => ref first(Bytes);
         }
 
-        [MethodImpl(Inline)]
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => api.empty(this);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !api.empty(this);
+        }
+
+       [MethodImpl(Inline)]
         public Span<T> Edit<T>()
             where T : unmanaged
                 => recover<T>(Bytes);

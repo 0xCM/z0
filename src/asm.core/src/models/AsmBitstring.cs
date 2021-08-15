@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    using api = AsmBitstrings;
+    using api = AsmBits;
 
     /// <summary>
     /// Defines a sequence of bits that specifies an instruction encoding
@@ -44,7 +44,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmBitstring(AsmHexCode src)
-            => new AsmBitstring(api.format(src));
+            => new AsmBitstring(api.format8x4(src));
 
         public static AsmBitstring Empty
         {

@@ -22,11 +22,11 @@ namespace Z0.Asm
 
         [Op]
         public static AsmEncodingInfo describe(in ProcessAsm src)
-            => new AsmEncodingInfo((src.OpCode, src.Sig), src.Statement, src.Encoded, AsmBitstrings.bitstring(src.Encoded));
+            => new AsmEncodingInfo((src.OpCode, src.Sig), src.Statement, src.Encoded, AsmBits.bitstring(src.Encoded));
 
         [Op]
         public static AsmEncodingInfo describe(in AsmFormExpr form, in AsmExpr statement, in AsmHexCode encoded)
-            => new AsmEncodingInfo(form, statement, encoded, AsmBitstrings.bitstring(encoded));
+            => new AsmEncodingInfo(form, statement, encoded, AsmBits.bitstring(encoded));
 
         [MethodImpl(Inline), Op]
         public static AsmEncodingInfo describe(in AsmFormExpr form, in AsmExpr statement, in AsmHexCode encoded, in AsmBitstring bitstring)

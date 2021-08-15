@@ -15,7 +15,7 @@ namespace Z0.Asm
             var flow = Wf.EmittingFile(path);
             using var writer = path.AsciWriter();
             var dst = span<char>(256*128);
-            var count = AsmBitfields.modrm(dst);
+            var count = AsmBits.ModRmTable(dst);
             var rendered = slice(dst,0,count);
             writer.Write(rendered);
             Wf.EmittedFile(flow,count);

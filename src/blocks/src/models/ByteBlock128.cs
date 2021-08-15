@@ -12,6 +12,7 @@ namespace Z0
     using static core;
 
     using B = ByteBlock128;
+    using api = ByteBlocks;
 
     /// <summary>
     /// Covers 128 bytes = 1024 bits of stack-allocated storage
@@ -25,6 +26,12 @@ namespace Z0
 
         ByteBlock64 B;
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => api.empty(this);
+        }
+
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
@@ -35,6 +42,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref first(Bytes);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !api.empty(this);
         }
 
         [MethodImpl(Inline)]

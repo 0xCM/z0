@@ -12,6 +12,7 @@ namespace Z0
     using static core;
 
     using B = ByteBlock15;
+    using api = ByteBlocks;
 
     /// <summary>
     /// 15 bytes of storage
@@ -35,6 +36,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref first(Bytes);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => api.empty(this);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !api.empty(this);
         }
 
         [MethodImpl(Inline)]

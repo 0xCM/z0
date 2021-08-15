@@ -20,14 +20,5 @@ namespace Z0
             seek(dst, i++) = bitchar(src, 0);
             return i - i0;
         }
-
-        [MethodImpl(Inline), Op]
-        public static uint render2(byte src, ref uint i, Span<AsciCode> dst)
-        {
-            var i0 = i;
-            seek(dst, i++) = code(src, 1);
-            seek(dst, i++) = code(src, 0);
-            return i - i0;
-        }
     }
 }

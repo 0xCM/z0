@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static bit;
 
     partial struct BitRender
     {
@@ -30,9 +29,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x4(byte src, uint offset, Span<char> dst)
+        public static uint render8x4(byte src, ref uint i, Span<char> dst)
         {
-            var i=offset;
+            var i0=i;
             seek(dst, i++) = bitchar(src, 7);
             seek(dst, i++) = bitchar(src, 6);
             seek(dst, i++) = bitchar(src, 5);
@@ -43,59 +42,34 @@ namespace Z0
             seek(dst, i++) = bitchar(src, 1);
             seek(dst, i++) = bitchar(src, 0);
             i += separate(i, dst);
-            return 8 + 2u;
+            return i - i0;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x4(byte src, uint offset, Span<AsciCode> dst)
+        public static uint render8x4(ReadOnlySpan<byte> src, ref uint i, Span<char> dst)
         {
-            var i=offset;
-            seek(dst, i++) = code(src, 7);
-            seek(dst, i++) = code(src, 6);
-            seek(dst, i++) = code(src, 5);
-            seek(dst, i++) = code(src, 4);
-            i += separate(i, dst);
-            seek(dst, i++) = code(src, 3);
-            seek(dst, i++) = code(src, 2);
-            seek(dst, i++) = code(src, 1);
-            seek(dst, i++) = code(src, 0);
-            i += separate(i, dst);
-            return 8 + 2u;
+            var i0=i;
+            var size = (int)src.Length;
+            var length = min(size, dst.Length);
+            for(var j=0; j<length; j++)
+                render8x4(skip(src, j), ref i, dst);
+            return i-i0;
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x4(byte src, uint offset, Span<BitChar> dst)
+        public static ReadOnlySpan<char> render8x4(in ByteBlock16 src, byte size = 16)
         {
-            var i=offset;
-            seek(dst, i++) = bit.test(src, 7);
-            seek(dst, i++) = bit.test(src, 6);
-            seek(dst, i++) = bit.test(src, 5);
-            seek(dst, i++) = bit.test(src, 4);
-            seek(dst, i++) = BitChars.SegSep;
-            seek(dst, i++) = bit.test(src, 3);
-            seek(dst, i++) = bit.test(src, 2);
-            seek(dst, i++) = bit.test(src, 1);
-            seek(dst, i++) = bit.test(src, 0);
-            seek(dst, i++) = BitChars.SegSep;
-            return 8 + 2u;
-        }
+            if(src.IsEmpty)
+                return default;
 
-        [MethodImpl(Inline), Op]
-        public static uint render4x4(ReadOnlySpan<byte> src, Span<char> dst)
-        {
-            var size = src.Length;
-            var j = 0u;
-            var w = w4;
-            for(var i=size-1; i >= 0; i--)
-            {
-                ref readonly var input = ref skip(src,i);
-                render4(hi(input), ref j, dst);
-                j+= separate(j, dst);
-                render4(lo(input), ref j, dst);
-                if(i != 0)
-                    j += separate(j, dst);
-            }
-            return j - 1;
+            CharBlocks.alloc(n256, out var block);
+            var dst = block.Data;
+            var i=0u;
+            var count = render8x4(slice(src.Bytes, 0, size), ref i, dst);
+            if(count == 0)
+                return EmptyString;
+
+            return slice(dst, 0, count);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline), Op]
-        public CmdVar var(string name, string value)
-            =>new CmdVar(name, value);
+        public static CmdVar var(string name, string value)
+            => new CmdVar(name, value);
     }
 }

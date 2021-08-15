@@ -14,6 +14,24 @@ namespace Z0.Asm
     partial struct AsmLayouts
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct LayoutCore : IAsmLayout<LayoutCore>
+        {
+            public RexPrefix Rex;
+
+            public Hex8 OpCode;
+
+            public ModRm ModRm;
+
+            public Sib Sib;
+
+            public ReadOnlySpan<byte> Content
+            {
+                [MethodImpl(Inline)]
+                get => bytes(this);
+            }
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct Layout1 : IAsmLayout<Layout1>
         {
             public Hex8 OpCode;
@@ -66,26 +84,6 @@ namespace Z0.Asm
             public Hex8 OpCode;
 
             public ModRm ModRm;
-
-            public ReadOnlySpan<byte> Content
-            {
-                [MethodImpl(Inline)]
-                get => bytes(this);
-            }
-        }
-
-        [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct Layout5 : IAsmLayout<Layout5>
-        {
-            public LegacyPrefix Lp;
-
-            public RexPrefix Rex;
-
-            public Hex8 OpCode;
-
-            public ModRm ModRm;
-
-            public Sib Sib;
 
             public ReadOnlySpan<byte> Content
             {

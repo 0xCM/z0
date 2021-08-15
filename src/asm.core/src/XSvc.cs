@@ -12,15 +12,19 @@ namespace Z0
     public static class XSvc
     {
         [Op]
-        public static AsmRegSets AsmRegSets(this IServiceContext ctx)
-            => Svc.AsmRegSets.create(ctx);
+        public static AsmRegSets AsmRegSets(this IServiceContext context)
+            => Svc.AsmRegSets.create(context);
 
         [Op]
-        public static AsmSymbols AsmSymbols(this IServiceContext ctx)
+        public static AsmSymbols AsmSymbols(this IServiceContext context)
             => Svc.AsmSymbols.create();
 
         [Op]
-        public static AsmEtl AsmEtl(this IServiceContext ctx)
-            => Svc.AsmEtl.create(ctx);
+        public static AsmEtl AsmEtl(this IServiceContext context)
+            => Svc.AsmEtl.create(context);
+
+        [Op]
+        public static AsmTools AsmTools(this IServiceContext context)
+            => Svc.AsmTools.create(context);
     }
 }

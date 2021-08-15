@@ -9,12 +9,12 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Facets : IIndex<Facet>
+    public readonly struct FacetIndex : IIndex<Facet>
     {
         readonly Index<Facet> Data;
 
         [MethodImpl(Inline)]
-        public Facets(Facet[] src)
+        public FacetIndex(Facet[] src)
         {
             Data = src;
         }
@@ -56,11 +56,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Facets(Facet[] src)
-            => new Facets(src);
+        public static implicit operator FacetIndex(Facet[] src)
+            => new FacetIndex(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Facet[](Facets src)
+        public static implicit operator Facet[](FacetIndex src)
             => src.Data.Storage;
     }
 }

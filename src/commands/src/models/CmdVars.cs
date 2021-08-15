@@ -19,6 +19,8 @@ namespace Z0
             Data = src;
         }
 
+        public uint NonEmptyCount()
+            => Data.Where(x => x.IsNonEmpty).Count;
         public uint Count
         {
             [MethodImpl(Inline)]

@@ -14,6 +14,17 @@ namespace Z0.Asm
     public readonly partial struct AsmLayouts
     {
         [MethodImpl(Inline), Op]
+        public static LayoutCore core(RexPrefix rex, Hex8 opcode, ModRm mrm, Sib sib)
+        {
+            var dst = new LayoutCore();
+            dst.Rex = rex;
+            dst.OpCode = opcode;
+            dst.ModRm = mrm;
+            dst.Sib = sib;
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
         public static Layout1 layout(Hex8 src)
         {
             var dst = new Layout1();
@@ -66,18 +77,6 @@ namespace Z0.Asm
             dst.Rex = rex;
             dst.OpCode = opcode;
             dst.ModRm = mrm;
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static Layout5 layout(LegacyPrefix lp, RexPrefix rex, Hex8 opcode, ModRm mrm, Sib sib)
-        {
-            var dst = new Layout5();
-            dst.Lp = lp;
-            dst.Rex = rex;
-            dst.OpCode = opcode;
-            dst.ModRm = mrm;
-            dst.Sib = sib;
             return dst;
         }
 

@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".asm")]
-        Outcome Assemble(CmdArgs args)
+        [CmdOp(".asm-legacy")]
+        Outcome AsmLegacy(CmdArgs args)
         {
             var count = args.Length;
             if(count ==0)

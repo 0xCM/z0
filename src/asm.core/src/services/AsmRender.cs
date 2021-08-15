@@ -22,7 +22,6 @@ namespace Z0.Asm
 
         const NumericKind Closure = UnsignedInts;
 
-
         [Op]
         public static string format(in Jcc8Conditions src, bit alt)
         {
@@ -43,28 +42,12 @@ namespace Z0.Asm
                 src.Value.FormatHexBytes()
                 );
 
-        [Op,Closures(Closure)]
-        public static string bits<T>(NamedRegValue<T> src)
-            where T : unmanaged
-        {
-            if(size<T>() == 1)
-                return new string(BitRender.render8(u8(src.Value)));
-            else if(size<T>() == 2)
-                return new string(BitRender.render16x8(u16(src.Value)));
-            else if(size<T>() == 4)
-                return new string(BitRender.render32x8(u32(src.Value)));
-            else if(size<T>() == 8)
-                return new string(BitRender.render64x8(u64(src.Value)));
-            else
-                return EmptyString;
-        }
-
         public static string format(in AsmHostStatement src)
             => string.Format("{0} {1,-36} ; {2} => {3}",
                         src.BlockOffset,
                         src.Expression,
                         string.Format("({0})<{1}>[{2}] => {3}", src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format()),
-                        AsmBitstrings.format(src.Encoded)
+                        AsmBits.format8x4(src.Encoded)
                         );
 
         public static string format(AsmBlockLabel src)
@@ -185,28 +168,6 @@ namespace Z0.Asm
             return dst;
         }
 
-        [Op]
-        public static string bits(RexPrefix src)
-            => text.format(BitRender.render8x4(src.Encoded));
-
-        [Op]
-        public static string bitfield(RexPrefix src)
-            => string.Format(RexFieldPattern, src.W(), src.R(), src.X(), src.B());
-
-        [Op]
-        public static uint bits(Vsib src, Span<char> dst)
-        {
-            var i=0u;
-            seek(dst,i++) = Open;
-            BitNumbers.render(src.SS(), ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            BitNumbers.render(src.Index(), ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            BitNumbers.render(src.Base(), ref i, dst);
-            seek(dst,i++) = Close;
-            return i;
-        }
-
         public static uint RexTable(ITextBuffer dst)
         {
             var bits = RexPrefix.Range();
@@ -299,7 +260,7 @@ namespace Z0.Asm
         {
             var common = format(src);
             if(bitstring)
-                return string.Format("{0} => {1}", common, AsmBitstrings.format(src.Encoded));
+                return string.Format("{0} => {1}", common, AsmBits.format8x4(src.Encoded));
             else
                 return common;
         }
@@ -346,7 +307,7 @@ namespace Z0.Asm
                 for(var i=0; i<To.Length; i++)
                     seek(dst,counter++) = skip(_to,i);
 
-                counter += AsmBitstrings.render8x4(n8, n4, src.Encoded, counter, dst);
+                AsmBits.render8x4(src.Encoded, ref counter, dst);
             }
 
             return counter;
@@ -355,9 +316,9 @@ namespace Z0.Asm
         [Op]
         public static string thumbprint(in AsmEncodingInfo src)
         {
-            var bits = AsmBitstrings.format(src.Encoded);
+            var bits = AsmBits.format8x4(src.Encoded);
             var statement = string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatPadded(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
-            return string.Format("{0} => {1}", statement, AsmBitstrings.format(src.Encoded));
+            return string.Format("{0} => {1}", statement, AsmBits.format8x4(src.Encoded));
         }
 
         [Op]
