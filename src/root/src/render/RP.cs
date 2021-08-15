@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Runtime.CompilerServices;
-
     using static Root;
 
     [ApiHost, LiteralProvider]
@@ -27,6 +25,5 @@ namespace Z0
         /// </summary>
         [RenderPattern("{0} -> {1}")]
         public const string ArrowAxB = "{0} -> {1}";
-
     }
 }

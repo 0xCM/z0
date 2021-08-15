@@ -53,7 +53,7 @@ namespace Z0
         public int CellWidth
         {
             [MethodImpl(Inline)]
-            get => width<T>();
+            get => (int)width<T>();
         }
 
         /// <summary>

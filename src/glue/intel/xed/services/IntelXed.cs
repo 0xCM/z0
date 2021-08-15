@@ -37,7 +37,7 @@ namespace Z0.Asm
         {
             Ws = Wf.DevWs();
             XedTables = Ws.Tables().Subdir("intel.xed");
-            XedSources = Ws.Sources().Dataset("xed.primary");
+            XedSources = Ws.Sources().Datasets("xed.primary");
             Parsers = Wf.XedParsers();
         }
 

@@ -10,9 +10,12 @@ namespace Z0
     {
         Identifier Name {get;}
 
-        /// <summary>
-        /// Defines a path of the form {Root}/.out
-        /// </summary>
+        FS.FolderPath DataDir()
+            => Root + FS.folder("data");
+
+        FS.FilePath LlvmRecord(string name)
+            => DataDir() + FS.folder("llvm.records") + FS.file(name, FS.Txt);
+
         FS.FolderPath OutDir()
             => Root + FS.folder(output);
 

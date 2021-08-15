@@ -8,7 +8,7 @@ namespace Z0.llvm
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
-    public struct LlvmOpCodeSpec : IRecord<LlvmOpCodeSpec>, IComparable<LlvmOpCodeSpec>
+    public struct OpCodeSpec : IRecord<OpCodeSpec>, IComparable<OpCodeSpec>
     {
         public const string TableId = "llvm.opcodes";
 
@@ -24,7 +24,7 @@ namespace Z0.llvm
 
         public CharBlock24 OpCodeBytes;
 
-        public int CompareTo(LlvmOpCodeSpec other)
+        public int CompareTo(OpCodeSpec other)
             => (OpId as IComparable<CharBlock32>).CompareTo(other.OpId);
 
         public static ReadOnlySpan<byte> RenderWidths

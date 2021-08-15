@@ -36,7 +36,7 @@ namespace Z0.Asm
 
         XmlDoc XmlSouceDoc()
         {
-            var src = Ws.Sources().Dataset(dataset) + FS.file(dataset, FS.Xml);
+            var src = Ws.Sources().Datasets(dataset) + FS.file(dataset, FS.Xml);
             return text.xml(src.ReadUtf8());
         }
 

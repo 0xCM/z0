@@ -16,7 +16,7 @@ namespace Z0.Asm
         Outcome ImportOpcodes(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = DataSources.Dataset(AsmTableScopes.SdmInstructions).Files(FS.Csv).ToReadOnlySpan();
+            var src = DataSources.Datasets(AsmTableScopes.SdmInstructions).Files(FS.Csv).ToReadOnlySpan();
             var count = src.Length;
             var kinds = Symbols.index<SdmTableKind>();
             Index<SdmOpCodeRecord> storage = alloc<SdmOpCodeRecord>(4000);

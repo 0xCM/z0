@@ -9,7 +9,7 @@ namespace Z0.Asm
     partial class IntelSdm
     {
         public FS.FolderPath IntelSources()
-            => Ws.Sources().Dataset("intel.pubs");
+            => Ws.Sources().Datasets("intel.pubs");
 
         public FS.FilePath SdmSrcPath(byte vol)
             => IntelSources() + SdmSrcFile(vol);

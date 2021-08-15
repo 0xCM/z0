@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
 
     [ApiHost]
     public readonly struct Surveys
@@ -240,7 +239,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Survey<T> template<T>(uint id, string name)
             where T : unmanaged
-                => template<T>(id,name, memory.width<T>(), memory.width<T>());
+                => template<T>(id,name, (int)memory.width<T>(), (int)memory.width<T>());
 
         /// <summary>
         /// Creates a stock survey with a specified number of questions, each of which has the maximum number
@@ -253,7 +252,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Survey<T> template<T>(uint id, string name, int length)
             where T : unmanaged
-                => template<T>(id,name, length, memory.width<T>());
+                => template<T>(id,name, length, (int)memory.width<T>());
 
         /// <summary>
         /// Creates a choice for a survey question

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     [ApiComplete]
     public class t_bb_disable : t_bits<t_bb_disable>
     {

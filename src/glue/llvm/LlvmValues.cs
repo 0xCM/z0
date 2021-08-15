@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static ushort width<T>(T src = default)
             where T : unmanaged
-                => core.width<T>();
+                => (ushort)core.width<T>();
 
         [MethodImpl(Inline)]
         public static ref ValueTypeInfo describe<T>(out ValueTypeInfo dst)

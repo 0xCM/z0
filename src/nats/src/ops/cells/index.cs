@@ -20,9 +20,9 @@ namespace Z0
             var rowCellCount = ScalarCast.uint16(mincells<N,T>());
             var rowOffset = ScalarCast.uint32(rowCellCount*row);
             return index(
-                CellIndex: ScalarCast.uint16(rowOffset + BitWidth.div(col,t)),
+                CellIndex: ScalarCast.uint16(rowOffset + BitWidth.div<T>(col)),
                 RowCellCount: rowCellCount,
-                BitOffset: ScalarCast.uint8(BitWidth.mod(col,t)),
+                BitOffset: ScalarCast.uint8(BitWidth.mod<T>(col)),
                 BitIndex: ScalarCast.uint32(rowOffset + col),
                 RowIndex: row,
                 ColIndex: col);

@@ -21,7 +21,7 @@ namespace Z0.Asm
         new T Value {get;}
 
         byte IDisplacement.StorageWidth
-            => core.width<T>();
+            => (byte)core.width<T>();
     }
 
     [Free]

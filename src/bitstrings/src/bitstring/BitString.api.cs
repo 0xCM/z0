@@ -59,7 +59,7 @@ namespace Z0
         public static Span<char> bitchars<T>(ReadOnlySpan<T> src, int? maxlen = null)
             where T : unmanaged
         {
-            var seglen = width<T>();
+            var seglen = (int)width<T>();
             var srclen = src.Length;
             Span<char> dst = sys.alloc<char>(srclen * seglen);
             ref readonly var input = ref first(src);
@@ -100,7 +100,7 @@ namespace Z0
         public static BitString replicate<T>(T src, int reps)
             where T : unmanaged
         {
-            var capacity = width<T>();
+            var capacity = (int)width<T>();
             var bitseq = sys.alloc<byte>(capacity*reps);
             var pattern = scalar(src);
             for(var i=0; i<reps; i++)

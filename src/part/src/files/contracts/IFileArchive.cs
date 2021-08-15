@@ -25,6 +25,12 @@ namespace Z0
         FS.FolderPath Subdir(string name)
             => Root + FS.folder(name);
 
+        FS.FilePath Path(string id, FS.FileExt ext)
+            => Root + FS.file(id,ext);
+
+        FS.FilePath Path(Scope scope, string id, FS.FileExt ext)
+            => Subdir(scope) + FS.file(id, ext);
+
         FS.FolderPath Subdir(Scope scope)
             => Root + FS.folder(scope.Format());
         string ITextual.Format()
@@ -48,25 +54,11 @@ namespace Z0
         FS.FolderPath Datasets()
             => Root + FS.folder(datasets);
 
-        FS.FolderPath Dataset(Scope scope)
+        FS.FolderPath Datasets(Scope scope)
             => Datasets() + FS.folder(scope.Format());
 
-        /// <summary>
-        /// Defines a path of the form {Root}/{subdir}/{id}.{ext}
-        /// </summary>
-        /// <param name="subdir">A subdirectory identifier</param>
-        /// <param name="id">A file identifiere</param>
-        /// <param name="ext">The target extension</param>
-        FS.FilePath Path(string subdir, string id, FS.FileExt ext)
-            => Subdir(subdir) + FS.file(id,ext);
-
-        /// <summary>
-        /// Defines a path of the form {Root}/{id}.{ext}
-        /// </summary>
-        /// <param name="id">A file identifiere</param>
-        /// <param name="ext">The target extension</param>
-        FS.FilePath Path(string id, FS.FileExt ext)
-            => Root + FS.file(id,ext);
+        FS.FilePath Dataset(Scope scope, string id, FS.FileExt ext)
+            => Datasets(scope) + FS.file(id,ext);
 
         FS.FilePath Table(Scope scope, TableId id)
             => Subdir(scope) + TableName(id);

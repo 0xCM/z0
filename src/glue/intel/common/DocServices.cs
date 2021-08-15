@@ -108,7 +108,7 @@ namespace Z0.Asm
 
         void Split(in DocSplitSpec spec, IReceiver<LineRange> dst)
         {
-            var src = Ws.Sources().Dataset("intel.pubs") + FS.file(spec.DocId, FS.Txt);
+            var src = Ws.Sources().Datasets("intel.pubs") + FS.file(spec.DocId, FS.Txt);
             if(!src.Exists)
             {
                 Error(FS.missing(src));

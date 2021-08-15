@@ -6,15 +6,13 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static AsmCodes;
-
     /// <summary>
     /// Characterizes a memory operand representation
     /// </summary>
     [Free]
     public interface IMemOp : IAsmOp
     {
-        AsmSizeKind Qualifier => default;
+        AsmSizeKind SizeKind  {get;}
 
         AsmAddress Address {get;}
     }
@@ -35,7 +33,7 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 1;
 
-        AsmSizeKind IMemOp.Qualifier
+        AsmSizeKind IMemOp.SizeKind
             => AsmSizeKind.@byte;
     }
 
@@ -58,7 +56,7 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 2;
 
-        AsmSizeKind IMemOp.Qualifier
+        AsmSizeKind IMemOp.SizeKind
             => AsmSizeKind.word;
     }
 
@@ -70,7 +68,6 @@ namespace Z0.Asm
 
         ByteSize ISized.Size
             => 2;
-
     }
 
     public interface IMemOp32 : IMemOp
@@ -81,7 +78,7 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 4;
 
-        AsmSizeKind IMemOp.Qualifier
+        AsmSizeKind IMemOp.SizeKind
             => AsmSizeKind.dword;
     }
 
@@ -103,7 +100,7 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 8;
 
-        AsmSizeKind IMemOp.Qualifier
+        AsmSizeKind IMemOp.SizeKind
             => AsmSizeKind.qword;
     }
 
@@ -125,7 +122,7 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 16;
 
-        AsmSizeKind IMemOp.Qualifier
+        AsmSizeKind IMemOp.SizeKind
             => AsmSizeKind.xmmword;
     }
 
@@ -147,7 +144,7 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 32;
 
-        AsmSizeKind IMemOp.Qualifier
+        AsmSizeKind IMemOp.SizeKind
             => AsmSizeKind.ymmword;
     }
 
@@ -169,7 +166,7 @@ namespace Z0.Asm
         ByteSize ISized.Size
             => 64;
 
-        AsmSizeKind IMemOp.Qualifier
+        AsmSizeKind IMemOp.SizeKind
             => AsmSizeKind.zmmword;
     }
 

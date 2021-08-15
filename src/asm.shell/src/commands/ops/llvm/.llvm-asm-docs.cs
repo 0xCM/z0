@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static Root;
     using static core;
 
     partial class AsmCmdService
@@ -11,8 +12,16 @@ namespace Z0.Asm
         [CmdOp(".llvm-asm-docs")]
         Outcome LlvmAsmDocs(CmdArgs args)
         {
+            const string AsmStringMarker = "Assembly string (intel):";
+            const string FlagsMarker = "Flags:";
+            const string ImplicitUsesMarker = "Implicit uses:";
+            const string ImplicitDefsMarker = "Implicit defs:";
+            const string PredicateMarker = "Predicates:";
+            const string UseMarker = "* USE";
+            const string ConstraintsMarker = "Constraints:";
+
             var result = Outcome.Success;
-            var src = DataSources.Dataset("llvm.tblgen.docs") + FS.file("X86.gen-instr-docs",FS.Txt);
+            var src = DataSources.Datasets("llvm.tblgen.docs") + FS.file("X86.gen-instr-docs",FS.Txt);
             var current = TextLine.Empty;
             var prior = TextLine.Empty;
             var counter = 0u;
@@ -35,7 +44,7 @@ namespace Z0.Asm
                 prior = current;
             }
 
-            Write(string.Format("Read {0} lines from {1}", counter, src.ToUri()));
+            Write(string.Format("Found {0} content sections in {1}", names.Count, src.ToUri()));
             return result;
         }
     }

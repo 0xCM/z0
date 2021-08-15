@@ -237,18 +237,6 @@ namespace Z0.Asm
         FS.Files Files(FS.FileExt a, FS.FileExt b, FS.FileExt c, FS.FileExt d)
             => State.Files().Where(f => f.Is(a) || f.Is(b) || f.Is(c) || f.Is(d));
 
-        FS.FilePath TablePath<T>()
-            where T : struct
-                => TableWs().Table<T>(FS.Csv);
-
-        FS.FilePath TablePath<T>(Scope scope)
-            where T : struct
-                => TableWs().Table<T>(scope);
-
-        FS.FilePath TablePath<T>(Scope scope, string suffix)
-            where T : struct
-                => TableWs().Table<T>(scope, suffix);
-
         FS.Files Files(FS.Files src, bool write = true)
         {
             State.Files(src);
@@ -256,6 +244,9 @@ namespace Z0.Asm
                 iter(src.View, f => Write(f.ToUri()));
             return src;
         }
+
+        void Emitted(FS.FilePath dst)
+            => Write(string.Format("Emitted {0}", dst.ToUri()));
 
         void ReceiveCmdStatus(in string src)
         {
@@ -278,6 +269,18 @@ namespace Z0.Asm
                 if(CmdResponse.parse(skip(src,i).Content, out var response))
                     Write(response);
             }
+        }
+
+        Index<SymKindRow> EmitSymKinds<K>(in Symbols<K> src, FS.FilePath dst)
+            where K : unmanaged
+        {
+            var result = Outcome.Success;
+            var kinds = src.Kinds;
+            var count = kinds.Length;
+            var buffer = alloc<SymKindRow>(count);
+            Symbols.kinds(src,buffer);
+            TableEmit(@readonly(buffer), SymKindRow.RenderWidths, dst);
+            return buffer;
         }
 
         Outcome RunCmdLine(CmdLine cmd, CmdVars vars, out ReadOnlySpan<TextLine> response)
@@ -329,6 +332,7 @@ namespace Z0.Asm
             }
             return result;
         }
+
         Outcome ToolOutDir(CmdArgs args, out FS.FolderPath dir)
         {
             dir = FS.FolderPath.Empty;

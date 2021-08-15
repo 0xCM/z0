@@ -11,11 +11,12 @@ namespace Z0.Asm
 
     partial struct AsmOperands
     {
-        public readonly struct xmmword
+        public readonly struct xmmword : ISizedTarget<xmmword>
         {
             public AsmAddress Target {get;}
 
-            public AsmSizeKind Kind => AsmSizeKind.xmmword;
+            public AsmSizeKind SizeKind
+                => AsmSizeKind.xmmword;
 
             [MethodImpl(Inline)]
             public xmmword(AsmAddress target)
@@ -26,27 +27,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator xmmword(AsmAddress dst)
                 => new xmmword(dst);
-        }
-
-        public readonly struct m128 : IMemOp128<m128>
-        {
-            public AsmAddress Address {get;}
-
-            public AsmSizeKind Qualifier
-            {
-                [MethodImpl(Inline)]
-                get => AsmSizeKind.xmmword;
-            }
-
-            [MethodImpl(Inline)]
-            public m128(AsmAddress address)
-            {
-                Address = address;
-            }
-
-            [MethodImpl(Inline)]
-            public static implicit operator m128(AsmAddress src)
-                => new m128(src);
         }
     }
 }

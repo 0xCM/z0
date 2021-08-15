@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The parametric type from which a bit-width will be determined</typeparam>
         [MethodImpl(Inline)]
-        public static int div<T>(int a, T t = default)
+        public static int div<T>(int a)
             where T : unmanaged
                 => a / (Unsafe.SizeOf<T>()*8);
 
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The parametric type from which a bit-width will be determined</typeparam>
         [MethodImpl(Inline)]
-        public static int mod<T>(int a, T t = default)
+        public static int mod<T>(int a)
             where T : unmanaged
                 => a % (Unsafe.SizeOf<T>()*8);
 
@@ -113,6 +113,10 @@ namespace Z0
             => src.Content;
 
         [MethodImpl(Inline)]
+        public static implicit operator uint(BitWidth src)
+            => (uint)src.Content;
+
+        [MethodImpl(Inline)]
         public static implicit operator BitWidth(long src)
             => new BitWidth(src);
 
@@ -121,8 +125,8 @@ namespace Z0
             => new BitWidth(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator ByteSize(BitWidth src)
-            => src.Bytes;
+        public static implicit operator BitWidth(uint src)
+            => new BitWidth(src);
 
         [MethodImpl(Inline)]
         public static implicit operator BitWidth(DataWidth src)
@@ -153,6 +157,14 @@ namespace Z0
             => (NumericWidth)src.Content;
 
         [MethodImpl(Inline)]
+        public static implicit operator BitWidth(ByteSize src)
+            => new BitWidth(src.Content*8);
+
+        [MethodImpl(Inline)]
+        public static explicit operator ByteSize(BitWidth src)
+            => src.Bytes;
+
+        [MethodImpl(Inline)]
         public static explicit operator BitWidth(byte src)
             => new BitWidth(src);
 
@@ -161,28 +173,21 @@ namespace Z0
             => new BitWidth(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitWidth(uint src)
-            => new BitWidth(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator byte(BitWidth src)
-            => (byte)src.Content;
-
-        [MethodImpl(Inline)]
         public static explicit operator int(BitWidth src)
             => (int)src.Content;
 
         [MethodImpl(Inline)]
-        public static explicit operator uint(BitWidth src)
-            => (uint)src.Content;
+        public static explicit operator byte(BitWidth src)
+            => (byte)src.Content;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(BitWidth src)
+            => (ushort)src.Content;
+
 
         [MethodImpl(Inline)]
         public static explicit operator double(BitWidth src)
             => src.Content;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitWidth(ByteSize src)
-            => new BitWidth(src.Content * 8);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitWidth lhs, BitWidth rhs)

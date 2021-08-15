@@ -9,10 +9,10 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct AsmOperand
     {
-        public const uint SZ = PrimalSizes.U8 + PrimalSizes.U64;
+        public const uint SZ = 2*PrimalSizes.U8;
 
         public AsmOpClass Class;
 
-        ulong Data;
+        public AsmSizeKind Size;
     }
 }

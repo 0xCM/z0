@@ -582,7 +582,7 @@ namespace Z0
             where T : unmanaged
         {
             var src = View;
-            var packed = PackedBits(src, offset, width<T>());
+            var packed = PackedBits(src, offset, (int)width<T>());
             return packed.Length != 0
                 ? packed.Singleton<byte,T>()
                 : default;

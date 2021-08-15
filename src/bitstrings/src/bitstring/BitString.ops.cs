@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString scalar<T>(T src, int? maxbits = null)
             where T : unmanaged
-                => new BitString(BitStringStore.bitseq(src, maxbits ?? width<T>()));
+                => new BitString(BitStringStore.bitseq(src, maxbits ?? (int)width<T>()));
 
         /// <summary>
         /// Constructs a bitstring from primal value, using caller-supplied storage instead of allocation
@@ -82,7 +82,7 @@ namespace Z0
         public static BitString scalar<T>(T src, byte[] storage, int? maxbits = null)
             where T : unmanaged
         {
-            var bitseq = BitStringStore.bitseq(src, maxbits ?? width<T>());
+            var bitseq = BitStringStore.bitseq(src, maxbits ?? (int)width<T>());
             bitseq.CopyTo(storage);
             return new BitString(storage);
         }
@@ -95,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString @enum<T>(T src, int? maxbits = null)
             where T : unmanaged, Enum
-                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? width<T>());
+                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? (int)width<T>());
 
         /// <summary>
         /// Constructs a bitstring from span of scalar values

@@ -584,6 +584,17 @@ namespace Z0
                 => BS.load<T>(random.Stream<T>().ToSpan(BS.cells<T>(bitcount)), bitcount);
 
         /// <summary>
+        /// Produces a bitblock over a specified number of bits
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="bitcount">The number of bits to cover</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitBlock<T> BitBlock<T>(this ISource random, uint bitcount)
+            where T : unmanaged
+                => BS.load<T>(random.Stream<T>().ToSpan(BS.cells<T>((int)bitcount)), (int)bitcount);
+
+        /// <summary>
         /// Produces a generic bitmatrix predicated on a primal type
         /// </summary>
         /// <param name="random">The random source</param>

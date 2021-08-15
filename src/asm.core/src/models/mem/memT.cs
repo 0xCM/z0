@@ -25,6 +25,12 @@ namespace Z0.Asm
                 Spec = src;
             }
 
+            public AsmSizeKind SizeKind
+            {
+                [MethodImpl(Inline)]
+                get => Spec.SizeKind;
+            }
+
             public AsmAddress Address
             {
                 [MethodImpl(Inline)]

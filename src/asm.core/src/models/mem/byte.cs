@@ -10,11 +10,12 @@ namespace Z0.Asm
 
     partial struct AsmOperands
     {
-        public readonly struct @byte
+        public readonly struct @byte : ISizedTarget<@byte>
         {
             public AsmAddress Target {get;}
 
-            public AsmSizeKind Kind => AsmSizeKind.@byte;
+            public AsmSizeKind SizeKind
+                => AsmSizeKind.@byte;
 
             [MethodImpl(Inline)]
             public @byte(AsmAddress dst)
@@ -25,27 +26,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator @byte(AsmAddress dst)
                 => new @byte(dst);
-        }
-
-        public readonly struct m8 : IMemOp8<m8>
-        {
-            public AsmAddress Address {get;}
-
-            public AsmSizeKind Qualifier
-            {
-                [MethodImpl(Inline)]
-                get => AsmSizeKind.@byte;
-            }
-
-            [MethodImpl(Inline)]
-            public m8(AsmAddress address)
-            {
-                Address = address;
-            }
-
-            [MethodImpl(Inline)]
-            public static implicit operator m8(AsmAddress src)
-                => new m8(src);
         }
     }
 }

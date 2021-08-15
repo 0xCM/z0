@@ -143,7 +143,7 @@ namespace Z0.Asm
 
             const string Imply = " => ";
 
-            var srcdir = Ws.Sources().Dataset("sde.cpuid");
+            var srcdir = Ws.Sources().Datasets("sde.cpuid");
             var srcfiles = srcdir.Files(FS.Def, true).ToReadOnlySpan();
             var count = srcfiles.Length;
             var outcome = Outcome.Success;

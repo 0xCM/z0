@@ -12,14 +12,14 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".llvm-mc-data")]
-        Outcome LlvmMcData(CmdArgs args)
+        [CmdOp(".emit-llvm-opcodes")]
+        Outcome LlvmOpCodes(CmdArgs args)
         {
             var result = Outcome.Success;
             var calcs = MC.calcs();
             var count = calcs.AsmCount;
 
-            var buffer = alloc<LlvmOpCodeSpec>(count);
+            var buffer = alloc<OpCodeSpec>(count);
             ref var dst = ref first(buffer);
             var ids = calcs.AsmId();
             for(ushort i=0; i<count; i++)
@@ -37,7 +37,7 @@ namespace Z0.Asm
 
             Array.Sort(buffer);
 
-            TableEmit(@readonly(buffer), LlvmOpCodeSpec.RenderWidths, TablePath<LlvmOpCodeSpec>());
+            TableEmit(@readonly(buffer), OpCodeSpec.RenderWidths, TableWs().Table<OpCodeSpec>(FS.Csv));
 
             return result;
         }

@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using static Root;
 
     partial class text
     {
@@ -19,6 +20,16 @@ namespace Z0
                     return segment(src, i0 + 1, i1 - 1);
             }
             return default;
+        }
+
+        [Op]
+        public static string between(string src, int i, int j)
+        {
+            if(j<=i)
+                return EmptyString;
+
+            else
+                return slice(src, i+1, (j-i) - 1);
         }
     }
 }
