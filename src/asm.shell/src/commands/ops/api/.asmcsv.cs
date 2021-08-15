@@ -4,26 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
     using static core;
 
     partial class AsmCmdService
     {
-        [CmdOp(".api-asm-files")]
-        Outcome ApiAsmFiles(CmdArgs args)
+        [CmdOp(".asmcsv")]
+        Outcome AsmStatements(CmdArgs args)
         {
             var result = Outcome.Success;
-            var pairs = ApiArchive.StatementTablePairs().View;
-            var count = pairs.Length;
+            var src = ApiArchive.HostAsmCsv().View;
+            var count = src.Length;
             for(var i=0; i<count; i++)
-            {
-                (var csv, var asm) = skip(pairs,i);
-                Write(string.Format("{0} | {1}", csv.ToUri(), asm.ToUri()));
-            }
+                Write(skip(src,i));
 
             return result;
         }
 
-        FS.Files ApiAsmPaths(PartId part)
-            => Files(ApiArchive.AsmCapturePaths(part));
     }
 }

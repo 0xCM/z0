@@ -32,7 +32,7 @@ namespace Z0.Asm
             return result;
         }
 
-        public static void traverse(FS.FilePath src, Receiver<ProcessAsm> dst)
+        public static void traverse(FS.FilePath src, Receiver<ProcessAsmRecord> dst)
         {
             var counter = 1u;
             using var reader = src.Utf8Reader();
@@ -49,7 +49,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static HexVector32 offsets(ReadOnlySpan<ProcessAsm> src)
+        public static HexVector32 offsets(ReadOnlySpan<ProcessAsmRecord> src)
         {
             var count = src.Length;
             var buffer = alloc<Hex32>(count);
@@ -123,7 +123,7 @@ namespace Z0.Asm
             return lines;
         }
 
-        public void EmitThumbprints(SortedSpan<ProcessAsm> src, FS.FilePath dst)
+        public void EmitThumbprints(SortedSpan<ProcessAsmRecord> src, FS.FilePath dst)
             => EmitThumbprints(DistinctEncodings(src), dst);
 
         public void EmitThumbprints(ReadOnlySpan<AsmThumbprint> src, FS.FilePath dst)
@@ -152,14 +152,14 @@ namespace Z0.Asm
             return lines;
         }
 
-        public SortedSpan<AsmThumbprint> DistinctThumbprints(ReadOnlySpan<AsmHostStatement> src)
+        public SortedSpan<AsmThumbprint> DistinctThumbprints(ReadOnlySpan<HostAsmRecord> src)
         {
             var distinct = hashset<AsmThumbprint>();
             iter(src, s => distinct.Add(asm.thumbprint(s)));
             return distinct.Array().ToSortedSpan();
         }
 
-        public SortedSpan<AsmThumbprint> EmitThumbprints(ReadOnlySpan<AsmHostStatement> src, FS.FilePath dst)
+        public SortedSpan<AsmThumbprint> EmitThumbprints(ReadOnlySpan<HostAsmRecord> src, FS.FilePath dst)
         {
             var distinct = DistinctThumbprints(src);
             EmitThumbprints(distinct, dst);
@@ -170,7 +170,7 @@ namespace Z0.Asm
         public static BinaryCode code(in CodeBlock src, uint offset, byte size)
             => slice(src.View, offset, size).ToArray();
 
-        public static SortedSpan<AsmEncodingInfo> DistinctEncodings(ReadOnlySpan<ProcessAsm> src)
+        public static SortedSpan<AsmEncodingInfo> DistinctEncodings(ReadOnlySpan<ProcessAsmRecord> src)
         {
             var collected = hashset<AsmEncodingInfo>();
             var count = src.Length;

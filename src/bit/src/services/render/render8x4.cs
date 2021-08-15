@@ -55,21 +55,5 @@ namespace Z0
                 render8x4(skip(src, j), ref i, dst);
             return i-i0;
         }
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> render8x4(in ByteBlock16 src, byte size = 16)
-        {
-            if(src.IsEmpty)
-                return default;
-
-            CharBlocks.alloc(n256, out var block);
-            var dst = block.Data;
-            var i=0u;
-            var count = render8x4(slice(src.Bytes, 0, size), ref i, dst);
-            if(count == 0)
-                return EmptyString;
-
-            return slice(dst, 0, count);
-        }
     }
 }

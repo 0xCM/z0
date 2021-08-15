@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static core;
 
-    using R = AsmHostStatement;
+    using R = HostAsmRecord;
 
     partial struct AsmParser
     {

@@ -42,7 +42,7 @@ namespace Z0.Asm
                 src.Value.FormatHexBytes()
                 );
 
-        public static string format(in AsmHostStatement src)
+        public static string format(in HostAsmRecord src)
             => string.Format("{0} {1,-36} ; {2} => {3}",
                         src.BlockOffset,
                         src.Expression,

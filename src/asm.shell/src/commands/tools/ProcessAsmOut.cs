@@ -36,7 +36,6 @@ namespace Z0.Asm
                 ref readonly var path = ref skip(paths,i);
                 var name = path.FileName;
             }
-
         }
 
         void ProcessObjDump(string srcid)

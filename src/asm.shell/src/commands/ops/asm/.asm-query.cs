@@ -22,7 +22,7 @@ namespace Z0.Asm
             var i = 0u;
             var count = AsmPrefixTests.rex(records, ref i, buffer);
             var filtered = slice(buffer,0,count);
-            QueryOut(@readonly(filtered), Z0.ProcessAsm.RenderWidths, qid);
+            QueryOut(@readonly(filtered), Z0.ProcessAsmRecord.RenderWidths, qid);
             return result;
         }
 
@@ -40,7 +40,7 @@ namespace Z0.Asm
             var i = 0u;
             var count = AsmPrefixTests.vex(records, ref i, buffer);
             var filtered = slice(buffer,0,count);
-            QueryOut(@readonly(filtered), Z0.ProcessAsm.RenderWidths, qid);
+            QueryOut(@readonly(filtered), Z0.ProcessAsmRecord.RenderWidths, qid);
             return result;
         }
     }

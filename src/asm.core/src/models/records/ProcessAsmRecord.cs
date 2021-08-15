@@ -13,7 +13,7 @@ namespace Z0
     using static Root;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct ProcessAsm : IRecord<ProcessAsm>, IComparable<ProcessAsm>, IAsmHexProvider<ProcessAsm>
+    public struct ProcessAsmRecord : IRecord<ProcessAsmRecord>, IComparable<ProcessAsmRecord>, IAsmHexProvider<ProcessAsmRecord>
     {
         public const string TableId = "asm.global";
 
@@ -66,7 +66,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public int CompareTo(ProcessAsm src)
+        public int CompareTo(ProcessAsmRecord src)
             => IP.CompareTo(src.IP);
 
         public override int GetHashCode()

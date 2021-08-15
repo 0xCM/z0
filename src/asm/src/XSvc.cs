@@ -16,6 +16,10 @@ namespace Z0
             => Services.AsmRowBuilder.create(wf);
 
         [Op]
+        public static AsmCsvService AsmCsv(this IWfRuntime wf)
+            => Services.AsmCsvService.create(wf);
+
+        [Op]
         public static ApiHostAsmEmitter AsmHostEmitter(this IWfRuntime wf)
             => Services.ApiHostAsmEmitter.create(wf);
 

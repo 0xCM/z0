@@ -10,8 +10,6 @@ namespace Z0
 
     public sealed class AsmAnalyzer : AppService<AsmAnalyzer>
     {
-        ApiHex ApiHex;
-
         AsmRowBuilder AsmRows;
 
         AsmCallPipe Calls;
@@ -26,7 +24,6 @@ namespace Z0
 
         protected override void OnInit()
         {
-            ApiHex = Wf.ApiHex();
             AsmRows = Wf.AsmRowBuilder();
             Calls = Wf.AsmCallPipe();
             Jumps = Wf.AsmJmpPipe();
@@ -37,14 +34,15 @@ namespace Z0
         {
             var blocks = CollectBlocks(src);
             var statements = Wf.AsmStatementPipe();
+            var asmcsv = Wf.AsmCsv();
             if(Settings.EmitCalls)
                 EmitCalls(src, dst);
 
             if(Settings.EmitJumps)
                 EmitJumps(src, dst);
 
-            if(Settings.EmitHostStatements)
-                statements.EmitHostStatements(src, dst);
+            if(Settings.EmitAsmCsv)
+                asmcsv.EmitAsmCsv(src, dst);
 
             if(Settings.EmitProcessAsm)
                 statements.EmitProcessAsm(src, dst.ProcessAsmPath());

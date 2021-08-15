@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     public class AsmLoader : Service<AsmLoader>
     {
-        public Index<AsmHostStatement> LoadHostStatements(FS.FilePath src)
+        public Index<HostAsmRecord> LoadHostAsmRows(FS.FilePath src)
         {
             var result = TextGrids.load(src, out var doc);
             if(!result)
@@ -22,7 +22,7 @@ namespace Z0.Asm
             }
             else
             {
-                var dst = alloc<AsmHostStatement>(doc.RowCount);
+                var dst = alloc<HostAsmRecord>(doc.RowCount);
                 var count = AsmParser.parse(doc, dst);
                 if(count)
                     return dst;
@@ -32,23 +32,47 @@ namespace Z0.Asm
             }
         }
 
-        public Index<AsmHostStatement> LoadHostStatements(FS.FolderPath src)
+        public Index<HostAsmRecord> LoadHostAsmRows(FS.FolderPath src, bool pll = true, bool sort = true)
         {
             var files = src.Files(FS.Csv, true);
             var flow = Running(LoadingStatements.Format(src));
-            var dst = bag<AsmHostStatement>();
-            Status(LoadingDocs.Format(files.Length));
-            var docs = TextGrids.load(files);
             var counter = 0u;
+            var dst = bag<HostAsmRecord>();
+            if(pll)
+            {
+                Status(LoadingDocs.Format(files.Length));
+                var docs = TextGrids.load(files);
 
-            Status(ParsingDocs.Format(docs.Length));
-            var results = parse(docs, dst);
-            foreach(var result in results)
-                result.OnSuccess(count => counter+=count).OnFailure(msg => Error(msg));
+                Status(ParsingDocs.Format(docs.Length));
+                var results = parse(docs, dst);
+                foreach(var result in results)
+                    result.OnSuccess(count => counter+=count).OnFailure(msg => Error(msg));
+            }
+            else
+            {
+                foreach(var file in files)
+                {
+                    var result = TextGrids.load(file, out var grid);
+                    if(result.Fail)
+                    {
+                        Error(result.Message);
+                        continue;
+                    }
+
+                    var parsed = AsmParser.parse(grid, dst);
+                    if(parsed.Fail)
+                        Error(string.Format("Error parsing {0}:{1}", file.ToUri(), result.Message));
+                    else
+                        counter += parsed.Data;
+                }
+            }
 
             Ran(flow, ParsedStatements.Format(counter));
 
-            return dst.ToArray();
+            var records = dst.ToArray();
+            if(sort)
+                Array.Sort(records);
+            return records;
         }
 
         public static uint ProcessAsmCount(FS.FilePath src)
@@ -66,7 +90,7 @@ namespace Z0.Asm
             return counter;
         }
 
-        public static Outcome<uint> LoadProcessAsm(FS.FilePath src, Span<ProcessAsm> dst)
+        public static Outcome<uint> LoadProcessAsm(FS.FilePath src, Span<ProcessAsmRecord> dst)
         {
             var counter = 1u;
             var i = 0u;
@@ -88,7 +112,7 @@ namespace Z0.Asm
             return i;
         }
 
-        static Index<Outcome<uint>> parse(ReadOnlySpan<TextGrid> src, ConcurrentBag<AsmHostStatement> dst)
+        static Index<Outcome<uint>> parse(ReadOnlySpan<TextGrid> src, ConcurrentBag<HostAsmRecord> dst)
         {
             var results = bag<Outcome<uint>>();
             iter(src, doc => {

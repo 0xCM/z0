@@ -17,267 +17,19 @@ namespace Z0.Asm
     {
         AsmDecoder Decoder;
 
-        ApiHex ApiHex;
-
         protected override void OnInit()
         {
             Decoder = Wf.AsmDecoder();
-            ApiHex = Wf.ApiHex();
         }
 
-        public ReadOnlySpan<AsmHostStatement> BuildHostStatements(ReadOnlySpan<ApiCodeBlock> src)
-        {
-            var count = src.Length;
-            var dst = list<AsmHostStatement>();
-            for(var i=0; i<count; i++)
-                CreateHostStatements(Decode(skip(src,i)), dst);
-            dst.Sort();
-            return dst.ViewDeposited();
-        }
-
-        public uint BuildHostStatements(in ApiHostBlocks src, List<AsmHostStatement> dst)
-        {
-            var blocks = src.Blocks.View;
-            var count = blocks.Length;
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-                counter += CreateHostStatements(Decode(skip(blocks,i)), dst);
-            return counter;
-        }
-
-        public ReadOnlySpan<AsmHostStatement> EmitHostStatements()
-            => EmitHostStatements(Db.AsmStatementRoot());
-
-        public ReadOnlySpan<AsmHostStatement> EmitHostStatements(FS.FolderPath dst)
-        {
-            var blocks = CodeBlocks.hosted(ApiHex.ReadBlocks().View);
-            return EmitHostStatements(blocks, dst);
-        }
-
-        public ReadOnlySpan<AsmHostStatement> EmitHostStatements(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath root)
-        {
-            root.Delete();
-
-            var count = src.Length;
-            var flow = Wf.Running(string.Format("Emitting statements for {0} host block sets", count));
-            var dst = list<AsmHostStatement>();
-            var buffer = list<AsmHostStatement>();
-            var counter = 0u;
-            for(var i=0; i<count; i++)
-            {
-                buffer.Clear();
-
-                ref readonly var blocks = ref skip(src,i);
-                if(blocks.Length == 0)
-                    continue;
-
-                counter += BuildHostStatements(blocks, buffer);
-
-                var host = blocks.Host;
-                EmitHostAsm(host, buffer.ViewDeposited());
-                EmitHostData(host, buffer.ViewDeposited());
-                dst.AddRange(buffer);
-            }
-
-            Wf.Ran(flow, string.Format("Emitted {0} total statements", counter));
-            return dst.ViewDeposited();
-        }
-
-        void EmitHostAsm(ApiHostUri host, ReadOnlySpan<AsmHostStatement> src)
-        {
-            var dst = Db.AsmStatementPath(host, FS.Asm);
-            var flow = Wf.EmittingFile(dst);
-            var count = src.Length;
-            using var asmwriter = dst.Writer();
-
-            for(var j=0; j<count;j++)
-            {
-                ref readonly var statement = ref skip(src,j);
-                if(statement.BlockOffset == 0)
-                    EmitAsmBlockHeader(statement,asmwriter);
-
-                asmwriter.WriteLine(AsmRender.format(statement));
-            }
-
-            Wf.EmittedFile(flow, count);
-        }
-
-        void EmitHostData(ApiHostUri host, ReadOnlySpan<AsmHostStatement> src)
-        {
-            var dst = Db.AsmStatementPath(host, FS.Csv);
-            var flow = Wf.EmittingTable<AsmHostStatement>(dst);
-            Wf.EmittedTable(flow, Tables.emit(src, AsmHostStatement.RenderWidths, dst));
-        }
-
-        public ReadOnlySpan<AsmHostStatement> EmitHostStatements(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
-        {
-            var statements = BuildHostStatements(src);
-            EmitHostStatements(statements, dst);
-            return statements;
-        }
-
-        public void EmitHostStatements(ReadOnlySpan<AsmHostStatement> src, FS.FolderPath root)
-        {
-            ClearTarget();
-
-            var thumbprints = hashset<AsmThumbprint>();
-            var formatter = Tables.formatter<AsmHostStatement>(AsmHostStatement.RenderWidths);
-            var statements = src;
-            var count = statements.Length;
-            var host = ApiHostUri.Empty;
-            var counter = 0u;
-            var tableWriter = default(StreamWriter);
-            var tablePath = FS.FilePath.Empty;
-            var tableFlow = default(WfTableFlow<AsmHostStatement>);
-            var asmWriter = default(StreamWriter);
-            var asmPath = FS.FilePath.Empty;
-            var asmFlow = default(WfFileFlow);
-            var buffer = text.buffer();
-
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var statement = ref skip(statements,i);
-                if(statement.IsValid())
-                    thumbprints.Add(asm.thumbprint(statement));
-
-                var uri = statement.OpUri;
-                if(i == 0)
-                {
-                    host = uri.Host;
-                    tablePath = AsmTablePath(host, root);
-                    tableWriter = tablePath.Writer();
-                    tableWriter.WriteLine(formatter.FormatHeader());
-
-                    tableFlow = Wf.EmittingTable<AsmHostStatement>(tablePath);
-                    asmPath = AsmSrcPath(host, root);
-                    asmWriter = asmPath.Writer();
-                    asmFlow = Wf.EmittingFile(asmPath);
-                }
-
-                if(uri.Host != host)
-                {
-                    tableWriter.Dispose();
-                    Wf.EmittedTable<AsmHostStatement>(tableFlow, counter);
-
-                    asmWriter.Dispose();
-                    Wf.EmittedFile(asmFlow, counter);
-
-                    host = statement.OpUri.Host;
-                    tablePath = Db.AsmStatementPath(root, host,FS.Csv);
-
-                    tableWriter = tablePath.Writer();
-                    tableWriter.WriteLine(formatter.FormatHeader());
-                    tableFlow = Wf.EmittingTable<AsmHostStatement>(tablePath);
-
-                    asmPath = Db.AsmStatementPath(root, host, FS.Asm);
-                    asmWriter = asmPath.Writer();
-                    asmFlow = Wf.EmittingFile(asmPath);
-
-                    counter = 0;
-                }
-
-                if(statement.BlockOffset == 0)
-                    EmitAsmBlockHeader(statement,asmWriter);
-
-                tableWriter.WriteLine(formatter.Format(statement));
-                asmWriter.WriteLine(AsmRender.format(statement));
-
-                counter++;
-            }
-
-            Wf.AsmEtl().EmitThumbprints(thumbprints.ToArray().ToSortedSpan(), ThumbprintPath(root));
-            tableWriter.Dispose();
-            Wf.EmittedTable(tableFlow,counter);
-
-            asmWriter.Dispose();
-            Wf.EmittedFile(asmFlow,counter);
-        }
-
-        public static uint CountInstructions(ReadOnlySpan<AsmRoutine> src)
-        {
-            var count = src.Length;
-            var total = 0u;
-            for(var i=0; i<count; i++)
-                total += (uint)skip(src,i).InstructionCount;
-            return total;
-        }
-
-        public void EmitHostStatements(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
-        {
-            var pipe = Wf.AsmStatementPipe();
-            var total = CountInstructions(src);
-            var running = Wf.Running(Msg.CreatingStatements.Format(total));
-            var buffer = span<AsmHostStatement>(total);
-            var count = src.Length;
-            var offset = 0u;
-            for(var i=0; i<count; i++)
-                offset += pipe.CreateStatementData(skip(src,i), slice(buffer, offset));
-            Wf.Ran(running, Msg.CreatedStatements.Format(total));
-
-            pipe.EmitHostStatements(buffer, dst.RootDir());
-        }
-
-        uint CreateStatementData(in AsmRoutine src, Span<AsmHostStatement> dst)
-        {
-            var instructions = src.Instructions.View;
-            var count = (uint)instructions.Length;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var instruction = ref skip(instructions, i);
-                ref var target = ref seek(dst,i);
-                target.BlockAddress = src.BaseAddress;
-                target.IP = instruction.IP;
-                target.BlockOffset = (Address16)instruction.Offset;
-                target.Expression = instruction.Statment;
-                target.Encoded = instruction.AsmHex;
-                target.Sig = instruction.AsmSig;
-                target.OpCode = instruction.OpCode;
-                target.Bitstring = instruction.AsmHex;
-                target.OpUri = src.Uri;
-            }
-            return count;
-        }
-
-        uint CreateHostStatements(in AsmInstructionBlock src, List<AsmHostStatement> dst)
-        {
-            var instructions = src.Instructions;
-            var count = (uint)instructions.Length;
-            var offset = z16;
-            var bytes = src.Code.View;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var instruction = ref skip(instructions,i);
-                var opcode = asm.opcode(instruction.OpCode.ToString());
-                if(!opcode.IsValid)
-                    break;
-
-                var statement = new AsmHostStatement();
-                var size = (ushort)instruction.ByteLength;
-                var specifier = instruction.Specifier;
-                statement.BlockAddress = src.BaseAddress;
-                statement.BlockOffset = offset;
-                statement.IP = instruction.IP;
-                statement.OpUri = src.Uri;
-                statement.Expression = instruction.FormattedInstruction;
-                AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
-                statement.Encoded = AsmHexCode.load(bytes.Slice(offset, size));
-                statement.OpCode = opcode;
-                statement.Bitstring = statement.Encoded;
-                dst.Add(statement);
-
-                offset += size;
-            }
-            return count;
-        }
-
-        public SortedReadOnlySpan<ProcessAsm> BuildProcessAsm(ReadOnlySpan<AsmRoutine> src)
+        public SortedReadOnlySpan<ProcessAsmRecord> BuildProcessAsm(ReadOnlySpan<AsmRoutine> src)
         {
             var kRountines = src.Length;
             if(kRountines == 0)
                 return default;
 
-            var total = CountInstructions(src);
-            var buffer = span<ProcessAsm>(total);
+            var total = ApiInstructions.count(src);
+            var buffer = span<ProcessAsmRecord>(total);
             ref var dst = ref first(buffer);
             var counter = 0u;
             var @base = skip(src,0).BaseAddress;
@@ -300,7 +52,7 @@ namespace Z0.Asm
                     if(!opcode.IsValid)
                         break;
 
-                    var statement = new ProcessAsm();
+                    var statement = new ProcessAsmRecord();
                     var size = (ushort)instruction.ByteLength;
                     var specifier = instruction.Specifier;
                     var ip = (MemoryAddress)instruction.IP;
@@ -324,23 +76,23 @@ namespace Z0.Asm
             return Spans.sorted(@readonly(slice(buffer,1,counter)));
         }
 
-        public uint EmitProcessAsm(SortedReadOnlySpan<ProcessAsm> src, FS.FilePath dst)
-            => TableEmit(src.View, ProcessAsm.RenderWidths, ProcessAsm.RowPad, Encoding.ASCII, dst);
+        public uint EmitProcessAsm(SortedReadOnlySpan<ProcessAsmRecord> src, FS.FilePath dst)
+            => TableEmit(src.View, ProcessAsmRecord.RenderWidths, ProcessAsmRecord.RowPad, Encoding.ASCII, dst);
 
-        public ReadOnlySpan<ProcessAsm> EmitProcessAsm(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
+        public ReadOnlySpan<ProcessAsmRecord> EmitProcessAsm(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
         {
             var rows = BuildProcessAsm(src);
             EmitProcessAsm(rows, dst);
             return rows;
         }
 
-        public SortedReadOnlySpan<ProcessAsm> BuildProcessAsm(SortedSpan<ApiCodeBlock> src)
+        public SortedReadOnlySpan<ProcessAsmRecord> BuildProcessAsm(SortedSpan<ApiCodeBlock> src)
         {
             var count = src.Length;
             if(count == 0)
                 return default;
 
-            var dst = list<ProcessAsm>();
+            var dst = list<ProcessAsmRecord>();
             var counter = 0u;
             var @base = src[0].BaseAddress;
 
@@ -364,7 +116,7 @@ namespace Z0.Asm
                     if(!opcode.IsValid)
                         break;
 
-                    var statement = new ProcessAsm();
+                    var statement = new ProcessAsmRecord();
                     var size = (ushort)instruction.ByteLength;
                     var specifier = instruction.Specifier;
                     var ip = (MemoryAddress)instruction.IP;
@@ -399,31 +151,5 @@ namespace Z0.Asm
                 return AsmInstructionBlock.Empty;
             }
         }
-
-        void ClearTarget()
-        {
-            var dir = Db.TableDir<AsmHostStatement>();
-            var flow = Wf.Running(Msg.ObliteratingDirectory.Format(dir));
-            dir.Delete();
-            Wf.Ran(flow, Msg.ObliteratedDirectory.Format(dir));
-        }
-
-        static void EmitAsmBlockHeader(in AsmHostStatement first, StreamWriter dst)
-        {
-            dst.WriteLine(AsmBlockSeparator);
-            dst.WriteLine(string.Format("; {0}, uri={1}", first.BlockAddress, first.OpUri));
-            dst.WriteLine(AsmBlockSeparator);
-        }
-
-        FS.FilePath ThumbprintPath(FS.FolderPath root)
-            => root + FS.file("thumbprints", FS.Asm);
-
-        FS.FilePath AsmSrcPath(ApiHostUri host, FS.FolderPath root)
-            => Db.AsmStatementPath(root, host, FS.Asm);
-
-        FS.FilePath AsmTablePath(ApiHostUri host, FS.FolderPath root)
-            => Db.AsmStatementPath(root, host,FS.Csv);
-
-        const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
     }
 }

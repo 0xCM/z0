@@ -21,7 +21,7 @@ namespace Z0.Asm
         const NumericKind Closure = UnsignedInts;
 
         [Op]
-        public static AsmEncodingInfo describe(in ProcessAsm src)
+        public static AsmEncodingInfo describe(in ProcessAsmRecord src)
             => new AsmEncodingInfo((src.OpCode, src.Sig), src.Statement, src.Encoded, AsmBits.bitstring(src.Encoded));
 
         [Op]

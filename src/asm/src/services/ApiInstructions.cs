@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -13,6 +14,71 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct ApiInstructions
     {
+        [Op]
+        public static uint count(ReadOnlySpan<AsmRoutine> src)
+        {
+            var count = src.Length;
+            var total = 0u;
+            for(var i=0; i<count; i++)
+                total += (uint)skip(src,i).InstructionCount;
+            return total;
+        }
+
+        [Op]
+        public static uint statements(in AsmRoutine src, Span<HostAsmRecord> dst)
+        {
+            var instructions = src.Instructions.View;
+            var count = (uint)instructions.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var instruction = ref skip(instructions, i);
+                ref var target = ref seek(dst,i);
+                target.BlockAddress = src.BaseAddress;
+                target.IP = instruction.IP;
+                target.BlockOffset = (Address16)instruction.Offset;
+                target.Expression = instruction.Statment;
+                target.Encoded = instruction.AsmHex;
+                target.Sig = instruction.AsmSig;
+                target.OpCode = instruction.OpCode;
+                target.Bitstring = instruction.AsmHex;
+                target.OpUri = src.Uri;
+            }
+            return count;
+        }
+
+        [Op]
+        public static uint statements(in AsmInstructionBlock src, List<HostAsmRecord> dst)
+        {
+            var instructions = src.Instructions;
+            var count = (uint)instructions.Length;
+            var offset = z16;
+            var bytes = src.Code.View;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var instruction = ref skip(instructions,i);
+                var opcode = asm.opcode(instruction.OpCode.ToString());
+                if(!opcode.IsValid)
+                    break;
+
+                var statement = new HostAsmRecord();
+                var size = (ushort)instruction.ByteLength;
+                var specifier = instruction.Specifier;
+                statement.BlockAddress = src.BaseAddress;
+                statement.BlockOffset = offset;
+                statement.IP = instruction.IP;
+                statement.OpUri = src.Uri;
+                statement.Expression = instruction.FormattedInstruction;
+                AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
+                statement.Encoded = AsmHexCode.load(bytes.Slice(offset, size));
+                statement.OpCode = opcode;
+                statement.Bitstring = statement.Encoded;
+                dst.Add(statement);
+
+                offset += size;
+            }
+            return count;
+        }
+
         [Op]
         public static AsmInstructionInfo summarize(MemoryAddress @base, IceInstruction src, CodeBlock encoded, AsmExpr statement, uint offset)
             => new AsmInstructionInfo(@base, offset,  statement,  src.Specifier, AsmEtl.code(encoded, offset, src.InstructionSize));

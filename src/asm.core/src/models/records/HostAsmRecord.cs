@@ -13,7 +13,7 @@ namespace Z0
     using static Root;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct AsmHostStatement : IRecord<AsmHostStatement>, IComparable<AsmHostStatement>
+    public struct HostAsmRecord : IRecord<HostAsmRecord>, IComparable<HostAsmRecord>
     {
         public const string TableId = "asm.statements";
 
@@ -41,7 +41,7 @@ namespace Z0
             => Expression.IsValid;
 
         [MethodImpl(Inline)]
-        public int CompareTo(AsmHostStatement src)
+        public int CompareTo(HostAsmRecord src)
             => IP.CompareTo(src.IP);
 
         public static ReadOnlySpan<byte> RenderWidths

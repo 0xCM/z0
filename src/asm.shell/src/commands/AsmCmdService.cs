@@ -57,9 +57,9 @@ namespace Z0.Asm
 
         AddressMap _NativeAddressMap;
 
-        Index<ProcessAsm> _ProcessAsm;
+        Index<ProcessAsmRecord> _ProcessAsm;
 
-        Index<ProcessAsm> _ProcessAsmSelection;
+        Index<ProcessAsmRecord> _ProcessAsmSelection;
 
         CliMemoryMap ResPack;
 
@@ -94,8 +94,8 @@ namespace Z0.Asm
             RoutineName = Identifier.Empty;
             CodeSize = 0;
             _Assembled = array<byte>();
-            _ProcessAsm = Index<ProcessAsm>.Empty;
-            _ProcessAsmSelection = Index<ProcessAsm>.Empty;
+            _ProcessAsm = Index<ProcessAsmRecord>.Empty;
+            _ProcessAsmSelection = Index<ProcessAsmRecord>.Empty;
             ResPack = CliMemoryMap.Empty;
         }
 
@@ -163,15 +163,15 @@ namespace Z0.Asm
             return ProcessAsmCount();
         }
 
-        Span<ProcessAsm> ProcessAsmBuffer()
+        Span<ProcessAsmRecord> ProcessAsmBuffer()
         {
             if(_ProcessAsm.IsEmpty)
                 _ProcessAsm = AllocProcessAsm();
             return _ProcessAsm;
         }
 
-        ProcessAsm[] AllocProcessAsm()
-            => alloc<ProcessAsm>(AsmLoader.ProcessAsmCount(ProcessAsmPath()));
+        ProcessAsmRecord[] AllocProcessAsm()
+            => alloc<ProcessAsmRecord>(AsmLoader.ProcessAsmCount(ProcessAsmPath()));
 
         [MethodImpl(Inline)]
         ref readonly NativeBufferSeq NativeBuffers()
@@ -402,7 +402,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        Span<ProcessAsm> AsmSelection()
+        Span<ProcessAsmRecord> AsmSelection()
             => _ProcessAsmSelection.Edit;
 
         Outcome BuildAsmExe(string id)
@@ -420,7 +420,7 @@ namespace Z0.Asm
         FS.FilePath ProcessAsmPath()
             => ApiArchive.ProcessAsmPath();
 
-        ReadOnlySpan<ProcessAsm> ProcessAsm()
+        ReadOnlySpan<ProcessAsmRecord> ProcessAsm()
         {
             if(ProcessAsmCount() != 0)
             {
@@ -438,7 +438,7 @@ namespace Z0.Asm
             }
 
             var count = ProcessAsmCount(result.Data);
-            _ProcessAsmSelection = alloc<ProcessAsm>(count);
+            _ProcessAsmSelection = alloc<ProcessAsmRecord>(count);
             Write(string.Format("Loaded {0} process asm records from {1}", count, path.ToUri()));
             return ProcessAsmBuffer();
         }

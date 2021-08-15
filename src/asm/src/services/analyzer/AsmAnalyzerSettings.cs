@@ -14,7 +14,7 @@ namespace Z0
 
         public bool EmitProcessAsm;
 
-        public bool EmitHostStatements;
+        public bool EmitAsmCsv;
 
         public bool EmitBitstringIndex;
 
@@ -24,7 +24,7 @@ namespace Z0
             dst.EmitJumps = true;
             dst.EmitAsmDetails = true;
             dst.EmitProcessAsm = true;
-            dst.EmitHostStatements = true;
+            dst.EmitAsmCsv = true;
             dst.EmitBitstringIndex = true;
             return ref dst;
         }

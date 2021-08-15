@@ -20,7 +20,7 @@ namespace Z0.Asm
             => new AsmThumbprint(statement, form.Sig, form.OpCode, encoded);
 
         [MethodImpl(Inline),Op]
-        public static AsmThumbprint thumbprint(in AsmHostStatement src)
+        public static AsmThumbprint thumbprint(in HostAsmRecord src)
             => thumbprint(src.Expression, src.Sig, src.OpCode, src.Encoded);
     }
 }

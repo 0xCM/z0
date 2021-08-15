@@ -103,7 +103,7 @@ namespace Z0.Asm
             return i;
         }
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static uint vsib(Vsib src, Span<char> dst)
         {
             var i=0u;
@@ -117,7 +117,7 @@ namespace Z0.Asm
             return i;
         }
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static uint opcode(Hex8 src, ref uint i, Span<char> dst)
         {
             var i0 = i;
@@ -125,7 +125,7 @@ namespace Z0.Asm
             return i-i0;
         }
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static uint rex(RexPrefix src, ref uint i, Span<char> dst)
         {
             var i0 = i;
@@ -153,7 +153,7 @@ namespace Z0.Asm
         public static uint modrm(byte src, ref uint i, Span<char> dst)
             => BitRender.render8x2x3x3(src, ref i, dst);
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static uint modrm(ModRm src, ref uint i, Span<char> dst)
         {
             var i0=i;
@@ -169,7 +169,7 @@ namespace Z0.Asm
             return i-i0;
         }
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static uint sib(Sib src, ref uint i, Span<char> dst)
         {
             var i0=i;
@@ -186,44 +186,43 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x3x3x2(AsmHexCode src, ref uint i, Span<char> dst)
+        public static uint render8x3x3x2(in AsmHexCode src, ref uint i, Span<char> dst)
             => BitRender.render8x3x3x2(slice(src.Bytes, src.Size), ref i, dst);
 
         [MethodImpl(Inline), Op]
-        public static uint render8x4(AsmHexCode src, Span<char> dst)
+        public static uint render8x4(in AsmHexCode src, Span<char> dst)
         {
             var i=0u;
             return BitRender.render8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> render8x4(AsmHexCode src)
+        public static ReadOnlySpan<char> render8x4(in AsmHexCode src)
         {
-            return BitRender.render8x4(first(recover<ByteBlock16>(src.Bytes)), src.Size);
-            // if(src.IsEmpty)
-            //     return default;
+            if(src.IsEmpty)
+                return default;
 
-            // CharBlocks.alloc(n256, out var block);
-            // var dst = block.Data;
-            // var count = render8x4(src, dst);
-            // if(count == 0)
-            //     return EmptyString;
+            CharBlocks.alloc(n256, out var block);
+            var dst = block.Data;
+            var count = render8x4(src, dst);
+            if(count == 0)
+                return EmptyString;
 
-            // return slice(dst, 0, count);
+            return slice(dst, 0, count);
         }
 
         [Op,Closures(Closure)]
-        public static string format<T>(in NamedRegValue<T> src)
+        public static ReadOnlySpan<char> render<T>(in NamedRegValue<T> src)
             where T : unmanaged
         {
             if(size<T>() == 1)
-                return new string(BitRender.render8(u8(src.Value)));
+                return BitRender.render8(u8(src.Value));
             else if(size<T>() == 2)
-                return new string(BitRender.render16x8(u16(src.Value)));
+                return BitRender.render16x8(u16(src.Value));
             else if(size<T>() == 4)
-                return new string(BitRender.render32x8(u32(src.Value)));
+                return BitRender.render32x8(u32(src.Value));
             else if(size<T>() == 8)
-                return new string(BitRender.render64x8(u64(src.Value)));
+                return BitRender.render64x8(u64(src.Value));
             else
                 return EmptyString;
         }
@@ -233,11 +232,11 @@ namespace Z0.Asm
             => src.IsEmpty ? EmptyString : text.format(render8x4(src));
 
         [Op]
-        public static AsmBitstring bitstring(AsmHexCode src)
+        public static AsmBitstring bitstring(in AsmHexCode src)
             => new AsmBitstring(format8x4(src));
 
         [Op]
-        public static string format8x4(AsmHexCode src, Span<char> buffer)
+        public static string format8x4(in AsmHexCode src, Span<char> buffer)
         {
             if(src.IsEmpty)
                 return EmptyString;
@@ -250,7 +249,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x4(AsmHexCode src, ref uint i, Span<char> dst)
+        public static uint render8x4(in AsmHexCode src, ref uint i, Span<char> dst)
             => BitRender.render8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
 
         [Op]
