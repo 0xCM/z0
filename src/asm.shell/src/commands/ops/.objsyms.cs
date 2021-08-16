@@ -12,7 +12,7 @@ namespace Z0.Asm
         Outcome ObjSyms(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = Files(FS.Sym).View;
+            var src = State.Files(FS.Sym).View;
             var count = src.Length;
             var formatter = Tables.formatter<ObjSymRecord>(ObjSymRecord.RenderWidths);
             var buffer = list<ObjSymRecord>();

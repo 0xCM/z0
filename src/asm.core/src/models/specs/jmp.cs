@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Root;
     using static AsmOperands;
     using static core;
-    using static Blit;
 
     partial class AsmSpecs
     {

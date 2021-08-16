@@ -11,7 +11,7 @@ namespace Z0.Asm
         [CmdOp(".asm-config")]
         Outcome AsmConfig(CmdArgs args)
         {
-            var result = RunScript(AsmWs.Script("log-config"), out var response);
+            var result = Run(AsmWs.Script("log-config"), out var response);
             if(result.Fail)
                 return result;
 

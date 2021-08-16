@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     using static AsmCodes;
-    using static AsmCodes.MachineModeKind;
+    using static AsmCodes.OperatingModeKind;
     using static AsmCodes.OpszKind;
 
     partial struct AsmEncoder
@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// <param name="default"></param>
         /// <param name="effective"></param>
         [Op]
-        public static bit need66(MachineModeKind mode, OpszKind @default, OpszKind effective)
+        public static bit need66(OperatingModeKind mode, OpszKind @default, OpszKind effective)
             => mode switch{
                 IA32e => effective switch {
                     W16 => 1,

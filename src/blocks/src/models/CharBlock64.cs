@@ -89,7 +89,5 @@ namespace Z0
         public static B Empty => RP.Spaced64;
 
         public static B Null => default;
-
-
     }
 }

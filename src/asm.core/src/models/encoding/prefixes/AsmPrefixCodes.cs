@@ -86,6 +86,32 @@ namespace Z0.Asm
             BNT = x3e,
         }
 
+        [SymSource]
+        public enum SizeOverrideCode
+        {
+            None = 0,
+
+            /// <summary>
+            /// Operand size override
+            /// </summary>
+            /// <remarks>
+            /// The operand-size override prefix allows a program to switch between 16- and 32-bit operand sizes.
+            /// Either size can be the default; use of the prefix selects the non-default size
+            /// </remarks>
+            [Symbol("x66","Operand size override")]
+            OPSZ = x66,
+
+            /// <summary>
+            /// Address size override
+            /// </summary>
+            /// <remarks>
+            /// The address-size override prefix allows programs to switch between 16- and 32-bit addressing.
+            /// Either size can be the default; the prefix selects the non-default size
+            /// </remarks>
+            [Symbol("x64", "Address size override")]
+            ADSZ = x67,
+        }
+
         /// <summary>
         /// Defines the mandatory prefix codes as specified by Intel Vol II, 2.1.2
         /// </summary>
@@ -235,32 +261,6 @@ namespace Z0.Asm
 
             [Symbol("gs", "GS segment override")]
             GS = x65,
-        }
-
-        [SymSource]
-        public enum SizeOverrideCode
-        {
-            None = 0,
-
-            /// <summary>
-            /// Operand size override
-            /// </summary>
-            /// <remarks>
-            /// The operand-size override prefix allows a program to switch between 16- and 32-bit operand sizes.
-            /// Either size can be the default; use of the prefix selects the non-default size
-            /// </remarks>
-            [Symbol("x66","Operand size override")]
-            OPSZ = x66,
-
-            /// <summary>
-            /// Address size override
-            /// </summary>
-            /// <remarks>
-            /// The address-size override prefix allows programs to switch between 16- and 32-bit addressing.
-            /// Either size can be the default; the prefix selects the non-default size
-            /// </remarks>
-            [Symbol("x64", "Address size override")]
-            ADSZ = x67,
         }
 
         [SymSource]

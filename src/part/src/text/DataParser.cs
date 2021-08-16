@@ -201,13 +201,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Outcome parse(string src, out StringAddress dst)
-        {
-            dst = text.address(src);
-            return true;
-        }
-
-        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out ClrMemberName dst)
         {
             dst = Clr.membername(src);

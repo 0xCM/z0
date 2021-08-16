@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static core;
     using static AsmInstructions;
 
-    partial class AsmCases
+    partial class AsmCaseArchive
     {
         [MethodImpl(Inline)]
         public static SyntaxFragment<T> line<T>(GridPoint<uint> location, T content)

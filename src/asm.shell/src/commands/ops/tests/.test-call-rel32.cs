@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmSpecs;
-
     partial class AsmCmdService
     {
         [CmdOp(".test-call-rel32")]

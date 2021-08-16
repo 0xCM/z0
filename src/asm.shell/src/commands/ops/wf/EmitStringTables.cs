@@ -15,7 +15,7 @@ namespace Z0.Asm
         Outcome EmitLlvmStringTables()
         {
             var result = Outcome.Success;
-            var lists = Files(FS.List).View;
+            var lists = State.Files(FS.List).View;
             var count = lists.Length;
             var delimiter = Chars.Comma;
             var csdst = Gen().Path("llvm.stringtables", FS.Cs);
@@ -68,11 +68,11 @@ namespace Z0.Asm
             return table;
         }
 
-        Outcome EmitStringTable(StringTableSpec spec)
+        Outcome EmitStringTable(StringTableSpec spec, FS.FolderPath outdir)
         {
             var result = Outcome.Success;
-            var csdst = Gen().Path(spec.TableName, FS.Cs);
-            var rowdst = Gen().Path(spec.TableName, FS.Csv);
+            var csdst = outdir + FS.file(spec.TableName.Format(), FS.Cs);
+            var rowdst = outdir + FS.file(spec.TableName.Format(), FS.Csv);
             var formatter = Tables.formatter<StringTableRow>(StringTableRow.RenderWidths);
             using var cswriter = csdst.Writer();
             using var rowwriter = rowdst.AsciWriter();

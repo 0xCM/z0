@@ -1,0 +1,33 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0.Asm
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
+    using static WsAtoms;
+
+    partial class AsmCmdService
+    {
+        Outcome GetToolOut(CmdArgs args, out FS.FolderPath dir)
+        {
+            dir = FS.FolderPath.Empty;
+            if(args.Length == 0)
+                return (false, ToolUnspecified.Format());
+
+            var id = arg(args,0).Value;
+            dir = OutRoot() + FS.folder(id);
+            return true;
+        }
+
+        FS.FolderPath GetToolOut(ToolId tool)
+            => Ws.Output().Subdir(tool.Format());
+
+        FS.FolderPath GetToolOut(CmdArgs args, ToolId tool)
+            => args.Length > 0 ? OutRoot() + FS.folder(arg(args,0).Value) : GetToolOut(tool);
+    }
+}

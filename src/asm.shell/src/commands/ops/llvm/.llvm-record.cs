@@ -12,18 +12,6 @@ namespace Z0.Asm
     using static core;
     using static llvm.MC;
 
-    struct Env<S,T>
-    {
-        public S State;
-
-        public Func<T,S> F;
-
-        public void Compute(Func<T> next)
-        {
-            State = F(next());
-        }
-    }
-
     public struct MnemonicLength
     {
         public AsmId Id;
@@ -35,7 +23,6 @@ namespace Z0.Asm
             Id = id;
             Length = 0;
         }
-
 
         public string Format()
             => string.Format(RP.attrib(Id.ToString(), Length));
@@ -49,25 +36,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        void Maxmimal()
-        {
-            var env = new Env<byte,AsmId>();
-            var mc = MC.calcs();
-            var count = mc.AsmCount;
-            for(var i=0; i<count; i++)
-            {
-                var id = (AsmId)i;
-                var dst = new MnemonicLength(id);
-                dst.Length = (byte)mc.Monic(dst.Id).Length;
-
-
-            }
-
-        }
-
-
-        [CmdOp(".llvm-data")]
-        Outcome LLvmData(CmdArgs args)
+        [CmdOp(".llvm-monics")]
+        Outcome LLvmMonics(CmdArgs args)
         {
             var result = Outcome.Success;
             var mc = MC.calcs();
@@ -76,15 +46,23 @@ namespace Z0.Asm
             for(ushort i=0; i<count; i++)
             {
                 var monic = mc.Monic((AsmId)i);
-                var l = monic.Length;
-                if(l > length)
-                    length = l;
 
             }
-            Write("max(length(AsmMnemonic))=",length);
+
             return result;
         }
 
+        [CmdOp(".llvm-data")]
+        Outcome LlvmDataLoad(CmdArgs args)
+        {
+            var dst = new LlvmRecordSources();
+            var svc = Wf.LlvmDatasets(DataSources);
+            var result = svc.Load(LlvmDatasetKind.X86 | LlvmDatasetKind.Details, ref dst);
+            result.OnSuccess(path => Write(path.ToUri().Format(), dst.X86Details.Count));
+            result = svc.Load(LlvmDatasetKind.X86 | LlvmDatasetKind.Summary, ref dst);
+            result.OnSuccess(path => Write(path.ToUri().Format(), dst.X86Summary.Count));
+            return result;
+        }
 
         [CmdOp(".llvm-record")]
         Outcome LlvmRecord(CmdArgs args)
@@ -141,7 +119,8 @@ namespace Z0.Asm
                 tgr.EntityName = name;
                 tgr.Fields = fields.ToArray();
                 tgr.Lines = lines.ToArray();
-                Emit(tgr,AsmWs.LlvmRecord(name));
+                var path = AsmWs.DataDir() + FS.folder("llvm.records") + FS.file(name, FS.Txt);
+                Emit(tgr, path);
             }
 
             return result;

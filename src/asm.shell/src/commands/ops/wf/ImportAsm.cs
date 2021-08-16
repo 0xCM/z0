@@ -11,7 +11,7 @@ namespace Z0.Asm
         Outcome ImportAsm(string label)
         {
             var result = Outcome.Success;
-            var paths = Files(FS.Asm);
+            var paths = State.Files(FS.Asm);
             var lines = list<AsmLine>();
             var counter = 0u;
             var dst = Imports().Path("asm", label, FS.Asm);

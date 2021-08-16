@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Root;
 
-    [ApiHost]
+    [ApiHost("asm.specs")]
     public partial class AsmSpecs
     {
         const NumericKind Closure = UnsignedInts;

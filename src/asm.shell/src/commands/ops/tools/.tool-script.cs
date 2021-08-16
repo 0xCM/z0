@@ -15,7 +15,7 @@ namespace Z0.Asm
             if(!script.Exists)
                 return (false, FS.missing(script));
             else
-                return RunScript(script, out var _);
+                return Run(script, out var _);
         }
     }
 }

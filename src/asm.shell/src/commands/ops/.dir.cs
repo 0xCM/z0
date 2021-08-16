@@ -21,7 +21,7 @@ namespace Z0.Asm
 
             Write(spec);
 
-            result = RunWinCmd(spec, out var response);
+            result = Run(spec, out var response);
             if(result.Fail)
                 return result;
 

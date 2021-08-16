@@ -79,10 +79,6 @@ namespace Z0
         }
 
         [Op]
-        public static LlvmTooling Llvm(this IWfRuntime wf)
-            => LlvmTooling.create(wf);
-
-        [Op]
         public static LlvmObjDump LlvmObjDump(this IWfRuntime wf)
             => Z0.LlvmObjDump.create(wf);
     }

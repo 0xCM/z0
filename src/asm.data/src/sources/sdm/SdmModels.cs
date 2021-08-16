@@ -8,13 +8,61 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using static SdmModels.EncodingSigs;
+
     using K = SdmModels.ModRmEncKind;
+    using SQ = SymbolicQuery;
 
     [ApiHost]
     public readonly partial struct SdmModels
     {
+        public static ReadOnlySpan<CharBlock16> operands(in SdmOpCode src)
+        {
+            var storage = CharBlock64.Null;
+            var data = storage.Data;
+            ref var dst = ref first(storage.Data);
+            var operands = text.split(src.Operands.Format(), Chars.Comma).Select(op => op.Trim());
+            var count = min(operands.Length,4);
+            for(var i=0; i<count; i++)
+            {
+                ref var target = ref seek(dst,i*16);
+                ref readonly var op = ref skip(operands,i);
+                if(op.Length <= 16)
+                    text.copy(op, ref target);
+                else
+                    text.copy(text.slice(op,0,16), ref target);
+            }
+
+            return recover<CharBlock16>(data);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref SdmOpCode opcode(in SdmOpCodeDetail src, out SdmOpCode dst)
+        {
+            dst.OpCodeId = src.OpCodeId;
+            dst.Mnemonic = src.Mnemonic;
+            operands(src, out dst.Operands);
+            dst.Expr = src.OpCode;
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        static bool operands(in SdmOpCodeDetail src, out CharBlock64 dst)
+        {
+            var result = false;
+            dst = CharBlock64.Null;
+            var sig = src.Sig.String;
+            var i = SQ.index(sig, Chars.Space);
+            if(i >=0)
+            {
+                dst = SQ.right(sig,i).Trim();
+                result = true;
+            }
+            return result;
+        }
+
         [MethodImpl(Inline), Op]
         public static ChapterNumber chapter(byte number)
             => new ChapterNumber(number);
@@ -205,6 +253,15 @@ namespace Z0.Asm
                     dst.Append(OverflowMarker);
                 break;
             }
+        }
+
+        [Op]
+        public static string format(in SdmOpCode src)
+        {
+            const string OpCodePattern = "{0}({1}) = {2}";
+            var operands = @readonly(text.split(src.Operands.Format(), Chars.Comma).Select(x => x.Trim()));
+            var ocformat = string.Format(OpCodePattern, src.Mnemonic, text.join(Chars.Comma, operands), src.Expr);
+            return string.Format("OpCode[{0:D4}]:{1}", src.OpCodeId, ocformat);
         }
 
         [Op]

@@ -21,19 +21,31 @@ namespace Z0
             => string.Join(sep, src);
 
         [Op, Closures(Closure)]
-        public static string join<T>(char sep, IEnumerable<T> src)
-            => string.Join(sep, src);
+        public static string join<T>(char sep, ReadOnlySpan<T> src)
+        {
+            var dst = buffer();
+            var count = src.Length;
+            var last = count - 1;
+            for(var i=0; i<count; i++)
+            {
+                dst.Append(skip(src,i).ToString());
+                if(i != last)
+                    dst.Append(sep);
+            }
+            return dst.Emit();
+        }
 
         [Op, Closures(Closure)]
         public static string join<T>(string sep, ReadOnlySpan<T> src)
         {
-            var dst = TextTools.buffer();
+            var dst = buffer();
             var count = src.Length;
+            var last = count - 1;
             for(var i=0; i<count; i++)
             {
-                if(i != 0)
+                dst.Append(skip(src,i).ToString());
+                if(i != last)
                     dst.Append(sep);
-                dst.AppendItem(skip(src,i));
             }
             return dst.Emit();
         }

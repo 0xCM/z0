@@ -12,6 +12,7 @@ namespace Z0.Asm
 
     using REP = AsmPrefixCodes.RepeatPrefixCode;
     using L = AsmPrefixCodes.LockPrefixCode;
+    using SZ = AsmPrefixCodes.SizeOverrideCode;
 
     [ApiHost]
     public readonly struct AsmPrefixTests
@@ -23,6 +24,24 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static bit rex(in AsmOpCodeExpr src)
             => src.Data.Contains("REX", StringComparison.InvariantCultureIgnoreCase);
+
+        /// <summary>
+        /// Tests whether a specified byte represents the operand size override prefix,
+        /// that selects an instruction's non-default operand size
+        /// </summary>
+        /// <param name="src">The byte to thest</param>
+        [MethodImpl(Inline), Op]
+        public static bit opsz(byte src)
+            => (SZ)src == SZ.OPSZ;
+
+        /// <summary>
+        /// Tests whether a specified byte represents the address size override prefix
+        /// that selects an instruction's non-default address size
+        /// </summary>
+        /// <param name="src">The byte to thest</param>
+        [MethodImpl(Inline), Op]
+        public static bit adsz(byte src)
+            => (SZ)src == SZ.ADSZ;
 
         [MethodImpl(Inline), Op]
         public static bit rex(byte src)

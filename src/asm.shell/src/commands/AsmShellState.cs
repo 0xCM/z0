@@ -12,21 +12,49 @@ namespace Z0.Asm
 
     public class AsmShellState : ShellState
     {
-        Index<SdmOpCodeRecord> _OpCodes;
+        Index<SdmOpCodeDetail> _OpCodes;
+
+        Index<ProcessAsmRecord> _ProcessAsm;
+
+        Index<ProcessAsmRecord> _ProcessAsmSelection;
 
         public AsmShellState()
         {
-            _OpCodes = array<SdmOpCodeRecord>();
+            _OpCodes = array<SdmOpCodeDetail>();
+            _ProcessAsm = array<ProcessAsmRecord>();
+            _ProcessAsmSelection = array<ProcessAsmRecord>();
         }
 
         [MethodImpl(Inline)]
-        public void OpCodes(SdmOpCodeRecord[] src)
+        public void SdmOpCodes(SdmOpCodeDetail[] src)
         {
             _OpCodes = src;
         }
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<SdmOpCodeRecord> OpCodes()
+        public ReadOnlySpan<SdmOpCodeDetail> SdmOpCodes()
             => _OpCodes.View;
+
+        [MethodImpl(Inline)]
+        public Span<ProcessAsmRecord> ProcessAsmSelection()
+            => _ProcessAsmSelection.Edit;
+
+        public uint ProcessAsmCount
+        {
+            [MethodImpl(Inline)]
+            get => _ProcessAsm.Count;
+        }
+
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<ProcessAsmRecord> ProcessAsm()
+            => _ProcessAsm.View;
+
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<ProcessAsmRecord> ProcessAsm(Index<ProcessAsmRecord> src)
+        {
+            _ProcessAsm = src;
+            _ProcessAsmSelection = alloc<ProcessAsmRecord>(_ProcessAsm.Count);
+            return ProcessAsm();
+        }
     }
 }

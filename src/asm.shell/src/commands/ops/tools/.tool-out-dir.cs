@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".tool-out-dir", "Displays the path of a tool output directory")]
         Outcome ToolOut(CmdArgs args)
         {
-            var result = ToolOutDir(args, out var dir);
+            var result = GetToolOut(args, out var dir);
             if(result)
                 Write(dir);
             return result;

@@ -11,10 +11,10 @@ namespace Z0.Asm
         Outcome DumpObjects()
         {
             var result = Outcome.Success;
-            var src = Files(FS.Obj, FS.Exe, FS.Lib, FS.Dll).View;
+            var src = State.Files(FS.Obj, FS.Exe, FS.Lib, FS.Dll).View;
             var count = src.Length;
             var tool = Toolspace.llvm_objdump;
-            var outdir = ToolOutDir(tool);
+            var outdir = GetToolOut(tool);
             var svc = Wf.LlvmObjDump();
             return svc.DumpObjects(src,outdir, response => Write(response));
         }

@@ -19,4 +19,5 @@ namespace Z0
         Identifier IDomainEnv.Name
             => typeof(T).Name;
     }
+
 }

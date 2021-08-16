@@ -40,6 +40,17 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public static v64<MemoryAddress> v64(MemoryAddress[] src)
                 => new v64<MemoryAddress>(src);
+
+            [MethodImpl(Inline)]
+            public static vector<N,T> vector<N,T>(N n, T[] src)
+                where N : unmanaged, ITypeNat
+                where T : unmanaged
+            {
+                if(Typed.nat32i<N>() != src.Length)
+                    return Blit.vector<N,T>.Empty;
+                else
+                    return new vector<N, T>(src);
+            }
         }
     }
 }

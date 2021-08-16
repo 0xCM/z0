@@ -52,6 +52,12 @@ namespace Z0
             get => ref first(Data);
         }
 
+        public ref char this[uint i]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(First,i);
+        }
+
         /// <summary>
         /// If the block contains no null-terminators, returns a readonly view of the data source; otherwise
         /// returns the content preceding the first null-terminator

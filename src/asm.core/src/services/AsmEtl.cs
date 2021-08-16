@@ -14,17 +14,17 @@ namespace Z0.Asm
     [ApiHost]
     public class AsmEtl : Service<AsmEtl>
     {
-        public Outcome LoadSdmOpCodes(FS.FilePath src, out SdmOpCodeRecord[] dst)
+        public Outcome LoadSdmOpCodes(FS.FilePath src, out SdmOpCodeDetail[] dst)
         {
             var result = Outcome.Success;
-            dst = sys.empty<SdmOpCodeRecord>();
+            dst = sys.empty<SdmOpCodeDetail>();
             var lines = src.ReadLines().View;
             result = TextGrids.load(lines, out var grid);
             if(result.Fail)
                 return result;
             var count = grid.RowCount;
 
-            dst = alloc<SdmOpCodeRecord>(count);
+            dst = alloc<SdmOpCodeDetail>(count);
             result = AsmParser.parse(grid,dst);
             if(result.Fail)
                 return result;

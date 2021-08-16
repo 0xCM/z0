@@ -54,7 +54,6 @@ namespace Z0.Asm
 
         static ReadOnlySpan<byte> MatchTarget4 => new byte[4]{0xCC,0x00,0x19,0x00};
 
-
         static ReadOnlySpan<byte> MatchInput => new byte[]{
             0x52,0x21,0x18,0x00,
             0x23,0x48,0x16,0x19,

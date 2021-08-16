@@ -26,10 +26,6 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmText<T> WithKind(AsmTextKind kind)
-            => new AsmText<T>(Source, kind);
-
-        [MethodImpl(Inline)]
         public uint Render(ref uint i, Span<char> dst)
             => Source.Render(ref i, dst);
 
@@ -49,6 +45,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmText<T>(ReadOnlySpan<char> src)
-            => AsmText.asmtext(src.Recover<T>());
+            => new AsmText<T>(StringAddress.from(src));
     }
 }

@@ -12,7 +12,7 @@ namespace Z0.Asm
         Outcome AsmHexArray(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = AsmWs.HexDir().Files(FS.Hex).ToReadOnlySpan();
+            var src = AsmWs.HexOutDir().Files(FS.Hex).ToReadOnlySpan();
             var count = src.Length;
             var files = alloc<FS.FilePath>(count);
             for(var i=0; i<count; i++)

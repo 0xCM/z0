@@ -22,6 +22,9 @@ namespace Z0.Asm
 
         const NumericKind Closure = UnsignedInts;
 
+        public static string format(in Disp32Link src)
+            => string.Format("{0}h:{1} -> {2}", src.Disp, src.Source, src.Target);
+
         [Op]
         public static string format(in Jcc8Conditions src, bit alt)
         {

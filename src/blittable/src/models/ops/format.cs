@@ -54,6 +54,31 @@ namespace Z0
                 const string Pattern = "{0} -> {1}";
                 return string.Format(Pattern, m.Source, m.Target);
             }
+
+            public static string format<N,T>(in vector<N,T> src)
+                where T : unmanaged
+                where N : unmanaged, ITypeNat
+            {
+                var cells = src.Cells;
+                var count = cells.Length;
+                var buffer = text.buffer();
+                var last = cells.Length - 1;
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var cell = ref skip(cells,i);
+                    var fmt = string.Format("{0}", cell).Trim();
+                    if(nonempty(fmt))
+                    {
+                        buffer.Append(fmt);
+                        if(i != last)
+                            buffer.Append(Chars.Comma);
+
+                    }
+                    else
+                        break;
+                }
+                return buffer.Emit();
+            }
         }
     }
 }

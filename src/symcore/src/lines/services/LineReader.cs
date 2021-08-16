@@ -46,5 +46,13 @@ namespace Z0
 
             return true;
         }
+
+        public ReadOnlySpan<TextLine> ReadAll()
+        {
+            var dst = list<TextLine>();
+            while(Next(out var line))
+                dst.Add(line);
+            return dst.ViewDeposited();
+        }
     }
 }

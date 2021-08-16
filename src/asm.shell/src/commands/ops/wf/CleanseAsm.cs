@@ -13,9 +13,9 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var tool = Toolspace.llvm_mc;
             var cmd = Cmd.cmdline(ToolWs().Script(tool, "cleanse").Format(PathSeparator.BS));
-            var src = Files(FS.S).View;
+            var src = State.Files(FS.S).View;
             var count = src.Length;
-            var outdir = ToolOutDir(tool);
+            var outdir = GetToolOut(tool);
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(src,i);

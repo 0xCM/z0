@@ -9,7 +9,7 @@ namespace Z0.Asm
     using static core;
     using static AppMsg;
 
-    using R = SdmOpCodeRecord;
+    using R = SdmOpCodeDetail;
 
     partial struct AsmParser
     {

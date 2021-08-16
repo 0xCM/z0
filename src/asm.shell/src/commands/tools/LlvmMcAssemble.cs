@@ -8,8 +8,8 @@ namespace Z0.Asm
     {
         Outcome LlvmMcAssemble(FS.FilePath src, FS.FolderPath dst)
         {
-            var script = LlvmMc.Scripts.Assemble(src.FolderPath, src.FileName, dst);
-            var result = RunScript(script, out var response);
+            var script = LlvmMcScripts.Assemble(src.FolderPath, src.FileName, dst);
+            var result = Run(script, out var response);
             if(result)
                 ParseCmdResponse(response);
             return result;

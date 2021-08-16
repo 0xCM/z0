@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial class AsmCases
+    partial class AsmCaseArchive
     {
         [ApiHost("cases.callrel32")]
         public struct CallRel32Case

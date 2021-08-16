@@ -10,7 +10,7 @@ namespace Z0.Asm
     {
         Outcome Assemble()
         {
-            var src = Files(FS.Asm).View;
+            var src = State.Files(FS.Asm).View;
             var result = Outcome.Success;
             var count = src.Length;
             var output = list<FS.FilePath>();

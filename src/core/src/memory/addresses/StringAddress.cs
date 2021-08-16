@@ -6,13 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
     using static TextTools;
-
-    using api = TextTools;
 
     public readonly struct StringAddress : IAddressable
     {
@@ -42,6 +39,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static StringAddress resource(string src)
             => new StringAddress(core.address(src));
+
+        [MethodImpl(Inline), Op]
+        public static StringAddress from(ReadOnlySpan<char> src)
+            => new StringAddress(core.address(src));
+
+        [MethodImpl(Inline), Op]
+        public static StringAddress from<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => new StringAddress(core.address(src));
 
         internal const string EmptyMarker = "<empty>";
 
@@ -104,10 +110,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(string src)
-            => api.intern(src);
+            => resource(src);
 
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(Name src)
-            => api.intern(src.Content);
+            => resource(src.Content);
     }
 }

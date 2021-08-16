@@ -39,10 +39,10 @@ namespace Z0
             => OutDir() + FS.folder(dumps);
 
         FS.FilePath AsmHexPath(string id)
-            => HexDir() + FS.file(id, FS.Hex);
+            => HexOutDir() + FS.file(id, FS.Hex);
 
         FS.FilePath HexArrayPath(string id)
-            => HexDir() + FS.file(string.Format("{0}.array",id), FS.Hex);
+            => HexOutDir() + FS.file(string.Format("{0}.array",id), FS.Hex);
 
         FS.FilePath ListPath(string id)
             => Lists() + FS.file(id, FS.AsmList);

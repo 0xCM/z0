@@ -61,7 +61,7 @@ namespace Z0.Asm
 
                     var parsed = AsmParser.parse(grid, dst);
                     if(parsed.Fail)
-                        Error(string.Format("Error parsing {0}:{1}", file.ToUri(), result.Message));
+                        Error(FileParseError.Format(file, result.Message));
                     else
                         counter += parsed.Data;
                 }
@@ -121,12 +121,14 @@ namespace Z0.Asm
             return results.ToArray();
         }
 
-        static MsgPattern<FS.FolderPath> LoadingStatements => "Loading asm statement rows from {0}";
+        static MsgPattern<FS.FolderPath> LoadingStatements => "Loading asm statement rows from directory {0}";
 
         static MsgPattern<Count> ParsedStatements => "Parsed {0} asm statement rows";
 
         static MsgPattern<Count> LoadingDocs => "Loading {0} documents";
 
         static MsgPattern<Count> ParsingDocs => "Parsing {0} documents";
+
+        static MsgPattern<FS.FileUri,string> FileParseError => "Error parsing {0}:{1}";
     }
 }

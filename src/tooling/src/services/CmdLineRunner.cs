@@ -70,12 +70,32 @@ namespace Z0
         }
 
         public Outcome Run(CmdLine cmd, out ReadOnlySpan<TextLine> dst)
+            => Run(cmd, OnStatusEvent, OnErrorEvent, out dst);
+        // {
+        //     var log = Db.AppLog("cmdline");
+        //     using var writer = log.AsciWriter();
+        //     try
+        //     {
+        //         var process = ScriptProcess.run(cmd, OnStatusEvent, OnErrorEvent).Wait();
+        //         var lines =  Lines.read(process.Output);
+        //         core.iter(lines, line => writer.WriteLine(line));
+        //         dst = lines;
+        //         return true;
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         dst = default;
+        //         return e;
+        //     }
+        // }
+
+        public Outcome Run(CmdLine cmd, Receiver<string> status, Receiver<string> error, out ReadOnlySpan<TextLine> dst)
         {
             var log = Db.AppLog("cmdline");
             using var writer = log.AsciWriter();
             try
             {
-                var process = ScriptProcess.run(cmd, OnStatusEvent, OnErrorEvent).Wait();
+                var process = ScriptProcess.run(cmd, status, error).Wait();
                 var lines =  Lines.read(process.Output);
                 core.iter(lines, line => writer.WriteLine(line));
                 dst = lines;

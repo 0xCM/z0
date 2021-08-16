@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmEncoder;
     using static AsmSpecs;
 
     partial class AsmCmdService
@@ -24,22 +23,32 @@ namespace Z0.Asm
             var dx0 = asm.disp32(ip0, dst);
             var actual0 = jmp32(ip0, dst);
             var expect0 = asm.hexcode("e9 58 10 00 00");
-            Write(string.Format("{0}:{1} -> {2}", dx0, ip0, dst));
-            Write(string.Format("{0} ?=? {1}", expect0, actual0.Format()));
+            var d0l = asm.link(dx0,ip0,dst);
+            Write(d0l);
+            if(!actual0.Equals(expect0))
+                Error(string.Format("{0} != {1}", expect0, actual0));
+            else
+                Write(string.Format("{0} == {1}", expect0, actual0));
+
             var l1 = 0x0065;
             var ip1 = @base + l1 + sz;
             var dx1 = asm.disp32(ip1, dst);
             var actual1 = jmp32(ip1, dst);
             var expect1 = asm.hexcode("e9 4d 10 00 00");
-            Write(string.Format("{0}:{1} -> {2}", dx1, ip1, dst));
-            Write(string.Format("{0} ?=? {1}", expect1, actual1.Format()));
+            var d1l = asm.link(dx1,ip1,dst);
+            Write(d1l);
+            if(!actual1.Equals(expect1))
+                Error(string.Format("{0} != {1}", expect1, actual1));
+            else
+                Write(string.Format("{0} == {1}", expect1, actual1));
+
             var l2 = 0x0070;
             var ip2 = @base + l2 + sz;
             var dx2 = asm.disp32(ip2, dst);
             var actual2 = jmp32(ip2, dst);
             var expect2 = asm.hexcode("e9 42 10 00 00");
-
-            Write(string.Format("{0}:{1} -> {2}", dx2, ip2, dst));
+            var d2l = asm.link(dx2, ip2, dst);
+            Write(d2l);
             if(!actual2.Equals(expect2))
                 Error(string.Format("{0} != {1}", expect2, actual2));
             else
@@ -50,7 +59,8 @@ namespace Z0.Asm
             var dx3 = asm.disp32(ip3, dst);
             var actual3 = jmp32(ip3, dst);
             var expect3 = asm.hexcode("e9 37 10 00 00");
-            Write(string.Format("{0}:{1} -> {2}", dx3, ip3, dst));
+            var d3l = asm.link(dx3,ip3,dst);
+            Write(d3l);
             if(!actual3.Equals(expect3))
                 Error(string.Format("{0} != {1}", expect3, actual3));
             else
@@ -59,13 +69,4 @@ namespace Z0.Asm
             return result;
         }
     }
-
-    /*
-BaseAddress = 7ffd4512bf30h
-005ah jmp near ptr 10b7h | e9 58 10 00 00
-0065h jmp near ptr 10b7h | e9 4d 10 00 00
-0070h jmp near ptr 10b7h | e9 42 10 00 00
-007bh jmp near ptr 10b7h | e9 37 10 00 00
-
-    */
 }

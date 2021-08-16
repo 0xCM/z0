@@ -7,8 +7,6 @@ namespace Z0.Asm
     using static core;
     using static Root;
 
-    using static AsmTools;
-    using static AsmTools.AsmToolKind;
     using static WsAtoms;
 
     partial class AsmCmdService

@@ -120,6 +120,18 @@ namespace Z0
         public FS.Files Files()
             => _Files;
 
+        public FS.Files Files(FS.FileExt ext)
+            => Files().Where(f => f.Is(ext));
+
+        public FS.Files Files(FS.FileExt a, FS.FileExt b)
+            => Files().Where(f => f.Is(a) || f.Is(b));
+
+        public FS.Files Files(FS.FileExt a, FS.FileExt b, FS.FileExt c)
+            => Files().Where(f => f.Is(a) || f.Is(b) || f.Is(c));
+
+        public FS.Files Files(FS.FileExt a, FS.FileExt b, FS.FileExt c, FS.FileExt d)
+            => Files().Where(f => f.Is(a) || f.Is(b) || f.Is(c) || f.Is(d));
+
         [MethodImpl(Inline)]
         public FS.Files Files(FS.Files src)
         {
