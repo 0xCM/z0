@@ -10,6 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
+    using static Asm.AsmSpecs;
     using static Asm.AsmEncoder;
     using static MemorySections;
 
@@ -27,7 +28,7 @@ namespace Z0
             Buffer = bss;
             Pos = 0;
             Max = Buffer.TotalSize - 1;
-            Fill(Interrupt.int3());
+            Fill(int3());
         }
 
         [MethodImpl(Inline)]
@@ -45,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Reset()
         {
-            Fill(Interrupt.int3());
+            Fill(int3());
         }
 
         [MethodImpl(Inline)]
@@ -56,7 +57,7 @@ namespace Z0
             for(var i=0u; i<max; i++)
             {
                 ref readonly var input = ref Cell(i);
-                if(!Interrupt.int3(input))
+                if(!int3(input))
                     seek(dst,j++) = input;
                 else
                     break;

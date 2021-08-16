@@ -10,17 +10,10 @@ namespace Z0
     using static Root;
     using static core;
 
-    using SQ = SymbolicQuery;
-
-
     [ApiHost]
     public readonly struct Facets
     {
         const NumericKind Closure = UnsignedInts;
-
-        [MethodImpl(Inline), Op]
-        public static Facet<K,V> facet<K,V>(K key, V value)
-            => new Facet<K,V>(key,value);
 
         [Op]
         public static ReadOnlySpan<Facet<string>> parse(ReadOnlySpan<TextLine> src)
@@ -33,11 +26,11 @@ namespace Z0
             {
                 ref readonly var line = ref skip(src,i);
                 var content = line.Content;
-                var j = SQ.index(content, Chars.Colon);
+                var j = text.index(content, Chars.Colon);
                 if(j > 0)
                 {
-                    var name = SQ.left(content, j).Format().Trim();
-                    var value = SQ.right(content, j).Format().Trim();
+                    var name = text.left(content, j).Trim();
+                    var value = text.right(content, j).Trim();
                     seek(dst, counter++) = (name,value);
                 }
             }

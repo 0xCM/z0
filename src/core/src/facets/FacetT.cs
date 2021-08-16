@@ -23,6 +23,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public void Deconstruct(string key, T value)
+        {
+            key = Key;
+            value = Value;
+        }
+
+        public string Format()
+            => RP.facet(Key, Value);
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
         public static implicit operator Facet<T>((string name, T value) src)
             => new Facet<T>(src.name, src.value);
     }

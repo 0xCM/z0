@@ -2,17 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    partial struct core
+    partial class AsmSpecs
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool same<T>(in T a, in T b)
-            => Unsafe.AreSame(ref edit(a), ref edit(b));
+        [MethodImpl(Inline), Op]
+        public static CallRel32 call(MemoryAddress client, uint dx)
+            => new CallRel32(client, dx);
     }
 }

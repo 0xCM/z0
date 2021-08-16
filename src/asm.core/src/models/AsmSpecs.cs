@@ -8,16 +8,10 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    partial struct AsmEncoder
+    [ApiHost]
+    public partial class AsmSpecs
     {
-        [ApiHost("encoder.calls")]
-        public readonly partial struct Calls
-        {
-            [MethodImpl(Inline), Op]
-            public static CallRel32 rel32(MemoryAddress client, uint dx)
-                => new CallRel32(client, dx);
-        }
+        const NumericKind Closure = UnsignedInts;
     }
 }

@@ -62,7 +62,7 @@ namespace Z0.llvm
             }
 
             [MethodImpl(Inline), Op]
-            public ReadOnlySpan<char> Monic(ushort id)
+            ReadOnlySpan<char> Monic(ushort id)
             {
                 var opcode = OpCode(id);
                 var i = offset(opcode);

@@ -15,7 +15,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var conditions = Conditions.create();
             var buffer = alloc<Jcc8Conditions>(32);
-            var count = Machines.jcc8(conditions,buffer);
+            var count = Conditions.jcc8(conditions,buffer);
             var output = slice(span(buffer),0, count);
             for(var i=0; i<count; i++)
             {

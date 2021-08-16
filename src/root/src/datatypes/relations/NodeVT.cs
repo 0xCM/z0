@@ -35,7 +35,7 @@ namespace Z0
         }
 
         public string Format()
-            => string.Format("{0}:{1}", Index, Content);
+            => string.Format("[{0}]={1}", Index, Content);
 
         public override string ToString()
             => Format();

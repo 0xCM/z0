@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Relations
+    partial struct core
     {
         /// <summary>
         /// Creates a vertex with payload
@@ -27,9 +27,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Node<T> node<T>(T src)
             => new Node<T>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static TypeNode<T> node<T>()
-            => default;
     }
 }

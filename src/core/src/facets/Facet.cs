@@ -22,6 +22,12 @@ namespace Z0
             Value = value;
         }
 
+        public string Format()
+            => RP.facet(Key,Value);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator Facet((string name, object value) src)
             => new Facet(src.name, src.value);

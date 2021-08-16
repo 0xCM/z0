@@ -22,7 +22,17 @@ namespace Z0
             Value = value;
         }
 
+        public string Format()
+            => RP.facet(Key,Value);
+
+        public override string ToString()
+            => Format();
+
         public static implicit operator Facet<K,V>(Paired<K,V> src)
             => new Facet<K,V>(src.Left, src.Right);
+
+        public static implicit operator Facet<K,V>((K key, V value) src)
+            => new Facet<K,V>(src.key, src.value);
+
     }
 }

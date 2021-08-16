@@ -15,7 +15,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Facets(uint count)
-            => Data = sys.alloc<Facet<K,V>>(count);
+            => Data = core.alloc<Facet<K,V>>(count);
 
         [MethodImpl(Inline)]
         public Facets(Facet<K,V>[] src)

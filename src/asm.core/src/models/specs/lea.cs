@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static AsmOperands;
     using static Blit;
 
-    partial struct AsmEncoder
+    partial class AsmSpecs
     {
         /// <summary>
         /// LEA r16,m | 8D /r | encoding(ModRM:reg (w), ModRM:r/m (r))
@@ -26,7 +26,6 @@ namespace Z0.Asm
 
             return size;
         }
-
 
         /// <summary>
         /// LEA r32,m | 8D /r | encoding(ModRM:reg (w), ModRM:r/m (r))
@@ -64,6 +63,5 @@ namespace Z0.Asm
 
             return size;
         }
-
     }
 }

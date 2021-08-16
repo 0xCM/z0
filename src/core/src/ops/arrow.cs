@@ -23,6 +23,10 @@ namespace Z0
             => new Arrow<S,T>(src, dst);
 
         [MethodImpl(Inline)]
+        public static Arrow<K,V> arrow<K,V>(in Facet<K,V> src)
+            => arrow(src.Key,src.Value);
+
+        [MethodImpl(Inline)]
         public static Arrow<S,T,K> arrow<S,T,K>(S src, T dst, K kind)
             where K : unmanaged
                 => new Arrow<S,T,K>(src, dst, kind);

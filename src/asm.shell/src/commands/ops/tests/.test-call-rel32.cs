@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmEncoder;
+    using static AsmSpecs;
 
     partial class AsmCmdService
     {
@@ -18,7 +18,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
 
             MemoryAddress client = FunctionBase + InstructionOffset;
-            var call = Calls.rel32(client,Displacement);
+            var call = AsmSpecs.call(client, Displacement);
             Write(AsmRender.format(call));
 
             return result;
