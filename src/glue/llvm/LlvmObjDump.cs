@@ -23,7 +23,7 @@ namespace Z0
             var count = src.Length;
             var tool = Toolspace.llvm_objdump;
 
-            var cmd = Cmd.cmdline(Ws.Script(tool, "run").Format(PathSeparator.BS));
+            var cmd = Cmd.cmdline(Ws.Tools().Script(tool, "run").Format(PathSeparator.BS));
             var result = Outcome.Success;
             var responses = list<CmdResponse>();
             for(var i=0; i<count; i++)

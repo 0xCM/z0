@@ -17,15 +17,12 @@ namespace Z0.Asm
 
         DocServices DocServices;
 
-        DevWs Ws;
-
         CharMapper CharMapper;
 
         protected override void OnInit()
         {
             DocServices = Wf.DocServices();
             CharMapper = Wf.CharMapper();
-            Ws = Wf.DevWs();
         }
 
         public void ClearTargets()

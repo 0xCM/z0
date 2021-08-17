@@ -11,16 +11,9 @@ namespace Z0.Asm
 
     public class DocServices : AppService<DocServices>
     {
-        DevWs Ws;
-
         public DocServices()
         {
 
-        }
-
-        protected override void OnInit()
-        {
-            Ws = Wf.DevWs();
         }
 
         public Outcome Split(FS.FilePath specpath)

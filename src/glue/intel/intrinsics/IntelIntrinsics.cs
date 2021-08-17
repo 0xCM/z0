@@ -18,13 +18,6 @@ namespace Z0.Asm
     {
         const string dataset = "intel.intrinsics";
 
-        DevWs Ws;
-
-        protected override void Initialized()
-        {
-            Ws = Wf.DevWs();
-        }
-
         public ReadOnlySpan<Intrinsic> Emit()
         {
             var parsed = Parse();

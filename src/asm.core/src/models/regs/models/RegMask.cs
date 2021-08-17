@@ -8,17 +8,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    partial class AsmCmdService
+    public struct RegMask
     {
-        [CmdOp(".tokens-emit")]
-        Outcome Tokens(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            Wf.AsmEtl().EmitAsmTokens();
+        RegClass Kind;
 
-            return result;
-        }
+        RegWidth Width;
+
+        RegIndex Index;
     }
 }

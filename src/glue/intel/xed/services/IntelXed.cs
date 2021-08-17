@@ -29,13 +29,10 @@ namespace Z0.Asm
 
         FS.FolderPath XedSources;
 
-        DevWs Ws;
-
         XedParsers Parsers;
 
         protected override void OnInit()
         {
-            Ws = Wf.DevWs();
             XedTables = Ws.Tables().Subdir("intel.xed");
             XedSources = Ws.Sources().Datasets("xed.primary");
             Parsers = Wf.XedParsers();

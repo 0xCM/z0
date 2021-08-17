@@ -12,6 +12,7 @@ namespace Z0.Asm
     using K = RegKind;
     using T = System.Byte;
     using G = RegModels.r8;
+    using api = AsmRegBits;
 
     partial struct RegModels
     {
@@ -39,7 +40,7 @@ namespace Z0.Asm
             public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
-                get => AsmRegs.index(RegKind);
+                get => api.index(RegKind);
             }
 
             [MethodImpl(Inline)]
@@ -66,7 +67,7 @@ namespace Z0.Asm
             public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
-                get => AsmRegs.index(RegKind);
+                get => api.index(RegKind);
             }
         }
 

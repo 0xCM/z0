@@ -13,16 +13,8 @@ namespace Z0.Asm
 
     public class AsmTables : AppService<AsmTables>
     {
-        DevWs Ws;
-
         public AsmTables()
         {
-        }
-
-
-        protected override void Initialized()
-        {
-            Ws = Wf.DevWs();
         }
 
         public FS.Files AsmDetailFiles()

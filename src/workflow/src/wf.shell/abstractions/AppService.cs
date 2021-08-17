@@ -52,12 +52,15 @@ namespace Z0
 
         public Identifier HostName {get;}
 
+        protected DevWs Ws;
+
         public void Init(IWfRuntime wf)
         {
             var flow = wf.Creating(typeof(H).Name);
             Host = new WfSelfHost(typeof(H));
             Wf = wf;
             Db = new WfDb(wf, wf.Env.Db);
+            Ws = DevWs.create(wf.Env.DevWs);
             OnInit();
             Initialized();
             wf.Created(flow);

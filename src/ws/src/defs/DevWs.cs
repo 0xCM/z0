@@ -10,6 +10,7 @@ namespace Z0
     using static Root;
     using static WsNames;
 
+
     public sealed class DevWs : IWorkspace<DevWs>
     {
         [MethodImpl(Inline)]
@@ -85,7 +86,7 @@ namespace Z0
         public AsmWs Asm()
             => AsmWs.create(_WsRoot + FS.folder(asm));
 
-        public ToolWs Tools()
+        public IWorkspace Tools()
             => ToolWs.create(_WsRoot + FS.folder(tools));
 
         public IWorkspace Tables()

@@ -34,7 +34,7 @@ namespace Z0.Asm
             public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
-                get => AsmRegs.index(RegKind);
+                get => AsmRegBits.index(RegKind);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Z0.Asm
             public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
-                get => AsmRegs.index(RegKind);
+                get => AsmRegBits.index(RegKind);
             }
 
             [MethodImpl(Inline)]

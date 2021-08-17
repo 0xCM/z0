@@ -32,8 +32,6 @@ namespace Z0.Tools
 
         FS.FilePath InputFile;
 
-        DevWs Ws;
-
         public CultProcessor()
         {
             Summaries = new();
@@ -46,7 +44,6 @@ namespace Z0.Tools
 
         protected override void OnInit()
         {
-            Ws = Wf.DevWs();
             TargetRoot = Ws.Imports().Subdir(Tool);
             DetailRoot = TargetRoot + FS.folder("details");
             InputFile = Ws.Sources().Path(Tool.Format(), FS.Asm);

@@ -20,10 +20,6 @@ namespace Z0
             => Svc.AsmSymbols.create();
 
         [Op]
-        public static AsmEtl AsmEtl(this IServiceContext context)
-            => Svc.AsmEtl.create(context);
-
-        [Op]
         public static AsmTools AsmTools(this IServiceContext context)
             => Svc.AsmTools.create(context);
     }

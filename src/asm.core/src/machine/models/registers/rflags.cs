@@ -12,6 +12,7 @@ namespace Z0.Asm
 
     using K = AsmCodes.RFlagBits;
     using I = AsmCodes.RFlagIndex;
+    using api = AsmRegBits;
 
     partial struct RegModels
     {

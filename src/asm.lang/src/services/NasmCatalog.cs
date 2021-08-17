@@ -11,14 +11,6 @@ namespace Z0.Asm
 
     public class NasmCatalog : AppService<NasmCatalog>
     {
-        DevWs Ws;
-
-        protected override void Initialized()
-        {
-            Ws = Wf.DevWs();
-
-        }
-
         static bool comment(string src)
             => src.Length > 0 && src[0] == Chars.Semicolon;
 

@@ -15,8 +15,6 @@ namespace Z0
     {
         public ToolId Id {get;}
 
-        protected IWorkspace Ws;
-
         ScriptRunner ScriptRunner;
 
         CmdLineRunner CmdRunner;
@@ -29,7 +27,6 @@ namespace Z0
         protected override void OnInit()
         {
             base.OnInit();
-            Ws = Wf.DevWs().Tools();
             ScriptRunner = Wf.ScriptRunner();
             CmdRunner = Wf.CmdLineRunner();
         }

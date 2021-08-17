@@ -9,6 +9,8 @@ namespace Z0.Asm
 
     using static Root;
 
+    using api = AsmRegBits;
+
     partial struct RegModels
     {
         public struct IP : IReg16<IP,ushort>
@@ -36,10 +38,9 @@ namespace Z0.Asm
             public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
-                get => AsmRegs.index(RegKind);
+                get => api.index(RegKind);
             }
         }
-
 
         public struct EIP : IReg32<EIP,uint>
         {
@@ -66,7 +67,7 @@ namespace Z0.Asm
             public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
-                get => AsmRegs.index(RegKind);
+                get => api.index(RegKind);
             }
         }
 
@@ -95,7 +96,7 @@ namespace Z0.Asm
             public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
-                get => AsmRegs.index(RegKind);
+                get => api.index(RegKind);
             }
         }
     }
