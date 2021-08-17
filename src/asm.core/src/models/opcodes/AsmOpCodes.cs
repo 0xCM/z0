@@ -21,8 +21,12 @@ namespace Z0.Asm
     public readonly partial struct AsmOpCodes
     {
         [MethodImpl(Inline), Op]
-        public static AsmOpCode define(ushort sdmkey, MC.AsmId asmid, uint encoding)
-            => new AsmOpCode(sdmkey, asmid, encoding);
+        public static AsmOpCode define(ushort sdmkey, MC.AsmId asmid, uint encoding, in CharBlock48 expr)
+            => new AsmOpCode(sdmkey, asmid, encoding, expr);
+
+        [MethodImpl(Inline), Op]
+        public static AsmOpCode define(ushort sdmkey, in CharBlock48 expr)
+            => new AsmOpCode(sdmkey, 0, 0, expr);
 
         [Op]
         public static bit search(ReadOnlySpan<char> src, out ModRmToken dst)

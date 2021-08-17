@@ -9,7 +9,7 @@ namespace Z0.Asm
     partial struct AsmParser
     {
         [Op]
-        public static Outcome sig(string src, out AsmSigExpr dst)
+        public static Outcome sigxpr(string src, out AsmSigExpr dst)
         {
             if(text.empty(src))
                 return true;
@@ -17,12 +17,12 @@ namespace Z0.Asm
             var trimmed = src.Trim();
             var i = text.index(trimmed, Chars.Space);
             if(i == NotFound)
-                dst = asm.sig(asm.mnemonic(src), src);
+                dst = asm.sigxpr(asm.mnemonic(src), src);
             else
             {
                 var mnemonic = asm.mnemonic(text.slice(trimmed,0,i));
                 var operands = text.slice(trimmed, i + 1);
-                dst = asm.sig(mnemonic, trimmed);
+                dst = asm.sigxpr(mnemonic, trimmed);
             }
             return true;
         }

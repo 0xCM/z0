@@ -38,11 +38,11 @@ namespace Z0.Asm
 
             dst.Expression = asm.expr(skip(cells, i++));
             dst.Encoded = AsmHexCode.parse(skip(cells, i++));
-            result = sig(skip(cells, i++), out dst.Sig);
+            result = sigxpr(skip(cells, i++), out dst.Sig);
             if(result.Fail)
                 return result;
 
-            dst.OpCode = asm.opcode(skip(cells, i++));
+            dst.OpCode = asm.ocexpr(skip(cells, i++));
             dst.Bitstring = dst.Encoded;
 
             result = DataParser.parse(skip(cells, i++), out dst.OpUri);

@@ -29,7 +29,7 @@ namespace Z0.Asm
             var C = parts.Length > 2 ? skip(parts,2) : EmptyString;
             if(text.unfence(A, SigFence, out var sigexpr))
             {
-                result = AsmParser.sig(sigexpr, out var sig);
+                result = AsmParser.sigxpr(sigexpr, out var sig);
                 if(result.Fail)
                     return (false, $"Could not parse sig expression from ${sigexpr}");
 
@@ -39,7 +39,7 @@ namespace Z0.Asm
                     {
                         if(AsmHexCode.parse(B, out var encoded))
                         {
-                            thumbprint = new AsmThumbprint(statement, sig, asm.opcode(opcode), encoded);
+                            thumbprint = new AsmThumbprint(statement, sig, asm.ocexpr(opcode), encoded);
                             return true;
                         }
                         else

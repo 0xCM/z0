@@ -489,7 +489,7 @@ namespace Z0.Asm
             EmitAsciBytes(name, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", Db.AppLog(name, FS.Cs));
         }
 
-        public void LoadForms()
+        public void LoadStanfordForms()
         {
             var catalog = Wf.StanfordCatalog();
             var rows = catalog.LoadAsset();
@@ -498,8 +498,8 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                AsmParser.sig(row.Instruction, out var sig);
-                var form = asm.form(asm.opcode(row.OpCode), sig);
+                AsmParser.sigxpr(row.Instruction, out var sig);
+                var form = new AsmFormExpr(asm.ocexpr(row.OpCode), sig);
                 var spec = string.Format("{0,-32} | {1,-42} | {2,-42}", form.Sig.Mnemonic, form.OpCode, form.Sig);
                 dst.Add(spec);
             }

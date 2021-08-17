@@ -16,7 +16,7 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential, Pack=1, Size =(int)SZ), Blittable(SZ)]
     public struct AsmOpCode
     {
-        public const uint SZ = 2*PrimalSizes.U16 + PrimalSizes.U32;
+        public const uint SZ = 2*PrimalSizes.U16 + PrimalSizes.U32 + CharBlock48.SZ;
 
         public ushort SdmKey;
 
@@ -24,12 +24,15 @@ namespace Z0.Asm
 
         public uint Encoding;
 
+        public CharBlock48 Expr;
+
         [MethodImpl(Inline)]
-        public AsmOpCode(ushort key, MC.AsmId asmid, uint encoding)
+        public AsmOpCode(ushort key, MC.AsmId asmid, uint encoding, CharBlock48 expr)
         {
             AsmId = 0;
             SdmKey = key;
             Encoding = encoding;
+            Expr = expr;
         }
 
         public ref byte Lead
@@ -56,6 +59,11 @@ namespace Z0.Asm
             get => slice(bytes(Encoding),0, 3);
         }
 
+        public string Format()
+            => Expr.Format();
+
+        public override string ToString()
+            => Format();
         public static AsmOpCode Empty
             => default;
     }

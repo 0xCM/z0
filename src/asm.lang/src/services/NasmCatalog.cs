@@ -40,7 +40,7 @@ namespace Z0.Asm
         public ReadOnlySpan<NasmInstruction> ParseInstructions(FS.FilePath src)
         {
             const uint FirstLine = 70;
-            var lines = slice(src.ReadTextLines(), FirstLine);
+            var lines = slice(src.ReadNumberedLines(), FirstLine);
             var count = lines.Length;
             var section = EmptyString;
             var buffer = span<NasmInstruction>(count);

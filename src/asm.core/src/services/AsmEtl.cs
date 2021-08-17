@@ -14,11 +14,38 @@ namespace Z0.Asm
     [ApiHost]
     public class AsmEtl : Service<AsmEtl>
     {
+        /// <summary>
+        /// Distills <see cref='AsmForm'/> values from a <see cref='SdmOpCodeDetail'/> sequence
+        /// </summary>
+        /// <param name="src">The data source</param>
+        [Op]
+        public static Index<AsmForm> forms(ReadOnlySpan<SdmOpCodeDetail> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<AsmForm>(count);
+            ref var dst = ref first(buffer);
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var record = ref skip(src,i);
+                ref var opcode = ref SdmModels.opcode(record, out _);
+                ref var form = ref seek(dst,i);
+                form = asm.form(
+                    asm.sig(
+                        opcode.Mnemonic.Format(),
+                        SdmModels.operands(opcode)
+                        ),
+                    asm.opcode((ushort)opcode.OpCodeId, opcode.Expr)
+                    );
+            }
+            return buffer;
+        }
+
         public Outcome LoadSdmOpCodes(FS.FilePath src, out SdmOpCodeDetail[] dst)
         {
             var result = Outcome.Success;
             dst = sys.empty<SdmOpCodeDetail>();
-            var lines = src.ReadLines().View;
+            var lines = src.ReadLines(TextEncodingKind.Unicode).View;
             result = TextGrids.load(lines, out var grid);
             if(result.Fail)
                 return result;

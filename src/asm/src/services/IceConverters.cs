@@ -31,18 +31,18 @@ namespace Z0.Asm
             => () => access(src);
 
         [Op]
-        public static AsmFormExpr specifier(Iced.Instruction src)
+        public static AsmFormExpr formxpr(Iced.Instruction src)
         {
             var ocinfo = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            return asm.form(
+            return (
                 ocxpr(ocinfo.ToOpCodeString()),
-                asm.sig(src.Mnemonic.ToString(),
+                asm.sigxpr(src.Mnemonic.ToString(),
                 ocinfo.ToInstructionString())
                 );
         }
 
         static AsmOpCodeExpr ocxpr(string src)
-            => asm.opcode(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
+            => asm.ocexpr(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
 
         [MethodImpl(Inline), Op]
         public static IceOpAccess[] access(Iced.InstructionInfo src)
@@ -68,7 +68,7 @@ namespace Z0.Asm
                 UsedMemory = UsedMemory(info),
                 UsedRegisters = UsedRegisters(info),
                 Access = OpAccessDefer(info),
-                Specifier = specifier(src),
+                Specifier = formxpr(src),
                 ByteLength = src.ByteLength,
                 ConditionCode = Thaw(src.ConditionCode),
                 CodeSize = Thaw(src.CodeSize),

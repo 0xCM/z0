@@ -26,13 +26,13 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public void SdmOpCodes(SdmOpCodeDetail[] src)
+        public void SdmOpCodeDetail(SdmOpCodeDetail[] src)
         {
             _OpCodes = src;
         }
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<SdmOpCodeDetail> SdmOpCodes()
+        public ReadOnlySpan<SdmOpCodeDetail> SdmOpCodeDetail()
             => _OpCodes.View;
 
         [MethodImpl(Inline)]

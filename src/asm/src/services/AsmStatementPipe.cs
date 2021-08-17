@@ -48,7 +48,7 @@ namespace Z0.Asm
                 for(var j=0; j<icount; j++)
                 {
                     var instruction = skip(instructions,j).Instruction;
-                    var opcode = asm.opcode(instruction.OpCode.ToString());
+                    var opcode = asm.ocexpr(instruction.OpCode.ToString());
                     if(!opcode.IsValid)
                         break;
 
@@ -63,7 +63,7 @@ namespace Z0.Asm
                     statement.IP = ip;
                     statement.OpUri = routine.Uri;
                     statement.Statement = instruction.FormattedInstruction;
-                    AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
+                    AsmParser.sigxpr(instruction.OpCode.InstructionString, out statement.Sig);
                     statement.Encoded = AsmHexCode.load(slice(bytes, blockOffset, size));
                     statement.OpCode = opcode;
                     statement.Bitstring = statement.Encoded;
@@ -112,7 +112,7 @@ namespace Z0.Asm
                 for(var j=0; j<icount; j++)
                 {
                     var instruction = skip(instructions,j);
-                    var opcode = asm.opcode(instruction.OpCode.ToString());
+                    var opcode = asm.ocexpr(instruction.OpCode.ToString());
                     if(!opcode.IsValid)
                         break;
 
@@ -127,7 +127,7 @@ namespace Z0.Asm
                     statement.IP = ip;
                     statement.OpUri = code.OpUri;
                     statement.Statement = instruction.FormattedInstruction;
-                    AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
+                    AsmParser.sigxpr(instruction.OpCode.InstructionString, out statement.Sig);
                     statement.Encoded = AsmHexCode.load(slice(bytes, blockOffset, size));
                     statement.OpCode = opcode;
                     statement.Bitstring = statement.Encoded;

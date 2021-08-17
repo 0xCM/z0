@@ -12,16 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmSigExpr sig(AsmMnemonic mnemonic, string content)
-            => new AsmSigExpr(mnemonic, content);
-
-        [Op]
-        public static AsmSigExpr sig(string src)
-        {
-            if(AsmParser.sig(src, out var dst))
-                return dst;
-            else
-                return AsmSigExpr.Empty;
-        }
+        public static AsmSig sig(AsmMnemonic mnemonic, ReadOnlySpan<string> ops)
+            => AsmSigs.sig(mnemonic, ops);
     }
 }

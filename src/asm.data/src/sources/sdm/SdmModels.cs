@@ -18,25 +18,8 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct SdmModels
     {
-        public static ReadOnlySpan<CharBlock16> operands(in SdmOpCode src)
-        {
-            var storage = CharBlock64.Null;
-            var data = storage.Data;
-            ref var dst = ref first(storage.Data);
-            var operands = text.split(src.Operands.Format(), Chars.Comma).Select(op => op.Trim());
-            var count = min(operands.Length,4);
-            for(var i=0; i<count; i++)
-            {
-                ref var target = ref seek(dst,i*16);
-                ref readonly var op = ref skip(operands,i);
-                if(op.Length <= 16)
-                    text.copy(op, ref target);
-                else
-                    text.copy(text.slice(op,0,16), ref target);
-            }
-
-            return recover<CharBlock16>(data);
-        }
+        public static ReadOnlySpan<string> operands(in SdmOpCode src)
+            => text.split(src.Operands.Format(), Chars.Comma).Select(op => op.Trim());
 
         [MethodImpl(Inline), Op]
         public static ref SdmOpCode opcode(in SdmOpCodeDetail src, out SdmOpCode dst)

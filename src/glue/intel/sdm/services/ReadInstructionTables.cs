@@ -35,7 +35,7 @@ namespace Z0.Asm
             var rowidx = z16;
             var table = TableBuilder.create();
             var tables = list<Table>();
-            using var reader = src.LineReader(TextEncodingKind.Asci);
+            using var reader = src.LineReader(TextEncodingKind.Utf8);
             while(reader.Next(out var line))
             {
                 if((line.IsEmpty || line.StartsWith(Separator)) && !parsingrows)

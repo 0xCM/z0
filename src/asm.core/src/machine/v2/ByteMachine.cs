@@ -11,7 +11,6 @@ namespace Z0
     using static core;
 
     using static Asm.AsmSpecs;
-    using static Asm.AsmEncoder;
     using static MemorySections;
 
     [ApiComplete]

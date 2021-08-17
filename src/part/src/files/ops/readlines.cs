@@ -31,5 +31,35 @@ namespace Z0
                 seek(dst,i) = text.line(i, skip(data,i));
             return buffer;
         }
+
+        public static Index<TextLine> readlines(FS.FilePath src, TextEncodingKind encoding)
+        {
+            using var reader = src.Reader(encoding);
+            var buffer = list<TextLine>();
+            var content = reader.ReadLine();
+            var number = 1u;
+            while(content != null)
+            {
+                buffer.Add(text.line(number++, content));
+                content = reader.ReadLine();
+            }
+
+            return buffer.ToArray();
+        }
+
+        public static Index<string> readtext(FS.FilePath src, TextEncodingKind encoding)
+        {
+            using var reader = src.Reader(encoding);
+            var buffer = list<string>();
+            var content = reader.ReadLine();
+            var number = 1u;
+            while(content != null)
+            {
+                buffer.Add(content);
+                content = reader.ReadLine();
+            }
+
+            return buffer.ToArray();
+        }
     }
 }

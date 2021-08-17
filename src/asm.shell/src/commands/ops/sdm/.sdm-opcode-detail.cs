@@ -13,18 +13,18 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".sdm-opcodes")]
-        Outcome Opcodes(CmdArgs args)
+        [CmdOp(".sdm-opcode-detail")]
+        Outcome OpcodeDetail(CmdArgs args)
         {
             var result = Outcome.Success;
-            var opcodes = State.SdmOpCodes();
+            var opcodes = State.SdmOpCodeDetail();
             if(opcodes.Length == 0)
             {
-                result = LoadSdmOpcodes(out _);
+                result = SdmOpCodeDetailLoad(out _);
                 if(result.Fail)
                     return result;
 
-                opcodes = State.SdmOpCodes();
+                opcodes = State.SdmOpCodeDetail();
             }
 
             var count = opcodes.Length;

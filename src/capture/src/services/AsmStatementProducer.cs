@@ -86,14 +86,14 @@ namespace Z0.Asm
             return counter;
         }
 
-        static AsmSigExpr sig(in ApiInstruction src)
-            => asm.sig(src.Instruction.OpCode.InstructionString);
+        static AsmSigExpr sigxpr(in ApiInstruction src)
+            => asm.sigxpr(src.Instruction.OpCode.InstructionString);
 
-        static AsmFormExpr form(in ApiInstruction src)
-            => asm.form(src.OpCode, sig(src));
+        static AsmFormExpr formxpr(in ApiInstruction src)
+            => (src.OpCode, sigxpr(src));
 
         static AsmThumbprint thumbprint(in ApiInstruction src)
-            => asm.thumbprint(src.Statment, form(src), AsmHexCode.load(src.EncodedData));
+            => asm.thumbprint(src.Statment, formxpr(src), AsmHexCode.load(src.EncodedData));
 
         static string format(MemoryAddress @base, CodeBlock code)
             => string.Format("{0}[{1}] => {2}", @base.Format(), code.Length, code.Format());

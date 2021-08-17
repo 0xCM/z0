@@ -58,6 +58,34 @@ namespace Z0
             get => api.length(this);
         }
 
+        [MethodImpl(Inline)]
+        public ref CharBlock32 Block(N0 n, N32 w)
+        {
+            ref var c = ref seek(Data,0);
+            return ref @as<char,CharBlock32>(c);
+        }
+
+        [MethodImpl(Inline)]
+        public ref CharBlock32 Block(N1 n, N32 w)
+        {
+            ref var c = ref seek(Data,32);
+            return ref @as<char,CharBlock32>(c);
+        }
+
+        [MethodImpl(Inline)]
+        public ref CharBlock32 Block(N2 n, N32 w)
+        {
+            ref var c = ref seek(Data,64);
+            return ref @as<char,CharBlock32>(c);
+        }
+
+        [MethodImpl(Inline)]
+        public ref CharBlock32 Block(N3 n, N32 w)
+        {
+            ref var c = ref seek(Data,86);
+            return ref @as<char,CharBlock32>(c);
+        }
+
         public string Format()
             => TextTools.format(String);
 

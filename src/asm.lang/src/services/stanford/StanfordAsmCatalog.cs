@@ -53,7 +53,7 @@ namespace Z0.Asm
         /// <summary>
         /// Retrieves the forms present in the catalog
         /// </summary>
-        public ReadOnlySpan<AsmFormExpr> DeriveForms()
+        public ReadOnlySpan<AsmFormExpr> DeriveFormExprssions()
         {
             var imported = LoadAsset();
             var count = imported.Length;
@@ -63,8 +63,8 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(imported, i);
-                if(AsmParser.sig(row.Instruction, out var sig))
-                    seek(buffer, k++) = asm.form(asm.opcode(row.OpCode), sig);
+                if(AsmParser.sigxpr(row.Instruction, out var sig))
+                    seek(buffer, k++) = (asm.ocexpr(row.OpCode), sig);
                 else
                 {
                     seek(buffer, k++) = AsmFormExpr.Empty;

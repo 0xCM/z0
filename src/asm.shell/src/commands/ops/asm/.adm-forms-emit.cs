@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-    partial struct asm
+    partial class AsmCmdService
     {
-        [MethodImpl(Inline), Op]
-        public static AsmForm form(in AsmSig sig, in AsmOpCode oc)
-            => new AsmForm(sig,oc);
+        [CmdOp(".asm-forms-emit")]
+        Outcome AsmFormsEmit(CmdArgs args)
+            => AsmFormsEmit();
     }
 }

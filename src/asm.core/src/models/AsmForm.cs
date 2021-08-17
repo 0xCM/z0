@@ -9,17 +9,23 @@ namespace Z0.Asm
 
     using static Root;
 
-    /// <summary>
-    /// Represents an operand in the context of an instruction signature
-    /// </summary>
-    public readonly struct AsmSigOp
+    public readonly struct AsmForm
     {
-        readonly byte Data;
+        public AsmSig Sig {get;}
+
+        public AsmOpCode OpCode {get;}
 
         [MethodImpl(Inline)]
-        internal AsmSigOp(byte data)
+        public AsmForm(in AsmSig sig, in AsmOpCode oc)
         {
-            Data = data;
+            Sig = sig;
+            OpCode = oc;
         }
+
+        public string Format()
+            => string.Format("{0} = {1}", Sig, OpCode);
+
+        public override string ToString()
+            => Format();
     }
 }

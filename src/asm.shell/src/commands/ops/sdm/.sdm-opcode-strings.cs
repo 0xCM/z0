@@ -15,7 +15,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
-            result = LoadSdmOpcodes(out var opcodes);
+            result = SdmOpCodeDetailLoad(out var opcodes);
             if(result.Fail)
                 return result;
 

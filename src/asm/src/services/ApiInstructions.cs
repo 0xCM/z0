@@ -56,7 +56,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var instruction = ref skip(instructions,i);
-                var opcode = asm.opcode(instruction.OpCode.ToString());
+                var opcode = asm.ocexpr(instruction.OpCode.ToString());
                 if(!opcode.IsValid)
                     break;
 
@@ -68,7 +68,7 @@ namespace Z0.Asm
                 statement.IP = instruction.IP;
                 statement.OpUri = src.Uri;
                 statement.Expression = instruction.FormattedInstruction;
-                AsmParser.sig(instruction.OpCode.InstructionString, out statement.Sig);
+                AsmParser.sigxpr(instruction.OpCode.InstructionString, out statement.Sig);
                 statement.Encoded = AsmHexCode.load(bytes.Slice(offset, size));
                 statement.OpCode = opcode;
                 statement.Bitstring = statement.Encoded;

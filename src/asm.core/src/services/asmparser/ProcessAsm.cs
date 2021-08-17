@@ -58,11 +58,11 @@ namespace Z0.Asm
             if(outcome.Fail)
                 return (false, string.Format(ErrorPattern, nameof(dst.Encoded), src.LineNumber));
 
-            outcome += sig(skip(parts,i++), out dst.Sig);
+            outcome += sigxpr(skip(parts,i++), out dst.Sig);
             if(outcome.Fail)
                 return (false, string.Format(ErrorPattern, nameof(dst.Sig), src.LineNumber));
 
-            dst.OpCode = asm.opcode(skip(parts, i++));
+            dst.OpCode = asm.ocexpr(skip(parts, i++));
 
             var bitstring = skip(parts,i++);
             dst.Bitstring = dst.Encoded;

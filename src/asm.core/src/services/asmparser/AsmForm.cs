@@ -7,7 +7,7 @@ namespace Z0.Asm
     partial struct AsmParser
     {
         [Op]
-        public static Outcome form(string src, out AsmFormExpr dst)
+        public static Outcome formxpr(string src, out AsmFormExpr dst)
         {
             dst = AsmFormExpr.Empty;
             var result = Outcome.Success;
@@ -16,7 +16,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return (false, FenceNotFound.Format(SigFence,src));
 
-            result = sig(sigexpr, out var _sig);
+            result = sigxpr(sigexpr, out var _sig);
             if(result.Fail)
                 return (false, Msg.CouldNotParseSigExpr.Format(sigexpr));
 
@@ -24,7 +24,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return (false, FenceNotFound.Format(OpCodeFence, src));
 
-            dst = new AsmFormExpr(asm.opcode(opcode), _sig);
+            dst = new AsmFormExpr(asm.ocexpr(opcode), _sig);
             return true;
         }
 
@@ -32,9 +32,9 @@ namespace Z0.Asm
         {
             var i = 0;
             DataParser.parse(src[i++], out dst.Seq);
-            opcode(src[i++], out dst.OpCode);
-            sig(src[i++], out dst.Sig);
-            form(src[i++], out dst.FormExpr);
+            ocxpr(src[i++], out dst.OpCode);
+            sigxpr(src[i++], out dst.Sig);
+            formxpr(src[i++], out dst.FormExpr);
             return ref dst;
         }
 
