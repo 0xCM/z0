@@ -31,6 +31,9 @@ namespace Z0.Asm
             Specializer = Wf.ImmSpecializer();
         }
 
+        IImmArchive ImmArchive
+            => Db.ImmArchive();
+
         bool Append = true;
 
         public void Emit(Index<PartId> parts)
@@ -84,17 +87,17 @@ namespace Z0.Asm
         void ClearArchive(Index<PartId> parts)
         {
             if(parts.Length != 0)
-                Db.ImmHostDirs(parts).Delete();
+                ImmArchive.ImmHostDirs(parts).Delete();
             else
-                Db.ImmCaptureRoot().Delete();
+                ImmArchive.Root.Delete();
         }
 
         void ClearArchive(Index<PartId> parts, FS.FolderPath root)
         {
             if(parts.Length != 0)
-                Db.ImmHostDirs(root, parts).Delete();
+                ImmArchive.ImmHostDirs(root, parts).Delete();
             else
-                Db.ImmCaptureRoot(root).Delete();
+                ImmArchive.Root.Delete();
         }
 
         ReadOnlySpan<AsmRoutine> EmitLiteral(byte[] imm8, Index<PartId> parts)

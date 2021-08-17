@@ -47,13 +47,4 @@ namespace Z0
         public FS.FilePath OutputPath(string subject, FS.FileName file)
             => OutputDir(subject) + file;
     }
-
-    partial interface IEnvPaths
-    {
-        CodeGenArchive CodeGen()
-            => DbRoot() + FS.folder(codegen);
-
-        CodeGenArchive CodeGen(FS.FolderPath root)
-            => root + FS.folder(codegen);
-    }
 }

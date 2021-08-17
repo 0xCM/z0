@@ -111,7 +111,7 @@ namespace Z0.Asm
 
         void CaptureParts(params PartId[] parts)
         {
-            var dst = Db.AppLogDir() + FS.folder("capture");
+            var dst = Db.AppLogRoot() + FS.folder("capture");
             dst.Clear();
             Wf.CaptureRunner().Capture(parts, dst);
         }
@@ -451,7 +451,7 @@ namespace Z0.Asm
         public void ParseDisassembly()
         {
             var src = FS.path(@"C:\Data\zdb\tools\dumpbin\output\xxhsum.exe.disasm.asm");
-            var dir = Db.AppLogDir();
+            var dir = Db.AppLogRoot();
             var parser = Wf.DumpBinProcesor();
             var dst = dir + FS.file("xxhsum", FS.Asm);
             parser.ParseDisassembly(src,dst);

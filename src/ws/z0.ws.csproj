@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Workflow)" />
+    <ProjectReference Include="$(Part)" />
+    <ProjectReference Include="$(Events)" />
   </ItemGroup>
 
 </Project>

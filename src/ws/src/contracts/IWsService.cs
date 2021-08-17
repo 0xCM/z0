@@ -4,11 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    public interface IWsService : IService
+    {
+        IWorkspace Ws {get;}
+    }
 
-    [Free]
-    public interface IFsEntries<T> : IIndex<T>
-        where T : struct, IFsEntry<T>
+    public interface IWsService<T> : IWsService
+        where T : IWsService<T>, new()
     {
 
     }

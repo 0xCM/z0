@@ -50,7 +50,6 @@ namespace Z0.Asm
                 => Format();
         }
 
-
         [SymSource(group), Alias("decorator")]
         public enum DecoratorToken : byte
         {

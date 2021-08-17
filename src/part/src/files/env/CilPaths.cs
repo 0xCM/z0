@@ -4,21 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
     using static EnvFolders;
+    using static Root;
 
-    partial interface IEnvPaths
+    public interface ICilPaths : IEnvPaths
     {
-        FS.FolderPath CilDataRoot()
-            => CaptureRoot() + FS.folder(cildata);
-
-        FS.FolderPath CilDataRoot(FS.FolderPath root)
-            => CaptureRoot(root) + FS.folder(cildata);
-
         FS.FilePath CilDataPath(FS.FileName name)
             => CilDataRoot() + name;
-
-        FS.FilePath CilDataPath(FS.FolderPath root, FS.FileName name)
-            => CilDataRoot(root) + name;
 
         FS.FilePath CilDataPath(ApiHostUri host)
             => CilDataPath(ApiFiles.filename(host, FS.IlData));
@@ -35,9 +30,6 @@ namespace Z0
         FS.FolderPath CilCodeRoot()
             => CaptureRoot() + FS.folder(cil);
 
-        FS.FolderPath CilCodeRoot(FS.FolderPath root)
-            => CaptureRoot(root) + FS.folder(cil);
-
         FS.FilePath CilCodePath(FS.FileName name)
             => CilCodeRoot() + name;
 
@@ -52,5 +44,20 @@ namespace Z0
 
         FS.Files CilCodePaths(PartId part)
             => CilCodePaths().Where(f => f.IsOwner(part));
+    }
+
+    public readonly struct CilPaths : ICilPaths
+    {
+        public EnvData Env {get;}
+
+        [MethodImpl(Inline)]
+        public CilPaths(EnvData env)
+        {
+            Env = env;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CilPaths(EnvData env)
+            => new CilPaths(env);
     }
 }

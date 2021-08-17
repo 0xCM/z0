@@ -4,28 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
     using static EnvFolders;
     using static Root;
 
-    partial interface IEnvPaths
+    public interface IImmArchive : IFileArchive
     {
-        FS.Files ImmAsmFiles()
-            => ImmCaptureRoot().Files(FS.Asm, true);
-
-        FS.Files ImmAsmFiles(FS.FolderPath root)
-            => ImmCaptureRoot(root).Files(FS.Asm, true);
-
-        FS.Files ImmHexFiles()
-            => ImmCaptureRoot().Files(FS.Hex, true);
-
-        FS.Files ImmHexFiles(FS.FolderPath root)
-            => ImmCaptureRoot(root).Files(FS.Hex, true);
-
         FS.FolderPath[] ImmDirs(PartId part)
-            => ImmCaptureRoot().SubDirs().Where(d => d.Name.EndsWith(part.Format()));
+            => Root.SubDirs().Where(d => d.Name.EndsWith(part.Format()));
 
         FS.FolderPath[] ImmDirs(FS.FolderPath root, PartId part)
-            => ImmCaptureRoot(root).SubDirs().Where(d => d.Name.EndsWith(part.Format()));
+            => Root.SubDirs().Where(d => d.Name.EndsWith(part.Format()));
 
         FS.FolderPath[] ImmHostDirs(PartId part)
             => ImmDirs(part).SelectMany(path => path.SubDirs());
@@ -45,10 +36,10 @@ namespace Z0
         }
 
         FS.FolderPath ImmSubDir(FS.FolderName name)
-            => (ImmCaptureRoot() + name);
+            => (Root + name);
 
         FS.FolderPath ImmSubDir(FS.FolderPath root, FS.FolderName name)
-            => (ImmCaptureRoot(root) + name);
+            => (Root + name);
 
         FS.FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id, bool refined)
             => ImmSubDir(FS.folder(owner.Format(), host.HostName)) + id.ToFileName(refined ? "r" : EmptyString, FS.Hex);
@@ -61,5 +52,20 @@ namespace Z0
 
         FS.FilePath AsmImmPath(FS.FolderPath root, PartId owner, ApiHostUri host, OpIdentity id, bool refined)
             => ImmSubDir(root, FS.folder(owner.Format(), host.HostName)) + id.ToFileName(refined ? "r" : EmptyString, FS.Asm);
+    }
+
+    public readonly struct ImmArchive : IImmArchive
+    {
+        public FS.FolderPath Root {get;}
+
+        [MethodImpl(Inline)]
+        public ImmArchive(FS.FolderPath src)
+        {
+            Root = src;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ImmArchive(FS.FolderPath src)
+            => new ImmArchive(src);
     }
 }

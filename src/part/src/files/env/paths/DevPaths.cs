@@ -8,20 +8,8 @@ namespace Z0
 
     partial interface IEnvPaths
     {
-        FS.FolderPath DevRoot()
-            => Env.DevRoot;
-
-        FS.FolderPath ZDev()
-            => Env.ZDev;
-
-        FS.FolderPath DevRoot(FS.FolderPath root)
-            => root;
-
         FS.FolderPath DevRoot(string id)
             => DevRoot() + FS.folder(id);
-
-        FS.FolderPath ZRoot()
-            => DevRoot(z0);
 
         FS.FolderPath ZSrc()
             => ZRoot() + FS.folder(src);

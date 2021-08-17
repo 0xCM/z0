@@ -11,9 +11,6 @@ namespace Z0
         FS.FolderPath RawExtractRoot()
             => CaptureRoot() + FS.folder(extracts);
 
-        FS.FolderPath RawExtractRoot(FS.FolderPath root)
-            => CaptureRoot(root) + FS.folder(extracts);
-
         FS.Files RawExtractPaths()
             => RawExtractRoot().TopFiles;
 

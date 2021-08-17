@@ -11,7 +11,7 @@ namespace Z0
     partial class CliEmitter
     {
         FS.FolderPath FieldLiteralTarget
-            => Wf.Db().TableRoot() + FS.folder(MemberFieldName.TableId);
+            => Wf.Db().DbTableRoot() + FS.folder(MemberFieldName.TableId);
 
         ReadOnlySpan<Paired<FieldRef,string>> EmitFieldLiterals(ApiPartTypes src)
         {

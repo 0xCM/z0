@@ -8,26 +8,11 @@ namespace Z0
 
     partial interface IEnvPaths
     {
-        FS.FolderPath DataRoot()
-            => Env.DataRoot;
-
-        FS.FolderPath DevWs()
-            => Env.DevWs;
-
-        FS.FolderPath DbRoot()
-            => Env.Db;
-
         FS.FolderPath DbRoot(FS.FolderPath root)
             => root;
 
-        FS.FolderPath RuntimeRoot()
-            => Env.ZBin;
-
         FS.FolderPath BinaryRoot()
             => DbRoot() + FS.folder(bin);
-
-        FS.FolderPath EventRoot()
-            => DbRoot() + FS.folder(events);
 
         FS.FolderPath RefDataRoot()
             => DbRoot() + FS.folder(refdata);
@@ -37,9 +22,6 @@ namespace Z0
 
         FS.FolderPath SettingsRoot()
             => DbRoot() + FS.folder(settings);
-
-        FS.FolderPath ControlScripts()
-            => ControlRoot() + FS.folder(".cmd");
 
         FS.FileName HostFile(ApiHostUri host, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}", host.Part.Format(), host.HostName), ext);

@@ -60,7 +60,7 @@ namespace Z0
             => Db.TableDir<MsilMetadata>().AllFiles;
 
         public FS.Files CapturesFiles()
-            => Db.CilDataPaths();
+            => Db.CilPaths.CilDataPaths();
 
         public Index<MsilMetadata> LoadMetadata(FS.FilePath src)
         {

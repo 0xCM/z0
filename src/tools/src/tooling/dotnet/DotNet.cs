@@ -9,7 +9,7 @@ namespace Z0.Tools
         public void DumpImages(byte major = 3, byte minor = 1, byte revision = 12)
         {
             var emitter = MemoryEmitter.create(Wf);
-            var src = Db.SymbolPaths().DotNetSymbolDir(major, minor, revision);
+            var src = Db.DebugSymbolPaths().DotNetSymbolDir(major, minor, revision);
             if(!src.Exists)
             {
                 Wf.Error(FS.Msg.DirDoesNotExist.Format(src));

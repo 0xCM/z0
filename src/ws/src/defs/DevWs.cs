@@ -77,7 +77,6 @@ namespace Z0
             if(dst != null)
                 result = true;
             return result;
-
         }
 
         public IWorkspace Api()

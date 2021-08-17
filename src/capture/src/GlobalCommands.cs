@@ -119,7 +119,7 @@ namespace Z0
         [CmdOp("asm-gen-models-preview")]
         public Outcome GenInstructionModelPreview(CmdArgs args)
         {
-            Wf.AsmModelGen().GenModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
+            Wf.AsmModelGen().GenModels(Db.AppLogRoot() + FS.folder("asm.lang.g"));
             return true;
         }
 

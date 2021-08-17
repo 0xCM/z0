@@ -50,45 +50,5 @@ namespace Z0
         FS.FilePath DisasmPath(string id, ToolId tool, FS.FileExt? ext = null)
             => DisasmOut() + FS.file(string.Format("{0}.{1}", id, tool), ext ?? FS.Asm);
 
-        AsmToolchainSpec ToolchainSpec(ToolId assembler, ToolId disassembler, string id)
-        {
-            var spec = new AsmToolchainSpec();
-            spec.Assembler = assembler;
-            spec.Disassembler = disassembler;
-            spec.AsmPath = AsmPath(id);
-            spec.BinPath = BinPath(id);
-            spec.HexPath = AsmHexPath(id);
-            spec.HexArrayPath = HexArrayPath(id);
-            spec.ObjKind = ObjFileKind.win64;
-            spec.DisasmPath = DisasmPath(id, disassembler);
-            spec.Analysis = Analysis();
-            spec.ListPath = ListPath(id);
-            spec.AsmBitMode = Bitness.b64;
-            spec.EmitDebugInfo = true;
-            if(spec.ObjKind > ObjFileKind.bin)
-                spec.ObjPath = ObjPath(id);
-
-            return spec;
-        }
-
-        AsmToolchainSpec ToolchainSpec(ToolId assembler, ToolId disassembler, FS.FilePath src)
-        {
-            var spec = new AsmToolchainSpec();
-            var id = src.FileName.WithoutExtension.Format();
-            spec.Assembler = assembler;
-            spec.Disassembler = disassembler;
-            spec.AsmPath = src;
-            spec.BinPath = BinPath(id);
-            spec.HexPath = AsmHexPath(id);
-            spec.HexArrayPath = HexArrayPath(id);
-            spec.ObjKind = ObjFileKind.win64;
-            spec.DisasmPath = DisasmPath(id, disassembler);
-            spec.Analysis = Analysis();
-            spec.ListPath = ListPath(id);
-            spec.AsmBitMode = Bitness.b64;
-            spec.EmitDebugInfo = true;
-            spec.ObjPath = ObjPath(id);
-            return spec;
-        }
-    }
+   }
 }

@@ -235,9 +235,6 @@ namespace Z0.Asm
             return Run(cmd, vars, out var response);
         }
 
-        // FS.FilePath ProcessAsmPath()
-        //     => ApiArchive.ProcessAsmPath();
-
         ReadOnlySpan<ProcessAsmRecord> GetProcessAsm()
         {
             if(State.ProcessAsmCount != 0)
@@ -257,29 +254,6 @@ namespace Z0.Asm
             Write(string.Format("Loaded {0} process asm records from {1}", loaded.Length, path.ToUri()));
             return loaded;
         }
-
-        // ReadOnlySpan<ProcessAsmRecord> GetProcessAsm()
-        // {
-        //     if(ProcessAsmCount() != 0)
-        //     {
-        //         return ProcessAsmBuffer();
-        //     }
-
-        //     var path = ProcessAsmPath();
-        //     var buffer = ProcessAsmBuffer();
-        //     Write(string.Format("Loading process asm from {0}", path.ToUri()));
-        //     var result = AsmLoader.LoadProcessAsm(path, buffer);
-        //     if(result.Fail)
-        //     {
-        //         Error(result.Message);
-        //         return default;
-        //     }
-
-        //     var count = ProcessAsmCount(result.Data);
-        //     _ProcessAsmSelection = alloc<ProcessAsmRecord>(count);
-        //     Write(string.Format("Loaded {0} process asm records from {1}", count, path.ToUri()));
-        //     return ProcessAsmBuffer();
-        // }
 
         void RecordsEmitted(Count count, FS.FilePath dst)
         {

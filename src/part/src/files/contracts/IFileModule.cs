@@ -21,12 +21,4 @@ namespace Z0
     {
 
     }
-
-    [Free]
-    public interface IFileModule<F,T> : IFileModule<T>
-        where F : struct, IFileModule<F,T>
-        where T : struct, IFileModule<T>
-    {
-
-    }
 }

@@ -10,12 +10,6 @@ namespace Z0
 
     partial interface IEnvPaths
     {
-        FS.FolderPath DumpRoot()
-            => FS.dir("j:/dumps");
-
-        FS.FolderPath DumpRoot(FS.FolderPath root)
-            => root;
-
         DumpArchive DumpArchive()
             => new DumpArchive(DumpRoot());
 
@@ -23,7 +17,7 @@ namespace Z0
             => new DumpArchive(root);
 
         DumpPaths DumpPaths()
-            => new DumpPaths(DumpRoot(), TableRoot() + FS.folder("dumps.tables"));
+            => new DumpPaths(DumpRoot(), DbTableRoot() + FS.folder("dumps.tables"));
 
         FS.FilePath DumpPath(string id)
             => DumpArchive().DumpPath(id);

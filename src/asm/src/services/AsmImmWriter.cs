@@ -42,9 +42,13 @@ namespace Z0.Asm
             Config = AsmFormatConfig.@default(out var _);
         }
 
+        IImmArchive ImmArchive
+            => Db.ImmArchive();
+
+
         public Option<FS.FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined)
         {
-            var dst = Db.AsmImmPath(Uri.Part, Uri, id, refined);
+            var dst = ImmArchive.AsmImmPath(Uri.Part, Uri, id, refined);
             using var writer = dst.Writer(append);
             for(var i=0; i<src.Length; i++)
             {
@@ -60,7 +64,7 @@ namespace Z0.Asm
             if(src.Length == 0)
                 return ApiCodeset.Empty;
 
-            var path = Db.HexImmPath(Uri.Part, Uri, id, refined);
+            var path = ImmArchive.HexImmPath(Uri.Part, Uri, id, refined);
             var count = src.Length;
             var view = @readonly(src);
             var blocks = alloc<ApiCodeBlock>(count);

@@ -65,6 +65,8 @@ namespace Z0
 
         public const string tools = nameof(tools);
 
+        public const string tokens = nameof(tokens);
+
         public const string tables = nameof(tables);
 
         public const string sources = nameof(sources);

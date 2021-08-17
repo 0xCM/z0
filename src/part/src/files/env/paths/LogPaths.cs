@@ -11,38 +11,20 @@ namespace Z0
 
     partial interface IEnvPaths
     {
-        FS.FolderPath LogRoot()
-            => DbRoot() + FS.folder(logs);
-
-        FS.FolderPath LogRoot(FS.FolderPath root)
-            => DbRoot(root) + FS.folder(logs);
-
-        FS.FolderPath CmdLogRoot()
-            => LogRoot() + FS.folder(commands);
-
-        FS.FolderPath BuildLogRoot()
-            => LogRoot() + FS.folder(dotbuild);
-
         FS.FilePath BuildLogPath(FS.FileName src)
             => BuildLogRoot() + src;
 
-        FS.FolderPath AppLogRoot()
-            => LogRoot() + FS.folder(apps);
-
-        FS.FolderPath AppLogDir()
-            => AppLogRoot() + FS.folder(AppName);
-
         FS.FolderPath AppLogDir(string id)
-            => AppLogDir() + FS.folder(id);
+            => AppLogRoot() + FS.folder(id);
 
         FS.FolderPath StepLogRoot()
             => LogRoot() + FS.folder(steps);
 
         FS.FilePath AppLog(string id)
-            => AppLogDir() + FS.file(id, FS.Log);
+            => AppLogRoot() + FS.file(id, FS.Log);
 
         FS.FilePath AppLog(string id, FS.FileExt ext)
-            => AppLogDir() + FS.file(id, ext);
+            => AppLogRoot() + FS.file(id, ext);
 
         FS.FilePath CmdLog(ScriptId id)
             => CmdLogRoot() + (id.IsDiscriminated

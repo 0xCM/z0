@@ -6,6 +6,27 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
+        AsmToolchainSpec AsmTooling(ToolId assembler, ToolId disassembler, string id)
+        {
+            var spec = new AsmToolchainSpec();
+            spec.Assembler = assembler;
+            spec.Disassembler = disassembler;
+            spec.AsmPath = AsmWs.AsmPath(id);
+            spec.BinPath = AsmWs.BinPath(id);
+            spec.HexPath = AsmWs.AsmHexPath(id);
+            spec.HexArrayPath = AsmWs.HexArrayPath(id);
+            spec.ObjKind = ObjFileKind.win64;
+            spec.DisasmPath = AsmWs.DisasmPath(id, disassembler);
+            spec.Analysis = AsmWs.Analysis();
+            spec.ListPath = AsmWs.ListPath(id);
+            spec.AsmBitMode = Bitness.b64;
+            spec.EmitDebugInfo = true;
+            if(spec.ObjKind > ObjFileKind.bin)
+                spec.ObjPath = AsmWs.ObjPath(id);
+
+            return spec;
+        }
+
         [CmdOp(".asm-legacy")]
         Outcome AsmLegacy(CmdArgs args)
         {
@@ -14,7 +35,7 @@ namespace Z0.Asm
                 return Assemble();
 
             var id = (string)args.First.Value;
-            var spec = AsmWs.ToolchainSpec(Toolspace.nasm, Toolspace.bddiasm, id);
+            var spec = AsmTooling(Toolspace.nasm, Toolspace.bddiasm, id);
             if(count > 1)
                 Enums.parse(args[1].Value, out spec.AsmBitMode);
 

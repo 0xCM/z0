@@ -26,8 +26,13 @@ namespace Z0
 
         public static MsgPattern<string,string> ParseFailure
             => "Parsing {0} from {1} failed";
+
         public static MsgPattern<string> UriParseFailure
             => "Coult not parse '{0}' as a uri";
+
+        public static MsgPattern<Identifier> WorkspaceSelected
+            => "{0} workspace selected";
+
         public static StatusMsg<T> status<T>(T data)
             => new StatusMsg<T>(data);
 

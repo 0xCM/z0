@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct Files : IFsEntries<FilePath>
+        public readonly struct Files : IIndex<FilePath>
         {
             public readonly Index<FilePath> Data;
 

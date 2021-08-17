@@ -7,7 +7,7 @@ namespace Z0
     partial interface IEnvPaths
     {
         FS.FolderPath AsmStatementRoot()
-            => TableRoot() + FS.folder("asm.statements");
+            => DbTableRoot() + FS.folder("asm.statements");
 
         FS.FolderPath AsmStatementRoot(FS.FolderPath root)
             => TableRoot(root) + FS.folder("asm.statements");

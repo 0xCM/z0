@@ -95,7 +95,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 var src = skip(files,i);
-                var dst = Db.AppLogDir() + src.FileName.ChangeExtension(FS.Il);
+                var dst = Db.AppLogRoot() + src.FileName.ChangeExtension(FS.Il);
                 var records = pipe.LoadMetadata(src);
                 pipe.EmitCode(records, dst);
             }

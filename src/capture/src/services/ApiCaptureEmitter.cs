@@ -45,8 +45,8 @@ namespace Z0
                 if(parsed.Length != 0)
                 {
                     EmitApiHex(host, parsed, Db.ParsedExtractPath(host));
-                    EmitMsilData(host, parsed, Db.CilDataPath(host));
-                    EmitMsilCode(host, parsed, Db.CilCodePath(host));
+                    EmitMsilData(host, parsed, Db.CilPaths.CilDataPath(host));
+                    EmitMsilCode(host, parsed, Db.CilPaths.CilCodePath(host));
                     routines = DecodeMembers(host, parsed, src);
                 }
                 Wf.Ran(flow);
@@ -63,14 +63,15 @@ namespace Z0
             var routines = AsmHostRoutines.Empty;
             try
             {
+                var cilpaths = Db.CilPaths;
                 var flow = Wf.Running(Msg.RunningHostEmissionWorkflow.Format(host,src.Count));
                 var extracts = EmitExtracts(host, src, Db.RawExtractPath(dst, host));
                 var parsed = ParseExtracts(host, src);
                 if(parsed.Length != 0)
                 {
                     EmitApiHex(host, parsed, dst);
-                    EmitMsilData(host, parsed, Db.CilDataPath(dst, host));
-                    EmitMsilCode(host, parsed, Db.CilCodePath(dst, host));
+                    EmitMsilData(host, parsed, cilpaths.CilDataPath(dst, host));
+                    EmitMsilCode(host, parsed, cilpaths.CilCodePath(dst, host));
                     routines = DecodeMembers(host, parsed, src, Db.AsmCapturePath(dst,host));
                 }
                 Wf.Ran(flow);

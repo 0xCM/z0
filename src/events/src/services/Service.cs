@@ -50,21 +50,11 @@ namespace Z0
         protected virtual void Initialized() {}
 
 
-        protected DataEvent<T> Row<T>(T src)
-        {
-            return Signal.Data(src);
-        }
-
-
         protected BabbleEvent<T> Babble<T>(T src)
-        {
-            return Signal.Babble(src);
-        }
+            => Signal.Babble(src);
 
         protected StatusEvent<T> Status<T>(T src)
-        {
-            return Signal.Status(src);
-        }
+            => Signal.Status(src);
 
         protected WarnEvent<T> Warn<T>(T src)
         {
@@ -82,43 +72,30 @@ namespace Z0
         }
 
         protected RunningEvent Running()
-        {
-            return Signal.Running();
-        }
+            => Signal.Running();
 
         protected RunningEvent<T> Running<T>(T data)
-        {
-            return Signal.Running(data);
-        }
+            => Signal.Running(data);
 
         protected RanEvent<T> Ran<T>(RunningEvent<T> e, T data)
-        {
-            return Signal.Ran(data);
-        }
+            => Signal.Ran(data);
 
         protected RanEvent<T> Ran<T>(RunningEvent<T> e)
-        {
-            return Signal.Ran(e.Payload.Data);
-        }
+            => Signal.Ran(e.Payload.Data);
 
         protected RanEvent<RunningEvent> Ran(RunningEvent e)
-        {
-            return Signal.Ran(e);
-        }
+            => Signal.Ran(e);
 
         protected ProcessedFileEvent Processed(ProcessingFileEvent e)
-        {
-            return Signal.Processed(e.SourcePath);
-        }
+            => Signal.Processed(e.SourcePath);
 
         protected EmittingFileEvent Emitting(FS.FilePath src)
-        {
-            return Signal.EmittingFile(src);
-        }
+            => Signal.EmittingFile(src);
 
         protected EmittedFileEvent Emitted(EmittingFileEvent e, Count metric)
-        {
-            return Signal.EmittedFile(metric, e.Target);
-        }
+            => Signal.EmittedFile(metric, e.Target);
+
+        protected DataEvent<T> Write<T>(in T src, FlairKind? flair = null)
+            => Signal.Data(src,flair);
     }
 }

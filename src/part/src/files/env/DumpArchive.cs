@@ -8,9 +8,6 @@ namespace Z0
 
     public readonly struct DumpArchive : IFileArchive
     {
-        public static DumpArchive create(FS.FolderPath root)
-            => new DumpArchive(root);
-
         public FS.FolderPath Root {get;}
 
         public DumpArchive(FS.FolderPath root)
@@ -35,6 +32,5 @@ namespace Z0
 
         public FS.FolderPath DumpDir(byte major, byte minor, byte revision)
             => DumpRoot() + FS.FolderName.version(major, minor, revision);
-
     }
 }

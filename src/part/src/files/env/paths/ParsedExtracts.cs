@@ -24,9 +24,6 @@ namespace Z0
         FS.FilePath ParsedExtractPath(FS.FileName name)
             => ParsedExtractRoot() + name;
 
-        FS.FilePath ParsedExtractPath(FS.FolderPath root, FS.FileName name)
-            => ParsedExtractRoot(root) + name;
-
         FS.FilePath ParsedExtractPath(ApiHostUri host)
             => ParsedExtractPath(ApiFiles.filename(host, PCsv));
 

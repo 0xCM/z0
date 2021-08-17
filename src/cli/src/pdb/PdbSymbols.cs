@@ -16,7 +16,7 @@ namespace Z0
     {
         public FS.Files EmitDefaultSymbolPaths(FS.FilePath dst)
         {
-            var paths = SymbolPaths(Db.SymbolPaths().DefaultSymbolCache());
+            var paths = SymbolPaths(Db.DebugSymbolPaths().DefaultSymbolCache());
             var buffer = text.buffer();
             FS.render(paths.View, buffer);
             using var writer = dst.Writer();

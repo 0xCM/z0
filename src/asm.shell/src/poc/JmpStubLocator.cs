@@ -56,7 +56,7 @@ namespace Z0.Asm
 
         void CaptureParts(params PartId[] parts)
         {
-            var dst = Db.AppLogDir() + FS.folder("capture");
+            var dst = Db.AppLogRoot() + FS.folder("capture");
             dst.Clear();
             Wf.CaptureRunner().Capture(parts, dst);
         }

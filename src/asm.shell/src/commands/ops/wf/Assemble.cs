@@ -8,6 +8,26 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        AsmToolchainSpec AsmTooling(ToolId assembler, ToolId disassembler, FS.FilePath src)
+        {
+            var spec = new AsmToolchainSpec();
+            var id = src.FileName.WithoutExtension.Format();
+            spec.Assembler = assembler;
+            spec.Disassembler = disassembler;
+            spec.AsmPath = src;
+            spec.BinPath = AsmWs.BinPath(id);
+            spec.HexPath = AsmWs.AsmHexPath(id);
+            spec.HexArrayPath = AsmWs.HexArrayPath(id);
+            spec.ObjKind = ObjFileKind.win64;
+            spec.DisasmPath = AsmWs.DisasmPath(id, disassembler);
+            spec.Analysis = AsmWs.Analysis();
+            spec.ListPath = AsmWs.ListPath(id);
+            spec.AsmBitMode = Bitness.b64;
+            spec.EmitDebugInfo = true;
+            spec.ObjPath = AsmWs.ObjPath(id);
+            return spec;
+        }
+
         Outcome Assemble()
         {
             var src = State.Files(FS.Asm).View;
@@ -17,7 +37,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(src,i);
-                var spec = AsmWs.ToolchainSpec(Toolspace.nasm, Toolspace.bddiasm, path);
+                var spec = AsmTooling(Toolspace.nasm, Toolspace.bddiasm, path);
                 result = AsmToolchain.Run(spec);
                 if(result.Fail)
                     return result;

@@ -99,7 +99,7 @@ namespace Z0
         [Op]
         public Index<HexPacked> Emit(SortedReadOnlySpan<ApiCodeBlock> blocks, FS.FilePath? dst = null, bool validate = false)
         {
-            var _dst = dst ?? Db.TableRoot() + FS.file("apihex", FS.ext("xpack"));
+            var _dst = dst ?? Db.DbTableRoot() + FS.file("apihex", FS.ext("xpack"));
             var result = Pack(blocks, validate);
             var packed = result.View;
             var emitting = EmittingFile(_dst);

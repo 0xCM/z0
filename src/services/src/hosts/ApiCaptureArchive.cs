@@ -80,7 +80,7 @@ namespace Z0
         Outcome<uint> ClearCilData(PartId part)
         {
             var kind = FS.IlData;
-            var files = Db.CilDataPaths(part);
+            var files = Db.CilPaths.CilDataPaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);
@@ -92,7 +92,7 @@ namespace Z0
         Outcome<uint> ClearCilCode(PartId part)
         {
             var kind = FS.Il;
-            var files = Db.CilCodePaths(part);
+            var files = Db.CilPaths.CilCodePaths(part);
             var result = Clear(files);
             if(result)
                 ClearStatus(part, kind, result.Data);

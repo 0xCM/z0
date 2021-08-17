@@ -8,19 +8,7 @@ namespace Z0
 
     partial interface IEnvPaths
     {
-        FS.FolderPath IndexRoot()
-            => TableRoot() + FS.folder(indices);
-
-        FS.FolderPath IndexRoot(FS.FolderPath root)
-            => TableRoot(root) + FS.folder(indices);
-
         FS.FilePath IndexFile(string id)
             => IndexRoot() + FS.file(id, FS.Idx);
-
-        FS.FilePath IndexFile(string subject, string id)
-            => IndexDir(subject) + FS.file(id, FS.Idx);
-
-        FS.Files IndexFiles()
-            => IndexRoot().Files(FS.Idx);
     }
 }

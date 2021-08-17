@@ -112,28 +112,40 @@ namespace Z0.Asm
         [SymSource]
         public enum RexToken : byte
         {
-            [Symbol("REX")]
+            [Symbol("REX", "Indicates the presence of a REX prefix")]
             Rex,
 
-            [Symbol("REX.W")]
+            [Symbol("REX.W", "Indicates the W-bit is enabled which signals a 64-bit operand size")]
             RexW,
 
-            [Symbol("REX.R", "Modifies the ModR/M reg field when that field encodes a GPR, SSE, control or debug register. REX.R is ignored when ModR/M specifies other registers or defines an extended opcode")]
+            [Symbol("REX.R", "Extends (prepends) the ModRM.reg 3-bit field to form a 4-bit field, providing a register domain of [0..15]")]
             RexR,
 
-            [Symbol("REX.X", "Modifies the SIB index field")]
+            [Symbol("REX.X", "Extends (prepends) the Sib.index 3-bit field to form a 4-bit field, providing a register domain of [0..15]")]
             RexX,
 
             [Symbol("REX.B", "Modifies the base in the ModR/M r/m field or SIB base field; or it modifies the opcode reg field used for accessing GPRs")]
             RexB,
-
-            [Symbol(".")]
-            Sep,
         }
 
         [SymSource]
         public enum VexToken : byte
         {
+            [Symbol("W", "Opcode extension field")]
+            W,
+
+            [Symbol("R", "Logically equivalent to REX.R, but represented in 1's complement form")]
+            R,
+
+            [Symbol("X", "Logically equivalent to REX.X, but represented in 1's complement form")]
+            X,
+
+            [Symbol("B", "Logically equivalent to REX.B, but represented in 1's complement form")]
+            B,
+
+            [Symbol("L", "Vector length, where 1 => w=256 and 2 => w=128 or scalar")]
+            L,
+
             [Symbol("VEX")]
             VEX,
 
@@ -158,13 +170,16 @@ namespace Z0.Asm
             [Symbol("256")]
             W256,
 
-            [Symbol("vvvv", "Indicates non-destructive source register encoding")]
+            [Symbol("vvvv", "A register specifier in 1's complement form")]
             vvvv,
 
             [Symbol("mmmmm", "In a 3-byte vex prefix, indicates the least 5 bits of the middle byte")]
             mmmmm,
 
-            [Symbol(".")]
+            [Symbol("pp", "opcode extension providing equivalent functionality of a SIMD prefix")]
+            pp,
+
+            [Symbol(".", "The VEX token delimiter")]
             Sep,
         }
 
@@ -198,7 +213,7 @@ namespace Z0.Asm
             [Symbol("512")]
             W512,
 
-            [Symbol(".")]
+            [Symbol(".", "The EVEX token delimiter")]
             Sep,
         }
 
@@ -352,7 +367,7 @@ namespace Z0.Asm
         [FieldSeg(7,2), SymSource]
         public enum ExclusionToken
         {
-            [Symbol("NP", " Indicates the use of 66/F2/F3 prefixes are not allowed with the instruction")]
+            [Symbol("NP", "Indicates the use of 66/F2/F3 prefixes are not allowed with the instruction")]
             NP,
 
             [Symbol("NFx", "Indicates the use of F2/F3 prefixes are not allowed with the instruction")]
