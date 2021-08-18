@@ -51,10 +51,10 @@ namespace Z0.Asm
         }
 
         [Op]
-        static TokenKind classify(ReadOnlySpan<char> src)
+        static AsmOcTokenKind classify(ReadOnlySpan<char> src)
         {
             var length = src.Length;
-            var kind = TokenKind.None;
+            var kind = AsmOcTokenKind.None;
             switch(length)
             {
                 case 1:
@@ -89,7 +89,7 @@ namespace Z0.Asm
         /// <param name="n"></param>
         /// <param name="src"></param>
         [Op]
-        static TokenKind classify(N1 n, ReadOnlySpan<char> src)
+        static AsmOcTokenKind classify(N1 n, ReadOnlySpan<char> src)
         {
             return 0;
         }
@@ -100,12 +100,12 @@ namespace Z0.Asm
         /// <param name="n"></param>
         /// <param name="src"></param>
         [Op]
-        static TokenKind classify(N2 n, ReadOnlySpan<char> src)
+        static AsmOcTokenKind classify(N2 n, ReadOnlySpan<char> src)
         {
             ref readonly var c0 = ref skip(src,0);
             ref readonly var c1 = ref skip(src,1);
             if(SQ.hexdigit(skip(src,0)) && SQ.hexdigit(skip(src,1)))
-                return TokenKind.Byte;
+                return AsmOcTokenKind.Byte;
             switch(c0)
             {
                 case 'a':
@@ -120,7 +120,7 @@ namespace Z0.Asm
         /// <param name="n"></param>
         /// <param name="src"></param>
         [Op]
-        static TokenKind classify(N3 n, ReadOnlySpan<char> src)
+        static AsmOcTokenKind classify(N3 n, ReadOnlySpan<char> src)
         {
             return 0;
         }
@@ -131,7 +131,7 @@ namespace Z0.Asm
         /// <param name="n"></param>
         /// <param name="src"></param>
         [Op]
-        static TokenKind classify(N4 n, ReadOnlySpan<char> src)
+        static AsmOcTokenKind classify(N4 n, ReadOnlySpan<char> src)
         {
             return 0;
         }
@@ -142,7 +142,7 @@ namespace Z0.Asm
         /// <param name="n"></param>
         /// <param name="src"></param>
         [Op]
-        static TokenKind classify(N5 n, ReadOnlySpan<char> src)
+        static AsmOcTokenKind classify(N5 n, ReadOnlySpan<char> src)
         {
             return 0;
         }
@@ -153,7 +153,7 @@ namespace Z0.Asm
         /// <param name="n"></param>
         /// <param name="src"></param>
         [Op]
-        static TokenKind classify(N6 n, ReadOnlySpan<char> src)
+        static AsmOcTokenKind classify(N6 n, ReadOnlySpan<char> src)
         {
             return 0;
         }
@@ -164,7 +164,7 @@ namespace Z0.Asm
         /// <param name="n"></param>
         /// <param name="src"></param>
         [Op]
-        static TokenKind classify(N7 n, ReadOnlySpan<char> src)
+        static AsmOcTokenKind classify(N7 n, ReadOnlySpan<char> src)
         {
             return 0;
         }

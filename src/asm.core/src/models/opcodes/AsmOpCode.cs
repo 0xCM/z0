@@ -16,7 +16,6 @@ namespace Z0.Asm
 
     using api = AsmOpCodes;
 
-
     [StructLayout(LayoutKind.Sequential, Pack=1, Size =(int)SZ), Blittable(SZ)]
     public struct AsmOpCode
     {
@@ -79,7 +78,6 @@ namespace Z0.Asm
                     return false;
             }
         }
-
 
         public string Format()
             => Expr.Format();

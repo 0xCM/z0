@@ -4,16 +4,155 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
 
-	[ApiHost]
-	public struct BitPos
-	{
+    [ApiHost]
+    public readonly struct BitPos
+    {
         const NumericKind Closure = UnsignedInts;
+
+		[MethodImpl(Inline)]
+        public static ref BitPos32 add(ref BitPos32 pos, uint bitindex)
+        {
+            var newindex = pos.LinearIndex + bitindex;
+            pos.CellIndex = linear(pos.CellWidth,newindex);
+            pos.BitOffset = offset(pos.CellWidth, newindex);
+            return ref pos;
+        }
+
+		[MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref BitPos<T> add<T>(ref BitPos<T> pos, uint bitindex)
+            where T : unmanaged
+        {
+            var newindex = pos.LinearIndex + bitindex;
+            pos.CellIndex = linear(pos.CellWidth,newindex);
+            pos.BitOffset = offset(pos.CellWidth, newindex);
+            return ref pos;
+        }
+
+		[MethodImpl(Inline), Op]
+        public static ref BitPos32 sub(ref BitPos32 pos, uint bitindex)
+        {
+            var newIndex = pos.LinearIndex - bitindex;
+            if(newIndex > 0)
+			{
+				pos.CellIndex = linear(pos.CellWidth, bitindex);
+				pos.BitOffset = offset(pos.CellWidth, bitindex);
+			}
+            else
+            {
+				pos.CellIndex = 0;
+				pos.BitOffset = 0;
+			}
+
+            return ref pos;
+        }
+
+		[MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref BitPos<T> sub<T>(ref BitPos<T> pos, uint bitindex)
+            where T : unmanaged
+        {
+            var newIndex = pos.LinearIndex - bitindex;
+            if(newIndex > 0)
+			{
+				pos.CellIndex = linear(pos.CellWidth, bitindex);
+				pos.BitOffset = offset(pos.CellWidth, bitindex);
+			}
+            else
+            {
+				pos.CellIndex = 0;
+				pos.BitOffset = 0;
+			}
+
+            return ref pos;
+        }
+
+		[MethodImpl(Inline), Op]
+        public static ref BitPos32 dec(ref BitPos32 pos)
+        {
+            if(pos.BitOffset > 0)
+                --pos.BitOffset;
+            else
+            {
+                if(pos.CellIndex != 0)
+                {
+                    pos.BitOffset = pos.CellWidth - 1;
+                    --pos.CellIndex;
+                }
+            }
+
+            return ref pos;
+        }
+
+		[MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref BitPos<T> dec<T>(ref BitPos<T> pos)
+            where T : unmanaged
+        {
+            if(pos.BitOffset > 0)
+                --pos.BitOffset;
+            else
+            {
+                if(pos.CellIndex != 0)
+                {
+                    pos.BitOffset = pos.CellWidth - 1;
+                    --pos.CellIndex;
+                }
+            }
+
+            return ref pos;
+        }
+
+		[MethodImpl(Inline), Op]
+        public static ref BitPos32 inc(ref BitPos32 pos)
+        {
+            if(pos.BitOffset < pos.CellWidth - 1)
+                pos.BitOffset++;
+            else
+            {
+                pos.CellIndex++;
+                pos.BitOffset = 0;
+            }
+
+            return ref pos;
+        }
+
+		[MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref BitPos<T> inc<T>(ref BitPos<T> pos)
+            where T : unmanaged
+        {
+            if(pos.BitOffset < pos.CellWidth - 1)
+                pos.BitOffset++;
+            else
+            {
+                pos.CellIndex++;
+                pos.BitOffset = 0;
+            }
+
+            return ref pos;
+        }
+
+		[MethodImpl(Inline), Op]
+        public static bool eq(in BitPos32 a, in BitPos32 b)
+			=> a.CellIndex == b.CellIndex
+            && a.BitOffset == b.BitOffset
+			&& a.CellWidth == b.CellWidth;
+
+		[MethodImpl(Inline), Op, Closures(Closure)]
+        public static bool eq<T>(in BitPos<T> a, in BitPos<T> b)
+            where T : unmanaged
+			=> a.CellIndex == b.CellIndex
+            && a.BitOffset == b.BitOffset;
+
+        public static string format(in BitPos32 src)
+            => string.Format("({0},{1}/{2})", src.LinearIndex, src.CellIndex, src.BitOffset);
+
+		[MethodImpl(Inline), Op, Closures(Closure)]
+		public static uint count<T>(in BitPos<T> src, in BitPos<T> dst)
+            where T : unmanaged
+			    => (uint)math.abs((long)src.LinearIndex - (long)dst.LinearIndex) + 1;
 
 		/// <summary>
 		/// Computes the order-invariant absolute distance between two positions
@@ -21,7 +160,7 @@ namespace Z0
 		/// <param name="a">The left position</param>
 		/// <param name="b">The right position</param>
 		[MethodImpl(Inline), Op]
-		public static uint delta(BitPos a, BitPos b)
+		public static uint delta(BitPos32 a, BitPos32 b)
 			=> ScalarCast.uint32(core.abs((long)a.LinearIndex - (long)b.LinearIndex));
 
         /// <summary>
@@ -39,9 +178,13 @@ namespace Z0
 		/// <param name="w">The cell width</param>
 		/// <param name="cellindex">The cell index</param>
 		/// <param name="offset">The cell-relative offset of the bit</param>
-		[MethodImpl(Inline)]
+		[MethodImpl(Inline), Op]
 		public static uint linear(uint w, uint cellindex, uint offset)
 			=> cellindex*w + offset;
+
+		[MethodImpl(Inline), Op]
+        public static uint linear(in BitPos32 src)
+            => linear(src.CellWidth, src.CellIndex, src.BitOffset);
 
         /// <summary>
         /// Computes the offset of a linear bit index over storage cells of specified width
@@ -58,8 +201,8 @@ namespace Z0
         /// <param name="w">The storage cell width</param>
 		/// <param name="index">The linear bit index</param>
 		[MethodImpl(Inline), Op]
-		public static BitPos init(uint w, uint index)
-			=> new BitPos(w, linear(w, index), offset(w, index));
+		public static BitPos32 init(uint w, uint index)
+			=> new BitPos32(w, linear(w, index), offset(w, index));
 
 		/// <summary>
 		/// Defines a bit position predicated on the width and container-relative index of a storage cell and a cell-relative bit offset
@@ -68,18 +211,18 @@ namespace Z0
 		/// <param name="cellindex">The container-relative cell index</param>
 		/// <param name="offset">The cell-relative bit offset</param>
 		[MethodImpl(Inline), Op]
-		public static BitPos FromCellIndex(uint w, uint cellindex, uint offset)
-			=> new BitPos(w, cellindex, offset);
+		public static BitPos32 FromCellIndex(uint w, uint cellindex, uint offset)
+			=> new BitPos32(w, cellindex, offset);
 
 		/// <summary>
 		/// Defines a bit position predicated on a parametric cell type and a cell-relative bit offset
 		/// </summary>
 		/// <param name="cellindex">The container-relative cell index</param>
 		/// <param name="offset">The cell-relative bit offset</param>
-		[MethodImpl(Inline), Op, Closures(UnsignedInts)]
+		[MethodImpl(Inline), Op, Closures(Closure)]
 		public static BitPos<T> FromCellIndex<T>(uint cellindex, uint offset)
 			where T : unmanaged
-				=> BitPos<T>.Define(cellindex, offset);
+				=> new BitPos<T>(cellindex, offset);
 
         /// <summary>
         /// Defines a bit position, relative to a T-valued sequence, predicated on a linear index
@@ -89,7 +232,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitPos<T> position<T>(uint index)
             where T : unmanaged
-				=> new BitPos<T>(BitPos.linear(width<T>(), index), BitPos.offset(width<T>(), index));
+				=> new BitPos<T>(linear(width<T>(), index), offset(width<T>(), index));
 
         /// <summary>
         /// Defines a bit position, relative to a T-valued sequence, predicated on a linear index
@@ -103,165 +246,8 @@ namespace Z0
             where T : unmanaged
         {
             var w = width<T>(w16);
-			cell = BitPos.linear(w, index);
+			cell = linear(w, index);
             offset = BitPos.offset(w, index);
         }
-
-        /// <summary>
-		/// A container-relative 0-based cell offset
-		/// </summary>
-		public uint CellIndex;
-
-		/// <summary>
-		/// A cell-relative bit offset
-		/// </summary>
-		public uint BitOffset;
-
-		/// <summary>
-		/// The bit-width of a cell
-		/// </summary>
-		public uint CellWidth;
-
-		[MethodImpl(Inline)]
-		public BitPos(uint cellwidth, uint cellindex, uint bitoffset)
-		{
-			CellWidth = cellwidth;
-			CellIndex = cellindex;
-			BitOffset = bitoffset;
-		}
-
-		/// <summary>
-		/// The linear/absolute bit index of the represented position
-		/// </summary>
-		public uint LinearIndex
-		{
-			[MethodImpl(Inline)]
-			get => linear(CellWidth, CellIndex, BitOffset);
-		}
-
-		[MethodImpl(Inline), Op]
-        public void Add(uint bitindex)
-        {
-            var newindex = LinearIndex + bitindex;
-            CellIndex = linear(CellWidth,newindex);
-            BitOffset = offset(CellWidth, newindex);
-        }
-
-		[MethodImpl(Inline), Op]
-        public void Sub(uint bitindex)
-        {
-            var newIndex = LinearIndex - bitindex;
-            if(newIndex > 0)
-			{
-				CellIndex = linear(CellWidth, bitindex);
-				BitOffset = offset(CellWidth, bitindex);
-			}
-            else
-            {
-				CellIndex = 0;
-				BitOffset = 0;
-			}
-        }
-
-		[MethodImpl(Inline), Op]
-        public void Dec()
-        {
-            if(BitOffset > 0)
-                --BitOffset;
-            else
-            {
-                if(CellIndex != 0)
-                {
-                    BitOffset = CellWidth - 1;
-                    --CellIndex;
-                }
-            }
-        }
-
-		[MethodImpl(Inline), Op]
-        public void Inc()
-        {
-            if(BitOffset < CellWidth - 1)
-                BitOffset++;
-            else
-            {
-                CellIndex++;
-                BitOffset = 0;
-            }
-        }
-
-		[MethodImpl(Inline)]
-		public bool Equals(BitPos rhs)
-			=> CellIndex == rhs.CellIndex
-            && BitOffset == rhs.BitOffset
-			&& CellWidth == rhs.CellWidth;
-
-		public string Format()
-			=> string.Format("({0},{1}/{2})", LinearIndex, CellIndex, BitOffset);
-
-		public override string ToString()
-			=> Format();
-
-		public override int GetHashCode()
-			=> HashCode.Combine(CellWidth, CellIndex, BitOffset);
-
-		public override bool Equals(object rhs)
-            => rhs is BitPos x && Equals(x);
-
-		[MethodImpl(Inline)]
-		public static BitPos operator +(BitPos pos, uint count)
-		{
-			pos.Add(count);
-            return pos;
-		}
-
-		[MethodImpl(Inline)]
-		public static BitPos operator -(BitPos pos, uint count)
-		{
-            pos.Sub(count);
-            return pos;
-		}
-
-		[MethodImpl(Inline)]
-		public static uint operator -(BitPos a, BitPos b)
-			=> delta(a,b);
-
-		[MethodImpl(Inline)]
-		public static BitPos operator --(BitPos pos)
-		{
-            pos.Dec();
-            return pos;
-		}
-
-		[MethodImpl(Inline)]
-		public static BitPos operator ++(BitPos pos)
-		{
-			pos.Inc();
-            return pos;
-		}
-
-		[MethodImpl(Inline)]
-		public static bool operator <(BitPos a, BitPos b)
-			=> a.LinearIndex < b.LinearIndex;
-
-		[MethodImpl(Inline)]
-		public static bool operator <=(BitPos a, BitPos b)
-			=> a.LinearIndex <= b.LinearIndex;
-
-		[MethodImpl(Inline)]
-		public static bool operator >(BitPos a, BitPos b)
-			=> a.LinearIndex > b.LinearIndex;
-
-		[MethodImpl(Inline)]
-		public static bool operator >=(BitPos a, BitPos b)
-			=> a.LinearIndex >= b.LinearIndex;
-
-		[MethodImpl(Inline)]
-		public static bool operator ==(BitPos a, BitPos b)
-			=> a.Equals(b);
-
-		[MethodImpl(Inline)]
-		public static bool operator !=(BitPos a, BitPos b)
-			=> !a.Equals(b);
-	}
+    }
 }

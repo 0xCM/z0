@@ -17,6 +17,22 @@ namespace Z0.Asm
     [ApiComplete]
     public sealed class Conditions
     {
+        public static Conditions create()
+            => _Instance.Value;
+
+        [Op]
+        public static string format(in Jcc8Conditions src, bit alt)
+        {
+            const string Pattern = "{0,-4} rel{1} [{2}:{3}b] => {4}";
+            var dst = EmptyString;
+            if(alt)
+                dst =  string.Format(Pattern, src.Alt.Name, src.Alt.Size.Width, HexFormat.asmhex(src.Alt.Encoding), BitRender.format8x4(src.Alt.Encoding), src.AltInfo);
+            else
+                dst = string.Format(Pattern, src.Primary.Name, src.RelWidth, HexFormat.asmhex(src.Encoding), text.format(src.EncodedBits), src.PrimaryInfo);
+            return dst;
+        }
+
+
         [Op]
         public static uint jcc8(Conditions src, Span<Jcc8Conditions> dst)
         {
@@ -47,9 +63,6 @@ namespace Z0.Asm
         {
             _Instance = new Lazy<Conditions>(() => new Conditions());
         }
-
-        public static Conditions create()
-            => _Instance.Value;
 
         Index<Condition> _CC;
 

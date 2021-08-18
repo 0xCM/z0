@@ -37,30 +37,6 @@ namespace Z0
         public string Format()
             => Data.ToString();
 
-        public string FormatHex(params byte[] partitions)
-        {
-            var count = partitions.Length;
-            if(count != 0)
-            {
-                var dst = text.buffer();
-                var parts = @readonly(partitions);
-                var content = bytes(Data);
-                var current = 0;
-                for(var i=0; i<count; i++)
-                {
-                    var len = skip(parts,i);
-                    var seg = slice(content, current, len);
-                    dst.Append(string.Format("[{0}]", seg.FormatHex()));
-                    dst.Append(Chars.Space);
-                    current += len;
-                }
-                dst.Append(string.Format("[{0}]", slice(content,current).FormatHex()));
-                return dst.Emit();
-            }
-            else
-                return Data.FormatHex();
-        }
-
         public static implicit operator AsmCaseId(ulong src)
             => new AsmCaseId(src);
     }

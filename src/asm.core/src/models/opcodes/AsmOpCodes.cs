@@ -17,6 +17,13 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmOpCodes
     {
+        const NumericKind Closure = UnsignedInts;
+
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+         public static AsmOcToken<K> token<K>(AsmOcTokenKind kind, K value)
+            where K : unmanaged
+                => new AsmOcToken<K>(kind,value);
         [Op]
         public static ReadOnlySpan<Token<DispToken>> DispTokens()
             => Tokens.tokenize<DispToken>();
@@ -40,16 +47,6 @@ namespace Z0.Asm
         public static ReadOnlySpan<Token> TokenSet()
             => AsmTokens.OpCodes.create().Collection;
 
-        // {
-        //     var types = typeof(AsmOpCodeTokens).GetNestedTypes().Enums().ToReadOnlySpan();
-        //     var count = types.Length;
-        //     var dst = list<Token>();
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         dst.AddRange(Tokens.tokenize(skip(types,i)).ToArray());
-        //     }
-        //     return dst.ViewDeposited();
-        // }
 
         [Op]
         public static ReadOnlySpan<Token<RexToken>> RexTokens()

@@ -10,7 +10,8 @@ namespace Z0
 
     using static Root;
     using static core;
-	using static BitPos;
+
+    using api = BitPos;
 
 	/// <summary>
 	/// Identifies a bit position within a contiguous sequence of T-element values together with their cell index/bit offsets
@@ -36,74 +37,47 @@ namespace Z0
 			BitOffset = bitoffset;
 		}
 
+		/// <summary>
+		/// Specifies the number of bits that can be placed in one segment
+		/// </summary>
+		public uint CellWidth
+        {
+			[MethodImpl(Inline)]
+			get => width<T>();
+        }
+
 		public uint LinearIndex
 		{
 			[MethodImpl(Inline)]
-			get => CellIndex * CellWidth + BitOffset;
+			get => api.linear(this);
 		}
 
 		[MethodImpl(Inline)]
-		public uint CountTo(BitPos<T> src)
-			=> (uint)math.abs((long)LinearIndex - (long)src.LinearIndex) + 1;
+		public uint CountTo(in BitPos<T> dst)
+			=> api.count(this, dst);
 
 		[MethodImpl(Inline)]
         public void Add(uint src)
-        {
-            var newIndex = (uint)(LinearIndex + src);
-            CellIndex = linear(CellWidth,newIndex);
-            BitOffset = offset(CellWidth,newIndex);
-        }
+            => api.add(ref this, src);
 
 		[MethodImpl(Inline)]
-        public void Sub(uint rhs)
-        {
-            var newindex = LinearIndex - rhs;
-            if(newindex > 0)
-			{
-				CellIndex = linear(CellWidth, newindex);
-				BitOffset = offset(CellWidth, newindex);
-			}
-			else
-			{
-				CellIndex = 0;
-				BitOffset = 0;
-			}
-        }
+        public void Sub(uint src)
+            => api.sub(ref this, src);
 
 		[MethodImpl(Inline)]
         public void Dec()
-        {
-            if(BitOffset > 0)
-                --BitOffset;
-            else
-            {
-                if(CellIndex != 0)
-                {
-                    BitOffset = (CellWidth - 1);
-                    --CellIndex;
-                }
-            }
-        }
+            => api.dec(ref this);
 
 		[MethodImpl(Inline)]
         public void Inc()
-        {
-            if(BitOffset < CellWidth - 1)
-                BitOffset++;
-            else
-            {
-                CellIndex++;
-                BitOffset = 0;
-            }
-        }
+            => api.inc(ref this);
 
 		[MethodImpl(Inline)]
-		public bool Equals(BitPos<T> rhs)
-			=> CellIndex == rhs.CellIndex
-            && BitOffset == rhs.BitOffset;
+		public bool Equals(BitPos<T> src)
+            => api.eq(this, src);
 
 		public string Format()
-			=> string.Format("({0},{1}/{2})", LinearIndex, CellIndex, BitOffset);
+			=> api.format(this);
 
 		public override string ToString()
 			=> Format();
@@ -173,23 +147,17 @@ namespace Z0
 			=> lhs.LinearIndex >= rhs.LinearIndex;
 
 		[MethodImpl(Inline)]
-        public static implicit operator BitPos<T>((uint cellindex, uint bitoffset) x)
-            => new BitPos<T>(x.cellindex, x.bitoffset);
+        public static implicit operator BitPos32(BitPos<T> src)
+            => new BitPos32(src.CellWidth, src.CellIndex, src.BitOffset);
 
 		[MethodImpl(Inline)]
-		public static BitPos<T> Define(uint cellindex, uint bitoffset)
-			=> new BitPos<T>(cellindex, bitoffset);
+        public static implicit operator BitPos<T>((uint cellindex, uint bitoffset) x)
+            => new BitPos<T>(x.cellindex, x.bitoffset);
 
         /// <summary>
         /// The zero position
         /// </summary>
 		public static BitPos<T> Zero
 			=> default(BitPos<T>);
-
-		/// <summary>
-		/// Specifies the number of bits that can be placed in one segment
-		/// </summary>
-		public static uint CellWidth
-			=> width<T>();
 	}
 }

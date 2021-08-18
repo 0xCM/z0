@@ -10,15 +10,6 @@ namespace Z0.Asm
 
     public readonly struct ConditionCodes
     {
-        public enum ActionCode : byte
-        {
-            None =0,
-
-            Jmp = 1,
-
-            Mov = 2
-        }
-
         public readonly struct ConditionFacets
         {
             public const byte ConditionCount = 16;

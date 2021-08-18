@@ -14,18 +14,6 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential, Pack=1,Size=(int)SZ), Blittable(SZ)]
     public struct Jcc8Conditions
     {
-        [Op]
-        public static string format(in Jcc8Conditions src, bit alt)
-        {
-            const string Pattern = "{0,-4} rel{1} [{2}:{3}b] => {4}";
-            var dst = EmptyString;
-            if(alt)
-                dst =  string.Format(Pattern, src.Alt.Name, src.Alt.Size.Width, HexFormat.asmhex(src.Alt.Encoding), BitRender.format8x4(src.Alt.Encoding), src.AltInfo);
-            else
-                dst = string.Format(Pattern, src.Primary.Name, src.RelWidth, HexFormat.asmhex(src.Encoding), text.format(src.EncodedBits), src.PrimaryInfo);
-            return dst;
-        }
-
         public const uint SZ = JccInfo<Jcc8>.SZ + JccInfo<Jcc8Alt>.SZ + 2*CharBlock64.SZ;
 
         public JccInfo<Jcc8> Primary;
@@ -61,7 +49,7 @@ namespace Z0.Asm
         }
 
         public string Format(bit alt)
-            => format(this,alt);
+            => Conditions.format(this,alt);
 
         public override string ToString()
             => Format(false);

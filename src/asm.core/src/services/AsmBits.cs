@@ -193,7 +193,7 @@ namespace Z0.Asm
         public static uint render8x4(in AsmHexCode src, Span<char> dst)
         {
             var i=0u;
-            return BitRender.render8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
+            return BitRender.renderNx8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
         }
 
         [MethodImpl(Inline), Op]
@@ -250,7 +250,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static uint render8x4(in AsmHexCode src, ref uint i, Span<char> dst)
-            => BitRender.render8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
+            => BitRender.renderNx8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
 
         [Op]
         public static uint ModRmTable(Span<char> dst)

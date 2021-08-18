@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline), BitCopy]
         public static byte bitcopy(byte src, byte index, byte count, byte dst)
-            => or(disable(dst, index, count), sll(slice(src, index, count), index));
+            => or(trim(dst, index, count), sll(slice(src, index, count), index));
 
         /// <summary>
         /// Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline), BitCopy]
         public static ushort bitcopy(ushort src, byte index, byte count, ushort dst)
-            => or(disable(dst, index, count), sll(slice(src, index, count), index));
+            => or(trim(dst, index, count), sll(slice(src, index, count), index));
 
         /// <summary>
         /// Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline), BitCopy]
         public static uint bitcopy(uint src, byte index, byte count, uint dst)
-            => or(disable(dst, index, count), sll(slice(src, index, count), index));
+            => or(trim(dst, index, count), sll(slice(src, index, count), index));
 
         /// <summary>
         /// Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]
@@ -54,6 +54,6 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline), BitCopy]
         public static ulong bitcopy(ulong src, byte index, byte count, ulong dst)
-            => or(disable(dst, index, count), sll(slice(src, index, count), index));
+            => or(trim(dst, index, count), sll(slice(src, index, count), index));
      }
 }

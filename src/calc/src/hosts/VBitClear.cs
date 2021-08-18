@@ -22,7 +22,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte b, byte c)
-                => gbits.disable(a, b, c);
+                => gbits.trim(a, b, c);
         }
 
         [Closures(Integers)]
@@ -35,7 +35,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte b, byte c)
-                => gbits.disable(a, b, c);
+                => gbits.trim(a, b, c);
         }
     }
 }

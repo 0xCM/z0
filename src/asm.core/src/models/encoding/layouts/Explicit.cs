@@ -75,24 +75,6 @@ namespace Z0.Asm
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct Layout4 : IAsmLayout<Layout4>
-        {
-            public LegacyPrefix Lp;
-
-            public RexPrefix Rex;
-
-            public Hex8 OpCode;
-
-            public ModRm ModRm;
-
-            public ReadOnlySpan<byte> Content
-            {
-                [MethodImpl(Inline)]
-                get => bytes(this);
-            }
-        }
-
-        [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct Layout6 : IAsmLayout<Layout6>
         {
             public VexPrefix Vex;
@@ -153,6 +135,5 @@ namespace Z0.Asm
                 get => bytes(this);
             }
         }
-
     }
 }

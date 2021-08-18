@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using REP = AsmPrefixCodes.RepeatPrefixCode;
+    using REP = AsmPrefixCodes.RepPrefixCode;
     using L = AsmPrefixCodes.LockPrefixCode;
     using SZ = AsmPrefixCodes.SizeOverrideCode;
 

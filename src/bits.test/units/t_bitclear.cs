@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class t_bitclear : t_bits<t_bitclear>
     {
@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             var n = width<T>();
-            var dst = gbits.disable(Numeric.maxval<T>(), first, count);
+            var dst = gbits.trim(Numeric.maxval<T>(), first, count);
             var bs = BitSpans.create(dst);
             var len = bs.Length;
             Claim.eq(len, n);

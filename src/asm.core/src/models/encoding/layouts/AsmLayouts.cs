@@ -70,17 +70,6 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static Layout4 layout(LegacyPrefix lp, RexPrefix rex, Hex8 opcode, ModRm mrm)
-        {
-            var dst = new Layout4();
-            dst.Lp = lp;
-            dst.Rex = rex;
-            dst.OpCode = opcode;
-            dst.ModRm = mrm;
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
         public static Layout9 layout(VexPrefix vex, Hex8 opcode, ModRm mrm)
         {
             var dst = new Layout9();
