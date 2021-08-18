@@ -16,36 +16,32 @@ namespace Z0.Asm
             /// <summary>
             /// Classifies the 256 literal hex bytes [0xOO, 0x01, ..., 0xFF]
             /// </summary>
-            [Symbol("literal")]
             Byte,
 
             /// <summary>
             /// Classifies <see cref='RexToken'/> tokens
             /// </summary>
-            [Symbol("rex")]
             Rex,
 
             /// <summary>
             /// Classifies <see cref='VexToken'/> tokens
             /// </summary>
-            [Symbol("vex")]
             Vex,
 
             /// <summary>
             /// Classifies <see cref='EvexToken'/> tokens
             /// </summary>
-            [Symbol("evex")]
             Evex,
 
             /// <summary>
-            /// Classifies <see cref='LegacyPrefixToken'/> tokens
+            /// Classifies <see cref='EscapeToken'/> prefix tokens
             /// </summary>
-            LegacyPrefix,
+            EscapePrefix,
 
+            /// <summary>
             /// <summary>
             /// Classifies <see cref='RexBToken'/> tokens
             /// </summary>
-            [Symbol("rex(b)")]
             RexBExtension,
 
             /// <summary>
@@ -61,7 +57,6 @@ namespace Z0.Asm
             /// <summary>
             /// Classifies <see cref='DispToken'/> tokens
             /// </summary>
-            [Symbol("disp")]
             Disp,
 
             /// <summary>
@@ -85,12 +80,25 @@ namespace Z0.Asm
             Mask,
 
             /// <summary>
-            /// Classifies <see cref='OperatorToken'/> tokens
+            /// Classifies <see cref='OpCodeOperator'/> tokens
             /// </summary>
             Operator,
         }
 
-        [FieldSeg(0,4), SymSource]
+        [SymSource]
+        public enum EscapeToken : ushort
+        {
+            [Symbol("0F")]
+            x0F = 0x0F,
+
+            [Symbol("0F38")]
+            x0F38 = 0x0F38,
+
+            [Symbol("0F3A")]
+            x0F3A = 0x0F3A,
+        }
+
+        [SymSource]
         public enum LegacyPrefixToken : byte
         {
             [Symbol("66")]
@@ -101,12 +109,6 @@ namespace Z0.Asm
 
             [Symbol("F3")]
             F3,
-
-            [Symbol("0F")]
-            x0F,
-
-            [Symbol("0F38")]
-            x0F38,
         }
 
         [SymSource]
@@ -118,14 +120,14 @@ namespace Z0.Asm
             [Symbol("REX.W", "Indicates the W-bit is enabled which signals a 64-bit operand size")]
             RexW,
 
-            [Symbol("REX.R", "Extends (prepends) the ModRM.reg 3-bit field to form a 4-bit field, providing a register domain of [0..15]")]
-            RexR,
+            // [Symbol("REX.R", "Extends (prepends) the ModRM.reg 3-bit field to form a 4-bit field, providing a register domain of [0..15]")]
+            // RexR,
 
-            [Symbol("REX.X", "Extends (prepends) the Sib.index 3-bit field to form a 4-bit field, providing a register domain of [0..15]")]
-            RexX,
+            // [Symbol("REX.X", "Extends (prepends) the Sib.index 3-bit field to form a 4-bit field, providing a register domain of [0..15]")]
+            // RexX,
 
-            [Symbol("REX.B", "Modifies the base in the ModR/M r/m field or SIB base field; or it modifies the opcode reg field used for accessing GPRs")]
-            RexB,
+            // [Symbol("REX.B", "Modifies the base in the ModR/M r/m field or SIB base field; or it modifies the opcode reg field used for accessing GPRs")]
+            // RexB,
         }
 
         [SymSource]
@@ -178,9 +180,6 @@ namespace Z0.Asm
 
             [Symbol("pp", "opcode extension providing equivalent functionality of a SIMD prefix")]
             pp,
-
-            [Symbol(".", "The VEX token delimiter")]
-            Sep,
         }
 
         [SymSource]
@@ -212,12 +211,9 @@ namespace Z0.Asm
 
             [Symbol("512")]
             W512,
-
-            [Symbol(".", "The EVEX token delimiter")]
-            Sep,
         }
 
-        [FieldSeg(1,3), SymSource]
+        [SymSource]
         public enum DispToken : byte
         {
             [Symbol("cb", "Indicates a 1-byte value follows the opcode to specify a code offset and/or new value for the code segment register")]
@@ -239,7 +235,7 @@ namespace Z0.Asm
             ct,
         }
 
-        [FieldSeg(2,3), SymSource]
+        [SymSource]
         public enum SegOverrideToken : byte
         {
             [Symbol("cs", "CS segment override")]
@@ -264,7 +260,7 @@ namespace Z0.Asm
         /// <summary>
         /// "Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode."
         /// </summary>
-        [FieldSeg(3,4), SymSource]
+        [SymSource]
         public enum ModRmToken : byte
         {
             [Symbol("/r", "The ModR/M byte of the instruction contains a register operand and an r/m operand")]
@@ -295,12 +291,12 @@ namespace Z0.Asm
             r7,
         }
 
-        [FieldSeg(4,3), SymSource("Indicates the lower 3 bits of the opcode byte is used to encode the register operand without a modR/M byte")]
+        /// <summary>
+        /// Represents one of ['+rb', '+rw', '+rd', '+ro']
+        /// </summary>
+        [SymSource("Indicates the lower 3 bits of the opcode byte is used to encode the register operand without a modR/M byte")]
         public enum RexBToken : byte
         {
-            [Symbol("None", "Indicates that REX.B in not applicable")]
-            None = 0,
-
             [Symbol("+rb", "For an 8-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction")]
             rb,
 
@@ -312,15 +308,9 @@ namespace Z0.Asm
 
             [Symbol("+ro", "For a 64-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction")]
             ro,
-
-            [Symbol("N.A.", "Indicates that REX.B is not applicable")]
-            NA,
-
-            [Symbol("N.E.", "Indicates that REX.B is not encodable")]
-            NE,
         }
 
-        [FieldSeg(5,3), SymSource("Specifies the size of an immediate operand in the context of an opcode specification")]
+        [SymSource("Specifies the size of an immediate operand in the context of an opcode specification")]
         public enum ImmSizeToken : byte
         {
             [Symbol("ib", "Indicates a 1-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.")]
@@ -336,7 +326,7 @@ namespace Z0.Asm
             io,
         }
 
-        [FieldSeg(6,3), SymSource]
+        [SymSource]
         public enum FpuDigitToken : byte
         {
             [Symbol("+0")]
@@ -364,7 +354,7 @@ namespace Z0.Asm
             i7,
         }
 
-        [FieldSeg(7,2), SymSource]
+        [SymSource]
         public enum ExclusionToken
         {
             [Symbol("NP", "Indicates the use of 66/F2/F3 prefixes are not allowed with the instruction")]
@@ -385,7 +375,7 @@ namespace Z0.Asm
         }
 
         [SymSource]
-        public enum OperatorToken : byte
+        public enum OpCodeOperator : byte
         {
             [Symbol("+")]
             Plus,

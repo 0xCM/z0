@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".sdm-load")]
         Outcome LoadOpcodes(CmdArgs args)
         {
-            var result = SdmOpCodeDetailLoad(out var opcodes);
+            var result = LoadSdmOpCodeDetails(out var opcodes);
             if(result.Fail)
                 return result;
 

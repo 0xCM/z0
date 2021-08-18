@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static core;
     using static Root;
-    using static AsmTests;
+    using static AsmChecks;
 
     partial class AsmCmdService
     {

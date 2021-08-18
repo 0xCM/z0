@@ -6,15 +6,35 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct RegMask
     {
-        RegClass Kind;
+        uint Index;
 
-        RegWidth Width;
+        uint Class;
 
-        RegIndex Index;
+        ushort Width;
+
+        [MethodImpl(Inline)]
+        public void Include(RegWidth src)
+        {
+             Width |= Pow2.pow16u(src);
+        }
+
+        [MethodImpl(Inline)]
+        public void Include(RegClass src)
+        {
+             Class |= Pow2.pow32u(src);
+        }
+
+        [MethodImpl(Inline)]
+        public void Include(RegIndex src)
+        {
+             Index |= Pow2.pow32u(src);
+        }
     }
 }

@@ -12,20 +12,20 @@ namespace Z0
     {
         public uint Key {get;}
 
-        public string Identifier {get;}
+        public Sym Symbol {get;}
 
         public string Expression {get;}
 
         [MethodImpl(Inline)]
-        public Token(uint key, string id, string expression)
+        public Token(uint key, Sym symbol, string expression)
         {
             Key = key;
-            Identifier = id;
+            Symbol = symbol;
             Expression = expression;
         }
 
         public string Format()
-            => string.Format("{0,-2} => {1} => '{2}'", Key, Identifier, Expression);
+            => string.Format("{0,-24} | {1,-5} | {2,-16} | '{3}'", Symbol.Type, Key, Symbol.Name, Expression);
 
         public override string ToString()
             => Format();

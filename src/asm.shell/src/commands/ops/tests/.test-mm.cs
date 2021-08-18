@@ -8,7 +8,8 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using static MatchMachine3x8;
+    using static MatchMachines;
+    using static MatchMachines.Match3x8;
 
     partial class AsmCmdService
     {
@@ -32,7 +33,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
 
             var spec = specify(n,src);
-            var machine = MatchMachine3x8.create(spec);
+            var machine = Match3x8.create(spec);
 
             Write(spec.Format());
 

@@ -25,25 +25,6 @@ namespace Z0.Asm
         public static string format(in Disp32Link src)
             => string.Format("{0}h:{1} -> {2}", src.Disp, src.Source, src.Target);
 
-        [Op]
-        public static string format(in Jcc8Conditions src, bit alt)
-        {
-            const string Pattern = "{0,-4} rel{1} [{2}:{3}b] => {4}";
-            var dst = EmptyString;
-            if(alt)
-                dst =  string.Format(Pattern, src.Alt.Name, src.Alt.Size.Width, HexFormat.asmhex(src.Alt.Encoding), BitRender.format8x4(src.Alt.Encoding), src.AltInfo);
-            else
-                dst = string.Format(Pattern, src.Primary.Name, src.RelWidth, HexFormat.asmhex(src.Encoding), text.format(src.EncodedBits), src.PrimaryInfo);
-            return dst;
-        }
-
-        [Op]
-        public static string format<T>(NamedRegValue<T> src)
-            where T : unmanaged
-                => string.Format("{0}{1}",
-                string.Format(RP.pad(-(AsmRegNames.length(src.Name) + 2)), src.Name),
-                src.Value.FormatHexBytes()
-                );
 
         public static string format(in HostAsmRecord src)
             => string.Format("{0} {1,-36} ; {2} => {3}",
@@ -171,22 +152,6 @@ namespace Z0.Asm
             return dst;
         }
 
-        public static uint RexTable(ITextBuffer dst)
-        {
-            var bits = RexPrefix.Range();
-            var count = bits.Length;
-            for(var i=0; i<count; i++)
-                dst.AppendLine(describe(skip(bits,i)));
-            return (uint)count;
-        }
-
-        public static string describe(RexPrefix src)
-        {
-            var bits = text.format(BitRender.render8x4(src.Encoded));
-            var bitfield = string.Format(RexFieldPattern, src.W(), src.R(), src.X(), src.B());
-            return $"{src.Encoded.FormatAsmHex()} | [{bits}] => {bitfield}";
-        }
-
         [Op]
         public static string rescomment(OpUri uri, BinaryCode src)
             => string.Format("; {0}", SpanRes.format(SpanRes.specify(uri, src)));
@@ -206,25 +171,6 @@ namespace Z0.Asm
 
         public static string format(in AsmLabel src)
             => string.Format("{0} {1}:", src.Offset, src.Name);
-
-        public static string format(in AsmSourceLine src)
-        {
-            if(src.Label.IsNonEmpty)
-                return string.Format("{0}:", src.Label);
-            else if(src.Statement.IsNonEmpty)
-            {
-                if(src.Comment.IsNonEmpty)
-                    return string.Format("{0,-46} ; {1}", src.Statement, src.Comment.Content);
-                else
-                    return src.Statement.Format();
-            }
-            else if(src.Comment.IsNonEmpty)
-            {
-                return string.Format("; {0}", src.Comment.Content);
-            }
-            else
-                return EmptyString;
-        }
 
         [Op]
         public static string format(MemoryAddress @base, in AsmInstructionInfo src, in AsmFormatConfig config)

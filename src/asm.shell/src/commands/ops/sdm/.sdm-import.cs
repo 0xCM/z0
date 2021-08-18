@@ -9,11 +9,11 @@ namespace Z0.Asm
         [CmdOp(".sdm-import")]
         Outcome SdmImport(CmdArgs args)
         {
-            var result = SdmOpCodeDetailEmit();
+            var result = EmitSdmOpCodeDetails();
             if(result.Fail)
                 return result;
 
-            result = AsmFormsEmit();
+            result = EmitAsmForms();
             return result;
         }
     }

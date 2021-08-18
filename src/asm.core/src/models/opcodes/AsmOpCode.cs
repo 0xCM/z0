@@ -12,6 +12,10 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static AsmOpCodeTokens;
+
+    using api = AsmOpCodes;
+
 
     [StructLayout(LayoutKind.Sequential, Pack=1, Size =(int)SZ), Blittable(SZ)]
     public struct AsmOpCode
@@ -59,11 +63,30 @@ namespace Z0.Asm
             get => slice(bytes(Encoding),0, 3);
         }
 
+        public bit Rex
+        {
+            [MethodImpl(Inline)]
+            get => api.rex(Expr.String);
+        }
+
+        public bit RexW
+        {
+            get
+            {
+                if(api.rex(Expr.String, out var x))
+                    return x == RexToken.RexW;
+                else
+                    return false;
+            }
+        }
+
+
         public string Format()
             => Expr.Format();
 
         public override string ToString()
             => Format();
+
         public static AsmOpCode Empty
             => default;
     }

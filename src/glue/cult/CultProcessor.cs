@@ -298,7 +298,7 @@ namespace Z0.Tools
             {
                 foreach(var line in AsmLines)
                 {
-                    var lf =  AsmRender.format(line);
+                    var lf =  AsmText.format(line);
                     if(lf.StartsWith(summary.Mnemonic.Format(MnemonicCase.Lowercase) + Chars.Space))
                         writer.WriteLine(lf);
                 }

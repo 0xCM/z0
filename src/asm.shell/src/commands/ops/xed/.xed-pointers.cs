@@ -11,7 +11,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var src = Xed.PointerWidths();
-            WriteSyms(src);
+            ShowSyms(src);
             return result;
         }
     }

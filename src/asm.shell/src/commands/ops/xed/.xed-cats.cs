@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".xed-cats")]
         Outcome XedCategories(CmdArgs args)
-            => WriteSyms(Xed.Categories());
+            => ShowSyms(Xed.Categories());
     }
 }

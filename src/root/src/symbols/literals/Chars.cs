@@ -250,35 +250,6 @@ namespace Z0
         /// </summary>
         public const char Null = (char)0;
 
-        public const char A = 'A';
-
-        public const char B = 'B';
-
-        public const char C = 'C';
-
-        public const char D = 'D';
-
-        public const char E = 'E';
-
-        /// <summary>
-        /// The 'F' character
-        /// </summary>
-        public const char F = 'F';
-
-        /// <summary>
-        /// The 'G' character
-        /// </summary>
-        public const char G = 'G';
-
-        /// <summary>
-        /// The 'H' character
-        /// </summary>
-        public const char H = 'H';
-
-        /// <summary>
-        /// The 'X' character
-        /// </summary>
-        public const char X = 'X';
 
         /// <summary>
         /// The 'f' character
@@ -299,6 +270,68 @@ namespace Z0
         /// The 'x' character
         /// </summary>
         public const char x = 'x';
+
+        public const char A = 'A';
+
+        /// <summary>
+        /// The 'B' character
+        /// </summary>
+        public const char B = 'B';
+
+        /// <summary>
+        /// The 'C' character
+        /// </summary>
+        public const char C = 'C';
+
+        /// <summary>
+        /// The 'D' character
+        /// </summary>
+        public const char D = 'D';
+
+        /// <summary>
+        /// The 'E' character
+        /// </summary>
+        public const char E = 'E';
+
+        /// <summary>
+        /// The 'F' character
+        /// </summary>
+        public const char F = 'F';
+
+        /// <summary>
+        /// The 'G' character
+        /// </summary>
+        public const char G = 'G';
+
+        /// <summary>
+        /// The 'H' character
+        /// </summary>
+        public const char H = 'H';
+
+        /// <summary>
+        /// The 'R' character
+        /// </summary>
+        public const char R = 'R';
+
+        /// <summary>
+        /// The 'W' character
+        /// </summary>
+        public const char W = 'W';
+
+        /// <summary>
+        /// The 'X' character
+        /// </summary>
+        public const char X = 'X';
+
+        /// <summary>
+        /// The 'Y' character
+        /// </summary>
+        public const char Y = 'Y';
+
+        /// <summary>
+        /// The 'Z' character
+        /// </summary>
+        public const char Z = 'Z';
 
         /// <summary>
         /// The '•' character

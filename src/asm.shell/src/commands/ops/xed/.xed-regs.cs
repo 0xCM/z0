@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".xed-regs")]
         Outcome XedRegs(CmdArgs args)
-            => WriteSyms(Xed.Registers());
+            => ShowSyms(Xed.Registers());
     }
 }

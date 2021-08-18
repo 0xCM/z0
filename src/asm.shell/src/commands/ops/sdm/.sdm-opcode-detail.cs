@@ -20,7 +20,7 @@ namespace Z0.Asm
             var opcodes = State.SdmOpCodeDetail();
             if(opcodes.Length == 0)
             {
-                result = SdmOpCodeDetailLoad(out _);
+                result = LoadSdmOpCodeDetails(out _);
                 if(result.Fail)
                     return result;
 

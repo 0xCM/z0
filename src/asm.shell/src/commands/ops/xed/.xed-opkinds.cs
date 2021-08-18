@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".xed-opkinds")]
         Outcome XedOpKinds(CmdArgs args)
-            => WriteSyms(Xed.OperandKinds());
+            => ShowSyms(Xed.OperandKinds());
     }
 }

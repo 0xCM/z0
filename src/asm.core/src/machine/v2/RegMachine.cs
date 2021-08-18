@@ -13,7 +13,14 @@ namespace Z0.Asm
     using static core;
     using static Pow2x64;
     using static AsmOperands;
+
     using AsmId = llvm.MC.AsmId;
+
+    public readonly partial struct RegMachines
+    {
+
+
+    }
 
     public struct GpState
     {
@@ -151,5 +158,4 @@ namespace Z0.Asm
             Regs.Dispose();
         }
     }
-
 }

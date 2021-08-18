@@ -26,5 +26,9 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator RegClassCode(RegClass src)
             => src.Code;
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(RegClass src)
+            => (byte)src.Code;
     }
 }

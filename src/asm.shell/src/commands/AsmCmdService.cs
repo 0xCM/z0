@@ -18,8 +18,6 @@ namespace Z0.Asm
 
         Identifier RoutineName;
 
-        DevWs Ws;
-
         IAsmWorkspace AsmWs;
 
         ScriptRunner ScriptRunner;
@@ -99,7 +97,6 @@ namespace Z0.Asm
 
         protected override void Initialized()
         {
-            Ws = Wf.DevWs();
             AsmWs = Ws.Asm();
             ScriptRunner = Wf.ScriptRunner();
             ApiPacks = Wf.ApiPacks();
@@ -149,27 +146,6 @@ namespace Z0.Asm
             get => _NativeAddressMap;
         }
 
-        // [MethodImpl(Inline)]
-        // uint ProcessAsmCount()
-        //     => _ProcessAsmCount;
-
-        // [MethodImpl(Inline)]
-        // uint ProcessAsmCount(uint count)
-        // {
-        //     _ProcessAsmCount = count;
-        //     return ProcessAsmCount();
-        // }
-
-        // ProcessAsmRecord[] AllocProcessAsm()
-        //     => alloc<ProcessAsmRecord>(AsmLoader.ProcessAsmCount(ProcessAsmPath()));
-
-        // Span<ProcessAsmRecord> ProcessAsmBuffer()
-        // {
-        //     if(_ProcessAsm.IsEmpty)
-        //         _ProcessAsm = AllocProcessAsm();
-        //     return _ProcessAsm;
-        // }
-
         [MethodImpl(Inline)]
         ref readonly NativeBufferSeq NativeBuffers()
             => ref _NativeBuffers;
@@ -179,6 +155,9 @@ namespace Z0.Asm
 
         IWorkspace Gen()
             => Ws.Gen();
+
+        IWorkspace Docs()
+            => Ws.Docs();
 
         FS.FolderPath OutDir(string id)
             => OutWs.Subdir(id);

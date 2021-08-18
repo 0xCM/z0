@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     public readonly struct RegWidth
     {
@@ -26,5 +25,9 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator RegWidthCode(RegWidth src)
             => src.Code;
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(RegWidth src)
+            => (byte)src.Code;
     }
 }

@@ -14,7 +14,7 @@ namespace Z0.Asm
     {
         public const string TableId = "sdm.opcodes";
 
-        public const byte FieldCount = 14;
+        public const byte FieldCount = 10;
 
         public const uint StorageSize =
             PrimalSizes.U32 +
@@ -23,7 +23,6 @@ namespace Z0.Asm
             CharBlock64.SZ +
             4*CharBlock8.StorageSize +
             CharBlock16.SZ +
-            4*bit.StorageSize +
             CharBlock254.SZ
             ;
 
@@ -45,21 +44,13 @@ namespace Z0.Asm
 
         public CharBlock16 CpuId;
 
-        public bit Rex;
-
-        public bit RexW;
-
-        public bit Vex;
-
-        public bit Evex;
-
         public CharBlock254 Description;
 
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[FieldCount]{
                 12,16,48,64,
                 10,10,10,10,
-                16,6,6,6,6,
+                16,
                 254};
 
         public int CompareTo(SdmOpCodeDetail src)

@@ -12,6 +12,8 @@ namespace Z0
     using static Root;
     using static core;
     using static MemorySections;
+    using static Asm.OpCodeMachines;
+    using static Asm.RegMachines;
 
     using SQ = SymbolicQuery;
 
@@ -23,8 +25,12 @@ namespace Z0
             => new ByteMachine(buffer);
 
         [MethodImpl(Inline), Op]
-        public static Regs8x64 regs(N8 n, W64 w)
+        public static Store8x64 regs(N8 n, W64 w)
             => default;
+
+        [MethodImpl(Inline), Op]
+        public static OpCodeParser ocparser()
+            => new OpCodeParser();
 
         public abstract class CharParser : Machine<char>
         {

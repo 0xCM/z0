@@ -40,11 +40,9 @@ namespace Z0.Asm
                     result = (false,$"{expect} != {actual}");
                     return result;
                 }
-                //Write(string.Format("{0} | {1} | {2}", i, skip(offsets,i), actual));
             }
 
             return result;
         }
-
     }
 }

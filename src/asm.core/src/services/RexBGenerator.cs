@@ -24,10 +24,6 @@ namespace Z0.Asm
         Symbols<RexBToken> _Tokens;
 
         [MethodImpl(Inline)]
-        static RexBToken None()
-            => RexBToken.None;
-
-        [MethodImpl(Inline)]
         static RexBToken rb()
             => RexBToken.rb;
 
@@ -42,14 +38,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         static RexBToken ro()
             => RexBToken.ro;
-
-        [MethodImpl(Inline)]
-        static RexBToken NA()
-            => RexBToken.NA;
-
-        [MethodImpl(Inline)]
-        static RexBToken NE()
-            => RexBToken.NE;
 
         public RexBGenerator()
         {
@@ -71,7 +59,6 @@ namespace Z0.Asm
             counter += IncludeGp16(ref i, dst);
             counter += IncludeGp32(ref i, dst);
             counter += IncludeGp8(ref i, dst);
-            counter += IncludeGp8Hi(ref i, dst);
             return slice(dst,0,counter);
         }
 
@@ -81,10 +68,10 @@ namespace Z0.Asm
             var i0 = i;
             var j = z8;
             var regs = Gp8Regs().Kinds;
-            for(j=0; j<RegCount; j++, i++)
+            for(j=0; j<RegCount; j++)
             {
-                var token = j<4 ? None() : rb();
-                seek(dst,i) = rexb(token, (RegIndexCode)skip(regs,j));
+                if(j>=4)
+                    seek(dst,i++) = rexb(rb(), (RegIndexCode)skip(regs,j));
             }
 
             return (byte)(i - i0);
@@ -98,8 +85,8 @@ namespace Z0.Asm
             var j = z8;
             for(j=0; j<RegCount; j++)
             {
-                var token = j<8 ? None() : rw();
-                seek(dst,i) = rexb(token, (RegIndexCode)skip(regs,j));
+                if(j>=8)
+                    seek(dst,i++) = rexb(rw(), (RegIndexCode)skip(regs,j));
             }
 
             return (byte)(i - i0);
@@ -113,8 +100,8 @@ namespace Z0.Asm
             var regs = Gp32Regs().Kinds;
             for(j=0; j<RegCount; j++)
             {
-                var token = j<8 ? None() : rd();
-                seek(dst,i) = rexb(token, (RegIndexCode)skip(regs,j));
+                if(j>=8)
+                    seek(dst,i++) = rexb(rd(), (RegIndexCode)skip(regs,j));
             }
             return (byte)(i - i0);
         }
@@ -127,22 +114,8 @@ namespace Z0.Asm
             var regs = Gp64Regs().Kinds;
             for(j=0; j<RegCount; j++)
             {
-                var token = (i<4 ? None() : (i < 8 ? NA() : ro()));
-                seek(dst,i) = rexb(token, (RegIndexCode)skip(regs,j));
-            }
-            return (byte)(i - i0);
-        }
-
-        byte IncludeGp8Hi(ref uint i, Span<RexB> dst)
-        {
-            const byte RegCount = 4;
-            var i0 = i;
-            var regs = Gp8Regs(true).Kinds;
-            var j = z8;
-            for(j=0; j<RegCount; j++)
-            {
-                var token = NE();
-                seek(dst,i) = rexb(token, (RegIndexCode)skip(regs,j));
+                if(j >=8)
+                    seek(dst,i++) = rexb(ro(), (RegIndexCode)skip(regs,j));
             }
             return (byte)(i - i0);
         }

@@ -37,7 +37,6 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(input,i);
-
                 var vars = WsVars.create();
                 vars.DstDir = outdir;
                 vars.SrcDir = path.FolderPath;

@@ -14,6 +14,14 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmRegNames
     {
+        [Op]
+        public static string format<T>(NamedRegValue<T> src)
+            where T : unmanaged
+                => string.Format("{0,-5}{1}",
+                string.Format(RP.pad(-(length(src.Name) + 2)), src.Name),
+                src.Value.FormatHexBytes()
+                );
+
         [MethodImpl(Inline), Op]
         public static RegName name(XmmClass k, RegIndexCode index)
         {

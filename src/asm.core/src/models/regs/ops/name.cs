@@ -18,13 +18,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static RegName name(RegOp src)
             => AsmRegNames.name(src);
-
-        /// <summary>
-        /// Renders a <see cref='RegName'/> as text
-        /// </summary>
-        /// <param name="src">The source name</param>
-        [MethodImpl(Inline), Op]
-        public static string format(RegName src)
-            => AsmRegNames.format(src);
     }
 }

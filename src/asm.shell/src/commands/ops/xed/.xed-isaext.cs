@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".xed-isaext")]
         Outcome XedIsaExt(CmdArgs args)
-            => WriteSyms(Xed.IsaExtensions());
+            => ShowSyms(Xed.IsaExtensions());
     }
 }

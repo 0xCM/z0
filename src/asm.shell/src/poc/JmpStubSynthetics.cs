@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using static core;
     using static AsmRegOps;
-    using static AsmSpecs;
 
     public class JmpStubs : AppService<JmpStubs>
     {

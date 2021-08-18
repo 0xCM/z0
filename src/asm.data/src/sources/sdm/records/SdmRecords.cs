@@ -16,6 +16,18 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct SdmRecords
     {
+        // ['+rb', '+rw', '+rd', '+ro']
+        static string ocnormal(string src)
+        {
+            return
+                src.Replace("+ rb", " +rb")
+                    .Replace("+ rw", " +rw")
+                    .Replace("+ rd", " +rd")
+                    .Replace("+ ro", " +ro")
+                    .Replace("/ r", "/r")
+                    ;
+        }
+
         [Op]
         public static uint fill(Table src, Span<SdmOpCodeDetail> dst)
         {
@@ -39,11 +51,7 @@ namespace Z0.Asm
                     switch(col.Name)
                     {
                         case "Opcode":
-                        target.OpCode = content;
-                        target.Rex = SQ.match(n3, content, M.Rex) >= 0;
-                        target.RexW = SQ.match(n5,content, M.RexW) >= 0;
-                        target.Vex = SQ.match(n4, content, M.Vex) >= 0;
-                        target.Evex = SQ.match(n5,content, M.Evex) >= 0;
+                        target.OpCode = ocnormal(content);
                         break;
 
                         case "Instruction":

@@ -61,23 +61,6 @@ namespace Z0.Asm
             DataParser.block(skip(cells, i++), out dst.LegacyMode);
             DataParser.block(skip(cells, i++), out dst.Mode64x32);
             DataParser.block(skip(cells, i++), out dst.CpuId);
-
-            result = DataParser.parse(skip(cells, i++), out dst.Rex);
-            if(result.Fail)
-                return (false, ParseFailure.Format(nameof(dst.Rex), skip(cells,i-1)));
-
-            result = DataParser.parse(skip(cells, i++), out dst.RexW);
-            if(result.Fail)
-                return (false, ParseFailure.Format(nameof(dst.RexW), skip(cells,i-1)));
-
-            result = DataParser.parse(skip(cells, i++), out dst.Vex);
-            if(result.Fail)
-                return (false, ParseFailure.Format(nameof(dst.Vex), skip(cells,i-1)));
-
-            result = DataParser.parse(skip(cells, i++), out dst.Evex);
-            if(result.Fail)
-                return (false, ParseFailure.Format(nameof(dst.Evex), skip(cells,i-1)));
-
             DataParser.block(skip(cells, i++), out dst.Description);
             return result;
         }

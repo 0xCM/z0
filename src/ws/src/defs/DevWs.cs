@@ -47,14 +47,11 @@ namespace Z0
                 case asm:
                     dst = Asm();
                 break;
-                case tools:
-                    dst = Tools();
-                break;
-                case tables:
-                    dst = Tables();
-                break;
                 case control:
                     dst = Control();
+                break;
+                case docs:
+                    dst = Docs();
                 break;
                 case projects:
                     dst = Projects();
@@ -67,6 +64,12 @@ namespace Z0
                 break;
                 case gen:
                     dst = Gen();
+                break;
+                case tools:
+                    dst = Tools();
+                break;
+                case tables:
+                    dst = Tables();
                 break;
                 case output:
                     dst = Output();
@@ -94,6 +97,9 @@ namespace Z0
 
         public IWorkspace Control()
             => ControlWs.create(_WsRoot + FS.folder(control));
+
+        public IWorkspace Docs()
+            => DocsWs.create(_WsRoot + FS.folder(docs));
 
         public ProjectWs Projects()
             => ProjectWs.create(_WsRoot + FS.folder(projects), _OutRoot + FS.folder(projects));

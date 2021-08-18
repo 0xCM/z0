@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".asm-forms-emit")]
         Outcome AsmFormsEmit(CmdArgs args)
-            => AsmFormsEmit();
+            => EmitAsmForms();
     }
 }

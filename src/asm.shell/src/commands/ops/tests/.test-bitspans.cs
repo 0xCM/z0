@@ -14,7 +14,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var options = BitFormat.Default.WithBlockWidth(8);
-            var v1 = vmask.vmsb<byte>(w128,n8,n7);
+            var v1 = vmask.vmsb<byte>(w128, n8, n7);
             var b1 = v1.ToBitSpan();
             Write(b1.Format(options));
             return result;

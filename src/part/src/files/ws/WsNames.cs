@@ -34,5 +34,7 @@ namespace Z0
         public const string imports = A.imports;
 
         public const string api = A.api;
+
+        public const string docs = A.docs;
     }
 }
