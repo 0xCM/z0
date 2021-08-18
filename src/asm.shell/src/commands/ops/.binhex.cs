@@ -19,7 +19,7 @@ namespace Z0.Asm
                 ref readonly var src = ref skip(paths,i);
                 var dst = OutDir("binhex") + FS.file(src.FileName.Format(),FS.Hex);
                 var data = src.ReadBytes();
-                var size = (ByteSize)MemoryEmitter.emit(data,40,dst);
+                var size = (ByteSize)MemoryEmitter.emit(data,16,dst);
                 Write(string.Format("({0} bytes)[{1} -> {2}]", size, src.ToUri(), dst.ToUri()));
             }
 

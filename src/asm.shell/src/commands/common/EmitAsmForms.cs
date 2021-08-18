@@ -23,15 +23,7 @@ namespace Z0.Asm
             var count = forms.Length;
 
             for(var i=0; i<count; i++)
-            {
-                ref readonly var form = ref skip(forms,i);
-                writer.WriteLine(form);
-                // var oc = form.OpCode;
-                // Write(string.Format(Pattern, form,
-                //     "rex", oc.Rex,
-                //     "rex.w", oc.RexW
-                //     ));
-            }
+                writer.WriteLine(skip(forms,i));
 
             Emitted(dst);
             return result;

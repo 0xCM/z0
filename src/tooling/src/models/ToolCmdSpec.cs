@@ -25,7 +25,6 @@ namespace Z0
         /// Environment variables to use, if any
         /// </summary>
         public NamedValues<string> EnvVars;
-
         public string Format()
             => string.Format("{0} {0}", ToolPath.Format(PathSeparator.BS), Args.Format());
     }

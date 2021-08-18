@@ -38,9 +38,10 @@ namespace Z0
     }
 
     [Free]
-    public interface IArrow<S,T,K> : IArrow<S,T>, IKinded<K>
-        where K : unmanaged
+    public interface IArrow<S,T,K> : IArrow<S,T>
     {
+        K Kind {get;}
+
         string IIdentified.IdentityText
             => string.Format(RP.Arrow, Source, Target);
         string ITextual.Format()

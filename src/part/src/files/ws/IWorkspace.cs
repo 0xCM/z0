@@ -28,6 +28,12 @@ namespace Z0
         FS.FolderPath ScriptDir()
             => Root + FS.folder(scripts);
 
+        FS.FolderPath ObjSymDir()
+            => OutDir() + FS.folder(sym);
+
+        FS.FilePath ObjSymPath(string id)
+            => ObjSymDir() + FS.file(id,FS.Sym);
+
         FS.FilePath Script(string id)
             => ScriptDir() + FS.file(id,FS.Cmd);
 

@@ -13,7 +13,6 @@ namespace Z0
     /// Defines kinded link
     /// </summary>
     public readonly struct Arrow<S,T,K> : IArrow<S,T,K>
-        where K : unmanaged
     {
         /// <summary>
         /// The source

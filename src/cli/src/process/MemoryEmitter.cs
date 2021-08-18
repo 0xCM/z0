@@ -29,7 +29,7 @@ namespace Z0
 
             while(i++ <= last)
             {
-                current = (Address32)i;
+                current = (Address32)(i - 1);
                 ref readonly var b = ref skip(src,i);
                 if(restart)
                 {
@@ -39,7 +39,7 @@ namespace Z0
 
                 line.Append(string.Format("{0} ", HexFormat.format<W8,byte>(b)));
 
-                if(offset % bpl == 0)
+                if(offset != 0 && (offset % bpl == 0))
                 {
                     writer.WriteLine(line.Emit());
                     restart = true;

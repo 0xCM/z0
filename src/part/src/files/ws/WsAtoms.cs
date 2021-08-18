@@ -70,5 +70,7 @@ namespace Z0
         public const string tables = nameof(tables);
 
         public const string sources = nameof(sources);
+
+        public const string sym = nameof(sym);
     }
 }

@@ -54,10 +54,6 @@ namespace Z0.Asm
 
         AddressMap _NativeAddressMap;
 
-        // Index<ProcessAsmRecord> _ProcessAsm;
-
-        // Index<ProcessAsmRecord> _ProcessAsmSelection;
-
         CliMemoryMap ResPack;
 
         IPolyrand Random;

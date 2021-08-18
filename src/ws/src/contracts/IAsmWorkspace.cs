@@ -26,9 +26,6 @@ namespace Z0
         FS.FolderPath AsmLibSrc()
             => Src() + FS.folder("asm");
 
-        FS.FolderPath AsmAppSrc()
-            => Src() + FS.folder("apps");
-
         FS.FilePath AsmPath(string id)
             => AsmLibSrc() + FS.file(id, FS.Asm);
 
@@ -49,6 +46,5 @@ namespace Z0
 
         FS.FilePath DisasmPath(string id, ToolId tool, FS.FileExt? ext = null)
             => DisasmOut() + FS.file(string.Format("{0}.{1}", id, tool), ext ?? FS.Asm);
-
    }
 }

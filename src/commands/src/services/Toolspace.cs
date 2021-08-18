@@ -44,6 +44,8 @@ namespace Z0
 
         public static ToolId llvm_as => "llvm-as";
 
+        public static ToolId llvm_nm => "llvm-nm";
+
         public static ToolId obj2yaml => "obj2yaml";
 
         public static ToolId llvm_lli => "lli";
