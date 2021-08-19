@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(BitMatrix)" />
+    <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(BitPack)" />
+    <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(Calc)" />
   </ItemGroup>
 
 </Project>

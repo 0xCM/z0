@@ -8,8 +8,34 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
+    using static Root;
+
     partial class XTend
     {
+         /// <summary>
+        /// Extracts a 128-bit cpu vector from a bitsring of sufficient length
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="w">The bit width selector</param>
+        /// <param name="t">The component type representative</param>
+        /// <typeparam name="T">The target vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> ToCpuVector<T>(this BitString src, N128 w, T t = default)
+            where T : unmanaged
+                => src.Pack().Recover<byte,T>().Blocked(w).LoadVector();
+
+        /// <summary>
+        /// Extracts a 256-bit cpu vector from a bitsring of sufficient length
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="w">The bit width selector</param>
+        /// <param name="t">The component type representative</param>
+        /// <typeparam name="T">The target vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> ToCpuVector<T>(this BitString src, N256 w, T t = default)
+            where T : unmanaged
+                => src.Pack().Recover<byte,T>().Blocked(w).LoadVector();
+
         /// <summary>
         /// Formats vector bits
         /// </summary>

@@ -9,6 +9,7 @@
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Calc)" />
+    <ProjectReference Include="$(BitGrids)" />
   </ItemGroup>
 
 </Project>

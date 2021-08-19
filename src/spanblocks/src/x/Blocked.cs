@@ -11,6 +11,16 @@ namespace Z0
 
     partial class XSb
     {
+        [MethodImpl(Inline)]
+        public static bit Identical<T>(this SpanBlock128<T> xb, SpanBlock128<T> yb)
+            where T : unmanaged
+                => xb.Storage.Identical(yb.Storage);
+
+        [MethodImpl(Inline)]
+        public static bit Identical<T>(this SpanBlock256<T> xb, SpanBlock256<T> yb)
+            where T : unmanaged
+                => xb.Storage.Identical(yb.Storage);
+
         /// <summary>
         /// Constructs a 32-bit blocked span from an unblocked span
         /// </summary>

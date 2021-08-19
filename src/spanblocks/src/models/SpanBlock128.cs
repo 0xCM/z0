@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     /// <summary>
     /// Defines a span of contiguous memory that can be evenly partitioned into 8, 16, 32, 64 and 128-bit segments

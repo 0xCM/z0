@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
+    using static core;
 
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
-    public ref struct BitMatrix4
+    public struct BitMatrix4
     {
         ushort Data;
 
@@ -44,7 +44,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get =>  memory.bytes(Data);
+            get =>  bytes(Data);
         }
 
         /// <summary>

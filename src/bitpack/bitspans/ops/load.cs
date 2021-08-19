@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
+    using static core;
 
     partial class BitSpans
     {
@@ -60,9 +61,9 @@ namespace Z0
          public static BitSpan load<T>(Vector128<T> src, uint? maxbits = null)
             where T : unmanaged
         {
-            var bits = BitSpans.create(memory.bytes(src));
+            var bits = BitSpans.create(bytes(src));
             if(maxbits != null)
-                return memory.slice(bits.Storage, 0, maxbits.Value);
+                return slice(bits.Storage, 0, maxbits.Value);
             else
                 return bits;
         }
@@ -71,9 +72,9 @@ namespace Z0
          public static BitSpan load<T>(Vector256<T> src, uint? maxbits = null)
             where T : unmanaged
         {
-            var bits = BitSpans.create(memory.bytes(src));
+            var bits = BitSpans.create(bytes(src));
             if(maxbits != null)
-                return memory.slice(bits.Storage, 0, maxbits.Value);
+                return slice(bits.Storage, 0, maxbits.Value);
             else
                 return bits;
         }
@@ -82,9 +83,9 @@ namespace Z0
         public static BitSpan load<T>(T src, uint? maxbits = null)
             where T : unmanaged
         {
-            var bits = BitSpans.create(memory.bytes(src));
+            var bits = BitSpans.create(bytes(src));
             if(maxbits != null)
-                return memory.slice(bits.Storage, 0, maxbits.Value);
+                return slice(bits.Storage, 0, maxbits.Value);
             else
                 return bits;
         }

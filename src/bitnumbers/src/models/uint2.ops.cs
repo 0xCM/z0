@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     using U = uint2;
     using W = W2;

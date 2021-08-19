@@ -15,6 +15,31 @@ namespace Z0
     using BS = Z0.BitBlocks;
     using BM = Z0.BitMatrix;
 
+
+    public static partial class XTend
+    {
+        /// <summary>
+        /// Represents the source matrix as a generic bitgrid of dimension 32x32 over cells of width 32
+        /// </summary>
+        /// <param name="src">The source matrix</param>
+        [MethodImpl(Inline)]
+        public static BitGrid<uint> ToBitGrid(this BitMatrix32 src)
+            => BitGrid.load(SpanBlocks.load(n256,src.Content),32,32);
+
+        [MethodImpl(Inline)]
+        public static BitGrid<N64,N64,ulong> ToBitGrid(this BitMatrix64 src, N64 n)
+            => BitGrid.load(SpanBlocks.load(n256,src.Content),n,n);
+
+        /// <summary>
+        /// Represents the source matrix as a generic bitgrid of dimension 64x64 over cells of width 64
+        /// </summary>
+        /// <param name="src">The source matrix</param>
+        [MethodImpl(Inline)]
+        public static BitGrid<ulong> ToBitGrid(this BitMatrix64 src)
+            => BitGrid.load(SpanBlocks.load(n256,src.Content),64,64);
+
+    }
+
     public static class BitGridRng
     {
         /// <summary>

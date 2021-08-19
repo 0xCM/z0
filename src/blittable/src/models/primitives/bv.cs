@@ -291,7 +291,6 @@ namespace Z0
 
         }
 
-
         public struct bv8 : IScalarBits<byte>
         {
             public const uint Width = 8;
@@ -408,5 +407,35 @@ namespace Z0
             public static implicit operator bv<ulong>(bv64 src)
                 => new bv<ulong>(Width, src.Storage);
         }
+
+        public struct bv128 : IScalarBits<ByteBlock16>
+        {
+            public const uint Width = 64;
+
+            public ByteBlock16 Storage;
+
+            [MethodImpl(Inline)]
+            public bv128(ByteBlock16 src)
+            {
+                Storage = src;
+            }
+
+            BitWidth IPrimitive.ContentWidth
+                => Width;
+
+            public bit this[byte i]
+            {
+                [MethodImpl(Inline)]
+                get => throw Unsupported.define<bv128>();
+
+                [MethodImpl(Inline)]
+                set => throw Unsupported.define<bv128>();
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator bv<ByteBlock16>(bv128 src)
+                => new bv<ByteBlock16>(Width, src.Storage);
+        }
+
     }
 }
