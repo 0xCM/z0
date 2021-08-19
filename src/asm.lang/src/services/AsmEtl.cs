@@ -30,13 +30,6 @@ namespace Z0.Asm
             var dst = Ws.Tables().Table<SymToken>(WsAtoms.tokens, src.Name);
             var tokens = Symbols.tokens(src.Types());
             TableEmit(tokens, SymToken.RenderWidths, dst);
-            var count = tokens.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var token = ref skip(tokens,i);
-                //var name = token.TokenType.Format().Replace("Token", EmptyString);
-                //Write(string.Format(Expression, name, token.Expr, token.Description));
-            }
         }
 
         /// <summary>

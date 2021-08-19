@@ -12,10 +12,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".emit-llvm-opcodes")]
-        Outcome LlvmOpCodes(CmdArgs args)
+        Index<OpCodeSpec> EmitLlvmOpCodes()
         {
-            var result = Outcome.Success;
             var calcs = MC.calcs();
             var count = calcs.AsmCount;
 
@@ -37,9 +35,8 @@ namespace Z0.Asm
 
             Array.Sort(buffer);
 
-            TableEmit(@readonly(buffer), OpCodeSpec.RenderWidths, TableWs().Table<OpCodeSpec>(FS.Csv));
-
-            return result;
+            TableEmit(@readonly(buffer), OpCodeSpec.RenderWidths, TableWs().LlvmTable<OpCodeSpec>());
+            return buffer;
         }
     }
 }

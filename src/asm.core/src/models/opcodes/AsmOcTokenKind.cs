@@ -16,72 +16,72 @@ namespace Z0.Asm
         /// <summary>
         /// Classifies the 256 literal hex bytes [0xOO, 0x01, ..., 0xFF]
         /// </summary>
-        Byte,
+        Byte = 1,
 
         /// <summary>
         /// Classifies <see cref='RexToken'/> tokens
         /// </summary>
-        Rex,
+        Rex = 2,
 
         /// <summary>
         /// Classifies <see cref='VexToken'/> tokens
         /// </summary>
-        Vex,
+        Vex = 3,
 
         /// <summary>
         /// Classifies <see cref='EvexToken'/> tokens
         /// </summary>
-        Evex,
+        Evex = 4,
 
         /// <summary>
         /// Classifies <see cref='EscapeToken'/> prefix tokens
         /// </summary>
-        EscapePrefix,
+        EscapePrefix = 5,
 
         /// <summary>
         /// <summary>
         /// Classifies <see cref='RexBToken'/> tokens
         /// </summary>
-        RexBExtension,
+        RexBExtension = 6,
 
         /// <summary>
         /// Classifies <see cref='ModRmToken'/> tokens
         /// </summary>
-        RegOpCodeMod,
+        RegOpCodeMod = 7,
 
         /// <summary>
         /// Classifies <see cref='SegOverrideToken'/> tokens
         /// </summary>
-        SegOverride,
+        SegOverride = 8,
 
         /// <summary>
         /// Classifies <see cref='DispToken'/> tokens
         /// </summary>
-        Disp,
+        Disp = 9,
 
         /// <summary>
         /// Classifies <see cref='ImmSizeToken'/> tokens
         /// </summary>
-        ImmSize,
+        ImmSize = 10,
 
         /// <summary>
         /// Classifies <see cref='ExclusionToken'/> tokens
         /// </summary>
-        Exclusion,
+        Exclusion = 11,
 
         /// <summary>
         /// Classifies <see cref='FpuDigitToken'/> tokens
         /// </summary>
-        FpuDigit,
+        FpuDigit = 12,
 
         /// <summary>
         /// Classifies <see cref='MaskToken'/> tokens
         /// </summary>
-        Mask,
+        Mask = 13,
 
         /// <summary>
         /// Classifies <see cref='OpCodeOperator'/> tokens
         /// </summary>
-        Operator,
+        Operator = 14,
     }
 }

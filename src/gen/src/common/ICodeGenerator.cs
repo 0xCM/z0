@@ -2,12 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    partial class AsmCmdService
+    public interface ICodeGenerator : IGenerator
     {
-        [CmdOp(".llvm-strings")]
-        Outcome EmitStringtables(CmdArgs args)
-            => EmitLlvmStringTables();
-   }
+        string Generate();
+    }
 }

@@ -11,20 +11,18 @@ namespace Z0.Asm
     using static core;
     using static AsmLayouts;
 
+    using SR = SymbolicRender;
+
     [ApiHost]
     public class AsmBits
     {
         const NumericKind Closure = UnsignedInts;
 
+        const string FieldSep = " | ";
+
         const char Open = Chars.LBracket;
 
-        const char Delimit = Chars.Pipe;
-
-        const char Sep = Chars.Space;
-
         const char Close = Chars.RBracket;
-
-        const char Assign = Chars.Eq;
 
         public static AsmBits service()
             => The;
@@ -150,37 +148,15 @@ namespace Z0.Asm
             => string.Format(RexFieldPattern, src.W(), src.R(), src.X(), src.B());
 
         [MethodImpl(Inline), Op]
-        public static uint modrm(byte src, ref uint i, Span<char> dst)
-            => BitRender.render8x2x3x3(src, ref i, dst);
-
-        [MethodImpl(Inline), Op]
-        public static uint modrm(ModRm src, ref uint i, Span<char> dst)
-        {
-            var i0=i;
-            BitRender.render2(src.Mod(), ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            seek(dst,i++) = Chars.Pipe;
-            seek(dst,i++) = Chars.Space;
-            BitRender.render3(src.Reg(), ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            seek(dst,i++) = Chars.Pipe;
-            seek(dst,i++) = Chars.Space;
-            BitRender.render3(src.Reg(), ref i, dst);
-            return i-i0;
-        }
-
-        [MethodImpl(Inline), Op]
         public static uint sib(Sib src, ref uint i, Span<char> dst)
         {
             var i0=i;
             BitRender.render2(src.Scale(), ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            seek(dst,i++) = Chars.Pipe;
-            seek(dst,i++) = Chars.Space;
+            SR.copy(FieldSep, ref i, dst);
+
             BitRender.render3(src.Index(), ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            seek(dst,i++) = Chars.Pipe;
-            seek(dst,i++) = Chars.Space;
+            SR.copy(FieldSep, ref i, dst);
+
             BitRender.render3(src.Base(), ref i, dst);
             return i-i0;
         }
@@ -255,71 +231,48 @@ namespace Z0.Asm
         [Op]
         public static uint ModRmTable(Span<char> dst)
         {
+            const string Header = "mod | reg | r/m | hex | bitstring";
+
             var f0 = BitSeq.bits(n3);
             var f1 = BitSeq.bits(n3);
             var f2 = BitSeq.bits(n2);
             var k=0u;
+            SR.copy(Header, ref k, dst);
+            SR.crlf(ref k, dst);
+
             for(var c=0u; c<f2.Length; c++)
             for(var b=0u; b<f1.Length; b++)
             for(var a=0u; a<f0.Length; a++)
             {
                 var modrm = AsmEncoder.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
-                ModRmTableEntry(modrm, ref k, dst);
-                seek(dst, k++) = Sep;
-                seek(dst, k++) = Assign;
-                seek(dst, k++) = Sep;
-
-                var bits = modrm.Encoded.FormatBits() + "b";
-                text.copy(bits, ref k, dst);
-
-                seek(dst, k++) = Sep;
-                seek(dst, k++) = Assign;
-                seek(dst, k++) = Sep;
-
-                var hex = modrm.Encoded.FormatAsmHex(2);
-                text.copy(hex, ref k, dst);
-
-                seek(dst,k++) = (char)AsciControlSym.CR;
-                seek(dst,k++) = (char)AsciControlSym.LF;
+                AsmBits.modrm(modrm, ref k, dst);
+                SR.crlf(ref k, dst);
             }
             return k;
         }
 
-        [Op]
-        public static uint ModRmTableEntry(ModRm src, ref uint i, Span<char> dst)
+        public static string bitstring(ModRm src)
+            => string.Format("{0} {1} {2}", BitRender.format2(src.Mod()), BitRender.format3(src.Reg()), BitRender.format3(src.Rm()));
+
+        public static uint modrm(ModRm src, ref uint i, Span<char> dst)
         {
             var i0 = i;
-            const string ModRM = "ModRM";
-            const string Mod = "mod";
-            const string Reg = "reg";
-            const string Rm = "r/m";
-            text.copy(ModRM, ref i, dst);
-            seek(dst, i++) = Open;
+            BitRender.render2(src.Mod(), ref i, dst);
+            seek(dst,i++) = Chars.Space;
+            SR.copy(FieldSep, ref i, dst);
 
-            text.copy(Mod, ref i, dst);
-            seek(dst, i++) = Open;
-            BitRender.render8x2(src.Mod(), ref i, dst);
-            seek(dst, i++) = Close;
-
-            seek(dst, i++) = Sep;
-            seek(dst, i++) = Delimit;
-            seek(dst, i++) = Sep;
-
-            text.copy(Reg, ref i, dst);
-            seek(dst, i++) = Open;
             BitRender.render3(src.Reg(), ref i, dst);
-            seek(dst, i++) = Close;
+            SR.copy(FieldSep, ref i, dst);
 
-            seek(dst, i++) = Sep;
-            seek(dst, i++) = Delimit;
-            seek(dst, i++) = Sep;
-
-            text.copy(Rm, ref i, dst);
-            seek(dst, i++) = Open;
             BitRender.render3(src.Rm(), ref i, dst);
-            seek(dst, i++) = Close;
+            SR.copy(FieldSep, ref i, dst);
 
-            seek(dst, i++) = Close;
+            SR.copy(src.Encoded.FormatHex(2), ref i, dst);
+            seek(dst,i++) = Chars.Space;
+            SR.copy(FieldSep, ref i, dst);
+
+            SR.copy(bitstring(src), ref i, dst);
+
             return i - i0;
         }
     }

@@ -103,6 +103,54 @@ namespace Z0
         }
 
         [Op]
+        public static string format(byte src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x2"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(sbyte src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x2"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(short src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x4"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(ushort src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x4"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(int src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x8"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(uint src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x8"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(long src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(ulong src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
         public static string bytes(ushort src)
             => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
 

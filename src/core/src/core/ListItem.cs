@@ -32,13 +32,12 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public ListItemRecord ToRecord(string list)
+        public ListItemRecord ToRecord(string type)
         {
-            const string Pattern = "{0,-42} | {1:D6} | {2}";
             var dst = new ListItemRecord();
-            dst.ListName = list;
-            dst.Index = Index;
-            dst.Value =  string.Format("{0}",Content);
+            dst.Id = Index;
+            dst.Type = type;
+            dst.Value = Content?.ToString() ?? RP.Empty;
             return dst;
         }
 

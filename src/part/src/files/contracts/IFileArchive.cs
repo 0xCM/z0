@@ -12,7 +12,7 @@ namespace Z0
     /// Characterizes a file system repository
     /// </summary>
     [Free]
-    public interface IFileArchive : ITextual
+    public interface IFileArchive : ITextual, ITablePaths
     {
         FS.FolderPath Root {get;}
 
@@ -57,7 +57,10 @@ namespace Z0
         FS.FolderPath Datasets(Scope scope)
             => Datasets() + FS.folder(scope.Format());
 
-        FS.FilePath Dataset(Scope scope, string id, FS.FileExt ext)
+        FS.FolderPath Dataset(Scope scope)
+            => Datasets() + FS.folder(scope.Format());
+
+        FS.FilePath DataSource(Scope scope, string id, FS.FileExt ext)
             => Datasets(scope) + FS.file(id,ext);
 
         FS.FilePath Table(Scope scope, TableId id)
@@ -65,15 +68,6 @@ namespace Z0
 
         FS.FilePath Table(Scope scope, TableId id, string suffix)
             => Subdir(scope) + TableName(id,suffix);
-
-        FS.FilePath Table(TableId id)
-            => Root + TableName(id);
-
-        FS.FileName TableName(TableId id)
-            => FS.file(id.Format(), FS.Csv);
-
-        FS.FileName TableName(TableId id, string suffix)
-            => FS.file(string.Format("{0}.{1}", id, suffix), FS.Csv);
 
         FS.FilePath Table<T>(FS.FileExt ext)
             where T : struct
@@ -90,13 +84,5 @@ namespace Z0
         FS.FilePath Table<T>(Scope scope, string suffix)
             where T : struct
                 => Subdir(scope) + TableName<T>(suffix);
-
-        FS.FileName TableName<T>()
-            where T : struct
-                => FS.file(Z0.TableId.identify<T>().Format(), FS.Csv);
-
-        FS.FileName TableName<T>(string suffix)
-            where T : struct
-                => TableName(Z0.TableId.identify<T>(), suffix);
     }
 }

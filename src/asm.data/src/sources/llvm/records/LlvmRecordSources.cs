@@ -10,14 +10,20 @@ namespace Z0.llvm
 
         public Index<TextLine> IntrinsicsDetails;
 
-        public Index<TextLine> X86Details;
+        public Index<TextLine> InstructionDetails;
 
-        public Index<TextLine> X86Summary;
+        public Index<TextLine> InstructionSummary;
 
-        public Index<TextLine> X86RegInfo;
+        public Index<TextLine> Regs;
 
         public Index<TextLine> ValueTypesSummary;
 
         public Index<TextLine> ValueTypesDetails;
+
+        public uint TotalLineCount()
+            => IntrinsicsSummary.Count + IntrinsicsDetails.Count +
+            InstructionDetails.Count + InstructionSummary.Count +
+            Regs.Count + ValueTypesSummary.Count + ValueTypesDetails.Count;
+
     }
 }

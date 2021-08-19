@@ -14,10 +14,10 @@ namespace Z0.Asm
     {
         public readonly struct GpRm
         {
-            public GpRmToken Token {get;}
+            public GpRmComposite Token {get;}
 
             [MethodImpl(Inline)]
-            public GpRm(GpRmToken token)
+            public GpRm(GpRmComposite token)
             {
                 Token = token;
             }
@@ -25,11 +25,11 @@ namespace Z0.Asm
             public K Kind => K.GpRm;
 
             [MethodImpl(Inline)]
-            public static implicit operator GpRm(GpRmToken src)
+            public static implicit operator GpRm(GpRmComposite src)
                 => new GpRm(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator GpRmToken(GpRm src)
+            public static implicit operator GpRmComposite(GpRm src)
                 => src.Token;
 
             [MethodImpl(Inline)]

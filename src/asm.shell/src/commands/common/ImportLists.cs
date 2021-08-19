@@ -9,10 +9,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".import-lists")]
-        Outcome ImportLists(CmdArgs args)
+        void ImportLists(string dataset, string dstid)
         {
-            var dataset = arg(args,0).Value;
             var input = DataSources.Datasets(dataset).Files(FS.List);
             var count = input.Length;
             var formatter = Tables.formatter<ListItemRecord>(ListItemRecord.RenderWidths);
@@ -22,7 +20,7 @@ namespace Z0.Asm
                 var name = src.FileName.WithoutExtension.Format();
                 var members = items(src.ReadText().SplitClean(Chars.Comma).Select(x => x.Trim()).Where(text.nonempty).ToReadOnlySpan()).View;
                 var mCount = members.Length;
-                var dst = TableWs().Subdir("lists") + src.FileName.ChangeExtension(FS.Csv);
+                var dst = TableWs().Subdir(dstid) + src.FileName.ChangeExtension(FS.Csv);
                 using var writer = dst.AsciWriter();
                 writer.WriteLine(formatter.FormatHeader());
                 for(var j=0; j<mCount; j++)
@@ -33,8 +31,6 @@ namespace Z0.Asm
                 }
                 Write(FS.flow(src,dst));
             }
-
-            return true;
         }
     }
 }

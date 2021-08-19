@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using Z0.llvm;
 
     public static partial class XSvc

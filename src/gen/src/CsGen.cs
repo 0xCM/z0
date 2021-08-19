@@ -8,4 +8,11 @@ namespace Z0
     {
         public static EnumGenerator EnumGenerator => new();
     }
+
+
+    public static class XSvc
+    {
+        public static Generators Generators(this IWfRuntime wf)
+            => Z0.Generators.create(wf);
+    }
 }

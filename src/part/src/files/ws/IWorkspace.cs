@@ -13,6 +13,13 @@ namespace Z0
         FS.FolderPath DataDir()
             => Root + FS.folder(data);
 
+        FS.FilePath LlvmTable(string id)
+            => Root + FS.folder(llvm) + FS.file(id, FS.Csv);
+
+        FS.FilePath LlvmTable<T>()
+            where T : struct
+                => Root + FS.folder(llvm) + TableFile<T>();
+
         FS.FolderPath SrcDir()
             => Root + FS.folder(src);
 

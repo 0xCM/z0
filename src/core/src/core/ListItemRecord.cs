@@ -13,12 +13,12 @@ namespace Z0
 
         public const byte FieldCount = 3;
 
-        public Identifier ListName;
+        public uint Id;
 
-        public uint Index;
+        public Identifier Type;
 
         public TextBlock Value;
 
-        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{42,12,2};
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{12,42,2};
     }
 }

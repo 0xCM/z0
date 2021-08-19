@@ -9,26 +9,15 @@ namespace Z0
 
     using static Root;
     using static core;
+
     partial class text
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T copy<T>(ReadOnlySpan<char> src, ref T dst)
             where T : unmanaged
-                => ref TextTools.copy(src, ref dst);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T copyfill<T>(ReadOnlySpan<char> src, char c, ref T dst)
-            where T : unmanaged
         {
-            TextTools.copy(src, ref dst);
-            var count = src.Length;
-            var capacity = size<T>()/2;
-            if(count < capacity)
-            {
-                ref var target = ref seek(@as<T,char>(dst),count);
-                for(var i=count; i<capacity; i++)
-                    seek(target,i) = c;
-            }
+            var count = (uint)min(src.Length, size<T>()/2);
+            copy(first(src), ref @as<T,char>(dst), count);
             return ref dst;
         }
 
@@ -54,13 +43,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint copy(ReadOnlySpan<char> src, ref uint i, Span<char> dst)
+        static void copy(in byte src, ref byte dst, uint count)
         {
-            var count = src.Length;
-            var counter = 0u;
-            for(var j=0; j<count; j++, counter++)
-                seek(dst, i++) = skip(src, j);
-            return counter;
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(src,i);
         }
+
+        [MethodImpl(Inline)]
+        static void copy<S,T>(in S src, ref T dst, uint srcCount, uint dstOffset = 0)
+            where S: unmanaged
+            where T :unmanaged
+                => copy(core.u8(src), ref core.uint8(ref seek(dst, dstOffset)), srcCount*size<S>());
     }
 }

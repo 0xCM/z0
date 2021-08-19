@@ -19,13 +19,16 @@ namespace Z0.Asm
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op]
+        public static AsmOpCodeBits bits()
+            => new AsmOpCodeBits(0);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+         [MethodImpl(Inline), Op, Closures(Closure)]
          public static AsmOcToken<K> token<K>(AsmOcTokenKind kind, K value)
             where K : unmanaged
                 => new AsmOcToken<K>(kind,value);
         [Op]
-        public static ReadOnlySpan<Token<DispToken>> DispTokens()
+         public static ReadOnlySpan<Token<DispToken>> DispTokens()
             => Tokens.tokenize<DispToken>();
 
         [Op]

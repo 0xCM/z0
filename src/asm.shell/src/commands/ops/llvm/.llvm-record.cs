@@ -10,66 +10,15 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static llvm.MC;
-
-    public struct MnemonicLength
-    {
-        public AsmId Id;
-
-        public byte Length;
-
-        public MnemonicLength(AsmId id)
-        {
-            Id = id;
-            Length = 0;
-        }
-
-        public string Format()
-            => string.Format(RP.attrib(Id.ToString(), Length));
-
-        public override string ToString()
-            => Format();
-
-        public static implicit operator Paired<AsmId,byte>(MnemonicLength src)
-            => (src.Id,src.Length);
-    }
 
     partial class AsmCmdService
     {
-        [CmdOp(".llvm-monics")]
-        Outcome LLvmMonics(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var mc = MC.calcs();
-            var count = mc.AsmCount;
-            var length = 0;
-            for(ushort i=0; i<count; i++)
-            {
-                var monic = mc.Monic((AsmId)i);
-
-            }
-
-            return result;
-        }
-
-        [CmdOp(".llvm-data")]
-        Outcome LlvmDataLoad(CmdArgs args)
-        {
-            var dst = new LlvmRecordSources();
-            var svc = Wf.LlvmDatasets(DataSources);
-            var result = svc.Load(LlvmDatasetKind.X86 | LlvmDatasetKind.Details, ref dst);
-            result.OnSuccess(path => Write(path.ToUri().Format(), dst.X86Details.Count));
-            result = svc.Load(LlvmDatasetKind.X86 | LlvmDatasetKind.Summary, ref dst);
-            result.OnSuccess(path => Write(path.ToUri().Format(), dst.X86Summary.Count));
-            return result;
-        }
-
         [CmdOp(".llvm-record")]
         Outcome LlvmRecord(CmdArgs args)
         {
             var result = Outcome.Success;
             var match = arg(args,0).Value;
-            var src = DataSources.Dataset("llvm.tblgen.records", "X86.X86.td-details", FS.Txt);
+            var src = DataSources.DataSource(LlvmDatasetNames.TblgenRecords, LlvmDataSourceNames.X86Details, FS.Txt);
             using var reader = src.Utf8LineReader();
             var ParsingRecord = false;
             var ParsingFields = false;
@@ -138,9 +87,7 @@ namespace Z0.Asm
             Emitted(dst);
 
             if(src.Fields.Count != 0)
-            {
                 iter(src.Fields, f => Write(f));
-            }
          }
     }
 }

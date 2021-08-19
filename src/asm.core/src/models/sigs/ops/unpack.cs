@@ -4,43 +4,35 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
-    using static core;
-
-    using K = AsmSigTokenKind;
-
     partial class AsmSigs
     {
         [Op]
-        public static Span<AsmSigToken> unpack(GpRmToken src)
+        public static void decompose(GpRmComposite src, out GpRegToken gp, out MemToken m)
         {
-            var storage = 0u;
-            var count = 0;
-            var buffer = recover<AsmSigToken>(bytes(storage));
+            gp = default;
+            m = default;
             switch(src)
             {
-                case GpRmToken.r:
-                    seek(buffer,0) = token(K.GpReg, GpRegToken.reg);
+                case GpRmComposite.r:
+                    gp = GpRegToken.reg;
                 break;
-                case GpRmToken.rm8:
-                    seek(buffer,0) = token(K.GpReg, GpRegToken.r8);
-                    seek(buffer,1) = token(K.Mem, MemToken.m8);
+                case GpRmComposite.rm8:
+                    gp = GpRegToken.r8;
+                    m = MemToken.m8;
                 break;
-                case GpRmToken.rm16:
-                    seek(buffer,0) = token(K.GpReg, GpRegToken.r16);
-                    seek(buffer,1) = token(K.Mem, MemToken.m16);
+                case GpRmComposite.rm16:
+                    gp = GpRegToken.r16;
+                    m = MemToken.m16;
                 break;
-                case GpRmToken.rm32:
-                    seek(buffer,0) = token(K.GpReg, GpRegToken.r32);
-                    seek(buffer,1) = token(K.Mem, MemToken.m32);
+                case GpRmComposite.rm32:
+                    gp = GpRegToken.r32;
+                    m = MemToken.m32;
                 break;
-                case GpRmToken.rm64:
-                    seek(buffer,0) = token(K.GpReg, GpRegToken.r64);
-                    seek(buffer,1) = token(K.Mem, MemToken.m64);
+                case GpRmComposite.rm64:
+                    gp = GpRegToken.r64;
+                    m =  MemToken.m64;
                 break;
             }
-            return slice(buffer,0,count);
         }
     }
 }

@@ -57,22 +57,5 @@ namespace Z0
             for(var i=0; i<count; i++)
                 f(i, skip(input,i));
         }
-
-        /// <summary>
-        /// Appplies an action for each element in a source span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="f">The receiver</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void iteri<T>(IEnumerable<T> src, Action<int,T> f)
-        {
-            var items = src.Array().ToReadOnlySpan();
-            ref readonly var input = ref first(items);
-            int count = items.Length;
-
-            for(byte i=0; i<count; i++)
-                f(i, skip(input,i));
-        }
     }
 }

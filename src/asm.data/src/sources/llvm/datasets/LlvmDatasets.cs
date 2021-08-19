@@ -6,11 +6,11 @@ namespace Z0.llvm
 {
     using Z0.Asm;
 
+    using static LlvmDataSourceNames;
     using static LlvmDatasetNames;
 
     public class LlvmDatasets : Service<LlvmDatasets>
     {
-
         IWorkspace Ws;
 
         public LlvmDatasets WithSource(IWorkspace ws)
@@ -38,7 +38,7 @@ namespace Z0.llvm
                         break;
                     }
                 break;
-                case LlvmDatasetKind.X86:
+                case LlvmDatasetKind.Instructions:
                     switch(detail)
                     {
                         case 0:
@@ -49,7 +49,7 @@ namespace Z0.llvm
                         break;
                     }
                 break;
-                case LlvmDatasetKind.X86Regs:
+                case LlvmDatasetKind.Regs:
                         file = FS.file(X86Regs, FS.Txt);
                 break;
                 case LlvmDatasetKind.ValueTypes:
@@ -65,7 +65,7 @@ namespace Z0.llvm
                 break;
             }
 
-            return file.IsNonEmpty ? sources.Datasets(LlvmDatasetScope) + file : FS.FilePath.Empty;
+            return file.IsNonEmpty ? sources.Datasets(TblgenRecords) + file : FS.FilePath.Empty;
         }
 
         public Outcome<FS.FilePath> Load(LlvmDatasetKind kind, ref LlvmRecordSources dst)
@@ -104,14 +104,14 @@ namespace Z0.llvm
                         break;
                     }
                 break;
-                case LlvmDatasetKind.X86:
+                case LlvmDatasetKind.Instructions:
                     switch(detail)
                     {
                         case 1:
                             {
                                 path = LlvmDatasets.path(sources, single | LlvmDatasetKind.Details);
                                 using var reader = path.Utf8LineReader();
-                                dst.X86Details = reader.ReadAll().ToArray();
+                                dst.InstructionDetails = reader.ReadAll().ToArray();
                             }
                         break;
                     }
@@ -121,16 +121,16 @@ namespace Z0.llvm
                             {
                                 path = LlvmDatasets.path(sources, single | LlvmDatasetKind.Summary);
                                 using var reader = path.Utf8LineReader();
-                                dst.X86Summary = reader.ReadAll().ToArray();
+                                dst.InstructionSummary = reader.ReadAll().ToArray();
                             }
                         break;
                     }
                 break;
-                case LlvmDatasetKind.X86Regs:
+                case LlvmDatasetKind.Regs:
                             {
                                 path = LlvmDatasets.path(sources,single);
                                 using var reader = path.Utf8LineReader();
-                                dst.X86RegInfo = reader.ReadAll().ToArray();
+                                dst.Regs = reader.ReadAll().ToArray();
                             }
                 break;
                 case LlvmDatasetKind.ValueTypes:

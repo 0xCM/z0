@@ -14,6 +14,10 @@ namespace Z0.Asm
                 return result;
 
             result = EmitAsmForms();
+            if(result.Fail)
+                return result;
+
+            result = GenSdmOpCodeStrings();
             return result;
         }
     }

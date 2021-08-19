@@ -20,14 +20,5 @@ namespace Z0
             seek(dst, i++) = bitchar(src, 0);
             return i - i0;
         }
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> render8x2(byte src)
-        {
-            var dst = CharBlock2.Null.Data;
-            var i=0u;
-            render8x2(src, ref i, dst);
-            return dst;
-        }
     }
 }

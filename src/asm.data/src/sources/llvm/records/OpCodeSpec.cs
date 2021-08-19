@@ -10,7 +10,7 @@ namespace Z0.llvm
     [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
     public struct OpCodeSpec : IRecord<OpCodeSpec>, IComparable<OpCodeSpec>
     {
-        public const string TableId = "llvm.opcodes";
+        public const string TableId = LlvmTableNames.opcodes;
 
         public const byte FieldCount = 5;
 

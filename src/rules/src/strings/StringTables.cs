@@ -17,7 +17,29 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static void emit(StringTableSpec src, StreamWriter dst)
+        public static StringTable create(ReadOnlySpan<string> lines, string name, char? delimiter = null)
+        {
+            //var lines = src.ReadLines().View;
+            var buffer = list<string>();
+            for(var i=0; i<lines.Length; i++)
+            {
+                ref readonly var line = ref skip(lines,i);
+                buffer.AddRange(line.SplitClean(delimiter.Value).Select(x => x.Trim()));
+            }
+            var entries = buffer.ViewDeposited();
+            var table = StringTables.create(name, entries);
+            var count = Require.equal(buffer.Count, (int)table.EntryCount);
+            for(var i=0u; i<count; i++)
+            {
+                var data = table[i];
+                ref readonly var s0 = ref skip(entries,i);
+                var s1 = new string(data);
+                Require.equal(s0, s1);
+            }
+            return table;
+        }
+
+        public static void gencode(StringTableSpec src, StreamWriter dst)
         {
             var entries = src.Entries;
             var count = entries.Length;
@@ -27,10 +49,24 @@ namespace Z0
             dst.WriteLine();
             dst.WriteLine(string.Format("    using static {0};", "core"));
             dst.WriteLine();
-
             dst.WriteLine(StringTables.create(src.TableName, src.Entries).Format(4));
-
             dst.WriteLine(Chars.RBrace);
+        }
+
+        [Op]
+        public static uint genrows(StringTableSpec src, Span<StringTableRow> dst)
+        {
+            var entries = src.Entries;
+            var count = (uint)min(entries.Length,dst.Length);
+            for(var j=0; j<count; j++)
+            {
+                ref var row = ref seek(dst,j);
+                ref readonly var entry = ref skip(entries,j);
+                row.EntryIndex = entry.Index;
+                row.EntryName = entry.Content;
+                row.TableName = src.TableName;
+            }
+            return count;
         }
 
         public static StringTableSpec specify(Identifier ns, Identifier table, ListItem<string>[] entries)

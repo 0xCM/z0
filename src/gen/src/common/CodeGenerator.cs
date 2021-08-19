@@ -11,12 +11,7 @@ namespace Z0
 
     using static Root;
 
-    public interface ICodeGenerator
-    {
-        string Generate();
-    }
-
-    public class CodeGenerator : ICodeGenerator
+    public class CodeGenerator : Generator, ICodeGenerator
     {
         const string HeaderLine1 = "//-----------------------------------------------------------------------------";
 

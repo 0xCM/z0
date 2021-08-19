@@ -11,45 +11,6 @@ namespace Z0.Asm
     {
         const string group = "asmsigs";
 
-        public readonly struct Rel8 : IAsmRel<Rel8>
-        {
-            public RelToken Kind => RelToken.rel8;
-
-            public string Name => "rel8";
-
-            public string Format()
-                => Name;
-
-            public override string ToString()
-                => Format();
-        }
-
-        public readonly struct Rel16: IAsmRel<Rel16>
-        {
-            public RelToken Kind => RelToken.rel16;
-
-            public string Name => "rel16";
-
-            public string Format()
-                => Name;
-
-            public override string ToString()
-                => Format();
-        }
-
-        public readonly struct Rel32: IAsmRel<Rel32>
-        {
-            public RelToken Kind => RelToken.rel32;
-
-            public string Name => "rel32";
-
-            public string Format()
-                => Name;
-
-            public override string ToString()
-                => Format();
-        }
-
         [SymSource(group), Alias("decorator")]
         public enum DecoratorToken : byte
         {
@@ -174,7 +135,7 @@ namespace Z0.Asm
             [Symbol("xmm3", "A third xmm register operand")]
             xmm3,
 
-            [Symbol("ymm", "A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are available in 64-bit mode")]
+            [Symbol("ymm", "A YMM register")]
             ymm,
 
             [Symbol("ymm1", "A first ymm register operand")]
@@ -259,10 +220,10 @@ namespace Z0.Asm
         [SymSource(group), Alias("mem")]
         public enum MemToken : byte
         {
-            [Symbol("m", "An operand in memory of width 16, 32 or 64 bits")]
+            [Symbol("m", "A memory operand of width 16, 32 or 64 bits")]
             m,
 
-            [Symbol("mem")]
+            [Symbol("mem", "A memory operand of width 16, 32 or 64 bits")]
             mem,
 
             [Symbol("m8", "A byte operand in memory ( usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. In 64-bit mode, it is pointed to by the RSI or RDI registers")]
@@ -300,8 +261,8 @@ namespace Z0.Asm
             m16x64,
         }
 
-        [SymSource(group), Alias("gpRm")]
-        public enum GpRmToken : byte
+        [SymSource(group)]
+        public enum GpRmComposite : byte
         {
             [Symbol("/r", "Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand")]
             r,
@@ -318,6 +279,7 @@ namespace Z0.Asm
             [Symbol("r/m64", "A quadword general-purpose register or memory operand used for instructions whose operand-size attribute is 64 bits when using REX.W. Quadword general-purpose registers are: RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP, R8–R15; these are available only in 64-bit mode. The contents of memory are found at the address provided by the effective address computation")]
             rm64,
         }
+
 
         [SymSource(group), Alias("vRm")]
         public enum VecRmToken : byte
@@ -363,16 +325,16 @@ namespace Z0.Asm
         [SymSource(group), Alias("moffs")]
         public enum MoffsToken : byte
         {
-            [Symbol("moffs8")]
+            [Symbol("moffs8", "A segbase-relative address of width 32")]
             moffs8,
 
-            [Symbol("moffs16")]
+            [Symbol("moffs16", "A segbase-relative address of width 16")]
             moffs16,
 
-            [Symbol("moffs32")]
+            [Symbol("moffs32", "A segbase-relative address of width 32")]
             moffs32,
 
-            [Symbol("moffs64")]
+            [Symbol("moffs64", "A segbase-relative address of width 64")]
             moffs64,
         }
 

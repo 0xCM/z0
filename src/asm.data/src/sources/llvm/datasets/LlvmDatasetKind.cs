@@ -10,9 +10,9 @@ namespace Z0.llvm
 
         Intrinsics = 1,
 
-        X86 = 2,
+        Instructions = 2,
 
-        X86Regs = 4,
+        Regs = 4,
 
         ValueTypes = 8,
 

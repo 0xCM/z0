@@ -62,7 +62,7 @@ namespace Z0.llvm
             }
 
             [MethodImpl(Inline), Op]
-            ReadOnlySpan<char> Monic(ushort id)
+            ReadOnlySpan<char> Monic(uint id)
             {
                 var opcode = OpCode(id);
                 var i = offset(opcode);
@@ -77,7 +77,19 @@ namespace Z0.llvm
 
             [MethodImpl(Inline), Op]
             public string Monic(AsmId id)
-                => canonicalize(Monic((ushort)id));
+                => canonicalize(Monic(index(id)));
+
+            public Index<string> Monics()
+            {
+                var count = AsmCount;
+                var length = 0;
+                var set = hashset<string>();
+                for(ushort i=0; i<count; i++)
+                    set.Add(Monic((AsmId)i));
+                Index<string> distinct = set.Array();
+                distinct.Sort();
+                return distinct;
+            }
 
             [MethodImpl(Inline), Op]
             public ReadOnlySpan<AsmId> AsmId()
@@ -85,10 +97,10 @@ namespace Z0.llvm
 
             [MethodImpl(Inline), Op]
             public ref readonly Sym Sym(AsmId id)
-                => ref skip(_AsmIdSym, (ushort)id);
+                => ref skip(_AsmIdSym, u32(id));
 
             [MethodImpl(Inline), Op]
-            public ulong OpCode(ushort id)
+            public ulong OpCode(uint id)
             {
                 ulong Bits = 0;
                 Bits |= (ulong)skip(OpInfo0, id) << 0;
@@ -98,7 +110,7 @@ namespace Z0.llvm
 
             [MethodImpl(Inline), Op]
             public Hex64 OpCode(AsmId id)
-                => OpCode((ushort)id);
+                => OpCode(u32(id));
 
             [MethodImpl(Inline), Op]
             public uint MonicOffset(AsmId id)
@@ -107,6 +119,10 @@ namespace Z0.llvm
             [MethodImpl(Inline), Op]
             public uint MonicLength(AsmId id)
                 => AsmLength(offset(OpCode(id)));
+
+            [MethodImpl(Inline)]
+            static uint index(AsmId id)
+                => u32(id);
 
             [MethodImpl(Inline), Op]
             public static uint offset(ulong bits)
@@ -131,31 +147,22 @@ namespace Z0.llvm
             [Op]
             static string canonicalize(ReadOnlySpan<char> src)
             {
-                const string NA = "NA";
-                var result = text.format(src).Replace(Chars.Tab,Chars.Space).Trim();
-                if(empty(result))
-                    result = NA;
-                else
-                {
-                    var chars = text.span(result);
-                    var count = chars.Length;
-                    for(var i=0; i<count; i++)
-                    {
-                        ref readonly var c = ref skip(chars,i);
-                        switch(c)
-                        {
-                            case Chars.Hash:
-                            case Chars.Comma:
-                            case Chars.LBrace:
-                            case Chars.Dollar:
-                            case Chars.Underscore:
-                            case Chars.Space:
-                                result = NA;
-                            break;
-                        }
-                    }
-                }
-                return result;
+                var length = src.Length;
+                if(length == 0)
+                    return RP.Empty;
+
+                var result = text.format(src).Replace(Chars.Tab, Chars.Space).Trim();
+                if(text.empty(result))
+                    return RP.Empty;
+
+                if(result.StartsWith(Chars.Hash))
+                    return RP.Empty;
+
+                return
+                    result.Replace(" ax,", EmptyString)
+                          .Replace(" al,", EmptyString)
+                          .Replace(" eax,", EmptyString)
+                          .Replace(" rax,",EmptyString).Replace(" st,", String.Empty);
             }
         }
     }

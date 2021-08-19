@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static Chars;
     using static core;
+    using SR = SymbolicRender;
 
     [ApiHost]
     public readonly struct AsmRender
@@ -102,7 +103,7 @@ namespace Z0.Asm
             var i=0u;
             Hex.render(LowerCase,(Hex64)src.Offset, ref i, dst);
             seek(dst,i++) = Chars.Space;
-            text.copy(src.Statement.Data, ref i, dst);
+            SR.copy(src.Statement.Data, ref i, dst);
             return i;
         }
 

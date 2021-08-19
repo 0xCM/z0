@@ -70,5 +70,37 @@ namespace Z0
         public static string FormatHex<T>(this IEnumerable<T> src, char sep, bool specifier)
             where T : unmanaged
                 => src.ToSpan().FormatHex(sep, specifier);
+
+        [Op]
+        public static string FormatHex(this sbyte src, int digits, bool prespec = false, bool postspec = false)
+            => HexFormat.format(src, digits, prespec, postspec);
+
+        [Op]
+        public static string FormatHex(this byte src, int digits, bool prespec = false, bool postspec = false)
+            => HexFormat.format(src, digits, prespec, postspec);
+
+        [Op]
+        public static string FormatHex(this short src, int digits, bool prespec = false, bool postspec = false)
+            => HexFormat.format(src, digits, prespec, postspec);
+
+        [Op]
+        public static string FormatHex(this ushort src, int digits, bool prespec = false, bool postspec = false)
+            => HexFormat.format(src, digits, prespec, postspec);
+
+        [Op]
+        public static string FormatHex(this int src, int digits, bool prespec = false, bool postspec = false)
+            => HexFormat.format(src, digits, prespec, postspec);
+
+        [Op]
+        public static string FormatHex(this uint src, int digits, bool prespec = false, bool postspec = false)
+            => HexFormat.format(src, digits, prespec, postspec);
+
+        [Op]
+        public static string FormatHex(this ulong src, int digits, bool prespec = false, bool postspec = false)
+            => HexFormat.format(src, digits, prespec, postspec);
+
+        [Op]
+        public static string FormatHex(this long src, int digits, bool prespec = false, bool postspec = false)
+            => HexFormat.format(src, digits, prespec, postspec);
     }
 }

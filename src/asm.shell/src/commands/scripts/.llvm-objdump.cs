@@ -8,8 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".llvm-objdump")]
         Outcome LlvmObjDump(CmdArgs args)
-        {
-            return DumpObjects();
-        }
+            => DumpObjects();
     }
 }
