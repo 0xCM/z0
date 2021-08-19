@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Root;
-    using static core;
 
     partial class text
     {
@@ -20,11 +16,17 @@ namespace Z0
         [Op]
         public static string left(string src, int index)
         {
-            var length = src?.Length ?? 0;
-            if(length == 0 || index < 0 || index > length - 1)
+            if(empty(src) || index < 0)
                 return EmptyString;
-            else
-                return slice(src, 0, index);
+
+            var length = src.Length;
+            if(length == 0)
+                return EmptyString;
+
+            if(index > length - 1)
+                return EmptyString;
+
+            return slice(src, 0, index);
         }
 
         [Op]
@@ -35,16 +37,6 @@ namespace Z0
                 return left(src,i);
             else
                 return EmptyString;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> left(ReadOnlySpan<char> src, int index)
-        {
-            var length = src.Length;
-            if(length == 0 || index < 0 || index > length - 1)
-                return default;
-            else
-                return core.slice(src,0,index);
         }
     }
 }

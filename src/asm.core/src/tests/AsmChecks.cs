@@ -4,19 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
     [ApiHost]
     public readonly partial struct AsmChecks
     {
-        [Op]
-        public static string format(in AsmSizeCheck src)
-        {
-            const string Pattern = "{0} | Input={1,-16} | Output={2,-16} | Expect={3,-16} | {4}";
-            return string.Format(Pattern,
-                nameof(AsmSizeCheck), src.Input, src.Expect, src.Actual, src.Passed ? "Pass" : "Fail");
-        }
-
         [Op]
         public static bit check(ref AsmSizeCheck src)
         {

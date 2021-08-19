@@ -18,7 +18,58 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
-            result = TestAsmWidths();
+            var src = FS.path(@"C:\Dev\ws\asm\.out\dumps\kmov.obj.asm");
+            var tool = Wf.LlvmObjDump();
+            result = tool.ParseDump(src, out var rows);
+            if(result.Fail)
+                return result;
+
+            var formatter = Tables.formatter<ObjDumpRow>(ObjDumpRow.RenderWidths);
+            var count = rows.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows, i);
+                Write(formatter.Format(row));
+
+            }
+
+            return result;
+        }
+
+        Outcome ImportDumps()
+        {
+            var result = Outcome.Success;
+            var tool = Wf.LlvmObjDump();
+            var src = State.Files(FS.Asm).View;
+            var count = src.Length;
+            var dst = AsmWs.DumpOut() + Tables.filename<ObjDumpRow>();
+            var formatter = Tables.formatter<ObjDumpRow>(ObjDumpRow.RenderWidths);
+            var flow = EmittingTable<ObjDumpRow>(dst);
+            var counter = 0u;
+            using var writer = dst.AsciWriter();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(src,i);
+                result = tool.ParseDump(path, out var rows);
+                if(result.Fail)
+                {
+                    Error(result.Message);
+                    continue;
+                }
+
+                for(var j=0; j<rows.Length; j++)
+                {
+                    ref readonly var row = ref skip(rows,j);
+                    if(row.IsBlockStart)
+                        continue;
+
+                    writer.WriteLine(formatter.Format(row));
+                    counter++;
+                }
+
+            }
+            EmittedTable(flow,counter);
 
             return result;
         }
@@ -38,41 +89,6 @@ namespace Z0.Asm
                 result &= pass;
                 Write(test, pass ? FlairKind.Status : FlairKind.Error);
             }
-
-            // test.Input = AsmSizeKind.@byte;
-            // pass = check(ref test);
-            // result &= pass;
-            // Write(test, pass ? FlairKind.Status : FlairKind.Error);
-
-            // test.Input = AsmSizeKind.word;
-            // pass = check(ref test);
-            // result &= pass;
-            // Write(test, pass ? FlairKind.Status : FlairKind.Error);
-
-            // test.Input = AsmSizeKind.dword;
-            // pass = check(ref test);
-            // result &= pass;
-            // Write(test, pass ? FlairKind.Status : FlairKind.Error);
-
-            // test.Input = AsmSizeKind.qword;
-            // pass = check(ref test);
-            // result &= pass;
-            // Write(test, pass ? FlairKind.Status : FlairKind.Error);
-
-            // test.Input = AsmSizeKind.zmmword;
-            // pass = check(ref test);
-            // result &= pass;
-            // Write(test, pass ? FlairKind.Status : FlairKind.Error);
-
-            // test.Input = AsmSizeKind.ymmword;
-            // pass = check(ref test);
-            // result &= pass;
-            // Write(test, pass ? FlairKind.Status : FlairKind.Error);
-
-            // test.Input = AsmSizeKind.zmmword;
-            // pass = check(ref test);
-            // result &= pass;
-            // Write(test, pass ? FlairKind.Status : FlairKind.Error);
 
             return (result, result ? "Pass" : "Fail");
         }

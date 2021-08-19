@@ -19,10 +19,17 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string right(string src, int index)
         {
-            if(index < src.Length - 1)
+            if(empty(src) || index < 0)
+                return EmptyString;
+
+            var length = src.Length;
+            if(length == 0)
+                return EmptyString;
+
+            if(index < length - 1)
                 return slice(src, index + 1);
             else
-                return default;
+                return EmptyString;
         }
 
         [Op]
@@ -43,15 +50,6 @@ namespace Z0
                 return right(src,i);
             else
                 return EmptyString;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> right(ReadOnlySpan<char> src, int index)
-        {
-            if(index < src.Length - 1)
-                return core.slice(src, index + 1);
-            else
-                return default;
         }
     }
 }

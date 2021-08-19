@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
     partial class AsmCmdService
     {
-        Outcome DumpObjects()
+        [CmdOp(".dump-objects")]
+        Outcome DumpObjects(CmdArgs args)
         {
             var result = Outcome.Success;
             var src = State.Files(FS.Obj, FS.Exe, FS.Lib, FS.Dll).View;
@@ -17,6 +16,20 @@ namespace Z0.Asm
             var outdir = GetToolOut(tool);
             var svc = Wf.LlvmObjDump();
             return svc.DumpObjects(src,outdir, response => Write(response));
+        }
+
+        Outcome LlvmObjDump(FS.FilePath src, FS.FolderPath dst)
+        {
+            var tool = Toolspace.llvm_objdump;
+            var cmd = Cmd.cmdline(ToolWs().Script(tool, "run").Format(PathSeparator.BS));
+            var vars = WsVars.create();
+            vars.DstDir = dst;
+            vars.SrcDir = src.FolderPath;
+            vars.SrcFile = src.FileName;
+            var result = Run(cmd, vars.ToCmdVars(), out var response);
+            if(result)
+                ParseCmdResponse(response);
+            return result;
         }
     }
 }

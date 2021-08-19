@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".llvm-objdump")]
-        Outcome LlvmObjDump(CmdArgs args)
-            => DumpObjects();
+        [CmdOp(".dump-import")]
+        Outcome ImportDumps(CmdArgs args)
+            => ImportDumps();
     }
 }

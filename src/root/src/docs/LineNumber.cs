@@ -54,6 +54,7 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Value;
+
         public static LineNumber Empty => default;
 
         [MethodImpl(Inline)]
@@ -63,5 +64,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator uint(LineNumber src)
             => src.Value;
+
+        [MethodImpl(Inline)]
+        public static LineNumber operator ++(LineNumber src)
+            => new LineNumber(src.Value + 1);
     }
 }

@@ -49,7 +49,7 @@ namespace Z0.Asm
 
             Files(output.ToArray(), false);
 
-            return DumpObjects();
+            return DumpObjects(CmdArgs.Empty);
         }
     }
 }

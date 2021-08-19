@@ -67,7 +67,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data;
+            => Text;
 
         public string Format(int? pad)
             => pad != null ? string.Format(RP.pad(pad.Value), Data) : Data;

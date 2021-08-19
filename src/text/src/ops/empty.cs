@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         [MethodImpl(Inline)]
         public static bool empty(string src)
-            => TextTools.empty(src);
+            => string.IsNullOrEmpty(src);
 
         /// <summary>
         /// Tests whether a specified <see cref='char'/> matches the <see cref='Chars.Null'/> character
@@ -25,6 +25,6 @@ namespace Z0
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
         public static bool empty(char src)
-            => TextTools.empty(src);
+            => src == Chars.Null;
     }
 }
