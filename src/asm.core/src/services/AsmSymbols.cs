@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static RegTokens;
+    using static AsmRegTokens;
     using static SdmModels;
 
     [ApiHost]

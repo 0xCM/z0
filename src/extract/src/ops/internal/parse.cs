@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static core;
     using static ExtractTermCode;
 
     using EP = EncodingParser;
@@ -50,7 +49,6 @@ namespace Z0
             {
                 dst = ApiMemberCode.Empty;
                 return false;
-
             }
         }
 

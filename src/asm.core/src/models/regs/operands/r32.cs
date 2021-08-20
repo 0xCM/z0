@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndexCode;
     using G = AsmOperands.r32;
-    using K = RegTokens.Gp32Reg;
+    using K = AsmRegTokens.Gp32Reg;
     using api = AsmRegs;
 
     partial struct AsmOperands
@@ -114,7 +114,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator K(edx src)
                 => (K)src.Index;
-
         }
 
         public struct ebx : IRegOp32<ebx>

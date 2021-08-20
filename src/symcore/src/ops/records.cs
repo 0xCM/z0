@@ -19,6 +19,7 @@ namespace Z0
             var dst = new SymLiteral();
             dst.Component = src.Component.SimpleName;
             dst.Type = src.Type;
+            dst.Class = src.Class;
             dst.Position = src.Position;
             dst.Name = src.Name;
             dst.Symbol = src.Symbol;

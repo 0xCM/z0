@@ -9,12 +9,9 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsmLayouts;
-
-    using SR = SymbolicRender;
 
     [ApiHost]
-    public class AsmBits
+    public partial class AsmBits
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -53,54 +50,6 @@ namespace Z0.Asm
             }
         }
 
-        [Op]
-        public static uint bitfield3x3x2(Span<char> dst)
-        {
-            var f0 = BitSeq.bits(n3);
-            var f1 = BitSeq.bits(n3);
-            var f2 = BitSeq.bits(n2);
-            var m=0u;
-            for(var k=0; k<f2.Length; k++)
-            {
-                for(var j=0; j<f1.Length; j++)
-                {
-                    for(var i=0; i<f0.Length; i++)
-                    {
-                        var b0 = skip(f0, i);
-                        var b1 = skip(f1, j);
-                        var b2 = skip(f2, k);
-                        var bits = BitNumbers.join(b0,b1,b2);
-                        BitRender.render8(bits, ref m, dst);
-                        seek(dst,m++) = (char)AsciControlSym.CR;
-                        seek(dst,m++) = (char)AsciControlSym.LF;
-                    }
-                }
-            }
-            return m;
-        }
-
-        [Op]
-        public static uint render(in LayoutCore src, Span<char> dst)
-        {
-            var i=0u;
-            seek(dst,i++) = Chars.LBracket;
-            AsmBits.rex(src.Rex, ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            seek(dst,i++) = Chars.Pipe;
-            seek(dst,i++) = Chars.Space;
-            AsmBits.opcode(src.OpCode, ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            seek(dst,i++) = Chars.Pipe;
-            seek(dst,i++) = Chars.Space;
-            AsmBits.modrm(src.ModRm, ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            seek(dst,i++) = Chars.Pipe;
-            seek(dst,i++) = Chars.Space;
-            AsmBits.sib(src.Sib, ref i, dst);
-            seek(dst,i++) = Chars.RBracket;
-            return i;
-        }
-
         [MethodImpl(Inline), Op]
         public static uint vsib(Vsib src, Span<char> dst)
         {
@@ -123,14 +72,6 @@ namespace Z0.Asm
             return i-i0;
         }
 
-        [MethodImpl(Inline), Op]
-        public static uint rex(RexPrefix src, ref uint i, Span<char> dst)
-        {
-            var i0 = i;
-            BitRender.render8x4(src.Encoded, ref  i, dst);
-            return i-i0;
-        }
-
         [Op]
         public static string format(Register src)
         {
@@ -139,26 +80,6 @@ namespace Z0.Asm
             var @class = Bitfields.format<RegClassCode,byte>(src.Class, src.Class.ToString(), 4);
             var width = Enums.field<RegWidthCode,ushort>(src.Width, base10, "Width");
             return string.Format(Pattern, index, @class, width);
-        }
-
-        const string RexFieldPattern = "[W:{0} | R:{1} | X:{2} | B:{3}]";
-
-        [Op]
-        public static string bitfield(RexPrefix src)
-            => string.Format(RexFieldPattern, src.W(), src.R(), src.X(), src.B());
-
-        [MethodImpl(Inline), Op]
-        public static uint sib(Sib src, ref uint i, Span<char> dst)
-        {
-            var i0=i;
-            BitRender.render2(src.Scale(), ref i, dst);
-            SR.copy(FieldSep, ref i, dst);
-
-            BitRender.render3(src.Index(), ref i, dst);
-            SR.copy(FieldSep, ref i, dst);
-
-            BitRender.render3(src.Base(), ref i, dst);
-            return i-i0;
         }
 
         [MethodImpl(Inline), Op]
@@ -188,13 +109,13 @@ namespace Z0.Asm
         }
 
         [Op,Closures(Closure)]
-        public static ReadOnlySpan<char> render<T>(in NamedRegValue<T> src)
+        public static ReadOnlySpan<char> render<T>(in NamedRegValue<T> src, char sep = Chars.Space)
             where T : unmanaged
         {
             if(size<T>() == 1)
                 return BitRender.render8(u8(src.Value));
             else if(size<T>() == 2)
-                return BitRender.render16x8(u16(src.Value));
+                return BitRender.render16x8(u16(src.Value), sep);
             else if(size<T>() == 4)
                 return BitRender.render32x8(u32(src.Value));
             else if(size<T>() == 8)
@@ -227,53 +148,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static uint render8x4(in AsmHexCode src, ref uint i, Span<char> dst)
             => BitRender.renderNx8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
-
-        [Op]
-        public static uint ModRmTable(Span<char> dst)
-        {
-            const string Header = "mod | reg | r/m | hex | bitstring";
-
-            var f0 = BitSeq.bits(n3);
-            var f1 = BitSeq.bits(n3);
-            var f2 = BitSeq.bits(n2);
-            var k=0u;
-            SR.copy(Header, ref k, dst);
-            SR.crlf(ref k, dst);
-
-            for(var c=0u; c<f2.Length; c++)
-            for(var b=0u; b<f1.Length; b++)
-            for(var a=0u; a<f0.Length; a++)
-            {
-                var modrm = AsmEncoder.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
-                AsmBits.modrm(modrm, ref k, dst);
-                SR.crlf(ref k, dst);
-            }
-            return k;
-        }
-
-        public static string bitstring(ModRm src)
-            => string.Format("{0} {1} {2}", BitRender.format2(src.Mod()), BitRender.format3(src.Reg()), BitRender.format3(src.Rm()));
-
-        public static uint modrm(ModRm src, ref uint i, Span<char> dst)
-        {
-            var i0 = i;
-            BitRender.render2(src.Mod(), ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            SR.copy(FieldSep, ref i, dst);
-
-            BitRender.render3(src.Reg(), ref i, dst);
-            SR.copy(FieldSep, ref i, dst);
-
-            BitRender.render3(src.Rm(), ref i, dst);
-            SR.copy(FieldSep, ref i, dst);
-
-            SR.copy(src.Encoded.FormatHex(2), ref i, dst);
-            seek(dst,i++) = Chars.Space;
-            SR.copy(FieldSep, ref i, dst);
-
-            SR.copy(bitstring(src), ref i, dst);
-
-            return i - i0;
-        }
     }
 }

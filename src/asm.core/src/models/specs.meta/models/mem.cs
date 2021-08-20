@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     partial class AsmMetaSpecs
     {
         public readonly struct m8 : IOperand<m8>

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmCodes;
-
     /// <summary>
     /// Characterizes an asm operand representation
     /// </summary>

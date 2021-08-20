@@ -25,9 +25,9 @@ namespace Z0
                 var attrib = type.Tag<SymSourceAttribute>().Require();
                 var alias = type.Tag<AliasAttribute>();
                 if(alias.Exists && alias.Value.AliasList.Length!=0)
-                    seek(dst,i) = new SymType(type, attrib.GroupName, alias.Value.AliasList);
+                    seek(dst,i) = new SymType(type, attrib.SymKind, alias.Value.AliasList);
                 else
-                    seek(dst,i) = new SymType(type, attrib.GroupName);
+                    seek(dst,i) = new SymType(type, attrib.SymKind);
             }
             return new SymTypes(buffer);
         }

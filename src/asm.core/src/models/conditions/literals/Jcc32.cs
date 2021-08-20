@@ -4,57 +4,60 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using K = ConditionCodes.ConditionKind;
+    using E = ConditionCodes.Expressions;
+
     partial struct ConditionCodes
     {
-        [SymSource]
+        [SymSource(K.Jcc32)]
         public enum Jcc32 : byte
         {
-            [Symbol("jo", "Jump near if overflow (OF=1)")]
+            [Symbol("jo", "Jump short if overflow", E.O)]
             JO = 0x80,
 
-            [Symbol("jno", "Jump near if not overflow (OF=0)")]
+            [Symbol("jno", "Jump short if not overflow", E.NO)]
             JNO = 0x81,
 
-            [Symbol("jb", "Jump near if below (CF=1)")]
+            [Symbol("jb", "Jump short if below", E.B)]
             JB = 0x82,
 
-            [Symbol("jnb", "Jump near if not below (CF=0)")]
+            [Symbol("jnb", "Jump short if not below", E.NB)]
             JNB = 0x83,
 
-            [Symbol("jz", "Jump near if zero (ZF = 1)")]
+            [Symbol("jz", "Jump short if zero", E.Z)]
             JZ = 0x84,
 
-            [Symbol("jnz", "Jump near if not zero (ZF=0)")]
+            [Symbol("jnz", "Jump short if not zero", E.NZ)]
             JNZ = 0x85,
 
-            [Symbol("jna", "Jump near if not above (CF=1 | ZF=1)")]
+            [Symbol("jna", "Jump short if not above", E.NA)]
             JNA = 0x86,
 
-            [Symbol("ja", "Jump near if above (CF=0 & ZF=0)")]
+            [Symbol("ja", "Jump short if above", E.A)]
             JA = 0x87,
 
-            [Symbol("js", "Jump near if sign (SF=1)")]
+            [Symbol("js", "Jump short if sign", E.S)]
             JS = 0x88,
 
-            [Symbol("jns", "Jump near if not sign (SF=0)")]
+            [Symbol("jns", "Jump short if not sign", E.NS)]
             JNS = 0x89,
 
-            [Symbol("jpe", "Jump near if parity even (PF=1)")]
+            [Symbol("jpe", "Jump short if parity even", E.PE)]
             JPE = 0x8A,
 
-            [Symbol("jpo", "Jump near if parity odd (PF=0)")]
+            [Symbol("jpo", "Jump short if parity odd", E.PO)]
             JPO = 0x8B,
 
-            [Symbol("jl", "Jump near if less (SF != OF)")]
+            [Symbol("jl", "Jump short if less", E.L)]
             JL = 0x8C,
 
-            [Symbol("jnl", "Jump near if not less (SF=OF)")]
+            [Symbol("jnl", "Jump short if not less", E.NL)]
             JNL = 0x8D,
 
-            [Symbol("jng", "Jump near if not greater (ZF=1 | SF!=OF)")]
+            [Symbol("jng", "Jump short if not greater", E.NG)]
             JNG = 0x8E,
 
-            [Symbol("jnle", "Jump near if not less or equal (ZF=0 & SF=OF)")]
+            [Symbol("jnle", "Jump short if not less or equal", E.NLE)]
             JNLE = 0x8F,
         };
     }

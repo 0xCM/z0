@@ -15,21 +15,21 @@ namespace Z0
 
         readonly Index<string> _Alias;
 
-        public string Group {get;}
+        public string SymKind {get;}
 
         [MethodImpl(Inline)]
-        internal SymType(Type def, string group, string[] alias)
+        internal SymType(Type def, string kind, string[] alias)
         {
             Definition = def;
-            Group = group;
+            SymKind = kind;
             _Alias = alias;
         }
 
         [MethodImpl(Inline)]
-        internal SymType(Type def,string group)
+        internal SymType(Type def, string kind)
         {
             Definition = def;
-            Group = group;
+            SymKind = kind;
             _Alias = sys.empty<string>();
         }
 

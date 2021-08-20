@@ -15,6 +15,8 @@ namespace Z0
 
         public SymIdentity Identity {get;}
 
+        public SymClass Class {get;}
+
         public SymKey Key {get;}
 
         public Identifier Type {get;}
@@ -33,6 +35,7 @@ namespace Z0
         {
             Identity = SymIdentity.Empty;
             Key = default;
+            Class = SymClass.Empty;
             Name = Identifier.Empty;
             Kind = default;
             Expr = SymExpr.Empty;
@@ -41,9 +44,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Sym(SymIdentity id, SymKey index, Identifier type, ulong kind, Identifier name, SymExpr symbol, TextBlock? description = null, bool hidden = false)
+        public Sym(SymIdentity id, SymClass @class, SymKey index, Identifier type, ulong kind, Identifier name, SymExpr symbol, TextBlock? description = null, bool hidden = false)
         {
             Identity = id;
+            Class = @class;
             Key = index;
             Type = type;
             Kind = kind;

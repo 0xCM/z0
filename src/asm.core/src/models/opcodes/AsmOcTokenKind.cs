@@ -36,7 +36,7 @@ namespace Z0.Asm
         /// <summary>
         /// Classifies <see cref='EscapeToken'/> prefix tokens
         /// </summary>
-        EscapePrefix = 5,
+        Escape = 5,
 
         /// <summary>
         /// <summary>

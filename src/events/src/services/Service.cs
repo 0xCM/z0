@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
@@ -44,11 +45,23 @@ namespace Z0
             Env = ctx.Env;
             Paths = new EnvPaths(Env);
             Signal = EventSignals.signal(ctx.EventSink, typeof(H));
+            Initializer((H)this);
             Initialized();
         }
 
         protected virtual void Initialized() {}
 
+        protected Service()
+        {
+            Initializer = (svc) => {};
+        }
+
+        Action<H> Initializer;
+
+        protected Service(Action<H> init)
+        {
+            Initializer = init;
+        }
 
         protected BabbleEvent<T> Babble<T>(T src)
             => Signal.Babble(src);

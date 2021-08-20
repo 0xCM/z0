@@ -8,10 +8,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static Blit;
 
     using I = RegIndexCode;
     using G = AsmOperands.ymm;
-    using K = RegTokens.YmmReg;
+    using K = AsmRegTokens.YmmReg;
     using api = AsmRegs;
 
     partial struct AsmOperands

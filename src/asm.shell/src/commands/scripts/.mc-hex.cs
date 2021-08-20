@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".mc-hex")]
         Outcome McHex(CmdArgs args)
-            => RunAsmScript(arg(args,0), "mc-hex");
+            => RunAsmScript(arg(args,0), AsmScriptId.mc_hex);
     }
 }

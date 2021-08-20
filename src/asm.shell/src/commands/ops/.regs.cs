@@ -4,48 +4,47 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
-    using static RegTokens;
     using static core;
 
     partial class AsmCmdService
     {
-        [CmdOp(".reg-query")]
+        [CmdOp(".regs")]
         Outcome RegQuery(CmdArgs args)
         {
             var result = Outcome.Success;
-            var regs = AsmRegSets.create(Wf);
             var pred = arg(args,0).Value;
-            var selected = default(ReadOnlySpan<RegOp>);
+            var selected = RegSet.Empty;
             switch(pred)
             {
                 case "gp8":
-                    selected = regs.GpGrid().Row(GpRegKind.Gp8);
+                    selected = RegSets.GpRegs(RegWidthCode.W8);
                     break;
                 case "gp16":
-                    selected = regs.GpGrid().Row(GpRegKind.Gp16);
+                    selected = RegSets.GpRegs(RegWidthCode.W16);
                 break;
                 case "gp32":
-                    selected = regs.GpGrid().Row(GpRegKind.Gp32);
+                    selected = RegSets.GpRegs(RegWidthCode.W32);
                 break;
                 case "gp64":
-                    selected = regs.GpGrid().Row(GpRegKind.Gp64);
+                    selected = RegSets.GpRegs(RegWidthCode.W64);
                 break;
                 case "xmm":
-                    selected = regs.XmmRegs();
+                    selected = RegSets.XmmRegs();
                 break;
                 case "ymm":
+                    selected = RegSets.YmmRegs();
                 break;
                 case "zmm":
+                    selected = RegSets.ZmmRegs();
                 break;
                 case "k":
                 case "mask":
+                    selected = RegSets.MaskRegs();
                 break;
             }
 
             var buffer = text.buffer();
-            iter(selected, reg => buffer.AppendFormat("{0} ", reg));
+            iter(selected.View, reg => buffer.AppendFormat("{0} ", reg));
             Write(buffer.Emit());
 
             return result;

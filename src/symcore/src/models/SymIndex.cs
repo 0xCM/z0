@@ -37,6 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public SymIndex Untyped()
             => this;
+
         public ref readonly Sym this[uint index]
         {
             [MethodImpl(Inline)]

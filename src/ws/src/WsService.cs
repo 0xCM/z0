@@ -4,18 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
     public abstract class WsService<T> : Service<T>, IWsService<T>
         where T : WsService<T>,new()
     {
         protected WsService()
+            : base(Init)
         {
-            Dev = DevWs.create(Env.DevWs);
-            Ws = Dev;
+            // Dev = DevWs.create(Env.DevWs);
+            // Ws = Dev;
+        }
+
+        static void Init(T svc)
+        {
+            svc.Dev = DevWs.create(svc.Env.DevWs);
+            svc.Ws = svc.Dev;
         }
 
         protected DevWs Dev;

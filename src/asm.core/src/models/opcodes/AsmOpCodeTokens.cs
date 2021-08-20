@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using K = AsmOcTokenKind;
+
     public readonly struct AsmOpCodeTokens
     {
-        [SymSource]
+        [SymSource(K.Escape)]
         public enum EscapeToken : ushort
         {
             [Symbol("0F")]
@@ -19,20 +21,20 @@ namespace Z0.Asm
             x0F3A = 0x0F3A,
         }
 
-        [SymSource]
-        public enum LegacyPrefixToken : byte
-        {
-            [Symbol("66")]
-            x66,
+        // public enum RepPrefixToken : byte
+        // {
+        //     [Symbol("F2")]
+        //     F2,
 
-            [Symbol("F2")]
-            F2,
+        //     [Symbol("F3")]
+        //     F3,
 
-            [Symbol("F3")]
-            F3,
-        }
+        //     [Symbol("66")]
+        //     x66,
+        // }
 
-        [SymSource]
+
+        [SymSource(K.Rex)]
         public enum RexToken : byte
         {
             [Symbol("REX", "Indicates the presence of a REX prefix")]
@@ -51,7 +53,7 @@ namespace Z0.Asm
             // RexB,
         }
 
-        [SymSource]
+        [SymSource(K.Vex)]
         public enum VexToken : byte
         {
             [Symbol("W", "Opcode extension field")]
@@ -103,7 +105,7 @@ namespace Z0.Asm
             pp,
         }
 
-        [SymSource]
+        [SymSource(K.Evex)]
         public enum EvexToken : byte
         {
             [Symbol("EVEX")]
@@ -134,7 +136,7 @@ namespace Z0.Asm
             W512,
         }
 
-        [SymSource]
+        [SymSource(K.Disp)]
         public enum DispToken : byte
         {
             [Symbol("cb", "Indicates a 1-byte value follows the opcode to specify a code offset and/or new value for the code segment register")]
@@ -156,7 +158,7 @@ namespace Z0.Asm
             ct,
         }
 
-        [SymSource]
+        [SymSource(K.SegOverride)]
         public enum SegOverrideToken : byte
         {
             [Symbol("cs", "CS segment override")]
@@ -179,9 +181,10 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// "Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode."
+        /// Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction
+        /// uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode.
         /// </summary>
-        [SymSource]
+        [SymSource(K.RegOpCodeMod)]
         public enum ModRmToken : byte
         {
             [Symbol("/r", "The ModR/M byte of the instruction contains a register operand and an r/m operand")]
@@ -213,9 +216,9 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Represents one of ['+rb', '+rw', '+rd', '+ro']
+        /// Indicates the lower 3 bits of the opcode byte is used to encode the register operand without a modR/M byte Represents one of ['+rb', '+rw', '+rd', '+ro']
         /// </summary>
-        [SymSource("Indicates the lower 3 bits of the opcode byte is used to encode the register operand without a modR/M byte")]
+        [SymSource(K.RexBExtension)]
         public enum RexBToken : byte
         {
             [Symbol("+rb", "For an 8-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction")]
@@ -231,7 +234,10 @@ namespace Z0.Asm
             ro,
         }
 
-        [SymSource("Specifies the size of an immediate operand in the context of an opcode specification")]
+        /// <summary>
+        /// "Specifies the size of an immediate operand in the context of an opcode specification"
+        /// </summary>
+        [SymSource(K.ImmSize)]
         public enum ImmSizeToken : byte
         {
             [Symbol("ib", "Indicates a 1-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.")]
@@ -247,7 +253,7 @@ namespace Z0.Asm
             io,
         }
 
-        [SymSource]
+        [SymSource(K.FpuDigit)]
         public enum FpuDigitToken : byte
         {
             [Symbol("+0")]
@@ -275,7 +281,7 @@ namespace Z0.Asm
             i7,
         }
 
-        [SymSource]
+        [SymSource(K.Exclusion)]
         public enum ExclusionToken
         {
             [Symbol("NP", "Indicates the use of 66/F2/F3 prefixes are not allowed with the instruction")]
@@ -285,7 +291,7 @@ namespace Z0.Asm
             NFx,
         }
 
-        [SymSource]
+        [SymSource(K.Mask)]
         public enum MaskToken : byte
         {
             [Symbol("{k1}", "Indicates a mask register used as instruction writemask for instructions that do not allow zeroing-masking but support merging-masking")]
@@ -295,7 +301,7 @@ namespace Z0.Asm
             WriteMask,
         }
 
-        [SymSource]
+        [SymSource(K.Operator)]
         public enum OpCodeOperator : byte
         {
             [Symbol("+")]

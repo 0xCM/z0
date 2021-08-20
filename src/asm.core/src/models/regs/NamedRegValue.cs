@@ -8,16 +8,17 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static Blit;
 
     public readonly struct NamedRegValue<T>
         where T : unmanaged
     {
-        public RegName Name {get;}
+        public name64 Name {get;}
 
         public T Value {get;}
 
         [MethodImpl(Inline)]
-        public NamedRegValue(RegName name, T value)
+        public NamedRegValue(name64 name, T value)
         {
             Name = name;
             Value = value;
@@ -31,7 +32,7 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator NamedRegValue<T>(Paired<RegName,T> src)
-            => @as<Paired<RegName,T>,NamedRegValue<T>>(src);
+        public static implicit operator NamedRegValue<T>(Paired<name64,T> src)
+            => @as<Paired<name64,T>,NamedRegValue<T>>(src);
     }
 }

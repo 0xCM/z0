@@ -66,9 +66,11 @@ namespace Z0
                 ref readonly var f = ref skip(fields,i);
                 ref var row = ref seek(dst,i);
                 var tag = f.Tag<SymbolAttribute>();
+
                 row.Component = component;
                 row.Type = type.Name;
                 row.DataType = kind;
+                row.Class = @class(type);
                 row.Position = (ushort)i;
                 row.Name = f.Name;
                 row.ScalarValue = Enums.unbox(kind, f.GetRawConstantValue());

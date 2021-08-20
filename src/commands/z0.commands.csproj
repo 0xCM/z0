@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Clr)" />
     <ProjectReference Include="$(bit)" />
     <ProjectReference Include="$(Term)" />
+    <ProjectReference Include="$(Blittable)" />
   </ItemGroup>
 
 </Project>

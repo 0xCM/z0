@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static Chars;
     using static core;
+
     using SR = SymbolicRender;
 
     [ApiHost]
@@ -25,7 +26,6 @@ namespace Z0.Asm
 
         public static string format(in Disp32Link src)
             => string.Format("{0}h:{1} -> {2}", src.Disp, src.Source, src.Target);
-
 
         public static string format(in HostAsmRecord src)
             => string.Format("{0} {1,-36} ; {2} => {3}",

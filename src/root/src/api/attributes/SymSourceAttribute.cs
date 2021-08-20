@@ -10,14 +10,14 @@ namespace Z0
     {
         public SymSourceAttribute()
         {
-            GroupName = "";
+            SymKind = 0.ToString();
         }
 
-        public SymSourceAttribute(string group)
+        public SymSourceAttribute(object kind)
         {
-            GroupName = group;
+            SymKind = kind?.ToString() ?? string.Empty;
         }
 
-        public string GroupName {get;}
+        public string SymKind {get;}
     }
 }

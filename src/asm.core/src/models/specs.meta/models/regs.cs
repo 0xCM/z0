@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     partial class AsmMetaSpecs
     {
         public readonly struct r8 : IOperand<r8>
@@ -14,7 +11,6 @@ namespace Z0.Asm
             public AsmOpClass Class => AsmOpClass.R;
 
             public AsmSizeKind Size => AsmSizeKind.@byte;
-
         }
 
         public readonly struct r16 : IOperand<r16>

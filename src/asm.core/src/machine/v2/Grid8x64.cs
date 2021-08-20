@@ -8,6 +8,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
+    using static Blit;
 
     partial struct RegMachines
     {
@@ -18,8 +19,8 @@ namespace Z0.Asm
             Store8x64 Values;
 
             [MethodImpl(Inline)]
-            public ref RegName RegName(byte index)
-                => ref seek(recover<RegName>(Names.Bytes), index);
+            public ref name64 RegName(byte index)
+                => ref seek(recover<name64>(Names.Bytes), index);
 
             [MethodImpl(Inline)]
             public ref ulong RegVal(byte index)
@@ -35,7 +36,7 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
-            void Define(byte index, RegName name, ulong value)
+            void Define(byte index, name64 name, ulong value)
             {
                 RegName(index) = name;
                 RegVal(index) = value;

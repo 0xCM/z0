@@ -13,14 +13,14 @@ namespace Z0
     partial struct BitRender
     {
         [MethodImpl(Inline), Op]
-        public static uint render16x8(ushort src, uint offset, Span<char> dst)
+        public static uint render16x8(ushort src, uint offset, char sep, Span<char> dst)
         {
             var counter = 0u;
             var x = z8;
             var cells = bytes(src);
             x = skip(cells,0);
             counter += render8(x, counter + offset, dst);
-            counter += separate(counter + offset, dst);
+            counter += separate(counter + offset, sep, dst);
 
             x = skip(cells,1);
             counter += render8(x, counter + offset, dst);
@@ -28,15 +28,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render16x8(ushort src, Span<char> dst)
-            => render16x8(src,0,dst);
+        public static uint render16x8(ushort src, char sep, Span<char> dst)
+            => render16x8(src,0, sep, dst);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> render16x8(ushort src)
+        public static ReadOnlySpan<char> render16x8(ushort src, char sep)
         {
             var buffer = CharBlock32.Null.Data;
-            var count = render16x8(src, 0, buffer);
+            var count = render16x8(src, 0, sep, buffer);
             return slice(buffer,0,count);
         }
+
     }
 }

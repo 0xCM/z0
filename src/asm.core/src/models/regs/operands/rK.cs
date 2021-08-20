@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using I = RegIndexCode;
     using G = AsmOperands.rK;
-    using K = RegTokens.KReg;
+    using K = AsmRegTokens.KReg;
     using api = AsmRegs;
 
     partial struct AsmOperands

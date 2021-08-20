@@ -19,13 +19,8 @@ namespace Z0
         }
 
         public ReadOnlySpan<ApiHostRes> Emit()
-            => Emit(Wf.ApiIndexBuilder().IndexApiBlocks());
-
-        public ReadOnlySpan<ApiHostRes> Emit(ApiBlockIndex src)
         {
-            var apires = Emit(src, SourceDir);
-            RunScripts();
-            return apires;
+            return Emit(Wf.ApiHex().ReadBlocks().Storage);
         }
 
         void RunScripts()
@@ -65,19 +60,19 @@ namespace Z0
             return buffer;
         }
 
-        ReadOnlySpan<ApiHostRes> Emit(ApiBlockIndex index, FS.FolderPath dst)
-        {
-            var emissions = list<ApiHostRes>();
-            var flow = Running();
-            dst.Clear();
-            foreach(var host in index.NonemptyHosts)
-            {
-                var emitted = Emit(index.HostCodeBlocks(host), dst);
-                emissions.Add(emitted);
-            }
-            Ran(flow);
-            return emissions.ViewDeposited();
-        }
+        // ReadOnlySpan<ApiHostRes> Emit(ApiBlockIndex index, FS.FolderPath dst)
+        // {
+        //     var emissions = list<ApiHostRes>();
+        //     var flow = Running();
+        //     dst.Clear();
+        //     foreach(var host in index.NonemptyHosts)
+        //     {
+        //         var emitted = Emit(index.HostCodeBlocks(host), dst);
+        //         emissions.Add(emitted);
+        //     }
+        //     Ran(flow);
+        //     return emissions.ViewDeposited();
+        // }
 
         ApiHostRes Emit(in ApiHostBlocks src, FS.FolderPath dst)
         {

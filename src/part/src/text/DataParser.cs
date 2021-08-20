@@ -28,17 +28,25 @@ namespace Z0
                 return (false, AppMsg.FieldCountMismatch.Format(SymLiteral.FieldCount, cells.Length));
             }
 
-            outcome += parse(skip(cells,j), out dst.Component);
-            outcome += parse(skip(cells,j), out dst.Type);
-            outcome += parse(skip(cells,j), out dst.Position);
-            outcome += parse(skip(cells,j), out dst.Name);
-            outcome += parse(skip(cells,j), out dst.Symbol);
-            outcome += eparse(skip(cells,j), out dst.DataType);
-            outcome += parse(skip(cells,j), out dst.ScalarValue);
-            outcome += parse(skip(cells,j), out dst.Hidden);
-            outcome += parse(skip(cells,j), out dst.Description);
-            outcome += parse(skip(cells,j), out dst.Identity);
+            outcome += parse(skip(cells,j++), out dst.Component);
+            outcome += parse(skip(cells,j++), out dst.Type);
+            outcome += parse(skip(cells,j++), out dst.Class);
+            outcome += parse(skip(cells,j++), out dst.Position);
+            outcome += parse(skip(cells,j++), out dst.Name);
+            outcome += parse(skip(cells,j++), out dst.Symbol);
+            outcome += eparse(skip(cells,j++), out dst.DataType);
+            outcome += parse(skip(cells,j++), out dst.ScalarValue);
+            outcome += parse(skip(cells,j++), out dst.Hidden);
+            outcome += parse(skip(cells,j++), out dst.Description);
+            outcome += parse(skip(cells,j++), out dst.Identity);
             return outcome;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out SymClass dst)
+        {
+            dst = new SymClass(src);
+            return true;
         }
 
         [MethodImpl(Inline), Op]

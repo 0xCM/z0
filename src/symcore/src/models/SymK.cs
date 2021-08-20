@@ -21,6 +21,8 @@ namespace Z0
 
         public Identifier Name {get;}
 
+        public SymClass Class {get;}
+
         public K Kind {get;}
 
         public SymExpr Expr {get;}
@@ -38,6 +40,7 @@ namespace Z0
             Expr = SymExpr.Empty;
             Description = TextBlock.Empty;
             Hidden = true;
+            Class = SymClass.Empty;
         }
 
         [MethodImpl(Inline)]
@@ -45,6 +48,7 @@ namespace Z0
         {
             Identity = src.Identity;
             Key = index;
+            Class = src.Class;
             Kind = src.Symbol.Kind;
             Name = src.Name;
             Expr = src.Symbol;
@@ -62,6 +66,7 @@ namespace Z0
             Expr = symbol;
             Description = description ?? TextBlock.Empty;
             Hidden = hidden;
+            Class = SymClass.Empty;
         }
 
         public ulong Value

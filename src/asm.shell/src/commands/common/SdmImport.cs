@@ -6,11 +6,17 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".asm-tools")]
-        Outcome Assemblers(CmdArgs args)
+        Outcome SdmImport()
         {
-            var result = Outcome.Success;
-            Write(AsmToolSvc.Tools());
+            var result = EmitSdmOpCodeDetails();
+            if(result.Fail)
+                return result;
+
+            result = EmitAsmForms();
+            if(result.Fail)
+                return result;
+
+            result = GenSdmOpCodeStrings();
             return result;
         }
     }

@@ -4,12 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct AsmCodes
+    using System;
+
+    using static Pow2x32;
+
+    partial struct RFlags
     {
         /// <summary>
-        /// Defines the bitfield index of the flags defined by <see cref='RFlagBits'/>
+        /// Defines literals corresponding the bits in the RFLAGS register
         /// </summary>
-        public enum RFlagIndex : byte
+        [Flags,SymSource]
+        public enum RFlagBits : ulong
         {
             /// <summary>
             /// Carry Flag (Status Flag): Set if an arithmetic operation generates a carry or a borrow
@@ -17,43 +22,51 @@ namespace Z0.Asm
             /// indicates an overflow condition for unsigned-integer arithmetic. It is also used
             /// in multiple-precision arithmetic
             ///</summary>
-            CF = 0,
+            [Symbol("cf", "Carry Flag")]
+            CF = P2ᐞ00,
 
             /// <summary>
             /// Parity Flag (Status Flag): Set if the least-significant byte of the result contains an even number of 1 bits; cleared otherwise.
             ///</summary>
-            PF = 2,
+            [Symbol("pf", "Parity Flag")]
+            PF = P2ᐞ02,
 
             /// <summary>
             /// Adjust/Carry Flag (Status Flag): Set if an arithmetic operation generates a carry or a borrow out of bit 3 of the result; cleared otherwise.
             ///</summary>
-            AF = 4,
+            [Symbol("af", "Adjust/Carry Flag")]
+            AF = P2ᐞ04,
 
             /// <summary>
             /// Zero Flag (Status Flag): Set if the result is zero; cleared otherwise
             ///</summary>
-            ZF = 6,
+            [Symbol("zf", "Zero Flag")]
+            ZF = P2ᐞ06,
 
             /// <summary>
             /// Sign Flag (Status Flag): Set equal to the most-significant bit of the result, which is the sign bit of a signed
             /// integer. (0 indicates a positive value and 1 indicates a negative value.)
             ///</summary>
-            SF = 7,
+            [Symbol("sf", "Sign Flag")]
+            SF = P2ᐞ07,
 
             /// <summary>
             ///  Trap Flag (System Flag): Set to enable single-step mode for debugging; clear to disable single-step mode.
             ///</summary>
-            TF = 8,
+            [Symbol("tf", "Trap Flag")]
+            TF = P2ᐞ08,
 
             /// <summary>
             /// Interupt Flag (System Flag)
             ///</summary>
-            IF = 9,
+            [Symbol("if", "Interupt Flag")]
+            IF = P2ᐞ09,
 
             /// <summary>
             /// Direction Flag
             ///</summary>
-            DF = 10,
+            [Symbol("df", "Direction Flag")]
+            DF = P2ᐞ10,
 
             /// <summary>
             /// Overflow Flag (Status Flag): Set if the integer result is too large a positive number
@@ -61,37 +74,44 @@ namespace Z0.Asm
             /// operand; cleared otherwise. This flag indicates an overflow condition for signed-integer
             /// (two’s complement) arithmetic.
             ///</summary>
-            OF = 11,
+            [Symbol("of", "Overflow Flag")]
+            OF = P2ᐞ11,
 
             /// <summary>
             /// Resume Flag
             ///</summary>
-            RF = 16,
+            [Symbol("rf", "Resume Flag")]
+            RF = P2ᐞ16,
 
             /// <summary>
             /// Virtual 8086 Mode
             ///</summary>
-            VM = 17,
+            [Symbol("vm", "Virtual 8086 Mode")]
+            VM = P2ᐞ17,
 
             /// <summary>
             /// Alignment Check
             ///</summary>
-            AC = 18,
+            [Symbol("ac", "Alignment Check")]
+            AC = P2ᐞ18,
 
             /// <summary>
             /// Virtual Interrupt Flag
             ///</summary>
-            VIF = 19,
+            [Symbol("vif", "Virtual Interrupt Flag")]
+            VIF = P2ᐞ19,
 
             /// <summary>
             /// Virtual Interrupt Pending
             ///</summary>
-            VIP = 20,
+            [Symbol("vip", "Virtual Interrupt Pending")]
+            VIP = P2ᐞ20,
 
             /// <summary>
             /// CPUID-capability
             ///</summary>
-            ID = 21,
+            [Symbol("id", "CPUID-capability")]
+            ID = P2ᐞ21,
         }
     }
 }

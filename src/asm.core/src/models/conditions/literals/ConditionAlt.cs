@@ -7,9 +7,11 @@ namespace Z0.Asm
 
     using static BitSeq;
 
+    using K = ConditionCodes.ConditionKind;
+
     partial struct ConditionCodes
     {
-        [SymSource]
+        [SymSource(K.CodeAlt)]
         public enum ConditionAlt : byte
         {
             /// <summary>

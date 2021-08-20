@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static Blit;
 
     using api = AsmRegs;
 
@@ -54,13 +55,13 @@ namespace Z0.Asm
             get => AsmRegBits.index(this);
         }
 
-        public RegName Name
+        public name64 Name
         {
             [MethodImpl(Inline)]
             get => api.name(this);
         }
         public string Format()
-            => Name.Format();
+            => Name.Format().Trim();
 
 
         public override string ToString()

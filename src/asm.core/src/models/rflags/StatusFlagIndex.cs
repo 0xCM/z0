@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using I = AsmCodes.RFlagIndex;
+    using I = RFlags.RFlagIndex;
 
-    partial struct AsmCodes
+    partial struct RFlags
     {
         /// <summary>
         /// Defines indices into the <see cref='StatusFlagBits'/>

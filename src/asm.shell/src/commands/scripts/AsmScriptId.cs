@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmCmdService
+    public readonly struct AsmScriptId
     {
-        [CmdOp(".asm-forms-emit")]
-        Outcome AsmFormsEmit(CmdArgs args)
-            => EmitAsmForms();
+        public const string mc = "mc";
+
+        public const string mc_hex = "mc-hex";
     }
 }

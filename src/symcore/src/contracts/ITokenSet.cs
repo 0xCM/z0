@@ -11,5 +11,7 @@ namespace Z0
         Type[] Types();
 
         string Name {get;}
+
+        ReadOnlySpan<Token> View {get;}
     }
 }

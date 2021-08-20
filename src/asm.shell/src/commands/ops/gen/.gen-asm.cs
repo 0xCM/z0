@@ -4,9 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static core;
+
     partial class AsmCmdService
     {
-        [CmdOp(".gen-asm")]
         Outcome GenAsm(CmdArgs args)
         {
             const string mnemonic = "kandb";
@@ -18,7 +19,7 @@ namespace Z0.Asm
 
             // a in RCX, b in RDX, c in R8, d in R9
             var counter = 0u;
-            var r0 = RegSets.MaskSet();
+            var r0 = RegSets.MaskRegs();
             var r1 = r0.Replicate();
             var r2 = r0.Replicate();
             for(var i=0u; i<r0.Count; i++)
@@ -39,9 +40,55 @@ namespace Z0.Asm
             return true;
         }
 
+        [CmdOp(".gen-asm")]
+        Outcome GenAsm2(CmdArgs args)
+        {
+            const string AsmPattern = "{0} {1},{2}";
+            const string LabelPattern = "{0}:";
+            const string SectionPattern = "{0}";
+            const string TextSection = ".text";
+            const string McSyntax = "mc";
+            const string MlSyntax = "ml";
+            const string NasmSyntax = "nasm";
+            const string CommentPattern = "# {0}";
+
+            var ocinfo = "BSR(r16,r/m16) = 0F BD /r";
+            var result = Outcome.Success;
+            var asmid = "bsr";
+            var label = "bsr_r16_r16";
+            var syntax = McSyntax;
+            var w0 = RegWidthCode.W16;
+            var w1 = RegWidthCode.W16;
+            var r0 = RegSets.GpRegs(w0);
+            var r1 = RegSets.GpRegs(w1);
+            var dst = AsmWs.AsmPath(syntax, asmid);
+            var indent = 0u;
+            var buffer = text.buffer();
+            buffer.AppendLine(string.Format(SectionPattern, TextSection));
+            buffer.AppendLine();
+            buffer.AppendLineFormat(CommentPattern, ocinfo);
+            buffer.AppendLine(string.Format(LabelPattern,label));
+
+            indent += 4;
+            for(var i=0u; i<r0.Count; i++)
+            for(var j=0u; j<r1.Count; j++)
+            {
+                buffer.IndentLine(indent, string.Format(AsmPattern, asmid, r0[i], r1[j]));
+            }
+
+            indent -= 4;
+
+            dst.Overwrite(buffer.Emit(), TextEncodingKind.Asci);
+
+            Emitted(dst);
+
+            RunAsmScript(asmid, AsmScriptId.mc, out var flows);
+
+            return result;
+        }
+
+
         static string format(RegOp op0, RegOp op1, RegOp op2)
             => string.Format("{0},{1},{2}", op0, op1, op2);
-
-        MsgPattern<Count,FS.FileUri> EmittedInstructions => "Emitted {0} instructions to {1}";
     }
 }

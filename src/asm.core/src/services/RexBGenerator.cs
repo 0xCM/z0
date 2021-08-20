@@ -58,7 +58,7 @@ namespace Z0.Asm
             counter += IncludeGp8(ref i, dst);
             counter += IncludeGp16(ref i, dst);
             counter += IncludeGp32(ref i, dst);
-            counter += IncludeGp8(ref i, dst);
+            counter += IncludeGp64(ref i, dst);
             return slice(dst,0,counter);
         }
 

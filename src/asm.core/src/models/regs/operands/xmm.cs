@@ -8,10 +8,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static Blit;
 
     using I = RegIndexCode;
     using G = AsmOperands.xmm;
-    using K = RegTokens.XmmReg;
+    using K = AsmRegTokens.XmmReg;
     using api = AsmRegs;
 
     partial struct AsmOperands
@@ -26,7 +27,7 @@ namespace Z0.Asm
                 Index = index;
             }
 
-            public RegName Name
+            public name64 Name
                 => AsmRegNames.name(this);
 
             public string Format()

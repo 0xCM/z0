@@ -24,10 +24,8 @@ namespace Z0
         public virtual string Name
             => typeof(T).Name;
 
-        public ReadOnlySpan<Token> Collection
-        {
-            get => _Tokens.ViewDeposited();
-        }
+        public ReadOnlySpan<Token> View
+            => _Tokens.ViewDeposited();
 
         List<Token> _Tokens;
 

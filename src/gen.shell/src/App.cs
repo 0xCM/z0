@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    sealed class Generator : AppService<Generator>
+    sealed class GenX : AppService<GenX>
     {
         public void Generate(string[] args)
         {
@@ -26,7 +26,7 @@ namespace Z0
             try
             {
                 using var wf = WfAppLoader.load(args);
-                Generator.create(wf).Generate(args);
+                GenX.create(wf).Generate(args);
             }
             catch(Exception e)
             {

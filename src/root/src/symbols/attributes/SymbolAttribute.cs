@@ -16,33 +16,26 @@ public class SymbolAttribute : Attribute
 
     public string Description {get;}
 
-    public string Expansion {get;}
+    public string Refinement {get;}
 
     public SymbolAttribute(object symbol)
     {
         _Symbol = symbol;
         Description = string.Empty;
-        Expansion = string.Empty;
+        Refinement = string.Empty;
     }
 
     public SymbolAttribute(object symbol, string description)
     {
         _Symbol = symbol;
         Description = description;
-        Expansion = string.Empty;
+        Refinement = string.Empty;
     }
 
-    public SymbolAttribute(object symbol, string description, string expansion)
+    public SymbolAttribute(object symbol, string description, string refinement)
     {
         _Symbol = symbol;
         Description = description;
-        Expansion = expansion;
+        Refinement = refinement;
     }
-
-    // public SymbolAttribute(object symbol)
-    // {
-    //     _Symbol = symbol;
-    //     Description = string.Empty;
-    // }
-
 }

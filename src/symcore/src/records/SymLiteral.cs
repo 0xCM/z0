@@ -15,7 +15,7 @@ namespace Z0
     {
         public const string TableId = "symbolic.literals";
 
-        public const byte FieldCount = 10;
+        public const byte FieldCount = 11;
 
         /// <summary>
         /// The component that defines the literal
@@ -26,6 +26,11 @@ namespace Z0
         /// The literal's declaring type
         /// </summary>
         public Identifier Type;
+
+        /// <summary>
+        /// A literal classifier
+        /// </summary>
+        public SymClass Class;
 
         /// <summary>
         /// The container-relative declaration order of the literal
@@ -68,6 +73,6 @@ namespace Z0
         public SymIdentity Identity;
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{24, 32, 10, 32, 16, 12, 22, 10, 48, 80};
+            => new byte[FieldCount]{24, 32, 16, 10, 32, 16, 12, 22, 10, 48, 80};
     }
 }

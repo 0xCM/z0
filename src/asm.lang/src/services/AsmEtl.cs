@@ -16,17 +16,15 @@ namespace Z0.Asm
     {
         public void EmitAsmTokens()
         {
-            EmitTokens(AsmTokens.Codes.create());
-            EmitTokens(AsmTokens.Regs.create());
-            EmitTokens(AsmTokens.Conditions.create());
-            EmitTokens(AsmTokens.Regs.create());
-            EmitTokens(AsmTokens.Sigs.create());
-            EmitTokens(AsmTokens.OpCodes.create());
+            var tokens = Wf.AsmTokens();
+            EmitTokens(tokens.RegTokens());
+            EmitTokens(tokens.OpCodeTokens());
+            EmitTokens(tokens.SigTokens());
+            EmitTokens(tokens.ConditonTokens());
         }
 
         void EmitTokens(ITokenSet src)
         {
-            const string Expression = "{0,-16}: {1,-14} - {2}";
             var dst = Ws.Tables().Table<SymToken>(WsAtoms.tokens, src.Name);
             var tokens = Symbols.tokens(src.Types());
             TableEmit(tokens, SymToken.RenderWidths, dst);

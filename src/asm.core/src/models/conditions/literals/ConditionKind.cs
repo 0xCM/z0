@@ -4,15 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmCmdService
+    partial struct ConditionCodes
     {
-        [CmdOp(".tokens-emit")]
-        Outcome Tokens(CmdArgs args)
+        public enum ConditionKind : byte
         {
-            var result = Outcome.Success;
-            Wf.AsmEtl().EmitAsmTokens();
+            None,
 
-            return result;
+            Code,
+
+            CodeAlt,
+
+            Jcc8,
+
+            Jcc8Alt,
+
+            Jcc32,
+
+            Jcc32Alt,
         }
     }
 }

@@ -8,17 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".sdm-import")]
         Outcome SdmImport(CmdArgs args)
-        {
-            var result = EmitSdmOpCodeDetails();
-            if(result.Fail)
-                return result;
-
-            result = EmitAsmForms();
-            if(result.Fail)
-                return result;
-
-            result = GenSdmOpCodeStrings();
-            return result;
-        }
+            => SdmImport();
     }
 }

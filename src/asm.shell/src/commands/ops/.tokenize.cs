@@ -13,8 +13,7 @@ namespace Z0.Asm
         Outcome TestTokenize(CmdArgs args)
         {
             var result = Outcome.Success;
-            //var _tokens = Z0.Tokens.tokenize(typeof(AsmOpCodeTokens.ModRmToken));
-            var tokens = AsmOpCodes.TokenSet();
+            var tokens = AsmOpCodes.OpCodeTokens();
             var count = tokens.Length;
             for(var i=0; i<count; i++)
             {

@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    using static RegTokens;
+    using static AsmRegTokens;
 
     [ApiHost]
     public class AsmRegCodes

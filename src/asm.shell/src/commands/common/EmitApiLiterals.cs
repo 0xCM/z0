@@ -10,8 +10,7 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".emit-api-literals")]
-        Outcome EmitApiLiterals(CmdArgs args)
+        Outcome EmitApiLiterals()
         {
             var result = Outcome.Success;
             var components = ApiRuntimeLoader.assemblies();

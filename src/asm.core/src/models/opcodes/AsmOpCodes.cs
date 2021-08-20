@@ -27,7 +27,7 @@ namespace Z0.Asm
          public static AsmOcToken<K> token<K>(AsmOcTokenKind kind, K value)
             where K : unmanaged
                 => new AsmOcToken<K>(kind,value);
-        [Op]
+         [Op]
          public static ReadOnlySpan<Token<DispToken>> DispTokens()
             => Tokens.tokenize<DispToken>();
 
@@ -40,16 +40,11 @@ namespace Z0.Asm
             => Tokens.tokenize<DispToken>();
 
         [Op]
-        public static ReadOnlySpan<Token<LegacyPrefixToken>> LegacyPrefixTokens()
-            => Tokens.tokenize<LegacyPrefixToken>();
-
-        [Op]
         public static ReadOnlySpan<Token<ModRmToken>> ModRmTokens()
             => Tokens.tokenize<ModRmToken>();
 
-        public static ReadOnlySpan<Token> TokenSet()
-            => AsmTokens.OpCodes.create().Collection;
-
+        public static ReadOnlySpan<Token> OpCodeTokens()
+            => AsmTokens.OpCodes.create().View;
 
         [Op]
         public static ReadOnlySpan<Token<RexToken>> RexTokens()

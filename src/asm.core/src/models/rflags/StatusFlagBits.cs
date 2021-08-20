@@ -6,9 +6,9 @@ namespace Z0.Asm
 {
     using System;
 
-    using RF = AsmCodes.RFlagBits;
+    using RF = RFlags.RFlagBits;
 
-    partial struct AsmCodes
+    partial struct RFlags
     {
         [Flags,SymSource]
         public enum StatusFlagBits : ulong

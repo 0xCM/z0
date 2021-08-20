@@ -76,8 +76,8 @@ namespace Z0
             => new string(render8(src));
 
         [Op]
-        public static string format16x8(ushort src)
-            => new string(render16x8(src));
+        public static string format16x8(ushort src, char sep = Chars.Space)
+            => new string(render16x8(src, sep));
 
         [Op]
         public static string format32x8(uint src)

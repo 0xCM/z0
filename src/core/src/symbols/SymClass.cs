@@ -2,46 +2,44 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    /// <summary>
-    /// Defines a register name
-    /// </summary>
-    public readonly struct RegName
+    public readonly struct SymClass
     {
-        readonly ulong Data;
+        public string Name {get;}
 
         [MethodImpl(Inline)]
-        internal RegName(ulong data)
-            => Data = data;
+        public SymClass(string name)
+        {
+            Name = name;
+        }
+
+        public string Format()
+            => Name ?? EmptyString;
+
+        public override string ToString()
+            => Format();
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data == 0;
+            get => core.empty(Name);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Data != 0;
+            get => core.nonempty(Name);
         }
 
-        public string Format()
-            => AsmRegNames.format(this);
-
-        public override string ToString()
-            => Format();
-
-        public static RegName Empty
+        public static SymClass Empty
         {
             [MethodImpl(Inline)]
-            get => new RegName(0);
+            get => new SymClass(EmptyString);
         }
     }
 }

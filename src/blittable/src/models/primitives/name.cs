@@ -109,6 +109,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator name<ulong>(name64 src)
                 => new name<ulong>(src.Storage, src.Length, src.PointSize);
+
+            public static name64 Empty => default;
         }
 
         public struct name128 : IName<name128,Cell128>

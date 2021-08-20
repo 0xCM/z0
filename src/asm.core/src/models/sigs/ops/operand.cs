@@ -44,7 +44,7 @@ namespace Z0.Asm
             => src;
 
         [MethodImpl(Inline), Op]
-        public static GpRm operand(GpRmComposite src)
+        public static GpRm operand(GpRmToken src)
             => src;
 
         [MethodImpl(Inline), Op]

@@ -26,6 +26,11 @@ namespace Z0
         public Identifier Type;
 
         /// <summary>
+        /// A literal classifier
+        /// </summary>
+        public SymClass Class;
+
+        /// <summary>
         /// The container-relative declaration order of the literal
         /// </summary>
         public ushort Position;

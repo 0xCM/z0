@@ -18,19 +18,20 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
-            var src = FS.path(@"C:\Dev\ws\asm\.out\dumps\kmov.obj.asm");
-            var tool = Wf.LlvmObjDump();
-            result = tool.ParseDump(src, out var rows);
-            if(result.Fail)
-                return result;
-
-            var formatter = Tables.formatter<ObjDumpRow>(ObjDumpRow.RenderWidths);
-            var count = rows.Length;
+            var ockinds = TokenMaps.ockinds();
+            var data = TokenMaps.serialize(ockinds).View;
+            var symbols = Symbols.index<AsmOcTokenKind>();
+            var symview = symbols.View;
+            var count = symview.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var row = ref skip(rows, i);
-                Write(formatter.Format(row));
-
+                ref readonly var symbol = ref skip(symview,i);
+                ref readonly var map = ref ockinds[symbol.Kind];
+                ref readonly var bits = ref skip(data,i);
+                var buffer = CharBlock32.Null;
+                var bitstring = BitRender.format16x8(bits, Chars.Colon);
+                var expr = string.Format("{0} => {1}", map, bitstring);
+                Write(expr);
             }
 
             return result;

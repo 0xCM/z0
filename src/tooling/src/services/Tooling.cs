@@ -22,11 +22,11 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static ReadOnlySpan<Arrow<FS.FilePath,FS.FilePath,name128>> flow(ReadOnlySpan<TextLine> src)
+        public static ReadOnlySpan<ToolFlow> flow(ReadOnlySpan<TextLine> src)
         {
             var count = src.Length;
             var counter = 0u;
-            var dst = span<Arrow<FS.FilePath,FS.FilePath,name128>>(count);
+            var dst = span<ToolFlow>(count);
             for(var i=0; i<count; i++)
             {
                 ref readonly var line = ref skip(src,i);
@@ -45,7 +45,7 @@ namespace Z0
                         var a = text.left(flow,j).Trim();
                         var b = text.right(flow,j + 2).Trim();
                         if(nonempty(a) && nonempty(b))
-                            seek(dst,counter++) = (tool,FS.path(a), FS.path(b));
+                            seek(dst,counter++) = new ToolFlow(tool, FS.path(a), FS.path(b));
                     }
                 }
             }

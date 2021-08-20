@@ -74,5 +74,7 @@ namespace Z0
         public const string sym = nameof(sym);
 
         public const string llvm = nameof(llvm);
+
+        public const string ll = nameof(ll);
     }
 }

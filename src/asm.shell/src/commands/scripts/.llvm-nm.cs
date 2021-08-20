@@ -24,7 +24,7 @@ namespace Z0.Asm
                     ("SrcPath", src.Format(PathSeparator.BS)),
                     ("DstPath", dst.Format(PathSeparator.BS))
                     );
-                result = Run(script,vars);
+                result = RunToolScript(script,vars, out _);
                 if(result.Fail)
                     return result;
             }

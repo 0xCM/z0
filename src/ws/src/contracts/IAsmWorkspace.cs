@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static EnvFolders;
+    using static WsAtoms;
 
     public interface IAsmWorkspace : IWorkspace
     {
@@ -12,7 +12,7 @@ namespace Z0
             => OutDir() + FS.folder("dis");
 
         FS.FolderPath Lists()
-            => OutDir() + FS.folder("list");
+            => OutDir() + FS.folder(list);
 
         /// <summary>
         /// Defines a path of the form {Root}/src
@@ -20,14 +20,17 @@ namespace Z0
         FS.FolderPath Src()
             => Root + FS.folder(src);
 
-        /// <summary>
-        /// Defines a path of the form {Src}/asm
-        /// </summary>
-        FS.FolderPath AsmLibSrc()
-            => Src() + FS.folder("asm");
+        FS.FolderPath AsmSrc()
+            => Src() + FS.folder(asm);
+
+        FS.FolderPath LlSrc()
+            => Src() + FS.folder(ll);
 
         FS.FilePath AsmPath(string id)
-            => AsmLibSrc() + FS.file(id, FS.Asm);
+            => AsmSrc() + FS.file(id, FS.Asm);
+
+        FS.FilePath AsmPath(string syntax, string id)
+            => AsmSrc() + FS.folder(syntax) + FS.file(id, FS.Asm);
 
         FS.FolderPath Analysis()
             => OutDir() + FS.folder("analysis");

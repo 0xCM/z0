@@ -44,5 +44,8 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator RegSet(RegOp[] src)
             => new RegSet(src);
+
+        public static RegSet Empty
+            => new RegSet(sys.empty<RegOp>());
     }
 }

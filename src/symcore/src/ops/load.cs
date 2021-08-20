@@ -41,7 +41,7 @@ namespace Z0
         [Op, Closures(Closure)]
         internal static Sym untyped<T>(Sym<T> src)
             where T : unmanaged
-                => new Sym(src.Identity, src.Key, src.Type, bw64(src.Kind), src.Name, src.Expr, src.Description, src.Hidden);
+                => new Sym(src.Identity, src.Class, src.Key, src.Type, bw64(src.Kind), src.Name, src.Expr, src.Description, src.Hidden);
 
         internal static Symbols<E> load<E>()
             where E : unmanaged, Enum
@@ -64,6 +64,7 @@ namespace Z0
             var count = fields.Length;
             var dst = span<SymLiteral<E>>(count);
             var kind = ClrPrimitives.kind(src);
+            var klass = @class(typeof(E));
             var counter = 0u;
             for(var i=z16; i<count; i++)
             {
@@ -75,6 +76,7 @@ namespace Z0
                 row.Component = component;
                 row.Type = src.Name;
                 row.DataType = kind;
+                row.Class = klass;
                 row.Position = i;
                 row.Name = f.Name;
                 row.Symbol = (litval,expr);

@@ -17,6 +17,7 @@ namespace Z0
         {
             var dst = list<SymToken>();
             var count = src.Length;
+            var counter = 0u;
             for(var i=0; i<count; i++)
             {
                 ref readonly var type = ref skip(src,i);
@@ -26,7 +27,9 @@ namespace Z0
                     ref readonly var symbol = ref skip(symbols,j);
                     var record = new SymToken();
                     record.TokenType = type.Name;
-                    record.Key = symbol.Key;
+                    record.Class = symbol.Class;
+                    record.Index = counter++;
+                    record.SymId = symbol.Key;
                     record.Name = symbol.Name;
                     record.Expr = symbol.Expr;
                     record.Description = symbol.Description;
@@ -43,12 +46,14 @@ namespace Z0
             var count = symbols.Length;
             var buffer = alloc<SymToken>(count);
             ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
                 ref readonly var symbol = ref skip(symbols,i);
                 ref var record = ref seek(dst,i);
                 record.TokenType = src.Name;
-                record.Key = symbol.Key;
+                record.Class = symbol.Class;
+                record.Index = i;
+                record.SymId = symbol.Key;
                 record.Name =  symbol.Name;
                 record.Expr = symbol.Expr;
                 record.Description = symbol.Description;
