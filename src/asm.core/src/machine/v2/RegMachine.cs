@@ -14,7 +14,7 @@ namespace Z0.Asm
     using static Pow2x64;
     using static AsmOperands;
 
-    using AsmId = llvm.MC.AsmId;
+    using McAsmId = llvm.McAsmId;
 
     public readonly partial struct RegMachines
     {
@@ -148,7 +148,7 @@ namespace Z0.Asm
             var id = asm.OpCode.AsmId;
             switch(id)
             {
-                case AsmId.MOV8ri:
+                case McAsmId.MOV8ri:
                 break;
             }
         }

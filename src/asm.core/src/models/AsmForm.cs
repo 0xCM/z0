@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using llvm;
 
     using static Root;
 
@@ -20,6 +21,12 @@ namespace Z0.Asm
         {
             Sig = sig;
             OpCode = oc;
+        }
+
+        public McAsmId AsmId
+        {
+            [MethodImpl(Inline)]
+            get => OpCode.AsmId;
         }
 
         public string Format()

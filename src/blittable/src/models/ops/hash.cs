@@ -15,7 +15,7 @@ namespace Z0
         partial struct Operate
         {
             [MethodImpl(Inline), Op]
-            public static uint hash(name64 src)
+            public static uint hash(text7 src)
                 => alg.hash.calc(src.Storage);
         }
     }

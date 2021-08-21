@@ -49,5 +49,9 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => new AsmBlockLabel(Identifier.Empty);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmBlockLabel(string src)
+            => new AsmBlockLabel(src);
     }
 }

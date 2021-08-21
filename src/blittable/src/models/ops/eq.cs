@@ -15,11 +15,11 @@ namespace Z0
         partial struct Operate
         {
             [MethodImpl(Inline), Op]
-            public static bit eq(name64 a, name64 b)
+            public static bit eq(text7 a, text7 b)
                 => a.Storage == b.Storage;
 
             [MethodImpl(Inline), Op]
-            public static bit neq(name64 a, name64 b)
+            public static bit neq(text7 a, text7 b)
                 => a.Storage != b.Storage;
         }
     }

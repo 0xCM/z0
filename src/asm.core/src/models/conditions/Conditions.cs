@@ -32,7 +32,6 @@ namespace Z0.Asm
             return dst;
         }
 
-
         [Op]
         public static uint jcc8(Conditions src, Span<Jcc8Conditions> dst)
         {
@@ -76,25 +75,25 @@ namespace Z0.Asm
 
         Index<Jcc32Alt> _AltJcc32Codes;
 
-        Index<name64> _ConditionNames;
+        Index<text7> _ConditionNames;
 
-        Index<name64> _AltConditionNames;
+        Index<text7> _AltConditionNames;
 
         Index<TextBlock> _ConditionInfo;
 
         Index<TextBlock> _AltConditionInfo;
 
-        Index<name64> _Jcc8Names;
+        Index<text7> _Jcc8Names;
 
-        Index<name64> _AltJcc8Names;
+        Index<text7> _AltJcc8Names;
 
         Index<TextBlock> _Jcc8Info;
 
         Index<TextBlock> _AltJcc8Info;
 
-        Index<name64> _Jcc32Names;
+        Index<text7> _Jcc32Names;
 
-        Index<name64> _AltJcc32Names;
+        Index<text7> _AltJcc32Names;
 
         Index<TextBlock> _Jcc32Info;
 
@@ -114,8 +113,8 @@ namespace Z0.Asm
             _Jcc8Codes = alloc<Jcc8>(ConditionCount);
             _AltJcc8Codes = alloc<Jcc8Alt>(ConditionCount);
 
-            _ConditionNames = alloc<name64>(ConditionCount);
-            _AltConditionNames = alloc<name64>(ConditionCount);
+            _ConditionNames = alloc<text7>(ConditionCount);
+            _AltConditionNames = alloc<text7>(ConditionCount);
 
             _ConditionInfo = alloc<TextBlock>(ConditionCount);
             _AltConditionInfo = alloc<TextBlock>(ConditionCount);
@@ -123,14 +122,14 @@ namespace Z0.Asm
             _Jcc32Codes = alloc<Jcc32>(ConditionCount);
             _AltJcc32Codes = alloc<Jcc32Alt>(ConditionCount);
 
-            _Jcc8Names = alloc<name64>(ConditionCount);
-            _AltJcc8Names = alloc<name64>(ConditionCount);
+            _Jcc8Names = alloc<text7>(ConditionCount);
+            _AltJcc8Names = alloc<text7>(ConditionCount);
 
             _Jcc8Info = alloc<TextBlock>(ConditionCount);
             _AltJcc8Info = alloc<TextBlock>(ConditionCount);
 
-            _Jcc32Names = alloc<name64>(ConditionCount);
-            _AltJcc32Names = alloc<name64>(ConditionCount);
+            _Jcc32Names = alloc<text7>(ConditionCount);
+            _AltJcc32Names = alloc<text7>(ConditionCount);
 
             _Jcc32Info = alloc<TextBlock>(ConditionCount);
             _AltJcc32Info = alloc<TextBlock>(ConditionCount);
@@ -140,37 +139,37 @@ namespace Z0.Asm
         {
             var ccA = Symbols.index<Condition>();
             Require.equal((uint)ccA.Length, ConditionCount);
-            Factory.names(ccA, _ConditionNames.Edit);
+            Factory.expressions(ccA, _ConditionNames.Edit);
             Symbols.describe(ccA, _ConditionInfo.Edit);
             Symbols.kinds(ccA, _CC.Edit);
 
             var ccB = Symbols.index<ConditionAlt>();
             Require.equal((uint)ccB.Length, ConditionCount);
-            Factory.names(ccB, _AltConditionNames.Edit);
+            Factory.expressions(ccB, _AltConditionNames.Edit);
             Symbols.describe(ccB, _AltConditionInfo.Edit);
             Symbols.kinds(ccB, _CCAlt.Edit);
 
             var jcc8a = Symbols.index<Jcc8>();
             Require.equal(jcc8a.Count, ConditionCount);
-            Factory.names(jcc8a, _Jcc8Names.Edit);
+            Factory.expressions(jcc8a, _Jcc8Names.Edit);
             Symbols.describe(jcc8a, _Jcc8Info.Edit);
             Symbols.kinds(jcc8a, _Jcc8Codes.Edit);
 
             var jcc8b = Symbols.index<Jcc8Alt>();
             Require.equal(jcc8b.Count, ConditionCount);
-            Factory.names(jcc8b, _AltJcc8Names.Edit);
+            Factory.expressions(jcc8b, _AltJcc8Names.Edit);
             Symbols.describe(jcc8b, _AltJcc8Info.Edit);
             Symbols.kinds(jcc8b, _AltJcc8Codes.Edit);
 
             var jcc32a = Symbols.index<Jcc32>();
             Require.equal(jcc32a.Count, ConditionCount);
-            Factory.names(jcc32a, _Jcc32Names.Edit);
+            Factory.expressions(jcc32a, _Jcc32Names.Edit);
             Symbols.describe(jcc32a, _Jcc32Info.Edit);
             Symbols.kinds(jcc32a, _Jcc32Codes.Edit);
 
             var jcc32b = Symbols.index<Jcc32Alt>();
             Require.equal(jcc32b.Count, ConditionCount);
-            Factory.names(jcc32b, _AltJcc32Names.Edit);
+            Factory.expressions(jcc32b, _AltJcc32Names.Edit);
             Symbols.describe(jcc32b, _AltJcc32Info.Edit);
             Symbols.kinds(jcc32b, _AltJcc32Codes.Edit);
         }
@@ -200,15 +199,15 @@ namespace Z0.Asm
             => _AltJcc32Codes.View;
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<name64> Names(bit alt = default)
+        public ReadOnlySpan<text7> Names(bit alt = default)
             => alt ? _AltConditionNames.View : _ConditionNames.View;
 
         [MethodImpl(Inline)]
-        public ref readonly name64 Name(Condition src)
+        public ref readonly text7 Name(Condition src)
             => ref _ConditionNames[(byte)src];
 
         [MethodImpl(Inline)]
-        public ref readonly name64 Name(ConditionAlt src)
+        public ref readonly text7 Name(ConditionAlt src)
             => ref _ConditionNames[(byte)src];
 
         [MethodImpl(Inline)]
@@ -220,7 +219,7 @@ namespace Z0.Asm
             => ref _AltConditionInfo[(byte)src];
 
         [MethodImpl(Inline)]
-        public ref readonly name64 Name(Jcc8 src)
+        public ref readonly text7 Name(Jcc8 src)
             => ref _Jcc8Names[(byte)(src - Jcc8Base)];
 
         [MethodImpl(Inline)]
@@ -228,7 +227,7 @@ namespace Z0.Asm
             => ref _Jcc8Info[(byte)(src - Jcc8Base)];
 
         [MethodImpl(Inline)]
-        public ref readonly name64 Name(Jcc8Alt src)
+        public ref readonly text7 Name(Jcc8Alt src)
             => ref _AltJcc8Names[(byte)(src - Jcc8Base)];
 
         [MethodImpl(Inline)]
@@ -236,7 +235,7 @@ namespace Z0.Asm
             => ref _AltJcc8Info[(byte)(src - Jcc8Base)];
 
         [MethodImpl(Inline)]
-        public ref readonly name64 Name(Jcc32 src)
+        public ref readonly text7 Name(Jcc32 src)
             => ref _Jcc32Names[(byte)(src - Jcc32Base)];
 
         [MethodImpl(Inline)]
@@ -244,7 +243,7 @@ namespace Z0.Asm
             => ref _Jcc32Info[(byte)(src - Jcc32Base)];
 
         [MethodImpl(Inline)]
-        public ref readonly name64 Name(Jcc32Alt src)
+        public ref readonly text7 Name(Jcc32Alt src)
             => ref _AltJcc32Names[(byte)(src - Jcc32Base)];
 
         [MethodImpl(Inline)]

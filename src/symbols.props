@@ -88,6 +88,8 @@
 
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
 
+    <Llvm>$(Src)llvm/z0.llvm.csproj</Llvm>
+
     <Part>$(Src)part/z0.part.csproj</Part>
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
     <Pipes>$(Src)pipes/z0.pipes.csproj</Pipes>

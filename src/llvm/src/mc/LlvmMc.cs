@@ -2,20 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.llvm
 {
-    partial struct Llvm
+    using System;
+
+    public class LlvmMc : ToolService<LlvmMc>
     {
-        [Tool]
-        public readonly struct Obj2Yaml : ITool<Obj2Yaml>
+        public LlvmMc()
+            : base(Toolspace.llvm_mc)
         {
-            public ToolId Id => Toolspace.obj2yaml;
+
         }
 
-        [Cmd]
-        public struct Obj2YamlCmd : IToolCmd<Obj2YamlCmd,Obj2Yaml>
+        public Outcome Parse(FS.FilePath src, out ReadOnlySpan<McAsmRow> dst)
         {
+            dst = default;
 
+            return true;
         }
     }
 }

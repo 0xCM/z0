@@ -24,7 +24,7 @@ namespace Z0.Asm
                 );
 
         [MethodImpl(Inline), Op]
-        public static name64 name(XmmClass k, RegIndexCode index)
+        public static text7 name(XmmClass k, RegIndexCode index)
         {
             const byte RegLength = 5;
             const string Data = "xmm1 xmm2 xmm3 xmm4 xmm5 xmm6 xmm7 xmm8 xmm9 xmm10xmm11xmm12xmm13xmm14xmm15xmm16xmm17xmm18xmm19xmm20xmm21xmm22xmm23xmm24xmm25xmm26xmm27xmm28xmm29xmm30xmm31";
@@ -33,7 +33,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static name64 name(YmmClass k, RegIndexCode index)
+        public static text7 name(YmmClass k, RegIndexCode index)
         {
             const byte RegLength = 5;
             const string Data = "ymm1 ymm2 ymm3 ymm4 ymm5 ymm6 ymm7 ymm8 ymm9 ymm10ymm11ymm12ymm13ymm14ymm15ymm16ymm17ymm18ymm19ymm20ymm21ymm22ymm23ymm24ymm25ymm26ymm27ymm28ymm29ymm30ymm31";
@@ -42,7 +42,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static name64 name(ZmmClass k, RegIndexCode index)
+        public static text7 name(ZmmClass k, RegIndexCode index)
         {
             const byte RegLength = 5;
             const string Data = "zmm1 zmm2 zmm3 zmm4 zmm5 zmm6 zmm7 zmm8 zmm9 zmm10zmm11zmm12zmm13zmm14zmm15zmm16zmm17zmm18zmm19zmm20zmm21zmm22zmm23zmm24zmm25zmm26zmm27zmm28zmm29zmm30zmm31";
@@ -51,7 +51,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static name64 name(MaskClass k, RegIndexCode index)
+        public static text7 name(MaskClass k, RegIndexCode index)
         {
             const byte RegLength = 2;
             const string Data = "k0k1k2k3k4k5k6k7";
@@ -60,7 +60,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static name64 name(GpClass k, RegIndexCode index, RegWidthCode width)
+        public static text7 name(GpClass k, RegIndexCode index, RegWidthCode width)
         {
             const byte RegLength = 4;
             const string R0 = "rax eax ax  al  ";
@@ -86,7 +86,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static name64 name(RegOp src)
+        public static text7 name(RegOp src)
         {
             switch(src.RegClass)
             {
@@ -101,7 +101,7 @@ namespace Z0.Asm
                 case RegClassCode.MASK:
                     return name(KReg, src.Index);
             }
-            return name64.Empty;
+            return text7.Empty;
         }
 
         [MethodImpl(Inline), Op]

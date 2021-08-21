@@ -17,8 +17,36 @@ namespace Z0.Asm
             var symbols = Symbols.index<AsmOpCodeTokens.ModRmToken>();
             var src = Z0.Tokens.concat(symbols);
             var dst = Gen().Root + FS.file("token-specs", FS.Cs);
-
             EmitTokenSpecs("ModRmTokens", src,dst);
+            return result;
+        }
+
+        [CmdOp(".tokenstrings")]
+        Outcome EmitTokenStrings(CmdArgs args)
+        {
+            // "----\0----\0----\0"
+            var result = Outcome.Success;
+            var dst = text.buffer();
+            var spec = new char[12];
+            var j=0u;
+            seek(spec,j++)=Chars.Dash;
+            seek(spec,j++)=Chars.Dash;
+            seek(spec,j++)=Chars.Dash;
+            seek(spec,j++)=Chars.Null;
+
+            seek(spec,j++)=Chars.Dash;
+            seek(spec,j++)=Chars.Dash;
+            seek(spec,j++)=Chars.Dash;
+            seek(spec,j++)=Chars.Null;
+
+            seek(spec,j++)=Chars.Dash;
+            seek(spec,j++)=Chars.Dash;
+            seek(spec,j++)=Chars.Dash;
+            seek(spec,j++)=Chars.Null;
+
+            var ts = TokenStrings.define(spec);
+            Write(ts.TokenCount);
+
             return result;
         }
 
@@ -28,6 +56,7 @@ namespace Z0.Asm
             using var writer = dst.AsciWriter();
             var i=0;
             var count = src.Length;
+            var buffer = text.buffer();
             writer.Write(string.Format("public const string {0} = ", name));
             writer.Write('\"');
             while(i++<count)
@@ -47,5 +76,6 @@ namespace Z0.Asm
 
             EmittedFile(emitting, 1);
         }
+
     }
 }

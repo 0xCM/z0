@@ -55,7 +55,13 @@ namespace Z0.Asm
             get => AsmRegBits.index(this);
         }
 
-        public name64 Name
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => OpClass == 0;
+        }
+
+        public text7 Name
         {
             [MethodImpl(Inline)]
             get => api.name(this);

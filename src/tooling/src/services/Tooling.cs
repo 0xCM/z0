@@ -16,7 +16,6 @@ namespace Z0
     using SQ = SymbolicQuery;
     using SR = SymbolicRender;
 
-
     [ApiHost]
     public readonly struct Tooling
     {
@@ -37,7 +36,7 @@ namespace Z0
                 var j = text.index(content, Chars.Colon);
                 if(j >= 0)
                 {
-                    name128 tool = text.left(content, j);
+                    text15 tool = text.left(content, j);
                     var flow = text.right(content, j);
                     j = text.index(flow, "--");
                     if(j>=0)

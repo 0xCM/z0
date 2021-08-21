@@ -199,6 +199,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.blittable", "blittable\z
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.ws", "ws\z0.ws.csproj", "{BFC3A15E-CDB2-4773-AC14-20A6BDFD9E1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.llvm", "llvm\z0.llvm.csproj", "{7B4FF460-C44E-4933-AC88-F36528EE517E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1388,5 +1390,17 @@ Global
 		{BFC3A15E-CDB2-4773-AC14-20A6BDFD9E1F}.Release|x64.Build.0 = Release|Any CPU
 		{BFC3A15E-CDB2-4773-AC14-20A6BDFD9E1F}.Release|x86.ActiveCfg = Release|Any CPU
 		{BFC3A15E-CDB2-4773-AC14-20A6BDFD9E1F}.Release|x86.Build.0 = Release|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Debug|x64.Build.0 = Debug|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Debug|x86.Build.0 = Debug|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Release|x64.ActiveCfg = Release|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Release|x64.Build.0 = Release|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Release|x86.ActiveCfg = Release|Any CPU
+		{7B4FF460-C44E-4933-AC88-F36528EE517E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

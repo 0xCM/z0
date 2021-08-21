@@ -23,14 +23,14 @@ namespace Z0.Asm
 
         public ushort SdmKey;
 
-        public MC.AsmId AsmId;
+        public McAsmId AsmId;
 
         public uint Encoding;
 
         public CharBlock48 Expr;
 
         [MethodImpl(Inline)]
-        public AsmOpCode(ushort key, MC.AsmId asmid, uint encoding, CharBlock48 expr)
+        public AsmOpCode(ushort key, McAsmId asmid, uint encoding, CharBlock48 expr)
         {
             AsmId = 0;
             SdmKey = key;

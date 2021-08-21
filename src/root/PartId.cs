@@ -100,7 +100,8 @@ public enum PartId : byte
     [Symbol("ws")]
     Ws = 30,
 
-    OpenSlot1 = 31,
+    [Symbol("llvm")]
+    Llvm = 31,
 
     OpenSlot2 = 32,
 

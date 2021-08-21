@@ -7,15 +7,9 @@ namespace Z0
     partial struct Llvm
     {
         [Tool]
-        public struct TblGen : ITool<TblGen>
+        public readonly struct As : ITool<As>
         {
-            public ToolId Id => Toolspace.llvm_tblgen;
-        }
-
-        [Cmd]
-        public struct TableGenCmd : IToolCmd<TableGenCmd,TblGen>
-        {
-
+            public ToolId Id => Toolspace.llvm_as;
         }
     }
 }

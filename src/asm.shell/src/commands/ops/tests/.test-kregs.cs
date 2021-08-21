@@ -11,14 +11,13 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static Blit;
-
     using static RegClasses;
     using static RegMachines;
 
     partial class AsmCmdService
     {
         [MethodImpl(Inline)]
-        public static NamedRegValue<T> regval<T>(name64 name, T value)
+        public static NamedRegValue<T> regval<T>(text7 name, T value)
             where T : unmanaged
                 => new NamedRegValue<T>(name,value);
 
@@ -29,7 +28,7 @@ namespace Z0.Asm
 
             var grid = default(Grid8x64);
             var regs = Machines.regs(n8,w64);
-            var names = recover<name64>(ByteBlock64.Empty.Bytes);
+            var names = recover<text7>(ByteBlock64.Empty.Bytes);
             var pairs = recover<NamedRegValue<ulong>>(ByteBlock128.Empty.Bytes);
 
             for(byte i=0; i<7; i++)

@@ -2,21 +2,27 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.llvm
 {
-    using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
+    using Z0.Asm;
 
     using static Root;
 
-    public readonly ref struct AsmBlockComment
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
+    public struct McOperand
     {
-        public ReadOnlySpan<TextLine> Content {get;}
+        public AsmOpClass Class;
+
+        public ulong Value;
 
         [MethodImpl(Inline)]
-        public AsmBlockComment(ReadOnlySpan<TextLine> src)
+        public McOperand(AsmOpClass @class, ulong value)
         {
-            Content = src;
+            Class = @class;
+            Value  = value;
         }
     }
 }

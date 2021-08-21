@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static llvm.MC;
 
-    using Id = llvm.MC.AsmId;
+    using Id = llvm.McAsmId;
 
     [LiteralProvider]
     public readonly partial struct AsmPatterns

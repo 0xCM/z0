@@ -7,13 +7,11 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using llvm;
-
     using static Root;
     using static core;
     using static AsmOperands;
     using static llvm.MC;
-    using static llvm.MC.AsmId;
+    using static llvm.McAsmId;
 
     partial class AsmSpecs
     {

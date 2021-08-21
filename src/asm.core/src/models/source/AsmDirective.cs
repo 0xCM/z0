@@ -25,6 +25,26 @@ namespace Z0.Asm
 
     public enum AsmDirectiveKind : byte
     {
+        [Symbol(".file")]
+        File,
+
+        [Symbol(".globl")]
+        Global,
+
+        [Symbol(".p2align")]
+        P2Align,
+
+        [Symbol(".def")]
+        Def,
+
+        [Symbol(".endef")]
+        EndDef,
+
+        [Symbol(".scl")]
+        Scl,
+
+        [Symbol(".type")]
+        Type,
 
     }
 }

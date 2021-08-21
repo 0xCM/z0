@@ -27,7 +27,7 @@ namespace Z0.Asm
                 Index = index;
             }
 
-            public name64 Name
+            public text7 Name
                 => AsmRegNames.name(this);
 
             public string Format()

@@ -13,12 +13,12 @@ namespace Z0.Asm
     public readonly struct NamedRegValue<T>
         where T : unmanaged
     {
-        public name64 Name {get;}
+        public text7 Name {get;}
 
         public T Value {get;}
 
         [MethodImpl(Inline)]
-        public NamedRegValue(name64 name, T value)
+        public NamedRegValue(text7 name, T value)
         {
             Name = name;
             Value = value;
@@ -32,7 +32,7 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator NamedRegValue<T>(Paired<name64,T> src)
-            => @as<Paired<name64,T>,NamedRegValue<T>>(src);
+        public static implicit operator NamedRegValue<T>(Paired<text7,T> src)
+            => @as<Paired<text7,T>,NamedRegValue<T>>(src);
     }
 }

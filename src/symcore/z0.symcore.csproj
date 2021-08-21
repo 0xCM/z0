@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Containers)" />
     <ProjectReference Include="$(Clr)" />
     <ProjectReference Include="$(Text)" />
+    <ProjectReference Include="$(Blocks)" />
   </ItemGroup>
 
 </Project>

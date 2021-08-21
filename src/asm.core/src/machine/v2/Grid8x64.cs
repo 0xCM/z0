@@ -19,8 +19,8 @@ namespace Z0.Asm
             Store8x64 Values;
 
             [MethodImpl(Inline)]
-            public ref name64 RegName(byte index)
-                => ref seek(recover<name64>(Names.Bytes), index);
+            public ref text7 RegName(byte index)
+                => ref seek(recover<text7>(Names.Bytes), index);
 
             [MethodImpl(Inline)]
             public ref ulong RegVal(byte index)
@@ -36,7 +36,7 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
-            void Define(byte index, name64 name, ulong value)
+            void Define(byte index, text7 name, ulong value)
             {
                 RegName(index) = name;
                 RegVal(index) = value;

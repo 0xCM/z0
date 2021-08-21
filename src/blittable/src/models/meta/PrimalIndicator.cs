@@ -14,10 +14,10 @@ namespace Z0
     {
         public readonly struct PrimalIndicator
         {
-            public name64 Name {get;}
+            public text7 Name {get;}
 
             [MethodImpl(Inline)]
-            public PrimalIndicator(name64 name)
+            public PrimalIndicator(text7 name)
             {
                 Name = name;
             }
@@ -29,7 +29,7 @@ namespace Z0
                 => Format();
 
             [MethodImpl(Inline)]
-            public static implicit operator PrimalIndicator(name64 name)
+            public static implicit operator PrimalIndicator(text7 name)
                 => new PrimalIndicator(name);
         }
     }

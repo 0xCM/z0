@@ -17,12 +17,12 @@ namespace Z0.llvm
     {
         [MethodImpl(NotInline), Op]
         public static Calcs calcs()
-            => new Calcs(Symbols.index<AsmId>(), AsmStrs, OpInfo0, OpInfo1);
+            => new Calcs(Symbols.index<McAsmId>(), AsmStrs, OpInfo0, OpInfo1);
 
         [ApiHost("llvm.mc.calcs")]
         public readonly ref struct Calcs
         {
-            readonly ReadOnlySpan<AsmId> _AsmId;
+            readonly ReadOnlySpan<McAsmId> _AsmId;
 
             readonly ReadOnlySpan<Sym> _AsmIdSym;
 
@@ -33,7 +33,7 @@ namespace Z0.llvm
             readonly ReadOnlySpan<uint> OpInfo1;
 
             [MethodImpl(Inline)]
-            internal Calcs(Symbols<AsmId> asmid, ReadOnlySpan<char> strs, ReadOnlySpan<uint> a, ReadOnlySpan<uint> b)
+            internal Calcs(Symbols<McAsmId> asmid, ReadOnlySpan<char> strs, ReadOnlySpan<uint> a, ReadOnlySpan<uint> b)
             {
                 _AsmId = asmid.Kinds;
                 _AsmIdSym = asmid.Untyped().Storage;
@@ -76,7 +76,7 @@ namespace Z0.llvm
             }
 
             [MethodImpl(Inline), Op]
-            public string Monic(AsmId id)
+            public string Monic(McAsmId id)
                 => canonicalize(Monic(index(id)));
 
             public Index<string> Monics()
@@ -85,18 +85,18 @@ namespace Z0.llvm
                 var length = 0;
                 var set = hashset<string>();
                 for(ushort i=0; i<count; i++)
-                    set.Add(Monic((AsmId)i));
+                    set.Add(Monic((McAsmId)i));
                 Index<string> distinct = set.Array();
                 distinct.Sort();
                 return distinct;
             }
 
             [MethodImpl(Inline), Op]
-            public ReadOnlySpan<AsmId> AsmId()
+            public ReadOnlySpan<McAsmId> AsmId()
                 => _AsmId;
 
             [MethodImpl(Inline), Op]
-            public ref readonly Sym Sym(AsmId id)
+            public ref readonly Sym Sym(McAsmId id)
                 => ref skip(_AsmIdSym, u32(id));
 
             [MethodImpl(Inline), Op]
@@ -109,19 +109,19 @@ namespace Z0.llvm
             }
 
             [MethodImpl(Inline), Op]
-            public Hex64 OpCode(AsmId id)
+            public Hex64 OpCode(McAsmId id)
                 => OpCode(u32(id));
 
             [MethodImpl(Inline), Op]
-            public uint MonicOffset(AsmId id)
+            public uint MonicOffset(McAsmId id)
                 => offset(OpCode(id));
 
             [MethodImpl(Inline), Op]
-            public uint MonicLength(AsmId id)
+            public uint MonicLength(McAsmId id)
                 => AsmLength(offset(OpCode(id)));
 
             [MethodImpl(Inline)]
-            static uint index(AsmId id)
+            static uint index(McAsmId id)
                 => u32(id);
 
             [MethodImpl(Inline), Op]

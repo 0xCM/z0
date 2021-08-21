@@ -14,12 +14,12 @@ namespace Z0.llvm
     {
         public class AsmIdAttribute : Attribute
         {
-            public AsmIdAttribute(AsmId id)
+            public AsmIdAttribute(McAsmId id)
             {
                 Id = id;
             }
 
-            public AsmId Id {get;}
+            public McAsmId Id {get;}
         }
     }
 }

@@ -13,9 +13,7 @@ namespace Z0
     {
         Type Rep {get;}
 
-        FileKind FileKind {get;}
-
-        FS.FileExt FileExt {get;}
+        FS.FileExt DefaultExt {get;}
     }
 
     [Free]

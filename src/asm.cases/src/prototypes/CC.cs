@@ -24,6 +24,7 @@ namespace Z0.Asm
                 r8d[3] = edx*0x17;
             }
 
+
             [Op]
             public static Vector128<uint> f_u32_u32_u32_u32_v128x32u(uint a0, uint a1, uint a2, uint a3)
                 => cpu.vparts(w128, a0,  a1, a2, a3);

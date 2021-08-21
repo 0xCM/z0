@@ -15,16 +15,16 @@ namespace Z0.Asm
     public readonly struct JccInfo<K>
         where K : unmanaged
     {
-        public const uint SZ = 1 + name64.StorageSize + AsmSize.StorageSize;
+        public const uint SZ = 1 + text7.StorageSize + AsmSize.StorageSize;
 
         public K Kind {get;}
 
-        public name64 Name {get;}
+        public text7 Name {get;}
 
         public AsmSize Size {get;}
 
         [MethodImpl(Inline)]
-        public JccInfo(K kind, name64 name, AsmSize size)
+        public JccInfo(K kind, text7 name, AsmSize size)
         {
             Name = name;
             Size = size;

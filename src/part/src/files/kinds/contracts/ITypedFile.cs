@@ -8,23 +8,17 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ITypedFile : IFsEntry
+    public interface ITypedFile : IFile
     {
-
+        IFileType FileType {get;}
     }
 
     [Free]
     public interface ITypedFile<T> : ITypedFile
         where T : struct, IFileType
     {
-
+        IFileType ITypedFile.FileType
+            => default(T);
     }
 
-    [Free]
-    public interface ITypedFile<F,T> : ITypedFile<T>, IFsEntry<F>
-        where F : struct, ITypedFile<F,T>
-        where T : struct, IFileType
-    {
-
-    }
 }

@@ -8,12 +8,12 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static llvm.MC;
+    using Z0.llvm;
 
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct AsmInfo
     {
-        public AsmId Id;
+        public McAsmId Id;
 
         public StringAddress OpCodeExpr;
 

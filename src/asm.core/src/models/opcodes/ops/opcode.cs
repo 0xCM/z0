@@ -15,7 +15,7 @@ namespace Z0.Asm
     partial struct AsmOpCodes
     {
         [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(ushort sdmkey, MC.AsmId asmid, uint encoding, in CharBlock48 expr)
+        public static AsmOpCode opcode(ushort sdmkey, McAsmId asmid, uint encoding, in CharBlock48 expr)
             => new AsmOpCode(sdmkey, asmid, encoding, expr);
 
         [MethodImpl(Inline), Op]

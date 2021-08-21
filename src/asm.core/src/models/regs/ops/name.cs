@@ -13,7 +13,7 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static name64 name(RegOp src)
+        public static text7 name(RegOp src)
             => AsmRegNames.name(src);
     }
 }
