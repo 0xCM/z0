@@ -13,13 +13,10 @@ namespace Z0.Asm
     {
         public CharBlock32 Name {get;}
 
-        public Hex64 Offset {get;}
-
         [MethodImpl(Inline)]
-        public AsmLabel(in CharBlock32 name, Hex64 offset = default)
+        public AsmLabel(in CharBlock32 name)
         {
             Name = name;
-            Offset = offset;
         }
 
         public AsmLinePart TokenKind

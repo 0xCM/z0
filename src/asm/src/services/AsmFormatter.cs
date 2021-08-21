@@ -22,7 +22,7 @@ namespace Z0.Asm
                 ref readonly var instruction = ref skip(instructions,i);
                 var size = instruction.InstructionSize;
                 var code = slice(block, offset, size);
-                dst.AppendLineFormat("{0,-6} {1,-46} ; {2,-2} | {3}", offset, instruction.FormattedInstruction, size, code.FormatHex());
+                dst.AppendLineFormat("{0,-6} {1,-46} # {2,-2} | {3}", offset, instruction.FormattedInstruction, size, code.FormatHex());
                 offset += size;
             }
         }
@@ -30,7 +30,7 @@ namespace Z0.Asm
         [Op]
         public static AsmRoutineFormat format(AsmRoutine src, in AsmFormatConfig config)
         {
-            var dst = TextTools.buffer();
+            var dst = text.buffer();
             render(src, config, dst);
             return new AsmRoutineFormat(dst.Emit());
         }
@@ -38,9 +38,8 @@ namespace Z0.Asm
         [Op]
         public static void render(AsmRoutine src, in AsmFormatConfig config, ITextBuffer dst)
         {
-            const string Separator = "; " + RP.PageBreak160;
-            var buffer = span<string>(8);
-            var count = AsmRender.format(src.AsmHeader(), buffer);
+            var buffer = span<string>(16);
+            var count = AsmRender.format(ApiCodeBlockHeader.define(src.Uri, src.DisplaySig, src.Code, src.TermCode), buffer);
             for(var i=0; i<count; i++)
                 dst.AppendLine(skip(buffer,i));
             dst.AppendLine(instructions(src, config).Join(Eol));

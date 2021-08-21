@@ -28,6 +28,9 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
+        public static implicit operator string(AsmInlineComment src)
+            => src.Format();
+
         public static AsmInlineComment Empty
         {
             [MethodImpl(Inline)]

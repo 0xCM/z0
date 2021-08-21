@@ -45,7 +45,6 @@ namespace Z0.Asm
         IImmArchive ImmArchive
             => Db.ImmArchive();
 
-
         public Option<FS.FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined)
         {
             var dst = ImmArchive.AsmImmPath(Uri.Part, Uri, id, refined);

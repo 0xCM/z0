@@ -15,7 +15,6 @@ namespace Z0.Asm
         public static AsmComment comment(string src)
             => new AsmComment(src);
 
-
         [MethodImpl(Inline), Op]
         public static AsmInlineComment comment(AsmCommentMarker marker, string src)
             => new AsmInlineComment(marker,src);

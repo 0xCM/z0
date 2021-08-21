@@ -15,17 +15,9 @@ namespace Z0.Asm
 
         public bool EmitFileHeader;
 
-        public bool EmitBaseAddress;
-
-        public bool EmitSectionDelimiter;
-
-        public byte InstructionPad;
+        public bool EmitLineLabels;
 
         public bool EmitLineAddresses;
-
-        public string FieldDelimiter;
-
-        public string SectionDelimiter;
 
         public bool AbsoluteLabels;
 
@@ -38,12 +30,8 @@ namespace Z0.Asm
         {
             dst.EmitCaptureTermCode = true;
             dst.EmitFileHeader = true;
-            dst.EmitBaseAddress = true;
-            dst.EmitSectionDelimiter = true;
-            dst.InstructionPad = 46;
+            dst.EmitLineLabels = false;
             dst.AbsoluteLabels = false;
-            dst.FieldDelimiter = RP.FieldSep;
-            dst.SectionDelimiter = "; " + RP.PageBreak160;
             dst.EmitLineAddresses = true;
             dst.HeaderEncodingFormat = HexFormatSpecs.options();
             return ref dst;

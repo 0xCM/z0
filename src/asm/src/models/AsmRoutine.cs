@@ -49,8 +49,8 @@ namespace Z0.Asm
             TermCode = term;
         }
 
-        public ApiCodeBlockHeader AsmHeader()
-            => new ApiCodeBlockHeader("; " + RP.PageBreak160, Code.OpUri, DisplaySig, Code, TermCode);
+        // public ApiCodeBlockHeader AsmHeader()
+        //     => new ApiCodeBlockHeader("# " + RP.PageBreak160, Code.OpUri, DisplaySig, Code, TermCode);
 
         [MethodImpl(Inline)]
         public int CompareTo(AsmRoutine other)

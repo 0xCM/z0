@@ -11,7 +11,8 @@ namespace Z0
 
     public readonly struct ApiCodeBlockHeader
     {
-        public string Separator {get;}
+        public static ApiCodeBlockHeader define(OpUri uri, MethodDisplaySig method, ApiCodeBlock code, ExtractTermCode term)
+            => new ApiCodeBlockHeader(uri, method, code, term);
 
         public OpUri Uri {get;}
 
@@ -22,9 +23,8 @@ namespace Z0
         public ExtractTermCode TermCode {get;}
 
         [MethodImpl(Inline)]
-        public ApiCodeBlockHeader(string sep, OpUri uri, MethodDisplaySig sig, CodeBlock code, ExtractTermCode term)
+        public ApiCodeBlockHeader(OpUri uri, MethodDisplaySig sig, CodeBlock code, ExtractTermCode term)
         {
-            Separator = sep;
             Uri = uri;
             DisplaySig = sig;
             CodeBlock = code;
