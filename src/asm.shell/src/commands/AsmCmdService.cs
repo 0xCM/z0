@@ -7,8 +7,11 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
+    using llvm;
+
     using static Root;
     using static core;
+
 
     public sealed partial class AsmCmdService : AppCmdService<AsmCmdService>
     {
@@ -71,6 +74,7 @@ namespace Z0.Asm
         AsmTools AsmToolSvc;
 
         ShellEnv ShellEnv;
+
 
         byte[] _Assembled;
 

@@ -148,7 +148,6 @@ namespace Z0.Asm
 
                 ref readonly var file = ref skip(srcfiles,i);
                 var chip = file.FolderName.Format();
-                var formatter = Tables.formatter<CpuIdRow>();
                 using var reader = file.LineReader(TextEncodingKind.Asci);
                 while(reader.Next(out var line))
                 {

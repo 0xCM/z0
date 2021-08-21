@@ -1,1455 +1,1498 @@
 ﻿TableName                | EntryIndex   | EntryName
-OpCodeStrings            | 0            | 14 ib   
-OpCodeStrings            | 1            | 15 iw   
-OpCodeStrings            | 2            | 15 id   
-OpCodeStrings            | 3            | 81 /2 iw
-OpCodeStrings            | 4            | 83 /2 ib
-OpCodeStrings            | 5            | 11 /r   
-OpCodeStrings            | 6            | 81 /2 id
-OpCodeStrings            | 7            | 83 /2 ib
-OpCodeStrings            | 8            | 11 /r   
-OpCodeStrings            | 9            | REX.W + 81 /2 id
-OpCodeStrings            | 10           | REX.W + 83 /2 ib
-OpCodeStrings            | 11           | REX.W + 11 /r
-OpCodeStrings            | 12           | 80 /2 ib
-OpCodeStrings            | 13           | REX + 80 /2 ib
-OpCodeStrings            | 14           | 10 /r   
-OpCodeStrings            | 15           | REX + 10 /r
-OpCodeStrings            | 16           | 13 /r   
-OpCodeStrings            | 17           | 13 /r   
-OpCodeStrings            | 18           | REX.W + 13 /r
-OpCodeStrings            | 19           | REX + 12 /r
-OpCodeStrings            | 20           | 12 /r   
-OpCodeStrings            | 21           | REX.W + 15 id
-OpCodeStrings            | 22           | 66 0F 38 F6 /r
-OpCodeStrings            | 23           | 66 REX.w 0F 38 F6 /r
-OpCodeStrings            | 24           | 04 ib   
-OpCodeStrings            | 25           | 05 iw   
-OpCodeStrings            | 26           | 05 id   
-OpCodeStrings            | 27           | 81 /0 iw
-OpCodeStrings            | 28           | 83 /0 ib
-OpCodeStrings            | 29           | 01 /r   
-OpCodeStrings            | 30           | 81 /0 id
-OpCodeStrings            | 31           | 83 /0 ib
-OpCodeStrings            | 32           | 01 /r   
-OpCodeStrings            | 33           | REX.W + 81 /0 id
-OpCodeStrings            | 34           | REX.W + 83 /0 ib
-OpCodeStrings            | 35           | REX.W + 01 /r
-OpCodeStrings            | 36           | REX + 80 /0 ib
-OpCodeStrings            | 37           | 80 /0 ib
-OpCodeStrings            | 38           | REX + 00 /r
-OpCodeStrings            | 39           | 00 /r   
-OpCodeStrings            | 40           | 03 /r   
-OpCodeStrings            | 41           | 03 /r   
-OpCodeStrings            | 42           | REX.W + 03 /r
-OpCodeStrings            | 43           | 02 /r   
-OpCodeStrings            | 44           | REX + 02 /r
-OpCodeStrings            | 45           | REX.W + 05 id
-OpCodeStrings            | 46           | 66 0F 58 /r
-OpCodeStrings            | 47           | 24 ib   
-OpCodeStrings            | 48           | 25 iw   
-OpCodeStrings            | 49           | 25 id   
-OpCodeStrings            | 50           | 81 /4 iw
-OpCodeStrings            | 51           | 83 /4 ib
-OpCodeStrings            | 52           | 21 /r   
-OpCodeStrings            | 53           | 81 /4 id
-OpCodeStrings            | 54           | 83 /4 ib
-OpCodeStrings            | 55           | 21 /r   
-OpCodeStrings            | 56           | REX.W + 81 /4 id
-OpCodeStrings            | 57           | REX.W + 83 /4 ib
-OpCodeStrings            | 58           | REX.W + 21 /r
-OpCodeStrings            | 59           | 80 /4 ib
-OpCodeStrings            | 60           | REX + 80 /4 ib
-OpCodeStrings            | 61           | REX + 20 /r
-OpCodeStrings            | 62           | 20 /r   
-OpCodeStrings            | 63           | 23 /r   
-OpCodeStrings            | 64           | 23 /r   
-OpCodeStrings            | 65           | REX.W + 23 /r
-OpCodeStrings            | 66           | 22 /r   
-OpCodeStrings            | 67           | REX + 22 /r
-OpCodeStrings            | 68           | REX.W + 25 id
-OpCodeStrings            | 69           | VEX.LZ.0F38.W0 F2 /r
-OpCodeStrings            | 70           | VEX.LZ. 0F38.W1 F2 /r
-OpCodeStrings            | 71           | VEX.LZ.0F38.W0 F7 /r
-OpCodeStrings            | 72           | VEX.LZ.0F38.W1 F7 /r
-OpCodeStrings            | 73           | VEX.LZ.0F38.W0 F3 /3
-OpCodeStrings            | 74           | VEX.LZ.0F38.W1 F3 /3
-OpCodeStrings            | 75           | VEX.LZ.0F38.W0 F3 /1
-OpCodeStrings            | 76           | VEX.LZ.0F38.W1 F3 /1
-OpCodeStrings            | 77           | NP 0F 1A /r
-OpCodeStrings            | 78           | NP 0F 1B /r
-OpCodeStrings            | 79           | 0F BC /r
-OpCodeStrings            | 80           | 0F BC /r
-OpCodeStrings            | 81           | REX.W + 0F BC /r
-OpCodeStrings            | 82           | 0F BD /r
-OpCodeStrings            | 83           | 0F BD /r
-OpCodeStrings            | 84           | REX.W + 0F BD /r
-OpCodeStrings            | 85           | 0F C8 +rd
-OpCodeStrings            | 86           | REX.W + 0F C8 +rd
-OpCodeStrings            | 87           | 0F BA /4 ib
-OpCodeStrings            | 88           | 0F A3 /r
+OpCodeStrings            | 0            |         
+OpCodeStrings            | 1            |         
+OpCodeStrings            | 2            | 14 ib   
+OpCodeStrings            | 3            | 15 iw   
+OpCodeStrings            | 4            | 15 id   
+OpCodeStrings            | 5            | 81 /2 iw
+OpCodeStrings            | 6            | 83 /2 ib
+OpCodeStrings            | 7            | 11 /r   
+OpCodeStrings            | 8            | 81 /2 id
+OpCodeStrings            | 9            | 83 /2 ib
+OpCodeStrings            | 10           | 11 /r   
+OpCodeStrings            | 11           | REX.W + 81 /2 id
+OpCodeStrings            | 12           | REX.W + 83 /2 ib
+OpCodeStrings            | 13           | REX.W + 11 /r
+OpCodeStrings            | 14           | REX + 80 /2 ib
+OpCodeStrings            | 15           | 80 /2 ib
+OpCodeStrings            | 16           | 10 /r   
+OpCodeStrings            | 17           | REX + 10 /r
+OpCodeStrings            | 18           | 13 /r   
+OpCodeStrings            | 19           | 13 /r   
+OpCodeStrings            | 20           | REX.W + 13 /r
+OpCodeStrings            | 21           | REX + 12 /r
+OpCodeStrings            | 22           | 12 /r   
+OpCodeStrings            | 23           | REX.W + 15 id
+OpCodeStrings            | 24           | 66 0F 38 F6 /r
+OpCodeStrings            | 25           | 66 REX.w 0F 38 F6 /r
+OpCodeStrings            | 26           | 04 ib   
+OpCodeStrings            | 27           | 05 iw   
+OpCodeStrings            | 28           | 05 id   
+OpCodeStrings            | 29           | 81 /0 iw
+OpCodeStrings            | 30           | 83 /0 ib
+OpCodeStrings            | 31           | 01 /r   
+OpCodeStrings            | 32           | 81 /0 id
+OpCodeStrings            | 33           | 83 /0 ib
+OpCodeStrings            | 34           | 01 /r   
+OpCodeStrings            | 35           | REX.W + 81 /0 id
+OpCodeStrings            | 36           | REX.W + 83 /0 ib
+OpCodeStrings            | 37           | REX.W + 01 /r
+OpCodeStrings            | 38           | 80 /0 ib
+OpCodeStrings            | 39           | REX + 80 /0 ib
+OpCodeStrings            | 40           | 00 /r   
+OpCodeStrings            | 41           | REX + 00 /r
+OpCodeStrings            | 42           | 03 /r   
+OpCodeStrings            | 43           | 03 /r   
+OpCodeStrings            | 44           | REX.W + 03 /r
+OpCodeStrings            | 45           | 02 /r   
+OpCodeStrings            | 46           | REX + 02 /r
+OpCodeStrings            | 47           | REX.W + 05 id
+OpCodeStrings            | 48           | 66 0F 58 /r
+OpCodeStrings            | 49           | 24 ib   
+OpCodeStrings            | 50           | 25 iw   
+OpCodeStrings            | 51           | 25 id   
+OpCodeStrings            | 52           | 81 /4 iw
+OpCodeStrings            | 53           | 83 /4 ib
+OpCodeStrings            | 54           | 21 /r   
+OpCodeStrings            | 55           | 81 /4 id
+OpCodeStrings            | 56           | 83 /4 ib
+OpCodeStrings            | 57           | 21 /r   
+OpCodeStrings            | 58           | REX.W + 81 /4 id
+OpCodeStrings            | 59           | REX.W + 83 /4 ib
+OpCodeStrings            | 60           | REX.W + 21 /r
+OpCodeStrings            | 61           | 80 /4 ib
+OpCodeStrings            | 62           | REX + 80 /4 ib
+OpCodeStrings            | 63           | REX + 20 /r
+OpCodeStrings            | 64           | 20 /r   
+OpCodeStrings            | 65           | 23 /r   
+OpCodeStrings            | 66           | 23 /r   
+OpCodeStrings            | 67           | REX.W + 23 /r
+OpCodeStrings            | 68           | REX + 22 /r
+OpCodeStrings            | 69           | 22 /r   
+OpCodeStrings            | 70           | REX.W + 25 id
+OpCodeStrings            | 71           | VEX.LZ.0F38.W0 F2 /r
+OpCodeStrings            | 72           | VEX.LZ. 0F38.W1 F2 /r
+OpCodeStrings            | 73           | VEX.LZ.0F38.W0 F7 /r
+OpCodeStrings            | 74           | VEX.LZ.0F38.W1 F7 /r
+OpCodeStrings            | 75           | VEX.LZ.0F38.W0 F3 /3
+OpCodeStrings            | 76           | VEX.LZ.0F38.W1 F3 /3
+OpCodeStrings            | 77           | VEX.LZ.0F38.W0 F3 /1
+OpCodeStrings            | 78           | VEX.LZ.0F38.W1 F3 /1
+OpCodeStrings            | 79           | NP 0F 1A /r
+OpCodeStrings            | 80           | NP 0F 1B /r
+OpCodeStrings            | 81           | 0F BC /r
+OpCodeStrings            | 82           | 0F BC /r
+OpCodeStrings            | 83           | REX.W + 0F BC /r
+OpCodeStrings            | 84           | 0F BD /r
+OpCodeStrings            | 85           | 0F BD /r
+OpCodeStrings            | 86           | REX.W + 0F BD /r
+OpCodeStrings            | 87           | 0F C8 +rd
+OpCodeStrings            | 88           | REX.W + 0F C8 +rd
 OpCodeStrings            | 89           | 0F BA /4 ib
 OpCodeStrings            | 90           | 0F A3 /r
-OpCodeStrings            | 91           | REX.W + 0F BA /4 ib
-OpCodeStrings            | 92           | REX.W + 0F A3 /r
-OpCodeStrings            | 93           | VEX.LZ.0F38.W0 F5 /r
-OpCodeStrings            | 94           | VEX.LZ.0F38.W1 F5 /r
-OpCodeStrings            | 95           | FF /3   
-OpCodeStrings            | 96           | FF /3   
-OpCodeStrings            | 97           | REX.W FF /3
-OpCodeStrings            | 98           | 9A cd   
-OpCodeStrings            | 99           | 9A cp   
-OpCodeStrings            | 100          | FF /2   
-OpCodeStrings            | 101          | FF /2   
-OpCodeStrings            | 102          | FF /2   
-OpCodeStrings            | 103          | E8 cw   
-OpCodeStrings            | 104          | E8 cd   
-OpCodeStrings            | 105          | 99      
-OpCodeStrings            | 106          | 0F 47 /r
-OpCodeStrings            | 107          | 0F 47 /r
-OpCodeStrings            | 108          | REX.W + 0F 47 /r
-OpCodeStrings            | 109          | 0F 43 /r
-OpCodeStrings            | 110          | 0F 43 /r
-OpCodeStrings            | 111          | REX.W + 0F 43 /r
-OpCodeStrings            | 112          | 0F 42 /r
-OpCodeStrings            | 113          | 0F 42 /r
-OpCodeStrings            | 114          | REX.W + 0F 42 /r
-OpCodeStrings            | 115          | 0F 46 /r
-OpCodeStrings            | 116          | 0F 46 /r
-OpCodeStrings            | 117          | REX.W + 0F 46 /r
-OpCodeStrings            | 118          | 0F 42 /r
-OpCodeStrings            | 119          | 0F 42 /r
-OpCodeStrings            | 120          | REX.W + 0F 42 /r
-OpCodeStrings            | 121          | 0F 44 /r
-OpCodeStrings            | 122          | 0F 44 /r
-OpCodeStrings            | 123          | REX.W + 0F 44 /r
-OpCodeStrings            | 124          | 0F 4F /r
-OpCodeStrings            | 125          | 0F 4F /r
-OpCodeStrings            | 126          | REX.W + 0F 4F /r
-OpCodeStrings            | 127          | 0F 4D /r
-OpCodeStrings            | 128          | 0F 4D /r
-OpCodeStrings            | 129          | REX.W + 0F 4D /r
-OpCodeStrings            | 130          | 0F 4C /r
-OpCodeStrings            | 131          | 0F 4C /r
-OpCodeStrings            | 132          | REX.W + 0F 4C /r
-OpCodeStrings            | 133          | 0F 4E /r
-OpCodeStrings            | 134          | 0F 4E /r
-OpCodeStrings            | 135          | REX.W + 0F 4E /r
-OpCodeStrings            | 136          | 0F 46 /r
-OpCodeStrings            | 137          | 0F 46 /r
-OpCodeStrings            | 138          | REX.W + 0F 46 /r
-OpCodeStrings            | 139          | 0F 42 /r
-OpCodeStrings            | 140          | 0F 42 /r
-OpCodeStrings            | 141          | REX.W + 0F 42 /r
-OpCodeStrings            | 142          | 0F 43 /r
-OpCodeStrings            | 143          | 0F 43 /r
-OpCodeStrings            | 144          | REX.W + 0F 43 /r
-OpCodeStrings            | 145          | 0F 47 /r
-OpCodeStrings            | 146          | 0F 47 /r
-OpCodeStrings            | 147          | REX.W + 0F 47 /r
-OpCodeStrings            | 148          | 0F 43 /r
-OpCodeStrings            | 149          | 0F 43 /r
-OpCodeStrings            | 150          | REX.W + 0F 43 /r
-OpCodeStrings            | 151          | 0F 45 /r
-OpCodeStrings            | 152          | 0F 45 /r
-OpCodeStrings            | 153          | REX.W + 0F 45 /r
-OpCodeStrings            | 154          | 0F 4E /r
-OpCodeStrings            | 155          | 0F 4E /r
-OpCodeStrings            | 156          | REX.W + 0F 4E /r
-OpCodeStrings            | 157          | 0F 4C /r
-OpCodeStrings            | 158          | 0F 4C /r
-OpCodeStrings            | 159          | REX.W + 0F 4C /r
-OpCodeStrings            | 160          | 0F 4D /r
-OpCodeStrings            | 161          | 0F 4D /r
-OpCodeStrings            | 162          | REX.W + 0F 4D /r
-OpCodeStrings            | 163          | 0F 4F /r
-OpCodeStrings            | 164          | 0F 4F /r
-OpCodeStrings            | 165          | REX.W + 0F 4F /r
-OpCodeStrings            | 166          | 0F 41 /r
-OpCodeStrings            | 167          | 0F 41 /r
-OpCodeStrings            | 168          | REX.W + 0F 41 /r
-OpCodeStrings            | 169          | 0F 4B /r
-OpCodeStrings            | 170          | 0F 4B /r
-OpCodeStrings            | 171          | REX.W + 0F 4B /r
-OpCodeStrings            | 172          | 0F 49 /r
-OpCodeStrings            | 173          | 0F 49 /r
-OpCodeStrings            | 174          | REX.W + 0F 49 /r
-OpCodeStrings            | 175          | 0F 45 /r
-OpCodeStrings            | 176          | 0F 45 /r
-OpCodeStrings            | 177          | REX.W + 0F 45 /r
-OpCodeStrings            | 178          | 0F 40 /r
-OpCodeStrings            | 179          | 0F 40 /r
-OpCodeStrings            | 180          | REX.W + 0F 40 /r
-OpCodeStrings            | 181          | 0F 4A /r
-OpCodeStrings            | 182          | 0F 4A /r
-OpCodeStrings            | 183          | REX.W + 0F 4A /r
-OpCodeStrings            | 184          | 0F 4A /r
-OpCodeStrings            | 185          | 0F 4A /r
-OpCodeStrings            | 186          | REX.W + 0F 4A /r
-OpCodeStrings            | 187          | 0F 4B /r
-OpCodeStrings            | 188          | 0F 4B /r
-OpCodeStrings            | 189          | REX.W + 0F 4B /r
-OpCodeStrings            | 190          | 0F 48 /r
-OpCodeStrings            | 191          | 0F 48 /r
-OpCodeStrings            | 192          | REX.W + 0F 48 /r
-OpCodeStrings            | 193          | 0F 44 /r
-OpCodeStrings            | 194          | 0F 44 /r
-OpCodeStrings            | 195          | REX.W + 0F 44 /r
-OpCodeStrings            | 196          | 3C ib   
-OpCodeStrings            | 197          | 3D iw   
-OpCodeStrings            | 198          | 3D id   
-OpCodeStrings            | 199          | 81 /7 iw
-OpCodeStrings            | 200          | 83 /7 ib
-OpCodeStrings            | 201          | 39 /r   
-OpCodeStrings            | 202          | 81 /7 id
-OpCodeStrings            | 203          | 83 /7 ib
-OpCodeStrings            | 204          | 39 /r   
-OpCodeStrings            | 205          | REX.W + 81 /7 id
-OpCodeStrings            | 206          | REX.W + 83 /7 ib
-OpCodeStrings            | 207          | REX.W + 39 /r
-OpCodeStrings            | 208          | 80 /7 ib
-OpCodeStrings            | 209          | REX + 80 /7 ib
-OpCodeStrings            | 210          | REX + 38 /r
-OpCodeStrings            | 211          | 38 /r   
-OpCodeStrings            | 212          | 3B /r   
-OpCodeStrings            | 213          | 3B /r   
-OpCodeStrings            | 214          | REX.W + 3B /r
-OpCodeStrings            | 215          | 3A /r   
-OpCodeStrings            | 216          | REX + 3A /r
-OpCodeStrings            | 217          | REX.W + 3D id
-OpCodeStrings            | 218          | NP 0F C2 /r ib
-OpCodeStrings            | 219          | REX.W + 99
-OpCodeStrings            | 220          | 99      
-OpCodeStrings            | 221          | F7 /6   
-OpCodeStrings            | 222          | F7 /6   
-OpCodeStrings            | 223          | REX.W + F7 /6
-OpCodeStrings            | 224          | REX + F6 /6
-OpCodeStrings            | 225          | F6 /6   
-OpCodeStrings            | 226          | NP 0F AE /0
-OpCodeStrings            | 227          | NP REX.W + 0F AE /0
-OpCodeStrings            | 228          | F7 /5   
-OpCodeStrings            | 229          | F7 /5   
-OpCodeStrings            | 230          | REX.W + F7 /5
-OpCodeStrings            | 231          | F6 /5   
-OpCodeStrings            | 232          | 0F AF /r
-OpCodeStrings            | 233          | 69 /r iw
-OpCodeStrings            | 234          | 6B /r ib
-OpCodeStrings            | 235          | 0F AF /r
-OpCodeStrings            | 236          | 69 /r id
-OpCodeStrings            | 237          | 6B /r ib
-OpCodeStrings            | 238          | REX.W + 0F AF /r
-OpCodeStrings            | 239          | REX.W + 69 /r id
-OpCodeStrings            | 240          | REX.W + 6B /r ib
-OpCodeStrings            | 241          | EC      
-OpCodeStrings            | 242          | E4 ib   
-OpCodeStrings            | 243          | ED      
-OpCodeStrings            | 244          | E5 ib   
-OpCodeStrings            | 245          | ED      
-OpCodeStrings            | 246          | E5 ib   
-OpCodeStrings            | 247          | FF /0   
-OpCodeStrings            | 248          | FF /0   
-OpCodeStrings            | 249          | REX.W + FF /0
-OpCodeStrings            | 250          | FE /0   
-OpCodeStrings            | 251          | REX + FE /0
-OpCodeStrings            | 252          | 40  +rw 
-OpCodeStrings            | 253          | 40  +rd 
-OpCodeStrings            | 254          | 6D      
-OpCodeStrings            | 255          | 6D      
-OpCodeStrings            | 256          | 6C      
-OpCodeStrings            | 257          | 6C      
-OpCodeStrings            | 258          | 6D      
-OpCodeStrings            | 259          | 6D      
-OpCodeStrings            | 260          | 0F 87 cw
-OpCodeStrings            | 261          | 0F 87 cd
-OpCodeStrings            | 262          | 77 cb   
-OpCodeStrings            | 263          | 0F 83 cw
-OpCodeStrings            | 264          | 0F 83 cd
-OpCodeStrings            | 265          | 73 cb   
-OpCodeStrings            | 266          | 0F 82 cw
-OpCodeStrings            | 267          | 0F 82 cd
-OpCodeStrings            | 268          | 72 cb   
-OpCodeStrings            | 269          | 0F 86 cw
-OpCodeStrings            | 270          | 0F 86 cd
-OpCodeStrings            | 271          | 76 cb   
-OpCodeStrings            | 272          | 0F 82 cw
-OpCodeStrings            | 273          | 0F 82 cd
-OpCodeStrings            | 274          | 72 cb   
-OpCodeStrings            | 275          | E3 cb   
-OpCodeStrings            | 276          | 0F 84 cw
-OpCodeStrings            | 277          | 0F 84 cd
-OpCodeStrings            | 278          | 74 cb   
-OpCodeStrings            | 279          | E3 cb   
-OpCodeStrings            | 280          | 0F 8F cw
-OpCodeStrings            | 281          | 0F 8F cd
-OpCodeStrings            | 282          | 7F cb   
-OpCodeStrings            | 283          | 0F 8D cw
-OpCodeStrings            | 284          | 0F 8D cd
-OpCodeStrings            | 285          | 7D cb   
-OpCodeStrings            | 286          | 0F 8C cw
-OpCodeStrings            | 287          | 0F 8C cd
-OpCodeStrings            | 288          | 7C cb   
-OpCodeStrings            | 289          | 0F 8E cw
-OpCodeStrings            | 290          | 0F 8E cd
-OpCodeStrings            | 291          | 7E cb   
-OpCodeStrings            | 292          | FF /5   
-OpCodeStrings            | 293          | FF /5   
-OpCodeStrings            | 294          | REX.W FF /5
-OpCodeStrings            | 295          | EA cd   
-OpCodeStrings            | 296          | EA cp   
-OpCodeStrings            | 297          | FF /4   
-OpCodeStrings            | 298          | FF /4   
-OpCodeStrings            | 299          | FF /4   
-OpCodeStrings            | 300          | E9 cw   
-OpCodeStrings            | 301          | E9 cd   
-OpCodeStrings            | 302          | EB cb   
-OpCodeStrings            | 303          | 0F 86 cw
-OpCodeStrings            | 304          | 0F 86 cd
-OpCodeStrings            | 305          | 76 cb   
-OpCodeStrings            | 306          | 0F 82 cw
-OpCodeStrings            | 307          | 0F 82 cd
-OpCodeStrings            | 308          | 72 cb   
-OpCodeStrings            | 309          | 0F 83 cw
-OpCodeStrings            | 310          | 0F 83 cd
-OpCodeStrings            | 311          | 73 cb   
-OpCodeStrings            | 312          | 0F 87 cw
-OpCodeStrings            | 313          | 0F 87 cd
-OpCodeStrings            | 314          | 77 cb   
-OpCodeStrings            | 315          | 0F 83 cw
-OpCodeStrings            | 316          | 0F 83 cd
-OpCodeStrings            | 317          | 73 cb   
-OpCodeStrings            | 318          | 0F 85 cw
-OpCodeStrings            | 319          | 0F 85 cd
-OpCodeStrings            | 320          | 75 cb   
-OpCodeStrings            | 321          | 0F 8E cw
-OpCodeStrings            | 322          | 0F 8E cd
-OpCodeStrings            | 323          | 7E cb   
-OpCodeStrings            | 324          | 0F 8C cw
-OpCodeStrings            | 325          | 0F 8C cd
-OpCodeStrings            | 326          | 7C cb   
-OpCodeStrings            | 327          | 0F 8D cw
-OpCodeStrings            | 328          | 0F 8D cd
-OpCodeStrings            | 329          | 7D cb   
-OpCodeStrings            | 330          | 0F 8F cw
-OpCodeStrings            | 331          | 0F 8F cd
-OpCodeStrings            | 332          | 7F cb   
-OpCodeStrings            | 333          | 0F 81 cw
-OpCodeStrings            | 334          | 0F 81 cd
-OpCodeStrings            | 335          | 71 cb   
-OpCodeStrings            | 336          | 0F 8B cw
-OpCodeStrings            | 337          | 0F 8B cd
-OpCodeStrings            | 338          | 7B cb   
-OpCodeStrings            | 339          | 0F 89 cw
-OpCodeStrings            | 340          | 0F 89 cd
-OpCodeStrings            | 341          | 79 cb   
-OpCodeStrings            | 342          | 0F 85 cw
-OpCodeStrings            | 343          | 0F 85 cd
-OpCodeStrings            | 344          | 75 cb   
-OpCodeStrings            | 345          | 0F 80 cw
-OpCodeStrings            | 346          | 0F 80 cd
-OpCodeStrings            | 347          | 70 cb   
-OpCodeStrings            | 348          | 0F 8A cw
-OpCodeStrings            | 349          | 0F 8A cd
-OpCodeStrings            | 350          | 7A cb   
-OpCodeStrings            | 351          | 0F 8A cw
-OpCodeStrings            | 352          | 0F 8A cd
-OpCodeStrings            | 353          | 7A cb   
-OpCodeStrings            | 354          | 0F 8B cw
-OpCodeStrings            | 355          | 0F 8B cd
-OpCodeStrings            | 356          | 7B cb   
-OpCodeStrings            | 357          | E3 cb   
-OpCodeStrings            | 358          | 0F 88 cw
-OpCodeStrings            | 359          | 0F 88 cd
-OpCodeStrings            | 360          | 78 cb   
-OpCodeStrings            | 361          | 0F 84 cw
-OpCodeStrings            | 362          | 0F 84 cd
-OpCodeStrings            | 363          | 74 cb   
-OpCodeStrings            | 364          | VEX.L1.66.0F.W0 4A /r
-OpCodeStrings            | 365          | VEX.L1.66.0F.W1 4A /r
-OpCodeStrings            | 366          | VEX.L1.0F.W1 4A /r
-OpCodeStrings            | 367          | VEX.L1.0F.W0 4A /r
-OpCodeStrings            | 368          | VEX.L1.66.0F.W0 41 /r
-OpCodeStrings            | 369          | VEX.L1.66.0F.W1 41 /r
-OpCodeStrings            | 370          | VEX.L1.66.0F.W0 42 /r
-OpCodeStrings            | 371          | VEX.L1.66.0F.W1 42 /r
-OpCodeStrings            | 372          | VEX.L1.0F.W1 42 /r
-OpCodeStrings            | 373          | VEX.L1.0F.W0 42 /r
-OpCodeStrings            | 374          | VEX.L1.0F.W1 41 /r
-OpCodeStrings            | 375          | VEX.L1.0F.W0 41 /r
-OpCodeStrings            | 376          | VEX.L0.66.0F.W0 90 /r
-OpCodeStrings            | 377          | VEX.L0.66.0F.W0 92 /r
-OpCodeStrings            | 378          | VEX.L0.66.0F.W0 91 /r
-OpCodeStrings            | 379          | VEX.L0.66.0F.W0 93 /r
-OpCodeStrings            | 380          | VEX.L0.66.0F.W1 90 /r
-OpCodeStrings            | 381          | VEX.L0.F2.0F.W0 92 /r
-OpCodeStrings            | 382          | VEX.L0.66.0F.W1 91 /r
-OpCodeStrings            | 383          | VEX.L0.F2.0F.W0 93 /r
-OpCodeStrings            | 384          | VEX.L0.0F.W1 90 /r
-OpCodeStrings            | 385          | VEX.L0.F2.0F.W1 92 /r
-OpCodeStrings            | 386          | VEX.L0.0F.W1 91 /r
-OpCodeStrings            | 387          | VEX.L0.F2.0F.W1 93 /r
-OpCodeStrings            | 388          | VEX.L0.0F.W0 90 /r
-OpCodeStrings            | 389          | VEX.L0.0F.W0 92 /r
-OpCodeStrings            | 390          | VEX.L0.0F.W0 91 /r
-OpCodeStrings            | 391          | VEX.L0.0F.W0 93 /r
-OpCodeStrings            | 392          | VEX.L0.66.0F.W0 44 /r
-OpCodeStrings            | 393          | VEX.L0.66.0F.W1 44 /r
-OpCodeStrings            | 394          | VEX.L0.0F.W1 44 /r
-OpCodeStrings            | 395          | VEX.L0.0F.W0 44 /r
-OpCodeStrings            | 396          | VEX.L1.66.0F.W0 45 /r
-OpCodeStrings            | 397          | VEX.L1.66.0F.W1 45 /r
-OpCodeStrings            | 398          | VEX.L1.0F.W1 45 /r
-OpCodeStrings            | 399          | VEX.L0.66.0F.W0 98 /r
-OpCodeStrings            | 400          | VEX.L0.66.0F.W1 98 /r
-OpCodeStrings            | 401          | VEX.L0.0F.W1 98 /r
-OpCodeStrings            | 402          | VEX.L0.0F.W0 98 /r
-OpCodeStrings            | 403          | VEX.L1.0F.W0 45 /r
-OpCodeStrings            | 404          | VEX.L0.66.0F3A.W0 32 /r
-OpCodeStrings            | 405          | VEX.L0.66.0F3A.W0 33 /r
-OpCodeStrings            | 406          | VEX.L0.66.0F3A.W1 33 /r
-OpCodeStrings            | 407          | VEX.L0.66.0F3A.W1 32 /r
-OpCodeStrings            | 408          | VEX.L0.66.0F3A.W0 30 /r
-OpCodeStrings            | 409          | VEX.L0.66.0F3A.W0 31 /r
-OpCodeStrings            | 410          | VEX.L0.66.0F3A.W1 31 /r
-OpCodeStrings            | 411          | VEX.L0.66.0F3A.W1 30 /r
-OpCodeStrings            | 412          | VEX.L0.66.0F.W0 99 /r
-OpCodeStrings            | 413          | VEX.L0.66.0F.W1 99 /r
-OpCodeStrings            | 414          | VEX.L0.0F.W1 99 /r
-OpCodeStrings            | 415          | VEX.L0.0F.W0 99 /r
-OpCodeStrings            | 416          | VEX.L1.66.0F.W0 4B /r
-OpCodeStrings            | 417          | VEX.L1.0F.W1 4B /r
-OpCodeStrings            | 418          | VEX.L1.0F.W0 4B /r
-OpCodeStrings            | 419          | VEX.L1.66.0F.W0 46 /r
-OpCodeStrings            | 420          | VEX.L1.66.0F.W1 46 /r
-OpCodeStrings            | 421          | VEX.L1.0F.W1 46 /r
-OpCodeStrings            | 422          | VEX.L1.0F.W0 46 /r
-OpCodeStrings            | 423          | VEX.L1.66.0F.W0 47 /r
-OpCodeStrings            | 424          | VEX.L1.66.0F.W1 47 /r
-OpCodeStrings            | 425          | VEX.L1.0F.W1 47 /r
-OpCodeStrings            | 426          | VEX.L1.0F.W0 47 /r
-OpCodeStrings            | 427          | 8D /r   
-OpCodeStrings            | 428          | 8D /r   
-OpCodeStrings            | 429          | REX.W + 8D /r
-OpCodeStrings            | 430          | C9      
-OpCodeStrings            | 431          | C9      
-OpCodeStrings            | 432          | C9      
-OpCodeStrings            | 433          | F0      
-OpCodeStrings            | 434          | E2 cb   
-OpCodeStrings            | 435          | E1 cb   
-OpCodeStrings            | 436          | E0 cb   
-OpCodeStrings            | 437          | REX.W + A0
-OpCodeStrings            | 438          | A0      
-OpCodeStrings            | 439          | A1      
-OpCodeStrings            | 440          | A1      
-OpCodeStrings            | 441          | A3      
-OpCodeStrings            | 442          | A3      
-OpCodeStrings            | 443          | REX.W + A3
-OpCodeStrings            | 444          | A2      
-OpCodeStrings            | 445          | REX.W + A2
-OpCodeStrings            | 446          | C7 / 0 iw
-OpCodeStrings            | 447          | 89 /r   
-OpCodeStrings            | 448          | 8C /r   
-OpCodeStrings            | 449          | C7 / 0 id
-OpCodeStrings            | 450          | 89 /r   
-OpCodeStrings            | 451          | REX.W + C7 / 0 id
-OpCodeStrings            | 452          | REX.W + 89 /r
-OpCodeStrings            | 453          | REX + C6 / 0 ib
-OpCodeStrings            | 454          | C6 / 0 ib
-OpCodeStrings            | 455          | 88 /r   
-OpCodeStrings            | 456          | REX + 88 /r
-OpCodeStrings            | 457          | B8 +rw iw
-OpCodeStrings            | 458          | 8B /r   
-OpCodeStrings            | 459          | REX.W + 8C /r
-OpCodeStrings            | 460          | B8 +rd id
-OpCodeStrings            | 461          | 8B /r   
-OpCodeStrings            | 462          | REX.W + B8 +rd io
-OpCodeStrings            | 463          | REX.W + 8B /r
-OpCodeStrings            | 464          | REX.W + 8C /r
-OpCodeStrings            | 465          | B0 +rb ib
-OpCodeStrings            | 466          | REX + B0 +rb ib
-OpCodeStrings            | 467          | REX + 8A /r
-OpCodeStrings            | 468          | 8A /r   
-OpCodeStrings            | 469          | REX.W + A1
-OpCodeStrings            | 470          | 8E /r   
-OpCodeStrings            | 471          | REX.W + 8E /r
-OpCodeStrings            | 472          | 66 0F 28 /r
-OpCodeStrings            | 473          | 66 0F 29 /r
-OpCodeStrings            | 474          | NP 0F 28 /r
-OpCodeStrings            | 475          | NP 0F 29 /r
-OpCodeStrings            | 476          | NP 0F 6E /r
-OpCodeStrings            | 477          | 66 0F 7E /r
-OpCodeStrings            | 478          | NP 0F 7E /r
-OpCodeStrings            | 479          | 66 0F 6E /r
-OpCodeStrings            | 480          | 66 0F 38 F8 /r
-OpCodeStrings            | 481          | 66 0F 6F /r
-OpCodeStrings            | 482          | 66 0F 6F /r
-OpCodeStrings            | 483          | 66 0F 7F /r
-OpCodeStrings            | 484          | 66 0F 7F /r
-OpCodeStrings            | 485          | F3 0F 6F /r
-OpCodeStrings            | 486          | F3 0F 6F /r
-OpCodeStrings            | 487          | F3 0F 7F /r
-OpCodeStrings            | 488          | F3 0F 7F /r
-OpCodeStrings            | 489          | NP 0F 6F /r
-OpCodeStrings            | 490          | NP REX.W + 0F 6E /r
-OpCodeStrings            | 491          | NP 0F 7F /r
-OpCodeStrings            | 492          | 66 REX.W 0F 7E /r
-OpCodeStrings            | 493          | NP REX.W + 0F 7E /r
-OpCodeStrings            | 494          | 66 REX.W 0F 6E /r
-OpCodeStrings            | 495          | F3 0F 7E /r
-OpCodeStrings            | 496          | 66 0F D6 /r
-OpCodeStrings            | 497          | A5      
-OpCodeStrings            | 498          | A5      
-OpCodeStrings            | 499          | REX.W + A5
-OpCodeStrings            | 500          | A4      
-OpCodeStrings            | 501          | A4      
-OpCodeStrings            | 502          | A5      
-OpCodeStrings            | 503          | REX.W + A5
-OpCodeStrings            | 504          | A5      
-OpCodeStrings            | 505          | 0F BE /r
-OpCodeStrings            | 506          | 0F BF /r
-OpCodeStrings            | 507          | 0F BE /r
-OpCodeStrings            | 508          | REX.W + 0F BF /r
-OpCodeStrings            | 509          | REX.W + 0F BE /r
-OpCodeStrings            | 510          | 63 /r   
-OpCodeStrings            | 511          | 63 /r   
-OpCodeStrings            | 512          | REX.W + 63 /r
-OpCodeStrings            | 513          | 66 0F 10 /r
-OpCodeStrings            | 514          | 66 0F 11 /r
-OpCodeStrings            | 515          | 0F B6 /r
-OpCodeStrings            | 516          | 0F B7 /r
-OpCodeStrings            | 517          | 0F B6 /r
-OpCodeStrings            | 518          | REX.W + 0F B7 /r
-OpCodeStrings            | 519          | REX.W + 0F B6 /r
-OpCodeStrings            | 520          | 66 0F 3A 42 /r ib
-OpCodeStrings            | 521          | F7 /3   
-OpCodeStrings            | 522          | F7 /3   
-OpCodeStrings            | 523          | REX.W + F7 /3
-OpCodeStrings            | 524          | F6 /3   
-OpCodeStrings            | 525          | REX + F6 /3
-OpCodeStrings            | 526          | EE      
-OpCodeStrings            | 527          | EF      
-OpCodeStrings            | 528          | EF      
-OpCodeStrings            | 529          | E6 ib   
-OpCodeStrings            | 530          | E7 ib   
-OpCodeStrings            | 531          | E7 ib   
-OpCodeStrings            | 532          | 6F      
-OpCodeStrings            | 533          | 6F      
-OpCodeStrings            | 534          | 6E      
-OpCodeStrings            | 535          | 6E      
-OpCodeStrings            | 536          | 6F      
-OpCodeStrings            | 537          | 6F      
-OpCodeStrings            | 538          | NP 0F 38 1C /r 1
-OpCodeStrings            | 539          | 66 0F 38 1C /r
-OpCodeStrings            | 540          | NP 0F 38 1E /r 1
-OpCodeStrings            | 541          | 66 0F 38 1E /r
-OpCodeStrings            | 542          | NP 0F 38 1D /r 1
-OpCodeStrings            | 543          | 66 0F 38 1D /r
-OpCodeStrings            | 544          | NP 0F 6B /r 1
-OpCodeStrings            | 545          | 66 0F 6B /r
-OpCodeStrings            | 546          | NP 0F 63 /r 1
-OpCodeStrings            | 547          | 66 0F 63 /r
-OpCodeStrings            | 548          | 66 0F 38 2B /r
-OpCodeStrings            | 549          | NP 0F 67 /r
-OpCodeStrings            | 550          | 66 0F 67 /r
-OpCodeStrings            | 551          | NP 0F DC /r 1
-OpCodeStrings            | 552          | 66 0F DC /r
-OpCodeStrings            | 553          | NP 0F DD /r 1
-OpCodeStrings            | 554          | 66 0F DD /r
-OpCodeStrings            | 555          | NP 0F DB /r 1
-OpCodeStrings            | 556          | 66 0F DB /r
-OpCodeStrings            | 557          | 66 0F 3A 20 /r ib
-OpCodeStrings            | 558          | 66 0F 3A 20 /r ib
-OpCodeStrings            | 559          | 66 0F 3A 22 /r ib
-OpCodeStrings            | 560          | 66 0F 3A 22 /r ib
-OpCodeStrings            | 561          | 66 REX.W 0F 3A 22 /r ib
-OpCodeStrings            | 562          | 66 REX.W 0F 3A 22 /r ib
-OpCodeStrings            | 563          | 66 0F 38 3C /r
-OpCodeStrings            | 564          | 66 0F 38 3D /r
-OpCodeStrings            | 565          | NP 0F EE /r
-OpCodeStrings            | 566          | 66 0F EE /r
-OpCodeStrings            | 567          | NP 0F D7 /r 1
-OpCodeStrings            | 568          | 66 0F D7 /r
-OpCodeStrings            | 569          | 66 0f 38 21 /r
-OpCodeStrings            | 570          | 66 0f 38 22 /r
-OpCodeStrings            | 571          | 66 0f 38 20 /r
-OpCodeStrings            | 572          | 66 0f 38 25 /r
-OpCodeStrings            | 573          | 66 0f 38 23/r
-OpCodeStrings            | 574          | 66 0f 38 24 /r
-OpCodeStrings            | 575          | 66 0f 38 31 /r
-OpCodeStrings            | 576          | 66 0f 38 32 /r
-OpCodeStrings            | 577          | 66 0f 38 30 /r
-OpCodeStrings            | 578          | 66 0f 38 35 /r
-OpCodeStrings            | 579          | 66 0f 38 33 /r
-OpCodeStrings            | 580          | 66 0f 38 34 /r
-OpCodeStrings            | 581          | 1F      
-OpCodeStrings            | 582          | 07      
-OpCodeStrings            | 583          | 0F A1   
-OpCodeStrings            | 584          | 0F A1   
-OpCodeStrings            | 585          | 0F A1   
-OpCodeStrings            | 586          | 0F A9   
-OpCodeStrings            | 587          | 0F A9   
-OpCodeStrings            | 588          | 0F A9   
-OpCodeStrings            | 589          | 8F /0   
-OpCodeStrings            | 590          | 8F /0   
-OpCodeStrings            | 591          | 8F /0   
-OpCodeStrings            | 592          | 58 +rw  
-OpCodeStrings            | 593          | 58 +rd  
-OpCodeStrings            | 594          | 58 +rd  
-OpCodeStrings            | 595          | 17      
-OpCodeStrings            | 596          | 9D      
-OpCodeStrings            | 597          | 9D      
-OpCodeStrings            | 598          | 9D      
-OpCodeStrings            | 599          | 0F 18 /0
-OpCodeStrings            | 600          | 0F 18 /1
-OpCodeStrings            | 601          | 0F 18 /2
-OpCodeStrings            | 602          | 0F 18 /3
-OpCodeStrings            | 603          | NP 0F 38 00 /r 1
-OpCodeStrings            | 604          | 66 0F 38 00 /r
-OpCodeStrings            | 605          | 66 0F 70 /r ib
-OpCodeStrings            | 606          | F2 0F 70 /r ib
-OpCodeStrings            | 607          | NP 0F 70 /r ib
-OpCodeStrings            | 608          | NP 0F 38 08 /r 1
-OpCodeStrings            | 609          | 66 0F 38 08 /r
-OpCodeStrings            | 610          | NP 0F 38 0A /r 1
-OpCodeStrings            | 611          | 66 0F 38 0A /r
-OpCodeStrings            | 612          | NP 0F 38 09 /r 1
-OpCodeStrings            | 613          | 66 0F 38 09 /r
-OpCodeStrings            | 614          | NP 0F 68 /r
-OpCodeStrings            | 615          | 66 0F 68 /r
-OpCodeStrings            | 616          | NP 0F 6A /r
-OpCodeStrings            | 617          | 66 0F 6A /r
-OpCodeStrings            | 618          | 66 0F 6D /r
-OpCodeStrings            | 619          | NP 0F 69 /r
-OpCodeStrings            | 620          | 66 0F 69 /r
-OpCodeStrings            | 621          | NP 0F 62 /r
-OpCodeStrings            | 622          | 66 0F 62 /r
-OpCodeStrings            | 623          | 66 0F 6C /r
-OpCodeStrings            | 624          | 0E      
-OpCodeStrings            | 625          | 1E      
-OpCodeStrings            | 626          | 06      
-OpCodeStrings            | 627          | 0F A0   
-OpCodeStrings            | 628          | 0F A8   
-OpCodeStrings            | 629          | 68 iw   
-OpCodeStrings            | 630          | 68 id   
-OpCodeStrings            | 631          | 6A ib   
-OpCodeStrings            | 632          | FF /6   
-OpCodeStrings            | 633          | FF /6   
-OpCodeStrings            | 634          | FF /6   
-OpCodeStrings            | 635          | 50 +rw  
-OpCodeStrings            | 636          | 50 +rd  
-OpCodeStrings            | 637          | 50 +rd  
-OpCodeStrings            | 638          | 16      
-OpCodeStrings            | 639          | 9C      
-OpCodeStrings            | 640          | 9C      
-OpCodeStrings            | 641          | 9C      
-OpCodeStrings            | 642          | NP 0F EF /r 1
-OpCodeStrings            | 643          | 66 0F EF /r
-OpCodeStrings            | 644          | D1 /2   
-OpCodeStrings            | 645          | D3 /2   
-OpCodeStrings            | 646          | C1 /2 ib
-OpCodeStrings            | 647          | D1 /2   
-OpCodeStrings            | 648          | D3 /2   
-OpCodeStrings            | 649          | C1 /2 ib
-OpCodeStrings            | 650          | REX.W + D1 /2
-OpCodeStrings            | 651          | REX.W + D3 /2
-OpCodeStrings            | 652          | REX.W + C1 /2 ib
-OpCodeStrings            | 653          | REX + D0 /2
-OpCodeStrings            | 654          | D0 /2   
-OpCodeStrings            | 655          | D2 /2   
-OpCodeStrings            | 656          | REX + D2 /2
-OpCodeStrings            | 657          | C0 /2 ib
-OpCodeStrings            | 658          | REX + C0 /2 ib
-OpCodeStrings            | 659          | D1 /3   
-OpCodeStrings            | 660          | D3 /3   
-OpCodeStrings            | 661          | C1 /3 ib
-OpCodeStrings            | 662          | D1 /3   
-OpCodeStrings            | 663          | D3 /3   
-OpCodeStrings            | 664          | C1 /3 ib
-OpCodeStrings            | 665          | REX.W + D1 /3
-OpCodeStrings            | 666          | REX.W + D3 /3
-OpCodeStrings            | 667          | REX.W + C1 /3 ib
-OpCodeStrings            | 668          | REX + D0 /3
-OpCodeStrings            | 669          | D0 /3   
-OpCodeStrings            | 670          | D2 /3   
-OpCodeStrings            | 671          | REX + D2 /3
-OpCodeStrings            | 672          | C0 /3 ib
-OpCodeStrings            | 673          | REX + C0 /3 ib
-OpCodeStrings            | 674          | F3 0F AE /0
-OpCodeStrings            | 675          | F3 REX.W 0F AE /0
-OpCodeStrings            | 676          | F3 0F AE /1
-OpCodeStrings            | 677          | F3 REX.W 0F AE /1
-OpCodeStrings            | 678          | D1 /0   
-OpCodeStrings            | 679          | D3 /0   
-OpCodeStrings            | 680          | C1 /0 ib
-OpCodeStrings            | 681          | D1 /0   
-OpCodeStrings            | 682          | D3 /0   
-OpCodeStrings            | 683          | C1 /0 ib
-OpCodeStrings            | 684          | REX.W + D1 /0
-OpCodeStrings            | 685          | REX.W + D3 /0
-OpCodeStrings            | 686          | REX.W + C1 /0 ib
-OpCodeStrings            | 687          | REX + D0 /0
-OpCodeStrings            | 688          | D0 /0   
-OpCodeStrings            | 689          | D2 /0   
-OpCodeStrings            | 690          | REX + D2 /0
-OpCodeStrings            | 691          | C0 /0 ib
-OpCodeStrings            | 692          | REX + C0 /0 ib
-OpCodeStrings            | 693          | D1 /1   
-OpCodeStrings            | 694          | D3 /1   
-OpCodeStrings            | 695          | C1 /1 ib
-OpCodeStrings            | 696          | D1 /1   
-OpCodeStrings            | 697          | D3 /1   
-OpCodeStrings            | 698          | C1 /1 ib
-OpCodeStrings            | 699          | REX.W + D1 /1
-OpCodeStrings            | 700          | REX.W + D3 /1
-OpCodeStrings            | 701          | REX.W + C1 /1 ib
-OpCodeStrings            | 702          | D0 /1   
-OpCodeStrings            | 703          | REX + D0 /1
-OpCodeStrings            | 704          | REX + D2 /1
-OpCodeStrings            | 705          | D2 /1   
-OpCodeStrings            | 706          | C0 /1 ib
-OpCodeStrings            | 707          | REX + C0 /1 ib
-OpCodeStrings            | 708          | D1 /4   
-OpCodeStrings            | 709          | D3 /4   
-OpCodeStrings            | 710          | C1 /4 ib
-OpCodeStrings            | 711          | D1 /4   
-OpCodeStrings            | 712          | D3 /4   
-OpCodeStrings            | 713          | C1/4 ib 
-OpCodeStrings            | 714          | REX.W + D1 /4
-OpCodeStrings            | 715          | REX.W + D3 /4
-OpCodeStrings            | 716          | REX.W + C1 /4 ib
-OpCodeStrings            | 717          | D0 /4   
-OpCodeStrings            | 718          | D2 /4   
-OpCodeStrings            | 719          | REX + D0 /4
-OpCodeStrings            | 720          | REX + D2 /4
-OpCodeStrings            | 721          | REX + C0 /4 ib
-OpCodeStrings            | 722          | C0 /4 ib
-OpCodeStrings            | 723          | D3 /7   
-OpCodeStrings            | 724          | D1 /7   
-OpCodeStrings            | 725          | C1 /7 ib
-OpCodeStrings            | 726          | D1 /7   
-OpCodeStrings            | 727          | D3 /7   
-OpCodeStrings            | 728          | C1 /7 ib
-OpCodeStrings            | 729          | REX.W + D1 /7
-OpCodeStrings            | 730          | REX.W + D3 /7
-OpCodeStrings            | 731          | REX.W + C1 /7 ib
-OpCodeStrings            | 732          | D0 /7   
-OpCodeStrings            | 733          | D2 /7   
-OpCodeStrings            | 734          | REX + D0 /7
-OpCodeStrings            | 735          | REX + D2 /7
-OpCodeStrings            | 736          | C0 /7 ib
-OpCodeStrings            | 737          | REX + C0 /7 ib
-OpCodeStrings            | 738          | VEX.LZ.F3.0F38.W0 F7 /r
-OpCodeStrings            | 739          | VEX.LZ.F3.0F38.W1 F7 /r
-OpCodeStrings            | 740          | 1C ib   
-OpCodeStrings            | 741          | 1D iw   
-OpCodeStrings            | 742          | 1D id   
-OpCodeStrings            | 743          | 81 /3 iw
-OpCodeStrings            | 744          | 83 /3 ib
-OpCodeStrings            | 745          | 19 /r   
-OpCodeStrings            | 746          | 81 /3 id
-OpCodeStrings            | 747          | 83 /3 ib
-OpCodeStrings            | 748          | 19 /r   
-OpCodeStrings            | 749          | REX.W + 81 /3 id
-OpCodeStrings            | 750          | REX.W + 83 /3 ib
-OpCodeStrings            | 751          | REX.W + 19 /r
-OpCodeStrings            | 752          | 80 /3 ib
-OpCodeStrings            | 753          | REX + 80 /3 ib
-OpCodeStrings            | 754          | REX + 18 /r
-OpCodeStrings            | 755          | 18 /r   
-OpCodeStrings            | 756          | 1B /r   
-OpCodeStrings            | 757          | 1B /r   
-OpCodeStrings            | 758          | REX.W + 1B /r
-OpCodeStrings            | 759          | REX + 1A /r
-OpCodeStrings            | 760          | 1A /r   
-OpCodeStrings            | 761          | REX.W + 1D id
-OpCodeStrings            | 762          | 0F 97   
-OpCodeStrings            | 763          | REX + 0F 97
-OpCodeStrings            | 764          | 0F 93   
-OpCodeStrings            | 765          | REX + 0F 93
-OpCodeStrings            | 766          | REX + 0F 92
-OpCodeStrings            | 767          | 0F 92   
-OpCodeStrings            | 768          | REX + 0F 96
-OpCodeStrings            | 769          | 0F 96   
-OpCodeStrings            | 770          | 0F 92   
-OpCodeStrings            | 771          | REX + 0F 92
-OpCodeStrings            | 772          | REX + 0F 94
-OpCodeStrings            | 773          | 0F 94   
-OpCodeStrings            | 774          | 0F 9F   
-OpCodeStrings            | 775          | REX + 0F 9F
-OpCodeStrings            | 776          | REX + 0F 9D
-OpCodeStrings            | 777          | 0F 9D   
-OpCodeStrings            | 778          | 0F 9C   
-OpCodeStrings            | 779          | REX + 0F 9C
-OpCodeStrings            | 780          | 0F 9E   
-OpCodeStrings            | 781          | REX + 0F 9E
-OpCodeStrings            | 782          | 0F 96   
-OpCodeStrings            | 783          | REX + 0F 96
-OpCodeStrings            | 784          | 0F 92   
-OpCodeStrings            | 785          | REX + 0F 92
-OpCodeStrings            | 786          | 0F 93   
-OpCodeStrings            | 787          | REX + 0F 93
-OpCodeStrings            | 788          | 0F 97   
-OpCodeStrings            | 789          | REX + 0F 97
-OpCodeStrings            | 790          | 0F 93   
-OpCodeStrings            | 791          | REX + 0F 93
-OpCodeStrings            | 792          | REX + 0F 95
-OpCodeStrings            | 793          | 0F 95   
-OpCodeStrings            | 794          | REX + 0F 9E
-OpCodeStrings            | 795          | 0F 9E   
-OpCodeStrings            | 796          | 0F 9C   
-OpCodeStrings            | 797          | REX + 0F 9C
-OpCodeStrings            | 798          | 0F 9D   
-OpCodeStrings            | 799          | REX + 0F 9D
-OpCodeStrings            | 800          | REX + 0F 9F
-OpCodeStrings            | 801          | 0F 9F   
-OpCodeStrings            | 802          | 0F 91   
-OpCodeStrings            | 803          | REX + 0F 91
-OpCodeStrings            | 804          | REX + 0F 9B
-OpCodeStrings            | 805          | 0F 9B   
-OpCodeStrings            | 806          | REX + 0F 99
-OpCodeStrings            | 807          | 0F 99   
-OpCodeStrings            | 808          | REX + 0F 95
-OpCodeStrings            | 809          | 0F 95   
-OpCodeStrings            | 810          | REX + 0F 90
-OpCodeStrings            | 811          | 0F 90   
-OpCodeStrings            | 812          | 0F 9A   
-OpCodeStrings            | 813          | REX + 0F 9A
-OpCodeStrings            | 814          | 0F 9A   
-OpCodeStrings            | 815          | REX + 0F 9A
-OpCodeStrings            | 816          | REX + 0F 9B
-OpCodeStrings            | 817          | 0F 9B   
-OpCodeStrings            | 818          | REX + 0F 98
-OpCodeStrings            | 819          | 0F 98   
-OpCodeStrings            | 820          | 0F 94   
-OpCodeStrings            | 821          | REX + 0F 94
-OpCodeStrings            | 822          | D3 /4   
-OpCodeStrings            | 823          | D1 /4   
-OpCodeStrings            | 824          | C1 /4 ib
-OpCodeStrings            | 825          | D3 /4   
-OpCodeStrings            | 826          | D1 /4   
-OpCodeStrings            | 827          | C1 /4 ib
-OpCodeStrings            | 828          | REX.W + D3 /4
-OpCodeStrings            | 829          | REX.W + D1 /4
-OpCodeStrings            | 830          | REX.W + C1 /4 ib
-OpCodeStrings            | 831          | D0 /4   
-OpCodeStrings            | 832          | D2 /4   
-OpCodeStrings            | 833          | REX + D0 /4
-OpCodeStrings            | 834          | REX + D2 /4
-OpCodeStrings            | 835          | REX + C0 /4 ib
-OpCodeStrings            | 836          | C0 /4 ib
-OpCodeStrings            | 837          | VEX.LZ.66.0F38.W0 F7 /r
-OpCodeStrings            | 838          | VEX.LZ.66.0F38.W1 F7 /r
-OpCodeStrings            | 839          | D1 /5   
-OpCodeStrings            | 840          | D3 /5   
-OpCodeStrings            | 841          | C1 /5 ib
-OpCodeStrings            | 842          | D1 /5   
-OpCodeStrings            | 843          | D3 /5   
-OpCodeStrings            | 844          | C1 /5 ib
-OpCodeStrings            | 845          | REX.W + D1 /5
-OpCodeStrings            | 846          | REX.W + D3 /5
-OpCodeStrings            | 847          | REX.W + C1 /5 ib
-OpCodeStrings            | 848          | D2 /5   
-OpCodeStrings            | 849          | REX + D0 /5
-OpCodeStrings            | 850          | D0 /5   
-OpCodeStrings            | 851          | REX + D2 /5
-OpCodeStrings            | 852          | REX + C0 /5 ib
-OpCodeStrings            | 853          | C0 /5 ib
-OpCodeStrings            | 854          | VEX.LZ.F2.0F38.W0 F7 /r
-OpCodeStrings            | 855          | VEX.LZ.F2.0F38.W1 F7 /r
-OpCodeStrings            | 856          | AB      
-OpCodeStrings            | 857          | AB      
-OpCodeStrings            | 858          | REX.W + AB
-OpCodeStrings            | 859          | AA      
-OpCodeStrings            | 860          | AA      
-OpCodeStrings            | 861          | AB      
-OpCodeStrings            | 862          | REX.W + AB
-OpCodeStrings            | 863          | AB      
-OpCodeStrings            | 864          | 2C ib   
-OpCodeStrings            | 865          | 2D iw   
-OpCodeStrings            | 866          | 2D id   
-OpCodeStrings            | 867          | 81 /5 iw
-OpCodeStrings            | 868          | 83 /5 ib
-OpCodeStrings            | 869          | 29 /r   
-OpCodeStrings            | 870          | 81 /5 id
-OpCodeStrings            | 871          | 83 /5 ib
-OpCodeStrings            | 872          | 29 /r   
-OpCodeStrings            | 873          | REX.W + 81 /5 id
-OpCodeStrings            | 874          | REX.W + 83 /5 ib
-OpCodeStrings            | 875          | REX.W + 29 /r
-OpCodeStrings            | 876          | REX + 80 /5 ib
-OpCodeStrings            | 877          | 80 /5 ib
-OpCodeStrings            | 878          | 28 /r   
-OpCodeStrings            | 879          | REX + 28 /r
-OpCodeStrings            | 880          | 2B /r   
-OpCodeStrings            | 881          | 2B /r   
-OpCodeStrings            | 882          | REX.W + 2B /r
-OpCodeStrings            | 883          | 2A /r   
-OpCodeStrings            | 884          | REX + 2A /r
-OpCodeStrings            | 885          | REX.W + 2D id
-OpCodeStrings            | 886          | 0F 05   
-OpCodeStrings            | 887          | A8 ib   
-OpCodeStrings            | 888          | A9 iw   
-OpCodeStrings            | 889          | A9 id   
-OpCodeStrings            | 890          | F7 /0 iw
-OpCodeStrings            | 891          | 85 /4   
-OpCodeStrings            | 892          | F7 /0 id
-OpCodeStrings            | 893          | 85 /4   
-OpCodeStrings            | 894          | REX.W + F7 /0 id
-OpCodeStrings            | 895          | REX.W + 85 /4
-OpCodeStrings            | 896          | REX + F6 /0 ib
-OpCodeStrings            | 897          | F6 /0 ib
-OpCodeStrings            | 898          | 84 /4   
-OpCodeStrings            | 899          | REX + 84 /4
-OpCodeStrings            | 900          | REX.W + A9 id
-OpCodeStrings            | 901          | 66 0F AE /6
-OpCodeStrings            | 902          | EVEX.128.66.0F.W1 58 /r
-OpCodeStrings            | 903          | VEX.128.66.0F.WIG 58 /r
-OpCodeStrings            | 904          | EVEX.256.66.0F.W1 58 /r
-OpCodeStrings            | 905          | VEX.256.66.0F.WIG 58 /r
-OpCodeStrings            | 906          | EVEX.512.66.0F.W1 58 /r
-OpCodeStrings            | 907          | VEX.256.66.0F38.W0 5A /r
-OpCodeStrings            | 908          | EVEX.128.66.0F38.W0 59 /r
-OpCodeStrings            | 909          | EVEX.256.66.0F38.W0 59 /r
-OpCodeStrings            | 910          | EVEX.512.66.0F38.W0 59 /r
-OpCodeStrings            | 911          | EVEX.256.66.0F38.W0 5A /r
-OpCodeStrings            | 912          | EVEX.512.66.0F38.W0 5A /r
-OpCodeStrings            | 913          | EVEX.512.66.0F38.W0 5B /r
-OpCodeStrings            | 914          | EVEX.256.66.0F38.W1 5A /r
-OpCodeStrings            | 915          | EVEX.512.66.0F38.W1 5A /r
-OpCodeStrings            | 916          | EVEX.512.66.0F38.W1 5B /r
-OpCodeStrings            | 917          | EVEX.128.0F.W0 C2 /r ib
-OpCodeStrings            | 918          | EVEX.256.0F.W0 C2 /r ib
-OpCodeStrings            | 919          | EVEX.512.0F.W0 C2 /r ib
-OpCodeStrings            | 920          | VEX.128.0F.WIG C2 /r ib
-OpCodeStrings            | 921          | VEX.256.0F.WIG C2 /r ib
-OpCodeStrings            | 922          | VEX.256.66.0F3A.W0 39 /r ib
-OpCodeStrings            | 923          | EVEX.256.66.0F3A.W0 39 /r ib
-OpCodeStrings            | 924          | EVEX.512.66.0F3A.W0 39 /r ib
-OpCodeStrings            | 925          | EVEX.512.66.0F3A.W0 3B /r ib
-OpCodeStrings            | 926          | EVEX.256.66.0F3A.W1 39 /r ib
-OpCodeStrings            | 927          | EVEX.512.66.0F3A.W1 39 /r ib
-OpCodeStrings            | 928          | EVEX.512.66.0F3A.W1 3B /r ib
-OpCodeStrings            | 929          | VEX.128.66.0F38.W0 2F /r
-OpCodeStrings            | 930          | VEX.256.66.0F38.W0 2F /r
-OpCodeStrings            | 931          | VEX.128.66.0F38.W0 2D /r
-OpCodeStrings            | 932          | VEX.256.66.0F38.W0 2D /r
-OpCodeStrings            | 933          | VEX.128.66.0F38.W0 2E /r
-OpCodeStrings            | 934          | VEX.256.66.0F38.W0 2E /r
-OpCodeStrings            | 935          | VEX.128.66.0F38.W0 2C /r
-OpCodeStrings            | 936          | VEX.256.66.0F38.W0 2C /r
-OpCodeStrings            | 937          | VEX.128.66.0F.WIG 28 /r
-OpCodeStrings            | 938          | EVEX.128.66.0F.W1 28 /r
-OpCodeStrings            | 939          | EVEX.128.66.0F.W1 29 /r
-OpCodeStrings            | 940          | VEX.128.66.0F.WIG 29 /r
-OpCodeStrings            | 941          | VEX.256.66.0F.WIG 28 /r
-OpCodeStrings            | 942          | EVEX.256.66.0F.W1 28 /r
-OpCodeStrings            | 943          | EVEX.256.66.0F.W1 29 /r
-OpCodeStrings            | 944          | VEX.256.66.0F.WIG 29 /r
-OpCodeStrings            | 945          | EVEX.512.66.0F.W1 28 /r
-OpCodeStrings            | 946          | EVEX.512.66.0F.W1 29 /r
-OpCodeStrings            | 947          | EVEX.128.0F.W0 28 /r
-OpCodeStrings            | 948          | VEX.128.0F.WIG 28 /r
-OpCodeStrings            | 949          | EVEX.128.0F.W0 29 /r
-OpCodeStrings            | 950          | VEX.128.0F.WIG 29 /r
-OpCodeStrings            | 951          | EVEX.256.0F.W0 28 /r
-OpCodeStrings            | 952          | VEX.256.0F.WIG 28 /r
-OpCodeStrings            | 953          | EVEX.256.0F.W0 29 /r
-OpCodeStrings            | 954          | VEX.256.0F.WIG 29 /r
-OpCodeStrings            | 955          | EVEX.512.0F.W0 28 /r
-OpCodeStrings            | 956          | EVEX.512.0F.W0 29 /r
-OpCodeStrings            | 957          | EVEX.128.66.0F.W0 7E /r
-OpCodeStrings            | 958          | VEX.128.66.0F.W0 7E /r
-OpCodeStrings            | 959          | VEX.128.66.0F.W0 6E /
-OpCodeStrings            | 960          | EVEX.128.66.0F.W0 6E /r
-OpCodeStrings            | 961          | VEX.128.66.0F.WIG 6F /r
-OpCodeStrings            | 962          | VEX.128.66.0F.WIG 6F /r
-OpCodeStrings            | 963          | VEX.128.66.0F.WIG 7F /r
-OpCodeStrings            | 964          | VEX.128.66.0F.WIG 7F /r
-OpCodeStrings            | 965          | VEX.256.66.0F.WIG 6F /r
-OpCodeStrings            | 966          | VEX.256.66.0F.WIG 6F /r
-OpCodeStrings            | 967          | VEX.256.66.0F.WIG 7F /r
-OpCodeStrings            | 968          | VEX.256.66.0F.WIG 7F /r
-OpCodeStrings            | 969          | EVEX.128.66.0F.W0 6F /r
-OpCodeStrings            | 970          | EVEX.128.66.0F.W0 6F /r
-OpCodeStrings            | 971          | EVEX.128.66.0F.W0 7F /r
-OpCodeStrings            | 972          | EVEX.128.66.0F.W0 7F /r
-OpCodeStrings            | 973          | EVEX.256.66.0F.W0 6F /r
-OpCodeStrings            | 974          | EVEX.256.66.0F.W0 6F /r
-OpCodeStrings            | 975          | EVEX.256.66.0F.W0 7F /r
-OpCodeStrings            | 976          | EVEX.256.66.0F.W0 7F /r
-OpCodeStrings            | 977          | EVEX.512.66.0F.W0 6F /r
-OpCodeStrings            | 978          | EVEX.512.66.0F.W0 6F /r
-OpCodeStrings            | 979          | EVEX.512.66.0F.W0 7F /r
-OpCodeStrings            | 980          | EVEX.512.66.0F.W0 7F /r
-OpCodeStrings            | 981          | EVEX.128.66.0F.W1 6F /r
-OpCodeStrings            | 982          | EVEX.128.66.0F.W1 6F /r
-OpCodeStrings            | 983          | EVEX.128.66.0F.W1 7F /r
-OpCodeStrings            | 984          | EVEX.128.66.0F.W1 7F /r
-OpCodeStrings            | 985          | EVEX.256.66.0F.W1 6F /r
-OpCodeStrings            | 986          | EVEX.256.66.0F.W1 6F /r
-OpCodeStrings            | 987          | EVEX.256.66.0F.W1 7F /r
-OpCodeStrings            | 988          | EVEX.256.66.0F.W1 7F /r
-OpCodeStrings            | 989          | EVEX.512.66.0F.W1 6F /r
-OpCodeStrings            | 990          | EVEX.512.66.0F.W1 6F /r
-OpCodeStrings            | 991          | EVEX.512.66.0F.W1 7F /r
-OpCodeStrings            | 992          | EVEX.512.66.0F.W1 7F /r
-OpCodeStrings            | 993          | VEX.128.F3.0F.WIG 6F /r
-OpCodeStrings            | 994          | VEX.128.F3.0F.WIG 6F /r
-OpCodeStrings            | 995          | VEX.128.F3.0F.WIG 7F /r
-OpCodeStrings            | 996          | VEX.128.F3.0F.WIG 7F /r
-OpCodeStrings            | 997          | VEX.256.F3.0F.WIG 6F /r
-OpCodeStrings            | 998          | VEX.256.F3.0F.WIG 6F /r
-OpCodeStrings            | 999          | VEX.256.F3.0F.WIG 7F /r
-OpCodeStrings            | 1000         | VEX.256.F3.0F.WIG 7F /r
-OpCodeStrings            | 1001         | EVEX.128.F2.0F.W1 6F /r
-OpCodeStrings            | 1002         | EVEX.128.F2.0F.W1 6F /r
-OpCodeStrings            | 1003         | EVEX.128.F2.0F.W1 7F /r
-OpCodeStrings            | 1004         | EVEX.128.F2.0F.W1 7F /r
-OpCodeStrings            | 1005         | EVEX.256.F2.0F.W1 6F /r
-OpCodeStrings            | 1006         | EVEX.256.F2.0F.W1 6F /r
-OpCodeStrings            | 1007         | EVEX.256.F2.0F.W1 7F /r
-OpCodeStrings            | 1008         | EVEX.256.F2.0F.W1 7F /r
-OpCodeStrings            | 1009         | EVEX.512.F2.0F.W1 6F /r
-OpCodeStrings            | 1010         | EVEX.512.F2.0F.W1 6F /r
-OpCodeStrings            | 1011         | EVEX.512.F2.0F.W1 7F /r
-OpCodeStrings            | 1012         | EVEX.512.F2.0F.W1 7F /r
-OpCodeStrings            | 1013         | EVEX.128.F3.0F.W0 6F /r
-OpCodeStrings            | 1014         | EVEX.128.F3.0F.W0 6F /r
-OpCodeStrings            | 1015         | EVEX.128.F3.0F.W0 7F /r
-OpCodeStrings            | 1016         | EVEX.128.F3.0F.W0 7F /r
-OpCodeStrings            | 1017         | EVEX.256.F3.0F.W0 6F /r
-OpCodeStrings            | 1018         | EVEX.256.F3.0F.W0 6F /r
-OpCodeStrings            | 1019         | EVEX.256.F3.0F.W0 7F /r
-OpCodeStrings            | 1020         | EVEX.256.F3.0F.W0 7F /r
-OpCodeStrings            | 1021         | EVEX.512.F3.0F.W0 6F /r
-OpCodeStrings            | 1022         | EVEX.512.F3.0F.W0 6F /r
-OpCodeStrings            | 1023         | EVEX.512.F3.0F.W0 7F /r
-OpCodeStrings            | 1024         | EVEX.512.F3.0F.W0 7F /r
-OpCodeStrings            | 1025         | EVEX.128.F3.0F.W1 6F /r
-OpCodeStrings            | 1026         | EVEX.128.F3.0F.W1 6F /r
-OpCodeStrings            | 1027         | EVEX.128.F3.0F.W1 7F /r
-OpCodeStrings            | 1028         | EVEX.128.F3.0F.W1 7F /r
-OpCodeStrings            | 1029         | EVEX.256.F3.0F.W1 6F /r
-OpCodeStrings            | 1030         | EVEX.256.F3.0F.W1 6F /r
-OpCodeStrings            | 1031         | EVEX.256.F3.0F.W1 7F /r
-OpCodeStrings            | 1032         | EVEX.256.F3.0F.W1 7F /r
-OpCodeStrings            | 1033         | EVEX.512.F3.0F.W1 6F /r
-OpCodeStrings            | 1034         | EVEX.512.F3.0F.W1 6F /r
-OpCodeStrings            | 1035         | EVEX.512.F3.0F.W1 7F /r
-OpCodeStrings            | 1036         | EVEX.512.F3.0F.W1 7F /r
-OpCodeStrings            | 1037         | EVEX.128.F2.0F.W0 6F /r
-OpCodeStrings            | 1038         | EVEX.128.F2.0F.W0 6F /r
-OpCodeStrings            | 1039         | EVEX.128.F2.0F.W0 7F /r
-OpCodeStrings            | 1040         | EVEX.128.F2.0F.W0 7F /r
-OpCodeStrings            | 1041         | EVEX.256.F2.0F.W0 6F /r
-OpCodeStrings            | 1042         | EVEX.256.F2.0F.W0 6F /r
-OpCodeStrings            | 1043         | EVEX.256.F2.0F.W0 7F /r
-OpCodeStrings            | 1044         | EVEX.256.F2.0F.W0 7F /r
-OpCodeStrings            | 1045         | EVEX.512.F2.0F.W0 6F /r
-OpCodeStrings            | 1046         | EVEX.512.F2.0F.W0 6F /r
-OpCodeStrings            | 1047         | EVEX.512.F2.0F.W0 7F /r
-OpCodeStrings            | 1048         | EVEX.512.F2.0F.W0 7F /r
-OpCodeStrings            | 1049         | VEX.128.66.0F.W1 7E /r
-OpCodeStrings            | 1050         | EVEX.128.66.0F.W1 7E /r
-OpCodeStrings            | 1051         | EVEX.128.66.0F.W1 6E /r
-OpCodeStrings            | 1052         | VEX.128.66.0F.W1 6E /r
-OpCodeStrings            | 1053         | VEX.128.F3.0F.WIG 7E /r
-OpCodeStrings            | 1054         | EVEX.128.F3.0F.W1 7E /r
-OpCodeStrings            | 1055         | EVEX.128.66.0F.W1 D6 /r
-OpCodeStrings            | 1056         | VEX.128.66.0F.WIG D6 /r
-OpCodeStrings            | 1057         | EVEX.128.66.0F.W1 10 /r
-OpCodeStrings            | 1058         | VEX.128.66.0F.WIG 10 /r
-OpCodeStrings            | 1059         | EVEX.128.66.0F.W1 11 /r
-OpCodeStrings            | 1060         | VEX.128.66.0F.WIG 11 /r
-OpCodeStrings            | 1061         | EVEX.256.66.0F.W1 10 /r
-OpCodeStrings            | 1062         | VEX.256.66.0F.WIG 10 /r
-OpCodeStrings            | 1063         | EVEX.256.66.0F.W1 11 /r
-OpCodeStrings            | 1064         | VEX.256.66.0F.WIG 11 /r
-OpCodeStrings            | 1065         | EVEX.512.66.0F.W1 10 /r
-OpCodeStrings            | 1066         | EVEX.512.66.0F.W1 11 /r
-OpCodeStrings            | 1067         | VEX.128.66.0F3A.WIG 42 /r ib
-OpCodeStrings            | 1068         | VEX.256.66.0F3A.WIG 42 /r ib
-OpCodeStrings            | 1069         | EVEX.128.66.0F38.WIG 1C /r
-OpCodeStrings            | 1070         | VEX.128.66.0F38.WIG 1C /r
-OpCodeStrings            | 1071         | EVEX.256.66.0F38.WIG 1C /r
-OpCodeStrings            | 1072         | VEX.256.66.0F38.WIG 1C /r
-OpCodeStrings            | 1073         | EVEX.512.66.0F38.WIG 1C /r
-OpCodeStrings            | 1074         | EVEX.128.66.0F38.W0 1E /r
-OpCodeStrings            | 1075         | VEX.128.66.0F38.WIG 1E /r
-OpCodeStrings            | 1076         | EVEX.256.66.0F38.W0 1E /r
-OpCodeStrings            | 1077         | VEX.256.66.0F38.WIG 1E /r
-OpCodeStrings            | 1078         | EVEX.512.66.0F38.W0 1E /r
-OpCodeStrings            | 1079         | EVEX.128.66.0F38.W1 1F /r
-OpCodeStrings            | 1080         | EVEX.256.66.0F38.W1 1F /r
-OpCodeStrings            | 1081         | EVEX.512.66.0F38.W1 1F /r
-OpCodeStrings            | 1082         | EVEX.128.66.0F38.WIG 1D /r
-OpCodeStrings            | 1083         | VEX.128.66.0F38.WIG 1D /r
-OpCodeStrings            | 1084         | EVEX.256.66.0F38.WIG 1D /r
-OpCodeStrings            | 1085         | VEX.256.66.0F38.WIG 1D /r
-OpCodeStrings            | 1086         | EVEX.512.66.0F38.WIG 1D /r
-OpCodeStrings            | 1087         | EVEX.128.66.0F.W0 6B /r
-OpCodeStrings            | 1088         | VEX.128.66.0F.WIG 6B /r
-OpCodeStrings            | 1089         | VEX.256.66.0F.WIG 6B /r
-OpCodeStrings            | 1090         | EVEX.128.66.0F.WIG 63 /r
-OpCodeStrings            | 1091         | VEX.128.66.0F.WIG 63 /r
-OpCodeStrings            | 1092         | EVEX.256.66.0F.WIG 63 /r
-OpCodeStrings            | 1093         | VEX.256.66.0F.WIG 63 /r
-OpCodeStrings            | 1094         | EVEX.512.66.0F.WIG 63 /r
-OpCodeStrings            | 1095         | VEX.128.66.0F38 2B /r
-OpCodeStrings            | 1096         | EVEX.128.66.0F38.W0 2B /r
-OpCodeStrings            | 1097         | VEX.256.66.0F38 2B /r
-OpCodeStrings            | 1098         | EVEX.256.66.0F38.W0 2B /r
-OpCodeStrings            | 1099         | EVEX.512.66.0F38.W0 2B /r
-OpCodeStrings            | 1100         | VEX.128.66.0F.WIG 67 /r
-OpCodeStrings            | 1101         | EVEX.128.66.0F.WIG 67 /r
-OpCodeStrings            | 1102         | VEX.256.66.0F.WIG 67 /r
-OpCodeStrings            | 1103         | EVEX.256.66.0F.WIG 67 /r
-OpCodeStrings            | 1104         | EVEX.512.66.0F.WIG 67 /r
-OpCodeStrings            | 1105         | EVEX.128.66.0F.WIG DC /r
-OpCodeStrings            | 1106         | VEX.128.660F.WIG DC /r
-OpCodeStrings            | 1107         | EVEX.256.66.0F.WIG DC /r
-OpCodeStrings            | 1108         | VEX.256.66.0F.WIG DC /r
-OpCodeStrings            | 1109         | EVEX.512.66.0F.WIG DC /r
-OpCodeStrings            | 1110         | EVEX.128.66.0F.WIG DD /r
-OpCodeStrings            | 1111         | VEX.128.66.0F.WIG DD /r
-OpCodeStrings            | 1112         | EVEX.256.66.0F.WIG DD /r
-OpCodeStrings            | 1113         | VEX.256.66.0F.WIG DD /r
-OpCodeStrings            | 1114         | VEX.128.66.0F.WIG DB /r
-OpCodeStrings            | 1115         | VEX.256.66.0F.WIG DB /r
-OpCodeStrings            | 1116         | EVEX.128.66.0F.W0 DB /r
-OpCodeStrings            | 1117         | EVEX.256.66.0F.W0 DB /r
-OpCodeStrings            | 1118         | EVEX.512.66.0F.W0 DB /r
-OpCodeStrings            | 1119         | EVEX.128.66.0F.W1 DB /r
-OpCodeStrings            | 1120         | EVEX.256.66.0F.W1 DB /r
-OpCodeStrings            | 1121         | EVEX.512.66.0F.W1 DB /r
-OpCodeStrings            | 1122         | VEX.128.66.0F38.W0 78 /r
-OpCodeStrings            | 1123         | EVEX.128.66.0F38.W0 78 /r
-OpCodeStrings            | 1124         | VEX.256.66.0F38.W0 78 /r
-OpCodeStrings            | 1125         | EVEX.256.66.0F38.W0 78 /r
-OpCodeStrings            | 1126         | EVEX.512.66.0F38.W0 78 /r
-OpCodeStrings            | 1127         | EVEX.128.66.0F38.W0 58 /r
-OpCodeStrings            | 1128         | VEX.128.66.0F38.W0 58 /r
-OpCodeStrings            | 1129         | EVEX.256.66.0F38.W0 58 /r
-OpCodeStrings            | 1130         | VEX.256.66.0F38.W0 58 /r
-OpCodeStrings            | 1131         | EVEX.512.66.0F38.W0 58 /r
-OpCodeStrings            | 1132         | EVEX.128.66.0F38.W1 59 /r
-OpCodeStrings            | 1133         | VEX.128.66.0F38.W0 59 /r
-OpCodeStrings            | 1134         | EVEX.256.66.0F38.W1 59 /r
-OpCodeStrings            | 1135         | VEX.256.66.0F38.W0 59 /r
-OpCodeStrings            | 1136         | EVEX.512.66.0F38.W1 59 /r
-OpCodeStrings            | 1137         | VEX.128.66.0F38.W0 79 /r
-OpCodeStrings            | 1138         | EVEX.128.66.0F38.W0 79 /r
-OpCodeStrings            | 1139         | VEX.256.66.0F38.W0 79 /r
-OpCodeStrings            | 1140         | EVEX.256.66.0F38.W0 79 /r
-OpCodeStrings            | 1141         | EVEX.512.66.0F38.W0 79 /r
-OpCodeStrings            | 1142         | EVEX.128.66.0F38.W0 8B /r
-OpCodeStrings            | 1143         | EVEX.256.66.0F38.W0 8B /r
-OpCodeStrings            | 1144         | EVEX.512.66.0F38.W0 8B /r
-OpCodeStrings            | 1145         | EVEX.128.66.0F38.W1 8B /r
-OpCodeStrings            | 1146         | EVEX.256.66.0F38.W1 8B /r
-OpCodeStrings            | 1147         | EVEX.512.66.0F38.W1 8B /r
-OpCodeStrings            | 1148         | EVEX.128.66.0F38.W0 C4 /r
-OpCodeStrings            | 1149         | EVEX.256.66.0F38.W0 C4 /r
-OpCodeStrings            | 1150         | EVEX.512.66.0F38.W0 C4 /r
-OpCodeStrings            | 1151         | EVEX.128.66.0F38.W1 C4 /r
-OpCodeStrings            | 1152         | EVEX.256.66.0F38.W1 C4 /r
-OpCodeStrings            | 1153         | EVEX.512.66.0F38.W1 C4 /r
-OpCodeStrings            | 1154         | VEX.256.66.0F3A.W0 46 /r ib
-OpCodeStrings            | 1155         | EVEX.128.66.0F38.W0 8D /r
-OpCodeStrings            | 1156         | EVEX.256.66.0F38.W0 8D /r
-OpCodeStrings            | 1157         | EVEX.512.66.0F38.W0 8D /r
-OpCodeStrings            | 1158         | EVEX.128.66.0F38.W0 76 /r
-OpCodeStrings            | 1159         | EVEX.256.66.0F38.W0 76 /r
-OpCodeStrings            | 1160         | EVEX.512.66.0F38.W0 76 /r
-OpCodeStrings            | 1161         | EVEX.128.66.0F38.W1 77 /r
-OpCodeStrings            | 1162         | EVEX.256.66.0F38.W1 77 /r
-OpCodeStrings            | 1163         | EVEX.512.66.0F38.W1 77 /r
-OpCodeStrings            | 1164         | EVEX.128.66.0F38.W0 77 /r
-OpCodeStrings            | 1165         | EVEX.256.66.0F38.W0 77 /r
-OpCodeStrings            | 1166         | EVEX.512.66.0F38.W0 77 /r
-OpCodeStrings            | 1167         | EVEX.128.66.0F38.W1 76 /r
-OpCodeStrings            | 1168         | EVEX.256.66.0F38.W1 76 /r
-OpCodeStrings            | 1169         | EVEX.512.66.0F38.W1 76 /r
-OpCodeStrings            | 1170         | EVEX.128.66.0F38.W1 75 /r
-OpCodeStrings            | 1171         | EVEX.256.66.0F38.W1 75 /r
-OpCodeStrings            | 1172         | EVEX.512.66.0F38.W1 75 /r
-OpCodeStrings            | 1173         | EVEX.128.66.0F38.W0 7D /r
-OpCodeStrings            | 1174         | EVEX.256.66.0F38.W0 7D /r
-OpCodeStrings            | 1175         | EVEX.512.66.0F38.W0 7D /r
-OpCodeStrings            | 1176         | EVEX.128.66.0F38.W0 7E /r
-OpCodeStrings            | 1177         | EVEX.256.66.0F38.W0 7E /r
-OpCodeStrings            | 1178         | EVEX.512.66.0F38.W0 7E /r
-OpCodeStrings            | 1179         | EVEX.128.66.0F38.W1 7F /r
-OpCodeStrings            | 1180         | EVEX.256.66.0F38.W1 7F /r
-OpCodeStrings            | 1181         | EVEX.512.66.0F38.W1 7F /r
-OpCodeStrings            | 1182         | EVEX.128.66.0F38.W0 7F /r
-OpCodeStrings            | 1183         | EVEX.256.66.0F38.W0 7F /r
-OpCodeStrings            | 1184         | EVEX.512.66.0F38.W0 7F /r
-OpCodeStrings            | 1185         | EVEX.128.66.0F38.W1 7E /r
-OpCodeStrings            | 1186         | EVEX.256.66.0F38.W1 7E /r
-OpCodeStrings            | 1187         | EVEX.512.66.0F38.W1 7E /r
-OpCodeStrings            | 1188         | EVEX.128.66.0F38.W1 7D /r
-OpCodeStrings            | 1189         | EVEX.256.66.0F38.W1 7D /r
-OpCodeStrings            | 1190         | EVEX.512.66.0F38.W1 7D /r
-OpCodeStrings            | 1191         | VEX.128.66.0F38.W1 90 /r
-OpCodeStrings            | 1192         | VEX.256.66.0F38.W1 90 /r
-OpCodeStrings            | 1193         | VEX.128.66.0F38.W1 91 /r
-OpCodeStrings            | 1194         | VEX.256.66.0F38.W1 91 /r
-OpCodeStrings            | 1195         | VEX.128.66.0F3A.W0 20 /r ib
-OpCodeStrings            | 1196         | VEX.128.66.0F3A.W0 20 /r ib
-OpCodeStrings            | 1197         | EVEX.128.66.0F3A.WIG 20 /r ib
-OpCodeStrings            | 1198         | EVEX.128.66.0F3A.WIG 20 /r ib
-OpCodeStrings            | 1199         | VEX.128.66.0F3A.W0 22 /r ib
-OpCodeStrings            | 1200         | VEX.128.66.0F3A.W0 22 /r ib
-OpCodeStrings            | 1201         | EVEX.128.66.0F3A.W0 22 /r ib
-OpCodeStrings            | 1202         | EVEX.128.66.0F3A.W0 22 /r ib
-OpCodeStrings            | 1203         | VEX.128.66.0F3A.W1 22 /r ib
-OpCodeStrings            | 1204         | VEX.128.66.0F3A.W1 22 /r ib
-OpCodeStrings            | 1205         | EVEX.128.66.0F3A.W1 22 /r ib
-OpCodeStrings            | 1206         | EVEX.128.66.0F3A.W1 22 /r ib
-OpCodeStrings            | 1207         | VEX.128.66.0F38.W0 8E /r
-OpCodeStrings            | 1208         | VEX.256.66.0F38.W0 8E /r
-OpCodeStrings            | 1209         | VEX.128.66.0F38.W0 8C /r
-OpCodeStrings            | 1210         | VEX.256.66.0F38.W0 8C /r
-OpCodeStrings            | 1211         | VEX.128.66.0F38.W1 8E /r
-OpCodeStrings            | 1212         | VEX.256.66.0F38.W1 8E /r
-OpCodeStrings            | 1213         | VEX.128.66.0F38.W1 8C /r
-OpCodeStrings            | 1214         | VEX.256.66.0F38.W1 8C /r
-OpCodeStrings            | 1215         | VEX.128.66.0F38.WIG 3C /r
-OpCodeStrings            | 1216         | EVEX.128.66.0F38.WIG 3C /r
-OpCodeStrings            | 1217         | VEX.256.66.0F38.WIG 3C /r
-OpCodeStrings            | 1218         | EVEX.256.66.0F38.WIG 3C /r
-OpCodeStrings            | 1219         | EVEX.512.66.0F38.WIG 3C /r
-OpCodeStrings            | 1220         | VEX.128.66.0F38.WIG 3D /r
-OpCodeStrings            | 1221         | EVEX.128.66.0F38.W0 3D /r
-OpCodeStrings            | 1222         | VEX.256.66.0F38.WIG 3D /r
-OpCodeStrings            | 1223         | EVEX.256.66.0F38.W0 3D /r
-OpCodeStrings            | 1224         | EVEX.512.66.0F38.W0 3D /r
-OpCodeStrings            | 1225         | EVEX.128.66.0F38.W1 3D /r
-OpCodeStrings            | 1226         | EVEX.256.66.0F38.W1 3D /r
-OpCodeStrings            | 1227         | EVEX.512.66.0F38.W1 3D /r
-OpCodeStrings            | 1228         | VEX.128.66.0F.WIG EE /r
-OpCodeStrings            | 1229         | EVEX.128.66.0F.WIG EE /r
-OpCodeStrings            | 1230         | VEX.256.66.0F.WIG EE /r
-OpCodeStrings            | 1231         | EVEX.256.66.0F.WIG EE /r
-OpCodeStrings            | 1232         | EVEX.512.66.0F.WIG EE /r
-OpCodeStrings            | 1233         | EVEX.128.F3.0F38.W0 29 /r
-OpCodeStrings            | 1234         | EVEX.256.F3.0F38.W0 29 /r
-OpCodeStrings            | 1235         | EVEX.512.F3.0F38.W0 29 /r
-OpCodeStrings            | 1236         | EVEX.128.F3.0F38.W0 39 /r
-OpCodeStrings            | 1237         | EVEX.256.F3.0F38.W0 39 /r
-OpCodeStrings            | 1238         | EVEX.512.F3.0F38.W0 39 /r
-OpCodeStrings            | 1239         | VEX.128.66.0F.WIG D7 /r
-OpCodeStrings            | 1240         | VEX.256.66.0F.WIG D7 /r
-OpCodeStrings            | 1241         | EVEX.128.F3.0F38.W1 39 /r
-OpCodeStrings            | 1242         | EVEX.256.F3.0F38.W1 39 /r
-OpCodeStrings            | 1243         | EVEX.512.F3.0F38.W1 39 /r
-OpCodeStrings            | 1244         | EVEX.256.F3.0F38.W0 20 /r
-OpCodeStrings            | 1245         | EVEX.128.F3.0F38.W0 20 /r
-OpCodeStrings            | 1246         | EVEX.512.F3.0F38.W0 20 /r
-OpCodeStrings            | 1247         | VEX.128.66.0F38.WIG 21 /r
-OpCodeStrings            | 1248         | EVEX.128.66.0F38.WIG 21 /r
-OpCodeStrings            | 1249         | VEX.256.66.0F38.WIG 21 /r
-OpCodeStrings            | 1250         | EVEX.256.66.0F38.WIG 21 /r
-OpCodeStrings            | 1251         | EVEX.512.66.0F38.WIG 21 /r
-OpCodeStrings            | 1252         | VEX.128.66.0F38.WIG 22 /r
-OpCodeStrings            | 1253         | EVEX.128.66.0F38.WIG 22 /r
-OpCodeStrings            | 1254         | VEX.256.66.0F38.WIG 22 /r
-OpCodeStrings            | 1255         | EVEX.256.66.0F38.WIG 22 /r
-OpCodeStrings            | 1256         | EVEX.512.66.0F38.WIG 22 /r
-OpCodeStrings            | 1257         | VEX.128.66.0F38.WIG 20 /r
-OpCodeStrings            | 1258         | EVEX.128.66.0F38.WIG 20 /r
-OpCodeStrings            | 1259         | VEX.256.66.0F38.WIG 20 /r
-OpCodeStrings            | 1260         | EVEX.256.66.0F38.WIG 20 /r
-OpCodeStrings            | 1261         | EVEX.512.66.0F38.WIG 20 /r
-OpCodeStrings            | 1262         | VEX.128.66.0F38.WIG 25 /r
-OpCodeStrings            | 1263         | EVEX.128.66.0F38.W0 25 /r
-OpCodeStrings            | 1264         | VEX.256.66.0F38.WIG 25 /r
-OpCodeStrings            | 1265         | EVEX.256.66.0F38.W0 25 /r
-OpCodeStrings            | 1266         | EVEX.512.66.0F38.W0 25 /r
-OpCodeStrings            | 1267         | VEX.128.66.0F38.WIG 23 /r
-OpCodeStrings            | 1268         | EVEX.128.66.0F38.WIG 23 /r
-OpCodeStrings            | 1269         | VEX.256.66.0F38.WIG 23 /r
-OpCodeStrings            | 1270         | EVEX.256.66.0F38.WIG 23 /r
-OpCodeStrings            | 1271         | EVEX.512.66.0F38.WIG 23 /r
-OpCodeStrings            | 1272         | VEX.128.66.0F38.WIG 24 /r
-OpCodeStrings            | 1273         | EVEX.128.66.0F38.WIG 24 /r
-OpCodeStrings            | 1274         | VEX.256.66.0F38.WIG 24 /r
-OpCodeStrings            | 1275         | EVEX.256.66.0F38.WIG 24 /r
-OpCodeStrings            | 1276         | EVEX.512.66.0F38.WIG 24 /r
-OpCodeStrings            | 1277         | EVEX.256.F3.0F38.W0 10 /r
-OpCodeStrings            | 1278         | EVEX.128.F3.0F38.W0 10 /r
-OpCodeStrings            | 1279         | EVEX.512.F3.0F38.W0 10 /r
-OpCodeStrings            | 1280         | EVEX.128.F3.0F38.W1 29 /r
-OpCodeStrings            | 1281         | EVEX.256.F3.0F38.W1 29 /r
-OpCodeStrings            | 1282         | EVEX.512.F3.0F38.W1 29 /r
-OpCodeStrings            | 1283         | EVEX.256.F3.0F38.W0 30 /r
-OpCodeStrings            | 1284         | EVEX.128.F3.0F38.W0 30 /r
-OpCodeStrings            | 1285         | EVEX.512.F3.0F38.W0 30 /r
-OpCodeStrings            | 1286         | EVEX.128.66.0F38.WIG 31 /r
-OpCodeStrings            | 1287         | VEX.128.66.0F38.WIG 31 /r
-OpCodeStrings            | 1288         | EVEX.256.66.0F38.WIG 31 /r
-OpCodeStrings            | 1289         | VEX.256.66.0F38.WIG 31 /r
-OpCodeStrings            | 1290         | EVEX.512.66.0F38.WIG 31 /r
-OpCodeStrings            | 1291         | EVEX.128.66.0F38.WIG 32 /r
-OpCodeStrings            | 1292         | VEX.128.66.0F38.WIG 32 /r
-OpCodeStrings            | 1293         | EVEX.256.66.0F38.WIG 32 /r
-OpCodeStrings            | 1294         | VEX.256.66.0F38.WIG 32 /r
-OpCodeStrings            | 1295         | EVEX.512.66.0F38.WIG 32 /r
-OpCodeStrings            | 1296         | EVEX.128.66.0F38 30.WIG /r
-OpCodeStrings            | 1297         | VEX.128.66.0F38.WIG 30 /r
-OpCodeStrings            | 1298         | EVEX.256.66.0F38.WIG 30 /r
-OpCodeStrings            | 1299         | VEX.256.66.0F38.WIG 30 /r
-OpCodeStrings            | 1300         | EVEX.512.66.0F38.WIG 30 /r
-OpCodeStrings            | 1301         | EVEX.128.66.0F38.W0 35 /r
-OpCodeStrings            | 1302         | VEX.128.66.0F 38.WIG 35 /r
-OpCodeStrings            | 1303         | EVEX.256.66.0F38.W0 35 /r
-OpCodeStrings            | 1304         | VEX.256.66.0F38.WIG 35 /r
-OpCodeStrings            | 1305         | EVEX.512.66.0F38.W0 35 /r
-OpCodeStrings            | 1306         | EVEX.128.66.0F38.WIG 33 /r
-OpCodeStrings            | 1307         | VEX.128.66.0F38.WIG 33 /r
-OpCodeStrings            | 1308         | EVEX.256.66.0F38.WIG 33 /r
-OpCodeStrings            | 1309         | VEX.256.66.0F38.WIG 33 /r
-OpCodeStrings            | 1310         | EVEX.512.66.0F38.WIG 33 /r
-OpCodeStrings            | 1311         | EVEX.128.66.0F38.WIG 34 /r
-OpCodeStrings            | 1312         | VEX.128.66.0F38.WIG 34 /r
-OpCodeStrings            | 1313         | EVEX.256.66.0F38.WIG 34 /r
-OpCodeStrings            | 1314         | VEX.256.66.0F38.WIG 34 /r
-OpCodeStrings            | 1315         | EVEX.512.66.0F38.WIG 34 /r
-OpCodeStrings            | 1316         | EVEX.128.66.0F38.WIG 00 /r
-OpCodeStrings            | 1317         | VEX.128.66.0F38.WIG 00 /r
-OpCodeStrings            | 1318         | EVEX.256.66.0F38.WIG 00 /r
-OpCodeStrings            | 1319         | VEX.256.66.0F38.WIG 00 /r
-OpCodeStrings            | 1320         | EVEX.512.66.0F38.WIG 00 /r
-OpCodeStrings            | 1321         | VEX.128.66.0F.WIG 70 /r ib
-OpCodeStrings            | 1322         | EVEX.128.66.0F.W0 70 /r ib
-OpCodeStrings            | 1323         | VEX.256.66.0F.WIG 70 /r ib
-OpCodeStrings            | 1324         | EVEX.256.66.0F.W0 70 /r ib
-OpCodeStrings            | 1325         | EVEX.512.66.0F.W0 70 /r ib
-OpCodeStrings            | 1326         | VEX.128.F2.0F.WIG 70 /r ib
-OpCodeStrings            | 1327         | EVEX.128.F2.0F.WIG 70 /r ib
-OpCodeStrings            | 1328         | VEX.256.F2.0F.WIG 70 /r ib
-OpCodeStrings            | 1329         | EVEX.256.F2.0F.WIG 70 /r ib
-OpCodeStrings            | 1330         | EVEX.512.F2.0F.WIG 70 /r ib
-OpCodeStrings            | 1331         | VEX.128.66.0F38.WIG 08 /r
-OpCodeStrings            | 1332         | VEX.256.66.0F38.WIG 08 /r
-OpCodeStrings            | 1333         | VEX.128.66.0F38.WIG 0A /r
-OpCodeStrings            | 1334         | VEX.256.66.0F38.WIG 0A /r
-OpCodeStrings            | 1335         | VEX.128.66.0F38.WIG 09 /r
-OpCodeStrings            | 1336         | VEX.256.66.0F38.WIG 09 /r
-OpCodeStrings            | 1337         | EVEX.128.66.0F38.W0 47 /r
-OpCodeStrings            | 1338         | VEX.128.66.0F38.W0 47 /r
-OpCodeStrings            | 1339         | EVEX.256.66.0F38.W0 47 /r
-OpCodeStrings            | 1340         | VEX.256.66.0F38.W0 47 /r
-OpCodeStrings            | 1341         | EVEX.512.66.0F38.W0 47 /r
-OpCodeStrings            | 1342         | EVEX.128.66.0F38.W1 47 /r
-OpCodeStrings            | 1343         | VEX.128.66.0F38.W1 47 /r
-OpCodeStrings            | 1344         | EVEX.256.66.0F38.W1 47 /r
-OpCodeStrings            | 1345         | VEX.256.66.0F38.W1 47 /r
-OpCodeStrings            | 1346         | EVEX.512.66.0F38.W1 47 /r
-OpCodeStrings            | 1347         | EVEX.128.66.0F38.W1 12 /r
-OpCodeStrings            | 1348         | EVEX.256.66.0F38.W1 12 /r
-OpCodeStrings            | 1349         | EVEX.512.66.0F38.W1 12 /r
-OpCodeStrings            | 1350         | EVEX.128.66.0F38.W0 26 /r
-OpCodeStrings            | 1351         | EVEX.256.66.0F38.W0 26 /r
-OpCodeStrings            | 1352         | EVEX.512.66.0F38.W0 26 /r
-OpCodeStrings            | 1353         | EVEX.128.66.0F38.W0 27 /r
-OpCodeStrings            | 1354         | EVEX.256.66.0F38.W0 27 /r
-OpCodeStrings            | 1355         | EVEX.512.66.0F38.W0 27 /r
-OpCodeStrings            | 1356         | EVEX.128.66.0F38.W1 27 /r
-OpCodeStrings            | 1357         | EVEX.256.66.0F38.W1 27 /r
-OpCodeStrings            | 1358         | EVEX.512.66.0F38.W1 27 /r
-OpCodeStrings            | 1359         | EVEX.128.66.0F38.W1 26 /r
-OpCodeStrings            | 1360         | EVEX.256.66.0F38.W1 26 /r
-OpCodeStrings            | 1361         | EVEX.512.66.0F38.W1 26 /r
-OpCodeStrings            | 1362         | EVEX.128.66.0F.WIG 68 /r
-OpCodeStrings            | 1363         | VEX.128.66.0F.WIG 68/r
-OpCodeStrings            | 1364         | EVEX.256.66.0F.WIG 68 /r
-OpCodeStrings            | 1365         | VEX.256.66.0F.WIG 68 /r
-OpCodeStrings            | 1366         | EVEX.512.66.0F.WIG 68/r
-OpCodeStrings            | 1367         | EVEX.128.66.0F.W0 6A /r
-OpCodeStrings            | 1368         | VEX.128.66.0F.WIG 6A/r
-OpCodeStrings            | 1369         | EVEX.256.66.0F.W0 6A /r
-OpCodeStrings            | 1370         | VEX.256.66.0F.WIG 6A /r
-OpCodeStrings            | 1371         | EVEX.512.66.0F.W0 6A /r
-OpCodeStrings            | 1372         | EVEX.128.66.0F.W1 6D /r
-OpCodeStrings            | 1373         | VEX.128.66.0F.WIG 6D/r
-OpCodeStrings            | 1374         | EVEX.256.66.0F.W1 6D /r
-OpCodeStrings            | 1375         | VEX.256.66.0F.WIG 6D /r
-OpCodeStrings            | 1376         | EVEX.512.66.0F.W1 6D /r
-OpCodeStrings            | 1377         | EVEX.128.66.0F.WIG 69 /r
-OpCodeStrings            | 1378         | VEX.128.66.0F.WIG 69/r
-OpCodeStrings            | 1379         | EVEX.256.66.0F.WIG 69 /r
-OpCodeStrings            | 1380         | VEX.256.66.0F.WIG 69 /r
-OpCodeStrings            | 1381         | EVEX.512.66.0F.WIG 69/r
-OpCodeStrings            | 1382         | EVEX.128.66.0F.WIG 60 /r
-OpCodeStrings            | 1383         | VEX.128.66.0F.WIG 60/r
-OpCodeStrings            | 1384         | EVEX.256.66.0F.WIG 60 /r
-OpCodeStrings            | 1385         | VEX.256.66.0F.WIG 60 /r
-OpCodeStrings            | 1386         | EVEX.512.66.0F.WIG 60/r
-OpCodeStrings            | 1387         | EVEX.128.66.0F.W0 62 /r
-OpCodeStrings            | 1388         | VEX.128.66.0F.WIG 62/r
-OpCodeStrings            | 1389         | EVEX.256.66.0F.W0 62 /r
-OpCodeStrings            | 1390         | VEX.256.66.0F.WIG 62 /r
-OpCodeStrings            | 1391         | EVEX.512.66.0F.W0 62 /r
-OpCodeStrings            | 1392         | EVEX.128.66.0F.W1 6C /r
-OpCodeStrings            | 1393         | VEX.128.66.0F.WIG 6C/r
-OpCodeStrings            | 1394         | EVEX.256.66.0F.W1 6C /r
-OpCodeStrings            | 1395         | VEX.256.66.0F.WIG 6C /r
-OpCodeStrings            | 1396         | EVEX.512.66.0F.W1 6C /r
-OpCodeStrings            | 1397         | EVEX.128.66.0F.WIG 61 /r
-OpCodeStrings            | 1398         | VEX.128.66.0F.WIG 61/r
-OpCodeStrings            | 1399         | EVEX.256.66.0F.WIG 61 /r
-OpCodeStrings            | 1400         | VEX.256.66.0F.WIG 61 /r
-OpCodeStrings            | 1401         | EVEX.512.66.0F.WIG 61/r
-OpCodeStrings            | 1402         | VEX.128.66.0F.WIG EF /r
-OpCodeStrings            | 1403         | VEX.256.66.0F.WIG EF /r
-OpCodeStrings            | 1404         | EVEX.128.66.0F.W0 EF /r
-OpCodeStrings            | 1405         | EVEX.256.66.0F.W0 EF /r
-OpCodeStrings            | 1406         | EVEX.512.66.0F.W0 EF /r
-OpCodeStrings            | 1407         | EVEX.128.66.0F.W1 EF /r
-OpCodeStrings            | 1408         | EVEX.256.66.0F.W1 EF /r
-OpCodeStrings            | 1409         | EVEX.512.66.0F.W1 EF /r
-OpCodeStrings            | 1410         | C7 F8   
-OpCodeStrings            | 1411         | C7 F8   
-OpCodeStrings            | 1412         | 90 +rw  
-OpCodeStrings            | 1413         | 90 +rd  
-OpCodeStrings            | 1414         | 87 /r   
-OpCodeStrings            | 1415         | 87 /r   
-OpCodeStrings            | 1416         | REX.W + 87 /r
-OpCodeStrings            | 1417         | 86 /r   
-OpCodeStrings            | 1418         | REX + 86 /r
-OpCodeStrings            | 1419         | 90 +rw  
-OpCodeStrings            | 1420         | 87 /r   
-OpCodeStrings            | 1421         | 90 +rd  
-OpCodeStrings            | 1422         | 87 /r   
-OpCodeStrings            | 1423         | REX.W + 90 +rd
-OpCodeStrings            | 1424         | REX.W + 87 /r
-OpCodeStrings            | 1425         | 86 /r   
-OpCodeStrings            | 1426         | REX + 86 /r
-OpCodeStrings            | 1427         | REX.W + 90 +rd
-OpCodeStrings            | 1428         | D7      
-OpCodeStrings            | 1429         | D7      
-OpCodeStrings            | 1430         | REX.W + D7
-OpCodeStrings            | 1431         | 34 ib   
-OpCodeStrings            | 1432         | 35 iw   
-OpCodeStrings            | 1433         | 35 id   
-OpCodeStrings            | 1434         | 81 /6 iw
-OpCodeStrings            | 1435         | 83 /6 ib
-OpCodeStrings            | 1436         | 31 /r   
-OpCodeStrings            | 1437         | 81 /6 id
-OpCodeStrings            | 1438         | 83 /6 ib
-OpCodeStrings            | 1439         | 31 /r   
-OpCodeStrings            | 1440         | REX.W + 81 /6 id
-OpCodeStrings            | 1441         | REX.W + 83 /6 ib
-OpCodeStrings            | 1442         | REX.W + 31 /r
-OpCodeStrings            | 1443         | 80 /6 ib
-OpCodeStrings            | 1444         | REX + 80 /6 ib
-OpCodeStrings            | 1445         | REX + 30 /r
-OpCodeStrings            | 1446         | 30 /r   
-OpCodeStrings            | 1447         | 33 /r   
-OpCodeStrings            | 1448         | 33 /r   
-OpCodeStrings            | 1449         | REX.W + 33 /r
-OpCodeStrings            | 1450         | 32 /r   
-OpCodeStrings            | 1451         | REX + 32 /r
-OpCodeStrings            | 1452         | REX.W + 35 id
-OpCodeStrings            | 1453         | NP 0F 01 D1
+OpCodeStrings            | 91           | 0F BA /4 ib
+OpCodeStrings            | 92           | 0F A3 /r
+OpCodeStrings            | 93           | REX.W + 0F BA /4 ib
+OpCodeStrings            | 94           | REX.W + 0F A3 /r
+OpCodeStrings            | 95           | 0F BA /5 ib
+OpCodeStrings            | 96           | 0F AB /r
+OpCodeStrings            | 97           | 0F BA /5 ib
+OpCodeStrings            | 98           | 0F AB /r
+OpCodeStrings            | 99           | REX.W + 0F BA /5 ib
+OpCodeStrings            | 100          | REX.W + 0F AB /r
+OpCodeStrings            | 101          | VEX.LZ.0F38.W0 F5 /r
+OpCodeStrings            | 102          | VEX.LZ.0F38.W1 F5 /r
+OpCodeStrings            | 103          | FF /3   
+OpCodeStrings            | 104          | FF /3   
+OpCodeStrings            | 105          | REX.W FF /3
+OpCodeStrings            | 106          | 9A cd   
+OpCodeStrings            | 107          | 9A cp   
+OpCodeStrings            | 108          | FF /2   
+OpCodeStrings            | 109          | FF /2   
+OpCodeStrings            | 110          | FF /2   
+OpCodeStrings            | 111          | E8 cw   
+OpCodeStrings            | 112          | E8 cd   
+OpCodeStrings            | 113          | 99      
+OpCodeStrings            | 114          | 0F 47 /r
+OpCodeStrings            | 115          | 0F 47 /r
+OpCodeStrings            | 116          | REX.W + 0F 47 /r
+OpCodeStrings            | 117          | 0F 43 /r
+OpCodeStrings            | 118          | 0F 43 /r
+OpCodeStrings            | 119          | REX.W + 0F 43 /r
+OpCodeStrings            | 120          | 0F 42 /r
+OpCodeStrings            | 121          | 0F 42 /r
+OpCodeStrings            | 122          | REX.W + 0F 42 /r
+OpCodeStrings            | 123          | 0F 46 /r
+OpCodeStrings            | 124          | 0F 46 /r
+OpCodeStrings            | 125          | REX.W + 0F 46 /r
+OpCodeStrings            | 126          | 0F 42 /r
+OpCodeStrings            | 127          | 0F 42 /r
+OpCodeStrings            | 128          | REX.W + 0F 42 /r
+OpCodeStrings            | 129          | 0F 44 /r
+OpCodeStrings            | 130          | 0F 44 /r
+OpCodeStrings            | 131          | REX.W + 0F 44 /r
+OpCodeStrings            | 132          | 0F 4F /r
+OpCodeStrings            | 133          | 0F 4F /r
+OpCodeStrings            | 134          | REX.W + 0F 4F /r
+OpCodeStrings            | 135          | 0F 4D /r
+OpCodeStrings            | 136          | 0F 4D /r
+OpCodeStrings            | 137          | REX.W + 0F 4D /r
+OpCodeStrings            | 138          | 0F 4C /r
+OpCodeStrings            | 139          | 0F 4C /r
+OpCodeStrings            | 140          | REX.W + 0F 4C /r
+OpCodeStrings            | 141          | 0F 4E /r
+OpCodeStrings            | 142          | 0F 4E /r
+OpCodeStrings            | 143          | REX.W + 0F 4E /r
+OpCodeStrings            | 144          | 0F 46 /r
+OpCodeStrings            | 145          | 0F 46 /r
+OpCodeStrings            | 146          | REX.W + 0F 46 /r
+OpCodeStrings            | 147          | 0F 42 /r
+OpCodeStrings            | 148          | 0F 42 /r
+OpCodeStrings            | 149          | REX.W + 0F 42 /r
+OpCodeStrings            | 150          | 0F 43 /r
+OpCodeStrings            | 151          | 0F 43 /r
+OpCodeStrings            | 152          | REX.W + 0F 43 /r
+OpCodeStrings            | 153          | 0F 47 /r
+OpCodeStrings            | 154          | 0F 47 /r
+OpCodeStrings            | 155          | REX.W + 0F 47 /r
+OpCodeStrings            | 156          | 0F 43 /r
+OpCodeStrings            | 157          | 0F 43 /r
+OpCodeStrings            | 158          | REX.W + 0F 43 /r
+OpCodeStrings            | 159          | 0F 45 /r
+OpCodeStrings            | 160          | 0F 45 /r
+OpCodeStrings            | 161          | REX.W + 0F 45 /r
+OpCodeStrings            | 162          | 0F 4E /r
+OpCodeStrings            | 163          | 0F 4E /r
+OpCodeStrings            | 164          | REX.W + 0F 4E /r
+OpCodeStrings            | 165          | 0F 4C /r
+OpCodeStrings            | 166          | 0F 4C /r
+OpCodeStrings            | 167          | REX.W + 0F 4C /r
+OpCodeStrings            | 168          | 0F 4D /r
+OpCodeStrings            | 169          | 0F 4D /r
+OpCodeStrings            | 170          | REX.W + 0F 4D /r
+OpCodeStrings            | 171          | 0F 4F /r
+OpCodeStrings            | 172          | 0F 4F /r
+OpCodeStrings            | 173          | REX.W + 0F 4F /r
+OpCodeStrings            | 174          | 0F 41 /r
+OpCodeStrings            | 175          | 0F 41 /r
+OpCodeStrings            | 176          | REX.W + 0F 41 /r
+OpCodeStrings            | 177          | 0F 4B /r
+OpCodeStrings            | 178          | 0F 4B /r
+OpCodeStrings            | 179          | REX.W + 0F 4B /r
+OpCodeStrings            | 180          | 0F 49 /r
+OpCodeStrings            | 181          | 0F 49 /r
+OpCodeStrings            | 182          | REX.W + 0F 49 /r
+OpCodeStrings            | 183          | 0F 45 /r
+OpCodeStrings            | 184          | 0F 45 /r
+OpCodeStrings            | 185          | REX.W + 0F 45 /r
+OpCodeStrings            | 186          | 0F 40 /r
+OpCodeStrings            | 187          | 0F 40 /r
+OpCodeStrings            | 188          | REX.W + 0F 40 /r
+OpCodeStrings            | 189          | 0F 4A /r
+OpCodeStrings            | 190          | 0F 4A /r
+OpCodeStrings            | 191          | REX.W + 0F 4A /r
+OpCodeStrings            | 192          | 0F 4A /r
+OpCodeStrings            | 193          | 0F 4A /r
+OpCodeStrings            | 194          | REX.W + 0F 4A /r
+OpCodeStrings            | 195          | 0F 4B /r
+OpCodeStrings            | 196          | 0F 4B /r
+OpCodeStrings            | 197          | REX.W + 0F 4B /r
+OpCodeStrings            | 198          | 0F 48 /r
+OpCodeStrings            | 199          | 0F 48 /r
+OpCodeStrings            | 200          | REX.W + 0F 48 /r
+OpCodeStrings            | 201          | 0F 44 /r
+OpCodeStrings            | 202          | 0F 44 /r
+OpCodeStrings            | 203          | REX.W + 0F 44 /r
+OpCodeStrings            | 204          | 3C ib   
+OpCodeStrings            | 205          | 3D iw   
+OpCodeStrings            | 206          | 3D id   
+OpCodeStrings            | 207          | 81 /7 iw
+OpCodeStrings            | 208          | 83 /7 ib
+OpCodeStrings            | 209          | 39 /r   
+OpCodeStrings            | 210          | 81 /7 id
+OpCodeStrings            | 211          | 83 /7 ib
+OpCodeStrings            | 212          | 39 /r   
+OpCodeStrings            | 213          | REX.W + 81 /7 id
+OpCodeStrings            | 214          | REX.W + 83 /7 ib
+OpCodeStrings            | 215          | REX.W + 39 /r
+OpCodeStrings            | 216          | 80 /7 ib
+OpCodeStrings            | 217          | REX + 80 /7 ib
+OpCodeStrings            | 218          | 38 /r   
+OpCodeStrings            | 219          | REX + 38 /r
+OpCodeStrings            | 220          | 3B /r   
+OpCodeStrings            | 221          | 3B /r   
+OpCodeStrings            | 222          | REX.W + 3B /r
+OpCodeStrings            | 223          | REX + 3A /r
+OpCodeStrings            | 224          | 3A /r   
+OpCodeStrings            | 225          | REX.W + 3D id
+OpCodeStrings            | 226          | NP 0F C2 /r ib
+OpCodeStrings            | 227          | REX.W + 99
+OpCodeStrings            | 228          | 99      
+OpCodeStrings            | 229          | F7 /6   
+OpCodeStrings            | 230          | F7 /6   
+OpCodeStrings            | 231          | REX.W + F7 /6
+OpCodeStrings            | 232          | REX + F6 /6
+OpCodeStrings            | 233          | F6 /6   
+OpCodeStrings            | 234          | NP 0F AE /0
+OpCodeStrings            | 235          | NP REX.W + 0F AE /0
+OpCodeStrings            | 236          | F7 /5   
+OpCodeStrings            | 237          | F7 /5   
+OpCodeStrings            | 238          | REX.W + F7 /5
+OpCodeStrings            | 239          | F6 /5   
+OpCodeStrings            | 240          | 0F AF /r
+OpCodeStrings            | 241          | 69 /r iw
+OpCodeStrings            | 242          | 6B /r ib
+OpCodeStrings            | 243          | 0F AF /r
+OpCodeStrings            | 244          | 69 /r id
+OpCodeStrings            | 245          | 6B /r ib
+OpCodeStrings            | 246          | REX.W + 0F AF /r
+OpCodeStrings            | 247          | REX.W + 69 /r id
+OpCodeStrings            | 248          | REX.W + 6B /r ib
+OpCodeStrings            | 249          | EC      
+OpCodeStrings            | 250          | E4 ib   
+OpCodeStrings            | 251          | ED      
+OpCodeStrings            | 252          | E5 ib   
+OpCodeStrings            | 253          | ED      
+OpCodeStrings            | 254          | E5 ib   
+OpCodeStrings            | 255          | FF /0   
+OpCodeStrings            | 256          | FF /0   
+OpCodeStrings            | 257          | REX.W + FF /0
+OpCodeStrings            | 258          | FE /0   
+OpCodeStrings            | 259          | REX + FE /0
+OpCodeStrings            | 260          | 40  +rw 
+OpCodeStrings            | 261          | 40  +rd 
+OpCodeStrings            | 262          | 6D      
+OpCodeStrings            | 263          | 6D      
+OpCodeStrings            | 264          | 6C      
+OpCodeStrings            | 265          | 6C      
+OpCodeStrings            | 266          | 6D      
+OpCodeStrings            | 267          | 6D      
+OpCodeStrings            | 268          | 0F 87 cw
+OpCodeStrings            | 269          | 0F 87 cd
+OpCodeStrings            | 270          | 77 cb   
+OpCodeStrings            | 271          | 0F 83 cw
+OpCodeStrings            | 272          | 0F 83 cd
+OpCodeStrings            | 273          | 73 cb   
+OpCodeStrings            | 274          | 0F 82 cw
+OpCodeStrings            | 275          | 0F 82 cd
+OpCodeStrings            | 276          | 72 cb   
+OpCodeStrings            | 277          | 0F 86 cw
+OpCodeStrings            | 278          | 0F 86 cd
+OpCodeStrings            | 279          | 76 cb   
+OpCodeStrings            | 280          | 0F 82 cw
+OpCodeStrings            | 281          | 0F 82 cd
+OpCodeStrings            | 282          | 72 cb   
+OpCodeStrings            | 283          | E3 cb   
+OpCodeStrings            | 284          | 0F 84 cw
+OpCodeStrings            | 285          | 0F 84 cd
+OpCodeStrings            | 286          | 74 cb   
+OpCodeStrings            | 287          | E3 cb   
+OpCodeStrings            | 288          | 0F 8F cw
+OpCodeStrings            | 289          | 0F 8F cd
+OpCodeStrings            | 290          | 7F cb   
+OpCodeStrings            | 291          | 0F 8D cw
+OpCodeStrings            | 292          | 0F 8D cd
+OpCodeStrings            | 293          | 7D cb   
+OpCodeStrings            | 294          | 0F 8C cw
+OpCodeStrings            | 295          | 0F 8C cd
+OpCodeStrings            | 296          | 7C cb   
+OpCodeStrings            | 297          | 0F 8E cw
+OpCodeStrings            | 298          | 0F 8E cd
+OpCodeStrings            | 299          | 7E cb   
+OpCodeStrings            | 300          | FF /5   
+OpCodeStrings            | 301          | FF /5   
+OpCodeStrings            | 302          | REX.W FF /5
+OpCodeStrings            | 303          | EA cd   
+OpCodeStrings            | 304          | EA cp   
+OpCodeStrings            | 305          | FF /4   
+OpCodeStrings            | 306          | FF /4   
+OpCodeStrings            | 307          | FF /4   
+OpCodeStrings            | 308          | E9 cw   
+OpCodeStrings            | 309          | E9 cd   
+OpCodeStrings            | 310          | EB cb   
+OpCodeStrings            | 311          | 0F 86 cw
+OpCodeStrings            | 312          | 0F 86 cd
+OpCodeStrings            | 313          | 76 cb   
+OpCodeStrings            | 314          | 0F 82 cw
+OpCodeStrings            | 315          | 0F 82 cd
+OpCodeStrings            | 316          | 72 cb   
+OpCodeStrings            | 317          | 0F 83 cw
+OpCodeStrings            | 318          | 0F 83 cd
+OpCodeStrings            | 319          | 73 cb   
+OpCodeStrings            | 320          | 0F 87 cw
+OpCodeStrings            | 321          | 0F 87 cd
+OpCodeStrings            | 322          | 77 cb   
+OpCodeStrings            | 323          | 0F 83 cw
+OpCodeStrings            | 324          | 0F 83 cd
+OpCodeStrings            | 325          | 73 cb   
+OpCodeStrings            | 326          | 0F 85 cw
+OpCodeStrings            | 327          | 0F 85 cd
+OpCodeStrings            | 328          | 75 cb   
+OpCodeStrings            | 329          | 0F 8E cw
+OpCodeStrings            | 330          | 0F 8E cd
+OpCodeStrings            | 331          | 7E cb   
+OpCodeStrings            | 332          | 0F 8C cw
+OpCodeStrings            | 333          | 0F 8C cd
+OpCodeStrings            | 334          | 7C cb   
+OpCodeStrings            | 335          | 0F 8D cw
+OpCodeStrings            | 336          | 0F 8D cd
+OpCodeStrings            | 337          | 7D cb   
+OpCodeStrings            | 338          | 0F 8F cw
+OpCodeStrings            | 339          | 0F 8F cd
+OpCodeStrings            | 340          | 7F cb   
+OpCodeStrings            | 341          | 0F 81 cw
+OpCodeStrings            | 342          | 0F 81 cd
+OpCodeStrings            | 343          | 71 cb   
+OpCodeStrings            | 344          | 0F 8B cw
+OpCodeStrings            | 345          | 0F 8B cd
+OpCodeStrings            | 346          | 7B cb   
+OpCodeStrings            | 347          | 0F 89 cw
+OpCodeStrings            | 348          | 0F 89 cd
+OpCodeStrings            | 349          | 79 cb   
+OpCodeStrings            | 350          | 0F 85 cw
+OpCodeStrings            | 351          | 0F 85 cd
+OpCodeStrings            | 352          | 75 cb   
+OpCodeStrings            | 353          | 0F 80 cw
+OpCodeStrings            | 354          | 0F 80 cd
+OpCodeStrings            | 355          | 70 cb   
+OpCodeStrings            | 356          | 0F 8A cw
+OpCodeStrings            | 357          | 0F 8A cd
+OpCodeStrings            | 358          | 7A cb   
+OpCodeStrings            | 359          | 0F 8A cw
+OpCodeStrings            | 360          | 0F 8A cd
+OpCodeStrings            | 361          | 7A cb   
+OpCodeStrings            | 362          | 0F 8B cw
+OpCodeStrings            | 363          | 0F 8B cd
+OpCodeStrings            | 364          | 7B cb   
+OpCodeStrings            | 365          | E3 cb   
+OpCodeStrings            | 366          | 0F 88 cw
+OpCodeStrings            | 367          | 0F 88 cd
+OpCodeStrings            | 368          | 78 cb   
+OpCodeStrings            | 369          | 0F 84 cw
+OpCodeStrings            | 370          | 0F 84 cd
+OpCodeStrings            | 371          | 74 cb   
+OpCodeStrings            | 372          | VEX.L1.66.0F.W0 4A /r
+OpCodeStrings            | 373          | VEX.L1.66.0F.W1 4A /r
+OpCodeStrings            | 374          | VEX.L1.0F.W1 4A /r
+OpCodeStrings            | 375          | VEX.L1.0F.W0 4A /r
+OpCodeStrings            | 376          | VEX.L1.66.0F.W0 41 /r
+OpCodeStrings            | 377          | VEX.L1.66.0F.W1 41 /r
+OpCodeStrings            | 378          | VEX.L1.66.0F.W0 42 /r
+OpCodeStrings            | 379          | VEX.L1.66.0F.W1 42 /r
+OpCodeStrings            | 380          | VEX.L1.0F.W1 42 /r
+OpCodeStrings            | 381          | VEX.L1.0F.W0 42 /r
+OpCodeStrings            | 382          | VEX.L1.0F.W1 41 /r
+OpCodeStrings            | 383          | VEX.L1.0F.W0 41 /r
+OpCodeStrings            | 384          | VEX.L0.66.0F.W0 90 /r
+OpCodeStrings            | 385          | VEX.L0.66.0F.W0 92 /r
+OpCodeStrings            | 386          | VEX.L0.66.0F.W0 91 /r
+OpCodeStrings            | 387          | VEX.L0.66.0F.W0 93 /r
+OpCodeStrings            | 388          | VEX.L0.66.0F.W1 90 /r
+OpCodeStrings            | 389          | VEX.L0.F2.0F.W0 92 /r
+OpCodeStrings            | 390          | VEX.L0.66.0F.W1 91 /r
+OpCodeStrings            | 391          | VEX.L0.F2.0F.W0 93 /r
+OpCodeStrings            | 392          | VEX.L0.0F.W1 90 /r
+OpCodeStrings            | 393          | VEX.L0.F2.0F.W1 92 /r
+OpCodeStrings            | 394          | VEX.L0.0F.W1 91 /r
+OpCodeStrings            | 395          | VEX.L0.F2.0F.W1 93 /r
+OpCodeStrings            | 396          | VEX.L0.0F.W0 90 /r
+OpCodeStrings            | 397          | VEX.L0.0F.W0 92 /r
+OpCodeStrings            | 398          | VEX.L0.0F.W0 91 /r
+OpCodeStrings            | 399          | VEX.L0.0F.W0 93 /r
+OpCodeStrings            | 400          | VEX.L0.66.0F.W0 44 /r
+OpCodeStrings            | 401          | VEX.L0.66.0F.W1 44 /r
+OpCodeStrings            | 402          | VEX.L0.0F.W1 44 /r
+OpCodeStrings            | 403          | VEX.L0.0F.W0 44 /r
+OpCodeStrings            | 404          | VEX.L1.66.0F.W0 45 /r
+OpCodeStrings            | 405          | VEX.L1.66.0F.W1 45 /r
+OpCodeStrings            | 406          | VEX.L1.0F.W1 45 /r
+OpCodeStrings            | 407          | VEX.L0.66.0F.W0 98 /r
+OpCodeStrings            | 408          | VEX.L0.66.0F.W1 98 /r
+OpCodeStrings            | 409          | VEX.L0.0F.W1 98 /r
+OpCodeStrings            | 410          | VEX.L0.0F.W0 98 /r
+OpCodeStrings            | 411          | VEX.L1.0F.W0 45 /r
+OpCodeStrings            | 412          | VEX.L0.66.0F3A.W0 32 /r
+OpCodeStrings            | 413          | VEX.L0.66.0F3A.W0 33 /r
+OpCodeStrings            | 414          | VEX.L0.66.0F3A.W1 33 /r
+OpCodeStrings            | 415          | VEX.L0.66.0F3A.W1 32 /r
+OpCodeStrings            | 416          | VEX.L0.66.0F3A.W0 30 /r
+OpCodeStrings            | 417          | VEX.L0.66.0F3A.W0 31 /r
+OpCodeStrings            | 418          | VEX.L0.66.0F3A.W1 31 /r
+OpCodeStrings            | 419          | VEX.L0.66.0F3A.W1 30 /r
+OpCodeStrings            | 420          | VEX.L0.66.0F.W0 99 /r
+OpCodeStrings            | 421          | VEX.L0.66.0F.W1 99 /r
+OpCodeStrings            | 422          | VEX.L0.0F.W1 99 /r
+OpCodeStrings            | 423          | VEX.L0.0F.W0 99 /r
+OpCodeStrings            | 424          | VEX.L1.66.0F.W0 4B /r
+OpCodeStrings            | 425          | VEX.L1.0F.W1 4B /r
+OpCodeStrings            | 426          | VEX.L1.0F.W0 4B /r
+OpCodeStrings            | 427          | VEX.L1.66.0F.W0 46 /r
+OpCodeStrings            | 428          | VEX.L1.66.0F.W1 46 /r
+OpCodeStrings            | 429          | VEX.L1.0F.W1 46 /r
+OpCodeStrings            | 430          | VEX.L1.0F.W0 46 /r
+OpCodeStrings            | 431          | VEX.L1.66.0F.W0 47 /r
+OpCodeStrings            | 432          | VEX.L1.66.0F.W1 47 /r
+OpCodeStrings            | 433          | VEX.L1.0F.W1 47 /r
+OpCodeStrings            | 434          | VEX.L1.0F.W0 47 /r
+OpCodeStrings            | 435          | 8D /r   
+OpCodeStrings            | 436          | 8D /r   
+OpCodeStrings            | 437          | REX.W + 8D /r
+OpCodeStrings            | 438          | C9      
+OpCodeStrings            | 439          | C9      
+OpCodeStrings            | 440          | C9      
+OpCodeStrings            | 441          | F0      
+OpCodeStrings            | 442          | E2 cb   
+OpCodeStrings            | 443          | E1 cb   
+OpCodeStrings            | 444          | E0 cb   
+OpCodeStrings            | 445          | REX.W + A0
+OpCodeStrings            | 446          | A0      
+OpCodeStrings            | 447          | A1      
+OpCodeStrings            | 448          | A1      
+OpCodeStrings            | 449          | A3      
+OpCodeStrings            | 450          | A3      
+OpCodeStrings            | 451          | REX.W + A3
+OpCodeStrings            | 452          | REX.W + A2
+OpCodeStrings            | 453          | A2      
+OpCodeStrings            | 454          | C7 / 0 iw
+OpCodeStrings            | 455          | 89 /r   
+OpCodeStrings            | 456          | 8C /r   
+OpCodeStrings            | 457          | C7 / 0 id
+OpCodeStrings            | 458          | 89 /r   
+OpCodeStrings            | 459          | REX.W + C7 / 0 id
+OpCodeStrings            | 460          | REX.W + 89 /r
+OpCodeStrings            | 461          | C6 / 0 ib
+OpCodeStrings            | 462          | REX + C6 / 0 ib
+OpCodeStrings            | 463          | REX + 88 /r
+OpCodeStrings            | 464          | 88 /r   
+OpCodeStrings            | 465          | B8 +rw iw
+OpCodeStrings            | 466          | 8B /r   
+OpCodeStrings            | 467          | REX.W + 8C /r
+OpCodeStrings            | 468          | B8 +rd id
+OpCodeStrings            | 469          | 8B /r   
+OpCodeStrings            | 470          | REX.W + B8 +rd io
+OpCodeStrings            | 471          | REX.W + 8B /r
+OpCodeStrings            | 472          | REX.W + 8C /r
+OpCodeStrings            | 473          | REX + B0 +rb ib
+OpCodeStrings            | 474          | B0 +rb ib
+OpCodeStrings            | 475          | REX + 8A /r
+OpCodeStrings            | 476          | 8A /r   
+OpCodeStrings            | 477          | REX.W + A1
+OpCodeStrings            | 478          | 8E /r   
+OpCodeStrings            | 479          | REX.W + 8E /r
+OpCodeStrings            | 480          | 66 0F 28 /r
+OpCodeStrings            | 481          | 66 0F 29 /r
+OpCodeStrings            | 482          | NP 0F 28 /r
+OpCodeStrings            | 483          | NP 0F 29 /r
+OpCodeStrings            | 484          | NP 0F 6E /r
+OpCodeStrings            | 485          | 66 0F 7E /r
+OpCodeStrings            | 486          | NP 0F 7E /r
+OpCodeStrings            | 487          | 66 0F 6E /r
+OpCodeStrings            | 488          | 66 0F 38 F8 /r
+OpCodeStrings            | 489          | 66 0F 6F /r
+OpCodeStrings            | 490          | 66 0F 6F /r
+OpCodeStrings            | 491          | 66 0F 7F /r
+OpCodeStrings            | 492          | 66 0F 7F /r
+OpCodeStrings            | 493          | F3 0F 6F /r
+OpCodeStrings            | 494          | F3 0F 6F /r
+OpCodeStrings            | 495          | F3 0F 7F /r
+OpCodeStrings            | 496          | F3 0F 7F /r
+OpCodeStrings            | 497          | NP 0F 6F /r
+OpCodeStrings            | 498          | NP REX.W + 0F 6E /r
+OpCodeStrings            | 499          | NP 0F 7F /r
+OpCodeStrings            | 500          | 66 REX.W 0F 7E /r
+OpCodeStrings            | 501          | NP REX.W + 0F 7E /r
+OpCodeStrings            | 502          | 66 REX.W 0F 6E /r
+OpCodeStrings            | 503          | F3 0F 7E /r
+OpCodeStrings            | 504          | 66 0F D6 /r
+OpCodeStrings            | 505          | A5      
+OpCodeStrings            | 506          | A5      
+OpCodeStrings            | 507          | REX.W + A5
+OpCodeStrings            | 508          | A4      
+OpCodeStrings            | 509          | A4      
+OpCodeStrings            | 510          | A5      
+OpCodeStrings            | 511          | REX.W + A5
+OpCodeStrings            | 512          | A5      
+OpCodeStrings            | 513          | 0F BE /r
+OpCodeStrings            | 514          | 0F BF /r
+OpCodeStrings            | 515          | 0F BE /r
+OpCodeStrings            | 516          | REX.W + 0F BF /r
+OpCodeStrings            | 517          | REX.W + 0F BE /r
+OpCodeStrings            | 518          | 63 /r   
+OpCodeStrings            | 519          | 63 /r   
+OpCodeStrings            | 520          | REX.W + 63 /r
+OpCodeStrings            | 521          | 66 0F 10 /r
+OpCodeStrings            | 522          | 66 0F 11 /r
+OpCodeStrings            | 523          | 0F B6 /r
+OpCodeStrings            | 524          | 0F B7 /r
+OpCodeStrings            | 525          | 0F B6 /r
+OpCodeStrings            | 526          | REX.W + 0F B7 /r
+OpCodeStrings            | 527          | REX.W + 0F B6 /r
+OpCodeStrings            | 528          | 66 0F 3A 42 /r ib
+OpCodeStrings            | 529          | F7 /3   
+OpCodeStrings            | 530          | F7 /3   
+OpCodeStrings            | 531          | REX.W + F7 /3
+OpCodeStrings            | 532          | REX + F6 /3
+OpCodeStrings            | 533          | F6 /3   
+OpCodeStrings            | 534          | 0C ib   
+OpCodeStrings            | 535          | 0D iw   
+OpCodeStrings            | 536          | 0D id   
+OpCodeStrings            | 537          | 81 /1 iw
+OpCodeStrings            | 538          | 83 /1 ib
+OpCodeStrings            | 539          | 09 /r   
+OpCodeStrings            | 540          | 81 /1 id
+OpCodeStrings            | 541          | 83 /1 ib
+OpCodeStrings            | 542          | 09 /r   
+OpCodeStrings            | 543          | REX.W + 81 /1 id
+OpCodeStrings            | 544          | REX.W + 83 /1 ib
+OpCodeStrings            | 545          | REX.W + 09 /r
+OpCodeStrings            | 546          | 80 /1 ib
+OpCodeStrings            | 547          | REX + 80 /1 ib
+OpCodeStrings            | 548          | REX + 08 /r
+OpCodeStrings            | 549          | 08 /r   
+OpCodeStrings            | 550          | 0B /r   
+OpCodeStrings            | 551          | 0B /r   
+OpCodeStrings            | 552          | REX.W + 0B /r
+OpCodeStrings            | 553          | REX + 0A /r
+OpCodeStrings            | 554          | 0A /r   
+OpCodeStrings            | 555          | REX.W + 0D id
+OpCodeStrings            | 556          | EE      
+OpCodeStrings            | 557          | EF      
+OpCodeStrings            | 558          | EF      
+OpCodeStrings            | 559          | E6 ib   
+OpCodeStrings            | 560          | E7 ib   
+OpCodeStrings            | 561          | E7 ib   
+OpCodeStrings            | 562          | 6F      
+OpCodeStrings            | 563          | 6F      
+OpCodeStrings            | 564          | 6E      
+OpCodeStrings            | 565          | 6E      
+OpCodeStrings            | 566          | 6F      
+OpCodeStrings            | 567          | 6F      
+OpCodeStrings            | 568          | NP 0F 38 1C /r 1
+OpCodeStrings            | 569          | 66 0F 38 1C /r
+OpCodeStrings            | 570          | NP 0F 38 1E /r 1
+OpCodeStrings            | 571          | 66 0F 38 1E /r
+OpCodeStrings            | 572          | NP 0F 38 1D /r 1
+OpCodeStrings            | 573          | 66 0F 38 1D /r
+OpCodeStrings            | 574          | NP 0F 6B /r 1
+OpCodeStrings            | 575          | 66 0F 6B /r
+OpCodeStrings            | 576          | NP 0F 63 /r 1
+OpCodeStrings            | 577          | 66 0F 63 /r
+OpCodeStrings            | 578          | 66 0F 38 2B /r
+OpCodeStrings            | 579          | NP 0F 67 /r
+OpCodeStrings            | 580          | 66 0F 67 /r
+OpCodeStrings            | 581          | NP 0F DC /r 1
+OpCodeStrings            | 582          | 66 0F DC /r
+OpCodeStrings            | 583          | NP 0F DD /r 1
+OpCodeStrings            | 584          | 66 0F DD /r
+OpCodeStrings            | 585          | NP 0F DB /r 1
+OpCodeStrings            | 586          | 66 0F DB /r
+OpCodeStrings            | 587          | VEX.LZ.F2.0F38.W0 F5 /r
+OpCodeStrings            | 588          | VEX.LZ.F2.0F38.W1 F5 /r
+OpCodeStrings            | 589          | 66 0F 3A 20 /r ib
+OpCodeStrings            | 590          | 66 0F 3A 20 /r ib
+OpCodeStrings            | 591          | 66 0F 3A 22 /r ib
+OpCodeStrings            | 592          | 66 0F 3A 22 /r ib
+OpCodeStrings            | 593          | 66 REX.W 0F 3A 22 /r ib
+OpCodeStrings            | 594          | 66 REX.W 0F 3A 22 /r ib
+OpCodeStrings            | 595          | 66 0F 38 3C /r
+OpCodeStrings            | 596          | 66 0F 38 3D /r
+OpCodeStrings            | 597          | NP 0F EE /r
+OpCodeStrings            | 598          | 66 0F EE /r
+OpCodeStrings            | 599          | NP 0F D7 /r 1
+OpCodeStrings            | 600          | 66 0F D7 /r
+OpCodeStrings            | 601          | 66 0f 38 21 /r
+OpCodeStrings            | 602          | 66 0f 38 22 /r
+OpCodeStrings            | 603          | 66 0f 38 20 /r
+OpCodeStrings            | 604          | 66 0f 38 25 /r
+OpCodeStrings            | 605          | 66 0f 38 23/r
+OpCodeStrings            | 606          | 66 0f 38 24 /r
+OpCodeStrings            | 607          | 66 0f 38 31 /r
+OpCodeStrings            | 608          | 66 0f 38 32 /r
+OpCodeStrings            | 609          | 66 0f 38 30 /r
+OpCodeStrings            | 610          | 66 0f 38 35 /r
+OpCodeStrings            | 611          | 66 0f 38 33 /r
+OpCodeStrings            | 612          | 66 0f 38 34 /r
+OpCodeStrings            | 613          | 1F      
+OpCodeStrings            | 614          | 07      
+OpCodeStrings            | 615          | 0F A1   
+OpCodeStrings            | 616          | 0F A1   
+OpCodeStrings            | 617          | 0F A1   
+OpCodeStrings            | 618          | 0F A9   
+OpCodeStrings            | 619          | 0F A9   
+OpCodeStrings            | 620          | 0F A9   
+OpCodeStrings            | 621          | 8F /0   
+OpCodeStrings            | 622          | 8F /0   
+OpCodeStrings            | 623          | 8F /0   
+OpCodeStrings            | 624          | 58 +rw  
+OpCodeStrings            | 625          | 58 +rd  
+OpCodeStrings            | 626          | 58 +rd  
+OpCodeStrings            | 627          | 17      
+OpCodeStrings            | 628          | 9D      
+OpCodeStrings            | 629          | 9D      
+OpCodeStrings            | 630          | 9D      
+OpCodeStrings            | 631          | 0F 18 /0
+OpCodeStrings            | 632          | 0F 18 /1
+OpCodeStrings            | 633          | 0F 18 /2
+OpCodeStrings            | 634          | 0F 18 /3
+OpCodeStrings            | 635          | NP 0F 38 00 /r 1
+OpCodeStrings            | 636          | 66 0F 38 00 /r
+OpCodeStrings            | 637          | 66 0F 70 /r ib
+OpCodeStrings            | 638          | F2 0F 70 /r ib
+OpCodeStrings            | 639          | NP 0F 70 /r ib
+OpCodeStrings            | 640          | NP 0F 38 08 /r 1
+OpCodeStrings            | 641          | 66 0F 38 08 /r
+OpCodeStrings            | 642          | NP 0F 38 0A /r 1
+OpCodeStrings            | 643          | 66 0F 38 0A /r
+OpCodeStrings            | 644          | NP 0F 38 09 /r 1
+OpCodeStrings            | 645          | 66 0F 38 09 /r
+OpCodeStrings            | 646          | NP 0F 68 /r
+OpCodeStrings            | 647          | 66 0F 68 /r
+OpCodeStrings            | 648          | NP 0F 6A /r
+OpCodeStrings            | 649          | 66 0F 6A /r
+OpCodeStrings            | 650          | 66 0F 6D /r
+OpCodeStrings            | 651          | NP 0F 69 /r
+OpCodeStrings            | 652          | 66 0F 69 /r
+OpCodeStrings            | 653          | NP 0F 62 /r
+OpCodeStrings            | 654          | 66 0F 62 /r
+OpCodeStrings            | 655          | 66 0F 6C /r
+OpCodeStrings            | 656          | 0E      
+OpCodeStrings            | 657          | 1E      
+OpCodeStrings            | 658          | 06      
+OpCodeStrings            | 659          | 0F A0   
+OpCodeStrings            | 660          | 0F A8   
+OpCodeStrings            | 661          | 68 iw   
+OpCodeStrings            | 662          | 68 id   
+OpCodeStrings            | 663          | 6A ib   
+OpCodeStrings            | 664          | FF /6   
+OpCodeStrings            | 665          | FF /6   
+OpCodeStrings            | 666          | FF /6   
+OpCodeStrings            | 667          | 50 +rw  
+OpCodeStrings            | 668          | 50 +rd  
+OpCodeStrings            | 669          | 50 +rd  
+OpCodeStrings            | 670          | 16      
+OpCodeStrings            | 671          | 9C      
+OpCodeStrings            | 672          | 9C      
+OpCodeStrings            | 673          | 9C      
+OpCodeStrings            | 674          | NP 0F EF /r 1
+OpCodeStrings            | 675          | 66 0F EF /r
+OpCodeStrings            | 676          | D1 /2   
+OpCodeStrings            | 677          | D3 /2   
+OpCodeStrings            | 678          | C1 /2 ib
+OpCodeStrings            | 679          | D1 /2   
+OpCodeStrings            | 680          | D3 /2   
+OpCodeStrings            | 681          | C1 /2 ib
+OpCodeStrings            | 682          | REX.W + D1 /2
+OpCodeStrings            | 683          | REX.W + D3 /2
+OpCodeStrings            | 684          | REX.W + C1 /2 ib
+OpCodeStrings            | 685          | REX + D0 /2
+OpCodeStrings            | 686          | D0 /2   
+OpCodeStrings            | 687          | D2 /2   
+OpCodeStrings            | 688          | REX + D2 /2
+OpCodeStrings            | 689          | REX + C0 /2 ib
+OpCodeStrings            | 690          | C0 /2 ib
+OpCodeStrings            | 691          | D1 /3   
+OpCodeStrings            | 692          | D3 /3   
+OpCodeStrings            | 693          | C1 /3 ib
+OpCodeStrings            | 694          | D1 /3   
+OpCodeStrings            | 695          | D3 /3   
+OpCodeStrings            | 696          | C1 /3 ib
+OpCodeStrings            | 697          | REX.W + D1 /3
+OpCodeStrings            | 698          | REX.W + D3 /3
+OpCodeStrings            | 699          | REX.W + C1 /3 ib
+OpCodeStrings            | 700          | REX + D0 /3
+OpCodeStrings            | 701          | D0 /3   
+OpCodeStrings            | 702          | REX + D2 /3
+OpCodeStrings            | 703          | D2 /3   
+OpCodeStrings            | 704          | C0 /3 ib
+OpCodeStrings            | 705          | REX + C0 /3 ib
+OpCodeStrings            | 706          | F3 0F AE /0
+OpCodeStrings            | 707          | F3 REX.W 0F AE /0
+OpCodeStrings            | 708          | F3 0F AE /1
+OpCodeStrings            | 709          | F3 REX.W 0F AE /1
+OpCodeStrings            | 710          | D1 /0   
+OpCodeStrings            | 711          | D3 /0   
+OpCodeStrings            | 712          | C1 /0 ib
+OpCodeStrings            | 713          | D1 /0   
+OpCodeStrings            | 714          | D3 /0   
+OpCodeStrings            | 715          | C1 /0 ib
+OpCodeStrings            | 716          | REX.W + D1 /0
+OpCodeStrings            | 717          | REX.W + D3 /0
+OpCodeStrings            | 718          | REX.W + C1 /0 ib
+OpCodeStrings            | 719          | D0 /0   
+OpCodeStrings            | 720          | REX + D0 /0
+OpCodeStrings            | 721          | REX + D2 /0
+OpCodeStrings            | 722          | D2 /0   
+OpCodeStrings            | 723          | C0 /0 ib
+OpCodeStrings            | 724          | REX + C0 /0 ib
+OpCodeStrings            | 725          | D1 /1   
+OpCodeStrings            | 726          | D3 /1   
+OpCodeStrings            | 727          | C1 /1 ib
+OpCodeStrings            | 728          | D1 /1   
+OpCodeStrings            | 729          | D3 /1   
+OpCodeStrings            | 730          | C1 /1 ib
+OpCodeStrings            | 731          | REX.W + D1 /1
+OpCodeStrings            | 732          | REX.W + D3 /1
+OpCodeStrings            | 733          | REX.W + C1 /1 ib
+OpCodeStrings            | 734          | D0 /1   
+OpCodeStrings            | 735          | REX + D0 /1
+OpCodeStrings            | 736          | D2 /1   
+OpCodeStrings            | 737          | REX + D2 /1
+OpCodeStrings            | 738          | C0 /1 ib
+OpCodeStrings            | 739          | REX + C0 /1 ib
+OpCodeStrings            | 740          | D1 /4   
+OpCodeStrings            | 741          | D3 /4   
+OpCodeStrings            | 742          | C1 /4 ib
+OpCodeStrings            | 743          | D1 /4   
+OpCodeStrings            | 744          | D3 /4   
+OpCodeStrings            | 745          | C1/4 ib 
+OpCodeStrings            | 746          | REX.W + D1 /4
+OpCodeStrings            | 747          | REX.W + D3 /4
+OpCodeStrings            | 748          | REX.W + C1 /4 ib
+OpCodeStrings            | 749          | D0 /4   
+OpCodeStrings            | 750          | D2 /4   
+OpCodeStrings            | 751          | REX + D0 /4
+OpCodeStrings            | 752          | REX + D2 /4
+OpCodeStrings            | 753          | C0 /4 ib
+OpCodeStrings            | 754          | REX + C0 /4 ib
+OpCodeStrings            | 755          | D3 /7   
+OpCodeStrings            | 756          | D1 /7   
+OpCodeStrings            | 757          | C1 /7 ib
+OpCodeStrings            | 758          | D1 /7   
+OpCodeStrings            | 759          | D3 /7   
+OpCodeStrings            | 760          | C1 /7 ib
+OpCodeStrings            | 761          | REX.W + D1 /7
+OpCodeStrings            | 762          | REX.W + D3 /7
+OpCodeStrings            | 763          | REX.W + C1 /7 ib
+OpCodeStrings            | 764          | D0 /7   
+OpCodeStrings            | 765          | D2 /7   
+OpCodeStrings            | 766          | REX + D0 /7
+OpCodeStrings            | 767          | REX + D2 /7
+OpCodeStrings            | 768          | REX + C0 /7 ib
+OpCodeStrings            | 769          | C0 /7 ib
+OpCodeStrings            | 770          | VEX.LZ.F3.0F38.W0 F7 /r
+OpCodeStrings            | 771          | VEX.LZ.F3.0F38.W1 F7 /r
+OpCodeStrings            | 772          | 1C ib   
+OpCodeStrings            | 773          | 1D iw   
+OpCodeStrings            | 774          | 1D id   
+OpCodeStrings            | 775          | 81 /3 iw
+OpCodeStrings            | 776          | 83 /3 ib
+OpCodeStrings            | 777          | 19 /r   
+OpCodeStrings            | 778          | 81 /3 id
+OpCodeStrings            | 779          | 83 /3 ib
+OpCodeStrings            | 780          | 19 /r   
+OpCodeStrings            | 781          | REX.W + 81 /3 id
+OpCodeStrings            | 782          | REX.W + 83 /3 ib
+OpCodeStrings            | 783          | REX.W + 19 /r
+OpCodeStrings            | 784          | REX + 80 /3 ib
+OpCodeStrings            | 785          | 80 /3 ib
+OpCodeStrings            | 786          | 18 /r   
+OpCodeStrings            | 787          | REX + 18 /r
+OpCodeStrings            | 788          | 1B /r   
+OpCodeStrings            | 789          | 1B /r   
+OpCodeStrings            | 790          | REX.W + 1B /r
+OpCodeStrings            | 791          | 1A /r   
+OpCodeStrings            | 792          | REX + 1A /r
+OpCodeStrings            | 793          | REX.W + 1D id
+OpCodeStrings            | 794          | 0F 97   
+OpCodeStrings            | 795          | REX + 0F 97
+OpCodeStrings            | 796          | 0F 93   
+OpCodeStrings            | 797          | REX + 0F 93
+OpCodeStrings            | 798          | 0F 92   
+OpCodeStrings            | 799          | REX + 0F 92
+OpCodeStrings            | 800          | 0F 96   
+OpCodeStrings            | 801          | REX + 0F 96
+OpCodeStrings            | 802          | 0F 92   
+OpCodeStrings            | 803          | REX + 0F 92
+OpCodeStrings            | 804          | REX + 0F 94
+OpCodeStrings            | 805          | 0F 94   
+OpCodeStrings            | 806          | REX + 0F 9F
+OpCodeStrings            | 807          | 0F 9F   
+OpCodeStrings            | 808          | 0F 9D   
+OpCodeStrings            | 809          | REX + 0F 9D
+OpCodeStrings            | 810          | 0F 9C   
+OpCodeStrings            | 811          | REX + 0F 9C
+OpCodeStrings            | 812          | 0F 9E   
+OpCodeStrings            | 813          | REX + 0F 9E
+OpCodeStrings            | 814          | 0F 96   
+OpCodeStrings            | 815          | REX + 0F 96
+OpCodeStrings            | 816          | 0F 92   
+OpCodeStrings            | 817          | REX + 0F 92
+OpCodeStrings            | 818          | 0F 93   
+OpCodeStrings            | 819          | REX + 0F 93
+OpCodeStrings            | 820          | REX + 0F 97
+OpCodeStrings            | 821          | 0F 97   
+OpCodeStrings            | 822          | REX + 0F 93
+OpCodeStrings            | 823          | 0F 93   
+OpCodeStrings            | 824          | REX + 0F 95
+OpCodeStrings            | 825          | 0F 95   
+OpCodeStrings            | 826          | 0F 9E   
+OpCodeStrings            | 827          | REX + 0F 9E
+OpCodeStrings            | 828          | REX + 0F 9C
+OpCodeStrings            | 829          | 0F 9C   
+OpCodeStrings            | 830          | REX + 0F 9D
+OpCodeStrings            | 831          | 0F 9D   
+OpCodeStrings            | 832          | REX + 0F 9F
+OpCodeStrings            | 833          | 0F 9F   
+OpCodeStrings            | 834          | REX + 0F 91
+OpCodeStrings            | 835          | 0F 91   
+OpCodeStrings            | 836          | REX + 0F 9B
+OpCodeStrings            | 837          | 0F 9B   
+OpCodeStrings            | 838          | REX + 0F 99
+OpCodeStrings            | 839          | 0F 99   
+OpCodeStrings            | 840          | 0F 95   
+OpCodeStrings            | 841          | REX + 0F 95
+OpCodeStrings            | 842          | 0F 90   
+OpCodeStrings            | 843          | REX + 0F 90
+OpCodeStrings            | 844          | 0F 9A   
+OpCodeStrings            | 845          | REX + 0F 9A
+OpCodeStrings            | 846          | REX + 0F 9A
+OpCodeStrings            | 847          | 0F 9A   
+OpCodeStrings            | 848          | REX + 0F 9B
+OpCodeStrings            | 849          | 0F 9B   
+OpCodeStrings            | 850          | 0F 98   
+OpCodeStrings            | 851          | REX + 0F 98
+OpCodeStrings            | 852          | 0F 94   
+OpCodeStrings            | 853          | REX + 0F 94
+OpCodeStrings            | 854          | D3 /4   
+OpCodeStrings            | 855          | D1 /4   
+OpCodeStrings            | 856          | C1 /4 ib
+OpCodeStrings            | 857          | D3 /4   
+OpCodeStrings            | 858          | D1 /4   
+OpCodeStrings            | 859          | C1 /4 ib
+OpCodeStrings            | 860          | REX.W + D3 /4
+OpCodeStrings            | 861          | REX.W + D1 /4
+OpCodeStrings            | 862          | REX.W + C1 /4 ib
+OpCodeStrings            | 863          | D0 /4   
+OpCodeStrings            | 864          | D2 /4   
+OpCodeStrings            | 865          | REX + D0 /4
+OpCodeStrings            | 866          | REX + D2 /4
+OpCodeStrings            | 867          | REX + C0 /4 ib
+OpCodeStrings            | 868          | C0 /4 ib
+OpCodeStrings            | 869          | VEX.LZ.66.0F38.W0 F7 /r
+OpCodeStrings            | 870          | VEX.LZ.66.0F38.W1 F7 /r
+OpCodeStrings            | 871          | D1 /5   
+OpCodeStrings            | 872          | D3 /5   
+OpCodeStrings            | 873          | C1 /5 ib
+OpCodeStrings            | 874          | D1 /5   
+OpCodeStrings            | 875          | D3 /5   
+OpCodeStrings            | 876          | C1 /5 ib
+OpCodeStrings            | 877          | REX.W + D1 /5
+OpCodeStrings            | 878          | REX.W + D3 /5
+OpCodeStrings            | 879          | REX.W + C1 /5 ib
+OpCodeStrings            | 880          | D2 /5   
+OpCodeStrings            | 881          | REX + D0 /5
+OpCodeStrings            | 882          | D0 /5   
+OpCodeStrings            | 883          | REX + D2 /5
+OpCodeStrings            | 884          | REX + C0 /5 ib
+OpCodeStrings            | 885          | C0 /5 ib
+OpCodeStrings            | 886          | VEX.LZ.F2.0F38.W0 F7 /r
+OpCodeStrings            | 887          | VEX.LZ.F2.0F38.W1 F7 /r
+OpCodeStrings            | 888          | AB      
+OpCodeStrings            | 889          | AB      
+OpCodeStrings            | 890          | REX.W + AB
+OpCodeStrings            | 891          | AA      
+OpCodeStrings            | 892          | AA      
+OpCodeStrings            | 893          | AB      
+OpCodeStrings            | 894          | REX.W + AB
+OpCodeStrings            | 895          | AB      
+OpCodeStrings            | 896          | 2C ib   
+OpCodeStrings            | 897          | 2D iw   
+OpCodeStrings            | 898          | 2D id   
+OpCodeStrings            | 899          | 81 /5 iw
+OpCodeStrings            | 900          | 83 /5 ib
+OpCodeStrings            | 901          | 29 /r   
+OpCodeStrings            | 902          | 81 /5 id
+OpCodeStrings            | 903          | 83 /5 ib
+OpCodeStrings            | 904          | 29 /r   
+OpCodeStrings            | 905          | REX.W + 81 /5 id
+OpCodeStrings            | 906          | REX.W + 83 /5 ib
+OpCodeStrings            | 907          | REX.W + 29 /r
+OpCodeStrings            | 908          | REX + 80 /5 ib
+OpCodeStrings            | 909          | 80 /5 ib
+OpCodeStrings            | 910          | 28 /r   
+OpCodeStrings            | 911          | REX + 28 /r
+OpCodeStrings            | 912          | 2B /r   
+OpCodeStrings            | 913          | 2B /r   
+OpCodeStrings            | 914          | REX.W + 2B /r
+OpCodeStrings            | 915          | 2A /r   
+OpCodeStrings            | 916          | REX + 2A /r
+OpCodeStrings            | 917          | REX.W + 2D id
+OpCodeStrings            | 918          | 0F 05   
+OpCodeStrings            | 919          | A8 ib   
+OpCodeStrings            | 920          | A9 iw   
+OpCodeStrings            | 921          | A9 id   
+OpCodeStrings            | 922          | F7 /0 iw
+OpCodeStrings            | 923          | 85 /4   
+OpCodeStrings            | 924          | F7 /0 id
+OpCodeStrings            | 925          | 85 /4   
+OpCodeStrings            | 926          | REX.W + F7 /0 id
+OpCodeStrings            | 927          | REX.W + 85 /4
+OpCodeStrings            | 928          | REX + F6 /0 ib
+OpCodeStrings            | 929          | F6 /0 ib
+OpCodeStrings            | 930          | REX + 84 /4
+OpCodeStrings            | 931          | 84 /4   
+OpCodeStrings            | 932          | REX.W + A9 id
+OpCodeStrings            | 933          | 66 0F AE /6
+OpCodeStrings            | 934          | EVEX.128.66.0F.W1 58 /r
+OpCodeStrings            | 935          | VEX.128.66.0F.WIG 58 /r
+OpCodeStrings            | 936          | EVEX.256.66.0F.W1 58 /r
+OpCodeStrings            | 937          | VEX.256.66.0F.WIG 58 /r
+OpCodeStrings            | 938          | EVEX.512.66.0F.W1 58 /r
+OpCodeStrings            | 939          | EVEX.NDS.128.66.0F3A.W0 03 /r ib
+OpCodeStrings            | 940          | EVEX.NDS.256.66.0F3A.W0 03 /r ib
+OpCodeStrings            | 941          | EVEX.NDS.512.66.0F3A.W0 03 /r ib
+OpCodeStrings            | 942          | EVEX.NDS.128.66.0F3A.W1 03 /r ib
+OpCodeStrings            | 943          | EVEX.NDS.256.66.0F3A.W1 03 /r ib
+OpCodeStrings            | 944          | EVEX.NDS.512.66.0F3A.W1 03 /r ib
+OpCodeStrings            | 945          | VEX.256.66.0F38.W0 5A /r
+OpCodeStrings            | 946          | EVEX.128.66.0F38.W0 59 /r
+OpCodeStrings            | 947          | EVEX.256.66.0F38.W0 59 /r
+OpCodeStrings            | 948          | EVEX.512.66.0F38.W0 59 /r
+OpCodeStrings            | 949          | EVEX.256.66.0F38.W0 5A /r
+OpCodeStrings            | 950          | EVEX.512.66.0F38.W0 5A /r
+OpCodeStrings            | 951          | EVEX.512.66.0F38.W0 5B /r
+OpCodeStrings            | 952          | EVEX.256.66.0F38.W1 5A /r
+OpCodeStrings            | 953          | EVEX.512.66.0F38.W1 5A /r
+OpCodeStrings            | 954          | EVEX.512.66.0F38.W1 5B /r
+OpCodeStrings            | 955          | EVEX.128.0F.W0 C2 /r ib
+OpCodeStrings            | 956          | EVEX.256.0F.W0 C2 /r ib
+OpCodeStrings            | 957          | EVEX.512.0F.W0 C2 /r ib
+OpCodeStrings            | 958          | VEX.128.0F.WIG C2 /r ib
+OpCodeStrings            | 959          | VEX.256.0F.WIG C2 /r ib
+OpCodeStrings            | 960          | VEX.256.66.0F3A.W0 39 /r ib
+OpCodeStrings            | 961          | EVEX.256.66.0F3A.W0 39 /r ib
+OpCodeStrings            | 962          | EVEX.512.66.0F3A.W0 39 /r ib
+OpCodeStrings            | 963          | EVEX.512.66.0F3A.W0 3B /r ib
+OpCodeStrings            | 964          | EVEX.256.66.0F3A.W1 39 /r ib
+OpCodeStrings            | 965          | EVEX.512.66.0F3A.W1 39 /r ib
+OpCodeStrings            | 966          | EVEX.512.66.0F3A.W1 3B /r ib
+OpCodeStrings            | 967          | VEX.128.66.0F38.W0 2F /r
+OpCodeStrings            | 968          | VEX.256.66.0F38.W0 2F /r
+OpCodeStrings            | 969          | VEX.128.66.0F38.W0 2D /r
+OpCodeStrings            | 970          | VEX.256.66.0F38.W0 2D /r
+OpCodeStrings            | 971          | VEX.128.66.0F38.W0 2E /r
+OpCodeStrings            | 972          | VEX.256.66.0F38.W0 2E /r
+OpCodeStrings            | 973          | VEX.128.66.0F38.W0 2C /r
+OpCodeStrings            | 974          | VEX.256.66.0F38.W0 2C /r
+OpCodeStrings            | 975          | VEX.128.66.0F.WIG 28 /r
+OpCodeStrings            | 976          | EVEX.128.66.0F.W1 28 /r
+OpCodeStrings            | 977          | EVEX.128.66.0F.W1 29 /r
+OpCodeStrings            | 978          | VEX.128.66.0F.WIG 29 /r
+OpCodeStrings            | 979          | VEX.256.66.0F.WIG 28 /r
+OpCodeStrings            | 980          | EVEX.256.66.0F.W1 28 /r
+OpCodeStrings            | 981          | EVEX.256.66.0F.W1 29 /r
+OpCodeStrings            | 982          | VEX.256.66.0F.WIG 29 /r
+OpCodeStrings            | 983          | EVEX.512.66.0F.W1 28 /r
+OpCodeStrings            | 984          | EVEX.512.66.0F.W1 29 /r
+OpCodeStrings            | 985          | EVEX.128.0F.W0 28 /r
+OpCodeStrings            | 986          | VEX.128.0F.WIG 28 /r
+OpCodeStrings            | 987          | EVEX.128.0F.W0 29 /r
+OpCodeStrings            | 988          | VEX.128.0F.WIG 29 /r
+OpCodeStrings            | 989          | EVEX.256.0F.W0 28 /r
+OpCodeStrings            | 990          | VEX.256.0F.WIG 28 /r
+OpCodeStrings            | 991          | EVEX.256.0F.W0 29 /r
+OpCodeStrings            | 992          | VEX.256.0F.WIG 29 /r
+OpCodeStrings            | 993          | EVEX.512.0F.W0 28 /r
+OpCodeStrings            | 994          | EVEX.512.0F.W0 29 /r
+OpCodeStrings            | 995          | VEX.128.66.0F.W0 7E /r
+OpCodeStrings            | 996          | EVEX.128.66.0F.W0 7E /r
+OpCodeStrings            | 997          | EVEX.128.66.0F.W0 6E /r
+OpCodeStrings            | 998          | VEX.128.66.0F.W0 6E /
+OpCodeStrings            | 999          | VEX.128.66.0F.WIG 6F /r
+OpCodeStrings            | 1000         | VEX.128.66.0F.WIG 6F /r
+OpCodeStrings            | 1001         | VEX.128.66.0F.WIG 7F /r
+OpCodeStrings            | 1002         | VEX.128.66.0F.WIG 7F /r
+OpCodeStrings            | 1003         | VEX.256.66.0F.WIG 6F /r
+OpCodeStrings            | 1004         | VEX.256.66.0F.WIG 6F /r
+OpCodeStrings            | 1005         | VEX.256.66.0F.WIG 7F /r
+OpCodeStrings            | 1006         | VEX.256.66.0F.WIG 7F /r
+OpCodeStrings            | 1007         | EVEX.128.66.0F.W0 6F /r
+OpCodeStrings            | 1008         | EVEX.128.66.0F.W0 6F /r
+OpCodeStrings            | 1009         | EVEX.128.66.0F.W0 7F /r
+OpCodeStrings            | 1010         | EVEX.128.66.0F.W0 7F /r
+OpCodeStrings            | 1011         | EVEX.256.66.0F.W0 6F /r
+OpCodeStrings            | 1012         | EVEX.256.66.0F.W0 6F /r
+OpCodeStrings            | 1013         | EVEX.256.66.0F.W0 7F /r
+OpCodeStrings            | 1014         | EVEX.256.66.0F.W0 7F /r
+OpCodeStrings            | 1015         | EVEX.512.66.0F.W0 6F /r
+OpCodeStrings            | 1016         | EVEX.512.66.0F.W0 6F /r
+OpCodeStrings            | 1017         | EVEX.512.66.0F.W0 7F /r
+OpCodeStrings            | 1018         | EVEX.512.66.0F.W0 7F /r
+OpCodeStrings            | 1019         | EVEX.128.66.0F.W1 6F /r
+OpCodeStrings            | 1020         | EVEX.128.66.0F.W1 6F /r
+OpCodeStrings            | 1021         | EVEX.128.66.0F.W1 7F /r
+OpCodeStrings            | 1022         | EVEX.128.66.0F.W1 7F /r
+OpCodeStrings            | 1023         | EVEX.256.66.0F.W1 6F /r
+OpCodeStrings            | 1024         | EVEX.256.66.0F.W1 6F /r
+OpCodeStrings            | 1025         | EVEX.256.66.0F.W1 7F /r
+OpCodeStrings            | 1026         | EVEX.256.66.0F.W1 7F /r
+OpCodeStrings            | 1027         | EVEX.512.66.0F.W1 6F /r
+OpCodeStrings            | 1028         | EVEX.512.66.0F.W1 6F /r
+OpCodeStrings            | 1029         | EVEX.512.66.0F.W1 7F /r
+OpCodeStrings            | 1030         | EVEX.512.66.0F.W1 7F /r
+OpCodeStrings            | 1031         | VEX.128.F3.0F.WIG 6F /r
+OpCodeStrings            | 1032         | VEX.128.F3.0F.WIG 6F /r
+OpCodeStrings            | 1033         | VEX.128.F3.0F.WIG 7F /r
+OpCodeStrings            | 1034         | VEX.128.F3.0F.WIG 7F /r
+OpCodeStrings            | 1035         | VEX.256.F3.0F.WIG 6F /r
+OpCodeStrings            | 1036         | VEX.256.F3.0F.WIG 6F /r
+OpCodeStrings            | 1037         | VEX.256.F3.0F.WIG 7F /r
+OpCodeStrings            | 1038         | VEX.256.F3.0F.WIG 7F /r
+OpCodeStrings            | 1039         | EVEX.128.F2.0F.W1 6F /r
+OpCodeStrings            | 1040         | EVEX.128.F2.0F.W1 6F /r
+OpCodeStrings            | 1041         | EVEX.128.F2.0F.W1 7F /r
+OpCodeStrings            | 1042         | EVEX.128.F2.0F.W1 7F /r
+OpCodeStrings            | 1043         | EVEX.256.F2.0F.W1 6F /r
+OpCodeStrings            | 1044         | EVEX.256.F2.0F.W1 6F /r
+OpCodeStrings            | 1045         | EVEX.256.F2.0F.W1 7F /r
+OpCodeStrings            | 1046         | EVEX.256.F2.0F.W1 7F /r
+OpCodeStrings            | 1047         | EVEX.512.F2.0F.W1 6F /r
+OpCodeStrings            | 1048         | EVEX.512.F2.0F.W1 6F /r
+OpCodeStrings            | 1049         | EVEX.512.F2.0F.W1 7F /r
+OpCodeStrings            | 1050         | EVEX.512.F2.0F.W1 7F /r
+OpCodeStrings            | 1051         | EVEX.128.F3.0F.W0 6F /r
+OpCodeStrings            | 1052         | EVEX.128.F3.0F.W0 6F /r
+OpCodeStrings            | 1053         | EVEX.128.F3.0F.W0 7F /r
+OpCodeStrings            | 1054         | EVEX.128.F3.0F.W0 7F /r
+OpCodeStrings            | 1055         | EVEX.256.F3.0F.W0 6F /r
+OpCodeStrings            | 1056         | EVEX.256.F3.0F.W0 6F /r
+OpCodeStrings            | 1057         | EVEX.256.F3.0F.W0 7F /r
+OpCodeStrings            | 1058         | EVEX.256.F3.0F.W0 7F /r
+OpCodeStrings            | 1059         | EVEX.512.F3.0F.W0 6F /r
+OpCodeStrings            | 1060         | EVEX.512.F3.0F.W0 6F /r
+OpCodeStrings            | 1061         | EVEX.512.F3.0F.W0 7F /r
+OpCodeStrings            | 1062         | EVEX.512.F3.0F.W0 7F /r
+OpCodeStrings            | 1063         | EVEX.128.F3.0F.W1 6F /r
+OpCodeStrings            | 1064         | EVEX.128.F3.0F.W1 6F /r
+OpCodeStrings            | 1065         | EVEX.128.F3.0F.W1 7F /r
+OpCodeStrings            | 1066         | EVEX.128.F3.0F.W1 7F /r
+OpCodeStrings            | 1067         | EVEX.256.F3.0F.W1 6F /r
+OpCodeStrings            | 1068         | EVEX.256.F3.0F.W1 6F /r
+OpCodeStrings            | 1069         | EVEX.256.F3.0F.W1 7F /r
+OpCodeStrings            | 1070         | EVEX.256.F3.0F.W1 7F /r
+OpCodeStrings            | 1071         | EVEX.512.F3.0F.W1 6F /r
+OpCodeStrings            | 1072         | EVEX.512.F3.0F.W1 6F /r
+OpCodeStrings            | 1073         | EVEX.512.F3.0F.W1 7F /r
+OpCodeStrings            | 1074         | EVEX.512.F3.0F.W1 7F /r
+OpCodeStrings            | 1075         | EVEX.128.F2.0F.W0 6F /r
+OpCodeStrings            | 1076         | EVEX.128.F2.0F.W0 6F /r
+OpCodeStrings            | 1077         | EVEX.128.F2.0F.W0 7F /r
+OpCodeStrings            | 1078         | EVEX.128.F2.0F.W0 7F /r
+OpCodeStrings            | 1079         | EVEX.256.F2.0F.W0 6F /r
+OpCodeStrings            | 1080         | EVEX.256.F2.0F.W0 6F /r
+OpCodeStrings            | 1081         | EVEX.256.F2.0F.W0 7F /r
+OpCodeStrings            | 1082         | EVEX.256.F2.0F.W0 7F /r
+OpCodeStrings            | 1083         | EVEX.512.F2.0F.W0 6F /r
+OpCodeStrings            | 1084         | EVEX.512.F2.0F.W0 6F /r
+OpCodeStrings            | 1085         | EVEX.512.F2.0F.W0 7F /r
+OpCodeStrings            | 1086         | EVEX.512.F2.0F.W0 7F /r
+OpCodeStrings            | 1087         | VEX.128.66.0F.W1 7E /r
+OpCodeStrings            | 1088         | EVEX.128.66.0F.W1 7E /r
+OpCodeStrings            | 1089         | VEX.128.66.0F.W1 6E /r
+OpCodeStrings            | 1090         | EVEX.128.66.0F.W1 6E /r
+OpCodeStrings            | 1091         | EVEX.128.F3.0F.W1 7E /r
+OpCodeStrings            | 1092         | VEX.128.F3.0F.WIG 7E /r
+OpCodeStrings            | 1093         | VEX.128.66.0F.WIG D6 /r
+OpCodeStrings            | 1094         | EVEX.128.66.0F.W1 D6 /r
+OpCodeStrings            | 1095         | EVEX.128.66.0F.W1 10 /r
+OpCodeStrings            | 1096         | VEX.128.66.0F.WIG 10 /r
+OpCodeStrings            | 1097         | EVEX.128.66.0F.W1 11 /r
+OpCodeStrings            | 1098         | VEX.128.66.0F.WIG 11 /r
+OpCodeStrings            | 1099         | EVEX.256.66.0F.W1 10 /r
+OpCodeStrings            | 1100         | VEX.256.66.0F.WIG 10 /r
+OpCodeStrings            | 1101         | EVEX.256.66.0F.W1 11 /r
+OpCodeStrings            | 1102         | VEX.256.66.0F.WIG 11 /r
+OpCodeStrings            | 1103         | EVEX.512.66.0F.W1 10 /r
+OpCodeStrings            | 1104         | EVEX.512.66.0F.W1 11 /r
+OpCodeStrings            | 1105         | VEX.128.66.0F3A.WIG 42 /r ib
+OpCodeStrings            | 1106         | VEX.256.66.0F3A.WIG 42 /r ib
+OpCodeStrings            | 1107         | EVEX.128.66.0F38.WIG 1C /r
+OpCodeStrings            | 1108         | VEX.128.66.0F38.WIG 1C /r
+OpCodeStrings            | 1109         | EVEX.256.66.0F38.WIG 1C /r
+OpCodeStrings            | 1110         | VEX.256.66.0F38.WIG 1C /r
+OpCodeStrings            | 1111         | EVEX.512.66.0F38.WIG 1C /r
+OpCodeStrings            | 1112         | EVEX.128.66.0F38.W0 1E /r
+OpCodeStrings            | 1113         | VEX.128.66.0F38.WIG 1E /r
+OpCodeStrings            | 1114         | EVEX.256.66.0F38.W0 1E /r
+OpCodeStrings            | 1115         | VEX.256.66.0F38.WIG 1E /r
+OpCodeStrings            | 1116         | EVEX.512.66.0F38.W0 1E /r
+OpCodeStrings            | 1117         | EVEX.128.66.0F38.W1 1F /r
+OpCodeStrings            | 1118         | EVEX.256.66.0F38.W1 1F /r
+OpCodeStrings            | 1119         | EVEX.512.66.0F38.W1 1F /r
+OpCodeStrings            | 1120         | EVEX.128.66.0F38.WIG 1D /r
+OpCodeStrings            | 1121         | VEX.128.66.0F38.WIG 1D /r
+OpCodeStrings            | 1122         | EVEX.256.66.0F38.WIG 1D /r
+OpCodeStrings            | 1123         | VEX.256.66.0F38.WIG 1D /r
+OpCodeStrings            | 1124         | EVEX.512.66.0F38.WIG 1D /r
+OpCodeStrings            | 1125         | EVEX.128.66.0F.W0 6B /r
+OpCodeStrings            | 1126         | VEX.128.66.0F.WIG 6B /r
+OpCodeStrings            | 1127         | VEX.256.66.0F.WIG 6B /r
+OpCodeStrings            | 1128         | EVEX.128.66.0F.WIG 63 /r
+OpCodeStrings            | 1129         | VEX.128.66.0F.WIG 63 /r
+OpCodeStrings            | 1130         | EVEX.256.66.0F.WIG 63 /r
+OpCodeStrings            | 1131         | VEX.256.66.0F.WIG 63 /r
+OpCodeStrings            | 1132         | EVEX.512.66.0F.WIG 63 /r
+OpCodeStrings            | 1133         | VEX.128.66.0F38 2B /r
+OpCodeStrings            | 1134         | EVEX.128.66.0F38.W0 2B /r
+OpCodeStrings            | 1135         | VEX.256.66.0F38 2B /r
+OpCodeStrings            | 1136         | EVEX.256.66.0F38.W0 2B /r
+OpCodeStrings            | 1137         | EVEX.512.66.0F38.W0 2B /r
+OpCodeStrings            | 1138         | VEX.128.66.0F.WIG 67 /r
+OpCodeStrings            | 1139         | EVEX.128.66.0F.WIG 67 /r
+OpCodeStrings            | 1140         | VEX.256.66.0F.WIG 67 /r
+OpCodeStrings            | 1141         | EVEX.256.66.0F.WIG 67 /r
+OpCodeStrings            | 1142         | EVEX.512.66.0F.WIG 67 /r
+OpCodeStrings            | 1143         | EVEX.128.66.0F.WIG DC /r
+OpCodeStrings            | 1144         | VEX.128.660F.WIG DC /r
+OpCodeStrings            | 1145         | EVEX.256.66.0F.WIG DC /r
+OpCodeStrings            | 1146         | VEX.256.66.0F.WIG DC /r
+OpCodeStrings            | 1147         | EVEX.512.66.0F.WIG DC /r
+OpCodeStrings            | 1148         | EVEX.128.66.0F.WIG DD /r
+OpCodeStrings            | 1149         | VEX.128.66.0F.WIG DD /r
+OpCodeStrings            | 1150         | EVEX.256.66.0F.WIG DD /r
+OpCodeStrings            | 1151         | VEX.256.66.0F.WIG DD /r
+OpCodeStrings            | 1152         | VEX.128.66.0F.WIG DB /r
+OpCodeStrings            | 1153         | VEX.256.66.0F.WIG DB /r
+OpCodeStrings            | 1154         | EVEX.128.66.0F.W0 DB /r
+OpCodeStrings            | 1155         | EVEX.256.66.0F.W0 DB /r
+OpCodeStrings            | 1156         | EVEX.512.66.0F.W0 DB /r
+OpCodeStrings            | 1157         | EVEX.128.66.0F.W1 DB /r
+OpCodeStrings            | 1158         | EVEX.256.66.0F.W1 DB /r
+OpCodeStrings            | 1159         | EVEX.512.66.0F.W1 DB /r
+OpCodeStrings            | 1160         | VEX.128.66.0F38.W0 78 /r
+OpCodeStrings            | 1161         | EVEX.128.66.0F38.W0 78 /r
+OpCodeStrings            | 1162         | VEX.256.66.0F38.W0 78 /r
+OpCodeStrings            | 1163         | EVEX.256.66.0F38.W0 78 /r
+OpCodeStrings            | 1164         | EVEX.512.66.0F38.W0 78 /r
+OpCodeStrings            | 1165         | EVEX.128.66.0F38.W0 58 /r
+OpCodeStrings            | 1166         | VEX.128.66.0F38.W0 58 /r
+OpCodeStrings            | 1167         | EVEX.256.66.0F38.W0 58 /r
+OpCodeStrings            | 1168         | VEX.256.66.0F38.W0 58 /r
+OpCodeStrings            | 1169         | EVEX.512.66.0F38.W0 58 /r
+OpCodeStrings            | 1170         | EVEX.128.66.0F38.W1 59 /r
+OpCodeStrings            | 1171         | VEX.128.66.0F38.W0 59 /r
+OpCodeStrings            | 1172         | EVEX.256.66.0F38.W1 59 /r
+OpCodeStrings            | 1173         | VEX.256.66.0F38.W0 59 /r
+OpCodeStrings            | 1174         | EVEX.512.66.0F38.W1 59 /r
+OpCodeStrings            | 1175         | VEX.128.66.0F38.W0 79 /r
+OpCodeStrings            | 1176         | EVEX.128.66.0F38.W0 79 /r
+OpCodeStrings            | 1177         | VEX.256.66.0F38.W0 79 /r
+OpCodeStrings            | 1178         | EVEX.256.66.0F38.W0 79 /r
+OpCodeStrings            | 1179         | EVEX.512.66.0F38.W0 79 /r
+OpCodeStrings            | 1180         | EVEX.128.66.0F38.W0 8B /r
+OpCodeStrings            | 1181         | EVEX.256.66.0F38.W0 8B /r
+OpCodeStrings            | 1182         | EVEX.512.66.0F38.W0 8B /r
+OpCodeStrings            | 1183         | EVEX.128.66.0F38.W1 8B /r
+OpCodeStrings            | 1184         | EVEX.256.66.0F38.W1 8B /r
+OpCodeStrings            | 1185         | EVEX.512.66.0F38.W1 8B /r
+OpCodeStrings            | 1186         | EVEX.128.66.0F38.W0 C4 /r
+OpCodeStrings            | 1187         | EVEX.256.66.0F38.W0 C4 /r
+OpCodeStrings            | 1188         | EVEX.512.66.0F38.W0 C4 /r
+OpCodeStrings            | 1189         | EVEX.128.66.0F38.W1 C4 /r
+OpCodeStrings            | 1190         | EVEX.256.66.0F38.W1 C4 /r
+OpCodeStrings            | 1191         | EVEX.512.66.0F38.W1 C4 /r
+OpCodeStrings            | 1192         | VEX.256.66.0F3A.W0 46 /r ib
+OpCodeStrings            | 1193         | EVEX.128.66.0F38.W0 8D /r
+OpCodeStrings            | 1194         | EVEX.256.66.0F38.W0 8D /r
+OpCodeStrings            | 1195         | EVEX.512.66.0F38.W0 8D /r
+OpCodeStrings            | 1196         | EVEX.128.66.0F38.W0 76 /r
+OpCodeStrings            | 1197         | EVEX.256.66.0F38.W0 76 /r
+OpCodeStrings            | 1198         | EVEX.512.66.0F38.W0 76 /r
+OpCodeStrings            | 1199         | EVEX.128.66.0F38.W1 77 /r
+OpCodeStrings            | 1200         | EVEX.256.66.0F38.W1 77 /r
+OpCodeStrings            | 1201         | EVEX.512.66.0F38.W1 77 /r
+OpCodeStrings            | 1202         | EVEX.128.66.0F38.W0 77 /r
+OpCodeStrings            | 1203         | EVEX.256.66.0F38.W0 77 /r
+OpCodeStrings            | 1204         | EVEX.512.66.0F38.W0 77 /r
+OpCodeStrings            | 1205         | EVEX.128.66.0F38.W1 76 /r
+OpCodeStrings            | 1206         | EVEX.256.66.0F38.W1 76 /r
+OpCodeStrings            | 1207         | EVEX.512.66.0F38.W1 76 /r
+OpCodeStrings            | 1208         | EVEX.128.66.0F38.W1 75 /r
+OpCodeStrings            | 1209         | EVEX.256.66.0F38.W1 75 /r
+OpCodeStrings            | 1210         | EVEX.512.66.0F38.W1 75 /r
+OpCodeStrings            | 1211         | EVEX.128.66.0F38.W0 7D /r
+OpCodeStrings            | 1212         | EVEX.256.66.0F38.W0 7D /r
+OpCodeStrings            | 1213         | EVEX.512.66.0F38.W0 7D /r
+OpCodeStrings            | 1214         | EVEX.128.66.0F38.W0 7E /r
+OpCodeStrings            | 1215         | EVEX.256.66.0F38.W0 7E /r
+OpCodeStrings            | 1216         | EVEX.512.66.0F38.W0 7E /r
+OpCodeStrings            | 1217         | EVEX.128.66.0F38.W1 7F /r
+OpCodeStrings            | 1218         | EVEX.256.66.0F38.W1 7F /r
+OpCodeStrings            | 1219         | EVEX.512.66.0F38.W1 7F /r
+OpCodeStrings            | 1220         | EVEX.128.66.0F38.W0 7F /r
+OpCodeStrings            | 1221         | EVEX.256.66.0F38.W0 7F /r
+OpCodeStrings            | 1222         | EVEX.512.66.0F38.W0 7F /r
+OpCodeStrings            | 1223         | EVEX.128.66.0F38.W1 7E /r
+OpCodeStrings            | 1224         | EVEX.256.66.0F38.W1 7E /r
+OpCodeStrings            | 1225         | EVEX.512.66.0F38.W1 7E /r
+OpCodeStrings            | 1226         | EVEX.128.66.0F38.W1 7D /r
+OpCodeStrings            | 1227         | EVEX.256.66.0F38.W1 7D /r
+OpCodeStrings            | 1228         | EVEX.512.66.0F38.W1 7D /r
+OpCodeStrings            | 1229         | VEX.128.66.0F38.W1 90 /r
+OpCodeStrings            | 1230         | VEX.256.66.0F38.W1 90 /r
+OpCodeStrings            | 1231         | VEX.128.66.0F38.W1 91 /r
+OpCodeStrings            | 1232         | VEX.256.66.0F38.W1 91 /r
+OpCodeStrings            | 1233         | EVEX.128.66.0F3A.WIG 20 /r ib
+OpCodeStrings            | 1234         | EVEX.128.66.0F3A.WIG 20 /r ib
+OpCodeStrings            | 1235         | VEX.128.66.0F3A.W0 20 /r ib
+OpCodeStrings            | 1236         | VEX.128.66.0F3A.W0 20 /r ib
+OpCodeStrings            | 1237         | VEX.128.66.0F3A.W0 22 /r ib
+OpCodeStrings            | 1238         | VEX.128.66.0F3A.W0 22 /r ib
+OpCodeStrings            | 1239         | EVEX.128.66.0F3A.W0 22 /r ib
+OpCodeStrings            | 1240         | EVEX.128.66.0F3A.W0 22 /r ib
+OpCodeStrings            | 1241         | VEX.128.66.0F3A.W1 22 /r ib
+OpCodeStrings            | 1242         | VEX.128.66.0F3A.W1 22 /r ib
+OpCodeStrings            | 1243         | EVEX.128.66.0F3A.W1 22 /r ib
+OpCodeStrings            | 1244         | EVEX.128.66.0F3A.W1 22 /r ib
+OpCodeStrings            | 1245         | VEX.128.66.0F38.W0 8E /r
+OpCodeStrings            | 1246         | VEX.256.66.0F38.W0 8E /r
+OpCodeStrings            | 1247         | VEX.128.66.0F38.W0 8C /r
+OpCodeStrings            | 1248         | VEX.256.66.0F38.W0 8C /r
+OpCodeStrings            | 1249         | VEX.128.66.0F38.W1 8E /r
+OpCodeStrings            | 1250         | VEX.256.66.0F38.W1 8E /r
+OpCodeStrings            | 1251         | VEX.128.66.0F38.W1 8C /r
+OpCodeStrings            | 1252         | VEX.256.66.0F38.W1 8C /r
+OpCodeStrings            | 1253         | VEX.128.66.0F38.WIG 3C /r
+OpCodeStrings            | 1254         | EVEX.128.66.0F38.WIG 3C /r
+OpCodeStrings            | 1255         | VEX.256.66.0F38.WIG 3C /r
+OpCodeStrings            | 1256         | EVEX.256.66.0F38.WIG 3C /r
+OpCodeStrings            | 1257         | EVEX.512.66.0F38.WIG 3C /r
+OpCodeStrings            | 1258         | VEX.128.66.0F38.WIG 3D /r
+OpCodeStrings            | 1259         | EVEX.128.66.0F38.W0 3D /r
+OpCodeStrings            | 1260         | VEX.256.66.0F38.WIG 3D /r
+OpCodeStrings            | 1261         | EVEX.256.66.0F38.W0 3D /r
+OpCodeStrings            | 1262         | EVEX.512.66.0F38.W0 3D /r
+OpCodeStrings            | 1263         | EVEX.128.66.0F38.W1 3D /r
+OpCodeStrings            | 1264         | EVEX.256.66.0F38.W1 3D /r
+OpCodeStrings            | 1265         | EVEX.512.66.0F38.W1 3D /r
+OpCodeStrings            | 1266         | VEX.128.66.0F.WIG EE /r
+OpCodeStrings            | 1267         | EVEX.128.66.0F.WIG EE /r
+OpCodeStrings            | 1268         | VEX.256.66.0F.WIG EE /r
+OpCodeStrings            | 1269         | EVEX.256.66.0F.WIG EE /r
+OpCodeStrings            | 1270         | EVEX.512.66.0F.WIG EE /r
+OpCodeStrings            | 1271         | EVEX.128.F3.0F38.W0 29 /r
+OpCodeStrings            | 1272         | EVEX.256.F3.0F38.W0 29 /r
+OpCodeStrings            | 1273         | EVEX.512.F3.0F38.W0 29 /r
+OpCodeStrings            | 1274         | EVEX.128.F3.0F38.W0 39 /r
+OpCodeStrings            | 1275         | EVEX.256.F3.0F38.W0 39 /r
+OpCodeStrings            | 1276         | EVEX.512.F3.0F38.W0 39 /r
+OpCodeStrings            | 1277         | VEX.128.66.0F.WIG D7 /r
+OpCodeStrings            | 1278         | VEX.256.66.0F.WIG D7 /r
+OpCodeStrings            | 1279         | EVEX.128.F3.0F38.W1 39 /r
+OpCodeStrings            | 1280         | EVEX.256.F3.0F38.W1 39 /r
+OpCodeStrings            | 1281         | EVEX.512.F3.0F38.W1 39 /r
+OpCodeStrings            | 1282         | EVEX.256.F3.0F38.W0 20 /r
+OpCodeStrings            | 1283         | EVEX.128.F3.0F38.W0 20 /r
+OpCodeStrings            | 1284         | EVEX.512.F3.0F38.W0 20 /r
+OpCodeStrings            | 1285         | VEX.128.66.0F38.WIG 21 /r
+OpCodeStrings            | 1286         | EVEX.128.66.0F38.WIG 21 /r
+OpCodeStrings            | 1287         | VEX.256.66.0F38.WIG 21 /r
+OpCodeStrings            | 1288         | EVEX.256.66.0F38.WIG 21 /r
+OpCodeStrings            | 1289         | EVEX.512.66.0F38.WIG 21 /r
+OpCodeStrings            | 1290         | VEX.128.66.0F38.WIG 22 /r
+OpCodeStrings            | 1291         | EVEX.128.66.0F38.WIG 22 /r
+OpCodeStrings            | 1292         | VEX.256.66.0F38.WIG 22 /r
+OpCodeStrings            | 1293         | EVEX.256.66.0F38.WIG 22 /r
+OpCodeStrings            | 1294         | EVEX.512.66.0F38.WIG 22 /r
+OpCodeStrings            | 1295         | VEX.128.66.0F38.WIG 20 /r
+OpCodeStrings            | 1296         | EVEX.128.66.0F38.WIG 20 /r
+OpCodeStrings            | 1297         | VEX.256.66.0F38.WIG 20 /r
+OpCodeStrings            | 1298         | EVEX.256.66.0F38.WIG 20 /r
+OpCodeStrings            | 1299         | EVEX.512.66.0F38.WIG 20 /r
+OpCodeStrings            | 1300         | VEX.128.66.0F38.WIG 25 /r
+OpCodeStrings            | 1301         | EVEX.128.66.0F38.W0 25 /r
+OpCodeStrings            | 1302         | VEX.256.66.0F38.WIG 25 /r
+OpCodeStrings            | 1303         | EVEX.256.66.0F38.W0 25 /r
+OpCodeStrings            | 1304         | EVEX.512.66.0F38.W0 25 /r
+OpCodeStrings            | 1305         | VEX.128.66.0F38.WIG 23 /r
+OpCodeStrings            | 1306         | EVEX.128.66.0F38.WIG 23 /r
+OpCodeStrings            | 1307         | VEX.256.66.0F38.WIG 23 /r
+OpCodeStrings            | 1308         | EVEX.256.66.0F38.WIG 23 /r
+OpCodeStrings            | 1309         | EVEX.512.66.0F38.WIG 23 /r
+OpCodeStrings            | 1310         | VEX.128.66.0F38.WIG 24 /r
+OpCodeStrings            | 1311         | EVEX.128.66.0F38.WIG 24 /r
+OpCodeStrings            | 1312         | VEX.256.66.0F38.WIG 24 /r
+OpCodeStrings            | 1313         | EVEX.256.66.0F38.WIG 24 /r
+OpCodeStrings            | 1314         | EVEX.512.66.0F38.WIG 24 /r
+OpCodeStrings            | 1315         | EVEX.256.F3.0F38.W0 10 /r
+OpCodeStrings            | 1316         | EVEX.128.F3.0F38.W0 10 /r
+OpCodeStrings            | 1317         | EVEX.512.F3.0F38.W0 10 /r
+OpCodeStrings            | 1318         | EVEX.128.F3.0F38.W1 29 /r
+OpCodeStrings            | 1319         | EVEX.256.F3.0F38.W1 29 /r
+OpCodeStrings            | 1320         | EVEX.512.F3.0F38.W1 29 /r
+OpCodeStrings            | 1321         | EVEX.256.F3.0F38.W0 30 /r
+OpCodeStrings            | 1322         | EVEX.128.F3.0F38.W0 30 /r
+OpCodeStrings            | 1323         | EVEX.512.F3.0F38.W0 30 /r
+OpCodeStrings            | 1324         | EVEX.128.66.0F38.WIG 31 /r
+OpCodeStrings            | 1325         | VEX.128.66.0F38.WIG 31 /r
+OpCodeStrings            | 1326         | EVEX.256.66.0F38.WIG 31 /r
+OpCodeStrings            | 1327         | VEX.256.66.0F38.WIG 31 /r
+OpCodeStrings            | 1328         | EVEX.512.66.0F38.WIG 31 /r
+OpCodeStrings            | 1329         | EVEX.128.66.0F38.WIG 32 /r
+OpCodeStrings            | 1330         | VEX.128.66.0F38.WIG 32 /r
+OpCodeStrings            | 1331         | EVEX.256.66.0F38.WIG 32 /r
+OpCodeStrings            | 1332         | VEX.256.66.0F38.WIG 32 /r
+OpCodeStrings            | 1333         | EVEX.512.66.0F38.WIG 32 /r
+OpCodeStrings            | 1334         | EVEX.128.66.0F38 30.WIG /r
+OpCodeStrings            | 1335         | VEX.128.66.0F38.WIG 30 /r
+OpCodeStrings            | 1336         | EVEX.256.66.0F38.WIG 30 /r
+OpCodeStrings            | 1337         | VEX.256.66.0F38.WIG 30 /r
+OpCodeStrings            | 1338         | EVEX.512.66.0F38.WIG 30 /r
+OpCodeStrings            | 1339         | EVEX.128.66.0F38.W0 35 /r
+OpCodeStrings            | 1340         | VEX.128.66.0F 38.WIG 35 /r
+OpCodeStrings            | 1341         | EVEX.256.66.0F38.W0 35 /r
+OpCodeStrings            | 1342         | VEX.256.66.0F38.WIG 35 /r
+OpCodeStrings            | 1343         | EVEX.512.66.0F38.W0 35 /r
+OpCodeStrings            | 1344         | EVEX.128.66.0F38.WIG 33 /r
+OpCodeStrings            | 1345         | VEX.128.66.0F38.WIG 33 /r
+OpCodeStrings            | 1346         | EVEX.256.66.0F38.WIG 33 /r
+OpCodeStrings            | 1347         | VEX.256.66.0F38.WIG 33 /r
+OpCodeStrings            | 1348         | EVEX.512.66.0F38.WIG 33 /r
+OpCodeStrings            | 1349         | EVEX.128.66.0F38.WIG 34 /r
+OpCodeStrings            | 1350         | VEX.128.66.0F38.WIG 34 /r
+OpCodeStrings            | 1351         | EVEX.256.66.0F38.WIG 34 /r
+OpCodeStrings            | 1352         | VEX.256.66.0F38.WIG 34 /r
+OpCodeStrings            | 1353         | EVEX.512.66.0F38.WIG 34 /r
+OpCodeStrings            | 1354         | EVEX.128.66.0F38.WIG 00 /r
+OpCodeStrings            | 1355         | VEX.128.66.0F38.WIG 00 /r
+OpCodeStrings            | 1356         | EVEX.256.66.0F38.WIG 00 /r
+OpCodeStrings            | 1357         | VEX.256.66.0F38.WIG 00 /r
+OpCodeStrings            | 1358         | EVEX.512.66.0F38.WIG 00 /r
+OpCodeStrings            | 1359         | VEX.128.66.0F.WIG 70 /r ib
+OpCodeStrings            | 1360         | EVEX.128.66.0F.W0 70 /r ib
+OpCodeStrings            | 1361         | VEX.256.66.0F.WIG 70 /r ib
+OpCodeStrings            | 1362         | EVEX.256.66.0F.W0 70 /r ib
+OpCodeStrings            | 1363         | EVEX.512.66.0F.W0 70 /r ib
+OpCodeStrings            | 1364         | VEX.128.F2.0F.WIG 70 /r ib
+OpCodeStrings            | 1365         | EVEX.128.F2.0F.WIG 70 /r ib
+OpCodeStrings            | 1366         | VEX.256.F2.0F.WIG 70 /r ib
+OpCodeStrings            | 1367         | EVEX.256.F2.0F.WIG 70 /r ib
+OpCodeStrings            | 1368         | EVEX.512.F2.0F.WIG 70 /r ib
+OpCodeStrings            | 1369         | VEX.128.66.0F38.WIG 08 /r
+OpCodeStrings            | 1370         | VEX.256.66.0F38.WIG 08 /r
+OpCodeStrings            | 1371         | VEX.128.66.0F38.WIG 0A /r
+OpCodeStrings            | 1372         | VEX.256.66.0F38.WIG 0A /r
+OpCodeStrings            | 1373         | VEX.128.66.0F38.WIG 09 /r
+OpCodeStrings            | 1374         | VEX.256.66.0F38.WIG 09 /r
+OpCodeStrings            | 1375         | EVEX.128.66.0F38.W0 47 /r
+OpCodeStrings            | 1376         | VEX.128.66.0F38.W0 47 /r
+OpCodeStrings            | 1377         | EVEX.256.66.0F38.W0 47 /r
+OpCodeStrings            | 1378         | VEX.256.66.0F38.W0 47 /r
+OpCodeStrings            | 1379         | EVEX.512.66.0F38.W0 47 /r
+OpCodeStrings            | 1380         | EVEX.128.66.0F38.W1 47 /r
+OpCodeStrings            | 1381         | VEX.128.66.0F38.W1 47 /r
+OpCodeStrings            | 1382         | EVEX.256.66.0F38.W1 47 /r
+OpCodeStrings            | 1383         | VEX.256.66.0F38.W1 47 /r
+OpCodeStrings            | 1384         | EVEX.512.66.0F38.W1 47 /r
+OpCodeStrings            | 1385         | EVEX.128.66.0F38.W1 12 /r
+OpCodeStrings            | 1386         | EVEX.256.66.0F38.W1 12 /r
+OpCodeStrings            | 1387         | EVEX.512.66.0F38.W1 12 /r
+OpCodeStrings            | 1388         | EVEX.128.66.0F38.W0 26 /r
+OpCodeStrings            | 1389         | EVEX.256.66.0F38.W0 26 /r
+OpCodeStrings            | 1390         | EVEX.512.66.0F38.W0 26 /r
+OpCodeStrings            | 1391         | EVEX.128.66.0F38.W0 27 /r
+OpCodeStrings            | 1392         | EVEX.256.66.0F38.W0 27 /r
+OpCodeStrings            | 1393         | EVEX.512.66.0F38.W0 27 /r
+OpCodeStrings            | 1394         | EVEX.128.66.0F38.W1 27 /r
+OpCodeStrings            | 1395         | EVEX.256.66.0F38.W1 27 /r
+OpCodeStrings            | 1396         | EVEX.512.66.0F38.W1 27 /r
+OpCodeStrings            | 1397         | EVEX.128.66.0F38.W1 26 /r
+OpCodeStrings            | 1398         | EVEX.256.66.0F38.W1 26 /r
+OpCodeStrings            | 1399         | EVEX.512.66.0F38.W1 26 /r
+OpCodeStrings            | 1400         | EVEX.128.66.0F.WIG 68 /r
+OpCodeStrings            | 1401         | VEX.128.66.0F.WIG 68/r
+OpCodeStrings            | 1402         | EVEX.256.66.0F.WIG 68 /r
+OpCodeStrings            | 1403         | VEX.256.66.0F.WIG 68 /r
+OpCodeStrings            | 1404         | EVEX.512.66.0F.WIG 68/r
+OpCodeStrings            | 1405         | EVEX.128.66.0F.W0 6A /r
+OpCodeStrings            | 1406         | VEX.128.66.0F.WIG 6A/r
+OpCodeStrings            | 1407         | EVEX.256.66.0F.W0 6A /r
+OpCodeStrings            | 1408         | VEX.256.66.0F.WIG 6A /r
+OpCodeStrings            | 1409         | EVEX.512.66.0F.W0 6A /r
+OpCodeStrings            | 1410         | EVEX.128.66.0F.W1 6D /r
+OpCodeStrings            | 1411         | VEX.128.66.0F.WIG 6D/r
+OpCodeStrings            | 1412         | EVEX.256.66.0F.W1 6D /r
+OpCodeStrings            | 1413         | VEX.256.66.0F.WIG 6D /r
+OpCodeStrings            | 1414         | EVEX.512.66.0F.W1 6D /r
+OpCodeStrings            | 1415         | EVEX.128.66.0F.WIG 69 /r
+OpCodeStrings            | 1416         | VEX.128.66.0F.WIG 69/r
+OpCodeStrings            | 1417         | EVEX.256.66.0F.WIG 69 /r
+OpCodeStrings            | 1418         | VEX.256.66.0F.WIG 69 /r
+OpCodeStrings            | 1419         | EVEX.512.66.0F.WIG 69/r
+OpCodeStrings            | 1420         | EVEX.128.66.0F.WIG 60 /r
+OpCodeStrings            | 1421         | VEX.128.66.0F.WIG 60/r
+OpCodeStrings            | 1422         | EVEX.256.66.0F.WIG 60 /r
+OpCodeStrings            | 1423         | VEX.256.66.0F.WIG 60 /r
+OpCodeStrings            | 1424         | EVEX.512.66.0F.WIG 60/r
+OpCodeStrings            | 1425         | EVEX.128.66.0F.W0 62 /r
+OpCodeStrings            | 1426         | VEX.128.66.0F.WIG 62/r
+OpCodeStrings            | 1427         | EVEX.256.66.0F.W0 62 /r
+OpCodeStrings            | 1428         | VEX.256.66.0F.WIG 62 /r
+OpCodeStrings            | 1429         | EVEX.512.66.0F.W0 62 /r
+OpCodeStrings            | 1430         | EVEX.128.66.0F.W1 6C /r
+OpCodeStrings            | 1431         | VEX.128.66.0F.WIG 6C/r
+OpCodeStrings            | 1432         | EVEX.256.66.0F.W1 6C /r
+OpCodeStrings            | 1433         | VEX.256.66.0F.WIG 6C /r
+OpCodeStrings            | 1434         | EVEX.512.66.0F.W1 6C /r
+OpCodeStrings            | 1435         | EVEX.128.66.0F.WIG 61 /r
+OpCodeStrings            | 1436         | VEX.128.66.0F.WIG 61/r
+OpCodeStrings            | 1437         | EVEX.256.66.0F.WIG 61 /r
+OpCodeStrings            | 1438         | VEX.256.66.0F.WIG 61 /r
+OpCodeStrings            | 1439         | EVEX.512.66.0F.WIG 61/r
+OpCodeStrings            | 1440         | VEX.128.66.0F.WIG EF /r
+OpCodeStrings            | 1441         | VEX.256.66.0F.WIG EF /r
+OpCodeStrings            | 1442         | EVEX.128.66.0F.W0 EF /r
+OpCodeStrings            | 1443         | EVEX.256.66.0F.W0 EF /r
+OpCodeStrings            | 1444         | EVEX.512.66.0F.W0 EF /r
+OpCodeStrings            | 1445         | EVEX.128.66.0F.W1 EF /r
+OpCodeStrings            | 1446         | EVEX.256.66.0F.W1 EF /r
+OpCodeStrings            | 1447         | EVEX.512.66.0F.W1 EF /r
+OpCodeStrings            | 1448         | C7 F8   
+OpCodeStrings            | 1449         | C7 F8   
+OpCodeStrings            | 1450         | 90 +rw  
+OpCodeStrings            | 1451         | 90 +rd  
+OpCodeStrings            | 1452         | 87 /r   
+OpCodeStrings            | 1453         | 87 /r   
+OpCodeStrings            | 1454         | REX.W + 87 /r
+OpCodeStrings            | 1455         | 86 /r   
+OpCodeStrings            | 1456         | REX + 86 /r
+OpCodeStrings            | 1457         | 90 +rw  
+OpCodeStrings            | 1458         | 87 /r   
+OpCodeStrings            | 1459         | 90 +rd  
+OpCodeStrings            | 1460         | 87 /r   
+OpCodeStrings            | 1461         | REX.W + 90 +rd
+OpCodeStrings            | 1462         | REX.W + 87 /r
+OpCodeStrings            | 1463         | 86 /r   
+OpCodeStrings            | 1464         | REX + 86 /r
+OpCodeStrings            | 1465         | REX.W + 90 +rd
+OpCodeStrings            | 1466         | NP 0F 01 D0
+OpCodeStrings            | 1467         | D7      
+OpCodeStrings            | 1468         | D7      
+OpCodeStrings            | 1469         | REX.W + D7
+OpCodeStrings            | 1470         | 34 ib   
+OpCodeStrings            | 1471         | 35 iw   
+OpCodeStrings            | 1472         | 35 id   
+OpCodeStrings            | 1473         | 81 /6 iw
+OpCodeStrings            | 1474         | 83 /6 ib
+OpCodeStrings            | 1475         | 31 /r   
+OpCodeStrings            | 1476         | 81 /6 id
+OpCodeStrings            | 1477         | 83 /6 ib
+OpCodeStrings            | 1478         | 31 /r   
+OpCodeStrings            | 1479         | REX.W + 81 /6 id
+OpCodeStrings            | 1480         | REX.W + 83 /6 ib
+OpCodeStrings            | 1481         | REX.W + 31 /r
+OpCodeStrings            | 1482         | 80 /6 ib
+OpCodeStrings            | 1483         | REX + 80 /6 ib
+OpCodeStrings            | 1484         | REX + 30 /r
+OpCodeStrings            | 1485         | 30 /r   
+OpCodeStrings            | 1486         | 33 /r   
+OpCodeStrings            | 1487         | 33 /r   
+OpCodeStrings            | 1488         | REX.W + 33 /r
+OpCodeStrings            | 1489         | 32 /r   
+OpCodeStrings            | 1490         | REX + 32 /r
+OpCodeStrings            | 1491         | REX.W + 35 id
+OpCodeStrings            | 1492         | NP 0F AE /4
+OpCodeStrings            | 1493         | NP REX.W + 0F AE /4
+OpCodeStrings            | 1494         | NP 0F C7 /4
+OpCodeStrings            | 1495         | NP REX.W + 0F C7 /4
+OpCodeStrings            | 1496         | NP 0F 01 D1

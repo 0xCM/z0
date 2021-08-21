@@ -16,16 +16,6 @@ namespace Z0.Asm
 
         public const byte FieldCount = 10;
 
-        public const uint StorageSize =
-            PrimalSizes.U32 +
-            CharBlock16.SZ +
-            CharBlock48.SZ +
-            CharBlock64.SZ +
-            4*CharBlock8.StorageSize +
-            CharBlock16.SZ +
-            CharBlock254.SZ
-            ;
-
         public uint OpCodeId;
 
         public CharBlock16 Mnemonic;

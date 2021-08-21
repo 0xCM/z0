@@ -5,6 +5,8 @@
 namespace Z0.Asm
 {
     using static core;
+    using llvm;
+    using static AsmOperands;
 
     partial class AsmCmdService
     {
@@ -40,7 +42,6 @@ namespace Z0.Asm
             return true;
         }
 
-        [CmdOp(".gen-asm")]
         Outcome GenAsm2(CmdArgs args)
         {
             const string AsmPattern = "{0} {1},{2}";

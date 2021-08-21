@@ -42,12 +42,7 @@ namespace Z0
             => new ApiPartCatalog(src.Id(), src, complete(src), apihosts(src), SvcHostTypes(src));
 
         public static IApiCatalog catalog()
-        {
-            var control = core.controller();
-            var path = FS.path(control.Location);
-            var dir = path.FolderPath;
-            return catalog(dir);
-        }
+            => catalog(location());
 
         public static IApiCatalog catalog(FS.FolderPath dir)
         {

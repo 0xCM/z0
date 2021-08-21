@@ -17,9 +17,13 @@ namespace Z0.Asm
             var storage = CharBlock64.Null;
             var dst = storage.Data;
             var i=0u;
-            text.copy(src.Mnemonic.Format(MnemonicCase.Uppercase), ref i, dst);
             seek(dst,i++) = Chars.LParen;
+            text.copy(src.Mnemonic.Format(MnemonicCase.Uppercase), ref i, dst);
             var count = src.OperandCount;
+
+            if(count != 0)
+                seek(dst,i++) = Chars.Space;
+
             for(byte j=0; j<count; j++)
             {
                 ref readonly var op = ref operand(src,j);

@@ -32,11 +32,12 @@ namespace Z0.Asm
             {
                 ref readonly var row = ref skip(src,i);
                 result = parse(row, out seek(dst,i));
-                if(result.Fail)
-                    return result;
+                // if(result.Fail)
+                //      warn(result.Message);
             }
             return (true,counter);
         }
+
         [Op]
         public static Outcome parse(in TextRow src, out R dst)
         {

@@ -10,13 +10,12 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".api-catalog")]
-        Outcome ApiCatalog(CmdArgs args)
+        [CmdOp(".api-members")]
+        Outcome ApiMembers(CmdArgs args)
         {
             var result = Outcome.Success;
-            var catalog = ApiRuntimeLoader.catalog();
-            var parts = catalog.PartIdentities;
-            iter(parts, part => Write(part.Format()));
+            var entries = ApiCatalogs.LoadApiCatalog(ApiArchive.ApiCatalog());
+            iter(entries, e => Write(e.OpUri));
             return result;
         }
     }

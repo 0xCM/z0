@@ -13,15 +13,26 @@ namespace Z0
 
     public class ApiCaptureRunner : AppService<ApiCaptureRunner>
     {
+        // [Op]
+        // public ReadOnlySpan<AsmHostRoutines> Capture(Index<PartId> parts, FS.FolderPath dst)
+        // {
+        //     var jit = Wf.ApiJit();
+        //     var hex = Wf.ApiHex();
+        //     var capture = Wf.ApiCapture();
+        //     var pipe = Wf.AsmStatementPipe();
+        //     var partcount = parts.Length;
+        //     var hosts = Wf.ApiCatalog.PartHosts(parts).View;
+        //     var hostcount = hosts.Length;
+        //     var routines = list<AsmHostRoutines>();
+        //     for(var i=0; i<hostcount; i++)
+        //         routines.Add(capture.CaptureHost(skip(hosts,i), dst));
+        //     return routines.ViewDeposited();
+        // }
+
         [Op]
-        public ReadOnlySpan<AsmHostRoutines> Capture(Index<PartId> parts, FS.FolderPath dst)
+        public ReadOnlySpan<AsmHostRoutines> Capture(ReadOnlySpan<IApiHost> hosts, FS.FolderPath dst)
         {
-            var jit = Wf.ApiJit();
-            var hex = Wf.ApiHex();
             var capture = Wf.ApiCapture();
-            var pipe = Wf.AsmStatementPipe();
-            var partcount = parts.Length;
-            var hosts = Wf.ApiCatalog.PartHosts(parts).View;
             var hostcount = hosts.Length;
             var routines = list<AsmHostRoutines>();
             for(var i=0; i<hostcount; i++)

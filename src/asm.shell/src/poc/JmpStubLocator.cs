@@ -54,16 +54,16 @@ namespace Z0.Asm
             log.Show(calc64.Format());
         }
 
-        void CaptureParts(params PartId[] parts)
-        {
-            var dst = Db.AppLogRoot() + FS.folder("capture");
-            dst.Clear();
-            Wf.CaptureRunner().Capture(parts, dst);
-        }
+        // void CaptureParts(params PartId[] parts)
+        // {
+        //     var dst = Db.AppLogRoot() + FS.folder("capture");
+        //     dst.Clear();
+        //     Wf.CaptureRunner().Capture(parts, dst);
+        // }
 
         public ReadOnlySpan<JmpStub> FindJmpStubs()
         {
-            CaptureParts(PartId.AsmCases);
+            //CaptureParts(PartId.AsmCases);
             ShowInterfaceMaps();
             var stubs = JmpStubs();
             using var log = ShowLog("jumptargets",FS.Csv);

@@ -17,7 +17,7 @@ namespace Z0.Asm
             var id = arg(args,0).Value;
             var part = ApiPartIdParser.single(id);
             if(part != 0)
-                Captured(CaptureParts(part));
+                Captured(CapturePart(part));
             else
                 result = (false, string.Format("{0} is not a part", id));
             return result;

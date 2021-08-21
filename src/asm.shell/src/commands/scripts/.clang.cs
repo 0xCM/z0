@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-    partial struct asm
+    partial class AsmCmdService
     {
-        [MethodImpl(Inline), Op]
-        public static AsmForm form(in AsmSig sig, in AsmOpCode oc)
-            => new AsmForm(sig, oc);
+        [CmdOp(".clang")]
+        Outcome Clang(CmdArgs args)
+            => RunAsmScript(arg(args,0), "clang-build");
     }
 }

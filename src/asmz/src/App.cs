@@ -121,7 +121,6 @@ namespace Z0.Asm
             }
         }
 
-
         void ResolveApi(params PartId[] parts)
         {
             var resolver = Wf.ApiResolver();

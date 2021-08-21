@@ -315,9 +315,41 @@ namespace Z0.Asm
             return EmptyString;
         }
 
+        public static string detail(RegModels.r8 src)
+        {
+            Hex8 data = src.Content;
+            var hex = data.Format();
+            var bits = data.FormatBits(n8);
+            return string.Format("{0} {1}", hex, bits);
+        }
+
+        public static string detail(RegModels.r16 src)
+        {
+            Hex16 data = src.Content;
+            var hex = data.Format();
+            var bits = data.FormatBits(n8);
+            return string.Format("{0} {1}", hex, bits);
+        }
+
+        public static string detail(RegModels.r32 src)
+        {
+            Hex32 data = src.Content;
+            var hex = data.Format();
+            var bits = data.FormatBits(n8);
+            return string.Format("{0} {1}", hex, bits);
+        }
+
+        public static string detail(RegModels.r64 src)
+        {
+            Hex64 data = src.Content;
+            var hex = data.Format();
+            var bits = data.FormatBits(n8);
+            return string.Format("{0} {1}", hex, bits);
+        }
+
         public static void regvals(ReadOnlySpan<CpuIdRow> src, ITextBuffer dst)
         {
-            const sbyte ColWidth = 47;
+            const sbyte ColWidth = 46;
             const byte ColCount = 6;
             var slots = array(RP.pad(0,-ColWidth), RP.pad(1,-ColWidth), RP.pad(2,-ColWidth), RP.pad(3,-ColWidth), RP.pad(4,-ColWidth), RP.pad(5,-ColWidth));
             var pattern = string.Format("{0} | {1} | {2} | {3} | {4} | {5}", slots);

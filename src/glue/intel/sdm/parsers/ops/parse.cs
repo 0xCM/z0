@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static core;
     using static Root;
-    using static TextTools;
+    //using static TextTools;
     using static SdmModels;
 
     using SP = ScalarParser;
@@ -70,7 +70,7 @@ namespace Z0.Asm
             var i = placeholder(src);
             var remainder = text.right(src,i);
             var d = SQ.digitIndex(base10, remainder);
-            var input = slice(remainder, d);
+            var input = text.slice(remainder, d);
 
             if(parse(input, out page))
             {
@@ -107,7 +107,7 @@ namespace Z0.Asm
             if(i == NotFound)
                 return false;
 
-            var numeric = slice(src, i + ContentMarkers.ChapterNumber.Length);
+            var numeric = text.slice(src, i + ContentMarkers.ChapterNumber.Length);
             if(SP.uint8(base10,numeric, out var cn))
             {
                 dst = cn;
@@ -183,7 +183,7 @@ namespace Z0.Asm
             var i = index(src, ContentMarkers.TableNumber);
             if(i != NotFound)
             {
-                dst = tablenumber(slice(src, i + ContentMarkers.TableNumber.Length));
+                dst = tablenumber(text.slice(src, i + ContentMarkers.TableNumber.Length));
                 return true;
             }
             return false;

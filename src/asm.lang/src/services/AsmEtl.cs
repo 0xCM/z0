@@ -47,10 +47,7 @@ namespace Z0.Asm
                 ref var opcode = ref SdmModels.opcode(record, out _);
                 ref var form = ref seek(dst,i);
                 form = asm.form(
-                    asm.sig(
-                        opcode.Mnemonic.Format(),
-                        SdmModels.operands(opcode)
-                        ),
+                    asm.sig(opcode.Mnemonic.Format(), SdmModels.operands(opcode)),
                     asm.opcode((ushort)opcode.OpCodeId, opcode.Expr)
                     );
             }
@@ -68,7 +65,7 @@ namespace Z0.Asm
             var count = grid.RowCount;
 
             dst = alloc<SdmOpCodeDetail>(count);
-            result = AsmParser.parse(grid,dst);
+            result = AsmParser.parse(grid, dst);
             if(result.Fail)
                 return result;
 

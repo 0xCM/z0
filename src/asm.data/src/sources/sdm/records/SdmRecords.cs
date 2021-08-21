@@ -10,9 +10,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using M = SdmModels.EncodingSigs;
-    using SQ = SymbolicQuery;
-
     [ApiHost]
     public readonly partial struct SdmRecords
     {
@@ -25,6 +22,7 @@ namespace Z0.Asm
                     .Replace("+ rd", " +rd")
                     .Replace("+ ro", " +ro")
                     .Replace("/ r", "/r")
+                    .Trim()
                     ;
         }
 
@@ -38,10 +36,9 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var input = ref skip(rows,i);
-                ref var target = ref seek(dst,i);
-                counter++;
-
+                var target = new SdmOpCodeDetail();
                 var cells = input.Cells;
+                var valid = true;
 
                 for(var k=0; k<cells.Length; k++)
                 {
@@ -51,12 +48,18 @@ namespace Z0.Asm
                     switch(col.Name)
                     {
                         case "Opcode":
-                        target.OpCode = ocnormal(content);
+                        var oc = ocnormal(content);
+                        target.OpCode = oc;
+                        if(empty(oc))
+                            valid = false;
                         break;
 
                         case "Instruction":
+                        var monic = text.trim(text.ifempty(text.left(content, Chars.Space), content));
                         target.Sig = content;
-                        target.Mnemonic = text.ifempty(text.left(content, Chars.Space), content);
+                        target.Mnemonic = monic;
+                        if(empty(monic))
+                            valid = false;
                         break;
 
                         case "Op / En":
@@ -85,6 +88,9 @@ namespace Z0.Asm
                         break;
                     }
                 }
+
+                if(valid)
+                    seek(dst,counter++) = target;
             }
             return counter;
         }

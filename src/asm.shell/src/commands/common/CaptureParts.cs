@@ -10,11 +10,12 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        ReadOnlySpan<AsmHostRoutines> CaptureParts(params PartId[] parts)
+        ReadOnlySpan<AsmHostRoutines> CapturePart(PartId part)
         {
             var dst = Db.CaptureRoot();
-            dst.Clear();
-            return Wf.CaptureRunner().Capture(parts, dst);
+            var catalog = ApiRuntimeLoader.catalog();
+            var hosts = catalog.ApiHosts.Where(h => h.PartId == part);
+            return Wf.CaptureRunner().Capture(hosts, dst);
         }
     }
 }

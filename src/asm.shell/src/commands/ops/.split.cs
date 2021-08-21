@@ -19,10 +19,5 @@ namespace Z0.Asm
             var results = Wf.FileSplitter().Run(spec);
             return true;
         }
-
-        //J:\ws\.out\sde\sde-data-0.log
-        //.dstdir j:\ws\.out\sde
-        //.srcdir j:\ws\.out\sde
-        //.split sde-data-0.log sde-data-0 100000
     }
 }
