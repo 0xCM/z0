@@ -11,10 +11,6 @@ namespace Z0.Asm
 
         public sealed class AsmDataSources : Assets<AsmDataSources>
         {
-            public Asset AsmDbInstructions() => Asset("asmdb.instructions.csv");
-
-            public Asset AsmDbOperands() => Asset("asmdb.operands.csv");
-
             public Asset StanfordAsmCatalog() => Asset("stanford-asm-catalog.csv");
         }
     }

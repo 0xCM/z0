@@ -10,6 +10,8 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
+    using static Msg;
+
     public class AsmFormPipe : RecordPipe<AsmFormPipe,AsmFormRecord>
     {
         public AsmFormPipe()
@@ -82,11 +84,11 @@ namespace Z0.Asm
 
         ReadOnlySpan<AsmFormHash> HashPerfect(ReadOnlySpan<AsmFormExpr> src)
         {
-            Wf.Status($"Attempting to find perfect hashes for {src.Length} form expressions");
+            Wf.Status($"Attempting to find perfect hashes for {src.Length} expressions");
             var perfect = HashFunctions.perfect(src, x => x.Format(), HashFunctions.strings()).Codes;
             var count = (uint)perfect.Length;
 
-            Wf.Status($"Found {count} distinct hash codes for {src.Length} form expressions");
+            Wf.Status($"Found {count} distinct hash codes for {src.Length} expressions");
 
             var dst = Db.AsmCatalogTable<AsmFormHash>();
             var buffer = alloc<AsmFormHash>(count);
@@ -151,7 +153,7 @@ namespace Z0.Asm
                 }
 
                 var forms = Load(doc.Value);
-                Wf.Ran(flow, string.Format("Loaded {0} forms from {1}", forms.Length, src.ToUri()));
+                Wf.Ran(flow, LoadedForms.Format(forms.Length, src));
                 return forms;
             }
             else

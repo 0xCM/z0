@@ -109,13 +109,6 @@ namespace Z0.Asm
             Wf.CaptureRunner().Capture(Assembly.GetExecutingAssembly().Id());
         }
 
-        void CaptureParts(params PartId[] parts)
-        {
-            var dst = Db.AppLogRoot() + FS.folder("capture");
-            dst.Clear();
-            Wf.CaptureRunner().Capture(parts, dst);
-        }
-
         void DescribeHeaps()
         {
             var components = Wf.ApiCatalog.Components.View;
@@ -487,25 +480,6 @@ namespace Z0.Asm
         {
             var name = "Uppercase";
             EmitAsciBytes(name, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", Db.AppLog(name, FS.Cs));
-        }
-
-        public void LoadStanfordForms()
-        {
-            var catalog = Wf.StanfordCatalog();
-            var rows = catalog.LoadAsset();
-            var count = rows.Length;
-            var dst = list<string>();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(rows,i);
-                AsmParser.sigxpr(row.Instruction, out var sig);
-                var form = new AsmFormExpr(asm.ocexpr(row.OpCode), sig);
-                var spec = string.Format("{0,-32} | {1,-42} | {2,-42}", form.Sig.Mnemonic, form.OpCode, form.Sig);
-                dst.Add(spec);
-            }
-
-            dst.Sort();
-            iter(dst.ViewDeposited(), x => Wf.Row(x));
         }
 
         void Dispatch(string cmd)

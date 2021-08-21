@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static Chars;
     using static core;
+    using static AsmRenderPatterns;
 
     using SR = SymbolicRender;
 
@@ -153,8 +154,6 @@ namespace Z0.Asm
 
         const string PageBreak = MarkerText + CharText.Space + RP.PageBreak160;
 
-        const string FieldDelimiter = " | ";
-
         [Op]
         public static AsmInlineComment spanres(OpUri uri, BinaryCode src)
             => asm.comment(CommentMarker, SpanRes.format(SpanRes.specify(uri, src)));
@@ -174,6 +173,7 @@ namespace Z0.Asm
             seek(dst, i++) = asm.comment(CommentMarker, string.Concat(nameof(src.CodeBlock.BaseAddress), RP.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
             seek(dst, i++) = asm.comment(CommentMarker, string.Concat(nameof(src.TermCode), RP.spaced(Chars.Eq), src.TermCode.ToString()));
             seek(dst, i++) = PageBreak;
+            seek(dst, i++) = format(asm.label(src.Uri.OpId.Name));
             return i;
         }
 
@@ -217,13 +217,7 @@ namespace Z0.Asm
         [Op]
         public static string format(in AsmThumbprint src)
             => string.Format("{0} {1}", src.Statement.FormatPadded(), comment(src));
-            //string.Format("{0} ; ({1})<{2}>[{3}] => {4}", src.Statement.FormatPadded(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
 
-        // [Op]
-        // public static string format(AsmFormExpr src, byte[] encoded, string sep)
-        //     => string.Format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
-
-        const string InstInfoPattern = "{0} | {1,-3} | {2,-32} | ({3}) = {4}";
 
         [Op]
         public static string format(in AsmOffsetLabel label, in AsmFormExpr src, byte[] encoded)
