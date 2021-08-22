@@ -30,6 +30,9 @@ namespace Z0.Asm
         /// </summary>
         RegWidthCode WidthCode {get;}
 
+
+        ushort Bitfield {get;}
+
         BitWidth ISized.Width
             => (uint)WidthCode;
 
@@ -54,6 +57,8 @@ namespace Z0.Asm
     public interface IRegOp<T> : IRegOp, ISized<T>
         where T : unmanaged
     {
+        ushort IRegOp.Bitfield
+            => u16(this);
         AsmOpClass IAsmOp.OpClass
             => AsmOpClass.R | (AsmOpClass)width<T>(w16);
 

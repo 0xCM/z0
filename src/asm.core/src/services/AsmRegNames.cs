@@ -24,6 +24,33 @@ namespace Z0.Asm
                 );
 
         [MethodImpl(Inline), Op]
+        public static text7 name(DbClass k, RegIndexCode index)
+        {
+            const byte RegLength = 3;
+            const string Data = "db0db1db2db3db4db5db6db7";
+            var i0 = (uint)index*RegLength;
+            return slice(text.chars(Data), i0, RegLength);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static text7 name(MmxClass k, RegIndexCode index)
+        {
+            const byte RegLength = 3;
+            const string Data = "mm0mm1mm2mm3mm4mm5m6mm7";
+            var i0 = (uint)index*RegLength;
+            return slice(text.chars(Data), i0, RegLength);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static text7 name(CrClass k, RegIndexCode index)
+        {
+            const byte RegLength = 3;
+            const string Data = "cr0cr1cr2cr3cr4cr5cr6cr7";
+            var i0 = (uint)index*RegLength;
+            return slice(text.chars(Data), i0, RegLength);
+        }
+
+        [MethodImpl(Inline), Op]
         public static text7 name(XmmClass k, RegIndexCode index)
         {
             const byte RegLength = 5;
@@ -86,7 +113,7 @@ namespace Z0.Asm
         }
 
         public static text7 name<T>(T src)
-            where T : unmanaged, IRegOp<T>
+            where T : unmanaged, IRegOp
         {
             switch(src.RegClassCode)
             {

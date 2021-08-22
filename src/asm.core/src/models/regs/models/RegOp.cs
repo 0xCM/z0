@@ -25,7 +25,7 @@ namespace Z0.Asm
             Data = src;
         }
 
-        internal ushort Bitfield
+        public ushort Bitfield
         {
             [MethodImpl(Inline)]
             get => Data;

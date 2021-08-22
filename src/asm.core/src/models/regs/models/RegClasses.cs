@@ -16,11 +16,11 @@ namespace Z0.Asm
 
         public static MaskClass KReg => default;
 
-        public static ControlClass Cr => default;
+        public static CrClass Cr => default;
 
-        public static XControlClass XCr => default;
+        public static XCrClass XCr => default;
 
-        public static DebugClass Db => default;
+        public static DbClass Db => default;
 
         public static XmmClass Xmm => default;
 
@@ -60,19 +60,19 @@ namespace Z0.Asm
                 => src.Kind;
         }
 
-        public readonly struct ControlClass : IRegClass<ControlClass>
+        public readonly struct CrClass : IRegClass<CrClass>
         {
             public CC Kind => CC.CR;
 
-            public static implicit operator CC(ControlClass src)
+            public static implicit operator CC(CrClass src)
                 => src.Kind;
         }
 
-        public readonly struct DebugClass : IRegClass<DebugClass>
+        public readonly struct DbClass : IRegClass<DbClass>
         {
             public CC Kind => CC.DB;
 
-            public static implicit operator CC(DebugClass src)
+            public static implicit operator CC(DbClass src)
                 => src.Kind;
         }
 
@@ -150,11 +150,11 @@ namespace Z0.Asm
                 => src.Kind;
         }
 
-        public readonly struct XControlClass : IRegClass<XControlClass>
+        public readonly struct XCrClass : IRegClass<XCrClass>
         {
             public CC Kind => CC.XCR;
 
-            public static implicit operator CC(XControlClass src)
+            public static implicit operator CC(XCrClass src)
                 => src.Kind;
         }
     }

@@ -8,6 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
+    using static Blit;
 
     public readonly struct RegOp<T> : IRegOp<T>
         where T : unmanaged, IRegOp
@@ -18,6 +20,12 @@ namespace Z0.Asm
         public RegOp(T src)
         {
             Data = src;
+        }
+
+        public ushort Bitfield
+        {
+            [MethodImpl(Inline)]
+            get => u16(Data);
         }
 
         public RegIndexCode Index
@@ -36,6 +44,36 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => Data.WidthCode;
+        }
+
+        public RegWidth RegWidth
+        {
+            [MethodImpl(Inline)]
+            get => WidthCode;
+        }
+
+        public RegClass RegClass
+        {
+            [MethodImpl(Inline)]
+            get => RegClassCode;
+        }
+
+        public AsmOpClass OpClass
+        {
+            [MethodImpl(Inline)]
+            get => AsmOpClass.R;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => OpClass == 0;
+        }
+
+        public text7 Name
+        {
+            [MethodImpl(Inline)]
+            get => AsmRegNames.name(this);
         }
 
         public string Format()

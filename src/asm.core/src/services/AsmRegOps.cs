@@ -140,22 +140,6 @@ namespace Z0.Asm
 
         public static R.r15q r15 => default;
 
-        public static R.cr0 cr0 => default;
-
-        public static R.cr1 cr1 => default;
-
-        public static R.cr2 cr2 => default;
-
-        public static R.cr3 cr3 => default;
-
-        public static R.cr4 cr4 => default;
-
-        public static R.cr5 cr5 => default;
-
-        public static R.cr6 cr6 => default;
-
-        public static R.cr7 cr7 => default;
-
         public static R.xmm0 xmm0 => default;
 
         public static R.xmm1 xmm1 => default;
@@ -347,5 +331,38 @@ namespace Z0.Asm
         public static R.zmm30 zmm30 => default;
 
         public static R.zmm31 zmm31 => default;
+
+        public static R.db0 db0 => default;
+
+        public static R.db1 db1 => default;
+
+        public static R.db2 db2 => default;
+
+        public static R.db3 db3 => default;
+
+        public static R.db4 db4 => default;
+
+        public static R.db5 db5 => default;
+
+        public static R.db6 db6 => default;
+
+        public static R.db7 db7 => default;
+
+        public static R.cr0 cr0 => default;
+
+        public static R.cr1 cr1 => default;
+
+        public static R.cr2 cr2 => default;
+
+        public static R.cr3 cr3 => default;
+
+        public static R.cr4 cr4 => default;
+
+        public static R.cr5 cr5 => default;
+
+        public static R.cr6 cr6 => default;
+
+        public static R.cr7 cr7 => default;
+
     }
 }
