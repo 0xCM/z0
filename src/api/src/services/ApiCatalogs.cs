@@ -28,12 +28,12 @@ namespace Z0
             Runtime = Wf.ApiRuntime();
         }
 
-        public ReadOnlySpan<SymLiteral> EmitApiClasses()
+        public ReadOnlySpan<SymLiteralRow> EmitApiClasses()
             => EmitApiClasses(Db.IndexTable("api.classes"));
 
-        public ReadOnlySpan<SymLiteral> EmitApiClasses(FS.FilePath dst)
+        public ReadOnlySpan<SymLiteralRow> EmitApiClasses(FS.FilePath dst)
         {
-            var flow = Wf.EmittingTable<SymLiteral>(dst);
+            var flow = Wf.EmittingTable<SymLiteralRow>(dst);
             var literals = Query.ApiClassLiterals();
             var count = Tables.emit(literals, dst);
             Wf.EmittedTable(flow, count);

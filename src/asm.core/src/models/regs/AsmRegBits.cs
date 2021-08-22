@@ -104,7 +104,7 @@ namespace Z0.Asm
         /// <param name="r">The operand</param>
         [MethodImpl(Inline), Op]
         public static bit gp(RegOp r)
-            => gp(r.RegClass);
+            => gp(r.RegClassCode);
 
         [MethodImpl(Inline), Op]
         public static bit gp(RegClassCode c)
@@ -112,7 +112,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static bit gp(RegOp r, RegWidthCode w)
-            => w == r.Width && gp(r);
+            => w == r.WidthCode && gp(r);
 
         /// <summary>
         /// Determines whether a specified operand references an xmm register
@@ -120,7 +120,7 @@ namespace Z0.Asm
         /// <param name="r">The operand</param>
         [MethodImpl(Inline), Op]
         public static bit xmm(RegOp r)
-            => xmm(r.RegClass);
+            => xmm(r.RegClassCode);
 
         /// <summary>
         /// Determines whether a specified class code designates an xmm register
@@ -136,7 +136,7 @@ namespace Z0.Asm
         /// <param name="r">The operand</param>
         [MethodImpl(Inline), Op]
         public static bit ymm(RegOp r)
-            => ymm(r.RegClass);
+            => ymm(r.RegClassCode);
 
         /// <summary>
         /// Determines whether a specified class code designates a ymm register
@@ -152,7 +152,7 @@ namespace Z0.Asm
         /// <param name="r">The operand</param>
         [MethodImpl(Inline), Op]
         public static bit zmm(RegOp r)
-            => zmm(r.RegClass);
+            => zmm(r.RegClassCode);
 
         /// <summary>
         /// Determines whether a specified class code designates a zmm register

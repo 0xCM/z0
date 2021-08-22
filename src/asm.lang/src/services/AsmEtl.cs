@@ -14,64 +14,6 @@ namespace Z0.Asm
     [ApiHost]
     public class AsmEtl : AppService<AsmEtl>
     {
-        public void EmitAsmTokens()
-        {
-            var tokens = Wf.AsmTokens();
-            EmitTokens(tokens.RegTokens());
-            EmitTokens(tokens.OpCodeTokens());
-            EmitTokens(tokens.SigTokens());
-            EmitTokens(tokens.ConditonTokens());
-        }
-
-        void EmitTokens(ITokenSet src)
-        {
-            var dst = Ws.Tables().Table<SymToken>(WsAtoms.tokens, src.Name);
-            var tokens = Symbols.tokens(src.Types());
-            TableEmit(tokens, SymToken.RenderWidths, dst);
-        }
-
-        /// <summary>
-        /// Distills <see cref='AsmForm'/> values from a <see cref='SdmOpCodeDetail'/> sequence
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [Op]
-        public static Index<AsmForm> forms(ReadOnlySpan<SdmOpCodeDetail> src)
-        {
-            var count = src.Length;
-            var buffer = alloc<AsmForm>(count);
-            ref var dst = ref first(buffer);
-
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(src,i);
-                ref var opcode = ref SdmModels.opcode(record, out _);
-                ref var form = ref seek(dst,i);
-                form = asm.form(
-                    asm.sig(opcode.Mnemonic.Format(), SdmModels.operands(opcode)),
-                    asm.opcode((ushort)opcode.OpCodeId, opcode.Expr)
-                    );
-            }
-            return buffer;
-        }
-
-        public Outcome LoadSdmOpCodes(FS.FilePath src, out SdmOpCodeDetail[] dst)
-        {
-            var result = Outcome.Success;
-            dst = sys.empty<SdmOpCodeDetail>();
-            var lines = src.ReadLines(TextEncodingKind.Unicode).View;
-            result = TextGrids.load(lines, out var grid);
-            if(result.Fail)
-                return result;
-            var count = grid.RowCount;
-
-            dst = alloc<SdmOpCodeDetail>(count);
-            result = AsmParser.parse(grid, dst);
-            if(result.Fail)
-                return result;
-
-            return result;
-        }
-
         public static void traverse(FS.FilePath src, Receiver<ProcessAsmRecord> dst)
         {
             var counter = 1u;

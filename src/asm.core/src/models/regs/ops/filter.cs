@@ -23,7 +23,7 @@ namespace Z0.Asm
                 if(AsmRegBits.invalid(candidate.Index))
                     continue;
 
-                if(candidate.RegClass == @class)
+                if(candidate.RegClassCode == @class)
                     seek(dst,k++) = candidate;
             }
             return k;
@@ -41,7 +41,7 @@ namespace Z0.Asm
                 if(AsmRegBits.invalid(candidate.Index))
                     continue;
 
-                if(candidate.Width == width)
+                if(candidate.WidthCode == width)
                     seek(dst,k++) = candidate;
             }
             return k;
@@ -59,7 +59,7 @@ namespace Z0.Asm
                 if(AsmRegBits.invalid(candidate.Index))
                     continue;
 
-                if(candidate.Width == width && candidate.RegClass == @class)
+                if(candidate.WidthCode == width && candidate.RegClassCode == @class)
                     seek(dst,k++) = candidate;
             }
             return k;

@@ -315,6 +315,31 @@ namespace Z0.Asm
             return EmptyString;
         }
 
+        public static string regop<T>(T src)
+            where T : unmanaged, IRegOp<T>
+        {
+            var op = AsmRegBits.reg(src.WidthCode, src.RegClassCode, src.Index);
+            return op.Name.Format();
+        }
+
+        [Op]
+        public static string format(RegWidth src)
+        {
+            var symbols = Symbols.index<RegWidthCode>();
+            var index = (byte)src.Code;
+            var symbol = symbols[index];
+            return symbol.Expr.Format();
+        }
+
+        [Op]
+        public static string format(RegClass src)
+        {
+            var symbols = Symbols.index<RegClassCode>();
+            var index = (byte)src.Code;
+            var symbol = symbols[index];
+            return symbol.Expr.Format();
+        }
+
         public static string detail(RegModels.r8 src)
         {
             Hex8 data = src.Content;

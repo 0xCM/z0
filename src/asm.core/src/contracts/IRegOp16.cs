@@ -12,7 +12,7 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp16 : IRegOp
     {
-        RegWidthCode IRegOp.Width
+        RegWidthCode IRegOp.WidthCode
             => RegWidthCode.W16;
     }
 
@@ -20,7 +20,7 @@ namespace Z0.Asm
     public interface IRegOp16<T> : IRegOp16, IRegOp<T>
         where T : unmanaged, IRegOp16<T>
     {
-        RegClassCode IRegOp.RegClass
+        RegClassCode IRegOp.RegClassCode
             => RegClassCode.GP;
     }
 }

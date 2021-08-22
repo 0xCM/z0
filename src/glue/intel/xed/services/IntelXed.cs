@@ -68,7 +68,7 @@ namespace Z0.Asm
         public Symbols<RegId> Registers()
             => Symbols.index<RegId>();
 
-        public Index<SymLiteral> SymLiterals()
+        public Index<SymLiteralRow> SymLiterals()
         {
             var src = typeof(XedModels).GetNestedTypes().Enums();
             return Symbols.literals(src);
@@ -295,10 +295,10 @@ namespace Z0.Asm
             return dst;
         }
 
-        Index<SymLiteral> EmitSymIndex(FS.FilePath dst)
+        Index<SymLiteralRow> EmitSymIndex(FS.FilePath dst)
         {
             var src = SymLiterals();
-            var emitting = Wf.EmittingTable<SymLiteral>(dst);
+            var emitting = Wf.EmittingTable<SymLiteralRow>(dst);
             var count = Tables.emit(src.View, dst);
             Wf.EmittedTable(emitting,count);
             return src;

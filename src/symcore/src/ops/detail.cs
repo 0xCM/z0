@@ -7,7 +7,7 @@ namespace Z0
     partial struct Symbols
     {
         [Op, Closures(Closure)]
-        public static ref SymbolDetail detail<T>(in Sym<T> src, ushort count, out SymbolDetail dst)
+        public static ref SymDetailRow detail<T>(in Sym<T> src, ushort count, out SymDetailRow dst)
             where T : unmanaged
         {
             dst.TypeName = src.Type.Name;

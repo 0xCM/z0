@@ -26,7 +26,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public void Include(RegClass src)
+        public void Include(AsmRegClass src)
         {
              Class |= Pow2.pow32u(src);
         }

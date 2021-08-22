@@ -66,6 +66,9 @@ namespace Z0
         FS.FilePath Table(Scope scope, TableId id)
             => Subdir(scope) + TableName(id);
 
+        FS.FilePath Table(Scope scope, string id)
+            => Subdir(scope) + TableName(id);
+
         FS.FilePath Table(Scope scope, TableId id, string suffix)
             => Subdir(scope) + TableName(id,suffix);
 

@@ -42,7 +42,7 @@ namespace Z0
             => ref src.Identifiers[index];
 
         [MethodImpl(Inline), Op]
-        public static uint charcount(ReadOnlySpan<SymLiteral> src)
+        public static uint charcount(ReadOnlySpan<SymLiteralRow> src)
         {
             var width = 0u;
             var kSrc = src.Length;
@@ -55,7 +55,7 @@ namespace Z0
         }
 
         [Op]
-        public static SymHeapSpec specify(ReadOnlySpan<SymLiteral> src)
+        public static SymHeapSpec specify(ReadOnlySpan<SymLiteralRow> src)
         {
             var dst = new SymHeapSpec();
 

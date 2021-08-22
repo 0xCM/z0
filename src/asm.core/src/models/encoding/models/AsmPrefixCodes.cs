@@ -121,10 +121,10 @@ namespace Z0.Asm
             [Symbol("66")]
             x66 = H.x66,
 
-            [Symbol("f2")]
+            [Symbol("F2")]
             F2 = xf2,
 
-            [Symbol("f3")]
+            [Symbol("F3")]
             F3 = xf3,
         }
 
@@ -136,10 +136,10 @@ namespace Z0.Asm
             [Symbol("0f")]
             x0F = 0x0F,
 
-            [Symbol("0f 38")]
+            [Symbol("0F38")]
             x0F38 = 0x0F38,
 
-            [Symbol("0f 3a")]
+            [Symbol("0F3A")]
             x0F3A = 0x0F3A,
         }
 
@@ -155,6 +155,7 @@ namespace Z0.Asm
         /// <summary>
         /// The segment override codes as specified by Intel Vol II, 2.1.1
         /// </summary>
+        [SymSource]
         public enum SegOverrideCode : byte
         {
             None = 0,
@@ -262,7 +263,7 @@ namespace Z0.Asm
             /// <summary>
             /// Extends the reg field in the ModR/M byte
             /// </summary>
-            [Symbol("REX.R", "[0100 0100] =>[W:0 | R:1 | X:0 | B:0]")]
+            [Symbol("REX.R", "[0100 0100] => [W:0 | R:1 | X:0 | B:0]")]
             R = x44,
 
             /// <summary>

@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsmCodes;
 
     /// <summary>
     /// Characterizes a register operand representation
@@ -24,18 +23,24 @@ namespace Z0.Asm
         /// <summary>
         /// The register classifier
         /// </summary>
-        RegClassCode RegClass {get;}
-
-        BitWidth ISized.Width
-            => (uint)Width;
-
-        ByteSize ISized.Size
-            => ((uint)Width)/8;
+        RegClassCode RegClassCode {get;}
 
         /// <summary>
         /// The width of the represented register operand
         /// </summary>
-        new RegWidthCode Width {get;}
+        RegWidthCode WidthCode {get;}
+
+        BitWidth ISized.Width
+            => (uint)WidthCode;
+
+        ByteSize ISized.Size
+            => ((uint)WidthCode)/8;
+
+        RegWidth RegWidth
+            => WidthCode;
+
+        RegClass RegClass
+            => RegClassCode;
 
         string ITextual.Format()
             => GetType().Name;

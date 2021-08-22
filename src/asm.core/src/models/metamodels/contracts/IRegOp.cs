@@ -4,10 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmCmdService
+    partial class AsmMetamodels
     {
-        [CmdOp(".sdm-opcode-strings")]
-        public Outcome SdmOpCodeStrings(CmdArgs args)
-            => GenSdmOpCodeStrings();
+        public interface IRegOp<T> : IOperand<T>
+            where T : unmanaged, IRegOp<T>
+        {
+
+            RegClassCode RegClass {get;}
+        }
     }
 }

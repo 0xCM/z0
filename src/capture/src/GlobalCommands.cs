@@ -90,7 +90,7 @@ namespace Z0
         public Outcome EmitSymLiterals(CmdArgs args)
         {
             var service = Wf.Symbolism();
-            var dst = Db.AppTablePath<SymLiteral>();
+            var dst = Db.AppTablePath<SymLiteralRow>();
             service.EmitLiterals(dst);
             return true;
         }

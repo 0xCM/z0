@@ -42,6 +42,7 @@ namespace Z0.Asm
 
         public XedDatasetKind Kind
         {
+            [MethodImpl(Inline)]
             get => _Kind;
         }
     }

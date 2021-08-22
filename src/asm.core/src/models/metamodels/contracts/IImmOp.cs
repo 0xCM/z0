@@ -4,17 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmMetaSpecs
+    partial class AsmMetamodels
     {
-        public interface IOperand
-        {
-            AsmOpClass Class {get;}
-
-            AsmSizeKind Size {get;}
-        }
-
-        public interface IOperand<T> : IOperand
-            where T : unmanaged, IOperand<T>
+        public interface IImmOp<T> : IOperand<T>
+            where T : unmanaged, IImmOp<T>
         {
 
         }

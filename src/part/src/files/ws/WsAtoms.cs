@@ -76,5 +76,7 @@ namespace Z0
         public const string llvm = nameof(llvm);
 
         public const string ll = nameof(ll);
+
+        public const string machine = nameof(machine);
     }
 }

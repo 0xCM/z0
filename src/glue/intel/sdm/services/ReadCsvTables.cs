@@ -9,22 +9,15 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static SdmModels;
+    using static SdmCsvLiterals;
 
     partial class IntelSdm
     {
         public static Index<TableColumn> columns(ReadOnlySpan<string> src)
             => Tables.columns<SdmColumnKind>(src);
 
-        public ReadOnlySpan<Table> ReadInstructionTables(FS.FilePath src)
+        public ReadOnlySpan<Table> ReadCsvTables(FS.FilePath src)
         {
-            const string TitleMarker = "# ";
-            const string TableMarker = "## ";
-            const string Separator = "------";
-            const string TableTileFormat = "# {0}";
-            const string InstTitleFormat = "# Instruction {0}";
-            const string Rejoin = " | ";
-            const char ColSep = Chars.Pipe;
-
             var result = Outcome.Success;
             var foundtable = false;
             var parsingrows = false;
@@ -38,7 +31,7 @@ namespace Z0.Asm
             using var reader = src.LineReader(TextEncodingKind.Utf8);
             while(reader.Next(out var line))
             {
-                if((line.IsEmpty || line.StartsWith(Separator)) && !parsingrows)
+                if((line.IsEmpty || line.StartsWith(TableSeparator)) && !parsingrows)
                     continue;
 
                 if(parsingrows && line.IsEmpty)
@@ -52,7 +45,7 @@ namespace Z0.Asm
 
                 var content = line.Content;
 
-                if(content.StartsWith(TitleMarker))
+                if(content.StartsWith(PageTitleMarker))
                 {
                     table.WithSource(content.Remove(TableMarker).Trim());
                     continue;

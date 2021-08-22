@@ -18,6 +18,13 @@ namespace Z0.Asm
             Code = code;
         }
 
+        public string Format()
+            => AsmRender.format(this);
+
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator RegWidth(RegWidthCode src)
             => new RegWidth(src);

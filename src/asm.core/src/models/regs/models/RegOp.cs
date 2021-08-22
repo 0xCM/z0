@@ -37,13 +37,13 @@ namespace Z0.Asm
             get => AsmOpClass.R;
         }
 
-        public RegWidthCode Width
+        public RegWidthCode WidthCode
         {
             [MethodImpl(Inline)]
             get => AsmRegBits.width(this);
         }
 
-        public RegClassCode RegClass
+        public RegClassCode RegClassCode
         {
             [MethodImpl(Inline)]
             get => AsmRegBits.@class(this);
@@ -53,6 +53,18 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => AsmRegBits.index(this);
+        }
+
+        public RegWidth RegWidth
+        {
+            [MethodImpl(Inline)]
+            get => WidthCode;
+        }
+
+        public RegClass RegClass
+        {
+            [MethodImpl(Inline)]
+            get => RegClassCode;
         }
 
         public bool IsEmpty

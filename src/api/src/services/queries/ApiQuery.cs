@@ -20,7 +20,7 @@ namespace Z0
 
         Index<ApiClassifier> _Classifiers;
 
-        Index<SymLiteral> _ClassLiterals;
+        Index<SymLiteralRow> _ClassLiterals;
 
         object locker;
 
@@ -40,7 +40,7 @@ namespace Z0
             return _Classes.View;
         }
 
-        public ReadOnlySpan<SymLiteral> ApiClassLiterals()
+        public ReadOnlySpan<SymLiteralRow> ApiClassLiterals()
         {
             lock(locker)
             {

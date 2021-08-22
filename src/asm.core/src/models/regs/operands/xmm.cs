@@ -36,21 +36,33 @@ namespace Z0.Asm
             public override string ToString()
                 => Format();
 
-            public RegWidthCode Width
+            public RegWidthCode WidthCode
             {
                 [MethodImpl(Inline)]
                 get => RegWidthCode.W128;
             }
 
-            public RegClassCode RegClass
+            public RegClassCode RegClassCode
             {
                 [MethodImpl(Inline)]
                 get => RegClassCode.XMM;
             }
 
+            public RegWidth RegWidth
+            {
+                [MethodImpl(Inline)]
+                get => WidthCode;
+            }
+
+            public RegClass RegClass
+            {
+                [MethodImpl(Inline)]
+                get => RegClassCode;
+            }
+
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => AsmRegBits.reg(src.Width, src.RegClass, src.Index);
+                => AsmRegBits.reg(src.WidthCode, src.RegClassCode, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)
@@ -76,7 +88,6 @@ namespace Z0.Asm
         public readonly struct xmm0 : IRegOp128<xmm0>
         {
             public I Index => I.r0;
-
 
             [MethodImpl(Inline)]
             public static implicit operator G(xmm0 src)

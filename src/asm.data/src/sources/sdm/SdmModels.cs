@@ -18,6 +18,7 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct SdmModels
     {
+
         public static ReadOnlySpan<string> operands(in SdmOpCode src)
             => text.split(src.Operands.Format(), Chars.Comma).Select(op => op.Trim());
 

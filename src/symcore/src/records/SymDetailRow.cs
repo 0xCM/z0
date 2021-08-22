@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct SymbolDetail : IRecord<SymbolDetail>
+    public struct SymDetailRow : IRecord<SymDetailRow>
     {
-        public const string TableId = "symbolic.details";
+        public const string TableId = "symbol.details";
 
         public const byte FieldCount = 10;
 

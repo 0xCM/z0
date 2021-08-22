@@ -13,19 +13,28 @@ namespace Z0
 
     partial struct Symbols
     {
+        public static ReadOnlySpan<SymLiteralRow> literals<E>()
+            where E : unmanaged, Enum
+        {
+            var symbols = index<E>().View;
+            var dst = alloc<SymLiteralRow>(symbols.Length);
+            fill<E>(symbols, dst);
+            return dst;
+        }
+
         [Op]
-        public static Index<SymLiteral> literals(Type src)
+        public static Index<SymLiteralRow> literals(Type src)
         {
             var fields = @readonly(src.LiteralFields());
-            var dst = alloc<SymLiteral>(fields.Length);
+            var dst = alloc<SymLiteralRow>(fields.Length);
             fill(src, ClrPrimitives.kind(src), fields, dst);
             return dst;
         }
 
         [Op]
-        public static Index<SymLiteral> literals(Index<Type> src)
+        public static Index<SymLiteralRow> literals(Index<Type> src)
         {
-            var dst = list<SymLiteral>();
+            var dst = list<SymLiteralRow>();
             var kTypes = src.Count;
             for(var i=0; i<kTypes; i++)
                 dst.AddRange(literals(src[i]));
@@ -34,11 +43,11 @@ namespace Z0
         }
 
         [Op]
-        public static ReadOnlySpan<SymLiteral> literals(Index<Assembly> src)
+        public static ReadOnlySpan<SymLiteralRow> literals(Index<Assembly> src)
         {
             var kvTypes = Enums.types(src).View;
             var partCount = kvTypes.Length;
-            var dst = list<SymLiteral>();
+            var dst = list<SymLiteralRow>();
             for(var i=0; i<partCount; i++)
             {
                 var types = skip(kvTypes,i).View;
@@ -55,8 +64,36 @@ namespace Z0
             return dst.ViewDeposited();
         }
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        static void fill<E>(ReadOnlySpan<Sym<E>> src, Span<SymLiteralRow> dst)
+            where E : unmanaged
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                seek(dst, i) = untype(literal(skip(src,i), out _));
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        static SymLiteralRow untype<E>(in SymLiteral<E> src)
+            where E : unmanaged
+        {
+            var dst = new SymLiteralRow();
+            dst.Component = src.Component.SimpleName;
+            dst.Type = src.Type;
+            dst.Class = src.Class;
+            dst.Position = src.Position;
+            dst.Name = src.Name;
+            dst.Symbol = src.Symbol;
+            dst.DataType = src.DataType;
+            dst.ScalarValue = src.ScalarValue;
+            dst.Description = src.Description;
+            dst.Hidden = src.Hidden;
+            dst.Identity = src.Identity;
+            return dst;
+        }
+
         [Op]
-        static void fill(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymLiteral> dst)
+        static void fill(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymLiteralRow> dst)
         {
             var count = fields.Length;
 

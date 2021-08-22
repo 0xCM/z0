@@ -56,6 +56,9 @@ namespace Z0
         FS.FileName TableName(TableId id)
             => FS.file(id.Format(), FS.Csv);
 
+        FS.FileName TableName(string id)
+            => FS.file(id, FS.Csv);
+
         FS.FileName TableName(TableId id, string suffix)
             => FS.file(string.Format("{0}.{1}", id, suffix), FS.Csv);
 

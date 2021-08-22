@@ -9,13 +9,14 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static SdmModels;
+    using static SdmCsvLiterals;
 
-    partial class AsmCmdService
+    partial class IntelSdm
     {
-        public Outcome EmitSdmOpCodeDetails()
+        public Index<SdmOpCodeDetail> ImportCsvOpCodes(ReadOnlySpan<FS.FilePath> src)
         {
             var result = Outcome.Success;
-            var src = DataSources.Datasets(AsmTableScopes.SdmInstructions).Files(FS.Csv).ToReadOnlySpan();
+
             var count = src.Length;
             var kinds = Symbols.index<SdmTableKind>();
             Index<SdmOpCodeDetail> storage = alloc<SdmOpCodeDetail>(4000);
@@ -24,7 +25,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var inpath = ref skip(src,i);
-                var tables = SdmSvc.ReadInstructionTables(inpath);
+                var tables = ReadCsvTables(inpath);
                 var id = inpath.FileName.WithoutExtension.Format();
                 for(var j=0; j<tables.Length; j++)
                 {
@@ -40,14 +41,16 @@ namespace Z0.Asm
                 }
             }
 
-            var rows = span(slice(buffer,0,counter).ToArray().Sort());
+            var rows = slice(buffer,0,counter).ToArray().Sort();
 
             for(var i=0u; i<rows.Length; i++)
                 seek(rows,i).OpCodeId = i + 1;
-            var outpath = TableWs().Table<SdmOpCodeDetail>();
+
+            var ws = Ws.Tables();
+            var outpath = ws.Table<SdmOpCodeDetail>();
             using var writer = outpath.UnicodeWriter();
             TableEmit(@readonly(rows), SdmOpCodeDetail.RenderWidths, writer, outpath);
-            return result;
+            return rows;
         }
     }
 }

@@ -10,24 +10,8 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial class AsmMetaSpecs
+    partial class AsmMetamodels
     {
-        public struct operand<A0>
-            where A0 : unmanaged, IOperand
-        {
-            public A0 a0;
-
-            [MethodImpl(Inline)]
-            public operand(A0 a0)
-            {
-                this.a0 = a0;
-            }
-
-            [MethodImpl(Inline)]
-            public static implicit operator operand<A0>(A0 src)
-                => new operand<A0>(src);
-        }
-
         public struct operands<A0,A1>
             where A0 : unmanaged, IOperand
             where A1 : unmanaged, IOperand

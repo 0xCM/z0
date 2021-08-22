@@ -16,14 +16,14 @@ namespace Z0
         /// <summary>
         /// Represents a bijective correspondence between two sequences of homogenous type
         /// </summary>
-        public readonly ref struct Bijection<T>
+        public readonly struct Bijection<T>
         {
-            public ReadOnlySpan<T> Source {get;}
+            public Index<T> Source {get;}
 
-            public ReadOnlySpan<T> Target {get;}
+            public Index<T> Target {get;}
 
             [MethodImpl(Inline)]
-            public Bijection(ReadOnlySpan<T> src, ReadOnlySpan<T> dst)
+            public Bijection(Index<T> src, Index<T> dst)
             {
                 Source = src;
                 Target = dst;
@@ -32,7 +32,7 @@ namespace Z0
             public Pair<T> this[uint i]
             {
                 [MethodImpl(Inline)]
-                get => (skip(Source,i), skip(Target,i));
+                get => (Source[i], Target[i]);
             }
         }
     }

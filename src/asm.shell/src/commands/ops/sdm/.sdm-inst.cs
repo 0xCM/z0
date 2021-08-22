@@ -22,7 +22,7 @@ namespace Z0.Asm
             if(!src.Exists)
                 return (false, FS.missing(src));
 
-            var tables = SdmSvc.ReadInstructionTables(src);
+            var tables = SdmSvc.ReadCsvTables(src);
             var tCount = tables.Length;
             for(var i=0; i<tCount; i++)
             {

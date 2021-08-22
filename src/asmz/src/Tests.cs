@@ -463,11 +463,6 @@ namespace Z0.Asm
             Wf.Row(a0);
         }
 
-        void EmitPartSymbols()
-        {
-            var svc = Wf.Symbolism();
-            svc.EmitLiterals<PartId>();
-        }
 
         void FilterApiBlocks()
         {

@@ -14,7 +14,6 @@ namespace Z0
         dynamic Source {get;}
 
         dynamic Target {get;}
-
     }
 
     /// <summary>

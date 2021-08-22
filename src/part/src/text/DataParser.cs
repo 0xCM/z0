@@ -17,15 +17,15 @@ namespace Z0
     {
         public static MsgPattern<Name,string> ParseFailure => "Parse failure {0}:{1}";
 
-        public static Outcome parse(TextLine src, out SymLiteral dst)
+        public static Outcome parse(TextLine src, out SymLiteralRow dst)
         {
             var outcome = Outcome.Success;
             var j=0;
             var cells = src.Split(Chars.Pipe);
-            if(cells.Length != SymLiteral.FieldCount)
+            if(cells.Length != SymLiteralRow.FieldCount)
             {
                 dst = default;
-                return (false, AppMsg.FieldCountMismatch.Format(SymLiteral.FieldCount, cells.Length));
+                return (false, AppMsg.FieldCountMismatch.Format(SymLiteralRow.FieldCount, cells.Length));
             }
 
             outcome += parse(skip(cells,j++), out dst.Component);

@@ -41,15 +41,15 @@ namespace Z0
             var count = src.Length;
             var buffer = alloc<Replace<T>>(count);
             ref var target = ref first(buffer);
-            ref readonly var input = ref first(src);
-            ref readonly var output = ref first(dst);
+            ref readonly var input = ref src.First;
+            ref readonly var output = ref dst.First;
             for(var i=0; i<count; i++)
                 seek(target,i) = replace(skip(input,i), skip(output,i));
             return buffer;
         }
 
         [Op, Closures(Closure)]
-        public static Span<Replace<T>> replace<T>(ReadOnlySpan<T> src, ReadOnlySpan<T> dst)
+        public static Span<Replace<T>> replace<T>(Index<T> src, Index<T> dst)
             => replace(bijection<T>(src,dst));
     }
 }

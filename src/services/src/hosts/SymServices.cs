@@ -14,16 +14,16 @@ namespace Z0
 
     public class SymServices : AppService<SymServices>
     {
-        public Index<SymbolDetail> EmitSymDetails<E>()
+        public Index<SymDetailRow> EmitSymDetails<E>()
             where E : unmanaged, Enum
         {
-            var dst = Db.Table<SymbolDetail>(typeof(E).Name);
-            var flow = Wf.EmittingTable<SymbolDetail>(dst);
+            var dst = Db.Table<SymDetailRow>(typeof(E).Name);
+            var flow = Wf.EmittingTable<SymDetailRow>(dst);
             var symbols  = Symbols.index<E>().View;
             var count = symbols.Length;
-            var buffer = alloc<SymbolDetail>(count);
+            var buffer = alloc<SymDetailRow>(count);
             ref var target = ref first(buffer);
-            var formatter = Tables.formatter<SymbolDetail>(SymbolDetail.RenderWidths);
+            var formatter = Tables.formatter<SymDetailRow>(SymDetailRow.RenderWidths);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)

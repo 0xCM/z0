@@ -7,16 +7,16 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static AsmInstructions;
-
     using llvm;
 
+    using static AsmInstructions;
     using static Root;
     using static core;
-    using static llvm.MC;
     using static llvm.McAsmId;
 
-    partial class AsmMetaSpecs
+    using M = AsmMetamodel;
+
+    partial class AsmMetamodels
     {
         [Op]
         public static uint collect(in Movzx x, ref uint i, Span<AsmInfo> dst)

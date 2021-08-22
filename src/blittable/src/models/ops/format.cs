@@ -21,7 +21,7 @@ namespace Z0
                 var count = src.Length;
                 var data = src.Bytes;
                 for(var i=0; i<count; i++)
-                    seek(dst,i) = (char)skip(data,i);
+                    seek(dst, i) = (char)skip(data,i);
                 return text.format(slice(dst,0,count));
             }
 

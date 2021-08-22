@@ -12,7 +12,7 @@ namespace Z0
     partial struct Symbols
     {
         /// <summary>
-        /// Populates a <see cref='SymLiteral<E>'/> from a specified source <see cref='Sym<E>'/>
+        /// Populates a <see cref='SymLiteralRow<E>'/> from a specified source <see cref='Sym<E>'/>
         /// </summary>
         /// <param name="src"></param>
         /// <param name="dst"></param>

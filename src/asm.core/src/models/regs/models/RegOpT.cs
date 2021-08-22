@@ -26,20 +26,20 @@ namespace Z0.Asm
             get => Data.Index;
         }
 
-        public RegClassCode RegClass
+        public RegClassCode RegClassCode
         {
             [MethodImpl(Inline)]
-            get => Data.RegClass;
+            get => Data.RegClassCode;
         }
 
-        public RegWidthCode Width
+        public RegWidthCode WidthCode
         {
             [MethodImpl(Inline)]
-            get => Data.Width;
+            get => Data.WidthCode;
         }
 
         public string Format()
-            => string.Format("{0}/{1}/{2}", Index, RegClass, Width);
+            => string.Format("{0}/{1}/{2}", Index, RegClassCode, WidthCode);
 
         public override string ToString()
             =>  Format();

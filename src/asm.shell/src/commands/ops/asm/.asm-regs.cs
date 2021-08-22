@@ -13,8 +13,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             xmm r = AsmRegOps.xmm0;
-            var counter = 0;
-            while(counter++ < 36)
+            for(var i=0; i<32; i++)
             {
                 Write(r++);
             }
