@@ -27,14 +27,14 @@ namespace Z0
         public Imm16(K value)
             => Content = value;
 
-        public ImmWidth Width => ImmWidth.W16;
+        public ImmWidthCode Width => ImmWidthCode.W16;
 
 
         public ImmKind Kind => ImmKind.Imm16;
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Content, W);
+            => HexFormat.format(Content, W, true);
 
         public override string ToString()
             => Format();

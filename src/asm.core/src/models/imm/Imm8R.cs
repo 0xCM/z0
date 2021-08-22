@@ -22,12 +22,12 @@ namespace Z0
         public Imm8R(byte value)
             => Content = value;
 
-        public ImmWidth Width => ImmWidth.W8;
+        public ImmWidthCode Width => ImmWidthCode.W8;
 
         public ImmKind Kind => ImmKind.Imm8;
 
         public string Format()
-            => HexFormat.format(W, Content);
+            => HexFormat.format(Content, W, true);
 
         public override string ToString()
             => Format();

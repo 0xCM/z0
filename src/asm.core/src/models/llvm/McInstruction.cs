@@ -9,7 +9,7 @@ namespace Z0.llvm
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct McInstruction
     {
-        public McAsmId Id;
+        public AsmId Id;
 
         public McOperand Op0;
 

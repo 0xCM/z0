@@ -14,12 +14,12 @@ namespace Z0.Asm
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public readonly struct EncodingOperand
         {
-            public byte OpNumber {get;}
+            public OperandIndex OpNumber {get;}
 
             public EncodingSig Sig {get;}
 
             [MethodImpl(Inline)]
-            public EncodingOperand(byte n, EncodingSig sig)
+            public EncodingOperand(OperandIndex n, EncodingSig sig)
             {
                 OpNumber = n;
                 Sig = sig;

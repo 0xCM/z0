@@ -2,10 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    public readonly struct AsmSources
+    public enum ImmWidthCode : byte
     {
+        None = 0,
 
+        W8 = 8,
+
+        W16 = 16,
+
+        W32 = 32,
+
+        W64 = 64
     }
 }

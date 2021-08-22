@@ -15,13 +15,13 @@ namespace Z0
         public static Table define(string src, uint kind, TableColumn[] cols, TableRow[] rows)
             => new Table(src,kind, cols, rows);
 
-        readonly TableRow[] Data;
-
-        readonly TableColumn[] _Cols;
-
         public string Source {get;}
 
         public uint Kind {get;}
+
+        readonly TableRow[] Data;
+
+        readonly TableColumn[] _Cols;
 
         [MethodImpl(Inline)]
         public Table(string src, uint kind, TableColumn[] cols, TableRow[] rows)

@@ -25,12 +25,12 @@ namespace Z0
         public Imm32(uint src)
             => Content = src;
 
-        public ImmWidth Width => ImmWidth.W32;
+        public ImmWidthCode Width => ImmWidthCode.W32;
 
         public ImmKind Kind => ImmKind.Imm32;
 
         public string Format()
-            => HexFormatter.format(W, Content);
+            => HexFormat.format(Content, W, true);
 
         public override string ToString()
             => Format();

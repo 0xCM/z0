@@ -24,7 +24,7 @@ namespace Z0
         public Imm8(byte src)
             => Content = src;
 
-        public ImmWidth Width => ImmWidth.W8;
+        public ImmWidthCode Width => ImmWidthCode.W8;
 
         public ImmKind Kind => ImmKind.Imm8;
 
@@ -35,7 +35,7 @@ namespace Z0
         }
 
         public string Format()
-            => HexFormat.format(W, Content);
+            => HexFormat.format(Content, W, true);
 
         public override string ToString()
             => Format();

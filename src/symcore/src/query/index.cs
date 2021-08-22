@@ -11,12 +11,43 @@ namespace Z0
     using static core;
 
     using C = AsciCode;
+    using SQ = SymbolicQuery;
 
     partial struct SymbolicQuery
     {
         [MethodImpl(Inline), Op]
         public static int index(ReadOnlySpan<char> src, ReadOnlySpan<char> match, bool cased = true)
             => src.IndexOf(match, cased ? Cased : NoCase);
+
+        [Op]
+        public static int index(ReadOnlySpan<char> src, char c0, char c1)
+        {
+            var count = src.Length;
+            var level = 0;
+            var index = -1;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var c = ref skip(src, i);
+                switch(level)
+                {
+                    case 0:
+                        if(SQ.match(c, c0))
+                            level++;
+                    break;
+                    case 1:
+                        if(SQ.match(c, c1))
+                        {
+                            index = i-level;
+                            break;
+                        }
+                    break;
+                    default:
+                        level = 0;
+                        break;
+                }
+            }
+            return index;
+        }
 
         [MethodImpl(Inline), Op]
         public static int index(ReadOnlySpan<char> src, char match)

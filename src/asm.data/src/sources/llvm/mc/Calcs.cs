@@ -17,12 +17,37 @@ namespace Z0.llvm
     {
         [MethodImpl(NotInline), Op]
         public static Calcs calcs()
-            => new Calcs(Symbols.index<McAsmId>(), AsmStrs, OpInfo0, OpInfo1);
+            => new Calcs(Symbols.index<AsmId>(), AsmStrs, OpInfo0, OpInfo1);
 
+        [Op]
+        public static Index<OpCodeSpec> opcodes()
+        {
+            var calcs = MC.calcs();
+            var count = calcs.AsmCount;
+
+            var buffer = alloc<OpCodeSpec>(count);
+            ref var dst = ref first(buffer);
+            var ids = calcs.AsmId();
+            for(ushort i=0; i<count; i++)
+            {
+                ref readonly var id = ref skip(ids,i);
+                ref readonly var sym = ref calcs.Sym(id);
+                var opcode = calcs.OpCode(id);
+                ref var record = ref seek(dst,i);
+                record.Index = i;
+                record.Mnemonic = calcs.Monic(id);
+                record.OpId = sym.Name.Content.Content;
+                record.OpCodeValue = opcode;
+                record.OpCodeBytes = Hex.hexbytes(opcode, LowerCase);
+            }
+
+            Array.Sort(buffer);
+            return buffer;
+        }
         [ApiHost("llvm.mc.calcs")]
         public readonly ref struct Calcs
         {
-            readonly ReadOnlySpan<McAsmId> _AsmId;
+            readonly ReadOnlySpan<AsmId> _AsmId;
 
             readonly ReadOnlySpan<Sym> _AsmIdSym;
 
@@ -33,7 +58,7 @@ namespace Z0.llvm
             readonly ReadOnlySpan<uint> OpInfo1;
 
             [MethodImpl(Inline)]
-            internal Calcs(Symbols<McAsmId> asmid, ReadOnlySpan<char> strs, ReadOnlySpan<uint> a, ReadOnlySpan<uint> b)
+            internal Calcs(Symbols<AsmId> asmid, ReadOnlySpan<char> strs, ReadOnlySpan<uint> a, ReadOnlySpan<uint> b)
             {
                 _AsmId = asmid.Kinds;
                 _AsmIdSym = asmid.Untyped().Storage;
@@ -76,7 +101,7 @@ namespace Z0.llvm
             }
 
             [MethodImpl(Inline), Op]
-            public string Monic(McAsmId id)
+            public string Monic(AsmId id)
                 => canonicalize(Monic(index(id)));
 
             public Index<string> Monics()
@@ -85,18 +110,18 @@ namespace Z0.llvm
                 var length = 0;
                 var set = hashset<string>();
                 for(ushort i=0; i<count; i++)
-                    set.Add(Monic((McAsmId)i));
+                    set.Add(Monic((AsmId)i));
                 Index<string> distinct = set.Array();
                 distinct.Sort();
                 return distinct;
             }
 
             [MethodImpl(Inline), Op]
-            public ReadOnlySpan<McAsmId> AsmId()
+            public ReadOnlySpan<AsmId> AsmId()
                 => _AsmId;
 
             [MethodImpl(Inline), Op]
-            public ref readonly Sym Sym(McAsmId id)
+            public ref readonly Sym Sym(AsmId id)
                 => ref skip(_AsmIdSym, u32(id));
 
             [MethodImpl(Inline), Op]
@@ -109,19 +134,19 @@ namespace Z0.llvm
             }
 
             [MethodImpl(Inline), Op]
-            public Hex64 OpCode(McAsmId id)
+            public Hex64 OpCode(AsmId id)
                 => OpCode(u32(id));
 
             [MethodImpl(Inline), Op]
-            public uint MonicOffset(McAsmId id)
+            public uint MonicOffset(AsmId id)
                 => offset(OpCode(id));
 
             [MethodImpl(Inline), Op]
-            public uint MonicLength(McAsmId id)
+            public uint MonicLength(AsmId id)
                 => AsmLength(offset(OpCode(id)));
 
             [MethodImpl(Inline)]
-            static uint index(McAsmId id)
+            static uint index(AsmId id)
                 => u32(id);
 
             [MethodImpl(Inline), Op]

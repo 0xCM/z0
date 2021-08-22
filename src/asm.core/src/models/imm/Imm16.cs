@@ -26,12 +26,12 @@ namespace Z0
         public Imm16(ushort src)
             => Content = src;
 
-        public ImmWidth Width => ImmWidth.W16;
+        public ImmWidthCode Width => ImmWidthCode.W16;
 
         public ImmKind Kind => ImmKind.Imm16;
 
         public string Format()
-            => HexFormat.format(W, Content);
+            => HexFormat.format(Content, W, true);
 
         public override string ToString()
             => Format();

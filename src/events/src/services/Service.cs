@@ -110,5 +110,8 @@ namespace Z0
 
         protected DataEvent<T> Write<T>(in T src, FlairKind? flair = null)
             => Signal.Data(src,flair);
+
+        protected void Write<T>(string name, T value, FlairKind? flair = null)
+            => Signal.Data(RP.attrib(name, value), flair);
     }
 }

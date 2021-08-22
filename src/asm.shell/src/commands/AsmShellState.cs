@@ -12,28 +12,41 @@ namespace Z0.Asm
 
     public class AsmShellState : ShellState
     {
-        Index<SdmOpCodeDetail> _OpCodes;
+        Index<SdmOpCodeDetail> _SdmOpCodes;
 
         Index<ProcessAsmRecord> _ProcessAsm;
 
         Index<ProcessAsmRecord> _ProcessAsmSelection;
 
+        Index<llvm.OpCodeSpec> _LlvmOpCodes;
+
         public AsmShellState()
         {
-            _OpCodes = array<SdmOpCodeDetail>();
+            _SdmOpCodes = array<SdmOpCodeDetail>();
             _ProcessAsm = array<ProcessAsmRecord>();
             _ProcessAsmSelection = array<ProcessAsmRecord>();
+            _LlvmOpCodes = array<llvm.OpCodeSpec>();
         }
 
         [MethodImpl(Inline)]
         public void SdmOpCodeDetail(SdmOpCodeDetail[] src)
         {
-            _OpCodes = src;
+            _SdmOpCodes = src;
+        }
+
+        [MethodImpl(Inline)]
+        public void LlvmOpCodes(llvm.OpCodeSpec[] src)
+        {
+            _LlvmOpCodes = src;
         }
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<SdmOpCodeDetail> SdmOpCodeDetail()
-            => _OpCodes.View;
+            => _SdmOpCodes.View;
+
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<llvm.OpCodeSpec> LlvmOpCodes()
+            => _LlvmOpCodes.View;
 
         [MethodImpl(Inline)]
         public Span<ProcessAsmRecord> ProcessAsmSelection()

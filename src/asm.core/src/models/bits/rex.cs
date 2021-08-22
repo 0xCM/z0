@@ -8,9 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
-
-    using SR = SymbolicRender;
 
     partial class AsmBits
     {
@@ -23,8 +20,6 @@ namespace Z0.Asm
         }
 
         const string RexBitstring = "0100 {0} {1} {2} {3}";
-
-        const string RexHeader = "Marker {0,-3} {1,-3} {2,-3} {3,-3}";
 
         [Op]
         public static string bitstring(RexPrefix src)

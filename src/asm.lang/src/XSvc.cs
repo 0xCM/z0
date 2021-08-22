@@ -26,10 +26,6 @@ namespace Z0
             => Svc.AsmTables.create(wf);
 
         [Op]
-        public static AsmLoader AsmLoader(this IServiceContext wf)
-            => Svc.AsmLoader.create(wf);
-
-        [Op]
         public static StanfordAsmCatalog StanfordCatalog(this IWfRuntime wf)
             => Svc.StanfordAsmCatalog.create(wf);
 

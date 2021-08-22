@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static core;
     using static Root;
-    //using static TextTools;
     using static SdmModels;
 
     using SP = ScalarParser;
@@ -21,7 +20,7 @@ namespace Z0.Asm
         public static SdmTableKind tablekind(string name)
             => name switch {
                 "OpCodes" => SdmTableKind.OpCodes,
-                "Encoding" => SdmTableKind.Encoding,
+                "Encoding" => SdmTableKind.EncodingRule,
                 "BinaryFormat" => SdmTableKind.BinaryFormat,
                 "Intrinsics" => SdmTableKind.Intrinsics,
                 "Notes" => SdmTableKind.Intrinsics,

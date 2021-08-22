@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -15,6 +16,16 @@ namespace Z0.Asm
     {
         public static Index<TableColumn> columns(ReadOnlySpan<string> src)
             => Tables.columns<SdmColumnKind>(src);
+
+        public ReadOnlySpan<Table> ReadCsvTables(ReadOnlySpan<FS.FilePath> src)
+        {
+            var filecount = src.Length;
+            var dst = list<Table>();
+            for(var i=0; i<filecount; i++)
+                dst.AddRange(ReadCsvTables(skip(src,i)).ToArray());
+
+            return dst.ViewDeposited();
+        }
 
         public ReadOnlySpan<Table> ReadCsvTables(FS.FilePath src)
         {

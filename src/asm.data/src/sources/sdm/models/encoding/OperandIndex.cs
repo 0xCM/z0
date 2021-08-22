@@ -2,18 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    public enum ImmWidth : byte
+    partial struct SdmModels
     {
-        None = 0,
+        public enum OperandIndex : byte
+        {
+            Op0 = 0,
 
-        W8 = 8,
+            Op1 = 1,
 
-        W16 = 16,
+            Op2 = 2,
 
-        W32 = 32,
-
-        W64 = 64
+            Op3 = 3
+        }
     }
 }

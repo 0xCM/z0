@@ -14,7 +14,7 @@ namespace Z0.Asm
         Outcome ApiAsm(CmdArgs args)
         {
             var result = Outcome.Success;
-            var rows = AsmLoader.LoadHostAsmRows(ApiArchive.HostAsm());
+            var rows = AsmEtl.LoadHostAsmRows(ApiArchive.HostAsm());
             var src = rows.View;
             var count = src.Length;
             var buffer = alloc<AsmDataBlock>(count);

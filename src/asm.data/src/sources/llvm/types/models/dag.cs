@@ -11,6 +11,8 @@ namespace Z0.llvm
     using static Root;
     using static core;
 
+    using api = LlvmValues;
+
     partial struct LlvmTypes
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
@@ -40,6 +42,12 @@ namespace Z0.llvm
                 [MethodImpl(Inline)]
                 get => ref p0[0];
             }
+
+            public string Format()
+                => api.format(this);
+
+            public override string ToString()
+                => Format();
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
@@ -79,6 +87,12 @@ namespace Z0.llvm
                 [MethodImpl(Inline)]
                 get => ref p1[0];
             }
+
+            public string Format()
+                => api.format(this);
+
+            public override string ToString()
+                => Format();
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
@@ -128,6 +142,12 @@ namespace Z0.llvm
                 [MethodImpl(Inline)]
                 get => ref p2[0];
             }
+
+            public string Format()
+                => api.format(this);
+
+            public override string ToString()
+                => Format();
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
@@ -188,6 +208,12 @@ namespace Z0.llvm
                 [MethodImpl(Inline)]
                 get => ref p3[0];
             }
+
+            public string Format()
+                => api.format(this);
+
+            public override string ToString()
+                => Format();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct AsmInfoRecord
     {
-        public McAsmId Id;
+        public AsmId Id;
 
         public CharBlock32 OpCodeExpr;
 

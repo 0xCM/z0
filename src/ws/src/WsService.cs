@@ -16,22 +16,16 @@ namespace Z0
 
         static void Init(T svc)
         {
-            svc.Dev = DevWs.create(svc.Env.DevWs);
-            svc.Ws = svc.Dev;
+            svc.Ws = DevWs.create(svc.Env.DevWs);
+            //svc.Dev = svc.Dev;
         }
 
-        protected DevWs Dev;
+        protected DevWs Ws;
 
-        public IWorkspace Ws {get; private set;}
+        IWorkspace IWsService.Ws
+            => Ws;
 
-        public T WithWs(Identifier name)
-        {
-            if(Dev.Select(name, out var _ws))
-            {
-                Ws = _ws;
-                Write(AppMsg.WorkspaceSelected.Format(name));
-            }
-            return (T)this;
-        }
-   }
+        //public IWorkspace Ws {get; private set;}
+
+    }
 }

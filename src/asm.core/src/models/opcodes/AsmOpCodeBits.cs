@@ -29,6 +29,18 @@ namespace Z0.Asm
             Storage = src;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Storage == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Storage != 0;
+        }
+
         // AsmOcTokenKind [0..15]
         // TokenCount [16..23]
         // Token1Value [24..31]
@@ -75,5 +87,7 @@ namespace Z0.Asm
         {
             Storage |= bit.enable((ushort)Storage, (byte)((byte)kind - 1));
         }
+
+        public static AsmOpCodeBits Empty => default;
     }
 }

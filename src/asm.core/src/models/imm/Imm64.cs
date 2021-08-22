@@ -27,7 +27,7 @@ namespace Z0
         public Imm64(ulong src)
             => Content = src;
 
-        public ImmWidth Width => ImmWidth.W64;
+        public ImmWidthCode Width => ImmWidthCode.W64;
 
         public ImmKind Kind => ImmKind.Imm64;
 
@@ -42,7 +42,7 @@ namespace Z0
             => (int)Hash;
 
         public string Format()
-            => HexFormatter.format(W, Content);
+            => HexFormat.format(Content, W, true);
 
         public override string ToString()
             => Format();

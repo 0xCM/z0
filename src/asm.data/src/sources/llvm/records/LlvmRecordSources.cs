@@ -20,8 +20,6 @@ namespace Z0.llvm
 
         public Index<TextLine> InstructionSummary;
 
-        public Index<TextLine> Regs;
-
         public Index<TextLine> ValueTypesSummary;
 
         public Index<TextLine> ValueTypesDetails;
@@ -32,7 +30,6 @@ namespace Z0.llvm
             IntrinsicsDetails.Count +
             InstructionDetails.Count +
             InstructionSummary.Count +
-            Regs.Count +
             ValueTypesSummary.Count +
             ValueTypesDetails.Count;
 
@@ -41,6 +38,5 @@ namespace Z0.llvm
             [MethodImpl(Inline)]
             get => TotalLineCount() == 0;
         }
-
     }
 }

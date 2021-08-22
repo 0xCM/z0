@@ -5,21 +5,17 @@
 namespace Z0.llvm
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-    using static core;
 
     partial struct MC
     {
         public class AsmIdAttribute : Attribute
         {
-            public AsmIdAttribute(McAsmId id)
+            public AsmIdAttribute(AsmId id)
             {
                 Id = id;
             }
 
-            public McAsmId Id {get;}
+            public AsmId Id {get;}
         }
     }
 }

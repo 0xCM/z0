@@ -23,18 +23,18 @@ namespace Z0.Asm
 
         public ushort SdmKey;
 
-        public McAsmId AsmId;
+        public AsmId AsmId;
 
-        public uint Encoding;
+        public AsmOpCodeBits Bits;
 
         public CharBlock48 Expr;
 
         [MethodImpl(Inline)]
-        public AsmOpCode(ushort key, McAsmId asmid, uint encoding, CharBlock48 expr)
+        public AsmOpCode(ushort key, AsmId asmid, AsmOpCodeBits bits, CharBlock48 expr)
         {
             AsmId = 0;
             SdmKey = key;
-            Encoding = encoding;
+            Bits = bits;
             Expr = expr;
         }
 
@@ -47,19 +47,19 @@ namespace Z0.Asm
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Encoding == 0;
+            get => Bits.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Encoding != 0;
+            get => Bits.IsNonEmpty;
         }
 
         Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => slice(bytes(Encoding),0, 3);
+            get => slice(bytes(Bits),0, 3);
         }
 
         public bit Rex

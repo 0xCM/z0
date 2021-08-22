@@ -51,7 +51,7 @@ namespace Z0.Asm
                 matches.Add(match);
             }
 
-            SQ.match(n,src,marker,OnMatch);
+            SQ.match(n, src, marker, OnMatch);
             return matches.ViewDeposited();
         }
 

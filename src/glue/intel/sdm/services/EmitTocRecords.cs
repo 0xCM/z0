@@ -5,77 +5,13 @@
 namespace Z0.Asm
 {
     using System;
+
     using static core;
     using static SdmParsers;
     using static SdmModels;
 
     partial class IntelSdm
     {
-        /// <summary>
-        /// Distills <see cref='AsmForm'/> values from a <see cref='SdmOpCodeDetail'/> sequence
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [Op]
-        static Index<AsmForm> forms(ReadOnlySpan<SdmOpCodeDetail> src)
-        {
-            var count = src.Length;
-            var buffer = alloc<AsmForm>(count);
-            ref var dst = ref first(buffer);
-
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(src,i);
-                ref var opcode = ref SdmModels.opcode(record, out _);
-                ref var form = ref seek(dst,i);
-                form = asm.form(
-                    asm.sig(opcode.Mnemonic.Format(), SdmModels.operands(opcode)),
-                    asm.opcode((ushort)opcode.OpCodeId, opcode.Expr)
-                    );
-            }
-            return buffer;
-        }
-
-        public ReadOnlySpan<AsmForm> DeriveAsmForms(FS.FilePath src)
-        {
-            const string Pattern = "{0,-80} | {1}:{2} | {3}:{4}";
-            var result = LoadImportedOpCodes(src, out var details);
-            if(result.Fail)
-            {
-                Error(result.Message);
-                return default;
-            }
-
-            var ws = Ws.Tables();
-            var dst = ws.Root + FS.file("asm.forms", FS.Txt);
-            using var writer = dst.UnicodeWriter();
-            var forms = IntelSdm.forms(details).View;
-            var count = forms.Length;
-
-            for(var i=0; i<count; i++)
-                writer.WriteLine(skip(forms,i));
-
-            return forms;
-        }
-
-
-        public Outcome LoadImportedOpCodes(FS.FilePath src, out SdmOpCodeDetail[] dst)
-        {
-            var result = Outcome.Success;
-            dst = sys.empty<SdmOpCodeDetail>();
-            var lines = src.ReadLines(TextEncodingKind.Unicode).View;
-            result = TextGrids.load(lines, out var grid);
-            if(result.Fail)
-                return result;
-            var count = grid.RowCount;
-
-            dst = alloc<SdmOpCodeDetail>(count);
-            result = AsmParser.parse(grid, dst);
-            if(result.Fail)
-                return result;
-
-            return result;
-        }
-
         string VolumeMarker(byte vol)
             => string.Format("Vol. {0}", vol);
 

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Root;
 
@@ -19,13 +20,17 @@ namespace Z0
         public TableRow(uint index, TableCell[] cells)
         {
             Seq = index;
-            _Cells = cells;
+            _Cells = cells ?? new TableCell[]{};
         }
 
         public Span<TableCell> Cells
         {
             [MethodImpl(Inline)]
-            get => _Cells;
+            get => _Cells ?? Span<TableCell>.Empty;
         }
+
+
+        public static TableRow Empty
+            => new TableRow(0, new TableCell[0]{});
     }
 }

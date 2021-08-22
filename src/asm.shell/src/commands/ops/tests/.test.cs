@@ -22,9 +22,8 @@ namespace Z0.Asm
 
 
             var op0 = asm.imm8(32);
-            var dag0 = LlvmValues.dag(McAsmId.AAD8i8, &op0);
-
-
+            var dag0 = LlvmValues.dag(AsmId.AAD8i8, &op0);
+            Write(dag0.Format());
 
             return result;
         }

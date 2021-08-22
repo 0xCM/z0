@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct TableCell
+    public readonly struct TableCell : ITextual
     {
         public object Content {get;}
 
@@ -18,5 +18,11 @@ namespace Z0
         {
             Content = content;
         }
+
+        public string Format()
+            => Content != null ? Content.ToString() : RP.Null;
+
+        public override string ToString()
+            => Format();
     }
 }

@@ -10,15 +10,11 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using static SdmModels.EncodingSigs;
-
-    using K = SdmModels.ModRmEncKind;
     using SQ = SymbolicQuery;
 
     [ApiHost]
     public readonly partial struct SdmModels
     {
-
         public static ReadOnlySpan<string> operands(in SdmOpCode src)
             => text.split(src.Operands.Format(), Chars.Comma).Select(op => op.Trim());
 
@@ -272,50 +268,6 @@ namespace Z0.Asm
             return dst.Emit();
         }
 
-        [Op]
-        public static bit parse(string src, out ModRmEncKind dst)
-        {
-            dst = 0;
-            var i = text.index(src, ModRm);
-            if(i < 0)
-                return false;
 
-            var content = text.right(src,Chars.Colon);
-            switch(src)
-            {
-                case ModRm_RmR:
-                    dst = K.RmR;
-                break;
-
-                case ModRm_RmW:
-                    dst = K.RmW;
-                break;
-
-                case ModRm_RmRW:
-                    dst = K.RmRW;
-                break;
-
-                case ModRm_RegR:
-                    dst = K.RegR;
-                break;
-
-                case ModRm_RegW:
-                    dst = K.RegW;
-                break;
-
-                case ModRm_RegRW:
-                    dst = K.RegRW;
-                break;
-
-                case ModRm_RmR11:
-                    dst = K.RmRMust11;
-                break;
-
-                case ModRm_RmWNot11:
-                    dst = K.RmWNot11;
-                break;
-            }
-            return dst != 0;
-        }
     }
 }

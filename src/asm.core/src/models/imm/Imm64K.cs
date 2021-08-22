@@ -21,7 +21,7 @@ namespace Z0
     {
         public K Content {get;}
 
-        public ImmWidth Width => ImmWidth.W64;
+        public ImmWidthCode Width => ImmWidthCode.W64;
 
         public ImmKind Kind => ImmKind.Imm64;
 
@@ -34,7 +34,7 @@ namespace Z0
             => bw64(this);
 
         public string Format()
-            => HexFormat.format(Content, W);
+            => HexFormat.format(Content, W, true);
 
         public override string ToString()
             => Format();

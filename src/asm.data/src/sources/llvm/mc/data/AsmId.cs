@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    public enum McAsmId : ushort
+    public enum AsmId : ushort
     {
         PHI	= 0,
         INLINEASM	= 1,

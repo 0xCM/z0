@@ -27,57 +27,97 @@ namespace Z0.llvm
         i128           =   7,   // This is a 128 bit integer value
 
         FIRST_INTEGER_VALUETYPE = i1,
+
         LAST_INTEGER_VALUETYPE  = i128,
 
         bf16           =   8,   // This is a 16 bit brain floating point value
+
         f16            =   9,   // This is a 16 bit floating point value
+
         f32            =  10,   // This is a 32 bit floating point value
+
         f64            =  11,   // This is a 64 bit floating point value
+
         f80            =  12,   // This is a 80 bit floating point value
+
         f128           =  13,   // This is a 128 bit floating point value
+
         ppcf128        =  14,   // This is a PPC 128-bit floating point value
 
         FIRST_FP_VALUETYPE = bf16,
+
         LAST_FP_VALUETYPE  = ppcf128,
 
         v1i1           =  15,   //    1 x i1
+
         v2i1           =  16,   //    2 x i1
+
         v4i1           =  17,   //    4 x i1
+
         v8i1           =  18,   //    8 x i1
+
         v16i1          =  19,   //   16 x i1
+
         v32i1          =  20,   //   32 x i1
+
         v64i1          =  21,   //   64 x i1
+
         v128i1         =  22,   //  128 x i1
+
         v256i1         =  23,   //  256 x i1
+
         v512i1         =  24,   //  512 x i1
+
         v1024i1        =  25,   // 1024 x i1
 
         v1i8           =  26,   //    1 x i8
+
         v2i8           =  27,   //    2 x i8
+
         v4i8           =  28,   //    4 x i8
+
         v8i8           =  29,   //    8 x i8
+
         v16i8          =  30,   //   16 x i8
+
         v32i8          =  31,   //   32 x i8
+
         v64i8          =  32,   //   64 x i8
+
         v128i8         =  33,   //  128 x i8
+
         v256i8         =  34,   //  256 x i8
+
         v512i8         =  35,   //  512 x i8
+
         v1024i8        =  36,   // 1024 x i8
 
         v1i16          =  37,   //   1 x i16
+
         v2i16          =  38,   //   2 x i16
+
         v3i16          =  39,   //   3 x i16
+
         v4i16          =  40,   //   4 x i16
+
         v8i16          =  41,   //   8 x i16
+
         v16i16         =  42,   //  16 x i16
+
         v32i16         =  43,   //  32 x i16
+
         v64i16         =  44,   //  64 x i16
+
         v128i16        =  45,   // 128 x i16
+
         v256i16        =  46,   // 256 x i16
+
         v512i16        =  47,   // 512 x i16
 
         v1i32          =  48,   //    1 x i32
+
         v2i32          =  49,   //    2 x i32
+
         v3i32          =  50,   //    3 x i32
         v4i32          =  51,   //    4 x i32
         v5i32          =  52,   //    5 x i32

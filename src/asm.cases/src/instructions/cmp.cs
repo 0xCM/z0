@@ -4,13 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public enum AsmCaseKind : byte
+
+    using static Root;
+    using static core;
+
+    partial class AsmCaseArchive
     {
+        public static AsmEncodingCases cmp()
+        {
+            var dst = new AsmEncodingCases(alloc<AsmEncodingCase>(2));
 
-        Rule,
 
-        Sig,
+            return dst;
+        }
 
-        OpCode,
     }
 }

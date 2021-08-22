@@ -9,6 +9,7 @@
       <ProjectReference Include="$(Core)" />
       <ProjectReference Include="$(Resources)" />
       <ProjectReference Include="$(Events)" />
+      <ProjectReference Include="$(Ws)" />
   </ItemGroup>
 
   <ItemGroup>

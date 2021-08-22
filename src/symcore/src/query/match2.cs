@@ -15,7 +15,7 @@ namespace Z0
     partial struct SymbolicQuery
     {
         [Op]
-        public static int match(ReadOnlySpan<char> src, char c0, char c1)
+        public static void match(ReadOnlySpan<char> src, char c0, char c1, Action<int> signal)
         {
             var count = src.Length;
             var level = z8;
@@ -30,7 +30,7 @@ namespace Z0
                     break;
                     case 1:
                         if(SQ.match(c, c1))
-                           return i-level;
+                            signal(i-level);
                         level = 0;
                     break;
                     default:
@@ -38,7 +38,6 @@ namespace Z0
                         break;
                 }
             }
-            return -1;
         }
     }
 }

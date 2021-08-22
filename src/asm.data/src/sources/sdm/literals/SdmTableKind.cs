@@ -14,7 +14,7 @@ namespace Z0.Asm
             OpCodes,
 
             [Symbol("Encoding")]
-            Encoding,
+            EncodingRule,
 
             [Symbol("BinaryFormat")]
             BinaryFormat,

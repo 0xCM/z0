@@ -49,9 +49,6 @@ namespace Z0.llvm
                         break;
                     }
                 break;
-                case LlvmDatasetKind.Regs:
-                        file = FS.file(X86Regs, FS.Txt);
-                break;
                 case LlvmDatasetKind.ValueTypes:
                     switch(detail)
                     {
@@ -125,13 +122,6 @@ namespace Z0.llvm
                             }
                         break;
                     }
-                break;
-                case LlvmDatasetKind.Regs:
-                            {
-                                path = LlvmDatasets.path(sources,single);
-                                using var reader = path.Utf8LineReader();
-                                dst.Regs = reader.ReadAll().ToArray();
-                            }
                 break;
                 case LlvmDatasetKind.ValueTypes:
                     switch(detail)

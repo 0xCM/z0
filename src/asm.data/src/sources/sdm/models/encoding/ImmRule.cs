@@ -23,13 +23,17 @@ namespace Z0.Asm
                 Data = data;
             }
 
-            public EncodingClass Class => EncodingClass.Imm;
+            public EncodingClass Class
+                => EncodingClass.Imm;
 
-            public bit Imm8() => (Data & 1) != 0;
+            public bit Imm8()
+                => (Data & 1) != 0;
 
-            public bit Imm16() => (Data & 2) != 0;
+            public bit Imm16()
+                => (Data & 2) != 0;
 
-            public bit Imm32() => (Data & 4) != 0;
+            public bit Imm32()
+                => (Data & 4) != 0;
 
             public static ImmRule Empty => default;
         }

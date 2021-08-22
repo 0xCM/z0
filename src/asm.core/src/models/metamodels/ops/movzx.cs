@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static AsmInstructions;
     using static Root;
     using static core;
-    using static llvm.McAsmId;
+    using static llvm.AsmId;
 
     using M = AsmMetamodel;
 
@@ -48,7 +48,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static void movzx(r16 dst, r8 src, ref AsmInfo info)
         {
-            const McAsmId Id = MOVZX16rr8;
+            const AsmId Id = MOVZX16rr8;
             const string OpCodeExpr = "0F B6 /r";
             const string SigExpr = "MOVZX r16, r8";
             info.Id = Id;
@@ -59,7 +59,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static void movzx(r16 dst, m8 src, ref AsmInfo info)
         {
-            const McAsmId Id = MOVZX16rm8;
+            const AsmId Id = MOVZX16rm8;
             const string OpCodeExpr = "0F B6 /r";
             const string SigExpr = "MOVZX r16, m8";
             info.Id = Id;
@@ -70,7 +70,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static void movzx(r32 dst, r8 src, ref AsmInfo info)
         {
-            const McAsmId Id = MOVZX32rr8;
+            const AsmId Id = MOVZX32rr8;
             const string OpCodeExpr = "0F B6 /r";
             const string SigExpr = "MOVZX r32, r8";
             info.Id = Id;
@@ -81,7 +81,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static void movzx(r32 dst, m8 src, ref AsmInfo info)
         {
-            const McAsmId Id = MOVZX32rm8;
+            const AsmId Id = MOVZX32rm8;
             const string OpCodeExpr = "0F B6 /r";
             const string SigExpr = "MOVZX r32, m8";
             info.Id = Id;
@@ -92,7 +92,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static void movzx(r32 dst, r16 src, ref AsmInfo info)
         {
-            const McAsmId Id = MOVZX32rr16;
+            const AsmId Id = MOVZX32rr16;
             const string OpCodeExpr = "0F B7 /r";
             const string SigExpr = "MOVZX r32, r16";
             info.Id = Id;
@@ -103,7 +103,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static void movzx(r32 dst, m16 src, ref AsmInfo info)
         {
-            const McAsmId Id = MOVZX32rm16;
+            const AsmId Id = MOVZX32rm16;
             const string OpCodeExpr = "0F B7 /r";
             const string SigExpr = "MOVZX r32, m16";
             info.Id = Id;
@@ -114,7 +114,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static void movzx(r64 dst, m8 src, ref AsmInfo info)
         {
-            const McAsmId Id = MOVZX64rm8;
+            const AsmId Id = MOVZX64rm8;
             const string OpCodeExpr = "REX.W + 0F B6 /r";
             const string SigExpr = "MOVZX r64, m8";
             info.Id = Id;
@@ -125,7 +125,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static void movzx(r64 dst, r8 src, ref AsmInfo info)
         {
-            const McAsmId Id = MOVZX64rr8;
+            const AsmId Id = MOVZX64rr8;
             const string OpCodeExpr = "REX.W + 0F B6 /r";
             const string SigExpr = "MOVZX r64, r8";
             info.Id = Id;
@@ -136,7 +136,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static void movzx(r64 dst, r16 src, ref AsmInfo info)
         {
-            const McAsmId Id = MOVZX64rr16;
+            const AsmId Id = MOVZX64rr16;
             const string OpCodeExpr = "REX.W + 0F B7 /r";
             const string SigExpr = "MOVZX r64, r16";
             info.Id = Id;
@@ -147,7 +147,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static void movzx(r64 dst, m16 src, ref AsmInfo info)
         {
-            const McAsmId Id = MOVZX64rm16;
+            const AsmId Id = MOVZX64rm16;
             const string OpCodeExpr = "REX.W + 0F B7 /r";
             const string SigExpr = "MOVZX r64, m16";
             info.Id = Id;

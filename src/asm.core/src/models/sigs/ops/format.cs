@@ -31,7 +31,10 @@ namespace Z0.Asm
                     break;
 
                 if(j != 0)
+                {
                     seek(dst,i++) = Chars.Comma;
+                    seek(dst,i++) = Chars.Space;
+                }
 
                 text.copy(op.Text, ref i, dst);
             }

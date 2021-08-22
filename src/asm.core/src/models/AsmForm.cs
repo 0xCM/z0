@@ -23,7 +23,7 @@ namespace Z0.Asm
             OpCode = oc;
         }
 
-        public McAsmId AsmId
+        public AsmId AsmId
         {
             [MethodImpl(Inline)]
             get => OpCode.AsmId;

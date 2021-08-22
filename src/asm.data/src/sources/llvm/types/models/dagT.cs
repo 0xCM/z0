@@ -29,6 +29,12 @@ namespace Z0.llvm
                 [MethodImpl(Inline)]
                 get => size<dag<T>>();
             }
+
+            public string Format()
+                => Def.Format();
+
+            public override string ToString()
+                => Format();
         }
     }
 }

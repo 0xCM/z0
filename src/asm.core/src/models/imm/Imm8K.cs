@@ -25,13 +25,13 @@ namespace Z0
         public Imm8(K src)
             => Content = src;
 
-        public ImmWidth Width => ImmWidth.W8;
+        public ImmWidthCode Width => ImmWidthCode.W8;
 
         public ImmKind Kind => ImmKind.Imm8;
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Content, W);
+            => HexFormat.format(Content, W, true);
 
         [MethodImpl(Inline)]
         public byte AsPrimitive()

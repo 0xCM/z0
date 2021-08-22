@@ -124,30 +124,6 @@ namespace Z0.Asm
             return i - i0;
         }
 
-        [MethodImpl(Inline), Op]
-        public static uint hexbytes(Hex64 src, Span<char> dst)
-        {
-            var i=0u;
-            var data = bytes(src);
-            var count = data.Length;
-            for(var j=0; j<count; j++)
-            {
-                ref readonly var b = ref skip(data, j);
-                Hex.render(LowerCase, (Hex8)b, ref i, dst);
-                if(j != count - 1)
-                    seek(dst, i++) = Chars.Space;
-            }
-            return i;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static CharBlock24 hexbytes(Hex64 src)
-        {
-            var dst = CharBlock24.Null;
-            hexbytes(src, dst.Data);
-            return dst;
-        }
-
         const string MarkerText = "#";
 
         const AsmCommentMarker CommentMarker = AsmCommentMarker.Hash;

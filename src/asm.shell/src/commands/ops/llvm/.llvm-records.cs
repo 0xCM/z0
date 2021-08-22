@@ -4,14 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using Z0.llvm;
-
+    using static core;
     partial class AsmCmdService
     {
         [CmdOp(".llvm-records")]
-        Outcome LlvmRecords(CmdArgs args)
+        Outcome LlRecords(CmdArgs args)
         {
-            var sources = LlvmRecordSources();
+            var names = LlvmRecords.Defs(llvm.LlvmDatasetKind.Instructions);
+            iter(names, n => Write(n));
             return true;
         }
     }

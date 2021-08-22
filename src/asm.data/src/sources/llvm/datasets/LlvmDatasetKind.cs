@@ -12,8 +12,6 @@ namespace Z0.llvm
 
         Instructions = 2,
 
-        Regs = 4,
-
         ValueTypes = 8,
 
         Summary = 16,

@@ -23,7 +23,7 @@ namespace Z0
 
         public static W W => default;
 
-        public ImmWidth Width => ImmWidth.W32;
+        public ImmWidthCode Width => ImmWidthCode.W32;
 
         public ImmKind Kind => ImmKind.Imm32;
 
@@ -46,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Content, W);
+            => HexFormat.format(Content, W, true);
 
         public override string ToString()
             => Format();

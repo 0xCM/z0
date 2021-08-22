@@ -14,11 +14,45 @@ namespace Z0.llvm
     partial struct LlvmValues
     {
         [MethodImpl(Inline)]
-        public static unsafe dag<O,A0> render<O,A0>(in dag<O,A0> src, Span<char> dst)
+        public static string format<O,A0>(in dag<O,A0> src)
             where O : unmanaged
             where A0 : unmanaged
         {
+            const string Pattern = "({0} {1})";
+            return string.Format(Pattern, src.Operator, src.Arg0);
+        }
 
+        [MethodImpl(Inline)]
+        public static string format<O,A0,A1>(in dag<O,A0,A1> src)
+            where O : unmanaged
+            where A0 : unmanaged
+            where A1 : unmanaged
+        {
+            const string Pattern = "({0} {1},{2})";
+            return string.Format(Pattern, src.Operator, src.Arg0, src.Arg1);
+        }
+
+        [MethodImpl(Inline)]
+        public static string format<O,A0,A1,A2>(in dag<O,A0,A1,A2> src)
+            where O : unmanaged
+            where A0 : unmanaged
+            where A1 : unmanaged
+            where A2 : unmanaged
+        {
+            const string Pattern = "({0} {1},{2},{3})";
+            return string.Format(Pattern, src.Operator, src.Arg0, src.Arg1, src.Arg2);
+        }
+
+        [MethodImpl(Inline)]
+        public static string format<O,A0,A1,A2,A3>(in dag<O,A0,A1,A2,A3> src)
+            where O : unmanaged
+            where A0 : unmanaged
+            where A1 : unmanaged
+            where A2 : unmanaged
+            where A3 : unmanaged
+        {
+            const string Pattern = "({0} {1},{2},{3})";
+            return string.Format(Pattern, src.Operator, src.Arg0, src.Arg1, src.Arg2, src.Arg3);
         }
 
         [MethodImpl(Inline)]

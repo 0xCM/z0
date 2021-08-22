@@ -9,11 +9,10 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static SdmModels;
-    using static SdmCsvLiterals;
 
     partial class IntelSdm
     {
-        public Index<SdmOpCodeDetail> ImportCsvOpCodes(ReadOnlySpan<FS.FilePath> src)
+        public Index<SdmOpCodeDetail> ImportOpCodeDetails(ReadOnlySpan<FS.FilePath> src)
         {
             var result = Outcome.Success;
 
@@ -22,6 +21,7 @@ namespace Z0.Asm
             Index<SdmOpCodeDetail> storage = alloc<SdmOpCodeDetail>(4000);
             var buffer = storage.Edit;
             var counter = 0u;
+            var _tables = list<Table>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var inpath = ref skip(src,i);
@@ -42,7 +42,6 @@ namespace Z0.Asm
             }
 
             var rows = slice(buffer,0,counter).ToArray().Sort();
-
             for(var i=0u; i<rows.Length; i++)
                 seek(rows,i).OpCodeId = i + 1;
 

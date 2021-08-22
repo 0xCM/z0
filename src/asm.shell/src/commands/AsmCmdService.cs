@@ -43,8 +43,6 @@ namespace Z0.Asm
 
         AsmTables AsmTables;
 
-        AsmLoader AsmLoader;
-
         ApiPacks ApiPacks;
 
         ApiHexPacks ApiHexPacks;
@@ -61,6 +59,8 @@ namespace Z0.Asm
 
         IPolyrand Random;
 
+        AsmEtl AsmEtl;
+
         IWorkspace ApiWs;
 
         IWorkspace OutWs;
@@ -76,6 +76,8 @@ namespace Z0.Asm
         ShellEnv ShellEnv;
 
         LlvmRecordSources _LlvmRecordSources;
+
+        llvm.Records LlvmRecords;
 
         byte[] _Assembled;
 
@@ -112,7 +114,6 @@ namespace Z0.Asm
             AsmToolchain = Wf.AsmToolchain();
             AsmTables = Wf.AsmTables();
             Random = Rng.wyhash64();
-            AsmLoader = Wf.AsmLoader();
             ApiHexPacks = Wf.ApiHexPacks();
             ApiWs = Ws.Api();
             OutWs = Ws.Output();
@@ -121,6 +122,8 @@ namespace Z0.Asm
             DataSources = Ws.Sources();
             ApiCatalogs = Wf.ApiCatalogs();
             AsmToolSvc = Wf.AsmTools();
+            AsmEtl = Wf.AsmEtl();
+            LlvmRecords = Wf.LlvmRecords();
             State.DevWs(Ws);
         }
 
@@ -140,37 +143,6 @@ namespace Z0.Asm
             if(ResPack.IsEmpty)
                 ResPack = CliMemoryMap.create(Db.Package("respack") + FS.file("z0.respack", FS.Dll));
             return ResPack;
-        }
-
-        LlvmRecordSources LlvmRecordSources()
-        {
-            if(_LlvmRecordSources.IsEmtpty)
-            {
-                var svc = Wf.LlvmDatasets(DataSources);
-                var result = svc.Load(LlvmDatasetKind.Instructions | LlvmDatasetKind.Details, ref _LlvmRecordSources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.InstructionDetails.Count));
-
-                result = svc.Load(LlvmDatasetKind.Instructions | LlvmDatasetKind.Summary, ref _LlvmRecordSources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.InstructionSummary.Count));
-
-                result = svc.Load(LlvmDatasetKind.Regs, ref _LlvmRecordSources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.Regs.Count));
-
-                result = svc.Load(LlvmDatasetKind.Intrinsics | LlvmDatasetKind.Details, ref _LlvmRecordSources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.IntrinsicsDetails.Count));
-
-                result = svc.Load(LlvmDatasetKind.Intrinsics | LlvmDatasetKind.Summary, ref _LlvmRecordSources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.IntrinsicsSummary.Count));
-
-                result = svc.Load(LlvmDatasetKind.ValueTypes | LlvmDatasetKind.Summary, ref _LlvmRecordSources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.ValueTypesSummary.Count));
-
-                result = svc.Load(LlvmDatasetKind.ValueTypes | LlvmDatasetKind.Details, ref _LlvmRecordSources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.ValueTypesDetails.Count));
-
-                Write(string.Format("Loaded {0} lines", _LlvmRecordSources.TotalLineCount()));
-            }
-            return _LlvmRecordSources;
         }
 
         AddressMap NativeAddressMap
@@ -218,6 +190,13 @@ namespace Z0.Asm
             return src;
         }
 
+        ReadOnlySpan<llvm.OpCodeSpec> LlvmOpCodes()
+        {
+            if(State.LlvmOpCodes().IsEmpty)
+                State.LlvmOpCodes(MC.opcodes());
+            return State.LlvmOpCodes();
+        }
+
         void Emitted(FS.FilePath dst)
             => Write(string.Format("Emitted {0}", dst.ToUri()));
 
@@ -253,9 +232,9 @@ namespace Z0.Asm
                 return State.ProcessAsm();
 
             var path = ApiArchive.ProcessAsmPath();
-            var buffer = alloc<ProcessAsmRecord>(AsmLoader.ProcessAsmCount(path));
+            var buffer = alloc<ProcessAsmRecord>(AsmEtl.ProcessAsmCount(path));
             Write(string.Format("Loading process asm from {0}", path.ToUri()));
-            var result = AsmLoader.LoadProcessAsm(path, buffer);
+            var result = AsmEtl.LoadProcessAsm(path, buffer);
             if(result.Fail)
             {
                 Error(result.Message);
