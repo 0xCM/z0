@@ -20,5 +20,10 @@ namespace Z0.Asm
 
             return result;
         }
+
+        void EmitRegTokens()
+        {
+
+        }
     }
 }

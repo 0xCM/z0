@@ -19,17 +19,6 @@ namespace Z0
     [DataType("imm64")]
     public readonly struct Imm64 : IImm<Imm64,ulong>
     {
-        [MethodImpl(Inline)]
-        public static Imm64 from(ReadOnlySpan<byte> src)
-        {
-            var storage = z64;
-            ref var dst = ref @as<byte>(storage);
-            var count = min(W,src.Length);
-            for(var i=0; i<count; i++)
-                seek(dst,i) = skip(src,i);
-            return storage;
-        }
-
         public ulong Content {get;}
 
         public static W W => default;
@@ -104,10 +93,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Imm<ulong>(I src)
             => new Imm<ulong>(src);
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator Cell64(I src)
-        //     => new Cell64(src.Content);
 
         [MethodImpl(Inline)]
         public static implicit operator I(ulong src)

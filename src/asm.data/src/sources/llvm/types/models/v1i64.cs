@@ -11,7 +11,7 @@ namespace Z0.llvm
 
     using static LlvmValues;
 
-    public readonly partial struct LlvmTypes
+    partial struct LlvmTypes
     {
         /// <summary>
         ///  1 x i64 vector value

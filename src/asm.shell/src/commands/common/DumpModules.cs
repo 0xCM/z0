@@ -13,6 +13,9 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        FS.FolderPath ProjectOutDir(string id)
+            => OutWs.Root + FS.folder("projects") + FS.folder(State.Project().Format()) + FS.folder(id);
+
         Outcome DumpModules(CmdArgs args, FileModuleKind kind)
         {
             var result = Outcome.Success;
@@ -30,7 +33,7 @@ namespace Z0.Asm
             var tool = Toolspace.dumpbin;
             var project = State.Project();
             var rootdir = GetToolOut(args, tool);
-            var outdir = GetProjectOut(dumps);
+            var outdir = ProjectOutDir(dumps);
             var cmd = Cmd.cmdline(ToolWs().Script(tool, script).Format(PathSeparator.BS));
             var input = State.Files().View;
             var count = input.Length;

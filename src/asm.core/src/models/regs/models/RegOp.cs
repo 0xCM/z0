@@ -61,6 +61,12 @@ namespace Z0.Asm
             get => WidthCode;
         }
 
+        public RegKind RegKind
+        {
+            [MethodImpl(Inline)]
+            get => (RegKind)Data;
+        }
+
         public RegClass RegClass
         {
             [MethodImpl(Inline)]

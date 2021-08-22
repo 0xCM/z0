@@ -9,6 +9,7 @@ namespace Z0.Asm
     using static Hex8Seq;
 
     using H = Hex8Seq;
+    using K = AsmPrefixKind;
 
     public readonly struct AsmPrefixCodes
     {
@@ -16,57 +17,58 @@ namespace Z0.Asm
 
         public static RexPrefixCode RexB => RexPrefixCode.B;
 
-        /// <summary>
-        /// Classifies prefix domains
-        /// </summary>
-        public enum PrefixKind : byte
+        public enum VsibField : byte
         {
-            None = 0,
+            /// <summary>
+            /// VSIB.base, Bits [3:0]
+            /// </summary>
+            [Symbol("base")]
+            Base = 0,
 
-            [Domain(typeof(SegOverrideCode))]
+            /// <summary>
+            /// VSIB.index, Bits [5:3]
+            /// </summary>
+            [Symbol("index")]
+            Index = 3,
 
-            SegOverride = 2,
+            /// <summary>
+            /// VSIB.SS, Bits [7:6]
+            /// </summary>
+            [Symbol("SS")]
+            SS = 6,
+        }
 
-            [Domain(typeof(SizeOverrideCode))]
-            SizeOverride = 3,
+        /// <summary>
+        /// Defines REX field identifiers
+        /// </summary>
+        public enum RexFieldIndex : byte
+        {
+            [Symbol("b")]
+            B = 0,
 
-            [Domain(typeof(EscapeCode))]
-            Escape = 4,
+            [Symbol("x")]
+            X = 1,
 
-            [Domain(typeof(LockPrefixCode))]
-            Lock = 5,
+            [Symbol("r")]
+            R = 2,
 
-            [Domain(typeof(BndPrefixCode))]
-            Bnd = 6,
-
-            [Domain(typeof(BranchHintCode))]
-            BranchHint = 7,
-
-            [Domain(typeof(RepPrefixCode))]
-            Rep = 8,
-
-            [Domain(typeof(MandatoryPrefixCode))]
-            Mandatory = 9,
-
-            [Domain(typeof(RexPrefixCode))]
-            Rex = 10,
-
-            Vex = 11,
+            [Symbol("w")]
+            W = 3,
         }
 
         /// <summary>
         /// Defines the lock prefix code
         /// </summary>
-        [SymSource]
+        [SymSource(K.Lock)]
         public enum LockPrefixCode : byte
         {
             None = 0,
 
-            [Symbol("f0", "Lock Prefix")]
+            [Symbol("F0", "Lock Prefix")]
             LOCK = xf0,
         }
 
-        [SymSource]
+        [SymSource(K.BranchHint)]
         public enum BranchHintCode : byte
         {
             None = 0,
@@ -84,7 +86,7 @@ namespace Z0.Asm
             BNT = x3e,
         }
 
-        [SymSource]
+        [SymSource(K.SizeOverride)]
         public enum SizeOverrideCode
         {
             None = 0,
@@ -113,7 +115,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines the mandatory prefix codes as specified by Intel Vol II, 2.1.2
         /// </summary>
-        [SymSource]
+        [SymSource(K.Mandatory)]
         public enum MandatoryPrefixCode : byte
         {
             None = 0,
@@ -128,12 +130,12 @@ namespace Z0.Asm
             F3 = xf3,
         }
 
-        [SymSource]
+        [SymSource(K.Escape)]
         public enum EscapeCode : ushort
         {
             None = 0,
 
-            [Symbol("0f")]
+            [Symbol("0F")]
             x0F = 0x0F,
 
             [Symbol("0F38")]
@@ -143,7 +145,7 @@ namespace Z0.Asm
             x0F3A = 0x0F3A,
         }
 
-        [SymSource]
+        [SymSource(K.Bnd)]
         public enum BndPrefixCode : byte
         {
             None = 0,
@@ -155,7 +157,7 @@ namespace Z0.Asm
         /// <summary>
         /// The segment override codes as specified by Intel Vol II, 2.1.1
         /// </summary>
-        [SymSource]
+        [SymSource(K.SegOverride)]
         public enum SegOverrideCode : byte
         {
             None = 0,
@@ -179,70 +181,30 @@ namespace Z0.Asm
             GS = x65,
         }
 
-        [SymSource]
-        public enum VsibField : byte
-        {
-            /// <summary>
-            /// VSIB.base, Bits [3:0]
-            /// </summary>
-            [Symbol("base")]
-            Base = 0,
-
-            /// <summary>
-            /// VSIB.index, Bits [5:3]
-            /// </summary>
-            [Symbol("index")]
-            Index = 3,
-
-            /// <summary>
-            /// VSIB.SS, Bits [7:6]
-            /// </summary>
-            [Symbol("SS")]
-            SS = 6,
-        }
-
         /// <summary>
         /// Classfies vex prefix codes
         /// </summary>
-        [SymSource]
+        [SymSource(K.Vex)]
         public enum VexPrefixKind : byte
         {
-            [Symbol("xC4", "The leading byte of a 3-byte vex prefix sequence")]
+            [Symbol("C4", "The leading byte of a 3-byte vex prefix sequence")]
             xC4 = H.xc4,
 
-            [Symbol("xC5", "The leading byte of a 2-byte vex prefix sequence")]
+            [Symbol("C5", "The leading byte of a 2-byte vex prefix sequence")]
             xC5 = H.xc5,
-        }
-
-        /// <summary>
-        /// Defines REX field identifiers
-        /// </summary>
-        [SymSource]
-        public enum RexFieldIndex : byte
-        {
-            [Symbol("b")]
-            B = 0,
-
-            [Symbol("x")]
-            X = 1,
-
-            [Symbol("r")]
-            R = 2,
-
-            [Symbol("w")]
-            W = 3,
         }
 
         /// <summary>
         /// [0100 0001] | W:0 | R:0 | X:0 | B:1
         /// </summary>
         [Flags]
+        [SymSource(K.Rex)]
         public enum RexPrefixCode : byte
         {
             /// <summary>
             /// [0100 0000] => [W:0 | R:0 | X:0 | B:0]
             /// </summary>
-            [Symbol("REX", "[0100 0000] => [W:0 | R:0 | X:0 | B:0]")]
+            [Symbol("REX", "[0100 0000]")]
             Base = x40,
 
             /// <summary>
@@ -251,29 +213,29 @@ namespace Z0.Asm
             /// - The index field in the SIB byte
             /// - The reg field in the opcode byte
             /// </summary>
-            [Symbol("REX.B", "[0100 0001] => [W:0 | R:0 | X:0 | B:1]")]
+            [Symbol("REX.B", "[0100 0001]")]
             B = x41,
 
             /// <summary>
             /// Extends the index field in the SIB byte
             /// </summary>
-            [Symbol("REX.X", "[0100 0010] => [W:0 | R:0 | X:1 | B:0]")]
+            [Symbol("REX.X", "[0100 0010]")]
             X = x42,
 
             /// <summary>
             /// Extends the reg field in the ModR/M byte
             /// </summary>
-            [Symbol("REX.R", "[0100 0100] => [W:0 | R:1 | X:0 | B:0]")]
+            [Symbol("REX.R", "[0100 0100]")]
             R = x44,
 
             /// <summary>
             /// Wide, enables 64-bit execution
             /// </summary>
-            [Symbol("REX.W", "[0100 1000] => [W:1 | R:0 | X:0 | B:0]")]
+            [Symbol("REX.W", "[0100 1000]")]
             W = x48,
         }
 
-        [SymSource]
+        [SymSource(K.Rep)]
         public enum RepPrefixCode : byte
         {
             None = 0,

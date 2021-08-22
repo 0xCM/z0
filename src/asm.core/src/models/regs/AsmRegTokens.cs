@@ -833,37 +833,37 @@ namespace Z0.Asm
             /// <summary>
             /// Code segment register
             /// </summary>
-            [Symbol("cs", "Code segment register")]
+            [Symbol("cs")]
             cs = r0,
 
             /// <summary>
             /// Data segment register
             /// </summary>
-            [Symbol("ds", "Data segment register")]
+            [Symbol("ds")]
             ds = r1,
 
             /// <summary>
             /// Stack segment register
             /// </summary>
-            [Symbol("ss", "Stack segment register")]
+            [Symbol("ss")]
             ss = r2,
 
             /// <summary>
             /// Extra segment (1)
             /// </summary>
-            [Symbol("es", "Extra segment (1)")]
+            [Symbol("es")]
             es = r3,
 
             /// <summary>
             /// Extra segment (2)
             /// </summary>
-            [Symbol("fs","Extra segment (2)")]
+            [Symbol("fs")]
             fs = r4,
 
             /// <summary>
             /// Extra segment (3)
             /// </summary>
-            [Symbol("gs","Extra segment (3)")]
+            [Symbol("gs")]
             gs = r5,
         }
 
@@ -873,19 +873,30 @@ namespace Z0.Asm
         [SymSource(K.SysPtr), RegCode]
         public enum SPtrReg : byte
         {
-            [Symbol("GDTR","The global descriptor table register")]
+            /// <summary>
+            /// The global descriptor table register
+            /// </summary>
+            [Symbol("GDTR")]
             gdtr = r0,
 
-            [Symbol("LDTR","The localal descriptor table register")]
+            /// <summary>
+            /// The local descriptor table register
+            /// </summary>
+            [Symbol("LDTR")]
             ldtr = r1,
 
-            [Symbol("IDTR","The interrupt descriptor table register")]
+
+            /// <summary>
+            /// The interrupt descriptor table register
+            /// </summary>
+            [Symbol("IDTR")]
             idtr = r2,
         }
 
         /// <summary>
         /// Specifies the MMX registers
         /// mmx0, mmx1, mmx2, mmx3, mmx4, mmx5, mmx6, mmx7
+        /// "The interrupt descriptor table register"
         /// </summary>
         [SymSource(K.Mmx), RegCode]
         public enum MmxReg : byte

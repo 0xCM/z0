@@ -16,7 +16,20 @@ namespace Z0.Asm
     partial class AsmCmdService
     {
         [CmdOp(".test")]
-        Outcome Test(CmdArgs args)
+        unsafe Outcome Test(CmdArgs args)
+        {
+            var result = Outcome.Success;
+
+
+            var op0 = asm.imm8(32);
+            var dag0 = LlvmValues.dag(McAsmId.AAD8i8, &op0);
+
+
+
+            return result;
+        }
+
+        Outcome TestTokenMaps()
         {
             var result = Outcome.Success;
 
@@ -37,8 +50,8 @@ namespace Z0.Asm
             }
 
             return result;
-        }
 
+        }
         Outcome ImportDumps()
         {
             var result = Outcome.Success;

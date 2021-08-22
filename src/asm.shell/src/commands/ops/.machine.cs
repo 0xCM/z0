@@ -31,14 +31,15 @@ namespace Z0.Asm
         Outcome EmitMachineTables(CmdArgs args)
         {
             var result = Outcome.Success;
+            var tables = Ws.Tables();
             var tokens = Wf.AsmTokens();
             EmitTokens(tokens.RegTokens());
             EmitTokens(tokens.OpCodeTokens());
             EmitTokens(tokens.SigTokens());
             EmitTokens(tokens.ConditonTokens());
-            var dst = Ws.Tables().Table(WsAtoms.machine,"classes.asm.operands");
-            EmitSymKinds(Symbols.index<AsmOpClass>(),dst);
-            EmitSymLiterals<AsmPrefixCodes.RexPrefixCode>(Ws.Tables().Table(WsAtoms.machine,"symbols.asm.prefix.rex"));
+            EmitTokens(tokens.PrefixTokens());
+            EmitSymKinds(Symbols.index<AsmOpClass>(), tables.Table(WsAtoms.machine,"classes.asm.operands"));
+            EmitSymIndex<RegClassCode>(tables.Table(WsAtoms.machine, "classes.asm.regs"));
             return result;
 
         }

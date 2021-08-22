@@ -8,28 +8,16 @@ namespace Z0.Asm
 
     partial class AsmSigs
     {
-        [SymSource(K.Decorator)]
-        public enum DecoratorToken : byte
+        [SymSource(K.Rounding)]
+        public enum RoundingToken : byte
         {
             None = 0,
-
-            [Symbol("{k1}")]
-            k1,
-
-            [Symbol("{z}")]
-            z,
 
             [Symbol("{sae}")]
             sae,
 
             [Symbol("{er}")]
             er,
-
-            [Symbol("bcast32")]
-            bcast32,
-
-            [Symbol("bcast64")]
-            bcast64,
         }
 
         [SymSource(K.SysReg)]
@@ -107,14 +95,17 @@ namespace Z0.Asm
         [SymSource(K.MaskReg)]
         public enum MaskRegToken : byte
         {
+            [Symbol("{z}")]
+            z,
+
             [Symbol("{k1}{z}", "A mask register used as instruction writemask")]
-            k1zMask,
+            k1z,
 
             [Symbol("{k1}", "A mask register used as instruction writemask for instructions that do not allow zeroing-masking but support merging-masking")]
-            k1Mask,
+            k1,
 
             [Symbol("k1", "A mask register used as a regular operand (either destination or source)")]
-            k1,
+            k1Reg,
         }
 
         [SymSource(K.VecReg)]
@@ -235,11 +226,14 @@ namespace Z0.Asm
             [Symbol("m64", "A 64-bit operand in memory")]
             m64,
 
-            [Symbol("m128", "A memory double quadword operand in memory")]
+            [Symbol("m128", "A 128-bit memory operand")]
             m128,
 
-            [Symbol("m256", "A 256-bit operand in memory. This nomenclature is used only with AVX instructions")]
+            [Symbol("m256", "A 256-bit memory operand")]
             m256,
+
+            [Symbol("m512", "A 512-bit memory operand")]
+            m512,
         }
 
         [SymSource(K.MemPair)]
@@ -289,8 +283,11 @@ namespace Z0.Asm
             [Symbol("mV", "A vector memory operand; the operand size is dependent on the instruction")]
             mV,
 
-            [Symbol("xmm/m128", "An XMM register or a 128-bit memory operand. The 128-bit XMM registers are XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation")]
+            [Symbol("xmm/m128", "An XMM register or a 128-bit memory operand")]
             xmm128,
+
+            [Symbol("zmm/m512", "A ZMM register or a 512-bit memory operand")]
+            zmm512,
         }
 
         [SymSource(K.Vsib)]
@@ -347,6 +344,17 @@ namespace Z0.Asm
             rel32,
         }
 
+
+        [SymSource(K.Ptr)]
+        public enum PtrToken : byte
+        {
+            [Symbol("ptr16:16", "A far pointer typically to a code segment different from that of the instruction. The notation 16:16 indicates that the value of the pointer has two parts. The value to the left of the colon is a 16- bit selector or value destined for the code segment register. The value to the right corresponds to the offset within the destination segment. The ptr16:16 symbol is used when the instruction's operand-size attribute is 16 bits E.G, CALL ptr16:16 (Call far, absolute, address given in operand")]
+            ptr16x16,
+
+            [Symbol("ptr16:32", "A far pointer typically to a code segment different from that of the instruction and similar to ptr16:16 notation; in this case the ptr16:32 symbol is used when the operand-size attribute is 32 bits A memory operand using SIB addressing form, where the index register is not used in address calculation, Scale is ignored. Only the base and displacement are used in effective address calculation E.G, CALL ptr16:32 (Call far, absolute, address given in operand)")]
+            ptr16x32,
+        }
+
         [SymSource(K.FarPtr)]
         public enum FarPtrToken : byte
         {
@@ -376,14 +384,14 @@ namespace Z0.Asm
             SRC3,
         }
 
-        [SymSource(K.Ptr)]
-        public enum PtrToken : byte
+        [SymSource(K.Broadcast)]
+        public enum BroadcastToken
         {
-            [Symbol("ptr16:16", "A far pointer typically to a code segment different from that of the instruction. The notation 16:16 indicates that the value of the pointer has two parts. The value to the left of the colon is a 16- bit selector or value destined for the code segment register. The value to the right corresponds to the offset within the destination segment. The ptr16:16 symbol is used when the instruction's operand-size attribute is 16 bits E.G, CALL ptr16:16 (Call far, absolute, address given in operand")]
-            ptr16x16,
+            [Symbol("bcast32", "Represents a 32-bit memory location that defines a scalar to broadcast to vector operands")]
+            bcast32,
 
-            [Symbol("ptr16:32", "A far pointer typically to a code segment different from that of the instruction and similar to ptr16:16 notation; in this case the ptr16:32 symbol is used when the operand-size attribute is 32 bits A memory operand using SIB addressing form, where the index register is not used in address calculation, Scale is ignored. Only the base and displacement are used in effective address calculation E.G, CALL ptr16:32 (Call far, absolute, address given in operand)")]
-            ptr16x32,
+            [Symbol("bcast64", "Represents a 64-bit memory location that defines a scalar to broadcast to vector operands")]
+            bcast64,
         }
 
         [SymSource(K.ZmmBCast)]
@@ -393,13 +401,13 @@ namespace Z0.Asm
             /// Represents a zmm vector, a 512-bit memory location or a 512-bit memory location or a 512-bit vector loaded from a 32-bit memory location
             /// </summary>
             [Symbol("zmm/m512/m32bcst", "Represents a zmm vector, a 512-bit memory location or a 512-bit memory location or a 512-bit vector loaded from a 32-bit memory location")]
-            Zmm512x32bcst,
+            z512x32bcst,
 
             /// <summary>
             /// Represents a zmm vector, a 512-bit memory location or a 512-bit memory location or a 512-bit vector loaded from a 64-bit memory location
             /// </summary>
             [Symbol("zmm/m512/m64bcst", "Represents a zmm vector, a 512-bit memory location or a 512-bit memory location or a 512-bit vector loaded from a 64-bit memory location")]
-            Zmm512x64bcst,
+            z512x64bcst,
         }
     }
 }

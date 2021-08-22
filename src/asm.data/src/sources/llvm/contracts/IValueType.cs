@@ -5,7 +5,6 @@
 namespace Z0.llvm
 {
     using static core;
-
     using static LlvmValues;
 
     public interface IValueType<T>

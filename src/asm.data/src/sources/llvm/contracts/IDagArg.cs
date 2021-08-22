@@ -2,16 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.llvm
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Root;
-
-    public readonly struct RegSeq
+    [Free]
+    public interface IDagArg
     {
 
     }
 
+    [Free]
+    public interface IDagArg<A> : IDagArg
+        where A : unmanaged
+    {
+
+    }
 }

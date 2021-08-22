@@ -18,7 +18,9 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var match = arg(args,0).Value;
-            var src = DataSources.DataSource(LlvmDatasetNames.TblgenRecords, LlvmDataSourceNames.X86Details, FS.Txt);
+            var def = string.Format("def {0}", match);
+            var @class =string.Format("class {0}", match);
+            var src = DataSources.DataSource(LlvmDatasetNames.TblgenRecords, LlvmDataSourceNames.X86Regs, FS.Txt);
             using var reader = src.Utf8LineReader();
             var ParsingRecord = false;
             var ParsingFields = false;
@@ -30,7 +32,7 @@ namespace Z0.Asm
             {
                 var content = line.Content;
 
-                if(text.begins(content, match))
+                if(text.begins(content, match) || text.begins(content, def) || text.begins(content, @class))
                 {
                     ParsingRecord = true;
                     name = text.left(content, Chars.Space);

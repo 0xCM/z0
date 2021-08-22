@@ -72,15 +72,15 @@ namespace Z0.Asm
             return i-i0;
         }
 
-        [Op]
-        public static string format(Register src)
-        {
-            const string Pattern = "[{0,-12} | {1,-8} | {2}]";
-            var index = Bitfields.format<RegIndexCode,byte>(src.Code, src.Name, 5);
-            var @class = Bitfields.format<RegClassCode,byte>(src.Class, src.Class.ToString(), 4);
-            var width = Enums.field<RegWidthCode,ushort>(src.Width, base10, "Width");
-            return string.Format(Pattern, index, @class, width);
-        }
+        // [Op]
+        // public static string format(Register src)
+        // {
+        //     const string Pattern = "[{0,-12} | {1,-8} | {2}]";
+        //     var index = Bitfields.format<RegIndexCode,byte>(src.Code, src.Name, 5);
+        //     var @class = Bitfields.format<RegClassCode,byte>(src.Class, src.Class.ToString(), 4);
+        //     var width = Enums.field<RegWidthCode,ushort>(src.Width, base10, "Width");
+        //     return string.Format(Pattern, index, @class, width);
+        // }
 
         [MethodImpl(Inline), Op]
         public static uint render8x3x3x2(in AsmHexCode src, ref uint i, Span<char> dst)

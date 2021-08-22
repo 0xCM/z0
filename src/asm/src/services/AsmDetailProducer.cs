@@ -13,8 +13,6 @@ namespace Z0.Asm
     public struct AsmInstructionDetail
     {
         public AsmMnemonicCode Mnemonic;
-
-        public Register Register;
     }
 
     [ApiHost]
@@ -113,7 +111,7 @@ namespace Z0.Asm
             var kind = IceConverters.opkind(src, index);
             var desc = EmptyString;
             if(IceOpTest.isRegister(kind))
-                SpecifyOperand(block, IceConverters.register(src,index), ref dst);
+                {}
             else if(IceOpTest.isMem(kind))
                 SpecifyOperand(block, IceConverters.meminfo(src, index), ref dst);
             else if (IceOpTest.isBranch(kind))
@@ -122,14 +120,6 @@ namespace Z0.Asm
                 {}
             else
                 SpecifyMysteryOperand(block, src,index, ref dst);
-        }
-
-        [Op]
-        void SpecifyOperand(in ApiCodeBlock block, in IceRegister src, ref AsmInstructionDetail dst)
-        {
-            dst.Register = RegConverter.convert(src);
-            if(dst.Register.ToString() != src.ToString())
-                Wf.Warn(string.Format("Register conversion failed: {0} != {1}", dst.Register, src));
         }
 
         void SpecifyOperand(in ApiCodeBlock block,  in IceMemoryInfo src, ref AsmInstructionDetail dst)

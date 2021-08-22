@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XApi
+    partial class XTend
     {
         [Op]
         public static Index<Imm8R> RefinedImmValues(this ParameterInfo param)

@@ -16,12 +16,15 @@ namespace Z0.Asm
 
         Conditions _Conditions;
 
+        Prefixes _Prefixes;
+
         public AsmTokens()
         {
             _OpCodes = OpCodes.create();
             _Sigs = Sigs.create();
             _Regs = Regs.create();
             _Conditions = Conditions.create();
+            _Prefixes = Prefixes.create();
         }
 
         public ITokenSet OpCodeTokens()
@@ -35,6 +38,9 @@ namespace Z0.Asm
 
         public ITokenSet ConditonTokens()
             => _Conditions;
+
+        public ITokenSet PrefixTokens()
+            => _Prefixes;
 
         public sealed class OpCodes : TokenSet<OpCodes>
         {
@@ -52,6 +58,15 @@ namespace Z0.Asm
 
             public override Type[] Types()
                 => typeof(AsmSigs).GetNestedTypes().Enums().Tagged<SymSourceAttribute>();
+        }
+
+        public sealed class Prefixes : TokenSet<Prefixes>
+        {
+            public override string Name
+                => "asm.prefixes";
+
+            public override Type[] Types()
+                => typeof(AsmPrefixCodes).GetNestedTypes().Enums().Tagged<SymSourceAttribute>();
         }
 
         public sealed class Regs : TokenSet<Regs>

@@ -53,7 +53,7 @@ namespace Z0.Asm
                 result = LlvmObjDump(objfile, dumps);
                 if(!result)
                     return result;
-                result = LlvmMcDisasm(hexfile, dumps);
+                result = McDisasm(hexfile, dumps);
             }
             return result;
         }

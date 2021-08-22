@@ -14,22 +14,22 @@ namespace Z0.Asm
     {
         public readonly struct Decorator
         {
-            public DecoratorToken Token {get;}
+            public RoundingToken Token {get;}
 
             [MethodImpl(Inline)]
-            public Decorator(DecoratorToken token)
+            public Decorator(RoundingToken token)
             {
                 Token = token;
             }
 
-            public K Kind => K.Decorator;
+            public K Kind => K.Rounding;
 
             [MethodImpl(Inline)]
-            public static implicit operator Decorator(DecoratorToken src)
+            public static implicit operator Decorator(RoundingToken src)
                 => new Decorator(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator DecoratorToken(Decorator src)
+            public static implicit operator RoundingToken(Decorator src)
                 => src.Token;
 
             [MethodImpl(Inline)]

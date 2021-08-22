@@ -24,7 +24,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static Decorator operand(DecoratorToken src)
+        public static Decorator operand(RoundingToken src)
             => src;
 
         [MethodImpl(Inline), Op]

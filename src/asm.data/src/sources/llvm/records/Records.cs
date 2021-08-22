@@ -2,11 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.llvm
 {
-    partial class AsmCmdService
+    using System;
+    using System.Runtime.InteropServices;
+
+    [ApiHost("llvm.records")]
+    public partial class Records : Service<Records>
     {
-        FS.FolderPath GetProjectOut(string id)
-            => OutWs.Root + FS.folder("projects") + FS.folder(State.Project().Format()) + FS.folder(id);
+
+
     }
 }

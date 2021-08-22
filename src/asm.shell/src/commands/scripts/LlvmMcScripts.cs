@@ -6,14 +6,14 @@ namespace Z0.Asm
 {
     public readonly struct LlvmMcScripts
     {
-        public static ToolScript Disasm(FS.FolderPath SrcDir, FS.FileName SrcFile, FS.FolderPath DstDir)
+        public static ToolScript mcdisasm(FS.FolderPath SrcDir, FS.FileName SrcFile, FS.FolderPath DstDir)
         {
             const string ScriptId = "disasm";
             var result = Outcome.Success;
             return Cmd.toolscript(Toolspace.llvm_mc, ScriptId, vars(SrcDir,SrcFile,DstDir));
         }
 
-        public static ToolScript Assemble(FS.FolderPath SrcDir, FS.FileName SrcFile, FS.FolderPath DstDir)
+        public static ToolScript assemble(FS.FolderPath SrcDir, FS.FileName SrcFile, FS.FolderPath DstDir)
         {
             const string ScriptId = "assemble";
             var result = Outcome.Success;

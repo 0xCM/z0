@@ -29,5 +29,27 @@ namespace Z0
             else
                 return uint64(src);
         }
+
+        [MethodImpl(Inline), Op]
+        public static long bw64i(ReadOnlySpan<byte> src)
+        {
+            var storage = z64i;
+            ref var dst = ref @as<byte>(storage);
+            var count = min(8,src.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(src,i);
+            return storage;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ulong bw64u(ReadOnlySpan<byte> src)
+        {
+            var storage = z64;
+            ref var dst = ref @as<byte>(storage);
+            var count = min(8,src.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(src,i);
+            return storage;
+        }
     }
 }

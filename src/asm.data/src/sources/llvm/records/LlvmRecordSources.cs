@@ -4,6 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
+    using static Root;
+
+    [StructLayout(LayoutKind.Sequential)]
     public struct LlvmRecordSources
     {
         public Index<TextLine> IntrinsicsSummary;
@@ -20,10 +26,21 @@ namespace Z0.llvm
 
         public Index<TextLine> ValueTypesDetails;
 
+        [MethodImpl(Inline)]
         public uint TotalLineCount()
-            => IntrinsicsSummary.Count + IntrinsicsDetails.Count +
-            InstructionDetails.Count + InstructionSummary.Count +
-            Regs.Count + ValueTypesSummary.Count + ValueTypesDetails.Count;
+            => IntrinsicsSummary.Count +
+            IntrinsicsDetails.Count +
+            InstructionDetails.Count +
+            InstructionSummary.Count +
+            Regs.Count +
+            ValueTypesSummary.Count +
+            ValueTypesDetails.Count;
+
+        public bool IsEmtpty
+        {
+            [MethodImpl(Inline)]
+            get => TotalLineCount() == 0;
+        }
 
     }
 }

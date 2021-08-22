@@ -75,6 +75,7 @@ namespace Z0.Asm
 
         ShellEnv ShellEnv;
 
+        LlvmRecordSources _LlvmRecordSources;
 
         byte[] _Assembled;
 
@@ -93,6 +94,7 @@ namespace Z0.Asm
             _Assembled = array<byte>();
             ResPack = CliMemoryMap.Empty;
             ShellEnv = ShellEnv.Empty();
+            _LlvmRecordSources = new ();
         }
 
         protected override void Initialized()
@@ -138,6 +140,37 @@ namespace Z0.Asm
             if(ResPack.IsEmpty)
                 ResPack = CliMemoryMap.create(Db.Package("respack") + FS.file("z0.respack", FS.Dll));
             return ResPack;
+        }
+
+        LlvmRecordSources LlvmRecordSources()
+        {
+            if(_LlvmRecordSources.IsEmtpty)
+            {
+                var svc = Wf.LlvmDatasets(DataSources);
+                var result = svc.Load(LlvmDatasetKind.Instructions | LlvmDatasetKind.Details, ref _LlvmRecordSources);
+                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.InstructionDetails.Count));
+
+                result = svc.Load(LlvmDatasetKind.Instructions | LlvmDatasetKind.Summary, ref _LlvmRecordSources);
+                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.InstructionSummary.Count));
+
+                result = svc.Load(LlvmDatasetKind.Regs, ref _LlvmRecordSources);
+                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.Regs.Count));
+
+                result = svc.Load(LlvmDatasetKind.Intrinsics | LlvmDatasetKind.Details, ref _LlvmRecordSources);
+                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.IntrinsicsDetails.Count));
+
+                result = svc.Load(LlvmDatasetKind.Intrinsics | LlvmDatasetKind.Summary, ref _LlvmRecordSources);
+                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.IntrinsicsSummary.Count));
+
+                result = svc.Load(LlvmDatasetKind.ValueTypes | LlvmDatasetKind.Summary, ref _LlvmRecordSources);
+                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.ValueTypesSummary.Count));
+
+                result = svc.Load(LlvmDatasetKind.ValueTypes | LlvmDatasetKind.Details, ref _LlvmRecordSources);
+                result.OnSuccess(path => Write(path.ToUri().Format(), _LlvmRecordSources.ValueTypesDetails.Count));
+
+                Write(string.Format("Loaded {0} lines", _LlvmRecordSources.TotalLineCount()));
+            }
+            return _LlvmRecordSources;
         }
 
         AddressMap NativeAddressMap

@@ -5,10 +5,7 @@
 namespace Z0.llvm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
-    using static Root;
     using static core;
 
     public class LlvmTableLoader
@@ -66,8 +63,5 @@ namespace Z0.llvm
             buffer = slice(buffer, 0, counter);
             return result;
         }
-
-
-
     }
 }

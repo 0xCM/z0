@@ -40,12 +40,14 @@ namespace Z0.Asm
 
         ZmmBCast,
 
-        Decorator,
+        Rounding,
 
         FarPtr,
 
         MemPair,
 
         Vsib,
+
+        Broadcast
     }
 }

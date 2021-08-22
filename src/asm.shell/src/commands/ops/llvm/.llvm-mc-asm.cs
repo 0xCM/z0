@@ -11,9 +11,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var id = arg(args,0).Value;
-            var src = AsmWs.AsmPath(id);
-            var dst = AsmWs.ObjOut();
-            return LlvmMcAssemble(src,dst);
+            return McAssemble(AsmWs.AsmPath(id),AsmWs.ObjOut());
         }
     }
 }

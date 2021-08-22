@@ -139,7 +139,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator K(ebx src)
                 => (K)src.Index;
-
         }
 
         public struct esi : IRegOp32<esi>

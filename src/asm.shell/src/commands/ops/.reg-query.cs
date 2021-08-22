@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".regs")]
+        [CmdOp(".reg-query")]
         Outcome RegQuery(CmdArgs args)
         {
             var result = Outcome.Success;

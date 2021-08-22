@@ -8,22 +8,21 @@ namespace Z0.llvm
     using System.Runtime.InteropServices;
 
     using static Root;
-
     using static LlvmValues;
 
-    public readonly partial struct LlvmTypes
+    partial struct LlvmTypes
     {
         /// <summary>
-        ///  128 x i64 vector value
+        ///  2 x i64 vector value
         /// </summary>
         [StructLayout(Layout, Size = Size)]
-        public struct v128i64
+        public struct v2i64
         {
-            public const ushort Width = 8192;
+            public const ushort Width = 128;
 
             public const ushort Size = Width/8;
 
-            public const string Identifier = nameof(v128i64);
+            public const string Identifier = nameof(v2i64);
 
             public StringAddress Name
             {

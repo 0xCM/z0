@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Represents a register index from the domain [0,31]
     /// </summary>
-    public struct RegIndex : ITextual
+    public readonly struct RegIndex : ITextual
     {
         public static RegIndex Min => 0;
 
@@ -26,7 +26,7 @@ namespace Z0.Asm
         public static RegIndex from(RegIndexCode code)
             => new RegIndex(code);
 
-        public RegIndexCode Code;
+        public readonly RegIndexCode Code;
 
         [MethodImpl(Inline)]
         public RegIndex(RegIndexCode kind)

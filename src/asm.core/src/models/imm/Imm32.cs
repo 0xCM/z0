@@ -19,17 +19,6 @@ namespace Z0
     [DataType("imm32")]
     public readonly struct Imm32 : IImm<I,uint>
     {
-        [MethodImpl(Inline)]
-        public static Imm32 from(ReadOnlySpan<byte> src)
-        {
-            var storage = z32;
-            ref var dst = ref @as<byte>(storage);
-            var count = min(W,src.Length);
-            for(var i=0; i<count; i++)
-                seek(dst,i) = skip(src,i);
-            return storage;
-        }
-
         public uint Content {get;}
 
         [MethodImpl(Inline)]

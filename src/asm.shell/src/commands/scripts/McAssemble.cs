@@ -6,9 +6,9 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        Outcome LlvmMcAssemble(FS.FilePath src, FS.FolderPath dst)
+        Outcome McAssemble(FS.FilePath src, FS.FolderPath dst)
         {
-            var script = LlvmMcScripts.Assemble(src.FolderPath, src.FileName, dst);
+            var script = LlvmMcScripts.assemble(src.FolderPath, src.FileName, dst);
             var result = Run(script, out var response);
             if(result)
                 ParseCmdResponse(response);

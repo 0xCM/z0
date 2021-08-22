@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Root;
     using static core;
-    using static SdmModels;
 
     partial class AsmCmdService
     {
