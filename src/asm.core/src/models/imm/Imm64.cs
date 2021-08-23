@@ -27,7 +27,7 @@ namespace Z0
         public Imm64(ulong src)
             => Content = src;
 
-        public ImmWidthCode Width => ImmWidthCode.W64;
+        public ImmBitWidth Width => ImmBitWidth.W64;
 
         public ImmKind Kind => ImmKind.Imm64;
 

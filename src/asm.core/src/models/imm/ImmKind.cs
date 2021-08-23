@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using W = ImmWidthCode;
+    using W = ImmBitWidth;
 
     using static Pow2x8;
 

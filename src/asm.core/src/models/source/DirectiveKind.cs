@@ -4,27 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-    public readonly struct AsmDirective
+    public enum DirectiveKind : byte
     {
-        public AsmDirectiveKind Kind {get;}
+        None = 0,
 
-        public Index<string> Operands {get;}
+        [Symbol(".section")]
+        Section,
 
-        [MethodImpl(Inline)]
-        public AsmDirective(AsmDirectiveKind kind, string[] operands)
-        {
-            Kind = kind;
-            Operands = operands;
-        }
-    }
-
-    public enum AsmDirectiveKind : byte
-    {
         [Symbol(".file")]
         File,
 
@@ -45,6 +31,5 @@ namespace Z0.Asm
 
         [Symbol(".type")]
         Type,
-
     }
 }

@@ -10,22 +10,17 @@ namespace Z0
         protected WsService()
             : base(Init)
         {
-            // Dev = DevWs.create(Env.DevWs);
-            // Ws = Dev;
+
         }
 
         static void Init(T svc)
         {
             svc.Ws = DevWs.create(svc.Env.DevWs);
-            //svc.Dev = svc.Dev;
         }
 
         protected DevWs Ws;
 
         IWorkspace IWsService.Ws
             => Ws;
-
-        //public IWorkspace Ws {get; private set;}
-
     }
 }

@@ -6,56 +6,66 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        AsmToolchainSpec AsmTooling(ToolId assembler, ToolId disassembler, string id)
-        {
-            var spec = new AsmToolchainSpec();
-            spec.Assembler = assembler;
-            spec.Disassembler = disassembler;
-            spec.AsmPath = AsmWs.AsmPath(id);
-            spec.BinPath = AsmWs.BinPath(id);
-            spec.HexPath = AsmWs.AsmHexPath(id);
-            spec.HexArrayPath = AsmWs.HexArrayPath(id);
-            spec.ObjKind = ObjFileKind.win64;
-            spec.DisasmPath = AsmWs.DisasmPath(id, disassembler);
-            spec.Analysis = AsmWs.Analysis();
-            spec.ListPath = AsmWs.ListPath(id);
-            spec.AsmBitMode = Bitness.b64;
-            spec.EmitDebugInfo = true;
-            if(spec.ObjKind > ObjFileKind.bin)
-                spec.ObjPath = AsmWs.ObjPath(id);
+        // Outcome McDisasm(FS.FilePath src, FS.FolderPath dst)
+        // {
+        //     var script = LlvmMcScripts.mcdisasm(src.FolderPath, src.FileName, dst);
+        //     var result = Run(script, out var response);
+        //     if(result)
+        //         ParseCmdResponse(response);
+        //     return result;
+        // }
 
-            return spec;
-        }
 
-        [CmdOp(".asm-legacy")]
-        Outcome AsmLegacy(CmdArgs args)
-        {
-            var count = args.Length;
-            if(count ==0)
-                return Assemble();
+        // AsmToolchainSpec AsmTooling(ToolId assembler, ToolId disassembler, string id)
+        // {
+        //     var spec = new AsmToolchainSpec();
+        //     spec.Assembler = assembler;
+        //     spec.Disassembler = disassembler;
+        //     spec.AsmPath = AsmWs.AsmPath(id);
+        //     spec.BinPath = AsmWs.BinPath(id);
+        //     spec.HexPath = AsmWs.AsmHexPath(id);
+        //     spec.HexArrayPath = AsmWs.HexArrayPath(id);
+        //     spec.ObjKind = ObjFileKind.win64;
+        //     spec.DisasmPath = AsmWs.DisasmPath(id, disassembler);
+        //     spec.Analysis = AsmWs.Analysis();
+        //     spec.ListPath = AsmWs.ListPath(id);
+        //     spec.AsmBitMode = Bitness.b64;
+        //     spec.EmitDebugInfo = true;
+        //     if(spec.ObjKind > ObjFileKind.bin)
+        //         spec.ObjPath = AsmWs.ObjPath(id);
 
-            var id = (string)args.First.Value;
-            var spec = AsmTooling(Toolspace.nasm, Toolspace.bddiasm, id);
-            if(count > 1)
-                Enums.parse(args[1].Value, out spec.AsmBitMode);
+        //     return spec;
+        // }
 
-            var result = AsmToolchain.Run(spec);
-            if(result)
-            {
-                var binfile = AsmWs.BinPath(id);
-                var objfile = AsmWs.ObjPath(id);
-                var asmfile = AsmWs.AsmPath(id);
-                var hexfile = AsmWs.HexArrayPath(id);
-                var dumps = AsmWs.DumpOut().Create();
-                _Assembled = binfile.ReadBytes();
-                RoutineName = id;
-                Files(new FS.FilePath[]{binfile, objfile, asmfile, hexfile}, false);
-                result = LlvmObjDump(objfile, dumps);
-                if(!result)
-                    return result;
-                result = McDisasm(hexfile, dumps);
-            }
-            return result;
-        }
+        // [CmdOp(".asm-legacy")]
+        // Outcome AsmLegacy(CmdArgs args)
+        // {
+        //     var count = args.Length;
+        //     if(count ==0)
+        //         return Assemble();
+
+        //     var id = (string)args.First.Value;
+        //     var spec = AsmTooling(Toolspace.nasm, Toolspace.bddiasm, id);
+        //     if(count > 1)
+        //         Enums.parse(args[1].Value, out spec.AsmBitMode);
+
+        //     var result = AsmToolchain.Run(spec);
+        //     if(result)
+        //     {
+        //         var binfile = AsmWs.BinPath(id);
+        //         var objfile = AsmWs.ObjPath(id);
+        //         var asmfile = AsmWs.AsmPath(id);
+        //         var hexfile = AsmWs.HexArrayPath(id);
+        //         var dumps = AsmWs.DumpOut().Create();
+        //         _Assembled = binfile.ReadBytes();
+        //         RoutineName = id;
+        //         Files(new FS.FilePath[]{binfile, objfile, asmfile, hexfile}, false);
+        //         result = LlvmObjDump(objfile, dumps);
+        //         if(!result)
+        //             return result;
+        //         result = McDisasm(hexfile, dumps);
+        //     }
+        //     return result;
+        // }
     }
 }

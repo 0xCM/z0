@@ -6,12 +6,376 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
 
+    using static Blit.Operate;
+
     partial struct Blit
     {
+        /// <summary>
+        /// Defines a 1-cell T-vector
+        /// </summary>
+        public struct v1<T> : IVector<T>
+            where T : unmanaged
+        {
+            T C0;
+
+            [MethodImpl(Inline)]
+            public v1(T src)
+            {
+                C0 = src;
+            }
+
+            public uint N => 1;
+
+            public Span<T> Cells
+            {
+                [MethodImpl(Inline)]
+                get => cells(ref this);
+            }
+
+            public ref T this[uint i]
+            {
+                [MethodImpl(Inline)]
+                get => ref seek(Cells, i);
+            }
+
+            public BitWidth StorageWidth
+            {
+                [MethodImpl(Inline)]
+                get => N*size<T>();
+            }
+
+            public BitWidth ContentWidth
+            {
+                [MethodImpl(Inline)]
+                get => StorageWidth;
+            }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator v1<T>(T src)
+                => new v1<T>(src);
+        }
+
+        /// <summary>
+        /// Defines a 2-cell T-vector
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct v2<T> : IVector<T>
+            where T : unmanaged
+        {
+            v1<T> C0;
+
+            v1<T> C1;
+
+            public uint N => 2;
+
+            public BitWidth StorageWidth
+            {
+                [MethodImpl(Inline)]
+                get => N*size<T>();
+            }
+
+            public BitWidth ContentWidth
+            {
+                [MethodImpl(Inline)]
+                get => StorageWidth;
+            }
+
+            public Span<T> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Operate.cells(ref this);
+            }
+
+            public ref T this[uint i]
+            {
+                [MethodImpl(Inline)]
+                get => ref seek(Cells, i);
+            }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
+
+        }
+
+        /// <summary>
+        /// Defines a 3-cell T-vector
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct v3<T> : IVector<T>
+            where T : unmanaged
+        {
+            v2<T> C0;
+
+            v1<T> C1;
+
+            public uint N => 3;
+
+            public BitWidth StorageWidth
+            {
+                [MethodImpl(Inline)]
+                get => N*size<T>();
+            }
+
+            public BitWidth ContentWidth
+            {
+                [MethodImpl(Inline)]
+                get => StorageWidth;
+            }
+
+            public Span<T> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Operate.cells(ref this);
+            }
+
+            public ref T this[uint i]
+            {
+                [MethodImpl(Inline)]
+                get => ref seek(Cells, i);
+            }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
+
+        }
+
+        /// <summary>
+        /// Defines a 4-cell T-vector
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct v4<T> : IVector<T>
+            where T : unmanaged
+        {
+            v2<T> A;
+
+            v2<T> B;
+
+            public uint N => 4;
+
+            public BitWidth StorageWidth
+            {
+                [MethodImpl(Inline)]
+                get => N*size<T>();
+            }
+
+            public BitWidth ContentWidth
+            {
+                [MethodImpl(Inline)]
+                get => StorageWidth;
+            }
+
+            public Span<T> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Operate.cells(ref this);
+            }
+
+            public ref T this[uint i]
+            {
+                [MethodImpl(Inline)]
+                get => ref seek(Cells, i);
+            }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
+
+        }
+
+        /// <summary>
+        /// Defines a 8-cell T-vector
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct v8<T> : IVector<T>
+            where T : unmanaged
+        {
+            v4<T> A;
+
+            v4<T> B;
+
+            public uint N => 8;
+
+            public BitWidth StorageWidth
+            {
+                [MethodImpl(Inline)]
+                get => N*size<T>();
+            }
+
+            public BitWidth ContentWidth
+            {
+                [MethodImpl(Inline)]
+                get => StorageWidth;
+            }
+
+            public Span<T> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Operate.cells(ref this);
+            }
+
+            public ref T this[uint i]
+            {
+                [MethodImpl(Inline)]
+                get => ref seek(Cells, i);
+            }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
+        }
+
+        /// <summary>
+        /// Defines a 16-cell T-vector
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct v16<T> : IVector<T>
+            where T : unmanaged
+        {
+            v8<T> A;
+
+            v8<T> B;
+
+            public uint N => 16;
+
+            public BitWidth StorageWidth
+            {
+                [MethodImpl(Inline)]
+                get => N*size<T>();
+            }
+
+            public BitWidth ContentWidth
+            {
+                [MethodImpl(Inline)]
+                get => StorageWidth;
+            }
+
+            public Span<T> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Operate.cells(ref this);
+            }
+            public ref T this[uint i]
+            {
+                [MethodImpl(Inline)]
+                get => ref seek(Cells, i);
+            }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
+        }
+
+        /// <summary>
+        /// Defines a 32-cell T-vector
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct v32<T> : IVector<T>
+            where T : unmanaged
+        {
+            v16<T> A;
+
+            v16<T> B;
+
+            public uint N => 32;
+
+            public BitWidth StorageWidth
+            {
+                [MethodImpl(Inline)]
+                get => N*size<T>();
+            }
+
+            public BitWidth ContentWidth
+            {
+                [MethodImpl(Inline)]
+                get => StorageWidth;
+            }
+
+            public Span<T> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Operate.cells(ref this);
+            }
+
+            public ref T this[uint i]
+            {
+                [MethodImpl(Inline)]
+                get => ref seek(Cells, i);
+            }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
+        }
+
+        /// <summary>
+        /// Defines a 64-cell T-vector
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct v64<T> : IVector<T>
+            where T : unmanaged
+        {
+            v32<T> A;
+
+            v32<T> B;
+
+            public uint N => 64;
+
+            public BitWidth StorageWidth
+            {
+                [MethodImpl(Inline)]
+                get => N*size<T>();
+            }
+
+            public BitWidth ContentWidth
+            {
+                [MethodImpl(Inline)]
+                get => StorageWidth;
+            }
+
+            public Span<T> Cells
+            {
+                [MethodImpl(Inline)]
+                get => Operate.cells(ref this);
+            }
+
+            public ref T this[uint i]
+            {
+                [MethodImpl(Inline)]
+                get => ref seek(Cells, i);
+            }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
+        }
+
         /// <summary>
         /// Represents the empty vector
         /// </summary>
@@ -31,353 +395,5 @@ namespace Z0
             BitWidth IPrimitive.ContentWidth
                 => Width;
         }
-
-        /// <summary>
-        /// Represents a finite sequence of 1-bit values covered byte <typeparamref='T'/> storage cells
-        /// </summary>
-        /// <typeparam name="T">The storage cell type</param>
-        public struct v1<T> : IVector<T>
-            where T : unmanaged
-        {
-            readonly Index<T> Data;
-
-            [MethodImpl(Inline)]
-            internal v1(T[] cells)
-            {
-                Data = cells;
-            }
-
-            public Span<T> Cells
-            {
-                [MethodImpl(Inline)]
-                get => Data.Edit;
-            }
-
-            public ref T this[uint index]
-            {
-                [MethodImpl(Inline)]
-                get => ref Cell(index);
-            }
-
-            public uint N
-            {
-                [MethodImpl(Inline)]
-                get => Data.Count;
-            }
-
-            [MethodImpl(Inline)]
-            public ref T Cell(uint index)
-                => ref Data[index];
-
-            BitWidth IPrimitive.StorageWidth
-                => Data.Length*width<T>();
-
-            BitWidth IPrimitive.ContentWidth
-                => Data.Length*1;
-        }
-
-        /// <summary>
-        /// Represents a finite sequence of 8-bit values
-        /// </summary>
-        public struct v8<T> : IVector<T>
-            where T : unmanaged
-        {
-            readonly Index<T> Data;
-
-            [MethodImpl(Inline)]
-            internal v8(T[] cells)
-            {
-                Data = cells;
-            }
-
-            public Span<T> Cells
-            {
-                [MethodImpl(Inline)]
-                get => Data.Edit;
-            }
-
-            public ref T this[uint index]
-            {
-                [MethodImpl(Inline)]
-                get => ref Cell(index);
-            }
-
-            public uint N
-            {
-                [MethodImpl(Inline)]
-                get => Data.Count;
-            }
-
-            [MethodImpl(Inline)]
-            public ref T Cell(uint index)
-                => ref Data[index];
-
-            BitWidth IPrimitive.StorageWidth
-                => Data.Length*width<T>();
-
-            BitWidth IPrimitive.ContentWidth
-                => Data.Length*8;
-        }
-
-        /// <summary>
-        /// Represents a finite sequence of 16-bit values
-        /// </summary>
-        public struct v16<T> : IVector<T>
-            where T : unmanaged
-        {
-            readonly Index<T> Data;
-
-            [MethodImpl(Inline)]
-            internal v16(T[] cells)
-            {
-                Data = cells;
-            }
-
-            public Span<T> Cells
-            {
-                [MethodImpl(Inline)]
-                get => Data.Edit;
-            }
-
-            public ref T this[uint index]
-            {
-                [MethodImpl(Inline)]
-                get => ref Cell(index);
-            }
-
-            public uint N
-            {
-                [MethodImpl(Inline)]
-                get => Data.Count;
-            }
-
-
-            [MethodImpl(Inline)]
-            public ref T Cell(uint index)
-                => ref Data[index];
-
-            BitWidth IPrimitive.StorageWidth
-                => Data.Length*width<T>();
-
-            BitWidth IPrimitive.ContentWidth
-                => Data.Length*16;
-        }
-
-        /// <summary>
-        /// Represents a finite sequence of 32-bit values
-        /// </summary>
-        public struct v32<T> : IVector<T>
-            where T : unmanaged
-        {
-            readonly Index<T> Data;
-
-            [MethodImpl(Inline)]
-            internal v32(T[] cells)
-            {
-                Data = cells;
-            }
-
-            public Span<T> Cells
-            {
-                [MethodImpl(Inline)]
-                get => Data.Edit;
-            }
-            public ref T this[uint index]
-            {
-                [MethodImpl(Inline)]
-                get => ref Cell(index);
-            }
-
-            public uint N
-            {
-                [MethodImpl(Inline)]
-                get => Data.Count;
-            }
-
-            [MethodImpl(Inline)]
-            public ref T Cell(uint index)
-                => ref Data[index];
-
-            BitWidth IPrimitive.StorageWidth
-                => Data.Length*width<T>();
-
-            BitWidth IPrimitive.ContentWidth
-                => Data.Length*32;
-        }
-
-        /// <summary>
-        /// Represents a finite sequence of 64-bit values
-        /// </summary>
-        public struct v64<T> : IVector<T>
-            where T : unmanaged
-        {
-            readonly Index<T> Data;
-
-            [MethodImpl(Inline)]
-            internal v64(T[] cells)
-            {
-                Data = cells;
-            }
-
-            public Span<T> Cells
-            {
-                [MethodImpl(Inline)]
-                get => Data.Edit;
-            }
-
-            public ref T this[uint index]
-            {
-                [MethodImpl(Inline)]
-                get => ref Cell(index);
-            }
-
-            public uint N
-            {
-                [MethodImpl(Inline)]
-                get => Data.Count;
-            }
-
-            [MethodImpl(Inline)]
-            public ref T Cell(uint index)
-                => ref Data[index];
-
-            BitWidth IPrimitive.StorageWidth
-                => Data.Length*width<T>();
-
-            BitWidth IPrimitive.ContentWidth
-                => Data.Length*64;
-        }
-
-        /// <summary>
-        /// Represents a finite sequence of 128-bit values
-        /// </summary>
-        public struct v128<T> : IVector<T>
-            where T : unmanaged
-        {
-            readonly Index<T> Data;
-
-            [MethodImpl(Inline)]
-            internal v128(T[] cells)
-            {
-                Data = cells;
-            }
-
-            public Span<T> Cells
-            {
-                [MethodImpl(Inline)]
-                get => Data.Edit;
-            }
-
-            public ref T this[uint index]
-            {
-                [MethodImpl(Inline)]
-                get => ref Cell(index);
-            }
-
-            public uint N
-            {
-                [MethodImpl(Inline)]
-                get => Data.Count;
-            }
-
-            [MethodImpl(Inline)]
-            public ref T Cell(uint index)
-                => ref Data[index];
-
-            BitWidth IPrimitive.StorageWidth
-                => Cells.Length*width<T>();
-
-            BitWidth IPrimitive.ContentWidth
-                => Cells.Length*128;
-        }
-
-        /// <summary>
-        /// Represents a finite sequence of 128-bit values
-        /// </summary>
-        public struct v256<T> : IVector<T>
-            where T : unmanaged
-        {
-            readonly Index<T> Data;
-
-            [MethodImpl(Inline)]
-            internal v256(T[] cells)
-            {
-                Data = cells;
-            }
-
-            public Span<T> Cells
-            {
-                [MethodImpl(Inline)]
-                get => Data.Edit;
-            }
-
-            public ref T this[uint index]
-            {
-                [MethodImpl(Inline)]
-                get => ref Cell(index);
-            }
-
-            public uint N
-            {
-                [MethodImpl(Inline)]
-                get => Data.Count;
-            }
-
-            [MethodImpl(Inline)]
-            public ref T Cell(uint index)
-                => ref Data[index];
-
-            BitWidth IPrimitive.StorageWidth
-                => Cells.Length*width<T>();
-
-            BitWidth IPrimitive.ContentWidth
-                => Cells.Length*256;
-        }
-
-        public struct vector<N,T> : IVector<T>
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            readonly Index<T> Data;
-
-            [MethodImpl(Inline)]
-            internal vector(T[] src)
-            {
-                Data = src;
-            }
-
-            public Span<T> Cells
-            {
-                [MethodImpl(Inline)]
-                get => Data.Edit;
-            }
-
-            [MethodImpl(Inline)]
-            public ref T Cell(uint index)
-                => ref Data[index];
-
-            public ref T this[uint index]
-            {
-                [MethodImpl(Inline)]
-                get => ref Cell(index);
-            }
-
-            public string Format()
-                => Operate.format(this);
-
-            public override string ToString()
-                => Format();
-
-            BitWidth IPrimitive.StorageWidth
-                => Data.Length*width<T>();
-
-            BitWidth IPrimitive.ContentWidth
-                => Data.Length* Typed.nat32u<N>();
-
-            uint IVector.N
-                => Typed.nat32u<N>();
-
-            public static vector<N,T> Empty => default;
-        }
-    }
+   }
 }

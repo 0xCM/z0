@@ -7,7 +7,7 @@ namespace Z0.Asm
     using static DataWidth;
 
     /// <summary>
-    /// Defines register class identifiers
+    /// Defines an equivalence class that partitions the set of x86-64 registers
     /// </summary>
     [SymSource]
     public enum RegClassCode : byte

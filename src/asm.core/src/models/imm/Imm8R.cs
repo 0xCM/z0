@@ -22,7 +22,7 @@ namespace Z0
         public Imm8R(byte value)
             => Content = value;
 
-        public ImmWidthCode Width => ImmWidthCode.W8;
+        public ImmBitWidth Width => ImmBitWidth.W8;
 
         public ImmKind Kind => ImmKind.Imm8;
 

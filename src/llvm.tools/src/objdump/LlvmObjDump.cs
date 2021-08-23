@@ -18,11 +18,8 @@ namespace Z0.llvm
 
         const string FormatMarker = "file format ";
 
-        public LlvmObjDump()
-            : base(Toolspace.llvm_objdump)
-        {
-
-        }
+        public override ToolId Id
+            => Toolspace.llvm_objdump;
 
         static bool DefinesBlockLabel(ReadOnlySpan<char> src)
         {

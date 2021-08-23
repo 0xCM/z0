@@ -21,7 +21,7 @@ namespace Z0
     {
         public K Content {get;}
 
-        public ImmWidthCode Width => ImmWidthCode.W64;
+        public ImmBitWidth Width => ImmBitWidth.W64;
 
         public ImmKind Kind => ImmKind.Imm64;
 

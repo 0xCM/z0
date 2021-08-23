@@ -18,7 +18,7 @@
     <ProjectReference Include="$(AsmCases)" />
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Llvm)" />
+    <ProjectReference Include="$(LlvmTools)" />
   </ItemGroup>
 
 </Project>

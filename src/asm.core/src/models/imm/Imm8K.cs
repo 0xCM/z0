@@ -25,7 +25,7 @@ namespace Z0
         public Imm8(K src)
             => Content = src;
 
-        public ImmWidthCode Width => ImmWidthCode.W8;
+        public ImmBitWidth Width => ImmBitWidth.W8;
 
         public ImmKind Kind => ImmKind.Imm8;
 

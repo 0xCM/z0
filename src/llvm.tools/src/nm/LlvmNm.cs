@@ -12,12 +12,8 @@ namespace Z0.llvm
 
     public sealed class LlvmNm : ToolService<LlvmNm>
     {
-
-        public LlvmNm()
-            : base(Toolspace.llvm_nm)
-        {
-
-        }
+        public override ToolId Id
+            => Toolspace.llvm_nm;
 
         public ReadOnlySpan<ObjSymRecord> Collect(ReadOnlySpan<FS.FilePath> src, FS.FilePath outpath)
         {

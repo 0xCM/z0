@@ -8,6 +8,8 @@ namespace Z0.Asm
 
     using K = AsmRegTokens.RegTokenKind;
 
+    using I = RegIndexCode;
+
     public readonly struct AsmRegTokens
     {
         public enum RegTokenKind
@@ -306,30 +308,29 @@ namespace Z0.Asm
             rdi = r7,
 
             [Symbol("r8")]
-            r8q = r8,
+            r8 = I.r8,
 
             [Symbol("r9")]
-            r9q = r9,
+            r9 = I.r9,
 
             [Symbol("r10")]
-            r10q = r10,
+            r10 = I.r10,
 
             [Symbol("r11")]
-            r11q = r11,
+            r11 = I.r11,
 
             [Symbol("r12")]
-            r12q = r12,
+            r12 = I.r12,
 
             [Symbol("r13")]
-            r13q = r13,
+            r13 = I.r13,
 
             [Symbol("r14")]
-            r14q = r14,
+            r14 = I.r14,
 
             [Symbol("r15")]
-            r15q = r15,
+            r15 = I.r15,
         }
-
 
         /// <summary>
         /// Specifies the XMM registers

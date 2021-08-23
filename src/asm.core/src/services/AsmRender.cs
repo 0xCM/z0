@@ -19,6 +19,9 @@ namespace Z0.Asm
     {
         const NumericKind Closure = UnsignedInts;
 
+        public static string format(in RegRange src)
+            => string.Format("{0}[{1}..{2}]", src.Class, src.MinIndex, src.MaxIndex);
+
         public static string format(in Disp32Link src)
             => string.Format("{0}h:{1} -> {2}", src.Disp, src.Source, src.Target);
 

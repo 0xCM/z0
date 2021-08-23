@@ -9,6 +9,9 @@ namespace Z0.Asm
 
     using static Root;
 
+    /// <summary>
+    /// Specifies a <see cref='RegClassCode'/>
+    /// </summary>
     public readonly struct RegClass
     {
         public RegClassCode Code {get;}

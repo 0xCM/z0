@@ -22,10 +22,10 @@ namespace Z0
         public Imm(T src)
             => Content = src;
 
-        public static ImmWidthCode Capacity
+        public static ImmBitWidth Capacity
         {
             [MethodImpl(Inline)]
-            get => (ImmWidthCode)(byte)width<T>();
+            get => (ImmBitWidth)(byte)width<T>();
         }
 
         public static ImmKind Kind

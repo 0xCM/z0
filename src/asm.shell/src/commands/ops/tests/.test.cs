@@ -11,6 +11,7 @@ namespace Z0.Asm
 
     using static core;
     using static Root;
+    using static Blit;
     using static AsmChecks;
 
     partial class AsmCmdService
@@ -20,6 +21,26 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
+            var cc = CallCv.Win64;
+
+            var cc8 = CallCv.regslots(cc,w8);
+            Write(cc8.Format());
+
+            var cc16 = CallCv.regslots(cc,w16);
+            Write(cc16.Format());
+
+            var cc32 = CallCv.regslots(cc,w32);
+            Write(cc32.Format());
+
+            var cc64 = CallCv.regslots(cc,w64);
+            Write(cc64.Format());
+
+            return result;
+        }
+
+        unsafe Outcome DagTests()
+        {
+            var result = Outcome.Success;
 
             var op0 = asm.imm8(32);
             var dag0 = LlvmValues.dag(AsmId.AAD8i8, &op0);

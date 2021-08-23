@@ -100,10 +100,11 @@ public enum PartId : byte
     [Symbol("ws")]
     Ws = 30,
 
-    [Symbol("llvm")]
-    Llvm = 31,
+    [Symbol("llvm.tools")]
+    LlvmTools = 31,
 
-    OpenSlot2 = 32,
+    [Symbol("llvm.models")]
+    LlvmModels = 32,
 
     OpenSlot3 = 33,
 

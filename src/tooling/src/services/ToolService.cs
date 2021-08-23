@@ -13,7 +13,7 @@ namespace Z0
     public abstract class ToolService<T> : AppService<T>, ITool<T>
         where T : ToolService<T>, new()
     {
-        public ToolId Id {get;}
+        public virtual ToolId Id {get;}
 
         ScriptRunner ScriptRunner;
 
@@ -22,6 +22,12 @@ namespace Z0
         protected ToolService(ToolId id)
         {
             Id = id;
+        }
+
+
+        protected ToolService()
+        {
+
         }
 
         protected override void OnInit()

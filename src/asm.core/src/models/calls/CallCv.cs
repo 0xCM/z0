@@ -2,14 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    partial struct Llvm
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+
+    [ApiHost]
+    public readonly partial struct CallCv
     {
-        [Tool]
-        public readonly struct As : ITool<As>
-        {
-            public ToolId Id => Toolspace.llvm_as;
-        }
+        public static win64 Win64
+            => default;
     }
 }

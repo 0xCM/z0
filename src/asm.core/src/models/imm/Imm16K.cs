@@ -27,7 +27,7 @@ namespace Z0
         public Imm16(K value)
             => Content = value;
 
-        public ImmWidthCode Width => ImmWidthCode.W16;
+        public ImmBitWidth Width => ImmBitWidth.W16;
 
 
         public ImmKind Kind => ImmKind.Imm16;

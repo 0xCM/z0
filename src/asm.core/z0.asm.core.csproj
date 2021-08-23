@@ -9,6 +9,7 @@
       <ProjectReference Include="$(BitNumbers)" />
       <ProjectReference Include="$(Bits)" />
       <ProjectReference Include="$(AsmData)" />
+      <ProjectReference Include="$(LlvmModels)" />
       <ProjectReference Include="$(Commands)" />
       <ProjectReference Include="$(Events)" />
       <ProjectReference Include="$(Rules)" />

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
         public static void unpack1x8(byte src, Span<byte> dst)
-            => seek64(first(dst), 0) = scatter((ulong)(byte)src, lsb<ulong>(n8,n1));
+            => seek64(first(dst), 0) = scatter((ulong)(byte)src, lsb<ulong>(n8, n1));
 
         /// <summary>
         /// Sends each source bit to to least bit of each 8-bit segment in the target
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
-        public static void unpack1x8(byte src, in SpanBlock64<byte> dst, int block)
+        public static void unpack1x8(byte src, int block, in SpanBlock64<byte> dst)
             => unpack1x8(src, dst.CellBlock(block));
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Unpack]
-        public static ref ulong unpack1x8(byte src, Span<byte> dst, uint offset)
+        public static ref ulong unpack1x8(byte src, uint offset, Span<byte> dst)
             => ref unpack1x8(src, ref seek64(dst, offset));
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
             var count = src.Length;
             var offset = 0u;
             for(var i=0; i<count; i++, offset +=8)
-                unpack1x8(skip(src,i), dst, offset);
+                unpack1x8(skip(src,i), offset, dst);
         }
     }
 }

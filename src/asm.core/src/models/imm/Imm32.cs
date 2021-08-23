@@ -25,7 +25,7 @@ namespace Z0
         public Imm32(uint src)
             => Content = src;
 
-        public ImmWidthCode Width => ImmWidthCode.W32;
+        public ImmBitWidth Width => ImmBitWidth.W32;
 
         public ImmKind Kind => ImmKind.Imm32;
 

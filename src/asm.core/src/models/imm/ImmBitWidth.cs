@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum ImmWidthCode : byte
+    public enum ImmBitWidth : byte
     {
         None = 0,
 
