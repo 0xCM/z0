@@ -6,10 +6,8 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".dump-obj")]
-        Outcome DumpObj(CmdArgs args)
-        {
-            return DumpModules(args, FileModuleKind.Obj);
-        }
+        [CmdOp(".dump-dll")]
+        Outcome DumpDll(CmdArgs args)
+            => DumpModules(args, FileModuleKind.Dll);
     }
 }

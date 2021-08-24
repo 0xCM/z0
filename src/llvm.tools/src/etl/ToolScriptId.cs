@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    partial class AsmCmdService
+    public readonly struct ToolScriptId
     {
-        [CmdOp(".dump-exe")]
-        Outcome DumpExe(CmdArgs args)
-        {
-            return DumpModules(args, FileModuleKind.Exe);
-        }
+        public const string mc = "mc";
+
+        public const string mc_hex = "mc-hex";
+
+        public const string emit_llvm_lists = "emit-lists";
     }
 }

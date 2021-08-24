@@ -27,5 +27,14 @@ namespace Z0
         [Op]
         public static LlvmNm LlvmNm(this IWfRuntime wf)
             => llvm.LlvmNm.create(wf);
+
+        [Op]
+        public static LlvmEtl LlvmEtl(this IWfRuntime wf)
+            => llvm.LlvmEtl.create(wf);
+
+        [Op]
+        public static OmniScript OmniScript(this IWfRuntime wf)
+            => Z0.OmniScript.create(wf);
+
     }
 }

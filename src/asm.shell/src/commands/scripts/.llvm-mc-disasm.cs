@@ -6,10 +6,8 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".dump-lib")]
-        Outcome DumpLib(CmdArgs args)
-        {
-            return DumpModules(args, FileModuleKind.Lib);
-        }
+        [CmdOp(".llvm-mc-disasm")]
+        Outcome Disasm(CmdArgs args)
+            => DisasmHex();
     }
 }

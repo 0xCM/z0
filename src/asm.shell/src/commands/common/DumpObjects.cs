@@ -26,7 +26,7 @@ namespace Z0.Asm
             vars.DstDir = dst;
             vars.SrcDir = src.FolderPath;
             vars.SrcFile = src.FileName;
-            var result = Run(cmd, vars.ToCmdVars(), out var response);
+            var result = OmniScript.Run(cmd, vars.ToCmdVars(), out var response);
             if(result)
                 ParseCmdResponse(response);
             return result;

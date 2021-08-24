@@ -253,6 +253,17 @@ namespace Z0
             return count;
         }
 
+        protected Outcome<uint> EmitLines(ReadOnlySpan<TextLine> src, FS.FilePath dst, TextEncodingKind encoding)
+        {
+            using var writer = dst.Writer(encoding);
+            var count = (uint)src.Length;
+            var emitting = EmittingFile(dst);
+            for(var i=0; i<count; i++)
+                writer.WriteLine(skip(src,i));
+            EmittedFile(emitting,count);
+            return count;
+        }
+
         protected virtual void OnInit()
         {
 

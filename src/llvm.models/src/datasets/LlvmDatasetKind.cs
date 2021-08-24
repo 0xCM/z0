@@ -13,9 +13,5 @@ namespace Z0.llvm
         Instructions = 2,
 
         ValueTypes = 8,
-
-        Summary = 16,
-
-        Details = 32,
     }
 }

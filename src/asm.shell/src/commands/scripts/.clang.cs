@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".clang")]
         Outcome Clang(CmdArgs args)
-            => RunAsmScript(arg(args,0), "clang-build");
+            => OmniScript.RunAsmScript(arg(args,0), "clang-build");
     }
 }

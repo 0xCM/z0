@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".ml")]
         Outcome AsmMl(CmdArgs args)
-            => RunAsmScript(arg(args,0), "ml");
+            => OmniScript.RunAsmScript(arg(args,0), "ml");
     }
 }

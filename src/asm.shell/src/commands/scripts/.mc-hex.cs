@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".mc-hex")]
         Outcome McHex(CmdArgs args)
-            => RunAsmScript(arg(args,0), ToolScriptId.mc_hex);
+            => OmniScript.RunAsmScript(arg(args,0), ToolScriptId.mc_hex);
     }
 }

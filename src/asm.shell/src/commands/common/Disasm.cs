@@ -21,7 +21,7 @@ namespace Z0.Asm
                 ref readonly var input = ref skip(src,i);
                 var output = GetToolOut(Toolspace.llvm_mc) + input.FileName.ChangeExtension(FS.Asm);
                 var command = string.Format(CmdPattern, input,output);
-                result = Run(command, out var response);
+                result = OmniScript.Run(command, out var response);
                 if(result.Fail)
                     return result;
                 seek(dst,i) = output;

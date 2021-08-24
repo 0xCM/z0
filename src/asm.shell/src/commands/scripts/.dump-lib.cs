@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public readonly struct ToolScriptId
+    partial class AsmCmdService
     {
-        public const string mc = "mc";
-
-        public const string mc_hex = "mc-hex";
-
-        public const string emit_llvm_lists = "emit-lists";
+        [CmdOp(".dump-lib")]
+        Outcome DumpLib(CmdArgs args)
+            => DumpModules(args, FileModuleKind.Lib);
     }
 }

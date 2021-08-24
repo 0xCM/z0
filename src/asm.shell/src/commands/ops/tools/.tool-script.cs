@@ -15,7 +15,7 @@ namespace Z0.Asm
             if(!script.Exists)
                 return (false, FS.missing(script));
             else
-                return Run(script, out var _);
+                return OmniScript.Run(script, out var _);
         }
     }
 }

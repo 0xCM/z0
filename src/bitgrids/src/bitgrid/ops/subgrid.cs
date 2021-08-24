@@ -9,9 +9,32 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
+    using static BitMaskLiterals;
 
     partial class BitGrid
     {
+        [MethodImpl(Inline), Init]
+        public static SubGrid32<N8,N3,uint> subgrid(Perm8L p)
+            => (uint)p;
+
+        [MethodImpl(Inline), Init]
+        public static SubGrid32<N8,N3,uint> subgrid(NatPerm<N8> p)
+            => subgrid(p.ToLiteral());
+
+        [Init]
+        public static SubGrid256<N32,N5,ulong> subgrid(NatPerm<N32> p)
+        {
+            var m = n32;
+            var n = n5;
+            var w = n256;
+            var dst = SpanBlocks.single<ulong>(w);
+            var mask = Lsb64x8x5;
+            var bs = BitString.alloc(w);
+            for(int i=0, j=0 ; i< p.Length; i++, j+=5)
+                bs.BitMap(p[i].ToBitString(),j, 5);
+            return BitGrid.subgrid(bs.ToCpuVector<ulong>(w), m,n);
+        }
+
         /// <summary>
         /// Allocates a 0-filled 16-bit subgrid
         /// </summary>

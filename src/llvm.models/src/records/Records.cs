@@ -36,13 +36,13 @@ namespace Z0.llvm
             switch(kind)
             {
                 case LlvmDatasetKind.Instructions:
-                    source = sources.InstructionSummary;
+                    source = sources.Instructions;
                 break;
                 case LlvmDatasetKind.Intrinsics:
-                    source = sources.IntrinsicsSummary;
+                    source = sources.Intrinsics;
                 break;
                 case LlvmDatasetKind.ValueTypes:
-                    source = sources.ValueTypesSummary;
+                    source = sources.ValueTypes;
                 break;
             }
             return Defs(source,kind, filter);
@@ -56,13 +56,13 @@ namespace Z0.llvm
             switch(kind)
             {
                 case LlvmDatasetKind.Instructions:
-                    source = sources.InstructionSummary;
+                    source = sources.Instructions;
                 break;
                 case LlvmDatasetKind.Intrinsics:
-                    source = sources.IntrinsicsSummary;
+                    source = sources.Intrinsics;
                 break;
                 case LlvmDatasetKind.ValueTypes:
-                    source = sources.ValueTypesSummary;
+                    source = sources.ValueTypes;
                 break;
             }
             return Classes(source,kind, filter);
@@ -150,23 +150,15 @@ namespace Z0.llvm
             if(_Sources.IsEmtpty)
             {
                 var svc = Wf.LlvmDatasets();
-                var result = svc.Load(LlvmDatasetKind.Instructions | LlvmDatasetKind.Details, ref _Sources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _Sources.InstructionDetails.Count));
 
-                result = svc.Load(LlvmDatasetKind.Instructions | LlvmDatasetKind.Summary, ref _Sources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _Sources.InstructionSummary.Count));
+                var result = svc.Load(LlvmDatasetKind.Instructions, ref _Sources);
+                result.OnSuccess(path => Write(path.ToUri().Format(), _Sources.Instructions.Count));
 
-                result = svc.Load(LlvmDatasetKind.Intrinsics | LlvmDatasetKind.Details, ref _Sources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _Sources.IntrinsicsDetails.Count));
+                result = svc.Load(LlvmDatasetKind.Intrinsics, ref _Sources);
+                result.OnSuccess(path => Write(path.ToUri().Format(), _Sources.Intrinsics.Count));
 
-                result = svc.Load(LlvmDatasetKind.Intrinsics | LlvmDatasetKind.Summary, ref _Sources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _Sources.IntrinsicsSummary.Count));
-
-                result = svc.Load(LlvmDatasetKind.ValueTypes | LlvmDatasetKind.Summary, ref _Sources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _Sources.ValueTypesSummary.Count));
-
-                result = svc.Load(LlvmDatasetKind.ValueTypes | LlvmDatasetKind.Details, ref _Sources);
-                result.OnSuccess(path => Write(path.ToUri().Format(), _Sources.ValueTypesDetails.Count));
+                result = svc.Load(LlvmDatasetKind.ValueTypes, ref _Sources);
+                result.OnSuccess(path => Write(path.ToUri().Format(), _Sources.ValueTypes.Count));
 
                 Write(string.Format("Loaded {0} lines", _Sources.TotalLineCount()));
             }

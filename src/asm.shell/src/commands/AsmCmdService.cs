@@ -12,7 +12,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-
     public sealed partial class AsmCmdService : AppCmdService<AsmCmdService>
     {
         NativeBuffer CodeBuffer;
@@ -25,6 +24,8 @@ namespace Z0.Asm
 
         ScriptRunner ScriptRunner;
 
+        CmdLineRunner CmdRunner;
+
         AsmShellState State;
 
         IApiPack ApiPack;
@@ -34,8 +35,6 @@ namespace Z0.Asm
         IntelSdm SdmSvc;
 
         AsmRegSets RegSets;
-
-        CmdLineRunner CmdRunner;
 
         IntelXed Xed;
 
@@ -75,11 +74,13 @@ namespace Z0.Asm
 
         ShellEnv ShellEnv;
 
-        LlvmRecordSources _LlvmRecordSources;
-
         llvm.Records LlvmRecords;
 
         llvm.LlvmDatasets LlvmDatasets;
+
+        llvm.LlvmEtl LlvmEtl;
+
+        OmniScript OmniScript;
 
         byte[] _Assembled;
 
@@ -98,20 +99,17 @@ namespace Z0.Asm
             _Assembled = array<byte>();
             ResPack = CliMemoryMap.Empty;
             ShellEnv = ShellEnv.Empty();
-            _LlvmRecordSources = new ();
         }
 
         protected override void Initialized()
         {
             AsmWs = Ws.Asm();
-            ScriptRunner = Wf.ScriptRunner();
             ApiPacks = Wf.ApiPacks();
             ApiPack = ApiPacks.Current();
             ApiArchive = ApiPack.Archive();
             NasmCatalog = Wf.NasmCatalog();
             SdmSvc = Wf.IntelSdm();
             RegSets = Wf.AsmRegSets();
-            CmdRunner = Wf.CmdLineRunner();
             Xed = Wf.IntelXed();
             AsmToolchain = Wf.AsmToolchain();
             AsmTables = Wf.AsmTables();
@@ -127,6 +125,8 @@ namespace Z0.Asm
             AsmEtl = Wf.AsmEtl();
             LlvmRecords = Wf.LlvmRecords();
             LlvmDatasets = Wf.LlvmDatasets();
+            LlvmEtl = Wf.LlvmEtl();
+            OmniScript = Wf.OmniScript();
             State.DevWs(Ws);
         }
 
@@ -193,13 +193,6 @@ namespace Z0.Asm
             return src;
         }
 
-        ReadOnlySpan<llvm.OpCodeSpec> LlvmOpCodes()
-        {
-            if(State.LlvmOpCodes().IsEmpty)
-                State.LlvmOpCodes(MC.opcodes());
-            return State.LlvmOpCodes();
-        }
-
         void Emitted(FS.FilePath dst)
             => Write(string.Format("Emitted {0}", dst.ToUri()));
 
@@ -226,7 +219,7 @@ namespace Z0.Asm
                 ("SrcId", id)
                 );
             var cmd = Cmd.cmdline(script.Format(PathSeparator.BS));
-            return Run(cmd, vars, out var response);
+            return OmniScript.Run(cmd, vars, out var response);
         }
 
         ReadOnlySpan<ProcessAsmRecord> GetProcessAsm()

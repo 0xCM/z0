@@ -20,7 +20,6 @@ namespace Z0
         public static BitGrid64<N16,N4,ulong> ToBitGrid(this Perm16L src)
             => (ulong)src;
 
-
         /// <summary>
         /// Represents the source value as a 32-bit natural bitgrid of dimension 1x32
         /// </summary>

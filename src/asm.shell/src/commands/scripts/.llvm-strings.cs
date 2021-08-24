@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".llvm-config")]
-        Outcome LlvmConfig(CmdArgs args)
-            => LlvmEtl.QueryConfig();
+        [CmdOp(".llvm-strings")]
+        Outcome LlvmStrings(CmdArgs args)
+            => LlvmEtl.ValidateStringTables();
     }
 }

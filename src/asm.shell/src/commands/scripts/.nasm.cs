@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".nasm")]
         Outcome AsmNasm(CmdArgs args)
-            => RunAsmScript(arg(args,0), "nasm");
+            => OmniScript.RunAsmScript(arg(args,0), "nasm");
     }
 }

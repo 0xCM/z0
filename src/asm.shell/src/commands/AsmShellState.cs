@@ -18,14 +18,11 @@ namespace Z0.Asm
 
         Index<ProcessAsmRecord> _ProcessAsmSelection;
 
-        Index<llvm.OpCodeSpec> _LlvmOpCodes;
-
         public AsmShellState()
         {
             _SdmOpCodes = array<SdmOpCodeDetail>();
             _ProcessAsm = array<ProcessAsmRecord>();
             _ProcessAsmSelection = array<ProcessAsmRecord>();
-            _LlvmOpCodes = array<llvm.OpCodeSpec>();
         }
 
         [MethodImpl(Inline)]
@@ -35,18 +32,8 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public void LlvmOpCodes(llvm.OpCodeSpec[] src)
-        {
-            _LlvmOpCodes = src;
-        }
-
-        [MethodImpl(Inline)]
         public ReadOnlySpan<SdmOpCodeDetail> SdmOpCodeDetail()
             => _SdmOpCodes.View;
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<llvm.OpCodeSpec> LlvmOpCodes()
-            => _LlvmOpCodes.View;
 
         [MethodImpl(Inline)]
         public Span<ProcessAsmRecord> ProcessAsmSelection()

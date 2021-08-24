@@ -4,14 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using Z0.llvm;
+
     partial class AsmCmdService
     {
-        [CmdOp(".emit-pe-headers")]
-        Outcome EmitSectionHeaders(CmdArgs args)
-        {
-            var service = Wf.CliEmitter();
-            service.EmitSectionHeaders();
-            return true;
-        }
+        [CmdOp(".llvm-etl")]
+        Outcome RunLlvmEtl(CmdArgs args)
+            => LlvmEtl.RunEtl();
+
+        [CmdOp(".llvm-list-gen")]
+        Outcome LlvmListGen(CmdArgs args)
+            => LlvmEtl.GenLists();
     }
 }
