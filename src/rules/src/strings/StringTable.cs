@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     using api = StringTables;
 
@@ -20,23 +19,40 @@ namespace Z0
 
         readonly Index<uint> _Offsets;
 
+        readonly Index<Identifier> _Identifiers;
+
         [MethodImpl(Inline)]
-        public StringTable(Identifier name, string src, Index<uint> offsets)
+        public StringTable(Identifier name, string src, Index<uint> offsets, Identifier[] identifiers)
         {
             Name = name;
             Content = src;
             _Offsets = offsets;
+            _Identifiers = identifiers;
         }
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<char> Entry(uint index)
+        public ReadOnlySpan<char> Entry(int index)
             => api.chars(this, index);
 
-        public ReadOnlySpan<char> this[uint index]
+        public ReadOnlySpan<char> this[int index]
         {
             [MethodImpl(Inline)]
             get => api.chars(this, index);
         }
+
+        public ReadOnlySpan<char> this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => api.chars(this, (int)index);
+        }
+
+        [MethodImpl(Inline)]
+        public ref readonly Identifier Identifier(int index)
+            => ref _Identifiers[index];
+
+        [MethodImpl(Inline)]
+        public ref readonly Identifier Identifier(uint index)
+            => ref _Identifiers[index];
 
         public uint EntryCount
         {
@@ -56,6 +72,11 @@ namespace Z0
             get => _Offsets.View;
         }
 
+        public ReadOnlySpan<Identifier> Identifiers
+        {
+            [MethodImpl(Inline)]
+            get => _Identifiers.View;
+        }
         public uint[] OffsetStorage
         {
             [MethodImpl(Inline)]

@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Represents a native buffer allocation
     /// </summary>
-    public readonly struct NativeBuffer<T> : IBufferAllocation
+    public unsafe readonly struct NativeBuffer<T> : IBufferAllocation
         where T : unmanaged
     {
         public IntPtr Handle {get;}
@@ -34,6 +34,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Handle;
+        }
+
+        public ref T this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek<T>(Address.Pointer<T>(), index);
+        }
+
+        public ref T this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek<T>(Address.Pointer<T>(), index);
         }
 
         public BitWidth Width

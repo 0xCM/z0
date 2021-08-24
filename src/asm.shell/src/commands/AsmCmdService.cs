@@ -79,6 +79,8 @@ namespace Z0.Asm
 
         llvm.Records LlvmRecords;
 
+        llvm.LlvmDatasets LlvmDatasets;
+
         byte[] _Assembled;
 
         const ushort _NativeBufferSize = Pow2.T14;
@@ -124,6 +126,7 @@ namespace Z0.Asm
             AsmToolSvc = Wf.AsmTools();
             AsmEtl = Wf.AsmEtl();
             LlvmRecords = Wf.LlvmRecords();
+            LlvmDatasets = Wf.LlvmDatasets();
             State.DevWs(Ws);
         }
 

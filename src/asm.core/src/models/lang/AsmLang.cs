@@ -70,31 +70,31 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, Imm8 c)
+        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, imm8 c)
             where A : unmanaged
             where B : unmanaged
                 => Produce<A,B,byte>(a,b,c);
 
         [MethodImpl(Inline), Op]
-        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, Imm16 c)
+        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, imm16 c)
             where A : unmanaged
             where B : unmanaged
                 => Produce<A,B,ushort>(a,b,c);
 
         [MethodImpl(Inline), Op]
-        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, Imm32 c)
+        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, imm32 c)
             where A : unmanaged
             where B : unmanaged
                 => Produce<A,B,uint>(a,b,c);
 
         [MethodImpl(Inline), Op]
-        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, Imm64 c)
+        AsmExpr Produce<A,B>(Sym<A> a, Sym<B> b, imm64 c)
             where A : unmanaged
             where B : unmanaged
                 => Produce<A,B,ulong>(a,b,c);
 
         [MethodImpl(Inline), Op]
-        AsmExpr Produce<A,B,T>(Sym<A> a, Sym<B> b, Imm<T> c)
+        AsmExpr Produce<A,B,T>(Sym<A> a, Sym<B> b, imm<T> c)
             where A : unmanaged
             where B : unmanaged
             where T : unmanaged
@@ -113,7 +113,7 @@ namespace Z0.Asm
             => slice(Buffer.Edit, 0, Position);
 
         [Op]
-        void Render<T>(Imm<T> src)
+        void Render<T>(imm<T> src)
             where T : unmanaged
                 => Render("0" + src.Format());
 

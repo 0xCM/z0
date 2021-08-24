@@ -70,7 +70,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(RexPrefix a0, Hex8 a1, Imm64 a2)
+        public static AsmHexCode encode(RexPrefix a0, Hex8 a1, imm64 a2)
         {
             var writer = write(buffer());
             writer.Write8(a0);
@@ -80,7 +80,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmHexCode encode(Hex8 a0, Imm8 a1)
+        public static AsmHexCode encode(Hex8 a0, imm8 a1)
         {
             var writer = write(buffer());
             writer.Write8(a0);
@@ -89,7 +89,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static byte encode(Hex8 a0, Imm8 a1, ref byte hex)
+        public static byte encode(Hex8 a0, imm8 a1, ref byte hex)
         {
             seek(hex,0) = a0;
             seek(hex,1) = a1;

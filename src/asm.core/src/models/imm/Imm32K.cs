@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a refined 32-bit immediate value
     /// </summary>
     [DataType("imm32{k}")]
-    public readonly struct Imm32<K> : IImm<Imm32<K>, K>
+    public readonly struct imm32<K> : IImm<imm32<K>, K>
         where K : unmanaged
     {
         public K Content {get;}
@@ -28,15 +28,15 @@ namespace Z0
         public ImmKind Kind => ImmKind.Imm32;
 
         [MethodImpl(Inline)]
-        public static implicit operator K(Imm32<K> src)
+        public static implicit operator K(imm32<K> src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm32<K>(K src)
-            => new Imm32<K>(src);
+        public static implicit operator imm32<K>(K src)
+            => new imm32<K>(src);
 
         [MethodImpl(Inline)]
-        public Imm32(K src)
+        public imm32(K src)
             => Content = src;
 
         [MethodImpl(Inline)]

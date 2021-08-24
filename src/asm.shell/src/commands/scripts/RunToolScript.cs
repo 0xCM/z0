@@ -10,14 +10,14 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        Outcome RunToolScript(FS.FilePath src, CmdVars vars, out ReadOnlySpan<ToolFlow> flows)
+        Outcome RunToolScript(FS.FilePath src, CmdVars vars, bool quiet, out ReadOnlySpan<ToolFlow> flows)
         {
             flows = default;
 
             var result = Outcome.Success;
             if(!src.Exists)
                 return (false, FS.missing(src));
-            result = Run(src, vars, out var response);
+            result = Run(src, vars, quiet, out var response);
             if(result.Fail)
                 return result;
 

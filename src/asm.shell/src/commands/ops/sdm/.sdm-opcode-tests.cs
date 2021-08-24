@@ -14,12 +14,12 @@ namespace Z0.Asm
         public Outcome TestOcStrings(CmdArgs args)
         {
             var result = Outcome.Success;
-            var info = StringTableInfo.infer(OpCodeStrings.Offsets, OpCodeStrings.Data);
+            var runtime = MemoryStrings.create(OpCodeStrings.Offsets, OpCodeStrings.Data);
             var offsets = recover<uint>(OpCodeStrings.Offsets);
-            var formatter = Tables.formatter<StringTableInfo>();
-            Write(formatter.Format(info, RecordFormatKind.KeyValuePairs));
+            var formatter = Tables.formatter<MemoryStrings>();
+            Write(formatter.Format(runtime, RecordFormatKind.KeyValuePairs));
 
-            result = CheckOffsets(info,offsets);
+            result = CheckOffsets(runtime,offsets);
             if(result.Fail)
                 return result;
             else
@@ -28,12 +28,12 @@ namespace Z0.Asm
             return result;
         }
 
-        static Outcome CheckOffsets(in StringTableInfo info, ReadOnlySpan<uint> offsets)
+        static Outcome CheckOffsets(in MemoryStrings info, ReadOnlySpan<uint> offsets)
         {
             var result = Outcome.Success;
-            for(var i=0u; i<info.EntryCount; i++)
+            for(var i=0; i<info.EntryCount; i++)
             {
-                var actual = StringTables.offset(info,i);
+                var actual = MemoryStrings.offset(info,i);
                 var expect = skip(offsets,i);
                 if(actual != expect)
                 {

@@ -10,18 +10,18 @@ namespace Z0
     using static Root;
 
     using W = W8;
-    using I = Imm8;
+    using I = imm8;
 
     /// <summary>
     /// Defines an 8-bit immediate value
     /// </summary>
     [DataType("imm8")]
-    public readonly struct Imm8 : IImm<I,byte>
+    public readonly struct imm8 : IImm<I,byte>
     {
         public byte Content {get;}
 
         [MethodImpl(Inline)]
-        public Imm8(byte src)
+        public imm8(byte src)
             => Content = src;
 
         public ImmBitWidth Width => ImmBitWidth.W8;
@@ -87,8 +87,8 @@ namespace Z0
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<byte>(I src)
-            => new Imm<byte>(src);
+        public static implicit operator imm<byte>(I src)
+            => new imm<byte>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator I(byte src)

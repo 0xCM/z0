@@ -10,15 +10,15 @@ namespace Z0.Asm
     partial struct AsmLang
     {
         [Op]
-        public AsmExpr cmp(r8 a0, Imm8 a1)
+        public AsmExpr cmp(r8 a0, imm8 a1)
             => Produce(S[CMP], S[a0], a1);
 
         [Op]
-        public AsmExpr cmp(r16 a0, Imm16 a1)
+        public AsmExpr cmp(r16 a0, imm16 a1)
             => Produce(S[CMP], S[a0], a1);
 
         [Op]
-        public AsmExpr cmp(r32 a0, Imm32 a1)
+        public AsmExpr cmp(r32 a0, imm32 a1)
             => Produce(S[CMP], S[a0], a1);
 
         [Op]

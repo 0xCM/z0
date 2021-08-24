@@ -10,5 +10,10 @@ namespace Z0.llvm
         public const string TblgenRecords = "llvm.tblgen.records";
 
         public const string TblgenLists = "llvm.tblgen.lists";
+
+        public const string X86Instructions = "X86.instructions";
+
+        public const string LlvmIntrinsics = "llvm.intrinsics";
+
     }
 }

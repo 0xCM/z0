@@ -10,20 +10,20 @@ namespace Z0
     using static Root;
 
     using W = W16;
-    using I = Imm16;
+    using I = imm16;
 
     /// <summary>
     /// Defines a 16-bit immediate value
     /// </summary>
     [DataType("imm16")]
-    public readonly struct Imm16 : IImm<I,ushort>
+    public readonly struct imm16 : IImm<I,ushort>
     {
         public ushort Content {get;}
 
         public static W W => default;
 
         [MethodImpl(Inline)]
-        public Imm16(ushort src)
+        public imm16(ushort src)
             => Content = src;
 
         public ImmBitWidth Width => ImmBitWidth.W16;
@@ -89,8 +89,8 @@ namespace Z0
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<ushort>(Imm16 src)
-            => new Imm<ushort>(src);
+        public static implicit operator imm<ushort>(imm16 src)
+            => new imm<ushort>(src);
 
         // [MethodImpl(Inline)]
         // public static implicit operator Cell16(I src)

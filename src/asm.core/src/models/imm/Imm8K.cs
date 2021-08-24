@@ -16,13 +16,13 @@ namespace Z0
     /// Defines a refined 8-bit immediate value
     /// </summary>
     [DataType("imm8{k}")]
-    public readonly struct Imm8<K> : IImm<Imm8<K>,K>
+    public readonly struct imm8<K> : IImm<imm8<K>,K>
         where K : unmanaged
     {
         public K Content {get;}
 
         [MethodImpl(Inline)]
-        public Imm8(K src)
+        public imm8(K src)
             => Content = src;
 
         public ImmBitWidth Width => ImmBitWidth.W8;
@@ -50,16 +50,16 @@ namespace Z0
             => (int)Hash;
 
         [MethodImpl(Inline)]
-        public static implicit operator K(Imm8<K> src)
+        public static implicit operator K(imm8<K> src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(Imm8<K> src)
+        public static implicit operator byte(imm8<K> src)
             => src.AsPrimitive();
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm8<K>(K src)
-            => new Imm8<K>(src);
+        public static implicit operator imm8<K>(K src)
+            => new imm8<K>(src);
 
         public static W W => default;
     }

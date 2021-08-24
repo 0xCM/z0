@@ -217,6 +217,9 @@ namespace Z0
         public static string Constant(string name, Enum src)
             => string.Format("public const {0} {1} = {0}.{2};", src.GetType().Name, name, src);
 
+        public static string StaticLambdaProp(string type, string name, string expr)
+            => string.Format("public static {0} {1} => {2};", type, name, expr);
+
         public static string EnumDecl(string name, string @base)
             => string.Format(L.EnumDeclPattern, name, @base);
 

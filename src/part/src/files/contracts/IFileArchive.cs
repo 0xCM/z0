@@ -42,14 +42,11 @@ namespace Z0
         FS.FolderPath Queries()
             => Root + FS.folder("queries");
 
-        FS.FolderPath Queries(Scope scope)
-            => Queries() + FS.folder(scope.Format());
-
         FS.FilePath QueryOut(string id, FS.FileExt ext)
             => Queries() + FS.file(id,ext);
 
-        Deferred<FS.FilePath> Files(FS.FileExt ext)
-            => Root.EnumerateFiles(ext, true);
+        FS.Files Files(FS.FileExt ext)
+            => Root.EnumerateFiles(ext, true).Yield();
 
         FS.FolderPath Datasets()
             => Root + FS.folder(datasets);

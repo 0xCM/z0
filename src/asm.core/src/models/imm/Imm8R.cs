@@ -14,12 +14,12 @@ namespace Z0
     /// <summary>
     /// Describes an 8-bit immediate that is potentially refined
     /// </summary>
-    public readonly struct Imm8R : IImm<Imm8R,byte>
+    public readonly struct imm8R : IImm<imm8R,byte>
     {
         public byte Content {get;}
 
         [MethodImpl(Inline)]
-        public Imm8R(byte value)
+        public imm8R(byte value)
             => Content = value;
 
         public ImmBitWidth Width => ImmBitWidth.W8;
@@ -33,7 +33,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(Imm8R imm8)
+        public static implicit operator byte(imm8R imm8)
             => imm8.Content;
 
        public static W W => default;

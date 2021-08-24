@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         // 80 /4 ib         | AND r/m8, imm8   | MI    | Valid       | Valid           | r/m8 AND imm8.
         [Op]
-        public AsmExpr and(r8 a0, Imm8 imm8)
+        public AsmExpr and(r8 a0, imm8 imm8)
             => Produce(S[AND], S[a0], imm8);
     }
 }

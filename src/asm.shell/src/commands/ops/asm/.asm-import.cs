@@ -9,9 +9,5 @@ namespace Z0.Asm
         [CmdOp(".asm-import")]
         Outcome ImportAsm(CmdArgs args)
             => ImportAsm(arg(args,0));
-
-        // .project ll
-        // .outfiles dumps/*.asm
-        // .import-asm
     }
 }

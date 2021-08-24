@@ -11,16 +11,16 @@ namespace Z0
     partial class XTend
     {
         [Op]
-        public static Index<Imm8R> RefinedImmValues(this ParameterInfo param)
+        public static Index<imm8R> RefinedImmValues(this ParameterInfo param)
         {
             if(param.IsRefinedImmediate())
                 return param.ParameterType.GetEnumValues().Cast<byte>().Array().ToImm8Values(ImmRefinementKind.Refined);
             else
-                return sys.empty<Imm8R>();
+                return sys.empty<imm8R>();
         }
 
         [Op]
-        public static Index<Imm8R> ToImm8Values(this byte[] src, ImmRefinementKind kind)
-            => src.Map(x => new Imm8R(x));
+        public static Index<imm8R> ToImm8Values(this byte[] src, ImmRefinementKind kind)
+            => src.Map(x => new imm8R(x));
     }
 }

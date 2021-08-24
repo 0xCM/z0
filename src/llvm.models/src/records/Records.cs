@@ -6,6 +6,7 @@ namespace Z0.llvm
 {
     using System;
     using System.Runtime.InteropServices;
+
     using static core;
     using static Root;
 
@@ -21,9 +22,14 @@ namespace Z0.llvm
             _Sources = new();
         }
 
-        public ReadOnlySpan<string> Defs(LlvmDatasetKind kind)
+        public ReadOnlySpan<DefRecord> Defs(LlvmDatasetKind kind)
+            => Defs(kind, x => true);
+
+        public ReadOnlySpan<ClassRecord> Classes(LlvmDatasetKind kind)
+            => Classes(kind, x => true);
+
+        public ReadOnlySpan<DefRecord> Defs(LlvmDatasetKind kind, Func<DefRecord,bool> filter)
         {
-            var results = core.array<string>();
             var sources = Sources();
             var source = Index<TextLine>.Empty;
 
@@ -39,49 +45,111 @@ namespace Z0.llvm
                     source = sources.ValueTypesSummary;
                 break;
             }
-            return Defs(source);
+            return Defs(source,kind, filter);
         }
 
-        ReadOnlySpan<string> Defs(ReadOnlySpan<TextLine> src)
+        public ReadOnlySpan<ClassRecord> Classes(LlvmDatasetKind kind, Func<ClassRecord,bool> filter)
         {
-            var result = Outcome.Success;
+            var sources = Sources();
+            var source = Index<TextLine>.Empty;
+
+            switch(kind)
+            {
+                case LlvmDatasetKind.Instructions:
+                    source = sources.InstructionSummary;
+                break;
+                case LlvmDatasetKind.Intrinsics:
+                    source = sources.IntrinsicsSummary;
+                break;
+                case LlvmDatasetKind.ValueTypes:
+                    source = sources.ValueTypesSummary;
+                break;
+            }
+            return Classes(source,kind, filter);
+        }
+
+        ReadOnlySpan<DefRecord> Defs(ReadOnlySpan<TextLine> src, LlvmDatasetKind kind, Func<DefRecord,bool> filter)
+        {
             const string Marker = "def ";
             var fields = list<RecordField>();
             var lines = list<TextLine>();
-            var dst = list<string>();
+            var dst = list<DefRecord>();
             var name = EmptyString;
-            var count = src.Length;
-            for(var i=0; i<count; i++)
+            for(var i=0; i<src.Length; i++)
             {
                 ref readonly var line = ref skip(src,i);
                 var content = line.Content;
                 var j = text.index(content, Marker);
+                var isDefEnd = text.begins(content, Chars.RBrace);
                 if(j >= 0)
                 {
                     var k = text.index(content, Chars.LBrace);
                     if(k>=0)
                     {
-                        name = text.trim(text.between(content, j + Marker.Length - 1, k));
+                        var record = new DefRecord();
+                        record.Dataset = kind;
+                        record.Offset = line.LineNumber;
+                        record.Name = text.trim(text.between(content, j + Marker.Length - 1, k));
                         var m = SQ.index(content, Chars.FSlash, Chars.FSlash);
                         if(m >= 0)
-                        {
-                            var ancestors = text.trim(text.right(content,m+1));
-                            name = string.Format("{0} :> ({1})", name, ancestors);
-                        }
-
-                        dst.Add(name);
-
+                            record.Ancestors = text.trim(text.right(content, m + 1));
+                        if(filter(record))
+                            dst.Add(record);
                     }
                 }
             }
-            return dst.ViewDeposited();
+
+            var results = dst.ToArray();
+            return results;
+        }
+
+        ReadOnlySpan<ClassRecord> Classes(ReadOnlySpan<TextLine> src, LlvmDatasetKind kind, Func<ClassRecord,bool> filter)
+        {
+            const string Marker = "class ";
+            var fields = list<RecordField>();
+            var lines = list<TextLine>();
+            var dst = list<ClassRecord>();
+            var name = EmptyString;
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var line = ref skip(src,i);
+                var content = line.Content;
+                var j = text.index(content, Marker);
+                var isDefEnd = text.begins(content, Chars.RBrace);
+                if(j >= 0)
+                {
+                    var k = text.index(content, Chars.LBrace);
+                    if(k>=0)
+                    {
+                        var record = new ClassRecord();
+                        record.Dataset = kind;
+                        record.Offset = line.LineNumber;
+                        var lt = text.index(content,Chars.Lt);
+                        if(lt >=0)
+                            record.Name = text.trim(text.between(content, j + Marker.Length - 1, lt));
+                        else
+                        {
+                            record.Name = text.trim(text.between(content, j + Marker.Length - 1, k));
+                        }
+                        //record.Name = text.trim(text.between(content, j + Marker.Length - 1, k));
+                        var m = SQ.index(content, Chars.FSlash, Chars.FSlash);
+                        if(m >= 0)
+                            record.Ancestors = text.trim(text.right(content, m + 1));
+                        if(filter(record))
+                            dst.Add(record);
+                    }
+                }
+            }
+
+            var results = dst.ToArray();
+            return results;
         }
 
         public LlvmRecordSources Sources()
         {
             if(_Sources.IsEmtpty)
             {
-                var svc = Wf.LlvmDatasets(Ws.Sources());
+                var svc = Wf.LlvmDatasets();
                 var result = svc.Load(LlvmDatasetKind.Instructions | LlvmDatasetKind.Details, ref _Sources);
                 result.OnSuccess(path => Write(path.ToUri().Format(), _Sources.InstructionDetails.Count));
 

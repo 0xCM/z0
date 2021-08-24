@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a refined 16-bit immediate value
     /// </summary>
     [DataType("imm16{k}")]
-    public readonly struct Imm16<K> : IImm<Imm16<K>, K>
+    public readonly struct imm16<K> : IImm<imm16<K>, K>
         where K : unmanaged
     {
         public K Content {get;}
@@ -24,7 +24,7 @@ namespace Z0
         public static W W => default;
 
         [MethodImpl(Inline)]
-        public Imm16(K value)
+        public imm16(K value)
             => Content = value;
 
         public ImmBitWidth Width => ImmBitWidth.W16;
@@ -53,15 +53,15 @@ namespace Z0
             => bw16(this);
 
         [MethodImpl(Inline)]
-        public static implicit operator K(Imm16<K> src)
+        public static implicit operator K(imm16<K> src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm16<K>(K src)
-            => new Imm16<K>(src);
+        public static implicit operator imm16<K>(K src)
+            => new imm16<K>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ushort(Imm16<K> src)
+        public static implicit operator ushort(imm16<K> src)
             => src.AsPrimitive();
 
     }

@@ -128,7 +128,7 @@ namespace Z0
         {
             var service = Wf.ApiPacks();
             var pack = service.Current();
-            var files = pack.Files(FS.Csv).Yield();
+            var files = pack.Files(FS.Csv).View;
             var counting = Wf.Running(string.Format("Counting lines in {0} files from {1}", files.Length, pack.Root));
             var counts = FS.linecounts(files);
             iter(counts, c => Wf.Row(c.Format()));

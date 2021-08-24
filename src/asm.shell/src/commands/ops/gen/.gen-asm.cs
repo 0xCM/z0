@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using llvm;
-
-    using static core;
-    using static AsmOperands;
-
     partial class AsmCmdService
     {
         Outcome GenAsm(CmdArgs args)
@@ -84,7 +79,7 @@ namespace Z0.Asm
 
             Emitted(dst);
 
-            RunAsmScript(asmid, AsmScriptId.mc, out var flows);
+            RunAsmScript(asmid, ToolScriptId.mc, out var flows);
 
             return result;
         }

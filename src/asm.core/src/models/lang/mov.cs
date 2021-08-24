@@ -10,7 +10,7 @@ namespace Z0.Asm
     partial struct AsmLang
     {
         [Op]
-        public AsmExpr mov(Gp64Reg a0, Imm64 a1)
+        public AsmExpr mov(Gp64Reg a0, imm64 a1)
             => Produce(S[MOV], S[a0], a1);
     }
 }

@@ -32,11 +32,12 @@ namespace Z0.Asm
                 var lines = path.ReadLines().View;
                 var table = StringTables.create(lines, name, delimiter);
                 var spec = StringTables.specify("Z0." + TargetId, table);
-                StringTables.gencode(spec,cswriter);
+                StringTables.gencode(spec, cswriter);
                 for(var j=0u; j<table.EntryCount; j++)
                 {
                     var content = table[j];
-                    var row = StringTables.row(table,j);
+                    ref readonly var id = ref table.Identifier(j);
+                    var row = StringTables.row(table, j);
                     rowwriter.WriteLine(formatter.Format(row));
                 }
 

@@ -17,7 +17,7 @@ namespace Z0.Asm
             var vars = WsVars.create();
             var path = AsmWs.Script(script);
             vars.SrcId = srcid;
-            return RunToolScript(path, vars.ToCmdVars(), out flows);
+            return RunToolScript(path, vars.ToCmdVars(), true, out flows);
         }
     }
 }

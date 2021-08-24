@@ -4,22 +4,31 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using Z0.Asm;
-
     using static LlvmDataSourceNames;
     using static LlvmDatasetNames;
+    using static WsAtoms;
 
-    public class LlvmDatasets : Service<LlvmDatasets>
+    using K = LlvmDatasetKind;
+
+    public class LlvmDatasets : WsService<LlvmDatasets>
     {
-        IWorkspace Ws;
+        public FS.FilePath Lined(LlvmDatasetKind kind)
+            => Ws.Tables().Subdir(llvm) + lined(kind);
 
-        public LlvmDatasets WithSource(IWorkspace ws)
+        public Outcome<FS.FilePath> Load(LlvmDatasetKind kind, ref LlvmRecordSources dst)
         {
-            Ws = ws;
-            return this;
+            return load(Ws.Sources(), kind,ref dst);
         }
 
-        public static FS.FilePath path(IWorkspace sources, LlvmDatasetKind kind)
+        static FS.FileName lined(LlvmDatasetKind kind)
+            => kind switch
+            {
+                K.Instructions => FS.file(X86Instructions,FS.Txt),
+                K.Intrinsics => FS.file(LlvmIntrinsics,FS.Txt),
+                _ => FS.FileName.Empty,
+            };
+
+        static FS.FilePath path(IWorkspace sources, LlvmDatasetKind kind)
         {
             var single = (LlvmDatasetKind)((uint)kind & 0xF);
             var detail = (byte)(bit)((kind & LlvmDatasetKind.Details) != 0);
@@ -65,12 +74,7 @@ namespace Z0.llvm
             return file.IsNonEmpty ? sources.Datasets(TblgenRecords) + file : FS.FilePath.Empty;
         }
 
-        public Outcome<FS.FilePath> Load(LlvmDatasetKind kind, ref LlvmRecordSources dst)
-        {
-            return load(Ws,kind,ref dst);
-        }
-
-        public static Outcome<FS.FilePath> load(IWorkspace sources, LlvmDatasetKind kind, ref LlvmRecordSources dst)
+        static Outcome<FS.FilePath> load(IWorkspace sources, LlvmDatasetKind kind, ref LlvmRecordSources dst)
         {
             var single = (LlvmDatasetKind)((uint)kind & 0xF);
             var detail = (byte)(bit)((kind & LlvmDatasetKind.Details) != 0);

@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a refined 64-bit immediate value
     /// </summary>
     [DataType("imm64{k}")]
-    public readonly struct Imm64<K> : IImm<Imm64<K>,K>
+    public readonly struct imm64<K> : IImm<imm64<K>,K>
         where K : unmanaged
     {
         public K Content {get;}
@@ -26,7 +26,7 @@ namespace Z0
         public ImmKind Kind => ImmKind.Imm64;
 
         [MethodImpl(Inline)]
-        public Imm64(K src)
+        public imm64(K src)
             => Content = src;
 
         [MethodImpl(Inline)]
@@ -49,12 +49,12 @@ namespace Z0
             => (int)Hash;
 
         [MethodImpl(Inline)]
-        public static implicit operator K(Imm64<K> src)
+        public static implicit operator K(imm64<K> src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm64<K>(K src)
-            => new Imm64<K>(src);
+        public static implicit operator imm64<K>(K src)
+            => new imm64<K>(src);
 
         public static W W => default;
     }

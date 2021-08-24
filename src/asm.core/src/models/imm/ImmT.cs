@@ -12,14 +12,14 @@ namespace Z0
     using static core;
 
     [DataType("imm{t}")]
-    public readonly struct Imm<T> : IImm<Imm<T>,T>
+    public readonly struct imm<T> : IImm<imm<T>,T>
         where T : unmanaged
     {
         public T Content {get;}
 
         [MethodImpl(Inline)]
 
-        public Imm(T src)
+        public imm(T src)
             => Content = src;
 
         public static ImmBitWidth Capacity
@@ -88,11 +88,11 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public bool Equals(Imm<T> src)
+        public bool Equals(imm<T> src)
             => Imm64 == src.Imm64;
 
         public override bool Equals(object obj)
-            => obj is Imm<T> x && Equals(x);
+            => obj is imm<T> x && Equals(x);
 
         public string Format()
         {
@@ -110,23 +110,23 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public int CompareTo(Imm<T> src)
+        public int CompareTo(imm<T> src)
             => Imm64 == src.Imm64 ? 0 : Imm64 < src.Imm64 ? -1 : 1;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<T>(byte src)
-            => new Imm<T>(force<byte,T>(src));
+        public static implicit operator imm<T>(byte src)
+            => new imm<T>(force<byte,T>(src));
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<T>(ushort src)
-            => new Imm<T>(force<ushort,T>(src));
+        public static implicit operator imm<T>(ushort src)
+            => new imm<T>(force<ushort,T>(src));
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<T>(uint src)
-            => new Imm<T>(force<uint,T>(src));
+        public static implicit operator imm<T>(uint src)
+            => new imm<T>(force<uint,T>(src));
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<T>(ulong src)
-            => new Imm<T>(force<ulong,T>(src));
+        public static implicit operator imm<T>(ulong src)
+            => new imm<T>(force<ulong,T>(src));
     }
 }

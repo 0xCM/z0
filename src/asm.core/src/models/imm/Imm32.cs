@@ -11,18 +11,18 @@ namespace Z0
     using static core;
 
     using W = W32;
-    using I = Imm32;
+    using I = imm32;
 
     /// <summary>
     /// Defines a 32-bit immediate value
     /// </summary>
     [DataType("imm32")]
-    public readonly struct Imm32 : IImm<I,uint>
+    public readonly struct imm32 : IImm<I,uint>
     {
         public uint Content {get;}
 
         [MethodImpl(Inline)]
-        public Imm32(uint src)
+        public imm32(uint src)
             => Content = src;
 
         public ImmBitWidth Width => ImmBitWidth.W32;
@@ -88,8 +88,8 @@ namespace Z0
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<uint>(I src)
-            => new Imm<uint>(src);
+        public static implicit operator imm<uint>(I src)
+            => new imm<uint>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator I(uint src)

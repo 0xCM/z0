@@ -7,10 +7,10 @@ namespace Z0.Asm
     partial class AsmCmdService
     {
         [CmdOp(".lists")]
-        Outcome ShowLists(CmdArgs args)
+        Outcome ListFiles(CmdArgs args)
         {
             var result = Outcome.Success;
-            Files(TableWs().Subdir("lists").AllFiles);
+            Files(Ws.Sources().Files(FS.List));
             return result;
         }
     }

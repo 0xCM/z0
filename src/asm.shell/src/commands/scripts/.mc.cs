@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".mc")]
         Outcome Mc(CmdArgs args)
-            => RunAsmScript(arg(args,0), AsmScriptId.mc);
+            => RunAsmScript(arg(args,0), ToolScriptId.mc);
     }
 }

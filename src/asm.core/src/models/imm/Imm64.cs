@@ -11,20 +11,20 @@ namespace Z0
     using static core;
 
     using W = W64;
-    using I = Imm64;
+    using I = imm64;
 
     /// <summary>
     /// Defines a 64-bit immediate value
     /// </summary>
     [DataType("imm64")]
-    public readonly struct Imm64 : IImm<Imm64,ulong>
+    public readonly struct imm64 : IImm<imm64,ulong>
     {
         public ulong Content {get;}
 
         public static W W => default;
 
         [MethodImpl(Inline)]
-        public Imm64(ulong src)
+        public imm64(ulong src)
             => Content = src;
 
         public ImmBitWidth Width => ImmBitWidth.W64;
@@ -91,8 +91,8 @@ namespace Z0
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm<ulong>(I src)
-            => new Imm<ulong>(src);
+        public static implicit operator imm<ulong>(I src)
+            => new imm<ulong>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator I(ulong src)
