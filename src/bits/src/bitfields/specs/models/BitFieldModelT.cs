@@ -54,7 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Position(int index)
-            => bw32(Seg(index).Min);
+            => bw32(Seg(index).Offset);
 
         [MethodImpl(Inline)]
         public ref BitfieldSeg<T> Seg(int index)

@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
 
     using static core;
+    using static WsAtoms;
 
     partial class AsmCmdService
     {
@@ -18,6 +19,34 @@ namespace Z0.Asm
             var src = Z0.Tokens.concat(symbols);
             var dst = Gen().Root + FS.file("token-specs", FS.Cs);
             EmitTokenSpecs("ModRmTokens", src,dst);
+            return result;
+        }
+
+        [CmdOp(".bitfields")]
+        Outcome GenBitFields(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var dir = Ws.Tables().Subdir(llvm) + FS.folder(lists);
+            var name = "BinOpMI";
+            var file = FS.file(name, FS.Csv);
+            var formatter = Tables.formatter<ListItem>(ListItem.RenderWidths);
+            if(Tables.list(dir + file, out var records))
+            {
+                var src = @readonly(records);
+                var count = src.Length;
+                var segs = alloc<BitfieldSeg>(count);
+
+                for(var i=0u; i<count; i++)
+                {
+                    ref readonly var item = ref skip(src,i);
+                    seek(segs,i) = BitfieldSpecs.segment(item.Value.Format(), i, i, 1);
+                }
+
+                var bitfield = BitfieldSpecs.bitfield(name,segs);
+                Write(bitfield.Format());
+
+            }
+
             return result;
         }
 

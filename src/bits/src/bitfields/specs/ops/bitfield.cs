@@ -22,14 +22,12 @@ namespace Z0
             var count = tagged.Length;
             var offset = 0u;
             var segs = alloc<BitfieldSeg>(count);
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
                 ref readonly var field = ref skip(tagged,i);
                 var name = field.Type.Name;
                 var width = field.Tag.Width;
-                var left = offset;
-                var right = offset + width - 1;
-                seek(segs,i) = BitfieldSpecs.segment(name, left, right);
+                seek(segs,i) = BitfieldSpecs.segment(name, i, offset, width);
 
                 offset += width;
             }

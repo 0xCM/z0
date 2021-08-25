@@ -21,34 +21,34 @@ namespace Z0
         /// <summary>
         /// The segment name
         /// </summary>
-        public readonly Identifier SegName {get;}
+        public Identifier SegName {get;}
 
         /// <summary>
-        /// The index, relative to the containing section, of the first bit in the segment
+        /// The 0-based position of the segment within the field
         /// </summary>
-        public readonly uint Min {get;}
+        public uint SegPos {get;}
 
         /// <summary>
-        /// The index, relative to the containing section, of the last bit in the segment
+        /// The index of the first bit in the segment
         /// </summary>
-        public readonly uint Max {get;}
+        public uint Offset {get;}
+
+        /// <summary>
+        /// The index, of the last bit in the segment
+        /// </summary>
+        public uint Width {get;}
 
         [MethodImpl(Inline)]
-        public BitfieldSeg(Identifier name, uint min, uint max)
+        public BitfieldSeg(Identifier name, uint pos,  uint offset, uint width)
         {
             SegName = name;
-            Min = min;
-            Max = max;
-        }
-
-        public uint Width
-        {
-            [MethodImpl(Inline)]
-            get => api.width(this);
+            SegPos = pos;
+            Offset = offset;
+            Width = width;
         }
 
         public string Format()
-            => string.Format("{0}[{1},{2}]", SegName, Min, Max);
+            => api.format(this);
 
         public override string ToString()
             => Format();

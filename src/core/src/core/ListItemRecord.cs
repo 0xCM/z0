@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [Record(TableId)]
-    public struct ListItemRecord : IRecord<ListItemRecord>
+    public struct ListItem : IRecord<ListItem>
     {
         public const string TableId = "listitems";
 

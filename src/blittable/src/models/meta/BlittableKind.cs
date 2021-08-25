@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    [SymSource]
     public enum BlittableKind : byte
     {
         /// <summary>

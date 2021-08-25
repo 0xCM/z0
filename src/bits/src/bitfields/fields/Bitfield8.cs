@@ -24,13 +24,14 @@ namespace Z0
             => _State = state;
 
         [MethodImpl(Inline)]
-        public S Read(byte i0, byte i1)
-            => api.read(this, i0, i1);
+        public S Read(byte pos, byte width)
+            => api.read(this, pos, width);
+
 
         [MethodImpl(Inline)]
-        public Bitfield8 Store(byte i0, byte i1, S src)
+        public Bitfield8 Store(S src, byte offset, byte width)
         {
-            api.store(i0, i1, src, ref this);
+            api.store(src, offset, width, ref this);
             return this;
         }
 

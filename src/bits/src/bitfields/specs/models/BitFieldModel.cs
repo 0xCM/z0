@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     public readonly struct BitfieldModel : IBitfieldModel
     {
@@ -59,10 +60,28 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint SegStart(uint i)
-            => Seg(i).Min;
+            => Seg(i).Offset;
 
         [MethodImpl(Inline)]
         public uint SegEnd(uint i)
-            => Seg(i).Max;
+            => Seg(i).Width;
+
+
+        public string Format()
+        {
+            const string SegPattern = "{0},";
+            var dst = text.buffer();
+            dst.AppendLine(string.Format("{0}[{1}:{2}] => ", Name, TotalWidth,SegCount));
+            var indent = 2u;
+            dst.IndentLine(indent,Chars.LBracket);
+            indent += 2u;
+            for(var i=0; i<SegCount; i++)
+            {
+                dst.IndentLineFormat(indent, SegPattern, skip(Segments,i).Format());
+            }
+            indent -= 2;
+            dst.IndentLine(indent,Chars.RBracket);
+            return dst.Emit();
+        }
     }
 }

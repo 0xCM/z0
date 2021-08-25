@@ -12,13 +12,26 @@ namespace Z0
 
     partial struct BitfieldSpecs
     {
+        public static string format(in BitfieldSeg src)
+        {
+            const string SegPattern = "{0}[{1}]:{2} = [{3}]";
+            var datatype = src.Width == 1 ? nameof(bit) : string.Format("uint{0}", src.Width);
+            var i = endpos(src.Offset, src.Width);
+            var section = src.Width == 1 ? string.Format("{0}", src.Offset) : string.Format("{0}:{1}", i, src.Offset);
+            return string.Format(SegPattern,
+                src.SegName,
+                src.SegPos,
+                datatype,
+                section);
+        }
+
+
         [Op]
         public static uint render(in BitfieldSeg src, ref uint i, Span<char> dst, SegRenderStyle style = default)
         {
             var i0 = i;
             text.copy(src.SegName.Format(), ref i, dst);
-            //seek(dst, i++) = Chars.Colon;
-            render(src.Min, src.Max, style, ref i, dst);
+            render(src.Offset, src.Width, style, ref i, dst);
             return i - i0;
         }
 

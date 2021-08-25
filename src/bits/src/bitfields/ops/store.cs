@@ -14,62 +14,62 @@ namespace Z0
     partial struct Bitfields
     {
         [MethodImpl(Inline), Op]
-        public static ref Bitfield8 store(byte i0, byte i1, byte src, ref Bitfield8 dst)
+        public static ref Bitfield8 store(byte src, byte offset, byte width, ref Bitfield8 dst)
         {
-            dst.Overwrite(or(dst.State, sll(src, u8(i1 - i0 + 1))));
+            dst.Overwrite(or(dst.State, sll(src, width)));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref Bitfield16 store(byte i0, byte i1, ushort src, ref Bitfield16 dst)
+        public static ref Bitfield16 store(ushort src, byte offset, byte width, ref Bitfield16 dst)
         {
-            dst.Overwrite(or(dst.State, sll(src, u8(i1 - i0 + 1))));
+            dst.Overwrite(or(dst.State, sll(src, width)));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref Bitfield32 store(byte i0, byte i1, uint src, ref Bitfield32 dst)
+        public static ref Bitfield32 store(uint src, byte offset, byte width, ref Bitfield32 dst)
         {
-            dst.Overwrite(or(dst.State, sll(src, u8(i1 - i0 + 1))));
+            dst.Overwrite(or(dst.State, sll(src, width)));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref Bitfield64 store(byte i0, byte i1, ulong src, ref Bitfield64 dst)
+        public static ref Bitfield64 store(ulong src, byte offset, byte width, ref Bitfield64 dst)
         {
-            dst.Overwrite(or(dst.State, sll(src, u8(i1 - i0 + 1))));
+            dst.Overwrite(or(dst.State, sll(src, width)));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(UInt8k)]
-        public static ref Bitfield8<T> store<T>(byte i0, byte i1, T src, ref Bitfield8<T> dst)
+        public static ref Bitfield8<T> store<T>(T src, byte offset, byte width, ref Bitfield8<T> dst)
             where T : unmanaged
         {
-            dst.Overwrite(or(dst.State, sll(u8(src), u8(i1 - i0 + 1))));
+            dst.Overwrite(or(dst.State, sll(u8(src), width)));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(UInt8x16k)]
-        public static ref Bitfield16<T> store<T>(byte i0, byte i1, T src, ref Bitfield16<T> dst)
+        public static ref Bitfield16<T> store<T>(T src, byte offset, byte width, ref Bitfield16<T> dst)
             where T : unmanaged
         {
-            dst.Overwrite(or(dst.State, sll(u16(src), u8(i1 - i0 + 1))));
+            dst.Overwrite(or(dst.State, sll(u8(src), width)));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(UInt8x16x32k)]
-        public static ref Bitfield32<T> store<T>(byte i0, byte i1, T src, ref Bitfield32<T> dst)
+        public static ref Bitfield32<T> store<T>(T src, byte offset, byte width, ref Bitfield32<T> dst)
             where T : unmanaged
         {
-            dst.Overwrite(or(dst.State, sll(u32(src), u8(i1 - i0 + 1))));
+            dst.Overwrite(or(dst.State, sll(u8(src), width)));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref Bitfield64<T> store<T>(byte i0, byte i1, T src, ref Bitfield64<T> dst)
+        public static ref Bitfield64<T> store<T>(T src, byte offset, byte width, ref Bitfield64<T> dst)
             where T : unmanaged
         {
-            dst.Overwrite(or(dst.State, sll(u64(src), u8(i1 - i0 + 1))));
+            dst.Overwrite(or(dst.State, sll(u8(src), width)));
             return ref dst;
         }
 
@@ -78,7 +78,7 @@ namespace Z0
             where T : unmanaged
         {
             ref readonly var spec = ref skip(dst.SegSpecs,i);
-            dst.Overwrite(gmath.or(dst.State, gmath.sll(dst.State, u8(spec.Max - spec.Min + 1))));
+            dst.Overwrite(gmath.or(dst.State, gmath.sll(dst.State, u8(spec.Width))));
             return ref dst;
         }
 
@@ -88,7 +88,7 @@ namespace Z0
             where K : unmanaged
         {
             ref readonly var spec = ref skip(dst.SegSpecs,i);
-            dst.Overwrite(gmath.or(dst.State, gmath.sll(dst.State, u8(spec.Max - spec.Min + 1))));
+            dst.Overwrite(gmath.or(dst.State, gmath.sll(dst.State, u8(spec.Width))));
             return ref dst;
         }
    }

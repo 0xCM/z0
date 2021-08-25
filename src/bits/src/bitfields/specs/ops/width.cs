@@ -12,14 +12,10 @@ namespace Z0
 
     partial struct BitfieldSpecs
     {
-        [MethodImpl(Inline), Op]
-        public static uint width(in BitfieldSeg src)
-            => (uint)(src.Max - src.Min + 1);
 
         [MethodImpl(Inline), Op]
-        public static uint width<K>(in BitfieldSeg<K> src)
-            where K : unmanaged
-                => (uint)(src.Max - src.Min + 1);
+        public static byte endpos(uint offset, uint width)
+            => (byte)((offset + width) - 1);
 
         /// <summary>
         /// Computes the aggregate width of the segments that comprise the bitfield
@@ -35,7 +31,7 @@ namespace Z0
             var count = src.Length;
             var w = 0u;
             for(var i=0; i<count; i++)
-                w += width(skip(src,i));
+                w += skip(src,i).Width;
             return w;
         }
 
@@ -46,7 +42,7 @@ namespace Z0
             var count = src.Length;
             var w = 0u;
             for(var i=0; i<count; i++)
-                w += width(skip(src,i));
+                w += skip(src,i).Width;
             return w;
         }
 

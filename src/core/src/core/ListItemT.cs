@@ -7,11 +7,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-
-    public readonly struct ListItem
-    {
-
-    }
+    using static core;
 
     public readonly struct ListItem<T>
     {
@@ -32,14 +28,8 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public ListItemRecord ToRecord(string type)
-        {
-            var dst = new ListItemRecord();
-            dst.Id = Index;
-            dst.Type = type;
-            dst.Value = Content?.ToString() ?? RP.Empty;
-            return dst;
-        }
+        public ListItem ToRecord(string type)
+            => ListItems.record(this,type);
 
         [MethodImpl(Inline)]
         public static implicit operator ListItem<T>((uint index, T content) src)

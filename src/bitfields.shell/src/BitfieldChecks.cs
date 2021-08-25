@@ -31,10 +31,10 @@ namespace Z0
         public void bitfield_a()
         {
             var segs = segments(
-                segment(BF_A.Seg0, 0, 1),
-                segment(BF_A.Seg1, 2, 3),
-                segment(BF_A.Seg2, 4, 5),
-                segment(BF_A.Seg3, 6, 7)
+                segment(0, BF_A.Seg0, 0, 2),
+                segment(1, BF_A.Seg1, 2, 2),
+                segment(2, BF_A.Seg2, 4, 2),
+                segment(3,BF_A.Seg3, 6, 2)
                 );
 
             var s0 = (byte)0b01_11_10_11;
