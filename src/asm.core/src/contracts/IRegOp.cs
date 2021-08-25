@@ -28,7 +28,7 @@ namespace Z0.Asm
         /// <summary>
         /// The width of the represented register operand
         /// </summary>
-        RegWidthCode WidthCode {get;}
+        AsmWidthCode WidthCode {get;}
 
 
         ushort Bitfield {get;}

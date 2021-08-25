@@ -250,6 +250,30 @@ namespace Z0
         /// </summary>
         public const char Null = (char)0;
 
+        /// <summary>
+        /// The 'a' character
+        /// </summary>
+        public const char a = 'a';
+
+        /// <summary>
+        /// The 'b' character
+        /// </summary>
+        public const char b = 'b';
+
+        /// <summary>
+        /// The 'c' character
+        /// </summary>
+        public const char c = 'c';
+
+        /// <summary>
+        /// The 'c' character
+        /// </summary>
+        public const char d = 'd';
+
+        /// <summary>
+        /// The 'e' character
+        /// </summary>
+        public const char e = 'e';
 
         /// <summary>
         /// The 'f' character
@@ -267,9 +291,84 @@ namespace Z0
         public const char h = 'h';
 
         /// <summary>
+        /// The 'i' character
+        /// </summary>
+        public const char i = 'i';
+
+        /// <summary>
+        /// The 'i' character
+        /// </summary>
+        public const char j = 'j';
+
+        /// <summary>
+        /// The 'k' character
+        /// </summary>
+        public const char k = 'k';
+
+        /// <summary>
+        /// The 'l' character
+        /// </summary>
+        public const char l = 'l';
+
+        /// <summary>
+        /// The 'm' character
+        /// </summary>
+        public const char m = 'm';
+
+        /// <summary>
+        /// The 'o' character
+        /// </summary>
+        public const char o = 'o';
+
+        /// <summary>
+        /// The 'p' character
+        /// </summary>
+        public const char p = 'p';
+
+        /// <summary>
+        /// The 'q' character
+        /// </summary>
+        public const char q = 'q';
+
+        /// <summary>
+        /// The 'r' character
+        /// </summary>
+        public const char r = 'r';
+
+        /// <summary>
+        /// The 's' character
+        /// </summary>
+        public const char s = 's';
+
+        /// <summary>
+        /// The 't' character
+        /// </summary>
+        public const char t = 't';
+
+        /// <summary>
+        /// The 'u' character
+        /// </summary>
+        public const char u = 'u';
+
+        /// <summary>
+        /// The 'v' character
+        /// </summary>
+        public const char v = 'v';
+
+        /// <summary>
+        /// The 'w' character
+        /// </summary>
+        public const char w = 'w';
+
+        /// <summary>
         /// The 'x' character
         /// </summary>
         public const char x = 'x';
+
+        /// <summary>
+        /// The 'y' character
+        /// </summary>
+        public const char y = 'y';
 
         public const char A = 'A';
 

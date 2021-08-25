@@ -23,6 +23,14 @@ namespace Z0
             => contains(F.MinUpperLetter, F.MaxUpperLetter, src);
 
         /// <summary>
+        /// Determines whether the source value is one of <see cref='AsciLetterUpCode'/>
+        /// </summary>
+        /// <param name="src">The value to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit uppercase(AsciChar src)
+            => contains(F.MinUpperLetter, F.MaxUpperLetter, (C)src);
+
+        /// <summary>
         /// Determines whether the code of a specified character is one of <see cref='AsciLetterUpCode'/>
         /// </summary>
         /// <param name="src">The value to test</param>

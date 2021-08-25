@@ -40,7 +40,7 @@ namespace Z0.Asm
             get => Data.RegClassCode;
         }
 
-        public RegWidthCode WidthCode
+        public AsmWidthCode WidthCode
         {
             [MethodImpl(Inline)]
             get => Data.WidthCode;

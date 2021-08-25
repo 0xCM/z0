@@ -23,8 +23,8 @@ namespace Z0.Asm
     public interface IReg<T> : IReg, IContented<T>
         where T : unmanaged
     {
-        RegWidthCode Width
-            => (RegWidthCode)(ushort)core.width<T>();
+        AsmWidthCode Width
+            => (AsmWidthCode)(ushort)core.width<T>();
 
         string ITextual.Format()
             => api.format(this);

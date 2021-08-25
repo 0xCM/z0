@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using static RegWidthCode;
+    using static AsmWidthCode;
     using static RegClassCode;
     using static RegIndexCode;
     using static RegFieldFacets;
@@ -27,7 +27,7 @@ namespace Z0.Asm
             => recover<RegOp>(GpRegData);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<RegWidthCode> widths()
+        public static ReadOnlySpan<AsmWidthCode> widths()
             => RegWidthCodes;
 
         [MethodImpl(Inline), Op]
@@ -81,8 +81,8 @@ namespace Z0.Asm
                     GP8HI
                 };
 
-        internal static ReadOnlySpan<RegWidthCode> RegWidthCodes
-            => new RegWidthCode[WidthCount]
+        internal static ReadOnlySpan<AsmWidthCode> RegWidthCodes
+            => new AsmWidthCode[WidthCount]
             {
                 W8,
                 W16,

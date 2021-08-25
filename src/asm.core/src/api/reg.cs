@@ -17,7 +17,7 @@ namespace Z0.Asm
                 => new RegOp<T>(src);
 
         [MethodImpl(Inline), Op]
-        public static RegOp reg(RegWidthCode width, RegClassCode @class, RegIndexCode r)
+        public static RegOp reg(AsmWidthCode width, RegClassCode @class, RegIndexCode r)
             => AsmRegs.reg(width, @class, r);
     }
 }

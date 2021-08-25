@@ -46,13 +46,13 @@ namespace Z0.Asm
         {
             switch(src.Width)
             {
-                case RegWidthCode.W8:
+                case AsmWidthCode.W8:
                     return format(src as IReg8<T>);
-                case RegWidthCode.W16:
+                case AsmWidthCode.W16:
                     return format(src as IReg16<T>);
-                case RegWidthCode.W32:
+                case AsmWidthCode.W32:
                     return format(src as IReg32<T>);
-                case RegWidthCode.W64:
+                case AsmWidthCode.W64:
                     return format(src as IReg64<T>);
                 default:
                     var data = bytes(src.Content);

@@ -12,8 +12,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp32 : IRegOp
     {
-        RegWidthCode IRegOp.WidthCode
-            => RegWidthCode.W32;
+        AsmWidthCode IRegOp.WidthCode
+            => AsmWidthCode.W32;
     }
 
     [Free]

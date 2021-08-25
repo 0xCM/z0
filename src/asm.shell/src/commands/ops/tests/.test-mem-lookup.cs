@@ -24,7 +24,6 @@ namespace Z0.Asm
                 Warn(string.Format("There should be {0} distinct base addresses and yet there are {1}", count, distinct.Count));
 
             var symbols = MemorySymbols.alloc(capacity);
-
             for(var i=0; i<count; i++)
             {
                 ref readonly var block = ref skip(blocks,i);

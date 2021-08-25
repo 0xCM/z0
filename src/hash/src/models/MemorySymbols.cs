@@ -40,7 +40,6 @@ namespace Z0
             return count;
         }
 
-
         public static MemorySymbols alloc(uint capacity)
             => new MemorySymbols(capacity);
 
@@ -55,6 +54,7 @@ namespace Z0
         public static uint bucket(Hash32 hash, uint capacity)
             => hash % (capacity - 1);
 
+        [Op]
         public static MemoryLookup lookup(Index<MemorySymbol> symbols, uint count)
         {
             var capacity = (uint)symbols.Length;

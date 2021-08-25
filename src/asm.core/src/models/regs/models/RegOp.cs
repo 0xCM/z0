@@ -37,7 +37,7 @@ namespace Z0.Asm
             get => AsmOpClass.R;
         }
 
-        public RegWidthCode WidthCode
+        public AsmWidthCode WidthCode
         {
             [MethodImpl(Inline)]
             get => AsmRegBits.width(this);

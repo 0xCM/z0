@@ -7,7 +7,7 @@ namespace Z0.Asm
     using static RegFieldFacets;
     using static RegIndexCode;
     using static RegClassCode;
-    using static RegWidthCode;
+    using static AsmWidthCode;
 
     public enum XControlRegKind : ushort
     {

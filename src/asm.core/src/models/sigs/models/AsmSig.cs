@@ -12,15 +12,21 @@ namespace Z0.Asm
 
     using api = AsmSigs;
 
+    public struct AsmSigOp
+    {
+
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
     public struct AsmSigOps
     {
-        public AsmSigOpExpr Op0;
+        public AsmSigOp Op0;
 
-        public AsmSigOpExpr Op1;
+        public AsmSigOp Op1;
 
-        public AsmSigOpExpr Op2;
+        public AsmSigOp Op2;
 
-        public AsmSigOpExpr Op3;
+        public AsmSigOp Op3;
     }
 
     [StructLayout(LayoutKind.Sequential)]

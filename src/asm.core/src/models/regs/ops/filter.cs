@@ -30,7 +30,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static uint filter(RegWidthCode width, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
+        public static uint filter(AsmWidthCode width, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
         {
             var k=0u;
             var j = min(src.Length, dst.Length);
@@ -48,7 +48,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static uint filter(RegClassCode @class, RegWidthCode width, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
+        public static uint filter(RegClassCode @class, AsmWidthCode width, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
         {
             var k=0u;
             var j = min(src.Length, dst.Length);

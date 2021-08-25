@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static RegWidthCode;
+    using static AsmWidthCode;
     using static RegFieldFacets;
     using static RegClassCode;
 

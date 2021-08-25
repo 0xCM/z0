@@ -72,30 +72,4 @@ namespace Z0.Asm
         OpUri = P2ᐞ10,
     }
 
-    public enum AsmCellWidth : ushort
-    {
-        None = 0,
-
-        Sequence = 12,
-
-        GlobalOffset = 16,
-
-        BlockAddress = 16,
-
-        IP = 16,
-
-        BlockOffset = 16,
-
-        Statement = 64,
-
-        EncodedBytes = 32,
-
-        FormSig = 64,
-
-        OpCode = 32,
-
-        Bitstring = 180,
-
-        OpUri = 180,
-    }
 }

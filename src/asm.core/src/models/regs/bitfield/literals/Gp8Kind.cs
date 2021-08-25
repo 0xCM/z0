@@ -7,7 +7,7 @@ namespace Z0.Asm
     using static RegFieldFacets;
     using static RegIndexCode;
     using static RegClassCode;
-    using static RegWidthCode;
+    using static AsmWidthCode;
 
     /// <summary>
     /// Defines classifiers for <see cref='GP'/> registers of width <see cref='W8'/>

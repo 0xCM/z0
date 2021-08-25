@@ -41,7 +41,7 @@ namespace Z0.Asm
             return (uint)count;
         }
 
-        public RegSet Regs(RegClassCode @class, RegWidthCode width = default)
+        public RegSet Regs(RegClassCode @class, AsmWidthCode width = default)
         {
             var regs = RegSet.Empty;
             switch(@class)
@@ -70,7 +70,7 @@ namespace Z0.Asm
             const byte Count = 32;
             var dst = alloc<RegOp>(Count);
             for(var i=0; i<Count; i++)
-                seek(dst,i) = AsmRegs.reg(RegWidthCode.W128, RegClassCode.XMM, (RegIndexCode)i);
+                seek(dst,i) = AsmRegs.reg(AsmWidthCode.W128, RegClassCode.XMM, (RegIndexCode)i);
             return dst;
         }
 
@@ -79,7 +79,7 @@ namespace Z0.Asm
             const byte Count = 32;
             var dst = alloc<RegOp>(Count);
             for(var i=0; i<Count; i++)
-                seek(dst,i) = AsmRegs.reg(RegWidthCode.W128, RegClassCode.YMM, (RegIndexCode)i);
+                seek(dst,i) = AsmRegs.reg(AsmWidthCode.W128, RegClassCode.YMM, (RegIndexCode)i);
             return dst;
         }
 
@@ -88,16 +88,16 @@ namespace Z0.Asm
             const byte Count = 32;
             var dst = alloc<RegOp>(Count);
             for(var i=0; i<Count; i++)
-                seek(dst,i) = AsmRegs.reg(RegWidthCode.W512, RegClassCode.ZMM, (RegIndexCode)i);
+                seek(dst,i) = AsmRegs.reg(AsmWidthCode.W512, RegClassCode.ZMM, (RegIndexCode)i);
             return dst;
         }
 
-        public RegSet GpRegs(RegWidthCode width)
+        public RegSet GpRegs(AsmWidthCode width)
         {
             var dst = RegSet.Empty;
             switch(width)
             {
-                case RegWidthCode.W8:
+                case AsmWidthCode.W8:
                     {
                         var count = 20;
                         var buffer = alloc<RegOp>(count);
@@ -108,9 +108,9 @@ namespace Z0.Asm
                         dst = buffer;
                     }
                 break;
-                case RegWidthCode.W16:
-                case RegWidthCode.W32:
-                case RegWidthCode.W64:
+                case AsmWidthCode.W16:
+                case AsmWidthCode.W32:
+                case AsmWidthCode.W64:
                 {
                     var Count = 16;
                     var buffer = alloc<RegOp>(Count);
@@ -128,7 +128,7 @@ namespace Z0.Asm
             const byte Count = 8;
             var dst = alloc<RegOp>(Count);
             for(var i=0; i<Count; i++)
-                seek(dst,i) = AsmRegs.reg(RegWidthCode.W64, RegClassCode.MASK, (RegIndexCode)i);
+                seek(dst,i) = AsmRegs.reg(AsmWidthCode.W64, RegClassCode.MASK, (RegIndexCode)i);
             return dst;
         }
     }

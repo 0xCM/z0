@@ -87,7 +87,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static text7 name(GpClass k, RegIndexCode index, RegWidthCode width)
+        public static text7 name(GpClass k, RegIndexCode index, AsmWidthCode width)
         {
             const byte RegLength = 4;
             const string R0 = "rax eax ax  al  ";
@@ -118,7 +118,7 @@ namespace Z0.Asm
             switch(src.RegClassCode)
             {
                 case RegClassCode.GP:
-                    return name(Gp, src.Index, (RegWidthCode)(u16(src) & 0b111));
+                    return name(Gp, src.Index, (AsmWidthCode)(u16(src) & 0b111));
                 case RegClassCode.XMM:
                     return name(Xmm, src.Index);
                 case RegClassCode.YMM:
@@ -137,7 +137,7 @@ namespace Z0.Asm
             switch(src.RegClassCode)
             {
                 case RegClassCode.GP:
-                    return name(Gp, src.Index, (RegWidthCode)(src.Bitfield & 0b111));
+                    return name(Gp, src.Index, (AsmWidthCode)(src.Bitfield & 0b111));
                 case RegClassCode.XMM:
                     return name(Xmm, src.Index);
                 case RegClassCode.YMM:
@@ -151,17 +151,17 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        static ushort offsset(GpClass k, RegIndexCode index, RegWidthCode width)
+        static ushort offsset(GpClass k, RegIndexCode index, AsmWidthCode width)
         {
             const byte RegLength = 4;
             const byte RowLength = 4*RegLength;
             var row = (uint)((uint)index*RowLength);
             var col = z32;
-            if(width == RegWidthCode.W64)
+            if(width == AsmWidthCode.W64)
                 col = 0;
-            else if(width == RegWidthCode.W32)
+            else if(width == AsmWidthCode.W32)
                 col = 4;
-            else if(width == RegWidthCode.W16)
+            else if(width == AsmWidthCode.W16)
                 col = 8;
             else
                 col = 12;

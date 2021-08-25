@@ -11,28 +11,32 @@ namespace Z0.Asm
 
     using static core;
     using static Root;
-    using static Blit;
     using static AsmChecks;
 
     partial class AsmCmdService
     {
+        [CmdOp(".test")]
         unsafe Outcome Test(CmdArgs args)
         {
             var result = Outcome.Success;
+            const string DataSource = "38D10F9FC00FB6C0C338D10F97C00FB6C0C36639D10F9FC00FB6C0C36639D10F97C00FB6C0C339D10F9FC00FB6C0C339D10F97C0C34839D10F9FC00FB6C0C34839D10F97C00FB6C0C3";
+            var input = span(DataSource);
+            var count = DataSource.Length;
+            var dst = alloc<HexDigitValue>(count);
+            result = Hex.digits(input,dst);
+            if(result.Fail)
+                return result;
 
-            var cc = CallCv.Win64;
+            for(var i=0; i<count; i++)
+            {
+                if(Hex.upper(skip(dst,i)) != skip(input,i))
+                    return (false, "Not Equal");
+            }
 
-            var cc8 = CallCv.regslots(cc,w8);
-            Write(cc8.Format());
-
-            var cc16 = CallCv.regslots(cc,w16);
-            Write(cc16.Format());
-
-            var cc32 = CallCv.regslots(cc,w32);
-            Write(cc32.Format());
-
-            var cc64 = CallCv.regslots(cc,w64);
-            Write(cc64.Format());
+            var buffer = alloc<byte>(count/2);
+            var size = Hex.pack(dst,buffer);
+            Write(DataSource);
+            Write(buffer.FormatHex());
 
             return result;
         }
@@ -48,7 +52,6 @@ namespace Z0.Asm
             return result;
         }
 
-        [CmdOp(".test")]
         Outcome TestBitMappers(CmdArgs args)
         {
             var result = Outcome.Success;

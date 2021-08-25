@@ -40,7 +40,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<RegOp> Where(RegWidthCode width)
+        public ReadOnlySpan<RegOp> Where(AsmWidthCode width)
         {
             var target = Cache;
             var count = api.filter(width, Regs, target);
@@ -48,7 +48,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<RegOp> Where(RegClassCode @class, RegWidthCode width)
+        public ReadOnlySpan<RegOp> Where(RegClassCode @class, AsmWidthCode width)
         {
             var target = Cache;
             var count = api.filter(@class, width, Regs, target);

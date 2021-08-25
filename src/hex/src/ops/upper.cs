@@ -28,5 +28,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool upper(char c)
             => upper((AsciCode)c);
+
+        /// <summary>
+        /// Retrieves the character corresponding to a specified <see cref='HexDigitValue'/>
+        /// </summary>
+        /// <param name="case">The case specifier</param>
+        /// <param name="value">The digit value</param>
+        [MethodImpl(Inline), Op]
+        public static char upper(HexDigitValue value)
+            => (char)symbol(UpperCase, value);
     }
 }

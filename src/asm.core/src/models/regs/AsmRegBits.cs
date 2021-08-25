@@ -48,7 +48,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static RegOp reg(RegWidthCode width, RegClassCode @class, RegIndexCode r)
+        public static RegOp reg(AsmWidthCode width, RegClassCode @class, RegIndexCode r)
             => new RegOp(or((byte)width, sll((ushort)@class, 5), sll((ushort)r, 10)));
 
         [MethodImpl(Inline), Op]
@@ -56,17 +56,17 @@ namespace Z0.Asm
             => new RegOp((ushort)kind);
 
         [MethodImpl(Inline), Op]
-        public static RegKind kind(RegIndexCode i, RegClassCode k, RegWidthCode w)
+        public static RegKind kind(RegIndexCode i, RegClassCode k, AsmWidthCode w)
             => (RegKind)(((uint)i  << IndexField) | ((uint)k << ClassField) | ((uint)w << WidthField));
 
         [MethodImpl(Inline), Op]
-        public static uint regops(RegClassCode @class, RegWidthCode w, Span<RegOp> dst)
+        public static uint regops(RegClassCode @class, AsmWidthCode w, Span<RegOp> dst)
         {
             ref var r = ref first(dst);
             var count = AsmRegData.regcount(@class);
             var counter = 0u;
             for(var i=0; i<count; i++)
-                seek(r,counter++) = reg((RegWidthCode)w, @class, (RegIndexCode)i);
+                seek(r,counter++) = reg((AsmWidthCode)w, @class, (RegIndexCode)i);
             return counter;
         }
 
@@ -111,7 +111,7 @@ namespace Z0.Asm
             => c == RegClassCode.GP;
 
         [MethodImpl(Inline), Op]
-        public static bit gp(RegOp r, RegWidthCode w)
+        public static bit gp(RegOp r, AsmWidthCode w)
             => w == r.WidthCode && gp(r);
 
         /// <summary>
@@ -167,16 +167,16 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline), Op]
-        public static RegWidthCode width(RegOp src)
-            => (RegWidthCode)(src.Bitfield & 0b111);
+        public static AsmWidthCode width(RegOp src)
+            => (AsmWidthCode)(src.Bitfield & 0b111);
 
         /// <summary>
         /// Determines the width of the register represented by a specified kind
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static RegWidthCode width(RegKind src)
-            => (RegWidthCode)Bits.slice((uint)src, (byte)RegFieldIndex.W, (byte)RegFieldWidth.RegWidth);
+        public static AsmWidthCode width(RegKind src)
+            => (AsmWidthCode)Bits.slice((uint)src, (byte)RegFieldIndex.W, (byte)RegFieldWidth.RegWidth);
 
         [MethodImpl(Inline), Op]
         public static bit valid(RegIndexCode src)
@@ -191,11 +191,11 @@ namespace Z0.Asm
             => (uint)src >= 32;
 
         [MethodImpl(Inline), Op]
-        public static ushort bitwidth(RegWidthCode src)
-            => src == RegWidthCode.W80 ? (ushort)80 : (ushort)Pow2.pow((byte)(((byte)src) << 3));
+        public static ushort bitwidth(AsmWidthCode src)
+            => src == AsmWidthCode.W80 ? (ushort)80 : (ushort)Pow2.pow((byte)(((byte)src) << 3));
 
         [MethodImpl(Inline), Op]
-        public static void split(RegKind src, out RegIndexCode c, out RegClassCode k, out RegWidthCode w)
+        public static void split(RegKind src, out RegIndexCode c, out RegClassCode k, out AsmWidthCode w)
         {
             c = index(src);
             k = @class(src);

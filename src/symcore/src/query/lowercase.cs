@@ -23,6 +23,14 @@ namespace Z0
             => contains(F.MinLowerLetter, F.MaxLowerLetter, src);
 
         /// <summary>
+        /// Determines whether the source value is one of <see cref='AsciLetterLoCode'/>
+        /// </summary>
+        /// <param name="src">The value to test</param>
+        [MethodImpl(Inline), Op]
+        public static bool lowercase(AsciChar src)
+            => contains(F.MinLowerLetter, F.MaxLowerLetter, (C)src);
+
+        /// <summary>
         /// Determines whether the code of a specified character is one of <see cref='AsciLetterLoCode'/>
         /// </summary>
         /// <param name="src">The value to test</param>
