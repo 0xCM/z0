@@ -10,8 +10,9 @@ namespace Z0
 
     using static Root;
     using static BitMaskLiterals;
+    using static cpu;
 
-    partial struct cpu
+    partial struct vbits
     {
         /// <summary>
         /// Distributes each source bit to to a specified bit of each byte in a 256-bit target vector

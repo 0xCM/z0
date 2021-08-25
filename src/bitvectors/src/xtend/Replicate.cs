@@ -41,7 +41,7 @@ namespace Z0
         public static BitVector128<N,T> Replicate<N,T>(this BitVector128<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitVector128.replicate(src);
+                => BitVector.replicate(src);
 
         /// <summary>
         /// Creates a copy of the vector

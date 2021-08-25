@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vinflate256x8u(uint src, byte index)
-            => vmap32x1(src,index, out Vector256<byte> dst);
+            => vbits.vmap32x1(src,index, out Vector256<byte> dst);
     }
 }

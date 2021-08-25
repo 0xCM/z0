@@ -17,6 +17,7 @@ namespace Z0
         /// <summary>
         /// 2^0 = 1
         /// </summary>
+        [Symbol("2^0")]
         P2ᐞ00 = K.T00,
     }
 }

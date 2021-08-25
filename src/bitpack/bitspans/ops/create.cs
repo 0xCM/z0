@@ -12,23 +12,23 @@ namespace Z0
         [Op, Closures(Closure)]
         public static BitSpan create<T>(T src)
             where T : unmanaged
-                => gpack.unpack(src);
+                => vbits.unpack(src);
 
         [Op, Closures(Closure)]
         public static BitSpan create<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => gpack.unpack(src);
+                => vbits.unpack(src);
 
         [Op, Closures(Closure)]
         public static BitSpan create<T>(Span<T> src)
             where T : unmanaged
-                => gpack.unpack(src.ReadOnly());
+                => vbits.unpack(src.ReadOnly());
 
         [Op, Closures(Closure)]
         public static BitSpan create<T>(ReadOnlySpan<T> src, Span<bit> buffer)
             where T : unmanaged
         {
-            gpack.unpack(src, buffer);
+            vbits.unpack(src, buffer);
             return buffer;
         }
     }

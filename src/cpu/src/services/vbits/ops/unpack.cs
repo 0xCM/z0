@@ -6,11 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Root;
+    using static cpu;
     using static core;
 
-    partial struct gpack
+    partial struct vbits
     {
         [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static uint unpack<T>(ReadOnlySpan<T> src, Span<bit> dst)

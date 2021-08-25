@@ -39,14 +39,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Mask(E index)
-            => api.mask(this, index);
+            => vmask.mask(this, index);
 
         [MethodImpl(Inline)]
         public T Read(E index)
-            => api.read(this, index);
+            => api.extract(this, index);
 
         [MethodImpl(Inline)]
         public void Write(T src, E index)
-            => api.write(src, index, ref this);
+            => api.store(src, index, ref this);
     }
 }

@@ -22,7 +22,7 @@ namespace Z0
                 var bitseq = bs.BitSeq.Blocked(block);
                 Claim.eq(bitseq.CellCount,n4);
 
-                var packed = gpack.pack4x8x1(bitseq,0);
+                var packed = vbits.pack4x8x1(bitseq,0);
                 Trace("bitstring", bs, FlairKind.Running);
                 Trace("bitseq", bitseq.Format(), FlairKind.Running);
 
@@ -40,7 +40,7 @@ namespace Z0
                 BitPack.unpack1x16(src, dst, 0);
                 unpack_check(src,dst);
 
-                var rebound = gpack.pack16x8x1(dst);
+                var rebound = vbits.pack16x8x1(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -55,7 +55,7 @@ namespace Z0
 
                 unpack_check(src,dst);
 
-                var rebound = gpack.pack32x8x1(dst);
+                var rebound = vbits.pack32x8x1(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -70,7 +70,7 @@ namespace Z0
 
                 unpack_check(src,dst.Storage);
 
-                var rebound = gpack.pack64x8x1(dst,0);
+                var rebound = vbits.pack64x8x1(dst,0);
 
                 ClaimPrimal.eq(src,rebound);
             }
@@ -111,7 +111,7 @@ namespace Z0
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
-                uint packed = gpack.pack32x8x1(bitseq);
+                uint packed = vbits.pack32x8x1(bitseq);
                 for(var i=0; i< count; i++)
                     Claim.eq(bs[i], (byte)Bit32.test(packed, i));
             }
@@ -144,7 +144,7 @@ namespace Z0
             {
                 var src = SpanBlocks.single<byte>(n256);
                 gcpu.vones<byte>(n256).StoreTo(src);
-                var dst = gpack.pack32x8x1(src);
+                var dst = vbits.pack32x8x1(src);
                 Claim.eq(dst,uint.MaxValue);
 
             }
@@ -153,7 +153,7 @@ namespace Z0
             {
                 var src = SpanBlocks.single<byte>(n128);
                 gcpu.vones<byte>(n128).StoreTo(src);
-                var dst = gpack.pack16x8x1(src);
+                var dst = vbits.pack16x8x1(src);
                 Claim.eq(dst,ushort.MaxValue);
             }
 

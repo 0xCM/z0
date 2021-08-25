@@ -38,14 +38,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Mask(byte index)
-            => api.mask(this, index);
+            => vmask.mask(this, index);
 
         [MethodImpl(Inline)]
         public T Read(byte index)
-            => api.read(this, index);
+            => api.extract(this, index);
 
         [MethodImpl(Inline)]
         public void Write(T src, byte index)
-            => api.write(src, index, ref this);
+            => api.store(src, index, ref this);
     }
 }

@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
+    using static core;
 
     partial struct vbits
     {
@@ -24,9 +25,9 @@ namespace Z0
                 => new Bitfield256<E,T>(widths, state);
 
         [MethodImpl(Inline)]
-        public static Bitfield256<E,T> bitfield<E,T>(Vector256<T> state)
-            where E : unmanaged, Enum
+        public static Bitfield256<E,T> bitfield<E,T>(Vector256<T> state, Symbols<E> symbols)
+            where E : unmanaged
             where T : unmanaged
-                => new Bitfield256<E,T>(widths<E>(w256), state);
+                => new Bitfield256<E,T>(segwidths<E>(w256, symbols), state);
     }
 }

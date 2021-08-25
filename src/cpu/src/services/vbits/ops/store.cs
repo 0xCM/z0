@@ -8,18 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct vbits
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(in Bitfield256<T> src, byte index)
+        public static void store<T>(T src, byte index, ref Bitfield256<T> dst)
             where T : unmanaged
-                => BitMasks.lo<T>(src.SegWidth(index));
+                => dst.State = cpu.vcell(dst.State, index, gmath.and(src, dst.Mask(index)));
 
         [MethodImpl(Inline)]
-        public static T mask<E,T>(in Bitfield256<E,T> src, E index)
+        public static void store<E,T>(T src, E index, ref Bitfield256<E,T> dst)
             where E : unmanaged
             where T : unmanaged
-                => BitMasks.lo<T>(src.SegWidth(index));
+                => dst.State = cpu.vcell(dst.State, bw8(index), gmath.and(src, dst.Mask(index)));
     }
 }

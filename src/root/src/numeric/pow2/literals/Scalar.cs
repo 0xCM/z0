@@ -166,18 +166,18 @@ namespace Z0
         /// <summary>
         /// 2^31 = 2,147,483,648 = 0x80000000
         /// </summary>
-        public const uint T31 = (uint)K.P2ᐞ31;
+        public const uint T31 = 0x80000000;
 
         /// <summary>
         /// 2^32 = 4,294,967,296 = 0x100000000
         /// </summary>
-        public const ulong T32 = (ulong)K.P2ᐞ32;
+        public const ulong T32 = 2*(long)T31;
 
-        public const ulong T33 = (ulong)K.P2ᐞ33;
+        public const ulong T33 = 2*T32;
 
-        public const ulong T34 = (ulong)K.P2ᐞ34;
+        public const ulong T34 = 2*T33;
 
-        public const ulong T35 = (long)K.P2ᐞ35;
+        public const ulong T35 = 2*T34;
 
         public const ulong T36 = (long)K.P2ᐞ36;
 

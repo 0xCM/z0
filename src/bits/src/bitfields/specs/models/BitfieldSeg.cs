@@ -21,17 +21,17 @@ namespace Z0
         /// <summary>
         /// The segment name
         /// </summary>
-        public Identifier SegName {get;}
+        public readonly Identifier SegName {get;}
 
         /// <summary>
         /// The index, relative to the containing section, of the first bit in the segment
         /// </summary>
-        public uint Min {get;}
+        public readonly uint Min {get;}
 
         /// <summary>
         /// The index, relative to the containing section, of the last bit in the segment
         /// </summary>
-        public uint Max {get;}
+        public readonly uint Max {get;}
 
         [MethodImpl(Inline)]
         public BitfieldSeg(Identifier name, uint min, uint max)

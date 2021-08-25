@@ -11,8 +11,9 @@ namespace Z0
     using static Root;
     using static core;
     using static BitMaskLiterals;
+    using static gcpu;
 
-    partial struct gcpu
+    partial struct vbits
     {
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -635,5 +636,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<ulong> v0000FFFFFFFF0000(N256 w)
             => cpu.vbroadcast(w, Central64x64x32);
+
+
     }
 }

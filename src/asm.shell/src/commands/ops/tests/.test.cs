@@ -16,7 +16,6 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".test")]
         unsafe Outcome Test(CmdArgs args)
         {
             var result = Outcome.Success;
@@ -49,23 +48,26 @@ namespace Z0.Asm
             return result;
         }
 
-        Outcome TestTokenMaps()
+        [CmdOp(".test")]
+        Outcome TestBitMappers(CmdArgs args)
         {
             var result = Outcome.Success;
-
-            var ockinds = TokenMaps.ockinds();
-            var data = TokenMaps.serialize(ockinds).View;
             var symbols = Symbols.index<AsmOcTokenKind>();
             var symview = symbols.View;
-            var count = symview.Length;
+            var map = BitMappers.define<AsmOcTokenKind,Pow2x16>(symbols);
+            var data = BitMappers.serialize(map).View;
+            var count = map.PointCount;
+            var indices = slice(data,0, count);
+            var bits = recover<ushort>(slice(data,count,count*size<Pow2x16>()));
             for(var i=0; i<count; i++)
             {
                 ref readonly var symbol = ref skip(symview,i);
-                ref readonly var map = ref ockinds[symbol.Kind];
-                ref readonly var bits = ref skip(data,i);
+                ref readonly var entry = ref map[symbol.Kind];
+                ref readonly var index = ref skip(data,i);
+
                 var buffer = CharBlock32.Null;
-                var bitstring = BitRender.format16x8(bits, Chars.Colon);
-                var expr = string.Format("{0} => {1}", map, bitstring);
+                var bitstring = BitRender.format16(skip(bits,i));
+                var expr = string.Format("{0} => {1}", entry, bitstring);
                 Write(expr);
             }
 
