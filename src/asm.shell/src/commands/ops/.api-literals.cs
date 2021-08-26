@@ -2,14 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using static Root;
+    using System;
 
-    [ApiHost]
-    public partial class WinSdk : ToolService<WinSdk>
+    using static core;
+
+    partial class AsmCmdService
     {
-        public WinSdkInfo Latest()
-            => latest();
+        [CmdOp(".api-literals")]
+        Outcome EmitApiLiterals(CmdArgs args)
+            => EmitApiLiterals();
     }
 }

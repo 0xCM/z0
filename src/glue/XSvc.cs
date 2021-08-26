@@ -71,6 +71,14 @@ namespace Z0
         public static BdDisasm BdDisasm(this IServiceContext ctx)
             => Tools.BdDisasm.create(ctx);
 
+        [Op]
+        public static WinSdk WinSdk(this IWfRuntime wf)
+            => Z0.WinSdk.create(wf);
+
+        [Op]
+        public static Msvs Msvs(this IWfRuntime wf)
+            => Z0.Msvs.create(wf);
+
         public static Index<IToolResultHandler> ResultHandlers(this IEnvPaths paths)
         {
             var buffer = sys.alloc<IToolResultHandler>(2);
@@ -79,6 +87,5 @@ namespace Z0
             seek(dst,1) = new RobocopyResultHandler(paths);
             return buffer;
         }
-
     }
 }

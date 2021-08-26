@@ -19,36 +19,38 @@ namespace Z0
             => new LiteralProvider(src,usage);
 
         [Op]
-        public static string format(in ApiLiteralValue src)
+        public static string format<T>(in RuntimeLiteralValue<T> src)
+            where T : IEquatable<T>
         {
-            var content = src.Data switch
+            var data = src.Data.ToString();
+            var content = data switch
             {
                 RP.WinEol => "<weol>",
                 RP.LinuxEol => "<leol>",
                 RP.AsciNull => "<ascinull>",
-                _ => src.Data
+                _ => data
             };
             return RP.ticks(content);
         }
 
-        public static string format(in ApiLiteral src)
+        public static string format(in RuntimeLiteral src)
             => string.Format("{0,-16} | {1,-16} | {2,-12} | {3}", src.Source, src.Name, src.Kind, value(src));
 
         [Op]
-        public static ApiLiteralValue value(in ApiLiteral src)
+        public static RuntimeLiteralValue<string> value(in RuntimeLiteral src)
         {
             var value = EmptyString;
             if(src.Kind == ClrLiteralKind.String)
-                value = ((StringAddress)src.Content).Format();
+                value = ((StringAddress)src.Data).Format();
             else
-                value = src.Content.ToString();
-            return value;
+                value = src.Data.ToString();
+            return new RuntimeLiteralValue<string>(value);
         }
 
         [Op]
-        public static ApiLiteralSpec specify(in ApiLiteral src)
+        public static CompilationLiteral specify(in RuntimeLiteral src)
         {
-            var dst = default(ApiLiteralSpec);
+            var dst = default(CompilationLiteral);
             dst.Source = src.Source.Format();
             dst.Name = src.Name.Format();
             dst.Kind = src.Kind.ToString();
@@ -78,12 +80,24 @@ namespace Z0
             return buffer;
         }
 
+        public static Index<RuntimeLiteral> provided(Type src)
+        {
+            var tag = src.Tag<LiteralProviderAttribute>();
+            if(tag)
+            {
+                var usage = tag.Value.Usage;
+                return provided(provider(src,usage));
+            }
+            else
+                return Index<RuntimeLiteral>.Empty;
+        }
+
         [Op]
-        public static Index<ApiLiteral> provided(LiteralProvider src)
+        public static Index<RuntimeLiteral> provided(LiteralProvider src)
         {
             var fields = src.Definition.Fields().ReadOnly();
             var count = fields.Length;
-            var buffer = alloc<ApiLiteral>(count);
+            var buffer = alloc<RuntimeLiteral>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
@@ -105,7 +119,7 @@ namespace Z0
                     data = ClrLiterals.serialize(raw,lk);
                 }
 
-                seek(dst,i) = new ApiLiteral(ClrLiterals.name(field.DeclaringType), ClrLiterals.name(field), data, lk);
+                seek(dst,i) = new RuntimeLiteral(ClrLiterals.name(field.DeclaringType), ClrLiterals.name(field), data, lk);
             }
             return buffer;
         }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static FormatFunctions;
@@ -97,5 +98,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DelimitedIndex<T>(Index<T> src)
             => new DelimitedIndex<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator DelimitedIndex<T>(List<T> src)
+            => new DelimitedIndex<T>(src.ToArray());
+
     }
 }

@@ -2,14 +2,14 @@
 // Copyright   :  Copyright 2020 Aaron R Robinson
 // License     :  See Robinson.lic in project license directory
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.IO;
 
-    partial struct WinSdk
+    partial class WinSdk
     {
         [Op]
         public static WinSdkInfo latest()

@@ -5,12 +5,65 @@
 namespace Z0
 {
     using FF = AsciLetterUp;
+    using ff = AsciLetterLo;
 
     /// <summary>
     /// Defines symbols for file system drive letters
     /// </summary>
     public enum DriveLetter : ushort
     {
+        a = ff.a,
+
+        b = ff.b,
+
+        c = ff.c,
+
+        d = ff.d,
+
+        e = ff.e,
+
+        f = ff.f,
+
+        g = ff.g,
+
+        h = ff.h,
+
+        i = ff.i,
+
+        j = ff.j,
+
+        k = ff.k,
+
+        l = ff.l,
+
+        m = ff.m,
+
+        n = ff.n,
+
+        o = ff.o,
+
+        p = ff.p,
+
+        q = ff.q,
+
+        r = ff.r,
+
+        s = ff.s,
+
+        t = ff.t,
+
+        u = ff.u,
+
+        v = ff.v,
+
+        w = ff.w,
+
+        x = ff.x,
+
+        y = ff.y,
+
+        z = ff.z,
+
         A = FF.A,
 
         B = FF.B,
@@ -61,6 +114,7 @@ namespace Z0
 
         Y = FF.Y,
 
-        Z = FF.Z
+        Z = FF.Z,
+
     }
 }

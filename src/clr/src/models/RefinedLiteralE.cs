@@ -20,22 +20,22 @@ namespace Z0
         /// <summary>
         /// The classifying literal
         /// </summary>
-        public T Value {get;}
+        public T Data {get;}
 
         public ClrLiteralKind Kind {get;}
 
-        public Name Name => Value.ToString();
+        public Name Name => Data.ToString();
 
         [MethodImpl(Inline)]
         public RefinedLiteral(T @class, ClrEnumKind kind)
         {
-            Value = @class;
+            Data = @class;
             Kind = (ClrLiteralKind)kind;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator T(RefinedLiteral<T> t)
-            => t.Value;
+            => t.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator RefinedLiteral<T>(T value)

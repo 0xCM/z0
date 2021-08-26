@@ -7,18 +7,10 @@ namespace Z0.Asm
     using System;
 
     using static core;
+    using static WsAtoms;
 
     partial class AsmCmdService
     {
-        [CmdOp(".asmgen")]
-        Outcome Generate(CmdArgs args)
-        {
-            var result = Outcome.Success;
-
-
-            return result;
-        }
-
         [CmdOp(".machine")]
         Outcome EmitMachineTables(CmdArgs args)
         {
@@ -42,8 +34,8 @@ namespace Z0.Asm
             EmitTokens(tokens.SigTokens());
             EmitTokens(tokens.ConditonTokens());
             EmitTokens(tokens.PrefixTokens());
-            EmitSymKinds(Symbols.index<AsmOpClass>(), tables.Table(WsAtoms.machine,"classes.asm.operands"));
-            EmitSymIndex<RegClassCode>(tables.Table(WsAtoms.machine, "classes.asm.regs"));
+            EmitSymKinds(Symbols.index<AsmOpClass>(), tables.Table(machine,"classes.asm.operands"));
+            EmitSymIndex<RegClassCode>(tables.Table(machine, "classes.asm.regs"));
             return result;
         }
 
@@ -53,8 +45,8 @@ namespace Z0.Asm
             var components = ApiRuntimeLoader.assemblies();
             var providers = ApiLiterals.providers(components).View;
             var count = providers.Length;
-            var buffer = list<ApiLiteralSpec>();
-            var dst = ApiWs.Table<ApiLiterals>();
+            var buffer = list<CompilationLiteral>();
+            var dst = Ws.Tables().Table<ApiLiterals>(machine);
             for(var i=0; i<count; i++)
             {
                 ref readonly var provider = ref skip(providers,i);
@@ -66,7 +58,7 @@ namespace Z0.Asm
                 }
             }
 
-            TableEmit(buffer.ViewDeposited(), ApiLiteralSpec.RenderWidths, dst);
+            TableEmit(buffer.ViewDeposited(), CompilationLiteral.RenderWidths, dst);
 
             return result;
         }
@@ -74,7 +66,7 @@ namespace Z0.Asm
         Outcome GenSibBits()
         {
             var result = Outcome.Success;
-            var dst = TableWs().Path(WsAtoms.machine, "sib", FS.ext("bits") + FS.Csv);
+            var dst = TableWs().Path(machine, "sib", FS.ext("bits") + FS.Csv);
             var rows = AsmBits.SibRows().View;
             TableEmit(rows, SibBitfieldRow.RenderWidths, dst);
             return result;
@@ -82,7 +74,7 @@ namespace Z0.Asm
 
         Outcome GenModRmBits()
         {
-            var path = TableWs().Path(WsAtoms.machine, "modrm", FS.ext("bits") + FS.Csv);
+            var path = TableWs().Path(machine, "modrm", FS.ext("bits") + FS.Csv);
             var flow = Wf.EmittingFile(path);
             using var writer = path.AsciWriter();
             var dst = span<char>(256*128);
@@ -95,7 +87,7 @@ namespace Z0.Asm
 
         void EmitTokens(ITokenSet src)
         {
-            var dst = Ws.Tables().Table<SymToken>(WsAtoms.machine, src.Name);
+            var dst = Ws.Tables().Table<SymToken>(machine, src.Name);
             var tokens = Symbols.tokens(src.Types());
             TableEmit(tokens, SymToken.RenderWidths, dst);
         }

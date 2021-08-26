@@ -8,7 +8,6 @@ namespace Z0
 
     partial struct Blit
     {
-
         /// <summary>
         /// Represents the empty vector
         /// </summary>

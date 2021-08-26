@@ -16,7 +16,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             const string qid = "process-asm.rex";
             var counter = 0u;
-            var records = GetProcessAsm();
+            var records = State.ProcessAsm();
             var buffer = State.ProcessAsmSelection();
             buffer.Clear();
             var i = 0u;
@@ -33,7 +33,7 @@ namespace Z0.Asm
             const string qid = "process-asm.vex";
 
             var counter = 0u;
-            var records = GetProcessAsm();
+            var records = State.ProcessAsm();
             var buffer = State.ProcessAsmSelection();
             buffer.Clear();
             var i = 0u;

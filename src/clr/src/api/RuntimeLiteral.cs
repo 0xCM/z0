@@ -12,37 +12,39 @@ namespace Z0
     using api = ApiLiterals;
 
     /// <summary>
-    /// Encodes a literal value and, optionally, it's purpose
+    /// Specifies the content of a <see cref='CompilationLiteral'/> at runtime
     /// </summary>
     /// <remarks>
     /// The <see cref='decimal'/> type is not supported; the <see cref='string'/> type is supported via addressing
     /// </remarks>
-    [StructLayout(LayoutKind.Sequential,Pack=1,Size=(int)StorageSize), Blittable(StorageSize)]
-    public readonly struct ApiLiteral : ITextual
+    [StructLayout(LayoutKind.Sequential,Pack=1,Size=(int)StorageSize), Blittable(StorageSize), Record(TableName)]
+    public readonly struct RuntimeLiteral : ITextual, IRuntimeLiteral
     {
+        public const string TableName = "literals.runtime";
+
         public const uint StorageSize = 2*StringAddress.StorageSize + PrimalSizes.U64 + PrimalSizes.U8;
 
         public StringAddress Source {get;}
 
         public StringAddress Name {get;}
 
-        public ulong Content {get;}
+        public ulong Data {get;}
 
         public ClrLiteralKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public ApiLiteral(StringAddress source, StringAddress name, ulong content, ClrLiteralKind clr)
+        public RuntimeLiteral(StringAddress source, StringAddress name, ulong content, ClrLiteralKind clr)
         {
             Source = source;
             Name = name;
-            Content = content;
+            Data = content;
             Kind = clr;
         }
 
-        public ApiLiteralValue Value()
+        public RuntimeLiteralValue<string> Value()
             => api.value(this);
 
-        public ApiLiteralSpec Specify()
+        public CompilationLiteral Specify()
             => api.specify(this);
 
         public string Format()

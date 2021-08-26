@@ -23,19 +23,8 @@ namespace Z0
         public static int N => (int)width<T>();
 
         [MethodImpl(Inline)]
-        public static BitVector<T> operator * (BitMatrix<T> A, BitVector<T> x)
-            => BitMatrix.mul(A,x);
-
-        [MethodImpl(Inline)]
         internal BitMatrix(Span<T> data)
             => Data = data;
-
-        [MethodImpl(Inline)]
-        internal BitMatrix(BitVector<T> fill)
-        {
-            Data = new T[fill.Width];
-            Data.Fill(fill);
-        }
 
         public ref T Head
         {
@@ -67,7 +56,7 @@ namespace Z0
         public ref BitVector<T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref AsBitVector(ref memory.seek(Data, row));
+            get => ref AsBitVector(ref core.seek(Data, row));
         }
 
         public bit this[int row, int col]
@@ -87,5 +76,11 @@ namespace Z0
         public BitMatrix<S> As<S>()
             where S : unmanaged
                 => new BitMatrix<S>(Content.Recover<T,S>());
+
+        [MethodImpl(Inline)]
+        public static BitVector<T> operator * (BitMatrix<T> A, BitVector<T> x)
+            => BitMatrix.mul(A,x);
+
+
     }
 }

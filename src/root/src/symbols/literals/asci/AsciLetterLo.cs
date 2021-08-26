@@ -139,15 +139,5 @@ namespace Z0
         /// The 'z' symbol
         /// </summary>
         z = 'z',
-
-        /// <summary>
-        /// The first declared symbol
-        /// </summary>
-        First = a,
-
-        /// <summary>
-        /// The last declared symbol
-        /// </summary>
-        Last = b,
     }
 }

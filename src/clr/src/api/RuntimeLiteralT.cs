@@ -12,47 +12,47 @@ namespace Z0
     /// <summary>
     /// Covers a value that can be interpreted as a compile-time literal constant
     /// </summary>
-    public readonly struct ApiLiteral<T> : ILiteralValue<T>
+    public readonly struct RuntimeLiteral<T> : IRuntimeLiteral<T>
         where T : unmanaged, IEquatable<T>
     {
         public StringAddress Source {get;}
 
         public StringAddress Name {get;}
 
-        public T Value {get;}
+        public T Data {get;}
 
         public ClrLiteralKind Kind {get;}
 
         public LiteralUsage Usage {get;}
 
         [MethodImpl(Inline)]
-        public ApiLiteral(StringAddress source,  StringAddress name, T value, ClrLiteralKind kind, LiteralUsage usage = default)
+        public RuntimeLiteral(StringAddress source,  StringAddress name, T value, ClrLiteralKind kind, LiteralUsage usage = default)
         {
             Source = source;
             Name = name;
-            Value = value;
+            Data = value;
             Kind = kind;
             Usage = usage;
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(ApiLiteral<T> src)
-            => Value.Equals(src.Value) && Kind == src.Kind && Usage == src.Usage;
+        public bool Equals(RuntimeLiteral<T> src)
+            => Data.Equals(src.Data) && Kind == src.Kind && Usage == src.Usage;
 
         [MethodImpl(Inline)]
         public string Format()
-            => Value.ToString();
+            => Data.ToString();
 
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
-            => Value.GetHashCode();
+            => Data.GetHashCode();
 
         public override bool Equals(object src)
-            => src is ApiLiteral<T> v && Equals(v);
+            => src is RuntimeLiteral<T> v && Equals(v);
 
-        public static ApiLiteral<T> Empty
+        public static RuntimeLiteral<T> Empty
             => default;
     }
 }

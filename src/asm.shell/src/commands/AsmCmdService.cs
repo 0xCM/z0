@@ -24,8 +24,6 @@ namespace Z0.Asm
 
         ScriptRunner ScriptRunner;
 
-        CmdLineRunner CmdRunner;
-
         AsmShellState State;
 
         IApiPack ApiPack;
@@ -127,7 +125,7 @@ namespace Z0.Asm
             LlvmDatasets = Wf.LlvmDatasets();
             LlvmEtl = Wf.LlvmEtl();
             OmniScript = Wf.OmniScript();
-            State.DevWs(Ws);
+            State.Init(Wf,Ws);
         }
 
         protected override void Disposing()
@@ -222,25 +220,25 @@ namespace Z0.Asm
             return OmniScript.Run(cmd, vars, out var response);
         }
 
-        ReadOnlySpan<ProcessAsmRecord> GetProcessAsm()
-        {
-            if(State.ProcessAsmCount != 0)
-                return State.ProcessAsm();
+        // ReadOnlySpan<ProcessAsmRecord> GetProcessAsm()
+        // {
+        //     if(State.ProcessAsmCount != 0)
+        //         return State.ProcessAsm();
 
-            var path = ApiArchive.ProcessAsmPath();
-            var buffer = alloc<ProcessAsmRecord>(AsmEtl.ProcessAsmCount(path));
-            Write(string.Format("Loading process asm from {0}", path.ToUri()));
-            var result = AsmEtl.LoadProcessAsm(path, buffer);
-            if(result.Fail)
-            {
-                Error(result.Message);
-                return default;
-            }
+        //     var path = ApiArchive.ProcessAsmPath();
+        //     var buffer = alloc<ProcessAsmRecord>(AsmEtl.ProcessAsmCount(path));
+        //     Write(string.Format("Loading process asm from {0}", path.ToUri()));
+        //     var result = AsmEtl.LoadProcessAsm(path, buffer);
+        //     if(result.Fail)
+        //     {
+        //         Error(result.Message);
+        //         return default;
+        //     }
 
-            var loaded = State.ProcessAsm(buffer);
-            Write(string.Format("Loaded {0} process asm records from {1}", loaded.Length, path.ToUri()));
-            return loaded;
-        }
+        //     var loaded = State.ProcessAsm(buffer);
+        //     Write(string.Format("Loaded {0} process asm records from {1}", loaded.Length, path.ToUri()));
+        //     return loaded;
+        // }
 
         void RecordsEmitted(Count count, FS.FilePath dst)
         {

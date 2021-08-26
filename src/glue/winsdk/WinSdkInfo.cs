@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     public struct WinSdkInfo : ITextual
     {
@@ -11,6 +11,7 @@ namespace Z0.Tools
         public IncludePath IncPaths;
 
         public IncludePath LibPaths;
+
         public string Format()
         {
             var dst = text.buffer();

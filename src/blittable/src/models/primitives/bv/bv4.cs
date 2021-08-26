@@ -24,6 +24,7 @@ namespace Z0
             {
                 Storage = src;
             }
+
             BitWidth IPrimitive.ContentWidth
                 => Width;
 

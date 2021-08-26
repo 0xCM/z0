@@ -28,11 +28,14 @@ namespace Z0
 
         IWorkspace _Workspace;
 
-        DevWs Ws;
+        protected DevWs Ws;
 
-        public void DevWs(DevWs ws)
+        protected IWfRuntime Wf;
+
+        public void Init(IWfRuntime wf, DevWs ws)
         {
             Ws = ws;
+            Wf = wf;
             _Workspace = ws;
             _CurrentDir = ws.Root;
         }

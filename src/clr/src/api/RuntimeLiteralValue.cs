@@ -4,31 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    using api = ApiLiterals;
-
-    public readonly struct ApiLiteralValue
+    public readonly struct RuntimeLiteralValue<T> : ITextual
+        where T : IEquatable<T>
     {
-        public string Data {get;}
+        public T Data {get;}
 
         [MethodImpl(Inline)]
-        public ApiLiteralValue(string src)
+        public RuntimeLiteralValue(T src)
         {
             Data = src;
         }
 
         public string Format()
-            => api.format(this);
+            => ApiLiterals.format(this);
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-
-        public static implicit operator ApiLiteralValue(string src)
-            => new ApiLiteralValue(src);
     }
 }

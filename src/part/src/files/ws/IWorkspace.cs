@@ -13,6 +13,18 @@ namespace Z0
         FS.FolderPath DataDir()
             => Root + FS.folder(data);
 
+        FS.FolderPath AdminDir()
+            => Root + FS.folder(admin);
+
+        FS.FilePath AdminPath(string id, FS.FileExt ext)
+            => AdminDir() + FS.file(id,ext);
+
+        FS.Files AdminFiles()
+            => AdminDir().AllFiles;
+
+        FS.Files AdminFiles(FS.FileExt ext)
+            => AdminDir().Files(ext);
+
         FS.FilePath LlvmTable(string id)
             => Root + FS.folder(llvm) + FS.file(id, FS.Csv);
 

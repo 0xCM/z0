@@ -52,7 +52,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            =>  nonempty(Value) ? string.Format("{0}:{1}", Name, Value) : Name;
+            =>  nonempty(Value) ? string.Format("{0}={1}", Name, Value) : Name;
 
 
         public override string ToString()
