@@ -14,8 +14,8 @@ namespace Z0.Asm
         {
             public AsmAddress Target {get;}
 
-            public AsmSizeKind SizeKind
-                => AsmSizeKind.ymmword;
+            public AsmSizeClass SizeClass
+                => AsmSizeClass.ymmword;
 
             [MethodImpl(Inline)]
             public ymmword(AsmAddress reg)

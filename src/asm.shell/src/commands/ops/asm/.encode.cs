@@ -4,13 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmMetamodels
-    {
-        public interface IRegOp<T> : IOperand<T>
-            where T : unmanaged, IRegOp<T>
-        {
+    using static Root;
+    using static core;
 
-            RegClassCode RegClass {get;}
+    using llvm;
+
+    partial class AsmCmdService
+    {
+        Outcome Encode(CmdArgs args)
+        {
+            var result = Outcome.Success;
+
+            return result;
         }
+
     }
 }

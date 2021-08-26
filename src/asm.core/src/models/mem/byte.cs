@@ -14,8 +14,8 @@ namespace Z0.Asm
         {
             public AsmAddress Target {get;}
 
-            public AsmSizeKind SizeKind
-                => AsmSizeKind.@byte;
+            public AsmSizeClass SizeClass
+                => AsmSizeClass.@byte;
 
             [MethodImpl(Inline)]
             public @byte(AsmAddress dst)

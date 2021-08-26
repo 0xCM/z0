@@ -120,7 +120,7 @@ namespace Z0.Asm
             var result = bit.On;
             var pass = bit.Off;
             var test = default(AsmSizeCheck);
-            var inputs = Symbols.index<AsmSizeKind>().Kinds;
+            var inputs = Symbols.index<AsmSizeClass>().Kinds;
             var count = inputs.Length;
             for(var i=0; i<count; i++)
             {

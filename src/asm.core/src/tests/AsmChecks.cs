@@ -13,25 +13,25 @@ namespace Z0.Asm
             src.Actual = (ushort)asm.width(src.Input);
             switch(src.Input)
             {
-                case AsmSizeKind.@byte:
+                case AsmSizeClass.@byte:
                     src.Expect = 8;
                 break;
-                case AsmSizeKind.word:
+                case AsmSizeClass.word:
                     src.Expect = 16;
                 break;
-                case AsmSizeKind.dword:
+                case AsmSizeClass.dword:
                     src.Expect = 32;
                 break;
-                case AsmSizeKind.qword:
+                case AsmSizeClass.qword:
                     src.Expect = 64;
                 break;
-                case AsmSizeKind.xmmword:
+                case AsmSizeClass.xmmword:
                     src.Expect = 128;
                 break;
-                case AsmSizeKind.ymmword:
+                case AsmSizeClass.ymmword:
                     src.Expect = 256;
                 break;
-                case AsmSizeKind.zmmword:
+                case AsmSizeClass.zmmword:
                     src.Expect = 512;
                 break;
             }

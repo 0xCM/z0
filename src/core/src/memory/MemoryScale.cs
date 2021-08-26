@@ -9,8 +9,11 @@ namespace Z0.Asm
 
     using static Root;
 
+    [Blittable(SZ)]
     public readonly struct MemoryScale : ITextual
     {
+        public const uint SZ = 1;
+
         [MethodImpl(Inline)]
         public static MemoryScale from(byte value)
             => from((ScaleFactor)value);

@@ -73,5 +73,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ClrAssemblyName(Assembly src)
             => new ClrAssemblyName(src);
+
+        public static ClrAssemblyName Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ClrAssemblyName(new AssemblyName());
+        }
     }
 }

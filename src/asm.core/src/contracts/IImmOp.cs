@@ -18,21 +18,23 @@ namespace Z0
     public interface IImmOp<T> : IImmOp, IContented<T>
         where T : unmanaged
     {
-        BitWidth ISized.Width
-            => core.size<T>();
+
     }
 
+    [Free]
     public interface IImm : IImmOp
     {
 
     }
 
+    [Free]
     public interface IImm<T> : IImm, IImmOp<T>, IDataType<T>
         where T : unmanaged
     {
-        //T Content {get;}
+
     }
 
+    [Free]
     public interface IImm<F,T> : IImm<T>
         where F : unmanaged, IImm<F,T>
         where T : unmanaged

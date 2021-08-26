@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static AsmPrefixCodes;
     using static AsmOpCodeTokens;
 
-    partial struct AsmEncoder
+    partial struct AsmEncoding
     {
         // RexBBits:[Index[00000] | Token[000]]
         [MethodImpl(Inline), Op]

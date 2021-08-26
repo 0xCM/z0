@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     public interface ISizedTarget
     {
-        AsmSizeKind SizeKind {get;}
+        AsmSizeClass SizeClass {get;}
 
         AsmAddress Target {get;}
     }
@@ -15,5 +15,4 @@ namespace Z0.Asm
         where T : unmanaged, ISizedTarget<T>
     {
     }
-
 }

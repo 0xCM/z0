@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static AsmPrefixCodes;
 
-    partial struct AsmEncoder
+    partial struct AsmEncoding
     {
         [MethodImpl(Inline), Op]
         public static VexPrefix vex(VexPrefixKind kind)

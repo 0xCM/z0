@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmMetamodels
+    public interface IAsmOpClass
     {
-        public interface IMemOp<T> : IOperand<T>
-            where T : unmanaged, IMemOp<T>
-        {
 
-        }
+    }
+
+    public interface IAsmOpClass<T> : IAsmOpClass
+        where T : unmanaged
+    {
+
     }
 }

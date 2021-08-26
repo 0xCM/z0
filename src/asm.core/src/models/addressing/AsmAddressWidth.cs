@@ -10,20 +10,22 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    public readonly struct AsmAddressSize
+    public readonly struct AsmAddressWidth
     {
+        const AsmWidthCode Min = AsmWidthCode.W16;
+
+        const AsmWidthCode Max = AsmWidthCode.W64;
+
         public byte Width {get;}
 
         [MethodImpl(Inline)]
-        public AsmAddressSize(uint2 index)
+        public AsmAddressWidth(AsmWidthCode code)
         {
-            Width = skip(Widths, index);
+            Width =  emath.between(code,Min,Max) ? (byte)asm.width(code) : z8;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmAddressSize(byte index)
-            => new AsmAddressSize(index);
-
-        static ReadOnlySpan<byte> Widths => new byte[3]{16,32,64};
+        public static implicit operator AsmAddressWidth(AsmWidthCode code)
+            => new AsmAddressWidth(code);
     }
 }

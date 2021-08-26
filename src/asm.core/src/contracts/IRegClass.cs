@@ -11,7 +11,6 @@ namespace Z0.Asm
 
     public interface IRegClass<T> : IRegClass
         where T : unmanaged, IRegClass<T>
-
     {
 
     }

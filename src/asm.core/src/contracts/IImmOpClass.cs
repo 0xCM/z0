@@ -4,15 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System.Runtime.InteropServices;
-
-    [StructLayout(LayoutKind.Sequential, Pack=1)]
-    public struct AsmOperand
+    public interface IImmOpClass<T> : IAsmOpClass<T>
+        where T : unmanaged, IImmOpClass<T>
     {
-        public const uint SZ = 2*PrimalSizes.U8;
 
-        public AsmOpClass Class;
-
-        public AsmSizeKind Size;
     }
 }

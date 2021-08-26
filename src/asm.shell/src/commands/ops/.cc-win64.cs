@@ -35,13 +35,5 @@ namespace Z0.Asm
 
             return result;
         }
-
-        Outcome ParseAsmId(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var src = Symbols.index<AsmId>();
-
-            return result;
-        }
     }
 }

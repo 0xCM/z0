@@ -14,7 +14,7 @@ namespace Z0.Asm
         public Outcome TestOcStrings(CmdArgs args)
         {
             var result = Outcome.Success;
-            var runtime = MemoryStrings.create(OpCodeStrings.Offsets, OpCodeStrings.Data);
+            var runtime = MemoryStrings.load(OpCodeStrings.Offsets, OpCodeStrings.Data);
             var offsets = recover<uint>(OpCodeStrings.Offsets);
             var formatter = Tables.formatter<MemoryStrings>();
             Write(formatter.Format(runtime, RecordFormatKind.KeyValuePairs));

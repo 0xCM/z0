@@ -6,6 +6,8 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
+    using static Root;
+
     /// <summary>
     /// A succinct type signature
     /// </summary>
@@ -31,5 +33,16 @@ namespace Z0
         public bool IsPointer;
 
         public bool IsArray;
+
+        public static ClrTypeSigInfo Empty
+        {
+            get
+            {
+                var dst = new ClrTypeSigInfo();
+                dst.DisplayName = EmptyString;
+                dst.Modifier = EmptyString;
+                return dst;
+            }
+        }
     }
 }

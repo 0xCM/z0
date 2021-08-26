@@ -14,7 +14,7 @@ namespace Z0.Asm
             var bits = RexPrefix.Range();
             using var writer = path.AsciWriter();
             var buffer = text.buffer();
-            var count = AsmEncoder.RexTable(buffer);
+            var count = AsmEncoding.RexTable(buffer);
             writer.Write(buffer.Emit());
             Wf.EmittedFile(flow,count);
             return true;

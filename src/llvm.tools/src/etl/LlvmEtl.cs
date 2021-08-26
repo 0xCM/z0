@@ -13,6 +13,7 @@ namespace Z0.llvm
 
     using K = llvm.LlvmConfigKind;
     using ST = llvm.stringtables;
+    using SQ = SymbolicQuery;
 
     public partial class LlvmEtl : AppService<LlvmEtl>
     {
@@ -34,7 +35,62 @@ namespace Z0.llvm
             LlvmRecords = Wf.LlvmRecords();
             LlvmDatasets = Wf.LlvmDatasets();
             _LlvmRecordSources = new ();
+        }
 
+        public LineMap<AsmId> MapAsmDefLines()
+        {
+            const uint BufferLength = 256;
+            var result = Outcome.Success;
+            var sources = LlvmRecords.Sources();
+            var records = sources.Instructions.View;
+            var linecount = records.Length;
+            var defs = LlvmRecords.Defs(LlvmDatasetKind.Instructions);
+            var count = defs.Length;
+            var buffer = span<TextLine>(BufferLength);
+            var intervals = list<LineInterval<AsmId>>();
+            for(var i=0;i<count; i++)
+            {
+                ref readonly var d0 = ref skip(defs,i);
+                if(!Enums.parse(d0.Name, out AsmId id))
+                    continue;
+
+                var k=0;
+                buffer.Clear();
+                var index = d0.Offset.Value;
+                for(var j=index; j<linecount && k<BufferLength; j++)
+                {
+                    ref readonly var line = ref skip(records,j);
+                    ref readonly var content = ref line.Content;
+                    if(SQ.index(content, Chars.RBrace) != 0)
+                    {
+                        seek(buffer,k++) = line;
+                    }
+                    else
+                        break;
+                }
+
+                if(k>0)
+                {
+                    ref readonly var l0 = ref first(buffer);
+                    ref readonly var l1 = ref skip(buffer,k-1);
+                    var interval = LineMaps.interval(id,l0.LineNumber, l1.LineNumber);
+                    intervals.Add(interval);
+                }
+            }
+
+            var map = LineMaps.map(intervals.ToArray());
+            var dst = RecordMap("x86.instructions");
+            var emitting = EmittingFile(dst);
+            using var writer = dst.AsciWriter();
+            var _intervals = map.Intervals;
+            for(var i=0; i<_intervals.Length; i++)
+            {
+                ref readonly var ix = ref skip(_intervals,i);
+                writer.WriteLine(string.Format("{0:D5} {1}", (ushort)ix.Id, ix));
+            }
+
+            EmittedFile(emitting, _intervals.Length);
+            return map;
         }
 
         public Outcome QueryConfig()
@@ -175,28 +231,28 @@ namespace Z0.llvm
             }
         }
 
-        ReadOnlySpan<llvm.OpCodeSpec> LlvmOpCodes()
+        public ReadOnlySpan<llvm.OpCodeSpec> LlvmOpCodes()
         {
             if(_LlvmOpCodes.IsEmpty)
                 _LlvmOpCodes = MC.opcodes();
             return _LlvmOpCodes.View;
         }
 
-        [CmdOp(".llvm-etl")]
         public Outcome RunEtl()
         {
             var result = Outcome.Success;
             result = EmitTables();
             TableEmit(LlvmOpCodes(), OpCodeSpec.RenderWidths, Ws.Tables().LlvmTable<OpCodeSpec>());
-            ImportLists(LlvmDatasetNames.TblgenLists, "llvm");
+            ImportLists(LlvmDatasetNames.TblgenLists, llvm);
             GenStringTables();
+            MapAsmDefLines();
             return result;
         }
 
         public Outcome ValidateStringTables()
         {
             var result = Outcome.Success;
-            var runtime = MemoryStrings.create(ST.AVX512.Offsets, ST.AVX512.Data);
+            var runtime = MemoryStrings.load(ST.AVX512.Offsets, ST.AVX512.Data);
             var offsets = runtime.Offsets;
             var count = runtime.EntryCount;
             var formatter = Tables.formatter<MemoryStrings>();
@@ -274,6 +330,16 @@ namespace Z0.llvm
                 iter(src.Fields, f => Write(f));
          }
 
+        FS.FolderPath LlvmTables()
+            => Ws.Tables().Subdir(llvm);
+
+
+        FS.FilePath RecordIndex(string id)
+            => LlvmTables() + FS.file(string.Format("{0}.index", id), FS.Csv);
+
+        FS.FilePath RecordMap(string id)
+            => LlvmTables() + FS.file(id,FS.ext("map"));
+
         public Outcome EmitTables()
         {
             var result = Outcome.Success;
@@ -281,20 +347,13 @@ namespace Z0.llvm
             EmitLines(sources.Instructions.View, LlvmDatasets.Lined(LlvmDatasetKind.Instructions), TextEncodingKind.Asci);
             EmitLines(sources.Intrinsics.View, LlvmDatasets.Lined(LlvmDatasetKind.Intrinsics), TextEncodingKind.Asci);
 
-            TableEmit(LlvmRecords.Defs(LlvmDatasetKind.Instructions, DefinesInstruction), DefRecord.RenderWidths, Ws.Tables().Subdir("llvm") + FS.file("x86.instructions.index",FS.Csv));
-            TableEmit(LlvmRecords.Classes(LlvmDatasetKind.Instructions), ClassRecord.RenderWidths, Ws.Tables().Subdir("llvm") + FS.file("x86.classes.index",FS.Csv));
+            TableEmit(LlvmRecords.Defs(LlvmDatasetKind.Instructions, Records.DefinesInstruction), DefRecord.RenderWidths, RecordIndex("x86.instructions"));
+            TableEmit(LlvmRecords.Classes(LlvmDatasetKind.Instructions), ClassRecord.RenderWidths, RecordIndex("x86.classes"));
 
-            TableEmit(LlvmRecords.Defs(LlvmDatasetKind.Intrinsics), DefRecord.RenderWidths, Ws.Tables().Subdir("llvm") + FS.file("llvm.intrinsics.index",FS.Csv));
+            TableEmit(LlvmRecords.Defs(LlvmDatasetKind.Intrinsics), DefRecord.RenderWidths, RecordIndex("llvm.intrinsics"));
             return result;
         }
 
-        static bool DefinesInstruction(DefRecord src)
-        {
-            bit result = 1;
-            result &= Enums.parse(src.Name, out AsmId dst);
-            result &= (src.Ancestors.StartsWith("InstructionEncoding"));
-            return result;
-        }
 
         public ReadOnlySpan<ListItem> ImportLists(string dataset, string dstid)
         {

@@ -9,85 +9,92 @@ namespace Z0.Asm
 
     using static Root;
 
-
     partial class AsmMetamodels
     {
-        public readonly struct imm : IImmOp<imm>
+        public readonly struct imm : IImmOpClass<imm>
         {
-            public AsmSizeKind Size {get;}
+            public AsmSizeClass SizeClass {get;}
 
             [MethodImpl(Inline)]
-            public imm(AsmSizeKind size)
+            public imm(AsmSizeClass size)
             {
-                Size = size;
+                SizeClass = size;
             }
 
-            public AsmOpClass OpClass => AsmOpClass.Imm;
+            public AsmOpClass OpClass
+                => AsmOpClass.Imm;
 
             [MethodImpl(Inline)]
-            public static implicit operator operand(imm src)
-                => new operand(src.OpClass, src.Size);
+            public static implicit operator AsmOperand(imm src)
+                => new AsmOperand(src.OpClass, src.SizeClass);
         }
 
-        public readonly struct imm8 : IImmOp<imm8>
+        public readonly struct imm8 : IImmOpClass<imm8>
         {
-            public AsmOpClass OpClass => AsmOpClass.Imm;
+            public AsmOpClass OpClass
+                => AsmOpClass.Imm;
 
-            public AsmSizeKind Size => AsmSizeKind.@byte;
+            public AsmSizeClass SizeClass
+                => AsmSizeClass.@byte;
 
             [MethodImpl(Inline)]
             public static implicit operator imm(imm8 src)
-                => new imm(src.Size);
+                => new imm(src.SizeClass);
 
             [MethodImpl(Inline)]
-            public static implicit operator operand(imm8 src)
-                => new operand(src.OpClass, src.Size);
+            public static implicit operator AsmOperand(imm8 src)
+                => new AsmOperand(src.OpClass, src.SizeClass);
         }
 
-        public readonly struct imm16 : IImmOp<imm16>
+        public readonly struct imm16 : IImmOpClass<imm16>
         {
-            public AsmOpClass OpClass => AsmOpClass.Imm;
+            public AsmOpClass OpClass
+                => AsmOpClass.Imm;
 
-            public AsmSizeKind Size => AsmSizeKind.word;
+            public AsmSizeClass SizeClass
+                => AsmSizeClass.word;
 
             [MethodImpl(Inline)]
             public static implicit operator imm(imm16 src)
-                => new imm(src.Size);
+                => new imm(src.SizeClass);
 
             [MethodImpl(Inline)]
-            public static implicit operator operand(imm16 src)
-                => new operand(src.OpClass, src.Size);
+            public static implicit operator AsmOperand(imm16 src)
+                => new AsmOperand(src.OpClass, src.SizeClass);
         }
 
-        public readonly struct imm32 : IImmOp<imm32>
+        public readonly struct imm32 : IImmOpClass<imm32>
         {
-            public AsmOpClass OpClass => AsmOpClass.Imm;
+            public AsmOpClass OpClass
+                => AsmOpClass.Imm;
 
-            public AsmSizeKind Size => AsmSizeKind.dword;
+            public AsmSizeClass SizeClass
+                => AsmSizeClass.dword;
 
             [MethodImpl(Inline)]
             public static implicit operator imm(imm32 src)
-                => new imm(src.Size);
+                => new imm(src.SizeClass);
 
             [MethodImpl(Inline)]
-            public static implicit operator operand(imm32 src)
-                => new operand(src.OpClass, src.Size);
+            public static implicit operator AsmOperand(imm32 src)
+                => new AsmOperand(src.OpClass, src.SizeClass);
         }
 
-        public readonly struct imm64 : IImmOp<imm64>
+        public readonly struct imm64 : IImmOpClass<imm64>
         {
-            public AsmOpClass OpClass => AsmOpClass.Imm;
+            public AsmOpClass OpClass
+                => AsmOpClass.Imm;
 
-            public AsmSizeKind Size => AsmSizeKind.qword;
+            public AsmSizeClass SizeClass
+                => AsmSizeClass.qword;
 
             [MethodImpl(Inline)]
             public static implicit operator imm(imm64 src)
-                => new imm(src.Size);
+                => new imm(src.SizeClass);
 
             [MethodImpl(Inline)]
-            public static implicit operator operand(imm64 src)
-                => new operand(src.OpClass, src.Size);
-
+            public static implicit operator AsmOperand(imm64 src)
+                => new AsmOperand(src.OpClass, src.SizeClass);
         }
     }
 }

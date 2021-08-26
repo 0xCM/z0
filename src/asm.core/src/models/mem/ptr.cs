@@ -28,10 +28,10 @@ namespace Z0.Asm
                 get => Source.Target;
             }
 
-            public AsmSizeKind SizeKind
+            public AsmSizeClass SizeClass
             {
                 [MethodImpl(Inline)]
-                get => Source.SizeKind;
+                get => Source.SizeClass;
             }
 
             [MethodImpl(Inline)]

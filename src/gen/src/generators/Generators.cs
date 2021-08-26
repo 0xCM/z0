@@ -58,7 +58,7 @@ namespace Z0
                 StringTables.gencode(spec, cswriter);
                 var count = spec.Entries.Length;
                 var buffer = alloc<StringTableRow>(count);
-                StringTables.genrows(spec,buffer);
+                StringTables.rows(spec,buffer);
                 Host.TableEmit(@readonly(buffer), StringTableRow.RenderWidths, rowdst);
                 return result;
             }

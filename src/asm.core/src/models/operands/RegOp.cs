@@ -8,16 +8,22 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
     using static Blit;
 
-    public readonly struct RegOp<T> : IRegOp<T>
-        where T : unmanaged, IRegOp
+    using api = AsmRegs;
+
+    /// <summary>
+    /// Specifies a register operand
+    /// </summary>
+    [Blittable(SZ)]
+    public readonly struct RegOp : IRegOp
     {
-        readonly T Data;
+        public const uint SZ = 2;
+
+        readonly ushort Data;
 
         [MethodImpl(Inline)]
-        public RegOp(T src)
+        internal RegOp(ushort src)
         {
             Data = src;
         }
@@ -25,25 +31,31 @@ namespace Z0.Asm
         public ushort Bitfield
         {
             [MethodImpl(Inline)]
-            get => u16(Data);
+            get => Data;
         }
 
-        public RegIndexCode Index
+        public AsmOpClass OpClass
         {
             [MethodImpl(Inline)]
-            get => Data.Index;
-        }
-
-        public RegClassCode RegClassCode
-        {
-            [MethodImpl(Inline)]
-            get => Data.RegClassCode;
+            get => AsmOpClass.R;
         }
 
         public AsmWidthCode WidthCode
         {
             [MethodImpl(Inline)]
-            get => Data.WidthCode;
+            get => AsmRegBits.width(this);
+        }
+
+        public RegClassCode RegClassCode
+        {
+            [MethodImpl(Inline)]
+            get => AsmRegBits.@class(this);
+        }
+
+        public RegIndexCode Index
+        {
+            [MethodImpl(Inline)]
+            get => AsmRegBits.index(this);
         }
 
         public RegWidth RegWidth
@@ -52,16 +64,16 @@ namespace Z0.Asm
             get => WidthCode;
         }
 
+        public RegKind RegKind
+        {
+            [MethodImpl(Inline)]
+            get => (RegKind)Data;
+        }
+
         public RegClass RegClass
         {
             [MethodImpl(Inline)]
             get => RegClassCode;
-        }
-
-        public AsmOpClass OpClass
-        {
-            [MethodImpl(Inline)]
-            get => AsmOpClass.R;
         }
 
         public bool IsEmpty
@@ -73,13 +85,17 @@ namespace Z0.Asm
         public text7 Name
         {
             [MethodImpl(Inline)]
-            get => AsmRegNames.name(this);
+            get => api.name(this);
         }
-
         public string Format()
-            => string.Format("{0}/{1}/{2}", Index, RegClassCode, WidthCode);
+            => Name.Format().Trim();
+
 
         public override string ToString()
             =>  Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator RegOp(RegKind kind)
+            => new RegOp((ushort)kind);
     }
 }

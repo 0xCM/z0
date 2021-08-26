@@ -14,8 +14,8 @@ namespace Z0.Asm
         {
             public AsmAddress Address {get;}
 
-            public AsmSizeKind SizeKind
-                => AsmSizeKind.dword;
+            public AsmSizeClass SizeClass
+                => AsmSizeClass.dword;
 
             [MethodImpl(Inline)]
             public m32(AsmAddress address)

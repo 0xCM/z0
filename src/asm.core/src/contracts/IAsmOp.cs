@@ -7,12 +7,12 @@ namespace Z0.Asm
     /// <summary>
     /// Characterizes an asm operand representation
     /// </summary>
-    public interface IAsmOp : ISized
+    public interface IAsmOp
     {
         AsmOpClass OpClass => default;
     }
 
-    public interface IAsmOp<T> : IAsmOp, ISized<T>
+    public interface IAsmOp<T> : IAsmOp
         where T : unmanaged
     {
 

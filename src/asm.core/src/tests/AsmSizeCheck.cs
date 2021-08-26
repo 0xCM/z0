@@ -10,9 +10,9 @@ namespace Z0.Asm
     using static Root;
 
     [StructLayout(LayoutKind.Sequential, Pack=1)]
-    public struct AsmSizeCheck : IAsmCheck<AsmSizeCheck,AsmSizeKind,BitWidth>
+    public struct AsmSizeCheck : IAsmCheck<AsmSizeCheck,AsmSizeClass,BitWidth>
     {
-        public AsmSizeKind Input;
+        public AsmSizeClass Input;
 
         public ushort Expect;
 
@@ -34,13 +34,13 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
-        AsmSizeKind IAsmCheck<AsmSizeCheck, AsmSizeKind, BitWidth>.Input
+        AsmSizeClass IAsmCheck<AsmSizeCheck, AsmSizeClass, BitWidth>.Input
             => Input;
 
-        BitWidth IAsmCheck<AsmSizeCheck, AsmSizeKind, BitWidth>.Expect
+        BitWidth IAsmCheck<AsmSizeCheck, AsmSizeClass, BitWidth>.Expect
             => Expect;
 
-        BitWidth IAsmCheck<AsmSizeCheck, AsmSizeKind, BitWidth>.Actual
+        BitWidth IAsmCheck<AsmSizeCheck, AsmSizeClass, BitWidth>.Actual
             => Actual;
     }
 }

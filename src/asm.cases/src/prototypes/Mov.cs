@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     partial struct Prototypes
     {
-
         [ApiHost(prototypes + "mov")]
         public readonly struct Mov
         {

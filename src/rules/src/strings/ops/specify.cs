@@ -21,7 +21,7 @@ namespace Z0
             var buffer = alloc<ListItem<string>>(count);
             ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = (i,text.format(src[i]));
+                seek(dst,i) = (i, text.format(src[i]));
             return specify(ns, src.Name, buffer);
         }
     }

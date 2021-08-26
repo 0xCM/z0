@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct AsmEncoder
+    partial struct AsmEncoding
     {
         [MethodImpl(Inline), Op]
         public static Sib sib(uint3 @base, uint3 index, uint2 scale)

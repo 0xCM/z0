@@ -32,7 +32,7 @@ namespace Z0.Asm
             for(var b=0u; b<f1.Length; b++)
             for(var a=0u; a<f0.Length; a++)
             {
-                modrm(AsmEncoder.modrm(skip(f0, a), skip(f1, b), skip(f2, c)), ref k, dst);
+                modrm(AsmEncoding.modrm(skip(f0, a), skip(f1, b), skip(f2, c)), ref k, dst);
                 SR.crlf(ref k, dst);
             }
             return k;

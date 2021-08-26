@@ -13,8 +13,8 @@ namespace Z0.Asm
     partial class AsmMetamodels
     {
         public struct operands<A0,A1>
-            where A0 : unmanaged, IOperand
-            where A1 : unmanaged, IOperand
+            where A0 : unmanaged, IAsmOperand
+            where A1 : unmanaged, IAsmOperand
         {
             public A0 a0;
 
@@ -33,9 +33,9 @@ namespace Z0.Asm
         }
 
         public struct operands<A0,A1,A2>
-            where A0 : unmanaged, IOperand
-            where A1 : unmanaged, IOperand
-            where A2 : unmanaged, IOperand
+            where A0 : unmanaged, IAsmOperand
+            where A1 : unmanaged, IAsmOperand
+            where A2 : unmanaged, IAsmOperand
         {
             public A0 a0;
 
@@ -59,10 +59,10 @@ namespace Z0.Asm
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct operands<A0,A1,A2,A3>
-            where A0 : unmanaged, IOperand
-            where A1 : unmanaged, IOperand
-            where A2 : unmanaged, IOperand
-            where A3 : unmanaged, IOperand
+            where A0 : unmanaged, IAsmOperand
+            where A1 : unmanaged, IAsmOperand
+            where A2 : unmanaged, IAsmOperand
+            where A3 : unmanaged, IAsmOperand
         {
             public A0 a0;
 

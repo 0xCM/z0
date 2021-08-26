@@ -14,8 +14,8 @@ namespace Z0.Asm
         {
             public AsmAddress Target {get;}
 
-            public AsmSizeKind SizeKind
-                => AsmSizeKind.word;
+            public AsmSizeClass SizeClass
+                => AsmSizeClass.word;
 
             [MethodImpl(Inline)]
             public word(AsmAddress reg)

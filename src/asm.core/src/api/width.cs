@@ -12,7 +12,11 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static BitWidth width(AsmSizeKind src)
+        public static BitWidth width(AsmSizeClass src)
             => Pow2.pow((byte)src)*8ul;
+
+        [MethodImpl(Inline), Op]
+        public static BitWidth width(AsmWidthCode src)
+            => src != AsmWidthCode.W80 ? (Pow2.pow((byte)src)*8ul) : 80;
     }
 }

@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <param name="imm8"></param>
         [MethodImpl(Inline), Op]
         public static byte and(al r, imm8 imm8, ref byte hex)
-            => AsmEncoder.encode(x24, imm8, ref hex);
+            => AsmEncoding.encode(x24, imm8, ref hex);
 
         /// <summary>
         /// (AND r/m8, imm8)[80 /4 ib]
@@ -28,6 +28,6 @@ namespace Z0.Asm
         /// <param name="imm8"></param>
         [MethodImpl(Inline), Op]
         public static byte and(r8b r, imm8 imm8, ref byte hex)
-            => AsmEncoder.encode(x24, imm8, ref hex);
+            => AsmEncoding.encode(x24, imm8, ref hex);
     }
 }

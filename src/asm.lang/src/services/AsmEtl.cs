@@ -264,7 +264,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(src,i);
-                if(collected.Add(AsmEncoder.describe(statement)))
+                if(collected.Add(AsmEncoding.describe(statement)))
                     counter++;
             }
             return collected.Array().ToSortedSpan();

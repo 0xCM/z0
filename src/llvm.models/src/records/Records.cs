@@ -22,6 +22,15 @@ namespace Z0.llvm
             _Sources = new();
         }
 
+
+        public static bool DefinesInstruction(DefRecord src)
+        {
+            bit result = 1;
+            result &= Enums.parse(src.Name, out AsmId dst);
+            result &= (src.Ancestors.StartsWith("InstructionEncoding"));
+            return result;
+        }
+
         public ReadOnlySpan<DefRecord> Defs(LlvmDatasetKind kind)
             => Defs(kind, x => true);
 

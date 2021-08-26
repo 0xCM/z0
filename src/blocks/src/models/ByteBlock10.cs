@@ -16,10 +16,10 @@ namespace Z0
     /// <summary>
     /// 10 bytes of storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
+    [StructLayout(LayoutKind.Sequential, Size = (int)SZ, Pack=1)]
     public struct ByteBlock10 : IDataBlock<B>
     {
-        public const ushort Size = 10;
+        public const uint SZ = 10;
 
         ByteBlock9 A;
 
@@ -43,5 +43,13 @@ namespace Z0
                 => recover<T>(Bytes);
 
         public static B Empty => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ByteBlock10(ulong src)
+        {
+            var dst = new ByteBlock10();
+            @as<ulong>(dst.First) = src;
+            return dst;
+        }
     }
 }

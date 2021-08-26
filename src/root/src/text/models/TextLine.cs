@@ -37,7 +37,7 @@ namespace Z0
         /// <summary>
         /// The line content
         /// </summary>
-        public string Content {get;}
+        public readonly string Content;
 
         [MethodImpl(Inline)]
         public TextLine(uint number, string text)

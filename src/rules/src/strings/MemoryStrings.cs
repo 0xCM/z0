@@ -14,11 +14,11 @@ namespace Z0
     public readonly struct MemoryStrings
     {
         [MethodImpl(Inline), Op]
-        public static MemoryStrings create(uint entries, uint length, MemoryAddress offsetbase, MemoryAddress charbase)
+        public static MemoryStrings load(uint entries, uint length, MemoryAddress offsetbase, MemoryAddress charbase)
             => new MemoryStrings(entries, length, offsetbase, charbase);
 
         [MethodImpl(Inline), Op]
-        public static MemoryStrings create(ReadOnlySpan<byte> offsets, ReadOnlySpan<char> chars)
+        public static MemoryStrings load(ReadOnlySpan<byte> offsets, ReadOnlySpan<char> chars)
             => new MemoryStrings((uint)(offsets.Length/4), (uint)chars.Length, address(offsets), address(chars));
 
         [MethodImpl(Inline), Op]
@@ -59,6 +59,18 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<char> chars(MemoryAddress @base, int i0, int i1)
             => cover(@base.Pointer<char>() + i0, (i1 - i0));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static void iter<T>(in MemoryStrings src, Symbols<T> symbols, Action<T,int,uint> f)
+            where T : unmanaged
+        {
+            var count = min(symbols.Length, src.EntryCount);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var symbol = ref skip(symbols,i);
+                f(symbols[(uint)i].Kind, i, length(src,i));
+            }
+        }
 
         public readonly uint EntryCount;
 

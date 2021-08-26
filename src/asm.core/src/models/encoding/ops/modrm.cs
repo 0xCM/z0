@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct AsmEncoder
+    partial struct AsmEncoding
     {
         [MethodImpl(Inline), Op]
         public static ModRm modrm(byte src)

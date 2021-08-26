@@ -27,7 +27,6 @@ namespace Z0.Asm
             Wf.Ran(flow);
         }
 
-
         [Op]
         public void GenModelsInPlace()
         {

@@ -11,7 +11,6 @@ namespace Z0.Asm
     using static core;
     using static ConditionCodes;
     using static ConditionCodes.ConditionFacets;
-
     using static Blit;
 
     [ApiComplete]
@@ -48,8 +47,8 @@ namespace Z0.Asm
                 ref readonly var info = ref src.Describe(code);
                 ref readonly var infoAlt = ref src.Describe(codeAlt);
                 ref var target = ref seek(dst,counter++);
-                target.Primary = AsmSpecs.jcc(code, name, AsmSizeKind.@byte);
-                target.Alt = AsmSpecs.jcc(codeAlt, nameAlt, AsmSizeKind.@byte);
+                target.Primary = AsmSpecs.jcc(code, name, AsmSizeClass.@byte);
+                target.Alt = AsmSpecs.jcc(codeAlt, nameAlt, AsmSizeClass.@byte);
                 target.PrimaryInfo = info.Text;
                 target.AltInfo = infoAlt.Text;
            }

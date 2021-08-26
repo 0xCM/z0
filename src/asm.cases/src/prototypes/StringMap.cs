@@ -4,12 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmMetamodels
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+
+    partial struct Prototypes
     {
-        public interface IImmOp<T> : IOperand<T>
-            where T : unmanaged, IImmOp<T>
+        public readonly struct StringMap
         {
 
         }
+
+
     }
 }

@@ -14,8 +14,8 @@ namespace Z0.Asm
         {
             public AsmAddress Address {get;}
 
-            public AsmSizeKind SizeKind
-                => AsmSizeKind.ymmword;
+            public AsmSizeClass SizeClass
+                => AsmSizeClass.ymmword;
 
             [MethodImpl(Inline)]
             public m256(AsmAddress address)

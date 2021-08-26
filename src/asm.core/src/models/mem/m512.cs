@@ -14,8 +14,8 @@ namespace Z0.Asm
         {
             public AsmAddress Address {get;}
 
-            public AsmSizeKind SizeKind
-                => AsmSizeKind.zmmword;
+            public AsmSizeClass SizeClass
+                => AsmSizeClass.zmmword;
 
             [MethodImpl(Inline)]
             public m512(AsmAddress address)

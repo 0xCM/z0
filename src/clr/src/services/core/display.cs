@@ -8,6 +8,6 @@ namespace Z0
     {
         [Op]
         public static MethodDisplaySig display(in ClrMethodArtifact src)
-            => new MethodDisplaySig(ClrRender.format(src));
+            => new MethodDisplaySig(ClrMethodArtifact.format(src));
     }
 }

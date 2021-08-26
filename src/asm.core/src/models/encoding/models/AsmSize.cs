@@ -14,27 +14,26 @@ namespace Z0.Asm
     {
         public const uint StorageSize = PrimalSizes.U8;
 
-        public AsmSizeKind Kind {get;}
+        public AsmSizeClass Class {get;}
 
         public BitWidth Width
         {
             [MethodImpl(Inline)]
-            get => Pow2.pow((byte)Kind) << 3;
+            get => Pow2.pow((byte)Class) << 3;
         }
 
         [MethodImpl(Inline)]
-        public AsmSize(AsmSizeKind kind)
+        public AsmSize(AsmSizeClass kind)
         {
-            Kind = kind;
+            Class = kind;
         }
 
-
         [MethodImpl(Inline)]
-        public static implicit operator AsmSize(AsmSizeKind src)
+        public static implicit operator AsmSize(AsmSizeClass src)
             => new AsmSize(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmSizeKind(AsmSize src)
-            => src.Kind;
+        public static implicit operator AsmSizeClass(AsmSize src)
+            => src.Class;
     }
 }

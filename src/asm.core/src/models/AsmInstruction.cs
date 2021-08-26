@@ -10,11 +10,9 @@ namespace Z0.Asm
 
     using static Root;
 
-    [StructLayout(LayoutKind.Sequential, Pack=1, Size =(int)SZ), Blittable(SZ)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct AsmInstruction
     {
-        public const uint SZ = AsmOpCode.SZ + 4*AsmOperand.SZ;
-
         public AsmOpCode OpCode;
 
         public AsmOperand Op0;

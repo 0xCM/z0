@@ -12,6 +12,22 @@ namespace Z0
 
     using bv = Blit.bv;
 
+    public readonly struct DfaSymbol<T>
+        where T : unmanaged
+    {
+        public readonly T Value;
+
+        [MethodImpl(Inline)]
+        public DfaSymbol(T value)
+        {
+            Value = value;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator DfaSymbol<T>(T src)
+            => new DfaSymbol<T>(src);
+    }
+
     public readonly struct DfaState<T>
         where T : unmanaged
     {
@@ -43,14 +59,13 @@ namespace Z0
         public static DfaState<T> state<T>(T src)
             where T : unmanaged
                 => new DfaState<T>(src);
-
         [Op]
         public static ReadOnlySpan<DfaState<byte>> states(uint width, W8 w)
         {
             var count = Pow2.pow((byte)width);
             var dst = span<byte>(count);
             var interval = Intervals.closed<uint>(0, (uint)count);
-            discretize(interval, dst);
+            points(interval, dst);
             return recover<DfaState<byte>>(dst);
         }
 
@@ -67,7 +82,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        static void discretize(Interval<uint> src, Span<byte> dst)
+        static void points(Interval<uint> src, Span<byte> dst)
         {
             long i0 = src.Left;
             long i1 = src.Right;
