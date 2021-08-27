@@ -27,5 +27,7 @@ namespace Z0.Asm
 
         [Symbol("zmmword")]
         zmmword = 6,
+
+        mm80 = 7,
     }
 }

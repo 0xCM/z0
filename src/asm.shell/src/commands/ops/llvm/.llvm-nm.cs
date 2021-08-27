@@ -9,7 +9,7 @@ namespace Z0.Asm
     partial class AsmCmdService
     {
         [CmdOp(".llvm-nm")]
-        Outcome LlvmNm(CmdArgs args)
+        Outcome RunLlvmNm(CmdArgs args)
         {
             var result = Outcome.Success;
             var files = State.Files(FS.Obj, FS.Dll, FS.Lib, FS.Exe).View;

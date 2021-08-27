@@ -47,6 +47,23 @@ namespace Z0
             return true;
         }
 
+        public bool Skip(uint count, out TextLine dst)
+        {
+            bool result = true;
+            dst = default;
+            for(var i=0; i<count; i++)
+            {
+                if(!Next(out dst))
+                {
+                    result = false;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+
         public ReadOnlySpan<TextLine> ReadAll()
         {
             var dst = list<TextLine>();

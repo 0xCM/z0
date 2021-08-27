@@ -22,13 +22,15 @@ namespace Z0
 
             Char16 = C.Char16,
 
-            LlvmString = S.LlvmString,
+            Char32 = C.Char32,
+
+            LlvmString = S.Char6String,
 
             AsciString = S.AsciString,
 
             Utf8String = S.Utf8String,
 
-            Utf16String = S.Utf16String,
+            Utf16String = S.UnicodeString,
         }
     }
 }

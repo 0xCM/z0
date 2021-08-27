@@ -25,8 +25,43 @@ namespace Z0
             get => _Intervals;
         }
 
+        public uint IntervalCount
+        {
+            [MethodImpl(Inline)]
+            get => (uint)(_Intervals?.Length ?? 0);
+        }
+
+        public uint LineCount
+        {
+            get
+            {
+                var k = 0u;
+                var src = Intervals;
+                for(var i=0; i<src.Length; i++)
+                    k += src[i].LineCount;
+                return k;
+            }
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => IntervalCount == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => IntervalCount != 0;
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator LineMap<T>(LineInterval<T>[] src)
             => new LineMap<T>(src);
+
+        public static LineMap<T> Empty
+        {
+            get => new LineMap<T>(Array.Empty<LineInterval<T>>());
+        }
     }
 }

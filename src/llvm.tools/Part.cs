@@ -14,12 +14,10 @@ namespace Z0.Parts
 
 namespace Z0
 {
-
     using Z0.llvm;
 
     public static class XSvc
     {
-
         [Op]
         public static LlvmObjDump LlvmObjDump(this IWfRuntime wf)
             => llvm.LlvmObjDump.create(wf);
@@ -29,12 +27,15 @@ namespace Z0
             => llvm.LlvmNm.create(wf);
 
         [Op]
-        public static LlvmEtl LlvmEtl(this IWfRuntime wf)
-            => llvm.LlvmEtl.create(wf);
+        public static EtlWorkflow LlvmEtl(this IWfRuntime wf)
+            => llvm.EtlWorkflow.create(wf);
 
         [Op]
         public static OmniScript OmniScript(this IWfRuntime wf)
             => Z0.OmniScript.create(wf);
 
+        [Op]
+        public static LlvmPaths LlvmPaths(this IServiceContext context)
+            => llvm.LlvmPaths.create(context);
     }
 }

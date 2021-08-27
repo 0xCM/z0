@@ -22,7 +22,7 @@ namespace Z0
     {
         public const string TableName = "literals.runtime";
 
-        public const uint StorageSize = 2*StringAddress.StorageSize + PrimalSizes.U64 + PrimalSizes.U8;
+        public const uint StorageSize = 2*StringAddress.SZ + PrimalSizes.U64 + PrimalSizes.U8;
 
         public StringAddress Source {get;}
 

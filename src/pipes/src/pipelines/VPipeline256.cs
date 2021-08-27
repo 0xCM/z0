@@ -7,7 +7,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static SFx;
 
     public struct VPipeline256<B,M,R,S,T>
         where R : IBlockSink256<R,T>

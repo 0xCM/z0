@@ -76,14 +76,26 @@ namespace Z0
             => ScriptRunner.RunCmd(Cmd.cmdline(src.Format(PathSeparator.BS)), CmdVars.Empty, ReceiveCmdStatusQuiet, ReceiveCmdError, out response);
 
 
-        public Outcome RunAsmScript(string srcid, ScriptId script)
-            => RunAsmScript(srcid,script, out _);
+        public Outcome RunAsmScript(string srcid, ScriptId sid)
+            => RunAsmScript(srcid,sid, out _);
 
-        public Outcome RunAsmScript(string srcid, ScriptId script, out ReadOnlySpan<ToolFlow> flows)
+        public Outcome RunProjectScript(ProjectId project, string srcid, Scope scope, ScriptId sid)
+            => RunProjectScript(project, srcid, scope, sid, out _);
+
+        public Outcome RunProjectScript(ProjectId project, string srcid, Scope scope, ScriptId sid, out ReadOnlySpan<ToolFlow> flows)
+        {
+            var path = Ws.Projects().Script(project, scope, sid, FS.Cmd);
+            var result = Outcome.Success;
+            var vars = WsVars.create();
+            vars.SrcId = srcid;
+            return RunToolScript(path, vars.ToCmdVars(), true, out flows);
+        }
+
+        public Outcome RunAsmScript(string srcid, ScriptId sid, out ReadOnlySpan<ToolFlow> flows)
         {
             var result = Outcome.Success;
             var vars = WsVars.create();
-            var path = Ws.Asm().Script(script);
+            var path = Ws.Asm().Script(sid);
             vars.SrcId = srcid;
             return RunToolScript(path, vars.ToCmdVars(), true, out flows);
         }

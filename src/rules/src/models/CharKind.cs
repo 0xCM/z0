@@ -22,6 +22,8 @@ namespace Z0
             Char8 = W.W8 | Char,
 
             Char16 = W.W16 | Char,
+
+            Char32 = W.W32 | Char
         }
     }
 }

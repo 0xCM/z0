@@ -35,6 +35,5 @@ namespace Z0.Asm
             OpClass =opclass;
             Size = size;
         }
-
     }
 }

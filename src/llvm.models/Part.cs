@@ -23,10 +23,5 @@ namespace Z0
 
     public static class XSvc
     {
-        public static LlvmDatasets LlvmDatasets(this IServiceContext context)
-            => llvm.LlvmDatasets.create(context);
-
-        public static llvm.Records LlvmRecords(this IServiceContext context)
-            => llvm.Records.create(context);
     }
 }

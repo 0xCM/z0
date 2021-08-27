@@ -10,7 +10,7 @@ namespace Z0.llvm
 
     public class LlvmTableLoader
     {
-        public static Outcome load(FS.FilePath path,  out Span<LlvmValueType> buffer)
+        public static Outcome load(FS.FilePath path, out Span<LlvmValueType> buffer)
         {
             const byte FieldCount = LlvmValueType.FieldCount;
             var result = TextGrids.load(path, out var doc);

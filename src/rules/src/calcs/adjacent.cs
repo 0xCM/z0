@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static Rules;
-    using static core;
 
     partial struct RuleCalcs
     {

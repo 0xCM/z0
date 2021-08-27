@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".dump-import")]
         Outcome ImportDumps(CmdArgs args)
-            => ImportDumps();
+            => ImportObjDumps();
     }
 }

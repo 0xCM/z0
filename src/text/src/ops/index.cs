@@ -33,6 +33,13 @@ namespace Z0
         public static int index(ReadOnlySpan<char> src, char match)
             => index(src, 0, match);
 
+        [MethodImpl(Inline), Op]
+        public static bool index(ReadOnlySpan<char> src, char match, out int i)
+        {
+            i = index(src,match);
+            return i >= 0;
+        }
+
         /// <summary>
         /// Returns the index of first source character that matches the specified predicate
         /// </summary>

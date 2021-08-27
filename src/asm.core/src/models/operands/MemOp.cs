@@ -27,7 +27,7 @@ namespace Z0.Asm
         public BitWidth Width
         {
             [MethodImpl(Inline)]
-            get => asm.width(Size);
+            get => Size.Width;
         }
     }
 }

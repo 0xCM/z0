@@ -64,7 +64,7 @@ namespace Z0.Asm
 
         IWorkspace LogWs;
 
-        ProjectWs ProjectWs;
+        IProjectWs ProjectWs;
 
         IWorkspace DataSources;
 
@@ -72,13 +72,11 @@ namespace Z0.Asm
 
         ShellEnv ShellEnv;
 
-        llvm.Records LlvmRecords;
-
-        llvm.LlvmDatasets LlvmDatasets;
-
-        llvm.LlvmEtl LlvmEtl;
+        llvm.EtlWorkflow LlvmEtl;
 
         OmniScript OmniScript;
+
+        llvm.LlvmNm LlvmNm;
 
         byte[] _Assembled;
 
@@ -97,6 +95,7 @@ namespace Z0.Asm
             _Assembled = array<byte>();
             ResPack = CliMemoryMap.Empty;
             ShellEnv = ShellEnv.Empty();
+
         }
 
         protected override void Initialized()
@@ -121,10 +120,9 @@ namespace Z0.Asm
             ApiCatalogs = Wf.ApiCatalogs();
             AsmToolSvc = Wf.AsmTools();
             AsmEtl = Wf.AsmEtl();
-            LlvmRecords = Wf.LlvmRecords();
-            LlvmDatasets = Wf.LlvmDatasets();
             LlvmEtl = Wf.LlvmEtl();
             OmniScript = Wf.OmniScript();
+            LlvmNm = Wf.LlvmNm();
             State.Init(Wf,Ws);
         }
 

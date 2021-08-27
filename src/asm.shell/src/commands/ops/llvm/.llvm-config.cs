@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".llvm-config")]
         Outcome LlvmConfig(CmdArgs args)
-            => LlvmEtl.QueryConfig();
+            => LlvmEtl.LoadConfig();
     }
 }

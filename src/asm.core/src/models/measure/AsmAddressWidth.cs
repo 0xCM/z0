@@ -16,12 +16,13 @@ namespace Z0.Asm
 
         const AsmWidthCode Max = AsmWidthCode.W64;
 
-        public byte Width {get;}
+        public AsmWidthCode Width {get;}
 
         [MethodImpl(Inline)]
         public AsmAddressWidth(AsmWidthCode code)
         {
-            Width =  emath.between(code,Min,Max) ? (byte)asm.width(code) : z8;
+            Width = code;
+            //Width =  emath.between(code,Min,Max) ? (byte)asm.width(code) : z8;
         }
 
         [MethodImpl(Inline)]

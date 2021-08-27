@@ -13,9 +13,9 @@ namespace Z0
     {
         public T Id {get;}
 
-        public LineNumber MinLine {get;}
+        public readonly LineNumber MinLine;
 
-        public LineNumber MaxLine {get;}
+        public readonly LineNumber MaxLine;
 
         [MethodImpl(Inline)]
         public LineInterval(T id, LineNumber min, LineNumber max)

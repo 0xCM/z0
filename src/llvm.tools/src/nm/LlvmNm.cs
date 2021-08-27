@@ -5,9 +5,7 @@
 namespace Z0.llvm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Root;
     using static core;
 
     public sealed class LlvmNm : ToolService<LlvmNm>

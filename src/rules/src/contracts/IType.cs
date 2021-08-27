@@ -16,11 +16,4 @@ namespace Z0
     {
 
     }
-
-    public interface IType<K,T> : IType<T>
-        where T : struct, IType<T>
-        where K : unmanaged, Enum, IEquatable<K>
-    {
-        K Kind {get;}
-    }
 }

@@ -8,14 +8,11 @@ namespace Z0
     {
         public FS.Files LlvmLibPaths;
 
-
         public static ShellEnv Empty()
         {
             var dst = new ShellEnv();
             dst.LlvmLibPaths = FS.Files.Empty;
             return dst;
         }
-
     }
-
 }

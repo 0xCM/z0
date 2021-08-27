@@ -9,10 +9,10 @@ namespace Z0.Asm
 
     using static Root;
 
-    [Blittable(StorageSize)]
+    [Blittable(SZ)]
     public readonly struct AsmSize
     {
-        public const uint StorageSize = PrimalSizes.U8;
+        public const uint SZ = PrimalSizes.U8;
 
         public AsmSizeClass Class {get;}
 
@@ -29,11 +29,37 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
+        public AsmSize(AsmWidthCode kind)
+        {
+            Class = (AsmSizeClass)kind;
+        }
+
+        [MethodImpl(Inline)]
         public static implicit operator AsmSize(AsmSizeClass src)
             => new AsmSize(src);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmSizeClass(AsmSize src)
             => src.Class;
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmSize(AsmWidthCode src)
+            => new AsmSize(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmWidthCode(AsmSize src)
+            => (AsmWidthCode)src.Class;
+
+        [MethodImpl(Inline)]
+        public static implicit operator RegWidth(AsmSize src)
+            => (AsmWidthCode)src.Class;
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmSize(RegWidth src)
+            => new AsmSize((AsmSizeClass)src.Code);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmSize(AsmAddressWidth src)
+            => new AsmSize(src.Width);
     }
 }

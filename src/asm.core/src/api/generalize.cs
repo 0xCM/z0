@@ -4,19 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
     using static Root;
-    using static core;
 
-    using llvm;
-
-    partial class AsmCmdService
+    partial struct asm
     {
-        Outcome Encode(CmdArgs args)
-        {
-            var result = Outcome.Success;
-
-            return result;
-        }
-
+        [MethodImpl(Inline), Op]
+        public static AsmOperand generalize(RegOp src)
+            => new AsmOperand(src);
     }
 }

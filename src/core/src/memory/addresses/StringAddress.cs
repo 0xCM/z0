@@ -11,9 +11,10 @@ namespace Z0
     using static core;
     using static TextTools;
 
+    [Blittable(SZ)]
     public readonly struct StringAddress : IAddressable
     {
-        public const uint StorageSize = MemoryAddress.StorageSize;
+        public const uint SZ = MemoryAddress.StorageSize;
 
         [MethodImpl(Inline), Op]
         public static uint length(StringAddress src)

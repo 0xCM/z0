@@ -15,7 +15,6 @@ namespace Z0.Asm
         public Index<SdmOpCodeDetail> ImportOpCodeDetails(ReadOnlySpan<FS.FilePath> src)
         {
             var result = Outcome.Success;
-
             var count = src.Length;
             var kinds = Symbols.index<SdmTableKind>();
             Index<SdmOpCodeDetail> storage = alloc<SdmOpCodeDetail>(4000);

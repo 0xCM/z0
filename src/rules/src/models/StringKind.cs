@@ -14,13 +14,15 @@ namespace Z0
         {
             None = 0,
 
-            LlvmString = Char6 | String,
+            Char6String = Char6 | String,
 
             AsciString = Char7 | String,
 
             Utf8String = Char8 | String,
 
-            Utf16String = Char16 | String,
+            UnicodeString = Char16 | String,
+
+            Utf32String = Char32 | String
         }
     }
 }

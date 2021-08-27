@@ -58,20 +58,20 @@ namespace Z0.Asm
             var dst = text.buffer();
             var spec = new char[12];
             var j=0u;
-            seek(spec,j++)=Chars.Dash;
-            seek(spec,j++)=Chars.Dash;
-            seek(spec,j++)=Chars.Dash;
-            seek(spec,j++)=Chars.Null;
+            seek(spec,j++) = Chars.Dash;
+            seek(spec,j++) = Chars.Dash;
+            seek(spec,j++) = Chars.Dash;
+            seek(spec,j++) = Chars.Null;
 
-            seek(spec,j++)=Chars.Dash;
-            seek(spec,j++)=Chars.Dash;
-            seek(spec,j++)=Chars.Dash;
-            seek(spec,j++)=Chars.Null;
+            seek(spec,j++) = Chars.Dash;
+            seek(spec,j++) = Chars.Dash;
+            seek(spec,j++) = Chars.Dash;
+            seek(spec,j++) = Chars.Null;
 
-            seek(spec,j++)=Chars.Dash;
-            seek(spec,j++)=Chars.Dash;
-            seek(spec,j++)=Chars.Dash;
-            seek(spec,j++)=Chars.Null;
+            seek(spec,j++) = Chars.Dash;
+            seek(spec,j++) = Chars.Dash;
+            seek(spec,j++) = Chars.Dash;
+            seek(spec,j++) = Chars.Null;
 
             var ts = TokenStrings.define(spec);
             Write(ts.TokenCount);

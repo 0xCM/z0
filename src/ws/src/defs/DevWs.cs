@@ -101,7 +101,7 @@ namespace Z0
         public IWorkspace Docs()
             => DocsWs.create(_WsRoot + FS.folder(docs));
 
-        public ProjectWs Projects()
+        public IProjectWs Projects()
             => ProjectWs.create(_WsRoot + FS.folder(projects), _OutRoot + FS.folder(projects));
 
         public IWorkspace Sources()

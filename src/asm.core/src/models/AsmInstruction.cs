@@ -22,5 +22,17 @@ namespace Z0.Asm
         public AsmOperand Op2;
 
         public AsmOperand Op3;
+
+        public llvm.AsmId Id
+        {
+            [MethodImpl(Inline)]
+            get => OpCode.AsmId;
+        }
+
+        public byte OpCount
+        {
+            [MethodImpl(Inline)]
+            get => (byte)((byte)Op0.IsNonEmpty + (byte)Op1.IsNonEmpty + (byte)Op2.IsNonEmpty + (byte)Op3.IsNonEmpty);
+        }
     }
 }

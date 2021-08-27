@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".objsyms")]
+        [CmdOp(".nmsyms")]
         Outcome ObjSyms(CmdArgs args)
         {
             var result = Outcome.Success;
@@ -19,9 +19,12 @@ namespace Z0.Asm
             var formatter = Tables.formatter<ObjSymRecord>(ObjSymRecord.RenderWidths);
             var buffer = list<ObjSymRecord>();
             var ws = State.Workspace();
-            var outpath = ws.OutDir() + Tables.filename<ObjSymRecord>();
-            Wf.LlvmNm().Collect(src, outpath);
+            var outpath = ProjectOut() + Tables.filename<ObjSymRecord>();
+            LlvmNm.Collect(src, outpath);
             return result;
         }
+
+        FS.FolderPath ProjectOut()
+            => Ws.Projects().OutDir(State.Project());
     }
 }

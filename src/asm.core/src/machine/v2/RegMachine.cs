@@ -143,15 +143,37 @@ namespace Z0.Asm
             => ref @as<Cell512,Cell128>(reg512(index));
 
 
-        public void run(AsmInstruction asm)
+        public void Run(in AsmInstruction a)
         {
-            var id = asm.OpCode.AsmId;
+            var id = a.Id;
+
+
+        }
+
+        bit IsMov(in AsmInstruction a)
+            => a.Id >= AsmId.MOV16ao16 && a.Id <= AsmId.MOV8rr_NOREX;
+        // bit IsMov(AsmInstruction a)
+        //     => a.
+
+        void mov(in AsmInstruction a)
+        {
+            var id = a.Id;
             switch(id)
             {
+                case AsmId.MOV8rm:
+                break;
+                case AsmId.MOV8mr:
+                break;
+                case AsmId.MOV8rr:
+                break;
                 case AsmId.MOV8ri:
                 break;
+                case AsmId.MOV8mi:
+                break;
             }
+
         }
+
 
         public void Dispose()
         {

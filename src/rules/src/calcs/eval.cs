@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct RuleCalcs
     {
-        public static bool eval(string src, Adjacent<char, OneOf<char>> rule, out Adjacent<char> dst)
+        public static bool eval(string src, Adjacent<char,OneOf<char>> rule, out Adjacent<char> dst)
         {
             var match = rule.A;
             var candidates = rule.B.Elements.View;
@@ -27,6 +27,5 @@ namespace Z0
             dst = default;
             return false;
         }
-
     }
 }

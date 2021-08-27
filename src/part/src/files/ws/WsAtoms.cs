@@ -15,6 +15,8 @@ namespace Z0
 
         public const string api = nameof(api);
 
+        public const string assets = nameof(assets);
+
         public const string bin = nameof(bin);
 
         public const string c = nameof(c);
@@ -49,6 +51,12 @@ namespace Z0
 
         public const string logs = nameof(logs);
 
+        public const string llvm = nameof(llvm);
+
+        public const string ll = nameof(ll);
+
+        public const string machine = nameof(machine);
+
         public const string obj = nameof(obj);
 
         public const string projects = nameof(projects);
@@ -73,10 +81,8 @@ namespace Z0
 
         public const string sym = nameof(sym);
 
-        public const string llvm = nameof(llvm);
+        public const string win = nameof(win);
 
-        public const string ll = nameof(ll);
-
-        public const string machine = nameof(machine);
+        public const string wsl = nameof(wsl);
     }
 }

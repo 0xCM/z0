@@ -12,7 +12,7 @@ namespace Z0.Asm
         [CmdOp(".sdm-rules")]
         Outcome SdmRules(CmdArgs args)
         {
-            var tables = SdmTables();
+            var tables = AsmEtl.ReadSdmTables();
             var count = tables.Length;
             var buffer = text.buffer();
             for(var i=0; i<count; i++)
