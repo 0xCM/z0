@@ -29,7 +29,6 @@ namespace Z0.Asm
                 b.BlockOffset = s.BlockOffset;
                 text.asci(s.Expression.Content, b.Expression.Bytes);
             }
-
             return result;
         }
     }

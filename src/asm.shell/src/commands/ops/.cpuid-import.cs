@@ -8,8 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".cpuid-import")]
         Outcome ImportCpuid(CmdArgs args)
-        {
-            return AsmTables.ImportCpuIdSources();
-        }
+            => AsmTables.ImportCpuIdSources();
     }
 }

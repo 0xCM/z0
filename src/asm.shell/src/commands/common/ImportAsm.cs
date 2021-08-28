@@ -14,7 +14,7 @@ namespace Z0.Asm
             var paths = State.Files(FS.Asm);
             var lines = list<AsmLine>();
             var counter = 0u;
-            var dst = Imports().Path("asm", label, FS.Asm);
+            var dst = Ws.Imports().Path("asm", label, FS.Asm);
             using var writer = dst.AsciWriter();
             foreach(var path in paths)
             {
@@ -32,8 +32,5 @@ namespace Z0.Asm
             Write(string.Format("Imported {0} asm lines to {1}", counter, dst));
             return result;
         }
-
-        // .asm-outfiles llvm-llc/dumps *.asm
-        // .asm-import llvm-llc
     }
 }

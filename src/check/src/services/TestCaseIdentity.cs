@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static ApiUriDelimiters;
-
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public readonly struct TestCaseIdentity : ITestCaseIdentity
@@ -41,7 +39,7 @@ namespace Z0
         /// <param name="method">The method that implements the test</param>
         [Op]
         public static string from(MethodInfo method)
-            => $"{PartName.from(method.DeclaringType)}{UriPathSep}{method.DeclaringType.Name}{UriPathSep}{method.Name}";
+            => $"{PartName.from(method.DeclaringType)}{IDI.UriPathSep}{method.DeclaringType.Name}{IDI.UriPathSep}{method.Name}";
 
         /// <summary>
         /// Produces a test case name predicated on a parametrically-specialized label
@@ -71,7 +69,7 @@ namespace Z0
         /// <param name="fullname">The full name of the test</param>
         [Op]
         public static string identify(Type host, string fullname)
-            => $"{PartName.from(host)}{UriPathSep}{host.Name}{UriPathSep}{fullname}";
+            => $"{PartName.from(host)}{IDI.UriPathSep}{host.Name}{IDI.UriPathSep}{fullname}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, excluding the host name
@@ -79,7 +77,7 @@ namespace Z0
         /// <param name="id">Identity of the operation under test</param>
         [Op]
         public static string from(OpUri uri)
-            => $"{uri.Part.Format()}{UriPathSep}{uri.Host.HostName}{UriPathSep}{uri.OpId}";
+            => $"{uri.Part.Format()}{IDI.UriPathSep}{uri.Host.HostName}{IDI.UriPathSep}{uri.OpId}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, excluding the host name
@@ -87,7 +85,7 @@ namespace Z0
         /// <param name="id">Identity of the operation under test</param>
         [Op]
         public static string from(ApiHostUri host, OpIdentity id)
-            => $"{host.Part.Format()}{UriPathSep}{host.HostName}{UriPathSep}{id}";
+            => $"{host.Part.Format()}{IDI.UriPathSep}{host.HostName}{IDI.UriPathSep}{id}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, excluding the host name
@@ -95,7 +93,7 @@ namespace Z0
         /// <param name="id">Identity of the operation under test</param>
         [Op]
         public static string from(Type host, OpIdentity id)
-            => $"{PartName.from(host)}{UriPathSep}{host.Name}{UriPathSep}{id.IdentityText}";
+            => $"{PartName.from(host)}{IDI.UriPathSep}{host.Name}{IDI.UriPathSep}{id.IdentityText}";
 
         /// <summary>
         /// Produces a case name for an identified operation match test

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static ApiUriDelimiters;
     using static Root;
     using static minicore;
 
@@ -41,11 +40,11 @@ namespace Z0
 
         [Op]
         public static string QueryText(ApiUriScheme scheme, PartId part, string host, string group)
-            => $"{scheme.Format()}{UriEndOfScheme}{part.Format()}{UriPathSep}{host}{UriQuery}{group}";
+            => $"{scheme.Format()}{IDI.EndOfScheme}{part.Format()}{IDI.UriPathSep}{host}{IDI.UriQuery}{group}";
 
         [Op]
         public static string FullUriText(ApiUriScheme scheme, PartId part, string host, string group, OpIdentity opid)
-            => $"{scheme.Format()}{UriEndOfScheme}{part.Format()}{UriPathSep}{host}{UriQuery}{group}{UriFragment}{opid.IdentityText}";
+            => $"{scheme.Format()}{IDI.EndOfScheme}{part.Format()}{IDI.UriPathSep}{host}{IDI.UriQuery}{group}{IDI.UriFragment}{opid.IdentityText}";
 
         public static ApiUriScheme scheme(string src)
             => Enum.TryParse(typeof(ApiUriScheme), src, true, out var result) ? (ApiUriScheme)result : ApiUriScheme.None;
@@ -56,7 +55,7 @@ namespace Z0
             if(blank(src))
                 return failure;
 
-            var parts = src.SplitClean(ApiUriDelimiters.UriPathSep);
+            var parts = src.SplitClean(IDI.UriPathSep);
             var count = parts.Length;
             if(count != 2)
                 return failure.WithReason(string.Concat("Component count ", count," != ", 2));
@@ -79,7 +78,7 @@ namespace Z0
             if(blank(src))
                 return (false, "Empty input");
 
-            var parts = src.SplitClean(ApiUriDelimiters.UriPathSep);
+            var parts = src.SplitClean(IDI.UriPathSep);
             var count = parts.Length;
             if(count != 2)
                 return (false,string.Concat("Component count ", count," != ", 2));
@@ -122,20 +121,20 @@ namespace Z0
 
         public static ParseResult<OpUri> parse(string src)
         {
-            var parts = src.SplitClean(UriEndOfScheme);
+            var parts = src.SplitClean(IDI.EndOfScheme);
             var msg = string.Empty;
             if(parts.Length != 2)
-                return ParseResult.unparsed<OpUri>(src, $"Splitting on {UriEndOfScheme} produced {parts.Length} pieces");
+                return ParseResult.unparsed<OpUri>(src, $"Splitting on {IDI.EndOfScheme} produced {parts.Length} pieces");
 
             var uriScheme = scheme(parts[0]);
             var rest = parts[1];
-            var pathText = rest.TakeBefore(UriQuery);
+            var pathText = rest.TakeBefore(IDI.UriQuery);
             var path = host(pathText);
             if(path.Failed)
                 return ParseResult.unparsed<OpUri>(src, $"{path.Message}");
 
-            var id = opid(rest.TakeAfter(UriFragment));
-            var group = rest.Between(UriQuery,UriFragment);
+            var id = opid(rest.TakeAfter(IDI.UriFragment));
+            var group = rest.Between(IDI.UriQuery,IDI.UriFragment);
             var uri = define(uriScheme, path.Value, group, id);
             return ParseResult.parsed(src, uri);
         }
@@ -164,7 +163,7 @@ namespace Z0
 
         [Op]
         public static string PathText(string scheme, PartId catalog, string host)
-            => $"{scheme}{UriEndOfScheme}{catalog.Format()}{UriPathSep}{host}";
+            => $"{scheme}{IDI.EndOfScheme}{catalog.Format()}{IDI.UriPathSep}{host}";
 
         [Op]
         public static string GroupUriText(ApiUriScheme scheme, ApiHostUri host, string group)
@@ -176,7 +175,7 @@ namespace Z0
         /// <param name="host">The source type</param>
         [Op]
         public static string HostUri(Type host)
-            => $"{PartName.from(host)}{UriPathSep}{host.Name}";
+            => $"{PartName.from(host)}{IDI.UriPathSep}{host.Name}";
 
         /// <summary>
         /// Builds the *canonical* operation uri

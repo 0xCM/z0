@@ -35,7 +35,7 @@ namespace Z0
         {
             Part = owner;
             HostName = name ?? "__empty__";
-            UriText = owner != 0 ? string.Format("{0}{1}{2}", Part.Format(), ApiUriDelimiters.UriPathSep, HostName) : HostName;
+            UriText = owner != 0 ? string.Format("{0}{1}{2}", Part.Format(), IDI.UriPathSep, HostName) : HostName;
         }
 
         public Name Id

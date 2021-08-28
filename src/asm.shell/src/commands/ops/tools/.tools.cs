@@ -13,7 +13,7 @@ namespace Z0.Asm
         [CmdOp(".tools")]
         Outcome DefineTools(CmdArgs args)
         {
-            var ws = ToolWs();
+            var ws = Ws.Tools();
             var subdirs = ws.Root.SubDirs();
             var counter = 0u;
             var formatter = Tables.formatter<ToolConfig>();

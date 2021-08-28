@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static ApiUriDelimiters;
     using static core;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -38,7 +37,7 @@ namespace Z0
         public static string name<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{PartName.from(host)}/{host.Name}{UriPathSep}{build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
+                => $"{PartName.from(host)}/{host.Name}{IDI.UriPathSep}{build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
 
         /// <summary>
         /// Produces a test case identifier predicated on a parametrically-specialized label

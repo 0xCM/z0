@@ -11,7 +11,7 @@ namespace Z0.Asm
         [CmdOp(".tool-env")]
         Outcome ShowToolEnv(CmdArgs args)
         {
-            var path = ToolWs().Script("show-env-config");
+            var path = Ws.Tools().Script("show-env-config");
             var cmd = Cmd.cmdline(path.Format(PathSeparator.BS));
             var response = ScriptRunner.RunCmd(cmd);
             var settings = Settings.parse(response);

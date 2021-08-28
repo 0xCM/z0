@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".xed-wf", "Executes the XED etl workflow")]
         Outcome EmitXedTables(CmdArgs args)
         {
-            var dst = TableWs().Subdir(AsmTableScopes.IntelXed);
+            var dst = Ws.Tables().Subdir(AsmTableScopes.IntelXed);
             dst.Clear();
             Wf.IntelXed().EmitTables(dst);
             return true;

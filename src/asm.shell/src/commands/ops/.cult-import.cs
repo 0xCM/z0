@@ -8,9 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".cult-import")]
         Outcome ImportCultData(CmdArgs args)
-        {
-            Wf.CultProcessor().Process();
-            return true;
-        }
+            => Wf.CultProcessor().Process();
     }
 }

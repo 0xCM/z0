@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".tool-script")]
         Outcome ToolScript(CmdArgs args)
         {
-            var tools = ToolWs();
+            var tools = Ws.Tools();
             var tool = (ToolId)arg(args,0).Value;
             var script = tools.Script(tool, arg(args,1).Value);
             if(!script.Exists)

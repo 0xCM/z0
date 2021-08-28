@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static ApiUriDelimiters;
 
     using Builder = ApiIdentityBuilder;
 
@@ -22,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string name(Type host, IFunc f)
-            =>$"{host.Assembly.Id().Format()}{UriPathSep}{host.Name}{UriPathSep}{SFx.name(f)}";
+            =>$"{host.Assembly.Id().Format()}{IDI.UriPathSep}{host.Name}{IDI.UriPathSep}{SFx.name(f)}";
 
         [Op]
         public static string name(IFunc f, IFunc g)

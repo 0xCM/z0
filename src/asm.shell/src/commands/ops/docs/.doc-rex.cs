@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".doc-rex")]
         Outcome EmitRexFields(CmdArgs args)
         {
-            var path = Docs().Path("bitfields", "rex", FS.ext("bits"));
+            var path = Ws.Docs().Path("bitfields", "rex", FS.ext("bits"));
             var flow = Wf.EmittingFile(path);
             var bits = RexPrefix.Range();
             using var writer = path.AsciWriter();

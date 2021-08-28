@@ -15,7 +15,7 @@ namespace Z0.Asm
         {
             const string Pattern = "{0,-4} rel{1} [{2}:{3}b] => {4}";
             var result = Outcome.Success;
-            var dst = Docs().Subdir("generated") + FS.file("jcc8.txt");
+            var dst = Ws.Docs().Subdir("generated") + FS.file("jcc8.txt");
             var conditions = Conditions.create();
             var buffer = alloc<Jcc8Conditions>(32);
             var count = Conditions.jcc8(conditions,buffer);

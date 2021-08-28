@@ -12,7 +12,7 @@ namespace Z0.Asm
         Outcome ToolSettings(CmdArgs args)
         {
             ToolId tool = arg(args,0).Value;
-            var src = ToolWs().Logs(tool) + FS.file("config", FS.Log);
+            var src = Ws.Tools().Logs(tool) + FS.file("config", FS.Log);
             if(!src.Exists)
                 return (false,FS.missing(src));
 

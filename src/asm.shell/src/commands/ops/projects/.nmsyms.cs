@@ -18,7 +18,6 @@ namespace Z0.Asm
             var count = src.Length;
             var formatter = Tables.formatter<ObjSymRecord>(ObjSymRecord.RenderWidths);
             var buffer = list<ObjSymRecord>();
-            var ws = State.Workspace();
             var outpath = ProjectOut() + Tables.filename<ObjSymRecord>();
             LlvmNm.Collect(src, outpath);
             return result;

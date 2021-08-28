@@ -66,7 +66,7 @@ namespace Z0.Asm
         Outcome GenSibBits()
         {
             var result = Outcome.Success;
-            var dst = TableWs().Path(machine, "sib", FS.ext("bits") + FS.Csv);
+            var dst = Ws.Tables().Path(machine, "sib", FS.ext("bits") + FS.Csv);
             var rows = AsmBits.SibRows().View;
             TableEmit(rows, SibBitfieldRow.RenderWidths, dst);
             return result;
@@ -74,7 +74,7 @@ namespace Z0.Asm
 
         Outcome GenModRmBits()
         {
-            var path = TableWs().Path(machine, "modrm", FS.ext("bits") + FS.Csv);
+            var path = Ws.Tables().Path(machine, "modrm", FS.ext("bits") + FS.Csv);
             var flow = Wf.EmittingFile(path);
             using var writer = path.AsciWriter();
             var dst = span<char>(256*128);

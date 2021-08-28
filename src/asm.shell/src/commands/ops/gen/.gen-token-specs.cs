@@ -17,7 +17,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var symbols = Symbols.index<AsmOpCodeTokens.ModRmToken>();
             var src = Z0.Tokens.concat(symbols);
-            var dst = Gen().Root + FS.file("token-specs", FS.Cs);
+            var dst = Ws.Gen().Root + FS.file("token-specs", FS.Cs);
             EmitTokenSpecs("ModRmTokens", src,dst);
             return result;
         }

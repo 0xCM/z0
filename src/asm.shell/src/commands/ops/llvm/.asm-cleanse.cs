@@ -16,7 +16,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var tool = Toolspace.llvm_mc;
-            var cmd = Cmd.cmdline(ToolWs().Script(tool, "cleanse").Format(PathSeparator.BS));
+            var cmd = Cmd.cmdline(Ws.Tools().Script(tool, "cleanse").Format(PathSeparator.BS));
             var src = State.Files(FS.S).View;
             var count = src.Length;
             var outdir = GetToolOut(tool);

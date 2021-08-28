@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// An identity part delimiter
         /// </summary>
-        public const char PartSep = Underscore;
+        public const char PartSep = (char)SymNotKind.LeftTick;
 
         /// <summary>
         /// A suffix part delimiter
@@ -29,12 +29,12 @@ namespace Z0
         /// <summary>
         /// A separator between an identifier body and an applied modifier
         /// </summary>
-        public const char ModSep = Tilde;
+        public const char ModSep = '~';
 
         /// <summary>
         /// A seperator that between a type and a generalization
         /// </summary>
-        public const char Refines = Chars.Colon;
+        public const char Refines = ':';
 
         /// <summary>
         /// Indicates a signed integral type
@@ -74,27 +74,27 @@ namespace Z0
         /// <summary>
         /// A type or value argument delimiter
         /// </summary>
-        public const char ArgSep = Comma;
+        public const char ArgSep = ',';
 
         /// <summary>
         /// Opens a value parameter list
         /// </summary>
-        public const char ArgsOpen = LParen;
+        public const char ArgsOpen = '(';
 
         /// <summary>
         /// Closes a value parameter list
         /// </summary>
-        public const char ArgsClose = RParen;
+        public const char ArgsClose = ')';
 
         /// <summary>
         /// Opens a type argument list
         /// </summary>
-        public const char TypeArgsOpen = LBracket;
+        public const char TypeArgsOpen = '[';
 
         /// <summary>
         /// Closes a type argument list
         /// </summary>
-        public const char TypeArgsClose = RBracket;
+        public const char TypeArgsClose = ']';
 
         /// <summary>
         /// The text used to terminate a uri scheme and trailing '//'
@@ -104,17 +104,17 @@ namespace Z0
         /// <summary>
         /// The symbol used to separate uri path components
         /// </summary>
-        public const char UriPathSep = Chars.FSlash;
+        public const char UriPathSep = '/';
 
         /// <summary>
         /// The symbol used to delimit a uri query segment from the path
         /// </summary>
-        public const char UriQueryMarker = Chars.Question;
+        public const char UriQuery = '?';
 
         /// <summary>
         /// The symbol used to announce a fragment
         /// </summary>
-        public const char UriFragment = Chars.Hash;
+        public const char UriFragment = '#';
 
         /// <summary>
         /// Indicates a pointer
@@ -129,17 +129,17 @@ namespace Z0
         /// <summary>
         /// Indicates a span
         /// </summary>
-        public const string Span = SpanIndicators.Span;
+        public const string Span = "span";
 
         /// <summary>
         /// Indicates an unmodifiable (readonly, immutable, etc) span
         /// </summary>
-        public const string ReadOnlySpan = SpanIndicators.ReadOnly;
+        public const string ReadOnlySpan = "rspan";
 
         /// <summary>
         /// Indicates a natural span
         /// </summary>
-        public const string NatSpan = SpanIndicators.Natural;
+        public const string NatSpan = "nspan";
 
         /// <summary>
         /// An identifier suffix indicating that an immediate value is required

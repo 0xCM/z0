@@ -58,8 +58,6 @@ namespace Z0.Asm
 
         AsmEtl AsmEtl;
 
-        IWorkspace ApiWs;
-
         IWorkspace OutWs;
 
         IWorkspace LogWs;
@@ -112,7 +110,6 @@ namespace Z0.Asm
             AsmTables = Wf.AsmTables();
             Random = Rng.wyhash64();
             ApiHexPacks = Wf.ApiHexPacks();
-            ApiWs = Ws.Api();
             OutWs = Ws.Output();
             LogWs = Ws.Logs();
             ProjectWs = Ws.Projects();
@@ -154,29 +151,14 @@ namespace Z0.Asm
         ref readonly NativeBufferSeq NativeBuffers()
             => ref _NativeBuffers;
 
-        IWorkspace Imports()
-            => Ws.Imports();
-
-        IWorkspace Gen()
-            => Ws.Gen();
-
-        IWorkspace Docs()
-            => Ws.Docs();
-
         FS.FolderPath OutDir(string id)
             => OutWs.Subdir(id);
 
         public FS.FolderPath OutRoot()
             => OutWs.Root;
 
-        IWorkspace ToolWs()
-            => Ws.Tools();
-
         FS.FilePath ToolScript(ToolId tool, string id)
-            => ToolWs().Script(tool, id);
-
-        IWorkspace TableWs()
-            => Ws.Tables();
+            => Ws.Tools().Script(tool, id);
 
         FS.FolderPath ProjectHome(ProjectId id)
             => ProjectWs.Home(id);

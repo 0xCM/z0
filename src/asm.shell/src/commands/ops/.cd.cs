@@ -19,9 +19,7 @@ namespace Z0.Asm
             var dst = FS.dir(arg(args,0).Value);
             if(!dst.Exists)
                 return (false, FS.missing(dst));
-
             Write(State.CurrentDir(dst));
-
             return result;
         }
     }

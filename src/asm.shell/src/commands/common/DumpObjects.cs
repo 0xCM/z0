@@ -21,7 +21,7 @@ namespace Z0.Asm
         Outcome LlvmObjDump(FS.FilePath src, FS.FolderPath dst)
         {
             var tool = Toolspace.llvm_objdump;
-            var cmd = Cmd.cmdline(ToolWs().Script(tool, "run").Format(PathSeparator.BS));
+            var cmd = Cmd.cmdline(Ws.Tools().Script(tool, "run").Format(PathSeparator.BS));
             var vars = WsVars.create();
             vars.DstDir = dst;
             vars.SrcDir = src.FolderPath;

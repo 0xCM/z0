@@ -12,7 +12,7 @@ namespace Z0.Asm
         [CmdOp(".load-lists")]
         Outcome LoadListImport(CmdArgs args)
         {
-            var lists = TableWs().Subdir("lists").AllFiles.View;
+            var lists = Ws.Tables().Subdir("lists").AllFiles.View;
             var match = arg(args,0).Value;
             var count = lists.Length;
             var items = list<ListItem<string>>();
