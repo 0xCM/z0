@@ -15,44 +15,44 @@ namespace Z0
         partial struct Operate
         {
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> cells<T>(ref v1<T> src)
+            public static Span<T> vcells<T>(ref v1<T> src)
                 where T : unmanaged
-                    => cover(cell(n0, ref src), src.N);
+                    => cover(vcell(n0, ref src), src.N);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> cells<T>(ref v2<T> src)
+            public static Span<T> vcells<T>(ref v2<T> src)
                 where T : unmanaged
-                    => cover(cell(n0, ref src), src.N);
+                    => cover(vcell(n0, ref src), src.N);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> cells<T>(ref v3<T> src)
+            public static Span<T> vcells<T>(ref v3<T> src)
                 where T : unmanaged
-                    => cover(cell(n0, ref src), src.N);
+                    => cover(vcell(n0, ref src), src.N);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> cells<T>(ref v4<T> src)
+            public static Span<T> vcells<T>(ref v4<T> src)
                 where T : unmanaged
-                    => cover(cell(n0, ref src), src.N);
+                    => cover(vcell(n0, ref src), src.N);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> cells<T>(ref v8<T> src)
+            public static Span<T> vcells<T>(ref v8<T> src)
                 where T : unmanaged
-                    => cover(cell(n0, ref src), src.N);
+                    => cover(vcell(n0, ref src), src.N);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> cells<T>(ref v16<T> src)
+            public static Span<T> vcells<T>(ref v16<T> src)
                 where T : unmanaged
-                    => cover(cell(n0, ref src), src.N);
+                    => cover(vcell(n0, ref src), src.N);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> cells<T>(ref v32<T> src)
+            public static Span<T> vcells<T>(ref v32<T> src)
                 where T : unmanaged
-                    => cover(cell(n0, ref src), src.N);
+                    => cover(vcell(n0, ref src), src.N);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> cells<T>(ref v64<T> src)
+            public static Span<T> vcells<T>(ref v64<T> src)
                 where T : unmanaged
-                    => cover(cell(n0, ref src), src.N);
+                    => cover(vcell(n0, ref src), src.N);
         }
     }
 }

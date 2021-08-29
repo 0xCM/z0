@@ -20,13 +20,13 @@ namespace Z0.Asm
                     ref readonly var r = ref records[i];
                     if(empty(selected))
                     {
-                        Write(string.Format("({0}) = {1} # {2}", r.Sig, r.OpCode, r.Description));
+                        Write(string.Format("# ({0}) = {1} - {2}", r.Sig, r.OpCode, r.Description));
                     }
                     else
                     {
                         var sig = r.Sig.Format();
                         if(text.contains(sig,selected,false))
-                            Write(string.Format("({0}) = {1} # {2}", r.Sig, r.OpCode, r.Description));
+                            Write(string.Format("# ({0}) = {1} - {2}", r.Sig, r.OpCode, r.Description));
                     }
                 }
 

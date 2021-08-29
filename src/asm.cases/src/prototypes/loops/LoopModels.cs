@@ -2,12 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    partial class AsmCmdService
+    [ApiComplete]
+    public unsafe readonly partial struct LoopModels
     {
-        [CmdOp(".mc-disasm")]
-        Outcome HexDecode(CmdArgs args)
-            => HexDecode(arg(args,0).Value);
     }
 }

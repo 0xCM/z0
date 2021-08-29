@@ -42,7 +42,7 @@ namespace Z0
             public Span<T> Cells
             {
                 [MethodImpl(Inline)]
-                get => Operate.cells(ref this);
+                get => Operate.vcells(ref this);
             }
             public ref T this[uint i]
             {

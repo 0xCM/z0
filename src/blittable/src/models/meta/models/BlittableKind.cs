@@ -85,10 +85,10 @@ namespace Z0
         Sequence = 10,
 
         /// <summary>
-        /// Indicates an homogenous tensor
+        /// Indicates a grid
         /// </summary>
-        [Symbol("z")]
-        Cube = 11,
+        [Symbol("g")]
+        Grid = 11,
 
         /// <summary>
         /// Indicates a type that represents an identifier, unique within some scope
@@ -96,10 +96,7 @@ namespace Z0
         [Symbol("q")]
         Name = 12,
 
-        [Symbol("bv")]
+        [Symbol("b")]
         BitVector = 13,
-
-        [Symbol("fx")]
-        Function = 14,
     }
 }

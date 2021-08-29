@@ -2,12 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    partial class AsmCmdService
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
+
+    partial struct Blit
     {
-        [CmdOp(".mc-disasm")]
-        Outcome HexDecode(CmdArgs args)
-            => HexDecode(arg(args,0).Value);
+        partial struct Factory
+        {
+
+        }
     }
 }

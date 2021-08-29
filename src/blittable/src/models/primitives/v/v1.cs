@@ -32,7 +32,7 @@ namespace Z0
             public Span<T> Cells
             {
                 [MethodImpl(Inline)]
-                get => cells(ref this);
+                get => vcells(ref this);
             }
 
             public ref T this[uint i]
