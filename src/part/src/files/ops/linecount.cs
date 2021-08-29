@@ -23,5 +23,20 @@ namespace Z0
             iter(src, path => dst.Add(linecount(path)), true);
             return dst.ToArray().Sort();
         }
+
+        [Op]
+        public static uint linecount(FS.FilePath src, TextEncodingKind encoding)
+        {
+            var counter = 0u;
+            using var reader = src.Reader(encoding);
+            var line = reader.ReadLine();
+            while(line != null)
+            {
+                counter++;
+                line = reader.ReadLine();
+            }
+
+            return counter;
+        }
     }
 }

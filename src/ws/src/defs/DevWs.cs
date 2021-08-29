@@ -10,7 +10,6 @@ namespace Z0
     using static Root;
     using static WsNames;
 
-
     public sealed class DevWs : IWorkspace<DevWs>
     {
         [MethodImpl(Inline)]

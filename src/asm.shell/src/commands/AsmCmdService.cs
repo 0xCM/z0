@@ -30,7 +30,7 @@ namespace Z0.Asm
 
         NasmCatalog NasmCatalog;
 
-        IntelSdm SdmSvc;
+        IntelSdm Sdm;
 
         AsmRegSets RegSets;
 
@@ -76,6 +76,11 @@ namespace Z0.Asm
 
         llvm.LlvmNm LlvmNm;
 
+        FS.FolderPath AsmRoot
+        {
+            get => AsmWs.Root;
+        }
+
         byte[] _Assembled;
 
         const ushort _NativeBufferSize = Pow2.T14;
@@ -103,7 +108,7 @@ namespace Z0.Asm
             ApiPack = ApiPacks.Current();
             ApiArchive = ApiPack.Archive();
             NasmCatalog = Wf.NasmCatalog();
-            SdmSvc = Wf.IntelSdm();
+            Sdm = Wf.IntelSdm();
             RegSets = Wf.AsmRegSets();
             Xed = Wf.IntelXed();
             AsmToolchain = Wf.AsmToolchain();

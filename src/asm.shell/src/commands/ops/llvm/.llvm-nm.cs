@@ -24,7 +24,7 @@ namespace Z0.Asm
                     ("SrcPath", src.Format(PathSeparator.BS)),
                     ("DstPath", dst.Format(PathSeparator.BS))
                     );
-                result = OmniScript.RunToolScript(script,vars, true, out _);
+                result = OmniScript.Run(script,vars, false, out _);
                 if(result.Fail)
                     return result;
             }

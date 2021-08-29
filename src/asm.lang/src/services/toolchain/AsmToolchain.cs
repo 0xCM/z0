@@ -42,14 +42,7 @@ namespace Z0.Asm
 
         void EnsurePaths(in AsmToolchainSpec spec)
         {
-            // spec.Analysis.Create();
-            // spec.AsmPath.FolderPath.Create();
-            // spec.BinPath.FolderPath.Create();
-            // spec.ObjPath.FolderPath.Create();
-            // spec.DisasmPath.FolderPath.Create();
-            // spec.HexPath.FolderPath.Create();
-            // spec.HexArrayPath.FolderPath.Create();
-            // spec.ListPath.FolderPath.Create();
+
         }
 
         Outcome Exec(in CmdLine cmd)
@@ -70,7 +63,7 @@ namespace Z0.Asm
             }
 
             var cmdrun = Wf.Running(cmd);
-            var cmdproc = ScriptProcess.run(cmd, OnStatus, OnError);
+            var cmdproc = ScriptProcess.create(cmd, OnStatus, OnError);
             cmdproc.Wait();
             Wf.Ran(cmdrun);
 
@@ -175,7 +168,7 @@ namespace Z0.Asm
             }
 
             using var writer = dst.AsciWriter();
-            var process = ScriptProcess.run(cmdline, writer, OnStatus, OnError);
+            var process = ScriptProcess.create(cmdline, writer, OnStatus, OnError);
             process.Wait();
             stdout.Sort();
             Wf.Ran(running);

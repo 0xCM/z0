@@ -52,7 +52,10 @@ namespace Z0
         FS.Files SrcFiles(ProjectId id)
             => Src(id).Files(true);
 
-        FS.FilePath Src(ProjectId project, string fileid, FS.FileExt ext)
+        FS.Files SrcFiles(ProjectId project, Scope scope)
+            => (Src(project) + FS.folder(scope.Format())).AllFiles;
+
+        FS.FilePath SrcFile(ProjectId project, string fileid, FS.FileExt ext)
             => Src(project) + FS.file(fileid,ext);
 
         FS.FolderPath Assets(ProjectId id)

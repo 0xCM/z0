@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static ProjectScriptNames;
+
     partial class AsmCmdService
     {
-        [CmdOp(".mc-hex")]
-        Outcome McHex(CmdArgs args)
-            => OmniScript.RunAsmScript(arg(args,0), ToolScriptId.mc_hex);
+        [CmdOp(".c-build")]
+        Outcome BuildC(CmdArgs args)
+            => OmniScript.RunProjectScript(AsmRoot, arg(args,0).Value, CBuild, false, out var flows);
     }
 }

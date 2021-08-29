@@ -19,7 +19,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var markers = SQ.markers(typeof(BinaryFormatMarkers));
-            var lines = SdmSvc.LoadImportedVolume(VolDigit.V2);
+            var lines = Sdm.LoadImportedVolume(VolDigit.V2);
             var count = (uint)lines.Length;
 
             var marker = SQ.marker(nameof(EncodingSigs.RexW), EncodingSigs.RexW);

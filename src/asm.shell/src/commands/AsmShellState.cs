@@ -37,7 +37,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public void SdmOpCodeDetail(SdmOpCodeDetail[] src)
+        public void SdmOpCodes(SdmOpCodeDetail[] src)
         {
             _SdmOpCodes = src;
         }
@@ -68,22 +68,14 @@ namespace Z0.Asm
             return _ProcessAsm;
         }
 
-
-        // [MethodImpl(Inline)]
-        // public ReadOnlySpan<ProcessAsmRecord> ProcessAsm(Index<ProcessAsmRecord> src)
-        // {
-        //     _ProcessAsm = src;
-        //     _ProcessAsmSelection = alloc<ProcessAsmRecord>(_ProcessAsm.Count);
-        //     return ProcessAsm();
-        // }
-
         Outcome LoadProcessAsm()
         {
             var archive = Wf.ApiPacks().Current().Archive();
             var path = archive.ProcessAsmPath();
-            var buffer = alloc<ProcessAsmRecord>(AsmEtl.ProcessAsmCount(path));
+            var count = FS.linecount(path,TextEncodingKind.Asci) - 1;
+            var buffer = alloc<ProcessAsmRecord>(count);
             var flow = Wf.Running(string.Format("Loading process asm from {0}", path.ToUri()));
-            var result = AsmEtl.LoadProcessAsm(path, buffer);
+            var result = asm.load(path, buffer);
             if(result.Fail)
                 return (false, result.Message);
 

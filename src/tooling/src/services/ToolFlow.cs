@@ -11,11 +11,11 @@ namespace Z0
 
     public readonly struct ToolFlow
     {
-        public text15 Tool {get;}
+        public readonly text15 Tool;
 
-        public FS.FilePath Source {get;}
+        public readonly FS.FilePath Source;
 
-        public FS.FilePath Target {get;}
+        public readonly FS.FilePath Target;
 
         [MethodImpl(Inline)]
         public ToolFlow(text15 tool, FS.FilePath src, FS.FilePath dst)
@@ -30,5 +30,10 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static ToolFlow Empty
+        {
+            get => new ToolFlow(text15.Empty, FS.FilePath.Empty, FS.FilePath.Empty);
+        }
     }
 }

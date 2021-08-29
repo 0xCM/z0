@@ -37,5 +37,10 @@ namespace Z0
         [Op]
         public static LlvmPaths LlvmPaths(this IServiceContext context)
             => llvm.LlvmPaths.create(context);
+
+        [Op]
+        public static LlvmMc LLvmMc(this IWfRuntime wf)
+            => llvm.LlvmMc.create(wf);
+
     }
 }

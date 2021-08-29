@@ -52,6 +52,15 @@ namespace Z0.Asm
             return result;
         }
 
+        public static Index<Outcome<uint>> parse(ReadOnlySpan<TextGrid> src, ConcurrentBag<HostAsmRecord> dst)
+        {
+            var results = bag<Outcome<uint>>();
+            iter(src, doc => {
+                results.Add(AsmParser.parse(doc, dst));
+            }, true);
+            return results.ToArray();
+        }
+
         public static Outcome<uint> parse(in TextGrid doc, ConcurrentBag<R> dst)
         {
             var counter = 0u;

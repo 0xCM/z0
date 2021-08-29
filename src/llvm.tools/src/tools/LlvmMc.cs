@@ -2,10 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.llvm
 {
-    public readonly struct LlvmMcScripts
+    public sealed class LlvmMc : ToolService<LlvmMc>
     {
+        public override ToolId Id
+            => Toolspace.llvm_mc;
+
         public static ToolScript mcdisasm(FS.FolderPath SrcDir, FS.FileName SrcFile, FS.FolderPath DstDir)
         {
             const string ScriptId = "disasm";

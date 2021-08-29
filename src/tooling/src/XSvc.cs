@@ -21,10 +21,6 @@ namespace Z0
         [Op]
         public static ScriptRunner ScriptRunner(this IEnvPaths paths)
             => Svc.ScriptRunner.create(paths);
-
-        [Op]
-        public static ProcessLauncher ProcessLauncher(this IWfRuntime paths)
-            => Svc.ProcessLauncher.create(paths);
     }
 
     public static partial class XTend

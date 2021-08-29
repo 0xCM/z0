@@ -145,7 +145,7 @@ namespace Z0.Asm
                 counter++;
             }
 
-            Wf.AsmEtl().EmitThumbprints(thumbprints.ToArray().ToSortedSpan(), ThumbprintPath(root));
+            asm.emit(thumbprints.ToArray().ToSortedSpan(), ThumbprintPath(root));
             tableWriter.Dispose();
             Wf.EmittedTable(tableFlow, counter);
 

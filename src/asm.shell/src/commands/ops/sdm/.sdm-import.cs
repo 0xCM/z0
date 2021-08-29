@@ -4,20 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-     using System;
-
-     using static core;
-
     partial class AsmCmdService
     {
         [CmdOp(".sdm-import")]
         Outcome SdmImport(CmdArgs args)
         {
-            var opcodes = AsmEtl.ImportSdmOpCodes();
-            State.SdmOpCodeDetail(opcodes);
-            var dst = Ws.Tables().Root + FS.file("asm.forms", FS.Txt);
-            var forms = AsmEtl.EmitAsmForms(opcodes, dst);
-            return AsmEtl.EmitOpCodeStrings(opcodes);
+            var opcodes = Sdm.ImportSdmOpCodes();
+            State.SdmOpCodes(opcodes);
+            var forms = Sdm.EmitForms(opcodes);
+            return Sdm.EmitOpCodeStrings(opcodes);
         }
     }
 }

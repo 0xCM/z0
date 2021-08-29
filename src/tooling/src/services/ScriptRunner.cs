@@ -44,7 +44,7 @@ namespace Z0
         {
             try
             {
-                var process = ScriptProcess.run(cmd, vars);
+                var process = ScriptProcess.create(cmd, vars);
                 process.Wait();
                 return Lines.read(process.Output);
             }
@@ -64,7 +64,7 @@ namespace Z0
                 var path = ScriptFile(script, kind);
                 if(!path.Exists)
                     return (false,FS.missing(path));
-                var process = ScriptProcess.run(CmdLine(path, kind), script.Vars, status, error);
+                var process = ScriptProcess.create(CmdLine(path, kind), script.Vars, status, error);
                 process.Wait();
                 dst = Lines.read(process.Output);
                 return true;
@@ -80,7 +80,7 @@ namespace Z0
             dst = default;
             try
             {
-                var process = ScriptProcess.run(cmd, vars, status, error);
+                var process = ScriptProcess.create(cmd, vars, status, error);
                 process.Wait();
                 dst = Lines.read(process.Output);
                 return true;
@@ -96,7 +96,7 @@ namespace Z0
             dst = default;
             try
             {
-                var process = ScriptProcess.run(cmd, vars);
+                var process = ScriptProcess.create(cmd, vars);
                 process.Wait();
                 dst = Lines.read(process.Output);
                 return true;
@@ -111,7 +111,7 @@ namespace Z0
         {
             try
             {
-                var process = ScriptProcess.run(cmd);
+                var process = ScriptProcess.create(cmd);
                 process.Wait();
                 return Lines.read(process.Output);
             }
@@ -130,7 +130,7 @@ namespace Z0
             using var writer = Paths.CmdLog(script).Writer();
             try
             {
-                var process = vars != null ? ScriptProcess.run(cmd, vars.Value) : ScriptProcess.run(cmd);
+                var process = vars != null ? ScriptProcess.create(cmd, vars.Value) : ScriptProcess.create(cmd);
                 process.Wait();
                 var lines =  Lines.read(process.Output);
                 iter(lines, line => writer.WriteLine(line));

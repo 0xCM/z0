@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     public readonly struct CmdArgs : IIndex<CmdArg>
     {
@@ -82,5 +83,29 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new CmdArgs(core.array<CmdArg>());
         }
+
+        public string Format()
+        {
+            var args = View;
+            var count = args.Length;
+            if(count > 0)
+            {
+                var dst = text.buffer();
+                for(var i=0; i<count; i++)
+                {
+                    dst.Append(skip(args,i).Value);
+                    if(i != count - 1)
+                        dst.Append(Chars.Space);
+                }
+                return dst.Emit();
+            }
+            else
+            {
+                return EmptyString;
+            }
+        }
+
+        public override string ToString()
+            => Format();
     }
 }

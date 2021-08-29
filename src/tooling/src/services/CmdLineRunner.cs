@@ -15,7 +15,7 @@ namespace Z0
         public void RunScript(FS.FilePath path, string args)
         {
             var cmd = new CmdLine($"cmd /c {path.Format(PathSeparator.BS)} {args}");
-            var process = ScriptProcess.run(cmd);
+            var process = ScriptProcess.create(cmd);
             var output = process.Output;
             Wf.Status(output);
         }
@@ -56,7 +56,7 @@ namespace Z0
             using var writer = log.AsciWriter();
             try
             {
-                var process = ScriptProcess.run(cmd, OnStatusEvent, OnErrorEvent).Wait();
+                var process = ScriptProcess.create(cmd, OnStatusEvent, OnErrorEvent).Wait();
                 var lines =  Lines.read(process.Output);
                 iter(lines, line => writer.WriteLine(line));
                 return lines;
@@ -71,31 +71,16 @@ namespace Z0
 
         public Outcome Run(CmdLine cmd, out ReadOnlySpan<TextLine> dst)
             => Run(cmd, OnStatusEvent, OnErrorEvent, out dst);
-        // {
-        //     var log = Db.AppLog("cmdline");
-        //     using var writer = log.AsciWriter();
-        //     try
-        //     {
-        //         var process = ScriptProcess.run(cmd, OnStatusEvent, OnErrorEvent).Wait();
-        //         var lines =  Lines.read(process.Output);
-        //         core.iter(lines, line => writer.WriteLine(line));
-        //         dst = lines;
-        //         return true;
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         dst = default;
-        //         return e;
-        //     }
-        // }
 
         public Outcome Run(CmdLine cmd, Receiver<string> status, Receiver<string> error, out ReadOnlySpan<TextLine> dst)
+            => Run(cmd,Db.AppLog("cmdline"), status, error, out dst);
+
+        public Outcome Run(CmdLine cmd, FS.FilePath log, Receiver<string> status, Receiver<string> error, out ReadOnlySpan<TextLine> dst)
         {
-            var log = Db.AppLog("cmdline");
             using var writer = log.AsciWriter();
             try
             {
-                var process = ScriptProcess.run(cmd, status, error).Wait();
+                var process = ScriptProcess.create(cmd, status, error).Wait();
                 var lines =  Lines.read(process.Output);
                 core.iter(lines, line => writer.WriteLine(line));
                 dst = lines;

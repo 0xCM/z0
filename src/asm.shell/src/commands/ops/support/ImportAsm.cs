@@ -19,7 +19,7 @@ namespace Z0.Asm
             foreach(var path in paths)
             {
                 lines.Clear();
-                var count = AsmEtl.load(path, lines);
+                var count = asm.lines(path, lines);
                 counter += count;
                 var desc = string.Format("Source: {0}, {1} lines", path.ToUri(), count);
 

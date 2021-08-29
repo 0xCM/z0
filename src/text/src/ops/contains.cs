@@ -13,11 +13,11 @@ namespace Z0
     partial class text
     {
         [MethodImpl(Inline), Op]
-        public static bool contains(string src, string match)
-            => src.Contains(match);
+        public static bool contains(string src, string match, bool @case = true)
+            => src.Contains(match, @case ? Cased : NoCase);
 
         [MethodImpl(Inline), Op]
-        public static bool contains(string src, char match)
-            => src.Contains(match);
+        public static bool contains(string src, char match, bool @case = true)
+            => src.Contains(match, @case ? Cased : NoCase);
     }
 }

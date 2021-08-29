@@ -66,7 +66,7 @@ namespace Z0
             => OutDir() + FS.folder(bin);
 
         FS.FilePath BinPath(string id)
-            =>  Bin() + FS.file(id, FS.Bin);
+            => Bin() + FS.file(id, FS.Bin);
 
         FS.FolderPath HexOutDir()
             => OutDir() + FS.folder(hex);

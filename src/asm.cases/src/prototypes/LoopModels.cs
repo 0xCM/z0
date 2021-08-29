@@ -12,11 +12,6 @@ namespace Z0
     [ApiComplete]
     public readonly struct LoopModels
     {
-        /// <summary>
-        /// isl/test_inputs/codegen/atomic.c
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
         public static void atomic(Action<int> a, Action<int> b)
         {
             for (int c0 = 0; c0 <= 10; c0 += 1)
@@ -52,7 +47,7 @@ namespace Z0
 
         }
 
-        public static string const_string(N8 n)
+        public static string const_string_n8()
         {
             const string s0 = "";
             const string s1 = "";

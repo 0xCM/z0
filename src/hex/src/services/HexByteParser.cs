@@ -19,6 +19,14 @@ namespace Z0
         public static HexByteParser Service
             => default(HexByteParser);
 
+        [MethodImpl(Inline)]
+        public static bool HasPreSpec(string src)
+            => src.TrimStart().StartsWith(PreSpec);
+
+        [MethodImpl(Inline)]
+        public static bool HasPostSpec(string src)
+            => src.TrimEnd().EndsWith(PostSpec);
+
         public static Outcome hexbytes(string src, out BinaryCode dst)
         {
             dst = BinaryCode.Empty;
@@ -53,9 +61,9 @@ namespace Z0
             {
                 var s0 = src.Trim();
                 var len = s0.Length;
-                if(HexFormatSpecs.HasPreSpec(s0))
+                if(HasPreSpec(s0))
                     s0 = text.substring(s0, len - PreSpec.Length);
-                else if(HexFormatSpecs.HasPostSpec(s0))
+                else if(HasPostSpec(s0))
                     s0 = text.substring(s0, 0, len - PostSpec.Length);
                 var blocks = split(s0, Chars.Space).View;
                 var count = blocks.Length;

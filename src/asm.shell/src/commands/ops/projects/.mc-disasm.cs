@@ -6,8 +6,9 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".clang-run")]
-        Outcome ClangRun(CmdArgs args)
-            => OmniScript.RunAsmScript(arg(args,0), "clang-run");
+        [CmdOp(".mc-disasm")]
+        Outcome HexDecode(CmdArgs args)
+            => HexDecode(arg(args,0).Value);
+
     }
 }

@@ -40,7 +40,7 @@ namespace Z0.Asm
         public ReadOnlySpan<AsmDetailRow> Emit(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
         {
             var rows = BuildRows(src);
-            var rowsets = rows.GroupBy(x => x.Mnemonic).Select(x => AsmEtl.rowset(x.Key, x.Array())).Array().ToReadOnlySpan();
+            var rowsets = rows.GroupBy(x => x.Mnemonic).Select(x => asm.rowset(x.Key, x.Array())).Array().ToReadOnlySpan();
             var count = rowsets.Length;
             for(var i=0; i<count; i++)
                 Emit(skip(rowsets,i), dst);

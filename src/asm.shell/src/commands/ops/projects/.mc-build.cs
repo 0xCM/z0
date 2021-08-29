@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static ProjectScriptNames;
+
     partial class AsmCmdService
     {
-        [CmdOp(".clang")]
-        Outcome Clang(CmdArgs args)
-            => OmniScript.RunAsmScript(arg(args,0), "clang-build");
+        [CmdOp(".mc-build")]
+        Outcome BuildMc(CmdArgs args)
+            => OmniScript.RunProjectScript(AsmRoot, arg(args,0).Value, McBuild, false, out var flows);
     }
 }

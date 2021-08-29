@@ -10,11 +10,13 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".asm-hex-array")]
+        [CmdOp(".hexrays")]
         Outcome AsmHexArray(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = AsmWs.HexOutDir().Files(FS.Hex).ToReadOnlySpan();
+
+            LoadProjectSources("asm", "hex");
+            var src = State.Files().View;
             var count = src.Length;
             var files = alloc<FS.FilePath>(count);
             for(var i=0; i<count; i++)

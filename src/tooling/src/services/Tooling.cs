@@ -42,7 +42,7 @@ namespace Z0
                     if(j>=0)
                     {
                         var a = text.left(flow,j).Trim();
-                        var b = text.right(flow,j + 2).Trim();
+                        var b = text.left(text.right(flow, j + 2), Chars.RBracket).Trim();
                         if(nonempty(a) && nonempty(b))
                             seek(dst,counter++) = new ToolFlow(tool, FS.path(a), FS.path(b));
                     }

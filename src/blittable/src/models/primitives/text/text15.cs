@@ -65,6 +65,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator textT<Cell128>(text15 src)
                 => new textT<Cell128>(src.Storage, src.Length, src.PointSize);
+
+            public static text15 Empty => default;
         }
     }
 }

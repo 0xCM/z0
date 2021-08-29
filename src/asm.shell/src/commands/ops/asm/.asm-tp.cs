@@ -13,8 +13,10 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var src = ApiArchive.Thumbprints();
-            var etl = Wf.AsmEtl();
-            var data = etl.LoadThumbprints(src);
+            result = asm.thumbprints(src, out var data);
+            if(result.Fail)
+                return result;
+
             var count = data.Length;
             for(var i=0; i<count; i++)
             {

@@ -8,7 +8,7 @@ namespace Z0.Asm
     {
         Outcome McAssemble(FS.FilePath src, FS.FolderPath dst)
         {
-            var script = LlvmMcScripts.assemble(src.FolderPath, src.FileName, dst);
+            var script = llvm.LlvmMc.assemble(src.FolderPath, src.FileName, dst);
             var result = OmniScript.Run(script, out var response);
             if(result)
                 ParseCmdResponse(response);
