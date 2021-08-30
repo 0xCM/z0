@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Blit.Operate;
 
     partial struct Blit
     {
@@ -52,11 +51,10 @@ namespace Z0
             }
 
             public string Format()
-                => format(this);
+                => Operate.vformat(this);
 
             public override string ToString()
                 => Format();
-
         }
    }
 }

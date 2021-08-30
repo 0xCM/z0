@@ -137,10 +137,8 @@ namespace Z0
         public static bool operator!=(H x, H y)
             => x.Value != y.Value;
 
-        public static H Zero
-        {
-             [MethodImpl(Inline)]
-             get => default;
-        }
+        public static H Zero => default;
+
+        public static H Max => K.MaxValue;
     }
 }

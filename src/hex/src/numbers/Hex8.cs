@@ -157,5 +157,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Address8(H src)
             => new Address8(src);
+        public static H MaxValue
+        {
+            [MethodImpl(Inline)]
+            get =>  byte.MaxValue;
+        }
     }
 }

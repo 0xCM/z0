@@ -23,7 +23,7 @@ namespace Z0
             }
 
             public string Format()
-                => api.format(Name);
+                => api.tformat(Name);
 
             public override string ToString()
                 => Format();

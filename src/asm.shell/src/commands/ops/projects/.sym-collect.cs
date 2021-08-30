@@ -10,12 +10,14 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".nm-syms")]
-        Outcome ObjSyms(CmdArgs args)
+        [CmdOp(".sym-collect")]
+        Outcome CollectSyms(CmdArgs args)
         {
             var result = Outcome.Success;
-            var outpath = ProjectOut() + Tables.filename<ObjSymRecord>();
-            var symbols = LlvmNm.Collect(State.Files(FS.Sym).View, outpath);
+            var outpath = OutData<ObjSymRecord>();
+            var files = ProjectOut().Files(FS.Sym,true);
+            Write(string.Format("Collecting symbols from {0} files", files.Length));
+            var symbols = LlvmNm.Collect(files, outpath);
             return result;
         }
     }

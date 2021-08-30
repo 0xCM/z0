@@ -17,6 +17,8 @@ namespace Z0
     {
         public const uint StorageSize = PrimalSizes.U16;
 
+        public static H Max => K.MaxValue;
+
         public K Value {get;}
 
         [MethodImpl(Inline)]
@@ -137,10 +139,6 @@ namespace Z0
         public static implicit operator H(Address16 src)
             => new H(src.Location);
 
-        public static H Zero
-        {
-             [MethodImpl(Inline)]
-             get => default;
-        }
-    }
+        public static H Zero => default;
+   }
 }

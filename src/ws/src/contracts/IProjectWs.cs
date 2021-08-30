@@ -8,13 +8,11 @@ namespace Z0
 
     public interface IProjectWs : IWorkspace
     {
-        FS.FolderPath OutRoot {get;}
-
         FS.FolderPath Home(ProjectId id)
             => Root + FS.folder(id.Format());
 
         FS.FolderPath Out(ProjectId id)
-            => OutRoot + FS.folder(id.Format());
+            => Home(id) + FS.folder(output);
 
         FS.Files OutFiles(ProjectId id)
             => Out(id).Files(true);
@@ -60,9 +58,6 @@ namespace Z0
 
         FS.FolderPath Assets(ProjectId id)
             => Home(id) + FS.folder(assets);
-
-        FS.FolderPath WsRoot()
-            => Root;
 
         FS.FolderPath Scripts(ProjectId id)
             => Home(id) + FS.folder(scripts);

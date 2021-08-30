@@ -403,14 +403,79 @@ namespace Z0
         public const char G = 'G';
 
         /// <summary>
-        /// The 'H' character
+        /// The 'I' character
         /// </summary>
         public const char H = 'H';
+
+        /// <summary>
+        /// The 'H' character
+        /// </summary>
+        public const char I = 'I';
+
+        /// <summary>
+        /// The 'J' character
+        /// </summary>
+        public const char J = 'J';
+
+        /// <summary>
+        /// The 'K' character
+        /// </summary>
+        public const char K = 'K';
+
+        /// <summary>
+        /// The 'L' character
+        /// </summary>
+        public const char L = 'L';
+
+        /// <summary>
+        /// The 'M' character
+        /// </summary>
+        public const char M = 'M';
+
+        /// <summary>
+        /// The 'N' character
+        /// </summary>
+        public const char N = 'N';
+
+        /// <summary>
+        /// The 'O' character
+        /// </summary>
+        public const char O = 'O';
+
+        /// <summary>
+        /// The 'P' character
+        /// </summary>
+        public const char P = 'P';
+
+        /// <summary>
+        /// The 'Q' character
+        /// </summary>
+        public const char Q = 'Q';
 
         /// <summary>
         /// The 'R' character
         /// </summary>
         public const char R = 'R';
+
+        /// <summary>
+        /// The 'S' character
+        /// </summary>
+        public const char S = 'S';
+
+        /// <summary>
+        /// The 'T' character
+        /// </summary>
+        public const char T = 'T';
+
+        /// <summary>
+        /// The 'U' character
+        /// </summary>
+        public const char U = 'U';
+
+        /// <summary>
+        /// The 'V' character
+        /// </summary>
+        public const char V = 'V';
 
         /// <summary>
         /// The 'W' character

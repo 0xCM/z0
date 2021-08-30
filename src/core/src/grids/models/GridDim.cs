@@ -10,6 +10,7 @@ namespace Z0
 
     using static Root;
     using static CharText;
+    using static core;
 
     /// <summary>
     /// Defines grid dimensions based on specification without parametrization
@@ -17,46 +18,63 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential), DataType]
     public readonly struct GridDim : IDataTypeEquatable<GridDim>
     {
+        public static bool Parse(string s, out GridDim dst)
+        {
+            var n = 0u;
+            var parts = @readonly(s.Split('x'));
+            var parser = NumericParser.create<uint>();
+            dst = default;
+            if(parts.Length == 2)
+            {
+                if(parser.Parse(skip(parts,0), out var m) && parser.Parse(skip(parts,1), out n))
+                {
+                    dst = new GridDim(m, n);
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public uint RowCount {get;}
+        public readonly uint M;
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public uint ColCount {get;}
+        public readonly uint N;
 
         [MethodImpl(Inline)]
         public GridDim(uint rows, uint cols)
         {
-            RowCount = rows;
-            ColCount = cols;
+            M = rows;
+            N = cols;
         }
 
         /// <summary>
         /// Formats the dimension in canonical form
         /// </summary>
         public string Format()
-            => $"{RowCount}x{ColCount}";
+            => $"{M}x{N}";
 
         [MethodImpl(Inline)]
         public void Deconstruct(out uint rows, out uint cols)
         {
-            rows = RowCount;
-            cols = ColCount;
+            rows = M;
+            cols = N;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(GridDim src)
-            => src.RowCount == RowCount
-            && src.ColCount == ColCount;
+            => src.M == M
+            && src.N == N;
 
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
-            => (int)FastHash.combine(RowCount, ColCount);
+            => (int)FastHash.combine(M, N);
 
         public override bool Equals(object obj)
             => obj is GridDim d && Equals(d);
@@ -79,7 +97,7 @@ namespace Z0
             => default;
 
         public static RenderTemplate RT =>
-             fLT + nameof(GridDim.RowCount) + RT + x +
-             fLT + nameof(GridDim.ColCount) + RT;
+             fLT + nameof(GridDim.M) + RT + x +
+             fLT + nameof(GridDim.N) + RT;
     }
 }

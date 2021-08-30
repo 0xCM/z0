@@ -9,11 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static AsciCode;
-    using static BlittableKind;
-
-    using K = BlittableKind;
-
 
     partial struct Blit
     {

@@ -126,6 +126,7 @@ namespace Z0.Asm
             OmniScript = Wf.OmniScript();
             LlvmNm = Wf.LlvmNm();
             State.Init(Wf,Ws);
+            State.Project("cmodels");
         }
 
         protected override void Disposing()

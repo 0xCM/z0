@@ -17,7 +17,6 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public static BlittableKind typekind(byte index)
                 => skip(TypeKinds, index);
-
         }
     }
 }

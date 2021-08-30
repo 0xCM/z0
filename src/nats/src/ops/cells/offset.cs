@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline), Op]
         public static uint offset(GridDim dim, GridPoint point)
-            => point.Row*dim.ColCount + point.Col;
+            => point.Row*dim.N + point.Col;
 
         /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate

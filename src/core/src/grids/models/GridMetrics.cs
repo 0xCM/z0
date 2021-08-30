@@ -10,38 +10,38 @@ namespace Z0
 
     using static Root;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public readonly struct GridMetrics : IDataType<GridMetrics>
     {
         /// <summary>
         /// The number of rows in the layout
         /// </summary>
-        public ushort RowCount {get;}
+        public readonly ushort RowCount;
 
         /// <summary>
         /// The number of columns in the layout
         /// </summary>
-        public ushort ColCount {get;}
+        public readonly ushort ColCount;
 
         /// <summary>
         /// The number of bits in a segment
         /// </summary>
-        public ushort CellWidth {get;}
+        public readonly ushort CellWidth;
 
         /// <summary>
         /// The number of segment-aligned storage segments
         /// </summary>
-        public uint CellCount {get;}
+        public readonly uint CellCount;
 
         /// <summary>
         /// The number of segment-aligned bits required for storage
         /// </summary>
-        public uint StoreWidth {get;}
+        public readonly uint StoreWidth;
 
         /// <summary>
         /// The number of segment-aligned bytes bits required for storage
         /// </summary>
-        public uint StoreSize {get;}
+        public readonly uint StoreSize;
 
         [MethodImpl(Inline)]
         public GridMetrics(in GridSpec spec)

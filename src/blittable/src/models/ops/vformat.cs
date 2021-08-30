@@ -14,37 +14,42 @@ namespace Z0
     {
         partial struct Operate
         {
-            public static string format<T>(in v1<T> src)
+            public static string vformat<T>(in v1<T> src)
                 where T : unmanaged
                     => string.Format(RP.V1, src[0]);
 
-            public static string format<T>(in v2<T> src)
+            public static string vformat<T>(in v2<T> src)
                 where T : unmanaged
                     => string.Format(RP.V2, src[0], src[1]);
 
-            public static string format<T>(in v3<T> src)
+            public static string vformat<T>(in v3<T> src)
                 where T : unmanaged
                     => string.Format(RP.V3,
                         src[0], src[1], src[2]);
 
-            public static string format<T>(in v4<T> src)
+            public static string vformat<T>(in v4<T> src)
                 where T : unmanaged
                     => string.Format(RP.V4,
                         src[0], src[1], src[2], src[3]);
 
-            public static string format<T>(in v8<T> src)
+            public static string vformat<T>(in v5<T> src)
+                where T : unmanaged
+                    => string.Format(RP.V5,
+                        src[0], src[1], src[2], src[3], src[4]);
+
+            public static string vformat<T>(in v8<T> src)
                 where T : unmanaged
                     => string.Format(RP.V8,
                         src[0], src[1], src[2], src[3], src[4], src[5], src[6], src[7]);
 
-            public static string format<T>(in v16<T> src)
+            public static string vformat<T>(in v16<T> src)
                 where T : unmanaged
                     => string.Format(RP.V16,
                         src[0],  src[1],  src[2],  src[3],  src[4],  src[5],  src[6],  src[7],
                         src[8],  src[9],  src[10], src[11], src[12], src[13], src[14], src[15]
                         );
 
-            public static string format<T>(in v32<T> src)
+            public static string vformat<T>(in v32<T> src)
                 where T : unmanaged
                     => string.Format(RP.V32,
                         src[0],  src[1],  src[2],  src[3],  src[4],  src[5],  src[6],  src[7],  src[8], src[9],
@@ -53,7 +58,7 @@ namespace Z0
                         src[30], src[31]
                         );
 
-            public static string format<T>(in v64<T> src)
+            public static string vformat<T>(in v64<T> src)
                 where T : unmanaged
                     => string.Format(RP.V32,
                         src[0],  src[1],  src[2],  src[3],  src[4],  src[5],  src[6],  src[7],  src[8], src[9],
@@ -65,49 +70,7 @@ namespace Z0
                         src[60], src[61], src[62], src[63]
                         );
 
-
-            [Op]
-            public static string format(in text7 src)
-            {
-                Span<char> dst = stackalloc char[text7.MaxLength];
-                var count = src.Length;
-                var data = src.Bytes;
-                for(var i=0; i<count; i++)
-                    seek(dst, i) = (char)skip(data,i);
-                return text.format(slice(dst,0,count));
-            }
-
-            [Op]
-            public static string format(in text15 src)
-            {
-                Span<char> dst = stackalloc char[text15.MaxLength];
-                var count = src.Length;
-                var data = src.Bytes;
-                for(var i=0; i<count; i++)
-                    seek(dst,i) = (char)skip(data,i);
-                return text.format(slice(dst,0,count));
-            }
-
-            [Op]
-            public static string format(in bv src)
-            {
-                var count = (int)src.Width;
-                Span<char> buffer = stackalloc char[count];
-                for(var i=0; i<count; i++)
-                    seek(buffer,i) = src[i].ToChar();
-                buffer.Reverse();
-                return text.format(buffer);
-            }
-
-            public static string format<S,T>(in map<S,T> m)
-                where S : unmanaged
-                where T : unmanaged
-            {
-                const string Pattern = "{0} -> {1}";
-                return string.Format(Pattern, m.Source, m.Target);
-            }
-
-            public static string format<N,T>(in vector<N,T> src)
+            public static string vformat<N,T>(in vector<N,T> src)
                 where T : unmanaged
                 where N : unmanaged, ITypeNat
             {

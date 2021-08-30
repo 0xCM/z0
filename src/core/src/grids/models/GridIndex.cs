@@ -17,12 +17,12 @@ namespace Z0
         /// <summary>
         /// The container-relative index of the storage segment containing the bit
         /// </summary>
-        public ushort CellIndex {get;}
+        public readonly ushort CellIndex;
 
         /// <summary>
         /// The number of cells covered by a row
         /// </summary>
-        public ushort RowCellCount {get;}
+        public readonly ushort RowCellCount;
 
         /// <summary>
         /// The segment-relative bit offset
@@ -57,5 +57,8 @@ namespace Z0
 
         public string Format()
             => $"(RowCellcount = {RowCellCount}, BitIndex = {BitIndex}, CellIndex = {CellIndex}, Row = {RowIndex}, Col = {ColIndex}, BitOffset = {BitOffset})";
+
+        public override string ToString()
+            => Format();
     }
 }

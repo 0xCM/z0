@@ -24,7 +24,7 @@ namespace Z0
                 where T : unmanaged
             {
                 var v = new v2<T>();
-                ref var dst = ref Operate.vcell(n0, ref v);
+                ref var dst = ref Operate.vref(ref v);
                 seek(dst,0) = a0;
                 seek(dst,1) = a1;
                 return v;
@@ -35,7 +35,7 @@ namespace Z0
                 where T : unmanaged
             {
                 var v = new v3<T>();
-                ref var dst = ref Operate.vcell(n0, ref v);
+                ref var dst = ref Operate.vref(ref v);
                 seek(dst,0) = a0;
                 seek(dst,1) = a1;
                 seek(dst,2) = a2;
@@ -47,7 +47,7 @@ namespace Z0
                 where T : unmanaged
             {
                 var v = new v4<T>();
-                ref var dst = ref Operate.vcell(n0, ref v);
+                ref var dst = ref Operate.vref(ref v);
                 seek(dst,0) = a0;
                 seek(dst,1) = a1;
                 seek(dst,2) = a2;
@@ -56,11 +56,25 @@ namespace Z0
             }
 
             [MethodImpl(Inline), Op, Closures(Closure)]
+            public static v5<T> v5<T>(T a0 = default, T a1 = default, T a2 = default, T a3 = default, T a4 = default)
+                where T : unmanaged
+            {
+                var v = new v5<T>();
+                ref var dst = ref Operate.vref(ref v);
+                seek(dst,0) = a0;
+                seek(dst,1) = a1;
+                seek(dst,2) = a2;
+                seek(dst,3) = a3;
+                seek(dst,4) = a4;
+                return v;
+            }
+
+            [MethodImpl(Inline), Op, Closures(Closure)]
             public static v8<T> v8<T>(T a0 = default, T a1 = default, T a2 = default, T a3 = default, T a4 = default, T a5 = default, T a6 = default, T a7 = default)
                 where T : unmanaged
             {
                 var v = new v8<T>();
-                ref var dst = ref Operate.vcell(n0, ref v);
+                ref var dst = ref Operate.vref(ref v);
                 seek(dst,0) = a0;
                 seek(dst,1) = a1;
                 seek(dst,2) = a2;
@@ -77,7 +91,7 @@ namespace Z0
                 where T : unmanaged
             {
                 var v = new v16<T>();
-                ref var dst = ref @as<T,v8<T>>(Operate.vcell(n0, ref v));
+                ref var dst = ref @as<T,v8<T>>(Operate.vref(ref v));
                 seek(dst,0) = a0;
                 seek(dst,1) = a1;
                 return v;
@@ -88,7 +102,7 @@ namespace Z0
                 where T : unmanaged
             {
                 var v = new v32<T>();
-                ref var dst = ref @as<T,v16<T>>(Operate.vcell(n0, ref v));
+                ref var dst = ref @as<T,v16<T>>(Operate.vref(ref v));
                 seek(dst,0) = a0;
                 seek(dst,1) = a1;
                 return v;
@@ -99,7 +113,7 @@ namespace Z0
                 where T : unmanaged
             {
                 var v = new v64<T>();
-                ref var dst = ref @as<T,v32<T>>(Operate.vcell(n0, ref v));
+                ref var dst = ref @as<T,v32<T>>(Operate.vref(ref v));
                 seek(dst,0) = a0;
                 seek(dst,1) = a1;
                 return v;

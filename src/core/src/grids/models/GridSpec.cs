@@ -6,51 +6,45 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
     /// <summary>
     /// Characterizes the memory layout of a 2-d grid
     /// </summary>
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public readonly struct GridSpec : IDataType<GridSpec>
     {
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public ushort RowCount {get;}
+        public readonly ushort RowCount;
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public ushort ColCount {get;}
+        public readonly ushort ColCount;
 
         /// <summary>
         /// The number of bits in a storage cell
         /// </summary>
-        public ushort CellWidth {get;}
+        public readonly ushort CellWidth;
 
         /// <summary>
         /// The the total number of allocated storage cells
         /// </summary>
-        public uint CellCount {get;}
+        public readonly uint CellCount;
 
         /// <summary>
         /// The the total number of segment-aligned bits allocated for storage
         /// </summary>
-        public uint StoreWidth {get;}
+        public readonly uint StoreWidth;
 
         /// <summary>
         /// The the total number of segment-aligned bytes allocated for storage
         /// </summary>
-        public uint StoreSize {get;}
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(GridSpec a, GridSpec b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(GridSpec a, GridSpec b)
-            => !a.Equals(b);
+        public readonly uint StoreSize;
 
         [MethodImpl(Inline)]
         public GridSpec(ushort rows, ushort cols, ushort wCell, uint zStore, uint wStore, uint cells)
@@ -80,5 +74,13 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(GridSpec a, GridSpec b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(GridSpec a, GridSpec b)
+            => !a.Equals(b);
     }
 }

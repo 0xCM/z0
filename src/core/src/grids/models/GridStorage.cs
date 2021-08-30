@@ -17,17 +17,17 @@ namespace Z0
         /// <summary>
         /// The the total number of segment-aligned bits allocated for storage
         /// </summary>
-        public BitWidth BitCount {get;}
+        public readonly BitWidth BitCount;
 
         /// <summary>
         /// The number of bits in each segment
         /// </summary>
-        public uint SegWidth {get;}
+        public readonly uint SegWidth;
 
         /// <summary>
         /// The the total number of segments allocated for storage
         /// </summary>
-        public uint SegCount {get;}
+        public readonly uint SegCount;
 
         [MethodImpl(Inline)]
         public GridStorage(BitWidth bits, uint segwdith)

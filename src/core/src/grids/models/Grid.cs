@@ -19,7 +19,7 @@ namespace Z0
         public Grid(GridDim dim)
         {
             Dim = dim;
-            Data = alloc<T>(Dim.RowCount*Dim.ColCount);
+            Data = alloc<T>(Dim.M*Dim.N);
         }
 
         [MethodImpl(Inline)]
@@ -51,6 +51,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static uint linear(GridDim dim, GridPoint point)
-            => point.Row*dim.ColCount+ point.Col;
+            => point.Row*dim.N+ point.Col;
     }
 }

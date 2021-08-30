@@ -14,12 +14,10 @@ namespace Z0
     public sealed class ProjectWs : IProjectWs, IWorkspace<ProjectWs>
     {
         [MethodImpl(Inline)]
-        public static ProjectWs create(FS.FolderPath src, FS.FolderPath dst)
-            => new ProjectWs(src,dst);
+        public static ProjectWs create(FS.FolderPath home)
+            => new ProjectWs(home);
 
         public FS.FolderPath Root {get; private set;}
-
-        public FS.FolderPath OutRoot {get; private set;}
 
         public Identifier Name
         {
@@ -29,10 +27,9 @@ namespace Z0
 
         Dictionary<ProjectId,ProjectConfig> ConfigLookup;
 
-        public ProjectWs(FS.FolderPath src, FS.FolderPath dst)
+        public ProjectWs(FS.FolderPath src)
         {
             Root = src;
-            OutRoot = dst;
             ConfigLookup = dict<ProjectId,ProjectConfig>();
         }
 

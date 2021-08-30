@@ -6,27 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
-    using static Blit.Operate;
 
     partial struct Blit
     {
-
-        [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct g2x2<T>
-            where T : unmanaged
+        partial struct Operate
         {
-            v2<T> R0;
-
-            v2<T> R1;
-
-            public uint M => 2;
-
-            public uint N => 2;
+            public static string mformat<S,T>(in map<S,T> m)
+                where S : unmanaged
+                where T : unmanaged
+            {
+                const string Pattern = "{0} -> {1}";
+                return string.Format(Pattern, m.Source, m.Target);
+            }
         }
-
     }
 }

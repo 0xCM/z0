@@ -59,5 +59,7 @@ namespace Z0
         public static ToolId llc => "llc";
 
         public static ToolId llvm_objdump =>"llvm-objdump";
+
+        public static ToolId yaml_bench =>"yaml-bench";
     }
 }

@@ -63,7 +63,6 @@ namespace Z0
             return result;
         }
 
-
         public ReadOnlySpan<TextLine> ReadAll()
         {
             var dst = list<TextLine>();

@@ -9,7 +9,12 @@ namespace Z0.Asm
     partial class AsmCmdService
     {
         [CmdOp(".c-build")]
-        Outcome BuildC(CmdArgs args)
-            => OmniScript.RunProjectScript(AsmRoot, arg(args,0).Value, CBuild, false, out var flows);
+        Outcome BuildCProj(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var home = ProjectHome(State.Project());
+            result = OmniScript.RunProjectScript(home, arg(args,0).Value, CBuild, false, out var flows);
+            return result;
+        }
     }
 }

@@ -9,19 +9,22 @@ namespace Z0
 
     using static Root;
 
-    partial class XTend
+    partial struct Grids
     {
-        /// <summary>
-        /// Calculates a grid layout from a specification
-        /// </summary>
-        /// <param name="spec">The grid specification that characterizes the layout</param>
-        /// <typeparam name="T">The storage type</typeparam>
-        [MethodImpl(Inline)]
-        public static GridMetrics Map(this GridSpec spec)
-            => new GridMetrics(spec);
-
-        [MethodImpl(Inline)]
-        public static GridStats Stats(this GridMetrics map)
-            => GridStats.Define(map);
+        [MethodImpl(Inline), Op]
+        public static GridStats stats(in GridMetrics src)
+            => new GridStats(
+                RowCount : src.RowCount,
+                ColCount : src.ColCount,
+                SegWidth : src.CellWidth,
+                StorageSegs : src.CellCount,
+                StorageBits : src.StoreWidth,
+                StorageBytes : src.StoreSize,
+                PointCount : (uint)points(src.Dim),
+                Vec128Count : coverage(src, W128.W),
+                Vec128Remainder : remainder(src, W128.W),
+                Vec256Count : coverage(src, W256.W),
+                Vec256Remainder : remainder(src, W256.W)
+            );
     }
 }

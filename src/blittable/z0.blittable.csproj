@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Cells)" />
     <ProjectReference Include="$(SymCore)" />
+    <ProjectReference Include="$(Nats)" />
   </ItemGroup>
 
 </Project>

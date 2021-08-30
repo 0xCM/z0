@@ -52,6 +52,37 @@ namespace Z0
             return RunToolScript(path, vars.ToCmdVars(), quiet, out flows);
         }
 
+        public Outcome RunProjectScript(ProjectId project, string src, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
+        {
+            var path = Ws.Projects().Script(project, script, FS.Cmd);
+            var result = Outcome.Success;
+            var vars = WsVars.create();
+            vars.SrcId = src;
+            return RunToolScript(path, vars.ToCmdVars(), quiet, out flows);
+        }
+
+        public Outcome RunProjectScripts(ProjectId project, string match, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
+        {
+            var result = Outcome.Success;
+            var buffer = list<ToolFlow>();
+            var paths = @readonly(Ws.Projects().Scripts(project).Files(FS.Cmd).Where(x => x.Format().StartsWith(match)));
+            var count = paths.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(paths,i);
+                var vars = WsVars.create();
+                var id = path.FileName.WithoutExtension.Format();
+                vars.SrcId = id;
+                result = RunToolScript(path, vars.ToCmdVars(), quiet, out var _flows);
+                if(result.Fail)
+                    break;
+                iter(_flows, f => buffer.Add(f));
+            }
+
+            flows = buffer.ToArray();
+            return result;
+        }
+
         public Outcome RunProjectScript(FS.FolderPath root, string src, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
         {
             var result = Outcome.Success;
@@ -105,6 +136,9 @@ namespace Z0
 
         public Outcome RunProjectScript(ProjectId project, string src, Scope scope, ScriptId script)
             => RunProjectScript(project, src, scope, script, out _);
+
+        public Outcome RunProjectScript(ProjectId project, string src, Scope scope, ScriptId script, bool quiet)
+            => RunProjectScript(project, src, scope, script, quiet, out _);
 
         public Outcome RunProjectScript(ProjectId project, string src, Scope scope, ScriptId script, out ReadOnlySpan<ToolFlow> flows)
             => RunProjectScript(project, src, scope, script, true, out flows);
