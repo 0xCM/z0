@@ -34,19 +34,19 @@ namespace Z0.Asm
             byte x = 0;
 
             x = skip(src,0);
-            Write(f.map(x));
+            Write(f.Map(x));
 
             x = skip(src,1);
-            Write(f.map(x));
+            Write(f.Map(x));
 
             x = skip(src,2);
-            Write(f.map(x));
+            Write(f.Map(x));
 
             x = skip(src,3);
-            Write(f.map(x));
+            Write(f.Map(x));
 
             x = skip(src,4);
-            Write(f.map(x));
+            Write(f.Map(x));
 
             return true;
         }

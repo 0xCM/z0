@@ -23,6 +23,7 @@ namespace Z0
 
         }
 
+        [Free]
         public interface IName<F,T> : IName<T>
             where T : unmanaged
             where F : unmanaged, IName<F,T>
