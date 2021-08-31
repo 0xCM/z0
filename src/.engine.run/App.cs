@@ -25,7 +25,7 @@ namespace Z0
         protected override void OnInit()
         {
             AssetRoot = Db.ZSrc("engine.run", "assets");
-            Configure();
+            //Configure();
         }
 
         public App()
@@ -40,50 +40,47 @@ namespace Z0
                 Wf.Raise(e);
         }
 
-        public void Run()
-        {
-            var engine = Engine.create(Wf);
-            engine.Run();
-        }
+        // public void Run()
+        // {
+        //     var engine = Engine.create(Wf);
+        //     engine.Run();
+        // }
 
-        void Configure()
-        {
-            var settings = new EngineSettings();
-            settings.Affinity = 0b10101101u;
-            Wf.Row(settings.Affinity);
-        }
+        // void Configure()
+        // {
+        //     var settings = new EngineSettings();
+        //     settings.Affinity = 0b10101101u;
+        //     Wf.Row(settings.Affinity);
+        // }
 
-        public void CheckStack()
-        {
-            var stack = StackMachines.create(Pow2.T08);
-            stack.Push(2);
-            Queue.Deposit(EventFactory.data(stack.state()));
-            stack.Push(4);
-            Queue.Deposit(EventFactory.data(stack.state()));
-            stack.Push(6);
-            Queue.Deposit(EventFactory.data(stack.state()));
-        }
+        // public void CheckStack()
+        // {
+        //     var stack = StackMachines.create(Pow2.T08);
+        //     stack.Push(2);
+        //     Queue.Deposit(EventFactory.data(stack.state()));
+        //     stack.Push(4);
+        //     Queue.Deposit(EventFactory.data(stack.state()));
+        //     stack.Push(6);
+        //     Queue.Deposit(EventFactory.data(stack.state()));
+        // }
 
-        Task<uint> RunMachine(uint cycles)
-            => Task.Factory.StartNew(() => new Vmx128x2(1024, Rng.@default()).Run(cycles));
-
-        ulong Run(uint count, uint cycles)
-        {
-            var counter = 0ul;
-            var tasks = root.stream(0u,count).Map(i => RunMachine(cycles));
-            Task.WaitAll(tasks);
-            foreach(var t in tasks)
-                counter += t.Result;
-            return counter;
-        }
 
         void RunWf1()
         {
+            Task<uint> RunMachine(uint cycles)
+                => Task.Factory.StartNew(() => new Vmx128x2(1024, Rng.@default()).Run(cycles));
+
             var jobs = 64u;
             var cycles = 64u;
             var flow = Wf.Running();
             var clock = Time.counter(true);
-            var count = Run(jobs, cycles);
+
+            var count = 0ul;
+            var tasks = core.stream(0u,jobs).Map(i => RunMachine(cycles));
+            Task.WaitAll(tasks);
+            foreach(var t in tasks)
+                count += t.Result;
+
             var time = clock.Elapsed();
             Wf.Ran(flow, string.Format("Processed {0:##,#} items in {1} ms", count, time.Ms));
 

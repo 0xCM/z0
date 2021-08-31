@@ -11,7 +11,7 @@ namespace Z0
 
     public struct MemorySymbol : IRecord<MemorySymbol>, IComparable<MemorySymbol>, IEquatable<MemorySymbol>
     {
-        public uint Index;
+        public uint Key;
 
         public Hash32 HashCode;
 
@@ -19,16 +19,16 @@ namespace Z0
 
         public ByteSize Size;
 
-        public SymExpr Expression;
+        public SymExpr Expr;
 
         [MethodImpl(Inline)]
-        public MemorySymbol(uint index, uint hash, MemoryAddress address, ByteSize size, SymExpr expr)
+        public MemorySymbol(uint key, Hash32 hash, MemoryAddress address, ByteSize size, SymExpr expr)
         {
-            Index = index;
+            Key = key;
             HashCode = hash;
             Address = address;
             Size = size;
-            Expression = expr;
+            Expr = expr;
         }
 
         public bool IsEmpty

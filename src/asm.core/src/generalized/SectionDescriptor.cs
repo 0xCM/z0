@@ -13,10 +13,10 @@ namespace Z0
 
     partial struct MemorySections
     {
-        [StructLayout(LayoutKind.Sequential, Pack=1, Size=(int)StorageSize), Blittable(StorageSize)]
+        [StructLayout(LayoutKind.Sequential, Pack=1, Size=(int)SZ), Blittable(SZ)]
         public readonly struct SectionDescriptor
         {
-            public const uint StorageSize = Hex16.StorageSize + MemoryAddress.StorageSize + SectionCapacity.StorageSize;
+            public const uint SZ = Hex16.StorageSize + MemoryAddress.SZ + SectionCapacity.StorageSize;
 
             /// <summary>
             /// A 0-based surrogate key

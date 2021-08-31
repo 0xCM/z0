@@ -25,6 +25,12 @@ namespace Z0
             get => u64(Value);
         }
 
+        public string Format()
+            => Primitive.ToString("X");
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator Hash64(Hash64<T> src)
             => new Hash64(src.Primitive);

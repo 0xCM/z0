@@ -4,62 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static RegModels;
     using static FunctionModels;
-    using static CpuModels;
 
     using static core;
 
     using Fx = AsmInstructions;
-
-
-    public ref struct CpuRuntime
-    {
-        const uint DefaultBufferSize = CpuBuffer.BufferSize;
-
-        readonly IWfRuntime Wf;
-
-        readonly CpuBuffers Buffers;
-
-        int ProcessedCount;
-
-        [MethodImpl(Inline)]
-        public CpuRuntime(IWfRuntime wf)
-        {
-            Wf = wf;
-            Buffers = CpuBuffers.create(DefaultBufferSize);
-            ProcessedCount = 0;
-        }
-
-        public void Dispose()
-        {
-
-        }
-
-        [Op]
-        public void Run()
-        {
-            var flow = Wf.Running();
-            try
-            {
-                var buffer =  Buffers.Run();
-                var steps = buffer.Slice(0, ProcessedCount);
-                var log = Buffers.Log();
-                var count = Hex.render(steps, log);
-                var hex =  text.format(slice(log,0,count));
-                Wf.Status(hex);
-            }
-            catch(Exception error)
-            {
-                Wf.Error(error);
-            }
-            Wf.Ran(flow);
-        }
-    }
 
     public struct EngineSettings
     {
@@ -108,41 +61,9 @@ namespace Z0.Asm
             return true;
         }
 
-
-        [CmdOp(".test")]
-        Outcome Test(CmdArgs args)
-        {
-            var src = FS.path(@"J:\dumps\images\machine.exe.asm");
-            const uint Skip = 5;
-            using var reader = src.AsciLineReader();
-            var counter = 0u;
-            var skipping = Skip != 0;
-            while(reader.Next(out var line))
-            {
-                counter++;
-
-                if(counter == Skip)
-                {
-                    skipping = false;
-                    Write(line.Format());
-                }
-
-                if(skipping)
-                    continue;
-
-                if(counter % 100000 == 0)
-                {
-                    Write(line.Format());
-                }
-
-            }
-            return true;
-        }
-
         public void Configure(in EngineSettings src)
         {
             Settings = src;
-
         }
 
         protected override void Initialized()

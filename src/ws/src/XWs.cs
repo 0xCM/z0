@@ -10,5 +10,9 @@ namespace Z0
        [Op]
        public static DevWs DevWs(this IEnvProvider provider)
             => Z0.DevWs.create(provider.Env.DevWs);
+
+        [Op]
+        public static string Format(this FileKind src)
+            => Symbols.index<FileKind>()[src].Expr.Format();
     }
 }

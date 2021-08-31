@@ -14,10 +14,13 @@ namespace Z0
             app.Init(wf);
             var name = typeof(A).Name;
             var flow = wf.Running(RP.msg("Running application {0}", name));
-            app.Run();
+            app.Run(args);
             wf.Ran(flow, RP.msg("Ran application {0}", name));
         }
 
         protected abstract void Run();
+
+        protected virtual void Run(string[] args)
+            => Run();
     }
 }

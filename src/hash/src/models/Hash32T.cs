@@ -24,6 +24,12 @@ namespace Z0
             get => core.u32(Value);
         }
 
+        public string Format()
+            => Primitive.ToString("X");
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator Hash32(Hash32<T> src)
             => new Hash32(src.Primitive);

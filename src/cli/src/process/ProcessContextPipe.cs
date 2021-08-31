@@ -43,7 +43,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var summary = ref skip(summaries,i);
-                symbols.Deposit(summary.BaseAddress, summary.Size, summary.ImageName.Format());
+                symbols.Deposit(summary.BaseAddress,  summary.Size, summary.ImageName.Format());
             }
             return symbols;
         }

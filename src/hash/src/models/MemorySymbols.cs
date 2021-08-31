@@ -22,6 +22,19 @@ namespace Z0
         public static uint hash(MemoryAddress src)
             => (uint)src;
 
+        [MethodImpl(Inline), Op]
+        public static MemorySymbol symbol(uint key, StringAddress address)
+        {
+            var dst = new MemorySymbol();
+            var chars = address.Chars;
+            dst.Key = key;
+            dst.Address = address;
+            dst.HashCode = StringHash.compute(chars);
+            dst.Size = chars.Length*2;
+            dst.Expr = TextTools.format(chars);
+            return dst;
+        }
+
         [Op]
         public static uint hash(ReadOnlySpan<MemoryAddress> src, Span<AddressHash> dst)
         {
@@ -65,7 +78,7 @@ namespace Z0
             {
                 ref var symbol = ref seek(s,i);
                 symbol.HashCode = hash(symbol.Address);
-                seek(k,  bucket(symbol.HashCode, capacity)) = symbol.Index;
+                seek(k,  bucket(symbol.HashCode, capacity)) = symbol.Key;
 
             }
             return new MemoryLookup(symbols, keys, capacity);

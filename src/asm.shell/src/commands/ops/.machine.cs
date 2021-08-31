@@ -18,9 +18,8 @@ namespace Z0.Asm
             var tables = Ws.Tables();
             var tokens = Wf.AsmTokens();
 
-            result = EmitApiLiterals();
-            if(result.Fail)
-                return result;
+            var literals = EmitApiLiterals();
+
             result = GenModRmBits();
             if(result.Fail)
                 return result;
@@ -36,30 +35,6 @@ namespace Z0.Asm
             EmitTokens(tokens.PrefixTokens());
             EmitSymKinds(Symbols.index<AsmOpClass>(), tables.Table(machine,"classes.asm.operands"));
             EmitSymIndex<RegClassCode>(tables.Table(machine, "classes.asm.regs"));
-            return result;
-        }
-
-        Outcome EmitApiLiterals()
-        {
-            var result = Outcome.Success;
-            var components = ApiRuntimeLoader.assemblies();
-            var providers = ApiLiterals.providers(components).View;
-            var count = providers.Length;
-            var buffer = list<CompilationLiteral>();
-            var dst = Ws.Tables().Table<ApiLiterals>(machine);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var provider = ref skip(providers,i);
-                var literals = ApiLiterals.provided(provider).View;
-                for(var j=0; j<literals.Length; j++)
-                {
-                    ref readonly var literal = ref skip(literals,j);
-                    buffer.Add(literal.Specify());
-                }
-            }
-
-            TableEmit(buffer.ViewDeposited(), CompilationLiteral.RenderWidths, dst);
-
             return result;
         }
 

@@ -18,23 +18,7 @@ namespace Z0
         protected override void Run()
         {
             var flow = Wf.Running();
-            CheckFormatting();
-            BitfieldChecks.create(Wf).Run();
             Wf.Ran(flow);
-        }
-
-        void CheckFormatting()
-        {
-            var m0 = BitMaskLiterals.b00001111x32;
-            var m1 = BitMaskLiterals.Even32;
-            var m = (ulong)m0 | ((ulong)m1 << 32);
-            var bf = Bitfields.create(m);
-            var bytes = bf.Bytes;
-            var buffer = CharBlock128.Null;
-            var count = BitRender.render4x4(bytes, buffer.Data);
-            var chars = slice(buffer.Data,0,count);
-            var fmt = text.format(chars);
-            Wf.Row(fmt);
         }
     }
 }

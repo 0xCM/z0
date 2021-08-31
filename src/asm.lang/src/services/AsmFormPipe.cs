@@ -39,7 +39,7 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public ReadOnlySpan<AsmFormHash> EmitFormHashes()
+        public ReadOnlySpan<HashEntry> EmitFormHashes()
         {
             var pipe = Wf.AsmFormPipe();
             var expressions = pipe.LoadFormExpressions();
@@ -82,7 +82,7 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, count);
         }
 
-        ReadOnlySpan<AsmFormHash> HashPerfect(ReadOnlySpan<AsmFormExpr> src)
+        ReadOnlySpan<HashEntry> HashPerfect(ReadOnlySpan<AsmFormExpr> src)
         {
             Wf.Status($"Attempting to find perfect hashes for {src.Length} expressions");
             var perfect = HashFunctions.perfect(src, x => x.Format(), HashFunctions.strings()).Codes;
@@ -90,18 +90,18 @@ namespace Z0.Asm
 
             Wf.Status($"Found {count} distinct hash codes for {src.Length} expressions");
 
-            var dst = Db.AsmCatalogTable<AsmFormHash>();
-            var buffer = alloc<AsmFormHash>(count);
+            var dst = Db.AsmCatalogTable<HashEntry>();
+            var buffer = alloc<HashEntry>(count);
             ref var records = ref first(buffer);
             for(var i=0; i<count; i++)
             {
                 ref var record = ref seek(records,i);
                 ref readonly var hash = ref skip(perfect,i);
-                record.Form = hash.Source;
-                record.HashCode = hash.Hash;
-                record.IndexKey = (hash.Hash % count);
+                record.Content = hash.Source.Format();
+                record.Code = hash.Hash;
+                record.Key = (hash.Hash % count);
             }
-            var emitting = Wf.EmittingTable<AsmFormHash>(dst);
+            var emitting = Wf.EmittingTable<HashEntry>(dst);
             var ecount = Tables.emit(@readonly(buffer), dst);
             Wf.EmittedTable(emitting, ecount);
             return buffer;

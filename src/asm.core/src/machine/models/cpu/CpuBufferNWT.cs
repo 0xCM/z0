@@ -13,12 +13,12 @@ namespace Z0.Asm
 
     partial struct CpuModels
     {
-        public ref struct CpuBuffer<N,W,T>
+        public struct CpuBuffer<N,W,T>
             where N : unmanaged, ITypeNat
             where W : unmanaged, ITypeWidth
             where T : unmanaged
         {
-            readonly Span<T> Data;
+            readonly Index<T> Data;
 
             [MethodImpl(Inline)]
             public CpuBuffer(T[] data)
@@ -39,25 +39,25 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public void Clear(W16 w)
             {
-                first(Data.Recover<T,ushort>()) = z16;
+                first(Data.Edit.Recover<T,ushort>()) = z16;
             }
 
             [MethodImpl(Inline)]
             public void Clear(W32 w)
             {
-                first(Data.Recover<T,uint>()) = z32;
+                first(Data.Edit.Recover<T,uint>()) = z32;
             }
 
             [MethodImpl(Inline)]
             public void Clear(W64 w)
             {
-                first(Data.Recover<T,ulong>()) = z64;
+                first(Data.Edit.Recover<T,ulong>()) = z64;
             }
 
             [MethodImpl(Inline)]
             public void Clear(W128 w)
             {
-                first(Data.Recover<T,Cell128>()) = Cell128.Empty;
+                first(Data.Edit.Recover<T,Cell128>()) = Cell128.Empty;
             }
         }
     }

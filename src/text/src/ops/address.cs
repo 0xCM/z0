@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct TextTools
+    partial class text
     {
         [MethodImpl(Inline), Op]
         public static StringAddress address(string src)

@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential, Pack=1, Size=(int)StorageSize), Blittable(StorageSize)]
+    [StructLayout(LayoutKind.Sequential, Pack=1, Size=(int)SZ), Blittable(SZ)]
     public struct AsmDataBlock
     {
-        public const uint StorageSize =
+        public const uint SZ =
             2*PrimalSizes.U32 +
-            2*MemoryAddress.StorageSize +
+            2*MemoryAddress.SZ +
             Address16.StorageSize +
             ByteBlock64.Size +
             ByteBlock16.Size +

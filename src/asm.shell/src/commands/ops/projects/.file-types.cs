@@ -1,0 +1,67 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0.Asm
+{
+    using System;
+
+    using static core;
+
+    partial class AsmCmdService
+    {
+        [CmdOp(".file-types")]
+        Outcome ProjFileTypes(CmdArgs args)
+        {
+            return FileTypeTest1();
+        }
+
+        Outcome FileTypeTest1()
+        {
+            var result = Outcome.Success;
+            var src = ApiLiterals.provided(typeof(FileKindNames)).Sort();
+            var values = src.Map(x => x.Value().Format().Remove(RP.Tick));
+            result = HashFunctions.perfect(values, out var entries);
+            if(result.Fail)
+                return result;
+
+            var count = src.Length;
+            var formatter = Tables.formatter<HashEntry>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var entry = ref entries[i];
+                Write(formatter.Format(entry));
+            }
+
+
+            return result;
+        }
+
+        Outcome FileTypesTest2()
+        {
+            var result = Outcome.Success;
+            var src = ApiLiterals.provided(typeof(FileKindNames)).View;
+            var count = src.Length;
+            var symbols = alloc<MemorySymbol>(count);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var literal = ref skip(src,i);
+                var address = (StringAddress)literal.Data;
+                seek(symbols,i) = MemorySymbols.symbol(i, address);
+            }
+
+            result = HashFunctions.perfect(symbols, out var entries);
+            if(result.Fail)
+                return result;
+
+            var formatter = Tables.formatter<HashEntry>();
+
+            for(var i=0; i<count; i++)
+            {
+                Write(formatter.Format(entries[i]));
+            }
+
+            return result;
+        }
+    }
+}

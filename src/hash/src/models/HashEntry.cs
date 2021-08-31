@@ -6,17 +6,15 @@ namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    using Z0.Asm;
-
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct AsmFormHash : IRecord<AsmFormHash>
+    public struct HashEntry : IRecord<HashEntry>
     {
-        public const string TableId = "asm.forms.hashed";
+        public const string TableId = "text.hashed";
 
-        public Hex32 HashCode;
+        public uint Key;
 
-        public uint IndexKey;
+        public Hash32 Code;
 
-        public AsmFormExpr Form;
+        public TextBlock Content;
     }
 }

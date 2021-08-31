@@ -6,8 +6,9 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(AsmLang)" />
     <ProjectReference Include="$(Agents)" />
+    <ProjectReference Include="$(AsmCore)" />
+    <ProjectReference Include="$(Dynamic)" />
   </ItemGroup>
 
 </Project>

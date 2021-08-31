@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Value.ToString();
+            => Value.ToString("X");
 
         public override string ToString()
             => Format();

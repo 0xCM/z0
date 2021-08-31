@@ -27,6 +27,58 @@ namespace Z0
             return count - (uint)accumulator.Count;
         }
 
+        public static Outcome perfect(ReadOnlySpan<MemorySymbol> src, out Index<HashEntry> dst)
+        {
+            var result = Outcome.Success;
+            dst = default;
+            var codes = src.Map(x => x.HashCode);
+            var count = (uint)codes.Length;
+            dst = alloc<HashEntry>(count);
+            ref var records = ref dst.First;
+            for(var i=0; i<count; i++)
+            {
+                ref var record = ref seek(records,i);
+                ref readonly var hash = ref skip(codes,i);
+                record.Code = hash;
+                record.Key = (hash % count);
+                record.Content = skip(src,i).Expr.Text;
+            }
+
+            var distinct = hashset(dst.Storage);
+            if(distinct.Count != count)
+                result = (false, "Imperfect");
+
+            return result;
+        }
+
+        public static Outcome perfect(ReadOnlySpan<string> src, out Index<HashEntry> dst)
+        {
+            var result = Outcome.Success;
+
+            dst = default;
+            try
+            {
+                var codes = perfect(src, x => x, HashFunctions.strings()).Codes;
+                var count = (uint)codes.Length;
+                dst = alloc<HashEntry>(count);
+                ref var records = ref dst.First;
+                for(var i=0; i<count; i++)
+                {
+                    ref var record = ref seek(records,i);
+                    ref readonly var hash = ref skip(codes,i);
+                    record.Code = hash.Hash;
+                    record.Key = (hash.Hash % count);
+                    record.Content = hash.Source;
+                }
+            }
+            catch(Exception e)
+            {
+                result = e;
+            }
+
+            return result;
+        }
+
         public static HashedIndex<T> perfect<T>(ReadOnlySpan<T> src, Func<T,string> f, StringHash hasher)
         {
             var count = src.Length;

@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     partial struct CpuModels
     {
-        public ref struct CpuBuffers
+        public struct CpuBuffers
         {
             [MethodImpl(Inline), Op]
             public static CpuBuffers create(uint size)

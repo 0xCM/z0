@@ -8,30 +8,34 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    public readonly struct Hash64 : IHashCode<ulong,ulong>
+    /// <summary>
+    /// Represents a path to a file that is within the scope of a project
+    /// </summary>
+    public readonly partial struct ProjectFile : IFsEntry<ProjectFile>
     {
-        public ulong Value {get;}
+        public FileKind Kind {get;}
+
+        public FS.FilePath Path {get;}
 
         [MethodImpl(Inline)]
-        public Hash64(ulong value)
-            => Value = value;
-
-        public ulong Primitive
+        public ProjectFile(FileKind kind, FS.FilePath path)
         {
-            [MethodImpl(Inline)]
-            get => Value;
+            Kind = kind;
+            Path = path;
         }
 
+        public FS.PathPart Name
+        {
+            [MethodImpl(Inline)]
+            get => Path.Name;
+        }
+
+        [MethodImpl(Inline)]
         public string Format()
-            => Primitive.ToString("X");
+            => Path.Format();
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Hash64(ulong src)
-            => new Hash64(src);
     }
 }

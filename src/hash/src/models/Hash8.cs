@@ -24,6 +24,12 @@ namespace Z0
             get => Value;
         }
 
+        public string Format()
+            => Value.ToString("X");
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator Hash8(byte src)
             => new Hash8(src);

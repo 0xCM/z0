@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct ApiLiterals
     {
         [MethodImpl(Inline), Op]
-        public static LiteralProvider provider(Type src, LiteralUsage usage = default)
+        public static LiteralProvider provider(Type src, LiteralUsage usage)
             => new LiteralProvider(src,usage);
 
         [Op]
@@ -86,7 +86,7 @@ namespace Z0
             if(tag)
             {
                 var usage = tag.Value.Usage;
-                return provided(provider(src,usage));
+                return provided(provider(src, usage));
             }
             else
                 return Index<RuntimeLiteral>.Empty;
@@ -95,7 +95,7 @@ namespace Z0
         [Op]
         public static Index<RuntimeLiteral> provided(LiteralProvider src)
         {
-            var fields = src.Definition.Fields().ReadOnly();
+            var fields = src.Definition.PublicFields().ReadOnly();
             var count = fields.Length;
             var buffer = alloc<RuntimeLiteral>(count);
             ref var dst = ref first(buffer);

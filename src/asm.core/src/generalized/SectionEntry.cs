@@ -14,10 +14,10 @@ namespace Z0
 
     partial struct MemorySections
     {
-        [StructLayout(LayoutKind.Sequential, Pack=1, Size=(int)StorageSize), Blittable(StorageSize)]
+        [StructLayout(LayoutKind.Sequential, Pack=1, Size=(int)SZ), Blittable(SZ)]
         public readonly struct SectionEntry : ISectionEntry<SectionEntry>
         {
-            public const uint StorageSize = SectionDescriptor.StorageSize;
+            public const uint SZ = SectionDescriptor.SZ;
 
             readonly SectionDescriptor _D;
 

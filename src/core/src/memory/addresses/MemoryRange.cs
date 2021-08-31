@@ -16,7 +16,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct MemoryRange : IMemoryRange<MemoryRange>
     {
-        public const uint StorageSize = 2*MemoryAddress.StorageSize;
+        public const uint SZ = 2*MemoryAddress.SZ;
 
         [MethodImpl(Inline)]
         public static MemoryRange define(MemoryAddress min, MemoryAddress max)

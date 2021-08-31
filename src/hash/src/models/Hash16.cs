@@ -24,6 +24,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public string Format()
+            => Value.ToString("X");
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
         public static implicit operator Hash16(ushort src)
             => new Hash16(src);
     }

@@ -8,8 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static ProjectFile;
 
-    partial class FileTypes
+    [ApiHost]
+    public class FileTypes
     {
         [MethodImpl(Inline)]
         public static TypedFile<K> file<K>(FS.FilePath src)
@@ -19,5 +21,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static TypedFile file(FileType type, FS.FilePath path)
             => new TypedFile(type,path);
+
+        public static FileKind classify(FS.FilePath src)
+            => default;
+
     }
 }

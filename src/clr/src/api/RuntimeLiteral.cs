@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
@@ -17,12 +18,12 @@ namespace Z0
     /// <remarks>
     /// The <see cref='decimal'/> type is not supported; the <see cref='string'/> type is supported via addressing
     /// </remarks>
-    [StructLayout(LayoutKind.Sequential,Pack=1,Size=(int)StorageSize), Blittable(StorageSize), Record(TableName)]
-    public readonly struct RuntimeLiteral : ITextual, IRuntimeLiteral
+    [StructLayout(LayoutKind.Sequential,Pack=1,Size=(int)SZ), Blittable(SZ), Record(TableName)]
+    public readonly struct RuntimeLiteral : ITextual, IRuntimeLiteral, IComparableRecord<RuntimeLiteral>
     {
         public const string TableName = "literals.runtime";
 
-        public const uint StorageSize = 2*StringAddress.SZ + PrimalSizes.U64 + PrimalSizes.U8;
+        public const uint SZ = 2*StringAddress.SZ + PrimalSizes.U64 + PrimalSizes.U8;
 
         public StringAddress Source {get;}
 
@@ -52,5 +53,8 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public int CompareTo(RuntimeLiteral src)
+            => Format().CompareTo(src.Format());
     }
 }

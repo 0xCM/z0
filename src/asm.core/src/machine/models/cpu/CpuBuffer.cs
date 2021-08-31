@@ -15,7 +15,7 @@ namespace Z0.Asm
         [ApiComplete]
         public ref struct CpuBuffer
         {
-            readonly Span<byte> Data;
+            readonly Index<byte> Data;
 
             /// <summary>
             /// The number of bytes covered by the buffer
@@ -73,19 +73,19 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public void Clear(W16 w, byte index)
             {
-                first(uint16(Data)) = z16;
+                first(uint16(Data.Edit)) = z16;
             }
 
             [MethodImpl(Inline), Op]
             public void Clear(W32 w, byte index)
             {
-                first(uint32(Data)) = z32;
+                first(uint32(Data.Edit)) = z32;
             }
 
             [MethodImpl(Inline), Op]
             public void Clear(W64 w, byte index)
             {
-                first(uint64(Data)) = z64;
+                first(uint64(Data.Edit)) = z64;
             }
 
             [MethodImpl(Inline), Op]

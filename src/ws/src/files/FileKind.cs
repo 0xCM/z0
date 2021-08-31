@@ -136,5 +136,25 @@ namespace Z0
 
         [Symbol(h, "A C/C++ header file")]
         H,
+
+        [Symbol(mcasm)]
+        McAsm,
+
+        [Symbol(mclog)]
+        McLog,
+
+        OpsAsm,
+
+        [Symbol(sym)]
+        ObjSym,
+
+        [Symbol(ll)]
+        Llir,
+
+        [Symbol(mlir)]
+        Mlir,
+
+        [Symbol(mir)]
+        Mir,
     }
 }

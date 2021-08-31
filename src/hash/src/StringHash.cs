@@ -15,5 +15,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public uint Compute(in string src)
             => alg.hash.marvin(bytes(src));
+
+        [MethodImpl(Inline)]
+        public static uint compute(ReadOnlySpan<char> src)
+            => alg.hash.marvin(bytes(src));
     }
 }

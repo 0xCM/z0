@@ -25,6 +25,12 @@ namespace Z0
             get => u8(Value);
         }
 
+        public string Format()
+            => Primitive.ToString("X");
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator Hash8(Hash8<T> src)
             => new Hash8(src.Primitive);
