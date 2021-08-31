@@ -118,11 +118,40 @@ namespace Z0.Asm
             return (uint)count;
         }
 
-        public ReadOnlySpan<CpuIdRow> LoadCpuIdImports()
+        public Outcome LoadCpuIdImports(IWorkspace ws, out ReadOnlySpan<CpuIdRow> rows)
         {
-            var src = Ws.Tables().Table<CpuIdRow>();
+            const byte FieldCount = CpuIdRow.FieldCount;
+            const char Delimiter = Chars.Pipe;
+            rows = default;
+            var result = Outcome.Success;
+            var src = ws.Table<CpuIdRow>();
+
             using var reader = src.Utf8Reader();
-            return LoadCpuIdImports(reader);
+            var header = TextGrids.header(reader.ReadLine(), Delimiter);
+            var count = header.Length;
+            if(count != FieldCount)
+                return (false, Tables.FieldCountMismatch.Format(FieldCount,count));
+
+            var current = reader.ReadLine();
+            var dst = list<CpuIdRow>();
+            while(current != null)
+            {
+                var data = TextRow.parse(current,Chars.Pipe);
+                if(data.CellCount != FieldCount)
+                    return (false, Tables.FieldCountMismatch.Format(FieldCount, data.CellCount));
+
+                result = AsmParser.parse(data, out CpuIdRow row);
+                if(result.Fail)
+                    return result;
+
+                dst.Add(row);
+
+                current = reader.ReadLine();
+            }
+
+            rows = dst.ViewDeposited();
+
+            return result;
         }
 
         public Outcome ImportCpuIdSources()
@@ -268,6 +297,7 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, count);
             return result;
         }
+
 
         ReadOnlySpan<CpuIdRow> LoadCpuIdImports(TextReader reader)
         {

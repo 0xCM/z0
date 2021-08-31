@@ -32,6 +32,27 @@ namespace Z0.Asm
         }
 
         [Op]
+        public static string format(in Jcc32Conditions src, bit alt)
+        {
+            const string Pattern = "{0,-4} rel{1} [{2}:{3}b] => {4}";
+            var dst = EmptyString;
+            if(alt)
+                dst =  string.Format(Pattern, src.Alt.Name, src.Alt.Size.Width, HexFormat.asmhex(src.Alt.Encoding), BitRender.format8x4(src.Alt.Encoding), src.AltInfo);
+            else
+                dst = string.Format(Pattern, src.Primary.Name, src.RelWidth, HexFormat.asmhex(src.Encoding), text.format(src.EncodedBits), src.PrimaryInfo);
+            return dst;
+        }
+
+        public static ReadOnlySpan<Jcc8Conditions> jcc8()
+        {
+            var conditions = create();
+            var buffer = alloc<Jcc8Conditions>(32);
+            var count = jcc8(conditions,buffer);
+            var output = slice(span(buffer),0, count);
+            return output;
+        }
+
+        [Op]
         public static uint jcc8(Conditions src, Span<Jcc8Conditions> dst)
         {
             var jcc = src.JccCodes(w8, n0);
@@ -49,6 +70,39 @@ namespace Z0.Asm
                 ref var target = ref seek(dst,counter++);
                 target.Primary = AsmSpecs.jcc(code, name, AsmSizeClass.@byte);
                 target.Alt = AsmSpecs.jcc(codeAlt, nameAlt, AsmSizeClass.@byte);
+                target.PrimaryInfo = info.Text;
+                target.AltInfo = infoAlt.Text;
+           }
+            return (uint)count;
+        }
+
+        public static ReadOnlySpan<Jcc32Conditions> jcc32()
+        {
+            var conditions = create();
+            var buffer = alloc<Jcc32Conditions>(32);
+            var count = jcc32(conditions,buffer);
+            var output = slice(span(buffer),0, count);
+            return output;
+        }
+
+        [Op]
+        public static uint jcc32(Conditions src, Span<Jcc32Conditions> dst)
+        {
+            var jcc = src.JccCodes(w32, n0);
+            var jccAlt = src.JccCodes(w32, n1);
+            var count = jcc.Length;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var code = ref skip(jcc,i);
+                ref readonly var codeAlt = ref skip(jccAlt,i);
+                ref readonly var name = ref src.Name(code);
+                ref readonly var nameAlt = ref src.Name(codeAlt);
+                ref readonly var info = ref src.Describe(code);
+                ref readonly var infoAlt = ref src.Describe(codeAlt);
+                ref var target = ref seek(dst,counter++);
+                target.Primary = AsmSpecs.jcc(code, name, AsmSizeClass.dword);
+                target.Alt = AsmSpecs.jcc(codeAlt, nameAlt, AsmSizeClass.dword);
                 target.PrimaryInfo = info.Text;
                 target.AltInfo = infoAlt.Text;
            }

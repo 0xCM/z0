@@ -11,34 +11,35 @@ namespace Z0.Asm
     {
         [CmdOp(".llc")]
         Outcome Llc(CmdArgs args)
-            => OmniScript.RunProjectScript(State.Project(), arg(args,0).Value, LlcBuild, false, out _);
+            => RunBuildScript(args, LlcBuild);
 
         [CmdOp(".llc-sse2")]
         Outcome LlcSse2(CmdArgs args)
-            => OmniScript.RunProjectScript(State.Project(), arg(args,0).Value, LlcBuildSse2, false, out _);
+            => RunBuildScript(args, LlcBuildSse2);
 
         [CmdOp(".llc-sse3")]
         Outcome LlcSse3(CmdArgs args)
-            => OmniScript.RunProjectScript(State.Project(), arg(args,0).Value, LlcBuildSse3, false, out _);
+            => RunBuildScript(args, LlcBuildSse3);
 
         [CmdOp(".llc-sse41")]
         Outcome LlcSse41(CmdArgs args)
-            => OmniScript.RunProjectScript(State.Project(), arg(args,0).Value, LlcBuildSse41, false, out _);
+            => RunBuildScript(args, LlcBuildSse41);
 
         [CmdOp(".llc-sse42")]
         Outcome LlcSse42(CmdArgs args)
-            => OmniScript.RunProjectScript(State.Project(), arg(args,0).Value, LlcBuildSse42, false, out _);
+            => RunBuildScript(args, LlcBuildSse42);
 
         [CmdOp(".llc-avx")]
         Outcome LlcAvx(CmdArgs args)
-            => OmniScript.RunProjectScript(State.Project(), arg(args,0).Value, LlcBuildAvx, false, out _);
+            => RunBuildScript(args, LlcBuildAvx);
 
         [CmdOp(".llc-avx2")]
         Outcome LlcAvx2(CmdArgs args)
-            => OmniScript.RunProjectScript(State.Project(), arg(args,0).Value, LlcBuildAvx2, false, out _);
+            => RunBuildScript(args, LlcBuildAvx2);
 
         [CmdOp(".llc-avx512")]
         Outcome LlcAvx512(CmdArgs args)
-            => OmniScript.RunProjectScript(State.Project(), arg(args,0).Value, LlcBuildAvx512, false, out _);
+            => RunBuildScript(args, LlcBuildAvx512);
+            //=> OmniScript.RunProjectScript(State.Project(), arg(args,0).Value, LlcBuildAvx512, false, out _);
     }
 }

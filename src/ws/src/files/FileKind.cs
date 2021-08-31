@@ -143,10 +143,11 @@ namespace Z0
         [Symbol(mclog)]
         McLog,
 
-        OpsAsm,
+        [Symbol(objasm)]
+        ObjAsm,
 
-        [Symbol(sym)]
-        ObjSym,
+        [Symbol(objyaml)]
+        ObjYaml,
 
         [Symbol(ll)]
         Llir,

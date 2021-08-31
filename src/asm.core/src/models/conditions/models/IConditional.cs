@@ -4,10 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial class AsmCmdService
+    using System;
+
+    public interface IConditional
     {
-        [CmdOp(".dump-import")]
-        Outcome ImportDumps(CmdArgs args)
-            => ImportObjDumps();
+        string Format(bit alt);
+
+        ReadOnlySpan<char> EncodedBits {get;}
+
+        BitWidth RelWidth {get;}
+
+        byte Encoding {get;}
+
+        bit Identical {get;}
+
     }
 }

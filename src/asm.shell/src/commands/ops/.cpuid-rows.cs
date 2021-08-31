@@ -10,7 +10,10 @@ namespace Z0.Asm
         Outcome LoadCpuidRows(CmdArgs args)
         {
             var result = Outcome.Success;
-            var rows = AsmTables.LoadCpuIdImports();
+            result = AsmTables.LoadCpuIdImports(Ws.Tables(), out var rows);
+            if(result.Fail)
+                return result;
+
             Write(rows, CpuIdRow.RenderWidths);
             return result;
         }

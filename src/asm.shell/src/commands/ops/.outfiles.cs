@@ -38,10 +38,5 @@ namespace Z0.Asm
                 Files(ProjectWs.OutFiles(id));
             return result;
         }
-
-        //.outfiles ll
-        //.outfiles ll .obj
-        //.outfiles ll dumps
-        //.outfiles ll dumps .rawdata.hex
     }
 }

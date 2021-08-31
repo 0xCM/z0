@@ -6,11 +6,17 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".import-intrinsics")]
-        public Outcome ImportIntrinsics(CmdArgs args)
+        [CmdOp(".asm-collect")]
+        Outcome AsmCollect(CmdArgs args)
         {
-            Wf.IntelIntrinsics().Emit();
-            return true;
+            var result = Outcome.Success;
+            result = CollectObjAsm();
+            if(result.Fail)
+                return result;
+
+            result = CollectSyms();
+
+            return result;
         }
     }
 }

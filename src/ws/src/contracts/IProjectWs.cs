@@ -8,47 +8,57 @@ namespace Z0
 
     public interface IProjectWs : IWorkspace
     {
-        FS.FolderPath Home(ProjectId id)
-            => Root + FS.folder(id.Format());
+        FS.FolderPath Home(ProjectId project)
+            => Root + FS.folder(project.Format());
 
-        FS.FolderPath Out(ProjectId id)
-            => Home(id) + FS.folder(output);
+        FS.FolderPath Out(ProjectId project)
+            => Home(project) + FS.folder(output);
 
-        FS.Files OutFiles(ProjectId id)
-            => Out(id).Files(true);
+        FS.FolderPath Out(ProjectId project, Scope scope)
+            => Out(project) + FS.folder(scope.Format());
 
-        FS.Files OutFiles(ProjectId id, FS.FileExt ext)
-            => Out(id).Files(ext, true);
+        FS.Files OutFiles(ProjectId project)
+            => Out(project).Files(true);
 
-        FS.Files OutFiles(ProjectId id, FS.FolderName subdir)
-            => (Out(id) + subdir).Files(true);
+        FS.FolderPath DataOut(ProjectId project)
+            => Out(project, data);
 
-        FS.Files OutFiles(ProjectId id, FS.FolderName subdir, FS.FileExt ext)
-            => (Out(id) + subdir).Files(ext,true);
+        FS.FilePath TableOut<T>(ProjectId project)
+            where T : struct
+                => DataOut(project) + FS.file(Z0.TableId.identify<T>().Format(),FS.Csv);
 
-        FS.FolderPath Docs(ProjectId id)
-            => Home(id) + FS.folder(docs);
+        FS.Files OutFiles(ProjectId project, FS.FileExt ext)
+            => Out(project).Files(ext, true);
 
-        FS.Files DocFiles(ProjectId id)
-            => Docs(id).Files(true);
+        FS.Files OutFiles(ProjectId project, FS.FolderName subdir)
+            => (Out(project) + subdir).Files(true);
+
+        FS.Files OutFiles(ProjectId project, FS.FolderName subdir, FS.FileExt ext)
+            => (Out(project) + subdir).Files(ext,true);
+
+        FS.FolderPath Docs(ProjectId project)
+            => Home(project) + FS.folder(docs);
+
+        FS.Files DocFiles(ProjectId project)
+            => Docs(project).Files(true);
 
         FS.FilePath Doc(ProjectId project, string fileid, FS.FileExt ext)
             => Docs(project) + FS.file(fileid, ext);
 
-        FS.FolderPath Logs(ProjectId id)
-            => Home(id) + FS.folder(logs);
+        FS.FolderPath Logs(ProjectId project)
+            => Home(project) + FS.folder(logs);
 
-        FS.Files LogFiles(ProjectId id)
-            => Logs(id).Files(true);
+        FS.Files LogFiles(ProjectId project)
+            => Logs(project).Files(true);
 
         FS.FilePath Log(ProjectId project, string fileid)
             => Logs(project) + FS.file(fileid, FS.Log);
 
-        FS.FolderPath Src(ProjectId id)
-            => Home(id) + FS.folder(src);
+        FS.FolderPath Src(ProjectId project)
+            => Home(project) + FS.folder(src);
 
-        FS.Files SrcFiles(ProjectId id)
-            => Src(id).Files(true);
+        FS.Files SrcFiles(ProjectId project)
+            => Src(project).Files(true);
 
         FS.Files SrcFiles(ProjectId project, Scope scope)
             => (Src(project) + FS.folder(scope.Format())).AllFiles;
@@ -56,19 +66,19 @@ namespace Z0
         FS.FilePath SrcFile(ProjectId project, string fileid, FS.FileExt ext)
             => Src(project) + FS.file(fileid,ext);
 
-        FS.FolderPath Assets(ProjectId id)
-            => Home(id) + FS.folder(assets);
+        FS.FolderPath Assets(ProjectId project)
+            => Home(project) + FS.folder(assets);
 
-        FS.FolderPath Scripts(ProjectId id)
-            => Home(id) + FS.folder(scripts);
+        FS.FolderPath Scripts(ProjectId project)
+            => Home(project) + FS.folder(scripts);
 
-        FS.FolderPath Scripts(ProjectId id, Scope scope)
-            => Scripts(id) + FS.folder(scope.Format());
+        FS.FolderPath Scripts(ProjectId project, Scope scope)
+            => Scripts(project) + FS.folder(scope.Format());
 
-        FS.FilePath Script(ProjectId id, Scope scope, ScriptId sid, FS.FileExt ext)
-            => Scripts(id,scope) + FS.file(sid.Format(), ext);
+        FS.FilePath Script(ProjectId project, Scope scope, ScriptId sid, FS.FileExt ext)
+            => Scripts(project,scope) + FS.file(sid.Format(), ext);
 
-        FS.FilePath Script(ProjectId id, ScriptId sid, FS.FileExt ext)
-            => Scripts(id) + FS.file(sid.Format(), ext);
+        FS.FilePath Script(ProjectId project, ScriptId sid, FS.FileExt ext)
+            => Scripts(project) + FS.file(sid.Format(), ext);
     }
 }

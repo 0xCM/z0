@@ -28,6 +28,12 @@ namespace Z0.Asm
             if(result.Fail)
                 return result;
 
+            result = AsmTables.ImportCpuIdSources();
+            if(result.Fail)
+                return result;
+
+            Wf.IntelIntrinsics().Emit();
+
             EmitTokens(tokens.RegTokens());
             EmitTokens(tokens.OpCodeTokens());
             EmitTokens(tokens.SigTokens());

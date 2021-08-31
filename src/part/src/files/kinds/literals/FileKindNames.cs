@@ -253,6 +253,11 @@ namespace Z0
         public const string objasm = obj + sep + asm;
 
         /// <summary>
+        /// Defines the 'obj.yaml' literal
+        /// </summary>
+        public const string objyaml = obj + sep + yaml;
+
+        /// <summary>
         /// Defines the 'status' literal
         /// </summary>
         public const string status = nameof(status);
@@ -334,10 +339,6 @@ namespace Z0
 
         const string sep = ".";
 
-        const string x = nameof(x);
-
-        const string p = nameof(p);
-
         /// il.csv
         /// </summary>
         public const string ildata = il + sep + csv;
@@ -345,12 +346,12 @@ namespace Z0
         /// <summary>
         /// Defines the 'x.csv' literal
         /// </summary>
-        public const string xcsv = x + sep + csv;
+        public const string xcsv = CharText.x + sep + csv;
 
         /// <summary>
         /// Defines the 'p.csv' literal
         /// </summary>
-        public const string pcsv = p + sep + csv;
+        public const string pcsv = CharText.p + sep + csv;
 
         /// <summary>
         /// Defines the 'tok' literal

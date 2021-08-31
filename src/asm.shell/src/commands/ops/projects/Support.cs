@@ -5,8 +5,10 @@
 namespace Z0.Asm
 {
     using System;
+    using Z0.llvm;
 
     using static core;
+
     using static ProjectScriptNames;
 
     partial class AsmCmdService
@@ -42,9 +44,6 @@ namespace Z0.Asm
             where T : struct
                 => OutData() + Tables.filename<T>();
 
-        FS.FilePath OutData(FS.FileName file)
-            => OutData() + file;
-
         Outcome HexDecode(string srcid)
             => OmniScript.RunProjectScript(AsmRoot, srcid, McDisasm, false, out var flows);
 
@@ -64,6 +63,81 @@ namespace Z0.Asm
                 return result;
             }
 
+            return result;
+        }
+
+        Outcome RunBuildScript(CmdArgs args, ScriptId script)
+        {
+            var result = Outcome.Success;
+            var project = State.Project();
+            if(args.Count != 0)
+                return OmniScript.RunProjectScript(project, arg(args,0).Value, script, false, out _);
+
+            result = LoadProjectSources(project);
+            if(result.Fail)
+                return result;
+
+            var src = State.Files().View;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(src,i);
+                var srcid = path.FileName.WithoutExtension.Format();
+                OmniScript.RunProjectScript(project, srcid, script, true, out var flows);
+                for(var j=0; j<flows.Length; j++)
+                {
+                    ref readonly var flow = ref skip(flows, j);
+                    Write(flow.Format());
+                }
+            }
+
+            return result;
+        }
+
+        Outcome CollectSyms()
+        {
+            var result = Outcome.Success;
+            var src = ProjectOut().Files(FS.Sym,true);
+            var dst = Ws.Projects().TableOut<ObjSymRecord>(State.Project());
+            Write(string.Format("Collecting symbols from {0} files", src.Length));
+            var symbols = LlvmNm.Collect(src, dst);
+            return result;
+        }
+
+        Outcome CollectObjAsm()
+        {
+            var project = State.Project();
+            var src = Ws.Projects().OutFiles(project, FileTypes.ObjAsm).View;
+            var dst = Ws.Projects().DataOut(project) + Tables.filename<ObjDumpRow>();
+            var result = Outcome.Success;
+            var tool = Wf.LlvmObjDump();
+            var count = src.Length;
+            var formatter = Tables.formatter<ObjDumpRow>(ObjDumpRow.RenderWidths);
+            var flow = EmittingTable<ObjDumpRow>(dst);
+            var counter = 0u;
+            using var writer = dst.AsciWriter();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(src,i);
+                result = tool.ParseDump(path, out var rows);
+                if(result.Fail)
+                {
+                    Error(result.Message);
+                    continue;
+                }
+
+                for(var j=0; j<rows.Length; j++)
+                {
+                    ref readonly var row = ref skip(rows,j);
+                    if(row.IsBlockStart)
+                        continue;
+
+                    writer.WriteLine(formatter.Format(row));
+                    counter++;
+                }
+            }
+            EmittedTable(flow,counter);
             return result;
         }
     }

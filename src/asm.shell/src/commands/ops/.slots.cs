@@ -31,10 +31,10 @@ namespace Z0.Asm
                 ulong Dispatch(byte index, ulong a)
                     => index switch
                     {
-                        0 => box.f0(a),
-                        1 => box.f1(a),
-                        2 => box.f2(a),
-                        3 => box.f3(a),
+                        0 => box.f0(a*2),
+                        1 => box.f1(a*3),
+                        2 => box.f2(a*4),
+                        3 => box.f3(a*5),
                         _ => 0
                     };
 

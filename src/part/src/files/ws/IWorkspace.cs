@@ -62,6 +62,9 @@ namespace Z0
         FS.FolderPath Docs(string id)
             => Docs() + FS.folder(id);
 
+        FS.FilePath Doc(string id, FS.FileExt ext)
+            => Docs() + FS.file(id,ext);
+
         FS.FolderPath Bin()
             => OutDir() + FS.folder(bin);
 

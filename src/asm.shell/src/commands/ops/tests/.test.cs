@@ -10,7 +10,6 @@ namespace Z0.Asm
     using Z0.llvm;
 
     using static core;
-    using static Root;
     using static AsmChecks;
 
     partial class AsmCmdService
@@ -74,46 +73,8 @@ namespace Z0.Asm
             }
 
             return result;
-
         }
 
-        Outcome ImportObjDumps()
-        {
-            var result = Outcome.Success;
-            var tool = Wf.LlvmObjDump();
-            var src = State.Files(FS.Asm).View;
-            var count = src.Length;
-            var dst = AsmWs.DumpOut() + Tables.filename<ObjDumpRow>();
-            var formatter = Tables.formatter<ObjDumpRow>(ObjDumpRow.RenderWidths);
-            var flow = EmittingTable<ObjDumpRow>(dst);
-            var counter = 0u;
-            using var writer = dst.AsciWriter();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var path = ref skip(src,i);
-                result = tool.ParseDump(path, out var rows);
-                if(result.Fail)
-                {
-                    Error(result.Message);
-                    continue;
-                }
-
-                for(var j=0; j<rows.Length; j++)
-                {
-                    ref readonly var row = ref skip(rows,j);
-                    if(row.IsBlockStart)
-                        continue;
-
-                    writer.WriteLine(formatter.Format(row));
-                    counter++;
-                }
-
-            }
-            EmittedTable(flow,counter);
-
-            return result;
-        }
 
         Outcome TestAsmWidths()
         {

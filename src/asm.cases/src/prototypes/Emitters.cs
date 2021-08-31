@@ -5,8 +5,10 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static core;
+    using static Root;
 
     partial struct Prototypes
     {
@@ -56,7 +58,6 @@ namespace Z0.Asm
             [Op]
             public static ulong emit64u_2()
                 => BitMaskLiterals.Central64x16x8;
-
         }
 
 
@@ -170,13 +171,37 @@ namespace Z0.Asm
             [Op]
             public ref readonly Cell256 Next()
             {
-                if(Position< Data.Length)
+                if(Position < Data.Length)
                     return ref skip(Data,Position++);
                 else
                 {
                     Position=0;
                     return ref skip(Data,Position++);
                 }
+            }
+        }
+
+        [ApiHost(prototypes + "refemitter512")]
+        public ref struct RefEmitter512
+        {
+            readonly ReadOnlySpan<Cell512> Data;
+
+            uint Index;
+
+            uint Count;
+
+            [MethodImpl(Inline), Op]
+            void Mod()
+            {
+                if(!(Index < Count))
+                    Index = 0;
+            }
+
+            [MethodImpl(Inline), Op]
+            public ref readonly Cell512 Next()
+            {
+                Mod();
+                return ref skip(Data, Index++);
             }
         }
     }

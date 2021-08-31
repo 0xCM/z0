@@ -12,13 +12,13 @@ namespace Z0.Asm
     using static ConditionCodes;
 
     [StructLayout(LayoutKind.Sequential, Pack=1,Size=(int)SZ), Blittable(SZ)]
-    public struct Jcc8Conditions : IConditional
+    public struct Jcc32Conditions : IConditional
     {
-        public const uint SZ = JccInfo<Jcc8>.SZ + JccInfo<Jcc8Alt>.SZ + 2*CharBlock64.SZ;
+        public const uint SZ = JccInfo<Jcc32>.SZ + JccInfo<Jcc32>.SZ + 2*CharBlock64.SZ;
 
-        public JccInfo<Jcc8> Primary;
+        public JccInfo<Jcc32> Primary;
 
-        public JccInfo<Jcc8Alt> Alt;
+        public JccInfo<Jcc32Alt> Alt;
 
         public CharBlock64 PrimaryInfo;
 
