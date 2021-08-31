@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static ProjectScriptNames;
+
     partial class AsmCmdService
     {
-        [CmdOp(".llvm-mc-asm")]
-        Outcome LLvmMcAssemble(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var id = arg(args,0).Value;
-            return McAssemble(AsmWs.AsmPath(id),AsmWs.ObjOut());
-        }
+        [CmdOp(".llc-avx512")]
+        Outcome LlcAvx512(CmdArgs args)
+            => RunBuildScript(args, LlcBuildAvx512);
     }
 }

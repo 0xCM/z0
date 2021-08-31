@@ -15,7 +15,7 @@ namespace Z0
         partial struct Operate
         {
             [Op]
-            public static string bvformat(in bv src)
+            public static string vformat(in bv src)
             {
                 var count = (int)src.Width;
                 Span<char> buffer = stackalloc char[count];

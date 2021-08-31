@@ -15,29 +15,29 @@ namespace Z0
         partial struct Operate
         {
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> grow<T>(ref g2x2<T> src, uint i)
+            public static Span<T> cells<T>(ref g2x2<T> src)
                 where T : unmanaged
-                    => slice(gcells(ref src),i*src.N,src.M);
+                    => cover(cell(ref src), src.MxN);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> grow<T>(ref g3x3<T> src, uint i)
+            public static Span<T> cells<T>(ref g3x3<T> src)
                 where T : unmanaged
-                    => slice(gcells(ref src),i*src.N,src.M);
+                    => cover(cell(ref src), src.MxN);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> grow<T>(ref g4x4<T> src, uint i)
+            public static Span<T> cells<T>(ref g4x4<T> src)
                 where T : unmanaged
-                    => slice(gcells(ref src),i*src.N,src.M);
+                    => cover(cell(ref src), src.MxN);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> grow<T>(ref g5x5<T> src, uint i)
+            public static Span<T> cells<T>(ref g5x5<T> src)
                 where T : unmanaged
-                    => slice(gcells(ref src),i*src.N,src.M);
+                    => cover(cell(ref src), src.MxN);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Span<T> grow<T>(ref g8x8<T> src, uint i)
+            public static Span<T> cells<T>(ref g8x8<T> src)
                 where T : unmanaged
-                    => slice(gcells(ref src),i*src.N,src.M);
+                    => cover(cell(ref src), src.MxN);
         }
     }
 }

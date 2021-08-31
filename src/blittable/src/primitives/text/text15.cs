@@ -49,7 +49,7 @@ namespace Z0
             }
 
             public string Format()
-                => O.tformat(this);
+                => O.format(this);
 
             public override string ToString()
                 => Format();

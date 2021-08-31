@@ -28,16 +28,16 @@ namespace Z0
             => new GT<T>(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static GTE<T> gte<T>(T a, T b)
-            => new GTE<T>(a,b);
+        public static GE<T> gte<T>(T a, T b)
+            => new GE<T>(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static LT<T> lt<T>(T a, T b)
             => new LT<T>(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static LTE<T> lte<T>(T a, T b)
-            => new LTE<T>(a,b);
+        public static LE<T> lte<T>(T a, T b)
+            => new LE<T>(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static CmpEval<T> eq<T>(T a, T b, bit result)

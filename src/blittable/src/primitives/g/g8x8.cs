@@ -60,13 +60,13 @@ namespace Z0
             public Span<T> Cells
             {
                 [MethodImpl(Inline)]
-                get => Operate.gcells(ref this);
+                get => Operate.cells(ref this);
             }
 
             public Span<T> this[uint row]
             {
                 [MethodImpl(Inline)]
-                get => Operate.grow(ref this,row);
+                get => Operate.row(ref this,row);
             }
 
             public ref T this[uint row, uint col]

@@ -42,11 +42,11 @@ namespace Z0.Asm
             }
         }
 
-        [Evaluator(typeof(GTE<>))]
-        readonly struct PrimalGteEval<T> : IEvaluator<GTE<T>, CmpEval<T>>
+        [Evaluator(typeof(GE<>))]
+        readonly struct PrimalGteEval<T> : IEvaluator<GE<T>, CmpEval<T>>
             where T : unmanaged
         {
-            public bool Eval(in GTE<T> src, out CmpEval<T> dst)
+            public bool Eval(in GE<T> src, out CmpEval<T> dst)
             {
                 dst = (src, gmath.gteq(src.A,src.B));
                 return true;
@@ -64,11 +64,11 @@ namespace Z0.Asm
             }
         }
 
-        [Evaluator(typeof(LTE<>))]
-        readonly struct PrimalLteEval<T> : IEvaluator<LTE<T>, CmpEval<T>>
+        [Evaluator(typeof(LE<>))]
+        readonly struct PrimalLteEval<T> : IEvaluator<LE<T>, CmpEval<T>>
             where T : unmanaged
         {
-            public bool Eval(in LTE<T> src, out CmpEval<T> dst)
+            public bool Eval(in LE<T> src, out CmpEval<T> dst)
             {
                 dst = (src,gmath.lteq(src.A,src.B));
                 return true;

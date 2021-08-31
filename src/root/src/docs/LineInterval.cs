@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct LineInterval
     {
-        public LineNumber MinLine {get;}
+        public readonly LineNumber MinLine;
 
-        public LineNumber MaxLine {get;}
+        public readonly LineNumber MaxLine;
 
         [MethodImpl(Inline)]
         public LineInterval(LineNumber min, LineNumber max)

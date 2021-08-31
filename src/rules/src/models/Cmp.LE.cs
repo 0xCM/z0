@@ -10,14 +10,14 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct GT<T> : ICmpPred<GT<T>,T>
+        public readonly struct LE<T> : ICmpPred<LE<T>,T>
         {
             public T A {get;}
 
             public T B {get;}
 
             [MethodImpl(Inline)]
-            public GT(T a, T b)
+            public LE(T a, T b)
             {
                 A = a;
                 B = b;
@@ -26,11 +26,12 @@ namespace Z0
             public string Symbol
             {
                 [MethodImpl(Inline)]
-                get => CmpSymbol.GT;
+                get => CmpSymbol.LE;
             }
 
+
             public CmpKind Kind
-                => CmpKind.GT;
+                => CmpKind.LE;
 
             [MethodImpl(Inline)]
             public string Format()
@@ -40,11 +41,11 @@ namespace Z0
                 => Format();
 
             [MethodImpl(Inline)]
-            public static implicit operator GT<T>((T a, T b) src)
-                => new GT<T>(src.a, src.b);
+            public static implicit operator LE<T>((T a, T b) src)
+                => new LE<T>(src.a, src.b);
 
             [MethodImpl(Inline)]
-            public static implicit operator CmpPred<T>(GT<T> src)
+            public static implicit operator CmpPred<T>(LE<T> src)
                 => new CmpPred<T>(src.A,src.B,src.Kind);
         }
     }

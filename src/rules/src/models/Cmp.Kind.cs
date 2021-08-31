@@ -8,17 +8,21 @@ namespace Z0
     {
         public enum CmpKind : byte
         {
-            EQ,
+            EQ = 0,
 
-            NEQ,
+            LT = 1,
 
-            LT,
+            LE = 2,
 
-            LTE,
+            NEQ = 4,
+
+            NLT = 5,
+
+            NGT,
 
             GT,
 
-            GTE
+            GE
         }
     }
 }

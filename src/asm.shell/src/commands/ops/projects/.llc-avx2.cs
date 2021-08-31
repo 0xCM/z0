@@ -8,8 +8,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".llc")]
-        Outcome Llc(CmdArgs args)
-            => RunBuildScript(args, LlcBuild);
+        [CmdOp(".llc-avx2")]
+        Outcome LlcAvx2(CmdArgs args)
+            => RunBuildScript(args, LlcBuildAvx2);
     }
 }

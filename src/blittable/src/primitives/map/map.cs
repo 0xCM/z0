@@ -29,7 +29,7 @@ namespace Z0
             }
 
             public string Format()
-                => api.mformat(this);
+                => api.format(this);
 
             public override string ToString()
                 => Format();
@@ -53,7 +53,7 @@ namespace Z0
             }
 
             public string Format()
-                => api.mformat((map<T,T>)this);
+                => api.format((map<T,T>)this);
 
             public override string ToString()
                 => Format();

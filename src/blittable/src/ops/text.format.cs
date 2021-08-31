@@ -15,7 +15,7 @@ namespace Z0
         partial struct Operate
         {
             [Op]
-            public static string tformat(in text7 src)
+            public static string format(in text7 src)
             {
                 Span<char> dst = stackalloc char[text7.MaxLength];
                 var count = src.Length;
@@ -26,7 +26,7 @@ namespace Z0
             }
 
             [Op]
-            public static string tformat(in text15 src)
+            public static string format(in text15 src)
             {
                 Span<char> dst = stackalloc char[text15.MaxLength];
                 var count = src.Length;

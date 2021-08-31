@@ -15,29 +15,29 @@ namespace Z0
         partial struct Operate
         {
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static ref T gref<T>(ref g2x2<T> src)
+            public static Span<T> row<T>(ref g2x2<T> src, uint i)
                 where T : unmanaged
-                    => ref @as<g2x2<T>,T>(src);
+                    => slice(cells(ref src),i*src.N,src.M);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static ref T gref<T>(ref g3x3<T> src)
+            public static Span<T> row<T>(ref g3x3<T> src, uint i)
                 where T : unmanaged
-                    => ref @as<g3x3<T>,T>(src);
+                    => slice(cells(ref src),i*src.N,src.M);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static ref T gref<T>(ref g4x4<T> src)
+            public static Span<T> row<T>(ref g4x4<T> src, uint i)
                 where T : unmanaged
-                    => ref @as<g4x4<T>,T>(src);
+                    => slice(cells(ref src),i*src.N,src.M);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static ref T gref<T>(ref g5x5<T> src)
+            public static Span<T> row<T>(ref g5x5<T> src, uint i)
                 where T : unmanaged
-                    => ref @as<g5x5<T>,T>(src);
+                    => slice(cells(ref src),i*src.N,src.M);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static ref T gref<T>(ref g8x8<T> src)
+            public static Span<T> row<T>(ref g8x8<T> src, uint i)
                 where T : unmanaged
-                    => ref @as<g8x8<T>,T>(src);
+                    => slice(cells(ref src),i*src.N,src.M);
         }
     }
 }

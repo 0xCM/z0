@@ -4,17 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-    using static core;
-
     partial struct Blit
     {
         partial struct Operate
         {
-            public static string mformat<S,T>(in map<S,T> m)
+            public static string format<S,T>(in map<S,T> m)
                 where S : unmanaged
                 where T : unmanaged
             {

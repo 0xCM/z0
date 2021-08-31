@@ -15,11 +15,15 @@ namespace Z0
 
             public static string GT => ">";
 
-            public static string GTE => ">=";
+            public static string NGT => "!>";
+
+            public static string GE => ">=";
 
             public static string LT => "<";
 
-            public static string LTE => "<=";
+            public static string LE => "<=";
+
+            public static string NLT => "!<";
         }
     }
 }

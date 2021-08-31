@@ -10,14 +10,14 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct LTE<T> : ICmpPred<LTE<T>,T>
+        public readonly struct NLT<T> : ICmpPred<NLT<T>,T>
         {
             public T A {get;}
 
             public T B {get;}
 
             [MethodImpl(Inline)]
-            public LTE(T a, T b)
+            public NLT(T a, T b)
             {
                 A = a;
                 B = b;
@@ -26,12 +26,11 @@ namespace Z0
             public string Symbol
             {
                 [MethodImpl(Inline)]
-                get => CmpSymbol.LTE;
+                get => CmpSymbol.NLT;
             }
 
-
             public CmpKind Kind
-                => CmpKind.LTE;
+                => CmpKind.NLT;
 
             [MethodImpl(Inline)]
             public string Format()
@@ -41,11 +40,11 @@ namespace Z0
                 => Format();
 
             [MethodImpl(Inline)]
-            public static implicit operator LTE<T>((T a, T b) src)
-                => new LTE<T>(src.a, src.b);
+            public static implicit operator NLT<T>((T a, T b) src)
+                => new NLT<T>(src.a, src.b);
 
             [MethodImpl(Inline)]
-            public static implicit operator CmpPred<T>(LTE<T> src)
+            public static implicit operator CmpPred<T>(NLT<T> src)
                 => new CmpPred<T>(src.A,src.B,src.Kind);
         }
     }

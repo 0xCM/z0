@@ -17,9 +17,9 @@ namespace Z0
                     CmpKind.EQ => CmpSymbol.EQ,
                     CmpKind.NEQ => CmpSymbol.NEQ,
                     CmpKind.GT => CmpSymbol.GT,
-                    CmpKind.GTE => CmpSymbol.GTE,
+                    CmpKind.GE => CmpSymbol.GE,
                     CmpKind.LT => CmpSymbol.LT,
-                    CmpKind.LTE => CmpSymbol.LTE,
+                    CmpKind.LE => CmpSymbol.LE,
                     _ => "?",
                 };
 

@@ -43,7 +43,7 @@ namespace Z0
             }
 
             public string Format()
-                => api.bvformat(this);
+                => api.vformat(this);
         }
     }
 }

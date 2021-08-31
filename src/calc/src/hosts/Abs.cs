@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static SpanBlocks;
     using static SFx;
 
     using K = ApiClasses;
