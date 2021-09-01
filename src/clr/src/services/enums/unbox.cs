@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using EC = ClrPrimalKind;
+    using EC = PrimitiveKind;
 
     partial struct Enums
     {

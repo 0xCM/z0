@@ -5,11 +5,16 @@
 namespace Z0
 {
     /// <summary>
-    /// Defines a <see cref='PrimitiveKind'/> subset that corresponds to primal numeric kinds
+    /// Defines a <see cref='PrimitiveKind'/> subset that corresponds to primal types that can be used as compile-time literals
     /// </summary>
-    public enum ClrNumericKind : byte
+    public enum LiteralKind : byte
     {
         None = 0,
+
+        /// <summary>
+        /// An alias for <see cref='PrimitiveKind.U1'/>
+        /// </summary>
+        U1 = PrimitiveKind.U1,
 
         /// <summary>
         /// An alias for <see cref='PrimitiveKind.U8'/>
@@ -65,5 +70,15 @@ namespace Z0
         /// An alias for <see cref='PrimitiveKind.F128'/>
         /// </summary>
         F128 = PrimitiveKind.F128,
+
+        /// <summary>
+        /// An alias for <see cref='PrimitiveKind.C16'/>
+        /// </summary>
+        C16 = PrimitiveKind.C16,
+
+        /// <summary>
+        /// An alias for <see cref='PrimitiveKind.String'/>
+        /// </summary>
+        String = PrimitiveKind.String,
     }
 }

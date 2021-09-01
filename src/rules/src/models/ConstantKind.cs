@@ -5,7 +5,7 @@
 namespace Z0
 {
     using NK = Rules.NumericKind;
-    using LK = ClrLiteralKind;
+    using LK = LiteralKind;
     using DK = Rules.DataKind;
 
     partial struct Rules

@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The literal's bitfield</param>
         [MethodImpl(Inline), Op]
-        public static TypeWidth width(ClrPrimalKind f)
+        public static TypeWidth width(PrimitiveKind f)
             => (TypeWidth)Pow2.pow(select(f, Field.Width));
     }
 }

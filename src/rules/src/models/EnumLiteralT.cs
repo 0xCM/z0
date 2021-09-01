@@ -36,7 +36,6 @@ namespace Z0
             public EnumLiteral Untype()
                 => new EnumLiteral(Order, Value, Description);
 
-
             [MethodImpl(Inline)]
             public static implicit operator EnumLiteral(EnumLiteral<T> src)
                 => src.Untype();

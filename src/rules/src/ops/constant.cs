@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The constant type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Constant<T> constant<T>(T value)
-            => new Constant<T>(value, (ConstantKind)ClrLiteralKinds.kind<T>());
+            => new Constant<T>(value, (ConstantKind)LiteralKinds.kind<T>());
 
         /// <summary>
         /// Creates a <see cref='ConstExpr{S,T}'/>
@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="T">The constant type</typeparam>
         public static ConstExpr<S,T> constexpr<S,T>(string name, S src, ITransformer2<S,T> map)
             => map.Transform(src, out var dst)
-            ? new ConstExpr<S,T>(name, src, dst, (ConstantKind)ClrLiteralKinds.kind<T>())
+            ? new ConstExpr<S,T>(name, src, dst, (ConstantKind)LiteralKinds.kind<T>())
             : @throw<ConstExpr<S,T>>(new Exception(Msg.TransformFailed<S,T>(src)));
     }
 }

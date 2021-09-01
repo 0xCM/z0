@@ -17,7 +17,7 @@ namespace Z0
             => (TypeCode)(*(core.address(src) + index).Pointer<byte>());
 
         [MethodImpl(Inline), Op]
-        public static TypeCode typecode(ClrPrimalKind f)
+        public static TypeCode typecode(PrimitiveKind f)
             => (TypeCode)ClrPrimitives.select(f, Field.KindId);
     }
 }

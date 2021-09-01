@@ -13,7 +13,7 @@ namespace Z0
     partial struct ClrPrimitives
     {
         [MethodImpl(Inline), Op]
-        public static PrimalCode id(ClrPrimalKind f)
+        public static PrimalCode id(PrimitiveKind f)
             => (PrimalCode)select(f, Field.KindId);
     }
 }

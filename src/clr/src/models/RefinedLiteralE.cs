@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         public T Data {get;}
 
-        public ClrLiteralKind Kind {get;}
+        public LiteralKind Kind {get;}
 
         public Name Name => Data.ToString();
 
@@ -30,7 +30,7 @@ namespace Z0
         public RefinedLiteral(T @class, ClrEnumKind kind)
         {
             Data = @class;
-            Kind = (ClrLiteralKind)kind;
+            Kind = (LiteralKind)kind;
         }
 
         [MethodImpl(Inline)]

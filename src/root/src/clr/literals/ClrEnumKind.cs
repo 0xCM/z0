@@ -13,43 +13,43 @@ namespace Z0
         None = 0,
 
         /// <summary>
-        /// An alias for <see cref='ClrPrimalKind.U8'/>
+        /// An alias for <see cref='PrimitiveKind.U8'/>
         /// </summary>
-        U8 = ClrPrimalKind.U8,
+        U8 = PrimitiveKind.U8,
 
         /// <summary>
-        /// An alias for <see cref='ClrPrimalKind.U16'/>
+        /// An alias for <see cref='PrimitiveKind.U16'/>
         /// </summary>
-        U16 = ClrPrimalKind.U16,
+        U16 = PrimitiveKind.U16,
 
         /// <summary>
-        /// An alias for <see cref='ClrPrimalKind.U32'/>
+        /// An alias for <see cref='PrimitiveKind.U32'/>
         /// </summary>
-        U32 = ClrPrimalKind.U32,
+        U32 = PrimitiveKind.U32,
 
         /// <summary>
-        /// An alias for <see cref='ClrPrimalKind.U64'/>
+        /// An alias for <see cref='PrimitiveKind.U64'/>
         /// </summary>
-        U64 = ClrPrimalKind.U64,
+        U64 = PrimitiveKind.U64,
 
         /// <summary>
-        /// An alias for <see cref='ClrPrimalKind.I8'/>
+        /// An alias for <see cref='PrimitiveKind.I8'/>
         /// </summary>
-        I8 = ClrPrimalKind.I8,
+        I8 = PrimitiveKind.I8,
 
         /// <summary>
-        /// An alias for <see cref='ClrPrimalKind.I16'/>
+        /// An alias for <see cref='PrimitiveKind.I16'/>
         /// </summary>
-        I16 = ClrPrimalKind.I16,
+        I16 = PrimitiveKind.I16,
 
         /// <summary>
-        /// An alias for <see cref='ClrPrimalKind.I32'/>
+        /// An alias for <see cref='PrimitiveKind.I32'/>
         /// </summary>
-        I32 = ClrPrimalKind.I32,
+        I32 = PrimitiveKind.I32,
 
         /// <summary>
-        /// An alias for <see cref='ClrPrimalKind.I64'/>
+        /// An alias for <see cref='PrimitiveKind.I64'/>
         /// </summary>
-        I64 = ClrPrimalKind.I64,
+        I64 = PrimitiveKind.I64,
     }
 }

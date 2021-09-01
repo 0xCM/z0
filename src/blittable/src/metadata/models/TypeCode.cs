@@ -8,8 +8,6 @@ namespace Z0
 
     using static Root;
 
-    using api = Blit.Operate;
-
     partial struct Blit
     {
         public struct TypeCode

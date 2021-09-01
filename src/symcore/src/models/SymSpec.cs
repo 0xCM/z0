@@ -48,6 +48,6 @@ namespace Z0
         /// <summary>
         /// The type-system value domain
         /// </summary>
-        public ClrLiteralKind ValueKind;
+        public LiteralKind ValueKind;
     }
 }

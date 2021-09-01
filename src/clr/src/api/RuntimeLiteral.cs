@@ -31,10 +31,10 @@ namespace Z0
 
         public ulong Data {get;}
 
-        public ClrLiteralKind Kind {get;}
+        public LiteralKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public RuntimeLiteral(StringAddress source, StringAddress name, ulong content, ClrLiteralKind clr)
+        public RuntimeLiteral(StringAddress source, StringAddress name, ulong content, LiteralKind clr)
         {
             Source = source;
             Name = name;

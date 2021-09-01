@@ -18,8 +18,8 @@ namespace Z0
             => ref skip(Masks, (byte)i);
 
         [MethodImpl(Inline), Op]
-        public static ClrPrimalKind filter(byte src, SegMask mask)
-            => (ClrPrimalKind)(src & (byte)mask);
+        public static PrimitiveKind filter(byte src, SegMask mask)
+            => (PrimitiveKind)(src & (byte)mask);
 
         /// <summary>
         /// Isolates an identified bitfield segment
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source bitfield</param>
         /// <param name="i">The segment identifier</param>
         [MethodImpl(Inline), Op]
-        public static ClrPrimalKind filter(ClrPrimalKind src, Field i)
+        public static PrimitiveKind filter(PrimitiveKind src, Field i)
             => filter((byte)src, filter(i));
     }
 }

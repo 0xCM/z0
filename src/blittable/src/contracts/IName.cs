@@ -6,7 +6,6 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     partial struct Blit
     {
         [Free]
@@ -103,7 +102,5 @@ namespace Z0
         {
 
         }
-
-
     }
 }

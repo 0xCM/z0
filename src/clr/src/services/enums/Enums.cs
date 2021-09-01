@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    using PK = ClrPrimalKind;
+    using PK = PrimitiveKind;
 
     [ApiHost]
     public readonly partial struct Enums
@@ -37,7 +37,7 @@ namespace Z0
         }
 
         [Op]
-        public static ulong @ulong(ClrPrimalKind kind, object src)
+        public static ulong @ulong(PrimitiveKind kind, object src)
             => kind switch {
                 PK.U8 => (ulong)(byte)src,
                 PK.I8 => (ulong)(sbyte)src,

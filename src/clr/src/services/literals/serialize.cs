@@ -6,7 +6,7 @@ namespace Z0
 {
     using static core;
 
-    using LK = ClrLiteralKind;
+    using LK = LiteralKind;
     using EK = ClrEnumKind;
 
     partial struct ClrLiterals

@@ -21,12 +21,12 @@ namespace Z0
 
         public T Data {get;}
 
-        public ClrLiteralKind Kind {get;}
+        public LiteralKind Kind {get;}
 
         public LiteralUsage Usage {get;}
 
         [MethodImpl(Inline)]
-        public RuntimeLiteral(StringAddress source,  StringAddress name, T value, ClrLiteralKind kind, LiteralUsage usage = default)
+        public RuntimeLiteral(StringAddress source,  StringAddress name, T value, LiteralKind kind, LiteralUsage usage = default)
         {
             Source = source;
             Name = name;

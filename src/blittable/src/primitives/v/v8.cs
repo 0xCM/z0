@@ -11,8 +11,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using static Blit.Operate;
-
     partial struct Blit
     {
         /// <summary>
