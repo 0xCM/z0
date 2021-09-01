@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Blit
     {
-        partial struct Operate
+        partial class Render
         {
             [Op, Closures(Closure)]
             public static string format<T>(in v1<T> src)
@@ -79,7 +79,7 @@ namespace Z0
                         src[60], src[61], src[62], src[63]
                         );
 
-            public static string vformat<N,T>(in vector<N,T> src)
+            public static string format<N,T>(in vector<N,T> src)
                 where T : unmanaged
                 where N : unmanaged, ITypeNat
             {

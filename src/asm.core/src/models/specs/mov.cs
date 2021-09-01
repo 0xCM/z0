@@ -14,14 +14,13 @@ namespace Z0.Asm
 
     partial class AsmSpecs
     {
-            // REX + C6 / 0 ib   | MOV r/m8,imm8
-            // B8+ rd id         | MOV r32,imm32
-            // REX + B0+ rb ib   | MOV r8,imm8
-            // B8+ rw iw         | MOV r16,imm16
-            // C7 / 0 iw         | MOV r/m16,imm16
-            // C7 / 0 id         | MOV r/m32,imm32
-            // REX.W + B8+ rd io | MOV r64,imm64
-
+        // REX + C6 / 0 ib   | MOV r/m8,imm8
+        // B8+ rd id         | MOV r32,imm32
+        // REX + B0+ rb ib   | MOV r8,imm8
+        // B8+ rw iw         | MOV r16,imm16
+        // C7 / 0 iw         | MOV r/m16,imm16
+        // C7 / 0 id         | MOV r/m32,imm32
+        // REX.W + B8+ rd io | MOV r64,imm64
         public static byte mov(in r8b dst, imm8 src, ref byte hex)
         {
             // imm8 -> r8b

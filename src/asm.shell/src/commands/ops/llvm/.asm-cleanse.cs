@@ -15,11 +15,11 @@ namespace Z0.Asm
         Outcome CleanseAsm()
         {
             var result = Outcome.Success;
-            var tool = Toolspace.llvm_mc;
-            var cmd = Cmd.cmdline(Ws.Tools().Script(tool, "cleanse").Format(PathSeparator.BS));
+            var cmd = Cmd.cmdline(Ws.Tools().Script(Toolspace.llvm_mc, "cleanse").Format(PathSeparator.BS));
             var src = State.Files(FS.S).View;
             var count = src.Length;
-            var outdir = GetToolOut(tool);
+            var outdir = (Ws.Projects().OutDir(State.Project()) + FS.folder("cleansed")).Create();
+
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(src,i);
@@ -28,7 +28,7 @@ namespace Z0.Asm
                 vars.SrcDir = path.FolderPath;
                 vars.SrcFile = path.FileName;
                 vars.SrcId = path.FileName.WithoutExtension.Format();
-                result = ScriptRunner.RunCmd(cmd, vars.ToCmdVars(), out _);
+                result = OmniScript.Run(cmd,vars.ToCmdVars(), out _);
                 if(result.Fail)
                     break;
             }

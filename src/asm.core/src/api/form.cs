@@ -30,9 +30,9 @@ namespace Z0.Asm
             {
                 ref readonly var record = ref skip(src,i);
                 ref var opcode = ref SdmModels.opcode(record, out _);
-                ref var form = ref seek(dst,i);
-                form = asm.form(
-                    asm.sig(opcode.Mnemonic.Format(), SdmModels.operands(opcode)),
+                ref var current = ref seek(dst,i);
+                current = form(
+                    sig(opcode.Mnemonic.Format(), SdmModels.operands(opcode)),
                     asm.opcode((ushort)opcode.OpCodeId, opcode.Expr)
                     );
             }

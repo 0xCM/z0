@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
 
     using static core;
+    using llvm;
 
     partial class AsmCmdService
     {
@@ -42,5 +43,6 @@ namespace Z0.Asm
             PipeQueryOut(@readonly(filtered), Z0.ProcessAsmRecord.RenderWidths, qid);
             return result;
         }
+
     }
 }

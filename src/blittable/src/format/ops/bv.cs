@@ -12,10 +12,10 @@ namespace Z0
 
     partial struct Blit
     {
-        partial struct Operate
+        partial class Render
         {
             [Op]
-            public static string vformat(in bv src)
+            public static string format(in bv src)
             {
                 var count = (int)src.Width;
                 Span<char> buffer = stackalloc char[count];

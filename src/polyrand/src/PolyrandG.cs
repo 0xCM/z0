@@ -10,16 +10,15 @@ namespace Z0
     using static Root;
     using static core;
 
+    using api = PolyOps;
 
-    using api = PolyG;
-
-    public struct Polyrand<G> : IDomainSource
+    public struct PolyG<G> : IDomainSource
         where G : struct, IDomainRng<G,ulong>
     {
         internal G Source;
 
         [MethodImpl(Inline)]
-        public Polyrand(in G g)
+        public PolyG(G g)
         {
             Source = g;
         }
@@ -324,7 +323,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Polyrand<G>(G src)
-            => new Polyrand<G>(src);
+        public static implicit operator PolyG<G>(G src)
+            => new PolyG<G>(src);
     }
 }

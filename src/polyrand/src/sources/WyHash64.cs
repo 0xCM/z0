@@ -56,6 +56,24 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static uint fill(ref G g, Span<byte> dst)
+        {
+            var q = (uint)dst.Length/8;
+            var r = dst.Length%8;
+            ref var b0 = ref @as<ulong>(first(dst));
+            var cells = cover(b0,q);
+            fill(ref g, cells);
+            if(r != 0)
+            {
+                ref var b1 = ref seek(dst, q*8);
+                var last = @bytes(next(ref g));
+                for(var i=0; i<r; i++)
+                    seek(b1,i) = skip(last,i);
+            }
+            return q;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint fill(ref G g, Span<ulong> dst, ulong max)
         {
             var count = (uint)dst.Length;

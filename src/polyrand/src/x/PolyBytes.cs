@@ -34,6 +34,5 @@ namespace Z0
 
         public static Span<byte> Bytes(this ISource src, Span<byte> dst)
             => Sources.bytes(src, dst);
-
     }
 }

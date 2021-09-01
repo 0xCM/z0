@@ -53,7 +53,7 @@ namespace Z0
             }
 
             public string Format()
-                => Operate.format(this);
+                => Render.format(this);
 
             public override string ToString()
                 => Format();

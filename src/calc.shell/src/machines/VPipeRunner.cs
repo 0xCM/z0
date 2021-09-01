@@ -42,7 +42,6 @@ namespace Z0
             => new BlockSource01(poly, blocks);
     }
 
-
     public readonly struct VMap01 : IVMap128<VMap01,byte,byte>
     {
         [MethodImpl(Inline)]

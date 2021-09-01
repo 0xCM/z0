@@ -48,6 +48,12 @@ namespace Z0.Asm
 
         Vsib,
 
-        Broadcast
+        Broadcast,
+
+        XmmReg,
+
+        YmmReg,
+
+        ZmmReg
     }
 }

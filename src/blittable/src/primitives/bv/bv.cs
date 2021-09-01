@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = Blit.Operate;
-
     partial struct Blit
     {
         public readonly ref struct bv
@@ -43,7 +41,7 @@ namespace Z0
             }
 
             public string Format()
-                => api.vformat(this);
+                => Render.format(this);
         }
     }
 }

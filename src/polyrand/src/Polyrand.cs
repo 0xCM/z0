@@ -34,9 +34,6 @@ namespace Z0
             Navigator = Option.some(points as IRngNav);
         }
 
-        public RngKind RngKind
-            => Points.RngKind;
-
         [MethodImpl(Inline)]
         public T Next<T>()
         {

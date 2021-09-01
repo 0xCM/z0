@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class XSource
     {
@@ -25,7 +25,7 @@ namespace Z0
         public static NatSpan<N,T> NatSpan<N,T>(this IDomainSource src, Interval<T> domain, N n = default, Func<T,bool> filter = null)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => TypeNats.span(src.Span<T>((int)value(n), domain, filter), n);
+                => TypeNats.span(src.Span<T>((int)Typed.value(n), domain, filter), n);
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values
@@ -70,7 +70,7 @@ namespace Z0
         public static Span<T> Span<N,T>(this IDomainSource src, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Sources.polyspan<T>(src, (int)nat64u(n), Z0.Interval<T>.Full);
+                => Sources.polyspan<T>(src, (int)Typed.nat64u(n), Z0.Interval<T>.Full);
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values over a specified domain
@@ -81,7 +81,7 @@ namespace Z0
         public static Span<T> Span<N,T>(this IDomainSource src, T min, T max, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Sources.polyspan<T>(src, (int)nat64u(n), (min, max));
+                => Sources.polyspan<T>(src, (int)Typed.nat64u(n), (min, max));
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values over a specified domain
@@ -92,6 +92,6 @@ namespace Z0
         public static Span<T> Span<N,T>(this IDomainSource src, Interval<T> domain, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Sources.polyspan<T>(src, (int)nat64u(n), domain);
+                => Sources.polyspan<T>(src, (int)Typed.nat64u(n), domain);
     }
 }

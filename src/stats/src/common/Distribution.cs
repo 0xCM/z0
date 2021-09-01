@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Collections;
 
-    public abstract class Distribution<S,T> : IDistribution<T>, IRngSampler<T>
+    public abstract class Distribution<S,T> : IDistribution<T>
         where T : unmanaged
         where S : IDistributionSpec<T>
     {
@@ -17,13 +17,10 @@ namespace Z0
 
         public S Spec {get;}
 
-        public RngKind RngKind 
-            => Polyrand.RngKind;
-
-        public int BufferLength 
+        public int BufferLength
             => 0;
 
-        public DistributionKind DistKind 
+        public DistributionKind DistKind
             => Spec.DistKind;
 
         protected Distribution(IPolyrand random, S Spec)
@@ -31,7 +28,7 @@ namespace Z0
             this.Polyrand = random;
             this.Spec =Spec;
         }
-        
+
         public abstract IEnumerable<T> Sample();
 
         public IEnumerator<T> GetEnumerator()

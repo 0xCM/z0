@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Blit
     {
-        partial struct Operate
+        partial class Render
         {
             [Op]
             public static string format(in text7 src)

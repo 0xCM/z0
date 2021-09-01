@@ -109,7 +109,7 @@ namespace Z0.Asm
         }
 
         [SymSource(K.VecReg)]
-        public enum VecRegToken : byte
+        public enum VRegToken : byte
         {
             [Symbol("xmm", "An XMM register. The 128-bit XMM registers are: XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode.The contents of memory are found at the address provided by the effective address computation")]
             xmm,

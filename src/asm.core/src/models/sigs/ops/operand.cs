@@ -48,15 +48,7 @@ namespace Z0.Asm
             => src;
 
         [MethodImpl(Inline), Op]
-        public static Imm operand(ImmToken src)
-            => src;
-
-        [MethodImpl(Inline), Op]
         public static MaskReg operand(MaskRegToken src)
-            => src;
-
-        [MethodImpl(Inline), Op]
-        public static Mem operand(MemToken src)
             => src;
 
         [MethodImpl(Inline), Op]
@@ -83,11 +75,7 @@ namespace Z0.Asm
         public static SrcOp src(SrcOpToken src)
             => src;
 
-        [MethodImpl(Inline), Op]
-        public static VecReg src(VecRegToken src)
-            => src;
-
-        [MethodImpl(Inline), Op]
+       [MethodImpl(Inline), Op]
         public static VecRm src(VecRmToken src)
             => src;
 

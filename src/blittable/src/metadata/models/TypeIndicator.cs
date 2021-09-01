@@ -27,7 +27,7 @@ namespace Z0
                 => (char)src.Data;
 
             public string Format()
-                => Types.format(this);
+                => Render.format(this);
 
             public override string ToString()
                 => Format();

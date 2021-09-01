@@ -6,7 +6,7 @@ namespace Z0
 {
     partial struct Blit
     {
-        partial struct Operate
+        public partial class Render
         {
             public static string format<S,T>(in map<S,T> m)
                 where S : unmanaged

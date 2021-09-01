@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial class AsmMetamodels
+    partial class AsmSpecs
     {
         public struct operands<A0,A1>
             where A0 : unmanaged, IAsmOperand
@@ -54,7 +54,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator operands<A0,A1,A2>((A0 a0, A1 a1, A2 a2) src)
                 => new operands<A0,A1,A2>(src.a0, src.a1, src.a2);
-
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]

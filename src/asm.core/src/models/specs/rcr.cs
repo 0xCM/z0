@@ -8,11 +8,9 @@ namespace Z0.Asm
 
     using static Root;
     using static AsmOperands;
-    using static Hex8Seq;
 
     partial class AsmSpecs
     {
-
         public static byte rcr(r8 r, N1 n)
         {
             return default;

@@ -9,8 +9,6 @@ namespace Z0
 
     using static Root;
 
-    using api = Blit.Operate;
-
     partial struct Blit
     {
         public struct map<S,T>
@@ -29,7 +27,7 @@ namespace Z0
             }
 
             public string Format()
-                => api.format(this);
+                => Render.format(this);
 
             public override string ToString()
                 => Format();
@@ -53,7 +51,7 @@ namespace Z0
             }
 
             public string Format()
-                => api.format((map<T,T>)this);
+                => Render.format((map<T,T>)this);
 
             public override string ToString()
                 => Format();

@@ -324,6 +324,11 @@ namespace Z0
             BitMaskChecker.create(Wf).Run(Source);
         }
 
+        void Run(N21 n)
+        {
+            BlitMachine.create(Wf).Run();
+        }
+
         void Run(string spec)
         {
             if(uint.TryParse(spec, out var n))
@@ -383,6 +388,9 @@ namespace Z0
                     break;
                     case 20:
                         Run(n20);
+                    break;
+                    case 21:
+                        Run(n21);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

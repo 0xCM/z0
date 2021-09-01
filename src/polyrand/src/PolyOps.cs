@@ -11,27 +11,28 @@ namespace Z0
     using static core;
 
     [ApiHost]
-    public readonly struct PolyG
+    public readonly struct PolyOps
     {
+
         [MethodImpl(Inline)]
-        public static Polyrand<G> poly<G>(in G g)
+        public static PolyG<G> poly<G>(in G g)
            where G : struct, IDomainRng<G,ulong>
                 => g;
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T next<T>(ref WyHash64 g)
            where T : unmanaged
-                => PolyG.next<WyHash64,T>(ref g);
+                => next<WyHash64,T>(ref g);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T next<T>(ref WyHash64 g, T max)
            where T : unmanaged
-                => PolyG.next<WyHash64,T>(ref g, max);
+                => next<WyHash64,T>(ref g, max);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T next<T>(ref WyHash64 g, T min, T max)
            where T : unmanaged
-                => PolyG.next<WyHash64,T>(ref g, min, max);
+                => next<WyHash64,T>(ref g, min, max);
 
         [MethodImpl(Inline), Op]
         public static void flow(ref WyHash64 g, ulong min, ulong max, Span<ulong> dst)

@@ -10,10 +10,11 @@ namespace Z0
     using static Root;
     using static core;
     using static BlittableKind;
+    using static Blit.Types;
 
     partial struct Blit
     {
-        partial struct Types
+        partial class Render
         {
             [Op]
             public static string format(TypeIndicator src)

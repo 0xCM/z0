@@ -47,7 +47,7 @@ namespace Z0
             }
 
             public string Format()
-                => O.format(this);
+                => Render.format(this);
 
             public override string ToString()
                 => Format();
