@@ -51,7 +51,7 @@ namespace Z0.Asm
                 var docs = TextGrids.load(files);
 
                 Status(ParsingDocs.Format(docs.Length));
-                var results = AsmParser.parse(docs, dst);
+                var results = AsmParser.rows(docs, dst);
                 foreach(var result in results)
                     result.OnSuccess(count => counter+=count).OnFailure(msg => Error(msg));
             }
@@ -66,7 +66,7 @@ namespace Z0.Asm
                         continue;
                     }
 
-                    var parsed = AsmParser.parse(grid, dst);
+                    var parsed = AsmParser.rows(grid, dst);
                     if(parsed.Fail)
                         Error(FileParseError.Format(file, result.Message));
                     else

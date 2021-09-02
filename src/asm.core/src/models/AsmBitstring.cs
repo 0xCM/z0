@@ -44,7 +44,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmBitstring(AsmHexCode src)
-            => new AsmBitstring(api.format8x4(src));
+            => new AsmBitstring(AsmRender.format8x4(src));
 
         public static AsmBitstring Empty
         {

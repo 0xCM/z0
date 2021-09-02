@@ -37,13 +37,6 @@ namespace Z0.Asm
         FS.FolderPath ProjectOut()
             => Ws.Projects().Out(State.Project());
 
-        FS.FolderPath OutData()
-            => ProjectOut() + FS.folder("data");
-
-        FS.FilePath OutData<T>()
-            where T : struct
-                => OutData() + Tables.filename<T>();
-
         Outcome HexDecode(string srcid)
             => OmniScript.RunProjectScript(AsmRoot, srcid, McDisasm, false, out var flows);
 

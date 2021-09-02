@@ -9,12 +9,20 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static TextTools;
 
     [Blittable(SZ)]
     public unsafe readonly struct StringAddress : IAddressable
     {
         public const uint SZ = MemoryAddress.SZ;
+
+        [MethodImpl(Inline), Op]
+        public static unsafe string format(StringAddress src)
+            => new string(src.Address.Pointer<char>());
+
+        [MethodImpl(Inline), Op]
+        public static unsafe string format<N>(StringAddress<N> src)
+            where N : unmanaged, ITypeNat
+                => new string(src.Address.Pointer<char>());
 
         [MethodImpl(Inline), Op]
         public static unsafe ref char first(StringAddress src)
@@ -30,6 +38,17 @@ namespace Z0
             return counter;
         }
 
+        [MethodImpl(Inline)]
+        public static uint render<N>(StringAddress<N> src, ref uint i, Span<char> dst)
+            where N : unmanaged, ITypeNat
+        {
+            ref var c = ref first(src.Source);
+            var n = src.Length;
+            for(var j=0; j<n; j++)
+                seek(dst,i++) = skip(c,j);
+            return n;
+        }
+
         [MethodImpl(Inline), Op]
         public static uint render(StringAddress src, ref uint i, Span<char> dst)
         {
@@ -39,6 +58,16 @@ namespace Z0
             while(c != 0 && i < dst.Length)
                 seek(dst, i++) = skip(c, j++);
             return j-1;
+        }
+
+        [MethodImpl(Inline)]
+        public static StringAddress<N> natural<N>(string src)
+            where N : unmanaged, ITypeNat
+        {
+            if(src.Length >= Typed.nat32i<N>())
+                return new StringAddress<N>(resource(src));
+            else
+                return default;
         }
 
         [MethodImpl(Inline), Op]

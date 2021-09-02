@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial struct AsmParser
     {
-        public static Outcome parse(string src, out AsmOffsetLabel dst)
+        public static Outcome offlabel(string src, out AsmOffsetLabel dst)
         {
             dst = default;
             var result = DataParser.parse(src, out Hex64 value);
@@ -15,7 +15,7 @@ namespace Z0.Asm
             return result;
         }
 
-        public static Outcome parse(AsmBlockLabel src, out AsmOffsetLabel dst)
-            => parse(src.Name, out dst);
+        public static Outcome offlabel(AsmBlockLabel src, out AsmOffsetLabel dst)
+            => offlabel(src.Name, out dst);
     }
 }

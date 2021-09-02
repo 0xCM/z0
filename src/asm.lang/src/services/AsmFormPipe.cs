@@ -30,7 +30,7 @@ namespace Z0.Asm
             catalog.EmitForms(catalog.DeriveFormExprssions());
 
             var src = Db.AsmCatalogTable<AsmFormRecord>();
-            var records = Load(src);
+            var records = LoadForms(src);
             var count = records.Length;
             var buffer = alloc<AsmFormExpr>(count);
             ref var dst = ref first(buffer);
@@ -117,7 +117,7 @@ namespace Z0.Asm
             return ref dst;
         }
 
-        public ReadOnlySpan<AsmFormRecord> Load(in TextGrid src)
+        public ReadOnlySpan<AsmFormRecord> LoadForms(in TextGrid src)
         {
             var rows = src.Rows;
             var count = rows.Length;
@@ -134,12 +134,12 @@ namespace Z0.Asm
                     Wf.Error(FieldCountMismatch.Format(TableId, row.CellCount, FieldCount));
                     return array<AsmFormRecord>();
                 }
-                AsmParser.parse(row, ref seek(dst,i));
+                AsmParser.row(row, ref seek(dst,i));
             }
             return buffer;
         }
 
-        public ReadOnlySpan<AsmFormRecord> Load(FS.FilePath src)
+        public ReadOnlySpan<AsmFormRecord> LoadForms(FS.FilePath src)
         {
             var dst = list<AsmFormRecord>();
             if(src.Exists)
@@ -152,7 +152,7 @@ namespace Z0.Asm
                     return array<AsmFormRecord>();
                 }
 
-                var forms = Load(doc.Value);
+                var forms = LoadForms(doc.Value);
                 Wf.Ran(flow, LoadedForms.Format(forms.Length, src));
                 return forms;
             }

@@ -33,7 +33,7 @@ namespace Z0.Asm
                 if(result.Fail)
                     return (false, $"Could not parse sig expression from ${sigexpr}");
 
-                    AsmParser.code(sig.Mnemonic, out var monic);
+                    AsmParser.mnemonic(sig.Mnemonic, out var monic);
 
                     if(text.unfence(A, OpCodeFence, out var opcode))
                     {

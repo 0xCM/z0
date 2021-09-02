@@ -19,6 +19,56 @@ namespace Z0.Asm
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op]
+        public static uint render8x4(in AsmHexCode src, Span<char> dst)
+        {
+            var i=0u;
+            return BitRender.renderNx8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> render8x4(in AsmHexCode src)
+        {
+            if(src.IsEmpty)
+                return default;
+
+            CharBlocks.alloc(n256, out var block);
+            var dst = block.Data;
+            var count = render8x4(src, dst);
+            if(count == 0)
+                return EmptyString;
+
+            return slice(dst, 0, count);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render8x3x3x2(in AsmHexCode src, ref uint i, Span<char> dst)
+            => BitRender.render8x3x3x2(slice(src.Bytes, src.Size), ref i, dst);
+
+        [Op,Closures(Closure)]
+        public static ReadOnlySpan<char> render<T>(in NamedRegValue<T> src, char sep = Chars.Space)
+            where T : unmanaged
+        {
+            if(size<T>() == 1)
+                return BitRender.render8(u8(src.Value));
+            else if(size<T>() == 2)
+                return BitRender.render16x8(u16(src.Value), sep);
+            else if(size<T>() == 4)
+                return BitRender.render32x8(u32(src.Value));
+            else if(size<T>() == 8)
+                return BitRender.render64x8(u64(src.Value));
+            else
+                return EmptyString;
+        }
+
+        [Op]
+        public static string format8x4(AsmHexCode src)
+            => src.IsEmpty ? EmptyString : text.format(AsmRender.render8x4(src));
+
+        [MethodImpl(Inline), Op]
+        public static uint render8x4(in AsmHexCode src, ref uint i, Span<char> dst)
+            => BitRender.renderNx8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
+
         public static string format(in RegRange src)
             => string.Format("{0}[{1}..{2}]", src.Class, src.MinIndex, src.MaxIndex);
 
@@ -30,7 +80,7 @@ namespace Z0.Asm
                         src.BlockOffset,
                         src.Expression,
                         string.Format("({0})<{1}>[{2}] => {3}", src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format()),
-                        AsmBits.format8x4(src.Encoded)
+                        format8x4(src.Encoded)
                         );
 
         public static string format(AsmBlockLabel src)
@@ -213,7 +263,7 @@ namespace Z0.Asm
         {
             var common = format(src);
             if(bitstring)
-                return string.Format("{0} => {1}", common, AsmBits.format8x4(src.Encoded));
+                return string.Format("{0} => {1}", common, format8x4(src.Encoded));
             else
                 return common;
         }
@@ -221,9 +271,9 @@ namespace Z0.Asm
         [Op]
         public static string thumbprint(in AsmEncodingInfo src)
         {
-            var bits = AsmBits.format8x4(src.Encoded);
+            var bits = format8x4(src.Encoded);
             var statement = string.Format("{0} # ({1})<{2}>[{3}] => {4}", src.Statement.FormatPadded(), src.Sig, src.OpCode, src.Encoded.Size, src.Encoded.Format());
-            return string.Format("{0} => {1}", statement, AsmBits.format8x4(src.Encoded));
+            return string.Format("{0} => {1}", statement, format8x4(src.Encoded));
         }
 
         [Op]
@@ -317,38 +367,6 @@ namespace Z0.Asm
             var index = (byte)src.Code;
             var symbol = symbols[index];
             return symbol.Expr.Format();
-        }
-
-        public static string detail(RegModels.r8 src)
-        {
-            Hex8 data = src.Content;
-            var hex = data.Format();
-            var bits = data.FormatBits(n8);
-            return string.Format("{0} {1}", hex, bits);
-        }
-
-        public static string detail(RegModels.r16 src)
-        {
-            Hex16 data = src.Content;
-            var hex = data.Format();
-            var bits = data.FormatBits(n8);
-            return string.Format("{0} {1}", hex, bits);
-        }
-
-        public static string detail(RegModels.r32 src)
-        {
-            Hex32 data = src.Content;
-            var hex = data.Format();
-            var bits = data.FormatBits(n8);
-            return string.Format("{0} {1}", hex, bits);
-        }
-
-        public static string detail(RegModels.r64 src)
-        {
-            Hex64 data = src.Content;
-            var hex = data.Format();
-            var bits = data.FormatBits(n8);
-            return string.Format("{0} {1}", hex, bits);
         }
 
         public static void regvals(ReadOnlySpan<CpuIdRow> src, ITextBuffer dst)

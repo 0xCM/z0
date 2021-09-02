@@ -9,6 +9,8 @@ namespace Z0.Asm
     {
         public const string LlcBuild = "llc-build";
 
+        public const string LlcBuildSse = "llc-build-sse";
+
         public const string LlcBuildSse2 = "llc-build-sse2";
 
         public const string LlcBuildSse3 = "llc-build-sse3";

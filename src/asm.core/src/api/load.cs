@@ -20,7 +20,7 @@ namespace Z0.Asm
                 return result;
 
             dst = alloc<HostAsmRecord>(doc.RowCount);
-            return AsmParser.parse(doc,dst);
+            return AsmParser.row(doc,dst);
         }
 
         public static Outcome<uint> load(FS.FilePath src, Span<ProcessAsmRecord> dst)
@@ -34,7 +34,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             while(line != null && result.Ok)
             {
-                result = AsmParser.parse(counter++, line, out seek(dst,i));
+                result = AsmParser.row(counter++, line, out seek(dst,i));
                 if(result.Fail)
                     return result;
                 else

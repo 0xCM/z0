@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     using SQ = SymbolicQuery;
 
-
     partial struct AsmParser
     {
         /// <summary>

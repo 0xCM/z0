@@ -2,28 +2,28 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace types.meta
+namespace types.metadata
 {
-    using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using Z0;
-
-    using static Z0.core;
     using static Z0.Root;
 
-
-    namespace systems
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
+    public struct Scalar
     {
-        [ApiHost("types.meta.blit")]
-        public readonly partial struct Blittable
-        {
-            const NumericKind Closure = UnsignedInts;
+        public ScalarKind Kind;
 
-            [MethodImpl(Inline), Op]
-            public static name name(string src)
-                => new name(src);
+        public uint StorageSize;
+
+        public uint DataWidth;
+
+        [MethodImpl(Inline)]
+        public Scalar(ScalarKind kind, uint s, uint w)
+        {
+            Kind = kind;
+            StorageSize = s;
+            DataWidth = w;
         }
     }
 }

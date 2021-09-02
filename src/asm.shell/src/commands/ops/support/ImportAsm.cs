@@ -19,11 +19,9 @@ namespace Z0.Asm
             foreach(var path in paths)
             {
                 lines.Clear();
-                var count = asm.lines(path, lines);
+                var count = AsmParser.lines(path, lines);
                 counter += count;
-                var desc = string.Format("Source: {0}, {1} lines", path.ToUri(), count);
-
-                writer.WriteLine(asm.comment(desc));
+                writer.WriteLine(asm.comment(string.Format("Source: {0}, {1} lines", path.ToUri(), count)));
                 writer.WriteLine(asm.comment(RP.PageBreak80));
                 writer.WriteLine();
 

@@ -22,7 +22,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             while(line != null && result.Ok)
             {
-                result = AsmParser.parse(counter++, line, out var row);
+                result = AsmParser.row(counter++, line, out var row);
                 if(result.Ok)
                     dst(row);
                 line = reader.ReadLine();

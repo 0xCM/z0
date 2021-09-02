@@ -16,13 +16,13 @@ namespace Z0.Asm
     partial struct AsmParser
     {
         [Op]
-        public static Outcome parse(string src, out AsmExpr dst)
+        public static Outcome asmxpr(string src, out AsmExpr dst)
         {
             dst = new AsmExpr(src.Trim());
             return true;
         }
 
-        public static Outcome parse(ReadOnlySpan<AsciCode> src, out AsmExpr dst)
+        public static Outcome asmexpr(ReadOnlySpan<AsciCode> src, out AsmExpr dst)
         {
             dst = AsmExpr.Empty;
             var outcome = Outcome.Success;
@@ -48,7 +48,7 @@ namespace Z0.Asm
             return outcome;
         }
 
-        public static Outcome parse(in AsciLine src, out AsmBlockLabel label, out AsmExpr expr)
+        public static Outcome asmxpr(in AsciLine src, out AsmBlockLabel label, out AsmExpr expr)
         {
             label = AsmBlockLabel.Empty;
             var content = src.Content;

@@ -444,7 +444,7 @@ namespace Z0.Asm
         public void CheckBitstrings()
         {
             CharBlocks.alloc(n128, out var block);
-            var count = AsmBits.render8x4(Input, block.Data);
+            var count = AsmRender.render8x4(Input, block.Data);
             var chars = slice(block.Data,0,count);
             var bits = text.format(chars);
             Wf.Row(InputBits);

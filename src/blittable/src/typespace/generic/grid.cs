@@ -2,18 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace types.generic
 {
-    using System;
     using System.Runtime.CompilerServices;
+    using static Z0.Root;
 
-    using static Root;
-    using static core;
-
-    partial struct TextTools
+    public struct grid<T>
+        where T : unmanaged
     {
-        [MethodImpl(Inline), Op]
-        internal static unsafe ref char firstchar(StringAddress src)
-            => ref @ref(src.Address.Pointer<char>());
+
     }
 }

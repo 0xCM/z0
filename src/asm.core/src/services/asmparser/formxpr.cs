@@ -28,16 +28,8 @@ namespace Z0.Asm
             return true;
         }
 
-        public static ref AsmFormRecord parse(in TextRow src, ref AsmFormRecord dst)
-        {
-            var i = 0;
-            DataParser.parse(src[i++], out dst.Seq);
-            ocxpr(src[i++], out dst.OpCode);
-            sigxpr(src[i++], out dst.Sig);
-            formxpr(src[i++], out dst.FormExpr);
-            return ref dst;
-        }
 
-        public static MsgPattern<Fence<char>,string> FenceNotFound => "No content fenced with {0} exists int the input text '{1}'";
+        public static MsgPattern<Fence<char>,string> FenceNotFound
+            => "No content fenced with {0} exists int the input text '{1}'";
     }
 }

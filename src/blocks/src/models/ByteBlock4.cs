@@ -14,7 +14,7 @@ namespace Z0
     using B = ByteBlock4;
 
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock4 : IDataBlock<B>
+    public struct ByteBlock4 : IStorageBlock<B>
     {
         public const ushort Size = 4;
 

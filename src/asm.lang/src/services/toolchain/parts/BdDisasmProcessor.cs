@@ -39,11 +39,11 @@ namespace Z0.Asm
                 return (false, "Unable to parse offset");
 
 
-            result = AsmParser.parse(b, out AsmHexCode hexcode);
+            result = AsmParser.hexcode(b, out AsmHexCode hexcode);
             if(result.Fail)
                 return result;
 
-            result = AsmParser.parse(c, out AsmExpr expr);
+            result = AsmParser.asmexpr(c, out AsmExpr expr);
             if(result.Fail)
                 return result;
 

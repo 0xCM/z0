@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct AsmParser
     {
         [Op]
-        public static Outcome parse(ReadOnlySpan<AsciCode> src, out AsmHexCode dst)
+        public static Outcome hexcode(ReadOnlySpan<AsciCode> src, out AsmHexCode dst)
         {
             dst = default;
             var buffer = Cells.alloc(n128).Bytes;

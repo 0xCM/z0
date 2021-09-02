@@ -75,20 +75,6 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public ReadOnlySpan<AsmMnemonic> DeriveMnemonics()
-        {
-            var dst = hashset<AsmMnemonic>();
-            var rows = LoadAsset();
-            var count = rows.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(rows,i);
-                if(AsmParser.mnemonic(row.Instruction, out var monic))
-                    dst.Add(monic);
-            }
-            return dst.ToArray();
-        }
-
         public ReadOnlySpan<Name> DeriveEncodingKinds()
         {
             var rows = LoadAsset();

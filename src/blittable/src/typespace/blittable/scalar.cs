@@ -2,19 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace types
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static core;
+    using Z0;
 
-    public interface IDataBlock<T>
-        where T : unmanaged, IDataBlock<T>
+    using static Z0.Root;
+    using static Z0.LiteralKind;
+
+    partial struct Blittable
     {
-        ByteSize Size
-            => size<T>();
 
-        Span<byte> Bytes
-            => bytes((T)this);
     }
+
 }

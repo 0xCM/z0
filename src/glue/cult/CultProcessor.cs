@@ -213,7 +213,7 @@ namespace Z0.Tools
             var bitstring = "<error>";
             var formatted = FormatBytes(comment, out var count);
             if(HexByteParser.ParseData(formatted, out var parsed))
-                bitstring = AsmBits.format8x4(AsmHexCode.load(parsed));
+                bitstring = AsmRender.format8x4(AsmHexCode.load(parsed));
 
             if(count != 0)
                 comment = string.Format(StatementCommentPattern, comment, count, formatted, bitstring);

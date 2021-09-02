@@ -69,7 +69,7 @@ namespace Z0.Asm
                     ref readonly var src = ref skip(rows,j);
                     if(src.CellCount != AsmDetailRow.FieldCount)
                         return (false, string.Format("Found {0} fields in {1} while {2} were expected", kCells, src, AsmDetailRow.FieldCount));
-                    var loaded = AsmParser.parse(src, out AsmDetailRow row);
+                    var loaded = AsmParser.row(src, out AsmDetailRow row);
                     if(!loaded)
                     {
                         Error(loaded.Message);
@@ -110,7 +110,7 @@ namespace Z0.Asm
                     row.Instruction,
                     row.OpCode,
                     row.Encoded,
-                    AsmBits.format8x4(row.Encoded),
+                    AsmRender.format8x4(row.Encoded),
                     AsmRender.semantic(row)
                 );
                 writer.WriteLine(rendered);
@@ -140,7 +140,7 @@ namespace Z0.Asm
                 if(data.CellCount != FieldCount)
                     return (false, Tables.FieldCountMismatch.Format(FieldCount, data.CellCount));
 
-                result = AsmParser.parse(data, out CpuIdRow row);
+                result = AsmParser.row(data, out CpuIdRow row);
                 if(result.Fail)
                     return result;
 
@@ -323,7 +323,7 @@ namespace Z0.Asm
                     return default;
                 }
 
-                var result = AsmParser.parse(data, out CpuIdRow row);
+                var result = AsmParser.row(data, out CpuIdRow row);
                 if(result.Fail)
                 {
                     Error(result.Message);
