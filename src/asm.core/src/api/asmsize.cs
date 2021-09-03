@@ -12,11 +12,19 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmText asmtext(StringAddress src, AsmTextKind kind = default)
-            => new AsmText(src, kind);
+        public static NativeWidthCode code(BitWidth src)
+        {
+            if(src != 80)
+            {
+                var i = Pow2.log(src >> 3);
+                return (NativeWidthCode)i;
+            }
+            else
+                return NativeWidthCode.W80;
+        }
 
         [MethodImpl(Inline), Op]
-        public static AsmText asmtext(string src, AsmTextKind kind = default)
-            => asmtext(StringAddress.from(src), kind);
+        public static NativeSize asmsize(BitWidth src)
+            => code(src);
     }
 }

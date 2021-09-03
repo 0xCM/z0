@@ -2,25 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct AsmAddressWidth
+    partial struct Rules
     {
-        public AsmWidthCode Width {get;}
-
         [MethodImpl(Inline)]
-        public AsmAddressWidth(AsmWidthCode code)
-        {
-            Width = code;
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmAddressWidth(AsmWidthCode code)
-            => new AsmAddressWidth(code);
+        public static Constraint<S,R> constrain<S,R>(S subject, R rule)
+            where R : IRule
+                => new Constraint<S,R>(subject,rule);
     }
 }

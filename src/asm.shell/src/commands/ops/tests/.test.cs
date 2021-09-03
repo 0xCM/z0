@@ -11,18 +11,40 @@ namespace Z0.Asm
 
     using static core;
     using static AsmChecks;
+    using static Root;
 
     partial class AsmCmdService
     {
         [CmdOp(".test")]
         unsafe Outcome Test(CmdArgs args)
         {
+            return TestHexDigitValues(args);
+            // var result = Outcome.Success;
+            // BitWidth w8 = 8;
+            // BitWidth w16 = 16;
+            // BitWidth w32 = 32;
+            // BitWidth w64 = 64;
+
+            // var sz8 = asm.asmsize(w8);
+            // var sz16 = asm.asmsize(w16);
+            // var sz32 = asm.asmsize(w32);
+            // var sz64 = asm.asmsize(w64);
+            // Write(sz8);
+            // Write(sz16);
+            // Write(sz32);
+            // Write(sz64);
+            // return result;
+        }
+
+        [CmdOp(".test")]
+        unsafe Outcome TestHexDigitValues(CmdArgs args)
+        {
             var result = Outcome.Success;
             const string DataSource = "38D10F9FC00FB6C0C338D10F97C00FB6C0C36639D10F9FC00FB6C0C36639D10F97C00FB6C0C339D10F9FC00FB6C0C339D10F97C0C34839D10F9FC00FB6C0C34839D10F97C00FB6C0C3";
             var input = span(DataSource);
             var count = DataSource.Length;
             var dst = alloc<HexDigitValue>(count);
-            result = Hex.digits(input,dst);
+            result = Hex.map(DataSource,dst);
             if(result.Fail)
                 return result;
 

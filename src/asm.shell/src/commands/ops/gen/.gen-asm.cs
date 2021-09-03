@@ -54,8 +54,8 @@ namespace Z0.Asm
             var asmid = "bsr";
             var label = "bsr_r16_r16";
             var syntax = McSyntax;
-            var w0 = AsmWidthCode.W16;
-            var w1 = AsmWidthCode.W16;
+            var w0 = NativeWidthCode.W16;
+            var w1 = NativeWidthCode.W16;
             var r0 = RegSets.GpRegs(w0);
             var r1 = RegSets.GpRegs(w1);
             var dst = AsmWs.AsmPath(syntax, asmid);

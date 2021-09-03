@@ -354,7 +354,7 @@ namespace Z0.Asm
         [Op]
         public static string format(RegWidth src)
         {
-            var symbols = Symbols.index<AsmWidthCode>();
+            var symbols = Symbols.index<NativeWidthCode>();
             var index = (byte)src.Code;
             var symbol = symbols[index];
             return symbol.Expr.Format();

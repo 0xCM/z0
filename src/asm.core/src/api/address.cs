@@ -91,7 +91,7 @@ namespace Z0.Asm
         /// <param name="disp">The displacement</param>
         [MethodImpl(Inline), Op]
         public static AsmAddress address(W8 w, RegIndexCode @base, RegIndexCode index, MemoryScale scale, Disp8 disp = default)
-            => address(AsmRegs.reg(AsmWidthCode.W8, RegClassCode.GP, @base), AsmRegs.reg(AsmWidthCode.W8, RegClassCode.GP, index), scale,disp);
+            => address(AsmRegs.reg(NativeWidthCode.W8, RegClassCode.GP, @base), AsmRegs.reg(NativeWidthCode.W8, RegClassCode.GP, index), scale,disp);
 
         /// <summary>
         /// Specifies an effective address for 16-bit operands
@@ -103,7 +103,7 @@ namespace Z0.Asm
         /// <param name="disp">The displacement</param>
         [MethodImpl(Inline), Op]
         public static AsmAddress address(W16 w, RegIndexCode @base, RegIndexCode index, MemoryScale scale, Disp16 disp = default)
-            => address(AsmRegs.reg(AsmWidthCode.W16, RegClassCode.GP, @base), AsmRegs.reg(AsmWidthCode.W16, RegClassCode.GP, index), scale,disp);
+            => address(AsmRegs.reg(NativeWidthCode.W16, RegClassCode.GP, @base), AsmRegs.reg(NativeWidthCode.W16, RegClassCode.GP, index), scale,disp);
 
         /// <summary>
         /// Specifies an effective address for 32-bit operands
@@ -115,7 +115,7 @@ namespace Z0.Asm
         /// <param name="disp">The displacement</param>
         [MethodImpl(Inline), Op]
         public static AsmAddress address(W32 w, RegIndexCode @base, RegIndexCode index, MemoryScale scale, Disp32 disp = default)
-            => address(AsmRegs.reg(AsmWidthCode.W32, RegClassCode.GP, @base), AsmRegs.reg(AsmWidthCode.W32, RegClassCode.GP, index), scale,disp);
+            => address(AsmRegs.reg(NativeWidthCode.W32, RegClassCode.GP, @base), AsmRegs.reg(NativeWidthCode.W32, RegClassCode.GP, index), scale,disp);
 
         /// <summary>
         /// Specifies an effective address for 64-bit operands
@@ -127,6 +127,6 @@ namespace Z0.Asm
         /// <param name="disp">The displacement</param>
         [MethodImpl(Inline), Op]
         public static AsmAddress address(W64 w, RegIndexCode @base, RegIndexCode index, MemoryScale scale, Disp32 disp = default)
-            => address(AsmRegs.reg(AsmWidthCode.W64, RegClassCode.GP, @base), AsmRegs.reg(AsmWidthCode.W64, RegClassCode.GP, index), scale,disp);
+            => address(AsmRegs.reg(NativeWidthCode.W64, RegClassCode.GP, @base), AsmRegs.reg(NativeWidthCode.W64, RegClassCode.GP, index), scale,disp);
     }
 }

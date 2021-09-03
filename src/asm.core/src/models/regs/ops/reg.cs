@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static RegOp reg(AsmWidthCode width, RegClassCode @class, RegIndexCode r)
+        public static RegOp reg(NativeWidthCode width, RegClassCode @class, RegIndexCode r)
             => AsmRegBits.reg(width, @class, r);
     }
 }

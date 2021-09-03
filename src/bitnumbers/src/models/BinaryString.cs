@@ -10,14 +10,14 @@ namespace Z0
     using static Root;
 
     /// <summary>
-    /// Defines a sequence of hex values
+    /// Defines a sequence of binary values
     /// </summary>
-    public readonly ref struct HexString
+    public readonly ref struct BinaryString
     {
         public ReadOnlySpan<char> Data {get;}
 
         [MethodImpl(Inline)]
-        public HexString(ReadOnlySpan<char> src)
+        public BinaryString(ReadOnlySpan<char> src)
         {
             Data = src;
         }
@@ -26,11 +26,11 @@ namespace Z0
             => text.format(Data);
 
         [MethodImpl(Inline)]
-        public static implicit operator HexString(string src)
-            => new HexString(src);
+        public static implicit operator BinaryString(string src)
+            => new BinaryString(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator HexString(ReadOnlySpan<char> src)
-            => new HexString(src);
+        public static implicit operator BinaryString(ReadOnlySpan<char> src)
+            => new BinaryString(src);
     }
 }

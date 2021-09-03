@@ -65,13 +65,13 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(src.Length >= Typed.nat32i<N>())
-                return new StringAddress<N>(resource(src));
+                return new StringAddress<N>(from(src));
             else
                 return default;
         }
 
         [MethodImpl(Inline), Op]
-        public static StringAddress resource(string src)
+        public static StringAddress from(string src)
             => new StringAddress(core.address(src));
 
         [MethodImpl(Inline), Op]
@@ -142,10 +142,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(string src)
-            => resource(src);
+            => from(src);
 
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(Name src)
-            => resource(src.Content);
+            => from(src.Content);
     }
 }

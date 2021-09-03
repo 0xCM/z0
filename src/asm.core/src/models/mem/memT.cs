@@ -25,7 +25,7 @@ namespace Z0.Asm
                 Spec = src;
             }
 
-            public AsmSize Size
+            public NativeSize Size
             {
                 [MethodImpl(Inline)]
                 get => Spec.Size;

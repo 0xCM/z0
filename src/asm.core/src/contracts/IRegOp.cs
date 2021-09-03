@@ -28,7 +28,7 @@ namespace Z0.Asm
         /// <summary>
         /// The width of the represented register operand
         /// </summary>
-        AsmWidthCode WidthCode {get;}
+        NativeWidthCode WidthCode {get;}
 
         ushort Bitfield {get;}
 
@@ -68,8 +68,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp8 : IRegOp
     {
-        AsmWidthCode IRegOp.WidthCode
-            => AsmWidthCode.W8;
+        NativeWidthCode IRegOp.WidthCode
+            => NativeWidthCode.W8;
     }
 
     [Free]
@@ -86,8 +86,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp16 : IRegOp
     {
-        AsmWidthCode IRegOp.WidthCode
-            => AsmWidthCode.W16;
+        NativeWidthCode IRegOp.WidthCode
+            => NativeWidthCode.W16;
     }
 
     [Free]
@@ -104,8 +104,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp32 : IRegOp
     {
-        AsmWidthCode IRegOp.WidthCode
-            => AsmWidthCode.W32;
+        NativeWidthCode IRegOp.WidthCode
+            => NativeWidthCode.W32;
     }
 
     [Free]
@@ -119,8 +119,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp64 : IRegOp
     {
-        AsmWidthCode IRegOp.WidthCode
-            => AsmWidthCode.W64;
+        NativeWidthCode IRegOp.WidthCode
+            => NativeWidthCode.W64;
     }
 
     [Free]
@@ -137,8 +137,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp128 : IRegOp
     {
-        AsmWidthCode IRegOp.WidthCode
-            => AsmWidthCode.W128;
+        NativeWidthCode IRegOp.WidthCode
+            => NativeWidthCode.W128;
     }
 
     [Free]
@@ -152,8 +152,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp256 : IRegOp
     {
-        AsmWidthCode IRegOp.WidthCode
-            => AsmWidthCode.W256;
+        NativeWidthCode IRegOp.WidthCode
+            => NativeWidthCode.W256;
     }
 
     [Free]
@@ -170,8 +170,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp512 : IRegOp
     {
-        AsmWidthCode IRegOp.WidthCode
-            => AsmWidthCode.W512;
+        NativeWidthCode IRegOp.WidthCode
+            => NativeWidthCode.W512;
     }
 
     [Free]

@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     /// <summary>
     /// Defines a <see cref='DataWidth' subset that corresponds to x86 register widths and
     /// </summary>
     [SymSource]
-    public enum AsmWidthCode : byte
+    public enum NativeWidthCode : byte
     {
         /// <summary>
         /// Indicates the width of an 8-bit register
@@ -57,5 +57,7 @@ namespace Z0.Asm
         ///</summary>
         [Symbol("w80", "Indicates an 80-bit width")]
         W80 = 7,
+
+        Invalid=0xFF
     }
 }

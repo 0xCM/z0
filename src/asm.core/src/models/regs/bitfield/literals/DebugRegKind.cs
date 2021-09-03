@@ -7,7 +7,7 @@ namespace Z0.Asm
     using static RegFieldFacets;
     using static RegIndexCode;
     using static RegClassCode;
-    using static AsmWidthCode;
+    using static NativeWidthCode;
 
     /// <summary>
     /// Classifies the accessible debug registers

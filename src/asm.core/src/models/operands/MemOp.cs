@@ -13,7 +13,7 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public readonly struct MemOp : IMemOp
     {
-        public AsmSize Size {get;}
+        public NativeSize Size {get;}
 
         public AsmAddress Address {get;}
 

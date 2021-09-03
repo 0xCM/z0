@@ -40,7 +40,7 @@ namespace Z0.Asm
             get => AsmOpClass.R;
         }
 
-        public AsmWidthCode WidthCode
+        public NativeWidthCode WidthCode
         {
             [MethodImpl(Inline)]
             get => AsmRegBits.width(this);

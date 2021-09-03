@@ -15,12 +15,12 @@ namespace Z0.Asm
     {
         public AsmOpClass OpClass {get;}
 
-        public AsmSize Size {get;}
+        public NativeSize Size {get;}
 
         ByteBlock10 _Data {get;}
 
         [MethodImpl(Inline)]
-        internal AsmOperand(AsmOpClass opclass, AsmSize size)
+        internal AsmOperand(AsmOpClass opclass, NativeSize size)
         {
             OpClass = opclass;
             Size = size;
@@ -39,7 +39,7 @@ namespace Z0.Asm
         internal AsmOperand(imm8 src)
         {
             OpClass = AsmOpClass.Imm;
-            Size = AsmWidthCode.W8;
+            Size = NativeWidthCode.W8;
             _Data = (byte)src;
         }
 
@@ -47,7 +47,7 @@ namespace Z0.Asm
         internal AsmOperand(imm16 src)
         {
             OpClass = AsmOpClass.Imm;
-            Size = AsmWidthCode.W16;
+            Size = NativeWidthCode.W16;
             _Data = (ushort)src;
         }
 
@@ -55,7 +55,7 @@ namespace Z0.Asm
         internal AsmOperand(imm32 src)
         {
             OpClass = AsmOpClass.Imm;
-            Size = AsmWidthCode.W32;
+            Size = NativeWidthCode.W32;
             _Data = (uint)src;
         }
 
@@ -63,7 +63,7 @@ namespace Z0.Asm
         internal AsmOperand(imm64 src)
         {
             OpClass = AsmOpClass.Imm;
-            Size = AsmWidthCode.W64;
+            Size = NativeWidthCode.W64;
             _Data = (ulong)src;
         }
 
@@ -76,7 +76,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        internal AsmOperand(AsmOpClass opclass, AsmSize size, ByteBlock10 data)
+        internal AsmOperand(AsmOpClass opclass, NativeSize size, ByteBlock10 data)
         {
             OpClass = opclass;
             Size = size;

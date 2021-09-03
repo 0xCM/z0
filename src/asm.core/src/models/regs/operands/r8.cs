@@ -26,10 +26,10 @@ namespace Z0.Asm
                 Index = index;
             }
 
-            public AsmWidthCode WidthCode
+            public NativeWidthCode WidthCode
             {
                 [MethodImpl(Inline)]
-                get => AsmWidthCode.W8;
+                get => NativeWidthCode.W8;
             }
 
             public RegClassCode RegClassCode

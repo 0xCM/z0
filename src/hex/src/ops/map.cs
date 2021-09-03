@@ -8,11 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    partial struct Rules
+    partial struct Hex
     {
-        [MethodImpl(Inline), Op]
-        public static DataType datatype(string name)
-            => new DataType(name);
+        [MethodImpl(Inline)]
+        public static bool map(ReadOnlySpan<char> src, Span<HexDigitValue> dst)
+            => digits(src, dst);
+
+        [MethodImpl(Inline)]
+        public static bool map(HexString src, Span<HexDigitValue> dst)
+            => digits(src.Data, dst);
     }
 }

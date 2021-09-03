@@ -4,28 +4,30 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
     partial struct Rules
     {
-        public readonly struct Consequent : IRule<Consequent>
+        public readonly struct Constraint<S,R>
+            where R : IRule
         {
-            public TermId Id {get;}
+            public S Subject {get;}
 
-            public dynamic Term {get;}
+            public R Rule {get;}
 
             [MethodImpl(Inline)]
-            public Consequent(TermId id, dynamic src)
+            public Constraint(S subject, R rule)
             {
-                Id = id;
-                Term = src;
+                Subject = subject;
+                Rule = rule;
             }
 
             [MethodImpl(Inline)]
-            public bool Equals(Consequent src)
-                => match(this, src);
+            public static implicit operator Constraint<S,R>((S s, R r) src)
+                => new Constraint<S,R>(src.s,src.r);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Z0.Asm
     {
         public AsmOpClass OpClass {get;}
 
-        public AsmSize Size {get;}
+        public NativeSize Size {get;}
 
         public T Data {get;}
 

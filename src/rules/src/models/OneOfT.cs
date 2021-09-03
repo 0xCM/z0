@@ -16,16 +16,22 @@ namespace Z0
         /// </summary>
         public readonly struct OneOf<T> : IRule<OneOf<T>,T>
         {
-            public Index<T> Elements {get;}
+            readonly Index<T> _Terms;
 
             [MethodImpl(Inline)]
             public OneOf(Index<T> choices)
-                => Elements = choices;
+                => _Terms = choices;
 
             public uint Count
             {
                 [MethodImpl(Inline)]
-                get => Elements.Count;
+                get => _Terms.Count;
+            }
+
+            public Span<T> Terms
+            {
+                [MethodImpl(Inline)]
+                get => _Terms;
             }
 
             [MethodImpl(Inline)]
@@ -34,7 +40,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator OneOf(OneOf<T> src)
-                => new OneOf(src.Elements.Select(x => (dynamic)x));
+                => new OneOf(src._Terms.Select(x => (dynamic)x));
         }
     }
 }

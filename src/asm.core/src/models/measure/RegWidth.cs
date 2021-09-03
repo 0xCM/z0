@@ -10,10 +10,10 @@ namespace Z0.Asm
 
     public readonly struct RegWidth
     {
-        public AsmWidthCode Code {get;}
+        public NativeWidthCode Code {get;}
 
         [MethodImpl(Inline)]
-        public RegWidth(AsmWidthCode code)
+        public RegWidth(NativeWidthCode code)
         {
             Code = code;
         }
@@ -26,11 +26,11 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator RegWidth(AsmWidthCode src)
+        public static implicit operator RegWidth(NativeWidthCode src)
             => new RegWidth(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmWidthCode(RegWidth src)
+        public static implicit operator NativeWidthCode(RegWidth src)
             => src.Code;
 
         [MethodImpl(Inline)]

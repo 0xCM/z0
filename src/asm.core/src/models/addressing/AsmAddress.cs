@@ -38,7 +38,7 @@ namespace Z0.Asm
             Disp = disp;
         }
 
-        public AsmAddressWidth AddressSize
+        public AddressSize AddressSize
         {
             [MethodImpl(Inline)]
             get => Base.WidthCode;

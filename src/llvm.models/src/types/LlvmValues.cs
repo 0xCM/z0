@@ -48,7 +48,7 @@ namespace Z0.llvm
 
         [MethodImpl(Inline), Op]
         internal static StringAddress name(string src)
-            => StringAddress.resource(src);
+            => StringAddress.from(src);
 
         [MethodImpl(Inline)]
         internal static ushort width<T>(T src = default)

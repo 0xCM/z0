@@ -36,10 +36,10 @@ namespace Z0.Asm
             public override string ToString()
                 => Format();
 
-            public AsmWidthCode WidthCode
+            public NativeWidthCode WidthCode
             {
                 [MethodImpl(Inline)]
-                get => AsmWidthCode.W128;
+                get => NativeWidthCode.W128;
             }
 
             public RegClassCode RegClassCode

@@ -10,7 +10,7 @@ namespace Z0.Asm
     {
         AsmOpClass OpClass {get;}
 
-        AsmSize Size {get;}
+        NativeSize Size {get;}
 
         ReadOnlySpan<byte> Data {get;}
     }

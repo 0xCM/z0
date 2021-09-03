@@ -12,11 +12,11 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static OneOf<T> oneof<T>(params T[] src)
+        public static OneOf<T> oneof<T>(T[] src)
             => new OneOf<T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static OneOf<T> oneof<T>(Index<T> src)
-            => new OneOf<T>(src);
+        public static Constraint<T,OneOf<T>> oneof<T>(T subject, T[] src)
+            => constrain(subject,oneof(src));
     }
 }

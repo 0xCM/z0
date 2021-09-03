@@ -32,7 +32,7 @@ namespace Z0.Asm
         /// <summary>
         /// The common width of the base and index registers
         /// </summary>
-        public AsmWidthCode RegWidth;
+        public NativeWidthCode RegWidth;
 
         /// <summary>
         /// An 8-bit, 16-bit or 32-bit displacement
