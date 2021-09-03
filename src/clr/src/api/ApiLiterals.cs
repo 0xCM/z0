@@ -55,6 +55,7 @@ namespace Z0
             dst.Name = src.Name.Format();
             dst.Kind = src.Kind.ToString();
             dst.Value = src.Value();
+            dst.Length = (uint)dst.Value.Data.Length;
             return dst;
         }
 

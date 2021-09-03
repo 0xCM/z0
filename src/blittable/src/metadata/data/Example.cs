@@ -9,7 +9,7 @@ namespace Z0
     partial struct Blit
     {
         [ApiComplete]
-        public readonly struct PrimalNames
+        public readonly struct Example
         {
             const string U2 = "u0u1u2u3u4u5u6u7u8";
 

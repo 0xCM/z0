@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Blit
     {
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
         public readonly struct DataType
         {
             public BlittableKind Kind {get;}

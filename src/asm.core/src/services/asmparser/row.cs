@@ -23,7 +23,7 @@ namespace Z0.Asm
 
             var i=0;
 
-            result = DataParser.parse(skip(cells, i++), out dst.OpCodeKey);
+            result = DataParser.parse(skip(cells,i++), out dst.OpCodeKey);
             if(result.Fail)
                 return (false, ParseFailure.Format(nameof(dst.OpCodeKey), skip(cells,i-1)));
 

@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     public class AsmShellState : ShellState
     {
-        Index<SdmOpCodeDetail> _SdmOpCodes;
+        Index<SdmOpCodeDetail> _SdmOpCodeDetails;
 
         Index<ProcessAsmRecord> _ProcessAsm;
 
@@ -21,12 +21,23 @@ namespace Z0.Asm
 
         Index<Assembly> _ApiComponents;
 
+        Index<CompilationLiteral> _ApiLiterals;
+
+        Index<HostAsmRecord> _HostAsm;
+
+        Index<AsmDataBlock> _AsmBlocks;
+
+        IApiCatalog _ApiCatalog;
+
         public AsmShellState()
         {
-            _SdmOpCodes = array<SdmOpCodeDetail>();
+            _SdmOpCodeDetails = array<SdmOpCodeDetail>();
             _ProcessAsm = array<ProcessAsmRecord>();
             _ProcessAsmSelection = array<ProcessAsmRecord>();
             _ApiComponents = array<Assembly>();
+            _ApiLiterals = array<CompilationLiteral>();
+            _HostAsm = array<HostAsmRecord>();
+            _AsmBlocks = array<AsmDataBlock>();
         }
 
         public ReadOnlySpan<Assembly> ApiComponents()
@@ -36,15 +47,50 @@ namespace Z0.Asm
             return _ApiComponents;
         }
 
+        public ReadOnlySpan<AsmDataBlock> Records(Func<Index<AsmDataBlock>> loader)
+        {
+            if(_AsmBlocks.IsEmpty)
+                _AsmBlocks = loader();
+            return _AsmBlocks;
+        }
+
+        public ReadOnlySpan<SdmOpCodeDetail> Records(Func<Index<SdmOpCodeDetail>> loader)
+        {
+            if(_SdmOpCodeDetails.IsEmpty)
+                _SdmOpCodeDetails = loader();
+            return _SdmOpCodeDetails;
+        }
+
+        public IApiCatalog ApiCatalog(Func<IApiCatalog> loader)
+        {
+            if(_ApiCatalog == null)
+                _ApiCatalog = loader();
+            return _ApiCatalog;
+        }
+
+        public ReadOnlySpan<HostAsmRecord> HostAsm(Func<Index<HostAsmRecord>> loader)
+        {
+            if(_HostAsm.IsEmpty)
+                _HostAsm = loader();
+            return _HostAsm;
+        }
+
+        public ReadOnlySpan<CompilationLiteral> ApiLiterals(Func<Index<CompilationLiteral>> loader)
+        {
+            if(_ApiLiterals.IsEmpty)
+                _ApiLiterals = loader();
+            return _ApiLiterals;
+        }
+
         [MethodImpl(Inline)]
         public void SdmOpCodes(SdmOpCodeDetail[] src)
         {
-            _SdmOpCodes = src;
+            _SdmOpCodeDetails = src;
         }
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<SdmOpCodeDetail> SdmOpCodeDetail()
-            => _SdmOpCodes.View;
+            => _SdmOpCodeDetails.View;
 
         [MethodImpl(Inline)]
         public Span<ProcessAsmRecord> ProcessAsmSelection()

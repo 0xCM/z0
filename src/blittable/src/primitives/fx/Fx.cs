@@ -12,21 +12,21 @@ namespace Z0
 
     partial struct Blit
     {
-        public readonly ref struct FunctionSpec
+        public readonly ref struct Fx
         {
             public readonly ReadOnlySpan<byte> Domain;
 
             public readonly ReadOnlySpan<byte> Range;
 
             [MethodImpl(Inline)]
-            public FunctionSpec(ReadOnlySpan<byte> src, ReadOnlySpan<byte> dst)
+            public Fx(ReadOnlySpan<byte> src, ReadOnlySpan<byte> dst)
             {
                 Domain = src;
                 Range = dst;
             }
         }
 
-        public readonly ref struct FunctionSpec<S,T>
+        public readonly ref struct Fx<S,T>
             where S : unmanaged
             where T : unmanaged
         {
@@ -34,15 +34,15 @@ namespace Z0
 
             public readonly ReadOnlySpan<T> Target;
 
-            public FunctionSpec(in FunctionSpec src)
+            public Fx(in Fx src)
             {
                 Source = recover<S>(src.Domain);
                 Target = recover<T>(src.Range);
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator FunctionSpec<S,T>(FunctionSpec src)
-                => new FunctionSpec<S,T>(src);
+            public static implicit operator Fx<S,T>(Fx src)
+                => new Fx<S,T>(src);
         }
     }
 }

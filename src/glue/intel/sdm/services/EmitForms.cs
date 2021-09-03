@@ -18,15 +18,51 @@ namespace Z0.Asm
             return svc.ReadCsvTables(src);
         }
 
-        public ReadOnlySpan<AsmForm> EmitForms(ReadOnlySpan<SdmOpCodeDetail> opcodes)
+        public Index<AsmForm> EmitForms(ReadOnlySpan<SdmOpCodeDetail> opcodes, FS.FolderPath dir)
         {
-            const string Pattern = "{0,-80} | {1}:{2} | {3}:{4}";
-            var dst = Ws.Tables().Root + FS.file("asm.forms", FS.Txt);
+            const string Pattern = "{0,-16} | {1,-64} | {2}";
+            const string OpSep = ", ";
+            var dst = dir + FS.file("asm.forms", FS.Csv);
             using var writer = dst.UnicodeWriter();
-            var _forms = asm.forms(opcodes).View;
+            var _forms = asm.forms(opcodes);
             var count = _forms.Length;
             for(var i=0; i<count; i++)
-                writer.WriteLine(skip(_forms,i));
+            {
+                ref readonly var form = ref _forms[i];
+                ref readonly var sig = ref form.Sig;
+                var operands = EmptyString;
+                var opcount = form.Sig.OperandCount;
+                switch(opcount)
+                {
+                    case 1:
+                        operands = AsmSigs.operand(sig,0).Format();
+                    break;
+                    case 2:
+                        operands = string.Format(RP.delimit(n2, OpSep),
+                            AsmSigs.operand(sig,0),
+                            AsmSigs.operand(sig,1)
+                            );
+                    break;
+                    case 3:
+                        operands = string.Format(RP.delimit(n3, OpSep),
+                            AsmSigs.operand(sig,0),
+                            AsmSigs.operand(sig,1),
+                            AsmSigs.operand(sig,2)
+                            );
+                    break;
+                    case 4:
+                        operands = string.Format(RP.delimit(n4, OpSep),
+                            AsmSigs.operand(sig,0),
+                            AsmSigs.operand(sig,1),
+                            AsmSigs.operand(sig,2),
+                            AsmSigs.operand(sig,3)
+                            );
+                    break;
+                    default:
+                    break;
+                }
+                writer.WriteLine(string.Format(Pattern, form.Sig.Mnemonic, operands, form.OpCode.Format()));
+            }
 
             return _forms;
         }

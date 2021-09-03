@@ -63,13 +63,13 @@ namespace Z0.Asm
         public bool IsValid
         {
             [MethodImpl(Inline)]
-            get => IsNonEmpty && !Content.Text.StartsWith("(bad)");
+            get => IsNonEmpty && !Content.StartsWith("(bad)");
         }
 
         public bool IsInvalid
         {
             [MethodImpl(Inline)]
-            get => IsEmpty || Content.Text.StartsWith("(bad)");
+            get => IsEmpty || Content.StartsWith("(bad)");
         }
 
         [MethodImpl(Inline)]

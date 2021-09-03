@@ -7,11 +7,11 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential, Pack=1)]
-    public struct DataBlock12<T> : IStorageBlock<DataBlock12<T>>
+    public struct GBlock10<T> : IDataBlock<GBlock10<T>>
         where T : unmanaged
     {
-        DataBlock6<T> A;
+        GBlock8<T> A;
 
-        DataBlock6<T> B;
+        GBlock2<T> B;
     }
 }

@@ -10,25 +10,42 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        Index<HostAsmRecord> LoadHostAsm()
+            => AsmEtl.LoadHostAsmRows(ApiArchive.HostAsm());
+
+        Index<AsmDataBlock> LoadAsmBlocks()
+        {
+            var hostasm = State.HostAsm(LoadHostAsm);
+            var count = hostasm.Length;
+            var buffer = alloc<AsmDataBlock>(count);
+            ref var records = ref first(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                ref var dst = ref seek(records,i);
+                ref readonly var src = ref skip(hostasm,i);
+                dst.Key = i;
+                dst.BlockAddress = src.BlockAddress;
+                dst.IP = src.IP;
+                dst.BlockOffset = src.BlockOffset;
+                dst.Expression = src.Expression.Format();
+                dst.Encoded = @as<AsmHexCode,ByteBlock16>(src.Encoded);
+                dst.Encoded[15] = 0;
+                dst.Bitstring = src.Bitstring.Format();
+                dst.Sig = src.Sig.Format();
+                dst.OpCode = src.OpCode.Format();
+                // if(src.OpUri != null)
+                //     dst.OpUri = src.OpUri.Format();
+                // else
+                //     dst.OpUri = RP.Null;
+            }
+            return buffer;
+        }
+
         [CmdOp(".api-asm")]
         Outcome ApiAsm(CmdArgs args)
         {
             var result = Outcome.Success;
-            var rows = AsmEtl.LoadHostAsmRows(ApiArchive.HostAsm());
-            var src = rows.View;
-            var count = src.Length;
-            var buffer = alloc<AsmDataBlock>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0u; i<count; i++)
-            {
-                ref var b = ref seek(dst,i);
-                ref readonly var s = ref skip(src,i);
-                b.GlobalIndex = i;
-                b.BlockAddress = s.BlockAddress;
-                b.IP = s.IP;
-                b.BlockOffset = s.BlockOffset;
-                text.asci(s.Expression.Content, b.Expression.Bytes);
-            }
+            var blocks = State.Records(LoadAsmBlocks);
             return result;
         }
     }

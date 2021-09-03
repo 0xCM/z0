@@ -18,6 +18,16 @@ namespace Z0.Asm
         public static ReadOnlySpan<string> operands(in SdmOpCode src)
             => text.split(src.Operands.Format(), Chars.Comma).Select(op => op.Trim());
 
+        public static Index<SdmOpCode> opcodes(ReadOnlySpan<SdmOpCodeDetail> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<SdmOpCode>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+                opcode(skip(src,i), out seek(dst,i));
+            return buffer;
+        }
+
         [MethodImpl(Inline), Op]
         public static ref SdmOpCode opcode(in SdmOpCodeDetail src, out SdmOpCode dst)
         {
@@ -238,10 +248,13 @@ namespace Z0.Asm
         [Op]
         public static string format(in SdmOpCode src)
         {
-            const string OpCodePattern = "{0}({1}) = {2}";
-            var operands = @readonly(text.split(src.Operands.Format(), Chars.Comma).Select(x => x.Trim()));
-            var ocformat = string.Format(OpCodePattern, src.Mnemonic, text.join(Chars.Comma, operands), src.Expr);
-            return string.Format("OpCode[{0:D4}]:{1}", src.OpCodeKey, ocformat);
+            const string OcPattern0 = "opcode({0}) = {1}";
+            const string OcPattern1 = "opcode({0}, {1}) = {2}";
+            var ops = operands(src);
+            if(ops.Length == 0)
+                return string.Format(OcPattern0, src.Mnemonic, src.Expr);
+            else
+                return string.Format(OcPattern1, src.Mnemonic, text.join(", ", ops), src.Expr);
         }
 
         [Op]
@@ -267,7 +280,5 @@ namespace Z0.Asm
             render(src, dst);
             return dst.Emit();
         }
-
-
     }
 }

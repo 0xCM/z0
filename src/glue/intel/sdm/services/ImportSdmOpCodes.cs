@@ -12,14 +12,14 @@ namespace Z0.Asm
 
     partial class IntelSdm
     {
-        public Index<SdmOpCodeDetail> ImportSdmOpCodes()
+        public Index<SdmOpCodeDetail> ImportSdmOpCodes(FS.FolderPath dir)
         {
             var result = Outcome.Success;
             var src = Ws.Sources().Datasets(AsmTableScopes.SdmInstructions).Files(FS.Csv).ToReadOnlySpan();
-            return ImportSdmOpCodes(src);
+            return ImportSdmOpCodes(src,dir);
         }
 
-        public Index<SdmOpCodeDetail> ImportSdmOpCodes(ReadOnlySpan<FS.FilePath> src)
+        public Index<SdmOpCodeDetail> ImportSdmOpCodes(ReadOnlySpan<FS.FilePath> src, FS.FolderPath dir)
         {
             var result = Outcome.Success;
             var count = src.Length;
@@ -38,7 +38,6 @@ namespace Z0.Asm
                     ref readonly var table = ref skip(tables,j);
                     var kind = (SdmTableKind)table.Kind;
                     ref readonly var symbol = ref kinds[kind];
-                    Write(string.Format("{0,-16} | {1,-12} | {2}", id, symbol.Expr, table.Source));
                     if(kind == SdmTableKind.OpCodes)
                     {
                         var current = slice(buffer, counter);
@@ -49,10 +48,10 @@ namespace Z0.Asm
 
             var rows = slice(buffer,0,counter).ToArray().Sort();
             for(var i=0u; i<rows.Length; i++)
-                seek(rows,i).OpCodeKey = i + 1;
+                seek(rows,i).OpCodeKey = i;
 
             var ws = Ws.Tables();
-            var outpath = ws.Table<SdmOpCodeDetail>();
+            var outpath = ws.TablePath<SdmOpCodeDetail>(dir);
             using var writer = outpath.UnicodeWriter();
             TableEmit(@readonly(rows), SdmOpCodeDetail.RenderWidths, writer, outpath);
             return rows;

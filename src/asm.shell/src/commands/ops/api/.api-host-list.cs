@@ -17,6 +17,7 @@ namespace Z0.Asm
             var ext = FS.ext(FS.ext("parsed"), FS.XPack);
             var files = src.Files(ext).ToReadOnlySpan();
             var count = files.Length;
+            var hex = list<ApiHostHex>();
             for(var i=0; i<count; i++)
             {
                 var file = skip(files,i);
@@ -29,12 +30,14 @@ namespace Z0.Asm
                 if(id == 0)
                     continue;
 
-                var uri = ApiHostUri.define(id,skip(elements,1));
+                var uri = ApiHostUri.define(id, skip(elements,1));
                 Write(uri);
 
-                result = Z0.HexPacks.load(file, out var pack);
+                result = Z0.HexPacks.load(file, out var blocks);
                 if(result.Fail)
                     return result;
+
+                hex.Add((uri, blocks));
             }
 
             return result;

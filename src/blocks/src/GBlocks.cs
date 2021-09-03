@@ -11,12 +11,12 @@ namespace Z0
     using static core;
 
     [ApiHost]
-    public readonly struct DataBlocks
+    public readonly struct GBlocks
     {
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock2<T> init<T>(N2 n, out DataBlock2<T> dst)
+        public static ref GBlock2<T> init<T>(N2 n, out GBlock2<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock3<T> init<T>(N3 n, out DataBlock3<T> dst)
+        public static ref GBlock3<T> init<T>(N3 n, out GBlock3<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock4<T> init<T>(N4 n, out DataBlock4<T> dst)
+        public static ref GBlock4<T> init<T>(N4 n, out GBlock4<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock5<T> init<T>(N5 n, out DataBlock5<T> dst)
+        public static ref GBlock5<T> init<T>(N5 n, out GBlock5<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -48,7 +48,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock6<T> init<T>(N6 n, out DataBlock6<T> dst)
+        public static ref GBlock6<T> init<T>(N6 n, out GBlock6<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -56,7 +56,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock7<T> init<T>(N7 n, out DataBlock7<T> dst)
+        public static ref GBlock7<T> init<T>(N7 n, out GBlock7<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock8<T> init<T>(N8 n, out DataBlock8<T> dst)
+        public static ref GBlock8<T> init<T>(N8 n, out GBlock8<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -72,7 +72,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock9<T> init<T>(N9 n, out DataBlock9<T> dst)
+        public static ref GBlock9<T> init<T>(N9 n, out GBlock9<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -80,7 +80,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock10<T> init<T>(N10 n, out DataBlock10<T> dst)
+        public static ref GBlock10<T> init<T>(N10 n, out GBlock10<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -88,7 +88,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock11<T> init<T>(N11 n, out DataBlock11<T> dst)
+        public static ref GBlock11<T> init<T>(N11 n, out GBlock11<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -96,7 +96,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock12<T> init<T>(N12 n, out DataBlock12<T> dst)
+        public static ref GBlock12<T> init<T>(N12 n, out GBlock12<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -104,7 +104,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock16<T> init<T>(N16 n, out DataBlock16<T> dst)
+        public static ref GBlock16<T> init<T>(N16 n, out GBlock16<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -112,146 +112,146 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock2<T> load<T>(ReadOnlySpan<T> src, ref DataBlock2<T> dst)
+        public static ref GBlock2<T> load<T>(ReadOnlySpan<T> src, ref GBlock2<T> dst)
             where T : unmanaged
         {
-            dst = first(recover<T,DataBlock2<T>>(src));
+            dst = first(recover<T,GBlock2<T>>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock3<T> load<T>(ReadOnlySpan<T> src, ref DataBlock3<T> dst)
+        public static ref GBlock3<T> load<T>(ReadOnlySpan<T> src, ref GBlock3<T> dst)
             where T : unmanaged
         {
-            dst = first(recover<T,DataBlock3<T>>(src));
+            dst = first(recover<T,GBlock3<T>>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock4<T> load<T>(ReadOnlySpan<T> src, ref DataBlock4<T> dst)
+        public static ref GBlock4<T> load<T>(ReadOnlySpan<T> src, ref GBlock4<T> dst)
             where T : unmanaged
         {
-            dst = first(recover<T,DataBlock4<T>>(src));
+            dst = first(recover<T,GBlock4<T>>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock5<T> load<T>(ReadOnlySpan<T> src, ref DataBlock5<T> dst)
+        public static ref GBlock5<T> load<T>(ReadOnlySpan<T> src, ref GBlock5<T> dst)
             where T : unmanaged
         {
-            dst = first(recover<T,DataBlock5<T>>(src));
+            dst = first(recover<T,GBlock5<T>>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock6<T> load<T>(ReadOnlySpan<T> src, ref DataBlock6<T> dst)
+        public static ref GBlock6<T> load<T>(ReadOnlySpan<T> src, ref GBlock6<T> dst)
             where T : unmanaged
         {
-            dst = first(recover<T,DataBlock6<T>>(src));
+            dst = first(recover<T,GBlock6<T>>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock7<T> load<T>(ReadOnlySpan<T> src, ref DataBlock7<T> dst)
+        public static ref GBlock7<T> load<T>(ReadOnlySpan<T> src, ref GBlock7<T> dst)
             where T : unmanaged
         {
-            dst = first(recover<T,DataBlock7<T>>(src));
+            dst = first(recover<T,GBlock7<T>>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock8<T> load<T>(ReadOnlySpan<T> src, ref DataBlock8<T> dst)
+        public static ref GBlock8<T> load<T>(ReadOnlySpan<T> src, ref GBlock8<T> dst)
             where T : unmanaged
         {
-            dst = first(recover<T,DataBlock8<T>>(src));
+            dst = first(recover<T,GBlock8<T>>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock12<T> load<T>(ReadOnlySpan<T> src, ref DataBlock12<T> dst)
+        public static ref GBlock12<T> load<T>(ReadOnlySpan<T> src, ref GBlock12<T> dst)
             where T : unmanaged
         {
-            dst = first(recover<T,DataBlock12<T>>(src));
+            dst = first(recover<T,GBlock12<T>>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref DataBlock16<T> load<T>(ReadOnlySpan<T> src, ref DataBlock16<T> dst)
+        public static ref GBlock16<T> load<T>(ReadOnlySpan<T> src, ref GBlock16<T> dst)
             where T : unmanaged
         {
-            dst = first(recover<T,DataBlock16<T>>(src));
+            dst = first(recover<T,GBlock16<T>>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly DataBlock2<T> store<T>(in DataBlock2<T> src, Span<T> dst)
+        public static ref readonly GBlock2<T> store<T>(in GBlock2<T> src, Span<T> dst)
             where T : unmanaged
         {
-            first(recover<T,DataBlock2<T>>(dst)) = src;
+            first(recover<T,GBlock2<T>>(dst)) = src;
             return ref src;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly DataBlock3<T> store<T>(in DataBlock3<T> src, Span<T> dst)
+        public static ref readonly GBlock3<T> store<T>(in GBlock3<T> src, Span<T> dst)
             where T : unmanaged
         {
-            first(recover<T,DataBlock3<T>>(dst)) = src;
+            first(recover<T,GBlock3<T>>(dst)) = src;
             return ref src;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly DataBlock4<T> store<T>(in DataBlock4<T> src, Span<T> dst)
+        public static ref readonly GBlock4<T> store<T>(in GBlock4<T> src, Span<T> dst)
             where T : unmanaged
         {
-            first(recover<T,DataBlock4<T>>(dst)) = src;
+            first(recover<T,GBlock4<T>>(dst)) = src;
             return ref src;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly DataBlock5<T> store<T>(in DataBlock5<T> src, Span<T> dst)
+        public static ref readonly GBlock5<T> store<T>(in GBlock5<T> src, Span<T> dst)
             where T : unmanaged
         {
-            first(recover<T,DataBlock5<T>>(dst)) = src;
+            first(recover<T,GBlock5<T>>(dst)) = src;
             return ref src;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly DataBlock6<T> store<T>(in DataBlock6<T> src, Span<T> dst)
+        public static ref readonly GBlock6<T> store<T>(in GBlock6<T> src, Span<T> dst)
             where T : unmanaged
         {
-            first(recover<T,DataBlock6<T>>(dst)) = src;
+            first(recover<T,GBlock6<T>>(dst)) = src;
             return ref src;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly DataBlock7<T> store<T>(in DataBlock7<T> src, Span<T> dst)
+        public static ref readonly GBlock7<T> store<T>(in GBlock7<T> src, Span<T> dst)
             where T : unmanaged
         {
-            first(recover<T,DataBlock7<T>>(dst)) = src;
+            first(recover<T,GBlock7<T>>(dst)) = src;
             return ref src;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly DataBlock8<T> store<T>(in DataBlock8<T> src, Span<T> dst)
+        public static ref readonly GBlock8<T> store<T>(in GBlock8<T> src, Span<T> dst)
             where T : unmanaged
         {
-            first(recover<T,DataBlock8<T>>(dst)) = src;
+            first(recover<T,GBlock8<T>>(dst)) = src;
             return ref src;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly DataBlock12<T> store<T>(in DataBlock12<T> src, Span<T> dst)
+        public static ref readonly GBlock12<T> store<T>(in GBlock12<T> src, Span<T> dst)
             where T : unmanaged
         {
-            first(recover<T,DataBlock12<T>>(dst)) = src;
+            first(recover<T,GBlock12<T>>(dst)) = src;
             return ref src;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly DataBlock16<T> store<T>(in DataBlock16<T> src, Span<T> dst)
+        public static ref readonly GBlock16<T> store<T>(in GBlock16<T> src, Span<T> dst)
             where T : unmanaged
         {
-            first(recover<T,DataBlock16<T>>(dst)) = src;
+            first(recover<T,GBlock16<T>>(dst)) = src;
             return ref src;
         }
     }

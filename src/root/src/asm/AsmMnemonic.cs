@@ -19,16 +19,22 @@ namespace Z0.Asm
             Name = src;
         }
 
+        public string Content
+        {
+            [MethodImpl(Inline)]
+            get => Name ?? EmptyString;
+        }
+
         public ReadOnlySpan<char> Data
         {
             [MethodImpl(Inline)]
-            get => Name;
+            get => Content;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Name?.Length ?? 0;
+            get => Content.Length;
         }
 
         public bool IsEmpty
@@ -44,11 +50,11 @@ namespace Z0.Asm
         }
 
         public override int GetHashCode()
-            => Name.GetHashCode();
+            => Content.GetHashCode();
 
         [MethodImpl(Inline)]
         public string Format()
-            => Name;
+            => Content;
 
         public string Format(MnemonicCase @case)
         {
@@ -73,7 +79,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public bool Equals(AsmMnemonic src)
-            => Name.Equals(src.Name);
+            => Content.Equals(src.Content);
 
         public override bool Equals(object src)
             => src is AsmMnemonic x && Equals(x);

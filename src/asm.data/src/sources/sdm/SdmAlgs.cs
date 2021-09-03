@@ -19,7 +19,6 @@ namespace Z0.Asm
         public static Comment comment(string src)
             => new Comment(src);
 
-
         public readonly struct Comparison
         {
             readonly uint Data;

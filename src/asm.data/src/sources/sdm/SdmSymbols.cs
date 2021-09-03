@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using static SdmModels;
 
-    using S = SdmModels.EncodingSigs;
+    using S = SdmModels.SdmEncodingSigs;
 
     [ApiComplete]
     public class SdmSymbols

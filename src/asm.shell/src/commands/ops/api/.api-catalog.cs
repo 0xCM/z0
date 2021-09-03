@@ -14,9 +14,11 @@ namespace Z0.Asm
         Outcome ApiCatalog(CmdArgs args)
         {
             var result = Outcome.Success;
-            var catalog = ApiRuntimeLoader.catalog();
+            var catalog = State.ApiCatalog(ApiRuntimeLoader.catalog);
             var parts = catalog.PartIdentities;
-            iter(parts, part => Write(part.Format()));
+            var desc = string.Format("Parts:[{0}]", parts.Map(p => p.Format()).Delimit());
+            Write(desc);
+            //iter(parts, part => Write(part.Format()));
             return result;
         }
     }

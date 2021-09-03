@@ -15,8 +15,8 @@ namespace Z0
         partial struct Types
         {
             [MethodImpl(Inline), Op]
-            public static Blit.TypeIndicator indicator(BlittableKind src)
-                => new Blit.TypeIndicator((ushort)skip(IndicatorCodes,(byte)src));
+            public static TypeIndicator indicator(BlittableKind src)
+                => default;
         }
     }
 }

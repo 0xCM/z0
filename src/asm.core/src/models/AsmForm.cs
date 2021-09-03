@@ -12,9 +12,9 @@ namespace Z0.Asm
 
     public readonly struct AsmForm
     {
-        public AsmSig Sig {get;}
+        readonly public AsmSig Sig;
 
-        public AsmOpCode OpCode {get;}
+        public readonly AsmOpCode OpCode;
 
         [MethodImpl(Inline)]
         public AsmForm(in AsmSig sig, in AsmOpCode oc)

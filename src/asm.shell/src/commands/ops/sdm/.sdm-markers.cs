@@ -22,11 +22,11 @@ namespace Z0.Asm
             var lines = Sdm.LoadImportedVolume(VolDigit.V2);
             var count = (uint)lines.Length;
 
-            var marker = SQ.marker(nameof(EncodingSigs.RexW), EncodingSigs.RexW);
+            var marker = SQ.marker(nameof(SdmEncodingSigs.RexW), SdmEncodingSigs.RexW);
             var matches = SdmMarkers(n5, lines, marker);
             DisplayMatches(lines, marker, matches);
 
-            marker = SQ.marker(nameof(EncodingSigs.ModRm), EncodingSigs.ModRm);
+            marker = SQ.marker(nameof(SdmEncodingSigs.ModRm), SdmEncodingSigs.ModRm);
             matches = SdmMarkers(n6, lines, marker);
             DisplayMatches(lines, marker, matches);
             return result;

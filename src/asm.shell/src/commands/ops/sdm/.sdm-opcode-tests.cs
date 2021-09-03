@@ -14,16 +14,20 @@ namespace Z0.Asm
         public Outcome TestOcStrings(CmdArgs args)
         {
             var result = Outcome.Success;
-            var runtime = MemoryStrings.load(OpCodeStrings.Offsets, OpCodeStrings.Data);
+            var strings = MemoryStrings.load(OpCodeStrings.Offsets, OpCodeStrings.Data);
             var offsets = recover<uint>(OpCodeStrings.Offsets);
             var formatter = Tables.formatter<MemoryStrings>();
-            Write(formatter.Format(runtime, RecordFormatKind.KeyValuePairs));
+            Write(formatter.Format(strings, RecordFormatKind.KeyValuePairs));
 
-            result = CheckOffsets(runtime,offsets);
+            result = CheckOffsets(strings,offsets);
             if(result.Fail)
                 return result;
             else
-                Write("Success");
+            {
+                var count = strings.EntryCount;
+                for(var i=0; i<count; i++)
+                    Write(text.format(strings[i]));
+            }
 
             return result;
         }

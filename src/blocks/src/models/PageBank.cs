@@ -13,21 +13,6 @@ namespace Z0
 
     using api = PageBlocks;
 
-    public interface IPageBank<N,T>
-        where T : unmanaged, IPageBlock<T>
-        where N : unmanaged, ITypeNat
-    {
-        MemoryAddress BaseAddress {get;}
-
-        uint PageCount
-            => api.PageCount<T>();
-
-        ByteSize Size => size<T>();
-
-        MemoryRange Range
-            => (BaseAddress, BaseAddress + Size);
-    }
-
     public struct PageBank<N,T> : IPageBank<N,T>
         where T : unmanaged, IPageBlock<T>
         where N : unmanaged, ITypeNat

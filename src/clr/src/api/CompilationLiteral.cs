@@ -15,7 +15,7 @@ namespace Z0
     {
         public const string TableId = "literals.defs";
 
-        public const byte FieldCount = 4;
+        public const byte FieldCount = 5;
 
         public string Source;
 
@@ -23,9 +23,11 @@ namespace Z0
 
         public string Kind;
 
+        public uint Length;
+
         public RuntimeLiteralValue<string> Value;
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{32,16,12,1};
+            => new byte[FieldCount]{32,32,12,12,1};
     }
 }

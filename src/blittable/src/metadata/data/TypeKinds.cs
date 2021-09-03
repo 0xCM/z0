@@ -12,6 +12,8 @@ namespace Z0
     {
         partial struct Types
         {
+            const byte TypeKindCount = 19;
+
             internal static ReadOnlySpan<BlittableKind> TypeKinds
                 => new BlittableKind[TypeKindCount]{
                     K.Unknown,
@@ -24,29 +26,15 @@ namespace Z0
                     K.Array,
                     K.Tensor,
                     K.Domain,
-                    K.Sequence,
+                    K.Seq,
                     K.Grid,
                     K.Name,
                     K.BitVector,
                     K.List,
                     K.Function,
-                    K.Map,
-
-                    K.K17,
-                    K.K18,
-                    K.K19,
-                    K.K20,
-                    K.K21,
-                    K.K22,
-                    K.K23,
-                    K.K24,
-                    K.K26,
-                    K.K26,
-                    K.K27,
-                    K.K28,
-                    K.K29,
-                    K.K30,
-                    K.K31,
+                    K.Pair,
+                    K.Block,
+                    K.Tuple,
                     };
         }
     }

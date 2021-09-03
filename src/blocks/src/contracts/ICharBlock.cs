@@ -8,7 +8,7 @@ namespace Z0
 
     using static core;
 
-    public interface ICharBlock<T> : ITextual, IComparable<T>, IEquatable<T>, IBlittable<T>
+    public interface ICharBlock<T> : ITextual, IComparable<T>, IEquatable<T>, IBlittable<T>, IDataBlock<T>
         where T : unmanaged, ICharBlock<T>
     {
         Span<char> Data {get;}
@@ -18,6 +18,12 @@ namespace Z0
         int Length {get;}
 
         uint Capacity {get;}
+
+        ByteSize IDataBlock.Size
+            => Length*2;
+
+        Span<byte> IDataBlock.Bytes
+            => recover<byte>(Data);
 
         Span<byte> IBlittable.Edit
             => recover<byte>(Data);

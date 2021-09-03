@@ -14,10 +14,9 @@ namespace Z0
     {
         partial struct Types
         {
-            [MethodImpl(Inline), Op, Closures(Closure)]
-            public static GridSpec gridspec<T>(uint rows, uint cols)
-                where T : unmanaged
-                    => CellCalcs.gridspec((ushort)rows, (ushort)cols, (ushort)width<T>());
+            [MethodImpl(Inline), Op]
+            internal static TypeCode code(Type src)
+                => new TypeCode((ulong)src.MetadataToken);
         }
     }
 }

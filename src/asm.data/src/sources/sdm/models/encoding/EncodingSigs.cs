@@ -6,7 +6,8 @@ namespace Z0.Asm
 {
     partial struct SdmModels
     {
-        public readonly struct EncodingSigs
+        [LiteralProvider]
+        public readonly struct SdmEncodingSigs
         {
             const string _ = "_";
 

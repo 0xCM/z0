@@ -18,7 +18,7 @@ namespace Z0
     /// 13 bytes of storage
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock13 : IStorageBlock<B>
+    public struct ByteBlock13 : IDataBlock<B>
     {
         public const ushort Size = 13;
 
@@ -50,6 +50,17 @@ namespace Z0
             get => !api.empty(this);
         }
 
+        public ref byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(First,index);
+        }
+
+        public ref byte this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(First,index);
+        }
 
         [MethodImpl(Inline)]
         public Span<T> Storage<T>()

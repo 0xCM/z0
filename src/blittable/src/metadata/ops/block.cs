@@ -14,9 +14,15 @@ namespace Z0
     {
         partial struct Types
         {
+            /// <summary>
+            /// Defines a block specification
+            /// </summary>
+            /// <param name="capacity"></param>
+            /// <param name="cellwidth"></param>
+            /// <param name="cellkind"></param>
             [MethodImpl(Inline), Op]
-            public static ReadOnlySpan<Blit.TypeIndicator> indicators()
-                => recover<AsciCode,Blit.TypeIndicator>(IndicatorCodes);
+            public static DataBlock block(ByteSize capacity, BitWidth cellwidth, BlittableKind cellkind)
+                => new DataBlock(capacity, cellwidth, cellkind);
         }
     }
 }

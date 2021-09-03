@@ -539,8 +539,8 @@ OpCodeStrings            | 536          | 66 0F 29 /r
 OpCodeStrings            | 537          | NP 0F 28 /r
 OpCodeStrings            | 538          | NP 0F 29 /r
 OpCodeStrings            | 539          | NP 0F 6E /r
-OpCodeStrings            | 540          | 66 0F 7E /r
-OpCodeStrings            | 541          | NP 0F 7E /r
+OpCodeStrings            | 540          | NP 0F 7E /r
+OpCodeStrings            | 541          | 66 0F 7E /r
 OpCodeStrings            | 542          | 66 0F 6E /r
 OpCodeStrings            | 543          | 66 0F 38 F8 /r
 OpCodeStrings            | 544          | 66 0F 6F /r
@@ -554,8 +554,8 @@ OpCodeStrings            | 551          | F3 0F 7F /r
 OpCodeStrings            | 552          | NP 0F 6F /r
 OpCodeStrings            | 553          | NP REX.W + 0F 6E /r
 OpCodeStrings            | 554          | NP 0F 7F /r
-OpCodeStrings            | 555          | 66 REX.W 0F 7E /r
-OpCodeStrings            | 556          | NP REX.W + 0F 7E /r
+OpCodeStrings            | 555          | NP REX.W + 0F 7E /r
+OpCodeStrings            | 556          | 66 REX.W 0F 7E /r
 OpCodeStrings            | 557          | 66 REX.W 0F 6E /r
 OpCodeStrings            | 558          | F3 0F 7E /r
 OpCodeStrings            | 559          | 66 0F D6 /r

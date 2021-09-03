@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static SdmModels;
-    using static SdmModels.EncodingSigs;
+    using static SdmModels.SdmEncodingSigs;
 
     using K = SdmModels.ModRmEncKind;
 

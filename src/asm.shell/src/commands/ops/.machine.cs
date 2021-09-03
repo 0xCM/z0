@@ -18,7 +18,7 @@ namespace Z0.Asm
             var tables = Ws.Tables();
             var tokens = Wf.AsmTokens();
 
-            var literals = EmitApiLiterals();
+            var literals = Wf.TableLoaders().ApiLiterals();
 
             result = GenModRmBits();
             if(result.Fail)

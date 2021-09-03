@@ -36,8 +36,7 @@ namespace Z0
             ref T this[uint row, uint col] {get;}
 
             GridSpec IGrid.Spec
-                => Types.gridspec<T>(M,N);
-
+                => Types.grid<T>(M,N);
         }
 
         [Free]

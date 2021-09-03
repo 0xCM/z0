@@ -46,30 +46,36 @@ namespace Z0
         public PartId Part
             => Host.Part;
 
+        public string Content
+        {
+            [MethodImpl(Inline)]
+            get => UriText ?? EmptyString;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Host.IsEmpty && OpId.IsEmpty;
+            get => Content.Length == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !IsEmpty;
+            get => Content.Length != 0;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => UriText;
+            => Content;
 
         public int CompareTo(OpUri src)
-            => (UriText).CompareTo(src.UriText);
+            => (Content).CompareTo(src.Content);
 
         public bool Equals(OpUri src)
-            => (UriText).Equals(src.UriText, NoCase);
+            => (Content).Equals(src.Content, NoCase);
 
         public override int GetHashCode()
-            => UriText?.GetHashCode() ?? 0;
+            => Content.GetHashCode();
 
         public override bool Equals(object src)
             => src is OpUri a && Equals(a);

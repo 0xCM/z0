@@ -9,12 +9,13 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static vcore;
 
     partial class ByteBlocks
     {
         [MethodImpl(Inline)]
         public static bool empty<T>(in T src)
-            where T : unmanaged, IStorageBlock<T>
+            where T : unmanaged, IDataBlock<T>
         {
             var b = src.Bytes;
             var count = b.Length;

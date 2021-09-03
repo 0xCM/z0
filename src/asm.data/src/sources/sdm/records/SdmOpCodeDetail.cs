@@ -12,7 +12,7 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId), Blittable]
     public struct SdmOpCodeDetail : IRecord<SdmOpCodeDetail>, IComparable<SdmOpCodeDetail>
     {
-        public const string TableId = "sdm.opcodes";
+        public const string TableId = "sdm.opcodes.details";
 
         public const byte FieldCount = 10;
 

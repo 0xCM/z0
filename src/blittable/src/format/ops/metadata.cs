@@ -17,23 +17,12 @@ namespace Z0
         partial class Render
         {
             [Op]
-            public static string format(TypeIndicator src)
-            {
-                Span<char> dst = stackalloc char[2];
-                var c1 = (char)((byte)src.Data >> 8);
-                seek(dst,0) = (char)((byte)src.Data);
-                seek(dst,1) = c1;
-                var length = 1 + (c1 != 0 ? 1 : 0);
-                return text.format(slice(dst,0,length));
-            }
-
-            [Op]
             public static string format(DataType src)
             {
-                const byte Max = 32;
+                const byte Max = 64;
                 var i=0u;
                 Span<char> dst = stackalloc char[Max];
-                seek(dst,i++) = indicator(src.Kind);
+                text.copy(indicator(src.Kind).Format(), ref i, dst);
                 switch(src.Kind)
                 {
                     case Unsigned:
@@ -53,7 +42,7 @@ namespace Z0
                     break;
                     case BlittableKind.Domain:
                     break;
-                    case BlittableKind.Sequence:
+                    case BlittableKind.Seq:
                     break;
                     case BlittableKind.Grid:
                     break;

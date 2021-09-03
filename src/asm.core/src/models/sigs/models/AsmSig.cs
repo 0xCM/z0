@@ -42,7 +42,7 @@ namespace Z0.Asm
 
         internal AsmSigOpExpr Op3;
 
-        public byte OperandCount {get;}
+        public readonly byte OperandCount;
 
         [MethodImpl(Inline)]
         public AsmSig(AsmMnemonic monic)

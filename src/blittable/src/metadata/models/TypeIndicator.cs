@@ -4,33 +4,31 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial struct Blit
     {
         public readonly struct TypeIndicator
         {
-            public ushort Data {get;}
+            public text7 Name {get;}
 
             [MethodImpl(Inline)]
-            internal TypeIndicator(ushort symbol)
+            public TypeIndicator(text7 name)
             {
-                Data = symbol;
+                Name = name;
             }
 
-            [MethodImpl(Inline)]
-            public static implicit operator char(TypeIndicator src)
-                => (char)src.Data;
-
             public string Format()
-                => Render.format(this);
+                => Render.format(Name);
 
             public override string ToString()
                 => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator TypeIndicator(text7 name)
+                => new TypeIndicator(name);
         }
     }
 }

@@ -9,7 +9,6 @@ namespace Z0
         [ApiHost]
         public readonly partial struct Types
         {
-            const byte TypeKindCount = 32;
         }
     }
 }

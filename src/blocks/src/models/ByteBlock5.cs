@@ -12,12 +12,13 @@ namespace Z0
     using static core;
 
     using B = ByteBlock5;
+    using api = ByteBlocks;
 
     /// <summary>
     /// 5 bytes of storage
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock5 : IStorageBlock<B>
+    public struct ByteBlock5 : IDataBlock<B>
     {
         public const ushort Size = 5;
 
@@ -35,6 +36,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref first(Bytes);
+        }
+
+        public ref byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(First,index);
+        }
+
+        public ref byte this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(First,index);
         }
 
         [MethodImpl(Inline)]

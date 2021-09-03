@@ -15,15 +15,12 @@ namespace Z0
     [ApiHost]
     public class ApiCatalogs : AppService<ApiCatalogs>
     {
-        ApiJit ApiJit;
-
         ApiQuery Query;
 
         ApiRuntime Runtime;
 
         protected override void OnInit()
         {
-            ApiJit = Wf.ApiJit();
             Query = Wf.ApiQuery();
             Runtime = Wf.ApiRuntime();
         }

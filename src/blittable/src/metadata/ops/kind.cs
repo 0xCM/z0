@@ -15,12 +15,12 @@ namespace Z0
         partial struct Types
         {
             [MethodImpl(Inline), Op]
-            public static BlittableKind typekind(byte index)
-                => skip(TypeKinds, index);
+            public static BlittableKind kind(byte index)
+                => skip(TypeKinds, clamp(index, (byte)(TypeKinds.Length - 1)));
 
             [MethodImpl(Inline), Op]
-            internal static TypeCode typecode(Type src)
-                => new TypeCode((ulong)src.MetadataToken);
+            static byte clamp(byte src, byte max)
+                => src <= max ? src : max;
         }
     }
 }

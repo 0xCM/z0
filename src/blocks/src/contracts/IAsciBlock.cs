@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IAsciBlock<T> : IStorageBlock<T>
+    public interface IAsciBlock<T> : IDataBlock<T>
         where T : unmanaged, IAsciBlock<T>
     {
         ref byte First {get;}

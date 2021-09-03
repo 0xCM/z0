@@ -70,7 +70,7 @@ namespace Z0
             public GridSpec Spec
             {
                 [MethodImpl(Inline)]
-                get => Types.gridspec<T>(M,N);
+                get => Types.grid<T>(M,N);
             }
         }
     }

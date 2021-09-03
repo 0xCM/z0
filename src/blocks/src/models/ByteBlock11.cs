@@ -12,12 +12,13 @@ namespace Z0
     using static core;
 
     using B = ByteBlock11;
+    using api = ByteBlocks;
 
     /// <summary>
     /// 11 bytes of storage
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
-    public struct ByteBlock11 : IStorageBlock<B>
+    public struct ByteBlock11 : IDataBlock<B>
     {
         public const ushort Size = 11;
 

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using M = SdmModels.EncodingSigs;
+    using M = SdmModels.SdmEncodingSigs;
 
     partial struct SdmModels
     {

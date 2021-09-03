@@ -8,13 +8,20 @@ namespace Z0
 
     using static core;
 
-    public interface IStorageBlock<T>
-        where T : unmanaged, IStorageBlock<T>
+    public interface IDataBlock
     {
-        ByteSize Size
+        ByteSize Size {get;}
+
+        Span<byte> Bytes {get;}
+    }
+
+    public interface IDataBlock<T> : IDataBlock
+        where T : unmanaged, IDataBlock<T>
+    {
+        ByteSize IDataBlock.Size
             => size<T>();
 
-        Span<byte> Bytes
+        Span<byte> IDataBlock.Bytes
             => bytes((T)this);
     }
 }

@@ -74,6 +74,8 @@ namespace Z0.Asm
 
         OmniScript OmniScript;
 
+        TableLoaders Loaders;
+
         llvm.LlvmNm LlvmNm;
 
         FS.FolderPath AsmRoot
@@ -123,6 +125,7 @@ namespace Z0.Asm
             AsmToolSvc = Wf.AsmTools();
             AsmEtl = Wf.AsmEtl();
             LlvmEtl = Wf.LlvmEtl();
+            Loaders = Wf.TableLoaders();
             OmniScript = Wf.OmniScript();
             LlvmNm = Wf.LlvmNm();
             State.Init(Wf,Ws);
