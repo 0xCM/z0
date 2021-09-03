@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         public const byte FieldCount = 10;
 
-        public uint OpCodeId;
+        public uint OpCodeKey;
 
         public CharBlock16 Mnemonic;
 

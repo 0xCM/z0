@@ -12,7 +12,7 @@ namespace Z0.Asm
     using K = RegKind;
     using T = System.UInt64;
     using G = RegModels.kreg;
-    using api = AsmRegBits;
+    using api = AsmRegs;
 
     partial struct RegModels
     {

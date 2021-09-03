@@ -10,6 +10,7 @@ namespace Z0
     using static Root;
     using static core;
     using static HexFormatSpecs;
+    using static Msg;
 
     using X = HexDigitFacets;
     using C = AsciChar;
@@ -17,6 +18,30 @@ namespace Z0
 
     partial struct Hex
     {
+        public static Outcome parse(string src, out BinaryCode dst)
+        {
+            var result = Outcome.Success;
+            var count = text.length(src);
+            if(count % 2 != 0)
+                return (false, UnevenNibbles.Format(src));
+            var size = count/2;
+            var buffer = alloc<byte>(size);
+            var input = span(src);
+            ref var output = ref first(buffer);
+            for(int i=0, j=0; i<count; i+=2, j++)
+            {
+                result = parse(skip(input,i), skip(input, i+1), out seek(output, j));
+                if(result.Fail)
+                {
+                    dst = BinaryCode.Empty;
+                    return result;
+                }
+            }
+
+            dst = buffer;
+            return true;
+        }
+
         /// <summary>
         /// Parses a nibble
         /// </summary>

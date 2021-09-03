@@ -88,7 +88,7 @@ namespace Z0.Asm
             {
                 ref readonly var seg = ref skip(src,i);
                 buffer.Clear();
-                writer.WriteLine(HexPacks.linepack(seg, i, buffer));
+                writer.WriteLine(MemoryStore.linepack(seg, i, buffer));
             }
             Wf.EmittedFile(flow, count);
         }
@@ -103,7 +103,7 @@ namespace Z0.Asm
             {
                 ref readonly var seg = ref skip(src,i);
                 buffer.Clear();
-                writer.WriteLine(HexPacks.arraypack(seg, i, buffer));
+                writer.WriteLine(MemoryStore.arraypack(seg, i, buffer));
             }
             Wf.EmittedFile(flow, count);
         }

@@ -33,7 +33,7 @@ namespace Z0.Asm
                 ref var current = ref seek(dst,i);
                 current = form(
                     sig(opcode.Mnemonic.Format(), SdmModels.operands(opcode)),
-                    asm.opcode((ushort)opcode.OpCodeId, opcode.Expr)
+                    asm.opcode(opcode.OpCodeKey, opcode.Expr)
                     );
             }
             return buffer;

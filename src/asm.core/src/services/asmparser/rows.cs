@@ -24,8 +24,7 @@ namespace Z0.Asm
             var rows = doc.RowData.View;
             for(var i=0; i<count; i++)
             {
-                ref readonly var row = ref skip(rows, i);
-                var result = AsmParser.row(row, out seek(dst, i));
+                var result = row(skip(rows, i), out seek(dst, i));
                 if(result.Fail)
                     return result;
             }
@@ -37,7 +36,6 @@ namespace Z0.Asm
             var cells = src.Header.Labels.Count;
             if(cells != SdmOpCodeDetail.FieldCount)
                 return (false, FieldCountMismatch.Format(SdmOpCodeDetail.FieldCount, cells));
-
             return rows(src.Rows, dst);
         }
 
@@ -49,8 +47,7 @@ namespace Z0.Asm
             var count = min(src.Length, dst.Length);
             for(var i=0; i<count; i++)
             {
-                ref readonly var row = ref skip(src,i);
-                result = AsmParser.row(row, out seek(dst, i));
+                result = row(skip(src,i), out seek(dst, i));
                 if(result.Fail)
                       warn(result.Message);
             }
@@ -62,7 +59,7 @@ namespace Z0.Asm
         {
             var results = bag<Outcome<uint>>();
             iter(src, doc => {
-                results.Add(AsmParser.rows(doc, dst));
+                results.Add(rows(doc, dst));
             }, true);
             return results.ToArray();
         }
@@ -71,14 +68,13 @@ namespace Z0.Asm
         {
             var counter = 0u;
             if(doc.Header.Labels.Length != R.FieldCount)
-                return (false, AppMsg.FieldCountMismatch.Format(R.FieldCount, doc.Header.Labels.Length));
+                return (false, FieldCountMismatch.Format(R.FieldCount, doc.Header.Labels.Length));
 
             var count = doc.RowCount;
             var rows = doc.RowData.View;
             for(var i=0; i<count; i++)
             {
-                ref readonly var row = ref skip(rows,i);
-                var result = AsmParser.row(row, out R statement);
+                var result = row(skip(rows,i), out R statement);
                 if(result)
                 {
                     dst.Add(statement);
@@ -89,7 +85,5 @@ namespace Z0.Asm
             }
             return counter;
         }
-
-
     }
 }

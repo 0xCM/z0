@@ -14,15 +14,15 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(ushort sdmkey, in CharBlock48 expr)
-            => new AsmOpCode(sdmkey, 0, AsmOpCodeBits.Empty, expr);
+        public static AsmOpCode opcode(uint key, in CharBlock48 expr)
+            => new AsmOpCode(key, AsmOpCodeBits.Empty, expr);
 
         [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(ushort sdmkey, AsmId id, in CharBlock48 expr)
-            => new AsmOpCode(sdmkey, id, AsmOpCodeBits.Empty, expr);
+        public static AsmOpCode opcode(AsmId id, in CharBlock48 expr)
+            => new AsmOpCode(id, AsmOpCodeBits.Empty, expr);
 
         [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(ushort sdmkey, AsmId asmid, AsmOpCodeBits bits, in CharBlock48 expr)
-            => new AsmOpCode(sdmkey, asmid, bits, expr);
+        public static AsmOpCode opcode(AsmId asmid, AsmOpCodeBits bits, in CharBlock48 expr)
+            => new AsmOpCode(asmid, bits, expr);
     }
 }

@@ -33,7 +33,6 @@ namespace Z0.llvm
             }
 
             return result;
-
         }
 
         void ProcessConfig(Sym<K> sym, TextLine src)

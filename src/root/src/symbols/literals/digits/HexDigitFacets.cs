@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
+    [LiteralProvider]
     public readonly struct HexDigitFacets
     {
         public const HexDigitCode MinScalarCode = HexDigitCode.x0;

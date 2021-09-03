@@ -64,9 +64,7 @@ namespace Z0.llvm
         }
 
         public Outcome<FS.FilePath> Load(LlvmDatasetKind kind, ref LlvmRecordSources dst)
-        {
-            return load(Ws.Sources(), kind,ref dst);
-        }
+            => load(Ws.Sources(), kind,ref dst);
 
         Outcome<FS.FilePath> load(IWorkspace sources, LlvmDatasetKind kind, ref LlvmRecordSources dst)
         {

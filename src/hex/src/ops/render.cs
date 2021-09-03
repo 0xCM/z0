@@ -23,6 +23,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static uint render(UpperCased @case, Hex8 src, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            seek(dst, i++) = hexchar(@case, src.Hi);
+            seek(dst, i++) = hexchar(@case, src.Lo);
+            return i - i0;
+        }
+
+        [MethodImpl(Inline), Op]
         public static uint render(LowerCased @case, byte src, ref uint i, Span<char> dst)
         {
             var i0 = i;

@@ -49,7 +49,7 @@ namespace Z0.Asm
 
             var rows = slice(buffer,0,counter).ToArray().Sort();
             for(var i=0u; i<rows.Length; i++)
-                seek(rows,i).OpCodeId = i + 1;
+                seek(rows,i).OpCodeKey = i + 1;
 
             var ws = Ws.Tables();
             var outpath = ws.Table<SdmOpCodeDetail>();

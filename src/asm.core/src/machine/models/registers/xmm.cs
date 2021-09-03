@@ -30,7 +30,7 @@ namespace Z0.Asm
             public RegIndexCode Index
             {
                 [MethodImpl(Inline)]
-                get => AsmRegBits.index(RegKind);
+                get => AsmRegs.index(RegKind);
             }
         }
 

@@ -24,13 +24,7 @@ namespace Z0
                 ref readonly var code = ref skip(src,i);
                 seek(target, i) = new MemoryBlock(code.Address, code.Size, code.Encoded);
             }
-            var packed = Z0.HexPacks.pack(buffer);
-            HexPacks.Emit(packed,dst);
-
-            // var found = ApiExtracts.terminals(src, blocks);
-            // var packed = Z0.HexPacks.pack(blocks);
-            // HexPacks.Emit(packed, dst);
-            // Wf.Status(string.Format("Identified {0} terminals from {1} methods", found, count));
+            HexPacks.Emit(MemoryStore.pack(buffer),dst);
             return count;
         }
     }

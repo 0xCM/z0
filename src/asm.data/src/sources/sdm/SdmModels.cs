@@ -21,7 +21,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static ref SdmOpCode opcode(in SdmOpCodeDetail src, out SdmOpCode dst)
         {
-            dst.OpCodeId = src.OpCodeId;
+            dst.OpCodeKey = src.OpCodeKey;
             dst.Mnemonic = src.Mnemonic;
             operands(src, out dst.Operands);
             dst.Expr = src.OpCode;
@@ -241,7 +241,7 @@ namespace Z0.Asm
             const string OpCodePattern = "{0}({1}) = {2}";
             var operands = @readonly(text.split(src.Operands.Format(), Chars.Comma).Select(x => x.Trim()));
             var ocformat = string.Format(OpCodePattern, src.Mnemonic, text.join(Chars.Comma, operands), src.Expr);
-            return string.Format("OpCode[{0:D4}]:{1}", src.OpCodeId, ocformat);
+            return string.Format("OpCode[{0:D4}]:{1}", src.OpCodeKey, ocformat);
         }
 
         [Op]

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using Z0.llvm;
     using static core;
 
     using F = llvm.AsmRecordField;

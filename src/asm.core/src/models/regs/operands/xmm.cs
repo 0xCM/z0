@@ -62,7 +62,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => AsmRegBits.reg(src.WidthCode, src.RegClassCode, src.Index);
+                => api.reg(src.WidthCode, src.RegClassCode, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)

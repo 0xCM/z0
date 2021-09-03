@@ -13,9 +13,9 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential,Pack=1)]
     public struct AsmOperand : IAsmOperand
     {
-        public AsmOpClass OpClass {get;}
+        public readonly AsmOpClass OpClass;
 
-        public NativeSize Size {get;}
+        public readonly NativeSize Size;
 
         ByteBlock10 _Data {get;}
 
@@ -100,6 +100,12 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => OpClass == 0;
         }
+
+        AsmOpClass IAsmOperand.OpClass
+            => OpClass;
+
+        NativeSize IAsmOperand.Size
+            => Size;
 
         [MethodImpl(Inline)]
         public static implicit operator AsmOperand(RegOp src)

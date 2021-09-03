@@ -40,22 +40,28 @@ namespace Z0.Asm
             get => AsmOpClass.R;
         }
 
+        public bit IsInvalid
+        {
+            [MethodImpl(Inline)]
+            get => Data == ushort.MaxValue;
+        }
+
         public NativeWidthCode WidthCode
         {
             [MethodImpl(Inline)]
-            get => AsmRegBits.width(this);
+            get => AsmRegs.width(this);
         }
 
         public RegClassCode RegClassCode
         {
             [MethodImpl(Inline)]
-            get => AsmRegBits.@class(this);
+            get => AsmRegs.@class(this);
         }
 
         public RegIndexCode Index
         {
             [MethodImpl(Inline)]
-            get => AsmRegBits.index(this);
+            get => AsmRegs.index(this);
         }
 
         public RegWidth RegWidth
@@ -90,12 +96,17 @@ namespace Z0.Asm
         public string Format()
             => Name.Format().Trim();
 
-
         public override string ToString()
             =>  Format();
 
         [MethodImpl(Inline)]
         public static implicit operator RegOp(RegKind kind)
             => new RegOp((ushort)kind);
+
+        public static RegOp Invalid
+        {
+            [MethodImpl(Inline)]
+            get => new RegOp(ushort.MaxValue);
+        }
     }
 }

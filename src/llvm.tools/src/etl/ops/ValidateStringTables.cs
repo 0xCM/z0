@@ -4,12 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static core;
-    using static WsAtoms;
-    using static Root;
 
     using ST = llvm.stringtables;
 

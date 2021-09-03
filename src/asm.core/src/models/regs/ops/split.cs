@@ -4,15 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
+     using System;
+     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial class AsmSpecs
+    partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static CallRel32 call(MemoryAddress client, uint dx)
-            => new CallRel32(client, dx);
+        public static void split(RegKind src, out RegIndexCode c, out RegClassCode k, out NativeWidthCode w)
+        {
+            c = index(src);
+            k = @class(src);
+            w = width(src);
+        }
     }
 }

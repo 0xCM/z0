@@ -17,12 +17,14 @@ namespace Z0
             => new HexArray(src);
 
         [MethodImpl(Inline), Op]
-        public static uint hexarray(ReadOnlySpan<byte> src, Span<char> dst)
+        public static uint hexarray(ReadOnlySpan<byte> src, Span<char> dst, bool brackets = false)
         {
             var j = 0u;
             var count = src.Length;
             var max = dst.Length;
-            seek(dst,j++) = Chars.LBracket;
+            if(brackets)
+                seek(dst,j++) = Chars.LBracket;
+
             for(var i=0; i<count && j<max; i++)
             {
                 ref readonly var b = ref skip(src,i);
@@ -33,7 +35,9 @@ namespace Z0
                 if(i != count-1)
                     seek(dst,j++) = Chars.Comma;
             }
-            seek(dst,j++) = Chars.RBracket;
+
+            if(brackets)
+                seek(dst,j++) = Chars.RBracket;
             return j;
         }
 

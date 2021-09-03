@@ -347,7 +347,7 @@ namespace Z0.Asm
         public static string regop<T>(T src)
             where T : unmanaged, IRegOp<T>
         {
-            var op = AsmRegBits.reg(src.WidthCode, src.RegClassCode, src.Index);
+            var op = AsmRegs.reg(src.WidthCode, src.RegClassCode, src.Index);
             return op.Name.Format();
         }
 

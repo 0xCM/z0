@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-
     using static core;
     using static WsAtoms;
 
@@ -50,18 +49,5 @@ namespace Z0.llvm
             datasets.OpCodeData = _LlvmOpCodes;
             return result;
         }
-
-         void Emit(TableGenRecord src, FS.FilePath dst)
-         {
-            using var writer = dst.AsciWriter();
-            foreach(var line in src.Lines)
-            {
-                writer.WriteLine(line.Content);
-                Write(line);
-            }
-
-            if(src.Fields.Count != 0)
-                iter(src.Fields, f => Write(f));
-         }
    }
 }

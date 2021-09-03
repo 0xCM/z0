@@ -20,7 +20,7 @@ namespace Z0.Asm
             for(var i=0; i<j; i++)
             {
                 ref readonly var candidate = ref skip(src,i);
-                if(AsmRegBits.invalid(candidate.Index))
+                if(invalid(candidate.Index))
                     continue;
 
                 if(candidate.RegClassCode == @class)
@@ -38,7 +38,7 @@ namespace Z0.Asm
             {
                 ref readonly var candidate = ref skip(src,i);
 
-                if(AsmRegBits.invalid(candidate.Index))
+                if(invalid(candidate.Index))
                     continue;
 
                 if(candidate.WidthCode == width)
@@ -56,7 +56,7 @@ namespace Z0.Asm
             {
                 ref readonly var candidate = ref skip(src,i);
 
-                if(AsmRegBits.invalid(candidate.Index))
+                if(invalid(candidate.Index))
                     continue;
 
                 if(candidate.WidthCode == width && candidate.RegClassCode == @class)

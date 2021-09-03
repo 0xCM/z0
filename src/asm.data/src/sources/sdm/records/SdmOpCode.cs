@@ -12,7 +12,7 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct SdmOpCode
     {
-        public uint OpCodeId;
+        public uint OpCodeKey;
 
         public CharBlock16 Mnemonic;
 

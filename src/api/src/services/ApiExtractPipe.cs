@@ -15,6 +15,28 @@ namespace Z0
         public FS.Files RawExtractPaths()
             => Db.RawExtractPaths();
 
+        public static Outcome parse(string src, out ApiExtractBlock dst)
+        {
+            dst = ApiExtractBlock.Empty;
+            try
+            {
+                var parts = src.SplitClean(FieldDelimiter);
+                var parser = HexParsers.bytes();
+                if(parts.Length != 3)
+                    return (false, $"components = {parts.Length} != 3");
+
+                var address = HexParsers.scalar().Parse(parts[(byte)ApiExtractField.Base]).ValueOrDefault();
+                var uri = ApiUri.parse(parts[(byte)ApiExtractField.Uri].Trim()).ValueOrDefault();
+                var bytes = parts[(byte)ApiExtractField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
+                dst = new ApiExtractBlock(address, uri.Format(), bytes);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+        }
+
         public uint Load(FS.FilePath src, List<ApiExtractBlock> dst)
         {
             var lines = src.ReadLines().View;
@@ -25,7 +47,7 @@ namespace Z0
             for(var i=1u; i<count; i++)
             {
                 ref readonly var line = ref skip(lines,i);
-                result = ApiExtractBlock.parse(line, out var block);
+                result = parse(line, out var block);
                 if(result.Ok)
                 {
                     dst.Add(block);

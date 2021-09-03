@@ -13,7 +13,14 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static RegRange range(RegClass @class, RegIndex i0, RegIndex i1)
-            => new RegRange(@class, i0, i1);
+        public static uint regops(RegClassCode @class, NativeWidthCode w, Span<RegOp> dst)
+        {
+            ref var r = ref first(dst);
+            var count = AsmRegData.regcount(@class);
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+                seek(r,counter++) = reg((NativeWidthCode)w, @class, (RegIndexCode)i);
+            return counter;
+        }
     }
 }

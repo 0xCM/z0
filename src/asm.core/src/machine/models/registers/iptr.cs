@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    using api = AsmRegBits;
+    using api = AsmRegs;
 
     partial struct RegModels
     {

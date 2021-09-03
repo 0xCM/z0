@@ -23,7 +23,7 @@ namespace Z0
             var flow = Wf.EmittingFile(dst);
             var segment = Clr.metadata(src);
             using var writer = dst.Writer();
-            var size = HexPacks.emit(segment, bpl, writer);
+            var size = MemoryStore.emit(segment, bpl, writer);
             Wf.EmittedFile(flow, (uint)size);
             return size;
         }

@@ -13,13 +13,7 @@ namespace Z0.Asm
     [ApiComplete]
     public struct AsmOpCodeBits
     {
-        const ulong KindSeg = 0x00_00_00_00_00_00_FF_FF;
-
-        const ulong CountSeg = 0x00_00_00_00_00_FF_00_00;
-
         const ulong CountSegClear = 0xFF_FF_FF_FF_FF_00_FF_FF;
-
-        const ulong ValSegs = 0xFF_FF_FF_FF_FF_00_00_00;
 
         ulong Storage;
 

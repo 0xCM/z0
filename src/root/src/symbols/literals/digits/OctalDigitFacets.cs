@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    [LiteralProvider]
     public readonly struct OctalDigitFacets
     {
         public const OctalDigitCode MinCode = OctalDigitCode.o0;

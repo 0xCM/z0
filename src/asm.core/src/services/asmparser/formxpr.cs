@@ -28,7 +28,6 @@ namespace Z0.Asm
             return true;
         }
 
-
         public static MsgPattern<Fence<char>,string> FenceNotFound
             => "No content fenced with {0} exists int the input text '{1}'";
     }

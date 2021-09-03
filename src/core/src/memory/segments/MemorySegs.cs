@@ -39,7 +39,6 @@ namespace Z0
         public static uint cells<T>(MemoryRange src)
             => (uint)(src.Size/core.size<T>());
 
-
         /// <summary>
         /// Covers a <see cref='MemoryRange'/> with a readonly span
         /// </summary>

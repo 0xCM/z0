@@ -74,7 +74,7 @@ namespace Z0
             var packs = alloc<HexPacked>(count);
             var chars = alloc<char>(BufferLength);
             ref var dst = ref first(packs);
-            var size = HexPacks.pack(blocks, packs, chars);
+            var size = MemoryStore.pack(blocks, packs, chars);
             if(validate)
             {
                 var buffer = span<HexDigitValue>(BufferLength);
@@ -116,7 +116,7 @@ namespace Z0
         {
             var flow = EmittingFile(dst);
             using var writer = dst.Writer();
-            var total = HexPacks.emit(src, writer);
+            var total = MemoryStore.emit(src, writer);
             EmittedFile(flow, (uint)total);
             return total;
         }
@@ -126,7 +126,7 @@ namespace Z0
         {
             var flow = EmittingFile(dst);
             using var writer = dst.Writer();
-            var total = HexPacks.emit(HexPacks.pack(src), writer);
+            var total = MemoryStore.emit(MemoryStore.pack(src), writer);
             EmittedFile(flow, (uint)total);
             return total;
         }

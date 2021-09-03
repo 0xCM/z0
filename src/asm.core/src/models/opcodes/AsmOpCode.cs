@@ -21,8 +21,6 @@ namespace Z0.Asm
     {
         public const uint SZ = 2*PrimalSizes.U16 + PrimalSizes.U32 + CharBlock48.SZ;
 
-        public ushort SdmKey;
-
         public AsmId AsmId;
 
         public AsmOpCodeBits Bits;
@@ -30,10 +28,17 @@ namespace Z0.Asm
         public CharBlock48 Expr;
 
         [MethodImpl(Inline)]
-        public AsmOpCode(ushort key, AsmId asmid, AsmOpCodeBits bits, CharBlock48 expr)
+        public AsmOpCode(AsmId asmid, AsmOpCodeBits bits, CharBlock48 expr)
+        {
+            AsmId = asmid;
+            Bits = bits;
+            Expr = expr;
+        }
+
+        [MethodImpl(Inline)]
+        public AsmOpCode(uint key, AsmOpCodeBits bits, CharBlock48 expr)
         {
             AsmId = 0;
-            SdmKey = key;
             Bits = bits;
             Expr = expr;
         }

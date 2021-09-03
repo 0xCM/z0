@@ -8,12 +8,19 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial struct AsmRegs
     {
+        /// <summary>
+        /// Determines whether a specified register index code is within the inclusive range [0,31]
+        /// </summary>
+        /// <param name="src"></param>
         [MethodImpl(Inline), Op]
-        public static RegRange range(RegClass @class, RegIndex i0, RegIndex i1)
-            => new RegRange(@class, i0, i1);
+        public static bit invalid(RegIndexCode src)
+            => (uint)src >= 32;
+
+        [MethodImpl(Inline), Op]
+        public static bit valid(RegIndexCode src)
+            => (uint)src <= 31;
     }
 }

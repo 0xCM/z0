@@ -38,12 +38,13 @@ namespace Z0.llvm
                 record.Mnemonic = calcs.Monic(id);
                 record.OpId = sym.Name.Content.Content;
                 record.OpCodeValue = opcode;
-                record.OpCodeBytes = Hex.hexbytes(opcode, LowerCase);
+                record.OpCodeBytes = Hex.hexchars(opcode, LowerCase);
             }
 
             Array.Sort(buffer);
             return buffer;
         }
+
         [ApiHost("llvm.mc.calcs")]
         public readonly ref struct Calcs
         {
