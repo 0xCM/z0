@@ -6,22 +6,23 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
+    using System.Collections.Generic;
 
     using static Root;
 
-    [StructLayout(LayoutKind.Sequential, Size=2)]
-    public readonly struct AsmOcToken
+    partial class IntelIntrinsicModels
     {
-        public AsmOcTokenKind Kind {get;}
-
-        public byte Value {get;}
-
-        [MethodImpl(Inline)]
-        public AsmOcToken(AsmOcTokenKind kind, byte value)
+        public struct Operation
         {
-            Kind = kind;
-            Value = value;
+            public const string ElementName = "operation";
+
+            public List<TextLine> Content;
+
+            [MethodImpl(Inline)]
+            public Operation(List<TextLine> src)
+            {
+                Content = src;
+            }
         }
     }
 }

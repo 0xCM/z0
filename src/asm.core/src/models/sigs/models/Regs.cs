@@ -227,7 +227,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(cr src)
                 => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
-
         }
 
         public readonly struct rflags : IRegOpClass<rflags>
@@ -245,7 +244,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(rflags src)
                 => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
-
         }
 
         public readonly struct db : IRegOpClass<db>

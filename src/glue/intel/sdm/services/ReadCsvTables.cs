@@ -94,7 +94,7 @@ namespace Z0.Asm
 
                 if(content.StartsWith(TableMarker))
                 {
-                    tablekind = SdmParsers.tablekind(content.Remove(TableMarker).Trim());
+                    tablekind = IntelSdm.tablekind(content.Remove(TableMarker).Trim());
                     table.Clear();
                     table.WithKind((uint)tablekind);
                     foundtable = true;

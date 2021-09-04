@@ -21,19 +21,6 @@ namespace Z0.Asm
             x0F3A = 0x0F3A,
         }
 
-        // public enum RepPrefixToken : byte
-        // {
-        //     [Symbol("F2")]
-        //     F2,
-
-        //     [Symbol("F3")]
-        //     F3,
-
-        //     [Symbol("66")]
-        //     x66,
-        // }
-
-
         [SymSource(K.Rex)]
         public enum RexToken : byte
         {
@@ -42,15 +29,6 @@ namespace Z0.Asm
 
             [Symbol("REX.W", "Indicates the W-bit is enabled which signals a 64-bit operand size")]
             RexW,
-
-            // [Symbol("REX.R", "Extends (prepends) the ModRM.reg 3-bit field to form a 4-bit field, providing a register domain of [0..15]")]
-            // RexR,
-
-            // [Symbol("REX.X", "Extends (prepends) the Sib.index 3-bit field to form a 4-bit field, providing a register domain of [0..15]")]
-            // RexX,
-
-            // [Symbol("REX.B", "Modifies the base in the ModR/M r/m field or SIB base field; or it modifies the opcode reg field used for accessing GPRs")]
-            // RexB,
         }
 
         [SymSource(K.Vex)]

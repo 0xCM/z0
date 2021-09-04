@@ -12,7 +12,7 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Operand<T> operand<T>(StringAddress name, T value)
-            => new Operand<T>(name, value);
+        public static Union<T> union<T>(string name, T[] members)
+            => new Union<T>(name, members);
     }
 }

@@ -8,7 +8,6 @@ namespace Z0.llvm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Blit;
 
     partial struct Types
     {
@@ -21,7 +20,7 @@ namespace Z0.llvm
 
             public uint N;
 
-            public text15 TypeName
+            public string TypeName
                 => string.Format(Identifier, N);
 
             [MethodImpl(Inline)]

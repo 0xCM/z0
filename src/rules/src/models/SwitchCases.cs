@@ -11,31 +11,38 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct SwitchCases<T>
-            where T : unmanaged
+        public readonly struct SwitchCases<C,T>
         {
-            readonly Index<T> Branches;
-
-            readonly Index<string> Targets;
+            readonly Index<SwitchCase<C,T>> Data;
 
             [MethodImpl(Inline)]
-            public SwitchCases(Index<T> branches, Index<string> targets)
+            public SwitchCases(Index<SwitchCase<C,T>> src)
             {
-                Branches = branches;
-                Targets = targets;
-                Require.invariant(Branches.Length == Targets.Length, () => "Branch/Target lenths must match");
+                Data = src;
+            }
+
+            public Span<SwitchCase<C,T>> Edit
+            {
+                [MethodImpl(Inline)]
+                get => Data.Edit;
+            }
+
+            public ReadOnlySpan<SwitchCase<C,T>> View
+            {
+                [MethodImpl(Inline)]
+                get => Data.View;
             }
 
             public uint Count
             {
                 [MethodImpl(Inline)]
-                get => Branches.Count;
+                get => Data.Count;
             }
 
-            public Paired<T,string> this[uint index]
+            public ref SwitchCase<C,T> this[uint index]
             {
                 [MethodImpl(Inline)]
-                get => (Branches[index],Targets[index]);
+                get => ref Data[index];
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static XedModels;
-    using static IntrinsicsModels;
+    using static IntelIntrinsicModels;
 
     public class IntelIntrinsics  : AppService<IntelIntrinsics>
     {
@@ -43,7 +43,7 @@ namespace Z0.Asm
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             for(var i=0; i<count; i++)
-                writer.WriteLine(skip(src,i).Format());
+                writer.WriteLine(format(skip(src,i)));
             Wf.EmittedFile(flow, count);
         }
 
@@ -134,7 +134,7 @@ namespace Z0.Asm
                             read(reader, entries[i].CPUID);
                         break;
 
-                        case IntrinsicsModels.Category.ElementName:
+                        case IntelIntrinsicModels.Category.ElementName:
                             read(reader, ref entries[i].category);
                         break;
 
@@ -184,7 +184,7 @@ namespace Z0.Asm
         static void read(XmlReader reader, CpuIdMembership dst)
             => dst.Add(reader.ReadInnerXml());
 
-        static void read(XmlReader reader, ref IntrinsicsModels.Category dst)
+        static void read(XmlReader reader, ref IntelIntrinsicModels.Category dst)
             => dst.Content = reader.ReadInnerXml();
 
         static void read(XmlReader reader, ref Header dst)

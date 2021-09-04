@@ -9,15 +9,12 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        Index<SdmOpCodeDetail> OpCodeDetails()
-            => Sdm.ImportSdmOpCodes(Ws.Tables().Subdir(machine));
-
-        [CmdOp(".sdm-opcodes")]
-        Outcome SdmOpCodes(CmdArgs args)
+        [CmdOp(".sdm-import")]
+        Outcome SdmImport(CmdArgs args)
         {
             var result = Outcome.Success;
             var dir = Ws.Tables().Subdir(machine);
-            var details = State.Records(OpCodeDetails);
+            var details = Sdm.ImportSdmOpCodes(Ws.Tables().Subdir(machine));
             var forms = Sdm.EmitForms(details, dir);
             Sdm.EmitOpCodeStrings(details);
             var opcodes = SdmModels.opcodes(details).View;
@@ -25,10 +22,7 @@ namespace Z0.Asm
             var dst = dir + FS.file("sdm.opcodes", FS.Txt);
             using var writer = dst.AsciWriter();
             for(var i=0; i<count; i++)
-            {
-                ref readonly var opcode = ref skip(opcodes,i);
-                writer.WriteLine(opcode.Format());
-            }
+                writer.WriteLine(skip(opcodes,i).Format());
 
             return result;
         }

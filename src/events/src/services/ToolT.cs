@@ -32,7 +32,6 @@ namespace Z0
         {
             _RenderBuffer = alloc<char>(2048);
             RenderLock = new object();
-
         }
 
         Span<char> Buffer()

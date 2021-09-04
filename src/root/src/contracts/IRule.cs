@@ -20,6 +20,7 @@ namespace Z0
     public interface IRule<R,T> : IRule<R>
         where R : IRule<R,T>
     {
+
     }
 
     public interface IRule<R,A,B> : IRule<R>

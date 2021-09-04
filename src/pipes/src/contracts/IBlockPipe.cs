@@ -45,12 +45,4 @@ namespace Z0
     {
 
     }
-
-    [Free]
-    public interface IBlockPipe512<S,T> : IBlockPipe<W512,S,T>, IBlockSource512<S>, IBlockSink512<T>
-        where S : unmanaged
-        where T : unmanaged
-    {
-
-    }
 }

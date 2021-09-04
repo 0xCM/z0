@@ -14,6 +14,8 @@ namespace Z0.llvm
 
         public AsmId Id;
 
+        public byte Size;
+
         public bit IsReturn;
 
         public bit IsBranch;
@@ -25,6 +27,8 @@ namespace Z0.llvm
         public bit IsMoveReg;
 
         public bit IsCall;
+
+        public bit IsPseudo;
 
         public StringAddress AsmString;
     }

@@ -2,17 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
-    using static Root;
-
-    partial struct Rules
+    partial class IntelIntrinsicModels
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Operand<T> operand<T>(StringAddress name, T value)
-            => new Operand<T>(name, value);
+        public class Parameters : List<Parameter>
+        {
+
+        }
     }
 }

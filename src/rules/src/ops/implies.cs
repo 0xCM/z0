@@ -12,10 +12,9 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline)]
-        public static Implication<I,A,C> implies<I,A,C>(I index, A @if, C then)
-            where I : unmanaged, IEquatable<I>
+        public static Implication<A,C> implies<A,C>(A @if, C then)
             where A : IEquatable<A>
             where C : IEquatable<C>
-                => new Implication<I,A,C>(index, @if, then);
+                => new Implication<A,C>(@if, then);
     }
 }

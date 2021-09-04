@@ -26,5 +26,8 @@ namespace Z0.llvm
             where T : unmanaged
                 => new bits<T>(n, value);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static list<T> list<T>(T[] src)
+            => new list<T>(src);
     }
 }

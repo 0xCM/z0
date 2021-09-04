@@ -12,18 +12,18 @@ namespace Z0
 
     partial struct Rules
     {
-        public static Index<RuleOperand> operands<T>(T src)
-            where T : struct, IRule<T>
+        public static Index<Operand> operands<T>(T src)
+            where T : struct
         {
             var props = @readonly(typeof(T).DeclaredInstanceProperties());
             var _ref = __makeref(src);
             var count = props.Length;
-            var buffer = alloc<RuleOperand>(count);
+            var buffer = alloc<Operand>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
                 ref readonly var prop = ref skip(props,i);
-                seek(dst,i) = new RuleOperand(prop.Name, prop.GetValue(src));
+                seek(dst,i) = new Operand(prop.Name, prop.GetValue(src));
             }
             return buffer;
         }

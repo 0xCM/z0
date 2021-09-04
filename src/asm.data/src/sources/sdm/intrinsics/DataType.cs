@@ -9,24 +9,27 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial class AsmSigs
+    partial class IntelIntrinsicModels
     {
-        public readonly struct imm : IImmOpClass<imm>
+        public readonly struct DataType : ITextual
         {
-            public AsmSizeClass SizeClass {get;}
+            public string Name {get;}
 
             [MethodImpl(Inline)]
-            public imm(AsmSizeClass size)
+            public DataType(string src)
             {
-                SizeClass = size;
+                Name = src;
             }
 
-            public AsmOpClass OpClass
-                => AsmOpClass.Imm;
+            public string Format()
+                => Name;
+
+            public override string ToString()
+                => Name;
 
             [MethodImpl(Inline)]
-            public static implicit operator AsmOperand(imm src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+            public static implicit operator DataType(string src)
+                => new DataType(src);
         }
     }
 }

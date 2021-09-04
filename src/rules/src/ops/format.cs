@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static core;
     partial struct Rules
     {
         [Op, Closures(Closure)]
@@ -19,6 +20,25 @@ namespace Z0
             var buffer = TextTools.buffer();
             render(rule,buffer);
             return buffer.Emit();
+        }
+
+        public static string format<T>(in Union<T> src)
+        {
+            var dst = text.buffer();
+            var members = src.Members;
+            var count = members.Length;
+            dst.Append(src.Name);
+            if(count != 0)
+                dst.Append(" = ");
+
+            for(var i=0; i<count; i++)
+            {
+                if(i != count - 1)
+                    dst.Append(string.Format("{0} | ",skip(members,i)));
+                else
+                    dst.Append(string.Format("{0}", skip(members,i)));
+            }
+            return dst.Emit();
         }
 
         public static void render<F,C>(Enclosed<F,C> rule, ITextBuffer dst)

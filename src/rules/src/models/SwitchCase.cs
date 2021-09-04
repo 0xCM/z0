@@ -6,25 +6,27 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
     partial struct Rules
     {
-        public readonly struct SwitchCase
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public readonly struct SwitchCase<C,T>
         {
-            public uint Index {get;}
+            public readonly uint Index;
 
-            public Value Match {get;}
+            public readonly C Case;
 
-            public string Name {get;}
+            public readonly T Target;
 
             [MethodImpl(Inline)]
-            public SwitchCase(uint group, string name, Value test)
+            public SwitchCase(uint index, C @case, T target)
             {
-                Index = group;
-                Name = name;
-                Match = test;
+                Index = index;
+                Case = @case;
+                Target = target;
             }
         }
     }
