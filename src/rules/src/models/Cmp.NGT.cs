@@ -34,7 +34,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => CmpPreds.format<T>(this);
+                => format<T>(this);
 
             public override string ToString()
                 => Format();

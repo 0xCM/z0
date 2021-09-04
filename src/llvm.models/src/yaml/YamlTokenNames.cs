@@ -8,7 +8,6 @@ namespace Z0.llvm
     public readonly struct YamlTokenFacets
     {
         public const byte MinTokenLength = 3;
-
     }
 
     [LiteralProvider]

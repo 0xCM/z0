@@ -233,6 +233,16 @@ namespace Z0
             return count;
         }
 
+        protected uint TableEmit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, TextEncodingKind encoding, FS.FilePath dst)
+            where T : struct
+        {
+            var flow = EmittingTable<T>(dst);
+            var spec = Tables.rowspec<T>(widths, z16);
+            var count = Tables.emit(src, spec, encoding, dst);
+            EmittedTable(flow,count);
+            return count;
+        }
+
         protected uint TableEmit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, StreamWriter writer, FS.FilePath dst)
             where T : struct
         {

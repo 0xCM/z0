@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
- 
     public sealed class t_uint8 : t_numeric<t_uint8>
     {
         protected override int CycleCount => (int)Pow2.T24;
@@ -40,7 +37,7 @@ namespace Z0
 
             var c = byte.MinValue;
             var d = uint8_t.zero;
-            
+
             for(var i=0; i<300; i++)
             {
                 c++;
@@ -54,8 +51,6 @@ namespace Z0
                 d--;
                 Claim.eq(c,d);
             }
-
         }
-
     }
 }

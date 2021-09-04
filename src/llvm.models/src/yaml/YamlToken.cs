@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-
     using System.Runtime.CompilerServices;
     using static Root;
 

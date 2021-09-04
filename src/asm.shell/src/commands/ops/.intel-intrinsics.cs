@@ -11,13 +11,11 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".api-literals")]
-        Outcome EmitApiLiterals(CmdArgs args)
+        [CmdOp(".intel-intrinsics")]
+        public Outcome ImportIntelIntrinsics(CmdArgs args)
         {
-            var result = Outcome.Success;
-            var literals = State.ApiLiterals(Loaders.ApiLiterals);
-            var path = Emitters.Emit(literals, Ws.Tables().Subdir(machine));
-            return result;
+            Wf.IntelIntrinsics().Emit(Ws.Tables().Subdir(machine));
+            return true;
         }
-   }
+    }
 }

@@ -7,6 +7,7 @@ namespace Z0.llvm
 {
     using N = YamlTokenNames;
 
+    [SymSource]
     public enum YamlTokenKind : byte
     {
         None,

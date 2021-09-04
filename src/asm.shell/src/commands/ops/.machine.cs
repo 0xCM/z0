@@ -18,8 +18,9 @@ namespace Z0.Asm
             var tables = Ws.Tables();
             var tokens = Wf.AsmTokens();
 
-            var literals = Wf.TableLoaders().ApiLiterals();
+            var dir = Ws.Tables().Subdir(machine);
 
+            Emitters.Emit(Loaders.ApiLiterals().View, dir);
             result = GenModRmBits();
             if(result.Fail)
                 return result;
@@ -32,7 +33,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return result;
 
-            Wf.IntelIntrinsics().Emit();
+            Wf.IntelIntrinsics().Emit(dir);
 
             EmitTokens(tokens.RegTokens());
             EmitTokens(tokens.OpCodeTokens());

@@ -12,7 +12,6 @@ namespace Z0
             NonZero<byte> b = 5;
             Claim.nonzero(a.Value);
             Claim.eq(b, (byte)5);
-
         }
     }
 }

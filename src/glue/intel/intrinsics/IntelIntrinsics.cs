@@ -18,12 +18,12 @@ namespace Z0.Asm
     {
         const string dataset = "intel.intrinsics";
 
-        public ReadOnlySpan<Intrinsic> Emit()
+        public ReadOnlySpan<Intrinsic> Emit(FS.FolderPath dir)
         {
             var parsed = Parse();
-            EmitAlgorithms(parsed);
-            EmitTable(parsed);
-            EmitHeader(parsed);
+            EmitAlgorithms(parsed, dir);
+            EmitTable(parsed, dir);
+            EmitHeader(parsed, dir);
             return parsed;
         }
 
@@ -36,10 +36,10 @@ namespace Z0.Asm
         ReadOnlySpan<Intrinsic> Parse()
             => Parse(XmlSouceDoc());
 
-        void EmitAlgorithms(ReadOnlySpan<Intrinsic> src)
+        void EmitAlgorithms(ReadOnlySpan<Intrinsic> src, FS.FolderPath dir)
         {
             var count = src.Length;
-            var dst = Ws.Imports().Subdir(dataset) + FS.file("intrinsics.algorithms", FS.Txt);
+            var dst = dir + FS.file("intrinsics.algorithms", FS.Txt);
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             for(var i=0; i<count; i++)
@@ -47,9 +47,9 @@ namespace Z0.Asm
             Wf.EmittedFile(flow, count);
         }
 
-        void EmitHeader(ReadOnlySpan<Intrinsic> src)
+        void EmitHeader(ReadOnlySpan<Intrinsic> src, FS.FolderPath dir)
         {
-            var dst = Ws.Imports().Subdir(dataset) + FS.file("intrinsics.declarations", FS.H);
+            var dst = dir + FS.file("intrinsics.declarations", FS.H);
             var flow = Wf.EmittingFile(dst);
             var count = src.Length;
             using var writer = dst.Writer();
@@ -88,9 +88,9 @@ namespace Z0.Asm
             }
         }
 
-        void EmitTable(ReadOnlySpan<Intrinsic> src)
+        void EmitTable(ReadOnlySpan<Intrinsic> src, FS.FolderPath dir)
         {
-            var dst = Ws.Tables().Table<IntelIntrinsic>();
+            var dst = dir + FS.file("intel.intrinsics", FS.Csv);
             var flow = Wf.EmittingTable<IntelIntrinsic>(dst);
             var rows = list<IntelIntrinsic>();
             Summarize(src, rows);

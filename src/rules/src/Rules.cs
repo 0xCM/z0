@@ -25,7 +25,7 @@ namespace Z0
             if(!outcome)
                 return false;
 
-            if(!satisfied(bounds,dst))
+            if(!eval(bounds,dst))
             {
                 outcome = (false, $"The parsed value {dst} is not with the required range {bounds}");
                 return false;

@@ -29,13 +29,12 @@ namespace Z0
                 get => CmpSymbol.LE;
             }
 
-
             public CmpKind Kind
                 => CmpKind.LE;
 
             [MethodImpl(Inline)]
             public string Format()
-                => CmpPreds.format<T>(this);
+                => format<T>(this);
 
             public override string ToString()
                 => Format();

@@ -17,12 +17,5 @@ namespace Z0.Asm
 {
     public static partial class XTend
     {
-        [Op]
-        public static AsmCmdService AsmCmd(this IWfRuntime context)
-            => AsmCmdService.create(context);
-
-        [Op]
-        public static TableLoaders TableLoaders(this IWfRuntime context)
-            => Asm.TableLoaders.create(context);
     }
 }

@@ -19,15 +19,14 @@ namespace Z0.Asm
 
             var fields = datasets.AsmDefFields;
             var count = fields.Length;
-            var dst = Ws.Tables().Subdir("llvm") + FS.file("fields", FS.Csv);
+            var dst = Ws.Tables().Subdir("llvm") + FS.file("llvm.fields", FS.Csv);
             var emitting = EmittingTable<F>(dst);
-            const string FieldFormat = "{0,-32} | {1,-32} | {2,-32} | {3}";
             using var writer = dst.AsciWriter();
-            writer.WriteLine(FieldFormat, nameof(F.Id), nameof(F.Type) , nameof(F.Name), nameof(F.Value));
+            writer.WriteLine(F.RowHeader);
             for(var i=0; i<count; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                writer.WriteLine(string.Format(FieldFormat, field.Id, field.Type, field.Name, field.Value));
+                writer.WriteLine(string.Format(F.RowFormat, field.Id, field.Type, field.Name, field.Value));
             }
 
             EmittedTable(emitting, count);

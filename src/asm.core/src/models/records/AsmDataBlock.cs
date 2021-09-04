@@ -7,10 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential, Pack=1)]
+    using Asm;
+
+    [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
     public struct AsmDataBlock
     {
-        public const byte FieldCount = 10;
+        public const string TableId = "asm.blocks";
+
+        public const byte FieldCount = 9;
 
         public uint Key;
 
@@ -22,7 +26,7 @@ namespace Z0
 
         public CharBlock64 Expression;
 
-        public ByteBlock16 Encoded;
+        public CharBlock48 Encoded;
 
 		public CharBlock64 Sig;
 
@@ -30,6 +34,6 @@ namespace Z0
 
         public CharBlock128 Bitstring;
 
-        public CharBlock128 OpUri;
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{16, 16, 16, 16, 64, 48, 64, 32, 128};
     }
 }

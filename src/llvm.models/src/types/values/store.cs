@@ -9,9 +9,9 @@ namespace Z0.llvm
 
     using static Root;
     using static core;
-    using static LlvmTypes;
+    using static Types;
 
-    partial struct LlvmValues
+    partial struct Values
     {
         [MethodImpl(Inline)]
         public static uint store<O,A0>(in dag<O,A0> src, Span<byte> dst)

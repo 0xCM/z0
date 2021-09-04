@@ -8,29 +8,21 @@ namespace Z0.llvm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static Blit;
 
-    partial struct LlvmTypes
+    partial struct Types
     {
-        public readonly struct bits
-        {
-            internal readonly Ptr<byte> pB;
-
-            public readonly ulong Count;
-
-            [MethodImpl(Inline)]
-            internal bits(Ptr<byte> pB, ulong count)
-            {
-                this.pB = pB;
-                Count = count;
-            }
-        }
-
         public struct bits<T>
             where T : unmanaged
         {
+            public const string Identifier = "bits<{0}>";
+
             public T Packed;
 
             public uint N;
+
+            public text15 TypeName
+                => string.Format(Identifier, N);
 
             [MethodImpl(Inline)]
             public bits(uint n, T src)
@@ -44,7 +36,7 @@ namespace Z0.llvm
                 => new bits<T>(src.n, src.value);
         }
 
-        public struct bits<M,T>
+       public struct bits<M,T>
             where M : unmanaged, ITypeNat
             where T : unmanaged
         {

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     using S = Surrogates;
 
@@ -16,7 +16,6 @@ namespace Z0
         public void eq_check()
         {
             const string name = "eq";
-
             eq_check(S.predicate(math.eq, name, z8));
             eq_check(S.predicate(math.eq, name, z8i));
             eq_check(S.predicate(math.eq, name, z16));
@@ -43,7 +42,6 @@ namespace Z0
         public void neq()
         {
             const string name = "neq";
-
             neq_check(S.predicate(math.neq, name, z8));
             neq_check(S.predicate(math.neq, name, z8i));
             neq_check(S.predicate(math.neq, name, z16));
@@ -70,7 +68,6 @@ namespace Z0
         public void gt()
         {
             const string name = "gt";
-
             gt_check(S.predicate(math.gt, name, z8));
             gt_check(S.predicate(math.gt, name, z8i));
             gt_check(S.predicate(math.gt, name, z16));
@@ -96,7 +93,6 @@ namespace Z0
         public void gteq()
         {
             const string name = "gteq";
-
             gteq_check(S.predicate(math.gteq, name, z8));
             gteq_check(S.predicate(math.gteq, name, z8i));
             gteq_check(S.predicate(math.gteq, name, z16));
@@ -121,7 +117,6 @@ namespace Z0
         public void lt()
         {
             const string name = "lt";
-
             lt_check(S.predicate(math.lt, name, z8));
             lt_check(S.predicate(math.lt, name, z8i));
             lt_check(S.predicate(math.lt, name, z16));
@@ -132,7 +127,6 @@ namespace Z0
             lt_check(S.predicate(math.lt, name, z64i));
             lt_check(S.predicate(fmath.lt, name, z32f));
             lt_check(S.predicate(fmath.lt, name, z64f));
-
         }
 
         void lt_check<T>(S.BinaryPredicate<T> f, T t = default)
@@ -147,7 +141,6 @@ namespace Z0
         public void lteq()
         {
             const string name = "lteq";
-
             lteq_check(S.predicate(math.lteq, name, z8));
             lteq_check(S.predicate(math.lteq, name, z8i));
             lteq_check(S.predicate(math.lteq, name, z16));
@@ -158,7 +151,6 @@ namespace Z0
             lteq_check(S.predicate(math.lteq, name, z64i));
             lteq_check(S.predicate(fmath.lteq, name, z32f));
             lteq_check(S.predicate(fmath.lteq, name, z64f));
-
         }
 
         void lteq_check<T>(S.BinaryPredicate<T> f, T t = default)
@@ -173,7 +165,6 @@ namespace Z0
         public void max_check()
         {
             const string name = "max";
-
             max_check(S.binary(math.max, name, z8));
             max_check(S.binary(math.max, name, z8i));
             max_check(S.binary(math.max, name, z16));
@@ -198,7 +189,6 @@ namespace Z0
         public void min_check()
         {
             const string name = "min";
-
             min_check(S.binary(math.min, name, z8));
             min_check(S.binary(math.min, name, z8i));
             min_check(S.binary(math.min, name, z16));

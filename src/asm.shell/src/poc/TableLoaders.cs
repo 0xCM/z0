@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-    using static WsAtoms;
 
-    using  L = ApiLiterals;
+    using static core;
+
+    using L = ApiLiterals;
 
     public class TableLoaders : AppService<TableLoaders>
     {
@@ -23,7 +23,6 @@ namespace Z0.Asm
             var providers = L.providers(components).View;
             var count = providers.Length;
             var buffer = list<CompilationLiteral>();
-            var dst = Ws.Tables().Table(machine, "api.literals");
             for(var i=0; i<count; i++)
             {
                 ref readonly var provider = ref skip(providers,i);
@@ -32,9 +31,7 @@ namespace Z0.Asm
                     buffer.Add(skip(literals,j).Specify());
             }
 
-            var records = buffer.ToArray();
-            TableEmit(records.ToReadOnlySpan(), CompilationLiteral.RenderWidths, dst);
-            return records;
+            return buffer.ToArray();
         }
     }
 }

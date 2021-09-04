@@ -13,7 +13,7 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool satisfied<T>(Bounded<T> rule, T src)
+        public static bool eval<T>(Bounded<T> rule, T src)
             where T : unmanaged
         {
             if(size<T>() == 1)

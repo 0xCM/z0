@@ -95,13 +95,6 @@ namespace Z0
             return true;
         }
 
-        [CmdOp("emit-intrinsics-catalog")]
-        public Outcome EmitIntrinsicsCatalog(CmdArgs args)
-        {
-            Wf.IntelIntrinsics().Emit();
-            return true;
-        }
-
         [CmdOp("emit-respack")]
         public Outcome EmitResPack(CmdArgs args)
         {

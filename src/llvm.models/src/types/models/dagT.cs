@@ -10,7 +10,7 @@ namespace Z0.llvm
     using static Root;
     using static core;
 
-    partial struct LlvmTypes
+    partial struct Types
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct dag<T> : IDag<dag<T>>

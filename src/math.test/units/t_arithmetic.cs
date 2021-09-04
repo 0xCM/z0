@@ -158,7 +158,6 @@ namespace Z0
         public void sub_check()
         {
             const string name = "sub";
-
             sub_check(S.binary(math.sub, name, z8));
             sub_check(S.binary(math.sub, name, z8i));
             sub_check(S.binary(math.sub, name, z16));
@@ -174,7 +173,6 @@ namespace Z0
         public void mul_check()
         {
             const string name = "mul";
-
             mul_check(S.binary(math.mul, name, z8));
             mul_check(S.binary(math.mul, name, z8i));
             mul_check(S.binary(math.mul, name, z16));
@@ -190,7 +188,6 @@ namespace Z0
         public void div_check()
         {
             const string name = "div";
-
             div_check(S.binary(math.div, name, z8));
             div_check(S.binary(math.div, name, z8i));
             div_check(S.binary(math.div, name, z16));
@@ -206,7 +203,6 @@ namespace Z0
         public void mod_check()
         {
             const string name = "mod";
-
             mod_check(S.binary(math.mod, name, z8));
             mod_check(S.binary(math.mod, name, z8i));
             mod_check(S.binary(math.mod, name, z16));
@@ -223,7 +219,6 @@ namespace Z0
         public void modmul_check()
         {
             const string name = "modmul";
-
             modmul_check(S.ternary(math.modmul, name, z8));
             modmul_check(S.ternary(math.modmul, name, z8i));
             modmul_check(S.ternary(math.modmul, name, z16));
@@ -240,7 +235,6 @@ namespace Z0
         public void clamp_check()
         {
             const string name = "clamp";
-
             clamp_check(S.binary(math.clamp, name, z8));
             clamp_check(S.binary(math.clamp, name, z8i));
             clamp_check(S.binary(math.clamp, name, z16));
@@ -256,7 +250,6 @@ namespace Z0
         public void inc_check()
         {
             const string name = "inc";
-
             inc_check(S.unary(math.inc, name, z8));
             inc_check(S.unary(math.inc, name, z8i));
             inc_check(S.unary(math.inc, name, z16));
@@ -272,7 +265,6 @@ namespace Z0
         public void dec_check()
         {
             const string name = "dec";
-
             dec_check(S.unary(math.dec, name, z8));
             dec_check(S.unary(math.dec, name, z8i));
             dec_check(S.unary(math.dec, name, z16));
@@ -288,7 +280,6 @@ namespace Z0
         public void negate_check()
         {
             const string name = "negate";
-
             negate_check(S.unary(math.negate, name, z8));
             negate_check(S.unary(math.negate, name, z8i));
             negate_check(S.unary(math.negate, name, z16));
@@ -304,7 +295,6 @@ namespace Z0
         public void abs_check()
         {
             const string name = "abs";
-
             abs_check(S.unary(Math.Abs, name, z8i));
             abs_check(S.unary(Math.Abs, name, z16i));
             abs_check(S.unary(Math.Abs, name, z32i));
@@ -325,7 +315,5 @@ namespace Z0
             CheckAction(() => check_increments(z64), CaseName(name, z64));
             CheckAction(() => check_increments(z64i), CaseName(name, z64i));
         }
-
-
     }
 }

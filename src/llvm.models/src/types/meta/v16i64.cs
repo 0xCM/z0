@@ -8,9 +8,8 @@ namespace Z0.llvm
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static LlvmValues;
 
-    partial struct LlvmTypes
+    partial struct Metatypes
     {
         /// <summary>
         ///  16 x i64 vector value
@@ -27,7 +26,7 @@ namespace Z0.llvm
             public StringAddress Name
             {
                 [MethodImpl(Inline)]
-                get => name(nameof(Identifier));
+                get => name(Identifier);
             }
         }
     }

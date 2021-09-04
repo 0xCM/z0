@@ -4,13 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    public readonly partial struct LlvmTypes
-    {
-        public struct ValueTypeInfo
-        {
-            public StringAddress Name;
+    using System;
+    using System.Runtime.InteropServices;
 
-            public BitWidth Width;
-        }
+    public readonly partial struct Types
+    {
+        const LayoutKind Layout = LayoutKind.Sequential;
+
+        const NumericKind Closure = NumericKind.UnsignedInts;
     }
 }

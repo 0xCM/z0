@@ -4,25 +4,52 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Rules
+    using S = CmpSymbol;
+
+    public enum CmpKind : byte
     {
-        public enum CmpKind : byte
-        {
-            EQ = 0,
+        [Op(S.EQ)]
+        EQ,
 
-            LT = 1,
+        [Op(S.LT)]
+        LT,
 
-            LE = 2,
+        [Op(S.LE)]
+        LE,
 
-            NEQ = 4,
+        [Op(S.NEQ)]
+        NEQ,
 
-            NLT = 5,
+        [Op(S.NLT)]
+        NLT,
 
-            NGT,
+        [Op(S.NGT)]
+        NGT,
 
-            GT,
+        [Op(S.GT)]
+        GT,
 
-            GE
-        }
+        [Op(S.GE)]
+        GE
+    }
+
+    [ApiComplete("cmp.symbol")]
+    public readonly struct CmpSymbol
+    {
+        public const string EQ = "==";
+
+        public const string NEQ = "!=";
+
+        public const string GT = ">";
+
+        public const string NGT = "!>";
+
+        public const string GE = ">=";
+
+        public const string LT = "<";
+
+        public const string LE = "<=";
+
+        public const string NLT = "!<";
     }
 }

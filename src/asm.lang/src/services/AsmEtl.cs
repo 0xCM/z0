@@ -49,7 +49,6 @@ namespace Z0.Asm
             {
                 Status(LoadingDocs.Format(files.Length));
                 var docs = TextGrids.load(files);
-
                 Status(ParsingDocs.Format(docs.Length));
                 var results = AsmParser.rows(docs, dst);
                 foreach(var result in results)

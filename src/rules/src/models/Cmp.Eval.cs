@@ -34,7 +34,7 @@ namespace Z0
             }
 
             public string Format()
-                => CmpPreds.format(this);
+                => format<T>(this);
 
             public override string ToString()
                 => Format();

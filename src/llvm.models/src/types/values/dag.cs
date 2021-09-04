@@ -8,10 +8,9 @@ namespace Z0.llvm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
-    using static LlvmTypes;
+    using static Types;
 
-    partial struct LlvmValues
+    partial struct Values
     {
         [MethodImpl(Inline)]
         public static string format<O,A0>(in dag<O,A0> src)

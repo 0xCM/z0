@@ -9,10 +9,10 @@ namespace Z0
 
     using static Root;
 
-   /// <summary>
-   /// Defines a natural-length sequence of literal bit values
-   /// </summary>
-   public readonly struct LiteralLogicSeqExpr<N> : ILiteralLogicSeqExpr
+    /// <summary>
+    /// Defines a natural-length sequence of literal bit values
+    /// </summary>
+    public readonly struct LiteralLogicSeqExpr<N> : ILiteralLogicSeqExpr
         where N : unmanaged, ITypeNat
     {
         public Index<bit> Terms {get;}

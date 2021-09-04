@@ -13,7 +13,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
     public struct CompilationLiteral : IRecord<CompilationLiteral>
     {
-        public const string TableId = "literals.defs";
+        public const string TableId = "api.literals";
 
         public const byte FieldCount = 5;
 

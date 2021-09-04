@@ -38,6 +38,8 @@ namespace Z0.Asm
 
         AsmToolchain AsmToolchain;
 
+        IntelIntrinsics IntelIntrinsics;
+
         AsmTables AsmTables;
 
         ApiPacks ApiPacks;
@@ -76,6 +78,8 @@ namespace Z0.Asm
 
         TableLoaders Loaders;
 
+        TableEmitters Emitters;
+
         llvm.LlvmNm LlvmNm;
 
         FS.FolderPath AsmRoot
@@ -100,7 +104,6 @@ namespace Z0.Asm
             _Assembled = array<byte>();
             ResPack = CliMemoryMap.Empty;
             ShellEnv = ShellEnv.Empty();
-
         }
 
         protected override void Initialized()
@@ -126,7 +129,9 @@ namespace Z0.Asm
             AsmEtl = Wf.AsmEtl();
             LlvmEtl = Wf.LlvmEtl();
             Loaders = Wf.TableLoaders();
+            Emitters = Wf.TableEmitters();
             OmniScript = Wf.OmniScript();
+            IntelIntrinsics = Wf.IntelIntrinsics();
             LlvmNm = Wf.LlvmNm();
             State.Init(Wf,Ws);
             State.Project("cmodels");

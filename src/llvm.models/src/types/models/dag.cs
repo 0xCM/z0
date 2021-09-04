@@ -11,9 +11,9 @@ namespace Z0.llvm
     using static Root;
     using static core;
 
-    using api = LlvmValues;
+    using api = Values;
 
-    partial struct LlvmTypes
+    partial struct Types
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct dag<O,A0> : IDag<dag<O,A0>,O>

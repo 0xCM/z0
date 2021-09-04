@@ -4,11 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
-    using static core;
-
     partial struct Rules
     {
+        [Op, Closures(Closure)]
+        public static string format<T>(in CmpPred<T> src)
+            => string.Format("{0}{1}{2}", src.A, symbol(src.Kind), src.B);
+
+        [Op, Closures(Closure)]
+        public static string format<T>(in CmpEval<T> src)
+            => string.Format("{0}:{1}", format(src.Source), src.Result ? "true" : "false");
+
         public static string format<F,C>(Enclosed<F,C> rule)
         {
             var buffer = TextTools.buffer();

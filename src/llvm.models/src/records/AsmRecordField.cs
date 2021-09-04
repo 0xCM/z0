@@ -4,35 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
     [StructLayout(LayoutKind.Sequential, Pack=1)]
-    public struct AsmDescriptor
-    {
-        public AsmId Id;
-
-        public bit IsReturn;
-
-        public bit IsBranch;
-
-        public bit IsCompare;
-
-        public bit IsMoveImm;
-
-        public bit IsMoveReg;
-
-        public bit IsCall;
-
-        public StringAddress AsmString;
-    }
-
-    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct AsmRecordField
     {
+        public const string TableId = "llvm.fields";
+
+        public const string RowFormat = "{0,-32} | {1,-32} | {2,-32} | {3}";
+
+        public static string RowHeader
+            => string.Format(RowFormat, nameof(Id), nameof(Type), nameof(Name), nameof(Value));
+
         public AsmId Id;
 
         public RecordField FieldContent;

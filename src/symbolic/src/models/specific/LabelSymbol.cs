@@ -13,8 +13,6 @@ namespace Z0
 
     using static Root;
 
-    using api = CodeSymbols;
-
     partial struct CodeSymbolModels
     {
         public readonly struct LabelSymbol : ICodeSymbol<LabelSymbol,ILabelSymbol>

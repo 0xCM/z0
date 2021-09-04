@@ -5,7 +5,7 @@
 namespace Z0.llvm
 {
     using static core;
-    using static LlvmValues;
+    using static Values;
 
     public interface IValueType<T>
         where T : unmanaged, IValueType<T>

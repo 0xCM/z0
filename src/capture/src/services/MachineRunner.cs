@@ -8,6 +8,7 @@ namespace Z0
 
     using static Msg;
     using static core;
+    using static WsAtoms;
 
     public class MachineRunner : AppService<MachineRunner>
     {
@@ -49,7 +50,7 @@ namespace Z0
                     Wf.IntelXed().EmitCatalog();
 
                 if(options.EmitIntrinsicsInfo)
-                    Wf.IntelIntrinsics().Emit();
+                    Wf.IntelIntrinsics().Emit(Ws.Tables().Subdir(machine));
 
                 if(options.EmitSymbolicLiterals)
                     Wf.Symbolism().EmitLiterals();
