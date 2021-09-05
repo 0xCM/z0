@@ -200,7 +200,12 @@ namespace Z0
         /// <summary>
         /// Defines the 'mc.log' literal
         /// </summary>
-        public const string mclog = mc + sep + log;
+        public const string mcopslog = mc + sep + ops + sep + log;
+
+        /// <summary>
+        /// Defines the 'mc.ops.asm' literal
+        /// </summary>
+        public const string mcopsasm = mc + sep + ops + sep + asm;
 
         /// <summary>
         /// Defines the 'mlir' literal
@@ -256,6 +261,11 @@ namespace Z0
         /// Defines the 'obj.yaml' literal
         /// </summary>
         public const string objyaml = obj + sep + yaml;
+
+        /// <summary>
+        /// Defines the 'obj.hex' literal
+        /// </summary>
+        public const string objhex = obj + sep + hex;
 
         /// <summary>
         /// Defines the 'status' literal

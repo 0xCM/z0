@@ -35,6 +35,9 @@ namespace Z0
             get => FileKind != 0;
         }
 
+        public FS.FileExt Ext
+            => FS.ext(ExtName.Format());
+
         public string Format()
             => FileKind.Format();
 
@@ -42,7 +45,7 @@ namespace Z0
             => Format();
 
         public static implicit operator FS.FileExt(FileType src)
-            => FS.ext(src.ExtName.Format());
+            => src.Ext;
 
         public static FileType Empty
         {

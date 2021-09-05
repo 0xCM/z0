@@ -10,11 +10,6 @@ namespace Z0.Asm
     {
         [CmdOp(".c-build")]
         Outcome BuildCProj(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var home = ProjectHome(State.Project());
-            result = OmniScript.RunProjectScript(home, arg(args,0).Value, CBuild, false, out var flows);
-            return result;
-        }
+            => RunBuildScript(args, CBuild);
     }
 }

@@ -48,10 +48,28 @@ namespace Z0
             get => define(FileKind.ObjAsm, objasm);
         }
 
-        public static FileType McLog
+        public static FileType ObjYaml
         {
             [MethodImpl(Inline), Op]
-            get => define(FileKind.McLog, mclog);
+            get => define(FileKind.ObjYaml, objyaml);
+        }
+
+        public static FileType YamlTok
+        {
+            [MethodImpl(Inline), Op]
+            get => define(FileKind.YamlTok, yamltok);
+        }
+
+        public static FileType McOpsAsm
+        {
+            [MethodImpl(Inline), Op]
+            get => define(FileKind.McOpsAsm, mcopsasm);
+        }
+
+        public static FileType McOpsLog
+        {
+            [MethodImpl(Inline), Op]
+            get => define(FileKind.McOpsLog, mcopslog);
         }
 
         public static FileType Sym
@@ -60,5 +78,10 @@ namespace Z0
             get => define(FileKind.Sym, sym);
         }
 
+        public static FileType CoffHeaders
+        {
+            [MethodImpl(Inline), Op]
+            get => define(FileKind.CoffHeaders, coffheaders);
+        }
     }
 }

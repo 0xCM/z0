@@ -2,11 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.CpuShell)]
-namespace Z0.Parts
+namespace Z0.Asm
 {
-    public sealed class CpuShell : Part<CpuShell>
+    partial class AsmCmdService
     {
-
+        [CmdOp(".collect")]
+        Outcome AsmCollect(CmdArgs args)
+            => AsmCollect();
     }
 }

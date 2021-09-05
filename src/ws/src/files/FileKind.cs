@@ -140,14 +140,26 @@ namespace Z0
         [Symbol(mcasm)]
         McAsm,
 
-        [Symbol(mclog)]
-        McLog,
+        [Symbol(mcopsasm)]
+        McOpsAsm,
+
+        [Symbol(mcopslog)]
+        McOpsLog,
+
+        [Symbol(coffheaders)]
+        CoffHeaders,
 
         [Symbol(objasm)]
         ObjAsm,
 
+        [Symbol(objhex)]
+        ObjHex,
+
         [Symbol(objyaml)]
         ObjYaml,
+
+        [Symbol(yamltok)]
+        YamlTok,
 
         [Symbol(ll)]
         Llir,

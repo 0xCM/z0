@@ -23,7 +23,7 @@ namespace Z0
         [Op]
         public static bool drive(string src, out DriveLetter dst)
         {
-            var i = text.index(src ,Chars.Colon);
+            var i = text.index(src, Chars.Colon);
             dst = default;
             if(i>=0)
             {

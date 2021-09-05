@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".binhex-array", "state.files()[0..n] -> .out/binhex.raw/file(i).hex")]
         Outcome BinHexRaw(CmdArgs args)
         {
             var result = Outcome.Success;

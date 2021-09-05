@@ -64,7 +64,12 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var project = State.Project();
             if(args.Count != 0)
-                return OmniScript.RunProjectScript(project, arg(args,0).Value, script, false, out _);
+            {
+                result = OmniScript.RunProjectScript(project, arg(args,0).Value, script, false, out _);
+                if(result.Ok)
+                    result = AsmCollect();
+                return result;
+            }
 
             result = LoadProjectSources(project);
             if(result.Fail)
@@ -82,6 +87,43 @@ namespace Z0.Asm
                     ref readonly var flow = ref skip(flows, j);
                     Write(flow.Format());
                 }
+            }
+
+            result = AsmCollect();
+
+            return result;
+        }
+
+        Outcome AsmCollect()
+        {
+            var result = Outcome.Success;
+            result = CollectObjAsm();
+            if(result.Fail)
+                return result;
+
+            result = CollectSyms();
+            if(result.Fail)
+                return result;
+
+            result = CollectObjHex();
+            if(result.Fail)
+                return result;
+
+            return result;
+        }
+
+        Outcome CollectObjHex()
+        {
+            var result = Outcome.Success;
+            var paths = Ws.Projects().Out(State.Project()).Files(true, FS.Obj, FS.O).View;
+            var count = paths.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var src = ref skip(paths,i);
+                var dst = Ws.Projects().Out(State.Project(), "data") + FS.file(src.FileName.Format(), FS.Hex);
+                var data = src.ReadBytes();
+                var size = (ByteSize)MemoryEmitter.emit(data, 32, dst);
+                Write(string.Format("({0} bytes)[{1} -> {2}]", size, src.ToUri(), dst.ToUri()));
             }
 
             return result;

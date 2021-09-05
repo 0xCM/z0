@@ -55,6 +55,5 @@ namespace Z0
             => new LineOffset(src.line,src.offset);
 
         public static LineOffset Empty => default;
-
     }
 }
