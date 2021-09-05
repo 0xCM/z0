@@ -42,7 +42,7 @@ namespace Z0
         public ReadOnlySpan<char> String
         {
             [MethodImpl(Inline)]
-            get => TextTools.@string(Data);
+            get => text.@string(Data);
         }
 
         /// <summary>

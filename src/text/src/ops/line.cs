@@ -11,11 +11,6 @@ namespace Z0
 
     partial class text
     {
-        /// <summary>
-        /// Creates a <see cref='TextLine'/>
-        /// </summary>
-        /// <param name="number">The line number</param>
-        /// <param name="src">The line text</param>
         [MethodImpl(Inline), Op]
         public static TextLine line(uint number, string src)
             => new TextLine(number, src);

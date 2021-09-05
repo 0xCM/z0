@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct TextTools
+    partial class text
     {
         [MethodImpl(Inline), Op]
         public static uint render(ReadOnlySpan<char> src, ref uint i, Span<byte> dst)

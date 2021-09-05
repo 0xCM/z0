@@ -25,7 +25,7 @@ namespace Z0
 
         [TextUtility]
         public static string Join(this Span<string> src, string sep)
-            => TextTools.join(src,sep);
+            => TextTools.join(sep,src);
 
         [TextUtility]
         public static string Join(this ReadOnlySpan<string> src, char sep)

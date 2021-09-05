@@ -16,55 +16,11 @@ namespace Z0
         static string status(MemoryFileInfo file)
             => string.Format("Created memory map: {0} | {1} | {2,-12} | {3}", file.BaseAddress, file.EndAddress, file.Size, file.Path.ToUri());
 
-        public static uint emit(ReadOnlySpan<byte> src, uint bpl, FS.FilePath dst)
-        {
-            var line = text.buffer();
-            using var writer = dst.AsciWriter();
-            var current = Address32.Zero;
-            var count = (uint)src.Length;
-            var offset = 1;
-            var restart = true;
-            var last = count - 1;
-            var i=0u;
-            var fill = bpl - (count % bpl);
-
-            while(i++ <= last)
-            {
-                current = (Address32)(i - 1);
-                ref readonly var b = ref skip(src,i);
-                if(restart)
-                {
-                    line.Append(string.Format("{0} ", current.Format()));
-                    restart = false;
-                }
-
-                line.Append(string.Format("{0} ", HexFormat.format<W8,byte>(b)));
-
-                if(offset != 0 && (offset % bpl == 0))
-                {
-                    writer.WriteLine(line.Emit());
-                    restart = true;
-                }
-
-                offset++;
-            }
-
-            for(var q=0; q<fill; q++)
-            {
-                line.Append("00");
-                if(q != fill - 1)
-                    line.Append(" ");
-            }
-            writer.WriteLine(line.Emit());
-            return count;
-        }
-
         [Op]
         public unsafe static uint emit(MemorySeg src, uint bpl, FS.FilePath dst)
         {
             var line = text.buffer();
             using var writer = dst.Writer();
-
             var pSrc = src.BaseAddress.Pointer<byte>();
             var last =  src.LastAddress.Pointer<byte>();
             var current = MemoryAddress.Zero;

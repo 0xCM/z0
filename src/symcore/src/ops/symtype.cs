@@ -16,7 +16,7 @@ namespace Z0
             dst.TypeName = t.Name;
             dst.DataType = (PrimalCode)Enums.ecode(t);
             dst.SymCount = (ushort)t.GetFields().Length;
-            dst.TypeNameData = TextTools.utf16(dst.TypeName).ToArray();
+            dst.TypeNameData = text.utf16(dst.TypeName).ToArray();
             dst.TypeNameSize = (ushort)dst.TypeNameData.Length;
             return ref dst;
         }
@@ -27,7 +27,7 @@ namespace Z0
             dst.TypeName = src.Name;
             dst.DataType = (PrimalCode)Enums.ecode(src);
             dst.SymCount = (ushort)src.GetFields().Length;
-            dst.TypeNameData = TextTools.utf16(dst.TypeName).ToArray();
+            dst.TypeNameData = text.utf16(dst.TypeName).ToArray();
             dst.TypeNameSize = (ushort)dst.TypeNameData.Length;
             return ref dst;
         }

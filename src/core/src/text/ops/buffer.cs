@@ -19,9 +19,5 @@ namespace Z0
         [Op]
         public static ITextBuffer buffer(uint capacity)
             => new TextBuffer(capacity);
-
-        [MethodImpl(Inline), Op]
-        public static ITextBuffer buffer(StringBuilder dst)
-            => new TextBuffer(dst);
     }
 }

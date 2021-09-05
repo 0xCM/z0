@@ -117,12 +117,15 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var paths = Ws.Projects().Out(State.Project()).Files(true, FS.Obj, FS.O).View;
             var count = paths.Length;
+            var hex = HexLines.Service();
             for(var i=0; i<count; i++)
             {
                 ref readonly var src = ref skip(paths,i);
                 var dst = Ws.Projects().Out(State.Project(), "data") + FS.file(src.FileName.Format(), FS.Hex);
+                using var writer = dst.AsciWriter();
                 var data = src.ReadBytes();
-                var size = (ByteSize)MemoryEmitter.emit(data, 32, dst);
+                var size = hex.Emit(data, writer);
+                //var size = (ByteSize)MemoryEmitter.emit(data, 32, dst);
                 Write(string.Format("({0} bytes)[{1} -> {2}]", size, src.ToUri(), dst.ToUri()));
             }
 

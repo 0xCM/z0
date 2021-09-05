@@ -12,39 +12,6 @@ namespace Z0.Asm
 
     public sealed class AsmToolchain : AppService<AsmToolchain>
     {
-        public Outcome Run(in AsmToolchainSpec spec)
-        {
-            var outcome = Outcome.Success;
-            EnsurePaths(spec);
-            outcome = Assemble(spec);
-            if(outcome.Fail)
-            {
-                Wf.Error(outcome.Message);
-                return outcome;
-            }
-
-            outcome = ProcessAssembly(spec);
-            if(outcome.Fail)
-            {
-                Wf.Error(outcome.Message);
-                return outcome;
-            }
-
-            outcome = Disassemble(spec);
-            if(outcome.Fail)
-            {
-                Wf.Error(outcome.Message);
-                return outcome;
-            }
-
-            return ProcessDisassembly(spec);
-        }
-
-        void EnsurePaths(in AsmToolchainSpec spec)
-        {
-
-        }
-
         Outcome Exec(in CmdLine cmd)
         {
             var stdout = list<string>();
@@ -71,18 +38,6 @@ namespace Z0.Asm
                 return true;
             else
                 return (false, errout.Delimit(Chars.NL).Format());
-        }
-
-        Outcome Assemble(in AsmToolchainSpec spec)
-        {
-            var tool = Wf.Nasm();
-            var result = Exec(tool.Command(spec.AsmPath, tool.OutFile(spec.BinPath, ObjFileKind.bin), spec.ListPath));
-            if(result.Ok && CanEmitObj(spec))
-            {
-                var debug = CalcDebugOptions(spec);
-                result = Exec(tool.Command(spec.AsmPath, tool.OutFile(spec.ObjPath, spec.ObjKind), debug));
-            }
-            return result;
         }
 
         ByteSize EmitHexText(ReadOnlySpan<byte> src, ushort rowsize, FS.FilePath dst)
@@ -114,40 +69,6 @@ namespace Z0.Asm
             return size;
         }
 
-        ByteSize EmitHexArray(byte[] src, FS.FilePath dst)
-        {
-            var array = Hex.hexarray(src);
-            var size = src.Length;
-            var flow = EmittingFile(dst);
-            using var writer = dst.AsciWriter();
-            writer.WriteLine(array.Format(false));
-            EmittedFile(flow, size);
-            return size;
-        }
-
-        Outcome ProcessAssembly(in AsmToolchainSpec src)
-        {
-            var outpath = src.BinPath;
-            var data = outpath.ReadBytes();
-            EmitHexText(data, 40, src.HexPath);
-            EmitHexArray(data,src.HexArrayPath);
-            return true;
-        }
-
-        Outcome Disassemble(in AsmToolchainSpec spec)
-        {
-            var tool = Wf.BdDisasm();
-            var cmd = tool.Cmd(spec);
-            var cmdline = tool.CmdLine(cmd);
-            return Run(cmdline, cmd.OutputPath);
-        }
-
-        Outcome ProcessDisassembly(in AsmToolchainSpec spec)
-        {
-            var parser = Wf.DbDiasmProcessor();
-            parser.ParseDisassembly(spec.DisasmPath, spec.Analysis);
-            return true;
-        }
 
         Outcome Run(CmdLine cmdline, FS.FilePath dst)
         {
@@ -178,29 +99,5 @@ namespace Z0.Asm
             else
                 return (false, errout.Delimit(Chars.NL).Format());
        }
-
-        NasmDebugOptions CalcDebugOptions(in AsmToolchainSpec spec)
-        {
-            if(!spec.EmitDebugInfo)
-                return 0;
-
-            var options = NasmDebugOptions.g;
-
-            if(spec.ObjKind == ObjFileKind.bin)
-                return options;
-
-            if(spec.ObjKind == ObjFileKind.obj)
-            {
-                if((byte)spec.AsmBitMode <= 32)
-                    return options | NasmDebugOptions.Win32DbgFormat;
-                else
-                    return options | NasmDebugOptions.Win64DbgFormat;
-            }
-
-            return options;
-        }
-
-        bool CanEmitObj(in AsmToolchainSpec spec)
-            => spec.ObjKind != 0 && spec.ObjKind != ObjFileKind.bin && spec.ObjPath.IsNonEmpty;
     }
 }

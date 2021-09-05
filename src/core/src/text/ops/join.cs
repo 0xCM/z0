@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     using static core;
 
     partial struct TextTools
     {
-        public static string join(Span<string> src, string sep)
+        public static string join(string sep, Span<string> src)
         {
             var dst = buffer();
             for(var i=0; i<src.Length; i++)
@@ -27,18 +25,6 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static string join<T>(string sep, IEnumerable<T> src)
-            => string.Join(sep, src);
-
-        [Op, Closures(Closure)]
-        public static string join<T>(string sep, params T[] src)
-            => string.Join(sep, src);
-
-        [Op, Closures(Closure)]
-        public static string join<T>(char sep, IEnumerable<T> src)
-            => string.Join(sep, src);
-
-        [Op, Closures(Closure)]
         public static string join<T>(string sep, ReadOnlySpan<T> src)
         {
             var dst = buffer();
@@ -51,9 +37,5 @@ namespace Z0
             }
             return dst.Emit();
         }
-
-        [Op, Closures(Closure)]
-        public static string join<T>(char sep, params T[] src)
-            => string.Join(sep, src);
     }
 }

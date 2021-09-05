@@ -8,7 +8,6 @@ namespace Z0
 
     partial struct TextTools
     {
-
         [Op]
         public static string format(ReadOnlySpan<char> src)
             => new string(src);

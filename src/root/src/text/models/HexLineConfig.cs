@@ -14,24 +14,30 @@ namespace Z0
         /// <summary>
         /// The maximum byte-count per line
         /// </summary>
-        public ushort BytesPerLine {get;}
+        public readonly ushort BytesPerLine {get;}
 
         /// <summary>
         /// Specifies whether offset labels should be emitted
         /// </summary>
-        public bool LineLabels {get;}
+        public readonly bool LineLabels {get;}
 
         /// <summary>
         /// If offset lables are emitted, the separator between the label and the data
         /// </summary>
-        public char Delimiter {get;}
+        public readonly char Delimiter {get;}
+
+        /// <summary>
+        /// Specifies whether the last line should be zero-padded to <see cref='BytesPerLine'/>
+        /// </summary>
+        public readonly bool ZeroPad {get;}
 
         [MethodImpl(Inline)]
-        public HexLineConfig(ushort linebytes, bool linelabels, char delimiter = Chars.Space)
+        public HexLineConfig(ushort bpl, bool labels, char delimiter = Chars.Space, bool zeropad = false)
         {
-            BytesPerLine = linebytes;
-            LineLabels = linelabels;
+            BytesPerLine = bpl;
+            LineLabels = labels;
             Delimiter = delimiter;
+            ZeroPad = zeropad;
         }
     }
 }

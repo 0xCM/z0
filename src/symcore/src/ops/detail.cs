@@ -15,9 +15,9 @@ namespace Z0
             dst.Index = src.Key;
             dst.Name = src.Name;
             dst.Expr = src.Expr;
-            dst.NameData = TextTools.utf16(src.Name).ToArray();
+            dst.NameData = text.utf16(src.Name).ToArray();
             dst.NameSize = (ushort)dst.NameData.Count;
-            dst.ExprData = TextTools.utf16(src.Expr.Format()).ToArray();
+            dst.ExprData = text.utf16(src.Expr.Format()).ToArray();
             dst.ExprSize = (ushort)dst.ExprData.Count;
             dst.Hidden = src.Hidden;
             return ref dst;

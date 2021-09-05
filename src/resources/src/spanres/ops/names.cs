@@ -29,6 +29,6 @@ namespace Z0
 
         public ByteSpanSpec name<K>(Sym<K> src)
             where K : unmanaged
-                => SpanRes.specify(src.Name, TextTools.utf16(src.Name).ToArray());
+                => SpanRes.specify(src.Name, text.utf16(src.Name).ToArray());
     }
 }

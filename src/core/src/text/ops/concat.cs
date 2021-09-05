@@ -13,18 +13,6 @@ namespace Z0
 
     partial struct TextTools
     {
-        [MethodImpl(Inline), Op]
-        public static string concat(params object[] src)
-            => string.Concat(src);
-
-        /// <summary>
-        /// Concatenates a sequence of characters with no intervening delimiter
-        /// </summary>
-        /// <param name="src">The characters to concatenate</param>
-        [MethodImpl(Inline), Op]
-        public static string concat(IEnumerable<char> src)
-            => string.Concat(src);
-
         [Op]
         public static string concat(ReadOnlySpan<string> src, char? delimiter)
         {
@@ -53,6 +41,5 @@ namespace Z0
             }
             return dst.ToString();
         }
-
     }
 }
