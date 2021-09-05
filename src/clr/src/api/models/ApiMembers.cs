@@ -42,6 +42,11 @@ namespace Z0
             get => Data.Count;
         }
 
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length;
+        }
         public ReadOnlySpan<ApiMember> View
         {
             [MethodImpl(Inline)]
@@ -54,11 +59,14 @@ namespace Z0
             get => Data;
         }
 
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Data.Length;
-        }
+        public Methods Methods
+            => Data.Map(x => x.Method).Storage;
+
+        public ReadOnlySpan<ApiMsil> Msil
+            => Data.Map(x => x.Msil);
+
+        public ReadOnlySpan<ClrMethodArtifact> Artifacts
+            => Data.Map(x => x.Metadata);
 
         public ref ApiMember this[long index]
         {

@@ -22,7 +22,7 @@ namespace Z0
         }
 
         public static string format(in ApiRuntimeMember src)
-            => string.Format(RenderPattern, src.Address, src.Uri, src.DisplaySig, src.Msil.Code.Format());
+            => string.Format(RenderPattern, src.Address, src.Uri, src.DisplaySig, src.Msil.CliCode.Format());
 
         /// <summary>
         /// Returns a <see cref='ApiHostCatalog'/> for a specified host

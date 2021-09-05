@@ -8,17 +8,6 @@ namespace Z0
 
     using static core;
 
-    public abstract class Tool<T> : Service<T>, ITool<T>
-        where T : Tool<T>,new()
-    {
-        public ToolId Id {get;}
-
-        protected Tool(ToolId id)
-        {
-            Id = id;
-        }
-    }
-
     public abstract class Tool<T,C> : Tool<T>, ICmdLineTool<T,C>
         where T : Tool<T,C>,new()
         where C : IToolCmd

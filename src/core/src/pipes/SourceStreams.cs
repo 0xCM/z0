@@ -11,14 +11,14 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public readonly struct SourceStreams
+    public readonly partial struct SourceStreams
     {
         const NumericKind Closure = NumericKind.U64;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ISourceStream<T> create<T>(IEnumerable<T> src, ulong classifier = 0)
             where T : struct
-                => new SourceStream<T>(src, classifier);
+                => new Deferred<T>(src, classifier);
 
         /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source

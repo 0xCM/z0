@@ -15,15 +15,15 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiCode
     {
-        public static Index<ApiMsil> msil(MethodInfo[] src)
+        public static Index<ApiMsil> msil(ReadOnlySpan<MethodInfo> src)
         {
             var count = src.Length;
             var buffer = alloc<ApiMsil>(count);
-            var methods = @readonly(src);
+            var methods = src;
             var target = span(buffer);
             for(var i=0; i<count; i++)
             {
-                ref readonly var method = ref skip(methods,i);
+                ref readonly var method = ref skip(src,i);
                 var address = ClrJit.jit(method);
                 var uri = ApiUri.located(method.DeclaringType.ApiHostUri(), method.Name, method.Identify());
                 var located = new ResolvedMethod(uri, method, address);

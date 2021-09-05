@@ -4,10 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ApiMemoryClass;
-    using I = IApiMemoryClass;
-
-    partial struct ApiClasses
+    [Actor]
+    public abstract class Tool<T> : Service<T>, ITool<T>
+        where T : Tool<T>,new()
     {
+        public ToolId Id {get;}
+
+        protected Tool(ToolId id)
+        {
+            Id = id;
+        }
     }
 }

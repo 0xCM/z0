@@ -26,7 +26,7 @@ namespace Z0.Asm
                     continue;
 
                 var part = skip(elements,0);
-                var id = ApiPartIdParser.single(part);
+                var id = ApiParsers.part(part);
                 if(id == 0)
                     continue;
 

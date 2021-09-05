@@ -7,37 +7,42 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
+    [StructLayout(LayoutKind.Sequential)]
     public class ApiMsil
     {
-        public CliToken Token {get;}
+        /// <summary>
+        /// The assembly-relative method identifier
+        /// </summary>
+        public readonly CliToken Token;
 
         /// <summary>
         /// The operation identity
         /// </summary>
-        public Name Uri {get;}
+        public readonly Name Uri;
 
         /// <summary>
         /// The code's base address
         /// </summary>
-        public MemoryAddress BaseAddress {get;}
+        public readonly MemoryAddress BaseAddress;
 
         /// <summary>
         /// The Cli signature
         /// </summary>
-        public CliSig CliSig {get;}
+        public readonly CliSig CliSig;
 
         /// <summary>
         /// The encoded cil
         /// </summary>
-        public BinaryCode Code {get;}
+        public readonly BinaryCode CliCode;
 
         /// <summary>
         /// The method implementation attributes
         /// </summary>
-        public MethodImplAttributes ImplSpec {get;}
+        public readonly MethodImplAttributes ImplSpec;
 
         [MethodImpl(Inline)]
         public ApiMsil(CliToken token, MemoryAddress @base, OpUri uri, CliSig sig, BinaryCode data, MethodImplAttributes impl)
@@ -45,9 +50,9 @@ namespace Z0
             Token = token;
             BaseAddress = @base;
             Uri = uri.Format();
-            Code = data;
+            CliCode = data;
             CliSig = sig;
-            Code = data;
+            CliCode = data;
             ImplSpec = impl;
         }
     }

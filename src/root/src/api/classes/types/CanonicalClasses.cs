@@ -9,6 +9,12 @@ namespace Z0
 
     partial struct ApiClasses
     {
+        public readonly struct Flow : I { K I.Kind => K.Flow; }
+
+        public readonly struct Store : I { K I.Kind => K.Store; }
+
+        public readonly struct Load : I { K I.Kind => K.Load; }
+
         public readonly struct Reverse : I { K I.Kind => K.Reverse; }
 
         public readonly struct Identity : I { K I.Kind => K.Identity; }

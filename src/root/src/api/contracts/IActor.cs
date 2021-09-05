@@ -4,10 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ApiMemoryClass;
-    using I = IApiMemoryClass;
-
-    partial struct ApiClasses
+    public interface IActor
     {
+        string Name {get;}
+    }
+
+    public interface IActor<S,T> : IActor
+    {
+        S Source {get;}
+
+        T Target {get;}
     }
 }

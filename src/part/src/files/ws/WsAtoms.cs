@@ -57,6 +57,8 @@ namespace Z0
 
         public const string machine = nameof(machine);
 
+        public const string msil = nameof(msil);
+
         public const string obj = nameof(obj);
 
         public const string projects = nameof(projects);

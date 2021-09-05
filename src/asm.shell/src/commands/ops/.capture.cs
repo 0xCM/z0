@@ -15,7 +15,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var id = arg(args,0).Value;
-            var part = ApiPartIdParser.single(id);
+            var part = ApiParsers.part(id);
             if(part != 0)
                 Captured(CapturePart(part));
             else

@@ -118,7 +118,7 @@ namespace Z0
         [Op]
         public static LocatedImageInfo locate(ProcessModule src)
         {
-            var part = ApiPartIdParser.fromFile(src.FileName);
+            var part = ApiParsers.partFromFile(src.FileName);
             var entry = (MemoryAddress)src.EntryPointAddress;
             var @base = src.BaseAddress;
             var size = (uint)src.ModuleMemorySize;

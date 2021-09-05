@@ -4,17 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using static Root;
+    using static core;
 
     partial struct FS
     {
-        public static PartId part(FileName src)
-        {
-            var i = src.Name.Text.IndexOf(Chars.Dot);
-            if(i == NotFound)
-                return default;
-            else
-                return ApiParsers.part(text.segment(src.Name.Text,0, i - 1));
-        }
+        [Op]
+        public static FS.FileName partfile(PartId part, FS.FileExt ext)
+            => file(part.Format(), ext);
     }
 }

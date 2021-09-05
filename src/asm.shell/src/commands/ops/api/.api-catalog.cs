@@ -18,7 +18,6 @@ namespace Z0.Asm
             var parts = catalog.PartIdentities;
             var desc = string.Format("Parts:[{0}]", parts.Map(p => p.Format()).Delimit());
             Write(desc);
-            //iter(parts, part => Write(part.Format()));
             return result;
         }
     }

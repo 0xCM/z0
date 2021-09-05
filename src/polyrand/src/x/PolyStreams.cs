@@ -79,7 +79,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static ISourceStream<T> DataStream<T>(this ISource src)
             where T : unmanaged
-                => new SourceStream<T>(src.Stream<T>());
+                => SourceStreams.create(src.Stream<T>());
 
         /// <summary>
         /// Produces a stream values from the source subject to a specified range and optional filter
@@ -90,7 +90,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static ISourceStream<T> DataStream<T>(this IDomainSource src, T min, T max)
             where T : unmanaged
-                => new SourceStream<T>(src.Stream<T>((min,max)));
+                => SourceStreams.create(src.Stream<T>((min,max)));
 
         /// <summary>
         /// Produces a stream values from the source subject to a specified range and optional filter
@@ -112,6 +112,6 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static ISourceStream<T> DataStream<T>(this IDomainSource src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => new SourceStream<T>(src.Stream(domain, filter));
+                => SourceStreams.create(src.Stream(domain, filter));
     }
 }

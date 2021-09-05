@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection.Metadata;
 
-    using static memory;
+    using static core;
 
     public sealed class MsilPipe : AppService<MsilPipe>
     {
@@ -131,7 +131,7 @@ namespace Z0
                     var member = code.Member;
                     var cil = member.Msil;
                     var sig = code.CliSig.Data;
-                    var bytes = cil.Code;
+                    var bytes = cil.CliCode;
                     writer.WriteLine(CilPageBreak);
                     writer.WriteLine(string.Format(CilCodeHeader, member.Token, member.BaseAddress, member.OpUri));
                     writer.WriteLine(string.Format(CilSigHeader, sig.Length, sig.Format()));
@@ -151,7 +151,7 @@ namespace Z0
 
         public void RenderCode(ApiMsil src, ITextBuffer dst)
         {
-            var bytes = src.Code;
+            var bytes = src.CliCode;
             var sig = src.CliSig.Data;
             dst.AppendLine(CilPageBreak);
             dst.AppendLine(string.Format(CilCodeHeader, src.Token, src.BaseAddress, src.Uri));
@@ -193,7 +193,7 @@ namespace Z0
             dst.BaseAddress = cil.BaseAddress;
             dst.Token = src.Token;
             dst.Uri = src.OpUri;
-            dst.Encoded = cil.Code;
+            dst.Encoded = cil.CliCode;
             return ref dst;
         }
 

@@ -7,6 +7,15 @@ namespace Z0
     using K = ApiCanonicalClass;
     using A = OpKindAttribute;
 
+    /// <summary>
+    /// Identifies a target operation/type that transports A -> B
+    /// </summary>
+    public class FlowAttribute : A { public FlowAttribute() : base(K.Flow) {} }
+
+    public class LoadAttribute : A { public LoadAttribute() : base(K.Load) {} }
+
+    public class StoreAttribute : A { public StoreAttribute() : base(K.Store) {} }
+
     public sealed class IdentityFunctionAttribute : A { public IdentityFunctionAttribute() : base(K.Identity) {} }
 
     public sealed class IdentityValueAttribute : A { public IdentityValueAttribute() : base(K.Identity) {} }

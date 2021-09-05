@@ -80,6 +80,7 @@ namespace Z0
 
         public MethodDisplaySig DisplaySig
             => new MethodDisplaySig(ClrMethodArtifact.format(this));
+
         CliToken IClrArtifact.Token
             => Id;
 

@@ -348,6 +348,8 @@ public enum ApiClassKind : ushort
 
     Store,
 
+    Flow,
+
     Zero,
 
     One,

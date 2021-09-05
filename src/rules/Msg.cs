@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct Msg
+    struct Msg
     {
         static RenderPattern<S,Type> TransformFailedPattern<S>()
             => "The transformation {0}->{1} failed";

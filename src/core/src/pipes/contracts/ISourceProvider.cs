@@ -4,17 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IStreamProvider<T>
+    public interface ISourceProvider<T>
+        where T : ISource
     {
-        /// <summary>
-        /// In infinite T-stream
-        /// </summary>
-        IEnumerable<T> Stream {get;}
+        T Source {get;}
     }
 }

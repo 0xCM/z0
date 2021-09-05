@@ -10,9 +10,14 @@ namespace Z0
     {
         public DomainAttribute(Type src)
         {
-            PointSource = src;
+            PointType = src;
         }
 
-        public Type PointSource {get;}
+        public DomainAttribute()
+        {
+            PointType = typeof(void);
+        }
+
+        public Type PointType {get;}
     }
 }

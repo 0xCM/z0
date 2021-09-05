@@ -33,6 +33,9 @@ namespace Z0
         public static MsgPattern<Identifier> WorkspaceSelected
             => "{0} workspace selected";
 
+        public static MsgPattern<ApiHostUri> HostNotFound
+            => "Host {0} not found";
+
         public static StatusMsg<T> status<T>(T data)
             => new StatusMsg<T>(data);
 

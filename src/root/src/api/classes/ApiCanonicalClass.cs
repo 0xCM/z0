@@ -85,5 +85,17 @@ namespace Z0
         Concretizer = Id.Concretizer,
 
         ParseFunction = Id.ParseFunction,
+
+        Flow = Id.Flow,
+
+        /// <summary>
+        /// Identifies operations that move data from B -> A
+        /// </summary>
+        Load = Id.Load,
+
+        /// <summary>
+        /// Identifies operations that move data from A -> B
+        /// </summary>
+        Store = Id.Store,
     }
 }

@@ -5,14 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Threading;
-    using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Root;
     using static core;
 
+    [ApiHost]
     public readonly struct ApiParsers
     {
+        [Op]
+        public static PartId partFromFile(string src)
+            => part(Path.GetFileName(src).Replace("z0.", EmptyString).Replace(".dll", EmptyString).Replace(".exe", EmptyString));
+
+        [Op]
         public static Outcome path(string src, out ApiPath dst)
         {
             var result = Outcome.Success;
@@ -36,17 +41,41 @@ namespace Z0
             return result;
         }
 
+        public static PartId part(string src)
+        {
+            part(src, out var dst);
+            return dst;
+        }
+
         [Op]
         public static Outcome part(string src, out PartId dst)
         {
+            dst = PartId.None;
             var symbols = Symbols.index<PartId>();
             if(symbols.Lookup(src, out var sym))
             {
                 dst = sym.Kind;
                 return true;
             }
-            dst = PartId.None;
             return false;
+        }
+
+        [Op]
+        public static Outcome host(string src, out ApiHostUri dst)
+        {
+            var result = Outcome.Failure;
+            dst = ApiHostUri.Empty;
+            var i = text.index(src, Chars.FSlash);
+            if(i>0)
+            {
+                result = part(text.left(src,i), out var p);
+                if(result)
+                {
+                    var h = ApiHostUri.define(p, text.right(src,i));
+                    return result;
+                }
+            }
+            return result;
         }
 
         [Op]

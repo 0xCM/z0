@@ -15,15 +15,15 @@ namespace Z0
     /// </summary>
     public class ApiMember : IApiMember<ApiMember>
     {
-        public OpUri OpUri {get;}
+        public readonly OpUri OpUri;
 
-        public MethodInfo Method {get;}
+        public readonly MethodInfo Method;
 
-        public ApiClassKind ApiClass {get;}
+        public readonly ApiClassKind ApiClass;
 
-        public ApiMsil Msil {get;}
+        public readonly ApiMsil Msil;
 
-        public ClrMethodArtifact Metadata {get;}
+        public readonly ClrMethodArtifact Metadata;
 
         public ApiMember(OpUri uri, MethodInfo method, MemoryAddress address)
         {
@@ -88,5 +88,11 @@ namespace Z0
 
         public static ApiMember Empty
             => new ApiMember(OpUri.Empty, EmptyVessels.EmptyMethod, 0);
+
+        ApiMsil IApiMember.Msil
+            => Msil;
+
+        MethodInfo IApiMethod.Method
+            => Method;
     }
 }

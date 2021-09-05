@@ -15,16 +15,6 @@ namespace Z0
         Alloc = ApiClassKind.Alloc,
 
         /// <summary>
-        /// Identifies operations that move data from B -> A
-        /// </summary>
-        Load = ApiClassKind.Load,
-
-        /// <summary>
-        /// Identifies operations that move data from A -> B
-        /// </summary>
-        Store = ApiClassKind.Store,
-
-        /// <summary>
         /// Identifies an operation that accepts a memory buffer, such as a memory segmented covered by an S-span,
         /// and returns the buffer unaltered but with an alternate presentation, such as a T-span
         /// </summary>

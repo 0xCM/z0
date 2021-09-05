@@ -84,7 +84,7 @@ namespace Z0
             dst.DisplaySig = src.Method.DisplaySig().Format();
             dst.Token = msil.Token;
             dst.Uri = src.Uri.Format();
-            dst.MsilCode = msil.Code;
+            dst.MsilCode = msil.CliCode;
             return dst;
         }
     }

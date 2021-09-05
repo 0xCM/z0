@@ -310,16 +310,6 @@ namespace Z0.Asm
             }
         }
 
-        void EmitMsil()
-        {
-            var pipe = Wf.MsilPipe();
-            var members = Wf.ApiCatalog.ApiHosts.Where(h => h.HostType == typeof(math)).Single().Methods;
-            var buffer = text.buffer();
-            var methods = ApiCode.msil(members);
-            root.iter(methods, m => pipe.RenderCode(m,buffer));
-            using var writer = Db.AppDataFile(FS.file(nameof(math), FS.Il)).Writer();
-            writer.Write(buffer.Emit());
-        }
 
         static string FormatAttributes(IXmlElement src)
             => src.Attributes.Select(x => string.Format("{0}={1}",x.Name, x.Value)).Delimit(Chars.Comma).Format();

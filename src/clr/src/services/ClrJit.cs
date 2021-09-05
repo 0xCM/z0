@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
@@ -23,7 +21,7 @@ namespace Z0
         [Op]
         public static MemoryAddress jit(MethodInfo src)
         {
-            sys.prepare(src.MethodHandle);
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
             return fptr(src);
         }
 

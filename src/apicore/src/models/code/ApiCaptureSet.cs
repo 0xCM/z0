@@ -33,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static MsilSourceBlock msil(in ApiMsil src, MethodImplAttributes attributes = default)
-            => msil(src.Token, src.CliSig, src.Code, attributes);
+            => msil(src.Token, src.CliSig, src.CliCode, attributes);
 
         public OpUri Id {get;}
 
