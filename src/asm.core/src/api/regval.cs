@@ -8,14 +8,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static Blit;
 
-    partial struct Prototypes
+    partial struct asm
     {
-        public readonly struct StringMap
-        {
-
-        }
-
-
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static NamedRegValue<T> regval<T>(text7 name, T value)
+            where T : unmanaged
+                => new NamedRegValue<T>(name,value);
     }
 }

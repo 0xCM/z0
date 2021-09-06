@@ -4,11 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using K = AsmSigTokenKind;
 
     partial class AsmSigs
     {
-        [SymSource(K.Rounding)]
+        const string tokens = nameof(tokens);
+
+        [SymSource(tokens)]
         public enum RoundingToken : byte
         {
             None = 0,
@@ -20,7 +21,7 @@ namespace Z0.Asm
             er,
         }
 
-        [SymSource(K.SysReg)]
+        [SymSource(tokens)]
         public enum SysRegToken : byte
         {
             [Symbol("bnd", "A 128-bit bounds register. BND0 through BND3")]
@@ -30,7 +31,7 @@ namespace Z0.Asm
             Sreg,
         }
 
-        [SymSource(K.GpReg)]
+        [SymSource(tokens)]
         public enum GpRegToken : byte
         {
             [Symbol("reg", "A gp register used for instructions when the width of the register does not matter to the semantics of the operation of the instruction. The register can be r16, r32, or r64.")]
@@ -79,7 +80,7 @@ namespace Z0.Asm
             r32b,
         }
 
-        [SymSource(K.MmxReg)]
+        [SymSource(tokens)]
         public enum MmxRegToken : byte
         {
             [Symbol("mm", "An MMX register", "MM0|MM1|MM2|MM3|MM4|MM5|MM6|MM7")]
@@ -92,7 +93,7 @@ namespace Z0.Asm
             mm64,
         }
 
-        [SymSource(K.MaskReg)]
+        [SymSource(tokens)]
         public enum MaskRegToken : byte
         {
             [Symbol("{z}")]
@@ -108,7 +109,7 @@ namespace Z0.Asm
             k1Reg,
         }
 
-        [SymSource(K.VecReg)]
+        [SymSource(tokens)]
         public enum VRegToken : byte
         {
             [Symbol("xmm", "An XMM register. The 128-bit XMM registers are: XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode.The contents of memory are found at the address provided by the effective address computation")]
@@ -139,7 +140,7 @@ namespace Z0.Asm
             zmm,
         }
 
-        [SymSource(K.FpuReg)]
+        [SymSource(tokens)]
         public enum FpuRegToken : byte
         {
             [Symbol("ST(0)", "The top element of the FPU register stack")]
@@ -167,7 +168,7 @@ namespace Z0.Asm
             ST7,
         }
 
-        [SymSource(K.FpuMem)]
+        [SymSource(tokens)]
         public enum FpuMemToken : byte
         {
             [Symbol("m16int", "Indicates a 16-bit integer memory operand in the context of an FPU integer instruction")]
@@ -189,7 +190,7 @@ namespace Z0.Asm
             m80fp,
         }
 
-        [SymSource(K.Imm)]
+        [SymSource(tokens)]
         public enum ImmToken : byte
         {
             [Symbol("imm8", "An immediate 8-bit value in the inclusive range [–128, 127]. For instructions in which imm8 is combined with a word or doubleword operand, the immediate value is sign-extended to form a word or doubleword. The upper byte of the word is filled with the topmost bit of the immediate value")]
@@ -205,7 +206,7 @@ namespace Z0.Asm
             imm64,
         }
 
-        [SymSource(K.Mem)]
+        [SymSource(tokens)]
         public enum MemToken : byte
         {
             [Symbol("m", "A memory operand of width 16, 32 or 64 bits")]
@@ -236,7 +237,7 @@ namespace Z0.Asm
             m512,
         }
 
-        [SymSource(K.MemPair)]
+        [SymSource(tokens)]
         public enum MemPairToken : byte
         {
             [Symbol("m16&16", "A memory operand that defines a 16-bit x 16-bit pair")]
@@ -252,7 +253,7 @@ namespace Z0.Asm
             m16x64,
         }
 
-        [SymSource(K.GpRm)]
+        [SymSource(tokens)]
         public enum GpRmToken : byte
         {
             [Symbol("/r", "Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand")]
@@ -271,7 +272,7 @@ namespace Z0.Asm
             rm64,
         }
 
-        [SymSource(K.VecRm)]
+        [SymSource(tokens)]
         public enum VecRmToken : byte
         {
             [Symbol("xmm/m32", "An XMM register or a 32-bit memory operand. The 128-bit XMM registers are XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation")]
@@ -290,7 +291,7 @@ namespace Z0.Asm
             zmm512,
         }
 
-        [SymSource(K.Vsib)]
+        [SymSource(tokens)]
         public enum VsibToken : byte
         {
             [Symbol("vm32x", "A vector array of memory operands specified using VSIB memory addressing. The array of memory addresses are specified using a common base register, a constant scale factor, and a vector index register with individual elements of 32-bit index value in an XMM register")]
@@ -315,7 +316,7 @@ namespace Z0.Asm
         /// <summary>
         /// "Identifies a variable that represents a memory offset, used by some variants of the MOV instruction. The actual address is given by a simple offset relative to the segment base. No ModR/M byte is used in the instruction. The number shown with moffs indicates its size, which is determined by the address-size attribute of the instruction "
         /// </summary>
-        [SymSource(K.Moffs)]
+        [SymSource(tokens)]
         public enum MoffsToken : byte
         {
             [Symbol("moffs8", "A segbase-relative address of width 32")]
@@ -331,7 +332,7 @@ namespace Z0.Asm
             moffs64,
         }
 
-        [SymSource(K.Rel)]
+        [SymSource(tokens)]
         public enum RelToken: byte
         {
             [Symbol("rel8", "A relative address in the range from 128 bytes before the end of the instruction to 127 bytes after the end of the instruction")]
@@ -345,7 +346,7 @@ namespace Z0.Asm
         }
 
 
-        [SymSource(K.Ptr)]
+        [SymSource(tokens)]
         public enum PtrToken : byte
         {
             [Symbol("ptr16:16", "A far pointer typically to a code segment different from that of the instruction. The notation 16:16 indicates that the value of the pointer has two parts. The value to the left of the colon is a 16- bit selector or value destined for the code segment register. The value to the right corresponds to the offset within the destination segment. The ptr16:16 symbol is used when the instruction's operand-size attribute is 16 bits E.G, CALL ptr16:16 (Call far, absolute, address given in operand")]
@@ -355,7 +356,7 @@ namespace Z0.Asm
             ptr16x32,
         }
 
-        [SymSource(K.FarPtr)]
+        [SymSource(tokens)]
         public enum FarPtrToken : byte
         {
             [Symbol("m16:16", "A far pointer defined by a 16-bit segment selector an 16-bit offset")]
@@ -368,7 +369,7 @@ namespace Z0.Asm
             p16x64
         }
 
-        [SymSource(K.SrcOp)]
+        [SymSource(tokens)]
         public enum SrcOpToken : byte
         {
             [Symbol("SRC", "The source in a single-source instruction")]
@@ -384,7 +385,7 @@ namespace Z0.Asm
             SRC3,
         }
 
-        [SymSource(K.Broadcast)]
+        [SymSource(tokens)]
         public enum BroadcastToken
         {
             [Symbol("bcast32", "Represents a 32-bit memory location that defines a scalar to broadcast to vector operands")]
@@ -394,7 +395,7 @@ namespace Z0.Asm
             bcast64,
         }
 
-        [SymSource(K.ZmmBCast)]
+        [SymSource(tokens)]
         public enum ZmmBCastToken : byte
         {
             /// <summary>

@@ -30,6 +30,10 @@ namespace Z0
         public static bit whitespace(char c)
             => space(c) || tab(c) || cr(c) || nl(c) || vtab(c);
 
+        [MethodImpl(Inline), Op]
+        public static bit whitespace(AsciChar c)
+            => whitespace((char)c);
+
         /// <summary>
         /// Returns true if only asci whitspace chacter codes are present
         /// </summary>

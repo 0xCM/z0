@@ -37,6 +37,18 @@ namespace Z0
             get => ref first(Bytes);
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => api.empty(this);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !api.empty(this);
+        }
+
         [MethodImpl(Inline)]
         public Span<T> Storage<T>()
             where T : unmanaged

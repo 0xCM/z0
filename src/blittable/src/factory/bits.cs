@@ -14,10 +14,15 @@ namespace Z0
         partial struct Factory
         {
             [MethodImpl(Inline)]
-            public static kvp<S,T> map<S,T>(S src, T dst)
-                where S : unmanaged
+            public static bits<N,T> bits<N,T>(N n, T value)
+                where N : unmanaged, ITypeNat
                 where T : unmanaged
-                    => new kvp<S,T>(src,dst);
+                    => new bits<N,T>(value);
+
+            [MethodImpl(Inline), Op, Closures(Closure)]
+            public static bits<T> bits<T>(uint n, T value)
+                where T : unmanaged
+                    => new bits<T>(n, value);
         }
     }
 }

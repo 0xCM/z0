@@ -24,7 +24,7 @@ namespace Z0
         {
             T Eval(S x);
 
-            map<S,T> Map(S x);
+            kvp<S,T> Map(S x);
         }
     }
 }

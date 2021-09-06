@@ -9,40 +9,40 @@ namespace Z0
     partial struct Blit
     {
         [Free]
-        public interface IList
+        public interface ITuple
         {
             uint N  {get;}
         }
 
         [Free]
-        public interface IList<N> : IList
+        public interface ITuple<N> : ITuple
             where N : unmanaged, ITypeNat
         {
-            uint IList.N
+            uint ITuple.N
                 => Typed.nat32u<N>();
         }
 
         [Free]
-        public interface IList<F,N> : IList<N>
+        public interface ITuple<F,N> : ITuple<N>
             where N : unmanaged, ITypeNat
-            where F : unmanaged, IList<F,N>
+            where F : unmanaged, ITuple<F,N>
         {
 
         }
 
         [Free]
-        public interface IList<F,N,T0> : IList<F,N>
+        public interface ITuple<F,N,T0> : ITuple<F,N>
             where N : unmanaged, ITypeNat
-            where F : unmanaged, IList<F,N,T0>
+            where F : unmanaged, ITuple<F,N,T0>
             where T0 : unmanaged
         {
 
         }
 
         [Free]
-        public interface IList<F,N,T0,T1> : IList<F,N>
+        public interface ITuple<F,N,T0,T1> : ITuple<F,N>
             where N : unmanaged, ITypeNat
-            where F : unmanaged, IList<F,N,T0,T1>
+            where F : unmanaged, ITuple<F,N,T0,T1>
             where T0 : unmanaged
             where T1 : unmanaged
         {
@@ -50,9 +50,9 @@ namespace Z0
         }
 
         [Free]
-        public interface IList<F,N,T0,T1,T2> : IList<F,N>
+        public interface ITuple<F,N,T0,T1,T2> : ITuple<F,N>
             where N : unmanaged, ITypeNat
-            where F : unmanaged, IList<F,N,T0,T1,T2>
+            where F : unmanaged, ITuple<F,N,T0,T1,T2>
             where T0 : unmanaged
             where T1 : unmanaged
             where T2 : unmanaged
@@ -60,11 +60,10 @@ namespace Z0
 
         }
 
-
        [Free]
-        public interface IList<F,N,T0,T1,T2,T3> : IList<F,N>
+        public interface ITuple<F,N,T0,T1,T2,T3> : ITuple<F,N>
             where N : unmanaged, ITypeNat
-            where F : unmanaged, IList<F,N,T0,T1,T2,T3>
+            where F : unmanaged, ITuple<F,N,T0,T1,T2,T3>
             where T0 : unmanaged
             where T1 : unmanaged
             where T2 : unmanaged
@@ -72,6 +71,5 @@ namespace Z0
         {
 
         }
-
     }
 }

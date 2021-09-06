@@ -14,7 +14,7 @@ namespace Z0
     {
         public static string format(Index<Setting> src)
         {
-            var dst = TextTools.buffer();
+            var dst = text.buffer();
             iter(src, x => dst.AppendLine(x.Format()));
             return dst.Emit();
         }

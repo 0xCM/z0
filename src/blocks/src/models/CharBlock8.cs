@@ -90,6 +90,5 @@ namespace Z0
 
         public static B Empty => RP.Spaced8;
 
-
     }
 }

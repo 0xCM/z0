@@ -38,7 +38,6 @@ namespace Z0
             var kTypes = src.Count;
             for(var i=0; i<kTypes; i++)
                 dst.AddRange(literals(src[i]));
-
             return dst.Array();
         }
 
@@ -103,7 +102,6 @@ namespace Z0
                 ref readonly var f = ref skip(fields,i);
                 ref var row = ref seek(dst,i);
                 var tag = f.Tag<SymbolAttribute>();
-
                 row.Component = component;
                 row.Type = type.Name;
                 row.DataType = kind;

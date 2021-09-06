@@ -12,6 +12,7 @@ namespace Z0
 
     partial struct Blit
     {
+
         public readonly ref struct bv
         {
             readonly Span<bit> Bits;

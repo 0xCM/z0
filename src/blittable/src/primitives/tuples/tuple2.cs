@@ -9,28 +9,23 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
-    using static core;
 
     partial struct Blit
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct list3<T0,T1,T2> : IList<list3<T0,T1,T2>,N3,T0,T1,T2>
+        public struct tuple<T0,T1> : ITuple<tuple<T0,T1>,N2,T0,T1>
             where T0: unmanaged
             where T1: unmanaged
-            where T2 : unmanaged
         {
             internal T0 c0;
 
             internal T1 c1;
 
-            internal T2 c2;
-
             [MethodImpl(Inline)]
-            public list3(T0 a0, T1 a1, T2 a2)
+            public tuple(T0 a0, T1 a1)
             {
                 c0 = a0;
                 c1 = a1;
-                c2 = a2;
             }
 
             public T0 this[N0 n]
@@ -47,14 +42,6 @@ namespace Z0
                 get => c1;
                 [MethodImpl(Inline)]
                 set => c1 = value;
-            }
-
-            public T2 this[N2 n]
-            {
-                [MethodImpl(Inline)]
-                get => c2;
-                [MethodImpl(Inline)]
-                set => c2 = value;
             }
         }
     }

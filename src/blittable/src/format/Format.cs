@@ -8,12 +8,12 @@ namespace Z0
     {
         public partial class Render
         {
-            public static string format<S,T>(in map<S,T> m)
+            public static string format<S,T>(in kvp<S,T> m)
                 where S : unmanaged
                 where T : unmanaged
             {
                 const string Pattern = "{0} -> {1}";
-                return string.Format(Pattern, m.Source, m.Target);
+                return string.Format(Pattern, m.Key, m.Val);
             }
         }
     }

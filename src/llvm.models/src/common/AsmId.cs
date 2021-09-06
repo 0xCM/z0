@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
+    [SymSource(nameof(llvm))]
     public enum AsmId : ushort
     {
         PHI	= 0,

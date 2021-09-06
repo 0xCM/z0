@@ -18,26 +18,63 @@ namespace Z0.Asm
         [CmdOp(".test")]
         unsafe Outcome Test(CmdArgs args)
         {
-            return TestHexDigitValues(args);
-            // var result = Outcome.Success;
-            // BitWidth w8 = 8;
-            // BitWidth w16 = 16;
-            // BitWidth w32 = 32;
-            // BitWidth w64 = 64;
+            var result = Outcome.Success;
 
-            // var sz8 = asm.asmsize(w8);
-            // var sz16 = asm.asmsize(w16);
-            // var sz32 = asm.asmsize(w32);
-            // var sz64 = asm.asmsize(w64);
-            // Write(sz8);
-            // Write(sz16);
-            // Write(sz32);
-            // Write(sz64);
-            // return result;
+            return EmitSymIndex();
+        }
+
+        Outcome EmitSymIndex()
+        {
+            var result = Outcome.Success;
+            var literals = SymLiterals();
+            var count = literals.Length;
+            var counter = 0u;
+            var dst = Ws.Tables().Subdir(WsAtoms.machine) + FS.file("symliterals", FS.Txt);
+            using var writer = dst.UnicodeWriter();
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var literal = ref literals[i];
+                var name = literal.Name.Format();
+                ref readonly var pos = ref literal.Position;
+                var symbol = literal.Symbol.Format();
+                ref readonly var scalar = ref literal.ScalarValue;
+                var @class = literal.Class.IsNonEmpty ? literal.Class.Format() : EmptyString;
+                var type =  empty(@class) ? literal.Type.Format() : (literal.Type.Format() + RP.embrace(@class));
+                var desc = EmptyString;
+                desc = string.Format("[{0:D5}:{1:D5}:{2}:{3}] = '{4}'", i, pos, type, name, symbol);;
+                writer.WriteLine(desc);
+            }
+
+            return result;
+        }
+
+        Index<SymLiteralRow> SymLiterals()
+        {
+            var catalog = State.ApiCatalog(ApiRuntimeLoader.catalog);
+            return Symbols.literals(catalog.Components.Storage.Enums());
+        }
+
+        Outcome TestAsmSizes()
+        {
+            var result = Outcome.Success;
+            BitWidth w8 = 8;
+            BitWidth w16 = 16;
+            BitWidth w32 = 32;
+            BitWidth w64 = 64;
+
+            var sz8 = asm.asmsize(w8);
+            var sz16 = asm.asmsize(w16);
+            var sz32 = asm.asmsize(w32);
+            var sz64 = asm.asmsize(w64);
+            Write(sz8);
+            Write(sz16);
+            Write(sz32);
+            Write(sz64);
+            return result;
         }
 
         [CmdOp(".test")]
-        unsafe Outcome TestHexDigitValues(CmdArgs args)
+        unsafe Outcome TestHexDigitValues()
         {
             var result = Outcome.Success;
             const string DataSource = "38D10F9FC00FB6C0C338D10F97C00FB6C0C36639D10F9FC00FB6C0C36639D10F97C00FB6C0C339D10F9FC00FB6C0C339D10F97C0C34839D10F9FC00FB6C0C34839D10F97C00FB6C0C3";

@@ -8,13 +8,15 @@ namespace Z0
 
     using static core;
 
-    public interface ICharBlock<T> : ITextual, IComparable<T>, IEquatable<T>, IBlittable<T>, IDataBlock<T>
+    public interface ICharBlock<T> : ITextual, IComparable<T>, IEquatable<T>, IBlittable<T>, IDataBlock<T>, ICellBlock<char>
         where T : unmanaged, ICharBlock<T>
     {
         Span<char> Data {get;}
 
         ReadOnlySpan<char> String {get;}
 
+        Span<char> ICellBlock<char>.Cells
+            => Data;
         int Length {get;}
 
         uint Capacity {get;}

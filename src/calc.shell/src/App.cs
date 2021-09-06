@@ -215,7 +215,6 @@ namespace Z0
             Wf.Row(block.Describe());
         }
 
-
         void Run(N14 x)
         {
             var n = n2;
@@ -329,6 +328,11 @@ namespace Z0
             BlitMachine.create(Wf).Run();
         }
 
+        void Run(N22 n)
+        {
+            X86Emulator.create(Wf).Run();
+        }
+
         void Run(string spec)
         {
             if(uint.TryParse(spec, out var n))
@@ -391,6 +395,9 @@ namespace Z0
                     break;
                     case 21:
                         Run(n21);
+                    break;
+                    case 22:
+                        Run(n22);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

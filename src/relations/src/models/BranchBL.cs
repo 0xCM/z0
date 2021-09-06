@@ -4,23 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
     partial struct Relations
     {
-        public readonly struct Branch
+        public readonly struct Branch<B,L> : IBranch<B,L>
+            where B : IBranch
+            where L : ILeaf
         {
-            public Index<ILeaf> Leaves {get;}
+            public Index<B> Branches {get;}
 
-            public Index<IBranch> Branches {get;}
+            public Index<L> Leaves {get;}
 
             [MethodImpl(Inline)]
-            public Branch(Index<ILeaf> leaves, Index<IBranch> branches)
+            public Branch(Index<B> branches, Index<L> leaves)
             {
-                Leaves = leaves;
                 Branches = branches;
+                Leaves = leaves;
             }
         }
     }

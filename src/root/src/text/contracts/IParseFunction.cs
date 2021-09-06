@@ -28,10 +28,4 @@ namespace Z0
             return result;
         }
     }
-
-    public interface IParseFunction<T,K> : IParseFunction<T>
-        where K : unmanaged
-    {
-        K Kind {get;}
-    }
 }

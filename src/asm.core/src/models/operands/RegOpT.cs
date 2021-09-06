@@ -76,7 +76,7 @@ namespace Z0.Asm
         public text7 Name
         {
             [MethodImpl(Inline)]
-            get => AsmRegNames.name(this);
+            get => AsmRegs.name(this);
         }
 
         public string Format()

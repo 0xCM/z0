@@ -125,7 +125,6 @@ namespace Z0.Asm
                 using var writer = dst.AsciWriter();
                 var data = src.ReadBytes();
                 var size = hex.Emit(data, writer);
-                //var size = (ByteSize)MemoryEmitter.emit(data, 32, dst);
                 Write(string.Format("({0} bytes)[{1} -> {2}]", size, src.ToUri(), dst.ToUri()));
             }
 

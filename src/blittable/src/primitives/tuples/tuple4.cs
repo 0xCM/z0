@@ -14,7 +14,7 @@ namespace Z0
     partial struct Blit
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct list4<T0,T1,T2,T3>  : IList<list4<T0,T1,T2,T3>,N4,T0,T1,T2>
+        public struct tuple<T0,T1,T2,T3>  : ITuple<tuple<T0,T1,T2,T3>,N4,T0,T1,T2>
             where T0: unmanaged
             where T1: unmanaged
             where T2 : unmanaged
@@ -29,7 +29,7 @@ namespace Z0
             internal T3 c3;
 
             [MethodImpl(Inline)]
-            public list4(T0 a0, T1 a1, T2 a2, T3 a3)
+            public tuple(T0 a0, T1 a1, T2 a2, T3 a3)
             {
                 c0 = a0;
                 c1 = a1;

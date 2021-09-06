@@ -316,6 +316,11 @@ namespace Z0
         public const char m = 'm';
 
         /// <summary>
+        /// The 'm' character
+        /// </summary>
+        public const char n = 'n';
+
+        /// <summary>
         /// The 'o' character
         /// </summary>
         public const char o = 'o';
@@ -369,6 +374,11 @@ namespace Z0
         /// The 'y' character
         /// </summary>
         public const char y = 'y';
+
+        /// <summary>
+        /// The 'z' character
+        /// </summary>
+        public const char z = 'z';
 
         public const char A = 'A';
 

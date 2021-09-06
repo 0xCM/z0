@@ -18,9 +18,14 @@ namespace Z0
             => EmitLiterals(Wf.Components, dst);
 
         /// <summary>
+        /// Discovers symbolic literals defined in a specified component collection
+        /// </summary>
+        public ReadOnlySpan<SymLiteralRow> DiscoverLiterals(Assembly[] src)
+            => Symbols.literals(src);
+
+        /// <summary>
         /// Discovers all symbolic literals everywhere
         /// </summary>
-        /// <returns></returns>
         public ReadOnlySpan<SymLiteralRow> DiscoverLiterals()
             => Symbols.literals(Wf.Components);
 
@@ -46,7 +51,6 @@ namespace Z0
         public ReadOnlySpan<SymLiteralRow> EmitLiterals<E>(FS.FilePath dst)
             where E : unmanaged, Enum
         {
-            //var dst = Db.Table<SymLiteralRow>(typeof(E).FullName);
             var flow = Wf.EmittingTable<SymLiteralRow>(dst);
             var rows = Symbols.literals<E>();
             var count = rows.Length;
@@ -59,7 +63,7 @@ namespace Z0
             return rows;
         }
 
-        public ReadOnlySpan<SymLiteralRow> EmitLiterals(Index<Assembly> src, FS.FilePath dst)
+        public ReadOnlySpan<SymLiteralRow> EmitLiterals(Assembly[] src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<SymLiteralRow>(dst);
             var rows = Symbols.literals(src);

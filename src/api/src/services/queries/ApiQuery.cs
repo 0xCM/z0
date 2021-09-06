@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
-    using static core;
 
     [ApiHost]
     public partial class ApiQuery : AppService<ApiQuery>

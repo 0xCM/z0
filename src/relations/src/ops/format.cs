@@ -19,8 +19,11 @@ namespace Z0
         public static string format<S,T>(Dependency<S,T> src)
             => RenderLink<S,T>().Format(src.Source, src.Target);
 
-        public static string format<S,T>(DataFlow<S,T> flow)
+        public static string format<S,T>(in DataFlow<S,T> flow)
             => RenderLink<S,T>().Format(flow.Source, flow.Target);
+
+        public static string format<A,S,T>(in DataFlow<A,S,T> flow)
+            => string.Format("{0} |{1}> {2}", flow.Source, flow.Actor, flow.Target);
 
         public static RenderPattern<S,T> RenderLink<S,T>() => "{0} -> {1}";
 
@@ -61,6 +64,5 @@ namespace Z0
         public static RenderPattern<S,T> render<S,T>() => "{0} -> {1}";
 
         public static RenderPattern<T,T> render<T>() => render<T,T>();
-
     }
 }

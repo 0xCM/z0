@@ -28,7 +28,7 @@ namespace Z0.Asm
             }
 
             public text7 Name
-                => AsmRegNames.name(this);
+                => AsmRegs.name(this);
 
             public string Format()
                 => Name.Format();

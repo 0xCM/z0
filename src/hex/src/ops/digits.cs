@@ -44,7 +44,7 @@ namespace Z0
             var count = min(src.Length, dst.Length);
             for(var i=0; i<src.Length; i++)
             {
-                if(!parse((AsciChar)skip(src,i), out seek(dst,i)))
+                if(!parse(skip(src,i), out seek(dst,i)))
                     return false;
             }
             return j;

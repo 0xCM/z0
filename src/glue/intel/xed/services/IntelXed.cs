@@ -80,26 +80,6 @@ namespace Z0.Asm
         public Outcome LoadChipMap(out ChipMap dst)
             => Parsers.ParseChipMap(ChipSourcePath(), out dst);
 
-        // public Index<XedSummaryRow> LoadSummaries()
-        //     => LoadSummaries(SummaryTable());
-
-        // public Index<XedSummaryRow> LoadSummaries(FS.FilePath src)
-        // {
-        //     var flow  = Wf.Running(string.Format("Loading summary records from {0}", src.ToUri()));
-        //     var doc = TextGrids.parse(src).Require();
-        //     var count = doc.RowCount;
-        //     var buffer = alloc<XedSummaryRow>(count);
-        //     if(count != 0)
-        //     {
-        //         ref var dst = ref first(buffer);
-        //         for(var i=0; i<count; i++)
-        //             LoadSummaryRow(doc[i], ref seek(dst, i));
-        //     }
-
-        //     Wf.Ran(flow, string.Format("Loaded {0} records from {1}", count, src.ToUri()));
-        //     return buffer;
-        // }
-
         public ReadOnlySpan<XedFormImport> LoadForms()
         {
             var src = Ws.Tables().TablePath<XedFormImport>("intel.xed");

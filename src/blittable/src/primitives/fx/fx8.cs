@@ -47,7 +47,7 @@ namespace Z0
                 => skip(cover(PDst.P, Size), iY(x));
 
             [MethodImpl(Inline)]
-            public map<byte,byte> Map(byte x)
+            public kvp<byte,byte> Map(byte x)
                 => api.map(x, Eval(x));
         }
 
@@ -86,7 +86,7 @@ namespace Z0
                 => skip(cover(PDst.P, Size), iY(u8(x)));
 
             [MethodImpl(Inline)]
-            public map<S,T> Map(S x)
+            public kvp<S,T> Map(S x)
                 => api.map(x, Eval(x));
         }
     }

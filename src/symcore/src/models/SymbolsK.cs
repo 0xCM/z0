@@ -11,16 +11,14 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = Symbols;
-
     public class Symbols<K> : ISymIndex<K>
         where K : unmanaged
     {
         readonly Index<Sym<K>> Data;
 
-        readonly Index<K> _Kinds;
+        readonly Dictionary<string,Sym<K>> SymLookup;
 
-        readonly Dictionary<string,Sym<K>> _SymbolMap;
+        readonly Index<K> SymKinds;
 
         readonly SymIndex _Untyped;
 
@@ -30,12 +28,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal Symbols(Index<Sym<K>> src, Dictionary<string,Sym<K>> lookup)
+        internal Symbols(Index<Sym<K>> src, Dictionary<string,Sym<K>> lookup, SymIndex untyped)
         {
             Data = src;
-            _Kinds = src.Select(x => x.Kind);
-            _SymbolMap = lookup;
-            _Untyped = CreateUntyped();
+            SymLookup = lookup;
+            SymKinds = src.Select(x => x.Kind);
+            _Untyped = untyped;
         }
 
         public ref readonly Sym<K> this[uint index]
@@ -51,7 +49,7 @@ namespace Z0
         }
 
         public bool Lookup(SymExpr src, out Sym<K> dst)
-            => _SymbolMap.TryGetValue(src.Text, out dst);
+            => SymLookup.TryGetValue(src.Text, out dst);
 
         /// <summary>
         /// Presents an untyped view of the source data
@@ -60,17 +58,10 @@ namespace Z0
         public SymIndex Untyped()
             => _Untyped;
 
-        SymIndex CreateUntyped()
-        {
-            var symbols = Data.Select(x => api.untyped(x));
-            var map = _SymbolMap.Map(x => (x.Key, api.untyped(x.Value))).ToDictionary();
-            return new SymIndex(symbols,map);
-        }
-
         public ReadOnlySpan<K> Kinds
         {
             [MethodImpl(Inline)]
-            get => _Kinds;
+            get => SymKinds;
         }
 
         public Sym<K>[] Storage

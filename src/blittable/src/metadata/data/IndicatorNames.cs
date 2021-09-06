@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     partial struct Blit
     {
         [LiteralProvider]
@@ -40,15 +37,13 @@ namespace Z0
 
             public const string BitVector = "bv";
 
-            public const string List = "list";
+            public const string Tuple = "tuple";
 
             public const string Function = "fx";
 
             public const string Pair = "pair";
 
             public const string Block = "block";
-
-            public const string Tuple = "tuple";
         }
     }
 }

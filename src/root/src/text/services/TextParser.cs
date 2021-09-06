@@ -9,13 +9,11 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct TextParser : ITextParser
+    public readonly struct TextParser
     {
-
         [MethodImpl(Inline)]
         public static TextParser create(ITextParser inner)
             => new TextParser(inner);
-
 
         [MethodImpl(Inline)]
         public static TextParser<T> create<T>(ParserDelegate<T> f)
@@ -35,6 +33,7 @@ namespace Z0
             TargetType = inner.TargetType;
             Fx = inner.ToDelegate();
         }
+
         public Type SourceType
         {
             [MethodImpl(Inline)]

@@ -25,8 +25,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => AsmRegNames.format(this);
-
+            => AsmRegs.format(this);
 
         public override string ToString()
             => Format();

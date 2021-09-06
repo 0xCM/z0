@@ -11,24 +11,21 @@ namespace Z0
 
     partial struct Blit
     {
-        partial struct Types
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct DataBlock
         {
-            [StructLayout(LayoutKind.Sequential, Pack=1)]
-            public struct DataBlock
+            public ByteSize Capacity {get;}
+
+            public BitWidth CellWidth {get;}
+
+            public BlittableKind CellKind {get;}
+
+            [MethodImpl(Inline)]
+            public DataBlock(ByteSize capacity, BitWidth cellwidth, BlittableKind cellkind)
             {
-                public ByteSize Capacity {get;}
-
-                public BitWidth CellWidth {get;}
-
-                public BlittableKind CellKind {get;}
-
-                [MethodImpl(Inline)]
-                public DataBlock(ByteSize capacity, BitWidth cellwidth, BlittableKind cellkind)
-                {
-                    Capacity = capacity;
-                    CellWidth = cellwidth;
-                    CellKind = cellkind;
-                }
+                Capacity = capacity;
+                CellWidth = cellwidth;
+                CellKind = cellkind;
             }
         }
     }

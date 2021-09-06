@@ -7,7 +7,6 @@ namespace Z0.Asm
     using static RegIndexCode;
 
     using K = AsmRegTokens.RegTokenKind;
-
     using I = RegIndexCode;
 
     public readonly struct AsmRegTokens

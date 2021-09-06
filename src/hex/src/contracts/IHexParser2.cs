@@ -6,11 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IHexParser2 : IParser2<char,byte>
-    {
-    }
-
-    public interface IHexParser2<T> : IHexParser2, IDataParser2<T>
+    public interface IHexParser2<T> : IParser2<char,byte>, IDataParser2<T>
         where T : unmanaged
     {
         Type ITransformer2.SourceType

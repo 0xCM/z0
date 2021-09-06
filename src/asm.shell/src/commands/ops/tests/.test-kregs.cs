@@ -16,11 +16,6 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [MethodImpl(Inline)]
-        public static NamedRegValue<T> regval<T>(text7 name, T value)
-            where T : unmanaged
-                => new NamedRegValue<T>(name,value);
-
         [CmdOp(".test-kregs")]
         public Outcome KRegTests(CmdArgs args)
         {
@@ -34,8 +29,8 @@ namespace Z0.Asm
             for(byte i=0; i<7; i++)
             {
                 regs[i] = i;
-                seek(names,i) = AsmRegNames.name(KReg, (RegIndexCode)i);
-                grid[i]= regval(skip(names,i), regs[i]);
+                seek(names,i) = AsmRegs.name(KReg, (RegIndexCode)i);
+                grid[i]= asm.regval(skip(names,i), regs[i]);
             }
 
             for(byte i=0; i<7; i++)
@@ -52,7 +47,7 @@ namespace Z0.Asm
             for(byte i=0; i<7; i++)
             {
                 regs[i] = input << i*3;
-                Write(regval(skip(names,i),regs[i]));
+                Write(asm.regval(skip(names,i), regs[i]));
             }
 
             return result;

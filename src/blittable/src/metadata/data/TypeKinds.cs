@@ -12,7 +12,7 @@ namespace Z0
     {
         partial struct Types
         {
-            const byte TypeKindCount = 19;
+            const byte TypeKindCount = 18;
 
             internal static ReadOnlySpan<BlittableKind> TypeKinds
                 => new BlittableKind[TypeKindCount]{
@@ -30,11 +30,10 @@ namespace Z0
                     K.Grid,
                     K.Name,
                     K.BitVector,
-                    K.List,
+                    K.Tuple,
                     K.Function,
                     K.Pair,
                     K.Block,
-                    K.Tuple,
                     };
         }
     }

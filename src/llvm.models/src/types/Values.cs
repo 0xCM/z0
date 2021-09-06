@@ -15,16 +15,6 @@ namespace Z0.llvm
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline)]
-        public static bits<N,T> bits<N,T>(N n, T value)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => new bits<N,T>(value);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bits<T> bits<T>(uint n, T value)
-            where T : unmanaged
-                => new bits<T>(n, value);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static list<T> list<T>(T[] src)

@@ -33,6 +33,5 @@ namespace Z0
 
         public static implicit operator Facet<K,V>((K key, V value) src)
             => new Facet<K,V>(src.key, src.value);
-
     }
 }

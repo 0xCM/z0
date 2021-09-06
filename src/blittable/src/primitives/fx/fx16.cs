@@ -49,7 +49,7 @@ namespace Z0
                 => skip(cover(PDst.P, Size), iY(u16(x)));
 
             [MethodImpl(Inline)]
-            public map<S,T> Map(S x)
+            public kvp<S,T> Map(S x)
                 => api.map(x, Eval(x));
         }
     }

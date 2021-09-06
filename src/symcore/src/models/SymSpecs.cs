@@ -26,7 +26,6 @@ namespace Z0
             const string ValueField = nameof(S.Value);
             const string DescriptionField = nameof(S.Description);
             const string ValueKindField = nameof(S.ValueKind);
-
             var result = SymSpecKind.None;
             for(var i=0; i<names.Length; i++)
             {

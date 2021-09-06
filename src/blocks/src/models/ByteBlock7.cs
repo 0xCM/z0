@@ -38,6 +38,18 @@ namespace Z0
             get => ref first(Bytes);
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => api.empty(this);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !api.empty(this);
+        }
+
         public ref byte this[int index]
         {
             [MethodImpl(Inline)]

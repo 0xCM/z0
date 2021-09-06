@@ -104,13 +104,6 @@ namespace Z0
         BitVector = 13,
 
         /// <summary>
-        /// Indicates a type that represents a cell-sequence of natural length where the
-        /// cells may be of non-homogenous type
-        /// </summary>
-        [Symbol(N.List)]
-        List = 14,
-
-        /// <summary>
         /// Indicates a type that defines a function
         /// </summary>
         [Symbol(N.Function)]

@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = Symbols;
-
     public readonly struct SymCache<K>
         where K : unmanaged, Enum
     {
@@ -20,7 +18,7 @@ namespace Z0
             => new SymCache<K>();
 
         static SymCache()
-            => Storage = api.load<K>();
+            => Storage = SymIndexBuilder.create<K>();
 
         public ref readonly Sym<K> this[K index]
         {

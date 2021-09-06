@@ -5,19 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Root;
     using static core;
 
-    partial struct Blit
+    public interface ICellBlock<T> : IDataBlock
+        where T : unmanaged
     {
-        public struct block<T> : IBlock<T>
-            where T : unmanaged, IDataBlock<T>
-        {
-            public T Storage;
-            T IBlock<T>.Storage
-                => Storage;
-        }
+        Span<T> Cells {get;}
+
+        ByteSize IDataBlock.Size
+            => Cells.Length*size<T>();
+
+        Span<byte> IDataBlock.Bytes
+            => bytes(Cells);
     }
 }
