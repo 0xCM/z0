@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(Extract)" />
-    <ProjectReference Include="$(Lang)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Cli)" />
     <ProjectReference Include="$(Gen)" />

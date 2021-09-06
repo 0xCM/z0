@@ -128,7 +128,7 @@
     <Workflow>$(Src)workflow/z0.workflow.csproj</Workflow>
     <Ws>$(Src)ws/z0.ws.csproj</Ws>
 
-    <Xed>$(Src)xed/z0.xed.csproj</Xed>
+    <Xml>$(Src)xml/z0.xml.csproj</Xml>
   </PropertyGroup>
 
 </Project>

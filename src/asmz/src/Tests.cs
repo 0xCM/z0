@@ -310,7 +310,6 @@ namespace Z0.Asm
             }
         }
 
-
         static string FormatAttributes(IXmlElement src)
             => src.Attributes.Select(x => string.Format("{0}={1}",x.Name, x.Value)).Delimit(Chars.Comma).Format();
 

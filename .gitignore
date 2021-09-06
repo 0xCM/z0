@@ -18,3 +18,7 @@ mkl.redist/
 .logs
 .antlr
 src/respack/content/
+generated-sources/
+maven-status/
+test-classes/
+classes/

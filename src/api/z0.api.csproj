@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Res)" />
     <ProjectReference Include="$(BitNumbers)" />
     <ProjectReference Include="$(Cpu)" />
-    <ProjectReference Include="$(Lang)" />
     <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Cli)" />

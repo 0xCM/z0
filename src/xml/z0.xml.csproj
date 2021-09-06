@@ -6,7 +6,9 @@
 
   <ItemGroup>
       <ProjectReference Include="$(Core)" />
-      <ProjectReference Include="$(Blittable)" />
+      <ProjectReference Include="$(Cells)" />
+      <ProjectReference Include="$(Part)" />
+
   </ItemGroup>
 
 </Project>

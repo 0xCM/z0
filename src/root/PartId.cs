@@ -111,7 +111,8 @@ public enum PartId : byte
     [Symbol("gmath")]
     GMath = 34,
 
-    OpenSlot4 = 35,
+    [Symbol("xml")]
+    Xml = 35,
 
     OpenSlot5 = 36,
 
@@ -270,7 +271,6 @@ public enum PartId : byte
 
     [Symbol("asm.lang")]
     AsmLang = 88,
-
 
     [Symbol("asm.core")]
     AsmCore = 89,
