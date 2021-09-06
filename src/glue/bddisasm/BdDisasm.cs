@@ -28,18 +28,6 @@ namespace Z0.Tools
             ToolPath = Workspace.ToolPath(Toolspace.bddiasm);
         }
 
-        public BdDisasmCmd Cmd(in AsmToolchainSpec spec, bool bitfields = false , bool details = false)
-        {
-            var dst = new BdDisasmCmd();
-            dst.ToolPath = ToolPath;
-            dst.BinPath = spec.BinPath;
-            dst.EmitBitfields = bitfields;
-            dst.EmitDetails = details;
-            dst.AsmBitMode = spec.AsmBitMode;
-            dst.OutputPath = spec.DisasmPath;
-            return dst;
-        }
-
         [Op]
         public static uint render(Bitness src, ref uint i, Span<char> dst)
         {

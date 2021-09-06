@@ -68,8 +68,6 @@ namespace Z0.Asm
 
         IWorkspace DataSources;
 
-        AsmTools AsmToolSvc;
-
         ShellEnv ShellEnv;
 
         llvm.EtlWorkflow LlvmEtl;
@@ -125,7 +123,6 @@ namespace Z0.Asm
             ProjectWs = Ws.Projects();
             DataSources = Ws.Sources();
             ApiCatalogs = Wf.ApiCatalogs();
-            AsmToolSvc = Wf.AsmTools();
             AsmEtl = Wf.AsmEtl();
             LlvmEtl = Wf.LlvmEtl();
             Loaders = Wf.TableLoaders();

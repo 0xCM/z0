@@ -13,7 +13,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var dst = sys.empty<SdmOpCodeDetail>();
-            var path = Ws.Tables().Table<SdmOpCodeDetail>();
+            var path = Ws.Tables().TablePath<SdmOpCodeDetail>();
             var lines = path.ReadLines(TextEncodingKind.Unicode).View;
             result = TextGrids.load(lines, out var grid);
             if(result.Fail)

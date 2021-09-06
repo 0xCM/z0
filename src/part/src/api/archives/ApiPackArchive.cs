@@ -71,16 +71,6 @@ namespace Z0
         public FS.FilePath HostAsmTable(ApiHostUri host)
             => HostAsm(host.Part) + FS.file(host.HostName, FS.Csv);
 
-        // public FS.FolderPath StatementTables(PartId part)
-        //     => CaptureTables() + This.PartFolder(part);
-
-        // public FS.FilePath StatementTable(ApiHostUri host)
-        //     => StatementTables(host.Part) + This.HostFile(host, FS.Csv);
-
-        // public FS.FilePath TableAsm(ApiHostUri host)
-        //     => StatementTables(host.Part) + This.HostFile(host, FS.Asm);
-
-
         public FS.FilePath Thumbprints()
             => RootDir() + FS.file("thumbprints", FS.Asm);
 
@@ -99,14 +89,8 @@ namespace Z0
         public FS.FolderPath CaptureRoot()
             => Root + FS.folder(capture);
 
-        // public FS.FolderPath IndexRoot()
-        //     => Root;
-
         public FS.FolderPath AsmCaptureRoot()
             => CaptureRoot() + FS.folder(asm);
-
-        // public FS.Files AsmCapturePaths()
-        //     => AsmCaptureRoot().Files(FS.Asm,true);
 
         public FS.FolderPath CodeGenRoot()
             => Root + FS.folder("codegen");
@@ -135,9 +119,6 @@ namespace Z0
         public FS.FilePath AsmSrcPath(ApiHostUri host)
             => AsmPartCapture(host.Part) + FS.file(host, FS.Asm);
 
-        // public FS.FilePath AsmDataPath(ApiHostUri host)
-        //     => AsmPartCapture(host.Part) + FS.file(host, FS.Csv);
-
         public FS.FolderPath ContextRoot()
             => CaptureRoot() + FS.folder(context);
 
@@ -151,16 +132,13 @@ namespace Z0
             => TableDir() + FS.file("asm.jumps", FS.Csv);
 
         public FS.FilePath TablePath<T>()
-            where T : struct, IRecord<T>
+            where T : struct
                 => TableDir() + FS.file(TableId.identify<T>().Format(), FS.Csv);
         public FS.FilePath TablePath(string id)
             => TableDir() + FS.file(id, FS.Csv);
 
         public FS.FolderPath DetailTables()
             => TableDir() + FS.folder("asm.details");
-
-        // public FS.Files DetailPaths()
-        //     => DetailTables().AllFiles;
 
         public FS.FilePath ApiCatalogPath()
             => TableDir() + FS.file(TableId.identify<ApiCatalogEntry>().Format(), FS.Csv);

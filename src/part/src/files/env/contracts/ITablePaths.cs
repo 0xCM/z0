@@ -43,23 +43,18 @@ namespace Z0
 
         FS.FilePath TablePath<T>(FS.FolderPath dir)
             where T : struct
-                => dir + FS.file(Z0.TableId.identify<T>().Format(), FS.Csv);
+                => dir + FS.file(Z0.TableId.identify<T>().Format(), DefaultTableExt);
 
-        FS.FileName TableName(TableId id)
-            => FS.file(id.Format(), FS.Csv);
+        FS.FileName TableFile(TableId id)
+            => FS.file(id.Format(), DefaultTableExt);
 
         FS.FileName TableName(string id)
             => FS.file(id, FS.Csv);
 
-        FS.FileName TableName(TableId id, string suffix)
-            => FS.file(string.Format("{0}.{1}", id, suffix), FS.Csv);
+        FS.FileName TableFile(string id)
+            => FS.file(id, FS.Csv);
 
-        FS.FileName TableName<T>()
-            where T : struct
-                => FS.file(Z0.TableId.identify<T>().Format(), FS.Csv);
-
-        FS.FileName TableName<T>(string suffix)
-            where T : struct
-                => TableName(Z0.TableId.identify<T>(), suffix);
+        FS.FileName TableFile(TableId id, string suffix)
+            => FS.file(string.Format("{0}.{1}", id, suffix), DefaultTableExt);
     }
 }

@@ -57,32 +57,25 @@ namespace Z0
         FS.FolderPath Dataset(Scope scope)
             => Datasets() + FS.folder(scope.Format());
 
-        FS.FilePath DataSource(Scope scope, string id, FS.FileExt ext)
-            => Datasets(scope) + FS.file(id,ext);
+        FS.FilePath TablePath(Scope scope, TableId id)
+            => Subdir(scope) + TableFile(id);
 
-        FS.FilePath Table(Scope scope, TableId id)
+        FS.FilePath TablePath(Scope scope, string id)
             => Subdir(scope) + TableName(id);
 
-        FS.FilePath Table(Scope scope, string id)
-            => Subdir(scope) + TableName(id);
+        FS.FilePath TablePath(Scope scope, TableId id, string suffix)
+            => Subdir(scope) + TableFile(id, suffix);
 
-        FS.FilePath Table(Scope scope, TableId id, string suffix)
-            => Subdir(scope) + TableName(id,suffix);
-
-        FS.FilePath Table<T>(FS.FileExt ext)
-            where T : struct
-                => Path(Z0.TableId.identify<T>().Format(), ext);
-
-        FS.FilePath Table<T>()
+        FS.FilePath TablePath<T>()
             where T : struct
                 => Path(Z0.TableId.identify<T>().Format(), FS.Csv);
 
-        FS.FilePath Table<T>(Scope scope)
+        FS.FilePath TablePath<T>(Scope scope)
             where T : struct
-                => Subdir(scope) + TableName<T>();
+                => Subdir(scope) + TableFile<T>();
 
-        FS.FilePath Table<T>(Scope scope, string suffix)
+        FS.FilePath TablePath<T>(Scope scope, string suffix)
             where T : struct
-                => Subdir(scope) + TableName<T>(suffix);
+                => Subdir(scope) + TableFile<T>(suffix);
     }
 }

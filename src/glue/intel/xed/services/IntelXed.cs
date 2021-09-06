@@ -102,7 +102,7 @@ namespace Z0.Asm
 
         public ReadOnlySpan<XedFormImport> LoadForms()
         {
-            var src = Ws.Tables().Table<XedFormImport>("intel.xed");
+            var src = Ws.Tables().TablePath<XedFormImport>("intel.xed");
             var counter = 0u;
             var outcome = Outcome.Success;
             var dst = list<XedFormImport>();

@@ -65,7 +65,7 @@ namespace Z0.Asm
         public ReadOnlySpan<NasmInstruction> ImportInstructions()
         {
             var src = Ws.Sources().Datasets(AsmTableScopes.Nasm) + FS.file("nasm.instructions", FS.Txt);
-            var dst = Ws.Tables().Table<NasmInstruction>(AsmTableScopes.Nasm);
+            var dst = Ws.Tables().TablePath<NasmInstruction>(AsmTableScopes.Nasm);
             return ImportInstructions(src,dst);
         }
 
@@ -86,7 +86,7 @@ namespace Z0.Asm
 
         public ReadOnlySpan<NasmInstruction> LoadInstructionImports()
         {
-            var src = Ws.Tables().Table<NasmInstruction>(AsmTableScopes.Nasm);
+            var src = Ws.Tables().TablePath<NasmInstruction>(AsmTableScopes.Nasm);
             return LoadInstructionImports(src);
         }
 

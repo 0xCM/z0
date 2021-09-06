@@ -30,7 +30,6 @@ namespace Z0
             b = B;
         }
 
-
         [MethodImpl(Inline)]
         public static implicit operator Relation<T>((T a, T b) x)
             => new Relation<T>(x.a, x.b);

@@ -4,19 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Root;
     using static core;
-    using static WsAtoms;
 
     partial class AsmCmdService
     {
-        FS.FolderPath ProjectOutDir(string id)
-            => OutWs.Root + FS.folder("projects") + FS.folder(State.Project().Format()) + FS.folder(id);
-
-        Outcome DumpModules(CmdArgs args, FileModuleKind kind)
+        Outcome DumpModules(FileModuleKind kind)
         {
             var result = Outcome.Success;
             var script = kind switch{
@@ -30,11 +23,9 @@ namespace Z0.Asm
             if(empty(script))
                 return (false, string.Format("{0} not supported", kind));
 
-            var tool = Toolspace.dumpbin;
             var project = State.Project();
-            var rootdir = GetToolOut(args, tool);
-            var outdir = ProjectOutDir(dumps);
-            var cmd = Cmd.cmdline(Ws.Tools().Script(tool, script).Format(PathSeparator.BS));
+            var outdir = Ws.Projects().DataOut(project);
+            var cmd = Cmd.cmdline(Ws.Tools().Script(Toolspace.dumpbin, script).Format(PathSeparator.BS));
             var input = State.Files().View;
             var count = input.Length;
             for(var i=0; i<count; i++)

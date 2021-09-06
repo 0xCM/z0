@@ -7,22 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static core;
     using static Root;
 
-    /// <summary>
-    /// Defines a labled statement block
-    /// </summary>
-    public readonly struct NasmOutputFile : IFile
+    partial struct Relations
     {
-        public FS.FilePath Path {get;}
-
-        public ObjFileKind Kind {get;}
+        [MethodImpl(Inline)]
+        public static Facet<K,V> facet<K,V>(K key, V value)
+            => new Facet<K,V>(key,value);
 
         [MethodImpl(Inline)]
-        public NasmOutputFile(FS.FilePath target, ObjFileKind kind)
-        {
-            Path = target;
-            Kind = kind;
-        }
+        public static Facet<S,T> facet<S,T>(Arrow<S,T> src)
+            => facet(src.Source, src.Target);
     }
 }

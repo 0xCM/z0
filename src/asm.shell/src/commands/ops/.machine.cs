@@ -40,8 +40,8 @@ namespace Z0.Asm
             EmitTokens(tokens.SigTokens());
             EmitTokens(tokens.ConditonTokens());
             EmitTokens(tokens.PrefixTokens());
-            EmitSymKinds(Symbols.index<AsmOpClass>(), tables.Table(machine,"classes.asm.operands"));
-            EmitSymIndex<RegClassCode>(tables.Table(machine, "classes.asm.regs"));
+            EmitSymKinds(Symbols.index<AsmOpClass>(), tables.TablePath(machine,"classes.asm.operands"));
+            EmitSymIndex<RegClassCode>(tables.TablePath(machine, "classes.asm.regs"));
             return result;
         }
 
@@ -69,7 +69,7 @@ namespace Z0.Asm
 
         void EmitTokens(ITokenSet src)
         {
-            var dst = Ws.Tables().Table<SymToken>(machine, src.Name);
+            var dst = Ws.Tables().TablePath<SymToken>(machine, src.Name);
             var tokens = Symbols.tokens(src.Types());
             TableEmit(tokens, SymToken.RenderWidths, dst);
         }

@@ -11,12 +11,5 @@ namespace Z0
 
     partial struct core
     {
-        [MethodImpl(Inline)]
-        public static Facet<K,V> facet<K,V>(K key, V value)
-            => new Facet<K,V>(key,value);
-
-        [MethodImpl(Inline)]
-        public static Facet<S,T> facet<S,T>(Arrow<S,T> src)
-            => facet(src.Source, src.Target);
     }
 }

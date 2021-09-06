@@ -7,6 +7,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IRelation
     {
         dynamic Kind {get;}

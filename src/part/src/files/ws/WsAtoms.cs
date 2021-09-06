@@ -7,9 +7,11 @@ namespace Z0
     [LiteralProvider]
     public readonly struct WsAtoms
     {
-        public const string admin = ".admin";
+        const string dot = ".";
 
-        public const string output = ".out";
+        public const string admin = dot + "admin";
+
+        public const string output = dot + "out";
 
         public const string asm = nameof(asm);
 
@@ -42,6 +44,10 @@ namespace Z0
         public const string imports = nameof(imports);
 
         public const string inventory = nameof(inventory);
+
+        public const string intel = nameof(intel);
+
+        public const string intelxed = intel + dot + xed;
 
         public const string lang = nameof(lang);
 
@@ -86,5 +92,7 @@ namespace Z0
         public const string win = nameof(win);
 
         public const string wsl = nameof(wsl);
+
+        public const string xed = nameof(xed);
     }
 }

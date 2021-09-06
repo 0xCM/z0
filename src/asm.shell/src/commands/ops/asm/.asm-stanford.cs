@@ -8,12 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".asm-stanford")]
         Outcome Stanford(CmdArgs args)
-        {
-            var result = Outcome.Success;
-
-            var forms = LoadStanfordForms();
-
-            return result;
-        }
+            => LoadStanfordForms();
     }
 }

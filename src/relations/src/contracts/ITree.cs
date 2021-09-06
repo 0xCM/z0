@@ -4,21 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public interface ILeaf
-    {
-        dynamic Content {get;}
-    }
-
-    public interface ILeaf<T> : ILeaf
-    {
-        new T Content {get;}
-
-        dynamic ILeaf.Content
-            => Content;
-    }
-
     public interface ITree
     {
         Index<IBranch> Branches {get;}

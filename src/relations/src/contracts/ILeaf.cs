@@ -2,12 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    partial class AsmCmdService
+    public interface ILeaf
     {
-        [CmdOp(".xed-isa")]
-        Outcome XedIsa(CmdArgs args)
-            => EmitXedIsa(arg(args,0).Value);
+        dynamic Content {get;}
+    }
+
+    public interface ILeaf<T> : ILeaf
+    {
+        new T Content {get;}
+
+        dynamic ILeaf.Content
+            => Content;
     }
 }

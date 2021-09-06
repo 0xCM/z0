@@ -133,7 +133,7 @@ namespace Z0
             using var writer = target.Writer();
             writer.Write(utf);
             Wf.EmittedFile(flow,1);
-            return core.arrow(src,target);
+            return Relations.arrow(src,target);
         }
     }
 

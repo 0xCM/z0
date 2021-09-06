@@ -41,7 +41,7 @@ namespace Z0.llvm
                     rowwriter.WriteLine(formatter.Format(row));
                 }
 
-                Write(string.Format("{0}: Stringtable emitted", arrow(path.ToUri(),csdst.ToUri())));
+                Write(string.Format("{0}: Stringtable emitted", Relations.arrow(path.ToUri(),csdst.ToUri())));
             }
 
             return result;

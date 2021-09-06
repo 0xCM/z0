@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        Index<AsmFormExpr> LoadStanfordForms()
+        Outcome LoadStanfordForms()
         {
             var catalog = Wf.StanfordCatalog();
             var rows = catalog.LoadAsset();
@@ -28,7 +28,7 @@ namespace Z0.Asm
             dst.Sort();
             iter(dst.ViewDeposited(), x => Wf.Row(x));
 
-            return forms;
+            return true;
         }
     }
 }
