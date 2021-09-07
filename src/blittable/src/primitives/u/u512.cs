@@ -7,9 +7,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-
+    using static core;
     partial struct Blit
     {
+        /// <summary>
+        /// Defines an unsigned 512-bit integer over parametric storage
+        /// </summary>
         public struct u512<T> : IUnsigned<T>
             where T : unmanaged
         {

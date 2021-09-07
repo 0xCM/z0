@@ -8,19 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct Blit
     {
-        public struct kvp<S,T>
-            where S : unmanaged
-            where T : unmanaged
+        public struct kvp<K,V>
+            where K : unmanaged
+            where V : unmanaged
         {
-            public S Key;
+            public static ByteSize SZ => size<K>() + size<V>();
 
-            public T Val;
+            public K Key;
+
+            public V Val;
 
             [MethodImpl(Inline)]
-            public kvp(S src, T dst)
+            public kvp(K src, V dst)
             {
                 Key =src;
                 Val = dst;
@@ -32,8 +35,8 @@ namespace Z0
             public override string ToString()
                 => Format();
 
-            public static implicit operator kvp<S,T>((S src, T dst) x)
-                => new kvp<S,T>(x.src, x.dst);
+            public static implicit operator kvp<K,V>((K src, V dst) x)
+                => new kvp<K,V>(x.src, x.dst);
         }
     }
 }

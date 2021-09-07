@@ -20,6 +20,8 @@ namespace Z0
             where T2 : unmanaged
             where T3 : unmanaged
         {
+            public static ByteSize SZ => size<tuple<T0,T1,T2,T3>>();
+
             internal T0 c0;
 
             internal T1 c1;

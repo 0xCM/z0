@@ -14,12 +14,14 @@ namespace Z0
     partial struct Blit
     {
         /// <summary>
-        /// Defines a 4-cell T-vector
+        /// Defines a 5-cell T-vector
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct v5<T> : IVector<T>
             where T : unmanaged
         {
+            public static ByteSize SZ => size<v5<T>>();
+
             v4<T> A;
 
             v1<T> B;

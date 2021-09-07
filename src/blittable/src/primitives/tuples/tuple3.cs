@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
+    using static core;
 
     partial struct Blit
     {
@@ -18,6 +19,8 @@ namespace Z0
             where T1: unmanaged
             where T2 : unmanaged
         {
+            public static ByteSize SZ => size<tuple<T0,T1,T2>>();
+
             internal T0 c0;
 
             internal T1 c1;

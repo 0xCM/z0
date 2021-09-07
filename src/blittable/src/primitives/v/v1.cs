@@ -18,6 +18,8 @@ namespace Z0
         public struct v1<T> : IVector<T>
             where T : unmanaged
         {
+            public static ByteSize SZ => size<v1<T>>();
+
             T C0;
 
             [MethodImpl(Inline)]

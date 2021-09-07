@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static core;
+
     partial struct Blit
     {
         public struct i16<T> : ISigned<T>

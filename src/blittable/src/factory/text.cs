@@ -38,21 +38,6 @@ namespace Z0
                 return new text7(storage);
             }
 
-            [MethodImpl(Inline),Op, Closures(Closure)]
-            public static uint expressions<T>(in Symbols<T> src, Span<text7> dst)
-                where T : unmanaged
-            {
-                var count = (uint)min(src.Length, dst.Length);
-                var symbols = src.View;
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var symbol = ref skip(symbols,i);
-                    var data = symbol.Expr.Data;
-                    seek(dst, i) = text(n7, data);
-                }
-                return count;
-            }
-
             [MethodImpl(Inline), Op]
             static uint available(ReadOnlySpan<char> src)
             {

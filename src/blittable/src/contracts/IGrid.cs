@@ -36,7 +36,7 @@ namespace Z0
             ref T this[uint row, uint col] {get;}
 
             GridSpec IGrid.Spec
-                => Types.grid<T>(M,N);
+                => Meta.grid<T>(M,N);
         }
 
         [Free]
@@ -56,7 +56,6 @@ namespace Z0
             uint IGrid.M => Typed.nat32u<N>();
 
             uint IGrid.N => Typed.nat32u<N>();
-
         }
 
         [Free]

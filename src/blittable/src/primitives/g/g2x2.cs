@@ -17,6 +17,8 @@ namespace Z0
         public struct g2x2<T> : IGrid<g2x2<T>,N2,T>
             where T : unmanaged
         {
+            public static ByteSize SZ => size<g2x2<T>>();
+
             v2<T> R0;
 
             v2<T> R1;
@@ -66,7 +68,7 @@ namespace Z0
             public GridSpec Spec
             {
                 [MethodImpl(Inline)]
-                get => Types.grid<T>(M,N);
+                get => Meta.grid<T>(M,N);
             }
         }
     }

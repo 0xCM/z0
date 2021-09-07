@@ -4,28 +4,29 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial struct Blit
     {
-        public struct u16<T> : IUnsigned<T>
-            where T : unmanaged
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct Literal<V>
         {
-            public const ulong Width = 16;
+            public Name Name;
 
-            public T Storage;
+            public LiteralKind Kind;
+
+            public V Value;
 
             [MethodImpl(Inline)]
-            public u16(T src)
+            public Literal(Name n, LiteralKind kind, V value)
             {
-                Storage = src;
+                Name = n;
+                Kind = kind;
+                Value = value;
             }
-
-            BitWidth IPrimitive.ContentWidth
-                => Width;
         }
     }
 }

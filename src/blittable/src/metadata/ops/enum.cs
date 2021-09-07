@@ -4,11 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+
     partial struct Blit
     {
-        [ApiHost]
-        public readonly partial struct Types
+        partial struct Meta
         {
+            [MethodImpl(Inline), Op, Closures(Closure)]
+            public static Enum<V> @enum<V>(string name, Literal<V>[] src)
+                => new Enum<V>(name, src);
         }
     }
 }

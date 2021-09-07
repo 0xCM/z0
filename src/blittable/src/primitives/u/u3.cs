@@ -7,9 +7,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct Blit
     {
+        /// <summary>
+        /// Defines an unsigned 3-bit integer over parametric storage
+        /// </summary>
         public struct u3<T> : IUnsigned<T>
             where T : unmanaged
         {

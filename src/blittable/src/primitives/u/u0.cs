@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static core;
+
     partial struct Blit
     {
         public struct u0<T> : IUnsigned<T>

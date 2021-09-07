@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-
+    using static core;
     partial struct Blit
     {
         public struct u64<T> : IUnsigned<T>

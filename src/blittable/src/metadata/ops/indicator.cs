@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Blit
     {
-        partial struct Types
+        partial struct Meta
         {
             [MethodImpl(Inline), Op]
             public static TypeIndicator indicator(BlittableKind src)

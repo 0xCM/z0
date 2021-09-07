@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     [PartExecutor]
     public abstract class PartExecutor<P> : IPartExecutor<P>
         where P : PartExecutor<P>, new()

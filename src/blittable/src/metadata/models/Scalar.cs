@@ -4,28 +4,29 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial struct Blit
     {
-        public struct u16<T> : IUnsigned<T>
-            where T : unmanaged
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct ScalarType
         {
-            public const ulong Width = 16;
+            public readonly ScalarKind Kind;
 
-            public T Storage;
+            public readonly uint StorageSize;
+
+            public readonly uint DataWidth;
 
             [MethodImpl(Inline)]
-            public u16(T src)
+            public ScalarType(ScalarKind kind, uint s, uint w)
             {
-                Storage = src;
+                Kind = kind;
+                StorageSize = s;
+                DataWidth = w;
             }
-
-            BitWidth IPrimitive.ContentWidth
-                => Width;
         }
     }
 }

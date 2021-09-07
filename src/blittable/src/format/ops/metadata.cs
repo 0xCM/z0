@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
     using static BlittableKind;
-    using static Blit.Types;
+    using static Blit.Meta;
 
     partial struct Blit
     {

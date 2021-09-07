@@ -11,7 +11,7 @@ namespace Z0.Parts
 
     }
 
-    public sealed partial class XmlExecutor : PartExecutor<XmlExecutor>
+    public sealed partial class XmlPartExecutor : PartExecutor<XmlPartExecutor>
     {
         public override void Run()
         {

@@ -17,6 +17,8 @@ namespace Z0
         {
             public const string Identifier = "bits<{0}>";
 
+            public static ByteSize SZ => size<T>();
+
             public T Packed;
 
             public uint N;
@@ -40,6 +42,8 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where T : unmanaged
         {
+            public static ByteSize SZ => size<T>();
+
             public T Packed;
 
             [MethodImpl(Inline)]

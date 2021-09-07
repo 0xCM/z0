@@ -4,9 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost]
-    public readonly partial struct ApiLang
+    using System;
+
+    [Flags,SymSource]
+    public enum ParamDirection : byte
     {
-        const NumericKind Closure = NumericKind.UnsignedInts;
+        None = 0,
+
+        [Symbol("in")]
+        In = 1,
+
+        [Symbol("out")]
+        Out = 2,
+
+        [Symbol("inout")]
+        Bidirectional = In | Out,
     }
 }

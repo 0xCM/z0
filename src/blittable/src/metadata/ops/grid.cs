@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Blit
     {
-        partial struct Types
+        partial struct Meta
         {
             [MethodImpl(Inline), Op, Closures(Closure)]
             public static GridSpec grid<T>(uint rows, uint cols)

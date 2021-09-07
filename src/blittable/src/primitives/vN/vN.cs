@@ -16,6 +16,8 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
+            public static ByteSize SZ => size<T>()*Typed.nat32u<N>();
+
             readonly Index<T> Data;
 
             [MethodImpl(Inline)]

@@ -4,20 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    [Flags]
-    public enum ParamDirection : byte
+    partial struct Blit
     {
-        None = 0,
+        public struct f0<T> : IFloat<T>
+            where T : unmanaged
+        {
+            public const ulong Width = 0;
 
-        [Symbol("in")]
-        In = 1,
-
-        [Symbol("out")]
-        Out = 2,
-
-        [Symbol("inout")]
-        Bidirectional = In | Out,
+            BitWidth IPrimitive.ContentWidth
+                => Width;
+        }
     }
 }

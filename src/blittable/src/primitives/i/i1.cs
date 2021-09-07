@@ -7,12 +7,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct Blit
     {
         public struct i1<T> : ISigned<T>
             where T : unmanaged
         {
+            public static ByteSize SZ => size<i1<T>>();
+
             public const ulong Width = 1;
 
             public T Storage;
