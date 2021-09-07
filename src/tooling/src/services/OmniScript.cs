@@ -143,22 +143,6 @@ namespace Z0
         public Outcome RunProjectScript(ProjectId project, string src, Scope scope, ScriptId script, out ReadOnlySpan<ToolFlow> flows)
             => RunProjectScript(project, src, scope, script, true, out flows);
 
-        public Outcome RunAsmScript(string src, ScriptId script)
-            => RunAsmScript(src, script, out _);
-
-        public Outcome RunAsmScript(string src, ScriptId script, out ReadOnlySpan<ToolFlow> flows)
-            => RunAsmScript(src,script, true, out flows);
-
-        public Outcome RunAsmScript(string src, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
-        {
-            var result = Outcome.Success;
-            var vars = WsVars.create();
-            var path = Ws.Asm().Script(script);
-            vars.SrcId = src;
-            return RunToolScript(path, vars.ToCmdVars(), quiet, out flows);
-        }
-
-
         void ReceiveCmdStatusQuiet(in string src)
         {
 

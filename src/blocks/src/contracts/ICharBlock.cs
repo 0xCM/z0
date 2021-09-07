@@ -8,21 +8,25 @@ namespace Z0
 
     using static core;
 
-    public interface ICharBlock<T> : ITextual, IComparable<T>, IEquatable<T>, IBlittable<T>, IDataBlock<T>, ICellBlock<char>
+    public interface ICharBlock<T> : ITextual, IComparable<T>, IEquatable<T>, IBlittable<T>, IDataBlock<T>, ICellBlock<char>, IHashed
         where T : unmanaged, ICharBlock<T>
     {
         Span<char> Data {get;}
 
         ReadOnlySpan<char> String {get;}
 
-        Span<char> ICellBlock<char>.Cells
-            => Data;
         int Length {get;}
 
         uint Capacity {get;}
 
+        uint IHashed.Hash
+            => alg.hash.calc(String);
+
         ByteSize IDataBlock.Size
             => Length*2;
+
+        Span<char> ICellBlock<char>.Cells
+            => Data;
 
         Span<byte> IDataBlock.Bytes
             => recover<byte>(Data);
@@ -38,6 +42,7 @@ namespace Z0
 
         bool IEquatable<T>.Equals(T src)
             => Data.SequenceEqual(src.Data);
+
         ref char First
             => ref first(Data);
     }

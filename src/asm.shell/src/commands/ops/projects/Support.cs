@@ -66,8 +66,6 @@ namespace Z0.Asm
             if(args.Count != 0)
             {
                 result = OmniScript.RunProjectScript(project, arg(args,0).Value, script, false, out _);
-                if(result.Ok)
-                    result = AsmCollect();
                 return result;
             }
 
@@ -88,8 +86,6 @@ namespace Z0.Asm
                     Write(flow.Format());
                 }
             }
-
-            result = AsmCollect();
 
             return result;
         }
@@ -144,7 +140,7 @@ namespace Z0.Asm
         Outcome CollectObjAsm()
         {
             var project = State.Project();
-            var src = Ws.Projects().OutFiles(project, FileTypes.ObjAsm).View;
+            var src = Ws.Projects().OutFiles(project, FileTypes.ext(FileKind.ObjAsm)).View;
             var dst = Ws.Projects().DataOut(project) + Tables.filename<ObjDumpRow>();
             var result = Outcome.Success;
             var tool = Wf.LlvmObjDump();

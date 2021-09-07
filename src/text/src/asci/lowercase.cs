@@ -7,11 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static core;
-    using static AsciSymbols;
 
-    partial struct Asci
+    partial struct AsciSymbols
     {
         /// <summary>
         /// Transforms an uppercase character [A..Z] to the corresponding lowercase character [a..z];

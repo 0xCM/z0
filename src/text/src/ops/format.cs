@@ -17,6 +17,13 @@ namespace Z0
         public static string format(ReadOnlySpan<char> src, uint length)
             => new string(core.slice(src,0, length));
 
+        [Op]
+        public static string format(ReadOnlySpan<AsciCode> src, Span<char> buffer)
+        {
+            var count = AsciSymbols.decode(src, buffer);
+            return new string(core.slice(buffer,0, count));
+        }
+
         /// <summary>
         /// Creates a string from a span, via UTF8 encoding
         /// </summary>

@@ -11,7 +11,7 @@ namespace Z0.llvm
         public Outcome GenLists()
         {
             var result = Outcome.Success;
-            var path = Ws.Tools().Script(Toolspace.llvm_tblgen, ToolScriptId.emit_llvm_lists);
+            var path = Ws.Tools().Script(Toolspace.llvm_tblgen, "emit-lists");
             result = Wf.OmniScript().RunToolScript(path, CmdVars.Empty, false, out var flow);
             ImportLists(LlvmDatasetNames.TblgenLists, llvm);
             return result;

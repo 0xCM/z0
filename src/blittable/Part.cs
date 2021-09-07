@@ -8,6 +8,15 @@ namespace Z0.Parts
 {
     public sealed class Blittable : Part<Blittable>
     {
+        public override IPartExecutor Executor
+            => new BlittableExecutor();
+    }
 
+    public sealed partial class BlittableExecutor : PartExecutor<BlittableExecutor>
+    {
+        public override void Run()
+        {
+
+        }
     }
 }

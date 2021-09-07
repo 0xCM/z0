@@ -7,6 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
+    using llvm;
+
     using static Root;
     using static core;
     using static AsmOpCodeTokens;
@@ -28,39 +30,43 @@ namespace Z0.Asm
             where K : unmanaged
                 => new AsmOcToken<K>(kind,value);
          [Op]
-         public static ReadOnlySpan<Token<DispToken>> DispTokens()
-            => Tokens.tokenize<DispToken>();
+         public static ReadOnlySpan<Token<DispToken>> DispTokens(out ReadOnlySpan<byte> data)
+            => Tokens.tokenize<DispToken>(out data);
+
+         [Op]
+         public static ReadOnlySpan<Token<AsmId>> AsmIdTokens(out ReadOnlySpan<byte> data)
+            => Tokens.tokenize<AsmId>(out data);
 
         [Op]
-        public static ReadOnlySpan<Token<DispToken>> ImmSizeTokens()
-            => Tokens.tokenize<DispToken>();
+        public static ReadOnlySpan<Token<DispToken>> ImmSizeTokens(out ReadOnlySpan<byte> data)
+            => Tokens.tokenize<DispToken>(out data);
 
         [Op]
-        public static ReadOnlySpan<Token<DispToken>> RexBTokens()
-            => Tokens.tokenize<DispToken>();
+        public static ReadOnlySpan<Token<DispToken>> RexBTokens(out ReadOnlySpan<byte> data)
+            => Tokens.tokenize<DispToken>(out data);
 
         [Op]
-        public static ReadOnlySpan<Token<ModRmToken>> ModRmTokens()
-            => Tokens.tokenize<ModRmToken>();
+        public static ReadOnlySpan<Token<ModRmToken>> ModRmTokens(out ReadOnlySpan<byte> data)
+            => Tokens.tokenize<ModRmToken>(out data);
 
         public static ReadOnlySpan<Token> OpCodeTokens()
             => AsmTokens.OpCodes.create().View;
 
         [Op]
-        public static ReadOnlySpan<Token<RexToken>> RexTokens()
-            => Tokens.tokenize<RexToken>();
+        public static ReadOnlySpan<Token<RexToken>> RexTokens(out ReadOnlySpan<byte> data)
+            => Tokens.tokenize<RexToken>(out data);
 
         [Op]
-        public static ReadOnlySpan<Token<MaskToken>> MaskTokens()
-            => Tokens.tokenize<MaskToken>();
+        public static ReadOnlySpan<Token<MaskToken>> MaskTokens(out ReadOnlySpan<byte> data)
+            => Tokens.tokenize<MaskToken>(out data);
 
         [Op]
-        public static ReadOnlySpan<Token<VexToken>> VexTokens()
-            => Tokens.tokenize<VexToken>();
+        public static ReadOnlySpan<Token<VexToken>> VexTokens(out ReadOnlySpan<byte> data)
+            => Tokens.tokenize<VexToken>(out data);
 
         [Op]
-        public static ReadOnlySpan<Token<OpCodeOperator>> OperatorTokens()
-            => Tokens.tokenize<OpCodeOperator>();
+        public static ReadOnlySpan<Token<OpCodeOperator>> OperatorTokens(out ReadOnlySpan<byte> data)
+            => Tokens.tokenize<OpCodeOperator>(out data);
 
         [MethodImpl(Inline), Op]
         public static bit IsCallRel32(ReadOnlySpan<byte> src, uint offset)

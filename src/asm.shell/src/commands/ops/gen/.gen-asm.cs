@@ -79,7 +79,7 @@ namespace Z0.Asm
 
             Emitted(dst);
 
-            OmniScript.RunAsmScript(asmid, ToolScriptId.mc, out var flows);
+            //OmniScript.RunAsmScript(asmid, ToolScriptId.mc, true, out var flows);
 
             return result;
         }

@@ -17,7 +17,25 @@ namespace Z0
 
         public abstract void Run();
 
-        public virtual void Run(ExecutorContext context)
+        public virtual void Run(dynamic context)
             => Run();
+    }
+
+    public abstract class PartExecutor<P,C> : PartExecutor<P>, IPartExecutor<P,C>
+        where P : PartExecutor<P,C>, new()
+    {
+        public virtual void Run(C context)
+            => Run();
+
+        public override void Run(dynamic context)
+            => Run((C)context);
+    }
+
+    public sealed class PartExecutor : PartExecutor<PartExecutor>
+    {
+        public override void Run()
+        {
+
+        }
     }
 }

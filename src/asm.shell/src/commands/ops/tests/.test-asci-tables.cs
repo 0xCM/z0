@@ -14,11 +14,11 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var buffer = span<char>(128);
-            Write(Asci.format(AsciTables.letters(LowerCase).Codes, buffer));
+            Write(text.format(AsciTables.letters(LowerCase).Codes, buffer));
             buffer.Clear();
-            Write(Asci.format(AsciTables.letters(UpperCase).Codes, buffer));
+            Write(text.format(AsciTables.letters(UpperCase).Codes, buffer));
             buffer.Clear();
-            Write(Asci.format(AsciTables.digits().Codes, buffer));
+            Write(text.format(AsciTables.digits().Codes, buffer));
             buffer.Clear();
             return result;
         }

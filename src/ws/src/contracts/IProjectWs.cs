@@ -25,7 +25,7 @@ namespace Z0
 
         FS.FilePath TableOut<T>(ProjectId project)
             where T : struct
-                => DataOut(project) + FS.file(Z0.TableId.identify<T>().Format(),FS.Csv);
+                => DataOut(project) + FS.file(Z0.TableId.identify<T>().Format(), FS.Csv);
 
         FS.Files OutFiles(ProjectId project, FS.FileExt ext)
             => Out(project).Files(ext, true);

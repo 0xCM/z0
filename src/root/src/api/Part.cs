@@ -51,13 +51,14 @@ namespace Z0
             Id =  id(Owner);
         }
 
-        [MethodImpl(Inline)]
-        public static bool operator ==(Part<P> p1, Part<P> p2)
-            => p1.Id == p2.Id;
+        public virtual IPartExecutor Executor
+            => new PartExecutor();
 
-        [MethodImpl(Inline)]
-        public static bool operator !=(Part<P> p1, Part<P> p2)
-            => p1.Id != p2.Id;
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => hash(Id);
+        }
 
         [MethodImpl(Inline)]
         public bool Equals(P src)
@@ -65,11 +66,7 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is P x && Equals(x);
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => hash(Id);
-        }
+
 
         public override int GetHashCode()
             => (int)Hash;
@@ -80,5 +77,13 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Part<P> p1, Part<P> p2)
+            => p1.Id == p2.Id;
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Part<P> p1, Part<P> p2)
+            => p1.Id != p2.Id;
     }
 }

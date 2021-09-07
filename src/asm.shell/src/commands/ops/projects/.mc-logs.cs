@@ -16,7 +16,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var project = State.Project();
-            var logs = Ws.Projects().OutFiles(project, FileTypes.McOpsLog).View;
+            var logs = Ws.Projects().OutFiles(project, FileTypes.ext(FileKind.McOpsLog)).View;
             var count = logs.Length;
             for(var i=0; i<count; i++)
             {

@@ -74,6 +74,5 @@ namespace Z0.Asm
                 get => ref R(7);
             }
         }
-
     }
 }

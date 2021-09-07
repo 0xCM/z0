@@ -10,36 +10,43 @@ namespace Z0
     using static Root;
     using static Blit;
 
-    public readonly struct FileType
+    public readonly struct FileType : IFileType<FileType>
     {
-        public FileKind FileKind {get;}
+        public FileKind Kind {get;}
 
         public text15 ExtName {get;}
 
         [MethodImpl(Inline)]
         public FileType(FileKind kind, text15 ext)
         {
-            FileKind = kind;
+            Kind = kind;
             ExtName = ext;
+        }
+
+        [MethodImpl(Inline)]
+        public FileType(FileKind kind, FS.FileExt ext)
+        {
+            Kind = kind;
+            ExtName = ext.Format();
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => FileKind == 0;
+            get => Kind == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => FileKind != 0;
+            get => Kind != 0;
         }
 
         public FS.FileExt Ext
             => FS.ext(ExtName.Format());
 
         public string Format()
-            => FileKind.Format();
+            => Kind.Format();
 
         public override string ToString()
             => Format();

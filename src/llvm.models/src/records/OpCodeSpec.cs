@@ -24,8 +24,8 @@ namespace Z0.llvm
 
         public CharBlock24 OpCodeBytes;
 
-        public int CompareTo(OpCodeSpec other)
-            => (OpId as IComparable<CharBlock32>).CompareTo(other.OpId);
+        public int CompareTo(OpCodeSpec src)
+            => (OpId as IComparable<CharBlock32>).CompareTo(src.OpId);
 
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[FieldCount]{8,32,16,16,24};

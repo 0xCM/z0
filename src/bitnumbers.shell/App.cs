@@ -13,8 +13,6 @@ namespace Z0
         {
             var flow = Wf.Running();
 
-            BitFormatChecks.create(Wf).Run(Rng.wyhash64());
-
             Wf.Ran(flow);
         }
     }

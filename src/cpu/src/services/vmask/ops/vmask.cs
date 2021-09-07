@@ -584,9 +584,9 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(W128 w, N8 f, N7 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N8 f, N7 d)
             where T : unmanaged
-                => gcpu.vbroadcast(w, msb(f,d,t));
+                => gcpu.vbroadcast(w, msb<T>(f,d));
 
         /// <summary>
         /// The f most significant bits of each 8 bits are enabled

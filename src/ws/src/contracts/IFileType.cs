@@ -4,23 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using static Blit;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IFileType
     {
-        Type Rep {get;}
+        FileKind Kind {get;}
 
-        FS.FileExt DefaultExt {get;}
+        FS.FileExt Ext {get;}
     }
 
     [Free]
     public interface IFileType<T> : IFileType
-        where T : struct, IFileType<T>
+        where T : unmanaged, IFileType<T>
     {
-        Type IFileType.Rep
-            => typeof(T);
+
     }
 }

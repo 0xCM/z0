@@ -13,13 +13,17 @@ namespace Z0
     {
         string Text {get;}
 
-        ReadOnlySpan<char> Data => Text;
+        ReadOnlySpan<char> Data
+            => Text ?? string.Empty;
 
-        int Length => Text?.Length ?? 0;
+        int Length
+            => Data.Length;
 
-        bool INullity.IsEmpty => Length == 0;
+        bool INullity.IsEmpty
+            => Length == 0;
 
-        bool INullity.IsNonEmpty => Length != 0;
+        bool INullity.IsNonEmpty
+            => Length != 0;
 
         string ITextual.Format()
             => Text;

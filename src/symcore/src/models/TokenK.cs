@@ -39,8 +39,8 @@ namespace Z0
         public override string ToString()
             => Format();
 
-         [MethodImpl(Inline)]
-       public static implicit operator Token(Token<K> src)
+        [MethodImpl(Inline)]
+        public static implicit operator Token(Token<K> src)
             => new Token(src.Key, src.Symbol, src.Expression);
     }
 }

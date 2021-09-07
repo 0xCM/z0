@@ -10,6 +10,6 @@ namespace Z0.Asm
     {
         [CmdOp(".cpp-build")]
         Outcome BuildCpp(CmdArgs args)
-            => OmniScript.RunProjectScript(AsmRoot, arg(args,0).Value, CppBuild, false, out var flows);
+            => RunBuildScript(args, CppBuild);
     }
 }

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -13,7 +12,7 @@ namespace Z0
     [ApiHost]
     public readonly struct Tokens
     {
-        public static ReadOnlySpan<Token> tokenize(Type symtype)
+        public static ReadOnlySpan<Token> tokenize(Type symtype, out ReadOnlySpan<byte> data)
         {
             var symbols = Symbols.untyped(symtype).View;
             var symcount = symbols.Length;
@@ -26,6 +25,7 @@ namespace Z0
             }
 
             var src = span(content.Emit());
+            data = recover<byte>(src);
             var count = src.Length;
             var counter = 0u;
             var tokens = span<Token>(count);
@@ -58,7 +58,6 @@ namespace Z0
                 chars.Clear();
             }
             return slice(tokens,0,counter);
-
         }
 
         public static Index<AsciCode> concat<K>(Symbols<K> src)
@@ -89,7 +88,7 @@ namespace Z0
             return buffer;
         }
 
-        public static ReadOnlySpan<Token<K>> tokenize<K>()
+        public static ReadOnlySpan<Token<K>> tokenize<K>(out ReadOnlySpan<byte> data)
             where K : unmanaged, Enum
         {
             var symbols = Symbols.index<K>().View;
@@ -103,6 +102,7 @@ namespace Z0
             }
 
             var src = span(content.Emit());
+            data = recover<byte>(src);
             var count = src.Length;
             var counter = 0u;
             var tokens = span<Token<K>>(count);

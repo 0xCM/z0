@@ -6,8 +6,7 @@ namespace Z0.llvm
 {
     using System;
     using System.Runtime.InteropServices;
-
-    using Z0.Asm;
+    using System.Runtime.CompilerServices;
 
     using static Root;
 
@@ -32,7 +31,7 @@ namespace Z0.llvm
 
         public TextBlock Encoding;
 
-        public AsmExpr Asm;
+        public TextBlock Asm;
 
         public FS.FileUri Source;
 
@@ -52,11 +51,14 @@ namespace Z0.llvm
 
         public bool IsEmpty
         {
+
+            [MethodImpl(Inline)]
             get => Line.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
+            [MethodImpl(Inline)]
             get => Line.IsNonEmpty;
         }
 

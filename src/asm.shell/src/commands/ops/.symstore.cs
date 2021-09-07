@@ -21,11 +21,11 @@ namespace Z0.Asm
             store.Deposit("nop", out var s5);
             Write(s5);
 
-            var e1 = store.Extract(s1);
-            var e2 = store.Extract(s2);
-            var e3 = store.Extract(s3);
-            var e4 = store.Extract(s4);
-            var e5 = store.Extract(s5);
+            var e1 = store.Find(s1);
+            var e2 = store.Find(s2);
+            var e3 = store.Find(s3);
+            var e4 = store.Find(s4);
+            var e5 = store.Find(s5);
             Write(e1 + e2 + e3 + e4 + e5);
             return true;
         }

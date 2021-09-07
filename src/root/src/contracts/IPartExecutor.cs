@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public interface IPartExecutor
     {
@@ -13,7 +12,10 @@ namespace Z0
 
         void Run();
 
-        void Run(ExecutorContext context);
+        void Run(dynamic context);
+
+        Type ContextType
+            => typeof(void);
     }
 
     public interface IPartExecutor<P> : IPartExecutor
@@ -21,5 +23,17 @@ namespace Z0
     {
         Type IPartExecutor.ExecutorType
             => typeof(P);
+    }
+
+    public interface IPartExecutor<P,C> : IPartExecutor<P>
+        where P : IPartExecutor<P>
+    {
+        void Run(C context);
+
+        void IPartExecutor.Run(dynamic context)
+            => Run((C)context);
+
+        Type IPartExecutor.ContextType
+            => typeof(C);
     }
 }

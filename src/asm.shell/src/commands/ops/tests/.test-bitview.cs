@@ -39,5 +39,13 @@ namespace Z0.Asm
 
             return result;
         }
+
+        [CmdOp(".test-bit-formats")]
+        Outcome CheckBitFormats(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            BitFormatChecks.create(Wf).Run(Rng.wyhash64());
+            return result;
+        }
     }
 }

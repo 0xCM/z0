@@ -4,32 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct TypedFile<T>
-        where T : struct, IFileType<T>
+    public readonly struct SymRef
     {
-        public FS.FilePath Location {get;}
+        public readonly ushort Seg;
 
-        public T Type => default;
+        public readonly ushort Key;
 
         [MethodImpl(Inline)]
-        public TypedFile(FS.FilePath path)
+        public SymRef(ushort seg, ushort key)
         {
-            Location = path;
-        }
-
-        public FS.PathPart Name
-        {
-            [MethodImpl(Inline)]
-            get => Location.Name;
+            Seg = seg;
+            Key = key;
         }
 
         public string Format()
-            => Location.ToUri().Format();
+            => string.Format("{0:D5}:{1:D5}", Seg, Key);
 
         public override string ToString()
             => Format();

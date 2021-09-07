@@ -14,11 +14,12 @@ namespace Z0
     }
 
     [Free]
-    public interface ITypedFile<T> : ITypedFile
-        where T : struct, IFileType
+    public interface ITypedFile<F> : ITypedFile
+        where F : unmanaged, IFileType
     {
-        IFileType ITypedFile.FileType
-            => default(T);
-    }
+        new F FileType => default(F);
 
+        IFileType ITypedFile.FileType
+            => FileType;
+    }
 }

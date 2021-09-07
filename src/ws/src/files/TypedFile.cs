@@ -11,31 +11,25 @@ namespace Z0
 
     public readonly struct TypedFile
     {
-        public FileType Type {get;}
+        public FileKind Kind {get;}
 
-        public FS.FilePath Location {get;}
+        public FS.FilePath Path {get;}
 
         [MethodImpl(Inline)]
-        public TypedFile(FileType type, FS.FilePath path)
+        public TypedFile(FileKind kind, FS.FilePath path)
         {
-            Type = type;
-            Location = path;
-        }
-
-        public FS.PathPart Name
-        {
-            [MethodImpl(Inline)]
-            get => Location.Name;
+            Kind = kind;
+            Path = path;
         }
 
         public string Format()
-            => Location.ToUri().Format();
+            => Path.ToUri().Format();
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator TypedFile((FileType type, FS.FilePath path) src)
-            => new TypedFile(src.type, src.path);
+        public static implicit operator TypedFile((FileKind kind, FS.FilePath path) src)
+            => new TypedFile(src.kind, src.path);
     }
 }

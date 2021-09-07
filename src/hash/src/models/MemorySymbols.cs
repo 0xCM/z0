@@ -31,7 +31,7 @@ namespace Z0
             dst.Address = address;
             dst.HashCode = StringHash.compute(chars);
             dst.Size = chars.Length*2;
-            dst.Expr = TextTools.format(chars);
+            dst.Expr = text.format(chars);
             return dst;
         }
 
@@ -133,11 +133,5 @@ namespace Z0
 
         public MemoryLookup ToLookup()
             => lookup(_Symbols, EntryCount);
-    }
-
-    partial struct Msg
-    {
-        public static MsgPattern<MemoryAddress,uint,MemoryAddress> SymbolHashMismatch
-            => "The hashed address {0} at index {1} does not match the symbol address {2} at the corresponding index";
     }
 }

@@ -17,7 +17,7 @@ namespace Z0.Asm
         const byte PointCount = 5;
 
         public static ReadOnlySpan<C> Source
-            => new C[PointCount]{C.Base,C.B,C.X,C.R,C.W};
+            => new C[PointCount]{C.Base, C.B, C.X, C.R, C.W};
 
         public static ReadOnlySpan<AsciCode> Target
             => new AsciCode[PointCount]{AsciCode.Bang, AsciCode.B, AsciCode.X, AsciCode.R, AsciCode.W};
@@ -29,7 +29,7 @@ namespace Z0.Asm
         unsafe Outcome FT(CmdArgs args)
         {
             var src = recover<C,byte>(Source);
-            Blit.Factory.fx8<AsciCode>(src, Target, out var f);
+            ref var f = ref Blit.Factory.fx8<AsciCode>(src, Target, out _);
 
             byte x = 0;
 

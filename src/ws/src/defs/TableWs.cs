@@ -31,6 +31,5 @@ namespace Z0
 
         public FS.FolderPath WsRoot()
             => _WsRoot;
-
     }
 }

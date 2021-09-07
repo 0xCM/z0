@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using static Root;
     using static core;
+    using static Blit;
 
     partial class AsmCmdService
     {
@@ -27,6 +28,18 @@ namespace Z0.Asm
                 Write(string.Format("BitVector[{0}].Bits={1}", i, v.Format()));
             }
             return true;
+        }
+
+        [CmdOp(".names")]
+        Outcome Names(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var name0 = Factory.name(n16, "0123456789ABCDEF");
+            var name1 = Factory.name(n8, "01234");
+            Write(name0);
+            Write(name1);
+
+            return result;
         }
     }
 }
