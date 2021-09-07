@@ -12,15 +12,15 @@ namespace Z0
 
     partial struct Blit
     {
-        partial struct Operate
+        [MethodImpl(Inline), Op]
+        public static uint deposit(uint width, ulong src, Span<bit> dst)
         {
-            [MethodImpl(Inline), Op]
-            public static bit eq(text7 a, text7 b)
-                => a.Storage == b.Storage;
-
-            [MethodImpl(Inline), Op]
-            public static bit neq(text7 a, text7 b)
-                => a.Storage != b.Storage;
+            var input = src;
+            var storage = 0ul;
+            var count = (uint)min(width, dst.Length);
+            for(byte i=0; i<count; i++)
+                seek(dst,i) = bit.test(input,i);
+            return count;
         }
     }
 }

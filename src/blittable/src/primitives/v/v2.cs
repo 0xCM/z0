@@ -14,6 +14,27 @@ namespace Z0
     partial struct Blit
     {
         /// <summary>
+        /// Creates a vector of specifield length and parametric type
+        /// </summary>
+        /// <param name="n">The length selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static v2<T> v<T>(N2 n)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static v2<T> v<T>(N2 n, T a0, T a1 = default)
+            where T : unmanaged
+        {
+            var v = new v2<T>();
+            ref var dst = ref cell(ref v);
+            seek(dst,0) = a0;
+            seek(dst,1) = a1;
+            return v;
+        }
+
+        /// <summary>
         /// Defines a 2-cell T-vector
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack=1)]
@@ -42,7 +63,7 @@ namespace Z0
             public Span<T> Cells
             {
                 [MethodImpl(Inline)]
-                get => Operate.cells(ref this);
+                get => cells(ref this);
             }
 
             public ref T this[uint i]
@@ -52,7 +73,7 @@ namespace Z0
             }
 
             public string Format()
-                => Render.format(this);
+                => format(this);
 
             public override string ToString()
                 => Format();

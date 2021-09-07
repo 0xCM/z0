@@ -54,19 +54,19 @@ namespace Z0
             public Span<T> Cells
             {
                 [MethodImpl(Inline)]
-                get => Operate.cells(ref this);
+                get => cells(ref this);
             }
 
-            public Span<T> this[uint row]
+            public Span<T> this[uint r]
             {
                 [MethodImpl(Inline)]
-                get => Operate.row(ref this, row);
+                get => row(ref this, r);
             }
 
-            public ref T this[uint row, uint col]
+            public ref T this[uint r, uint c]
             {
                 [MethodImpl(Inline)]
-                get => ref seek(this[row], col);
+                get => ref seek(this[r], c);
             }
 
             public GridSpec Spec

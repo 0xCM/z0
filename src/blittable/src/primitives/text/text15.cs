@@ -11,10 +11,20 @@ namespace Z0
     using static core;
 
     using F = Blit.Factory;
-    using O = Blit.Operate;
 
     partial struct Blit
     {
+        [Op]
+        public static string format(in text15 src)
+        {
+            Span<char> dst = stackalloc char[text15.MaxLength];
+            var count = src.Length;
+            var data = src.Bytes;
+            for(var i=0; i<count; i++)
+                seek(dst,i) = (char)skip(data,i);
+            return text.format(slice(dst,0,count));
+        }
+
         public struct text15 : IName<text15,Cell128>
         {
             public const uint StorageSize = 16;
@@ -49,7 +59,7 @@ namespace Z0
             }
 
             public string Format()
-                => Render.format(this);
+                => format(this);
 
             public override string ToString()
                 => Format();

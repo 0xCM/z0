@@ -12,6 +12,14 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline), Op]
+        public static vNx64<ulong> v(N64 n, ulong[] src)
+            => new vNx64<ulong>(src);
+
+        [MethodImpl(Inline), Op]
+        public static vNx64<MemoryAddress> v(N64 n, MemoryAddress[] src)
+            => new vNx64<MemoryAddress>(src);
+
         /// <summary>
         /// Represents a finite sequence of 64-bit values
         /// </summary>

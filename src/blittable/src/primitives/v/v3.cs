@@ -14,6 +14,44 @@ namespace Z0
     partial struct Blit
     {
         /// <summary>
+        /// Creates a vector of specifield length and parametric type
+        /// </summary>
+        /// <param name="n">The length selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static v3<T> v<T>(N3 n)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static v3<T> v<T>(N3 n, T a0, T a1 = default, T a2 = default)
+            where T : unmanaged
+        {
+            var v = new v3<T>();
+            ref var dst = ref cell(ref v);
+            seek(dst,0) = a0;
+            seek(dst,1) = a1;
+            seek(dst,2) = a2;
+            return v;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T cell<T>(ref v3<T> src)
+            where T : unmanaged
+                => ref @as<v3<T>,T>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> cells<T>(ref v3<T> src)
+            where T : unmanaged
+                => cover(cell(ref src), src.N);
+
+        [Op, Closures(Closure)]
+        public static string format<T>(in v3<T> src)
+            where T : unmanaged
+                => string.Format(RP.V3,
+                    src[0], src[1], src[2]);
+
+        /// <summary>
         /// Defines a 3-cell T-vector
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack=1)]
@@ -43,7 +81,7 @@ namespace Z0
             public Span<T> Cells
             {
                 [MethodImpl(Inline)]
-                get => Operate.cells(ref this);
+                get => cells(ref this);
             }
 
             public ref T this[uint i]
@@ -53,7 +91,7 @@ namespace Z0
             }
 
             public string Format()
-                => Render.format(this);
+                => format(this);
 
             public override string ToString()
                 => Format();

@@ -9,5 +9,7 @@ namespace Z0.Asm
         None,
 
         WinX64,
+
+        RegCall64
     }
 }

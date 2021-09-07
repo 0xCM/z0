@@ -192,37 +192,37 @@ namespace Z0.Asm
         {
             var ccA = Symbols.index<Condition>();
             Require.equal((uint)ccA.Length, ConditionCount);
-            Factory.expr(ccA, _ConditionNames.Edit);
+            expr(ccA, _ConditionNames.Edit);
             Symbols.describe(ccA, _ConditionInfo.Edit);
             Symbols.kinds(ccA, _CC.Edit);
 
             var ccB = Symbols.index<ConditionAlt>();
             Require.equal((uint)ccB.Length, ConditionCount);
-            Factory.expr(ccB, _AltConditionNames.Edit);
+            expr(ccB, _AltConditionNames.Edit);
             Symbols.describe(ccB, _AltConditionInfo.Edit);
             Symbols.kinds(ccB, _CCAlt.Edit);
 
             var jcc8a = Symbols.index<Jcc8>();
             Require.equal(jcc8a.Count, ConditionCount);
-            Factory.expr(jcc8a, _Jcc8Names.Edit);
+            expr(jcc8a, _Jcc8Names.Edit);
             Symbols.describe(jcc8a, _Jcc8Info.Edit);
             Symbols.kinds(jcc8a, _Jcc8Codes.Edit);
 
             var jcc8b = Symbols.index<Jcc8Alt>();
             Require.equal(jcc8b.Count, ConditionCount);
-            Factory.expr(jcc8b, _AltJcc8Names.Edit);
+            expr(jcc8b, _AltJcc8Names.Edit);
             Symbols.describe(jcc8b, _AltJcc8Info.Edit);
             Symbols.kinds(jcc8b, _AltJcc8Codes.Edit);
 
             var jcc32a = Symbols.index<Jcc32>();
             Require.equal(jcc32a.Count, ConditionCount);
-            Factory.expr(jcc32a, _Jcc32Names.Edit);
+            expr(jcc32a, _Jcc32Names.Edit);
             Symbols.describe(jcc32a, _Jcc32Info.Edit);
             Symbols.kinds(jcc32a, _Jcc32Codes.Edit);
 
             var jcc32b = Symbols.index<Jcc32Alt>();
             Require.equal(jcc32b.Count, ConditionCount);
-            Factory.expr(jcc32b, _AltJcc32Names.Edit);
+            expr(jcc32b, _AltJcc32Names.Edit);
             Symbols.describe(jcc32b, _AltJcc32Info.Edit);
             Symbols.kinds(jcc32b, _AltJcc32Codes.Edit);
         }

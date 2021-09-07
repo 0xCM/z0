@@ -8,14 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct Blit
     {
-        partial struct Meta
-        {
-            [MethodImpl(Inline), Op]
-            public static DataType type(BlittableKind kind, BitWidth content, BitWidth storage)
-                => new DataType(kind, content, storage);
-        }
+        [MethodImpl(Inline), Op]
+        public static bit eq(text7 a, text7 b)
+            => a.Storage == b.Storage;
+
+        [MethodImpl(Inline), Op]
+        public static bit neq(text7 a, text7 b)
+            => a.Storage != b.Storage;
     }
 }

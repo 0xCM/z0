@@ -12,6 +12,10 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline), Op]
+        public static vNx32<uint> v(N32 n,  uint[] src)
+            => new vNx32<uint>(src);
+
         /// <summary>
         /// Represents a finite sequence of 32-bit values
         /// </summary>

@@ -12,6 +12,14 @@ namespace Z0
 
     partial struct Blit
     {
+        public static string format<S,T>(in kvp<S,T> m)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            const string Pattern = "{0} -> {1}";
+            return string.Format(Pattern, m.Key, m.Val);
+        }
+
         public struct kvp<K,V>
             where K : unmanaged
             where V : unmanaged
@@ -30,7 +38,7 @@ namespace Z0
             }
 
             public string Format()
-                => Render.format(this);
+                => format(this);
 
             public override string ToString()
                 => Format();

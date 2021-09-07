@@ -5,9 +5,8 @@
 namespace Z0.Asm
 {
     [ApiHost]
-    public readonly partial struct CallCv
+    public readonly partial struct Ccv
     {
-        public static win64 Win64
-            => default;
+
     }
 }

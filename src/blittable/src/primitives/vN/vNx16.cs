@@ -12,6 +12,10 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline), Op]
+        public static vNx16<ushort> v(N16 n, ushort[] src)
+            => new vNx16<ushort>(src);
+
         /// <summary>
         /// Represents a finite sequence of 16-bit values
         /// </summary>

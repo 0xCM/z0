@@ -21,7 +21,7 @@ namespace Z0
             }
 
             public string Format()
-                => Render.format(Name);
+                => format(Name);
 
             public override string ToString()
                 => Format();

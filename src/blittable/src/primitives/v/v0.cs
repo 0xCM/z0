@@ -5,9 +5,23 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
 
     partial struct Blit
     {
+        /// <summary>
+        /// Creates the empty vector
+        /// </summary>
+        /// <param name="n">The length selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static v0<T> v<T>(N0 n)
+            where T : unmanaged
+                => default;
+
         /// <summary>
         /// Represents the empty vector
         /// </summary>

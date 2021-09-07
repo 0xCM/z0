@@ -12,6 +12,10 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline), Op]
+        public static vNx8<byte> v(N8 n, byte[] src)
+            => new vNx8<byte>(src);
+
         /// <summary>
         /// Represents a finite sequence of 8-bit values
         /// </summary>

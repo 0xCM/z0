@@ -12,6 +12,14 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline), Op]
+        public static vNx1<bit> v(N1 n, bit[] src)
+            => new vNx1<bit>(src);
+
+        [MethodImpl(Inline), Op]
+        public static vNx1<byte> v(N1 n, byte[] src)
+            => new vNx1<byte>(src);
+
         /// <summary>
         /// Represents a finite sequence of 1-bit values covered byte <typeparamref='T'/> storage cells
         /// </summary>

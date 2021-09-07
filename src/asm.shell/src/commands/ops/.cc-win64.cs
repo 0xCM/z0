@@ -5,6 +5,8 @@
 namespace Z0.Asm
 {
     using static Root;
+    using static Ccv;
+
 
     partial class AsmCmdService
     {
@@ -13,19 +15,18 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
-            var cc = CallCv.Win64;
             Write("win64cc");
             Write("---------------");
-            var cc8 = CallCv.regslots(cc,w8);
+            var cc8 = Win64.slots(w8);
             Write(cc8.Format());
 
-            var cc16 = CallCv.regslots(cc,w16);
+            var cc16 = Win64.slots(w16);
             Write(cc16.Format());
 
-            var cc32 = CallCv.regslots(cc,w32);
+            var cc32 = Win64.slots(w32);
             Write(cc32.Format());
 
-            var cc64 = CallCv.regslots(cc,w64);
+            var cc64 = Win64.slots(w64);
             Write(cc64.Format());
 
             return result;

@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    partial struct CallCv
+    partial struct Ccv
     {
         public struct cc<T> : ICallCv<cc<T>>
         {

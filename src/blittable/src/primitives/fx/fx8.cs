@@ -14,6 +14,51 @@ namespace Z0
 
     partial struct Blit
     {
+        [Op]
+        public static fx8 fx(N8 n, MemoryAddress src, MemoryAddress dst)
+            => new fx8(src, dst);
+
+        [Op, Closures(Closure)]
+        public static fx8<byte,T> fx<T>(N8 n, MemoryAddress src, MemoryAddress dst)
+            where T : unmanaged
+                => new fx8<byte,T>(src, dst);
+
+        public static fx8<S,T> fx<S,T>(N8 n, MemoryAddress src, MemoryAddress dst)
+            where T : unmanaged
+            where S : unmanaged
+                => new fx8<S,T>(src, dst);
+
+        /// <summary>
+        /// Defines a function fx8:u8->T
+        /// </summary>
+        /// <param name="f">The function under specification</param>
+        /// <param name="src">The source domain points</param>
+        /// <param name="dst">The target domain points</param>
+        /// <typeparam name="T">The target domain</typeparam>
+        [Op, Closures(Closure)]
+        public static ref fx8<byte,T> fx<T>(N8 n, ref fx8<byte,T> f, ReadOnlySpan<byte> src, ReadOnlySpan<T> dst)
+            where T : unmanaged
+        {
+            f.SrcMap.Clear();
+            var count = min(min(src.Length, dst.Length), Blit.fx8.Capacity);
+            f.Size = (uint)count;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var x = ref skip(src,i);
+                ref readonly var y = ref skip(dst,i);
+                f.SrcMap[x] = (byte)i;
+            }
+            return ref f;
+        }
+
+        [Op, Closures(Closure)]
+        public static ref fx8<byte,T> fx<T>(N8 n, ReadOnlySpan<byte> src, ReadOnlySpan<T> dst, out fx8<byte,T> f)
+            where T : unmanaged
+        {
+            f = fx<T>(n, address(first(src)), address(first(dst)));
+            return ref fx(n, ref f, src, dst);
+        }
+
         /// <summary>
         /// Defines a total function over an 8-bit domain
         /// </summary>

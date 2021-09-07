@@ -12,6 +12,17 @@ namespace Z0
 
     partial struct Blit
     {
+        [Op]
+        public static string format(in bv src)
+        {
+            var count = (int)src.Width;
+            Span<char> buffer = stackalloc char[count];
+            for(var i=0; i<count; i++)
+                seek(buffer,i) = src[i].ToChar();
+            buffer.Reverse();
+            return text.format(buffer);
+        }
+
         public readonly ref struct bv
         {
             readonly Span<bit> Bits;
@@ -41,7 +52,7 @@ namespace Z0
             }
 
             public string Format()
-                => Render.format(this);
+                => format(this);
         }
     }
 }

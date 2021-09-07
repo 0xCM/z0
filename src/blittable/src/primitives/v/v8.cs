@@ -14,6 +14,43 @@ namespace Z0
     partial struct Blit
     {
         /// <summary>
+        /// Creates a vector of specifield length and parametric type
+        /// </summary>
+        /// <param name="n">The length selector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static v8<T> v<T>(N8 n)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static v8<T> v<T>(N8 n, T a0, T a1 = default, T a2 = default, T a3 = default, T a4 = default, T a5 = default, T a6 = default, T a7 = default)
+            where T : unmanaged
+        {
+            var v = new v8<T>();
+            ref var dst = ref cell(ref v);
+            seek(dst,0) = a0;
+            seek(dst,1) = a1;
+            seek(dst,2) = a2;
+            seek(dst,3) = a3;
+            seek(dst,4) = a4;
+            seek(dst,5) = a5;
+            seek(dst,6) = a6;
+            seek(dst,7) = a7;
+            return v;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T cell<T>(ref v8<T> src)
+            where T : unmanaged
+                => ref @as<v8<T>,T>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> cells<T>(ref v8<T> src)
+            where T : unmanaged
+                => cover(cell(ref src), src.N);
+
+        /// <summary>
         /// Defines a 8-cell T-vector
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack=1)]
@@ -43,7 +80,7 @@ namespace Z0
             public Span<T> Cells
             {
                 [MethodImpl(Inline)]
-                get => Operate.cells(ref this);
+                get => cells(ref this);
             }
 
             public ref T this[uint i]
@@ -53,7 +90,7 @@ namespace Z0
             }
 
             public string Format()
-                => Render.format(this);
+                => format(this);
 
             public override string ToString()
                 => Format();

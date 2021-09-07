@@ -11,10 +11,24 @@ namespace Z0
     using static core;
 
     using F = Blit.Factory;
-    using O = Blit.Operate;
 
     partial struct Blit
     {
+        [MethodImpl(Inline), Op]
+        public static uint hash(text7 src)
+            => alg.hash.calc(src.Storage);
+
+        [Op]
+        public static string format(in text7 src)
+        {
+            Span<char> dst = stackalloc char[text7.MaxLength];
+            var count = src.Length;
+            var data = src.Bytes;
+            for(var i=0; i<count; i++)
+                seek(dst, i) = (char)skip(data,i);
+            return text.format(slice(dst,0,count));
+        }
+
         public struct text7 : IName<text7,ulong>
         {
             public const byte MaxLength = 7;
@@ -47,20 +61,20 @@ namespace Z0
             }
 
             public string Format()
-                => Render.format(this);
+                => format(this);
 
             public override string ToString()
                 => Format();
 
             [MethodImpl(Inline)]
             public bool Equals(text7 src)
-                => O.eq(this,src);
+                => eq(this,src);
 
             public override bool Equals(object src)
                 => src is text7 n ? Equals(n) : false;
 
             public override int GetHashCode()
-                => (int)O.hash(this);
+                => (int)hash(this);
 
             [MethodImpl(Inline)]
             public static bool operator ==(text7 a, text7 b)
