@@ -10,6 +10,10 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline), Op]
+        public static bv64 bv(N64 n, ulong src)
+            => new bv64(src);
+
         /// <summary>
         /// Defines a 64-bit bitvector
         /// </summary>
@@ -38,8 +42,8 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator bv<ulong>(bv64 src)
-                => new bv<ulong>(Width, src.Storage);
+            public static implicit operator gbv<ulong>(bv64 src)
+                => new gbv<ulong>(Width, src.Storage);
         }
     }
 }

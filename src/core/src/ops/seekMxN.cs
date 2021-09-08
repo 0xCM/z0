@@ -7,51 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
 
     partial struct core
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T seek8k<T,K>(in T src, K count)
-            where K : unmanaged
-                => ref Add(ref edit(src), u8(count));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T seek16k<T,K>(in T src, K count)
-            where K : unmanaged
-                => ref Add(ref edit(src), u16(count));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T seek32k<T,K>(in T src, K count)
-            where K : unmanaged
-                => ref Add(ref edit(src), (int)u32(count));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T seek64k<T,K>(in T src, K count)
-            where K : unmanaged
-                => ref Add(ref edit(src), (int)u64(count));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip8k<T,K>(in T src, K count)
-            where K : unmanaged
-                => ref Add(ref edit(src), u8(count));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip16k<T,K>(in T src, K count)
-            where K : unmanaged
-                => ref Add(ref edit(src), u16(count));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip32k<T,K>(in T src, K count)
-            where K : unmanaged
-                => ref Add(ref edit(src), (int)u32(count));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly T skip64k<T,K>(in T src, K count)
-            where K : unmanaged
-                => ref Add(ref edit(src), (int)u64(count));
-
         [MethodImpl(Inline)]
         public static ref byte seek8x8k<T,K>(in T src, K count)
             where K : unmanaged

@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using F = Blit.Factory;
-
     partial struct Blit
     {
         [MethodImpl(Inline), Op]
@@ -27,6 +25,18 @@ namespace Z0
             for(var i=0; i<count; i++)
                 seek(dst, i) = (char)skip(data,i);
             return text.format(slice(dst,0,count));
+        }
+
+        [MethodImpl(Inline), Op]
+        public static text7 txt(N7 n, ReadOnlySpan<char> src)
+        {
+            const byte Max = text7.MaxLength;
+            var length = (byte)min(available(src), Max);
+            var storage = 0ul;
+            var dst = bytes(storage);
+            pack(src, length, dst);
+            seek(dst,7) = length;
+            return new text7(storage);
         }
 
         public struct text7 : IName<text7,ulong>
@@ -86,11 +96,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator text7(string src)
-                => F.text(N,src);
+                => txt(N,src);
 
             [MethodImpl(Inline)]
             public static implicit operator text7(ReadOnlySpan<char> src)
-                => F.text(N,src);
+                => txt(N,src);
 
             [MethodImpl(Inline)]
             public static implicit operator textT<ulong>(text7 src)

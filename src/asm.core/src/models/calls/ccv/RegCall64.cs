@@ -107,7 +107,7 @@ namespace Z0.Asm
                 => new Gp16Reg[GpRegCount]{ax,cx,dx,di,si,r8w,r9w,r11w,r12w,r13w,r14w,r15w};
 
             static ReadOnlySpan<Gp8Reg> Gp8Data
-                => new Gp8Reg[GpRegCount]{al,cl,dl,bl,spl,r8b,r9b,r11b,r12b,r13b,r14b,r15b};
+                => new Gp8Reg[GpRegCount]{al,cl,dl,dil,sil,r8b,r9b,r11b,r12b,r13b,r14b,r15b};
 
             static ReadOnlySpan<XmmReg> XmmData
                 => new XmmReg[VRegCount]{xmm0, xmm1, xmm2, xmm3, xmm4, xmm5, xmm6, xmm7, xmm8, xmm9, xmm10, xmm11, xmm12, xmm13, xmm14, xmm15};

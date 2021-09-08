@@ -22,7 +22,7 @@ namespace Z0
             {
                 ref readonly var symbol = ref skip(symbols,i);
                 var data = symbol.Expr.Data;
-                seek(dst, i) = Factory.text(n7, data);
+                seek(dst, i) = txt(n7, data);
             }
             return count;
         }

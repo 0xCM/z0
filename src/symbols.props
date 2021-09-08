@@ -55,6 +55,7 @@
 
     <Digital>$(Src)digital/z0.digital.csproj</Digital>
     <Dynamic>$(Src)dynamic/z0.dynamic.csproj</Dynamic>
+    <DynamicLinq>$(Src)dynamic.linq/z0.dynamic.linq.csproj</DynamicLinq>
     <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
 
     <Engine>$(Src)engine/z0.engine.csproj</Engine>

@@ -10,6 +10,7 @@ namespace Z0
 
     using static Root;
     using static cpu;
+    using static NumericCast;
 
     using NK = NumericKind;
 
@@ -19,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static variant from<T>(T src)
             where T : unmanaged
-                => from(store(Numeric.force<T,ulong>(src), Numeric.kind<T>()));
+                => from(store(force<T,ulong>(src), NumericKinds.kind<T>()));
 
         [MethodImpl(Inline), Op]
         public static variant define(ulong src, NumericKind dst)
@@ -45,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<T> vector<T>(variant src)
             where T : unmanaged
-                => memory.generic<T>(src.Storage);
+                => core.generic<T>(src.Storage);
 
         [MethodImpl(Inline)]
         static variant from(Vector128<ulong> src)

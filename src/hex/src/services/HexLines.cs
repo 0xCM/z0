@@ -34,9 +34,12 @@ namespace Z0
         [Op]
         public uint Emit(ReadOnlySpan<byte> src, StreamWriter dst)
         {
+            var count = (uint)src.Length;
+            if(count == 0)
+                return 0;
+
             var line = text.buffer();
             var address = Address32.Zero;
-            var count = (uint)src.Length;
             var offset = 1;
             var restart = true;
             var last = count - 1;

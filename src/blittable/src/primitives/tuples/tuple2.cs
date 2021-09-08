@@ -13,6 +13,12 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline)]
+        public static tuple<T0,T1> t2<T0,T1>(T0 a0 = default, T1 a1 = default)
+            where T0: unmanaged
+            where T1: unmanaged
+                => new tuple<T0,T1>(a0,a1);
+
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct tuple<T0,T1> : ITuple<tuple<T0,T1>,N2,T0,T1>
             where T0: unmanaged

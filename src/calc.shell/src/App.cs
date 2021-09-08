@@ -215,16 +215,16 @@ namespace Z0
             Wf.Row(block.Describe());
         }
 
-        void Run(N14 x)
-        {
-            var n = n2;
-            var t = z32;
-            var m = CaseMethods.BinaryAdd_Method;
-            var id = m.Identify();
-            var factory = Dynamic.Factory(OperatorClasses.binary(t));
-            var fx = factory.Create(m);
-            Wf.Row(fx(3,4).ToString());
-        }
+        // void Run(N14 x)
+        // {
+        //     var n = n2;
+        //     var t = z32;
+        //     var m = CaseMethods.BinaryAdd_Method;
+        //     var id = m.Identify();
+        //     var factory = Dynamic.Factory(OperatorClasses.binary(t));
+        //     var fx = factory.Create(m);
+        //     Wf.Row(fx(3,4).ToString());
+        // }
 
         void Run(N3 n)
         {
@@ -372,9 +372,9 @@ namespace Z0
                     case 13:
                         Run(n13);
                     break;
-                    case 14:
-                        Run(n14);
-                    break;
+                    // case 14:
+                    //     Run(n14);
+                    // break;
                     case 15:
                         Run(n15);
                     break;

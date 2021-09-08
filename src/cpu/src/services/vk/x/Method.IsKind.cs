@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
         [Op]
         public static bool IsKind(this MethodInfo m, Vec128Type vk, bool total)
-            => VexReflex.IsVectorized(m, vk.BitWidth, total);
+            => vreflect.IsVectorized(m, vk.BitWidth, total);
 
         /// <summary>
         /// Determines whether a method is of characterized vector kind
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
         [Op]
         public static bool IsKind(this MethodInfo m, Vec256Type vk, bool total)
-            => VexReflex.IsVectorized(m, vk.BitWidth, total);
+            => vreflect.IsVectorized(m, vk.BitWidth, total);
 
         /// <summary>
         /// Determines whether a method is of characterized vector kind
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
         [Op]
         public static bool IsKind(this MethodInfo m, Vec512Type vk, bool total)
-            => VexReflex.IsVectorized(m, vk.BitWidth, total);
+            => vreflect.IsVectorized(m, vk.BitWidth, total);
 
         /// <summary>
         /// Determines whether a method is of characterized vector kind
@@ -48,7 +48,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static bool IsKind<T>(this MethodInfo m, Vec128Kind<T> vk)
             where T : unmanaged
-                => VexReflex.IsVectorized(m, vk.W, typeof(T));
+                => vreflect.IsVectorized(m, vk.W, typeof(T));
 
         /// <summary>
         /// Determines whether a method is of characterized vector kind
@@ -59,7 +59,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static bool IsKind<T>(this MethodInfo m, Vec256Kind<T> vk)
             where T : unmanaged
-                => VexReflex.IsVectorized(m, vk.W, typeof(T));
+                => vreflect.IsVectorized(m, vk.W, typeof(T));
 
         /// <summary>
         /// Determines whether a method is of characterized vector kind
@@ -70,6 +70,6 @@ namespace Z0
         [Op, Closures(Closure)]
         public static bool IsKind<T>(this MethodInfo m, Vec512Kind<T> vk)
             where T : unmanaged
-                => VexReflex.IsVectorized(m, vk.W, typeof(T));
+                => vreflect.IsVectorized(m, vk.W, typeof(T));
     }
 }

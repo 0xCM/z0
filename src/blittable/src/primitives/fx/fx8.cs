@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = Blit.Factory;
-
     partial struct Blit
     {
         [Op]
@@ -93,7 +91,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public kvp<byte,byte> Map(byte x)
-                => api.map(x, Eval(x));
+                => kv(x, Eval(x));
         }
 
         /// <summary>
@@ -132,7 +130,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public kvp<S,T> Map(S x)
-                => api.map(x, Eval(x));
+                => kv(x, Eval(x));
         }
     }
 }

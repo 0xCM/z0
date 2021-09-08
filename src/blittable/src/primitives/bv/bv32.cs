@@ -10,6 +10,11 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline), Op]
+        public static bv32 bv(N32 n, uint src)
+            => new bv32(src);
+
+
         /// <summary>
         /// Defines a 32-bit bitvector
         /// </summary>
@@ -38,8 +43,8 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator bv<uint>(bv32 src)
-                => new bv<uint>(Width, src.Storage);
+            public static implicit operator gbv<uint>(bv32 src)
+                => new gbv<uint>(Width, src.Storage);
         }
     }
 }

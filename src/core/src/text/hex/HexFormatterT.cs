@@ -26,9 +26,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public string FormatItem(T src, in HexFormatOptions config)
             => string.Concat(
-                config.Specifier && config.Specifier ? HexFormatSpecs.PreSpec : string.Empty,
-                config.ZeroPad ? BaseFormatter.Format(src, config.CaseIndicator.ToString()).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, config.CaseIndicator.ToString()),
-                config.Specifier && !config.PreSpec ? HexFormatSpecs.PostSpec : string.Empty
+                config.Specifier && config.Specifier
+                    ? HexFormatSpecs.PreSpec : string.Empty,
+                config.ZeroPad
+                    ? BaseFormatter.Format(src, config.CaseIndicator.ToString()).PadLeft(Unsafe.SizeOf<T>()*2, '0')
+                    : BaseFormatter.Format(src, config.CaseIndicator.ToString()),
+                config.Specifier && !config.PreSpec
+                    ? HexFormatSpecs.PostSpec : string.Empty
                 );
 
         public string Format(ReadOnlySpan<T> src, HexFormatOptions options)

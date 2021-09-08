@@ -8,6 +8,7 @@ namespace Z0
 
     using static Root;
     using static core;
+
     partial struct Blit
     {
         /// <summary>

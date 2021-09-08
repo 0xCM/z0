@@ -50,6 +50,11 @@ namespace Z0
             where T : unmanaged
                 => cover(cell(ref src), src.N);
 
+        public static string format<T>(in v8<T> src)
+            where T : unmanaged
+                => string.Format(RP.V8,
+                    src[0], src[1], src[2], src[3], src[4], src[5], src[6], src[7]);
+
         /// <summary>
         /// Defines a 8-cell T-vector
         /// </summary>

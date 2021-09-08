@@ -10,10 +10,43 @@ namespace Z0
     using static Root;
     using static core;
 
-    using F = Blit.Factory;
-
     partial struct Blit
     {
+        [MethodImpl(Inline), Op]
+        public static text15 txt(N15 n, ReadOnlySpan<char> src)
+        {
+            const byte Max = text15.MaxLength;
+            var length = (byte)min(available(src), Max);
+            var storage = Cell128.Empty;
+            var dst = storage.Bytes;
+            pack(src, length, dst);
+            seek(dst,15) = length;
+            return new text15(storage);
+        }
+
+        [MethodImpl(Inline), Op]
+        static uint available(ReadOnlySpan<char> src)
+        {
+            var present = 0u;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                if(skip(src,i) != 0)
+                    present++;
+                else
+                    break;
+            }
+            return present;
+        }
+
+        [MethodImpl(Inline), Op]
+        static void pack(ReadOnlySpan<char> src, uint count, Span<byte> dst)
+        {
+            for(var i=0; i<count; i++)
+                seek(dst,i) = (byte)skip(src,i);
+        }
+
+
         [Op]
         public static string format(in text15 src)
         {
@@ -66,11 +99,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator text15(string src)
-                => F.text(N,src);
+                => txt(N,src);
 
             [MethodImpl(Inline)]
             public static implicit operator text15(ReadOnlySpan<char> src)
-                => F.text(N,src);
+                => txt(N,src);
 
             [MethodImpl(Inline)]
             public static implicit operator textT<Cell128>(text15 src)

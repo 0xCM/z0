@@ -20,6 +20,13 @@ namespace Z0
             return string.Format(Pattern, m.Key, m.Val);
         }
 
+        [MethodImpl(Inline)]
+        public static kvp<S,T> kv<S,T>(S src, T dst)
+            where S : unmanaged
+            where T : unmanaged
+                => new kvp<S,T>(src,dst);
+
+
         public struct kvp<K,V>
             where K : unmanaged
             where V : unmanaged

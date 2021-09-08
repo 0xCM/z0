@@ -13,6 +13,11 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static g5x5<T> grid5x5<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => first(recover<T,g5x5<T>>(src));
+
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct g5x5<T> : IGrid<g5x5<T>,N2,T>
             where T : unmanaged

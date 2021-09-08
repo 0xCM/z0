@@ -53,17 +53,6 @@ namespace Z0
         DynamicDelegate<BinaryOp<Vector256<T>>> IDynexus.CreateBinaryOp<T>(MethodInfo src, W256 w, byte imm)
             => Dynop.EmbedImmVBinaryOpImm(VK.vk256<T>(), Identify(src), src, imm);
 
-        IEmitterOpFactory<T> IDynexus.Factory<T>(EmitterClass<T> k)
-            => EmitterFactory<T>.Service;
-
-        IUnaryOpFactory<T> IDynexus.Factory<T>(UnaryOperatorClass<T> k)
-            => UnaryOpFactory<T>.Service;
-
-        IBinaryOpFactory<T> IDynexus.Factory<T>(BinaryOperatorClass<T> k)
-            => BinaryOpFactory<T>.Service;
-
-        ITernaryOpFactory<T> IDynexus.Factory<T>(TernaryOperatorClass<T> k)
-            => TernaryOpFactory<T>.Service;
 
         Option<DynamicDelegate> IDynexus.CreateUnaryOp(TypeWidth w, MethodInfo src, byte imm8)
         {

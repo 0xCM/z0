@@ -8,51 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial struct Blit
     {
-        [Op]
-        public static string format(in bv src)
-        {
-            var count = (int)src.Width;
-            Span<char> buffer = stackalloc char[count];
-            for(var i=0; i<count; i++)
-                seek(buffer,i) = src[i].ToChar();
-            buffer.Reverse();
-            return text.format(buffer);
-        }
+        [MethodImpl(Inline), Op]
+        public static gbv<Cell128> bv(N128 n, uint width, Cell128 src)
+            => new gbv<Cell128>(width, src);
 
-        public readonly ref struct bv
-        {
-            readonly Span<bit> Bits;
+        [MethodImpl(Inline), Op]
+        public static gbv<Cell512> bv(N512 n, uint width, Cell512 src)
+            => new gbv<Cell512>(width, src);
 
-            [MethodImpl(Inline)]
-            public bv(Span<bit> b)
-            {
-                Bits = b;
-            }
+        [MethodImpl(Inline), Op]
+        public static gbv<Cell256> bv(N256 n, uint width, Cell256 src)
+            => new gbv<Cell256>(width, src);
 
-            public uint Width
-            {
-                [MethodImpl(Inline)]
-                get => (uint)Bits.Length;
-            }
-
-            public ref bit this[long i]
-            {
-                [MethodImpl(Inline)]
-                get => ref seek(Bits,i);
-            }
-
-            public ref bit this[ulong i]
-            {
-                [MethodImpl(Inline)]
-                get => ref seek(Bits,i);
-            }
-
-            public string Format()
-                => format(this);
-        }
     }
 }

@@ -281,8 +281,8 @@ public enum PartId : byte
     [Symbol("asm.run")]
     AsmRun = 91,
 
-    [Symbol("asm.emu")]
-    AsmEmu = 92,
+    [Symbol("dynamic.linq")]
+    DynamicLinq = 92,
 
     [Symbol("capture")]
     Capture = 93,

@@ -17,6 +17,38 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op]
+        public static ulong join(W64 w, byte a, byte b)
+            => (ulong)a | (ulong)b << 8;
+
+        [MethodImpl(Inline), Op]
+        public static ulong join(W64 w, byte a, byte b, byte c)
+            => (ulong)a | (ulong)b << 8 | (ulong)c << 16;
+
+        [MethodImpl(Inline), Op]
+        public static ulong join(W64 w, byte a, byte b, byte c, byte d)
+            => (ulong)a | (ulong)b << 8 | (ulong)c << 16 | (ulong)d << 24;
+
+        [MethodImpl(Inline), Op]
+        public static ulong join(W64 w, byte a, byte b, byte c, byte d, byte e)
+            => (ulong)a | (ulong)b << 8 | (ulong)c << 16 | (ulong)d << 24
+             | (ulong)e << 32;
+
+        [MethodImpl(Inline), Op]
+        public static ulong join(W64 w, byte a, byte b, byte c, byte d, byte e, byte f)
+            => (ulong)a | (ulong)b << 8 | (ulong)c << 16 | (ulong)d << 24
+             | (ulong)e << 32 | (ulong)f << 40;
+
+        [MethodImpl(Inline), Op]
+        public static ulong join(W64 w, byte a, byte b, byte c, byte d, byte e, byte f, byte g)
+            => (ulong)a | (ulong)b << 8 | (ulong)c << 16 | (ulong)d << 24
+             | (ulong)e << 32 | (ulong)f << 40 | (ulong)g << 48;
+
+        [MethodImpl(Inline), Op]
+        public static ulong join(W64 w, byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte h)
+            => (ulong)a | (ulong)b << 8 | (ulong)c << 16 | (ulong)d << 24
+             | (ulong)e << 32 | (ulong)f << 40 | (ulong)g << 48 | (ulong)h << 56;
+
         /// <summary>
         /// Extracts an index-identified source byte
         /// </summary>

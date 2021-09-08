@@ -12,14 +12,17 @@ namespace Z0
 
     partial struct core
     {
-        /// <summary>
-        /// Adds an offset to the source reference, measured relative to 32-bit segments, and returns the reinterpreted reference
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="count">The number of 32-bit segments to skip</param>
-        /// <typeparam name="T">The (arbitrary) source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref uint seek32<T>(in T src, uint count)
+        public static ref uint seek32<T>(in T src, ulong count)
             => ref Add(ref As<T,uint>(ref edit(src)), (int)count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref uint seek32<T>(Span<T> src, ulong count)
+            => ref Add(ref As<T,uint>(ref first(src)), (int)count);
+
+        [MethodImpl(Inline)]
+        public static ref T seek32k<T,K>(in T src, K count)
+            where K : unmanaged
+                => ref Add(ref edit(src), (int)u32(count));
     }
 }

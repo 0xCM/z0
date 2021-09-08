@@ -12,26 +12,17 @@ namespace Z0
 
     partial struct core
     {
-        /// <summary>
-        /// Adds an offset, measured by 32-bit segments, to a source reference and presents the cell
-        /// at the offset as an unsigned integer of bit-width <see cref='W64'/>
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="count">The number of 64-bit segments to skip</param>
-        /// <typeparam name="T">The (arbitrary) source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref ulong seek64<T>(in T src, uint count)
+        public static ref ulong seek64<T>(in T src, ulong count)
             => ref Add(ref As<T,ulong>(ref edit(src)), (int)count);
 
-        /// <summary>
-        /// Adds a specified offset count, measured by 64-bit segments, to the leading cell of a source span
-        /// and returns the offset cell as an unsigned integer of bit-width <see cref='W64'/>
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="count">The number of 64-bit segments to skip</param>
-        /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref ulong seek64<T>(Span<T> src, uint count)
+        public static ref ulong seek64<T>(Span<T> src, ulong count)
             => ref Add(ref As<T,ulong>(ref first(src)), (int)count);
+
+        [MethodImpl(Inline)]
+        public static ref T seek64k<T,K>(in T src, K count)
+            where K : unmanaged
+                => ref Add(ref edit(src), (int)u64(count));
     }
 }

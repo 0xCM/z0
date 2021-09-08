@@ -38,8 +38,8 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator bv<ByteBlock16>(bv128 src)
-                => new bv<ByteBlock16>(Width, src.Storage);
+            public static implicit operator gbv<ByteBlock16>(bv128 src)
+                => new gbv<ByteBlock16>(Width, src.Storage);
         }
     }
 }

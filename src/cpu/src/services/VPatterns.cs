@@ -11,12 +11,14 @@ namespace Z0
     using static Root;
     using static gcpu;
     using static core;
+    using static NumericCast;
+    using static Limits;
 
     /// <summary>
     /// Generates the data presented by VData
     /// </summary>
     [ApiHost]
-    public static class VPatterns
+    public static class vpatterns
     {
         /// <summary>
         /// Creates a vector populated with component values that alternate between the first operand and the second
@@ -239,9 +241,8 @@ namespace Z0
             return vload(n, in data.Swap(swaps).First);
         }
 
-
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> DefineLaneMergeData8u()
+        public static Vector256<byte> LaneMerge8u()
         {
             //<lo = i,i+2,i+4 ... n-2 | hi = i+1, i + 3, i+5, ... n-1 >
             //0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31
@@ -253,18 +254,42 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> DefineLaneMergeData16u()
+        public static Span<byte> LaneMerge16u()
         {
             //<lo = i,i+2,i+4 ... n-2 | hi = i+1, i + 3, i+5, ... n-1 >
             //components: 0, 2, 4, 6, 8, 10, 12, 14, 1, 3, 5, 7, 9, 11, 13, 15
             //hexstring: 0x00,0x00,0x02,0x00,0x04,0x00,0x06,0x00,0x08,0x00,0x0A,0x00,0x0C,0x00,0x0E,0x00,0x01,0x00,0x03,0x00,0x05,0x00,0x07,0x00,0x09,0x00,0x0B,0x00,0x0D,0x00,0x0F,0x00
             ushort i = 0, j = 1;
-            Span<ushort> dst = new ushort[16]
-            {
-                i, i+=2, i+=2, i+=2, i+=2, i+=2, i+=2, i+=2,
-                j, j+=2, j+=2, j+=2, j+=2, j+=2, j+=2, j+=2
-            };
-            return dst.Bytes();
+            var k = 0;
+            var storage = ByteBlock32.Empty;
+            ref var dst = ref u16(storage.First);
+
+            seek(dst,k++) = i;
+            seek(dst,k++) = i += 2;
+            seek(dst,k++) = i += 2;
+            seek(dst,k++) = i += 2;
+            seek(dst,k++) = i += 2;
+            seek(dst,k++) = i += 2;
+            seek(dst,k++) = i += 2;
+            seek(dst,k++) = i += 2;
+
+            seek(dst,k++) = j;
+            seek(dst,k++) = j += 2;
+            seek(dst,k++) = j += 2;
+            seek(dst,k++) = j += 2;
+            seek(dst,k++) = j += 2;
+            seek(dst,k++) = j += 2;
+            seek(dst,k++) = j += 2;
+            seek(dst,k++) = j += 2;
+
+            return storage.Bytes;
+
+            // Span<ushort> dst = new ushort[16]
+            // {
+            //     i, i+=2, i+=2, i+=2, i+=2, i+=2, i+=2, i+=2,
+            //     j, j+=2, j+=2, j+=2, j+=2, j+=2, j+=2, j+=2
+            // };
+            // return dst.Bytes();
         }
 
         /// <summary>
@@ -272,11 +297,11 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
         [Op, Closures(UnsignedInts)]
-        public static Span<T> DefineClearAlt<T>()
+        public static Span<T> ClearAlt<T>()
             where T : unmanaged
         {
             var mask = SpanBlocks.cellalloc<T>(n256,1);
-            var chop = Numeric.maxval<T>();
+            var chop = maxval<T>();
 
             //For the first 128-bit lane
             var half = mask.CellCount/2;
@@ -285,7 +310,7 @@ namespace Z0
                 if(i % 2 != 0)
                     mask[i] = chop;
                 else
-                    mask[i] = Numeric.force<byte,T>(i);
+                    mask[i] = force<byte,T>(i);
             }
 
             //For the second 128-bit lane
@@ -294,7 +319,7 @@ namespace Z0
                 if(i % 2 != 0)
                     mask[i + half] = chop;
                 else
-                    mask[i + half] = Numeric.force<byte,T>(i);
+                    mask[i + half] = force<byte,T>(i);
             }
 
             return mask;

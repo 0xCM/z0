@@ -9,20 +9,9 @@ namespace Z0
 
     using static CellDelegates;
 
+
     public interface IDynexus
     {
-        IEmitterOpFactory<T> Factory<T>(EmitterClass<T> k)
-            where T : unmanaged;
-
-        IUnaryOpFactory<T> Factory<T>(UnaryOperatorClass<T> op)
-            where T :  unmanaged;
-
-        IBinaryOpFactory<T> Factory<T>(BinaryOperatorClass<T> op)
-            where T :  unmanaged;
-
-        ITernaryOpFactory<T> Factory<T>(TernaryOperatorClass<T> op)
-            where T :  unmanaged;
-
         UnaryOp<T> EmitUnaryOp<T>(BufferToken dst, ApiCodeBlock src)
             where T : unmanaged;
 
@@ -47,7 +36,6 @@ namespace Z0
         /// <param name="src">The defining method that requires an immediate value</param>
         /// <param name="imm">The immediate value to embed</param>
         Option<DynamicDelegate> CreateBinaryOp(TypeWidth w, MethodInfo src, byte imm);
-
 
         /// <summary>
         /// Creates a 128-bit vectorized parametric unary operator that consumes an immediate value in the second argument

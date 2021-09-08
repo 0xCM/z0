@@ -27,6 +27,16 @@ namespace Z0
             where T : unmanaged
                 => a0;
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T cell<T>(ref v1<T> src)
+            where T : unmanaged
+                => ref @as<v1<T>,T>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> cells<T>(ref v1<T> src)
+            where T : unmanaged
+                => cover(cell(ref src), src.N);
+
         /// <summary>
         /// Defines a 1-cell T-vector
         /// </summary>

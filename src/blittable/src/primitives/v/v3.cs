@@ -45,7 +45,6 @@ namespace Z0
             where T : unmanaged
                 => cover(cell(ref src), src.N);
 
-        [Op, Closures(Closure)]
         public static string format<T>(in v3<T> src)
             where T : unmanaged
                 => string.Format(RP.V3,

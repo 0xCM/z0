@@ -18,7 +18,6 @@
     <ProjectReference Include="$(AsmCore)" />
     <ProjectReference Include="$(Services)" />
     <ProjectReference Include="$(AsmLangG)"/>
-
   </ItemGroup>
 
    <ItemGroup>

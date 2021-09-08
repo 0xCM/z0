@@ -23,7 +23,6 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        [Op, Closures(Closure)]
         public static string format<T>(in v10<T> src)
             where T : unmanaged
                 => string.Format(RP.V8,

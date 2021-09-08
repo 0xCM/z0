@@ -10,6 +10,10 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline), Op]
+        public static bv2 bv(N2 n, byte src)
+            => new bv2(src);
+
         /// <summary>
         /// Defines a 2-bit bitvector
         /// </summary>
@@ -38,11 +42,11 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator bv<byte>(bv2 src)
-                => new bv<byte>(Width, src.Storage);
+            public static implicit operator gbv<byte>(bv2 src)
+                => new gbv<byte>(Width, src.Storage);
 
             [MethodImpl(Inline)]
-            public static implicit operator bv2(bv<byte> src)
+            public static implicit operator bv2(gbv<byte> src)
                 => new bv2(src.Storage);
         }
     }

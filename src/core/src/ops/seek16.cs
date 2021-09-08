@@ -12,14 +12,17 @@ namespace Z0
 
     partial struct core
     {
-        /// <summary>
-        /// Skips a specified number of 16-bit source segments and returns a reference to the located cell
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="count">The number of 16-bit segments to skip</param>
-        /// <typeparam name="T">The (arbitrary) source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref ushort seek16<T>(in T src, uint count)
+        public static ref ushort seek16<T>(in T src, ulong count)
             => ref Add(ref As<T,ushort>(ref edit(src)), (int)count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref ushort seek16<T>(Span<T> src, ulong count)
+            => ref Add(ref As<T,ushort>(ref first(src)), (int)count);
+
+        [MethodImpl(Inline)]
+        public static ref T seek16k<T,K>(in T src, K count)
+            where K : unmanaged
+                => ref Add(ref edit(src), u16(count));
     }
 }

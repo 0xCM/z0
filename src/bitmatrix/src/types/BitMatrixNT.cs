@@ -149,7 +149,7 @@ namespace Z0
         public void Fill(Bit32 value)
         {
             if(value)
-                Content.Fill(Numeric.maxval<T>());
+                Content.Fill(Limits.maxval<T>());
             else
                 Content.Fill(NumericLiterals.zero<T>());
         }

@@ -9,8 +9,7 @@ namespace Z0
 
     using static Root;
     using static core;
-
-    using bv = Blit.bv;
+    using static Blit;
 
     public readonly struct DfaSymbol<T>
         where T : unmanaged
@@ -67,18 +66,6 @@ namespace Z0
             var interval = Intervals.closed<uint>(0, (uint)count);
             points(interval, dst);
             return recover<DfaState<byte>>(dst);
-        }
-
-        [Op]
-        public static bv bitvector(uint width, byte src, Span<bit> buffer)
-        {
-            var input = src;
-            var storage = 0ul;
-            ref var _dst = ref @as<ulong,bit>(storage);
-            Span<bit> dst = alloc<bit>(width);
-            for(byte i=0; i<width; i++)
-                seek(buffer,i) = bit.test(input,i);
-            return new bv(slice(buffer,0,width));
         }
 
         [MethodImpl(Inline), Op]

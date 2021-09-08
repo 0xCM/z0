@@ -35,56 +35,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref v1<T> src)
-            where T : unmanaged
-                => ref @as<v1<T>,T>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref v2<T> src)
-            where T : unmanaged
-                => ref @as<v2<T>,T>(src);
-
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref v64<T> src)
             where T : unmanaged
                 => ref @as<v64<T>,T>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> cells<T>(ref v1<T> src)
-            where T : unmanaged
-                => cover(cell(ref src), src.N);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> cells<T>(ref v2<T> src)
-            where T : unmanaged
-                => cover(cell(ref src), src.N);
-
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cells<T>(ref v64<T> src)
             where T : unmanaged
                 => cover(cell(ref src), src.N);
 
-        [Op, Closures(Closure)]
         public static string format<T>(in v1<T> src)
             where T : unmanaged
                 => string.Format(RP.V1, src[0]);
 
-        [Op, Closures(Closure)]
-        public static string format<T>(in v2<T> src)
-            where T : unmanaged
-                => string.Format(RP.V2, src[0], src[1]);
-
-
-        [Op, Closures(Closure)]
-        public static string format<T>(in v5<T> src)
-            where T : unmanaged
-                => string.Format(RP.V5,
-                    src[0], src[1], src[2], src[3], src[4]);
-
-
-        [Op, Closures(Closure)]
         public static string format<T>(in v64<T> src)
             where T : unmanaged
                 => string.Format(RP.V64,

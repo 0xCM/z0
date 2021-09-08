@@ -25,7 +25,7 @@ namespace Z0
         public static implicit operator Vector128x3(Vector128x3<T> src)
         {
             var dst = default(Vector128x3);
-            dst.Kind = Numeric.kind<T>();
+            dst.Kind = NumericKinds.kind<T>();
             dst.A = cpu.v64u(src.A);
             dst.B = cpu.v64u(src.B);
             dst.C = cpu.v64u(src.C);

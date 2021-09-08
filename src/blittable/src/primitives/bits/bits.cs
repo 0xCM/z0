@@ -12,6 +12,17 @@ namespace Z0
 
     partial struct Blit
     {
+        [MethodImpl(Inline)]
+        public static bits<N,T> nbits<N,T>(N n, T value)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new bits<N,T>(value);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static bits<T> nbits<T>(uint n, T value)
+            where T : unmanaged
+                => new bits<T>(n, value);
+
         public struct bits<T>
             where T : unmanaged
         {
