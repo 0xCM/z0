@@ -13,10 +13,38 @@ namespace Z0
     using System.Threading.Tasks;
 
     using static Root;
+    using static Fsm1Spec.StateKinds;
 
     [ApiHost]
     public readonly struct Fsm
     {
+
+        public void example1()
+        {
+            var machineCount = Pow2.T04;
+            var spec1 = Fsm.primal<ushort>("Fsm2",750,750,100,120,Pow2.T15);
+            var stats = Fsm.run(spec1, machineCount);
+            var counts = stats.Select(x => x.ReceiptCount).ToArray().AsSpan().ReadOnly();
+            var count = gAlg.sum(counts);
+            term.inform($"A total of {count} events were processed");
+        }
+
+        public void example2()
+        {
+            var spec = new Fsm1Spec();
+            var tasks = new Task[Pow2.T08];
+            var indices = gAlg.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(Pow2.T08).ToArray();
+            for(var i=0u; i<tasks.Length; i++)
+            {
+                var random = Rng.pcg64(0,indices[i]);
+                var context = Fsm.context(random);
+                var machine = Fsm.machine($"Fsm1-{i}",context, S0,S5, spec.TransFunc);
+                tasks[i] = Fsm.run(machine);
+            }
+            Task.WaitAll(tasks);
+        }
+
+
         static int MachineCounter = 0;
 
         const NumericKind Closure = UInt16k;

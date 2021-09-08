@@ -34,7 +34,7 @@ namespace Z0
             ref var tmp = ref uint8(ref buffer);
             ref var lead = ref first(dst);
             unpack1x8(src, ref tmp);
-            vinflate8x256x32u(tmp).StoreTo(ref lead);
+            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead);
         }
     }
 }

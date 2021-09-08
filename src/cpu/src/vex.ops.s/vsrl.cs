@@ -13,7 +13,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
     using static LimitValues;
 
     partial struct cpu
@@ -39,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(vinflate256x16i(src),count));
+            var x = v16u(ShiftRightLogical(vpack.vinflate256x16i(src),count));
             var y = vand(x, v16u(vbroadcast(w256, byte.MaxValue)));
             return v8i(vpack128x8u(y));
         }
@@ -112,8 +111,8 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector256<sbyte> vsrl(Vector256<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(vinflate256x16i(vlo(src)),count));
-            var y = v16u(ShiftRightLogical(vinflate256x16i(vhi(src)),count));
+            var x = v16u(ShiftRightLogical(vpack.vinflate256x16i(vlo(src)),count));
+            var y = v16u(ShiftRightLogical(vpack.vinflate256x16i(vhi(src)),count));
             var m = v16u(vbroadcast(w256, byte.MaxValue));
             return v8i(vpack256x8u(vand(x,m), vand(y,m)));
         }
@@ -200,7 +199,7 @@ namespace Z0
         public static Vector128<byte> vsrl(Vector128<byte> src, Vector128<byte> count)
         {
             var y = v16u(count);
-            var dst = vsrl(vinflate256x16u(src),y);
+            var dst = vsrl(vpack.vinflate256x16u(src),y);
             return vpack128x8u(dst);
         }
 
@@ -213,7 +212,7 @@ namespace Z0
         public static Vector128<sbyte> vsrl(Vector128<sbyte> src, Vector128<sbyte> count)
         {
             var y = v16i(count);
-            var dst = vsrl(vinflate256x16i(src),y);
+            var dst = vsrl(vpack.vinflate256x16i(src),y);
             return vpack128x8i(dst);
         }
 
@@ -285,8 +284,8 @@ namespace Z0
         public static Vector256<sbyte> vsrl(Vector256<sbyte> src, Vector128<sbyte> count)
         {
             var y = v16i(count);
-            var lo = vsrl(vinflate256x16i(vlo(src)), y);
-            var hi = vsrl(vinflate256x16i(vhi(src)),y);
+            var lo = vsrl(vpack.vinflate256x16i(vlo(src)), y);
+            var hi = vsrl(vpack.vinflate256x16i(vhi(src)),y);
             return vpack256x8i(lo, hi);
         }
 
@@ -299,8 +298,8 @@ namespace Z0
         public static Vector256<byte> vsrl(Vector256<byte> src, Vector128<byte> count)
         {
             var y = v16u(count);
-            var lo = vsrl(vinflate256x16u(vlo(src)),y);
-            var hi = vsrl(vinflate256x16u(vhi(src)),y);
+            var lo = vsrl(vpack.vinflate256x16u(vlo(src)),y);
+            var hi = vsrl(vpack.vinflate256x16u(vhi(src)),y);
             return vpack256x8u(lo, hi);
         }
 

@@ -127,7 +127,7 @@ namespace Z0.Asm
         {
             var dId = ApiIdentityBuilder.build(name, w, kind, false);
             var gId = ApiIdentityBuilder.build(name, w, kind, true);
-            var archive = Wf.ApiHexArchive();
+            var archive = Wf.ApiHex();
             var dHost = ApiQuery.hostinfo(typeof(cpu));
             var gHost = ApiQuery.hostinfo(typeof(gcpu));
             var dMatch = archive.Read(dHost.HostUri).Where(x => x.Id == dId);

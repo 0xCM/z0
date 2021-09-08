@@ -12,13 +12,13 @@ namespace Z0
     public readonly struct AsciTestCase02 :  IAsciTestCase<AsciTestCase02>
     {
         [MethodImpl(Inline)]
-        public static AsciTestCase02 Create(AsciCharCode c0 = AsciCharCode.Bang)
+        public static AsciTestCase02 Create(AsciCode c0 = AsciCode.Bang)
             => new AsciTestCase02((sbyte)c0);
 
         [MethodImpl(Inline)]
         internal AsciTestCase02(sbyte c0)
         {
-            C0 = (AsciCharCode)c0;
+            C0 = (AsciCode)c0;
             A2 = Asci.init(n2, Asci.codes(c0,2));
             A4 = Asci.init(n4, Asci.codes(c0,4));
             A8 = Asci.init(n8, Asci.codes(c0,8));
@@ -27,7 +27,7 @@ namespace Z0
             A64 = Asci.init(n64, Asci.codes(c0,64));
         }
 
-        public readonly AsciCharCode C0;
+        public readonly AsciCode C0;
 
         public readonly asci2 A2;
 

@@ -26,7 +26,7 @@ namespace Z0
             => new string[4]{s0,s1,s2,s3};
 
         static Index<TextBlock> Blocks
-            => root.map(StringData, s => new TextBlock(s));
+            => StringData.Select(s => new TextBlock(s));
 
         [MethodImpl(Inline)]
         public static implicit operator AsciTestCase(AsciTestCase01 src)

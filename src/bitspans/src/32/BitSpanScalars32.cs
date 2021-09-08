@@ -24,7 +24,7 @@ namespace Z0
             ref var target = ref ByteBlocks.first<uint>(ref storage);
 
             BitPack.unpack1x8(src, ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target);
+            vpack.vinflate8x256x32u(tmp, 0, ref target);
             return BitSpans32.load(ByteBlocks.span<uint>(ref storage).Recover<Bit32>());
         }
 
@@ -38,8 +38,8 @@ namespace Z0
             ref var target = ref ByteBlocks.first<uint>(ref storage);
 
             BitPack.unpack1x16(src, ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target);
-            vinflate8x256x32u(tmp, 1, ref target);
+            vpack.vinflate8x256x32u(tmp, 0, ref target);
+            vpack.vinflate8x256x32u(tmp, 1, ref target);
             return BitSpans32.load(ByteBlocks.span<uint>(ref storage).Recover<Bit32>());
         }
 
@@ -53,10 +53,10 @@ namespace Z0
             ref var target = ref ByteBlocks.first<uint>(ref block);
 
             BitPack.unpack1x32x32(src, ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target);
-            vinflate8x256x32u(tmp, 1, ref target);
-            vinflate8x256x32u(tmp, 2, ref target);
-            vinflate8x256x32u(tmp, 3, ref target);
+            vpack.vinflate8x256x32u(tmp, 0, ref target);
+            vpack.vinflate8x256x32u(tmp, 1, ref target);
+            vpack.vinflate8x256x32u(tmp, 2, ref target);
+            vpack.vinflate8x256x32u(tmp, 3, ref target);
             return BitSpans32.load(block.Storage<Bit32>());
         }
 
@@ -76,7 +76,7 @@ namespace Z0
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             BitPack.unpack1x8(src, ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target);
+            vpack.vinflate8x256x32u(tmp, 0, ref target);
             return ref dst;
         }
 
@@ -88,8 +88,8 @@ namespace Z0
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             BitPack.unpack1x16(src, ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target);
-            vinflate8x256x32u(tmp, 1, ref target);
+            vpack.vinflate8x256x32u(tmp, 0, ref target);
+            vpack.vinflate8x256x32u(tmp, 1, ref target);
             return ref dst;
         }
 
@@ -100,10 +100,10 @@ namespace Z0
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             BitPack.unpack1x32x32(src, ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target);
-            vinflate8x256x32u(tmp, 1, ref target);
-            vinflate8x256x32u(tmp, 2, ref target);
-            vinflate8x256x32u(tmp, 3, ref target);
+            vpack.vinflate8x256x32u(tmp, 0, ref target);
+            vpack.vinflate8x256x32u(tmp, 1, ref target);
+            vpack.vinflate8x256x32u(tmp, 2, ref target);
+            vpack.vinflate8x256x32u(tmp, 3, ref target);
             return ref dst;
         }
 
@@ -115,16 +115,16 @@ namespace Z0
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             BitPack.unpack1x32x32((uint)src, ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target, 0);
-            vinflate8x256x32u(tmp, 1, ref target, 1);
-            vinflate8x256x32u(tmp, 2, ref target, 2);
-            vinflate8x256x32u(tmp, 3, ref target, 3);
+            vpack.vinflate8x256x32u(tmp, 0, ref target, 0);
+            vpack.vinflate8x256x32u(tmp, 1, ref target, 1);
+            vpack.vinflate8x256x32u(tmp, 2, ref target, 2);
+            vpack.vinflate8x256x32u(tmp, 3, ref target, 3);
 
             BitPack.unpack1x32x32((uint)(src >> 32), ref tmp);
-            vinflate8x256x32u(tmp, 0, ref target, 4);
-            vinflate8x256x32u(tmp, 1, ref target, 5);
-            vinflate8x256x32u(tmp, 2, ref target, 6);
-            vinflate8x256x32u(tmp, 3, ref target, 7);
+            vpack.vinflate8x256x32u(tmp, 0, ref target, 4);
+            vpack.vinflate8x256x32u(tmp, 1, ref target, 5);
+            vpack.vinflate8x256x32u(tmp, 2, ref target, 6);
+            vpack.vinflate8x256x32u(tmp, 3, ref target, 7);
             return ref dst;
         }
 

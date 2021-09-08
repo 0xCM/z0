@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ushort> vgather(N128 w, in ushort src, Vector128<ushort> vidx)
-            => vpack128x16u(GatherVector256(p32u(src), v32i(vinflate256x32u(vidx)), 2));
+            => vpack128x16u(GatherVector256(p32u(src), v32i(vpack.vinflate256x32u(vidx)), 2));
 
         /// <summary>
         /// Loads a 128x16i vector from index-identified source cells
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vgather(N128 w, in short src, Vector128<short> vidx)
-            => v16i(vpack128x16u(GatherVector256(p32u(src), v32i(vinflate256x32u(v16u(vidx))),2)));
+            => v16i(vpack128x16u(GatherVector256(p32u(src), v32i(vpack.vinflate256x32u(v16u(vidx))),2)));
 
         /// <summary>
         /// Loads a 128x8u vector from index-identified source cells
@@ -153,7 +153,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<sbyte> vgather(N128 w, in sbyte src, Vector128<sbyte> vidx)
         {
-            (var v0, var v1) = vinflate512x32u(v8u(vidx));
+            (var v0, var v1) = vpack.vinflate512x32u(v8u(vidx));
             var x0 = GatherVector256(p32u(src), v32i(v0),1);
             var x1 = GatherVector256(p32u(src), v32i(v1),1);
             return v8i(vpack128x8u(x0, x1));
@@ -168,7 +168,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<byte> vgather(N128 w, in byte src, Vector128<byte> vidx)
         {
-            (var v0, var v1) = vinflate512x32u(vidx);
+            (var v0, var v1) = vpack.vinflate512x32u(vidx);
             var x0 = GatherVector256(p32u(src), v32i(v0), 1);
             var x1 = GatherVector256(p32u(src), v32i(v1), 1);
             return vpack128x8u(x0, x1);

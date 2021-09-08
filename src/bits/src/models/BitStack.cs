@@ -12,6 +12,10 @@ namespace Z0
     [ApiComplete]
     public struct BitStack
     {
+        [MethodImpl(Inline)]
+        public static BitStack create(ulong state)
+            => new BitStack(state);
+
         ulong State;
 
         [MethodImpl(Inline)]

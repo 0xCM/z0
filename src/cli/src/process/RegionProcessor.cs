@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     public sealed class RegionProcessor : SpanProcessor<RegionProcessor,ProcessMemoryRegion>
     {
@@ -79,24 +78,10 @@ namespace Z0
             {
                 var selector = src.StartAddress.Quadrant(n2);
                 var @base = src.StartAddress.Lo;
-                //var size = (uint)(src.EndAddress - src.StartAddress);
                 var sidx = (ushort)Index(selector);
                 Bases[sidx].Add(root.paired(@base, (uint)src.Size));
                 load(src, ref _Segments[index]);
-                //ref var segment = ref _Segments[index];
-                // segment.Index = index;
-                // segment.Selector = selector;
-                // segment.Base = @base;
-                // segment.Size = size;
-                // segment.PageCount = size/PageSize;
-                // segment.Range = (src.StartAddress, src.EndAddress);
-                // segment.Type = src.Type;
-                // segment.Protection = src.Protection;
-                // segment.Label = id;
             }
-
-                //segment.Target = ((ulong)segment.Selector << 32) + ((uint)segment.Base + size);
-
         }
 
         [MethodImpl(Inline), Op]

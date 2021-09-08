@@ -25,9 +25,12 @@ namespace Z0
             Wf.EmittedFile(flow,64);
         }
 
+        public ICheckEquatable CheckEq => new CheckEquatable();
+
         public void t_bits()
         {
-            var Claim = CheckProvider.create().CheckEquatable;
+
+            var Claim = CheckEq;
 
             var b1 = Digital.bits(n1);
             Claim.eq(b1.Length, 2);
@@ -51,6 +54,7 @@ namespace Z0
 
         public void t_digit_parser()
         {
+            var Claim = CheckEq;
             ReadOnlySpan<char> input = "0123456789ABCDEF";
             var count = input.Length;
             for(var i=0; i<count; i++)

@@ -39,7 +39,7 @@ namespace Z0
             var xE = cpu.vparts(1,2);
             var yE = cpu.vparts(3,4);
 
-            var z = cpu.vinflate256x64u(block,0);
+            var z = vpack.vinflate256x64u(block,0);
             Claim.eq(xE, cpu.vlo(z));
             Claim.eq(yE, cpu.vhi(z));
         }
@@ -49,7 +49,7 @@ namespace Z0
             var block = SpanBlocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
             var xE = cpu.vparts(n128,1,2,3,4,5,6,7,8);
             var yE = cpu.vparts(n128,9,10,11,12,13,14,15,16);
-            var z = cpu.vinflate256x16u(block,0);
+            var z = vpack.vinflate256x16u(block,0);
 
             Claim.eq(xE, cpu.vlo(z));
             Claim.eq(yE, cpu.vhi(z));
@@ -58,7 +58,7 @@ namespace Z0
         public void v128x8u_v128x16u()
         {
             var x = cpu.vparts(w128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
-            var y = cpu.vlo128x16u(x);
+            var y = vpack.vlo128x16u(x);
             var z = cpu.vparts(w128,0,1,2,3,4,5,6,7);
             Claim.eq(y,z);
         }
@@ -75,7 +75,7 @@ namespace Z0
         public void blockspan_128x8u_v128x16u()
         {
             var x = SpanBlocks.parts<byte>(w128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
-            var q = cpu.vinflate256x16u(x,0);
+            var q = vpack.vinflate256x16u(x,0);
             var z0 = x.LoBlock(0);
             var z1 = x.HiBlock(0);
             var y0s = cpu.vlo(q).ToSpan();
@@ -120,7 +120,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw, st);
-                var tv = cpu.vinflate256x16u(sv);
+                var tv = vpack.vinflate256x16u(sv);
 
                 sv.StoreTo(sb);
                 tv.StoreTo(tb);
@@ -152,7 +152,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = cpu.vinflate256x16u(sv);
+                var tv = vpack.vinflate256x16u(sv);
                 var tvLo = cpu.vlo(tv);
                 var tvHi = cpu.vhi(tv);
 

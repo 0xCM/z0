@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
     using static core;
     using static cpu;
 
@@ -34,8 +33,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack16x32(in Cell256 src, Span<ushort> dst)
         {
-            vstore(vinflatelo256x16u(src), ref seek(dst,0));
-            vstore(vinflatehi256x16u(src), ref seek(dst,16));
+            vstore(vpack.vinflatelo256x16u(src), ref seek(dst,0));
+            vstore(vpack.vinflatehi256x16u(src), ref seek(dst,16));
         }
     }
 }

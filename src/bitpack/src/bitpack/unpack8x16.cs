@@ -19,6 +19,6 @@ namespace Z0
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ushort> unpack8x16(ulong src)
-            => recover<ushort>(bytes(vlo(vinflate256x16u(vbytes(w128, src)))));
+            => recover<ushort>(bytes(vlo(vpack.vinflate256x16u(vbytes(w128, src)))));
     }
 }

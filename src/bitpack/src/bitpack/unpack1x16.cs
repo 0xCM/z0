@@ -29,9 +29,9 @@ namespace Z0
             ref var lead = ref first(dst);
 
             unpack1x8((byte)src, ref tmp);
-            vinflate8x256x32u(tmp).StoreTo(ref lead);
+            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead);
             unpack1x8((byte)(src >> 8), ref tmp);
-            vinflate8x256x32u(tmp).StoreTo(ref lead, 8);
+            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead, 8);
         }
 
         /// <summary>

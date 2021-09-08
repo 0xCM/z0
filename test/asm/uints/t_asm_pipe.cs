@@ -9,8 +9,8 @@ namespace Z0.Asm
     using System.IO;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     using K = OperatorClasses;
 
@@ -63,7 +63,7 @@ namespace Z0.Asm
             writer.WriteLine(RP.PageBreak120);
             root.iter(gHexRows, r => writer.WriteLine(r.Uri));
 
-            var mblocks = root.map(mHexRows.Storage, ApiHex.block);
+            var mblocks = core.map(mHexRows.Storage, ApiHex.block);
             check_unary_ops(mblocks);
         }
 

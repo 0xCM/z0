@@ -26,7 +26,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 unpack1x8(skip(src, i), ref tmp);
-                cpu.vinflate8x256x32u(tmp).StoreTo(ref seek(dst, i*8));
+                vpack.vinflate8x256x32u(tmp).StoreTo(ref seek(dst, i*8));
             }
         }
 

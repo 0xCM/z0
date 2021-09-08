@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="hi">Receiver for the product of the upper components</param>
         [MethodImpl(Inline), Mul]
         public static Vector256<short> vmul(Vector128<sbyte> x, Vector128<sbyte> y)
-            => vmullo(vinflate256x16i(x), vinflate256x16i(y));
+            => vmullo(vpack.vinflate256x16i(x), vpack.vinflate256x16i(y));
 
         /// <summary>
         /// Computes the full 16-bit product of corresponding left and right source components
@@ -106,8 +106,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector256<ushort> vmul(Vector128<byte> x, Vector128<byte> y)
         {
-            var z0 = vinflate256x16u(x);
-            var z1 = vinflate256x16u(y);
+            var z0 = vpack.vinflate256x16u(x);
+            var z1 = vpack.vinflate256x16u(y);
             return vmullo(z0,z1);
         }
 
@@ -121,8 +121,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector256<int> vmul(Vector128<short> x, Vector128<short> y)
         {
-            var z0 = vinflate256x32i(x);
-            var z1 = vinflate256x32i(y);
+            var z0 = vpack.vinflate256x32i(x);
+            var z1 = vpack.vinflate256x32i(y);
             return vmullo(z0,z1);
         }
 
@@ -136,8 +136,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector256<uint> vmul(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var z0 = vinflate256x32u(x);
-            var z1 = vinflate256x32u(y);
+            var z0 = vpack.vinflate256x32u(x);
+            var z1 = vpack.vinflate256x32u(y);
             return vmullo(z0,z1);
         }
 
@@ -177,8 +177,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<short> vmul(Vector256<sbyte> x, Vector256<sbyte> y)
         {
-            (var x1, var x2) = vinflate512x16i(x);
-            (var y1, var y2) = vinflate512x16i(x);
+            (var x1, var x2) = vpack.vinflate512x16i(x);
+            (var y1, var y2) = vpack.vinflate512x16i(x);
             return (vmullo(x1,y1), vmullo(x2,y2));
         }
 
@@ -192,8 +192,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<ushort> vmul(Vector256<byte> x, Vector256<byte> y)
         {
-            (var x1, var x2) = vinflate512x16u(x);
-            (var y1, var y2) = vinflate512x16u(y);
+            (var x1, var x2) = vpack.vinflate512x16u(x);
+            (var y1, var y2) = vpack.vinflate512x16u(y);
             return (vmullo(x1,y1), vmullo(x2,y2));
         }
 
@@ -205,8 +205,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<uint> vmul(Vector256<ushort> x, Vector256<ushort> y)
         {
-            (var x1, var x2) = vinflate512x32u(x);
-            (var y1, var y2) = vinflate512x32u(y);
+            (var x1, var x2) = vpack.vinflate512x32u(x);
+            (var y1, var y2) = vpack.vinflate512x32u(y);
             return(vmullo(x1,y1), vmullo(x2,y2));
         }
 
@@ -218,8 +218,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<int> vmul(Vector256<short> x, Vector256<short> y)
         {
-            (var x1, var x2) = vinflate512x32i(x);
-            (var y1, var y2) = vinflate512x32i(y);
+            (var x1, var x2) = vpack.vinflate512x32i(x);
+            (var y1, var y2) = vpack.vinflate512x32i(y);
             return(vmullo(x1,y1), vmullo(x2,y2));
         }
 

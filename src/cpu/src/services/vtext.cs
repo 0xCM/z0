@@ -57,10 +57,10 @@ namespace Z0
         public static void unpack(in ByteBlock32 src, ref CharBlock32 dst)
         {
             var v = cpu.vload(w256, src.Bytes);
-            var b0 = cpu.vinflatelo256x16u(v);
+            var b0 = vpack.vinflatelo256x16u(v);
             ref var c0 = ref u16(dst);
             cpu.vstore(b0, ref c0);
-            var b1 = cpu.vinflatehi256x16u(v);
+            var b1 = vpack.vinflatehi256x16u(v);
             ref var c1 = ref seek(u16(dst), 16);
             cpu.vstore(b1, ref c1);
         }
@@ -69,18 +69,18 @@ namespace Z0
         public static ReadOnlySpan<char> unpack(in ByteBlock32 src)
         {
             var v = cpu.vload(w256, src.Bytes);
-            var lo = cpu.vinflatelo256x16u(v);
-            var hi = cpu.vinflatehi256x16u(v);
+            var lo = vpack.vinflatelo256x16u(v);
+            var hi = vpack.vinflatehi256x16u(v);
             return recover<char>(bytes(new V256x2(lo,hi)));
         }
 
         public static void bits(Vector128<byte> src, Span<char> dst)
         {
-            var a = cpu.vinflate256x8u(cpu.vcell(src,1), 0);
-            var lo = cpu.vlo256x16u(a);
+            var a = vpack.vinflate256x8u(cpu.vcell(src,1), 0);
+            var lo = vpack.vlo256x16u(a);
             ref var target = ref u16(first(dst));
             cpu.vstore(lo, ref seek(target,0));
-            var hi = cpu.vhi256x16u(a);
+            var hi = vpack.vhi256x16u(a);
             cpu.vstore(hi, ref seek(target,16));
         }
 

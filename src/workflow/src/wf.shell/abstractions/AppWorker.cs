@@ -9,7 +9,7 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    public abstract class AppWorker<W,S,T> : AppService<W>, IProcessor<S,T>
+    public abstract class AppWorker<W,S,T> : IProcessor<S,T>
         where W : AppWorker<W,S,T>, new()
     {
         public abstract Task Process(S src, T dst, CancellationToken cancel);
@@ -17,7 +17,7 @@ namespace Z0
         public virtual void Process(S src, T dst)
         {
             using var ct = new CancellationTokenSource();
-            var task = Process(src,dst, ct.Token);
+            var task = Process(src, dst, ct.Token);
             task.Wait();
         }
 

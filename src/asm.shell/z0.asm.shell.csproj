@@ -19,6 +19,9 @@
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(LlvmTools)" />
+    <ProjectReference Include="$(Check)" />
+    <ProjectReference Include="$(CaptureChecks)" />
+    <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
 
 </Project>

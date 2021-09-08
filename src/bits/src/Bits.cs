@@ -14,6 +14,10 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op]
+        public static BitStack bitstack(ulong state)
+            => BitStack.create(state);
+
         /// <summary>
         /// Wraps a bitview around a generic reference
         /// </summary>
