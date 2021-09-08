@@ -69,9 +69,9 @@ namespace Z0.Asm
 
         void EmitTokens(ITokenSet src)
         {
-            var dst = Ws.Tables().TablePath<SymToken>(machine, src.Name);
-            var tokens = Symbols.tokens(src.Types());
-            TableEmit(tokens, SymToken.RenderWidths, dst);
+            var dst = Ws.Tables().TablePath<TokenRow>(machine, src.Name);
+            var tokens = Tokens.rows(src.Types());
+            TableEmit(tokens, TokenRow.RenderWidths, dst);
         }
 
         ReadOnlySpan<SymLiteralRow> EmitSymLiterals<E>(FS.FilePath dst)

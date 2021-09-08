@@ -8,7 +8,7 @@ namespace Z0.Asm
     using Z0.llvm;
 
     using static core;
-
+    using static WsAtoms;
     using static ProjectScriptNames;
 
     partial class AsmCmdService
@@ -111,17 +111,18 @@ namespace Z0.Asm
         Outcome CollectObjHex()
         {
             var result = Outcome.Success;
-            var paths = Ws.Projects().Out(State.Project()).Files(true, FS.Obj, FS.O).View;
+            var paths = OutFiles(FileKind.Obj, FileKind.O).View;
             var count = paths.Length;
             var hex = HexLines.Service();
             for(var i=0; i<count; i++)
             {
                 ref readonly var src = ref skip(paths,i);
-                var dst = Ws.Projects().Out(State.Project(), "data") + FS.file(src.FileName.Format(), FS.Hex);
+                var id = src.FileName.WithoutExtension.Format();
+                var dst = OutPath(objhex, id, FileKind.HexDat);
                 using var writer = dst.AsciWriter();
                 var data = src.ReadBytes();
                 var size = hex.Emit(data, writer);
-                Write(string.Format("({0} bytes)[{1} -> {2}]", size, src.ToUri(), dst.ToUri()));
+                Write(string.Format("({0:D5} bytes)[{1} -> {2}]", size, src.ToUri(), dst.ToUri()));
             }
 
             return result;
@@ -137,11 +138,23 @@ namespace Z0.Asm
             return result;
         }
 
+        FS.FilePath OutPath(Scope scope, string id, FileKind kind)
+            =>  Ws.Projects().Out(State.Project(), scope) + FS.file(id,FileTypes.ext(kind));
+
+        FS.Files OutFiles()
+            => Ws.Projects().OutFiles(State.Project());
+
+        FS.Files OutFiles(FileKind kind)
+            => Ws.Projects().OutFiles(State.Project(), kind);
+
+        FS.Files OutFiles(params FileKind[] kinds)
+            => Ws.Projects().OutFiles(State.Project(), kinds);
+
         Outcome CollectObjAsm()
         {
             var project = State.Project();
-            var src = Ws.Projects().OutFiles(project, FileTypes.ext(FileKind.ObjAsm)).View;
-            var dst = Ws.Projects().DataOut(project) + Tables.filename<ObjDumpRow>();
+            var src = OutFiles(FileKind.ObjAsm).View;
+            var dst = Ws.Projects().TableOut<ObjDumpRow>(project);
             var result = Outcome.Success;
             var tool = Wf.LlvmObjDump();
             var count = src.Length;

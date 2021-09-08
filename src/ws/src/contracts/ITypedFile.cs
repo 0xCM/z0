@@ -10,16 +10,13 @@ namespace Z0
     [Free]
     public interface ITypedFile : IFile
     {
-        IFileType FileType {get;}
+        FileKind Kind {get;}
     }
 
     [Free]
     public interface ITypedFile<F> : ITypedFile
-        where F : unmanaged, IFileType
+        where F : ITypedFile<F>
     {
-        new F FileType => default(F);
 
-        IFileType ITypedFile.FileType
-            => FileType;
     }
 }

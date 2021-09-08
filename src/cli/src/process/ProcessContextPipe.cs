@@ -145,7 +145,7 @@ namespace Z0
             worker.Submit(regions);
             ref readonly var product = ref worker.Bank;
             var count = product.SelectorCount;
-            var dst = root.datalist<AddressBankEntry>();
+            var dst = list<AddressBankEntry>();
             var total = 0ul;
             for(ushort i=0; i<count; i++)
             {
@@ -166,7 +166,7 @@ namespace Z0
                     dst.Add(record);
                 }
             }
-            return dst.Close();
+            return dst.ViewDeposited();
         }
 
         public void EmitContextSummary(FS.FilePath dst)

@@ -9,11 +9,11 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct TypedFile
+    public readonly struct TypedFile : ITypedFile
     {
-        public FileKind Kind {get;}
+        public readonly FileKind Kind;
 
-        public FS.FilePath Path {get;}
+        public readonly FS.FilePath Path;
 
         [MethodImpl(Inline)]
         public TypedFile(FileKind kind, FS.FilePath path)
@@ -21,6 +21,12 @@ namespace Z0
             Kind = kind;
             Path = path;
         }
+
+        FileKind ITypedFile.Kind
+            => Kind;
+
+        FS.FilePath IFile.Path
+            => Path;
 
         public string Format()
             => Path.ToUri().Format();

@@ -12,6 +12,7 @@ namespace Z0.Asm
     using static core;
     using static AsmChecks;
     using static Root;
+    using static Blit;
 
     partial class AsmCmdService
     {
@@ -19,39 +20,23 @@ namespace Z0.Asm
         unsafe Outcome Test(CmdArgs args)
         {
             var result = Outcome.Success;
-
-            return EmitSymIndex();
-        }
-
-        Outcome EmitSymIndex()
-        {
-            var result = Outcome.Success;
-            var literals = SymLiterals();
-            var count = literals.Length;
-            var counter = 0u;
-            var dst = Ws.Tables().Subdir(WsAtoms.machine) + FS.file("symliterals", FS.Txt);
-            using var writer = dst.UnicodeWriter();
-            for(var i=0u; i<count; i++)
+            var source = alloc<byte>(Pow2.T08);
+            source.Clear();
+            Random.Bytes(source);
+            var cells = recover<Cell16>(source);
+            var count = cells.Length;
+            var n = width<Cell16>();
+            var buffer = span<char>(128);
+            for(var i=0; i<count; i++)
             {
-                ref readonly var literal = ref literals[i];
-                var name = literal.Name.Format();
-                ref readonly var pos = ref literal.Position;
-                var symbol = literal.Symbol.Format();
-                ref readonly var scalar = ref literal.ScalarValue;
-                var @class = literal.Class.IsNonEmpty ? literal.Class.Format() : EmptyString;
-                var type =  empty(@class) ? literal.Type.Format() : (literal.Type.Format() + RP.embrace(@class));
-                var desc = EmptyString;
-                desc = string.Format("[{0:D5}:{1:D5}:{2}:{3}] = '{4}'", i, pos, type, name, symbol);;
-                writer.WriteLine(desc);
+                buffer.Clear();
+                var bits = nbits(n, skip(cells,i));
+                var len = Blit.render(bits,buffer);
+                slice(buffer,0,len);
+                Write(string.Format("{0} = {1}", bits.TypeName, text.format(slice(buffer,0,len))));
             }
 
             return result;
-        }
-
-        Index<SymLiteralRow> SymLiterals()
-        {
-            var catalog = State.ApiCatalog(ApiRuntimeLoader.catalog);
-            return Symbols.literals(catalog.Components.Storage.Enums());
         }
 
         Outcome TestAsmSizes()

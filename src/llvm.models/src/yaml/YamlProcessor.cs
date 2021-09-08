@@ -2,21 +2,29 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.llvm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
+    using static core;
     using static Root;
 
-    public readonly struct YamlFile : IFile
+    public class YamlTokenProcessor
     {
-        public FS.FilePath Path {get;}
 
-        [MethodImpl(Inline)]
-        public YamlFile(FS.FilePath path)
+        Symbols<YamlTokenKind> Symbols;
+
+        public YamlTokenProcessor()
         {
-            Path = path;
+            Symbols = Z0.Symbols.index<YamlTokenKind>();
+
         }
+
+        public void Process(YamlTokenFile src)
+        {
+
+        }
+
     }
+
 }

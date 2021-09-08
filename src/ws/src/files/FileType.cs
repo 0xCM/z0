@@ -8,26 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Blit;
 
     public readonly struct FileType : IFileType<FileType>
     {
         public FileKind Kind {get;}
 
-        public text15 ExtName {get;}
-
         [MethodImpl(Inline)]
-        public FileType(FileKind kind, text15 ext)
+        public FileType(FileKind kind)
         {
             Kind = kind;
-            ExtName = ext;
-        }
-
-        [MethodImpl(Inline)]
-        public FileType(FileKind kind, FS.FileExt ext)
-        {
-            Kind = kind;
-            ExtName = ext.Format();
         }
 
         public bool IsEmpty
@@ -43,7 +32,7 @@ namespace Z0
         }
 
         public FS.FileExt Ext
-            => FS.ext(ExtName.Format());
+            => FileTypes.ext(Kind);
 
         public string Format()
             => Kind.Format();
@@ -51,13 +40,18 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        [MethodImpl(Inline)]
         public static implicit operator FS.FileExt(FileType src)
             => src.Ext;
+
+        [MethodImpl(Inline)]
+        public static implicit operator FileType(FileKind src)
+            => new FileType(src);
 
         public static FileType Empty
         {
             [MethodImpl(Inline)]
-            get => new FileType(FileKind.None, text15.Empty);
+            get => new FileType(FileKind.None);
         }
     }
 }

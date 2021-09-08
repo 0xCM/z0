@@ -10,7 +10,6 @@ namespace Z0
 
     partial struct Blit
     {
-
         public struct gbv<T>
             where T : unmanaged
         {

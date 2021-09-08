@@ -23,12 +23,21 @@ namespace Z0
         FS.FolderPath DataOut(ProjectId project)
             => Out(project, data);
 
+        FS.FolderPath TablesOut(ProjectId project)
+            => Out(project, tables);
+
         FS.FilePath TableOut<T>(ProjectId project)
             where T : struct
-                => DataOut(project) + FS.file(Z0.TableId.identify<T>().Format(), FS.Csv);
+                => TablesOut(project) + FS.file(Z0.TableId.identify<T>().Format(), FS.Csv);
 
         FS.Files OutFiles(ProjectId project, FS.FileExt ext)
             => Out(project).Files(ext, true);
+
+        FS.Files OutFiles(ProjectId project, FileKind kind)
+            => OutFiles(project, FileTypes.ext(kind));
+
+        FS.Files OutFiles(ProjectId project, params FileKind[] kinds)
+            => Out(project).Files(true, kinds.Select(FileTypes.ext));
 
         FS.Files OutFiles(ProjectId project, FS.FolderName subdir)
             => (Out(project) + subdir).Files(true);

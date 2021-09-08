@@ -14,7 +14,7 @@ namespace Z0
             if(count == 0)
                 return 0;
 
-            HexPacks.Emit(Z0.HexPacks.blocks(src), PackArchive.RawHexPath(host));
+            HexPacks.Emit(ApiHex.blocks(src), PackArchive.RawHexPath(host));
             return count;
         }
     }

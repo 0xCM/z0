@@ -11,9 +11,6 @@ namespace Z0
 
     public class ApiHexPacks : AppService<ApiHexPacks>
     {
-        public static Outcome load(FS.FilePath src, out MemoryBlocks dst)
-            => HexPacks.load(src, out dst);
-
         public Lookup<FS.FilePath,MemoryBlocks> LoadParsed(FS.FolderPath src)
             => Load(src.Files(".parsed", FS.XPack, true));
 
@@ -133,7 +130,7 @@ namespace Z0
 
         static void load(FS.FilePath src, Lookup<FS.FilePath,MemoryBlocks> success, Lookup<FS.FilePath,Outcome> fail)
         {
-            var result = HexPacks.load(src, out var pack);
+            var result = ApiHex.load(src, out var pack);
             if(result.Fail)
                 fail.Add(src, result);
             else

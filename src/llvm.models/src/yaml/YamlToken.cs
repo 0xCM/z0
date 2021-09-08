@@ -6,19 +6,17 @@
 namespace Z0.llvm
 {
     using System.Runtime.CompilerServices;
+
     using static Root;
 
     public struct YamlToken
     {
         public YamlTokenKind Kind {get;}
 
-        public string Value {get;}
-
         [MethodImpl(Inline)]
-        public YamlToken(YamlTokenKind kind, string value)
+        public YamlToken(YamlTokenKind kind)
         {
             Kind = kind;
-            Value = value;
         }
 
         public bool IsEmpty
@@ -34,13 +32,13 @@ namespace Z0.llvm
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator YamlToken((YamlTokenKind kind, string value) src)
-            => new YamlToken(src.kind, src.value);
+        public static implicit operator YamlToken(YamlTokenKind src)
+            => new YamlToken(src);
 
         public static YamlToken Empty
         {
             [MethodImpl(Inline)]
-            get => new YamlToken(0, EmptyString);
+            get => new YamlToken(0);
         }
     }
 

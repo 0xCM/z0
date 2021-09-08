@@ -94,5 +94,7 @@ namespace Z0
         public const string wsl = nameof(wsl);
 
         public const string xed = nameof(xed);
+
+        public const string objhex = obj + dot + hex;
     }
 }

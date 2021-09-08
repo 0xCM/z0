@@ -12,16 +12,23 @@ namespace Z0
     partial struct Blit
     {
         [MethodImpl(Inline), Op]
-        public static gbv<Cell128> bv(N128 n, uint width, Cell128 src)
-            => new gbv<Cell128>(width, src);
+        public static gbv<ByteBlock8> bv(uint n, ByteBlock8 src)
+            => new gbv<ByteBlock8>(n, src);
 
         [MethodImpl(Inline), Op]
-        public static gbv<Cell512> bv(N512 n, uint width, Cell512 src)
-            => new gbv<Cell512>(width, src);
+        public static gbv<ByteBlock16> bv(uint n, ByteBlock16 src)
+            => new gbv<ByteBlock16>(n, src);
 
         [MethodImpl(Inline), Op]
-        public static gbv<Cell256> bv(N256 n, uint width, Cell256 src)
-            => new gbv<Cell256>(width, src);
+        public static gbv<ByteBlock32> bv(uint n, ByteBlock32 src)
+            => new gbv<ByteBlock32>(n, src);
 
+        [MethodImpl(Inline), Op]
+        public static gbv<ByteBlock64> bv(uint n, ByteBlock64 src)
+            => new gbv<ByteBlock64>(n, src);
+
+        [MethodImpl(Inline), Op]
+        public static gbv<ByteBlock128> bv(uint n, ByteBlock128 src)
+            => new gbv<ByteBlock128>(n, src);
     }
 }

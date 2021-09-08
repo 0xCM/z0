@@ -33,7 +33,7 @@ namespace Z0.Asm
                 var uri = ApiHostUri.define(id, skip(elements,1));
                 Write(uri);
 
-                result = Z0.HexPacks.load(file, out var blocks);
+                result = ApiHex.load(file, out var blocks);
                 if(result.Fail)
                     return result;
 

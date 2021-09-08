@@ -7,6 +7,8 @@ namespace Z0
     [LiteralProvider]
     public readonly struct FileKindNames
     {
+        const string sep = ".";
+
         /// <summary>
         /// Defines the 'alg' literal
         /// </summary>
@@ -88,6 +90,11 @@ namespace Z0
         public const string cpp = nameof(cpp);
 
         /// <summary>
+        /// Defines the 'dat' literal
+        /// </summary>
+        public const string dat = nameof(dat);
+
+        /// <summary>
         /// Defines the 'def' literal
         /// </summary>
         public const string def = nameof(def);
@@ -146,6 +153,11 @@ namespace Z0
         /// Defines the 'hex' literal
         /// </summary>
         public const string hex = nameof(hex);
+
+        /// <summary>
+        /// Defines the 'hex.dat' literal
+        /// </summary>
+        public const string hexdat = hex + sep + dat;
 
         /// <summary>
         /// Defines the 'i' literal
@@ -346,8 +358,6 @@ namespace Z0
         /// Defines the 'zip' literal
         /// </summary>
         public const string zip = nameof(zip);
-
-        const string sep = ".";
 
         /// il.csv
         /// </summary>

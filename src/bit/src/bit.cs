@@ -227,6 +227,14 @@ namespace Z0
             => *((byte*)(&on));
 
         /// <summary>
+        /// Implicitly coverts a bit a char
+        /// </summary>
+        /// <param name="state">The state of the bit to construct</param>
+        [MethodImpl(Inline)]
+        public static implicit operator char(bit src)
+            => src.ToChar();
+
+        /// <summary>
         /// Implicitly constructs a bool from a bit
         /// </summary>
         /// <param name="state">The state of the bit to construct</param>

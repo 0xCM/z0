@@ -42,7 +42,6 @@ namespace Z0
             return count;
         }
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void copy<T>(MemoryRange src, Span<T> dst)
             where T : unmanaged

@@ -31,6 +31,5 @@ namespace Z0
 
         public static implicit operator TokenExpr(TokenExpr<T> src)
             => new TokenExpr(src.Id, src.Content.Format());
-
     }
 }

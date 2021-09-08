@@ -373,7 +373,7 @@ namespace Z0
                 {
                     if(DataParser.parse(input, out bit u1))
                     {
-                        dst = (name, generic<T>(u1));
+                        dst = (name, generic<T>((bool)u1));
                         return true;
                     }
                 }

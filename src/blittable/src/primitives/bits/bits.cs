@@ -23,6 +23,7 @@ namespace Z0
             where T : unmanaged
                 => new bits<T>(n, value);
 
+
         public struct bits<T>
             where T : unmanaged
         {
@@ -43,6 +44,12 @@ namespace Z0
                 N = n;
                 Packed = src;
             }
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator bits<T>((uint n, T value) src)

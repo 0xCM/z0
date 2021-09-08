@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a 32-bit bitvector
     /// </summary>
-    public struct BitVector32<T> : IBitVector<BitVector32<T>, T>
+    public struct BitVector32<T>
         where T : unmanaged
     {
         public T State {get;}
@@ -40,6 +40,7 @@ namespace Z0
 
         public string Format(BitFormat config)
             => BitRender.formatter<T>(config).Format(State);
+
         public string Format()
             => BitRender.formatter<T>().Format(State);
     }

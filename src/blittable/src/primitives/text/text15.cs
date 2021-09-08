@@ -91,6 +91,18 @@ namespace Z0
                 get => Storage.Cell(w8, 15);
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Storage.IsEmpty;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Storage.IsNonEmpty;
+            }
+
             public string Format()
                 => format(this);
 
