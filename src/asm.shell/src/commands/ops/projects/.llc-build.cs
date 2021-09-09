@@ -10,34 +10,34 @@ namespace Z0.Asm
     {
         [CmdOp(".llc-sse")]
         Outcome LlcSse(CmdArgs args)
-            => RunBuildScript(args, LlcBuildSse);
+            => RunProjectScript(args, LlcBuildSse);
 
         [CmdOp(".llc-sse2")]
         Outcome LlcSse2(CmdArgs args)
-            => RunBuildScript(args, LlcBuildSse2);
+            => RunProjectScript(args, LlcBuildSse2);
 
         [CmdOp(".llc-sse3")]
         Outcome LlcSse3(CmdArgs args)
-            => RunBuildScript(args, LlcBuildSse3);
+            => RunProjectScript(args, LlcBuildSse3);
 
         [CmdOp(".llc-sse41")]
         Outcome LlcSse41(CmdArgs args)
-            => RunBuildScript(args, LlcBuildSse41);
+            => RunProjectScript(args, LlcBuildSse41);
 
         [CmdOp(".llc-sse42")]
         Outcome LlcSse42(CmdArgs args)
-            => RunBuildScript(args, LlcBuildSse42);
+            => RunProjectScript(args, LlcBuildSse42);
 
         [CmdOp(".llc-avx")]
         Outcome LlcAvx(CmdArgs args)
-            => RunBuildScript(args, LlcBuildAvx);
+            => RunProjectScript(args, LlcBuildAvx);
 
         [CmdOp(".llc-avx2")]
         Outcome LlcAvx2(CmdArgs args)
-            => RunBuildScript(args, LlcBuildAvx2);
+            => RunProjectScript(args, LlcBuildAvx2);
 
         [CmdOp(".llc-avx512")]
         Outcome LlcAvx512(CmdArgs args)
-            => RunBuildScript(args, LlcBuildAvx512);
+            => RunProjectScript(args, LlcBuildAvx512);
     }
 }

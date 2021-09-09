@@ -26,7 +26,6 @@ namespace Z0
             where T : unmanaged
                 => new kvp<S,T>(src,dst);
 
-
         public struct kvp<K,V>
             where K : unmanaged
             where V : unmanaged

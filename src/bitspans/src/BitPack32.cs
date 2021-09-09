@@ -41,13 +41,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return Numeric.force<T>(pack(src, n8));
+                return NumericCast.force<T>(pack(src, n8));
             else if(typeof(T) == typeof(short))
-                return Numeric.force<T>(pack(src, n16));
+                return NumericCast.force<T>(pack(src, n16));
             else if(typeof(T) == typeof(int))
-                return Numeric.force<T>(pack(src, n32));
+                return NumericCast.force<T>(pack(src, n32));
             else if(typeof(T) == typeof(long))
-                return Numeric.force<T>(pack(src, n64));
+                return NumericCast.force<T>(pack(src, n64));
             else
                 throw no<T>();
         }
@@ -61,7 +61,7 @@ namespace Z0
         public static byte pack(Span<Bit32> src, N8 count)
         {
             var v0 = cpu.vload(w256, first(convert(src, 0, width<byte>(w8))));
-            return (byte)cpu.vpacklsb(cpu.vpack128x8u(v0));
+            return (byte)vpack.vpacklsb(vpack.vpack128x8u(v0));
         }
 
         /// <summary>

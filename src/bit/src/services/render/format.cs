@@ -115,13 +115,24 @@ namespace Z0
             return config.SpecifierPrefix ? "0b" + bs : bs;
         }
 
-        public static string format(ReadOnlySpan<bit> src, BitFormat? fmt = null)
+        [MethodImpl(Inline), Op]
+        public static uint length(ReadOnlySpan<bit> src, BitFormat options)
         {
-            var options = fmt ?? BitFormat.configure();
             var bitcount = min((uint)options.MaxBitCount,(uint)src.Length);
             var blocked = options.BlockWidth != 0;
             var blocks = (uint)(blocked ? src.Length/options.BlockWidth : 0);
             bitcount += blocks; // space for block separators
+            return bitcount;
+        }
+
+        public static string format(ReadOnlySpan<bit> src, BitFormat? fmt = null)
+        {
+            var options = fmt ?? BitFormat.configure();
+            //var bitcount = min((uint)options.MaxBitCount,(uint)src.Length);
+            var blocked = options.BlockWidth != 0;
+            var blocks = (uint)(blocked ? src.Length/options.BlockWidth : 0);
+            //bitcount += blocks; // space for block separators
+            var bitcount = length(src,options);
 
             Span<char> buffer = stackalloc char[(int)bitcount];
             ref var dst = ref first(buffer);

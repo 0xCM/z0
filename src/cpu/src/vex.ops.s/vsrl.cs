@@ -40,7 +40,7 @@ namespace Z0
         {
             var x = v16u(ShiftRightLogical(vpack.vinflate256x16i(src),count));
             var y = vand(x, v16u(vbroadcast(w256, byte.MaxValue)));
-            return v8i(vpack128x8u(y));
+            return v8i(vpack.vpack128x8u(y));
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Z0
             var x = v16u(ShiftRightLogical(vpack.vinflate256x16i(vlo(src)),count));
             var y = v16u(ShiftRightLogical(vpack.vinflate256x16i(vhi(src)),count));
             var m = v16u(vbroadcast(w256, byte.MaxValue));
-            return v8i(vpack256x8u(vand(x,m), vand(y,m)));
+            return v8i(vpack.vpack256x8u(vand(x,m), vand(y,m)));
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace Z0
         {
             var y = v16u(count);
             var dst = vsrl(vpack.vinflate256x16u(src),y);
-            return vpack128x8u(dst);
+            return vpack.vpack128x8u(dst);
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace Z0
         {
             var y = v16i(count);
             var dst = vsrl(vpack.vinflate256x16i(src),y);
-            return vpack128x8i(dst);
+            return vpack.vpack128x8i(dst);
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace Z0
             var y = v16i(count);
             var lo = vsrl(vpack.vinflate256x16i(vlo(src)), y);
             var hi = vsrl(vpack.vinflate256x16i(vhi(src)),y);
-            return vpack256x8i(lo, hi);
+            return vpack.vpack256x8i(lo, hi);
         }
 
         /// <summary>
@@ -300,7 +300,7 @@ namespace Z0
             var y = v16u(count);
             var lo = vsrl(vpack.vinflate256x16u(vlo(src)),y);
             var hi = vsrl(vpack.vinflate256x16u(vhi(src)),y);
-            return vpack256x8u(lo, hi);
+            return vpack.vpack256x8u(lo, hi);
         }
 
         /// <summary>

@@ -136,7 +136,7 @@ namespace Z0
         public static byte extract8(in BitSpan32 src, int offset)
         {
             ref readonly var unpacked = ref first(extract(src, offset, 8));
-            return (byte)cpu.vpacklsb(vpack128x8u(vload(w256, unpacked)));
+            return (byte)vpack.vpacklsb(vpack.vpack128x8u(vload(w256, unpacked)));
         }
 
         [MethodImpl(Inline), Op]

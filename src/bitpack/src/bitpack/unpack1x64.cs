@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static vpack;
 
     partial struct BitPack
     {
@@ -58,21 +59,21 @@ namespace Z0
             var wSrc = w64;
             var wDst = w256;
             unpack1x8((byte)src, ref tmp);
-            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead);
+            vinflate8x256x32u(tmp).StoreTo(ref lead);
             unpack1x8((byte)(src >> 8), ref tmp);
-            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead, 8);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 8);
             unpack1x8((byte)(src >> 16), ref tmp);
-            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead, 16);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 16);
             unpack1x8((byte)(src >> 24), ref tmp);
-            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead, 24);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 24);
             unpack1x8((byte)(src >> 32), ref tmp);
-            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead, 32);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 32);
             unpack1x8((byte)(src >> 40), ref tmp);
-            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead, 40);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 40);
             unpack1x8((byte)(src >> 48), ref tmp);
-            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead, 48);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 48);
             unpack1x8((byte)(src >> 56), ref tmp);
-            vpack.vinflate8x256x32u(tmp).StoreTo(ref lead, 56);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 56);
         }
 
         [MethodImpl(Inline), Op]
@@ -83,16 +84,16 @@ namespace Z0
             ref var target = ref first(dst);
 
             unpack1x32x32((uint)src, ref tmp);
-            vpack.vinflate8x256x32u(tmp, 0, ref target, 0);
-            vpack.vinflate8x256x32u(tmp, 1, ref target, 1);
-            vpack.vinflate8x256x32u(tmp, 2, ref target, 2);
-            vpack.vinflate8x256x32u(tmp, 3, ref target, 3);
+            vinflate8x256x32u(tmp, 0, ref target, 0);
+            vinflate8x256x32u(tmp, 1, ref target, 1);
+            vinflate8x256x32u(tmp, 2, ref target, 2);
+            vinflate8x256x32u(tmp, 3, ref target, 3);
 
             unpack1x32x32((uint)(src >> 32), ref tmp);
-            vpack.vinflate8x256x32u(tmp, 0, ref target, 4);
-            vpack.vinflate8x256x32u(tmp, 1, ref target, 5);
-            vpack.vinflate8x256x32u(tmp, 2, ref target, 6);
-            vpack.vinflate8x256x32u(tmp, 3, ref target, 7);
+            vinflate8x256x32u(tmp, 0, ref target, 4);
+            vinflate8x256x32u(tmp, 1, ref target, 5);
+            vinflate8x256x32u(tmp, 2, ref target, 6);
+            vinflate8x256x32u(tmp, 3, ref target, 7);
         }
 
         [MethodImpl(Inline), Op]
@@ -102,14 +103,14 @@ namespace Z0
             ref var tmp = ref ByteBlocks.first<byte>(ref buffer);
             ref var target = ref first(dst);
             unpack1x64x8(src, ref tmp);
-            vpack.vinflate8x256x32u(tmp, 0, ref target);
-            vpack.vinflate8x256x32u(tmp, 1, ref target);
-            vpack.vinflate8x256x32u(tmp, 2, ref target);
-            vpack.vinflate8x256x32u(tmp, 3, ref target);
-            vpack.vinflate8x256x32u(tmp, 4, ref target);
-            vpack.vinflate8x256x32u(tmp, 5, ref target);
-            vpack.vinflate8x256x32u(tmp, 6, ref target);
-            vpack.vinflate8x256x32u(tmp, 7, ref target);
+            vinflate8x256x32u(tmp, 0, ref target);
+            vinflate8x256x32u(tmp, 1, ref target);
+            vinflate8x256x32u(tmp, 2, ref target);
+            vinflate8x256x32u(tmp, 3, ref target);
+            vinflate8x256x32u(tmp, 4, ref target);
+            vinflate8x256x32u(tmp, 5, ref target);
+            vinflate8x256x32u(tmp, 6, ref target);
+            vinflate8x256x32u(tmp, 7, ref target);
         }
 
 

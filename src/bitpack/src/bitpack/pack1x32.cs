@@ -23,13 +23,13 @@ namespace Z0
         {
             var v0 = vload(w256, skip(src,0*8));
             var v1 = vload(w256, skip(src,1*8));
-            var x = vpack256x16u(v0, v1);
+            var x = vpack.vpack256x16u(v0, v1);
 
             v0 = vload(w256, skip(src,2*8));
             v1 = vload(w256, skip(src,3*8));
-            var y = vpack256x16u(v0,v1);
+            var y = vpack.vpack256x16u(v0,v1);
 
-            dst = vpacklsb(vpack256x8u(x, y));
+            dst = vpack.vpacklsb(vpack.vpack256x8u(x, y));
             return ref dst;
         }
 

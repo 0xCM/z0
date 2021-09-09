@@ -39,6 +39,14 @@ namespace Z0
             return new text7(storage);
         }
 
+        [MethodImpl(Inline), Op]
+        public static bit eq(text7 a, text7 b)
+            => a.Storage == b.Storage;
+
+        [MethodImpl(Inline), Op]
+        public static bit neq(text7 a, text7 b)
+            => a.Storage != b.Storage;
+
         public struct text7 : IName<text7,ulong>
         {
             public const byte MaxLength = 7;
@@ -101,10 +109,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator text7(ReadOnlySpan<char> src)
                 => txt(N,src);
-
-            [MethodImpl(Inline)]
-            public static implicit operator textT<ulong>(text7 src)
-                => new textT<ulong>(src.Storage, src.Length, src.PointSize);
 
             public static text7 Empty => default;
         }

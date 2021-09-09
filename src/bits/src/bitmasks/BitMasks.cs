@@ -19,6 +19,9 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        public static string[] names()
+            => typeof(BitMaskLiterals).LiteralFields().Select(x => x.Name);
+
         public readonly struct Specs
         {
             [MethodImpl(Inline)]

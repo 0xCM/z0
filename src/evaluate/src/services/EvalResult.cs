@@ -11,8 +11,6 @@ namespace Z0
     /// </summary>
     public struct EvalResult : IRecord<EvalResult>
     {
-        public EvalAspectKey FieldKind => EvalAspectKey.Sequence;
-
         public int Sequence;
 
         public string CaseName;

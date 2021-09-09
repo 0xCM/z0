@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static cpu;
 
     partial class VexExamples
@@ -57,47 +57,47 @@ namespace Z0
 
             var i2x2 = vparts(w256, 2, 4, 8, 16);
             var v2x2 = vgather(w128, in src32, i2x2);
-            VClaims.veq(vpack128x32u(i2x2), v2x2);
+            VClaims.veq(vpack.vpack128x32u(i2x2), v2x2);
 
             var i3x3 = vparts(w256, 3, 6, 12, 24);
             var v3x3 = vgather(w128, in src32, i3x3);
-            VClaims.veq(vpack128x32u(i3x3), v3x3);
+            VClaims.veq(vpack.vpack128x32u(i3x3), v3x3);
 
             var i3_3 = vparts(w256, 3, 6, 9, 12);
             var v3_3 = vgather(w128, in src32, i3_3);
-            VClaims.veq(vpack128x32u(i3_3), v3_3);
+            VClaims.veq(vpack.vpack128x32u(i3_3), v3_3);
 
             var i4x2 = vparts(w256, 4, 8, 16, 32);
             var v4x2 = vgather(w128, in src32, i4x2);
-            VClaims.veq(vpack128x32u(i4x2), v4x2);
+            VClaims.veq(vpack.vpack128x32u(i4x2), v4x2);
 
             var i5_5 =vparts(w256, 5, 10, 15, 20);
             var v5_5 = vgather(w128, in src32, i5_5);
-            VClaims.veq(vpack128x32u(i5_5), v5_5);
+            VClaims.veq(vpack.vpack128x32u(i5_5), v5_5);
 
             var i9_9 = vparts(w256, 9, 18, 27, 36);
             var v9_9 = vgather(w128, in src32, i9_9);
-            VClaims.veq(vpack128x32u(i9_9), v9_9);
+            VClaims.veq(vpack.vpack128x32u(i9_9), v9_9);
 
             var i10_10 = vparts(w256, 10, 20, 30, 40);
             var v10_10 = vgather(w128, in src32, i10_10);
-            VClaims.veq(vpack128x32u(i10_10), v10_10);
+            VClaims.veq(vpack.vpack128x32u(i10_10), v10_10);
 
             var i16x2 = vparts(w256, 16, 32, 64, 128);
             var v16x2 = vgather(w128, in src32, i16x2);
-            VClaims.veq(vpack128x32u(i16x2), v16x2);
+            VClaims.veq(vpack.vpack128x32u(i16x2), v16x2);
 
             var i20_5 = vparts(w256, 20, 25, 30, 35);
             var v20_5 = vgather(w128, in src32, i20_5);
-            VClaims.veq(vpack128x32u(i20_5), v20_5);
+            VClaims.veq(vpack.vpack128x32u(i20_5), v20_5);
 
             var i40_3 = vparts(w256, 40, 43, 46, 49);
             var v40_3 = vgather(w128, in src32, i40_3);
-            VClaims.veq(vpack128x32u(i40_3), v40_3);
+            VClaims.veq(vpack.vpack128x32u(i40_3), v40_3);
 
             var i4x128 = vparts(w256i, 0, 128 - 1, 128*2 - 1, 128*4 - 1);
             var v4x128 = vgather(w128, in src32, v512idx);
-            VClaims.veq(vpack128x32i(i4x128), v32i(v4x128));
+            VClaims.veq(vpack.vpack128x32i(i4x128), v32i(v4x128));
         }
 
         [Op(ExampleGroups.Gather)]

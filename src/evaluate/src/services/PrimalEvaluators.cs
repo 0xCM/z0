@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     public readonly struct PrimalEvaluators
     {
-
         [Evaluator(typeof(EQ<>))]
         readonly struct PrimalEqEval<T> : IEvaluator<EQ<T>, CmpEval<T>>
             where T : unmanaged

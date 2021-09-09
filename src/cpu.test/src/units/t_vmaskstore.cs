@@ -59,7 +59,7 @@ namespace Z0
 
             // Store every component
             storage.Clear();
-            mask = vmask.vmsb(w256, n8, n1, z8);
+            mask = vmask.vmsb<byte>(w256, n8, n1);
             gcpu.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
             Claim.veq(x,stored);

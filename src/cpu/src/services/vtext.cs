@@ -10,6 +10,8 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static cpu;
+    using static vpack;
 
     [ApiHost]
     public readonly partial struct vtext
@@ -22,90 +24,91 @@ namespace Z0
         /// <param name="count">The number of source characters to convert</param>
         /// <param name="dst">The receiving buffer</param>
         [MethodImpl(Inline), Op]
-        public static void pack(in CharBlock16 src, ref ByteBlock16 dst)
-            => cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, @char(src))), ref @byte(dst));
+        public static void pack16(in CharBlock16 src, ref ByteBlock16 dst)
+            => vstore(vpack128x8u(vload(w256, @char(src))), ref @byte(dst));
 
         [MethodImpl(Inline), Op]
-        public static void pack(in CharBlock32 src, ref ByteBlock32 dst)
+        public static void pack32(in CharBlock32 src, ref ByteBlock32 dst)
         {
             ref readonly var c0 = ref c16(src);
             ref var b0 = ref u8(dst);
-            cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, c0)), ref b0);
+            vstore(vpack128x8u(vload(w256, c0)), ref b0);
             ref readonly var c1 = ref skip(c16(src),16);
             ref var b1 = ref seek(u8(dst),16);
-            cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, c1)), ref b1);
+            vstore(vpack128x8u(vload(w256, c1)), ref b1);
         }
 
         [MethodImpl(Inline), Op]
-        public static void pack(in CharBlock64 src, ref ByteBlock64 dst)
+        public static void pack64(in CharBlock64 src, ref ByteBlock64 dst)
         {
             ref readonly var c0 = ref c16(src);
             ref var b0 = ref u8(dst);
-            cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, c0)), ref b0);
+            vstore(vpack128x8u(vload(w256, c0)), ref b0);
             ref readonly var c1 = ref skip(c16(src),16);
             ref var b1 = ref seek(u8(dst),16);
-            cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, c1)), ref b1);
+            vstore(vpack128x8u(vload(w256, c1)), ref b1);
             ref readonly var c2 = ref skip(c16(src),32);
             ref var b2 = ref seek(u8(dst),32);
-            cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, c2)), ref b2);
+            vstore(vpack128x8u(vload(w256, c2)), ref b2);
             ref readonly var c3 = ref skip(c16(src),48);
             ref var b3 = ref seek(u8(dst),48);
-            cpu.vstore(cpu.vpack128x8u(cpu.vload(w256, c3)), ref b3);
+            vstore(vpack128x8u(vload(w256, c3)), ref b3);
         }
 
         [MethodImpl(Inline), Op]
-        public static void unpack(in ByteBlock32 src, ref CharBlock32 dst)
+        public static void unpack32(in ByteBlock32 src, ref CharBlock32 dst)
         {
-            var v = cpu.vload(w256, src.Bytes);
-            var b0 = vpack.vinflatelo256x16u(v);
+            var v = vload(w256, src.Bytes);
+            var b0 = vinflatelo256x16u(v);
             ref var c0 = ref u16(dst);
-            cpu.vstore(b0, ref c0);
-            var b1 = vpack.vinflatehi256x16u(v);
+            vstore(b0, ref c0);
+            var b1 = vinflatehi256x16u(v);
             ref var c1 = ref seek(u16(dst), 16);
-            cpu.vstore(b1, ref c1);
+            vstore(b1, ref c1);
         }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> unpack(in ByteBlock32 src)
+        public static ReadOnlySpan<char> chars(in ByteBlock32 src)
         {
-            var v = cpu.vload(w256, src.Bytes);
-            var lo = vpack.vinflatelo256x16u(v);
-            var hi = vpack.vinflatehi256x16u(v);
+            var v = vload(w256, src.Bytes);
+            var lo = vinflatelo256x16u(v);
+            var hi = vinflatehi256x16u(v);
             return recover<char>(bytes(new V256x2(lo,hi)));
         }
 
+        [MethodImpl(Inline), Op]
         public static void bits(Vector128<byte> src, Span<char> dst)
         {
-            var a = vpack.vinflate256x8u(cpu.vcell(src,1), 0);
-            var lo = vpack.vlo256x16u(a);
+            var a = vinflate256x8u(vcell(src,1), 0);
+            var lo = vlo256x16u(a);
             ref var target = ref u16(first(dst));
-            cpu.vstore(lo, ref seek(target,0));
-            var hi = vpack.vhi256x16u(a);
-            cpu.vstore(hi, ref seek(target,16));
+            vstore(lo, ref seek(target,0));
+            var hi = vhi256x16u(a);
+            vstore(hi, ref seek(target,16));
         }
 
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vunicode(W256 w, ReadOnlySpan<char> src)
-            => cpu.vload(w, recover<ushort>(src));
+        public static Vector256<ushort> vunicode256(ReadOnlySpan<char> src)
+            => vload(w256, recover<ushort>(src));
 
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vasci(W256 w, ReadOnlySpan<byte> src)
-            => cpu.vload(w, src);
+        public static Vector256<byte> vasci256(ReadOnlySpan<byte> src)
+            => vload(w256, src);
 
         [MethodImpl(Inline), Op]
-        public static ref CharBlock16 copy(ReadOnlySpan<char> src, ref CharBlock16 dst)
+        public static ref CharBlock16 copy16(ReadOnlySpan<char> src, ref CharBlock16 dst)
         {
-            cpu.vstore(cpu.vload(w128, u8(first(src))), ref u8(dst));
+            vstore(vload(w128, u8(first(src))), ref u8(dst));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref CharBlock32 copy(ReadOnlySpan<char> src, ref CharBlock32 dst)
+        public static ref CharBlock32 copy32(ReadOnlySpan<char> src, ref CharBlock32 dst)
         {
             ref readonly var _u8Src = ref u8(first(src));
             ref var _u8Dst = ref u8(dst);
-            cpu.vstore(cpu.vload(w256, _u8Src), ref _u8Dst);
-            cpu.vstore(cpu.vload(w256, skip(_u8Src,32)), ref seek(_u8Dst, 32));
+            vstore(vload(w256, _u8Src), ref _u8Dst);
+            vstore(vload(w256, skip(_u8Src,32)), ref seek(_u8Dst, 32));
             return ref dst;
         }
     }

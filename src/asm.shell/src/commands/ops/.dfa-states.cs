@@ -29,17 +29,5 @@ namespace Z0.Asm
             }
             return true;
         }
-
-        [CmdOp(".names")]
-        Outcome Names(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var name0 = Factory.name(n16, "0123456789ABCDEF");
-            var name1 = Factory.name(n8, "01234");
-            Write(name0);
-            Write(name1);
-
-            return result;
-        }
     }
 }

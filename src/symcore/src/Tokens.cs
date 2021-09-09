@@ -98,7 +98,6 @@ namespace Z0
             return buffer;
         }
 
-
         public static ReadOnlySpan<Token> tokenize(Type symtype, out ReadOnlySpan<byte> data)
         {
             var symbols = Symbols.untyped(symtype).View;

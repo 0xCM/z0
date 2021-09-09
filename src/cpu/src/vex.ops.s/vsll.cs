@@ -180,7 +180,6 @@ namespace Z0
         public static Vector256<ulong> vsll(Vector256<ulong> src, [Imm] byte count)
             => ShiftLeftLogical(src, (byte)count);
 
-
         /// <summary>
         /// Shifts each source vector component leftwards by an amount specified in the first component of the offset vector
         /// </summary>
@@ -191,7 +190,7 @@ namespace Z0
         {
             var y = v16u(count);
             var dst = vsll(vpack.vinflate256x16u(src), y);
-            return vpack128x8u(dst);
+            return vpack.vpack128x8u(dst);
         }
 
         /// <summary>
@@ -204,7 +203,7 @@ namespace Z0
         {
             var y = v16i(count);
             var dst = vsll(vpack.vinflate256x16i(src), y);
-            return vpack128x8i(dst);
+            return vpack.vpack128x8i(dst);
         }
 
         /// <summary>
@@ -277,7 +276,7 @@ namespace Z0
             var y = v16i(count);
             var lo = vsll(vpack.vinflate256x16i(vlo(src)), y);
             var hi = vsll(vpack.vinflate256x16i(vhi(src)), y);
-            return vpack256x8i(lo,hi);
+            return vpack.vpack256x8i(lo,hi);
         }
 
         /// <summary>
@@ -291,7 +290,7 @@ namespace Z0
             var y = v16u(count);
             var lo = vsll(vpack.vinflate256x16u(vlo(src)), y);
             var hi = vsll(vpack.vinflate256x16u(vhi(src)), y);
-            return vpack256x8u(lo, hi);
+            return vpack.vpack256x8u(lo, hi);
         }
 
         /// <summary>
@@ -353,7 +352,6 @@ namespace Z0
         [MethodImpl(Inline), Sll]
         public static Vector256<ulong> vsll(Vector256<ulong> src, Vector128<ulong> count)
             => ShiftLeftLogical(src, count);
-
 
         [MethodImpl(Inline), Op]
         static byte msb8f(byte density)

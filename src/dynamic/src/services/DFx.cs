@@ -81,7 +81,6 @@ namespace Z0
             return new DynamicAction(name, f, method, (Action)method.CreateDelegate(tFunc));
         }
 
-
         [MethodImpl(Inline), Op]
         public static SegRef load(ReadOnlySpan<byte> src, uint offset, in NativeBuffer dst)
         {

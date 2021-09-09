@@ -58,22 +58,22 @@ namespace Z0
             var w = w256;
             var v0 = vload(w, skip(src, 0*8));
             var v1 = vload(w, skip(src, 1*8));
-            var x = vpack256x16u(v0, v1);
+            var x = vpack.vpack256x16u(v0, v1);
             v0 = vload(w, skip(src,2*8));
             v1 = vload(w, skip(src,3*8));
 
-            var y = vpack256x16u(v0, v1);
-            var packed = (ulong)vpacklsb(vpack256x8u(x,y));
+            var y = vpack.vpack256x16u(v0, v1);
+            var packed = (ulong)vpack.vpacklsb(vpack.vpack256x8u(x,y));
 
             v0 = vload(w, skip(src,4*8));
             v1 = vload(w, skip(src,5*8));
-            x = vpack256x16u(v0,v1);
+            x = vpack.vpack256x16u(v0,v1);
 
             v0 = vload(w, skip(src,6*8));
             v1 = vload(w, skip(src,7*8));
-            y = vpack256x16u(v0,v1);
+            y = vpack.vpack256x16u(v0,v1);
 
-            packed |= (ulong)vpacklsb(vpack256x8u(x,y)) << 32;
+            packed |= (ulong)vpack.vpacklsb(vpack.vpack256x8u(x,y)) << 32;
 
             dst = packed;
             return ref dst;

@@ -5,11 +5,12 @@
 namespace Z0.Asm
 {
     using static ProjectScriptNames;
+    using static WsAtoms;
 
     partial class AsmCmdService
     {
         [CmdOp(".c-build")]
         Outcome BuildCProj(CmdArgs args)
-            => RunBuildScript(args, CBuild);
+            => RunProjectScript(args, CBuild, c);
     }
 }

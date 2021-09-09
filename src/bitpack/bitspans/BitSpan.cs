@@ -56,6 +56,12 @@ namespace Z0
             get => Data;
         }
 
+        public string Format()
+            => api.format(this);
+
+        public string Format(BitFormat options)
+            => api.format(this, options);
+
         [MethodImpl(Inline)]
         public static bit operator ==(in BitSpan x, in BitSpan y)
             => api.same(x,y);

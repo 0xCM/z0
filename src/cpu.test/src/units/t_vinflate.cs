@@ -21,7 +21,7 @@ namespace Z0
             var v128x16u_b = cpu.vhi(v256x16u);
             var v128x16u_a_expect = gcpu.vinc<ushort>(w128,0);
             var v128x16u_b_expect = gcpu.vinc<ushort>(w128,8);
-            var v128x8u_output = cpu.vpack128x8u(v128x16u_a, v128x16u_b);
+            var v128x8u_output = vpack.vpack128x8u(v128x16u_a, v128x16u_b);
 
             Claim.veq(v128x16u_a_expect, v128x16u_a);
             Claim.veq(v128x16u_b_expect, v128x16u_b);
@@ -52,15 +52,15 @@ namespace Z0
             var u16inc = gcpu.vinc<ushort>(w,0);
             var u8inc = gcpu.vinc<byte>(w,0);
 
-            var c8 = cpu.vpack256x8u(a0, b0, c0, d0);
-            var c16 = cpu.vpack256x16u(a0, b0);
-            var v1024x32u = vpack.vinflate1024x32u(c8);
+            var c8 = vpack.vpack256x8u(a0, b0, c0, d0);
+            var c16 = vpack.vpack256x16u(a0, b0);
+            vpack.vinflate1024x32u(c8, out var x0, out var y0);
             Claim.veq(u16inc, c16);
             Claim.veq(u8inc, c8);
-            Claim.veq(a0, v1024x32u.A);
-            Claim.veq(b0, v1024x32u.B);
-            Claim.veq(c0, v1024x32u.C);
-            Claim.veq(d0, v1024x32u.D);
+            Claim.veq(a0, x0.Lo);
+            Claim.veq(b0, x0.Hi);
+            Claim.veq(c0, y0.Lo);
+            Claim.veq(d0, y0.Hi);
         }
     }
 }

@@ -5,9 +5,12 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Collections.Generic;
+
     using Z0.llvm;
 
     using static core;
+    using static Root;
     using static WsAtoms;
     using static ProjectScriptNames;
 
@@ -25,9 +28,12 @@ namespace Z0.Asm
             return outcome;
         }
 
-        Outcome LoadProjectSources(ProjectId id, Scope scope)
+        Outcome LoadProjectSources(ProjectId id, Scope? scope)
         {
-            Files(Ws.Projects().SrcFiles(id,scope));
+            if(scope != null)
+                Files(Ws.Projects().SrcFiles(id, scope.Value));
+            else
+                Files(Ws.Projects().SrcFiles(id));
             return true;
         }
 
@@ -59,7 +65,7 @@ namespace Z0.Asm
             return result;
         }
 
-        Outcome RunBuildScript(CmdArgs args, ScriptId script)
+        Outcome RunProjectScript(CmdArgs args, ScriptId script, Scope? scope = null)
         {
             var result = Outcome.Success;
             var project = State.Project();
@@ -69,7 +75,7 @@ namespace Z0.Asm
                 return result;
             }
 
-            result = LoadProjectSources(project);
+            result = LoadProjectSources(project, scope);
             if(result.Fail)
                 return result;
 
@@ -105,6 +111,8 @@ namespace Z0.Asm
             if(result.Fail)
                 return result;
 
+            result = CollectMcLogs();
+
             return result;
         }
 
@@ -136,6 +144,72 @@ namespace Z0.Asm
             Write(string.Format("Collecting symbols from {0} files", src.Length));
             var symbols = LlvmNm.Collect(src, dst);
             return result;
+        }
+
+        Outcome CollectMcLogs()
+        {
+            var project = State.Project();
+            var logs = Ws.Projects().OutFiles(project, FileTypes.ext(FileKind.McOpsLog)).View;
+            var dst = Ws.Projects().TableOut<McOpLogEntry>(project);
+            var count = logs.Length;
+            var buffer = list<McOpLogEntry>();
+            for(var i=0; i<count; i++)
+                ParseMcLog(skip(logs,i), buffer);
+            TableEmit(buffer.ViewDeposited(), McOpLogEntry.RenderWidths, dst);
+            return true;
+        }
+
+        uint ParseMcLog(FS.FilePath src, List<McOpLogEntry> dst)
+        {
+            const string EntryMarker = "note: parsed instruction:";
+            var lines = src.ReadNumberedLines();
+            var count = lines.Length;
+            var segs = count/3;
+            var counter = 0u;
+            for(var i=0; i<segs; i+=3)
+            {
+                ref readonly var a = ref skip(lines,i).Content;
+                ref readonly var b = ref skip(lines,i+1).Content;
+                ref readonly var c = ref skip(lines,i+2);
+
+                var m = text.index(a,EntryMarker);
+                if(!a.Contains(EntryMarker))
+                    continue;
+
+                Fence<char> Brackets = (Chars.LBracket, Chars.RBracket);
+                var locator = text.left(a,m).Trim();
+                locator = text.slice(locator,0, locator.Length - 1);
+
+                var info = text.right(a,m + EntryMarker.Length);
+                var semfound = text.unfence(info, Brackets, out var semantic);
+                info = semfound ? RP.parenthetical(semantic) : info;
+                var body = b.Replace(Chars.Tab,Chars.Space);
+                var xpr = AsmExpr.Empty;
+                var comment = AsmComment.Empty;
+                var q = text.index(body, Chars.Hash);
+                var encoding = EmptyString;
+                if(q > 0)
+                {
+                    var _l = text.left(body, q).Trim();
+                    var _r = text.right(body, q).Trim();
+                    var z = text.index(_l, Chars.Space);
+                    var mnemonic = z > 0 ? text.left(_l,z).Trim() : _l;
+                    var operands = z > 0 ? text.right(_l,z).Trim() : EmptyString;
+                    xpr = asm.expr(mnemonic, operands);
+
+                    var encfound = text.unfence(_r, Brackets, out encoding);
+                    comment = asm.comment(string.Format("{0} {1}", encfound ? encoding : _r, info));
+                }
+
+                var record = new McOpLogEntry();
+                counter++;
+                record.Locator = locator;
+                record.Expr = xpr;
+                record.Encoding = encoding;
+                record.Semantic = info;
+                dst.Add(record);
+            }
+            return counter;
         }
 
         FS.FilePath OutPath(Scope scope, string id, FileKind kind)

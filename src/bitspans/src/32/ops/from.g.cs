@@ -14,7 +14,6 @@ namespace Z0
 
     partial class BitSpans32
     {
-
         /// <summary>
         /// Creates a bitspan from a primal source
         /// </summary>
@@ -58,16 +57,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return SB.from(Numeric.force<T,byte>(src));
+                return SB.from(NumericCast.force<T,byte>(src));
             else if(typeof(T) == typeof(short))
-                return SB.from(Numeric.force<T,ushort>(src));
+                return SB.from(NumericCast.force<T,ushort>(src));
             else if(typeof(T) == typeof(int))
-                return SB.from(Numeric.force<T,uint>(src));
+                return SB.from(NumericCast.force<T,uint>(src));
             else if(typeof(T) == typeof(long))
-                return SB.from(Numeric.force<T,ulong>(src));
+                return SB.from(NumericCast.force<T,ulong>(src));
             else
                 throw no<T>();
         }
-
     }
 }

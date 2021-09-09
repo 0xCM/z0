@@ -46,7 +46,6 @@ namespace Z0
                 seek(dst,i) = (byte)skip(src,i);
         }
 
-
         [Op]
         public static string format(in text15 src)
         {
@@ -116,10 +115,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator text15(ReadOnlySpan<char> src)
                 => txt(N,src);
-
-            [MethodImpl(Inline)]
-            public static implicit operator textT<Cell128>(text15 src)
-                => new textT<Cell128>(src.Storage, src.Length, src.PointSize);
 
             public static text15 Empty => default;
         }

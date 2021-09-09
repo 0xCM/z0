@@ -40,6 +40,11 @@ namespace Z0.Asm
         public const string McHex = "mc-hex";
 
         public const string McDisasm = "mc-disasm";
+
+        public const string DumpLayouts = "dump-layouts";
+
+        public const string DumpAst = "dump-ast";
+
     }
 
 }

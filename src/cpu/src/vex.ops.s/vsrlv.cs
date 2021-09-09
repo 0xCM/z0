@@ -63,7 +63,7 @@ namespace Z0
         {
             var x = vpack.vinflate256x16i(src);
             var y = vpack.vinflate256x16i(counts);
-            return vpack128x8i(vsrlv(x,y));
+            return vpack.vpack128x8i(vsrlv(x,y));
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
         {
             var x = vpack.vinflate256x16u(src);
             var y = vpack.vinflate256x16u(counts);
-            return vpack128x8u(vsrlv(x,y));
+            return vpack.vpack128x8u(vsrlv(x,y));
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         {
             var x = vpack.vinflate256x32i(src);
             var y = v32u(vpack.vinflate256x32i(counts));
-            return vpack128x16i(ShiftRightLogicalVariable(x,y));
+            return vpack.vpack128x16i(ShiftRightLogicalVariable(x,y));
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
         {
             var x = vpack.vinflate256x32u(src);
             var y = vpack.vinflate256x32u(counts);
-            return vpack128x16u(ShiftRightLogicalVariable(x,y));
+            return vpack.vpack128x16u(ShiftRightLogicalVariable(x,y));
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Z0
         {
             (var x0, var x1) = vpack.vinflate512x16i(src);
             (var s0, var s1) = vpack.vinflate512x16i(counts);
-            return vpack256x8i(vsrlv(x0,s0), vsrlv(x1,s1));
+            return vpack.vpack256x8i(vsrlv(x0,s0), vsrlv(x1,s1));
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Z0
         {
             (var x0, var x1) = vpack.vinflate512x16u(src);
             (var s0, var s1) = vpack.vinflate512x16u(counts);
-            return vpack256x8u(vsrlv(x0,s0), vsrlv(x1,s1));
+            return vpack.vpack256x8u(vsrlv(x0,s0), vsrlv(x1,s1));
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Z0
         {
             (var x0, var x1) = vpack.vinflate512x32i(src);
             (var s0, var s1) = vpack.vinflate512x32i(counts);
-            return vpack256x16i(vsrlv(x0,s0), vsrlv(x1,s1));
+            return vpack.vpack256x16i(vsrlv(x0,s0), vsrlv(x1,s1));
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace Z0
         {
             (var x0, var x1) = vpack.vinflate512x32u(src);
             (var s0, var s1) = vpack.vinflate512x32u(counts);
-            return vpack256x16u(vsrlv(x0,s0), vsrlv(x1,s1));
+            return vpack.vpack256x16u(vsrlv(x0,s0), vsrlv(x1,s1));
         }
     }
 }

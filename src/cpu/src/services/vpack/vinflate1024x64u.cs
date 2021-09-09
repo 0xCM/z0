@@ -20,7 +20,10 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector1024<ulong> vinflate1024x64u(Vector256<ushort> src)
-            => (vinflate512x64u(vlo(src)), vinflate512x64u(vhi(src)));
+        public static void vinflate1024x64u(Vector256<ushort> src, out Vector512<ulong> lo, out Vector512<ulong> hi)
+        {
+            lo = vinflate512x64u(vlo(src));
+            hi = vinflate512x64u(vhi(src));
+        }
     }
 }
