@@ -12,12 +12,12 @@ namespace Z0
     using static Root;
     using static Chars;
 
-    public class BinaryKindGenerator : CodeGenerator
+    public class BinaryKindGen : CodeGenerator
     {
-        public static BinaryKindGenerator Create(uint max = 0xFF)
-            => new BinaryKindGenerator(max);
+        public static BinaryKindGen Create(uint max = 0xFF)
+            => new BinaryKindGen(max);
 
-        public BinaryKindGenerator(uint max)
+        public BinaryKindGen(uint max)
         {
             MaxValue = max;
             MaxBitCount = effwidth(MaxValue);

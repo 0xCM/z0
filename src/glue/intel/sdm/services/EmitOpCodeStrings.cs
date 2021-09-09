@@ -21,7 +21,7 @@ namespace Z0.Asm
 
             var dst = Wf.EnvPaths.Codebase(PartId.AsmData) + FS.folder("src/sources/gen");
             var spec = StringTables.specify("Z0.Asm", "OpCodeStrings", items);
-            return Wf.Generators().Generate(spec,dst);
+            return StringTableGen.create(Wf).Generate(spec, dst);
         }
     }
 }

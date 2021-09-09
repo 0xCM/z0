@@ -72,6 +72,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public Cell512(ByteBlock64 src)
+        {
+            var v = src.Vector<ulong>();
+            X0 = v.Lo;
+            X1 = v.Hi;
+        }
+
+        [MethodImpl(Inline)]
         public static Cell512 init<T>(in Vector512<T> src)
             where T : unmanaged
                 => new Cell512(src.As<ulong>());

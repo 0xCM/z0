@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public abstract class BitSetGenerator : CodeGenerator
+    public abstract class BitSetGen : CodeGenerator
     {
         protected string TypeDigits(byte m, byte n)
             => BitRender.gformat(n, BitFormat.limited(m,m));

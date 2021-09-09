@@ -55,7 +55,7 @@ namespace Z0
 
         internal void Deposit(ExtractErrorEvent e)
         {
-
+            Wf.Error(e);
         }
 
         public ApiCollection Run(in ApiExtractSettings settings)
@@ -70,7 +70,7 @@ namespace Z0
             return collection;
         }
 
-        public ApiCollection Run()
+        public ApiCollection Run(CmdArgs args)
         {
             return Run(ApiExtractSettings.init(Db.CapturePackRoot(), now()));
         }

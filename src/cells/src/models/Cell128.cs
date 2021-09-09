@@ -23,6 +23,10 @@ namespace Z0
             => Data = src;
 
         [MethodImpl(Inline)]
+        public Cell128(ByteBlock16 src)
+            => Data = src.Vector<ulong>();
+
+        [MethodImpl(Inline)]
         public Cell128(ulong src)
             => Data = Vector128.CreateScalarUnsafe(src);
 

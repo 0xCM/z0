@@ -14,8 +14,19 @@ namespace Z0
 
     using static CsPatterns;
 
-    public class AsciLookups : Service<AsciLookups>
+    public class AsciLookupGen : Service<AsciLookupGen>
     {
+        public ByteSpanSpec DefineByteSpan(Identifier name, string content)
+        {
+            var src = span(content);
+            var count = src.Length;
+            var buffer = alloc<byte>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+                seek(dst, i) = (byte)skip(src,i);
+            return new ByteSpanSpec(name, buffer, true);
+        }
+
         const char semi = Chars.Semicolon;
 
         const char lbrace = Chars.LBrace;
@@ -26,15 +37,12 @@ namespace Z0
 
         public static RenderPattern<string,string> Assign => "{0} => {1}";
 
-        AsciBytes AsciBytes;
-
         protected override void Initialized()
         {
-            AsciBytes = Context.AsciBytes();
         }
 
         public void EmitAsciBytes(uint indent, Identifier name, string data, ITextBuffer dst)
-            => Render(indent, AsciBytes.DefineAsciBytes(name,data), dst);
+            => Render(indent, DefineByteSpan(name,data), dst);
 
         public void Render(uint indent, ByteSpanSpec spec, ITextBuffer dst)
         {
@@ -161,7 +169,7 @@ namespace Z0
 
     partial class XTend
     {
-        public static AsciLookups AsciLookups(this IServiceContext context)
-            => Z0.AsciLookups.create(context);
+        public static AsciLookupGen AsciLookups(this IServiceContext context)
+            => Z0.AsciLookupGen.create(context);
     }
 }

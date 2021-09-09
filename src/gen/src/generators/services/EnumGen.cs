@@ -6,7 +6,7 @@ namespace Z0
 {
     using static core;
 
-    public class EnumGenerator : CodeGenerator
+    public class EnumGen : CodeGenerator
     {
         public Outcome Generate(uint offset, in EnumSpec spec, ITextBuffer dst)
         {

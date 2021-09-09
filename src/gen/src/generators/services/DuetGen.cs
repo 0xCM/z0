@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class QuintetGenerator : BitSetGenerator
+    public class DuetGen : BitSetGen
     {
-        public static BitSetGenerator Service => new QuintetGenerator();
+        public static BitSetGen Service => new DuetGen();
 
-        public override byte Digits => 5;
+        public override byte Digits => 2;
 
-        public override byte MaxValue => 31;
+        public override byte MaxValue => 3;
     }
 }

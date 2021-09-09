@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    public class HexMachineGenerator : CodeGenerator
+    public class HexMachineGen : CodeGenerator
     {
         byte MinHandler;
 

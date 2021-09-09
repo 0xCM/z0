@@ -41,7 +41,6 @@ namespace Z0
             get => ref first(Bytes);
         }
 
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -70,6 +69,11 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        [MethodImpl(Inline)]
+        public Vector128<T> Vector<T>()
+            where T : unmanaged
+                => vcore.vload<T>(w128, @as<T>(First));
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<byte>(B src)

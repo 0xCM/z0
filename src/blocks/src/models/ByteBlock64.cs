@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Root;
     using static core;
@@ -61,6 +62,23 @@ namespace Z0
         public Span<T> Storage<T>()
             where T : unmanaged
                 => recover<T>(Bytes);
+
+        [MethodImpl(Inline)]
+        public Vector512<T> Vector<T>()
+            where T : unmanaged
+                => vcore.vload<T>(w512, @as<T>(First));
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector512<byte>(B src)
+            => vcore.vload(default(W512), src.Bytes);
+
+        [MethodImpl(Inline)]
+        public static implicit operator B(Vector512<byte> src)
+        {
+            var dst = Empty;
+            vcore.vstore(src, dst.Bytes);
+            return dst;
+        }
 
         public static B Empty => default;
     }

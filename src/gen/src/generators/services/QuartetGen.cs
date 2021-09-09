@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Generate
 {
-    public class QuartetGenerator : BitSetGenerator
+    public class QuartetGen : BitSetGen
     {
-        public static BitSetGenerator Service => new QuartetGenerator();
+        public static BitSetGen Service => new QuartetGen();
 
         public override byte Digits => 4;
 

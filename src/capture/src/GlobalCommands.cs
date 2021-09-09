@@ -119,7 +119,7 @@ namespace Z0
         [CmdOp("capture-v2")]
         public Outcome CaptureV2(CmdArgs args)
         {
-           Wf.ApiExtractWorkflow().Run();
+           Wf.ApiExtractWorkflow().Run(args);
            return true;
         }
 
@@ -146,7 +146,7 @@ namespace Z0
         }
 
         public Outcome Dispatch(string command, CmdArgs args)
-            => Dispatcher.Dispatch(command,args);
+            => Dispatcher.Dispatch(command, args);
 
         public Outcome Dispatch(string command)
             => Dispatcher.Dispatch(command);

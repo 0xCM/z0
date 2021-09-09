@@ -39,7 +39,6 @@ namespace Z0
             where T : unmanaged
                 => ref @as<v2<T>,T>(src);
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cells<T>(ref v2<T> src)
             where T : unmanaged

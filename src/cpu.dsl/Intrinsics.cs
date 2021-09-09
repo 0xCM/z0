@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Vdsl
 {
-    [ApiHost]
-    public readonly partial struct Intel
+    [ApiComplete]
+    public readonly partial struct Intrinsics
     {
-        [ApiHost("intel.algorithms")]
+        [ApiComplete("intel.algorithms")]
         public readonly partial struct Algs
         {
 

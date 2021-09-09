@@ -6,7 +6,7 @@ namespace Z0
 {
     public readonly struct CsGen
     {
-        public static EnumGenerator EnumGenerator => new();
+        public static EnumGen EnumGenerator => new();
     }
 
 

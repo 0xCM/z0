@@ -12,17 +12,17 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        public struct __m128i<T>
+        public struct __m256i<T>
             where T : unmanaged
         {
-            Cell128<T> Data;
+            Cell256<T> Data;
 
             [MethodImpl(Inline)]
-            public __m128i(Vector128<T> src)
+            public __m256i(Vector256<T> src)
                 => Data = src;
 
             [MethodImpl(Inline)]
-            public __m128i(Cell128<T> src)
+            public __m256i(Cell256<T> src)
                 => Data = src;
 
             public num<T> this[int i]
@@ -35,16 +35,16 @@ namespace Z0.Vdsl
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator __m128i<T>(Vector128<T> src)
-                => new __m128i<T>(src);
+            public static implicit operator __m256i<T>(Vector256<T> src)
+                => new __m256i<T>(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator __m128i<T>(T src)
-                => gcpu.vbroadcast(w128,src);
+            public static implicit operator __m256i<T>(T src)
+                => gcpu.vbroadcast(w256,src);
 
             [MethodImpl(Inline)]
-            public static implicit operator Vector128<T>(__m128i<T> src)
-                => src.Data.ToVector();
+            public static implicit operator Vector256<T>(__m256i<T> src)
+                => src.Data;
         }
     }
 }

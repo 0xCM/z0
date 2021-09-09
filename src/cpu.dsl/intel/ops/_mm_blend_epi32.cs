@@ -11,24 +11,20 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        public struct Imm8
+        public static __m128i<uint> _mm_blend_epi32(__m128i<uint> a, __m128i<uint> b, Imm8 imm8)
         {
-            byte Data;
-
-            [MethodImpl(Inline)]
-            public Imm8(byte src)
+            var dst = default(__m128i<uint>);
+            var i=0;
+            for(var j=0; j<4; j++)
             {
-                Data = src;
+                i = j*16;
+                if(imm8[i])
+                    dst[i] = b[i];
+                else
+                    dst[i] = a[i];
             }
 
-            public bit this[int i]
-            {
-                [MethodImpl(Inline)]
-                get => bit.test(Data,(byte)i);
-            }
-
-            public static implicit operator Imm8(byte src)
-                => new Imm8(src);
+            return dst;
         }
     }
 }

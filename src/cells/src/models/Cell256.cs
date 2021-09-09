@@ -24,6 +24,10 @@ namespace Z0
             => Content = src;
 
         [MethodImpl(Inline)]
+        public Cell256(ByteBlock32 src)
+            => Content = src.Vector<ulong>();
+
+        [MethodImpl(Inline)]
         public Cell256(ulong src)
             => Content = Vector256.CreateScalarUnsafe(src);
 
@@ -81,7 +85,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Content.AsSByte();
         }
-
 
         public Vector256<ushort> V16u
         {
@@ -167,10 +170,6 @@ namespace Z0
             where T : unmanaged
                 => Content.As<ulong,T>();
 
-        [MethodImpl(Inline)]
-        public T As<T>()
-             where T : struct
-               => @as<F,T>(this);
        public string Format()
             => Content.ToString();
 
@@ -192,12 +191,12 @@ namespace Z0
             => init(src.x,src.y);
 
         [MethodImpl(Inline)]
-        public static implicit operator Cell256(Vector256<byte> x)
-            => init(x);
-
-        [MethodImpl(Inline)]
         public static implicit operator Cell256(ulong x)
             => new Cell256(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell256(Vector256<byte> x)
+            => init(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell256(Vector256<ushort> x)
@@ -231,7 +230,7 @@ namespace Z0
         public static implicit operator Vector256<uint>(Cell256 x)
             => x.V32u;
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static implicit operator Vector256<int>(Cell256 x)
             => x.V32i;
 

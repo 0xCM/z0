@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Generate
 {
-    public class DuetGenerator : BitSetGenerator
+    public class OctetGen : BitSetGen
     {
-        public static BitSetGenerator Service => new DuetGenerator();
+        public static BitSetGen Service => new OctetGen();
 
-        public override byte Digits => 2;
+        public override byte Digits => 8;
 
-        public override byte MaxValue => 3;
+        public override byte MaxValue => 255;
     }
 }

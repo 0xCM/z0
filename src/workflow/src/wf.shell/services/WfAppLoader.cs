@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-
     using static core;
 
     public readonly struct WfAppLoader
@@ -33,9 +32,6 @@ namespace Z0
         public static IWfRuntime load(IApiParts parts, string[] args)
             => create(parts, args);
 
-        public static IWfRuntime load(IApiParts parts)
-            => create(parts, System.Environment.GetCommandLineArgs());
-
         static WfContext context(Assembly control, IApiParts parts, string[] args)
         {
             var ctx = new WfContext();
@@ -52,7 +48,6 @@ namespace Z0
         static IWfRuntime create(IApiParts parts, string[] args)
         {
             term.inform(InitializingRuntime.Format(now()));
-
             var clock = Time.counter(true);
             var verbose = true;
             var control = controller();

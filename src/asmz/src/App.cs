@@ -453,46 +453,40 @@ namespace Z0.Asm
         void EmitSymbolIndex<E>(Identifier container)
             where E : unmanaged, Enum
         {
-            var buffer = TextTools.buffer();
+            var buffer = text.buffer();
             SpanRes.symrender<E>(container, buffer);
             Wf.Row(buffer.Emit());
         }
 
-        string RenderAsciByteSpan(Identifier name, string data)
-        {
-            var dst = TextTools.buffer();
-            SpanRes.ascirender(8, name, data, dst);
-            return dst.Emit();
-        }
-
-        void EmitAsciBytes(Identifier name, string content, FS.FilePath dst)
-        {
-            var flow = Wf.EmittingFile(dst);
-            using var writer = dst.Writer();
-            var bytespan = RenderAsciByteSpan(name, content);
-            Wf.Row(bytespan);
-            writer.WriteLine(bytespan);
-            Wf.EmittedFile(flow,content.Length);
-        }
-
-        public void EmitAsciBytes()
-        {
-            var name = "Uppercase";
-            EmitAsciBytes(name, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", Db.AppLog(name, FS.Cs));
-        }
-
-        void Dispatch(string cmd)
+        void Dispatch(string cmd, CmdArgs args)
         {
             var commands = Wf.GlobalCommands();
-            var result = commands.Dispatch(cmd);
+            var result = commands.Dispatch(cmd, args);
             if(result.Fail)
                 Wf.Error(result.Message);
         }
 
         void Dispatch()
         {
-            var args = Wf.Args;
-            iter(args, arg => Dispatch(arg));
+            var input = Wf.Args;
+            if(input.Length == 0)
+            {
+                Error("Command unspecified");
+                return;
+            }
+
+            var cmd = input[0];
+            if(input.Length == 1)
+                Dispatch(cmd, CmdArgs.Empty);
+            else
+            {
+                var values = slice(span(input),1);
+                var count = values.Length;
+                var args = alloc<CmdArg>(count);
+                for(ushort i=0; i<count; i++)
+                    seek(args,i) = Cmd.arg(i,skip(values,i));
+                Dispatch(cmd, args);
+            }
         }
 
         static void render(EventWrittenEventArgs src, ITextBuffer dst)
@@ -562,7 +556,7 @@ namespace Z0.Asm
             try
             {
                 var parts = ApiRuntimeLoader.parts(controller(), array<string>());
-                using var wf = WfAppLoader.load(parts);
+                using var wf = WfAppLoader.load(parts, args);
                 var app = App.create(wf.WithSource(Rng.@default()));
                 app.Run();
 

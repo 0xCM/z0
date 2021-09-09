@@ -70,7 +70,12 @@ namespace Z0
             where T : unmanaged
                 => recover<T>(Bytes);
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
+        public Vector256<T> Vector<T>()
+            where T : unmanaged
+                => vcore.vload<T>(w256, @as<T>(First));
+
+        [MethodImpl(Inline)]
         public static implicit operator Vector256<byte>(B src)
             => vcore.vload(default(W256), src.Bytes);
 

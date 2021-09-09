@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Concurrent;
+    using System.Diagnostics;
 
     using Z0.Asm;
 
@@ -57,15 +58,52 @@ namespace Z0
             DatasetReceiver = new();
         }
 
-        void ClearTargets()
+        void ClearTargets(IApiPack pack)
         {
             PackArchive.HexPackRoot().Clear();
             PackArchive.AsmCaptureRoot().Clear(true);
         }
 
-        public void ExtractParts()
+        void ResolveParts(ReadOnlySpan<IPart> parts)
+        {
+            var count = parts.Length;
+            ResolvedParts = alloc<ResolvedPart>(count);
+            ref var dst = ref ResolvedParts.First;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var part = ref skip(parts,i);
+                var resolution = Resolver.ResolvePart(part);
+                seek(dst,i) = resolution;
+                Channel.Raise(new PartResolvedEvent(resolution));
+            }
+        }
+
+        void ResolveParts(IApiPack pack)
+        {
+            var parts = Wf.ApiCatalog.Parts.ToReadOnlySpan();
+            ResolveParts(parts);
+        }
+
+        void ExtractParts(IApiPack pack)
         {
             ExtractParts(ResolvedParts, false);
+        }
+
+        void EmitProcessContext(IApiPack pack)
+        {
+            var flow = Wf.Running("Emitting process context");
+            var ts = pack.Timestamp;
+            if(!ts.IsNonZero)
+                ts = now();
+
+            var dir = pack.Archive().ContextRoot();
+            var process = Process.GetCurrentProcess();
+            var pipe = Wf.ProcessContextPipe();
+            var procparts = pipe.EmitPartitions(process, ts, dir);
+            var regions = pipe.EmitRegions(process, ts, dir);
+            pipe.EmitDump(process, pack.ProcDumpPath(process, ts));
+            EmitApiCatalog(ts);
+            Wf.Ran(flow);
         }
 
         void EmitContext(IApiPack pack)
@@ -80,24 +118,11 @@ namespace Z0
                 Wf.AsmAnalyzer().Analyze(SortedRoutines, PackArchive);
         }
 
-        void RunWorkflow(IApiPack pack)
+        void CollectRoutines(IApiPack pack)
         {
-            ClearTargets();
-            ResolveParts();
-            ExtractParts();
-            CollectRoutines();
-            EmitContext(pack);
-            EmitAnalyses(pack);
-        }
-
-        FS.FolderPath SegDir
-            => Db.TableDir("segments");
-
-        ApiCollection CollectAll()
-        {
-            var collection = new ApiCollection();
-            collection._ResolvedParts = ResolvedParts;
-            return collection;
+            CollectedDatasets = DatasetReceiver.Array();
+            SortedRoutines = CollectedDatasets.SelectMany(x => x.Routines.Where(r => r != null && r.IsNonEmpty));
+            SortedRoutines.Sort();
         }
 
         internal ApiCollection Run(ApiExtractChannel receivers, IApiPack pack)
@@ -105,8 +130,19 @@ namespace Z0
             Channel = receivers;
             PackArchive = ApiPackArchive.create(pack.Root);
             RedirectEmissions("capture", pack.Root);
-            RunWorkflow(pack);
-            return CollectAll();
+            ClearTargets(pack);
+            ResolveParts(pack);
+            ExtractParts(pack);
+            CollectRoutines(pack);
+            EmitContext(pack);
+            EmitAnalyses(pack);
+            var collection = new ApiCollection();
+            collection._ResolvedParts = ResolvedParts;
+            return collection;
+
         }
+
+        FS.FolderPath SegDir
+            => Db.TableDir("segments");
     }
 }

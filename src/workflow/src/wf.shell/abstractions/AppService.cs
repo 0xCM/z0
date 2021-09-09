@@ -97,31 +97,6 @@ namespace Z0
         protected ShowLog ShowLog([Caller] string name = null, FS.FileExt? ext = null)
             => ShowLog(NameShowLog(name,ext ?? FS.Csv));
 
-        protected void Pipe<S,T>(ReadOnlySpan<S> src, Func<S,T> converter, string channel = null)
-            where T : ITextual
-        {
-            var count = src.Length;
-            if(count != 0)
-            {
-                var dst = Db.AppLog(string.Format("{0}.{1}",Timestamp.now(), channel ?? typeof(T).Name));
-                using var writer = dst.AsciWriter();
-                for(var i=0; i<count; i++)
-                    writer.WriteLine((converter(skip(src,i)).Format()));
-            }
-        }
-
-        protected void Pipe<T>(ReadOnlySpan<T> src, string channel = null)
-            where T : ITextual
-        {
-            var count = src.Length;
-            if(count != 0)
-            {
-                var dst = Db.AppLog(string.Format("{0}.{1}", Timestamp.now(), channel ?? typeof(T).Name));
-                using var writer = dst.AsciWriter();
-                for(var i=0; i<count; i++)
-                    writer.WriteLine(skip(src,i).Format());
-            }
-        }
 
         protected bool Check<T>(Outcome<T> outcome, out T payload)
         {
@@ -215,64 +190,26 @@ namespace Z0
 
         protected uint TableEmit<T>(ReadOnlySpan<T> src, FS.FilePath dst)
             where T : struct
-        {
-            var flow = EmittingTable<T>(dst);
-            var spec = Tables.rowspec<T>();
-            var count = Tables.emit(src, spec, dst);
-            EmittedTable(flow,count);
-            return count;
-        }
+                => Wf.TableEmit(src,dst);
 
         protected uint TableEmit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
             where T : struct
-        {
-            var flow = EmittingTable<T>(dst);
-            var spec = Tables.rowspec<T>(widths, z16);
-            var count = Tables.emit(src, spec, dst);
-            EmittedTable(flow,count);
-            return count;
-        }
+                => Wf.TableEmit(src, widths, dst);
 
         protected uint TableEmit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, TextEncodingKind encoding, FS.FilePath dst)
             where T : struct
-        {
-            var flow = EmittingTable<T>(dst);
-            var spec = Tables.rowspec<T>(widths, z16);
-            var count = Tables.emit(src, spec, encoding, dst);
-            EmittedTable(flow,count);
-            return count;
-        }
+                => Wf.TableEmit(src, widths, encoding, dst);
 
         protected uint TableEmit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, StreamWriter writer, FS.FilePath dst)
             where T : struct
-        {
-            var flow = EmittingTable<T>(dst);
-            var spec = Tables.rowspec<T>(widths, z16);
-            var count = Tables.emit(src, spec, writer);
-            EmittedTable(flow,count);
-            return count;
-        }
+                => Wf.TableEmit(src, widths, writer, dst);
 
         protected uint TableEmit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, ushort rowpad, Encoding encoding, FS.FilePath dst)
             where T : struct
-        {
-            var flow = Wf.EmittingTable<T>(dst);
-            var spec = Tables.rowspec<T>(widths, rowpad);
-            var count = Tables.emit(src, spec, encoding, dst);
-            Wf.EmittedTable(flow, count);
-            return count;
-        }
+                => Wf.TableEmit(src, widths, rowpad,  encoding, dst);
 
         protected Outcome<uint> EmitLines(ReadOnlySpan<TextLine> src, FS.FilePath dst, TextEncodingKind encoding)
-        {
-            using var writer = dst.Writer(encoding);
-            var count = (uint)src.Length;
-            var emitting = EmittingFile(dst);
-            for(var i=0; i<count; i++)
-                writer.WriteLine(skip(src,i));
-            EmittedFile(emitting,count);
-            return count;
-        }
+            => Wf.EmitLines(src,dst,encoding);
 
         protected virtual void OnInit()
         {

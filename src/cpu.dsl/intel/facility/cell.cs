@@ -10,9 +10,9 @@ namespace Z0.Vdsl
     using static Root;
     using static core;
 
-    partial struct Intel
+    partial struct Intrinsics
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref num<T> cell<T>(ref __m128i<T> src, int i)
             where T : unmanaged
         {
@@ -20,32 +20,56 @@ namespace Z0.Vdsl
             return ref seek(dst,i);
         }
 
-        public static __m128i<T> z128<T>()
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref num<T> cell<T>(ref __m256i<T> src, int i)
+            where T : unmanaged
+        {
+            ref var dst = ref @as<__m256i<T>,num<T>>(src);
+            return ref seek(dst,i);
+        }
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ref num<T> cell<T>(ref __m512i<T> src, int i)
+            where T : unmanaged
+        {
+            ref var dst = ref @as<__m512i<T>,num<T>>(src);
+            return ref seek(dst,i);
+        }
+
+        [MethodImpl(Inline),Closures(AllNumeric)]
+        public static __m128i<T> m128i<T>()
             where T : unmanaged
                 => default;
 
-        public static __m128i<byte> z128(W8 w)
+        [MethodImpl(Inline),Closures(AllNumeric)]
+        public static __m256i<T> m256i<T>()
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline),Closures(AllNumeric)]
+        public static __m512i<T> m512i<T>()
+            where T : unmanaged
+                => default;
+
+        public static __m128i<byte> z128i(W8 w)
             => default;
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
-        public static void For(int min, int max, Func<int,int> ixf, Action<int> receiver)
-        {
-            for(var i=min; i<=max; i++)
-            {
-                var j = ixf(i);
-                receiver(j);
+        public static __m128i<sbyte> z128i(W8i w)
+            => default;
 
-            }
-        }
+        public static __m128i<ushort> z128i(W16 w)
+            => default;
 
-        [MethodImpl(Inline), Closures(AllNumeric)]
-        public static __m128i<T> For<T>(W128 w, int min, int max, Func<int,T> f)
-            where T : unmanaged
-        {
-            var dst = z128<T>();
-            for(var i=min; i<=max; i++)
-                dst[i] = f(i);
-            return dst;
-        }
-    }
+        public static __m128i<uint> z128i(W32 w)
+            => default;
+
+        public static __m128i<ulong> z128i(W64 w)
+            => default;
+
+        public static __m256i<byte> z256i(W8 w)
+            => default;
+
+        public static __m512i<byte> z512i(W8 w)
+            => default;
+     }
 }

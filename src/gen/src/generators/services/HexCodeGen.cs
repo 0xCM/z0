@@ -9,9 +9,9 @@ namespace Z0
 
     using static Chars;
 
-    public class HexCodeGenerator : CodeGenerator
+    public class HexCodeGen : CodeGenerator
     {
-        public static CodeGenerator Service => new HexCodeGenerator();
+        public static CodeGenerator Service => new HexCodeGen();
 
         static string Name(byte value)
             => text.concat(AsciLetterUp.X, value.FormatHex(true,false,uppercase:true));
@@ -21,7 +21,7 @@ namespace Z0
 
         public static IEnumerable<string> Gen()
         {
-            var template = new HexCodeGenerator();
+            var template = new HexCodeGen();
             for(var i=0; i<= 0xFF;i++)
             {
                 yield return template.Populate(Name((byte)i), Kind((byte)i));
@@ -31,7 +31,7 @@ namespace Z0
 
         public static IEnumerable<string> Instances()
         {
-            var template = new HexCodeGenerator();
+            var template = new HexCodeGen();
             for(var i=0; i<= 0xFF;i++)
             {
                 yield return template.Instance(Name((byte)i), Kind((byte)i));
