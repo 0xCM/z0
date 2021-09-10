@@ -11,7 +11,7 @@ namespace Z0
     partial struct SpanRes
     {
         [Op]
-        public static ApiHostRes calculate(ApiHostBlocks src)
+        public static ApiHostRes hostres(ApiHostBlocks src)
         {
             var count = src.Length;
             var buffer = alloc<BinaryResSpec>(count);
@@ -26,15 +26,5 @@ namespace Z0
             return new ApiHostRes(src.Host, buffer);
         }
 
-        [Op]
-        public static ApiCodeRes calculate(ApiHostKey host, ReadOnlySpan<CodeBlock> src)
-        {
-            var count = src.Length;
-            var buffer = alloc<BinaryResSpec>(count);
-            var dst = span(buffer);
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = new BinaryResSpec(new ApiCodeKey(host,i).Format(), skip(src,i));
-            return new ApiCodeRes(host, buffer);
-        }
     }
 }

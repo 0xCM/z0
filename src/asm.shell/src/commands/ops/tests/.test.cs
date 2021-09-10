@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static core;
     using static AsmChecks;
     using static Root;
-    using static Blit;
+    using static BitFlow;
 
     partial class AsmCmdService
     {
@@ -31,7 +31,7 @@ namespace Z0.Asm
             {
                 buffer.Clear();
                 var bits = nbits(n, skip(cells,i));
-                var len = Blit.render(bits,buffer);
+                var len = BitFlow.render(bits,buffer);
                 slice(buffer,0,len);
                 Write(string.Format("{0} = {1}", bits.TypeName, text.format(slice(buffer,0,len))));
             }

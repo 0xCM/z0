@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using Asm;
-
     [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
     public struct AsmDataBlock
     {

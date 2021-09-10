@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         public struct u8 : IUnsigned<byte>
         {

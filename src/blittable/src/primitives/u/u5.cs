@@ -9,7 +9,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         /// <summary>
         /// Defines an unsigned 5-bit integer over parametric storage

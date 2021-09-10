@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector512<T> vbroadcast<T>(W512 w, T src)
             where T : unmanaged
-                => (vbroadcast(Part.w256,src), vbroadcast(Part.w256,src));
+                => (vbroadcast(w256,src), vbroadcast(w256,src));
 
         [MethodImpl(Inline)]
         static Vector128<T> vbroadcast_u<T>(W128 w, T src)

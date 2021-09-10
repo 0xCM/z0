@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         public struct i0<T> : ISigned<T>
             where T : unmanaged

@@ -5,7 +5,7 @@
 namespace Z0
 {
     using static core;
-    partial struct Blit
+    partial struct BitFlow
     {
         public struct i8<T> : ISigned<T>
             where T : unmanaged

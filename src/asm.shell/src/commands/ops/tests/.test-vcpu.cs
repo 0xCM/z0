@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static core;
     using static AsmChecks;
     using static Root;
-    using static Blit;
+    using static BitFlow;
 
     partial class AsmCmdService
     {

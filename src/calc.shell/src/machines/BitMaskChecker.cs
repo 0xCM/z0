@@ -77,10 +77,10 @@ namespace Z0
             Cases16 = source.Fill(z8, width<ushort>(w8), alloc<byte>(Reps));
             Cases32 = source.Fill(z8, width<uint>(w8), alloc<byte>(Reps));
             Cases64 = source.Fill(z8, width<uint>(w8), alloc<byte>(Reps));
-            Literals8 = ClrLiterals.tagged<byte>(Part.base2, typeof(BitMaskLiterals));
-            Literals16 = ClrLiterals.tagged<ushort>(Part.base2, typeof(BitMaskLiterals));
-            Literals32 = ClrLiterals.tagged<uint>(Part.base2, typeof(BitMaskLiterals));
-            Literals64 = ClrLiterals.tagged<ulong>(Part.base2, typeof(BitMaskLiterals));
+            Literals8 = ClrLiterals.tagged<byte>(base2, typeof(BitMaskLiterals));
+            Literals16 = ClrLiterals.tagged<ushort>(base2, typeof(BitMaskLiterals));
+            Literals32 = ClrLiterals.tagged<uint>(base2, typeof(BitMaskLiterals));
+            Literals64 = ClrLiterals.tagged<ulong>(base2, typeof(BitMaskLiterals));
             HiMaskResults8 = alloc<CheckHiMaskResult<byte>>(Reps);
             HiMaskResults16 = alloc<CheckHiMaskResult<ushort>>(Reps);
             HiMaskResults32 = alloc<CheckHiMaskResult<uint>>(Reps);
@@ -127,7 +127,7 @@ namespace Z0
             Init(source, log);
             var results = 0ul;
             var index = z8;
-            Check(Part.base2);
+            Check(base2);
             CheckLoMasks(ref index, ref results);
             CheckHiMasks();
             EmitReport(log);

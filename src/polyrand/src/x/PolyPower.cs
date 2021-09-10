@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class XSource
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Power<T>(this IDomainSource src, T t = default)
             where T : unmanaged
-                => Numeric.force<ulong,T>(Pow2.pow((byte)src.Log2(t)));
+                => NumericCast.force<ulong,T>(Pow2.pow((byte)src.Log2(t)));
 
         /// <summary>
         /// Produces a random power of 2 with specified min/max exponent values
@@ -35,7 +35,7 @@ namespace Z0
             where T : unmanaged
         {
             var exp = src.Next((byte)minexp, (byte)(maxexp + 1));
-            return Numeric.force<ulong,T>(Pow2.pow(exp));
+            return NumericCast.force<ulong,T>(Pow2.pow(exp));
         }
 
         /// <summary>

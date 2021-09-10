@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Part;
+    using static Root;
 
     public class t_vsub : t_inx<t_vsub>
     {

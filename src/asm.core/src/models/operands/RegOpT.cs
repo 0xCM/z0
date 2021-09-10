@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static Blit;
+    using static BitFlow;
 
     [Blittable(SZ)]
     public readonly struct RegOp<T> : IRegOp<T>

@@ -12,10 +12,7 @@ namespace Z0
     /// <summary>
     /// A numbered box
     /// </summary>
-    [
-        IdentityProvider(typeof(BoxedNumber)),
-        UserType(UserTypeId.BoxedNumberId)
-    ]
+    [IdentityProvider(typeof(BoxedNumber))]
     public readonly struct BoxedNumber : INumeric, IEquatable<BoxedNumber>, ITypeIdentityProvider<BoxedNumber>
     {
         public static BoxedNumberConverter Converter => default;

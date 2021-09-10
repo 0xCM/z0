@@ -5,6 +5,8 @@
 namespace Z0.Asm
 {
     using System;
+    using System.IO;
+    using llvm;
 
     using static core;
 
@@ -18,5 +20,42 @@ namespace Z0.Asm
             iter(entries, e => Write(e.OpUri));
             return result;
         }
+
+        [CmdOp(".emit-sym-index")]
+        Outcome EmitSymIndex(CmdArgs srgs)
+        {
+            var result = Outcome.Success;
+            var dst = Ws.Tables().Subdir("tmp") + FS.file("symindex", FS.Cs);
+            using var writer = dst.AsciWriter();
+            EmitSymIndex<AsmId>("AsmIdSymbols", writer);
+            return result;
+        }
+
+        Outcome EmitSymIndex<E>(Identifier container, StreamWriter dst)
+            where E : unmanaged, Enum
+        {
+            var result = Outcome.Success;
+            var buffer = text.buffer();
+            SpanRes.symrender<E>(container, buffer);
+            dst.WriteLine(buffer.Emit());
+            return result;
+        }
+
+       void EmitSymIndex<K>(FS.FilePath dst)
+            where K : unmanaged, Enum
+        {
+            var src = Symbols.index<K>().View;
+            var count = src.Length;
+            if(count != 0)
+            {
+                var flow = Wf.EmittingFile(dst);
+                using var writer = dst.Writer();
+                writer.WriteLine(Symbols.header());
+                for(var i=0; i<count; i++)
+                    writer.WriteLine(skip(src,i));
+                Wf.EmittedFile(flow, count);
+            }
+        }
+
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [MethodImpl(Inline), Op]
         public static uint deposit(uint width, ulong src, Span<bit> dst)

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         public static void render<T>(in bits<T> src, ITextBuffer dst)
             where T : unmanaged

@@ -11,7 +11,7 @@ namespace Z0
     public enum NumericBaseIndicator : ushort
     {
         None = 0,
-        
+
         /// <summary>
         /// Identifies base 2, binary
         /// </summary>
@@ -21,6 +21,11 @@ namespace Z0
         /// Identifies base 3, ternary
         /// </summary>
         Base3 = 't',
+
+        /// <summary>
+        /// Identifies base 3, quaternary
+        /// </summary>
+        Base4 = 'q',
 
         /// <summary>
         /// Identifies base 8, octal

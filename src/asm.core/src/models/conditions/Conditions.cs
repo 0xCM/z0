@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static core;
     using static ConditionCodes;
     using static ConditionCodes.ConditionFacets;
-    using static Blit;
+    using static BitFlow;
 
     [ApiComplete]
     public sealed class Conditions

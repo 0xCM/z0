@@ -8,7 +8,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [MethodImpl(Inline), Op]
         public static bv32 bv(N32 n, uint src)

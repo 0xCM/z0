@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct ScalarType

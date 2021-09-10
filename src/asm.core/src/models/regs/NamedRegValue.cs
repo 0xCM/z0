@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static Blit;
+    using static BitFlow;
 
     public readonly struct NamedRegValue<T>
         where T : unmanaged

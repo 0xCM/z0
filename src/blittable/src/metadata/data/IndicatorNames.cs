@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Blit
+    partial struct BitFlow
     {
         [LiteralProvider]
         public readonly struct IndicatorNames

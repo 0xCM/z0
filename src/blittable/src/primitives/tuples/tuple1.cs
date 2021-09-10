@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [MethodImpl(Inline)]
         public static tuple<T0> t1<T0>(T0 a0 = default)

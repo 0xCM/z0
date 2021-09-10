@@ -6,7 +6,7 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [Free]
         public interface IBlock : IPrimitive

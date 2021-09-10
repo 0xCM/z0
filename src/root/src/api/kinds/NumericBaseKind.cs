@@ -10,7 +10,7 @@ namespace Z0
     public enum NumericBaseKind : uint
     {
         None = 0,
-        
+
         /// <summary>
         /// Identifies base 2, binary
         /// </summary>
@@ -20,6 +20,11 @@ namespace Z0
         /// Identifies base 3, ternary
         /// </summary>
         Base3 = 3,
+
+        /// <summary>
+        /// Identifies base 4, quternary
+        /// </summary>
+        Base4 = 4,
 
         /// <summary>
         /// Identifies base 8, octal

@@ -10,12 +10,12 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        Index<HostAsmRecord> LoadHostAsm()
+        Index<HostAsmRecord> LoadHostAsmRows()
             => AsmEtl.LoadHostAsmRows(ApiArchive.HostAsm());
 
-        Index<AsmDataBlock> LoadAsmBlocks()
+        Index<AsmDataBlock> DistillHostAsmBlocks()
         {
-            var hostasm = State.HostAsm(LoadHostAsm);
+            var hostasm = State.HostAsm(LoadHostAsmRows);
             var count = hostasm.Length;
             var buffer = alloc<AsmDataBlock>(count);
             ref var records = ref first(buffer);
@@ -27,7 +27,6 @@ namespace Z0.Asm
                 ref readonly var src = ref skip(hostasm,i);
                 ref readonly var BlockAddress = ref src.BlockAddress;
                 ref readonly var Expression = ref src.Expression;
-
                 var newblock = (block != BlockAddress);
                 if(!newblock && skipping)
                     continue;
@@ -56,16 +55,20 @@ namespace Z0.Asm
                 dst.OpCode = src.OpCode.Format();
             }
 
-            var path = Ws.Gen().Subdir("csv") + Tables.filename<AsmDataBlock>();
-            TableEmit(slice(@readonly(buffer), 0, key), AsmDataBlock.RenderWidths, TextEncodingKind.Unicode, path);
-            return buffer;
+            return slice(@readonly(buffer), 0, key).ToArray();
+        }
+
+        void EmitHostAsmBlocks(ReadOnlySpan<AsmDataBlock> src, FS.FilePath dst)
+        {
+            TableEmit(src, AsmDataBlock.RenderWidths, TextEncodingKind.Unicode, dst);
         }
 
         [CmdOp(".api-asm")]
         Outcome ApiAsm(CmdArgs args)
         {
             var result = Outcome.Success;
-            var blocks = State.Records(LoadAsmBlocks);
+            var dst = Ws.Gen().Subdir("csv") + Tables.filename<AsmDataBlock>();
+            EmitHostAsmBlocks(State.Records(DistillHostAsmBlocks),dst);
             return result;
         }
     }

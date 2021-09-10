@@ -5,7 +5,7 @@
 namespace Z0
 {
 
-    using static Part;
+    using static Root;
 
     public class t_natmod : t_gmath<t_natmod>
     {

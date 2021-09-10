@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-
     public class t_vor : t_inx<t_vor>
     {
         public void vor_check()

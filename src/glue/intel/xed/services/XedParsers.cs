@@ -240,7 +240,7 @@ namespace Z0.Asm
 
                 var i=0u;
                 ref var target = ref seek(dst,tables++);
-                outcome = ParseDigits(line, ref i, out target.Instruction.Sequence);
+                outcome = SP.digits(base10, line, ref i, out target.Instruction.Sequence);
                 if(outcome.Fail)
                 {
                     Error(outcome.Message);
@@ -248,33 +248,6 @@ namespace Z0.Asm
                 }
             }
             return slice(dst, 0, tables);
-        }
-
-        /// <summary>
-        /// Parsed the leading digit sequence of a given row
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        Outcome ParseDigits(in AsciLine src, ref uint i, out ushort dst)
-        {
-            var i0 = i;
-            var result = Outcome.Success;
-            dst = default;
-            var data = slice(src.Codes, i);
-            var length = data.Length;
-            for(; i<length; i++)
-            {
-                ref readonly var c = ref skip(data,i);
-                if(SQ.whitespace(c))
-                    continue;
-
-                if(SQ.digit(base10, c))
-                {
-                    result = SP.parse(base10, slice(data,i), out dst);
-                    break;
-                }
-            }
-            return result;
         }
     }
 }

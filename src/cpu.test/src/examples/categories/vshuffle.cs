@@ -11,7 +11,7 @@ namespace Z0
 
     using static HexConst;
     using static cpu;
-    using static Part;
+    using static Root;
 
     partial class VexExamples
     {

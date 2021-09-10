@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Blit
+    partial struct BitFlow
     {
         public struct i7<T> : ISigned<T>
             where T : unmanaged

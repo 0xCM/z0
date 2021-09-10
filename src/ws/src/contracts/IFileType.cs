@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Blit;
+    using static BitFlow;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 

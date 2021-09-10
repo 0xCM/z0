@@ -40,7 +40,7 @@ namespace Z0.Asm
             var dst = list<AsmJmpRow>();
             for(var i=0u; i<src.Length; i++)
             {
-                var routine = root.require(skip(src, i));
+                var routine = require(skip(src, i));
                 var count = routine.InstructionCount;
                 var instructions = routine.Instructions.View;
                 for(var j=0; j<count; j++)

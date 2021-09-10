@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     /// <summary>
     /// Defines an untyped comparison expression
@@ -37,8 +38,8 @@ namespace Z0
         public ComparisonExpr(ApiComparisonClass kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
         {
             ComparisonKind = kind;
-            Lhs = root.require(lhs);
-            Rhs = root.require(rhs);
+            Lhs = require(lhs);
+            Rhs = require(rhs);
             _Vars = vars;
         }
 
@@ -50,14 +51,14 @@ namespace Z0
 
         public void SetVars(params ILogicExpr[] values)
         {
-            var count = core.min(_Vars.Length, values.Length);
+            var count = min(_Vars.Length, values.Length);
             for(var i=0; i<count; i++)
                 _Vars[i].Set(values[i]);
         }
 
         public byte SetVars(ILiteralLogicSeqExpr values)
         {
-            var count = core.min(VarCount, (byte)values.Length);
+            var count = min(VarCount, (byte)values.Length);
             for(var i=0; i<count; i++)
                 _Vars[i].Set(values[i]);
             return count;
@@ -65,7 +66,7 @@ namespace Z0
 
         public byte SetVars(params bit[] values)
         {
-            var count = core.min(VarCount, (byte)values.Length);
+            var count = min(VarCount, (byte)values.Length);
             for(var i=0; i<count; i++)
                 _Vars[i].Set(values[i]);
             return count;

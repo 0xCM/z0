@@ -9,7 +9,7 @@ namespace Z0
     using static Root;
     using static LiteralKind;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         partial struct Meta
         {

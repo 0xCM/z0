@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Part;
+    using static Root;
 
     public class t_natmath : UnitTest<t_natmath>
     {

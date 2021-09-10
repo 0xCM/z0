@@ -9,7 +9,8 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
+    using static core;
 
     [ApiHost]
     public static class LogicEngine
@@ -22,7 +23,7 @@ namespace Z0.Logix
         /// <param name="expr">The expression to evaluate</param>
         [Op]
         public static bit eval(ILogicExpr expr)
-            => LogicExprEval.eval(root.require(expr));
+            => LogicExprEval.eval(require(expr));
 
         /// <summary>
         /// Evaluates a typed logic expression
@@ -31,7 +32,7 @@ namespace Z0.Logix
         [Op, Closures(Closure)]
         public static bit eval<T>(ILogicExpr<T> expr)
             where T : unmanaged
-                => LogicExprEval.eval(root.require(expr));
+                => LogicExprEval.eval(require(expr));
 
         /// <summary>
         /// Evaluates a typed scalar expression
@@ -40,7 +41,7 @@ namespace Z0.Logix
         [Op, Closures(Closure)]
         public static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged
-                => ScalarExprEval.eval(root.require(expr));
+                => ScalarExprEval.eval(require(expr));
 
         /// <summary>
         /// Evaluates a comparison expression, returning literal expression over the comparison type
@@ -51,7 +52,7 @@ namespace Z0.Logix
         [Op, Closures(Closure)]
         public static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
-                => CmpExprEval.eval(root.require(expr));
+                => CmpExprEval.eval(require(expr));
 
         /// <summary>
         /// Evaluates a comparison expression over 128-bit intrinsic vectors
@@ -61,7 +62,7 @@ namespace Z0.Logix
         [Op, Closures(Closure)]
         public static LiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
             where T : unmanaged
-                => CmpExprEval.eval(root.require(expr));
+                => CmpExprEval.eval(require(expr));
 
         /// <summary>
         /// Evaluates a comparison expression over 256-bit intrinsic vectors
@@ -71,7 +72,7 @@ namespace Z0.Logix
         [Op, Closures(Closure)]
         public static LiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
             where T : unmanaged
-                => CmpExprEval.eval(root.require(expr));
+                => CmpExprEval.eval(require(expr));
 
         /// <summary>
         /// Evaluates a comparison predicate, returning an enabled bit if the comparison succeeds and
@@ -82,7 +83,7 @@ namespace Z0.Logix
         [Op, Closures(Closure)]
         public static bit eval<T>(IComparisonPredExpr<T> expr)
             where T : unmanaged
-                => CmpExprEval.eval(root.require(expr));
+                => CmpExprEval.eval(require(expr));
 
         /// <summary>
         /// Evaluates a typed scalar expression
@@ -91,7 +92,7 @@ namespace Z0.Logix
         [Op, Closures(Closure)]
         public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
             where T : unmanaged
-                => ArithExprEval.eval(root.require(expr));
+                => ArithExprEval.eval(require(expr));
 
         /// <summary>
         /// Evaluates a typed 128-bit intrinsic expression
@@ -100,7 +101,7 @@ namespace Z0.Logix
         [Op, Closures(Closure)]
         public static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
-                => VectorExprEval.eval(root.require(expr));
+                => VectorExprEval.eval(require(expr));
 
         /// <summary>
         /// Evaluates a typed 256-bit intrinsic expression
@@ -109,7 +110,7 @@ namespace Z0.Logix
         [Op, Closures(Closure)]
         public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
-                => VectorExprEval.eval(root.require(expr));
+                => VectorExprEval.eval(require(expr));
 
         /// <summary>
         /// Returns an enabled bit if the equality expression is satisfied with

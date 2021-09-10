@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [MethodImpl(Inline)]
         public static bits<N,T> nbits<N,T>(N n, T value)

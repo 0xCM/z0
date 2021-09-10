@@ -13,6 +13,12 @@ namespace Z0
     {
         public static Base8 Base => default;
 
+        public NumericBaseKind Modulus
+            => NumericBaseKind.Base8;
+
+        public NumericBaseIndicator Indicator
+            => NumericBaseIndicator.Base8;
+
         [MethodImpl(Inline)]
         public static implicit operator int(Base8 src)
             => (int)src.Modulus;
@@ -20,11 +26,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator NumericBaseKind(Base8 src)
             => src.Modulus;
-
-        public NumericBaseKind Modulus
-            => NumericBaseKind.Base8;
-
-        public NumericBaseIndicator Indicator
-            => NumericBaseIndicator.Base8;
     }
 }

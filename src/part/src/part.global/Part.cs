@@ -10,10 +10,6 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Part
     {
-        /// <summary>
-        /// Retrieves the part identifier, if any, of the entry assembly
-        /// </summary>
-        public static PartId ExecutingPart
-            => Root.id(Assembly.GetEntryAssembly());
+
     }
 }

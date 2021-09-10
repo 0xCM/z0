@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-
     public class t_vselect : t_inx<t_vselect>
     {
         public void vselect_check()

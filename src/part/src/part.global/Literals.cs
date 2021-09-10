@@ -19,41 +19,6 @@ namespace Z0
         public const string EmptyString = "";
 
         /// <summary>
-        /// The number of bytes in a page of memory
-        /// </summary>
-        public const ushort PageSize = 0x1000;
-
-        /// <summary>
-        /// An abbreviation for the ridiculously long "StringComparison.InvariantCultureIgnoreCase"
-        /// </summary>
-        public const StringComparison NoCase = StringComparison.InvariantCultureIgnoreCase;
-
-        /// <summary>
-        /// An abbreviation for the somewhat verbose "StringComparison.InvariantCulture"
-        /// </summary>
-        public const StringComparison Cased = StringComparison.InvariantCulture;
-
-        /// <summary>
-        /// The end-of-line escape sequence
-        /// </summary>
-        public const string Eol = Chars.Eol;
-
-        /// <summary>
-        /// The default delimiter to use when formatting structured text
-        /// </summary>
-        public const char FieldDelimiter = Chars.Pipe;
-
-        /// <summary>
-        /// What else could this be?
-        /// </summary>
-        public const char Space = ' ';
-
-        /// <summary>
-        /// Evidence of absence
-        /// </summary>
-        public const byte AsciNone = (byte)AsciCode.Null;
-
-        /// <summary>
         /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field
         /// </summary>
         public const int WidthOffset = 16;
@@ -88,45 +53,5 @@ namespace Z0
         /// and is placed in ECX/RCX
         /// </summary>
         public const CC ThisCall = CC.ThisCall;
-
-        /// <summary>
-        /// Canonical return value for search operation that returns a nonnegative value upon success
-        /// </summary>
-        public const int NotFound = -1;
-
-        /// <summary>
-        /// Uppercase letter classifier accessor
-        /// </summary>
-        public static UpperCased UpperCase => default;
-
-        /// <summary>
-        /// Lowercase letter classifier accessor
-        /// </summary>
-        public static LowerCased LowerCase => default;
-
-        /// <summary>
-        /// Species the base2 singleton representative
-        /// </summary>
-        public static Base2 base2 => default;
-
-        /// <summary>
-        /// Species the base8 singleton representative
-        /// </summary>
-        public static Base3 base3 => default;
-
-        /// <summary>
-        /// Species the base8 singleton representative
-        /// </summary>
-        public static Base8 base8 => default;
-
-        /// <summary>
-        /// Species the base10 singleton representative
-        /// </summary>
-        public static Base10 base10 => default;
-
-        /// <summary>
-        /// Species the base16 singleton representative
-        /// </summary>
-        public static Base16 base16 => default;
     }
 }

@@ -5,7 +5,7 @@
 namespace Z0
 {
 
-    using static memory;
+    using static core;
 
     public class t_ntz : t_bits<t_ntz>
     {

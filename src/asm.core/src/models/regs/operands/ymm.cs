@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Blit;
+    using static BitFlow;
 
     using I = RegIndexCode;
     using G = AsmOperands.ymm;

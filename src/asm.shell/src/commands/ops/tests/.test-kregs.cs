@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static Blit;
+    using static BitFlow;
     using static RegClasses;
     using static RegMachines;
 

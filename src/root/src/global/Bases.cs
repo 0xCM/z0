@@ -12,9 +12,14 @@ namespace Z0
         public static Base2 base2 => default;
 
         /// <summary>
-        /// Species the base8 singleton representative
+        /// Species the base3 singleton representative
         /// </summary>
         public static Base3 base3 => default;
+
+        /// <summary>
+        /// Species the base4 singleton representative
+        /// </summary>
+        public static Base4 base4 => default;
 
         /// <summary>
         /// Species the base8 singleton representative

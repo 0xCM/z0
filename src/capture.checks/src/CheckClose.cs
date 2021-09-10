@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
     using static ErrorMsg;
 
     using api = ClaimValidator;

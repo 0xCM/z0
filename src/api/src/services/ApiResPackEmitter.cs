@@ -91,7 +91,7 @@ namespace Z0
                 return ApiHostRes.Empty;
             }
 
-            var resources = SpanRes.calculate(src);
+            var resources = SpanRes.hostres(src);
             var hostname = src.Host.HostName.ReplaceAny(array('.'), '_');
             var typename = string.Concat(src.Host.Part.Format(), Chars.Underscore, hostname);
             var members = hashset<string>();

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class BitMatrixA
     {

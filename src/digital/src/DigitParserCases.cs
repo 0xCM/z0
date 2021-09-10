@@ -21,7 +21,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var @case = ref skip(cases,i);
-                DigitParser.digit(@case.Base, @case.Input, out var d);
+                Digital.digit(@case.Base, @case.Input, out var d);
                 seek(dst,i) = new DigitParserResult(@case, d);
             }
 

@@ -12,6 +12,20 @@ namespace Z0
 
     public readonly struct PartResolution
     {
+        /// <summary>
+        /// Retrieves the part identifier, if any, of the entry assembly
+        /// </summary>
+        public static PartId Executing
+            => id(Assembly.GetEntryAssembly());
+
+        public static PartId id(Assembly src)
+        {
+            if(src != null && Attribute.IsDefined(src, typeof(PartIdAttribute)))
+                return ((PartIdAttribute)Attribute.GetCustomAttribute(src, typeof(PartIdAttribute))).Id;
+            else
+                return PartId.None;
+        }
+
         public static bool resolve(Type type, out IPart part)
         {
             try
@@ -48,7 +62,7 @@ namespace Z0
         protected Part()
         {
             Owner = typeof(P).Assembly;
-            Id =  id(Owner);
+            Id =  PartResolution.id(Owner);
         }
 
         public virtual IPartExecutor Executor
@@ -73,7 +87,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(Id);
+            => Id.Format();
 
         public override string ToString()
             => Format();

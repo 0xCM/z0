@@ -7,7 +7,7 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public readonly partial struct Blit
+    public readonly partial struct BitFlow
     {
         const NumericKind Closure = UnsignedInts;
 

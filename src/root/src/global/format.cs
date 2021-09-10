@@ -12,9 +12,5 @@ namespace Z0
         [Op]
         public static string name(Assembly src)
             => src.GetName().Name;
-
-        [Op]
-        public static string format(PartId src)
-            => src.ToString();
     }
 }

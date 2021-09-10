@@ -6,7 +6,7 @@ namespace Z0
 {
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [ApiComplete]
         public readonly struct Example

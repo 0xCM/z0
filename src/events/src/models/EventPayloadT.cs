@@ -38,7 +38,7 @@ namespace Z0
         public T Data
         {
             [MethodImpl(Inline), Op]
-            get => root.require(_Data);
+            get => core.require(_Data);
         }
 
         [MethodImpl(Inline)]

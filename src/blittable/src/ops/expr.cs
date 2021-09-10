@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [MethodImpl(Inline),Op, Closures(Closure)]
         public static uint expr<T>(in Symbols<T> src, Span<text7> dst)

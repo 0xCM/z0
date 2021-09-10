@@ -450,14 +450,6 @@ namespace Z0.Asm
         }
 
 
-        void EmitSymbolIndex<E>(Identifier container)
-            where E : unmanaged, Enum
-        {
-            var buffer = text.buffer();
-            SpanRes.symrender<E>(container, buffer);
-            Wf.Row(buffer.Emit());
-        }
-
         void Dispatch(string cmd, CmdArgs args)
         {
             var commands = Wf.GlobalCommands();

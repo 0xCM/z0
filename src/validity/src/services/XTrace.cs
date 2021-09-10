@@ -14,7 +14,7 @@ namespace Z0
             => TestContext.fieldwidth(TestCaseField.CaseName);
 
         public static string TracePrefix(object title, Type host, string caller)
-            => string.Concat(Part.ExecutingPart.Format(), Chars.FSlash, host.Name, Chars.FSlash, caller, Chars.LBrace, title, Chars.RBrace).PadRight(CasePadding);
+            => string.Concat(PartResolution.Executing.Format(), Chars.FSlash, host.Name, Chars.FSlash, caller, Chars.LBrace, title, Chars.RBrace).PadRight(CasePadding);
 
         public static IAppMsg TraceMsg(object title, object msg, Type host, string caller, FlairKind color)
             => AppMsg.colorize(string.Concat(TracePrefix(title, host, caller), Chars.Pipe, Chars.Space, msg), color);

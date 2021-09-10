@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         /// <summary>
         /// Defines a function fx8:u8->T
@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             f.SrcMap.Clear();
-            var count = min(min(src.Length, dst.Length), Blit.fx16<ushort,T>.Capacity);
+            var count = min(min(src.Length, dst.Length), BitFlow.fx16<ushort,T>.Capacity);
             f.Size = (uint)count;
             for(var i=0; i<count; i++)
             {

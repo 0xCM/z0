@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using static Blit;
+    using static BitFlow;
 
     public class BlitMachine : AppService<BlitMachine>
     {

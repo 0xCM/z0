@@ -13,6 +13,12 @@ namespace Z0
     {
         public static Base3 Base => default;
 
+        public NumericBaseKind Modulus
+            => NumericBaseKind.Base3;
+
+        public NumericBaseIndicator Indicator
+            => NumericBaseIndicator.Base3;
+
         [MethodImpl(Inline)]
         public static implicit operator int(Base3 src)
             => (int)src.Modulus;
@@ -20,11 +26,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator NumericBaseKind(Base3 src)
             => src.Modulus;
-
-        public NumericBaseKind Modulus
-            => NumericBaseKind.Base3;
-
-        public NumericBaseIndicator Indicator
-            => NumericBaseIndicator.Base3;
     }
 }

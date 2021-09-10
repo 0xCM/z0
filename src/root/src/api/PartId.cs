@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Root.format(Id);
+            => Id.Format();
 
         public override string ToString()
             => Format();

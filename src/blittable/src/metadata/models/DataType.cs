@@ -11,9 +11,9 @@ namespace Z0
     using static Root;
     using static core;
     using static BlittableKind;
-    using static Blit.Meta;
+    using static BitFlow.Meta;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [MethodImpl(Inline), Op]
         public static DataType type(BlittableKind kind, BitWidth content, BitWidth storage)

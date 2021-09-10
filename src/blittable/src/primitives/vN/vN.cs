@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [MethodImpl(Inline)]
         public static vector<N,T> v<N,T>(N n, T[] src)
@@ -18,7 +18,7 @@ namespace Z0
             where T : unmanaged
         {
             if(Typed.nat32i<N>() != src.Length)
-                return Blit.vector<N,T>.Empty;
+                return BitFlow.vector<N,T>.Empty;
             else
                 return new vector<N,T>(src);
         }

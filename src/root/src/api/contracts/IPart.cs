@@ -24,7 +24,7 @@ namespace Z0
         /// The part identifier, known from the assembly
         /// </summary>
         PartId IPartId.Id
-            => Root.id(Owner);
+            => PartResolution.id(Owner);
     }
 
     public interface IPart<P> : IPart, IPartId<P>, IEquatable<P>

@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static v16<T> v<T>(N16 n)

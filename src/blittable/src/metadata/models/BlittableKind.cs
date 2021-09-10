@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using N = Blit.IndicatorNames;
+    using N = BitFlow.IndicatorNames;
 
     [SymSource]
     public enum BlittableKind : byte

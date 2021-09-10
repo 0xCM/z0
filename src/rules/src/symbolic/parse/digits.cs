@@ -10,14 +10,13 @@ namespace Z0
     using static Root;
     using static core;
 
-    using C = AsciCode;
     using SQ = SymbolicQuery;
     using SC = SymbolicCalcs;
 
     partial struct SymbolicParse
     {
         [Op]
-        public static int EatWhitespace(ReadOnlySpan<AsciCode> src)
+        public static int SkipWhitespace(ReadOnlySpan<AsciCode> src)
         {
             var count = src.Length;
             var i=0;
@@ -31,24 +30,32 @@ namespace Z0
             return NotFound;
         }
 
-        [Op]
-        public static uint digits(Base10 @base, ReadOnlySpan<char> src, uint offset, Span<byte> dst)
+
+        /// <summary>
+        /// Parsed the leading digit sequence of a given row
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        public static Outcome digits(Base10 @base, in AsciLine src, ref uint i, out ushort dst)
         {
-            var i=offset;
-            var j=0u;
-            var imax = src.Length - 1;
-            while(i <= imax)
+            var i0 = i;
+            var result = Outcome.Success;
+            dst = default;
+            var data = slice(src.Codes, i);
+            var length = data.Length;
+            for(; i<length; i++)
             {
-                ref readonly var c = ref skip(src, i++);
-                if(SQ.space(c) && j==0)
+                ref readonly var c = ref skip(data,i);
+                if(SQ.whitespace(c))
                     continue;
 
                 if(SQ.digit(@base, c))
-                    seek(dst, j++) = C.d9 - (C)c;
-                else
+                {
+                    result = parse(@base, slice(data,i), out dst);
                     break;
+                }
             }
-            return j;
+            return result;
         }
 
         [Op]

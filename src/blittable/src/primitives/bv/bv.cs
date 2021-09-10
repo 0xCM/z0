@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [MethodImpl(Inline), Op]
         public static gbv<ByteBlock8> bv(uint n, ByteBlock8 src)

@@ -59,7 +59,7 @@ namespace Z0
         public static void render<T>(uint margin, SymSpanSpec<T> src, ITextBuffer dst)
             where T : unmanaged
         {
-            var tmp = TextTools.buffer();
+            var tmp = text.buffer();
             tmp.Append("public");
             tmp.Append(Chars.Space);
             tmp.Append(src.IsStatic ? RP.rspace("static") : EmptyString);

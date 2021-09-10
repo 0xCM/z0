@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static g3x3<T> grid3x3<T>(ReadOnlySpan<T> src)

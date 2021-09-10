@@ -9,7 +9,7 @@ namespace Z0.Vdsl
 
     using static Root;
     using static core;
-    using static Blit;
+    using static BitFlow;
 
     partial struct Intrinsics
     {

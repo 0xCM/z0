@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<T> zero<T>(N16 w)
             where T : unmanaged
-                => new BitGrid16<T>(Part.z16);
+                => new BitGrid16<T>(Root.z16);
 
         /// <summary>
         /// Creates a zero-filled 32-bit grid of caller-interpreted dimension
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<T> zero<T>(N32 w)
             where T : unmanaged
-               => new BitGrid32<T>(Part.z32);
+               => new BitGrid32<T>(Root.z32);
 
         /// <summary>
         /// Creates a zero-filled 64-bit grid of caller-interpreted dimension
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Alloc, Closures(Closure)]
         public static BitGrid64<T> zero<T>(N64 w)
             where T : unmanaged
-               => new BitGrid64<T>(Part.z64);
+               => new BitGrid64<T>(Root.z64);
 
         /// <summary>
         /// Allocates a zero-filled 1x16 grid

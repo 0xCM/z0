@@ -8,7 +8,7 @@ namespace Z0
 
     using K = BlittableKind;
 
-    partial struct Blit
+    partial struct BitFlow
     {
         partial struct Meta
         {
