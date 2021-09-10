@@ -33,9 +33,5 @@ namespace Z0
             Env = env;
             EventSink = sink;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ServiceContext((IEnvProvider env, IEventSink sink) src)
-            => new ServiceContext(src.env, src.sink);
     }
 }

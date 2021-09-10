@@ -45,6 +45,4 @@ namespace Z0
         public int CompareTo(PageBlockInfo src)
             => BaseAddress.CompareTo(src.BaseAddress);
     }
-
-
 }

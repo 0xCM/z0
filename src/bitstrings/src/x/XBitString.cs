@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public static class XBitString
     {

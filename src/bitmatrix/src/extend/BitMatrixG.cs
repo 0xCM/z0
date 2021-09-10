@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public static class BitMatrixGx
     {
@@ -29,7 +29,5 @@ namespace Z0
         public static BitMatrix<T> Replicate<T>(this BitMatrix<T> A)
             where T : unmanaged
                 => new BitMatrix<T>(A.Content.Replicate());
-
-
     }
 }

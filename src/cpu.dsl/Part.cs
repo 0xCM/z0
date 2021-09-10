@@ -12,16 +12,3 @@ namespace Z0.Parts
 
     }
 }
-
-namespace Z0
-{
-
-    class App
-    {
-
-        public static void Main(string[] args)
-        {
-            term.announce();
-        }
-    }
-}

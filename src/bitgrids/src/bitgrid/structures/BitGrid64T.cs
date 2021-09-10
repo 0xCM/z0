@@ -76,11 +76,11 @@ namespace Z0
             where U : unmanaged
                 => new BitGrid64<U>(Data);
 
-        public override bool Equals(object obj)
-            => throw new NotSupportedException();
+        public override bool Equals(object src)
+            => src is BitGrid64<T> x && Equals(x);
 
         public override int GetHashCode()
-            => throw new NotSupportedException();
+            => (int)alg.hash.calc(Data);
 
         [MethodImpl(Inline)]
         public static implicit operator ulong(BitGrid64<T> src)

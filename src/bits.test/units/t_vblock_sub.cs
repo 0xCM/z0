@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using VecLen = NatSeq<N1,N2,N3>;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class vblock_sub : UnitTest<vblock_sub>
     {

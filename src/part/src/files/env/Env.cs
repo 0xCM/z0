@@ -13,11 +13,8 @@ namespace Z0
 
     using N = EnvVarNames;
 
-    public class Env
+    public class Env : IEnvProvider
     {
-        public PartId AppId
-            => Assembly.GetEntryAssembly().Id();
-
         public static Env load()
             => new Env();
 
@@ -28,6 +25,10 @@ namespace Z0
                  dst.Add(new EnvVar(kv.Key?.ToString() ?? EmptyString, kv.Value?.ToString() ?? EmptyString));
             return dst.ViewDeposited();
         }
+
+        public PartId AppId
+            => Assembly.GetEntryAssembly().Id();
+
 
         Env()
         {
@@ -120,6 +121,9 @@ namespace Z0
 
         public ReadOnlySpan<IEnvVar> Provided
             => Members(this);
+
+        EnvData IEnvProvider.Env
+            => Data;
 
         [Op]
         static EnvDirVar dir(string name)

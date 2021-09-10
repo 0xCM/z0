@@ -31,15 +31,5 @@ namespace Z0
         public static ref T edit<S,T>(in S src)
             => ref As<S,T>(ref AsRef(src));
 
-        /// <summary>
-        /// Transforms a readonly S-cell into an editable T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <param name="dst">The target cell</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T edit<S,T>(in S src, ref T dst)
-            => ref As<S,T>(ref AsRef(src));
     }
 }

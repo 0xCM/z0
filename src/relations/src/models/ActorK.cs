@@ -8,34 +8,28 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Actor : IActor
+    public readonly struct Actor<K> : IActor<K>
+        where K : unmanaged
     {
-        public readonly StringAddress Name;
+        public readonly K Kind;
 
         [MethodImpl(Inline)]
-        public Actor(string name)
+        public Actor(K kind)
         {
-            Name = name;
+            Kind = kind;
         }
 
-        [MethodImpl(Inline)]
-        public Actor(StringAddress name)
-        {
-            Name = name;
-        }
+        K IActor<K>.Kind
+            => Kind;
 
-        string IActor.Name
-            => Name.Format();
-
-        [MethodImpl(Inline)]
         public string Format()
-            => Name.Format();
+            => Kind.ToString();
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator Actor(string name)
-            => new Actor(name);
+        public static implicit operator Actor<K>(K kind)
+            => new Actor<K>(kind);
     }
 }

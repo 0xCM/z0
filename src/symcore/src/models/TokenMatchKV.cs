@@ -10,22 +10,22 @@ namespace Z0
     using static Root;
     using static core;
 
-    public readonly struct TokenMatch<K,V>
+    public readonly struct TokenMatch<K>
         where K : unmanaged
     {
         public readonly K Kind;
 
-        public readonly V Value;
+        public readonly uint Key;
 
         [MethodImpl(Inline)]
-        public TokenMatch(K kind, V value)
+        public TokenMatch(K kind, uint key)
         {
             Kind = kind;
-            Value = value;
+            Key = key;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator TokenMatch<K,V>((K kind, V value) src)
-            => new TokenMatch<K,V>(src.kind, src.value);
+        public static implicit operator TokenMatch<K>((K kind, uint index) src)
+            => new TokenMatch<K>(src.kind, src.index);
     }
 }

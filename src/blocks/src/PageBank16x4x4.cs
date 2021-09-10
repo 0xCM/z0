@@ -11,12 +11,27 @@ namespace Z0
     using static Root;
     using static core;
     using static PageBlocks;
+    using B = PageBlocks.PageBlock16x4;
 
     [ApiHost]
-    public class PageBanks
+    public class PageBank16x4x4
     {
-        public static PageBanks service()
+        public static PageBank16x4x4 allocated()
             => Instance;
+
+        public const uint BlockCount = 8;
+
+        public const uint BlockSize = B.SZ;
+
+        public const uint BankSize = BlockCount*BlockSize;
+
+        public const uint TotalPageCount = B.PageCount*BlockCount;
+
+        public const uint PagesPerBlock = B.PageCount;
+
+        [MethodImpl(Inline), Op]
+        public PageBlock Block(byte index)
+            => new PageBlock(BlockIndex[index]);
 
         [MethodImpl(Inline), Op]
         public PageBlock Block(N0 n)
@@ -34,18 +49,15 @@ namespace Z0
         public PageBlock Block(N3 n)
             => new PageBlock(BlockIndex[3]);
 
-        public ByteSize BlockSize => _BlockSize;
-
-        internal static void alloc<N,T>(N n, out PageBank<N,T> dst)
-            where T : unmanaged, IPageBlock<T>
-            where N : unmanaged, ITypeNat
-        {
-            dst = default;
-        }
+        [MethodImpl(Inline), Op]
+        public ref readonly PageBankInfo Describe()
+            => ref Description;
 
         Index<MemoryRange> BlockIndex;
 
-        PageBanks()
+        PageBankInfo Description;
+
+        PageBank16x4x4()
         {
             BlockIndex = new MemoryRange[4];
             ref var dst = ref BlockIndex.First;
@@ -53,31 +65,37 @@ namespace Z0
             seek(dst,1) = new MemoryRange(address(Block16x4x1), _BlockSize);
             seek(dst,2) = new MemoryRange(address(Block16x4x2), _BlockSize);
             seek(dst,3) = new MemoryRange(address(Block16x4x3), _BlockSize);
+            WinMem.liberate(address(Block16x4x0), size<B>());
+            WinMem.liberate(address(Block16x4x1), size<B>());
+            WinMem.liberate(address(Block16x4x2), size<B>());
+            WinMem.liberate(address(Block16x4x3), size<B>());
+            Description.BankSize = BankSize;
+            Description.BlockCount = BlockCount;
+            Description.BlockSize = BlockSize;
+            Description.PageSize = PageBlocks.PageSize;
+            Description.PagesPerBlock = PagesPerBlock;
+            Description.TotalPageCount = TotalPageCount;
         }
 
-        static PageBanks()
+        static PageBank16x4x4()
         {
-            WinMem.liberate(address(Block16x4x0), size<PageBlock16x4>());
-            WinMem.liberate(address(Block16x4x1), size<PageBlock16x4>());
-            WinMem.liberate(address(Block16x4x2), size<PageBlock16x4>());
-            WinMem.liberate(address(Block16x4x3), size<PageBlock16x4>());
-            Instance = new PageBanks();
+            Instance = new PageBank16x4x4();
         }
 
-        static ByteSize _BlockSize => size<PageBlock16x4>();
+        static ByteSize _BlockSize => size<B>();
 
-        static PageBanks Instance;
-
-        [FixedAddressValueType]
-        static PageBlock16x4 Block16x4x0;
+        static PageBank16x4x4 Instance;
 
         [FixedAddressValueType]
-        static PageBlock16x4 Block16x4x1;
+        static B Block16x4x0;
 
         [FixedAddressValueType]
-        static PageBlock16x4 Block16x4x2;
+        static B Block16x4x1;
 
         [FixedAddressValueType]
-        static PageBlock16x4 Block16x4x3;
+        static B Block16x4x2;
+
+        [FixedAddressValueType]
+        static B Block16x4x3;
     }
 }

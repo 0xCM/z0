@@ -16,6 +16,7 @@
     <ProjectReference Include="$(SymCore)" />
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Xml)" />
+    <ProjectReference Include="$(BitGrids)" />
   </ItemGroup>
 
 </Project>

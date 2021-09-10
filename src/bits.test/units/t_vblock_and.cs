@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-    using static memory;
+    using static core;
 
     public class t_vblock_and : UnitTest<t_vblock_and>
     {

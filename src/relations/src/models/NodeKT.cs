@@ -12,15 +12,15 @@ namespace Z0
     /// <summary>
     /// Defines a vertex to which data may be attached
     /// </summary>
-    /// <typeparam name="I">The vertex index type</typeparam>
+    /// <typeparam name="K">The vertex index type</typeparam>
     /// <typeparam name="T">The payload type</typeparam>
-    public readonly struct Node<I,T>
-        where I : unmanaged
+    public readonly struct Node<K,T>
+        where K : unmanaged
     {
         /// <summary>
         /// The index of the vertex that uniquely identifies it within a graph
         /// </summary>
-        public I Index {get;}
+        public K Index {get;}
 
         /// <summary>
         /// The vertex payload
@@ -28,28 +28,28 @@ namespace Z0
         public T Content {get;}
 
         [MethodImpl(Inline)]
-        public Node(I index, T content)
+        public Node(K index, T content)
         {
             Index = index;
             Content = content;
         }
 
         public string Format()
-            => string.Format("[{0}]={1}", Index, Content);
+            => string.Format("({0},{1})", Index, Content);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static Arrow<I> operator +(in Node<I,T> src, in Node<I,T> dst)
-            => new Arrow<I>(src.Index, dst.Index);
+        public static Arrow<K> operator +(in Node<K,T> src, in Node<K,T> dst)
+            => new Arrow<K>(src.Index, dst.Index);
 
         /// <summary>
         /// Sheds the associated data to form a payload-free vertex
         /// </summary>
         /// <param name="src">The source vertex</param>
         [MethodImpl(Inline)]
-        public static implicit operator Node<I>(in Node<I,T> src)
-            => new Node<I>(src.Index);
+        public static implicit operator Node<K>(in Node<K,T> src)
+            => new Node<K>(src.Index);
     }
 }

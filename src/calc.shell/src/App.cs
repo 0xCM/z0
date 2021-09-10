@@ -13,7 +13,6 @@ namespace Z0
     using static Root;
     using static core;
 
-
     using Masks = BitMaskLiterals;
 
     class App : WfApp<App>
@@ -25,13 +24,10 @@ namespace Z0
 
         EventQueue Queue;
 
-        IDynexus Dynamic;
-
         protected override void OnInit()
         {
             Queue = EventQueue.allocate();
             Source = Rng.@default();
-            Dynamic = Dynops.Dynexus;
         }
 
         protected override void Disposing()
@@ -96,9 +92,9 @@ namespace Z0
 
         void Run(N8 n)
         {
-            var provider = PageBanks.service();
-            var block = provider.Block(n0);
-            var segsize = 32;
+            var buffer = PageBank16x4x4.allocated();
+            var block = buffer.Block(n0);
+            var segsize = size<Cell256>();
             uint count = block.Size/segsize;
             ref var src = ref block.Segment<Cell256>(0);
             for(var i=0u; i<count; i++)
@@ -115,8 +111,7 @@ namespace Z0
 
         void Run128(PageBlock lhs, PageBlock rhs, PageBlock dst)
         {
-            var provider = PageBanks.service();
-            var size = provider.BlockSize;
+            var size = lhs.Size;
             var w = w128;
             var cells = size/size<Cell128>();
             ref var left = ref lhs.Segment<Cell128>(0);
@@ -135,20 +130,22 @@ namespace Z0
 
         void Run(N5 n)
         {
-            var bank = PageBanks.service();
-            var size = bank.BlockSize;
+            var bank = PageBank16x4x4.allocated();
+            var size = PageBank16x4x4.BlockSize;
             var w = w128;
-            var cells = size/size<Cell128>();
+            //var cells = size/size<Cell128>();
 
             var left = bank.Block(n0);
             var right = bank.Block(n1);
             var dst = bank.Block(n2);
             Run128(left, right, dst);
 
+
             ref var lCell = ref left.Segment<Cell128>(0);
             ref var rCell = ref right.Segment<Cell128>(0);
             ref var target = ref dst.Segment<Cell128>(0);
 
+            var cells = left.Size/size<Cell128>();
             for(var i=0u; i<cells; i++)
             {
                 ref readonly var a = ref skip(lCell,i);
@@ -198,7 +195,7 @@ namespace Z0
 
         void Run(N6 n)
         {
-            var provider = PageBanks.service();
+            var provider = PageBank16x4x4.allocated();
             var block = provider.Block(n0);
             var segsize = 32;
             uint count = block.Size/segsize;
@@ -228,8 +225,8 @@ namespace Z0
 
         void Run(N3 n)
         {
-            var bank = PageBanks.service();
-            var size = bank.BlockSize;
+            var bank = PageBank16x4x4.allocated();
+            var size = PageBank16x4x4.BlockSize;
             var w = w128;
             var cells = size/size<Cell128>();
 

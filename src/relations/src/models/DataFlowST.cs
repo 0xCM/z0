@@ -39,7 +39,6 @@ namespace Z0
         T IArrow<S,T>.Target
             => Target;
 
-
         [MethodImpl(Inline)]
         public static implicit operator DataFlow<S,T>((S src, T dst) x)
             => new DataFlow<S,T>(x.src, x.dst);

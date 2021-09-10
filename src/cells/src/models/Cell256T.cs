@@ -144,7 +144,7 @@ namespace Z0
             => ToVector().Equals(src.ToVector());
 
         public string Format()
-            => Data.ToString();
+            => V8u.ToString();
 
         public override string ToString()
             => Format();

@@ -22,7 +22,12 @@ namespace Z0
              where T : unmanaged
                 => gcpu.vspan(src).FormatHex(sep, specifier);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [Op, Closures(Closure)]
+        public static string FormatHex<T>(this Vector512<T> src, char sep = Chars.Comma, bool specifier = false)
+            where T : unmanaged
+                => string.Concat(gcpu.vspan(src).FormatHex(sep, specifier), sep, Chars.Space,gcpu.vspan(src).FormatHex(sep, specifier));
+
+        [Op, Closures(Closure)]
         public static string Format<T>(this Vector128<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
                 => gcpu.vspan(src).FormatList(sep,0,pad,true);

@@ -25,7 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static MemoryCells<T> cells<T>(PageBlock src)
-            where T : unmanaged, IDataCell
+            where T : unmanaged
                 => new MemoryCells<T>(src.Range);
 
         [MethodImpl(Inline)]
@@ -126,111 +126,132 @@ namespace Z0
             read1024(ref pSrc, ref dst, ref offset);
             read1024(ref pSrc, ref dst, ref offset);
         }
+
         /// <summary>
         /// Reserves 1 pages of memory that covers 2^12 = 4096 bytes
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock1 : IPageBlock<PageBlock1>
         {
-            public const uint Size = PageSize;
+            public const uint SZ = PageSize;
         }
 
         /// <summary>
         /// Reserves 2 pages of memory that cover 2^13 = 8,192 bytes
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock2 : IPageBlock<PageBlock2>
         {
-            public const uint Size = Pow2.T13;
+            public const uint SZ = Pow2.T13;
+
+            public const uint PageCount = SZ/PageSize;
         }
 
         /// <summary>
         /// Reserves 3 pages of memory
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock3 : IPageBlock<PageBlock3>
         {
-            public const uint Size = PageBlock2.Size + PageBlock1.Size;
+            public const uint SZ = PageBlock2.SZ + PageBlock1.SZ;
+
+            public const uint PageCount = SZ/PageSize;
         }
 
         /// <summary>
         /// Reserves 4 pages of memory that cover 2^14 = 16,384 bytes
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock4 : IPageBlock<PageBlock4>
         {
-            public const uint Size = Pow2.T14;
+            public const uint SZ = Pow2.T14;
+
+            public const uint PageCount = SZ/PageSize;
         }
 
         /// <summary>
         /// Reserves 5 pages of memory
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock5 : IPageBlock<PageBlock5>
         {
-            public const uint Size = PageBlock4.Size + PageBlock1.Size;
+            public const uint SZ = PageBlock4.SZ + PageBlock1.SZ;
+
+            public const uint PageCount = SZ/PageSize;
         }
 
         /// <summary>
         /// Reserves 6 pages of memory
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock6 : IPageBlock<PageBlock6>
         {
-            public const uint Size = PageBlock5.Size + PageBlock1.Size;
+            public const uint SZ = PageBlock5.SZ + PageBlock1.SZ;
+
+            public const uint PageCount = SZ/PageSize;
         }
 
         /// <summary>
         /// Reserves 7 pages of memory
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock7 : IPageBlock<PageBlock6>
         {
-            public const uint Size = PageBlock6.Size + PageBlock1.Size;
+            public const uint SZ = PageBlock6.SZ + PageBlock1.SZ;
+
+            public const uint PageCount = SZ/PageSize;
         }
 
         /// <summary>
         /// Reserves 8 pages of memory that covers 2^15 = 32,768 bytes
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock8 : IPageBlock<PageBlock8>
         {
-            public const uint Size = Pow2.T15;
+            public const uint SZ = Pow2.T15;
+
+            public const uint PageCount = SZ/PageSize;
         }
 
         /// <summary>
         /// Reserves 16 pages of memory that covers 2^16 = 65,536 bytes
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock16 : IPageBlock<PageBlock16>
         {
-            public const uint Size = Pow2.T16;
+            public const uint SZ = Pow2.T16;
+
+            public const uint PageCount = SZ/PageSize;
         }
 
         /// <summary>
         /// Reserves 16 pages of memory that covers 2^17 = 131,072 bytes
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock32 : IPageBlock<PageBlock32>
         {
-            public const uint Size = Pow2.T17;
+            public const uint SZ = Pow2.T17;
+
+            public const uint PageCount = SZ/PageSize;
         }
 
         /// <summary>
         /// Reserves 16 pages of memory that covers 2^18 = 262,144 bytes
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         internal struct PageBlock64 : IPageBlock<PageBlock64>
         {
-            public const uint Size = Pow2.T18;
+            public const uint SZ = Pow2.T18;
+
+            public const uint PageCount = SZ/PageSize;
         }
 
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         public struct PageBlock16x4 : IPageBlock<PageBlock16x4>
         {
-            public const uint BlockSize = PageBlocks.PageBlock16.Size;
+            public const uint SZ = PageBlock16.SZ*4;
 
-            public const uint Size = BlockSize*4;
+            public const uint PageCount = SZ/PageSize;
 
             PageBlocks.PageBlock16 Block0;
 
@@ -241,12 +262,12 @@ namespace Z0
             PageBlocks.PageBlock16 Block3;
         }
 
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
         public struct PageBlock32x4 : IPageBlock<PageBlock32x4>
         {
-            public const uint BlockSize = PageBlocks.PageBlock32.Size;
+            public const uint SZ = PageBlock32.SZ*4;
 
-            public const uint Size = BlockSize*4;
+            public const uint PageCount = SZ/PageSize;
 
             PageBlocks.PageBlock32 Block0;
 
@@ -257,12 +278,12 @@ namespace Z0
             PageBlocks.PageBlock32 Block3;
         }
 
-        [StructLayout(LayoutKind.Sequential, Size = (int)Size)]
-        public struct PageBlock64x4 : IPageBlock<PageBlock32x4>
+        [StructLayout(LayoutKind.Sequential, Size = (int)SZ)]
+        public struct PageBlock64x4 : IPageBlock<PageBlock64x4>
         {
-            public const uint BlockSize = PageBlocks.PageBlock64.Size;
+            public const uint SZ = PageBlock64.SZ*4;
 
-            public const uint Size = BlockSize*4;
+            public const uint PageCount = SZ/PageSize;
 
             PageBlocks.PageBlock64 Block0;
 

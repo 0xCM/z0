@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N = W := 16

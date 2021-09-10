@@ -36,7 +36,6 @@ namespace Z0
             Data = data;
         }
 
-
         public CellKind Kind
             => CellKind.Cell128;
 
@@ -137,6 +136,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public bit TestBit(int index)
+            => bit.test(Data[index/8], (byte)(index%8));
+
+        [MethodImpl(Inline)]
+        public void SetBit(int index, bit state)
+        {
+            ref var b = ref Data[index];
+            b = bit.set(b, (byte)(index%8), state);
+        }
+
+        [MethodImpl(Inline)]
         public Vector128<T> ToVector()
             => Data.Vector<T>();
 
@@ -145,7 +155,7 @@ namespace Z0
             => ToVector().Equals(src.ToVector());
 
         public string Format()
-            => Data.ToString();
+            => V8u.ToString();
 
         public override string ToString()
             => Format();

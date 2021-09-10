@@ -7,15 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public static class BitMatrixNx
     {
         public static BitMatrix<N,T> Replicate<N,T>(this BitMatrix<N,T> A)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitMatrix<N, T>(A.Content.Replicate());
+                => new BitMatrix<N,T>(A.Content.Replicate());
 
         public static BitBlock<N,T> Diagonal<N,T>(this BitMatrix<N,T> A)
             where N : unmanaged, ITypeNat

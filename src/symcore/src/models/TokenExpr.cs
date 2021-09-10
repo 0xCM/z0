@@ -11,6 +11,7 @@ namespace Z0
     public readonly struct TokenExpr
     {
         public uint Id {get;}
+
         public string Content {get;}
 
         [MethodImpl(Inline)]

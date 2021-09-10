@@ -4,20 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Vdsl
 {
-    [ApiComplete]
+    [ApiHost]
     public readonly partial struct Intrinsics
     {
-        [ApiComplete("intel.algorithms")]
-        public readonly partial struct Algs
-        {
-
-        }
-
-        [ApiHost("intel.checks")]
-        public readonly struct Checks
-        {
-
-        }
+        const NumericKind Closure = NumericKind.UnsignedInts;
     }
 }
-

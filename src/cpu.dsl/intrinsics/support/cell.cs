@@ -12,41 +12,41 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref num<T> cell<T>(ref __m128i<T> src, int i)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T cell<T>(ref __m128i<T> src, int i)
             where T : unmanaged
         {
-            ref var dst = ref @as<__m128i<T>,num<T>>(src);
+            ref var dst = ref @as<__m128i<T>,T>(src);
             return ref seek(dst,i);
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref num<T> cell<T>(ref __m256i<T> src, int i)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T cell<T>(ref __m256i<T> src, int i)
             where T : unmanaged
         {
-            ref var dst = ref @as<__m256i<T>,num<T>>(src);
+            ref var dst = ref @as<__m256i<T>,T>(src);
             return ref seek(dst,i);
         }
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref num<T> cell<T>(ref __m512i<T> src, int i)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T cell<T>(ref __m512i<T> src, int i)
             where T : unmanaged
         {
-            ref var dst = ref @as<__m512i<T>,num<T>>(src);
+            ref var dst = ref @as<__m512i<T>,T>(src);
             return ref seek(dst,i);
         }
 
-        [MethodImpl(Inline),Closures(AllNumeric)]
+        [MethodImpl(Inline), Closures(Closure)]
         public static __m128i<T> m128i<T>()
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline),Closures(AllNumeric)]
+        [MethodImpl(Inline), Closures(Closure)]
         public static __m256i<T> m256i<T>()
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline),Closures(AllNumeric)]
+        [MethodImpl(Inline), Closures(Closure)]
         public static __m512i<T> m512i<T>()
             where T : unmanaged
                 => default;

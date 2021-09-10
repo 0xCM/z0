@@ -12,18 +12,19 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        [MethodImpl(Inline)]
-        public static __m128i<byte> _mm_avg_epu8(__m128i<byte> a, __m128i<byte> b)
+        partial struct Specs
         {
-            var dst = m128i<byte>();
-            var i = 0;
-            for(var j=0; j<=15; j++)
+            [MethodImpl(Inline)]
+            public static __m256i<byte> _mm256_min_epu8(__m256i<byte> a, __m256i<byte> b)
             {
-                i = j*8;
-                dst[i + 7] = a[i+7] + b[i+7] + 1;
+                var dst = m256i<byte>();
+                for(var j=0; j<=31; j++)
+                {
+                    var i = j*8;
+                    dst[i+7,i] = min(a[i+7,i], b[i+7,i]);
+                }
+                return dst;
             }
-
-            return dst;
         }
     }
 }

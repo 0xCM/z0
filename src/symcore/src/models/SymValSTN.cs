@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     /// <summary>
     /// Defines an S-symbol value, of bit-width N, covered by a T-storage cell

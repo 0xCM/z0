@@ -11,16 +11,17 @@ namespace Z0
 
     using api = Relations;
 
-    public readonly struct DataFlow<A,S,T> : IDataFlow<S,T>
+    public readonly struct DataFlow<K,S,T> : IDataFlow<S,T>
+        where K : unmanaged
     {
-        public readonly A Actor;
+        public readonly Actor<K> Actor;
 
         public readonly S Source;
 
         public readonly T Target;
 
         [MethodImpl(Inline)]
-        public DataFlow(A actor, S src, T dst)
+        public DataFlow(Actor<K> actor, S src, T dst)
         {
             Actor = actor;
             Source = src;
@@ -43,7 +44,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator DataFlow<A,S,T>((A actor, S src, T dst) x)
-            => new DataFlow<A,S,T>(x.actor, x.src, x.dst);
+        public static implicit operator DataFlow<K,S,T>((K actor, S src, T dst) x)
+            => new DataFlow<K,S,T>(x.actor, x.src, x.dst);
     }
 }

@@ -8,28 +8,28 @@ namespace Z0
 
     public enum CmpKind : byte
     {
-        [Op(S.EQ)]
+        [Symbol(S.EQ)]
         EQ,
 
-        [Op(S.LT)]
+        [Symbol(S.LT)]
         LT,
 
-        [Op(S.LE)]
+        [Symbol(S.LE)]
         LE,
 
-        [Op(S.NEQ)]
+        [Symbol(S.NEQ)]
         NEQ,
 
-        [Op(S.NLT)]
+        [Symbol(S.NLT)]
         NLT,
 
-        [Op(S.NGT)]
+        [Symbol(S.NGT)]
         NGT,
 
-        [Op(S.GT)]
+        [Symbol(S.GT)]
         GT,
 
-        [Op(S.GE)]
+        [Symbol(S.GE)]
         GE
     }
 

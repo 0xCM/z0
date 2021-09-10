@@ -36,6 +36,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static v3<T> v<T>(T a0, T a1, T a2)
+            where T : unmanaged
+        {
+            var v = new v3<T>();
+            ref var dst = ref cell(ref v);
+            seek(dst,0) = a0;
+            seek(dst,1) = a1;
+            seek(dst,2) = a2;
+            return v;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref v3<T> src)
             where T : unmanaged
                 => ref @as<v3<T>,T>(src);

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static memory;
+    using static core;
 
     public class t_bitstring2 : t_bits<t_bitstring2>
     {

@@ -2,17 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Vdsl
 {
-    public interface IActor
-    {
-        string Name {get;}
-    }
+    using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IActor<S,T> : IActor
-    {
-        S Source {get;}
+    using static Root;
+    using static core;
 
-        T Target {get;}
-    }
+
+
 }

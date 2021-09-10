@@ -14,9 +14,9 @@ namespace Z0
     public readonly struct Tokens
     {
         [MethodImpl(Inline)]
-        public static TokenMatch<K,V> match<K,V>(K kind, V value)
+        public static TokenMatch<K> match<K>(K kind, uint key)
             where K : unmanaged
-                => new TokenMatch<K,V>(kind,value);
+                => new TokenMatch<K>(kind, key);
         [Op]
         public static ReadOnlySpan<TokenRow> rows(ReadOnlySpan<Type> src)
         {

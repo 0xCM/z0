@@ -12,7 +12,7 @@ namespace Z0
     {
         public readonly struct OperandValue
         {
-            public OperandSpec  Operand {get;}
+            public OperandSpec Operand {get;}
 
             public Value Value {get;}
 

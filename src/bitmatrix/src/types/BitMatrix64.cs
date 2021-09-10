@@ -8,7 +8,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     /// <summary>
     /// Defines a 64x64 matrix of bits

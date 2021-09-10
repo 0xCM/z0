@@ -9,7 +9,6 @@ namespace Z0
 
     using static core;
     using static Root;
-    using static Typed;
 
     [ApiHost]
     public unsafe readonly struct AsciFormatter

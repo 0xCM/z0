@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     partial class BitMatrix
     {
@@ -36,7 +36,7 @@ namespace Z0
             var rhs = (T)y;
             ref var href = ref dst.Head;
             for(byte i=0; i<order; i++)
-                memory.seek(href, i) = x[i] ? rhs : default;
+                seek(href, i) = x[i] ? rhs : default;
             return ref dst;
         }
 

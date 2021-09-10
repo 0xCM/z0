@@ -4,29 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-    partial struct Rules
+    public interface ICmpPred : IRule, ITextual
     {
-        public interface ICmpPred : IRule, ITextual
-        {
-            CmpKind Kind {get;}
-        }
+        CmpKind Kind {get;}
+    }
 
-        public interface ICmpPred<T> : ICmpPred
-        {
-            T A {get;}
+    public interface ICmpPred<T> : ICmpPred
+    {
+        T A {get;}
 
-            T B {get;}
-        }
+        T B {get;}
+    }
 
-        public interface ICmpPred<F,T> : ICmpPred<T>
-            where F : ICmpPred<F,T>
-        {
+    public interface ICmpPred<F,T> : ICmpPred<T>
+        where F : ICmpPred<F,T>
+    {
 
-        }
     }
 }

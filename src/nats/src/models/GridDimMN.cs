@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     /// <summary>
     /// Encapsulates metrics that characterize a grid of natural rectangular dimensions

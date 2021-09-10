@@ -58,8 +58,13 @@ namespace Z0
             => api.describe(this);
 
         [MethodImpl(Inline)]
-        public MemoryCells<T> Cells<T>()
-            where T : unmanaged, IDataCell
-                => api.cells<T>(this);
+        public Span<T> Cells<T>()
+            where T : unmanaged
+                => recover<T>(Edit);
+
+        // [MethodImpl(Inline)]
+        // public Span<T> Cells<T>()
+        //     where T : unmanaged
+        //         => api.cells<T>(this).Edit;
     }
 }
