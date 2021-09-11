@@ -13,7 +13,6 @@ namespace Z0
     using System.IO;
 
     using static Root;
-    using static SFx;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
@@ -26,15 +25,16 @@ namespace Z0
         public void InjectShell(IWfRuntime wf)
         {
             Wf = wf;
-            OnShellInjected();
+            Db = wf.Db();
+            OnShellInjected(wf);
         }
 
-        protected virtual void OnShellInjected()
+        protected virtual void OnShellInjected(IWfRuntime wf)
         {
 
         }
 
-        protected IWfDb Db => Wf.Db();
+        protected IWfDb Db {get; private set;}
 
         public void SetMode(bool diagnostic)
             => DiagnosticMode = diagnostic;

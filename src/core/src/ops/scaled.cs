@@ -5,17 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IRecordEmitter : IDisposable
+    using static Root;
+
+    partial struct core
     {
-        void EmitHeader();
-    }
-
-    public interface IRecordEmitter<T> : IRecordEmitter
-        where T : struct
-    {
-        void Emit(in T src);
-
-        void Emit(ReadOnlySpan<T> src);
+        [MethodImpl(Inline), Op]
+        public static ScaledIndex scaled(W8 w, N4 n, sbyte dx, uint i)
+            => new ScaledIndex(8, 4, dx, i);
     }
 }

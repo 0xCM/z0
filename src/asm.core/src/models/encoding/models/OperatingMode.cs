@@ -8,24 +8,23 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmCodes;
 
     public readonly struct OperatingMode
     {
-        public OperatingModeKind Kind {get;}
+        public OpModeKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public OperatingMode(OperatingModeKind kind)
+        public OperatingMode(OpModeKind kind)
         {
             Kind = kind;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator OperatingMode(OperatingModeKind src)
+        public static implicit operator OperatingMode(OpModeKind src)
             => new OperatingMode(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator OperatingModeKind(OperatingMode src)
+        public static implicit operator OpModeKind(OperatingMode src)
             => src.Kind;
     }
 }

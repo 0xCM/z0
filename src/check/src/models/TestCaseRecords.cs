@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
-
     public readonly struct TestCaseRecords
     {
         const string Delimiter = "| ";
@@ -34,7 +32,7 @@ namespace Z0
             dst.AppendPadded(src.Message, MessagePad, Delimiter);
         }
 
-        public static string format(in TestCaseRecord src, char delimiter = FieldDelimiter)
+        public static string format(in TestCaseRecord src)
         {
             var dst = text.buffer();
             render(src, dst);

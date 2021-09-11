@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static SFx;
-    using static memory;
+    using static core;
 
     public interface ICheckSF<T0,T1,R> : ICheckSF
         where T0 : unmanaged

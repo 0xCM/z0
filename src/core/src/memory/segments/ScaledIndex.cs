@@ -12,15 +12,15 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct ScaledIndex
     {
-        public uint Offset {get;}
+        public readonly uint Offset;
 
-        public sbyte Scale {get;}
+        public readonly sbyte Scale;
 
-        public byte Mod {get;}
+        public readonly byte Mod;
 
-        public byte StorageWidth {get;}
+        public readonly byte CellWidth;
 
-        public byte CellWidth {get;}
+        public readonly byte StorageWidth;
 
         [MethodImpl(Inline)]
         public ScaledIndex(byte wStorage, byte wCell, sbyte scale, uint index)

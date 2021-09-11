@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.IO;
     using System.Text;
+    using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;

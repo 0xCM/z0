@@ -9,24 +9,17 @@ namespace Z0
 
     using static Root;
 
-    public sealed class ImportsWs : IWorkspace<ImportsWs>
+    public sealed class ImportsWs : Workspace<ImportsWs>
     {
         [MethodImpl(Inline)]
         public static ImportsWs create(FS.FolderPath root)
             => new ImportsWs(root);
 
-        FS.FolderPath _WsRoot;
-
         [MethodImpl(Inline)]
-        ImportsWs(FS.FolderPath root)
+        internal ImportsWs(FS.FolderPath root)
+            : base(root)
         {
-            _WsRoot = root;
-        }
 
-        public FS.FolderPath Root
-        {
-            [MethodImpl(Inline)]
-            get => _WsRoot;
         }
     }
 }

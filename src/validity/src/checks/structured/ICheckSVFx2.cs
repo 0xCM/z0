@@ -8,8 +8,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static SFx;
-
     [Free]
     public interface ICheckSF128<S,T> : IFunc<S,Vector128<T>,bit>
         where S : unmanaged

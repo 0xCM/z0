@@ -11,43 +11,54 @@ namespace Z0
     using static Root;
     using static core;
 
-    public readonly struct RecordEmitter<T> : IRecordEmitter<T>
-        where T : struct
+    public readonly struct RecordEmitter : IRecordEmitter
     {
-        public FS.FilePath Target {get;}
-
-        readonly IRecordFormatter<T> Formatter;
-
-        readonly StreamWriter Writer;
-
-        [MethodImpl(Inline)]
-        public RecordEmitter(IRecordFormatter<T> formatter, FS.FilePath dst)
+        public Outcome Emit<T>(in T src, StreamWriter dst)
+            where T : struct
         {
-            Target = dst;
-            Writer = dst.Writer();
-            Formatter = formatter;
+            try
+            {
+                var formatter = Tables.formatter<T>();
+                dst.WriteLine(formatter.Format(src));
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+            return true;
         }
 
-        public void EmitHeader()
+        public Outcome Emit<T>(ReadOnlySpan<T> src, StreamWriter dst, bool header = true)
+            where T : struct
         {
-            Writer.WriteLine(Formatter.FormatHeader());
+            var formatter = Tables.formatter<T>();
+            if(header)
+                dst.WriteLine(formatter.FormatHeader());
+            return Write(src,formatter,dst);
         }
 
-        public void Emit(in T src)
+        public Outcome Emit<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, StreamWriter dst, bool header = true)
+            where T : struct
         {
-            Writer.WriteLine(Formatter.Format(src));
+            var formatter = Tables.formatter<T>(widths);
+            if(header)
+                dst.WriteLine(formatter.FormatHeader());
+            return Write(src,formatter,dst);
         }
 
-        public void Emit(ReadOnlySpan<T> src)
+        Outcome Write<T>(ReadOnlySpan<T> src, IRecordFormatter<T> formatter, StreamWriter dst)
+            where T : struct
         {
-            for(var i=0; i<src.Length; i++)
-                Writer.WriteLine(Formatter.Format(skip(src,i)));
-        }
-
-        public void Dispose()
-        {
-            Writer?.Flush();
-            Writer?.Dispose();
+            try
+            {
+                for(var i=0; i<src.Length; i++)
+                    dst.WriteLine(formatter.Format(skip(src,i)));
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+            return true;
         }
     }
 }

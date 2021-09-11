@@ -9,24 +9,16 @@ namespace Z0
 
     using static Root;
 
-    public sealed class ApiWs : IWorkspace<ApiWs>
+    public sealed class ApiWs : Workspace<ApiWs>
     {
         [MethodImpl(Inline)]
         public static ApiWs create(FS.FolderPath root)
             => new ApiWs(root);
 
-        FS.FolderPath _WsRoot;
-
         [MethodImpl(Inline)]
         ApiWs(FS.FolderPath root)
+            : base(root)
         {
-            _WsRoot = root;
-        }
-
-        public FS.FolderPath Root
-        {
-            [MethodImpl(Inline)]
-            get => _WsRoot;
         }
     }
 }

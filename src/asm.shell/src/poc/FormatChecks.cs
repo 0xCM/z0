@@ -50,30 +50,33 @@ namespace Z0
             var bits = BitRender.render8x8(bytes);
             Wf.Row(text.format(bits));
 
-            var nibbles = BitNumbers.nibbles(bytes);
+            var nibbles = NibbleSpan.from(bytes);
             var count = nibbles.Count;
             Wf.Row(string.Format("{0}:{1}", "Count", count));
             if(count != 32)
                 return;
 
-            var dst = text.buffer();
-            dst.Append("[");
-            for(var i=0; i<count; i++)
-            {
-                var cell = nibbles[i];
-                dst.Append(cell.Format());
-                if(i != count - 1)
-                    dst.Append(" | ");
-            }
-            dst.Append("]");
+            Wf.Row(nibbles.Format());
+        }
 
-            Wf.Row(dst.Emit());
+        void CheckJoin()
+        {
+            var c0 = Cells.cell64(BitMaskLiterals.Odd64);
+            var c1 = Cells.cell64(BitMaskLiterals.Central64x16x8);
+            var c2 = Cells.cell64(BitMaskLiterals.Lsb63x3x1);
+            var c3 = Cells.cell64(BitMaskLiterals.Odd64);
+            var c256 = Cells.join(c0,c1,c2,c3);
+            Wf.Row(c256);
+            var bytes = c256.Bytes;
+            var nibbles = NibbleSpan.from(bytes);
+            Wf.Row(nibbles.Format());
         }
 
         public void Run(IPolySource src)
         {
             CheckNibbleSpan();
             Check(w3);
+            CheckJoin();
         }
 
         public void Show(HexVector8<N4> src)

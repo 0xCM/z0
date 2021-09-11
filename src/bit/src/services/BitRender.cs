@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static uint separate(uint offset, char sep, Span<char> dst)
         {
-            seek(dst,offset) = sep;
+            seek(dst, offset) = sep;
             return 1;
         }
     }

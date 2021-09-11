@@ -15,7 +15,6 @@ namespace Z0.Asm
         [Op]
         public static uint serialize(BitMapper<K,P> src, Span<ushort> dst)
         {
-            //var sz = size<A>() + size<B>();
             var points = src.Points;
             var count = points.Length;
             var j=0;

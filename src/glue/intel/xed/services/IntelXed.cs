@@ -235,7 +235,7 @@ namespace Z0.Asm
             EmitSymbols<IFormType>(dir);
             EmitSymbols<IsaKind>(dir);
             EmitSymbols<Mode>(dir);
-            EmitSymbols<OperatingModeKind>(dir);
+            EmitSymbols<OpModeKind>(dir);
             EmitSymbols<Nonterminal>(dir);
             EmitSymbols<OpCodeMap>(dir);
             EmitSymbols<OperandAction>(dir);

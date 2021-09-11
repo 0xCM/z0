@@ -72,7 +72,6 @@ namespace Z0.Asm
             return buffer;
         }
 
-
         [MethodImpl(Inline), Op]
         public static uint sib(Sib src, ref uint i, Span<char> dst)
         {

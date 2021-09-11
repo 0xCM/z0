@@ -9,24 +9,17 @@ namespace Z0
 
     using static Root;
 
-    public sealed class GenWs : IWorkspace<GenWs>
+    public sealed class GenWs : Workspace<GenWs>
     {
         [MethodImpl(Inline)]
         public static GenWs create(FS.FolderPath root)
             => new GenWs(root);
 
-        FS.FolderPath _WsRoot;
 
         [MethodImpl(Inline)]
-        GenWs(FS.FolderPath root)
+        internal GenWs(FS.FolderPath root)
+            : base(root)
         {
-            _WsRoot = root;
-        }
-
-        public FS.FolderPath Root
-        {
-            [MethodImpl(Inline)]
-            get => _WsRoot;
         }
     }
 }

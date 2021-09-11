@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    partial struct AsmLayouts
+    public readonly struct AsmLayoutModels
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct LayoutCore : IAsmLayout<LayoutCore>
@@ -41,7 +41,6 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => bytes(this);
             }
-
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]

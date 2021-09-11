@@ -4,16 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmLayouts;
-
-    public interface IAsmLayoutPart
+    public enum BranchTargetKind : byte
     {
-        SlotKind Kind {get;}
-    }
+        None = 0,
 
-    public interface IAsmLayoutPart<T> : IAsmLayoutPart
-        where T : unmanaged, IAsmLayoutPart<T>
-    {
+        Near = 1,
 
+        Far = 2
     }
 }

@@ -49,25 +49,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static uint render8x8(byte src, uint maxbits, uint j, Span<char> dst)
-        {
-            for(byte i=0; i<8; i++, j++)
-            {
-                if(j>=maxbits)
-                    break;
-
-                seek(dst, (uint)j) = bit.test(src, i).ToChar();
-            }
-            return j;
-        }
-
-        [MethodImpl(Inline), Op]
         public static uint render8x8(ReadOnlySpan<byte> src, int count, uint maxbits, Span<char> dst)
         {
             var k=0u;
             for(var i=0u; i<count; i++)
             {
-                k += render8x8(skip(src,i), maxbits, k, dst);
+                k += render8(skip(src,i), maxbits, k, dst);
                 if(k >= maxbits)
                     break;
             }

@@ -328,11 +328,9 @@ namespace Z0.Asm
             var blocks = LoadApiBlocks();
             var clock = Time.counter(true);
             var traverser = Wf.ApiCodeBlockTraverser();
-            var receiver  = new AsmDetailProducer(Wf,750000);
+            var receiver  = new AsmReceiverModel(Wf,750000);
             traverser.Traverse(blocks, receiver);
             var duration = clock.Elapsed().Ms;
-            var productions = receiver.Productions;
-            Wf.Status(string.Format("Processed {0} instructions in {1} ms", productions.Length, (ulong)duration));
         }
 
         ReadOnlySpan<ApiHostRes> EmitResPack()
@@ -396,48 +394,6 @@ namespace Z0.Asm
             // }
 
             Wf.EmittedFile(emitting, counter);
-        }
-
-
-        public static Outcome require(string a, string b)
-        {
-            var success = a.Equals(b);
-            var op = success ? "==" : "!=";
-            return (success,string.Format("{0} {1} {2}", a, op, b));
-        }
-
-        void CheckCodeFactory()
-        {
-            // 4080C416                add spl,22
-            var buffer = span<char>(20);
-            var input1 = "40 80 c4 16";
-            var input2 = "4080C416";
-            HexNumericParser.parse64u(input2, out var input3);
-
-            var code1 = asm.code(input1);
-            var code2 = asm.code(input2);
-            var code3 = asm.code(input3);
-
-            var text1 = code1.Format();
-            var text2 = code2.Format();
-            var text3 = code3.Format();
-
-            Wf.Row(code1.Format());
-            Wf.Row(code2.Format());
-            Wf.Row(code3.Format());
-
-            var check1 = require(text1,text2);
-            if(check1.Fail)
-                Wf.Error(check1.Message);
-            else
-                Wf.Status(check1.Message);
-
-            var check2 = require(text1,text3);
-            if(check2.Fail)
-                Wf.Error(check2.Message);
-            else
-                Wf.Status(check2.Message);
-
         }
 
         public void ParseDisassembly()
@@ -511,7 +467,6 @@ namespace Z0.Asm
             }
 
             using var listener = ClrEventListener.create(receive);
-
             var settings = ApiExtractSettings.init(Db.CapturePackRoot(), now());
             Wf.ApiExtractWorkflow().Run(settings);
         }

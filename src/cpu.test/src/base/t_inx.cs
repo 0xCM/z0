@@ -19,11 +19,17 @@ namespace Z0
     {
         protected t_inx()
         {
-            CheckSVF =  Context.CheckSVF();
+            CheckSVF =  new CheckSVF(Context);
         }
 
         protected readonly ICheckSVF CheckSVF;
 
+        protected SVFChecks SVF {get; private set;}
+
+        protected override void OnShellInjected(IWfRuntime wf)
+        {
+            SVF = SVFChecks.create(wf, Random);
+        }
 
         protected void vbinop_bench<F,T>(W128 w, F f, T t = default, SystemCounter clock = default)
             where F : IBinaryOp128<T>

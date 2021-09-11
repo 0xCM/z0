@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static SFx;
     using static Root;
     using static cpu;
-
 
     using K = OperatorClasses;
 
@@ -18,7 +16,7 @@ namespace Z0
     {
         ICheckSVF<T> Typed<T>()
             where T : unmanaged
-                => Context.CheckSVF<T>();
+                => new CheckSVF<T>(Context);
 
         void CheckUnaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged

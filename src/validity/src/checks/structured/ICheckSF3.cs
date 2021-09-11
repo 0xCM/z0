@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static core;
     using static SFx;
 
     public interface ICheckSF<T0,T1,T2,R> : ICheckSF

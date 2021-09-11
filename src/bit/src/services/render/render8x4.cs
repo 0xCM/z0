@@ -41,8 +41,14 @@ namespace Z0
             seek(dst, i++) = bitchar(src, 2);
             seek(dst, i++) = bitchar(src, 1);
             seek(dst, i++) = bitchar(src, 0);
-            i += separate(i, dst);
             return i - i0;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render8x4(byte src, Span<char> dst)
+        {
+            var i=0u;
+            return render8x4(src, ref i, dst);
         }
     }
 }

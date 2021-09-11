@@ -9,7 +9,7 @@ namespace Z0.Asm
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IAsmOps
+    public interface IAsmOperands
     {
         /// <summary>
         /// The number of arguments accepted by the operand
@@ -23,11 +23,11 @@ namespace Z0.Asm
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="A">The operand type</typeparam>
     [Free]
-    public interface IAsmOps<F,A> : IAsmOps
-        where F : struct, IAsmOps<F,A>
+    public interface IAsmOperands<F,A> : IAsmOperands
+        where F : struct, IAsmOperands<F,A>
         where A : unmanaged, IAsmOp
     {
-        byte IAsmOps.Count
+        byte IAsmOperands.Count
             => 1;
 
         A this[N0 n] {get;}
@@ -35,12 +35,12 @@ namespace Z0.Asm
         A First => this[n0];
     }
 
-    public interface IAsmOps<F,A,B> : IAsmOps
-        where F : struct, IAsmOps<F,A,B>
+    public interface IAsmOperands<F,A,B> : IAsmOperands
+        where F : struct, IAsmOperands<F,A,B>
         where A : unmanaged, IAsmOp
         where B : unmanaged, IAsmOp
     {
-        byte IAsmOps.Count
+        byte IAsmOperands.Count
             => 2;
 
         A this[N0 n] {get;}
@@ -53,13 +53,13 @@ namespace Z0.Asm
     }
 
    [Free]
-   public interface IAsmOps<F,A,B,C> : IAsmOps
-        where F : struct, IAsmOps<F,A,B,C>
+   public interface IAsmOperands<F,A,B,C> : IAsmOperands
+        where F : struct, IAsmOperands<F,A,B,C>
         where A : unmanaged, IAsmOp
         where B : unmanaged, IAsmOp
         where C : unmanaged, IAsmOp
     {
-        byte IAsmOps.Count
+        byte IAsmOperands.Count
             => 3;
 
         A this[N0 n] {get;}
@@ -76,14 +76,14 @@ namespace Z0.Asm
     }
 
     [Free]
-    public interface IAsmOps<F,A,B,C,D> : IAsmOps
-        where F : struct, IAsmOps<F,A,B,C,D>
+    public interface IAsmOperands<F,A,B,C,D> : IAsmOperands
+        where F : struct, IAsmOperands<F,A,B,C,D>
         where A : unmanaged, IAsmOp
         where B : unmanaged, IAsmOp
         where C : unmanaged, IAsmOp
         where D : unmanaged, IAsmOp
     {
-        byte IAsmOps.Count
+        byte IAsmOperands.Count
             => 4;
 
         A this[N0 n] {get;}

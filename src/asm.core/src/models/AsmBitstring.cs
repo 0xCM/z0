@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static Root;
 
-    using api = AsmBits;
-
     /// <summary>
     /// Defines a sequence of bits that specifies an instruction encoding
     /// </summary>

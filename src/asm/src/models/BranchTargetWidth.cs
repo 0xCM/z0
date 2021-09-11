@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmLayouts;
-
-    public interface IAsmLayoutSlot
+    public enum BranchTargetWidth : byte
     {
-        SlotKind Kind {get;}
+        None = 0,
 
-        byte Position {get;}
+        Branch16 = 16,
+
+        Branch32 = 32,
+
+        Branch64 = 64,
     }
 }

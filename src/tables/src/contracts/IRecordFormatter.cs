@@ -8,9 +8,9 @@ namespace Z0
 
     public interface IRecordFormatter
     {
-        string Format(IRecord src);
+        string Format(ValueType src);
 
-        string Format(IRecord src, RecordFormatKind kind);
+        string Format(ValueType src, RecordFormatKind kind);
 
         Type RecordType {get;}
 
@@ -34,10 +34,10 @@ namespace Z0
         string FormatKvp(in T src)
             => Format(src, RecordFormatKind.KeyValuePairs);
 
-        string IRecordFormatter.Format(IRecord src)
+        string IRecordFormatter.Format(ValueType src)
             => Format((T)src);
 
-        string IRecordFormatter.Format(IRecord src, RecordFormatKind kind)
+        string IRecordFormatter.Format(ValueType src, RecordFormatKind kind)
             => Format((T)src, kind);
 
         Type IRecordFormatter.RecordType

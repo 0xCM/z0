@@ -14,8 +14,6 @@ namespace Z0.Tools
     {
         public AsmWs Workspace {get; private set;}
 
-        public FS.FilePath ToolPath {get; set;}
-
         public BdDisasm()
             : base(Toolspace.bddiasm)
         {
@@ -25,7 +23,6 @@ namespace Z0.Tools
         protected override void Initialized()
         {
             Workspace = AsmWs.create(Env.AsmWs);
-            ToolPath = Workspace.ToolPath(Toolspace.bddiasm);
         }
 
         [Op]

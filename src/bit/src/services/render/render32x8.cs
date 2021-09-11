@@ -13,39 +13,34 @@ namespace Z0
     partial struct BitRender
     {
         [MethodImpl(Inline), Op]
-        public static uint render32x8(uint src, uint offset, Span<char> dst, char sep = Chars.Space)
+        public static uint render32x8(uint src, ref uint i, Span<char> dst, char sep = Chars.Space)
         {
-            var counter = 0u;
-            var x = z8;
-
+            var i0 = i;
             var cells = bytes(src);
-            x = skip(cells,0);
-            counter += render8(x, counter + offset, dst);
-            counter += separate(counter + offset, sep, dst);
+            render8(skip(cells,3), ref i, dst);
+            i += separate(sep, dst);
+            render8(skip(cells,2), ref i, dst);
+            i+= separate(sep, dst);
+            render8(skip(cells,1), ref i, dst);
+            i+= separate(sep, dst);
+            render8(skip(cells,0), ref i, dst);
 
-            x = skip(cells,1);
-            counter += render8(x, counter + offset, dst);
-            counter += separate(counter + offset, sep, dst);
-
-            x = skip(cells,2);
-            counter += render8(x, counter + offset, dst);
-            counter += separate(counter + offset, sep, dst);
-
-            x = skip(cells,3);
-            counter += render8(x, counter + offset, dst);
-
-            return counter;
+            return i-i0;
         }
 
         [MethodImpl(Inline), Op]
         public static uint render32x8(uint src, Span<char> dst, char sep = Chars.Space)
-            => render32x8(src,0, dst, sep);
+        {
+            var i = 0u;
+            return render32x8(src, ref i, dst, sep);
+        }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> render32x8(uint src, char sep = Chars.Space)
         {
             var buffer = CharBlock64.Null.Data;
-            var count = render32x8(src, 0, buffer, sep);
+            var i=0u;
+            var count = render32x8(src, ref i, buffer, sep);
             return slice(buffer,0,count);
         }
     }

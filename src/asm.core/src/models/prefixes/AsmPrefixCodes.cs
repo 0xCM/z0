@@ -15,8 +15,6 @@ namespace Z0.Asm
     {
         public static RexPrefixCode RexW => RexPrefixCode.W;
 
-        public static RexPrefixCode RexB => RexPrefixCode.B;
-
         public enum VsibField : byte
         {
             /// <summary>

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static SFx;
-
     using api = Matches;
 
     public interface ICheckSF<T,R> : ICheckSF

@@ -6,8 +6,6 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static SFx;
-
     [Free]
     public interface ICheckBinarySVFD<W,F,T>
         where T : unmanaged

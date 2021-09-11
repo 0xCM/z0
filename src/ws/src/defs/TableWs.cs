@@ -9,27 +9,17 @@ namespace Z0
 
     using static Root;
 
-    public struct TableWs : IWorkspace<TableWs>
+    public sealed class TableWs : Workspace<TableWs>
     {
         [MethodImpl(Inline)]
         public static TableWs create(FS.FolderPath root)
             => new TableWs(root);
 
-        FS.FolderPath _WsRoot;
-
         [MethodImpl(Inline)]
-        TableWs(FS.FolderPath root)
+        internal TableWs(FS.FolderPath root)
+            : base(root)
         {
-            _WsRoot = root;
-        }
 
-        public FS.FolderPath Root
-        {
-            [MethodImpl(Inline)]
-            get => _WsRoot;
         }
-
-        public FS.FolderPath WsRoot()
-            => _WsRoot;
     }
 }

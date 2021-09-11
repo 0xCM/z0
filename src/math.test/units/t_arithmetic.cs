@@ -79,8 +79,8 @@ namespace Z0
         {
             var g = Calcs.clamp<T>();
             var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
+            validator.CheckMatch(f, g);
+            validator.CheckSpanMatch(f, g);
         }
 
         [MethodImpl(Inline)]

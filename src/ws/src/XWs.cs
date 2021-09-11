@@ -7,8 +7,8 @@ namespace Z0
     [ApiHost]
     public static class XWs
     {
-       [Op]
-       public static DevWs DevWs(this IEnvProvider provider)
+        [Op]
+        public static DevWs DevWs(this IEnvProvider provider)
             => Z0.DevWs.create(provider.Env.DevWs);
 
         [Op]

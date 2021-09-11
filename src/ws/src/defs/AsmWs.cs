@@ -15,34 +15,12 @@ namespace Z0
         public static AsmWs create(FS.FolderPath root)
             => new AsmWs(root);
 
-        FS.FolderPath _WsRoot;
-
-        EnvData _Env;
+        public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        AsmWs(FS.FolderPath root)
+        internal AsmWs(FS.FolderPath root)
         {
-            _WsRoot = root;
-            _Env = Env.load().Data;
-        }
-
-        public FS.FolderPath Root
-        {
-            [MethodImpl(Inline)]
-            get => _WsRoot;
-        }
-
-        public FS.FolderPath WsRoot()
-            => _WsRoot;
-
-        public FS.FilePath ToolPath(ToolId id)
-        {
-            if(id == Toolspace.bddiasm)
-                return FS.path(@"j:\source\bddisasm\build\bddisasm.exe");
-            else if(id == Toolspace.nasm)
-                return FS.path(@"c:\tools\nasm\nasm.exe");
-            else
-                throw no(id);
+            Root = root;
         }
     }
 }

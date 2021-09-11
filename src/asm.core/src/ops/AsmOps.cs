@@ -4,17 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct AsmCodes
+    public readonly partial struct AsmOps
     {
-        public enum BranchTargetWidth : byte
-        {
-            None = 0,
 
-            Branch16 = 16,
 
-            Branch32 = 32,
-
-            Branch64 = 64,
-        }
     }
 }

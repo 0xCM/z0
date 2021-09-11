@@ -33,28 +33,8 @@ namespace Z0.Asm
             => new AsmEncodingInfo(form, statement, encoded, bitstring);
 
         [MethodImpl(Inline), Op]
-        public static MandatoryPrefix mandatory(MandatoryPrefixCode code)
-            => new MandatoryPrefix(code);
-
-        [MethodImpl(Inline), Op]
         public static Vsib vsib(byte src)
             => new Vsib(src);
-
-        [MethodImpl(Inline), Op]
-        public static BndPrefix bnd()
-            => BndPrefixCode.BND;
-
-        [MethodImpl(Inline), Op]
-        public static AsmPrefix prefix()
-            => new AsmPrefix(0);
-
-        [MethodImpl(Inline), Op]
-        public static BranchHintPrefix hint(bit bt)
-            => bt ? BranchHintCode.BT : BranchHintCode.BNT;
-
-        [MethodImpl(Inline), Op]
-        public static SizeOverrides sizes(bit opsz, bit adsz)
-            => new SizeOverrides(opsz,adsz);
 
         [MethodImpl(Inline), Op]
         public static bit test(K src, K match)
@@ -120,23 +100,6 @@ namespace Z0.Asm
         {
             seek(writer.Target, AsmHexCode.SizeIndex) = (byte)writer.BytesWritten;
             return new AsmHexCode(vload(writer.Target));
-        }
-
-        public static uint RexTable(ITextBuffer dst)
-        {
-            var bits = RexPrefix.Range();
-            var count = bits.Length;
-            for(var i=0; i<count; i++)
-                dst.AppendLine(describe(skip(bits,i)));
-            return (uint)count;
-        }
-
-        public static string describe(RexPrefix src)
-        {
-            const string RexFieldPattern = "[W:{0} | R:{1} | X:{2} | B:{3}]";
-            var bits = text.format(BitRender.render8x4(src.Encoded));
-            var bitfield = string.Format(RexFieldPattern, src.W(), src.R(), src.X(), src.B());
-            return $"{src.Encoded.FormatAsmHex()} | [{bits}] => {bitfield}";
         }
     }
 }

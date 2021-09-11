@@ -12,12 +12,15 @@ namespace Z0
     [ApiHost]
     public readonly struct HexVector
     {
-        public static uint bitstring<N>(HexVector8<N> src, uint offset, Span<char> dst)
+        public static uint bitstring<N>(HexVector8<N> src, uint i, Span<char> dst)
             where N : unmanaged, ITypeNat
-                => BitRender.render8x8<N>(src.Bytes, offset, dst);
+                => BitRender.render8x8<N>(src.Bytes, i, dst);
         [Op]
-        public static uint bitstring(Hex32 src, N8 n, uint offset, Span<char> dst)
-            => BitRender.render32x8(src.Value, offset, dst);
+        public static uint bitstring(Hex32 src, N8 n, Span<char> dst)
+        {
+            var i = 0u;
+            return BitRender.render32x8(src.Value, ref i, dst);
+        }
 
         [MethodImpl(Inline), Op]
         public static HexVector4 v4(byte[] src)

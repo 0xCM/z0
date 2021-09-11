@@ -5,21 +5,18 @@
 namespace Z0
 {
     using System;
-
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct Formatter<T> : ITextFormatter<T>
+    public readonly struct RngContext : IRngContext<RngContext>
     {
-        readonly FormatFunctions.Format<T> Fx;
+        public IPolyrand Random {get;}
 
         [MethodImpl(Inline)]
-        public Formatter(FormatFunctions.Format<T> render)
-            => Fx = render;
-
-        [MethodImpl(Inline)]
-        public string Format(T src)
-            => Fx(src);
+        public RngContext(IPolyrand random)
+        {
+            Random = random;
+        }
     }
 }

@@ -40,14 +40,15 @@ namespace Z0
         void vadd_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            CheckSVF.CheckBinaryOp(Calcs.vadd<T>(w),w,t);
+            SVF.Checker<T>().CheckBinaryOp(w, Calcs.vadd<T>(w));
         }
 
         void vadd_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var svc = Calcs.vadd<T>(w);
-            CheckSVF.CheckBinaryOp(svc,w,t);
+            //var svc = Calcs.vadd<T>(w);
+            SVF.Checker<T>().CheckBinaryOp(w, Calcs.vadd<T>(w));
+            //CheckSVF.CheckBinaryOp(svc,w,t);
         }
     }
 }

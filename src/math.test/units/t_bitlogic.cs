@@ -112,9 +112,6 @@ namespace Z0
         public void and_check()
         {
             const string name = "and";
-            // var op = ApiClasses.and();
-            // and_check(S.binary(BL.and, ApiIdentity.klass(op,z8i), z8i));
-
             and_check(S.binary(BL.and, name, z8i));
             and_check(S.binary(BL.and, name, z16));
             and_check(S.binary(BL.and, name, z16i));
@@ -127,7 +124,6 @@ namespace Z0
         public void or_check()
         {
             const string name = "or";
-
             or_check(S.binary(BL.or, name, z8));
             or_check(S.binary(BL.or, name, z8i));
             or_check(S.binary(BL.or, name, z16));
@@ -142,7 +138,6 @@ namespace Z0
         public void xor_check()
         {
             const string name = "xor";
-
             xor_check(S.binary(BL.xor, name, z8));
             xor_check(S.binary(BL.xor, name, z8i));
             xor_check(S.binary(BL.xor, name, z16));
@@ -151,14 +146,12 @@ namespace Z0
             xor_check(S.binary(BL.xor, name, z32i));
             xor_check(S.binary(BL.xor, name, z64));
             xor_check(S.binary(BL.xor, name, z64i));
-
         }
 
 
         public void nand_check()
         {
             const string name = "nand";
-
             nand_check(S.binary(BL.nand, name, z8));
             nand_check(S.binary(BL.nand, name, z8i));
             nand_check(S.binary(BL.nand, name, z16));
@@ -169,11 +162,9 @@ namespace Z0
             nand_check(S.binary(BL.nand, name, z64i));
         }
 
-
         public void nor_check()
         {
             const string name = "nor";
-
             nor_check(S.binary(BL.nor, name, z8));
             nor_check(S.binary(BL.nor, name, z8i));
             nor_check(S.binary(BL.nor, name, z16));
@@ -188,7 +179,6 @@ namespace Z0
         public void xnor_check()
         {
             const string name = "xnor";
-
             xnor_check(S.binary(BL.xnor, name, z8));
             xnor_check(S.binary(BL.xnor, name, z8i));
             xnor_check(S.binary(BL.xnor, name, z16));
@@ -203,7 +193,6 @@ namespace Z0
         public void not_check()
         {
             const string name = "not";
-
             not_check(S.unary(BL.not, name, z8));
             not_check(S.unary(BL.not, name, z8i));
             not_check(S.unary(BL.not, name, z16));
@@ -217,7 +206,6 @@ namespace Z0
         public void impl_check()
         {
             const string name = "impl";
-
             impl_check(S.binary(BL.impl, name, z8));
             impl_check(S.binary(BL.impl, name, z8i));
             impl_check(S.binary(BL.impl, name, z16));
@@ -231,7 +219,6 @@ namespace Z0
         public void nonimpl_check()
         {
             const string name = "nonimpl";
-
             nonimpl_check(S.binary(BL.nonimpl, name, z8));
             nonimpl_check(S.binary(BL.nonimpl, name, z8i));
             nonimpl_check(S.binary(BL.nonimpl, name, z16));
@@ -241,7 +228,6 @@ namespace Z0
             nonimpl_check(S.binary(BL.nonimpl, name, z64));
             nonimpl_check(S.binary(BL.nonimpl, name, z64i));
         }
-
 
         public void cimpl_check()
         {

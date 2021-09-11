@@ -12,8 +12,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using F = Cell256;
-
     [DataType("m256")]
     public readonly struct Cell256 : IDataCell<Cell256,W256,Vector256<ulong>>
     {

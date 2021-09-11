@@ -15,6 +15,10 @@ namespace Z0
     {
         const NumericKind Closure = NumericKind.U64;
 
+        [MethodImpl(Inline), Op]
+        public static RngContext context(IPolyrand src)
+            => new RngContext(src);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ISourceStream<T> create<T>(IEnumerable<T> src, ulong classifier = 0)
             where T : struct

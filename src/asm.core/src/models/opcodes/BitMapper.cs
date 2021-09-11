@@ -60,11 +60,6 @@ namespace Z0.Asm
     {
         readonly Index<I,BitMap<I,T>> Storage;
 
-        public BitMapper(uint capacity)
-        {
-            Storage = alloc<BitMap<I,T>>(capacity);
-        }
-
         public BitMapper(BitMap<I,T>[] maps)
         {
             Storage = maps;

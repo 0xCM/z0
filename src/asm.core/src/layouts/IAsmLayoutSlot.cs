@@ -4,15 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct AsmCodes
+    public interface IAsmLayoutSlot
     {
-        public enum BranchTargetKind : byte
-        {
-            None = 0,
+        LayoutSlotKind Kind {get;}
 
-            Near = 1,
-
-            Far = 2
-        }
+        byte Position {get;}
     }
 }

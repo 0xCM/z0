@@ -5,14 +5,9 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-
     using llvm;
 
     using static Root;
-    using static core;
-
 
     public partial class AsmEncoder : Service<AsmEncoder>
     {

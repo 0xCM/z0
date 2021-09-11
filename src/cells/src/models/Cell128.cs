@@ -173,7 +173,7 @@ namespace Z0
             where T : struct
                 => Data.As<ulong,T>();
         public string Format()
-            => Data.ToString();
+            => Content.ToString();
 
         public override string ToString()
             => Format();

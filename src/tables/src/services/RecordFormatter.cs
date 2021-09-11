@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
+
     using api = Tables;
 
     public sealed class RecordFormatter : IRecordFormatter
@@ -35,12 +35,12 @@ namespace Z0
 
         public RowFormatSpec FormatSpec {get;}
 
-        public string Format(IRecord src)
+        public string Format(ValueType src)
         {
             throw new NotImplementedException();
         }
 
-        public string Format(IRecord src, RecordFormatKind kind)
+        public string Format(ValueType src, RecordFormatKind kind)
         {
             throw new NotImplementedException();
         }

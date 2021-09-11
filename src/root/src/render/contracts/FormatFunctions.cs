@@ -18,20 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content value</param>
         /// <typeparam name="T">The content type</typeparam>
-        public delegate string Format<T>(T src);
+        public delegate string FormatCell<T>(in T src);
 
-        /// <summary>
-        /// Characterizes a content render function
-        /// </summary>
-        /// <param name="src">The content value</param>
-        /// <typeparam name="T">The content type</typeparam>
-        public delegate string FormatDelimited<T>(T src, char delimiter);
-
-        /// <summary>
-        /// Characterizes a title render function
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The type for which titles will be provided</typeparam>
-        public delegate string FormatTitle<T>(T src);
     }
 }

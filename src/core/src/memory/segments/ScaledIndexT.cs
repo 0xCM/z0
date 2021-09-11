@@ -13,13 +13,13 @@ namespace Z0
     public readonly struct ScaledIndex<T>
         where T : unmanaged
     {
-        public uint Offset {get;}
+        public readonly uint Offset;
 
-        public sbyte Scale {get;}
+        public readonly sbyte Scale;
 
-        public byte Mod {get;}
+        public readonly byte Mod;
 
-        public byte CellWidth {get;}
+        public readonly byte CellWidth;
 
         [MethodImpl(Inline)]
         public ScaledIndex(byte width, sbyte scale, uint index)

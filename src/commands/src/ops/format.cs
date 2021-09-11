@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Cmd
     {
-        [MethodImpl(Inline), Formatter]
+        [MethodImpl(Inline), Op]
         public static string format(CmdOptionSpec src)
             => src.IsEmpty ? EmptyString : string.Format("{0,-32}:{1}", src.Name, src.Description);
 

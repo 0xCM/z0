@@ -11,8 +11,6 @@ namespace Z0.Asm
     using static core;
     using static AsmOperands;
 
-//| FF /4       | JMP r/m64    | M     | Valid       | N.E.            | Jump near, absolute indirect, RIP = 64-Bit offset from register or memory                     |
-
     [ApiHost]
     public readonly struct Jmp64
     {

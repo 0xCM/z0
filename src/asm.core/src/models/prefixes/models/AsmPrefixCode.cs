@@ -13,12 +13,12 @@ namespace Z0.Asm
     /// Represents a prefix encoding
     /// [Kind[24,27] | Encoding]
     /// </summary>
-    public struct AsmPrefix
+    public struct AsmPrefixCode
     {
         uint Data;
 
         [MethodImpl(Inline)]
-        internal AsmPrefix(uint data)
+        internal AsmPrefixCode(uint data)
         {
             Data = data;
         }

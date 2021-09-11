@@ -46,8 +46,20 @@ namespace Z0
         {
             var buffer = CharBlock8.Null.Data;
             var i=0u;
-            var count = render8(src, ref i, buffer);
-            return slice(buffer,0,count);
+            return buffer;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render8(byte src, uint maxbits, uint j, Span<char> dst)
+        {
+            for(byte i=0; i<8; i++, j++)
+            {
+                if(j>=maxbits)
+                    break;
+
+                seek(dst, (uint)j) = bit.test(src, i).ToChar();
+            }
+            return j;
         }
     }
 }

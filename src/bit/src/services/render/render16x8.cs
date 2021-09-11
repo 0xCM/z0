@@ -16,14 +16,10 @@ namespace Z0
         public static uint render16x8(ushort src, uint offset, char sep, Span<char> dst)
         {
             var counter = 0u;
-            var x = z8;
             var cells = bytes(src);
-            x = skip(cells,0);
-            counter += render8(x, counter + offset, dst);
+            counter += render8(skip(cells,1), counter + offset, dst);
             counter += separate(counter + offset, sep, dst);
-
-            x = skip(cells,1);
-            counter += render8(x, counter + offset, dst);
+            counter += render8(skip(cells,0), counter + offset, dst);
             return counter;
         }
 
@@ -38,6 +34,5 @@ namespace Z0
             var count = render16x8(src, 0, sep, buffer);
             return slice(buffer,0,count);
         }
-
     }
 }

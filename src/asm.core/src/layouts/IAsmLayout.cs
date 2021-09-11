@@ -14,8 +14,8 @@ namespace Z0.Asm
 
         ReadOnlySpan<byte> Content {get;}
 
-        byte ContentSize => (byte)Content.Length;
-
+        byte ContentSize
+            => (byte)Content.Length;
     }
 
     public interface IAsmLayout<T> : IAsmLayout

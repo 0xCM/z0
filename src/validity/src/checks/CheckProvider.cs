@@ -8,7 +8,5 @@ namespace Z0
     {
         public static CheckProvider create()
             => new CheckProvider();
-
-        public ICheckEquatable CheckEquatable => new CheckEquatable();
     }
 }

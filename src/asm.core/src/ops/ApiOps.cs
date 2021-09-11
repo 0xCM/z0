@@ -5,15 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IOperationChecker : IClaimValidator
+    public readonly partial struct ApiOps
     {
-        OpUri Operation {get;}
-    }
 
-    public interface IEquatableChecker : IOperationChecker
-    {
-        CheckResult Eq<T>(T lhs, T rhs)
-            where T : IEquatable<T>;
+
     }
 }

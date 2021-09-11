@@ -35,7 +35,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public void Traverse(ApiCodeBlocks src, AsmDetailProducer dst)
+        public void Traverse(ApiCodeBlocks src, AsmReceiverModel dst)
         {
             var blocks = src.View;
             var count = blocks.Length;

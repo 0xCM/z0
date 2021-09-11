@@ -9,24 +9,17 @@ namespace Z0
 
     using static Root;
 
-    public sealed class DocsWs : IWorkspace<DocsWs>
+    public sealed class DocsWs : Workspace<DocsWs>
     {
         [MethodImpl(Inline)]
         public static DocsWs create(FS.FolderPath root)
             => new DocsWs(root);
 
-        FS.FolderPath _WsRoot;
-
         [MethodImpl(Inline)]
-        DocsWs(FS.FolderPath root)
+        internal DocsWs(FS.FolderPath root)
+            : base(root)
         {
-            _WsRoot = root;
-        }
 
-        public FS.FolderPath Root
-        {
-            [MethodImpl(Inline)]
-            get => _WsRoot;
         }
     }
 }

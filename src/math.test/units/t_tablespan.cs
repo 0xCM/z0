@@ -4,7 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Typed;
+    using static Root;
+    using static core;
 
     public class t_tablespan : UnitTest<t_tablespan>
     {

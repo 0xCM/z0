@@ -9,33 +9,17 @@ namespace Z0
 
     using static Root;
 
-    public sealed class SourcesWs : IWorkspace<SourcesWs>
+    public sealed class SourcesWs : Workspace<SourcesWs>
     {
         [MethodImpl(Inline)]
         public static SourcesWs create(FS.FolderPath root)
             => new SourcesWs(root);
 
-        FS.FolderPath _WsRoot;
-
         [MethodImpl(Inline)]
-        SourcesWs(FS.FolderPath root)
+        internal SourcesWs(FS.FolderPath root)
+            : base(root)
         {
-            _WsRoot = root;
-        }
 
-        public FS.FolderPath Root
-        {
-            [MethodImpl(Inline)]
-            get => _WsRoot;
-        }
-
-        public FS.FolderPath WsRoot()
-            => _WsRoot;
-
-        public FS.FolderPath WsRoot(FS.FolderPath src)
-        {
-            _WsRoot = src;
-            return WsRoot();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
             var i=0u;
             var buffer = CharBlock2.Null;
             var dst = buffer.Data;
-            render8x2(src, ref i, dst);
+            render2(src, ref i, dst);
             return new string(dst);
         }
 

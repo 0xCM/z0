@@ -38,11 +38,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> render16(ushort src)
         {
-            var buffer = CharBlock32.Null.Data;
+            var buffer = CharBlock16.Null.Data;
             var i=0u;
-            var count = render16(src, ref i, buffer);
-            return slice(buffer,0,count);
+            render16(src, ref i, buffer);
+            return buffer;
         }
-
     }
 }

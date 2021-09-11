@@ -20,6 +20,12 @@ namespace Z0.Asm
         unsafe Outcome Test(CmdArgs args)
         {
             var result = Outcome.Success;
+            DagTests();
+            return result;
+        }
+
+        void CheckCells()
+        {
             var source = alloc<byte>(Pow2.T08);
             source.Clear();
             Random.Bytes(source);
@@ -35,8 +41,45 @@ namespace Z0.Asm
                 slice(buffer,0,len);
                 Write(string.Format("{0} = {1}", bits.TypeName, text.format(slice(buffer,0,len))));
             }
+        }
 
-            return result;
+        static Outcome same(string a, string b)
+        {
+            var same = a.Equals(b);
+            return (same, string.Format("{0} {1} {2}", a, same ? "==" : "!=", b));
+        }
+
+        void CheckAsmHexCode()
+        {
+            // 4080C416                add spl,22
+            var buffer = span<char>(20);
+            var input1 = "40 80 c4 16";
+            var input2 = "4080C416";
+            HexNumericParser.parse64u(input2, out var input3);
+
+            var code1 = asm.code(input1);
+            var code2 = asm.code(input2);
+            var code3 = asm.code(input3);
+
+            var text1 = code1.Format();
+            var text2 = code2.Format();
+            var text3 = code3.Format();
+
+            Wf.Row(code1.Format());
+            Wf.Row(code2.Format());
+            Wf.Row(code3.Format());
+
+            var check1 = same(text1,text2);
+            if(check1.Fail)
+                Wf.Error(check1.Message);
+            else
+                Wf.Status(check1.Message);
+
+            var check2 = same(text1,text3);
+            if(check2.Fail)
+                Wf.Error(check2.Message);
+            else
+                Wf.Status(check2.Message);
         }
 
         Outcome TestAsmSizes()
@@ -87,20 +130,21 @@ namespace Z0.Asm
         unsafe Outcome DagTests()
         {
             var result = Outcome.Success;
-
             var op0 = asm.imm8(32);
-            var dag0 = Values.dag(AsmId.AAD8i8, &op0);
-            Write(dag0.Format());
 
+            var dag0 = Values.dag(AsmId.AAD8i8, &op0);
+
+            Write(dag0.Format());
             return result;
         }
 
+        [CmdOp(".bit-mappers")]
         Outcome TestBitMappers(CmdArgs args)
         {
             var result = Outcome.Success;
-            var symbols = Symbols.index<AsmOcTokenKind>();
+            var symbols = Symbols.index<ConditionCodes.Condition>();
             var symview = symbols.View;
-            var map = BitMappers.define<AsmOcTokenKind,Pow2x16>(symbols);
+            var map = BitMappers.define<ConditionCodes.Condition,Pow2x16>(symbols);
             var data = BitMappers.serialize(map).View;
             var count = map.PointCount;
             var indices = slice(data,0, count);
@@ -110,7 +154,6 @@ namespace Z0.Asm
                 ref readonly var symbol = ref skip(symview,i);
                 ref readonly var entry = ref map[symbol.Kind];
                 ref readonly var index = ref skip(data,i);
-                var buffer = CharBlock32.Null;
                 var bitstring = BitRender.format16(skip(bits,i));
                 var expr = string.Format("{0} => {1}", entry, bitstring);
                 Write(expr);
@@ -118,7 +161,6 @@ namespace Z0.Asm
 
             return result;
         }
-
 
         Outcome TestAsmWidths()
         {

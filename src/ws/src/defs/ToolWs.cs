@@ -17,11 +17,11 @@ namespace Z0
         public static ToolWs create(FS.FolderPath root)
             => new ToolWs(root);
 
-        public FS.FolderPath Root {get; private set;}
+        public FS.FolderPath Root {get;}
 
         Dictionary<ToolId,ToolConfig> ConfigLookup;
 
-        public ToolWs(FS.FolderPath root)
+        internal ToolWs(FS.FolderPath root)
         {
             Root = root;
             ConfigLookup = dict<ToolId,ToolConfig>();
@@ -32,16 +32,5 @@ namespace Z0
 
         public void Configure(ToolId id, in ToolConfig src)
             => ConfigLookup[id] = src;
-
-        public FS.FolderPath WsRoot()
-        {
-            return Root;
-        }
-
-        public FS.FolderPath WsRoot(FS.FolderPath src)
-        {
-            Root = src;
-            return WsRoot();
-        }
     }
 }

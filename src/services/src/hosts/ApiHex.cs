@@ -443,8 +443,10 @@ namespace Z0
             var buffer = alloc<ApiHexIndexRow>(count);
             var target = span(buffer);
             var parts = PartNames.NameLookup();
-            using var emitter = Tables.emitter<ApiHexIndexRow>(array<byte>(10, 16, 20, 20, 20, 120), dst);
-            emitter.EmitHeader();
+
+            using var writer = dst.Utf8Writer();
+            var formatter = Tables.formatter<ApiHexIndexRow>(array<byte>(10, 16, 20, 20, 20, 120));
+            writer.WriteLine(formatter.FormatHeader());
             for(var i=0u; i<count; i++)
             {
                 ref readonly var block = ref skip(blocks,i);
@@ -456,7 +458,7 @@ namespace Z0
                 record.HostName = block.OpUri.Host.HostName;
                 record.MethodName = block.OpId.Name;
                 record.Uri = block.OpUri;
-                emitter.Emit(record);
+                writer.WriteLine(formatter.Format(record));
             }
 
             Wf.EmittedTable(flow, count);

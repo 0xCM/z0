@@ -7,9 +7,6 @@ namespace Z0
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
     {
-        protected FS.FileExt CsvExt
-            => FS.Csv;
-
         public static N0 n0 => default;
 
         public static N1 n1 => default;
