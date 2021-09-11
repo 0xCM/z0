@@ -27,7 +27,6 @@ namespace Z0
             {
                 ref readonly var a0 = ref skip(src, pos);
                 ref readonly var a1 = ref skip(src, pos + 1);
-
                 if(SQ.eol(a0,a1))
                     counter++;
             }

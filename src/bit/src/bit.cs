@@ -13,7 +13,7 @@ namespace Z0
     [ApiHost, DataType]
     public readonly partial struct bit : ITextual, IEquatable<bit>
     {
-        public const uint StorageSize = PrimalSizes.U1;
+        public const uint SZ = PrimalSizes.U1;
 
         internal readonly bool State;
 

@@ -35,7 +35,7 @@ namespace Z0
 
                 if(++counter >= width && config.DelimitBlocks)
                 {
-                    if(config.BlockDelimiter == Chars.NL || config.BlockDelimiter == Chars.LineFeed)
+                    if(config.BlockDelimiter == Chars.NL || config.BlockDelimiter == Chars.CR)
                         dst.AppendLine();
                     else
                         dst.Append(config.BlockDelimiter);

@@ -233,17 +233,12 @@ namespace Z0
         /// <summary>
         /// The line-feed character
         /// </summary>
-        public const char LineFeed = '\r';
+        public const char CR = '\r';
 
         /// <summary>
         /// The end-of-line escape sequence
         /// </summary>
         public const string Eol = "\r\n";
-
-        /// <summary>
-        /// The '↦' character
-        /// </summary>
-        public const char MapsTo = (char)ArrowSymbols.MapsTo;
 
         /// <summary>
         /// The asci null character '\0'
