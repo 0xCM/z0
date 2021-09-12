@@ -80,7 +80,6 @@ namespace Z0
                 ref readonly var literal = ref skip(src,i);
                 var symsrc = literal.Symbol.Data;
                 var width = (ushort)symsrc.Length;
-
                 seek(widths, i) = width;
                 seek(values, i) = (ushort)literal.ScalarValue;
                 seek(id, i) = literal.Name;

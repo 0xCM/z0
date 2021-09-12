@@ -36,32 +36,5 @@ namespace Z0.Asm
 
             return result;
         }
-
-        Outcome FileTypesTest2()
-        {
-            var result = Outcome.Success;
-            var src = ApiLiterals.provided(typeof(FileKindNames)).View;
-            var count = src.Length;
-            var symbols = alloc<MemorySymbol>(count);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var literal = ref skip(src,i);
-                var address = (StringAddress)literal.Data;
-                seek(symbols,i) = MemorySymbols.symbol(i, address);
-            }
-
-            result = HashFunctions.perfect(symbols, out var entries);
-            if(result.Fail)
-                return result;
-
-            var formatter = Tables.formatter<HashEntry>();
-
-            for(var i=0; i<count; i++)
-            {
-                Write(formatter.Format(entries[i]));
-            }
-
-            return result;
-        }
     }
 }

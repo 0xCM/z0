@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static EnvFolders;
-
     partial interface IEnvPaths
     {
         FS.FilePath IndexFile(string id)

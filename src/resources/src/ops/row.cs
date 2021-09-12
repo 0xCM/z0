@@ -16,7 +16,7 @@ namespace Z0
         {
             var dst = new StringResRow();
             dst.Id = src.Source.MetadataToken;
-            dst.Address = src.Format();
+            dst.Address = src.Value;
             dst.Length = (uint)src.Value.Length;
             return dst;
         }

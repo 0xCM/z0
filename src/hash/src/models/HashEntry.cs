@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct HashEntry : IRecord<HashEntry>
+    public struct HashEntry : IComparable<HashEntry>
     {
         public const string TableId = "text.hashed";
 
@@ -16,5 +18,8 @@ namespace Z0
         public Hash32 Code;
 
         public TextBlock Content;
+
+        public int CompareTo(HashEntry src)
+            => Key.CompareTo(src.Key);
     }
 }

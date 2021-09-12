@@ -50,12 +50,11 @@ namespace Z0
                 seek(target,j) = skip(vb,i);
         }
 
-
         [Op]
         public static string format(IncludePath src, PathSeparator sep, bool quote)
         {
             var dst = text.buffer();
-            root.iter(src.Entries, include => dst.AppendFormat("{0};", include.Format(sep, quote)));
+            iter(src.Entries, include => dst.AppendFormat("{0};", include.Format(sep, quote)));
             return dst.Emit();
         }
 

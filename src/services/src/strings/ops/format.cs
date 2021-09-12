@@ -4,11 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiSigTypeMod<T> : ITextual
-        where T : struct, IApiSigTypeMod<T>
+    partial struct StringTables
     {
-        Name Name {get;}
-
-        ApiSigModKind Kind {get;}
+        public static string format(in StringTable src, uint margin = 0)
+        {
+            var dst = text.buffer();
+            render(margin, src, dst);
+            return dst.Emit();
+        }
     }
 }

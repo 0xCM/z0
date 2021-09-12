@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct root
+    partial struct core
     {
         /// <summary>
         /// Invokes an action if the supplied value is not null
@@ -17,7 +17,7 @@ namespace Z0
         /// <typeparam name="V">The value type</typeparam>
         /// <param name="x">The potentially null value</param>
         /// <param name="f">The action to invoke if possible</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void ifsome<T>(T x, Action<T> f)
             where T : class
         {
@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="V">The value type</typeparam>
         /// <param name="x">The potentially null value</param>
         /// <param name="f">The action to invoke if possible</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void ifsome<T>(T? x, Action<T> f)
             where T : struct
         {

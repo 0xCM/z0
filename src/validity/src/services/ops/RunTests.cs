@@ -11,7 +11,7 @@ namespace Z0
         void RunTests(bool concurrent, Index<string> hosts)
         {
             var types = hosts.IsEmpty ? FindHosts() : FindHosts(hosts);
-            root.iter(types, h =>  RunUnit(h), concurrent);
+            core.iter(types, h =>  RunUnit(h), concurrent);
         }
 
         protected virtual void RunTests(params string[] hosts)

@@ -34,13 +34,13 @@ namespace Z0.Asm
                 var symbol = comp.GetAssemblySymbol(metadata);
                 var gns = symbol.GlobalNamespace;
                 var types = gns.GetTypes();
-                root.iter(types, show);
+                iter(types, show);
             }
 
             void show(CodeSymbolModels.TypeSymbol src)
             {
                 Wf.Row(src);
-                root.iter(src.GetMembers(), m => Wf.Row(m));
+                iter(src.GetMembers(), m => Wf.Row(m));
             }
         }
 
@@ -195,13 +195,6 @@ namespace Z0.Asm
             var count = producer.Produce(FS.FolderPath.Empty, Toolspace.nasm, hosts);
         }
 
-        void ShowRegKinds(RegKind src, ShowLog dst)
-        {
-            if(src.IsNonZero())
-                dst.Show(src);
-        }
-
-
         void ShowOptions()
         {
             var protocol = Cmd.protocol(Cmd.prefix('-','-'), ' ');
@@ -229,20 +222,6 @@ namespace Z0.Asm
                     term.print(line);
                     line = reader.ReadLine();
                 }
-            }
-        }
-
-        void ShowLetters()
-        {
-            using var flow = Wf.Running();
-            var resources = Resources.strings(typeof(AsciCharText));
-            var rows = Resources.rows(resources).View;
-            var count = resources.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var res = ref skip(resources,i);
-                ref readonly var row = ref skip(rows,i);
-                Wf.Row(row);
             }
         }
 
@@ -445,13 +424,6 @@ namespace Z0.Asm
             var descriptors = ApiCode.descriptors(Wf);
             Wf.Row($"Loaded {descriptors.Count} descriptors");
         }
-
-        void TestTextProps()
-        {
-            var a0 = TextProp.define("name0", "value0");
-            Wf.Row(a0);
-        }
-
 
         void FilterApiBlocks()
         {

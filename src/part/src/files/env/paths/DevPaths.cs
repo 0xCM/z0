@@ -11,15 +11,6 @@ namespace Z0
         FS.FolderPath DevRoot(string id)
             => DevRoot() + FS.folder(id);
 
-        FS.FolderPath ZSrc()
-            => ZRoot() + FS.folder(src);
-
-        FS.FolderPath ZSrc(string project)
-            => ZSrc() + FS.folder(project);
-
-        FS.FolderPath ZSrc(string project, string subfolder)
-            => ZSrc(project) + FS.folder(subfolder);
-
         FS.FolderPath PartSrcDir(string id)
             => ZRoot() + FS.folder(src) + FS.folder(id);
 

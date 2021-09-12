@@ -15,6 +15,7 @@ namespace Z0.Asm
     /// </summary>
     public class AddressMap
     {
+        [MethodImpl(Inline)]
         public static AddressMap cover(NativeBufferSeq segs)
             => new AddressMap(segs);
 
@@ -22,7 +23,8 @@ namespace Z0.Asm
 
         MemoryAddress BaseAddress;
 
-        AddressMap(NativeBufferSeq segs)
+        [MethodImpl(Inline)]
+        internal AddressMap(NativeBufferSeq segs)
         {
             Segs = segs;
             BaseAddress = segs[0].Address;
@@ -48,8 +50,8 @@ namespace Z0.Asm
             => Segs[i].Address;
 
         [MethodImpl(Inline)]
-        public MemoryAddress Address(uint i0, Disp32 disp)
-            => Base(i0) + disp.Value;
+        public MemoryAddress Address(uint i, uint disp)
+            => Base(i) + disp;
 
         [MethodImpl(Inline)]
         public MemorySeg Seg(uint i)

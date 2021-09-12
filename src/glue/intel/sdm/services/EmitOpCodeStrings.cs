@@ -20,8 +20,7 @@ namespace Z0.Asm
                 seek(items,i) = (i,skip(src,i).OpCode);
 
             var dst = Wf.EnvPaths.Codebase(PartId.AsmData) + FS.folder("src/sources/gen");
-            var spec = StringTables.specify("Z0.Asm", "OpCodeStrings", items);
-            return StringTableGen.create(Wf).Generate(spec, dst);
+            return StringTables.emit(StringTables.specify("Z0.Asm", "OpCodeStrings", items), dst);
         }
     }
 }

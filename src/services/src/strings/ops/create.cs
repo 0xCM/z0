@@ -12,19 +12,6 @@ namespace Z0
 
     partial struct StringTables
     {
-        static Identifier[] identifiers(ReadOnlySpan<string> lines, char delimiter)
-        {
-            var identifiers = list<Identifier>();
-            for(var i=0; i<lines.Length; i++)
-            {
-                ref readonly var line = ref skip(lines,i);
-                var cells = line.SplitClean(delimiter).Select(x => x.Trim());
-                for(var j=0; j<cells.Length; j++)
-                    identifiers.Add(skip(cells,j));
-            }
-            return identifiers.ToArray();
-        }
-
         public static StringTable create(ReadOnlySpan<string> lines, string name, char delimiter)
         {
             var buffer = list<string>();
@@ -83,6 +70,19 @@ namespace Z0
             for(var j=0; j<count; j++)
                 seek(dst,i++) = skip(src,j);
             return i - i0;
+        }
+
+        static Identifier[] identifiers(ReadOnlySpan<string> lines, char delimiter)
+        {
+            var identifiers = list<Identifier>();
+            for(var i=0; i<lines.Length; i++)
+            {
+                ref readonly var line = ref skip(lines,i);
+                var cells = line.SplitClean(delimiter).Select(x => x.Trim());
+                for(var j=0; j<cells.Length; j++)
+                    identifiers.Add(skip(cells,j));
+            }
+            return identifiers.ToArray();
         }
     }
 }

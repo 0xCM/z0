@@ -27,14 +27,13 @@ namespace Z0
             if(parts.Length < 3)
                 return (false, AppMsg.FieldCountMismatch.Format(3, parts.Length));
 
-            Outcome result = true;
-
+            var result = Outcome.Success;
             result = uint.TryParse(skip(parts,0), out dst.Id);
             if(result.Fail)
                 return (false, "Parsing item id failed");
 
-            dst.Type = skip(parts,1);
-            dst.Value = skip(parts,2);
+            dst.Type = skip(parts, 1);
+            dst.Value = skip(parts, 2);
             return result;
         }
     }

@@ -7,13 +7,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     public readonly struct ListItem<T>
     {
-        public uint Index {get;}
+        public readonly uint Index;
 
-        public T Content {get;}
+        public readonly T Content;
 
         [MethodImpl(Inline)]
         public ListItem(uint index, T content)
@@ -29,7 +28,7 @@ namespace Z0
             => Format();
 
         public ListItem ToRecord(string type)
-            => ListItems.record(this,type);
+            => ListItems.record(this, type);
 
         [MethodImpl(Inline)]
         public static implicit operator ListItem<T>((uint index, T content) src)

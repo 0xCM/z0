@@ -4,16 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Root;
 
-    partial struct root
+    [ApiHost]
+    public readonly partial struct StringTables
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T zero<T>()
-            where T : unmanaged
-                => default(T);
+        const NumericKind Closure = UnsignedInts;
     }
 }

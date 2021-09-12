@@ -11,7 +11,7 @@ namespace Z0
 
     using api = StringTables;
 
-    public readonly struct StringTable
+    public class StringTable
     {
         public Identifier Name {get;}
 
@@ -37,13 +37,13 @@ namespace Z0
         public ReadOnlySpan<char> this[int index]
         {
             [MethodImpl(Inline)]
-            get => api.chars(this, index);
+            get => Entry(index);
         }
 
         public ReadOnlySpan<char> this[uint index]
         {
             [MethodImpl(Inline)]
-            get => api.chars(this, (int)index);
+            get => Entry((int)index);
         }
 
         [MethodImpl(Inline)]
@@ -77,6 +77,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => _Identifiers.View;
         }
+
         public uint[] OffsetStorage
         {
             [MethodImpl(Inline)]

@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
     using static EnvFolders;
 
     using SP = SymbolPaths;
@@ -56,9 +52,6 @@ namespace Z0
         FS.FolderPath DbDocRoot()
             => DbRoot() + FS.folder(docs);
 
-        FS.FolderPath ZBuildRoot()
-            => ZRoot() + FS.folder(dotbuild);
-
         FS.FolderPath JobRoot()
             => DbRoot() + FS.folder(jobs);
 
@@ -77,12 +70,6 @@ namespace Z0
         FS.FolderPath ListRoot()
             => DbRoot() + FS.folder(lists);
 
-        FS.FolderPath ArchiveRoot()
-            => Env.Archives;
-
-        FS.FolderPath RepoArchiveRoot()
-            => BinaryRoot() + FS.folder(source);
-
         FS.FolderPath BuildArchiveRoot()
             => BinaryRoot() + FS.folder(builds);
 
@@ -100,9 +87,6 @@ namespace Z0
 
         FS.FolderPath DevRoot()
             => Env.DevRoot;
-
-        FS.FolderPath ZDev()
-            => Env.ZDev;
 
         FS.FolderPath ZRoot()
             => DevRoot(z0);

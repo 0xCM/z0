@@ -14,7 +14,6 @@ namespace Z0.llvm
         public Outcome GenStringTables()
         {
             const string TargetId = "llvm.stringtables";
-
             var result = Outcome.Success;
             var lists = Ws.Sources().Dataset(LlvmDatasetNames.TblgenLists).AllFiles.View;
             var count = lists.Length;
@@ -32,15 +31,9 @@ namespace Z0.llvm
                 var lines = path.ReadLines().View;
                 var table = StringTables.create(lines, name, delimiter);
                 var spec = StringTables.specify("Z0." + TargetId, table);
-                StringTables.gencode(spec, cswriter);
+                StringTables.encode(spec, cswriter);
                 for(var j=0u; j<table.EntryCount; j++)
-                {
-                    var content = table[j];
-                    ref readonly var id = ref table.Identifier(j);
-                    var row = StringTables.row(table, j);
-                    rowwriter.WriteLine(formatter.Format(row));
-                }
-
+                    rowwriter.WriteLine(formatter.Format(StringTables.row(table, j)));
                 Write(string.Format("{0}: Stringtable emitted", Relations.arrow(path.ToUri(),csdst.ToUri())));
             }
 

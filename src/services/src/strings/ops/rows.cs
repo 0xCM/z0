@@ -13,19 +13,9 @@ namespace Z0
 
     partial struct StringTables
     {
-        public static void gencode(StringTableSpec src, StreamWriter dst)
-        {
-            var entries = src.Entries;
-            var count = entries.Length;
-            dst.WriteLine(string.Format("namespace {0}",src.Namespace));
-            dst.WriteLine(Chars.LBrace);
-            dst.WriteLine(string.Format("    using {0};", "System"));
-            dst.WriteLine();
-            dst.WriteLine(string.Format("    using static {0};", "core"));
-            dst.WriteLine();
-            dst.WriteLine(StringTables.create(src.TableName, src.Entries).Format(4));
-            dst.WriteLine(Chars.RBrace);
-        }
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static StringTableRow row(in StringTable src, uint index)
+            => new StringTableRow(src.Name, index, text.format(src[index]));
 
         [Op]
         public static uint rows(StringTableSpec src, Span<StringTableRow> dst)
@@ -43,11 +33,13 @@ namespace Z0
             return count;
         }
 
-        public static string format(in StringTable src, uint margin = 0)
+        [MethodImpl(Inline), Op]
+        public static uint rows(in StringTable src, uint offset, Span<StringTableRow> dst)
         {
-            var dst = text.buffer();
-            emit(margin, src, dst);
-            return dst.Emit();
+            var j=0u;
+            for(var i=offset; i<src.EntryCount && j<dst.Length; i++)
+                seek(dst,j++) = row(src,i);
+            return j;
         }
     }
 }

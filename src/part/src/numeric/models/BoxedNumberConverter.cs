@@ -38,7 +38,7 @@ namespace Z0
             }
             catch(Exception)
             {
-                return root.none<object>();
+                return Option.none<object>();
             }
         }
 

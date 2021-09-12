@@ -29,7 +29,7 @@ namespace Z0
             Events = events;
             States = states;
             Results = results;
-            Rules = root.array(api.rule(E1,S0,S1), api.rule(E1, S1, S2), api.rule(E1, S2, S3), api.rule(E1,S3, S4), api.rule(E1,S4,S5));
+            Rules = core.array(api.rule(E1,S0,S1), api.rule(E1, S1, S2), api.rule(E1, S2, S3), api.rule(E1,S3, S4), api.rule(E1,S4,S5));
         }
 
         [MethodImpl(Inline)]

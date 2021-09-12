@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using static EnvFolders;
 
     partial interface IEnvPaths
@@ -16,7 +15,7 @@ namespace Z0
             => CatalogRoot() + FS.folder(asm);
 
         FS.FilePath AsmCatalogTable<T>()
-            where T : struct, IRecord<T>
+            where T : struct
                 => AsmCatalogRoot() + FS.file(TableId<T>(), FS.Csv);
     }
 }

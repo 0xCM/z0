@@ -25,7 +25,7 @@ namespace Z0
                     ExecExplicit(et, host.Name, results);
                 else
                 {
-                    root.iter(FindTests(host), t =>  execTime += RunCase(unit, t, results));
+                    core.iter(FindTests(host), t =>  execTime += RunCase(unit, t, results));
                     BenchmarkQueue.Enqueue(unit.TakeBenchmarks().Array());
                 }
 

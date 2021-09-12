@@ -12,9 +12,6 @@ namespace Z0
 
     partial struct root
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool same<T>(T a, T b)
-            => EqualityComparer<T>.Default.Equals(a,b);
 
         [MethodImpl(Inline), Op]
         public static IndexedSeq<T> seq<T>(params T[] src)

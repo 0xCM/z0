@@ -21,10 +21,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var fv = ref skip(values,i);
-                ref var target = ref seek(dst,i);
-                target.Address = fv.Right;
-                target.Source = fv.Left;
-                target.Value = fv.Right;
+                seek(dst,i) = new(fv.Left,fv.Right);
             }
             return buffer;
         }

@@ -70,6 +70,7 @@ namespace Z0
                     record.Key = (hash.Hash % count);
                     record.Content = hash.Source;
                 }
+                dst.Sort();
             }
             catch(Exception e)
             {

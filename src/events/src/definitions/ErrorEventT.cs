@@ -34,7 +34,7 @@ namespace Z0
         public ErrorEvent(CmdId cmd, T data, EventOrigin source)
         {
             EventId = (Kind, cmd, CorrelationToken.Default);
-            Exception = root.none<Exception>();
+            Exception = Option.none<Exception>();
             Payload = data;
             Source = source;
             Summary = Payload.Format();

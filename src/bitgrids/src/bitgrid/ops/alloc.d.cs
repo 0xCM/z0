@@ -26,7 +26,7 @@ namespace Z0
             var blocksize = n256;
             var blocks = CellCalcs.blockcount<T>(blocksize, (uint)nat64u(m), (uint)nat64u(n));
             var data = Z0.SpanBlocks.alloc<T>(blocksize, blocks);
-            return new BitGrid<M, N, T>(data);
+            return new BitGrid<M,N,T>(data);
         }
 
         /// <summary>

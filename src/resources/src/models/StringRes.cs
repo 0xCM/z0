@@ -15,8 +15,6 @@ namespace Z0
     /// </summary>
     public struct StringRes : ITextual
     {
-        const string RenderPattern = "{0,-10} | {1,-16} | {2}";
-
         /// <summary>
         /// The resource identifier
         /// </summary>
@@ -27,21 +25,28 @@ namespace Z0
         /// </summary>
         public StringAddress Address;
 
-        /// <summary>
-        /// The resource value extracted from the accompanying location
-        /// </summary>
-        public string Value;
-
         [MethodImpl(Inline)]
-        public StringRes(FieldInfo src, StringAddress address, string value)
+        public StringRes(FieldInfo src, StringAddress address)
         {
             Source = src;
             Address = address;
-            Value = value;
         }
 
-        [MethodImpl(Inline)]
+        /// <summary>
+        /// The resource value extracted from the accompanying location
+        /// </summary>
+        public string Value
+        {
+            [MethodImpl(Inline)]
+            get => Address.Format();
+        }
+
         public string Format()
-            => Address.Format();
+            => string.Format(RenderPattern, Address.Address, Source.DeclaringType.Name, Source.Name, Value);
+
+        public override string ToString()
+            => Format();
+
+        const string RenderPattern = "{0} {1}::{2} = \"{3}\"";
     }
 }

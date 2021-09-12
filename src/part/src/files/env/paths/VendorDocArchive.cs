@@ -8,12 +8,6 @@ namespace Z0
 
     public readonly struct VendorDocArchive : IFileArchive
     {
-        public static VendorDocArchive create()
-            => new VendorDocArchive(Env.load().VendorDocs.Value);
-
-        public static VendorDocArchive create(Env env)
-            => new VendorDocArchive(env.VendorDocs.Value);
-
         public FS.FolderPath Root {get;}
 
         public VendorDocArchive(FS.FolderPath root)

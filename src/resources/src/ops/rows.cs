@@ -12,7 +12,7 @@ namespace Z0
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
-        public static Index<StringResRow> rows(Index<StringRes> src)
+        public static ReadOnlySpan<StringResRow> rows(ReadOnlySpan<StringRes> src)
             => src.Select(r => row(r));
     }
 }

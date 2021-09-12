@@ -8,7 +8,7 @@ namespace Z0
 
     partial struct StringTables
     {
-        public static void emit(uint margin, in StringTable src, ITextBuffer dst)
+        public static void render(uint margin, in StringTable src, ITextBuffer dst)
         {
             dst.IndentLine(margin, PublicReadonlyStruct(src.Name));
             dst.IndentLine(margin, Open());
@@ -33,7 +33,7 @@ namespace Z0
             dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryAddress), OffsetBaseProp, "address(Offsets)"));
             dst.AppendLine();
 
-            index(margin, src, dst);
+            GenIndex(margin, src, dst);
             dst.AppendLine();
 
             dst.IndentLine(margin, SpanRes.bytespan(OffsetsProp, src.OffsetStorage).Format());
@@ -41,6 +41,23 @@ namespace Z0
             dst.IndentLine(margin, SpanRes.charspan(DataProp, src.Content).Format());
             margin-=4;
             dst.IndentLine(margin, Close());
+        }
+
+        static void GenIndex(uint margin, in StringTable src, ITextBuffer dst)
+        {
+            var count = src.EntryCount;
+            dst.IndentLine(margin, string.Format("public enum Index : uint"));
+            dst.IndentLine(margin, Chars.LBrace);
+            margin+=4;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var id = ref src.Identifier(i);
+                if(id.IsEmpty)
+                    break;
+                dst.IndentLineFormat(margin, "{0}={1},", id, i);
+            }
+            margin-=4;
+            dst.IndentLine(margin, Chars.RBrace);
         }
     }
 }

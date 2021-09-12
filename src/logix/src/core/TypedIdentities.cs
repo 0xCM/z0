@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static Root;
+    using static core;
     using static TypedLogicSpec;
 
     using TLS = TypedLogicSpec;
@@ -19,15 +18,15 @@ namespace Z0
     {
         public static Index<ComparisonExpr<T>> ScalarIdentities<T>()
             where T : unmanaged
-                => root.array(AndOverOr<T>(), AndOverXOr<T>(), OrOverAnd<T>(), NotOverAnd<T>(), NotOverXOr<T>());
+                => array(AndOverOr<T>(), AndOverXOr<T>(), OrOverAnd<T>(), NotOverAnd<T>(), NotOverXOr<T>());
 
         public static Index<ComparisonExpr<Vector128<T>>> Vec128Identities<T>()
             where T : unmanaged
-                => root.array(AndOverOr128<T>(), AndOverXOr128<T>(), OrOverAnd128<T>(), NotOverAnd128<T>(), NotOverXOr128<T>());
+                => array(AndOverOr128<T>(), AndOverXOr128<T>(), OrOverAnd128<T>(), NotOverAnd128<T>(), NotOverXOr128<T>());
 
         public static Index<ComparisonExpr<Vector256<T>>> Vec256Identities<T>()
             where T : unmanaged
-                => root.array(AndOverOr256<T>(), AndOverXOr256<T>(), OrOverAnd256<T>(), NotOverAnd256<T>(), NotOverXOr256<T>());
+                => array(AndOverOr256<T>(), AndOverXOr256<T>(), OrOverAnd256<T>(), NotOverAnd256<T>(), NotOverXOr256<T>());
 
         /// <summary>
         /// Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))

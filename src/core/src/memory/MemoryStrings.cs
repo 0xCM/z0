@@ -60,17 +60,17 @@ namespace Z0
         public static unsafe ReadOnlySpan<char> chars(MemoryAddress @base, int i0, int i1)
             => cover(@base.Pointer<char>() + i0, (i1 - i0));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void iter<T>(in MemoryStrings src, Symbols<T> symbols, Action<T,int,uint> f)
-            where T : unmanaged
-        {
-            var count = min(symbols.Length, src.EntryCount);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var symbol = ref skip(symbols,i);
-                f(symbols[(uint)i].Kind, i, length(src,i));
-            }
-        }
+        // [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        // public static void iter<T>(in MemoryStrings src, Symbols<T> symbols, Action<T,int,uint> f)
+        //     where T : unmanaged
+        // {
+        //     var count = min(symbols.Length, src.EntryCount);
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var symbol = ref skip(symbols,i);
+        //         f(symbols[(uint)i].Kind, i, length(src,i));
+        //     }
+        // }
 
         public readonly uint EntryCount;
 
