@@ -456,7 +456,7 @@ namespace Z0.Asm
         void FilterApiBlocks()
         {
             var blocks = Wf.ApiCatalogs().Correlate();
-            var f1 = CodeBlocks.filter(blocks,ApiClassKind.And);
+            var f1 = ApiCodeBlocks.filter(blocks,ApiClassKind.And);
             root.iter(f1,f => Wf.Row(f.Uri));
         }
     }

@@ -109,7 +109,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var code = ref skip(src,i);
-                seek(dst,i) = new MemoryBlock(code.Origin, code.Encoded);
+                seek(dst,i) = new MemoryBlock(code.AddressRange, code.Encoded);
             }
 
             buffer.Sort();
@@ -129,7 +129,7 @@ namespace Z0
                 package.Index = i;
                 package.Address = block.BaseAddress;
                 package.Size = block.Size;
-                package.Data = text.format(slice(buffer,0, Hex.charpack(block.View, buffer)));
+                package.Data = text.format(slice(buffer,0, Hex.charpack(block.Bytes, buffer)));
                 size += package.Size;
             }
             return size;

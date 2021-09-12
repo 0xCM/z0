@@ -8,45 +8,43 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    public readonly struct ApiCodeBlocks : ISortedIndex<ApiCodeBlock>
+    public readonly struct SortedIndex<T> : ISortedIndex<T>
+        where T : IComparable<T>
     {
-        /// <summary>
-        /// The host-owned code
-        /// </summary>
-        readonly ApiCodeBlock[] Data;
+        public static SortedIndex<T> sort(T[] src)
+            => new SortedIndex<T>(src);
 
-        [MethodImpl(Inline)]
-        public ApiCodeBlocks(ApiCodeBlock[] code)
+        readonly Index<T> Data;
+
+        internal SortedIndex(T[] src)
         {
-            Data = code.OrderBy(x => x.BaseAddress);
+            Array.Sort(src);
+            Data = src;
         }
 
-        public SortedReadOnlySpan<ApiCodeBlock> Sorted()
-            => Spans.sorted(@readonly(Data));
-        public ApiCodeBlock[] Storage
+        public T[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ReadOnlySpan<ApiCodeBlock> View
+        public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ref readonly ApiCodeBlock this[long index]
+        public ref readonly T this[long index]
         {
              [MethodImpl(Inline)]
-             get => ref skip(Data,index);
+             get => ref Data[index];
         }
 
-        public ref readonly ApiCodeBlock this[ulong index]
+        public ref readonly T this[ulong index]
         {
              [MethodImpl(Inline)]
-             get => ref skip(Data,index);
+             get => ref Data[index];
         }
 
         /// <summary>
@@ -55,31 +53,28 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data?.Length ?? 0;
+            get => Data.Length;
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Length;
+            get => Data.Count;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Length != 0;
+            get => Data.IsNonEmpty;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Length == 0;
+            get => Data.IsEmpty;
         }
 
-        public static ApiCodeBlocks Empty
-        {
-            [MethodImpl(Inline)]
-            get => new ApiCodeBlocks(sys.empty<ApiCodeBlock>());
-        }
+        public static SortedIndex<T> Empty
+            => new SortedIndex<T>(sys.empty<T>());
     }
 }

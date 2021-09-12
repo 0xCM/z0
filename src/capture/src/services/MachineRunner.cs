@@ -20,8 +20,8 @@ namespace Z0
             try
             {
                 var blocks = Wf.ApiHex().ReadBlocks().Storage;
-                var partitioned = CodeBlocks.hosted(@readonly(blocks));
-                var sorted = blocks.ToSortedSpan();
+                var partitioned = ApiCodeBlocks.hosted(@readonly(blocks));
+                var sorted = blocks.ToSortedIndex();
 
                 if(options.EmitAsmStatements)
                     Wf.AsmCsv().EmitAsmCsv(partitioned, Db.AsmStatementRoot());
@@ -30,7 +30,7 @@ namespace Z0
                     Wf.AsmRowBuilder().Emit(blocks);
 
                 if(options.EmitHexIndex)
-                    Wf.ApiHex().EmitIndex(blocks);
+                    Wf.ApiHex().EmitIndex(sorted, Db.IndexFile(ApiHexIndexRow.TableId));
 
                 if(options.EmitHexPack)
                     Wf.ApiHexPacks().Emit(sorted);

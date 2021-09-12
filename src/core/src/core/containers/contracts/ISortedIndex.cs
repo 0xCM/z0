@@ -7,10 +7,4 @@ namespace Z0
     {
 
     }
-
-    public interface ISortedIndex<I,T> : IIndex<I,T>
-        where I : unmanaged
-    {
-
-    }
 }

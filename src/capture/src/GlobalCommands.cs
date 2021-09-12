@@ -160,7 +160,7 @@ namespace Z0
         ReadOnlySpan<ApiCodeBlock> Blocks()
             => Wf.ApiHex().ReadBlocks().Storage;
 
-        SortedSpan<ApiCodeBlock> SortedBlocks()
-            => Wf.ApiHex().ReadBlocks().Storage.ToSortedSpan();
+        SortedIndex<ApiCodeBlock> SortedBlocks()
+            => Wf.ApiHex().ReadBlocks().Storage.ToSortedIndex();
     }
 }

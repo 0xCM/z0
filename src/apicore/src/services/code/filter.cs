@@ -9,7 +9,7 @@ namespace Z0
 
     using static core;
 
-    partial struct CodeBlocks
+    partial struct ApiCodeBlocks
     {
         public static ReadOnlySpan<ApiMemberCode> filter(ReadOnlySpan<ApiMemberCode> src, ApiClassKind kind)
         {

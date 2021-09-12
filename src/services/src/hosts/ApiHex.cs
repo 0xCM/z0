@@ -148,10 +148,10 @@ namespace Z0
             => HexRoot(root).Files(FS.PCsv);
 
         [Op]
-        public ApiCodeBlocks ReadBlocks()
+        public SortedIndex<ApiCodeBlock> ReadBlocks()
             => ReadBlocks(Db.ParsedExtractPaths());
 
-        public ApiCodeBlocks ReadBlocks(FS.FolderPath src)
+        public SortedIndex<ApiCodeBlock> ReadBlocks(FS.FolderPath src)
             => ReadBlocks(Db.ParsedExtractPaths(src));
 
         [Op]
@@ -245,11 +245,11 @@ namespace Z0
         }
 
         [Op]
-        public ApiCodeBlocks ReadBlocks(FS.Files src)
+        public SortedIndex<ApiCodeBlock> ReadBlocks(FS.Files src)
         {
             var count = src.Length;
             if(count == 0)
-                return ApiCodeBlocks.Empty;
+                return SortedIndex<ApiCodeBlock>.Empty;
 
             var flow = Wf.Running(Msg.LoadingHexFileBlocks.Format(count));
             var view = src.View;
@@ -272,7 +272,7 @@ namespace Z0
 
             Wf.Ran(flow, Msg.LoadedHexBlocks.Format(counter));
 
-            return new ApiCodeBlocks(blocks.ToArray());
+            return SortedIndex<ApiCodeBlock>.sort(blocks.ToArray());
         }
 
         [Op]
@@ -415,21 +415,7 @@ namespace Z0
         static MsgPattern<Name,string> ParseFailure => DataParser.ParseFailure;
 
         [Op]
-        public ReadOnlySpan<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src)
-        {
-            var dst = Db.IndexFile(ApiHexIndexRow.TableId);
-            return EmitIndex(src, dst);
-        }
-
-        [Op]
-        public ReadOnlySpan<ApiHexIndexRow> EmitIndex(Index<ApiCodeBlock> src, FS.FilePath dst)
-        {
-            Array.Sort(src.Storage);
-            return EmitIndex(Spans.sorted(src.View), dst);
-        }
-
-        [Op]
-        public ReadOnlySpan<ApiHexIndexRow> EmitIndex(ApiCodeBlocks src, FS.FilePath dst)
+        public ReadOnlySpan<ApiHexIndexRow> EmitIndex(SortedIndex<ApiCodeBlock> src, FS.FilePath dst)
         {
             return EmitIndex(Spans.sorted(src.View), dst);
         }

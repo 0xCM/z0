@@ -20,7 +20,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var extract = ref skip(src,i);
-                var term = terminal(extract.Encoded.View);
+                var term = terminal(extract.Encoded.Bytes);
                 if(term.TerminalFound)
                     seek(dst, j++) = memblock(extract, term);
             }

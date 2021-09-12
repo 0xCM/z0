@@ -145,8 +145,8 @@ namespace Z0.Asm
 
         public ReadOnlySpan<ApiPartRoutines> Decode(ReadOnlySpan<ApiCodeBlock> src)
         {
-            var hosts = CodeBlocks.hosted(src);
-            var parts = CodeBlocks.parts(hosts);
+            var hosts = ApiCodeBlocks.hosted(src);
+            var parts = ApiCodeBlocks.parts(hosts);
             var count = parts.Length;
             var dst = alloc<ApiPartRoutines>(count);
             Decode(parts, dst);

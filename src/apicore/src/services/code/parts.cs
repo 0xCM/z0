@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    partial struct CodeBlocks
+    partial struct ApiCodeBlocks
     {
         [Op]
         public static ReadOnlySpan<ApiPartBlocks> parts(ReadOnlySpan<ApiHostBlocks> src)

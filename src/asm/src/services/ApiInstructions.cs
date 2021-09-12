@@ -52,7 +52,7 @@ namespace Z0.Asm
             var instructions = src.Instructions;
             var count = (uint)instructions.Length;
             var offset = z16;
-            var bytes = src.Code.View;
+            var bytes = src.Code.Bytes;
             for(var i=0; i<count; i++)
             {
                 ref readonly var instruction = ref skip(instructions,i);

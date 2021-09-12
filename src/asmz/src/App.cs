@@ -238,7 +238,7 @@ namespace Z0.Asm
             Wf.Row(formatter.Format(info,RecordFormatKind.KeyValuePairs));
         }
 
-        public ApiCodeBlocks LoadApiBlocks()
+        public SortedIndex<ApiCodeBlock> LoadApiBlocks()
         {
             return Wf.ApiHex().ReadBlocks();
         }
@@ -325,7 +325,7 @@ namespace Z0.Asm
 
         void ProcessInstructions()
         {
-            var blocks = LoadApiBlocks();
+            var blocks = LoadApiBlocks().View;
             var clock = Time.counter(true);
             var traverser = Wf.ApiCodeBlockTraverser();
             var receiver  = new AsmReceiverModel(Wf,750000);

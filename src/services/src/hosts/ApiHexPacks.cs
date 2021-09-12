@@ -62,7 +62,7 @@ namespace Z0
         }
 
         [Op]
-        public Index<HexPacked> Pack(SortedReadOnlySpan<ApiCodeBlock> src, bool validate = false)
+        public Index<HexPacked> Pack(SortedIndex<ApiCodeBlock> src, bool validate = false)
         {
             const ushort BufferLength = 48400;
 
@@ -94,10 +94,10 @@ namespace Z0
         }
 
         [Op]
-        public Index<HexPacked> Emit(SortedReadOnlySpan<ApiCodeBlock> blocks, FS.FilePath? dst = null, bool validate = false)
+        public Index<HexPacked> Emit(SortedIndex<ApiCodeBlock> src, FS.FilePath? dst = null, bool validate = false)
         {
             var _dst = dst ?? Db.DbTableRoot() + FS.file("apihex", FS.ext("xpack"));
-            var result = Pack(blocks, validate);
+            var result = Pack(src, validate);
             var packed = result.View;
             var emitting = EmittingFile(_dst);
             using var writer = _dst.Writer();

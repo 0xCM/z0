@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using static core;
+    using System;
 
     [ApiHost]
     public class ApiCodeBlockTraverser : AppService<ApiCodeBlockTraverser>
@@ -35,18 +36,18 @@ namespace Z0.Asm
         }
 
         [Op]
-        public void Traverse(ApiCodeBlocks src, AsmReceiverModel dst)
+        public void Traverse(ReadOnlySpan<ApiCodeBlock> src, AsmReceiverModel dst)
         {
-            var blocks = src.View;
+            var blocks = src;
             var count = blocks.Length;
             for(var i=0u; i<count; i++)
                 Traverse(skip(blocks,i), dst);
         }
 
         [Op]
-        public void Traverse(Index<ApiCodeBlock> src, IReceiver<ApiCodeBlock> dst)
+        public void Traverse(ReadOnlySpan<ApiCodeBlock> src, IReceiver<ApiCodeBlock> dst)
         {
-            var blocks = src.View;
+            var blocks = src;
             var count = blocks.Length;
             for(var i=0u; i<count; i++)
                 dst.Deposit(skip(blocks,i));

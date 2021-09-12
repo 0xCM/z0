@@ -10,26 +10,28 @@ namespace Z0
 
     using static Root;
 
-    [StructLayout(LayoutKind.Sequential, Pack=1, Size=(int)StorageSize), Blittable(StorageSize)]
-    public readonly struct ApiCodeKey
+    [StructLayout(LayoutKind.Sequential, Pack=1, Size=(int)SZ), Blittable(SZ)]
+    public readonly struct CodeKey
     {
-        public const uint StorageSize = ApiHostKey.StorageSize + PrimalSizes.U32;
+        public const uint SZ = PrimalSizes.U32 + CodeHostKey.SZ;
 
-        public ApiHostKey HostKey {get;}
+        public CodeHostKey HostKey {get;}
 
         public uint BlockSeq {get;}
 
         [MethodImpl(Inline)]
-        public ApiCodeKey(ApiHostKey host, uint block)
+        public CodeKey(CodeHostKey host, uint block)
         {
             HostKey = host;
             BlockSeq = block;
         }
 
         public string Format()
-            => string.Format("f_{0}_{1}_{2}", (byte)HostKey.Part, HostKey.HostSeq, BlockSeq);
+            => string.Format("{0}:{1:D3}", HostKey, BlockSeq);
 
         public override string ToString()
             => Format();
+
+        public static CodeKey Empty => default;
     }
 }

@@ -28,7 +28,7 @@ namespace Z0
                 size = term.Offset;
 
             var origin = new MemoryRange(src.Address, size);
-            var data = slice(src.Encoded.View, 0, size);
+            var data = slice(src.Encoded.Bytes, 0, size);
             return new MemoryBlock(origin, data.ToArray());
         }
     }

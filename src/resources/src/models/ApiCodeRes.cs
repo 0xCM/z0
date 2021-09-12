@@ -12,14 +12,11 @@ namespace Z0
 
     public readonly struct ApiCodeRes
     {
-        public ApiHostKey Host {get;}
-
         public Index<BinaryResSpec> Data {get;}
 
         [MethodImpl(Inline)]
-        public ApiCodeRes(ApiHostKey key, BinaryResSpec[] src)
+        public ApiCodeRes(BinaryResSpec[] src)
         {
-            Host = key;
             Data = src;
         }
 
@@ -42,6 +39,6 @@ namespace Z0
         }
 
         public static ApiCodeRes Empty
-            => new ApiCodeRes(ApiHostKey.Empty, array<BinaryResSpec>());
+            => new ApiCodeRes(array<BinaryResSpec>());
     }
 }

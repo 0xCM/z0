@@ -23,9 +23,6 @@ namespace Z0.Asm
             var doc = DocModels.unicode(src);
             var reader = doc.CreateReader();
             Write(reader.Count(Chars.NL));
-
-
-
             return result;
         }
 

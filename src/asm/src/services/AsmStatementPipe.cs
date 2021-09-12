@@ -102,7 +102,7 @@ namespace Z0.Asm
                 if(icount == 0)
                     continue;
 
-                var bytes = code.View;
+                var bytes = code.Bytes;
                 var i0 = first(instructions);
                 var blockBase = (MemoryAddress)i0.IP;
                 var blockOffset = z16;

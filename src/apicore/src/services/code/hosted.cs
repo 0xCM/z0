@@ -9,7 +9,7 @@ namespace Z0
 
     using static core;
 
-    partial struct CodeBlocks
+    partial struct ApiCodeBlocks
     {
         [Op]
         static ReadOnlySpan<ApiHostBlocks> hosted(Index<ApiCodeBlock> src)

@@ -36,7 +36,7 @@ namespace Z0
             => Emit(blocks, SourceDir);
 
         public ReadOnlySpan<ApiHostRes> Emit(ReadOnlySpan<ApiCodeBlock> blocks, FS.FolderPath dst)
-            => Emit(CodeBlocks.hosted(blocks), dst);
+            => Emit(ApiCodeBlocks.hosted(blocks), dst);
 
         ReadOnlySpan<ApiHostRes> Emit(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath dst)
         {

@@ -62,7 +62,7 @@ namespace Z0
             get => Code.Storage;
         }
 
-        public ReadOnlySpan<byte> View
+        public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]
             get => Code.Storage;
@@ -77,7 +77,7 @@ namespace Z0
              get => Code.BaseAddress;
         }
 
-        public MemoryRange Origin
+        public MemoryRange AddressRange
         {
             [MethodImpl(Inline)]
             get => new MemoryRange(BaseAddress, (ByteSize)Length);
