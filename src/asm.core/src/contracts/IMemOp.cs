@@ -111,12 +111,10 @@ namespace Z0.Asm
     }
 
     [Free]
-    public interface IMemOp<F,W,T> : IMemOp<T>
-        where T : unmanaged
-        where F : unmanaged, IMemOp<F,W,T>
+    public interface IMemOp<F,W> : IMemOp
+        where F : unmanaged, IMemOp<F,W>
         where W : unmanaged, ITypeWidth
     {
         W Width => default(W);
-
     }
 }

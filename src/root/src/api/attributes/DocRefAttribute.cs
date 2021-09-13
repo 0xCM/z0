@@ -10,11 +10,11 @@ namespace Z0
     /// Specifies a documentation reference
     /// </summary>
     [AttributeUsage(AttributeTargets.All)]
-    public class DocAttribute : Attribute
+    public class DocRefAttribute : Attribute
     {
         public string Reference {get;}
 
-        public DocAttribute(string name)
+        public DocRefAttribute(string name)
             => Reference = name;
     }
 }

@@ -1,5 +1,0 @@
-@echo off
-echo # HelpCmd:%HelpCmd% >> %ToolHelpPath%
-echo # >> %ToolHelpPath%
-
-%HelpCmd% >> %ToolHelpPath%

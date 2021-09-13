@@ -50,7 +50,6 @@ namespace Z0
             get => Empty;
         }
 
-
         [MethodImpl(Inline)]
         public T As<T>()
             where T : struct

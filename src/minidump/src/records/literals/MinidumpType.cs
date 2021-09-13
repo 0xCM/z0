@@ -77,7 +77,7 @@ namespace Z0
         // data providers to include all of their state in the dump.
         // The exact set of what is provided depends on the auxiliary.
         // This can be quite large.
-        [Flags, Doc(Docs + "ne-minidumpapiset-minidump_type.md")]
+        [Flags, DocRef(Docs + "ne-minidumpapiset-minidump_type.md")]
         public enum MinidumpType : ulong
         {
             /// <summary>

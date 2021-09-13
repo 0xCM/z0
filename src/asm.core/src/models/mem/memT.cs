@@ -6,40 +6,62 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
 
     using static Root;
 
     partial struct AsmOperands
     {
         /// <summary>
-        /// Defines a memory operend
+        /// Represents an operand expression of the form BaseReg + IndexReg*Scale + Displacement
         /// </summary>
-        public struct mem<T> : IMemOp<mem<T>>
-            where T : unmanaged, IMemOp
+        public readonly struct mem<T> : IMemOp<T>
+            where T : unmanaged, IMemOp<T>
         {
-            public T Spec;
+            public RegOp Base {get;}
+
+            public RegOp Index {get;}
+
+            public MemoryScale Scale {get;}
+
+            public Disp Disp {get;}
 
             [MethodImpl(Inline)]
-            public mem(T src)
+            public mem(RegOp @base, RegOp index, MemoryScale scale, Disp disp)
             {
-                Spec = src;
+                Base = @base;
+                Index = index;
+                Scale = scale;
+                Disp = disp;
+            }
+
+            public AddressSize AddressSize
+            {
+                [MethodImpl(Inline)]
+                get => Base.WidthCode;
             }
 
             public NativeSize Size
             {
                 [MethodImpl(Inline)]
-                get => Spec.Size;
+                get => default(T).Size;
             }
 
             public AsmAddress Address
             {
                 [MethodImpl(Inline)]
-                get => Spec.Address;
+                get => this;
             }
 
-            [MethodImpl(Inline)]
-            public static implicit operator mem<T>(T src)
-                => new mem<T>(src);
+            public string Format()
+                => AsmRender.format(this);
+
+            public override string ToString()
+                => Format();
+
+            public static implicit operator AsmAddress(mem<T> src)
+                => new AsmAddress(src.Base, src.Index, src.Scale, src.Disp);
         }
     }
 }

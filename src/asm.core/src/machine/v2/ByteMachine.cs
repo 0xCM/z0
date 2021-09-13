@@ -102,6 +102,5 @@ namespace Z0
             for(var i=0; i<count; i++)
                 seek(target,i) = (char)skip(src,i);
         }
-
    }
 }

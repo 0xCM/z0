@@ -24,6 +24,12 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
+            public m128(RegOp @base, RegOp index, MemoryScale scale, Disp disp)
+            {
+                Address = new AsmAddress(@base, index, scale, disp);
+            }
+
+            [MethodImpl(Inline)]
             public static implicit operator m128(AsmAddress src)
                 => new m128(src);
         }

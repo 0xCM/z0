@@ -71,16 +71,15 @@ namespace Z0
         {
             const string SegPattern = "{0},";
             var dst = text.buffer();
-            dst.AppendLine(string.Format("{0}[{1}:{2}] => ", Name, TotalWidth,SegCount));
+            var decl = string.Format("{0}[{1},{2}] " , Name, TotalWidth,SegCount);
+            dst.AppendLine(decl + Chars.LBrace);
             var indent = 2u;
-            dst.IndentLine(indent,Chars.LBracket);
-            indent += 2u;
             for(var i=0; i<SegCount; i++)
             {
                 dst.IndentLineFormat(indent, SegPattern, skip(Segments,i).Format());
             }
             indent -= 2;
-            dst.IndentLine(indent,Chars.RBracket);
+            dst.IndentLine(indent,Chars.RBrace);
             return dst.Emit();
         }
     }

@@ -1,9 +1,0 @@
-# CilOpCodeType - https://docs.microsoft.com/en-us/dotnet/api/system.reflection.emit.opcodetype?view=netcore-3.1
----------------------------------------------------------------------------------------------------------------------------------------------------
-| Identifier | Value | Description                                                                                                                                                                                                   |
-| Annotation | 0     | This enumerator value is reserved and should not be used.                                                                                                                                          |
-| Macro      | 1     | These are Microsoft intermediate language (MSIL) instructions that are used as a synonym for other MSIL instructions. For example, ldarg.0 represents the ldarg instruction with an argument of 0. |
-| Nternal    | 2     | Describes a reserved Microsoft intermediate language (MSIL) instruction.                                                                                                                           |
-| Objmodel   | 3     | Describes a Microsoft intermediate language (MSIL) instruction that applies to objects.                                                                                                            |
-| Prefix     | 4     | Describes a prefix instruction that modifies the behavior of the following instruction.                                                                                                            |
-| Primitive  | 5     | Describes a built-in instruction.                                                                                                                                                                  |

@@ -28,7 +28,7 @@ namespace Z0
         /// Creates a string from a span, via UTF8 encoding
         /// </summary>
         /// <param name="src">The data source</param>
-        [Op, Doc("https://github.com/microsoft/ClangSharp/blob/6355b742f73915a21d18f74227f5c504b75bd976/sources/ClangSharp/Internals/SpanExtensions.cs")]
+        [Op, DocRef("https://github.com/microsoft/ClangSharp/blob/6355b742f73915a21d18f74227f5c504b75bd976/sources/ClangSharp/Internals/SpanExtensions.cs")]
         public static unsafe string format(ReadOnlySpan<byte> src)
         {
             if(src.IsEmpty)

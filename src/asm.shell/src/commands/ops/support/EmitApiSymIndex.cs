@@ -18,7 +18,8 @@ namespace Z0.Asm
             return Symbols.literals(catalog.Components.Storage.Enums());
         }
 
-        Outcome EmitApiSymIndex()
+        [CmdOp(".emit-sym-index")]
+        Outcome EmitApiSymIndex(CmdArgs args)
         {
             var result = Outcome.Success;
             var literals = SymLiterals();

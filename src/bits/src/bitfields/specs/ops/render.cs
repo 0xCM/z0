@@ -14,17 +14,10 @@ namespace Z0
     {
         public static string format(in BitfieldSeg src)
         {
-            const string SegPattern = "{0}[{1}]:{2} = [{3}]";
+            const string SegPattern = "{0}[{1}:{2}]:{3}";
             var datatype = src.Width == 1 ? nameof(bit) : string.Format("uint{0}", src.Width);
-            var i = endpos(src.Offset, src.Width);
-            var section = src.Width == 1 ? string.Format("{0}", src.Offset) : string.Format("{0}:{1}", i, src.Offset);
-            return string.Format(SegPattern,
-                src.SegName,
-                src.SegPos,
-                datatype,
-                section);
+            return string.Format(SegPattern, src.SegName, endpos(src.Offset, src.Width), src.SegPos, datatype);
         }
-
 
         [Op]
         public static uint render(in BitfieldSeg src, ref uint i, Span<char> dst, SegRenderStyle style = default)

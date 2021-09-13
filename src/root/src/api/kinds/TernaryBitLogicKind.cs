@@ -1296,6 +1296,4 @@ namespace Z0
         /// </summary>
         XFF = 0xff,
     }
-
-
 }

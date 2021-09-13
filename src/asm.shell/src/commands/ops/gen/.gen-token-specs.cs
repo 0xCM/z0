@@ -27,24 +27,26 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var dir = Ws.Tables().Subdir(llvm) + FS.folder(lists);
-            var name = "BinOpMI";
-            var file = FS.file(name, FS.Csv);
-            var formatter = Tables.formatter<ListItem>(ListItem.RenderWidths);
-            if(Tables.list(dir + file, out var records))
+            var sources = @readonly(dir.Files(FS.Csv));
+            var outdir = Ws.Gen().Subdir("bitvectors");
+            var count = sources.Length;
+            Write(string.Format("Emitting {0} bitvector specifications", count));
+            for(var i=0; i<count; i++)
             {
-                var src = @readonly(records);
-                var count = src.Length;
-                var segs = alloc<BitfieldSeg>(count);
-
-                for(var i=0u; i<count; i++)
+                ref readonly var src = ref skip(sources,i);
+                result = Tables.list(src, out var items);
+                if(result.Fail)
                 {
-                    ref readonly var item = ref skip(src,i);
-                    seek(segs,i) = BitfieldSpecs.segment(item.Value.Format(), i, i, 1);
+                    Error(result.Message);
+                    continue;
                 }
-
-                var bitfield = BitfieldSpecs.bitfield(name,segs);
-                Write(bitfield.Format());
-
+                var name = src.FileName.WithoutExtension.Format();
+                var file = src.FileName.ChangeExtension(FS.ext("bv"));
+                var dst = outdir + file;
+                var bitvector = BitfieldSpecs.bitvector(name, items);
+                using var writer = dst.AsciWriter();
+                writer.Write(bitvector.Format());
+                Emitted(dst);
             }
 
             return result;

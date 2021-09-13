@@ -6,7 +6,7 @@ namespace Z0
 {
     partial struct PeRecords
     {
-        [Doc("http://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/")]
+        [DocRef("http://www.hexacorn.com/blog/2016/12/15/pe-section-names-re-visited/")]
         public enum ImageSectionKind : byte
         {
             Unknown = 0,

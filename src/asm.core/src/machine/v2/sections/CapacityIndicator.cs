@@ -13,10 +13,10 @@ namespace Z0
 
     partial struct MemorySections
     {
-        [StructLayout(LayoutKind.Sequential, Pack=1, Size=(int)StorageSize), Blittable(StorageSize)]
+        [StructLayout(LayoutKind.Sequential, Pack=1, Size=(int)SZ), Blittable(SZ)]
         public readonly struct CapacityIndicator
         {
-            public const uint StorageSize = PrimalSizes.U8 + PrimalSizes.U16 + 4*PrimalSizes.U32;
+            public const uint SZ = PrimalSizes.U8 + PrimalSizes.U16 + 4*PrimalSizes.U32;
 
             /// <summary>
             /// The size of the smallest addressable unit

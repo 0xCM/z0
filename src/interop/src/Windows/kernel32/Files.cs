@@ -7,9 +7,7 @@ namespace Windows
     using System.Runtime.InteropServices;
     using System.IO;
 
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
 
     [Flags]
     public enum SymLinkKind : uint

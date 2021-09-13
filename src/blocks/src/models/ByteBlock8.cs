@@ -49,6 +49,18 @@ namespace Z0
             get => !api.empty(this);
         }
 
+        public ref uint Lo
+        {
+            [MethodImpl(Inline)]
+            get => ref first32u(Bytes);
+        }
+
+        public ref uint Hi
+        {
+            [MethodImpl(Inline)]
+            get => ref seek32(Bytes,1);
+        }
+
         [MethodImpl(Inline)]
         public Span<T> Storage<T>()
             where T : unmanaged

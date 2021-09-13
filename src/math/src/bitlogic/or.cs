@@ -27,6 +27,10 @@ namespace Z0
         public static byte or(byte a, byte b)
             => (byte)(a | b);
 
+        [MethodImpl(Inline), Or]
+        public static byte or(ref byte a, byte b)
+            => a = or(a,b);
+
         /// <summary>
         /// Computes the bitwise or c := a | b for operands a and b
         /// </summary>
