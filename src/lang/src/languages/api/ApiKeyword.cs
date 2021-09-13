@@ -10,7 +10,7 @@ namespace Z0
 
     public readonly struct ApiKeyword
     {
-        public Name Name {get;}
+        readonly StringAddress Name;
 
         [MethodImpl(Inline)]
         public unsafe ApiKeyword(string src)
@@ -18,16 +18,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Name;
+            => Name.Format();
 
         public override string ToString()
             => Format();
-
-        public unsafe MemoryAddress Address
-        {
-            [MethodImpl(Inline)]
-            get => core.pchar(Name.Content);
-        }
 
         [MethodImpl(Inline)]
         public static implicit operator ApiKeyword(string name)

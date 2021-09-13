@@ -4,10 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly partial struct CsModels
+    [SymSource]
+    public enum LangKind : byte
     {
-        [Op]
-        public static SummaryComment comment(string content)
-            => new SummaryComment(content);
+        None,
+
+        [Symbol(LangNames.Cs)]
+        Cs,
+
+        [Symbol(LangNames.Cpp)]
+        Cpp,
+
+        [Symbol(LangNames.C)]
+        C,
+
+        [Symbol(LangNames.Asm)]
+        Asm
     }
 }

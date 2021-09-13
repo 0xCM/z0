@@ -173,9 +173,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static U sub(U x, U y)
+        public static U sub(U a, U b)
         {
-            var delta = x.data - y.data;
+            var delta = a.data - b.data;
             if(delta < 0)
                 return wrap4((byte)(delta + U.Mod));
             else

@@ -148,21 +148,21 @@ namespace Z0
         /// <summary>
         /// Creates a 3-bit unsigned integer from a 3-term bit sequence
         /// </summary>
-        /// <param name="x0">The term at index 0</param>
-        /// <param name="x1">The term at index 1</param>
-        /// <param name="x2">The term at index 2</param>
+        /// <param name="a">The term at index 0</param>
+        /// <param name="b">The term at index 1</param>
+        /// <param name="c">The term at index 2</param>
         [MethodImpl(Inline), Op]
-        public static U uint3(bit x0, bit x1 = default, bit x2 = default)
+        public static U uint3(bit a, bit b = default, bit c = default)
              => wrap3((byte)(
-                 ((uint)x0 << 0) |
-                 ((uint)x1 << 1) |
-                 ((uint)x2 << 2)
+                 ((uint)a << 0) |
+                 ((uint)b << 1) |
+                 ((uint)c << 2)
                  ));
 
         [MethodImpl(Inline), Op]
-        public static U add(U x, U y)
+        public static U add(U a, U b)
         {
-            var sum = x.data + y.data;
+            var sum = a.data + b.data;
             return wrap3((sum >= U.Mod) ? (byte)(sum - U.Mod): (byte)sum);
         }
 
@@ -174,28 +174,32 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static U mul(U lhs, U rhs)
-            => reduce3((byte)(lhs.data * rhs.data));
+        public static U mul(U a, U b)
+            => reduce3((byte)(a.data * b.data));
 
         [MethodImpl(Inline), Op]
-        public static U div (U lhs, U rhs)
-            => wrap3((byte)(lhs.data / rhs.data));
+        public static U div (U a, U b)
+            => wrap3((byte)(a.data / b.data));
 
         [MethodImpl(Inline), Op]
-        public static U mod (U lhs, U rhs)
-            => wrap3((byte)(lhs.data % rhs.data));
+        public static U mod (U a, U b)
+            => wrap3((byte)(a.data % b.data));
 
         [MethodImpl(Inline), Op]
-        public static U and(U lhs, U rhs)
-            => wrap3((byte)(lhs.data & rhs.data));
+        public static U and(U a, U b)
+            => wrap3((byte)(a.data & b.data));
 
         [MethodImpl(Inline), Op]
-        public static U or(U lhs, U rhs)
-            => wrap3((byte)(lhs.data | rhs.data));
+        public static U or(U a, U b)
+            => wrap3((byte)(a.data | b.data));
 
         [MethodImpl(Inline), Op]
-        public static U xor(U lhs, U rhs)
-            => wrap3((byte)(lhs.data ^ rhs.data));
+        public static U or(U a, U b, U c)
+            => wrap3((byte)(a.data | b.data | c.data));
+
+        [MethodImpl(Inline), Op]
+        public static U xor(U a, U b)
+            => wrap3((byte)(a.data ^ b.data));
 
         [MethodImpl(Inline), Op]
         public static U not(U a)

@@ -19,6 +19,8 @@ namespace Z0
         {
             public const ulong Width = 1;
 
+            public static N1 N => default;
+
             public T Storage;
 
             [MethodImpl(Inline)]

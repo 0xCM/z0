@@ -11,6 +11,38 @@ namespace Z0
 
     partial struct BitFlow
     {
+        public struct u8 : IUnsigned<Cell8>
+        {
+            public const ulong Width = 8;
+
+            public Cell8 Storage;
+
+            [MethodImpl(Inline)]
+            public u8(Cell8 src)
+            {
+                Storage = src;
+            }
+
+            BitWidth IPrimitive.ContentWidth
+                => Width;
+
+            [MethodImpl(Inline)]
+            public static implicit operator u8(u8<byte> src)
+                => new u8(src.Storage);
+
+            [MethodImpl(Inline)]
+            public static implicit operator u8<byte>(u8 src)
+                => new u8<byte>(src.Storage);
+
+            [MethodImpl(Inline)]
+            public static implicit operator u8(byte src)
+                => new u8(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator byte(u8 src)
+                => src.Storage;
+        }
+
         /// <summary>
         /// Defines an unsigned 8-bit integer over parametric storage
         /// </summary>

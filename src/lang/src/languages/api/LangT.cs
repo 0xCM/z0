@@ -4,10 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly partial struct CsModels
+    using lang;
+
+    public abstract class Lang<T> :  ILang
+        where T : Lang<T>, new()
     {
-        [Op]
-        public static SummaryComment comment(string content)
-            => new SummaryComment(content);
+        public LangIdentifier Identifier {get;}
+
+        protected Lang(LangIdentifier identifier)
+        {
+            Identifier = identifier;
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace Z0
     using static Root;
     using static core;
     using static CsPatterns;
+    using static CsModels;
 
     partial struct SpanRes
     {
@@ -79,7 +80,7 @@ namespace Z0
             where T : unmanaged
         {
             if(src.Description.IsNonEmpty)
-                CSharp.comment(src.Description).Render(indent, dst);
+                comment(src.Description).Render(indent, dst);
             dst.IndentLineFormat(indent, "{0},", src.Name);
         }
 

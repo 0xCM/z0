@@ -14,7 +14,16 @@ namespace Z0
     partial struct BitNumbers
     {
         /// <summary>
-        /// Promotes a <see cref='T.uint1'/> to a <see cref='T.uint2'/>
+        /// Zero-extends a <see cref='bit'/> to a <see cref='T.uint3'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Op]
+        public static uint3 movzx(bit src, W3 w)
+            => new uint3((byte)src, true);
+
+        /// <summary>
+        /// Zero-extends a <see cref='T.uint1'/> to a <see cref='T.uint2'/>
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="w">The target width</param>

@@ -10,7 +10,7 @@ namespace Z0
         /// <summary>
         /// Identifies the first of four permutation symbols
         /// </summary>
-        [Symbol("11")]
+        [Symbol("00")]
         A = 0b00,
 
         /// <summary>

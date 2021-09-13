@@ -11,7 +11,6 @@ namespace Z0.Vdsl
     using static BitFlow;
     using static Root;
 
-
     partial struct Intrinsics
     {
         [ApiComplete("intrinsics.specs")]
@@ -24,7 +23,6 @@ namespace Z0.Vdsl
         [ApiHost("intrinsics.checks")]
         public partial class Checks : Service<Checks>
         {
-
             [MethodImpl(Inline)]
             public static CmpPred128<T> eq<T>(__m128i<T> a, __m128i<T> b)
                 where T : unmanaged
@@ -130,66 +128,6 @@ namespace Z0.Vdsl
                 }
             }
 
-            void Compute2()
-            {
-                var block0 = Cells<byte>(n0);
-                Random.Fill(block0);
-                var block1 = Cells<byte>(n1);
-                Random.Fill(block1);
-                var left = recover<__m256i<byte>>(block0);
-                var right = recover<__m256i<byte>>(block1);
-                var count = left.Length;
-                var op = nameof(Specs._mm256_min_epu8);
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var a = ref skip(left,i);
-                    ref readonly var b = ref skip(right,i);
-                    var dst = Specs._mm256_min_epu8(a,b);
-                    var expr = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", op, a, b, dst);
-
-                    Write(expr);
-                }
-            }
-
-            void Compute3()
-            {
-                var block0 = Cells<short>(n0);
-                Random.Fill(block0);
-                var block1 = Cells<short>(n1);
-                Random.Fill(block1);
-                var left = recover<__m128i<short>>(block0);
-                var right = recover<__m128i<short>>(block1);
-                var count = left.Length;
-                for(var i=0; i<count; i++)
-                {
-                    var io = new _mm_packus_epi16(skip(left,i), skip(right,i));
-                    calc(ref io);
-                    var x = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", io.Op, io.A, io.B, io.Dst);
-                    var y = eq(vpack.vpackus(io.A, io.B), io.Dst).Format();
-
-                    Write(y);
-
-                }
-            }
-
-            void Compute(N4 n)
-            {
-                var block0 = Cells<sbyte>(n0);
-                Random.Fill(block0);
-                var block1 = Cells<sbyte>(n1);
-                Random.Fill(block1);
-                var left = recover<__m128i<sbyte>>(block0);
-                var right = recover<__m128i<sbyte>>(block1);
-                var count = left.Length;
-                for(var i=0; i<count; i++)
-                {
-                    var io = new _mm_min_epi8(skip(left,i), skip(right,i));
-                    calc(ref io);
-                    var x = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", io.Op, io.A, io.B, io.Dst);
-                    Write(x);
-                }
-            }
-
             [Op]
             void Compute()
             {
@@ -214,7 +152,9 @@ namespace Z0.Vdsl
 
             public void Run()
             {
-                Compute(n4);
+                Compute(IntrinsicKind._mm256_min_epu8);
+                Compute(IntrinsicKind._mm_packus_epi16);
+                Compute(IntrinsicKind._mm_min_epi8);
             }
         }
     }

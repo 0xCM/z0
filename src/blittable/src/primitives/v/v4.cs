@@ -37,9 +37,29 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static v4<T> v<T>(N4 n, v2<T> a0, v2<T> a1)
+            where T : unmanaged
+        {
+            var v = new v4<T>();
+            lo(ref v) = a0;
+            hi(ref v) = a1;
+            return v;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref v4<T> src)
             where T : unmanaged
                 => ref @as<v4<T>,T>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref v2<T> lo<T>(ref v4<T> src)
+            where T : unmanaged
+                => ref @as<v4<T>,v2<T>>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref v2<T> hi<T>(ref v4<T> src)
+            where T : unmanaged
+                => ref seek(@as<v4<T>,v2<T>>(src),1);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cells<T>(ref v4<T> src)

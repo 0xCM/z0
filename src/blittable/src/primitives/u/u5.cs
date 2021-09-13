@@ -12,6 +12,27 @@ namespace Z0
     partial struct BitFlow
     {
         /// <summary>
+        /// Defines an unsigned 5-bit integer over an 8-bit cell
+        /// </summary>
+        public struct u5 : IUnsigned<u5>
+        {
+            public const ulong Width = 5;
+
+            public static N5 N => default;
+
+            public Cell8 Storage;
+
+            [MethodImpl(Inline)]
+            public u5(Cell8 src)
+            {
+                Storage = Cells.trim(src,N);
+            }
+
+            BitWidth IPrimitive.ContentWidth
+                => Width;
+        }
+
+        /// <summary>
         /// Defines an unsigned 5-bit integer over parametric storage
         /// </summary>
         public struct u5<T> : IUnsigned<T>
@@ -19,6 +40,8 @@ namespace Z0
         {
             public static ByteSize SZ = size<u5<T>>();
             public const ulong Width = 5;
+
+            public static N5 N => default;
 
             public T Storage;
 

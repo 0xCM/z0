@@ -12,6 +12,27 @@ namespace Z0
     partial struct BitFlow
     {
         /// <summary>
+        /// Defines an unsigned 2-bit integer over an 8-bit cell
+        /// </summary>
+        public struct u2 : IUnsigned<u2>
+        {
+            public const ulong Width = 2;
+
+            public static N2 N => default;
+
+            public Cell8 Storage;
+
+            [MethodImpl(Inline)]
+            public u2(Cell8 src)
+            {
+                Storage = Cells.trim(src,N);
+            }
+
+            BitWidth IPrimitive.ContentWidth
+                => Width;
+        }
+
+        /// <summary>
         /// Defines an unsigned 2-bit integer over parametric storage
         /// </summary>
         public struct u2<T> : IUnsigned<T>

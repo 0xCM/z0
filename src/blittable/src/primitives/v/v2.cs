@@ -56,6 +56,7 @@ namespace Z0
             where T : unmanaged
         {
             public static ByteSize SZ => size<v2<T>>();
+
             v1<T> C0;
 
             v1<T> C1;

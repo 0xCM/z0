@@ -2,14 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Vdsl
+namespace lang
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    public abstract class TypeDomain<T> : ITypeDomain<T>
+        where T : ILang, new()
+    {
+        public T Lang {get;}
 
-    using static Root;
-    using static core;
-
-
-
+        protected TypeDomain()
+        {
+            Lang = new T();
+        }
+    }
 }

@@ -2,10 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace lang.asm
+namespace Z0
 {
+    [LiteralProvider]
+    public readonly partial struct BitMaskLiterals
+    {
 
-
-
-
+    }
 }

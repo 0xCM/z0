@@ -143,22 +143,22 @@ namespace Z0
             => new U((byte)((byte)src & U.MaxLiteral));
 
         [MethodImpl(Inline), Op]
-        public static U add(U x, U y)
+        public static U add(U a, U b)
         {
-            var sum = x.data + y.data;
+            var sum = a.data + b.data;
             return wrap1((sum >= U.Count) ? (byte)sum - (byte)U.Count: sum);
         }
 
         [MethodImpl(Inline), Op]
-        public static U sub(U x, U y)
+        public static U sub(U a, U b)
         {
-            var diff = (int)x - (int)y;
+            var diff = (int)a - (int)b;
             return wrap1(diff < 0 ? (byte)(diff + U.Count) : (byte)diff);
         }
 
         [MethodImpl(Inline), Op]
-        public static U mul(U lhs, U rhs)
-            => reduce1((byte)(lhs.data * rhs.data));
+        public static U mul(U a, U b)
+            => reduce1((byte)(a.data * b.data));
 
         [MethodImpl(Inline), Op]
         public static U div (U lhs, U rhs)
@@ -173,8 +173,8 @@ namespace Z0
             => uint1((byte)(lhs.data >> rhs));
 
         [MethodImpl(Inline), Op]
-        public static U sll(U lhs, byte rhs)
-            => uint1((byte)(lhs.data << rhs));
+        public static U sll(U a, byte b)
+            => uint1((byte)(a.data << b));
 
         [MethodImpl(Inline), Op]
         public static U inc(U x)
@@ -198,20 +198,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static bool eq(U x, U y)
-            => x.data == y.data;
+        public static bit eq(U a, U b)
+            => a.data == b.data;
 
         [MethodImpl(Inline)]
-        public static byte crop1(byte x)
-            => (byte)(U.MaxLiteral & x);
+        public static byte crop1(byte a)
+            => (byte)(U.MaxLiteral & a);
 
         [MethodImpl(Inline), Op]
-        internal static byte reduce1(byte x)
-            => (byte)(x % U.Count);
+        internal static byte reduce1(byte a)
+            => (byte)(a % U.Count);
 
         [MethodImpl(Inline)]
-        internal static U wrap1(int src)
-            => new U((byte)src, false);
+        internal static U wrap1(int a)
+            => new U((byte)a, false);
 
         /// <summary>
         /// Injects the source value directly into the width-identified target, bypassing bounds-checks

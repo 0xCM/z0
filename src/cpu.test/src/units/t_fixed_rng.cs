@@ -19,7 +19,7 @@ namespace Z0
             var total = 0ul;
             var emit = CellDelegates.emitter(next<byte>);
             for(var i=0; i<RepCount; i++ )
-                total += Cells.uint8(emit());
+                total += (Cell8)(emit());
 
             var expect = (ulong)(Numeric.maxval<byte>()/2);
             var actual = total/(ulong)RepCount;

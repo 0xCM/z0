@@ -12,10 +12,31 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
+        [MethodImpl(Inline), Op]
+        public static __m256i<byte> calc(in _mm256_min_epu8 src)
+            => Specs._mm256_min_epu8(src.A, src.B);
+
+        public readonly struct _mm256_min_epu8 : IIntrinsicInput<_mm256_min_epu8>
+        {
+            public readonly __m256i<byte> A;
+
+            public readonly __m256i<byte> B;
+
+            [MethodImpl(Inline)]
+            public _mm256_min_epu8(in __m256i<byte> a, in __m256i<byte> b)
+            {
+                A = a;
+                B = b;
+            }
+
+            public IntrinsicKind Kind
+                => IntrinsicKind._mm256_min_epu8;
+        }
+
         partial struct Specs
         {
             [MethodImpl(Inline)]
-            public static __m256i<byte> _mm256_min_epu8(__m256i<byte> a, __m256i<byte> b)
+            public static __m256i<byte> _mm256_min_epu8(in __m256i<byte> a, in __m256i<byte> b)
             {
                 var dst = m256i<byte>();
                 for(var j=0; j<=31; j++)

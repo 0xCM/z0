@@ -4,19 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial class Cells
+    using lang;
+
+    public abstract class TypeMap<S,T>
+        where S : ILang, ITypeDomain<S>, new()
+        where T : ILang, ITypeDomain<T>, new()
     {
-        /// <summary>
-        /// Converts a specified cell to a <see cref='byte'/> value
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        [MethodImpl(Inline), Op]
-        public static byte uint8(Cell8 src)
-            => (byte)src;
+        Index<S> Source {get;}
+
+        Index<T> Target {get;}
     }
 }

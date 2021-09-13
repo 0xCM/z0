@@ -14,6 +14,70 @@ namespace Z0.Asm
     using static XedModels;
     using static IntelIntrinsicModels;
 
+    public class FunctionSpec
+    {
+        public string Name {get;}
+
+        public Index<string> Operands {get;}
+
+        public string ReturnType {get;}
+
+        public string Body {get;}
+
+        public FunctionSpec(string name, string[] operands, string ret, string body)
+        {
+            Name = name;
+            Operands = operands;
+            ReturnType = ret;
+            Body = body;
+        }
+    }
+
+    public class OperandSpec
+    {
+        public string Name {get;}
+
+        public string Type {get;}
+
+        public Index<string> Modifiers {get;}
+
+        public OperandSpec(string name, string type, string[] modifiers)
+        {
+            Name = name;
+            Type = type;
+            Modifiers = modifiers;
+        }
+    }
+
+    public class InstrinsicHostBuilder : AppService<InstrinsicHostBuilder>
+    {
+        public void EmitCsHosts(ReadOnlySpan<Intrinsic> src, FS.FolderPath dir)
+        {
+            var dst = dir + FS.file("intrinsics.cs", FS.Cs);
+            var flow = Wf.EmittingFile(dst);
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                var spec = DefineFunction(skip(src,i));
+            }
+        }
+
+
+        public FunctionSpec DefineFunction(in Intrinsic src)
+        {
+            var name = src.name;
+            var operands = src.parameters;
+            var count = operands.Count;
+            for(var i=0; i<count; i++)
+            {
+
+            }
+
+            return default;
+        }
+
+    }
+
     public class IntelIntrinsics  : AppService<IntelIntrinsics>
     {
         const string dataset = "intel.intrinsics";
@@ -46,6 +110,7 @@ namespace Z0.Asm
                 writer.WriteLine(format(skip(src,i)));
             Wf.EmittedFile(flow, count);
         }
+
 
         void EmitHeader(ReadOnlySpan<Intrinsic> src, FS.FolderPath dir)
         {

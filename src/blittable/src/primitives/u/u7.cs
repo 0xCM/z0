@@ -12,6 +12,27 @@ namespace Z0
     partial struct BitFlow
     {
         /// <summary>
+        /// Defines an unsigned 7-bit integer over an 8-bit cell
+        /// </summary>
+        public struct u7 : IUnsigned<u7>
+        {
+            public const ulong Width = 7;
+
+            public static N7 N => default;
+
+            public Cell8 Storage;
+
+            [MethodImpl(Inline)]
+            public u7(Cell8 src)
+            {
+                Storage = Cells.trim(src,N);
+            }
+
+            BitWidth IPrimitive.ContentWidth
+                => Width;
+        }
+
+        /// <summary>
         /// Defines an unsigned 7-bit integer over parametric storage
         /// </summary>
         public struct u7<T> : IUnsigned<T>

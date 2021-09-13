@@ -12,6 +12,27 @@ namespace Z0
     partial struct BitFlow
     {
         /// <summary>
+        /// Defines an unsigned 3-bit integer over an 8-bit cell
+        /// </summary>
+        public struct u3 : IUnsigned<u3>
+        {
+            public const ulong Width = 3;
+
+            public static N3 N => default;
+
+            public Cell8 Storage;
+
+            [MethodImpl(Inline)]
+            public u3(Cell8 src)
+            {
+                Storage = Cells.trim(src,N);
+            }
+
+            BitWidth IPrimitive.ContentWidth
+                => Width;
+        }
+
+        /// <summary>
         /// Defines an unsigned 3-bit integer over parametric storage
         /// </summary>
         public struct u3<T> : IUnsigned<T>

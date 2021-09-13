@@ -4,10 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly partial struct CsModels
+    public readonly struct LangNames
     {
-        [Op]
-        public static SummaryComment comment(string content)
-            => new SummaryComment(content);
+        public const string Cs = nameof(Cs);
+
+        public const string Cpp = nameof(Cpp);
+
+        public const string C = nameof(C);
+
+        public const string Asm = nameof(Asm);
     }
 }

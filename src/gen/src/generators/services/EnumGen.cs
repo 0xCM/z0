@@ -5,6 +5,7 @@
 namespace Z0
 {
     using static core;
+    using static CsModels;
 
     public class EnumGen : CodeGenerator
     {
@@ -28,7 +29,7 @@ namespace Z0
                 Require.equal(count, spec.Descriptions.Length);
 
             if(spec.Description.IsNonEmpty)
-                CSharp.comment(spec.Description).Render(indent, dst);
+                comment(spec.Description).Render(indent, dst);
 
             if(spec.Flags)
                 dst.IndentLine(indent,"[Flags]");
@@ -59,7 +60,7 @@ namespace Z0
                     description = spec.Descriptions[i];
 
                 if(nonempty(description))
-                    CSharp.comment(description).Render(indent, dst);
+                    comment(description).Render(indent, dst);
 
                 if(nonempty(symbol))
                 {

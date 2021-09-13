@@ -1,0 +1,94 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0.Vdsl
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static core;
+    using static BitFlow;
+    using static Root;
+
+    using K = IntrinsicKind;
+
+    partial struct Intrinsics
+    {
+        partial class Checks
+        {
+            void Compute(IntrinsicKind kind)
+            {
+                switch(kind)
+                {
+                    case K._mm256_cvtepi16_epi8:
+                    break;
+
+                    case K._mm256_min_epu8:
+                    {
+                        var block0 = Cells<byte>(n0);
+                        Random.Fill(block0);
+                        var block1 = Cells<byte>(n1);
+                        Random.Fill(block1);
+                        var left = recover<__m256i<byte>>(block0);
+                        var right = recover<__m256i<byte>>(block1);
+                        var count = left.Length;
+                        var op = nameof(Specs._mm256_min_epu8);
+                        for(var i=0; i<count; i++)
+                        {
+                            ref readonly var a = ref skip(left,i);
+                            ref readonly var b = ref skip(right,i);
+                            var dst = Specs._mm256_min_epu8(a,b);
+                            var expr = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", op, a, b, dst);
+
+                            Write(expr);
+                        }
+                    }
+                    break;
+
+                    case K._mm_packus_epi16:
+                    {
+                        var block0 = Cells<short>(n0);
+                        Random.Fill(block0);
+                        var block1 = Cells<short>(n1);
+                        Random.Fill(block1);
+                        var left = recover<__m128i<short>>(block0);
+                        var right = recover<__m128i<short>>(block1);
+                        var count = left.Length;
+                        for(var i=0; i<count; i++)
+                        {
+                            var input = new _mm_packus_epi16(skip(left,i), skip(right,i));
+                            var output = calc(input);
+                            var x = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", input.Kind, input.A, input.B, output);
+                            var y = eq(vpack.vpackus(input.A, input.B), output).Format();
+                            Write(y);
+                        }
+                    }
+                    break;
+
+                    case K._mm_min_epi8:
+                    {
+                        var block0 = Cells<sbyte>(n0);
+                        Random.Fill(block0);
+                        var block1 = Cells<sbyte>(n1);
+                        Random.Fill(block1);
+                        var left = recover<__m128i<sbyte>>(block0);
+                        var right = recover<__m128i<sbyte>>(block1);
+                        var count = left.Length;
+                        for(var i=0; i<count; i++)
+                        {
+                            var input = new _mm_min_epi8(skip(left,i), skip(right,i));
+                            var output = calc(input);
+                            var x = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", input.Kind, input.A, input.B, output);
+                            Write(x);
+                        }
+                    }
+                    break;
+
+                    default:
+                    break;
+                }
+            }
+        }
+    }
+}

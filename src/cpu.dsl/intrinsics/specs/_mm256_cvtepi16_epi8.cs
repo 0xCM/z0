@@ -13,6 +13,24 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
+        [MethodImpl(Inline), Op]
+        public static __m128i<byte> calc(in _mm256_cvtepi16_epi8 src)
+            => Specs._mm256_cvtepi16_epi8(src.A);
+
+        public readonly struct _mm256_cvtepi16_epi8 : IIntrinsicInput<_mm256_cvtepi16_epi8>
+        {
+            public readonly __m256i<ushort> A;
+
+            [MethodImpl(Inline)]
+            public _mm256_cvtepi16_epi8(in __m256i<ushort> a)
+            {
+                A = a;
+            }
+
+            public IntrinsicKind Kind
+                => IntrinsicKind._mm256_cvtepi16_epi8;
+        }
+
         partial struct Specs
         {
             [MethodImpl(Inline)]
@@ -34,7 +52,6 @@ namespace Z0.Vdsl
         public static byte Truncate8(ushort src)
             => (byte)src;
 
-
         [MethodImpl(Inline), Op]
         public static uint _mm256_cvtepi16_epi8_loop(Span<v3<int>> dst)
         {
@@ -54,11 +71,7 @@ namespace Z0.Vdsl
         {
             var count = (uint)src.Length;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var a = ref skip(src,i);
-                ref var x = ref seek(dst,i);
-                x = Specs._mm256_cvtepi16_epi8(a);
-            }
+                seek(dst,i) = Specs._mm256_cvtepi16_epi8(skip(src,i));
             return count;
         }
     }
