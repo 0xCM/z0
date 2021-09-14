@@ -166,15 +166,14 @@ namespace Z0
             where T : unmanaged
                 => ref core.first(recover<T,Cell512>(slice(src, offset)));
 
-
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Cell<T> load<T>(ReadOnlySpan<byte> src)
-            where T : struct
+            where T : unmanaged
                 => load8x64<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         static Cell<T> load8x64<T>(ReadOnlySpan<byte> src)
-            where T : struct
+            where T : unmanaged
         {
             if(size<T>() == 1)
                 return @as<T>(Cells.cell(w8,src));
@@ -188,9 +187,9 @@ namespace Z0
                 return load128x512<T>(src);
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         static Cell<T> load128x512<T>(ReadOnlySpan<byte> src)
-            where T : struct
+            where T : unmanaged
         {
             if(size<T>() == 16)
                 return @as<Cell128,Cell<T>>(Cells.cell(w128, src));

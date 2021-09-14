@@ -12,10 +12,6 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        [MethodImpl(Inline), Op]
-        public static __m128i<byte> calc(in _mm_avg_epu8 src)
-            => Specs._mm_avg_epu8(src.A, src.B);
-
         public readonly struct _mm_avg_epu8 : IIntrinsicInput<_mm_avg_epu8>
         {
             public readonly __m128i<byte> A;
@@ -35,6 +31,10 @@ namespace Z0.Vdsl
 
         partial struct Specs
         {
+            [MethodImpl(Inline)]
+            public static __m128i<byte> calc(in _mm_avg_epu8 src)
+                => _mm_avg_epu8(src.A, src.B);
+
             [MethodImpl(Inline)]
             public static __m128i<byte> _mm_avg_epu8(in __m128i<byte> a, in __m128i<byte> b)
             {

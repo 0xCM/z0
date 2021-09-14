@@ -9,6 +9,7 @@ namespace Z0.Vdsl
     using System.Runtime.Intrinsics;
 
     using static Root;
+    using static core;
     using static Intrinsics;
 
     public struct __m128i<T>
@@ -29,7 +30,7 @@ namespace Z0.Vdsl
         public uint CellWidth
         {
             [MethodImpl(Inline)]
-            get => core.width<T>();
+            get => width<T>();
         }
 
         public uint CellCount

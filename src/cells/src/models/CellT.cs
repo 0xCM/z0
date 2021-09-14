@@ -10,9 +10,8 @@ namespace Z0
     using static Root;
     using static core;
 
-    [DataType("m")]
     public struct Cell<T> : IDataCell<Cell<T>>
-        where T : struct
+        where T : unmanaged
     {
         T Content;
 
@@ -34,7 +33,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Cell<S> morph<S>(in Cell<T> src)
-            where S : struct, IDataCell<S>
+            where S : unmanaged
                 => ref @as<Cell<T>,Cell<S>>(src);
 
         [MethodImpl(Inline)]

@@ -147,6 +147,5 @@ namespace Z0
 
         [Free]
         public delegate Bit32 BinaryPredicate512(Cell512 a, Cell512 b);
-
     }
 }

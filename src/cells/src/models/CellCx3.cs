@@ -10,9 +10,9 @@ namespace Z0
     using static Root;
 
     public struct Cell<A,B,C> : IDataCell<Cell<A,B,C>>
-        where A : struct, IDataCell<A>
-        where B : struct, IDataCell<B>
-        where C : struct, IDataCell<C>
+        where A : unmanaged, IDataCell<A>
+        where B : unmanaged, IDataCell<B>
+        where C : unmanaged, IDataCell<C>
     {
         public A C0;
 

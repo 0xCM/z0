@@ -10,7 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-
     using SQ = SymbolicQuery;
 
     [ApiHost]
@@ -20,15 +19,18 @@ namespace Z0
         public static TokenString define(char[] src)
             => new TokenString(src);
 
-
         [MethodImpl(Inline), Op]
         public static TokenExpr<T> expr<T>(uint id, T src)
             where T : unmanaged, ICharBlock<T>
                 => new TokenExpr<T>(id,src);
 
         [MethodImpl(Inline), Op]
-        public static TokenExpr expr(uint id, string src)
-            => new TokenExpr(id,src);
+        public static TokenExpr expr(uint id, ReadOnlySpan<char> src, uint offset, uint length)
+        {
+            ref readonly var c = ref skip(src,offset);
+            var location = address(c);
+            return new TokenExpr(id, location,length);
+        }
 
         [MethodImpl(Inline), Op]
         public static uint count(in TokenString src)

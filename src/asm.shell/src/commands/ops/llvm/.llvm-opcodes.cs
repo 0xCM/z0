@@ -9,8 +9,8 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".llvm-opcodes")]
-        Outcome LlvmOpCodes(CmdArgs args)
+        [CmdOp(".llvm-ocspecs")]
+        Outcome LlvmOcSpecs(CmdArgs args)
         {
             var result = Outcome.Success;
 
@@ -21,6 +21,22 @@ namespace Z0.Asm
             {
                 ref readonly var code = ref skip(src,i);
                 Write(formatter.Format(code));
+            }
+
+            return result;
+        }
+
+        [CmdOp(".llvm-ocstrings")]
+        public Outcome LlvmOcStrings(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var strings = llvm.Strings.OpCodes;
+            var kinds = Symbols.index<AsmId>().Kinds;
+            for(var i=0; i<kinds.Length; i++)
+            {
+                ref readonly var kind = ref skip(kinds,i);
+                var s = strings[kind];
+                Write(string.Format("{0} = '{1}'", kind, text.format(s)));
             }
 
             return result;

@@ -12,9 +12,6 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        [MethodImpl(Inline), Op]
-        public static __m128i<sbyte> calc(in _mm_min_epi8 src)
-            => Specs._mm_min_epi8(src.A, src.B);
 
         public readonly struct _mm_min_epi8 : IIntrinsicInput<_mm_min_epi8>
         {
@@ -35,6 +32,10 @@ namespace Z0.Vdsl
 
         partial struct Specs
         {
+            [MethodImpl(Inline)]
+            public static __m128i<sbyte> calc(in _mm_min_epi8 src)
+                => Specs._mm_min_epi8(src.A, src.B);
+
             [MethodImpl(Inline)]
             public static __m128i<sbyte> _mm_min_epi8(in __m128i<sbyte> a, in __m128i<sbyte> b)
             {

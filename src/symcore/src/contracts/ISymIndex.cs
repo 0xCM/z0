@@ -34,6 +34,7 @@ namespace Z0
             dst = default;
             return false;
         }
+
         ref readonly Sym<K> this[uint index] {get;}
 
         ref readonly Sym<K> this[K index] {get;}

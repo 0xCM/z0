@@ -13,10 +13,6 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        [MethodImpl(Inline), Op]
-        public static __m128i<byte> calc(in _mm256_cvtepi16_epi8 src)
-            => Specs._mm256_cvtepi16_epi8(src.A);
-
         public readonly struct _mm256_cvtepi16_epi8 : IIntrinsicInput<_mm256_cvtepi16_epi8>
         {
             public readonly __m256i<ushort> A;
@@ -33,6 +29,11 @@ namespace Z0.Vdsl
 
         partial struct Specs
         {
+            [MethodImpl(Inline)]
+            public static __m128i<byte> calc(in _mm256_cvtepi16_epi8 src)
+                => Specs._mm256_cvtepi16_epi8(src.A);
+
+
             [MethodImpl(Inline)]
             public static __m128i<byte> _mm256_cvtepi16_epi8(__m256i<ushort> a)
             {

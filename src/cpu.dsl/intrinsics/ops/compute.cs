@@ -8,7 +8,6 @@ namespace Z0.Vdsl
     using System.Runtime.CompilerServices;
 
     using static core;
-    using static BitFlow;
     using static Root;
 
     using K = IntrinsicKind;
@@ -33,14 +32,11 @@ namespace Z0.Vdsl
                         var left = recover<__m256i<byte>>(block0);
                         var right = recover<__m256i<byte>>(block1);
                         var count = left.Length;
-                        var op = nameof(Specs._mm256_min_epu8);
                         for(var i=0; i<count; i++)
                         {
-                            ref readonly var a = ref skip(left,i);
-                            ref readonly var b = ref skip(right,i);
-                            var dst = Specs._mm256_min_epu8(a,b);
-                            var expr = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", op, a, b, dst);
-
+                            var input = new _mm256_min_epu8(skip(left,i), skip(right,i));
+                            var output = Specs.calc(input);
+                            var expr = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", input.Kind, input.A, input.B, output);
                             Write(expr);
                         }
                     }
@@ -58,8 +54,8 @@ namespace Z0.Vdsl
                         for(var i=0; i<count; i++)
                         {
                             var input = new _mm_packus_epi16(skip(left,i), skip(right,i));
-                            var output = calc(input);
-                            var x = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", input.Kind, input.A, input.B, output);
+                            var output = Specs.calc(input);
+                            var expr = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", input.Kind, input.A, input.B, output);
                             var y = eq(vpack.vpackus(input.A, input.B), output).Format();
                             Write(y);
                         }
@@ -78,9 +74,9 @@ namespace Z0.Vdsl
                         for(var i=0; i<count; i++)
                         {
                             var input = new _mm_min_epi8(skip(left,i), skip(right,i));
-                            var output = calc(input);
-                            var x = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", input.Kind, input.A, input.B, output);
-                            Write(x);
+                            var output = Specs.calc(input);
+                            var expr = string.Format("{0}(\r\n  {1}, \r\n  {2}) -> \r\n  {3}", input.Kind, input.A, input.B, output);
+                            Write(expr);
                         }
                     }
                     break;

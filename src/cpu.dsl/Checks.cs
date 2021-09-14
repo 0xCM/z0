@@ -20,6 +20,12 @@ namespace Z0.Vdsl
 
         }
 
+        [ApiComplete("intrinsics.refs")]
+        public readonly partial struct Refs
+        {
+
+        }
+
         [ApiHost("intrinsics.checks")]
         public partial class Checks : Service<Checks>
         {

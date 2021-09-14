@@ -4,28 +4,40 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
+    using static core;
 
-    public readonly struct TokenExpr
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
+    public unsafe readonly struct TokenExpr
     {
-        public uint Id {get;}
+        public readonly uint Id;
 
-        public string Content {get;}
+        readonly MemoryAddress Address;
+
+        public readonly uint Length;
 
         [MethodImpl(Inline)]
-        public TokenExpr(uint id, string content)
+        public TokenExpr(uint id, MemoryAddress location, uint length)
         {
             Id = id;
-            Content = content;
+            Address = location;
+            Length = length;
+        }
+
+        public ReadOnlySpan<char> Chars
+        {
+            [MethodImpl(Inline)]
+            get => cover(Address.Pointer<char>(), Length);
         }
 
         public string Format()
-            => Content;
+            => text.format(Chars);
 
         public override string ToString()
             => Format();
-
     }
 }

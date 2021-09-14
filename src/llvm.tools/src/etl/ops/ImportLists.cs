@@ -9,7 +9,6 @@ namespace Z0.llvm
 
     using static core;
     using static WsAtoms;
-    using static Root;
 
     partial class EtlWorkflow
     {

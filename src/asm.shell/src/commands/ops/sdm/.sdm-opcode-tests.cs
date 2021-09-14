@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
 
     using static core;
+    using llvm;
 
     partial class AsmCmdService
     {
@@ -31,6 +32,7 @@ namespace Z0.Asm
 
             return result;
         }
+
 
         static Outcome CheckOffsets(in MemoryStrings info, ReadOnlySpan<uint> offsets)
         {

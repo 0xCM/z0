@@ -11,10 +11,6 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        [MethodImpl(Inline), Op]
-        public static __m128i<byte> calc(in _mm_packus_epi16 io)
-            => Specs._mm_packus_epi16(io.A, io.B);
-
         public struct _mm_packus_epi16
         {
             public __m128i<short> A;
@@ -34,6 +30,10 @@ namespace Z0.Vdsl
 
         partial struct Specs
         {
+            [MethodImpl(Inline), Op]
+            public static __m128i<byte> calc(in _mm_packus_epi16 io)
+                => Specs._mm_packus_epi16(io.A, io.B);
+
             [MethodImpl(Inline)]
             public static byte SaturateU8(short src)
                 => src < 0 ? z8 : (byte)(src < 0xFF ? src : 0xFF);

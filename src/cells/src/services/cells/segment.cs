@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     partial class Cells
     {
@@ -28,7 +27,7 @@ namespace Z0
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T segment<F,T>(in F src, byte index)
-            where F : unmanaged, IDataCell
+            where F : unmanaged
             where T : unmanaged
                 => ref Unsafe.Add(ref @as<F,T>(src), index);
 

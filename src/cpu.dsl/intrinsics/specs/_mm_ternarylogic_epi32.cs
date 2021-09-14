@@ -12,9 +12,6 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        [MethodImpl(Inline), Op]
-        public static __m128i<uint> calc(in _mm_ternarylogic_epi32 src)
-            => Specs._mm_ternarylogic_epi32(src.A, src.B, src.C, src.Imm8);
 
         public struct _mm_ternarylogic_epi32 : IIntrinsicInput<_mm_ternarylogic_epi32>
         {
@@ -41,6 +38,10 @@ namespace Z0.Vdsl
 
         partial struct Specs
         {
+            [MethodImpl(Inline)]
+            public static __m128i<uint> calc(in _mm_ternarylogic_epi32 src)
+                => Specs._mm_ternarylogic_epi32(src.A, src.B, src.C, src.Imm8);
+
             /// <summary>
             /// __m128i _mm_ternarylogic_epi32(__m128i a, __m128i b, __m128i c, int imm8)
             /// VPTERNLOGD xmm, xmm, xmm, imm8
