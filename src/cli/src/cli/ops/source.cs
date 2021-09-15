@@ -5,14 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-    using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
     using System.Reflection.PortableExecutable;
     using System.Reflection;
-
-    using static Root;
-    using static core;
 
     partial struct Cli
     {

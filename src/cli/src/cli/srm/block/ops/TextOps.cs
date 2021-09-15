@@ -16,7 +16,6 @@ namespace Z0
     {
         unsafe partial struct MemoryBlock
         {
-
             [MethodImpl(Inline), Op]
             public int Utf8NullTerminatedOffsetOfAsciiChar(int startOffset, char asciiChar)
             {

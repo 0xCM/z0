@@ -44,7 +44,7 @@ namespace Z0
             public static MemoryBlock Empty
             {
                 [MethodImpl(Inline)]
-                get => new MemoryBlock(memory.gptr(first(Array.Empty<byte>())),0);
+                get => new MemoryBlock(core.gptr(first(Array.Empty<byte>())),0);
             }
 
             public MemoryBlockDef Definition

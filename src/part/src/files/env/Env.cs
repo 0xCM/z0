@@ -29,7 +29,6 @@ namespace Z0
         public PartId AppId
             => Assembly.GetEntryAssembly().Id();
 
-
         Env()
         {
             var dst = this;

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
     using static NumericCast;
 
     /// <summary>
@@ -103,7 +104,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(Data);
+            get => bytes(Data);
         }
 
         /// <summary>

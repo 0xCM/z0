@@ -9,12 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Diagnostics;
     using System.Collections.Immutable;
-    using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
-
-    using static Part;
-    using static core;
 
     partial class SRM
     {

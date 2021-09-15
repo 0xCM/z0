@@ -15,21 +15,21 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         /// <summary>
+        /// Covers a memory reference with a readonly span
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> view<T>(MemorySeg src)
+            => core.cover(src.BaseAddress.Ref<T>(), count<T>(src));
+
+        /// <summary>
         /// Computes the whole number of T-cells identified by a reference
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint count<T>(MemorySeg src)
             => (uint)(src.Length/core.size<T>());
-
-        /// <summary>
-        /// Covers a memory reference with a readonly span
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> view<T>(MemorySeg src)
-            => core.cover(src.BaseAddress.Ref<T>(), count<T>(src));
 
         /// <summary>
         /// Computes the whole number of <typeparamref name='T'/> cells covered by a specified <see cref='MemoryRange'/>

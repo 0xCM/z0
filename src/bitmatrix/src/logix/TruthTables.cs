@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Typed;
 
     [ApiHost]
     public readonly struct TruthTables
@@ -106,7 +105,6 @@ namespace Z0
             table[1] = BitBlocks.single<N2,byte>(bit.pack(f(on), on));
             return table;
         }
-
 
         [Op]
         public static BitMatrix<N4,N3,byte> table(BinaryBitLogicKind kind)

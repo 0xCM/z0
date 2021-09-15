@@ -9,11 +9,8 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
-    using System.Reflection.Metadata.Ecma335;
-    using System.Runtime.InteropServices;
-    using System.Linq;
 
-    using static Part;
+    using static Root;
     using static core;
 
     partial class SRM

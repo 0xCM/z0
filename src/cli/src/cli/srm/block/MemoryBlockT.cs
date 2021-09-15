@@ -44,7 +44,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator MemoryBlock<T>(MemoryBlockDef src)
                 => new MemoryBlock<T>(src.Pointer, src.Length);
-
         }
     }
 }

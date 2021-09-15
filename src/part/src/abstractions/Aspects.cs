@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     public readonly struct Aspects
     {

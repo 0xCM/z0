@@ -15,12 +15,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static HexLookup<Hex5Seq,T> hex<T>(N5 n, HexLookupEntry<Hex5Seq,T>[] src)
             where T : struct
-                => hex<Hex5Seq,T>(src, sys.alloc<T>(32));
+                => hex<Hex5Seq,T>(src, alloc<T>(32));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static HexLookup<Hex8Seq,T> hex<T>(N8 n, HexLookupEntry<Hex8Seq,T>[] src)
             where T : struct
-                => hex<Hex8Seq,T>(src, sys.alloc<T>(256));
+                => hex<Hex8Seq,T>(src, alloc<T>(256));
 
         [MethodImpl(Inline)]
         public static HexLookup<K,T> hex<K,T>(Func<T,K> f, T[] src, T[] dst)
@@ -51,7 +51,7 @@ namespace Z0
             where K : unmanaged
         {
             var input = @readonly(src);
-            var buffer = sys.alloc<T>(src.Length);
+            var buffer = alloc<T>(src.Length);
             var dst = span(buffer);
             var count = buffer.Length;
             for(var i=0u; i<count; i++)

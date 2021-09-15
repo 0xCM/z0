@@ -14,9 +14,9 @@ namespace Z0
     /// Defines a 16x16 matrix of bits
     /// </summary>
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
-    public readonly ref struct BitMatrix16
+    public struct BitMatrix16
     {
-        internal readonly Span<ushort> Data;
+        ByteBlock32 Data;
 
         /// <summary>
         /// The matrix order
@@ -26,37 +26,40 @@ namespace Z0
         /// <summary>
         /// Defines the 16x16 identity bitmatrix
         /// </summary>
-        public static BitMatrix16 Identity => BitMatrix.identity(n16);
+        public static BitMatrix16 Identity
+            => BitMatrix.identity(n16);
 
         /// <summary>
         /// Allocates a 16x16 zero bitmatrix
         /// </summary>
-        public static BitMatrix16 Zero => new BitMatrix16(new ushort[N]);
+        public static BitMatrix16 Zero
+            => new BitMatrix16(new ushort[N]);
 
         [MethodImpl(Inline)]
         public static BitMatrix16 Alloc()
-            => From(new ushort[N]);
+            => new BitMatrix16();
 
         /// <summary>
         /// Allocates a matrix with a fill value
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitMatrix16 Alloc(Bit32 fill)
+        public static BitMatrix16 Alloc(bit fill)
             => new BitMatrix16(fill);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 From(ushort[] src)
-            => new BitMatrix16(src);
+        internal BitMatrix16(Span<ushort> src)
+            => Data = core.first(core.recover<ushort,ByteBlock32>(src));
 
         [MethodImpl(Inline)]
-        internal BitMatrix16(Span<ushort> src)
-            => this.Data = src;
-
-        internal BitMatrix16(Bit32 fill)
+        internal BitMatrix16(bit fill)
         {
-            this.Data = new ushort[N];
-            if(fill)
-                Data.Fill(ushort.MaxValue);
+            Data = cpu.vones<byte>(w256);
+        }
+
+        [MethodImpl(Inline)]
+        internal BitMatrix16(ByteBlock32 src)
+        {
+            Data = src;
         }
 
         /// <summary>
@@ -65,7 +68,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Data.Bytes();
+            get => Data.Bytes;
         }
 
         /// <summary>
@@ -74,7 +77,7 @@ namespace Z0
         public Span<ushort> Content
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => recover<ushort>(Bytes);
         }
 
         /// <summary>
@@ -83,7 +86,7 @@ namespace Z0
         public ref ushort Head
         {
             [MethodImpl(Inline)]
-            get => ref first(Data);
+            get => ref @as<ushort>(Data.First);
         }
 
         public readonly int Order
@@ -118,11 +121,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public readonly BitVector16 Col(int index)
+        public BitVector16 Col(int index)
         {
             ushort col = 0;
             for(byte r = 0; r<N; r++)
-                col = Bits.setif(Data[r], (byte)index, col, r);
+                col = Bits.setif(skip(Content,r), (byte)index, col, r);
             return col;
         }
 
@@ -133,18 +136,18 @@ namespace Z0
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public void RowSwap(int i, int j)
-            => Data.Swap((uint)i,(uint)j);
+            => Content.Swap((uint)i,(uint)j);
 
-        public readonly BitMatrix16 Transpose()
+        public BitMatrix16 Transpose()
         {
             var dst = Replicate();
             for(var i=0; i<N; i++)
-                dst.Data[i] = Col(i);
+                seek(dst.Content,i) = Col(i);
             return dst;
         }
 
         public readonly BitMatrix16 Replicate()
-            => From(Data.ToArray());
+            => new BitMatrix16(Data);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -166,7 +169,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix<ushort>(in BitMatrix16 src)
-            => BitMatrix.load(src.Data);
+            => BitMatrix.load(src.Content);
 
         /// <summary>
         /// Computes the bitwise and of the operands

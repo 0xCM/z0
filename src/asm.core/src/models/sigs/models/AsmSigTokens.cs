@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using AC = AsciCode;
 
     partial class AsmSigs
     {
@@ -409,6 +410,122 @@ namespace Z0.Asm
             /// </summary>
             [Symbol("zmm/m512/m64bcst", "Represents a zmm vector, a 512-bit memory location or a 512-bit memory location or a 512-bit vector loaded from a 64-bit memory location")]
             z512x64bcst,
+        }
+
+
+        [SymSource(tokens)]
+        public enum MnemonicLetter : byte
+        {
+            [Symbol(' ')]
+            Null = 0,
+
+            [Symbol('0')]
+            d0 = 1,
+
+            [Symbol('1')]
+            d1 = 2,
+
+            [Symbol('2')]
+            d2 = 3,
+
+            [Symbol('3')]
+            d3 = 4,
+
+            [Symbol('4')]
+            d4 = 5,
+
+            [Symbol('5')]
+            d5 = 6,
+
+            [Symbol('6')]
+            d6 = 7,
+
+            [Symbol('7')]
+            d7 = 8,
+
+            [Symbol('8')]
+            d8 = 9,
+
+            [Symbol('9')]
+            d9 = 10,
+
+            [Symbol('a')]
+            a = 11,
+
+            [Symbol('b')]
+            b = 12,
+
+            [Symbol('c')]
+            c = 13,
+
+            [Symbol('d')]
+            d = 14,
+
+            [Symbol('e')]
+            e = 15,
+
+            [Symbol('f')]
+            f = 16,
+
+            [Symbol('g')]
+            g = 17,
+
+            [Symbol('h')]
+            h = 18,
+
+            [Symbol('i')]
+            i = 19,
+
+            [Symbol('j')]
+            j = 20,
+
+            [Symbol('k')]
+            k = 21,
+
+            [Symbol('l')]
+            l = 22,
+
+            [Symbol('m')]
+            m = 23,
+
+            [Symbol('n')]
+            n = 24,
+
+            [Symbol('o')]
+            o = 25,
+
+            [Symbol('1')]
+            p = 26,
+
+            [Symbol('q')]
+            q = 27,
+
+            [Symbol('r')]
+            r = 28,
+
+            [Symbol('s')]
+            s = 29,
+
+            [Symbol('t')]
+            t = 30,
+
+            [Symbol('u')]
+            u = 31,
+
+            [Symbol('v')]
+            v = 32,
+
+            [Symbol('w')]
+            w = 33,
+
+            [Symbol('x')]
+            x = 34,
+
+            [Symbol('y')]
+            y = 35,
+
+            [Symbol('z')]
+            z = 36,
         }
     }
 }

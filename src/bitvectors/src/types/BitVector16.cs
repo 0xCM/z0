@@ -90,7 +90,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(Data);
+            get => core.bytes(Data);
         }
 
         /// <summary>

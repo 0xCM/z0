@@ -147,14 +147,5 @@ namespace Z0
         /// </summary>
         First = a,
 
-        /// <summary>
-        /// The last declared code, 122
-        /// </summary>
-        Last = z,
-
-        /// <summary>
-        /// The code declaration count, 26
-        /// </summary>
-        Count = Last - First + 1
     }
 }

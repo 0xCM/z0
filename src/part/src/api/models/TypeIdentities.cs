@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static Root;
-
     public readonly struct TypeIdentityProviders
     {
         public static ITypeIdentityProvider create(Type t, ITypeIdentityProvider fallback)

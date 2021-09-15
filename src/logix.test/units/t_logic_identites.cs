@@ -6,8 +6,8 @@
 namespace Z0.Logix
 {
     using System;
+    using static core;
 
-    using static Part;
     using static BitLogicSpec;
 
     public class t_logic_identities : t_logix<t_logic_identities>
@@ -18,8 +18,8 @@ namespace Z0.Logix
         public void check_identities()
         {
             var src = LogicIdentities.All.Array();
-            root.iter(src, expr => Claim.notnull(expr.Vars));
-            root.iter(src, check_exhaustive);
+            iter(src, expr => Claim.notnull(expr.Vars));
+            iter(src, check_exhaustive);
         }
 
         public void identity_bench()

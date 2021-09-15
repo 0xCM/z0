@@ -5,52 +5,62 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using static core;
 
-    using llvm;
-
-    using static Root;
-    using static AsmOperands;
-
-    public interface IAsmSpec
-    {
-        AsmId Id {get;}
-    }
-
-    public interface IAsmSpec<T> : IAsmSpec
-        where T: unmanaged
+    public readonly struct AsmSigBits
     {
 
-    }
-
-    public interface IAsmSpec<T,A> : IAsmSpec<T>
-        where T : unmanaged, IAsmOperand<T>
-    {
-
+        public static uint mnemonic(ReadOnlySpan<char> src, ref uint i, Span<byte> dst)
+        {
+            var i0 = i;
+            var count = src.Length;
+            ref var b = ref seek(dst,i);
+            for(var j = 0; j<count; j++)
+            {
+                ref readonly var c = ref skip(src,j);
+            }
+            return i - i0;
+        }
     }
 
 
     [ApiHost]
     public readonly partial struct AsmOps
     {
-        [MethodImpl(Inline), Op]
-        public static Xor32RR xor(r32 op0, r32 op1)
-            => new Xor32RR(op0,op1);
 
-        public struct Xor32RR : IAsmSpec<Xor32RR>
-        {
-            public r32 Op0;
 
-            public r32 Op1;
 
-            [MethodImpl(Inline)]
-            public Xor32RR(r32 a0, r32 a1)
-            {
-                Op0 = a0;
-                Op1 = a1;
-            }
+        // public static byte sig(ReadOnlySpan<char> name, AsmOpClass op0, Span<byte> dst)
+        // {
+        //     return default;
+        // }
 
-            public AsmId Id => AsmId.XOR32rr;
-        }
+
+        /*
+
+            cmp r8 imm8
+            cmp m8 imm8
+            cmp r16 imm16
+            cmp m16 imm16
+            cmp r32 imm32
+            cmp m32 imm32
+            cmp r64 imm32
+            cmp m64 imm32
+            cmp r16 imm8
+            cmp m16 imm8
+            cmp r32 imm8
+            cmp m32 imm8
+            cmp r64 imm8
+            cmp m64 imm8
+            cmp r8 r8
+            cmp m8 r8
+            cmp r16 r16
+            cmp m16 r16
+            cmp r32 r32
+            cmp m32 r32
+            cmp r64 r64
+            cmp m64 r64
+
+        */
     }
 }

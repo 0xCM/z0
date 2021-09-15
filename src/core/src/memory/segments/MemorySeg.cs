@@ -12,29 +12,14 @@ namespace Z0
     using static Root;
     using static core;
 
+    using api = MemorySegs;
+
     /// <summary>
     /// Defines a reference to a (live) memory segment
     /// </summary>
     public readonly struct MemorySeg : IMemorySegment, ITextual, IEquatable<MemorySeg>, IHashed
     {
-        /// <summary>
-        /// Computes the whole number of T-cells identified by a reference
-        /// </summary>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        static uint count<T>(MemorySeg src)
-            => (uint)(src.Length/size<T>());
-
-        /// <summary>
-        /// Covers a memory reference with a readonly span
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<T> view<T>(MemorySeg src)
-            => cover(src.BaseAddress.Ref<T>(), count<T>(src));
-
-        public const byte StorageSize = 16;
+        public const byte SZ = 16;
 
         readonly Vector128<ulong> Segment;
 
@@ -135,18 +120,18 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public uint CellCount<T>()
-            => count<T>(this);
+            => api.count<T>(this);
 
         public string Format()
             => Range.Format();
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Load()
-            => view<byte>(this);
+            => api.view<byte>(this);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Load<T>()
-            => view<T>(this);
+            => api.view<T>(this);
 
         [MethodImpl(Inline)]
         public uint Hash()
@@ -158,7 +143,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe MemorySpan ToSpan()
-            => new MemorySpan(Range, MemorySegs.edit(BaseAddress, Size));
+            => new MemorySpan(Range, api.edit(BaseAddress, Size));
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<ulong>(in MemorySeg src)

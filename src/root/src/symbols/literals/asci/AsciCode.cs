@@ -168,52 +168,52 @@ namespace Z0
         FS = (byte)AC.FS,
 
         /// <summary>
-        /// Specifies the asci code for the digit '0'
+        /// The '0' character code 48
         /// </summary>
         d0 = (byte)AC.d0,
 
         /// <summary>
-        /// Specifies the asci code for the digit '1'
+        /// The '1' character code 49
         /// </summary>
         d1 = (byte)AC.d1,
 
         /// <summary>
-        /// Specifies the asci code for the digit '2'
+        /// The '2' character code 50
         /// </summary>
         d2 = (byte)AC.d2,
 
         /// <summary>
-        /// Specifies the asci code for the digit '3'
+        /// The '3' character code 51
         /// </summary>
         d3 = (byte)AC.d3,
 
         /// <summary>
-        /// Specifies the asci code for the digit '4'
+        /// The '4' character code 52
         /// </summary>
         d4 = (byte)AC.d4,
 
         /// <summary>
-        /// Specifies the asci code for the digit '5'
+        /// The '5' character code 53
         /// </summary>
         d5 = (byte)AC.d5,
 
         /// <summary>
-        /// Specifies the asci code for the digit '6'
+        /// The '6' character code 54
         /// </summary>
         d6 = (byte)AC.d6,
 
         /// <summary>
-        /// Specifies the asci code for the digit '7'
+        /// The '7' character code 55
         /// </summary>
         d7 = (byte)AC.d7,
 
         /// <summary>
-        /// Specifies the asci code for the digit '8'
+        /// The '8' character code 56
         /// </summary>
         d8 = (byte)AC.d8,
 
         /// <summary>
-        /// Specifies the asci code for the digit '9'
+        /// The '9' character code 57
         /// </summary>
         d9 = (byte)AC.d9,
 
