@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Stack(T[] buffer)
         {
-            Capacity = (uint)buffer.Length - 1;
+            Capacity = (uint)buffer.Length;
             Storage = buffer;
             Pos = (uint)Storage.Length - 1;
         }
@@ -36,9 +36,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public bit Pop(out T cell)
         {
-            if(Pos < Capacity)
+            if(Pos < Capacity - 1)
             {
-                cell = Storage[Pos++];
+                cell = Storage[++Pos];
                 return true;
             }
             else
@@ -57,7 +57,7 @@ namespace Z0
                 return true;
             }
             else
-                return true;
+                return false;
         }
     }
 }

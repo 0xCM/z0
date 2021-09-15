@@ -11,25 +11,19 @@ namespace Z0
     using static Root;
     using static core;
 
-    public sealed class ProjectWs : IProjectWs, IWorkspace<ProjectWs>
+    public sealed class ProjectWs : Workspace<ProjectWs>, IProjectWs
     {
         [MethodImpl(Inline)]
         public static ProjectWs create(FS.FolderPath home)
             => new ProjectWs(home);
 
-        public FS.FolderPath Root {get;}
-
-        public Identifier Name
-        {
-            [MethodImpl(Inline)]
-            get => "projects";
-        }
+        public override WsKind Kind => WsKind.Projects;
 
         Dictionary<ProjectId,ProjectConfig> ConfigLookup;
 
         public ProjectWs(FS.FolderPath src)
+            : base(src)
         {
-            Root = src;
             ConfigLookup = dict<ProjectId,ProjectConfig>();
         }
 

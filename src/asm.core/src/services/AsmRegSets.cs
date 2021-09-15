@@ -41,7 +41,7 @@ namespace Z0.Asm
             return (uint)count;
         }
 
-        public RegSet Regs(RegClassCode @class, NativeWidthCode width = default)
+        public RegSet Regs(RegClassCode @class, NativeSizeCode width = default)
         {
             var regs = RegSet.Empty;
             switch(@class)
@@ -70,7 +70,7 @@ namespace Z0.Asm
             const byte Count = 32;
             var dst = alloc<RegOp>(Count);
             for(var i=0; i<Count; i++)
-                seek(dst,i) = AsmRegs.reg(NativeWidthCode.W128, RegClassCode.XMM, (RegIndexCode)i);
+                seek(dst,i) = AsmRegs.reg(NativeSizeCode.W128, RegClassCode.XMM, (RegIndexCode)i);
             return dst;
         }
 
@@ -79,7 +79,7 @@ namespace Z0.Asm
             const byte Count = 32;
             var dst = alloc<RegOp>(Count);
             for(var i=0; i<Count; i++)
-                seek(dst,i) = AsmRegs.reg(NativeWidthCode.W128, RegClassCode.YMM, (RegIndexCode)i);
+                seek(dst,i) = AsmRegs.reg(NativeSizeCode.W128, RegClassCode.YMM, (RegIndexCode)i);
             return dst;
         }
 
@@ -88,16 +88,16 @@ namespace Z0.Asm
             const byte Count = 32;
             var dst = alloc<RegOp>(Count);
             for(var i=0; i<Count; i++)
-                seek(dst,i) = AsmRegs.reg(NativeWidthCode.W512, RegClassCode.ZMM, (RegIndexCode)i);
+                seek(dst,i) = AsmRegs.reg(NativeSizeCode.W512, RegClassCode.ZMM, (RegIndexCode)i);
             return dst;
         }
 
-        public RegSet GpRegs(NativeWidthCode width)
+        public RegSet GpRegs(NativeSizeCode width)
         {
             var dst = RegSet.Empty;
             switch(width)
             {
-                case NativeWidthCode.W8:
+                case NativeSizeCode.W8:
                     {
                         var count = 20;
                         var buffer = alloc<RegOp>(count);
@@ -108,9 +108,9 @@ namespace Z0.Asm
                         dst = buffer;
                     }
                 break;
-                case NativeWidthCode.W16:
-                case NativeWidthCode.W32:
-                case NativeWidthCode.W64:
+                case NativeSizeCode.W16:
+                case NativeSizeCode.W32:
+                case NativeSizeCode.W64:
                 {
                     var Count = 16;
                     var buffer = alloc<RegOp>(Count);
@@ -128,7 +128,7 @@ namespace Z0.Asm
             const byte Count = 8;
             var dst = alloc<RegOp>(Count);
             for(var i=0; i<Count; i++)
-                seek(dst,i) = AsmRegs.reg(NativeWidthCode.W64, RegClassCode.MASK, (RegIndexCode)i);
+                seek(dst,i) = AsmRegs.reg(NativeSizeCode.W64, RegClassCode.MASK, (RegIndexCode)i);
             return dst;
         }
     }

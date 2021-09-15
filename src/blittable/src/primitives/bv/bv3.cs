@@ -14,7 +14,6 @@ namespace Z0
         public static bv3 bv(N3 n,byte src)
             => new bv3(src);
 
-
         /// <summary>
         /// Defines a 3-bit bitvector
         /// </summary>

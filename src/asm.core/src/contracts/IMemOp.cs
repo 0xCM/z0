@@ -12,22 +12,21 @@ namespace Z0.Asm
     [Free]
     public interface IMemOp : IAsmOp
     {
-        NativeSize Size {get;}
-
         AsmAddress Address {get;}
+
+        AsmOpClass IAsmOp.OpClass
+            => AsmOpClass.M;
     }
 
     [Free]
     public interface IMemOp<T> : IMemOp, IAsmOp<T>
         where T : unmanaged
     {
-        AsmOpClass IAsmOp.OpClass
-            => AsmOpClass.M;
     }
 
     public interface IMemOp8 : IMemOp
     {
-        NativeSize IMemOp.Size
+        NativeSize IAsmOp.Size
             => AsmSizeClass.@byte;
     }
 
@@ -39,7 +38,7 @@ namespace Z0.Asm
 
     public interface IMemOp16 : IMemOp
     {
-        NativeSize IMemOp.Size
+        NativeSize IAsmOp.Size
             => AsmSizeClass.word;
     }
 
@@ -51,7 +50,7 @@ namespace Z0.Asm
 
     public interface IMemOp32 : IMemOp
     {
-        NativeSize IMemOp.Size
+        NativeSize IAsmOp.Size
             => AsmSizeClass.dword;
     }
 
@@ -63,8 +62,7 @@ namespace Z0.Asm
 
     public interface IMemOp64 : IMemOp
     {
-
-        NativeSize IMemOp.Size
+        NativeSize IAsmOp.Size
             => AsmSizeClass.qword;
     }
 
@@ -72,12 +70,11 @@ namespace Z0.Asm
         where T : unmanaged, IMemOp64<T>
     {
 
-
     }
 
     public interface IMemOp128 : IMemOp
     {
-        NativeSize IMemOp.Size
+        NativeSize IAsmOp.Size
             => AsmSizeClass.xmmword;
     }
 
@@ -89,8 +86,7 @@ namespace Z0.Asm
 
     public interface IMemOp256 : IMemOp
     {
-
-        NativeSize IMemOp.Size
+        NativeSize IAsmOp.Size
             => AsmSizeClass.ymmword;
     }
 
@@ -101,7 +97,7 @@ namespace Z0.Asm
 
     public interface IMemOp512 : IMemOp
     {
-        NativeSize IMemOp.Size
+        NativeSize IAsmOp.Size
             => AsmSizeClass.zmmword;
     }
 

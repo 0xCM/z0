@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="vertices">The vertices in the graph</param>
         /// <param name="edges">The edges that connect the vertices</param>
         [MethodImpl(Inline)]
-        public static Graph<V,T> graph<V,T>(Index<Node<V,T>> vertices, Index<Arrow<V>> edges)
+        public static Graph<V,T> graph<V,T>(Index<Node<V,T>> vertices, Arrow<Node<V>>[] edges)
             where V : unmanaged
             where T : unmanaged
                 => new Graph<V,T>(vertices, edges);
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="edges">The edges that connect the vertices</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]
-        public static Graph<V> graph<V>(Index<Node<V>> vertices, Index<Arrow<V>> edges)
+        public static Graph<V> graph<V>(Node<V>[] vertices, Arrow<Node<V>>[] edges)
             where V : unmanaged
                 => new Graph<V>(vertices, edges);
     }

@@ -8,9 +8,9 @@ namespace Z0.llvm
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential, Pack=1)]
-    public struct AsmDescriptor
+    public struct AsmSpec
     {
-        public const string TableId = "llvm.descriptors";
+        public const string TableId = "llvm.asmSpec";
 
         public AsmId Id;
 

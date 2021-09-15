@@ -19,6 +19,7 @@ namespace Z0
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Range<T> range<T>(T min, T max, T step)
-            => new Range<T>(min, max, step);
+            where T : unmanaged
+                => new Range<T>(min, max, step);
     }
 }

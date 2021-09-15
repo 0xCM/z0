@@ -64,7 +64,6 @@ namespace Z0
 
         public IPolySource Random {get;}
 
-
         /// <summary>
         /// Fires when input is received
         /// </summary>

@@ -26,10 +26,10 @@ namespace Z0.Asm
                 Index = index;
             }
 
-            public NativeWidthCode WidthCode
+            public NativeSize Size
             {
                 [MethodImpl(Inline)]
-                get => NativeWidthCode.W8;
+                get => NativeSizeCode.W8;
             }
 
             public RegClassCode RegClassCode
@@ -41,7 +41,7 @@ namespace Z0.Asm
             public RegWidth RegWidth
             {
                 [MethodImpl(Inline)]
-                get => WidthCode;
+                get => Size;
             }
 
             public RegClass RegClass
@@ -58,7 +58,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator RegOp(G src)
-                => api.reg(src.WidthCode, src.RegClassCode, src.Index);
+                => api.reg(src.Size, src.RegClassCode, src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(G src)

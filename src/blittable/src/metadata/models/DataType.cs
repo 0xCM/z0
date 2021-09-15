@@ -58,6 +58,9 @@ namespace Z0
             return text.format(slice(dst,0,i));
         }
 
+        /// <summary>
+        /// Specifies a concrete data type
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public readonly struct DataType
         {
@@ -80,6 +83,26 @@ namespace Z0
 
             public override string ToString()
                 => Format();
+        }
+
+        /// <summary>
+        /// Specifies a parametric data type
+        /// </summary>
+        public readonly struct DataType<T>
+            where T : ITypeParameter
+        {
+
+        }
+
+        public interface ITypeParameter
+        {
+            text7 ParameterName {get;}
+        }
+
+        public interface ITypeParameter<T> : ITypeParameter
+            where T : IPrimitive
+        {
+
         }
     }
 }

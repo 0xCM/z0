@@ -5,8 +5,6 @@
 
 namespace  Z0
 {
-    using System;
-
     /// <summary>
     /// Characterizes operational multiplication
     /// </summary>
@@ -14,5 +12,5 @@ namespace  Z0
     public interface IMultiplicativeOps<T>
     {
         T Mul(T lhs, T rhs);
-    }    
+    }
 }

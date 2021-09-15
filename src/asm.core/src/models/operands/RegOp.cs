@@ -46,7 +46,7 @@ namespace Z0.Asm
             get => Data == ushort.MaxValue;
         }
 
-        public NativeWidthCode WidthCode
+        public NativeSizeCode WidthCode
         {
             [MethodImpl(Inline)]
             get => AsmRegs.width(this);

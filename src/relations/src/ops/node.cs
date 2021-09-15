@@ -26,7 +26,7 @@
                     => new Node<V,T>(index,data);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Node<T> node<T>(T src)
-                => new Node<T>(src);
+            public static Node<T> node<T>(uint index, T src)
+                => new Node<T>(index,src);
     }
 }

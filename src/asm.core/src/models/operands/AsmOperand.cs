@@ -39,7 +39,7 @@ namespace Z0.Asm
         internal AsmOperand(imm8 src)
         {
             OpClass = AsmOpClass.Imm;
-            Size = NativeWidthCode.W8;
+            Size = NativeSizeCode.W8;
             _Data = (byte)src;
         }
 
@@ -47,7 +47,7 @@ namespace Z0.Asm
         internal AsmOperand(imm16 src)
         {
             OpClass = AsmOpClass.Imm;
-            Size = NativeWidthCode.W16;
+            Size = NativeSizeCode.W16;
             _Data = (ushort)src;
         }
 
@@ -55,7 +55,7 @@ namespace Z0.Asm
         internal AsmOperand(imm32 src)
         {
             OpClass = AsmOpClass.Imm;
-            Size = NativeWidthCode.W32;
+            Size = NativeSizeCode.W32;
             _Data = (uint)src;
         }
 
@@ -63,7 +63,7 @@ namespace Z0.Asm
         internal AsmOperand(imm64 src)
         {
             OpClass = AsmOpClass.Imm;
-            Size = NativeWidthCode.W64;
+            Size = NativeSizeCode.W64;
             _Data = (ulong)src;
         }
 

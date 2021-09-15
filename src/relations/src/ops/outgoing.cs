@@ -17,12 +17,12 @@ namespace Z0
         /// <param name="graph">The declaring graph</param>
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
-        public static ReadOnlySpan<Arrow<V>> outgoing<V>(Graph<V> graph, V source)
+        public static ReadOnlySpan<Arrow<Node<V>>> outgoing<V>(Graph<V> graph, V source)
             where V : unmanaged
         {
             var count = graph.EdgeCount;
-            var buffer = alloc<Arrow<V>>(count);
-            Span<Arrow<V>> edges = buffer;
+            var buffer = alloc<Arrow<Node<V>>>(count);
+            Span<Arrow<Node<V>>> edges = buffer;
             var j = 0;
             for(var i = 0; i<count; i++)
             {

@@ -9,7 +9,10 @@ namespace Z0.Asm
     /// </summary>
     public interface IAsmOp
     {
-        AsmOpClass OpClass => default;
+        AsmOpClass OpClass {get;}
+
+        NativeSize Size {get;}
+
     }
 
     public interface IAsmOp<T> : IAsmOp

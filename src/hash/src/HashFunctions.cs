@@ -35,12 +35,12 @@ namespace Z0
             var count = (uint)codes.Length;
             dst = alloc<HashEntry>(count);
             ref var records = ref dst.First;
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
                 ref var record = ref seek(records,i);
                 ref readonly var hash = ref skip(codes,i);
-                record.Code = hash;
                 record.Key = (hash % count);
+                record.Code = hash;
                 record.Content = skip(src,i).Expr.Text;
             }
 
@@ -54,20 +54,20 @@ namespace Z0
         public static Outcome perfect(ReadOnlySpan<string> src, out Index<HashEntry> dst)
         {
             var result = Outcome.Success;
-
+            var count = (uint)src.Length;
+            var n = Pow2.test(count) ? count : (uint)Pow2.next(count);
             dst = default;
             try
             {
                 var codes = perfect(src, x => x, HashFunctions.strings()).Codes;
-                var count = (uint)codes.Length;
-                dst = alloc<HashEntry>(count);
+                dst = alloc<HashEntry>(n);
                 ref var records = ref dst.First;
-                for(var i=0; i<count; i++)
+                for(var j=0u; j<count; j++)
                 {
-                    ref var record = ref seek(records,i);
-                    ref readonly var hash = ref skip(codes,i);
+                    ref readonly var hash = ref skip(codes,j);
+                    ref var record = ref seek(records,j);
+                    record.Key = hash.Hash % n;
                     record.Code = hash.Hash;
-                    record.Key = (hash.Hash % count);
                     record.Content = hash.Source;
                 }
                 dst.Sort();

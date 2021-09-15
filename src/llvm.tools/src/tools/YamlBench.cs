@@ -1,7 +1,6 @@
 //-----------------------------------------------------------------------------
-// Copyright   : (c) LLVM Project
-// License     : Apache-2.0 WITH LLVM-exceptions
-// Source      : llvm/lib/Support/YAMLParser.cpp
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {

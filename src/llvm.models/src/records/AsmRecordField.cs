@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
+    using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 

@@ -8,22 +8,6 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".llc-sse")]
-        Outcome LlcSse(CmdArgs args)
-            => RunProjectScript(args, LlcBuildSse);
-
-        [CmdOp(".llc-sse2")]
-        Outcome LlcSse2(CmdArgs args)
-            => RunProjectScript(args, LlcBuildSse2);
-
-        [CmdOp(".llc-sse3")]
-        Outcome LlcSse3(CmdArgs args)
-            => RunProjectScript(args, LlcBuildSse3);
-
-        [CmdOp(".llc-sse41")]
-        Outcome LlcSse41(CmdArgs args)
-            => RunProjectScript(args, LlcBuildSse41);
-
         [CmdOp(".llc-sse42")]
         Outcome LlcSse42(CmdArgs args)
             => RunProjectScript(args, LlcBuildSse42);

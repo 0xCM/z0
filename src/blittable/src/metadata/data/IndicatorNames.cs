@@ -44,6 +44,8 @@ namespace Z0
             public const string Pair = "pair";
 
             public const string Block = "block";
+
+            public const string BitSeq = "bits";
         }
     }
 }

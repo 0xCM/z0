@@ -78,7 +78,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static text7 name(GpClass k, RegIndexCode index, NativeWidthCode width)
+        public static text7 name(GpClass k, RegIndexCode index, NativeSizeCode width)
         {
             const byte RegLength = 4;
             const string R0 = "rax eax ax  al  ";
@@ -109,7 +109,7 @@ namespace Z0.Asm
             switch(src.RegClassCode)
             {
                 case RegClassCode.GP:
-                    return name(Gp, src.Index, (NativeWidthCode)(u16(src) & 0b111));
+                    return name(Gp, src.Index, (NativeSizeCode)(u16(src) & 0b111));
                 case RegClassCode.XMM:
                     return name(Xmm, src.Index);
                 case RegClassCode.YMM:
@@ -128,7 +128,7 @@ namespace Z0.Asm
             switch(src.RegClassCode)
             {
                 case RegClassCode.GP:
-                    return name(Gp, src.Index, (NativeWidthCode)(src.Bitfield & 0b111));
+                    return name(Gp, src.Index, (NativeSizeCode)(src.Bitfield & 0b111));
                 case RegClassCode.XMM:
                     return name(Xmm, src.Index);
                 case RegClassCode.YMM:
@@ -142,17 +142,17 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        static ushort offsset(GpClass k, RegIndexCode index, NativeWidthCode width)
+        static ushort offsset(GpClass k, RegIndexCode index, NativeSizeCode width)
         {
             const byte RegLength = 4;
             const byte RowLength = 4*RegLength;
             var row = (uint)((uint)index*RowLength);
             var col = z32;
-            if(width == NativeWidthCode.W64)
+            if(width == NativeSizeCode.W64)
                 col = 0;
-            else if(width == NativeWidthCode.W32)
+            else if(width == NativeSizeCode.W32)
                 col = 4;
-            else if(width == NativeWidthCode.W16)
+            else if(width == NativeSizeCode.W16)
                 col = 8;
             else
                 col = 12;

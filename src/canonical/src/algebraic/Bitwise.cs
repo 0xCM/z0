@@ -7,9 +7,9 @@ namespace Z0
     /// <summary>
     /// Characterizes bitwise operations over an operand
     /// </summary>
-    public interface IBitwiseOps<T>  
-        where T : unmanaged      
-    { 
+    public interface IBitwiseOps<T>
+        where T : unmanaged
+    {
         /// <summary>
         /// Computes the bitwise AND
         /// </summary>
@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="a">The left value</param>
         /// <param name="b">The right value</param>
         T Or(T a, T b);
- 
+
         /// <summary>
         /// Computes the bitwise XOR
         /// </summary>
@@ -36,7 +36,5 @@ namespace Z0
         /// </summary>
         /// <param name="a">The operand</param>
         T Not(T a);
-
     }
-
 }

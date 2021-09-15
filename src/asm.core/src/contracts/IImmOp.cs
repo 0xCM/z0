@@ -11,7 +11,8 @@ namespace Z0
     [Free]
     public interface IImmOp : IAsmOp, ITextual
     {
-        AsmOpClass Class => AsmOpClass.Imm;
+        AsmOpClass IAsmOp.OpClass
+            => AsmOpClass.Imm;
     }
 
     [Free]
@@ -39,6 +40,7 @@ namespace Z0
         where F : unmanaged, IImm<F,T>
         where T : unmanaged
     {
-
+        NativeSize IAsmOp.Size
+            => asm.asmsize(core.width<T>());
     }
 }

@@ -15,22 +15,23 @@ namespace Z0
         /// Defines a stewise-contiguous sequence of scalar values, available on-demand, that satisfy upper/lower bound constraints
         /// </summary>
         /// <typeparam name="T">The scalar type</typeparam>
-        public readonly struct Range<T> : IRule<Range<T>,T>
+        public readonly struct Range<T>
+            where T : unmanaged
         {
             /// <summary>
             /// The min value in the range
             /// </summary>
-            public T Min {get;}
+            public readonly T Min;
 
             /// <summary>
             /// The max value in the range
             /// </summary>
-            public T Max {get;}
+            public readonly T Max;
 
             /// <summary>
             /// The distance between successive range points
             /// </summary>
-            public T Step {get;}
+            public readonly T Step;
 
             [MethodImpl(Inline)]
             public Range(T min, T max, T step)

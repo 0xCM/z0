@@ -51,7 +51,7 @@ namespace Z0.Asm
 
         readonly Symbols<TestReg> _TestRegs;
 
-        readonly Symbols<NativeWidthCode> _RegWidths;
+        readonly Symbols<NativeSizeCode> _RegWidths;
 
         readonly Symbols<RegIndexCode> _RegIndices;
 

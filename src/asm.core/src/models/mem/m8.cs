@@ -14,8 +14,11 @@ namespace Z0.Asm
         {
             public AsmAddress Address {get;}
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.@byte;
+            public NativeSize Size
+            {
+                [MethodImpl(Inline)]
+                get => asm.asmsize(8);
+            }
 
             [MethodImpl(Inline)]
             public m8(AsmAddress address)

@@ -21,5 +21,8 @@ namespace Z0
         {
 
         }
+
+        public override WsKind Kind
+            => WsKind.Logs;
     }
 }

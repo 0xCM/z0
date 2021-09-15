@@ -12,19 +12,24 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static NativeWidthCode code(BitWidth src)
+        public static NativeSizeCode code(BitWidth src)
         {
             if(src != 80)
             {
                 var i = Pow2.log(src >> 3);
-                return (NativeWidthCode)i;
+                return (NativeSizeCode)i;
             }
             else
-                return NativeWidthCode.W80;
+                return NativeSizeCode.W80;
         }
 
         [MethodImpl(Inline), Op]
         public static NativeSize asmsize(BitWidth src)
             => code(src);
+
+        [MethodImpl(Inline)]
+        public static NativeSize asmsize<T>()
+            where T : unmanaged
+                => asmsize(core.width<T>());
     }
 }

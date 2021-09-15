@@ -7,7 +7,6 @@ namespace Z0.Asm
     using static Root;
     using static Ccv;
 
-
     partial class AsmCmdService
     {
         [CmdOp(".cc-win64")]

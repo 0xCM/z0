@@ -18,7 +18,6 @@ namespace Z0
     [ApiHost]
     public readonly struct Fsm
     {
-
         public void example1()
         {
             var machineCount = Pow2.T04;
@@ -43,7 +42,6 @@ namespace Z0
             }
             Task.WaitAll(tasks);
         }
-
 
         static int MachineCounter = 0;
 

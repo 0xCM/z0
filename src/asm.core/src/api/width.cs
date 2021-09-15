@@ -16,7 +16,7 @@ namespace Z0.Asm
             => Pow2.pow((byte)src)*8ul;
 
         [MethodImpl(Inline), Op]
-        public static BitWidth width(NativeWidthCode src)
-            => src != NativeWidthCode.W80 ? (Pow2.pow((byte)src)*8ul) : 80;
+        public static BitWidth width(NativeSizeCode src)
+            => src != NativeSizeCode.W80 ? (Pow2.pow((byte)src)*8ul) : 80;
     }
 }

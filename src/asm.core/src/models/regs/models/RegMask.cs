@@ -22,7 +22,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public void Include(RegWidth src)
         {
-             Width |= Pow2.pow16u(src);
+             Width |= Pow2.pow16u((byte)src.Size.Code);
         }
 
         [MethodImpl(Inline)]

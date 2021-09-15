@@ -30,7 +30,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static uint filter(NativeWidthCode width, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
+        public static uint filter(NativeSizeCode width, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
         {
             var k=0u;
             var j = min(src.Length, dst.Length);
@@ -48,7 +48,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static uint filter(RegClassCode @class, NativeWidthCode width, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
+        public static uint filter(RegClassCode @class, NativeSizeCode width, ReadOnlySpan<RegOp> src, Span<RegOp> dst)
         {
             var k=0u;
             var j = min(src.Length, dst.Length);

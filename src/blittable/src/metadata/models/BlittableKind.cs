@@ -126,5 +126,11 @@ namespace Z0
         /// </summary>
         [Symbol(N.Tuple)]
         Tuple = 18,
+
+        /// <summary>
+        /// Indicates a finite sequence of bits
+        /// </summary>
+        [Symbol(N.BitSeq)]
+        BitSeq = 19,
     }
 }

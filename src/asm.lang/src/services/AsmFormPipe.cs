@@ -93,13 +93,13 @@ namespace Z0.Asm
             var dst = Db.AsmCatalogTable<HashEntry>();
             var buffer = alloc<HashEntry>(count);
             ref var records = ref first(buffer);
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
                 ref var record = ref seek(records,i);
                 ref readonly var hash = ref skip(perfect,i);
+                record.Key = (hash.Hash % count);
                 record.Content = hash.Source.Format();
                 record.Code = hash.Hash;
-                record.Key = (hash.Hash % count);
             }
             var emitting = Wf.EmittingTable<HashEntry>(dst);
             var ecount = Tables.emit(@readonly(buffer), dst);

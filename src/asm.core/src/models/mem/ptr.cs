@@ -28,10 +28,10 @@ namespace Z0.Asm
                 get => Source.Target;
             }
 
-            public AsmSizeClass SizeClass
+            public NativeSize Size
             {
                 [MethodImpl(Inline)]
-                get => Source.SizeClass;
+                get => asm.asmsize<T>();
             }
 
             [MethodImpl(Inline)]

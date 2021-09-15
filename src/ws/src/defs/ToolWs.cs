@@ -11,20 +11,36 @@ namespace Z0
     using static Root;
     using static core;
 
-    public sealed class ToolWs : IWorkspace<ToolWs>
+    public sealed class ToolWs : Workspace<ToolWs>, IToolWs
     {
         [MethodImpl(Inline)]
         public static ToolWs create(FS.FolderPath root)
             => new ToolWs(root);
 
-        public FS.FolderPath Root {get;}
-
         Dictionary<ToolId,ToolConfig> ConfigLookup;
 
+        Index<ToolConfig> Configs;
+
         internal ToolWs(FS.FolderPath root)
+            : base(root)
         {
-            Root = root;
             ConfigLookup = dict<ToolId,ToolConfig>();
+            Configs = array<ToolConfig>();
+        }
+
+        public IToolWs Configure(ToolConfig[] src)
+        {
+            Configs = src;
+            ConfigLookup = src.Select(x => (x.ToolId, x)).ToDictionary();
+            return this;
+        }
+
+        public override WsKind Kind
+            => WsKind.Tools;
+
+        public ReadOnlySpan<ToolConfig> Configured
+        {
+            get => Configs;
         }
 
         public bool Settings(ToolId id, out ToolConfig dst)

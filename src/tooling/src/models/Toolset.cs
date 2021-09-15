@@ -9,19 +9,17 @@ namespace Z0
 
     using static Root;
 
-    public class Toolchain
+    public readonly struct Toolset
     {
-        Index<ToolId> _Tools;
+        public FS.FolderPath InstallBase {get;}
 
-        internal Toolchain(ToolId[] tools)
-        {
-            _Tools = tools;
-        }
+        public Index<ToolId> Members {get;}
 
-        public ReadOnlySpan<ToolId> Tools
+        [MethodImpl(Inline)]
+        public Toolset(FS.FolderPath @base, ToolId[] members)
         {
-            [MethodImpl(Inline)]
-            get => _Tools.View;
+            InstallBase = @base;
+            Members = members;
         }
     }
 }

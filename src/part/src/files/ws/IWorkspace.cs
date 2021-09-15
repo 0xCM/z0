@@ -10,6 +10,8 @@ namespace Z0
     {
         Identifier Name {get;}
 
+        WsKind Kind {get;}
+
         FS.FolderPath DataDir()
             => Root + FS.folder(data);
 
@@ -19,14 +21,8 @@ namespace Z0
         FS.FilePath AdminPath(string id, FS.FileExt ext)
             => AdminDir() + FS.file(id,ext);
 
-        FS.Files AdminFiles()
-            => AdminDir().AllFiles;
-
         FS.Files AdminFiles(FS.FileExt ext)
             => AdminDir().Files(ext);
-
-        FS.FilePath LlvmTable(string id)
-            => Root + FS.folder(llvm) + FS.file(id, FS.Csv);
 
         FS.FilePath LlvmTable<T>()
             where T : struct
@@ -115,9 +111,6 @@ namespace Z0
 
         FS.FilePath ConfigLog(ToolId id)
             => Logs(id) + FS.file(config, FS.Log);
-
-        FS.FilePath Inventory()
-            => Root + FS.folder(admin) + FS.file(inventory, FS.Txt);
     }
 
     public interface IWorkspace<T> : IWorkspace

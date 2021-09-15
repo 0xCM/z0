@@ -9,15 +9,21 @@ namespace Z0
 
     using static Root;
 
-    public struct Workspace : IWorkspace<Workspace>
+    public sealed class OutputWs : IWorkspace<OutputWs>
     {
+        [MethodImpl(Inline)]
+        public static OutputWs create(FS.FolderPath root)
+            => new OutputWs(root);
+
         FS.FolderPath _WsRoot;
 
         [MethodImpl(Inline)]
-        public Workspace(FS.FolderPath root)
+        OutputWs(FS.FolderPath root)
         {
             _WsRoot = root;
         }
+
+        public WsKind Kind => WsKind.Output;
 
         public FS.FolderPath Root
         {
@@ -25,24 +31,13 @@ namespace Z0
             get => _WsRoot;
         }
 
-        [MethodImpl(Inline)]
         public FS.FolderPath WsRoot()
             => _WsRoot;
 
-        [MethodImpl(Inline)]
         public FS.FolderPath WsRoot(FS.FolderPath src)
         {
             _WsRoot = src;
             return WsRoot();
         }
-
-        public FS.FolderPath Subdir(string name)
-            => Root + FS.folder(name);
-
-        public string Format()
-            => _WsRoot.Format();
-
-        public override string ToString()
-            => Format();
     }
 }

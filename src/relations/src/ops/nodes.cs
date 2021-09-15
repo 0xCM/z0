@@ -40,8 +40,8 @@ namespace Z0
         {
             var buffer = alloc<Node<V>>(count);
             Span<Node<V>> dst = buffer;
-            for(var i=0; i<count; i++)
-                seek(dst,i) = new Node<V>(NumericCast.force<V>(i));
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = new Node<V>(i, NumericCast.force<V>(i));
             return buffer;
         }
     }

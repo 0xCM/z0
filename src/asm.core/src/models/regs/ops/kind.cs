@@ -14,7 +14,7 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static RegKind kind(RegIndexCode i, RegClassCode k, NativeWidthCode w)
+        public static RegKind kind(RegIndexCode i, RegClassCode k, NativeSizeCode w)
             => (RegKind)(((uint)i  << IndexField) | ((uint)k << ClassField) | ((uint)w << WidthField));
 
         /// <summary>

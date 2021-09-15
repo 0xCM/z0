@@ -20,6 +20,9 @@ namespace Z0.Asm
 
         public T Data {get;}
 
+        ReadOnlySpan<byte> IAsmOperand.Data
+            => core.bytes(Data);
+
         [MethodImpl(Inline)]
         public AsmOperand(AsmOpClass opclass, AsmSizeClass size, T data)
         {

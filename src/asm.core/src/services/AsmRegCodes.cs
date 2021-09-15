@@ -84,7 +84,7 @@ namespace Z0.Asm
             => _SysPtrRegs;
 
         [Op]
-        public static Symbols<NativeWidthCode> RegWidths()
+        public static Symbols<NativeSizeCode> RegWidths()
             => _RegWidths;
 
         [Op]
@@ -129,7 +129,7 @@ namespace Z0.Asm
 
         static Symbols<TestReg> _TestRegs;
 
-        static Symbols<NativeWidthCode> _RegWidths;
+        static Symbols<NativeSizeCode> _RegWidths;
 
         static Symbols<RegIndexCode> _RegIndices;
 
@@ -161,7 +161,7 @@ namespace Z0.Asm
             _BndRegs = symbols<BndReg>();
             _TestRegs = symbols<TestReg>();
             _SysPtrRegs = symbols<SPtrReg>();
-            _RegWidths = symbols<NativeWidthCode>();
+            _RegWidths = symbols<NativeSizeCode>();
             _RegIndices = symbols<RegIndexCode>();
             _RegClasses = symbols<RegClassCode>();
         }

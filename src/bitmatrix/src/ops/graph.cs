@@ -81,7 +81,7 @@ namespace Z0
         {
             var n = nat32i<N>();
             var nodes = Relations.nodes<T>(n);
-            var edges = new List<Arrow<T>>();
+            var edges = new List<Arrow<Node<T>>>();
             for(var row=0; row<n; row++)
             for(var col=0; col<n; col++)
                 if(src[row,col])

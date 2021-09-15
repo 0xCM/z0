@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System.Runtime.InteropServices;
-
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
 
     using static Root;
 

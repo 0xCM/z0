@@ -21,12 +21,12 @@ namespace Z0
     {
         readonly Node<V>[] Nodes;
 
-        readonly Arrow<V>[] Edges;
+        readonly Arrow<Node<V>>[] Edges;
 
         readonly Nodes<V> Index;
 
         [MethodImpl(Inline)]
-        public Graph(Node<V>[] vertices, Arrow<V>[] edges)
+        public Graph(Node<V>[] vertices, Arrow<Node<V>>[] edges)
         {
             Nodes = vertices;
             Edges = edges;
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The source vertex</param>
         [MethodImpl(Inline)]
-        public List<V> Sources(V target)
+        public List<Node<V>> Sources(Node<V> target)
             => Index.Sources(target);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The source vertex</param>
         [MethodImpl(Inline)]
-        public List<V> Targets(V source)
+        public List<Node<V>> Targets(Node<V> source)
             => Index.Targets(source);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
-        public ref Arrow<V> Edge(int index)
+        public ref Arrow<Node<V>> Edge(int index)
             => ref Edges[index];
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// </summary>
         /// <param name="target">The target vector</param>
         [MethodImpl(Inline)]
-        public int InDegree(V target)
+        public int InDegree(Node<V> target)
             => Sources(target).Count;
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The source vector</param>
         [MethodImpl(Inline)]
-        public int OutDegree(V source)
+        public int OutDegree(Node<V> source)
             => Targets(source).Count;
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Z0
         /// </summary>
         /// <param name="vertex">The vertext to test</param>
         [MethodImpl(Inline)]
-        public bool IsIsolated(V vertex)
+        public bool IsIsolated(Node<V> vertex)
             => InDegree(vertex) == 0 && OutDegree(vertex) == 0;
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0
         /// sink (or source) so "degenerate" sinks are excluded
         /// </remarks>
         [MethodImpl(Inline)]
-        public bool IsSink(V vertex)
+        public bool IsSink(Node<V> vertex)
             => OutDegree(vertex) == 0 && InDegree(vertex) != 0;
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Z0
         /// sink (or source) so "degenerate" sources are excluded
         /// </remarks>
         [MethodImpl(Inline)]
-        public bool IsSource(V vertex)
+        public bool IsSource(Node<V> vertex)
             => OutDegree(vertex) != 0 && InDegree(vertex) == 0;
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="v0">The start vertex</param>
         /// <param name="traversed">The traversal action</param>
         /// <param name="vEnd">An optional endpoint</param>
-        public void Traverse(V v0, Action<V> traversed, V vEnd = default)
+        public void Traverse(Node<V> v0, Action<Node<V>> traversed, Node<V> vEnd = default)
         {
             foreach(var target in Targets(v0))
             {
@@ -158,7 +158,7 @@ namespace Z0
         /// </summary>
         /// <param name="v0">The start vertex</param>
         /// <param name="vEnd">An optional endpoint</param>
-        public IEnumerable<V> Path(V v0, V vEnd = default)
+        public IEnumerable<Node<V>> Path(Node<V> v0, Node<V> vEnd = default)
         {
             foreach(var target in Targets(v0))
             {

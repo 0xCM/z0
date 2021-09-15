@@ -24,7 +24,7 @@ namespace Z0.Asm
             => new AddressSize(size);
 
         [MethodImpl(Inline)]
-        public static implicit operator AddressSize(NativeWidthCode code)
+        public static implicit operator AddressSize(NativeSizeCode code)
             => asm.asmsize(asm.width(code));
     }
 }

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     /// <summary>
     /// Characterizes operations over an integer type
     /// </summary>

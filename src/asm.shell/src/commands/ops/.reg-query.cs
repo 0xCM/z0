@@ -17,16 +17,16 @@ namespace Z0.Asm
             switch(pred)
             {
                 case "gp8":
-                    selected = RegSets.GpRegs(NativeWidthCode.W8);
+                    selected = RegSets.GpRegs(NativeSizeCode.W8);
                     break;
                 case "gp16":
-                    selected = RegSets.GpRegs(NativeWidthCode.W16);
+                    selected = RegSets.GpRegs(NativeSizeCode.W16);
                 break;
                 case "gp32":
-                    selected = RegSets.GpRegs(NativeWidthCode.W32);
+                    selected = RegSets.GpRegs(NativeSizeCode.W32);
                 break;
                 case "gp64":
-                    selected = RegSets.GpRegs(NativeWidthCode.W64);
+                    selected = RegSets.GpRegs(NativeSizeCode.W64);
                 break;
                 case "xmm":
                     selected = RegSets.XmmRegs();

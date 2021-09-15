@@ -23,6 +23,22 @@ namespace Z0
             where T : unmanaged
                 => new bits<T>(n, value);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static bit element<T>(in bits<T> src, uint index)
+            where  T : unmanaged
+        {
+            var data = bytes(src.Packed);
+            ref readonly var cell = ref skip(data,index/8);
+            return bit.test(cell, (byte)(index % 8));
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void convert<T>(bits<T> src, list<bit> dst)
+            where T : unmanaged
+        {
+            for(var i=0u; i<src.N; i++)
+                dst[i] = element(src,i);
+        }
 
         public struct bits<T>
             where T : unmanaged
@@ -43,6 +59,12 @@ namespace Z0
             {
                 N = n;
                 Packed = src;
+            }
+
+            public bit this[uint index]
+            {
+                [MethodImpl(Inline)]
+                get => element(this,index);
             }
 
             public string Format()

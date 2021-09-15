@@ -13,13 +13,13 @@ namespace Z0.Asm
     partial struct AsmRegs
     {
         [MethodImpl(Inline), Op]
-        public static uint regops(RegClassCode @class, NativeWidthCode w, Span<RegOp> dst)
+        public static uint regops(RegClassCode @class, NativeSizeCode w, Span<RegOp> dst)
         {
             ref var r = ref first(dst);
             var count = AsmRegData.regcount(@class);
             var counter = 0u;
             for(var i=0; i<count; i++)
-                seek(r,counter++) = reg((NativeWidthCode)w, @class, (RegIndexCode)i);
+                seek(r,counter++) = reg((NativeSizeCode)w, @class, (RegIndexCode)i);
             return counter;
         }
     }

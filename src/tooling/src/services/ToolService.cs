@@ -24,7 +24,6 @@ namespace Z0
             Id = id;
         }
 
-
         protected ToolService()
         {
 
@@ -83,8 +82,6 @@ namespace Z0
             response = ScriptRunner.RunCmd(cmd, OnError);
             return result;
         }
-
-        //protected IEnvPaths Paths => Db;
 
         protected FS.FolderPath Home
             => Db.DevWs() + FS.folder("tools") + FS.folder(Id.Format());

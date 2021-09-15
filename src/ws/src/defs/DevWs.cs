@@ -33,6 +33,8 @@ namespace Z0
             get => _WsRoot;
         }
 
+        public WsKind Kind => WsKind.Dev;
+
         public Outcome Select(Identifier name, out IWorkspace dst)
         {
             var result = Outcome.Failure;
@@ -88,7 +90,7 @@ namespace Z0
         public IAsmWorkspace Asm()
             => AsmWs.create(_WsRoot + FS.folder(asm));
 
-        public IWorkspace Tools()
+        public IToolWs Tools()
             => ToolWs.create(_WsRoot + FS.folder(tools));
 
         public IWorkspace Tables()

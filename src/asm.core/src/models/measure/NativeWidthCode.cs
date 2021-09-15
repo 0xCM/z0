@@ -8,7 +8,7 @@ namespace Z0
     /// Defines a <see cref='DataWidth' subset that corresponds to x86 register widths and
     /// </summary>
     [SymSource]
-    public enum NativeWidthCode : byte
+    public enum NativeSizeCode : byte
     {
         /// <summary>
         /// Indicates the width of an 8-bit register

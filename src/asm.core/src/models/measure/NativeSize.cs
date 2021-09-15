@@ -14,7 +14,7 @@ namespace Z0.Asm
     {
         public const uint SZ = PrimalSizes.U8;
 
-        public NativeWidthCode Code {get;}
+        public NativeSizeCode Code {get;}
 
         public BitWidth Width
         {
@@ -25,11 +25,11 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public NativeSize(AsmSizeClass kind)
         {
-            Code = (NativeWidthCode)kind;
+            Code = (NativeSizeCode)kind;
         }
 
         [MethodImpl(Inline)]
-        public NativeSize(NativeWidthCode kind)
+        public NativeSize(NativeSizeCode kind)
         {
             Code = kind;
         }
@@ -49,20 +49,20 @@ namespace Z0.Asm
             => (AsmSizeClass)src.Code;
 
         [MethodImpl(Inline)]
-        public static implicit operator NativeSize(NativeWidthCode src)
+        public static implicit operator NativeSize(NativeSizeCode src)
             => new NativeSize(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator NativeWidthCode(NativeSize src)
-            => (NativeWidthCode)src.Code;
+        public static implicit operator NativeSizeCode(NativeSize src)
+            => (NativeSizeCode)src.Code;
 
         [MethodImpl(Inline)]
         public static implicit operator RegWidth(NativeSize src)
-            => (NativeWidthCode)src.Code;
+            => (NativeSizeCode)src.Code;
 
         [MethodImpl(Inline)]
         public static implicit operator NativeSize(RegWidth src)
-            => new NativeSize((AsmSizeClass)src.Code);
+            => src.Size;
 
         [MethodImpl(Inline)]
         public static implicit operator NativeSize(AddressSize src)

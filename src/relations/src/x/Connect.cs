@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="dst">The target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]
-        public static Arrow<V> Connect<V>(this Node<V> src, Node<V> dst)
+        public static Arrow<Node<V>> Connect<V>(this Node<V> src, Node<V> dst)
             where V : unmanaged
                 => Relations.connect(src,dst);
     }

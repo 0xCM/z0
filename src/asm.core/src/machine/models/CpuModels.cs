@@ -20,13 +20,9 @@ namespace Z0.Asm
             where T : unmanaged
                 => new CpuCore<T>(id);
 
-        public static Stack<T> stack<T>(CpuMachine<T> m, uint capacity)
+        public static Stack<T> stack<T>(uint capacity)
             where T : unmanaged
-                => new Stack<T>(allocate<T>(m,capacity));
-
-        public static T[] allocate<T>(CpuMachine<T> m, uint count)
-            where T : unmanaged
-                => alloc<T>(count);
+                => new Stack<T>(alloc<T>(capacity));
 
         public static CpuModel<T> cpu<T>(uint cores)
             where T : unmanaged

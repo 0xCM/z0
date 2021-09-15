@@ -19,9 +19,9 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         /// <typeparam name="T">The vertex payload type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Arrow<T> connect<T>(Node<T> src, Node<T> dst)
+        public static Arrow<Node<T>> connect<T>(Node<T> src, Node<T> dst)
             where T : unmanaged
-                => new Arrow<T>(src, dst);
+                => new Arrow<Node<T>>(src, dst);
 
         /// <summary>
         /// Connects a source vertex to a target vertex

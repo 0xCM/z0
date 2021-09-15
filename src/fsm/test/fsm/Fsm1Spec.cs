@@ -31,14 +31,13 @@ namespace Z0
 
         public enum EventKinds: byte
         {
-            E1 , E2, E3, E4, E5, E6, E7
+            E1, E2, E3, E4, E5, E6, E7
         }
 
         public enum OutputKinds : byte
         {
             O0, O1, O2, O3, O4, O5, O6, O7, O8, O9, O10
         }
-
 
         public override IEnumerable<OutputRule<EventKinds,StateKinds,OutputKinds>> OutputRules
         {

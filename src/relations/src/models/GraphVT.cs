@@ -21,9 +21,9 @@ namespace Z0
     {
         readonly Node<I,T>[] Nodes;
 
-        readonly Arrow<I>[] Edges;
+        readonly Arrow<Node<I>>[] Edges;
 
-        public Graph(Node<I,T>[] nodes, Arrow<I>[] edges)
+        public Graph(Node<I,T>[] nodes, Arrow<Node<I>>[] edges)
         {
             Nodes = nodes;
             Edges = edges;
@@ -47,14 +47,14 @@ namespace Z0
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
         public ref Node<I,T> Vertex(I index)
-            => ref Nodes[force<I,ulong>(index)];
+            => ref Nodes[core.bw32(index)];
 
         /// <summary>
         /// Looks up an edge based on its index
         /// </summary>
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
-        public ref Arrow<I> Edge(int index)
+        public ref Arrow<Node<I>> Edge(uint index)
             => ref Edges[index];
 
         /// <summary>

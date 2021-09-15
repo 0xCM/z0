@@ -7,6 +7,8 @@ namespace Z0.llvm
     using static core;
     using static WsAtoms;
 
+    using F = llvm.AsmRecordField;
+
     public partial class EtlWorkflow : AppService<EtlWorkflow>
     {
         llvm.LlvmPaths LlvmPaths;
@@ -47,7 +49,26 @@ namespace Z0.llvm
             datasets.AsmDefFieldData = AsmDefFields;
             datasets.AsmDefMapData = AsmDefMap;
             datasets.OpCodeData = _LlvmOpCodes;
-            return result;
+
+            return EmitFields(datasets);
+        }
+
+        Outcome EmitFields(in EtlDatasets src)
+        {
+            var fields = src.AsmDefFields;
+            var count = fields.Length;
+            var dst = Ws.Tables().Subdir("llvm") + FS.file("llvm.fields", FS.Csv);
+            var emitting = EmittingTable<F>(dst);
+            using var writer = dst.AsciWriter();
+            writer.WriteLine(F.RowHeader);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var field = ref skip(fields,i);
+                writer.WriteLine(string.Format(F.RowFormat, field.Id, field.Type, field.Name, field.Value));
+            }
+
+            EmittedTable(emitting, count);
+            return true;
         }
    }
 }

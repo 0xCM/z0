@@ -18,9 +18,6 @@ namespace Z0.Asm
     public interface IAsmOperand<T> : IAsmOperand
         where T : unmanaged
     {
-        new T Data {get;}
 
-        ReadOnlySpan<byte> IAsmOperand.Data
-            => core.bytes(Data);
     }
 }

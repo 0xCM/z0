@@ -28,9 +28,12 @@ namespace Z0.Asm
         /// <summary>
         /// The width of the represented register operand
         /// </summary>
-        NativeWidthCode WidthCode {get;}
+        NativeSizeCode WidthCode {get;}
 
         ushort Bitfield {get;}
+
+        NativeSize IAsmOp.Size
+            => new NativeSize(WidthCode);
 
         RegWidth RegWidth
             => WidthCode;
@@ -68,8 +71,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp8 : IRegOp
     {
-        NativeWidthCode IRegOp.WidthCode
-            => NativeWidthCode.W8;
+        NativeSizeCode IRegOp.WidthCode
+            => NativeSizeCode.W8;
     }
 
     [Free]
@@ -86,8 +89,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp16 : IRegOp
     {
-        NativeWidthCode IRegOp.WidthCode
-            => NativeWidthCode.W16;
+        NativeSizeCode IRegOp.WidthCode
+            => NativeSizeCode.W16;
     }
 
     [Free]
@@ -104,8 +107,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp32 : IRegOp
     {
-        NativeWidthCode IRegOp.WidthCode
-            => NativeWidthCode.W32;
+        NativeSizeCode IRegOp.WidthCode
+            => NativeSizeCode.W32;
     }
 
     [Free]
@@ -119,8 +122,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp64 : IRegOp
     {
-        NativeWidthCode IRegOp.WidthCode
-            => NativeWidthCode.W64;
+        NativeSizeCode IRegOp.WidthCode
+            => NativeSizeCode.W64;
     }
 
     [Free]
@@ -137,8 +140,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp128 : IRegOp
     {
-        NativeWidthCode IRegOp.WidthCode
-            => NativeWidthCode.W128;
+        NativeSizeCode IRegOp.WidthCode
+            => NativeSizeCode.W128;
     }
 
     [Free]
@@ -152,8 +155,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp256 : IRegOp
     {
-        NativeWidthCode IRegOp.WidthCode
-            => NativeWidthCode.W256;
+        NativeSizeCode IRegOp.WidthCode
+            => NativeSizeCode.W256;
     }
 
     [Free]
@@ -170,8 +173,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp512 : IRegOp
     {
-        NativeWidthCode IRegOp.WidthCode
-            => NativeWidthCode.W512;
+        NativeSizeCode IRegOp.WidthCode
+            => NativeSizeCode.W512;
     }
 
     [Free]

@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.llvm
+namespace Z0.Asm
 {
-    public struct TableGenRecord
+    using static ProjectScriptNames;
+
+    partial class AsmCmdService
     {
-        public string EntityName;
-
-        public Index<TextLine> Lines;
-
-        public Index<RecordField> Fields;
+        [CmdOp(".llc-sse41")]
+        Outcome LlcSse41(CmdArgs args)
+            => RunProjectScript(args, LlcBuildSse41);
     }
 }

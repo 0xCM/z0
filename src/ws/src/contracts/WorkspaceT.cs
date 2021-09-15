@@ -14,11 +14,12 @@ namespace Z0
             Root = root;
         }
 
+        public abstract WsKind Kind {get;}
+
         public string Format()
             => string.Format("{0}:{1}", typeof(T).Name, Root.Format());
 
         public override string ToString()
             => Format();
-
     }
 }

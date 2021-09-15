@@ -23,11 +23,5 @@ namespace Z0.Asm
             Size = size;
             Address = address;
         }
-
-        public BitWidth Width
-        {
-            [MethodImpl(Inline)]
-            get => Size.Width;
-        }
     }
 }

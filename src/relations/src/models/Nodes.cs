@@ -16,31 +16,31 @@ namespace Z0
         /// <summary>
         /// Correlates sources with their targets
         /// </summary>
-        Dictionary<V,List<V>> SourceIndex;
+        Dictionary<Node<V>,List<Node<V>>> SourceIndex;
 
         /// <summary>
         /// Correlates targets with their sources
         /// </summary>
-        IDictionary<V,List<V>> TargetIndex;
+        IDictionary<Node<V>,List<Node<V>>> TargetIndex;
 
-        public static Nodes<V> Build(Node<V>[] vertices, Arrow<V>[] edges)
+        public static Nodes<V> Build(Node<V>[] vertices, Arrow<Node<V>>[] edges)
         {
             var index = new Nodes<V>();
-            index.SourceIndex = new Dictionary<V, List<V>>();
-            index.TargetIndex = new Dictionary<V, List<V>>();
+            index.SourceIndex = new Dictionary<Node<V>, List<Node<V>>>();
+            index.TargetIndex = new Dictionary<Node<V>, List<Node<V>>>();
 
             for(var i=0; i<edges.Length; i++)
             {
                 var edge = edges[i];
-                if(index.SourceIndex.TryGetValue(edge.Source, out List<V> targets))
+                if(index.SourceIndex.TryGetValue(edge.Source, out List<Node<V>> targets))
                     targets.Add(edge.Target);
                 else
-                    index.SourceIndex[edge.Source] = list(edge.Target);
+                    index.SourceIndex[edge.Source] = targets;
 
-                if(index.TargetIndex.TryGetValue(edge.Target, out List<V> sources))
+                if(index.TargetIndex.TryGetValue(edge.Target, out List<Node<V>> sources))
                     sources.Add(edge.Source);
                 else
-                    index.TargetIndex[edge.Target] = list(edge.Source);
+                    index.TargetIndex[edge.Target] = sources;
             }
             return index;
 
@@ -59,12 +59,12 @@ namespace Z0
         /// </summary>
         /// <param name="source">The source vertex</param>
         [MethodImpl(Inline)]
-        public List<V> Sources(V target)
+        public List<Node<V>> Sources(Node<V> target)
         {
-            if(SourceIndex.TryGetValue(target, out List<V> sources))
+            if(SourceIndex.TryGetValue(target, out List<Node<V>> sources))
                 return sources;
             else
-                return new List<V>();
+                return new List<Node<V>>();
         }
 
         /// <summary>
@@ -72,12 +72,12 @@ namespace Z0
         /// </summary>
         /// <param name="source">The source vertex</param>
         [MethodImpl(Inline)]
-        public List<V> Targets(V source)
+        public List<Node<V>> Targets(Node<V> source)
         {
-            if(TargetIndex.TryGetValue(source, out List<V> targets))
+            if(TargetIndex.TryGetValue(source, out List<Node<V>> targets))
                 return targets;
             else
-                return new List<V>();
+                return new List<Node<V>>();
         }
     }
 }

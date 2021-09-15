@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     public interface ISizedTarget
     {
-        AsmSizeClass SizeClass {get;}
+        NativeSize Size {get;}
 
         AsmAddress Target {get;}
     }

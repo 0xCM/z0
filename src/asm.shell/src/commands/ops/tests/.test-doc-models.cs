@@ -25,6 +25,5 @@ namespace Z0.Asm
             Write(reader.Count(Chars.NL));
             return result;
         }
-
     }
 }

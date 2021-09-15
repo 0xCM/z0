@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface INode : ITextual
+    public interface INode
     {
-        Label Label {get;}
-
-        string ITextual.Format()
-            => Label;
+        uint Index {get;}
     }
 
     /// <summary>
@@ -21,14 +18,12 @@ namespace Z0
         T Content {get;}
     }
 
-    /// <summary>
-    /// Characterizes an atomic value reification
-    /// </summary>
-    /// <typeparam name="H">The reifying type</typeparam>
-    /// <typeparam name="T">The node value type</typeparam>
-    public interface INode<H,T> : INode<T>
-        where H : INode<H,T>, new()
+    public interface INode<K,T> : INode<T>
+        where K : unmanaged
     {
+        new K Index {get;}
 
+        uint INode.Index
+            => core.bw32(Index);
     }
 }
