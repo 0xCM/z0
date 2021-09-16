@@ -139,7 +139,7 @@ namespace Z0.Logix
         {
             Require.invariant(expr.VarCount >= 2, () => $"The source expression has {expr.VarCount} and the operation requires 2");
             expr.SetVars(a,b);
-            return gmath.eq(LogicEngine.eval(expr).Value, Numeric.maxval<T>());
+            return gmath.eq(LogicEngine.eval(expr).Value, Limits.maxval<T>());
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace Z0.Logix
         {
             var sln = new List<T>();
             var level0 = domain.Increments<T>();
-            var ones = Numeric.maxval<T>();
+            var ones = Limits.maxval<T>();
             for(var i=0; i<level0.Length; i++)
             {
                 expr.SetVar(varyix, level0[i]);
@@ -218,7 +218,7 @@ namespace Z0.Logix
             var sln = new List<T>();
             var level0 = domain.Increments<T>();
             var level1 = domain.Increments<T>();
-            var ones = Numeric.maxval<T>();
+            var ones = Limits.maxval<T>();
             for(var i=0; i<level0.Length; i++)
             {
                 expr.SetVar(0, level0[i]);

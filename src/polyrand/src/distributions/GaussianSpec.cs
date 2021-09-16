@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static NumericCast;
 
     /// <summary>
     /// Characterizes a Gaussian (normal) distribution
@@ -44,15 +45,14 @@ namespace Z0
         public static GaussianSpec<T> Define(T mu, T sigma)
             => new GaussianSpec<T>(mu,sigma);
 
-
         public T Variance
         {
             [MethodImpl(Inline)]
             get
             {
-                var sig = Numeric.force<T,double>(StdDev);
+                var sig = force<T,double>(StdDev);
                 Require.invariant(sig != 0, () =>$"The invariant k := (sigma == 0) failed");
-                return Numeric.force<T>(sig*sig);
+                return force<T>(sig*sig);
             }
         }
 
@@ -61,9 +61,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get
             {
-                var sig = Numeric.force<T,double>(StdDev);
+                var sig = force<T,double>(StdDev);
                 Require.invariant(sig != 0, () => $"The invariant k := (sigma == 0) failed");
-                return Numeric.force<T>(RngMath.recip(sig*sig));
+                return force<T>(RngMath.recip(sig*sig));
             }
         }
 
@@ -75,12 +75,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public GaussianSpec<float> ToFloat32()
-            => new GaussianSpec<float>(Numeric.force<T,float>(Mean), Numeric.force<T,float>(StdDev));
+            => new GaussianSpec<float>(force<T,float>(Mean), force<T,float>(StdDev));
 
         [MethodImpl(Inline)]
         public GaussianSpec<double> ToFloat64()
-            => new GaussianSpec<double>(Numeric.force<T,double>(Mean), Numeric.force<T,double>(StdDev));
-
+            => new GaussianSpec<double>(force<T,double>(Mean), force<T,double>(StdDev));
 
         [MethodImpl(Inline)]
         public static implicit operator (T mu, T sigma)(GaussianSpec<T> spec)

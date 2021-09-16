@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
+    using static Root;
 
     public class t_vinsert : t_inx<t_vinsert>
     {

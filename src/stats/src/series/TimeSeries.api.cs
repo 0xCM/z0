@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Threading.Tasks;
 
-    using static Part;
+    using static Root;
 
     public static class TimeSeries
     {

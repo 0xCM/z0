@@ -18,7 +18,8 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.sub(a,b);
+            public readonly T Invoke(T a, T b)
+                => gmath.sub(a,b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
@@ -63,7 +64,6 @@ namespace Z0
             public T Invoke(T a, T b)
                 => gmath.sub(a,b);
         }
-
 
         [Closures(AllNumeric), Sub]
         public readonly struct Sub128<T> : IBlockedBinaryOp128<T>

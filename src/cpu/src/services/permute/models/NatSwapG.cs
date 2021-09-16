@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static NumericCast;
 
     /// <summary>
     /// Defines a transposition in the context of a permutation of natural length
@@ -37,8 +38,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatSwap((T i, T j) src)
         {
-            I = Numeric.force<T,uint>(src.i);
-            J = Numeric.force<T,uint>(src.j);
+            I = force<T,uint>(src.i);
+            J = force<T,uint>(src.j);
         }
 
         [MethodImpl(Inline)]
@@ -69,8 +70,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Deconstruct(out T i, out T j)
         {
-            i = Numeric.force<T>(this.I.State);
-            j = Numeric.force<T>(this.J.State);
+            i = force<T>(this.I.State);
+            j = force<T>(this.J.State);
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace Z0
         /// <param name="j">The second term index</param>
         [MethodImpl(Inline)]
         public (T i, T j) ToTuple()
-            => (Numeric.force<T>(I.State), Numeric.force<T>(J.State));
+            => (force<T>(I.State), force<T>(J.State));
 
         /// <summary>
         /// Creates a copy

@@ -33,7 +33,7 @@ namespace Z0
 
         public static FS.Files clear(FS.Files src)
         {
-            var dst = root.list<FS.FilePath>();
+            var dst = core.list<FS.FilePath>();
             foreach(var file in src)
             {
                 if(file.Exists)

@@ -4,18 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-    using System;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-
-    using static Part;
-    using static memory;
 
     using TL = TypedLogicSpec;
 
     public class t_typed_identities : t_logix<t_typed_identities>
     {
-
         public void check_identity_stream()
         {
             Claim.nonzero(TypedIdentities.ScalarIdentities<byte>().Length);

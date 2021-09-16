@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.Intrinsics.X86.Bmi1;
-    using static System.Runtime.Intrinsics.X86.Bmi1.X64;
-
     partial class math
     {
         /// <summary>
@@ -91,6 +88,5 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static ulong nand(ulong a, ulong b)
             => ~ (a & b);
-
     }
 }

@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static NumericCast;
 
     using SB = BitSpan32Scalars;
 
@@ -47,13 +48,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return Numeric.force<T>(SB.extract8(src, offset));
+                return force<T>(SB.extract8(src, offset));
             else if(typeof(T) == typeof(short))
-                return Numeric.force<T>(SB.extract16(src, offset));
+                return force<T>(SB.extract16(src, offset));
             else if(typeof(T) == typeof(int))
-                return Numeric.force<T>(SB.extract32(src, offset));
+                return force<T>(SB.extract32(src, offset));
             else if(typeof(T) == typeof(long))
-                return Numeric.force<T>(SB.extract64(src, offset));
+                return force<T>(SB.extract64(src, offset));
             else
                 throw no<T>();
         }

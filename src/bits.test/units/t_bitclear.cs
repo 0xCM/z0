@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             var n = width<T>();
-            var dst = gbits.trim(Numeric.maxval<T>(), first, count);
+            var dst = gbits.trim(Limits.maxval<T>(), first, count);
             var bs = BitSpans.create(dst);
             var len = bs.Length;
             Claim.eq(len, n);

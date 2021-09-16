@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Runtime.CompilerServices;
-
     partial struct HexMax
     {
         [Op, Closures(Closure)]

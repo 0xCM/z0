@@ -11,8 +11,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using SQ = SymbolicQuery;
-
     public readonly partial struct DocModels
     {
         public static UnicodeDoc unicode(char[] src)

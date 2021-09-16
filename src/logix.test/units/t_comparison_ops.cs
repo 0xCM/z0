@@ -113,13 +113,13 @@ namespace Z0.Logix
                 Claim.require(y0);
 
                 var y1 = S.equals(x,x);
-                Claim.eq(Numeric.maxval<T>(), y1);
+                Claim.eq(Limits.maxval<T>(), y1);
 
                 var y2 = gmath.eq(x,y);
                 Claim.nea(y2);
 
                 var y3 = S.equals(x,y);
-                Claim.eq(Numeric.zero<T>(),y3);
+                Claim.eq(NumericLiterals.zero<T>(),y3);
 
             }
         }
@@ -176,7 +176,7 @@ namespace Z0.Logix
                 actual = gcpu.vgt(x,y);
                 Claim.require(gcpu.vsame(expect,actual));
 
-                var a = gcpu.vbroadcast(n,Random.Next<T>());
+                var a = gcpu.vbroadcast(n, Random.Next<T>());
                 x = gcpu.vxor(x,a);
                 y = gcpu.vxor(y,a);
             }

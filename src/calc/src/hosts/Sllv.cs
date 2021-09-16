@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static SFx;
+    using static Root;
+    using static NumericCast;
+
     partial struct CalcHosts
     {
         public readonly struct VSllv128<T> : IBinaryOp128D<T>
@@ -21,7 +22,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T offset)
-                => gmath.sll(a, Numeric.force<T,byte>(offset));
+                => gmath.sll(a, force<T,byte>(offset));
         }
 
         public readonly struct VSllv256<T> : IBinaryOp256D<T>
@@ -33,7 +34,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T offset)
-                => gmath.sll(a, Numeric.force<T,byte>(offset));
+                => gmath.sll(a, force<T,byte>(offset));
         }
     }
 }

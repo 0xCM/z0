@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.IO;
-    using System.Text;
 
     partial class XFs
     {
-       /// <summary>
+        /// <summary>
         /// Opens a <see cref='FileStream'/>
         /// </summary>
         /// <param name="path">The target file path</param>

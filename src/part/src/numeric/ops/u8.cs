@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct Numeric
     {
-
         [MethodImpl(Inline), Op]
         public static byte u8(byte src)
             => src;

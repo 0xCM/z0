@@ -8,7 +8,6 @@ namespace Z0
 
     partial class XVex
     {
-
         /// <summary>
         /// Determines whether a type is a 128-bit intrinsic vector closed over a specified type
         /// </summary>

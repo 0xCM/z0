@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
-    using static memory;
-
     public class t_vnegate : t_inx<t_vnegate>
     {
         public void vnegate_check()

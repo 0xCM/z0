@@ -23,18 +23,15 @@ namespace Z0
             where T : unmanaged
                 => ref @as<g4x4<T>,T>(src);
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cells<T>(ref g4x4<T> src)
             where T : unmanaged
                 => cover(cell(ref src), src.MxN);
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> row<T>(ref g4x4<T> src, uint i)
             where T : unmanaged
                 => slice(cells(ref src),i*src.N,src.M);
-
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct g4x4<T> : IGrid<g4x4<T>,N4,T>

@@ -31,7 +31,7 @@ namespace Z0
     /// <typeparam name="K">The operator classifier</typeparam>
     public interface IOperatorExpr<T,K> : IOperatorExpr<T>
         where T : unmanaged
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
         /// <summary>
         /// Specifies the class to which the operator belongs

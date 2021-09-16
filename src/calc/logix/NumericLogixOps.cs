@@ -805,7 +805,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T f5b<T>(T a, T b, T c)
             where T : unmanaged
-                => or(xor(a,c), xor(or(a,b), Numeric.maxval<T>()));
+                => or(xor(a,c), xor(or(a,b), Limits.maxval<T>()));
 
         //(A ? not (C) : B)
         [MethodImpl(Inline), Op, Closures(Closure)]

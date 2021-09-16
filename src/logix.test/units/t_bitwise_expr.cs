@@ -9,6 +9,7 @@ namespace Z0.Logix
 
     using static Root;
     using static TypedLogicSpec;
+    using static NumericCast;
 
     public class t_bitwise_expr : UnitTest<t_bitwise_expr, ICheckVectorBits>
     {
@@ -37,7 +38,6 @@ namespace Z0.Logix
         public void check_or_scalar_expr()
         {
             var op = BinaryBitLogicKind.Or;
-
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
             check_scalar_expr<uint>(op);
@@ -47,7 +47,6 @@ namespace Z0.Logix
         public void check_xor_scalar_expr()
         {
             var op = BinaryBitLogicKind.Xor;
-
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
             check_scalar_expr<uint>(op);
@@ -57,7 +56,6 @@ namespace Z0.Logix
         public void check_nand_scalar_expr()
         {
             var op = BinaryBitLogicKind.Nand;
-
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
             check_scalar_expr<uint>(op);
@@ -67,7 +65,6 @@ namespace Z0.Logix
         public void check_nor_scalar_expr()
         {
             var op = BinaryBitLogicKind.Nor;
-
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
             check_scalar_expr<uint>(op);
@@ -77,7 +74,6 @@ namespace Z0.Logix
         public void check_xnor_scalar_expr()
         {
             var op = BinaryBitLogicKind.Xnor;
-
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
             check_scalar_expr<uint>(op);
@@ -241,12 +237,12 @@ namespace Z0.Logix
         void check_op_identity<T>(TernaryBitLogicKind id)
             where T: unmanaged
         {
-            var a = Numeric.force<T>(0b1111_0000);
-            var b = Numeric.force<T>(0b1100_1100);
-            var c = Numeric.force<T>(0b1010_1010);
-            var mask = Numeric.force<T>(0xFF);
+            var a = force<T>(0b1111_0000);
+            var b = force<T>(0b1100_1100);
+            var c = force<T>(0b1010_1010);
+            var mask = force<T>(0xFF);
             var f = NumericLogixHost.lookup<T>(id);
-            var actual = Numeric.force<T,byte>(gmath.and(f(a,b,c), mask));
+            var actual = force<T,byte>(gmath.and(f(a,b,c), mask));
             var expect = (byte)id;
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }

@@ -116,7 +116,7 @@ namespace Z0
         {
             var points = Partition.measured(open(min, max), width);
             var len = gmath.sub(max,min);
-            var deltaSum = Numeric.zero<T>();
+            var deltaSum = NumericLiterals.zero<T>();
             for(var i=0; i<points.Length - 1; i++)
             {
                 var left = points[i];

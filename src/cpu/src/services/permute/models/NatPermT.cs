@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static NumericCast;
 
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
@@ -19,7 +20,7 @@ namespace Z0
     {
         readonly Perm<T> perm;
 
-        static T nT => NumericCast.force<T>(TypeNats.value<N>());
+        static T nT => force<T>(TypeNats.value<N>());
 
         static int n => (int)TypeNats.value<N>();
 
@@ -37,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T[] AllocIdentity()
-            => gAlg.stream<T>(default, Numeric.force<T>(n - 1)).ToArray();
+            => gAlg.stream<T>(default, force<T>(n - 1)).ToArray();
 
         /// <summary>
         /// Allocates an empty permutation
@@ -280,7 +281,7 @@ namespace Z0
         /// <param name="start">The domain point at which evaluation will begin</param>
         [MethodImpl(Inline)]
         public PermCycle<T> Cycle(int start)
-            => perm.Cycle(Numeric.force<T>(start));
+            => perm.Cycle(force<T>(start));
 
         /// <summary>
         /// Computes a permutation cycle originating at a specified point

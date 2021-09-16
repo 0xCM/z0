@@ -5,7 +5,7 @@
 namespace Z0
 {
     /// <summary>
-    /// Characterizes a partial order, i.e. a reflexive, transitive and 
+    /// Characterizes a partial order, i.e. a reflexive, transitive and
     /// antisymmetric binary operator
     /// </summary>
     /// <typeparam name="T">The relation domain</typeparam>
@@ -23,7 +23,6 @@ namespace Z0
     /// <remarks>See https://en.wikipedia.org/wiki/Partially_ordered_set </remarks>
     public interface IPosetOps<T> : IPartialOrderOps<T>
         where T : unmanaged
-
     {
         /// <summary>
         /// Determines whether order may be adjudicated between two particluar elements

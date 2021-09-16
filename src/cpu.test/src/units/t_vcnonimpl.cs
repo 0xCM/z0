@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static Root;
-
 
     public class t_vcnonimpl : t_inx<t_vcnonimpl>
     {

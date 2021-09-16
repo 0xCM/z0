@@ -132,7 +132,7 @@ namespace Z0
             gAlg.increments(first, count, ref src);
 
             for(var i=0; i < count; i++)
-                NumericClaims.eq(gmath.add(first, Numeric.force<T>(i)), data[i]);
+                NumericClaims.eq(gmath.add(first, NumericCast.force<T>(i)), data[i]);
         }
 
         public void add_check()
@@ -153,7 +153,6 @@ namespace Z0
             add_check(S.binary(fmath.add, name, z32f));
             add_check(S.binary(fmath.add, name, z64f));
         }
-
 
         public void sub_check()
         {

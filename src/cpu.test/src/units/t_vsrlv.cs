@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static Root;
+    using static core;
 
     public class t_vsrlv : t_inx<t_vsrlv>
     {

@@ -101,7 +101,7 @@ namespace Z0
             where T : unmanaged
         {
             var capacity = (int)width<T>();
-            var bitseq = sys.alloc<byte>(capacity*reps);
+            var bitseq = alloc<byte>(capacity*reps);
             var pattern = scalar(src);
             for(var i=0; i<reps; i++)
                 pattern.BitSeq.CopyTo(bitseq, i*capacity);

@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     public class t_vblock_add : UnitTest<t_vblock_add>
     {

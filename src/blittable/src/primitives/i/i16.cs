@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static core;
-
     partial struct BitFlow
     {
         public struct i16<T> : ISigned<T>

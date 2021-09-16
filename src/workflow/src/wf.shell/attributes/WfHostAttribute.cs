@@ -13,7 +13,7 @@ namespace Z0
     {
         public WfHostAttribute()
         {
-            CommandName = Part.EmptyString;
+            CommandName = Root.EmptyString;
         }
 
         public WfHostAttribute(string name)

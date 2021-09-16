@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static LiteralExpr<T> @true<T>()
             where T : unmanaged
-                => Numeric.maxval<T>();
+                => Limits.maxval<T>();
 
         /// <summary>
         /// Defines a typed literal where all bits are off

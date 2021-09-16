@@ -127,7 +127,7 @@ namespace Z0
             void check()
             {
                 var zed = default(T);
-                var src = Random.SpanBlocks<T>(w, closed(zed, Numeric.maxval(t)),3);
+                var src = Random.SpanBlocks<T>(w, closed(zed, Limits.maxval(t)),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 

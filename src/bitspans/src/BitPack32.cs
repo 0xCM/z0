@@ -13,7 +13,7 @@ namespace Z0
     [ApiHost]
     public class BitPack32
     {
-        const NumericKind Closure = Part.UnsignedInts;
+        const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T pack<T>(Span<Bit32> src, T t = default)

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public partial class BitMatrix
@@ -24,7 +24,6 @@ namespace Z0
     public readonly struct BitMatrixServices : IBitMatrixServices
     {
         public static IBitMatrixServices Factory => default(BitMatrixServices);
-
     }
 
     public static partial class XTend

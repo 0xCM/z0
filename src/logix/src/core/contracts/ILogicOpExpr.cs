@@ -15,7 +15,7 @@ namespace Z0
     }
 
     public interface ILogicOpExpr<K> : ILogicOpExpr
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
         K ApiClass {get;}
     }
@@ -27,7 +27,7 @@ namespace Z0
     /// <typeparam name="K">The operator classifier</typeparam>
    public interface ILogicOpExpr<T,K> :  ILogicOpExpr<K>, IOperatorExpr<T,K>, ILogicExpr<T>
         where T : unmanaged
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
 
     }

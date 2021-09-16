@@ -25,7 +25,6 @@ namespace Z0
     public interface IVariedLogicExpr<T> : IVariedLogicExpr,  ILogicExpr<T>
         where T : unmanaged
     {
-
         new ILogicExpr<T> BaseExpr {get;}
 
         new ILogicVarExpr<T>[] Vars {get;}

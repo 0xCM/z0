@@ -44,7 +44,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator gbv<byte>(bv8 src)
                 => new gbv<byte>(Width, src.Storage);
-
         }
     }
 }

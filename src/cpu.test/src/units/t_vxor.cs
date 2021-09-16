@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
+    using static Root;
 
     public class t_vxor : t_inx<t_vxor>
     {

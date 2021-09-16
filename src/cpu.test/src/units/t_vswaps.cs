@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Part;
-    using static memory;
+    using static core;
 
     public class t_vswaps : t_inx<t_vswaps>
     {

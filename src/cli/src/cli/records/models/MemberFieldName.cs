@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Root;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct MemberFieldName : IRecord<MemberFieldName>

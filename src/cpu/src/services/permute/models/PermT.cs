@@ -232,7 +232,7 @@ namespace Z0
         {
             var dst = new Perm<T>(new T[Length]);
             for(var i=0; i< Length; i++)
-                dst[terms[i]] = Numeric.force<T>(i);
+                dst[terms[i]] = NumericCast.force<T>(i);
             return dst;
         }
 
@@ -279,7 +279,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static int iVal(T src)
-            => Numeric.force<T,int>(src);
+            => NumericCast.force<T,int>(src);
 
         public string Format(int? colwidth = null)
             => Terms.FormatAsPerm(colwidth);

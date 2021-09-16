@@ -9,10 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static Numeric;
-    using static SFx;
-
-    using K = ApiClasses;
+    using static NumericCast;
 
     partial struct CalcHosts
     {

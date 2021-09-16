@@ -156,7 +156,7 @@ namespace Z0
         {
             var src = _PartComponents.View;
             var count = src.Length;
-            var dst = root.list<Assembly>();
+            var dst = core.list<Assembly>();
             var match = parts.ToHashSet();
             for(var i=0; i<count; i++)
             {

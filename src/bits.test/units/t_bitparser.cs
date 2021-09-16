@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class t_bitparser : t_bits<t_bitparser>
     {
         public void t_bitparser_01()

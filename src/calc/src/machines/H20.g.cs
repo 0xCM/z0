@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
-
     partial struct HexMax
     {
         [Op, Closures(Closure)]

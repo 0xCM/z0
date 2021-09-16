@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <remarks>See https://en.wikipedia.org/wiki/Hadamard_product_(matrices)</remarks>
         [MethodImpl(Inline), HProd]
-        public static ref readonly BitMatrix16 hprod(in BitMatrix16 a, in BitMatrix16 b, in BitMatrix16 dst)
+        public static ref readonly BitMatrix16 hprod(in BitMatrix16 a, in BitMatrix16 b, ref BitMatrix16 dst)
         {
             for(var i=0; i<a.Order; i++)
             for(var j=0; j<b.Order; j++)

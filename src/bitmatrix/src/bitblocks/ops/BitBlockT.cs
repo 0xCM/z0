@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Typed;
 
     /// <summary>
     /// A data structure that covers and arbitrary number of 256-bit blocks of packed bits

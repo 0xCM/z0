@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
+    using static core;
     using static BinaryBitLogicKind;
 
     public class t_bm_ops : t_logix<t_bm_ops>

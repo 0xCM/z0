@@ -7,7 +7,7 @@ namespace Z0
     [ApiHost]
     public partial class BitSpans
     {
-        const NumericKind Closure = Part.UnsignedInts;
+        const NumericKind Closure = Root.UnsignedInts;
     }
 
 

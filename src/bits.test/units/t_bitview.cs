@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
     using static core;
 
     public class t_bitview : t_bits<t_bitview>
@@ -24,7 +23,7 @@ namespace Z0
         void bitview_check<T>(T t = default)
             where T : unmanaged
         {
-            var src = Numeric.maxval<T>();
+            var src = Limits.maxval<T>();
             var view = Bits.editor(src);
             var bytecount = size<T>();
 

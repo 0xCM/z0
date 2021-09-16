@@ -5,13 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static core;
 
     partial class Dynop
     {
-
         [Op]
         internal static CellDelegate EmitTernaryCellOp(this IBufferToken dst, OpIdentity id, Type operatorType, Type operandType)
             => dst.Handle.EmitCellular(id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType));

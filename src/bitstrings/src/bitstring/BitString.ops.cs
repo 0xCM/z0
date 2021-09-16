@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="len">The length of the bitstring</param>
         [MethodImpl(Inline)]
         public static BitString alloc(int len)
-            => new BitString(core.alloc<byte>(len));
+            => new BitString(alloc<byte>(len));
 
         /// <summary>
         /// Loads a bitstring from a bitseq
@@ -110,7 +110,7 @@ namespace Z0
             var cellbits = width<T>();
             var bitcount = maxbits ?? cellbits*src.Length;
             var k = 0u;
-            var buffer = core.alloc<byte>(bitcount);
+            var buffer = alloc<byte>(bitcount);
             var dst = span(buffer);
 
             for(int i=0; i<src.Length; i++)

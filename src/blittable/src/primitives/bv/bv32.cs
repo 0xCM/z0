@@ -14,7 +14,6 @@ namespace Z0
         public static bv32 bv(N32 n, uint src)
             => new bv32(src);
 
-
         /// <summary>
         /// Defines a 32-bit bitvector
         /// </summary>

@@ -27,8 +27,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public UnaryLogicOpExpr(UnaryBitLogicKind op, ILogicExpr arg)
         {
-            this.ApiClass = op;
-            this.Arg = arg;
+            ApiClass = op;
+            Arg = arg;
         }
 
         public string Format()

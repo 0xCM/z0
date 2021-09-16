@@ -23,10 +23,10 @@ namespace Z0
         public DistributionKind DistKind
             => Spec.DistKind;
 
-        protected Distribution(IPolyrand random, S Spec)
+        protected Distribution(IPolyrand random, S spec)
         {
-            this.Polyrand = random;
-            this.Spec =Spec;
+            Polyrand = random;
+            Spec =spec;
         }
 
         public abstract IEnumerable<T> Sample();

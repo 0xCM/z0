@@ -22,7 +22,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T count)
-                => gmath.srl(a, Numeric.force<T,byte>(count));
+                => gmath.srl(a, NumericCast.force<T,byte>(count));
         }
 
         public readonly struct VSrlv256<T> : IBinaryOp256D<T>
@@ -34,7 +34,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T count)
-                => gmath.srl(a, Numeric.force<T,byte>(count));
+                => gmath.srl(a, NumericCast.force<T,byte>(count));
         }
     }
 }

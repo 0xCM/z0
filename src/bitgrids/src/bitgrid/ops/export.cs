@@ -10,7 +10,6 @@ namespace Z0
     using System.IO;
 
     using static Root;
-    using static Typed;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 

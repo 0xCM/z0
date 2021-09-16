@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-    using static memory;
+    using static core;
 
     public class t_bm_layout : t_bits<t_bm_layout>
     {
