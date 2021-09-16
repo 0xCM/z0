@@ -30,12 +30,12 @@ namespace Z0
                 => default(Abs256<T>);
 
         [MethodImpl(Inline), Factory(Abs), Closures(SignedInts)]
-        public static VAbs128<T> vabs<T>(W128 w, T t = default)
+        public static VAbs128<T> vabs<T>(W128 w)
             where T : unmanaged
                 => default(VAbs128<T>);
 
         [MethodImpl(Inline), Factory(Abs), Closures(SignedInts)]
-        public static VAbs256<T> vabs<T>(W256 w, T t = default)
+        public static VAbs256<T> vabs<T>(W256 w)
             where T : unmanaged
                 => default(VAbs256<T>);
 

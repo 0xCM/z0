@@ -19,12 +19,12 @@ namespace Z0
                 => default;
 
         [MethodImpl(Inline), Factory(Inc), Closures(Closure)]
-        public static VInc128<T> vinc<T>(W128 w, T t = default)
+        public static VInc128<T> vinc<T>(W128 w)
             where T : unmanaged
                 => default(VInc128<T>);
 
         [MethodImpl(Inline), Factory(Inc), Closures(Closure)]
-        public static VInc256<T> vinc<T>(W256 w, T t = default)
+        public static VInc256<T> vinc<T>(W256 w)
             where T : unmanaged
                 => default(VInc256<T>);
 

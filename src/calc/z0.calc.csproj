@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(Dynamic)" />
   </ItemGroup>
 
 </Project>

@@ -15,7 +15,6 @@ namespace Z0
 
     public class BlitMachine : AppService<BlitMachine>
     {
-
         IPolyrand Random;
 
         Index<byte> Buffer;

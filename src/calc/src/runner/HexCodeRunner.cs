@@ -8,7 +8,7 @@ namespace Z0
 
     using static core;
 
-    unsafe class AsmShellOps : IDisposable
+    unsafe class HexCodeRunner : IDisposable
     {
         readonly NativeBuffer CodeBuffer;
 
@@ -16,7 +16,7 @@ namespace Z0
 
         readonly IWfRuntime Wf;
 
-        public AsmShellOps(IWfRuntime wf, Action<object> receiver)
+        public HexCodeRunner(IWfRuntime wf, Action<object> receiver)
         {
             Wf = wf;
             CodeBuffer = Buffers.native(Pow2.T10);

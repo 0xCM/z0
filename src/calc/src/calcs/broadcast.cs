@@ -145,12 +145,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Factory, Closures(Closure)]
-        public static VBroadcast128<T> vbroadcast<T>(W128 w, T t = default)
+        public static VBroadcast128<T> vbroadcast<T>(W128 w)
             where T : unmanaged
                 => default(VBroadcast128<T>);
 
         [MethodImpl(Inline), Factory, Closures(Closure)]
-        public static VBroadcast256<T> vbroadcast<T>(W256 w, T t = default)
+        public static VBroadcast256<T> vbroadcast<T>(W256 w)
             where T : unmanaged
                 => default(VBroadcast256<T>);
 

@@ -22,6 +22,7 @@
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(CaptureChecks)" />
     <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(Calc)" />
   </ItemGroup>
 
 </Project>

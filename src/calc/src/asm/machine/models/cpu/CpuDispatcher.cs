@@ -12,10 +12,6 @@ namespace Z0.Asm
 
     partial struct CpuModels
     {
-        public abstract class CpuDispatcher<T>
-        {
 
-
-        }
     }
 }
