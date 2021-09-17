@@ -7,42 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.llvm;
-
     using static Root;
     using static core;
-    using static Pow2x64;
-    using static AsmOperands;
 
-    using AsmId = llvm.AsmId;
 
     public readonly partial struct RegMachines
     {
-
-
-    }
-
-    public struct GpState
-    {
-
-
-    }
-
-    public struct XmmState
-    {
-
-
-    }
-
-    public struct YmmState
-    {
-
-
-    }
-
-    public struct ZmmState
-    {
-
 
     }
 
@@ -77,7 +47,6 @@ namespace Z0.Asm
 
         public void State(ITextBuffer dst)
         {
-            var file = Regs.File;
             var allocations = Regs.Allocations;
             var count = allocations.Length;
             var offset = Address16.Zero;
@@ -142,23 +111,19 @@ namespace Z0.Asm
         ref Cell128 reg128(RegIndex index)
             => ref @as<Cell512,Cell128>(reg512(index));
 
-
         public void Run(in AsmInstruction a)
         {
-            var id = a.Id;
+            var id = a.OpCode;
 
 
         }
 
         bit IsMov(in AsmInstruction a)
-            => a.Id >= AsmId.MOV16ao16 && a.Id <= AsmId.MOV8rr_NOREX;
-        // bit IsMov(AsmInstruction a)
-        //     => a.
+            => a.OpCode >= AsmId.MOV16ao16 && a.OpCode <= AsmId.MOV8rr_NOREX;
 
         void mov(in AsmInstruction a)
         {
-            var id = a.Id;
-            switch(id)
+            switch(a.OpCode)
             {
                 case AsmId.MOV8rm:
                 break;
@@ -171,7 +136,6 @@ namespace Z0.Asm
                 case AsmId.MOV8mi:
                 break;
             }
-
         }
 
 

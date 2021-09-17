@@ -12,19 +12,18 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-
-        public struct _mm_ternarylogic_epi32 : IIntrinsicInput<_mm_ternarylogic_epi32>
+        public struct mm_ternarylogic_epi32 : IIntrinsicInput<mm_ternarylogic_epi32>
         {
-            public __m128i<uint> A;
+            public m128i<uint> A;
 
-            public __m128i<uint> B;
+            public m128i<uint> B;
 
-            public __m128i<uint> C;
+            public m128i<uint> C;
 
             public Imm8 Imm8;
 
             [MethodImpl(Inline)]
-            public _mm_ternarylogic_epi32(__m128i<uint> a, __m128i<uint> b, __m128i<uint> c, Imm8 imm8)
+            public mm_ternarylogic_epi32(m128i<uint> a, m128i<uint> b, m128i<uint> c, Imm8 imm8)
             {
                 A = a;
                 B = b;
@@ -33,14 +32,14 @@ namespace Z0.Vdsl
             }
 
             public IntrinsicKind Kind
-                => IntrinsicKind._mm_ternarylogic_epi32;
+                => IntrinsicKind.mm_ternarylogic_epi32;
         }
 
         partial struct Specs
         {
             [MethodImpl(Inline)]
-            public static __m128i<uint> calc(in _mm_ternarylogic_epi32 src)
-                => Specs._mm_ternarylogic_epi32(src.A, src.B, src.C, src.Imm8);
+            public static m128i<uint> calc(in mm_ternarylogic_epi32 src)
+                => Specs.mm_ternarylogic_epi32(src.A, src.B, src.C, src.Imm8);
 
             /// <summary>
             /// __m128i _mm_ternarylogic_epi32(__m128i a, __m128i b, __m128i c, int imm8)
@@ -51,7 +50,7 @@ namespace Z0.Vdsl
             /// that bit in "imm8" is written to the corresponding bit in "dst".
             /// </summary>
             [MethodImpl(Inline)]
-            public static __m128i<uint> _mm_ternarylogic_epi32(__m128i<uint> a, __m128i<uint> b, __m128i<uint> c, Imm8 imm8)
+            public static m128i<uint> mm_ternarylogic_epi32(m128i<uint> a, m128i<uint> b, m128i<uint> c, Imm8 imm8)
             {
                 var dst = m128i<uint>();
                 for(byte j=0; j<=3; j++)

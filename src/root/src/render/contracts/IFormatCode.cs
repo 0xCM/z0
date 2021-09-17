@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static minicore;
+
     public interface IFormatCode : ITextual
     {
         FormatCodeKind Kind {get;}
@@ -29,7 +31,7 @@ namespace Z0
         new K Kind {get;}
 
         FormatCodeKind IFormatCode.Kind
-            => Unsafe.As<K,FormatCodeKind>(ref Unsafe.AsRef(Kind));
+            => @as<K,FormatCodeKind>(Kind);
 
         new C Code {get;}
 

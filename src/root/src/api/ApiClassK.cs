@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static minicore;
 
     public readonly struct ApiClass<K> : ITextual
         where K : unmanaged, IApiClass<K>
@@ -24,7 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ApiClass(ApiClass<K> src)
-            => new ApiClass(Root.@as<K,ApiClassKind>(src.Kind));
+            => new ApiClass(@as<K,ApiClassKind>(src.Kind));
 
         public string Format()
             => Kind.Format();

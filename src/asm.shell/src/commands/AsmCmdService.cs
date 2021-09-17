@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         Identifier RoutineName;
 
-        IAsmWorkspace AsmWs;
+        IWorkspace AsmWs;
 
         ScriptRunner ScriptRunner;
 

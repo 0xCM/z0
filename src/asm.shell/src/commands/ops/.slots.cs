@@ -22,7 +22,6 @@ namespace Z0.Asm
             for(byte i=0; i<slots.Length; i++)
             {
                 ref readonly var slot = ref skip(slots,i);
-
                 var pDst = slot.Address.Pointer<byte>();
                 var length = code.Length;
                 for(var j=0; j<length; j++)

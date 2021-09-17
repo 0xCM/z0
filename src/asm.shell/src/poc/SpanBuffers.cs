@@ -43,10 +43,6 @@ namespace Z0
             Assert.eq(x3,1u);
         }
 
-
-
-
-
         [Op]
         public void bitstack_basecase()
         {
@@ -91,7 +87,5 @@ namespace Z0
             Claim.eq(buffer.Data.AsUInt64()[2],0xFFF);
             Claim.eq(buffer.Data.AsUInt64()[3],0xFFFF);
         }
-
-
     }
 }

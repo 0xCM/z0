@@ -24,11 +24,7 @@ namespace Z0
             if(dst.Length >= count/2 && count % 2 == 0)
             {
                 for(var i=0; i<count; i+=2)
-                {
-                    ref readonly var d0 = ref skip(src,i+1);
-                    ref readonly var d1 = ref skip(src,i);
-                    seek(dst,j++) = pack(d0,d1);
-                }
+                    seek(dst,j++) = pack(skip(src,i+1), skip(src,i));
             }
             return j;
         }

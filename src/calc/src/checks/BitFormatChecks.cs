@@ -12,7 +12,7 @@ namespace Z0
     using static BitNumbers;
 
     [ApiHost]
-    class BitFormatChecks : AppService<BitFormatChecks>
+    public class BitFormatChecks : AppService<BitFormatChecks>
     {
         BitNumberFormatter Formatter;
 

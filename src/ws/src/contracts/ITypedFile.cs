@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
@@ -15,7 +14,7 @@ namespace Z0
 
     [Free]
     public interface ITypedFile<F> : ITypedFile
-        where F : ITypedFile<F>
+        where F : struct, ITypedFile<F>
     {
 
     }

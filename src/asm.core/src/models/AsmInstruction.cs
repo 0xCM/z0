@@ -13,7 +13,7 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct AsmInstruction
     {
-        public AsmOpCode OpCode;
+        public AsmId OpCode;
 
         public AsmOperand Op0;
 
@@ -22,12 +22,6 @@ namespace Z0.Asm
         public AsmOperand Op2;
 
         public AsmOperand Op3;
-
-        public llvm.AsmId Id
-        {
-            [MethodImpl(Inline)]
-            get => OpCode.AsmId;
-        }
 
         public byte OpCount
         {

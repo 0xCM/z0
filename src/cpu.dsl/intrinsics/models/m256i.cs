@@ -9,28 +9,27 @@ namespace Z0.Vdsl
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static core;
     using static Intrinsics;
 
-    public struct __m128i<T>
+    public struct m256i<T>
         where T : unmanaged
     {
-        internal Cell128<T> Data;
+        Cell256<T> Data;
 
         [MethodImpl(Inline)]
-        public __m128i(Vector128<T> src)
+        public m256i(Vector256<T> src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public __m128i(Cell128<T> src)
+        public m256i(Cell256<T> src)
             => Data = src;
 
-        public uint Width => 128;
+        public uint Width => 256;
 
         public uint CellWidth
         {
             [MethodImpl(Inline)]
-            get => width<T>();
+            get => core.width<T>();
         }
 
         public uint CellCount
@@ -39,13 +38,17 @@ namespace Z0.Vdsl
             get => Width/CellWidth;
         }
 
-        public bit this[int i]
+        [MethodImpl(Inline)]
+        public ref T Cell(int i)
+            => ref Data[i];
+
+        public num<T> this[int i]
         {
             [MethodImpl(Inline)]
-            get => Data.TestBit(i);
+            get => cell(ref this, i/8);
 
             [MethodImpl(Inline)]
-            set => Data.SetBit(i,value);
+            set => cell(ref this, i/8) = value;
         }
 
         public T this[int max, int min]
@@ -56,29 +59,22 @@ namespace Z0.Vdsl
             set => bitseg(ref this, max, min) = value;
         }
 
-        [MethodImpl(Inline)]
-        public ref T Cell(int i)
-            => ref Data[i];
-
         public string Format()
             => string.Format("<{0}>", Data.ToVector().FormatHex());
-
-        public string Format(NumericBaseKind @base)
-            => format(this, @base);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator __m128i<T>(Vector128<T> src)
-            => new __m128i<T>(src);
+        public static implicit operator m256i<T>(Vector256<T> src)
+            => new m256i<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator __m128i<T>(T src)
-            => gcpu.vbroadcast(w128,src);
+        public static implicit operator m256i<T>(T src)
+            => gcpu.vbroadcast(w256,src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<T>(__m128i<T> src)
-            => src.Data.ToVector();
+        public static implicit operator Vector256<T>(m256i<T> src)
+            => src.Data;
     }
 }

@@ -24,27 +24,27 @@ namespace Z0.Asm
         public static byte mov(in r8b dst, imm8 src, ref byte hex)
         {
             // imm8 -> r8b
-            var i8 = llvm.AsmId.MOV8ri;
+            var i8 = AsmId.MOV8ri;
             // imm8 -> m8
-            var i7 = llvm.AsmId.MOV8mi;
+            var i7 = AsmId.MOV8mi;
 
             // imm16 -> r16
-            var i1 = llvm.AsmId.MOV16ri;
+            var i1 = AsmId.MOV16ri;
             // imm16 -> m16
-            var i0 = llvm.AsmId.MOV16mi;
+            var i0 = AsmId.MOV16mi;
 
             // imm32 -> r32
-            var i3 = llvm.AsmId.MOV32ri;
+            var i3 = AsmId.MOV32ri;
             // imm32 -> m32
-            var i2 = llvm.AsmId.MOV32mi;
+            var i2 = AsmId.MOV32mi;
 
             // imm64 -> r64
-            var i5 = llvm.AsmId.MOV64ri;
+            var i5 = AsmId.MOV64ri;
 
             // imm32 -> r64
-            var i6 = llvm.AsmId.MOV64ri32;
+            var i6 = AsmId.MOV64ri32;
             // imm32 -> m64
-            var i4 = llvm.AsmId.MOV64mi32;
+            var i4 = AsmId.MOV64mi32;
             return 0;
         }
 

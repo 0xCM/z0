@@ -9,22 +9,21 @@ namespace Z0.Vdsl
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static Intrinsics;
 
-    public struct __m256i<T>
+    public struct __m512i<T>
         where T : unmanaged
     {
-        Cell256<T> Data;
+        Cell512<T> Data;
 
         [MethodImpl(Inline)]
-        public __m256i(Vector256<T> src)
+        public __m512i(Vector512<T> src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public __m256i(Cell256<T> src)
+        public __m512i(Cell512<T> src)
             => Data = src;
 
-        public uint Width => 256;
+        public uint Width => 512;
 
         public uint CellWidth
         {
@@ -42,23 +41,6 @@ namespace Z0.Vdsl
         public ref T Cell(int i)
             => ref Data[i];
 
-        public num<T> this[int i]
-        {
-            [MethodImpl(Inline)]
-            get => cell(ref this, i/8);
-
-            [MethodImpl(Inline)]
-            set => cell(ref this, i/8) = value;
-        }
-
-        public T this[int max, int min]
-        {
-            [MethodImpl(Inline)]
-            get => bitseg(ref this, max, min);
-            [MethodImpl(Inline)]
-            set => bitseg(ref this, max, min) = value;
-        }
-
         public string Format()
             => string.Format("<{0}>", Data.ToVector().FormatHex());
 
@@ -66,15 +48,15 @@ namespace Z0.Vdsl
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator __m256i<T>(Vector256<T> src)
-            => new __m256i<T>(src);
+        public static implicit operator __m512i<T>(Vector512<T> src)
+            => new __m512i<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator __m256i<T>(T src)
-            => gcpu.vbroadcast(w256,src);
+        public static implicit operator __m512i<T>(T src)
+            => gcpu.vbroadcast(w512,src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<T>(__m256i<T> src)
+        public static implicit operator Vector512<T>(__m512i<T> src)
             => src.Data;
     }
 }

@@ -8,10 +8,10 @@ namespace Z0.llvm
 
     using static core;
     using static Root;
+    using static FileTypes;
 
     public class YamlTokenProcessor
     {
-
         Symbols<YamlTokenKind> Symbols;
 
         public YamlTokenProcessor()

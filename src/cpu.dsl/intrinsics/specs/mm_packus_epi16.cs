@@ -11,35 +11,35 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        public struct _mm_packus_epi16
+        public struct mm_packus_epi16
         {
-            public __m128i<short> A;
+            public m128i<short> A;
 
-            public __m128i<short> B;
+            public m128i<short> B;
 
             [MethodImpl(Inline)]
-            public _mm_packus_epi16(in __m128i<short> a, in __m128i<short> b)
+            public mm_packus_epi16(in m128i<short> a, in m128i<short> b)
             {
                 A = a;
                 B = b;
             }
 
             public IntrinsicKind Kind
-                => IntrinsicKind._mm_packus_epi16;
+                => IntrinsicKind.mm_packus_epi16;
         }
 
         partial struct Specs
         {
             [MethodImpl(Inline), Op]
-            public static __m128i<byte> calc(in _mm_packus_epi16 io)
-                => Specs._mm_packus_epi16(io.A, io.B);
+            public static m128i<byte> calc(in mm_packus_epi16 io)
+                => Specs.mm_packus_epi16(io.A, io.B);
 
             [MethodImpl(Inline)]
             public static byte SaturateU8(short src)
                 => src < 0 ? z8 : (byte)(src < 0xFF ? src : 0xFF);
 
             [MethodImpl(Inline)]
-            public static __m128i<byte> _mm_packus_epi16(in __m128i<short> a, in __m128i<short> b)
+            public static m128i<byte> mm_packus_epi16(in m128i<short> a, in m128i<short> b)
             {
                 var dst = m128i<byte>();
                 dst[7,0] = SaturateU8(a[15,0]);

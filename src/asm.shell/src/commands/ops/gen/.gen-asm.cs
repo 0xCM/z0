@@ -11,7 +11,7 @@ namespace Z0.Asm
             const string mnemonic = "kandb";
             const string RenderPattern = mnemonic + " {0}";
 
-            var dst = AsmWs.AsmPath(string.Format("{0}.g",mnemonic));
+            var dst = Ws.Projects().SrcDir("asm") + FS.file(mnemonic, FS.Asm);
             using var writer = dst.AsciWriter();
             writer.WriteLine("bits 64");
 
@@ -58,7 +58,7 @@ namespace Z0.Asm
             var w1 = NativeSizeCode.W16;
             var r0 = RegSets.GpRegs(w0);
             var r1 = RegSets.GpRegs(w1);
-            var dst = AsmWs.AsmPath(syntax, asmid);
+            var dst = Ws.Projects().SrcDir("asm") + FS.file(asmid, FS.Asm);
             var indent = 0u;
             var buffer = text.buffer();
             buffer.AppendLine(string.Format(SectionPattern, TextSection));

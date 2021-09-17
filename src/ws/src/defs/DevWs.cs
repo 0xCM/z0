@@ -87,7 +87,7 @@ namespace Z0
         public IWorkspace Api()
             => ApiWs.create(_WsRoot + FS.folder(api));
 
-        public IAsmWorkspace Asm()
+        public IWorkspace Asm()
             => AsmWs.create(_WsRoot + FS.folder(asm));
 
         public IToolWs Tools()

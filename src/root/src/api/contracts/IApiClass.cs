@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static minicore;
+
     public interface IApiClass : ITextual
     {
         ApiClassKind ClassId {get;}
@@ -18,6 +20,6 @@ namespace Z0
         K Kind  {get;}
 
         ApiClassKind IApiClass.ClassId
-            => Root.@as<K,ApiClassKind>(Kind);
+            => @as<K,ApiClassKind>(Kind);
     }
 }

@@ -8,43 +8,43 @@ namespace Z0.Vdsl
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial struct Intrinsics
     {
-
-        public readonly struct _mm_min_epi8 : IIntrinsicInput<_mm_min_epi8>
+        public readonly struct mm_avg_epu8 : IIntrinsicInput<mm_avg_epu8>
         {
-            public readonly __m128i<sbyte> A;
+            public readonly m128i<byte> A;
 
-            public readonly __m128i<sbyte> B;
+            public readonly m128i<byte> B;
 
             [MethodImpl(Inline)]
-            public _mm_min_epi8(in __m128i<sbyte> a, in __m128i<sbyte> b)
+            public mm_avg_epu8(in m128i<byte> a, in m128i<byte> b)
             {
                 A = a;
                 B = b;
             }
 
             public IntrinsicKind Kind
-                => IntrinsicKind._mm_min_epi8;
+                => IntrinsicKind.mm_avg_epu8;
         }
 
         partial struct Specs
         {
             [MethodImpl(Inline)]
-            public static __m128i<sbyte> calc(in _mm_min_epi8 src)
-                => Specs._mm_min_epi8(src.A, src.B);
+            public static m128i<byte> calc(in mm_avg_epu8 src)
+                => mm_avg_epu8(src.A, src.B);
 
             [MethodImpl(Inline)]
-            public static __m128i<sbyte> _mm_min_epi8(in __m128i<sbyte> a, in __m128i<sbyte> b)
+            public static m128i<byte> mm_avg_epu8(in m128i<byte> a, in m128i<byte> b)
             {
-                var dst = m128i<sbyte>();
+                var dst = m128i<byte>();
+                var i = 0;
                 for(var j=0; j<=15; j++)
                 {
-                    var i = j*8;
-                    dst[i+7,i] = min(a[i+7,i], b[i+7,i]);
+                    i = j*8;
+                    dst[i + 7,i] = (byte)((a[i+7,i] + b[i+7,i]) >> 1);
                 }
+
                 return dst;
             }
         }

@@ -15,7 +15,7 @@ namespace Z0.Asm
             thumbprint = AsmThumbprint.Empty;
             var result = Outcome.Success;
             var a = src.LeftOfFirst(Semicolon);
-            HexNumericParser.parse16u(a.LeftOfFirst(Chars.Space), out var offset);
+            Hex.parse16u(a.LeftOfFirst(Chars.Space), out var offset);
             AsmExpr statement = a.RightOfFirst(Semicolon);
 
             var parts = @readonly(src.RightOfFirst(Semicolon).SplitClean(Implication));

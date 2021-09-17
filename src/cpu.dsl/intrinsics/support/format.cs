@@ -12,7 +12,7 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        public static string format<T>(in __m128i<T> src, NumericBaseKind @base)
+        public static string format<T>(in m128i<T> src, NumericBaseKind @base)
             where T : unmanaged
         {
             switch(@base)

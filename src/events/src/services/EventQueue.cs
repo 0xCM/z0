@@ -14,8 +14,11 @@ namespace Z0
 
     public sealed class EventQueue : IEventSink, IEventEmitter
     {
-        public static EventQueue allocate(Type host = null)
+        public static EventQueue allocate(Type host)
             => new EventQueue(host);
+
+        public static EventQueue allocate(Type host, Action<IWfEvent> receiver)
+            => new EventQueue(host, receiver);
 
         readonly ConcurrentQueue<IWfEvent> Storage = new();
 
@@ -25,14 +28,14 @@ namespace Z0
 
         readonly Type Host;
 
-        internal EventQueue(Type host = null)
+        internal EventQueue(Type host)
         {
-            Host = host ?? GetType();
+            Host = host;
             Receiver = e => {};
             Signal = EventSignals.signal(this, Host);
         }
 
-        internal EventQueue(Action<IWfEvent> receiver, Type host = null)
+        internal EventQueue(Type host, Action<IWfEvent> receiver)
         {
             Host = host ?? GetType();
             Receiver = receiver;

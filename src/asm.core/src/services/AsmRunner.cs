@@ -8,9 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static core;
-
-    using AsmId = llvm.AsmId;
-    using static llvm.AsmId;
+    using static AsmId;
 
     public class AsmRunner
     {
@@ -38,8 +36,7 @@ namespace Z0.Asm
 
         public void Run(in AsmInstruction src)
         {
-            ref readonly var oc = ref src.OpCode;
-            ref readonly var id = ref oc.AsmId;
+            ref readonly var id = ref src.OpCode;
             ref readonly var op0 = ref src.Op0;
             ref readonly var op0class = ref op0.OpClass;
             ref readonly var op0Size = ref op0.Size;
@@ -56,7 +53,6 @@ namespace Z0.Asm
             {
                 // (AND AL, imm8) = 24 ib
                 case AND8i8:
-
                 case AND8mi:
                 case AND8mi8:
                 case AND8mr:
@@ -91,6 +87,5 @@ namespace Z0.Asm
                 break;
             }
         }
-
     }
 }

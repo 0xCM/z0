@@ -73,36 +73,6 @@ namespace Z0
             => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + PostSpec;
 
         [Op]
-        public static string asmhex(ushort src, NumericWidth width)
-        {
-            return width switch{
-                    NumericWidth.W8 => asmhex((byte)src,2),
-                    _ => asmhex(src,4),
-            };
-        }
-
-        [Op]
-        public static string asmhex(uint src, NumericWidth width)
-        {
-            return width switch{
-                    NumericWidth.W8 => asmhex((byte)src,2),
-                    NumericWidth.W16 => asmhex((ushort)src,4),
-                    _ => asmhex(src,8),
-            };
-        }
-
-        [Op]
-        public static string asmhex(ulong src, NumericWidth width)
-        {
-            return width switch{
-                    NumericWidth.W8 => asmhex((byte)src,2),
-                    NumericWidth.W16 => asmhex((ushort)src,4),
-                    NumericWidth.W32 => asmhex((uint)src,8),
-                    _ => asmhex(src,12),
-            };
-        }
-
-        [Op]
         public static string format(byte src, int? digits = null, bool prespec = false, bool postspec = false)
             => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
             + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x2"))

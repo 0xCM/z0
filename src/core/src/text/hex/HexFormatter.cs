@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal type</typeparam>
         [Op, Closures(Closure)]
-        public static string format<T>(ReadOnlySpan<T> src,  char sep = Chars.Space, bool specifier = false)
+        public static string format<T>(ReadOnlySpan<T> src, char sep = Chars.Space, bool specifier = false)
             where T : unmanaged
         {
             var result = new StringBuilder();

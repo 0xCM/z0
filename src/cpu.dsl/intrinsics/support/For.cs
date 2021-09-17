@@ -13,7 +13,7 @@ namespace Z0.Vdsl
     partial struct Intrinsics
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static __m128i<T> For<T>(W128 w, int min, int max, Func<int,T> f)
+        public static m128i<T> For<T>(W128 w, int min, int max, Func<int,T> f)
             where T : unmanaged
         {
             var dst = m128i<T>();
@@ -23,7 +23,7 @@ namespace Z0.Vdsl
         }
 
         [MethodImpl(Inline), Op,Closures(Closure)]
-        public static __m256i<T> For<T>(W256 w, int min, int max, Func<int,T> f)
+        public static m256i<T> For<T>(W256 w, int min, int max, Func<int,T> f)
             where T : unmanaged
         {
             var dst = m256i<T>();

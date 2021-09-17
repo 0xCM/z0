@@ -7,22 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
 
-    public sealed class AsmWs : IWorkspace<AsmWs>
+    partial struct minicore
     {
         [MethodImpl(Inline)]
-        public static IWorkspace create(FS.FolderPath root)
-            => new AsmWs(root);
-
-        public FS.FolderPath Root {get;}
-
-        [MethodImpl(Inline)]
-        internal AsmWs(FS.FolderPath root)
-        {
-            Root = root;
-        }
-
-        public WsKind Kind => WsKind.Asm;
+        public static ref T @as<S,T>(in S src)
+            => ref As<S,T>(ref Unsafe.AsRef(src));
     }
 }

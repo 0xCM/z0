@@ -18,9 +18,14 @@ namespace Z0.Vdsl
 
         Checks Checks;
 
+        void EventRaised(IWfEvent e)
+        {
+
+        }
+
         protected override void OnInit()
         {
-            Queue = EventQueue.allocate();
+            Queue = EventQueue.allocate(GetType(), EventRaised);
             Source = Rng.@default();
             Checks = Checks.create(Wf);
         }

@@ -11,6 +11,8 @@ namespace Z0.Asm
     using static core;
     using static BitFlow;
 
+    using api = AsmRegs;
+
     [Blittable(SZ)]
     public readonly struct RegOp<T> : IRegOp<T>
         where T : unmanaged, IRegOp
@@ -76,7 +78,7 @@ namespace Z0.Asm
         public text7 Name
         {
             [MethodImpl(Inline)]
-            get => AsmRegs.name(this);
+            get => api.name(this);
         }
 
         public string Format()

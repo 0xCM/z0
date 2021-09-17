@@ -10,8 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static AsmOperands;
-    using static llvm.MC;
-    using static llvm.AsmId;
+    using static AsmId;
 
     partial class AsmSpecs
     {

@@ -17,27 +17,22 @@ namespace Z0
             => (kind, src);
 
         [MethodImpl(Inline), Op]
-        public static FileFlow flow(TypedFile src, TypedFile dst)
-            => (src, dst);
+        public static FileFlow<S,T> flow<S,T>(S src, T dst)
+            where S : struct, ITypedFile
+            where T : struct, ITypedFile
+                => (src, dst);
 
         [MethodImpl(Inline), Op]
-        public static FileFlow flow(string actor, TypedFile src, TypedFile dst)
-            => new FileFlow(actor, src, dst);
+        public static FileFlow flow(TypedFile src, TypedFile dst)
+            => (src, dst);
 
         [MethodImpl(Inline), Op]
         public static FileFlow flow(FileKind kSrc, FS.FilePath src, FileKind kDst, FS.FilePath dst)
             => flow(typed(kSrc, src), typed(kDst,dst));
 
         [MethodImpl(Inline), Op]
-        public static FileFlow flow(string actor, FileKind kSrc, FS.FilePath src, FileKind kDst, FS.FilePath dst)
-            => flow(actor, typed(kSrc, src), typed(kDst,dst));
-
-        [MethodImpl(Inline), Op]
         public static FileFlow flow(Arrow<TypedFile> src)
             => flow(src.Source, src.Target);
 
-        [MethodImpl(Inline), Op]
-        public static FileFlow flow(string actor, Arrow<TypedFile> src)
-            => flow(actor, src.Source, src.Target);
     }
 }

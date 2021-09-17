@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
-    using F = llvm.AsmRecordField;
-
     partial class AsmCmdService
     {
         [CmdOp(".llvm-etl")]

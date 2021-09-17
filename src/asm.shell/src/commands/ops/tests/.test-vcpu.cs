@@ -7,12 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.llvm;
-
-    using static core;
-    using static AsmChecks;
     using static Root;
-    using static BitFlow;
 
     partial class AsmCmdService
     {

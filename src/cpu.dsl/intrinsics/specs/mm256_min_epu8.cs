@@ -12,38 +12,38 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        public readonly struct _mm256_min_epu8 : IIntrinsicInput<_mm256_min_epu8>
+        public readonly struct mm256_min_epu8 : IIntrinsicInput<mm256_min_epu8>
         {
-            public readonly __m256i<byte> A;
+            public readonly m256i<byte> A;
 
-            public readonly __m256i<byte> B;
+            public readonly m256i<byte> B;
 
             [MethodImpl(Inline)]
-            public _mm256_min_epu8(in __m256i<byte> a, in __m256i<byte> b)
+            public mm256_min_epu8(in m256i<byte> a, in m256i<byte> b)
             {
                 A = a;
                 B = b;
             }
 
             public IntrinsicKind Kind
-                => IntrinsicKind._mm256_min_epu8;
+                => IntrinsicKind.mm256_min_epu8;
         }
 
         partial struct Refs
         {
             [MethodImpl(Inline)]
-            public static __m256i<byte> calc(in _mm256_min_epu8 src)
+            public static m256i<byte> calc(in mm256_min_epu8 src)
                 => cpu.vmin(src.A,src.B);
         }
 
         partial struct Specs
         {
             [MethodImpl(Inline), Op]
-            public static __m256i<byte> calc(in _mm256_min_epu8 src)
-                => _mm256_min_epu8(src.A, src.B);
+            public static m256i<byte> calc(in mm256_min_epu8 src)
+                => mm256_min_epu8(src.A, src.B);
 
             [MethodImpl(Inline)]
-            public static __m256i<byte> _mm256_min_epu8(in __m256i<byte> a, in __m256i<byte> b)
+            public static m256i<byte> mm256_min_epu8(in m256i<byte> a, in m256i<byte> b)
             {
                 var dst = m256i<byte>();
                 for(var j=0; j<=31; j++)

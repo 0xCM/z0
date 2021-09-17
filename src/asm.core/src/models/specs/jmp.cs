@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsmOperands;
     using static core;
 
     partial class AsmSpecs
@@ -58,20 +57,6 @@ namespace Z0.Asm
             seek(hex,0) = opcode;
             u8(seek(hex, 1)) = asm.disp8(rip,dst);
             return 2;
-        }
-
-        /// <summary>
-        /// Jump near, absolute indirect, RIP = 64-Bit offset from register or memory
-        /// JMP r/m64 | FF /4
-        /// jmp r64(FF /4)
-        /// </summary>
-        /// <param name="r"></param>
-        [MethodImpl(Inline), Op]
-        public static byte jmp(r64 r, ref byte hex)
-        {
-            var i = r.Index;
-
-            return 0;
         }
     }
 }

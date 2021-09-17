@@ -11,20 +11,20 @@ namespace Z0.Vdsl
 
     partial struct Intrinsics
     {
-        public struct __mmask32
+        public struct mask32
         {
             ushort Data;
 
             [MethodImpl(Inline)]
-            public __mmask32(ushort src)
+            public mask32(ushort src)
                 => Data = src;
 
             [MethodImpl(Inline)]
-            public static implicit operator __mmask32(ushort src)
-                => new __mmask32(src);
+            public static implicit operator mask32(ushort src)
+                => new mask32(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator ushort(__mmask32 src)
+            public static implicit operator ushort(mask32 src)
                 => src.Data;
         }
     }

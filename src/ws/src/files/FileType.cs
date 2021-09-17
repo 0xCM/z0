@@ -9,6 +9,8 @@ namespace Z0
 
     using static Root;
 
+    using api = FileTypes;
+
     public readonly struct FileType : IFileType<FileType>
     {
         public FileKind Kind {get;}
@@ -32,10 +34,10 @@ namespace Z0
         }
 
         public FS.FileExt Ext
-            => FileTypes.ext(Kind);
+            => api.ext(Kind);
 
         public string Format()
-            => Kind.Format();
+            => api.format(Kind);
 
         public override string ToString()
             => Format();

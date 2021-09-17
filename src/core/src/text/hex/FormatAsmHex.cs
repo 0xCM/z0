@@ -39,18 +39,6 @@ namespace Z0
             => HexFormat.asmhex(src,digits);
 
         [Op]
-        public static string FormatAsmHex(this ushort src, NumericWidth width)
-            => HexFormat.asmhex(src, width);
-
-        [Op]
-        public static string FormatAsmHex(this uint src, NumericWidth width)
-            => HexFormat.asmhex(src, width);
-
-        [Op]
-        public static string FormatAsmHex(this ulong src, NumericWidth width)
-            => HexFormat.asmhex(src, width);
-
-        [Op]
         public static string FormatTrimmedAsmHex(this ushort src)
             => src.FormatAsmHex(Widths.effective(src));
 

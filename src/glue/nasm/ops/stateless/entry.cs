@@ -50,7 +50,7 @@ namespace Z0.Tools
                 }
                 else if(outcount == 3)
                 {
-                    if(HexNumericParser.parse64u(part1, out var offset))
+                    if(Hex.parse64u(part1, out var offset))
                         dst.Offset = offset;
                     else
                         return (false, string.Format($"HexNumericParser failed on {part1}"));

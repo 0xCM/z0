@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static Root;
+    using static minicore;
 
     partial class Widths
     {
@@ -22,27 +23,13 @@ namespace Z0
             => ref Unsafe.AsRef(src);
 
         /// <summary>
-        /// Presents an S-cell as a T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T pretend<S,T>(in S src)
-            => ref Unsafe.As<S,T>(ref edit(src));
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint size<T>(T t = default)
-            => (uint)Unsafe.SizeOf<T>();
-
-        /// <summary>
         /// Presents a T-references as a <see cref='byte'/> reference
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte u8<T>(in T src)
-            => ref pretend<T,byte>(src);
+            => ref @as<T,byte>(src);
 
         /// <summary>
         /// Presents a T-reference as a <see cref='ushort'/> reference
@@ -51,7 +38,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ushort u16<T>(in T src)
-            => ref pretend<T,ushort>(src);
+            => ref @as<T,ushort>(src);
 
         /// <summary>
         /// Presents a parametric references as a <see cref='uint'/> reference
@@ -60,7 +47,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref uint u32<T>(in T src)
-            => ref pretend<T,uint>(src);
+            => ref @as<T,uint>(src);
 
         /// <summary>
         /// Presents a T-references as a <see cref='ulong'/> reference
@@ -69,7 +56,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ulong u64<T>(in T src)
-            => ref pretend<T,ulong>(src);
+            => ref @as<T,ulong>(src);
 
         /// <summary>
         /// Computes the minimum number of bits required to represent the source value

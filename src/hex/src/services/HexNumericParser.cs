@@ -11,42 +11,30 @@ namespace Z0
     [ApiHost]
     public readonly struct HexNumericParser
     {
-        public static Outcome parse64u(string src, out ulong dst)
-            => ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out dst);
-
-        public static Outcome parse32u(string src, out uint dst)
-            => uint.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out dst);
-
-        public static Outcome parse16u(string src, out ushort dst)
-            => ushort.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out dst);
-
-        public static Outcome parse8u(string src, out byte dst)
-            => byte.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out dst);
-
         public static Outcome parse(string src, out Hex8 dst)
         {
-            var outcome = parse8u(src, out var x);
+            var outcome = Hex.parse8u(src, out var x);
             dst = x;
             return outcome;
         }
 
         public static Outcome parse(string src, out Hex16 dst)
         {
-            var outcome = parse16u(src, out var x);
+            var outcome = Hex.parse16u(src, out var x);
             dst = x;
             return outcome;
         }
 
         public static Outcome parse(string src, out Hex32 dst)
         {
-            var outcome = parse32u(src, out var x);
+            var outcome = Hex.parse32u(src, out var x);
             dst = x;
             return outcome;
         }
 
         public static Outcome parse(string src, out Hex64 dst)
         {
-            var outcome = parse64u(src, out var x);
+            var outcome = Hex.parse64u(src, out var x);
             dst = x;
             return outcome;
         }

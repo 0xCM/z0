@@ -23,7 +23,8 @@ namespace Z0
             _WsRoot = root;
         }
 
-        public WsKind Kind => WsKind.Output;
+        public WsKind Kind
+            => WsKind.Output;
 
         public FS.FolderPath Root
         {

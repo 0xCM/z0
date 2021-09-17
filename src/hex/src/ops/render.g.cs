@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Hex
     {
-       [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<char> render<T>(UpperCased @case, T value)
             where T : unmanaged
                 => chars_u(@case, value);

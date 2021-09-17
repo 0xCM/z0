@@ -30,9 +30,7 @@ namespace Z0.llvm
             {
                 ref readonly var c = ref skip(src,i);
                 if(i <16 && SQ.digit(base16,c))
-                {
                     continue;
-                }
 
                 if(i == 16 && SQ.whitespace(c))
                     continue;

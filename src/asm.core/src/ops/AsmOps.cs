@@ -5,6 +5,8 @@
 namespace Z0.Asm
 {
     using System;
+
+    using static AsmOperands;
     using static core;
 
     public readonly struct AsmSigBits
@@ -25,10 +27,14 @@ namespace Z0.Asm
 
 
     [ApiHost]
-    public readonly partial struct AsmOps
+    public partial class AsmOps
     {
 
 
+        // public static AsmInstruction kmovd(rK dst, r32 src)
+        // {
+
+        // }
 
         // public static byte sig(ReadOnlySpan<char> name, AsmOpClass op0, Span<byte> dst)
         // {

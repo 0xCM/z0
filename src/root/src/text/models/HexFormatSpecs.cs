@@ -224,7 +224,12 @@ namespace Z0
         /// </summary>
         public static HexFormatOptions HexArray
         {
-            get => options(zpad:true, specifier:true, uppercase:false, prespec:true, delimitsegs:true, segsep:ListDelimiter, valsep: ListDelimiter);
+             get => options(zpad:true, specifier:true, uppercase:false, prespec:true, delimitsegs:true, segsep:ListDelimiter, valsep: ListDelimiter);
+        }
+
+        public static HexFormatOptions Compact
+        {
+            get => options(zpad:true, specifier:false, uppercase:true, prespec:false, delimitsegs:false, delimitblocks:false);
         }
 
         /// <summary>

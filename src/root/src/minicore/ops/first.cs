@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct minicore
@@ -57,6 +56,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly char first(ReadOnlySpan<char> src)
             => ref GetReference(src);
-
     }
 }

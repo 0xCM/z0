@@ -9,14 +9,16 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct FileFlow : IDataFlow<TypedFile,TypedFile>
+    public readonly struct FileFlow<S,T> : IDataFlow<S,T>
+        where S : struct, ITypedFile
+        where T : struct, ITypedFile
     {
-        public TypedFile Source {get;}
+        public S Source {get;}
 
-        public TypedFile Target {get;}
+        public T Target {get;}
 
         [MethodImpl(Inline)]
-        public FileFlow(TypedFile src, TypedFile dst)
+        public FileFlow(S src, T dst)
         {
             Source = src;
             Target = dst;
@@ -29,7 +31,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator FileFlow((TypedFile src, TypedFile dst) x)
-            => new FileFlow(x.src,x.dst);
+        public static implicit operator FileFlow<S,T>((S src, T dst) x)
+            => new FileFlow<S,T>(x.src, x.dst);
     }
 }

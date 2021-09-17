@@ -9,11 +9,6 @@ namespace Z0
 
     partial struct Root
     {
-        [MethodImpl(Inline)]
-        internal static ref T @as<S,T>(in S src)
-            => ref Unsafe.As<S,T>(ref Unsafe.AsRef(src));
-
-
         [MethodImpl(Inline), Op]
         public static uint hash(PartId src)
             => (uint)src;
@@ -32,10 +27,5 @@ namespace Z0
          [MethodImpl(Inline)]
          public static Y apply<X,Y>(X x, Func<X,Y> f)
             => f(x);
-
-
-        [MethodImpl(Inline), Op]
-        public static string format(ExternId id)
-            => id.ToString().ToLower();
     }
 }

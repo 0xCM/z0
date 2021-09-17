@@ -8,17 +8,17 @@ namespace Z0.Vdsl
 
     using static Root;
 
-    public struct CmpPred128<T> : ICmpPred<__m128i<T>>
+    public struct CmpPred128<T> : ICmpPred<m128i<T>>
         where T : unmanaged
     {
         public CmpKind Kind {get;}
 
-        public __m128i<T> A {get;}
+        public m128i<T> A {get;}
 
-        public __m128i<T> B {get;}
+        public m128i<T> B {get;}
 
         [MethodImpl(Inline)]
-        public CmpPred128(CmpKind kind, __m128i<T> a, __m128i<T> b)
+        public CmpPred128(CmpKind kind, m128i<T> a, m128i<T> b)
         {
             Kind = kind;
             A = a;
@@ -35,5 +35,4 @@ namespace Z0.Vdsl
         public override string ToString()
             => Format();
     }
-
 }

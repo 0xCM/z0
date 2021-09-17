@@ -275,11 +275,11 @@ namespace Z0
             dst = CliToken.Empty;
             if(i != NotFound)
             {
-                outcome = HexNumericParser.parse8u(src.LeftOfIndex(i), out var table);
+                outcome = Hex.parse8u(src.LeftOfIndex(i), out var table);
                 if(!outcome)
                     return outcome;
 
-                outcome = HexNumericParser.parse32u(text.right(src,i), out var row);
+                outcome = Hex.parse32u(text.right(src,i), out var row);
                 if(!outcome)
                     return outcome;
 
@@ -288,7 +288,7 @@ namespace Z0
             }
             else
             {
-                outcome = HexNumericParser.parse32u(src, out var token);
+                outcome = Hex.parse32u(src, out var token);
                 if(!outcome)
                     return outcome;
                 dst = token;

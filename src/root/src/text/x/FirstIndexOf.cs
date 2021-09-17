@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static Root;
+    using static minicore;
 
     partial class XText
     {
@@ -31,7 +32,7 @@ namespace Z0
         public static Option<int> FirstIndexOf<T>(this string src, T match)
             where T : unmanaged
         {
-            var idx = src.IndexOf(Root.@as<T,char>(match));
+            var idx = src.IndexOf(@as<T,char>(match));
             return idx != -1 ? idx : Option.none<int>();
         }
 

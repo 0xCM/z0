@@ -24,9 +24,14 @@ namespace Z0
 
         EventQueue Queue;
 
+        void EventRaised(IWfEvent e)
+        {
+
+        }
+
         protected override void OnInit()
         {
-            Queue = EventQueue.allocate();
+            Queue = EventQueue.allocate(GetType(), EventRaised);
             Source = Rng.@default();
         }
 
@@ -293,7 +298,6 @@ namespace Z0
         void Run(N17 n)
         {
             BitfieldChecks.create(Wf).Run();
-
         }
 
         void Run(N18 n)
@@ -328,6 +332,11 @@ namespace Z0
         void Run(N22 n)
         {
             X86Emulator.create(Wf).Run();
+        }
+
+        void Run(N23 n)
+        {
+            BitFormatChecks.create(Wf).Run(Rng.wyhash64());
         }
 
         void Run(string spec)
@@ -395,6 +404,9 @@ namespace Z0
                     break;
                     case 22:
                         Run(n22);
+                    break;
+                    case 23:
+                        Run(n23);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

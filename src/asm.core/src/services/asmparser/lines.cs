@@ -15,9 +15,9 @@ namespace Z0.Asm
             using var reader = src.AsciLineReader();
             while(reader.Next(out var line))
             {
-                if(AsmParser.asmxpr(line, out AsmBlockLabel label, out AsmExpr expr))
+                if(asmxpr(line, out AsmBlockLabel label, out AsmExpr expr))
                 {
-                    if(AsmParser.offlabel(label, out AsmOffsetLabel offset))
+                    if(offlabel(label, out AsmOffsetLabel offset))
                     {
                         dst.Add(asm.line(offset, expr));
                         counter++;

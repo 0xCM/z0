@@ -103,7 +103,7 @@ namespace Z0
 
         public string Format()
         {
-            var dst = TextTools.buffer();
+            var dst = text.buffer();
             var count = Data.Length;
             dst .Append(Chars.LBracket);
             for(var i=0; i<count; i++)

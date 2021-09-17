@@ -69,7 +69,7 @@ namespace Z0.Asm
             var buffer = span<char>(20);
             var input1 = "40 80 c4 16";
             var input2 = "4080C416";
-            HexNumericParser.parse64u(input2, out var input3);
+            Hex.parse64u(input2, out var input3);
 
             var code1 = asm.code(input1);
             var code2 = asm.code(input2);
@@ -115,8 +115,8 @@ namespace Z0.Asm
             return result;
         }
 
-        [CmdOp(".test")]
-        unsafe Outcome TestHexDigitValues()
+        [CmdOp(".test-hex")]
+        unsafe Outcome TestHexDigitValues(CmdArgs args)
         {
             var result = Outcome.Success;
             const string DataSource = "38D10F9FC00FB6C0C338D10F97C00FB6C0C36639D10F9FC00FB6C0C36639D10F97C00FB6C0C339D10F9FC00FB6C0C339D10F97C0C34839D10F9FC00FB6C0C34839D10F97C00FB6C0C3";
@@ -136,7 +136,7 @@ namespace Z0.Asm
             var buffer = alloc<byte>(count/2);
             var size = Hex.pack(dst,buffer);
             Write(DataSource);
-            Write(buffer.FormatHex());
+            Write(buffer.FormatHex(HexFormatSpecs.Compact));
 
             return result;
         }

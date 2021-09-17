@@ -5,25 +5,19 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Collections.Generic;
-
-    using static core;
-    using static Root;
 
     [Record(TableId)]
     public struct McOpLogEntry
     {
         public const string TableId = "mc.ops-log";
 
-        public string Semantic;
-
         public AsmExpr Expr;
 
-        public string Encoding;
+        public string Semantic;
 
-        public string Locator;
+        public FS.FileUri Source;
 
-        public static ReadOnlySpan<byte> RenderWidths => new byte[4]{120,62,68,5};
+        public static ReadOnlySpan<byte> RenderWidths => new byte[3]{62,120,5};
     }
 
     partial class AsmCmdService

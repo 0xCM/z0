@@ -12,7 +12,6 @@ namespace Z0.Tools
     [ApiHost]
     public sealed partial class BdDisasm : Tool<BdDisasm, BdDisasmCmd>
     {
-        public AsmWs Workspace {get; private set;}
 
         public BdDisasm()
             : base(Toolspace.bddiasm)
@@ -22,7 +21,6 @@ namespace Z0.Tools
 
         protected override void Initialized()
         {
-            Workspace = AsmWs.create(Env.AsmWs);
         }
 
         [Op]

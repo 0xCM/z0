@@ -49,19 +49,19 @@ namespace Z0.Asm
         public NativeSizeCode WidthCode
         {
             [MethodImpl(Inline)]
-            get => AsmRegs.width(this);
+            get => api.width(this);
         }
 
         public RegClassCode RegClassCode
         {
             [MethodImpl(Inline)]
-            get => AsmRegs.@class(this);
+            get => api.@class(this);
         }
 
         public RegIndexCode Index
         {
             [MethodImpl(Inline)]
-            get => AsmRegs.index(this);
+            get => api.index(this);
         }
 
         public RegWidth RegWidth

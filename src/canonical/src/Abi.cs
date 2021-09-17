@@ -111,7 +111,6 @@ namespace Z0
             [Op, MethodImpl(NotInline)]
             public static ref uint f3(ref uint abi)
             {
-
                 abi *= 8;
 
                 return ref abi;

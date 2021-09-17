@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using api = Sizes;
 
@@ -58,10 +59,9 @@ namespace Z0
             get => Untyped.Mb;
         }
 
-
         [MethodImpl(Inline)]
         public Size<T> Align(T factor)
-            => Untyped.Align(Widths.pretend<T,ulong>(factor));
+            => Untyped.Align(bw64(factor));
 
         [MethodImpl(Inline)]
         public bool Equals(Size<T> src)
@@ -87,7 +87,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Size<T>(ByteSize src)
-            => new Size<T>(Widths.pretend<ulong,T>((ulong)src));
+            => new Size<T>(@as<T>((ulong)src));
 
         [MethodImpl(Inline)]
         public static implicit operator ByteSize(Size<T> src)

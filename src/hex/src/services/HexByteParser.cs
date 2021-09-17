@@ -38,7 +38,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var part = ref skip(parts,i);
-                result = HexNumericParser.parse8u(part, out seek(target,i));
+                result = Hex.parse8u(part, out seek(target,i));
                 if(result.Fail)
                 {
                     result = (false, string.Format("The source value '{0}' could not be parsed", part));

@@ -30,8 +30,8 @@ namespace Z0
                 ref readonly var b = ref skip(src,i);
                 seek(dst,j++) = Chars.D0;
                 seek(dst,j++) = Chars.x;
-                seek(dst,j++) = Hex.hexchar(LowerCase, b, 1);
-                seek(dst,j++) = Hex.hexchar(LowerCase, b, 0);
+                seek(dst,j++) = hexchar(LowerCase, b, 1);
+                seek(dst,j++) = hexchar(LowerCase, b, 0);
                 if(i != count-1)
                     seek(dst,j++) = Chars.Comma;
             }
@@ -67,7 +67,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var cell = ref skip(cells,i);
-                if(!HexNumericParser.parse8u(cell, out seek(target,i)))
+                if(!Hex.parse8u(cell, out seek(target,i)))
                     return (false, cell);
             }
             dst = buffer;

@@ -116,6 +116,13 @@ namespace Z0.Asm
             return result;
         }
 
+        Outcome CollectOpsAsm()
+        {
+            var result = Outcome.Success;
+
+            return result;
+        }
+
         Outcome CollectObjHex()
         {
             var result = Outcome.Success;
@@ -180,32 +187,14 @@ namespace Z0.Asm
                 var locator = text.left(a,m).Trim();
                 locator = text.slice(locator,0, locator.Length - 1);
 
-                var info = text.right(a,m + EntryMarker.Length);
+                var info = text.right(a, m + EntryMarker.Length);
                 var semfound = text.unfence(info, Brackets, out var semantic);
                 info = semfound ? RP.parenthetical(semantic) : info;
-                var body = b.Replace(Chars.Tab,Chars.Space);
-                var xpr = AsmExpr.Empty;
-                var comment = AsmComment.Empty;
-                var q = text.index(body, Chars.Hash);
-                var encoding = EmptyString;
-                if(q > 0)
-                {
-                    var _l = text.left(body, q).Trim();
-                    var _r = text.right(body, q).Trim();
-                    var z = text.index(_l, Chars.Space);
-                    var mnemonic = z > 0 ? text.left(_l,z).Trim() : _l;
-                    var operands = z > 0 ? text.right(_l,z).Trim() : EmptyString;
-                    xpr = asm.expr(mnemonic, operands);
-
-                    var encfound = text.unfence(_r, Brackets, out encoding);
-                    comment = asm.comment(string.Format("{0} {1}", encfound ? encoding : _r, info));
-                }
-
+                var body = b.Replace(Chars.Tab, Chars.Space);
                 var record = new McOpLogEntry();
                 counter++;
-                record.Locator = locator;
-                record.Expr = xpr;
-                record.Encoding = encoding;
+                record.Source = FS.path(locator);
+                record.Expr = asm.expr(body);
                 record.Semantic = info;
                 dst.Add(record);
             }

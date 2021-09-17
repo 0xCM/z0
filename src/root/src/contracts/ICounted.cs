@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static minicore;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
@@ -33,6 +35,6 @@ namespace Z0
         new T Count {get;}
 
         uint ICounted.Count
-            => Root.@as<T,uint>(Count);
+            => @as<T,uint>(Count);
     }
 }
