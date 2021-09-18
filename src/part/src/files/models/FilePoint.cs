@@ -13,7 +13,6 @@ namespace Z0
     {
         public readonly struct FilePoint
         {
-
             public FS.FilePath Path {get;}
 
             public LineOffset Location {get;}

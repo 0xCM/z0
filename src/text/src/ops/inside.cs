@@ -9,18 +9,41 @@ namespace Z0
 
     partial class text
     {
+        // [Op]
+        // public static string inside(string src, Interval<int> bounds)
+        // {
+        //     var length = bounds.Right - bounds.Left;
+        //     return slice(src, bounds.Right + 1, length - 1);
+        // }
+
+        // [Op]
+        // public static string inside(string src, Interval<uint> bounds)
+        // {
+        //     var length = bounds.Right - bounds.Left;
+        //     return slice(src, bounds.Right + 1, length - 1);
+        // }
+
         [Op]
-        public static string inside(string src, Interval<int> bounds)
+        public static string inside(string src, char c0, char c1)
         {
-            var length = bounds.Right - bounds.Left;
-            return slice(src, bounds.Right + 1, length - 1);
+            var i0 = index(src, c0);
+            if(i0 > 0)
+            {
+                var i1 = index(src, i0 + 1, c1);
+                if(i1 > 0)
+                    return segment(src, i0 + 1, i1 - 1);
+            }
+            return default;
         }
 
         [Op]
-        public static string inside(string src, Interval<uint> bounds)
+        public static string inside(string src, int i, int j)
         {
-            var length = bounds.Right - bounds.Left;
-            return slice(src, bounds.Right + 1, length - 1);
+            if(j<=i)
+                return EmptyString;
+
+            else
+                return slice(src, i+1, (j-i) - 1);
         }
     }
 }

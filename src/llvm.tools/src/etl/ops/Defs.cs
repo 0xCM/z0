@@ -115,7 +115,7 @@ namespace Z0.llvm
                         var record = new DefRecord();
                         record.Dataset = kind;
                         record.Offset = line.LineNumber;
-                        record.Name = text.trim(text.between(content, j + Marker.Length - 1, k));
+                        record.Name = text.trim(text.inside(content, j + Marker.Length - 1, k));
                         var m = SQ.index(content, Chars.FSlash, Chars.FSlash);
                         if(m >= 0)
                             record.Ancestors = text.trim(text.right(content, m + 1));

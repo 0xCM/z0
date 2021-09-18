@@ -10,5 +10,9 @@ namespace Z0.Asm
     public interface IAsmContextDepr : IMessageQueue, IPolyrandProvider
     {
         IMessageQueue MessageQueue {get;}
+
+        AsmDecoder Decoder {get;}
+
+        AsmFormatConfig FormatConfig {get;}
     }
 }

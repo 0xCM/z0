@@ -28,7 +28,7 @@ namespace Z0
             var running = wf.Running(CapturingRoutines.Format(dir));
             var routines = args.Length != 0 ? runner.Capture(identities, CaptureWorkflowOptions.EmitImm) : runner.Capture(identities);
             var total = 0u;
-            root.iter(routines, r => total += r.Count);
+            iter(routines, r => total += r.Count);
             wf.Ran(running, CapturedRoutines.Format(total,routines.Length));
             return routines;
         }

@@ -19,24 +19,26 @@ namespace Z0
         public static FilePoint point(FS.FilePath path, LineNumber line, uint col)
             => new FilePoint(path, (line,col));
 
-        [Op]
         public static Outcome point(string src, out FilePoint dst)
         {
-            var result = Outcome.Failure;
             dst = FilePoint.Empty;
-            var parts = text.split(src, Chars.Colon);
-            if(parts.Length == 3)
+            var indices = text.indices(src,Chars.Colon);
+            if(indices.Length < 2)
+                return false;
+
+            var j = indices.Length -1;
+            ref readonly var i0 = ref indices[j-1];
+            ref readonly var i1 = ref indices[j];
+            var l = text.inside(src,i0,i1);
+            var c = text.right(src, i1);
+            if(uint.TryParse(l, out var line) && uint.TryParse(c, out var col))
             {
-                var _path = path(skip(parts,0));
-                result = DataParser.parse(skip(parts,1), out uint line);
-                if(result)
-                {
-                    result = DataParser.parse(skip(parts,2), out uint col);
-                    if(result)
-                        dst = new FilePoint(_path, (line,col));
-                }
+                var loc = (line,col);
+                var path = FS.path(text.left(src,i0));
+                dst = new FilePoint(path,loc);
             }
-            return result;
+            return true;
         }
+
     }
 }

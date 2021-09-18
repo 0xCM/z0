@@ -11,29 +11,29 @@ namespace Z0
 
     partial class FileTypes
     {
-        public readonly struct McOpsAsmFile : ITypedFile<McOpsAsmFile>
+        public readonly struct AsmSyntaxLog : ITypedFile<AsmSyntaxLog>
         {
             public FS.FilePath Path {get;}
 
             [MethodImpl(Inline)]
-            public McOpsAsmFile(FS.FilePath path)
+            public AsmSyntaxLog(FS.FilePath path)
             {
                 Path = path;
             }
 
             public FileKind Kind
-                => FileKind.McOpsAsm;
+                => FileKind.AsmSyntaxLog;
 
             [MethodImpl(Inline)]
-            public static implicit operator McOpsAsmFile(FS.FilePath src)
-                => new McOpsAsmFile(src);
+            public static implicit operator AsmSyntaxLog(FS.FilePath src)
+                => new AsmSyntaxLog(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator FS.FilePath(McOpsAsmFile src)
+            public static implicit operator FS.FilePath(AsmSyntaxLog src)
                 => src.Path;
 
             [MethodImpl(Inline)]
-            public static implicit operator TypedFile(McOpsAsmFile src)
+            public static implicit operator TypedFile(AsmSyntaxLog src)
                 => new TypedFile(src.Kind, src.Path);
         }
     }

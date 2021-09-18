@@ -33,7 +33,7 @@ namespace Z0.llvm
                         if(text.index(namedValue, Chars.Eq, out var i2))
                         {
                             if(text.index(namedValue, Chars.Semicolon, out var i3))
-                                field.FieldContent.Value = text.between(namedValue, i2, i3);
+                                field.FieldContent.Value = text.inside(namedValue, i2, i3);
                         }
                     }
                 }

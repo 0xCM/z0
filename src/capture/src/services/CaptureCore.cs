@@ -122,7 +122,7 @@ namespace Z0.Asm
 
         // [MethodImpl(Inline)]
         // static ApiCaptureBlock DefineMember(OpIdentity id, MethodInfo src, CodeBlockPair bits, ExtractTermCode term)
-        //     => CodeBlocks.capture(id, src, bits.Raw, bits.Parsed, term);
+        //     => ApiCaptureService.capture(id, src, bits.Raw, bits.Parsed, term);
 
         // [MethodImpl(Inline)]
         // static ApiCaptureBlock DefineMember(OpIdentity id, Delegate src, CodeBlockPair bits, ExtractTermCode term)
@@ -131,7 +131,5 @@ namespace Z0.Asm
         // [MethodImpl(Inline)]
         // static ApiCaptureResult capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
         //     => ApiExtracts.divine(exchange.Buffer, id, (byte*)Unsafe.AsPointer(ref src));
-
-
     }
 }

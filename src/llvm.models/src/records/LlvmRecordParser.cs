@@ -71,7 +71,7 @@ namespace Z0.llvm
                             var j = text.index(nameval, Chars.Pipe);
                             if(j >=0)
                             {
-                                dst.Value = text.between(nameval,i,j).Trim();
+                                dst.Value = text.inside(nameval,i,j).Trim();
                                 return true;
                             }
                         }

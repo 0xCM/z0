@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct LineOffset : IEquatable<LineOffset>, IComparable<LineOffset>
     {
-        public const string RenderPattern = "{0}{1:D3}";
+        public const string RenderPattern = "{0}:{1:D3}";
 
         public const byte RenderLength = LineNumber.RenderLength + 3;
 

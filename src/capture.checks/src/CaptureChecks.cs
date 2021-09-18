@@ -32,7 +32,6 @@ namespace Z0.Asm
             Context = new AsmContextDepr(context(wf), wf);
             _Buffers = Buffers.native(Pow2.T16, 5);
             Tokens = _Buffers.Tokenize();
-            //Tokens = Buffers.native(Pow2.T16, 5, out BufferAlloc).Tokenize();
         }
 
         public ref readonly BufferToken this[BufferSeqId id]
@@ -44,7 +43,6 @@ namespace Z0.Asm
         public void Dispose()
         {
             _Buffers.Dispose();
-            //BufferAlloc.Dispose();
         }
     }
 }

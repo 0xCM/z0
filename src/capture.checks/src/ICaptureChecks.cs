@@ -15,31 +15,37 @@ namespace Z0.Asm
         IPolyrand IPolyrandProvider.Random
             => Context.Random;
 
-        // void WriteAsm(ApiCaptureBlock capture, StreamWriter dst)
-        // {
-        //     var asm = Decoder.Decode(capture).Require();
-        //     var formatted = Context.Formatter.Format(asm);
-        //     dst.Write(formatted);
-        // }
+        AsmDecoder Decoder
+            => Context.Decoder;
 
-        // void WriteAsm(ApiCaptureBlock[] src, StreamWriter dst)
-        // {
-        //     for(var i=0; i<src.Length; i++)
-        //         WriteAsm(src[i], dst);
-        // }
+        AsmFormatConfig FormatConfig
+            => Context.FormatConfig;
 
-        // void WriteAsm(ReadOnlySpan<ApiCaptureBlock> src, StreamWriter dst)
-        // {
-        //     for(var i=0; i<src.Length; i++)
-        //         WriteAsm(src[i], dst);
-        // }
+        void WriteAsm(ApiCaptureBlock capture, StreamWriter dst)
+        {
+            var asm = Decoder.Decode(capture).Require();
+            var formatted = AsmFormatter.format(asm, FormatConfig);
+            dst.Write(formatted);
+        }
 
-        // void WriteAsm(AsmRoutine f, StreamWriter dst)
-        //     => dst.WriteLine(Context.Formatter.Format(f));
+        void WriteAsm(ApiCaptureBlock[] src, StreamWriter dst)
+        {
+            for(var i=0; i<src.Length; i++)
+                WriteAsm(src[i], dst);
+        }
+
+        void WriteAsm(ReadOnlySpan<ApiCaptureBlock> src, StreamWriter dst)
+        {
+            for(var i=0; i<src.Length; i++)
+                WriteAsm(src[i], dst);
+        }
+
+        void WriteAsm(AsmRoutine f, StreamWriter dst)
+            => dst.WriteLine(AsmFormatter.format(f,FormatConfig));
 
         // Option<AsmRoutine> CaptureAsm<D>(DynamicDelegate<D> src)
         //     where D : Delegate
-        //         => from capture in CaptureService.Capture(CaptureExchange.Context, src.Id, src)
+        //         => from capture in Capture.Capture(CaptureExchange.Context, src.Id, src)
         //         from asm in Decoder.Decode(capture)
         //         select asm;
 

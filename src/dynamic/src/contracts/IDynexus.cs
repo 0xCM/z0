@@ -9,7 +9,6 @@ namespace Z0
 
     using static CellDelegates;
 
-
     public interface IDynexus
     {
         UnaryOp<T> EmitUnaryOp<T>(BufferToken dst, ApiCodeBlock src)

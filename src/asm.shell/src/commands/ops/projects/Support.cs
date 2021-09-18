@@ -37,6 +37,9 @@ namespace Z0.Asm
             return true;
         }
 
+        FS.Files ProjectSources(Scope? scope = null)
+            => scope != null ? Ws.Projects().SrcFiles(State.Project(), scope.Value) : Ws.Projects().SrcFiles(State.Project());
+
         FS.FilePath Script(ProjectId project, ScriptId script)
             => Ws.Projects().Script(project, script, FS.Cmd);
 
@@ -111,14 +114,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return result;
 
-            result = CollectMcLogs();
-
-            return result;
-        }
-
-        Outcome CollectOpsAsm()
-        {
-            var result = Outcome.Success;
+            result = CollectAsmSyntax();
 
             return result;
         }
@@ -153,31 +149,29 @@ namespace Z0.Asm
             return result;
         }
 
-        Outcome CollectMcLogs()
+        Outcome CollectAsmSyntax()
         {
             var project = State.Project();
-            var logs = Ws.Projects().OutFiles(project, FileTypes.ext(FileKind.McOpsLog)).View;
-            var dst = Ws.Projects().TableOut<McOpLogEntry>(project);
+            var logs = Ws.Projects().OutFiles(project, FileTypes.ext(FileKind.AsmSyntaxLog)).View;
+            var dst = Ws.Projects().TableOut<AsmSyntaxRow>(project);
             var count = logs.Length;
-            var buffer = list<McOpLogEntry>();
+            var buffer = list<AsmSyntaxRow>();
             for(var i=0; i<count; i++)
-                ParseMcLog(skip(logs,i), buffer);
-            TableEmit(buffer.ViewDeposited(), McOpLogEntry.RenderWidths, dst);
+                ParseSyntaxRows(skip(logs,i), buffer);
+            TableEmit(buffer.ViewDeposited(), AsmSyntaxRow.RenderWidths, dst);
             return true;
         }
 
-        uint ParseMcLog(FS.FilePath src, List<McOpLogEntry> dst)
+        uint ParseSyntaxRows(FS.FilePath src, List<AsmSyntaxRow> dst)
         {
             const string EntryMarker = "note: parsed instruction:";
             var lines = src.ReadNumberedLines();
             var count = lines.Length;
-            var segs = count/3;
             var counter = 0u;
-            for(var i=0; i<segs; i+=3)
+            for(var i=0; i<count-1; i++)
             {
                 ref readonly var a = ref skip(lines,i).Content;
                 ref readonly var b = ref skip(lines,i+1).Content;
-                ref readonly var c = ref skip(lines,i+2);
 
                 var m = text.index(a,EntryMarker);
                 if(!a.Contains(EntryMarker))
@@ -187,15 +181,17 @@ namespace Z0.Asm
                 var locator = text.left(a,m).Trim();
                 locator = text.slice(locator,0, locator.Length - 1);
 
-                var info = text.right(a, m + EntryMarker.Length);
-                var semfound = text.unfence(info, Brackets, out var semantic);
-                info = semfound ? RP.parenthetical(semantic) : info;
+                var syntax = text.right(a, m + EntryMarker.Length);
+                var semfound = text.unfence(syntax, Brackets, out var semantic);
+                syntax = semfound ? RP.parenthetical(semantic) : syntax;
                 var body = b.Replace(Chars.Tab, Chars.Space);
-                var record = new McOpLogEntry();
+                var record = new AsmSyntaxRow();
                 counter++;
-                record.Source = FS.path(locator);
+                FS.point(locator, out var point);
+                record.Location = point.Location;
                 record.Expr = asm.expr(body);
-                record.Semantic = info;
+                record.Syntax = syntax;
+                record.Source = point.Path;
                 dst.Add(record);
             }
             return counter;

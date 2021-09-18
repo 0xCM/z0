@@ -13,16 +13,16 @@ namespace Z0
         public static string format(FileKind src)
             => Symbols.index<FileKind>()[src].Expr.Format();
 
-        public static ObjAsmFile objasm(FS.FilePath src)
+        public static ObjAsm objasm(FS.FilePath src)
             => src;
 
-        public static McOpsAsmFile opsasm(FS.FilePath src)
+        public static AsmSyntaxLog asmsynlog(FS.FilePath src)
             => src;
 
-        public static McAsmFile mcasm(FS.FilePath src)
+        public static McAsm mcasm(FS.FilePath src)
             => src;
 
-        public static YamlTokenFile yamltok(FS.FilePath src)
+        public static YamlToken yamltok(FS.FilePath src)
             => src;
     }
 }

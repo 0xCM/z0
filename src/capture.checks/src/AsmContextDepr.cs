@@ -20,10 +20,16 @@ namespace Z0.Asm
 
         public IPolyrand Random {get;}
 
+        public AsmDecoder Decoder {get;}
+
+        public AsmFormatConfig FormatConfig {get;}
+
         [MethodImpl(Inline)]
         public AsmContextDepr(ICheckContext app, IWfRuntime wf)
         {
             Wf = wf;
+            Decoder = wf.AsmDecoder();
+            FormatConfig = AsmFormatConfig.@default(out var _);
             MessageQueue = app.MessageQueue;
             Next = app.MessageRelay;
             app.MessageQueue.Next += Relay;

@@ -11,29 +11,29 @@ namespace Z0
 
     partial class FileTypes
     {
-        public readonly struct YamlTokenFile : ITypedFile<YamlTokenFile>
+        public readonly struct McAsm : ITypedFile<McAsm>
         {
             public FS.FilePath Path {get;}
 
             [MethodImpl(Inline)]
-            public YamlTokenFile(FS.FilePath path)
+            public McAsm(FS.FilePath path)
             {
                 Path = path;
             }
 
             public FileKind Kind
-                => FileKind.YamlTok;
+                => FileKind.McAsm;
 
             [MethodImpl(Inline)]
-            public static implicit operator YamlTokenFile(FS.FilePath src)
-                => new YamlTokenFile(src);
+            public static implicit operator McAsm(FS.FilePath src)
+                => new McAsm(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator FS.FilePath(YamlTokenFile src)
+            public static implicit operator FS.FilePath(McAsm src)
                 => src.Path;
 
             [MethodImpl(Inline)]
-            public static implicit operator TypedFile(YamlTokenFile src)
+            public static implicit operator TypedFile(McAsm src)
                 => new TypedFile(src.Kind, src.Path);
         }
     }

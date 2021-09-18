@@ -92,11 +92,11 @@ namespace Z0
         [Symbol(mcasm)]
         McAsm,
 
-        [Symbol(mcopsasm)]
-        McOpsAsm,
+        [Symbol(asmsyn)]
+        AsmSyntax,
 
-        [Symbol(mcopslog)]
-        McOpsLog,
+        [Symbol(asmsynlog)]
+        AsmSyntaxLog,
 
         [Symbol(coffheaders)]
         CoffHeaders,

@@ -40,10 +40,10 @@ namespace Z0.llvm
                         record.Offset = line.LineNumber;
                         var lt = text.index(content,Chars.Lt);
                         if(lt >=0)
-                            record.Name = text.trim(text.between(content, j + Marker.Length - 1, lt));
+                            record.Name = text.trim(text.inside(content, j + Marker.Length - 1, lt));
                         else
                         {
-                            record.Name = text.trim(text.between(content, j + Marker.Length - 1, k));
+                            record.Name = text.trim(text.inside(content, j + Marker.Length - 1, k));
                         }
                         var m = SQ.index(content, Chars.FSlash, Chars.FSlash);
                         if(m >= 0)

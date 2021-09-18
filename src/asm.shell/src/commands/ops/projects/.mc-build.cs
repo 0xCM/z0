@@ -10,6 +10,6 @@ namespace Z0.Asm
     {
         [CmdOp(".mc-build")]
         Outcome BuildMc(CmdArgs args)
-            => RunProjectScript(args,McBuild);
+            => RunProjectScript(args,McBuild, "asm");
     }
 }

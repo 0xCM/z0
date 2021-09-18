@@ -210,14 +210,19 @@ namespace Z0
         public const string mcasm = mc + sep + asm;
 
         /// <summary>
-        /// Defines the 'mc.log' literal
+        /// Defines the 'syn' literal
         /// </summary>
-        public const string mcopslog = mc + sep + ops + sep + log;
+        public const string syn = nameof(syn);
 
         /// <summary>
-        /// Defines the 'mc.ops.asm' literal
+        /// Defines the 'syn.asm' literal
         /// </summary>
-        public const string mcopsasm = mc + sep + ops + sep + asm;
+        public const string asmsyn = asm + sep + syn;
+
+        /// <summary>
+        /// Defines the 'syn.asm.log' literal
+        /// </summary>
+        public const string asmsynlog = syn + sep + asm + sep + log;
 
         /// <summary>
         /// Defines the 'mlir' literal

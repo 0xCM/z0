@@ -81,7 +81,7 @@ namespace Z0.llvm
                 {
                     var j = text.index(content,Chars.Colon);
                     if(j >=0)
-                        section = text.between(content, i + SectionMarker.Length - 1, j);
+                        section = text.inside(content, i + SectionMarker.Length - 1, j);
                     ParsingSection = true;
                     continue;
                 }
@@ -112,7 +112,7 @@ namespace Z0.llvm
                         var k = text.index(content, Chars.Gt);
                         if(k>=0)
                         {
-                            blockname = text.between(content, j, k);
+                            blockname = text.inside(content, j, k);
                             row.BlockName = blockname;
                         }
                         buffer.Add(row);
