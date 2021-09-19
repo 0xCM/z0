@@ -64,7 +64,7 @@ namespace Z0
             var rng = Rng.xorShift1024(seed);
             if(!States.TryAdd(id,rng))
                 throw new Exception($"Key {id} already exists");
-            return new TimeSeries<T>(id, domain, term(0, memory.zero<T>()));
+            return new TimeSeries<T>(id, domain, term(0, core.zero<T>()));
         }
 
         public static void evolve<T>(Interval<T> domain, ulong[] seed, int count, Action<TimeSeries<T>,Duration> complete)

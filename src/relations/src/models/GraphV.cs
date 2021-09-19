@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static NumericCast;
+    using static Numeric;
 
     /// <summary>
     /// Defines a directed graph parameterized by the vertex index type

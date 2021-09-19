@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Interval<T> bounds<T>(uint n)
             where T : unmanaged
-                => (NumericLiterals.zero<T>(), NumericCast.force<T>(n));
+                => (zero<T>(), Numeric.force<T>(n));
 
         public void vgather_check()
         {

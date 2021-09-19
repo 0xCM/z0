@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static NumericCast;
+    using static Numeric;
 
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1

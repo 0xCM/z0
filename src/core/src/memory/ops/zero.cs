@@ -11,9 +11,5 @@ namespace Z0
 
     partial struct memory
     {
-        [MethodImpl(Inline)]
-        public static T zero<T>()
-            where T : unmanaged
-                => NumericLiterals.zero<T>();
     }
 }

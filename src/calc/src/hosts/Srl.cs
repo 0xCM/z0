@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
     using static SFx;
-    using static NumericCast;
+    using static Numeric;
 
     partial struct CalcHosts
     {

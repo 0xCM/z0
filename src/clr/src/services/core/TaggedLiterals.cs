@@ -19,13 +19,13 @@ namespace Z0
                 => from f in typeof(E).LiteralFields().ToArray()
                     where f.Tagged<BinaryLiteralAttribute>()
                     let a = f.Tag<BinaryLiteralAttribute>().Require()
-                    select NumericLiterals.binary(base2, f.Name, Enums.scalar<E,T>((E)f.GetValue(null)), a.Text);
+                    select BinaryLiteral.define(base2, f.Name, Enums.scalar<E,T>((E)f.GetValue(null)), a.Text);
 
         public static NumericLiteral binaryliteral(FieldInfo target, object value)
         {
             if(!IsBinaryLiteral(target))
                 return NumericLiteral.Empty;
-            return NumericLiterals.literal(base2, target.Name, value, target.Tag<BinaryLiteralAttribute>().Value.Text);
+            return Numeric.literal(base2, target.Name, value, target.Tag<BinaryLiteralAttribute>().Value.Text);
         }
 
         [MethodImpl(Inline), Op]

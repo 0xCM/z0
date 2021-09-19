@@ -41,13 +41,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return NumericCast.force<T>(pack(src, n8));
+                return Numeric.force<T>(pack(src, n8));
             else if(typeof(T) == typeof(short))
-                return NumericCast.force<T>(pack(src, n16));
+                return Numeric.force<T>(pack(src, n16));
             else if(typeof(T) == typeof(int))
-                return NumericCast.force<T>(pack(src, n32));
+                return Numeric.force<T>(pack(src, n32));
             else if(typeof(T) == typeof(long))
-                return NumericCast.force<T>(pack(src, n64));
+                return Numeric.force<T>(pack(src, n64));
             else
                 throw no<T>();
         }

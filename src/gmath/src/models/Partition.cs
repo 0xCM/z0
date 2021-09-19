@@ -30,7 +30,7 @@ namespace Z0
         /// <typeparam name="T">The interval primal type</typeparam>
         public static Span<T> counted<T>(Interval<T> src, int count)
             where T : unmanaged
-                => measured(src,gmath.div(gmath.sub(src.Right, src.Left), NumericCast.force<T>(count - 1)));
+                => measured(src,gmath.div(gmath.sub(src.Right, src.Left), Numeric.force<T>(count - 1)));
 
         /// <summary>
         /// Partitions an interval predicated on a specified partition count
@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">The interval primal type</typeparam>
         public static Span<Interval<T>> counted<S,T>(Interval<T> src, int count)
             where T : unmanaged
-                => width(src,gmath.div(gmath.sub(src.Right, src.Left), NumericCast.force<T>(count)));
+                => width(src,gmath.div(gmath.sub(src.Right, src.Left), Numeric.force<T>(count)));
 
         /// <summary>
         /// Partitions an interval predicated on a specified partition width
@@ -89,7 +89,7 @@ namespace Z0
             where T : unmanaged
         {
             var len =  gAlg.length(src);
-            var count = NumericCast.force<T,int>(gmath.div(len, width));
+            var count = Numeric.force<T,int>(gmath.div(len, width));
             var dst = span<T>(count + 1);
             var point = src.Left;
             var lastix = dst.Length - 1;
@@ -117,7 +117,7 @@ namespace Z0
             var scale = 4;
             var len =  gfp.round(gAlg.length(src), scale);
             var fcount = gfp.div(len, width);
-            var count = NumericCast.force<T,int>(gfp.ceil(fcount));
+            var count = Numeric.force<T,int>(gfp.ceil(fcount));
             var dst = core.span<T>(count + 1);
 
             var point = src.Left;

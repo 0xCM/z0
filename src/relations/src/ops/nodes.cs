@@ -21,12 +21,12 @@ namespace Z0
             where V : unmanaged
             where T : unmanaged
         {
-            var start = NumericCast.force<V,ulong>(s0);
+            var start = Numeric.force<V,ulong>(s0);
             var buffer = alloc<Node<V,T>>(data.Length);
             Span<Node<V,T>> dst = buffer;
 
             for(var i=0; i<data.Length; i++, start++)
-                dst[i] = new Node<V,T>(NumericCast.force<V>(start), data[i]);
+                dst[i] = new Node<V,T>(Numeric.force<V>(start), data[i]);
             return buffer;
         }
 
@@ -41,7 +41,7 @@ namespace Z0
             var buffer = alloc<Node<V>>(count);
             Span<Node<V>> dst = buffer;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = new Node<V>(i, NumericCast.force<V>(i));
+                seek(dst,i) = new Node<V>(i, Numeric.force<V>(i));
             return buffer;
         }
     }

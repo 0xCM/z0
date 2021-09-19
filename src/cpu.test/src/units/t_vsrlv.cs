@@ -41,7 +41,7 @@ namespace Z0
         void vsrlv_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var domain = Intervals.closed(NumericLiterals.zero<T>(), NumericCast.force<uint,T>((uint)width<T>() - 1));
+            var domain = Intervals.closed(zero<T>(), Numeric.force<uint,T>((uint)width<T>() - 1));
 
             Pair<Vector128<T>> @case(uint i)
             {
@@ -56,7 +56,7 @@ namespace Z0
         void vsrlv_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var domain = Intervals.closed(default(T), NumericCast.force<uint,T>((uint)width<T>() - 1));
+            var domain = Intervals.closed(default(T), Numeric.force<uint,T>((uint)width<T>() - 1));
 
             Pair<Vector256<T>> @case(uint i)
             {

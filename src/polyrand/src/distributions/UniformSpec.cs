@@ -49,15 +49,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public UniformSpec<int> ToInt32()
-            => new UniformSpec<int>(NumericCast.force<T,int>(Min), NumericCast.force<T,int>(Max));
+            => new UniformSpec<int>(Numeric.force<T,int>(Min), Numeric.force<T,int>(Max));
 
         [MethodImpl(Inline)]
         public UniformSpec<float> ToFloat32()
-            => new UniformSpec<float>(NumericCast.force<T,float>(Min), NumericCast.force<T,float>(Max));
+            => new UniformSpec<float>(Numeric.force<T,float>(Min), Numeric.force<T,float>(Max));
 
         [MethodImpl(Inline)]
         public UniformSpec<double> ToFloat64()
-            => new UniformSpec<double>(NumericCast.force<T,double>(Min), NumericCast.force<T,double>(Max));
+            => new UniformSpec<double>(Numeric.force<T,double>(Min), Numeric.force<T,double>(Max));
 
         [MethodImpl(Inline)]
         public static implicit operator (T min, T max)(in UniformSpec<T> spec)

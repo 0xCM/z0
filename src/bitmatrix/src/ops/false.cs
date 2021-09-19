@@ -30,7 +30,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> @false<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T:unmanaged
         {
-            Z.Content.Fill(NumericLiterals.zero<T>());
+            Z.Content.Fill(core.zero<T>());
             return ref Z;
         }
     }

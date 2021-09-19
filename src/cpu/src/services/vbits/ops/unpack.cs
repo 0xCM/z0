@@ -66,7 +66,7 @@ namespace Z0
                 var k = 0u;
                 for(var i=0; i<cells; i++)
                 for(byte j=0; j<wCell; j++)
-                    seek(dst, k++) = bit.gtest(skip(src,i), j) == bit.On ? NumericLiterals.one<T>() : zero<T>();
+                    seek(dst, k++) = bit.gtest(skip(src,i), j) == bit.On ? one<T>() : zero<T>();
                 return dst;
             }
         }
@@ -78,7 +78,7 @@ namespace Z0
         {
             var count = min(width<S>(), dst.Length);
             for(var i=0u; i<count; i++)
-                seek(dst, i) = bit.gtest(src, (byte)i) == bit.On ? NumericLiterals.one<T>() : zero<T>();
+                seek(dst, i) = bit.gtest(src, (byte)i) == bit.On ? one<T>() : zero<T>();
         }
 
         public static Span<T> unpack<S,T>(Span<S> src, Span<T> dst)

@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static StatCollector Create<T>(T seed = default)
             where T : unmanaged
-                => new StatCollector(NumericCast.force<T,double>(seed));
+                => new StatCollector(Numeric.force<T,double>(seed));
 
         int count;
 

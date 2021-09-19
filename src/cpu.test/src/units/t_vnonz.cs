@@ -5,6 +5,7 @@
 namespace Z0
 {
     using static Root;
+    using static core;
 
     public class t_vnonz : t_inx<t_vnonz>
     {
@@ -41,9 +42,9 @@ namespace Z0
         protected void vnonz_check<T>(W128 w, T t = default)
             where T : unmanaged
         {
-            var min = NumericLiterals.one<T>();
+            var min = one<T>();
             var max = Limits.maxval(t);
-            var domain = Intervals.closed(NumericLiterals.one<T>(), Limits.maxval<T>());
+            var domain = Intervals.closed(one<T>(), Limits.maxval<T>());
             var f = Calcs.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero(w,t)));
@@ -55,9 +56,9 @@ namespace Z0
         protected void vnonz_check<T>(W256 w, T t = default)
             where T : unmanaged
         {
-            var min = NumericLiterals.one<T>();
+            var min = one<T>();
             var max = Limits.maxval(t);
-            var domain = Intervals.closed(NumericLiterals.one<T>(), Limits.maxval<T>());
+            var domain = Intervals.closed(one<T>(), Limits.maxval<T>());
             var f = Calcs.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero<T>(w)));

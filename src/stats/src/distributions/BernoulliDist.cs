@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
     using System.Collections.Generic;
 
     /// <summary>
@@ -17,7 +15,7 @@ namespace Z0
     {
         static T Zero => default;
 
-        static T One => NumericLiterals.one<T>();
+        static T One => core.one<T>();
 
         public BernoulliDist(IPolyrand random, BernoulliSpec<T> spec)
             : base(random, spec)

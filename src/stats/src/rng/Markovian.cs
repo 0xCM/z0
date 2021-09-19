@@ -118,7 +118,7 @@ namespace Z0
             for(var r = 0; r < (int)n.NatValue; r ++)
             {
                 var row = src.Row(r);
-                var sum =  NumericCast.force<T,double>(gAlg.sum(row.Unsized));
+                var sum =  Numeric.force<T,double>(gAlg.sum(row.Unsized));
                 if(!radius.Contains(sum))
                     return false;
             }

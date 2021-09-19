@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct Surveys
@@ -219,7 +220,7 @@ namespace Z0
             for(uint i=0u, questionId = 1; i<length; i++, questionId++)
             {
                 var choices = new QuestionChoice<T>[width];
-                var choiceId = NumericLiterals.one<T>();
+                var choiceId = core.one<T>();
                 for(var j = 0u; j< width; j++)
                 {
                     choices[j] = choice(choiceId, label(j));
@@ -239,7 +240,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Survey<T> template<T>(uint id, string name)
             where T : unmanaged
-                => template<T>(id,name, (int)memory.width<T>(), (int)memory.width<T>());
+                => template<T>(id,name, (int)width<T>(), (int)width<T>());
 
         /// <summary>
         /// Creates a stock survey with a specified number of questions, each of which has the maximum number
@@ -252,7 +253,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Survey<T> template<T>(uint id, string name, int length)
             where T : unmanaged
-                => template<T>(id,name, length, (int)memory.width<T>());
+                => template<T>(id,name, length, (int)width<T>());
 
         /// <summary>
         /// Creates a choice for a survey question

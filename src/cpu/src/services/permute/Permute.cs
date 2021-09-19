@@ -316,7 +316,7 @@ namespace Z0
         {
             var dst = new T[terms.Length];
             for(var i=0; i<terms.Length; i++)
-                dst[i] = NumericCast.force<T>(terms[i]);
+                dst[i] = Numeric.force<T>(terms[i]);
             return new Perm<T>(dst);
         }
 

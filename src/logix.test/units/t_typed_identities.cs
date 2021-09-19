@@ -7,6 +7,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using TL = TypedLogicSpec;
+    using static core;
 
     public class t_typed_identities : t_logix<t_typed_identities>
     {
@@ -30,26 +31,26 @@ namespace Z0.Logix
 
         public void check_scalar_identities()
         {
-            root.iter(TypedIdentities.ScalarIdentities<byte>(), check_identity);
-            root.iter(TypedIdentities.ScalarIdentities<ushort>(), check_identity);
-            root.iter(TypedIdentities.ScalarIdentities<uint>(), check_identity);
-            root.iter(TypedIdentities.ScalarIdentities<ulong>(), check_identity);
+            iter(TypedIdentities.ScalarIdentities<byte>(), check_identity);
+            iter(TypedIdentities.ScalarIdentities<ushort>(), check_identity);
+            iter(TypedIdentities.ScalarIdentities<uint>(), check_identity);
+            iter(TypedIdentities.ScalarIdentities<ulong>(), check_identity);
         }
 
         public void check_vec128_identities()
         {
-            root.iter(TypedIdentities.Vec128Identities<byte>(), id => check_identity(n128,id));
-            root.iter(TypedIdentities.Vec128Identities<ushort>(), id => check_identity(n128,id));
-            root.iter(TypedIdentities.Vec128Identities<uint>(), id => check_identity(n128,id));
-            root.iter(TypedIdentities.Vec128Identities<ulong>(), id => check_identity(n128,id));
+            iter(TypedIdentities.Vec128Identities<byte>(), id => check_identity(n128,id));
+            iter(TypedIdentities.Vec128Identities<ushort>(), id => check_identity(n128,id));
+            iter(TypedIdentities.Vec128Identities<uint>(), id => check_identity(n128,id));
+            iter(TypedIdentities.Vec128Identities<ulong>(), id => check_identity(n128,id));
         }
 
         public void check_vec256_identities()
         {
-            root.iter(TypedIdentities.Vec256Identities<byte>(), id => check_identity(n256,id));
-            root.iter(TypedIdentities.Vec256Identities<ushort>(), id => check_identity(n256,id));
-            root.iter(TypedIdentities.Vec256Identities<uint>(), id => check_identity(n256,id));
-            root.iter(TypedIdentities.Vec256Identities<ulong>(), id => check_identity(n256,id));
+            iter(TypedIdentities.Vec256Identities<byte>(), id => check_identity(n256,id));
+            iter(TypedIdentities.Vec256Identities<ushort>(), id => check_identity(n256,id));
+            iter(TypedIdentities.Vec256Identities<uint>(), id => check_identity(n256,id));
+            iter(TypedIdentities.Vec256Identities<ulong>(), id => check_identity(n256,id));
         }
 
         void check_identity<T>(ComparisonExpr<T> identity)

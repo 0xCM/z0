@@ -10,49 +10,49 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct NumericCast
+    partial struct Numeric
     {
         [MethodImpl(Inline)]
-        static T convert64f_u<T>(double src)
+        static T convert16i_u<T>(short src)
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(ScalarCast.uint8(src));
+                return generic<T>((byte)src);
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(ScalarCast.uint16(src));
+                return generic<T>((ushort)src);
             else if(typeof(T) == typeof(uint))
-                return generic<T>(ScalarCast.uint32(src));
+                return generic<T>((uint)src);
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(ScalarCast.uint64(src));
+                return generic<T>((ulong)src);
             else
-                return convert64f_i<T>(src);
+                return convert16i_i<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convert64f_i<T>(double src)
+        static T convert16i_i<T>(short src)
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(ScalarCast.int8(src));
+                return generic<T>((sbyte)src);
             else if(typeof(T) == typeof(short))
-                return generic<T>(ScalarCast.int16(src));
+                return generic<T>((short)src);
             else if(typeof(T) == typeof(int))
-                return generic<T>(ScalarCast.int32(src));
+                return generic<T>((int)src);
             else if(typeof(T) == typeof(long))
-                return generic<T>(ScalarCast.int64(src));
+                return generic<T>((long)src);
             else
-                return convert64f_x<T>(src);
+                return convert16i_x<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convert64f_x<T>(double src)
+        static T convert16i_x<T>(short src)
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(ScalarCast.float32(src));
+                return generic<T>((float)src);
             else if(typeof(T) == typeof(double))
-                return generic<T>(src);
+                return generic<T>(ScalarCast.float64(src));
             else if(typeof(T) == typeof(char))
-                return generic<T>((char)(int)src);
+                return generic<T>((char)src);
             else
-                return no<double,T>();
+                throw no<T>();
         }
     }
 }

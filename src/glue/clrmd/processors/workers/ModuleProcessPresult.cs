@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static DiagnosticRecords;
 
-    public readonly partial struct DiagnosticProcessors
+    partial struct DiagnosticProcessors
     {
         public class ModuleProcessPresult
         {

@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T As<T>()
             where T : struct
-                => NumericCast.force<T>(Content);
+                => Numeric.force<T>(Content);
 
         [MethodImpl(Inline)]
         public bool Equals(ulong src)

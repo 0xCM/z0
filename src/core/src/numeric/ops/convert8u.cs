@@ -10,10 +10,10 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct NumericCast
+    partial struct Numeric
     {
         [MethodImpl(Inline)]
-        static T convert16u_u<T>(ushort src)
+        static T convert8u_u<T>(byte src)
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>((byte)src);
@@ -24,11 +24,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>((ulong)src);
             else
-                return convert16u_i<T>(src);
+                return convert8u_i<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convert16u_i<T>(ushort src)
+        static T convert8u_i<T>(byte src)
         {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>((sbyte)src);
@@ -39,11 +39,11 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>((long)src);
             else
-                return convert16u_x<T>(src);
+                return convert8u_x<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convert16u_x<T>(ushort src)
+        static T convert8u_x<T>(byte src)
         {
             if(typeof(T) == typeof(float))
                 return generic<T>((float)src);
@@ -52,7 +52,7 @@ namespace Z0
             else if(typeof(T) == typeof(char))
                 return generic<T>((char)src);
             else
-                return no<ushort,T>();
+                return no<byte,T>();
        }
     }
 }

@@ -9,11 +9,12 @@ namespace Z0
     using System.Collections.Concurrent;
 
     using static Root;
+    using static core;
     using static DiagnosticRecords;
 
     using ClrMd = Microsoft.Diagnostics.Runtime;
 
-    public readonly partial struct DiagnosticProcessors
+    partial struct DiagnosticProcessors
     {
         public class ModuleProcessor
         {
@@ -39,7 +40,7 @@ namespace Z0
 
             public void Process(ReadOnlySpan<ClrMd.ClrModule> src)
             {
-                root.iter(src, Process, Pll);
+                iter(src, Process, Pll);
             }
 
             public void Process(ClrMd.ClrModule src)

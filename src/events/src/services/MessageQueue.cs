@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     class MessageQueue : IMessageQueue
     {
@@ -69,7 +70,7 @@ namespace Z0
             try
             {
                 using var writer = dst.Writer();
-                root.iter(Dequeue(), msg => writer.WriteLine(msg.Format()));
+                iter(Dequeue(), msg => writer.WriteLine(msg.Format()));
             }
             catch(Exception)
             {

@@ -132,7 +132,7 @@ namespace Z0
             gAlg.increments(first, count, ref src);
 
             for(var i=0; i < count; i++)
-                NumericClaims.eq(gmath.add(first, NumericCast.force<T>(i)), data[i]);
+                NumericClaims.eq(gmath.add(first, Numeric.force<T>(i)), data[i]);
         }
 
         public void add_check()

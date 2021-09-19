@@ -6,6 +6,8 @@ namespace Z0.Logix
 {
     using S = NumericLogixOps;
 
+    using static core;
+
     public class t_comparison_ops : t_typed_logix<t_comparison_ops>
     {
         public void scalar_eq_op_check()
@@ -100,7 +102,6 @@ namespace Z0.Logix
             cpu_gt_op_check<ulong>(n);
         }
 
-
        void scalar_eq_op_check<T>()
             where T : unmanaged
         {
@@ -119,8 +120,7 @@ namespace Z0.Logix
                 Claim.nea(y2);
 
                 var y3 = S.equals(x,y);
-                Claim.eq(NumericLiterals.zero<T>(),y3);
-
+                Claim.eq(zero<T>(),y3);
             }
         }
 
@@ -180,7 +180,6 @@ namespace Z0.Logix
                 x = gcpu.vxor(x,a);
                 y = gcpu.vxor(y,a);
             }
-
         }
 
         void cpu_gt_op_check<T>(N256 n)

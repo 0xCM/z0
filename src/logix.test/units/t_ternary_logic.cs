@@ -8,7 +8,7 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static NumericCast;
+    using static Numeric;
 
     public class t_ternary_logic : t_logix<t_ternary_logic>
     {

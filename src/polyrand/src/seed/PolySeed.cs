@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Configured<T>(T index)
             where T : unmanaged
-                => TakeSingle<T>(NumericCast.force<T,int>(index));
+                => TakeSingle<T>(Numeric.force<T,int>(index));
 
         public static IEnumerable<ulong> ToU64Stream(this IEnumerable<Guid> guids)
         {

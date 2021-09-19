@@ -141,7 +141,7 @@ namespace Z0
 
         Timestamp EmitContext()
         {
-            var ts = root.timestamp();
+            var ts = core.timestamp();
             var dir = Db.CaptureContextRoot();
             var process = Process.GetCurrentProcess();
             var pipe = Wf.ProcessContextPipe();

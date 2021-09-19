@@ -69,8 +69,8 @@ namespace Z0
             const uint O = BitMaskLiterals.Odd32;
 
             var mask = gcpu.vmask32u(src, (byte)i);
-            var gT = gcell(g0, i, NumericCast.force<T>(BitMasks.gather(mask, E)));
-            gT = gcell(gT, j, NumericCast.force<T>(BitMasks.gather(mask, O)));
+            var gT = gcell(g0, i, Numeric.force<T>(BitMasks.gather(mask, E)));
+            gT = gcell(gT, j, Numeric.force<T>(BitMasks.gather(mask, O)));
             return gT;
         }
 

@@ -33,7 +33,7 @@ namespace Z0
 
         protected override void OnStart()
         {
-            root.thread(CurrentProcess.OsThreadId).OnSome(t => t.IdealProcessor = CoreNumber);
+            core.thread(CurrentProcess.OsThreadId).OnSome(t => t.IdealProcessor = CoreNumber);
             foreach(var src in Agents)
                 src.Start();
         }

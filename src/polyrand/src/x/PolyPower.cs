@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Power<T>(this IDomainSource src, T t = default)
             where T : unmanaged
-                => NumericCast.force<ulong,T>(Pow2.pow((byte)src.Log2(t)));
+                => Numeric.force<ulong,T>(Pow2.pow((byte)src.Log2(t)));
 
         /// <summary>
         /// Produces a random power of 2 with specified min/max exponent values
@@ -35,7 +35,7 @@ namespace Z0
             where T : unmanaged
         {
             var exp = src.Next((byte)minexp, (byte)(maxexp + 1));
-            return NumericCast.force<ulong,T>(Pow2.pow(exp));
+            return Numeric.force<ulong,T>(Pow2.pow(exp));
         }
 
         /// <summary>

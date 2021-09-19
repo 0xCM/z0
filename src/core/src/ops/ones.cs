@@ -19,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T ones<T>()
             where T : unmanaged
-                => NumericLiterals.ones<T>();
+                => Numeric.ones<T>();
     }
 }

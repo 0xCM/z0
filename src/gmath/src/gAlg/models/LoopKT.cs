@@ -12,13 +12,13 @@ namespace Z0
     public readonly struct Loop<K,T>
         where K : unmanaged
     {
-        public K Min {get;}
+        public readonly K Min;
 
-        public K Max {get;}
+        public readonly K Max;
 
-        public K Step {get;}
+        public readonly K Step;
 
-        public Action<K,T> Receiver {get;}
+        public readonly Action<K,T> Receiver;
 
         [MethodImpl(Inline)]
         public Loop(K min, K max, K step, Action<K,T> receiver)

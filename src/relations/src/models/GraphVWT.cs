@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static NumericCast;
+    using static Numeric;
 
     public class Graph<V,W,T>
         where V : unmanaged

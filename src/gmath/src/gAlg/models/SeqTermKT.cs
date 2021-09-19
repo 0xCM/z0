@@ -12,13 +12,13 @@ namespace Z0
     /// <summary>
     /// Defines a sequence term
     /// </summary>
-    public readonly struct SeqTerm<I,T>
-        where I : unmanaged
+    public readonly struct SeqTerm<K,T>
+        where K : unmanaged
     {
         /// <summary>
         /// The sequence index
         /// </summary>
-        public I Index {get;}
+        public K Index {get;}
 
         /// <summary>
         /// The term value
@@ -26,7 +26,7 @@ namespace Z0
         public T Value {get;}
 
         [MethodImpl(Inline)]
-        public SeqTerm(I index, T value)
+        public SeqTerm(K index, T value)
         {
             Index = index;
             Value = value;
@@ -45,18 +45,18 @@ namespace Z0
         public bool IsEmpty
             => Value == null ||  (Index.Equals(default) && Value.Equals(default));
 
-        public static SeqTerm<I,T> Empty => default;
+        public static SeqTerm<K,T> Empty => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator (I i, T t)(SeqTerm<I,T> src)
+        public static implicit operator (K i, T t)(SeqTerm<K,T> src)
             => (src.Index, src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator T(SeqTerm<I,T> src)
+        public static implicit operator T(SeqTerm<K,T> src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator SeqTerm<I,T>((I i, T t) src)
-            => new SeqTerm<I,T>(src.i, src.t);
+        public static implicit operator SeqTerm<K,T>((K i, T t) src)
+            => new SeqTerm<K,T>(src.i, src.t);
     }
 }

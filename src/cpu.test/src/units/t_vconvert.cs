@@ -130,7 +130,7 @@ namespace Z0
                 for(var j = 0; j < tb.BlockLength; j++, i++)
                 {
                     var m  = tb[block,j];
-                    var x = NumericCast.force<byte>(m);
+                    var x = Numeric.force<byte>(m);
                     Claim.eq(sb[i], x);
                 }
             }
@@ -163,7 +163,7 @@ namespace Z0
                 var i = 0;
                 for(var block = 0; block < tbc; block++)
                 for(var j = 0; j < tb.BlockLength; j++, i++)
-                    Claim.eq(sb[i], NumericCast.force<byte>(tb[block,j]));
+                    Claim.eq(sb[i], Numeric.force<byte>(tb[block,j]));
             }
         }
     }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static NumericCast;
+    using static Numeric;
 
     /// <summary>
     /// Defines a natural bitvector over a primal cell
@@ -232,7 +232,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator ++(BitVector<N,T> src)
-            =>  gmath.eq(src.Data,MaxValue) ? NumericLiterals.zero<T>() : gmath.inc(src.Data);
+            =>  gmath.eq(src.Data,MaxValue) ? core.zero<T>() : gmath.inc(src.Data);
 
         /// <summary>
         /// Computes the bitwise complement of the operand

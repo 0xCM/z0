@@ -145,12 +145,12 @@ namespace Z0
         /// </summary>
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
-        public void Fill(Bit32 value)
+        public void Fill(bit value)
         {
             if(value)
                 Content.Fill(Limits.maxval<T>());
             else
-                Content.Fill(NumericLiterals.zero<T>());
+                Content.Fill(core.zero<T>());
         }
 
         [MethodImpl(Inline)]

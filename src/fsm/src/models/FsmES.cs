@@ -101,7 +101,7 @@ namespace Z0
             CurrentState = ground;
             Random = Wf.Polysource;
             EndState = end;
-            Error = root.none<Exception>();
+            Error = Option.none<Exception>();
             Transition = transition;
             ReceiptCount = 0;
             TransitionCount = 0;
@@ -115,7 +115,7 @@ namespace Z0
             CurrentState = ground;
             EndState = end;
             Random = context.Random;
-            Error = root.none<Exception>();
+            Error = Option.none<Exception>();
             Transition = transition;
             ReceiptCount = 0;
             TransitionCount = 0;

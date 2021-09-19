@@ -79,6 +79,7 @@ namespace Z0
             get => ref this[Length - 1];
         }
 
-        public static Seq<T> Empty => new Seq<T>(SeqTerm<T>.Empty);
+        public static Seq<T> Empty
+            => new Seq<T>(SeqTerm<T>.Empty);
     }
 }

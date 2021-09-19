@@ -9,7 +9,7 @@ namespace Z0.Logix
 
     using static Root;
     using static TypedLogicSpec;
-    using static NumericCast;
+    using static Numeric;
 
     public class t_bitwise_expr : UnitTest<t_bitwise_expr, ICheckVectorBits>
     {

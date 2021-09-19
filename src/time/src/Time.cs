@@ -21,11 +21,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T numeric<T>(Duration src)
-            => NumericCast.force<T>(src.Ticks);
+            => Numeric.force<T>(src.Ticks);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Duration duration<T>(T src)
-            => NumericCast.force<T,long>(src);
+            => Numeric.force<T,long>(src);
 
         [Op]
         public static Outcome parse(string src, out Timestamp dst)

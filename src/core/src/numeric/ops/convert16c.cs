@@ -10,10 +10,10 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct NumericCast
+    partial struct Numeric
     {
         [MethodImpl(Inline)]
-        internal static T convert64i_u<T>(long src)
+        static T convert16c_u<T>(char src)
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>((byte)src);
@@ -24,11 +24,11 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>((ulong)src);
             else
-                return convert64i_i<T>(src);
+                return convert16c_i<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convert64i_i<T>(long src)
+        static T convert16c_i<T>(char src)
         {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>((sbyte)src);
@@ -36,23 +36,23 @@ namespace Z0
                 return generic<T>((short)src);
             else if(typeof(T) == typeof(int))
                 return generic<T>((int)src);
-            else if(typeof(T) == typeof(long))
+            else  if(typeof(T) == typeof(long))
                 return generic<T>((long)src);
             else
-                return convert64i_x<T>(src);
+                return convert16c_x<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convert64i_x<T>(long src)
+        static T convert16c_x<T>(char src)
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(ScalarCast.float32(src));
+                return generic<T>((float)src);
             else if(typeof(T) == typeof(double))
-                return generic<T>(ScalarCast.float64(src));
+                return generic<T>((double)(src));
             else if(typeof(T) == typeof(char))
-                return  generic<T>((char)src);
+                return generic<T>((char)src);
             else
-                return no<long,T>();
-        }
+                return no<char,T>();
+       }
     }
 }

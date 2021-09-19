@@ -9,7 +9,7 @@ namespace Z0
 
     using static BitMasks;
     using static BitMaskLiterals;
-    using static NumericCast;
+    using static Numeric;
     using static Root;
     using static core;
 

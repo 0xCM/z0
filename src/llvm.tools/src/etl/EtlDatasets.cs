@@ -12,7 +12,7 @@ namespace Z0.llvm
     {
         internal Index<AsmRecordField> AsmDefFieldData;
 
-        internal Index<llvm.OpCodeSpec> OpCodeData;
+        internal Index<OpCodeSpec> OpCodeData;
 
         internal LineMap<AsmId> AsmDefMapData;
 

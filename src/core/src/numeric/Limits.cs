@@ -42,13 +42,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return NumericCast.force<T>(sbyte.MaxValue);
+                return Numeric.force<T>(sbyte.MaxValue);
             else if(typeof(T) == typeof(short))
-                return NumericCast.force<T>(short.MaxValue);
+                return Numeric.force<T>(short.MaxValue);
             else if(typeof(T) == typeof(int))
-                return NumericCast.force<T>(int.MaxValue);
+                return Numeric.force<T>(int.MaxValue);
             else
-                return NumericCast.force<T>(long.MaxValue);
+                return Numeric.force<T>(long.MaxValue);
         }
 
         [MethodImpl(Inline)]
@@ -56,13 +56,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return NumericCast.force<T>(byte.MaxValue);
+                return Numeric.force<T>(byte.MaxValue);
             else if(typeof(T) == typeof(ushort))
-                return NumericCast.force<T>(ushort.MaxValue);
+                return Numeric.force<T>(ushort.MaxValue);
             else if(typeof(T) == typeof(uint))
-                return NumericCast.force<T>(uint.MaxValue);
+                return Numeric.force<T>(uint.MaxValue);
             else
-                return NumericCast.force<T>(ulong.MaxValue);
+                return Numeric.force<T>(ulong.MaxValue);
         }
 
         [MethodImpl(Inline)]
@@ -70,9 +70,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return NumericCast.force<T>(float.MaxValue);
+                return Numeric.force<T>(float.MaxValue);
             else if(typeof(T) == typeof(double))
-                return NumericCast.force<T>(double.MaxValue);
+                return Numeric.force<T>(double.MaxValue);
             else
                 throw no<T>();
         }
@@ -104,13 +104,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return NumericCast.force<T>(sbyte.MinValue);
+                return Numeric.force<T>(sbyte.MinValue);
             else if(typeof(T) == typeof(short))
-                return NumericCast.force<T>(short.MinValue);
+                return Numeric.force<T>(short.MinValue);
             else if(typeof(T) == typeof(int))
-                return NumericCast.force<T>(int.MinValue);
+                return Numeric.force<T>(int.MinValue);
             else
-                return NumericCast.force<T>(long.MinValue);
+                return Numeric.force<T>(long.MinValue);
         }
 
         [MethodImpl(Inline)]
@@ -118,13 +118,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return NumericCast.force<T>(byte.MinValue);
+                return Numeric.force<T>(byte.MinValue);
             else if(typeof(T) == typeof(ushort))
-                return NumericCast.force<T>(ushort.MinValue);
+                return Numeric.force<T>(ushort.MinValue);
             else if(typeof(T) == typeof(uint))
-                return NumericCast.force<T>(uint.MinValue);
+                return Numeric.force<T>(uint.MinValue);
             else
-                return NumericCast.force<T>(ulong.MinValue);
+                return Numeric.force<T>(ulong.MinValue);
         }
 
         [MethodImpl(Inline)]
@@ -132,9 +132,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return NumericCast.force<T>(float.MinValue);
+                return Numeric.force<T>(float.MinValue);
             else if(typeof(T) == typeof(double))
-                return NumericCast.force<T>(double.MinValue);
+                return Numeric.force<T>(double.MinValue);
             else
                 throw no<T>();
         }

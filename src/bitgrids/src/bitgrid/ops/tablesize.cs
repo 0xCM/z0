@@ -23,8 +23,8 @@ namespace Z0
             where T : unmanaged
         {
             var points = mul(rows, cols);
-            var module = mod(points, NumericCast.force<T>(8));
-            var remains = nonz(module) ? NumericLiterals.one<T>() : NumericLiterals.zero<T>();
+            var module = mod(points, Numeric.force<T>(8));
+            var remains = nonz(module) ? one<T>() : core.zero<T>();
             return add(gmath.srl(points, 3), remains);
         }
 

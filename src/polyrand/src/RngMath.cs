@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static NumericCast;
+    using static Numeric;
 
     [ApiHost]
     public readonly struct RngMath

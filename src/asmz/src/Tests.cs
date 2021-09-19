@@ -59,7 +59,7 @@ namespace Z0.Asm
         {
             var dst = Db.ProcessContextRoot();
             var pipe = Wf.ProcessContextPipe();
-            var ts = root.timestamp();
+            var ts = core.timestamp();
             var flags = ProcessContextFlag.Detail | ProcessContextFlag.Summary | ProcessContextFlag.Hashes;
             var prejit = pipe.Emit(dst, ts, "prejit", flags);
             var members = Wf.ApiJit().JitCatalog();

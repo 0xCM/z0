@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static core;
-    using static NumericCast;
+    using static Numeric;
 
     public class t_vsllv : t_inx<t_vsllv>
     {

@@ -9,6 +9,17 @@ namespace Z0
 
     using static Root;
 
+    partial class XTend
+    {
+        /// <summary>
+        /// Returns 0 in a box
+        /// </summary>
+        /// <param name="kind">The numeric kind of 0 to be put into the box</param>
+        [MethodImpl(Inline), Op]
+        public static BoxedNumber ZBox(this NumericKind kind)
+            => BoxedNumber.define(NumericBox.rebox(byte.MinValue, kind), kind);
+   }
+
     /// <summary>
     /// A numbered box
     /// </summary>

@@ -61,7 +61,7 @@ namespace Z0
             else if(w == TypeWidth.W256)
                 return DynamicImmediate.EmbedVUnaryOpImm(w256, src,imm8, Identify(src));
             else
-                return root.none<DynamicDelegate>();
+                return Option.none<DynamicDelegate>();
         }
 
         Option<DynamicDelegate> IDynexus.CreateBinaryOp(TypeWidth w, MethodInfo src, byte imm8)
@@ -71,7 +71,7 @@ namespace Z0
             else if(w == TypeWidth.W256)
                 return DynamicImmediate.EmbedVBinaryOpImm(w256, src, imm8, Identify(src));
             else
-                return root.none<DynamicDelegate>();
+                return Option.none<DynamicDelegate>();
         }
 
         UnaryOp<F> IDynexus.EmitFixedUnary<F>(BufferToken dst, ApiCodeBlock src)

@@ -54,7 +54,7 @@ namespace Z0
         public ErrorEvent(string label, T data,  EventOrigin source)
         {
             EventId = (EventName, label, CorrelationToken.Default);
-            Exception = root.none<Exception>();
+            Exception = Option.none<Exception>();
             Payload = data;
             Source = source;
             Summary = Payload.Format();
@@ -64,7 +64,7 @@ namespace Z0
         public ErrorEvent(WfStepId step, T data, EventOrigin source)
         {
             EventId = (EventName, step, CorrelationToken.Default);
-            Exception = root.none<Exception>();
+            Exception = Option.none<Exception>();
             Payload = data;
             Source = source;
             Summary = Payload.Format();

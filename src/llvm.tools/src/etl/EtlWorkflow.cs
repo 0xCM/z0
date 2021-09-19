@@ -5,6 +5,7 @@
 namespace Z0.llvm
 {
     using static core;
+    using System;
     using static WsAtoms;
 
     using F = llvm.AsmRecordField;
@@ -13,7 +14,7 @@ namespace Z0.llvm
     {
         llvm.LlvmPaths LlvmPaths;
 
-        Index<llvm.OpCodeSpec> _LlvmOpCodes;
+        Index<OpCodeSpec> _LlvmOpCodes;
 
         LlvmRecordSources Sources;
 
@@ -51,6 +52,33 @@ namespace Z0.llvm
             datasets.OpCodeData = _LlvmOpCodes;
 
             return EmitFields(datasets);
+        }
+
+        public static ReadOnlySpan<AsmRecordFields> partition(ReadOnlySpan<AsmRecordField> src)
+        {
+            var count = src.Length;
+            var dst = list<AsmRecordFields>();
+            var subset = list<AsmRecordField>();
+            var current = AsmId.PHI;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var f = ref skip(src,i);
+                ref readonly var id = ref f.Id;
+                if(id != current)
+                {
+                    if(subset.Count != 0)
+                    {
+                        dst.Add(new AsmRecordFields(current, subset.ToArray()));
+                        subset.Clear();
+                        current = id;
+                    }
+                    subset.Add(f);
+                }
+
+            }
+            if(subset.Count != 0)
+                dst.Add(new AsmRecordFields(current, subset.ToArray()));
+            return dst.ViewDeposited();
         }
 
         Outcome EmitFields(in EtlDatasets src)

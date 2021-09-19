@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static gcpu;
     using static core;
-    using static NumericCast;
+    using static Numeric;
     using static Limits;
 
     /// <summary>

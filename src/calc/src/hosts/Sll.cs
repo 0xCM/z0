@@ -48,7 +48,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T offset)
-                => gmath.sll(a, NumericCast.force<T,byte>(offset));
+                => gmath.sll(a, Numeric.force<T,byte>(offset));
         }
 
         public readonly struct VSllr256<T> : IBinaryOp256D<T>
@@ -60,7 +60,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T offset)
-                => gmath.sll(a, NumericCast.force<T,byte>(offset));
+                => gmath.sll(a, Numeric.force<T,byte>(offset));
         }
 
         [Closures(Integers), Sll]

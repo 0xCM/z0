@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static Intervals;
+    using static core;
 
     public class t_partition : t_gmath<t_partition>
     {
@@ -116,7 +117,7 @@ namespace Z0
         {
             var points = Partition.measured(open(min, max), width);
             var len = gmath.sub(max,min);
-            var deltaSum = NumericLiterals.zero<T>();
+            var deltaSum = zero<T>();
             for(var i=0; i<points.Length - 1; i++)
             {
                 var left = points[i];

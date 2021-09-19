@@ -17,9 +17,9 @@ namespace Z0
         {
             public const string TableId = "diagnostic.methods";
 
-            public readonly Bit32 HasNativeCode;
+            public readonly bit HasNativeCode;
 
-            public readonly Bit32 IsDynamic;
+            public readonly bit IsDynamic;
 
             public readonly ushort SlotNumber;
 

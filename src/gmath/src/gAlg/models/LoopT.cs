@@ -6,22 +6,22 @@ namespace Z0
 {
     using System;
 
-    public struct Loop<I> : ITextual
-        where I : unmanaged, IComparable<I>
+    public struct Loop<T> : ITextual
+        where T : unmanaged, IComparable<T>
     {
-        public I LowerBound;
+        public T LowerBound;
 
         public bit LowerInclusive;
 
-        public I UpperBound;
+        public T UpperBound;
 
         public bit UpperInclusive;
 
-        public I Step;
+        public T Step;
 
         public string Format()
         {
-            var dst = TextTools.buffer();
+            var dst = text.buffer();
             dst.Append(LowerInclusive ? $"[{LowerBound}" : $"({LowerBound}");
             dst.Append(UpperInclusive ? $", {UpperBound}]" : $", {UpperBound})");
             dst.Append($" step({Step})");
