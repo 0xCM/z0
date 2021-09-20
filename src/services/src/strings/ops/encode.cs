@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    partial struct StringTables
+    partial struct StringTableOps
     {
-        public static void encode(StringTableSpec src, StreamWriter dst)
+        public static uint encode(StringTableSpec src, StreamWriter dst)
         {
             var entries = src.Entries;
-            var count = entries.Length;
+            var count = (uint)entries.Length;
             dst.WriteLine(string.Format("namespace {0}",src.Namespace));
             dst.WriteLine(Chars.LBrace);
             dst.WriteLine(string.Format("    using {0};", "System"));
@@ -22,6 +22,7 @@ namespace Z0
             dst.WriteLine();
             dst.WriteLine(create(src.TableName, src.Entries).Format(4));
             dst.WriteLine(Chars.RBrace);
+            return count;
         }
     }
 }

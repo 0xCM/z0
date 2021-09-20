@@ -91,7 +91,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var buffer = span<N>(src, n);
-            var pSrc = gptr(memory.first(buffer));
+            var pSrc = gptr(core.first(buffer));
             return new MemorySeg(pSrc, buffer.Length);
          }
 

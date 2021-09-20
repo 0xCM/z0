@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using Z0.Asm;
-    using llvm;
 
     using static Root;
     using static core;
@@ -33,6 +32,11 @@ namespace Z0
         }
 
 
+        protected override void Disposing()
+        {
+            Registers.Dispose();
+        }
+
         public void Emulate(ReadOnlySpan<char> spec)
         {
             var count = spec.Length;
@@ -41,6 +45,7 @@ namespace Z0
 
             }
         }
+
 
         [CmdOp(".regs")]
         Outcome Regs(CmdArgs args)

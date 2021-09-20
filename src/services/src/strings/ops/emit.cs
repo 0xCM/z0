@@ -10,20 +10,20 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct StringTables
+    partial struct StringTableOps
     {
-        public static Outcome emit(StringTableSpec spec, FS.FolderPath outdir)
-        {
-            var result = Outcome.Success;
-            var csdst = outdir + FS.file(spec.TableName.Format(), FS.Cs);
-            var rowdst = outdir + FS.file(spec.TableName.Format(), FS.Csv);
-            using var cswriter = csdst.Writer();
-            encode(spec, cswriter);
-            var count = spec.Entries.Length;
-            var buffer = alloc<StringTableRow>(count);
-            rows(spec,buffer);
-            Tables.emit(@readonly(buffer), StringTableRow.RenderWidths, rowdst);
-            return result;
-        }
+        // public static Outcome emit(StringTableSpec spec, FS.FolderPath outdir)
+        // {
+        //     var result = Outcome.Success;
+        //     var csdst = outdir + FS.file(spec.TableName.Format(), FS.Cs);
+        //     var rowdst = outdir + FS.file(spec.TableName.Format(), FS.Csv);
+        //     using var cswriter = csdst.Writer();
+        //     encode(spec, cswriter);
+        //     var count = spec.Entries.Length;
+        //     var buffer = alloc<StringTableRow>(count);
+        //     rows(spec, buffer);
+        //     Tables.emit(@readonly(buffer), StringTableRow.RenderWidths, rowdst);
+        //     return result;
+        // }
     }
 }

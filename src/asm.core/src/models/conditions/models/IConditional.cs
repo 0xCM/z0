@@ -17,6 +17,5 @@ namespace Z0.Asm
         byte Encoding {get;}
 
         bit Identical {get;}
-
     }
 }

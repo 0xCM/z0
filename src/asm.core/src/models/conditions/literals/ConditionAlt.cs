@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     using static BitSeq;
 
     using K = ConditionCodes.ConditionKind;

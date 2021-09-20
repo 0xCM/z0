@@ -12,7 +12,6 @@ namespace Z0
     using static Root;
     using static SFx;
 
-
     partial struct CalcHosts
     {
         [Closures(Integers), Bsll]

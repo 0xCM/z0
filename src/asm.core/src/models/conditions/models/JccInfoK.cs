@@ -11,17 +11,17 @@ namespace Z0.Asm
     using static core;
     using static BitFlow;
 
-    [StructLayout(LayoutKind.Sequential, Pack=1, Size =(int)SZ), Blittable(SZ)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public readonly struct JccInfo<K>
         where K : unmanaged
     {
         public const uint SZ = 1 + text7.SZ + NativeSize.SZ;
 
-        public K Kind {get;}
+        public readonly K Kind;
 
-        public text7 Name {get;}
+        public readonly text7 Name;
 
-        public NativeSize Size {get;}
+        public readonly NativeSize Size;
 
         [MethodImpl(Inline)]
         public JccInfo(K kind, text7 name, NativeSize size)

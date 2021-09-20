@@ -10,8 +10,9 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct StringTables
+    partial struct StringTableOps
     {
+        [Op]
         public static StringTableSpec specify(Identifier ns, Identifier table, ListItem<string>[] entries)
             => new StringTableSpec(ns, table, entries);
 

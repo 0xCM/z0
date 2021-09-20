@@ -6,7 +6,7 @@ namespace Z0
 {
     partial struct Grids
     {
-       /// <summary>
+        /// <summary>
         /// Defines a standard header for a grid map summary line
         /// </summary>
         /// <param name="colpad">The amount by which to pad each column</param>

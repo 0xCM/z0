@@ -71,16 +71,17 @@ namespace Z0
 
         void Run(N11 n)
         {
-            Task<uint> RunMachine(uint cycles)
-                => Task.Factory.StartNew(() => new Vmx128x2(1024, Rng.@default()).Run(cycles));
+            const uint CellCount = 1024;
+            const uint JobCount = 128;
+            const uint CycleCount = 64;
 
-            var jobs = 64u;
-            var cycles = 64u;
+            Task<uint> RunMachine(uint cycles)
+                => Task.Factory.StartNew(() => new Vmx128x2(CellCount, Rng.@default()).Run(cycles));
+
             var flow = Wf.Running();
             var clock = Time.counter(true);
-
             var count = 0ul;
-            var tasks = core.stream(0u,jobs).Map(i => RunMachine(cycles));
+            var tasks = core.stream(0u,JobCount).Map(i => RunMachine(CycleCount));
             Task.WaitAll(tasks);
             foreach(var t in tasks)
                 count += t.Result;
@@ -339,6 +340,18 @@ namespace Z0
             BitFormatChecks.create(Wf).Run(Rng.wyhash64());
         }
 
+
+        void Run(N24 n)
+        {
+            CalcBuilder.create(Wf).Calc(w128);
+        }
+
+        void Run(N25 n)
+        {
+            Fsm.example1();
+            Fsm.example2();
+        }
+
         void Run(string spec)
         {
             if(uint.TryParse(spec, out var n))
@@ -407,6 +420,12 @@ namespace Z0
                     break;
                     case 23:
                         Run(n23);
+                    break;
+                    case 24:
+                        Run(n24);
+                    break;
+                    case 25:
+                        Run(n25);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

@@ -13,9 +13,9 @@ namespace Z0
     public readonly struct CmdSpec<K>
         where K : unmanaged
     {
-        public K Id {get;}
+        public readonly K Id;
 
-        public StringIndex Args {get;}
+        public readonly StringIndex Args;
 
         [MethodImpl(Inline)]
         public CmdSpec(K id, StringIndex args)

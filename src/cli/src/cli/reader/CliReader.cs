@@ -77,11 +77,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => MemorySegs.view<byte>(Segment);
         }
-
-        public unsafe SRM.MemoryBlock MemoryBlock()
-            => SRM.block(Segment.BaseAddress.Pointer<byte>(), Segment.Length);
-
-        public unsafe Outcome<CliMetadataHeader> Version()
-            => SRM.ReadMetadataHeader(MemoryBlock());
     }
 }

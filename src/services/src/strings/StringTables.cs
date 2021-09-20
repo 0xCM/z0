@@ -4,11 +4,29 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [ApiHost]
-    public readonly partial struct StringTables
+    using static Root;
+    using static core;
+    using static StringTableOps;
+
+    public sealed class StringTables : AppService<StringTables>
     {
-        const NumericKind Closure = UnsignedInts;
+        public Outcome Emit(StringTableSpec spec, FS.FolderPath outdir)
+        {
+            var result = Outcome.Success;
+            var csdst = outdir + FS.file(spec.TableName.Format(), FS.Cs);
+            var rowdst = outdir + FS.file(spec.TableName.Format(), FS.Csv);
+            var emitting = EmittingFile(csdst);
+            using var cswriter = csdst.Writer();
+            var cscount = encode(spec, cswriter);
+            EmittedFile(emitting, cscount);
+
+            var buffer = alloc<StringTableRow>(spec.Entries.Length);
+            rows(spec, buffer);
+            TableEmit(@readonly(buffer), StringTableRow.RenderWidths, rowdst);
+            return result;
+        }
     }
 }

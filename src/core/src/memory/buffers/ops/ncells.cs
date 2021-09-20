@@ -13,12 +13,12 @@ namespace Z0
         /// <typeparam name="F">The buffer segment type</typeparam>
         [Op]
         public static NativeCells<F> ncells<F>(byte count)
-            where F : unmanaged, IDataCell
+            where F : unmanaged
         {
-            var bufferSize = (uint)default(F).Size;
-            var totalSize = count*(bufferSize);
+            var cellSize = core.size<F>();
+            var totalSize = count*(cellSize);
             var allocated = native(totalSize);
-            return new NativeCells<F>(allocated, count, bufferSize, totalSize);
+            return new NativeCells<F>(allocated, count, cellSize, totalSize);
         }
     }
 }

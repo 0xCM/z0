@@ -16,7 +16,7 @@ namespace Z0.Asm
         where T : unmanaged
     {
         DataWidth IMem.Width
-            => memory.width<T>();
+            => core.width<T>();
     }
 
     public interface IMem8<T> : IMem<T>

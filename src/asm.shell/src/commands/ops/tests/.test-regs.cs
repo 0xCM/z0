@@ -18,5 +18,15 @@ namespace Z0.Asm
 
             return result;
         }
+
+
+        Outcome TestRegOps(CmdArgs args)
+        {
+            var result = Outcome.Success;
+
+
+
+            return result;
+        }
     }
 }

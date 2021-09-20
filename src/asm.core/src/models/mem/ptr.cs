@@ -11,8 +11,8 @@ namespace Z0.Asm
 
     partial struct AsmOperands
     {
-        public readonly struct ptr<T> : ISizedTarget<ptr<T>>
-            where T : unmanaged, ISizedTarget<T>
+        public readonly struct ptr<T>
+            where T : unmanaged, IMemOp<T>
         {
             public readonly T Source;
 
@@ -25,13 +25,13 @@ namespace Z0.Asm
             public AsmAddress Target
             {
                 [MethodImpl(Inline)]
-                get => Source.Target;
+                get => Source.Address;
             }
 
             public NativeSize Size
             {
                 [MethodImpl(Inline)]
-                get => asm.asmsize<T>();
+                get => Source.Size;
             }
 
             [MethodImpl(Inline)]

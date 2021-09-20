@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
 
     using static core;
-    using llvm;
 
     partial class AsmCmdService
     {
@@ -20,7 +19,7 @@ namespace Z0.Asm
             var formatter = Tables.formatter<MemoryStrings>();
             Write(formatter.Format(strings, RecordFormatKind.KeyValuePairs));
 
-            result = CheckOffsets(strings,offsets);
+            result = CheckOffsets(strings, offsets);
             if(result.Fail)
                 return result;
             else
@@ -33,17 +32,17 @@ namespace Z0.Asm
             return result;
         }
 
-
-        static Outcome CheckOffsets(in MemoryStrings info, ReadOnlySpan<uint> offsets)
+        static Outcome CheckOffsets(in MemoryStrings src, ReadOnlySpan<uint> offsets)
         {
             var result = Outcome.Success;
-            for(var i=0; i<info.EntryCount; i++)
+            var count = src.EntryCount;
+            for(var i=0; i<count; i++)
             {
-                var actual = MemoryStrings.offset(info,i);
-                var expect = skip(offsets,i);
+                ref readonly var actual = ref MemoryStrings.offset(src,i);
+                ref readonly var expect = ref skip(offsets,i);
                 if(actual != expect)
                 {
-                    result = (false,$"{expect} != {actual}");
+                    result = (false, $"{expect} != {actual}");
                     return result;
                 }
             }

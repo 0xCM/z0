@@ -19,8 +19,13 @@ namespace Z0.Asm
             for(var i=0u; i<count; i++)
                 seek(items,i) = (i,skip(src,i).OpCode);
 
+
+            var svc = Wf.StringTables();
             var dst = Wf.EnvPaths.Codebase(PartId.AsmData) + FS.folder("src/sources/gen");
-            return StringTables.emit(StringTables.specify("Z0.Asm", "OpCodeStrings", items), dst);
+            var spec = StringTableOps.specify("Z0.Asm", "OpCodeStrings", items);
+            //result = StringTableOps.emit(StringTableOps.specify("Z0.Asm", "OpCodeStrings", items), dst);
+            result = svc.Emit(spec, dst);
+            return result;
         }
     }
 }

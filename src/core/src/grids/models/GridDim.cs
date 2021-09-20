@@ -20,6 +20,8 @@ namespace Z0
     {
         public static bool Parse(string s, out GridDim dst)
         {
+            dst = GridDim.Empty;
+
             var n = 0u;
             var parts = @readonly(s.Split('x'));
             var parser = NumericParser.create<uint>();

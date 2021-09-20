@@ -55,7 +55,6 @@ namespace Z0
         // until the heap is empty (_count == 0), at which time we've reached the
         // end of the sequence.
         //
-
         public PriorityQueue(int capacity, IComparer<T> comparer)
         {
             _heap = new T[capacity > 0 ? capacity : DefaultCapacity];
@@ -175,7 +174,7 @@ namespace Z0
         /// Calculate the parent node index given a child node's index, taking advantage
         /// of the "shape" property.
         /// </summary>
-        private static int HeapParent(int i)
+        static int HeapParent(int i)
         {
             return (i - 1) / 2;
         }
@@ -184,7 +183,7 @@ namespace Z0
         /// Calculate the left child's index given the parent's index, taking advantage of
         /// the "shape" property. If there is no left child, the return value is >= _count.
         /// </summary>
-        private static int HeapLeftChild(int i)
+        static int HeapLeftChild(int i)
         {
             return (i * 2) + 1;
         }
@@ -194,15 +193,18 @@ namespace Z0
         /// of the "shape" property (i.e., sibling nodes are always adjacent). If there is
         /// no right child, the return value >= _count.
         /// </summary>
-        private static int HeapRightFromLeft(int i)
+        static int HeapRightFromLeft(int i)
         {
             return i + 1;
         }
 
-        private T[] _heap;
-        private int _count;
-        private IComparer<T> _comparer;
-        private const int DefaultCapacity = 6;
+        T[] _heap;
+
+        int _count;
+
+        IComparer<T> _comparer;
+
+        const int DefaultCapacity = 6;
 
         public void PushRange(IEnumerable<T> list)
         {

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System.Linq;
 
     public readonly struct GridFormatter
@@ -21,9 +20,9 @@ namespace Z0
 
             for(var i = 0; i<points.Length; i++)
             {
-                var gs = CellCalcs.metrics((ushort)points[i].row, (ushort)points[i].col, (ushort)segwidth).Stats();
-                if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
-                    dst.AppendLine(Grids.format(gs));
+                var stats = CellCalcs.metrics((ushort)points[i].row, (ushort)points[i].col, (ushort)segwidth).Stats;
+                if(stats.Vec256Remainder == 0 || stats.Vec128Remainder == 0)
+                    dst.AppendLine(Grids.format(stats));
             }
         }
     }

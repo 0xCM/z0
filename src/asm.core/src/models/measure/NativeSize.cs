@@ -14,7 +14,7 @@ namespace Z0.Asm
     {
         public const uint SZ = PrimalSizes.U8;
 
-        public NativeSizeCode Code {get;}
+        public readonly NativeSizeCode Code;
 
         public BitWidth Width
         {

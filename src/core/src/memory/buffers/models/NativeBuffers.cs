@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public unsafe class NativeBuffers : IDisposable
     {
-        internal readonly NativeBuffer Allocation;
+        readonly NativeBuffer Allocation;
 
         readonly Index<BufferToken> Tokens;
 

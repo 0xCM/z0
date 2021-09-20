@@ -130,6 +130,5 @@ namespace Z0
                     throw no<W>();
             }
         }
-
     }
 }

@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static core;
-
     using static BitFlow;
 
     public class BlitMachine : AppService<BlitMachine>
@@ -18,7 +17,6 @@ namespace Z0
         IPolyrand Random;
 
         Index<byte> Buffer;
-
 
         uint BufferSize;
 

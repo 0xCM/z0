@@ -50,7 +50,7 @@ namespace Z0
         {
             var result = default(T);
             for(var i=0; i<src.Length; i++)
-                result = or<T>().Invoke(result, memory.skip(src,(uint)i));
+                result = or<T>().Invoke(result, core.skip(src,(uint)i));
             return result;
         }
 

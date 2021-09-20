@@ -13,39 +13,23 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
-        /// Rotates source cells rightward and deposits the result in a caller-supplied target
-        /// </summary>
-        /// <param name="src">The leading source cell</param>
-        /// <param name="offset">The amount to rotate</param>
-        /// <param name="dst">The leading target cell</param>
-        /// <param name="count">The cell count</param>
-        /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline), Rotr, Closures(Closure)]
-        public static void rotr<T>(in T src, byte offset, ref T dst, int count)
-            where T : unmanaged
-        {
-            for(var i=0; i<count; i++)
-               seek(dst, i) =  rotr(skip(src, i),offset);
-        }
-
-        /// <summary>
         /// Rotates bits in the source rightwards by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="count">The magnitude of the rotation</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Rotr, Closures(Closure)]
-        public static T rotr<T>(T src, byte offset)
+        public static T rotr<T>(T src, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.rotr(uint8(src), offset));
+                return generic<T>(Bits.rotr(uint8(src), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.rotr(uint16(src), offset));
+                return generic<T>(Bits.rotr(uint16(src), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.rotr(uint32(src), offset));
+                return generic<T>(Bits.rotr(uint32(src), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.rotr(uint64(src), offset));
+                return generic<T>(Bits.rotr(uint64(src), count));
             else
                 throw no<T>();
         }
@@ -54,20 +38,20 @@ namespace Z0
         /// Rotates bits in the source rightwards by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="count">The magnitude of the rotation</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Rotr, Closures(Closure)]
-        public static T rotr<T>(T src, byte offset, byte width)
+        public static T rotr<T>(T src, byte count, byte width)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.rotr(uint8(src), offset, width));
+                return generic<T>(Bits.rotr(uint8(src), count, width));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.rotr(uint16(src), offset, width));
+                return generic<T>(Bits.rotr(uint16(src), count, width));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.rotr(uint32(src), offset, width));
+                return generic<T>(Bits.rotr(uint32(src), count, width));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.rotr(uint64(src), offset, width));
+                return generic<T>(Bits.rotr(uint64(src), count, width));
             else
                 throw no<T>();
         }

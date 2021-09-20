@@ -119,7 +119,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Vector128<T> to<T>()
             where T : unmanaged
-                => memory.generic<T>(Storage);
+                => core.generic<T>(Storage);
 
         [MethodImpl(Inline)]
         T cell<T>(byte index)

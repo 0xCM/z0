@@ -16,13 +16,13 @@ namespace Z0.Asm
         {
             const string Pattern = "{0,-4} rel{1} [{2}:{3}b] => {4}";
             var result = Outcome.Success;
-            var jcc8 = Ws.Tables().Subdir(WsAtoms.machine) + FS.file("jcc8", FS.Txt);
+            var jcc8 = Ws.Tables().Subdir(machine) + FS.file("jcc8", FS.Txt);
             EmitConditionDocs(Conditions.jcc8(), jcc8);
             using var jcc8Reader = jcc8.AsciLineReader();
             while(jcc8Reader.Next(out var line))
                 Write(SymbolicRender.format(line.Content));
 
-            var jcc32 = Ws.Tables().Subdir(WsAtoms.machine) + FS.file("jcc32", FS.Txt);
+            var jcc32 = Ws.Tables().Subdir(machine) + FS.file("jcc32", FS.Txt);
             EmitConditionDocs(Conditions.jcc32(), jcc32);
             using var jcc32Reader = jcc32.AsciLineReader();
             while(jcc32Reader.Next(out var line))
@@ -48,6 +48,7 @@ namespace Z0.Asm
                     counter++;
                 }
             }
+            Emitted(dst);
             return counter;
         }
 

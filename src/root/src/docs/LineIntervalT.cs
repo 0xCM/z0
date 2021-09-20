@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct LineInterval<T>
     {
-        public T Id {get;}
+        public readonly T Id;
 
         public readonly LineNumber MinLine;
 

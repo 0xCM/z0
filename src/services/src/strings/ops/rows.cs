@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct StringTables
+    partial struct StringTableOps
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static StringTableRow row(in StringTable src, uint index)

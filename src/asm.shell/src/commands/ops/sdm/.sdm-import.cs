@@ -17,6 +17,7 @@ namespace Z0.Asm
             var details = Sdm.ImportSdmOpCodes(Ws.Tables().Subdir(machine));
             var forms = Sdm.EmitForms(details, dir);
             Sdm.EmitOpCodeStrings(details);
+
             var opcodes = SdmModels.opcodes(details).View;
             var count = opcodes.Length;
             var dst = dir + FS.file("sdm.opcodes", FS.Txt);

@@ -8,8 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".sdm-process")]
         Outcome ProcessSdm(CmdArgs args)
-        {
-            return Sdm.Process();
-        }
+            => Sdm.Process();
     }
 }

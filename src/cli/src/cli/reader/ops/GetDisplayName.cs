@@ -146,5 +146,4 @@ namespace Z0
         static bool IsWhiteSpace(char c)
             => c == ' ' || c == '\t' || c == '\r' || c == '\n';
     }
-
 }

@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct GridRegion
     {
-        public GridPoint UpperLeft {get;}
+        public readonly GridPoint UpperLeft;
 
-        public GridPoint LowerRight {get;}
+        public readonly GridPoint LowerRight;
 
         [MethodImpl(Inline)]
         public GridRegion(GridPoint upper, GridPoint lower)

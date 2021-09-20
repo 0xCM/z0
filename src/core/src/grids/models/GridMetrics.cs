@@ -77,6 +77,12 @@ namespace Z0
         public string Format()
             => EmptyString;
 
+        public GridStats Stats
+        {
+            [MethodImpl(Inline)]
+            get => Grids.stats(this);
+        }
+
         public GridDim Dim
         {
             [MethodImpl(Inline)]

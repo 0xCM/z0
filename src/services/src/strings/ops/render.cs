@@ -6,7 +6,7 @@ namespace Z0
 {
     using static CsPatterns;
 
-    partial struct StringTables
+    partial struct StringTableOps
     {
         public static void render(uint margin, in StringTable src, ITextBuffer dst)
         {

@@ -66,7 +66,7 @@ namespace Z0
         public static Index<ProcessMemoryRegion> pages(ReadOnlySpan<MemoryRangeInfo> src)
         {
             var count = src.Length;
-            var buffer = memory.alloc<ProcessMemoryRegion>(count);
+            var buffer = alloc<ProcessMemoryRegion>(count);
             ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
                 fill(skip(src,i), i, out seek(dst,i));

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Root;
     using static core;
 
     public class t_msb_off : t_bits<t_msb_off>
@@ -26,8 +23,8 @@ namespace Z0
         void msboff_check<T>()
             where T : unmanaged
         {
-            var width = memory.width<T>();
-            for(byte i=0; i<width; i++)
+            var w = width<T>();
+            for(byte i=0; i<w; i++)
                 msboff_check<T>(i);
         }
 

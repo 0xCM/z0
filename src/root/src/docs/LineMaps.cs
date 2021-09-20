@@ -16,8 +16,8 @@ namespace Z0
             => new LineInterval<T>(id,min,max);
 
         [MethodImpl(Inline)]
-        public static LineInterval interval(LineNumber min, LineNumber max)
-            => new LineInterval(min,max);
+        public static LineInterval interval(uint id, LineNumber min, LineNumber max)
+            => new LineInterval(id, min,max);
 
         [MethodImpl(Inline)]
         public static LineMap<T> map<T>(LineInterval<T>[] src)

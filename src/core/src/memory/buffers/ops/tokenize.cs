@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="size">The number of bytes covered by each represented buffer</param>
         /// <param name="count">The length of the buffer sequence</param>
         public static NativeCellToken<F>[] tokenize<F>(IntPtr @base, uint size, uint count)
-            where F : unmanaged, IDataCell
+            where F : unmanaged
         {
             var tokens = new NativeCellToken<F>[count];
             for(var i=0; i<count; i++)

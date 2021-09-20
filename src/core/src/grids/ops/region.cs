@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct Grids
     {
-
         [MethodImpl(Inline), Op]
         public static GridRegion region(GridPoint upper, GridPoint lower)
             => new GridRegion(upper, lower);

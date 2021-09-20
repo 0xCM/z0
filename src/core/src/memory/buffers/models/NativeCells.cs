@@ -12,29 +12,29 @@ namespace Z0
     using static core;
 
     public readonly ref struct NativeCells<F>
-        where F : unmanaged, IDataCell
+        where F : unmanaged
     {
         readonly Span<F> Cover;
 
-        readonly Span<NativeCellToken<F>> Tokens;
+        readonly Index<NativeCellToken<F>> Tokens;
 
         readonly NativeBuffer Allocation;
 
-        readonly byte BufferCount;
+        readonly byte CellCount;
 
-        readonly uint BufferSize;
+        readonly uint CellSize;
 
         readonly uint TotalSize;
 
         [MethodImpl(Inline)]
-        internal unsafe NativeCells(NativeBuffer allocation, byte bufferCount, uint bufferSize, uint totalSize)
+        internal unsafe NativeCells(NativeBuffer allocation, byte cellCount, uint cellSize, uint totalSize)
         {
             Allocation = allocation;
-            BufferSize = bufferSize;
-            BufferCount = bufferCount;
+            CellSize = cellSize;
+            CellCount = cellCount;
             TotalSize = totalSize;
             Cover = new Span<F>(allocation.Handle.ToPointer(), (int)TotalSize);
-            Tokens = Buffers.tokenize<F>(Allocation.Handle, BufferSize, BufferCount);
+            Tokens = Buffers.tokenize<F>(Allocation.Handle, CellSize, CellCount);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
         public unsafe Span<byte> Bytes(byte index)
-            => new Span<byte>(Token(index).Handle.ToPointer(), (int)BufferSize);
+            => new Span<byte>(Token(index).Handle.ToPointer(), (int)CellSize);
 
         /// <summary>
         /// Presents an index-identified buffer as a span of bytes
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
         public ref readonly NativeCellToken<F> Token(byte index)
-            => ref skip(Tokens, index);
+            => ref Tokens[index];
 
         /// <summary>
         /// Zero-fills a token-identified buffer and returns the cleared memory content

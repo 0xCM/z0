@@ -57,6 +57,13 @@ namespace Z0
             CellCount = cells;
         }
 
+        public GridMetrics Metrics
+        {
+            [MethodImpl(Inline)]
+            get => new GridMetrics(this);
+        }
+
+
         [MethodImpl(Inline)]
         public bool Equals(GridSpec rhs)
             => RowCount == rhs.RowCount && ColCount == rhs.ColCount

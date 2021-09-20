@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public GuidIndex(GuidHandle value)
         {
-            Value = memory.u32(value);
+            Value = core.u32(value);
         }
 
         [MethodImpl(Inline)]

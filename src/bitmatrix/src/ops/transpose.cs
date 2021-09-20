@@ -136,7 +136,7 @@ namespace Z0
         static Vector128<byte> Tr8x16Mask
         {
             [MethodImpl(Inline)]
-            get => cpu.vload(n128, memory.first(Tr8x16MaskBytes));
+            get => cpu.vload(n128, core.first(Tr8x16MaskBytes));
         }
 
         /// <summary>

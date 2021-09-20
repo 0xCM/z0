@@ -23,23 +23,6 @@ namespace Z0
         public static CliArchive archive(FS.FolderPath root)
             => new CliArchive(root);
 
-        [MethodImpl(Inline), Op]
-        public static MetadataReaderState state(Assembly src)
-            => SRM.initialize(src);
-
-        [MethodImpl(Inline)]
-        public static T row<T>()
-            where T : unmanaged, ICliRecord<T>
-                => new T();
-
-        [MethodImpl(Inline)]
-        public static ref T row<T>(out T dst)
-            where T : unmanaged, ICliRecord<T>
-        {
-            dst = row<T>();
-            return ref dst;
-        }
-
         [Op]
         public static bool valid(FS.FilePath src)
         {

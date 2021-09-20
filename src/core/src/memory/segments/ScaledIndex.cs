@@ -12,6 +12,10 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct ScaledIndex
     {
+        [MethodImpl(Inline), Op]
+        public static ScaledIndex define(W8 w, N4 n, sbyte dx, uint i)
+            => new ScaledIndex(8, 4, dx, i);
+
         public readonly uint Offset;
 
         public readonly sbyte Scale;

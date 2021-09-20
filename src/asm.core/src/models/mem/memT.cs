@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-
     using static Root;
 
     partial struct AsmOperands
@@ -16,6 +15,7 @@ namespace Z0.Asm
         /// <summary>
         /// Represents an operand expression of the form BaseReg + IndexReg*Scale + Displacement
         /// </summary>
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
         public readonly struct mem<T> : IMemOp<T>
             where T : unmanaged, IMemOp<T>
         {
@@ -34,6 +34,15 @@ namespace Z0.Asm
                 Index = index;
                 Scale = scale;
                 Disp = disp;
+            }
+
+            [MethodImpl(Inline)]
+            public mem(AsmAddress src)
+            {
+                Base = src.Base;
+                Index = src.Index;
+                Scale = src.Scale;
+                Disp = src.Disp;
             }
 
             public AddressSize AddressSize
@@ -55,11 +64,12 @@ namespace Z0.Asm
             }
 
             public string Format()
-                => AsmRender.format(this);
+                => AsmRender.format(Address);
 
             public override string ToString()
                 => Format();
 
+            [MethodImpl(Inline)]
             public static implicit operator AsmAddress(mem<T> src)
                 => new AsmAddress(src.Base, src.Index, src.Scale, src.Disp);
         }

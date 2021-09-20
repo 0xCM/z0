@@ -53,15 +53,15 @@ namespace Z0
             => Storage.ToList().GetEnumerator();
     }
 
-    public interface IIndex<I,T> : IIndex<T>
-        where I : unmanaged
+    public interface IIndex<K,T> : IIndex<T>
+        where K : unmanaged
     {
-        ref T this[I index] {get;}
+        ref T this[K index] {get;}
 
         ref T IIndex<T>.this[int index]
-            => ref this[@as<int,I>(index)];
+            => ref this[@as<int,K>(index)];
 
-        ref T Lookup(I index)
+        ref T Lookup(K index)
             => ref this[index];
     }
 

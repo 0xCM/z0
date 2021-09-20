@@ -14,11 +14,6 @@ namespace Z0.Asm
         {
             public AsmAddress Address {get;}
 
-            public NativeSize Size
-            {
-                [MethodImpl(Inline)]
-                get => asm.asmsize(16);
-            }
 
             [MethodImpl(Inline)]
             public m16(AsmAddress address)
@@ -27,8 +22,34 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
+            public m16(RegOp @base, RegOp index, MemoryScale scale, Disp disp)
+            {
+                Address = new AsmAddress(@base, index, scale, disp);
+            }
+
+            public NativeSize Size
+            {
+                [MethodImpl(Inline)]
+                get => asm.asmsize(16);
+            }
+
+            public string Format()
+                => AsmRender.format(Address);
+
+            public override string ToString()
+                => Format();
+
+            [MethodImpl(Inline)]
             public static implicit operator m16(AsmAddress src)
                 => new m16(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator m16(mem<m16> src)
+                => new m16(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator mem<m16>(m16 src)
+                => new mem<m16>(src.Address);
         }
     }
 }

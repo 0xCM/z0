@@ -18,7 +18,7 @@ namespace Z0
 
             var handle = MetadataTokens.BlobHandle(1);
             var i=0;
-            var values = root.list<CliBlob>();
+            var values = core.list<CliBlob>();
             do
             {
                 var value = MD.GetBlobBytes(handle);
@@ -40,7 +40,7 @@ namespace Z0
         public CliBlob ReadBlobInfo(BlobHandle handle, Count seq)
         {
             var offset = (Address32)MD.GetHeapOffset(handle);
-            var value = MD.GetBlobBytes(handle) ?? sys.empty<byte>();
+            var value = MD.GetBlobBytes(handle) ?? core.array<byte>();
             var size = (uint)MD.GetHeapSize(HeapIndex.Blob);
             var row = new CliBlob();
             row.Sequence = seq;

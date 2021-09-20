@@ -18,6 +18,5 @@ namespace Z0
         public FS.FilePath XmlPath;
 
         public ByteSize MetadatSize;
-
     }
 }

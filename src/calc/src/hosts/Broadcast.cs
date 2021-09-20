@@ -36,7 +36,6 @@ namespace Z0
         public readonly struct VBroadcast256<T> : IFactory256<T,T>
             where T : unmanaged
         {
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(T a)
                 => gcpu.vbroadcast(n256, a);

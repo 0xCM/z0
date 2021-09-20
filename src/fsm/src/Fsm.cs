@@ -18,7 +18,7 @@ namespace Z0
     [ApiHost]
     public readonly struct Fsm
     {
-        public void example1()
+        public static void example2()
         {
             var machineCount = Pow2.T04;
             var spec1 = Fsm.primal<ushort>("Fsm2",750,750,100,120,Pow2.T15);
@@ -28,7 +28,7 @@ namespace Z0
             term.inform($"A total of {count} events were processed");
         }
 
-        public void example2()
+        public static void example1()
         {
             var spec = new Fsm1Spec();
             var tasks = new Task[Pow2.T08];

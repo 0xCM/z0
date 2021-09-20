@@ -19,7 +19,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static MemoryStrings load(ReadOnlySpan<byte> offsets, ReadOnlySpan<char> chars)
-            => new MemoryStrings((uint)(offsets.Length/4), (uint)chars.Length, address(offsets), address(chars));
+            => new MemoryStrings(ecount(offsets), (uint)chars.Length, address(offsets), address(chars));
+
+        [MethodImpl(Inline), Op]
+        public static uint ecount(ReadOnlySpan<byte> offsets)
+            => (uint)(offsets.Length/4);
 
         [MethodImpl(Inline)]
         public static MemoryStrings<K> load<K>(ReadOnlySpan<byte> offsets, ReadOnlySpan<char> chars)

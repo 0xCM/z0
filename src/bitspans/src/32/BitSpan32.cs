@@ -37,7 +37,7 @@ namespace Z0
         ref Bit32 Head
         {
             [MethodImpl(Inline)]
-            get => ref memory.first(Data);
+            get => ref first(Data);
         }
 
         /// <summary>

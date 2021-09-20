@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vmergehi(Vector256<sbyte> x, Vector256<sbyte> y)
-            => UnpackHigh(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi8 (__m256i a, __m256i b) VPUNPCKHBW ymm, ymm, ymm/m256
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vmergehi(Vector256<byte> x, Vector256<byte> y)
-            => UnpackHigh(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi16 (__m256i a, __m256i b) VPUNPCKHWD ymm, ymm, ymm/m256
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vmergehi(Vector256<short> x, Vector256<short> y)
-            => UnpackHigh(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi16 (__m256i a, __m256i b) VPUNPCKHWD ymm, ymm, ymm/m256
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vmergehi(Vector256<ushort> x, Vector256<ushort> y)
-            => UnpackHigh(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi32 (__m256i a, __m256i b) VPUNPCKHDQ ymm, ymm, ymm/m256
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmergehi(Vector256<int> x, Vector256<int> y)
-            => UnpackHigh(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi32 (__m256i a, __m256i b) VPUNPCKHDQ ymm, ymm, ymm/m256
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vmergehi(Vector256<uint> x, Vector256<uint> y)
-            => UnpackHigh(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi64 (__m256i a, __m256i b) VPUNPCKHQDQ ymm, ymm, ymm/m256
@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmergehi(Vector256<ulong> x, Vector256<ulong> y)
-             => UnpackHigh(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+             => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// __m256i _mm256_unpackhi_epi64 (__m256i a, __m256i b) VPUNPCKHQDQ ymm, ymm, ymm/m256
@@ -158,6 +158,6 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmergehi(Vector256<long> x, Vector256<long> y)
-            => UnpackHigh(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+            => UnpackHigh(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
     }
 }

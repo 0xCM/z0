@@ -43,8 +43,12 @@ namespace Z0.Asm
                 "ymm1" => "ymm",
                 "ymm2" => "ymm",
                 "ymm2/m256" => "ymm/m256",
+                "ymm3/m256/m64bcst" => "ymm/m256/m64bcst",
                 "zmm1" => "zmm",
                 "zmm2" => "zmm",
+                "zmm3" => "zmm",
+                "xmm3/m128/m32bcst" => "xmm/m128/m32bcst",
+                "xmm3/m128/m64bcst" => "xmm/m128/m64bcst",
                 _ => src
             };
 
@@ -90,7 +94,6 @@ namespace Z0.Asm
 
                         case "Instruction":
                             var monic = text.trim(text.ifempty(text.left(content, Chars.Space), content));
-                            //target.Sig = content;
                             var ops = operands(content);
                             if(nonempty(ops))
                                 target.Sig = string.Format("{0} {1}", monic, ops);
@@ -114,6 +117,7 @@ namespace Z0.Asm
                             target.Mode64 = content;
                         break;
 
+                        case "64/32 -bit Mode":
                         case "64/32 bit Mode Support":
                             target.Mode64x32 = content;
                         break;

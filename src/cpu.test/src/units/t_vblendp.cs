@@ -439,6 +439,7 @@ namespace Z0
             */
         }
 
+
         protected void vblendp_check<P,S,T>(N128 w, P np, S pattern, T t = default)
             where T : unmanaged
             where S : unmanaged

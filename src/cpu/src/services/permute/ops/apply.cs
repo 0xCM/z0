@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged
         {
             var len = swaps.Length;
-            ref var swap = ref memory.first(swaps);
+            ref var swap = ref first(swaps);
             for(var k = 0u; k<len; k++)
             {
                 (var i, var j) = skip(swap, k);

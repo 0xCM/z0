@@ -7,6 +7,7 @@ namespace Z0
     public enum ScaleFactor : byte
     {
         None = 0,
+
         S1 = 1,
 
         S2 = 2,

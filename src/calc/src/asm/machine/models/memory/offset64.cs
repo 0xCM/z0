@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
     using static RegModels;
 
     partial struct MemModels
@@ -62,7 +63,7 @@ namespace Z0.Asm
             public MemoryAddress EffectiveAddress
             {
                 [MethodImpl(Inline)]
-                get =>  Base.Content + (Index.Content * (byte)Scale) + memory.u32(Dx);
+                get =>  Base.Content + (Index.Content * (byte)Scale) + u32(Dx);
             }
         }
 

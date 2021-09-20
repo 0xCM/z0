@@ -23,15 +23,6 @@ namespace Z0
             => cover<T>(@base.Pointer(), count);
 
         /// <summary>
-        /// Creates a span over a memory segment
-        /// </summary>
-        /// <param name="base">The segment base address</param>
-        /// <param name="size">The length of the segment in byte</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<char> cover(string src)
-            => cover<char>(pchar(src), (uint)src.Length);
-
-        /// <summary>
         /// Creates a <see cref='Span{T}'/> over a <typeparamref name='T'/> measured memory segment sourced from a pointer
         /// </summary>
         /// <param name="pSrc">A pointer to the leading cell</param>

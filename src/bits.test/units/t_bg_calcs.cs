@@ -87,13 +87,13 @@ namespace Z0
 
             ref readonly var src = ref first64u(data);
             var spec = CellCalcs.gridspec(n8, n8, byte.MinValue);
-            var map = spec.Map();
+            var metrics = spec.Metrics;
             var state = bit.Off;
-            Claim.eq(map.CellCount, data.Length * width<byte>());
-            for(var row = 0; row < map.RowCount; row++)
-            for(var col = 0; col < map.ColCount; col++)
+            Claim.eq(metrics.CellCount, data.Length * width<byte>());
+            for(var row = 0; row < metrics.RowCount; row++)
+            for(var col = 0; col < metrics.ColCount; col++)
             {
-                var actual = bit.test(src, (byte)map.Position(row,col));
+                var actual = bit.test(src, (byte)metrics.Position(row,col));
                 Claim.require(actual == state);
                 state = !state;
             }

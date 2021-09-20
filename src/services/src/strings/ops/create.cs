@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct StringTables
+    partial struct StringTableOps
     {
         public static StringTable create(ReadOnlySpan<string> lines, string name, char delimiter)
         {
@@ -19,7 +19,7 @@ namespace Z0
                 buffer.AddRange(skip(lines,i).SplitClean(delimiter).Select(x => x.Trim()));
 
             var entries = buffer.ViewDeposited();
-            var table = StringTables.create(name, entries, identifiers(lines,delimiter));
+            var table = StringTableOps.create(name, entries, identifiers(lines,delimiter));
             var count = Require.equal(buffer.Count, (int)table.EntryCount);
             for(var i=0u; i<count; i++)
             {

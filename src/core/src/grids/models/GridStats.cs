@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct GridStats
@@ -67,6 +70,7 @@ namespace Z0
         /// </summary>
         public uint Vec256Remainder;
 
+        [MethodImpl(Inline)]
         public GridStats(ushort RowCount, ushort ColCount,  ushort SegWidth, uint PointCount,
             uint StorageSegs, uint StorageBits, uint StorageBytes, uint Vec128Count, uint Vec128Remainder, uint Vec256Count, uint Vec256Remainder)
         {

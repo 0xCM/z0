@@ -45,7 +45,7 @@ namespace Z0.llvm
                 {
                     ref readonly var l0 = ref first(buffer);
                     ref readonly var l1 = ref skip(buffer,k-1);
-                    var interval = LineMaps.interval(id,l0.LineNumber, l1.LineNumber);
+                    var interval = LineMaps.interval(id, l0.LineNumber, l1.LineNumber);
                     intervals.Add(interval);
                 }
             }

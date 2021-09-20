@@ -14,36 +14,36 @@ namespace Z0
         /// <summary>
         /// Rotates source bits rightward
         /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The rotation magnitude</param>
+        /// <param name="src">The source bitvector</param>
+        /// <param name="count">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Rotr, Closures(Closure)]
-        public static BitVector<T> rotr<T>(BitVector<T> x, byte offset)
+        public static BitVector<T> rotr<T>(BitVector<T> src, byte count)
             where T : unmanaged
-                => gbits.rotr(x.State, offset);
+                => gbits.rotr(src.State, count);
 
         /// <summary>
         /// Rotates source bits rightward
         /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The rotation magnitude</param>
+        /// <param name="src">The source bitvector</param>
+        /// <param name="count">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> rotr<N,T>(BitVector<N,T> x, byte offset)
+        public static BitVector<N,T> rotr<N,T>(BitVector<N,T> src, byte count)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.rotr(x.State, offset, (byte)x.Width);
+                => gbits.rotr(src.State, count, (byte)src.Width);
 
         /// <summary>
         /// Rotates source bits rightward
         /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The rotation magnitude</param>
+        /// <param name="src">The source bitvector</param>
+        /// <param name="count">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector128<N,T> rotr<N,T>(in BitVector128<N,T> x, byte offset)
+        public static BitVector128<N,T> rotr<N,T>(in BitVector128<N,T> src, byte count)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gcpu.vrotrx(x.State, offset);
+                => gcpu.vrotrx(src.State, count);
     }
 }

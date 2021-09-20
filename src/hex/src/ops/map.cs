@@ -11,11 +11,11 @@ namespace Z0
 
     partial struct Hex
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool map(ReadOnlySpan<char> src, Span<HexDigitValue> dst)
             => digits(src, dst);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool map(HexString src, Span<HexDigitValue> dst)
             => digits(src.Data, dst);
     }

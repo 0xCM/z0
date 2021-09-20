@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct StringTables
+    partial struct StringTableOps
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(StringTable src, int i)

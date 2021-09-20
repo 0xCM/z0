@@ -70,9 +70,7 @@ namespace Z0
             var buffer = alloc<DocLibEntry>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
-            {
                 seek(dst,i) =new DocLibEntry(skip(names,i), Path.GetExtension(skip(names,i)));
-            }
             return buffer;
         }
 

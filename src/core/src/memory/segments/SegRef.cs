@@ -10,6 +10,9 @@ namespace Z0
     using static Root;
     using static core;
 
+    /// <summary>
+    /// Defines a reference to a memory segment
+    /// </summary>
     public readonly struct SegRef : ISegRef<byte>
     {
         public MemoryAddress Address {get;}

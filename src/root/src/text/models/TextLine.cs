@@ -20,16 +20,6 @@ namespace Z0
         public const byte NumberWidth = 8;
 
         /// <summary>
-        /// The character that separates the number and the text
-        /// </summary>
-        public const char Delimiter = Chars.Colon;
-
-        /// <summary>
-        /// The 0-based position of the delimiter
-        /// </summary>
-        public const byte DelimiterPos = NumberWidth + 1;
-
-        /// <summary>
         /// The line number of the data source from which the line was extracted
         /// </summary>
         public LineNumber LineNumber {get;}

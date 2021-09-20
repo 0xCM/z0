@@ -14,15 +14,15 @@ namespace Z0
 
     public sealed class QueueCache<T>
     {
+        public static QueueCache<T> create()
+            => new QueueCache<T>();
+
         readonly ConcurrentQueue<T> Queue;
 
         public QueueCache()
         {
             Queue = new ConcurrentQueue<T>();
         }
-
-        public static QueueCache<T> create()
-            => new QueueCache<T>();
 
         public uint Count
             => (uint)Queue.Count;

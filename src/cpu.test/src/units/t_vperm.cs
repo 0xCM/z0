@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
+    using static core;
 
     public class t_vperm : t_permute<t_vperm>
     {
@@ -197,7 +198,7 @@ namespace Z0
         {
             var src = gcpu.vinc<T>(n).ToSpan();
             var dst = src.Swap(swaps);
-            return gcpu.vload(n, in memory.first(src));
+            return gcpu.vload(n, in first(src));
         }
 
         [MethodImpl(Inline)]

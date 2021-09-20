@@ -19,16 +19,14 @@ namespace Z0
             => render(src, name, dst);
 
         public static void render(in StringIndex src, ITextBuffer dst)
-        {
-            render(src, EmptyString, dst);
-        }
+            => render(src, EmptyString, dst);
 
         public static void render(in StringIndex src, Name name, ITextBuffer dst)
         {
             var view = src.View;
             var count = view.Length;
             if(name.IsNonEmpty)
-                dst.AppendFormat("{0}[{1}]=",name,count);
+                dst.AppendFormat("{0}[{1}]=", name, count);
             dst.Append(Chars.LBrace);
             for(var i=0; i<count; i++)
             {
@@ -39,11 +37,6 @@ namespace Z0
             }
 
             dst.Append(Chars.RBrace);
-        }
-
-        public static ReadOnlySpan<byte> serialize(in StringIndex src)
-        {
-            return default;
         }
 
         readonly Index<string> Data;

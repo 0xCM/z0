@@ -22,7 +22,7 @@ namespace Z0.Asm
         public static MemoryScale from(ScaleFactor factor)
             => new MemoryScale(factor);
 
-        public ScaleFactor Factor {get;}
+        public readonly ScaleFactor Factor;
 
         [MethodImpl(Inline)]
         public MemoryScale(ScaleFactor kind)

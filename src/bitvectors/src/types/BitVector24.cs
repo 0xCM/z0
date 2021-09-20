@@ -126,7 +126,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.slice(memory.bytes(Data),0,3);
+            get => slice(bytes(Data),0,3);
         }
 
         /// <summary>

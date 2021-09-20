@@ -88,6 +88,12 @@ namespace Z0.Asm
             get => OpClass == 0;
         }
 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => OpClass != 0;
+        }
+
         public text7 Name
         {
             [MethodImpl(Inline)]
