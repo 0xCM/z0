@@ -17,12 +17,6 @@ namespace Z0
             => (kind, src);
 
         [MethodImpl(Inline), Op]
-        public static FileFlow<S,T> flow<S,T>(S src, T dst)
-            where S : struct, ITypedFile
-            where T : struct, ITypedFile
-                => (src, dst);
-
-        [MethodImpl(Inline), Op]
         public static FileFlow flow(TypedFile src, TypedFile dst)
             => (src, dst);
 
@@ -33,6 +27,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FileFlow flow(Arrow<TypedFile> src)
             => flow(src.Source, src.Target);
-
     }
 }

@@ -215,9 +215,6 @@ public enum PartId : byte
     [Symbol("cli.shell")]
     CliShell = 69,
 
-    [Symbol("engine.run")]
-    EngineRun = 70,
-
     [Symbol("bitvectors")]
     BitVectors = 71,
 
@@ -232,12 +229,6 @@ public enum PartId : byte
 
     [Symbol("bitpack")]
     BitPack = 75,
-
-    [Symbol("bitfields")]
-    BitFields = 76,
-
-    [Symbol("bitfields.shell")]
-    BitFieldsShell = 77,
 
     [Symbol("bitmatrix")]
     BitMatrix = 78,
@@ -296,20 +287,14 @@ public enum PartId : byte
     [Symbol("bitnumbers")]
     BitNumbers = 96,
 
-    [Symbol("bitnumbers.shell")]
-    BitNumbersShell = 97,
-
-    [Symbol("circuits")]
-    Circuits = 98,
-
     [Symbol("workers")]
     Workers = 99,
 
     [Symbol("capture.checks")]
     CaptureChecks = 100,
 
-    [Symbol("dynamic.shell")]
-    DynamicShell = 101,
+    [Symbol("grids")]
+    Grids = 101,
 
     [Symbol("validity")]
     Validity = 102,

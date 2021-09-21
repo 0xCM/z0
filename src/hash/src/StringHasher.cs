@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    public readonly struct StringHash : IHashFunction<string,uint>
+    public readonly struct StringHasher : IHashFunction<string,uint>
     {
         [MethodImpl(Inline)]
         public uint Compute(in string src)

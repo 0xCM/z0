@@ -11,10 +11,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static BitFlow;
-
-    using SQ = SymbolicQuery;
-    using SR = SymbolicRender;
 
     partial struct Tooling
     {
@@ -34,7 +30,7 @@ namespace Z0
             if (!spec.WorkingDir.IsNonEmpty)
                 process.StartInfo.WorkingDirectory = spec.WorkingDir.Name;
 
-            root.iter(spec.EnvVars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
+            iter(spec.EnvVars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
             process.OutputDataReceived += (s,d) => status(d.Data ?? EmptyString);
             process.ErrorDataReceived += (s,d) => error(d.Data ?? EmptyString);
             process.Start();

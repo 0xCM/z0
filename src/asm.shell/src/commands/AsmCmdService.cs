@@ -64,7 +64,7 @@ namespace Z0.Asm
 
         IWorkspace LogWs;
 
-        IProjectWs ProjectWs;
+        IProjectSet ProjectWs;
 
         IWorkspace DataSources;
 

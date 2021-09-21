@@ -13,8 +13,8 @@ namespace Z0.Asm
             return result;
         }
 
-        [CmdOp(".llvm-list-gen")]
+        [CmdOp(".llvm-list-import")]
         Outcome LlvmListGen(CmdArgs args)
-            => LlvmEtl.GenLists();
+            => LlvmEtl.ImportLists();
     }
 }

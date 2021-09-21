@@ -18,6 +18,8 @@ namespace Z0
 
         Projects,
 
+        Project,
+
         Tools,
 
         Test,

@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static ISourceStream<T> NonZStream<T>(this IDomainSource source, Interval<T> domain)
             where T : unmanaged
-                => SourceStreams.create<T>(source, domain, x => root.nonz(x));
+                => SourceStreams.create<T>(source, domain, x => Rng.nonz(x));
 
         /// <summary>
         /// Queries the source for the next nonzero value within a range

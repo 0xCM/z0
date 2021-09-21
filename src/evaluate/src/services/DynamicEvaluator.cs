@@ -33,7 +33,7 @@ namespace Z0
             var stream = Source.Cells<F>();
             var points = stream.Take(RepCount);
             var checker = CheckEqual.Checker;
-            root.iter(points, x => checker.Eq(f(x), g(x)));
+            iter(points, x => checker.Eq(f(x), g(x)));
         }
 
         public Index<UnaryPairEval<UnaryOperatorClass,F,bit>> EvalEquality<F>(UnaryOperatorClass k, ApiCodeBlock a, ApiCodeBlock b)

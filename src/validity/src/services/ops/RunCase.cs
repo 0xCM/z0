@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+    using static core;
 
     partial class TestApp<A>
     {
@@ -15,13 +16,13 @@ namespace Z0
             var exectime = Duration.Zero;
             var casename = TestCaseIdentity.from(method);
             var clock = Time.counter(false);
-            var messages = root.list<IAppMsg>();
-            var outcomes = root.list<TestCaseRecord>();
+            var messages = list<IAppMsg>();
+            var outcomes = list<TestCaseRecord>();
 
             if(DiagnosticMode)
                 term.print($"Executing case {unit.HostType.Name}/{method.Name}");
 
-            var started = root.now();
+            var started = now();
             var finished = started;
             try
             {
@@ -30,7 +31,7 @@ namespace Z0
                 clock.Start();
                 method.Invoke(unit,null);
                 clock.Stop();
-                finished = root.now();
+                finished = now();
 
                 messages.AddRange(unit.Dequeue());
                 messages.Add(PostCase(casename, clock.Span(), started, finished));
@@ -46,7 +47,7 @@ namespace Z0
             catch(Exception e)
             {
                 clock.Stop();
-                finished = root.now();
+                finished = now();
                 var message = format(e);
                 messages.AddRange(unit.Dequeue());
                 messages.AddRange(FormatErrors(e, method));

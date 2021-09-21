@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Bit)" />
-    <ProjectReference Include="$(Grids)" />
   </ItemGroup>
 
 </Project>

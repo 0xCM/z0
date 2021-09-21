@@ -78,7 +78,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> NonZeroSpan<T>(this IDomainSource src, int length, Interval<T> domain)
             where T : unmanaged
-                => src.Span<T>(length, domain, x => root.nonz(x));
+                => src.Span<T>(length, domain, x => Rng.nonz(x));
 
         /// <summary>
         /// Allocates and produces a punctured span populated with nonzero random values
@@ -90,6 +90,6 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> NonZeroSpan<T>(this IDomainSource source, int length)
             where T : unmanaged
-                => source.Span<T>(length, ClosedInterval<T>.Full, x => root.nonz(x));
+                => source.Span<T>(length, ClosedInterval<T>.Full, x => Rng.nonz(x));
     }
 }

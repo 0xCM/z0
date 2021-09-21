@@ -71,6 +71,7 @@
     <Gen>$(Src)gen/z0.gen.csproj</Gen>
     <Glue>$(Src)glue/z0.glue.csproj</Glue>
     <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
+    <Grids>$(Src)grids/z0.grids.csproj</Grids>
     <GVec>$(Src)gvec/z0.gvec.csproj</GVec>
 
     <Hash>$(Src)hash/z0.hash.csproj</Hash>

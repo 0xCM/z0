@@ -13,11 +13,15 @@ namespace Z0
 
     partial struct Tables
     {
+        [Op, Closures(Closure)]
+        static DataList<T> datalist<T>(uint? capacity = null)
+            => DataList.create<T>(capacity);
+
         [Op]
         public static ReadOnlySpan<ReflectedTable> discover(ReadOnlySpan<Assembly> src)
         {
             var count = src.Length;
-            var dst = root.datalist<ReflectedTable>();
+            var dst = datalist<ReflectedTable>();
             for(var i=0; i<count; i++)
                 discover(skip(src,i), dst);
             return dst.View();
@@ -28,7 +32,7 @@ namespace Z0
         {
             var types = @readonly(src.Types().Tagged<RecordAttribute>());
             var count = types.Length;
-            var dst = root.datalist<ReflectedTable>();
+            var dst = datalist<ReflectedTable>();
             discover(src, dst);
             return dst.View();
         }

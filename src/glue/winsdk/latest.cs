@@ -9,6 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.IO;
 
+    using static core;
+
     partial class WinSdk
     {
         [Op]
@@ -49,8 +51,8 @@ namespace Z0
                     return new WinSdkInfo()
                     {
                         Version = version.Value,
-                        IncPaths = root.array(sharedIncDir, umIncDir, ucrtIncDir),
-                        LibPaths = root.array(umLibDir, ucrtLibDir),
+                        IncPaths = array(sharedIncDir, umIncDir, ucrtIncDir),
+                        LibPaths = array(umLibDir, ucrtLibDir),
                     };
                 }
             }

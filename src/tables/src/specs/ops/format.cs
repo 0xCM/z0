@@ -52,7 +52,7 @@ namespace Z0
         {
             var buffer = text.buffer();
             buffer.Append(src.Id.Format());
-            root.iter(src.Storage, part => buffer.Append(string.Format(" | {0}", part.Format())));
+            iter(src.Storage, part => buffer.Append(string.Format(" | {0}", part.Format())));
             return buffer.Emit();
         }
 

@@ -53,7 +53,7 @@ namespace Z0.Asm
                     from d in Decoder.Decode(c)
                     select d;
             else
-                return root.none<AsmRoutine>();
+                return Option.none<AsmRoutine>();
         }
 
         public AsmRoutine[] UnaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params imm8R[] imm8r)
@@ -77,7 +77,7 @@ namespace Z0.Asm
                     from d in Decoder.Decode(c)
                     select d;
             else
-                return root.none<AsmRoutine>();
+                return Option.none<AsmRoutine>();
         }
 
         public AsmRoutine[] BinaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params imm8R[] imm8r)

@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Root;
+    using static core;
 
     public class WfBroker : IEventBroker
     {
@@ -66,12 +67,12 @@ namespace Z0
 
         void Emit(IWfEvent e)
         {
-            root.iter(Receivers.Values, r => r(e));
+            iter(Receivers.Values, r => r(e));
         }
 
         void Emit(IAppEvent e)
         {
-            root.iter(Receivers.Values, r => r(e));
+            iter(Receivers.Values, r => r(e));
         }
 
         public void Raise(IWfEvent e)

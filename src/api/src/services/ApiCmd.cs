@@ -30,7 +30,7 @@ namespace Z0
 
         protected override void OnInit()
         {
-            _ApiAssets = root.lazy(Wf.ApiAssets);
+            _ApiAssets = core.lazy(Wf.ApiAssets);
         }
 
         [Action(K.EmitAssetContent)]

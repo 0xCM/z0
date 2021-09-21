@@ -5,24 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    [Flags]
-    public enum RelationKind : uint
+    using static Root;
+
+    partial struct core
     {
-        None,
-
-        Unary = 1,
-
-        Binary = 2,
-
-        Ternary = 4,
-
-        Directed = 8,
-
-        Unique = 16,
-
-        ForeignKey = 32 | Binary | Directed,
-
-        Join = 64
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Lazy<T> lazy<T>(Func<T> f)
+            => new Lazy<T>(f);
     }
 }

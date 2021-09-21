@@ -19,13 +19,13 @@ namespace Z0
                 if(AssetPaths.Count != 0)
                 {
                     dst.AppendLine("assets:");
-                    root.iter(AssetPaths, p => dst.AppendLine(string.Format("{0}", p.ToUri())));
+                    core.iter(AssetPaths, p => dst.AppendLine(string.Format("{0}", p.ToUri())));
                 }
 
                 if(RuntimeFiles.Count != 0)
                 {
                     dst.AppendLine("runtime_files:");
-                    root.iter(RuntimeFiles, f => dst.AppendLine(string.Format("{0}", f.Format())));
+                    core.iter(RuntimeFiles, f => dst.AppendLine(string.Format("{0}", f.Format())));
                 }
             }
         }

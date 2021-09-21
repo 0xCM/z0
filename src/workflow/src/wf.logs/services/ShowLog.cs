@@ -26,9 +26,9 @@ namespace Z0
         internal ShowLog(IWfRuntime wf, FS.FilePath dst)
         {
             Wf = wf;
-            _Writer = root.lazy(() => dst.Writer());
+            _Writer = core.lazy(() => dst.Writer());
             Target = dst;
-            _Buffer = root.lazy(() => text.buffer());
+            _Buffer = core.lazy(() => text.buffer());
         }
 
         public void Dispose()

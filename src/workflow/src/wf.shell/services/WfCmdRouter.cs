@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Concurrent;
 
+    using static core;
+
     public sealed class WfCmdRouter : AppService<WfCmdRouter>, ICmdRouter<WfCmdRouter>
     {
         ConcurrentDictionary<CmdId,ICmdReactor> Nodes;
@@ -38,7 +40,7 @@ namespace Z0
                 if(Nodes.TryAdd(reactor.CmdId, reactor))
                     count++;
             }
-            root.iter(src, cmd => Nodes.TryAdd(cmd.CmdId, cmd));
+            iter(src, cmd => Nodes.TryAdd(cmd.CmdId, cmd));
         }
 
         public CmdResult Dispatch(ICmd cmd, string msg)

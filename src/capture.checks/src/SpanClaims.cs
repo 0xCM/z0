@@ -6,15 +6,17 @@ namespace Z0
 {
     using System;
 
+    using static core;
+
     public readonly struct SpanClaims : ICheckSpans
     {
         public static void eq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
             where T : unmanaged
-                => root.iter(a,b, (a,b) => NumericClaims.eq(a,b));
+                => iter(a,b, (a,b) => NumericClaims.eq(a,b));
 
         public static void eq<T>(Span<T> a, Span<T> b)
             where T : unmanaged
-                => root.iter(a,b, (a,b) => NumericClaims.eq(a,b));
+                => iter(a,b, (a,b) => NumericClaims.eq(a,b));
 
         public static void eq<N,T>(NatSpan<N,T> a, NatSpan<N,T> b)
             where T : unmanaged

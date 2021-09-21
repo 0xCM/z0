@@ -16,8 +16,8 @@ namespace Z0
 
             public void Render(ITextBuffer dst)
             {
-                root.iter(AssemblyGroups, x => x.Render(dst));
-                root.iter(NativeLibraries, x => x.Render(dst));
+                core.iter(AssemblyGroups, x => x.Render(dst));
+                core.iter(NativeLibraries, x => x.Render(dst));
             }
         }
     }

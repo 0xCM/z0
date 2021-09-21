@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static TestCaseRecords;
+    using static core;
 
     partial class TestApp<A>
     {
@@ -37,7 +38,7 @@ namespace Z0
 
         static AppMsg PreCase(string testName, DateTime start)
         {
-            var fields = root.array(
+            var fields = array(
                 FormatName(testName),
                 FormatStatus("executing"),
                 DurationPlaceholder,
@@ -49,7 +50,7 @@ namespace Z0
 
         static AppMsg PostCase(string testName, TimeSpan elapsed, DateTime start, DateTime end)
         {
-            var fields = root.array(
+            var fields = array(
                 FormatName(testName),
                 FormatStatus("executed"),
                 Format(elapsed),
@@ -63,7 +64,7 @@ namespace Z0
 
         static AppMsg PostUnit(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
         {
-            var fields = root.array(
+            var fields = array(
                 FormatName(hosturi),
                 FormatStatus("completed"),
                 Format(elapsed),

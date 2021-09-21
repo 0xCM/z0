@@ -13,8 +13,8 @@ namespace Z0
     public readonly struct HashFunctions
     {
         [MethodImpl(Inline), Op]
-        public static StringHash strings()
-            => default(StringHash);
+        public static StringHasher strings()
+            => default(StringHasher);
 
         public static uint collisions<S,T>(Index<S> src, IHashFunction<S,T> hash)
             where T : unmanaged
@@ -80,7 +80,7 @@ namespace Z0
             return result;
         }
 
-        public static HashedIndex<T> perfect<T>(ReadOnlySpan<T> src, Func<T,string> f, StringHash hasher)
+        public static HashedIndex<T> perfect<T>(ReadOnlySpan<T> src, Func<T,string> f, StringHasher hasher)
         {
             var count = src.Length;
             var buffer = alloc<HashCode<T>>(count);

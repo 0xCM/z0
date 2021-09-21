@@ -74,7 +74,7 @@ namespace Z0
         {
             var def =  src.GenericDefinition2();
             if(def == typeof(void))
-                return root.none<ApiGridKind>();
+                return Option.none<ApiGridKind>();
 
             if(def == typeof(BitGrid<>))
                 return Z0.ApiGridKind.NumericGeneric;
@@ -107,7 +107,7 @@ namespace Z0
             else if(def == typeof(SubGrid256<,,>))
                 return Z0.ApiGridKind.Subgrid256;
             else
-                return root.none<ApiGridKind>();
+                return Option.none<ApiGridKind>();
         }
 
         [MethodImpl(Inline), Op]

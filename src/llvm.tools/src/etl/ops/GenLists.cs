@@ -8,12 +8,10 @@ namespace Z0.llvm
 
     partial class EtlWorkflow
     {
-        public Outcome GenLists()
+        public Outcome ImportLists()
         {
             var result = Outcome.Success;
-            var path = Ws.Tools().Script(Toolspace.llvm_tblgen, "emit-lists");
-            result = Wf.OmniScript().RunToolScript(path, CmdVars.Empty, false, out var flow);
-            ImportLists(LlvmDatasetNames.TblgenLists, llvm);
+
             return result;
         }
     }

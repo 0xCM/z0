@@ -2,11 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+
+[assembly: PartId(PartId.Grids)]
+
+namespace Z0.Parts
 {
-    [ApiHost]
-    public readonly partial struct Part
+    public sealed class Grids : Part<Grids>
     {
 
     }
 }
+
+namespace Z0
+{
+    [ApiHost]
+    public static partial class XTend
+    {
+
+    }
+}
+

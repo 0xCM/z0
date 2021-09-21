@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Threading.Tasks;
 
+    using static core;
     [ApiHost]
     public readonly struct Agents
     {
@@ -37,7 +38,7 @@ namespace Z0
 
             var servers = 40;
             var complex = new AgentComplex(context);
-            var configs = root.list<AgentServerConfig>();
+            var configs = list<AgentServerConfig>();
             var processors = Environment.ProcessorCount;
 
             term.inform($"Server complex using {processors} processor cores");

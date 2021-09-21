@@ -24,7 +24,7 @@ namespace Z0
             if (size == 0)
                 return sys.empty<string>();
 
-            var values = root.list<string>();
+            var values = list<string>();
             var handle = MetadataTokens.UserStringHandle(0);
             do
             {
@@ -42,7 +42,7 @@ namespace Z0
             if (size == 0)
                 return sys.empty<string>();
 
-            var values = root.list<string>();
+            var values = list<string>();
             var handle = MetadataTokens.StringHandle(0);
             do
             {

@@ -49,8 +49,8 @@ namespace Z0
             using var dst = target.Writer();
             dst.WriteLine(formatter.FormatHeader());
             var emitting = Wf.EmittingTable<DocLibEntry>(target);
-            var entries = root.list<DocLibEntry>();
-            Emit(root.array(Parts.Res.Assembly), dst, entries);
+            var entries = list<DocLibEntry>();
+            Emit(array(Parts.Res.Assembly), dst, entries);
             Wf.EmittedTable(emitting, entries.Count);
             Wf.Ran(flow);
             return entries.ToArray();

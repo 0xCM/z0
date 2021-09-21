@@ -83,13 +83,13 @@ namespace Z0
                 return width switch{
                     TypeWidth.W128 => EmbedV128UnaryOpImm(src, imm8, id),
                     TypeWidth.W256 => EmbedV256UnaryOpImm(src, imm8, id),
-                    _ => root.none<DynamicDelegate>()
+                    _ => Option.none<DynamicDelegate>()
                 };
             }
             catch(Exception e)
             {
                 term.error(e);
-                return root.none<DynamicDelegate>();
+                return Option.none<DynamicDelegate>();
             }
         }
 

@@ -22,12 +22,9 @@ namespace Z0
         {
             readonly IEnumerable<T> Src;
 
-            readonly ulong Classifier;
-
             [MethodImpl(Inline)]
             public Deferred(IEnumerable<T> src, ulong classifier = default)
             {
-                Classifier = default;
                 Src = src;
             }
 

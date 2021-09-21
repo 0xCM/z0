@@ -65,7 +65,7 @@ namespace Z0
             var info = mapped.Descriptions;
             var count = info.Count;
 
-            root.iter(info, file => Wf.Status(status(file)));
+            iter(info, file => Wf.Status(status(file)));
 
             for(ushort i=0; i<count; i++)
             {

@@ -20,7 +20,7 @@ namespace Z0
 
         public SegmentTraverser()
         {
-            ProcessBase = root.process().Handle.ToPointer();
+            ProcessBase = process().Handle.ToPointer();
         }
 
         public ByteSize Traverse(ReadOnlySpan<ProcessSegment> src, FS.FolderPath outdir)

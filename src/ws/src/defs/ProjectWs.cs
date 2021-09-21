@@ -14,23 +14,17 @@ namespace Z0
     public sealed class ProjectWs : Workspace<ProjectWs>, IProjectWs
     {
         [MethodImpl(Inline)]
-        public static ProjectWs create(FS.FolderPath home)
-            => new ProjectWs(home);
+        public static IProjectWs create(FS.FolderPath home, ProjectId id)
+            => new ProjectWs(home,id);
 
-        public override WsKind Kind => WsKind.Projects;
+        public override WsKind Kind => WsKind.Project;
 
-        Dictionary<ProjectId,ProjectConfig> ConfigLookup;
+        public ProjectId Project {get;}
 
-        public ProjectWs(FS.FolderPath src)
+        public ProjectWs(FS.FolderPath src, ProjectId project)
             : base(src)
         {
-            ConfigLookup = dict<ProjectId,ProjectConfig>();
+            Project = project;
         }
-
-        public bool Settings(ProjectId id, out ProjectConfig dst)
-            => ConfigLookup.TryGetValue(id, out dst);
-
-        public void Configure(ProjectId id, in ProjectConfig src)
-            => ConfigLookup[id] = src;
     }
 }

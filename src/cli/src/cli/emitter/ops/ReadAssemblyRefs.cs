@@ -28,7 +28,7 @@ namespace Z0
         {
             var components = Wf.ApiCatalog.Components.View;
             var count = components.Length;
-            var dst = root.list<AssemblyRefInfo>();
+            var dst = list<AssemblyRefInfo>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var assembly = ref skip(components,i);
@@ -37,7 +37,7 @@ namespace Z0
                 {
                     using var reader = PeReader.create(path);
                     var refs = reader.ReadAssemblyRefs();
-                    root.iter(refs,r => dst.Add(r));
+                    iter(refs,r => dst.Add(r));
                 }
             }
             dst.Sort();

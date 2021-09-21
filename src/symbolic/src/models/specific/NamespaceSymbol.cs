@@ -43,7 +43,7 @@ namespace Z0
 
             public ReadOnlySpan<TypeSymbol> GetTypes()
             {
-                var dst = root.list<TypeSymbol>();
+                var dst = list<TypeSymbol>();
                 Drill(Source, dst);
                 return dst.ViewDeposited();
             }

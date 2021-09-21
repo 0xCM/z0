@@ -5,6 +5,7 @@
 namespace Z0
 {
     using static Root;
+    using static core;
 
     using static RenderFunctions;
     using static FormatFunctions;
@@ -68,9 +69,9 @@ namespace Z0
             CaseName = name ?? "<missing_name>";
             Passed = succeeded;
             Duration = duration;
-            Started = root.now();
+            Started = now();
             Message = msg;
-            Finished = root.now();
+            Finished = now();
         }
 
         public string Format()

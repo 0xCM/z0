@@ -72,7 +72,7 @@ namespace Z0
             var emitting = Wf.EmittingFile(docspath);
             var docs = index.Documents;
             using var writer = docspath.Writer();
-            root.iter(docs, doc => writer.WriteLine(string.Format("<{0}>", doc.Path.ToUri())));
+            iter(docs, doc => writer.WriteLine(string.Format("<{0}>", doc.Path.ToUri())));
             Wf.EmittedFile(emitting, docs.Length);
             Wf.Ran(flow, Msg.IndexedPdbMethods.Format(counter));
         }

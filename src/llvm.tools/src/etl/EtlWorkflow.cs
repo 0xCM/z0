@@ -4,8 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using static core;
     using System;
+
+    using static core;
     using static WsAtoms;
 
     using F = llvm.AsmRecordField;
@@ -22,6 +23,8 @@ namespace Z0.llvm
 
         Index<AsmRecordField> AsmDefFields;
 
+        IProjectWs DataSource;
+
         public EtlWorkflow()
         {
             Sources = new();
@@ -32,6 +35,7 @@ namespace Z0.llvm
         protected override void Initialized()
         {
             LlvmPaths = Wf.LlvmPaths();
+            DataSource = Ws.Project("llvm.data");
         }
 
         public Outcome RunEtl(out EtlDatasets datasets)
@@ -50,7 +54,6 @@ namespace Z0.llvm
             datasets.AsmDefFieldData = AsmDefFields;
             datasets.AsmDefMapData = AsmDefMap;
             datasets.OpCodeData = _LlvmOpCodes;
-
             return EmitFields(datasets);
         }
 

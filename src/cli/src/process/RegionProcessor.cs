@@ -28,7 +28,7 @@ namespace Z0
             Selectors = new();
             Bases = new();
             _Segments = new();
-            HostProcessName = root.process().ProcessName;
+            HostProcessName = process().ProcessName;
         }
 
         protected override void Complete()
@@ -49,7 +49,7 @@ namespace Z0
             {
                 Selectors.Add(selector);
                 index = Selectors.Count - 1;
-                Bases.Add(root.list<Paired<Address32,uint>>());
+                Bases.Add(list<Paired<Address32,uint>>());
             }
             return (ushort)index;
         }
@@ -60,7 +60,7 @@ namespace Z0
         protected override uint Process(ReadOnlySpan<ProcessMemoryRegion> src)
         {
             var count = (uint)src.Length;
-            _Segments = core.alloc<ProcessSegment>(count);
+            _Segments = alloc<ProcessSegment>(count);
             for(var i=0u; i<count; i++)
                 Include(i, skip(src,i));
             return count;
@@ -79,7 +79,7 @@ namespace Z0
                 var selector = src.StartAddress.Quadrant(n2);
                 var @base = src.StartAddress.Lo;
                 var sidx = (ushort)Index(selector);
-                Bases[sidx].Add(root.paired(@base, (uint)src.Size));
+                Bases[sidx].Add(paired(@base, (uint)src.Size));
                 load(src, ref _Segments[index]);
             }
         }

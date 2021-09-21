@@ -59,7 +59,7 @@ namespace Z0
 
         public void SetVars(params IExpr<T>[] values)
         {
-            var count = root.min(_Vars.Length, values.Length);
+            var count = min(_Vars.Length, values.Length);
             if(count != 0)
             {
                 ref readonly var src = ref first(values);
@@ -70,7 +70,7 @@ namespace Z0
 
         public void SetVars(params T[] values)
         {
-            var count = root.min(_Vars.Length, values.Length);
+            var count = min(_Vars.Length, values.Length);
             if(count != 0)
             {
                 ref readonly var src = ref first(values);

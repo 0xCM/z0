@@ -193,6 +193,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.xml", "xml\z0.xml.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.dynamic.linq", "dynamic.linq\z0.dynamic.linq.csproj", "{8DA6182A-641C-4580-B892-9F075D3A6FD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.grids", "grids\z0.grids.csproj", "{9570FCFD-AD95-4BB3-9250-CF31B4036B49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1346,5 +1348,17 @@ Global
 		{8DA6182A-641C-4580-B892-9F075D3A6FD3}.Release|x64.Build.0 = Release|Any CPU
 		{8DA6182A-641C-4580-B892-9F075D3A6FD3}.Release|x86.ActiveCfg = Release|Any CPU
 		{8DA6182A-641C-4580-B892-9F075D3A6FD3}.Release|x86.Build.0 = Release|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Debug|x64.Build.0 = Debug|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Debug|x86.Build.0 = Debug|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Release|x64.ActiveCfg = Release|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Release|x64.Build.0 = Release|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Release|x86.ActiveCfg = Release|Any CPU
+		{9570FCFD-AD95-4BB3-9250-CF31B4036B49}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

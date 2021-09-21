@@ -29,7 +29,7 @@ namespace Z0
             var chars = address.Chars;
             dst.Key = key;
             dst.Address = address;
-            dst.HashCode = StringHash.compute(chars);
+            dst.HashCode = StringHasher.compute(chars);
             dst.Size = chars.Length*2;
             dst.Expr = text.format(chars);
             return dst;
@@ -61,11 +61,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint bucket(MemoryAddress src, uint capacity)
-            => hash(src) % (capacity - 1);
+            => hash(src) % (capacity);
 
         [MethodImpl(Inline), Op]
         public static uint bucket(Hash32 hash, uint capacity)
-            => hash % (capacity - 1);
+            => hash % (capacity);
 
         [Op]
         public static MemoryLookup lookup(Index<MemorySymbol> symbols, uint count)

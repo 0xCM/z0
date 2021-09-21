@@ -8,45 +8,44 @@ namespace Z0
 
     public interface IProjectWs : IWorkspace
     {
-        FS.FolderPath Home(ProjectId project)
-            => Root + FS.folder(project.Format());
+        ProjectId Project {get;}
 
-        FS.FolderPath Out(ProjectId project)
-            => Home(project) + FS.folder(output);
+        FS.FolderPath Home()
+            => Root + FS.folder(Project.Format());
 
-        FS.FolderPath Out(ProjectId project, Scope scope)
-            => Out(project) + FS.folder(scope.Format());
+        FS.FolderPath Out()
+            => Home() + FS.folder(output);
 
-        FS.Files OutFiles(ProjectId project)
-            => Out(project).Files(true);
+        FS.FolderPath Out(Scope scope)
+            => Out() + FS.folder(scope.Format());
 
-        FS.FolderPath DataOut(ProjectId project)
-            => Out(project, data);
+        FS.Files OutFiles()
+            => Out().Files(true);
 
-        FS.FolderPath TablesOut(ProjectId project)
-            => Out(project, tables);
+        FS.FolderPath DataOut()
+            => Out(data);
 
-        FS.FilePath TableOut<T>(ProjectId project)
+        FS.FolderPath TablesOut()
+            => Out(tables);
+
+        FS.FilePath TableOut<T>()
             where T : struct
-                => TablesOut(project) + FS.file(Z0.TableId.identify<T>().Format(), FS.Csv);
+                => TablesOut() + FS.file(Z0.TableId.identify<T>().Format(), FS.Csv);
 
-        FS.Files OutFiles(ProjectId project, FS.FileExt ext)
-            => Out(project).Files(ext, true);
+        FS.Files OutFiles(FS.FileExt ext)
+            => Out().Files(ext, true);
 
         FS.Files OutFiles(ProjectId project, FileKind kind)
-            => OutFiles(project, FileTypes.ext(kind));
+            => OutFiles(FileTypes.ext(kind));
 
-        FS.Files OutFiles(ProjectId project, params FileKind[] kinds)
-            => Out(project).Files(true, kinds.Select(FileTypes.ext));
+        FS.Files OutFiles(params FileKind[] kinds)
+            => Out().Files(true, kinds.Select(FileTypes.ext));
 
-        FS.Files OutFiles(ProjectId project, FS.FolderName subdir)
-            => (Out(project) + subdir).Files(true);
+        FS.Files OutFiles(FS.FolderName subdir)
+            => (Out() + subdir).Files(true);
 
-        FS.Files OutFiles(ProjectId project, FS.FolderName subdir, FS.FileExt ext)
-            => (Out(project) + subdir).Files(ext,true);
-
-        FS.FolderPath Docs(ProjectId project)
-            => Home(project) + FS.folder(docs);
+        FS.Files OutFiles(FS.FolderName subdir, FS.FileExt ext)
+            => (Out() + subdir).Files(ext,true);
 
         FS.Files DocFiles(ProjectId project)
             => Docs(project).Files(true);
@@ -54,40 +53,31 @@ namespace Z0
         FS.FilePath Doc(ProjectId project, string fileid, FS.FileExt ext)
             => Docs(project) + FS.file(fileid, ext);
 
-        FS.FolderPath Logs(ProjectId project)
-            => Home(project) + FS.folder(logs);
+        FS.FolderPath Logs()
+            => Home() + FS.folder(logs);
 
-        FS.Files LogFiles(ProjectId project)
-            => Logs(project).Files(true);
+        FS.FolderPath Src()
+            => Home() + FS.folder(src);
 
-        FS.FilePath Log(ProjectId project, string fileid)
-            => Logs(project) + FS.file(fileid, FS.Log);
+        FS.Files SrcFiles()
+            => Src().Files(true);
 
-        FS.FolderPath Src(ProjectId project)
-            => Home(project) + FS.folder(src);
+        FS.Files SrcFiles(Scope scope)
+            => (Src() + FS.folder(scope.Format())).AllFiles;
 
-        FS.Files SrcFiles(ProjectId project)
-            => Src(project).Files(true);
+        FS.FilePath SrcFile(string fileid, FS.FileExt ext)
+            => Src() + FS.file(fileid,ext);
 
-        FS.Files SrcFiles(ProjectId project, Scope scope)
-            => (Src(project) + FS.folder(scope.Format())).AllFiles;
+        FS.FolderPath Assets()
+            => Home() + FS.folder(assets);
 
-        FS.FilePath SrcFile(ProjectId project, string fileid, FS.FileExt ext)
-            => Src(project) + FS.file(fileid,ext);
+        FS.FolderPath Scripts()
+            => Home() + FS.folder(scripts);
 
-        FS.FolderPath Assets(ProjectId project)
-            => Home(project) + FS.folder(assets);
+        FS.FolderPath Scripts(Scope scope)
+            => Scripts() + FS.folder(scope.Format());
 
-        FS.FolderPath Scripts(ProjectId project)
-            => Home(project) + FS.folder(scripts);
-
-        FS.FolderPath Scripts(ProjectId project, Scope scope)
-            => Scripts(project) + FS.folder(scope.Format());
-
-        FS.FilePath Script(ProjectId project, Scope scope, ScriptId sid, FS.FileExt ext)
-            => Scripts(project,scope) + FS.file(sid.Format(), ext);
-
-        FS.FilePath Script(ProjectId project, ScriptId sid, FS.FileExt ext)
-            => Scripts(project) + FS.file(sid.Format(), ext);
+        FS.FilePath Script(Scope scope, ScriptId sid, FS.FileExt ext)
+            => Scripts(scope) + FS.file(sid.Format(), ext);
     }
 }

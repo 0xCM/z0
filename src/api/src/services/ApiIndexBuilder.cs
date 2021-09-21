@@ -81,7 +81,7 @@ namespace Z0
             var a = CodeAddress.TryAdd(src.BaseAddress, src);
             var b = AddressUri.TryAdd(src.BaseAddress, src.OpUri);
             var c = UriCode.TryAdd(src.OpUri, src);
-            return root.triple(a,b,c);
+            return triple(a,b,c);
         }
 
         void Include(ReadOnlySpan<ApiHexRow> src)

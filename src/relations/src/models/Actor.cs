@@ -4,34 +4,31 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct FileFlow<S,T> : IDataFlow<S,T>
-        where S : struct, ITypedFile
-        where T : struct, ITypedFile
+    public readonly struct Actor : IActor<ulong>
     {
-        public S Source {get;}
-
-        public T Target {get;}
+        public readonly ulong Kind;
 
         [MethodImpl(Inline)]
-        public FileFlow(S src, T dst)
+        public Actor(ulong kind)
         {
-            Source = src;
-            Target = dst;
+            Kind = kind;
         }
 
+        ulong IActor<ulong>.Kind
+            => Kind;
+
         public string Format()
-            => string.Format("{0} -> {1}", Source, Target);
+            => Kind.ToString();
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator FileFlow<S,T>((S src, T dst) x)
-            => new FileFlow<S,T>(x.src, x.dst);
+        public static implicit operator Actor(ulong kind)
+            => new Actor(kind);
     }
 }
