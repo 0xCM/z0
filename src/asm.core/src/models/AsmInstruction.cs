@@ -13,7 +13,7 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct AsmInstruction
     {
-        public AsmId OpCode;
+        public AsmId Id;
 
         public AsmOperand Op0;
 

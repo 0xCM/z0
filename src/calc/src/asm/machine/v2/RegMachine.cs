@@ -113,29 +113,9 @@ namespace Z0.Asm
 
         public void Run(in AsmInstruction a)
         {
-            var id = a.OpCode;
+            var id = a.Id;
 
 
-        }
-
-        bit IsMov(in AsmInstruction a)
-            => a.OpCode >= AsmId.MOV16ao16 && a.OpCode <= AsmId.MOV8rr_NOREX;
-
-        void mov(in AsmInstruction a)
-        {
-            switch(a.OpCode)
-            {
-                case AsmId.MOV8rm:
-                break;
-                case AsmId.MOV8mr:
-                break;
-                case AsmId.MOV8rr:
-                break;
-                case AsmId.MOV8ri:
-                break;
-                case AsmId.MOV8mi:
-                break;
-            }
         }
 
 

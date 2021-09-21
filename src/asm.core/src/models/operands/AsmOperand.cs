@@ -9,6 +9,7 @@ namespace Z0.Asm
     using System.Runtime.InteropServices;
 
     using static Root;
+    using static AsmOperands;
 
     [StructLayout(LayoutKind.Sequential,Pack=1)]
     public struct AsmOperand : IAsmOperand
@@ -65,6 +66,62 @@ namespace Z0.Asm
             OpClass = AsmOpClass.Imm;
             Size = NativeSizeCode.W64;
             _Data = (ulong)src;
+        }
+
+        [MethodImpl(Inline)]
+        internal AsmOperand(m8 src)
+        {
+            OpClass = AsmOpClass.M;
+            Size = NativeSizeCode.W8;
+            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+        }
+
+        [MethodImpl(Inline)]
+        internal AsmOperand(m16 src)
+        {
+            OpClass = AsmOpClass.M;
+            Size = NativeSizeCode.W16;
+            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+        }
+
+        [MethodImpl(Inline)]
+        internal AsmOperand(m32 src)
+        {
+            OpClass = AsmOpClass.M;
+            Size = NativeSizeCode.W32;
+            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+        }
+
+        [MethodImpl(Inline)]
+        internal AsmOperand(m64 src)
+        {
+            OpClass = AsmOpClass.M;
+            Size = NativeSizeCode.W64;
+            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+        }
+
+        [MethodImpl(Inline)]
+        internal AsmOperand(m128 src)
+        {
+            OpClass = AsmOpClass.M;
+            Size = NativeSizeCode.W128;
+            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+        }
+
+        [MethodImpl(Inline)]
+        internal AsmOperand(m256 src)
+        {
+            OpClass = AsmOpClass.M;
+            Size = NativeSizeCode.W256;
+            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+        }
+
+        [MethodImpl(Inline)]
+        internal AsmOperand(m512 src)
+        {
+            OpClass = AsmOpClass.M;
+            Size = NativeSizeCode.W512;
+            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
         }
 
         [MethodImpl(Inline)]
@@ -134,5 +191,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator AsmOperand<ByteBlock10>(AsmOperand src)
             =>  new AsmOperand<ByteBlock10>(src.OpClass, src.Size, src._Data);
+
+        public static AsmOperand Empty => default;
     }
 }

@@ -283,34 +283,6 @@ namespace Z0.Asm
             }
         }
 
-        public struct VecCode
-        {
-            public bit L0;
-
-            public bit L1;
-        }
-
-        public sealed class VexCodeParser : CharParser
-        {
-            const string VexTokens =
-                "VEX\0" +
-                "LZ\0" +
-                "LIG\0" +
-                "WIG\0" +
-                "W0\0" +
-                "W1\0" +
-                "W128\0" +
-                "W256\0";
-
-            public override bit Accept(char src)
-                => default;
-
-            protected override void Reset()
-            {
-
-            }
-        }
-
         [ApiHost]
         public sealed class OpCodeParser : CharParser
         {
