@@ -52,6 +52,6 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline), Op]
         public static BitVector<uint> load(byte x0, byte x1, byte x2, byte x3)
-            => load(Bits.concat(x0,x1,x2,x3));
+            => load(Bits.join(x0,x1,x2,x3));
     }
 }

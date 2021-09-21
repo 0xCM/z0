@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static ModRm modrm(byte rm, byte reg, byte mod)
-            => new ModRm(Bits.join((rm, 0), (reg, 3), (mod, 6)));
+            => new ModRm(combine((rm, 0), (reg, 3), (mod, 6)));
 
         [MethodImpl(Inline), Op]
         public static ModRm modrm(RegIndex r1, RegIndex r2)

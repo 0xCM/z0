@@ -572,7 +572,7 @@ namespace Z0
         public T Scalar<T>(int offset = 0, int? count = null)
             where T : unmanaged
         {
-            var len = root.min((count == null ? (int)width<T>() : count.Value), Length - offset);
+            var len = min((count == null ? (int)width<T>() : count.Value), Length - offset);
             var bits = BitSeq.Slice(offset, len);
             return bits.Take<T>();
         }

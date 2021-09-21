@@ -17,7 +17,7 @@ namespace Z0
                 var src = Random.Next<ulong>();
                 BitPack.unpack1x64x8(src, dst);
                 var bitsPC = dst.PopCount();
-                var bytes = memory.bytes(src);
+                var bytes = core.bytes(src);
                 var bytesPC = bytes.PopCount();
                 Claim.eq(bitsPC, bytesPC);
             }

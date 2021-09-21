@@ -34,7 +34,6 @@ namespace Z0
             vadd_check(w, z32i);
             vadd_check(w, z64);
             vadd_check(w, z64i);
-
         }
 
         void vadd_check<T>(N128 w, T t = default)

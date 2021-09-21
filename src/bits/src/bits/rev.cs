@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Reverse]
         public static ushort reverse(ushort src)
-            => concat(
+            => join(
                 reverse((byte)hi(src)),
                 reverse((byte)lo(src))
                 );
@@ -53,7 +53,7 @@ namespace Z0
         /// <remarks>BAD</remarks>
         [MethodImpl(Inline)]
         public static ulong reverse(ulong src)
-            => concat(
+            => join(
                 reverse((uint)hi(src)),
                 reverse((uint)lo(src))
                 );

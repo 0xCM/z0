@@ -109,7 +109,6 @@ namespace Z0
                 _ => NK.None
             };
 
-
         /// <summary>
         /// Computes the numeric kind determined by a bit-width and numeric indicator
         /// </summary>

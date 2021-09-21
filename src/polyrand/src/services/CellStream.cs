@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Root;
+    using static core;
 
     class CellStream<F,W,T> : ICellStream<F,W,T>
         where F : unmanaged, IDataCell
@@ -43,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static F Fixed<K>(in K x)
             where K : struct
-                => memory.@as<K,F>(x);
+                => @as<K,F>(x);
 
         public static Func<F> CreateEmitter(ISource source, CellWidth width, NumericKind nk)
         {

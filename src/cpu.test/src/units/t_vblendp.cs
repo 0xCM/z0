@@ -337,7 +337,7 @@ namespace Z0
             var t = default(T);
             var pn = n32;
 
-            Claim.eq(Typed.nat64u(pn), NatCalc.divT(w,t) * 2);
+            Claim.eq(nat64u(pn), NatCalc.divT(w,t) * 2);
 
             var left = gcpu.vinc(w, t);
             var right = gcpu.vadd(left, gmath.add(left.LastCell(), one<T>()));
@@ -445,7 +445,7 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat
         {
-            var spec = memory.@as(gcpu.vbroadcast(w, pattern), t);
+            var spec = @as(gcpu.vbroadcast(w, pattern), t);
             var a = gcpu.vinc(w, t);
             var b = gcpu.vadd(a, gmath.add(a.LastCell(), one<T>()));
             var c = gcpu.vblendp(a,b,spec);
@@ -473,7 +473,7 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat
         {
-            var spec = memory.@as(gcpu.vbroadcast(w, pattern),t);
+            var spec = @as(gcpu.vbroadcast(w, pattern),t);
             var a = gcpu.vinc(w, t);
             var b = gcpu.vadd(a, gmath.add(a.LastCell(), one<T>()));
             var c = gcpu.vblendp(a,b,spec);

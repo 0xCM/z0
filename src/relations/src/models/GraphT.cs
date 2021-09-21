@@ -14,23 +14,23 @@ namespace Z0
     /// <summary>
     /// Defines a directed graph parameterized by the vertex index type
     /// </summary>
-    /// <typeparam name="V">The vertex index type</typeparam>
+    /// <typeparam name="T">The vertex index type</typeparam>
     /// <remarks>For terminology consult, for example, https://xlinux.nist.gov/dads/<remarks>
-    public class Graph<V>
-        where V : unmanaged
+    public class Graph<T>
+        where T : unmanaged
     {
-        readonly Node<V>[] Nodes;
+        readonly Node<T>[] Nodes;
 
-        readonly Arrow<Node<V>>[] Edges;
+        readonly Arrow<Node<T>>[] Edges;
 
-        readonly Nodes<V> Index;
+        readonly Nodes<T> Index;
 
         [MethodImpl(Inline)]
-        public Graph(Node<V>[] vertices, Arrow<Node<V>>[] edges)
+        public Graph(Node<T>[] vertices, Arrow<Node<T>>[] edges)
         {
             Nodes = vertices;
             Edges = edges;
-            Index = Nodes<V>.Build(vertices, edges);
+            Index = Nodes<T>.Build(vertices, edges);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The source vertex</param>
         [MethodImpl(Inline)]
-        public List<Node<V>> Sources(Node<V> target)
+        public List<Node<T>> Sources(Node<T> target)
             => Index.Sources(target);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The source vertex</param>
         [MethodImpl(Inline)]
-        public List<Node<V>> Targets(Node<V> source)
+        public List<Node<T>> Targets(Node<T> source)
             => Index.Targets(source);
 
         /// <summary>
@@ -54,22 +54,22 @@ namespace Z0
         /// </summary>
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
-        public ref Node<V> Vertex(V index)
-            => ref Nodes[force<V,ulong>(index)];
+        public ref Node<T> Vertex(T index)
+            => ref Nodes[force<T,ulong>(index)];
 
         /// <summary>
         /// Looks up an edge based on its index
         /// </summary>
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
-        public ref Arrow<Node<V>> Edge(int index)
+        public ref Arrow<Node<T>> Edge(int index)
             => ref Edges[index];
 
         /// <summary>
         /// Looks up a vertex based on its index
         /// </summary>
         /// <param name="index">The vertex index</param>
-        public ref Node<V> this[V index]
+        public ref Node<T> this[T index]
         {
             [MethodImpl(Inline)]
             get => ref Vertex(index);
@@ -92,7 +92,7 @@ namespace Z0
         /// </summary>
         /// <param name="target">The target vector</param>
         [MethodImpl(Inline)]
-        public int InDegree(Node<V> target)
+        public int InDegree(Node<T> target)
             => Sources(target).Count;
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The source vector</param>
         [MethodImpl(Inline)]
-        public int OutDegree(Node<V> source)
+        public int OutDegree(Node<T> source)
             => Targets(source).Count;
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Z0
         /// </summary>
         /// <param name="vertex">The vertext to test</param>
         [MethodImpl(Inline)]
-        public bool IsIsolated(Node<V> vertex)
+        public bool IsIsolated(Node<T> vertex)
             => InDegree(vertex) == 0 && OutDegree(vertex) == 0;
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0
         /// sink (or source) so "degenerate" sinks are excluded
         /// </remarks>
         [MethodImpl(Inline)]
-        public bool IsSink(Node<V> vertex)
+        public bool IsSink(Node<T> vertex)
             => OutDegree(vertex) == 0 && InDegree(vertex) != 0;
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Z0
         /// sink (or source) so "degenerate" sources are excluded
         /// </remarks>
         [MethodImpl(Inline)]
-        public bool IsSource(Node<V> vertex)
+        public bool IsSource(Node<T> vertex)
             => OutDegree(vertex) != 0 && InDegree(vertex) == 0;
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="v0">The start vertex</param>
         /// <param name="traversed">The traversal action</param>
         /// <param name="vEnd">An optional endpoint</param>
-        public void Traverse(Node<V> v0, Action<Node<V>> traversed, Node<V> vEnd = default)
+        public void Traverse(Node<T> v0, Action<Node<T>> traversed, Node<T> vEnd = default)
         {
             foreach(var target in Targets(v0))
             {
@@ -158,7 +158,7 @@ namespace Z0
         /// </summary>
         /// <param name="v0">The start vertex</param>
         /// <param name="vEnd">An optional endpoint</param>
-        public IEnumerable<Node<V>> Path(Node<V> v0, Node<V> vEnd = default)
+        public IEnumerable<Node<T>> Path(Node<T> v0, Node<T> vEnd = default)
         {
             foreach(var target in Targets(v0))
             {

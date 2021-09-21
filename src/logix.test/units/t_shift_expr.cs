@@ -14,8 +14,6 @@ namespace Z0.Logix
 
     public class t_shift_expr : t_typed_logix<t_shift_expr>
     {
-       // ~ sll
-
         public void sll_8u()
             => check_op<byte>(AK.Sll);
 
@@ -42,8 +40,6 @@ namespace Z0.Logix
 
         public void sll_256x64u()
             => check_op_256<ulong>(AK.Sll);
-
-        // ~ srl
 
         public void srl_8u()
             => check_op<byte>(AK.Srl);
@@ -72,8 +68,6 @@ namespace Z0.Logix
         public void srl_256x64u()
             => check_op_256<ulong>(AK.Srl);
 
-        // ~ rotl
-
         public void rotl_8u()
             => check_op<byte>(AK.Rotl);
 
@@ -100,8 +94,6 @@ namespace Z0.Logix
 
         public void rotl_256x64u()
             => check_op_256<ulong>(AK.Rotl);
-
-        // ~ rotr
 
         public void rotr_8u()
             => check_op<byte>(AK.Rotr);

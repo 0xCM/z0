@@ -73,7 +73,7 @@ namespace Z0
             var inC = (ExcludeZero ? Random.NonZeroSpan<T2>(count) : Random.Span<T2>(count)).ReadOnly();
             ref readonly var inCTarget = ref first(inC);
 
-            var dst = memory.span<R>(count);
+            var dst = span<R>(count);
             ref var target = ref first(dst);
 
             clock.Start();

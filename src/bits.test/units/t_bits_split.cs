@@ -14,7 +14,7 @@ namespace Z0
             foreach(var x in src)
             {
                 Bits.split(x,out var x0, out var x1);
-                var y = Bits.concat(x0, x1);
+                var y = Bits.join(x0, x1);
                 Claim.eq(x,y);
                 Claim.eq(x, BitConverter.ToUInt16(new byte[]{x0, x1}));
             }
@@ -26,7 +26,7 @@ namespace Z0
             foreach(var x in src)
             {
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3);
-                var y = Bits.concat(x0, x1, x2, x3);
+                var y = Bits.join(x0, x1, x2, x3);
                 Claim.eq(x,y);
                 Claim.eq(x, BitConverter.ToUInt32(new byte[]{x0, x1, x2, x3}));
             }
@@ -38,7 +38,7 @@ namespace Z0
             foreach(var x in src)
             {
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3, out var x4, out var x5, out var x6, out var x7);
-                var y = Bits.concat(x0, x1, x2, x3, x4, x5, x6, x7);
+                var y = Bits.join(x0, x1, x2, x3, x4, x5, x6, x7);
                 Claim.eq(x,y);
                 Claim.eq(x, BitConverter.ToUInt64(new byte[]{x0, x1, x2, x3, x4, x5, x6, x7}));
 
@@ -68,7 +68,7 @@ namespace Z0
             var rhs = Random.Array<byte>(len);
             for(var i=0; i<len; i++)
             {
-                var dst = Bits.concat(lhs[i], rhs[i]);
+                var dst = Bits.join(lhs[i], rhs[i]);
                 Bits.split(dst,out var x0, out var x1);
 
                 Claim.eq(x0, lhs[i]);

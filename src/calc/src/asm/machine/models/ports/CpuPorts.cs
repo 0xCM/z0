@@ -17,6 +17,14 @@ namespace Z0.Asm
         public static CpuPorts range(Address16 min, Address16 max)
             => new CpuPorts(min, max);
 
+        readonly Address16 Min;
+
+        readonly Address16 Max;
+
+        public ushort Count {get;}
+
+        readonly ushort Data;
+
         [MethodImpl(Inline)]
         CpuPorts(Address16 min, Address16 max)
         {
@@ -25,14 +33,6 @@ namespace Z0.Asm
             Count = max - min;
             Data = 0;
         }
-
-        readonly Address16 Min;
-
-        readonly Address16 Max;
-
-        public ushort Count {get;}
-
-        readonly ushort Data;
 
         [MethodImpl(Inline), Op]
         public CpuPort Port(ushort index)

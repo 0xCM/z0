@@ -33,13 +33,13 @@ namespace Z0
         public new Span<CodeSymbol> Edit
         {
             [MethodImpl(Inline)]
-            get => memory.recover<ISymbol,CodeSymbol>(base.Edit);
+            get => recover<ISymbol,CodeSymbol>(base.Edit);
         }
 
         public new ReadOnlySpan<CodeSymbol> View
         {
             [MethodImpl(Inline)]
-            get => memory.recover<ISymbol,CodeSymbol>(base.View);
+            get => recover<ISymbol,CodeSymbol>(base.View);
         }
 
         public ref CodeSymbol this[uint index]

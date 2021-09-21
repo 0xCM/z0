@@ -142,7 +142,7 @@ namespace Z0
             where T : unmanaged
         {
             var v = source.Next<T>();
-            var clamp = memory.width<T>() - math.min(memory.width<T>(), wmax);
+            var clamp = core.width<T>() - math.min(core.width<T>(), wmax);
             return gmath.srl(v,(byte)clamp);
         }
 
@@ -159,7 +159,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var v = source.Next<T>();
-            var clamp = (byte)(memory.width<T>() - math.min(memory.width<T>(), nat32u(n)));
+            var clamp = (byte)(core.width<T>() - math.min(core.width<T>(), nat32u(n)));
             return gmath.srl(v,clamp);
         }
 

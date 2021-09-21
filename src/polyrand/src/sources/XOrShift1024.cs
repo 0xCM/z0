@@ -4,6 +4,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     /// <summary>
     /// Implements an XOrShift generator
@@ -26,7 +27,7 @@ namespace Z0
         public XOrShift1024(Span<byte> seed)
         {
             Require.invariant(seed.Length >= 128, () => $"Not enough seed! 1024 bits = 128 bytes are required");
-            State = memory.recover<ulong>(seed).ToArray();
+            State = recover<ulong>(seed).ToArray();
         }
 
         public RngKind RngKind

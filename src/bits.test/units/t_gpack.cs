@@ -74,7 +74,7 @@ namespace Z0
             for(var j=0; j<RepCount; j++)
             {
                 var src = Random.Next<S>();
-                Span<T> dst = new T[memory.width<S>()];
+                Span<T> dst = new T[width<S>()];
                 vbits.unpack(src,dst);
                 var bs = BitString.scalar(src);
                 for(var i = 0; i< bs.Length; i++)
@@ -86,7 +86,7 @@ namespace Z0
             }
 
             var x = Random.Span<S>(RepCount);
-            Span<T> y1 = new T[x.Length * memory.width<S>()];
+            Span<T> y1 = new T[x.Length * width<S>()];
             gpack.unpack32(x,y1);
             var y2 = BitString.scalars(x);
             for(var i=0; i< y1.Length; i++)
@@ -104,9 +104,9 @@ namespace Z0
             var opcount = RoundCount * CycleCount;
             var srcSign = NumericKinds.signed<S>() ? "i" : string.Empty;
             var dstSign = NumericKinds.signed<T>() ? "i" : string.Empty;
-            var opname = $"unpack_{memory.width<S>()}{srcSign}x{memory.width<T>()}{dstSign}";
+            var opname = $"unpack_{width<S>()}{srcSign}x{width<T>()}{dstSign}";
 
-            Span<T> dst = new T[memory.width<S>()];
+            Span<T> dst = new T[width<S>()];
 
             for(var i=0; i<opcount; i++)
             {

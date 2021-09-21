@@ -126,21 +126,19 @@ namespace Z0
                     if(t!=0)
                     {
                         ref readonly var symbol = ref skip(symbols,k);
-                        seek(tokens, counter++) = new Token(k++, symbol, text.format(slice(chars,0,t)));
+                        seek(tokens, counter++) = new Token(k++, symbol, text.format(slice(chars, 0, t)));
                         t = 0;
                         chars.Clear();
                     }
                 }
                 else
-                {
                     seek(chars, t++) = c;
-                }
             }
 
             if(t!=0)
             {
                 ref readonly var symbol = ref skip(symbols,k);
-                seek(tokens, counter++) = new Token(k++, symbol, text.format(slice(chars,0,t)));
+                seek(tokens, counter++) = new Token(k++, symbol, text.format(slice(chars, 0, t)));
                 chars.Clear();
             }
             return slice(tokens,0,counter);

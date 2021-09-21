@@ -10,6 +10,7 @@ namespace Z0
     using System.IO;
 
     using static Root;
+    using static core;
 
     public class CodeGenerator : Generator, ICodeGenerator
     {
@@ -93,7 +94,7 @@ namespace Z0
             => dst.AppendLine(src);
 
         public static void lines(IEnumerable<string> src, StringBuilder dst)
-            => root.iter(src,l => line(l,dst));
+            => iter(src,l => line(l,dst));
 
         public static string assign(object dst, object src)
             => text.concat(dst, Space, Chars.Eq, Space, src);
@@ -141,7 +142,7 @@ namespace Z0
                 HeaderLine1,
                 HeaderLine2,
                 HeaderLine3,
-                string.Format(HeaderLine4, root.now()),
+                string.Format(HeaderLine4, now()),
                 HeaderLine5);
 
         public static void EmitFileHeader(TextWriter dst)

@@ -19,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Pairs<T> pairs<T>(uint count)
             where T : unmanaged
-                => new Pairs<T>(sys.alloc<Pair<T>>(count));
+                => new Pairs<T>(core.alloc<Pair<T>>(count));
     }
 }

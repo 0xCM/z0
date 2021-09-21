@@ -124,7 +124,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(BitMatrix8 src)
-            => memory.u64(src.Data);
+            => core.u64(src.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitMatrix8(ulong src)

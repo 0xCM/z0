@@ -10,6 +10,7 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
+    using static core;
 
     public readonly struct Aspects
     {
@@ -89,7 +90,7 @@ namespace Z0
 
         public string[] FormatValues()
         {
-            var dst = memory.alloc<string>(Count);
+            var dst = alloc<string>(Count);
             for(var i=0u; i<dst.Length; i++)
                 dst[i] = FormatValue(i);
             return dst;

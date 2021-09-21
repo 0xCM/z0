@@ -13,6 +13,7 @@ namespace Z0
     using static Root;
     using static CodeSymbolModels;
     using static XmlParts;
+    using static core;
 
     [ApiHost]
     public readonly struct CodeSymbols
@@ -61,18 +62,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> convert<T>(ReadOnlySpan<CodeSymbol> src)
             where T : ICodeSymbol
-                => memory.recover<CodeSymbol,T>(src);
+                => recover<CodeSymbol,T>(src);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> materialize<S,T>(ReadOnlySpan<S> src, T target = default)
             where S : ISymbol
             where T : ICodeSymbol
-                => memory.recover<S,T>(src);
+                => recover<S,T>(src);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<CodeSymbol> materialize<S>(ReadOnlySpan<S> src)
             where S : ISymbol
-                => memory.recover<S,CodeSymbol>(src);
+                => recover<S,CodeSymbol>(src);
 
         [MethodImpl(Inline)]
         public static CodeSymbols<T> index<T>(T[] src)

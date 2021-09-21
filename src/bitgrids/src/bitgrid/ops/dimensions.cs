@@ -8,6 +8,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Root;
+    using static core;
     using static Dimensions;
 
     partial class BitGrid
@@ -121,12 +122,12 @@ namespace Z0
             {
                 while(--failsafe >= 0)
                 {
-                    yield return root.pair(m,n);
+                    yield return pair(m,n);
 
                     if(m == n)
                         break;
 
-                    yield return root.pair(n,m);
+                    yield return pair(n,m);
 
                     m <<= 1;
 

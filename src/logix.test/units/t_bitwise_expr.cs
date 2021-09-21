@@ -222,16 +222,16 @@ namespace Z0.Logix
 
         public void check_ternary_ops()
         {
-            root.iter(Seq.set(VLogixOps.TernaryBitLogicKinds, NumericLogixHost.TernaryLogicKinds),
-                check_ternary_ops);
+            core.iter(VLogixOps.TernaryBitLogicKinds, check_ternary_ops);
+            //core.iter(NumericLogixHost.TernaryLogicKinds, check_ternary_ops);
         }
 
         void check_ternary_ops(TernaryBitLogicKind op)
         {
-            //check_ternary_ops<byte>(op);
-            //check_ternary_ops<ushort>(op);
-            // check_ternary_ops<uint>(op);
-            // check_ternary_ops<ulong>(op);
+            check_ternary_ops<byte>(op);
+            check_ternary_ops<ushort>(op);
+            check_ternary_ops<uint>(op);
+            check_ternary_ops<ulong>(op);
         }
 
         void check_op_identity<T>(TernaryBitLogicKind id)
@@ -261,13 +261,12 @@ namespace Z0.Logix
                 var sa = Random.Next<T>();
                 var sb = Random.Next<T>();
                 var sc = Random.Next<T>();
-
                 var z0 = BitVector.alloc<T>();
                 var va = BitVector.alloc(sa);
                 var vb = BitVector.alloc(sb);
                 var vc = BitVector.alloc(sc);
                 for(var i=0; i< z0.Width; i++)
-                    z0[i] = BL(va[i],vb[i],vc[i]);
+                    z0[i] = BL(va[i], vb[i], vc[i]);
 
                 var z3 = SC(sa, sb, sc);
                 if(!NumericLogixOps.same(z3, z0.State))
@@ -283,7 +282,6 @@ namespace Z0.Logix
                 var u2 = gcpu.vlo(v2);
                 var u3 = gcpu.vlo(v3);
                 var u4 = Vector128.GetElement(V128(u1,u2,u3),0);
-
                 Claim.eq(u4, z3);
             }
         }

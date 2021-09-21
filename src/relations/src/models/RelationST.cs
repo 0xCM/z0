@@ -12,11 +12,11 @@ namespace Z0
     /// <summary>
     /// Defines a correspondence between two elements
     /// </summary>
-    public readonly struct Relation<S,T>
+    public struct Relation<S,T>
     {
-        public readonly S A;
+        public S A;
 
-        public readonly T B;
+        public T B;
 
         [MethodImpl(Inline)]
         public Relation(S a, T b)

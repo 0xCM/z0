@@ -297,7 +297,7 @@ namespace Z0.Asm
             var projects = src.Files(FS.CsProj, true);
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            root.iter(projects,project => writer.WriteLine(string.Format(Pattern, project.Format(PathSeparator.BS))));
+            iter(projects,project => writer.WriteLine(string.Format(Pattern, project.Format(PathSeparator.BS))));
             Wf.EmittedFile(flow,projects.Length);
         }
 

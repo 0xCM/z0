@@ -239,9 +239,9 @@ namespace Z0.Asm
             var target = deps.Target();
             var graph = deps.Graph;
             Wf.Row(string.Format("Target: {0} {1} {2}", target.Framework, target.Runtime, target.RuntimeSignature));
-            root.iter(libs, lib => Wf.Row(lib.Name));
+            iter(libs, lib => Wf.Row(lib.Name));
             var buffer = text.buffer();
-            root.iter(rtlibs, lib => lib.Render(buffer));
+            iter(rtlibs, lib => lib.Render(buffer));
             Wf.Row(buffer.Emit());
         }
 
@@ -429,7 +429,7 @@ namespace Z0.Asm
         {
             var blocks = Wf.ApiCatalogs().Correlate();
             var f1 = ApiCodeBlocks.filter(blocks,ApiClassKind.And);
-            root.iter(f1,f => Wf.Row(f.Uri));
+            iter(f1,f => Wf.Row(f.Uri));
         }
     }
 }

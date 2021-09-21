@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// Correlates targets with their sources
         /// </summary>
-        IDictionary<Node<V>,List<Node<V>>> TargetIndex;
+        Dictionary<Node<V>,List<Node<V>>> TargetIndex;
 
         public static Nodes<V> Build(Node<V>[] vertices, Arrow<Node<V>>[] edges)
         {

@@ -39,7 +39,7 @@ namespace Z0
             where V : unmanaged
         {
             var buffer = alloc<Node<V>>(count);
-            Span<Node<V>> dst = buffer;
+            ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
                 seek(dst,i) = new Node<V>(i, Numeric.force<V>(i));
             return buffer;

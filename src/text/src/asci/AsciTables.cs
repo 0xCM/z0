@@ -16,7 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         static AsciTable table(AsciTableKind kind, AsciCode min, AsciCode max)
-            => new AsciTable(kind,min,max);
+            => new AsciTable(kind, min, max);
 
         [MethodImpl(Inline), Op]
         public static AsciTable segment(AsciCode min, AsciCode max)

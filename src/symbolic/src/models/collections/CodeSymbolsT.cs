@@ -40,13 +40,13 @@ namespace Z0
         public new Span<CodeSymbol<T>> Edit
         {
             [MethodImpl(Inline)]
-            get => memory.recover<T,CodeSymbol<T>>(base.Edit);
+            get => recover<T,CodeSymbol<T>>(base.Edit);
         }
 
         public new ReadOnlySpan<CodeSymbol<T>> View
         {
             [MethodImpl(Inline)]
-            get => memory.recover<T,CodeSymbol<T>>(base.View);
+            get => recover<T,CodeSymbol<T>>(base.View);
         }
 
         [MethodImpl(Inline)]

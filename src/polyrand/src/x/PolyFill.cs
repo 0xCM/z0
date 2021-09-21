@@ -68,7 +68,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IDomainSource source, Span<T> dst)
             where T : unmanaged
-                => source.Fill(ClosedInterval<T>.Full, dst.Length, ref memory.first(dst));
+                => source.Fill(ClosedInterval<T>.Full, dst.Length, ref first(dst));
 
         /// <summary>
         /// Fills a caller-allocated span with random values

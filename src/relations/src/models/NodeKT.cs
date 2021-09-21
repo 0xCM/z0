@@ -14,18 +14,18 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">The vertex index type</typeparam>
     /// <typeparam name="T">The payload type</typeparam>
-    public readonly struct Node<K,T>
+    public struct Node<K,T> : INode<K,T>
         where K : unmanaged
     {
         /// <summary>
         /// The index of the vertex that uniquely identifies it within a graph
         /// </summary>
-        public K Index {get;}
+        public K Index;
 
         /// <summary>
         /// The vertex payload
         /// </summary>
-        public T Content {get;}
+        public T Content;
 
         [MethodImpl(Inline)]
         public Node(K index, T content)
@@ -33,6 +33,12 @@ namespace Z0
             Index = index;
             Content = content;
         }
+
+        K INode<K, T>.Index
+            => Index;
+
+        T INode<T>.Content
+            => Content;
 
         public string Format()
             => string.Format("({0},{1})", Index, Content);

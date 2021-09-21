@@ -73,7 +73,7 @@ namespace Z0
         /// <typeparam name="T">The data type</typeparam>
         public static T TakeSingle<T>(int offset)
             where T : unmanaged
-                => memory.cell<T>(Bytes, VerifyIndex<T>(offset));
+                => core.cell<T>(Bytes, VerifyIndex<T>(offset));
 
         /// <summary>
         /// Selects a readonly span of values from the embedded source

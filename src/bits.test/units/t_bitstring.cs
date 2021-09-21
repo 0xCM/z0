@@ -271,7 +271,7 @@ namespace Z0
                     bytes[i] = blocks[i].TakeScalar<byte>();
 
                 var j = 0;
-                var y = Bits.concat(bytes[j++], bytes[j++], bytes[j++], bytes[j++],
+                var y = Bits.join(bytes[j++], bytes[j++], bytes[j++], bytes[j++],
                     bytes[j++], bytes[j++], bytes[j++], bytes[j++]);
                 Claim.eq(x,y);
             }

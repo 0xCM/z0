@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class t_vor : t_inx<t_vor>
     {
         public void vor_check()
@@ -147,7 +145,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = RepCount;
-            var stats = CellCalcs.metrics(blocks,w,t);
+            var stats = CellCalcs.stats(blocks,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
@@ -164,7 +162,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocks = RepCount;
-            var stats = CellCalcs.metrics(blocks,w,t);
+            var stats = CellCalcs.stats(blocks,w,t);
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 

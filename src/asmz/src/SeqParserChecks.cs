@@ -60,7 +60,7 @@ namespace Z0
             const byte SegCount = 6;
 
             var parser = gAlg.splitter<ushort>(Delimiter);
-            var input = memory.uint16(edit(span(Input)));
+            var input = uint16(edit(span(Input)));
             gAlg.split(parser, input, out var segments);
             return segments;
         }

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     using S = Surrogates;
 
@@ -128,7 +129,7 @@ namespace Z0
         {
             var count = Random.Next(21u, 256u);
             Span<T> data = new T[count];
-            ref var src = ref memory.first(data);
+            ref var src = ref core.first(data);
             gAlg.increments(first, count, ref src);
 
             for(var i=0; i < count; i++)

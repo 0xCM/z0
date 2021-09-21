@@ -83,7 +83,7 @@ namespace Z0
                 if(identity.Contains("."))
                     dst.Identity = Path.GetFileName(identity);
                 else
-                    dst.Identity = identity.Substring(0, root.min(identity.Length, 12));
+                    dst.Identity = identity.Substring(0, min(identity.Length, 12));
             }
             else
             {

@@ -9,11 +9,11 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Node<T> : INode<T>
+    public struct Node<T> : INode<T>
     {
-        public uint Index {get;}
+        public uint Index;
 
-        public T Content {get;}
+        public T Content;
 
         [MethodImpl(Inline)]
         public Node(uint id, T content)
@@ -21,6 +21,12 @@ namespace Z0
             Index = id;
             Content = content;
         }
+
+        T INode<T>.Content
+            => Content;
+
+        uint INode.Index
+            => Index;
 
         public static Node<T> Empty => default;
     }

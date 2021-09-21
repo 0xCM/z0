@@ -48,7 +48,7 @@ namespace Z0
         /// <typeparam name="N">The type that dermines block width</typeparam>
         /// <typeparam name="T">The type that determines cell width</typeparam>
         [MethodImpl(Inline)]
-        public static BlockedGridStats<W,T> metrics<W,T>(int bc, W bw = default, T t = default)
+        public static BlockedGridStats<W,T> stats<W,T>(int bc, W bw = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => new BlockedGridStats<W,T>(bc);

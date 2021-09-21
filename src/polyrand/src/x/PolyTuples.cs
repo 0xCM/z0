@@ -31,14 +31,6 @@ namespace Z0
             where T : struct
                 => Sources.pairs<T>(src, count);
 
-        public static Pairs<T> Pairs<T>(this ISource src, Span<Pair<T>> dst)
-            where T : struct
-                => Sources.pairs(src, dst);
-
-        public static Pairs<T> Pairs<T>(this ISource src, Pair<T>[] dst)
-            where T : struct
-                => Sources.pairs(src, dst);
-
         public static Pairs<T> Pairs<T>(this ISource src, uint count)
             where T : struct
                 => Sources.pairs<T>(src, (int)count);

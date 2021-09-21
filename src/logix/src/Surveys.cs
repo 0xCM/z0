@@ -55,7 +55,7 @@ namespace Z0
             where T : unmanaged
         {
             var rowcount = src.Answered.Length;
-            var maxrows = memory.width<T>();
+            var maxrows = width<T>();
             if(rowcount > maxrows)
                 throw new Exception($"Too many rows for a primal bitmatrix");
 
@@ -75,7 +75,7 @@ namespace Z0
             where T : unmanaged
         {
             var rowcount = src.Questions.Length;
-            var maxrows = memory.width<T>();
+            var maxrows = width<T>();
             if(rowcount > maxrows)
                 throw new Exception($"Too many rows for a primal bitmatrix");
 
@@ -102,7 +102,7 @@ namespace Z0
         {
             var rowcount = src.Answered.Length;
             var dst = RowBits.alloc<T>(rowcount);
-            for(var i=0; i< rowcount; i++)
+            for(var i=0; i<rowcount; i++)
                 dst[i] = vector(src.Answered[i]);
             return dst;
         }

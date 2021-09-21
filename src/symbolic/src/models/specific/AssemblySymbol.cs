@@ -13,7 +13,7 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static memory;
+    using static core;
 
     using api = CodeSymbols;
 

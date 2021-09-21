@@ -13,6 +13,10 @@ namespace Z0
     partial struct core
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static bool same<T>(in T a, in T b)
+            => Unsafe.AreSame(ref edit(a), ref edit(b));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte seek8<T>(in T src, ulong count)
             => ref add(@as<T,byte>(edit(src)), (int)count);
 

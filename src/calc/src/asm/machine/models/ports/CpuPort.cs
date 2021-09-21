@@ -15,15 +15,15 @@ namespace Z0.Asm
 
         readonly ushort Data;
 
-        public DataWidth Width
-            => DataWidth.W8;
-
         [MethodImpl(Inline)]
         public CpuPort(Address16 address)
         {
             Address = address;
             Data = 0xFFFF;
         }
+
+        public DataWidth Width
+            => DataWidth.W8;
 
         public bool IsEmpty
         {

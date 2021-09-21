@@ -102,7 +102,7 @@ namespace Z0.Asm
 
         public void Decode(ReadOnlySpan<ApiPartBlocks> src, Span<ApiPartRoutines> dst)
         {
-            var hostFx = root.list<ApiHostRoutines>();
+            var hostFx = list<ApiHostRoutines>();
             var stats = ApiDecoderStats.init();
             var partCount = src.Length;
             var parts = src;

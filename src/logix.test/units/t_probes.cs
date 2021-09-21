@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-
     public class t_probes : UnitTest<t_probes>
     {
         public void probe_select()

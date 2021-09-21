@@ -60,7 +60,7 @@ namespace Z0
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
         /// </summary>
         [MethodImpl(Inline)]
-        public static Bit32 IsZero(this BitMatrix8 A)
+        public static bit IsZero(this BitMatrix8 A)
             => BitMatrix.empty(A);
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static ulong Pack(this BitMatrix8 A)
-            => memory.u64(A.Data);
+            => core.u64(A.Data);
 
         /// <summary>
         /// Transposes a copy of the source matrix

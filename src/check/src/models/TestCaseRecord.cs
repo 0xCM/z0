@@ -4,10 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using static Root;
     using static core;
 
-    using static RenderFunctions;
     using static FormatFunctions;
 
     public enum TestCaseField : uint
@@ -30,7 +31,9 @@ namespace Z0
     /// </summary>
     public struct TestCaseRecord : IRecord<TestCaseRecord>, ITextual
     {
-        public utf8 CaseName;
+        public const byte FieldCount = 6;
+
+        public string CaseName;
 
         public bool Passed;
 
@@ -42,8 +45,7 @@ namespace Z0
 
         public string Message;
 
-        public static RenderCellText<TestCaseRecord> RenderFunction
-            => TestCaseRecords.render;
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{60,14,26,26,26,5};
 
         public static FormatCell<TestCaseRecord> FormatFunction
             => TestCaseRecords.format;

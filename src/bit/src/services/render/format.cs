@@ -19,7 +19,7 @@ namespace Z0
             var buffer = CharBlock2.Null;
             var dst = buffer.Data;
             render2(src, ref i, dst);
-            return new string(dst);
+            return text.format(dst);
         }
 
         [Op]
@@ -28,7 +28,7 @@ namespace Z0
             var buffer = CharBlock3.Null.Data;
             var i=0u;
             var count = render3(src, ref i, buffer);
-            return new string(slice(buffer,0,count));
+            return text.format(slice(buffer,0,count));
         }
 
         [Op]
@@ -37,7 +37,7 @@ namespace Z0
             var buffer = CharBlock4.Null.Data;
             var i=0u;
             var count = render4(src, ref i, buffer);
-            return new string(slice(buffer,0,count));
+            return text.format(slice(buffer,0,count));
         }
 
         [Op]
@@ -50,7 +50,7 @@ namespace Z0
             var buffer = CharBlock5.Null.Data;
             var i=0u;
             var count = render5(src, ref i, buffer);
-            return new string(slice(buffer,0,count));
+            return text.format(slice(buffer,0,count));
         }
 
         [Op]
@@ -59,7 +59,7 @@ namespace Z0
             var buffer = CharBlock6.Null.Data;
             var i=0u;
             var count = render6(src, ref i, buffer);
-            return new string(slice(buffer,0,count));
+            return text.format(slice(buffer,0,count));
         }
 
         [Op]
@@ -68,20 +68,20 @@ namespace Z0
             var buffer = CharBlock7.Null.Data;
             var i=0u;
             var count = render7(src, ref i, buffer);
-            return new string(slice(buffer,0,count));
+            return text.format(slice(buffer,0,count));
         }
 
         [Op]
         public static string format8(byte src)
-            => new string(render8(src));
+            => text.format(render8(src));
 
         [Op]
         public static string format16x8(ushort src, char sep = Chars.Space)
-            => new string(render16x8(src, sep));
+            => text.format(render16x8(src, sep));
 
         [Op]
         public static string format16(ushort src)
-            => new string(render16(src));
+            => text.format(render16(src));
 
         [Op]
         public static string format32x8(uint src, char sep = Chars.Space)
@@ -89,7 +89,7 @@ namespace Z0
 
         [Op]
         public static string format64x8(ulong src)
-            => new string(render64x8(src));
+            => text.format(render64x8(src));
 
         public static string format(ReadOnlySpan<byte> src, in BitFormat config)
         {

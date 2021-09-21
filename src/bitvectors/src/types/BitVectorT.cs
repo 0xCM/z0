@@ -65,7 +65,7 @@ namespace Z0
         public readonly Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(Data);
+            get => bytes(Data);
         }
 
         /// <summary>

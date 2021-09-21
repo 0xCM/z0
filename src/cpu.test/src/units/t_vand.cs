@@ -42,7 +42,6 @@ namespace Z0
             vand_check(w, z32i);
             vand_check(w, z64);
             vand_check(w, z64i);
-
         }
 
         void vand_check(N256 w)

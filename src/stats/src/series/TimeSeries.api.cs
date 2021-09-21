@@ -12,6 +12,7 @@ namespace Z0
     using System.Threading.Tasks;
 
     using static Root;
+    using static core;
 
     public static class TimeSeries
     {
@@ -60,11 +61,11 @@ namespace Z0
         public static TimeSeries<T> define<T>(Interval<T> domain, ulong[] seed)
             where T : unmanaged
         {
-            var id = core.inc(ref LastSeriesId);
+            var id = inc(ref LastSeriesId);
             var rng = Rng.xorShift1024(seed);
             if(!States.TryAdd(id,rng))
                 throw new Exception($"Key {id} already exists");
-            return new TimeSeries<T>(id, domain, term(0, core.zero<T>()));
+            return new TimeSeries<T>(id, domain, term(0, zero<T>()));
         }
 
         public static void evolve<T>(Interval<T> domain, ulong[] seed, int count, Action<TimeSeries<T>,Duration> complete)
@@ -93,7 +94,7 @@ namespace Z0
                     let status = evolve.ContinueWith(t => receiver(t.Result))
                     select evolve;
 
-            await root.task(() => Task.WaitAll(variations.ToArray()));
+            await core.run(() => Task.WaitAll(variations.ToArray()));
         }
 
         static SeriesEvolution<T> run<T>(in ulong[] seed, in Interval<T> domain, int steps)

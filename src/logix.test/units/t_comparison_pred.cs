@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static LogicEngine;
     using static PredicateSpec;
     using static ApiComparisonClass;

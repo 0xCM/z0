@@ -160,7 +160,6 @@ namespace Z0.Logix
                 x = gcpu.vxor(x,a);
                 y = gcpu.vxor(y,a);
             }
-
         }
 
         void cpu_gt_op_check<T>(N128 n)

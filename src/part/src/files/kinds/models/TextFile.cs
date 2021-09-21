@@ -50,27 +50,27 @@ namespace Z0
         }
     }
 
-    public sealed class TextFile : TextFile<TextFile>
-    {
-        public TextFile()
-            : base(FS.FilePath.Empty, TextBlock.Empty)
-        {
+    // public sealed class TextFile : TextFile<TextFile>
+    // {
+    //     public TextFile()
+    //         : base(FS.FilePath.Empty, TextBlock.Empty)
+    //     {
 
-        }
+    //     }
 
-        public TextFile(TextBlock content)
-            : base(FS.FilePath.Empty, content)
-        {
+    //     public TextFile(TextBlock content)
+    //         : base(FS.FilePath.Empty, content)
+    //     {
 
-        }
+    //     }
 
-        public TextFile(FS.FilePath src, TextBlock content)
-            : base(src, content)
-        {
+    //     public TextFile(FS.FilePath src, TextBlock content)
+    //         : base(src, content)
+    //     {
 
-        }
+    //     }
 
-        public override TextFile Load(FS.FilePath location)
-            => new TextFile(location, location.ReadText());
-    }
+    //     public override TextFile Load(FS.FilePath location)
+    //         => new TextFile(location, location.ReadText());
+    // }
 }

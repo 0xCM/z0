@@ -214,7 +214,7 @@ namespace Z0
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = memory.nat32i<N>();
+            var n = core.nat32i<N>();
 
             for(var sample=0; sample < RepCount; sample++)
             {
@@ -359,7 +359,7 @@ namespace Z0
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = memory.nat32i<N>();
+            var n = core.nat32i<N>();
 
             for(var sample=0; sample<RepCount; sample++)
             {

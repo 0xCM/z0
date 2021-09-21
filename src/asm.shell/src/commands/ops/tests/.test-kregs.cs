@@ -43,7 +43,6 @@ namespace Z0.Asm
             }
 
             var input = (ulong)PermLits.Perm16Identity;
-
             for(byte i=0; i<7; i++)
             {
                 regs[i] = input << i*3;
