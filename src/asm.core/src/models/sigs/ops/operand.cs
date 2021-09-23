@@ -44,7 +44,7 @@ namespace Z0.Asm
             => src;
 
         [MethodImpl(Inline), Op]
-        public static MaskReg operand(MaskRegToken src)
+        public static OpMask operand(OpMaskToken src)
             => src;
 
         [MethodImpl(Inline), Op]
@@ -76,7 +76,7 @@ namespace Z0.Asm
             => src;
 
         [MethodImpl(Inline), Op]
-        public static ZmmBCast src(ZmmBCastToken src)
+        public static Broadcast src(BroadcastToken src)
             => src;
 
         [MethodImpl(Inline), Op]

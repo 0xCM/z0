@@ -6,107 +6,100 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
+    using static CharText;
     using static core;
 
     /// <summary>
-    /// Defines a parametrically-predicated blocked grid
+    /// Defines grid dimensions based on specification without parametrization
     /// </summary>
-    public readonly struct GridDim<W,M,N,T>
-        where W : unmanaged, ITypeNat
-        where M : unmanaged, ITypeNat
-        where N : unmanaged, ITypeNat
-        where T : unmanaged
+    [StructLayout(LayoutKind.Sequential), DataType]
+    public readonly struct GridDim : IDataTypeEquatable<GridDim>
     {
-        /// <summary>
-        /// The bit width of a block
-        /// </summary>
-        public int BlockWidth
+        public static bool Parse(string s, out GridDim dst)
         {
-            [MethodImpl(Inline)]
-            get => nat32i<W>();
+            dst = GridDim.Empty;
+
+            var n = 0u;
+            var parts = @readonly(s.Split('x'));
+            var parser = NumericParser.create<uint>();
+            dst = default;
+            if(parts.Length == 2)
+            {
+                if(parser.Parse(skip(parts,0), out var m) && parser.Parse(skip(parts,1), out n))
+                {
+                    dst = new GridDim(m, n);
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public int RowCount
-        {
-            [MethodImpl(Inline)]
-            get => nat32i<M>();
-        }
+        public readonly uint M;
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public int ColCount
+        public readonly uint N;
+
+        [MethodImpl(Inline)]
+        public GridDim(uint rows, uint cols)
         {
-            [MethodImpl(Inline)]
-            get => nat32i<N>();
+            M = rows;
+            N = cols;
         }
 
         /// <summary>
-        /// The bit width of a storage cell
-        /// </summary>
-        public int CellWidth
-        {
-            [MethodImpl(Inline)]
-            get => (int)width<T>();
-        }
-
-        /// <summary>
-        /// The total number of grid bits
-        /// </summary>
-        public int BitCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)NatCalc.mul<M,N>();
-        }
-
-        /// <summary>
-        /// The number of cells required cover a grid
-        /// </summary>
-        public int CellCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)CellCalcs.gridcells<M,N,T>();
-        }
-
-        /// <summary>
-        /// The number of bytes required to cover a grid
-        /// </summary>
-        public uint ByteCount
-        {
-            [MethodImpl(Inline)]
-            get => CellCalcs.mincells<M,N,byte>();
-        }
-
-        /// <summary>
-        /// Computes the aligned number of W-blocks required to cover M*N bits
-        /// </summary>
-        public int BlockCount
-        {
-            [MethodImpl(Inline)]
-            get => CellCalcs.cellcover<W,M,N,T>();
-        }
-
-        /// <summary>
-        /// Computes the number of cells covered by a block
-        /// </summary>
-        public int BlockLength
-        {
-            [MethodImpl(Inline)]
-            get => CellCalcs.blocklength<W,T>();
-        }
-
-        /// <summary>
-        /// Returns a dimension expression of the form {R}x{C}x{W}w where
-        /// R := row count
-        /// C := column count
-        /// W := cell width
+        /// Formats the dimension in canonical form
         /// </summary>
         public string Format()
-            => $"{BlockWidth}::{RowCount}x{ColCount}x{CellWidth}w";
+            => $"{M}x{N}";
+
+        [MethodImpl(Inline)]
+        public void Deconstruct(out uint rows, out uint cols)
+        {
+            rows = M;
+            cols = N;
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(GridDim src)
+            => src.M == M
+            && src.N == N;
+
+        public override string ToString()
+            => Format();
+
+        public override int GetHashCode()
+            => (int)FastHash.combine(M, N);
+
+        public override bool Equals(object obj)
+            => obj is GridDim d && Equals(d);
+
+        public static bool operator ==(GridDim d1, GridDim d2)
+            => d1.Equals(d2);
+
+        public static bool operator !=(GridDim d1, GridDim d2)
+            => !d1.Equals(d2);
+
+        [MethodImpl(Inline)]
+        public static implicit operator GridDim((int rows, int cols) src)
+            => new GridDim((uint)src.rows,(uint)src.cols);
+
+        [MethodImpl(Inline)]
+        public static implicit operator GridDim((uint rows, uint cols) src)
+            => new GridDim(src.rows,src.cols);
+
+        public static GridDim Empty
+            => default;
+
+        public static RenderTemplate RT =>
+             fLT + nameof(GridDim.M) + RT + x +
+             fLT + nameof(GridDim.N) + RT;
     }
 }

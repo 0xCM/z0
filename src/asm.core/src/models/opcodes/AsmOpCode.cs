@@ -8,8 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using Z0.llvm;
-
     using static Root;
     using static core;
     using static AsmOpCodeTokens;

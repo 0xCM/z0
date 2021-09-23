@@ -10,17 +10,13 @@ namespace Z0
     using static Root;
     using static core;
 
-    public class Grid<T>
+    using api = Grids;
+
+    public readonly struct Grid<T>
     {
         readonly Index<T> Data;
 
-        public GridDim Dim {get;}
-
-        public Grid(GridDim dim)
-        {
-            Dim = dim;
-            Data = alloc<T>(Dim.M*Dim.N);
-        }
+        public readonly GridDim Dim;
 
         [MethodImpl(Inline)]
         public Grid(GridDim dim, T[] data)
@@ -37,20 +33,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T Cell(uint row, uint col)
-            => ref seek(First, linear(Dim, (row, col)));
+            => ref seek(First, api.lineraize(Dim, (row, col)));
 
         [MethodImpl(Inline)]
         public ref T Cell(GridPoint point)
-            => ref seek(First, linear(Dim, point));
+            => ref seek(First, api.lineraize(Dim, point));
 
         public ref T this[uint row, uint col]
         {
             [MethodImpl(Inline)]
             get => ref Cell(row,col);
         }
-
-        [MethodImpl(Inline)]
-        static uint linear(GridDim dim, GridPoint point)
-            => point.Row*dim.N+ point.Col;
     }
 }

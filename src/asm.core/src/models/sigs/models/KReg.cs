@@ -12,28 +12,28 @@ namespace Z0.Asm
 
     partial class AsmSigs
     {
-        public readonly struct ZmmBCast
+        public readonly struct KReg
         {
-            public ZmmBCastToken Token {get;}
+            public MaskRegToken Token {get;}
 
             [MethodImpl(Inline)]
-            public ZmmBCast(ZmmBCastToken token)
+            public KReg(MaskRegToken token)
             {
                 Token = token;
             }
 
-            public K Kind => K.ZmmBCast;
+            public K Kind => K.MaskReg;
 
             [MethodImpl(Inline)]
-            public static implicit operator ZmmBCast(ZmmBCastToken src)
-                => new ZmmBCast(src);
+            public static implicit operator KReg(MaskRegToken src)
+                => new KReg(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator ZmmBCastToken(ZmmBCast src)
+            public static implicit operator MaskRegToken(KReg src)
                 => src.Token;
 
             [MethodImpl(Inline)]
-            public static implicit operator AsmSigToken(ZmmBCast src)
+            public static implicit operator AsmSigToken(KReg src)
                 => token(src.Kind, src);
         }
     }

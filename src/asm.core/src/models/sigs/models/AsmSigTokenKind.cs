@@ -38,8 +38,6 @@ namespace Z0.Asm
 
         Ptr,
 
-        ZmmBCast,
-
         Rounding,
 
         FarPtr,
@@ -54,6 +52,8 @@ namespace Z0.Asm
 
         YmmReg,
 
-        ZmmReg
+        ZmmReg,
+
+        OpMask
     }
 }

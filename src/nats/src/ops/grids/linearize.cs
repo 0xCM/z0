@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct Grids
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Grid<T> grid<T>(GridDim dim, T[] data)
-            => new Grid<T>(dim, data);
+        [MethodImpl(Inline), Op]
+        public static uint lineraize(GridDim dim, GridPoint point)
+            => point.Row*dim.N+ point.Col;
     }
 }

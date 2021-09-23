@@ -20,13 +20,8 @@ namespace Z0.Asm
     [StructLayout(LayoutKind.Sequential)]
     public struct AsmSigOps
     {
-        public AsmSigOp Op0;
 
-        public AsmSigOp Op1;
 
-        public AsmSigOp Op2;
-
-        public AsmSigOp Op3;
     }
 
     [StructLayout(LayoutKind.Sequential)]

@@ -12,28 +12,28 @@ namespace Z0.Asm
 
     partial class AsmSigs
     {
-        public readonly struct MaskReg
+        public readonly struct OpMask
         {
-            public MaskRegToken Token {get;}
+            public OpMaskToken Token {get;}
 
             [MethodImpl(Inline)]
-            public MaskReg(MaskRegToken token)
+            public OpMask(OpMaskToken token)
             {
                 Token = token;
             }
 
-            public K Kind => K.MaskReg;
+            public K Kind => K.OpMask;
 
             [MethodImpl(Inline)]
-            public static implicit operator MaskReg(MaskRegToken src)
-                => new MaskReg(src);
+            public static implicit operator OpMask(OpMaskToken src)
+                => new OpMask(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator MaskRegToken(MaskReg src)
+            public static implicit operator OpMaskToken(OpMask src)
                 => src.Token;
 
             [MethodImpl(Inline)]
-            public static implicit operator AsmSigToken(MaskReg src)
+            public static implicit operator AsmSigToken(OpMask src)
                 => token(src.Kind, src);
         }
     }
