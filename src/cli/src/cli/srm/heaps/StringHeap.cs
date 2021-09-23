@@ -20,44 +20,6 @@ namespace Z0
         {
             internal readonly MemoryBlock Block;
 
-            public MemoryAddress Baseaddress
-            {
-                [MethodImpl(Inline)]
-                get => Block.BaseAddress;
-            }
-
-            [MethodImpl(Inline), Op]
-            public static uint GetHeapOffset(StringHandle src)
-                => (core.uint32(src) & HeapHandleType.OffsetMask);
-
-            [MethodImpl(Inline), Op]
-            public static StringHandle HandleFromOffset(int heapOffset)
-                => core.@as<uint,StringHandle>(StringHandleType.String | (uint)heapOffset);
-
-            [MethodImpl(Inline), Op]
-            public BlobReader GetBlobReader(StringHandle handle)
-                => new BlobReader(GetMemoryBlock(handle));
-
-            [MethodImpl(Inline), Op]
-            public MemoryBlock GetMemoryBlock(StringHandle handle)
-                => handle.IsVirtual() ? GetVirtualHandleMemoryBlock(handle) : GetNonVirtualStringMemoryBlock(handle);
-
-            [MethodImpl(Inline), Op]
-            public int IndexOf(int offset, AsciCode match)
-                => Block.Utf8NullTerminatedOffsetOfAsciiChar(offset, (char)match);
-
-            public StringHandle GetNextHandle(StringHandle handle)
-            {
-                if (handle.IsVirtual())
-                    return default(StringHandle);
-
-                var terminator = Block.IndexOf(0, handle.GetHeapOffset());
-                if (terminator == -1 || terminator == Block.Length - 1)
-                    return default(StringHandle);
-
-                return HandleFromOffset(terminator + 1);
-            }
-
             internal enum VirtualIndex
             {
                 System_Runtime_WindowsRuntime,

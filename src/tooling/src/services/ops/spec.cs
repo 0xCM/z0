@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct Tooling
+    partial class Tooling
     {
         [Op]
         public static ToolCmdSpec spec(FS.FilePath path, params ToolCmdArg[] args)

@@ -2,15 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System.Runtime.CompilerServices;
+    using System;
 
-    using static Root;
-
-    [ApiHost]
-    public readonly struct DataConverters
+    public class OpCodeAttribute : Attribute
     {
+        public OpCodeAttribute(string code)
+        {
+            OpCode =  code;
+        }
 
+        public string OpCode {get;}
     }
+
 }

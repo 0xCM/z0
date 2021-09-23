@@ -42,6 +42,8 @@ namespace Z0
 
         public static ToolId clang_cl => "clang-cl";
 
+        public static ToolId llvm => "llvm";
+
         public static ToolId llvm_as => "llvm-as";
 
         public static ToolId llvm_nm => "llvm-nm";

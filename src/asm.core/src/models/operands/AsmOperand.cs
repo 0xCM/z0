@@ -9,6 +9,7 @@ namespace Z0.Asm
     using System.Runtime.InteropServices;
 
     using static Root;
+    using static core;
     using static AsmOperands;
 
     [StructLayout(LayoutKind.Sequential,Pack=1)]
@@ -33,7 +34,7 @@ namespace Z0.Asm
         {
             OpClass = AsmOpClass.R;
             Size = src.RegWidth;
-            _Data = core.u16(src);
+            _Data = u16(src);
         }
 
         [MethodImpl(Inline)]
@@ -73,7 +74,7 @@ namespace Z0.Asm
         {
             OpClass = AsmOpClass.M;
             Size = NativeSizeCode.W8;
-            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+            _Data = @as<AsmAddress,ByteBlock10>(src.Address);
         }
 
         [MethodImpl(Inline)]
@@ -81,7 +82,7 @@ namespace Z0.Asm
         {
             OpClass = AsmOpClass.M;
             Size = NativeSizeCode.W16;
-            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+            _Data = @as<AsmAddress,ByteBlock10>(src.Address);
         }
 
         [MethodImpl(Inline)]
@@ -89,7 +90,7 @@ namespace Z0.Asm
         {
             OpClass = AsmOpClass.M;
             Size = NativeSizeCode.W32;
-            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+            _Data = @as<AsmAddress,ByteBlock10>(src.Address);
         }
 
         [MethodImpl(Inline)]
@@ -97,7 +98,7 @@ namespace Z0.Asm
         {
             OpClass = AsmOpClass.M;
             Size = NativeSizeCode.W64;
-            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+            _Data = @as<AsmAddress,ByteBlock10>(src.Address);
         }
 
         [MethodImpl(Inline)]
@@ -105,7 +106,7 @@ namespace Z0.Asm
         {
             OpClass = AsmOpClass.M;
             Size = NativeSizeCode.W128;
-            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+            _Data = @as<AsmAddress,ByteBlock10>(src.Address);
         }
 
         [MethodImpl(Inline)]
@@ -113,7 +114,7 @@ namespace Z0.Asm
         {
             OpClass = AsmOpClass.M;
             Size = NativeSizeCode.W256;
-            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+            _Data = @as<AsmAddress,ByteBlock10>(src.Address);
         }
 
         [MethodImpl(Inline)]
@@ -121,7 +122,7 @@ namespace Z0.Asm
         {
             OpClass = AsmOpClass.M;
             Size = NativeSizeCode.W512;
-            _Data = core.@as<AsmAddress,ByteBlock10>(src.Address);
+            _Data = @as<AsmAddress,ByteBlock10>(src.Address);
         }
 
         [MethodImpl(Inline)]
@@ -129,7 +130,7 @@ namespace Z0.Asm
         {
             OpClass = AsmOpClass.M;
             Size = src.AddressSize;
-            _Data = core.@as<AsmAddress,ByteBlock10>(src);
+            _Data = @as<AsmAddress,ByteBlock10>(src);
         }
 
         [MethodImpl(Inline)]

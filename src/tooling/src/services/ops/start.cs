@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Tooling
+    partial class Tooling
     {
         public static async Task<int> start(ToolCmdSpec spec, Action<string> status, Action<string> error)
         {

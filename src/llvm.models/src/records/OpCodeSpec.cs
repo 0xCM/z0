@@ -16,7 +16,7 @@ namespace Z0.llvm
 
         public ushort Index;
 
-        public CharBlock32 OpId;
+        public AsmId Id;
 
         public CharBlock16 Mnemonic;
 
@@ -25,7 +25,7 @@ namespace Z0.llvm
         public CharBlock24 OpCodeBytes;
 
         public int CompareTo(OpCodeSpec src)
-            => (OpId as IComparable<CharBlock32>).CompareTo(src.OpId);
+            => Id.CompareTo(src.Id);
 
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[FieldCount]{8,32,16,16,24};

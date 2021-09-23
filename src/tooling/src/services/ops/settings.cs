@@ -9,7 +9,7 @@ namespace Z0
     using SQ = SymbolicQuery;
     using SR = SymbolicRender;
 
-    partial struct Tooling
+    partial class Tooling
     {
         public static Settings settings(FS.FilePath src)
         {

@@ -31,16 +31,11 @@ namespace Z0
             => llvm.EtlWorkflow.create(wf);
 
         [Op]
-        public static OmniScript OmniScript(this IWfRuntime wf)
-            => Z0.OmniScript.create(wf);
-
-        [Op]
         public static LlvmPaths LlvmPaths(this IServiceContext context)
             => llvm.LlvmPaths.create(context);
 
         [Op]
         public static LlvmMc LLvmMc(this IWfRuntime wf)
             => llvm.LlvmMc.create(wf);
-
     }
 }

@@ -30,13 +30,5 @@ namespace Z0.Asm
             OpClass =opclass;
             Size = size;
         }
-
-        [MethodImpl(Inline)]
-        public AsmOperand(AsmOpClass opclass, AsmSizeClass size)
-        {
-            Data = default;
-            OpClass =opclass;
-            Size = size;
-        }
     }
 }

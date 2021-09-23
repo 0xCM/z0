@@ -12,7 +12,7 @@ namespace Z0
     using SQ = SymbolicQuery;
     using SR = SymbolicRender;
 
-    partial struct Tooling
+    partial class Tooling
     {
         public static ReadOnlySpan<CmdOptionSpec> options(FS.FilePath src)
         {

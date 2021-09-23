@@ -7,7 +7,7 @@ namespace Z0
     using static WsAtoms;
     using static core;
 
-    partial struct Tooling
+    partial class Tooling
     {
         public static IToolWs configure(IToolWs ws)
         {

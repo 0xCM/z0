@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Tooling
+    partial class Tooling
     {
         [MethodImpl(Inline), Op]
         public static CmdExecStatus status(ScriptProcess process)

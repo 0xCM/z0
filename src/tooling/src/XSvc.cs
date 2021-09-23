@@ -21,11 +21,14 @@ namespace Z0
         [Op]
         public static ScriptRunner ScriptRunner(this IEnvPaths paths)
             => Svc.ScriptRunner.create(paths);
-    }
 
-    public static partial class XTend
-    {
-        public static ReadOnlySpan<TextLine> RunToolCmd(this IServiceContext context, ToolScript script)
-            => context.ScriptRunner().RunToolCmd(script);
+        [Op]
+        public static Tooling Tooling(this IWfRuntime wf)
+            => Svc.Tooling.create(wf);
+
+        [Op]
+        public static OmniScript OmniScript(this IWfRuntime wf)
+            => Svc.OmniScript.create(wf);
+
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
     using static core;
     using static BitFlow;
 
-    partial struct Tooling
+    partial class Tooling
     {
         public static ReadOnlySpan<ToolFlow> flow(ReadOnlySpan<TextLine> src)
         {

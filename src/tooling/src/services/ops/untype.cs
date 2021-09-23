@@ -6,17 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
-    using System.Threading.Tasks;
 
     using static Root;
     using static core;
-    using static BitFlow;
 
-    using SQ = SymbolicQuery;
-    using SR = SymbolicRender;
-
-    partial struct Tooling
+    partial class Tooling
     {
         [Op, Closures(UInt64k)]
         public static ToolExecSpec untype<T>(in T spec)

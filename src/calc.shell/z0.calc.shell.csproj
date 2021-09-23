@@ -13,7 +13,6 @@
     <ProjectReference Include="$(Symbolic)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(AsmCore)" />
-    <ProjectReference Include="$(Engine)" />
     <ProjectReference Include="$(Pipes)" />
     <ProjectReference Include="$(Fsm)" />
   </ItemGroup>

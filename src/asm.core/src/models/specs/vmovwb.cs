@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Root;
     using static AsmOperands;
+    using static asm;
 
     partial class AsmSpecs
     {

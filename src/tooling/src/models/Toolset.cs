@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Toolset
+    public class Toolset
     {
         public FS.FolderPath InstallBase {get;}
 
@@ -21,5 +21,22 @@ namespace Z0
             InstallBase = @base;
             Members = members;
         }
+
+        public Index<ToolDeployment> Deployments
+            => Members.Select(x => new ToolDeployment(x,InstallBase + FS.file(x.Format(), FS.Exe)));
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Members.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Members.IsNonEmpty;
+        }
+
+        public static Toolset Empty => new Toolset(FS.FolderPath.Empty, sys.empty<ToolId>());
     }
 }

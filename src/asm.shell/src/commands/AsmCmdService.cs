@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using llvm;
-
     using static Root;
     using static core;
 
@@ -62,13 +60,9 @@ namespace Z0.Asm
 
         IWorkspace OutWs;
 
-        IWorkspace LogWs;
-
         IProjectSet ProjectWs;
 
         IWorkspace DataSources;
-
-        ShellEnv ShellEnv;
 
         llvm.EtlWorkflow LlvmEtl;
 
@@ -101,7 +95,6 @@ namespace Z0.Asm
             CodeSize = 0;
             _Assembled = array<byte>();
             ResPack = CliMemoryMap.Empty;
-            ShellEnv = ShellEnv.Empty();
         }
 
         protected override void Initialized()
@@ -119,7 +112,6 @@ namespace Z0.Asm
             Random = Rng.wyhash64();
             ApiHexPacks = Wf.ApiHexPacks();
             OutWs = Ws.Output();
-            LogWs = Ws.Logs();
             ProjectWs = Ws.Projects();
             DataSources = Ws.Sources();
             ApiCatalogs = Wf.ApiCatalogs();
@@ -185,20 +177,6 @@ namespace Z0.Asm
         void Emitted(FS.FilePath dst)
             => Write(string.Format("Emitted {0}", dst.ToUri()));
 
-        void EmitRecords<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
-            where T : struct
-        {
-            var count = Tables.emit(src, widths, dst);
-            RecordsEmitted(count, dst);
-        }
-
-        void EmitAsciRecords<T>(ReadOnlySpan<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
-            where T : struct
-        {
-            var count = Tables.emit(src, widths, TextEncodingKind.Asci, dst);
-            RecordsEmitted(count, dst);
-        }
-
         Outcome BuildAsmExe(string id)
         {
             const string ScriptId = "build-exe";
@@ -230,10 +208,5 @@ namespace Z0.Asm
         //     Write(string.Format("Loaded {0} process asm records from {1}", loaded.Length, path.ToUri()));
         //     return loaded;
         // }
-
-        void RecordsEmitted(Count count, FS.FilePath dst)
-        {
-            Write(string.Format("Emitted {0} records to {1}", count, dst.ToUri()));
-        }
     }
 }

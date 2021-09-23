@@ -20,7 +20,7 @@ namespace Z0.Asm
         unsafe Outcome Test(CmdArgs args)
         {
             var result = Outcome.Success;
-            DagTests();
+
             return result;
         }
 

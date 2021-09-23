@@ -50,7 +50,7 @@ namespace Z0
         /// <summary>
         /// The process image version
         /// </summary>
-        public VersionInfo ImageVersion;
+        public VersionSpec ImageVersion;
 
         /// <summary>
         /// The minimum working set size

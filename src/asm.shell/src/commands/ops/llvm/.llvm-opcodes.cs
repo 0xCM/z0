@@ -13,9 +13,8 @@ namespace Z0.Asm
         Outcome LlvmOcSpecs(CmdArgs args)
         {
             var result = Outcome.Success;
-
             var src = llvm.MC.opcodes().View;
-            var formatter = Tables.formatter<OpCodeSpec>();
+            var formatter = Tables.formatter<OpCodeSpec>(OpCodeSpec.RenderWidths);
             var count = src.Length;
             for(var i=0; i<count; i++)
             {
