@@ -146,8 +146,8 @@ public enum PartId : byte
     [Symbol("cpu")]
     Cpu = 46,
 
-    [Symbol("cpu.shell")]
-    CpuShell = 47,
+    [Symbol("llvm.tool")]
+    LlvmTool = 47,
 
     [Symbol("gen")]
     Gen = 48,

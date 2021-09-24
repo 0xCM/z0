@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     public sealed class TestWs : Workspace<TestWs>
     {
@@ -21,7 +20,5 @@ namespace Z0
             : base(root)
         {
         }
-
-        public override WsKind Kind => WsKind.Test;
     }
 }

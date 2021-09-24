@@ -25,11 +25,7 @@ namespace Z0
 
         public const string control = A.control;
 
-        public const string lang = A.lang;
-
         public const string output = A.output;
-
-        public const string queries = A.queries;
 
         public const string imports = A.imports;
 

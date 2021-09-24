@@ -16,9 +16,9 @@ namespace Z0
         /// </summary>
         public readonly struct Alt<T> : IRule<Alt<T>,T>
         {
-            public One<T> Left {get;}
+            public T Left {get;}
 
-            public One<T> Right {get;}
+            public T Right {get;}
 
             [MethodImpl(Inline)]
             public Alt(T left, T right)
@@ -41,10 +41,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Alt<T>((T left, T right) src)
                 => new Alt<T>(src);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Alt(Alt<T> src)
-                => new Alt(src.Left, src.Right);
         }
     }
 }

@@ -33,8 +33,6 @@ namespace Z0
             get => _WsRoot;
         }
 
-        public WsKind Kind => WsKind.Dev;
-
         public Outcome Select(Identifier name, out IWorkspace dst)
         {
             var result = Outcome.Failure;

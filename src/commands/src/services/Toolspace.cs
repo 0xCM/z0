@@ -40,30 +40,5 @@ namespace Z0
 
         public static ToolId clang => "clang";
 
-        public static ToolId clang_cl => "clang-cl";
-
-        public static ToolId llvm => "llvm";
-
-        public static ToolId llvm_as => "llvm-as";
-
-        public static ToolId llvm_nm => "llvm-nm";
-
-        public static ToolId obj2yaml => "obj2yaml";
-
-        public static ToolId llvm_lli => "lli";
-
-        public static ToolId llvm_mc => "llvm-mc";
-
-        public static ToolId llvm_ml => "llvm-ml";
-
-        public static ToolId llvm_tblgen => "llvm-tblgen";
-
-        public static ToolId llc => "llc";
-
-        public static ToolId llvm_objdump =>"llvm-objdump";
-
-        public static ToolId yaml_bench =>"yaml-bench";
-
-        public static ToolId llvm_readobj =>"llvm-readobj";
     }
 }

@@ -12,7 +12,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var src = State.Files(FS.Obj, FS.Exe, FS.Lib, FS.Dll).View;
             var count = src.Length;
-            var tool = Toolspace.llvm_objdump;
+            var tool = LlvmToolNames.llvm_objdump;
             var outdir = GetToolOut(tool);
             var svc = Wf.LlvmObjDump();
             return svc.DumpObjects(src,outdir, response => Write(response));
@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         Outcome LlvmObjDump(FS.FilePath src, FS.FolderPath dst)
         {
-            var tool = Toolspace.llvm_objdump;
+            var tool = LlvmToolNames.llvm_objdump;
             var cmd = Cmd.cmdline(Ws.Tools().Script(tool, "run").Format(PathSeparator.BS));
             var vars = WsVars.create();
             vars.DstDir = dst;

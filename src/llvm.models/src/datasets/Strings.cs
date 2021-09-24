@@ -14,7 +14,7 @@ namespace Z0.llvm
         public static MemoryStrings<AsmId> OpCodes
         {
             [MethodImpl(Inline)]
-            get => MemoryStrings.load<AsmId>(stringtables.Instruction.Offsets, stringtables.Instruction.Data);
+            get => memory.strings<AsmId>(stringtables.Instruction.Offsets, stringtables.Instruction.Data);
         }
     }
 }

@@ -23,22 +23,10 @@ namespace Z0
             _WsRoot = root;
         }
 
-        public WsKind Kind
-            => WsKind.Output;
-
         public FS.FolderPath Root
         {
             [MethodImpl(Inline)]
             get => _WsRoot;
-        }
-
-        public FS.FolderPath WsRoot()
-            => _WsRoot;
-
-        public FS.FolderPath WsRoot(FS.FolderPath src)
-        {
-            _WsRoot = src;
-            return WsRoot();
         }
     }
 }

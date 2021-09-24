@@ -18,14 +18,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int run1(in CodeBuffers src)
         {
-            var f0 = (delegate* unmanaged<int, int, int>)Pointers.ptr(src.Buffer128);
+            var f0 = (delegate* unmanaged<int, int, int>)memory.ptr(src.Buffer128);
             return Sigs.invoke(f0,42,378);
         }
 
         [MethodImpl(Inline), Op]
         public static int run2(in CodeBuffers src)
         {
-            var f1 = Sigs.func_32i_32i_32i(Pointers.ptr(src.Buffer128));
+            var f1 = Sigs.func_32i_32i_32i(memory.ptr(src.Buffer128));
             return f1(42,378);
         }
 

@@ -7,24 +7,17 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Identifies and elaborates a tool specification
+    /// Identifies a tool
     /// </summary>
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class ToolAttribute : Attribute
     {
-        public string ToolName {get;}
 
-        public string UsageSyntax {get;}
+        public ToolId Id {get;}
 
-        public ToolAttribute()
+        public ToolAttribute(string id)
         {
-            ToolName = string.Empty;
-            UsageSyntax = string.Empty;
-        }
-
-        public ToolAttribute(string name)
-        {
-            ToolName = name ?? string.Empty;
-            UsageSyntax = string.Empty;
+            Id = id;
         }
     }
 }

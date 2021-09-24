@@ -10,8 +10,6 @@ namespace Z0
     {
         Identifier Name {get;}
 
-        WsKind Kind {get;}
-
         FS.FolderPath DataDir()
             => Root + FS.folder(data);
 

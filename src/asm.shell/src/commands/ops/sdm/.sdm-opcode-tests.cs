@@ -14,7 +14,7 @@ namespace Z0.Asm
         public Outcome TestOcStrings(CmdArgs args)
         {
             var result = Outcome.Success;
-            var strings = MemoryStrings.load(OpCodeStrings.Offsets, OpCodeStrings.Data);
+            var strings = memory.strings(OpCodeStrings.Offsets, OpCodeStrings.Data);
             var offsets = recover<uint>(OpCodeStrings.Offsets);
             var formatter = Tables.formatter<MemoryStrings>();
             Write(formatter.Format(strings, RecordFormatKind.KeyValuePairs));
@@ -38,7 +38,7 @@ namespace Z0.Asm
             var count = src.EntryCount;
             for(var i=0; i<count; i++)
             {
-                ref readonly var actual = ref MemoryStrings.offset(src,i);
+                ref readonly var actual = ref memory.offset(src,i);
                 ref readonly var expect = ref skip(offsets,i);
                 if(actual != expect)
                 {

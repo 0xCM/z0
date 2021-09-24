@@ -19,7 +19,7 @@ namespace Z0.llvm
         const string FormatMarker = "file format ";
 
         public override ToolId Id
-            => Toolspace.llvm_objdump;
+            => LlvmToolNames.llvm_objdump;
 
         static bool DefinesBlockLabel(ReadOnlySpan<char> src)
         {
@@ -159,7 +159,7 @@ namespace Z0.llvm
         public Outcome DumpObjects(ReadOnlySpan<FS.FilePath> src, FS.FolderPath outdir, Action<CmdResponse> handler)
         {
             var count = src.Length;
-            var tool = Toolspace.llvm_objdump;
+            var tool = LlvmToolNames.llvm_objdump;
 
             var cmd = Cmd.cmdline(Ws.Tools().Script(tool, "run").Format(PathSeparator.BS));
             var result = Outcome.Success;

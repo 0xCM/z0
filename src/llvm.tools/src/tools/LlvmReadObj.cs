@@ -4,13 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
-
-    using static core;
-
     public sealed class LlvmReadObj : ToolService<LlvmReadObj>
     {
         public override ToolId Id
-            => Toolspace.llvm_readobj;
+            => LlvmToolNames.llvm_readobj;
     }
 }

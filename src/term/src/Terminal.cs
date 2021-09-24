@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="c">The char to emit</param>
         /// <param name="severity">The severity</param>
         public void WriteChar(char c, FlairKind? color = null)
-            => Write(c, (ConsoleColor)(color ?? FlairKind.Warning));
+            => Write(c, (color ?? FlairKind.Warning));
 
         public void WriteMessage(IAppMsg msg, FlairKind? color = null)
         {
@@ -148,7 +148,7 @@ namespace Z0
 
         public string Prompt(object msg)
         {
-            Write(msg, ConsoleColor.Cyan);
+            Write(msg, (FlairKind)ConsoleColor.Cyan);
             return Console.ReadLine();
         }
 
@@ -192,12 +192,20 @@ namespace Z0
             }
         }
 
-        void Write(object src, ConsoleColor color)
+        public void Write(object src)
+        {
+            lock(TermLock)
+            {
+                Console.Write(src);
+            }
+        }
+
+        public void Write(object src, FlairKind color)
         {
             lock(TermLock)
             {
                 var current = Console.ForegroundColor;
-                Console.ForegroundColor = color;
+                Console.ForegroundColor = (ConsoleColor)color;
                 Console.Write(src);
                 Console.ForegroundColor = current;
             }

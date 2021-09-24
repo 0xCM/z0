@@ -7,7 +7,6 @@ namespace Z0.llvm
     public sealed partial class LlvmMc : ToolService<LlvmMc>
     {
         public override ToolId Id
-            => Toolspace.llvm_mc;
-
+            => LlvmToolNames.llvm_mc;
     }
 }

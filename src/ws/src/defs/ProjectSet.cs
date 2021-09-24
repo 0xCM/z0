@@ -17,8 +17,6 @@ namespace Z0
         public static ProjectSet create(FS.FolderPath home)
             => new ProjectSet(home);
 
-        public override WsKind Kind => WsKind.Projects;
-
         Dictionary<ProjectId,ProjectConfig> ConfigLookup;
 
         public ProjectSet(FS.FolderPath src)

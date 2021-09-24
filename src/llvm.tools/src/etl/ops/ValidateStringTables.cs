@@ -13,7 +13,7 @@ namespace Z0.llvm
         public Outcome ValidateStringTables()
         {
             var result = Outcome.Success;
-            var runtime = MemoryStrings.load(ST.AVX512.Offsets, ST.AVX512.Data);
+            var runtime = memory.strings(ST.AVX512.Offsets, ST.AVX512.Data);
             var offsets = runtime.Offsets;
             var count = runtime.EntryCount;
             var formatter = Tables.formatter<MemoryStrings>();
@@ -22,7 +22,7 @@ namespace Z0.llvm
             Write(string.Format("Symbols:{0}", symbols.Length));
             for(var i=0; i<offsets.Length; i++)
             {
-                var l = MemoryStrings.length(runtime, i);
+                var l = memory.length(runtime, i);
                 if(l == 0)
                     break;
                 var k = (ST.AVX512.Index)i;

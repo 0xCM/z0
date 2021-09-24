@@ -21,8 +21,5 @@ namespace Z0
         {
 
         }
-
-        public override WsKind Kind
-            => WsKind.Tables;
     }
 }

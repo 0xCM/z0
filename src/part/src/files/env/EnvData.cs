@@ -73,6 +73,9 @@ namespace Z0
         public FS.FolderPath CapturePacks
             => Source.CapturePacks;
 
+        public FS.FolderPath LlvmRoot
+            => Source.LlvmRoot;
+
         public ulong CpuCount
             => Source.CpuCount;
 

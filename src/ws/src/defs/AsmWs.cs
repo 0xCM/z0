@@ -22,7 +22,5 @@ namespace Z0
         {
             Root = root;
         }
-
-        public WsKind Kind => WsKind.Asm;
     }
 }

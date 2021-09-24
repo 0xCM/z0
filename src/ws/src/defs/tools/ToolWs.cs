@@ -35,9 +35,6 @@ namespace Z0
             return this;
         }
 
-        public override WsKind Kind
-            => WsKind.Tools;
-
         public ReadOnlySpan<ToolConfig> Configured
         {
             get => Configs;

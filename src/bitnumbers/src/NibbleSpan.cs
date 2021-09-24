@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint4 read(in NibbleSpan src, uint index)
         {
-            var cell = ScaledIndex.define(w8, n4, -2, index);
+            var cell = memory.scaled(w8, n4, -2, index);
             ref readonly var c = ref skip(src.Bytes, cell.Offset);
             return cell.Even ? api.uint4(c) : api.uint4(srl(c , cell.CellWidth));
         }
@@ -37,7 +37,7 @@ namespace Z0
         {
             const byte UpperMask = 0xF0;
             const byte LowerMask = 0x0F;
-            var cell = ScaledIndex.define(w8, n4, -2, index);
+            var cell = memory.scaled(w8, n4, -2, index);
             ref var c = ref seek(dst.Bytes, cell.Offset);
             if(cell.Even)
                 c = or(and(c, UpperMask), src);

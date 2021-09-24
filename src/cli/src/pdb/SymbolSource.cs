@@ -80,8 +80,8 @@ namespace Z0
             PdbPath = pdb;
             var peData = File.ReadAllBytes(PePath.Name);
             var pdbData = File.ReadAllBytes(PdbPath.Name);
-            PePin = Pointers.pin<byte>(peData);
-            PdbPin = Pointers.pin<byte>(pdbData);
+            PePin = memory.pin<byte>(peData);
+            PdbPin = memory.pin<byte>(pdbData);
             PeData = peData;
             PdbData = pdbData;
             PeStream = new MemoryStream(peData);

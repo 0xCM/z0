@@ -15,14 +15,11 @@ namespace Z0
         public static ControlWs create(FS.FolderPath root)
             => new ControlWs(root);
 
-
         [MethodImpl(Inline)]
         internal ControlWs(FS.FolderPath root)
             : base(root)
         {
 
         }
-
-        public override WsKind Kind => WsKind.Control;
     }
 }

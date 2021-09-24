@@ -13,7 +13,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static Toolspace;
 
     partial class App : AppService<App>
     {
@@ -32,14 +31,6 @@ namespace Z0.Asm
             Wf.AsmFormPipe().EmitFormHashes();
         }
 
-        void RunScripts()
-        {
-            var runner = Wf.ScriptRunner();
-            runner.RunToolCmd(clang, "codegen");
-            runner.RunToolCmd(clang, "parse");
-            runner.RunToolPs(clang, "fast-math");
-            runner.RunToolPs(llvm_ml, "lex");
-        }
 
         public static MsgPattern<T> DispatchingCmd<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";

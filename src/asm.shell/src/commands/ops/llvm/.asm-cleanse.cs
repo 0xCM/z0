@@ -15,7 +15,7 @@ namespace Z0.Asm
         Outcome CleanseAsm()
         {
             var result = Outcome.Success;
-            var cmd = Cmd.cmdline(Ws.Tools().Script(Toolspace.llvm_mc, "cleanse").Format(PathSeparator.BS));
+            var cmd = Cmd.cmdline(Ws.Tools().Script(LlvmToolNames.llvm_mc, "cleanse").Format(PathSeparator.BS));
             var src = State.Files(FS.S).View;
             var count = src.Length;
             var outdir = (Ws.Projects().OutDir(State.Project()) + FS.folder("cleansed")).Create();

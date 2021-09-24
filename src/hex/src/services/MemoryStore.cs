@@ -80,7 +80,7 @@ namespace Z0
         public static ByteSize emit(in MemoryBlocks src, StreamWriter dst)
         {
             var blocks = src.View;
-            var maxsz = Buffers.maxblock(blocks).Size;
+            var maxsz = memory.maxblock(blocks).Size;
             var count = blocks.Length;
             var buffer = span<char>(maxsz*2);
             var total = 0u;

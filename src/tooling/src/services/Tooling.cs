@@ -58,7 +58,6 @@ namespace Z0
         public Outcome CreateLlvmToolbase(FS.FolderPath spec, FS.FolderPath toolbase)
         {
             var result = Outcome.Success;
-            var set = Toolspace.llvm;
             var config = spec + FS.file("llvm", FS.Settings);
             result = LoadToolset(config, out var toolset);
             if(result.Fail)
@@ -67,7 +66,7 @@ namespace Z0
             var profilepath = spec + Tables.filename<ToolProfile>();
             if(!profilepath.Exists)
             {
-                InitializeProfiles(spec,config, set);
+                InitializeProfiles(spec,config, "llvm");
             }
 
             var profiles = LoadProfiles(profilepath);

@@ -12,10 +12,13 @@ namespace Z0
 
         object Host;
 
-        internal CmdDispatcher(object host, CmdMethodLookup lookup)
+        Func<string,CmdArgs,Outcome> Fallback;
+
+        internal CmdDispatcher(object host, CmdMethodLookup lookup, Func<string,CmdArgs,Outcome> fallback = null)
         {
             Host = host;
             Lookup = lookup;
+            Fallback = fallback;
         }
 
         public ReadOnlySpan<string> Supported
@@ -31,7 +34,12 @@ namespace Z0
                 if(Lookup.Find(command, out var method))
                     return (Outcome)method.Invoke(Host, new object[1]{args});
                 else
-                    return (false, string.Format("Command '{0}' unrecognized", command));
+                {
+                    if(Fallback != null)
+                        return Fallback(command,args);
+                    else
+                        return (false, string.Format("Command '{0}' unrecognized", command));
+                }
             }
             catch(Exception e)
             {

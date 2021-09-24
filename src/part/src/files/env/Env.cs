@@ -52,6 +52,7 @@ namespace Z0
             dst.CapturePacks = dir(N.CapturePacks);
             dst.CpuCount = number(N.CpuCount);
             dst.DevWs = dir(N.DevWs);
+            dst.LlvmRoot = dir(N.LlvmRoot);
         }
 
         public EnvDirVar ZDev;
@@ -89,6 +90,8 @@ namespace Z0
         public EnvDirVar VendorDocs;
 
         public EnvDirVar CapturePacks;
+
+        public EnvDirVar LlvmRoot;
 
         public EnvVar<ulong> CpuCount;
 
@@ -129,7 +132,7 @@ namespace Z0
         {
             var value = Environment.GetEnvironmentVariable(name);
             if(text.blank(value))
-                core.@throw($"The environment variable '{name}' is undefined");
+                @throw($"The environment variable '{name}' is undefined");
             return (name, FS.dir(value));
         }
 
@@ -150,7 +153,7 @@ namespace Z0
         {
             var value = Environment.GetEnvironmentVariable(name);
             if(text.blank(value))
-                core.@throw($"The environment variable '{name}' is undefined");
+                @throw($"The environment variable '{name}' is undefined");
             return (name, FS.path(value));
         }
 

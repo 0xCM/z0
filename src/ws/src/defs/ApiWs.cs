@@ -20,7 +20,5 @@ namespace Z0
             : base(root)
         {
         }
-
-        public override WsKind Kind => WsKind.Api;
     }
 }

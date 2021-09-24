@@ -9,7 +9,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public unsafe sealed class AsmShell : WfApp<AsmShell>
+    sealed class AsmShell : WfApp<AsmShell>
     {
         AsmCmdService AsmCmd;
 

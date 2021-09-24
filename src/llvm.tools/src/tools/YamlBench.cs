@@ -20,7 +20,7 @@ namespace Z0.llvm
         }
 
         public override ToolId Id
-            => Toolspace.yaml_bench;
+            => LlvmToolNames.yaml_bench;
 
         [MethodImpl(Inline), Op]
         public static bool eq(ReadOnlySpan<char> a, ReadOnlySpan<char> b)

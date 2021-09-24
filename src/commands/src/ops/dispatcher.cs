@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     partial struct Cmd
     {
         [Op]
-        public static CmdDispatcher dispatcher(object host)
-            => new CmdDispatcher(host, lookup(host));
+        public static CmdDispatcher dispatcher(object host, Func<string,CmdArgs,Outcome> fallback = null)
+            => new CmdDispatcher(host, lookup(host), fallback);
     }
 }

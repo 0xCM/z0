@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using api = Addresses;
+    using api = memory;
 
     public interface IAddressBox<T>
         where T : unmanaged, IAddress<T>
@@ -17,7 +17,6 @@ namespace Z0
         T Base {get;}
 
         ByteSize Size {get;}
-
     }
 
     public readonly struct AddressBox<T> : IAddressBox<T>
