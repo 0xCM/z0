@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static core;
 
     partial class EtlWorkflow
@@ -17,7 +14,6 @@ namespace Z0.llvm
             var result = Outcome.Success;
             var lists = Ws.Sources().Dataset(LlvmDatasetNames.TblgenLists).AllFiles.View;
             var count = lists.Length;
-            var delimiter = Chars.Comma;
             var csdst = Ws.Gen().Path(TargetId, FS.Cs);
             var rowdst = Ws.Gen().Path(TargetId, FS.Csv);
             var formatter = Tables.formatter<StringTableRow>(StringTableRow.RenderWidths);
@@ -29,11 +25,11 @@ namespace Z0.llvm
                 ref readonly var path = ref skip(lists,i);
                 var name = path.FileName.WithoutExtension.Format();
                 var lines = path.ReadLines().View;
-                var table = StringTableOps.create(lines, name, delimiter);
-                var spec = StringTableOps.specify("Z0." + TargetId, table);
-                StringTableOps.encode(spec, cswriter);
+                var table = StringTables.create(lines, name, Chars.Comma);
+                var spec = StringTables.specify("Z0." + TargetId, table);
+                StringTables.csharp(spec, cswriter);
                 for(var j=0u; j<table.EntryCount; j++)
-                    rowwriter.WriteLine(formatter.Format(StringTableOps.row(table, j)));
+                    rowwriter.WriteLine(formatter.Format(StringTables.row(table, j)));
                 Write(string.Format("{0}: Stringtable emitted", Relations.arrow(path.ToUri(),csdst.ToUri())));
             }
 

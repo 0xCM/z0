@@ -14,35 +14,6 @@ namespace Z0
         /// <summary>
         /// Represents the magnitude of the distance between two values with respect to a contectxtual metric
         /// </summary>
-        public readonly struct Delta : IRule<Delta>
-        {
-            public dynamic Left {get;}
-
-            public dynamic Right {get;}
-
-            [MethodImpl(Inline)]
-            public Delta(dynamic left, dynamic right)
-            {
-                Left = left;
-                Right = right;
-            }
-
-            [MethodImpl(Inline)]
-            public static implicit operator Delta((dynamic left, dynamic right) src)
-                => new Delta(src.left, src.right);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Delta(Pair<dynamic> src)
-                => new Delta(src.Left, src.Right);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Delta<dynamic>(Delta src)
-                => new Delta<dynamic>(src.Left, src.Right);
-        }
-
-        /// <summary>
-        /// Represents the magnitude of the distance between two values with respect to a contectxtual metric
-        /// </summary>
         public readonly struct Delta<T> : IRule<Delta<T>,T>
         {
             public T Left {get;}
@@ -63,10 +34,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Delta<T>(Pair<T> src)
                 => new Delta<T>(src.Left, src.Right);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Delta(Delta<T> src)
-                => new Delta(src.Left, src.Right);
         }
     }
 }

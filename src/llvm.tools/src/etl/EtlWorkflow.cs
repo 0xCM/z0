@@ -45,7 +45,7 @@ namespace Z0.llvm
             result = EmitTables();
             _LlvmOpCodes = MC.opcodes();
             TableEmit(_LlvmOpCodes.View, OpCodeSpec.RenderWidths, LlvmPaths.OpCodeTable());
-            ImportLists(LlvmDatasetNames.TblgenLists, llvm);
+            ImportLists();
             GenStringTables();
             AsmDefMap = MapAsmDefLines();
             AsmDefFields = LoadAsmDefFields();

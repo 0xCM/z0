@@ -84,25 +84,5 @@ namespace Z0
             public override string ToString()
                 => Format();
         }
-
-        /// <summary>
-        /// Specifies a parametric data type
-        /// </summary>
-        public readonly struct DataType<T>
-            where T : ITypeParameter
-        {
-
-        }
-
-        public interface ITypeParameter
-        {
-            text7 ParameterName {get;}
-        }
-
-        public interface ITypeParameter<T> : ITypeParameter
-            where T : IPrimitive
-        {
-
-        }
     }
 }

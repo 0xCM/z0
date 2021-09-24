@@ -57,6 +57,5 @@ namespace Z0.llvm
             var results = dst.ToArray();
             return results;
         }
-
    }
 }

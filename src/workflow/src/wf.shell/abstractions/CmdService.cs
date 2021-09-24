@@ -4,18 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
     using static core;
-
-    public interface IAppCmdService : IAppService
-    {
-        Outcome Dispatch(CmdSpec cmd);
-
-        void Run();
-    }
 
     public abstract class AppCmdService<T> : AppService<T>, IAppCmdService
         where T : AppCmdService<T>, new()
@@ -23,6 +12,8 @@ namespace Z0
         CmdDispatcher Dispatcher;
 
         IWorkerLog Witness;
+
+        Option<IToolCmdShell> Shell;
 
         protected AppCmdService()
         {
@@ -33,6 +24,24 @@ namespace Z0
         {
             Dispatcher = Cmd.dispatcher(this, Dispatch);
             Witness = Loggers.worker(controller().Id(), Db.ControlRoot());
+        }
+
+        public T With(IToolCmdShell shell)
+        {
+            Shell = Option.some(shell);
+            return (T)this;
+        }
+
+        Outcome SelectTool(ToolId tool)
+        {
+            var result = Outcome.Success;
+            if(Shell.IsNone())
+            {
+                result = (false, "Target shell unspecified");
+                return result;
+            }
+
+            return Shell.Value.SelectTool(tool);
         }
 
         protected override void Disposing()
@@ -52,7 +61,6 @@ namespace Z0
         CmdSpec Next()
         {
             var input = term.prompt(Prompt());
-
             return Cmd.cmdspec(input);
         }
 
@@ -63,8 +71,19 @@ namespace Z0
             {
                 if(input.IsNonEmpty)
                 {
-                    Witness.LogStatus(string.Format("{0} {1}", Prompt(), input.Format()));
-                    Dispatch(input);
+                    if(input.Name == ".tool")
+                    {
+                        var result = SelectTool(arg(input.Args,0).Value);
+                        if(result.Fail)
+                        {
+                            Error(result.Message);
+                        }
+                    }
+                    else
+                    {
+                        Witness.LogStatus(string.Format("{0} {1}", Prompt(), input.Format()));
+                        Dispatch(input);
+                    }
                 }
 
                 input = Next();

@@ -14,10 +14,6 @@ namespace Z0
 
     readonly partial struct SymbolicCalcs
     {
-        [MethodImpl(Inline), Op]
-        public static SortedSpan<string> apply(Ordered<string> rule, Span<string> src)
-            => src.ToSortedSpan();
-
         [Op]
         public static ReadOnlySpan<string> apply(SeqSplit<char> rule, string src)
         {

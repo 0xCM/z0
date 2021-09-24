@@ -62,15 +62,6 @@ namespace Z0
             return counter;
         }
 
-        public static uint describe(ReadOnlySpan<ResolvedMethod> src, Span<ApiMemberInfo> dst)
-        {
-            var count = (uint)src.Length;
-            for(var i=0; i<count; i++)
-                seek(dst,i) = skip(src,i).Describe();
-            dst.Sort();
-            return count;
-        }
-
         /// <summary>
         /// Resolves the methods defined in a specifed set of parts
         /// </summary>
@@ -134,7 +125,6 @@ namespace Z0
                 offset += Describe(part, slice(dst,offset));
             }
 
-            dst.Sort();
             var path = Db.IndexTable<ApiMemberInfo>();
             TableEmit(@readonly(dst), ApiMemberInfo.RenderWidths, path);
         }
@@ -202,18 +192,6 @@ namespace Z0
             for(var i=0; i<count; i++)
                 dst.Add(ResolvePart(skip(parts,i)));
             return dst.ViewDeposited();
-        }
-
-        public ReadOnlySpan<ApiMemberInfo> LogResolutions(ReadOnlySpan<ResolvedPart> src, FS.FolderPath dir)
-        {
-            var _methods = methods(src);
-            var count = _methods.Length;
-            Wf.Status(string.Format("{0} Resolved {1} methods from {2} parts", Worker(), count, src.Length));
-            var buffer = span<ApiMemberInfo>(count);
-            describe(_methods, buffer);
-            Wf.Status(string.Format("{0} Collected descriptions for {1} method resolutions", Worker(), count));
-            TableEmit(@readonly(buffer), ApiMemberInfo.RenderWidths, Db.Table<ApiMemberInfo>(dir));
-            return buffer;
         }
 
         public ReadOnlySpan<ResolvedPart> ResolveParts(ReadOnlySpan<PartId> src)

@@ -6,7 +6,6 @@
 
 namespace Z0.Parts
 {
-
     public sealed class LlvmTool : Part<LlvmTool>
     {
 

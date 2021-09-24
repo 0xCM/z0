@@ -55,7 +55,7 @@ namespace Z0.llvm
         void Init()
         {
             Writer = NextWriter();
-            var src = FS.path(@"J:\source\llvm\llvm-project\build\include\llvm\IR\IntrinsicsX86.h");
+            var src = FS.path(@"J:\llvm\source\llvm\include\llvm\CodeGen\ISDOpcodes.h");
             var args = string.Format("-p \"{0}\" \"{1}\"", LlvmWs.BuildRoot.Format(PathSeparator.FS), src.Format(PathSeparator.FS));
             Controller = Interpreter.create(ToolPath, args, OnStatus, OnError, OnExit);
             Controller.Start();

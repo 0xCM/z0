@@ -12,7 +12,7 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op]
-        public static Comment comment(CommentKind kind, Text content)
+        public static Comment comment(CommentKind kind, TextBlock content)
             => new Comment(kind, content);
     }
 }

@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static ReflectionFlags;
+
+    using F = System.Reflection.BindingFlags;
 
     partial class ClrQuery
     {
@@ -19,6 +20,6 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static MethodInfo[] InstanceMethods(this Type src)
-            => src.GetMethods(BF_World);
+            => src.GetMethods(F.Public | F.NonPublic | F.Instance);
     }
 }

@@ -25,14 +25,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Not<T>(T src)
                 => new Not<T>(src);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Not<T>(Not src)
-                => new Not<T>(src.Element);
-
-            [MethodImpl(Inline)]
-            public static implicit operator Not(Not<T> src)
-                => new Not(src.Element);
         }
     }
 }

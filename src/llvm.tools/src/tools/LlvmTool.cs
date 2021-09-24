@@ -33,6 +33,9 @@ namespace Z0.llvm
             Initializer();
         }
 
+        protected override string PromptTitle
+            => Id;
+
         /// <summary>
         /// The tool id
         /// </summary>

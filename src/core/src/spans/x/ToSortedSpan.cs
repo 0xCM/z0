@@ -25,9 +25,5 @@ namespace Z0
         public static SortedSpan<T> ToSortedSpan<T>(this ConcurrentBag<T> src)
             where T : IComparable<T>
                 => src.ToIndex().ToSortedSpan();
-
-        public static SortedSpan<T> ToSortedSpan<T>(this Span<T> src)
-            where T : IComparable<T>
-                => new SortedSpan<T>(src.Sort());
     }
 }

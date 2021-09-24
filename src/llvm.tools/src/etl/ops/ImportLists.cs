@@ -8,13 +8,14 @@ namespace Z0.llvm
     using System.Runtime.CompilerServices;
 
     using static core;
-    using static WsAtoms;
 
     partial class EtlWorkflow
     {
-        public ReadOnlySpan<ListItem> ImportLists(string dataset, string dstid)
+        public Outcome ImportLists()
         {
-            var input = Ws.Sources().Datasets(dataset).Files(FS.List, true);
+            var project = Ws.Project("llvm.data");
+            var target = project.Tables();
+            var input = project.OutFiles(FS.List).View;
             var count = input.Length;
             var formatter = Tables.formatter<ListItem>(ListItem.RenderWidths);
             var result = list<ListItem>();
@@ -24,7 +25,7 @@ namespace Z0.llvm
                 var name = src.FileName.WithoutExtension.Format();
                 var members = items(src.ReadText().SplitClean(Chars.Comma).Select(x => x.Trim()).Where(text.nonempty).ToReadOnlySpan()).View;
                 var mCount = members.Length;
-                var dst = Ws.Tables().Subdir(dstid) + FS.folder(lists) + src.FileName.ChangeExtension(FS.Csv);
+                var dst = target + src.FileName.ChangeExtension(FS.Csv);
                 using var writer = dst.AsciWriter();
                 writer.WriteLine(formatter.FormatHeader());
                 for(var j=0; j<mCount; j++)
@@ -36,7 +37,7 @@ namespace Z0.llvm
                 }
                 Write(FS.flow(src,dst));
             }
-            return result.ViewDeposited();
+            return true;
         }
     }
 }

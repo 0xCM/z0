@@ -9,15 +9,4 @@ namespace Z0
     {
         T Compute(in S src);
     }
-
-    public interface IHashFunction<T>
-        where T : unmanaged
-    {
-        T Compute<S>(in S src);
-    }
-
-    public interface IHashFunction : IHashFunction<uint>
-    {
-
-    }
 }

@@ -25,6 +25,9 @@ namespace Z0
         FS.FolderPath DataOut()
             => Out(data);
 
+        FS.FolderPath Tables()
+            => Home() + FS.folder(tables);
+
         FS.FolderPath TablesOut()
             => Out(tables);
 

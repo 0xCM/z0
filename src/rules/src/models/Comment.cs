@@ -15,10 +15,10 @@ namespace Z0
         {
             public CommentKind Kind {get;}
 
-            public Text Content {get;}
+            public TextBlock Content {get;}
 
             [MethodImpl(Inline)]
-            public Comment(CommentKind kind, Text content)
+            public Comment(CommentKind kind, TextBlock content)
             {
                 Kind = kind;
                 Content = content;

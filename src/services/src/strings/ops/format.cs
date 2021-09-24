@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct StringTableOps
+    partial class StringTables
     {
         public static string format(in StringTable src, uint margin = 0)
         {

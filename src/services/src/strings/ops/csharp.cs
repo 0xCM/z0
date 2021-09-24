@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    partial struct StringTableOps
+    partial class StringTables
     {
-        public static uint encode(StringTableSpec src, StreamWriter dst)
+        public static uint csharp(StringTableSpec src, StreamWriter dst)
         {
             var entries = src.Entries;
             var count = (uint)entries.Length;

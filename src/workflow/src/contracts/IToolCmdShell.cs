@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
-
-    [ApiHost]
-    public readonly partial struct StringTableOps
+    public interface IToolCmdShell
     {
-        const NumericKind Closure = UnsignedInts;
+        Outcome SelectTool(ToolId tool);
     }
 }

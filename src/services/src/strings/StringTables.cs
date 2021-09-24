@@ -9,10 +9,12 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static StringTableOps;
 
-    public sealed class StringTables : AppService<StringTables>
+    [ApiHost]
+    public sealed partial class StringTables : AppService<StringTables>
     {
+        const NumericKind Closure = UnsignedInts;
+
         public Outcome Emit(StringTableSpec spec, FS.FolderPath outdir)
         {
             var result = Outcome.Success;
@@ -20,7 +22,7 @@ namespace Z0
             var rowdst = outdir + FS.file(spec.TableName.Format(), FS.Csv);
             var emitting = EmittingFile(csdst);
             using var cswriter = csdst.Writer();
-            var cscount = encode(spec, cswriter);
+            var cscount = csharp(spec, cswriter);
             EmittedFile(emitting, cscount);
 
             var buffer = alloc<StringTableRow>(spec.Entries.Length);

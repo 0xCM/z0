@@ -26,10 +26,6 @@ namespace Z0
                 Name = id;
                 Value = value;
             }
-
-            [MethodImpl(Inline)]
-            public static implicit operator Literal(Literal<T> src)
-                => new Literal(src.Name, src.Value);
         }
     }
 }

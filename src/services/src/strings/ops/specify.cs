@@ -4,13 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
     using static core;
 
-    partial struct StringTableOps
+    partial class StringTables
     {
         [Op]
         public static StringTableSpec specify(Identifier ns, Identifier table, ListItem<string>[] entries)

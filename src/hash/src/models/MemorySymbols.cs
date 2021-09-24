@@ -65,7 +65,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint bucket(Hash32 hash, uint capacity)
-            => hash % (capacity);
+            => hash % capacity;
 
         [Op]
         public static MemoryLookup lookup(Index<MemorySymbol> symbols, uint count)

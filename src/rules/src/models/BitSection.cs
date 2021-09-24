@@ -13,11 +13,11 @@ namespace Z0
     partial struct Rules
     {
         [StructLayout(LayoutKind.Sequential)]
-        public readonly struct BitSection : IRuleDataType<BitSection>
+        public readonly struct BitSection
         {
-            public uint MinIndex {get;}
+            public readonly uint MinIndex;
 
-            public uint MaxIndex {get;}
+            public readonly uint MaxIndex;
 
             [MethodImpl(Inline)]
             public BitSection(uint min, uint max)

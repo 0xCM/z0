@@ -2,17 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.llvm
+namespace Z0
 {
-    using static WsAtoms;
-
-    partial class EtlWorkflow
+    public interface IAppCmdService : IAppService
     {
-        public Outcome ImportLists()
-        {
-            var result = Outcome.Success;
+        Outcome Dispatch(CmdSpec cmd);
 
-            return result;
-        }
+        void Run();
     }
 }

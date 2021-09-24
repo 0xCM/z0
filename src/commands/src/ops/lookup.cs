@@ -21,18 +21,14 @@ namespace Z0
             foreach(var (name, method) in src)
             {
                 if(!methods.TryAdd(name,method))
-                {
                     term.warn(string.Format("Duplicate command:{0}", name));
-                }
             }
-
-            //var methods = type.InstanceMethods().Tagged<CmdOpAttribute>().Select(x => (x.Name, x)).ToDictionary();
 
             var lookup = CmdMethodLookup.create();
             foreach(var (name,method) in methods)
             {
                 var cmd = method.Tag<CmdOpAttribute>().MapValueOrDefault(m => m.CommandName, method.Name);
-                lookup.Add(cmd,method);
+                lookup.Add(cmd, method);
             }
             return lookup.Seal();
         }

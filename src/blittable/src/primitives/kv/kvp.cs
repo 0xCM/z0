@@ -30,8 +30,6 @@ namespace Z0
             where K : unmanaged
             where V : unmanaged
         {
-            public static ByteSize SZ => size<K>() + size<V>();
-
             public K Key;
 
             public V Val;

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using api = StringTableOps;
+    using api = StringTables;
 
     public class StringTable
     {
