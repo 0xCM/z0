@@ -12,6 +12,22 @@ namespace Z0
 
     partial struct BitRender
     {
+        [MethodImpl(Inline), Op]
+        public static uint render8x4(ReadOnlySpan<byte> src, ref uint i, Span<char> dst)
+        {
+            var i0=i;
+            var size = (int)src.Length;
+            var length = min(size, dst.Length);
+            for(var j=0; j<length; j++)
+            {
+                render8x4(skip(src, j), ref i, dst);
+                if(j != length - 1)
+                    i+= separate(i,dst);
+            }
+            return i-i0;
+        }
+
+        [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> render8x4(byte src)
         {
             var dst = CharBlock16.Null.Data;

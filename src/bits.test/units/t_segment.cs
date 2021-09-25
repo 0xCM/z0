@@ -11,7 +11,6 @@ namespace Z0
         public void segment_outline()
         {
             const ulong U64_00 = 0b00001001_11110000_11001001_10011111_00010001_10111100_00111000_11110000;
-
             const uint U32_01 = 0b00001001_11110000_11001001_10011111;
 
             Span<byte> dst = stackalloc byte[8];
@@ -44,7 +43,6 @@ namespace Z0
 
                 var y0 = gbits.segment(x, 0, 15);
                 var y1 = gbits.segment(x, 16, 31);
-
                 PrimalClaims.eq(y0,x0);
                 PrimalClaims.eq(y1,x1);
             }

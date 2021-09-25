@@ -19,4 +19,11 @@ namespace Z0
         Span<byte> IDataBlock.Bytes
             => bytes(Cells);
     }
+
+    public interface ICellBlock<F,T> : ICellBlock<T>
+        where T : unmanaged
+        where F : ICellBlock<F,T>
+    {
+
+    }
 }

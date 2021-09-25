@@ -95,7 +95,7 @@ namespace Z0
 
         public unsafe void EmitPaged(MemoryRange src, StreamWriter dst, byte bpl = 40)
         {
-            Buffers.liberate(src);
+            memory.liberate(src);
             var buffer = span<byte>(PageSize);
             var pages = (uint)(src.Size/PageSize);
             var reader = MemoryReader.create<byte>(src);

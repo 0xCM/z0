@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="pos">The source-relative offset</param>
         /// <param name="dst">The target</param>
         [Op]
-        public static uint line(ReadOnlySpan<AsciSymbol> src, ref uint number, ref uint i, out AsciLine dst)
+        public static uint line(ReadOnlySpan<AsciCode> src, ref uint number, ref uint i, out AsciLine dst)
         {
             var i0 = i;
             dst = default;

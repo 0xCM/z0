@@ -28,6 +28,19 @@ namespace Z0
         public static uint render8x8(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
             => render8x8(src, src.Length, maxbits, dst);
 
+        [MethodImpl(Inline), Op]
+        public static uint render8x8(ReadOnlySpan<byte> src, int count, uint maxbits, Span<char> dst)
+        {
+            var k=0u;
+            for(var i=0u; i<count; i++)
+            {
+                k += render8(skip(src,i), maxbits, k, dst);
+                if(k >= maxbits)
+                    break;
+            }
+            return k;
+        }
+
         public static uint render8x8<N>(ReadOnlySpan<byte> src, uint offset, Span<char> dst)
             where N : unmanaged, ITypeNat
         {
@@ -46,19 +59,6 @@ namespace Z0
             seek(dst, counter + offset) = Chars.Gt;
             counter++;
             return counter;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint render8x8(ReadOnlySpan<byte> src, int count, uint maxbits, Span<char> dst)
-        {
-            var k=0u;
-            for(var i=0u; i<count; i++)
-            {
-                k += render8(skip(src,i), maxbits, k, dst);
-                if(k >= maxbits)
-                    break;
-            }
-            return k;
         }
     }
 }

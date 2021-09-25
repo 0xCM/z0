@@ -29,7 +29,7 @@ namespace Z0.Asm
             using var writer = dst.Writer();
             for(var i=0u; i<count; i++)
             {
-                var content = AsmRender.thumbprint(SortedSpans.skip(src,i), true);
+                var content = AsmRender.bitstring(SortedSpans.skip(src,i));
                 writer.WriteLine(content);
                 seek(lines,i) = (i,content);
             }

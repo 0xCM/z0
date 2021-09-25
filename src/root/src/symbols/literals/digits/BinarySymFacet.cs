@@ -9,7 +9,6 @@ namespace Z0
     /// <summary>
     /// Defines <see cref='BinaryDigitSym' /> classiefiers
     /// </summary>
-    [FacetProvider(typeof(BinaryDigitSym))]
     public enum BinarySymFacet : ushort
     {
         /// <summary>

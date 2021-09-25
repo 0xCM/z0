@@ -20,7 +20,7 @@ namespace Z0.Asm
             const string Header = "scale | index | base | hex | bitstring";
 
             var m=0u;
-            SR.copy(Header, ref m, dst);
+            text.copy(Header, ref m, dst);
             SR.crlf(ref m, dst);
 
             var f0 = BitSeq.bits(n3);
@@ -77,20 +77,20 @@ namespace Z0.Asm
         {
             var i0=i;
             BitRender.render2(src.Scale(), ref i, dst);
-            SR.copy(FieldSep, ref i, dst);
+            text.copy(FieldSep, ref i, dst);
 
             BitRender.render3(src.Index(), ref i, dst);
-            SR.copy(FieldSep, ref i, dst);
+            text.copy(FieldSep, ref i, dst);
 
             BitRender.render3(src.Base(), ref i, dst);
 
-            SR.copy(FieldSep, ref i, dst);
+            text.copy(FieldSep, ref i, dst);
 
-            SR.copy(src.Encoded.FormatHex(2), ref i, dst);
+            text.copy(src.Encoded.FormatHex(2), ref i, dst);
             seek(dst,i++) = Chars.Space;
-            SR.copy(FieldSep, ref i, dst);
+            text.copy(FieldSep, ref i, dst);
 
-            SR.copy(bitstring(src), ref i, dst);
+            text.copy(bitstring(src), ref i, dst);
 
             return i-i0;
         }

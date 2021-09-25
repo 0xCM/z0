@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using SQ = SymbolicQuery;
-
     partial struct Lines
     {
         [Op]
@@ -21,7 +19,7 @@ namespace Z0
                 var next = reader.ReadLine();
                 while(next != null)
                 {
-                    if(SQ.blank(next))
+                    if(text.blank(next))
                     {
                         if(keepblank)
                             receiver(new TextLine(++lineNumber, next));

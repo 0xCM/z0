@@ -17,17 +17,17 @@ namespace Z0
         /// <summary>
         /// The index of this flag relative to other flags in a collection
         /// </summary>
-        public ushort Index {get;}
+        public readonly ushort Index;
 
         /// <summary>
         /// The flag name
         /// </summary>
-        public string Name {get;}
+        public readonly string Name;
 
         /// <summary>
         /// The flag description
         /// </summary>
-        public string Description {get;}
+        public readonly string Description;
 
         [MethodImpl(Inline)]
         public CmdFlagSpec(ushort index, string name, string desc)

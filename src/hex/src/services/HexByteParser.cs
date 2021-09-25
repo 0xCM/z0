@@ -14,7 +14,7 @@ namespace Z0
     using static core;
 
     [ApiHost]
-    public readonly struct HexByteParser : IHexParser2<byte>
+    public readonly struct HexByteParser
     {
         public static HexByteParser Service
             => default(HexByteParser);
@@ -94,6 +94,15 @@ namespace Z0
             }
         }
 
+        public byte Succeed(string src)
+        {
+            var result = Parse(src);
+            if(result)
+                return result.Value;
+            else
+                return 0;
+        }
+
         /// <summary>
         /// Parses a single hex digit
         /// </summary>
@@ -150,18 +159,5 @@ namespace Z0
         /// <param name="src">hex text</param>
         public byte ParseByte(string src)
             => byte.Parse(ClearSpecs(src), NumberStyles.HexNumber);
-
-        ParseResult<char,byte> IParser2<char,byte>.Parse(char src)
-            => Parser.lift<char,byte>(Parse(src));
-
-        public ParseResult Parse(object src)
-        {
-            if(src is string s)
-                return ParseData(s);
-            else if(src is char c)
-                return Parse(c);
-            else
-                throw Unsupported.define(src?.GetType() ?? typeof(void));
-        }
     }
 }

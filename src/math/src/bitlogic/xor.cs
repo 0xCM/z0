@@ -80,6 +80,5 @@ namespace Z0
         [MethodImpl(Inline), Xor]
         public static ulong xor(ulong a, ulong b)
             => a ^ b;
-
     }
 }

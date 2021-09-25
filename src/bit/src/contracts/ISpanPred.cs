@@ -38,5 +38,4 @@ namespace Z0
     {
         Span<P> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<P> dst);
     }
-
 }

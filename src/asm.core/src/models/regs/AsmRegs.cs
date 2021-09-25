@@ -10,7 +10,7 @@ namespace Z0.Asm
     public readonly partial struct AsmRegs
     {
         [Op]
-        public static string format<T>(NamedRegValue<T> src)
+        public static string format<T>(AsmRegValue<T> src)
             where T : unmanaged
                 => string.Format("{0,-5}{1}", src.Name, src.Value.FormatHexBytes());
 

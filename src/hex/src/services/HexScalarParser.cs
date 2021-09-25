@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct HexScalarParser : ITextParser2<ulong>
+    public readonly struct HexScalarParser
     {
         public static HexScalarParser Service
             => default(HexScalarParser);

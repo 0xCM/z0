@@ -20,38 +20,45 @@ namespace Z0
         /// <summary>
         /// The line content
         /// </summary>
-        public ReadOnlySpan<AsciSymbol> Content {get;}
+        readonly ReadOnlySpan<byte> Data;
 
         [MethodImpl(Inline)]
         public AsciLine(uint number, uint start, ReadOnlySpan<AsciSymbol> src)
         {
             LineNumber = number;
-            Content = src;
+            Data = recover<AsciSymbol,byte>(src);
+        }
+
+        [MethodImpl(Inline)]
+        public AsciLine(uint number, uint start, ReadOnlySpan<AsciCode> src)
+        {
+            LineNumber = number;
+            Data = recover<AsciCode,byte>(src);
         }
 
         [MethodImpl(Inline)]
         public AsciLine(uint number, ReadOnlySpan<byte> src)
         {
             LineNumber = number;
-            Content = recover<byte,AsciSymbol>(src);
+            Data = src;
         }
 
         public ReadOnlySpan<AsciCode> Codes
         {
             [MethodImpl(Inline)]
-            get => recover<AsciSymbol,AsciCode>(Content);
+            get => recover<byte,AsciCode>(Data);
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => Data.Length;
         }
 
         public int RenderLength
         {
             [MethodImpl(Inline)]
-            get => Content.Length + LineNumber.RenderLength;
+            get => Data.Length + LineNumber.RenderLength;
         }
 
         public bool IsEmpty
@@ -69,13 +76,13 @@ namespace Z0
         public ref readonly AsciSymbol this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref skip(Content,index);
+            get => ref @as<byte,AsciSymbol>(skip(Data,index));
         }
 
         public ref readonly AsciSymbol this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref skip(Content,index);
+            get => ref @as<byte,AsciSymbol>(skip(Data,index));
         }
 
         public string Format()

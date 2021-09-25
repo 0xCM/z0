@@ -4,13 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-
     using static Root;
     using static core;
-    using static BitFlow;
     using static RegClasses;
     using static RegMachines;
 
@@ -20,11 +15,10 @@ namespace Z0.Asm
         public Outcome KRegTests(CmdArgs args)
         {
             var result = Outcome.Success;
-
             var grid = default(Grid8x64);
             var regs = Machines.regs(n8,w64);
-            var names = recover<text7>(ByteBlock64.Empty.Bytes);
-            var pairs = recover<NamedRegValue<ulong>>(ByteBlock128.Empty.Bytes);
+            var names = recover<AsmRegName>(ByteBlock64.Empty.Bytes);
+            var pairs = recover<AsmRegValue<ulong>>(ByteBlock128.Empty.Bytes);
 
             for(byte i=0; i<7; i++)
             {
@@ -38,7 +32,6 @@ namespace Z0.Asm
                 ref readonly var name = ref skip(names,i);
                 ref readonly var value = ref regs[i];
                 var output = grid[i].Format();
-
                 Write(output);
             }
 

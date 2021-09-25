@@ -12,29 +12,34 @@ namespace Z0.Asm
     using static core;
     using static AsmRenderPatterns;
 
-    using SR = SymbolicRender;
-
     [ApiHost]
     public readonly struct AsmRender
     {
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op]
-        public static uint render8x4(in AsmHexCode src, Span<char> dst)
+        public static uint bitstring(in AsmHexCode src, Span<char> dst)
         {
             var i=0u;
-            return BitRender.renderNx8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
+            return BitRender.render8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
         }
 
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> render8x4(in AsmHexCode src)
+        [Op]
+        public static uint bitstring(ReadOnlySpan<byte> src, Span<char> dst)
+        {
+            var i=0u;
+            return BitRender.render8x4(src, ref i, dst);
+        }
+
+        [Op]
+        public static ReadOnlySpan<char> bitstring(in AsmHexCode src)
         {
             if(src.IsEmpty)
                 return default;
 
             CharBlocks.alloc(n256, out var block);
             var dst = block.Data;
-            var count = render8x4(src, dst);
+            var count = bitstring(src, dst);
             if(count == 0)
                 return EmptyString;
 
@@ -46,7 +51,7 @@ namespace Z0.Asm
             => BitRender.render8x3x3x2(slice(src.Bytes, src.Size), ref i, dst);
 
         [Op,Closures(Closure)]
-        public static ReadOnlySpan<char> render<T>(in NamedRegValue<T> src, char sep = Chars.Space)
+        public static ReadOnlySpan<char> bitstring<T>(in AsmRegValue<T> src, char sep = Chars.Space)
             where T : unmanaged
         {
             if(size<T>() == 1)
@@ -63,11 +68,11 @@ namespace Z0.Asm
 
         [Op]
         public static string format8x4(AsmHexCode src)
-            => src.IsEmpty ? EmptyString : text.format(AsmRender.render8x4(src));
+            => src.IsEmpty ? EmptyString : text.format(bitstring(src));
 
         [MethodImpl(Inline), Op]
         public static uint render8x4(in AsmHexCode src, ref uint i, Span<char> dst)
-            => BitRender.renderNx8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
+            => BitRender.render8x4(slice(src.Bytes, 0, src.Size), ref i, dst);
 
         public static string format(in RegRange src)
             => string.Format("{0}[{1}..{2}]", src.Class, src.MinIndex, src.MaxIndex);
@@ -151,7 +156,7 @@ namespace Z0.Asm
             var i=0u;
             Hex.render(LowerCase,(Hex64)src.Offset, ref i, dst);
             seek(dst,i++) = Chars.Space;
-            SR.copy(src.Statement.Data, ref i, dst);
+            text.copy(src.Statement.Data, ref i, dst);
             return i;
         }
 
@@ -177,11 +182,9 @@ namespace Z0.Asm
             return i - i0;
         }
 
-        const string MarkerText = "#";
-
         const AsmCommentMarker CommentMarker = AsmCommentMarker.Hash;
 
-        const string PageBreak = MarkerText + CharText.Space + RP.PageBreak160;
+        const string PageBreak = "#" + CharText.Space + RP.PageBreak160;
 
         [Op]
         public static AsmInlineComment spanres(OpUri uri, BinaryCode src)
@@ -247,7 +250,6 @@ namespace Z0.Asm
         public static string format(in AsmThumbprint src)
             => string.Format("{0} {1}", src.Statement.FormatPadded(), comment(src));
 
-
         [Op]
         public static string format(in AsmOffsetLabel label, in AsmFormExpr src, byte[] encoded)
             => string.Format(InstInfoPattern,
@@ -259,14 +261,8 @@ namespace Z0.Asm
                 );
 
         [Op]
-        public static string thumbprint(in AsmThumbprint src, bool bitstring)
-        {
-            var common = format(src);
-            if(bitstring)
-                return string.Format("{0} => {1}", common, format8x4(src.Encoded));
-            else
-                return common;
-        }
+        public static string bitstring(in AsmThumbprint src)
+            => string.Format("{0} => {1}", format(src), format8x4(src.Encoded));
 
         [Op]
         public static string thumbprint(in AsmEncodingInfo src)

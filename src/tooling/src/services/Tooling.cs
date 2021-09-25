@@ -208,7 +208,7 @@ namespace Z0
             using var reader = src.AsciLineReader();
             while(reader.Next(out var line))
             {
-                var content = line.Content;
+                var content = line.Codes;
                 var i = SQ.index(content, AsciCode.Colon);
                 var name = SR.format(SQ.left(content,i)).Trim();
                 var desc = SR.format(SQ.right(content,i)).Trim();
@@ -216,14 +216,6 @@ namespace Z0
                 dst.Add(flag);
             }
             return dst.ViewDeposited();
-        }
-
-        public static FS.FilePath enqueue<T>(CmdJob<T> job, IWfDb db)
-            where T : struct, ITextual
-        {
-            var dst = db.JobQueue() + FS.file(job.Name.Format(), FS.Cmd);
-            dst.Overwrite(job.Format());
-            return dst;
         }
     }
 }

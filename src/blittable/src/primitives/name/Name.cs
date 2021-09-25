@@ -12,10 +12,10 @@ namespace Z0
     {
         public readonly struct Name
         {
-            readonly StringAddress<N64> Value;
+            readonly StringAddress Value;
 
             [MethodImpl(Inline)]
-            public Name(StringAddress<N64> src)
+            public Name(StringAddress src)
             {
                 Value = src;
             }
@@ -28,7 +28,7 @@ namespace Z0
                 => Format();
 
             [MethodImpl(Inline)]
-            public static implicit operator Name(StringAddress<N64> src)
+            public static implicit operator Name(StringAddress src)
                 => new Name(src);
 
             [MethodImpl(Inline)]

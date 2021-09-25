@@ -9,7 +9,6 @@ namespace Z0
     /// <summary>
     /// Defines <see cref='DecimalDigitSym' /> classifiers
     /// </summary>
-    [FacetProvider(typeof(DecimalDigitSym))]
     public enum DecimalSymFacet : ushort
     {
         /// <summary>

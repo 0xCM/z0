@@ -44,12 +44,6 @@ namespace Z0
                 get => Data.LineNumber;
             }
 
-            public ReadOnlySpan<AsciSymbol> Content
-            {
-                [MethodImpl(Inline)]
-                get => Data.Content;
-            }
-
             public static TableRow Empty
             {
                 [MethodImpl(Inline)]

@@ -20,13 +20,13 @@ namespace Z0.Asm
             EmitConditionDocs(Conditions.jcc8(), jcc8);
             using var jcc8Reader = jcc8.AsciLineReader();
             while(jcc8Reader.Next(out var line))
-                Write(SymbolicRender.format(line.Content));
+                Write(SymbolicRender.format(line.Codes));
 
             var jcc32 = Ws.Tables().Subdir(machine) + FS.file("jcc32", FS.Txt);
             EmitConditionDocs(Conditions.jcc32(), jcc32);
             using var jcc32Reader = jcc32.AsciLineReader();
             while(jcc32Reader.Next(out var line))
-                Write(SymbolicRender.format(line.Content));
+                Write(SymbolicRender.format(line.Codes));
 
             return result;
         }
@@ -51,24 +51,5 @@ namespace Z0.Asm
             Emitted(dst);
             return counter;
         }
-
-        // uint EmitConditionDocs(ReadOnlySpan<Jcc32Conditions> src, FS.FilePath dst)
-        // {
-        //     using var writer = dst.AsciWriter();
-        //     var count = src.Length;
-        //     var counter = 0u;
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         ref readonly var info = ref skip(src,i);
-        //         writer.WriteLine(info.Format(false));
-        //         counter++;
-        //         if(!info.Identical)
-        //         {
-        //             writer.WriteLine(info.Format(true));
-        //             counter++;
-        //         }
-        //     }
-        //     return counter;
-        // }
     }
 }

@@ -7,7 +7,6 @@ namespace Z0
     /// <summary>
     /// Defines literals that correspond to base-2 digits
     /// </summary>
-    [CodeProvider]
     public enum BinaryDigitValue : byte
     {
         /// <summary>

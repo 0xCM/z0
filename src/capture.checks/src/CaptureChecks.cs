@@ -30,7 +30,7 @@ namespace Z0.Asm
         public CaptureChecks(IWfRuntime wf)
         {
             Context = new AsmContextDepr(context(wf), wf);
-            _Buffers = Buffers.native(Pow2.T16, 5);
+            _Buffers = memory.native(Pow2.T16, 5);
             Tokens = _Buffers.Tokenize();
         }
 

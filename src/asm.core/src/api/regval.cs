@@ -8,14 +8,12 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
-    using static BitFlow;
 
     partial struct asm
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static NamedRegValue<T> regval<T>(text7 name, T value)
+        public static AsmRegValue<T> regval<T>(AsmRegName name, T value)
             where T : unmanaged
-                => new NamedRegValue<T>(name,value);
+                => new AsmRegValue<T>(name,value);
     }
 }

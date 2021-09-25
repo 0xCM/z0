@@ -69,7 +69,7 @@ namespace Z0
         void ExecuteCatalog(IApiPartCatalog catalog)
         {
             var flow = Wf.Running($"Evaluating {catalog.PartId.Format()}");
-            using var buffers = Buffers.native(BufferSize, BufferCount);
+            using var buffers = memory.native(BufferSize, BufferCount);
             foreach(var host in catalog.OperationHosts)
                 ExecuteHost(buffers.Tokenize(), host.HostUri);
             Wf.Ran(flow);
@@ -84,7 +84,7 @@ namespace Z0
                 var catalogs = ApiGlobal.PartCatalogs(parts.ToArray()).View;
                 var count = catalogs.Length;
                 var flow = Wf.Running($"Evaluating {count} parts");
-                using var buffers = Buffers.native(BufferSize, BufferCount);
+                using var buffers = memory.native(BufferSize, BufferCount);
                 for(var i=0; i<count; i++)
                     ExecuteCatalog(skip(catalogs,i));
 

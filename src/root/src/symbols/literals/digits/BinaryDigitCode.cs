@@ -6,7 +6,6 @@ namespace Z0
 {
     using S = BinaryDigitSym;
 
-    [CodeProvider]
     public enum BinaryDigitCode : byte
     {
         /// <summary>

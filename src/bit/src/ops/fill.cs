@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static core;
+    using static Root;
 
     partial struct bit
     {
-        [Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void fill<T>(in T src, Span<bit> dst)
             where T : struct
         {

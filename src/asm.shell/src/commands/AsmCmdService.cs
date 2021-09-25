@@ -88,8 +88,8 @@ namespace Z0.Asm
         public AsmCmdService()
         {
             State = new AsmShellState();
-            CodeBuffer = Buffers.native(_NativeBufferSize);
-            _NativeBuffers = Buffers.native(new ByteSize[_NativeBufferCount]{_NativeBufferSize,_NativeBufferSize,_NativeBufferSize,_NativeBufferSize});
+            CodeBuffer = memory.native(_NativeBufferSize);
+            _NativeBuffers = memory.native(new ByteSize[_NativeBufferCount]{_NativeBufferSize,_NativeBufferSize,_NativeBufferSize,_NativeBufferSize});
             _NativeAddressMap = AddressMap.cover(_NativeBuffers);
             RoutineName = Identifier.Empty;
             CodeSize = 0;

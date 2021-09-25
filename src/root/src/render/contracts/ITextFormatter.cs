@@ -4,26 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ITextFormatter : IFormatter
+    public interface ITextFormatter
     {
-        new string Format(object src);
-
-        object IFormatter.Format(object src)
-            => Format(src);
+        string Format(object src);
     }
 
-    public interface ITextFormatter<T> : ITextFormatter, IFormatter<T,string>
+    public interface ITextFormatter<T> : ITextFormatter
     {
-        object IFormatter.Format(object src)
-            => Format(src);
-
         string ITextFormatter.Format(object src)
             => Format(src);
-    }
-
-    public interface ITextFormatter<H,S> : ITextFormatter<S>
-        where H : ITextFormatter<H,S>
-    {
-
     }
 }

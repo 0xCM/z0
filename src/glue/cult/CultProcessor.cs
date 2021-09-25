@@ -24,8 +24,6 @@ namespace Z0.Tools
 
         FS.FolderPath DetailRoot;
 
-        IHexParser2<byte> HexParser;
-
         FS.FolderPath TargetRoot;
 
         ToolId Tool;
@@ -37,7 +35,6 @@ namespace Z0.Tools
             Summaries = new();
             AsmLines = new();
             HexCharBuffer = sys.alloc<char>(HexBufferLength);
-            HexParser = HexParsers.bytes();
             Tool = Toolspace.cult;
             InputFile = FS.FilePath.Empty;
         }

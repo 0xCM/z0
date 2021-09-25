@@ -16,7 +16,11 @@ namespace Z0
         /// </summary>
         /// <param name="bits">The number of bits for which storage is required</param>
         [MethodImpl(Inline), Op]
-        public static int minbytes(int bits)
-            => bits / 8 + (bits % 8 == 0 ? 0 : 1);
+        public static ulong minbytes(ulong bits)
+            => bits/8ul + (bits % 8 == 0 ? 0ul : 1ul);
+
+        [MethodImpl(Inline), Op]
+        public static long minbytes(long bits)
+            => bits/8L + (bits % 8 == 0 ? 0L : 1L);
     }
 }

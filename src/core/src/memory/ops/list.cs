@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Windows;
 
     using static Root;
     using static core;
@@ -14,6 +15,6 @@ namespace Z0
     {
         public static MemoryList<T> list<T>(uint count)
             where T : unmanaged
-                => new MemoryList<T>(Buffers.native(count*size<T>()));
+                => new MemoryList<T>(native(count*size<T>()));
     }
 }

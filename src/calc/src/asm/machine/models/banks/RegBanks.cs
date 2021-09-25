@@ -62,7 +62,7 @@ namespace Z0.Asm
                 size += (spec.RegSize*spec.RegCount);
             }
 
-            var buffer = Buffers.native(size);
+            var buffer = memory.native(size);
             buffer.Clear();
             var @base = buffer.Address;
             var address = @base;
@@ -72,7 +72,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var spec = ref seek(specs,i);
-                var tokens = Buffers.tokenize(address, spec.RegSize, spec.RegCount);
+                var tokens = memory.tokenize(address, spec.RegSize, spec.RegCount);
                 seek(allocations,i) = new RegAlloc(spec,tokens);
                 var blockSize = spec.RegCount*spec.RegSize;
                 address += blockSize;

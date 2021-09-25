@@ -44,8 +44,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> render8(byte src)
         {
-            var buffer = CharBlock8.Null.Data;
+            var storage = CharBlock8.Null;
+            var buffer = storage.Data;
             var i=0u;
+            render8(src,i,buffer);
             return buffer;
         }
 

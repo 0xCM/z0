@@ -51,7 +51,7 @@ namespace Z0.Asm
         public static Outcome asmxpr(in AsciLine src, out AsmBlockLabel label, out AsmExpr expr)
         {
             label = AsmBlockLabel.Empty;
-            var content = src.Content;
+            var content = src.Codes;
             var i = SQ.index(content, AsciCode.Colon);
             if(i < 0)
                 return false;

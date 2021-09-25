@@ -6,13 +6,11 @@ namespace Z0
 {
     using System;
 
+    using static Root;
+
     public class Generators : AppService<Generators>
     {
-
-        protected override void OnInit()
-        {
-
-        }
-
+        public StringTableGen StringTable()
+            => StringTableGen.create(Wf);
     }
 }

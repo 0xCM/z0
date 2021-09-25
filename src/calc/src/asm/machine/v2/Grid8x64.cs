@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static BitFlow;
 
     partial struct RegMachines
     {
@@ -19,14 +18,14 @@ namespace Z0.Asm
             Store8x64 Values;
 
             [MethodImpl(Inline)]
-            public ref text7 RegName(byte index)
-                => ref seek(recover<text7>(Names.Bytes), index);
+            public ref AsmRegName RegName(byte index)
+                => ref seek(recover<AsmRegName>(Names.Bytes), index);
 
             [MethodImpl(Inline)]
             public ref ulong RegVal(byte index)
                 => ref Values[index];
 
-            public NamedRegValue<ulong> this[byte index]
+            public AsmRegValue<ulong> this[byte index]
             {
                 [MethodImpl(Inline)]
                 get => paired(RegName(index), RegVal(index));
@@ -36,7 +35,7 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
-            void Define(byte index, text7 name, ulong value)
+            void Define(byte index, AsmRegName name, ulong value)
             {
                 RegName(index) = name;
                 RegVal(index) = value;

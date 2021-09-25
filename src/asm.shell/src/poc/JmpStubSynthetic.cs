@@ -23,7 +23,7 @@ namespace Z0
             Jump(default);
             var @base = ClrJit.jit(GetType().Method(nameof(Jump)));
             var size = 16ul;
-            var liberated = Buffers.liberate(@base,size);
+            var liberated = memory.liberate(@base,size);
             if(liberated.IsNonZero)
                 Location = (@base, @base + size);
             return Location;

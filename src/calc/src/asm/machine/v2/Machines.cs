@@ -7,12 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Root;
-    using static core;
     using static MemorySections;
-    using static Asm.OpCodeMachines;
     using static Asm.RegMachines;
 
     using SQ = SymbolicQuery;
@@ -28,9 +24,6 @@ namespace Z0
         public static Store8x64 regs(N8 n, W64 w)
             => default;
 
-        [MethodImpl(Inline), Op]
-        public static OpCodeParser ocparser()
-            => new OpCodeParser();
 
         public abstract class CharParser : Machine<char>
         {

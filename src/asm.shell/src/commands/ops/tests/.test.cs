@@ -21,6 +21,45 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
+            CheckBitSeq();
+            return result;
+        }
+
+        void CheckBitSeq()
+        {
+            var count = 256;
+            var length = 8;
+            var buffer = span<char>(count*length);
+            for(var i=0; i<count; i++)
+            {
+                ref var c = ref seek(buffer,i*length);
+                for(byte j=0; j<8; j++)
+                {
+                    seek(c,7-j) = bit.test(i,(byte)j).ToChar();
+                }
+            }
+
+            for(var i=0; i<count; i++)
+            {
+                var offset = i*length;
+                var s = slice(buffer,offset,length);
+                Write(string.Format("{0:D3}=0x{0:X2}=0b{1}", i, text.format(s)));
+            }
+        }
+
+        Outcome ShowObjDump(CmdArgs args)
+        {
+            var result = Outcome.Success;
+
+            var tool = Wf.LlvmObjDump();
+            var rows = tool.Consolidated(State.Project()).View;
+            var count = rows.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                Write(string.Format("Statement:{0}", row.Asm));
+                Write(string.Format("Encoding :{0}", row.Encoding));
+            }
             return result;
         }
 
@@ -38,6 +77,60 @@ namespace Z0.Asm
             return true;
         }
 
+
+        ReadOnlySpan<byte> Input => new byte[]{0x44, 0x01, 0x58,0x04};
+
+        const string InputBitsA = "0100 0100 0000 0001 0101 1000 0000 0100";
+
+        const uint InputBitsB = 0b0100_0100_0000_0001_0101_1000_0000_0100;
+
+        public void CheckBitstrings()
+        {
+            CharBlocks.alloc(n128, out var block1);
+            var count = AsmRender.bitstring(Input, block1.Data);
+            var chars = slice(block1.Data,0,count);
+            var bits = text.format(chars);
+            Wf.Row(InputBitsA);
+            Wf.Row(bits);
+
+            CharBlocks.alloc(n128, out var block2);
+            count = AsmRender.bitstring(bytes(InputBitsB), block2.Data);
+            bits = text.format(chars);
+            Wf.Row(bits);
+
+        }
+
+        void CheckBitFormatter()
+        {
+            var block = CharBlock128.Null;
+            var buffer = block.Data;
+            var input = 0b1100_0111_0101u;
+            var n = 12u;
+            var data = bytes(input);
+            ref readonly var b0 = ref skip(data,0);
+            ref readonly var b1 = ref skip(data,1);
+            var i=0u;
+            BitRender.render(b0, ref i, 8, buffer);
+            seek(buffer,i++) = Chars.Underscore;
+            BitRender.render(b1, ref i, 4, buffer);
+            Write(block.Format());
+        }
+
+        void CheckBitsParser()
+        {
+            // var source = BitFlow.nbits(12,0b110001110101u);
+            // var input = "{1,1,0,0,0,1,1,1,0,1,0,1}";
+            // var rendered = source.Format();
+            // var parser = Parsers.bits<uint>();
+            // var result = parser.Parse(input, out var output);
+            // if(result.Fail)
+            // {
+            //     Error(result.Message);
+            // }
+            // else
+            //     Write(string.Format("{0} => {1}", rendered, output));
+        }
+
         void CheckCells()
         {
             var source = alloc<byte>(Pow2.T08);
@@ -53,7 +146,7 @@ namespace Z0.Asm
                 var bits = nbits(n, skip(cells,i));
                 var len = BitFlow.render(bits,buffer);
                 slice(buffer,0,len);
-                Write(string.Format("{0} = {1}", bits.TypeName, text.format(slice(buffer,0,len))));
+                Write(string.Format("{0} Value{1} = {2};", bits.TypeName, i, text.format(slice(buffer,0,len))));
             }
         }
 

@@ -22,7 +22,7 @@ namespace Z0
                 var next = reader.ReadLine();
                 while(next != null)
                 {
-                    if(SymbolicQuery.blank(next))
+                    if(text.blank(next))
                     {
                         if(keepblank)
                             lines.Add(new TextLine(++lineNumber, next));

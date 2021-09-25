@@ -28,7 +28,7 @@ namespace Z0.Asm
             var storage = CharBlock254.Null;
             var buffer = storage.Data;
             var i=0u;
-            var length = BitRender.renderNx8x4(data, ref i, buffer);
+            var length = BitRender.render8x4(data, ref i, buffer);
             return slice(buffer, 0,length);
         }
 

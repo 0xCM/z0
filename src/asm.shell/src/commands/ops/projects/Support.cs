@@ -102,7 +102,7 @@ namespace Z0.Asm
         Outcome AsmCollect()
         {
             var result = Outcome.Success;
-            result = CollectObjAsm();
+            result = Wf.LlvmObjDump().Consolidate(State.Project());
             if(result.Fail)
                 return result;
 
@@ -208,42 +208,5 @@ namespace Z0.Asm
 
         FS.Files OutFiles(params FileKind[] kinds)
             => Ws.Projects().OutFiles(State.Project(), kinds);
-
-        Outcome CollectObjAsm()
-        {
-            var project = State.Project();
-            var src = OutFiles(FileKind.ObjAsm).View;
-            var dst = Ws.Projects().TableOut<ObjDumpRow>(project);
-            var result = Outcome.Success;
-            var tool = Wf.LlvmObjDump();
-            var count = src.Length;
-            var formatter = Tables.formatter<ObjDumpRow>(ObjDumpRow.RenderWidths);
-            var flow = EmittingTable<ObjDumpRow>(dst);
-            var counter = 0u;
-            using var writer = dst.AsciWriter();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var path = ref skip(src,i);
-                result = tool.ParseDump(path, out var rows);
-                if(result.Fail)
-                {
-                    Error(result.Message);
-                    continue;
-                }
-
-                for(var j=0; j<rows.Length; j++)
-                {
-                    ref readonly var row = ref skip(rows,j);
-                    if(row.IsBlockStart)
-                        continue;
-
-                    writer.WriteLine(formatter.Format(row));
-                    counter++;
-                }
-            }
-            EmittedTable(flow,counter);
-            return result;
-        }
-    }
+   }
 }

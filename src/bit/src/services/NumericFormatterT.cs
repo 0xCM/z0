@@ -25,10 +25,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public NumericFormatter<F> As<F>()
             where F : unmanaged
-            => new NumericFormatter<F>(this as INumericFormatter<F>);
-
-        [MethodImpl(Inline)]
-        public NumericFormatter<T> Concretize()
-            => this;
+                => new NumericFormatter<F>(this as INumericFormatter<F>);
     }
 }

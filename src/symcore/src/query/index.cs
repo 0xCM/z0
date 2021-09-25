@@ -64,17 +64,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static int index(ReadOnlySpan<AsciSymbol> src, C match)
+        public static int index(ReadOnlySpan<C> src, char match)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-                if(skip(src,i) == match)
+                if((char)skip(src,i) == match)
                     return i;
             return NotFound;
         }
 
-        [MethodImpl(Inline), Op]
-        public static int index(ReadOnlySpan<AsciSymbol> src, char match)
-            => index(src,(C)match);
     }
 }

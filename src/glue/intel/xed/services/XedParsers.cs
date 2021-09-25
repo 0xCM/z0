@@ -85,7 +85,6 @@ namespace Z0.Asm
             var outcome = Outcome.Success;
             if(line.IsNonEmpty)
             {
-                ref readonly var c = ref line[0];
                 var kind = classify(line);
                 if(kind == 0)
                     outcome = (false,"Row classification failed");

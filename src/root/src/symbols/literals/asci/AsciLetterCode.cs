@@ -6,7 +6,6 @@ namespace Z0
 {
     using LSym = AsciLetter;
 
-    [CodeProvider]
     public enum AsciLetterCode : byte
     {
         /// <summary>

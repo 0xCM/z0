@@ -405,19 +405,6 @@ namespace Z0.Asm
             Wf.Row(ApiSigs.operation("equals", r, op0, op1));
         }
 
-        ReadOnlySpan<byte> Input => new byte[]{0x44, 0x01, 0x58,0x04};
-
-        const string InputBits = "0100 0100 0000 0001 0101 1000 0000 0100";
-
-        public void CheckBitstrings()
-        {
-            CharBlocks.alloc(n128, out var block);
-            var count = AsmRender.render8x4(Input, block.Data);
-            var chars = slice(block.Data,0,count);
-            var bits = text.format(chars);
-            Wf.Row(InputBits);
-            Wf.Row(bits);
-        }
 
         void ListDescriptors()
         {

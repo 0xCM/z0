@@ -50,6 +50,80 @@ namespace Z0.llvm
             return result;
         }
 
+        FS.Files OutFiles(ProjectId project, FileKind kind)
+            => Ws.Projects().OutFiles(project, kind);
+
+        public Index<ObjDumpRow> Consolidated(FS.FilePath src)
+        {
+            var result = TextGrids.load(src, TextEncodingKind.Asci, out var grid);
+            if(result.Fail)
+            {
+                Error(result.Message);
+                return sys.empty<ObjDumpRow>();
+            }
+
+            var count = grid.RowCount;
+            var buffer = alloc<ObjDumpRow>(count);
+            ref var target = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var data = ref grid[i];
+                ref var dst = ref seek(target,i);
+                var j=0;
+                DataParser.parse(data[j++], out dst.Line);
+                DataParser.parse(data[j++], out dst.Section);
+                DataParser.parse(data[j++], out dst.BlockAddress);
+                DataParser.parse(data[j++], out dst.BlockName);
+                DataParser.parse(data[j++], out dst.IP);
+                DataParser.parse(data[j++], out dst.Encoding);
+                DataParser.parse(data[j++], out dst.Asm);
+                DataParser.parse(data[j++], out dst.Source);
+            }
+
+            return buffer;
+        }
+
+        public Index<ObjDumpRow> Consolidated(ProjectId project)
+        {
+            var src = Ws.Project(project).TableOut<ObjDumpRow>();
+            return Consolidated(src);
+        }
+
+        public Outcome Consolidate(ProjectId project)
+        {
+            var src = OutFiles(project, FileKind.ObjAsm).View;
+            var dst = Ws.Project(project).TableOut<ObjDumpRow>();
+            var result = Outcome.Success;
+            var count = src.Length;
+            var formatter = Tables.formatter<ObjDumpRow>(ObjDumpRow.RenderWidths);
+            var flow = EmittingTable<ObjDumpRow>(dst);
+            var counter = 0u;
+            using var writer = dst.AsciWriter();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(src,i);
+                result = ParseDump(path, out var rows);
+                if(result.Fail)
+                {
+                    Error(result.Message);
+                    continue;
+                }
+
+                for(var j=0; j<rows.Length; j++)
+                {
+                    ref readonly var row = ref skip(rows,j);
+                    if(row.IsBlockStart)
+                        continue;
+
+                    writer.WriteLine(formatter.Format(row));
+                    counter++;
+                }
+            }
+            EmittedTable(flow,counter);
+            return result;
+        }
+
         public Outcome ParseDump(FS.FilePath src, out ReadOnlySpan<ObjDumpRow> dst)
         {
             dst = default;
@@ -142,7 +216,8 @@ namespace Z0.llvm
                         var y = text.index(asm, Chars.Tab);
                         if(y > 0)
                         {
-                            row.Encoding = text.trim(text.left(asm,y));
+
+                            DataParser.parse(text.trim(text.left(asm,y)), out row.Encoding);
                             row.Asm = text.trim(text.right(asm,y)).Replace(Chars.Tab, Chars.Space);
                         }
 

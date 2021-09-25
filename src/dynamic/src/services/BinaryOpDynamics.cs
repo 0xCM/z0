@@ -19,7 +19,7 @@ namespace Z0
 
         public static unsafe DynamicOp<BinaryOp<T>> dynop<T>(Identifier name, ReadOnlySpan<byte> f)
         {
-            var emitted = create<T>(name, (MemoryAddress)Buffers.liberate(f), out var method);
+            var emitted = create<T>(name, (MemoryAddress)memory.liberate(f), out var method);
             return (method,emitted);
         }
 
@@ -44,11 +44,11 @@ namespace Z0
 
         [Op, Closures(UInt64k)]
         public static unsafe BinaryOp<T> create<T>(OpIdentity id, ReadOnlySpan<byte> code)
-            => create<T>(id.Format(), Buffers.liberate(code), out _);
+            => create<T>(id.Format(), memory.liberate(code), out _);
 
         [Op, Closures(UInt64k)]
         public static unsafe BinaryOp<T> create<T>(Identifier name, ReadOnlySpan<byte> f)
-            => create<T>(name, (MemoryAddress)Buffers.liberate(f), out _);
+            => create<T>(name, (MemoryAddress)memory.liberate(f), out _);
 
         static unsafe BinaryOp<T> create<T>(Identifier name, MemoryAddress f, out DynamicMethod method)
         {

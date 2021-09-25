@@ -8,7 +8,4 @@ namespace Z0
 
     [Free]
     public delegate bit BinaryPredicate<T>(T a, T b);
-
-    [Free]
-    public delegate bool BinaryBooleanPredicate<T>(T a, T b);
 }

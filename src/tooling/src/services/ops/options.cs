@@ -20,7 +20,7 @@ namespace Z0
             using var reader = src.AsciLineReader();
             while(reader.Next(out var line))
             {
-                var content = line.Content;
+                var content = line.Codes;
                 var i = SQ.index(content, AsciCode.Colon);
                 var name = SR.format(SQ.left(content,i)).Trim();
                 var desc = SR.format(SQ.right(content,i)).Trim();

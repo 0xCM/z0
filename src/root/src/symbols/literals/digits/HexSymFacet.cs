@@ -9,7 +9,6 @@ namespace Z0
 
     using L = HexLowerSym;
 
-    [FacetProvider(typeof(HexDigitSym))]
     public enum HexSymFacet : ushort
     {
         /// <summary>

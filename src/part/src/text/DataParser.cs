@@ -50,6 +50,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out LineNumber dst)
+        {
+            dst = LineNumber.Empty;
+            var result = parse(src, out uint n);
+            if(result)
+                dst = n;
+            return result;
+        }
+
+        [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out byte dst)
             => NumericParser.parse(src, out dst);
 
@@ -240,6 +250,13 @@ namespace Z0
         public static Outcome parse(string src, out FS.FileExt dst)
         {
             dst = FS.ext(src);
+            return true;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out FS.FileUri dst)
+        {
+            dst = FS.path(src);
             return true;
         }
 

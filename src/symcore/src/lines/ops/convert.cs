@@ -17,7 +17,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-                seek(buffer, i) = (char)skip(src.Content,i);
+                seek(buffer, i) = (char)skip(src.Codes,i);
             dst = new UnicodeLine(src.LineNumber, text.format(buffer));
         }
     }

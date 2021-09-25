@@ -53,10 +53,6 @@ namespace Z0
             => Svc.ApiCaptureArchive.create(wf);
 
         [Op]
-        public static StringTables StringTables(this IWfRuntime wf)
-            => Svc.StringTables.create(wf);
-
-        [Op]
         public static ApiPackages ApiPackages(this IEnvPaths src)
             => src.PackageRoot();
 

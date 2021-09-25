@@ -19,7 +19,7 @@ namespace Z0
         public HexCodeRunner(IWfRuntime wf, Action<object> receiver)
         {
             Wf = wf;
-            CodeBuffer = Buffers.native(Pow2.T10);
+            CodeBuffer = memory.native(Pow2.T10);
             Receiver = receiver;
         }
 

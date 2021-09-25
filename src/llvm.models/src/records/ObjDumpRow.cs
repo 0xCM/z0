@@ -29,7 +29,7 @@ namespace Z0.llvm
 
         public MemoryAddress IP;
 
-        public TextBlock Encoding;
+        public BinaryCode Encoding;
 
         public TextBlock Asm;
 
@@ -43,7 +43,7 @@ namespace Z0.llvm
             dst.BlockAddress = 0;
             dst.BlockName = TextBlock.Empty;
             dst.IP = 0;
-            dst.Encoding = TextBlock.Empty;
+            dst.Encoding = BinaryCode.Empty;
             dst.Asm = EmptyString;
             dst.Source = FS.FilePath.Empty;
             return dst;

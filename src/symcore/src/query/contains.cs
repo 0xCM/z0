@@ -44,14 +44,6 @@ namespace Z0
         public static bit contains(char min, char max, char match)
             => match >= min && match <= max;
 
-        [MethodImpl(Inline), Op]
-        public static bit contains(SymbolRange<C> range, C src)
-            => src >= range.Min && src <= range.Max;
-
-        [MethodImpl(Inline), Op]
-        public static bit contains(SymbolRange<char> range, char src)
-            => src >= range.Min && src <= range.Max;
-
         /// <summary>
         /// Determines whether the test code is a term of a specified sequence
         /// </summary>

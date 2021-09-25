@@ -49,11 +49,11 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static unsafe Emitter<T> emitter<T>(OpIdentity id, ReadOnlySpan<byte> code)
-            => emitter<T>(id.Format(), Buffers.liberate(code), out _);
+            => emitter<T>(id.Format(), memory.liberate(code), out _);
 
         [Op, Closures(Closure)]
         public static unsafe Emitter<T> emitter<T>(Identifier name, ReadOnlySpan<byte> f)
-            => emitter<T>(name, (MemoryAddress)Buffers.liberate(f), out _);
+            => emitter<T>(name, (MemoryAddress)memory.liberate(f), out _);
 
         public static unsafe Emitter<T> emitter<T>(Identifier name, MemoryAddress address, out DynamicMethod method)
         {
@@ -68,7 +68,7 @@ namespace Z0
         }
 
         public static unsafe DynamicAction action(string name, ReadOnlySpan<byte> f)
-            => action(name, Buffers.liberate(f));
+            => action(name, memory.liberate(f));
 
         public static unsafe DynamicAction action(string name, MemoryAddress f)
         {

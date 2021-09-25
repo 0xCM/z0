@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static BitFlow;
 
     using api = AsmRegs;
 
@@ -75,7 +74,7 @@ namespace Z0.Asm
             get => OpClass == 0;
         }
 
-        public text7 Name
+        public AsmRegName Name
         {
             [MethodImpl(Inline)]
             get => api.name(this);

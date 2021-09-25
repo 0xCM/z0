@@ -25,7 +25,7 @@ namespace Z0.Asm
             var f1 = BitSeq.bits(n3);
             var f2 = BitSeq.bits(n2);
             var k=0u;
-            SR.copy(ModRmHeader, ref k, dst);
+            text.copy(ModRmHeader, ref k, dst);
             SR.crlf(ref k, dst);
 
             for(var c=0u; c<f2.Length; c++)
@@ -46,19 +46,19 @@ namespace Z0.Asm
             var i0 = i;
             BitRender.render2(src.Mod(), ref i, dst);
             seek(dst,i++) = Chars.Space;
-            SR.copy(FieldSep, ref i, dst);
+            text.copy(FieldSep, ref i, dst);
 
             BitRender.render3(src.Reg(), ref i, dst);
-            SR.copy(FieldSep, ref i, dst);
+            text.copy(FieldSep, ref i, dst);
 
             BitRender.render3(src.Rm(), ref i, dst);
-            SR.copy(FieldSep, ref i, dst);
+            text.copy(FieldSep, ref i, dst);
 
-            SR.copy(src.Encoded.FormatHex(2), ref i, dst);
+            text.copy(src.Encoded.FormatHex(2), ref i, dst);
             seek(dst,i++) = Chars.Space;
-            SR.copy(FieldSep, ref i, dst);
+            text.copy(FieldSep, ref i, dst);
 
-            SR.copy(bitstring(src), ref i, dst);
+            text.copy(bitstring(src), ref i, dst);
 
             return i - i0;
         }
