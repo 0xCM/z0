@@ -14,7 +14,7 @@ namespace Z0
     partial struct MemorySections
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public readonly struct SectionDescriptor
+        public readonly struct Descriptor
         {
             /// <summary>
             /// A 0-based surrogate key
@@ -29,10 +29,10 @@ namespace Z0
             /// <summary>
             /// The capacity specifier
             /// </summary>
-            public readonly SectionCapacity Capacity;
+            public readonly Capacity Capacity;
 
             [MethodImpl(Inline)]
-            public SectionDescriptor(ushort id, MemoryAddress @base, SectionCapacity capacity)
+            public Descriptor(ushort id, MemoryAddress @base, Capacity capacity)
             {
                 Index = id;
                 BaseAddress = @base;

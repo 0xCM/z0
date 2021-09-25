@@ -44,17 +44,21 @@ namespace Z0
                 => address(first(Bss));
 
             [MethodImpl(Inline)]
-            public SectionCapacity Capacity()
+            public Capacity Capacity()
                 => capacity(CellSize, BlockCount, BlockSegs, SegCells);
 
             MemoryAddress IMemorySection.Base()
                 => Base();
 
-            SectionCapacity IMemorySection.Capacity()
+            Capacity IMemorySection.Capacity()
                 => Capacity();
 
             ushort IMemorySection.Index
                 => Id;
+
+            [MethodImpl(Inline)]
+            public unsafe Span<byte> Storage()
+                => cover(Base().Pointer<byte>(), TotalSize);
 
             /// <summary>
             /// Allocation

@@ -15,15 +15,14 @@ namespace Z0
     partial struct MemorySections
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public readonly struct SectionEntry<T> : ISectionEntry<SectionEntry<T>>
-            where T : unmanaged, IMemorySection<T>
+        public readonly struct Section : IMemorySection<Section>
         {
-            readonly SectionDescriptor _D;
+            readonly Descriptor _D;
 
             [MethodImpl(Inline)]
-            internal SectionEntry(ushort id, MemoryAddress @base, SectionCapacity capacity)
+            internal Section(ushort id, MemoryAddress @base, Capacity capacity)
             {
-                _D = new SectionDescriptor(id, @base, capacity);
+                _D = new Descriptor(id, @base, capacity);
             }
 
             public ushort Index
@@ -62,21 +61,43 @@ namespace Z0
                 get => _D.Capacity.TotalSize;
             }
 
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => _D.IsNonEmpty;
+            }
+
+            public uint CellCount
+            {
+                [MethodImpl(Inline)]
+                get => TotalSize;
+            }
+
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => _D.IsEmpty;
+            }
+
             [MethodImpl(Inline)]
             public MemoryAddress Base()
                 => _D.BaseAddress;
 
             [MethodImpl(Inline)]
-            public SectionCapacity Capacity()
+            public Capacity Capacity()
                 => _D.Capacity;
 
             [MethodImpl(Inline)]
-            public SectionDescriptor Descriptor()
+            public Descriptor Descriptor()
                 => api.descriptor(this);
 
             [MethodImpl(Inline)]
             public Span<byte> Storage()
                 => api.cells(this);
+
+            [MethodImpl(Inline)]
+            public Span<byte> Segment(uint index)
+                => api.segment(this, index);
 
             [MethodImpl(Inline)]
             public Span<S> Storage<S>()
@@ -90,11 +111,7 @@ namespace Z0
                 => Format();
 
             [MethodImpl(Inline)]
-            public static implicit operator SectionEntry(SectionEntry<T> src)
-                => new SectionEntry(src.Index, src.Base(), src.Capacity());
-
-            [MethodImpl(Inline)]
-            public static implicit operator SectionDescriptor(SectionEntry<T> src)
+            public static implicit operator Descriptor(Section src)
                 => src.Descriptor();
         }
     }

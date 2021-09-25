@@ -16,16 +16,16 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op]
-        public static SectionDescriptor descriptor(in SectionEntry src)
-            => new SectionDescriptor(src.Index, src.Base(), src.Capacity());
+        public static Descriptor descriptor(in Section src)
+            => new Descriptor(src.Index, src.Base(), src.Capacity());
 
         [MethodImpl(Inline)]
-        public static SectionEntry<T> entry<T>(in T src)
+        public static Section<T> section<T>(in T src)
             where T : unmanaged, IMemorySection<T>
-                => new SectionEntry<T>(src.Index, src.Base(), src.Capacity());
+                => new Section<T>(src.Index, src.Base(), src.Capacity());
 
         [MethodImpl(Inline)]
-        public static bool dispense<T>(T src, ushort id, out SectionEntry dst)
+        public static bool dispense<T>(T src, ushort id, out Section dst)
             where T : ISectionDispenser<T>
         {
             dst = src.Entry(id);
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static uint dispense<T>(T src, out ReadOnlySpan<SectionEntry> dst)
+        public static uint dispense<T>(T src, out ReadOnlySpan<Section> dst)
             where T : ISectionDispenser<T>
         {
             dst = src.Entries();
@@ -41,10 +41,10 @@ namespace Z0
         }
 
         [Op]
-        public static ref readonly SectionEntry initialize(in SectionEntry entry)
+        public static ref readonly Section initialize(in Section section)
         {
-            memory.liberate(entry.Base(), (ulong)entry.TotalSize);
-            return ref entry;
+            memory.liberate(section.Base(), (ulong)section.TotalSize);
+            return ref section;
         }
 
         /// <summary>
@@ -55,20 +55,20 @@ namespace Z0
         /// <param name="blocksegs"></param>
         /// <param name="segcells">The number of cells per segment</param>
         [MethodImpl(Inline), Op]
-        public static SectionCapacity capacity(ushort cellsize, uint blocks, byte blocksegs, uint segcells)
-            => new SectionCapacity(cellsize, blocks, blocksegs, segcells);
+        public static Capacity capacity(ushort cellsize, uint blocks, byte blocksegs, uint segcells)
+            => new Capacity(cellsize, blocks, blocksegs, segcells);
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> cells(in SectionEntry src)
+        public static Span<byte> cells(in Section src)
             => cover(src.Base().Pointer<byte>(), src.TotalSize);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> cells<T>(in SectionEntry src)
+        public static Span<T> cells<T>(in Section src)
             where T : unmanaged
                 => cover(src.Base().Pointer<T>(), src.TotalSize/size<T>());
 
         [MethodImpl(Inline), Op]
-        public static ref byte cell(in SectionEntry src, uint index)
+        public static ref byte cell(in Section src, uint index)
         {
             var pBase = src.Base().Pointer<byte>();
             pBase += index;
@@ -76,7 +76,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> segment(in SectionEntry src, uint index)
+        public static Span<byte> segment(in Section src, uint index)
         {
             var pBase = src.Base().Pointer<byte>();
             var unit = src.SegSize;
@@ -86,7 +86,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<byte> block(in SectionEntry src, uint index)
+        public static Span<byte> block(in Section src, uint index)
         {
             var pBase = src.Base().Pointer<byte>();
             var unit = src.BlockSize;
@@ -104,7 +104,7 @@ namespace Z0
             => string.Format("{0}x{1}x{2}x{3}", src.CellSize, src.SegSize, src.SegsPerBlock, src.BlockCount);
 
         [Op]
-        public static string format(in SectionDescriptor src)
+        public static string format(in Descriptor src)
             => string.Format("{0} {1}{2}", src.Index, src.AddressRange, src.Capacity);
     }
 }

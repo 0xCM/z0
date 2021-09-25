@@ -17,7 +17,7 @@ namespace Z0
     public readonly partial struct Machines
     {
         [MethodImpl(Inline), Op]
-        public static ByteMachine machine(N8 n, in SectionEntry buffer)
+        public static ByteMachine machine(N8 n, in Section buffer)
             => new ByteMachine(buffer);
 
         [MethodImpl(Inline), Op]

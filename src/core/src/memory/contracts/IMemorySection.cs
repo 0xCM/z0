@@ -17,24 +17,16 @@ namespace Z0
 
         MemoryAddress Base();
 
-        SectionCapacity Capacity();
-    }
+        Capacity Capacity();
 
-    [Free]
-    public interface IMemorySection<T> : IMemorySection
-        where T : unmanaged, IMemorySection<T>
-    {
-    }
-
-    [Free]
-    public interface ISectionEntry : IMemorySection, ITextual
-    {
         Span<byte> Storage();
 
         Span<T> Storage<T>()
-            where T : unmanaged;
+            where T : unmanaged
+                => core.recover<T>(Storage());
 
-        SectionDescriptor Descriptor();
+        Descriptor Descriptor()
+            => new Descriptor(Index, Base(), Capacity());
 
         ByteSize SegSize
             => Capacity().SegSize;
@@ -53,10 +45,9 @@ namespace Z0
     }
 
     [Free]
-    public interface ISectionEntry<T> : IMemorySection<T>, ISectionEntry
+    public interface IMemorySection<T> : IMemorySection
         where T : unmanaged, IMemorySection<T>
     {
-
     }
 
     [Free]
@@ -64,9 +55,9 @@ namespace Z0
     {
         uint EntryCount {get;}
 
-        SectionEntry Entry(ushort id);
+        Section Entry(ushort id);
 
-        ReadOnlySpan<SectionEntry> Entries();
+        ReadOnlySpan<Section> Entries();
     }
 
     [Free]

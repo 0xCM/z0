@@ -16,13 +16,13 @@ namespace Z0
     [ApiComplete]
     public sealed class ByteMachine
     {
-        SectionEntry Buffer;
+        Section Buffer;
 
         uint Pos;
 
         uint Max;
 
-        public ByteMachine(in SectionEntry bss)
+        public ByteMachine(in Section bss)
         {
             Buffer = bss;
             Pos = 0;

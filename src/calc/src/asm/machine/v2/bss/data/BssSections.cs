@@ -33,11 +33,11 @@ namespace Z0
         public uint EntryCount => _EntryCount;
 
         [MethodImpl(Inline), Op]
-        public unsafe ref readonly SectionEntry Entry(ushort index)
+        public unsafe ref readonly Section Entry(ushort index)
             => ref Container()[index];
 
         [Op]
-        public ReadOnlySpan<SectionEntry> Entries()
+        public ReadOnlySpan<Section> Entries()
             => Container().View;
 
         [Op]
@@ -45,24 +45,24 @@ namespace Z0
             => _EntryCount;
 
         [Op]
-        SectionEntry ISectionDispenser.Entry(ushort id)
+        Section ISectionDispenser.Entry(ushort id)
             => Entry(id);
 
         [Op]
-        ReadOnlySpan<SectionEntry> ISectionDispenser.Entries()
+        ReadOnlySpan<Section> ISectionDispenser.Entries()
             => Entries();
 
         [MethodImpl(Inline), Op]
-        ref readonly Index<SectionEntry> Container()
-            => ref Index.from<SectionEntry>(ContainerAddress);
+        ref readonly Index<Section> Container()
+            => ref Index.from<Section>(ContainerAddress);
 
         [Op]
-        static uint initialize(Span<SectionEntry> dst)
+        static uint initialize(Span<Section> dst)
         {
-            seek(dst,0) = entry(default(Bss1x16x16x64_0));
-            seek(dst,1) = entry(default(Bss1x16x16x64_1));
-            seek(dst,2) = entry(default(Bss1x16x16x64_2));
-            seek(dst,3) = entry(default(Bss1x16x16x64_3));
+            seek(dst,0) = section(default(Bss1x16x16x64_0));
+            seek(dst,1) = section(default(Bss1x16x16x64_1));
+            seek(dst,2) = section(default(Bss1x16x16x64_2));
+            seek(dst,3) = section(default(Bss1x16x16x64_3));
             api.initialize(skip(dst,0));
             api.initialize(skip(dst,1));
             api.initialize(skip(dst,2));
@@ -71,13 +71,13 @@ namespace Z0
         }
 
         [FixedAddressValueType]
-        static Index<SectionEntry> _Container;
+        static Index<Section> _Container;
 
         static MemoryAddress _ContainerAddress;
 
         static BssSections()
         {
-            _Container = alloc<SectionEntry>(_EntryCount);
+            _Container = alloc<Section>(_EntryCount);
             initialize(_Container.Edit);
             _ContainerAddress = address(_Container);
         }

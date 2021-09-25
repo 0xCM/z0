@@ -15,52 +15,50 @@ namespace Z0
     partial struct MemorySections
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public readonly struct SectionCapacity
+        public readonly struct Capacity
         {
-            public const uint StorageSize = PrimalSizes.U8 + PrimalSizes.U16 + 6*PrimalSizes.U32;
-
             /// <summary>
             /// The size of the smallest addressable unit
             /// </summary>
-            public ushort CellSize {get;}
+            public readonly ushort CellSize;
 
             /// <summary>
             /// The number of cells per segment
             /// </summary>
-            public uint CellsPerSeg {get;}
+            public readonly uint CellsPerSeg;
 
             /// <summary>
             /// The number of bytes covered by a segment
             /// </summary>
-            public uint SegSize {get;}
+            public readonly uint SegSize;
 
             /// <summary>
             /// The number of allocated segments
             /// </summary>
-            public uint SegCount {get;}
+            public readonly uint SegCount;
 
             /// <summary>
             /// The number of segments per block
             /// </summary>
-            public byte SegsPerBlock {get;}
+            public readonly byte SegsPerBlock;
 
             /// <summary>
             /// The number of blocks covered by the allocation
             /// </summary>
-            public uint BlockCount {get;}
+            public readonly uint BlockCount;
 
             /// <summary>
             /// The size of a block, as determined by <see cref='SegSize'/> * <see cref='SegsPerBlock'/>
             /// </summary>
-            public uint BlockSize {get;}
+            public readonly uint BlockSize;
 
             /// <summary>
             /// The total allocation size, as determined by <see cref='BlockCount'/> * <see cref='BlockSize'/>
             /// </summary>
-            public uint TotalSize {get;}
+            public readonly uint TotalSize;
 
             [MethodImpl(Inline)]
-            public SectionCapacity(ushort cellsize, uint blocks, byte blocksegs, uint segcells)
+            public Capacity(ushort cellsize, uint blocks, byte blocksegs, uint segcells)
             {
                 CellSize = cellsize;
                 BlockCount = blocks;
@@ -75,7 +73,7 @@ namespace Z0
             public CapacityIndicator Indicator
             {
                 [MethodImpl(Inline)]
-                get => @as<SectionCapacity,CapacityIndicator>(this);
+                get => @as<Capacity,CapacityIndicator>(this);
             }
 
             public bool IsEmpty
@@ -96,7 +94,7 @@ namespace Z0
             public override string ToString()
                 => Format();
 
-            public static SectionCapacity Empty => default;
+            public static Capacity Empty => default;
         }
     }
 }
