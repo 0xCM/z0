@@ -16,7 +16,7 @@ namespace Z0.Asm
             if(!src.Exists)
                 return (false,FS.missing(src));
 
-            var settings = Tooling.settings(src);
+            var settings = OptionReader.settings(src);
             iter(settings, setting => Write(setting));
             return true;
         }

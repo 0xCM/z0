@@ -20,13 +20,13 @@ namespace Z0.Asm
             EmitConditionDocs(Conditions.jcc8(), jcc8);
             using var jcc8Reader = jcc8.AsciLineReader();
             while(jcc8Reader.Next(out var line))
-                Write(SymbolicRender.format(line.Codes));
+                Write(text.format(line.Codes));
 
             var jcc32 = Ws.Tables().Subdir(machine) + FS.file("jcc32", FS.Txt);
             EmitConditionDocs(Conditions.jcc32(), jcc32);
             using var jcc32Reader = jcc32.AsciLineReader();
             while(jcc32Reader.Next(out var line))
-                Write(SymbolicRender.format(line.Codes));
+                Write(text.format(line.Codes));
 
             return result;
         }

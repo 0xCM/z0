@@ -13,14 +13,14 @@ namespace Z0
     [ApiHost]
     public class ParseFunctions
     {
-        Dictionary<Type,IParseFunction> _Parsers;
+        Dictionary<Type,IParser> _Parsers;
 
         public ParseFunctions()
         {
-            _Parsers = new Dictionary<Type,IParseFunction>();
+            _Parsers = new Dictionary<Type,IParser>();
         }
 
-        public ParseFunctions(ReadOnlySpan<IParseFunction> src)
+        public ParseFunctions(ReadOnlySpan<IParser> src)
             : this()
         {
             foreach(var item in src)
@@ -43,11 +43,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Include(IParseFunction parser)
+        public void Include(IParser parser)
             => _Parsers[parser.TargetType] = parser;
 
         [MethodImpl(Inline)]
-        public bool Lookup(Type target, out IParseFunction parser)
+        public bool Lookup(Type target, out IParser parser)
             => _Parsers.TryGetValue(target, out parser);
 
         [MethodImpl(Inline)]
@@ -55,7 +55,7 @@ namespace Z0
             => _Parsers.ContainsKey(target);
 
         [MethodImpl(Inline)]
-        public IParseFunction Require(Type target)
+        public IParser Require(Type target)
             => _Parsers[target];
     }
 }

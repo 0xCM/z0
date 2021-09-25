@@ -1,6 +1,8 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
+// Derivative Work
+// Copyright  : Microsoft/.Net foundation
+// Copyright  : (c) Chris Moore, 2020
+// License    :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
@@ -9,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Tooling
+    partial class ScriptProcess
     {
         [MethodImpl(Inline), Op]
         public static CmdExecStatus status(ScriptProcess process)

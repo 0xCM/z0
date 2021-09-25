@@ -10,8 +10,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using SR = SymbolicRender;
-
     partial class AsmBits
     {
         [Op]
@@ -21,7 +19,7 @@ namespace Z0.Asm
 
             var m=0u;
             text.copy(Header, ref m, dst);
-            SR.crlf(ref m, dst);
+            text.crlf(ref m, dst);
 
             var f0 = BitSeq.bits(n3);
             var f1 = BitSeq.bits(n3);
@@ -37,7 +35,7 @@ namespace Z0.Asm
                         var b1 = skip(f1, j);
                         var b2 = skip(f2, k);
                         sib(new Sib(BitNumbers.join(b0,b1,b2)), ref m, dst);
-                        SR.crlf(ref m, dst);
+                        text.crlf(ref m, dst);
                     }
                 }
             }

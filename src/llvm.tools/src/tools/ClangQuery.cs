@@ -2,60 +2,70 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.llvm
+namespace Z0.llvm.clang
 {
+    using System;
     using System.IO;
+    using System.Collections.Generic;
+
+    using static core;
 
     [Tool(LlvmToolNames.clang_query)]
     public sealed class ClangQuery : LlvmTool<ClangQuery>
     {
         Interpreter Controller;
 
-        StreamWriter Writer;
+        FS.FilePath QueryFile;
+
+        StreamWriter QueryWriter;
 
         uint Sequence;
 
+        uint Counter;
+
+
         public ClangQuery()
         {
-
+            Counter = 0;
         }
 
         protected override System.Action Initializer
-            => Init;
+            => SelectSource;
 
-        FS.FileName NextOutFile()
-            => FS.file(string.Format("QueryOut{0}",Sequence++), FS.Txt);
+        FS.FilePath NextOutFile()
+            => Ws.Project("llvm.data").OutDir(Id) + FS.file(string.Format("QueryOut{0}", Sequence++), FS.ext("tree"));
 
-        StreamWriter NextWriter()
+        void CloseQuery()
         {
-            if(Writer != null)
+            if(QueryWriter != null)
             {
-                Writer.Flush();
-                Writer.Dispose();
-                Writer = null;
+                QueryWriter.Flush();
+                QueryWriter.Dispose();
+                QueryWriter = null;
             }
-            Writer = (Ws.Sources().Dataset(GetType().Name) + NextOutFile()).Writer();
-            Writer.AutoFlush = true;
-            return Writer;
         }
 
-        StreamWriter CurrentWriter()
+        void QueryBegin()
         {
-            return Writer;
+            CloseQuery();
+            QueryFile = NextOutFile();
+            QueryWriter = (QueryFile).Writer();
+            QueryWriter.AutoFlush = true;
+            Write(string.Format("Sending query output to {0}", QueryFile.ToUri()));
         }
 
         protected override Outcome Dispatch(string command, CmdArgs args)
         {
-            var writer = NextWriter();
+            QueryBegin();
             var query = string.Format("{0} {1}", command, args.Format());
-            writer.WriteLine(string.Format("query:{0}", query));
+            QueryWriter.WriteLine(string.Format("query:{0}", query));
             return Controller.Submit(query);
         }
 
-        void Init()
+        void SelectSource()
         {
-            Writer = NextWriter();
-            var src = FS.path(@"J:\llvm\source\llvm\include\llvm\CodeGen\ISDOpcodes.h");
+            QueryBegin();
+            var src = FS.path(@"J:\llvm\source\llvm\lib\Target\X86\X86InstrInfo.cpp");
             var args = string.Format("-p \"{0}\" \"{1}\"", LlvmWs.BuildRoot.Format(PathSeparator.FS), src.Format(PathSeparator.FS));
             Controller = Interpreter.create(ToolPath, args, OnStatus, OnError, OnExit);
             Controller.Start();
@@ -64,14 +74,16 @@ namespace Z0.llvm
 
         void OnStatus(string msg)
         {
-            Write(msg);
-            CurrentWriter().WriteLine(msg);
+            QueryWriter.WriteLine(msg);
+            if(msg.EndsWith(" matches."))
+            {
+                Write(msg);
+            }
         }
 
         void OnError(string msg)
         {
-            Error(msg);
-            CurrentWriter().WriteLine(msg);
+            Write(msg);
         }
 
         void OnExit(int code)

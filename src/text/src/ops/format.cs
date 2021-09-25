@@ -13,6 +13,19 @@ namespace Z0
 
     partial class text
     {
+        [MethodImpl(Inline), Op]
+        public static uint crlf(ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            core.seek(dst,i++) = (char)AsciControlSym.CR;
+            core.seek(dst,i++) = (char)AsciControlSym.LF;
+            return i - i0;
+        }
+
+        [Op]
+        public static string format(ReadOnlySpan<AsciCode> src)
+            => text.format(src, core.span<char>(src.Length));
+
         [Op]
         public static string format(ReadOnlySpan<char> src, uint length)
             => new string(core.slice(src,0, length));
@@ -25,23 +38,10 @@ namespace Z0
         }
 
         /// <summary>
-        /// Creates a string from a span, via UTF8 encoding
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [Op, DocRef("https://github.com/microsoft/ClangSharp/blob/6355b742f73915a21d18f74227f5c504b75bd976/sources/ClangSharp/Internals/SpanExtensions.cs")]
-        public static unsafe string format(ReadOnlySpan<byte> src)
-        {
-            if(src.IsEmpty)
-                return EmptyString;
-
-            fixed(byte* pSrc = src)
-                return Encoding.UTF8.GetString(pSrc, src.Length);
-        }
-
-        /// <summary>
         /// Creates a string from a span, via a specified encoding
         /// </summary>
         /// <param name="src">The data source</param>
+        [Op]
         public static unsafe string format(ReadOnlySpan<byte> src, Encoding encoding)
         {
             if(src.IsEmpty)

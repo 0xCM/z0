@@ -6,6 +6,8 @@ namespace Z0.llvm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using clang;
+
     [Free]
     sealed class LlvmShell : WfApp<LlvmShell>, IToolCmdShell
     {

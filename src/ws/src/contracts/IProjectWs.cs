@@ -13,6 +13,12 @@ namespace Z0
         FS.FolderPath Home()
             => Root + FS.folder(Project.Format());
 
+        FS.FolderPath IWorkspace.OutDir()
+            => Out();
+
+        FS.FolderPath IWorkspace.OutDir(string scope)
+            => Out(scope);
+
         FS.FolderPath Out()
             => Home() + FS.folder(output);
 

@@ -10,8 +10,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    using SR = SymbolicRender;
-
     partial class AsmBits
     {
         const string ModRmHeader = "mod | reg | r/m | hex | bitstring";
@@ -26,14 +24,14 @@ namespace Z0.Asm
             var f2 = BitSeq.bits(n2);
             var k=0u;
             text.copy(ModRmHeader, ref k, dst);
-            SR.crlf(ref k, dst);
+            text.crlf(ref k, dst);
 
             for(var c=0u; c<f2.Length; c++)
             for(var b=0u; b<f1.Length; b++)
             for(var a=0u; a<f0.Length; a++)
             {
                 modrm(AsmEncoding.modrm(skip(f0, a), skip(f1, b), skip(f2, c)), ref k, dst);
-                SR.crlf(ref k, dst);
+                text.crlf(ref k, dst);
             }
             return k;
         }

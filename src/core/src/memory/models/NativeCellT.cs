@@ -1,24 +1,29 @@
+
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
 
-    partial struct SymbolicRender
+    public struct NativeCell<T>
     {
-        [MethodImpl(Inline), Op]
-        public static uint crlf(ref uint i, Span<char> dst)
+        public T Content;
+
+        [MethodImpl(Inline)]
+        public NativeCell(T src)
         {
-            var i0 = i;
-            seek(dst,i++) = (char)AsciControlSym.CR;
-            seek(dst,i++) = (char)AsciControlSym.LF;
-            return i - i0;
+            Content = src;
+        }
+
+        public MemoryAddress Location
+        {
+            [MethodImpl(Inline)]
+            get => address(this);
         }
     }
 }

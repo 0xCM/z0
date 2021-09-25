@@ -59,7 +59,7 @@ namespace Z0.Tools
 
         public string Format()
         {
-            var dst = TextTools.buffer();
+            var dst = text.buffer();
             foreach (var arg in ExeArgs.ToList())
             {
                 if(arg.Contains(' '))

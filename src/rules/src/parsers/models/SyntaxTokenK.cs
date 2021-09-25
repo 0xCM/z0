@@ -2,27 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.llvm
+namespace Z0
 {
-    using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    using static Metatypes;
-
-    public struct BitcastSpec
+    public readonly struct SyntaxToken<K> : ISyntaxToken<K>
+        where K : unmanaged
     {
-        public TypeDescriptor Source;
-
-        public TypeDescriptor Target;
+        public K Kind {get;}
 
         [MethodImpl(Inline)]
-        public BitcastSpec(TypeDescriptor src, TypeDescriptor dst)
+        public SyntaxToken(K kind)
         {
-            Source = src;
-            Target = dst;
+            Kind = kind;
         }
     }
 }

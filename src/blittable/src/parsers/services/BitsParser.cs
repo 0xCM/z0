@@ -14,8 +14,8 @@ namespace Z0
     {
         partial struct Parsers
         {
-            [TextParser(typeof(bits<>))]
-            public readonly struct BitsParser<T> : ITextParser<bits<T>>
+            [Parser(typeof(bits<>))]
+            public readonly struct BitsParser<T> : IParser<bits<T>>
                 where T : unmanaged
             {
                 public Outcome Parse(string src, out bits<T> dst)

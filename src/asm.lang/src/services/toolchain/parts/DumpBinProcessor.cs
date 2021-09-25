@@ -48,7 +48,7 @@ namespace Z0.Asm
                     return result;
 
                 var buffer = StatementBuffer();
-                var count = SymbolicRender.render(right, ref j, buffer);
+                var count = text.render(right, ref j, buffer);
                 dst = asm.disassembly(offset, text.format(slice(buffer,0,count)));
                 return true;
             }

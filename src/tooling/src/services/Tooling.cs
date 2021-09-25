@@ -11,7 +11,6 @@ namespace Z0
     using static core;
 
     using SQ = SymbolicQuery;
-    using SR = SymbolicRender;
 
     [ApiHost]
     public partial class Tooling : AppService<Tooling>
@@ -210,8 +209,8 @@ namespace Z0
             {
                 var content = line.Codes;
                 var i = SQ.index(content, AsciCode.Colon);
-                var name = SR.format(SQ.left(content,i)).Trim();
-                var desc = SR.format(SQ.right(content,i)).Trim();
+                var name = text.format(SQ.left(content,i)).Trim();
+                var desc = text.format(SQ.right(content,i)).Trim();
                 var flag = Cmd.flagspec(k++, name, desc);
                 dst.Add(flag);
             }

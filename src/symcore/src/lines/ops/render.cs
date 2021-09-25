@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static core;
-
-    using SR = SymbolicRender;
+    using static Root;
 
     partial struct Lines
     {
@@ -17,9 +16,9 @@ namespace Z0
         public static uint render(in UnicodeLine src, ref uint i, Span<char> dst)
         {
             var i0 = i;
-            SR.render(format(src.LineNumber), ref i, dst);
+            text.render(format(src.LineNumber), ref i, dst);
             if(src.IsNonEmpty)
-                SR.render(src.Content, ref i, dst);
+                text.render(src.Content, ref i, dst);
             return i - i0;
         }
 
@@ -27,9 +26,9 @@ namespace Z0
         public static uint render(in AsciLine src, ref uint i, Span<char> dst)
         {
             var i0 = i;
-            SR.render(format(src.LineNumber), ref i, dst);
+            text.render(format(src.LineNumber), ref i, dst);
             if(src.IsNonEmpty)
-                SR.render(src.Codes, ref i, dst);
+                text.render(src.Codes, ref i, dst);
             return i - i0;
         }
 
@@ -38,9 +37,9 @@ namespace Z0
             where T : unmanaged
         {
             var i0 = i;
-            SR.render(format(src.LineNumber), ref i, dst);
+            text.render(format(src.LineNumber), ref i, dst);
             if(src.IsNonEmpty)
-                SR.render(recover<T,AsciCode>(src.View), ref i, dst);
+                text.render(recover<T,AsciCode>(src.View), ref i, dst);
             return i - i0;
         }
 
@@ -48,9 +47,9 @@ namespace Z0
         public static uint render(in TextLine src, ref uint i, Span<char> dst)
         {
             var i0 = i;
-            SR.render(format(src.LineNumber), ref i, dst);
+            text.render(format(src.LineNumber), ref i, dst);
             if(src.IsNonEmpty)
-                SR.render(src.Content, ref i, dst);
+                text.render(src.Content, ref i, dst);
             return i - i0;
         }
     }

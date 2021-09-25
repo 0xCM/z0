@@ -25,7 +25,30 @@ namespace Z0.Asm
             return result;
         }
 
-        void CheckBitSeq()
+        [CmdOp(".test-native-cells")]
+        unsafe Outcome TestNativeCells(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            using var native = NativeCells.alloc<string>(256, out var id);
+            var count = native.CellCount;
+            var length = 8;
+            var bits = GenBitStrings();
+            for(var i=0u; i<count; i++)
+            {
+                var offset = i*length;
+                native.Content(i) = new string(slice(bits,offset,length));
+            }
+
+            for(var i=0u; i<count; i++)
+            {
+                Write(native.Content(i));
+            }
+
+            return result;
+
+        }
+
+        Span<char> GenBitStrings()
         {
             var count = 256;
             var length = 8;
@@ -38,6 +61,14 @@ namespace Z0.Asm
                     seek(c,7-j) = bit.test(i,(byte)j).ToChar();
                 }
             }
+            return buffer;
+        }
+
+        void CheckBitSeq()
+        {
+            var count = 256;
+            var length = 8;
+            var buffer = GenBitStrings();
 
             for(var i=0; i<count; i++)
             {

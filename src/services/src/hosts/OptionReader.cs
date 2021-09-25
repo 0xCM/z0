@@ -4,13 +4,31 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
+    using static Root;
     using static core;
 
     using SQ = SymbolicQuery;
-    using SR = SymbolicRender;
 
-    partial class Tooling
+    public readonly struct OptionReader
     {
+        public static ReadOnlySpan<CmdOption> commands(FS.FilePath src)
+        {
+            var dst = list<CmdOption>();
+            using var reader = src.Utf8LineReader();
+            while(reader.Next(out var line))
+            {
+                if(line.IsNonEmpty)
+                {
+                    ref readonly var content = ref line.Content;
+                    if(CmdOption.parse(content, out var option))
+                        dst.Add(option);
+                }
+            }
+            return dst.ViewDeposited();
+        }
+
         public static Settings settings(FS.FilePath src)
         {
             var dst = list<Setting>();
@@ -27,8 +45,8 @@ namespace Z0
                     var i = SQ.index(content, Chars.Colon);
                     if(i > 0)
                     {
-                        var name = SR.format(SQ.left(content,i));
-                        var value = SR.format(SQ.right(content,i));
+                        var name = text.format(SQ.left(content,i));
+                        var value = text.format(SQ.right(content,i));
                         dst.Add(new Setting(name,value));
                     }
                 }

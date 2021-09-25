@@ -8,11 +8,10 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class)]
-    public class TextParserAttribute : Attribute
+    public class ParserAttribute : Attribute
     {
-        public TextParserAttribute(Type target)
+        public ParserAttribute(Type target)
         {
             TargetType = target;
         }
@@ -21,7 +20,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ITextParser
+    public interface IParser
     {
         Type TargetType {get;}
 
@@ -29,14 +28,14 @@ namespace Z0
     }
 
     [Free]
-    public interface ITextParser<T> : ITextParser
+    public interface IParser<T> : IParser
     {
         Outcome Parse(string src, out T dst);
 
-        Type ITextParser.TargetType
+        Type IParser.TargetType
             => typeof(T);
 
-        Outcome ITextParser.Parse(string src, out dynamic dst)
+        Outcome IParser.Parse(string src, out dynamic dst)
         {
             var result = Parse(src, out var x);
             if(result)

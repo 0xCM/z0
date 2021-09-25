@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    public readonly struct SeqParser<T> : IParseFunction<T[]>
+    public class SeqParser<T> : Parser<T[]>
     {
         readonly ParseFunction<T> TermParser;
 
@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Outcome Parse(string src, out T[] dst)
+        public override Outcome Parse(string src, out T[] dst)
         {
             dst = array<T>();
             var components = text.split(src, Delimiter, SplitClean);
