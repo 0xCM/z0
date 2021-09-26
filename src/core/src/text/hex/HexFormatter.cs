@@ -10,80 +10,12 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static HexFormatSpecs;
 
     [ApiHost]
     public readonly struct HexFormatter
     {
-        const NumericKind Closure = AllNumeric;
-
-        [Op, Closures(Closure)]
-        public static string format<T>(W8 w, T src, bool postspec = false)
-            where T : unmanaged
-                => HexFormat.format(w, bw8(src), postspec);
-
-        [Op, Closures(Closure)]
-        public static string format<T>(W16 w, T src, bool postspec = false)
-            where T : unmanaged
-                => HexFormat.format(w, bw16(src), postspec);
-
-        [Op, Closures(Closure)]
-        public static string format<T>(W32 w, T src, bool postspec = false)
-            where T : unmanaged
-                => HexFormat.format(w, bw32(src), postspec);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format<T>(W64 w, T src, bool postspec = false)
-             where T : unmanaged
-                => HexFormat.format(w, bw64(src), postspec);
-
-        [Op]
-        public static string format(W32 w, uint src, bool postspec = false)
-            => src.ToString(HexFormatSpecs.Hex32Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
-
-        [Op]
-        public static string format(W64 w, ulong src, bool postspec = false)
-            => src.ToString(HexFormatSpecs.Hex64Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
-
-        /// <summary>
-        /// Creates a <see cref='HexFormatter<T>'/> for primitive numeric types
-        /// </summary>
-        /// <typeparam name="T">The primitive numeric type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static HexFormatter<T> formatter<T>()
-            where T : unmanaged
-                => new HexFormatter<T>(SystemHexFormatters.create<T>());
-
-        /// <summary>
-        /// Renders a sequence of primal numeric T-cells as a sequence of hex-formatted values
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="config">The format configuration</param>
-        /// <param name="dst">The rendered data receiver</param>
-        /// <typeparam name="T">The primal numeric type</typeparam>
-        [Op, Closures(Closure)]
-        public static void format<T>(ReadOnlySpan<T> src, in HexFormatOptions config, ITextBuffer dst)
-            where T : unmanaged
-        {
-            var count = src.Length;
-            ref readonly var cell = ref first(src);
-            var last = count - 1;
-            for(var i=0u; i<count; i++)
-            {
-                dst.Append(format(skip(cell,i), config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec));
-                if(i != last)
-                    dst.Append(config.SegDelimiter);
-            }
-        }
-
-        /// <summary>
-        /// Formats a sequence of primal numeric calls as data-formatted hex
-        /// </summary>
-        /// <param name="src">The source data</param>
-        /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string array<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => formatter<T>().Format(src, HexFormatSpecs.HexArray);
+        const NumericKind Closure = UnsignedInts;
 
         [Op, Closures(Closure)]
         public static string format<T>(ReadOnlySpan<T> src, in HexFormatOptions config)
@@ -126,16 +58,204 @@ namespace Z0
             return result.ToString();
         }
 
-        /// <summary>
-        /// Renders a primal numeric value as hex-formatted text
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="zpad">Specifies whether the output should be 0-padded to the data type width</param>
-        /// <param name="specifier">Specifies whether the output should be prefixed/postfixed with a hex specifier</param>
-        /// <param name="uppercase">Specifies whether the alphabetic hex digits should be uppercased</param>
-        /// <param name="prespec">Specifies whether the hex specifier, if emitted, should be the canonical prefix or postfix specifier</param>
-        /// <typeparam name="T">The primal numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ISystemFormatter<T> sysformatter<T>()
+            where T : struct
+                => SystemHexFormatters.system_u<T>();
+
+        /// <summary>
+        /// Formats a sequence of primal numeric calls as data-formatted hex
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string array<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => formatter<T>().Format(src, HexFormatSpecs.HexArray);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static HexFormatter<T> formatter<T>()
+            where T : unmanaged
+                => new HexFormatter<T>(sysformatter<T>());
+
+        [Op, Closures(Closure)]
+        public static string format<T>(W8 w, T src, bool postspec = false)
+            where T : unmanaged
+                => format(w, bw8(src), postspec);
+
+        [Op, Closures(Closure)]
+        public static string format<T>(W16 w, T src, bool postspec = false)
+            where T : unmanaged
+                => format(w, bw16(src), postspec);
+
+        [Op, Closures(Closure)]
+        public static string format<T>(W32 w, T src, bool postspec = false)
+            where T : unmanaged
+                => format(w, bw32(src), postspec);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string format<T>(W64 w, T src, bool postspec = false)
+             where T : unmanaged
+                => format(w, bw64(src), postspec);
+
+        [Op]
+        public static string format(ReadOnlySpan<byte> src, in HexFormatOptions config)
+        {
+            int? blockwidth = null;
+            var dst = new StringBuilder();
+            var count = src.Length;
+            var pre = (config.Specifier && config.PreSpec) ? "0x" : EmptyString;
+            var post = (config.Specifier && !config.PreSpec) ? "h" : EmptyString;
+            var spec = CaseSpec(config.Uppercase).ToString();
+            var width = config.BlockWidth == 0 ? ushort.MaxValue : config.BlockWidth;
+            var counter = 0;
+
+            for(var i=0; i<count; i++)
+            {
+                var value = skip(src,i).ToString(spec);
+                var padded = config.ZeroPad ? value.PadLeft(2, Chars.D0) : value;
+                dst.Append(string.Concat(pre, padded, post));
+                if(config.DelimitSegs && i != count - 1)
+                    dst.Append(config.SegDelimiter);
+
+                if(++counter >= width && config.DelimitBlocks)
+                {
+                    if(config.BlockDelimiter == Chars.NL || config.BlockDelimiter == Chars.CR)
+                        dst.AppendLine();
+                    else
+                        dst.Append(config.BlockDelimiter);
+                    counter = 0;
+                }
+            }
+
+            return dst.ToString();
+        }
+
+        [Op]
+        public static string format(W8 w, byte src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex8Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+
+        [Op]
+        public static string format(W16 w, ushort src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex16Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+
+        [Op]
+        public static string format(W32 w, uint src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex32Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+
+        [Op]
+        public static string format(W64 w, ulong src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.Hex64Spec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
+
+        [Op]
+        public static string asmhex(sbyte src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x2")) + PostSpec;
+
+        [Op]
+        public static string asmhex(byte src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x2")) + PostSpec;
+
+        [Op]
+        public static string asmhex(short src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x4")) + PostSpec;
+
+        [Op]
+        public static string asmhex(ushort src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x4")) + PostSpec;
+
+        [Op]
+        public static string asmhex(int src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + PostSpec;
+
+        [Op]
+        public static string asmhex(uint src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x8")) + PostSpec;
+
+        [Op]
+        public static string asmhex(ulong src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + PostSpec;
+
+        [Op]
+        public static string asmhex(long src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + PostSpec;
+
+        [Op]
+        public static string format(byte src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x2"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(sbyte src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x2"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(short src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x4"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(ushort src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x4"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(int src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x8"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(uint src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x8"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(long src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string format(ulong src, int? digits = null, bool prespec = false, bool postspec = false)
+            => (prespec ? HexFormatSpecs.PreSpec : EmptyString)
+            + digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x"))
+            + (postspec ? PostSpec : EmptyString);
+
+        [Op]
+        public static string bytes(ushort src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(short src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(int src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(uint src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(long src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op]
+        public static string bytes(ulong src)
+            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        public static string bytes<T>(T src)
+            where T : unmanaged
+                => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+
+        [Op, Closures(AllNumeric)]
         public static string format<T>(T src, bool zpad, bool specifier, bool uppercase = false, bool prespec = true)
             where T : unmanaged
                 => format_u(src, zpad, specifier, uppercase, prespec);
@@ -182,6 +302,21 @@ namespace Z0
                 return float64(src).FormatHex(zpad, specifier, uppercase, prespec);
             else
                 throw no<T>();
+        }
+
+        [MethodImpl(Inline), Op]
+        public static string format<W,T>(T value, W w = default, bool postspec = false)
+            where W : unmanaged, IDataWidth
+            where T : unmanaged
+        {
+            if(typeof(W) == typeof(W8))
+                return format(w8, bw8(value), postspec);
+            else if(typeof(W) == typeof(W16))
+                return format(w16, bw16(value), postspec);
+            else if(typeof(W) == typeof(W32))
+                return format(w32, bw32(value), postspec);
+            else
+                return format(w64, bw64(value), postspec);
         }
     }
 }

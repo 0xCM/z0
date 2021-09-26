@@ -15,19 +15,18 @@ namespace Z0
     /// <summary>
     /// Defines a closed T-interval where an ordering on T is assumed to exist and be well-defined
     /// </summary>
-    [DataType]
     public readonly struct ClosedInterval<T> : IInterval<T>
         where T : unmanaged
     {
         /// <summary>
         /// The left endpoint
         /// </summary>
-        public T Min {get;}
+        public readonly T Min;
 
         /// <summary>
         /// The right endpoint
         /// </summary>
-        public T Max {get;}
+        public readonly T Max;
 
         [MethodImpl(Inline)]
         public ClosedInterval(T min, T max)
@@ -45,45 +44,32 @@ namespace Z0
         public ulong Width
         {
             [MethodImpl(Inline)]
-            get => RightU64 - LeftU64 + 1;
+            get => Right64u - Left64u;
         }
 
-        /// <summary>
-        /// Specifies whether the left and right endpoints are the same
-        /// </summary>
-        public bool Degenerate
+        public bool Valid
         {
             [MethodImpl(Inline)]
-            get => Min.Equals(Max);
+            get => Right64i - Left64i > 0;
         }
 
-        /// <summary>
-        /// Specifies whether the interval is the zero interval
-        /// </summary>
+        public bool Invalid
+        {
+            [MethodImpl(Inline)]
+            get => !Valid;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Min.Equals(Max);
         }
 
-        /// <summary>
-        /// Converts the left and right underlying values
-        /// </summary>
-        /// <typeparam name="U">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public ClosedInterval<U> Convert<U>()
-            where U : unmanaged, IComparable<U>, IEquatable<U>
-                => new ClosedInterval<U>(@as<T,U>(Min), @as<T,U>(Max));
-
-        /// <summary>
-        /// Creates a view of the data in the interval as seen through the
-        /// lens of another type, but performs no conversion
-        /// </summary>
-        /// <typeparam name="U">The target type</typeparam>
-        [MethodImpl(Inline)]
-        public ClosedInterval<U> As<U>()
-            where U : unmanaged, IComparable<U>, IEquatable<U>
-                => new ClosedInterval<U>(@as<T,U>(Min), @as<T,U>(Max));
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !Min.Equals(Max);
+        }
 
         [MethodImpl(Inline)]
         public void Deconstruct(out T left, out T right)
@@ -106,13 +92,25 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        ulong LeftU64
+        long Left64i
+        {
+            [MethodImpl(Inline)]
+            get => @as<T,long>(Min);
+        }
+
+        long Right64i
+        {
+            [MethodImpl(Inline)]
+            get => @as<T,long>(Max);
+        }
+
+        ulong Left64u
         {
             [MethodImpl(Inline)]
             get => @as<T,ulong>(Min);
         }
 
-        ulong RightU64
+        ulong Right64u
         {
             [MethodImpl(Inline)]
             get => @as<T,ulong>(Max);

@@ -14,15 +14,6 @@ namespace Z0
     partial class Widths
     {
         /// <summary>
-        /// Transforms a readonly T-cell into an editable T-cell
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T edit<T>(in T src)
-            => ref Unsafe.AsRef(src);
-
-        /// <summary>
         /// Presents a T-references as a <see cref='byte'/> reference
         /// </summary>
         /// <param name="src">The source reference</param>

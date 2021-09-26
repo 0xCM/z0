@@ -2,14 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.llvm
 {
-    public enum SegRenderStyle : byte
+    partial class LlvmCmd
     {
-        Default = 0,
-
-        Interval = 1,
-
-        Intel = 2,
+        [CmdOp(".import-lists")]
+        Outcome ImportLists(CmdArgs args)
+            => LlvmEtl.ImportLists();
     }
 }

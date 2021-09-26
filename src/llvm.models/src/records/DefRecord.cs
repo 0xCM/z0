@@ -11,9 +11,7 @@ namespace Z0.llvm
     {
         public const string TableId = "llvm.defs";
 
-        public const byte FieldCount = 4;
-
-        public LlvmDatasetKind Dataset;
+        public const byte FieldCount = 3;
 
         public LineNumber Offset;
 
@@ -22,6 +20,6 @@ namespace Z0.llvm
         public TextBlock Ancestors;
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{22,12,42,1};
+            => new byte[FieldCount]{22,42,1};
     }
 }

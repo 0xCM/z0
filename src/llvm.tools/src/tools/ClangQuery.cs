@@ -6,7 +6,6 @@ namespace Z0.llvm.clang
 {
     using System;
     using System.IO;
-    using System.Collections.Generic;
 
     using static core;
 
@@ -33,7 +32,7 @@ namespace Z0.llvm.clang
             => SelectSource;
 
         FS.FilePath NextOutFile()
-            => Ws.Project("llvm.data").OutDir(Id) + FS.file(string.Format("QueryOut{0}", Sequence++), FS.ext("tree"));
+            => Ws.Project("llvm.data").OutDir(Id.Format()) + FS.file(string.Format("QueryOut{0}", Sequence++), FS.ext("tree"));
 
         void CloseQuery()
         {

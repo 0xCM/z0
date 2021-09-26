@@ -392,5 +392,10 @@ namespace Z0
         /// Defines the 'yaml.tok' literal
         /// </summary>
         public const string yamltok = yaml + sep + tok;
+
+        /// <summary>
+        /// Defines the 'bv' literal
+        /// </summary>
+        public const string bv = nameof(bv);
     }
 }

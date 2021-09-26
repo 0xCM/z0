@@ -21,30 +21,15 @@ namespace Z0.Asm
 
         const char Close = Chars.RBracket;
 
-        OpCodes _OpCodes;
-
         static AsmBits The;
-
-        public IAsmBitfield OpCodeField()
-            => _OpCodes;
 
         AsmBits()
         {
-            _OpCodes = new OpCodes();
         }
 
         static AsmBits()
         {
             The = new AsmBits();
-        }
-
-        sealed class OpCodes : AsmBitfield<AsmTokens.OpCodes>
-        {
-            public OpCodes()
-                : base("OpCodeBits")
-            {
-
-            }
         }
     }
 }

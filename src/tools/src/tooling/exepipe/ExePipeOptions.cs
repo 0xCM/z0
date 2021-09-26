@@ -20,7 +20,7 @@ namespace Z0.Tools
             dst.StdOutPipeName = EmptyString;
             dst.StdErrPipeName = EmptyString;
             dst.PidPipeName = EmptyString;
-            dst.ExePath = EmptyString;
+            dst.ExePath = FS.FilePath.Empty;
             dst.ControllerName = "control";
             dst.ExeArgs = new();
             return dst;
@@ -36,7 +36,7 @@ namespace Z0.Tools
 
         public string PidPipeName;
 
-        public string ExePath;
+        public FS.FilePath ExePath;
 
         public string ControllerName;
 
@@ -52,7 +52,7 @@ namespace Z0.Tools
                 || string.IsNullOrEmpty(StdOutPipeName)
                 || string.IsNullOrEmpty(StdErrPipeName)
                 || string.IsNullOrEmpty(PidPipeName)
-                || string.IsNullOrEmpty(ExePath)
+                || ExePath.IsEmpty
                 || string.IsNullOrEmpty(ControllerName)
                 );
         }

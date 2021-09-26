@@ -189,9 +189,9 @@ namespace Z0.Logix
                 var x = LogicEngine.eval(a);
                 var y = LogicEngine.eval(b);
                 if(x != y)
-                    return Z0.Bit32.Off;
+                    return bit.Off;
             }
-            return Z0.Bit32.On;
+            return bit.On;
         }
 
         [Op, Closures(Closure)]

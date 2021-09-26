@@ -16,12 +16,12 @@ namespace Z0
     public struct Bitfield<T>
         where T : unmanaged
     {
-        readonly BitfieldSegs _Segs;
+        readonly Index<BitfieldSeg> _Segs;
 
         public T State;
 
         [MethodImpl(Inline)]
-        public Bitfield(BitfieldSegs segs, T state)
+        public Bitfield(BitfieldSeg[] segs, T state)
         {
             State = state;
             _Segs = segs;

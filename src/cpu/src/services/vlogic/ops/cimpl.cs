@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline), CImpl, Closures(Closure)]
         public static Vector128<T> vcimpl<T>(W128 w, in T a, in T b)
             where T : unmanaged
-                => gcpu.vcimpl(gcpu.vload(w, in a), gcpu.vload(w, b));
+                => gcpu.vcimpl(gcpu.vload(w, a), gcpu.vload(w, b));
 
         [MethodImpl(Inline), CImpl, Closures(Closure)]
         public static Vector256<T> vcimpl<T>(W256 w, in T a, in T b)
@@ -49,14 +49,14 @@ namespace Z0
         [MethodImpl(Inline), CImpl, Closures(Closure)]
         public static void cimpl<T>(W256 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => gcpu.vstore(vcimpl(w, in a, in b), ref dst);
+                => gcpu.vstore(vcimpl(w, a, b), ref dst);
 
         [MethodImpl(Inline), CImpl, Closures(Closure)]
         public static void cimpl<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                cimpl(w, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
+                cimpl(w, skip(a, offset), skip(b, offset), ref seek(dst, offset));
         }
 
         [MethodImpl(Inline), CImpl, Closures(Closure)]
@@ -64,7 +64,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                cimpl(w, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
+                cimpl(w, skip(a, offset), skip(b, offset), ref seek(dst, offset));
         }
     }
 }

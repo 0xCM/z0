@@ -13,11 +13,32 @@ namespace Z0
         FS.FolderPath Home()
             => Root + FS.folder(Project.Format());
 
+        FS.FolderPath IFileArchive.Subdir(string name)
+            => Home() + FS.folder(name);
+
+        FS.FolderPath IFileArchive.Subdir(Scope scope)
+            => Home() + FS.folder(scope.Format());
+
         FS.FolderPath IWorkspace.OutDir()
             => Out();
 
-        FS.FolderPath IWorkspace.OutDir(string scope)
+        FS.FolderPath IWorkspace.OutDir(Scope scope)
             => Out(scope);
+
+        FS.FolderPath IWorkspace.ScriptDir()
+            => Home() + FS.folder(scripts);
+
+        FS.FilePath IFileArchive.TablePath<T>()
+            where T : struct
+                => Tables() +  TableFile<T>();
+
+        FS.FilePath IFileArchive.TablePath<T>(Scope scope)
+            where T : struct
+                => Subdir(scope) + TableFile<T>();
+
+        FS.FilePath IFileArchive.TablePath<T>(Scope scope, string suffix)
+            where T : struct
+                => Subdir(scope) + TableFile<T>(suffix);
 
         FS.FolderPath Out()
             => Home() + FS.folder(output);
@@ -33,6 +54,9 @@ namespace Z0
 
         FS.FolderPath Tables()
             => Home() + FS.folder(tables);
+
+        FS.FolderPath Tables(Scope scope)
+            => Tables() + FS.folder(scope.Format());
 
         FS.FolderPath TablesOut()
             => Out(tables);

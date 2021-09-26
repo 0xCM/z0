@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    public readonly partial struct DocModels
+    public readonly struct DocModels
     {
         public static UnicodeDoc unicode(char[] src)
             => new UnicodeDoc(src);
@@ -95,7 +95,6 @@ namespace Z0
 
             public DocReader<K> CreateReader()
                 => new DocReader<K>(this);
-
         }
 
         public sealed class UnicodeDoc : Doc<char>
@@ -115,8 +114,6 @@ namespace Z0
             {
 
             }
-
         }
     }
-
 }

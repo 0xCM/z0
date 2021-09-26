@@ -12,6 +12,11 @@ namespace Z0
         [Op]
         public static string format(FileKind src)
             => Symbols.index<FileKind>()[src].Expr.Format();
+    }
 
+    partial class XTend
+    {
+        public static FS.FileExt Ext(this FileKind src)
+            => FileTypes.ext(src);
     }
 }

@@ -16,23 +16,22 @@ namespace Z0
         public static BitfieldModel bitfield(Identifier name, Index<BitfieldSeg> segs)
             => new BitfieldModel(name, segs, width(segs));
 
-        public static BitfieldModel bitfield(string fieldname, Type[] src)
+        public static BitfieldModel bitfield<K>(Identifier name, Symbols<K> symbols)
+            where K : unmanaged
         {
-            var tagged = src.Attributions<FieldSegAttribute>().OrderBy(x => x.Tag.Order).ToReadOnlySpan();
-            var count = tagged.Length;
-            var offset = 0u;
+            var count = symbols.Count;
             var segs = alloc<BitfieldSeg>(count);
+            var syms = symbols.View;
+            var offset = 0u;
             for(var i=0u; i<count; i++)
             {
-                ref readonly var field = ref skip(tagged,i);
-                var name = field.Type.Name;
-                var width = field.Tag.Width;
-                seek(segs,i) = BitfieldSpecs.segment(name, i, offset, width);
-
+                ref readonly var sym = ref skip(syms,i);
+                var expr = sym.Expr.Format();
+                var width = bw32(sym.Kind);
+                seek(segs,i) = BitfieldSpecs.segment(expr, i, offset, width);
                 offset += width;
             }
-
-            return BitfieldSpecs.bitfield(fieldname, segs);
+            return BitfieldSpecs.bitfield(name, segs);
         }
     }
 }

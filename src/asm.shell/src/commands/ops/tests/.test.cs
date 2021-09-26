@@ -20,8 +20,20 @@ namespace Z0.Asm
         unsafe Outcome Test(CmdArgs args)
         {
             var result = Outcome.Success;
+            const string Expect = "* 1 {} {33 a cde:} d*";
+            var input = "aba {* 1 {} {33 a cde:} d*} x b";
+            var output = SymbolicQuery.enclosed(input, 0, RenderFence.Embraced);
+            if(output.IsNonEmpty)
+            {
+                var inner = text.inside(input, output.Min - 1, output.Max + 1);
+                if(inner == Expect)
+                    Write("Success");
+                else
+                    Write(string.Format("Fail:{0} != {1}", inner, Expect));
+            }
+            else
+                Write("Fail:Empty");
 
-            CheckBitSeq();
             return result;
         }
 
@@ -45,7 +57,6 @@ namespace Z0.Asm
             }
 
             return result;
-
         }
 
         Span<char> GenBitStrings()
@@ -276,14 +287,14 @@ namespace Z0.Asm
             return result;
         }
 
-        [CmdOp(".bit-mappers")]
-        Outcome TestBitMappers(CmdArgs args)
+        [CmdOp(".point-mappers")]
+        Outcome TestPointMappers(CmdArgs args)
         {
             var result = Outcome.Success;
             var symbols = Symbols.index<ConditionCodes.Condition>();
             var symview = symbols.View;
-            var map = BitMappers.define<ConditionCodes.Condition,Pow2x16>(symbols);
-            var data = BitMappers.serialize(map).View;
+            var map = PointMappers.define<ConditionCodes.Condition,Pow2x16>(symbols, (i,k) => (Pow2x16)Pow2.pow((byte)i));
+            var data = PointMappers.serialize(map).View;
             var count = map.PointCount;
             var indices = slice(data,0, count);
             var bits = recover<ushort>(slice(data,count,count*size<Pow2x16>()));

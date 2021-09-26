@@ -17,30 +17,10 @@ namespace Z0.llvm
 
         internal LineMap<AsmId> AsmDefMapData;
 
-        internal LlvmRecordSources RecordSourceData;
-
-        public LineMap<AsmId> AsmDefMap
-        {
-            [MethodImpl(Inline)]
-            get => AsmDefMapData;
-        }
-
-        public LlvmRecordSources RecordSources
-        {
-            [MethodImpl(Inline)]
-            get => RecordSourceData;
-        }
-
         public ReadOnlySpan<AsmRecordField> AsmDefFields
         {
             [MethodImpl(Inline)]
             get => AsmDefFieldData.View;
-        }
-
-        public ReadOnlySpan<OpCodeSpec> OpCodes
-        {
-            [MethodImpl(Inline)]
-            get => OpCodeData.View;
         }
     }
 }

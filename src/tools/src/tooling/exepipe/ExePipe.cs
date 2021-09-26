@@ -66,10 +66,10 @@ namespace Z0.Tools
 
                 var info = new ProcessStartInfo();
 
-                if (Path.IsPathRooted(options.ExePath))
-                    info.WorkingDirectory = Path.GetDirectoryName(options.ExePath);
+                if (Path.IsPathRooted(options.ExePath.Format()))
+                    info.WorkingDirectory = options.ExePath.FolderPath.Format();
 
-                info.FileName = options.ExePath;
+                info.FileName = options.ExePath.Format();
                 info.Arguments = options.Format();
                 info.UseShellExecute = false;
                 info.RedirectStandardInput = true;

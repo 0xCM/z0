@@ -32,6 +32,9 @@ namespace Z0
             return (T)this;
         }
 
+        protected void Emitted(FS.FilePath dst)
+            => Write(string.Format("Emitted {0}", dst.ToUri()));
+
         Outcome SelectTool(ToolId tool)
         {
             var result = Outcome.Success;

@@ -52,7 +52,6 @@ namespace Z0
             }
             buffer.Append("]");
             Wf.Row(buffer.Emit());
-
         }
 
         public void Run()

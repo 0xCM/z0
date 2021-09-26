@@ -16,39 +16,30 @@ namespace Z0
     public readonly struct BitfieldSeg<K>
         where K : unmanaged
     {
-        public static string format(in BitfieldSeg<K> src)
-        {
-            var i = api.endpos((byte)src.Offset,(byte)src.Width);
-            if(i == 0)
-                return string.Format("{0}[{1}]", src.SegName, src.Offset);
-            else
-                return string.Format("{0}[{1}:{2}]", src.SegName, src.Offset, i);
-        }
-
         /// <summary>
         /// The segment name
         /// </summary>
-        public Identifier SegName {get;}
+        public readonly Identifier SegName;
 
         /// <summary>
         /// The 0-based position of the segment within the field
         /// </summary>
-        public uint SegPos {get;}
+        public readonly uint SegPos;
 
         /// <summary>
         /// The segment position within the field
         /// </summary>
-        public K SegId {get;}
+        public readonly K SegId;
 
         /// <summary>
         /// The index of the first bit in the segment
         /// </summary>
-        public uint Offset {get;}
+        public readonly uint Offset;
 
         /// <summary>
         /// The index of the last bit in the segment
         /// </summary>
-        public uint Width {get;}
+        public readonly uint Width;
 
         [MethodImpl(Inline)]
         public BitfieldSeg(K id, uint pos, uint offset, uint width)
@@ -61,7 +52,7 @@ namespace Z0
         }
 
         public string Format()
-            => format(this);
+            => api.format(this);
 
 
         public override string ToString()

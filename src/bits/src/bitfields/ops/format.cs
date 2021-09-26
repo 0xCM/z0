@@ -10,19 +10,19 @@ namespace Z0
     {
         [Op]
         public static string format(Bitfield8 src)
-            => TextTools.format(render(src));
+            => text.format(render(src));
 
         [Op]
         public static string format(Bitfield16 src)
-            => TextTools.format(render(src));
+            => text.format(render(src));
 
         [Op]
         public static string format(Bitfield32 src)
-            => TextTools.format(render(src));
+            => text.format(render(src));
 
         [Op]
         public static string format(Bitfield64 src)
-            => TextTools.format(render(src));
+            => text.format(render(src));
 
         /// <summary>
         /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}

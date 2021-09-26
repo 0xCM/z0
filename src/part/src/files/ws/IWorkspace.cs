@@ -10,14 +10,8 @@ namespace Z0
     {
         Identifier Name {get;}
 
-        FS.FolderPath DataDir()
-            => Root + FS.folder(data);
-
         FS.FolderPath AdminDir()
             => Root + FS.folder(admin);
-
-        FS.FilePath AdminPath(string id, FS.FileExt ext)
-            => AdminDir() + FS.file(id,ext);
 
         FS.Files AdminFiles(FS.FileExt ext)
             => AdminDir().Files(ext);
@@ -29,14 +23,14 @@ namespace Z0
         FS.FolderPath SrcDir()
             => Root + FS.folder(src);
 
-        FS.FolderPath SrcDir(string name)
-            => SrcDir() + FS.folder(name);
+        FS.FolderPath SrcDir(Scope scope)
+            => SrcDir() + FS.folder(scope.Format());
 
         FS.FolderPath OutDir()
             => Root + FS.folder(output);
 
-        FS.FolderPath OutDir(string id)
-            => OutDir() + FS.folder(id);
+        FS.FolderPath OutDir(Scope scope)
+            => OutDir() + FS.folder(scope.Format());
 
         FS.FolderPath ScriptDir()
             => Root + FS.folder(scripts);

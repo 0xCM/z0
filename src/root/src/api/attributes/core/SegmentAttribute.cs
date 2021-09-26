@@ -6,19 +6,12 @@ namespace Z0
 {
     using System;
 
-    public class FieldSegAttribute : Attribute
+    public class SegmentAttribute : Attribute
     {
-        public uint Order {get;}
         public uint Width {get;}
 
-        public FieldSegAttribute(uint width)
+        public SegmentAttribute(uint width)
         {
-            Width = width;
-        }
-
-        public FieldSegAttribute(uint order, uint width)
-        {
-            Order = order;
             Width = width;
         }
     }

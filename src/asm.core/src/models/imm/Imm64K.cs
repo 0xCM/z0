@@ -34,7 +34,7 @@ namespace Z0
             => bw64(this);
 
         public string Format()
-            => HexFormat.format(Content, W, true);
+            => HexFormatter.format(Content, W, true);
 
         public override string ToString()
             => Format();

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
@@ -70,11 +69,11 @@ namespace Z0
         /// </summary>
         /// <param name="fields">The fields to delimit</param>
         /// <param name="delimiter">The delimiter to use</param>
-        public static string intersperse(ReadOnlySpan<string> fields, char delimiter = FieldDelimiter)
+        public static string intersperse(ReadOnlySpan<string> fields, char delimiter)
         {
             var dst = buffer();
             var count = fields.Length;
-            for(byte i=0; i<count; i++)
+            for(var i=0; i<count; i++)
             {
                 dst.Append(skip(fields, i));
                 if(i != count - 1)

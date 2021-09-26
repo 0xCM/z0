@@ -13,7 +13,7 @@ namespace Z0
     partial class text
     {
         [MethodImpl(Inline), Op]
-        public static uint lowercase(ref uint i, ReadOnlySpan<char> src, Span<char> dst)
+        public static uint lowercase(ReadOnlySpan<char> src, ref uint i, Span<char> dst)
         {
             var i0 = i;
             var count = src.Length;

@@ -63,7 +63,6 @@ namespace Z0
             return size;
         }
 
-
         [MethodImpl(Inline), Op]
         public static byte[] bytes(string src)
             => encoding().GetBytes(src);

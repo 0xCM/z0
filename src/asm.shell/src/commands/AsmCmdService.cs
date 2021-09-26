@@ -174,9 +174,6 @@ namespace Z0.Asm
             return src;
         }
 
-        void Emitted(FS.FilePath dst)
-            => Write(string.Format("Emitted {0}", dst.ToUri()));
-
         Outcome BuildAsmExe(string id)
         {
             const string ScriptId = "build-exe";

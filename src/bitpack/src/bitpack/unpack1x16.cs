@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static cpu;
     using static BitMasks;
     using static BitMaskLiterals;
 

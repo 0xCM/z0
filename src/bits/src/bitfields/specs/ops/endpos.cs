@@ -4,10 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class text
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+
+    partial struct BitfieldSpecs
     {
-        [Op]
-        public static TextTraverser traverse(string src)
-            => new TextTraverser(src);
+        [MethodImpl(Inline), Op]
+        public static uint endpos(uint offset, uint width)
+            => ((offset + width) - 1);
     }
 }

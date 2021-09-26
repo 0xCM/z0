@@ -95,7 +95,7 @@ namespace Z0.Tools
                                 GenerateError("--dbgExe");
                                 return -1;
                             }
-                            options.ExePath = dbgExe;
+                            options.ExePath = FS.path(dbgExe);
                         }
                         else
                         {

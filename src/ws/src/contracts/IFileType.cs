@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static BitFlow;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]

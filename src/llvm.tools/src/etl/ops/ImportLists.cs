@@ -14,7 +14,7 @@ namespace Z0.llvm
         public Outcome ImportLists()
         {
             var project = Ws.Project("llvm.data");
-            var target = project.Tables();
+            var target = project.Tables("lists");
             var input = project.OutFiles(FS.List).View;
             var count = input.Length;
             var formatter = Tables.formatter<ListItem>(ListItem.RenderWidths);

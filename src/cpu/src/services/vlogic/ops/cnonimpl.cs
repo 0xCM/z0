@@ -20,13 +20,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.cnonimpl(in u8(a), in u8(b), ref u8(dst));
+               BL.cnonimpl(u8(a), u8(b), ref u8(dst));
             else if(typeof(T) == typeof(ushort))
-                cnonimpl(w, in a, in b, ref dst);
+                cnonimpl(w, a, b, ref dst);
             else if(typeof(T) == typeof(uint))
-                cnonimpl(w, 4, 8, in a, in b, ref dst);
+                cnonimpl(w, 4, 8, a, b, ref dst);
             else if(typeof(T) == typeof(ulong))
-                cnonimpl(w, 16, 4, in a, in b, ref dst);
+                cnonimpl(w, 16, 4, a, b, ref dst);
             else
                 throw no<T>();
         }

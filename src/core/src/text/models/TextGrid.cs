@@ -8,9 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    public readonly struct TextGrid
+    public class TextGrid
     {
+        [MethodImpl(Inline)]
+        public static void parse<T>(in TextGrid src, Span<T> dst, Func<TextRow,T> parser)
+        {
+            var rows = src.RowData.View;
+            var count = rows.Length;
+            for(var i=0; i<count; i++)
+               seek(dst,i) = parser(skip(rows,i));
+        }
+
         public Index<TextRow> RowData {get;}
 
         public TextDocFormat Format {get;}
@@ -41,12 +51,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => RowData.Storage;
-        }
-
-        public string Content
-        {
-            [MethodImpl(Inline)]
-            get => RowData.Map(r => r.Format()).Join(RP.Eol);
         }
 
         public ref readonly TextRow this[int index]

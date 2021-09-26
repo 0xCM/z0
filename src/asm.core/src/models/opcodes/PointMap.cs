@@ -4,16 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public struct BitMap<I,T>
+    public struct PointMap<I,T>
         where I : unmanaged
         where T : unmanaged
     {
-        public I Index;
+        public I Source;
 
-        public T Bits;
+        public T Target;
 
         public string Format()
-            => string.Format("{0} -> {1}", Index, Bits);
+            => string.Format("{0} -> {1}", Source, Target);
 
         public override string ToString()
             => Format();

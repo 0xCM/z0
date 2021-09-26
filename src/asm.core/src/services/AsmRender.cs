@@ -99,11 +99,11 @@ namespace Z0.Asm
             var value = src.OffsetValue;
             var f = EmptyString;
             if(width <= 16)
-                f = HexFormat.format(w16,(ushort)value);
+                f = HexFormatter.format(w16,(ushort)value);
             else if(width <= 32)
-                f = HexFormat.format(w32,(uint)value);
+                f = HexFormatter.format(w32,(uint)value);
             else
-                f = HexFormat.format(w64,(ulong)value);
+                f = HexFormatter.format(w64,(ulong)value);
 
             return string.Format(LabelPattern, f);
         }

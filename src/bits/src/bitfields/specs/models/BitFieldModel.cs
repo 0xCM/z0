@@ -8,24 +8,25 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    public readonly struct BitfieldModel : IBitfieldModel
+    using api = BitfieldSpecs;
+
+    public readonly struct BitfieldModel
     {
         /// <summary>
         /// The bitfield name
         /// </summary>
-        public Identifier Name {get;}
+        public readonly Identifier Name;
 
         /// <summary>
         /// The number of defined segments
         /// </summary>
-        public uint SegCount {get;}
+        public readonly uint SegCount;
 
         /// <summary>
         /// The accumulated width of the defined segments
         /// </summary>
-        public uint TotalWidth {get;}
+        public readonly uint TotalWidth;
 
         readonly Index<BitfieldSeg> Data;
 
@@ -36,6 +37,12 @@ namespace Z0
             SegCount = segs.Count;
             TotalWidth = width;
             Data = segs;
+        }
+
+        public bool IsBitvector
+        {
+            [MethodImpl(Inline)]
+            get => api.bitvector(this);
         }
 
         public Span<BitfieldSeg> Segments
@@ -66,21 +73,10 @@ namespace Z0
         public uint SegEnd(uint i)
             => Seg(i).Width;
 
-
         public string Format()
-        {
-            const string SegPattern = "{0},";
-            var dst = text.buffer();
-            var decl = string.Format("{0}[{1},{2}] " , Name, TotalWidth,SegCount);
-            dst.AppendLine(decl + Chars.LBrace);
-            var indent = 2u;
-            for(var i=0; i<SegCount; i++)
-            {
-                dst.IndentLineFormat(indent, SegPattern, skip(Segments,i).Format());
-            }
-            indent -= 2;
-            dst.IndentLine(indent,Chars.RBrace);
-            return dst.Emit();
-        }
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
     }
 }

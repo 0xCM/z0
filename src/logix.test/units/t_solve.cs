@@ -7,7 +7,7 @@ namespace Z0.Logix
     using static core;
     public class t_solve : UnitTest<t_solve>
     {
-        public override bool Enabled => false;
+        public override bool Enabled => true;
 
         public void solve_and_over_or_u32_1var()
         {
@@ -26,8 +26,8 @@ namespace Z0.Logix
         public void solve_not_over_xor_u32_2vars()
             => check_identity_sln(TypedIdentities.NotOverXOr<uint>(), 0u,30u);
 
-        public void solve_not_over_xor_u8_2vars()
-            => check_identity_sln(TypedIdentities.NotOverXOr<byte>(), (byte)0,(byte)30);
+        // public void solve_not_over_xor_u8_2vars()
+        //     => check_identity_sln(TypedIdentities.NotOverXOr<byte>(), (byte)0,(byte)30);
 
         void check_identity_sln<T>(ComparisonExpr<T> identity, T min, T max)
             where T : unmanaged

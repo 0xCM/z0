@@ -28,7 +28,7 @@ namespace Z0
                 seek(segs,i) = segment(item.Value.Format(), i, i, 1);
             }
 
-            return bitfield(name,segs);
+            return bitfield(name, segs);
         }
     }
 }

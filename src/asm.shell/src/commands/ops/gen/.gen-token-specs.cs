@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
 
     using static core;
-    using static WsAtoms;
 
     partial class AsmCmdService
     {
@@ -19,36 +18,6 @@ namespace Z0.Asm
             var src = Z0.Tokens.concat(symbols);
             var dst = Ws.Gen().Root + FS.file("token-specs", FS.Cs);
             EmitTokenSpecs("ModRmTokens", src,dst);
-            return result;
-        }
-
-        [CmdOp(".bitfields")]
-        Outcome GenBitFields(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var dir = Ws.Tables().Subdir(llvm) + FS.folder(lists);
-            var sources = @readonly(dir.Files(FS.Csv));
-            var outdir = Ws.Gen().Subdir("bitvectors");
-            var count = sources.Length;
-            Write(string.Format("Emitting {0} bitvector specifications", count));
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var src = ref skip(sources,i);
-                result = Tables.list(src, out var items);
-                if(result.Fail)
-                {
-                    Error(result.Message);
-                    continue;
-                }
-                var name = src.FileName.WithoutExtension.Format();
-                var file = src.FileName.ChangeExtension(FS.ext("bv"));
-                var dst = outdir + file;
-                var bitvector = BitfieldSpecs.bitvector(name, items);
-                using var writer = dst.AsciWriter();
-                writer.Write(bitvector.Format());
-                Emitted(dst);
-            }
-
             return result;
         }
 

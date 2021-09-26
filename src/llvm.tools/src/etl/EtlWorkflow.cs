@@ -12,46 +12,38 @@ namespace Z0.llvm
 
     public partial class EtlWorkflow : AppService<EtlWorkflow>
     {
-        llvm.LlvmPaths LlvmPaths;
-
         Index<OpCodeSpec> _LlvmOpCodes;
 
         LlvmRecordSources Sources;
 
-        LineMap<AsmId> AsmDefMap;
-
-        Index<AsmRecordField> AsmDefFields;
-
-        IProjectWs DataSource;
+        IProjectWs LlvmData;
 
         public EtlWorkflow()
         {
             Sources = new();
             _LlvmOpCodes = new();
-            AsmDefMap = LineMap<AsmId>.Empty;
         }
 
         protected override void Initialized()
         {
-            LlvmPaths = Wf.LlvmPaths();
-            DataSource = Ws.Project("llvm.data");
+            LlvmData = Ws.Project("llvm.data");
         }
 
-        public Outcome RunEtl(out EtlDatasets datasets)
+        public Outcome RunEtl()
         {
+            var records = LoadRecords();
             var result = Outcome.Success;
-            Sources = LoadRecordSources();
-            result = EmitTables();
+            // Sources = LoadRecordSources();
+            EmitTables(records);
             _LlvmOpCodes = MC.opcodes();
-            TableEmit(_LlvmOpCodes.View, OpCodeSpec.RenderWidths, LlvmPaths.OpCodeTable());
-            ImportLists();
-            GenStringTables();
-            AsmDefMap = MapAsmDefLines();
-            AsmDefFields = LoadAsmDefFields();
-            datasets = new EtlDatasets();
-            datasets.RecordSourceData = Sources;
-            datasets.AsmDefFieldData = AsmDefFields;
-            datasets.AsmDefMapData = AsmDefMap;
+            TableEmit(_LlvmOpCodes.View, OpCodeSpec.RenderWidths, LlvmData.TablePath<OpCodeSpec>());
+            // ImportLists();
+            // GenStringTables();
+            var map = MapDefinitions(records);
+            var fields = LoadFields(records, map);
+            var datasets = new EtlDatasets();
+            datasets.AsmDefFieldData = fields;
+            datasets.AsmDefMapData = map;
             datasets.OpCodeData = _LlvmOpCodes;
             return EmitFields(datasets);
         }
@@ -87,7 +79,7 @@ namespace Z0.llvm
         {
             var fields = src.AsmDefFields;
             var count = fields.Length;
-            var dst = Ws.Tables().Subdir("llvm") + FS.file("llvm.fields", FS.Csv);
+            var dst = LlvmData.Tables() + FS.file("llvm.fields", FS.Csv);
             var emitting = EmittingTable<F>(dst);
             using var writer = dst.AsciWriter();
             writer.WriteLine(F.RowHeader);

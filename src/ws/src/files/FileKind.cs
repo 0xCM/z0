@@ -121,5 +121,11 @@ namespace Z0
 
         [Symbol(mir)]
         Mir,
+
+        [Symbol(bv, "A bitvector specification")]
+        Bv,
+
+        [Symbol("bits", "A bitfield specification")]
+        Bits
     }
 }

@@ -10,7 +10,6 @@ namespace Z0
     using static core;
 
     public struct Stack<T>
-        where T : unmanaged
     {
         readonly Index<T> Storage;
 

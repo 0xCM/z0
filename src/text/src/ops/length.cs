@@ -39,14 +39,15 @@ namespace Z0
         /// </summary>
         /// <param name="pSrc">The location of the first character</param>
         [MethodImpl(Inline), Op]
-        public static unsafe uint length(char* pSrc)
+        public static unsafe int length(char* pSrc)
         {
-            var p = pSrc;
-            if(p is null)
+            if(pSrc == null)
                 return 0;
+
+            var p = pSrc;
             while(*p != Chars.Null)
                 p++;
-            return (uint)(p - pSrc);
+            return (int)(p - pSrc);
         }
 
         /// <summary>
@@ -54,14 +55,16 @@ namespace Z0
         /// </summary>
         /// <param name="pSrc">The location of the first character</param>
         [MethodImpl(Inline), Op]
-        public static unsafe uint length(byte* pSrc)
+        public static unsafe int length(byte* pSrc)
         {
-            var p = pSrc;
-            if(p is null)
+            if(pSrc == null)
                 return 0;
+
+            var p = pSrc;
             while(*p != Chars.Null)
                 p++;
-            return (uint)(p - pSrc);
+
+            return (int)(p - pSrc);
         }
     }
 }

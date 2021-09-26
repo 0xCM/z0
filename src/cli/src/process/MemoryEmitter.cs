@@ -37,7 +37,7 @@ namespace Z0
                     restart = false;
                 }
 
-                line.Append(string.Format("{0} ", HexFormat.format<W8,byte>(*pSrc)));
+                line.Append(string.Format("{0} ", HexFormatter.format<W8,byte>(*pSrc)));
 
                 if(offset % bpl == 0)
                 {

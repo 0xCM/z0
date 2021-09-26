@@ -34,7 +34,6 @@ namespace Z0
         [Op]
         public static void render(CharSpanSpec src, ITextBuffer dst)
         {
-
             dst.Append("public");
             dst.Append(Chars.Space);
             dst.Append(src.IsStatic ? RP.rspace("static") : EmptyString);

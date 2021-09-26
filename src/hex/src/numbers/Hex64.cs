@@ -69,7 +69,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Value, W, false);
+            => HexFormatter.format(Value, W, false);
 
 
         public override string ToString()

@@ -38,7 +38,7 @@ namespace Z0
             if(count == 0)
                 return 0;
 
-            var line = text.buffer();
+            var line = TextTools.buffer();
             var address = Address32.Zero;
             var offset = 1;
             var restart = true;
@@ -56,7 +56,7 @@ namespace Z0
                     restart = false;
                 }
 
-                line.Append(string.Format("{0} ", HexFormat.format<W8,byte>(b)));
+                line.Append(string.Format("{0} ", HexFormatter.format<W8,byte>(b)));
 
                 if(offset != 0 && (offset % bpl == 0))
                 {

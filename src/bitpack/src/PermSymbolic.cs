@@ -162,23 +162,6 @@ namespace Z0
             => symbols<Perm16L,ulong>((ulong)src, 4, width<ulong>());
 
         /// <summary>
-        /// Computes the minimum number of cells required to store a specified number of bits
-        /// </summary>
-        /// <param name="w">The cell width</param>
-        /// <param name="n">The bit count/number of matrix columns</param>
-        [MethodImpl(Inline), Op]
-        static int mincells(ulong w, ulong n)
-        {
-            // if a single cell covers a column then there's no need for computation
-            if(w >= n)
-                return 1;
-
-            var q = n / w;
-            var r = n % w;
-            return (int)(r == 0 ? q : q + 1);
-        }
-
-        /// <summary>
         /// Assumes that
         /// 1. The source data source is a tape upon which fixed-width symbols are sequentially recorded
         /// 2. The symbol alphabet is defined by the last character of the literals defined by an enumeration
@@ -194,7 +177,7 @@ namespace Z0
             where T : unmanaged
         {
             var index = lookup<E,T>();
-            var count = mincells((ulong)segwidth, (ulong)maxbits);
+            var count = CellCalcs.mincells((ulong)segwidth, (ulong)maxbits);
             Span<char> symbols = new char[count];
             for(uint i=0, bitpos = 0; i<count; i++, bitpos += segwidth)
             {

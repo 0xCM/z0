@@ -4,19 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
+    using System;
+
     using static core;
 
     using SQ = SymbolicQuery;
 
     partial class EtlWorkflow
     {
-        public LineMap<AsmId> MapAsmDefLines()
+        public LineMap<AsmId> MapDefinitions(ReadOnlySpan<TextLine> records)
         {
             const uint BufferLength = 256;
             var result = Outcome.Success;
-            var records = Sources.Instructions.View;
             var linecount = records.Length;
-            var defs = Defs(LlvmDatasetKind.Instructions);
+            var defs = Defs(records);
             var count = defs.Length;
             var buffer = span<TextLine>(BufferLength);
             var intervals = list<LineInterval<AsmId>>();
@@ -34,9 +35,7 @@ namespace Z0.llvm
                     ref readonly var line = ref skip(records,j);
                     ref readonly var content = ref line.Content;
                     if(SQ.index(content, Chars.RBrace) != 0)
-                    {
                         seek(buffer,k++) = line;
-                    }
                     else
                         break;
                 }
@@ -51,7 +50,7 @@ namespace Z0.llvm
             }
 
             var map = LineMaps.map(intervals.ToArray());
-            var dst = LlvmPaths.LineMapPath("x86.instructions");
+            var dst = LlvmData.Tables() + FS.file("x86.records", FS.ext("map"));
             var emitting = EmittingFile(dst);
             using var writer = dst.AsciWriter();
             var _intervals = map.Intervals;

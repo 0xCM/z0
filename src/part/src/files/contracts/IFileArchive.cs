@@ -16,14 +16,11 @@ namespace Z0
     {
         FS.FolderPath Root {get;}
 
-        FS.FolderName PartFolder(PartId id)
-            => FS.folder(id.Format());
-
-        FS.FileName HostFile(ApiHostUri host, FS.FileExt ext)
-            => FS.file(string.Format("{0}.{1}", host.Part.Format(), host.HostName), ext);
-
         FS.FolderPath Subdir(string name)
             => Root + FS.folder(name);
+
+        FS.FolderPath Subdir(Scope scope)
+            => Root + FS.folder(scope.Format());
 
         FS.FilePath Path(string id, FS.FileExt ext)
             => Root + FS.file(id,ext);
@@ -31,8 +28,6 @@ namespace Z0
         FS.FilePath Path(Scope scope, string id, FS.FileExt ext)
             => Subdir(scope) + FS.file(id, ext);
 
-        FS.FolderPath Subdir(Scope scope)
-            => Root + FS.folder(scope.Format());
         string ITextual.Format()
             => Root.Format();
 
@@ -62,9 +57,6 @@ namespace Z0
 
         FS.FilePath TablePath(Scope scope, string id)
             => Subdir(scope) + TableName(id);
-
-        FS.FilePath TablePath(Scope scope, TableId id, string suffix)
-            => Subdir(scope) + TableFile(id, suffix);
 
         FS.FilePath TablePath<T>()
             where T : struct

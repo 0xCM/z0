@@ -8,11 +8,12 @@ namespace Z0
     using Z0;
     using Msil;
 
+
     public class CliLocalSigParser : CliSigParser
     {
-        readonly Stack<Type> _types = new Stack<Type>();
+        readonly System.Collections.Generic.Stack<Type> _types = new System.Collections.Generic.Stack<Type>();
 
-        readonly Stack<TypeCreator> _creators = new Stack<TypeCreator>();
+        readonly System.Collections.Generic.Stack<TypeCreator> _creators = new System.Collections.Generic.Stack<TypeCreator>();
 
         readonly ICilTokenResolver _tokenResolver;
 
@@ -143,7 +144,7 @@ namespace Z0
 
             abstract class Inner
             {
-                public abstract void Done(ICilTypeFactory factory, Stack<Type> stack);
+                public abstract void Done(ICilTypeFactory factory, System.Collections.Generic.Stack<Type> stack);
             }
 
             class SimpleInner : Inner
@@ -155,7 +156,7 @@ namespace Z0
                     _type = type;
                 }
 
-                public override void Done(ICilTypeFactory factory, Stack<Type> stack)
+                public override void Done(ICilTypeFactory factory, System.Collections.Generic.Stack<Type> stack)
                 {
                     stack.Push(_type);
                 }
@@ -163,7 +164,7 @@ namespace Z0
 
             class SzArrayInner : Inner
             {
-                public override void Done(ICilTypeFactory factory, Stack<Type> stack)
+                public override void Done(ICilTypeFactory factory, System.Collections.Generic.Stack<Type> stack)
                 {
                     stack.Push(factory.MakeArrayType(stack.Pop()));
                 }
@@ -173,7 +174,7 @@ namespace Z0
             {
                 public int Rank { get; set; }
 
-                public override void Done(ICilTypeFactory factory, Stack<Type> stack)
+                public override void Done(ICilTypeFactory factory, System.Collections.Generic.Stack<Type> stack)
                 {
                     stack.Push(factory.MakeArrayType(stack.Pop(), Rank));
                 }
@@ -181,7 +182,7 @@ namespace Z0
 
             class ByRefInner : Inner
             {
-                public override void Done(ICilTypeFactory factory, Stack<Type> stack)
+                public override void Done(ICilTypeFactory factory, System.Collections.Generic.Stack<Type> stack)
                 {
                     stack.Push(factory.MakeByRefType(stack.Pop()));
                 }
@@ -189,7 +190,7 @@ namespace Z0
 
             class PointerInner : Inner
             {
-                public override void Done(ICilTypeFactory factory, Stack<Type> stack)
+                public override void Done(ICilTypeFactory factory, System.Collections.Generic.Stack<Type> stack)
                 {
                     stack.Push(factory.MakePointerType(stack.Pop()));
                 }
@@ -199,7 +200,7 @@ namespace Z0
             {
                 private Type _type;
 
-                public override void Done(ICilTypeFactory factory, Stack<Type> stack)
+                public override void Done(ICilTypeFactory factory, System.Collections.Generic.Stack<Type> stack)
                 {
                     stack.Push(_type);
                 }
@@ -219,7 +220,7 @@ namespace Z0
                     _count = count;
                 }
 
-                public override void Done(ICilTypeFactory factory, Stack<Type> stack)
+                public override void Done(ICilTypeFactory factory, System.Collections.Generic.Stack<Type> stack)
                 {
                     var args = new Type[_count];
                     for (var i = args.Length - 1; i >= 0; i--)

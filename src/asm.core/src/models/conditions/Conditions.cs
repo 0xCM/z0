@@ -25,9 +25,9 @@ namespace Z0.Asm
             const string Pattern = "{0,-4} rel{1} [{2}:{3}b] => {4}";
             var dst = EmptyString;
             if(alt)
-                dst =  string.Format(Pattern, src.Alt.Name, src.Alt.Size.Width, HexFormat.asmhex(src.Alt.Encoding), BitRender.format8x4(src.Alt.Encoding), src.AltInfo);
+                dst =  string.Format(Pattern, src.Alt.Name, src.Alt.Size.Width, HexFormatter.asmhex(src.Alt.Encoding), BitRender.format8x4(src.Alt.Encoding), src.AltInfo);
             else
-                dst = string.Format(Pattern, src.Primary.Name, src.RelWidth, HexFormat.asmhex(src.Encoding), text.format(src.EncodedBits), src.PrimaryInfo);
+                dst = string.Format(Pattern, src.Primary.Name, src.RelWidth, HexFormatter.asmhex(src.Encoding), text.format(src.EncodedBits), src.PrimaryInfo);
             return dst;
         }
 
@@ -37,9 +37,9 @@ namespace Z0.Asm
             const string Pattern = "{0,-4} rel{1} [{2}:{3}b] => {4}";
             var dst = EmptyString;
             if(alt)
-                dst =  string.Format(Pattern, src.Alt.Name, src.Alt.Size.Width, HexFormat.asmhex(src.Alt.Encoding), BitRender.format8x4(src.Alt.Encoding), src.AltInfo);
+                dst =  string.Format(Pattern, src.Alt.Name, src.Alt.Size.Width, HexFormatter.asmhex(src.Alt.Encoding), BitRender.format8x4(src.Alt.Encoding), src.AltInfo);
             else
-                dst = string.Format(Pattern, src.Primary.Name, src.RelWidth, HexFormat.asmhex(src.Encoding), text.format(src.EncodedBits), src.PrimaryInfo);
+                dst = string.Format(Pattern, src.Primary.Name, src.RelWidth, HexFormatter.asmhex(src.Encoding), text.format(src.EncodedBits), src.PrimaryInfo);
             return dst;
         }
 

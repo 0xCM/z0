@@ -55,7 +55,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Location, W, true);
+            => HexFormatter.format(Location, W, true);
 
         public string FormatMinimal()
             => Location.FormatTrimmedAsmHex();

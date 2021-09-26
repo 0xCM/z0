@@ -59,5 +59,9 @@ namespace Z0
         [Op]
         public static SymServices SymServices(this IWfRuntime wf)
             => Svc.SymServices.create(wf);
+
+        [Op]
+        public static BitfieldServices Bitfields(this IWfRuntime wf)
+            => Svc.BitfieldServices.create(wf);
     }
 }

@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Content, W, true);
+            => HexFormatter.format(Content, W, true);
 
         [MethodImpl(Inline)]
         public byte AsPrimitive()

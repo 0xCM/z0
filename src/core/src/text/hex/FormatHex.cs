@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
 
     partial class XTend
     {
@@ -58,49 +57,36 @@ namespace Z0
             where T : unmanaged
                 => HexFormatter.format(src, Chars.Space, false);
 
-        /// <summary>
-        /// Formats a (hopefully finite) stream of values (hopefully numeric) as a sequence of hex values
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
-        /// <param name="sep">The character to use when separating digits</param>
-        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [Op, Closures(Closure)]
-        public static string FormatHex<T>(this IEnumerable<T> src, char sep, bool specifier)
-            where T : unmanaged
-                => src.ToSpan().FormatHex(sep, specifier);
-
         [Op]
         public static string FormatHex(this sbyte src, int digits, bool prespec = false, bool postspec = false)
-            => HexFormat.format(src, digits, prespec, postspec);
+            => HexFormatter.format(src, digits, prespec, postspec);
 
         [Op]
         public static string FormatHex(this byte src, int digits, bool prespec = false, bool postspec = false)
-            => HexFormat.format(src, digits, prespec, postspec);
+            => HexFormatter.format(src, digits, prespec, postspec);
 
         [Op]
         public static string FormatHex(this short src, int digits, bool prespec = false, bool postspec = false)
-            => HexFormat.format(src, digits, prespec, postspec);
+            => HexFormatter.format(src, digits, prespec, postspec);
 
         [Op]
         public static string FormatHex(this ushort src, int digits, bool prespec = false, bool postspec = false)
-            => HexFormat.format(src, digits, prespec, postspec);
+            => HexFormatter.format(src, digits, prespec, postspec);
 
         [Op]
         public static string FormatHex(this int src, int digits, bool prespec = false, bool postspec = false)
-            => HexFormat.format(src, digits, prespec, postspec);
+            => HexFormatter.format(src, digits, prespec, postspec);
 
         [Op]
         public static string FormatHex(this uint src, int digits, bool prespec = false, bool postspec = false)
-            => HexFormat.format(src, digits, prespec, postspec);
+            => HexFormatter.format(src, digits, prespec, postspec);
 
         [Op]
         public static string FormatHex(this ulong src, int digits, bool prespec = false, bool postspec = false)
-            => HexFormat.format(src, digits, prespec, postspec);
+            => HexFormatter.format(src, digits, prespec, postspec);
 
         [Op]
         public static string FormatHex(this long src, int digits, bool prespec = false, bool postspec = false)
-            => HexFormat.format(src, digits, prespec, postspec);
+            => HexFormatter.format(src, digits, prespec, postspec);
     }
 }

@@ -6,13 +6,12 @@ namespace Z0.llvm
 {
     using System;
 
+    [Record]
     public struct ClassRecord
     {
         public const string TableId = "llvm.classes";
 
-        public const byte FieldCount = 4;
-
-        public LlvmDatasetKind Dataset;
+        public const byte FieldCount = 3;
 
         public LineNumber Offset;
 
@@ -21,6 +20,6 @@ namespace Z0.llvm
         public TextBlock Ancestors;
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{22,12,64,1};
+            => new byte[FieldCount]{12,64,1};
     }
 }

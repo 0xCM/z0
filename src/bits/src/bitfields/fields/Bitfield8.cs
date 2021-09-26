@@ -27,7 +27,6 @@ namespace Z0
         public S Read(byte pos, byte width)
             => api.read(this, pos, width);
 
-
         [MethodImpl(Inline)]
         public Bitfield8 Store(S src, byte offset, byte width)
         {

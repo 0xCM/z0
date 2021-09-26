@@ -13,17 +13,17 @@ namespace Z0
     public readonly struct BitFieldModel<T>
         where T : unmanaged
     {
-        public Identifier Name {get;}
+        public readonly Identifier Name;
 
         /// <summary>
         /// The number of defined segments
         /// </summary>
-        public uint SegCount {get;}
+        public readonly uint SegCount;
 
         /// <summary>
         /// The accumulated width of the defined segments
         /// </summary>
-        public uint TotalWidth {get;}
+        public readonly uint TotalWidth;
 
         readonly Index<BitfieldSeg<T>> Data;
 

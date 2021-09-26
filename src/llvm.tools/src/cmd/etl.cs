@@ -2,16 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.llvm
 {
-    public interface IBitfieldSeg : ITextual
+    partial class LlvmCmd
     {
-        Identifier SegName {get;}
-
-        uint SegPos {get;}
-
-        uint Offset {get;}
-
-        uint Width {get;}
+        [CmdOp(".etl")]
+        Outcome RunEtl(CmdArgs args)
+        {
+            var result = LlvmEtl.RunEtl();
+            return result;
+        }
     }
 }

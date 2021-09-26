@@ -12,7 +12,7 @@ namespace Z0
     partial struct BitfieldSpecs
     {
         [MethodImpl(Inline), Op]
-        public static BitfieldSegs<K> segments<K>(params BitfieldSeg<K>[] src)
+        public static BitfieldSeg<K>[] segments<K>(params BitfieldSeg<K>[] src)
             where K : unmanaged
                 => src;
     }

@@ -11,7 +11,7 @@ namespace Z0.llvm
 
     partial class EtlWorkflow
     {
-        void LoadFieldRecords(ReadOnlySpan<TextLine> src, in LineInterval<AsmId> interval, ref int k, Span<AsmRecordField> dst)
+        void LoadFields(ReadOnlySpan<TextLine> src, in LineInterval<AsmId> interval, ref int k, Span<AsmRecordField> dst)
         {
             ref readonly var min = ref interval.MinLine;
             ref readonly var max = ref interval.MaxLine;
@@ -40,19 +40,17 @@ namespace Z0.llvm
             }
         }
 
-        public Index<AsmRecordField> LoadAsmDefFields()
+        public Index<AsmRecordField> LoadFields(ReadOnlySpan<TextLine> records,  LineMap<AsmId> map)
         {
             var result = Outcome.Success;
-            var src = LlvmPaths.DataSourcePath(LlvmDatasetKind.Instructions);
-            var icount = AsmDefMap.IntervalCount;
-            var lcount = AsmDefMap.LineCount;
-            var intervals = AsmDefMap.Intervals;
-            var lines = Sources.Instructions.View;
+            var icount = map.IntervalCount;
+            var lcount = map.LineCount;
+            var intervals = map.Intervals;
             var buffer = alloc<AsmRecordField>(lcount);
             ref var target = ref first(buffer);
             var k = 0;
             for(var i=0u; i<icount; i++)
-                LoadFieldRecords(lines, skip(intervals,i), ref k, buffer);
+                LoadFields(records, skip(intervals,i), ref k, buffer);
 
             return buffer;
         }

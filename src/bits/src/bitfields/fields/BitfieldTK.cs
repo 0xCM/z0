@@ -17,12 +17,12 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        readonly BitfieldSegs<K> _Segs;
+        readonly Index<BitfieldSeg<K>> _Segs;
 
         public T State;
 
         [MethodImpl(Inline)]
-        public Bitfield(BitfieldSegs<K> segs, T state)
+        public Bitfield(BitfieldSeg<K>[] segs, T state)
         {
             State = state;
             _Segs = segs;
