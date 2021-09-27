@@ -11,27 +11,27 @@ namespace Z0.Asm
         public static bit check(ref AsmSizeCheck src)
         {
             src.Actual = (ushort)asm.width(src.Input);
-            switch(src.Input)
+            switch(src.Input.Code)
             {
-                case AsmSizeClass.@byte:
+                case NativeSizeCode.W8:
                     src.Expect = 8;
                 break;
-                case AsmSizeClass.word:
+                case NativeSizeCode.W16:
                     src.Expect = 16;
                 break;
-                case AsmSizeClass.dword:
+                case NativeSizeCode.W32:
                     src.Expect = 32;
                 break;
-                case AsmSizeClass.qword:
+                case NativeSizeCode.W64:
                     src.Expect = 64;
                 break;
-                case AsmSizeClass.xmmword:
+                case NativeSizeCode.W128:
                     src.Expect = 128;
                 break;
-                case AsmSizeClass.ymmword:
+                case NativeSizeCode.W256:
                     src.Expect = 256;
                 break;
-                case AsmSizeClass.zmmword:
+                case NativeSizeCode.W512:
                     src.Expect = 512;
                 break;
             }

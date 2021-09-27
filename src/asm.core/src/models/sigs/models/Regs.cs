@@ -13,14 +13,14 @@ namespace Z0.Asm
     {
         public readonly struct reg : IRegOpClass<reg>
         {
-            public AsmSizeClass SizeClass {get;}
+            public NativeSize Size {get;}
 
             public RegClassCode RegClass {get;}
 
             [MethodImpl(Inline)]
-            public reg(AsmSizeClass size, RegClassCode @class)
+            public reg(NativeSize size, RegClassCode @class)
             {
-                SizeClass = size;
+                Size = size;
                 RegClass = @class;
             }
 
@@ -29,7 +29,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(reg src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct r8 : IRegOpClass<r8>
@@ -37,19 +37,19 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.@byte;
+            public NativeSize Size
+                => AsmSizeKeyword.@byte;
 
             public RegClassCode RegClass
                 => RegClassCode.GP;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(r8 src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(r8 src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct r8h : IRegOpClass<r8>
@@ -57,19 +57,19 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.@byte;
+            public NativeSize Size
+                => AsmSizeKeyword.@byte;
 
             public RegClassCode RegClass
                 => RegClassCode.GP8HI;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(r8h src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(r8h src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct r16 : IRegOpClass<r16>
@@ -77,19 +77,19 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.word;
+            public NativeSize Size
+                => AsmSizeKeyword.word;
 
             public RegClassCode RegClass
                 => RegClassCode.GP;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(r16 src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(r16 src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct r32 : IRegOpClass<r32>
@@ -97,19 +97,19 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.dword;
+            public NativeSize Size
+                => AsmSizeKeyword.dword;
 
             public RegClassCode RegClass
                 => RegClassCode.GP;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(r32 src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(r32 src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct r64 : IRegOpClass<r64>
@@ -117,19 +117,19 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.qword;
+            public NativeSize Size
+                => AsmSizeKeyword.qword;
 
             public RegClassCode RegClass
                 => RegClassCode.GP;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(r64 src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(r64 src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct xmm : IRegOpClass<xmm>
@@ -137,19 +137,19 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.xmmword;
+            public NativeSize Size
+                => AsmSizeKeyword.xmmword;
 
             public RegClassCode RegClass
                 => RegClassCode.XMM;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(xmm src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(xmm src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct ymm : IRegOpClass<ymm>
@@ -157,19 +157,19 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.ymmword;
+            public NativeSize Size
+                => AsmSizeKeyword.ymmword;
 
             public RegClassCode RegClass
                 => RegClassCode.YMM;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(ymm src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(ymm src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct zmm : IRegOpClass<zmm>
@@ -177,19 +177,19 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.zmmword;
+            public NativeSize Size
+                => AsmSizeKeyword.zmmword;
 
             public RegClassCode RegClass
                 => RegClassCode.ZMM;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(zmm src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(zmm src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct mask : IRegOpClass<mask>
@@ -197,53 +197,53 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.qword;
+            public NativeSize Size
+                => AsmSizeKeyword.qword;
 
             public RegClassCode RegClass
                 => RegClassCode.MASK;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(mask src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(mask src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct cr : IRegOpClass<cr>
         {
             public AsmOpClass OpClass => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass => AsmSizeClass.qword;
+            public NativeSize Size => AsmSizeKeyword.qword;
 
             public RegClassCode RegClass => RegClassCode.CR;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(cr src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(cr src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct rflags : IRegOpClass<rflags>
         {
             public AsmOpClass OpClass => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass => AsmSizeClass.qword;
+            public NativeSize Size => AsmSizeKeyword.qword;
 
             public RegClassCode RegClass => RegClassCode.FLAG;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(rflags src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(rflags src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
 
         public readonly struct db : IRegOpClass<db>
@@ -251,19 +251,19 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.R;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.qword;
+            public NativeSize Size
+                => AsmSizeKeyword.qword;
 
             public RegClassCode RegClass
                 => RegClassCode.DB;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(db src)
-                => new reg(src.SizeClass, src.RegClass);
+                => new reg(src.Size, src.RegClass);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(db src)
-                => new AsmOperand(src.OpClass, src.SizeClass, (byte)src.RegClass);
+                => new AsmOperand(src.OpClass, src.Size, (byte)src.RegClass);
         }
     }
 }

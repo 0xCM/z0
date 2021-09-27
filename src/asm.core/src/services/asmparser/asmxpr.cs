@@ -14,7 +14,6 @@ namespace Z0.Asm
 
     partial struct AsmParser
     {
-        [Op]
         public static Outcome asmxpr(string src, out AsmExpr dst)
         {
             dst = new AsmExpr(src.Trim());

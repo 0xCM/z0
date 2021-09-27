@@ -27,7 +27,7 @@ namespace Z0.Asm
     public interface IMemOp8 : IMemOp
     {
         NativeSize IAsmOp.Size
-            => AsmSizeClass.@byte;
+            => NativeSizeCode.W8;
     }
 
     public interface IMemOp8<T> : IMemOp8, IMemOp<T>
@@ -39,7 +39,7 @@ namespace Z0.Asm
     public interface IMemOp16 : IMemOp
     {
         NativeSize IAsmOp.Size
-            => AsmSizeClass.word;
+            => NativeSizeCode.W16;
     }
 
     public interface IMemOp16<T> : IMemOp16, IMemOp<T>
@@ -51,7 +51,7 @@ namespace Z0.Asm
     public interface IMemOp32 : IMemOp
     {
         NativeSize IAsmOp.Size
-            => AsmSizeClass.dword;
+            => NativeSizeCode.W32;
     }
 
     public interface IMemOp32<T> : IMemOp32, IMemOp<T>
@@ -63,7 +63,7 @@ namespace Z0.Asm
     public interface IMemOp64 : IMemOp
     {
         NativeSize IAsmOp.Size
-            => AsmSizeClass.qword;
+            => NativeSizeCode.W64;
     }
 
     public interface IMemOp64<T> : IMemOp64, IMemOp<T>
@@ -75,7 +75,7 @@ namespace Z0.Asm
     public interface IMemOp128 : IMemOp
     {
         NativeSize IAsmOp.Size
-            => AsmSizeClass.xmmword;
+            => NativeSizeCode.W128;
     }
 
     public interface IMemOp128<T> : IMemOp128, IMemOp<T>
@@ -87,7 +87,7 @@ namespace Z0.Asm
     public interface IMemOp256 : IMemOp
     {
         NativeSize IAsmOp.Size
-            => AsmSizeClass.ymmword;
+            => NativeSizeCode.W256;
     }
 
     public interface IMemOp256<T> :  IMemOp256, IMemOp<T>
@@ -98,7 +98,7 @@ namespace Z0.Asm
     public interface IMemOp512 : IMemOp
     {
         NativeSize IAsmOp.Size
-            => AsmSizeClass.zmmword;
+            => NativeSizeCode.W512;
     }
 
     public interface IMemOp512<T> : IMemOp512, IMemOp<T>

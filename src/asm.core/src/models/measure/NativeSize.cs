@@ -9,11 +9,8 @@ namespace Z0.Asm
 
     using static Root;
 
-    [Blittable(SZ)]
     public readonly struct NativeSize
     {
-        public const uint SZ = PrimalSizes.U8;
-
         public readonly NativeSizeCode Code;
 
         public BitWidth Width
@@ -23,7 +20,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public NativeSize(AsmSizeClass kind)
+        public NativeSize(AsmSizeKeyword kind)
         {
             Code = (NativeSizeCode)kind;
         }
@@ -41,12 +38,12 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator NativeSize(AsmSizeClass src)
+        public static implicit operator NativeSize(AsmSizeKeyword src)
             => new NativeSize(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmSizeClass(NativeSize src)
-            => (AsmSizeClass)src.Code;
+        public static implicit operator AsmSizeKeyword(NativeSize src)
+            => (AsmSizeKeyword)src.Code;
 
         [MethodImpl(Inline)]
         public static implicit operator NativeSize(NativeSizeCode src)

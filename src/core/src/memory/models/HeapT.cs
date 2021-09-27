@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    using api = Heaps;
+    using api = memory;
 
     public readonly struct Heap<T>
     {
@@ -31,5 +30,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> Segment(uint index)
             => api.segment(this, index);
+
+        public Span<T> this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => Segment(index);
+        }
+
+        public uint SegCount
+        {
+            [MethodImpl(Inline)]
+            get => Segments.Count;
+        }
     }
 }

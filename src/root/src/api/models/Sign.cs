@@ -39,5 +39,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator PolarityKind(Sign src)
             => src.Kind;
+
+        [MethodImpl(Inline)]
+        public static explicit operator char(Sign src)
+            => src.Kind == PolarityKind.Left ? Chars.Dash : Chars.Plus;
     }
 }

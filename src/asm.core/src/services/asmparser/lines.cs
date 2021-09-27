@@ -17,7 +17,7 @@ namespace Z0.Asm
             {
                 if(asmxpr(line, out AsmBlockLabel label, out AsmExpr expr))
                 {
-                    if(offlabel(label, out AsmOffsetLabel offset))
+                    if(AsmParser.label(label.Name, out AsmOffsetLabel offset))
                     {
                         dst.Add(asm.line(offset, expr));
                         counter++;

@@ -9,9 +9,9 @@ namespace Z0
 
     using static Root;
 
-    using api = Heaps;
+    using api = memory;
 
-    public readonly ref struct ReadOnlySpanHeap<T>
+    public readonly ref struct ReadOnlyHeap<T>
     {
         internal readonly ReadOnlySpan<T> Segments;
 
@@ -20,7 +20,7 @@ namespace Z0
         internal readonly uint LastSegment;
 
         [MethodImpl(Inline)]
-        internal ReadOnlySpanHeap(ReadOnlySpan<T> segs, uint[] offsets)
+        internal ReadOnlyHeap(ReadOnlySpan<T> segs, uint[] offsets)
         {
             Segments = segs;
             Offsets = offsets;
@@ -30,5 +30,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Segment(uint index)
              => api.segment(this, index);
+
+        public ReadOnlySpan<T> this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => Segment(index);
+        }
+
+        public uint SegCount
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Segments.Length;
+        }
    }
 }

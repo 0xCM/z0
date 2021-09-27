@@ -15,16 +15,16 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.Imm;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.dword;
+            public NativeSize Size
+                => NativeSizeCode.W32;
 
             [MethodImpl(Inline)]
             public static implicit operator imm(imm32 src)
-                => new imm(src.SizeClass);
+                => new imm(src.Size);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(imm32 src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+                => new AsmOperand(src.OpClass, src.Size);
         }
     }
 }

@@ -61,10 +61,5 @@ namespace Z0
         public Span<T> Cells<T>()
             where T : unmanaged
                 => recover<T>(Edit);
-
-        // [MethodImpl(Inline)]
-        // public Span<T> Cells<T>()
-        //     where T : unmanaged
-        //         => api.cells<T>(this).Edit;
     }
 }

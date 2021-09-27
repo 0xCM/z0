@@ -9,24 +9,24 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct DirectiveOp
+    public readonly struct DirectiveOperand
     {
-        public ulong Value {get;}
+        public string Value {get;}
 
         [MethodImpl(Inline)]
-        public DirectiveOp(ulong value)
+        public DirectiveOperand(string value)
         {
             Value = value;
         }
 
         public string Format()
-            => Value.FormatHex();
+            => Value ?? EmptyString;
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator DirectiveOp(ulong src)
-            => new DirectiveOp(src);
+        public static implicit operator DirectiveOperand(string src)
+            => new DirectiveOperand(src);
     }
 }

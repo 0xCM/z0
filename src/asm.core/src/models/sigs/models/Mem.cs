@@ -12,12 +12,12 @@ namespace Z0.Asm
     {
         public readonly struct mem : IMemOpClass<mem>
         {
-            public AsmSizeClass SizeClass {get;}
+            public NativeSize Size {get;}
 
             [MethodImpl(Inline)]
-            public mem(AsmSizeClass size)
+            public mem(NativeSize size)
             {
-                SizeClass = size;
+                Size = size;
             }
 
             public AsmOpClass OpClass
@@ -25,7 +25,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(mem src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+                => new AsmOperand(src.OpClass, src.Size);
         }
 
         public readonly struct m8 : IMemOpClass<m8>
@@ -33,16 +33,16 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.M;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.@byte;
+            public NativeSize Size
+                => AsmSizeKeyword.@byte;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m8 src)
-                => new mem(src.SizeClass);
+                => new mem(src.Size);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(m8 src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+                => new AsmOperand(src.OpClass, src.Size);
         }
 
         public readonly struct m16 : IMemOpClass<m16>
@@ -50,16 +50,16 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.M;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.word;
+            public NativeSize Size
+                => AsmSizeKeyword.word;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m16 src)
-                => new mem(src.SizeClass);
+                => new mem(src.Size);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(m16 src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+                => new AsmOperand(src.OpClass, src.Size);
         }
 
         public readonly struct m32 : IMemOpClass<m32>
@@ -67,16 +67,16 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.M;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.dword;
+            public NativeSize Size
+                => AsmSizeKeyword.dword;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m32 src)
-                => new mem(src.SizeClass);
+                => new mem(src.Size);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(m32 src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+                => new AsmOperand(src.OpClass, src.Size);
         }
 
         public readonly struct m64 : IMemOpClass<m64>
@@ -84,16 +84,16 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.M;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.qword;
+            public NativeSize Size
+                => AsmSizeKeyword.qword;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m64 src)
-                => new mem(src.SizeClass);
+                => new mem(src.Size);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(m64 src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+                => new AsmOperand(src.OpClass, src.Size);
         }
 
         public readonly struct m128 : IMemOpClass<m128>
@@ -101,16 +101,16 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.M;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.xmmword;
+            public NativeSize Size
+                => AsmSizeKeyword.xmmword;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m128 src)
-                => new mem(src.SizeClass);
+                => new mem(src.Size);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(m128 src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+                => new AsmOperand(src.OpClass, src.Size);
         }
 
         public readonly struct m256 : IMemOpClass<m256>
@@ -118,16 +118,16 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.M;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.ymmword;
+            public NativeSize Size
+                => AsmSizeKeyword.ymmword;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m256 src)
-                => new mem(src.SizeClass);
+                => new mem(src.Size);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(m256 src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+                => new AsmOperand(src.OpClass, src.Size);
         }
 
         public readonly struct m512 : IMemOpClass<m512>
@@ -135,16 +135,16 @@ namespace Z0.Asm
             public AsmOpClass OpClass
                 => AsmOpClass.M;
 
-            public AsmSizeClass SizeClass
-                => AsmSizeClass.zmmword;
+            public NativeSize Size
+                => AsmSizeKeyword.zmmword;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m512 src)
-                => new mem(src.SizeClass);
+                => new mem(src.Size);
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(m512 src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+                => new AsmOperand(src.OpClass, src.Size);
         }
     }
 }

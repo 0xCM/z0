@@ -18,7 +18,7 @@ namespace Z0.Asm
         public AsmAddress Address {get;}
 
         [MethodImpl(Inline)]
-        public MemOp(AsmSizeClass size, AsmAddress address)
+        public MemOp(NativeSize size, AsmAddress address)
         {
             Size = size;
             Address = address;

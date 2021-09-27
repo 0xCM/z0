@@ -151,18 +151,43 @@ namespace Z0.Asm
 
         Outcome CollectAsmSyntax()
         {
+            var result = CollectAsmParseLogs();
+            result = CollectAsmSyntaxTrees();
+            return result;
+        }
+
+        Outcome CollectAsmParseLogs()
+        {
             var project = State.Project();
             var logs = Ws.Projects().OutFiles(project, FileTypes.ext(FileKind.AsmSyntaxLog)).View;
             var dst = Ws.Projects().TableOut<AsmSyntaxRow>(project);
             var count = logs.Length;
             var buffer = list<AsmSyntaxRow>();
             for(var i=0; i<count; i++)
-                ParseSyntaxRows(skip(logs,i), buffer);
+                ParseSyntaxLogRows(skip(logs,i), buffer);
             TableEmit(buffer.ViewDeposited(), AsmSyntaxRow.RenderWidths, dst);
             return true;
         }
 
-        uint ParseSyntaxRows(FS.FilePath src, List<AsmSyntaxRow> dst)
+
+        Outcome CollectAsmSyntaxTrees()
+        {
+            var result = Outcome.Success;
+            var project = Ws.Project(State.Project());
+            var src = project.OutFiles(FileKind.AsmSyntax).View;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(src,i);
+                result = AsmParser.document(path, out var doc);
+                if(result.Fail)
+                    break;
+            }
+
+            return result;
+        }
+
+        uint ParseSyntaxLogRows(FS.FilePath src, List<AsmSyntaxRow> dst)
         {
             const string EntryMarker = "note: parsed instruction:";
             var lines = src.ReadNumberedLines();

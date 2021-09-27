@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     [SymSource]
-    public enum AsmSizeClass : byte
+    public enum AsmSizeKeyword : byte
     {
         [Symbol("byte")]
         @byte = 0,

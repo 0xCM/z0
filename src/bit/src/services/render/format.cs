@@ -96,6 +96,7 @@ namespace Z0
             var count = src.Length*8;
             var dst = span<char>(count);
             dst.Fill(Chars.D0);
+            Require.invariant(config.MaxBitCount > 0);
 
             render8x8(src, config.MaxBitCount, dst);
 
@@ -128,10 +129,8 @@ namespace Z0
         public static string format(ReadOnlySpan<bit> src, BitFormat? fmt = null)
         {
             var options = fmt ?? BitFormat.configure();
-            //var bitcount = min((uint)options.MaxBitCount,(uint)src.Length);
             var blocked = options.BlockWidth != 0;
             var blocks = (uint)(blocked ? src.Length/options.BlockWidth : 0);
-            //bitcount += blocks; // space for block separators
             var bitcount = length(src,options);
 
             Span<char> buffer = stackalloc char[(int)bitcount];

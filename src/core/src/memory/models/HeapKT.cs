@@ -8,19 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-
     using api = memory;
 
-    public readonly ref struct SpanHeap<T>
+    public readonly struct Heap<K,T>
+        where K : unmanaged
     {
-        internal readonly Span<T> Segments;
+        internal readonly Index<T> Segments;
 
-        internal readonly Index<uint> Offsets;
+        internal readonly Index<K,uint> Offsets;
 
         internal readonly uint LastSegment;
 
         [MethodImpl(Inline)]
-        internal SpanHeap(Span<T> segs, uint[] offsets)
+        internal Heap(Index<T> segs, Index<K,uint> offsets)
         {
             Segments = segs;
             Offsets = offsets;
@@ -28,10 +28,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Span<T> Segment(uint index)
+        public Span<T> Segment(K index)
             => api.segment(this, index);
 
-        public ReadOnlySpan<T> this[uint index]
+        public Span<T> this[K index]
         {
             [MethodImpl(Inline)]
             get => Segment(index);
@@ -40,8 +40,7 @@ namespace Z0
         public uint SegCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Segments.Length;
+            get => Segments.Count;
         }
-
     }
 }

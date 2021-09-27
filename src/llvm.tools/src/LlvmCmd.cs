@@ -8,11 +8,14 @@ namespace Z0.llvm
 
     public sealed partial class LlvmCmd : AppCmdService<LlvmCmd>
     {
-        llvm.EtlWorkflow LlvmEtl;
+        EtlWorkflow LlvmEtl;
+
+        LlvmToolbase Toolbase;
 
         protected override void Initialized()
         {
             LlvmEtl = Wf.LlvmEtl();
+            Toolbase = Wf.LLvmToolbase();
         }
     }
 }

@@ -400,44 +400,44 @@ namespace Z0
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> chars(in byte codes, byte src)
         {
-            var storage = CharStacks.alloc(n2);
-            ref var dst = ref storage.C0;
+            var storage = CharBlock2.Null;
+            ref var dst = ref storage.First;
             seek(dst,0) = (char)skip(codes, (byte)(0xF & src));
             seek(dst,1) = (char)skip(codes, (byte)((src >> 4) & 0xF));
-            return CharStacks.span(ref storage);
+            return storage.Data;
         }
 
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> chars(in byte codes, ushort src)
         {
             const int count = 4;
-            var storage = CharStacks.alloc(n4);
-            ref var dst = ref storage.C0;
+            var storage = CharBlock4.Null;
+            ref var dst = ref storage.First;
             for(var i=0; i<count; i++)
-                CharStacks.cell(ref dst, i) = (char)skip(codes, (uint)((src >> i*4) & 0xF));
-            return CharStacks.span(ref storage);
+                seek(dst, i) = (char)skip(codes, (uint)((src >> i*4) & 0xF));
+            return storage.Data;
         }
 
         [MethodImpl(Inline), Op]
         static ReadOnlySpan<char> chars(in byte codes, uint src)
         {
             const byte count = 8;
-            var storage = CharStacks.alloc(n8);
-            ref var dst = ref storage.C0;
+            var storage = CharBlock8.Null;
+            ref var dst = ref storage.First;
             for(byte i=0; i < count; i++)
-                CharStacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
-            return CharStacks.span(ref storage);
+                seek(dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
+            return storage.Data;
         }
 
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> chars(in byte codes, ulong src)
         {
             const byte count = 16;
-            var storage = CharStacks.alloc(n16);
-            ref var dst = ref storage.C0;
+            var storage = CharBlock16.Null;
+            ref var dst = ref storage.First;
             for(byte i=0; i<count; i++)
-                CharStacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
-            return CharStacks.span(ref storage);
+                seek(dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
+            return storage.Data;
         }
     }
 }

@@ -51,7 +51,6 @@ namespace Z0
             where T : unmanaged, IPageBlock<T>
                 => size<T>()/PageSize;
 
-
         [MethodImpl(Inline), Op]
         public static void Read(byte* pSrc, ref PageBlock dst)
         {

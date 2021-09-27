@@ -26,12 +26,6 @@ namespace Z0.Asm
             Data = ((ulong)width << Cut) | (offset & OffsetMask);
         }
 
-        public AsmLinePart TokenKind
-        {
-            [MethodImpl(Inline)]
-            get => AsmLinePart.OffsetLabel;
-        }
-
         public ulong OffsetValue
         {
             [MethodImpl(Inline)]

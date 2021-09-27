@@ -16,8 +16,18 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+
         [CmdOp(".test")]
         unsafe Outcome Test(CmdArgs args)
+        {
+            var result = Outcome.Success;
+
+            ShowLiterals(typeof(BitMaskLiterals), base2);
+
+            return result;
+        }
+
+        Outcome TestBraceMatching(CmdArgs args)
         {
             var result = Outcome.Success;
             const string Expect = "* 1 {} {33 a cde:} d*";
@@ -35,6 +45,7 @@ namespace Z0.Asm
                 Write("Fail:Empty");
 
             return result;
+
         }
 
         [CmdOp(".test-native-cells")]
@@ -311,12 +322,23 @@ namespace Z0.Asm
             return result;
         }
 
+        void ShowLiterals(Type src, Base2 @base)
+        {
+            var literals = Clr.literals(src, @base).View;
+            var count = literals.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var literal = ref skip(literals, i);
+                Write(string.Format("{0,-24} | {1,-64} | {2}", literal.Name, literal.Data, literal.Text));
+            }
+        }
+
         Outcome TestAsmWidths()
         {
             var result = bit.On;
             var pass = bit.Off;
             var test = default(AsmSizeCheck);
-            var inputs = Symbols.index<AsmSizeClass>().Kinds;
+            var inputs = Symbols.index<NativeSizeCode>().Kinds;
             var count = inputs.Length;
             for(var i=0; i<count; i++)
             {

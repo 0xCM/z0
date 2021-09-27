@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Root;
+    using static core;
 
     unsafe partial struct memory
     {

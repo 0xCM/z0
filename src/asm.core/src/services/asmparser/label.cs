@@ -4,21 +4,30 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
-    using SQ = SymbolicQuery;
-
     partial struct AsmParser
     {
-        [Op]
-        public static int label(ReadOnlySpan<char> src, out AsmBlockLabel dst)
+        public static Outcome label(string src, out AsmOffsetLabel dst)
         {
-            var i = SQ.index(src,Chars.Colon);
+            dst = default;
+            var result = DataParser.parse(src, out Hex64 value);
+            if(result)
+                dst = asm.label(Bits.effwidth(value), value);
+            return result;
+        }
+
+        public static Outcome label(string src, out AsmBlockLabel dst)
+        {
+            var i = text.index(src, Chars.Colon);
             if(i > 0)
-                dst = text.format(SQ.left(src,i));
+            {
+                dst = new AsmBlockLabel(text.left(src,i).Trim());
+                return true;
+            }
             else
+            {
                 dst = AsmBlockLabel.Empty;
-            return i;
+                return false;
+            }
         }
     }
 }

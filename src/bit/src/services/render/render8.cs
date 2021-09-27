@@ -50,18 +50,5 @@ namespace Z0
             render8(src,i,buffer);
             return buffer;
         }
-
-        [MethodImpl(Inline), Op]
-        public static uint render8(byte src, uint maxbits, uint j, Span<char> dst)
-        {
-            for(byte i=0; i<8; i++, j++)
-            {
-                if(j>=maxbits)
-                    break;
-
-                seek(dst, (uint)j) = bit.test(src, i).ToChar();
-            }
-            return j;
-        }
     }
 }

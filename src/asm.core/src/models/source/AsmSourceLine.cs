@@ -13,17 +13,17 @@ namespace Z0.Asm
     {
         public uint LineNumber {get;}
 
-        public TextBlock Label {get;}
+        public AsmBlockLabel Label {get;}
 
         public AsmExpr Statement {get;}
 
         public AsmComment Comment {get;}
 
         [MethodImpl(Inline)]
-        public AsmSourceLine(uint number, TextBlock label, AsmExpr statement, AsmComment? comment = null)
+        public AsmSourceLine(uint number, AsmBlockLabel label, AsmExpr statement, AsmComment? comment = null)
         {
             LineNumber = number;
-            Label = TextBlock.Empty;
+            Label = label;
             Statement = statement;
             Comment = comment ?? AsmComment.Empty;
         }
@@ -31,7 +31,25 @@ namespace Z0.Asm
         public static AsmSourceLine Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmSourceLine(0, TextBlock.Empty, AsmExpr.Empty);
+            get => new AsmSourceLine(0, AsmBlockLabel.Empty, AsmExpr.Empty);
         }
+
+        public string Format()
+        {
+            var dst = text.buffer();
+            if(Label.IsNonEmpty)
+                dst.AppendFormat(" {0,-12}", Label);
+
+            if(Statement.IsNonEmpty)
+                dst.AppendFormat(" {0,-60}", Statement);
+
+            if(Comment.IsNonEmpty)
+                dst.AppendFormat(" # {0}", Comment.Content);
+            return dst.Emit();
+        }
+
+        public override string ToString()
+            => Format();
+
     }
 }

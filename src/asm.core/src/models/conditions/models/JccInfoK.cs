@@ -15,8 +15,6 @@ namespace Z0.Asm
     public readonly struct JccInfo<K>
         where K : unmanaged
     {
-        public const uint SZ = 1 + text7.SZ + NativeSize.SZ;
-
         public readonly K Kind;
 
         public readonly text7 Name;

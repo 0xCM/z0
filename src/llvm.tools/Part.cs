@@ -40,5 +40,9 @@ namespace Z0
 
         public static ILlvmWorkspace LlvmWs(this IEnvProvider env)
             => Z0.LlvmWs.create(env.Env.LlvmRoot);
+
+        [Op]
+        public static LlvmToolbase LLvmToolbase(this IWfRuntime wf)
+            => llvm.LlvmToolbase.create(wf);
     }
 }

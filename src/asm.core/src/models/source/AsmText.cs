@@ -25,7 +25,7 @@ namespace Z0.Asm
         public static string format(in AsmSourceLine src)
         {
             if(src.Label.IsNonEmpty)
-                return string.Format("{0}:", src.Label);
+                return src.Label.Format();
             else if(src.Statement.IsNonEmpty)
             {
                 if(src.Comment.IsNonEmpty)

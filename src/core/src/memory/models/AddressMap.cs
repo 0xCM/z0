@@ -36,13 +36,13 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Computes the unsigned distance between the base addresses of index-identified segments
+        /// Computes the signed distance between the base addresses of index-identified segments
         /// </summary>
         /// <param name="i0">The first segment index</param>
         /// <param name="i1">The second segment index</param>
         [MethodImpl(Inline)]
-        public ulong Distance(uint i0, uint i1)
-            => i0 > i1 ? (ulong)Base(i0) - (ulong)Base(i1) : (ulong)Base(i1) - (ulong)Base(i0);
+        public long Distance(uint i0, uint i1)
+            => (long)Base(i1) - (long)Base(i0);
 
         [MethodImpl(Inline)]
         public MemoryAddress Base(uint i)

@@ -13,12 +13,12 @@ namespace Z0.Asm
     {
         public readonly struct imm : IImmOpClass<imm>
         {
-            public AsmSizeClass SizeClass {get;}
+            public NativeSize Size {get;}
 
             [MethodImpl(Inline)]
-            public imm(AsmSizeClass size)
+            public imm(NativeSize size)
             {
-                SizeClass = size;
+                Size = size;
             }
 
             public AsmOpClass OpClass
@@ -26,7 +26,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator AsmOperand(imm src)
-                => new AsmOperand(src.OpClass, src.SizeClass);
+                => new AsmOperand(src.OpClass, src.Size);
         }
     }
 }

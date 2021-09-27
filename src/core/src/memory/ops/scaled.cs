@@ -12,7 +12,7 @@ namespace Z0
     unsafe partial struct memory
     {
         [MethodImpl(Inline), Op]
-        public static ScaledIndex scaled(W8 w, N4 n, sbyte dx, uint i)
-            => new ScaledIndex(8, 4, dx, i);
+        public static ScaledIndex scaled(ushort cell, sbyte dx, uint i)
+            => new ScaledIndex(cell, dx, i);
     }
 }

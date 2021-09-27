@@ -22,23 +22,31 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint render8x8(ReadOnlySpan<byte> src, Span<char> dst)
-            => render8x8(src, (uint)dst.Length, dst);
-
-        [MethodImpl(Inline), Op]
-        public static uint render8x8(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
-            => render8x8(src, src.Length, maxbits, dst);
-
-        [MethodImpl(Inline), Op]
-        public static uint render8x8(ReadOnlySpan<byte> src, int count, uint maxbits, Span<char> dst)
         {
             var k=0u;
+            var count = src.Length;
             for(var i=0u; i<count; i++)
-            {
-                k += render8(skip(src,i), maxbits, k, dst);
-                if(k >= maxbits)
-                    break;
-            }
+                render8(skip(src,i), ref k, dst);
             return k;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render8x8(ReadOnlySpan<byte> src, uint limit, Span<char> dst)
+        {
+            var k=0u;
+            var count = src.Length;
+            for(var i=0u; i<count && k < limit; i++)
+                render8(skip(src,i), limit, ref k, dst);
+            return k;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint render8(byte src, uint limit, ref uint i, Span<char> dst)
+        {
+            var i0 = i;
+            for(byte k=0; k<8 && i<limit; k++)
+                seek(dst, i++) = bit.test(src, k).ToChar();
+            return i - i0;
         }
 
         public static uint render8x8<N>(ReadOnlySpan<byte> src, uint offset, Span<char> dst)

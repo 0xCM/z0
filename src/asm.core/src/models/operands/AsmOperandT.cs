@@ -24,7 +24,7 @@ namespace Z0.Asm
             => core.bytes(Data);
 
         [MethodImpl(Inline)]
-        public AsmOperand(AsmOpClass opclass, AsmSizeClass size, T data)
+        public AsmOperand(AsmOpClass opclass, NativeSize size, T data)
         {
             Data = data;
             OpClass =opclass;

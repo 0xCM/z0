@@ -68,8 +68,8 @@ namespace Z0.Asm
                 ref readonly var info = ref src.Describe(code);
                 ref readonly var infoAlt = ref src.Describe(codeAlt);
                 ref var target = ref seek(dst,counter++);
-                target.Primary = AsmSpecs.jcc(code, name, AsmSizeClass.@byte);
-                target.Alt = AsmSpecs.jcc(codeAlt, nameAlt, AsmSizeClass.@byte);
+                target.Primary = AsmSpecs.jcc(code, name, NativeSizeCode.W8);
+                target.Alt = AsmSpecs.jcc(codeAlt, nameAlt, NativeSizeCode.W8);
                 target.PrimaryInfo = info.Text;
                 target.AltInfo = infoAlt.Text;
            }
@@ -101,8 +101,8 @@ namespace Z0.Asm
                 ref readonly var info = ref src.Describe(code);
                 ref readonly var infoAlt = ref src.Describe(codeAlt);
                 ref var target = ref seek(dst,counter++);
-                target.Primary = AsmSpecs.jcc(code, name, AsmSizeClass.dword);
-                target.Alt = AsmSpecs.jcc(codeAlt, nameAlt, AsmSizeClass.dword);
+                target.Primary = AsmSpecs.jcc(code, name, NativeSizeCode.W32);
+                target.Alt = AsmSpecs.jcc(codeAlt, nameAlt, NativeSizeCode.W32);
                 target.PrimaryInfo = info.Text;
                 target.AltInfo = infoAlt.Text;
            }
