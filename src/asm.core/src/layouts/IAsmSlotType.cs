@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     public interface IAsmSlotType
     {
-        LayoutSlotKind Kind {get;}
+        AsmLayoutKind Kind {get;}
     }
 
     public interface IAsmSlotType<T> : IAsmSlotType

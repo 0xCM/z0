@@ -11,10 +11,12 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
+    using K = AsmLayoutKind;
+
     public readonly struct AsmLayoutModels
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct LayoutCore : IAsmLayout<LayoutCore>
+        public struct Layout0
         {
             public RexPrefix Rex;
 
@@ -24,59 +26,43 @@ namespace Z0.Asm
 
             public Sib Sib;
 
-            public ReadOnlySpan<byte> Content
-            {
-                [MethodImpl(Inline)]
-                get => bytes(this);
-            }
+            public K Kind => K.Rex | K.OpCode | K.ModRm | K.Sib;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct Layout1 : IAsmLayout<Layout1>
+        public struct Layout1
         {
             public Hex8 OpCode;
 
-            public ReadOnlySpan<byte> Content
-            {
-                [MethodImpl(Inline)]
-                get => bytes(this);
-            }
+            public K Kind => K.OpCode;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct Layout2 : IAsmLayout<Layout2>
+        public struct Layout11
         {
+            public EscapePrefix Escape;
+
             public Hex8 OpCode;
 
-            public ModRm ModRm;
-
-            public ReadOnlySpan<byte> Content
-            {
-                [MethodImpl(Inline)]
-                get => bytes(this);
-            }
+            public K Kind => K.Escape | K.OpCode;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct Layout3 : IAsmLayout<Layout3>
+        public struct Layout2
         {
-            public RexPrefix Rex;
-
             public Hex8 OpCode;
 
             public ModRm ModRm;
 
-            public ReadOnlySpan<byte> Content
-            {
-                [MethodImpl(Inline)]
-                get => bytes(this);
-            }
+            public Sib Sib;
+
+            public K Kind => K.OpCode | K.ModRm | K.Sib;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct Layout6 : IAsmLayout<Layout6>
+        public struct Layout12
         {
-            public VexPrefix Vex;
+            public EscapePrefix Escape;
 
             public Hex8 OpCode;
 
@@ -84,43 +70,63 @@ namespace Z0.Asm
 
             public Sib Sib;
 
-            public ReadOnlySpan<byte> Content
-            {
-                [MethodImpl(Inline)]
-                get => bytes(this);
-            }
+            public K Kind => K.Escape | K.OpCode | K.ModRm | K.Sib;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct Layout7 : IAsmLayout<Layout7>
+        public struct Layout3
+        {
+            public Hex8 OpCode;
+
+            public ModRm ModRm;
+
+            public K Kind => K.OpCode | K.ModRm;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct Layout4
+        {
+            public RexPrefix Rex;
+
+            public Hex8 OpCode;
+
+            public ModRm ModRm;
+
+            public K Kind => K.Rex | K.OpCode | K.ModRm;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct Layout7
         {
             public Hex8 OpCode;
 
             public Disp8 Disp;
 
-            public ReadOnlySpan<byte> Content
-            {
-                [MethodImpl(Inline)]
-                get => bytes(this);
-            }
+            public K Kind => K.OpCode | K.Disp;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct Layout8 : IAsmLayout<Layout8>
+        public struct Layout8
+        {
+            public Hex8 OpCode;
+
+            public Disp16 Disp;
+
+            public K Kind => K.OpCode | K.Disp;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct Layout9
         {
             public Hex8 OpCode;
 
             public Disp32 Disp;
 
-            public ReadOnlySpan<byte> Content
-            {
-                [MethodImpl(Inline)]
-                get => bytes(this);
-            }
+            public K Kind => K.OpCode | K.Disp;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        public struct Layout9 : IAsmLayout<Layout9>
+        public struct Layout6
         {
             public VexPrefix Vex;
 
@@ -128,11 +134,21 @@ namespace Z0.Asm
 
             public ModRm ModRm;
 
-            public ReadOnlySpan<byte> Content
-            {
-                [MethodImpl(Inline)]
-                get => bytes(this);
-            }
+            public Sib Sib;
+
+            public K Kind => K.Vex | K.OpCode | K.ModRm | K.Sib;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct Layout10
+        {
+            public VexPrefix Vex;
+
+            public Hex8 OpCode;
+
+            public ModRm ModRm;
+
+            public K Kind => K.Vex | K.OpCode | K.ModRm;
         }
     }
 }

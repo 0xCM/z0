@@ -11,24 +11,26 @@ namespace Z0.Asm
     {
         None = 0,
 
-        SegOverride = 2,
+        SegOverride,
 
-        SizeOverride = 3,
+        SizeOverride,
 
-        Escape = 4,
+        Escape,
 
-        Lock = 5,
+        Lock,
 
-        Bnd = 6,
+        Bnd,
 
-        BranchHint = 7,
+        BranchHint,
 
-        Rep = 8,
+        Rep,
 
-        Mandatory = 9,
+        Mandatory,
 
-        Rex = 10,
+        Rex,
 
-        Vex = 11,
+        Vex,
+
+        EVex
     }
 }
