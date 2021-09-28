@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsmCodes;
     using static XedModels;
 
     public sealed class IntelXed : AppService<IntelXed>
@@ -205,17 +204,6 @@ namespace Z0.Asm
 
             return outcome;
         }
-
-        // public ReadOnlySpan<XedFormImport> EmitFormDetails()
-        // {
-        //     var dst = XedTables + FS.file(Tables.identify<XedFormImport>().Format(), FS.Csv);
-        //     var src = LoadForms();
-        //     var count = src.Length;
-        //     var flow = Wf.EmittingFile(dst);
-        //     Tables.emit(src, dst, XedFormImport.RenderWidths);
-        //     Wf.EmittedFile(flow, count);
-        //     return src;
-        // }
 
         public void EmitSymCatalog(FS.FolderPath dir)
         {
@@ -470,33 +458,9 @@ namespace Z0.Asm
         FS.FilePath OperandKindImportPath(FS.FolderPath dir)
             => dir + FS.file(Tables.identify<XedOperandKind>().Format(), FS.Csv);
 
-        // FS.FilePath SummaryTable()
-        //     => XedTables + FS.file("summary", FS.Csv);
-
         const char CommentMarker = Chars.Hash;
 
         const char FieldDelimiter = Chars.Space;
-
-        // static bool LoadSummaryRow(in TextRow src, ref XedSummaryRow dst)
-        // {
-        //     if(src.CellCount == 10)
-        //     {
-        //         var i=0;
-        //         dst.Class = src[i++];
-        //         dst.Category = src[i++];
-        //         dst.Extension = src[i++];
-        //         dst.IsaSet = src[i++];
-        //         dst.IForm = src[i++];
-        //         dst.BaseCode = HexByteParser.Service.ParseData(src[i++]).Value ?? BinaryCode.Empty;
-        //         dst.Mod = src[i++];
-        //         dst.Reg = src[i++];
-        //         dst.Pattern = src[i++];
-        //         dst.Operands = src[i++];
-        //         return true;
-        //     }
-
-        //     return false;
-        // }
 
         static Outcome ParseSummary(TextLine src, out XedFormSource dst)
         {

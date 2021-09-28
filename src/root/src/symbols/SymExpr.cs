@@ -29,6 +29,10 @@ namespace Z0
             get => CharCount == 0;
         }
 
+        public bool IsNonEmpty
+        {
+            get => CharCount != 0;
+        }
         public string Text
         {
             [MethodImpl(Inline)]

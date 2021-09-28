@@ -4,24 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
     partial struct Rules
     {
-        public readonly struct Tag : IRule<Tag>
-        {
-            public string Content {get;}
-
-            public ulong Kind {get;}
-
-            [MethodImpl(Inline)]
-            public Tag(string content, ulong kind)
-            {
-                Content = content;
-                Kind = kind;
-            }
-        }
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Next<S,T> next<S,T>(S i, T o)
+            => new Next<S,T>(i, o);
     }
 }

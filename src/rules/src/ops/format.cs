@@ -75,9 +75,5 @@ namespace Z0
         [Op]
         public static string format(VarContextKind vck, VarSymbol src)
             => string.Format(VarContextKinds.FormatPattern(vck), src.Name);
-
-        [Op]
-        public static string format(in BitSection src)
-            => string.Format("[{0}..{1}]", src.MinIndex, src.MaxIndex);
     }
 }

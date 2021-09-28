@@ -21,21 +21,5 @@ namespace Z0
             var i = 0u;
             return BitRender.render32x8(src.Value, ref i, dst);
         }
-
-        [MethodImpl(Inline), Op]
-        public static HexVector4 v4(byte[] src)
-            => new HexVector4(src);
-
-        [MethodImpl(Inline), Op]
-        public static HexVector8 v8(Hex8[] src)
-            => new HexVector8(src);
-
-        [MethodImpl(Inline), Op]
-        public static HexVector16 v16(Hex16[] src)
-            => new HexVector16(src);
-
-        [MethodImpl(Inline), Op]
-        public static HexVector32 v32(Hex32[] src)
-            => new HexVector32(src);
     }
 }

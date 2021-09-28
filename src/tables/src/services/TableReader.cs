@@ -9,7 +9,6 @@ namespace Z0
     using System.IO;
 
     using static Root;
-    using static Tables;
 
     public class TableReader<T> : IDisposable
         where T : struct

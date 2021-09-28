@@ -13,8 +13,6 @@ namespace Z0.Asm
     [ApiHost]
     public struct AsmHexCode : IDataTypeComparable<AsmHexCode>
     {
-        public const uint StorageSize = 16;
-
         public const byte SizeIndex = 15;
 
         Cell128 Data;

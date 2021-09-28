@@ -14,16 +14,6 @@ namespace Z0.Asm
 
     partial struct AsmParser
     {
-        /// <summary>
-        /// Determines whether a character sequence contains as specified comment marker and, if so,
-        /// returns the index of the marker; othersise, returns the canonical <see cref='NotFound'/> value
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="marker">The marker to scan for</param>
-        [MethodImpl(Inline), Op]
-        public static int search(ReadOnlySpan<char> src, AsmCommentMarker marker)
-            => SQ.index(src, (char)marker);
-
         [Op]
         public static bool comment(ReadOnlySpan<char> src, out AsmInlineComment dst)
         {

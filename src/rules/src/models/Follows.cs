@@ -14,17 +14,17 @@ namespace Z0
         /// <summary>
         /// Requires that one element occurrs after another
         /// </summary>
-        public readonly struct Follows<T> : IRule<Follows<T>,T>
+        public readonly struct Next<S,T>
         {
-            public T Before {get;}
+            public readonly S Input;
 
-            public T After {get;}
+            public readonly T Output;
 
             [MethodImpl(Inline)]
-            public Follows(T before, T after)
+            public Next(S i, T o)
             {
-                Before = before;
-                After = after;
+                Input = i;
+                Output = o;
             }
         }
     }

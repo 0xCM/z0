@@ -93,17 +93,25 @@ namespace Z0
             }
         }
 
-        public Index<SymLiteralRow> LoadLiterals(FS.FilePath src)
+        public ReadOnlySpan<TokenSpec> EmitTokenSpecs(Type src)
         {
-            using var reader = src.TableReader<SymLiteralRow>(DataParser.parse);
-            var header = reader.Header.Split(Chars.Tab);
-            if(header.Length != SymLiteralRow.FieldCount)
-            {
-                Wf.Error(AppMsg.FieldCountMismatch.Format(SymLiteralRow.FieldCount,header.Length));
-                return Index<SymLiteralRow>.Empty;
-            }
+            var dst = Ws.Tables().TablePath<TokenSpec>("tokens", src.Name.ToLower());
+            var tokens = Tokens.specs(src);
+            TableEmit(tokens, TokenSpec.RenderWidths, dst);
+            return tokens;
+        }
 
-            var dst = new DataList<SymLiteralRow>();
+        public ReadOnlySpan<TokenSpec> LoadTokenSpecs(string name)
+        {
+            var src = Ws.Tables().TablePath<TokenSpec>("tokens", name.ToLower());
+            using var reader = src.TableReader<TokenSpec>(DataParser.parse);
+            var header = reader.Header.Split(Chars.Pipe);
+            if(header.Length != TokenSpec.FieldCount)
+            {
+                Wf.Error(AppMsg.FieldCountMismatch.Format(TokenSpec.FieldCount, header.Length));
+                return Index<TokenSpec>.Empty;
+            }
+            var dst = list<TokenSpec>();
             while(!reader.Complete)
             {
                 var outcome = reader.ReadRow(out var row);
@@ -115,7 +123,32 @@ namespace Z0
                 dst.Add(row);
             }
 
-            return dst.Emit();
+            return dst.ViewDeposited();
+        }
+
+        public ReadOnlySpan<SymLiteralRow> LoadLiterals(FS.FilePath src)
+        {
+            using var reader = src.TableReader<SymLiteralRow>(DataParser.parse);
+            var header = reader.Header.Split(Chars.Tab);
+            if(header.Length != SymLiteralRow.FieldCount)
+            {
+                Wf.Error(AppMsg.FieldCountMismatch.Format(SymLiteralRow.FieldCount,header.Length));
+                return Index<SymLiteralRow>.Empty;
+            }
+
+            var dst = list<SymLiteralRow>();
+            while(!reader.Complete)
+            {
+                var outcome = reader.ReadRow(out var row);
+                if(!outcome)
+                {
+                    Wf.Error(outcome.Message);
+                    break;
+                }
+                dst.Add(row);
+            }
+
+            return dst.ViewDeposited();
         }
     }
 }

@@ -11,8 +11,6 @@ namespace Z0
 
     public class HexCodeGen : CodeGenerator
     {
-        public static CodeGenerator Service => new HexCodeGen();
-
         static string Name(byte value)
             => text.concat(AsciLetterUp.X, value.FormatHex(true,false,uppercase:true));
 

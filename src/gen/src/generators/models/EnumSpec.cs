@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public struct EnumSpec
+    public class EnumSpec
     {
         public Identifier Name;
 
@@ -20,9 +20,9 @@ namespace Z0
 
         public Index<Identifier> Names;
 
-        public Index<ulong> Values;
+        public Index<SymVal> Values;
 
-        public Index<string> Symbols;
+        public Index<SymExpr> Symbols;
 
         public Index<string> Descriptions;
     }

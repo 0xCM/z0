@@ -13,7 +13,6 @@ namespace Z0
     {
         public Index<ClrEnumRecord> EmitEnumRecords(ClrAssemblyAdapter src, FS.FilePath dst)
         {
-
             var records = Enums.records(src);
             if(records.Length != 0)
             {

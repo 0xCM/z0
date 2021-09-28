@@ -198,7 +198,6 @@ namespace Z0
         {
             const char Delimiter = FieldDelimiter;
             const byte FieldCount = ApiCatalogEntry.FieldCount;
-
             var fields = text.split(src, Delimiter);
             if(fields.Length != FieldCount)
             {

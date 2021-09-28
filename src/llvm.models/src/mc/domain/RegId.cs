@@ -5,9 +5,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    partial struct MC
+    partial struct MCDomain
     {
-        public enum Register : ushort
+        public enum RegId : ushort
         {
             NoRegister,
             AH = 1,

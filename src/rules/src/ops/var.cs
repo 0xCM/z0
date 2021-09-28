@@ -11,14 +11,8 @@ namespace Z0
 
     partial struct Rules
     {
-        /// <summary>
-        /// Defines a <see cref='Var'/>
-        /// </summary>
-        /// <param name="scope">The variable scope</param>
-        /// <param name="name">The variable name</param>
-        /// <param name="type">The sort of value the variable can hold</param>
         [MethodImpl(Inline), Op]
-        public static Var var(IScope scope, string name, DataType type)
-            => new Var(scope,name,type);
+        public static Var<T> var<T>(uint id, T value)
+            => new Var<T>(id,value);
     }
 }

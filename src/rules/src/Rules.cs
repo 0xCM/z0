@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Rules;
 
     [ApiHost]
     public readonly partial struct Rules
@@ -37,7 +36,5 @@ namespace Z0
     [ApiHost]
     public static partial class XRules
     {
-        public static Constraint<T,OneOf<T>> Constrain<T>(this OneOf<T> rule, T src)
-            => Rules.constrain(src,rule);
     }
 }

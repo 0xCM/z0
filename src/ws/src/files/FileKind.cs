@@ -41,7 +41,7 @@ namespace Z0
         [Symbol(xcsv,"Unprocessed x86-encoded data")]
         XCsv,
 
-        [Symbol(sym,"A  symbol table as emitted by llvm-nm ")]
+        [Symbol(sym,"A  symbol table as emitted by llvm-nm")]
         Sym,
 
         [Symbol(pcsv,"Text-formatted x86-encoded/executable data")]

@@ -9,7 +9,7 @@ namespace Z0
 
     public class EnumGen : CodeGenerator
     {
-        public Outcome Generate(uint offset, in EnumSpec spec, ITextBuffer dst)
+        public Outcome Generate(uint offset, EnumSpec spec, ITextBuffer dst)
         {
             var kw = NumericKinds.kind(spec.DataType).Keyword();
             var counter = 0ul;
@@ -51,7 +51,7 @@ namespace Z0
                 var name = skip(names,i);
                 var description = "";
                 var value = (ulong)i;
-                var symbol = "";
+                var symbol = SymExpr.Empty;
                 if(values)
                     value = spec.Values[i];
                 if(symbols)
@@ -62,14 +62,16 @@ namespace Z0
                 if(nonempty(description))
                     comment(description).Render(indent, dst);
 
-                if(nonempty(symbol))
+                if(symbol.IsNonEmpty)
                 {
                     if(nonempty(description))
-                        dst.IndentLineFormat(indent, "", "[Symbol(\"{0}\",\"{1}\")]", symbol, description);
+                        dst.IndentLineFormat(indent, "[Symbol(\"{0}\",\"{1}\")]", symbol, description);
                     else
-                        dst.IndentLineFormat(indent, "", "[Symbol(\"{0}\")]", symbol);
+                        dst.IndentLineFormat(indent, "[Symbol(\"{0}\")]", symbol);
                 }
                 dst.IndentLineFormat(indent, "{0} = {1},", name, value);
+                if(i != count -1)
+                    dst.AppendLine();
             }
             indent -= 4;
             dst.IndentLine(indent,"}");

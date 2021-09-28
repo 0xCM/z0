@@ -11,6 +11,51 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        [CmdOp(".emit-tokens")]
+        Outcome EmitTokenSpecs(CmdArgs args)
+        {
+            var result = Outcome.Success;
+
+            var svc = Wf.Symbolism();
+            var output = svc.EmitTokenSpecs(typeof(AsmOpCodeTokens.VexToken));
+            var input = svc.LoadTokenSpecs(nameof(AsmOpCodeTokens.VexToken));
+            var formatter = Tables.formatter<TokenSpec>(TokenSpec.RenderWidths);
+            var count = input.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(input,i);
+                Write(formatter.Format(row));
+            }
+
+            return result;
+        }
+
+        void EmitTokenSpecs()
+        {
+            var tokens = Wf.AsmTokens();
+            EmitTokenSet(tokens.RegTokens());
+            EmitTokenSet(tokens.OpCodeTokens());
+            EmitTokenSet(tokens.SigTokens());
+            EmitTokenSet(tokens.ConditonTokens());
+            EmitTokenSet(tokens.PrefixTokens());
+        }
+
+
+        void EmitTokenSpecs(Type src)
+        {
+            var dst = Ws.Tables().TablePath<TokenSpec>("tokens", src.Name);
+            var tokens = Tokens.specs(src);
+            TableEmit(tokens, TokenSpec.RenderWidths, dst);
+        }
+
+        void EmitTokenSet(ITokenSet src)
+        {
+            var dst = Ws.Tables().TablePath<TokenSpec>("tokens", src.Name);
+            var tokens = Tokens.specs(src.Types());
+            TableEmit(tokens, TokenSpec.RenderWidths, dst);
+        }
+
+
         [CmdOp(".machine")]
         Outcome EmitMachineTables(CmdArgs args)
         {
@@ -35,11 +80,7 @@ namespace Z0.Asm
 
             Wf.IntelIntrinsics().Emit(dir);
 
-            EmitTokens(tokens.RegTokens());
-            EmitTokens(tokens.OpCodeTokens());
-            EmitTokens(tokens.SigTokens());
-            EmitTokens(tokens.ConditonTokens());
-            EmitTokens(tokens.PrefixTokens());
+            EmitTokenSpecs();
             EmitSymKinds(Symbols.index<AsmOpClass>(), tables.TablePath(machine,"classes.asm.operands"));
             EmitSymIndex<RegClassCode>(tables.TablePath(machine, "classes.asm.regs"));
             return result;
@@ -65,13 +106,6 @@ namespace Z0.Asm
             writer.Write(rendered);
             Wf.EmittedFile(flow,count);
             return true;
-        }
-
-        void EmitTokens(ITokenSet src)
-        {
-            var dst = Ws.Tables().TablePath<TokenRow>(machine, src.Name);
-            var tokens = Tokens.rows(src.Types());
-            TableEmit(tokens, TokenRow.RenderWidths, dst);
         }
 
         ReadOnlySpan<SymLiteralRow> EmitSymLiterals<E>(FS.FilePath dst)

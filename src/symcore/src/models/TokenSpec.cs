@@ -8,19 +8,17 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential), Record(TableId)]
-    public struct TokenRow
+    public struct TokenSpec
     {
         public const string TableId = "tokens";
 
-        public const byte FieldCount = 7;
+        public const byte FieldCount = 6;
 
         public Identifier TokenType;
 
-        public SymClass Class;
-
         public uint Index;
 
-        public SymKey SymId;
+        public SymVal Value;
 
         public Identifier Name;
 
@@ -29,6 +27,6 @@ namespace Z0
         public TextBlock Description;
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{24,16,8,8,18,18,64};
+            => new byte[FieldCount]{24,8,16,18,18,64};
     }
 }

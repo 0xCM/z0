@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
     using static core;
@@ -13,14 +14,10 @@ namespace Z0
     [ApiHost]
     public readonly struct Tokens
     {
-        [MethodImpl(Inline)]
-        public static TokenMatch<K> match<K>(K kind, uint key)
-            where K : unmanaged
-                => new TokenMatch<K>(kind, key);
         [Op]
-        public static ReadOnlySpan<TokenRow> rows(ReadOnlySpan<Type> src)
+        public static ReadOnlySpan<TokenSpec> specs(ReadOnlySpan<Type> src)
         {
-            var dst = list<TokenRow>();
+            var dst = list<TokenSpec>();
             var count = src.Length;
             var counter = 0u;
             for(var i=0; i<count; i++)
@@ -30,11 +27,10 @@ namespace Z0
                 for(var j=0; j<symbols.Length; j++)
                 {
                     ref readonly var symbol = ref skip(symbols,j);
-                    var record = new TokenRow();
+                    var record = new TokenSpec();
                     record.TokenType = type.Name;
-                    record.Class = symbol.Class;
                     record.Index = counter++;
-                    record.SymId = symbol.Key;
+                    record.Value = symbol.Value;
                     record.Name = symbol.Name;
                     record.Expr = symbol.Expr;
                     record.Description = symbol.Description;
@@ -45,20 +41,19 @@ namespace Z0
         }
 
         [Op]
-        public static ReadOnlySpan<TokenRow> rows(Type src)
+        public static ReadOnlySpan<TokenSpec> specs(Type src)
         {
             var symbols = Symbols.untyped(src).View;
             var count = symbols.Length;
-            var buffer = alloc<TokenRow>(count);
+            var buffer = alloc<TokenSpec>(count);
             ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var symbol = ref skip(symbols,i);
                 ref var record = ref seek(dst,i);
                 record.TokenType = src.Name;
-                record.Class = symbol.Class;
                 record.Index = i;
-                record.SymId = symbol.Key;
+                record.Value = symbol.Value;
                 record.Name =  symbol.Name;
                 record.Expr = symbol.Expr;
                 record.Description = symbol.Description;
@@ -66,11 +61,11 @@ namespace Z0
             return buffer;
         }
 
-        public static ReadOnlySpan<TokenRow> rows<E>()
+        public static ReadOnlySpan<TokenSpec> rows<E>()
             where E : unmanaged, Enum
-                => rows(typeof(E));
+                => specs(typeof(E));
 
-        public static Index<AsciCode> concat<K>(Symbols<K> src)
+        public static Index<char> concat<K>(Symbols<K> src)
             where K : unmanaged
         {
             var symbols = src.View;
@@ -84,7 +79,7 @@ namespace Z0
                 size += ((uint)expr.Length + 1);
             }
 
-            var buffer = alloc<AsciCode>(size);
+            var buffer = alloc<char>(size);
             ref var dst = ref first(buffer);
             var k=0;
             for(var i=0; i<count; i++)
@@ -92,8 +87,8 @@ namespace Z0
                 ref readonly var s = ref skip(symbols,i);
                 var expr = s.Expr.Data;
                 for(var j=0; j<expr.Length; j++)
-                    seek(dst,k++) = (AsciCode)skip(expr,j);
-                seek(dst,k++) = AsciCode.Null;
+                    seek(dst,k++) = (char)skip(expr,j);
+                seek(dst,k++) = (char)0;
             }
             return buffer;
         }

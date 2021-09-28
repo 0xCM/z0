@@ -217,7 +217,7 @@ namespace Z0
         /// <summary>
         /// Defines the 'syn.asm' literal
         /// </summary>
-        public const string asmsyn = asm + sep + syn;
+        public const string asmsyn = syn + sep + asm;
 
         /// <summary>
         /// Defines the 'syn.asm.log' literal

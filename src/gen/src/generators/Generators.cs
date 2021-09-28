@@ -12,5 +12,11 @@ namespace Z0
     {
         public StringTableGen StringTable()
             => StringTableGen.create(Wf);
+
+        public StringLiteralEmitter StringLiterals()
+            => Z0.StringLiteralEmitter.create(Wf);
+
+        public EnumGen CsEnum()
+            => new EnumGen();
     }
 }

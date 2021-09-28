@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
+    using static Root;
     using static core;
 
     partial class AsmCmdService
@@ -17,8 +18,45 @@ namespace Z0.Asm
             var symbols = Symbols.index<AsmOpCodeTokens.ModRmToken>();
             var src = Z0.Tokens.concat(symbols);
             var dst = Ws.Gen().Root + FS.file("token-specs", FS.Cs);
-            EmitTokenSpecs("ModRmTokens", src,dst);
+            var svc = Wf.Generators().StringLiterals();
+            svc.Emit("ModRmTokens", src, dst);
             return result;
+        }
+
+        [CmdOp(".gen-enums")]
+        Outcome GenEnums(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var svc = Wf.Generators().CsEnum();
+            var src = Tokens.specs(typeof(AsmOpCodeTokens.ModRmToken));
+            var count = src.Length;
+            var spec = new EnumSpec();
+            spec.Name = "OpCodeTokens";
+
+            spec.DataType = ClrEnumKind.U8;
+            spec.Flags = false;
+            spec.SymbolSource = true;
+            spec.Group = EmptyString;
+            spec.Description = "Test";
+
+            spec.Symbols = alloc<SymExpr>(count);
+            spec.Names = alloc<Identifier>(count);
+            spec.Values = alloc<SymVal>(count);
+            spec.Descriptions = alloc<string>(count);
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var token = ref skip(src,i);
+                spec.Symbols[i] = token.Expr;
+                spec.Names[i] = token.Name;
+                spec.Values[i] = token.Value;
+                spec.Descriptions[i] = token.Description;
+            }
+            var buffer = text.buffer();
+            svc.Generate(0,spec,buffer);
+            Write(buffer.Emit());
+
+            return result;
+
         }
 
         [CmdOp(".tokenstrings")]
@@ -48,33 +86,6 @@ namespace Z0.Asm
             Write(ts.TokenCount);
 
             return result;
-        }
-
-        void EmitTokenSpecs(string name, ReadOnlySpan<AsciCode> src, FS.FilePath dst)
-        {
-            var emitting = EmittingFile(dst);
-            using var writer = dst.AsciWriter();
-            var i=0;
-            var count = src.Length;
-            var buffer = text.buffer();
-            writer.Write(string.Format("public const string {0} = ", name));
-            writer.Write('\"');
-            while(i++<count)
-            {
-                ref readonly var c = ref skip(src,i);
-                if(c == AsciCode.Null)
-                {
-                    writer.Write('\\');
-                    writer.Write('0');
-                }
-                else
-                    writer.Write((char)c);
-            }
-            writer.Write('\"');
-            writer.Write(';');
-            writer.WriteLine();
-
-            EmittedFile(emitting, 1);
         }
     }
 }

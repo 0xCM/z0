@@ -6,24 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
 
     partial struct Rules
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public readonly struct BitSection
+        public readonly struct Var<T>
         {
-            public readonly uint MinIndex;
+            public readonly uint Id;
 
-            public readonly uint MaxIndex;
+            public readonly T Value;
 
             [MethodImpl(Inline)]
-            public BitSection(uint min, uint max)
+            public Var(uint id, T value)
             {
-                MinIndex = min;
-                MaxIndex = max;
+                Id = id;
+                Value = value;
             }
         }
     }

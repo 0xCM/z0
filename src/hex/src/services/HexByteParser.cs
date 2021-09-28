@@ -27,11 +27,20 @@ namespace Z0
         public static bool HasPostSpec(string src)
             => src.TrimEnd().EndsWith(PostSpec);
 
+        /// <summary>
+        /// Parses a sequence of hex bytes, delimited by a space or comma
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
         public static Outcome hexbytes(string src, out BinaryCode dst)
         {
             dst = BinaryCode.Empty;
             var result = Outcome.Success;
-            var parts = src.Replace(CharText.EOL, CharText.Space).SplitClean(Chars.Space).ToReadOnlySpan();
+            if(empty(src))
+                return result;
+
+            var sep = delimiter(src);
+            var parts = src.Replace(CharText.EOL, CharText.Space).SplitClean(sep).ToReadOnlySpan();
             var count = parts.Length;
             var buffer = alloc<byte>(count);
             ref var target = ref first(buffer);
@@ -48,6 +57,32 @@ namespace Z0
             }
             dst = buffer;
             return result;
+        }
+
+        [MethodImpl(Inline)]
+        static char delimiter(string src)
+            => text.index(src,Chars.Comma) > 0 ? Chars.Comma : Chars.Space;
+
+        public static Outcome<uint> hexbytes(string src, Span<byte> dst)
+        {
+            var size = 0u;
+            var limit = (uint)dst.Length;
+            var result = Outcome.Success;
+            if(empty(src))
+                return size;
+            var sep = delimiter(src);
+            var parts = src.Replace(CharText.EOL, CharText.Space).SplitClean(sep).ToReadOnlySpan();
+            var count = src.Length;
+            for(var i=0u; i<count && i<limit; i++)
+            {
+                ref readonly var part = ref skip(parts,i);
+                result = Hex.parse8u(part, out seek(dst,i));
+                if(result.Fail)
+                    return (false,size);
+                else
+                    size++;
+            }
+            return size;
         }
 
         [Op]

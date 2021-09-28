@@ -12,6 +12,36 @@ namespace Z0
 
     public readonly struct HexArray
     {
+        public static Outcome parse(string src, out HexArray16 dst)
+        {
+            dst = HexArray16.Empty;
+            return HexByteParser.hexbytes(src, dst.Bytes);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static HexArray16 load(N16 n, ReadOnlySpan<byte> src)
+        {
+            var size = src.Length;
+            if(size <= 16)
+                return @as<HexArray16>(first(src));
+            else
+            {
+                var dst = HexArray16.Empty;
+                store(src,ref dst);
+                return dst;
+            }
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref HexArray16 store(ReadOnlySpan<byte> src, ref HexArray16 dst)
+        {
+            ref var target = ref @as<HexArray16,byte>(dst);
+            var count = min(src.Length, 16);
+            for(var i=0; i<count; i++)
+                seek(target,i) = skip(src,i);
+            return ref dst;
+        }
+
         [MethodImpl(Inline)]
         public static HexArray cover(byte[] src)
             => new HexArray(src);

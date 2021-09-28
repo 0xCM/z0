@@ -169,19 +169,28 @@ namespace Z0.Asm
             return true;
         }
 
-
         Outcome CollectAsmSyntaxTrees()
         {
             var result = Outcome.Success;
             var project = Ws.Project(State.Project());
             var src = project.OutFiles(FileKind.AsmSyntax).View;
             var count = src.Length;
+            var dst = project.OutDir() + FS.file(project.Name.Format(), FileKind.AsmSyntax.Ext());
+            using var writer = dst.AsciWriter();
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(src,i);
                 result = AsmParser.document(path, out var doc);
                 if(result.Fail)
                     break;
+
+                var lines = doc.SourceLines;
+                writer.WriteLine(string.Format("# Source: {0}", path.ToUri()));
+                for(var j=0; j<lines.Length; j++)
+                {
+                    ref readonly var line = ref skip(lines,j);
+                    writer.WriteLine(line);
+                }
             }
 
             return result;
@@ -224,12 +233,6 @@ namespace Z0.Asm
 
         FS.FilePath OutPath(Scope scope, string id, FileKind kind)
             =>  Ws.Projects().Out(State.Project(), scope) + FS.file(id,FileTypes.ext(kind));
-
-        FS.Files OutFiles()
-            => Ws.Projects().OutFiles(State.Project());
-
-        FS.Files OutFiles(FileKind kind)
-            => Ws.Projects().OutFiles(State.Project(), kind);
 
         FS.Files OutFiles(params FileKind[] kinds)
             => Ws.Projects().OutFiles(State.Project(), kinds);

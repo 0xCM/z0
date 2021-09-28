@@ -9,11 +9,11 @@ namespace Z0
     partial class XTend
     {
         public static TableReader<T> TableReader<T>(this FS.FilePath src, bool header = true)
-            where T : struct, IRecord<T>
+            where T : struct
                 => new TableReader<T>(src, header);
 
         public static TableReader<T> TableReader<T>(this FS.FilePath src, RowParser<T> parser, bool header = true)
-            where T : struct, IRecord<T>
+            where T : struct
                 => new TableReader<T>(src, parser, header);
     }
 }

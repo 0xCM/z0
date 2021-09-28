@@ -9,7 +9,7 @@ namespace Z0
     [Free]
     public interface ITypedFile : IFile
     {
-        FileKind Kind {get;}
+        FileKind FileKind {get;}
     }
 
     [Free]

@@ -11,19 +11,19 @@ namespace Z0
 
     public readonly struct TypedFile : ITypedFile
     {
-        public readonly FileKind Kind;
+        public readonly FileKind FileKind;
 
         public readonly FS.FilePath Path;
 
         [MethodImpl(Inline)]
         public TypedFile(FileKind kind, FS.FilePath path)
         {
-            Kind = kind;
+            FileKind = kind;
             Path = path;
         }
 
-        FileKind ITypedFile.Kind
-            => Kind;
+        FileKind ITypedFile.FileKind
+            => FileKind;
 
         FS.FilePath IFile.Path
             => Path;

@@ -42,6 +42,47 @@ namespace Z0
             return outcome;
         }
 
+        public static Outcome parse(TextLine src, out TokenSpec dst)
+        {
+            var outcome = Outcome.Success;
+            var j=0;
+            var cells = src.Split(Chars.Pipe);
+            if(cells.Length != TokenSpec.FieldCount)
+            {
+                dst = default;
+                return (false, AppMsg.FieldCountMismatch.Format(SymLiteralRow.FieldCount, cells.Length));
+            }
+
+            outcome += parse(skip(cells,j++), out dst.TokenType);
+            outcome += parse(skip(cells,j++), out dst.Index);
+            outcome += parse(skip(cells,j++), out dst.Value);
+            outcome += parse(skip(cells,j++), out dst.Name);
+            outcome += parse(skip(cells,j++), out dst.Expr);
+            outcome += parse(skip(cells,j++), out dst.Description);
+            return outcome;
+        }
+
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out SymKey dst)
+        {
+            dst = default;
+            var result = parse(src, out uint x);
+            if(result)
+                dst = x;
+            return result;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static Outcome parse(string src, out SymVal dst)
+        {
+            dst = default;
+            var result = parse(src, out ulong x);
+            if(result)
+                dst = x;
+            return result;
+        }
+
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out SymClass dst)
         {

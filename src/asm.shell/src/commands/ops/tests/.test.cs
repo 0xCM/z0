@@ -16,6 +16,41 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        [CmdOp(".switch")]
+        Outcome EmitSwitch(CmdArgs src)
+        {
+            var result = Outcome.Success;
+            var fxname = "choose";
+            var argname = "c";
+            Span<char> choices = new char[]{'a','b','c','d'};
+            var buffer = text.buffer();
+            var indent = 0u;
+            buffer.IndentLineFormat(indent,"public void {0}(char {1})",fxname, argname);
+            buffer.IndentLine(indent,"{");
+            indent+=4;
+            buffer.IndentLineFormat(indent, "switch({0})", argname);
+            buffer.IndentLine(indent,"{");
+            indent+=4;
+            var count = choices.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var choice = ref skip(choices,i);
+                buffer.IndentLineFormat(indent, "case '{0}':", choice);
+                buffer.IndentLine(indent,"{");
+
+                buffer.IndentLine(indent,"}");
+                buffer.IndentLineFormat(indent, "break;");
+            }
+            indent-=4;
+            buffer.IndentLine(indent,"}");
+
+            indent-=4;
+            buffer.IndentLine(indent,"}");
+
+            Write(buffer.Emit());
+
+            return result;
+        }
 
         [CmdOp(".test")]
         unsafe Outcome Test(CmdArgs args)

@@ -8,19 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct Rules
     {
-        public readonly struct PrimalName
-        {
-            readonly ByteBlock16 Data;
-
-            [MethodImpl(Inline)]
-            public PrimalName(string src)
-            {
-                Data = ByteBlock16.Empty;
-                AsciSymbols.encode(src, Data.Bytes);
-            }
-        }
+        public static Switch<K,A> @switch<K,A>(Identifier name, K[] choices, Func<K,A> actor)
+            => new Switch<K,A>(name, choices, actor);
     }
 }

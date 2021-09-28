@@ -83,7 +83,13 @@ namespace Z0.Asm
                         var statement = text.left(content, (char)comment.Marker);
                         if(statement.Length != 0)
                             statement = RP.Spaced4 + statement;
-                        if(comment.Content.Contains("<MCInst #") && statement.Length != 0)
+
+                        if(comment.Content.Contains("encoding: "))
+                        {
+                            SourceLines.Add(new AsmSourceLine(src.LineNumber, EmptyString, statement));
+                            SourceLines.Add(new AsmSourceLine(src.LineNumber, EmptyString, "#" + RP.Spaced2 + comment.Content));
+                        }
+                        else if(comment.Content.Contains("<MCInst #") && statement.Length != 0)
                         {
                             SourceLines.Add(new AsmSourceLine(src.LineNumber, EmptyString, statement));
                             SourceLines.Add(new AsmSourceLine(src.LineNumber, EmptyString, "#" + RP.Spaced2 + comment.Content));

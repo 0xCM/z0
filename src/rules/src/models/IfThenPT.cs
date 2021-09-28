@@ -11,20 +11,22 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct VarValue : IValue<object>
+        public readonly struct IfThen<P,T>
         {
-            public Var Var {get;}
+            public readonly P Predicate;
 
-            public object Content {get;}
+            public readonly T Target;
 
             [MethodImpl(Inline)]
-            public VarValue(Var var, object value)
+            public IfThen(P pred, T target)
             {
-                Var = var;
-                Content = value;
+                Predicate = pred;
+                Target = target;
             }
 
-            public DataType Type => Var.Type;
+            [MethodImpl(Inline)]
+            public static implicit operator IfThen<P,T>((P pred, T target) src)
+                => new IfThen<P,T>(src.pred, src.target);
         }
     }
 }

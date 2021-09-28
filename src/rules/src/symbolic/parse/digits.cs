@@ -11,7 +11,6 @@ namespace Z0
     using static core;
 
     using SQ = SymbolicQuery;
-    using SC = SymbolicCalcs;
 
     partial struct SymbolicParse
     {
@@ -58,12 +57,30 @@ namespace Z0
             return result;
         }
 
+        [MethodImpl(Inline), Op]
+        public static uint convert(ReadOnlySpan<AsciCode> src, Span<char> dst)
+        {
+            var count = (uint)min(src.Length, dst.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = (char)skip(src,i);
+            return count;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint convert(ReadOnlySpan<char> src, Span<AsciCode> dst)
+        {
+            var count = (uint)min(src.Length, dst.Length);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = (AsciCode)skip(src,i);
+            return count;
+        }
+
         [Op]
         public static Outcome parse(Base10 @base, ReadOnlySpan<AsciCode> src, out ushort dst)
         {
             var storage = CharBlock16.Null;
             var buffer = storage.Data;
-            SC.convert(src, buffer);
+            convert(src, buffer);
             return ScalarParser.parse(@base, buffer, out dst);
         }
 

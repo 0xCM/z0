@@ -20,12 +20,12 @@ namespace Z0
             /// <summary>
             /// The minimum value
             /// </summary>
-            public T Min {get;}
+            public readonly T Min;
 
             /// <summary>
             /// The maximum value
             /// </summary>
-            public T Max {get;}
+            public readonly T Max;
 
             [MethodImpl(Inline)]
             public Bounded(T min, T max)

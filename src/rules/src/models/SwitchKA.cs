@@ -11,20 +11,25 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Var
+        public class Switch<K,A>
         {
-            public IScope Scope {get;}
+            readonly Index<K> _Choices;
 
-            public string Name {get;}
+            public Identifier Name {get;}
 
-            public DataType Type {get;}
+            public Func<K,A> Actor {get;}
 
-            [MethodImpl(Inline)]
-            public Var(IScope scope, string name, DataType type)
+            public Switch(Identifier name, K[] src, Func<K,A> actor)
             {
-                Scope = scope;
-                Type = type;
                 Name = name;
+                _Choices = src;
+                Actor = actor;
+            }
+
+            public ReadOnlySpan<K> Choices
+            {
+                [MethodImpl(Inline)]
+                get => _Choices.Edit;
             }
         }
     }

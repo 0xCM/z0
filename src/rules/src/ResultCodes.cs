@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     readonly struct ResultCodes
     {
         public static ResultCode Ok => default;
