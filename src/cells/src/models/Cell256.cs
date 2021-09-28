@@ -133,6 +133,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public byte Cell(W8 w, byte index)
+            => V8u.GetElement(index);
+
+        [MethodImpl(Inline)]
+        public ushort Cell(W16 w, byte index)
+            => V16u.GetElement(index);
+
+        [MethodImpl(Inline)]
+        public uint Cell(W32 w, byte index)
+            => V32u.GetElement(index);
+
+        [MethodImpl(Inline)]
+        public ulong Cell(W64 w, byte index)
+            => V64u.GetElement(index);
+
+        [MethodImpl(Inline)]
         public static Cell256 init<T>(Vector256<T> src)
             where T : unmanaged
                 => new Cell256(src.AsUInt64());

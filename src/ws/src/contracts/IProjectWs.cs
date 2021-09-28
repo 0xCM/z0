@@ -98,8 +98,8 @@ namespace Z0
         FS.Files SrcFiles(Scope scope)
             => (Src() + FS.folder(scope.Format())).AllFiles;
 
-        FS.FilePath SrcFile(string fileid, FS.FileExt ext)
-            => Src() + FS.file(fileid,ext);
+        FS.FilePath SrcFile(Scope scope, string fileid, FileKind kind)
+            => Src() + FS.folder(scope.Format()) + FS.file(fileid, kind.Ext());
 
         FS.FolderPath Assets()
             => Home() + FS.folder(assets);

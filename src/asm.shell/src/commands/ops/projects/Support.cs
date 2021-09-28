@@ -87,16 +87,29 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(src,i);
-                var srcid = path.FileName.WithoutExtension.Format();
-                OmniScript.RunProjectScript(project, srcid, script, true, out var flows);
-                for(var j=0; j<flows.Length; j++)
-                {
-                    ref readonly var flow = ref skip(flows, j);
-                    Write(flow.Format());
-                }
+                RunProjectScript(project,path,script);
+                // var srcid = path.FileName.WithoutExtension.Format();
+                // OmniScript.RunProjectScript(project, srcid, script, true, out var flows);
+                // for(var j=0; j<flows.Length; j++)
+                // {
+                //     ref readonly var flow = ref skip(flows, j);
+                //     Write(flow.Format());
+                // }
             }
 
             return result;
+        }
+
+        Outcome RunProjectScript(ProjectId project, FS.FilePath path, ScriptId script)
+        {
+            var srcid = path.FileName.WithoutExtension.Format();
+            OmniScript.RunProjectScript(project, srcid, script, true, out var flows);
+            for(var j=0; j<flows.Length; j++)
+            {
+                ref readonly var flow = ref skip(flows, j);
+                Write(flow.Format());
+            }
+            return true;
         }
 
         Outcome AsmCollect()

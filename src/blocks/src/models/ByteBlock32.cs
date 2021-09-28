@@ -18,7 +18,7 @@ namespace Z0
     /// <summary>
     /// Covers 32 bytes = 256 bits of stack-allocated storage
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct ByteBlock32 : IDataBlock<B>
     {
         public const ushort Size = 32;
@@ -63,6 +63,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => !api.empty(this);
+        }
+
+        public ref byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(First,index);
+        }
+
+        public ref byte this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(First,index);
         }
 
         [MethodImpl(Inline)]

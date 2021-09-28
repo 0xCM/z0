@@ -9,7 +9,7 @@ namespace Z0.Asm
     partial class AsmCmdService
     {
         [CmdOp(".asmcsv")]
-        Outcome AsmStatements(CmdArgs args)
+        Outcome AsmCsv(CmdArgs args)
         {
             var result = Outcome.Success;
             var src = ApiArchive.HostAsmCsv().View;

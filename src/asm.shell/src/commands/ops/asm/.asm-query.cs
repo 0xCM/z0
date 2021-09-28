@@ -43,6 +43,5 @@ namespace Z0.Asm
             PipeQueryOut(@readonly(filtered), Z0.ProcessAsmRecord.RenderWidths, qid);
             return result;
         }
-
     }
 }

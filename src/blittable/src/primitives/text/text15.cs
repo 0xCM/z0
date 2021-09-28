@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static BitFlow;
 
     partial struct BitFlow
     {
@@ -56,67 +57,64 @@ namespace Z0
                 seek(dst,i) = (char)skip(data,i);
             return text.format(slice(dst,0,count));
         }
+    }
+    public struct text15 : IName<text15,Cell128>
+    {
+        public const byte MaxLength = 15;
 
-        public struct text15 : IName<text15,Cell128>
+        public static W128 W => default;
+
+        static N15 N => default;
+
+        public Cell128 Storage;
+
+        public byte PointSize
+            => 1;
+
+        [MethodImpl(Inline)]
+        internal text15(in Cell128 data)
         {
-            public const uint StorageSize = 16;
-
-            public const byte MaxLength = 15;
-
-            public static W128 W => default;
-
-            static N15 N => default;
-
-            public Cell128 Storage;
-
-            public byte PointSize
-                => 1;
-
-            [MethodImpl(Inline)]
-            internal text15(in Cell128 data)
-            {
-                Storage = data;
-            }
-
-            public Span<byte> Bytes
-            {
-                [MethodImpl(Inline)]
-                get => slice(bytes(Storage),0, MaxLength);
-            }
-
-            public uint Length
-            {
-                [MethodImpl(Inline)]
-                get => Storage.Cell(w8, 15);
-            }
-
-            public bool IsEmpty
-            {
-                [MethodImpl(Inline)]
-                get => Storage.IsEmpty;
-            }
-
-            public bool IsNonEmpty
-            {
-                [MethodImpl(Inline)]
-                get => Storage.IsNonEmpty;
-            }
-
-            public string Format()
-                => format(this);
-
-            public override string ToString()
-                => Format();
-
-            [MethodImpl(Inline)]
-            public static implicit operator text15(string src)
-                => txt(N,src);
-
-            [MethodImpl(Inline)]
-            public static implicit operator text15(ReadOnlySpan<char> src)
-                => txt(N,src);
-
-            public static text15 Empty => default;
+            Storage = data;
         }
+
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => slice(bytes(Storage),0, MaxLength);
+        }
+
+        public uint Length
+        {
+            [MethodImpl(Inline)]
+            get => Storage.Cell(w8, 15);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Storage.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Storage.IsNonEmpty;
+        }
+
+        public string Format()
+            => format(this);
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator text15(string src)
+            => txt(N,src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator text15(ReadOnlySpan<char> src)
+            => txt(N,src);
+
+        public static text15 Empty => default;
     }
 }

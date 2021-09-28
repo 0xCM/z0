@@ -144,6 +144,10 @@ namespace Z0
             => V32u.GetElement(index);
 
         [MethodImpl(Inline)]
+        public ulong Cell(W64 w, byte index)
+            => V64u.GetElement(index);
+
+        [MethodImpl(Inline)]
         public bool Equals(Cell128 src)
             => Data.Equals(src.Data);
 
