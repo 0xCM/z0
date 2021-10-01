@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Generic vectorized intrinsics
     /// </summary>
-    public class Circuits
+    public partial class LegacyCircuits
     {
         [MethodImpl(Inline)]
         public static HalfAdder<T> half<T>()

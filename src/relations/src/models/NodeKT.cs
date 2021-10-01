@@ -34,7 +34,7 @@ namespace Z0
             Content = content;
         }
 
-        K INode<K, T>.Index
+        K INode<K,T>.Index
             => Index;
 
         T INode<T>.Content

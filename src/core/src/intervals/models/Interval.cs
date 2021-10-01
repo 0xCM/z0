@@ -64,13 +64,6 @@ namespace Z0
         public static Interval<T> RightUnbound(T left)
             => new Interval<T>(left, Limits.maxval<T>(), K.RightOpen);
 
-        [MethodImpl(Inline)]
-        public static implicit operator Interval<T>((T left, T right) x)
-            => new Interval<T>(x.left, true, x.right, true);
-
-        [MethodImpl(Inline)]
-        public static implicit operator (T left, T right)(Interval<T> x)
-            => (x.Left, x.Right);
 
         [MethodImpl(Inline)]
         static K Classify(bool leftclosed, bool rightclosed)
@@ -275,6 +268,7 @@ namespace Z0
             where U : unmanaged, IComparable<U>, IEquatable<U>
                 => new Interval<U>(@as<T,U>(Left), @as<T,U>(Right), Kind);
 
+
         [MethodImpl(Inline)]
         public void Deconstruct(out T left, out T right)
         {
@@ -324,6 +318,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (RightClosed || Closed) ? Chars.RBracket : Chars.RParen;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Interval<T>((T left, T right) x)
+            => new Interval<T>(x.left, true, x.right, true);
+
+        [MethodImpl(Inline)]
+        public static implicit operator (T left, T right)(Interval<T> x)
+            => (x.Left, x.Right);
 
         /// <summary>
         /// The interval of nothingness

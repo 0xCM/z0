@@ -58,7 +58,7 @@ namespace Z0
 
         public static N25 n25 => default;
 
-        public static N26 N26 => default;
+        public static N26 n26 => default;
 
         public static N27 n27 => default;
 

@@ -13,7 +13,7 @@ namespace Z0
     /// <typeparam name="T">The element type</typeparam>
     [Free]
     public interface ISet<F,T> : IDeferredSource<T>, ICounted, INullity
-        where F : struct, ISet<F,T>
+        where F : ISet<F,T>
     {
         /// <summary>
         /// Determines whether a value is a member
@@ -37,67 +37,24 @@ namespace Z0
 
         /// <summary>
         /// Calculates the union between the current set and a specified set and
-        /// returns a new set that embodies this result
+        /// returns a set that embodies this result
         /// </summary>
         /// <param name="rhs">The set with which to union/param>
         F Union(F rhs);
 
         /// <summary>
         /// Calculates the intersection between the current set and a specified set and
-        /// returns a new set that embodies this result
+        /// returns a set that embodies this result
         /// </summary>
         /// <param name="rhs">The set with which to intersect</param>
         F Intersect(F rhs);
 
         /// <summary>
         /// Calculates the set difference, or symmetric difference, between the current
-        /// set and a specified set and returns a new set that embodies this result
+        /// set and a specified set and returns a set that embodies this result
         /// </summary>
         /// <param name="rhs">The other set</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Symmetric_difference</remarks>
         F Difference(F rhs, bool symmetric);
-
-
-        /// <summary>
-        /// Determines whether a value is a member
-        /// </summary>
-        /// <param name="candidate">The potential member</param>
-        bool Contains(in T candidate);
-
-        /// <summary>
-        /// Determines whether the current set is a subset of a specified set.
-        /// </summary>
-        /// <param name="rhs">The candidate superset</param>
-        /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
-        bool IsSubset(in F rhs, bool proper);
-
-        /// <summary>
-        /// Determines whether the current set is a superset of a specified set.
-        /// </summary>
-        /// <param name="rhs">The candidate subset</param>
-        /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
-        bool IsSuperset(in F rhs, bool proper);
-
-        /// <summary>
-        /// Calculates the union between the current set and a specified set and
-        /// returns a new set that embodies this result
-        /// </summary>
-        /// <param name="rhs">The set with which to union/param>
-        F Union(in F rhs);
-
-        /// <summary>
-        /// Calculates the intersection between the current set and a specified set and
-        /// returns a new set that embodies this result
-        /// </summary>
-        /// <param name="rhs">The set with which to intersect</param>
-        F Intersect(in F rhs);
-
-        /// <summary>
-        /// Calculates the set difference, or symmetric difference, between the current
-        /// set and a specified set and returns a new set that embodies this result
-        /// </summary>
-        /// <param name="rhs">The set that should be differenced</param>
-        /// <remarks>See https://en.wikipedia.org/wiki/Symmetric_difference</remarks>
-        F Difference(in F rhs, bool symmetric);
     }
 }

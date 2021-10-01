@@ -12,6 +12,7 @@ namespace Z0
 
     using static Root;
     using static core;
+    using static FormalModels;
 
     using Masks = BitMaskLiterals;
 
@@ -340,7 +341,6 @@ namespace Z0
             BitFormatChecks.create(Wf).Run(Rng.wyhash64());
         }
 
-
         void Run(N24 n)
         {
             CalcBuilder.create(Wf).Calc(w128);
@@ -350,6 +350,19 @@ namespace Z0
         {
             Fsm.example1();
             Fsm.example2();
+        }
+
+        void Run(N26 n)
+        {
+            void receive(uint i, uint j)
+            {
+                Write(string.Format("{0} -> {1}", i, j));
+            }
+            var seq = SeqSpecs.finite((0u,57u), i => i + 1);
+            Write(string.Format("{0}..{1}", seq.Min, seq.Max));
+            var count = seq.Compute(receive);
+            count += seq.Compute(receive);
+            Write(string.Format("Term Count:{0}", count));
         }
 
         void Run(string spec)
@@ -426,6 +439,9 @@ namespace Z0
                     break;
                     case 25:
                         Run(n25);
+                    break;
+                    case 26:
+                        Run(n26);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

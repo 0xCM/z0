@@ -2,33 +2,35 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct CSharpSourceBlock : ISourceCode<CSharpSourceBlock,TextLine>
+    public class Alphabet<A>
+        where A : unmanaged
     {
-        public Index<TextLine> Code {get;}
+        readonly HashSet<Symbol<A>> Data;
 
         [MethodImpl(Inline)]
-        public CSharpSourceBlock(Index<TextLine> lines)
+        public Alphabet(HashSet<Symbol<A>> src)
         {
-            Code  = lines;
+            Data = src;
         }
 
-        public ReadOnlySpan<TextLine> View
+        public IEnumerable<Symbol<A>> Members
         {
             [MethodImpl(Inline)]
-            get => Code.View;
+            get => Data;
         }
 
-        public Span<TextLine> Edit
+        public uint MemberCount
         {
             [MethodImpl(Inline)]
-            get => Code.Edit;
+            get => (uint)Data.Count;
         }
     }
 }

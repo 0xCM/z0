@@ -46,14 +46,6 @@ namespace Z0
 
         }
 
-        [MethodImpl(Inline)]
-        static List<V> list(V first)
-        {
-            var list = new List<V>();
-            list.Add(first);
-            return list;
-        }
-
         /// <summary>
         /// Retrieves the indices of a targets' source vertices
         /// </summary>

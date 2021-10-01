@@ -72,8 +72,6 @@ namespace Z0
         public struct v8<T> : IVector<T>
             where T : unmanaged
         {
-            public static ByteSize SZ => size<v8<T>>();
-
             v4<T> A;
 
             v4<T> B;

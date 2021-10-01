@@ -4,19 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    /// <summary>
-    /// Represents one (or more) logic gates, which is intended to represent
-    /// a physical component that receives one or more bits of input and emits a single bit of output;
-    /// i.e., boolean function reification
-    /// </summary>
-    public interface ILogicGate
+    partial class LegacyCircuits
     {
+        /// <summary>
+        /// Represents one (or more) logic gates, which is intended to represent
+        /// a physical component that receives one or more bits of input and emits a single bit of output;
+        /// i.e., boolean function reification
+        /// </summary>
+        public interface ILogicGate
+        {
 
+        }
     }
-
-    public interface ILogicGate<T> : ILogicGate
-    {
-
-    }
-
 }

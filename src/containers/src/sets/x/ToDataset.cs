@@ -10,15 +10,15 @@ namespace Z0
     partial class XCollective
     {
         [Op, Closures(Closure)]
-        public static DataSet<T> ToDataset<T>(this IEnumerable<T> src)
-            => new DataSet<T>(src);
+        public static MutableSet<T> ToDataset<T>(this IEnumerable<T> src)
+            => new MutableSet<T>(src);
 
         [Op, Closures(Closure)]
-        public static DataSet<T> ToDataset<T>(this T[] src)
-            => new DataSet<T>(src);
+        public static MutableSet<T> ToDataset<T>(this T[] src)
+            => new MutableSet<T>(src);
 
         [Op, Closures(Closure)]
-        public static DataSet<T> ToDataset<T>(this Index<T> src)
-            => new DataSet<T>(src);
+        public static MutableSet<T> ToDataset<T>(this Index<T> src)
+            => new MutableSet<T>(src);
     }
 }

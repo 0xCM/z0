@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct AsmSourceBlock : ISourceCode<AsmSourceBlock,TextLine>
+    public readonly struct AsmSourceBlock
     {
         public Index<TextLine> Code {get;}
 

@@ -72,6 +72,10 @@ namespace Z0
         public static implicit operator text7(ReadOnlySpan<char> src)
             => txt(N,src);
 
+        [MethodImpl(Inline)]
+        public static implicit operator text7(char src)
+            => txt(N,src);
+
         public static text7 Empty => default;
     }
 
@@ -101,6 +105,13 @@ namespace Z0
             var dst = bytes(storage);
             pack(src, length, dst);
             seek(dst,7) = length;
+            return new text7(storage);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static text7 txt(N7 n7, char src)
+        {
+            var storage = (ulong)src;
             return new text7(storage);
         }
 

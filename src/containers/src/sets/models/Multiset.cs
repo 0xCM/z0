@@ -47,7 +47,6 @@ namespace Z0
         public bool IsEmtpty
             => Count != 0;
 
-
         /// <summary>
         /// Selects the occurrence count for each item in the source
         /// </summary>

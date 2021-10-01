@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct MsilSourceBlock : ISourceCode<MsilSourceBlock,byte>
+    public readonly struct MsilSourceBlock
     {
         [MethodImpl(Inline), Op]
         public static MsilSourceBlock create(CliToken id, CliSig sig, BinaryCode encoded, MethodImplAttributes attributes = default)

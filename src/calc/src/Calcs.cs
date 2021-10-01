@@ -12,7 +12,6 @@ namespace Z0
         const NumericKind Closure = Integers;
     }
 
-
     public static partial class XTend
     {
 

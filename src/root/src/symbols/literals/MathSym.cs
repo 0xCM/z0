@@ -13,19 +13,19 @@ namespace Z0
     public enum MathSym : ushort
     {
         Dots = '⋯',
-        
+
         Infinity = '∞',
-        
+
         OTimes = '⊗',
-        
+
         Oplus = '⊕',
-        
+
         Vee = '∨',
 
         Wedge = '∧',
-        
-        EmptySet = '∅',        
-                
+
+        EmptySet = '∅',
+
         Times = '×',
 
         NEQ = '≠',
@@ -51,13 +51,13 @@ namespace Z0
         Sum = '∑',
 
         Product = '∏',
-        
+
         Coproduct = '∐',
 
         Intersect = '∩',
 
         Union = '∪',
-        
+
         IFF = '⟺',
 
         Member = '⋴',
@@ -70,12 +70,14 @@ namespace Z0
 
         Equivalence = '∼',
 
-        Almost = '≈',        
+        Almost = '≈',
 
-        Define = '≔', 
+        Define = '≔',
 
         CDot = '·',
-        
+
         Partial = '∂',
+
+        Plus = '+'
     }
 }

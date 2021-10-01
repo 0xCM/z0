@@ -8,10 +8,13 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct XOrGate : IBinaryGate
+    partial class LegacyCircuits
     {
-        [MethodImpl(Inline)]
-        public bit Invoke(bit x, bit y)
-            => (x ^ y);
+        public readonly struct XOrGate : IBinaryGate
+        {
+            [MethodImpl(Inline)]
+            public bit Invoke(bit x, bit y)
+                => (x ^ y);
+        }
     }
 }

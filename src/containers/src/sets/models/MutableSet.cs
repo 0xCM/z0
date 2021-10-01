@@ -14,20 +14,22 @@ namespace Z0
     /// <summary>
     /// Encloses a finite set of structural values
     /// </summary>
-    public readonly struct DataSet<T> : ISet<DataSet<T>,T>, IEquatable<DataSet<T>>
+    public class MutableSet<T> : ISet<MutableSet<T>,T>, IEquatable<MutableSet<T>>, ISet<T>
     {
-        internal readonly HashSet<T> Data;
+        readonly HashSet<T> Data;
 
-        [MethodImpl(Inline)]
-        public DataSet(IEnumerable<T> src)
+        public MutableSet()
+        {
+            Data = new();
+        }
+
+        public MutableSet(IEnumerable<T> src)
             => Data = hashset(src);
 
-        [MethodImpl(Inline)]
-        public DataSet(HashSet<T> src)
+        public MutableSet(HashSet<T> src)
             => Data = src;
 
-        [MethodImpl(Inline)]
-        public DataSet(T[] src)
+        public MutableSet(T[] src)
             => Data = hashset(src);
 
         public IEnumerable<T> Next()
@@ -46,51 +48,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool IsMember(object candidate)
-            => candidate is T ? Contains((T)candidate) :false;
-
-        public IEnumerable<T> Content
-            => Data;
-
-        /// <summary>
-        /// Determines whether the current set is a subset of a specified set.
-        /// </summary>
-        /// <param name="src">The candidate superset</param>
-        /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
-        [MethodImpl(Inline)]
-        public bool IsSubset(in DataSet<T> src, bool proper = true)
+        public bool IsSubset(MutableSet<T> src, bool proper)
             => proper ? Data.IsProperSubsetOf(src.Data) : Data.IsSubsetOf(src.Data);
 
         [MethodImpl(Inline)]
-        public bool IsSubset(DataSet<T> src, bool proper)
-            => proper ? Data.IsProperSubsetOf(src.Data) : Data.IsSubsetOf(src.Data);
-
-        /// <summary>
-        /// Determines whether the current set is a superset of a specified set.
-        /// </summary>
-        /// <param name="src">The candidate subset</param>
-        /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
-        [MethodImpl(Inline)]
-        public bool IsSuperset(in DataSet<T> src, bool proper)
-            => proper ? Data.IsProperSupersetOf(src.Data) : Data.IsSupersetOf(src.Data);
-
-        [MethodImpl(Inline)]
-        public bool IsSuperset(DataSet<T> src, bool proper)
+        public bool IsSuperset(MutableSet<T> src, bool proper)
              => proper ? Data.IsProperSupersetOf(src.Data) : Data.IsSupersetOf(src.Data);
 
-        /// <summary>
-        /// Calculates the union between the current set and a specified set and returns a new set that embodies this result
-        /// </summary>
-        /// <param name="src">The set with which to union/param>
         [MethodImpl(Inline)]
-        public DataSet<T> Union(in DataSet<T> src)
+        public MutableSet<T> Union(params T[] src)
         {
-            Data.UnionWith(src.Data);
+            Data.UnionWith(src);
             return this;
         }
 
         [MethodImpl(Inline)]
-        public DataSet<T> Union(DataSet<T> src)
+        public MutableSet<T> Union(MutableSet<T> src)
         {
             Data.UnionWith(src.Data);
             return this;
@@ -101,7 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The set to compare</param>
         [MethodImpl(Inline)]
-        public bool Intersects(in DataSet<T> rhs)
+        public bool Intersects(in MutableSet<T> rhs)
             => Data.Overlaps(rhs.Data);
 
         /// <summary>
@@ -110,14 +83,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The set with which to intersect</param>
         [MethodImpl(Inline)]
-        public DataSet<T> Intersect(in DataSet<T> src)
+        public MutableSet<T> Intersect(in MutableSet<T> src)
         {
             Data.IntersectWith(src.Data);
             return this;
         }
 
         [MethodImpl(Inline)]
-        public DataSet<T> Intersect(DataSet<T> src)
+        public MutableSet<T> Intersect(MutableSet<T> src)
         {
             Data.IntersectWith(src.Data);
             return this;
@@ -138,7 +111,7 @@ namespace Z0
         /// <param name="src">The set that should be differenced</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Symmetric_difference</remarks>
         [MethodImpl(Inline)]
-        public DataSet<T> Difference(DataSet<T> src, bool symmetric)
+        public MutableSet<T> Difference(MutableSet<T> src, bool symmetric)
         {
             if(symmetric)
                 Data.SymmetricExceptWith(src.Data);
@@ -149,7 +122,7 @@ namespace Z0
         }
 
          [MethodImpl(Inline)]
-         public DataSet<T> Difference(in DataSet<T> src, bool symmetric)
+         public MutableSet<T> Difference(in MutableSet<T> src, bool symmetric)
          {
             if(symmetric)
                 Data.SymmetricExceptWith(src.Data);
@@ -162,61 +135,131 @@ namespace Z0
         static IEqualityComparer<HashSet<T>> Comparer
             => HashSet<T>.CreateSetComparer();
 
+        int ICollection<T>.Count
+            => ((ICollection<T>)Data).Count;
+
+        public bool IsReadOnly
+            => false;
+
         [MethodImpl(Inline)]
-        public bool Equals(DataSet<T> src)
+        public bool Equals(MutableSet<T> src)
             => Comparer.Equals(Data, src.Data);
 
         public override bool Equals(object obj)
-            => obj is DataSet<T> x && Equals(x);
+            => obj is MutableSet<T> x && Equals(x);
 
         public override int GetHashCode()
             => Data.GetHashCode();
 
-        [MethodImpl(Inline)]
-        public static implicit operator DataSet<T>(HashSet<T> src)
-            => new DataSet<T>(src);
+        bool ISet<T>.Add(T item)
+            => ((ISet<T>)Data).Add(item);
+
+        void ISet<T>.ExceptWith(IEnumerable<T> other)
+            => ((ISet<T>)Data).ExceptWith(other);
+
+        void ISet<T>.IntersectWith(IEnumerable<T> other)
+            => ((ISet<T>)Data).IntersectWith(other);
+
+        bool ISet<T>.IsProperSubsetOf(IEnumerable<T> other)
+            => ((ISet<T>)Data).IsProperSubsetOf(other);
+
+        bool ISet<T>.IsProperSupersetOf(IEnumerable<T> other)
+            => ((ISet<T>)Data).IsProperSupersetOf(other);
+        bool ISet<T>.IsSubsetOf(IEnumerable<T> other)
+        {
+            return ((ISet<T>)Data).IsSubsetOf(other);
+        }
+
+        bool ISet<T>.IsSupersetOf(IEnumerable<T> other)
+        {
+            return ((ISet<T>)Data).IsSupersetOf(other);
+        }
+
+        bool ISet<T>.Overlaps(IEnumerable<T> other)
+        {
+            return ((ISet<T>)Data).Overlaps(other);
+        }
+
+        bool ISet<T>.SetEquals(IEnumerable<T> other)
+        {
+            return ((ISet<T>)Data).SetEquals(other);
+        }
+
+        void ISet<T>.SymmetricExceptWith(IEnumerable<T> other)
+        {
+            ((ISet<T>)Data).SymmetricExceptWith(other);
+        }
+
+        void ISet<T>.UnionWith(IEnumerable<T> other)
+        {
+            ((ISet<T>)Data).UnionWith(other);
+        }
+
+        void ICollection<T>.Add(T item)
+        {
+            ((ICollection<T>)Data).Add(item);
+        }
+
+        public void Clear()
+        {
+            ((ICollection<T>)Data).Clear();
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            ((ICollection<T>)Data).CopyTo(array, arrayIndex);
+        }
+
+        public bool Remove(T item)
+        {
+            return ((ICollection<T>)Data).Remove(item);
+        }
 
         [MethodImpl(Inline)]
-        public static DataSet<T> operator +(DataSet<T> a, DataSet<T> b)
+        public static implicit operator MutableSet<T>(HashSet<T> src)
+            => new MutableSet<T>(src);
+
+        [MethodImpl(Inline)]
+        public static MutableSet<T> operator +(MutableSet<T> a, MutableSet<T> b)
             => a.Union(b);
 
         [MethodImpl(Inline)]
-        public static DataSet<T> operator -(DataSet<T> a, DataSet<T> b)
+        public static MutableSet<T> operator -(MutableSet<T> a, MutableSet<T> b)
             => a.Difference(b,false);
 
         [MethodImpl(Inline)]
-        public static DataSet<T> operator *(DataSet<T> a, DataSet<T> b)
+        public static MutableSet<T> operator *(MutableSet<T> a, MutableSet<T> b)
             => a.Intersect(b);
 
         [MethodImpl(Inline)]
-        public static bool operator <(DataSet<T> a, DataSet<T> b)
+        public static bool operator <(MutableSet<T> a, MutableSet<T> b)
             => b.IsSuperset(a, true);
 
         [MethodImpl(Inline)]
-        public static bool operator >(DataSet<T> a, DataSet<T> b)
+        public static bool operator >(MutableSet<T> a, MutableSet<T> b)
             => a.IsSuperset(b, true);
 
         [MethodImpl(Inline)]
-        public static bool operator <=(DataSet<T> a, DataSet<T> b)
+        public static bool operator <=(MutableSet<T> a, MutableSet<T> b)
             => b.IsSuperset(a, false);
 
         [MethodImpl(Inline)]
-        public static bool operator >=(DataSet<T> a, DataSet<T> b)
+        public static bool operator >=(MutableSet<T> a, MutableSet<T> b)
             => a.IsSuperset(b, false);
 
-        public static bool operator <(T a, DataSet<T> b)
+        public static bool operator <(T a, MutableSet<T> b)
             => b.Contains(a);
 
         [MethodImpl(Inline)]
-        public static bool operator >(T a, DataSet<T> b)
+        public static bool operator >(T a, MutableSet<T> b)
             => b.Contains(a) && b.Count == 1;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(DataSet<T> a, DataSet<T> b)
+        public static bool operator ==(MutableSet<T> a, MutableSet<T> b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(DataSet<T> a, DataSet<T> b)
+        public static bool operator !=(MutableSet<T> a, MutableSet<T> b)
             => !a.Equals(b);
     }
 }

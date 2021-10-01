@@ -2,48 +2,46 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct BinarySourceBlock : ISourceCode<BinarySourceBlock,byte>
+    public readonly struct String<S>
+        where S : unmanaged
     {
-        public BinaryCode Code {get;}
-
-        public BinaryRenderKind Render {get;}
+        readonly Index<Symbol<S>> Data;
 
         [MethodImpl(Inline)]
-        public BinarySourceBlock(BinaryCode encoded, BinaryRenderKind render)
+        public String(Symbol<S>[] value)
         {
-            Code = encoded;
-            Render = render;
+            Data = value;
         }
 
-        public Span<byte> Edit
+        public int Length
         {
             [MethodImpl(Inline)]
-            get => Code.Edit;
+            get => Data.Length;
         }
 
-        public ReadOnlySpan<byte> View
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Code.View;
+            get => Data.Count;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Code.IsEmpty;
+            get => Data.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Code.IsNonEmpty;
+            get => Data.IsNonEmpty;
         }
     }
 }
