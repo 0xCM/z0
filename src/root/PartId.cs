@@ -37,8 +37,8 @@ public enum PartId : byte
     [Symbol("api")]
     Api = 9,
 
-    [Symbol("bitmasks")]
-    BitMasks = 10,
+    [Symbol("models")]
+    Models = 10,
 
     [Symbol("term")]
     Term = 11,

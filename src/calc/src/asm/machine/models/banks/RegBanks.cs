@@ -29,22 +29,9 @@ namespace Z0.Asm
         public static ZmmRegAlloc zmm(RegAlloc src)
             => new ZmmRegAlloc(src);
 
-        static long FileSeqKeys;
-
-        static long RegSeqKeys;
-
         [Op]
-        public static RegFile file(W64 gp, W512 zmm)
-        {
-            var a = new RegSeqSpec((uint)inc(ref RegSeqKeys), 16, 8);
-            var b = new RegSeqSpec((uint)inc(ref RegSeqKeys), 32, 64);
-            var c = new RegSeqSpec[2]{a,b};
-            return new RegFile((uint)inc(ref FileSeqKeys),c);
-        }
-
-        [Op]
-        public static RegBank allocate(W64 gp, W512 zmm)
-            => allocate(file(gp,zmm));
+        public static RegBank intel64()
+            => allocate(RegFile.intel64());
 
         /// <summary>
         /// Alocates a set of register representations over a contiguous sequence of native memory

@@ -17,7 +17,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public bit dot<T>(BitVector<T> x, BitVector<T> y)
+        public bit dotprod<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => bvdot<T>().Invoke(x,y);
 

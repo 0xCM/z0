@@ -21,7 +21,7 @@ namespace Z0
 
         public X86Emulator()
         {
-            Registers = RegBanks.allocate(w64,w512);
+            Registers = RegBanks.intel64();
         }
 
         protected override void Initialized()

@@ -11,7 +11,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
-            var machine = RegMachine.create();
+            var machine = RegMachine.intel64();
             var buffer = text.buffer();
             machine.State(buffer);
             Write(buffer.Emit());

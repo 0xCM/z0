@@ -87,9 +87,9 @@
     <Matrix>$(Src)matrix/z0.matrix.csproj</Matrix>
     <Machine>$(Src)machine/z0.machine.csproj</Machine>
     <Minidump>$(Src)minidump/z0.minidump.csproj</Minidump>
+    <Models>$(Src)models/z0.models.csproj</Models>
 
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
-
 
     <LlvmTools>$(Src)llvm.tools/z0.llvm.tools.csproj</LlvmTools>
     <LlvmModels>$(Src)llvm.models/z0.llvm.models.csproj</LlvmModels>

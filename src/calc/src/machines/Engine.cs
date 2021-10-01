@@ -27,7 +27,7 @@ namespace Z0.Asm
 
         public Engine()
         {
-            Registers = RegBanks.allocate(w64,w512);
+            Registers = RegBanks.intel64();
         }
 
         [CmdOp(".regs")]

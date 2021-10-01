@@ -12,7 +12,7 @@ namespace Z0.Models
     partial struct Graphs
     {
         public readonly struct Edge<V> : IEdge<V>, IEquatable<Edge<V>>
-            where V : IVertex, IEquatable<V>
+            where V : unmanaged, IVertex, IEquatable<V>
         {
             public V Source {get;}
 

@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Range<T> range<T>(T min, T max, T step)
-            where T : unmanaged
+            where T : unmanaged, IEquatable<T>, IComparable<T>
                 => new Range<T>(min, max, step);
     }
 }

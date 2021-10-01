@@ -16,10 +16,10 @@ namespace Z0
     partial struct CalcHosts
     {
         [Closures(Integers)]
-        public readonly struct Dot<T> : IFunc<T,T,bit>
+        public readonly struct DotProduct<T> : IFunc<T,T,bit>
             where T : unmanaged
         {
-            public static Dot<T> Op => default;
+            public static DotProduct<T> Op => default;
 
             public const string Name = "dot";
 
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [Closures(UnsignedInts), Dot]
-        public readonly struct BvDot<T> : IBvBinaryPred<T>
+        public readonly struct BvDotProduct<T> : IBvBinaryPred<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]

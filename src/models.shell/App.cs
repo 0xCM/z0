@@ -9,22 +9,22 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    sealed class AsmShell : WfApp<AsmShell>
+    sealed class App : WfApp<App>
     {
-        AsmCmdService AsmCmd;
 
         protected override void Initialized()
         {
-            AsmCmd = Wf.AsmCmd();
+
         }
 
         protected override void Disposing()
         {
-            AsmCmd.Dispose();
         }
 
         protected override void Run()
-            => AsmCmd.Run();
+        {
+
+        }
 
         public static void Main(params string[] args)
         {

@@ -15,13 +15,13 @@ namespace Z0
     partial struct Calcs
     {
         [MethodImpl(Inline), Factory(Dot), Closures(Closure)]
-        public static Dot<T> dot<T>()
+        public static DotProduct<T> dot<T>()
             where T : unmanaged
-                => sfunc<Dot<T>>();
+                => sfunc<DotProduct<T>>();
 
         [MethodImpl(Inline), Factory, Closures(UnsignedInts)]
-        public static BvDot<T> bvdot<T>()
+        public static BvDotProduct<T> bvdot<T>()
             where T : unmanaged
-                => sfunc<BvDot<T>>();
+                => sfunc<BvDotProduct<T>>();
     }
 }

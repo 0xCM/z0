@@ -8,7 +8,6 @@ namespace Z0.Vdsl
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial struct Intrinsics
     {

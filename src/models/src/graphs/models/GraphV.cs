@@ -43,7 +43,6 @@ namespace Z0.Models
             {
                 iter(_Edges, f);
             }
-
         }
     }
 }

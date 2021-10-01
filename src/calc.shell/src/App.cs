@@ -12,7 +12,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static FormalModels;
 
     using Masks = BitMaskLiterals;
 
