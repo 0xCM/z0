@@ -8,7 +8,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         /// <summary>
         /// Specifies that the occurence of an element is distinguished by membership in a specified set

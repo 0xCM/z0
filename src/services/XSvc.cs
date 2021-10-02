@@ -6,9 +6,30 @@ namespace Z0
 {
     using Svc = Z0;
 
+    static class SvcCache
+    {
+        static object locker = new object();
+
+        static ModelServices _ModelServices;
+
+        public static ModelServices Models(IWfRuntime wf)
+        {
+            lock(locker)
+            {
+                if(_ModelServices == null)
+                    _ModelServices = ModelServices.create(wf);
+            }
+            return _ModelServices;
+        }
+    }
+
     [ApiHost]
     public static class XSvc
     {
+        [Op]
+        public static ModelServices Models(this IWfRuntime wf)
+            => SvcCache.Models(wf);
+
         [Op]
         public static BitMaskServices ApiBitMasks(this IWfRuntime wf)
             => Svc.BitMaskServices.create(wf);

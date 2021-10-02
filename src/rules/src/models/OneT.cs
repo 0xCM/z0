@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         /// <summary>
         /// Just one, neither more nor less

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         /// <summary>
         /// Represents the magnitude of the distance between two values with respect to a contectxtual metric

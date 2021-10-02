@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bool lowercase(AsciChar src)
+        public static bool lowercase(AsciCharSym src)
             => contains(F.MinLowerLetter, F.MaxLowerLetter, (C)src);
 
         /// <summary>

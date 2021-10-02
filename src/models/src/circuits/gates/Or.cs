@@ -2,29 +2,26 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    using api = FormalModels.Gates;
+    using api = Circuits.Gates;
 
-    partial struct FormalModels
+    partial struct Circuits
     {
-        partial struct Circuits
+        public sealed class Or<T> : BinaryGate<Or<T>,T>
+            where T : unmanaged
         {
-            public sealed class Or<T> : BinaryGate<Or<T>,T>
-                where T : unmanaged
-            {
-                public override GateKind Kind
-                    => GateKind.Or;
+            public override GateKind Kind
+                => GateKind.Or;
 
-                [MethodImpl(Inline)]
-                public override T Flow(T a, T b)
-                    => api.or(a,b);
-            }
+            [MethodImpl(Inline)]
+            public override T Flow(T a, T b)
+                => api.or(a,b);
         }
     }
 }

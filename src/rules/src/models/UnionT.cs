@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public struct Union<T> : IRule<Union<T>,T>
         {

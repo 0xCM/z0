@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public readonly struct Substitutions<T> : IRule<Substitutions<T>,T>
         {

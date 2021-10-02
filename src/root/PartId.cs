@@ -114,7 +114,8 @@ public enum PartId : byte
     [Symbol("xml")]
     Xml = 35,
 
-    OpenSlot5 = 36,
+    [Symbol("models.shell")]
+    ModelShell = 36,
 
     [Symbol("calc")]
     Calc = 37,

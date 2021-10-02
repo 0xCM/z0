@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public static Switch<K,A> @switch<K,A>(Identifier name, K[] choices, Func<K,A> actor)
             => new Switch<K,A>(name, choices, actor);

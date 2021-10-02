@@ -14,7 +14,7 @@ namespace Z0
     public readonly partial struct AsciG
     {
         [MethodImpl(Inline)]
-        public static bool contains<T>(in T src, AsciChar match)
+        public static bool contains<T>(in T src, AsciCharSym match)
             where T : IAsciSeq
         {
             var code = (byte)match;
@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static int index<T>(in T src, AsciChar match)
+        public static int index<T>(in T src, AsciCharSym match)
             where T : IAsciSeq
         {
             var code = (byte)match;

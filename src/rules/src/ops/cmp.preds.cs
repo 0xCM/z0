@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [MethodImpl(Inline)]
         public static CmpEval<T> eval<T>(CmpPred<T> pred, bit eval)

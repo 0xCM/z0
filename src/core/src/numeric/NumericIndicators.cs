@@ -5,7 +5,7 @@
 namespace Z0
 {
     using A = CharText;
-    using C = AsciChar;
+    using C = AsciCharSym;
 
     using static LimitValues;
 

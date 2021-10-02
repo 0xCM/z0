@@ -22,7 +22,7 @@ namespace Z0
             => src == C.CR;
 
         /// <summary>
-        /// Tests whether a source character is a <see cref='AsciChar.CR'/>
+        /// Tests whether a source character is a <see cref='AsciCharSym.CR'/>
         /// </summary>
         /// <param name="src">The character to test</param>
         [MethodImpl(Inline), Op]

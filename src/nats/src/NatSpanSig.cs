@@ -19,10 +19,10 @@ namespace Z0
 
         public readonly ushort CellWidth;
 
-        public readonly AsciChar Indicator;
+        public readonly AsciCharSym Indicator;
 
         [MethodImpl(Inline)]
-        public NatSpanSig(uint length, ushort cellwidth, AsciChar indicator)
+        public NatSpanSig(uint length, ushort cellwidth, AsciCharSym indicator)
         {
             Length = length;
             CellWidth = cellwidth;

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Precedes<T> precedes<T>(T before, T after)

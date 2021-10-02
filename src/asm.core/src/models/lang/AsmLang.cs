@@ -24,11 +24,6 @@ namespace Z0.Asm
 
         readonly AsmSymbols S;
 
-        public AsmSymbols SymbolSet
-        {
-            [MethodImpl(Inline), Op]
-            get => S;
-        }
 
         readonly Index<char> Buffer;
 

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [MethodImpl(Inline), Op]
         public static CountRule count(Identifier name, Count value)

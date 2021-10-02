@@ -8,7 +8,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Rules;
+    using static RuleModels;
 
     [ApiComplete]
     struct Msg

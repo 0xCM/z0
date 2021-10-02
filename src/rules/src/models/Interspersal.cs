@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         /// <summary>
         /// Represents the consequence of <see cref='Intersperse{T}'/> rule application

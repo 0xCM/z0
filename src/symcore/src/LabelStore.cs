@@ -2,24 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Models
+namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct Label
+    public readonly struct LabelStore
     {
-        public readonly ulong Value;
+        public MemoryAddress BaseAddress {get;}
+
+        public ByteSize Size {get;}
 
         [MethodImpl(Inline)]
-        public Label(ulong value)
+        public LabelStore(MemoryAddress address, ByteSize size)
         {
-            Value = value;
+            BaseAddress = address;
+            Size = size;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Label(ulong value)
-            => new Label(value);
     }
 }

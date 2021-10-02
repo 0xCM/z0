@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Rules;
+    using static RuleModels;
 
     public readonly struct PrimalEvaluators
     {

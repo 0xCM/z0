@@ -13,10 +13,10 @@ namespace Z0
             => BitRender.gformat(n, BitFormat.limited(m,m));
 
         protected string TypeName(byte m, byte n)
-            => text.concat(AsciLetterUp.B, TypeDigits(m,n));
+            => text.concat(AsciLetterUpSym.B, TypeDigits(m,n));
 
         protected string ValueName(byte m, byte n)
-            => text.concat(AsciLetterLo.b, TypeDigits(m,n));
+            => text.concat(AsciLetterLoSym.b, TypeDigits(m,n));
 
         public string DeclareLiteral(string name, string value)
             => $"public const string {name} = {text.enquote(value)};";
@@ -73,7 +73,7 @@ namespace Z0
         }
 
         protected string KindValue(byte m, byte n)
-            => text.concat(KindName(m), Chars.Dot, AsciLetterLo.b, TypeDigits(m,n));
+            => text.concat(KindName(m), Chars.Dot, AsciLetterLoSym.b, TypeDigits(m,n));
 
         protected string DeclareKindProperty(byte m, byte n)
             => text.concat($"public {KindName(m)} => {KindValue(m,n)};");

@@ -2,15 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
+    using K = Circuits.GateKind;
 
-    using K = FormalModels.Circuits.GateKind;
-
-    partial struct FormalModels
+    partial struct Circuits
     {
-        partial struct Circuits
-        {
             public class Printer
             {
                 [Op]
@@ -62,5 +59,5 @@ namespace Z0
                 }
             }
         }
-    }
+
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public readonly struct Antecedant<A> : IRule<Antecedant<A>,A>, IEquatable<Antecedant<A>>
             where A : IEquatable<A>
@@ -26,7 +26,7 @@ namespace Z0
             }
 
             public bool Equals(Antecedant<A> src)
-                => Rules.match(this,src);
+                => RuleModels.match(this,src);
         }
     }
 }

@@ -6,8 +6,6 @@ namespace Z0
 {
     public class QuintetGen : BitSetGen
     {
-        public static BitSetGen Service => new QuintetGen();
-
         public override byte Digits => 5;
 
         public override byte MaxValue => 31;

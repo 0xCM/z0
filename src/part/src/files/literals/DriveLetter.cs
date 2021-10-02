@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using FF = AsciLetterUp;
-    using ff = AsciLetterLo;
+    using FF = AsciLetterUpSym;
+    using ff = AsciLetterLoSym;
 
     /// <summary>
     /// Defines symbols for file system drive letters

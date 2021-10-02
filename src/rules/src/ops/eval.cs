@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool eval<T>(Bounded<T> rule, T src)

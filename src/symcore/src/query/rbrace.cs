@@ -30,11 +30,11 @@ namespace Z0
             => src == (char)C.RBrace;
 
         /// <summary>
-        /// Determines whether an <see cref='AsciChar'/> symbol represents the <see cref='Chars.RBrace'/> character
+        /// Determines whether an <see cref='AsciCharSym'/> symbol represents the <see cref='Chars.RBrace'/> character
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit rbrace(AsciChar src)
+        public static bit rbrace(AsciCharSym src)
             => rbrace((char)src);
     }
 }

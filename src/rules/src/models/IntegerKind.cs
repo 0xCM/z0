@@ -6,7 +6,7 @@ namespace Z0
 {
     using W = DataWidth;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [System.Flags]
         public enum IntegerKind : ushort

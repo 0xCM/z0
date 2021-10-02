@@ -14,7 +14,6 @@ namespace Z0
 
     partial struct SymbolicQuery
     {
-
         /// <summary>
         /// Counts the number of characters in a specified source that match one of the characters in a specified sequence
         /// </summary>

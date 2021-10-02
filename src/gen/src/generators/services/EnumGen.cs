@@ -9,9 +9,8 @@ namespace Z0
 
     public class EnumGen : CodeGenerator
     {
-        public Outcome Generate(uint offset, EnumSpec spec, ITextBuffer dst)
+        public Outcome Generate(uint offset, SymSet spec, ITextBuffer dst)
         {
-            var kw = NumericKinds.kind(spec.DataType).Keyword();
             var counter = 0ul;
             var indent = offset;
             var names = spec.Names.View;
@@ -34,15 +33,13 @@ namespace Z0
             if(spec.Flags)
                 dst.IndentLine(indent,"[Flags]");
 
-            if(spec.SymbolSource)
-            {
-                if(spec.Group.IsNonEmpty)
-                    dst.IndentLineFormat(indent,"[SymSource(\"{0}\")]", spec.Group);
-                else
-                    dst.IndentLine(indent,"[SymSource]");
-            }
+            if(spec.SymbolKind.IsNonEmpty)
+                dst.IndentLineFormat(indent,"[SymSource(\"{0}\")]", spec.SymbolKind);
+            else
+                dst.IndentLine(indent,"[SymSource]");
 
-            dst.IndentLineFormat(indent, "public enum {0} : {1}", spec.Name, kw);
+            var datatype = NumericKinds.kind(spec.DataType).Keyword();
+            dst.IndentLineFormat(indent, "public enum {0} : {1}", spec.Name, datatype);
             dst.IndentLine(indent,"{");
             indent += 4;
 

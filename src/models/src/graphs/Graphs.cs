@@ -20,10 +20,5 @@ namespace Z0.Models
         public static Graph<V> graph<V>()
             where V : unmanaged, IVertex, IEquatable<V>
                 => new Graph<V>();
-
-        public static Graph<V,L> graph<V,L>()
-            where V : unmanaged, IVertex, IEquatable<V>
-            where L : unmanaged, IEquatable<L>
-                => new Graph<V,L>();
     }
 }

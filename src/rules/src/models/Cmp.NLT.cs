@@ -8,7 +8,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public readonly struct NLT<T> : ICmpPred<NLT<T>,T>
         {

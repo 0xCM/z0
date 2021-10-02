@@ -8,7 +8,7 @@ namespace Z0
     {
         object Class {get;}
 
-        Label Name => Class?.ToString();
+        Identifier Name => Class?.ToString();
 
         string ITextual.Format()
             => Class?.ToString() ?? string.Empty;

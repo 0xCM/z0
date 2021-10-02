@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -14,17 +14,14 @@ namespace Z0
         /// <summary>
         /// Defines a compile-time literal value
         /// </summary>
-        public readonly struct Constant<T> : IConstant<T>
+        public readonly struct Constant<T>
         {
             public T Value {get;}
 
-            public ConstantKind Kind {get;}
-
             [MethodImpl(Inline)]
-            public Constant(T value, ConstantKind kind)
+            public Constant(T value)
             {
                 Value = value;
-                Kind = kind;
             }
 
             public string Format()
@@ -32,6 +29,10 @@ namespace Z0
 
             public override string ToString()
                 => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Constant<T>(T src)
+                => new Constant<T>(src);
         }
     }
 }

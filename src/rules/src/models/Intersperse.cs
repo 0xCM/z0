@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         /// <summary>
         /// Specifies that the terms of an input sequence are interspersed by a distinguished element

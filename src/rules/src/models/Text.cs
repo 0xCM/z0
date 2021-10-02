@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [StructLayout(LayoutKind.Sequential)]
         public readonly struct Text : IDataType<Text>

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Rules;
+    using static RuleModels;
 
     /// <summary>
     /// Characterizes a constant value

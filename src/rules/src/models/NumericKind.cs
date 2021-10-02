@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using I = Rules.IntegerKind;
-    using F = Rules.FloatKind;
+    using I = RuleModels.IntegerKind;
+    using F = RuleModels.FloatKind;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [System.Flags]
         public enum NumericKind : ushort

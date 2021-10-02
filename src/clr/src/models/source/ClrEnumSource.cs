@@ -8,20 +8,16 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    public sealed class ClrEnumSouce : SourceText<ClrEnumSouce>
     {
-        public readonly struct Constant
+        public ClrEnumSouce(TextBlock src)
+            : base(src)
         {
-            public dynamic Value {get;}
 
-            public ConstantKind Kind {get;}
-
-            [MethodImpl(Inline)]
-            public Constant(dynamic value, ConstantKind kind)
-            {
-                Value = value;
-                Kind = kind;
-            }
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrEnumSouce(string src)
+            => new ClrEnumSouce(src);
     }
 }

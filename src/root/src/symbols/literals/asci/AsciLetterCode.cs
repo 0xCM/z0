@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using LSym = AsciLetter;
+    using LSym = AsciLetterSym;
 
     public enum AsciLetterCode : byte
     {

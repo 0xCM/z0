@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Rules;
+    using static RuleModels;
 
     public interface IRangeLoop : IScopedLoop
     {
-        Rules.Range Range {get;}
+        RuleModels.Range Range {get;}
 
         RangeIterator Iterator {get;}
     }

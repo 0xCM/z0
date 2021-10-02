@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [MethodImpl(Inline), Op]
         public static Var<T> var<T>(uint id, T value)

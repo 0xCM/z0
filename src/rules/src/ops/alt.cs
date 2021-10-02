@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Alt<T> alt<T>(T a, T b)

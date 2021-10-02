@@ -8,7 +8,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         /// <summary>
         /// Represents a bijective correspondence between two sequences of homogenous type

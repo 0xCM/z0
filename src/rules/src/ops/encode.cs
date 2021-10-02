@@ -10,7 +10,7 @@ namespace Z0
     using static core;
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ByteSize encode<T>(in CmpPred<T> src, Span<byte> dst)

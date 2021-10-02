@@ -15,7 +15,7 @@ namespace Z0
         [Op]
         public static BitSpan32 parse(string src)
         {
-            var data = src.RemoveAny(Chars.LBracket, Chars.RBracket, Chars.Space, Chars.Underscore, (char)AsciLetter.b);
+            var data = src.RemoveAny(Chars.LBracket, Chars.RBracket, Chars.Space, Chars.Underscore, (char)AsciLetterSym.b);
             var len = data.Length;
             var lastix = len - 1;
             Span<Bit32> bits = new Bit32[len];

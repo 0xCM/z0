@@ -2,32 +2,29 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
-    partial struct FormalModels
+    partial struct Circuits
     {
-        partial struct Circuits
+        public enum GateKind : byte
         {
-            public enum GateKind : byte
-            {
-                None,
+            None,
 
-                And = 0b0001,
+            And = 0b0001,
 
-                Xor = 0b0110,
+            Xor = 0b0110,
 
-                Or = 0b0111,
+            Or = 0b0111,
 
-                Not = 0b1010,
+            Not = 0b1010,
 
-                Xnor = 0b1001,
+            Xnor = 0b1001,
 
-                Nor = 0b1000,
+            Nor = 0b1000,
 
-                Nand = 0b1110,
+            Nand = 0b1110,
 
-                Mux = 0b11_0101,
-            }
+            Mux = 0b11_0101,
         }
     }
 }

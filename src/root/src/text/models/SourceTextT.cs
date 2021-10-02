@@ -4,16 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial struct Rules
+    public abstract class SourceText<T> : ISourceText
+        where T : SourceText<T>
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Label<T> label<T>(T kind, string content)
-            where T : unmanaged
-                => new Label<T>(kind, content);
+        public TextBlock Content {get;}
+
+        [MethodImpl(Inline)]
+        protected SourceText(TextBlock src)
+        {
+            Content = src;
+        }
     }
 }

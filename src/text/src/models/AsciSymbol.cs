@@ -125,12 +125,12 @@ namespace Z0
             => (char)src.Code;
 
         [MethodImpl(Inline)]
-        public static implicit operator C(AsciChar src)
+        public static implicit operator C(AsciCharSym src)
             => new AsciSymbol((AsciCode)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsciChar(C src)
-            => (AsciChar)src.Code;
+        public static implicit operator AsciCharSym(C src)
+            => (AsciCharSym)src.Code;
 
         [MethodImpl(Inline)]
         public static implicit operator C(byte src)

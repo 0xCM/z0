@@ -33,7 +33,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         [Op]
         public static ClrEnumKind @base(Type et)
-            => @base(et.NumericKind());
+            => @base(et.GetEnumUnderlyingType().NumericKind());
 
         [Op]
         public static ClrEnumKind @base(NumericKind src)

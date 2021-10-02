@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection.Metadata.Ecma335;
 
     using static Root;
-    using static Rules;
+    using static RuleModels;
     using static core;
 
     [ApiHost]
@@ -303,7 +303,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bool parse(string src, Bounded<int> bounds, out int dst, out Outcome outcome)
-            => Rules.parse(src,bounds, out dst, out outcome);
+            => RuleModels.parse(src,bounds, out dst, out outcome);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out BinaryCode dst)

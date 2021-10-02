@@ -9,10 +9,10 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsciChar;
+    using static AsciCharSym;
 
     using T = AsmOpCodeTokens.RexToken;
-    using C = AsciChar;
+    using C = AsciCharSym;
 
     partial struct AsmOpCodes
     {

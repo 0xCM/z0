@@ -9,16 +9,15 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Label<K> : ILabel<K>
+    public readonly struct Label<K>
         where K : unmanaged
     {
         public K Kind {get;}
 
-        public string Content {get;}
-
+        public Label Content {get;}
 
         [MethodImpl(Inline)]
-        public Label(K kind, string content)
+        public Label(K kind, Label content)
         {
             Kind = kind;
             Content = content;
@@ -29,9 +28,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(Label<K> src)
-            => src.Content;
     }
 }

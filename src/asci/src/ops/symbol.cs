@@ -16,11 +16,11 @@ namespace Z0
             => src;
 
         [MethodImpl(Inline), Op]
-        public static AsciSymbol symbol(AsciLetterLo src)
+        public static AsciSymbol symbol(AsciLetterLoSym src)
             => (AsciCode)src;
 
         [MethodImpl(Inline), Op]
-        public static AsciSymbol symbol(AsciLetterUp src)
+        public static AsciSymbol symbol(AsciLetterUpSym src)
             => (AsciCode)src;
 
         [MethodImpl(Inline), Op]

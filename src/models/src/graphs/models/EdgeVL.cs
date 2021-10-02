@@ -13,7 +13,7 @@ namespace Z0.Models
     {
         public interface IEdge
         {
-
+            Label Label {get;}
         }
 
         public interface IEdge<V> : IEdge
@@ -24,25 +24,17 @@ namespace Z0.Models
             V Target {get;}
         }
 
-        public interface IEdge<V,L> : IEdge<V>
-            where L : unmanaged, IEquatable<L>
-            where V : IEquatable<V>
-        {
-            Label<L> Label {get;}
-        }
-
-        public readonly struct Edge<V,L> : IEdge<V,L>, IEquatable<Edge<V,L>>
+        public readonly struct Edge<V,L> : IEdge<V>, IEquatable<Edge<V,L>>
             where V : IVertex, IEquatable<V>
-            where L : unmanaged, IEquatable<L>
         {
-            public Label<L> Label {get;}
+            public Label Label {get;}
 
             public V Source {get;}
 
             public V Target {get;}
 
             [MethodImpl(Inline)]
-            public Edge(Label<L> label, V src, V dst)
+            public Edge(Label label, V src, V dst)
             {
                 Label = label;
                 Source = src;

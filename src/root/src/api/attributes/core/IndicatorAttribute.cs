@@ -17,7 +17,7 @@ namespace Z0
 
         public string Indicator {get;}
 
-        public IndicatorAttribute(AsciChar c)
+        public IndicatorAttribute(AsciCharSym c)
         {
             Indicator = $"{c}";
             Min = c;

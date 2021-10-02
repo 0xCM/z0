@@ -17,7 +17,7 @@ namespace Z0.Models
         {
             MutableSet<V> _Vertices;
 
-            MutableSet<Edge<V,L>> _Edges;
+            MutableSet<Edge<V>> _Edges;
 
             public Graph()
             {
@@ -25,10 +25,10 @@ namespace Z0.Models
                 _Edges = new();
             }
 
-            public void Connect(Label<L> label, V src, V dst)
+            public void Connect(Label label, V src, V dst)
             {
                 _Vertices.Union(src,dst);
-                _Edges.Union(new Edge<V,L>(label,src,dst));
+                _Edges.Union(new Edge<V>(label,src,dst));
             }
         }
     }

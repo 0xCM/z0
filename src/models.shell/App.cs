@@ -2,19 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
-    using Z0.Asm;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     sealed class App : WfApp<App>
     {
+        Controller controller;
+
+        string[] Args;
 
         protected override void Initialized()
         {
-
+            controller = Controller.create(Wf);
         }
 
         protected override void Disposing()
@@ -23,13 +24,14 @@ namespace Z0
 
         protected override void Run()
         {
-
+            controller.Control(Args);
         }
 
         public static void Main(params string[] args)
         {
             using var wf = WfAppLoader.load();
             using var shell = create(wf);
+            shell.Args = args;
             shell.Run();
         }
     }

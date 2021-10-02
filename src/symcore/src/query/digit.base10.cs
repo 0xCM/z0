@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="base">The base selector</param>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit digit(Base10 @base, AsciChar src)
+        public static bit digit(Base10 @base, AsciCharSym src)
             => contains(C.d0, C.d9, (C)src);
 
         /// <summary>

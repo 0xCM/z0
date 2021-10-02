@@ -31,7 +31,7 @@ namespace Z0
             => space(c) || tab(c) || cr(c) || nl(c) || vtab(c);
 
         [MethodImpl(Inline), Op]
-        public static bit whitespace(AsciChar c)
+        public static bit whitespace(AsciCharSym c)
             => whitespace((char)c);
 
         /// <summary>

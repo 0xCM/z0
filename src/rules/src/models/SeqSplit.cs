@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         /// <summary>
         /// Specifies that a <typeparamref name='T'/> sequence is partitioned by a specific <typeparamref name='T'/> element

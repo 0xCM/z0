@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SeqReplace<T> seqreplace<T>(T[] match, T[] replace)

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static Rules;
+    using static RuleModels;
 
     public readonly struct FencedNumber<T>
         where T : unmanaged

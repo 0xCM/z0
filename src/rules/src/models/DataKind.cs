@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Pow2x16;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [System.Flags]
         public enum DataKind : ushort

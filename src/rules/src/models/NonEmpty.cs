@@ -5,7 +5,7 @@
 namespace Z0
 {
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public readonly struct NonEmpty<T> : IRule<NonEmpty<T>,T>
         {

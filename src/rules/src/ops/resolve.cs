@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Rules
+    partial struct RuleModels
     {
         [Op]
         public static string resolve(VarContextKind vck, ScriptVar var)

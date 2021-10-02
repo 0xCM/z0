@@ -147,7 +147,7 @@ namespace Z0
             => string.Concat(IDI.Nat, src.Length.ToString(), IDI.SegSep, src.CellWidth.ToString(), src.Indicator);
 
         [MethodImpl(Inline), Op]
-        public static NatSpanSig sig(uint length, ushort cellwidth, AsciChar indicator)
+        public static NatSpanSig sig(uint length, ushort cellwidth, AsciCharSym indicator)
             => new NatSpanSig(length, cellwidth, indicator);
 
         [Op]
@@ -161,7 +161,7 @@ namespace Z0
                 var part2 = parts[1];
                 var n = z32;
                 var w = z16;
-                var indicator = AsciChar.Null;
+                var indicator = AsciCharSym.Null;
                 if(part1[0] == IDI.Nat)
                 {
                     var number =  part1.TakeAfter(IDI.Nat);
@@ -174,7 +174,7 @@ namespace Z0
                             digits += c;
                         else
                         {
-                            indicator = (AsciChar)c;
+                            indicator = (AsciCharSym)c;
                             break;
                         }
                     }
@@ -183,7 +183,7 @@ namespace Z0
                         ushort.TryParse(digits, out w);
                 }
 
-                if(n != 0 && w != 0 && indicator != AsciChar.Null)
+                if(n != 0 && w != 0 && indicator != AsciCharSym.Null)
                     return ParseResult.parsed(src, sig(n, w, indicator));
                 else
                     return fail;

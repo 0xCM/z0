@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using NK = Rules.NumericKind;
+    using NK = RuleModels.NumericKind;
     using LK = LiteralKind;
-    using DK = Rules.DataKind;
+    using DK = RuleModels.DataKind;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [System.Flags]
         public enum ConstantKind : ushort

@@ -22,7 +22,7 @@ namespace Z0
                 => discover(typeof(T));
 
         public static string name(FieldInfo def)
-            => def.Tag<LabelAttribute>().MapValueOrDefault(a => a.Label, def.Name);
+            => def.Name;
 
         /// <summary>
         /// Discerns a <see cref='RecordFields'/> for a specified record type

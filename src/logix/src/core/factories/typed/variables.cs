@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VariableExpr<T> variable<T>(AsciLetterLo name, IExpr<T> value)
+        public static VariableExpr<T> variable<T>(AsciLetterLoSym name, IExpr<T> value)
             where T : unmanaged
                 => new VariableExpr<T>(name.ToString(), value);
 
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static VariableExpr<T> variable<T>(AsciLetterLo name, T value = default)
+        public static VariableExpr<T> variable<T>(AsciLetterLoSym name, T value = default)
             where T : unmanaged
                 => new VariableExpr<T>(name.ToString(), literal(value));
 

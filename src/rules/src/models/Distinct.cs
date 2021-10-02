@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public readonly struct Distinct : IRule<Distinct>
         {

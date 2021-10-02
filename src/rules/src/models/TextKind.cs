@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using C = Rules.CharKind;
-    using S = Rules.StringKind;
+    using C = RuleModels.CharKind;
+    using S = RuleModels.StringKind;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [System.Flags]
         public enum TextKind : ushort

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Rules;
+    using static RuleModels;
 
     public interface IScopedOp : IScope
     {

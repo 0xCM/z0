@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
 
+
     public readonly struct SymVal : IEquatable<SymVal>, ISymVal<ulong>
     {
         public ulong Value {get;}

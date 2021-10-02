@@ -5,7 +5,7 @@
 namespace Z0
 {
     using static core;
-    partial struct Rules
+    partial struct RuleModels
     {
         [Op, Closures(Closure)]
         public static string format<T>(in CmpPred<T> src)

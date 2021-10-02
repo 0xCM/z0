@@ -8,7 +8,7 @@ namespace Z0
     /// Defines symbols corresponding to the letters A,..Z
     /// </summary>
     [SymSource]
-    public enum AsciLetterUp : ushort
+    public enum AsciLetterUpSym : ushort
     {
         /// <summary>
         /// The 'A' symbol

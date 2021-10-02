@@ -2,12 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-[assembly: PartId(PartId.AsmShell)]
+[assembly: PartId(PartId.ModelShell)]
 namespace Z0.Parts
 {
     using System;
 
-    public sealed class AsmShell : Part<AsmShell>
+    public sealed class ModelShell : Part<ModelShell>
     {
 
     }

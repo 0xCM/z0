@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Rules;
+    using static RuleModels;
 
     public interface ICall
     {
@@ -13,7 +13,7 @@ namespace Z0
         Index<OperandValue> Operands {get;}
     }
 
-    partial struct Rules
+    partial struct RuleModels
     {
 
     }

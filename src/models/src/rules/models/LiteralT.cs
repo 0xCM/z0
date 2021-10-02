@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -12,18 +12,18 @@ namespace Z0
     partial struct Rules
     {
         /// <summary>
-        /// Defines a literal value which, by definition, is a named constant
+        /// Defines a literal value which, by definition, is a labeled constant
         /// </summary>
         public readonly struct Literal<T>
         {
-            public string Name {get;}
+            public Label Name {get;}
 
             public Constant<T> Value {get;}
 
             [MethodImpl(Inline)]
-            public Literal(string id, Constant<T> value)
+            public Literal(Label name, Constant<T> value)
             {
-                Name = id;
+                Name = name;
                 Value = value;
             }
         }

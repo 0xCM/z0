@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public readonly struct EQ<T> : ICmpPred<EQ<T>,T>
         {

@@ -12,12 +12,12 @@ namespace Z0
     public static partial class XAsci
     {
         [MethodImpl(Inline)]
-        public static int FirstIndexOf<T>(this T src, AsciChar match)
+        public static int FirstIndexOf<T>(this T src, AsciCharSym match)
             where T : IAsciSeq
                 => AsciG.index(src, match);
 
         [MethodImpl(Inline)]
-        public static bool Contains<T>(this T src, AsciChar match)
+        public static bool Contains<T>(this T src, AsciCharSym match)
             where T : IAsciSeq
                 => AsciG.contains(src, match);
     }

@@ -14,13 +14,24 @@ namespace Z0.Models
         public readonly struct Edge<V> : IEdge<V>, IEquatable<Edge<V>>
             where V : unmanaged, IVertex, IEquatable<V>
         {
+            public Label Label {get;}
+
             public V Source {get;}
 
             public V Target {get;}
 
             [MethodImpl(Inline)]
+            public Edge(Label label, V src, V dst)
+            {
+                Label = label;
+                Source = src;
+                Target = dst;
+            }
+
+            [MethodImpl(Inline)]
             public Edge(V src, V dst)
             {
+                Label = default;
                 Source = src;
                 Target = dst;
             }

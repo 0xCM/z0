@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public readonly struct Proposition<A,C> : IRule<Proposition<A,C>,A,C>, IEquatable<Proposition<A,C>>
             where A : IEquatable<A>
@@ -30,7 +30,7 @@ namespace Z0
             }
 
             public bool Equals(Proposition<A,C> src)
-                => Rules.match(this, src);
+                => RuleModels.match(this, src);
         }
     }
 }

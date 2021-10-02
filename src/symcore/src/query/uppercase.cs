@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
-        public static bit uppercase(AsciChar src)
+        public static bit uppercase(AsciCharSym src)
             => contains(F.MinUpperLetter, F.MaxUpperLetter, (C)src);
 
         /// <summary>

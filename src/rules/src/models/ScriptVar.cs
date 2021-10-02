@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using api = Rules;
+    using api = RuleModels;
 
     /// <summary>
     /// Defines a script variable

@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface IValue
     {
-        Rules.DataType Type {get;}
+        RuleModels.DataType Type {get;}
 
         dynamic Content {get;}
     }

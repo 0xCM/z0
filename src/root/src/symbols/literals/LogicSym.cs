@@ -50,11 +50,11 @@ namespace Z0
         [Symbol(")", "end precedence group")]
         Right = ')',
 
-        [Symbol("⏐", "nand")]
-        Nand = '⏐',
+        [Symbol("↑", "nand")]
+        Nand = '↑',
 
-        [Symbol("⏤", "nor")]
-        Nor = '⏤',
+        [Symbol("↓", "nor")]
+        Nor = '↓',
 
         [Symbol("⊙", "xnor")]
         Xnor = '⊙'

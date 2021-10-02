@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Rules;
+    using static RuleModels;
 
     using Z0.Asm;
 

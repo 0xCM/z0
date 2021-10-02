@@ -24,6 +24,10 @@ namespace Z0
             => new Duration(ticks);
 
         [MethodImpl(Inline)]
+        public static Duration init(ulong ticks)
+            => new Duration((long)ticks);
+
+        [MethodImpl(Inline)]
         public static Duration init(TimeSpan ts)
             => new Duration(ts.Ticks);
 
@@ -94,6 +98,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Duration(long ticks)
+            => init(ticks);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Duration(ulong ticks)
             => init(ticks);
 
         [MethodImpl(Inline)]

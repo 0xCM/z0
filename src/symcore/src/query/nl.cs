@@ -14,7 +14,7 @@ namespace Z0
     partial struct SymbolicQuery
     {
         /// <summary>
-        /// Tests whether a character code represents <see cref='AsciChar.NL'/>
+        /// Tests whether a character code represents <see cref='AsciCharSym.NL'/>
         /// </summary>
         /// <param name="src">The character to test</param>
         [MethodImpl(Inline), Op]
@@ -22,7 +22,7 @@ namespace Z0
             => (byte)C.NL == src;
 
         /// <summary>
-        /// Tests whether a character code represents <see cref='AsciChar.NL'/>
+        /// Tests whether a character code represents <see cref='AsciCharSym.NL'/>
         /// </summary>
         /// <param name="src">The character to test</param>
         [MethodImpl(Inline), Op]
@@ -30,7 +30,7 @@ namespace Z0
             => C.NL == src;
 
         /// <summary>
-        /// Tests whether a source character is a <see cref='AsciChar.NL'/>
+        /// Tests whether a source character is a <see cref='AsciCharSym.NL'/>
         /// </summary>
         /// <param name="src">The character to test</param>
         [MethodImpl(Inline), Op]

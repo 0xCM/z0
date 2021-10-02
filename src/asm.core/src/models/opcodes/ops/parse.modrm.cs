@@ -9,9 +9,9 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static AsciChar;
+    using static AsciCharSym;
 
-    using C = AsciChar;
+    using C = AsciCharSym;
     using T = AsmOpCodeTokens.ModRmToken;
 
     partial struct AsmOpCodes

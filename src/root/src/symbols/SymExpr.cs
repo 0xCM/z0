@@ -9,6 +9,9 @@ namespace Z0
 
     using static Root;
 
+    /// <summary>
+    /// Defines the literal content of a symbol
+    /// </summary>
     public readonly struct SymExpr : ITextual
     {
         readonly string Content;

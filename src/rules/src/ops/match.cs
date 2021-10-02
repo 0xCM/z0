@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [Op, Closures(Closure)]
         public static bit match<A>(Antecedant<A> src, Antecedant<A> dst)

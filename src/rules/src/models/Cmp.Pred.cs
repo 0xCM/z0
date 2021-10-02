@@ -8,7 +8,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public readonly struct CmpPred<T> : ICmpPred<CmpPred<T>,T>
         {

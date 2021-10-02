@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [MethodImpl(Inline)]
         public static Proposition<A,C> proposition<A,C>(TermId id,Antecedant<A> @if, Consequent<C> then)

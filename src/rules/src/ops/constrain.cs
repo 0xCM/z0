@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [MethodImpl(Inline)]
         public static Constraint<S,R> constrain<S,R>(S subject, R rule)

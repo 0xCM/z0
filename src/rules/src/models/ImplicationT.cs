@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         public readonly struct Implication<A,C> : IRule<Implication<A,C>,A,C>
             where A : IEquatable<A>

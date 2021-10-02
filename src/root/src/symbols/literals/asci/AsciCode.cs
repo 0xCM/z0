@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using AC = AsciChar;
+    using AC = AsciCharSym;
 
     [CodeProvider(typeof(AC))]
     public enum AsciCode : byte

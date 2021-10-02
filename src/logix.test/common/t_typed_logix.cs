@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using static TypedLogicSpec;
 
-    using L = AsciLetterLo;
+    using L = AsciLetterLoSym;
 
     public abstract class t_typed_logix<X> : t_logix<X>
         where X : t_typed_logix<X>

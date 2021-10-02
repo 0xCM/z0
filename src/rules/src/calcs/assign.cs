@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ScriptVar assign(ScriptVar src, string value)
-            => Rules.scriptvar(src.Symbol, value);
+            => RuleModels.scriptvar(src.Symbol, value);
 
         /// <summary>
         /// Defines an idiom to promote brevity of expression

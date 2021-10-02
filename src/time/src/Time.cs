@@ -12,7 +12,7 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Rules;
+    using static RuleModels;
 
     [ApiHost]
     public readonly struct Time
@@ -70,7 +70,7 @@ namespace Z0
                 return (false, "Attempt to parse minutes failed");
             if(!NumericParser.parse(skip(seg1,2), out int ss))
                 return (false, "Attempt to parse seconds failed");
-            if(!Rules.parse(skip(seg1,3), fffBounds, out int fff, out outcome))
+            if(!RuleModels.parse(skip(seg1,3), fffBounds, out int fff, out outcome))
                 return outcome;
 
             dst =  new DateTime(yyyy,MM,dd,HH, mm, ss, fff);

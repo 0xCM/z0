@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         /// <summary>
         /// Defines a rule r:seq[T] -> seq[T] that requires a specified subsequence, if found, to be replaced with another

@@ -2,16 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static core;
-    using static FormalModels.Circuits;
 
-    partial struct FormalModels
+    partial struct Circuits
     {
         [ApiHost("calcs.gates")]
         public readonly partial struct Gates

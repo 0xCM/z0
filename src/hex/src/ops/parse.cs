@@ -14,7 +14,7 @@ namespace Z0
     using static Msg;
 
     using X = HexDigitFacets;
-    using C = AsciChar;
+    using C = AsciCharSym;
     using D = HexDigitValue;
 
     partial struct Hex
@@ -239,7 +239,7 @@ namespace Z0
             => parse((AsciCode)c, out dst);
 
         [Op]
-        public static bool parse(AsciChar src, out HexDigitValue dst)
+        public static bool parse(AsciCharSym src, out HexDigitValue dst)
         {
             switch(src)
             {

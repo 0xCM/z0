@@ -5,7 +5,7 @@
 namespace Z0
 {
     using C = AsciCode;
-    using S = AsciLetter;
+    using S = AsciLetterSym;
 
     public readonly struct AsciCodeFacets
     {

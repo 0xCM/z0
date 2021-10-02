@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Rules.DataKind;
+    using static RuleModels.DataKind;
 
     using W = DataWidth;
 
-    partial struct Rules
+    partial struct RuleModels
     {
         [System.Flags]
         public enum FloatKind : ushort
