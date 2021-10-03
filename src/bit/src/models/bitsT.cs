@@ -9,6 +9,9 @@ namespace Z0
 
     using static Root;
 
+    /// <summary>
+    /// Defines a bit sequence representation compatible with both llvm and SMTLib 'FixedSizeBitVectors' theory
+    /// </summary>
     public struct bits<T>
         where T : unmanaged
     {

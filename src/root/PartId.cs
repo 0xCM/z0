@@ -207,8 +207,8 @@ public enum PartId : byte
     [Symbol("bits")]
     Bits = 66,
 
-    [Symbol("engine")]
-    Engine = 67,
+    [Symbol("bitfields")]
+    Bitfields = 67,
 
     [Symbol("symcore")]
     SymCore = 68,

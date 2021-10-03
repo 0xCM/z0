@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(Bits)" />
+    <ProjectReference Include="$(SymCore)" />
   </ItemGroup>
 
 </Project>

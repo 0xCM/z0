@@ -21,7 +21,6 @@ namespace Z0
             return bit.test(cell, (byte)(index % 8));
         }
 
-
         [MethodImpl(Inline), Op]
         public static BinaryDigit digit(bit src)
             => src;
