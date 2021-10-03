@@ -4,13 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum Ordering
-    {
-        LT = -1,
-        EQ = 0,
-        GT = 1
-    }
-
     /// <summary>
     /// Characterizes an integral domain, which is a nonzero commutative ring
     /// such that for every pair of nonzero elements a and b, the product
@@ -21,7 +14,7 @@ namespace Z0
     public interface IIntegralDomainOps<T> : ICommutativeRingOps<T>
         where T : unmanaged
     {
-        
+
     }
 
     /// <summary>
@@ -43,7 +36,7 @@ namespace Z0
     public interface IDivisiveOps<T> : IModularOps<T>
         where T : unmanaged
     {
-        T Div(T lhs, T rhs);        
+        T Div(T lhs, T rhs);
 
         T Gcd(T lhs, T rhs);
 
@@ -57,7 +50,7 @@ namespace Z0
     public interface IUniqueFactorDomainOps<T> : IGcdDomainOps<T>
         where T : unmanaged, IUniqueFactorDomainOps<T>
     {
-        
+
     }
 
     /// <summary>
@@ -67,7 +60,7 @@ namespace Z0
     public interface IPrincipalIdealDomainOps<T> : IUniqueFactorDomainOps<T>
         where T : unmanaged, IPrincipalIdealDomainOps<T>
     {
-        
+
     }
 
     /// <summary>
@@ -80,7 +73,7 @@ namespace Z0
 
     }
 
-    public interface IModular<S> 
+    public interface IModular<S>
         where S : IModular<S>
     {
         S Mod(S rhs);
@@ -89,7 +82,7 @@ namespace Z0
     public interface IDivisive<S> : IModular<S>
         where S : IDivisive<S>, new()
     {
-        S Div(S rhs);        
+        S Div(S rhs);
 
         S Gcd(S rhs);
     }
@@ -98,5 +91,5 @@ namespace Z0
         where S : IDivisive<S,T>, new()
     {
 
-    }        
+    }
 }

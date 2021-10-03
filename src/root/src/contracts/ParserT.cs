@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    [Parser]
     public abstract class Parser<T> : IParser<T>
     {
         public abstract Outcome Parse(string src, out T dst);

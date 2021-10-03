@@ -10,13 +10,13 @@ namespace Z0
     using static Root;
     using static core;
 
-    public class SeqParser<T> : Parser<T[]>
+    public sealed class SeqParser<T> : Parser<T[]>
     {
         readonly ParseFunction<T> TermParser;
 
-        readonly string Delimiter;
+        string Delimiter;
 
-        readonly bool SplitClean;
+        bool SplitClean;
 
         [MethodImpl(Inline)]
         public SeqParser(string delimiter, ParseFunction<T> tp, bool clean = true)

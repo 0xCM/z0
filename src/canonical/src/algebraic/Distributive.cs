@@ -15,7 +15,6 @@ namespace Z0
         T Distribute(T lhs, (T x, T y) rhs);
     }
 
-
     /// <summary>
     /// Characterizes a type that defines an operator that right-distributes
     /// multiplication over addition
@@ -56,8 +55,8 @@ namespace Z0
         /// <typeparam name="X">The operand type</typeparam>
         S RightDistribute((S x, S y) rhs);
     }
-    
-    public interface IDistributive<S> : ILeftDistributive<S>, IRightDistributive<S> 
+
+    public interface IDistributive<S> : ILeftDistributive<S>, IRightDistributive<S>
     {}
 
     public interface ILeftDistributive<S,T>  : ILeftDistributive<S>, IMultiplicative<S,T>, IAdditive<S>

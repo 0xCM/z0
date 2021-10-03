@@ -2,19 +2,27 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Threading;
 
-    using static Root;
     using static core;
 
-    partial struct BitFlow
+    public abstract class ADT<T>
+        where T : ADT<T>, new()
     {
-        [ApiHost("bitflow.parsers")]
-        public readonly partial struct Parsers
+        Label Name {get;}
+
+        protected ADT(Label name)
         {
+            Name = name;
         }
+    }
+
+    public readonly partial struct ADT
+    {
+
+
     }
 }

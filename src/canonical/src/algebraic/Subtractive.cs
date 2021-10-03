@@ -8,7 +8,7 @@ namespace Z0
     /// Characterizes operational negation and subtraction
     /// </summary>
     /// <typeparam name="T">The individual type</typeparam>
-    public interface ISubtractiveOps<T> 
+    public interface ISubtractiveOps<T>
     {
         /// <summary>
         /// Combines the first operand with the negation of the second
@@ -19,7 +19,7 @@ namespace Z0
         T Sub(T lhs, T rhs);
     }
 
-    public interface ISubtractive<S> 
+    public interface ISubtractive<S>
         where S : ISubtractive<S>, new()
     {
         /// <summary>
@@ -28,5 +28,4 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         S Sub(S rhs);
     }
-
 }

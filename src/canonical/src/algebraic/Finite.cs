@@ -38,6 +38,5 @@ namespace Z0
         where S : IFiniteAbelianGroup<S,T>, new()
     {
 
-
     }
 }

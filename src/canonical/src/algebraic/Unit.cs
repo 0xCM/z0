@@ -5,8 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics;
-    
+
     /// <summary>
     /// Defines a slot in the type system for an "empty" type
     /// In this way, void functions can be considered
@@ -14,10 +13,10 @@ namespace Z0
     /// </summary>
     public readonly struct Unit
     {
-        public static readonly Unit Value = new Unit();
-        
-        public static readonly Type Type = typeof(Unit);
-        
+        public static Unit Value => new Unit();
+
+        public static Type Type => typeof(Unit);
+
         /// <summary>
         /// Executes the action and returns the unit value
         /// </summary>
@@ -26,6 +25,6 @@ namespace Z0
         {
             a();
             return Value;
-        }        
-    }    
+        }
+    }
 }

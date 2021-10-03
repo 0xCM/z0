@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    
-    public interface INaturalOps<T> : IIntegerOps<T>, INonNegativeOps<T> 
+    public interface INaturalOps<T> : IIntegerOps<T>, INonNegativeOps<T>
         where T : unmanaged
     {}
 
@@ -15,19 +13,19 @@ namespace Z0
     /// Characterizes an operation provider for bounded natural types
     /// </summary>
     /// <typeparam name="T">The type over which operations are defined</typeparam>
-    public interface IFiniteNaturalOps<T> : INaturalOps<T>, IBoundRealOps<T> 
+    public interface IFiniteNaturalOps<T> : INaturalOps<T>, IBoundRealOps<T>
         where T : unmanaged
     { }
 
     /// <summary>
-    /// Characterizes operational reifications of RealFiniteUInt 
-    /// </summary>        
+    /// Characterizes operational reifications of RealFiniteUInt
+    /// </summary>
     /// <typeparam name="R">The reification type</typeparam>
     /// <typeparam name="T">The operand type</typeparam>
     public interface IFiniteNaturalOps<R,T> : IFiniteNaturalOps<T>
-        where R : IFiniteNaturalOps<R,T>, new() 
+        where R : IFiniteNaturalOps<R,T>, new()
         where T : unmanaged
-        {  
+        {
 
         }
 
@@ -41,6 +39,6 @@ namespace Z0
         where S : INatural<S>, new()
     {
 
-    }            
+    }
 }
 

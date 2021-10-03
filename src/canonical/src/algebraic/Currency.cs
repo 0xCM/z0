@@ -4,13 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    
     /// <summary>
     /// Characterizes a bounded fractional operation provider
     /// </summary>
     /// <typeparam name="T">The primitive type</typeparam>
-    public interface ICurrencyOps<T> : IBoundRealOps<T>, IFractionalOps<T> 
+    public interface ICurrencyOps<T> : IBoundRealOps<T>, IFractionalOps<T>
         where T : unmanaged
 
     {
@@ -18,7 +16,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes structural reifications of Currency 
+    /// Characterizes structural reifications of Currency
     /// </summary>
     /// <typeparam name="S">The structural reification type</typeparam>
     public interface ICurrency<S> : IBoundReal<S>, IFractional<S>

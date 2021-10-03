@@ -4,18 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Characterizes a preorder, i.e. a reflexive and transitive
     /// binary relation over its domain
     /// </summary>
     /// <typeparam name="T">The preorder domain</typeparam>
     /// <remarks>See https://en.wikipedia.org/wiki/Preorder </remarks>
-    public interface IPreorderOps<T> : IReflexiveOps<T>, ITransitiveOps<T>            
+    public interface IPreorderOps<T> : IReflexiveOps<T>, ITransitiveOps<T>
     {
 
-    }        
+    }
 
     /// <summary>
     /// Characterizes a set equipped with a preorder

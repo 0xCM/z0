@@ -13,6 +13,18 @@ namespace Z0
     [ApiHost]
     public readonly struct BitParser
     {
+        const NumericKind Closure = UnsignedInts;
+
+        /// <summary>
+        /// Creates a parser for bits values
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static BitsParser<T> bits<T>()
+            where T : unmanaged
+                => default;
+
         [Op]
         public static bool semantic(string src, out bit dst)
         {

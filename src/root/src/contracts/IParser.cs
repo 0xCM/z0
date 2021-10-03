@@ -16,6 +16,11 @@ namespace Z0
             TargetType = target;
         }
 
+        public ParserAttribute()
+        {
+            TargetType = typeof(void);
+        }
+
         public Type TargetType {get;}
     }
 

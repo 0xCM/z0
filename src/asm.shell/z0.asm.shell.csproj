@@ -23,6 +23,7 @@
     <ProjectReference Include="$(CaptureChecks)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Calc)" />
+    <ProjectReference Include="$(Canonical)" />
   </ItemGroup>
 
 </Project>

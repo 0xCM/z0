@@ -9,11 +9,10 @@ namespace Z0
     {
 
     }
-    
+
     public interface IAlgebraicField<S> : ICommutativeRing<S>, IDivisionRing<S>
             where S : IAlgebraicField<S>, new()
     {
 
-     
-    }        
+    }
 }

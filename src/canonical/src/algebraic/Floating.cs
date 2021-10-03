@@ -4,17 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Characterizes an operation provider for floating point values
     /// </summary>
     /// <typeparam name="T">The underlying numeric type</typeparam>
-    public interface IFloatingOps<T> : 
-        IRealNumberOps<T>, 
-        IFractionalOps<T>, 
-        IResignableOps<T>, 
-        ISubtractiveOps<T>, 
+    public interface IFloatingOps<T> :
+        IRealNumberOps<T>,
+        IFractionalOps<T>,
+        IResignableOps<T>,
+        ISubtractiveOps<T>,
         ITrigonmetricOps<T>
             where T : unmanaged
     {
@@ -27,7 +25,7 @@ namespace Z0
         /// Calculates the square root of the input
         /// </summary>
         /// <param name="x">The input value</param>
-        T Sqrt(T x);   
+        T Sqrt(T x);
     }
 
 
@@ -35,14 +33,14 @@ namespace Z0
     /// Characterizes an operation provider for bounded floating point values
     /// </summary>
     /// <typeparam name="T">The underlying numeric type</typeparam>
-    public interface IFiniteFloatOps<T> : IFloatingOps<T>, IBoundRealOps<T> 
+    public interface IFiniteFloatOps<T> : IFloatingOps<T>, IBoundRealOps<T>
         where T : unmanaged
 
     { }
-        
+
 
     /// <summary>
-    /// Characterizes operational reifications of RealFiniteUInt 
+    /// Characterizes operational reifications of RealFiniteUInt
     /// </summary>
     /// <typeparam name="R">The reification type</typeparam>
     /// <typeparam name="T">The operand type</typeparam>
@@ -50,10 +48,10 @@ namespace Z0
         where T : unmanaged
         where R : IFiniteFloatOps<R,T>, new() { }
 
-    public interface IFloating<S> : 
-        IRealNumber<S>, 
-        IFractional<S>, 
-        ISubtractive<S>, 
+    public interface IFloating<S> :
+        IRealNumber<S>,
+        IFractional<S>,
+        ISubtractive<S>,
         ITrigonmetric<S>
         where S : IFloating<S>, new()
     {
@@ -67,6 +65,6 @@ namespace Z0
     public interface IFloating<S,T> : IFloating<S>
         where S : IFloating<S,T>, new()
     {
-        
+
     }
 }
