@@ -9,9 +9,9 @@ namespace Z0
     partial struct BitFlow
     {
         [Free]
-        public interface IFloat : IPrimitive
+        public interface IFloat : IBlittable
         {
-            BlittableKind IPrimitive.TypeKind
+            BlittableKind IBlittable.TypeKind
                 => BlittableKind.Float;
         }
     }

@@ -8,7 +8,7 @@ namespace Z0.Vdsl
 
     using static Root;
 
-    public struct CmpPred128<T> : ICmpPred<m128i<T>>
+    public struct CmpPred128<T>
         where T : unmanaged
     {
         public CmpKind Kind {get;}

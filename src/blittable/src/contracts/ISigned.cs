@@ -6,9 +6,9 @@ namespace Z0
 {
     partial struct BitFlow
     {
-        public interface ISigned : IPrimitive
+        public interface ISigned : IBlittable
         {
-            BlittableKind IPrimitive.TypeKind
+            BlittableKind IBlittable.TypeKind
                 => BlittableKind.Signed;
         }
     }

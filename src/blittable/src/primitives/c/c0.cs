@@ -14,7 +14,7 @@ namespace Z0
         {
             public const ulong Width = 0;
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Width;
         }
     }

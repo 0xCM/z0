@@ -23,7 +23,7 @@ namespace Z0
                 Storage = src;
             }
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Width;
 
             [MethodImpl(Inline)]
@@ -59,7 +59,7 @@ namespace Z0
                 Storage = src;
             }
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Width;
         }
     }

@@ -37,7 +37,7 @@ namespace Z0
             public Span<T> Cells
                 => default;
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Width;
         }
    }

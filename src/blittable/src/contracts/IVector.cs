@@ -11,7 +11,7 @@ namespace Z0
     partial struct BitFlow
     {
         [Free]
-        public interface IVector : IPrimitive
+        public interface IVector : IBlittable
         {
             /// <summary>
             /// The vector dimension/length
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The storage cell type</typeparam>
         [Free]
-        public interface IVector<T> : IVector, IPrimitive<T>
+        public interface IVector<T> : IVector, IBlittable<T>
             where T : unmanaged
         {
             /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
 
             Span<T> Cells {get;}
 
-            BlittableKind IPrimitive.TypeKind
+            BlittableKind IBlittable.TypeKind
                 => BlittableKind.Vector;
         }
     }

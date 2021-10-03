@@ -231,8 +231,8 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 buffer.Clear();
-                var bits = nbits(n, skip(cells,i));
-                var len = BitFlow.render(bits,buffer);
+                var bits = bit.nbits(n, skip(cells,i));
+                var len = bit.render(bits,buffer);
                 slice(buffer,0,len);
                 Write(string.Format("{0} Value{1} = {2};", bits.TypeName, i, text.format(slice(buffer,0,len))));
             }

@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct RuleModels
     {
-
         /// <summary>
         /// Defines a sequence of homogenous T-pairs
         /// </summary>

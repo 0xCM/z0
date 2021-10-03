@@ -9,19 +9,19 @@ namespace Z0
     partial struct BitFlow
     {
         [Free]
-        public interface IBlock : IPrimitive
+        public interface IBlock : IBlittable
         {
-            BlittableKind IPrimitive.TypeKind
+            BlittableKind IBlittable.TypeKind
                 => BlittableKind.Block;
         }
 
         [Free]
-        public interface IBlock<S> : IBlock, IPrimitive<S>
+        public interface IBlock<S> : IBlock, IBlittable<S>
             where S : unmanaged, IDataBlock<S>
         {
             S Storage {get;}
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => core.width<S>();
         }
     }

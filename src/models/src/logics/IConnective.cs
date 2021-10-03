@@ -17,5 +17,4 @@ namespace Z0.Models.Logics
     {
 
     }
-
 }

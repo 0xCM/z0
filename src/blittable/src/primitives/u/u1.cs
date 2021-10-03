@@ -29,7 +29,7 @@ namespace Z0
                 Storage = src;
             }
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Width;
         }
     }

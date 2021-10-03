@@ -8,26 +8,37 @@ namespace Z0.Models
 
     using static Root;
 
+    using api = Model;
+
     public readonly struct OpCode
     {
-        readonly uint Data;
+        public readonly Label Name;
+
+        internal readonly uint Data;
 
         [MethodImpl(Inline)]
-        public OpCode(byte table, ushort op)
+        public OpCode(Label name, uint data)
         {
-            Data = (uint)table |((uint)op <<8);
+            Data = data;
+            Name = name;
         }
 
-        public byte Table
+        public OpCodeTable Table
         {
             [MethodImpl(Inline)]
-            get => (byte)Table;
+            get => api.table(this);
         }
 
-        public ushort Value
+        public Hex16 Value
         {
             [MethodImpl(Inline)]
-            get => (ushort)(Data >>8);
+            get => api.value(this);
         }
+
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
     }
 }

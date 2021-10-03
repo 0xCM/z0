@@ -57,10 +57,10 @@ namespace Z0
             public ref T Cell(uint index)
                 => ref Data[index];
 
-            BitWidth IPrimitive.StorageWidth
+            BitWidth IBlittable.StorageWidth
                 => Data.Length*width<T>();
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Data.Length*1;
         }
     }

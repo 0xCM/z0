@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    using BV = BitVector;
-
     /// <summary>
     /// Defines primary api surface for rowbit manipulation
     /// </summary>
@@ -74,7 +72,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i<src.RowCount; i++)
-                dst[i] = BV.not(src[i]);
+                dst[i] = BitVector.not(src[i]);
             return dst;
         }
 
@@ -84,7 +82,7 @@ namespace Z0
         {
             var count = a.RowCount;
             for(var i=0; i<count; i++)
-                dst[i] = BV.and(a[i],b[i]);
+                dst[i] = BitVector.and(a[i],b[i]);
             return dst;
         }
 
@@ -94,7 +92,7 @@ namespace Z0
         {
             var count = a.RowCount;
             for(var i=0; i<count; i++)
-                dst[i] = BV.cnonimpl(a[i],b[i]);
+                dst[i] = BitVector.cnonimpl(a[i],b[i]);
             return dst;
         }
 
@@ -104,7 +102,7 @@ namespace Z0
         {
             var rc = x.RowCount;
             for(var i=0; i<rc; i++)
-                dst[i] = BV.or(x[i],y[i]);
+                dst[i] = BitVector.or(x[i],y[i]);
             return dst;
         }
 
@@ -114,7 +112,7 @@ namespace Z0
         {
             var rc = x.RowCount;
             for(var i=0; i<rc; i++)
-                dst[i] = BV.xor(x[i],y[i]);
+                dst[i] = BitVector.xor(x[i],y[i]);
             return dst;
         }
 
@@ -124,7 +122,7 @@ namespace Z0
         {
             var rc = x.RowCount;
             for(var i=0; i<rc; i++)
-                dst[i] = BV.nand(x[i],y[i]);
+                dst[i] = BitVector.nand(x[i],y[i]);
             return dst;
         }
 
@@ -134,7 +132,7 @@ namespace Z0
         {
             var count = a.RowCount;
             for(var i=0; i<count; i++)
-                dst[i] = BV.nor(a[i],b[i]);
+                dst[i] = BitVector.nor(a[i],b[i]);
             return dst;
         }
 
@@ -144,7 +142,7 @@ namespace Z0
         {
             var count = a.RowCount;
             for(var i=0; i<count; i++)
-                dst[i] = BV.xnor(a[i],b[i]);
+                dst[i] = BitVector.xnor(a[i],b[i]);
             return dst;
         }
 

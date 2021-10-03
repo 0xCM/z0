@@ -6,11 +6,11 @@ namespace Z0
 {
     partial struct BitFlow
     {
-        public interface ITensor : IPrimitive
+        public interface ITensor : IBlittable
         {
             byte Arity {get;}
 
-            BlittableKind IPrimitive.TypeKind
+            BlittableKind IBlittable.TypeKind
                 => BlittableKind.Tensor;
         }
     }

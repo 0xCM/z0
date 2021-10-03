@@ -84,10 +84,10 @@ namespace Z0
             public override string ToString()
                 => Format();
 
-            BitWidth IPrimitive.StorageWidth
+            BitWidth IBlittable.StorageWidth
                 => Data.Length*width<T>();
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Data.Length* Typed.nat32u<N>();
 
             uint IVector.N

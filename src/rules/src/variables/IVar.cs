@@ -28,13 +28,4 @@ namespace Z0
         string IVar.Value
             => Value?.ToString() ?? "";
     }
-
-    public interface IVar<S,T> : IVar<T>
-        where S : IVarSymbol
-    {
-        new S Symbol {get;}
-
-        VarSymbol IVar.Symbol
-            => new VarSymbol(Symbol.Name);
-    }
 }

@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Collections.Generic;
 
     using static core;
     using static SdmModels;
@@ -14,9 +15,9 @@ namespace Z0.Asm
         string VolumeMarker(byte vol)
             => string.Format("Vol. {0}", vol);
 
-        Strings VolumeMarkers(byte min, byte max)
+        HashSet<string> VolumeMarkers(byte min, byte max)
         {
-            var dst = Strings.create();
+            var dst = hashset<string>();
             for(var i=min; i<=max; i++)
                 dst.Add(VolumeMarker(i));
             return dst;
@@ -52,7 +53,7 @@ namespace Z0.Asm
             {
                 var content = line.Content;
                 var number = line.LineNumber;
-                if(vols.CoversAny(content))
+                if(vols.Contains(content))
                 {
                     writer.WriteLine(string.Format("{0}:{1}", number, content));
                     continue;

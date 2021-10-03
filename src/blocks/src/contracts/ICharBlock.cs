@@ -8,7 +8,7 @@ namespace Z0
 
     using static core;
 
-    public interface ICharBlock<T> : ITextual, IComparable<T>, IEquatable<T>, IBlittable<T>, IDataBlock<T>, ICellBlock<char>, IHashed
+    public interface ICharBlock<T> : ITextual, IComparable<T>, IEquatable<T>, IDataBlock<T>, ICellBlock<char>, IHashed
         where T : unmanaged, ICharBlock<T>
     {
         Span<char> Data {get;}
@@ -29,12 +29,6 @@ namespace Z0
             => Data;
 
         Span<byte> IDataBlock.Bytes
-            => recover<byte>(Data);
-
-        Span<byte> IBlittable.Edit
-            => recover<byte>(Data);
-
-        ReadOnlySpan<byte> IBlittable.View
             => recover<byte>(Data);
 
         int IComparable<T>.CompareTo(T src)

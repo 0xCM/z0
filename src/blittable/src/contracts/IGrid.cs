@@ -11,7 +11,7 @@ namespace Z0
     partial struct BitFlow
     {
         [Free]
-        public interface IGrid : IPrimitive
+        public interface IGrid : IBlittable
         {
             uint M {get;}
 
@@ -21,7 +21,7 @@ namespace Z0
 
             GridSpec Spec {get;}
 
-            BlittableKind IPrimitive.TypeKind
+            BlittableKind IBlittable.TypeKind
                 => BlittableKind.Grid;
         }
 

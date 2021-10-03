@@ -9,9 +9,9 @@ namespace Z0
     partial struct BitFlow
     {
         [Free]
-        public interface IName : IPrimitive
+        public interface IName : IBlittable
         {
-            BlittableKind IPrimitive.TypeKind
+            BlittableKind IBlittable.TypeKind
                 => BlittableKind.Name;
         }
 
@@ -31,33 +31,21 @@ namespace Z0
 
             byte PointSize {get;}
 
-            BitWidth IPrimitive.StorageWidth
+            BitWidth IBlittable.StorageWidth
                 => core.width<F>();
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Length*PointSize;
         }
-        [Free]
-        public interface IBitVector<T> : IBitVector, IPrimitive<T>
-            where T : unmanaged
-        {
-
-        }
 
         [Free]
-        public interface IScalarBits<T> : IBitVector<T>
-            where T : unmanaged
-        {
-            bit this[byte i] {get;set;}
-        }
-        [Free]
-        public interface IUnsigned<T> : IUnsigned, IPrimitive<T>
+        public interface IUnsigned<T> : IUnsigned, IBlittable<T>
             where T : unmanaged
         {
         }
 
         [Free]
-        public interface IChar<T> : IChar, IPrimitive<T>
+        public interface IChar<T> : IChar, IBlittable<T>
             where T : unmanaged
         {
 
@@ -73,7 +61,7 @@ namespace Z0
         }
 
         [Free]
-        public interface ITensor<T> : ITensor, IPrimitive<T>
+        public interface ITensor<T> : ITensor, IBlittable<T>
             where T : unmanaged
         {
         }
@@ -86,18 +74,18 @@ namespace Z0
             byte ITensor.Arity
                 => Typed.nat8u<N>();
 
-            BitWidth IPrimitive.StorageWidth
+            BitWidth IBlittable.StorageWidth
                 => Arity*core.width<T>();
         }
 
         [Free]
-        public interface ISigned<T> : ISigned, IPrimitive<T>
+        public interface ISigned<T> : ISigned, IBlittable<T>
             where T : unmanaged
         {
         }
 
         [Free]
-        public interface IFloat<T> : IFloat, IPrimitive<T>
+        public interface IFloat<T> : IFloat, IBlittable<T>
             where T : unmanaged
         {
 

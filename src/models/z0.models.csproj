@@ -9,6 +9,8 @@
     <ProjectReference Include="$(Bit)" />
     <ProjectReference Include="$(Blittable)" />
     <ProjectReference Include="$(gmath)" />
+    <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(Hex)" />
   </ItemGroup>
 
 </Project>

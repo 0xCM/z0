@@ -27,7 +27,7 @@ namespace Z0
                 Storage = Cells.trim(src,N);
             }
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Width;
         }
 
@@ -47,7 +47,7 @@ namespace Z0
                 Storage = src;
             }
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Width;
         }
     }

@@ -7,14 +7,6 @@ namespace Z0
     using static core;
     partial struct RuleModels
     {
-        [Op, Closures(Closure)]
-        public static string format<T>(in CmpPred<T> src)
-            => string.Format("{0}{1}{2}", src.A, symbol(src.Kind), src.B);
-
-        [Op, Closures(Closure)]
-        public static string format<T>(in CmpEval<T> src)
-            => string.Format("{0}:{1}", format(src.Source), src.Result ? "true" : "false");
-
         public static string format<F,C>(Enclosed<F,C> rule)
         {
             var buffer = TextTools.buffer();
@@ -64,13 +56,6 @@ namespace Z0
         public static string format(VarSymbol src)
             => format(VarContextKind.Workflow, src);
 
-        [Op, Closures(Closure)]
-        public static string format<T>(VarSymbol<T> src)
-            => format(VarContextKind.Workflow, src);
-
-        [Op, Closures(Closure)]
-        public static string format<T>(VarContextKind vck, VarSymbol<T> src)
-            => string.Format(VarContextKinds.FormatPattern(vck), src.Name);
 
         [Op]
         public static string format(VarContextKind vck, VarSymbol src)

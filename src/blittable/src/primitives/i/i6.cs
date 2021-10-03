@@ -13,7 +13,7 @@ namespace Z0
 
             public T Storage;
 
-            BitWidth IPrimitive.ContentWidth
+            BitWidth IBlittable.ContentWidth
                 => Width;
         }
     }

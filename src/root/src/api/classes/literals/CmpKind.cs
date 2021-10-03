@@ -4,8 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using S = CmpSymbol;
+    using S = CmpSymbolExpr;
 
+    [SymSource]
     public enum CmpKind : byte
     {
         [Symbol(S.EQ)]

@@ -43,6 +43,12 @@ namespace Z0
             get => core.cover(Address.Pointer<char>(), Length);
         }
 
+        public string Format()
+            => new string(Data);
+
+        public override string ToString()
+            => Format();
+
         public static Label Empty => default;
     }
 }

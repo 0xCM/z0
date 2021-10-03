@@ -57,6 +57,6 @@ namespace Z0
         Nor = '↓',
 
         [Symbol("⊙", "xnor")]
-        Xnor = '⊙'
+        Xnor = '⊙',
     }
 }
