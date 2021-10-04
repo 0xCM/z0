@@ -12,7 +12,6 @@ namespace Z0.Tools
     [ApiHost]
     public sealed partial class BdDisasm : Tool<BdDisasm, BdDisasmCmd>
     {
-
         public BdDisasm()
             : base(Toolspace.bddiasm)
         {

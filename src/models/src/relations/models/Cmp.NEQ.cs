@@ -10,7 +10,7 @@ namespace Z0.Models
 
     partial struct Relations
     {
-        public readonly struct NEQ<T> : ICmpPred<NEQ<T>,T>
+        public readonly struct NEQ<T> : ICmpPred<T>
         {
             public T A {get;}
 

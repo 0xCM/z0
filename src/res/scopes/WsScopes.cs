@@ -7,20 +7,20 @@ namespace Z0
     [ApiComplete]
     public readonly struct WsScopes
     {
-        public static Scope asm => "asm";
+        public static Subject asm => "asm";
 
-        public static Scope control => "control";
+        public static Subject control => "control";
 
-        public static Scope gen => "gen";
+        public static Subject gen => "gen";
 
-        public static Scope imports => "imports";
+        public static Subject imports => "imports";
 
-        public static Scope logs => "logs";
+        public static Subject logs => "logs";
 
-        public static Scope sources => "sources";
+        public static Subject sources => "sources";
 
-        public static Scope tables => "tables";
+        public static Subject tables => "tables";
 
-        public static Scope tools => "tools";
+        public static Subject tools => "tools";
     }
 }

@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [CmdOp(".xed-isa")]
         Outcome XedIsa(CmdArgs args)
-            => EmitXedIsa(arg(args,0).Value);
+            => Xed.EmitIsa(arg(args,0).Value);
     }
 }

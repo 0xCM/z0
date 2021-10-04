@@ -30,12 +30,4 @@ namespace Z0
         ToolCmdArgs IToolCmd.Args
             => Cmd.toolargs((C)this);
     }
-
-    [Free]
-    public interface IToolCmd<C,T> : IToolCmd<C>
-        where C : struct, IToolCmd<C>
-        where T : ITool
-    {
-
-    }
 }

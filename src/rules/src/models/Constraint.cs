@@ -12,7 +12,6 @@ namespace Z0
     partial struct RuleModels
     {
         public readonly struct Constraint<S,R>
-            where R : IRule
         {
             public S Subject {get;}
 

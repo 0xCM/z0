@@ -43,7 +43,7 @@ namespace Z0
             return result;
         }
 
-        public Outcome RunProjectScript(ProjectId project, string src, Scope scope, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
+        public Outcome RunProjectScript(ProjectId project, string src, Subject scope, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
         {
             var path = Ws.Projects().Script(project, scope, script, FS.Cmd);
             var result = Outcome.Success;
@@ -134,13 +134,13 @@ namespace Z0
         public Outcome Run(CmdLine cmd, CmdVars vars, FS.FilePath log, Receiver<string> status, Receiver<string> error, out ReadOnlySpan<TextLine> dst)
             => ScriptProcess.run(cmd, vars, log, status, error, out dst);
 
-        public Outcome RunProjectScript(ProjectId project, string src, Scope scope, ScriptId script)
+        public Outcome RunProjectScript(ProjectId project, string src, Subject scope, ScriptId script)
             => RunProjectScript(project, src, scope, script, out _);
 
-        public Outcome RunProjectScript(ProjectId project, string src, Scope scope, ScriptId script, bool quiet)
+        public Outcome RunProjectScript(ProjectId project, string src, Subject scope, ScriptId script, bool quiet)
             => RunProjectScript(project, src, scope, script, quiet, out _);
 
-        public Outcome RunProjectScript(ProjectId project, string src, Scope scope, ScriptId script, out ReadOnlySpan<ToolFlow> flows)
+        public Outcome RunProjectScript(ProjectId project, string src, Subject scope, ScriptId script, out ReadOnlySpan<ToolFlow> flows)
             => RunProjectScript(project, src, scope, script, true, out flows);
 
         void ReceiveCmdStatusQuiet(in string src)

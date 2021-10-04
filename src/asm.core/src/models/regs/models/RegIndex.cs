@@ -14,10 +14,6 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct RegIndex : ITextual
     {
-        public static RegIndex Min => 0;
-
-        public static RegIndex Max => 31;
-
         [MethodImpl(Inline)]
         public static RegIndex from(byte value)
             => from((RegIndexCode)value);

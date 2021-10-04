@@ -79,6 +79,40 @@ namespace Z0.Asm
         public Outcome LoadChipMap(out ChipMap dst)
             => Parsers.ParseChipMap(ChipSourcePath(), out dst);
 
+        public const string intelxed = "intel.xed";
+
+        static MsgPattern<Count,FS.FileUri> EmittedQueryResults
+            => "Directed {0} query result rows to {1}";
+
+        public Outcome EmitIsa(string chip)
+        {
+            var result = Outcome.Success;
+            var symbols = ChipCodes();
+            if(!symbols.Lookup(chip, out var code))
+                return (false, string.Format("Chip '{0}' not found", chip));
+
+            result = LoadChipMap(out var map);
+            if(result.Fail)
+                return result;
+
+            var kinds = map[code].ToHashSet();
+            var matches = list<XedFormImport>();
+            var forms = LoadForms();
+            var count = forms.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var form = ref skip(forms,i);
+                if(kinds.Contains(form.IsaKind))
+                    matches.Add(form);
+            }
+
+            var dst = Ws.Tables().TablePath<XedFormImport>(intelxed, code.Kind.ToString());
+            var formatter = Tables.formatter<XedFormImport>();
+            var rows = Tables.emit(matches.ViewDeposited(), XedFormImport.RenderWidths, dst);
+            Write(EmittedQueryResults.Format(rows,dst));
+            return result;
+        }
+
         public ReadOnlySpan<XedFormImport> LoadForms()
         {
             var src = Ws.Tables().TablePath<XedFormImport>("intel.xed");

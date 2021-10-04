@@ -23,13 +23,13 @@ namespace Z0
         FS.FolderPath SrcDir()
             => Root + FS.folder(src);
 
-        FS.FolderPath SrcDir(Scope scope)
+        FS.FolderPath SrcDir(Subject scope)
             => SrcDir() + FS.folder(scope.Format());
 
         FS.FolderPath OutDir()
             => Root + FS.folder(output);
 
-        FS.FolderPath OutDir(Scope scope)
+        FS.FolderPath OutDir(Subject scope)
             => OutDir() + FS.folder(scope.Format());
 
         FS.FolderPath ScriptDir()

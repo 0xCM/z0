@@ -6,12 +6,12 @@ namespace Z0
 {
     public readonly struct AsmTableScopes
     {
-        public static Scope Sdm => "intel.sdm";
+        public static Subject Sdm => "intel.sdm";
 
-        public static Scope SdmInstructions => "sdm.instructions";
+        public static Subject SdmInstructions => "sdm.instructions";
 
-        public static Scope IntelXed => "intel.xed";
+        public static Subject IntelXed => "intel.xed";
 
-        public static Scope Nasm => "nasm";
+        public static Subject Nasm => "nasm";
     }
 }

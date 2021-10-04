@@ -53,12 +53,6 @@ namespace Z0
         public readonly Duration Elapsed()
             => Running ? Measure() : Total;
 
-        // public readonly Duration Elapsed
-        // {
-        //     [MethodImpl(Inline)]
-        //     get => Running ? Measure() : Total;
-        // }
-
         /// <summary>
         /// Clears the counter's state
         /// </summary>

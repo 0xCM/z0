@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bit Accept(byte src)
+        public bit Deposit(byte src)
         {
             if(Pos < Max)
             {

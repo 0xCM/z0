@@ -10,7 +10,7 @@ namespace Z0.Models
 
     partial struct Relations
     {
-        public readonly struct LT<T> : ICmpPred<LT<T>,T>
+        public readonly struct LT<T> : ICmpPred<T>
         {
             public T A {get;}
 

@@ -16,13 +16,13 @@ namespace Z0
         FS.FolderPath IFileArchive.Subdir(string name)
             => Home() + FS.folder(name);
 
-        FS.FolderPath IFileArchive.Subdir(Scope scope)
+        FS.FolderPath IFileArchive.Subdir(Subject scope)
             => Home() + FS.folder(scope.Format());
 
         FS.FolderPath IWorkspace.OutDir()
             => Out();
 
-        FS.FolderPath IWorkspace.OutDir(Scope scope)
+        FS.FolderPath IWorkspace.OutDir(Subject scope)
             => Out(scope);
 
         FS.FolderPath IWorkspace.ScriptDir()
@@ -32,18 +32,18 @@ namespace Z0
             where T : struct
                 => Tables() +  TableFile<T>();
 
-        FS.FilePath IFileArchive.TablePath<T>(Scope scope)
+        FS.FilePath IFileArchive.TablePath<T>(Subject scope)
             where T : struct
                 => Subdir(scope) + TableFile<T>();
 
-        FS.FilePath IFileArchive.TablePath<T>(Scope scope, string suffix)
+        FS.FilePath IFileArchive.TablePath<T>(Subject scope, string suffix)
             where T : struct
                 => Subdir(scope) + TableFile<T>(suffix);
 
         FS.FolderPath Out()
             => Home() + FS.folder(output);
 
-        FS.FolderPath Out(Scope scope)
+        FS.FolderPath Out(Subject scope)
             => Out() + FS.folder(scope.Format());
 
         FS.Files OutFiles()
@@ -55,7 +55,7 @@ namespace Z0
         FS.FolderPath Tables()
             => Home() + FS.folder(tables);
 
-        FS.FolderPath Tables(Scope scope)
+        FS.FolderPath Tables(Subject scope)
             => Tables() + FS.folder(scope.Format());
 
         FS.FolderPath TablesOut()
@@ -95,10 +95,10 @@ namespace Z0
         FS.Files SrcFiles()
             => Src().Files(true);
 
-        FS.Files SrcFiles(Scope scope)
+        FS.Files SrcFiles(Subject scope)
             => (Src() + FS.folder(scope.Format())).AllFiles;
 
-        FS.FilePath SrcFile(Scope scope, string fileid, FileKind kind)
+        FS.FilePath SrcFile(Subject scope, string fileid, FileKind kind)
             => Src() + FS.folder(scope.Format()) + FS.file(fileid, kind.Ext());
 
         FS.FolderPath Assets()
@@ -107,10 +107,10 @@ namespace Z0
         FS.FolderPath Scripts()
             => Home() + FS.folder(scripts);
 
-        FS.FolderPath Scripts(Scope scope)
+        FS.FolderPath Scripts(Subject scope)
             => Scripts() + FS.folder(scope.Format());
 
-        FS.FilePath Script(Scope scope, ScriptId sid, FS.FileExt ext)
+        FS.FilePath Script(Subject scope, ScriptId sid, FS.FileExt ext)
             => Scripts(scope) + FS.file(sid.Format(), ext);
     }
 }

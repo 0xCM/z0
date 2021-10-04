@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    public struct BdDisasmCmd : IToolCmd<BdDisasmCmd,BdDisasm>
+    public struct BdDisasmCmd : IToolCmd<BdDisasmCmd>
     {
         public FS.FilePath ToolPath;
 

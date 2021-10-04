@@ -11,14 +11,13 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
-            var machine = RegMachine.intel64();
+            var machine = RegMachines.intel64();
             var buffer = text.buffer();
-            machine.State(buffer);
+            RegMachines.state(machine,buffer);
             Write(buffer.Emit());
 
             return result;
         }
-
 
         [CmdOp(".test-labels")]
         Outcome TestLabels(CmdArgs args)

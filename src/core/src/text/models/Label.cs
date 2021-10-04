@@ -11,12 +11,21 @@ namespace Z0
 
     public unsafe readonly struct Label
     {
+        [MethodImpl(Inline), Op]
+        public static Label from(string src)
+        {
+            if(core.empty(src))
+                return Label.Empty;
+            StringAddress a = src;
+            return new Label(a.Address, (byte)src.Length);
+        }
+
         readonly ulong Storage;
 
         [MethodImpl(Inline)]
         public Label(MemoryAddress @base, byte length)
         {
-            Storage = (ulong)@base | (1ul << 56);
+            Storage = (ulong)@base | ((ulong)length << 56);
         }
 
         public byte Length
@@ -50,5 +59,9 @@ namespace Z0
             => Format();
 
         public static Label Empty => default;
+
+        [MethodImpl(Inline), Op]
+        public static implicit operator Label(string src)
+            => Label.from(src);
     }
 }

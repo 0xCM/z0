@@ -58,5 +58,8 @@ namespace Z0
 
         [Symbol("⊙", "xnor")]
         Xnor = '⊙',
+
+        [Symbol("≡", "logical equivalence")]
+        Equivalent = '≡',
     }
 }

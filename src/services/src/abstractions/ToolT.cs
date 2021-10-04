@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Actor]
-    public abstract class Tool<T> : Service<T>, ITool<T>
+    public abstract class Tool<T> : Service<T>
         where T : Tool<T>,new()
     {
         public ToolId Id {get;}

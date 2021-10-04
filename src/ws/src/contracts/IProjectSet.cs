@@ -17,7 +17,7 @@ namespace Z0
         FS.FolderPath Out(ProjectId project)
             => Home(project) + FS.folder(output);
 
-        FS.FolderPath Out(ProjectId project, Scope scope)
+        FS.FolderPath Out(ProjectId project, Subject scope)
             => Out(project) + FS.folder(scope.Format());
 
         FS.Files OutFiles(ProjectId project)
@@ -55,16 +55,16 @@ namespace Z0
         FS.Files SrcFiles(ProjectId project)
             => Src(project).Files(true);
 
-        FS.Files SrcFiles(ProjectId project, Scope scope)
+        FS.Files SrcFiles(ProjectId project, Subject scope)
             => (Src(project) + FS.folder(scope.Format())).AllFiles;
 
         FS.FolderPath Scripts(ProjectId project)
             => Home(project) + FS.folder(scripts);
 
-        FS.FolderPath Scripts(ProjectId project, Scope scope)
+        FS.FolderPath Scripts(ProjectId project, Subject scope)
             => Scripts(project) + FS.folder(scope.Format());
 
-        FS.FilePath Script(ProjectId project, Scope scope, ScriptId sid, FS.FileExt ext)
+        FS.FilePath Script(ProjectId project, Subject scope, ScriptId sid, FS.FileExt ext)
             => Scripts(project,scope) + FS.file(sid.Format(), ext);
 
         FS.FilePath Script(ProjectId project, ScriptId sid, FS.FileExt ext)

@@ -22,10 +22,10 @@ namespace Z0
             Root = root;
         }
 
-        public FS.FolderPath Dir(Scope scope)
+        public FS.FolderPath Dir(Subject scope)
             => Root + FS.folder(scope.Format());
 
-        public FS.FilePath Path(Scope scope, TableId id)
+        public FS.FilePath Path(Subject scope, TableId id)
             => Dir(scope) + Name(id);
 
         public FS.FilePath Path(TableId id)
@@ -35,7 +35,7 @@ namespace Z0
             where T : struct
                 => Root + Name<T>();
 
-        public FS.FilePath Path<T>(Scope scope)
+        public FS.FilePath Path<T>(Subject scope)
             where T : struct
                 => Dir(scope) + Name<T>();
 

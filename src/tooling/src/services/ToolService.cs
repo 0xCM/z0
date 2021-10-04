@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    public abstract class ToolService<T> : AppService<T>, ITool<T>
+    public abstract class ToolService<T> : AppService<T>
         where T : ToolService<T>, new()
     {
         public virtual ToolId Id {get;}

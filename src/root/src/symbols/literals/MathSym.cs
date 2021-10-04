@@ -32,11 +32,11 @@ namespace Z0
 
         LTEQ = '⩽',
 
-        LT2 = '≪',
+        LShift = '≪',
 
         GTEQ = '⩾',
 
-        GT2 = '≫',
+        RShift = '≫',
 
         NLT = '≮',
 

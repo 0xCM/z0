@@ -10,7 +10,6 @@ namespace Z0.Models
     using static Root;
     using static core;
 
-
     [ApiHost]
     public readonly partial struct Model
     {

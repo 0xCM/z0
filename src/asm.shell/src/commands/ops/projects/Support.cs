@@ -28,7 +28,7 @@ namespace Z0.Asm
             return outcome;
         }
 
-        Outcome LoadProjectSources(ProjectId id, Scope? scope)
+        Outcome LoadProjectSources(ProjectId id, Subject? scope)
         {
             if(scope != null)
                 Files(Ws.Projects().SrcFiles(id, scope.Value));
@@ -37,7 +37,7 @@ namespace Z0.Asm
             return true;
         }
 
-        FS.Files ProjectSources(Scope? scope = null)
+        FS.Files ProjectSources(Subject? scope = null)
             => scope != null ? Ws.Projects().SrcFiles(State.Project(), scope.Value) : Ws.Projects().SrcFiles(State.Project());
 
         FS.FilePath Script(ProjectId project, ScriptId script)
@@ -68,7 +68,7 @@ namespace Z0.Asm
             return result;
         }
 
-        Outcome RunProjectScript(CmdArgs args, ScriptId script, Scope? scope = null)
+        Outcome RunProjectScript(CmdArgs args, ScriptId script, Subject? scope = null)
         {
             var result = Outcome.Success;
             var project = State.Project();
@@ -244,7 +244,7 @@ namespace Z0.Asm
             return counter;
         }
 
-        FS.FilePath OutPath(Scope scope, string id, FileKind kind)
+        FS.FilePath OutPath(Subject scope, string id, FileKind kind)
             =>  Ws.Projects().Out(State.Project(), scope) + FS.file(id,FileTypes.ext(kind));
 
         FS.Files OutFiles(params FileKind[] kinds)

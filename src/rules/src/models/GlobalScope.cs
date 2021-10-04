@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    public readonly struct GlobalScope : IScope<GlobalScope>
+    public readonly struct GlobalScope
     {
         static long IdentityStore;
 

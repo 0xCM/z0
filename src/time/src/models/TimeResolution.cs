@@ -36,5 +36,4 @@ namespace Z0
         /// </summary>
         Ms = 5
     }
-
 }

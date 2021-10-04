@@ -24,7 +24,7 @@ namespace Z0
 
         ApiPath _Api;
 
-        Arrow<Scope> _Channel;
+        Arrow<Subject> _Channel;
 
         IWorkspace _Workspace;
 
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Arrow<Scope> Channel()
+        public Arrow<Subject> Channel()
             => _Channel;
 
         [MethodImpl(Inline)]
@@ -52,13 +52,13 @@ namespace Z0
         public Outcome Workspace(string name)
             => Ws.Select(name, out _Workspace);
 
-        public Arrow<Scope> Channel(Arrow<Scope> channel)
+        public Arrow<Subject> Channel(Arrow<Subject> channel)
         {
             _Channel = channel;
             return Channel();
         }
 
-        public Arrow<Scope> Channel(Scope src, Scope dst)
+        public Arrow<Subject> Channel(Subject src, Subject dst)
         {
             _Channel = (src,dst);
             return Channel();
@@ -149,7 +149,7 @@ namespace Z0
             _DataSource = FS.FolderPath.Empty;
             _Files = array<FS.FilePath>();
             _Api = ApiPath.Empty;
-            _Channel = (Scope.Empty,Scope.Empty);
+            _Channel = (Subject.Empty,Subject.Empty);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Z0
         [Symbol(dll, "A library module")]
         Dll,
 
-        [Symbol(exe, "An executable module")]
+        [Symbol(exe, "A portable executable file")]
         Exe,
 
         [Symbol(txt,"Text data")]

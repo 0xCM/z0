@@ -2,19 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Models
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
+    using api = Rules;
+
     partial struct Rules
     {
         /// <summary>
         /// Defines a compile-time literal value
         /// </summary>
-        public readonly struct Constant<T>
+        public readonly struct Constant<T> : ITerm
         {
             public T Value {get;}
 
@@ -25,7 +27,7 @@ namespace Z0.Models
             }
 
             public string Format()
-                => Value?.ToString() ?? EmptyString;
+                => api.format(this);
 
             public override string ToString()
                 => Format();

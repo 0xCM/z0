@@ -13,7 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Constraint<S,R> constrain<S,R>(S subject, R rule)
-            where R : IRule
-                => new Constraint<S,R>(subject,rule);
+            => new Constraint<S,R>(subject,rule);
     }
 }

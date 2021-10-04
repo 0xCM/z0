@@ -11,12 +11,6 @@ namespace Z0
 
     partial struct RuleModels
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static OneOf<T> oneof<T>(T[] src)
-            => new OneOf<T>(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Constraint<T,OneOf<T>> oneof<T>(T subject, T[] src)
-            => constrain(subject,oneof(src));
     }
 }

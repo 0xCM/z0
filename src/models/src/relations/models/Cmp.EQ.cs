@@ -11,7 +11,7 @@ namespace Z0.Models
 
     partial struct Relations
     {
-        public readonly struct EQ<T> : ICmpPred<EQ<T>,T>
+        public readonly struct EQ<T> : ICmpPred<T>
         {
             public T A {get;}
 
