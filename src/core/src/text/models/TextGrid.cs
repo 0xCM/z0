@@ -12,15 +12,6 @@ namespace Z0
 
     public class TextGrid
     {
-        [MethodImpl(Inline)]
-        public static void parse<T>(in TextGrid src, Span<T> dst, Func<TextRow,T> parser)
-        {
-            var rows = src.RowData.View;
-            var count = rows.Length;
-            for(var i=0; i<count; i++)
-               seek(dst,i) = parser(skip(rows,i));
-        }
-
         public Index<TextRow> RowData {get;}
 
         public TextDocFormat Format {get;}

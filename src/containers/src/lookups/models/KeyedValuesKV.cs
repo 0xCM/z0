@@ -44,6 +44,12 @@ namespace Z0
             KeyFunction = (in V key) => default(K);
         }
 
+        public KeyedValues(uint capacity)
+        {
+            Pairs = alloc<KeyedValue<K,V>>(capacity);
+            KeyFunction = (in V key) => default(K);
+        }
+
         [MethodImpl(Inline)]
         public KeyedValues(KeyedValue<K,V>[] dst, KeyFunction<K,V> kf)
         {

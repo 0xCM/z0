@@ -8,21 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    partial struct RuleModels
+    public class ToolCmdParser
     {
-        public readonly struct Var<T>
-        {
-            public readonly uint Id;
 
-            public readonly T Value;
 
-            [MethodImpl(Inline)]
-            public Var(uint id, T value)
-            {
-                Id = id;
-                Value = value;
-            }
-        }
     }
 }

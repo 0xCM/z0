@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Models)"/>
     <ProjectReference Include="$(Workflow)" />
+    <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
 
 </Project>

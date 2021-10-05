@@ -14,7 +14,7 @@ namespace Z0
 
     partial class Tooling
     {
-        public static async Task<int> start(ToolCmdSpec spec, Action<string> status, Action<string> error)
+        public static async Task<int> start(ToolCmdSpec spec, ToolCmdContext context, Action<string> status, Action<string> error)
         {
             var info = new ProcessStartInfo
             {
@@ -27,10 +27,10 @@ namespace Z0
 
             var process = new Process {StartInfo = info};
 
-            if (!spec.WorkingDir.IsNonEmpty)
-                process.StartInfo.WorkingDirectory = spec.WorkingDir.Name;
+            if (!context.WorkingDir.IsNonEmpty)
+                process.StartInfo.WorkingDirectory = context.WorkingDir.Name;
 
-            iter(spec.EnvVars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
+            iter(context.EnvVars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
             process.OutputDataReceived += (s,d) => status(d.Data ?? EmptyString);
             process.ErrorDataReceived += (s,d) => error(d.Data ?? EmptyString);
             process.Start();

@@ -21,6 +21,10 @@ namespace Z0
             : base(src)
         {
             Project = project;
+
         }
+
+        public Identifier Name
+            => Project.Id;
     }
 }

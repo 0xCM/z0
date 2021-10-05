@@ -116,11 +116,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public string Format()
-            => ByteView.HexCoreFormat(HexFormatSpecs.HexData);
+            => HexFormatter.format(ByteView, HexFormatSpecs.HexData);
 
         [MethodImpl(Inline), Op]
         public string Format(in HexFormatOptions config)
-            => ByteView.HexCoreFormat(config);
+            => HexFormatter.format(ByteView, config);
 
         public override int GetHashCode()
             => Data.GetHashCode();

@@ -10,23 +10,24 @@ namespace Z0
     using static Root;
 
     [ApiComplete]
-    public struct BitStack
+    public struct CircularBits
     {
         [MethodImpl(Inline)]
-        public static BitStack create(ulong state)
-            => new BitStack(state);
+        public static CircularBits create(ulong state)
+            => new CircularBits(state);
 
         ulong State;
 
         [MethodImpl(Inline)]
-        public BitStack(ulong state)
+        public CircularBits(ulong state)
             => State  = state;
 
         [MethodImpl(Inline)]
-        public void Push(bit src)
+        public ulong Push(bit src)
         {
             State <<= 1;
             State |= (uint)src;
+            return State;
         }
 
         [MethodImpl(Inline)]

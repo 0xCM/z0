@@ -82,5 +82,13 @@ namespace Z0
 
         public static string format<T>(in Adjacent<T> src)
             => string.Format(RP.Adjacent2,src.A, src.B);
+
+        public static string format<T>(in Between<T> src)
+            where T : unmanaged, IEquatable<T>, IComparable<T>
+                => string.Format("[{0}, {1}]", src.Min, src.Max);
+
+        public static string format<T>(in Rule<T> src)
+            where T : ITerm<T>
+                => string.Format("{0} := {1}", src.Name, src.Term.Format());
     }
 }

@@ -23,8 +23,7 @@ namespace Z0
             var c = count ?? 16;
             if(c <= 16)
             {
-                var data = slice(bytes(src), 0, c);
-                return data.HexCoreFormat(HexFormatSpecs.HexData);
+                return HexFormatter.format(slice(bytes(src), 0, c),HexFormatSpecs.HexData);
             }
             return "!!FormatError!!";
         }

@@ -24,7 +24,7 @@ namespace Z0
 
         [Op]
         public static string format(ReadOnlySpan<AsciCode> src)
-            => text.format(src, core.span<char>(src.Length));
+            => format(src, core.span<char>(src.Length));
 
         [Op]
         public static string format(ReadOnlySpan<char> src, uint length)

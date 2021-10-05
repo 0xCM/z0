@@ -12,7 +12,7 @@ namespace Z0.Asm
         [Op]
         public static string format<T>(AsmRegValue<T> src)
             where T : unmanaged
-                => string.Format("{0,-5}{1}", src.Name, src.Value.FormatHexBytes());
+                => string.Format("{0,-5}{1}", src.Name, HexFormatter.bytes(src.Value));
 
         public enum RegFieldIndex : byte
         {

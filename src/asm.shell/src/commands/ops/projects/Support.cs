@@ -137,7 +137,6 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var paths = OutFiles(FileKind.Obj, FileKind.O).View;
             var count = paths.Length;
-            var hex = HexLines.Service();
             for(var i=0; i<count; i++)
             {
                 ref readonly var src = ref skip(paths,i);
@@ -145,7 +144,7 @@ namespace Z0.Asm
                 var dst = OutPath(objhex, id, FileKind.HexDat);
                 using var writer = dst.AsciWriter();
                 var data = src.ReadBytes();
-                var size = hex.Emit(data, writer);
+                var size = HexFormatter.emit(data, writer);
                 Write(string.Format("({0:D5} bytes)[{1} -> {2}]", size, src.ToUri(), dst.ToUri()));
             }
 
@@ -188,7 +187,7 @@ namespace Z0.Asm
             var project = Ws.Project(State.Project());
             var src = project.OutFiles(FileKind.AsmSyntax).View;
             var count = src.Length;
-            var dst = project.OutDir() + FS.file(project.Name.Format(), FileKind.AsmSyntax.Ext());
+            var dst = project.OutDir() + FS.file(project.Name.Format() + ".syntax-trees", FS.Asm);
             using var writer = dst.AsciWriter();
             for(var i=0; i<count; i++)
             {

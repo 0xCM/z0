@@ -8,16 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
-    public readonly struct StringHasher
+    partial class text
     {
-        [MethodImpl(Inline)]
-        public uint Compute(string src)
-            => alg.hash.marvin(bytes(src));
-
-        [MethodImpl(Inline)]
-        public static uint compute(ReadOnlySpan<char> src)
-            => alg.hash.marvin(bytes(src));
+        [Op]
+        public static TextRow row(string src, char delimiter)
+            => !string.IsNullOrEmpty(src) ? src.SplitClean(delimiter).Select(x => new TextBlock(x)) : TextRow.Empty;
     }
 }

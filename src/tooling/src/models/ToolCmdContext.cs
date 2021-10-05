@@ -4,18 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public struct ToolCmdSpec : ITextual
+    public struct ToolCmdContext
     {
         /// <summary>
-        /// The path to the tool executable
+        /// The working folder, if any
         /// </summary>
-        public FS.FilePath ToolPath;
+        public FS.FolderPath WorkingDir;
 
         /// <summary>
-        /// The arguments to pass to the tool
+        /// Environment variables to use, if any
         /// </summary>
-        public Index<string> Args;
-        public string Format()
-            => string.Format("{0} {0}", ToolPath.Format(PathSeparator.BS), Args.Format());
+        public NamedValues<string> EnvVars;
     }
 }

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
+    using System.IO;
 
     using static Root;
     using static core;
@@ -32,6 +33,59 @@ namespace Z0
             }
 
             return result.ToString();
+        }
+
+        public static HexLineConfig DefaultLineConfig => new HexLineConfig(bpl: 32, labels: true, delimiter: Chars.Space, zeropad: true);
+
+        [Op]
+        public static uint emit(ReadOnlySpan<byte> src, StreamWriter dst, HexLineConfig? c = null)
+        {
+            var count = (uint)src.Length;
+            if(count == 0)
+                return 0;
+
+            var config = c ?? DefaultLineConfig;
+            var line = TextTools.buffer();
+            var address = Address32.Zero;
+            var offset = 1;
+            var restart = true;
+            var last = count - 1;
+            var i=0u;
+            var bpl = config.BytesPerLine;
+
+            while(i++ <= last)
+            {
+                address = (Address32)(i - 1);
+                ref readonly var b = ref skip(src,i);
+                if(restart)
+                {
+                    line.Append(string.Format("{0} ", address.Format()));
+                    restart = false;
+                }
+
+                line.Append(string.Format("{0} ", HexFormatter.format<W8,byte>(b)));
+
+                if(offset != 0 && (offset % bpl == 0))
+                {
+                    dst.WriteLine(line.Emit());
+                    restart = true;
+                }
+
+                offset++;
+            }
+
+            if(config.ZeroPad)
+            {
+                var fill = bpl - (count % bpl);
+                for(var q=0; q<fill; q++)
+                {
+                    line.Append("00");
+                    if(q != fill - 1)
+                        line.Append(" ");
+                }
+            }
+            dst.WriteLine(line.Emit());
+            return count;
         }
 
         /// <summary>
@@ -61,7 +115,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ISystemFormatter<T> sysformatter<T>()
             where T : struct
-                => SystemHexFormatters.system_u<T>();
+                => system_u<T>();
 
         /// <summary>
         /// Formats a sequence of primal numeric calls as data-formatted hex
@@ -229,31 +283,31 @@ namespace Z0
 
         [Op]
         public static string bytes(ushort src)
-            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+            => format(core.bytes(src), HexFormatSpecs.HexData);
 
         [Op]
         public static string bytes(short src)
-            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+            => format(core.bytes(src), HexFormatSpecs.HexData);
 
         [Op]
         public static string bytes(int src)
-            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+            => format(core.bytes(src), HexFormatSpecs.HexData);
 
         [Op]
         public static string bytes(uint src)
-            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+            => format(core.bytes(src), HexFormatSpecs.HexData);
 
         [Op]
         public static string bytes(long src)
-            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+            => format(core.bytes(src), HexFormatSpecs.HexData);
 
         [Op]
         public static string bytes(ulong src)
-            => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+            => format(core.bytes(src), HexFormatSpecs.HexData);
 
         public static string bytes<T>(T src)
             where T : unmanaged
-                => core.bytes(src).HexCoreFormat(HexFormatSpecs.HexData);
+                => format(core.bytes(src), HexFormatSpecs.HexData);
 
         [Op, Closures(AllNumeric)]
         public static string format<T>(T src, bool zpad, bool specifier, bool uppercase = false, bool prespec = true)
@@ -318,5 +372,144 @@ namespace Z0
             else
                 return format(w64, bw64(value), postspec);
         }
+
+        [MethodImpl(Inline)]
+        internal static ISystemFormatter<T> system_u<T>()
+            where T : struct
+        {
+            if(typeof(T) == typeof(byte))
+                return generalize<HexFormatter8u,ISystemFormatter<T>>(HexFormatter8u.Service);
+            else if(typeof(T) == typeof(ushort))
+                return generalize<HexFormatter16u,ISystemFormatter<T>>(HexFormatter16u.Service);
+            else if(typeof(T) == typeof(uint))
+                return generalize<HexFormatter32u,ISystemFormatter<T>>(HexFormatter32u.Service);
+            else if(typeof(T) == typeof(ulong))
+                return generalize<HexFormatter64u,ISystemFormatter<T>>(HexFormatter64u.Service);
+            else
+                return system_i<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static ISystemFormatter<T> system_i<T>()
+            where T : struct
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generalize<HexFormatter8i,ISystemFormatter<T>>(HexFormatter8i.Service);
+            else if(typeof(T) == typeof(short))
+                return generalize<HexFormatter16i,ISystemFormatter<T>>(HexFormatter16i.Service);
+            else if(typeof(T) == typeof(int))
+                return generalize<HexFormatter32i,ISystemFormatter<T>>(HexFormatter32i.Service);
+            else if(typeof(T) == typeof(long))
+                return generalize<HexFormatter64i,ISystemFormatter<T>>(HexFormatter64i.Service);
+            else
+                return system_f<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static ISystemFormatter<T> system_f<T>()
+            where T : struct
+        {
+            if(typeof(T) == typeof(float))
+                return generalize<HexFormatter32f,ISystemFormatter<T>>(HexFormatter32f.Service);
+            else if(typeof(T) == typeof(double))
+                return generalize<HexFormatter64f,ISystemFormatter<T>>(HexFormatter64f.Service);
+            else
+                throw no<T>();
+        }
+
+        readonly struct HexFormatter8i : ISystemFormatter<HexFormatter8i,sbyte>
+        {
+            public static HexFormatter8i Service => default;
+
+            [MethodImpl(Inline)]
+            public string Format(sbyte src, string format = null)
+                => src.ToString(format ?? string.Empty);
+        }
+
+        readonly struct HexFormatter8u : ISystemFormatter<HexFormatter8u,byte>
+        {
+            public static HexFormatter8u Service => default;
+
+            [MethodImpl(Inline)]
+            public string Format(byte src, string format = null)
+                => src.ToString(format ?? EmptyString);
+        }
+
+        readonly struct HexFormatter16i : ISystemFormatter<HexFormatter16i,short>
+        {
+            public static HexFormatter16i Service => default;
+
+            [MethodImpl(Inline)]
+            public string Format(short src, string format = null)
+                => src.ToString(format ?? EmptyString);
+        }
+
+        readonly struct HexFormatter16u : ISystemFormatter<HexFormatter16u,ushort>
+        {
+            public static HexFormatter16u Service =>  default;
+
+            [MethodImpl(Inline)]
+            public string Format(ushort src, string format = null)
+                => src.ToString(format ?? EmptyString);
+        }
+
+        readonly struct HexFormatter32i : ISystemFormatter<HexFormatter32i,int>
+        {
+            public static HexFormatter32i Service => default;
+
+            [MethodImpl(Inline)]
+            public string Format(int src, string format = null)
+                => src.ToString(format ?? EmptyString);
+        }
+
+        readonly struct HexFormatter32u : ISystemFormatter<HexFormatter32u,uint>
+        {
+            public static HexFormatter32u Service =>  default;
+
+            [MethodImpl(Inline)]
+            public string Format(uint src, string format = null)
+                => src.ToString(format ?? EmptyString);
+        }
+
+        readonly struct HexFormatter64i : ISystemFormatter<HexFormatter64i,long>
+        {
+            public static HexFormatter64i Service =>  default;
+
+            [MethodImpl(Inline)]
+            public string Format(long src, string format = null)
+                => src.ToString(format ?? EmptyString);
+        }
+
+        readonly struct HexFormatter64u : ISystemFormatter<HexFormatter64u,ulong>
+        {
+            public static HexFormatter64u Service =>  default;
+
+            [MethodImpl(Inline)]
+            public string Format(ulong src, string format = null)
+                => src.ToString(format ?? EmptyString);
+        }
+
+        readonly struct HexFormatter32f : ISystemFormatter<HexFormatter32f,float>
+        {
+            public static HexFormatter32f Service =>  default;
+
+            [MethodImpl(Inline)]
+            public string Format(float src, string format = null)
+                => BitConverter.SingleToInt32Bits(src).ToString(format ?? EmptyString);
+        }
+
+        readonly struct HexFormatter64f : ISystemFormatter<HexFormatter64f,double>
+        {
+            public static HexFormatter64f Service =>  default;
+
+            [MethodImpl(Inline)]
+            public string Format(double src, string format = null)
+                => BitConverter.DoubleToInt64Bits(src).ToString(format ?? EmptyString);
+        }
+
+        [MethodImpl(Inline)]
+        static ref readonly F generalize<X,F>(in X src)
+            where X : struct
+                => ref @as<X,F>(src);
     }
 }

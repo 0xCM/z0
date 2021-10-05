@@ -14,8 +14,6 @@ namespace Z0
             var dst = new ToolCmdSpec();
             dst.ToolPath = path;
             dst.Args = args.Select(x => x.Format());
-            dst.EnvVars = NamedValues.empty<string>();
-            dst.WorkingDir = FS.dir(Environment.CurrentDirectory);
             return dst;
         }
     }

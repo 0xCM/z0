@@ -46,7 +46,7 @@ namespace Z0
         [Op]
         public void bitstack_basecase()
         {
-            var stack = new BitStack(0b101011);
+            var stack = new CircularBits(0b101011);
             Claim.require(stack.Pop() == 1);
             Claim.require(stack.Pop() == 1);
             Claim.require(stack.Pop() == 0);

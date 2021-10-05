@@ -16,14 +16,14 @@ namespace Z0
         public static StringHasher strings()
             => default(StringHasher);
 
-        public static uint collisions<S,T>(Index<S> src, IHashFunction<S,T> hash)
+        public static uint collisions<S,T>(Index<S> src, Func<S,T> hash)
             where T : unmanaged
         {
             var accumulator = hashset<T>();
             var count = src.Count;
             var view = src.View;
             for(var i=0; i<count; i++)
-                accumulator.Add(hash.Compute(skip(view, i)));
+                accumulator.Add(hash(skip(view, i)));
             return count - (uint)accumulator.Count;
         }
 

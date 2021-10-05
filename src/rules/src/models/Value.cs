@@ -25,21 +25,5 @@ namespace Z0
             }
         }
 
-        public readonly struct Value<T> : IValue<T>
-        {
-            public DataType Type {get;}
-
-            public T Content {get;}
-
-            [MethodImpl(Inline)]
-            public Value(DataType type, T content)
-            {
-                Type = type;
-                Content = content;
-            }
-
-            public static implicit operator Value(Value<T> src)
-                => new Value(src.Type, src.Content);
-        }
     }
 }

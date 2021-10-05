@@ -8,9 +8,10 @@ namespace Z0.Models
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
 
+    using static Root;
+
     public sealed class Controller : AppService<Controller>
     {
-
         void Spin()
         {
             var counter = 0u;
@@ -31,8 +32,7 @@ namespace Z0.Models
         public void Control(ReadOnlySpan<string> args)
         {
 
-            DefineGrammar();
-
+            var context = ModelContext.create(Wf);
 
         }
 

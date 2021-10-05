@@ -15,9 +15,6 @@ namespace Z0
     /// </summary>
     public readonly struct TextRow
     {
-        public static TextRow parse(string src, char delimiter)
-            => !string.IsNullOrEmpty(src) ? src.SplitClean(delimiter).Select(x => new TextBlock(x)) : Empty;
-
         readonly Index<TextBlock> Data;
 
         [MethodImpl(Inline)]

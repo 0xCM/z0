@@ -2,11 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models
 {
-    public interface IHashFunction<S,T>
-        where T : unmanaged
+    sealed class ModelContext : ModelContext<ModelContext,IWfRuntime>
     {
-        T Compute(in S src);
+        protected override void Initialize(IWfRuntime context)
+        {
+            Random = Rng.pcg64();
+        }
     }
 }

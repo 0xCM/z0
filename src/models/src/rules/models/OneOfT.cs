@@ -16,24 +16,24 @@ namespace Z0
         /// <summary>
         /// Specifies that the occurence of an element is distinguished by membership in a specified set
         /// </summary>
-        public readonly struct OneOf<T> : ITerm
+        public readonly struct OneOf<T> : IOneOf<T>
         {
-            readonly Index<T> _Terms;
+            readonly Index<T> _Choices;
 
             [MethodImpl(Inline)]
             public OneOf(Index<T> choices)
-                => _Terms = choices;
+                => _Choices = choices;
 
             public uint Count
             {
                 [MethodImpl(Inline)]
-                get => _Terms.Count;
+                get => _Choices.Count;
             }
 
-            public Span<T> Terms
+            public Span<T> Choices
             {
                 [MethodImpl(Inline)]
-                get => _Terms;
+                get => _Choices;
             }
 
              public string Format()
@@ -48,7 +48,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator OneOf(OneOf<T> src)
-                => new OneOf(src._Terms.Select(x => (dynamic)x));
+                => new OneOf(src._Choices.Select(x => (dynamic)x));
         }
     }
 }

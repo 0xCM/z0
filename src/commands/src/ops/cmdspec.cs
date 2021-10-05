@@ -13,11 +13,6 @@ namespace Z0
 
     partial struct Cmd
     {
-        [Op, Closures(Closure)]
-        public static CmdSpec<K> cmdspec<K>(K id, StringIndex args)
-            where K : unmanaged
-                => new CmdSpec<K>(id, args);
-
         [Op, MethodImpl(Inline)]
         public static CmdSpec cmdspec(string name, CmdArgs args)
             => new CmdSpec(name, args);

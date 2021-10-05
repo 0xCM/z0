@@ -2,13 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Models.MMIX
 {
-    partial struct RuleModels
+    public enum ControlOperation : byte
     {
-        public readonly struct Statement
-        {
-            public IScope Scope {get;}
-        }
+        None = 0,
+
+        CreateMachine,
+
+        DescribeMachine
     }
 }

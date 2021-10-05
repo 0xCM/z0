@@ -136,7 +136,7 @@ namespace Z0.Asm
             var dst = list<CpuIdRow>();
             while(current != null)
             {
-                var data = TextRow.parse(current,Chars.Pipe);
+                var data = text.row(current,Chars.Pipe);
                 if(data.CellCount != FieldCount)
                     return (false, Tables.FieldCountMismatch.Format(FieldCount, data.CellCount));
 
@@ -316,7 +316,7 @@ namespace Z0.Asm
             var dst = list<CpuIdRow>();
             while(current != null)
             {
-                var data = TextRow.parse(current,Chars.Pipe);
+                var data = text.row(current,Chars.Pipe);
                 if(data.CellCount != FieldCount)
                 {
                     Error(Tables.FieldCountMismatch.Format(FieldCount, data.CellCount));

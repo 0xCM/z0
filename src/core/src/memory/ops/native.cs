@@ -72,9 +72,12 @@ namespace Z0
         /// </summary>
         /// <param name="size">The buffer length in bytes</param>
         [Op]
-        public static NativeBuffer<T> native<T>(ByteSize size)
+        public static NativeBuffer<T> native<T>(uint count)
             where T : unmanaged
-                => new NativeBuffer<T>((liberate(Marshal.AllocHGlobal((int)size), (int)size), size));
+        {
+            ByteSize sz = count*size<T>();
+            return new NativeBuffer<T>((liberate(Marshal.AllocHGlobal((int)sz), sz), sz));
+        }
 
         /// <summary>
         /// Creates a buffer sequence that owns the underlying memory allocation and releases it upon disposal

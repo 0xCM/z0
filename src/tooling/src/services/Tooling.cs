@@ -25,7 +25,6 @@ namespace Z0
 
         }
 
-
         [MethodImpl(Inline), Op]
         public static Toolset toolset(FS.FolderPath @base, ToolId[] members)
             => new Toolset(@base, members);
@@ -39,8 +38,8 @@ namespace Z0
             {
                 var content = line.Codes;
                 var i = SQ.index(content, AsciCode.Colon);
-                var name = text.format(SQ.left(content,i)).Trim();
-                var desc = text.format(SQ.right(content,i)).Trim();
+                var name = text.trim(text.format(SQ.left(content,i)));
+                var desc = text.trim(text.format(SQ.right(content,i)));
                 var flag = Cmd.flagspec(k++, name, desc);
                 dst.Add(flag);
             }
