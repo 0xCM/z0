@@ -50,13 +50,13 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.Next<T>();
-                BitString.bitchars(a,s0);
-                s1 = BitString.bitchars(a);
+                BitStrings.bitchars(a,s0);
+                s1 = BitStrings.bitchars(a);
                 ClaimPrimalSeq.eq(s0, s1);
 
                 s0.Reverse();
                 var textA = s0.Concat();
-                var textB = BitString.scalar(a).Format();
+                var textB = BitStrings.scalar(a).Format();
                 ClaimPrimalSeq.eq(textA, textB);
             }
         }

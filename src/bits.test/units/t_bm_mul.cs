@@ -93,65 +93,65 @@ namespace Z0
             }
         }
 
-        public void bm_mul_16x16x16()
-        {
-            var n = n16;
-            for(var i=0; i< RepCount; i++)
-            {
-                var m1 = Random.BitMatrix(n);
-                var m2 = m1.Replicate();
-                var m3 = Random.BitMatrix(n);
-                var m4 = m2 * m3;
-                var m5 = bmm(m1,m3);
-                Claim.require(m4 == m5);
-            }
-        }
+        // public void bm_mul_16x16x16()
+        // {
+        //     var n = n16;
+        //     for(var i=0; i< RepCount; i++)
+        //     {
+        //         var m1 = Random.BitMatrix(n);
+        //         var m2 = m1.Replicate();
+        //         var m3 = Random.BitMatrix(n);
+        //         var m4 = m2 * m3;
+        //         var m5 = bmm(m1,m3);
+        //         Claim.require(m4 == m5);
+        //     }
+        // }
 
-        public void bm_mul_32x32x32()
-        {
-            var n = n32;
-            for(var i=0; i< RepCount; i++)
-            {
-                var m1 = Random.BitMatrix(n);
-                var m2 = m1.Replicate();
-                var m3 = Random.BitMatrix(n);
-                var m4 = m2 * m3;
-                var m5 = bmm(m1,m3);
-                Claim.require(m4 == m5);
-            }
-        }
+        // public void bm_mul_32x32x32()
+        // {
+        //     var n = n32;
+        //     for(var i=0; i< RepCount; i++)
+        //     {
+        //         var m1 = Random.BitMatrix(n);
+        //         var m2 = m1.Replicate();
+        //         var m3 = Random.BitMatrix(n);
+        //         var m4 = m2 * m3;
+        //         var m5 = bmm(m1,m3);
+        //         Claim.require(m4 == m5);
+        //     }
+        // }
 
-        public void bm_mul_64x64x64()
-        {
-            var n = n64;
-            for(var i=0; i< RepCount; i++)
-            {
-                var m1 = Random.BitMatrix(n);
-                var m2 = m1.Replicate();
-                var m3 = Random.BitMatrix(n);
-                var m4 = m2 * m3;
-                var m5 = bmm(m1,m3);
-                Claim.require(m4 == m5);
-            }
-        }
+        // public void bm_mul_64x64x64()
+        // {
+        //     var n = n64;
+        //     for(var i=0; i< RepCount; i++)
+        //     {
+        //         var m1 = Random.BitMatrix(n);
+        //         var m2 = m1.Replicate();
+        //         var m3 = Random.BitMatrix(n);
+        //         var m4 = m2 * m3;
+        //         var m5 = bmm(m1,m3);
+        //         Claim.require(m4 == m5);
+        //     }
+        // }
 
-        public void bm_vmul_64x64x64()
-        {
-            for(var sample = 0; sample < RepCount; sample++)
-            {
-                var A = Random.BitMatrix64();
-                var x = Random.BitVector(n64);
-                var z = A * x;
-                var y = BitVector.alloc(n64);
-                for(var i = 0; i<A.Order; i++)
-                {
-                    var r = A[i];
-                    y[i] = r % x;
-                }
+        // public void bm_vmul_64x64x64()
+        // {
+        //     for(var sample = 0; sample < RepCount; sample++)
+        //     {
+        //         var A = Random.BitMatrix64();
+        //         var x = Random.BitVector(n64);
+        //         var z = A * x;
+        //         var y = BitVector.alloc(n64);
+        //         for(var i = 0; i<A.Order; i++)
+        //         {
+        //             var r = A[i];
+        //             y[i] = r % x;
+        //         }
 
-                Claim.eq(z,y);
-            }
-        }
+        //         Claim.eq(z,y);
+        //     }
+        // }
 
         public void bm_vmul_8x8x8()
         {
@@ -168,23 +168,23 @@ namespace Z0
             }
         }
 
-        public void bm_vmul_16x16x16()
-        {
-            for(var sample = 0; sample < RepCount; sample++)
-            {
-                var m = Random.BitMatrix16();
-                var c = Random.BitVector(n16);
-                var z1 = m * c;
-                var z2 = BitVector.alloc(n16);
-                for(var i = 0; i<m.Order; i++)
-                {
-                    var r = m[i];
-                    z2[i] = r % c;
-                }
+        // public void bm_vmul_16x16x16()
+        // {
+        //     for(var sample = 0; sample < RepCount; sample++)
+        //     {
+        //         var m = Random.BitMatrix16();
+        //         var c = Random.BitVector(n16);
+        //         var z1 = m * c;
+        //         var z2 = BitVector.alloc(n16);
+        //         for(var i = 0; i<m.Order; i++)
+        //         {
+        //             var r = m[i];
+        //             z2[i] = r % c;
+        //         }
 
-                Claim.require(z1 == z2);
-            }
-        }
+        //         Claim.require(z1 == z2);
+        //     }
+        // }
 
         public void bm_vmul_32x32x32()
         {

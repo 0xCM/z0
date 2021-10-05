@@ -88,21 +88,21 @@ namespace Z0
             }
         }
 
-        public void blockspan_64x8u_v2x128x32u()
-        {
-            var x = SpanBlocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
-            var y = vblocks.vinflate256x32u(x,0);
-            var z0 = x.Slice(0,4);
-            var z1 = x.Slice(4,4);
-            var y0s = cpu.vlo(y).ToSpan();
-            var y1s = cpu.vhi(y).ToSpan();
+        // public void blockspan_64x8u_v2x128x32u()
+        // {
+        //     var x = SpanBlocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
+        //     var y = vblocks.vinflate256x32u(x,0);
+        //     var z0 = x.Slice(0,4);
+        //     var z1 = x.Slice(4,4);
+        //     var y0s = cpu.vlo(y).ToSpan();
+        //     var y1s = cpu.vhi(y).ToSpan();
 
-            for(var i=0; i <4; i++)
-            {
-                Claim.eq(z0[i], (byte)y0s[i]);
-                Claim.eq(z1[i], (byte)y1s[i]);
-            }
-        }
+        //     for(var i=0; i <4; i++)
+        //     {
+        //         Claim.eq(z0[i], (byte)y0s[i]);
+        //         Claim.eq(z1[i], (byte)y1s[i]);
+        //     }
+        // }
 
         public void vconvert_128x8u_1x256x16u()
         {

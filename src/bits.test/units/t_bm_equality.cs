@@ -56,25 +56,25 @@ namespace Z0
         }
 
 
-        public void bm_equality_16x16x16()
-        {
-            var n = n16;
-            for(var i=0; i<RepCount; i++)
-            {
-                var m1 = Random.BitMatrix(n);
-                Claim.require(BitMatrix.same(m1,m1));
+        // public void bm_equality_16x16x16()
+        // {
+        //     var n = n16;
+        //     for(var i=0; i<RepCount; i++)
+        //     {
+        //         var m1 = Random.BitMatrix(n);
+        //         Claim.require(BitMatrix.same(m1,m1));
 
-                var m2 = m1.Replicate();
-                Claim.require(BitMatrix.same(m1,m2));
-                Claim.require(are_equal(m1,m2));
+        //         var m2 = m1.Replicate();
+        //         Claim.require(BitMatrix.same(m1,m2));
+        //         Claim.require(are_equal(m1,m2));
 
-                m2[5,5] = !m1[5,5];
-                Claim.nea(BitMatrix.same(m1,m2));
-                Claim.nea(m1.Equals(m2));
+        //         m2[5,5] = !m1[5,5];
+        //         Claim.nea(BitMatrix.same(m1,m2));
+        //         Claim.nea(m1.Equals(m2));
 
 
-            }
-        }
+        //     }
+        // }
 
         public void bm_equality_32x32x32()
         {

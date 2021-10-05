@@ -19,12 +19,12 @@ namespace Z0
         /// <summary>
         /// The client node that takes a dependency on the target
         /// </summary>
-        public S Source {get;}
+        public readonly S Source;
 
         /// <summary>
         /// The node upon which the client depends
         /// </summary>
-        public T Target  {get;}
+        public readonly T Target;
 
         [MethodImpl(Inline)]
         public Dependency(S src, T dst)
@@ -44,6 +44,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => alg.hash.calc64(Source, Target);
         }
+
+        S IRelation<Dependency<S,T>, S,T>.Source
+            => Source;
+
+        T IRelation<Dependency<S,T>, S,T>.Target
+            => Target;
+
         public string Format()
             => api.format(this);
 

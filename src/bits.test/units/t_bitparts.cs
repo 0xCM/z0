@@ -102,9 +102,9 @@ namespace Z0
             {
                 var x = Random.Next<A>();
                 part(x, dst);
-                var y = BitString.scalar(x).Partition(width).Map(bs => bs.ToBitVector(n8));
+                var y = BitStrings.scalar(x).Partition(width).Map(bs => bs.ToBitVector(n8));
                 for(var i=0; i<count; i++)
-                    Claim.eq(y[i], BitString.scalar(dst[i]).ToBitVector(n8));
+                    Claim.eq(y[i], BitStrings.scalar(dst[i]).ToBitVector(n8));
             }
         }
     }

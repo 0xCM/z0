@@ -10,12 +10,14 @@ namespace Z0
     using static Root;
     using static core;
 
+    using api = BitStrings;
+
     /// <summary>
     /// Represents a sequence of bits
     /// </summary>
     public partial struct BitString : IEquatable<BitString>
     {
-        byte[] Data;
+        internal byte[] Data;
 
         [MethodImpl(Inline)]
         internal BitString(byte[] src)
@@ -191,11 +193,11 @@ namespace Z0
         /// <param name="minlen">The the minimum length of the produced span</param>
         [MethodImpl(Inline)]
         public readonly Span<byte> Pack()
-            => PackedBits(Data, 0, null);
+            => api.pack(Data, 0, null);
 
         [MethodImpl(Inline)]
         public readonly Span<byte> Pack(int offset, int minlen)
-            => PackedBits(Data, offset, minlen);
+            => api.pack(Data, offset, minlen);
 
         /// <summary>
         /// Counts the number of leading zero bits
@@ -369,7 +371,7 @@ namespace Z0
         /// Packs the bitsequence into a bytespan
         /// </summary>
         public Span<byte> ToPackedBytes()
-            => PackedBits(Data);
+            => api.pack(Data);
 
         /// <summary>
         /// Determines whether this bitstring represents the same value as another, ignoring
@@ -582,7 +584,7 @@ namespace Z0
             where T : unmanaged
         {
             var src = View;
-            var packed = PackedBits(src, offset, (int)width<T>());
+            var packed = api.pack(src, offset, (int)width<T>());
             return packed.Length != 0
                 ? packed.Singleton<byte,T>()
                 : default;
@@ -645,32 +647,32 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitString operator &(BitString lhs, BitString rhs)
-            => and(lhs,rhs);
+            => api.and(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitString operator |(BitString lhs, BitString rhs)
-            => or(lhs,rhs);
+            => api.or(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitString operator ^(BitString lhs, BitString rhs)
-            => xor(lhs,rhs);
+            => api.xor(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitString operator <<(BitString lhs, int offset)
-            => sll(lhs,offset);
+            => api.sll(lhs,offset);
 
         [MethodImpl(Inline)]
         public static BitString operator >>(BitString lhs, int offset)
-            => srl(lhs,offset);
+            => api.srl(lhs,offset);
 
         [MethodImpl(Inline)]
         public static BitString operator ~(BitString src)
-            => not(src);
+            => api.not(src);
 
         /// <summary>
         /// Defines the canonical empty bitstring of 0 length
         /// </summary>
         public static BitString Empty
-            => parse(string.Empty);
+            => api.parse(string.Empty);
     }
 }

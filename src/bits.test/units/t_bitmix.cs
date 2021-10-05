@@ -37,16 +37,16 @@ namespace Z0
                 var b = Random.Next<T>();
 
                 // odd a/b interspersal
-                var abOdd = BitString.scalar(gbits.mix(n1,a,b));
+                var abOdd = BitStrings.scalar(gbits.mix(n1,a,b));
 
                 // even a/b interspersal
-                var abEven = BitString.scalar(gbits.mix(n0,a,b));
+                var abEven = BitStrings.scalar(gbits.mix(n0,a,b));
 
                 // even/odd bits for a/b via bitstring
-                var bsaEven = BitString.scalar(a).Even();
-                var bsaOdd = BitString.scalar(a).Odd();
-                var bsbEven = BitString.scalar(b).Even();
-                var bsbOdd = BitString.scalar(b).Odd();
+                var bsaEven = BitStrings.scalar(a).Even();
+                var bsaOdd = BitStrings.scalar(a).Odd();
+                var bsbEven = BitStrings.scalar(b).Even();
+                var bsbOdd = BitStrings.scalar(b).Odd();
 
                 // bitstring reference interspersal for the even bits
                 var bsEven = bsaEven.Intersperse(bsbEven);
@@ -58,32 +58,32 @@ namespace Z0
             }
         }
 
-        public void bitmix_outline()
-        {
-            for(var i=0; i<RepCount; i++)
-            {
-                BitVector64 x = Random.BitVector(n64);
-                BitVector32 y = (uint)BitMasks.gather(x, L.Even64);
-                BitVector32 z = default;
+        // public void bitmix_outline()
+        // {
+        //     for(var i=0; i<RepCount; i++)
+        //     {
+        //         BitVector64 x = Random.BitVector(n64);
+        //         BitVector32 y = (uint)BitMasks.gather(x, L.Even64);
+        //         BitVector32 z = default;
 
-                for(int j=0, k = 0; j<64; j+=2, k++)
-                    z[k] = x[j];
+        //         for(int j=0, k = 0; j<64; j+=2, k++)
+        //             z[k] = x[j];
 
-                Claim.eq(z.State, y.State);
-            }
+        //         Claim.eq(z.State, y.State);
+        //     }
 
-            for(var i=0; i<RepCount; i++)
-            {
-                BitVector64 x = Random.BitVector(n64);
-                BitVector32 y = (uint)BitMasks.gather(x, L.Odd64);
-                BitVector32 z = default;
+        //     for(var i=0; i<RepCount; i++)
+        //     {
+        //         BitVector64 x = Random.BitVector(n64);
+        //         BitVector32 y = (uint)BitMasks.gather(x, L.Odd64);
+        //         BitVector32 z = default;
 
-                for(int j=1, k = 0; j<64; j+=2, k++)
-                    z[k] = x[j];
+        //         for(int j=1, k = 0; j<64; j+=2, k++)
+        //             z[k] = x[j];
 
-                Claim.eq(z.State, y.State);
-            }
-        }
+        //         Claim.eq(z.State, y.State);
+        //     }
+        // }
 
         string sb_mix_report()
         {

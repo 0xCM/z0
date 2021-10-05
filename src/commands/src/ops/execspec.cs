@@ -17,10 +17,10 @@ namespace Z0
             where T : struct
         {
             var t = typeof(T);
-            var fields = Clr.fields(t);
+            var fields = ClrModels.fields(t);
             var count = fields.Length;
             var reflected = alloc<FieldValue>(count);
-            Clr.values(spec, fields, reflected);
+            ClrFields.values(spec, fields, reflected);
             var buffer = alloc<ToolCmdArg>(count);
             var target = span(buffer);
             var source = @readonly(reflected);

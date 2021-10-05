@@ -19,12 +19,12 @@ namespace Z0
         /// <summary>
         /// The client in the relation that that depends on the <see cref='Target'/>
         /// </summary>
-        public T Source {get;}
+        public readonly T Source;
 
         /// <summary>
         /// The client-agnostic relation supplier
         /// </summary>
-        public T Target {get;}
+        public readonly T Target;
 
         [MethodImpl(Inline)]
         public Dependency(T src, T dst)
@@ -44,6 +44,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => alg.hash.calc64(Source,Target);
         }
+
+        T IRelation<Dependency<T>,T,T>.Source
+            => Source;
+
+        T IRelation<Dependency<T>,T,T>.Target
+            => Target;
 
         public string Format()
             => api.format(this);

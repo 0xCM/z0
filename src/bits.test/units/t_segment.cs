@@ -8,31 +8,31 @@ namespace Z0
 
     public class t_segment : t_bits<t_segment>
     {
-        public void segment_outline()
-        {
-            const ulong U64_00 = 0b00001001_11110000_11001001_10011111_00010001_10111100_00111000_11110000;
-            const uint U32_01 = 0b00001001_11110000_11001001_10011111;
+        // public void segment_outline()
+        // {
+        //     const ulong U64_00 = 0b00001001_11110000_11001001_10011111_00010001_10111100_00111000_11110000;
+        //     const uint U32_01 = 0b00001001_11110000_11001001_10011111;
 
-            Span<byte> dst = stackalloc byte[8];
+        //     Span<byte> dst = stackalloc byte[8];
 
-            var r1 = gbits.segment(U64_00, 0, 7);
-            PrimalClaims.eq((byte)0b11110000, r1);
+        //     var r1 = gbits.segment(U64_00, 0, 7);
+        //     PrimalClaims.eq((byte)0b11110000, r1);
 
-            gbits.segment(U64_00, 0, 7, dst, 0);
-            PrimalClaims.eq((byte)0b11110000, dst[0]);
+        //     gbits.segment(U64_00, 0, 7, dst, 0);
+        //     PrimalClaims.eq((byte)0b11110000, dst[0]);
 
-            gbits.segment(U64_00, 8, 15, dst, 0);
-            PrimalClaims.eq((byte)0b00111000, dst[0]);
+        //     gbits.segment(U64_00, 8, 15, dst, 0);
+        //     PrimalClaims.eq((byte)0b00111000, dst[0]);
 
-            gbits.segment(U64_00, 4, 7, dst, 0);
-            PrimalClaims.eq((byte)0b1111, dst[0]);
+        //     gbits.segment(U64_00, 4, 7, dst, 0);
+        //     PrimalClaims.eq((byte)0b1111, dst[0]);
 
-            gbits.segment(U64_00, 4, 6, dst, 1);
-            PrimalClaims.eq((byte)0b111, dst[1]);
+        //     gbits.segment(U64_00, 4, 6, dst, 1);
+        //     PrimalClaims.eq((byte)0b111, dst[1]);
 
-            gbits.segment(U32_01, 7, 8, dst, 2);
-            PrimalClaims.eq((byte)0b11, dst[2]);
-        }
+        //     gbits.segment(U32_01, 7, 8, dst, 2);
+        //     PrimalClaims.eq((byte)0b11, dst[2]);
+        // }
 
         public void segment_32u()
         {

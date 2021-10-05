@@ -10,7 +10,7 @@ namespace Z0
         {
             var perm = Permute.natural<N8>((2,3), (6,7));
             var bs1 = ((byte)0b10001101).ToBitString();
-            var bs2 = BitString.parse("01001101");
+            var bs2 = BitStrings.parse("01001101");
             var bs3 = bs1.Permute(perm);
             Claim.eq(bs2, bs3);
         }
@@ -19,7 +19,7 @@ namespace Z0
         {
             var p2 = Permute.natural<N16>((1,10), (2,11), (3, 8));
             var bsx2 = ((ushort)0b1000110111000100).ToBitString();
-            var bsy2 =  BitString.load(bsx2.BitSeq.Permute(p2).ToArray());
+            var bsy2 =  BitStrings.load(bsx2.BitSeq.Permute(p2).ToArray());
             var bsz2 = bsx2.Permute(p2);
             Claim.eq(bsy2, bsz2);
         }

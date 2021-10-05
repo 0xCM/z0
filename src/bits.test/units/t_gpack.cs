@@ -76,7 +76,7 @@ namespace Z0
                 var src = Random.Next<S>();
                 Span<T> dst = new T[width<S>()];
                 vbits.unpack(src,dst);
-                var bs = BitString.scalar(src);
+                var bs = BitStrings.scalar(src);
                 for(var i = 0; i< bs.Length; i++)
                 {
                     var expect = bs[i] ? one<T>() : zero<T>();
@@ -88,7 +88,7 @@ namespace Z0
             var x = Random.Span<S>(RepCount);
             Span<T> y1 = new T[x.Length * width<S>()];
             gpack.unpack32(x,y1);
-            var y2 = BitString.scalars(x);
+            var y2 = BitStrings.scalars(x);
             for(var i=0; i< y1.Length; i++)
             {
                 var expect = y2[i] ? one<T>() : zero<T>();

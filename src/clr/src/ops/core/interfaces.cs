@@ -9,12 +9,10 @@ namespace Z0
 
     using static Root;
 
-    partial class XBitBlocks
+    partial struct Clr
     {
-        [MethodImpl(Inline)]
-        public static BitString ToBitString<N,T>(this BitBlock<N,T> src)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitStrings.scalars(src.Data, (int)src.Width);
+        [MethodImpl(Inline), Op]
+        public static Type[] interfaces(Type src)
+            => src.GetInterfaces();
     }
 }

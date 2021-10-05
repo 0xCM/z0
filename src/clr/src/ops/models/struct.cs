@@ -6,15 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+
+    using R = System.Reflection;
 
     using static Root;
+    using static core;
 
-    partial class XBitBlocks
+    partial struct ClrModels
     {
-        [MethodImpl(Inline)]
-        public static BitString ToBitString<N,T>(this BitBlock<N,T> src)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitStrings.scalars(src.Data, (int)src.Width);
+        [MethodImpl(Inline), Op]
+        public static ClrStructAdapter @struct(Type src)
+            => new ClrStructAdapter(src);
     }
 }

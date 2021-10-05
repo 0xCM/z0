@@ -110,14 +110,14 @@ namespace Z0
             Claim.veq(expect,v);
         }
 
-        public void vpack_2x128x64u_128x32u()
-        {
-            var w = w128;
-            var x0 = cpu.vparts(w, 25, 50);
-            var x1 = cpu.vparts(w, 75, 10);
-            var dst = vpack.vpack128x32u(x0, x1);
-            var expect = cpu.vparts(w, 25, 50, 75, 10);
-            Claim.veq(expect,dst);
-        }
+        // public void vpack_2x128x64u_128x32u()
+        // {
+        //     var w = w128;
+        //     var x0 = cpu.vparts(w, 25, 50);
+        //     var x1 = cpu.vparts(w, 75, 10);
+        //     var dst = vpack.vpack128x32u(x0, x1);
+        //     var expect = cpu.vparts(w, 25, 50, 75, 10);
+        //     Claim.veq(expect,dst);
+        // }
     }
 }

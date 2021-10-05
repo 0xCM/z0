@@ -364,6 +364,11 @@ namespace Z0
             Write(string.Format("Term Count:{0}", count));
         }
 
+        void Run(N27 n)
+        {
+
+        }
+
         void Run(string spec)
         {
             if(uint.TryParse(spec, out var n))
@@ -441,6 +446,9 @@ namespace Z0
                     break;
                     case 26:
                         Run(n26);
+                    break;
+                    case 27:
+                        Run(n27);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

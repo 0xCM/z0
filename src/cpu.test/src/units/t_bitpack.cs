@@ -168,7 +168,7 @@ namespace Z0
             for(var i=0; i<count; i++)
                 Claim.eq((byte)gbits.testbit(src, (byte)i), y[i]);
 
-            Claim.eq(BitString.load(y.ToArray()).TakeScalar<T>(), src);
+            Claim.eq(BitStrings.load(y.ToArray()).TakeScalar<T>(), src);
         }
     }
 }

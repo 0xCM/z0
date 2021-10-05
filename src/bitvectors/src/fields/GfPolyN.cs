@@ -86,7 +86,7 @@ namespace Z0
         /// </summary>
         public string Format(char? variable = null)
         {
-            var bs = BitString.scalar(Data);
+            var bs = BitStrings.scalar(Data);
             var terms = new List<string>();
 
             for(var i=0; i<bs.Length; i++)

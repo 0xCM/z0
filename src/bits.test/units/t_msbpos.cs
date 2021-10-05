@@ -31,7 +31,7 @@ namespace Z0
                 NumericClaims.lt(xPos, (byte)width<T>());
 
                 var xCount = gbits.nlz(x);
-                var y = BitString.scalar(x);
+                var y = BitStrings.scalar(x);
                 var yCount = y.Nlz();
                 NumericClaims.eq(xCount, yCount);
 

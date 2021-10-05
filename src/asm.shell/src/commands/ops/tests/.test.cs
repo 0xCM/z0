@@ -12,7 +12,6 @@ namespace Z0.Asm
     using static core;
     using static AsmChecks;
     using static Root;
-    using static BitFlow;
 
     partial class AsmCmdService
     {
@@ -86,11 +85,11 @@ namespace Z0.Asm
         [CmdOp(".test-native-cells")]
         unsafe Outcome TestNativeCells(CmdArgs args)
         {
+            var count = 256u;
+            byte length = 8;
             var result = Outcome.Success;
-            using var native = NativeCells.alloc<string>(256, out var id);
-            var count = native.CellCount;
-            var length = 8;
-            var bits = GenBitStrings();
+            using var native = NativeCells.alloc<string>(count, out var id);
+            var bits = GenBitStrings8(count);
             for(var i=0u; i<count; i++)
             {
                 var offset = i*length;
@@ -105,14 +104,14 @@ namespace Z0.Asm
             return result;
         }
 
-        Span<char> GenBitStrings()
+        Span<char> GenBitStrings8(uint count)
         {
-            var count = 256;
-            var length = 8;
-            var buffer = span<char>(count*length);
+            // var count = 256;
+            // var length = 8;
+            var buffer = span<char>(count*8);
             for(var i=0; i<count; i++)
             {
-                ref var c = ref seek(buffer,i*length);
+                ref var c = ref seek(buffer,i*8);
                 for(byte j=0; j<8; j++)
                 {
                     seek(c,7-j) = bit.test(i,(byte)j).ToChar();
@@ -123,9 +122,9 @@ namespace Z0.Asm
 
         void CheckBitSeq()
         {
-            var count = 256;
-            var length = 8;
-            var buffer = GenBitStrings();
+            var count = 256u;
+            byte length = 8;
+            var buffer = GenBitStrings8(count);
 
             for(var i=0; i<count; i++)
             {

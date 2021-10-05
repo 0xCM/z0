@@ -35,7 +35,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();
-                var y = BitString.scalar(x);
+                var y = BitStrings.scalar(x);
                 Claim.eq(x, y.TakeScalar<T>());
 
                 x = gbits.rotl(x, (byte)offset);

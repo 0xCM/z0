@@ -31,7 +31,7 @@ namespace Z0
             for(byte j=0; j<8; j++)
                 view[i,j] = j % 2 == 0;
 
-            var bs = BitString.scalar(src);
+            var bs = BitStrings.scalar(src);
             for(var i=0; i<bytecount*8; i++)
                 Claim.require(bs[i] == (i%2 == 0));
         }

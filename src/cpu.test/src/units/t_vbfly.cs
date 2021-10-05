@@ -49,17 +49,17 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<uint>();
-                var b = BitString.scalar(Bits.bfly(n4, a));
-                var c = BitString.scalar(a);
+                var b = BitStrings.scalar(Bits.bfly(n4, a));
+                var c = BitStrings.scalar(a);
 
-                Claim.eq(BitString.scalar<byte>(c[0..3]), BitString.scalar<byte>(b[0..3]));
-                Claim.eq(BitString.scalar<byte>(c[4..7]), BitString.scalar<byte>(b[8..11]));
-                Claim.eq(BitString.scalar<byte>(c[8..11]), BitString.scalar<byte>(b[4..7]));
-                Claim.eq(BitString.scalar<byte>(c[12..15]), BitString.scalar<byte>(b[12..15]));
-                Claim.eq(BitString.scalar<byte>(c[16..19]), BitString.scalar<byte>(b[16..19]));
-                Claim.eq(BitString.scalar<byte>(c[20..23]), BitString.scalar<byte>(b[24..27]));
-                Claim.eq(BitString.scalar<byte>(c[24..27]), BitString.scalar<byte>(b[20..23]));
-                Claim.eq(BitString.scalar<byte>(c[28..31]), BitString.scalar<byte>(b[28..31]));
+                Claim.eq(BitStrings.scalar<byte>(c[0..3]), BitStrings.scalar<byte>(b[0..3]));
+                Claim.eq(BitStrings.scalar<byte>(c[4..7]), BitStrings.scalar<byte>(b[8..11]));
+                Claim.eq(BitStrings.scalar<byte>(c[8..11]), BitStrings.scalar<byte>(b[4..7]));
+                Claim.eq(BitStrings.scalar<byte>(c[12..15]), BitStrings.scalar<byte>(b[12..15]));
+                Claim.eq(BitStrings.scalar<byte>(c[16..19]), BitStrings.scalar<byte>(b[16..19]));
+                Claim.eq(BitStrings.scalar<byte>(c[20..23]), BitStrings.scalar<byte>(b[24..27]));
+                Claim.eq(BitStrings.scalar<byte>(c[24..27]), BitStrings.scalar<byte>(b[20..23]));
+                Claim.eq(BitStrings.scalar<byte>(c[28..31]), BitStrings.scalar<byte>(b[28..31]));
             }
 
         }

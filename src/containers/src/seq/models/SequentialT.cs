@@ -17,9 +17,9 @@ namespace Z0
     {
         const long Step = 1;
 
-        public T Lo;
+        internal T Lo;
 
-        public T Hi;
+        internal T Hi;
 
         [MethodImpl(Inline)]
         public Sequential(T src)

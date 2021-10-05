@@ -9,6 +9,6 @@ namespace Z0
     partial struct SpanRes
     {
         public static ReadOnlySpan<ReflectedByteSpan> reflected(Type[] src)
-            => Clr.bytespans(src);
+            => ClrModels.bytespans(src);
     }
 }

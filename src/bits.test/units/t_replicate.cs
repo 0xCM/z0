@@ -19,20 +19,20 @@ namespace Z0
             }
         }
 
-        public void replicate_32u()
-        {
-            var src = 0b111000u;
-            var actual = gbits.replicate(src).ToBitVector32();
-            var width = gbits.effwidth(src);
-            Claim.eq(6,width);
+        // public void replicate_32u()
+        // {
+        //     var src = 0b111000u;
+        //     var actual = gbits.replicate(src).ToBitVector32();
+        //     var width = gbits.effwidth(src);
+        //     Claim.eq(6,width);
 
-            var expect = BitVector.alloc(n32);
-            for(int i=0; i< expect.Width; i++)
-                if(math.between( i % 6,3,5))
-                    expect[i] = Bit32.On;
+        //     var expect = BitVector.alloc(n32);
+        //     for(int i=0; i< expect.Width; i++)
+        //         if(math.between( i % 6,3,5))
+        //             expect[i] = Bit32.On;
 
-            Claim.eq(expect.State, actual.State);
-        }
+        //     Claim.eq(expect.State, actual.State);
+        // }
 
         public void replicate_64u()
         {

@@ -103,7 +103,7 @@ namespace Z0
         {
             for(var i=0; i<=231; i++)
             {
-                var bs = BitString.pow2(i);
+                var bs = BitStrings.pow2(i);
                 Claim.eq((int)bs.Length, i + 1);
                 for(var j=0; j<bs.Length; j++)
                 {
@@ -195,7 +195,7 @@ namespace Z0
         public void bs_partition()
         {
             var src = "0000010100001100101010001";
-            var bs = BitString.parse(src);
+            var bs = BitStrings.parse(src);
             Claim.eq(bs.Length, 25);
 
             var b1 = bs.Partition(1);
@@ -211,32 +211,32 @@ namespace Z0
         public void bs_patterns()
         {
             var p1 = (byte)0b11001110;
-            var s1 = BitString.replicate(p1, 4);
+            var s1 = BitStrings.replicate(p1, 4);
             Claim.eq(s1.Length,32);
             Claim.eq(p1.ToBitString(), s1[8..15]);
 
             var p2 = (ushort)0b1111111100010001;
-            var s2 = BitString.replicate(p2, 2);
+            var s2 = BitStrings.replicate(p2, 2);
             Claim.eq(s2.Length,32);
             Claim.eq(p2.ToBitString(), s2[0..15]);
         }
 
         public void bs_tlz()
         {
-            ClaimPrimalSeq.eq("100", BitString.scalar(0b00000100).Format(true));
-            ClaimPrimalSeq.eq("101", BitString.scalar(0b00000101).Format(true));
-            ClaimPrimalSeq.eq("1000101", BitString.scalar(0b01000101).Format(true));
-            ClaimPrimalSeq.eq("11010101", BitString.scalar(0b11010101).Format(true));
+            ClaimPrimalSeq.eq("100", BitStrings.scalar(0b00000100).Format(true));
+            ClaimPrimalSeq.eq("101", BitStrings.scalar(0b00000101).Format(true));
+            ClaimPrimalSeq.eq("1000101", BitStrings.scalar(0b01000101).Format(true));
+            ClaimPrimalSeq.eq("11010101", BitStrings.scalar(0b11010101).Format(true));
         }
 
         public void bs_parselit()
         {
-            var a = BitString.parse("01010111");
+            var a = BitStrings.parse("01010111");
             var b = a.TakeScalar<byte>();
             Claim.eq((byte)0b01010111, b);
 
             var x =  0b111010010110011010111001110000100001101ul;
-            var xbs = BitString.parse("111010010110011010111001110000100001101");
+            var xbs = BitStrings.parse("111010010110011010111001110000100001101");
             var ybs = x.ToBitString();
             Claim.yea(xbs == ybs);
 
@@ -263,7 +263,7 @@ namespace Z0
                 var blocks = bsX.Partition(8);
                 Claim.eq(8, blocks.Length);
 
-                var bsY = BitString.assemble(blocks.Select(x => x.Format()).ToArray());
+                var bsY = BitStrings.assemble(blocks.Select(x => x.Format()).ToArray());
                 Claim.eq(bsX, bsY);
 
                 var bytes = alloc<byte>(8);
@@ -286,7 +286,7 @@ namespace Z0
                 for(var i=0; i<src.Length; i++)
                 {
                     var x0 = src[i];
-                    var x1 = BitString.storeseq(x0);
+                    var x1 = BitStrings.storeseq(x0);
                     var seqlen = x1.Length;
                     Claim.eq(seqlen, width<T>());
 
@@ -305,7 +305,7 @@ namespace Z0
             var src = Random.Span<T>(RepCount);
             foreach(var x in src)
             {
-                var y = BitString.scalar(x);
+                var y = BitStrings.scalar(x);
                 var z = y.TakeScalar<T>();
                 Claim.eq(x,z);
             }
@@ -317,7 +317,7 @@ namespace Z0
             var src = Random.Span<T>(RepCount);
             for(var i=0; i<src.Length; i++)
             {
-                var x = BitString.bitchars(src[i]);
+                var x = BitStrings.bitchars(src[i]);
                 gbits.parse(x, 0, out T y);
                 Claim.eq(src[i], y);
             }
@@ -328,8 +328,8 @@ namespace Z0
             for(var cycle=0; cycle< CycleCount; cycle++)
             {
                 var x = Random.BitString(minlen, maxlen);
-                var y = BitString.parse(x).Format();
-                var z = BitString.parse(y);
+                var y = BitStrings.parse(x).Format();
+                var z = BitStrings.parse(y);
 
                 Claim.eq(x.Length, y.Length);
                 Claim.eq(z.Length, y.Length);
@@ -348,10 +348,10 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 var x = src[i];
-                var bs = BitString.scalar(src[i]);
+                var bs = BitStrings.scalar(src[i]);
                 var y = bs.TakeScalar<T>();
                 Claim.eq(x,y);
-                ClaimPrimalSeq.eq(bs.Format(), BitString.scalar(y).Format());
+                ClaimPrimalSeq.eq(bs.Format(), BitStrings.scalar(y).Format());
             }
         }
 
@@ -361,8 +361,8 @@ namespace Z0
             var src = Random.Span<T>(RepCount);
             for(var i=0; i<src.Length; i++)
             {
-                var bc1 =  BitString.scalar(src[i]).Format();
-                var bc3 = BitString.scalar(src[i]);
+                var bc1 =  BitStrings.scalar(src[i]).Format();
+                var bc3 = BitStrings.scalar(src[i]);
                 ClaimPrimalSeq.eq(bc1,bc3);
             }
         }

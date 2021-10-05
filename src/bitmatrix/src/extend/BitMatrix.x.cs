@@ -44,7 +44,7 @@ namespace Z0
             Span<byte> bits = buffer;
             for(var i=0;i<src.RowCount; i++)
                 src[i].ToBitString().BitSeq.CopyTo(bits.Slice(i*src.ColCount));
-            return BitString.load(buffer);
+            return BitStrings.load(buffer);
         }
 
         [MethodImpl(Inline)]

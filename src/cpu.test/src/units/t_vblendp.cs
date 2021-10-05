@@ -88,7 +88,7 @@ namespace Z0
         {
             var description = text.build();
             var indent = "/// ";
-            var bits = BitString.scalar(sample).Format(specifier:true);
+            var bits = BitStrings.scalar(sample).Format(specifier:true);
             var header = $"{indent}512x{width<T>()}, {maskspec}, {bits}";
             var sep = Chars.Comma;
             var pad = 2;

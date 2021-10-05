@@ -4,13 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IExecutablePart : IExecutable, IPart
     {
 
     }
-    
+
     public interface IExecutablePart<P> : IExecutablePart, IPart<P>
         where P : IPart<P>, new()
     {

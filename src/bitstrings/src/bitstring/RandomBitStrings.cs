@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    using BS = Z0.BitString;
+    using BS = Z0.BitStrings;
 
     public static class RandomBitStrings
     {

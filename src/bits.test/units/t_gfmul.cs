@@ -79,18 +79,17 @@ namespace Z0
 
         public void gfpoly()
         {
-            gfpoly_check(GfPoly.Lookup<N3,byte>(), BitString.parse("1011"));
-            gfpoly_check(GfPoly.Lookup<N8,ushort>(), BitString.parse("100011101"));
-            gfpoly_check(GfPoly.Lookup<N16,uint>(), BitString.parse("10000001111011101"));
+            gfpoly_check(GfPoly.Lookup<N3,byte>(), BitStrings.parse("1011"));
+            gfpoly_check(GfPoly.Lookup<N8,ushort>(), BitStrings.parse("100011101"));
+            gfpoly_check(GfPoly.Lookup<N16,uint>(), BitStrings.parse("10000001111011101"));
             Claim.eq((ushort)0b100011101, GfPoly.Lookup<N8,ushort>().Scalar);
-
         }
 
         void gfpoly_check<N,T>(GfPoly<N,T> p, BitString match)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var bs = BitString.scalar(p.Scalar).Truncate(p.Degree + 1);
+            var bs = BitStrings.scalar(p.Scalar).Truncate(p.Degree + 1);
             Claim.eq(bs, match);
         }
     }

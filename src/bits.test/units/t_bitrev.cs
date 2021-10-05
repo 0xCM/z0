@@ -25,7 +25,7 @@ namespace Z0
             {
                 var src = Random.Next<T>();
                 var r1 = gbits.reverse(src);
-                var r2 = BitString.scalar(src).Reverse().TakeScalar<T>();
+                var r2 = BitStrings.scalar(src).Reverse().TakeScalar<T>();
                 Claim.eq(r1,r2);
             }
         }

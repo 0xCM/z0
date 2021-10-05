@@ -67,7 +67,7 @@ namespace Z0
             const string pbs_expect = "00011011";
             const string pformat_epect = "[00 01 10 11]: ABCD -> DCBA";
 
-            var pbs_actual = BitString.scalar((byte)p);
+            var pbs_actual = BitStrings.scalar((byte)p);
             Claim.eq(pbs_expect, pbs_actual);
 
             var p_assembled = Permute.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
