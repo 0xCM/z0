@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Marker : IRule<Marker>
+        public readonly struct Marker
         {
             public dynamic Element {get;}
 

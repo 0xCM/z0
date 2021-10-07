@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Tests<C> : IIndex<Test<C>>
+        public readonly struct Tests<C>
         {
             readonly Index<Test<C>> Data;
 

@@ -13,7 +13,7 @@ namespace Z0
 
         BitWidth StorageWidth {get;}
 
-        BlittableKind TypeKind {get;}
+        DataKind TypeKind {get;}
     }
 
     [Free]

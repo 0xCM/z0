@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<byte> Bytes<T>(this Span<T> src, int offset, int ? length = null)
             where T : struct
-                => bytes(src, offset,length);
+                => bytes(src, offset, length);
 
         /// <summary>
         /// Presents a span of generic values as a span of bytes

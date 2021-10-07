@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Proposition<A,C> : IRule<Proposition<A,C>,A,C>, IEquatable<Proposition<A,C>>
+        public readonly struct Proposition<A,C> : IEquatable<Proposition<A,C>>
             where A : IEquatable<A>
             where C : IEquatable<C>
         {

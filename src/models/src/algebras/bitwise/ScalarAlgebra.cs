@@ -8,7 +8,7 @@ namespace Z0.Models
 
     using static Root;
 
-    public readonly partial struct BitwiseAlgebras
+    partial struct BitwiseAlgebras
     {
         public readonly struct ScalarAlgebra<T> : IBooleanAlgebra<ScalarAlgebra<T>>
             where T : unmanaged

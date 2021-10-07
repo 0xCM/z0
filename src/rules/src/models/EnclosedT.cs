@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Defines fenced content
         /// </summary>
-        public readonly struct Enclosed<T> : IRule<Enclosed<T>,T>
+        public readonly struct Enclosed<T>
         {
             public DelimitedIndex<T> Content {get;}
 

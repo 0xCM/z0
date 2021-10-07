@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
@@ -118,5 +119,11 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(Span<T> src, ushort count)
             => ref add(first(src), count);
+
+        [MethodImpl(Inline)]
+        public static ref T seek<S,T>(Span<S> src, int offset = 0)
+            where S : unmanaged
+            where T : unmanaged
+                => ref MemoryMarshal.AsRef<T>(src.Bytes(offset,null));
     }
 }

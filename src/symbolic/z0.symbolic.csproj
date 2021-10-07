@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Workflow)" />
-    <ProjectReference Include="$(Lang)" />
     <ProjectReference Include="$(SFuncs)" />
     <ProjectReference Include="$(Xml)" />
   </ItemGroup>

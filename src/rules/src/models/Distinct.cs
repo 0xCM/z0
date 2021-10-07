@@ -8,7 +8,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Distinct : IRule<Distinct>
+        public readonly struct Distinct
         {
 
         }
@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// Specifies that a sequence of equatable elements contains no duplicates
         /// </summary>
-        public readonly struct Distinct<T> : IRule<Distinct<T>,T>
+        public readonly struct Distinct<T>
             where T : IEquatable<T>
         {
 

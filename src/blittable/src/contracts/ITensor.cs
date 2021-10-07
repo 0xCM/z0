@@ -10,8 +10,8 @@ namespace Z0
         {
             byte Arity {get;}
 
-            BlittableKind IBlittable.TypeKind
-                => BlittableKind.Tensor;
+            DataKind IBlittable.TypeKind
+                => DataKind.Tensor;
         }
     }
 }

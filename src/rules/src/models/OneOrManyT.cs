@@ -16,7 +16,7 @@ namespace Z0
         /// Specifies that an element occurs at least once
         /// (1..*)
         /// </summary>
-        public readonly struct OneOrMany<T> : IRule<OneOrMany<T>,T>
+        public readonly struct OneOrMany<T>
         {
             public Index<T> Elements {get;}
 

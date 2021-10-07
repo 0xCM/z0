@@ -11,8 +11,8 @@ namespace Z0
         [Free]
         public interface IBlock : IBlittable
         {
-            BlittableKind IBlittable.TypeKind
-                => BlittableKind.Block;
+            DataKind IBlittable.TypeKind
+                => DataKind.Block;
         }
 
         [Free]

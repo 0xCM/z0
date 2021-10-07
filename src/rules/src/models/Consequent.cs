@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Consequent : IRule<Consequent>
+        public readonly struct Consequent
         {
             public TermId Id {get;}
 

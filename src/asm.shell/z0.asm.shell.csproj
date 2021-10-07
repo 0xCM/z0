@@ -24,6 +24,7 @@
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(Canonical)" />
+    <ProjectReference Include="$(BitStrings)" />
   </ItemGroup>
 
 </Project>

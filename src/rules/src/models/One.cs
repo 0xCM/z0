@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// Just one, neither more nor less
         /// </summary>
-        public readonly struct One : IRule<One>
+        public readonly struct One
         {
             public dynamic Element {get;}
 

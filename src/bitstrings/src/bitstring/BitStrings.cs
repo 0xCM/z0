@@ -14,15 +14,35 @@ namespace Z0
     [ApiHost]
     public readonly struct BitStrings
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Constructs a bitsequence via the bitstore and populates an allocated target with the result
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<byte> storeseq<T>(T src)
             where T : unmanaged
                 => BitStringStore.bitseq(src);
+
+        /// <summary>
+        /// Counts the number of leading zero bits
+        /// </summary>
+        [Op]
+        public static int nlz(in BitString src)
+        {
+            var lastix = src.Data.Length - 1;
+            var result = 0;
+            for(var i=lastix; i>= 0; i--)
+            {
+                if(skip(src.Data,i) != 0)
+                    break;
+                else
+                    result++;
+            }
+            return result;
+        }
 
         /// <summary>
         /// Constructs a sequence of n characters {ci} := [c_n-1,..., c_0]
@@ -31,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void bitchars<T>(T src, Span<char> dst, int offset = 0)
             where T : unmanaged
                 => BitStringStore.bitchars(src,dst,offset);
@@ -43,11 +63,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [Op, Closures(Closure)]
         public static ReadOnlySpan<char> bitchars<T>(in T src)
             where T : unmanaged
         {
-            var dst = sys.alloc<char>(width<T>());
+            var dst = core.alloc<char>(width<T>());
             bitchars(src, dst);
             return dst;
         }
@@ -57,21 +77,20 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [Op, Closures(Closure)]
         public static Span<char> bitchars<T>(ReadOnlySpan<T> src, int? maxlen = null)
             where T : unmanaged
         {
             var seglen = (int)width<T>();
             var srclen = src.Length;
-            Span<char> dst = sys.alloc<char>(srclen * seglen);
+            Span<char> dst = core.alloc<char>(srclen * seglen);
             ref readonly var input = ref first(src);
-
             for(var i=0; i<srclen; i++)
                 bitchars(skip(input,i)).CopyTo(dst, i*seglen);
             return maxlen != null && dst.Length >= maxlen ?  dst.Slice(0,maxlen.Value) :  dst;
         }
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [Op, Closures(Closure)]
         public static Span<char> bitchars<T>(Span<T> src, int? maxlen = null)
             where T : unmanaged
                 => bitchars(src.ReadOnly(), maxlen);
@@ -81,7 +100,7 @@ namespace Z0
         /// leading zeroes, however, are considered part of the literal and are not removed
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static string normalize(string src)
             => src.RemoveAny(Chars.LBracket, Chars.RBracket, Chars.Space, Chars.Underscore, (char)AsciLetterSym.b);
 
@@ -89,7 +108,7 @@ namespace Z0
         /// Assembles a bitstring given parts ordered from lo to hi
         /// </summary>
         /// <param name="parts">The source parts</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static BitString assemble(params string[] parts)
             => parse(string.Join(string.Empty, parts.Reverse()));
 
@@ -99,6 +118,7 @@ namespace Z0
         /// <param name="src">The source pattern</param>
         /// <param name="reps">The number of times to repeat the pattern</param>
         /// <typeparam name="T">The primal source type</typeparam>
+        [Op, Closures(Closure)]
         public static BitString replicate<T>(T src, int reps)
             where T : unmanaged
         {
@@ -111,23 +131,104 @@ namespace Z0
         }
 
         /// <summary>
+        /// Returns a new bitstring of length no less than a specified minimum
+        /// </summary>
+        /// <param name="minlen">The minimum length</param>
+        [Op]
+        public static BitString pad(in BitString src, uint minlen)
+        {
+            if(src.Length >= minlen)
+                return new BitString(src.Data);
+
+            Span<byte> data = src.Data;
+            var dst = new byte[minlen];
+            data.CopyTo(dst);
+            return new BitString(dst);
+        }
+
+        /// <summary>
+        /// Creates a replica of the bitstring
+        /// </summary>
+        [Op]
+        public static BitString replicate(in BitString src)
+        {
+            var dst = new byte[src.Length];
+            src.Data.CopyTo(dst);
+            return new BitString(dst);
+        }
+
+        /// <summary>
+        /// Forms a new bitstring by concatenation
+        /// </summary>
+        [Op]
+        public static BitString concat(in BitString head, in BitString tail)
+        {
+            var dst = new byte[head.Length + tail.Length];
+            tail.BitSeq.CopyTo(dst);
+            head.BitSeq.CopyTo(dst, tail.Length);
+            return new BitString(dst);
+        }
+
+        /// <summary>
+        /// Forms a new bitstring by concatenation
+        /// </summary>
+        [Op]
+        public static BitString concat(in BitString head, in BitString s0, in BitString s1)
+        {
+            var dst = new byte[head.Length + s0.Length + s1.Length];
+            s1.BitSeq.CopyTo(dst);
+            s0.BitSeq.CopyTo(dst, s1.Length);
+            head.BitSeq.CopyTo(dst, s0.Length + s1.Length);
+            return new BitString(dst);
+        }
+
+        /// <summary>
+        /// Forms a new bitstring by concatenation
+        /// </summary>
+        /// <param name="tail">The trailing bits</param>
+        [Op]
+        public static BitString concat(in BitString head, in BitString s0, in BitString s1, in BitString s2)
+        {
+            var dst = new byte[head.Length + s0.Length + s1.Length + s2.Length];
+            s2.BitSeq.CopyTo(dst);
+            s1.BitSeq.CopyTo(dst, s2.Length);
+            s0.BitSeq.CopyTo(dst, s2.Length + s1.Length);
+            head.BitSeq.CopyTo(dst, s2.Length + s1.Length + s0.Length);
+            return new BitString(dst);
+        }
+
+        /// <summary>
+        /// Copies n replicas to a new bitstring
+        /// </summary>
+        /// <param name="n">Then number of times to replicate the bistring in the target</param>
+        [Op]
+        public static BitString replicate(in BitString src, int n)
+        {
+            var storage = new byte[src.Length*n];
+            Span<byte> dst = storage;
+
+            for(var i=0; i<n; i++)
+                src.Data.CopyTo(dst.Slice(i*src.Length));
+            return new BitString(storage);
+        }
+
+        /// <summary>
         /// Projects a bitstring onto a caller-allocated span via a supplied transformation
         /// </summary>
         /// <param name="f">The transformation</param>
         /// <typeparam name="T">The span element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void map<T>(BitString src, Func<bit,T> f, Span<T> dst)
         {
             for(var i=0; i<dst.Length; i++)
                 dst[i] = f((bit)src.Data[i]);
         }
 
-
         /// <summary>
         /// Allocates a bitstring with a specified length
         /// </summary>
         /// <param name="len">The length of the bitstring</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static BitString alloc(int len)
             => new BitString(alloc<byte>(len));
 
@@ -177,7 +278,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitString scalar<T>(T src, int? maxbits = null)
             where T : unmanaged
                 => new BitString(BitStringStore.bitseq(src, maxbits ?? (int)width<T>()));
@@ -188,7 +289,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="storage">The caller-supplied storage</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static BitString scalar<T>(T src, byte[] storage, int? maxbits = null)
             where T : unmanaged
         {
@@ -202,7 +303,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The enumeration type</typeparam>
-        [MethodImpl(Inline)]
         public static BitString @enum<T>(T src, int? maxbits = null)
             where T : unmanaged, Enum
                 => BitStrings.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? (int)width<T>());
@@ -213,7 +313,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal type</typeparam>
         /// <param name="maxbits">The maximum number of bits to extract from the source</param>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static BitString scalars<T>(ReadOnlySpan<T> src, int? maxbits = null)
             where T : unmanaged
         {
@@ -238,7 +338,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="maxbits">The maximum number of bits to extract from the source</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static BitString scalars<T>(Span<T> src, int? maxbits = null)
             where T : unmanaged
                 => scalars(src.ReadOnly(), maxbits);
@@ -247,7 +347,7 @@ namespace Z0
         /// Constructs a bitstring from a power of 2
         /// </summary>
         /// <param name="exp">The value of the exponent</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static BitString pow2(int exp)
         {
             var dst =  new byte[exp + 1];
@@ -262,7 +362,7 @@ namespace Z0
         /// <param name="offset">The bit position at which to begin extraction</param>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static T scalar<T>(BitString src, int offset = 0)
+        public static T scalar<T>(in BitString src, int offset = 0)
             where T : unmanaged
                 => src.Scalar<T>(offset);
 
@@ -270,6 +370,7 @@ namespace Z0
         /// Constructs a bitstring from text
         /// </summary>
         /// <param name="src">The bit source</param>
+        [Op]
         public static BitString parse(string src)
         {
             src = src.RemoveBlanks();
@@ -285,7 +386,8 @@ namespace Z0
         /// Computes the bitwise complement of the source operand
         /// </summary>
         /// <param name="src">The source bits</param>
-        public static BitString not(BitString src)
+        [Op]
+        public static BitString not(in BitString src)
         {
             var len = src.Length;
             var dst = alloc(len);
@@ -294,7 +396,7 @@ namespace Z0
             return dst;
         }
 
-        static int length(BitString a, BitString b)
+        static int length(in BitString a, in BitString b)
         {
             var len = a.Length;
             return len == b.Length ? len : throw new Exception($"Length mismatch: {a.Length} != {b.Length}");
@@ -305,7 +407,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        public static BitString and(BitString a, BitString b)
+        public static BitString and(in BitString a, in BitString b)
         {
             var len = length(a, b);
             var dst = alloc(len);
@@ -319,7 +421,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        public static BitString or(BitString a, BitString b)
+        public static BitString or(in BitString a, in BitString b)
         {
             var len = length(a, b);
             var dst = alloc(len);
@@ -333,7 +435,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        public static BitString xor(BitString a, BitString b)
+        public static BitString xor(in BitString a, in BitString b)
         {
             var len = length(a,b);
             var dst = alloc(len);
@@ -347,7 +449,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bitstring</param>
         /// <param name="shift">The shift offset</param>
-        public static BitString srl(BitString src, int shift)
+        public static BitString srl(in BitString src, int shift)
         {
             var dst = alloc(src.Length);
             for(var i=src.Length - shift; i>=0; i--)
@@ -360,7 +462,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bitstring</param>
         /// <param name="shift">The shift offset</param>
-        public static BitString sll(BitString src, int shift)
+        public static BitString sll(in BitString src, int shift)
         {
             var dst = alloc(src.Length);
             for(var i=shift; i<dst.Length; i++)
@@ -371,7 +473,7 @@ namespace Z0
         /// <summary>
         /// Extracts the even bits from the source
         /// </summary>
-        public static BitString even(BitString src)
+        public static BitString even(in BitString src)
         {
             var count = src.Length>>1;
             var dst = alloc(count);
@@ -383,7 +485,7 @@ namespace Z0
         /// <summary>
         /// Extracts the odd bits from the source
         /// </summary>
-        public static BitString odd(BitString src)
+        public static BitString odd(in BitString src)
         {
             var count = src.Length>>1;
             var dst = alloc(count);
@@ -399,7 +501,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="m">The source row count</param>
         /// <param name="n">The source column count</param>
-        public static BitString transpose(BitString src, int m, int n)
+        public static BitString transpose(in BitString src, int m, int n)
         {
             var bitcount = m*n;
             if(src.Length < bitcount)
@@ -414,7 +516,7 @@ namespace Z0
             return dst;
         }
 
-        public static BitString transpose(BitString src, ulong m, ulong n)
+        public static BitString transpose(in BitString src, ulong m, ulong n)
             => transpose(src,(int)m, (int)n);
 
         /// <summary>
@@ -424,7 +526,7 @@ namespace Z0
         /// <param name="dst">The target</param>
         /// <param name="start">The target index at which to begin</param>
         /// <param name="len">The number of bits to overwrite</param>
-        public static BitString inject(BitString src, BitString dst, int start, int len)
+        public static BitString inject(in BitString src, ref BitString dst, int start, int len)
         {
             for(int i=start, j=0; i<start + len; i++, j++)
                 dst[i] = src[j];
@@ -436,9 +538,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bitstring</param>
         /// <param name="value">The interspersal value</param>
-        public static BitString intersperse(BitString src, BitString value)
+        [Op]
+        public static BitString intersperse(in BitString src, in BitString value)
         {
-            var len = Math.Min(src.Length, value.Length);
+            var len = min(src.Length, value.Length);
             var dst = alloc(len*2);
             for(int i=0, j=0; i< dst.Length; i+=2, j++)
             {
@@ -456,7 +559,8 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         /// <param name="i0">The index of the first bit to clear</param>
         /// <param name="i1">The index of the last bit to clear</param>
-        public static BitString clear(BitString src, int i0, int i1)
+        [Op]
+        public static BitString clear(ref BitString src, int i0, int i1)
         {
             for(var i=i0; i<=i1; i++)
                 src[i] = bit.Off;
@@ -467,7 +571,8 @@ namespace Z0
         /// Rotates the bits leftwards by a specified offset
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
-        public static BitString rotl(BitString bs, uint offset)
+        [Op]
+        public static BitString rotl(in BitString bs, uint offset)
         {
             var dst = bs.Data.Replicate();
             var shift = (int)offset;
@@ -490,6 +595,7 @@ namespace Z0
         static byte enable(byte src, int pos)
             =>  src |= (byte)(1 << pos);
 
+        [Op]
         internal static Span<byte> pack(ReadOnlySpan<byte> src, int offset = 0, int? minlen = null)
         {
             if(src.Length <= offset)
@@ -513,6 +619,5 @@ namespace Z0
             }
             return dst;
         }
-
     }
 }

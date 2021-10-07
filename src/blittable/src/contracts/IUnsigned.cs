@@ -11,8 +11,8 @@ namespace Z0
         [Free]
         public interface IUnsigned : IBlittable
         {
-            BlittableKind IBlittable.TypeKind
-                => BlittableKind.Unsigned;
+            DataKind IBlittable.TypeKind
+                => DataKind.Unsigned;
         }
     }
 }

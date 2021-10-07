@@ -11,8 +11,8 @@ namespace Z0
         [Free]
         public interface IName : IBlittable
         {
-            BlittableKind IBlittable.TypeKind
-                => BlittableKind.Name;
+            DataKind IBlittable.TypeKind
+                => DataKind.Name;
         }
 
         [Free]

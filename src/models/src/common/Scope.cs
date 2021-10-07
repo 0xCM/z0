@@ -9,33 +9,35 @@ namespace Z0
 
     using static Root;
 
+    /// <summary>
+    /// Identifies a context-relative scope
+    /// </summary>
     public readonly struct Scope
     {
-        public readonly ulong Level;
+        public readonly uint Depth;
 
         public readonly Label Name;
 
         [MethodImpl(Inline)]
-        public Scope(ulong level, Label name)
+        public Scope(uint level, Label name)
         {
-            Level = level;
+            Depth = level;
             Name = name;
         }
-
 
         [MethodImpl(Inline)]
 
         public bool Equals(Scope src)
-            => Level.Equals(src.Level) && Name.Equals(src.Name);
+            => Depth.Equals(src.Depth) && Name.Equals(src.Name);
 
         public string Format()
-            => string.Format("{0,-8} {1}", Level, Name);
+            => string.Format("{0,-8} {1}", Depth, Name);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator Scope((ulong level, Label name) src)
+        public static implicit operator Scope((uint level, Label name) src)
             => new Scope(src.level, src.name);
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using api = RuleEval;
+    using api = SeqRules;
 
     [Free]
     public interface IEvaluator
@@ -31,15 +31,5 @@ namespace Z0
 
         uint Evaluate(ReadOnlySpan<S> src, Span<T> dst)
             => api.eval(src,dst,this);
-    }
-
-    public class EvaluatorAttribute : Attribute
-    {
-        public EvaluatorAttribute(Type t)
-        {
-            SourceType = t;
-        }
-
-        public Type SourceType {get;}
     }
 }

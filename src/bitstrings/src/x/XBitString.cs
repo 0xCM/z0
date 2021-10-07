@@ -240,12 +240,12 @@ namespace Z0
             => api.intersperse(src,value);
 
         [MethodImpl(Inline)]
-        public static BitString Clear(this BitString src, int i0, int i1)
-            => api.clear(src,i0,i1);
+        public static BitString Clear(ref this BitString src, int i0, int i1)
+            => api.clear(ref src, i0, i1);
 
         [MethodImpl(Inline)]
-        public static BitString BitMap(this BitString dst, BitString src, int start, int len)
-            => api.inject(src,dst,start,len);
+        public static BitString BitMap(ref this BitString dst, BitString src, int start, int len)
+            => api.inject(src,ref dst, start, len);
 
         [MethodImpl(Inline)]
         public static BitString Not(this BitString bs)

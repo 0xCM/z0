@@ -13,6 +13,7 @@ namespace Z0
     partial struct Rules
     {
         public readonly struct Var<T>
+            where T : ITerm<T>
         {
             public readonly Label Name;
 
@@ -23,7 +24,7 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public Binding<T> Bind(T val)
+            public VarBinding<T> Bind(T val)
                 =>(this,val);
 
             public string Format()

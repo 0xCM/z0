@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Models
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -11,19 +11,6 @@ namespace Z0.Models
 
     partial struct Graphs
     {
-        public interface IEdge
-        {
-            Label Label {get;}
-        }
-
-        public interface IEdge<V> : IEdge
-            where V : IEquatable<V>
-        {
-            V Source {get;}
-
-            V Target {get;}
-        }
-
         public readonly struct Edge<V,L> : IEdge<V>, IEquatable<Edge<V,L>>
             where V : IVertex, IEquatable<V>
         {

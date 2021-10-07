@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Defines two potential choices
         /// </summary>
-        public readonly struct Alt<T> : IRule<Alt<T>,T>
+        public readonly struct Alt<T>
         {
             public T Left {get;}
 

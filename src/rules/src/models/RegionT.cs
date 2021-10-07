@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Region<B,T> : IRule<Region<B,T>,B,T>
+        public readonly struct Region<B,T>
         {
             public B Base {get;}
 

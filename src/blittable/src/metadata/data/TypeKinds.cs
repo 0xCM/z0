@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using K = BlittableKind;
+    using K = DataKind;
 
     partial struct BitFlow
     {
@@ -14,8 +14,8 @@ namespace Z0
         {
             const byte TypeKindCount = 18;
 
-            internal static ReadOnlySpan<BlittableKind> TypeKinds
-                => new BlittableKind[TypeKindCount]{
+            internal static ReadOnlySpan<DataKind> TypeKinds
+                => new DataKind[TypeKindCount]{
                     K.Unknown,
                     K.Unsigned,
                     K.Signed,

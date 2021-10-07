@@ -10,10 +10,12 @@ namespace Z0
 
     using static Root;
 
-    public abstract class ScopeContext<T> : IScopeContext<T>
+    public abstract class ScopedContext<T> : IScopedContext<T>
         where T : IScopeContext
     {
         public T Parent {get; protected set;}
+
+        public Scope Scope {get; protected set;}
 
         List<T> _Children {get;}
 
@@ -23,18 +25,19 @@ namespace Z0
         public IReadOnlyList<T> Children
             => _Children;
 
-        protected ScopeContext(T parent)
+        protected ScopedContext(Scope scope, T parent)
             : this()
         {
             Parent = parent;
+            Scope = scope;
         }
 
-        protected ScopeContext()
+        protected ScopedContext()
         {
             _Children = new();
         }
 
-        public abstract T NewChild();
+        public abstract T NewChild(Scope scope);
 
         protected T AddChild(T child)
         {

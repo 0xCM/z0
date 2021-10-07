@@ -8,7 +8,7 @@ namespace Z0
     {
         CmpKind Kind {get;}
 
-        SymExpr Symbol {get;}
+        SymExpr Symbol  => default;
     }
 
     public interface ICmpPred<T> : ICmpPred

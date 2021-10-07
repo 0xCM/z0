@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Specifies that the terms of an input sequence are interspersed by a distinguished element
         /// </summary>
-        public readonly struct Intersperse : IRule<Intersperse>
+        public readonly struct Intersperse
         {
             public dynamic Element {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// Specifies that the terms of an input sequence are interspersed by a distinguished element
         /// </summary>
-        public readonly struct Intersperse<T> : IRule<Intersperse<T>,T>
+        public readonly struct Intersperse<T>
         {
             public T Element {get;}
 

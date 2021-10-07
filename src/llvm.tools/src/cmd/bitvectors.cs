@@ -13,7 +13,6 @@ namespace Z0.llvm
     {
         IProjectWs LlvmData => Ws.Project("llvm.data");
 
-
         [CmdOp(".bitvectors")]
         Outcome EmitBitVectors(CmdArgs args)
         {

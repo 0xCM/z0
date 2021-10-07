@@ -366,7 +366,7 @@ namespace Z0
 
         void Run(N27 n)
         {
-
+            Parts.BitPack.Resolved.Executor.Run();
         }
 
         void Run(string spec)

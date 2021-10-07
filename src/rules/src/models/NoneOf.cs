@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Specifies that the occurence of an element is distinguished by non-membership in a specified set
         /// </summary>
-        public readonly struct NoneOf<T> : IRule<NoneOf<T>,T>
+        public readonly struct NoneOf<T>
         {
             public Index<T> Elements {get;}
 

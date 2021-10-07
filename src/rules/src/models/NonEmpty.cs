@@ -7,7 +7,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct NonEmpty<T> : IRule<NonEmpty<T>,T>
+        public readonly struct NonEmpty<T>
         {
 
         }

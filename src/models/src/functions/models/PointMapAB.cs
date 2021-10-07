@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Models
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -11,7 +11,7 @@ namespace Z0.Models
     using static Root;
     using static core;
 
-    partial struct Functions
+    partial struct FunctionModels
     {
         public sealed class PointMap<A,B> : Function<A,B>
         {

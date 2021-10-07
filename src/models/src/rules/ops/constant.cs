@@ -19,9 +19,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Constant<T> constant<T>(T value)
             => new Constant<T>(value);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Literal<T> literal<T>(Label label, T value)
-            => new Literal<T>(label,value);
     }
 }

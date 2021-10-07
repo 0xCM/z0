@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static core;
-    using static Root;
 
     public sealed class BitfieldServices : AppService<BitfieldServices>
     {

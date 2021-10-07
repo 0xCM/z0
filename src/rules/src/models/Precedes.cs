@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Requires that one element occurrs before another
         /// </summary>
-        public readonly struct Precedes<T> : IRule<Precedes<T>,T>
+        public readonly struct Precedes<T>
         {
             public T Before {get;}
 

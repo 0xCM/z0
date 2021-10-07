@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// Specifies that an element occurs at least once
         /// </summary>
-        public readonly struct OneOrMany : IRule<OneOrMany>
+        public readonly struct OneOrMany
         {
             public Index<dynamic> Elements {get;}
 

@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Substitutions<T> : IRule<Substitutions<T>,T>
+        public readonly struct Substitutions<T>
         {
             public uint Count {get;}
 

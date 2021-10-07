@@ -92,7 +92,7 @@ namespace Z0
 
             public OperandAction Action;
 
-            public DataType Type;
+            public CellType Type;
         }
 
         public InstructionRow Instruction;

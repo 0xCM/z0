@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Tag<K> : IRule<Tag<K>,K>
+        public readonly struct Tag<K>
             where K : unmanaged
         {
             public string Content {get;}

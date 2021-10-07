@@ -11,8 +11,8 @@ namespace Z0
         [Free]
         public interface IChar : IBlittable
         {
-            BlittableKind IBlittable.TypeKind
-                => BlittableKind.Char;
+            DataKind IBlittable.TypeKind
+                => DataKind.Char;
         }
     }
 }

@@ -21,8 +21,8 @@ namespace Z0
 
             GridSpec Spec {get;}
 
-            BlittableKind IBlittable.TypeKind
-                => BlittableKind.Grid;
+            DataKind IBlittable.TypeKind
+                => DataKind.Grid;
         }
 
         [Free]

@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Conjunction
         /// </summary>
-        public readonly struct And<T> : IRule<And<T>,T>
+        public readonly struct And<T>
         {
             public Index<T> Elements {get;}
 

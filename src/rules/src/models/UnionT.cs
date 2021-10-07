@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public struct Union<T> : IRule<Union<T>,T>
+        public struct Union<T>
         {
             readonly CharBlock32 _Name;
 

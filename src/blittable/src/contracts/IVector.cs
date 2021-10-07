@@ -34,8 +34,8 @@ namespace Z0
 
             Span<T> Cells {get;}
 
-            BlittableKind IBlittable.TypeKind
-                => BlittableKind.Vector;
+            DataKind IBlittable.TypeKind
+                => DataKind.Vector;
         }
     }
 }

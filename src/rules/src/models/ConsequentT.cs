@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Consequent<C> : IRule<Consequent<C>,C>
+        public readonly struct Consequent<C>
         {
             public TermId Id {get;}
 

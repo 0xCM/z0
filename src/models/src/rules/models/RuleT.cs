@@ -14,9 +14,9 @@ namespace Z0
     partial struct Rules
     {
         /// <summary>
-        /// A rule is, by definition, a named term
+        /// A rule is, by definition, a name bound to a term
         /// </summary>
-        public readonly struct Rule<T>
+        public readonly struct Rule<T> : IBinding<T>
             where T : ITerm<T>
         {
             public readonly Label Name;
@@ -29,6 +29,12 @@ namespace Z0
                 Name = name;
                 Term = term;
             }
+
+            Label IBinding<T>.Name
+                => Name;
+
+            T IBinding<T>.Term
+                => Term;
 
             public string Format()
                 => api.format(this);

@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Marker<T> : IRule<Marker<T>,T>
+        public readonly struct Marker<T>
         {
             public T Element{get;}
 

@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Implication<A,C> : IRule<Implication<A,C>,A,C>
+        public readonly struct Implication<A,C>
             where A : IEquatable<A>
             where C : IEquatable<C>
         {

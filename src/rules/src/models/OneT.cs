@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Just one, neither more nor less
         /// </summary>
-        public readonly struct One<T> : IRule<One<T>,T>
+        public readonly struct One<T>
         {
             public T Element {get;}
 

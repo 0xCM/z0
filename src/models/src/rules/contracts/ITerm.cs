@@ -4,15 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Rules
+    public interface ITerm : ITextual
     {
-        public interface ITerm : ITextual
-        {
 
-        }
+    }
 
-        public interface ITerm<T> : ITerm
-        {
-        }
+    public interface ITerm<T> : ITerm
+    {
+
+    }
+
+    public interface IValue<T> : ITerm<T>
+    {
+        T Content {get;}
     }
 }

@@ -34,7 +34,7 @@ namespace Z0
         {
             Data = new byte[src.Length];
             for(var i=0; i<src.Length; i++)
-                Data[i] = (byte)src[i];
+                seek(Data,i) = (byte)skip(src,i);
         }
 
         /// <summary>
@@ -203,18 +203,7 @@ namespace Z0
         /// Counts the number of leading zero bits
         /// </summary>
         public int Nlz()
-        {
-            var lastix = Data.Length - 1;
-            var result = 0;
-            for(var i=lastix; i>= 0; i--)
-            {
-                if(Data[i] != 0)
-                    break;
-                else
-                    result++;
-            }
-            return result;
-        }
+            => api.nlz(this);
 
         /// <summary>
         /// Shifts the bits leftwards by a specifed offset in a manner that mimics the canonical scalar left-shift
@@ -240,68 +229,6 @@ namespace Z0
             return count;
         }
 
-        /// <summary>
-        /// Creates a replica of the bitstring
-        /// </summary>
-        public BitString Replicate()
-        {
-            var dst = new byte[Length];
-            Data.CopyTo(dst);
-            return new BitString(dst);
-        }
-
-        /// <summary>
-        /// Copies n replicas to a new bitstring
-        /// </summary>
-        /// <param name="n">Then number of times to replicate the bistring in the target</param>
-        public BitString Replicate(int n)
-        {
-            var storage = new byte[Length*n];
-            Span<byte> dst = storage;
-
-            for(var i=0; i<n; i++)
-                Data.CopyTo(dst.Slice(i*Length));
-            return new BitString(storage);
-        }
-
-        /// <summary>
-        /// Forms a new bitstring by concatenation
-        /// </summary>
-        /// <param name="tail">The trailing bits</param>
-        public BitString Concat(BitString tail)
-        {
-            var dst = new byte[Length + tail.Length];
-            tail.BitSeq.CopyTo(dst);
-            BitSeq.CopyTo(dst, tail.Length);
-            return new BitString(dst);
-        }
-
-        /// <summary>
-        /// Forms a new bitstring by concatenation
-        /// </summary>
-        /// <param name="tail">The trailing bits</param>
-        public BitString Concat(BitString s0, BitString s1)
-        {
-            var dst = new byte[Length + s0.Length + s1.Length];
-            s1.BitSeq.CopyTo(dst);
-            s0.BitSeq.CopyTo(dst, s1.Length);
-            BitSeq.CopyTo(dst, s0.Length + s1.Length);
-            return new BitString(dst);
-        }
-
-        /// <summary>
-        /// Forms a new bitstring by concatenation
-        /// </summary>
-        /// <param name="tail">The trailing bits</param>
-        public BitString Concat(BitString s0, BitString s1, BitString s2)
-        {
-            var dst = new byte[Length + s0.Length + s1.Length + s2.Length];
-            s2.BitSeq.CopyTo(dst);
-            s1.BitSeq.CopyTo(dst, s2.Length);
-            s0.BitSeq.CopyTo(dst, s2.Length + s1.Length);
-            BitSeq.CopyTo(dst, s2.Length + s1.Length + s0.Length);
-            return new BitString(dst);
-        }
 
         /// <summary>
         /// Returns a new bitstring of length no greater than a specified maximum
@@ -312,21 +239,6 @@ namespace Z0
             if(Length <= maxlen)
                 return new BitString(Data);
             var dst = Data.AsSpan().Slice(0, maxlen).ToArray();
-            return new BitString(dst);
-        }
-
-        /// <summary>
-        /// Returns a new bitstring of length no less than a specified minimum
-        /// </summary>
-        /// <param name="minlen">The minimum length</param>
-        public BitString Pad(uint minlen)
-        {
-            if(Length >= minlen)
-                return new BitString(Data);
-
-            Span<byte> src = Data;
-            var dst = new byte[minlen];
-            src.CopyTo(dst);
             return new BitString(dst);
         }
 
@@ -381,8 +293,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool EqualsTrace(BitString rhs, Action<string> trace = null)
         {
-            var x = Truncate(this.Length - this.Nlz());
-            var y = rhs.Truncate(rhs.Length - rhs.Nlz());
+            var x = Truncate(Length - api.nlz(this));
+            var y = rhs.Truncate(rhs.Length - api.nlz(rhs));
             if(x.Length != y.Length)
             {
                 trace?.Invoke($"The source length {x.Length} differs from the operand length {y.Length}");
@@ -406,8 +318,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(BitString rhs)
         {
-            var x = Truncate(Length - this.Nlz());
-            var y = rhs.Truncate(rhs.Length - rhs.Nlz());
+            var x = Truncate(Length - api.nlz(this));
+            var y = rhs.Truncate(rhs.Length - api.nlz(rhs));
             if(x.Length != y.Length)
             {
                 return false;
@@ -586,7 +498,7 @@ namespace Z0
             var src = View;
             var packed = api.pack(src, offset, (int)width<T>());
             return packed.Length != 0
-                ? packed.Singleton<byte,T>()
+                ? core.seek<byte,T>(packed)
                 : default;
         }
 
@@ -594,39 +506,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data;
-        }
-
-        /// <summary>
-        /// Enables a specified source bit
-        /// </summary>
-        /// <param name="src">The source value to manipulate</param>
-        /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        static byte enable(byte src, int pos)
-            =>  src |= (byte)(1 << pos);
-
-        static Span<byte> PackedBits(ReadOnlySpan<byte> src, int offset = 0, int? minlen = null)
-        {
-            if(src.Length <= offset)
-                return new byte[minlen ?? 1];
-
-            var srcLen = (uint)(src.Length - offset);
-            var dstLen = srcLen/8 + (srcLen % 8 == 0 ? 0 : 1);
-            if(minlen != null && dstLen < minlen)
-                dstLen = minlen.Value;
-
-            Span<byte> dst = core.alloc<byte>((int)dstLen);
-            for(int i=0, j=0; j < dstLen; i+=8, j++)
-            {
-                ref var x = ref dst[j];
-                for(var k=0; k<8; k++)
-                {
-                    var srcIx = i + k + offset;
-                    if(srcIx < srcLen && src[srcIx] != 0)
-                        x = enable(x, k);
-                }
-            }
-            return dst;
         }
 
         [MethodImpl(Inline)]
@@ -643,7 +522,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitString operator +(BitString lhs, BitString rhs)
-            => lhs.Concat(rhs);
+            => api.concat(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitString operator &(BitString lhs, BitString rhs)

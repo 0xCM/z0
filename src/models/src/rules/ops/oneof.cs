@@ -12,9 +12,8 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static OneOf<T> oneof<T>(T[] src)
+        public static OneOf<T> oneof<T>(params T[] src)
             => new OneOf<T>(src);
-
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static OneOf<T> oneof<T>(ReadOnlySpan<T> src)

@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Represents the magnitude of the distance between two values with respect to a contectxtual metric
         /// </summary>
-        public readonly struct Delta<T> : IRule<Delta<T>,T>
+        public readonly struct Delta<T>
         {
             public T Left {get;}
 

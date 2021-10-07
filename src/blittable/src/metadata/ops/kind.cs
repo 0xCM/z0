@@ -15,7 +15,7 @@ namespace Z0
         partial struct Meta
         {
             [MethodImpl(Inline), Op]
-            public static BlittableKind kind(byte index)
+            public static DataKind kind(byte index)
                 => skip(TypeKinds, clamp(index, (byte)(TypeKinds.Length - 1)));
 
             [MethodImpl(Inline), Op]

@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// Conjunction
         /// </summary>
-        public readonly struct And : IRule<And>
+        public readonly struct And
         {
             public Index<dynamic> Elements {get;}
 

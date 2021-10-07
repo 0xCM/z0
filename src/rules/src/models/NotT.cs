@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Represents the logical negation of a distinguished subject
         /// </summary>
-        public readonly struct Not<T> : IRule<Not<T>,T>
+        public readonly struct Not<T>
         {
             public T Element {get;}
 

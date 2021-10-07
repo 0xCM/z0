@@ -9,7 +9,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Ordered : IRule<Ordered>
+        public readonly struct Ordered
         {
 
 
@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// Specifies that a sequence of comparable elements should be ordered
         /// </summary>
-        public readonly struct Ordered<T> : IRule<Ordered<T>,T>
+        public readonly struct Ordered<T>
             where T : IComparable<T>
         {
             public static implicit operator Ordered(Ordered<T> src)

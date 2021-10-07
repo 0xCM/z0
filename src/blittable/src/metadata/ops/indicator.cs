@@ -14,7 +14,7 @@ namespace Z0
         partial struct Meta
         {
             [MethodImpl(Inline), Op]
-            public static TypeIndicator indicator(BlittableKind src)
+            public static TypeIndicator indicator(DataKind src)
                 => default;
         }
     }

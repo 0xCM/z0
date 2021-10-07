@@ -22,8 +22,9 @@ namespace Z0
                 Name = name;
             }
 
-            public Binding<T> Bind<T>(T val)
-                =>(this,val);
+            public VarBinding<T> Bind<T>(T val)
+                where T : ITerm<T>
+                    =>(this,val);
 
             public string Format()
                 => api.format(this);

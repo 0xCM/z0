@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public sealed class ScopeContext : ScopeContext<ScopeContext>
+    public sealed class ScopeContext : ScopedContext<ScopeContext>
     {
-        public ScopeContext(ScopeContext parent)
-            : base(parent)
+        public ScopeContext(Scope scope, ScopeContext parent)
+            : base(scope, parent)
         {
 
         }
@@ -17,7 +17,7 @@ namespace Z0
             Parent = this;
         }
 
-        public override ScopeContext NewChild()
-            => AddChild(new ScopeContext(this));
+        public override ScopeContext NewChild(Scope scope)
+            => AddChild(new ScopeContext(scope, this));
     }
 }

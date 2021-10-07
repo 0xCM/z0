@@ -13,6 +13,9 @@ namespace Z0
 
     partial struct Rules
     {
+        /// <summary>
+        /// Constrains an element or sequence to live within a specified range
+        /// </summary>
         public readonly struct Range<T> : ITerm<T>
             where T : unmanaged, IEquatable<T>, IComparable<T>
         {
@@ -33,7 +36,7 @@ namespace Z0
                 Max = max;
             }
 
-             public string Format()
+            public string Format()
                 => api.format(this);
 
             public override string ToString()

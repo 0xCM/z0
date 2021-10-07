@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Implication : IRule<Implication>
+        public readonly struct Implication
         {
             public dynamic Antecedant {get;}
 

@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct ZeroOrMany<T> : IRule<ZeroOrMany<T>,T>
+        public readonly struct ZeroOrMany<T>
             where T : IEquatable<T>
         {
             public Index<T> Elements {get;}

@@ -2,13 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Models
+namespace Z0
 {
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial struct Functions
+    partial struct FunctionModels
     {
         /// <summary>
         /// Represents a bijective correspondence between two sequences of homogenous type

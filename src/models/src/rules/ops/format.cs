@@ -7,7 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Lang;
+
     using static Root;
+    using static core;
 
     partial struct Rules
     {
@@ -15,10 +18,12 @@ namespace Z0
             => string.Format("var({0})", src.Name);
 
         public static string format<T>(in Var<T> src)
-            => string.Format("var<{0}>({1})", typeof(T).Name, src.Name);
+            where T : ITerm<T>
+                => string.Format("var<{0}>({1})", typeof(T).Name, src.Name);
 
-        public static string format<T>(in Binding<T> src)
-            => string.Format("{0} := {1}", src.Var, src.Value);
+        public static string format<T>(in VarBinding<T> src)
+            where T : ITerm<T>
+                => string.Format("{0} := {1}", src.Var, src.Term);
 
         public static string format<T>(in Replace<T> src)
             => string.Format("replace<{0}>({1} -> {2})", typeof(T).Name, src.Match, src.Value);
@@ -67,22 +72,6 @@ namespace Z0
             where T : unmanaged, IEquatable<T>, IComparable<T>
                 => string.Format("[{0}..{1}]", src.Min, src.Max);
 
-        public static string format(Grammar src)
-        {
-            var dst = text.buffer();
-            dst.AppendLineFormat("{0} = {1}", src.Name, Chars.LBrace);
-            foreach(var p in src.Productions)
-                dst.IndentLine(2, format(p));
-            dst.AppendLine(Chars.RBrace);
-            return dst.Emit();
-        }
-
-        public static string format(in Adjacent src)
-            => string.Format(RP.Adjacent2,src.A, src.B);
-
-        public static string format<T>(in Adjacent<T> src)
-            => string.Format(RP.Adjacent2,src.A, src.B);
-
         public static string format<T>(in Between<T> src)
             where T : unmanaged, IEquatable<T>, IComparable<T>
                 => string.Format("[{0}, {1}]", src.Min, src.Max);
@@ -90,5 +79,36 @@ namespace Z0
         public static string format<T>(in Rule<T> src)
             where T : ITerm<T>
                 => string.Format("{0} := {1}", src.Name, src.Term.Format());
+
+        public static string format<K,T>(in Switch<K,T> src)
+            where T : ITerm<T>
+            where K : unmanaged
+        {
+            var dst = text.buffer();
+            var margin = 0u;
+            var choices = src.Choices;
+            var terms = src.Terms;
+            var count = choices.Length;
+            dst.IndentLineFormat(margin, "switch({0}) {", src.Name);
+            margin += 2;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var choice = ref skip(choices,i);
+                ref readonly var term = ref skip(terms,i);
+                dst.IndentLineFormat(margin, "{0} -> {1}", choice.Format(), term.Format());
+            }
+            margin -=2;
+            dst.IndentLine(margin, "}");
+
+            return dst.Emit();
+        }
+
+        [Op, Closures(Closure)]
+        public static string format<T>(in CmpPred<T> src)
+            => string.Format("{0}{1}{2}", src.A, symbol(src.Kind), src.B);
+
+        [Op, Closures(Closure)]
+        public static string format<T>(in CmpEval<T> src)
+            => string.Format("{0}:{1}", format(src.Source), src.Result ? "true" : "false");
     }
 }

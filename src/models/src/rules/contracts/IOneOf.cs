@@ -28,7 +28,7 @@ namespace Z0
         /// Characterizes a (possibly empty) sequence of choices
         /// </summary>
         /// <typeparam name="T">The choice type</typeparam>
-        public interface IOneOf<T> : IOneOf
+        public interface IOneOf<T> : IOneOf, ITerm<T>
         {
             /// <summary>
             /// Specifies the possibilities

@@ -34,6 +34,14 @@ namespace alg
         public static uint calc<T>()
             => calc(typeof(T));
 
+        [MethodImpl(Inline), Op]
+        public static uint calc(ushort a, ushort b)
+            => (uint)a | ((uint)b << 16);
+
+        [MethodImpl(Inline), Op]
+        public static uint calc(char a, char b)
+            => (uint)a | ((uint)b << 16);
+
         /// <summary>
         /// Creates a 64-bit calc code predicated on two type parameters
         /// </summary>

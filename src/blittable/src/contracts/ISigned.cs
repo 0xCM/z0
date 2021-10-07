@@ -8,8 +8,8 @@ namespace Z0
     {
         public interface ISigned : IBlittable
         {
-            BlittableKind IBlittable.TypeKind
-                => BlittableKind.Signed;
+            DataKind IBlittable.TypeKind
+                => DataKind.Signed;
         }
     }
 }

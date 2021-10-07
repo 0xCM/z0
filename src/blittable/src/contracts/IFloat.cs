@@ -11,8 +11,8 @@ namespace Z0
         [Free]
         public interface IFloat : IBlittable
         {
-            BlittableKind IBlittable.TypeKind
-                => BlittableKind.Float;
+            DataKind IBlittable.TypeKind
+                => DataKind.Float;
         }
     }
 }

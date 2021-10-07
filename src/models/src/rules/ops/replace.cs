@@ -9,44 +9,10 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static Models.Functions;
+    using static FunctionModels;
 
     partial struct Rules
     {
-        /// <summary>
-        /// Replaces source characters that satisfy a specified replacement rule with the rule-specified replacement
-        /// </summary>
-        /// <param name="rule"></param>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        /// <param name="offset"></param>
-        [Op]
-        public static unsafe void apply<T>(Replace<T> rule, ReadOnlySpan<T> src, Span<T> dst, int offset = 0)
-        {
-            var count = src.Length;
-            for(var i=offset; i<count; i++)
-            {
-                ref readonly var c = ref skip(src,i);
-                seek(dst,i) = c.Equals(rule.Match) ? rule.Value : c;
-            }
-        }
-
-        [Op, Closures(Closure)]
-        public static uint apply<T>(Adjacent<T> rule, ReadOnlySpan<T> src, Span<uint> dst)
-            where T : unmanaged, IEquatable<T>
-        {
-            var terms = Math.Min(src.Length - 1, dst.Length);
-            var matched = 0u;
-            for(var i=0u; i<terms; i++)
-            {
-                ref readonly var s0 = ref skip(src, i);
-                ref readonly var s1 = ref skip(src, i + 1);
-                if((s0.Equals(rule.A) && s1.Equals(rule.B)))
-                    seek(dst, matched++) = i;
-            }
-            return matched;
-        }
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Replace<T> replace<T>(T src, T dst)
             where T : IEquatable<T>

@@ -12,7 +12,5 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public static Switch<K,A> @switch<K,A>(Identifier name, K[] choices, Func<K,A> actor)
-            => new Switch<K,A>(name, choices, actor);
     }
 }
