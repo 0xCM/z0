@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public sealed class AgentTransitioned : TraceEventAdapter<AgentTransitioned,AgentTransition>
     {
 

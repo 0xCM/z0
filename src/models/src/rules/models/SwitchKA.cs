@@ -14,8 +14,8 @@ namespace Z0
     partial struct Rules
     {
         public class Switch<K,T>
-            where T : ITerm<T>
             where K : unmanaged
+            where T : ITerm<T>
         {
             readonly Index<Constant<K>> _Choices;
 
@@ -48,7 +48,6 @@ namespace Z0
 
             public override string ToString()
                 => Format();
-
         }
     }
 }

@@ -9,19 +9,8 @@ namespace Z0
     [Free]
     public interface IDependency : IRelation
     {
-
-    }
-
-    /// <summary>
-    /// Characterizes a depency relation from a source to a target
-    /// </summary>
-    /// <typeparam name="S">The source node type</typeparam>
-    /// <typeparam name="T">The target node type</typeparam>
-    [Free]
-    public interface IDependency<K,S,T> : IDependency, IRelation<K,S,T>
-        where K : IDependency<K,S,T>
-    {
-        K IRelation<K,S,T>.Kind => (K)this;
+        RelationKind IRelation.Kind
+            => RelationKind.Dependency;
     }
 
     /// <summary>
@@ -29,8 +18,13 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The node type</typeparam>
     [Free]
-    public interface IDependency<K,T> : IDependency<K,T,T>
-        where K : IDependency<K,T>
+    public interface IDependency<S,T> : IDependency, IRelation<S,T>
+    {
+
+    }
+
+    [Free]
+    public interface IDependency<T> : IDependency<T,T>
     {
 
     }

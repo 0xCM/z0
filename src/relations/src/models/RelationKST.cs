@@ -12,17 +12,20 @@ namespace Z0
     /// <summary>
     /// Defines an undirected association between a source and a target
     /// </summary>
-    public struct Relation<K,S,T> : IRelation<K,S,T>
+    public readonly struct Relation<K,S,T> : IRelation<K,S,T>
     {
-        public K Kind;
+        public readonly Key<uint> Key;
 
-        public S Source;
+        public readonly K Kind;
 
-        public T Target;
+        public readonly S Source;
+
+        public readonly T Target;
 
         [MethodImpl(Inline)]
-        public Relation(K kind, in S src, in T dst)
+        public Relation(uint key, K kind, in S src, in T dst)
         {
+            Key = key;
             Kind = kind;
             Source = src;
             Target = dst;
@@ -31,14 +34,13 @@ namespace Z0
         K IRelation<K,S,T>.Kind
             => Kind;
 
-        S IRelation<K,S,T>.Source
+        S IRelation<S,T>.Source
             => Source;
 
-        T IRelation<K,S,T>.Target
+        T IRelation<S,T>.Target
             => Target;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Relation<K,S,T>((K kind, S src, T dst) x)
-            => new Relation<K,S,T>(x.kind, x.src, x.dst);
+        Key<uint> IRelation.Key
+            => Key;
     }
 }

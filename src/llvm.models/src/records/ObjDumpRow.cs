@@ -51,7 +51,6 @@ namespace Z0.llvm
 
         public bool IsEmpty
         {
-
             [MethodImpl(Inline)]
             get => Line.IsEmpty;
         }

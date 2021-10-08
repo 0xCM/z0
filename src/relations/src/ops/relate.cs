@@ -12,7 +12,7 @@ namespace Z0
     partial struct Relations
     {
         [MethodImpl(Inline)]
-        public static Relation<K,S,T> relate<K,S,T>(K kind, in S src, in  T dst)
-            => new Relation<K,S,T>(kind,src,dst);
+        public static Relation<K,S,T> relate<K,S,T>(uint key, K kind, in S src, in  T dst)
+            => new Relation<K,S,T>(key, kind,src,dst);
     }
 }

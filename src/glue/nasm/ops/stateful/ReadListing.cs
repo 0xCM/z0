@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tools
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static core;
 
     partial class Nasm

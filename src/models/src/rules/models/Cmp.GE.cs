@@ -34,7 +34,6 @@ namespace Z0
             public CmpKind Kind
                 => CmpKind.GE;
 
-
             [MethodImpl(Inline)]
             public string Format()
                 => api.format<T>(this);

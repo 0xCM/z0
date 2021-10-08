@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     /// <summary>
     /// Represents a pulse/tick/heartbeat relative to some frequency
     /// </summary>

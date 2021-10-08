@@ -7,8 +7,6 @@ namespace Z0.Lang
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Models;
-
     using static Root;
 
     public abstract class Grammar<G,K>

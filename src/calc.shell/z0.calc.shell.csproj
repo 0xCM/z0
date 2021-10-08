@@ -15,7 +15,6 @@
     <ProjectReference Include="$(AsmCore)" />
     <ProjectReference Include="$(Pipes)" />
     <ProjectReference Include="$(Fsm)" />
-    <ProjectReference Include="$(Models)" />
   </ItemGroup>
 
 </Project>

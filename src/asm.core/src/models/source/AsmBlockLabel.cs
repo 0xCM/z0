@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Represents a syntactically-valid label
     /// </summary>
-    public readonly struct AsmBlockLabel : IAsmLabel
+    public readonly struct AsmBlockLabel
     {
         public Identifier Name {get;}
 

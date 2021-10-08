@@ -1,6 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <Import Project="../directory.build.props"/>
-
-
+  <PropertyGroup>
+    <Version>0.0.3</Version>
+  </PropertyGroup>
 </Project>

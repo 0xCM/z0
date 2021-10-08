@@ -14,8 +14,13 @@ namespace Z0
     /// <summary>
     /// Captures a node-homogenous directed relation
     /// </summary>
-    public readonly struct Dependency<T> : IDependency<Dependency<T>, T>
+    public readonly struct Dependency<T> : IDependency<T>
     {
+        /// <summary>
+        /// Identifies the dependency within some context
+        /// </summary>
+        public readonly Key<uint> Key;
+
         /// <summary>
         /// The client in the relation that that depends on the <see cref='Target'/>
         /// </summary>
@@ -27,8 +32,9 @@ namespace Z0
         public readonly T Target;
 
         [MethodImpl(Inline)]
-        public Dependency(T src, T dst)
+        public Dependency(uint key, T src, T dst)
         {
+            Key = key;
             Source = src;
             Target = dst;
         }
@@ -45,11 +51,14 @@ namespace Z0
             get => alg.hash.calc64(Source,Target);
         }
 
-        T IRelation<Dependency<T>,T,T>.Source
+        T IRelation<T,T>.Source
             => Source;
 
-        T IRelation<Dependency<T>,T,T>.Target
+        T IRelation<T,T>.Target
             => Target;
+
+       Key<uint> IRelation.Key
+            => Key;
 
         public string Format()
             => api.format(this);
@@ -66,13 +75,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Dependency<T>((T src, T dst) r)
-            => new Dependency<T>(r.src,r.dst);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Dependency<T>(Pair<T> src)
-            => new Dependency<T>(src.Left, src.Right);
     }
 }

@@ -12,6 +12,7 @@
     <ProjectReference Include="$(BitNumbers)" />
     <ProjectReference Include="$(Tables)" />
     <ProjectReference Include="$(Services)" />
+    <ProjectReference Include="$(External)" />
 
   </ItemGroup>
 

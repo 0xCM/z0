@@ -11,22 +11,22 @@ namespace Z0.Parts
 
     public sealed class External : Part<External>
     {
-        public readonly struct Imports
-        {
-            public Assembly Dia2Lib
-                => typeof(Dia2Lib._FILETIME).Assembly;
+        // public readonly struct Imports
+        // {
+        //     public Assembly Dia2Lib
+        //         => typeof(Dia2Lib._FILETIME).Assembly;
 
-            public Assembly MsTraceEvent
-                => typeof(Microsoft.Diagnostics.Symbols.NativeSymbolModule).Assembly;
+        //     public Assembly MsTraceEvent
+        //         => typeof(Microsoft.Diagnostics.Symbols.NativeSymbolModule).Assembly;
 
-            public Assembly CSharpWorkspaces
-                => typeof(Microsoft.CodeAnalysis.CSharp.Formatting.BinaryOperatorSpacingOptions).Assembly;
+        //     public Assembly CSharpWorkspaces
+        //         => typeof(Microsoft.CodeAnalysis.CSharp.Formatting.BinaryOperatorSpacingOptions).Assembly;
 
-            public Assembly CodeAnalysis
-                => typeof(Microsoft.CodeAnalysis.Emit.InstrumentationKind).Assembly;
+        //     public Assembly CodeAnalysis
+        //         => typeof(Microsoft.CodeAnalysis.Emit.InstrumentationKind).Assembly;
 
-            public Assembly Srm
-                => typeof(System.Reflection.Metadata.AssemblyDefinition).Assembly;
-        }
+        //     public Assembly Srm
+        //         => typeof(System.Reflection.Metadata.AssemblyDefinition).Assembly;
+        // }
     }
 }

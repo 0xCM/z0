@@ -13,7 +13,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IMonoidal<T> : ISemigroupOps<T>
+    public interface IMonoidal<T> : ISemigroup<T>
         where T : struct
     {
         T Identity {get;}

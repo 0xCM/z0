@@ -8,20 +8,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class ConverterAttribute : Attribute
-    {
-        public Type SourceType {get;}
-
-        public Type TargetType {get;}
-
-        public ConverterAttribute(Type src, Type dst)
-        {
-            SourceType = src;
-            TargetType = dst;
-        }
-    }
-
     [Free]
     public interface IDataConverter
     {

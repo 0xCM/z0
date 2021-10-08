@@ -4,18 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IRelation
     {
-        dynamic Kind {get;}
+        Key<uint> Key {get;}
+
+        RelationKind Kind {get;}
 
         dynamic Source {get;}
 
         dynamic Target {get;}
     }
+
 
     /// <summary>
     /// Characterizes a directed relation from a source to a target
@@ -37,16 +39,18 @@ namespace Z0
     }
 
     [Free]
-    public interface IRelation<K,S,T> : IRelation
+    public interface IRelation<T> : IRelation<T,T>
+    {
+
+    }
+
+    [Free]
+    public interface IRelation<K,S,T> : IRelation<S,T>
     {
         new K Kind {get;}
 
-        new S Source {get;}
-
-        new T Target {get;}
-
-        dynamic IRelation.Kind
-            => Kind;
+        RelationKind IRelation.Kind
+            => RelationKind.Parametric;
 
         dynamic IRelation.Source
             => Source;

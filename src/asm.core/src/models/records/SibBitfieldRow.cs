@@ -25,6 +25,5 @@ namespace Z0.Asm
 
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[FieldCount]{5,5,5,3,10};
-
     }
 }

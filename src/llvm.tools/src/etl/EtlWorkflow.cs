@@ -37,7 +37,7 @@ namespace Z0.llvm
             EmitTables(records);
             _LlvmOpCodes = MC.opcodes();
             TableEmit(_LlvmOpCodes.View, OpCodeSpec.RenderWidths, LlvmData.TablePath<OpCodeSpec>());
-            // ImportLists();
+            ImportLists();
             // GenStringTables();
             var map = MapDefinitions(records);
             var fields = LoadFields(records, map);
@@ -45,6 +45,7 @@ namespace Z0.llvm
             datasets.AsmDefFieldData = fields;
             datasets.AsmDefMapData = map;
             datasets.OpCodeData = _LlvmOpCodes;
+            var parts = partition(fields);
             return EmitFields(datasets);
         }
 

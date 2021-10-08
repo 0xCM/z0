@@ -10,7 +10,7 @@ namespace Z0.llvm
 
     using static Root;
 
-    [StructLayout(LayoutKind.Sequential, Pack=1)]
+    [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
     public struct AsmRecordField
     {
         public const string TableId = "llvm.fields";

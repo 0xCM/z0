@@ -12,27 +12,36 @@ namespace Z0
     /// <summary>
     /// Defines a correspondence between two elements
     /// </summary>
-    public struct Relation<S,T>
+    public struct Relation<S,T> : IRelation<S,T>
     {
-        public S A;
+        public readonly Key<uint> Key;
 
-        public T B;
+        public readonly RelationKind Kind;
 
-        [MethodImpl(Inline)]
-        public Relation(S a, T b)
-        {
-            A = a;
-            B = b;
-        }
+        public readonly S Source;
 
-        public void Deconstruct(out S a, out T b)
-        {
-            a = A;
-            b = B;
-        }
+        public readonly T Target;
 
         [MethodImpl(Inline)]
-        public static implicit operator Relation<S,T>((S src, T dst) x)
-            => new Relation<S,T>(x.src, x.dst);
+        public Relation(uint key, RelationKind kind, S src, T dst)
+        {
+            Key = key;
+            Kind = kind;
+            Source = src;
+            Target = dst;
+        }
+
+        RelationKind IRelation.Kind
+            => Kind;
+
+        S IRelation<S,T>.Source
+            => Source;
+
+        T IRelation<S,T>.Target
+            => Target;
+
+        Key<uint> IRelation.Key
+            => Key;
+
     }
 }

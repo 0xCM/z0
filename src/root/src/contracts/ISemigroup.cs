@@ -18,15 +18,4 @@ namespace Z0
     {
 
     }
-
-    [Free]
-    public interface ISemigroupOps<T>
-    {
-        /// <summary>
-        /// Adjudicates equality between semigroup members
-        /// </summary>
-        /// <param name="lhs">The first operand</param>
-        /// <param name="rhs">The second operand</param>
-        bool Equals(T lhs, T rhs);
-    }
 }
