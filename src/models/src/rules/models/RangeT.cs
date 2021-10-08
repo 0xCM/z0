@@ -2,16 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Rules
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    using api = Rules;
 
-    partial struct Rules
+    partial struct api
     {
         /// <summary>
         /// Constrains an element or sequence to live within a specified range

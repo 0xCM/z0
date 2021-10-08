@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    using XPR = System.Linq.Expressions.Expression;
+    using LX = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
 
     partial class LinqXPress
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="args">The arguments supplied to the method when invoked</param>
         [MethodImpl(Inline), Op]
         public static MethodCallExpression call(object Host, MethodInfo m, params PX[] args)
-            => XPR.Call(core.coalesce(Host, h => constant(h)), m, args);
+            => LX.Call(core.coalesce(Host, h => constant(h)), m, args);
 
         /// <summary>
         /// Creates an expression that invokes a static method

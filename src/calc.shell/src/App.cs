@@ -369,6 +369,27 @@ namespace Z0
             Parts.BitPack.Resolved.Executor.Run();
         }
 
+        void Spin()
+        {
+            var counter = 0u;
+            var ticks = 0L;
+
+            void Receiver(long t)
+            {
+                counter++;
+                ticks += t;
+                Write(string.Format("{0:D4}:{1:D12}", counter, ticks));
+            }
+
+            var spinner = new Spinner(TimeSpan.FromSeconds(1), Receiver);
+            spinner.Spin();
+        }
+
+        void Run(N28 n)
+        {
+            Spin();
+        }
+
         void Run(string spec)
         {
             if(uint.TryParse(spec, out var n))
@@ -449,6 +470,9 @@ namespace Z0
                     break;
                     case 27:
                         Run(n27);
+                    break;
+                    case 28:
+                        Run(n28);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

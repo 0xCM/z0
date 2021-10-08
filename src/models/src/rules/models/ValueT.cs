@@ -2,16 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Rules
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    using api = Rules;
+    using api = api;
 
-    partial struct Rules
+    partial struct api
     {
         public readonly struct Value<T> : IValue<T>
         {

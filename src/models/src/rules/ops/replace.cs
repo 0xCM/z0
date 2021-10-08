@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Rules
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -11,7 +11,7 @@ namespace Z0
     using static core;
     using static FunctionModels;
 
-    partial struct Rules
+    partial struct api
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Replace<T> replace<T>(T src, T dst)

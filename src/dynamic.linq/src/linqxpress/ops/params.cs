@@ -12,7 +12,7 @@ namespace Z0
 
     using static Root;
 
-    using XPR = System.Linq.Expressions.Expression;
+    using LX = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
 
     partial class LinqXPress
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="name">The parameter name</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static PX paramX<X>(string name = "x1")
-            => XPR.Parameter(typeof(X), name);
+            => LX.Parameter(typeof(X), name);
 
         /// <summary>
         /// Creates a parameter expression array of length 2
@@ -62,7 +62,7 @@ namespace Z0
         /// <typeparam name="X">The parameter type</typeparam>
         [MethodImpl(Inline)]
         public static PX paramX<X>(int i)
-            => XPR.Parameter(typeof(X), "x" + i.ToString());
+            => LX.Parameter(typeof(X), "x" + i.ToString());
 
         /// <summary>
         /// Creates a parameter expression
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="paramTypes">The parameter types</param>
         public static PX[] @params(params Type[] paramTypes)
             => Enumerable.Range(0, paramTypes.Length)
-                    .Select(i => XPR.Parameter(paramTypes[i], "x" + (i + 1).ToString()))
+                    .Select(i => LX.Parameter(paramTypes[i], "x" + (i + 1).ToString()))
                     .ToArray();
     }
 }

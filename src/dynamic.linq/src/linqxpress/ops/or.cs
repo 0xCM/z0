@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    using XPR = System.Linq.Expressions.Expression;
+    using LX = System.Linq.Expressions.Expression;
 
     partial class LinqXPress
     {
@@ -20,8 +20,8 @@ namespace Z0
         /// <param name="lhs">The left expression</param>
         /// <param name="rhs">The right expression</param>
         [MethodImpl(Inline), Op]
-        public static BinaryExpression or(XPR lhs, XPR rhs)
-            => XPR.OrElse(lhs, rhs);
+        public static BinaryExpression or(LX lhs, LX rhs)
+            => LX.OrElse(lhs, rhs);
 
         /// <summary>
         /// Forms a disjunction from two function predicates

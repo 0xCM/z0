@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// Defines a 16-bit bitvector
         /// </summary>
-        public struct bv16 : IScalarBits<ushort>
+        public struct bv16 : IIndexedBits<ushort>
         {
             public const uint Width = 16;
 

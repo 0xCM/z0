@@ -25,7 +25,7 @@ namespace Z0
             }
 
             public string Format()
-                => api.format(this);
+                => SeqRules.format(this);
 
 
             public override string ToString()

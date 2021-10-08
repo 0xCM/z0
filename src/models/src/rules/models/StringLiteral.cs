@@ -2,39 +2,34 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Rules
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    using api = Rules;
-
-    partial struct Rules
+    public readonly struct StringLiteral : ITerm
     {
-        public readonly struct StringLiteral : ITerm
+        public Label Name {get;}
+
+        public Constant<string> Value {get;}
+
+        [MethodImpl(Inline)]
+        public StringLiteral(Label name, string value)
         {
-            public Label Name {get;}
+            Name = name;
+            Value = value;
+        }
 
-            public Constant<string> Value {get;}
+        public string Format()
+            => api.format(this);
 
-            [MethodImpl(Inline)]
-            public StringLiteral(Label name, string value)
-            {
-                Name = name;
-                Value = value;
-            }
+        public override string ToString()
+            => Format();
 
-            public string Format()
-                => api.format(this);
-
-            public override string ToString()
-                => Format();
-
-            [MethodImpl(Inline)]
-            public static implicit operator StringLiteral((Label name, string value) src)
-                => new StringLiteral(src.name,src.value);
-       }
+        [MethodImpl(Inline)]
+        public static implicit operator StringLiteral((Label name, string value) src)
+            => new StringLiteral(src.name,src.value);
     }
 }

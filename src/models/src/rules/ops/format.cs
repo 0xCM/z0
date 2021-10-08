@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Rules
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct Rules
+    partial struct api
     {
         public static string format(in Var src)
             => string.Format("var({0})", src.Name);
@@ -57,12 +57,12 @@ namespace Z0
             return dst.Emit();
         }
 
-        public static string format(IProduction src)
-        {
-            var dst = text.buffer();
-            dst.AppendFormat("<{0}> := {1}", src.Name, format(src.Expansion));
-            return dst.Emit();
-        }
+        // public static string format(IProduction src)
+        // {
+        //     var dst = text.buffer();
+        //     dst.AppendFormat("<{0}> := {1}", src.Name, format(src.Expansion));
+        //     return dst.Emit();
+        // }
 
         public static string format<T>(in Atom<T> src)
             where T : unmanaged

@@ -8,8 +8,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using api = SeqRules;
-
     [Free]
     public interface IEvaluator
     {
@@ -30,6 +28,6 @@ namespace Z0
         bool Eval(in S src, out T dst);
 
         uint Evaluate(ReadOnlySpan<S> src, Span<T> dst)
-            => api.eval(src,dst,this);
+            => SeqRules.eval(src, dst, this);
     }
 }

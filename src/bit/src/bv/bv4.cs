@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// Defines a 4-bit bitvector
         /// </summary>
-        public struct bv4 : IScalarBits<byte>
+        public struct bv4 : IIndexedBits<byte>
         {
             public const uint Width = 4;
 

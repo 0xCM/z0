@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// Defines a 64-bit bitvector
         /// </summary>
-        public struct bv64 : IScalarBits<ulong>
+        public struct bv64 : IIndexedBits<ulong>
         {
             public const uint Width = 64;
 

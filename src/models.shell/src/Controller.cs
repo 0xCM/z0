@@ -7,29 +7,13 @@ namespace Z0.Models
     using System;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
-    using static Rules;
+    using Rules;
 
     using static Root;
     using static core;
 
     public sealed class Controller : AppService<Controller>
     {
-        void Spin()
-        {
-            var counter = 0u;
-            var ticks = 0L;
-
-            void Receiver(long t)
-            {
-                counter++;
-                ticks += t;
-                Write(string.Format("{0:D4}:{1:D12}", counter, ticks));
-            }
-
-            var spinner = new Spinner(TimeSpan.FromSeconds(1), Receiver);
-            spinner.Spin();
-
-        }
 
         public void Control(ReadOnlySpan<string> args)
         {
@@ -62,8 +46,6 @@ namespace Z0.Models
             Write(string.Format("{0} -> {1}", x2, y2));
             Write(string.Format("{0} -> {1}", x3, y3));
         }
-
-
     }
 
     public struct BitmaskBuilder

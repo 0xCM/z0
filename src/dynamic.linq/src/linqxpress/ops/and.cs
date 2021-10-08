@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static Option;
 
-    using XPR = System.Linq.Expressions.Expression;
+    using LX = System.Linq.Expressions.Expression;
 
     partial class LinqXPress
     {
@@ -21,8 +21,8 @@ namespace Z0
         /// <param name="a">The left expression</param>
         /// <param name="b">The right expression</param>
         [MethodImpl(Inline), Op]
-        public static BinaryExpression and(XPR a, XPR b)
-            => XPR.AndAlso(a, b);
+        public static BinaryExpression and(LX a, LX b)
+            => LX.AndAlso(a, b);
 
         /// <summary>
         /// Forms a conjunction from two function predicates

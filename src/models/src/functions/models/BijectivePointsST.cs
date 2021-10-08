@@ -32,7 +32,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => (Source[i], Target[i]);
             }
-
         }
     }
 }

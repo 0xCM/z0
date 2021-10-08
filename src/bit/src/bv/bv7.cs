@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// Defines a 7-bit bitvector
         /// </summary>
-        public struct bv7 : IScalarBits<byte>
+        public struct bv7 : IIndexedBits<byte>
         {
             public const uint Width = 7;
 

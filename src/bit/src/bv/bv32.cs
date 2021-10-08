@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// Defines a 32-bit bitvector
         /// </summary>
-        public struct bv32 : IScalarBits<uint>
+        public struct bv32 : IIndexedBits<uint>
         {
             public const uint Width = 32;
 

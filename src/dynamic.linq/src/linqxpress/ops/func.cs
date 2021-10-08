@@ -13,7 +13,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using XPR = System.Linq.Expressions.Expression;
+    using LX = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
 
     public partial class LinqXPress
@@ -67,7 +67,7 @@ namespace Z0
             => Option.Try(() => (Func<X>)_cache.GetOrAdd(m, method =>
             {
                 var result = convert<X>(call(host, m));
-                return XPR.Lambda<Func<X>>(result).Compile();
+                return LX.Lambda<Func<X>>(result).Compile();
             }));
 
         /// <summary>

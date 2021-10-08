@@ -16,8 +16,8 @@ namespace Z0.Models
         public readonly partial struct Gates
         {
             [MethodImpl(Inline), Op]
-            public static Gate gate(GateKind kind, byte width, byte ins, byte outs)
-                => new Gate(kind, width, ins, outs);
+            public static GateInfo gate(GateKind kind, byte width, byte ins, byte outs)
+                => new GateInfo(kind, width, ins, outs);
 
             [MethodImpl(Inline), Op]
             public static Wire wire(byte width)

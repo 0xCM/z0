@@ -26,7 +26,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IScalarBits<T> : IBv<T>
+    public interface IIndexedBits<T> : IBv<T>
         where T : unmanaged
     {
         bit this[byte i] {get;set;}

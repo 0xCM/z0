@@ -48,7 +48,6 @@ namespace Z0.Models
     {
     }
 
-
     public readonly struct LogicChannels
     {
         public readonly struct Not<T> : IChannel1x1<Not<T>,T>
@@ -127,7 +126,6 @@ namespace Z0.Models
             y1 = gmath.max(x0,x1);
         }
     }
-
 
     public readonly struct SortingNetwork<T>
         where T : unmanaged

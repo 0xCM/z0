@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    using XPR = System.Linq.Expressions.Expression;
+    using LX = System.Linq.Expressions.Expression;
 
     partial class LinqXPress
     {
@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="t">The type to test against</param>
         [MethodImpl(Inline), Op]
         public static TypeBinaryExpression test(object value, Type t)
-            => XPR.TypeIs(constant(value), t);
+            => LX.TypeIs(constant(value), t);
 
         /// <summary>
         /// Creates an expression to adjudicate whether a value if of a specified type
@@ -30,6 +30,6 @@ namespace Z0
         /// <typeparam name="T">The type to test against</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static TypeBinaryExpression test<T>(object value)
-            => XPR.TypeIs(constant(value), typeof(T));
+            => LX.TypeIs(constant(value), typeof(T));
     }
 }

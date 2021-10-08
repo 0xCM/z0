@@ -27,6 +27,26 @@ namespace Z0
     public static class XSvc
     {
         [Op]
+        public static CmdLineRunner CmdLineRunner(this IWfRuntime wf)
+            => Svc.CmdLineRunner.create(wf);
+
+        [Op]
+        public static ScriptRunner ScriptRunner(this IServiceContext context)
+            => Svc.ScriptRunner.create(context.EnvPaths);
+
+        [Op]
+        public static ScriptRunner ScriptRunner(this IEnvPaths paths)
+            => Svc.ScriptRunner.create(paths);
+
+        [Op]
+        public static OmniScript OmniScript(this IWfRuntime wf)
+            => Svc.OmniScript.create(wf);
+
+        [Op]
+        public static Tooling Tooling(this IWfRuntime wf)
+            => Svc.Tooling.create(wf);
+
+        [Op]
         public static ModelServices Models(this IWfRuntime wf)
             => SvcCache.Models(wf);
 

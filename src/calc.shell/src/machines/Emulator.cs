@@ -31,7 +31,6 @@ namespace Z0
             Settings = config;
         }
 
-
         protected override void Disposing()
         {
             Registers.Dispose();

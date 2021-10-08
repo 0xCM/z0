@@ -13,7 +13,7 @@ namespace Z0
         /// <summary>
         /// Defines a 128-bit bitvector
         /// </summary>
-        public struct bv128 : IScalarBits<ByteBlock16>
+        public struct bv128 : IIndexedBits<ByteBlock16>
         {
             public const uint Width = 128;
 

@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct BV
     {
-        public struct bv0 : IScalarBits<byte>
+        public struct bv0 : IIndexedBits<byte>
         {
             public const uint Width = 0;
 

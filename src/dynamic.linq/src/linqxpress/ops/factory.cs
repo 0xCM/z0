@@ -8,7 +8,7 @@ namespace Z0
 
     using static Option;
 
-    using XPR = System.Linq.Expressions.Expression;
+    using LX = System.Linq.Expressions.Expression;
 
     partial class LinqXPress
     {
@@ -19,8 +19,8 @@ namespace Z0
         /// <typeparam name="X">The type of instance to create</typeparam>
         public static Option<Func<X>> factory<X>()
             => from c in ctor<X>()
-                let x = XPR.New(c)
-                select XPR.Lambda<Func<X>>(x).Compile();
+                let x = LX.New(c)
+                select LX.Lambda<Func<X>>(x).Compile();
 
         /// <summary>
         /// Defines a strongly-typed function that will invoke a one-parameter constructor to create a target type instance
@@ -30,7 +30,7 @@ namespace Z0
         public static Option<Func<X,T>> factory<X,T>()
             => from c in ctor<T>(typeof(X))
                 let parameters = array(paramX<X>())
-                let body = XPR.New(c, parameters)
+                let body = LX.New(c, parameters)
                 select lambda<Func<X,T>>(parameters, body).Compile();
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
                 let cParams = array(paramX(arg))
                 let lParams = array(paramX(typeof(object)))
                 let converted = array(convert(lParams[0], arg))
-                let body = XPR.New(c, converted)
+                let body = LX.New(c, converted)
                 select lambda<Func<object, object>>(lParams, body).Compile();
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         public static Option<Func<X1,X2,T>> factory<X1,X2,T>()
             => from c in ctor<X1,X2,T>()
                 let parameters = paramX<X1,X2>()
-                let body = XPR.New(c, parameters)
+                let body = LX.New(c, parameters)
                 select lambda<Func<X1,X2,T>>(parameters, body).Compile();
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
             => from c in ctor(target, arg1, arg2)
                 let lParams = array(paramX<object>(), paramX<object>())
                 let converted = array(convert(lParams[0], arg1), convert(lParams[1], arg2))
-                let body = convert(XPR.New(c, converted), typeof(object))
+                let body = convert(LX.New(c, converted), typeof(object))
                 let final = lambda<Func<object, object, object>>(lParams, body)
                 select final.Compile();
 
@@ -82,7 +82,7 @@ namespace Z0
         public static Option<Func<X1,X2,X3,T>> factory<X1,X2,X3,T>()
             => from c in ctor<X1,X2,T>()
                 let parameters = paramX<X1,X2,X3>()
-                let body = XPR.New(c, parameters)
+                let body = LX.New(c, parameters)
                 select lambda<Func<X1,X2,X3,T>>(parameters, body).Compile();
     }
 }

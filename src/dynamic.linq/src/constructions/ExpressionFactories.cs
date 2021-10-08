@@ -8,7 +8,7 @@ namespace Z0.DynamicModels
     using System.Linq;
     using System.Linq.Expressions;
 
-    using XPR = System.Linq.Expressions.Expression;
+    using LX = System.Linq.Expressions.Expression;
 
     public static class ExpressionFactories
     {
@@ -34,9 +34,9 @@ namespace Z0.DynamicModels
         /// <typeparam name="T"></typeparam>
         public static Expression<Func<T,bool>> Or<T>(this Expression<Func<T,bool>> left, Expression<Func<T,bool>> right)
         {
-            var invokedExpr = XPR.Invoke(right, left.Parameters.Cast<XPR>());
-            return XPR.Lambda<Func<T, bool>>
-                  (XPR.OrElse(left.Body, invokedExpr), left.Parameters);
+            var invokedExpr = LX.Invoke(right, left.Parameters.Cast<LX>());
+            return LX.Lambda<Func<T, bool>>
+                  (LX.OrElse(left.Body, invokedExpr), left.Parameters);
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace Z0.DynamicModels
         /// <typeparam name="T"></typeparam>
         public static Expression<Func<T,bool>> And<T>(this Expression<Func<T,bool>> lhs, Expression<Func<T,bool>> rhs)
         {
-            var invokedExpr = XPR.Invoke(rhs, lhs.Parameters.Cast<XPR>());
-            return XPR.Lambda<Func<T, bool>>
-                  (XPR.AndAlso(lhs.Body, invokedExpr), lhs.Parameters);
+            var invokedExpr = LX.Invoke(rhs, lhs.Parameters.Cast<LX>());
+            return LX.Lambda<Func<T, bool>>
+                  (LX.AndAlso(lhs.Body, invokedExpr), lhs.Parameters);
         }
 
         /// <summary>
@@ -60,9 +60,9 @@ namespace Z0.DynamicModels
         /// <typeparam name="T"></typeparam>
         public static Expression<Func<bool>> Equal<T>(this Expression<Func<T>> lhs, Expression<Func<T>> rhs)
         {
-            var lValue = XPR.Invoke(lhs);
-            var rValue = XPR.Invoke(rhs);
-            return XPR.Lambda<Func<bool>>(XPR.Equal(lValue, rValue));
+            var lValue = LX.Invoke(lhs);
+            var rValue = LX.Invoke(rhs);
+            return LX.Lambda<Func<bool>>(LX.Equal(lValue, rValue));
         }
     }
 }

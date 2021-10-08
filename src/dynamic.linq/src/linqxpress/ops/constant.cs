@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    using XPR = System.Linq.Expressions.Expression;
+    using LX = System.Linq.Expressions.Expression;
 
     partial class LinqXPress
     {
@@ -20,6 +20,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static ConstantExpression constant(object src)
-            => XPR.Constant(src);
+            => LX.Constant(src);
     }
 }

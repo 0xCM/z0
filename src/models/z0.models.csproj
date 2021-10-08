@@ -11,6 +11,7 @@
     <ProjectReference Include="$(gmath)" />
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Hex)" />
+    <ProjectReference Include="$(Lang)" />
   </ItemGroup>
 
 </Project>
