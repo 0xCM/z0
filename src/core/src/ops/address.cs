@@ -45,8 +45,6 @@ namespace Z0
         public static unsafe MemoryAddress address<T>(ReadOnlySpan<T> src)
             => new MemoryAddress(pvoid(first(src)));
 
-            //Unsafe.As<T,ulong>(ref MemoryMarshal.GetReference(src));
-
         /// <summary>
         /// Derives the address of a <see cref='Type'/> from the value of its <see cref='Type.TypeHandle' />
         /// </summary>

@@ -11,12 +11,8 @@ namespace Z0
 
     partial class ClrQuery
     {
-        /// <summary>
-        /// Selects all public instance fields from the source
-        /// </summary>
-        /// <param name="src">The source type</param>
         [Op]
-        public static FieldInfo[] PublicInstanceFields(this Type src)
-            => src.GetFields(BF_PublicInstance);
+        public static PropertyInfo[] PublicStaticProperties(this Type src)
+            => src.GetProperties(BF_PublicStatic);
     }
 }

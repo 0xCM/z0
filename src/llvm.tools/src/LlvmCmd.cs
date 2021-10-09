@@ -12,10 +12,13 @@ namespace Z0.llvm
 
         LlvmToolbase Toolbase;
 
+        LlvmPaths LlvmPaths;
+
         protected override void Initialized()
         {
             LlvmEtl = Wf.LlvmEtl();
             Toolbase = Wf.LLvmToolbase();
+            LlvmPaths = Wf.LlvmPaths();
         }
     }
 }

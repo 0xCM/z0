@@ -14,34 +14,39 @@ namespace Z0.llvm
 
     partial class EtlWorkflow
     {
-        public Outcome LoadConfig()
+        public LlvmConfig LoadConfig()
         {
             const string Pattern = "llvm-config --{0}";
             var result = Outcome.Success;
             var options = Symbols.index<K>().View;
             var count = options.Length;
+            var config = new LlvmConfig();
             for(var i=0; i<count; i++)
             {
                 ref readonly var option = ref skip(options,i);
                 var script = string.Format(Pattern, option.Expr);
-                result = Wf.OmniScript().Run(script, out var response);
+                result = OmniScript.Run(script, out var response);
                 if(result.Fail)
-                    return result;
+                {
+                    Write(result.Message);
+                }
 
                 if(response.Length != 0)
-                    ProcessConfig(option, first(response));
+                    LoadConfig(option, first(response), config);
             }
 
-            return result;
+            return config;
         }
 
-        void ProcessConfig(Sym<K> sym, TextLine src)
+        void LoadConfig(Sym<K> sym, TextLine src, LlvmConfig dst)
         {
-            var content = src.Content;
+            var content = text.trim(src.Content);
+            if(empty(content))
+                return;
+
             var kind = sym.Kind;
-            Write(EmptyString);
             Write(sym.Name, sym.Description, FlairKind.StatusData);
-            Write(RP.PageBreak40, FlairKind.StatusData);
+            Write(RP.PageBreak80, FlairKind.StatusData);
             switch(kind)
             {
                 case K.Version:
@@ -49,20 +54,23 @@ namespace Z0.llvm
                 break;
                 case K.IncludeDir:
                 {
-                    var dir = FS.dir(content);
-                    Write(dir);
+                    var data = FS.dir(content);
+                    dst.Set(kind,data);
+                    Write(data);
                 }
                 break;
                 case K.LibDir:
                 {
-                    var dir = FS.dir(content);
-                    Write(dir);
+                    var data = FS.dir(content);
+                    dst.Set(kind,data);
+                    Write(data);
                 }
                 break;
                 case K.TargetsBuilt:
                 {
-                    var items = content.Split(Chars.Space);
-                    iter(items, c => Write(c));
+                    var data = content.Split(Chars.Space);
+                    dst.Set(kind,data);
+                    iter(data, c => Write(c));
                 }
                 break;
                 case K.SrcRoot:
@@ -73,79 +81,92 @@ namespace Z0.llvm
                 break;
                 case K.ObjRoot:
                 {
-                    var dir = FS.dir(content);
-                    Write(dir);
+                    var data = FS.dir(content);
+                    dst.Set(kind,data);
+                    Write(data);
                 }
                 break;
                 case K.BinDir:
                 {
-                    var dir = FS.dir(content);
-                    Write(dir);
+                    var data = FS.dir(content);
+                    dst.Set(kind,data);
+                    Write(data);
                 }
                 break;
                 case K.HostTarget:
                 {
+                    dst.Set(kind, content);
                     Write(content);
                 }
                 break;
                 case K.CFlags:
                 {
-                    var items = content.Split(Chars.Space);
-                    iter(items, c => Write(c));
+                    var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty);
+                    dst.Set(kind,data);
+                    iter(data, c => Write(c));
                 }
                 break;
                 case K.CxxFlags:
                 {
-                    var items = content.Split(Chars.Space);
-                    iter(items, c => Write(c));
+                    var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty);
+                    dst.Set(kind,data);
+                    iter(data, c => Write(c));
                 }
                 break;
                 case K.SystemLibs:
                 {
-                    var items = content.Split(Chars.Space).Select(FS.file);
-                    iter(items, c => Write(c));
+                    var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty).Select(FS.file);
+                    dst.Set(kind,data);
+                    iter(data, c => Write(c));
                 }
                 break;
                 case K.LibNames:
                 {
-                    var items = content.Split(Chars.Space).Select(FS.file);
-                    iter(items, c => Write(c));
+                    var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty).Select(FS.file);
+                    dst.Set(kind,data);
+                    iter(data, c => Write(c));
                 }
                 break;
                 case K.CppFlags:
                 {
-                    var items = content.Split(Chars.Space);
-                    iter(items, c => Write(c));
+                    var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty);
+                    dst.Set(kind,data);
+                    iter(data, c => Write(c));
                 }
                 break;
                 case K.LinkerFlags:
                 {
-                    var items = content.Split(Chars.Space);
-                    iter(items, c => Write(c));
+                    var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty);
+                    dst.Set(kind,data);
+                    iter(data, c => Write(c));
                 }
                 break;
                 case K.LinkStatic:
                 {
-                    var items = content.Split(Chars.Space);
-                    iter(items, c => Write(c));
+                    var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty);
+                    dst.Set(kind,data);
+                    iter(data, c => Write(c));
                 }
                 break;
                 case K.Components:
                 {
-                    var items = content.Split(Chars.Space);
-                    iter(items, c => Write(c));
+                    var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty);
+                    dst.Set(kind,data);
+                    iter(data, c => Write(c));
                 }
                 break;
                 case K.Libs:
                 {
-                    var items = content.Split(Chars.Space).Select(FS.path);
-                    iter(items,p =>  Write(p.ToUri()));
+                    var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty).Select(FS.path);
+                    dst.Set(kind,data);
+                    iter(data,p =>  Write(p.ToUri()));
                 }
                 break;
                 case K.LibFiles:
                 {
-                    var items = content.Split(Chars.Space).Select(FS.path);
-                    iter(items,p =>  Write(p.ToUri()));
+                    var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty).Select(FS.path);
+                    dst.Set(kind,data);
+                    iter(data,p =>  Write(p.ToUri()));
                 }
                 break;
             }

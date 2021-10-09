@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -25,6 +25,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AddressSize(NativeSizeCode code)
-            => asm.asmsize(asm.width(code));
+            => new AddressSize(code);
     }
 }

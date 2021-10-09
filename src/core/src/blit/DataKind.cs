@@ -135,7 +135,7 @@ namespace Z0
     }
 
     [LiteralProvider]
-    public readonly struct DataKindNames
+    readonly struct DataKindNames
     {
         public const string Unknown = "?";
 

@@ -11,23 +11,23 @@ namespace Z0.llvm
     using static Root;
 
     [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
-    public struct AsmRecordField
+    public struct TableGenField
     {
         public const string TableId = "llvm.fields";
 
-        public const string RowFormat = "{0,-32} | {1,-32} | {2,-32} | {3}";
+        public const string RowFormat = "{0,-64} | {1,-32} | {2,-32} | {3}";
 
         public static string RowHeader
-            => string.Format(RowFormat, nameof(Id), nameof(Type), nameof(Name), nameof(Value));
+            => string.Format(RowFormat, nameof(Id), nameof(DataType), nameof(Name), nameof(Value));
 
-        public AsmId Id;
+        public Identifier Id;
 
         public RecordField FieldContent;
 
-        public string Type
+        public string DataType
         {
             [MethodImpl(Inline)]
-            get => FieldContent.Type;
+            get => FieldContent.DataType;
         }
 
         public string Name
@@ -43,7 +43,7 @@ namespace Z0.llvm
         }
 
         public string Format()
-            => string.Format("{0}.{1}:{2} = {3}", Id, Name, Type, Value);
+            => string.Format("{0}.{1}:{2} = {3}", Id, Name, DataType, Value);
 
         public override string ToString()
             => Format();

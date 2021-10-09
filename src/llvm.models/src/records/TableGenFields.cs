@@ -10,20 +10,20 @@ namespace Z0.llvm
 
     using static Root;
 
-    public readonly struct AsmRecordFields
+    public readonly struct TableGenFields
     {
-        public AsmId Id {get;}
+        public Identifier Id {get;}
 
-        readonly Index<AsmRecordField> Data;
+        readonly Index<TableGenField> Data;
 
         [MethodImpl(Inline)]
-        public AsmRecordFields(AsmId id, AsmRecordField[] src)
+        public TableGenFields(Identifier id, TableGenField[] src)
         {
             Id = id;
             Data = src;
         }
 
-        public ReadOnlySpan<AsmRecordField> View
+        public ReadOnlySpan<TableGenField> View
         {
             [MethodImpl(Inline)]
             get => Data.View;

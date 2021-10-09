@@ -8,10 +8,9 @@ namespace Z0.llvm
 
     partial class EtlWorkflow
     {
-        public ReadOnlySpan<TextLine> LoadRecords()
+        public ReadOnlySpan<TextLine> LoadSourceRecords()
         {
-            var src = LlvmData.OutDir() + FS.file("X86.records", FS.Txt);
-            using var reader = src.Utf8LineReader();
+            using var reader = LlvmPaths.TableGenSource("X86.records").Utf8LineReader();
             return reader.ReadAll();
         }
     }

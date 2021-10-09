@@ -32,5 +32,13 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator NativeSizeCode(RegWidth src)
             => src.Size;
+
+        [MethodImpl(Inline)]
+        public static implicit operator RegWidth(NativeSize src)
+            => (NativeSizeCode)src.Code;
+
+        [MethodImpl(Inline)]
+        public static implicit operator NativeSize(RegWidth src)
+            => src.Size;
     }
 }

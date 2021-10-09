@@ -11,10 +11,11 @@ namespace Z0
 
     partial class ClrQuery
     {
-       /// <summary>
+        /// <summary>
         /// Selects all public instance fields from the source
         /// </summary>
         /// <param name="src">The source type</param>
+        [Op]
         public static MethodInfo[] PublicInstanceMethods(this Type src)
             => src.GetMethods(BF_PublicInstance);
     }

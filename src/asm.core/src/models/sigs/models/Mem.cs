@@ -34,7 +34,7 @@ namespace Z0.Asm
                 => AsmOpClass.M;
 
             public NativeSize Size
-                => AsmSizeKeyword.@byte;
+                => NativeSizeCode.W8;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m8 src)
@@ -51,7 +51,7 @@ namespace Z0.Asm
                 => AsmOpClass.M;
 
             public NativeSize Size
-                => AsmSizeKeyword.word;
+                => NativeSizeCode.W16;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m16 src)
@@ -68,7 +68,7 @@ namespace Z0.Asm
                 => AsmOpClass.M;
 
             public NativeSize Size
-                => AsmSizeKeyword.dword;
+                => NativeSizeCode.W32;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m32 src)
@@ -85,7 +85,7 @@ namespace Z0.Asm
                 => AsmOpClass.M;
 
             public NativeSize Size
-                => AsmSizeKeyword.qword;
+                => NativeSizeCode.W64;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m64 src)
@@ -102,7 +102,7 @@ namespace Z0.Asm
                 => AsmOpClass.M;
 
             public NativeSize Size
-                => AsmSizeKeyword.xmmword;
+                => NativeSizeCode.W128;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m128 src)
@@ -119,7 +119,7 @@ namespace Z0.Asm
                 => AsmOpClass.M;
 
             public NativeSize Size
-                => AsmSizeKeyword.ymmword;
+                => NativeSizeCode.W256;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m256 src)
@@ -136,7 +136,7 @@ namespace Z0.Asm
                 => AsmOpClass.M;
 
             public NativeSize Size
-                => AsmSizeKeyword.zmmword;
+                => NativeSizeCode.W512;
 
             [MethodImpl(Inline)]
             public static implicit operator mem(m512 src)

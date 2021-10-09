@@ -21,7 +21,7 @@ namespace Z0.Asm
                 var name = member.Name;
                 var tag = member.Definition.Tag<SymbolAttribute>();
                 var symbol = text.ifempty(tag.MapValueOrDefault(t => t.Symbol, name),name);
-                var func = PublicOneLineFunc(String(), name, Empty(), RP.enquote(symbol));
+                var func = PublicOneLineFunc(@string, name, Empty(), RP.enquote(symbol));
                 dst.IndentLine(margin, func);
                 dst.AppendLine();
                 counter++;

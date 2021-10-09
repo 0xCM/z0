@@ -9,7 +9,6 @@ namespace Z0
     using static core;
     using static Root;
 
-
     public readonly struct SymbolSets
     {
         public static SymSet from(Type src)

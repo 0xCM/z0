@@ -20,6 +20,31 @@ namespace Z0
 
         const ulong BitsToKbFactor = KbFactor * BitFactor;
 
+        [MethodImpl(Inline), Op]
+        public static NativeSizeCode native(BitWidth src)
+        {
+            if(src != 80)
+            {
+                var i = Pow2.log(src >> 3);
+                return (NativeSizeCode)i;
+            }
+            else
+                return NativeSizeCode.W80;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static BitWidth width(NativeSizeCode src)
+            => src != NativeSizeCode.W80 ? (Pow2.pow((byte)src)*8ul) : 80;
+
+        [MethodImpl(Inline), Op]
+        public static MemoryScale scale(byte factor)
+            => new MemoryScale((ScaleFactor)factor);
+
+        [MethodImpl(Inline), Op]
+        public static MemoryScale scale(ScaleFactor factor)
+            => new MemoryScale(factor);
+
+
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Size<T> size<T>(T src)
             where T : unmanaged

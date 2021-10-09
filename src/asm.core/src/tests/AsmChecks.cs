@@ -10,7 +10,7 @@ namespace Z0.Asm
         [Op]
         public static bit check(ref AsmSizeCheck src)
         {
-            src.Actual = (ushort)asm.width(src.Input);
+            src.Actual = (ushort)Sizes.width(src.Input);
             switch(src.Input.Code)
             {
                 case NativeSizeCode.W8:

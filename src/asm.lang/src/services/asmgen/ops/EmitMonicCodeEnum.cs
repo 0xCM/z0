@@ -31,7 +31,7 @@ namespace Z0.Asm
             buffer.AppendLine(NamespaceDecl());
             buffer.AppendLine(Open);
             margin += 4;
-            buffer.IndentLine(margin, EnumDecl(TargetIdentifier(T.MonicCodeEnum), UShort()));
+            buffer.IndentLine(margin, EnumDecl(TargetIdentifier(T.MonicCodeEnum), @ushort));
             buffer.IndentLine(margin, Open);
             margin += 4;
 

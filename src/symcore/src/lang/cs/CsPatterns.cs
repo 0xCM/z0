@@ -12,7 +12,7 @@ namespace Z0
     using L = CsPatterns.Literals;
 
     [ApiComplete]
-    public readonly struct CsPatterns
+    public readonly partial struct CsPatterns
     {
         const string Space = " ";
 
@@ -34,66 +34,13 @@ namespace Z0
 
         public const string @short = "short";
 
+        public const string @ushort = "ushort";
+
         public const string @byte = "byte";
 
-        public readonly struct Literals
-        {
-            public const string Space = " ";
+        public const string @sbyte = "sbyte";
 
-            public const string Public = @public;
-
-            public const string Readonly = @readonly;
-
-            public const string Class = @class;
-
-            public const string Struct = "struct";
-
-            public const string Static = @static;
-
-            public const string String = "string";
-
-            public const string Using = @using;
-
-            public const string Open = "{";
-
-            public const string Close = "}";
-
-            public const string UShort = "ushort";
-
-            public const string Namespace = @namespace;
-
-            public const string Term = ";";
-
-            public const string NamespaceDeclPattern = Namespace + Space + "{0}";
-
-            public const string UsingStatic = Using + Space + Static;
-
-            public const string UsingNamespace = Using + Space + "{0}" + Term;
-
-            public const string UsingType = UsingStatic + Space + "{0}" + Term;
-
-            public const string InlineAttribute = "[MethodImpl(Inline)]";
-
-            public const string InlineOpAttribute = "[MethodImpl(Inline), Op]";
-
-            public const string ApiCompleteAttribute = "[ApiComplete]";
-
-            public const string PublicClass = Public + Space + Class;
-
-            public const string ReadOnlyStruct = Readonly + Space + Struct;
-
-            public const string UsingCompilerServices = "using System.Runtime.CompilerServices;";
-
-            internal const string OneLineFunc = "{0} {1}({2}) => {3}" + Term;
-
-            internal const string StaticOneLineFunc = Static + Space + OneLineFunc;
-
-            internal const string PublicStaticOneLineFunc = Public + Space + StaticOneLineFunc;
-
-            internal const string PublicOneLineFunc = Public + Space + OneLineFunc;
-
-            public const string EnumDeclPattern = "public enum {0} : {1}";
-        }
+        public const string @string = "string";
 
         [MethodImpl(Inline)]
         public static string Term()
@@ -104,10 +51,6 @@ namespace Z0
             => Root.EmptyString;
 
         [MethodImpl(Inline)]
-        public static string Class()
-            => L.Class;
-
-        [MethodImpl(Inline)]
         public static string Open()
             => L.Open;
 
@@ -116,24 +59,12 @@ namespace Z0
             => L.Close;
 
         [MethodImpl(Inline)]
-        public static string Class(string name)
-            => L.Class + Space + name;
-
-        [MethodImpl(Inline)]
         public static string PublicClass()
             => L.PublicClass;
 
         [MethodImpl(Inline)]
-        public static string Struct()
-            => L.Struct;
-
-        [MethodImpl(Inline)]
-        public static string Using()
-            => L.Using;
-
-        [MethodImpl(Inline)]
         public static string Readonly()
-            => L.Readonly;
+            => @readonly;
 
         public static string UsingNs(string name)
             => string.Format(L.UsingNamespace, name);
@@ -141,20 +72,12 @@ namespace Z0
         public static string UsingType(string name)
             => string.Format(L.UsingType, name);
 
-       public static string NamespaceDecl(string name)
+        public static string NamespaceDecl(string name)
             => string.Format(L.NamespaceDeclPattern, name);
 
         [MethodImpl(Inline)]
-        public static string String()
-            => L.String;
-
-        [MethodImpl(Inline)]
-        public static string UShort()
-            => L.UShort;
-
-        [MethodImpl(Inline)]
         public static string Struct(string name)
-            => L.Struct + Space + name;
+            => @struct + Space + name;
 
         [MethodImpl(Inline)]
         public static string ReadonlyStruct()
@@ -162,11 +85,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string ReadonlyStruct(string name)
-            => L.Readonly + Space + Struct(name);
+            => @readonly + Space + Struct(name);
 
         [MethodImpl(Inline)]
         public static string PublicReadonlyStruct(string name)
-            => L.Public + Space + ReadonlyStruct(name);
+            => @public + Space + ReadonlyStruct(name);
 
         [MethodImpl(Inline)]
         public static string InlineAttrib()
@@ -228,6 +151,9 @@ namespace Z0
 
         public static string PublicStaticOneLineFunc(string ret, string name, string ops, string body)
             => string.Format(L.PublicStaticOneLineFunc, ret, name, ops, body);
+
+        public static string Call(string method, params object[] args)
+            => string.Format("{0}({1})", method, args.Delimit());
 
         public static RenderPattern<string> ReadOnlySpanTypePattern => "ReadOnlySpan<{0}>";
 

@@ -4,26 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
-
-    using static core;
-    using static WsAtoms;
-
     partial class LlvmCmd
     {
-        IProjectWs LlvmData => Ws.Project("llvm.data");
-
-        [CmdOp(".bitvectors")]
-        Outcome EmitBitVectors(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var dir = LlvmData.Tables(lists);
-            var src = @readonly(dir.Files(FS.Csv));
-            var dst = LlvmData.Subdir("bitvectors");
-            Wf.Bitfields().EmitBitVectors(src,dst);
-            return result;
-        }
-
         [CmdOp(".bitfields")]
         Outcome EmitBitfield(CmdArgs args)
         {
@@ -45,5 +27,4 @@ namespace Z0.llvm
             Field3 = 2,
         }
     }
-
 }

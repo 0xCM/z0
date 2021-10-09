@@ -12,24 +12,23 @@ namespace Z0.llvm
 
     partial class EtlWorkflow
     {
-        public LineMap<AsmId> MapDefinitions(ReadOnlySpan<TextLine> records)
+        public LineMap<Identifier> MapContent<T>(ReadOnlySpan<T> relations, ReadOnlySpan<TextLine> records, string dstid)
+            where T : struct, IRecordRelations<T>
         {
             const uint BufferLength = 256;
             var result = Outcome.Success;
             var linecount = records.Length;
-            var defs = Defs(records);
-            var count = defs.Length;
+            var count = relations.Length;
             var buffer = span<TextLine>(BufferLength);
-            var intervals = list<LineInterval<AsmId>>();
+            var intervals = list<LineInterval<Identifier>>();
             for(var i=0;i<count; i++)
             {
-                ref readonly var d0 = ref skip(defs,i);
-                if(!Enums.parse(d0.Name, out AsmId id))
-                    continue;
+                ref readonly var d0 = ref skip(relations,i);
+                var id = d0.Name;
 
                 var k=0;
                 buffer.Clear();
-                var index = d0.Offset.Value;
+                var index = d0.SourceLine.Value;
                 for(var j=index; j<linecount && k<BufferLength; j++)
                 {
                     ref readonly var line = ref skip(records,j);
@@ -44,21 +43,17 @@ namespace Z0.llvm
                 {
                     ref readonly var l0 = ref first(buffer);
                     ref readonly var l1 = ref skip(buffer,k-1);
-                    var interval = LineMaps.interval(id, l0.LineNumber, l1.LineNumber);
-                    intervals.Add(interval);
+                    intervals.Add(LineMaps.interval(id, l0.LineNumber, l1.LineNumber));
                 }
             }
 
             var map = LineMaps.map(intervals.ToArray());
-            var dst = LlvmData.Tables() + FS.file("x86.records", FS.ext("map"));
+            var dst = LlvmPaths.ImportMap(dstid);
             var emitting = EmittingFile(dst);
             using var writer = dst.AsciWriter();
             var _intervals = map.Intervals;
             for(var i=0; i<_intervals.Length; i++)
-            {
-                ref readonly var ix = ref skip(_intervals,i);
-                writer.WriteLine(string.Format("{0:D5} {1}", (ushort)ix.Id, ix));
-            }
+                writer.WriteLine(skip(_intervals,i).Format());
 
             EmittedFile(emitting, _intervals.Length);
             return map;

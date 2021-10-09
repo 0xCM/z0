@@ -180,6 +180,12 @@ namespace Z0
         public ExecToken EmittedFile(WfFileFlow flow, Count count)
             => Wf.EmittedFile(flow,count);
 
+        protected void EmittedFile(WfFileFlow file, Count count, Arrow<FS.FileUri> flow)
+        {
+            Wf.EmittedFile(file,count);
+            Write(string.Format("flow[{0}]", flow));
+        }
+
         protected WfTableFlow<T> EmittingTable<T>(FS.FilePath dst)
             where T : struct
                 => Wf.EmittingTable<T>(dst);
@@ -210,6 +216,7 @@ namespace Z0
 
         protected Outcome<uint> EmitLines(ReadOnlySpan<TextLine> src, FS.FilePath dst, TextEncodingKind encoding)
             => Wf.EmitLines(src,dst,encoding);
+
 
         protected virtual void OnInit()
         {

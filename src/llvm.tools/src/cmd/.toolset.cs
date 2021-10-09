@@ -6,13 +6,6 @@ namespace Z0.llvm
 {
     partial class LlvmCmd
     {
-        [CmdOp(".etl")]
-        Outcome RunEtl(CmdArgs args)
-        {
-            var result = LlvmEtl.RunEtl();
-            return result;
-        }
-
         [CmdOp(".toolset")]
         Outcome TS(CmdArgs args)
         {
@@ -21,7 +14,6 @@ namespace Z0.llvm
             var spec = FS.dir("J:/llvm/toolset");
             var svc = Wf.Tooling();
             Toolbase.Create(spec,dst);
-
             return result;
         }
     }

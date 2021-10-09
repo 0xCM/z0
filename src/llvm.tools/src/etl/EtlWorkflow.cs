@@ -5,92 +5,48 @@
 namespace Z0.llvm
 {
     using System;
+    using System.Collections.Generic;
 
     using static core;
 
-    using F = llvm.AsmRecordField;
-
     public partial class EtlWorkflow : AppService<EtlWorkflow>
     {
-        Index<OpCodeSpec> _LlvmOpCodes;
+        LlvmPaths LlvmPaths;
 
-        LlvmRecordSources Sources;
+        OmniScript OmniScript;
 
-        IProjectWs LlvmData;
+        HashSet<string> ClassExclusions {get;}
+            = hashset<string>("Hexagon", "Neon", "PowerPC", "RISCV", "SystemZ", "Hexagom", "AMDGPU");
 
         public EtlWorkflow()
         {
-            Sources = new();
-            _LlvmOpCodes = new();
         }
 
         protected override void Initialized()
         {
-            LlvmData = Ws.Project("llvm.data");
+            LlvmPaths = Wf.LlvmPaths();
+            OmniScript = Wf.OmniScript();
+        }
+
+        void GenerateCode()
+        {
+            LlvmPaths.CodeGenRoot().Clear();
+            GenStringTables();
         }
 
         public Outcome RunEtl()
         {
-            var records = LoadRecords();
+            var records = LoadSourceRecords();
             var result = Outcome.Success;
-            // Sources = LoadRecordSources();
-            EmitTables(records);
-            _LlvmOpCodes = MC.opcodes();
-            TableEmit(_LlvmOpCodes.View, OpCodeSpec.RenderWidths, LlvmData.TablePath<OpCodeSpec>());
+            ImportRecordLines(records,"x86.records.lined");
             ImportLists();
-            // GenStringTables();
-            var map = MapDefinitions(records);
-            var fields = LoadFields(records, map);
-            var datasets = new EtlDatasets();
-            datasets.AsmDefFieldData = fields;
-            datasets.AsmDefMapData = map;
-            datasets.OpCodeData = _LlvmOpCodes;
-            var parts = partition(fields);
-            return EmitFields(datasets);
-        }
-
-        public static ReadOnlySpan<AsmRecordFields> partition(ReadOnlySpan<AsmRecordField> src)
-        {
-            var count = src.Length;
-            var dst = list<AsmRecordFields>();
-            var subset = list<AsmRecordField>();
-            var current = AsmId.PHI;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var f = ref skip(src,i);
-                ref readonly var id = ref f.Id;
-                if(id != current)
-                {
-                    if(subset.Count != 0)
-                    {
-                        dst.Add(new AsmRecordFields(current, subset.ToArray()));
-                        subset.Clear();
-                        current = id;
-                    }
-                    subset.Add(f);
-                }
-
-            }
-            if(subset.Count != 0)
-                dst.Add(new AsmRecordFields(current, subset.ToArray()));
-            return dst.ViewDeposited();
-        }
-
-        Outcome EmitFields(in EtlDatasets src)
-        {
-            var fields = src.AsmDefFields;
-            var count = fields.Length;
-            var dst = LlvmData.Tables() + FS.file("llvm.fields", FS.Csv);
-            var emitting = EmittingTable<F>(dst);
-            using var writer = dst.AsciWriter();
-            writer.WriteLine(F.RowHeader);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var field = ref skip(fields,i);
-                writer.WriteLine(string.Format(F.RowFormat, field.Id, field.Type, field.Name, field.Value));
-            }
-
-            EmittedTable(emitting, count);
+            GenerateCode();
+            var classes = ImportClassRelations(records);
+            var defs = ImportDefRelations(records);
+            var defFields = LoadFields(records, MapContent(defs, records, "X86.records.defs"));
+            EmitFields(defFields, "llvm.defs.fields");
+            var classFields = LoadFields(records, MapContent(classes, records, "X86.records.classes"));
+            EmitFields(classFields, "llvm.classes.fields");
             return true;
         }
    }

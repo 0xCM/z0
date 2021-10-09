@@ -38,6 +38,10 @@ namespace Z0
         public static LlvmMc LLvmMc(this IWfRuntime wf)
             => llvm.LlvmMc.create(wf);
 
+        [Op]
+        public static LlvmDb LLvmDb(this IWfRuntime wf)
+            => llvm.LlvmDb.create(wf);
+
         public static ILlvmWorkspace LlvmWs(this IEnvProvider env)
             => Z0.LlvmWs.create(env.Env.LlvmRoot);
 

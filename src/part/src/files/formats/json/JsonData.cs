@@ -21,6 +21,10 @@ namespace Z0
         public static JsonDataPacket<T> packet<T>(T src)
             => src;
 
+        [Op]
+        public static string unescape(FS.FilePath src)
+            => JsonSerializer.Deserialize<string>(src.Format());
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static JsonSetting<T> setting<T>(string name, T value)
             => new JsonSetting<T>(name, value);

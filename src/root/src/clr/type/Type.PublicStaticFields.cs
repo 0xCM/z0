@@ -11,6 +11,7 @@ namespace Z0
 
     partial class ClrQuery
     {
+        [Op]
         public static FieldInfo[] PublicStaticFields(this Type src)
             => src.GetFields(BF_PublicStatic);
     }

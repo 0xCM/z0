@@ -18,7 +18,7 @@ namespace Z0
         /// <see cref='BF_Declared'/> flags where <see cref='FieldInfo.IsLiteral'/> is true
         /// </summary>
         /// <param name="src">The source type</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static FieldInfo[] LiteralFields(this Type src)
             => src.GetFields(BF_Declared).Where(f => f.IsLiteral && f.Untagged<IgnoreAttribute>());
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         /// <param name="match">The literal field type to match</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static FieldInfo[] LiteralFields(this Type src, Type match)
             => src.GetFields(BF_Declared).Where(f => f.IsLiteral && f.FieldType == match);
     }

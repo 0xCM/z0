@@ -2,10 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.llvm
 {
-    public readonly struct DataType
+    partial class LlvmCmd
     {
-        public readonly DataKind Kind;
+        [CmdOp(".config")]
+        Outcome LlvmConfig(CmdArgs args)
+        {
+           var config = LlvmEtl.LoadConfig();
+
+           return true;
+        }
     }
 }

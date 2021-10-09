@@ -6,19 +6,23 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
     /// <summary>
     /// Defines a segment of a number-identified line
     /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
     public readonly struct LineSegment
     {
-        public LineNumber LineNumber {get;}
+        const string RenderPattern = "{0}[{1},{2}]";
 
-        public ushort MinCol {get;}
+        public readonly LineNumber LineNumber;
 
-        public ushort MaxCol {get;}
+        public readonly ushort MinCol;
+
+        public readonly ushort MaxCol;
 
         [MethodImpl(Inline)]
         public LineSegment(uint line, ushort min, ushort max)
@@ -27,5 +31,11 @@ namespace Z0
             MinCol = min;
             MaxCol = max;
         }
+
+        public string Format()
+            => string.Format(RenderPattern, LineNumber, MinCol, MaxCol);
+
+        public override string ToString()
+            => Format();
     }
 }

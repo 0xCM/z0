@@ -5,13 +5,12 @@
 namespace Z0.llvm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static core;
 
     partial class EtlWorkflow
     {
-        void LoadFields(ReadOnlySpan<TextLine> src, in LineInterval<AsmId> interval, ref int k, Span<AsmRecordField> dst)
+        void LoadFields(ReadOnlySpan<TextLine> src, in LineInterval<Identifier> interval, ref int k, Span<TableGenField> dst)
         {
             ref readonly var min = ref interval.MinLine;
             ref readonly var max = ref interval.MaxLine;
@@ -25,7 +24,7 @@ namespace Z0.llvm
                 field.Id = interval.Id;
                 if(text.index(content, Chars.Space, out var i0))
                 {
-                    field.FieldContent.Type = text.left(content,i0);
+                    field.FieldContent.DataType = text.left(content,i0);
                     var namedValue = text.right(content,i0);
                     if(text.index(namedValue, Chars.Space, out var i1))
                     {
@@ -40,18 +39,16 @@ namespace Z0.llvm
             }
         }
 
-        public Index<AsmRecordField> LoadFields(ReadOnlySpan<TextLine> records,  LineMap<AsmId> map)
+        public Index<TableGenField> LoadFields(ReadOnlySpan<TextLine> records, LineMap<Identifier> map)
         {
             var result = Outcome.Success;
             var icount = map.IntervalCount;
             var lcount = map.LineCount;
             var intervals = map.Intervals;
-            var buffer = alloc<AsmRecordField>(lcount);
-            ref var target = ref first(buffer);
+            var buffer = alloc<TableGenField>(lcount);
             var k = 0;
             for(var i=0u; i<icount; i++)
                 LoadFields(records, skip(intervals,i), ref k, buffer);
-
             return buffer;
         }
     }

@@ -13,6 +13,7 @@ namespace Z0
 
     partial class ClrQuery
     {
+        [Op]
         public static Option<PropertyInfo> Property(this Type src, string name)
             => src.GetProperties(BF_All).Where(p => p.Name == name).FirstOrDefault();
     }

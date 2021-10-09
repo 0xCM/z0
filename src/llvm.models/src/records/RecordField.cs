@@ -12,7 +12,7 @@ namespace Z0.llvm
     [StructLayout(LayoutKind.Sequential)]
     public struct RecordField
     {
-        public string Type;
+        public string DataType;
 
         public string Name;
 
@@ -20,14 +20,14 @@ namespace Z0.llvm
 
         public RecordField(string type, string name, string value)
         {
-            Type = type;
+            DataType = type;
             Name = name;
             Value = value;
         }
 
         public string Format()
             => string.Format("{0} {1} = {2}",
-                text.ifempty(Type, RP.Empty),
+                text.ifempty(DataType, RP.Empty),
                 text.ifempty(Name, RP.Empty),
                 text.ifempty(Value, RP.Empty)
                 );

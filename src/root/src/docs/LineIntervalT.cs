@@ -28,7 +28,7 @@ namespace Z0
         public uint LineCount
         {
             [MethodImpl(Inline)]
-            get => MaxLine.Value - MinLine.Value;
+            get => MaxLine.Value - MinLine.Value + 1;
         }
 
         public string Format()

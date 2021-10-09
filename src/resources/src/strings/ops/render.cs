@@ -27,10 +27,11 @@ namespace Z0
             dst.IndentLine(margin, Constant(CharCountProp, (uint)src.Content.Length));
             dst.AppendLine();
 
-            dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryAddress), CharBaseProp, "address(Data)"));
+            dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryAddress), CharBaseProp, Call("address", DataProp)));
+
             dst.AppendLine();
 
-            dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryAddress), OffsetBaseProp, "address(Offsets)"));
+            dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryAddress), OffsetBaseProp, Call("address", OffsetsProp)));
             dst.AppendLine();
 
             GenIndex(margin, src, dst);

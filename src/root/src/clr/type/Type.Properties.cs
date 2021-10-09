@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Linq;
 
     using static ReflectionFlags;
 
@@ -16,6 +15,7 @@ namespace Z0
         /// Retrieves all declared or inheraited by a type
         /// </summary>
         /// <param name="src">The type to examine</param>
+        [Op]
         public static PropertyInfo[] Properties(this Type src)
             => src.GetProperties(BF_All);
     }

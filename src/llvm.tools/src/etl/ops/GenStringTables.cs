@@ -10,27 +10,37 @@ namespace Z0.llvm
     {
         public Outcome GenStringTables()
         {
-            const string TargetId = "llvm.stringtables";
+            const string BaseId = "llvm.stringtables";
             var result = Outcome.Success;
-            var lists = Ws.Sources().Dataset(LlvmDatasetNames.TblgenLists).AllFiles.View;
+            var lists = LlvmPaths.ListSourceFiles().View;
             var count = lists.Length;
-            var csdst = Ws.Gen().Path(TargetId, FS.Cs);
-            var rowdst = Ws.Gen().Path(TargetId, FS.Csv);
             var formatter = Tables.formatter<StringTableRow>(StringTableRow.RenderWidths);
-            using var cswriter = csdst.Writer();
-            using var rowwriter = rowdst.AsciWriter();
-            rowwriter.WriteLine(formatter.FormatHeader());
+            var rowcount = 0u;
             for(var i=0; i<count; i++)
             {
-                ref readonly var path = ref skip(lists,i);
-                var name = path.FileName.WithoutExtension.Format();
-                var lines = path.ReadLines().View;
+                ref readonly var listpath = ref skip(lists,i);
+                var name = listpath.FileName.WithoutExtension.Format();
+                var id = BaseId + "." + name;
+                var cspath = LlvmPaths.CodeGenPath(id, FS.Cs);
+                var csvpath = LlvmPaths.CodeGenPath(id, FS.Csv);
+                var lines = listpath.ReadLines().View;
                 var table = StringTables.create(lines, name, Chars.Comma);
-                var spec = StringTables.specify("Z0." + TargetId, table);
+                var spec = StringTables.specify("Z0." + BaseId, table);
+
+                var csEmitting = EmittingFile(cspath);
+                var rowEmitting = EmittingFile(csvpath);
+
+                using var cswriter = cspath.Writer();
+                using var rowwriter = csvpath.AsciWriter();
+                rowwriter.WriteLine(formatter.FormatHeader());
+
                 StringTables.csharp(spec, cswriter);
                 for(var j=0u; j<table.EntryCount; j++)
                     rowwriter.WriteLine(formatter.Format(StringTables.row(table, j)));
-                Write(string.Format("{0}: Stringtable emitted", Relations.arrow(path.ToUri(),csdst.ToUri())));
+                rowcount += table.EntryCount;
+
+                EmittedFile(csEmitting, count,FS.flow(listpath,cspath));
+                EmittedFile(rowEmitting,rowcount,FS.flow(listpath,csvpath));
             }
 
             return result;

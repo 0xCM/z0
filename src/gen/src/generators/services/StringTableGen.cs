@@ -17,7 +17,6 @@ namespace Z0
             using var cswriter = csdst.Writer();
             var cscount = StringTables.csharp(spec, cswriter);
             EmittedFile(emitting, cscount);
-
             var buffer = alloc<StringTableRow>(spec.Entries.Length);
             StringTables.rows(spec, buffer);
             TableEmit(@readonly(buffer), StringTableRow.RenderWidths, rowdst);

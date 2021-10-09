@@ -35,6 +35,10 @@ namespace Z0
             get => Value != 0;
         }
 
+        [MethodImpl(Inline)]
+        public LineSegment Segment(ushort min, ushort max)
+            => new LineSegment(this,min,max);
+
         public string Format()
             => string.Format("{0:D8}",Value);
 

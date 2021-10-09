@@ -16,6 +16,5 @@ namespace Z0.llvm
         public const string X86Classes = "x86.classes";
 
         public const string LlvmIntrinsics = "llvm.intrinsics";
-
     }
 }

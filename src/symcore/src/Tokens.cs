@@ -174,9 +174,7 @@ namespace Z0
                     }
                 }
                 else
-                {
                     seek(chars, t++) = c;
-                }
             }
 
             if(t!=0)

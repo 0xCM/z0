@@ -10,15 +10,14 @@ namespace Z0.llvm
     using static core;
     using static Root;
 
-    using SQ = SymbolicQuery;
-
     partial class EtlWorkflow
     {
-        ReadOnlySpan<ClassRecord> Classes(ReadOnlySpan<TextLine> src)
+        ReadOnlySpan<DefRelations> ImportDefRelations(ReadOnlySpan<TextLine> src)
         {
-            const string Marker = "class ";
+            const string Marker = "def ";
+            var fields = list<RecordField>();
             var lines = list<TextLine>();
-            var dst = list<ClassRecord>();
+            var dst = list<DefRelations>();
             var name = EmptyString;
             for(var i=0; i<src.Length; i++)
             {
@@ -31,24 +30,23 @@ namespace Z0.llvm
                     var k = text.index(content, Chars.LBrace);
                     if(k>=0)
                     {
-                        var record = new ClassRecord();
-                        record.Offset = line.LineNumber;
-                        var lt = text.index(content,Chars.Lt);
-                        if(lt >=0)
-                            record.Name = text.trim(text.inside(content, j + Marker.Length - 1, lt));
-                        else
-                        {
-                            record.Name = text.trim(text.inside(content, j + Marker.Length - 1, k));
-                        }
-                        var m = SQ.index(content, Chars.FSlash, Chars.FSlash);
-                        if(m >= 0)
-                            record.Ancestors = text.trim(text.right(content, m + 1));
+                        var record = new DefRelations();
+                        name = text.trim(text.inside(content, j + Marker.Length - 1, k));
+                        if(empty(name) || text.member(name, ClassExclusions))
+                            continue;
+
+                        record.Name = name;
+                        record.SourceLine = line.LineNumber;
+                        ancestors(content, out record.Ancestors);
                         dst.Add(record);
                     }
                 }
             }
 
-            return dst.ViewDeposited();
+            var collected = dst.ViewDeposited();
+            TableEmit(collected, DefRelations.RenderWidths, LlvmPaths.ImportTable<DefRelations>());
+
+            return collected;
         }
-   }
+    }
 }

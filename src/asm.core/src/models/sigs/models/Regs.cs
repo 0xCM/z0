@@ -38,7 +38,7 @@ namespace Z0.Asm
                 => AsmOpClass.R;
 
             public NativeSize Size
-                => AsmSizeKeyword.@byte;
+                => NativeSizeCode.W8;
 
             public RegClassCode RegClass
                 => RegClassCode.GP;
@@ -58,7 +58,7 @@ namespace Z0.Asm
                 => AsmOpClass.R;
 
             public NativeSize Size
-                => AsmSizeKeyword.@byte;
+                => NativeSizeCode.W8;
 
             public RegClassCode RegClass
                 => RegClassCode.GP8HI;
@@ -78,7 +78,7 @@ namespace Z0.Asm
                 => AsmOpClass.R;
 
             public NativeSize Size
-                => AsmSizeKeyword.word;
+                => NativeSizeCode.W16;
 
             public RegClassCode RegClass
                 => RegClassCode.GP;
@@ -98,7 +98,7 @@ namespace Z0.Asm
                 => AsmOpClass.R;
 
             public NativeSize Size
-                => AsmSizeKeyword.dword;
+                => NativeSizeCode.W32;
 
             public RegClassCode RegClass
                 => RegClassCode.GP;
@@ -118,7 +118,7 @@ namespace Z0.Asm
                 => AsmOpClass.R;
 
             public NativeSize Size
-                => AsmSizeKeyword.qword;
+                => NativeSizeCode.W64;
 
             public RegClassCode RegClass
                 => RegClassCode.GP;
@@ -138,7 +138,7 @@ namespace Z0.Asm
                 => AsmOpClass.R;
 
             public NativeSize Size
-                => AsmSizeKeyword.xmmword;
+                => NativeSizeCode.W128;
 
             public RegClassCode RegClass
                 => RegClassCode.XMM;
@@ -158,7 +158,7 @@ namespace Z0.Asm
                 => AsmOpClass.R;
 
             public NativeSize Size
-                => AsmSizeKeyword.ymmword;
+                => NativeSizeCode.W256;
 
             public RegClassCode RegClass
                 => RegClassCode.YMM;
@@ -178,7 +178,7 @@ namespace Z0.Asm
                 => AsmOpClass.R;
 
             public NativeSize Size
-                => AsmSizeKeyword.zmmword;
+                => NativeSizeCode.W512;
 
             public RegClassCode RegClass
                 => RegClassCode.ZMM;
@@ -198,7 +198,7 @@ namespace Z0.Asm
                 => AsmOpClass.R;
 
             public NativeSize Size
-                => AsmSizeKeyword.qword;
+                => NativeSizeCode.W64;
 
             public RegClassCode RegClass
                 => RegClassCode.MASK;
@@ -214,11 +214,14 @@ namespace Z0.Asm
 
         public readonly struct cr : IRegOpClass<cr>
         {
-            public AsmOpClass OpClass => AsmOpClass.R;
+            public AsmOpClass OpClass
+                => AsmOpClass.R;
 
-            public NativeSize Size => AsmSizeKeyword.qword;
+            public NativeSize Size
+                => NativeSizeCode.W64;
 
-            public RegClassCode RegClass => RegClassCode.CR;
+            public RegClassCode RegClass
+                => RegClassCode.CR;
 
             [MethodImpl(Inline)]
             public static implicit operator reg(cr src)
@@ -233,7 +236,7 @@ namespace Z0.Asm
         {
             public AsmOpClass OpClass => AsmOpClass.R;
 
-            public NativeSize Size => AsmSizeKeyword.qword;
+            public NativeSize Size => NativeSizeCode.W64;
 
             public RegClassCode RegClass => RegClassCode.FLAG;
 
@@ -252,7 +255,7 @@ namespace Z0.Asm
                 => AsmOpClass.R;
 
             public NativeSize Size
-                => AsmSizeKeyword.qword;
+                => NativeSizeCode.W64;
 
             public RegClassCode RegClass
                 => RegClassCode.DB;
