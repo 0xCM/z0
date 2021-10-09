@@ -8,7 +8,6 @@ namespace Z0.llvm
     using System.Runtime.CompilerServices;
 
     using static core;
-    using static Root;
 
     using K = llvm.LlvmConfigKind;
 

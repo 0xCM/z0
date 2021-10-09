@@ -19,16 +19,20 @@ namespace Z0.llvm
 
         public Lineage Ancestors;
 
-       LineNumber IRecordRelations<DefRelations>.SourceLine
+        LineNumber IRecordRelations<DefRelations>.SourceLine
             => SourceLine;
 
         Identifier IRecordRelations<DefRelations>.Name
             => Name;
 
-        Lineage IRecordRelations<DefRelations>.Ancestors
-            => Ancestors;
-
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[FieldCount]{14,64,1};
+
+        public void Specify(LineNumber line, Identifier name, Lineage ancestors)
+        {
+            SourceLine = line;
+            Name = name;
+            Ancestors = ancestors;
+        }
     }
 }

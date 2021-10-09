@@ -9,6 +9,22 @@ namespace Z0.llvm
 
     using static core;
 
+    public readonly struct DatasetNames
+    {
+        public const string X86 = "X86.records";
+
+        public const string X86Lined = "x86.records.lined";
+
+        public const string X86Defs = "X86.records.defs";
+
+        public const string X86DefFields = "X86.records.defs.fields";
+
+        public const string X86Classes = "X86.records.classes";
+
+        public const string X86ClassMembers = "X86.records.classes.members";
+
+    }
+
     public partial class EtlWorkflow : AppService<EtlWorkflow>
     {
         LlvmPaths LlvmPaths;
@@ -36,17 +52,17 @@ namespace Z0.llvm
 
         public Outcome RunEtl()
         {
-            var records = LoadSourceRecords();
+            var records = LoadSourceRecords(DatasetNames.X86);
             var result = Outcome.Success;
-            ImportRecordLines(records,"x86.records.lined");
+            ImportRecordLines(records, DatasetNames.X86Lined);
             ImportLists();
             GenerateCode();
             var classes = ImportClassRelations(records);
             var defs = ImportDefRelations(records);
-            var defFields = LoadFields(records, MapContent(defs, records, "X86.records.defs"));
-            EmitFields(defFields, "llvm.defs.fields");
-            var classFields = LoadFields(records, MapContent(classes, records, "X86.records.classes"));
-            EmitFields(classFields, "llvm.classes.fields");
+            var defFields = LoadFields(records, MapContent(defs, records, DatasetNames.X86Defs));
+            EmitFields(defFields, DatasetNames.X86DefFields);
+            var classFields = LoadFields(records, MapContent(classes, records, DatasetNames.X86Classes));
+            EmitFields(classFields, DatasetNames.X86ClassMembers);
             return true;
         }
    }

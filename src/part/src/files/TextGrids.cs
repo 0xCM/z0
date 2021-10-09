@@ -48,13 +48,16 @@ namespace Z0
         }
 
         public static Outcome load(FS.FilePath src, out TextGrid dst)
+            => load(src, TextDocFormat.Structured(), out dst);
+
+        public static Outcome load(FS.FilePath src, TextDocFormat format, out TextGrid dst)
         {
             dst = TextGrid.Empty;
             if(!src.Exists)
                 return (false,FS.missing(src));
 
             using var reader = src.Utf8Reader();
-            var attempt =  parse(reader);
+            var attempt =  parse(reader,format);
             if(attempt)
             {
                 dst = attempt.Value;

@@ -10,7 +10,7 @@ namespace Z0
         public static bool ticks(string src, out Pair<int> indices)
         {
             indices = (-1,-1);
-            var i = index(src,RP.Ticks);
+            var i = index(src, RP.Ticks);
             if(i>=0)
             {
                 var j = index(right(src,i), RP.Ticks);

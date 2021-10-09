@@ -8,14 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static System.Runtime.InteropServices.MemoryMarshal;
+    using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct core
+    partial struct minicore
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<byte> src, int offset, int length)
-            where T : unmanaged
-                => recover<byte,T>(slice(src,offset, (int)(length * size<T>())));
-
         /// <summary>
         /// Presents a span of S-cells as a span of T-cells
         /// </summary>
@@ -24,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> recover<S,T>(Span<S> src)
-            => minicore.recover<S,T>(src);
+            => CreateSpan(ref @as<S,T>(first(src)), (int)((src.Length * size<S>())/size<T>()));
 
         /// <summary>
         /// Presents a readonly span of S-cells as a readonly span of T-cells
@@ -34,7 +31,7 @@ namespace Z0
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> recover<S,T>(ReadOnlySpan<S> src)
-            => minicore.recover<S,T>(src);
+            => CreateReadOnlySpan(ref @as<S,T>(first(src)), (int)((src.Length * size<S>())/size<T>()));
 
         /// <summary>
         /// Presents a <see cref='sbyte'/> span as a T-span
@@ -294,33 +291,5 @@ namespace Z0
         public static Span<T> recover<T>(Span<decimal> src)
             where T : struct
                  => recover<decimal,T>(src);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> recover<S,T>(ReadOnlySpan<S> src, out ReadOnlySpan<S> rem)
-            where T : struct
-            where S : struct
-        {
-            var z = size<T>();
-            var n = (uint)src.Length;
-            var q = n/z;
-            var r = n%z;
-            var dst = recover<S,T>(slice(src, 0, q));
-            rem = r != 0 ? slice(src,q) : EmptySpan<S>();
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Span<T> recover<S,T>(Span<S> src, out Span<S> rem)
-            where T : struct
-            where S : struct
-        {
-            var z = size<T>();
-            var n = (uint)src.Length;
-            var q = n/z;
-            var r = n%z;
-            var dst = recover<S,T>(slice(src,0, q));
-            rem = r != 0 ? slice(src,q) : EmptySpan<S>();
-            return dst;
-        }
     }
 }

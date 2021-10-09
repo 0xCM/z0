@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.CompilerServices.Unsafe;
-    using static System.Runtime.InteropServices.MemoryMarshal;
     using static Root;
+    using static System.Runtime.InteropServices.MemoryMarshal;
+    using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct core
+    partial struct minicore
     {
         /// <summary>
         /// Presents a T-reference as a byte reference and effects mov rax,rdx for all T
@@ -83,14 +83,5 @@ namespace Z0
         public static unsafe ref T @ref<S,T>(S* pSrc)
             where S : unmanaged
                 => ref @as<S,T>(@ref<S>(pSrc));
-
-        /// <summary>
-        /// Returns a reference to an identified location
-        /// </summary>
-        /// <param name="src">The source address</param>
-        /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe ref T @ref<T>(MemoryAddress src)
-            => ref AsRef<T>((void*)src.Location);
     }
 }

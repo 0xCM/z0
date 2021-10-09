@@ -8,18 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    public readonly struct LabelStore
+    public unsafe struct LabelEditor
     {
-        public MemoryAddress BaseAddress {get;}
-
-        public ByteSize Size {get;}
+        Labels Source;
 
         [MethodImpl(Inline)]
-        public LabelStore(MemoryAddress address, ByteSize size)
+        internal LabelEditor(Labels src)
         {
-            BaseAddress = address;
-            Size = size;
+            Source = src;
+        }
+
+        public Span<char> Buffer
+        {
+            [MethodImpl(Inline)]
+            get => cover(Source.BaseAddress.Pointer<char>(), Source.Size/2);
         }
     }
 }

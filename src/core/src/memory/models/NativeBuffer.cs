@@ -44,6 +44,12 @@ namespace Z0
         public void Clear()
             => Edit.Clear();
 
+        public bool Allocated
+        {
+            [MethodImpl(Inline)]
+            get => Size != 0;
+        }
+
         /// <summary>
         /// Presents the allocation via a span
         /// </summary>
@@ -78,5 +84,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe implicit operator byte*(NativeBuffer src)
             => src.Address.Pointer<byte>();
+
+        public static NativeBuffer Empty => default;
     }
 }

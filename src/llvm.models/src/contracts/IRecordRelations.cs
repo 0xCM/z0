@@ -11,6 +11,6 @@ namespace Z0.llvm
 
         Identifier Name {get;}
 
-        Lineage Ancestors {get;}
+        void Specify(LineNumber line, Identifier name, Lineage ancestors);
     }
 }

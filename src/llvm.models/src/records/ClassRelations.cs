@@ -12,7 +12,7 @@ namespace Z0.llvm
     {
         public const string TableId = "llvm.classes.relations";
 
-        public const byte FieldCount = 3;
+        public const byte FieldCount = 4;
 
         public LineNumber SourceLine;
 
@@ -20,16 +20,22 @@ namespace Z0.llvm
 
         public Lineage Ancestors;
 
+        public string Parameters;
+
         LineNumber IRecordRelations<ClassRelations>.SourceLine
             => SourceLine;
 
         Identifier IRecordRelations<ClassRelations>.Name
             => Name;
 
-        Lineage IRecordRelations<ClassRelations>.Ancestors
-            => Ancestors;
+        public void Specify(LineNumber line, Identifier name, Lineage ancestors)
+        {
+            SourceLine = line;
+            Name = name;
+            Ancestors = ancestors;
+        }
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{14,64,1};
+            => new byte[FieldCount]{14,60,110,1};
     }
 }

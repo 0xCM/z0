@@ -12,7 +12,7 @@ namespace Z0
 
     public class Lineage
     {
-        public static Lineage root(string name)
+        public static Lineage node(string name)
             => new Lineage(name);
 
         public static Lineage path(ReadOnlySpan<string> src)
@@ -23,15 +23,28 @@ namespace Z0
 
             var dst = alloc<Lineage>(count);
             ref readonly var input = ref first(src);
-            var _root = root(input);
-            first(dst) = _root;
-            var current = _root;
+            var start = node(input);
+            first(dst) = start;
+            var current = start;
             for(var i=1; i<count; i++)
             {
-                current = current.Child(skip(input,i));
+                current = current.CreateChild(skip(input,i));
                 seek(dst,i) = current;
             }
             return current;
+        }
+
+        const string LeftToRight = " -> ";
+
+        const string RightToLeft = " <- ";
+
+        public static Outcome parse(string src, out Lineage dst)
+        {
+            if(src.Contains(LeftToRight))
+                dst = path(src.SplitClean(LeftToRight));
+            else
+                dst = Empty;
+            return true;
         }
 
         Lineage(string name, Lineage ancestor)
@@ -72,7 +85,7 @@ namespace Z0
             get => Ancestor != null && Ancestor.IsNonEmpty;
         }
 
-        public Lineage Child(string name)
+        public Lineage CreateChild(string name)
             => new Lineage(name, this);
 
         void Render(ITextBuffer dst)
@@ -82,7 +95,7 @@ namespace Z0
                 dst.Append(Name);
                 if(HasAncestor)
                 {
-                    dst.Append(" -> ");
+                    dst.Append(LeftToRight);
                     Ancestor.Render(dst);
                 }
             }

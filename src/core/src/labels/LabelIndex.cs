@@ -9,11 +9,17 @@ namespace Z0
 
     using static Root;
 
-    partial struct core
-    {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe char* p16c<T>(in T src)
-            where T : unmanaged
-                => refptr<T,char>(ref edit(src));
-    }
+    using api = Labels;
+
+    // public readonly struct LabelIndex
+    // {
+    //     readonly Index<Label> Data;
+
+    //     readonly Index<uint> Hashes;
+
+    //     public LabelIndex(Labels src)
+    //     {
+
+    //     }
+    // }
 }

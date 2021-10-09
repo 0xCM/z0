@@ -9,17 +9,10 @@ namespace Z0
 
     using static Root;
 
-    public unsafe readonly struct Label
-    {
-        [MethodImpl(Inline), Op]
-        public static Label from(string src)
-        {
-            if(core.empty(src))
-                return Label.Empty;
-            StringAddress a = src;
-            return new Label(a.Address, (byte)src.Length);
-        }
+    using api = Labels;
 
+    public unsafe readonly struct Label : IEquatable<Label>, ITextual
+    {
         readonly ulong Storage;
 
         [MethodImpl(Inline)]
@@ -52,16 +45,37 @@ namespace Z0
             get => core.cover(Address.Pointer<char>(), Length);
         }
 
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Storage;
+        }
+
+        public bool Equals(Label src)
+            => Storage == src.Storage;
+
         public string Format()
             => new string(Data);
 
         public override string ToString()
             => Format();
 
+        public override int GetHashCode()
+            => (int)Hash;
+
+        public override bool Equals(object src)
+            => src is Label l && Equals(l);
+
         public static Label Empty => default;
 
         [MethodImpl(Inline), Op]
         public static implicit operator Label(string src)
-            => Label.from(src);
+            => api.label(src);
+
+        public static bool operator==(Label a, Label b)
+            => a.Equals(b);
+
+        public static bool operator!=(Label a, Label b)
+            => !a.Equals(b);
     }
 }

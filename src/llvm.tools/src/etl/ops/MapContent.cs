@@ -23,12 +23,10 @@ namespace Z0.llvm
             var intervals = list<LineInterval<Identifier>>();
             for(var i=0;i<count; i++)
             {
-                ref readonly var d0 = ref skip(relations,i);
-                var id = d0.Name;
-
+                ref readonly var relation = ref skip(relations,i);
                 var k=0;
                 buffer.Clear();
-                var index = d0.SourceLine.Value;
+                var index = relation.SourceLine.Value;
                 for(var j=index; j<linecount && k<BufferLength; j++)
                 {
                     ref readonly var line = ref skip(records,j);
@@ -43,7 +41,7 @@ namespace Z0.llvm
                 {
                     ref readonly var l0 = ref first(buffer);
                     ref readonly var l1 = ref skip(buffer,k-1);
-                    intervals.Add(LineMaps.interval(id, l0.LineNumber, l1.LineNumber));
+                    intervals.Add(LineMaps.interval(relation.Name, l0.LineNumber, l1.LineNumber));
                 }
             }
 

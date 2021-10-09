@@ -14,6 +14,7 @@ namespace Z0.llvm
 
     partial class EtlWorkflow
     {
+        // class AES8I<bits<8> AES8I:o = { ?, ?, ?, ?, ?, ?, ?, ? }, Format AES8I:F = ?, dag AES8I:outs = ?, dag AES8I:ins = ?, string AES8I:asm = ?, list<dag> AES8I:pattern = ?> {	// InstructionEncoding Instruction X86Inst I T8 T8PD Requires
         ReadOnlySpan<ClassRelations> ImportClassRelations(ReadOnlySpan<TextLine> src)
         {
             const string Marker = "class ";
@@ -25,7 +26,7 @@ namespace Z0.llvm
                 ref readonly var line = ref skip(src,i);
                 var content = line.Content;
                 var j = text.index(content, Marker);
-                var isDefEnd = text.begins(content, Chars.RBrace);
+                var parameters = EmptyString;
                 if(j >= 0)
                 {
                     var k = text.index(content, Chars.LBrace);
@@ -33,7 +34,11 @@ namespace Z0.llvm
                     {
                         var lt = text.index(content,Chars.Lt);
                         if(lt >=0)
+                        {
                             name = text.trim(text.inside(content, j + Marker.Length - 1, lt));
+                            var bounds = SQ.enclosed(content,0, (Chars.Lt, Chars.Gt));
+                            parameters = text.inside(content, bounds.Min - 1, bounds.Max + 1);
+                        }
                         else
                             name = text.trim(text.inside(content, j + Marker.Length - 1, k));
 
@@ -44,6 +49,7 @@ namespace Z0.llvm
                         record.SourceLine = line.LineNumber;
                         record.Name = name;
                         ancestors(content, out record.Ancestors);
+                        record.Parameters = parameters;
                         dst.Add(record);
                     }
                 }
@@ -52,22 +58,6 @@ namespace Z0.llvm
             var collected = dst.ViewDeposited();
             TableEmit(collected, ClassRelations.RenderWidths, LlvmPaths.ImportTable<ClassRelations>());
             return collected;
-        }
-
-        static bool ancestors(string content, out Lineage dst)
-        {
-            var m = SQ.index(content, Chars.FSlash, Chars.FSlash);
-            if(m >= 0)
-            {
-                var chain = text.trim(text.right(content, m + 1)).Split(Chars.Space);
-                if(chain.Length > 0)
-                {
-                    dst = Lineage.path(chain);
-                    return true;
-                }
-            }
-            dst = Lineage.Empty;
-            return false;
         }
    }
 }
