@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+
     using static core;
 
     using K = AsmOcTokenKind;
@@ -63,8 +64,8 @@ namespace Z0.Asm
             kseek(dst, K.RexBExtension).Source = K.RexBExtension;
             kseek(dst, K.RexBExtension).Target = P.P2ᐞ06;
 
-            kseek(dst, K.RegOpCodeMod).Source = K.RegOpCodeMod;
-            kseek(dst, K.RegOpCodeMod).Target = P.P2ᐞ07;
+            kseek(dst, K.OcExtension).Source = K.OcExtension;
+            kseek(dst, K.OcExtension).Target = P.P2ᐞ07;
 
             kseek(dst, K.SegOverride).Source = K.SegOverride;
             kseek(dst, K.SegOverride).Target = P.P2ᐞ08;

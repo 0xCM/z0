@@ -16,7 +16,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static IndexPtr<T> ptr<T>(Index<T> src, uint pos)
             where T : unmanaged
-                => new IndexPtr<T>(address(src).Pointer<T>(), src.Count, pos);
+                => new IndexPtr<T>(core.address(src).Pointer<T>(), src.Count, pos);
 
         /// <summary>
         /// Creates a representation over a specified generic pointer

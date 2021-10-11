@@ -56,5 +56,30 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Cell512 cell(W512 w, ReadOnlySpan<byte> src)
             => core.first(recover<byte,Vector512<ulong>>(slice(src,32)));
+
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T cell<T>(ref Cell128<T> src, int i)
+            where T : unmanaged
+        {
+            ref var dst = ref @as<Cell128<T>,T>(src);
+            return ref seek(dst,i);
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T cell<T>(ref Cell256<T> src, int i)
+            where T : unmanaged
+        {
+            ref var dst = ref @as<Cell256<T>,T>(src);
+            return ref seek(dst,i);
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T cell<T>(ref Cell512<T> src, int i)
+            where T : unmanaged
+        {
+            ref var dst = ref @as<Cell512<T>,T>(src);
+            return ref seek(dst,i);
+        }
     }
 }

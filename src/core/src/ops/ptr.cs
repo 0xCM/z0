@@ -21,11 +21,6 @@ namespace Z0
         public static unsafe void* pvoid<T>(in T src)
             => AsPointer(ref edit(src));
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe T* pointer<T>(ref T src)
-            where T : unmanaged
-                => (T*)AsPointer(ref src);
-
         /// <summary>
         /// Presents a generic reference as an sbyte pointer
         /// </summary>

@@ -30,12 +30,10 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var strings = llvm.Strings.OpCodes;
-            var kinds = Symbols.index<AsmId>().Kinds;
-            for(var i=0; i<kinds.Length; i++)
+            var count = strings.EntryCount;
+            for(ushort i=0; i<count; i++)
             {
-                ref readonly var kind = ref skip(kinds,i);
-                var s = strings[kind];
-                Write(string.Format("{0} = '{1}'", kind, text.format(s)));
+                Write(string.Format("{0:D5}: '{1}'", i, text.format(strings[i])));
             }
 
             return result;

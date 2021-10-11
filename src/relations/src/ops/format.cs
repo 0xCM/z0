@@ -11,13 +11,6 @@ namespace Z0
 
     partial struct Relations
     {
-        [MethodImpl(Inline)]
-        public static string format<T>(Dependency<T> src)
-            => RenderLink<T>().Format(src.Source, src.Target);
-
-        [MethodImpl(Inline)]
-        public static string format<S,T>(Dependency<S,T> src)
-            => RenderLink<S,T>().Format(src.Source, src.Target);
 
         public static string format<S,T>(in DataFlow<S,T> flow)
             => RenderLink<S,T>().Format(flow.Source, flow.Target);

@@ -7,8 +7,6 @@ namespace Z0.Models
     using System;
     using System.Collections.Generic;
 
-    using static core;
-
     public readonly partial struct Virtual
     {
         public class Allocator
@@ -47,8 +45,5 @@ namespace Z0.Models
                 return Allocated[Pos];
             }
         }
-
     }
-
-
 }

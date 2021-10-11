@@ -12,52 +12,35 @@ namespace Z0
     partial class math
     {
         /// <summary>
-        /// Saturates a 16-bit signed integer to an 8-bit signed integer
+        /// Saturate 16i -> 8u
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="dst">The saturation width width</param>
         [MethodImpl(Inline), Op]
-        public static sbyte sat(short src, W8 dst)
-        {
-            if(src > sbyte.MaxValue)
-                return sbyte.MaxValue;
-            else if(src < sbyte.MinValue)
-                return sbyte.MinValue;
-            else
-                return (sbyte)src;
-        }
+        public static byte sat8u(short src)
+            => src < 0 ? z8 : (byte)(src < 0xFF ? src : 0xFF);
 
         /// <summary>
-        /// Saturates a 32-bit signed integer to a 16-bit nsigned integer
+        /// Saturate 32i -> 16i
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="dst">The saturation width width</param>
         [MethodImpl(Inline), Op]
-        public static short sat(int src, W16 dst)
-        {
-            if(src > short.MaxValue)
-                return short.MaxValue;
-            else if(src < short.MinValue)
-                return short.MinValue;
-            else
-                return (short)src;
-        }
-
+        public static sbyte sat8i(short src)
+            => src > sbyte.MaxValue ? sbyte.MaxValue : src < sbyte.MinValue ? sbyte.MinValue : (sbyte)src;
 
         /// <summary>
-        /// Saturates a 32-bit signed integer to a 16-bit nsigned integer
+        /// Saturate 32i -> 16u
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static short sat16(int src)
-            => sat(src, w16);
+        public static ushort sat16u(int src)
+            => src > ushort.MaxValue ? ushort.MaxValue : (ushort)src;
 
         /// <summary>
-        /// Saturates a 16-bit signed integer to an 8-bit signed integer
+        /// Saturate 32i -> 16i
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static sbyte sat8(short src)
-            => sat(src, w8);
+        [MethodImpl(Inline)]
+        public static short sat16i(int src)
+            => src > short.MaxValue ? short.MaxValue : src < short.MinValue ? short.MinValue : (short)src;
     }
 }

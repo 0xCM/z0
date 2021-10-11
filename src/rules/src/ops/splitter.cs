@@ -11,8 +11,5 @@ namespace Z0
 
     partial struct RuleModels
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SeqSplit<T> splitter<T>(T delimiter)
-            => new SeqSplit<T>(delimiter);
     }
 }

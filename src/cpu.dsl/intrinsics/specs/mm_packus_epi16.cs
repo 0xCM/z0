@@ -8,6 +8,7 @@ namespace Z0.Vdsl
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static math;
 
     partial struct Intrinsics
     {
@@ -35,29 +36,25 @@ namespace Z0.Vdsl
                 => Specs.mm_packus_epi16(io.A, io.B);
 
             [MethodImpl(Inline)]
-            public static byte SaturateU8(short src)
-                => src < 0 ? z8 : (byte)(src < 0xFF ? src : 0xFF);
-
-            [MethodImpl(Inline)]
             public static m128i<byte> mm_packus_epi16(in m128i<short> a, in m128i<short> b)
             {
                 var dst = m128i<byte>();
-                dst[7,0] = SaturateU8(a[15,0]);
-                dst[15,8] = SaturateU8(a[31,16]);
-                dst[23,16] = SaturateU8(a[47,32]);
-                dst[31,24] = SaturateU8(a[63,48]);
-                dst[39,32] = SaturateU8(a[79,64]);
-                dst[47,40] = SaturateU8(a[95,80]);
-                dst[55,48] = SaturateU8(a[111,96]);
-                dst[63,56] = SaturateU8(a[127,112]);
-                dst[71,64] = SaturateU8(b[15,0]);
-                dst[79,72] = SaturateU8(b[31,16]);
-                dst[87,80] = SaturateU8(b[47,32]);
-                dst[95,88] = SaturateU8(b[63,48]);
-                dst[103,96] = SaturateU8(b[79,64]);
-                dst[111,104] = SaturateU8(b[95,80]);
-                dst[119,112] = SaturateU8(b[111,96]);
-                dst[127,120] = SaturateU8(b[127,112]);
+                dst[7,0] = sat8u(a[15,0]);
+                dst[15,8] = sat8u(a[31,16]);
+                dst[23,16] = sat8u(a[47,32]);
+                dst[31,24] = sat8u(a[63,48]);
+                dst[39,32] = sat8u(a[79,64]);
+                dst[47,40] = sat8u(a[95,80]);
+                dst[55,48] = sat8u(a[111,96]);
+                dst[63,56] = sat8u(a[127,112]);
+                dst[71,64] = sat8u(b[15,0]);
+                dst[79,72] = sat8u(b[31,16]);
+                dst[87,80] = sat8u(b[47,32]);
+                dst[95,88] = sat8u(b[63,48]);
+                dst[103,96] = sat8u(b[79,64]);
+                dst[111,104] = sat8u(b[95,80]);
+                dst[119,112] = sat8u(b[111,96]);
+                dst[127,120] = sat8u(b[127,112]);
                 return dst;
             }
         }

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     using api = memory;
 
@@ -34,12 +33,30 @@ namespace Z0
         public ReadOnlySpan<char> this[int index]
         {
             [MethodImpl(Inline)]
-            get => api.chars(this,index);
+            get => api.chars(this, index);
+        }
+
+        public ReadOnlySpan<char> this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => api.chars(this, index);
         }
 
         [MethodImpl(Inline)]
-        public ref readonly uint Offset(uint index)
-            => ref skip(Offsets,index);
+        public Label Label(uint index)
+            => Labels.label(this[index]);
+
+        [MethodImpl(Inline)]
+        public Label Label(int index)
+            => Labels.label(this[index]);
+
+        [MethodImpl(Inline)]
+        public MemoryAddress Address(uint index)
+            => api.address(this, index);
+
+        [MethodImpl(Inline)]
+        public MemoryAddress Address(int index)
+            => api.address(this, index);
 
         public ReadOnlySpan<char> Data
         {

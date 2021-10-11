@@ -57,7 +57,5 @@ namespace Z0
         ///</summary>
         [Symbol("w80", "Indicates an 80-bit width")]
         W80 = 7,
-
-        Invalid=0xFF
     }
 }

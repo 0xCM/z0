@@ -11,8 +11,5 @@ namespace Z0
 
     partial struct Relations
     {
-        [MethodImpl(Inline)]
-        public static Dependency<S,T> depends<S,T>(uint key, S src, T dst)
-            => new Dependency<S,T>(key, src,dst);
     }
 }

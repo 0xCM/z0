@@ -45,9 +45,9 @@ namespace Z0.Asm
         RexBExtension = 6,
 
         /// <summary>
-        /// Classifies <see cref='ModRmToken'/> tokens
+        /// Classifies <see cref='OcExtension'/> tokens
         /// </summary>
-        RegOpCodeMod = 7,
+        OcExtension = 7,
 
         /// <summary>
         /// Classifies <see cref='SegOverrideToken'/> tokens

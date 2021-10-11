@@ -8,18 +8,14 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static BitFlow;
 
     using api = AsmRegs;
 
     /// <summary>
     /// Specifies a register operand
     /// </summary>
-    [Blittable(SZ)]
     public readonly struct RegOp : IRegOp
     {
-        public const uint SZ = 2;
-
         readonly ushort Data;
 
         [MethodImpl(Inline)]

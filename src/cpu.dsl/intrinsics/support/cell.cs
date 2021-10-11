@@ -8,34 +8,9 @@ namespace Z0.Vdsl
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial struct Intrinsics
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref m128i<T> src, int i)
-            where T : unmanaged
-        {
-            ref var dst = ref @as<m128i<T>,T>(src);
-            return ref seek(dst,i);
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref m256i<T> src, int i)
-            where T : unmanaged
-        {
-            ref var dst = ref @as<m256i<T>,T>(src);
-            return ref seek(dst,i);
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref __m512i<T> src, int i)
-            where T : unmanaged
-        {
-            ref var dst = ref @as<__m512i<T>,T>(src);
-            return ref seek(dst,i);
-        }
-
         [MethodImpl(Inline), Closures(Closure)]
         public static m128i<T> m128i<T>()
             where T : unmanaged
@@ -47,7 +22,7 @@ namespace Z0.Vdsl
                 => default;
 
         [MethodImpl(Inline), Closures(Closure)]
-        public static __m512i<T> m512i<T>()
+        public static m512i<T> m512i<T>()
             where T : unmanaged
                 => default;
 
@@ -69,7 +44,7 @@ namespace Z0.Vdsl
         public static m256i<byte> z256i(W8 w)
             => default;
 
-        public static __m512i<byte> z512i(W8 w)
+        public static m512i<byte> z512i(W8 w)
             => default;
      }
 }

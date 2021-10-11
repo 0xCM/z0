@@ -51,9 +51,9 @@ namespace Z0.Vdsl
         public T this[int max, int min]
         {
             [MethodImpl(Inline)]
-            get => bitseg(ref this, max, min);
+            get => Cells.bits(ref Data, max, min);
             [MethodImpl(Inline)]
-            set => bitseg(ref this, max, min) = value;
+            set => Cells.bits(ref Data, max, min) = value;
         }
 
         [MethodImpl(Inline)]

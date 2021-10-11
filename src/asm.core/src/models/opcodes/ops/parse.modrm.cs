@@ -12,19 +12,10 @@ namespace Z0.Asm
     using static AsciCharSym;
 
     using C = AsciCharSym;
-    using T = AsmOpCodeTokens.ModRmToken;
+    using T = AsmOpCodeTokens.OpCodeExtension;
 
     partial struct AsmOpCodes
     {
-        [MethodImpl(Inline), Op]
-        public static bit modrm(ReadOnlySpan<char> src)
-            => parse(src, out T _);
-
-        /// <summary>
-        /// Attempts to match one of ['/r', '/0', '/1', '/2', '/3', '/4', '/5', '/6', '/7']
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
         [MethodImpl(Inline), Op]
         public static bit parse(ReadOnlySpan<char> src, out T dst)
             => scan(recover<char,C>(src), out dst);
@@ -56,9 +47,6 @@ namespace Z0.Asm
                 {
                     switch(skip(src,1))
                     {
-                        case C.r:
-                            token = T.r;
-                            break;
                         case d0:
                             token = T.r0;
                             break;

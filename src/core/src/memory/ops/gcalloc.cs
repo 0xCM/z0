@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Root;
-    using static core;
-
     unsafe partial struct memory
     {
         [Op]
@@ -20,7 +17,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static ManagedBuffer<T> gcalloc<T>(ulong count)
             where T : unmanaged
-                => new ManagedBuffer<T>(GCHandle.Alloc(new T[count], GCHandleType.Pinned), (uint)count*size<T>());
+                => new ManagedBuffer<T>(GCHandle.Alloc(new T[count], GCHandleType.Pinned), (uint)count*core.size<T>());
 
         [Op, Closures(Closure)]
         public static ManagedBuffer<T> gcalloc<T>(long count)

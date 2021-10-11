@@ -158,16 +158,9 @@ namespace Z0.Asm
             GS,
         }
 
-        /// <summary>
-        /// Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction
-        /// uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode.
-        /// </summary>
         [SymSource(tokens)]
-        public enum ModRmToken : byte
+        public enum OpCodeExtension : byte
         {
-            [Symbol("/r", "The ModR/M byte of the instruction contains a register operand and an r/m operand")]
-            r,
-
             [Symbol("/0", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode")]
             r0,
 
@@ -191,6 +184,18 @@ namespace Z0.Asm
 
             [Symbol("/7", "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 7 provides an extension to the instruction's opcode")]
             r7,
+        }
+
+        /// <summary>
+        /// Specifies a '/r' token where r = 0..7. A digit between 0 and 7 indicates that the ModR/M byte of the instruction
+        /// uses only the r/m (register or memory) operand. The reg field contains the digit that provides an extension to the instruction's opcode.
+        /// </summary>
+        [SymSource(tokens)]
+        public enum ModRmToken : byte
+        {
+            [Symbol("/r", "The ModR/M byte of the instruction contains a register operand and an r/m operand")]
+            r,
+
         }
 
         /// <summary>

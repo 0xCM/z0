@@ -21,11 +21,16 @@ namespace Z0
             return new Label(a.Address, (byte)src.Length);
         }
 
-        public static Labels from(ReadOnlySpan<char> src)
-            => new Labels(address(src), src.Length*2);
+        [MethodImpl(Inline), Op]
+        public static Label label(ReadOnlySpan<char> src)
+            => new Label(address(src), (byte)src.Length);
 
         public static Labels alocate(ByteSize size)
             => new Labels(memory.native(size));
+
+        [MethodImpl(Inline), Op]
+        public static Labels from(ReadOnlySpan<char> src)
+            => new Labels(core.address(src), src.Length*2);
 
         readonly NativeBuffer Buffer;
 

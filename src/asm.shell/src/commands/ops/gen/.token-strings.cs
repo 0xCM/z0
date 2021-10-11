@@ -23,17 +23,22 @@ namespace Z0.Asm
             return result;
         }
 
-        [CmdOp(".gen-enums")]
-        Outcome GenEnums(CmdArgs args)
+        [CmdOp(".gen-int-string")]
+        Outcome GenIntString(CmdArgs args)
         {
             var result = Outcome.Success;
-            var svc = Wf.Generators().CsEnum();
-            var spec = SymbolSets.from(typeof(AsmOpCodeTokens.ModRmToken));
-            var type = spec.DataType;
-            Write(string.Format("DataType:{0}",type));
-            var buffer = text.buffer();
-            svc.Generate(0,spec,buffer);
-            Write(buffer.Emit());
+            result = DataParser.parse(arg(args,0).Value, out uint min);
+            result = DataParser.parse(arg(args,1).Value, out uint max);
+            var values = list<string>();
+            var name = string.Format("Range{0}To{1}", min, max);
+            var n = max.ToString().Length;
+            for(var i=min; i<=max; i++)
+            {
+                values.Add(i.ToString().PadLeft(n));
+            }
+            var svc = Wf.Generators().StringLiterals();
+            var dst = Ws.Gen().Root + FS.file(name, FS.Cs);
+            svc.Emit(name,values.ViewDeposited(), dst);
             return result;
         }
 

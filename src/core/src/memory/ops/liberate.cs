@@ -11,10 +11,15 @@ namespace Z0
     using static Windows.Kernel32;
 
     using static Root;
-    using static core;
+    using static System.Runtime.CompilerServices.Unsafe;
 
     unsafe partial struct memory
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        static unsafe T* pointer<T>(ref T src)
+            where T : unmanaged
+                => (T*)AsPointer(ref src);
+
         [MethodImpl(Inline), Op]
         public static unsafe bool liberate(ReadOnlySpan<byte> src, out byte* pDst)
         {
@@ -39,7 +44,7 @@ namespace Z0
         /// <param name="src">The buffer to let it be what it wants</param>
         [MethodImpl(Inline), Op]
         public static unsafe byte* liberate(Span<byte> src)
-            => liberate((byte*)pointer(ref first(src)), src.Length);
+            => liberate((byte*)core.refptr(ref core.first(src)), src.Length);
 
         /// <summary>
         /// This may not be the best idea to solve your problem

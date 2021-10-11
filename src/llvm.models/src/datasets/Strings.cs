@@ -11,10 +11,10 @@ namespace Z0.llvm
     [ApiComplete]
     public readonly struct Strings
     {
-        public static MemoryStrings<AsmId> OpCodes
+        public static MemoryStrings<ushort> OpCodes
         {
             [MethodImpl(Inline)]
-            get => memory.strings<AsmId>(stringtables.Instruction.Offsets, stringtables.Instruction.Data);
+            get => memory.strings<ushort>(stringtables.Instruction.Offsets, stringtables.Instruction.Data);
         }
     }
 }

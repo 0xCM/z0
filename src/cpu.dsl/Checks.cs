@@ -73,9 +73,9 @@ namespace Z0.Vdsl
                     => Buffer.Block(n).Cells<m256i<T>>();
 
             [MethodImpl(Inline)]
-            Span<__m512i<T>> Vecs<T>(N0 n, W512 w)
+            Span<m512i<T>> Vecs<T>(N0 n, W512 w)
                 where T : unmanaged
-                    => Buffer.Block(n).Cells<__m512i<T>>();
+                    => Buffer.Block(n).Cells<m512i<T>>();
 
             [MethodImpl(Inline)]
             Span<m128i<T>> Vecs<T>(N1 n, W128 w)
@@ -88,9 +88,9 @@ namespace Z0.Vdsl
                     => Buffer.Block(n).Cells<m256i<T>>();
 
             [MethodImpl(Inline)]
-            Span<__m512i<T>> Vecs<T>(N1 n, W512 w)
+            Span<m512i<T>> Vecs<T>(N1 n, W512 w)
                 where T : unmanaged
-                    => Buffer.Block(n).Cells<__m512i<T>>();
+                    => Buffer.Block(n).Cells<m512i<T>>();
 
             [MethodImpl(Inline)]
             Span<m128i<T>> Vecs<T>(N2 n, W128 w)
@@ -103,9 +103,9 @@ namespace Z0.Vdsl
                     => Buffer.Block(n).Cells<m256i<T>>();
 
             [MethodImpl(Inline)]
-            Span<__m512i<T>> Vecs<T>(N2 n, W512 w)
+            Span<m512i<T>> Vecs<T>(N2 n, W512 w)
                 where T : unmanaged
-                    => Buffer.Block(n).Cells<__m512i<T>>();
+                    => Buffer.Block(n).Cells<m512i<T>>();
 
             void Segments()
             {

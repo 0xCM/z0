@@ -130,19 +130,35 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Hex8 dst)
-            => HexNumericParser.parse(src, out dst);
+        {
+            var outcome = Hex.parse8u(src, out var x);
+            dst = x;
+            return outcome;
+        }
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Hex16 dst)
-            => HexNumericParser.parse(src, out dst);
+        {
+            var outcome = Hex.parse16u(src, out var x);
+            dst = x;
+            return outcome;
+        }
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Hex32 dst)
-            => HexNumericParser.parse(src, out dst);
+        {
+            var outcome = Hex.parse32u(src, out var x);
+            dst = x;
+            return outcome;
+        }
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out Hex64 dst)
-            => HexNumericParser.parse(src, out dst);
+        {
+            var outcome = Hex.parse64u(src, out var x);
+            dst = x;
+            return outcome;
+        }
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out bool dst)
@@ -356,7 +372,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out MemoryRange dst)
-            => MemoryRangeParser.parse(src, out dst);
+            => AddressParser.range(src, out dst);
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out ToolId dst)

@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static Root;
     [ApiHost]
     public readonly partial struct AsmChecks
     {
@@ -14,25 +15,28 @@ namespace Z0.Asm
             switch(src.Input.Code)
             {
                 case NativeSizeCode.W8:
-                    src.Expect = 8;
+                    src.Expect = (ushort)asm.asmsize(w8).Width;
                 break;
                 case NativeSizeCode.W16:
-                    src.Expect = 16;
+                    src.Expect = (ushort)asm.asmsize(w16).Width;
                 break;
                 case NativeSizeCode.W32:
-                    src.Expect = 32;
+                    src.Expect = (ushort)asm.asmsize(w32).Width;
                 break;
                 case NativeSizeCode.W64:
-                    src.Expect = 64;
+                    src.Expect = (ushort)asm.asmsize(w64).Width;
                 break;
                 case NativeSizeCode.W128:
-                    src.Expect = 128;
+                    src.Expect = (ushort)asm.asmsize(w128).Width;
                 break;
                 case NativeSizeCode.W256:
-                    src.Expect = 256;
+                    src.Expect = (ushort)asm.asmsize(w256).Width;
                 break;
                 case NativeSizeCode.W512:
-                    src.Expect = 512;
+                    src.Expect = (ushort)asm.asmsize(w512).Width;
+                break;
+                case NativeSizeCode.W80:
+                    src.Expect = 80;
                 break;
             }
             return src.Passed;

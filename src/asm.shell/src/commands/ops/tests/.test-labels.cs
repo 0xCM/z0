@@ -10,22 +10,30 @@ namespace Z0.Asm
         Outcome TestLabels(CmdArgs args)
         {
             var result = Outcome.Success;
-            // var services = Wf.Models();
-            // var labels = services.Labels(Pow2.T12);
-            // var address = labels.BaseAddress;
-            // var mask1 = 0x00FFFFFF_FFFFFFFFul;
-            // var mask2 = 0x0000FFFF_FFFFFFFFul;
+            var strings = memory.strings(llvm.stringtables.Instruction.Offsets, llvm.stringtables.Instruction.Data);
+            var count = strings.EntryCount;
 
-            // var scalar = (ulong)address;
-            // MemoryAddress a1 = mask1 & scalar;
-            // MemoryAddress a2 = mask2 & scalar;
+            for(var i=0; i<count; i++)
+            {
+                var current = strings[i];
+                var length = (uint)current.Length;
+                var address = strings.Address(i);
+                var label = strings.Label(i);
+                var a = text.format(current);
+                var b = label.Format();
+                if(!text.equals(a,b))
+                {
+                    result = (false, string.Format("{0} != {1}", a, b));
+                    break;
+                }
+            }
 
-            // Write(string.Format("a0={0}", address));
-            // Write(string.Format("a1={0}", a1));
-            // Write(string.Format("a2={0}", a2));
+            if(result)
+            {
+                Write(string.Format("Verified {0} strings", count));
+            }
 
             return result;
         }
-
     }
 }

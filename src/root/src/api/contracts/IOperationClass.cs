@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
@@ -26,7 +25,6 @@ namespace Z0
     public interface IOperationClass<E> : IOperationClass, IApiClass<E>
         where E : unmanaged, Enum
     {
-
         E IApiClass<E>.Kind
             => Kind;
 

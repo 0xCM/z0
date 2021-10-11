@@ -28,6 +28,11 @@ namespace Z0.Asm
             => code(src);
 
         [MethodImpl(Inline)]
+        public static NativeSize asmsize<W>(W w)
+            where W : unmanaged, IDataWidth
+                => code((BitWidth)w.BitWidth);
+
+        [MethodImpl(Inline)]
         public static NativeSize asmsize<T>()
             where T : unmanaged
                 => asmsize(core.width<T>());

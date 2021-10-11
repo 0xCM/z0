@@ -10,17 +10,17 @@ namespace Z0.Vdsl
 
     using static Root;
 
-    public struct __m512i<T>
+    public struct m512i<T>
         where T : unmanaged
     {
         Cell512<T> Data;
 
         [MethodImpl(Inline)]
-        public __m512i(Vector512<T> src)
+        public m512i(Vector512<T> src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public __m512i(Cell512<T> src)
+        public m512i(Cell512<T> src)
             => Data = src;
 
         public uint Width => 512;
@@ -48,15 +48,15 @@ namespace Z0.Vdsl
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator __m512i<T>(Vector512<T> src)
-            => new __m512i<T>(src);
+        public static implicit operator m512i<T>(Vector512<T> src)
+            => new m512i<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator __m512i<T>(T src)
+        public static implicit operator m512i<T>(T src)
             => gcpu.vbroadcast(w512,src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector512<T>(__m512i<T> src)
+        public static implicit operator Vector512<T>(m512i<T> src)
             => src.Data;
     }
 }

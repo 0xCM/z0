@@ -11,8 +11,5 @@ namespace Z0
 
     partial struct RuleModels
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static One<T> one<T>(T term)
-            => new One<T>(term);
     }
 }

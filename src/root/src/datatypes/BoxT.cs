@@ -4,19 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    partial struct Relations
+    public sealed class Box<T> : StrongBox<T>
+        where T : struct
     {
         [MethodImpl(Inline)]
-        public static Facet<K,V> facet<K,V>(K key, V value)
-            => new Facet<K,V>(key,value);
+        public Box(T src)
+        {
+            Value = src;
+        }
 
         [MethodImpl(Inline)]
-        public static Facet<S,T> facet<S,T>(Arrow<S,T> src)
-            => facet(src.Source, src.Target);
+        public static implicit operator Box<T>(T src)
+            => new Box<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator T(Box<T> src)
+            => src.Value;
     }
 }

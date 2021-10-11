@@ -9,7 +9,6 @@ namespace Z0.Vdsl
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static Intrinsics;
 
     public struct m256i<T>
         where T : unmanaged
@@ -45,18 +44,18 @@ namespace Z0.Vdsl
         public num<T> this[int i]
         {
             [MethodImpl(Inline)]
-            get => cell(ref this, i/8);
+            get => Cells.cell(ref Data, i/8);
 
             [MethodImpl(Inline)]
-            set => cell(ref this, i/8) = value;
+            set => Cells.cell(ref Data, i/8) = value;
         }
 
         public T this[int max, int min]
         {
             [MethodImpl(Inline)]
-            get => bitseg(ref this, max, min);
+            get => Cells.bits(ref Data, max, min);
             [MethodImpl(Inline)]
-            set => bitseg(ref this, max, min) = value;
+            set => Cells.bits(ref Data, max, min) = value;
         }
 
         public string Format()

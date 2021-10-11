@@ -51,7 +51,8 @@ namespace Z0
         void CheckAnd(Index<Cell128> a, Index<Cell128> b)
         {
             var f = K.and();
-            var msg = string.Format("Validating {0} over {1} samples", f.Format(), SampleCount);
+            var name = ApiClasses.format(f);
+            var msg = string.Format("Validating {0} over {1} samples", name, SampleCount);
             var running = Wf.Running(msg);
             var success = 0u;
             for(var i=0; i<SampleCount; i++)

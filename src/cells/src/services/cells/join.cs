@@ -8,9 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial class Cells
     {
+
+
         [MethodImpl(Inline), Op]
         public static Cell16 join(byte lo, byte hi)
             => (lo, hi);

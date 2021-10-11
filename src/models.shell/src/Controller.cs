@@ -7,7 +7,6 @@ namespace Z0.Models
     using System;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
-    using Rules;
 
     using static Root;
     using static core;
@@ -48,43 +47,4 @@ namespace Z0.Models
         }
     }
 
-    public struct BitmaskBuilder
-    {
-        readonly OneOf<char> Rule;
-
-        [MethodImpl(Inline)]
-        public BitmaskBuilder(OneOf<char> rule)
-        {
-            Rule = rule;
-        }
-
-        uint VarCount(ReadOnlySpan<char> src)
-        {
-            var counter = 0u;
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var c = ref skip(src,i);
-                if(c == '?')
-                    counter++;
-            }
-            return counter;
-        }
-
-        public void Build(ReadOnlySpan<char> src, Span<byte> dst)
-        {
-            var count = min(src.Length,dst.Length);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var c = ref skip(src,i);
-                switch(c)
-                {
-                    case '0':
-                    break;
-                    case '1':
-                    break;
-                }
-            }
-        }
-    }
 }
