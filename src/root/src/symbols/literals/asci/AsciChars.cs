@@ -10,6 +10,7 @@ namespace Z0
 
     using FA = AsciCodeFacets;
     using AK = AsciCode;
+    using AT = AsciText;
 
     [ApiComplete]
     public readonly struct AsciChars
@@ -58,25 +59,25 @@ namespace Z0
             120, 121,122, 123, 124, 125, 126, 127,
         };
 
-        public static ReadOnlySpan<AsciCode> DigitCodes
+        public static ReadOnlySpan<char> DecimalDigits
+            => AT.DecimalDigits;
+
+        public static ReadOnlySpan<AsciCode> DecimalDigitCodes
             => new AsciCode[FA.DecimalDigitCount]{d0,d1,d2,d3,d4,d5,d6,d7,d8,d9};
-
-        public static ReadOnlySpan<char> DigitChars
-            => "0123456789";
-
-        public static ReadOnlySpan<AsciCode> LowerLetterCodes
-            => new AsciCode[FA.LowerLetterCount]{a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z};
-
-        public static ReadOnlySpan<AsciCode> UpperLetterCodes
-            => new AsciCode[FA.UpperLetterCount]{A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z};
 
         public static ReadOnlySpan<AsciCode> WhitespaceCodes
             => new AsciCode[6]{AK.Space, AK.NL, AK.CR, AK.FF, AK.Tab, AK.VTab};
 
-        public static ReadOnlySpan<char> UpperLetterChars
-            => "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public static ReadOnlySpan<char> UpperLetters
+            => AT.UpperLetters;
 
-        public static ReadOnlySpan<char> LowerLetterChars
-            => "abcdefghijklmnopqrstuvwxyz";
+        public static ReadOnlySpan<AsciCode> UpperLetterCodes
+            => new AsciCode[FA.UpperLetterCount]{A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z};
+
+        public static ReadOnlySpan<char> LowerLetters
+            => AT.LowerLetters;
+
+        public static ReadOnlySpan<AsciCode> LowerLetterCodes
+            => new AsciCode[FA.LowerLetterCount]{a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z};
     }
 }

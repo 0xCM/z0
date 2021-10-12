@@ -118,7 +118,7 @@ namespace Z0.Asm
         Outcome TestStringRes(CmdArgs args)
         {
             using var flow = Wf.Running();
-            var resources = Resources.strings(typeof(AsciCharText)).View;
+            var resources = Resources.strings(typeof(AsciText)).View;
             var count = resources.Length;
             for(var i=0; i<count; i++)
             {

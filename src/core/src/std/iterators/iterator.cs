@@ -2,19 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.std
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
-    [Free]
-    public interface ITerm : ITextual
+    public interface iterator<T>
     {
-
+        bool next(out T dst);
     }
 
-    [Free]
-    public interface ITerm<T> : ITerm
+    public interface iterator<I,T> : iterator<T>
+        where I : unmanaged
     {
-
     }
 }

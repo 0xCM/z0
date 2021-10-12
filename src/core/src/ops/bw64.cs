@@ -30,6 +30,20 @@ namespace Z0
                 return uint64(src);
         }
 
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static long bw64i<T>(T src)
+            where T : unmanaged
+        {
+            if(width<T>() == 8)
+                return int8(src);
+            if(width<T>() == 16)
+                return int16(src);
+            else if(width<T>() == 32)
+                return int32(src);
+            else
+                return int64(src);
+        }
+
         [MethodImpl(Inline), Op]
         public static long bw64i(ReadOnlySpan<byte> src)
         {

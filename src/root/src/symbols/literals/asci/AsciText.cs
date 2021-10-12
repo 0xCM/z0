@@ -8,7 +8,7 @@ namespace Z0
     /// Defines asci string literals
     /// </summary>
     [LiteralProvider]
-    public static class AsciCharText
+    public static class AsciText
     {
         public const string D0 = "0";
 
@@ -289,6 +289,62 @@ namespace Z0
         /// The 'Z' character represented as text
         /// </summary>
         public const string Z = "Z";
+
+        /// <summary>
+        /// The '"' character represented as text
+        /// </summary>
+        public const string DQuote = "\"";
+
+        /// <summary>
+        /// The '{' character represented as text
+        /// </summary>
+        public const string LBrace = "{";
+
+        /// <summary>
+        /// The '}' character represented as text
+        /// </summary>
+        public const string RBrace = "}";
+
+        /// <summary>
+        /// The '[' character represented as text
+        /// </summary>
+        public const string LBracket = "[";
+
+        /// <summary>
+        /// The ']' character represented as text
+        /// </summary>
+        public const string RBracket = "]";
+
+        /// <summary>
+        /// The '(' character represented as text
+        /// </summary>
+        public const string LParen = "(";
+
+        /// <summary>
+        /// The ')' character represented as text
+        /// </summary>
+        public const string RParen = ")";
+
+        /// <summary>
+        /// The ':' character text
+        /// </summary>
+        public const string Colon = ":";
+
+        public const string Semicolon = ";";
+
+        public const string Dash = "-";
+
+        public const string Dot = ".";
+
+        public const string Underscore = "_";
+
+        public const string Bang = "!";
+
+        public const string Tilde = "~";
+
+        public const string FSlash = "/";
+
+        public const string BSlash = "\\";
 
         public const string UpperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 

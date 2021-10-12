@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -54,6 +55,12 @@ namespace Z0
         public static T raise<S,T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw define($"The transformation {typeof(S).Name} -> {typeof(T).Name} is undefined", caller, file, line);
 
+        public static ArgumentException badarg<T>(T arg)
+            => new ArgumentException(arg?.ToString() ?? "<null>");
+
+        [Op]
+        public static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new Exception(string.Concat($"Duplicate keys were detected {string.Join(Chars.Comma, keys)}",  caller,file, line));
         static NotSupportedException define(string msg, string caller, string file, int? line)
             => new NotSupportedException(string.Format("{0}; caller:{1}; line:{2}; file:{3}", msg, caller, line, file));
     }

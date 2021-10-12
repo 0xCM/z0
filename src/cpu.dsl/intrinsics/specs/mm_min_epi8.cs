@@ -33,7 +33,7 @@ namespace Z0.Vdsl
         {
             [MethodImpl(Inline)]
             public static m128i<sbyte> calc(in mm_min_epi8 src)
-                => Specs.mm_min_epi8(src.A, src.B);
+                => mm_min_epi8(src.A, src.B);
 
             [MethodImpl(Inline)]
             public static m128i<sbyte> mm_min_epi8(in m128i<sbyte> a, in m128i<sbyte> b)

@@ -2,13 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.std
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface IValue<T> : ITerm<T>
-    {
-        T Content {get;}
-    }
+
 }

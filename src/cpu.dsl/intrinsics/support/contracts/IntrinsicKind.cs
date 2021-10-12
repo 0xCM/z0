@@ -17,6 +17,8 @@ namespace Z0.Vdsl
         [Symbol("__m128i _mm_avg_epu8(__m128i a, __m128i b)")]
         mm_avg_epu8,
 
+        mm_delta_epu8,
+
         mm_blend_epi32,
 
         mm_packus_epi16,

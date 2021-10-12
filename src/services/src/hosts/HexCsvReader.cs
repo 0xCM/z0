@@ -36,7 +36,7 @@ namespace Z0
             CurrentIndex = 0;
 
             if(!src.Exists)
-                Root.@throw(new FileNotFoundException(src.ToUri().Format()));
+                core.@throw(new FileNotFoundException(src.ToUri().Format()));
 
             using var reader = src.Utf8Reader();
             var size = src.Size;

@@ -289,43 +289,8 @@ namespace Z0
         /// </summary>
         public const string Z = "Z";
 
-
-        public const string DQuote = "\"";
-
-
-        public const string LBrace = "{";
-
-
-        public const string LBrack = "[";
-
-        public const string RBrack = "]";
-
-        public const string LParen = "(";
-
-        public const string RParen = ")";
-
-        /// <summary>
-        /// The ':' character text
-        /// </summary>
-        public const string Colon = ":";
-
         public const string Comma = ",";
 
-        public const string Semicolon = ";";
-
-        public const string Dash = "-";
-
-        public const string Dot = ".";
-
-        public const string Underscore = "_";
-
-        public const string Bang = "!";
-
-        public const string Tilde = "~";
-
-        public const string FS = "/";
-
-        public const string BSlash = "\\";
 
         public const string Null = "\0";
 
