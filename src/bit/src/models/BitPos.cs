@@ -6,12 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
-    using api = BitPos;
+    using api = bit;
 
-	public struct BitPos32
+    [StructLayout(LayoutKind.Sequential, Pack =1)]
+    public struct BitPos
 	{
         /// <summary>
 		/// A container-relative 0-based cell offset
@@ -29,7 +31,7 @@ namespace Z0
 		public uint CellWidth;
 
 		[MethodImpl(Inline)]
-		public BitPos32(uint cellwidth, uint cellindex, uint bitoffset)
+		public BitPos(uint cellwidth, uint cellindex, uint bitoffset)
 		{
 			CellWidth = cellwidth;
 			CellIndex = cellindex;
@@ -42,7 +44,7 @@ namespace Z0
 		public uint LinearIndex
 		{
 			[MethodImpl(Inline)]
-			get => api.linear(this);
+			get => BitPosInternals.linearIndex(this);
 		}
 
 		[MethodImpl(Inline)]
@@ -62,11 +64,11 @@ namespace Z0
             => api.inc(ref this);
 
 		[MethodImpl(Inline)]
-		public bool Equals(BitPos32 src)
+		public bool Equals(BitPos src)
             => api.eq(this, src);
 
 		public string Format()
-			=> api.format(this);
+			=> BitRender.format(this);
 
 		public override string ToString()
 			=> Format();
@@ -75,62 +77,62 @@ namespace Z0
 			=> HashCode.Combine(CellWidth, CellIndex, BitOffset);
 
 		public override bool Equals(object rhs)
-            => rhs is BitPos32 x && Equals(x);
+            => rhs is BitPos x && Equals(x);
 
 		[MethodImpl(Inline)]
-		public static BitPos32 operator +(BitPos32 pos, uint count)
+		public static BitPos operator +(BitPos pos, uint count)
 		{
 			pos.Add(count);
             return pos;
 		}
 
 		[MethodImpl(Inline)]
-		public static BitPos32 operator -(BitPos32 pos, uint count)
+		public static BitPos operator -(BitPos pos, uint count)
 		{
             pos.Sub(count);
             return pos;
 		}
 
 		[MethodImpl(Inline)]
-		public static uint operator -(BitPos32 a, BitPos32 b)
+		public static uint operator -(BitPos a, BitPos b)
 			=> api.delta(a,b);
 
 		[MethodImpl(Inline)]
-		public static BitPos32 operator --(BitPos32 pos)
+		public static BitPos operator --(BitPos pos)
 		{
             pos.Dec();
             return pos;
 		}
 
 		[MethodImpl(Inline)]
-		public static BitPos32 operator ++(BitPos32 pos)
+		public static BitPos operator ++(BitPos pos)
 		{
 			pos.Inc();
             return pos;
 		}
 
 		[MethodImpl(Inline)]
-		public static bool operator <(BitPos32 a, BitPos32 b)
+		public static bool operator <(BitPos a, BitPos b)
 			=> a.LinearIndex < b.LinearIndex;
 
 		[MethodImpl(Inline)]
-		public static bool operator <=(BitPos32 a, BitPos32 b)
+		public static bool operator <=(BitPos a, BitPos b)
 			=> a.LinearIndex <= b.LinearIndex;
 
 		[MethodImpl(Inline)]
-		public static bool operator >(BitPos32 a, BitPos32 b)
+		public static bool operator >(BitPos a, BitPos b)
 			=> a.LinearIndex > b.LinearIndex;
 
 		[MethodImpl(Inline)]
-		public static bool operator >=(BitPos32 a, BitPos32 b)
+		public static bool operator >=(BitPos a, BitPos b)
 			=> a.LinearIndex >= b.LinearIndex;
 
 		[MethodImpl(Inline)]
-		public static bool operator ==(BitPos32 a, BitPos32 b)
+		public static bool operator ==(BitPos a, BitPos b)
 			=> a.Equals(b);
 
 		[MethodImpl(Inline)]
-		public static bool operator !=(BitPos32 a, BitPos32 b)
+		public static bool operator !=(BitPos a, BitPos b)
 			=> !a.Equals(b);
 	}
 }

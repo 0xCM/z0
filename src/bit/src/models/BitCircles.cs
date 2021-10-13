@@ -10,16 +10,16 @@ namespace Z0
     using static Root;
 
     [ApiComplete]
-    public struct CircularBits
+    public struct BitCircles
     {
         [MethodImpl(Inline)]
-        public static CircularBits create(ulong state)
-            => new CircularBits(state);
+        public static BitCircles create(ulong state)
+            => new BitCircles(state);
 
         ulong State;
 
         [MethodImpl(Inline)]
-        public CircularBits(ulong state)
+        public BitCircles(ulong state)
             => State  = state;
 
         [MethodImpl(Inline)]

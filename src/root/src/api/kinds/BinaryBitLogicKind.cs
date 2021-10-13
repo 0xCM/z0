@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static BinaryBitLogicNames;
+
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>
@@ -15,7 +17,7 @@ namespace Z0
         /// <remarks>
         /// bv(0000) = id(True)
         /// </remarks>
-        [Symbol("false")]
+        [Symbol(@false)]
         False = 0,
 
         /// <summary>
@@ -28,7 +30,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        [Symbol("and")]
+        [Symbol(@and)]
         And = 0b0001,
 
         /// <summary>
@@ -42,7 +44,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        [Symbol("cnonimpl")]
+        [Symbol(cnonimpl)]
         CNonImpl = 0b0010,
 
         /// <summary>
@@ -56,8 +58,8 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        [Symbol("left")]
-        LProject = 0b0011,
+        [Symbol(left)]
+        Left = 0b0011,
 
         /// <summary>
         /// Identifies a logical binary operator notimply(a,b) := and(~a, b) = bv(0100)
@@ -70,7 +72,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        [Symbol("nonimpl")]
+        [Symbol(nonimpl)]
         NonImpl = 0b0100,
 
         /// <summary>
@@ -84,8 +86,8 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        [Symbol("right")]
-        RProject = 0b0101,
+        [Symbol(right)]
+        Right = 0b0101,
 
         /// <summary>
         /// Classifies a logical binary operator xor(a,b) := bv(0110)
@@ -98,7 +100,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        [Symbol("xor")]
+        [Symbol(xor)]
         Xor = 0b0110,
 
         /// <summary>
@@ -112,7 +114,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        [Symbol("or")]
+        [Symbol(or)]
         Or = 0b0111,
 
         /// <summary>
@@ -126,7 +128,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        [Symbol("nor")]
+        [Symbol(nor)]
         Nor = 0b1000,
 
         /// <summary>
@@ -140,7 +142,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        [Symbol("xnor")]
+        [Symbol(xnor)]
         Xnor = 0b1001,
 
         /// <summary>
@@ -154,7 +156,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        [Symbol("rnot")]
+        [Symbol(rnot)]
         RNot = 0b1010,
 
         /// <summary>
@@ -168,7 +170,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        [Symbol("impl")]
+        [Symbol(impl)]
         Impl = 0b1011,
 
         /// <summary>
@@ -182,7 +184,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        [Symbol("lnot")]
+        [Symbol(lnot)]
         LNot = 0b1100,
 
         /// <summary>
@@ -196,7 +198,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        [Symbol("cimpl")]
+        [Symbol(cimpl)]
         CImpl = 0b1101,
 
         /// <summary>
@@ -210,7 +212,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        [Symbol("nand")]
+        [Symbol(@nand)]
         Nand = 0b1110,
 
         /// <summary>
@@ -219,7 +221,7 @@ namespace Z0
         /// <remarks>
         /// bv(1111) = id(False)
         /// </remarks>
-        [Symbol("true")]
+        [Symbol(@true)]
         True = 0b1111,
     }
 }

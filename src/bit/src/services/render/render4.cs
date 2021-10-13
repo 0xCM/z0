@@ -22,5 +22,12 @@ namespace Z0
             seek(dst, i++) = bitchar(src, 0);
             return i - i0;
         }
+
+        [MethodImpl(Inline), Op]
+        public static uint render4(byte src, Span<char> dst)
+        {
+            var i = 0u;
+            return render4(src, ref i, dst);
+        }
     }
 }

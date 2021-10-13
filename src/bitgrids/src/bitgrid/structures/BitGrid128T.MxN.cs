@@ -16,7 +16,7 @@ namespace Z0
     /// A grid of natural dimensions M and N such that M*N = W := 128
     /// </summary>
     /// <remarks>Conforming dimensions include 1x128, 128x1, 2x64, 64x2, 4x32, 32x4, 8x16, and 16x8</remarks>
-    [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
+    [StructLayout(LayoutKind.Sequential, Size=StorageSize)]
     [IdentityProvider(typeof(BitGridIdentityProvider))]
     public struct BitGrid128<M,N,T>
         where M : unmanaged, ITypeNat
@@ -31,7 +31,7 @@ namespace Z0
         /// <summary>
         /// The number of bytes covered by the grid
         /// </summary>
-        public const int ByteCount = 16;
+        public const int StorageSize = 16;
 
         [MethodImpl(Inline)]
         internal BitGrid128(Vector128<T> data)
@@ -56,7 +56,7 @@ namespace Z0
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => ByteCount/size<T>();
+            get => StorageSize/size<T>();
         }
 
         /// <summary>
@@ -148,11 +148,11 @@ namespace Z0
             => BitGrid.negate(gx);
 
         [MethodImpl(Inline)]
-        public static Bit32 operator ==(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
+        public static bit operator ==(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
             => BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
-        public static Bit32 operator !=(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
+        public static bit operator !=(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
             => !BitGrid.same(g1,g2);
     }
 }

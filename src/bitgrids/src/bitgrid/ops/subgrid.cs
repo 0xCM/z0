@@ -170,6 +170,13 @@ namespace Z0
             where T : unmanaged
                 => new SubGrid128<M,N,T>(data);
 
+        [MethodImpl(Inline)]
+        public static SubGrid128<M,N,T> subgrid<M,N,T>(BitGrid128<M,N,T> data)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new SubGrid128<M,N,T>(data);
+
         /// <summary>
         /// Allocates a 0-filled 256-bit subgrid
         /// </summary>

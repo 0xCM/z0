@@ -263,7 +263,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline)]
-        public static explicit operator byte(bit src)
+        public static implicit operator byte(bit src)
             => u8(src.State);
 
         /// <summary>

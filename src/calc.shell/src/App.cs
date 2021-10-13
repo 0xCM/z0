@@ -390,6 +390,21 @@ namespace Z0
             Spin();
         }
 
+        void Run(N29 n)
+        {
+            var dst = ByteBlock64.Empty;
+            //var buffer = alloc<BitOpCalc>(256);
+            var buffer = recover<BitOpCalc>(dst.Bytes);
+            var count = BitStates.compute(w1,buffer);
+            var formatter = BitOpFormatter.service();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var result = ref skip(buffer,i);
+                Write(string.Format("{0:D2} | {1}", i, result.Format(BitOpFormatter.FormatOption.Bitstrings)));
+            }
+
+        }
+
         void Run(string spec)
         {
             if(uint.TryParse(spec, out var n))
@@ -473,6 +488,9 @@ namespace Z0
                     break;
                     case 28:
                         Run(n28);
+                    break;
+                    case 29:
+                        Run(n29);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

@@ -15,6 +15,9 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        public static string format(in BitPos src)
+            => string.Format("({0},{1}/{2})", src.LinearIndex, src.CellIndex, src.BitOffset);
+
         [MethodImpl(Inline), Op]
         static uint separate(uint offset, Span<char> dst)
         {

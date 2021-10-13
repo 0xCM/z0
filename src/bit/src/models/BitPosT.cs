@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = BitPos;
+    using api = bit;
 
 	/// <summary>
 	/// Identifies a bit position within a contiguous sequence of T-element values together with their cell index/bit offsets
@@ -49,7 +49,7 @@ namespace Z0
 		public uint LinearIndex
 		{
 			[MethodImpl(Inline)]
-			get => api.linear(this);
+			get => BitPosInternals.linearIndex(this);
 		}
 
 		[MethodImpl(Inline)]
@@ -77,7 +77,7 @@ namespace Z0
             => api.eq(this, src);
 
 		public string Format()
-			=> api.format(this);
+			=> BitRender.format(this);
 
 		public override string ToString()
 			=> Format();
@@ -131,12 +131,12 @@ namespace Z0
 			=> !a.Equals(b);
 
 		[MethodImpl(Inline)]
-		public static bool operator <(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.LinearIndex < rhs.LinearIndex;
+		public static bool operator <(BitPos<T> a, BitPos<T> b)
+			=> a.LinearIndex < b.LinearIndex;
 
 		[MethodImpl(Inline)]
-		public static bool operator <=(BitPos<T> lhs, BitPos<T> rhs)
-			=> lhs.LinearIndex <= rhs.LinearIndex;
+		public static bool operator <=(BitPos<T> a, BitPos<T> b)
+			=> a.LinearIndex <= b.LinearIndex;
 
 		[MethodImpl(Inline)]
 		public static bool operator >(BitPos<T> lhs, BitPos<T> rhs)
@@ -147,8 +147,8 @@ namespace Z0
 			=> lhs.LinearIndex >= rhs.LinearIndex;
 
 		[MethodImpl(Inline)]
-        public static implicit operator BitPos32(BitPos<T> src)
-            => new BitPos32(src.CellWidth, src.CellIndex, src.BitOffset);
+        public static implicit operator BitPos(BitPos<T> src)
+            => new BitPos(src.CellWidth, src.CellIndex, src.BitOffset);
 
 		[MethodImpl(Inline)]
         public static implicit operator BitPos<T>((uint cellindex, uint bitoffset) x)

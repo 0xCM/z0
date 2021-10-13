@@ -113,8 +113,8 @@ namespace Z0
                 case BLK.Impl: return impl(a,b);
                 case BLK.NonImpl: return nonimpl(a,b);
 
-                case BLK.LProject: return left(a,b);
-                case BLK.RProject: return right(a,b);
+                case BLK.Left: return left(a,b);
+                case BLK.Right: return right(a,b);
 
                 case BLK.LNot: return lnot(a,b);
                 case BLK.RNot: return rnot(a,b);

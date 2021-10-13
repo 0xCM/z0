@@ -103,8 +103,8 @@ namespace Z0
                 case BLK.Nor: return nor(a,b);
                 case BLK.Xor: return xor(a,b);
                 case BLK.Xnor: return xnor(a,b);
-                case BLK.LProject: return left(a,b);
-                case BLK.RProject: return right(a,b);
+                case BLK.Left: return left(a,b);
+                case BLK.Right: return right(a,b);
                 case BLK.LNot: return lnot(a,b);
                 case BLK.RNot: return rnot(a,b);
                 case BLK.Impl: return impl(a,b);
@@ -292,8 +292,8 @@ namespace Z0
                 case BLK.Nor: return nor;
                 case BLK.Xor: return xor;
                 case BLK.Xnor: return xnor;
-                case BLK.LProject: return left;
-                case BLK.RProject: return right;
+                case BLK.Left: return left;
+                case BLK.Right: return right;
                 case BLK.LNot: return lnot;
                 case BLK.RNot: return rnot;
                 case BLK.Impl: return impl;

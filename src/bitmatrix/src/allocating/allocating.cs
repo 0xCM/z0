@@ -29,8 +29,8 @@ namespace Z0
                 case BLK.Nor: return nor(A,B);
                 case BLK.Xor: return xor(A,B);
                 case BLK.Xnor: return xnor(A,B);
-                case BLK.LProject: return BitMatrix.left(A,B);
-                case BLK.RProject: return BitMatrix.right(A,B);
+                case BLK.Left: return BitMatrix.left(A,B);
+                case BLK.Right: return BitMatrix.right(A,B);
                 case BLK.LNot: return lnot(A,B);
                 case BLK.RNot: return rnot(A,B);
                 case BLK.Impl: return BitMatrix.impl(A,B);

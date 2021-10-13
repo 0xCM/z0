@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
+    using static core;
+
     partial struct BitRender
     {
         /// <summary>
@@ -17,18 +19,18 @@ namespace Z0
         /// <param name="rowlen">The number of bits in each row</param>
         /// <param name="maxbits">The maximum number of bits to format</param>
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
-        public static string grid(Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false)
+        public static string grid(Span<byte> src, int rowlen, int? maxbits, bool showrow)
         {
             var dst = render8x8(src);
-            var sb = new StringBuilder();
+            var sb = text.buffer();
             var limit = maxbits ?? dst.Length;
             for(int i=0, rowidx=0; i<limit; i+= rowlen, rowidx++)
             {
                 var remaining = dst.Length - i;
-                var segment = Math.Min(remaining, rowlen);
+                var segment = min(remaining, rowlen);
                 var rowbits = dst.Slice(i, segment);
                 var rowprefix = showrow ? $"{rowidx.ToString().PadRight(3)} | " : string.Empty;
-                var rowformat = rowprefix + new string(rowbits.Intersperse(Chars.Space));
+                var rowformat = rowprefix + text.format(rowbits.Intersperse(Chars.Space));
                 sb.AppendLine(rowformat);
             }
             return sb.ToString();

@@ -28,8 +28,8 @@ namespace Z0
                 case BLK.Nor: return nor;
                 case BLK.Xor: return xor;
                 case BLK.Xnor: return xnor;
-                case BLK.LProject: return left;
-                case BLK.RProject: return right;
+                case BLK.Left: return left;
+                case BLK.Right: return right;
                 case BLK.LNot: return lnot;
                 case BLK.RNot: return rnot;
                 case BLK.Impl: return impl;

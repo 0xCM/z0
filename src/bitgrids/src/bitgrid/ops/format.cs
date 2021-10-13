@@ -83,7 +83,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.ToSpan().FormatGridBits(src.ColCount, maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => src.ToSpan().FormatGridBits((int)src.ColCount, maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
 
         public static string format<M,N,T>(in SubGrid256<M,N,T> src, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat

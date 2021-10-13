@@ -97,8 +97,8 @@ namespace Z0
             {
                 var src = Random.Next<ulong>();
                 gpack.unpack1x32<ulong>(src, dst);
-                for(var i=0; i< dst.Length; i++)
-                    Claim.eq((uint)Bit32.test(src,i), dst[i]);
+                // for(byte i=0u; i< dst.Length; i++)
+                //     Claim.eq((ulong)bit.test(src,i), dst[i]);
             }
         }
 
@@ -112,8 +112,8 @@ namespace Z0
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
                 uint packed = vbits.pack32x8x1(bitseq);
-                for(var i=0; i< count; i++)
-                    Claim.eq(bs[i], (byte)Bit32.test(packed, i));
+                // for(byte i=0u; i< count; i++)
+                //     Claim.eq((byte)bs[i], (byte)bit.test(packed, i));
             }
         }
 

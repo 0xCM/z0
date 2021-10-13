@@ -566,7 +566,7 @@ namespace Z0
             var s2 = random.Stream(Intervals.closed(mincells, maxcells)).GetEnumerator();
             var s3 = random.Stream<byte>(Intervals.closed((byte)0, (byte)width<T>())).GetEnumerator();
             while(true && s2.MoveNext() && s3.MoveNext())
-                yield return BitPos.FromCellIndex<T>(s2.Current, s3.Current);
+                yield return bit.bitpos<T>(s2.Current, s3.Current);
         }
 
         /// <summary>
@@ -576,12 +576,12 @@ namespace Z0
         /// <param name="mincells">The minimum number of cells</param>
         /// <param name="maxcells">The maximum number of cells</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static IEnumerable<BitPos32> BitPositions(this IDomainSource random, byte capacity, ushort mincells, ushort maxcells)
+        public static IEnumerable<BitPos> BitPositions(this IDomainSource random, byte capacity, ushort mincells, ushort maxcells)
         {
             var s2 = random.Stream(Intervals.closed(mincells,maxcells)).GetEnumerator();
             var s3 = random.Stream<byte>(Intervals.closed((byte)0, capacity)).GetEnumerator();
             while(true && s2.MoveNext() && s3.MoveNext())
-                yield return BitPos.FromCellIndex(capacity, s2.Current, s3.Current);
+                yield return bit.bitpos(capacity, s2.Current, s3.Current);
         }
 
         /// <summary>

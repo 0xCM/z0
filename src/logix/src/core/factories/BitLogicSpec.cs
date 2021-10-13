@@ -285,7 +285,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
         public static BinaryLogicOpExpr left(ILogicExpr a, ILogicExpr b)
-            => binary(LProject, a, b);
+            => binary(Left, a, b);
 
         /// <summary>
         /// Defines a logical Xor operator over typed expression operands
@@ -295,7 +295,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BinaryLogicOpExpr<T> left<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(LProject, a, b);
+                => binary(Left, a, b);
 
         /// <summary>
         /// Defines a left projection over literal operands
@@ -304,7 +304,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
         public static BinaryLogicOpExpr left(bit a, bit b)
-            => binary(LProject, a, b);
+            => binary(Left, a, b);
 
         /// <summary>
         /// Defines a left projection operator over typed literal operands
@@ -314,7 +314,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         static BinaryLogicOpExpr<T> left<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(LProject, a, b);
+                => binary<T>(Left, a, b);
 
         /// <summary>
         /// Defines a right projection operator over expression operands
@@ -323,7 +323,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
         public static BinaryLogicOpExpr right(ILogicExpr a, ILogicExpr b)
-            => binary(RProject, a, b);
+            => binary(Right, a, b);
 
         /// <summary>
         /// Defines a right projection over literal operands
@@ -332,7 +332,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
         public static BinaryLogicOpExpr right(bit a, bit b)
-            => binary(RProject, a, b);
+            => binary(Right, a, b);
 
         /// <summary>
         /// Defines a right projection operator over typed expression operands
@@ -342,7 +342,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BinaryLogicOpExpr<T> right<T>(ILogicExpr<T> a, ILogicExpr<T> b)
             where T : unmanaged
-                => binary(RProject, a, b);
+                => binary(Right, a, b);
 
         /// <summary>
         /// Defines a right projection operator over typed literal operands
@@ -352,7 +352,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         static BinaryLogicOpExpr<T> right<T>(bit a, bit b)
             where T : unmanaged
-                => binary<T>(RProject, a, b);
+                => binary<T>(Right, a, b);
 
         /// <summary>
         /// Defines a left negation operator over expression operands

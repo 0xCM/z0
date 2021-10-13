@@ -15,8 +15,8 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op]
-        public static CircularBits bitstack(ulong state)
-            => CircularBits.create(state);
+        public static BitCircles bitstack(ulong state)
+            => BitCircles.create(state);
 
         /// <summary>
         /// Wraps a bitview around a generic reference

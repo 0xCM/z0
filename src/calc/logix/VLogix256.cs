@@ -115,8 +115,8 @@ namespace Z0
                 case BLK.Nor: return vnor(a,b);
                 case BLK.Xor: return vxor(a,b);
                 case BLK.Xnor: return vxnor(a,b);
-                case BLK.LProject: return vleft(a,b);
-                case BLK.RProject: return vright(a,b);
+                case BLK.Left: return vleft(a,b);
+                case BLK.Right: return vright(a,b);
                 case BLK.LNot: return vlnot(a,b);
                 case BLK.RNot: return vrnot(a,b);
                 case BLK.Impl: return vimpl(a,b);
@@ -158,8 +158,8 @@ namespace Z0
                 case BLK.Nor: return vnor;
                 case BLK.Xor: return vxor;
                 case BLK.Xnor: return vxnor;
-                case BLK.LProject: return vleft;
-                case BLK.RProject: return vright;
+                case BLK.Left: return vleft;
+                case BLK.Right: return vright;
                 case BLK.LNot: return vlnot;
                 case BLK.RNot: return vrnot;
                 case BLK.Impl: return vimpl;

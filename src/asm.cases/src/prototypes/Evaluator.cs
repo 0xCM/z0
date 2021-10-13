@@ -35,13 +35,13 @@ namespace Z0.Asm
                     case CNonImpl:
                         seek(dst,i) = math.cnonimpl(a,b);
                         break;
-                    case LProject:
+                    case Left:
                         seek(dst,i) = math.left(a,b);
                         break;
                     case NonImpl:
                         seek(dst,i) = math.nonimpl(a,b);
                         break;
-                    case RProject:
+                    case Right:
                         seek(dst,i) = math.right(a,b);
                         break;
                     case Xor:
@@ -89,11 +89,11 @@ namespace Z0.Asm
                         return skip(f,1)(a,b);
                     case CNonImpl:
                         return skip(f,2)(a,b);
-                    case LProject:
+                    case Left:
                         return skip(f,3)(a,b);
                     case NonImpl:
                         return skip(f,4)(a,b);
-                    case RProject:
+                    case Right:
                         return skip(f,5)(a,b);
                     case Xor:
                         return skip(f,6)(a,b);
@@ -135,11 +135,11 @@ namespace Z0.Asm
                         return and(a,b);
                     case CNonImpl:
                         return cnonimpl(a,b);
-                    case LProject:
+                    case Left:
                         return left(a,b);
                     case NonImpl:
                         return nonimpl(a,b);
-                    case RProject:
+                    case Right:
                         return right(a,b);
                     case Xor:
                         return xor(a,b);
@@ -177,11 +177,11 @@ namespace Z0.Asm
                         return and(a,b);
                     case CNonImpl:
                         return cnonimpl(a,b);
-                    case LProject:
+                    case Left:
                         return left(a,b);
                     case NonImpl:
                         return nonimpl(a,b);
-                    case RProject:
+                    case Right:
                         return right(a,b);
                     case Xor:
                         return xor(a,b);
@@ -219,11 +219,11 @@ namespace Z0.Asm
                         return and(a,b);
                     case CNonImpl:
                         return cnonimpl(a,b);
-                    case LProject:
+                    case Left:
                         return left(a,b);
                     case NonImpl:
                         return nonimpl(a,b);
-                    case RProject:
+                    case Right:
                         return right(a,b);
                     case Xor:
                         return xor(a,b);
@@ -261,11 +261,11 @@ namespace Z0.Asm
                         return and(a,b);
                     case CNonImpl:
                         return cnonimpl(a,b);
-                    case LProject:
+                    case Left:
                         return left(a,b);
                     case NonImpl:
                         return nonimpl(a,b);
-                    case RProject:
+                    case Right:
                         return right(a,b);
                     case Xor:
                         return xor(a,b);
@@ -303,11 +303,11 @@ namespace Z0.Asm
                         return and(a,b);
                     case CNonImpl:
                         return cnonimpl(a,b);
-                    case LProject:
+                    case Left:
                         return left(a,b);
                     case NonImpl:
                         return nonimpl(a,b);
-                    case RProject:
+                    case Right:
                         return right(a,b);
                     case Xor:
                         return xor(a,b);
@@ -345,11 +345,11 @@ namespace Z0.Asm
                         return and(a,b);
                     case CNonImpl:
                         return cnonimpl(a,b);
-                    case LProject:
+                    case Left:
                         return left(a,b);
                     case NonImpl:
                         return nonimpl(a,b);
-                    case RProject:
+                    case Right:
                         return right(a,b);
                     case Xor:
                         return xor(a,b);
@@ -387,11 +387,11 @@ namespace Z0.Asm
                         return and(a,b);
                     case CNonImpl:
                         return cnonimpl(a,b);
-                    case LProject:
+                    case Left:
                         return left(a,b);
                     case NonImpl:
                         return nonimpl(a,b);
-                    case RProject:
+                    case Right:
                         return right(a,b);
                     case Xor:
                         return xor(a,b);
@@ -429,11 +429,11 @@ namespace Z0.Asm
                         return and(a,b);
                     case CNonImpl:
                         return cnonimpl(a,b);
-                    case LProject:
+                    case Left:
                         return left(a,b);
                     case NonImpl:
                         return nonimpl(a,b);
-                    case RProject:
+                    case Right:
                         return right(a,b);
                     case Xor:
                         return xor(a,b);

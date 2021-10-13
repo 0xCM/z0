@@ -30,8 +30,8 @@ namespace Z0
                 case BLK.Nor: return BitVector.nor;
                 case BLK.Xor: return BitVector.xor;
                 case BLK.Xnor: return BitVector.xnor;
-                case BLK.LProject: return BitVector.left;
-                case BLK.RProject: return BitVector.right;
+                case BLK.Left: return BitVector.left;
+                case BLK.Right: return BitVector.right;
                 case BLK.LNot: return BitVector.lnot;
                 case BLK.RNot: return BitVector.rnot;
                 case BLK.Impl: return BitVector.impl;
@@ -56,8 +56,8 @@ namespace Z0
                 case BLK.Nor: return BitVector.nor(x,y);
                 case BLK.Xor: return BitVector.xor(x,y);
                 case BLK.Xnor: return BitVector.xnor(x,y);
-                case BLK.LProject: return BitVector.left(x,y);
-                case BLK.RProject: return BitVector.right(x,y);
+                case BLK.Left: return BitVector.left(x,y);
+                case BLK.Right: return BitVector.right(x,y);
                 case BLK.LNot: return BitVector.lnot(x,y);
                 case BLK.RNot: return BitVector.rnot(x,y);
                 case BLK.Impl: return BitVector.impl(x,y);
@@ -82,8 +82,8 @@ namespace Z0
                 case BLK.Nor: return nor(x,y);
                 case BLK.Xor: return xor(x,y);
                 case BLK.Xnor: return xnor(x,y);
-                case BLK.LProject: return x;
-                case BLK.RProject: return y;
+                case BLK.Left: return x;
+                case BLK.Right: return y;
                 case BLK.LNot: return lnot(x,y);
                 case BLK.RNot: return rnot(x,y);
                 case BLK.Impl: return impl(x,y);
