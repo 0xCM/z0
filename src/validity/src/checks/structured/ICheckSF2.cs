@@ -24,10 +24,10 @@ namespace Z0
             var clock = Time.counter(false);
 
             T0 next_x()
-                => ExcludeZero ? Source.NonZ<T0>() : Source.Next<T0>();
+                => ExcludeZero ? Source().NonZ<T0>() : Source().Next<T0>();
 
             T1 next_y()
-                => ExcludeZero ? Source.NonZ<T1>() : Source.Next<T1>();
+                => ExcludeZero ? Source().NonZ<T1>() : Source().Next<T1>();
 
             clock.Start();
             try

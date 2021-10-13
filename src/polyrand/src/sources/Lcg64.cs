@@ -11,7 +11,8 @@ namespace Z0
 
     using api = Lcg64Ops;
 
-    public struct Lcg64 : ISource<ulong>
+    [Rng(nameof(Lcg64))]
+    public struct Lcg64 : IRng<ulong>
     {
         internal readonly ulong Mul;
 
@@ -42,5 +43,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public ulong Next()
             => api.next(this);
+
+        public Label Name => nameof(Lcg64);
+
     }
 }

@@ -10,14 +10,15 @@ namespace Z0
     using static Root;
     using static core;
 
-    using G = XOrShift256;
+    using G = XorShift256;
 
     /// <summary>
     /// Defines pseudorandom number generator
     /// </summary>
     /// <remarks> Core algorithm taken from http://xoshiro.di.unimi.it/xoshiro256starstar.c</remarks>
     [ApiHost]
-    public struct XOrShift256 : IDomainRng<XOrShift256,ulong>
+    [Rng(nameof(XorShift256))]
+    public struct XorShift256 : IDomainRng<XorShift256,ulong>
     {
         ulong S0;
 
@@ -82,7 +83,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal XOrShift256(ReadOnlySpan<ulong> seed)
+        internal XorShift256(ReadOnlySpan<ulong> seed)
         {
             S0 = skip(seed, 0);
             S1 = skip(seed, 1);
@@ -95,8 +96,8 @@ namespace Z0
         public ulong Next()
             => next(ref this);
 
-        public RngKind RngKind
-            => RngKind.XOrShift256;
+        public Label Name
+            => nameof(XorShift256);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
@@ -109,12 +110,12 @@ namespace Z0
         /* When supplied to the jump function, it is equivalent
         to 2^128 calls to next(); it can be used to generate 2^128
         non-overlapping subsequences for parallel computations. */
-        static ulong[] J128 => new ulong[]{0x180ec6d33cfd0aba, 0xd5a61266f0c9392c, 0xa9582618e03fc9aa, 0x39abdc4529b1661c};
+        static ulong[] J128 {get;} = new ulong[]{0x180ec6d33cfd0aba, 0xd5a61266f0c9392c, 0xa9582618e03fc9aa, 0x39abdc4529b1661c};
 
         /* When supplied ot the jump function, t is equivalent to
         2^192 calls to next(); it can be used to generate 2^64 starting points,
         from each of which jump() will generate 2^64 non-overlapping
         subsequences for parallel distributed computations. */
-        static ulong[] J192 => new ulong[]{0x76e15d3efefdcbbf, 0xc5004e441c522fb3, 0x77710069854ee241, 0x39109bb02acbe635};
+        static ulong[] J192 {get;} = new ulong[]{0x76e15d3efefdcbbf, 0xc5004e441c522fb3, 0x77710069854ee241, 0x39109bb02acbe635};
     }
 }

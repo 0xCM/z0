@@ -16,7 +16,7 @@ namespace Z0.Asm
             => new AsmOffsetLabel(width, value);
 
         [MethodImpl(Inline), Op]
-        public static AsmLabel label(in CharBlock32 name)
+        public static AsmLabel label(TextBlock name)
             => new AsmLabel(name);
     }
 }

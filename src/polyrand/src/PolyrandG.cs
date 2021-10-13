@@ -12,10 +12,13 @@ namespace Z0
 
     using api = PolyOps;
 
-    public struct PolyG<G> : IDomainSource
-        where G : struct, IDomainRng<G,ulong>
+    public struct PolyG<G> : IRngAdapter, IDomainSource
+        where G : struct, IRng, IDomainRng<G,ulong>
     {
         internal G Source;
+
+        IRng IRngAdapter.Source
+            => Source;
 
         [MethodImpl(Inline)]
         public PolyG(G g)

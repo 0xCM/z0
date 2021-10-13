@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static core;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
@@ -31,22 +27,6 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive max value</param>
         T Next(T min, T max);
-
-        /// <summary>
-        /// Fills the span, from stem-to-stern with <typeparamref name='T'/> cells from the reifying source constrained to a specified domain
-        /// </summary>
-        /// <param name="domain">The source domain</param>
-        /// <param name="dst">The target spen</param>
-        void Fill(ClosedInterval<T> domain, Span<T> dst)
-        {
-            var count = dst.Length;
-            if(count != 0)
-            {
-                ref var target = ref first(dst);
-                for(var i=0; i<count; i++)
-                    seek(target,i) = Next(domain.Min, domain.Max);
-            }
-        }
     }
 
     /// <summary>

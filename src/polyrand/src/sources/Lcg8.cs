@@ -11,7 +11,8 @@ namespace Z0
 
     using api = Lcg8Ops;
 
-    public struct Lcg8 : ISource<byte>
+    [Rng(nameof(Lcg8))]
+    public struct Lcg8 : IRng<byte>
     {
         internal readonly byte Mul;
 
@@ -43,5 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public byte Next()
             => api.next(this);
+
+        public Label Name => nameof(Lcg8);
     }
 }

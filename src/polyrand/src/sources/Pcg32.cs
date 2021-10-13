@@ -11,6 +11,7 @@ namespace Z0
 
     using api = Pcg;
 
+    [Rng(nameof(Pcg32))]
     public struct Pcg32 : IRngNav<uint>, IDomainRng<Pcg32,ulong>
     {
         [MethodImpl(Inline)]
@@ -31,8 +32,7 @@ namespace Z0
 
         internal ulong Index;
 
-        public RngKind RngKind
-            => RngKind.Pcg32;
+        public Label Name => nameof(Pcg32);
 
         [MethodImpl(Inline)]
         public uint Next()

@@ -11,10 +11,10 @@ namespace Z0.Asm
 
     public readonly struct AsmLabel
     {
-        public CharBlock32 Name {get;}
+        public TextBlock Name {get;}
 
         [MethodImpl(Inline)]
-        public AsmLabel(in CharBlock32 name)
+        public AsmLabel(TextBlock name)
         {
             Name = name;
         }

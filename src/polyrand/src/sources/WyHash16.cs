@@ -15,6 +15,7 @@ namespace Z0
     /// Implements a 16-bit random number generator
     /// </summary>
     /// <remarks>Algorithms take from https://lemire.me/blog/2019/07/03/a-fast-16-bit-random-number-generator/</remarks>
+    [Rng(nameof(WyHash16))]
     public struct WyHash16 : IDomainRng<WyHash16,ushort>
     {
         [MethodImpl(Inline), Op]
@@ -39,8 +40,7 @@ namespace Z0
 
         readonly ushort Index;
 
-        public RngKind RngKind
-            => RngKind.WyHash16;
+        public Label Name => nameof(WyHash16);
 
         [MethodImpl(Inline)]
         public ushort Next()

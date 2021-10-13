@@ -11,7 +11,8 @@ namespace Z0
 
     using api = LcgOps;
 
-    public struct Lcg<T>
+    [Rng("Lcg<{0}>")]
+    public struct Lcg<T> : IRng<T>
         where T : unmanaged
     {
         internal readonly T Mul;
@@ -40,5 +41,11 @@ namespace Z0
             Min = api.min(this);
             Max = api.max(this);
         }
+
+        public Label Name => "Lcg<{0}>";
+
+        [MethodImpl(Inline)]
+        public T Next()
+            => api.next(this);
     }
 }

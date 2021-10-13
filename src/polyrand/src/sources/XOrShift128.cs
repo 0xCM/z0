@@ -10,13 +10,14 @@ namespace Z0
     using static Root;
     using static core;
 
-    using G = XOrShift128;
+    using G = XorShift128;
 
     /// <summary>
     /// Defines pseudorandom number generator
     /// </summary>
-    //[ApiHost]
-    public struct XOrShift128 : ISource<uint>
+    [ApiHost]
+    [Rng(nameof(XorShift128))]
+    public struct XorShift128 : ISource<uint>
     {
         uint A;
 
@@ -27,7 +28,7 @@ namespace Z0
         uint D;
 
         [MethodImpl(Inline)]
-        public XOrShift128(uint a, uint b, uint c, uint d)
+        public XorShift128(uint a, uint b, uint c, uint d)
         {
             A = a;
             B = b;
@@ -36,7 +37,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public XOrShift128(ReadOnlySpan<uint> state)
+        public XorShift128(ReadOnlySpan<uint> state)
         {
             A = skip(state,0);
             B = skip(state,1);
@@ -44,8 +45,8 @@ namespace Z0
             D = skip(state,3);
         }
 
-        public RngKind RngKind
-            => RngKind.XOrShift128;
+        public Label Name
+            => nameof(XorShift128);
 
         [MethodImpl(Inline), Op]
         public static uint next(ref G g)

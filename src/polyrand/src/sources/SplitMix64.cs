@@ -16,7 +16,7 @@ namespace Z0
     /// Implements a 64-bit random number generator
     /// </summary>
     /// <remarks>Algorithms take from https://github.com/lemire/testingRNG/blob/master/source/splitmix64.h</remarks>
-    [ApiHost]
+    [ApiHost, Rng(nameof(SplitMix64))]
     public struct SplitMix64 : IDomainRng<SplitMix64,ulong>
     {
         ulong State;
@@ -25,8 +25,7 @@ namespace Z0
         internal SplitMix64(ulong state)
             => State = state;
 
-        public RngKind RngKind
-            => RngKind.SplitMix64;
+        public Label Name => nameof(SplitMix64);
 
         [MethodImpl(Inline)]
         public ulong Next()

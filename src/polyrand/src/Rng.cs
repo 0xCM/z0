@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="seed">The initial state</param>
         [MethodImpl(Inline), Op]
         public static IPolyrand xorStars256(ulong[] seed = null)
-            => create(XOrShift256.create(seed ?? PolySeed256.Default));
+            => create(XorShift256.create(seed ?? PolySeed256.Default));
 
         /// <summary>
         /// Creates an XOrShift 1024 rng
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="seed">The initial state</param>
         [MethodImpl(Inline), Op]
         public static IPolyrand xorShift1024(ulong[] seed = null)
-            => create(new XOrShift1024(seed ?? PolySeed1024.Default));
+            => create(new XorShift1024(seed ?? PolySeed1024.Default));
 
         [MethodImpl(Inline), Op]
         public static IPolyrand create(IDomainRng<ulong> src)

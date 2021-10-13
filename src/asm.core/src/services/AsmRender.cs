@@ -205,7 +205,7 @@ namespace Z0.Asm
             seek(dst, i++) = asm.comment(CommentMarker, string.Concat(nameof(src.CodeBlock.BaseAddress), RP.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
             seek(dst, i++) = asm.comment(CommentMarker, string.Concat(nameof(src.TermCode), RP.spaced(Chars.Eq), src.TermCode.ToString()));
             seek(dst, i++) = PageBreak;
-            seek(dst, i++) = format(asm.label(src.Uri.OpId.Name));
+            seek(dst, i++) = asm.comment(src.Uri.OpId.Name);
             return i;
         }
 

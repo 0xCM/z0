@@ -11,12 +11,15 @@ namespace Z0
     /// of any numeric type among: sbyte, byte, short, ushort, int, uint, long, ulong, float, double
     /// </summary>
     [Free]
-    public interface IPolyrand : IPolySource
+    public interface IPolyrand : IRng, IPolySource
     {
         /// <summary>
         /// Retrieves the random stream navigator, if supported
         /// </summary>
         Option<IRngNav> Navigator {get;}
+
+        Label IRng.Name
+            => "Polyrand";
     }
 
     /// <summary>
@@ -28,7 +31,7 @@ namespace Z0
     {
         IPolyrand Random {get;}
 
-        IPolyrand ISourceProvider<IPolyrand>.Source
+        IPolyrand ISourceProvider<IPolyrand>.Source()
             => Random;
     }
 }

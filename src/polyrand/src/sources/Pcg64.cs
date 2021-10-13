@@ -14,6 +14,7 @@ namespace Z0
     /// <summary>
     /// Implements a 64-bit PCG generator
     /// </summary>
+    [Rng(nameof(Pcg64))]
     public struct Pcg64 : IRngNav<ulong>, IDomainRng<Pcg64,ulong>
     {
         internal const ulong Multiplier = Pcg.DefaultMultiplier;
@@ -27,8 +28,7 @@ namespace Z0
 
         internal ulong Index;
 
-        public RngKind RngKind
-            => RngKind.Pcg64;
+        public Label Name => nameof(Pcg64);
 
         [MethodImpl(Inline)]
         public ulong Next()

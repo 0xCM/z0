@@ -13,7 +13,6 @@ namespace Z0
     [ApiHost]
     public readonly struct PolyOps
     {
-
         [MethodImpl(Inline)]
         public static PolyG<G> poly<G>(in G g)
            where G : struct, IDomainRng<G,ulong>

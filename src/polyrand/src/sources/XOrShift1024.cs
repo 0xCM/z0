@@ -12,26 +12,27 @@ namespace Z0
     /// <remarks>
     /// Core algorithms taken from the paper: https://arxiv.org/pdf/1402.6246.pdf
     /// </remarks>
-    public class XOrShift1024 : IDomainRng<ulong>
+    [Rng(nameof(XorShift256))]
+    public class XorShift1024 : IDomainRng<ulong>
     {
         readonly ulong[] State;
 
         int P;
 
-        public XOrShift1024(ulong[] seed)
+        public XorShift1024(ulong[] seed)
         {
             Require.invariant(seed.Length >= 16, () => $"Not enough seed! 1024 bits = 128 bytes = 16 longs are required");
             State = seed;
         }
 
-        public XOrShift1024(Span<byte> seed)
+        public XorShift1024(Span<byte> seed)
         {
             Require.invariant(seed.Length >= 128, () => $"Not enough seed! 1024 bits = 128 bytes are required");
             State = recover<ulong>(seed).ToArray();
         }
 
-        public RngKind RngKind
-            => RngKind.XOrShift1024;
+        public Label Name
+            => nameof(XorShift1024);
 
         public void Jump()
         {
@@ -72,7 +73,7 @@ namespace Z0
         /// The jump table of predetermined constants to facilitate an efficient way
         /// to simulate calls to "Next()"
         /// </summary>
-        readonly static ulong[] JT = new ulong[]
+        ulong[] JT {get;} = new ulong[]
         {   0x84242f96eca9c41d, 0xa3c65b8776f96855, 0x5b34a39f070b5837,0x4489affce4f31a1e,
             0x2ffeeb0a48316f40, 0xdc2d9891fe68c022, 0x3659132bb12fea70, 0xaac17d8efa43cab8,
             0xc4cb815590989b13, 0x5ee975283d71c93b, 0x691548c86c1bd540, 0x7910c41d10a1e6a5,

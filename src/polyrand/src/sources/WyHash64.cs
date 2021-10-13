@@ -16,7 +16,8 @@ namespace Z0
     /// Implements a 64-bit random number generator
     /// </summary>
     /// <remarks>Core algorithm taken from https://github.com/lemire/testingRNG/blob/master/source/wyhash.h</remarks>
-    //[ApiHost]
+    [ApiHost]
+    [Rng(nameof(WyHash64))]
     public struct WyHash64 : IDomainRng<WyHash64,ulong>
     {
         [MethodImpl(Inline), Op]
@@ -105,8 +106,7 @@ namespace Z0
         public WyHash64(ulong state)
             => State = state;
 
-        public RngKind RngKind
-            => RngKind.WyHash64;
+        public Label Name => nameof(WyHash64);
 
         [MethodImpl(Inline)]
         public ulong Next()
