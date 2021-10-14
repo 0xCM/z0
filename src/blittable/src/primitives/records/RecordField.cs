@@ -30,23 +30,17 @@ namespace Z0
             public uint FieldOffset {get;}
 
             /// <summary>
-            /// The number of physical bits consumed by the field
-            /// </summary>
-            public byte StorageWidth {get;}
-
-            /// <summary>
             /// The number of semantic bits required by the field
             /// </summary>
             public byte ContentWidth {get;}
 
             [MethodImpl(Inline)]
-            public RecordField(text15 name, byte index, uint offset, byte wStore, byte wContent)
+            public RecordField(text15 name, byte index, uint offset, byte width)
             {
                 Name = name;
                 FieldIndex = index;
                 FieldOffset = offset;
-                StorageWidth = wStore;
-                ContentWidth = wContent;
+                ContentWidth = width;
             }
 
             /// <summary>
@@ -55,7 +49,7 @@ namespace Z0
             public uint LastBit
             {
                 [MethodImpl(Inline)]
-                get => FieldOffset + StorageWidth;
+                get => FieldOffset + ContentWidth;
             }
         }
     }

@@ -13,16 +13,19 @@ namespace Z0
     {
         public readonly struct RecordSchema
         {
+            public text15 Scope {get;}
+
             /// <summary>
             /// Specifies record type name
             /// </summary>
-            public Label EntityName {get;}
+            public text15 EntityName {get;}
 
             readonly Index<RecordField> _Fields;
 
             [MethodImpl(Inline)]
-            public RecordSchema(Label name, RecordField[] fields)
+            public RecordSchema(text15 scope, text15 name, RecordField[] fields)
             {
+                Scope = scope;
                 EntityName = name;
                 _Fields = fields;
             }

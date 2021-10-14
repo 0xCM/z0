@@ -392,16 +392,26 @@ namespace Z0
 
         void Run(N29 n)
         {
-            var dst = ByteBlock64.Empty;
-            //var buffer = alloc<BitOpCalc>(256);
-            var buffer = recover<BitOpCalc>(dst.Bytes);
-            var count = BitStates.compute(w1,buffer);
-            var formatter = BitOpFormatter.service();
+
+            var inputs = BinaryBitLogicOps.inputs(w1);
+            var eval = BinaryBitLogicOps.canonical(w1,inputs);
+            var count = inputs.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var result = ref skip(buffer,i);
-                Write(string.Format("{0:D2} | {1}", i, result.Format(BitOpFormatter.FormatOption.Bitstrings)));
+                ref readonly var input = ref skip(inputs,i);
+                ref readonly var result = ref skip(eval,i);
+                Write(string.Format("{0:D2} | {1}", i, result.Format(BinaryBitLogicOps.FormatOption.Bitstrings)));
             }
+
+            // var dst = ByteBlock64.Empty;
+            // var buffer = recover<BitOpCalc>(dst.Bytes);
+            // var count = BitStates.compute(w1,buffer);
+            // var formatter = BitOpFormatter.service();
+            // for(var i=0; i<count; i++)
+            // {
+            //     ref readonly var result = ref skip(buffer,i);
+            //     Write(string.Format("{0:D2} | {1}", i, result.Format(BitOpFormatter.FormatOption.Bitstrings)));
+            // }
 
         }
 
