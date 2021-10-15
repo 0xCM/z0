@@ -38,7 +38,7 @@ namespace Z0
             }
         }
 
-        void bm_identity_8x8u_check()
+        public void bm_identity_8x8u_check()
         {
             var m = BitMatrix8.Identity;
             for(byte i=0; i < m.Order; i++)
@@ -49,10 +49,10 @@ namespace Z0
             var lhs = BitMatrix8.Identity;
             var rhs = BitMatrix8.Identity;
             var result = lhs & rhs;
-            for(var row=0; row< result.Order; row++)
-            for(var col=0; col< result.Order; col++)
+            var order = result.Order;
+            for(var row=0; row<order; row++)
+            for(var col=0; col<order; col++)
                 Claim.eq(result[row,col], rhs[row,col]);
-
         }
 
         public void bm_identity_16x16u_check()

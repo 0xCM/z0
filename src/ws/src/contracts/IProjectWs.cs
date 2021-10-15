@@ -32,11 +32,11 @@ namespace Z0
             where T : struct
                 => Tables() +  TableFile<T>();
 
-        FS.FilePath IFileArchive.TablePath<T>(Subject scope)
+        FS.FilePath IFileArchive.TablePath<T>(string scope)
             where T : struct
                 => Subdir(scope) + TableFile<T>();
 
-        FS.FilePath IFileArchive.TablePath<T>(Subject scope, string suffix)
+        FS.FilePath IFileArchive.TablePath<T>(string scope, string suffix)
             where T : struct
                 => Subdir(scope) + TableFile<T>(suffix);
 

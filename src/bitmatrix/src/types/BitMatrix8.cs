@@ -14,9 +14,15 @@ namespace Z0
     /// Defines an 8x8 matrix of bits
     /// </summary>
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
-    public readonly ref struct BitMatrix8
+    public struct BitMatrix8
     {
-        internal readonly Span<byte> Data;
+        ulong Data;
+
+        [MethodImpl(Inline)]
+        public void Fill(byte src)
+        {
+            Data = cpu.broadcast(src,w64);
+        }
 
         /// <summary>
         /// The matrix order
@@ -40,16 +46,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix8(Span<byte> src)
-            => this.Data = src;
+            => Data = first64u(src);
 
         [MethodImpl(Inline)]
         internal BitMatrix8(ulong src)
-            => Data = bytes(src).Replicate();
+            => Data = src;
 
-        public ReadOnlySpan<byte> Bytes
+        public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => bytes(Data);
         }
 
         /// <summary>
@@ -58,7 +64,7 @@ namespace Z0
         public unsafe ref byte Head
         {
             [MethodImpl(Inline)]
-            get => ref first(Data);
+            get => ref seek(Bytes,0);
         }
 
         /// <summary>
@@ -120,7 +126,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix<byte>(BitMatrix8 src)
-            => BitMatrix.load(src.Data);
+            => BitMatrix.load<byte>(core.bytes(src));
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(BitMatrix8 src)
@@ -131,39 +137,39 @@ namespace Z0
             => new BitMatrix8(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator & (in BitMatrix8 A, in BitMatrix8 B)
+        public static BitMatrix8 operator & (BitMatrix8 A, BitMatrix8 B)
             =>  BitMatrix.and(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator | (in BitMatrix8 A, in BitMatrix8 B)
+        public static BitMatrix8 operator | (BitMatrix8 A, BitMatrix8 B)
             => BitMatrix.or(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator ^ (in BitMatrix8 A, in BitMatrix8 B)
+        public static BitMatrix8 operator ^ (BitMatrix8 A, BitMatrix8 B)
             => BitMatrixA.xor(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator ~ (in BitMatrix8 src)
+        public static BitMatrix8 operator ~ (BitMatrix8 src)
             => BitMatrix.not(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator - (in BitMatrix8 A, in BitMatrix8 B)
+        public static BitMatrix8 operator - (BitMatrix8 A, BitMatrix8 B)
             => BitMatrix.xornot(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator * (in BitMatrix8 A, in BitMatrix8 B)
+        public static BitMatrix8 operator * (BitMatrix8 A, BitMatrix8 B)
             => BitMatrix.mul(A,B);
 
         [MethodImpl(Inline)]
-        public static BitVector8 operator * (in BitMatrix8 A, in BitVector8 x)
+        public static BitVector8 operator * (BitMatrix8 A, BitVector8 x)
             => BitMatrix.mul(A,x);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitMatrix8 A, in BitMatrix8 B)
-            => A.Equals(B);
+        public static bit operator ==(BitMatrix8 A, BitMatrix8 B)
+            => BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitMatrix8 A, in BitMatrix8 B)
-            => !(A.Equals(B));
+        public static bit operator !=(BitMatrix8 A, BitMatrix8 B)
+            => !BitMatrix.same(A,B);
     }
 }

@@ -8,6 +8,9 @@ namespace Z0.Asm
 
     public readonly partial struct RegMachines
     {
+        public static Store8x64 regs(N8 n, W64 w)
+            => default;
+
         public static RegMachine intel64()
             => new RegMachine(RegBanks.intel64());
 

@@ -59,7 +59,7 @@ namespace Z0
         public static BitMatrix8 init(BitVector8 x)
         {
             var A = alloc(n8);
-            A.Data.Fill(x);
+            A.Fill(x);
             return A;
         }
 

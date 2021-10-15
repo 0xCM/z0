@@ -13,7 +13,7 @@ namespace Z0
     /// Defines a 64x64 matrix of bits
     /// </summary>
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
-    public readonly ref struct BitMatrix64
+    public ref struct BitMatrix64
     {
         internal readonly Span<ulong> Data;
 
@@ -27,9 +27,9 @@ namespace Z0
             => this.Data = src;
 
         [MethodImpl(Inline)]
-        internal BitMatrix64(Bit32 fill)
+        internal BitMatrix64(bit fill)
         {
-            this.Data = new ulong[N];
+            Data = new ulong[N];
             if(fill)
                 Data.Fill(ulong.MaxValue);
         }

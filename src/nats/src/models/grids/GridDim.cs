@@ -12,6 +12,8 @@ namespace Z0
     using static CharText;
     using static core;
 
+    using api = CellCalcs;
+
     /// <summary>
     /// Defines grid dimensions based on specification without parametrization
     /// </summary>
@@ -53,6 +55,10 @@ namespace Z0
             M = rows;
             N = cols;
         }
+
+        [MethodImpl(Inline)]
+        public uint Offset(uint row, uint col)
+            => api.offset(this, row, col);
 
         /// <summary>
         /// Formats the dimension in canonical form

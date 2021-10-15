@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static core;
 
@@ -19,7 +17,7 @@ namespace Z0
         /// <param name="rowlen">The number of bits in each row</param>
         /// <param name="maxbits">The maximum number of bits to format</param>
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
-        public static string grid(Span<byte> src, int rowlen, int? maxbits, bool showrow)
+        public static string grid(ReadOnlySpan<byte> src, int rowlen, int? maxbits, bool showrow)
         {
             var dst = render8x8(src);
             var sb = text.buffer();
@@ -46,6 +44,18 @@ namespace Z0
         /// <typeparam name="T">The primal cell type</typeparam>
         public static string grid<T>(Span<T> src, int rowlen, int? maxbits = null, bool showrow = false)
             where T : unmanaged
-                => grid(src.Bytes(),rowlen, maxbits, showrow);
+                => grid(src.Bytes().ReadOnly(), rowlen, maxbits, showrow);
+
+        /// <summary>
+        /// Formats the content of a generic span of primal cells as a bitmatrix
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="rowlen">The number of bits in each row</param>
+        /// <param name="maxbits">The maximum number of bits to format</param>
+        /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
+        public static string grid<T>(ReadOnlySpan<T> src, int rowlen, int? maxbits = null, bool showrow = false)
+            where T : unmanaged
+                => grid(src.Bytes(), rowlen, maxbits, showrow);
     }
 }

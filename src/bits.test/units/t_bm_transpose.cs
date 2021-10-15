@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public class t_bm_transpose : t_bits<t_bm_transpose>
     {
         void bm_transpose_8x8x8_v2()

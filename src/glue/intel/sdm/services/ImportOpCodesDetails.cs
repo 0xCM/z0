@@ -12,14 +12,16 @@ namespace Z0.Asm
 
     partial class IntelSdm
     {
-        public Index<SdmOpCodeDetail> ImportSdmOpCodes(FS.FolderPath dir)
+        public Index<SdmOpCodeDetail> ImportOpCodeDetails()
         {
             var result = Outcome.Success;
-            var src = Ws.Sources().Datasets(AsmTableScopes.SdmInstructions).Files(FS.Csv).ToReadOnlySpan();
-            return ImportSdmOpCodes(src,dir);
+            var dst =  Project().Subdir("imports");
+            var dir = Sources() + FS.folder("sdm.instructions");
+            var src = dir.Files(FS.Csv).ToReadOnlySpan();
+            return ImportOpCodesDetails(src,dst);
         }
 
-        public Index<SdmOpCodeDetail> ImportSdmOpCodes(ReadOnlySpan<FS.FilePath> src, FS.FolderPath dir)
+        public Index<SdmOpCodeDetail> ImportOpCodesDetails(ReadOnlySpan<FS.FilePath> src, FS.FolderPath dir)
         {
             var result = Outcome.Success;
             var count = src.Length;

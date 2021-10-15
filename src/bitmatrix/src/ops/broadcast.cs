@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly BitMatrix8 broadcast(BitVector8 x, in BitMatrix8 A)
         {
-            A.Data.Fill(x);
+            A.Fill(x);
             return ref A;
         }
 

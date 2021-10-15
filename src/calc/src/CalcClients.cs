@@ -14,6 +14,7 @@ namespace Z0
     [ApiHost]
     public readonly partial struct CalcClients
     {
+
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]

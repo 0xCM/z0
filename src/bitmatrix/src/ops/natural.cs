@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline), Op]
         public static BitMatrix<N8,byte> natural(in BitMatrix8 A)
-            => new BitMatrix<N8,byte>(A.Data);
+            => new BitMatrix<N8,byte>(A.Bytes.Replicate());
 
         /// <summary>
         /// Projects, without allocation, a primal bitmatrix onto a generic bitmatrix of natural order

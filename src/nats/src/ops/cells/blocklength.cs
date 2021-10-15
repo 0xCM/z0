@@ -83,15 +83,15 @@ namespace Z0
                 => 64/(int)size<T>();
 
         /// <summary>
-        /// Computes the number of T-cells that comprise an N-block
+        /// Computes the number of T-cells that comprise an W-width block
         /// </summary>
         /// <param name="w">The block width representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int blocklength<W,T>(W w = default, T t = default)
-            where W : unmanaged, ITypeNat
+            where W : unmanaged, IDataWidth
             where T : unmanaged
-                => (int)((NatCalc.div(w, default(N8)))/size<T>());
+                => (int)((NatCalc.wdiv(w, default(N8)))/size<T>());
     }
 }

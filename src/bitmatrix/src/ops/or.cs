@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial class BitMatrix
     {
@@ -40,30 +41,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
+        /// Computes the logical And between two source bitmatrices and returns the allocated result to the caller
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <param name="B">The target matrix</param>
-        [MethodImpl(Inline), Or]
-        public static ref BitMatrix8 or(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
-        {
-             vlogic.or(in A.Head, in B.Head, ref Z.Head);
-             return ref Z;
-        }
-
-        /// <summary>
-        /// Computes the converse implication for primal bitmatrices, returning the allocated result
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline), Or]
+        [MethodImpl(Inline), And]
         public static BitMatrix8 or(in BitMatrix8 A, in BitMatrix8 B)
-        {
-            var Z = BitMatrix.alloc(n8);
-            vlogic.or(in A.Head, in B.Head, ref Z.Head);
-            return Z;
-        }
+            => (BitMatrix8)(@u64(A) & u64(B));
 
         /// <summary>
         /// Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
@@ -126,7 +110,7 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static ref BitMatrix64 or(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            vlogic.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -139,7 +123,7 @@ namespace Z0
         public static BitMatrix64 or(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            vlogic.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(A.Head, B.Head, ref Z.Head);
             return Z;
         }
     }

@@ -9,8 +9,7 @@ namespace Z0
 
     using static Root;
 
-    [ApiHost]
-    public class Dimensions
+    partial struct Grids
     {
         /// <summary>
         /// Constructs an natural dimension of order 2
@@ -35,27 +34,7 @@ namespace Z0
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         public static GridDim<W,M,N,T> dim<W,M,N,T>(W w = default, M m = default, N n = default, T t = default)
-            where W : unmanaged, ITypeNat
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static GridTypeExpr<N64,N8,N8,T> expression<T>(T t = default)
-            where T : unmanaged
-                => expression(n64, n8,n8, t);
-
-        /// <summary>
-        /// Defines a parametrically-specified grid type expression
-        /// </summary>
-        /// <typeparam name="W">The block width type</typeparam>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The column count type</typeparam>
-        /// <typeparam name="T">The storage cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static GridTypeExpr<W,M,N,T> expression<W,M,N,T>(W w = default, M m = default, N n = default, T t = default)
-            where W : unmanaged, ITypeNat
+            where W : unmanaged, IDataWidth
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged

@@ -22,6 +22,15 @@ namespace Z0
                 => value(k1) / value(k2);
 
         /// <summary>
+        /// Computes k := k1 / k2
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static ulong wdiv<W,K2>(W w = default, K2 k2 = default)
+            where W : unmanaged, IDataWidth
+            where K2 : unmanaged, ITypeNat
+                => (ulong)Widths.data<W>() / value(k2);
+
+        /// <summary>
         /// Computes k := (k1*k2) / k3
         /// </summary>
         [MethodImpl(Inline)]

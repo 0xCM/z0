@@ -54,7 +54,14 @@ namespace Z0
 
         static ReadOnlySpan<byte> Identity8x8 => new byte[]
         {
-            1 << 0, 1 << 1, 1 << 2, 1 << 3, 1 << 4, 1 << 5, 1 << 6, 1 << 7
+            1 << 0,
+            1 << 1,
+            1 << 2,
+            1 << 3,
+            1 << 4,
+            1 << 5,
+            1 << 6,
+            1 << 7
         };
 
         static ReadOnlySpan<byte> Identity16x16 => new byte[]

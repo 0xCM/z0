@@ -14,7 +14,7 @@ namespace Z0
     /// Defines a 32x32 matrix of bits
     /// </summary>
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
-    public readonly ref struct BitMatrix32
+    public ref struct BitMatrix32
     {
         readonly Span<uint> Data;
 
@@ -25,10 +25,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix32(Span<uint> src)
-            => this.Data = src;
+            => Data = src;
 
         [MethodImpl(Inline)]
-        internal BitMatrix32(Bit32 fill)
+        internal BitMatrix32(bit fill)
         {
             this.Data = new uint[N];
             if(fill)

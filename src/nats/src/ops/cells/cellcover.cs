@@ -20,9 +20,9 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int cells<W,T>()
-            where W : unmanaged, ITypeNat
+            where W : unmanaged, IDataWidth
             where T : unmanaged
-                => (int)((NatCalc.div(default(W), default(N8)))/size<T>());
+                => (int)((NatCalc.wdiv(default(W), default(N8)))/size<T>());
 
         /// <summary>
         /// Computes the minimum number of 8-bit blocks required to cover a specified number of cells
@@ -142,7 +142,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int cellcover<W,M,N,T>(W w = default, M m = default, N n = default, T t = default)
-            where W : unmanaged, ITypeNat
+            where W : unmanaged, IDataWidth
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged

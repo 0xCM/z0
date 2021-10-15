@@ -9,18 +9,21 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        IProjectWs IntelDocs()
+            => Ws.Project("intel.docs");
+
         [CmdOp(".sdm-import")]
         Outcome SdmImport(CmdArgs args)
         {
+            var project = IntelDocs();
             var result = Outcome.Success;
-            var dir = Ws.Tables().Subdir(machine);
-            var details = Sdm.ImportSdmOpCodes(Ws.Tables().Subdir(machine));
-            var forms = Sdm.EmitForms(details, dir);
+            var details = Sdm.ImportOpCodeDetails();
+            var forms = Sdm.EmitForms(details);
             Sdm.EmitOpCodeStrings(details);
 
             var opcodes = SdmModels.opcodes(details).View;
             var count = opcodes.Length;
-            var dst = dir + FS.file("sdm.opcodes", FS.Txt);
+            var dst = project.Subdir(imports) + FS.file("sdm.opcodes", FS.Txt);
             using var writer = dst.AsciWriter();
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(opcodes,i).Format());

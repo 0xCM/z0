@@ -45,60 +45,19 @@ namespace Z0
             => Empty.Replicate();
 
         /// <summary>
-        /// Implicitly converts the source to an unsized permutation
-        /// </summary>
-        /// <param name="f">The permutation to convert</param>
-        [MethodImpl(Inline)]
-        public static implicit operator Permute(NatPerm<N> f)
-            => f.perm;
-
-        /// <summary>
-        /// Computes the composition h of f and g where h(i) = g(f(i)) for i = 0, ... n
-        /// </summary>
-        /// <param name="f">The left permutation</param>
-        /// <param name="g">The right permutation</param>
-        [MethodImpl(Inline)]
-        public static NatPerm<N> operator *(NatPerm<N> f, NatPerm<N> g)
-            => f.Compose(g);
-
-        /// <summary>
-        /// Computes the inverse of f
-        /// </summary>
-        /// <param name="f">The source permutation</param>
-        [MethodImpl(Inline)]
-        public static NatPerm<N> operator ~(NatPerm<N> f)
-            => f.Invert();
-
-        [MethodImpl(Inline)]
-        public static NatPerm<N> operator ++(in NatPerm<N> lhs)
-            => lhs.Inc();
-
-        [MethodImpl(Inline)]
-        public static NatPerm<N> operator --(in NatPerm<N> lhs)
-            => lhs.Dec();
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(NatPerm<N> f, NatPerm<N> g)
-            => f.Equals(g);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(NatPerm<N> f, NatPerm<N> g)
-            => !f.Equals(g);
-
-        /// <summary>
         /// Initializes a permutation with the identity followed by a sequence of transpostions
         /// </summary>
         /// <param name="swaps">The transpositions to apply to the identity</param>
         [MethodImpl(Inline)]
         public NatPerm(NatSwap<N>[] swaps)
         {
-            this.perm = new Permute(n, swaps.Unsized());
+            perm = new Permute(n, swaps.Unsized());
         }
 
         [MethodImpl(Inline)]
-        NatPerm(Permute src)
+        internal NatPerm(Permute src)
         {
-            this.perm = src;
+            perm = src;
         }
 
         /// <summary>
@@ -206,7 +165,6 @@ namespace Z0
             return p;
         }
 
-
         /// <summary>
         /// Reverses the permutation in-place
         /// </summary>
@@ -283,5 +241,46 @@ namespace Z0
 
          public override bool Equals(object o)
             => o is NatPerm<N> p  && p.perm.Equals(perm);
+
+        /// <summary>
+        /// Implicitly converts the source to an unsized permutation
+        /// </summary>
+        /// <param name="f">The permutation to convert</param>
+        [MethodImpl(Inline)]
+        public static implicit operator Permute(NatPerm<N> f)
+            => f.perm;
+
+        /// <summary>
+        /// Computes the composition h of f and g where h(i) = g(f(i)) for i = 0, ... n
+        /// </summary>
+        /// <param name="f">The left permutation</param>
+        /// <param name="g">The right permutation</param>
+        [MethodImpl(Inline)]
+        public static NatPerm<N> operator *(NatPerm<N> f, NatPerm<N> g)
+            => f.Compose(g);
+
+        /// <summary>
+        /// Computes the inverse of f
+        /// </summary>
+        /// <param name="f">The source permutation</param>
+        [MethodImpl(Inline)]
+        public static NatPerm<N> operator ~(NatPerm<N> f)
+            => f.Invert();
+
+        [MethodImpl(Inline)]
+        public static NatPerm<N> operator ++(in NatPerm<N> lhs)
+            => lhs.Inc();
+
+        [MethodImpl(Inline)]
+        public static NatPerm<N> operator --(in NatPerm<N> lhs)
+            => lhs.Dec();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(NatPerm<N> f, NatPerm<N> g)
+            => f.Equals(g);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(NatPerm<N> f, NatPerm<N> g)
+            => !f.Equals(g);
     }
 }

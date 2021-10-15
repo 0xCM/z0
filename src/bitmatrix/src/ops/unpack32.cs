@@ -35,7 +35,7 @@ namespace Z0
         public static ref readonly Matrix<N8,T> unpack32<T>(in BitMatrix8 src, in Matrix<N8,T> dst)
             where T : unmanaged
         {
-            gpack.unpack32(src.Data, dst.Data.AsSpan());
+            gpack.unpack32(src.Bytes, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -168,7 +168,7 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         public static ref readonly Matrix<N8,Bit32> unpack32(in BitMatrix8 A, in Matrix<N8,Bit32> Z)
         {
-            gpack.unpack32(A.Data, Z.Data);
+            gpack.unpack32(A.Bytes, Z.Data);
             return ref Z;
         }
 

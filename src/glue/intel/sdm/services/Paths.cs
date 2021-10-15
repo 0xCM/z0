@@ -8,6 +8,12 @@ namespace Z0.Asm
 
     partial class IntelSdm
     {
+        IProjectWs Project()
+            => Ws.Project("intel.docs");
+
+        FS.FolderPath Sources()
+            => Project().Subdir("sources");
+
         public FS.FolderPath IntelSources()
             => Ws.Sources().Datasets("intel.pubs");
 
@@ -24,7 +30,7 @@ namespace Z0.Asm
             => ImportDir() + FS.file("sdm.toc", FS.Txt);
 
         public FS.FilePath ProcessLog(string name)
-            => ImportLogs() + FS.file(name, FS.Log);
+            => LogDir() + FS.file(name, FS.Log);
 
         public SortedSpan<FS.FilePath> TocPaths()
             => ImportDir().AllFiles.Where(f => IsTocPart(f)).Array().ToSortedSpan();
@@ -32,20 +38,23 @@ namespace Z0.Asm
         public FS.FilePath TocEntryTable()
             => ImportDir() + FS.file(TableId.identify<TocEntry>().Format(), FS.Csv);
 
-        FS.FolderPath ImportLogs()
-            => Imports().Subdir("intel.sdm.logs");
+        FS.FolderPath LogDir()
+            => Project().Out() + FS.folder("intel.sdm.logs");
 
         IWorkspace Imports()
             => Ws.Imports();
 
         FS.FolderPath ImportDir()
-            => Imports().Subdir("intel.sdm");
+            => Project().Subdir("imports");
+
+        FS.FolderPath SettingsDir()
+            => Project().Subdir("settings");
 
         FS.FilePath CharMapPath()
-            => Ws.Sources().Settings("sdm.charmap", FS.Config);
+            => SettingsDir() + FS.file("sdm.charmap", FS.Config);
 
         FS.FilePath UnmappedCharLog()
-            => ImportLogs() + FS.file("unmapped", FS.Log);
+            => LogDir() + FS.file("unmapped", FS.Log);
 
         FS.FilePath SplitSpecs()
             => Ws.Sources().Settings("sdm.splits", FS.Csv);

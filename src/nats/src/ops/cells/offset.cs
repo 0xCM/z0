@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial struct CellCalcs
     {
@@ -30,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint offset<T>(GridDim<T> dim, uint row, uint col)
             where T : unmanaged
-                => offset(core.uint32(dim.ColCount), row, col);
+                => offset(uint32(dim.ColCount), row, col);
 
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate
@@ -59,8 +60,7 @@ namespace Z0
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline), Op]
         public static uint offset(GridDim dim, uint row, uint col)
-            => offset(dim, (row,col));
-
+            => dim.N*row + col;
 
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate and natural column width

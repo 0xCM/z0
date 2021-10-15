@@ -18,11 +18,11 @@ namespace Z0.Asm
             return svc.ReadCsvTables(src);
         }
 
-        public Index<AsmForm> EmitForms(ReadOnlySpan<SdmOpCodeDetail> opcodes, FS.FolderPath dir)
+        public Index<AsmForm> EmitForms(ReadOnlySpan<SdmOpCodeDetail> opcodes)
         {
             const string Pattern = "{0,-16} | {1,-64} | {2}";
             const string OpSep = ", ";
-            var dst = dir + FS.file("asm.forms", FS.Csv);
+            var dst = Project().Subdir("imports") + FS.file("asm.forms", FS.Csv);
             using var writer = dst.UnicodeWriter();
             var _forms = asm.forms(opcodes);
             var count = _forms.Length;

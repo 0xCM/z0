@@ -9,12 +9,12 @@ namespace Z0.Asm
 
     partial class IntelSdm
     {
-        public Outcome<Index<SdmOpCodeDetail>> LoadImportedOpCodes()
+        public Outcome<Index<SdmOpCodeDetail>> LoadOpCodeDetails()
         {
             var result = Outcome.Success;
             var dst = sys.empty<SdmOpCodeDetail>();
-            var path = Ws.Tables().TablePath<SdmOpCodeDetail>();
-            var lines = path.ReadLines(TextEncodingKind.Unicode).View;
+            var src = Project().Subdir("imports") + Tables.filename<SdmOpCodeDetail>();
+            var lines = src.ReadLines(TextEncodingKind.Unicode).View;
             result = TextGrids.load(lines, out var grid);
             if(result.Fail)
                 return result;

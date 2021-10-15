@@ -26,19 +26,14 @@ namespace Z0
             return ref A;
         }
 
-        /// <summary>
-        /// Permutes the rows of a matrix in-place according to a permutation
-        /// </summary>
-        /// <param name="perm">The permutation to apply</param>
-        /// <param name="A">The matrix to be permuted</param>
-        [Op]
-        public static ref readonly BitMatrix8 permute(in NatPerm<N8> perm, in BitMatrix8 A)
-        {
-            for(var row = 0; row < perm.Length; row++)
-                if(perm[row] != row)
-                    A.RowSwap(row, perm[row]);
-            return ref A;
-        }
+        // [Op]
+        // public static ref readonly BitMatrix8 permute(in NatPerm<N8> perm, in BitMatrix8 A)
+        // {
+        //     for(var row = 0; row < perm.Length; row++)
+        //         if(perm[row] != row)
+        //             A.RowSwap(row, perm[row]);
+        //     return ref A;
+        // }
 
         /// <summary>
         /// Permutes the rows of a matrix in-place according to a specified permutation

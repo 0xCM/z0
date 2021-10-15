@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     partial class BitMatrix
     {
@@ -71,11 +72,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline), And]
         public static BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B)
-        {
-            var Z = BitMatrix.alloc(n8);
-            vlogic.and(in A.Head, in B.Head, ref Z.Head);
-            return Z;
-        }
+            => (BitMatrix8)(@u64(A) & u64(B));
 
         /// <summary>
         /// Computes the logical and btween two source bitmatrices and deposits the result to a caller-supplied target

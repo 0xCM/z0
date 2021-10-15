@@ -203,11 +203,11 @@ namespace Z0
             => BitMatrix.mul(A, B);
 
         [MethodImpl(Inline)]
-        public static Bit32 operator ==(in BitMatrix16 A, in BitMatrix16 B)
+        public static bit operator ==(in BitMatrix16 A, in BitMatrix16 B)
             => BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
-        public static Bit32 operator !=(in BitMatrix16 A, in BitMatrix16 B)
+        public static bit operator !=(in BitMatrix16 A, in BitMatrix16 B)
             => !BitMatrix.same(A,B);
    }
 }

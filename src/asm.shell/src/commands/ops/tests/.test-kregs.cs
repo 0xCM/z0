@@ -16,7 +16,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var grid = default(Grid8x64);
-            var regs = Machines.regs(n8,w64);
+            var regs = RegMachines.regs(n8,w64);
             var names = recover<AsmRegName>(ByteBlock64.Empty.Bytes);
             var pairs = recover<AsmRegValue<ulong>>(ByteBlock128.Empty.Bytes);
 

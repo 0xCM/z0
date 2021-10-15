@@ -11,8 +11,16 @@ namespace Z0
 
     partial struct Grids
     {
+
+        /// <summary>
+        /// Creates a grid over cells of unmanaged type
+        /// </summary>
+        /// <param name="dim"></param>
+        /// <param name="src"></param>
+        /// <typeparam name="T"></typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Grid<T> grid<T>(GridDim dim, T[] data)
-            => new Grid<T>(dim, data);
+        public static DataGrid<T> data<T>(GridDim dim, T[] src)
+            where T : unmanaged
+                => new DataGrid<T>(dim, src);
     }
 }

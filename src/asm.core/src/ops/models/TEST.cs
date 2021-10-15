@@ -2,17 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System;
     using System.Runtime.CompilerServices;
 
+    using static AsmOperands;
     using static Root;
 
-    partial struct Grids
+    partial class AsmOps
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Grid<T> grid<T>(GridDim dim, T[] data)
-            => new Grid<T>(dim, data);
+        public struct TEST
+        {
+
+
+        }
     }
 }

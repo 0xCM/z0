@@ -4,12 +4,65 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
     using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static core;
+
+    public readonly struct DataTableTest<T>
+    {
+        readonly T[,] Storage;
+
+        public class TableInfo
+        {
+            public ulong Count;
+
+            public uint M;
+
+            public uint N;
+
+            internal byte Head;
+        }
+
+        [MethodImpl(Inline)]
+        public DataTableTest(uint m, uint n)
+        {
+            Storage = new T[m,n];
+        }
+
+        [MethodImpl(Inline)]
+        public DataTableTest(T[,] src)
+        {
+            Storage = src;
+        }
+
+        static byte Delta => (core.size<T>() == 8) ? (byte)1 : core.size<T>() == 4 ? (byte)2 : (byte)0;
+
+        public TableInfo StorageInfo
+        {
+            [MethodImpl(Inline)]
+            get => Unsafe.As<TableInfo>(Storage);
+        }
+
+        [MethodImpl(Inline)]
+        public static ref T seek(T[,] src, uint i, uint j)
+        {
+            var header = Unsafe.As<TableInfo>(src);
+            ref T lead = ref Unsafe.As<byte,T>(ref header.Head);
+            var offset = i*j + j;
+            return ref core.seek(lead, offset);
+        }
+
+        public ref T this[uint i, uint j]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(Storage,i,j);
+        }
+    }
 
     partial class AsmCmdService
     {
-        public class ArrayInfo
+        public class TableInfo
         {
             public ulong Count;
 
@@ -28,8 +81,6 @@ namespace Z0.Asm
             for(var j=0; j<n; j++)
                 src[i,j] = (ulong)(i*j);
 
-            var rowsize = sizeof(ulong)*n;
-
             fixed(ulong* pSrc = src)
             {
                 MemoryAddress @base = pSrc;
@@ -41,15 +92,60 @@ namespace Z0.Asm
                         MemoryAddress loc = pCurrent;
                         var value = *pCurrent++;
                         Require.equal(value, (ulong)(i*j));
-                        Write(string.Format("{0} {1} {2}x{3}={4}",loc, loc - @base, i, j, value));
+                        Write(string.Format("{0} {1} {2}x{3}={4}", loc, loc - @base, i, j, value));
                     }
                 }
             }
 
-            var dst = Unsafe.As<ArrayInfo>(src);
+            var dst = Unsafe.As<TableInfo>(src);
             Write(string.Format("{0}={1}x{2}", dst.Count, dst.M, dst.N));
 
             return true;
+        }
+
+        [CmdOp(".test-dt")]
+        unsafe Outcome DataTableTest(CmdArgs args)
+        {
+            const uint M = 17;
+            const uint N = 19;
+            const uint Count = M*N;
+            var result = Outcome.Success;
+            var storage = alloc<uint>(Count);
+            var k=0u;
+            for(var i=0u; i<M; i++)
+            for(var j=0u; j<N; j++, k++)
+                seek(storage,k) = i*j;
+
+            var table = new DataGrid<uint>((M,N), storage);
+
+            k = 0;
+            var msg = EmptyString;
+            for(var i=0u; i<M; i++)
+            {
+                for(var j=0u; j<M; j++, k++)
+                {
+                    var expect = i*j;
+                    ref readonly var actual = ref table[i,j];
+                    var ok = actual == expect;
+                    if(ok)
+                        msg = string.Format("{0}x{1} = {2}",i,j,expect);
+                    else
+                        msg = string.Format("{0}x{1} = [{0},{1}] = {2} != {3}", i,j, actual, expect);
+
+                    if(ok)
+                    {
+                        Write(msg, FlairKind.Status);
+                    }
+                    else
+                    {
+                        Write(msg, FlairKind.Error);
+                    }
+
+                }
+            }
+
+
+            return result;
         }
     }
 }

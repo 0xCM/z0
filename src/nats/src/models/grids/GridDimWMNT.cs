@@ -14,7 +14,7 @@ namespace Z0
     /// Defines a parametrically-predicated blocked grid
     /// </summary>
     public readonly struct GridDim<W,M,N,T>
-        where W : unmanaged, ITypeNat
+        where W : unmanaged, IDataWidth
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
@@ -25,7 +25,7 @@ namespace Z0
         public int BlockWidth
         {
             [MethodImpl(Inline)]
-            get => nat32i<W>();
+            get => (int)Widths.data<W>();
         }
 
         /// <summary>
