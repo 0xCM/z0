@@ -47,6 +47,5 @@ namespace Z0
             using var step = new RunFsm(wf);
             step.Run();
         }
-
     }
 }

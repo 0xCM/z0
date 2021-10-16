@@ -12,7 +12,6 @@ namespace Z0
 
     using static Root;
     using static core;
-    using static RuleModels;
 
     [ApiHost]
     public readonly struct Time
@@ -57,7 +56,6 @@ namespace Z0
             if(seg1.Length != 4)
                 return (false, $"The time segment has {seg1.Length} segments and should have 4");
 
-            var fffBounds = bounded(0,999);
             if(!NumericParser.parse(skip(seg0,0), out int yyyy))
                 return (false, "Attempt to parse year failed");
             if(!NumericParser.parse(skip(seg0,1), out int MM))
@@ -70,7 +68,7 @@ namespace Z0
                 return (false, "Attempt to parse minutes failed");
             if(!NumericParser.parse(skip(seg1,2), out int ss))
                 return (false, "Attempt to parse seconds failed");
-            if(!RuleModels.parse(skip(seg1,3), fffBounds, out int fff, out outcome))
+            if(!Intervals.parse(skip(seg1,3), (0,999), out int fff, out outcome))
                 return outcome;
 
             dst =  new DateTime(yyyy,MM,dd,HH, mm, ss, fff);

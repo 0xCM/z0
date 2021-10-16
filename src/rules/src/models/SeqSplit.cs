@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Specifies that a <typeparamref name='T'/> sequence is partitioned by a specific <typeparamref name='T'/> element
         /// </summary>
-        public readonly struct SeqSplit<T> : IRule<SeqSplit<T>,T>
+        public readonly struct SeqSplit<T>
         {
             public T Delimiter {get;}
 

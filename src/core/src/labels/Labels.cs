@@ -29,8 +29,8 @@ namespace Z0
             => new Labels(memory.native(size));
 
         [MethodImpl(Inline), Op]
-        public static Labels from(ReadOnlySpan<char> src)
-            => new Labels(core.address(src), src.Length*2);
+        public static ConstLabels from(ReadOnlySpan<char> src)
+            => new ConstLabels(src);
 
         readonly NativeBuffer Buffer;
 

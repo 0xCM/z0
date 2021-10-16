@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     partial struct gAlg
     {
@@ -24,7 +23,7 @@ namespace Z0
         {
             var partitions = src.Partitions.Length;
             for(var i = 1u; i<partitions; i++)
-                if(Intervals.contains(segment(src, i),point))
+                if(Intervals.contains(segment(src, i), point))
                     return i;
             return uint.MaxValue;
         }

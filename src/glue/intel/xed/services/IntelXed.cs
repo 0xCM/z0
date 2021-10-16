@@ -32,8 +32,10 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            XedTables = Ws.Tables().Subdir("intel.xed");
-            XedSources = Ws.Sources().Datasets("xed.primary");
+            var project = Ws.Project("intel.docs");
+            var root = project.Subdir("sources");
+            XedTables = root + FS.folder("intel.xed");
+            XedSources =root + FS.folder("xed.primary");
             Parsers = Wf.XedParsers();
         }
 

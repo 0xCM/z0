@@ -19,7 +19,6 @@ namespace Z0.Asm
             where T : unmanaged, IAsmOp<T>
         {
 
-
         }
     }
 }

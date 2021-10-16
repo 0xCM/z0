@@ -115,6 +115,5 @@ namespace Z0
         Y = FF.Y,
 
         Z = FF.Z,
-
     }
 }

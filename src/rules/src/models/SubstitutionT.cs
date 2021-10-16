@@ -13,15 +13,15 @@ namespace Z0
     {
         public readonly struct Substitution<T>
         {
-            public T Replace {get;}
+            public T Match {get;}
 
-            public T Replacement {get;}
+            public T Replace {get;}
 
             [MethodImpl(Inline)]
             public Substitution(T src, T dst)
             {
-                Replace = src;
-                Replacement = dst;
+                Match = src;
+                Replace = dst;
             }
         }
     }

@@ -2,40 +2,37 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Vec
 {
     using System;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    partial struct BitFlow
+    [Free]
+    public interface IVector : IBlittable
     {
-        [Free]
-        public interface IVector : IBlittable
-        {
-            /// <summary>
-            /// The vector dimension/length
-            /// </summary>
-            uint N {get;}
-        }
-
         /// <summary>
-        /// Defines a finite sequence of primal values
+        /// The vector dimension/length
         /// </summary>
-        /// <typeparam name="T">The storage cell type</typeparam>
-        [Free]
-        public interface IVector<T> : IVector, IBlittable<T>
-            where T : unmanaged
-        {
-            /// <summary>
-            /// Access a vector component i where i=0,...,N-1
-            /// </summary>
-            ref T this[uint i] {get;}
+        uint N {get;}
+    }
 
-            Span<T> Cells {get;}
+    /// <summary>
+    /// Defines a finite sequence of primal values
+    /// </summary>
+    /// <typeparam name="T">The storage cell type</typeparam>
+    [Free]
+    public interface IVector<T> : IVector, IBlittable<T>
+        where T : unmanaged
+    {
+        /// <summary>
+        /// Access a vector component i where i=0,...,N-1
+        /// </summary>
+        ref T this[uint i] {get;}
 
-            DataKind IBlittable.TypeKind
-                => DataKind.Vector;
-        }
+        Span<T> Cells {get;}
+
+        DataKind IBlittable.TypeKind
+            => DataKind.Vector;
     }
 }

@@ -33,10 +33,10 @@ namespace Z0.Asm
             Disp = disp;
         }
 
-        public AddressSize AddressSize
+        public NativeSize AddressSize
         {
             [MethodImpl(Inline)]
-            get => Base.WidthCode;
+            get => Base.Size;
         }
 
         public bit HasBase

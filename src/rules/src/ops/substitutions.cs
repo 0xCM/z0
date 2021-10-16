@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
     using static core;
 
     partial struct RuleModels
@@ -33,8 +29,8 @@ namespace Z0
                 input = ref seek(input, i);
                 s = ref seek(s,i);
                 t = ref seek(t,i);
-                s = input.Replace;
-                t = input.Replacement;
+                s = input.Match;
+                t = input.Replace;
             }
 
             return new Substitutions<T>(count, sources, targets);

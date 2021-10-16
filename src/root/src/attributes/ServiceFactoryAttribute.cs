@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    public class ServiceFactoryAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class)]
+    public class StringTableAttribute : Attribute
     {
 
     }

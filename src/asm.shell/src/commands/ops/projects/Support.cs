@@ -88,13 +88,6 @@ namespace Z0.Asm
             {
                 ref readonly var path = ref skip(src,i);
                 RunProjectScript(project,path,script);
-                // var srcid = path.FileName.WithoutExtension.Format();
-                // OmniScript.RunProjectScript(project, srcid, script, true, out var flows);
-                // for(var j=0; j<flows.Length; j++)
-                // {
-                //     ref readonly var flow = ref skip(flows, j);
-                //     Write(flow.Format());
-                // }
             }
 
             return result;
@@ -216,8 +209,8 @@ namespace Z0.Asm
             var counter = 0u;
             for(var i=0; i<count-1; i++)
             {
-                ref readonly var a = ref skip(lines,i).Content;
-                ref readonly var b = ref skip(lines,i+1).Content;
+                ref readonly var a = ref skip(lines, i).Content;
+                ref readonly var b = ref skip(lines, i+1).Content;
 
                 var m = text.index(a,EntryMarker);
                 if(!a.Contains(EntryMarker))

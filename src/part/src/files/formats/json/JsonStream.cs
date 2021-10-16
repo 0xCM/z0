@@ -32,9 +32,8 @@ namespace Z0
 
         bool ReadingObject;
 
-
         [MethodImpl(Inline)]
-        JsonStream(StreamReader stream)
+        internal JsonStream(StreamReader stream)
         {
             Stream = stream;
             BinaryStream = Stream.BinaryReader(Encoding.UTF8);

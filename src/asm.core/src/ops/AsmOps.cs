@@ -31,5 +31,17 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static KNOTQ knotq(rK op0, rK op1)
             => new KNOTQ(op0, op1);
+
+        [MethodImpl(Inline), Op]
+        public static PUSHF pushf()
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static PUSHFD pushfd()
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static PUSHFQ pushfq()
+            => default;
     }
 }

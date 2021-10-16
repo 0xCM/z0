@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using A = OpKindAttribute;
     using K = ApiBitShiftClass;
 

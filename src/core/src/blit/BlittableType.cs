@@ -10,22 +10,22 @@ namespace Z0
 
     public readonly struct BlittableType : IBlittable
     {
-        public readonly DataKind Kind;
+        public DataKind TypeKind {get;}
 
         /// <summary>
         /// The physical bit width
         /// </summary>
-        public readonly uint StorageWidth;
+        public uint StorageWidth {get;}
 
         /// <summary>
         /// The count of used bits
         /// </summary>
-        public readonly uint ContentWidth;
+        public uint ContentWidth {get;}
 
         [MethodImpl(Inline)]
         public BlittableType(DataKind kind, uint storage, uint content)
         {
-            Kind = kind;
+            TypeKind = kind;
             StorageWidth = storage;
             ContentWidth = content;
         }
@@ -37,6 +37,6 @@ namespace Z0
             => StorageWidth;
 
         DataKind IBlittable.TypeKind
-            => Kind;
+            => TypeKind;
     }
 }

@@ -44,6 +44,12 @@ namespace Z0.Asm
             get => Data.RegClassCode;
         }
 
+        public NativeSizeCode Size
+        {
+            [MethodImpl(Inline)]
+            get => Data.WidthCode;
+        }
+
         public NativeSizeCode WidthCode
         {
             [MethodImpl(Inline)]

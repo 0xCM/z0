@@ -22,9 +22,28 @@ namespace Z0
             public Drive(DriveLetter name)
                 => Name = name;
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Name == 0;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Name != 0;
+            }
+
             [MethodImpl(Inline)]
             public string Format()
                 => Name.ToString();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Drive(DriveLetter src)
+                => new Drive(src);
+
+
+            public static Drive Empty => default;
         }
     }
 }

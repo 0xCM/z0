@@ -44,13 +44,6 @@ namespace Z0.Asm
                 Scale = src.Scale;
                 Disp = src.Disp;
             }
-
-            public AddressSize AddressSize
-            {
-                [MethodImpl(Inline)]
-                get => Base.WidthCode;
-            }
-
             public NativeSize Size
             {
                 [MethodImpl(Inline)]

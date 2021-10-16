@@ -11,23 +11,24 @@ namespace Z0.llvm
 
     partial class EtlWorkflow
     {
-        public Outcome ImportLists()
+        public ReadOnlySpan<ItemList<string>> ImportLists()
         {
             var svc = Wf.Assets();
             var input = LlvmPaths.ListSourceFiles().View;
             var count = input.Length;
             var formatter = Tables.formatter<ListItem>(ListItem.RenderWidths);
-            var result = list<ListItem>();
+            var lists = list<ItemList<string>>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var src = ref skip(input,i);
                 var name = src.FileName.WithoutExtension.Format();
-                var items = FS.listed(src).View;
-                var mCount = items.Length;
+                var items = FS.listed(src);
+                lists.Add(items);
                 var dst = LlvmPaths.ListImportPath(name);
-                svc.EmitTable(name, items, dst);
+                svc.EmitTable(name, items.View, dst);
             }
-            return true;
+
+            return lists.ViewDeposited();
         }
     }
 }

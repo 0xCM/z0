@@ -93,7 +93,9 @@ namespace Z0.Asm
 
         XmlDoc XmlSouceDoc()
         {
-            var src = Ws.Sources().Datasets(dataset) + FS.file(dataset, FS.Xml);
+            var project = Ws.Project("intel.docs");
+            var sources = project.Subdir("sources");
+            var src = sources + FS.file(dataset, FS.Xml);
             return text.xml(src.ReadUtf8());
         }
 

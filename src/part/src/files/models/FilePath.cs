@@ -21,6 +21,16 @@ namespace Z0
             public FilePath(PathPart name)
                 => Name = name;
 
+            public Drive Drive
+            {
+                get
+                {
+                    if(drive(this, out var dst))
+                        return dst;
+                    else
+                        return Drive.Empty;
+                }
+            }
             public uint PathLength
             {
                 [MethodImpl(Inline)]

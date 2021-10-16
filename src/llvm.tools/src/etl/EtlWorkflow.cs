@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
     using System.Collections.Generic;
 
     using static core;
@@ -44,25 +43,25 @@ namespace Z0.llvm
             OmniScript = Wf.OmniScript();
         }
 
-        void GenerateCode()
-        {
-            LlvmPaths.CodeGenRoot().Clear();
-            GenStringTables();
-        }
-
         public Outcome RunEtl()
         {
+            var dst = new EtlDatasets();
             var records = LoadSourceRecords(DatasetNames.X86);
-            var result = Outcome.Success;
+            dst.Records = records;
             ImportRecordLines(records, DatasetNames.X86Lined);
-            ImportLists();
-            GenerateCode();
+            var lists = ImportLists();
+            dst.Lists = lists;
             var classes = ImportClassRelations(records);
+            dst.ClassRelations = classes;
             var defs = ImportDefRelations(records);
+            dst.DefRelations = defs;
             var defFields = LoadFields(records, MapContent(defs, records, DatasetNames.X86Defs));
+            dst.Defs = defFields;
             EmitFields(defFields, DatasetNames.X86DefFields);
             var classFields = LoadFields(records, MapContent(classes, records, DatasetNames.X86Classes));
+            dst.Classes = classFields;
             EmitFields(classFields, DatasetNames.X86ClassMembers);
+            Wf.LlvmGenerator().Run(dst);
             return true;
         }
    }

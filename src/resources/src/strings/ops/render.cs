@@ -20,6 +20,7 @@ namespace Z0
             var CharCountProp = nameof(MemoryStrings.CharCount);
             var CharBaseProp = nameof(MemoryStrings.CharBase);
             var OffsetBaseProp = nameof(MemoryStrings.OffsetBase);
+            var StringsProp = "Strings";
 
             dst.IndentLine(margin, Constant(EntryCountProp, src.EntryCount));
             dst.AppendLine();
@@ -28,10 +29,12 @@ namespace Z0
             dst.AppendLine();
 
             dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryAddress), CharBaseProp, Call("address", DataProp)));
-
             dst.AppendLine();
 
             dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryAddress), OffsetBaseProp, Call("address", OffsetsProp)));
+            dst.AppendLine();
+
+            dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryStrings), StringsProp, Call("memory.strings", OffsetsProp, DataProp)));
             dst.AppendLine();
 
             GenIndex(margin, src, dst);

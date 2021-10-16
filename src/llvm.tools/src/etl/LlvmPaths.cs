@@ -49,7 +49,7 @@ namespace Z0.llvm
             => LlvmData.Subdir("codegen");
 
         public FS.FilePath CodeGenPath(string id, FS.FileExt ext)
-            => CodeGenRoot() + FS.file(id,ext);
+            => CodeGenRoot() + FS.folder("stringtables") + FS.file(id,ext);
 
         public FS.FilePath TableGenImport(string id, FS.FileExt ext)
             =>  TableGenImports() + FS.file(id, ext);

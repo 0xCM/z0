@@ -19,6 +19,27 @@ namespace Z0
     /// </summary>
     public class JsonSettings : IJsonSettings
     {
+        public static void Save<S>(S src, FS.FilePath dst)
+            where S : ISettingsProvider
+        {
+            const string indent = "    ";
+
+            var settings = src.Settings.View;
+            if(settings.Length != 0)
+            {
+                using var writer = dst.Writer();
+                writer.WriteLine(LBrace);
+                for(var i = 0; i<settings.Length; i++)
+                {
+                    var line = indent + settings[i].Format();
+                    if(i != settings.Length - 1)
+                        line += Chars.Comma;
+                    writer.WriteLine(line);
+                }
+                writer.WriteLine(RBrace);
+            }
+        }
+
         public static S load<S>(IJsonSettings src)
             where S : new()
         {
@@ -125,27 +146,6 @@ namespace Z0
 
         public static IEnumerable<Setting> Settings<S>(object src)
             => PropSettings<S>(src).Union(FieldSettings<S>(src));
-
-        public static void Save<S>(S src, FS.FilePath dst)
-            where S : ISettingsProvider
-        {
-            const string indent = "    ";
-
-            var settings = src.Settings.View;
-            if(settings.Length != 0)
-            {
-                using var writer = dst.Writer();
-                writer.WriteLine(LBrace);
-                for(var i = 0; i<settings.Length; i++)
-                {
-                    var line = indent + settings[i].Format();
-                    if(i != settings.Length - 1)
-                        line += Chars.Comma;
-                    writer.WriteLine(line);
-                }
-                writer.WriteLine(RBrace);
-            }
-        }
 
         public static IJsonSettings Empty
             => new JsonSettings(new KeyValuePair<string,string>[]{});

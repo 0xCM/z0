@@ -7,9 +7,12 @@ namespace Z0.Vdsl
     using System;
     using System.Runtime.CompilerServices;
 
+    using Vec;
+
     using static Root;
     using static core;
     using static BitFlow;
+
 
     partial struct Intrinsics
     {
@@ -60,7 +63,7 @@ namespace Z0.Vdsl
             {
                 var i=16*j;
                 var l=8*j;
-                seek(dst,j) = v(j, i, l);
+                seek(dst,j) = api.v(j, i, l);
                 counter++;
             }
             return counter;

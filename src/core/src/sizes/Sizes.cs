@@ -44,7 +44,6 @@ namespace Z0
         public static MemoryScale scale(ScaleFactor factor)
             => new MemoryScale(factor);
 
-
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Size<T> size<T>(T src)
             where T : unmanaged

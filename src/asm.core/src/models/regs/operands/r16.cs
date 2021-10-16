@@ -32,6 +32,12 @@ namespace Z0.Asm
             public override string ToString()
                 => Format();
 
+            public NativeSize Size
+            {
+                [MethodImpl(Inline)]
+                get => NativeSizeCode.W16;
+            }
+
             public NativeSizeCode WidthCode
             {
                 [MethodImpl(Inline)]
@@ -47,7 +53,7 @@ namespace Z0.Asm
             public RegWidth RegWidth
             {
                 [MethodImpl(Inline)]
-                get => WidthCode;
+                get => Size;
             }
 
             public RegClass RegClass

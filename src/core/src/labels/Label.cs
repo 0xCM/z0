@@ -51,6 +51,18 @@ namespace Z0
             get => (uint)Storage;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Storage == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Storage != 0;
+        }
+
         public bool Equals(Label src)
             => Storage == src.Storage;
 

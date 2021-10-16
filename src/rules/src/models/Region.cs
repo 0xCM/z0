@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct RuleModels
     {
-        public readonly struct Region : IRule<Region>
+        public readonly struct Region
         {
             public dynamic Base {get;}
 

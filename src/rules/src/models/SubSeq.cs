@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="S">The sequence aggregate type</typeparam>
         /// <typeparam name="T">The sequence element type</typeparam>
-        public readonly struct SubSeq<S,T> : IRule<SubSeq<S,T>>
+        public readonly struct SubSeq<S,T>
             where S : IEquatable<S>
         {
             public S Source {get;}

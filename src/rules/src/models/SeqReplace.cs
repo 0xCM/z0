@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Defines a rule r:seq[T] -> seq[T] that requires a specified subsequence, if found, to be replaced with another
         /// </summary>
-        public readonly struct SeqReplace<T> : IRule<SeqReplace<T>>
+        public readonly struct SeqReplace<T>
         {
             /// <summary>
             /// The sequence term to match

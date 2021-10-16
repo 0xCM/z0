@@ -47,6 +47,11 @@ namespace Z0
         public const string V8 = "<{7},{6},{5},{4},{3},{2},{1},{0}>";
 
         /// <summary>
+        /// Defines the render pattern for a 9-element vector
+        /// </summary>
+        public const string V9 = "<{8},{7},{6},{5},{4},{3},{2},{1},{0}>";
+
+        /// <summary>
         /// Defines the render pattern for a 16-element vector
         /// </summary>
         public const string V16 =

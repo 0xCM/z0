@@ -15,25 +15,25 @@ namespace Z0
         {
             public uint Count {get;}
 
-            readonly Index<T> Sources {get;}
+            readonly Index<T> Matches {get;}
 
-            readonly Index<T> Targets {get;}
+            readonly Index<T> Replacements {get;}
 
             [MethodImpl(Inline)]
             internal Substitutions(uint count, T[] sources, T[] targets)
             {
                 Count = count;
-                Sources = sources;
-                Targets = targets;
+                Matches = sources;
+                Replacements = targets;
             }
 
             [MethodImpl(Inline)]
-            public ref readonly T Source(uint index)
-                => ref Sources[index];
+            public ref readonly T Match(uint index)
+                => ref Matches[index];
 
             [MethodImpl(Inline)]
-            public ref readonly T Target(uint index)
-                => ref Targets[index];
+            public ref readonly T Replace(uint index)
+                => ref Replacements[index];
         }
     }
 }

@@ -13,10 +13,6 @@ namespace Z0
 
     partial struct RuleModels
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static And<T> and<T>(params T[] src)
-            => new And<T>(src);
-
         [Op]
         public static ReadOnlySpan<string> apply(SeqSplit<char> rule, string src)
         {
@@ -62,6 +58,5 @@ namespace Z0
                 dst.Add(skip(src,i));
             return dst;
         }
-
     }
 }

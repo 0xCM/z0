@@ -42,11 +42,16 @@ namespace Z0
         public static LlvmDb LLvmDb(this IWfRuntime wf)
             => llvm.LlvmDb.create(wf);
 
+        [Op]
         public static ILlvmWorkspace LlvmWs(this IEnvProvider env)
             => Z0.LlvmWs.create(env.Env.LlvmRoot);
 
         [Op]
         public static LlvmToolbase LLvmToolbase(this IWfRuntime wf)
             => llvm.LlvmToolbase.create(wf);
+
+        [Op]
+        public static EtlGenerator LlvmGenerator(this IWfRuntime wf)
+            => llvm.EtlGenerator.create(wf);
     }
 }
