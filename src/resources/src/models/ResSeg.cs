@@ -11,12 +11,12 @@ namespace Z0
 
     public readonly struct ResSeg
     {
-        public Name Name {get;}
+        public Identifier Name {get;}
 
         public MemorySeg Segment {get;}
 
         [MethodImpl(Inline)]
-        public ResSeg(Name name, in MemorySeg segment)
+        public ResSeg(Identifier name, in MemorySeg segment)
         {
             Name = name;
             Segment = segment;

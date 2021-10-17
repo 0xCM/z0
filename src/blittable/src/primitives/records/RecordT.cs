@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Root;
     using static core;
 
-    partial struct BitFlow
+    partial struct BitRecords
     {
         /// <summary>
         /// Defines a record backed byte a <typeparamref name='T'/> storage cell

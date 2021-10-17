@@ -12,13 +12,5 @@ namespace Z0
 
     partial struct BitFlow
     {
-        [MethodImpl(Inline), Op]
-        public static Record record(byte[] src)
-            => new Record(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Record<T> record<T>(T src)
-            where T : unmanaged
-                => new Record<T>(src);
     }
 }

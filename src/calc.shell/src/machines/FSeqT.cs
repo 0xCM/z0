@@ -8,12 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using Z0.Asm;
-
-    using static Root;
-    using static core;
-
-
     /// <summary>
     /// Defines a T-valued sequence over a K-indexed interval
     /// </summary>

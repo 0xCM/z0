@@ -20,7 +20,7 @@ namespace Z0
             public ProjectProperty(T value)
                 => Definition = value;
 
-            public Name Name
+            public Identifier Name
             {
                 [MethodImpl(Inline)]
                 get => Definition.Name;

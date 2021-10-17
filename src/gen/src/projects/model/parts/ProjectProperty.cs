@@ -19,7 +19,7 @@ namespace Z0
             public ProjectProperty(IProjectProperty src)
                 => Definition = src;
 
-            public Name Name
+            public Identifier Name
             {
                 [MethodImpl(Inline)]
                 get => Definition.Name;

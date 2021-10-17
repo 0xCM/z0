@@ -32,7 +32,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static ReadOnlySpan<char> bitstring(in AsmHexCode src)
+        public static string bitstring(in AsmHexCode src)
         {
             if(src.IsEmpty)
                 return default;
@@ -43,7 +43,7 @@ namespace Z0.Asm
             if(count == 0)
                 return EmptyString;
 
-            return slice(dst, 0, count);
+            return text.format(slice(dst, 0, count));
         }
 
         [MethodImpl(Inline), Op]
@@ -68,7 +68,7 @@ namespace Z0.Asm
 
         [Op]
         public static string format8x4(AsmHexCode src)
-            => src.IsEmpty ? EmptyString : text.format(bitstring(src));
+            => src.IsEmpty ? EmptyString : bitstring(src);
 
         [MethodImpl(Inline), Op]
         public static uint render8x4(in AsmHexCode src, ref uint i, Span<char> dst)

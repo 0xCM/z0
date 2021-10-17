@@ -12,17 +12,6 @@ namespace Z0
     partial struct Relations
     {
         /// <summary>
-        /// Creates a graph from supplied vertices and edges and assumes the vertices are already appropriately sorted
-        /// </summary>
-        /// <param name="vertices">The vertices in the graph</param>
-        /// <param name="edges">The edges that connect the vertices</param>
-        [MethodImpl(Inline)]
-        public static Graph<V,T> graph<V,T>(Index<Node<V,T>> vertices, Arrow<Node<V>>[] edges)
-            where V : unmanaged
-            where T : unmanaged
-                => new Graph<V,T>(vertices, edges);
-
-        /// <summary>
         /// Creates a graph from supplied vertices and edges
         /// </summary>
         /// <param name="vertices">The vertices in the graph</param>

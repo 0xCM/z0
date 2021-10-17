@@ -17,7 +17,7 @@ namespace Z0
 
             public dynamic Value {get;}
 
-            public Name Name
+            public Identifier Name
                 => TagName;
 
             [MethodImpl(Inline)]

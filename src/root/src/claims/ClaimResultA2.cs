@@ -11,7 +11,7 @@ namespace Z0
 
     public struct ClaimResult<A0,A1,A2>
     {
-        public Name Identifier;
+        public Identifier Identifier;
 
         public readonly ClaimOperator Claim;
 
@@ -26,7 +26,7 @@ namespace Z0
         public TextBlock Message;
 
         [MethodImpl(Inline)]
-        public ClaimResult(Name identifier, ClaimKind claim, bool success, TextBlock message, A0 a0, A1 a1, A2 a2)
+        public ClaimResult(Identifier identifier, ClaimKind claim, bool success, TextBlock message, A0 a0, A1 a1, A2 a2)
         {
             Identifier = identifier;
             Claim = claim;

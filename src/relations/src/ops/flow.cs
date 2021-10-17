@@ -21,10 +21,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static DataFlow<S,T> flow<S,T>(in S src, in T dst)
             => new DataFlow<S,T>(src,dst);
-
-        [MethodImpl(Inline)]
-        public static DataFlow<K,S,T> flow<K,S,T>(K kind, in S src, in T dst)
-            where K : unmanaged
-                => new DataFlow<K,S,T>(kind, src, dst);
     }
 }

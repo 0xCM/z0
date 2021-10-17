@@ -30,7 +30,6 @@ namespace Z0
             where T : unmanaged
                 => cover(cell(ref src), src.MxN);
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> row<T>(ref g5x5<T> src, uint i)
             where T : unmanaged

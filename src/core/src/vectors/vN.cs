@@ -77,7 +77,7 @@ namespace Z0.Vec
         {
             var cells = src.Cells;
             var count = cells.Length;
-            var buffer = text.buffer();
+            var buffer = TextTools.buffer();
             var last = cells.Length - 1;
             for(var i=0; i<count; i++)
             {

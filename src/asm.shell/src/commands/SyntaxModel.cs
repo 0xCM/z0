@@ -11,11 +11,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    public readonly struct SyntaxParsers
-    {
-
-    }
-
     public interface ISyntaxNode
     {
         Identifier NodeName {get;}

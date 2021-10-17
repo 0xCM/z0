@@ -11,6 +11,8 @@ namespace Z0
     using static core;
     using static BitFlow;
 
+    using FC = FixedChars;
+
     public struct text7 : IName<text7,ulong>
     {
         public const byte MaxLength = 7;
@@ -41,14 +43,14 @@ namespace Z0
         }
 
         public string Format()
-            => format(this);
+            => FC.format(this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public bool Equals(text7 src)
-            => eq(this,src);
+            => FC.eq(this,src);
 
         public override bool Equals(object src)
             => src is text7 n ? Equals(n) : false;
@@ -66,15 +68,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator text7(string src)
-            => txt(N,src);
+            => FC.txt(N,src);
 
         [MethodImpl(Inline)]
         public static implicit operator text7(ReadOnlySpan<char> src)
-            => txt(N,src);
+            => FC.txt(N,src);
 
         [MethodImpl(Inline)]
         public static implicit operator text7(char src)
-            => txt(N,src);
+            => FC.txt(N,src);
 
         public static text7 Empty => default;
     }
@@ -122,6 +124,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bit neq(text7 a, text7 b)
             => a.Storage != b.Storage;
-
-   }
+    }
 }

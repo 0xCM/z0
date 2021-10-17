@@ -10,8 +10,11 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct BitFlow
+    [ApiHost]
+    public readonly partial struct BitRecords
     {
+        const NumericKind Closure = UnsignedInts;
+
         [MethodImpl(Inline), Op]
         public static RecordField field(text15 name, byte index, uint offset, byte width)
             => new RecordField(name, index, offset, width);
@@ -27,6 +30,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint serialize(in RecordField src, Span<byte> dst)
             => store(bytes(src), dst);
+
+        [MethodImpl(Inline), Op]
+        public static Record record(byte[] src)
+            => new Record(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Record<T> record<T>(T src)
+            where T : unmanaged
+                => new Record<T>(src);
 
         const uint Align32 = 32u;
 

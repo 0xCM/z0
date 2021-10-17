@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct BitFlow
+    partial struct BitRecords
     {
         public readonly struct RecordSchema
         {
@@ -53,7 +53,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => ref _Fields[i];
             }
-
         }
     }
 }

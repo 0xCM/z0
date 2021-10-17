@@ -12,17 +12,17 @@ namespace Z0
     public readonly struct CellFuncSig
     {
         [MethodImpl(Inline), Op]
-        public static CellFuncSig sig(Name name, TypeWidth[] args, TypeWidth result)
+        public static CellFuncSig sig(Identifier name, TypeWidth[] args, TypeWidth result)
             => new CellFuncSig(name, args, result);
 
-        public Name FuncName {get;}
+        public Identifier FuncName {get;}
 
         public TypeWidth[] ArgWidths {get;}
 
         public TypeWidth ResultWidth {get;}
 
         [MethodImpl(Inline)]
-        public CellFuncSig(Name name, TypeWidth[] args, TypeWidth result)
+        public CellFuncSig(Identifier name, TypeWidth[] args, TypeWidth result)
         {
             FuncName = name;
             ArgWidths = args;

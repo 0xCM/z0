@@ -19,7 +19,7 @@ namespace Z0
             public ProjectItem(IProjectItem src)
                 => Definition = src;
 
-            public Name Name
+            public Identifier Name
                 => Definition.Name;
 
             [MethodImpl(Inline)]

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct BitFlow
+    partial struct BitRecords
     {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public readonly struct RecordField

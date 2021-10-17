@@ -15,21 +15,28 @@ namespace Z0
     [DataType]
     public readonly struct Identifier : IIdentifier<Identifier>
     {
-        public Name Content {get;}
+        readonly string Data;
+
+        public string Content
+        {
+            [MethodImpl(Inline)]
+            get => Data ?? EmptyString;
+        }
 
         [MethodImpl(Inline)]
         public Identifier(string src)
-            => Content = src ?? EmptyString;
+            => Data = src ?? EmptyString;
 
         [MethodImpl(Inline)]
         public Identifier(Name src)
-            => Content = src;
+            => Data = src;
 
         public string Text
         {
             [MethodImpl(Inline)]
             get => Content;
         }
+
         public Name Name
         {
             [MethodImpl(Inline)]
@@ -39,19 +46,19 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsEmpty;
+            get => string.IsNullOrEmpty(Content);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsNonEmpty;
+            get => !IsEmpty;
         }
 
         public ReadOnlySpan<char> View
         {
             [MethodImpl(Inline)]
-            get => Content.View;
+            get => Content;
         }
 
         public int Length
@@ -63,7 +70,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => Content.Hash;
+            get => (uint)Content.GetHashCode();
         }
 
         public uint Count

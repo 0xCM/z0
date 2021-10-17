@@ -38,7 +38,7 @@ namespace Z0
             UriText = owner != 0 ? string.Format("{0}{1}{2}", Part.Format(), IDI.UriPathSep, HostName) : HostName;
         }
 
-        public Name Id
+        public Identifier Id
             => IsEmpty ? "__empty__" : string.Format("{0}.{1}", Part.Format(), HostName);
 
         [MethodImpl(Inline)]

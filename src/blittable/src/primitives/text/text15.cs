@@ -11,53 +11,8 @@ namespace Z0
     using static core;
     using static BitFlow;
 
-    partial struct BitFlow
-    {
-        [MethodImpl(Inline), Op]
-        public static text15 txt(N15 n, ReadOnlySpan<char> src)
-        {
-            const byte Max = text15.MaxLength;
-            var length = (byte)min(available(src), Max);
-            var storage = Cell128.Empty;
-            var dst = storage.Bytes;
-            pack(src, length, dst);
-            seek(dst,15) = length;
-            return new text15(storage);
-        }
+    using FC = FixedChars;
 
-        [MethodImpl(Inline), Op]
-        static uint available(ReadOnlySpan<char> src)
-        {
-            var present = 0u;
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                if(skip(src,i) != 0)
-                    present++;
-                else
-                    break;
-            }
-            return present;
-        }
-
-        [MethodImpl(Inline), Op]
-        static void pack(ReadOnlySpan<char> src, uint count, Span<byte> dst)
-        {
-            for(var i=0; i<count; i++)
-                seek(dst,i) = (byte)skip(src,i);
-        }
-
-        [Op]
-        public static string format(in text15 src)
-        {
-            Span<char> dst = stackalloc char[text15.MaxLength];
-            var count = src.Length;
-            var data = src.Bytes;
-            for(var i=0; i<count; i++)
-                seek(dst,i) = (char)skip(data,i);
-            return text.format(slice(dst,0,count));
-        }
-    }
     public struct text15 : IName<text15,Cell128>
     {
         public const byte MaxLength = 15;
@@ -109,12 +64,60 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator text15(string src)
-            => txt(N,src);
+            => FC.txt(N,src);
 
         [MethodImpl(Inline)]
         public static implicit operator text15(ReadOnlySpan<char> src)
-            => txt(N,src);
+            => FC.txt(N,src);
 
         public static text15 Empty => default;
+    }
+
+    partial struct BitFlow
+    {
+        [MethodImpl(Inline), Op]
+        public static text15 txt(N15 n, ReadOnlySpan<char> src)
+        {
+            const byte Max = text15.MaxLength;
+            var length = (byte)min(available(src), Max);
+            var storage = Cell128.Empty;
+            var dst = storage.Bytes;
+            pack(src, length, dst);
+            seek(dst,15) = length;
+            return new text15(storage);
+        }
+
+        [MethodImpl(Inline), Op]
+        static uint available(ReadOnlySpan<char> src)
+        {
+            var present = 0u;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                if(skip(src,i) != 0)
+                    present++;
+                else
+                    break;
+            }
+            return present;
+        }
+
+        [MethodImpl(Inline), Op]
+        static void pack(ReadOnlySpan<char> src, uint count, Span<byte> dst)
+        {
+            for(var i=0; i<count; i++)
+                seek(dst,i) = (byte)skip(src,i);
+        }
+
+        [Op]
+        public static string format(in text15 src)
+        {
+            Span<char> dst = stackalloc char[text15.MaxLength];
+            var count = src.Length;
+            var data = src.Bytes;
+            for(var i=0; i<count; i++)
+                seek(dst,i) = (char)skip(data,i);
+            return text.format(slice(dst,0,count));
+        }
     }
 }

@@ -16,14 +16,6 @@ namespace Z0
     {
         const NumericKind Closure = AllNumeric;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Channel<T> connect<T>(Pipe<T> src, Pipe<T> dst)
-            => new Channel<T>(src,dst);
-
-        [MethodImpl(Inline)]
-        public static Channel<S,T> connect<S,T>(Pipe<S,T> src, Pipe<T> dst)
-            => new Channel<S,T>(src,dst);
-
         [Op, Closures(Closure)]
         public static void flow<T>(ReadOnlySpan<T> src, ReadOnlySpan<IReceiver<T>> dst)
         {

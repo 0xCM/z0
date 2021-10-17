@@ -17,7 +17,7 @@ namespace Z0
 
     public interface IBuildProperty : ITextual
     {
-        Name Name {get;}
+        Identifier Name {get;}
 
         dynamic Value {get;}
 

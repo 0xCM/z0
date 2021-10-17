@@ -13,12 +13,12 @@ namespace Z0
     {
         public readonly struct Sdk
         {
-            public Name Name {get;}
+            public Identifier Name {get;}
 
             const string TagName = nameof(Sdk);
 
             [MethodImpl(Inline)]
-            public Sdk(Name name)
+            public Sdk(Identifier name)
             {
                 Name = name;
             }

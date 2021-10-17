@@ -16,7 +16,7 @@ namespace Z0
     {
         public string IdentityText {get;}
 
-        public Name TypeName {get;}
+        public Identifier TypeName {get;}
 
         public NumericKind BaseType {get;}
 

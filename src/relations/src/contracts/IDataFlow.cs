@@ -22,10 +22,4 @@ namespace Z0
     {
 
     }
-
-    [Free]
-    public interface IDataFlow<T> : IDataFlow<T,T>
-    {
-
-    }
 }

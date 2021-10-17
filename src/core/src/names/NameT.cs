@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Name<S> : IName<S>
+    public readonly struct Name<S>
     {
         public S Content {get;}
 

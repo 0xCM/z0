@@ -57,8 +57,8 @@ namespace Z0.Vec
     partial struct api
     {
         [MethodImpl(Inline), Op]
-        public static vNx1<bit> v(N1 n, bit[] src)
-            => new vNx1<bit>(src);
+        public static vNx1<bool> v(N1 n, bool[] src)
+            => new vNx1<bool>(src);
 
         [MethodImpl(Inline), Op]
         public static vNx1<byte> v(N1 n, byte[] src)

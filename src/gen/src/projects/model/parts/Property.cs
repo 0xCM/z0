@@ -13,12 +13,12 @@ namespace Z0
     {
         public readonly struct Property : IBuildProperty
         {
-            public Name Name {get;}
+            public Identifier Name {get;}
 
             public dynamic Value {get;}
 
             [MethodImpl(Inline)]
-            public Property(Name name, dynamic value)
+            public Property(Identifier name, dynamic value)
             {
                 Name = name;
                 Value = value;
@@ -34,12 +34,12 @@ namespace Z0
 
         public readonly struct Property<T> : ITextual
         {
-            public Name Name {get;}
+            public Identifier Name {get;}
 
             public T Value {get;}
 
             [MethodImpl(Inline)]
-            public Property(Name name, T value)
+            public Property(Identifier name, T value)
             {
                 Name = name;
                 Value = value;

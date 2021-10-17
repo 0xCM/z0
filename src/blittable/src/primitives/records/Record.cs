@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct BitFlow
+    partial struct BitRecords
     {
         /// <summary>
         /// Defines a record backed by an array of bytes

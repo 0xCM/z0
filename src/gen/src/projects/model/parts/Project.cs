@@ -15,14 +15,14 @@ namespace Z0
         {
             public Sdk Sdk {get;}
 
-            public Name Name {get;}
+            public Identifier Name {get;}
 
             public Index<PropertyGroup> PropertyGroups {get;}
 
             public Index<ItemGroup> itemGroups {get;}
 
             [MethodImpl(Inline)]
-            public Project(Name name, Sdk sdk, Index<PropertyGroup> properties, Index<ItemGroup> items)
+            public Project(Identifier name, Sdk sdk, Index<PropertyGroup> properties, Index<ItemGroup> items)
             {
                 Name = name;
                 Sdk = sdk;

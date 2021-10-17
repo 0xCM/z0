@@ -11,6 +11,8 @@ namespace Z0
     using static core;
     using static BitFlow;
 
+    using FC = FixedChars;
+
     public struct text31 : IName<text31,ByteBlock32>
     {
         public const byte MaxLength = 31;
@@ -53,14 +55,14 @@ namespace Z0
         }
 
         public string Format()
-            => format(this);
+            => FC.format(this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator text31(string src)
-            => txt(N,src);
+            => FC.txt(N,src);
 
         [MethodImpl(Inline)]
         public static implicit operator text31(ReadOnlySpan<char> src)

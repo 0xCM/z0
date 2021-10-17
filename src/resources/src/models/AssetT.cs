@@ -15,12 +15,12 @@ namespace Z0
     /// </summary>
     public readonly struct Asset<T> : IDataTypeComparable<Asset<T>>, IAddressable
     {
-        public Name Name {get;}
+        public Identifier Name {get;}
 
         public MemorySeg Segment {get;}
 
         [MethodImpl(Inline)]
-        public Asset(Name name, MemorySeg seg)
+        public Asset(Identifier name, MemorySeg seg)
         {
             Name = name;
             Segment = seg;
@@ -66,6 +66,6 @@ namespace Z0
             => Format();
 
         public static Asset<T> Empty
-            => new Asset<T>(Name.Empty, MemorySeg.Empty);
+            => new Asset<T>(Identifier.Empty, MemorySeg.Empty);
     }
 }

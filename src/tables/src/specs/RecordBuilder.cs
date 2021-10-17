@@ -35,7 +35,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static RecordSpec table(Name type, params MemberFieldSpec[] Fields)
+        public static RecordSpec table(Identifier type, params MemberFieldSpec[] Fields)
             => new RecordSpec(type, Fields);
 
         [MethodImpl(Inline), Op]
@@ -43,11 +43,11 @@ namespace Z0
             => new MemberFieldSpec(name, type, position, offset);
 
         [Op]
-        public static TypeBuilder type(ModuleBuilder mb, Name fullName, TypeAttributes attributes, Type parent)
+        public static TypeBuilder type(ModuleBuilder mb, Identifier fullName, TypeAttributes attributes, Type parent)
             => mb.DefineType(fullName, attributes, parent);
 
         [Op]
-        public static TypeBuilder valueType(ModuleBuilder mb, Name fullName, TypeAttributes attributes)
+        public static TypeBuilder valueType(ModuleBuilder mb, Identifier fullName, TypeAttributes attributes)
             => mb.DefineType(fullName, attributes, typeof(ValueType));
 
         [Op]

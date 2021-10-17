@@ -19,7 +19,7 @@ namespace Z0
             public OutputType(string value)
                 => Value = value;
 
-            public Name Name
+            public Identifier Name
                 => nameof(OutputType);
 
             public string Format()

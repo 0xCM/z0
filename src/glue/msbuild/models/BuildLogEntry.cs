@@ -17,8 +17,8 @@ namespace Z0
 
         public TextBlock Message;
 
-        public Name HelpKeyword;
+        public Identifier HelpKeyword;
 
-        public Name SenderName;
+        public Identifier SenderName;
     }
 }

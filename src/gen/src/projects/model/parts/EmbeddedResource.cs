@@ -25,7 +25,7 @@ namespace Z0
                 Include = include;
             }
 
-            public Name Name
+            public Identifier Name
                 => TagName;
 
             [MethodImpl(Inline)]
@@ -34,7 +34,6 @@ namespace Z0
 
             public override string ToString()
                 => Format();
-
         }
     }
 }
