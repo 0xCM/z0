@@ -2,7 +2,7 @@
 // Copyright   :  Licensed to the .NET Foundation under one or more agreements.
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace alg
+namespace Z0.alg
 {
     using System;
     using System.Diagnostics;

@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static gcpu;
-    using static core;
 
     partial struct vbits
     {

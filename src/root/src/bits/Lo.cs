@@ -127,6 +127,18 @@ namespace Z0
         public const ushort Lo16x12 = (ushort)Lo8x8 << 4 | Lo16x4;
 
         /// <summary>
+        /// [00011111 1111111]
+        /// </summary>
+        [BitMask ("[00011111 11111111]")]
+        public const ushort Lo16x13 = (ushort)Lo8x8 << 4 | Lo16x5;
+
+        /// <summary>
+        /// [00111111 1111111]
+        /// </summary>
+        [BitMask ("[00111111 11111111]")]
+        public const ushort Lo16x14 = (ushort)Lo8x8 << 4 | Lo16x6;
+
+        /// <summary>
         /// [11111111 11111111]
         /// </summary>
         [BitMask ("[11111111 11111111]")]

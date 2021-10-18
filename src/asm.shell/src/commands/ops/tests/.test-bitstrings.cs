@@ -34,6 +34,14 @@ namespace Z0.Asm
             return true;
         }
 
+        [CmdOp(".test-bits")]
+        Outcome CheckBits(CmdArgs args)
+        {
+            var v = vpack.vunpack256x8u(0xF0F0F0F0);
+            Write(v.FormatBlockedBits(8));
+            return true;
+        }
+
         void CheckBitFormatter()
         {
             var block = CharBlock128.Null;

@@ -11,7 +11,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static BitFlow;
     using static AsmRegTokens;
     using static AsmRegTokens.Gp64Reg;
     using static AsmRegTokens.Gp32Reg;

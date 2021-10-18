@@ -928,6 +928,7 @@ namespace Z0.Asm
 
         /// <summary>
         /// Specifies instruction pointer registers
+        /// ip, eip, rip
         /// </summary>
         [SymSource(K.Ip)]
         public enum IpReg : byte

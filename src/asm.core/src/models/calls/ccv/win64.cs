@@ -12,7 +12,6 @@ namespace Z0.Asm
     using static Root;
     using static core;
     using static AsmRegTokens;
-    using static BitFlow;
 
     partial struct Ccv
     {
@@ -76,7 +75,6 @@ namespace Z0.Asm
             [MethodImpl(Inline), Op]
             public static ref readonly v4<Gp64Reg> slots(W64 w)
                 => ref first(recover<v4<Gp64Reg>>(bytes(regs(w))));
-
 
             [MethodImpl(Inline), Op]
             public static bit slot(Win64 cc, byte index, out Gp8Reg dst)

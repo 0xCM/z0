@@ -6,6 +6,8 @@ namespace Z0
 {
     using static FileKindNames;
 
+    using N = FileKindNames;
+
     partial struct FS
     {
         /// <summary>
@@ -154,9 +156,9 @@ namespace Z0
         public static FileExt Targets => ext(targets);
 
         /// <summary>
-        /// Defines the <see cref='alg'/> <see cref='FileExt'/>
+        /// Defines the <see cref='N.alg'/> <see cref='FileExt'/>
         /// </summary>
-        public static FileExt Alg => ext(alg);
+        public static FileExt Alg => ext(N.alg);
 
         /// <summary>
         /// Defines the <see cref='dmp'/> <see cref='FileExt'/>

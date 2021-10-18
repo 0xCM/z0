@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static BitMasks;
     using static BitMaskLiterals;
-    using static core;
 
     partial struct vmask
     {

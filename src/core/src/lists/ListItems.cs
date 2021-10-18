@@ -11,6 +11,24 @@ namespace Z0
 
     public readonly struct ListItems
     {
+        public static ItemList<T> list<T>(Identifier name, ListItem<T>[] items)
+            => new ItemList<T>(name, items);
+
+        public static string format<T>(ItemList<T> src, char delimiter)
+        {
+            var count = src.Length;
+            var dst = TextTools.buffer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var item = ref src[i];
+                if(i != count - 1)
+                    dst.AppendFormat("{0}{1}", item.Content, delimiter);
+                else
+                    dst.Append(item.Content?.ToString() ?? RP.Null);
+            }
+            return dst.Emit();
+        }
+
         public static ListItem record<T>(ListItem<T> src, string type)
         {
             var dst = new ListItem();

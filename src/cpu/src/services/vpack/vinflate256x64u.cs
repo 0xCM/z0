@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="n">The source component count</param>
         /// <param name="dst">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ulong> vmove4x64u(in byte src)
+        public static unsafe Vector256<ulong> vinflate256x64u(in byte src)
             => v64u(ConvertToVector256Int64(gptr(src)));
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="n">The source component count</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ulong> vmove4x64u(in ushort src)
+        public static unsafe Vector256<ulong> vinflate256x64u(in ushort src)
             => v64u(ConvertToVector256Int64(gptr(src)));
     }
 }

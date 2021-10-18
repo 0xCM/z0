@@ -15,6 +15,18 @@ namespace Z0
 
         public Identifier ListName {get;}
 
+        public ref ListItem<T> this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
+        public ref ListItem<T> this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
         public Span<ListItem<T>> Edit
         {
             [MethodImpl(Inline)]
@@ -51,5 +63,16 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Count;
         }
+
+
+        public string Format()
+            => ListItems.format(this, Chars.Comma);
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ItemList<T>((string name, ListItem<T>[] items) src)
+            => new ItemList<T>(src.name, src.items);
     }
 }

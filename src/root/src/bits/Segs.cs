@@ -6,17 +6,14 @@ namespace Z0
 {
     partial struct BitMaskLiterals
     {
-        [BitMask("[11111111]")]
-        public const byte Seg8x8x0 = 0xFF;
-
         [BitMask("[00000000 11111111]")]
-        public const ushort Seg16x8x0 = Seg8x8x0;
+        public const ushort Seg16x8x0 = Lo8x8;
 
         [BitMask("[11111111 00000000]")]
         public const ushort Seg16x8x1 = Seg16x8x0 << 8;
 
         [BitMask("[00000000 00000000 00000000 11111111]")]
-        public const uint Seg32x8x0 = Seg8x8x0;
+        public const uint Seg32x8x0 = Lo8x8;
 
         [BitMask("[00000000 00000000 11111111 00000000]")]
         public const uint Seg32x8x1 = Seg32x8x0 << 8;
@@ -28,7 +25,7 @@ namespace Z0
         public const uint Seg32x8x3 = Seg32x8x2 << 8;
 
         [BitMask("[00000000 00000000 00000000 00000000 00000000 00000000 00000000 11111111]")]
-        public const ulong Seg64x8x0 = Seg8x8x0;
+        public const ulong Seg64x8x0 = Lo8x8;
 
         [BitMask("[00000000 00000000 00000000 00000000 00000000 00000000 11111111 00000000]")]
         public const ulong Seg64x8x1 = Seg64x8x0 << 8;

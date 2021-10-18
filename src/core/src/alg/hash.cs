@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace alg
+namespace Z0.alg
 {
     using System;
     using System.Runtime.CompilerServices;

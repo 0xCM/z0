@@ -9,16 +9,15 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IDecoder<T,S>
-    {
-        void Decode(ReadOnlySpan<T> src, Span<S> dst);
-    }
-
-    [Free]
     public interface IEncoder<S,T>
     {
         uint Encode(ReadOnlySpan<S> src, Span<T> dst);
+    }
 
+    [Free]
+    public interface IDecoder<T,S>
+    {
+        void Decode(ReadOnlySpan<T> src, Span<S> dst);
     }
 
     [Free]

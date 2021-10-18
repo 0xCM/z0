@@ -15,6 +15,25 @@ namespace Z0
 
         public Identifier ListName {get;}
 
+        [MethodImpl(Inline)]
+        public ItemList(Identifier name, ListItem[] src)
+        {
+            ListName = name;
+            Data = src;
+        }
+
+        public ref ListItem this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
+        public ref ListItem this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
         public Span<ListItem> Edit
         {
             [MethodImpl(Inline)]
@@ -33,13 +52,6 @@ namespace Z0
             get => Data.Storage;
         }
 
-        [MethodImpl(Inline)]
-        public ItemList(Identifier name, ListItem[] src)
-        {
-            ListName = name;
-            Data = src;
-        }
-
         public int Length
         {
             [MethodImpl(Inline)]
@@ -51,5 +63,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Count;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ItemList((string name, ListItem[] items) src)
+            => new ItemList(src.name, src.items);
     }
 }

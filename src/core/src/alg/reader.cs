@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.alg
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -11,7 +11,7 @@ namespace Z0
     using static core;
 
     [ApiHost]
-    public readonly struct UnmanagedReader
+    public readonly struct reader
     {
         const NumericKind Closure = UnsignedInts;
 
