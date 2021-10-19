@@ -41,12 +41,12 @@ namespace Z0
             return outcome;
         }
 
-        public static Outcome parse(TextLine src, out TokenSpec dst)
+        public static Outcome parse(TextLine src, out SymInfo dst)
         {
             var outcome = Outcome.Success;
             var j=0;
             var cells = src.Split(Chars.Pipe);
-            if(cells.Length != TokenSpec.FieldCount)
+            if(cells.Length != SymInfo.FieldCount)
             {
                 dst = default;
                 return (false, AppMsg.FieldCountMismatch.Format(SymLiteralRow.FieldCount, cells.Length));

@@ -15,8 +15,7 @@ namespace Z0.Asm
         Outcome GenTokenSpecs(CmdArgs args)
         {
             var result = Outcome.Success;
-            var symbols = Symbols.index<AsmOpCodeTokens.ModRmToken>();
-            var src = Z0.Tokens.concat(symbols);
+            var src = Symbols.concat(Symbols.index<AsmOpCodeTokens.ModRmToken>());
             var dst = Ws.Gen().Root + FS.file("token-specs", FS.Cs);
             var svc = Wf.Generators().StringLiterals();
             svc.Emit("ModRmTokens", src, dst);

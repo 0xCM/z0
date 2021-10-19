@@ -93,25 +93,25 @@ namespace Z0
             }
         }
 
-        public ReadOnlySpan<TokenSpec> EmitTokenSpecs(Type src)
+        public ReadOnlySpan<SymInfo> EmitTokenSpecs(Type src)
         {
-            var dst = Ws.Tables().TablePath<TokenSpec>("tokens", src.Name.ToLower());
-            var tokens = Tokens.specs(src);
-            TableEmit(tokens, TokenSpec.RenderWidths, dst);
+            var dst = Ws.Tables().TablePath<SymInfo>("tokens", src.Name.ToLower());
+            var tokens = Symbols.syminfo(src);
+            TableEmit(tokens, SymInfo.RenderWidths, dst);
             return tokens;
         }
 
-        public ReadOnlySpan<TokenSpec> LoadTokenSpecs(string name)
+        public ReadOnlySpan<SymInfo> LoadTokenSpecs(string name)
         {
-            var src = Ws.Tables().TablePath<TokenSpec>("tokens", name.ToLower());
-            using var reader = src.TableReader<TokenSpec>(DataParser.parse);
+            var src = Ws.Tables().TablePath<SymInfo>("tokens", name.ToLower());
+            using var reader = src.TableReader<SymInfo>(DataParser.parse);
             var header = reader.Header.Split(Chars.Pipe);
-            if(header.Length != TokenSpec.FieldCount)
+            if(header.Length != SymInfo.FieldCount)
             {
-                Wf.Error(AppMsg.FieldCountMismatch.Format(TokenSpec.FieldCount, header.Length));
-                return Index<TokenSpec>.Empty;
+                Wf.Error(AppMsg.FieldCountMismatch.Format(SymInfo.FieldCount, header.Length));
+                return Index<SymInfo>.Empty;
             }
-            var dst = list<TokenSpec>();
+            var dst = list<SymInfo>();
             while(!reader.Complete)
             {
                 var outcome = reader.ReadRow(out var row);

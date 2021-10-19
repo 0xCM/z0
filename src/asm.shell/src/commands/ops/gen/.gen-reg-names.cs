@@ -28,13 +28,11 @@ namespace Z0.Asm
                 ref readonly var reg = ref skip(regs,i);
                 buffer.AppendFormat("{0,-6}", reg);
             }
-            //Write(buffer.Emit());
             var bytespan = SpanRes.specify("GpRegNames", recover<RegOp,byte>(regs).ToArray());
             writer.WriteLine(bytespan.Format());
             EmittedFile(flow, regs.Length);
 
             return true;
         }
-
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     partial struct Symbols
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void describe<T>(Symbols<T> src, Span<TextBlock> dst)
+        public static void descriptions<T>(Symbols<T> src, Span<TextBlock> dst)
             where T : unmanaged
         {
             var count = min(src.Length,dst.Length);

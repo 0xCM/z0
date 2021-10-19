@@ -19,7 +19,7 @@ namespace Z0.Asm
             var svc = Wf.Symbolism();
             var output = svc.EmitTokenSpecs(typeof(AsmOpCodeTokens.VexToken));
             var input = svc.LoadTokenSpecs(nameof(AsmOpCodeTokens.VexToken));
-            var formatter = Tables.formatter<TokenSpec>(TokenSpec.RenderWidths);
+            var formatter = Tables.formatter<SymInfo>(SymInfo.RenderWidths);
             var count = input.Length;
             for(var i=0; i<count; i++)
             {
@@ -40,19 +40,18 @@ namespace Z0.Asm
             EmitTokenSet(tokens.PrefixTokens());
         }
 
-
         void EmitTokenSpecs(Type src)
         {
-            var dst = Ws.Tables().TablePath<TokenSpec>("tokens", src.Name);
-            var tokens = Tokens.specs(src);
-            TableEmit(tokens, TokenSpec.RenderWidths, dst);
+            var dst = Ws.Tables().TablePath<SymInfo>("tokens", src.Name);
+            var tokens = Symbols.syminfo(src);
+            TableEmit(tokens, SymInfo.RenderWidths, dst);
         }
 
         void EmitTokenSet(ITokenSet src)
         {
-            var dst = Ws.Tables().TablePath<TokenSpec>("tokens", src.Name);
-            var tokens = Tokens.specs(src.Types());
-            TableEmit(tokens, TokenSpec.RenderWidths, dst);
+            var dst = Ws.Tables().TablePath<SymInfo>("tokens", src.Name);
+            var tokens = Symbols.syminfo(src.Types());
+            TableEmit(tokens, SymInfo.RenderWidths, dst);
         }
 
 

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential), Record(TableId)]
-    public struct TokenSpec
+    public struct SymInfo
     {
         public const string TableId = "tokens";
 

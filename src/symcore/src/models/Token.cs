@@ -14,18 +14,18 @@ namespace Z0
 
         public Sym Symbol {get;}
 
-        public string Expression {get;}
+        public string Expr {get;}
 
         [MethodImpl(Inline)]
-        public Token(uint key, Sym symbol, string expression)
+        public Token(uint key, Sym symbol, string expr)
         {
             Key = key;
             Symbol = symbol;
-            Expression = expression;
+            Expr = expr;
         }
 
         public string Format()
-            => string.Format("{0,-24} | {1,-5} | {2,-16} | '{3}'", Symbol.Type, Key, Symbol.Name, Expression);
+            => string.Format("{0,-24} | {1,-5} | {2,-16} | '{3}'", Symbol.Type, Key, Symbol.Name, Expr);
 
         public override string ToString()
             => Format();

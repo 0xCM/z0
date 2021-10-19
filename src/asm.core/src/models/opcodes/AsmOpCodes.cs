@@ -27,9 +27,6 @@ namespace Z0.Asm
             where K : unmanaged
                 => new AsmOcToken<K>(kind,value);
 
-        public static ReadOnlySpan<Token> OpCodeTokens()
-            => AsmTokens.OpCodes.create().View;
-
         [MethodImpl(Inline), Op]
         public static bit IsCallRel32(ReadOnlySpan<byte> src, uint offset)
             => (offset + 4) <= src.Length && skip(src, offset) == 0xE8;

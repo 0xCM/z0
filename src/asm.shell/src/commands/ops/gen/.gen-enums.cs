@@ -11,7 +11,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var svc = Wf.Generators().CsEnum();
-            var spec = SymbolSets.from(typeof(AsmOpCodeTokens.ModRmToken));
+            var spec = Symbols.set(typeof(AsmOpCodeTokens.ModRmToken));
             var type = spec.DataType;
             var buffer = text.buffer();
             svc.Generate(0,spec,buffer);

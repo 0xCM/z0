@@ -9,12 +9,12 @@ namespace Z0
     using static core;
     using static Root;
 
-    public readonly struct SymbolSets
+    partial struct Symbols
     {
-        public static SymSet from(Type src)
+        public static SymSet set(Type src)
         {
-            var tokens = Tokens.specs(src);
-            var count = tokens.Length;
+            var specs = Symbols.syminfo(src);
+            var count = specs.Length;
             var type = Enums.@base(src);
             var dst = new SymSet((uint)count);
             var attrib = src.Tag<SymSourceAttribute>();
@@ -24,11 +24,11 @@ namespace Z0
             dst.SymbolKind = src.Tag<SymSourceAttribute>().MapValueOrElse(x => x.SymKind, () => EmptyString);
             for(var i=0; i<count; i++)
             {
-                ref readonly var token = ref skip(tokens,i);
-                dst.Symbols[i] = token.Expr;
-                dst.Names[i] = token.Name;
-                dst.Values[i] = token.Value;
-                dst.Descriptions[i] = token.Description;
+                ref readonly var sec = ref skip(specs,i);
+                dst.Symbols[i] = sec.Expr;
+                dst.Names[i] = sec.Name;
+                dst.Values[i] = sec.Value;
+                dst.Descriptions[i] = sec.Description;
             }
 
             return dst;
