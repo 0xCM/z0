@@ -205,7 +205,7 @@ namespace Z0
         /// <summary>
         /// Indicates a bit-width of 1024
         /// </summary>
-         [Symbol("w1024")]
-       W1024 = 1024,
+        [Symbol("w1024")]
+        W1024 = 1024,
     }
 }

@@ -10,9 +10,9 @@ namespace Z0
     using static Root;
 
     using DW = DataWidth;
-    using TW = TypeWidth;
-    using FW = CellWidth;
-    using VW = VectorWidth;
+    using TW = NativeTypeWidth;
+    using FW = CpuCellWidth;
+    using VW = NativeVectorWidth;
     using TS = TypeSignKind;
 
     using W = W256i;

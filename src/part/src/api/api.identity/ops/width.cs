@@ -13,16 +13,16 @@ namespace Z0
         /// </summary>
         /// <param name="t">The type to examine</param>
         [Op]
-        public static TypeWidth width(Type t)
+        public static NativeTypeWidth width(Type t)
         {
             if(t.IsVector())
                 return Widths.vector(t);
             else if(t.IsSegmented())
                 return Widths.segmented(t);
             if(NumericKinds.test(t))
-                return (TypeWidth)Widths.numeric(t);
+                return (NativeTypeWidth)Widths.numeric(t);
             else
-                return t.Tag<WidthAttribute>().MapValueOrDefault(a => a.TypeWidth, TypeWidth.None);
+                return t.Tag<WidthAttribute>().MapValueOrDefault(a => a.TypeWidth, NativeTypeWidth.None);
         }
     }
 }

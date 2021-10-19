@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct UnaryCellFunctionClass : ICellFunctionClass<UnaryCellFunctionClass,ApiOperatorKind>
     {
-        public TypeWidth Width {get;}
+        public NativeTypeWidth Width {get;}
 
         public ApiOperatorKind Kind
             => ApiOperatorKind.UnaryOp;
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public UnaryCellFunctionClass(TypeWidth width)
+        public UnaryCellFunctionClass(NativeTypeWidth width)
             => Width = width;
 
         [MethodImpl(Inline)]

@@ -10,8 +10,8 @@ namespace Z0
     using static Root;
 
     using DW = DataWidth;
-    using TW = TypeWidth;
-    using FW = CellWidth;
+    using TW = NativeTypeWidth;
+    using FW = CpuCellWidth;
     using TS = TypeSignKind;
 
     using W = W1024;

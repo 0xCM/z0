@@ -14,7 +14,7 @@ namespace Z0
         where W : unmanaged, ITypeWidth
         where E : unmanaged, Enum
     {
-        TypeWidth ICellFunctionClass.Width
+        NativeTypeWidth ICellFunctionClass.Width
             => Widths.type<W>();
     }
 }

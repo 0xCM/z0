@@ -13,14 +13,14 @@ namespace Z0
     {
         public PrimitiveKind Kind {get;}
 
-        public TypeWidth Width {get;}
+        public NativeTypeWidth Width {get;}
 
         public PolarityKind Sign {get;}
 
         public PrimalCode TypeCode {get;}
 
         [MethodImpl(Inline)]
-        public ClrPrimitiveInfo(PrimitiveKind kind, TypeWidth width, PolarityKind sign, PrimalCode tc)
+        public ClrPrimitiveInfo(PrimitiveKind kind, NativeTypeWidth width, PolarityKind sign, PrimalCode tc)
         {
             Kind = kind;
             Width = width;

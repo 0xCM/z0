@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
-        public static bool test(VectorKind k, sbyte t)
+        public static bool test(NativeVectorKind k, sbyte t)
             => ((uint)k & (uint)ScalarKind.I8) != 0;
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
-        public static bool test(VectorKind k, byte t)
+        public static bool test(NativeVectorKind k, byte t)
             => ((uint)k & (uint)ScalarKind.U8) != 0;
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
-        public static bool test(VectorKind k, short t)
+        public static bool test(NativeVectorKind k, short t)
             => ((uint)k & (uint)ScalarKind.I16) != 0;
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
-        public static bool test(VectorKind k, ushort t)
+        public static bool test(NativeVectorKind k, ushort t)
             => ((uint)k & (uint)ScalarKind.U16) != 0;
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
-        public static bool test(VectorKind k, int t)
+        public static bool test(NativeVectorKind k, int t)
              => ((uint)k & (uint)ScalarKind.I32) != 0;
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
-        public static bool test(VectorKind k, uint t)
+        public static bool test(NativeVectorKind k, uint t)
             => ((uint)k & (uint)ScalarKind.U32) != 0;
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
-        public static bool test(VectorKind k, long t)
+        public static bool test(NativeVectorKind k, long t)
             => ((uint)k & (uint)ScalarKind.I64) != 0;
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
-        public static bool test(VectorKind k, ulong t)
+        public static bool test(NativeVectorKind k, ulong t)
             => ((uint)k & (uint)ScalarKind.U64) != 0;
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
-        public static bool test(VectorKind k, float t)
+        public static bool test(NativeVectorKind k, float t)
              => ((uint)k & (uint)ScalarKind.F32) != 0;
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Test]
-        public static bool test(VectorKind k, double t)
+        public static bool test(NativeVectorKind k, double t)
              => ((uint)k & (uint)ScalarKind.F64) != 0;
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Test]
         public static bool test(Type t, W128 w)
-            => width(t) == TypeWidth.W128;
+            => width(t) == NativeTypeWidth.W128;
 
         /// <summary>
         /// Determines whether a type is a 256-bit intrinsic vector
@@ -189,7 +189,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Test]
         public static bool test(Type t, W256 w)
-            => width(t) == TypeWidth.W256;
+            => width(t) == NativeTypeWidth.W256;
 
         /// <summary>
         /// Determines whether a type is a 512-bit intrinsic vector
@@ -197,7 +197,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Test]
         public static bool test(Type t, W512 w)
-            => width(t) == TypeWidth.W512;
+            => width(t) == NativeTypeWidth.W512;
 
         /// <summary>
         /// Determines whether a parameter is of some intrinsic vector type
@@ -214,7 +214,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         [MethodImpl(Inline), Test]
         public static bool test(ParameterInfo p, W128 w)
-            => width(p.ParameterType) == TypeWidth.W128;
+            => width(p.ParameterType) == NativeTypeWidth.W128;
 
         /// <summary>
         /// Determines whether a parameter accepts a 256-bit intrinsic vector
@@ -223,7 +223,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         [MethodImpl(Inline), Test]
         public static bool test(ParameterInfo p, W256 w)
-            => width(p.ParameterType) == TypeWidth.W256;
+            => width(p.ParameterType) == NativeTypeWidth.W256;
 
         /// <summary>
         /// Determines whether a parameter accepts a 512-bit intrinsic vector
@@ -232,7 +232,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         [MethodImpl(Inline), Test]
         public static bool test(ParameterInfo p, W512 w)
-            => width(p.ParameterType) == TypeWidth.W512;
+            => width(p.ParameterType) == NativeTypeWidth.W512;
 
         /// <summary>
         /// Returns true if a method parameter is a 128-bit intrinsic vector closed over a specified argument type

@@ -7,9 +7,8 @@ namespace Z0
     using System;
 
     using static NumericKind;
-    using static CellWidth;
 
-    using CW = CellWidth;
+    using CW = CpuCellWidth;
 
     /// <summary>
     /// Classifies concrete intrinsic vectors of total width w over components of width t and sign indicator s where:
@@ -18,7 +17,7 @@ namespace Z0
     /// s = {u | i | f} as determined by kind[30..31]
     /// </summary>
     [Flags]
-    public enum VectorKind : uint
+    public enum NativeVectorKind : uint
     {
         None = 0,
 

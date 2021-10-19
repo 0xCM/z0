@@ -15,11 +15,7 @@ namespace Z0
     public readonly struct Vec512Type : IVectorKind<Vec512Type,W512>
     {
         [MethodImpl(Inline)]
-        public static implicit operator VectorWidthKind(Vec512Type src)
-            => src.Class;
-
-        [MethodImpl(Inline)]
-        public static implicit operator VectorWidth(Vec512Type src)
+        public static implicit operator NativeVectorWidth(Vec512Type src)
             => src.W;
 
         [MethodImpl(Inline)]
@@ -29,8 +25,8 @@ namespace Z0
         public W512 W
             => default;
 
-        public VectorWidth Class
-            => VectorWidth.W512;
+        public NativeVectorWidth Class
+            => NativeVectorWidth.W512;
 
         public uint Value
             => (uint)W.DataWidth;

@@ -10,12 +10,12 @@ namespace Z0
 
     using static Root;
 
-    using K = VectorWidth;
+    using K = NativeVectorWidth;
 
     partial class Widths
     {
         [MethodImpl(Inline)]
-        public static VectorWidth vector<W>(W w = default)
+        public static NativeVectorWidth vector<W>(W w = default)
             where W : struct, IVectorWidth
         {
             if(typeof(W) == typeof(W128))
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">The source type</param>
         [Op]
-        public static TypeWidth vector(Type t)
+        public static NativeTypeWidth vector(Type t)
         {
             var eff = t.TEffective();
             var def = eff.IsGenericType
@@ -41,13 +41,13 @@ namespace Z0
                 : (eff.IsGenericTypeDefinition ? eff : null);
 
             if(def == null)
-                return TypeWidth.None;
+                return NativeTypeWidth.None;
             else if(def == typeof(Vector128<>))
-                return TypeWidth.W128;
+                return NativeTypeWidth.W128;
             else if(def == typeof(Vector256<>))
-                return TypeWidth.W256;
+                return NativeTypeWidth.W256;
             else
-                return t.Tag<VectorAttribute>().MapValueOrDefault(a => a.TypeWidth, TypeWidth.None);
+                return t.Tag<VectorAttribute>().MapValueOrDefault(a => a.TypeWidth, NativeTypeWidth.None);
         }
     }
 }

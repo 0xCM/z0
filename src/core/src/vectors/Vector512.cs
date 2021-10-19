@@ -53,7 +53,7 @@ namespace Z0
 
     }
 
-    [StructLayout(LayoutKind.Sequential, Size = 64), Vector(TypeWidth.W512)]
+    [StructLayout(LayoutKind.Sequential, Size = 64), Vector(NativeTypeWidth.W512)]
     public readonly struct Vector512<T>
         where T : unmanaged
     {

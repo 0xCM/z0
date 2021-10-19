@@ -10,7 +10,6 @@ namespace Z0.Asm
     using Z0.llvm;
 
     using static core;
-    using static Root;
     using static WsAtoms;
     using static ProjectScriptNames;
 
@@ -97,6 +96,17 @@ namespace Z0.Asm
         {
             var srcid = path.FileName.WithoutExtension.Format();
             OmniScript.RunProjectScript(project, srcid, script, true, out var flows);
+            for(var j=0; j<flows.Length; j++)
+            {
+                ref readonly var flow = ref skip(flows, j);
+                Write(flow.Format());
+            }
+            return true;
+        }
+
+        Outcome RunProjectScript(ProjectId project, ScriptId script)
+        {
+            OmniScript.RunProjectScript(project, script, true, out var flows);
             for(var j=0; j<flows.Length; j++)
             {
                 ref readonly var flow = ref skip(flows, j);

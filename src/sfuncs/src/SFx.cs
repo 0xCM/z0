@@ -43,7 +43,7 @@ namespace Z0
         public static OpIdentity identity<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => Builder.build(opname, (TypeWidth)TypeNats.value<W>(), NumericKinds.kind<T>(), generic);
+                => Builder.build(opname, (NativeTypeWidth)TypeNats.value<W>(), NumericKinds.kind<T>(), generic);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -64,7 +64,7 @@ namespace Z0
         [Op, Closures(AllNumeric)]
         public static OpIdentity identity<T>(string opname, Vec128Kind<T> k)
             where T : unmanaged
-                => Builder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => Builder.build(opname, (NativeTypeWidth)k.Width, typeof(T).NumericKind(), true);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -75,7 +75,7 @@ namespace Z0
         [Op, Closures(AllNumeric)]
         public static OpIdentity identity<T>(string opname, Vec256Kind<T> k)
             where T : unmanaged
-                => Builder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => Builder.build(opname, (NativeTypeWidth)k.Width, typeof(T).NumericKind(), true);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -86,7 +86,7 @@ namespace Z0
         [Op, Closures(AllNumeric)]
         public static OpIdentity identity<T>(string opname, Vec512Kind<T> k)
             where T : unmanaged
-                => Builder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => Builder.build(opname, (NativeTypeWidth)k.Width, typeof(T).NumericKind(), true);
         const NumericKind Closure = NumericKind.I8 | NumericKind.U64;
     }
 }

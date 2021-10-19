@@ -18,7 +18,7 @@ namespace Z0
     {
         readonly ISource Source;
 
-        readonly CellWidth Width;
+        readonly CpuCellWidth Width;
 
         readonly NumericKind Kind;
 
@@ -27,7 +27,7 @@ namespace Z0
         public CellStream(ISource src)
         {
             Source = src;
-            Width = (CellWidth)default(F).Width;
+            Width = (CpuCellWidth)default(F).Width;
             Kind = typeof(T).NumericKind();
             ValueEmitter = CreateEmitter(src, Width, Kind);
         }
@@ -46,10 +46,10 @@ namespace Z0
             where K : struct
                 => @as<K,F>(x);
 
-        public static Func<F> CreateEmitter(ISource source, CellWidth width, NumericKind nk)
+        public static Func<F> CreateEmitter(ISource source, CpuCellWidth width, NumericKind nk)
         {
 
-            if(width <= CellWidth.W64)
+            if(width <= CpuCellWidth.W64)
             {
                 switch(nk)
                 {
@@ -79,11 +79,11 @@ namespace Z0
             {
                 switch(width)
                 {
-                    case CellWidth.W128:
+                    case CpuCellWidth.W128:
                         return f128;
-                    case CellWidth.W256:
+                    case CpuCellWidth.W256:
                         return f256;
-                    case CellWidth.W512:
+                    case CpuCellWidth.W512:
                         return f512;
                 }
             }

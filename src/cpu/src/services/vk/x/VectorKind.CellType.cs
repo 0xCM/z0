@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The vector kind</param>
         [MethodImpl(Inline), Op]
-        public static Type CellType(this VectorKind kind)
+        public static Type CellType(this NativeVectorKind kind)
             => VK.celltype(kind);
     }
 }

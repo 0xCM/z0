@@ -2,12 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    public interface IFixedWidth<F> : ICellWidth, WType<F>
-        where F : struct, IFixedWidth<F>
+    using static ProjectScriptNames;
+
+    partial class AsmCmdService
     {
-        CpuCellWidth ICellWidth.CellWidth
-            => Widths.cell<F>();
+        [CmdOp(".build")]
+        Outcome BuildProject(CmdArgs args)
+            => RunProjectScript(State.Project(), Build);
     }
 }

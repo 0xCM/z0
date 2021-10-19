@@ -9,14 +9,14 @@ namespace Z0
         /// <summary>
         /// Defines a class specifier for use as a discriminator
         /// </summary>
-        VectorWidth VectorWidth
-            => (VectorWidth)BitWidth;
+        NativeVectorWidth VectorWidth
+            => (NativeVectorWidth)BitWidth;
     }
 
     public interface IVectorWidth<F> : IVectorWidth, IFixedWidth<F>
         where F : struct, IVectorWidth<F>
     {
-        VectorWidth IVectorWidth.VectorWidth
+        NativeVectorWidth IVectorWidth.VectorWidth
             => Widths.vector<F>();
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The vector kind</param>
         [Op]
-        public static Type celltype(VectorKind kind)
+        public static Type celltype(NativeVectorKind kind)
         {
             if(test(kind, z8i))
                 return typeof(sbyte);

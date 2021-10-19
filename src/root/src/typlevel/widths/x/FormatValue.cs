@@ -12,7 +12,7 @@ namespace Z0
     partial class XWidth
     {
         [MethodImpl(Inline)]
-        public static string FormatValue(this TypeWidth w)
+        public static string FormatValue(this NativeTypeWidth w)
             => ((uint)w).ToString();
 
         [MethodImpl(Inline)]
@@ -24,11 +24,11 @@ namespace Z0
             => ((uint)w).ToString();
 
         [MethodImpl(Inline)]
-        public static string FormatValue(this CellWidth w)
+        public static string FormatValue(this CpuCellWidth w)
             => ((uint)w).ToString();
 
         [MethodImpl(Inline)]
-        public static string FormatValue(this VectorWidth w)
+        public static string FormatValue(this NativeVectorWidth w)
             => ((uint)w).ToString();
     }
 }

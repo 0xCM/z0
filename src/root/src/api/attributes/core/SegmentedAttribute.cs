@@ -9,18 +9,18 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Struct)]
     public class SegmentedAttribute : WidthAttribute
     {
-        public SegmentedAttribute(TypeWidth width, bool sequenced, params CellWidth[] widths)
+        public SegmentedAttribute(NativeTypeWidth width, bool sequenced, params CpuCellWidth[] widths)
             : base(width)
         {
 
         }
 
-        public SegmentedAttribute(TypeWidth width, params CellWidth[] cells)
+        public SegmentedAttribute(NativeTypeWidth width, params CpuCellWidth[] cells)
             : this(width, false, cells)
         {
         }
 
-        public SegmentedAttribute(TypeWidth width, SpanBlockKind kind)
+        public SegmentedAttribute(NativeTypeWidth width, SpanBlockKind kind)
             : this(width, false)
         {
 

@@ -137,15 +137,15 @@ namespace Z0
             => (DataWidth)src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitWidth(TypeWidth src)
+        public static implicit operator BitWidth(NativeTypeWidth src)
             => new BitWidth((uint)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator TypeWidth(BitWidth src)
-            => (TypeWidth)src.Content;
+        public static implicit operator NativeTypeWidth(BitWidth src)
+            => (NativeTypeWidth)src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitWidth(VectorWidth src)
+        public static implicit operator BitWidth(NativeVectorWidth src)
             => new BitWidth((uint)src);
 
         [MethodImpl(Inline)]

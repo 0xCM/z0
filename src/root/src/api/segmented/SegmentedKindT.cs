@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using BK = SegKind;
+    using BK = NativeSegKind;
 
    public readonly struct SegmentedKind<T> : ISegmentedKind<SegmentedKind<T>>
         where T : unmanaged
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SegmentedKind(SegKind kind)
+        public SegmentedKind(NativeSegKind kind)
             => Class = kind;
 
         [MethodImpl(Inline)]
@@ -31,7 +31,7 @@ namespace Z0
             => new SegmentedKind<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator SegKind(SegmentedKind<T> src)
+        public static implicit operator NativeSegKind(SegmentedKind<T> src)
             => src.Class;
     }
 }

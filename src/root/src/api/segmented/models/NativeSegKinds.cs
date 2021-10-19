@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using SK = SegKind;
+    using SK = NativeSegKind;
 
     [ApiHost]
-    public partial class SegmentedKinds
+    public partial class NativeSegKinds
     {
         const NumericKind Closure = NumericKind.All;
 
@@ -262,7 +262,7 @@ namespace Z0
         {
             public SK Class => SK.Seg8;
 
-            public TypeWidth SegWidth => TypeWidth.W8;
+            public NativeTypeWidth SegWidth => NativeTypeWidth.W8;
 
             public static implicit operator SK(Seg8 src)
                 => src.Class;
@@ -272,7 +272,7 @@ namespace Z0
         {
             public SK Class => SK.Seg16;
 
-            public TypeWidth SegWidth => TypeWidth.W16;
+            public NativeTypeWidth SegWidth => NativeTypeWidth.W16;
 
             public static implicit operator SK(Seg16 src)
                 => src.Class;
@@ -282,9 +282,9 @@ namespace Z0
         {
             public SK Class => SK.Seg32;
 
-            public TypeWidth SegWidth => TypeWidth.W32;
+            public NativeTypeWidth SegWidth => NativeTypeWidth.W32;
 
-            public static implicit operator SegKind(Seg32 src)
+            public static implicit operator NativeSegKind(Seg32 src)
                 => src.Class;
         }
 
@@ -292,7 +292,7 @@ namespace Z0
         {
             public SK Class => SK.Seg64;
 
-            public TypeWidth SegWidth => TypeWidth.W64;
+            public NativeTypeWidth SegWidth => NativeTypeWidth.W64;
 
             public static implicit operator SK(Seg64 src)
                 => src.Class;
@@ -302,7 +302,7 @@ namespace Z0
         {
             public SK Class => SK.Seg128;
 
-            public TypeWidth SegWidth => TypeWidth.W128;
+            public NativeTypeWidth SegWidth => NativeTypeWidth.W128;
 
             public static implicit operator SK(Seg128 src)
                 => src.Class;
@@ -312,7 +312,7 @@ namespace Z0
         {
             public SK Class => SK.Seg256;
 
-            public TypeWidth SegWidth => TypeWidth.W256;
+            public NativeTypeWidth SegWidth => NativeTypeWidth.W256;
 
             public static implicit operator SK(Seg256 src)
                 => src.Class;
@@ -322,7 +322,7 @@ namespace Z0
         {
             public SK Class => SK.Seg512;
 
-            public TypeWidth SegWidth => TypeWidth.W512;
+            public NativeTypeWidth SegWidth => NativeTypeWidth.W512;
 
             public static implicit operator SK(Seg512 src)
                 => src.Class;

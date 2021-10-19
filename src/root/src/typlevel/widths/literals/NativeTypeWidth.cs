@@ -7,10 +7,9 @@ namespace Z0
     using W = DataWidth;
 
     /// <summary>
-    /// Defines a <see cref="DataWidth"/> subset that is constrained to widths that correspond
-    /// to scalar primitives or vectorized registers
+    /// Defines a <see cref="DataWidth"/> subset that is constrained to widths that correspond to scalar primitives or vectorized registers
     /// </summary>
-    public enum TypeWidth : ushort
+    public enum NativeTypeWidth : ushort
     {
         /// <summary>
         /// Vapid

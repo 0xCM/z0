@@ -9,7 +9,7 @@ namespace Z0
     partial class XWidth
     {
         [Op]
-        public static string FormatName(this TypeWidth w, bool lowercase = false)
+        public static string FormatName(this NativeTypeWidth w, bool lowercase = false)
             => w != 0 ? (lowercase ?  w.ToString().ToLowerInvariant() : w.ToString()) : EmptyString;
 
         [Op]
@@ -21,11 +21,11 @@ namespace Z0
             => w != 0 ? (lowercase ?  w.ToString().ToLowerInvariant() : w.ToString()) : EmptyString;
 
         [Op]
-        public static string FormatName(this CellWidth w, bool lowercase = false)
+        public static string FormatName(this CpuCellWidth w, bool lowercase = false)
             => w != 0 ? (lowercase ?  w.ToString().ToLowerInvariant() : w.ToString()) : EmptyString;
 
         [Op]
-        public static string FormatName(this VectorWidth w, bool lowercase = false)
+        public static string FormatName(this NativeVectorWidth w, bool lowercase = false)
             => w != 0 ? (lowercase ?  w.ToString().ToLowerInvariant() : w.ToString()) : EmptyString;
     }
 }

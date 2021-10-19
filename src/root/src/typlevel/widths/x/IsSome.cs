@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static bool IsSome(this CellWidth src)
+        public static bool IsSome(this CpuCellWidth src)
             => src != 0;
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The type kine</param>
         [MethodImpl(Inline), Op]
-        public static int width(VectorKind k)
+        public static int width(NativeVectorKind k)
             => (ushort)k;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The type kine</param>
         [MethodImpl(Inline), Op]
-        public static int size(VectorKind kind)
+        public static int size(NativeVectorKind kind)
             => width(kind)/8;
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The vector kind</param>
         [MethodImpl(Inline), Op]
-        public static int segwidth(VectorKind k)
+        public static int segwidth(NativeVectorKind k)
             => (byte)((uint)k >> 16);
 
         /// <summary>
@@ -42,31 +42,31 @@ namespace Z0
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool unsigned(VectorKind k)
-            => (k & (VectorKind)NK.Unsigned) != 0;
+        public static bool unsigned(NativeVectorKind k)
+            => (k & (NativeVectorKind)NK.Unsigned) != 0;
 
         /// <summary>
         /// Determines whether a classified vector is defined over primal signed integer components
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool signed(VectorKind k)
-            => (k & (VectorKind)NK.Signed) != 0;
+        public static bool signed(NativeVectorKind k)
+            => (k & (NativeVectorKind)NK.Signed) != 0;
 
         /// <summary>
         /// Determines whether a classified vector is defined over floating-point components
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool floating(VectorKind k)
-            => (k & (VectorKind)NK.Float) != 0;
+        public static bool floating(NativeVectorKind k)
+            => (k & (NativeVectorKind)NK.Float) != 0;
 
         /// <summary>
         /// Determines whether a classified vector is defined over primal integer components
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool integral(VectorKind k)
+        public static bool integral(NativeVectorKind k)
             => signed(k) || unsigned(k);
     }
 }

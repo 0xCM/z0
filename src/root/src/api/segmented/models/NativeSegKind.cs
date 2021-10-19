@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using W = CellWidth;
+    using W = CpuCellWidth;
     using NK = NumericKind;
 
     /// <summary>
@@ -16,7 +16,7 @@ namespace Z0
     /// s = {u | i | f} as determined by kind[30..31]
     /// </summary>
     [Flags]
-    public enum SegKind : uint
+    public enum NativeSegKind : uint
     {
         None = 0,
 

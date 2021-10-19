@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool IsUnsigned(this SegKind k)
+        public static bool IsUnsigned(this NativeSegKind k)
             => ((uint)k & (uint)Z0.NumericKind.Unsigned) != 0;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool IsSigned(this SegKind k)
+        public static bool IsSigned(this NativeSegKind k)
             => ((uint)k & (uint)Z0.NumericKind.Signed) != 0;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool IsIntegral(this SegKind k)
+        public static bool IsIntegral(this NativeSegKind k)
             => k.IsSigned() || k.IsUnsigned();
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
-        public static bool IsFloat(this SegKind k)
+        public static bool IsFloat(this NativeSegKind k)
             => ((uint)k & (uint)Z0.NumericKind.Float) != 0;
     }
 }

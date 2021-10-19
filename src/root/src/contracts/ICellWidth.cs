@@ -9,8 +9,8 @@ namespace Z0
         /// <summary>
         /// Defines a class specifier synonym to facilitate disambiguation
         /// </summary>
-        CellWidth CellWidth
-            => (CellWidth)BitWidth;
+        CpuCellWidth CellWidth
+            => (CpuCellWidth)BitWidth;
 
    }
 

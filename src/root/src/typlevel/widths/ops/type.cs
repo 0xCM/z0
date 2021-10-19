@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using K = TypeWidth;
+    using K = NativeTypeWidth;
 
     partial class Widths
     {

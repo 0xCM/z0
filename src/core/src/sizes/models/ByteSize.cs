@@ -176,11 +176,11 @@ namespace Z0
             => new UIntPtr(src.Content);
 
         [MethodImpl(Inline)]
-        public static implicit operator ByteSize(TypeWidth src)
+        public static implicit operator ByteSize(NativeTypeWidth src)
             => new ByteSize((ulong)src/8);
 
         [MethodImpl(Inline)]
-        public static implicit operator ByteSize(VectorWidth src)
+        public static implicit operator ByteSize(NativeVectorWidth src)
             => new ByteSize((ulong)src/8);
 
         [MethodImpl(Inline)]

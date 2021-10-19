@@ -13,14 +13,14 @@ namespace Z0
     public readonly struct SegmentedIdentity
     {
         [MethodImpl(Inline)]
-        public static SegmentedIdentity define(TypeIndicator indicator, TypeWidth w, NumericKind nk)
-            => new SegmentedIdentity(indicator, (CellWidth)w, nk);
+        public static SegmentedIdentity define(TypeIndicator indicator, NativeTypeWidth w, NumericKind nk)
+            => new SegmentedIdentity(indicator, (CpuCellWidth)w, nk);
 
         [MethodImpl(Inline)]
         public static SegmentedIdentity from(string text)
             => new SegmentedIdentity(text);
 
-        public TypeWidth TypeWidth {get;}
+        public NativeTypeWidth TypeWidth {get;}
 
         public TypeIndicator Indicator {get;}
 
@@ -34,7 +34,7 @@ namespace Z0
             Identifier = nk.KeywordNot();
             Indicator = TypeIndicator.Empty;
             SegKind = nk;
-            TypeWidth = (TypeWidth)nk.Width();
+            TypeWidth = (NativeTypeWidth)nk.Width();
         }
 
         [MethodImpl(Inline)]
@@ -47,7 +47,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SegmentedIdentity(TypeWidth tw, CellWidth cw, NumericKind nk)
+        public SegmentedIdentity(NativeTypeWidth tw, CpuCellWidth cw, NumericKind nk)
         {
             TypeWidth = tw;
             Indicator = default;
@@ -56,10 +56,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SegmentedIdentity(TypeIndicator indicator, CellWidth width, NumericKind kind)
+        public SegmentedIdentity(TypeIndicator indicator, CpuCellWidth width, NumericKind kind)
         {
             Indicator = indicator;
-            TypeWidth = (TypeWidth)width;
+            TypeWidth = (NativeTypeWidth)width;
             SegKind = kind;
             if(TypeWidth == 0 && kind == 0)
                 Identifier = string.Empty;
@@ -109,10 +109,10 @@ namespace Z0
         public static bool operator!=(SegmentedIdentity a, SegmentedIdentity b)
             => !a.Equals(b);
 
-        public static implicit operator SegmentedIdentity((TypeIndicator si, CellWidth w, CellWidth t, NumericIndicator i) src)
+        public static implicit operator SegmentedIdentity((TypeIndicator si, CpuCellWidth w, CpuCellWidth t, NumericIndicator i) src)
             => new SegmentedIdentity(src.si, src.w, ((NumericWidth)src.t).ToNumericKind(src.i));
 
         public static SegmentedIdentity Empty
-            => new SegmentedIdentity(TypeIndicator.Empty, CellWidth.None, NumericKind.None);
+            => new SegmentedIdentity(TypeIndicator.Empty, CpuCellWidth.None, NumericKind.None);
     }
 }

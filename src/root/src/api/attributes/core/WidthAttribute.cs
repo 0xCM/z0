@@ -11,8 +11,8 @@ namespace Z0
     /// </summary>
     [AttributeUsage(AttributeTargets.Struct)]
     public class WidthAttribute : Attribute
-    {            
-        public WidthAttribute(TypeWidth width)
+    {
+        public WidthAttribute(NativeTypeWidth width)
         {
             this.TypeWidth = width;
         }
@@ -20,6 +20,6 @@ namespace Z0
         /// <summary>
         /// The logical width of the attributed type
         /// </summary>
-        public TypeWidth TypeWidth {get;}
+        public NativeTypeWidth TypeWidth {get;}
     }
 }

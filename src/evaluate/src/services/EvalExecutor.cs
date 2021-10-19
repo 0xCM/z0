@@ -30,29 +30,29 @@ namespace Z0
             Context = new EvalExecutorContext(source, 128, 0);
         }
 
-        public EvalResult MatchBinaryOps(in NativeBuffers buffers, CellWidth w, in ConstPair<ApiMemberCode> paired)
+        public EvalResult MatchBinaryOps(in NativeBuffers buffers, CpuCellWidth w, in ConstPair<ApiMemberCode> paired)
         {
             var clock = Time.counter();
             try
             {
                 switch(w)
                 {
-                    case CellWidth.W8:
+                    case CpuCellWidth.W8:
                         return MatchBinaryOps(buffers, n8, paired);
 
-                    case CellWidth.W16:
+                    case CpuCellWidth.W16:
                         return MatchBinaryOps(buffers, n16, paired);
 
-                    case CellWidth.W32:
+                    case CpuCellWidth.W32:
                         return MatchBinaryOps(buffers, n32, paired);
 
-                    case CellWidth.W64:
+                    case CpuCellWidth.W64:
                         return MatchBinaryOps(buffers, n64, paired);
 
-                    case CellWidth.W128:
+                    case CpuCellWidth.W128:
                         return MatchBinaryOps(buffers, n128, paired);
 
-                    case CellWidth.W256:
+                    case CpuCellWidth.W256:
                         return MatchBinaryOps(buffers, n256, paired);
 
                     default:

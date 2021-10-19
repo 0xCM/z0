@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="k">The primal kind over which the identifier is deined</param>
         [MethodImpl(Inline)]
         public static OpIdentity NumericOp(string opname, NumericKind k, bool generic = false)
-            => build(opname, TypeWidth.None, k, generic);
+            => build(opname, NativeTypeWidth.None, k, generic);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_g{kind}{u | i | f}
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static OpIdentity NumericOp<T>(string opname, bool generic = true)
             where T : unmanaged
-                => build(opname, TypeWidth.None, NumericKinds.kind<T>(), generic);
+                => build(opname, NativeTypeWidth.None, NumericKinds.kind<T>(), generic);
 
         public static string name<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
@@ -54,17 +54,17 @@ namespace Z0
         /// <param name="k">The primal kind over which the identifier is deined</param>
         [MethodImpl(Inline), Op]
         public static OpIdentity numeric(string opname, NumericKind k, bool generic = false)
-            => build(opname, TypeWidth.None, k, generic);
+            => build(opname, NativeTypeWidth.None, k, generic);
 
         public static OpIdentity kind<K,T>(K kind, T t = default)
             where K : unmanaged
             where T : unmanaged
-                => build(kind.ToString().ToLower(), (TypeWidth)width<T>(), NumericKinds.kind<T>(), true);
+                => build(kind.ToString().ToLower(), (NativeTypeWidth)width<T>(), NumericKinds.kind<T>(), true);
 
         public static OpIdentity klass<K,T>(K @class, T t = default)
             where K : unmanaged, IApiClass
             where T : unmanaged
-                => build(@class.Format(), (TypeWidth)width<T>(), NumericKinds.kind<T>(), true);
+                => build(@class.Format(), (NativeTypeWidth)width<T>(), NumericKinds.kind<T>(), true);
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -75,9 +75,9 @@ namespace Z0
         /// <typeparam name="W">The bit width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [Op]
-        public static OpIdentity build(string opname, TypeWidth tw, NumericKind k,  bool generic)
+        public static OpIdentity build(string opname, NativeTypeWidth tw, NumericKind k,  bool generic)
         {
-            var w = (CellWidth)tw;
+            var w = (CpuCellWidth)tw;
             var g = generic ? $"{IDI.Generic}" : EmptyString;
             if(generic && k == 0)
                 return ApiUri.opid(string.Concat(opname, IDI.PartSep, IDI.Generic));
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="k">The primal kind over which the identifier is deined</param>
         [Op]
         public static OpIdentity build(string opname, NumericKind k, bool generic)
-            => build(opname, TypeWidth.None, k, generic);
+            => build(opname, NativeTypeWidth.None, k, generic);
 
         [Op]
         public static OpIdentity build(ApiClassKind k, NumericKind nk, bool generic)

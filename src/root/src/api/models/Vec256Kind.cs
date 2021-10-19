@@ -15,8 +15,8 @@ namespace Z0
     {
         public W256 W => default;
 
-        public VectorWidth Width
-            => VectorWidth.W256;
+        public NativeVectorWidth Width
+            => NativeVectorWidth.W256;
 
         public NumericKind CellKind
             => NumericKinds.kind<T>();
@@ -32,7 +32,7 @@ namespace Z0
             => TypeDefinition.MakeGenericType(typeof(T));
 
         [MethodImpl(Inline)]
-        public static implicit operator VectorWidth(Vec256Kind<T> src)
+        public static implicit operator NativeVectorWidth(Vec256Kind<T> src)
             => src.Width;
 
         [MethodImpl(Inline)]

@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="w">The operand width</param>
         /// <param name="src">The defining method that requires an immediate value</param>
         /// <param name="imm">The immediate value to embed</param>
-        Option<DynamicDelegate> CreateUnaryOp(TypeWidth w, MethodInfo src, byte imm);
+        Option<DynamicDelegate> CreateUnaryOp(NativeTypeWidth w, MethodInfo src, byte imm);
 
         /// <summary>
         /// Creates a binary operator with an embedded immediate value
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="w">The operand width</param>
         /// <param name="src">The defining method that requires an immediate value</param>
         /// <param name="imm">The immediate value to embed</param>
-        Option<DynamicDelegate> CreateBinaryOp(TypeWidth w, MethodInfo src, byte imm);
+        Option<DynamicDelegate> CreateBinaryOp(NativeTypeWidth w, MethodInfo src, byte imm);
 
         /// <summary>
         /// Creates a 128-bit vectorized parametric unary operator that consumes an immediate value in the second argument

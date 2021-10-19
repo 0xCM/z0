@@ -45,6 +45,6 @@ namespace Z0.Asm
 
         public const string DumpAst = "dump-ast";
 
+        public const string Build = "build";
     }
-
 }

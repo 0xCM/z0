@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyrhs   :  (c) Chris Moore, 2020
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -35,7 +35,7 @@ namespace Z0
         public readonly uint D;
 
         [MethodImpl(Inline)]
-        public VersionSpec(uint a, uint b, uint c = 0, uint d = 0)
+        public VersionSpec(uint a, uint b = 0, uint c = 0, uint d = 0)
         {
             A = a;
             B = b;
@@ -74,28 +74,28 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool operator ==(VersionSpec lhs, VersionSpec rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(VersionSpec a, VersionSpec b)
+            => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(VersionSpec lhs, VersionSpec rhs)
-            => !(lhs == rhs);
+        public static bool operator !=(VersionSpec a, VersionSpec b)
+            => !(a == b);
 
         [MethodImpl(Inline)]
-        public static bool operator <(VersionSpec lhs, VersionSpec rhs)
-            => lhs.CompareTo(rhs) < 0;
+        public static bool operator <(VersionSpec a, VersionSpec b)
+            => a.CompareTo(b) < 0;
 
         [MethodImpl(Inline)]
-        public static bool operator <=(VersionSpec lhs, VersionSpec rhs)
-            => lhs.CompareTo(rhs) <= 0;
+        public static bool operator <=(VersionSpec a, VersionSpec b)
+            => a.CompareTo(b) <= 0;
 
         [MethodImpl(Inline)]
-        public static bool operator >(VersionSpec lhs, VersionSpec rhs)
-            => rhs < lhs;
+        public static bool operator >(VersionSpec a, VersionSpec b)
+            => b < a;
 
         [MethodImpl(Inline)]
-        public static bool operator >=(VersionSpec lhs, VersionSpec rhs)
-            => rhs <= lhs;
+        public static bool operator >=(VersionSpec a, VersionSpec b)
+            => b <= a;
 
         [MethodImpl(Inline)]
         public static implicit operator VersionSpec((uint a, uint b) src)

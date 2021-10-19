@@ -34,8 +34,8 @@ namespace Z0
         Span<byte> IBitVector.Bytes
             => bytes(State);
 
-        TypeWidth Width
-            => (TypeWidth)width<T>();
+        NativeTypeWidth Width
+            => (NativeTypeWidth)width<T>();
     }
 
     public interface IBitVector<V,T> : IBitVector<T>, IEquatable<V>

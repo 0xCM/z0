@@ -18,7 +18,7 @@ namespace Z0
         public @enum(E literal)
             => Literal = literal;
 
-        public DataWidth Width
+        public NativeTypeWidth Width
         {
             [MethodImpl(Inline)]
             get => core.width<E>();

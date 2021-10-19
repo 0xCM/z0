@@ -11,18 +11,18 @@ namespace Z0
     {
         None,
 
-        Sb8 = CellWidth.W8,
+        Sb8 = CpuCellWidth.W8,
 
-        Sb16 = CellWidth.W8 | CellWidth.W16,
+        Sb16 = CpuCellWidth.W8 | CpuCellWidth.W16,
 
-        Sb32 = CellWidth.W8 | CellWidth.W16 | CellWidth.W32,
+        Sb32 = CpuCellWidth.W8 | CpuCellWidth.W16 | CpuCellWidth.W32,
 
-        Sb64 = CellWidth.Numeric,
+        Sb64 = CpuCellWidth.Numeric,
 
-        Sb128 = CellWidth.W128 | CellWidth.Numeric,
+        Sb128 = CpuCellWidth.W128 | CpuCellWidth.Numeric,
 
-        Sb256 = CellWidth.W256 | CellWidth.W128 | CellWidth.Numeric,
+        Sb256 = CpuCellWidth.W256 | CpuCellWidth.W128 | CpuCellWidth.Numeric,
 
-        Sb512 = CellWidth.W512 | CellWidth.W256 | CellWidth.W128 | CellWidth.Numeric,
+        Sb512 = CpuCellWidth.W512 | CpuCellWidth.W256 | CpuCellWidth.W128 | CpuCellWidth.Numeric,
     }
 }

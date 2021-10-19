@@ -11,7 +11,7 @@ namespace Z0
 
     using DW = DataWidth;
     using TS = TypeSignKind;
-    using TW = TypeWidth;
+    using TW = NativeTypeWidth;
 
     using W = W24;
 

@@ -27,8 +27,8 @@ namespace Z0
             => (k & FixedSubgrid) != 0;
 
         [MethodImpl(Inline), Op]
-        public static CellWidth Width(this ApiGridKind k)
-            => (CellWidth)((ushort)k);
+        public static CpuCellWidth Width(this ApiGridKind k)
+            => (CpuCellWidth)((ushort)k);
 
         [MethodImpl(Inline), Op]
         public static ApiGridCategory Category(this ApiGridKind k)
@@ -111,7 +111,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Option<CellWidth> GridWidth(this Type src)
+        public static Option<CpuCellWidth> GridWidth(this Type src)
             => src.GridKind().TryMap(k => k.Width());
     }
 }

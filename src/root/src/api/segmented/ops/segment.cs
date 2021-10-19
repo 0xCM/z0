@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    partial class SegmentedKinds
+    partial class NativeSegKinds
     {
         /// <summary>
         /// Determines the segment kind classifier for a blocked type

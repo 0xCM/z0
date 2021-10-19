@@ -14,7 +14,7 @@ namespace Z0
     public interface IFuncW<W> : IFunc
         where W : unmanaged, ITypeWidth
     {
-        TypeWidth TypeWidth
+        NativeTypeWidth TypeWidth
             => default(W).TypeWidth;
     }
 

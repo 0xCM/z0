@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface ITypeWidth : IDataWidth
     {
-        TypeWidth TypeWidth {get;}
+        NativeTypeWidth TypeWidth {get;}
 
     }
 

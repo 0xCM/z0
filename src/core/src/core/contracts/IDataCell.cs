@@ -61,7 +61,7 @@ namespace Z0
         where W : unmanaged, ITypeWidth
         where T : struct
     {
-        TypeWidth TypeWidth
+        NativeTypeWidth TypeWidth
             => Widths.type<W>();
 
         uint IDataCell.Width

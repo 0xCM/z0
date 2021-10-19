@@ -18,8 +18,8 @@ namespace Z0
         public W256 W
             => default;
 
-        public VectorWidth Class
-            => VectorWidth.W256;
+        public NativeVectorWidth Class
+            => NativeVectorWidth.W256;
 
         public uint Value
             => (uint)W.DataWidth;
@@ -34,12 +34,9 @@ namespace Z0
         public Type Close(Type cell)
             => TypeDefinition.MakeGenericType(cell);
 
-        [MethodImpl(Inline)]
-        public static implicit operator VectorWidthKind(Vec256Type src)
-            => src.Class;
 
         [MethodImpl(Inline)]
-        public static implicit operator VectorWidth(Vec256Type src)
+        public static implicit operator NativeVectorWidth(Vec256Type src)
             => src.W;
 
         [MethodImpl(Inline)]

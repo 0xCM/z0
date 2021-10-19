@@ -44,7 +44,7 @@ namespace Z0
             Kind = TypeClosureKind.Numeric;
         }
 
-        public ClosuresAttribute(CellWidth spec)
+        public ClosuresAttribute(CpuCellWidth spec)
             : this()
         {
             Spec = (ulong)spec;
@@ -73,14 +73,6 @@ namespace Z0
             Spec = (ulong)spec;
             Kind = TypeClosureKind.Natural;
             Pairs = pairs;
-        }
-
-        public ClosuresAttribute(WidthClosureKind spec, params TypeWidth[] values)
-            : this()
-        {
-            Spec = (ulong)spec;
-            Kind = TypeClosureKind.Width;
-            Values = values.Select(v => (ulong)v).ToArray();
         }
 
         public ClosuresAttribute(ImmClosureKind spec, params byte[] values)

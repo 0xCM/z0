@@ -188,21 +188,21 @@ namespace Z0.Asm
             }
         }
 
-        [CmdOp(".test-int-strings")]
-        Outcome CheckIntStrings(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var src = span(gen.IntegerStrings.Range0To65535);
-            var width = 5;
-            for(var i=0; i<65535; i++)
-            {
-                var offset = width*i;
-                ushort.TryParse(slice(src,offset,width), out var value);
-                if(value != i)
-                    Error("!");
-            }
+        // [CmdOp(".test-int-strings")]
+        // Outcome CheckIntStrings(CmdArgs args)
+        // {
+        //     var result = Outcome.Success;
+        //     var src = span(gen.IntegerStrings.Range0To65535);
+        //     var width = 5;
+        //     for(var i=0; i<65535; i++)
+        //     {
+        //         var offset = width*i;
+        //         ushort.TryParse(slice(src,offset,width), out var value);
+        //         if(value != i)
+        //             Error("!");
+        //     }
 
-            return result;
-        }
+        //     return result;
+        // }
    }
 }

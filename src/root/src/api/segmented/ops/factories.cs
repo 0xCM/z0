@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class SegmentedKinds
+    partial class NativeSegKinds
     {
         [KindFactory]
         public static Seg16 seg16()
@@ -231,41 +231,5 @@ namespace Z0
         public static SegmentedKind<T> generic<T>(T t = default)
             where T : unmanaged
                 => default;
-
-        [MethodImpl(Inline)]
-        public static SegmentedKind<W,T> generic<W,T>(W w = default, T t = default)
-            where W : unmanaged, ITypeWidth
-            where T : unmanaged
-                => default;
-
-        [KindFactory, Closures(Closure)]
-        public static SegmentedKind<W16,T> generic<T>(W16 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [KindFactory, Closures(Closure)]
-        public static SegmentedKind<W32,T> generic<T>(W32 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [KindFactory, Closures(Closure)]
-        public static SegmentedKind<W64,T> generic<T>(W64 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [KindFactory, Closures(Closure)]
-        public static SegmentedKind<W128,T> generic<T>(W128 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [KindFactory, Closures(Closure)]
-        public static SegmentedKind<W256,T> generic<T>(W256 w, T t = default)
-            where T : unmanaged
-                => default;
-
-        [KindFactory, Closures(Closure)]
-        public static SegmentedKind<W512,T> generic<T>(W512 w, T t = default)
-            where T : unmanaged
-                => default;
-    }
+   }
 }

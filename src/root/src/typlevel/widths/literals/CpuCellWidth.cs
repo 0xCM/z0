@@ -12,7 +12,7 @@ namespace Z0
     /// Defines a <see cref="DataWidth"/> constrained to widths supported by available fixed-width types
     /// </summary>
     [Flags]
-    public enum CellWidth : ushort
+    public enum CpuCellWidth : ushort
     {
         /// <summary>
         /// Void

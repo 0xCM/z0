@@ -10,7 +10,7 @@ namespace Z0
         NumericWidth INumericWidth.NumericWidth
             => Widths.numeric<W>();
 
-        TypeWidth ITypeWidth.TypeWidth
+        NativeTypeWidth ITypeWidth.TypeWidth
             => Widths.type<W>();
     }
 }

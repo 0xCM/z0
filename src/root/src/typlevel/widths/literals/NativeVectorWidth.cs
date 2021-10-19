@@ -10,18 +10,12 @@ namespace Z0
     /// Defines a <see cref="DataWidth"/> subset that is constrained to widths that correspond to x86 vectorized registers
     /// </summary>
     [SymSource]
-    public enum VectorWidth : ushort
+    public enum NativeVectorWidth : ushort
     {
         /// <summary>
         /// Empty
         /// </summary>
         None = 0,
-
-        /// <summary>
-        /// Indicates a bit-width of 64
-        /// </summary>
-        [Symbol("w64")]
-        W64 = W.W64,
 
         /// <summary>
         /// Indicates a bit-width of 128

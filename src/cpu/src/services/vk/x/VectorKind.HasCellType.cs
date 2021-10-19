@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
-        public static bool HasCellType(this VectorKind k, sbyte t)
+        public static bool HasCellType(this NativeVectorKind k, sbyte t)
             => VK.test(k,t);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
-        public static bool HasCellType(this VectorKind k, byte t)
+        public static bool HasCellType(this NativeVectorKind k, byte t)
             => VK.test(k,t);
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
-        public static bool HasCellType(this VectorKind k, short t)
+        public static bool HasCellType(this NativeVectorKind k, short t)
             => VK.test(k,t);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
-        public static bool HasCellType(this VectorKind k, ushort t)
+        public static bool HasCellType(this NativeVectorKind k, ushort t)
             => VK.test(k,t);
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
-        public static bool HasCellType(this VectorKind k, int t)
+        public static bool HasCellType(this NativeVectorKind k, int t)
             => VK.test(k,t);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
-        public static bool HasCellType(this VectorKind k, uint t)
+        public static bool HasCellType(this NativeVectorKind k, uint t)
             => VK.test(k,t);
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
-        public static bool HasCellType(this VectorKind k, long t)
+        public static bool HasCellType(this NativeVectorKind k, long t)
             => VK.test(k,t);
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
-        public static bool HasCellType(this VectorKind k, ulong t)
+        public static bool HasCellType(this NativeVectorKind k, ulong t)
             => VK.test(k,t);
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
-        public static bool HasCellType(this VectorKind k, float t)
+        public static bool HasCellType(this NativeVectorKind k, float t)
             => VK.test(k,t);
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="k">The vector kind</param>
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
-        public static bool HasCellType(this VectorKind k, double t)
+        public static bool HasCellType(this NativeVectorKind k, double t)
             => VK.test(k,t);
     }
 }

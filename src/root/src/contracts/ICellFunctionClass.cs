@@ -11,7 +11,7 @@ namespace Z0
     [Free]
     public interface ICellFunctionClass : IOperationClass
     {
-        TypeWidth Width {get;}
+        NativeTypeWidth Width {get;}
     }
 
     [Free]

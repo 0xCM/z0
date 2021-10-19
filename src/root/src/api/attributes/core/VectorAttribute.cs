@@ -12,8 +12,8 @@ namespace Z0
     /// </summary>
     public class VectorAttribute : SegmentedAttribute
     {
-        public VectorAttribute(TypeWidth width)
-            : base(width,false, CellWidth.Numeric)
+        public VectorAttribute(NativeTypeWidth width)
+            : base(width,false, CpuCellWidth.Numeric)
         {
         }
     }

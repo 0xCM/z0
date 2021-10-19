@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using W = TypeWidth;
+    using W = NativeTypeWidth;
 
     /// <summary>
     /// Defines cell data type classifiers

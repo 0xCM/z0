@@ -9,7 +9,7 @@ namespace Z0
 
     public interface ITestBinaryDynamic : ITestOperatorMatch, ICheckDynamic
     {
-        TestCaseRecord Match(K k, TypeWidth w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
+        TestCaseRecord Match(K k, NativeTypeWidth w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
             => Test.create((ICheckBinaryCellOp)this).Match(k,w,a,b,dst);
 
         TestCaseRecord Match(K k, W8 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)

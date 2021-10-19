@@ -15,7 +15,7 @@ namespace Z0
         public ApiOperatorKind Kind
             => ApiOperatorKind.BinaryOp;
 
-        public TypeWidth Width
+        public NativeTypeWidth Width
             => Widths.type<W>();
 
         public OperatorClass<W> Classifier

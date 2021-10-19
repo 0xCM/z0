@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using TW = TypeWidth;
+    using TW = NativeTypeWidth;
 
     partial class VK
     {

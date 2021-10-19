@@ -85,15 +85,15 @@ namespace Z0
             => api.bits(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Kb(TypeWidth src)
+        public static implicit operator Kb(NativeTypeWidth src)
             => api.kb((BitWidth)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator TypeWidth(Kb src)
+        public static implicit operator NativeTypeWidth(Kb src)
             => api.bits(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Kb(VectorWidth src)
+        public static implicit operator Kb(NativeVectorWidth src)
             => api.kb((BitWidth)src);
 
         [MethodImpl(Inline)]

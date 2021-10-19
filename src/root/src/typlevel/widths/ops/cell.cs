@@ -9,17 +9,17 @@ namespace Z0
 
     using static Root;
 
-    using K = CellWidth;
+    using K = CpuCellWidth;
 
     partial class Widths
     {
         [MethodImpl(Inline)]
-        public static CellWidth cell<W>(W w = default)
+        public static CpuCellWidth cell<W>(W w = default)
             where W : struct, ICellWidth
                 => cell_u<W>();
 
         [MethodImpl(Inline)]
-        static CellWidth cell_u<W>(W w = default)
+        static CpuCellWidth cell_u<W>(W w = default)
             where W : struct, ICellWidth
         {
             if(typeof(W) == typeof(W8))
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static CellWidth cell_i<W>()
+        static CpuCellWidth cell_i<W>()
             where W : struct, ICellWidth
         {
             if(typeof(W) == typeof(W8i))
@@ -63,59 +63,59 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W8 w)
+        public static CpuCellWidth cell(W8 w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W16 w)
+        public static CpuCellWidth cell(W16 w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W32 w)
+        public static CpuCellWidth cell(W32 w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W64 w)
+        public static CpuCellWidth cell(W64 w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W128 w)
+        public static CpuCellWidth cell(W128 w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W256 w)
+        public static CpuCellWidth cell(W256 w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W512 w)
+        public static CpuCellWidth cell(W512 w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W8i w)
+        public static CpuCellWidth cell(W8i w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W16i w)
+        public static CpuCellWidth cell(W16i w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W32i w)
+        public static CpuCellWidth cell(W32i w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W64i w)
+        public static CpuCellWidth cell(W64i w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W128i w)
+        public static CpuCellWidth cell(W128i w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W256i w)
+        public static CpuCellWidth cell(W256i w)
             => cell_u(w);
 
         [MethodImpl(Inline), Op]
-        public static CellWidth cell(W512i w)
+        public static CpuCellWidth cell(W512i w)
             => cell_u(w);
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using W = CellWidth;
+    using W = CpuCellWidth;
     using P2 = Pow2x32;
 
     /// <summary>

@@ -61,6 +61,13 @@ namespace Z0
             return RunToolScript(path, vars.ToCmdVars(), quiet, out flows);
         }
 
+        public Outcome RunProjectScript(ProjectId project, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
+        {
+            var path = Ws.Projects().Script(project, script, FS.Cmd);
+            var result = Outcome.Success;
+            return RunToolScript(path, CmdVars.Empty, quiet, out flows);
+        }
+
         public Outcome RunProjectScripts(ProjectId project, string match, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
         {
             var result = Outcome.Success;

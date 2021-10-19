@@ -12,7 +12,6 @@ namespace Z0.llvm.clang
 
     public readonly struct EnumConstantDecl : IAstNode<EnumConstantDecl>
     {
-
         readonly ClangAst Ast;
 
         public uint Source {get;}

@@ -51,13 +51,13 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Func<Cell64> create(ISource source, W64 w, NumericKind nk)
-            => create<Cell64>(source, CellWidth.W64, nk);
+            => create<Cell64>(source, CpuCellWidth.W64, nk);
 
         [Op, Closures(Closure)]
-        public static Func<F> create<F>(ISource source, CellWidth width, NumericKind nk)
+        public static Func<F> create<F>(ISource source, CpuCellWidth width, NumericKind nk)
             where F : unmanaged
         {
-            if(width <= CellWidth.W64)
+            if(width <= CpuCellWidth.W64)
             {
                 switch(nk)
                 {
@@ -87,11 +87,11 @@ namespace Z0
             {
                 switch(width)
                 {
-                    case CellWidth.W128:
+                    case CpuCellWidth.W128:
                         return f128;
-                    case CellWidth.W256:
+                    case CpuCellWidth.W256:
                         return f256;
-                    case CellWidth.W512:
+                    case CpuCellWidth.W512:
                         return f512;
                 }
             }

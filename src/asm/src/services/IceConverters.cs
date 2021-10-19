@@ -15,7 +15,7 @@ namespace Z0.Asm
     using MZ = Asm.IceMemorySize;
     using NK = NumericKind;
     using SI = SegmentedIdentity;
-    using FIX = CellWidth;
+    using FIX = CpuCellWidth;
 
     [ApiHost]
     public readonly partial struct IceConverters

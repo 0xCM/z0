@@ -54,21 +54,21 @@ namespace Z0
             => Dynop.EmbedImmVBinaryOpImm(VK.vk256<T>(), Identify(src), src, imm);
 
 
-        Option<DynamicDelegate> IDynexus.CreateUnaryOp(TypeWidth w, MethodInfo src, byte imm8)
+        Option<DynamicDelegate> IDynexus.CreateUnaryOp(NativeTypeWidth w, MethodInfo src, byte imm8)
         {
-            if(w == TypeWidth.W128)
+            if(w == NativeTypeWidth.W128)
                 return DynamicImmediate.EmbedVUnaryOpImm(w128, src,imm8, Identify(src));
-            else if(w == TypeWidth.W256)
+            else if(w == NativeTypeWidth.W256)
                 return DynamicImmediate.EmbedVUnaryOpImm(w256, src,imm8, Identify(src));
             else
                 return Option.none<DynamicDelegate>();
         }
 
-        Option<DynamicDelegate> IDynexus.CreateBinaryOp(TypeWidth w, MethodInfo src, byte imm8)
+        Option<DynamicDelegate> IDynexus.CreateBinaryOp(NativeTypeWidth w, MethodInfo src, byte imm8)
         {
-            if(w == TypeWidth.W128)
+            if(w == NativeTypeWidth.W128)
                 return DynamicImmediate.EmbedVBinaryOpImm(w128, src, imm8, Identify(src));
-            else if(w == TypeWidth.W256)
+            else if(w == NativeTypeWidth.W256)
                 return DynamicImmediate.EmbedVBinaryOpImm(w256, src, imm8, Identify(src));
             else
                 return Option.none<DynamicDelegate>();

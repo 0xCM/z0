@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    partial class SegmentedKinds
+    partial class NativeSegKinds
     {
-        public static TypeWidth width(Type src)
+        public static NativeTypeWidth width(Type src)
             => Widths.segmented(src);
     }
 }

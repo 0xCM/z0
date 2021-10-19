@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct TernaryCellFunctionClass : ICellFunctionClass<TernaryCellFunctionClass,ApiOperatorKind>
     {
-        public TypeWidth Width {get;}
+        public NativeTypeWidth Width {get;}
 
         public ApiOperatorKind Kind
             => ApiOperatorKind.TernaryOp;
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public TernaryCellFunctionClass(TypeWidth width)
+        public TernaryCellFunctionClass(NativeTypeWidth width)
             => Width = width;
 
         [MethodImpl(Inline)]

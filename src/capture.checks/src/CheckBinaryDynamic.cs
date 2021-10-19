@@ -24,26 +24,26 @@ namespace Z0
         }
 
         [Op]
-        public TestCaseRecord Match(K k, TypeWidth w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
+        public TestCaseRecord Match(K k, NativeTypeWidth w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
         {
             switch(w)
             {
-                case TypeWidth.W8:
+                case NativeTypeWidth.W8:
                     return Match(k, w8, a, b, dst);
 
-                case TypeWidth.W16:
+                case NativeTypeWidth.W16:
                     return Match(k, w16, a, b, dst);
 
-                case TypeWidth.W32:
+                case NativeTypeWidth.W32:
                     return Match(k, w32, a, b, dst);
 
-                case TypeWidth.W64:
+                case NativeTypeWidth.W64:
                     return Match(k, w64, a, b, dst);
 
-                case TypeWidth.W128:
+                case NativeTypeWidth.W128:
                     return Match(k, w128, a, b, dst);
 
-                case TypeWidth.W256:
+                case NativeTypeWidth.W256:
                     return Match(k, w256, a, b, dst);
             }
 
@@ -131,26 +131,26 @@ namespace Z0
         }
 
         [Op]
-        public TestCaseRecord Match(K k, TypeWidth w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
+        public TestCaseRecord Match(K k, NativeTypeWidth w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
         {
             switch(w)
             {
-                case TypeWidth.W8:
+                case NativeTypeWidth.W8:
                     return Match(k, w8, a, b, dst);
 
-                case TypeWidth.W16:
+                case NativeTypeWidth.W16:
                     return Match(k, w16, a, b, dst);
 
-                case TypeWidth.W32:
+                case NativeTypeWidth.W32:
                     return Match(k, w32, a, b, dst);
 
-                case TypeWidth.W64:
+                case NativeTypeWidth.W64:
                     return Match(k, w64, a, b, dst);
 
-                case TypeWidth.W128:
+                case NativeTypeWidth.W128:
                     return Match(k, w128, a, b, dst);
 
-                case TypeWidth.W256:
+                case NativeTypeWidth.W256:
                     return Match(k, w256, a, b, dst);
             }
 

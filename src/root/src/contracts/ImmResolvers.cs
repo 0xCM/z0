@@ -14,8 +14,8 @@ namespace Z0
         NumericKind ImmKind
             => NumericKind.None;
 
-        TypeWidth OperandWidth
-            => TypeWidth.None;
+        NativeTypeWidth OperandWidth
+            => NativeTypeWidth.None;
     }
 
     [Free, SFx]
@@ -40,7 +40,7 @@ namespace Z0
     {
         DynamicDelegate<UnaryOp<V>>  @delegate(byte imm8);
 
-        TypeWidth IImmResover.OperandWidth
+        NativeTypeWidth IImmResover.OperandWidth
             => Widths.type<W>();
     }
 
@@ -51,7 +51,7 @@ namespace Z0
     {
         DynamicDelegate<BinaryOp<V>> @delegate(byte imm8);
 
-        TypeWidth IImmResover.OperandWidth
+        NativeTypeWidth IImmResover.OperandWidth
             => Widths.type<W>();
     }
 

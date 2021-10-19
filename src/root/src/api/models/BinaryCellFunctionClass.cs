@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct BinaryCellFunctionClass : ICellFunctionClass<BinaryCellFunctionClass,ApiOperatorKind>
     {
-        public TypeWidth Width {get;}
+        public NativeTypeWidth Width {get;}
 
         public ApiOperatorKind Kind
             => ApiOperatorKind.BinaryOp;
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BinaryCellFunctionClass(TypeWidth width)
+        public BinaryCellFunctionClass(NativeTypeWidth width)
             => Width = width;
 
         [MethodImpl(Inline)]

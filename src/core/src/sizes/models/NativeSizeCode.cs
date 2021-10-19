@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    /// <summary>
-    /// Defines a <see cref='DataWidth' subset that corresponds to x86 register widths and
-    /// </summary>
     [SymSource]
     public enum NativeSizeCode : byte
     {

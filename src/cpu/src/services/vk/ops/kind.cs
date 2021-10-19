@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Classify, Closures(Closure)]
-        public static VectorKind kind<T>(Vector128<T> src)
+        public static NativeVectorKind kind<T>(Vector128<T> src)
             where T : unmanaged
                 => vkind128_u(src);
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Classify, Closures(Closure)]
-        public static VectorKind kind<T>(Vector256<T> src)
+        public static NativeVectorKind kind<T>(Vector256<T> src)
             where T : unmanaged
                 => vkind256_u(src);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Classify, Closures(Closure)]
-        public static VectorKind kind<T>(Vector512<T> src)
+        public static NativeVectorKind kind<T>(Vector512<T> src)
             where T : unmanaged
                 => vkind512_u(src);
 
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="t">A representative cell value</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Classify, Closures(Closure)]
-        public static VectorKind kind<T>(W128 w, T t = default)
+        public static NativeVectorKind kind<T>(W128 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="t">A representative cell value</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Classify, Closures(Closure)]
-        public static VectorKind kind<T>(W256 w, T t = default)
+        public static NativeVectorKind kind<T>(W256 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
 
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="t">A representative cell value</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Classify, Closures(Closure)]
-        public static VectorKind kind<T>(W512 w, T t = default)
+        public static NativeVectorKind kind<T>(W512 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
 
@@ -83,7 +83,7 @@ namespace Z0
         /// <typeparam name="W">The width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static VectorKind kind<W,T>(W w = default, T t = default)
+        public static NativeVectorKind kind<W,T>(W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
         {
@@ -94,139 +94,139 @@ namespace Z0
             else if(typeof(W) == typeof(W512))
                 return VK.kind<T>(default(W512));
             else
-                return VectorKind.None;
+                return NativeVectorKind.None;
         }
 
         [MethodImpl(Inline)]
-        static VectorKind kind_u<T>(W128 w, T t = default)
+        static NativeVectorKind kind_u<T>(W128 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return VectorKind.v128x8u;
+                return NativeVectorKind.v128x8u;
             else if(typeof(T) == typeof(ushort))
-                return VectorKind.v128x16u;
+                return NativeVectorKind.v128x16u;
             else if(typeof(T) == typeof(uint))
-                return VectorKind.v128x32u;
+                return NativeVectorKind.v128x32u;
             else if(typeof(T) == typeof(ulong))
-                return VectorKind.v128x64u;
+                return NativeVectorKind.v128x64u;
             else
                 return kind_i(w,t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind kind_i<T>(W128 w, T t = default)
+        static NativeVectorKind kind_i<T>(W128 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return VectorKind.v128x8i;
+                return NativeVectorKind.v128x8i;
             else if(typeof(T) == typeof(short))
-                return VectorKind.v128x16i;
+                return NativeVectorKind.v128x16i;
             else if(typeof(T) == typeof(int))
-                return VectorKind.v128x32i;
+                return NativeVectorKind.v128x32i;
             else if(typeof(T) == typeof(long))
-                return VectorKind.v128x64i;
+                return NativeVectorKind.v128x64i;
             else
                 return kind_f(w, t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind kind_f<T>(W128 w, T t = default)
+        static NativeVectorKind kind_f<T>(W128 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return VectorKind.v128x32f;
+                return NativeVectorKind.v128x32f;
             else if(typeof(T) == typeof(double))
-                return VectorKind.v128x64f;
+                return NativeVectorKind.v128x64f;
             else
-                return VectorKind.None;
+                return NativeVectorKind.None;
         }
 
         [MethodImpl(Inline)]
-        static VectorKind kind_u<T>(W256 w, T t = default)
+        static NativeVectorKind kind_u<T>(W256 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return VectorKind.v256x8u;
+                return NativeVectorKind.v256x8u;
             else if(typeof(T) == typeof(ushort))
-                return VectorKind.v256x16u;
+                return NativeVectorKind.v256x16u;
             else if(typeof(T) == typeof(uint))
-                return VectorKind.v256x32u;
+                return NativeVectorKind.v256x32u;
             else if(typeof(T) == typeof(ulong))
-                return VectorKind.v256x64u;
+                return NativeVectorKind.v256x64u;
             else
                 return kind_i(w,t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind kind_i<T>(W256 w, T t = default)
+        static NativeVectorKind kind_i<T>(W256 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return VectorKind.v256x8i;
+                return NativeVectorKind.v256x8i;
             else if(typeof(T) == typeof(short))
-                return VectorKind.v256x16i;
+                return NativeVectorKind.v256x16i;
             else if(typeof(T) == typeof(int))
-                return VectorKind.v256x32i;
+                return NativeVectorKind.v256x32i;
             else if(typeof(T) == typeof(long))
-                return VectorKind.v256x64i;
+                return NativeVectorKind.v256x64i;
             else
                 return kind_f(w, t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind kind_f<T>(W256 w, T t = default)
+        static NativeVectorKind kind_f<T>(W256 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return VectorKind.v256x32f;
+                return NativeVectorKind.v256x32f;
             else if(typeof(T) == typeof(double))
-                return VectorKind.v256x64f;
+                return NativeVectorKind.v256x64f;
             else
-                return VectorKind.None;
+                return NativeVectorKind.None;
         }
 
         [MethodImpl(Inline)]
-        static VectorKind kind_u<T>(W512 w, T t = default)
+        static NativeVectorKind kind_u<T>(W512 w, T t = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return VectorKind.v512x8u;
+                return NativeVectorKind.v512x8u;
             else if(typeof(T) == typeof(ushort))
-                return VectorKind.v512x16u;
+                return NativeVectorKind.v512x16u;
             else if(typeof(T) == typeof(uint))
-                return VectorKind.v512x32u;
+                return NativeVectorKind.v512x32u;
             else if(typeof(T) == typeof(ulong))
-                return VectorKind.v512x64u;
+                return NativeVectorKind.v512x64u;
             else
                 return kind_i(w,t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind kind_i<T>(W512 w, T t = default)
+        static NativeVectorKind kind_i<T>(W512 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return VectorKind.v512x8i;
+                return NativeVectorKind.v512x8i;
             else if(typeof(T) == typeof(short))
-                return VectorKind.v512x16i;
+                return NativeVectorKind.v512x16i;
             else if(typeof(T) == typeof(int))
-                return VectorKind.v512x32i;
+                return NativeVectorKind.v512x32i;
             else if(typeof(T) == typeof(long))
-                return VectorKind.v512x64i;
+                return NativeVectorKind.v512x64i;
             else
                 return kind_f(w, t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind kind_f<T>(W512 w, T t = default)
+        static NativeVectorKind kind_f<T>(W512 w, T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return VectorKind.v512x32f;
+                return NativeVectorKind.v512x32f;
             else if(typeof(T) == typeof(double))
-                return VectorKind.v512x64f;
+                return NativeVectorKind.v512x64f;
             else
-                return VectorKind.None;
+                return NativeVectorKind.None;
         }
 
         /// <summary>
@@ -234,209 +234,209 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Classify]
-        public static VectorKind kind(Type src)
+        public static NativeVectorKind kind(Type src)
         {
             var t = src.EffectiveType();
             if(t == typeof(Vector128<byte>))
-                return VectorKind.v128x8u;
+                return NativeVectorKind.v128x8u;
             else if(t == typeof(Vector128<ushort>))
-                return VectorKind.v128x16u;
+                return NativeVectorKind.v128x16u;
             else if(t == typeof(Vector128<uint>))
-                return VectorKind.v128x32u;
+                return NativeVectorKind.v128x32u;
             else if(t == typeof(Vector128<ulong>))
-                return VectorKind.v128x64u;
+                return NativeVectorKind.v128x64u;
 
             else if(t == typeof(Vector128<sbyte>))
-                return VectorKind.v128x8i;
+                return NativeVectorKind.v128x8i;
             else if(t == typeof(Vector128<short>))
-                return VectorKind.v128x16i;
+                return NativeVectorKind.v128x16i;
             else if(t == typeof(Vector128<int>))
-                return VectorKind.v128x32i;
+                return NativeVectorKind.v128x32i;
             else if(t == typeof(Vector128<long>))
-                return VectorKind.v128x64i;
+                return NativeVectorKind.v128x64i;
 
             else if(t == typeof(Vector128<float>))
-                return VectorKind.v128x32f;
+                return NativeVectorKind.v128x32f;
             else if(t == typeof(Vector128<double>))
-                return VectorKind.v128x64f;
+                return NativeVectorKind.v128x64f;
 
             else if(t == typeof(Vector256<byte>))
-                return VectorKind.v256x8u;
+                return NativeVectorKind.v256x8u;
             else if(t == typeof(Vector256<ushort>))
-                return VectorKind.v256x16u;
+                return NativeVectorKind.v256x16u;
             else if(t == typeof(Vector256<uint>))
-                return VectorKind.v256x32u;
+                return NativeVectorKind.v256x32u;
             else if(t == typeof(Vector256<ulong>))
-                return VectorKind.v256x64u;
+                return NativeVectorKind.v256x64u;
 
             else if(t == typeof(Vector256<sbyte>))
-                return VectorKind.v256x8i;
+                return NativeVectorKind.v256x8i;
             else if(t == typeof(Vector256<short>))
-                return VectorKind.v256x16i;
+                return NativeVectorKind.v256x16i;
             else if(t == typeof(Vector256<int>))
-                return VectorKind.v256x32i;
+                return NativeVectorKind.v256x32i;
             else if(t == typeof(Vector256<long>))
-                return VectorKind.v256x64i;
+                return NativeVectorKind.v256x64i;
 
             else if(t == typeof(Vector256<float>))
-                return VectorKind.v256x32f;
+                return NativeVectorKind.v256x32f;
             else if(t == typeof(Vector256<double>))
-                return VectorKind.v256x64f;
+                return NativeVectorKind.v256x64f;
 
             else if(t == typeof(Vector512<byte>))
-                return VectorKind.v512x8u;
+                return NativeVectorKind.v512x8u;
             else if(t == typeof(Vector512<ushort>))
-                return VectorKind.v512x16u;
+                return NativeVectorKind.v512x16u;
             else if(t == typeof(Vector512<uint>))
-                return VectorKind.v512x32u;
+                return NativeVectorKind.v512x32u;
             else if(t == typeof(Vector512<ulong>))
-                return VectorKind.v512x64u;
+                return NativeVectorKind.v512x64u;
 
             else if(t == typeof(Vector512<sbyte>))
-                return VectorKind.v512x8i;
+                return NativeVectorKind.v512x8i;
             else if(t == typeof(Vector512<short>))
-                return VectorKind.v512x16i;
+                return NativeVectorKind.v512x16i;
             else if(t == typeof(Vector512<int>))
-                return VectorKind.v512x32i;
+                return NativeVectorKind.v512x32i;
             else if(t == typeof(Vector512<long>))
-                return VectorKind.v512x64i;
+                return NativeVectorKind.v512x64i;
 
             else if(t == typeof(Vector512<float>))
-                return VectorKind.v512x32f;
+                return NativeVectorKind.v512x32f;
             else if(t == typeof(Vector512<double>))
-                return VectorKind.v512x64f;
+                return NativeVectorKind.v512x64f;
             else
-                return VectorKind.None;
+                return NativeVectorKind.None;
         }
 
         [MethodImpl(Inline)]
-        static VectorKind vkind128_u<T>(T t = default)
+        static NativeVectorKind vkind128_u<T>(T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(Vector128<byte>))
-                return VectorKind.v128x8u;
+                return NativeVectorKind.v128x8u;
             else if(typeof(T) == typeof(Vector128<ushort>))
-                return VectorKind.v128x16u;
+                return NativeVectorKind.v128x16u;
             else if(typeof(T) == typeof(Vector128<uint>))
-                return VectorKind.v128x32u;
+                return NativeVectorKind.v128x32u;
             else if(typeof(T) == typeof(Vector128<ulong>))
-                return VectorKind.v128x64u;
+                return NativeVectorKind.v128x64u;
             else
                 return vkind128_i(t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind vkind128_i<T>(T t = default)
+        static NativeVectorKind vkind128_i<T>(T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(Vector128<sbyte>))
-                return VectorKind.v128x8i;
+                return NativeVectorKind.v128x8i;
             else if(typeof(T) == typeof(Vector128<short>))
-                return VectorKind.v128x16i;
+                return NativeVectorKind.v128x16i;
             else if(typeof(T) == typeof(Vector128<int>))
-                return VectorKind.v128x32i;
+                return NativeVectorKind.v128x32i;
             else if(typeof(T) == typeof(Vector128<long>))
-                return VectorKind.v128x64i;
+                return NativeVectorKind.v128x64i;
             else
                 return vkind128_f(t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind vkind128_f<T>(T t = default)
+        static NativeVectorKind vkind128_f<T>(T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(Vector128<float>))
-                return VectorKind.v128x32f;
+                return NativeVectorKind.v128x32f;
             else if(typeof(T) == typeof(Vector128<double>))
-                return VectorKind.v128x64f;
+                return NativeVectorKind.v128x64f;
             else
                 return default;
         }
 
         [MethodImpl(Inline)]
-        static VectorKind vkind256_u<T>(T t = default)
+        static NativeVectorKind vkind256_u<T>(T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(Vector256<byte>))
-                return VectorKind.v256x8u;
+                return NativeVectorKind.v256x8u;
             else if(typeof(T) == typeof(Vector256<ushort>))
-                return VectorKind.v256x16u;
+                return NativeVectorKind.v256x16u;
             else if(typeof(T) == typeof(Vector256<uint>))
-                return VectorKind.v256x32u;
+                return NativeVectorKind.v256x32u;
             else if(typeof(T) == typeof(Vector256<ulong>))
-                return VectorKind.v256x64u;
+                return NativeVectorKind.v256x64u;
             else
                 return vkind256_i(t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind vkind256_i<T>(T t = default)
+        static NativeVectorKind vkind256_i<T>(T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(Vector256<sbyte>))
-                return VectorKind.v256x8i;
+                return NativeVectorKind.v256x8i;
             else if(typeof(T) == typeof(Vector256<short>))
-                return VectorKind.v256x16i;
+                return NativeVectorKind.v256x16i;
             else if(typeof(T) == typeof(Vector256<int>))
-                return VectorKind.v256x32i;
+                return NativeVectorKind.v256x32i;
             else if(typeof(T) == typeof(Vector256<long>))
-                return VectorKind.v256x64i;
+                return NativeVectorKind.v256x64i;
             else
                 return vkind256_f(t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind vkind256_f<T>(T t = default)
+        static NativeVectorKind vkind256_f<T>(T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(Vector256<float>))
-                return VectorKind.v256x32f;
+                return NativeVectorKind.v256x32f;
             else if(typeof(T) == typeof(Vector256<double>))
-                return VectorKind.v256x64f;
+                return NativeVectorKind.v256x64f;
             else
                 return default;
         }
 
         [MethodImpl(Inline)]
-        static VectorKind vkind512_u<T>(T t = default)
+        static NativeVectorKind vkind512_u<T>(T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(Vector512<byte>))
-                return VectorKind.v512x8u;
+                return NativeVectorKind.v512x8u;
             else if(typeof(T) == typeof(Vector512<ushort>))
-                return VectorKind.v512x16u;
+                return NativeVectorKind.v512x16u;
             else if(typeof(T) == typeof(Vector512<uint>))
-                return VectorKind.v512x32u;
+                return NativeVectorKind.v512x32u;
             else if(typeof(T) == typeof(Vector512<ulong>))
-                return VectorKind.v512x64u;
+                return NativeVectorKind.v512x64u;
             else
                 return vkind512_i(t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind vkind512_i<T>(T t = default)
+        static NativeVectorKind vkind512_i<T>(T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(Vector512<sbyte>))
-                return VectorKind.v512x8i;
+                return NativeVectorKind.v512x8i;
             else if(typeof(T) == typeof(Vector512<short>))
-                return VectorKind.v512x16i;
+                return NativeVectorKind.v512x16i;
             else if(typeof(T) == typeof(Vector512<int>))
-                return VectorKind.v512x32i;
+                return NativeVectorKind.v512x32i;
             else if(typeof(T) == typeof(Vector512<long>))
-                return VectorKind.v512x64i;
+                return NativeVectorKind.v512x64i;
             else
                 return vkind512_f(t);
         }
 
         [MethodImpl(Inline)]
-        static VectorKind vkind512_f<T>(T t = default)
+        static NativeVectorKind vkind512_f<T>(T t = default)
             where T : struct
         {
             if(typeof(T) == typeof(Vector512<float>))
-                return VectorKind.v512x32f;
+                return NativeVectorKind.v512x32f;
             else if(typeof(T) == typeof(Vector512<double>))
-                return VectorKind.v512x64f;
+                return NativeVectorKind.v512x64f;
             else
                 return default;
         }
