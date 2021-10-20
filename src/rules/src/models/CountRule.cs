@@ -13,12 +13,12 @@ namespace Z0
     {
         public readonly struct CountRule
         {
-            public Identifier Name {get;}
+            public Label Name {get;}
 
             public Count Value {get;}
 
             [MethodImpl(Inline)]
-            public CountRule(Identifier name, Count value)
+            public CountRule(Label name, Count value)
             {
                 Name = name;
                 Value = value;
@@ -29,10 +29,6 @@ namespace Z0
 
             public override string ToString()
                 => Format();
-
-            [MethodImpl(Inline)]
-            public static implicit operator CountRule((string name, Count value) src)
-                => new CountRule(src.name, src.value);
         }
     }
 }

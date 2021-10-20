@@ -15,7 +15,7 @@ namespace Z0.llvm
     partial class EtlWorkflow
     {
         ReadOnlySpan<T> DistillRelations<T>(ReadOnlySpan<TextLine> src, string marker)
-            where T : struct, IRecordRelations<T>
+            where T : struct, ILineRelations<T>
         {
             var dst = list<T>();
             var name = EmptyString;

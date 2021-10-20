@@ -7,7 +7,7 @@ namespace Z0.llvm
     using System;
 
     [Record(TableId)]
-    public struct DefRelations : IRecordRelations<DefRelations>
+    public struct DefRelations : ILineRelations<DefRelations>
     {
         public const string TableId = "llvm.defs.relations";
 
@@ -19,10 +19,10 @@ namespace Z0.llvm
 
         public Lineage Ancestors;
 
-        LineNumber IRecordRelations<DefRelations>.SourceLine
+        LineNumber ILineRelations.SourceLine
             => SourceLine;
 
-        Identifier IRecordRelations<DefRelations>.Name
+        Identifier ILineRelations.Name
             => Name;
 
         public static ReadOnlySpan<byte> RenderWidths

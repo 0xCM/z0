@@ -17,25 +17,24 @@ namespace Z0
             => dst.AppendFormat("{0}{1}{2}", rule.Fence.Left, rule.Content, rule.Fence.Right);
 
         [Op]
-        public static string format(IVar var, char assign)
+        public static string format(IRuleVar var, char assign)
             => string.Format("{0}{1}{2}", format(var.Symbol), assign, var.Value);
 
         [Op]
-        public static string format(IVar var)
+        public static string format(IRuleVar var)
             => format(var, Chars.Eq);
 
         [Op]
-        public static string format(VarContextKind vck, IVar var, char assign)
+        public static string format(VarContextKind vck, IRuleVar var, char assign)
             => string.Format("{0}{1}{2}", format(vck, var.Symbol), assign, var.Value);
 
         [Op]
-        public static string format(VarContextKind vck, IVar var)
+        public static string format(VarContextKind vck, IRuleVar var)
             => format(vck,var, Chars.Eq);
 
         [Op]
         public static string format(VarSymbol src)
             => format(VarContextKind.Workflow, src);
-
 
         [Op]
         public static string format(VarContextKind vck, VarSymbol src)

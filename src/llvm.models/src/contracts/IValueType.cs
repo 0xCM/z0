@@ -5,12 +5,11 @@
 namespace Z0.llvm
 {
     using static core;
-    using static Values;
 
     public interface IValueType<T>
         where T : unmanaged, IValueType<T>
     {
-        StringAddress Name {get;}
+        Label Name {get;}
 
         BitWidth Width => width<T>();
 

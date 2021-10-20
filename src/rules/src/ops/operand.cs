@@ -12,7 +12,7 @@ namespace Z0
     partial struct RuleModels
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Operand<T> operand<T>(StringAddress name, T value)
+        public static Operand<T> operand<T>(Label name, T value)
             => new Operand<T>(name, value);
     }
 }

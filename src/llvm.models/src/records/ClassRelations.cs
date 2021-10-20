@@ -8,7 +8,7 @@ namespace Z0.llvm
     using System.Runtime.InteropServices;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
-    public struct ClassRelations : IRecordRelations<ClassRelations>
+    public struct ClassRelations : ILineRelations<ClassRelations>
     {
         public const string TableId = "llvm.classes.relations";
 
@@ -22,10 +22,10 @@ namespace Z0.llvm
 
         public string Parameters;
 
-        LineNumber IRecordRelations<ClassRelations>.SourceLine
+        LineNumber ILineRelations.SourceLine
             => SourceLine;
 
-        Identifier IRecordRelations<ClassRelations>.Name
+        Identifier ILineRelations.Name
             => Name;
 
         public void Specify(LineNumber line, Identifier name, Lineage ancestors)

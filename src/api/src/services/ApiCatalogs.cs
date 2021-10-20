@@ -176,7 +176,7 @@ namespace Z0
             if(count > 0)
             {
                 var view = @readonly(correlated);
-                var seq = Sequential.create(0, (byte)(part));
+                var seq = Seq16x2.create(0, (byte)(part));
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var pair = ref skip(view,i);

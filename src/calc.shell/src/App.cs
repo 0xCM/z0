@@ -428,6 +428,7 @@ namespace Z0
             Spin();
         }
 
+
         void Run(N29 n)
         {
 
@@ -450,6 +451,34 @@ namespace Z0
             //     ref readonly var result = ref skip(buffer,i);
             //     Write(string.Format("{0:D2} | {1}", i, result.Format(BitOpFormatter.FormatOption.Bitstrings)));
             // }
+
+        }
+
+        public unsafe void Run(N30 n)
+        {
+            var count = Pow2.T12;
+            using var buffer0 = memory.native<uint>(count);
+            using var buffer1 = memory.native<uint>(count);
+            using var buffer2 = memory.native<uint>(count);
+            var rng = Rng.pcg64(BitMaskLiterals.b01010101x64);
+            rng.Fill(buffer0.Edit);
+            rng.Fill(buffer1.Edit);
+            var r0 = seq.reader(buffer0);
+            var r1 = seq.reader(buffer1);
+            var reader = seq.reader(r0,r1);
+            var editor = seq.editor(buffer2);
+
+            while(reader.Next(out var c0, out var c1))
+            {
+                editor.Next(out var _) = math.xor(c0,c1);
+            }
+
+            var result = seq.reader(buffer2);
+            var counter = 0u;
+            while(result.Next(out var r))
+            {
+                Write(string.Format("{0:D5} {1:x}",counter++, r.FormatHex()));
+            }
 
         }
 
@@ -539,6 +568,9 @@ namespace Z0
                     break;
                     case 29:
                         Run(n29);
+                    break;
+                    case 30:
+                        Run(n30);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

@@ -15,12 +15,12 @@ namespace Z0
         /// </summary>
         public readonly struct Operand
         {
-            public StringAddress Name {get;}
+            public Label Name {get;}
 
             public dynamic Value {get;}
 
             [MethodImpl(Inline)]
-            public Operand(StringAddress name, dynamic value)
+            public Operand(Label name, dynamic value)
             {
                 Name = name;
                 Value = value;

@@ -15,7 +15,6 @@ namespace Z0.llvm
     {
         const NumericKind Closure = UnsignedInts;
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static list<T> list<T>(T[] src)
             => new list<T>(src);

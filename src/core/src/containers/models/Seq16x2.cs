@@ -11,6 +11,10 @@ namespace Z0
 
     public struct Seq16x2 : IDataTypeComparable<Seq16x2>
     {
+        [MethodImpl(Inline), Op]
+        public static Seq16x2 create(ushort lo, ushort hi)
+            => new Seq16x2(lo, hi);
+
         public ushort Lo;
 
         public ushort Hi;

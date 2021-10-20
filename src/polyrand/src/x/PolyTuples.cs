@@ -133,7 +133,7 @@ namespace Z0
 
         public static Deferred<Pair<T>> PairStream<T>(this ISource src)
             where T : struct
-                => Seq.defer(Sources.pairstream<T>(src));
+                => seq.defer(Sources.pairstream<T>(src));
 
         public static IEnumerable<Triple<T>> TripleStream<T>(this ISource src)
             where T : struct

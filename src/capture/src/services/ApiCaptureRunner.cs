@@ -63,7 +63,7 @@ namespace Z0
         public Index<AsmHostRoutines> Capture(Index<PartId> parts, CaptureWorkflowOptions options)
         {
             using var flow = Wf.Running();
-            Wf.Status(Seq.enclose(parts.Storage));
+            Wf.Status(seq.enclose(parts.Storage));
             var captured = CaptureParts(parts);
 
             if((options & CaptureWorkflowOptions.EmitImm) != 0)
@@ -81,7 +81,7 @@ namespace Z0
         public Index<AsmHostRoutines> Capture(ReadOnlySpan<ApiHostUri> hosts, CaptureWorkflowOptions options)
         {
             using var flow = Wf.Running();
-            Wf.Status(Seq.enclose(hosts).Format());
+            Wf.Status(seq.enclose(hosts).Format());
             var captured = CaptureHosts(hosts);
 
             if((options & CaptureWorkflowOptions.EmitImm) != 0)

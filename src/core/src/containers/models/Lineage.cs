@@ -105,8 +105,8 @@ namespace Z0
         {
             if(HasAncestor)
                 return Ancestor.Antecedant(name);
-
-            return Option.none<Lineage>();
+            else
+                return Option.none<Lineage>();
         }
 
         public string Format()

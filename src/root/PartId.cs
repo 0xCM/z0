@@ -106,7 +106,8 @@ public enum PartId : byte
     [Symbol("llvm.models")]
     LlvmModels = 32,
 
-    OpenSlot3 = 33,
+    [Symbol("seq")]
+    Seq = 33,
 
     [Symbol("gmath")]
     GMath = 34,

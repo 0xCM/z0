@@ -13,7 +13,7 @@ namespace Z0.llvm
     partial class EtlWorkflow
     {
         public LineMap<Identifier> MapContent<T>(ReadOnlySpan<T> relations, ReadOnlySpan<TextLine> records, string dstid)
-            where T : struct, IRecordRelations<T>
+            where T : struct, ILineRelations<T>
         {
             const uint BufferLength = 256;
             var result = Outcome.Success;

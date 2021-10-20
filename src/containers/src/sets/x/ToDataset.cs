@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    partial class XCollective
+    partial class XTend
     {
         [Op, Closures(Closure)]
         public static MutableSet<T> ToDataset<T>(this IEnumerable<T> src)

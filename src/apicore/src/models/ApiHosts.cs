@@ -93,7 +93,7 @@ namespace Z0
             => host(this, uri, out h);
 
         public string Format()
-            => Seq.format(Storage);
+            => seq.format(Storage);
 
         public override string ToString()
             => Format();

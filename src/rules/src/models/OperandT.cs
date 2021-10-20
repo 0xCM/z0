@@ -16,12 +16,12 @@ namespace Z0
         /// </summary>
         public readonly struct Operand<T>
         {
-            public StringAddress Name {get;}
+            public Label Name {get;}
 
             public T Value {get;}
 
             [MethodImpl(Inline)]
-            public Operand(StringAddress name, T value)
+            public Operand(Label name, T value)
             {
                 Name = name;
                 Value = value;
@@ -32,7 +32,7 @@ namespace Z0
                 => new Operand(src.Name, src.Value);
 
             [MethodImpl(Inline)]
-            public static implicit operator Operand<T>((StringAddress name, T value) src)
+            public static implicit operator Operand<T>((Label name, T value) src)
                 => new Operand<T>(src.name, src.value);
         }
     }

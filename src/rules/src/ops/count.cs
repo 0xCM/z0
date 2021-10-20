@@ -12,7 +12,7 @@ namespace Z0
     partial struct RuleModels
     {
         [MethodImpl(Inline), Op]
-        public static CountRule count(Identifier name, Count value)
+        public static CountRule count(Label name, Count value)
             => new CountRule(name,value);
     }
 }

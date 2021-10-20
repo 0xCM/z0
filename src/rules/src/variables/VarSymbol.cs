@@ -14,15 +14,15 @@ namespace Z0
         public string Name {get;}
 
         [Op]
-        public static string format(IVar var, char assign)
+        public static string format(IRuleVar var, char assign)
             => string.Format("{0}{1}{2}", format(var.Symbol), assign, var.Value);
 
         [Op]
-        public static string format(IVar var)
+        public static string format(IRuleVar var)
             => format(var, Chars.Eq);
 
         [Op]
-        public static string format(VarContextKind vck, IVar var, char assign)
+        public static string format(VarContextKind vck, IRuleVar var, char assign)
             => string.Format("{0}{1}{2}", format(vck, var.Symbol), assign, var.Value);
 
         [Op]
@@ -40,9 +40,8 @@ namespace Z0
             => string.Format(VarContextKinds.FormatPattern(vck), src.Name);
 
         [Op]
-        public static string format(VarContextKind vck, IVar var)
+        public static string format(VarContextKind vck, IRuleVar var)
             => format(vck,var, Chars.Eq);
-
 
         [MethodImpl(Inline)]
         public VarSymbol(string name)
