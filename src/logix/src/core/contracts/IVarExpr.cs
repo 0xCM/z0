@@ -18,14 +18,14 @@ namespace Z0
     /// <summary>
     /// Characterizes a typed variable
     /// </summary>
-    public interface IVarExpr<T> : IVarExpr, IExpr<T>
+    public interface IVarExpr<T> : IVarExpr, ILogixExpr<T>
         where T : unmanaged
     {
         /// <summary>
         /// Updates the variable
         /// </summary>
         /// <param name="expr">The value to assigned to the variable</param>
-        void Set(IExpr<T> expr);
+        void Set(ILogixExpr<T> expr);
 
         /// <summary>
         /// Updates the expression value
@@ -36,6 +36,6 @@ namespace Z0
         /// <summary>
         /// The current value of the variable
         /// </summary>
-        IExpr<T> Value {get;}
+        ILogixExpr<T> Value {get;}
     }
 }

@@ -29,7 +29,7 @@ namespace Z0
         /// <summary>
         /// The defining expression
         /// </summary>
-        new IExpr<T> Encoding {get;}
+        new ILogixExpr<T> Encoding {get;}
 
         IExpr IFormulaExpr.Encoding => Encoding;
     }

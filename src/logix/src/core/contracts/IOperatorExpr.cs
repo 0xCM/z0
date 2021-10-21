@@ -18,7 +18,7 @@ namespace Z0
     /// Characterizes a parametric operator that varies over operand type
     /// </summary>
     /// <typeparam name="T">The type over which the expression is defined</typeparam>
-    public interface IOperatorExpr<T> : IOperatorExpr, IExpr<T>
+    public interface IOperatorExpr<T> : IOperatorExpr, ILogixExpr<T>
         where T : unmanaged
     {
 

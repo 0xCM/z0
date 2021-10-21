@@ -15,9 +15,9 @@ namespace Z0
         /// <summary>
         /// The thing to shift
         /// </summary>
-        IExpr<T> Subject {get;}
+        ILogixExpr<T> Subject {get;}
 
 
-        IExpr<byte> Offset {get;}
+        ILogixExpr<byte> Offset {get;}
     }
 }

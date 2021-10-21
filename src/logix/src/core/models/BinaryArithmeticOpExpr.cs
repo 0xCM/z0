@@ -23,15 +23,15 @@ namespace Z0
         /// <summary>
         /// The left operand
         /// </summary>
-        public IExpr<T> LeftArg {get;}
+        public ILogixExpr<T> LeftArg {get;}
 
         /// <summary>
         /// The right operand
         /// </summary>
-        public IExpr<T> RightArg {get;}
+        public ILogixExpr<T> RightArg {get;}
 
         [MethodImpl(Inline)]
-        public BinaryArithmeticOpExpr(ApiBinaryArithmeticClass op, IExpr<T> lhs, IExpr<T> rhs)
+        public BinaryArithmeticOpExpr(ApiBinaryArithmeticClass op, ILogixExpr<T> lhs, ILogixExpr<T> rhs)
         {
             ApiClass = op;
             LeftArg= lhs;

@@ -15,7 +15,7 @@ namespace Z0.Logix
         const NumericKind Closure = UInt64k;
 
         [Op, Closures(Closure)]
-         public static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
+         public static LiteralExpr<Vector128<T>> eval<T>(ILogixExpr<Vector128<T>> expr)
             where T : unmanaged
         {
             switch(expr)
@@ -35,7 +35,7 @@ namespace Z0.Logix
         }
 
         [Op, Closures(Closure)]
-        public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
+        public static LiteralExpr<Vector256<T>> eval<T>(ILogixExpr<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr)

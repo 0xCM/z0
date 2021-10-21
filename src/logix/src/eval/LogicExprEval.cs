@@ -5,7 +5,6 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public readonly struct LogicExprEval
     {

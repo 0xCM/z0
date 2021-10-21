@@ -19,7 +19,7 @@ namespace Z0
         /// <summary>
         /// A variable-dependent expression
         /// </summary>
-        public IExpr<T> BaseExpr {get;}
+        public ILogixExpr<T> BaseExpr {get;}
 
         /// <summary>
         /// The variables upon which the expression depends
@@ -27,7 +27,7 @@ namespace Z0
         public IVarExpr<T>[] Vars {get;}
 
         [MethodImpl(Inline)]
-        public VariedExpr(IExpr<T> baseExpr, params VariableExpr<T>[] variables)
+        public VariedExpr(ILogixExpr<T> baseExpr, params VariableExpr<T>[] variables)
         {
             BaseExpr = baseExpr;
             Vars = variables;
@@ -38,7 +38,7 @@ namespace Z0
             => VariedExpr.Set(this, values.Map(v => (new LiteralExpr<T>(v) as ILiteralExpr<T>)));
 
         [MethodImpl(Inline)]
-        public void SetVars(params IExpr<T>[] values)
+        public void SetVars(params ILogixExpr<T>[] values)
             => VariedExpr.Set(this,values);
 
         public string Format()

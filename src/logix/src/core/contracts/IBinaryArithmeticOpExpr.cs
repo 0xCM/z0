@@ -12,8 +12,8 @@ namespace Z0
     public interface IBinaryArithmeticOpExpr<T> : IBinaryArithmeticOpExpr, IArithmeticOpExpr<T,ApiBinaryArithmeticClass>
         where T : unmanaged
     {
-        IExpr<T> LeftArg {get;}
+        ILogixExpr<T> LeftArg {get;}
 
-        IExpr<T> RightArg {get;}
+        ILogixExpr<T> RightArg {get;}
     }
 }

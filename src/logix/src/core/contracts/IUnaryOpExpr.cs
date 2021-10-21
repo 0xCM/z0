@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-   /// <summary>
+    /// <summary>
     /// Characterizes a unary operator parametrized by an expression type
     /// </summary>
     public interface IUnaryOpExpr<X> : IOperatorExpr
@@ -17,5 +15,4 @@ namespace Z0
         /// </summary>
         X Arg {get;}
     }
-
 }

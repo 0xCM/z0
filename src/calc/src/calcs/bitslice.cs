@@ -17,6 +17,5 @@ namespace Z0
         public static BitSlice<T> bitslice<T>()
             where T : unmanaged
                 => sfunc<BitSlice<T>>();
-
     }
 }

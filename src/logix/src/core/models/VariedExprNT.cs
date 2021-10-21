@@ -18,12 +18,12 @@ namespace Z0
         where T : unmanaged
         where N : unmanaged, ITypeNat
     {
-        public IExpr<T> BaseExpr {get;}
+        public ILogixExpr<T> BaseExpr {get;}
 
         public IVarExpr<T>[] Vars {get;}
 
         [MethodImpl(Inline)]
-        public VariedExpr(IExpr<T> baseExpr, params IVarExpr<T>[] variables)
+        public VariedExpr(ILogixExpr<T> baseExpr, params IVarExpr<T>[] variables)
         {
             BaseExpr = baseExpr;
             Vars = variables;
@@ -34,7 +34,7 @@ namespace Z0
             => VariedExpr.Set(this, values.Map(v => (new LiteralExpr<T>(v) as ILiteralExpr<T>)));
 
         [MethodImpl(Inline)]
-        public void SetVars(params IExpr<T>[] values)
+        public void SetVars(params ILogixExpr<T>[] values)
             => VariedExpr.Set(this,values);
 
         public string Format()

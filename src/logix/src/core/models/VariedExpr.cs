@@ -9,7 +9,7 @@ namespace Z0
 
     public readonly struct VariedExpr
     {
-        public static void Set<T>(IVariedExpr<T> expr, params IExpr<T>[] values)
+        public static void Set<T>(IVariedExpr<T> expr, params ILogixExpr<T>[] values)
             where T : unmanaged
         {
             var n = Math.Min(expr.Vars.Length, values.Length);

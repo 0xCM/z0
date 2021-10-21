@@ -22,7 +22,6 @@ namespace Z0
             where T : unmanaged
                 => ref src.Next();
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref Sequential<T> next<T>(in Sequential<T> src)
             where T : unmanaged

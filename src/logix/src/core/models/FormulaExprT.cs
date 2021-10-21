@@ -23,10 +23,10 @@ namespace Z0
         /// <summary>
         /// The identified expression
         /// </summary>
-        public IExpr<T> Encoding {get;}
+        public ILogixExpr<T> Encoding {get;}
 
         [MethodImpl(Inline)]
-        public FormulaExpr(string name, IExpr<T> encoding)
+        public FormulaExpr(string name, ILogixExpr<T> encoding)
         {
             Name = name;
             Encoding = encoding;

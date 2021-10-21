@@ -40,51 +40,11 @@ namespace Z0
         public static Swap<T>[] Chain(Swap<T> s0, int len)
         {
             var dst = new Swap<T>[len];
-            dst[0]  = s0;
+            seek(dst,0)  = s0;
             for(var k = 1; k < len; k++)
-                dst[k] = ++s0;
+                seek(dst,k) = ++s0;
             return dst;
         }
-
-        public static Swap<T> Parse(string src)
-            => throw new NotImplementedException();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Swap<T>((T i, T j) src)
-            => new Swap<T>(src.i, src.j);
-
-        [MethodImpl(Inline)]
-        public static implicit operator (T i, T j)(Swap<T> src)
-            => (src.i, src.j);
-
-        [MethodImpl(Inline)]
-        public static Swap<T> operator ++(in Swap<T> src)
-        {
-            ref var dst = ref edit(in src);
-            dst.i = gmath.inc(dst.i);
-            dst.j = gmath.inc(dst.j);
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Swap<T> operator --(in Swap<T> src)
-        {
-            ref var dst = ref edit(in src);
-            if(gmath.nonz(src.i))
-                dst.i = gmath.dec(dst.i);
-
-            if(gmath.nonz(src.j))
-                dst.j = gmath.dec(dst.j);
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(Swap<T> lhs, Swap<T> rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Swap<T> lhs, Swap<T> rhs)
-            => !(lhs == rhs);
 
         [MethodImpl(Inline)]
         public Swap((T i, T j) src)
@@ -142,5 +102,42 @@ namespace Z0
 
         public override bool Equals(object o)
             => o is Swap<T> x ? Equals(x) : false;
+
+        [MethodImpl(Inline)]
+        public static Swap<T> operator ++(in Swap<T> src)
+        {
+            ref var dst = ref edit(in src);
+            dst.i = gmath.inc(dst.i);
+            dst.j = gmath.inc(dst.j);
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Swap<T> operator --(in Swap<T> src)
+        {
+            ref var dst = ref edit(in src);
+            if(gmath.nonz(src.i))
+                dst.i = gmath.dec(dst.i);
+
+            if(gmath.nonz(src.j))
+                dst.j = gmath.dec(dst.j);
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Swap<T> a, Swap<T> b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Swap<T> a, Swap<T> b)
+            => !(a == b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Swap<T>((T i, T j) src)
+            => new Swap<T>(src.i, src.j);
+
+        [MethodImpl(Inline)]
+        public static implicit operator (T i, T j)(Swap<T> src)
+            => (src.i, src.j);
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
 
     }
 
-    public interface IArithmeticExpr<T> : IArithmeticExpr, IExpr<T>
+    public interface IArithmeticExpr<T> : IArithmeticExpr, ILogixExpr<T>
         where  T : unmanaged
     {
 

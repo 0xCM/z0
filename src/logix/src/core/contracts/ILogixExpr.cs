@@ -4,15 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-    partial struct Relations
+    /// <summary>
+    /// Characterizes an parametric expression
+    /// </summary>
+    /// <typeparam name="T">The type over which the expression is defined</typeparam>
+    public interface ILogixExpr<T> : IExpr
+        where T : struct
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Leaf<T> leaf<T>(T src)
-            => new Leaf<T>(src);
+
     }
 }

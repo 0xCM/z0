@@ -16,7 +16,7 @@ namespace Z0
     /// Characterizes a typed expression that admits logical evaluation
     /// </summary>
     /// <typeparam name="T">The type over which the expression is defined</typeparam>
-    public interface ILogicExpr<T> : ILogicExpr, IExpr<T>
+    public interface ILogicExpr<T> : ILogicExpr, ILogixExpr<T>
         where T : unmanaged
     {
 

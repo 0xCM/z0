@@ -28,8 +28,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public PermTerm(T src, T dst)
         {
-            this.Source = src;
-            this.Target = dst;
+            Source = src;
+            Target = dst;
         }
 
         public bool IsDegenerate

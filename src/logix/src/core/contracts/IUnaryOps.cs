@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IUnaryBitwiseOpExpr<T> : IUnaryOpExpr<IExpr<T>>, IOperatorExpr<T, UnaryBitLogicKind>
+    public interface IUnaryBitwiseOpExpr<T> : IUnaryOpExpr<ILogixExpr<T>>, IOperatorExpr<T, UnaryBitLogicKind>
         where T : unmanaged
     {
 

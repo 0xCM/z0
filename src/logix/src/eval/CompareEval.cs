@@ -35,7 +35,7 @@ namespace Z0.Logix
                 => VLogixOps.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op, Closures(Closure)]
-        static LiteralExpr<T> eval<T>(IExpr<T> expr)
+        static LiteralExpr<T> eval<T>(ILogixExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)
@@ -46,12 +46,12 @@ namespace Z0.Logix
         }
 
         [Op, Closures(Closure)]
-        static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
+        static LiteralExpr<Vector128<T>> eval<T>(ILogixExpr<Vector128<T>> expr)
             where T : unmanaged
                 => LogicEngine.eval(expr);
 
         [Op, Closures(Closure)]
-        static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
+        static LiteralExpr<Vector256<T>> eval<T>(ILogixExpr<Vector256<T>> expr)
             where T : unmanaged
                 => LogicEngine.eval(expr);
     }

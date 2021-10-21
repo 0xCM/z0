@@ -23,15 +23,15 @@ namespace Z0
         /// <summary>
         /// The operand
         /// </summary>
-        public IExpr<T> Subject {get;}
+        public ILogixExpr<T> Subject {get;}
 
         /// <summary>
         /// The magnitude of the shift
         /// </summary>
-        public IExpr<byte> Offset {get;}
+        public ILogixExpr<byte> Offset {get;}
 
         [MethodImpl(Inline)]
-        public ShiftOpExpr(ApiBitShiftClass op, IExpr<T> subject, IExpr<byte> offset)
+        public ShiftOpExpr(ApiBitShiftClass op, ILogixExpr<T> subject, ILogixExpr<byte> offset)
         {
             ApiClass = op;
             Subject = subject;

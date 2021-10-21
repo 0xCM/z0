@@ -17,6 +17,26 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
+        /// __m128d _mm_shuffle_pd (__m128d a, __m128d b, int immediate) SHUFPD xmm, xmm/m128, imm8
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec"></param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<uint> vshuffle(Vector128<uint> x, Vector128<uint> y, [Imm] BitState spec)
+            => v32u(Shuffle(v32f(x), v32f(y), (byte)spec));
+
+        /// <summary>
+        /// __m128d _mm_shuffle_pd (__m128d a, __m128d b, int immediate) SHUFPD xmm, xmm/m128, imm8
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec"></param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<ulong> vshuffle(Vector128<ulong> x, Vector128<ulong> y, [Imm] BitState spec)
+            => v64u(Shuffle(v64f(x), v64f(y), (byte)spec));
+
+        /// <summary>
         /// __m128 _mm_shuffle_ps (__m128 a, __m128 b, unsigned int control) SHUFPS xmm, xmm/m128, imm8
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -39,25 +59,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<double> vshuffle(Vector128<double> x, Vector128<double> y, [Imm] byte spec)
             => Shuffle(x, y, spec);
-
-        /// <summary>
-        /// __m128d _mm_shuffle_pd (__m128d a, __m128d b, int immediate) SHUFPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec"></param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<uint> vshuffle(Vector128<uint> x, Vector128<uint> y, [Imm] BitState spec)
-            => v32u(Shuffle(v32f(x), v32f(y), (byte)spec));
-
-        /// <summary>
-        /// __m128d _mm_shuffle_pd (__m128d a, __m128d b, int immediate) SHUFPD xmm, xmm/m128, imm8
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec"></param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vshuffle(Vector128<ulong> x, Vector128<ulong> y, [Imm] BitState spec)
-            => v64u(Shuffle(v64f(x), v64f(y), (byte)spec));
     }
 }

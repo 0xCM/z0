@@ -23,10 +23,10 @@ namespace Z0
         /// <summary>
         /// The operand
         /// </summary>
-        public IExpr<T> Arg {get;}
+        public ILogixExpr<T> Arg {get;}
 
         [MethodImpl(Inline)]
-        public UnaryArithmeticOpExpr(ApiUnaryArithmeticClass op, IExpr<T> operand)
+        public UnaryArithmeticOpExpr(ApiUnaryArithmeticClass op, ILogixExpr<T> operand)
         {
             ApiClass = op;
             Arg = operand;

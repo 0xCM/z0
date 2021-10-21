@@ -23,20 +23,20 @@ namespace Z0
         /// <summary>
         /// The first operand
         /// </summary>
-        public IExpr<T> FirstArg {get;}
+        public ILogixExpr<T> FirstArg {get;}
 
         /// <summary>
         /// The second operand
         /// </summary>
-        public IExpr<T> SecondArg {get;}
+        public ILogixExpr<T> SecondArg {get;}
 
         /// <summary>
         /// The third operand
         /// </summary>
-        public IExpr<T> ThirdArg {get;}
+        public ILogixExpr<T> ThirdArg {get;}
 
         [MethodImpl(Inline)]
-        public TernaryBitwiseOpExpr(TernaryBitLogicKind op, IExpr<T> first, IExpr<T> second, IExpr<T> third)
+        public TernaryBitwiseOpExpr(TernaryBitLogicKind op, ILogixExpr<T> first, ILogixExpr<T> second, ILogixExpr<T> third)
         {
             ApiClass = op;
             FirstArg = first;

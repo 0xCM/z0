@@ -16,14 +16,14 @@ namespace Z0
     /// Characterizes an expression that varies over a typed expression
     /// </summary>
     /// <typeparam name="T">The type over which the expression is defined</typeparam>
-    public interface IVariedExpr<T> : IVariedExpr, IExpr<T>
+    public interface IVariedExpr<T> : IVariedExpr, ILogixExpr<T>
         where T : unmanaged
     {
-        IExpr<T> BaseExpr {get;}
+        ILogixExpr<T> BaseExpr {get;}
 
         IVarExpr<T>[] Vars {get;}
 
-        void SetVars(params IExpr<T>[] values);
+        void SetVars(params ILogixExpr<T>[] values);
 
         void SetVars(params T[] values);
     }

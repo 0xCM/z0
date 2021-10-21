@@ -32,7 +32,7 @@ namespace Z0.Logix
         }
 
         [Op, Closures(Closure)]
-        static LiteralExpr<T> eval<T>(IExpr<T> expr)
+        static LiteralExpr<T> eval<T>(ILogixExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)

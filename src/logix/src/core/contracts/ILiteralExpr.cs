@@ -9,7 +9,7 @@ namespace Z0
 
     }
 
-    public interface ILiteralExpr<T> : ILiteralExpr, IExpr<T>
+    public interface ILiteralExpr<T> : ILiteralExpr, ILogixExpr<T>
         where T : unmanaged
     {
         /// <summary>

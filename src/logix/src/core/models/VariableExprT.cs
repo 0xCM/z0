@@ -20,10 +20,10 @@ namespace Z0
         /// <summary>
         /// The value of the variable
         /// </summary>
-        public IExpr<T> Value {get; private set;}
+        public ILogixExpr<T> Value {get; private set;}
 
         [MethodImpl(Inline)]
-        public VariableExpr(string name, IExpr<T> value)
+        public VariableExpr(string name, ILogixExpr<T> value)
         {
             Value = value;
             Name = name;
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The new value</param>
         [MethodImpl(Inline)]
-        public void Set(IExpr<T> value)
+        public void Set(ILogixExpr<T> value)
         {
             Value = value;
         }
@@ -47,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Set(IExpr value)
-            => Value = (IExpr<T>)value;
+            => Value = (ILogixExpr<T>)value;
 
         public string Format()
             => Format(false);

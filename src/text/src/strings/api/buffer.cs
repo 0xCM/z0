@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Strings
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
     partial struct strings
     {
         [Op, Closures(Closure)]

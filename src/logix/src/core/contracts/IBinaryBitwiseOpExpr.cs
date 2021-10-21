@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IBinaryBitwiseOpExpr<T> : IBinaryOpExpr<IExpr<T>>, IOperatorExpr<T,BinaryBitLogicKind>
+    public interface IBinaryBitwiseOpExpr<T> : IBinaryOpExpr<ILogixExpr<T>>, IOperatorExpr<T,BinaryBitLogicKind>
         where T : unmanaged
     {
     }

@@ -4,15 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
-    using static core;
-
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
+
     partial struct seq
     {
-       [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static void read<T>(Span<T> src, Action<T> dst)
             where T : unmanaged
         {
@@ -23,6 +22,5 @@ namespace Z0
                     dst(current);
             }
         }
-
     }
 }

@@ -23,12 +23,12 @@ namespace Z0
         /// <summary>
         /// The left operand
         /// </summary>
-        public IExpr<T> LeftArg {get;}
+        public ILogixExpr<T> LeftArg {get;}
 
         /// <summary>
         /// The right operand
         /// </summary>
-        public IExpr<T> RightArg {get;}
+        public ILogixExpr<T> RightArg {get;}
 
         /// <summary>
         /// The variables upon which the operands depend
@@ -36,7 +36,7 @@ namespace Z0
         Index<IVarExpr<T>> _Vars {get;}
 
         [MethodImpl(Inline)]
-        public ComparisonPredExpr(ApiComparisonClass op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
+        public ComparisonPredExpr(ApiComparisonClass op, ILogixExpr<T> left, ILogixExpr<T> right, params IVarExpr<T>[] vars)
         {
             ComparisonKind = op;
             LeftArg = left;
@@ -50,7 +50,7 @@ namespace Z0
             get => _Vars.Storage;
         }
 
-        public void SetVars(params IExpr<T>[] values)
+        public void SetVars(params ILogixExpr<T>[] values)
         {
             var count = Math.Min(_Vars.Length, values.Length);
             for(var i=0; i<count; i++)

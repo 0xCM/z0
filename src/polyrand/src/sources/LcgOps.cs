@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static T next<T>(in Lcg<T> g)
             where T : unmanaged
-            => gmath.mod(gmath.add(gmath.mul(g.Mul,g.State),  g.Inc),  g.Mod);
+                => gmath.mod(gmath.add(gmath.mul(g.Mul,g.State),  g.Inc),  g.Mod);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static ref Lcg<T> advance<T>(ref Lcg<T> g)

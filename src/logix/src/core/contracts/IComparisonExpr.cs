@@ -28,18 +28,18 @@ namespace Z0
     /// <summary>
     /// Characterizes a claim that two variable-dependent typed comparison expressions are equivalent
     /// </summary>
-    public interface IComparisonExpr<T> : IExpr<T>
+    public interface IComparisonExpr<T> : ILogixExpr<T>
         where T : unmanaged
     {
         /// <summary>
         /// The left expression
         /// </summary>
-        IExpr<T> LeftArg {get;}
+        ILogixExpr<T> LeftArg {get;}
 
         /// <summary>
         /// The right expression
         /// </summary>
-        IExpr<T> RightArg {get;}
+        ILogixExpr<T> RightArg {get;}
 
         /// <summary>
         /// Variables upon which the expression depends
