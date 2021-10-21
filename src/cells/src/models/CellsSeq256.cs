@@ -9,19 +9,19 @@ namespace Z0
 
     using static Root;
 
-    using C = Cell512;
-    using S = CellSeq512;
+    using C = Cell256;
+    using S = CellSeq256;
     using I = System.UInt32;
 
     /// <summary>
     /// Defines an indexed sequence of <see cref='C'/> cells
     /// </summary>
-    public readonly struct CellSeq512 : IDataCells<S,I,C>
+    public readonly struct CellSeq256 : IDataCells<S,I,C>
     {
-        readonly IndexedSeq<C> Data;
+        readonly Index<C> Data;
 
         [MethodImpl(Inline)]
-        public CellSeq512(C[] src)
+        public CellSeq256(C[] src)
             => Data = src;
 
         public uint Count

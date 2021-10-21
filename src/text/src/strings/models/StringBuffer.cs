@@ -23,6 +23,12 @@ namespace Z0.Strings
             Buffer.Clear();
         }
 
+        public StringBuffer(int count)
+        {
+            Buffer = memory.native<char>((uint)count);
+            Buffer.Clear();
+        }
+
         public void Dispose()
         {
             Buffer.Dispose();
@@ -45,11 +51,11 @@ namespace Z0.Strings
 
         [MethodImpl(Inline)]
         public MemoryAddress Address(ulong index)
-            => address(first(Buffer.Edit));
+            => Buffer.Address + index*2;
 
         [MethodImpl(Inline)]
         public MemoryAddress Address(long index)
-            => address(first(Buffer.Edit));
+            => Address((ulong)index);
 
         [MethodImpl(Inline)]
         public ref char Symbol(ulong index)
@@ -61,7 +67,7 @@ namespace Z0.Strings
 
         [MethodImpl(Inline)]
         public StringRef Substring(ulong index, ulong length)
-            => strings.substring(this,index,length);
+            => strings.substring(this, index, length);
 
         [MethodImpl(Inline)]
         public StringRef Substring(long index, long length)
@@ -97,6 +103,6 @@ namespace Z0.Strings
 
         [MethodImpl(Inline)]
         public Label StoreLabel(ReadOnlySpan<char> src, uint offset)
-            => strings.label(src,offset,this);
+            => strings.label(src, offset, this);
     }
 }

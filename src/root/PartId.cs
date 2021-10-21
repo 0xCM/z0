@@ -70,8 +70,7 @@ public enum PartId : byte
     [Symbol("res")]
     Res = 20,
 
-    [Symbol("files")]
-    Files = 21,
+    Open21 = 21,
 
     [Symbol("lang")]
     Lang = 22,
@@ -169,8 +168,8 @@ public enum PartId : byte
     [Symbol("asm.shell")]
     AsmShell = 53,
 
-    [Symbol("intel")]
-    Intel = 54,
+    [Symbol("graphs")]
+    Graphs = 54,
 
     [Symbol("tools.shell")]
     ToolShell = 55,

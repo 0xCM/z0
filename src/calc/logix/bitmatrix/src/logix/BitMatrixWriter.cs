@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal static IBitMatrixWriter share(StreamWriter dst)
+        public static IBitMatrixWriter share(StreamWriter dst)
             => new BitMatrixWriter(dst);
 
         [MethodImpl(Inline)]

@@ -28,6 +28,11 @@ namespace Z0.Strings
             return false;
         }
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static bool store<S>(ReadOnlySpan<S> src, int offset, StringBuffer<S> dst)
+            where S : unmanaged
+                => store(src, (uint)offset, dst);
+
         [MethodImpl(Inline), Op]
         public static bool store(ReadOnlySpan<char> src, uint offset, StringBuffer dst)
         {
@@ -42,5 +47,8 @@ namespace Z0.Strings
             }
             return false;
         }
+
+        public static bool store(ReadOnlySpan<char> src, int offset, StringBuffer dst)
+            => store(src, (uint)offset,dst);
     }
 }

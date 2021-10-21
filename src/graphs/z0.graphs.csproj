@@ -5,14 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Text)" />
-    <ProjectReference Include="$(Cells)" />
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(Seq)" />
-    <ProjectReference Include="$(Graphs)" />
   </ItemGroup>
 
 </Project>

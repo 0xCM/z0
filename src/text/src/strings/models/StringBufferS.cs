@@ -24,6 +24,12 @@ namespace Z0.Strings
             Buffer.Clear();
         }
 
+        public StringBuffer(int count)
+        {
+            Buffer = memory.native<S>((uint)count);
+            Buffer.Clear();
+        }
+
         public void Dispose()
         {
             Buffer.Dispose();
@@ -46,11 +52,11 @@ namespace Z0.Strings
 
         [MethodImpl(Inline)]
         public MemoryAddress Address(ulong index)
-            => address(first(Buffer.Edit));
+            => Buffer.Address + index*size<S>();
 
         [MethodImpl(Inline)]
         public MemoryAddress Address(long index)
-            => address(first(Buffer.Edit));
+            => Address((ulong)index);
 
         [MethodImpl(Inline)]
         public ref S Symbol(ulong index)

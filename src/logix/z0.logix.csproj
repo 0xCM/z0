@@ -9,7 +9,6 @@
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(BitGrids)" />
-    <ProjectReference Include="$(BitMatrix)" />
     <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Bit)" />

@@ -18,7 +18,7 @@ namespace Z0
     /// </summary>
     public readonly struct CellSeq64 : IDataCells<S,I,C>
     {
-        readonly IndexedSeq<C> Data;
+        readonly Index<C> Data;
 
         [MethodImpl(Inline)]
         public CellSeq64(C[] src)
