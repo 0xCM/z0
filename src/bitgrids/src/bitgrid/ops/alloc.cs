@@ -12,23 +12,23 @@ namespace Z0
     partial class BitGrid
     {
         [Alloc, Closures(Closure)]
-        public static BitGrid<T> alloc<T>(uint m, uint n, T t = default)
+        public static BitSpanBlocks256<T> alloc<T>(uint m, uint n, T t = default)
             where T : unmanaged
         {
             var blocksize = W256.W;
             var blocks = CellCalcs.blockcount<T>(blocksize,(uint)m,(uint)n);
             var data = Z0.SpanBlocks.alloc<T>(blocksize, blocks);
-            return new BitGrid<T>(data,(int)m,(int)n);
+            return new BitSpanBlocks256<T>(data,(int)m,(int)n);
         }
 
         [Alloc, Closures(Closure)]
-        public static BitGrid<T> alloc<T>(int m, int n, T t = default)
+        public static BitSpanBlocks256<T> alloc<T>(int m, int n, T t = default)
             where T : unmanaged
         {
             var blocksize = W256.W;
             var blocks = CellCalcs.blockcount<T>(blocksize,(uint)m,(uint)n);
             var data = Z0.SpanBlocks.alloc<T>(blocksize, blocks);
-            return new BitGrid<T>(data,(int)m,(int)n);
+            return new BitSpanBlocks256<T>(data,(int)m,(int)n);
         }
 
         /// <summary>

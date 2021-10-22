@@ -12,12 +12,12 @@ namespace Z0
 
     partial class BitGrid
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bit readbit<T>(in T src, int bitpos)
             where T : unmanaged
                 => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % width<T>()));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bit readbit<T>(in T src, uint bitpos)
             where T : unmanaged
                 => gbits.testbit(readcell(in src, (int)bitpos), (byte)(bitpos % width<T>()));
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="bitpos">The linear bit position</param>
         /// <param name="src">A reference to grid storage</param>
         /// <typeparam name="T">The storage segment type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         static ref readonly T readcell<T>(in T src, int bitpos)
             where T : unmanaged
                 => ref skip(in src, bitpos / width<T>());
@@ -45,7 +45,7 @@ namespace Z0
         /// <summary>
         /// Reads a bit from a grid
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bit readbit<T>(int width, in T src, int row, int col)
             where T : unmanaged
                 => readbit(in src, width*row + col);

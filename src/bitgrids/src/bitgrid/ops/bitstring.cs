@@ -127,7 +127,7 @@ namespace Z0
         /// </summary>
         /// <param name="g">The source grid</param>
         [MethodImpl(Inline)]
-        public static BitString bitstring<T>(in BitGrid<T> g)
+        public static BitString bitstring<T>(in BitSpanBlocks256<T> g)
             where T : unmanaged
                 => g.Data.ToBitString(g.BitCount);
     }

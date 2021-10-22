@@ -65,10 +65,11 @@ namespace Z0
             where T : unmanaged
             where F : unmanaged, IGrid<F,M,N,T>
         {
-            uint IGrid.M => Typed.nat32u<M>();
+            uint IGrid.M
+                => Typed.nat32u<M>();
 
-            uint IGrid.N => Typed.nat32u<N>();
-
+            uint IGrid.N
+                => Typed.nat32u<N>();
         }
     }
 }

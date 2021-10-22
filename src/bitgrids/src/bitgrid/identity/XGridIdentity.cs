@@ -76,7 +76,7 @@ namespace Z0
             if(def == typeof(void))
                 return Option.none<ApiGridKind>();
 
-            if(def == typeof(BitGrid<>))
+            if(def == typeof(BitSpanBlocks256<>))
                 return Z0.ApiGridKind.NumericGeneric;
             else if(def == typeof(BitGrid<,,>))
                 return Z0.ApiGridKind.NaturalUnfixed;

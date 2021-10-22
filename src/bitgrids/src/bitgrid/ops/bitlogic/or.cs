@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="gz">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Or, Closures(UnsignedInts)]
-        public static ref readonly BitGrid<T> or<T>(in BitGrid<T> gx, in BitGrid<T> gy, in BitGrid<T> gz)
+        public static ref readonly BitSpanBlocks256<T> or<T>(in BitSpanBlocks256<T> gx, in BitSpanBlocks256<T> gy, in BitSpanBlocks256<T> gz)
             where T : unmanaged
         {
             var blocks = gz.BlockCount;

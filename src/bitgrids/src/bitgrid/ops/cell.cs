@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">A reference to grid storage</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(in BitGrid<T> src, int bitpos)
+        public static ref T cell<T>(in BitSpanBlocks256<T> src, int bitpos)
             where T : unmanaged
                 => ref seek(src.Head, bitpos/width<T>());
 

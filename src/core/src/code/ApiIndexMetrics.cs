@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Collects statistics of encoded data known to a <see cref='ApiBlockIndex'/>
     /// </summary>
-    [Record]
+    [Record(TableId)]
     public struct ApiIndexMetrics : ITextual, IRecord<ApiIndexMetrics>
     {
         public const string TableId = "api.index.metrics";

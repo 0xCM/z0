@@ -11,7 +11,6 @@ namespace Z0.Asm
     using static core;
     using static ConditionCodes;
     using static ConditionCodes.ConditionFacets;
-    using static BitFlow;
 
     [ApiComplete]
     public sealed class Conditions
@@ -192,37 +191,37 @@ namespace Z0.Asm
         {
             var ccA = Symbols.index<Condition>();
             Require.equal((uint)ccA.Length, ConditionCount);
-            expr(ccA, _ConditionNames.Edit);
+            Symbols.expr(ccA, _ConditionNames.Edit);
             Symbols.descriptions(ccA, _ConditionInfo.Edit);
             Symbols.kinds(ccA, _CC.Edit);
 
             var ccB = Symbols.index<ConditionAlt>();
             Require.equal((uint)ccB.Length, ConditionCount);
-            expr(ccB, _AltConditionNames.Edit);
+            Symbols.expr(ccB, _AltConditionNames.Edit);
             Symbols.descriptions(ccB, _AltConditionInfo.Edit);
             Symbols.kinds(ccB, _CCAlt.Edit);
 
             var jcc8a = Symbols.index<Jcc8>();
             Require.equal(jcc8a.Count, ConditionCount);
-            expr(jcc8a, _Jcc8Names.Edit);
+            Symbols.expr(jcc8a, _Jcc8Names.Edit);
             Symbols.descriptions(jcc8a, _Jcc8Info.Edit);
             Symbols.kinds(jcc8a, _Jcc8Codes.Edit);
 
             var jcc8b = Symbols.index<Jcc8Alt>();
             Require.equal(jcc8b.Count, ConditionCount);
-            expr(jcc8b, _AltJcc8Names.Edit);
+            Symbols.expr(jcc8b, _AltJcc8Names.Edit);
             Symbols.descriptions(jcc8b, _AltJcc8Info.Edit);
             Symbols.kinds(jcc8b, _AltJcc8Codes.Edit);
 
             var jcc32a = Symbols.index<Jcc32>();
             Require.equal(jcc32a.Count, ConditionCount);
-            expr(jcc32a, _Jcc32Names.Edit);
+            Symbols.expr(jcc32a, _Jcc32Names.Edit);
             Symbols.descriptions(jcc32a, _Jcc32Info.Edit);
             Symbols.kinds(jcc32a, _Jcc32Codes.Edit);
 
             var jcc32b = Symbols.index<Jcc32Alt>();
             Require.equal(jcc32b.Count, ConditionCount);
-            expr(jcc32b, _AltJcc32Names.Edit);
+            Symbols.expr(jcc32b, _AltJcc32Names.Edit);
             Symbols.descriptions(jcc32b, _AltJcc32Info.Edit);
             Symbols.kinds(jcc32b, _AltJcc32Codes.Edit);
         }

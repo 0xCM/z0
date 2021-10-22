@@ -64,7 +64,7 @@ namespace Z0
                 => gcpu.vsame<T>(gx,gy);
 
         [MethodImpl(Inline)]
-        public static bit same<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+        public static bit same<T>(in BitSpanBlocks256<T> gx, in BitSpanBlocks256<T> gy)
             where T : unmanaged
         {
             var blocks = gx.BlockCount;

@@ -12,9 +12,9 @@ namespace Z0
     partial class BitGrid
     {
         [MethodImpl(Inline), Replicate, NumericClosures(Closure)]
-        public static BitGrid<T> replicate<T>(BitGrid<T> src)
+        public static BitSpanBlocks256<T> replicate<T>(BitSpanBlocks256<T> src)
             where T : unmanaged
-                => new BitGrid<T>(src.Data.Replicate(), src.RowCount, src.ColCount);
+                => new BitSpanBlocks256<T>(src.Data.Replicate(), src.RowCount, src.ColCount);
 
         public static BitGrid<M,N,T> replicate<M,N,T>(in BitGrid<M,N,T> src)
             where M : unmanaged, ITypeNat

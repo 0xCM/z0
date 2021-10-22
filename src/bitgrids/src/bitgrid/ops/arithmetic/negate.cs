@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="gz">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Negate, Closures(UnsignedInts)]
-        public static ref readonly BitGrid<T> negate<T>(in BitGrid<T> x, in BitGrid<T> gz)
+        public static ref readonly BitSpanBlocks256<T> negate<T>(in BitSpanBlocks256<T> x, in BitSpanBlocks256<T> gz)
             where T : unmanaged
         {
             var blocks = gz.BlockCount;

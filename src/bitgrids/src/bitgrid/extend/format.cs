@@ -6,7 +6,7 @@ namespace Z0
 {
     partial class BitGridX
     {
-        public static string Format<T>(this BitGrid<T> src, bool showrow = false, int? maxbits = null)
+        public static string Format<T>(this BitSpanBlocks256<T> src, bool showrow = false, int? maxbits = null)
             where T : unmanaged
                 => BitGrid.format(src, showrow, maxbits);
 

@@ -18,12 +18,12 @@ namespace Z0
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct Enum<V>
         {
-            public Name Name {get;}
+            public Label Name {get;}
 
             Index<Literal<V>> Data;
 
             [MethodImpl(Inline)]
-            public Enum(Name name, Literal<V>[] src)
+            public Enum(Label name, Literal<V>[] src)
             {
                 Name = name;
                 Data = src;

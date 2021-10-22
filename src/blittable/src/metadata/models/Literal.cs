@@ -14,17 +14,14 @@ namespace Z0
         [StructLayout(LayoutKind.Sequential, Pack=1)]
         public struct Literal<V>
         {
-            public Name Name;
-
-            public LiteralKind Kind;
+            public Label Name;
 
             public V Value;
 
             [MethodImpl(Inline)]
-            public Literal(Name n, LiteralKind kind, V value)
+            public Literal(Label n, V value)
             {
                 Name = n;
-                Kind = kind;
                 Value = value;
             }
         }

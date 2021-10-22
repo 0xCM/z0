@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="gz">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly BitGrid<T> not<T>(in BitGrid<T> gx, in BitGrid<T> gz)
+        public static ref readonly BitSpanBlocks256<T> not<T>(in BitSpanBlocks256<T> gx, in BitSpanBlocks256<T> gz)
             where T : unmanaged
         {
             var blocks = gz.BlockCount;
@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="gx">The source grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid<T> not<T>(in BitGrid<T> gx)
+        public static BitSpanBlocks256<T> not<T>(in BitSpanBlocks256<T> gx)
             where T : unmanaged
                 => not(gx, alloc<T>(gx.RowCount, gx.ColCount));
     }

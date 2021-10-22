@@ -13,7 +13,7 @@ namespace Z0
         partial struct Meta
         {
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static Enum<V> @enum<V>(string name, Literal<V>[] src)
+            public static Enum<V> @enum<V>(Label name, Literal<V>[] src)
                 => new Enum<V>(name, src);
         }
     }

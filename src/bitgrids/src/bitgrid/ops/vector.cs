@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vector<T>(in BitGrid<T> src, int block, W256 w = default)
+        public static Vector256<T> vector<T>(in BitSpanBlocks256<T> src, int block, W256 w = default)
             where T : unmanaged
                 => gcpu.vload(w, src.Data.BlockLead(block));
 

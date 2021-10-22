@@ -17,9 +17,9 @@ namespace Z0
             where T : unmanaged
                 => new BitGrid<M,N,T>(src.Content.Replicate());
 
-        public static BitGrid<T> Replicate<T>(this BitGrid<T> src)
+        public static BitSpanBlocks256<T> Replicate<T>(this BitSpanBlocks256<T> src)
             where T : unmanaged
-                => new BitGrid<T>(src.Content.Replicate(), src.RowCount, src.ColCount);
+                => new BitSpanBlocks256<T>(src.Content.Replicate(), src.RowCount, src.ColCount);
 
         [MethodImpl(Inline)]
         public static BitGrid32<M,N,T> Replicate<M,N,T>(this BitGrid32<M,N,T> src)

@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline), Store, Closures(Closure)]
-        public static void store<T>(Vector256<T> src, in BitGrid<T> dst, int block)
+        public static void store<T>(Vector256<T> src, in BitSpanBlocks256<T> dst, int block)
             where T : unmanaged
                 => gcpu.vstore(src, ref dst.Data.BlockLead(block));
 

@@ -505,13 +505,13 @@ namespace Z0
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The segment type</typeparam>
         [MethodImpl(Inline), Init, Closures(Closure)]
-        public static BitGrid<T> init<T>(uint m, uint n, T d = default)
+        public static BitSpanBlocks256<T> init<T>(uint m, uint n, T d = default)
             where T : unmanaged
         {
             var w = W256.W;
             var blocks = Z0.SpanBlocks.alloc<T>(w, CellCalcs.blockcount<T>(w, m, n));
             broadcast(d, blocks);
-            return new BitGrid<T>(blocks,(int)m,(int)n);
+            return new BitSpanBlocks256<T>(blocks,(int)m,(int)n);
         }
 
         /// <summary>

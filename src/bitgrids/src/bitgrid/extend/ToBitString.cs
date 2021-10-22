@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="g">The source grid</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString<T>(this BitGrid<T> g)
+        public static BitString ToBitString<T>(this BitSpanBlocks256<T> g)
             where T : unmanaged
                 => BitGrid.bitstring(g);
 

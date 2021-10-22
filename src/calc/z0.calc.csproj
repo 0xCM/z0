@@ -13,7 +13,6 @@
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(BitGrids)" />
-    <ProjectReference Include="$(BitMatrix)" />
   </ItemGroup>
 
 </Project>

@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitGrid<uint> ToBitGrid(this BitMatrix32 src)
+        public static BitSpanBlocks256<uint> ToBitSpanBlocks256(this BitMatrix32 src)
             => BitGrid.load(SpanBlocks.load(n256,src.Content),32,32);
 
         [MethodImpl(Inline)]
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitGrid<ulong> ToBitGrid(this BitMatrix64 src)
+        public static BitSpanBlocks256<ulong> ToBitGrid(this BitMatrix64 src)
             => BitGrid.load(SpanBlocks.load(n256,src.Content),64,64);
 
     }
@@ -535,7 +535,7 @@ namespace Z0
         /// <param name="n">The grid col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid<T> BitGrid<T>(this ISource random, uint m, uint n, T t = default)
+        public static BitSpanBlocks256<T> BitGrid<T>(this ISource random, uint m, uint n, T t = default)
             where T : unmanaged
                 => random.Fill(Z0.BitGrid.alloc<T>((int)m,(int)n));
 
@@ -547,7 +547,7 @@ namespace Z0
         /// <param name="n">The grid col count</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly BitGrid<T> Fill<T>(this ISource random, in BitGrid<T> dst)
+        public static ref readonly BitSpanBlocks256<T> Fill<T>(this ISource random, in BitSpanBlocks256<T> dst)
             where T : unmanaged
         {
             random.Fill(dst.CellCount, ref dst.Head);

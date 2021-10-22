@@ -45,7 +45,7 @@ namespace Z0
                 => init64<T>(ulong.MaxValue);
 
         [MethodImpl(Inline), Ones, Closures(Closure)]
-        public static ref readonly BitGrid<T> ones<T>(in BitGrid<T> dst)
+        public static ref readonly BitSpanBlocks256<T> ones<T>(in BitSpanBlocks256<T> dst)
             where T : unmanaged
         {
             broadcast(Limits.maxval<T>(), dst);

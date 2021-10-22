@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Xor, Closures(UInt8x16k)]
         public static BitGrid16<T> xor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => init16<T>(math.xor(gx,gy));
+                => init16<T>(math.xor(gx, gy));
 
         /// <summary>
         /// Computes the bitwise xor between generic bitgrids
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="gz">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
-        public static ref readonly BitGrid<T> xor<T>(in BitGrid<T> gx, in BitGrid<T> gy, in BitGrid<T> gz)
+        public static ref readonly BitSpanBlocks256<T> xor<T>(in BitSpanBlocks256<T> gx, in BitSpanBlocks256<T> gy, in BitSpanBlocks256<T> gz)
             where T : unmanaged
         {
             var blocks = gz.BlockCount;

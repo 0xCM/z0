@@ -53,7 +53,7 @@ namespace Z0
             var n = n32;
             var zero = 0u;
             var matrix = Random.BitMatrix(n);
-            var grid = matrix.ToBitGrid();
+            var grid = matrix.ToBitSpanBlocks256();
             for(byte row = 0; row < n; row++)
             for(byte col = 0; col < n; col++)
                 Claim.eq(grid[row,col], matrix[row,col]);

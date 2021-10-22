@@ -7,71 +7,70 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static LiteralKind;
 
     partial struct BitFlow
     {
         partial struct Meta
         {
             [MethodImpl(Inline), Op]
-            public static Literal<bool> literal(in Name name, bool value)
-                => literal(name, value, U1);
+            public static Literal<bool> literal(in Label name, bool value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<byte> literal(in Name name, byte value)
-                => literal(name, value, U8);
+            public static Literal<byte> literal(in Label name, byte value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<ushort> literal(in Name name, ushort value)
-                => literal(name, value, U16);
+            public static Literal<ushort> literal(in Label name, ushort value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<uint> literal(in Name name, uint value)
-                => literal(name, value, U32);
+            public static Literal<uint> literal(in Label name, uint value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<ulong> literal(in Name name, ulong value)
-                => literal(name, value, U64);
+            public static Literal<ulong> literal(in Label name, ulong value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<sbyte> literal(in Name name, sbyte value)
-                => literal(name, value, I8);
+            public static Literal<sbyte> literal(in Label name, sbyte value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<short> literal(in Name name, short value)
-                => literal(name, value, I16);
+            public static Literal<short> literal(in Label name, short value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<int> literal(in Name name, int value)
-                => literal(name, value, I32);
+            public static Literal<int> literal(in Label name, int value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<long> literal(in Name name, long value)
-                => literal(name, value, I64);
+            public static Literal<long> literal(in Label name, long value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<float> literal(in Name name, float value)
-                => literal(name, value, F32);
+            public static Literal<float> literal(in Label name, float value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<double> literal(in Name name, double value)
-                => literal(name, value, F64);
+            public static Literal<double> literal(in Label name, double value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<decimal> literal(in Name name, decimal value)
-                => literal(name, value, F128);
+            public static Literal<decimal> literal(in Label name, decimal value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<char> literal(in Name name, char value)
-                => literal(name, value, C16);
+            public static Literal<char> literal(in Label name, char value)
+                => literal(name, value);
 
             [MethodImpl(Inline), Op]
-            public static Literal<string> literal(in Name name, string value)
-                => literal(name, value, LiteralKind.String);
+            public static Literal<string> literal(in Label name, string value)
+                => literal(name, value);
 
             [MethodImpl(Inline)]
-            static Literal<V> literal<V>(in Name name, V value, LiteralKind kind)
-                => new Literal<V>(name, kind, value);
+            static Literal<V> literal<V>(in Label name, V value)
+                => new Literal<V>(name, value);
         }
     }
 }

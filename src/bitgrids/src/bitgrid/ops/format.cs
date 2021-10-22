@@ -19,7 +19,7 @@ namespace Z0
             where T : unmanaged
                 => src.Content.Bytes.FormatGridBits(nat32i<N>(), (int)NatCalc.mul<M,N>(), false);
 
-        public static string format<T>(BitGrid<T> src, bool showrow = false, int? maxbits = null)
+        public static string format<T>(BitSpanBlocks256<T> src, bool showrow = false, int? maxbits = null)
             where T : unmanaged
                 => src.Content.Bytes.FormatGridBits(src.ColCount, maxbits ,showrow);
 

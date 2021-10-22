@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="dst">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Broadcast, Closures(Closure)]
-        public static ref readonly BitGrid<T> broadcast<T>(T cell, in BitGrid<T> dst)
+        public static ref readonly BitSpanBlocks256<T> broadcast<T>(T cell, in BitSpanBlocks256<T> dst)
             where T : unmanaged
         {
             dst.Content.Fill(cell);

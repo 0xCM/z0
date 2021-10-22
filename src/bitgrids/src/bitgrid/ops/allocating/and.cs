@@ -14,7 +14,7 @@ namespace Z0
     partial class BitGridA
     {
         [MethodImpl(Inline), Ones, Closures(UnsignedInts)]
-        public static BitGrid<T> ones<T>(int rows, int cols, T zero = default)
+        public static BitSpanBlocks256<T> ones<T>(int rows, int cols, T zero = default)
             where T : unmanaged
         {
             var dst = alloc<T>(rows,cols);
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="gz">The target grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Negate, Closures(UnsignedInts)]
-        public static BitGrid<T> negate<T>(in BitGrid<T> x)
+        public static BitSpanBlocks256<T> negate<T>(in BitSpanBlocks256<T> x)
             where T : unmanaged
                 => BitGrid.negate(x, alloc<T>(x.RowCount, x.ColCount));
 
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
-        public static BitGrid<T> xor<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+        public static BitSpanBlocks256<T> xor<T>(in BitSpanBlocks256<T> gx, in BitSpanBlocks256<T> gy)
             where T : unmanaged
         {
             var gz = alloc<T>(gx.RowCount, gx.ColCount);
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Xnor, Closures(UnsignedInts)]
-        public static BitGrid<T> xnor<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+        public static BitSpanBlocks256<T> xnor<T>(in BitSpanBlocks256<T> gx, in BitSpanBlocks256<T> gy)
             where T : unmanaged
         {
             var gz = alloc<T>(gx.RowCount, gx.ColCount);
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Or, Closures(UnsignedInts)]
-        public static BitGrid<T> or<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+        public static BitSpanBlocks256<T> or<T>(in BitSpanBlocks256<T> gx, in BitSpanBlocks256<T> gy)
             where T : unmanaged
         {
             var gz = alloc<T>(gx.RowCount, gx.ColCount);
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="gy">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Nor, Closures(UnsignedInts)]
-        public static BitGrid<T> nor<T>(in BitGrid<T> gx, in BitGrid<T> gy)
+        public static BitSpanBlocks256<T> nor<T>(in BitSpanBlocks256<T> gx, in BitSpanBlocks256<T> gy)
             where T : unmanaged
         {
             var gz = alloc<T>(gx.RowCount, gx.ColCount);
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="b">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), And, Closures(UnsignedInts)]
-        public static BitGrid<T> and<T>(in BitGrid<T> a, in BitGrid<T> b)
+        public static BitSpanBlocks256<T> and<T>(in BitSpanBlocks256<T> a, in BitSpanBlocks256<T> b)
             where T : unmanaged
         {
             var gz = alloc<T>(a.RowCount, a.ColCount);
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="b">The right grid</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static BitGrid<T> nand<T>(in BitGrid<T> a, in BitGrid<T> b)
+        public static BitSpanBlocks256<T> nand<T>(in BitSpanBlocks256<T> a, in BitSpanBlocks256<T> b)
             where T : unmanaged
         {
             var dst = BitGrid.alloc<T>(a.RowCount, a.ColCount);
