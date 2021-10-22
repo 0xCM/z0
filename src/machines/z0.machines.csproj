@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>machines</AssemblyName>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <ZVer>0.0.30</ZVer>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="z0.cpu" Version="$(ZVer)" />
+    <PackageReference Include="z0.polyrand" Version="$(ZVer)" />
+    <PackageReference Include="z0.services" Version="$(ZVer)" />
+    <PackageReference Include="z0.lang" Version="$(ZVer)" />
+    <PackageReference Include="z0.asm" Version="$(ZVer)" />
+  </ItemGroup>
+
+</Project>

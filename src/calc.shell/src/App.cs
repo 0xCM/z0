@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Threading.Tasks;
 
-    using Machines;
-    using Machines.X86;
 
     using static Root;
     using static core;
@@ -48,47 +46,6 @@ namespace Z0
                 Wf.Raise(e);
         }
 
-        public void Run(N2 n)
-        {
-            var settings = new EngineSettings();
-            settings.Affinity = 0b10101101u;
-            Wf.Row(settings.Affinity);
-
-            var engine = Engine.create(Wf);
-            engine.Run();
-        }
-
-        public void Run(N10 n)
-        {
-            var stack = StackMachines.create(Pow2.T08);
-            stack.Push(2);
-            Queue.Deposit(EventFactory.data(stack.state()));
-            stack.Push(4);
-            Queue.Deposit(EventFactory.data(stack.state()));
-            stack.Push(6);
-            Queue.Deposit(EventFactory.data(stack.state()));
-        }
-
-        void Run(N11 n)
-        {
-            const uint CellCount = 1024;
-            const uint JobCount = 128;
-            const uint CycleCount = 64;
-
-            Task<uint> RunMachine(uint cycles)
-                => Task.Factory.StartNew(() => new Vmx128x2(CellCount, Rng.@default()).Run(cycles));
-
-            var flow = Wf.Running();
-            var clock = Time.counter(true);
-            var count = 0ul;
-            var tasks = core.stream(0u,JobCount).Map(i => RunMachine(CycleCount));
-            Task.WaitAll(tasks);
-            foreach(var t in tasks)
-                count += t.Result;
-
-            var time = clock.Elapsed();
-            Wf.Ran(flow, string.Format("Processed {0:##,#} items in {1} ms", count, time.Ms));
-        }
 
         void Run(N9 n)
         {
@@ -330,10 +287,6 @@ namespace Z0
             BlitMachine.create(Wf).Run();
         }
 
-        void Run(N22 n)
-        {
-            X86Emulator.create(Wf).Run();
-        }
 
         void Run(N23 n)
         {
@@ -451,9 +404,6 @@ namespace Z0
             {
                 switch(n)
                 {
-                    case 2:
-                        Run(n2);
-                    break;
                     case 3:
                         Run(n3);
                     break;
@@ -474,12 +424,6 @@ namespace Z0
                     break;
                     case 9:
                         Run(n9);
-                    break;
-                    case 10:
-                        Run(n10);
-                    break;
-                    case 11:
-                        Run(n11);
                     break;
                     case 13:
                         Run(n13);
@@ -507,9 +451,6 @@ namespace Z0
                     break;
                     case 21:
                         Run(n21);
-                    break;
-                    case 22:
-                        Run(n22);
                     break;
                     case 23:
                         Run(n23);

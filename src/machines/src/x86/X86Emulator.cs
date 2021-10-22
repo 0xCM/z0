@@ -81,7 +81,7 @@ namespace Z0.Machines.X86
         {
             var result = Outcome.Success;
             var grid = default(RegGrid8x64);
-            var regs = RegMachines.regs(n8,w64);
+            var regs = Control.regs(n8,w64);
             var names = recover<AsmRegName>(ByteBlock64.Empty.Bytes);
             var pairs = recover<AsmRegValue<ulong>>(ByteBlock128.Empty.Bytes);
 
@@ -116,9 +116,9 @@ namespace Z0.Machines.X86
         {
             var result = Outcome.Success;
 
-            var machine = RegMachines.intel64();
+            var machine = Control.intel64();
             var buffer = text.buffer();
-            RegMachines.state(machine,buffer);
+            Control.state(machine,buffer);
             Write(buffer.Emit());
 
             return result;

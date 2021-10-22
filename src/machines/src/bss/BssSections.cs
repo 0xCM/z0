@@ -11,7 +11,6 @@ namespace Z0.Machines
     using static core;
     using static MemorySections;
 
-    using api = MemorySections;
 
     [ApiHost]
     public readonly partial struct BssSections : ISectionDispenser<BssSections>
@@ -63,10 +62,10 @@ namespace Z0.Machines
             seek(dst,1) = section(default(Bss1x16x16x64_1));
             seek(dst,2) = section(default(Bss1x16x16x64_2));
             seek(dst,3) = section(default(Bss1x16x16x64_3));
-            api.initialize(skip(dst,0));
-            api.initialize(skip(dst,1));
-            api.initialize(skip(dst,2));
-            api.initialize(skip(dst,3));
+            MemorySections.initialize(skip(dst,0));
+            MemorySections.initialize(skip(dst,1));
+            MemorySections.initialize(skip(dst,2));
+            MemorySections.initialize(skip(dst,3));
             return _EntryCount;
         }
 

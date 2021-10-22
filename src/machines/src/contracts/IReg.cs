@@ -6,8 +6,6 @@ namespace Z0.Machines
 {
     using Asm;
 
-    using api = X86.RegModels;
-
     /// <summary>
     /// Characterizes a register representation
     /// </summary>
@@ -29,7 +27,7 @@ namespace Z0.Machines
             => (NativeSizeCode)(ushort)core.width<T>();
 
         string ITextual.Format()
-            => api.format(this);
+            => X86.RegModels.format(this);
     }
 
     /// <summary>

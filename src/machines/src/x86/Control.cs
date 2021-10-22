@@ -6,7 +6,7 @@ namespace Z0.Machines.X86
 {
     using static core;
 
-    public readonly partial struct RegMachines
+    public readonly struct Control
     {
         public static RegStore8x64 regs(N8 n, W64 w)
             => default;

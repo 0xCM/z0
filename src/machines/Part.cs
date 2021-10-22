@@ -2,10 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines.X86
-{
-    [ApiHost]
-    public readonly partial struct MemModels
+[assembly: PartId(PartId.Machine)]
+
+namespace Z0.Parts
+{ 
+    using System;
+    
+    public sealed class Machine : Part<Machine>
     {
 
     }

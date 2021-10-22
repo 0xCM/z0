@@ -11,12 +11,16 @@ namespace Z0.Machines.X86
 
     using static Root;
 
+    /// <summary>
+    /// Defines a <typeparamref name='T'/> parametric memory cell
+    /// </summary>
     public readonly struct mem<T> : IMem<T>
         where T : unmanaged
     {
         public T Content {get;}
 
-        public AsmOpClass OpClass => AsmOpClass.M;
+        public AsmOpClass OpClass
+            => AsmOpClass.M;
 
         [MethodImpl(Inline)]
         public mem(T src)
