@@ -2,26 +2,30 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0.Machines.X86
 {
     using System;
     using System.Runtime.CompilerServices;
 
+    using Asm;
+
     using static Root;
 
-    public class CpuModel<T>
+    public readonly struct mem<T> : IMem<T>
         where T : unmanaged
     {
-        Index<CpuCore<T>> _Cores;
+        public T Content {get;}
+
+        public AsmOpClass OpClass => AsmOpClass.M;
 
         [MethodImpl(Inline)]
-        internal CpuModel(CpuCore<T>[] cores)
+        public mem(T src)
         {
-            _Cores = cores;
+            Content = src;
         }
 
         [MethodImpl(Inline)]
-        public ref CpuCore<T> Core(uint id)
-            => ref _Cores[id];
+        public static implicit operator mem<T>(T src)
+            => new mem<T>(src);
     }
 }

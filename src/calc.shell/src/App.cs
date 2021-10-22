@@ -8,6 +8,7 @@ namespace Z0
     using System.Threading.Tasks;
 
     using Machines;
+    using Machines.X86;
 
     using static Root;
     using static core;

@@ -219,6 +219,5 @@ namespace Z0.Machines
             }
             return kind;
         }
-
     }
 }

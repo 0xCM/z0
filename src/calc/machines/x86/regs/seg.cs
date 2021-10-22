@@ -7,21 +7,26 @@ namespace Z0.Machines
     using System;
     using System.Runtime.CompilerServices;
 
+    using Asm;
+
     using static Root;
 
-    public class CpuModel<T>
-        where T : unmanaged
+    /// <summary>
+    /// Represents a segment register
+    /// </summary>
+    public struct seg
     {
-        Index<CpuCore<T>> _Cores;
+        public SegRegKind Kind {get;}
+
+        public bool IsEmpty => false;
 
         [MethodImpl(Inline)]
-        internal CpuModel(CpuCore<T>[] cores)
+        public seg(SegRegKind src)
         {
-            _Cores = cores;
+            Kind = src;
         }
 
-        [MethodImpl(Inline)]
-        public ref CpuCore<T> Core(uint id)
-            => ref _Cores[id];
+        public static seg Empty
+            => new seg(SegRegKind.CS);
     }
 }

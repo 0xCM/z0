@@ -10,54 +10,51 @@ namespace Z0.Machines
     using static Root;
     using static core;
 
-    partial struct CpuModels
+    public struct CpuBuffer<N,W,T>
+        where N : unmanaged, ITypeNat
+        where W : unmanaged, ITypeWidth
+        where T : unmanaged
     {
-        public struct CpuBuffer<N,W,T>
-            where N : unmanaged, ITypeNat
-            where W : unmanaged, ITypeWidth
-            where T : unmanaged
+        readonly Index<T> Data;
+
+        [MethodImpl(Inline)]
+        public CpuBuffer(T[] data)
+            => Data = data;
+
+        public int Length
         {
-            readonly Index<T> Data;
-
             [MethodImpl(Inline)]
-            public CpuBuffer(T[] data)
-                => Data = data;
+            get => (int)nat64u<N>();
+        }
 
-            public int Length
-            {
-                [MethodImpl(Inline)]
-                get => (int)nat64u<N>();
-            }
-
-            public Span<T> Edit
-            {
-                [MethodImpl(Inline)]
-                get => Data;
-            }
-
+        public Span<T> Edit
+        {
             [MethodImpl(Inline)]
-            public void Clear(W16 w)
-            {
-                first(Data.Edit.Recover<T,ushort>()) = z16;
-            }
+            get => Data;
+        }
 
-            [MethodImpl(Inline)]
-            public void Clear(W32 w)
-            {
-                first(Data.Edit.Recover<T,uint>()) = z32;
-            }
+        [MethodImpl(Inline)]
+        public void Clear(W16 w)
+        {
+            first(Data.Edit.Recover<T,ushort>()) = z16;
+        }
 
-            [MethodImpl(Inline)]
-            public void Clear(W64 w)
-            {
-                first(Data.Edit.Recover<T,ulong>()) = z64;
-            }
+        [MethodImpl(Inline)]
+        public void Clear(W32 w)
+        {
+            first(Data.Edit.Recover<T,uint>()) = z32;
+        }
 
-            [MethodImpl(Inline)]
-            public void Clear(W128 w)
-            {
-                first(Data.Edit.Recover<T,Cell128>()) = Cell128.Empty;
-            }
+        [MethodImpl(Inline)]
+        public void Clear(W64 w)
+        {
+            first(Data.Edit.Recover<T,ulong>()) = z64;
+        }
+
+        [MethodImpl(Inline)]
+        public void Clear(W128 w)
+        {
+            first(Data.Edit.Recover<T,Cell128>()) = Cell128.Empty;
         }
     }
 }

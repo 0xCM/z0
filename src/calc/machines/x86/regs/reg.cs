@@ -9,19 +9,21 @@ namespace Z0.Machines
 
     using static Root;
 
-    public class CpuModel<T>
-        where T : unmanaged
+    public readonly struct reg<T>
+        where T : unmanaged, IReg
     {
-        Index<CpuCore<T>> _Cores;
+        public T Content {get;}
 
         [MethodImpl(Inline)]
-        internal CpuModel(CpuCore<T>[] cores)
-        {
-            _Cores = cores;
-        }
+        public reg(T src)
+            => Content = src;
 
         [MethodImpl(Inline)]
-        public ref CpuCore<T> Core(uint id)
-            => ref _Cores[id];
+        public reg<T> Reposition(byte pos)
+            => new reg<T>(Content);
+
+        [MethodImpl(Inline)]
+        public static implicit operator reg<T>(T src)
+            => new reg<T>(src);
     }
 }

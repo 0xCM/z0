@@ -6,7 +6,7 @@ namespace Z0.Machines
 {
     using Asm;
 
-    using api = RegModels;
+    using api = X86.RegModels;
 
     /// <summary>
     /// Characterizes a register representation
@@ -48,7 +48,6 @@ namespace Z0.Machines
     {
 
     }
-
 
     public interface IReg512<H,T> : IReg512<T>
         where H : struct, IReg512<H,T>
