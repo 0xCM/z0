@@ -21,7 +21,6 @@ namespace Z0.llvm
         public const string X86Classes = "X86.records.classes";
 
         public const string X86ClassMembers = "X86.records.classes.members";
-
     }
 
     public partial class EtlWorkflow : AppService<EtlWorkflow>

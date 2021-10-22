@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0.Machines.X86
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -16,10 +16,10 @@ namespace Z0.Machines
         /// <summary>
         /// Defines an 'uninitialized' storage block with 64 blocks of size 8*n where n=64, the length of a segment,
         /// </summary>
-        [ApiComplete("bss.1x16x16x64.1")]
-        readonly struct Bss1x16x16x64_1 : IMemorySection<Bss1x16x16x64_1>
+        [ApiComplete("bss.1x16x16x64.0")]
+        readonly struct Bss1x16x16x64_0 : IMemorySection<Bss1x16x16x64_0>
         {
-            const ushort BssId = 1;
+            const ushort BssId = 0;
 
             const byte CellSize = 1;
 
@@ -47,6 +47,10 @@ namespace Z0.Machines
             public Capacity Capacity()
                 => capacity(CellSize, BlockCount, BlockSegs, SegCells);
 
+            [MethodImpl(Inline)]
+            public unsafe Span<byte> Storage()
+                => cover(Base().Pointer<byte>(), TotalSize);
+
             MemoryAddress IMemorySection.Base()
                 => Base();
 
@@ -56,9 +60,6 @@ namespace Z0.Machines
             ushort IMemorySection.Index
                 => Id;
 
-            [MethodImpl(Inline)]
-            public unsafe Span<byte> Storage()
-                => cover(Base().Pointer<byte>(), TotalSize);
 
             /// <summary>
             /// Allocation

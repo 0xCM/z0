@@ -12,13 +12,13 @@ namespace Z0.Machines.X86
     using static core;
     using static Asm.RegClasses;
 
-    public class X86Emulator : AppCmdService<X86Emulator>
+    public class TestMachine : AppCmdService<TestMachine>
     {
         RegBank Registers;
 
         EngineSettings Settings;
 
-        public X86Emulator()
+        public TestMachine()
         {
             Registers = RegBanks.intel64();
         }

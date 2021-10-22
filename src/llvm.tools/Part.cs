@@ -35,10 +35,6 @@ namespace Z0
             => llvm.LlvmPaths.create(context);
 
         [Op]
-        public static LlvmMc LLvmMc(this IWfRuntime wf)
-            => llvm.LlvmMc.create(wf);
-
-        [Op]
         public static LlvmDb LLvmDb(this IWfRuntime wf)
             => llvm.LlvmDb.create(wf);
 

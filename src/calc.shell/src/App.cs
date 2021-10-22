@@ -72,51 +72,6 @@ namespace Z0
             Wf.Row(block.Describe());
         }
 
-        void Run128(PageBlock lhs, PageBlock rhs, PageBlock dst)
-        {
-            var size = lhs.Size;
-            var w = w128;
-            var cells = size/size<Cell128>();
-            ref var left = ref lhs.Segment<Cell128>(0);
-            ref var right = ref rhs.Segment<Cell128>(1);
-            ref var target = ref dst.Segment<Cell128>(2);
-            var f = Calcs.vor<uint>(w);
-            for(var i=0u; i<cells; i++)
-            {
-                ref var a = ref seek(left,i);
-                a = cpu.vbroadcast(w,i);
-                ref var b = ref seek(right,i);
-                b = cpu.vbroadcast(w,i + Pow2.T12);
-                seek(target,i) = f.Invoke(a,b);
-            }
-        }
-
-        void Run(N5 n)
-        {
-            var bank = PageBank16x4x4.allocated();
-            var size = PageBank16x4x4.BlockSize;
-            var w = w128;
-            //var cells = size/size<Cell128>();
-
-            var left = bank.Block(n0);
-            var right = bank.Block(n1);
-            var dst = bank.Block(n2);
-            Run128(left, right, dst);
-
-
-            ref var lCell = ref left.Segment<Cell128>(0);
-            ref var rCell = ref right.Segment<Cell128>(0);
-            ref var target = ref dst.Segment<Cell128>(0);
-
-            var cells = left.Size/size<Cell128>();
-            for(var i=0u; i<cells; i++)
-            {
-                ref readonly var a = ref skip(lCell,i);
-                ref readonly var b = ref skip(rCell,i);
-                ref readonly var result = ref skip(target,i);
-                Wf.Row(string.Format("{0:D6} {1}([{2}],[{3}]) = {4}", i, "f", a.V32u.FormatHex(), b.V32u.FormatHex(), result.V32u.FormatHex()));
-            }
-        }
 
         void Run(N13 n)
         {
@@ -186,30 +141,6 @@ namespace Z0
         //     Wf.Row(fx(3,4).ToString());
         // }
 
-        void Run(N3 n)
-        {
-            var bank = PageBank16x4x4.allocated();
-            var size = PageBank16x4x4.BlockSize;
-            var w = w128;
-            var cells = size/size<Cell128>();
-
-            var left = bank.Block(n0);
-            var right = bank.Block(n1);
-            var dst = bank.Block(n2);
-            Run128(left, right, dst);
-
-            ref var lCell = ref left.Segment<Cell128>(0);
-            ref var rCell = ref right.Segment<Cell128>(0);
-            ref var target = ref dst.Segment<Cell128>(0);
-
-            for(var i=0u; i<cells; i++)
-            {
-                ref readonly var a = ref skip(lCell,i);
-                ref readonly var b = ref skip(rCell,i);
-                ref readonly var result = ref skip(target,i);
-                Wf.Row(string.Format("{0:D6} {1}([{2}],[{3}]) = {4}", i, "f", a.V32u.FormatHex(), b.V32u.FormatHex(), result.V32u.FormatHex()));
-            }
-        }
 
         void Run(N15 n)
         {
@@ -272,21 +203,11 @@ namespace Z0
             Wf.Row(fmt);
         }
 
-        void Run(N19 n)
-        {
-            VPipeTests.test(Wf);
-        }
 
         void Run(N20 n)
         {
             BitMaskChecker.create(Wf).Run(Source);
         }
-
-        void Run(N21 n)
-        {
-            BlitMachine.create(Wf).Run();
-        }
-
 
         void Run(N23 n)
         {
@@ -304,99 +225,11 @@ namespace Z0
             Fsm.example2();
         }
 
-        void Run(N26 n)
-        {
-            void receive(uint i, uint j)
-            {
-                Write(string.Format("{0} -> {1}", i, j));
-            }
-            var seq = SeqSpecs.finite((0u,57u), i => i + 1);
-            Write(string.Format("{0}..{1}", seq.Min, seq.Max));
-            var count = seq.Compute(receive);
-            count += seq.Compute(receive);
-            Write(string.Format("Term Count:{0}", count));
-        }
 
         void Run(N27 n)
         {
             Parts.BitPack.Resolved.Executor.Run();
         }
-
-        void Spin()
-        {
-            var counter = 0u;
-            var ticks = 0L;
-
-            void Receiver(long t)
-            {
-                counter++;
-                ticks += t;
-                Write(string.Format("{0:D4}:{1:D12}", counter, ticks));
-            }
-
-            var spinner = new Spinner(TimeSpan.FromSeconds(1), Receiver);
-            spinner.Spin();
-        }
-
-        void Run(N28 n)
-        {
-            Spin();
-        }
-
-
-        void Run(N29 n)
-        {
-
-            var inputs = BinaryBitLogicOps.inputs(w1);
-            var eval = BinaryBitLogicOps.canonical(w1,inputs);
-            var count = inputs.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var input = ref skip(inputs,i);
-                ref readonly var result = ref skip(eval,i);
-                Write(string.Format("{0:D2} | {1}", i, result.Format(BinaryBitLogicOps.FormatOption.Bitstrings)));
-            }
-
-            // var dst = ByteBlock64.Empty;
-            // var buffer = recover<BitOpCalc>(dst.Bytes);
-            // var count = BitStates.compute(w1,buffer);
-            // var formatter = BitOpFormatter.service();
-            // for(var i=0; i<count; i++)
-            // {
-            //     ref readonly var result = ref skip(buffer,i);
-            //     Write(string.Format("{0:D2} | {1}", i, result.Format(BitOpFormatter.FormatOption.Bitstrings)));
-            // }
-
-        }
-
-        public unsafe void Run(N30 n)
-        {
-            var count = Pow2.T12;
-            using var buffer0 = memory.native<uint>(count);
-            using var buffer1 = memory.native<uint>(count);
-            using var buffer2 = memory.native<uint>(count);
-            var rng = Rng.pcg64(BitMaskLiterals.b01010101x64);
-            rng.Fill(buffer0.Edit);
-            rng.Fill(buffer1.Edit);
-            var r0 = seq.reader(buffer0);
-            var r1 = seq.reader(buffer1);
-            var reader = seq.reader(r0,r1);
-            var editor = seq.editor(buffer2);
-
-            while(reader.Next(out var c0, out var c1))
-            {
-                editor.Next(out var _) = math.xor(c0,c1);
-            }
-
-            var result = seq.reader(buffer2);
-            var counter = 0u;
-            while(result.Next(out var r))
-            {
-                Write(string.Format("{0:D5} {1:x}",counter++, r.FormatHex()));
-            }
-
-        }
-
 
         void Run(string spec)
         {
@@ -404,14 +237,8 @@ namespace Z0
             {
                 switch(n)
                 {
-                    case 3:
-                        Run(n3);
-                    break;
                     case 4:
                         Run(n4);
-                    break;
-                    case 5:
-                        Run(n5);
                     break;
                     case 6:
                         Run(n6);
@@ -443,14 +270,8 @@ namespace Z0
                     case 18:
                         Run(n18);
                     break;
-                    case 19:
-                        Run(n19);
-                    break;
                     case 20:
                         Run(n20);
-                    break;
-                    case 21:
-                        Run(n21);
                     break;
                     case 23:
                         Run(n23);
@@ -461,20 +282,8 @@ namespace Z0
                     case 25:
                         Run(n25);
                     break;
-                    case 26:
-                        Run(n26);
-                    break;
                     case 27:
                         Run(n27);
-                    break;
-                    case 28:
-                        Run(n28);
-                    break;
-                    case 29:
-                        Run(n29);
-                    break;
-                    case 30:
-                        Run(n30);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

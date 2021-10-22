@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Root;
-
     partial struct TextTools
     {
         [Op]

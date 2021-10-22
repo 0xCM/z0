@@ -54,7 +54,6 @@ namespace Z0.Machines.X86
             Regs.Dispose();
         }
 
-
         [MethodImpl(Inline), Op]
         public ref byte reg8(RegIndex index)
             => ref @ref(R8 + 8*(byte)(index));

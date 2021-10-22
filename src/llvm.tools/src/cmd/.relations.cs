@@ -20,10 +20,9 @@ namespace Z0.llvm
             var pathA = LlvmPaths.ImportTable("llvm.defs.relations.test");
             TableEmit(relations, DefRelations.RenderWidths, pathA);
 
-            // var hydrated = LoadDefRelations(pathA);
-            // var pathB = LlvmPaths.ImportTable("llvm.defs.relations.test.loaded");
-            // TableEmit(hydrated, DefRelations.RenderWidths, pathB);
-
+            var hydrated = LoadDefRelations(pathA);
+            var pathB = LlvmPaths.ImportTable("llvm.defs.relations.test.loaded");
+            TableEmit(hydrated, DefRelations.RenderWidths, pathB);
 
             return result;
         }

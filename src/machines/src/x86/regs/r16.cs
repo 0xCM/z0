@@ -178,7 +178,6 @@ namespace Z0.Machines.X86
             [MethodImpl(Inline)]
             get =>new G(Content, RegKind);
         }
-
     }
 
     public struct di : IReg16<di,T>
@@ -254,11 +253,6 @@ namespace Z0.Machines.X86
     {
         public T Content  {get;}
 
-
-        [MethodImpl(Inline)]
-        public static implicit operator G(r8w src)
-            => src.Generalized;
-
         [MethodImpl(Inline)]
         public r8w(T value)
         {
@@ -272,15 +266,16 @@ namespace Z0.Machines.X86
             [MethodImpl(Inline)]
             get =>new G(Content, RegKind);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator G(r8w src)
+            => src.Generalized;
+
     }
 
     public struct r9w : IReg16<r9w,T>
     {
         public T Content  {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator G(r9w src)
-            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r9w(T value)
@@ -295,15 +290,15 @@ namespace Z0.Machines.X86
             [MethodImpl(Inline)]
             get =>new G(Content, RegKind);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator G(r9w src)
+            => src.Generalized;
     }
 
     public struct r10w : IReg16<r10w,T>
     {
         public T Content  {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator G(r10w src)
-            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r10w(T value)
@@ -318,15 +313,16 @@ namespace Z0.Machines.X86
             [MethodImpl(Inline)]
             get =>new G(Content, RegKind);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator G(r10w src)
+            => src.Generalized;
+
     }
 
     public struct r11w : IReg16<r11w,T>
     {
         public T Content  {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator G(r11w src)
-            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r11w(T value)
@@ -341,15 +337,15 @@ namespace Z0.Machines.X86
             [MethodImpl(Inline)]
             get =>new G(Content, RegKind);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator G(r11w src)
+            => src.Generalized;
     }
 
     public struct r12w : IReg16<r12w,T>
     {
         public T Content  {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator G(r12w src)
-            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r12w(T value)
@@ -364,15 +360,15 @@ namespace Z0.Machines.X86
             [MethodImpl(Inline)]
             get =>new G(Content, RegKind);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator G(r12w src)
+            => src.Generalized;
     }
 
     public struct r13w : IReg16<r13w,T>
     {
         public T Content  {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator G(r13w src)
-            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r13w(T value)
@@ -387,15 +383,15 @@ namespace Z0.Machines.X86
             [MethodImpl(Inline)]
             get =>new G(Content, RegKind);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator G(r13w src)
+            => src.Generalized;
     }
 
     public struct r14w : IReg16<r14w,T>
     {
         public T Content  {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator G(r14w src)
-            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r14w(T value)
@@ -410,15 +406,16 @@ namespace Z0.Machines.X86
             [MethodImpl(Inline)]
             get =>new G(Content, RegKind);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator G(r14w src)
+            => src.Generalized;
+
     }
 
     public struct r15w : IReg16<r15w,T>
     {
         public T Content  {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator G(r15w src)
-            => src.Generalized;
 
         [MethodImpl(Inline)]
         public r15w(T value)
@@ -433,5 +430,9 @@ namespace Z0.Machines.X86
             [MethodImpl(Inline)]
             get =>new G(Content, RegKind);
         }
-    }
+
+        [MethodImpl(Inline)]
+        public static implicit operator G(r15w src)
+            => src.Generalized;
+   }
 }

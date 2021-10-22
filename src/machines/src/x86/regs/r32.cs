@@ -188,7 +188,6 @@ namespace Z0.Machines.X86
         [MethodImpl(Inline)]
         public static implicit operator T(ebx src)
             => src.Content;
-
     }
 
     public struct esi : IReg32<esi,T>

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
-
     public sealed partial class LlvmCmd : AppCmdService<LlvmCmd>
     {
         EtlWorkflow LlvmEtl;

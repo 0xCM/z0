@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
-
     using static core;
     using static WsAtoms;
 
     partial class LlvmCmd
     {
         IProjectWs LlvmData => Ws.Project("llvm.data");
-
 
         [CmdOp(".bitvectors")]
         Outcome EmitBitVectors(CmdArgs args)

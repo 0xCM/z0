@@ -10,7 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    [Blittable(SZ)]
     public unsafe readonly struct StringAddress : IAddressable
     {
         public const uint SZ = MemoryAddress.SZ;

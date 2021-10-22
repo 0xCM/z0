@@ -7,8 +7,6 @@ namespace Z0.llvm.clang
     using System;
     using System.IO;
 
-    using static core;
-
     [Tool(LlvmToolNames.clang_query)]
     public sealed class ClangQuery : LlvmTool<ClangQuery>
     {

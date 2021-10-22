@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0.Machines.X86
 {
     public interface IReg8<T> : IReg<W8,T>
         where T : unmanaged

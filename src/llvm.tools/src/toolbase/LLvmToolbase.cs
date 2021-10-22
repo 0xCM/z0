@@ -10,8 +10,6 @@ namespace Z0.llvm
     using static Root;
     using static core;
 
-    using SQ = SymbolicQuery;
-
     public class LlvmToolbase : AppService<LlvmToolbase>
     {
         OmniScript OmniScript;

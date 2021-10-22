@@ -8,7 +8,6 @@ namespace Z0.llvm
 
     public class EtlGenerator : AppService<EtlGenerator>
     {
-
         LlvmPaths LlvmPaths;
 
         OmniScript OmniScript;
@@ -23,9 +22,7 @@ namespace Z0.llvm
         {
             LlvmPaths.CodeGenRoot().Clear(true);
             GenStringTables();
-
         }
-
 
         Outcome GenStringTables()
         {

@@ -2,15 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.std
+namespace Z0.Machines.X86
 {
-    public interface iterator<T>
+    public interface IReg128<T> : IReg<W128,T>
+        where T : unmanaged
     {
-        bool next(out T dst);
+
     }
 
-    public interface iterator<I,T> : iterator<T>
-        where I : unmanaged
+    public interface IReg128<H,T> : IReg128<T>
+        where H : struct, IReg128<H,T>
+        where T : unmanaged
     {
+
     }
 }

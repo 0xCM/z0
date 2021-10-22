@@ -17,7 +17,6 @@ namespace Z0.Strings
 
         StringBuffer Buffer;
 
-
         MemoryAddress MaxAddress;
 
         uint Position;
