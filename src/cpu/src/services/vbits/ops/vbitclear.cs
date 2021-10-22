@@ -24,8 +24,8 @@ namespace Z0
         public static Vector128<T> vbitclear<T>(Vector128<T> src, byte start, byte count)
             where T : unmanaged
         {
-            var cellmask = vmask.eraser<T>(start,count);
-            return vand(vbroadcast(w128, cellmask),src);
+            var cellmask = vmask.eraser<T>(start, count);
+            return vand(vbroadcast(w128, cellmask), src);
         }
 
         /// <summary>

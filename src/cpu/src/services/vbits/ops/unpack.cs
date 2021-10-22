@@ -6,12 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Root;
-    using static BitMaskLiterals;
     using static core;
-    using static cpu;
 
     partial struct vbits
     {

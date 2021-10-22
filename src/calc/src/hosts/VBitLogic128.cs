@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
+    using static gcpu;
 
     using K = ApiClasses;
 
@@ -20,23 +21,23 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> and(Vector128<T> a, Vector128<T> b)
-                => gcpu.vand(a,b);
+                => vand(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> or(Vector128<T> a, Vector128<T> b)
-                => gcpu.vor(a,b);
+                => vor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> xor(Vector128<T> a, Vector128<T> b)
-                => gcpu.vxor(a,b);
+                => vxor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> cimpl(Vector128<T> a, Vector128<T> b)
-                => gcpu.vcimpl(a,b);
+                => vcimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> cnonimpl(Vector128<T> a, Vector128<T> b)
-                => gcpu.vcnonimpl(a,b);
+                => vcnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> @false()
@@ -48,35 +49,35 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> impl(Vector128<T> a, Vector128<T> b)
-                => gcpu.vimpl(a,b);
+                => vimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> nand(Vector128<T> a, Vector128<T> b)
-                => gcpu.vnand(a,b);
+                => vnand(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> nonimpl(Vector128<T> a, Vector128<T> b)
-                => gcpu.vnonimpl(a,b);
+                => vnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> nor(Vector128<T> a, Vector128<T> b)
-                => gcpu.vnor(a,b);
+                => vnor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> not(Vector128<T> a)
-                => gcpu.vnot(a);
+                => vnot(a);
 
             [MethodImpl(Inline)]
             public Vector128<T> select(Vector128<T> a, Vector128<T> b, Vector128<T> c)
-                => gcpu.vselect(a,b,c);
+                => vselect(a,b,c);
 
             [MethodImpl(Inline)]
             public Vector128<T> @true()
-                => gcpu.vones<T>(w128);
+                => vones<T>(w128);
 
             [MethodImpl(Inline)]
             public Vector128<T> xnor(Vector128<T> a, Vector128<T> b)
-                => gcpu.vxnor(a,b);
+                => vxnor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> eval<K>(Vector128<T> a, K f = default)

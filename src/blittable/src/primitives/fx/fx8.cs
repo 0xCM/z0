@@ -90,8 +90,8 @@ namespace Z0
                 => skip(cover(PDst.P, Size), iY(x));
 
             [MethodImpl(Inline)]
-            public kvp<byte,byte> Map(byte x)
-                => kv(x, Eval(x));
+            public KeyedValue<byte,byte> Map(byte x)
+                => (x, Eval(x));
         }
 
         /// <summary>
@@ -129,8 +129,8 @@ namespace Z0
                 => skip(cover(PDst.P, Size), iY(u8(x)));
 
             [MethodImpl(Inline)]
-            public kvp<S,T> Map(S x)
-                => kv(x, Eval(x));
+            public KeyedValue<S,T> Map(S x)
+                => (x, Eval(x));
         }
     }
 }

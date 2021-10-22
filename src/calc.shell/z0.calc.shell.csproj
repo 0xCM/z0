@@ -17,6 +17,7 @@
     <ProjectReference Include="$(Fsm)" />
     <ProjectReference Include="$(Seq)" />
     <ProjectReference Include="$(BitGrids)" />
+    <ProjectReference Include="$(Dynamic)" />
   </ItemGroup>
 
 </Project>

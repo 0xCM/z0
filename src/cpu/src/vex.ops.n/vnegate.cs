@@ -146,7 +146,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<float> vnegate(Vector128<float> x)
-            => cpu.vsub(default, x);
+            => vsub(default, x);
 
         /// <summary>
         /// Negates each source vector component
@@ -154,7 +154,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<double> vnegate(Vector128<double> x)
-            => cpu.vsub(default, x);
+            => vsub(default, x);
 
         /// <summary>
         /// Negates each source vector component
@@ -162,7 +162,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<float> vnegate(Vector256<float> x)
-            => cpu.vsub(default, x);
+            => vsub(default, x);
 
         /// <summary>
         /// Negates each source vector component
@@ -170,6 +170,6 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<double> vnegate(Vector256<double> x)
-            => cpu.vsub(default, x);
+            => vsub(default, x);
     }
 }

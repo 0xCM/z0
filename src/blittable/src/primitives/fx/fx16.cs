@@ -83,8 +83,8 @@ namespace Z0
                 => skip(cover(PDst.P, Size), iY(u16(x)));
 
             [MethodImpl(Inline)]
-            public kvp<S,T> Map(S x)
-                => kv(x, Eval(x));
+            public KeyedValue<S,T> Map(S x)
+                => (x, Eval(x));
         }
     }
 }

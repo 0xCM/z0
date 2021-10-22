@@ -9,12 +9,10 @@ namespace Z0
 
     using static Root;
     using static Calcs;
-    using static core;
 
     [ApiHost]
     public readonly partial struct CalcClients
     {
-
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]

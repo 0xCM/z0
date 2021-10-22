@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     /// <summary>
     /// Defines a T-valued sequence over a K-indexed interval
@@ -28,7 +26,7 @@ namespace Z0
                  receiver(j, t);
                  counter++;
                  if(!@continue)
-                 break;
+                    break;
             }
             return counter;
         }

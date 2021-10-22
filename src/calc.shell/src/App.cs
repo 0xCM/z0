@@ -5,53 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Threading;
     using System.Threading.Tasks;
-    using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
+    using Machines;
 
     using static Root;
     using static core;
 
     using Masks = BitMaskLiterals;
-
-    public readonly struct ApiOpCodes
-    {
-
-    }
-
-    public readonly struct ApiOpCode
-    {
-        readonly ulong Data;
-
-        [MethodImpl(Inline)]
-        public ApiOpCode(ulong data)
-        {
-            Data = data;
-        }
-
-        public byte Cluster
-        {
-            [MethodImpl(Inline)]
-            get => (byte)Data;
-        }
-
-        public byte Router
-        {
-            [MethodImpl(Inline)]
-            get => (byte)(Data >> 8);
-        }
-
-        public byte Operation
-        {
-            [MethodImpl(Inline)]
-            get => (byte)(Data >> 16);
-        }
-
-        public static implicit operator ApiOpCode(ulong src)
-            => new ApiOpCode(src);
-    }
 
     class App : WfApp<App>
     {
@@ -481,6 +442,7 @@ namespace Z0
             }
 
         }
+
 
         void Run(string spec)
         {

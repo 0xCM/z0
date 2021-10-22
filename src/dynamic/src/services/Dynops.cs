@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
-
     public readonly struct Dynops
     {
         public static IDynexus Dynexus

@@ -22,7 +22,7 @@ namespace Z0
         {
             T Eval(S x);
 
-            kvp<S,T> Map(S x);
+            KeyedValue<S,T> Map(S x);
         }
     }
 }

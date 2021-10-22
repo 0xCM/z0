@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Root;
     using static core;
@@ -43,9 +42,6 @@ namespace Z0
             var g2 = grid2x2(@readonly(Cells<ulong>(2,4)));
             var spec = g2.Spec;
             Write(spec.Format());
-            //Factory.g2x2<ulong>()
-
         }
     }
-
 }

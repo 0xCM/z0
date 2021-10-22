@@ -7,8 +7,6 @@ namespace Z0.Alg
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static Calcs;
     using static core;
 
     [ApiHost("alg.api")]

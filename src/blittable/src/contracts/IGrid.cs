@@ -17,7 +17,8 @@ namespace Z0
 
             uint N {get;}
 
-            GridDim Dim => (M,N);
+            GridDim Dim
+                => (M,N);
 
             GridSpec Spec {get;}
 
@@ -53,9 +54,11 @@ namespace Z0
             where T : unmanaged
             where F : unmanaged, IGrid<F,N,T>
         {
-            uint IGrid.M => Typed.nat32u<N>();
+            uint IGrid.M
+                => Typed.nat32u<N>();
 
-            uint IGrid.N => Typed.nat32u<N>();
+            uint IGrid.N
+                => Typed.nat32u<N>();
         }
 
         [Free]
