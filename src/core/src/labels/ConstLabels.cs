@@ -29,6 +29,5 @@ namespace Z0
             PSrc = gptr(first(src));
             Length = src.Length;;
         }
-
     }
 }

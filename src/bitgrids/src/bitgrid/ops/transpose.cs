@@ -44,7 +44,6 @@ namespace Z0
             var r2 = BitMasks.scatter(c2, R << 2*r);
             var r3 = BitMasks.scatter(c3, R << 3*r);
             return r0 | r1 | r2 | r3;
-
         }
 
         [MethodImpl(Inline), Op]

@@ -63,7 +63,6 @@ namespace Z0.llvm
         public static unsafe dag<O,A0> dag<O,A0>(O op, A0* p0)
             where O : unmanaged
             where A0 : unmanaged
-                => new dag<O,A0>(op,p0);
-
+                => new dag<O,A0>(op, p0);
     }
 }

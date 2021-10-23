@@ -11,6 +11,11 @@ namespace Z0
 
     partial class BitGrid
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static BitGrid<T> create<T>(GridDim<ushort> dim, T src)
+            where T : unmanaged
+                => new BitGrid<T>(dim,src);
+
         [MethodImpl(Inline), Op]
         public static BitGrid64<N16,N4,ushort> create(N64 w, N16 m, N4 n,
             ushort x0, ushort x1, ushort x2, ushort x3)

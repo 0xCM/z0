@@ -14,7 +14,7 @@ namespace Z0
     /// Defines a uniform structural representation for so-called 'handles'
     /// </summary>
     public readonly ref struct SystemHandle<T>
-        where T : struct, ISystemHandle<T>
+        where T : struct, ISystemHandle
     {
         public T Value {get;}
 

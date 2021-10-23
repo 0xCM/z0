@@ -33,24 +33,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vshi(Vector128<short> src)
-            => gcpu.v16i(cpu.vscalar(w128, vcell(v64u(src), 1)));
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
         public static Vector128<ushort> vshi(Vector128<ushort> src)
             => gcpu.v16u(cpu.vscalar(w128, vcell(v64u(src), 1)));
-
-        /// <summary>
-        /// Creates a scalar vector from the upper 64 bits of the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<int> vshi(Vector128<int> src)
-            => v32i(cpu.vscalar(w128, vcell(v64u(src), 1)));
 
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector

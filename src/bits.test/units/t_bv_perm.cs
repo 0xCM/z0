@@ -31,19 +31,6 @@ namespace Z0
             Claim.eq(p1[1],30);
             Claim.eq(p1[2],29);
             Claim.eq(p1[3], 3);
-
-            var bm = p1.ToBitMatrix();
-            Claim.eq(bm[0,31], bit.On);
-            Claim.eq(bm[1,30], bit.On);
-            Claim.eq(bm[2,29], bit.On);
-
-
-            var v1 = BitVector32.Zero;
-            var v2 = v1.Permute(p1);
-
-            Claim.eq(v1[31],v2[0]);
-            Claim.eq(v1[30],v2[1]);
-            Claim.eq(v1[29],v2[2]);
         }
 
         public void pbv_perm_64()

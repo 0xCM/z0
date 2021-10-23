@@ -14,7 +14,6 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-
         [CmdOp(".test")]
         unsafe Outcome Test(CmdArgs args)
         {
@@ -187,22 +186,5 @@ namespace Z0.Asm
                 Write(string.Format("{0,-24} | {1,-64} | {2}", literal.Name, literal.Data, literal.Text));
             }
         }
-
-        // [CmdOp(".test-int-strings")]
-        // Outcome CheckIntStrings(CmdArgs args)
-        // {
-        //     var result = Outcome.Success;
-        //     var src = span(gen.IntegerStrings.Range0To65535);
-        //     var width = 5;
-        //     for(var i=0; i<65535; i++)
-        //     {
-        //         var offset = width*i;
-        //         ushort.TryParse(slice(src,offset,width), out var value);
-        //         if(value != i)
-        //             Error("!");
-        //     }
-
-        //     return result;
-        // }
    }
 }

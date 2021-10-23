@@ -39,7 +39,6 @@ namespace Z0
                 Claim.eq(vcell(v128x8u, i), vcell(v128x16u_a,i));
         }
 
-
         public void vinflate_256x8_1024x32()
         {
             var w = w256;

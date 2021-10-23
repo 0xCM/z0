@@ -22,15 +22,4 @@ namespace Z0
         /// </summary>
         bool IsOwner {get;}
     }
-
-    /// <summary>
-    /// Characterizes a concrete <see cref='ISystemHandle'/>
-    /// </summary>
-    /// <typeparam name="T">The reifying type</typeparam>
-    [Free]
-    public interface ISystemHandle<T> : ISystemHandle
-        where T : struct, ISystemHandle<T>
-    {
-
-    }
 }

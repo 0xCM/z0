@@ -186,23 +186,23 @@ namespace Z0
         //     }
         // }
 
-        public void bm_vmul_32x32x32()
-        {
-            for(var sample = 0; sample < RepCount; sample++)
-            {
-                var m = Random.BitMatrix32();
-                var c = Random.BitVector(n32);
-                var z1 = m * c;
-                var z2 = BitVector.alloc(n32);
-                for(var i = 0; i<m.Order; i++)
-                {
-                    var r = m[i];
-                    z2[i] = r % c;
-                }
+        // public void bm_vmul_32x32x32()
+        // {
+        //     for(var sample = 0; sample < RepCount; sample++)
+        //     {
+        //         var m = Random.BitMatrix32();
+        //         var c = Random.BitVector(n32);
+        //         var z1 = m * c;
+        //         var z2 = BitVector.alloc(n32);
+        //         for(var i = 0; i<m.Order; i++)
+        //         {
+        //             var r = m[i];
+        //             z2[i] = r % c;
+        //         }
 
-                Claim.require(z1 == z2);
-            }
-        }
+        //         Claim.require(z1 == z2);
+        //     }
+        // }
 
         void bm_mul_32x32x32_bench()
         {

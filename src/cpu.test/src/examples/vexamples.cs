@@ -4,91 +4,91 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
     using static Root;
+    using static cpu;
 
     /// <summary>
     /// Collects random examples
     /// </summary>
-    [ApiHost("vex.examples")]
-    public sealed partial class VexExamples : t_inx<VexExamples>
+    public sealed class VexExamples : t_inx<VexExamples>
     {
         VClaims VClaims => default;
 
         public override bool Enabled => true;
-    }
 
-    public static partial class MoreApiX
-    {
-        public static IApiHost Single(this IApiHost[] src, Type t)
-            => src.Where(x => x.GetType() == t).Single();
-    }
-
-    [ApiHost("vex.examples.runner")]
-    public sealed class VexExampleRunner: t_inx<VexExampleRunner>
-    {
-        uint Successes;
-
-        uint Failures;
-
-        public VexExampleRunner()
+        public void vmerge_128()
         {
-            Successes = 0;
-            Failures  = 0;
+            var a = vparts(w128, 0u,1,2,3);
+            var b = vparts(w128, 4u,5,6,7);
+            var c = vparts(w128, 8u,9,10,11);
+            var d = vparts(w128, 12u,13,14,15);
+            var x0 = vmergelo(v8u(a), v8u(b));
+            var y0 = vmergelo(v8u(c), v8u(d));
+            var z0 = v8u(vmergelo(v16u(x0),v16u(y0)));
+            var z1 = v8u(vmergehi(v16u(x0),v16u(y0)));
+            var x1 = vmergehi(v8u(a), v8u(b));
+            var y1 = vmergehi(v8u(c), v8u(d));
+            var z2 = v8u(vmergelo(v16u(x1),v16u(y1)));
+            var z3 = v8u(vmergehi(v16u(x1),v16u(y1)));
         }
 
-        [Op]
-        public void Run()
+        public void vmerge_lo()
         {
-            var examples = new VexExamples();
-            Run(examples.e_duplicate);
-            Run(examples.covers);
-            Run(examples.vgather_128);
-            Run(examples.vgather_256);
-            Run(examples.vgather_blocks);
-            Run(examples.vmerge_128);
-            Run(examples.vmerge_256);
-            Run(examples.vmerge_hi);
-            Run(examples.vmerge_hilo);
-            Run(examples.vmerge_lo);
-            Run(examples.e_vperm4x16);
-            Run(examples.e_vperm4x32_128x32u_A);
-            Run(examples.e_vperm4x32_128x32u_B);
+            /*
+            [ 0,  1,  2,  3,  4,  5,  6,  7]
+            [ 8,  9, 10, 11, 12, 13, 14, 15]
+            [ 4, 12,  5, 13,  6, 14,  7, 15]
+            */
 
-            Run(examples.vshuf16x16);
-            Run(examples.vshuf16x8_128x8u);
-            //Run(examples.vshuf16x8);
+            var w = w256;
+            var t = z32;
+            var count = vcount(w,t);
+            var a = gcpu.vinc(w,t);
+            var b = gcpu.vinc(w, (a.LastCell() + 1));
+            var c = cpu.vmergelo(a,b);
+            var fmt = $"({a.Format()},{b.Format()}) -> {c.Format()}";
         }
 
-        [MethodImpl(Inline),Op]
-        public void Run(Action f)
+        public void vmerge_256()
         {
-            try
-            {
-                f();
-                Successes++;
-            }
-            catch(Exception e)
-            {
-                Trace(e.Message);
-            }
+            var w = w256;
+            var t = z8;
+            var x = gcpu.vinc(w,t);
+            var y = gcpu.vinc(w, (byte)(x.LastCell() + 1));
+            var _z = cpu.vmerge(x,y);
+            Notify($"vmerge_256");
+            Notify(x.Format());
+            Notify(y.Format());
+            Notify(_z.Format());
         }
-    }
 
-    public readonly struct ExampleGroups
-    {
-        public const string Perms = nameof(Perms);
+        public void vmerge_hi()
+        {
+            var w = n256;
+            var t = z8;
+            var x = gcpu.vinc(w,t);
+            var y = gcpu.vinc(w, (byte)(x.LastCell() + 1));
+            var _z = cpu.vmergehi(x,y);
+            Notify($"vmerge_hi");
+            Notify(x.Format());
+            Notify(y.Format());
+            Notify(_z.Format());
+        }
 
-        public const string Shuffles = nameof(Shuffles);
+        public void vmerge_hilo()
+        {
+            var x = gcpu.vinc<byte>(n128);
+            var y = cpu.vadd(x, cpu.vbroadcast(n128, (byte)16));
 
-        public const string Merge = nameof(Merge);
+            var lo = gcpu.vmergelo(x,y);
+            var hi = gcpu.vmergehi(x,y);
 
-        public const string Gather = nameof(Gather);
-
-        public const string Cover = nameof(Cover);
-
-        public const string Duplicate = nameof(Duplicate);
+            Notify($"vmerge_hilo");
+            Notify(x.Format());
+            Notify(y.Format());
+            Notify(lo.Format());
+            Notify(hi.Format());
+        }
     }
 }

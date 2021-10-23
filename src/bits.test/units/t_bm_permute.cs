@@ -101,21 +101,21 @@ namespace Z0
         //     }
         // }
 
-        public void bm_perm_exchange_64x64x64()
-        {
-            for(var i= 0; i<RepCount; i++)
-            {
-                //Creates an "exchange" matrix
-                var perm = Permute.natural(n64).Reverse();
-                var mat = perm.ToBitMatrix();
+        // public void bm_perm_exchange_64x64x64()
+        // {
+        //     for(var i= 0; i<RepCount; i++)
+        //     {
+        //         //Creates an "exchange" matrix
+        //         var perm = Permute.natural(n64).Reverse();
+        //         var mat = perm.ToBitMatrix();
 
-                var v1 = Random.BitVector(n64);
-                var v2 = mat * v1;
-                var v3 = v1.Replicate();
-                v3 = BitVector.reverse(v3);
-                Claim.eq(v3,v2);
-            }
-        }
+        //         var v1 = Random.BitVector(n64);
+        //         var v2 = mat * v1;
+        //         var v3 = v1.Replicate();
+        //         v3 = BitVector.reverse(v3);
+        //         Claim.eq(v3,v2);
+        //     }
+        // }
     }
 
 }

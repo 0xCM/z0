@@ -26,12 +26,6 @@ namespace Z0.Asm
                 Write(test, pass ? FlairKind.Status : FlairKind.Error);
             }
 
-            return (result, result ? "Pass" : "Fail");
-        }
-
-        Outcome TestAsmSizes()
-        {
-            var result = Outcome.Success;
             BitWidth w8 = 8;
             BitWidth w16 = 16;
             BitWidth w32 = 32;
@@ -45,7 +39,9 @@ namespace Z0.Asm
             Write(sz16);
             Write(sz32);
             Write(sz64);
-            return result;
+
+
+            return (result, result ? "Pass" : "Fail");
         }
     }
 }

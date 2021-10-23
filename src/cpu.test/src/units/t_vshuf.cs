@@ -11,21 +11,47 @@ namespace Z0
 
     using static HexConst;
     using static cpu;
-    using static core;
     using static Root;
+    using static core;
 
-    partial class VexExamples
+    public class t_vshuf : t_inx<t_vshuf>
     {
-        public static ReadOnlySpan<byte> AddPattern
-            => new byte[32]{0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16};
+        VClaims VClaims => default;
 
-        //Identity
-        public static ReadOnlySpan<byte> IdentityPattern
-            => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
+        public void vshuf16x8_128x8u()
+        {
+            var w = w128;
+            var x0 = gcpu.vinc<byte>(w);
+            var x0Spec = cpu.vload(w, first(IdentityPattern));
+            var x0Dst = cpu.vshuf16x8(x0,x0Spec);
+            VClaims.veq(x0Spec,x0Dst);
 
-        //Reversal
-        public static ReadOnlySpan<byte> ReversalPattern
-            => new byte[16]{F,E,D,C,B,A,9,8,7,6,5,4,3,2,1,0};
+            var x1 = gcpu.vinc<byte>(w);
+            var x1Spec = cpu.vload(w, first(ReversalPattern));
+            var x1Dst = cpu.vshuf16x8(x1,x1Spec);
+            VClaims.veq(x1Spec,x1Dst);
+
+            var x2 = gcpu.vinc<byte>(w);
+            var x2Spec = cpu.vrotl(n128, n8);
+            var x2Dst = cpu.vshuf16x8(x2,x2Spec);
+            VClaims.veq(x2Spec,x2Dst);
+
+            var x3 = gcpu.vinc<byte>(w);
+            var x3Spec = cpu.vrotr(n128, n8);
+            var x3Dst = cpu.vshuf16x8(x3,x3Spec);
+            VClaims.veq(x3Spec,x3Dst);
+
+            var x4 = gcpu.vinc<byte>(w);
+            var x4Spec1 = cpu.vrotl(n128, n8);
+            var x4Spec2 = cpu.vrotr(n128, n8);
+            var x4Dst = cpu.vshuf16x8(cpu.vshuf16x8(x4,x4Spec1), x4Spec2);
+            VClaims.veq(x4,x4Dst);
+
+            var x5 = Random.CpuVector<byte>(w);
+            var x5Spec = cpu.vbroadcast(w,(byte)0b10000000);
+            var x5Dst = cpu.vshuf16x8(x5, x5Spec);
+            VClaims.veq(x5Dst, cpu.vbroadcast(w,(byte)0));
+        }
 
         /// <summary>
         /// Encodes a permutation on 16 unsigned shorts as a permutation on 32 bytes
@@ -93,7 +119,7 @@ namespace Z0
         /// Encodes a 256x16u component-oriented shuffle as an equivalent 256x8u component-oriented shuffle
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vshuffle_spec_1(Vector256<ushort> src)
+        static Vector256<byte> vshuffle_spec_1(Vector256<ushort> src)
             => vshuffle_spec_256x16u(
                 vcell(src,0), vcell(src,1), vcell(src,2),vcell(src,3),
                 vcell(src,4), vcell(src,5), vcell(src,6), vcell(src,7),
@@ -102,14 +128,9 @@ namespace Z0
                 );
 
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vshuffle_spec_2(Vector256<ushort> src)
-            => vpack.vpack256x8u(src, gcpu.vinc(w256, ScalarCast.uint16(16)));
-
-        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
             => v16u(cpu.vshuf32x8(v8u(a), vshuffle_spec_1(spec)));
 
-        [Op(ExampleGroups.Shuffles)]
         public void vshuf16x16()
         {
             var w = n256;
@@ -128,80 +149,13 @@ namespace Z0
             VClaims.veq(pairswap,y3);
         }
 
-        [Op(ExampleGroups.Shuffles)]
-        public void vshuf16x8_128x8u()
-        {
-            var w = w128;
-            var x0 = gcpu.vinc<byte>(w);
-            var x0Spec = cpu.vload(w, first(IdentityPattern));
-            var x0Dst = cpu.vshuf16x8(x0,x0Spec);
-            VClaims.veq(x0Spec,x0Dst);
 
-            var x1 = gcpu.vinc<byte>(w);
-            var x1Spec = cpu.vload(w, first(ReversalPattern));
-            var x1Dst = cpu.vshuf16x8(x1,x1Spec);
-            VClaims.veq(x1Spec,x1Dst);
+        //Identity
+        static ReadOnlySpan<byte> IdentityPattern
+            => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
 
-            var x2 = gcpu.vinc<byte>(w);
-            var x2Spec = cpu.vrotl(n128, n8);
-            var x2Dst = cpu.vshuf16x8(x2,x2Spec);
-            VClaims.veq(x2Spec,x2Dst);
-
-            var x3 = gcpu.vinc<byte>(w);
-            var x3Spec = cpu.vrotr(n128, n8);
-            var x3Dst = cpu.vshuf16x8(x3,x3Spec);
-            VClaims.veq(x3Spec,x3Dst);
-
-            var x4 = gcpu.vinc<byte>(w);
-            var x4Spec1 = cpu.vrotl(n128, n8);
-            var x4Spec2 = cpu.vrotr(n128, n8);
-            var x4Dst = cpu.vshuf16x8(cpu.vshuf16x8(x4,x4Spec1), x4Spec2);
-            VClaims.veq(x4,x4Dst);
-
-            var x5 = Random.CpuVector<byte>(w);
-            var x5Spec = cpu.vbroadcast(w,(byte)0b10000000);
-            var x5Dst = cpu.vshuf16x8(x5, x5Spec);
-            VClaims.veq(x5Dst, cpu.vbroadcast(w,(byte)0));
-        }
-
-        [Op(ExampleGroups.Shuffles)]
-        void vshuf_16x8()
-        {
-            var reverse = Permute.reversed(n16);
-            var perm = Permute.natural(reverse);
-            for(int i=0,j=15; i<perm.Length; i++, j--)
-                Claim.eq(perm[i], j);
-
-            var increments = gcpu.vinc<byte>(w128);
-            var spec = perm.ToShuffleSpec();
-            var dst = cpu.vshuf16x8(increments, spec);
-            var expect = gcpu.vdec<byte>(w128);
-            VClaims.veq(expect, dst);
-
-            var identity = videntity_shuffle();
-            for(var i=0; i<CycleCount; i++)
-            {
-                var x = Random.CpuVector<byte>(n256);
-                var y = cpu.vshuf16x8(x, identity);
-                VClaims.veq(x,y);
-            }
-        }
-
-        [Op]
-        public static Vector256<byte> videntity_shuffle()
-        {
-            var mask = SpanBlocks.cellalloc<byte>(n256,1);
-
-            //For the first 128-bit lane
-            var half = mask.CellCount/2;
-            for(byte i=0; i<half; i++)
-                mask[i] = i;
-
-            //For the second 128-bit lane
-            for(byte i=0; i<half; i++)
-                mask[i + half] = i;
-
-            return mask.LoadVector();
-        }
+        //Reversal
+        static ReadOnlySpan<byte> ReversalPattern
+            => new byte[16]{F,E,D,C,B,A,9,8,7,6,5,4,3,2,1,0};
     }
 }

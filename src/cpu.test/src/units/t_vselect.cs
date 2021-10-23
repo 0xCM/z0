@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class t_vselect : t_inx<t_vselect>
     {
         public void vselect_check()
