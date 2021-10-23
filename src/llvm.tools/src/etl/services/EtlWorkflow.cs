@@ -8,21 +8,6 @@ namespace Z0.llvm
 
     using static core;
 
-    public readonly struct DatasetNames
-    {
-        public const string X86 = "X86.records";
-
-        public const string X86Lined = "x86.records.lined";
-
-        public const string X86Defs = "X86.records.defs";
-
-        public const string X86DefFields = "X86.records.defs.fields";
-
-        public const string X86Classes = "X86.records.classes";
-
-        public const string X86ClassMembers = "X86.records.classes.members";
-    }
-
     public partial class EtlWorkflow : AppService<EtlWorkflow>
     {
         LlvmPaths LlvmPaths;
@@ -42,24 +27,41 @@ namespace Z0.llvm
             OmniScript = Wf.OmniScript();
         }
 
+        void IndexLists(ref EtlDatasets ds)
+        {
+            var index = dict<Identifier,uint>();
+            var count = ds.Lists.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var list = ref skip(ds.Lists,i);
+                index[list.ListName] = i;
+            }
+            ds.ListIndex = index;
+        }
+
         public Outcome RunEtl()
         {
             var dst = new EtlDatasets();
-            var records = LoadSourceRecords(DatasetNames.X86);
+            var records = LoadSourceRecords(EtlDatasetNames.X86);
             dst.Records = records;
-            ImportRecordLines(records, DatasetNames.X86Lined);
+            ImportRecordLines(records, EtlDatasetNames.X86Lined);
             var lists = ImportLists();
             dst.Lists = lists;
             var classes = ImportClassRelations(records);
             dst.ClassRelations = classes;
             var defs = ImportDefRelations(records);
             dst.DefRelations = defs;
-            var defFields = LoadFields(records, MapContent(defs, records, DatasetNames.X86Defs));
+            var defMap = EmitLineMap(defs, records, EtlDatasetNames.X86Defs);
+            dst.DefMap = defMap;
+            var defFields = LoadFields(records, defMap);
             dst.Defs = defFields;
-            EmitFields(defFields, DatasetNames.X86DefFields);
-            var classFields = LoadFields(records, MapContent(classes, records, DatasetNames.X86Classes));
+            EmitFields(defFields, EtlDatasetNames.X86DefFields);
+            var classMap = EmitLineMap(classes, records, EtlDatasetNames.X86Classes);
+            dst.ClassMap = classMap;
+            var classFields = LoadFields(records, classMap);
             dst.Classes = classFields;
-            EmitFields(classFields, DatasetNames.X86ClassMembers);
+            EmitFields(classFields, EtlDatasetNames.X86ClassMembers);
+            IndexLists(ref dst);
             Wf.LlvmGenerator().Run(dst);
             return true;
         }

@@ -13,7 +13,7 @@ namespace Z0
     using api = memory;
 
     /// <summary>
-    /// Captures and represents an <see cref='unmanaged'/> generic pointer
+    /// Captures a <typeparamref name='T'/>-parametric  <see cref='unmanaged'/> generic pointer
     /// </summary>
     public unsafe struct Ptr<T> : IPtr<T>
         where T : unmanaged

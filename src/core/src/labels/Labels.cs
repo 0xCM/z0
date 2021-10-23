@@ -7,10 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Strings;
+
     using static Root;
     using static core;
 
-    public class Labels : IDisposable
+    [ApiHost]
+    public readonly struct Labels
     {
         [MethodImpl(Inline), Op]
         public static Label label(string src)
@@ -25,55 +28,42 @@ namespace Z0
         public static Label label(ReadOnlySpan<char> src)
             => new Label(address(src), (byte)src.Length);
 
-        public static Labels alocate(ByteSize size)
-            => new Labels(memory.native(size));
+        [MethodImpl(Inline), Op]
+        public static Label label(ReadOnlySpan<char> src, int offset, StringBuffer dst)
+        {
+            var length = src.Length;
+            if(length <= byte.MaxValue && strings.store(src, offset, dst))
+                return new Label(dst.Address(offset), (byte)length);
+            else
+                return Label.Empty;
+        }
 
         [MethodImpl(Inline), Op]
-        public static ConstLabels from(ReadOnlySpan<char> src)
-            => new ConstLabels(src);
-
-        readonly NativeBuffer Buffer;
-
-        internal readonly MemoryAddress BaseAddress;
-
-        internal readonly ByteSize Size;
-
-        readonly bool CanEdit;
-
-        [MethodImpl(Inline)]
-        internal Labels(MemoryAddress @base, ByteSize size)
+        public static Label label(ReadOnlySpan<char> src, uint offset, StringBuffer dst)
         {
-            Buffer = NativeBuffer.Empty;
-            BaseAddress = @base;
-            Size = size;
-            CanEdit = true;
+            var length = src.Length;
+            if(length <= byte.MaxValue && strings.store(src, offset, dst))
+                return new Label(dst.Address(offset), (byte)length);
+            else
+                return Label.Empty;
         }
 
-        [MethodImpl(Inline)]
-        internal Labels(NativeBuffer buffer)
+        [Op]
+        public static StringBuffer alloc(ReadOnlySpan<string> src, out Index<Label> index)
         {
-            Buffer = buffer;
-            BaseAddress = buffer.Address;
-            Size = buffer.Size;
-            CanEdit = false;
-        }
-
-        [MethodImpl(Inline)]
-        public bool Editor(out LabelEditor dst)
-        {
-            if(CanEdit)
+            var count = src.Length;
+            var len = strings.length(src);
+            var dst = strings.buffer(len);
+            index = core.alloc<Label>(count);
+            var offset = 0u;
+            for(var i=0; i<count; i++)
             {
-                dst = new LabelEditor(this);
-                return true;
+                ref readonly var s = ref skip(src,i);
+                index[i] = dst.StoreLabel(s,offset);
+                offset += (uint)s.Length;
             }
-            dst = default;
-            return false;
-        }
 
-        public void Dispose()
-        {
-            if(Buffer.Allocated)
-                Buffer.Dispose();
+            return dst;
         }
     }
 }

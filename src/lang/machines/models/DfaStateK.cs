@@ -12,16 +12,16 @@ namespace Z0.Machines
 
     public readonly struct DfaState<K>
         where K : unmanaged
-    {    
+    {
         /// <summary>
         /// The state position within a given string
         /// </summary>
         public int Order {get;}
 
-        public Symbol<K> Symbol {get;}
+        public Atom<K> Symbol {get;}
 
         [MethodImpl(Inline)]
-        public DfaState(int order, Symbol<K> b)
+        public DfaState(int order, Atom<K> b)
         {
             Order = order;
             Symbol = b;

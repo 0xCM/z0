@@ -84,10 +84,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmText(ReadOnlySpan<char> src)
-            => new AsmText(StringAddress.from(src));
+            => new AsmText(strings.address(src));
 
         [MethodImpl(Inline)]
         public static implicit operator AsmText(ReadOnlySpan<byte> src)
-            => new AsmText(StringAddress.from(src));
+            => new AsmText(strings.address(src));
     }
 }

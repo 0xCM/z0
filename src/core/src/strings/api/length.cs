@@ -2,10 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Strings
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
+    using Strings;
 
     using static Root;
     using static core;
@@ -26,6 +28,29 @@ namespace Z0.Strings
                 ref readonly var s = ref skip(src,i);
                 counter += (uint)s.Length;
             }
+            return counter;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint length(in MemoryStrings src, int index)
+        {
+            var a = offset(src, index);
+            var b = 0u;
+            if(index == src.EntryCount - 1)
+                b = src.CharCount;
+            else
+                b = offset(src, index + 1);
+            return (uint)(b - a);
+        }
+
+
+        [MethodImpl(Inline), Op]
+        public static uint length(StringAddress src)
+        {
+            ref var c = ref strings.first(src);
+            var counter = 0u;
+            while(c != 0)
+                c = seek(c, counter++);
             return counter;
         }
     }

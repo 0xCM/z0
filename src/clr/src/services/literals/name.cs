@@ -14,18 +14,18 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static StringAddress name(FieldInfo src)
-            => StringAddress.from(src.Name);
+            => strings.address(src.Name);
 
         [MethodImpl(Inline), Op]
         public static StringAddress name(Type src)
-            => StringAddress.from(src.Name);
+            => strings.address(src.Name);
 
         [MethodImpl(Inline), Op]
         public static StringAddress name(PropertyInfo src)
-            => StringAddress.from(src.Name);
+            => strings.address(src.Name);
 
         [MethodImpl(Inline), Op]
         public static StringAddress name(MethodBase src)
-            => StringAddress.from(src.Name);
+            => strings.address(src.Name);
     }
 }

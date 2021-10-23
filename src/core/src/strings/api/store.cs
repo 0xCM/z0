@@ -2,10 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Strings
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
+    using Strings;
 
     using static Root;
     using static core;

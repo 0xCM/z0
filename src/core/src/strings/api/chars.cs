@@ -7,9 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Strings;
+
     using static Root;
 
-    unsafe partial struct memory
+    partial struct strings
     {
         [MethodImpl(Inline), Op]
         public static unsafe ReadOnlySpan<char> chars(in MemoryStrings src)

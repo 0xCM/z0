@@ -13,7 +13,7 @@ namespace Z0
     using api = memory;
 
     /// <summary>
-    /// Captures and represents <see cref='ulong'/> pointer
+    /// Captures a <see cref='ulong'/> pointer
     /// </summary>
     [ApiComplete]
     public unsafe struct Ptr64 : IPtr<ulong>

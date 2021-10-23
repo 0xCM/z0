@@ -10,16 +10,16 @@ namespace Z0.Lang
 
     using static Root;
 
-    public sealed class SymbolSet<K>
+    public sealed class Atoms<K>
         where K : unmanaged
     {
-        readonly Index<Symbol<K>> SymbolData;
+        readonly Index<Atom<K>> SymbolData;
 
         readonly Dictionary<uint,uint> KeyToOrder;
-        
+
         readonly Dictionary<K,uint> ValueToKey;
 
-        public SymbolSet(Symbol<K>[] src)
+        public Atoms(Atom<K>[] src)
         {
             SymbolData = src;
             ValueToKey = new();
@@ -39,19 +39,19 @@ namespace Z0.Lang
             get => SymbolData.Count;
         }
 
-        public ReadOnlySpan<Symbol<K>> Members
+        public ReadOnlySpan<Atom<K>> Members
         {
             [MethodImpl(Inline)]
             get => SymbolData.View;
         }
-    
+
         /// <summary>
         /// Searches for a key-predicated symbol, returning true upon success and false otherwise
         /// </summary>
         /// <param name="key">The symbol key</param>
         /// <param name="dst">The matching symbol, if found</param>
         [MethodImpl(Inline)]
-        public bool Symbol(uint key, out Symbol<K> dst)
+        public bool Atom(uint key, out Atom<K> dst)
         {
             if(KeyToOrder.TryGetValue(key, out var order))
             {
@@ -60,7 +60,7 @@ namespace Z0.Lang
             }
             else
             {
-                dst = Symbol<K>.Empty;
+                dst = Atom<K>.Empty;
                 return false;
             }
         }
@@ -77,15 +77,15 @@ namespace Z0.Lang
             }
         }
 
-        public Symbol<K> this[uint key]
+        public Atom<K> this[uint key]
         {
             [MethodImpl(Inline)]
             get
             {
-                if(Symbol(key, out var dst))
+                if(Atom(key, out var dst))
                     return dst;
                 else
-                    return Symbol<K>.Empty;
+                    return Atom<K>.Empty;
             }
         }
 
@@ -95,7 +95,7 @@ namespace Z0.Lang
             get => Key(value, out var dst) ? dst : default;
         }
 
-        internal Symbol<K>[] Storage
+        internal Atom<K>[] Storage
         {
             [MethodImpl(Inline)]
             get => SymbolData;

@@ -10,17 +10,17 @@ namespace Z0.Lang
     using static Root;
 
     /// <summary>
-    /// The textbook definition of a string - a finite sequence of symbols
+    /// The textbook definition of a string - a finite sequence of letters from som alphabet
     /// </summary>
     public readonly struct Token<K>
         where K : unmanaged
     {
         public uint Key {get;}
 
-        readonly Index<Symbol<K>> Data;
+        readonly Index<Atom<K>> Data;
 
         [MethodImpl(Inline)]
-        public Token(uint key, Symbol<K>[] value)
+        public Token(uint key, Atom<K>[] value)
         {
             Key = key;
             Data = value;
@@ -50,16 +50,16 @@ namespace Z0.Lang
             get => Data.IsNonEmpty;
         }
 
-        public ref Symbol<K> this[uint i]
+        public ref Atom<K> this[uint i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];
         }
 
-        public ref Symbol<K> this[int i]
+        public ref Atom<K> this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];
-        }        
-    }    
+        }
+    }
 }

@@ -11,7 +11,7 @@ namespace Z0.Strings
     using static core;
 
     /// <summary>
-    /// Defines a string over S-symbols allocated over a native buffer
+    /// Defines a character string allocated over a native buffer
     /// </summary>
     public unsafe struct StringBuffer : IDisposable
     {
@@ -66,12 +66,12 @@ namespace Z0.Strings
             => ref seek(Buffer.Edit,index);
 
         [MethodImpl(Inline)]
-        public StringRef Substring(ulong index, ulong length)
-            => strings.substring(this, index, length);
+        public Word Substring(ulong index, ulong length)
+            => strings.word(this, index, length);
 
         [MethodImpl(Inline)]
-        public StringRef Substring(long index, long length)
-            => strings.substring(this,index,length);
+        public Word Substring(long index, long length)
+            => strings.word(this,index,length);
 
         public ref char this[ulong index]
         {
@@ -85,24 +85,24 @@ namespace Z0.Strings
             get => ref Symbol(index);
         }
 
-        public StringRef this[long offset, long length]
+        public Word this[long offset, long length]
         {
             [MethodImpl(Inline)]
-            get => strings.substring(this, offset, length);
+            get => strings.word(this, offset, length);
         }
 
-        public StringRef this[ulong offset, ulong length]
+        public Word this[ulong offset, ulong length]
         {
             [MethodImpl(Inline)]
-            get => strings.substring(this, offset, length);
+            get => strings.word(this, offset, length);
         }
 
         [MethodImpl(Inline)]
         public bool Store(ReadOnlySpan<char> src, uint offset)
-            => strings.store(src,offset,this);
+            => strings.store(src, offset,this);
 
         [MethodImpl(Inline)]
         public Label StoreLabel(ReadOnlySpan<char> src, uint offset)
-            => strings.label(src, offset, this);
+            => Labels.label(src, offset, this);
     }
 }

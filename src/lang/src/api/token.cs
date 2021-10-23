@@ -12,7 +12,7 @@ namespace Z0.Lang
     partial struct lang
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Token<S> token<S>(uint key, params Symbol<S>[] src)
+        public static Token<S> token<S>(uint key, params Atom<S>[] src)
             where S : unmanaged
                 => new Token<S>(key, src);
     }

@@ -10,13 +10,15 @@ namespace Z0.Strings
     using static Root;
     using static core;
 
-    public unsafe readonly struct StringRef<S>
-        where S : unmanaged
+    /// <summary>
+    /// Defines a reference to a mutable character sequence
+    /// </summary>
+    public unsafe readonly struct Word
     {
-        readonly MemoryAddress Base;
+        internal readonly MemoryAddress Base;
 
         [MethodImpl(Inline)]
-        internal StringRef(MemoryAddress @base, uint length)
+        internal Word(MemoryAddress @base, uint length)
         {
             Base = @base;
             Length = length;
@@ -24,34 +26,41 @@ namespace Z0.Strings
 
         public uint Length {get;}
 
-        public ref S this[ulong index]
+        public ref char this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Base.Ref<S>(), index);
+            get => ref seek(Base.Ref<char>(), index);
         }
 
-        public ref S this[long index]
+        public ref char this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Base.Ref<S>(), index);
+            get => ref seek(Base.Ref<char>(), index);
         }
 
         public ByteSize Size
         {
             [MethodImpl(Inline)]
-            get => Length*size<S>();
+            get => Length*size<char>();
         }
 
-        public Span<S> Edit
+        public Span<char> Edit
         {
             [MethodImpl(Inline)]
-            get => cover<S>(Base.Pointer<S>(), Length);
+            get => cover<char>(Base.Pointer<char>(), Length);
         }
 
-        public ReadOnlySpan<S> View
+        public ReadOnlySpan<char> View
         {
             [MethodImpl(Inline)]
-            get => cover<S>(Base.Pointer<S>(), Length);
+            get => cover<char>(Base.Pointer<char>(), Length);
         }
+
+        public string Format()
+            => strings.format(this);
+
+
+        public override string ToString()
+            => Format();
     }
 }

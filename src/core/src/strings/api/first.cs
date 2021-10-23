@@ -2,19 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
+    using System;
     using System.Runtime.CompilerServices;
 
-    using static AsmOperands;
+    using Strings;
+
     using static Root;
 
-    partial class AsmOps
+    partial struct strings
     {
-        public struct TEST
-        {
-
-
-        }
+        [MethodImpl(Inline), Op]
+        public static unsafe ref char first(StringAddress src)
+            => ref core.@ref(src.Address.Pointer<char>());
     }
 }

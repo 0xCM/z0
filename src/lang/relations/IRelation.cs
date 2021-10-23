@@ -18,7 +18,6 @@ namespace Z0
         dynamic Target {get;}
     }
 
-
     /// <summary>
     /// Characterizes a directed relation from a source to a target
     /// </summary>

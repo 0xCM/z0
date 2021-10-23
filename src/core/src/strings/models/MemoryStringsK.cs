@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using api = memory;
+    using api = strings;
 
     public readonly struct MemoryStrings<K>
         where K : unmanaged

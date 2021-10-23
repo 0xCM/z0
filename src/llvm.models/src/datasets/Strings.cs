@@ -14,7 +14,7 @@ namespace Z0.llvm
         public static MemoryStrings<ushort> OpCodes
         {
             [MethodImpl(Inline)]
-            get => memory.strings<ushort>(stringtables.Instruction.Offsets, stringtables.Instruction.Data);
+            get => strings.memory<ushort>(stringtables.Instruction.Offsets, stringtables.Instruction.Data);
         }
     }
 }

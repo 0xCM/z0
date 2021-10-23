@@ -16,15 +16,15 @@ namespace Z0.Machines
         where K : unmanaged
     {
         readonly Index<DfaState<K>> _States;
-        
+
         readonly Index<DfaState<K>> _Terminals;
-        
+
         public Alphabet<A> Alphabet {get;}
 
         public ReadOnlySpan<DfaState<K>> States
         {
             [MethodImpl(Inline)]
-            get => _States.View;            
+            get => _States.View;
         }
 
         public ReadOnlySpan<DfaState<K>> Terminals
@@ -44,7 +44,7 @@ namespace Z0.Machines
                 CurrentState = Evaluate(src[i]);
         }
 
-        protected abstract DfaState<K> Evaluate(Symbol<K> src);
+        protected abstract DfaState<K> Evaluate(Atom<K> src);
 
         protected Dfa(Alphabet<A> alphabet, DfaState<K>[] states, DfaState<K>[] terminals, DfaState<K> s0)
         {

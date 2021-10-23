@@ -34,7 +34,7 @@ namespace Z0
             dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryAddress), OffsetBaseProp, Call("address", OffsetsProp)));
             dst.AppendLine();
 
-            dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryStrings), StringsProp, Call("memory.strings", OffsetsProp, DataProp)));
+            dst.IndentLine(margin, StaticLambdaProp(nameof(MemoryStrings), StringsProp, Call("strings.memory", OffsetsProp, DataProp)));
             dst.AppendLine();
 
             GenIndex(margin, src, dst);

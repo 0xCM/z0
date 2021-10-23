@@ -13,7 +13,7 @@ namespace Z0
     using api = memory;
 
     /// <summary>
-    /// Captures and represents <see cref='uint'/> pointer
+    /// Captures a <see cref='uint'/> pointer
     /// </summary>
     [ApiComplete]
     public unsafe struct Ptr32 : IPtr<uint>

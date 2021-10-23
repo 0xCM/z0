@@ -50,10 +50,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Render(ref uint i, Span<char> dst)
-            => StringAddress.render(this, ref i, dst);
+            => strings.render(this, ref i, dst);
 
         public string Format()
-            => StringAddress.format(this);
+            => strings.format(this);
 
         public override string ToString()
             => Format();
@@ -70,7 +70,7 @@ namespace Z0
             => src.Address;
 
         [MethodImpl(Inline)]
-       public static implicit operator StringAddress<N>(string src)
+        public static implicit operator StringAddress<N>(string src)
             => StringAddress.natural<N>(src);
     }
 }

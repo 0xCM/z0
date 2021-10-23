@@ -5,6 +5,7 @@
 namespace Z0.llvm
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Collects the records produced by the etl process
@@ -22,5 +23,13 @@ namespace Z0.llvm
        public ReadOnlySpan<TableGenField> Classes;
 
        public ReadOnlySpan<TableGenField> Defs;
+
+       public Dictionary<Identifier, uint> ListIndex;
+
+       public LineMap<Identifier> DefMap;
+
+       public LineMap<Identifier> ClassMap;
+
+
    }
 }

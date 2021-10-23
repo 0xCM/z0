@@ -19,7 +19,7 @@ namespace Z0.Lang
         /// <param name="src"></param>
         /// <typeparam name="K"></typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Alphabet<K> alphabet<K>(Label name, Symbol<K>[] src)
+        public static Alphabet<K> alphabet<K>(Label name, Atom<K>[] src)
             where K : unmanaged
                 => new Alphabet<K>(name, src);
 
@@ -32,11 +32,11 @@ namespace Z0.Lang
         {
             var src = Symbols.index<K>().View;
             var count = src.Length;
-            var dst = alloc<Symbol<K>>(count);
+            var dst = alloc<Atom<K>>(count);
             for(var i=0; i<count; i++)
             {
                 ref readonly var s = ref skip(src,i);
-                seek(dst,i) = symbol(s.Key.Value, s.Kind);
+                seek(dst,i) = atom(s.Key.Value, s.Kind);
             }
             return new Alphabet<K>(typeof(K).Name, dst);
         }
@@ -47,11 +47,11 @@ namespace Z0.Lang
             var syms = Symbols.index<A>();
             var view = syms.View;
             var count = syms.Count;
-            var dst = alloc<Symbol<A>>(count);
+            var dst = alloc<Atom<A>>(count);
             for(var i=0; i<count; i++)
             {
                 ref readonly var s = ref skip(view,i);
-                seek(dst,i) = symbol(s.Key.Value, s.Kind);
+                seek(dst,i) = atom(s.Key.Value, s.Kind);
             }
             return new Alphabet<A>(name, dst);
         }
@@ -65,9 +65,9 @@ namespace Z0.Lang
             where K : unmanaged
         {
             var count = src.Length;
-            var dst = alloc<Symbol<K>>(count);
+            var dst = alloc<Atom<K>>(count);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = symbol(i, skip(src,i));
+                seek(dst,i) = atom(i, skip(src,i));
             return new Alphabet<K>(name, dst);
         }
     }

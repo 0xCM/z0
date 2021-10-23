@@ -10,41 +10,52 @@ namespace Z0.Strings
     using static Root;
     using static core;
 
-    public unsafe readonly struct ConstStringRef
+    /// <summary>
+    /// Defines a reference to an immutable S-sequence
+    /// </summary>
+    public unsafe readonly struct ConstWord<S>
+        where S : unmanaged
     {
         readonly MemoryAddress Base;
 
         public uint Length {get;}
 
         [MethodImpl(Inline)]
-        internal ConstStringRef(MemoryAddress @base, uint length)
+        internal ConstWord(MemoryAddress @base, uint length)
         {
             Base = @base;
             Length = length;
         }
 
-        public ref readonly char this[ulong index]
+        public ref readonly S this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Base.Ref<char>(), index);
+            get => ref seek(Base.Ref<S>(), index);
         }
 
-        public ref readonly char this[long index]
+        public ref readonly S this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Base.Ref<char>(), index);
+            get => ref seek(Base.Ref<S>(), index);
         }
 
         public ByteSize Size
         {
             [MethodImpl(Inline)]
-            get => Length*size<char>();
+            get => Length*size<S>();
         }
 
-        public ReadOnlySpan<char> View
+        public ReadOnlySpan<S> View
         {
             [MethodImpl(Inline)]
-            get => cover<char>(Base.Pointer<char>(), Length);
+            get => cover<S>(Base.Pointer<S>(), Length);
         }
+
+        public string Format()
+            => strings.format(this);
+
+
+        public override string ToString()
+            => Format();
     }
 }

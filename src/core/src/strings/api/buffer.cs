@@ -2,8 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Strings
+namespace Z0
 {
+    using Strings;
+
     partial struct strings
     {
         [Op, Closures(Closure)]

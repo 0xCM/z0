@@ -16,21 +16,21 @@ namespace Z0.Lang
     public class Alphabet<K>
         where K : unmanaged
     {
-        readonly SymbolSet<K> Data;
-
         /// <summary>
         /// The name of the alphabet
         /// </summary>
         public Label Name {get;}
 
+        readonly Atoms<K> Data;
+
         [MethodImpl(Inline)]
-        internal Alphabet(Label name, Symbol<K>[] src)
+        internal Alphabet(Label name, Atom<K>[] src)
         {
             Name = name;
-            Data = new SymbolSet<K>(src);
+            Data = new Atoms<K>(src);
         }
 
-        public Symbol<K> this[uint key]
+        public Atom<K> this[uint key]
         {
             [MethodImpl(Inline)]
             get => Data[key];
@@ -39,7 +39,7 @@ namespace Z0.Lang
         /// <summary>
         /// The symbols that comprise the alpabet
         /// </summary>
-        public ReadOnlySpan<Symbol<K>> Symbols
+        public ReadOnlySpan<Atom<K>> Symbols
         {
             [MethodImpl(Inline)]
             get => Data.Storage;
@@ -51,7 +51,7 @@ namespace Z0.Lang
             get => (uint)Data.Members.Length;
         }
 
-        internal Symbol<K>[] Storage
+        internal Atom<K>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data.Storage;

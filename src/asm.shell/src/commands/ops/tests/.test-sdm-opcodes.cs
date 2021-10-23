@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using Strings;
 
     using static core;
 
@@ -14,19 +15,19 @@ namespace Z0.Asm
         public Outcome TestOcStrings(CmdArgs args)
         {
             var result = Outcome.Success;
-            var strings = memory.strings(OpCodeStrings.Offsets, OpCodeStrings.Data);
+            var _strings = strings.memory(OpCodeStrings.Offsets, OpCodeStrings.Data);
             var offsets = recover<uint>(OpCodeStrings.Offsets);
             var formatter = Tables.formatter<MemoryStrings>();
-            Write(formatter.Format(strings, RecordFormatKind.KeyValuePairs));
+            Write(formatter.Format(_strings, RecordFormatKind.KeyValuePairs));
 
-            result = CheckOffsets(strings, offsets);
+            result = CheckOffsets(_strings, offsets);
             if(result.Fail)
                 return result;
             else
             {
-                var count = strings.EntryCount;
+                var count = _strings.EntryCount;
                 for(var i=0; i<count; i++)
-                    Write(text.format(strings[i]));
+                    Write(text.format(_strings[i]));
             }
 
             return result;
@@ -38,7 +39,7 @@ namespace Z0.Asm
             var count = src.EntryCount;
             for(var i=0; i<count; i++)
             {
-                ref readonly var actual = ref memory.offset(src,i);
+                ref readonly var actual = ref strings.offset(src,i);
                 ref readonly var expect = ref skip(offsets,i);
                 if(actual != expect)
                 {

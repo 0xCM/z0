@@ -14,24 +14,24 @@ namespace Z0.Machines
         where K : unmanaged
         where A : unmanaged
     {
-        readonly DataGrid<Symbol<K>> Transitions;
+        readonly DataGrid<Atom<K>> Transitions;
 
-        public TableDfa(Alphabet<A> alphabet, DfaState<K>[] states, DfaState<K>[] terminals, DfaState<K> s0, DataGrid<Symbol<K>> transitions)
+        public TableDfa(Alphabet<A> alphabet, DfaState<K>[] states, DfaState<K>[] terminals, DfaState<K> s0, DataGrid<Atom<K>> transitions)
             : base(alphabet,states,terminals,s0)
         {
             Transitions = transitions;
         }
-        
-        protected override DfaState<K> Evaluate(Symbol<K> src)
+
+        protected override DfaState<K> Evaluate(Atom<K> src)
         {
             var i = CurrentState.Key;
             var j = src.Key;
             if(i < Transitions.RowCount && j<Transitions.ColCount)
             {
                 var order = Transitions.ColCount*i + j;
-                return api.state((int)order, Transitions[i,j]);                
+                return api.state((int)order, Transitions[i,j]);
             }
-            
+
             return default;
         }
     }

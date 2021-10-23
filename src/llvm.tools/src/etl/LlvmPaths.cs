@@ -21,6 +21,9 @@ namespace Z0.llvm
         public FS.FolderPath ImportTables()
             => ImportRoot() + FS.folder(tables);
 
+        public FS.FolderPath ImportDir(string scope)
+            => ImportRoot() + FS.folder(scope);
+
         public FS.FolderPath ImportTables(string scope)
             => ImportTables() + FS.folder(scope);
 
@@ -55,7 +58,7 @@ namespace Z0.llvm
             =>  TableGenImports() + FS.file(id, ext);
 
         public FS.FilePath ImportMap(string id)
-            => TableGenImports() + FS.file(id, FS.ext("map"));
+            => ImportRoot() + FS.file(id, FS.ext("map"));
 
         public FS.FilePath ImportTable<T>()
             where T : struct

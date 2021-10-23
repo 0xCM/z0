@@ -67,12 +67,12 @@ namespace Z0.Strings
             => ref seek(Buffer.Edit,index);
 
         [MethodImpl(Inline)]
-        public StringRef<S> Substring(ulong index, ulong length)
-            => strings.substring(this, index, length);
+        public Word<S> Substring(ulong index, ulong length)
+            => strings.word(this, index, length);
 
         [MethodImpl(Inline)]
-        public StringRef<S> Substring(long index, long length)
-            => strings.substring(this, index, length);
+        public Word<S> Substring(long index, long length)
+            => strings.word(this, index, length);
 
         public ref S this[ulong index]
         {
@@ -86,16 +86,16 @@ namespace Z0.Strings
             get => ref Symbol(index);
         }
 
-        public StringRef<S> this[long offset, long length]
+        public Word<S> this[long offset, long length]
         {
             [MethodImpl(Inline)]
-            get => strings.substring(this, offset, length);
+            get => strings.word(this, offset, length);
         }
 
-        public StringRef<S> this[ulong offset, ulong length]
+        public Word<S> this[ulong offset, ulong length]
         {
             [MethodImpl(Inline)]
-            get => strings.substring(this, offset, length);
+            get => strings.word(this, offset, length);
         }
 
         [MethodImpl(Inline)]

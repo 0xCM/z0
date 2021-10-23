@@ -12,8 +12,8 @@ namespace Z0.Lang
     partial struct lang
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Symbol<K> symbol<K>(uint key, K value)
+        public static Atom<K> atom<K>(uint key, K value)
             where K : unmanaged
-                => new Symbol<K>(key, value);
+                => new Atom<K>(key, value);
     }
 }

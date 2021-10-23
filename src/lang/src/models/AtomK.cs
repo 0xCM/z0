@@ -12,7 +12,7 @@ namespace Z0.Lang
     /// <summary>
     /// A terminal atomic
     /// </summary>
-    public readonly struct Symbol<K> : ISymbol<Symbol<K>,K>
+    public readonly struct Atom<K> : ISymbol<Atom<K>,K>
         where K : unmanaged
     {
         public uint Key {get;}
@@ -20,7 +20,7 @@ namespace Z0.Lang
         public K Value {get;}
 
         [MethodImpl(Inline)]
-        public Symbol(uint key, K value)
+        public Atom(uint key, K value)
         {
             Key = key;
             Value = value;
@@ -28,11 +28,11 @@ namespace Z0.Lang
 
         [MethodImpl(Inline)]
 
-        public bool Equals(Symbol<K> src)
+        public bool Equals(Atom<K> src)
             => Key == src.Key && bw64(Value).Equals(bw64(src.Value));
 
         [MethodImpl(Inline)]
-        public int CompareTo(Symbol<K> src)
+        public int CompareTo(Atom<K> src)
             => bw64(Value).CompareTo(bw64(src.Value));
 
         public string Format()
@@ -45,16 +45,16 @@ namespace Z0.Lang
             => (int)Key;
 
         public override bool Equals(object src)
-            => src is Symbol<K> s && Equals(s);
+            => src is Atom<K> s && Equals(s);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(Symbol<K> a, Symbol<K> b)
+        public static bool operator ==(Atom<K> a, Atom<K> b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(Symbol<K> a, Symbol<K> b)
+        public static bool operator !=(Atom<K> a, Atom<K> b)
             => !a.Equals(b);
 
-        public static Symbol<K> Empty => default;
+        public static Atom<K> Empty => default;
     }
 }

@@ -20,7 +20,7 @@ namespace Z0.Machines
         {
             var dst = alloc<DfaState<uint>>(count);
             for(var i=0; i<count; i++)
-                seek(dst,i) = state(i, lang.symbol((uint)(i + 1), (uint)i));
+                seek(dst,i) = state(i, lang.atom((uint)(i + 1), (uint)i));
             return dst;
         }
 
@@ -34,7 +34,7 @@ namespace Z0.Machines
             for(var i=0; i<count; i++)
             {
                 ref readonly var s = ref skip(view,i);
-                seek(dst,i) = state(i, lang.symbol(s.Key, s.Kind));
+                seek(dst,i) = state(i, lang.atom(s.Key, s.Kind));
             }
             return dst;
         }
@@ -50,7 +50,7 @@ namespace Z0.Machines
             for(var i=0; i<count; i++)
             {
                 ref readonly var c = ref skip(src,i);
-                seek(dst,i) = state(i, lang.symbol((uint)c, c));
+                seek(dst,i) = state(i, lang.atom((uint)c, c));
             }
             return dst;
         }

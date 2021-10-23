@@ -6,6 +6,8 @@ namespace Z0.llvm
 {
     using static core;
 
+
+
     public class EtlGenerator : AppService<EtlGenerator>
     {
         LlvmPaths LlvmPaths;
@@ -18,10 +20,16 @@ namespace Z0.llvm
             OmniScript = Wf.OmniScript();
         }
 
-        public void Run(EtlDatasets src)
+        public void Run(in EtlDatasets src)
         {
             LlvmPaths.CodeGenRoot().Clear(true);
             GenStringTables();
+            var dst = LlvmPaths.ImportDir("docs") + FS.folder("instructions");
+            dst.Clear();
+            var running = Running(string.Format("Emitting instruction docs to {0}", dst));
+            var docgen = EtlDocGen.create(src);
+            var count = docgen.GenInsructionDocs(dst);
+            Ran(running, string.Format("Emitted docs for {0} instructions", count));
         }
 
         Outcome GenStringTables()

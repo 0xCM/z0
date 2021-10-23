@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     /// <summary>
-    /// Captures and represents a void pointer
+    /// Captures a <see cref='void'/> pointer
     /// </summary>
     public unsafe struct Ptr : IPtr
     {

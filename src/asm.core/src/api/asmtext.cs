@@ -17,6 +17,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static AsmText asmtext(string src, AsmTextKind kind = default)
-            => asmtext(StringAddress.from(src), kind);
+            => asmtext(strings.address(src), kind);
     }
 }

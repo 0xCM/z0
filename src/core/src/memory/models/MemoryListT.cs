@@ -10,6 +10,9 @@ namespace Z0
     using static Root;
     using static core;
 
+    /// <summary>
+    /// Defines a list of <typeparamref name='T'/> over an unmanaged buffer
+    /// </summary>
     public unsafe readonly struct MemoryList<T> : IDisposable
         where T : unmanaged
     {

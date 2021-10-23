@@ -11,9 +11,9 @@ namespace Z0.Strings
     using static core;
 
     /// <summary>
-    /// Defines a string over S-symbols allocated over a native buffer
+    /// Defines a string over S-symbols over an embedded resource
     /// </summary>
-    public unsafe struct EmbeddedString<S>
+    public unsafe struct EmbeddedWord<S>
         where S : unmanaged
     {
         readonly MemoryAddress BaseAddress;
@@ -24,7 +24,7 @@ namespace Z0.Strings
         public uint Length {get;}
 
         [MethodImpl(Inline)]
-        public EmbeddedString(ReadOnlySpan<S> src)
+        public EmbeddedWord(ReadOnlySpan<S> src)
         {
             BaseAddress = address(first(src));
             Length = (uint)src.Length;
@@ -59,12 +59,12 @@ namespace Z0.Strings
             => ref skip(View,index);
 
         [MethodImpl(Inline)]
-        public ConstStringRef<S> Substring(ulong index, ulong length)
-            => strings.substring(this, index, length);
+        public ConstWord<S> Substring(ulong index, ulong length)
+            => strings.word(this, index, length);
 
         [MethodImpl(Inline)]
-        public ConstStringRef<S> Substring(long index, long length)
-            => strings.substring(this, index, length);
+        public ConstWord<S> Substring(long index, long length)
+            => strings.word(this, index, length);
 
         public ref readonly S this[ulong index]
         {
@@ -78,20 +78,27 @@ namespace Z0.Strings
             get => ref Symbol(index);
         }
 
-        public ConstStringRef<S> this[long offset, long length]
+        public ConstWord<S> this[long offset, long length]
         {
             [MethodImpl(Inline)]
-            get => strings.substring(this, offset, length);
+            get => strings.word(this, offset, length);
         }
 
-        public ConstStringRef<S> this[ulong offset, ulong length]
+        public ConstWord<S> this[ulong offset, ulong length]
         {
             [MethodImpl(Inline)]
-            get => strings.substring(this, offset, length);
+            get => strings.word(this, offset, length);
         }
+
+        public string Format()
+            => strings.format(this);
+
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator EmbeddedString<S>(ReadOnlySpan<S> src)
-            => new EmbeddedString<S>(src);
+        public static implicit operator EmbeddedWord<S>(ReadOnlySpan<S> src)
+            => new EmbeddedWord<S>(src);
     }
 }

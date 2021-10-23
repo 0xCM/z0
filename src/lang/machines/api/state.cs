@@ -14,7 +14,7 @@ namespace Z0.Machines
     partial struct api
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DfaState<T> state<T>(int order, Symbol<T> src)
+        public static DfaState<T> state<T>(int order, Atom<T> src)
             where T : unmanaged
                 => new DfaState<T>(order, src);
     }

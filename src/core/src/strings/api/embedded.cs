@@ -2,26 +2,28 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Strings
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
+    using Strings;
 
     using static Root;
 
     partial struct strings
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static EmbeddedString<S> embedded<S>(ReadOnlySpan<S> src)
+        public static EmbeddedWord<S> embedded<S>(ReadOnlySpan<S> src)
             where S : unmanaged
-                => new EmbeddedString<S>(src);
+                => new EmbeddedWord<S>(src);
 
         [MethodImpl(Inline), Op]
-        public static EmbeddedString<char> embedded(string src)
-            => new EmbeddedString<char>(src);
+        public static EmbeddedWord<char> embedded(string src)
+            => new EmbeddedWord<char>(src);
 
         [MethodImpl(Inline), Op]
-        public static EmbeddedString<char> embedded(ReadOnlySpan<char> src)
-            => new EmbeddedString<char>(src);
+        public static EmbeddedWord<char> embedded(ReadOnlySpan<char> src)
+            => new EmbeddedWord<char>(src);
     }
 }

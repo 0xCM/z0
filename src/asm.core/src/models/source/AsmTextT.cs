@@ -45,6 +45,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmText<T>(ReadOnlySpan<char> src)
-            => new AsmText<T>(StringAddress.from(src));
+            => new AsmText<T>(strings.address(src));
     }
 }

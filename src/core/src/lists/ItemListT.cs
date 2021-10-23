@@ -64,7 +64,6 @@ namespace Z0
             get => Data.Count;
         }
 
-
         public string Format()
             => ListItems.format(this, Chars.Comma);
 
@@ -74,5 +73,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ItemList<T>((string name, ListItem<T>[] items) src)
             => new ItemList<T>(src.name, src.items);
+
+        public static ItemList<T> Empty => new ItemList<T>(Identifier.Empty, sys.empty<ListItem<T>>());
     }
 }

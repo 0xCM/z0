@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using api = memory;
+    using api = strings;
 
     public readonly struct MemoryStrings
     {

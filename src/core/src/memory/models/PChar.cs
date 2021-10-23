@@ -12,6 +12,9 @@ namespace Z0
 
     using api = memory;
 
+    /// <summary>
+    /// Captures a <see cref="char"/> pointer
+    /// </summary>
     public unsafe struct PChar : IPtr<char>
     {
         public char* P;

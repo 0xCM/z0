@@ -16,15 +16,15 @@ namespace Z0.Asm
         Outcome LabelTest1()
         {
             var result = Outcome.Success;
-            var strings = memory.strings(llvm.stringtables.Instruction.Offsets, llvm.stringtables.Instruction.Data);
-            var count = strings.EntryCount;
+            var data = strings.memory(llvm.stringtables.Instruction.Offsets, llvm.stringtables.Instruction.Data);
+            var count = data.EntryCount;
 
             for(var i=0; i<count; i++)
             {
-                var current = strings[i];
+                var current = data[i];
                 var length = (uint)current.Length;
-                var address = strings.Address(i);
-                var label = strings.Label(i);
+                var address = data.Address(i);
+                var label = data.Label(i);
                 var a = text.format(current);
                 var b = label.Format();
                 if(!text.equals(a,b))
@@ -50,7 +50,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 seek(input,i) = i.FormatBits();
 
-            using var buffer = strings.labels(input, out var index);
+            using var buffer = Labels.alloc(input, out var index);
             for(var i=0; i<count; i++)
             {
                 ref readonly var label = ref index[i];

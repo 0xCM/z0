@@ -13,7 +13,7 @@ namespace Z0
     using api = memory;
 
     /// <summary>
-    /// Captures and represents <see cref='byte'/> pointer
+    /// Captures a <see cref='byte'/> pointer
     /// </summary>
     [ApiComplete]
     public unsafe struct Ptr8 : IPtr<byte>

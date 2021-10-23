@@ -14,73 +14,15 @@ namespace Z0
     {
         public const uint SZ = MemoryAddress.SZ;
 
-        [MethodImpl(Inline), Op]
-        public static unsafe string format(StringAddress src)
-            => new string(src.Address.Pointer<char>());
-
-        [MethodImpl(Inline), Op]
-        public static unsafe string format<N>(StringAddress<N> src)
-            where N : unmanaged, ITypeNat
-                => new string(src.Address.Pointer<char>());
-
-        [MethodImpl(Inline), Op]
-        public static unsafe ref char first(StringAddress src)
-            => ref @ref(src.Address.Pointer<char>());
-
-        [MethodImpl(Inline), Op]
-        public static uint length(StringAddress src)
-        {
-            ref var c = ref first(src);
-            var counter = 0u;
-            while(c != 0)
-                c = seek(c, counter++);
-            return counter;
-        }
-
-        [MethodImpl(Inline)]
-        public static uint render<N>(StringAddress<N> src, ref uint i, Span<char> dst)
-            where N : unmanaged, ITypeNat
-        {
-            ref var c = ref first(src.Source);
-            var n = src.Length;
-            for(var j=0; j<n; j++)
-                seek(dst,i++) = skip(c,j);
-            return n;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint render(StringAddress src, ref uint i, Span<char> dst)
-        {
-            var i0=i;
-            ref var c = ref first(src);
-            var j=0u;
-            while(c != 0 && i < dst.Length)
-                seek(dst, i++) = skip(c, j++);
-            return j-1;
-        }
-
         [MethodImpl(Inline)]
         public static StringAddress<N> natural<N>(string src)
             where N : unmanaged, ITypeNat
         {
             if(src.Length >= Typed.nat32i<N>())
-                return new StringAddress<N>(from(src));
+                return new StringAddress<N>(strings.address(src));
             else
                 return default;
         }
-
-        [MethodImpl(Inline), Op]
-        public static StringAddress from(string src)
-            => new StringAddress(core.address(src));
-
-        [MethodImpl(Inline), Op]
-        public static StringAddress from(ReadOnlySpan<char> src)
-            => new StringAddress(core.address(src));
-
-        [MethodImpl(Inline), Op]
-        public static StringAddress from<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-                => new StringAddress(core.address(src));
 
         public MemoryAddress Address {get;}
 
@@ -99,7 +41,7 @@ namespace Z0
         public uint Length
         {
             [MethodImpl(Inline)]
-            get => length(this);
+            get => strings.length(this);
         }
 
         public bool IsNonZero
@@ -110,11 +52,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Render(ref uint i, Span<char> dst)
-            => render(this, ref i, dst);
+            => strings.render(this, ref i, dst);
 
         [MethodImpl(Inline)]
         public unsafe string Format()
-            => format(this);
+            => strings.format(this);
 
         public override string ToString()
             => Format();
@@ -141,10 +83,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(string src)
-            => from(src);
+            => strings.address(src);
 
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(Name src)
-            => from(src.Content);
+            => strings.address(src.Content);
     }
 }

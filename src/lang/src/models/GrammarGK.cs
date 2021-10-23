@@ -20,7 +20,7 @@ namespace Z0.Lang
         /// <summary>
         /// Specifies the initial/start symbol
         /// </summary>
-        public Symbol<K> S0 {get; protected set;}
+        public Atom<K> S0 {get; protected set;}
 
         public Index<Production<T>> Productions {get;}
 
@@ -28,5 +28,5 @@ namespace Z0.Lang
         {
             Alphabet = default;
         }
-    }    
+    }
 }

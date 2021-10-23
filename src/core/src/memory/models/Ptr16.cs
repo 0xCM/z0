@@ -13,7 +13,7 @@ namespace Z0
     using api = memory;
 
     /// <summary>
-    /// Captures and represents <see cref='ushort'/> pointer
+    /// Captures a <see cref='ushort'/> pointer
     /// </summary>
     [ApiComplete]
     public unsafe struct Ptr16 : IPtr<ushort>

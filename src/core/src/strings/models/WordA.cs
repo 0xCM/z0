@@ -10,12 +10,16 @@ namespace Z0.Strings
     using static Root;
     using static core;
 
-    public unsafe readonly struct StringRef
+    /// <summary>
+    /// Defines a reference to a mutable S-sequence
+    /// </summary>
+    public unsafe readonly struct Word<S>
+        where S : unmanaged
     {
-        internal readonly MemoryAddress Base;
+        readonly MemoryAddress Base;
 
         [MethodImpl(Inline)]
-        internal StringRef(MemoryAddress @base, uint length)
+        internal Word(MemoryAddress @base, uint length)
         {
             Base = @base;
             Length = length;
@@ -23,34 +27,34 @@ namespace Z0.Strings
 
         public uint Length {get;}
 
-        public ref char this[ulong index]
+        public ref S this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Base.Ref<char>(), index);
+            get => ref seek(Base.Ref<S>(), index);
         }
 
-        public ref char this[long index]
+        public ref S this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Base.Ref<char>(), index);
+            get => ref seek(Base.Ref<S>(), index);
         }
 
         public ByteSize Size
         {
             [MethodImpl(Inline)]
-            get => Length*size<char>();
+            get => Length*size<S>();
         }
 
-        public Span<char> Edit
+        public Span<S> Edit
         {
             [MethodImpl(Inline)]
-            get => cover<char>(Base.Pointer<char>(), Length);
+            get => cover<S>(Base.Pointer<S>(), Length);
         }
 
-        public ReadOnlySpan<char> View
+        public ReadOnlySpan<S> View
         {
             [MethodImpl(Inline)]
-            get => cover<char>(Base.Pointer<char>(), Length);
+            get => cover<S>(Base.Pointer<S>(), Length);
         }
     }
 }
