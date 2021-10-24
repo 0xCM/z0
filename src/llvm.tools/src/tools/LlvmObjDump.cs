@@ -85,14 +85,14 @@ namespace Z0.llvm
 
         public Index<ObjDumpRow> Consolidated(ProjectId project)
         {
-            var src = Ws.Project(project).TableOut<ObjDumpRow>();
+            var src = Ws.Project(project).Table<ObjDumpRow>(project.Format());
             return Consolidated(src);
         }
 
         public Outcome Consolidate(ProjectId project)
         {
             var src = OutFiles(project, FileKind.ObjAsm).View;
-            var dst = Ws.Project(project).TableOut<ObjDumpRow>();
+            var dst = Ws.Project(project).Table<ObjDumpRow>(project.Format());
             var result = Outcome.Success;
             var count = src.Length;
             var formatter = Tables.formatter<ObjDumpRow>(ObjDumpRow.RenderWidths);

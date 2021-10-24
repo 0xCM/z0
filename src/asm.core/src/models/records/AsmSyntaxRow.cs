@@ -9,7 +9,7 @@ namespace Z0.Asm
     [Record(TableId)]
     public struct AsmSyntaxRow
     {
-        public const string TableId = "mc.ops-log";
+        public const string TableId = "asm.syntax";
 
         public LineOffset Location;
 

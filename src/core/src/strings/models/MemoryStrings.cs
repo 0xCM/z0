@@ -9,8 +9,6 @@ namespace Z0
 
     using static Root;
 
-    using api = strings;
-
     public readonly struct MemoryStrings
     {
         public readonly uint EntryCount;
@@ -33,13 +31,13 @@ namespace Z0
         public ReadOnlySpan<char> this[int index]
         {
             [MethodImpl(Inline)]
-            get => api.chars(this, index);
+            get => strings.chars(this, index);
         }
 
         public ReadOnlySpan<char> this[uint index]
         {
             [MethodImpl(Inline)]
-            get => api.chars(this, index);
+            get => strings.chars(this, index);
         }
 
         [MethodImpl(Inline)]
@@ -52,22 +50,22 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public MemoryAddress Address(uint index)
-            => api.address(this, index);
+            => strings.address(this, index);
 
         [MethodImpl(Inline)]
         public MemoryAddress Address(int index)
-            => api.address(this, index);
+            => strings.address(this, index);
 
         public ReadOnlySpan<char> Data
         {
             [MethodImpl(Inline)]
-            get => api.chars(this);
+            get => strings.chars(this);
         }
 
         public unsafe ReadOnlySpan<uint> Offsets
         {
             [MethodImpl(Inline)]
-            get => api.offsets(this);
+            get => strings.offsets(this);
         }
     }
 }

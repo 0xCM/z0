@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Strings;
-
     using static Root;
 
     partial struct strings

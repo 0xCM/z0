@@ -36,12 +36,6 @@ namespace Z0.Asm
             return true;
         }
 
-        FS.Files ProjectSources(Subject? scope = null)
-            => scope != null ? Ws.Projects().SrcFiles(State.Project(), scope.Value) : Ws.Projects().SrcFiles(State.Project());
-
-        FS.FilePath Script(ProjectId project, ScriptId script)
-            => Ws.Projects().Script(project, script, FS.Cmd);
-
         FS.FolderPath ProjectOut()
             => Ws.Projects().Out(State.Project());
 
@@ -117,34 +111,39 @@ namespace Z0.Asm
 
         Outcome AsmCollect()
         {
+            return AsmCollect(Ws.Project(State.Project()));
+        }
+
+        Outcome AsmCollect(IProjectWs ws)
+        {
             var result = Outcome.Success;
-            result = Wf.LlvmObjDump().Consolidate(State.Project());
+            result = Wf.LlvmObjDump().Consolidate(ws.Project);
             if(result.Fail)
                 return result;
 
-            result = CollectSyms();
+            result = CollectSyms(ws);
             if(result.Fail)
                 return result;
 
-            result = CollectObjHex();
+            result = CollectObjHex(ws);
             if(result.Fail)
                 return result;
 
-            result = CollectAsmSyntax();
+            result = CollectAsmSyntax(ws);
 
             return result;
         }
 
-        Outcome CollectObjHex()
+        Outcome CollectObjHex(IProjectWs ws)
         {
             var result = Outcome.Success;
-            var paths = OutFiles(FileKind.Obj, FileKind.O).View;
+            var paths = ws.OutFiles(FileKind.Obj, FileKind.O).View;
             var count = paths.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var src = ref skip(paths,i);
                 var id = src.FileName.WithoutExtension.Format();
-                var dst = OutPath(objhex, id, FileKind.HexDat);
+                var dst = ws.OutDir(objhex) + FS.file(id,FileTypes.ext(FileKind.HexDat));
                 using var writer = dst.AsciWriter();
                 var data = src.ReadBytes();
                 var size = HexFormatter.emit(data, writer);
@@ -154,28 +153,27 @@ namespace Z0.Asm
             return result;
         }
 
-        Outcome CollectSyms()
+        Outcome CollectSyms(IProjectWs ws)
         {
             var result = Outcome.Success;
-            var src = ProjectOut().Files(FS.Sym,true);
-            var dst = Ws.Projects().TableOut<ObjSymRecord>(State.Project());
+            var src = ws.OutFiles(FS.Sym).View;
+            var dst = ws.Table<ObjSymRecord>(ws.Project.Format());
             Write(string.Format("Collecting symbols from {0} files", src.Length));
             var symbols = LlvmNm.Collect(src, dst);
             return result;
         }
 
-        Outcome CollectAsmSyntax()
+        Outcome CollectAsmSyntax(IProjectWs ws)
         {
-            var result = CollectAsmParseLogs();
-            result = CollectAsmSyntaxTrees();
+            var result = CollectAsmParseLogs(ws);
+            result = CollectAsmSyntaxTrees(ws);
             return result;
         }
 
-        Outcome CollectAsmParseLogs()
+        Outcome CollectAsmParseLogs(IProjectWs ws)
         {
-            var project = State.Project();
-            var logs = Ws.Projects().OutFiles(project, FileTypes.ext(FileKind.AsmSyntaxLog)).View;
-            var dst = Ws.Projects().TableOut<AsmSyntaxRow>(project);
+            var logs = ws.OutFiles(FileTypes.ext(FileKind.AsmSyntaxLog)).View;
+            var dst = ws.Table<AsmSyntaxRow>(ws.Project.Format());
             var count = logs.Length;
             var buffer = list<AsmSyntaxRow>();
             for(var i=0; i<count; i++)
@@ -184,13 +182,12 @@ namespace Z0.Asm
             return true;
         }
 
-        Outcome CollectAsmSyntaxTrees()
+        Outcome CollectAsmSyntaxTrees(IProjectWs ws)
         {
             var result = Outcome.Success;
-            var project = Ws.Project(State.Project());
-            var src = project.OutFiles(FileKind.AsmSyntax).View;
+            var src = ws.OutFiles(FileKind.AsmSyntax).View;
             var count = src.Length;
-            var dst = project.OutDir() + FS.file(project.Name.Format() + ".syntax-trees", FS.Asm);
+            var dst = ws.OutDir() + FS.file(ws.Name.Format() + ".syntax-trees", FS.Asm);
             using var writer = dst.AsciWriter();
             for(var i=0; i<count; i++)
             {
@@ -245,11 +242,5 @@ namespace Z0.Asm
             }
             return counter;
         }
-
-        FS.FilePath OutPath(Subject scope, string id, FileKind kind)
-            =>  Ws.Projects().Out(State.Project(), scope) + FS.file(id,FileTypes.ext(kind));
-
-        FS.Files OutFiles(params FileKind[] kinds)
-            => Ws.Projects().OutFiles(State.Project(), kinds);
    }
 }

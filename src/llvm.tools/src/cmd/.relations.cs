@@ -14,7 +14,7 @@ namespace Z0.llvm
         Outcome RecordRelations(CmdArgs args)
         {
             var result = Outcome.Success;
-            var src = LlvmEtl.LoadSourceRecords(EtlDatasetNames.X86);
+            var src = LlvmEtl.LoadSourceRecords(EtlNames.Datasets.X86);
             var distiller = new DefRelationDistiller();
             var relations = distiller.DistillRelations(src);
             var pathA = LlvmPaths.ImportTable("llvm.defs.relations.test");

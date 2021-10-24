@@ -47,7 +47,7 @@ namespace Z0
             => llvm.LlvmToolbase.create(wf);
 
         [Op]
-        public static EtlGenerator LlvmGenerator(this IWfRuntime wf)
-            => llvm.EtlGenerator.create(wf);
+        public static EtlCodeGen LlvmEtlCodeGen(this IWfRuntime wf)
+            => llvm.EtlCodeGen.create(wf);
     }
 }

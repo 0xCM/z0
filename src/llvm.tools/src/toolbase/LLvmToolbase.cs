@@ -17,7 +17,6 @@ namespace Z0.llvm
         protected override void Initialized()
         {
             OmniScript = Wf.OmniScript();
-
         }
 
         Outcome InitializeProfiles(FS.FolderPath spec, FS.FilePath config, ToolId set)

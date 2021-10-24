@@ -65,14 +65,6 @@ namespace Z0.Strings
         public ref char Symbol(long index)
             => ref seek(Buffer.Edit,index);
 
-        [MethodImpl(Inline)]
-        public Word Substring(ulong index, ulong length)
-            => strings.word(this, index, length);
-
-        [MethodImpl(Inline)]
-        public Word Substring(long index, long length)
-            => strings.word(this,index,length);
-
         public ref char this[ulong index]
         {
             [MethodImpl(Inline)]
@@ -83,18 +75,6 @@ namespace Z0.Strings
         {
             [MethodImpl(Inline)]
             get => ref Symbol(index);
-        }
-
-        public Word this[long offset, long length]
-        {
-            [MethodImpl(Inline)]
-            get => strings.word(this, offset, length);
-        }
-
-        public Word this[ulong offset, ulong length]
-        {
-            [MethodImpl(Inline)]
-            get => strings.word(this, offset, length);
         }
 
         [MethodImpl(Inline)]

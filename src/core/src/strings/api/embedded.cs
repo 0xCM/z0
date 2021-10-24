@@ -14,16 +14,16 @@ namespace Z0
     partial struct strings
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static EmbeddedWord<S> embedded<S>(ReadOnlySpan<S> src)
+        public static WordRefs<S> embedded<S>(ReadOnlySpan<S> src)
             where S : unmanaged
-                => new EmbeddedWord<S>(src);
+                => new WordRefs<S>(src);
 
         [MethodImpl(Inline), Op]
-        public static EmbeddedWord<char> embedded(string src)
-            => new EmbeddedWord<char>(src);
+        public static WordRefs<char> embedded(string src)
+            => new WordRefs<char>(src);
 
         [MethodImpl(Inline), Op]
-        public static EmbeddedWord<char> embedded(ReadOnlySpan<char> src)
-            => new EmbeddedWord<char>(src);
+        public static WordRefs<char> embedded(ReadOnlySpan<char> src)
+            => new WordRefs<char>(src);
     }
 }

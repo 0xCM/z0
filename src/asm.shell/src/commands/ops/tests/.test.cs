@@ -167,15 +167,6 @@ namespace Z0.Asm
             return (same, string.Format("{0} {1} {2}", a, same ? "==" : "!=", b));
         }
 
-        unsafe Outcome DagTests()
-        {
-            var result = Outcome.Success;
-            var op0 = asm.imm8(32);
-            var dag0 = Values.dag(AsmId.AAD8i8, &op0);
-
-            Write(dag0.Format());
-            return result;
-        }
         void ShowLiterals(Type src, Base2 @base)
         {
             var literals = Clr.literals(src, @base).View;

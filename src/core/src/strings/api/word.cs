@@ -14,39 +14,21 @@ namespace Z0
     partial struct strings
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Word<S> word<S>(in StringBuffer<S> src, long index, long length)
+        public static WordRef<S> word<S>(in WordRefs<S> src, ulong index, ulong length)
             where S : unmanaged
-                => new Word<S>(src.Address(index), (uint)length);
+                => new WordRef<S>(src.Address(index), (uint)length);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Word<S> word<S>(in StringBuffer<S> src, ulong index, ulong length)
+        public static WordRef<S> word<S>(in WordRefs<S> src, long index, long length)
             where S : unmanaged
-                => new Word<S>(src.Address(index), (uint)length);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ConstWord<S> word<S>(in EmbeddedWord<S> src, ulong index, ulong length)
-            where S : unmanaged
-                => new ConstWord<S>(src.Address(index), (uint)length);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ConstWord<S> word<S>(in EmbeddedWord<S> src, long index, long length)
-            where S : unmanaged
-                => new ConstWord<S>(src.Address(index), (uint)length);
+                => new WordRef<S>(src.Address(index), (uint)length);
 
         [MethodImpl(Inline), Op]
-        public static ConstWord word(in EmbeddedWord src, ulong index, ulong length)
-            => new ConstWord(src.Address(index), (uint)length);
+        public static WordRef word(in WordRefs src, ulong index, ulong length)
+            => new WordRef(src.Address(index), (uint)length);
 
         [MethodImpl(Inline), Op]
-        public static ConstWord word(in EmbeddedWord src, long index, long length)
-            => new ConstWord(src.Address(index), (uint)length);
-
-        [MethodImpl(Inline), Op]
-        public static Word word(in StringBuffer src, long index, long length)
-            => new Word(src.Address(index), (uint)length);
-
-        [MethodImpl(Inline), Op]
-        public static Word word(in StringBuffer src, ulong index, ulong length)
-            => new Word(src.Address(index), (uint)length);
+        public static WordRef word(in WordRefs src, long index, long length)
+            => new WordRef(src.Address(index), (uint)length);
     }
 }

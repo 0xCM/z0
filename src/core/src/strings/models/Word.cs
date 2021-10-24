@@ -10,32 +10,32 @@ namespace Z0.Strings
     using static Root;
     using static core;
 
-    /// <summary>
-    /// Defines a reference to a mutable character sequence
-    /// </summary>
-    public unsafe readonly struct Word
+    public readonly struct Word
     {
-        internal readonly MemoryAddress Base;
+        readonly Index<char> Data;
 
         [MethodImpl(Inline)]
-        internal Word(MemoryAddress @base, uint length)
+        internal Word(char[] src)
         {
-            Base = @base;
-            Length = length;
+            Data = src;
         }
 
-        public uint Length {get;}
+        public uint Length
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
 
         public ref char this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Base.Ref<char>(), index);
+            get => ref Data[index];
         }
 
         public ref char this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Base.Ref<char>(), index);
+            get => ref Data[index];
         }
 
         public ByteSize Size
@@ -47,20 +47,13 @@ namespace Z0.Strings
         public Span<char> Edit
         {
             [MethodImpl(Inline)]
-            get => cover<char>(Base.Pointer<char>(), Length);
+            get => Data.Edit;
         }
 
         public ReadOnlySpan<char> View
         {
             [MethodImpl(Inline)]
-            get => cover<char>(Base.Pointer<char>(), Length);
+            get => Data.View;
         }
-
-        public string Format()
-            => strings.format(this);
-
-
-        public override string ToString()
-            => Format();
     }
 }

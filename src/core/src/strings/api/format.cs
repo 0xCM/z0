@@ -15,26 +15,18 @@ namespace Z0
     partial struct strings
     {
         [Op]
-        public static string format(in ConstWord src)
+        public static string format(in WordRef src)
             => new string(src.View);
 
-        public static string format<S>(in ConstWord<S> src)
+        public static string format<S>(in WordRef<S> src)
             where S : unmanaged
                 => new string(core.recover<S,char>(src.View));
 
         [Op]
-        public static string format(in EmbeddedWord src)
+        public static string format(in WordRefs src)
             => new string(src.View);
 
-        public static string format<S>(in EmbeddedWord<S> src)
-            where S : unmanaged
-                => new string(core.recover<S,char>(src.View));
-
-        [Op]
-        public static string format(in Word src)
-            => new string(src.View);
-
-        public static string format<S>(in Word<S> src)
+        public static string format<S>(in WordRefs<S> src)
             where S : unmanaged
                 => new string(core.recover<S,char>(src.View));
 

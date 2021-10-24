@@ -11,7 +11,7 @@ namespace Z0.llvm
 
     partial struct Types
     {
-        public struct list<T>
+        public struct list<T> : ITerm
         {
             public const string Identifier = "list<{0}>";
 

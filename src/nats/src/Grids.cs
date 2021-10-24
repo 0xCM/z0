@@ -8,10 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
     [ApiHost]
     public readonly partial struct Grids
     {
         const NumericKind Closure = UnsignedInts;
+
     }
 }

@@ -7,23 +7,18 @@ namespace Z0.llvm
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IDag : ITextual
-    {
-        uint StorageSize {get;}
-    }
-
-    [Free]
-    public interface IDag<H> : IDag
-        where H : unmanaged, IDag<H>
+    public interface IDag : ITerm
     {
 
     }
 
     [Free]
-    public interface IDag<H,O> : IDag<H>
-        where O : unmanaged
-        where H : unmanaged,IDag<H,O>
+    public interface IDag<L,R> : IDag
+        where L : ITerm
+        where R : ITerm
     {
+        L Left {get;}
 
+        R Right {get;}
     }
 }

@@ -14,9 +14,9 @@ namespace Z0.Machines
         where K : unmanaged
         where A : unmanaged
     {
-        readonly DataGrid<Atom<K>> Transitions;
+        readonly Grid<Atom<K>> Transitions;
 
-        public TableDfa(Alphabet<A> alphabet, DfaState<K>[] states, DfaState<K>[] terminals, DfaState<K> s0, DataGrid<Atom<K>> transitions)
+        public TableDfa(Alphabet<A> alphabet, DfaState<K>[] states, DfaState<K>[] terminals, DfaState<K> s0, Grid<Atom<K>> transitions)
             : base(alphabet,states,terminals,s0)
         {
             Transitions = transitions;

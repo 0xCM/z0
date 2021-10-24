@@ -16,10 +16,6 @@ namespace Z0
         FS.Files AdminFiles(FS.FileExt ext)
             => AdminDir().Files(ext);
 
-        FS.FilePath LlvmTable<T>()
-            where T : struct
-                => Root + FS.folder(llvm) + TableFile<T>();
-
         FS.FolderPath SrcDir()
             => Root + FS.folder(src);
 
@@ -29,8 +25,8 @@ namespace Z0
         FS.FolderPath OutDir()
             => Root + FS.folder(output);
 
-        FS.FolderPath OutDir(Subject scope)
-            => OutDir() + FS.folder(scope.Format());
+        FS.FolderPath OutDir(string scope)
+            => OutDir() + FS.folder(scope);
 
         FS.FolderPath ScriptDir()
             => Root + FS.folder(scripts);
@@ -38,38 +34,14 @@ namespace Z0
         FS.FolderPath ObjSymDir()
             => OutDir() + FS.folder(sym);
 
-        FS.FilePath ObjSymPath(string id)
-            => ObjSymDir() + FS.file(id,FS.Sym);
-
         FS.FilePath Script(string id)
             => ScriptDir() + FS.file(id,FS.Cmd);
-
-        FS.FolderPath Docs()
-            => Root + FS.folder(docs);
-
-        FS.FolderPath Docs(string id)
-            => Docs() + FS.folder(id);
-
-        FS.FilePath Doc(string id, FS.FileExt ext)
-            => Docs() + FS.file(id,ext);
 
         FS.FolderPath Bin()
             => OutDir() + FS.folder(bin);
 
         FS.FilePath BinPath(string id)
             => Bin() + FS.file(id, FS.Bin);
-
-        FS.FolderPath HexOutDir()
-            => OutDir() + FS.folder(hex);
-
-        FS.FolderPath HexSrcDir()
-            => SrcDir(hex);
-
-        FS.FolderPath ObjOut()
-            => OutDir() + FS.folder(obj);
-
-        FS.FilePath ObjPath(string id)
-            => ObjOut() + FS.file(id,FS.Obj);
 
         FS.FolderPath ExeOut()
             => OutDir() + FS.folder(exe);

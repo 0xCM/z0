@@ -16,27 +16,30 @@ namespace Z0.Strings
     public unsafe readonly struct Word<S>
         where S : unmanaged
     {
-        readonly MemoryAddress Base;
+        readonly Index<S> Data;
 
         [MethodImpl(Inline)]
-        internal Word(MemoryAddress @base, uint length)
+        internal Word(S[] src)
         {
-            Base = @base;
-            Length = length;
+            Data = src;
         }
 
-        public uint Length {get;}
+        public uint Length
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
 
         public ref S this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Base.Ref<S>(), index);
+            get => ref Data[index];
         }
 
         public ref S this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Base.Ref<S>(), index);
+            get => ref Data[index];
         }
 
         public ByteSize Size
@@ -48,13 +51,13 @@ namespace Z0.Strings
         public Span<S> Edit
         {
             [MethodImpl(Inline)]
-            get => cover<S>(Base.Pointer<S>(), Length);
+            get => Data.Edit;
         }
 
         public ReadOnlySpan<S> View
         {
             [MethodImpl(Inline)]
-            get => cover<S>(Base.Pointer<S>(), Length);
+            get => Data.View;
         }
     }
 }
