@@ -209,7 +209,7 @@ namespace Z0.Asm
             dst.Form = ft;
 
             result = DataParser.eparse(src.IsaSet, out dst.IsaKind);
-            dst.Attributes = Z0.seq.delimit(Chars.Colon, 0, attributes(src.Attributes));
+            dst.Attributes = Z0.seq.index(Chars.Colon, 0, attributes(src.Attributes));
 
             return true;
         }

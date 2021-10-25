@@ -12,6 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a data structure that measures a nonnegative count (I mean, really, is there any other kind?) of 32-bit capacity
     /// </summary>
+    [DataType("count")]
     public struct Count : ICount
     {
         public uint Value;

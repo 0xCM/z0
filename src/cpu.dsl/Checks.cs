@@ -34,7 +34,7 @@ namespace Z0.Vdsl
             [MethodImpl(Inline)]
             public static CmpPred128<T> eq<T>(m128i<T> a, m128i<T> b)
                 where T : unmanaged
-                    => new CmpPred128<T>(CmpKind.EQ,a,b);
+                    => new CmpPred128<T>(CmpPredKind.EQ,a,b);
 
             readonly PageBank16x4x4 Buffer;
 

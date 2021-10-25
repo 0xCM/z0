@@ -5,9 +5,6 @@
 namespace Z0.Vec
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
 
     /// <summary>
     /// Represents the empty vector
@@ -28,19 +25,4 @@ namespace Z0.Vec
         BitWidth IBlittable.ContentWidth
             => Width;
     }
-
-    partial struct api
-    {
-        /// <summary>
-        /// Creates the empty vector
-        /// </summary>
-        /// <param name="n">The length selector</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static v0<T> v<T>(N0 n)
-            where T : unmanaged
-                => default;
-   }
-
-
 }

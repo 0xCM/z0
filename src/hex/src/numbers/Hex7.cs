@@ -13,6 +13,7 @@ namespace Z0
     using K = Hex7Seq;
     using W = W7;
 
+    [DataType]
     public readonly struct Hex7 : IHexNumber<H,W,K>
     {
         public const uint StorageSize = PrimalSizes.U8;

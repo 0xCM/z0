@@ -53,10 +53,7 @@ namespace Z0
             var control = controller();
             var ctx = context(control, parts, args);
             if(verbose)
-            {
-                var enclosed = RuleModels.enclose(text.join(RP.CommaJoin, ctx.PartIdentities), RuleModels.fence(Chars.LBrace, Chars.RBrace));
-                term.inform(AppMsg.status(TextProp.define("Parts", RuleModels.format(enclosed))));
-            }
+                term.inform(AppMsg.status(TextProp.define("Parts", RP.embrace(text.join(RP.CommaJoin, ctx.PartIdentities)))));
 
             var init = new WfInit(ctx, Loggers.configure(ctx.ControlId, ctx.Paths.Root), ctx.PartIdentities);
             var wf = new WfRuntime(init);

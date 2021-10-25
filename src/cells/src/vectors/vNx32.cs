@@ -52,7 +52,7 @@ namespace Z0.Vec
             => Data.Length*32;
     }
 
-    partial struct api
+    partial struct vectors
     {
         [MethodImpl(Inline), Op]
         public static vNx32<uint> v(N32 n,  uint[] src)

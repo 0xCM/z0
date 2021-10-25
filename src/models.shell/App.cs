@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Models
+namespace Z0.Expr
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -24,7 +24,7 @@ namespace Z0.Models
 
         protected override void Run()
         {
-            controller.Control(Args);
+
         }
 
         public static void Main(params string[] args)

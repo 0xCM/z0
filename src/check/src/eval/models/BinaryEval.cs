@@ -9,6 +9,9 @@ namespace Z0
 
     using static Root;
 
+    /// <summary>
+    /// Captures the input and result of a binary evaluation
+    /// </summary>
     public struct BinaryEval<K,T,R>
     {
         public K Kind;

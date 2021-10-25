@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// Windows page size = 4096 bytes
         /// </summary>
-        public const uint PageSize = Pow2.T12;
+        public const uint PageSize = PageBlock.PageSize;
 
         [MethodImpl(Inline), Op]
         public static PageBlockInfo describe(PageBlock src)

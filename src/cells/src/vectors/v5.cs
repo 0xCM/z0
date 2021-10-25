@@ -18,8 +18,6 @@ namespace Z0.Vec
     public struct v5<T> : IVector<T>
         where T : unmanaged
     {
-        public static ByteSize SZ => size<v5<T>>();
-
         v4<T> A;
 
         v1<T> B;
@@ -41,7 +39,7 @@ namespace Z0.Vec
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
-            get => api.cells(ref this);
+            get => vectors.cells(ref this);
         }
 
         public ref T this[uint i]
@@ -51,51 +49,9 @@ namespace Z0.Vec
         }
 
         public string Format()
-            => api.format(this);
+            => vectors.format(this);
 
         public override string ToString()
             => Format();
-    }
-
-    partial struct api
-    {
-        /// <summary>
-        /// Creates a vector of specifield length and parametric type
-        /// </summary>
-        /// <param name="n">The length selector</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static v5<T> v<T>(N5 n)
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static v5<T> v<T>(N5 n, T a0, T a1 = default, T a2 = default, T a3 = default, T a4 = default)
-            where T : unmanaged
-        {
-            var v = new v5<T>();
-            ref var dst = ref cell(ref v);
-            seek(dst,0) = a0;
-            seek(dst,1) = a1;
-            seek(dst,2) = a2;
-            seek(dst,3) = a3;
-            seek(dst,4) = a4;
-            return v;
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref v5<T> src)
-            where T : unmanaged
-                => ref @as<v5<T>,T>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> cells<T>(ref v5<T> src)
-            where T : unmanaged
-                => cover(cell(ref src), src.N);
-
-        public static string format<T>(in v5<T> src)
-            where T : unmanaged
-                => string.Format(RP.V5,
-                    src[0], src[1], src[2], src[3], src[4]);
     }
 }

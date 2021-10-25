@@ -20,13 +20,11 @@ namespace Z0.Strings
         public StringBuffer(uint count)
         {
             Buffer = memory.native<char>(count);
-            Buffer.Clear();
         }
 
         public StringBuffer(int count)
         {
             Buffer = memory.native<char>((uint)count);
-            Buffer.Clear();
         }
 
         public void Dispose()

@@ -12,7 +12,7 @@ namespace Z0.Machines.X86
             => default;
 
         public static RegMachine intel64()
-            => new RegMachine(RegBanks.intel64());
+            => new RegMachine();
 
         public static void state(RegMachine src, ITextBuffer dst)
         {

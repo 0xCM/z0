@@ -6,13 +6,13 @@ namespace Z0
 {
     public struct CmpEval<T>
     {
-        public ComparisonKind Kind;
+        public CmpPredKind OpKind;
 
         public T A;
 
         public T B;
 
-        public bit Result;
+        public bool Result;
 
         public SuccessCode Success;
     }

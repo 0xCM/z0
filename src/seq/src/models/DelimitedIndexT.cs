@@ -11,6 +11,7 @@ namespace Z0
     using static Root;
     using static FormatFunctions;
 
+    [DataType("index<{0}>")]
     public readonly struct DelimitedIndex<T> : IIndex<T>, ITextual
     {
         public Index<T> Data {get;}
@@ -20,15 +21,6 @@ namespace Z0
         public int CellPad {get;}
 
         readonly FormatCells<T> Render;
-
-        [MethodImpl(Inline)]
-        public DelimitedIndex(Index<T> src, char delimiter = ListDelimiter, int pad = 0)
-        {
-            Data = src;
-            Delimiter = delimiter;
-            Render = text.delimit;
-            CellPad = pad;
-        }
 
         [MethodImpl(Inline)]
         public DelimitedIndex(T[] src, char delimiter = ListDelimiter, int pad = 0)
@@ -102,6 +94,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DelimitedIndex<T>(List<T> src)
             => new DelimitedIndex<T>(src.ToArray());
-
     }
 }

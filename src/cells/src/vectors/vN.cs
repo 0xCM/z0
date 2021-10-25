@@ -41,7 +41,7 @@ namespace Z0.Vec
         }
 
         public string Format()
-            => api.format(this);
+            => vectors.format(this);
 
         public override string ToString()
             => Format();
@@ -58,7 +58,7 @@ namespace Z0.Vec
         public static vector<N,T> Empty => default;
     }
 
-    partial struct api
+    partial struct vectors
     {
         [MethodImpl(Inline)]
         public static vector<N,T> v<N,T>(N n, T[] src)

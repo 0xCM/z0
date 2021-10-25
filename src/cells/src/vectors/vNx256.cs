@@ -52,5 +52,4 @@ namespace Z0.Vec
         BitWidth IBlittable.ContentWidth
             => Cells.Length*256;
     }
-
 }

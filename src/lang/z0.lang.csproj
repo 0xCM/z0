@@ -9,7 +9,6 @@
       <ProjectReference Include="$(Nats)" />
       <ProjectReference Include="$(Bit)" />
       <ProjectReference Include="$(SymCore)" />
-
   </ItemGroup>
 
 </Project>

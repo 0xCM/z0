@@ -13,6 +13,7 @@ namespace Z0
     using K = Hex4Seq;
     using W = W4;
 
+    [DataType]
     public readonly struct Hex4 : IHexNumber<H,W,K>
     {
         public const uint StorageSize = PrimalSizes.U8;

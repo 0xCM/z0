@@ -12,6 +12,7 @@ namespace Z0
     /// <summary>
     /// Captures a duration
     /// </summary>
+    [DataType]
     public readonly struct Duration : ITextual<Duration>, IEquatable<Duration>, IComparable<Duration>
     {
         /// <summary>

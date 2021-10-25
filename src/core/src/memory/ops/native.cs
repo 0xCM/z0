@@ -49,7 +49,11 @@ namespace Z0
         /// <param name="size">The buffer length in bytes</param>
         [Op]
         public static NativeBuffer native(ByteSize size)
-            => new NativeBuffer((liberate(Marshal.AllocHGlobal((int)size), (int)size), size));
+        {
+            var buffer = new NativeBuffer((liberate(Marshal.AllocHGlobal((int)size), (int)size), size));
+            buffer.Clear();
+            return buffer;
+        }
 
         /// <summary>
         /// Allocates a <see cref='NativeBuffer'/> sequence
@@ -62,9 +66,7 @@ namespace Z0
             var dst = new NativeBuffer[count];
             for(var i=0; i<count; i++)
                 core.seek(dst,i) = native(core.skip(sizes,i));
-            var seq = new NativeBufferSeq(dst);
-            seq.Clear();
-            return seq;
+            return new NativeBufferSeq(dst);
         }
 
         /// <summary>
@@ -76,7 +78,9 @@ namespace Z0
             where T : unmanaged
         {
             ByteSize sz = count*size<T>();
-            return new NativeBuffer<T>((liberate(Marshal.AllocHGlobal((int)sz), sz), sz));
+            var buffer = new NativeBuffer<T>((liberate(Marshal.AllocHGlobal((int)sz), sz), sz));
+            buffer.Clear();
+            return buffer;
         }
 
         /// <summary>

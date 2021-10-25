@@ -33,17 +33,25 @@ namespace Z0.Machines.X86
 
         Stack<ulong> Stack;
 
-        internal RegMachine(RegBank regs)
+        MemAlloc Ram;
+
+        MemoryAddress RamBase;
+
+        internal RegMachine()
         {
-            Regs = regs;
-            R64 = regs[0].BaseAddress.Pointer<ulong>();
-            R512 = regs[1].BaseAddress.Pointer<Cell512>();
-            K = regs[2].BaseAddress.Pointer<ulong>();
-            SYS = regs[3].BaseAddress.Pointer<ulong>();
+            Regs = RegBanks.intel64();
+            R64 = Regs[0].BaseAddress.Pointer<ulong>();
+            R512 = Regs[1].BaseAddress.Pointer<Cell512>();
+            K = Regs[2].BaseAddress.Pointer<ulong>();
+            SYS = Regs[3].BaseAddress.Pointer<ulong>();
             R32 = (uint*)R64;
             R16 = (ushort*)R64;
             R8 = (byte*)R64;
             Stack = CpuModels.stack<ulong>(64);
+            Ram = MemAlloc.alloc(256);
+            RamBase = AllocPage();
+            *RamBase.Pointer<ulong>() = 0xCC;
+            rip() = RamBase;
         }
 
         internal RegBank Bank
@@ -55,7 +63,12 @@ namespace Z0.Machines.X86
         public void Dispose()
         {
             Regs.Dispose();
+            Ram.Dispose();
         }
+
+        [MethodImpl(Inline), Op]
+        public MemoryAddress AllocPage()
+            => Ram.AllocPage();
 
         [MethodImpl(Inline), Op]
         ref byte reg8(RegIndex index)

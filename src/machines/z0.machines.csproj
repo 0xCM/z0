@@ -4,18 +4,20 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>machines</AssemblyName>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <ZVer>0.0.32</ZVer>
+    <ZVer>0.0.38</ZVer>
   </PropertyGroup>
-
 
   <ItemGroup>
     <PackageReference Include="z0.cpu" Version="$(ZVer)" />
     <PackageReference Include="z0.polyrand" Version="$(ZVer)" />
     <PackageReference Include="z0.services" Version="$(ZVer)" />
-    <PackageReference Include="z0.lang" Version="$(ZVer)" />
     <PackageReference Include="z0.asm" Version="$(ZVer)" />
     <PackageReference Include="z0.pipes" Version="$(ZVer)" />
     <PackageReference Include="z0.calc" Version="$(ZVer)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(Expr)" />
   </ItemGroup>
 
 </Project>

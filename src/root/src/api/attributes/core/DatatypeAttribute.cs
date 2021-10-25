@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Applied to a type to denote inclusion as a datatype within the DSL
     /// </summary>
-    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Delegate)]
+    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Delegate | AttributeTargets.Class)]
     public class DataTypeAttribute : Attribute
     {
         public DataTypeAttribute()
@@ -23,6 +23,5 @@ namespace Z0
         }
 
         public string[] Specifiers {get;}
-
     }
 }

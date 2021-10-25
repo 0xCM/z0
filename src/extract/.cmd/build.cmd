@@ -1,5 +1,5 @@
 @echo off
 
-set ProjectId=evaluate
+set ProjectId=expr
 call %ControlScripts%\build-lib.cmd
 

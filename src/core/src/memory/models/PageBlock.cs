@@ -16,6 +16,11 @@ namespace Z0
     [ApiComplete]
     public unsafe struct PageBlock
     {
+        /// <summary>
+        /// Windows page size = 4096 bytes
+        /// </summary>
+        public const uint PageSize = Pow2.T12;
+
         public MemoryRange Range {get;}
 
         [MethodImpl(Inline)]

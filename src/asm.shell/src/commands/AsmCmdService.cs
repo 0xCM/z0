@@ -50,8 +50,6 @@ namespace Z0.Asm
 
         NativeBufferSeq _NativeBuffers;
 
-        AddressMap _NativeAddressMap;
-
         CliMemoryMap ResPack;
 
         IPolyrand Random;
@@ -90,7 +88,6 @@ namespace Z0.Asm
             State = new AsmShellState();
             CodeBuffer = memory.native(_NativeBufferSize);
             _NativeBuffers = memory.native(new ByteSize[_NativeBufferCount]{_NativeBufferSize,_NativeBufferSize,_NativeBufferSize,_NativeBufferSize});
-            _NativeAddressMap = AddressMap.cover(_NativeBuffers);
             RoutineName = Identifier.Empty;
             CodeSize = 0;
             _Assembled = array<byte>();
@@ -144,11 +141,6 @@ namespace Z0.Asm
             return ResPack;
         }
 
-        AddressMap NativeAddressMap
-        {
-            [MethodImpl(Inline)]
-            get => _NativeAddressMap;
-        }
 
         [MethodImpl(Inline)]
         ref readonly NativeBufferSeq NativeBuffers()

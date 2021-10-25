@@ -53,16 +53,4 @@ namespace Z0.Vec
         BitWidth IBlittable.ContentWidth
             => Data.Length*1;
     }
-
-    partial struct api
-    {
-        [MethodImpl(Inline), Op]
-        public static vNx1<bool> v(N1 n, bool[] src)
-            => new vNx1<bool>(src);
-
-        [MethodImpl(Inline), Op]
-        public static vNx1<byte> v(N1 n, byte[] src)
-            => new vNx1<byte>(src);
-
-    }
 }

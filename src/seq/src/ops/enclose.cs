@@ -13,13 +13,9 @@ namespace Z0
 
     partial struct seq
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static EnclosedList<T> enclose<T>(SeqEnclosureKind kind, char delimiter, T[] src)
-            => new EnclosedList<T>(src, kind, delimiter);
-
         [MethodImpl(Inline)]
-        public static EnclosedList<T> enclose<T>(T[] src)
-            => enclose(SeqEnclosureKind.Embraced, Chars.Comma, src);
+        public static DelimitedList<T> enclose<T>(T[] src)
+            => list(src, Chars.Comma, SeqEnclosureKind.Embraced);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static EnclosedSpan<T> enclose<T>(SeqEnclosureKind kind, char delimiter, ReadOnlySpan<T> src)

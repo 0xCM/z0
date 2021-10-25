@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
 
+    [DataType("count<{0}>")]
     public struct Count<T> : ICount<Count<T>,T>
         where T : unmanaged
     {

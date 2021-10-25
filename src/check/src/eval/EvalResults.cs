@@ -49,7 +49,7 @@ namespace Z0
         public static CmpEval<T> eq<T>(T a, T b, bit result)
         {
             var dst = new CmpEval<T>();
-            dst.Kind = ComparisonKind.Eq;
+            dst.OpKind = CmpPredKind.EQ;
             dst.A = a;
             dst.B = b;
             dst.Result = result;
@@ -61,7 +61,7 @@ namespace Z0
         public static CmpEval<T> gt<T>(T a, T b, bit result)
         {
             var dst = new CmpEval<T>();
-            dst.Kind = ComparisonKind.Gt;
+            dst.OpKind = CmpPredKind.GT;
             dst.A = a;
             dst.B = b;
             dst.Result = result;
@@ -73,7 +73,7 @@ namespace Z0
         public static CmpEval<T> gteq<T>(T a, T b, bit result)
         {
             var dst = new CmpEval<T>();
-            dst.Kind = ComparisonKind.GtEq;
+            dst.OpKind = CmpPredKind.GE;
             dst.A = a;
             dst.B = b;
             dst.Result = result;
@@ -85,7 +85,7 @@ namespace Z0
         public static CmpEval<T> lt<T>(T a, T b, bit result)
         {
             var dst = new CmpEval<T>();
-            dst.Kind = ComparisonKind.Lt;
+            dst.OpKind = CmpPredKind.LT;
             dst.A = a;
             dst.B = b;
             dst.Result = result;
@@ -97,7 +97,7 @@ namespace Z0
         public static CmpEval<T> lteq<T>(T a, T b, bit result)
         {
             var dst = new CmpEval<T>();
-            dst.Kind = ComparisonKind.LtEq;
+            dst.OpKind = CmpPredKind.LE;
             dst.A = a;
             dst.B = b;
             dst.Result = result;

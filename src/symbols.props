@@ -56,17 +56,14 @@
     <Digital>$(Src)digital/z0.digital.csproj</Digital>
     <Dynamic>$(Src)dynamic/z0.dynamic.csproj</Dynamic>
     <DynamicLinq>$(Src)dynamic.linq/z0.dynamic.linq.csproj</DynamicLinq>
-    <DVec>$(Src)dvec/z0.dvec.csproj</DVec>
 
-    <Engine>$(Src)engine/z0.engine.csproj</Engine>
+    <Expr>$(Src)expr/z0.expr.csproj</Expr>
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
     <Events>$(Src)events/z0.events.csproj</Events>
     <External>$(Src)external/z0.external.csproj</External>
     <Extract>$(Src)extract/z0.extract.csproj</Extract>
 
-    <Files>$(Src)files/z0.files.csproj</Files>
     <Fsm>$(Src)fsm/z0.fsm.csproj</Fsm>
-    <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
 
     <Gen>$(Src)gen/z0.gen.csproj</Gen>
     <Glue>$(Src)glue/z0.glue.csproj</Glue>
@@ -74,7 +71,6 @@
     <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
 
     <Grids>$(Src)grids/z0.grids.csproj</Grids>
-    <GVec>$(Src)gvec/z0.gvec.csproj</GVec>
 
     <Hash>$(Src)hash/z0.hash.csproj</Hash>
     <Hex>$(Src)hex/z0.hex.csproj</Hex>
@@ -85,9 +81,8 @@
     <Logix>$(Src)logix/z0.logix.csproj</Logix>
 
     <Math>$(Src)math/z0.math.csproj</Math>
-    <MathSvc>$(Src)mathsvc/z0.mathsvc.csproj</MathSvc>
-    <Matrix>$(Src)matrix/z0.matrix.csproj</Matrix>
     <Machine>$(Src)machine/z0.machine.csproj</Machine>
+    <Machines>$(Src)machines/z0.machines.csproj</Machines>
     <Minidump>$(Src)minidump/z0.minidump.csproj</Minidump>
     <Models>$(Src)models/z0.models.csproj</Models>
 

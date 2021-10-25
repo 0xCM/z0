@@ -11,14 +11,14 @@ namespace Z0.Vdsl
     public struct CmpPred128<T>
         where T : unmanaged
     {
-        public CmpKind Kind {get;}
+        public CmpPredKind Kind {get;}
 
         public m128i<T> A {get;}
 
         public m128i<T> B {get;}
 
         [MethodImpl(Inline)]
-        public CmpPred128(CmpKind kind, m128i<T> a, m128i<T> b)
+        public CmpPred128(CmpPredKind kind, m128i<T> a, m128i<T> b)
         {
             Kind = kind;
             A = a;
@@ -27,7 +27,7 @@ namespace Z0.Vdsl
 
         public string Format()
         {
-            var syms = Symbols.index<CmpKind>();
+            var syms = Symbols.index<CmpPredKind>();
             var sym = syms[Kind].Expr;
             return string.Format("{0} {1} {2}", A, sym, B);
         }
