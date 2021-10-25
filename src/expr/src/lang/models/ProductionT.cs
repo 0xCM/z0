@@ -6,27 +6,24 @@ namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Root;
 
-    /// <summary>
-    /// Represents a sequence of dynamically-typed terms c0 | c1 | .. | cN-1
-    /// </summary>
-    public readonly struct Union : IUnion
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
+    public readonly struct Production<T> : IProduction<T>
+        where T : IExpr
     {
-        public Index<dynamic> Terms {get;}
+        public Label Name {get;}
+
+        public T Term {get;}
 
         [MethodImpl(Inline)]
-        public Union(Index<dynamic> choices)
-            => Terms = choices;
-
-        public uint N
+        public Production(Label name, T term)
         {
-            [MethodImpl(Inline)]
-            get => Terms.Count;
+            Name = name;
+            Term = term;
         }
-
-        public Label Name => "union";
 
         public string Format()
             => lang.format(this);

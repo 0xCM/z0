@@ -2,17 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Rules
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-
-    partial struct rules
+    public sealed class EbnfInstance : Grammar<EbnfInstance,AsciCharSym,EbnfRule>
     {
-        [MethodImpl(Inline), Op]
-        public static Union<T> union<T>(T[] terms)
-            => new Union<T>(terms);
+        public EbnfInstance(Label name)
+            : base(name, lang.alphabet<AsciCharSym>())
+        {
+
+        }
     }
 }

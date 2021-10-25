@@ -12,7 +12,8 @@ namespace Z0.Lang
     partial struct lang
     {
         [MethodImpl(Inline), Op]
-        public static Production<Union<T>> production<T>(Label name, Union<T> src)
-            => new Production<Union<T>>(name, src);
+        public static Production<T> production<T>(Label name, T term)
+            where T : IExpr
+                => new Production<T>(name, term);
     }
 }

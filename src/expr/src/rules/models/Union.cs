@@ -12,7 +12,7 @@ namespace Z0.Rules
     /// <summary>
     /// Represents a sequence of dynamically-typed terms c0 | c1 | .. | cN-1
     /// </summary>
-    public readonly struct Union : IExpr
+    public readonly struct Union : IUnion
     {
         public Index<dynamic> Terms {get;}
 
@@ -33,5 +33,5 @@ namespace Z0.Rules
 
         public override string ToString()
             => Format();
-    }    
+    }
 }

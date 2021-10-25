@@ -50,11 +50,5 @@ namespace Z0.Lang
             [MethodImpl(Inline)]
             get => (uint)Data.Members.Length;
         }
-
-        internal Atom<K>[] Storage
-        {
-            [MethodImpl(Inline)]
-            get => Data.Storage;
-        }
     }
 }

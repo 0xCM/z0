@@ -14,7 +14,7 @@ namespace Z0.Rules
         internal static string format<C>(in Test<C> src)
             where C : IExpr
                 => string.Format("?({0})", src.Condition);
-        
+
         internal static string format<A,B>(in Alt<A,B> src)
             => string.Format(XF.BinaryChoice, src.Left, src.Right);
 
@@ -149,7 +149,7 @@ namespace Z0.Rules
 
         internal static string format<T>(in Replace<T> src)
             => string.Concat(
-                string.Format("replace" + XF.AngledSlot0, typeof(T).Name), 
+                string.Format("replace" + XF.AngledSlot0, typeof(T).Name),
                 string.Format(XF.SourceToTarget, src.Match, src.Value)
                 );
 
@@ -164,7 +164,7 @@ namespace Z0.Rules
                 ref readonly var expr = ref src[i];
                 dst.Append(expr.Format());
                 if(i != count - 1)
-                    dst.Append(Delimiter);            
+                    dst.Append(Delimiter);
 
             }
             return dst.Emit();
@@ -179,13 +179,13 @@ namespace Z0.Rules
             for(var i=0; i<count; i++)
             {
                 ref readonly var product = ref src[i];
-                
+
                 dst.Append(Chars.LParen);
                 dst.Append(product.Format());
                 dst.Append(Chars.RParen);
 
                 if(i != count - 1)
-                    dst.Append(Delimiter);            
+                    dst.Append(Delimiter);
             }
 
             return dst.Emit();

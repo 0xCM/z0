@@ -12,7 +12,7 @@ namespace Z0.Rules
     /// <summary>
     /// Represents a sequence of parametrically-typed terms c0 | c1 | .. | cN-1
     /// </summary>
-    public readonly struct Union<T> : IExpr
+    public readonly struct Union<T> : IUnion<T>
     {
         readonly Index<T> _Data;
 
@@ -26,8 +26,7 @@ namespace Z0.Rules
             get => _Data.Count;
         }
 
-        public Label Name 
-            => "union<{0}>";
+        public Label Name => "union<{0}>";
 
         public Span<T> Terms
         {
@@ -48,5 +47,5 @@ namespace Z0.Rules
         [MethodImpl(Inline)]
         public static implicit operator Union(Union<T> src)
             => new Union(src._Data.Select(x => (dynamic)x));
-    }   
+    }
 }

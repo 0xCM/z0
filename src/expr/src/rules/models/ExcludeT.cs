@@ -26,7 +26,7 @@ namespace Z0.Rules
             get => _Data.Count;
         }
 
-        public Label Name 
+        public Label Name
             => "exclude<{0}>";
 
         public Span<T> Terms
@@ -54,5 +54,5 @@ namespace Z0.Rules
         [MethodImpl(Inline)]
         public static implicit operator Exclude(Exclude<T> src)
             => new Exclude(src._Data.Select(x => (dynamic)x));
-    }   
+    }
 }

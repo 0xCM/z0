@@ -12,10 +12,4 @@ namespace Z0.Expr
     {
 
     }
-    
-    public abstract class Context : IContext
-    {
-
-
-    }
 }
