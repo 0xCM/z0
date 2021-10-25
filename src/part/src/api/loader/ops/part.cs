@@ -9,9 +9,6 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Root;
-    using static core;
-
     partial struct ApiRuntimeLoader
     {
        /// <summary>

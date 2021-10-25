@@ -14,7 +14,7 @@ namespace Z0
     partial struct ApiRuntimeLoader
     {
         public static Assembly[] assemblies(bool justParts = true)
-            => assemblies(location(),justParts);
+            => assemblies(location(), justParts);
 
         public static Assembly[] assemblies(FS.FolderPath dir, bool justParts)
         {
