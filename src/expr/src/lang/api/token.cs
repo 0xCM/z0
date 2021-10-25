@@ -15,5 +15,9 @@ namespace Z0.Lang
         public static Token<S> token<S>(uint key, params Atom<S>[] src)
             where S : unmanaged
                 => new Token<S>(key, src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Token token(uint key, params Atom[] src)
+            => new Token(key, src);
     }
 }

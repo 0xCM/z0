@@ -8,17 +8,17 @@ namespace Z0.Lang
 
     using static Root;
 
-    public readonly struct Keyword
+    public readonly struct Keyword : ITerminal<Label>
     {
-        readonly Label Name;
+        public Label Value {get;}
 
         [MethodImpl(Inline)]
         public unsafe Keyword(string src)
-            => Name = src;
+            => Value = src;
 
         [MethodImpl(Inline)]
         public string Format()
-            => Name.Format();
+            => Value.Format();
 
         public override string ToString()
             => Format();

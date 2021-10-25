@@ -4,28 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using System;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ISymbol : IExpr
+    public interface ITerminal : IExpr
     {
-
+        dynamic Value {get;}
     }
 
     [Free]
-    public interface ISymbol<S> : ISymbol, IComparable<S>, IEquatable<S>
-        where S : unmanaged, ISymbol<S>
+    public interface ITerminal<T> : ITerminal
     {
-        uint Key {get;}
-    }
+        new T Value {get;}
 
-    [Free]
-    public interface ISymbol<S,K> : ISymbol<S>
-        where S : unmanaged, ISymbol<S>
-        where K : unmanaged
-    {
-        K Value {get;}
+        dynamic ITerminal.Value
+            => Value;
     }
 }

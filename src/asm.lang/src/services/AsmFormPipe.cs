@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-
     using static Msg;
 
     public class AsmFormPipe : RecordPipe<AsmFormPipe,AsmFormRecord>
@@ -19,10 +18,9 @@ namespace Z0.Asm
 
         }
 
-        public void HashFormIndex()
-        {
-
-        }
+        [MethodImpl(Inline)]
+        ref readonly string NextCell(ReadOnlySpan<string> src, ref uint i)
+            => ref skip(src, i++);
 
         public ReadOnlySpan<AsmFormExpr> LoadFormExpressions()
         {
@@ -163,7 +161,7 @@ namespace Z0.Asm
             }
         }
 
-        protected override Outcome ParseRow(TextLine src, out AsmFormRecord dst)
+        public Outcome ParseRow(TextLine src, out AsmFormRecord dst)
         {
             var parts = Cells(src.Content);
             var count = parts.Length;

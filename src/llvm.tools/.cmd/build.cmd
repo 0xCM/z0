@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=llvm
+set ProjectId=llvm.tools
 call %ControlScripts%\build-lib.cmd

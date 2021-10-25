@@ -97,10 +97,11 @@ namespace Z0.llvm
 
         public void ProjectCollect()
         {
-            ProjectCollect(Ws.Project(Projects.LlvmModels));
-            ProjectCollect(Ws.Project(Projects.ClangModels));
-            ProjectCollect(Ws.Project(Projects.McModels));
-            ProjectCollect(Ws.Project(Projects.Canonical));
+            iter(Projects.ProjectNames, name => ProjectCollect(Ws.Project(name)));
+            // ProjectCollect(Ws.Project(Projects.LlvmModels));
+            // ProjectCollect(Ws.Project(Projects.ClangModels));
+            // ProjectCollect(Ws.Project(Projects.McModels));
+            // ProjectCollect(Ws.Project(Projects.Canonical));
         }
 
         Outcome ProjectCollect(IProjectWs ws)

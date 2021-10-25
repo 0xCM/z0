@@ -17,7 +17,7 @@ namespace Z0.Expr
         readonly Grid<Atom<K>> Transitions;
 
         public TableDfa(Alphabet<A> alphabet, DfaState<K>[] states, DfaState<K>[] terminals, DfaState<K> s0, Grid<Atom<K>> transitions)
-            : base(alphabet,states,terminals,s0)
+            : base(alphabet, states, terminals, s0)
         {
             Transitions = transitions;
         }
@@ -29,7 +29,7 @@ namespace Z0.Expr
             if(i < Transitions.RowCount && j<Transitions.ColCount)
             {
                 var order = Transitions.ColCount*i + j;
-                return api.state((int)order, Transitions[i,j]);
+                return Dfa.state((int)order, Transitions[i,j]);
             }
 
             return default;

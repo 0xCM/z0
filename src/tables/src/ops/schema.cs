@@ -17,16 +17,14 @@ namespace Z0
             var count = fields.Length;
             if(count == 0)
                 return TableSchema.Empty;
-
-            var id = TableId.identify(src);
-            var specs = sys.alloc<RecordFieldSpec>(count);
+            var specs = alloc<RecordFieldSpec>(count);
             ref var spec = ref first(specs);
             for(ushort i=0; i<count; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                seek(spec,i) = new RecordFieldSpec(i, RecordFields.name(field), field.FieldType.Name);
+                seek(spec,i) = new RecordFieldSpec(i, field.Name, field.FieldType.Name);
             }
-            return new TableSchema(id, specs);
+            return new TableSchema(TableId.identify(src), specs);
         }
     }
 }

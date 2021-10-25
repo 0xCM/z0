@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+
     partial struct Tables
     {
         /// <summary>
@@ -33,10 +34,5 @@ namespace Z0
         public static IRecordFormatter<T> formatter<T>(byte fieldwidth = DefaultFieldWidth, ushort rowpad = 0)
             where T : struct
                 => formatter<T>(rowspec<T>(fieldwidth, rowpad));
-
-        public static IRecordFormatter<T> formatter<E,T>(ushort rowpad = 0)
-            where E : unmanaged, Enum
-            where T : struct
-                => formatter<T>(rowspec<T>(Enums.numeric<E,byte>(), rowpad));
     }
 }

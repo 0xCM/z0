@@ -34,9 +34,13 @@ namespace Z0.llvm
 
             public const string ClangModels = "clang.models";
 
+            public const string ClangAlgs = "clang.algs";
+
             public const string McModels = "mc.models";
 
             public const string LlvmData = "llvm.data";
+
+            public static string[] ProjectNames = new string[]{Canonical,LlvmModels,ClangModels,McModels,LlvmData, ClangAlgs};
         }
     }
 }

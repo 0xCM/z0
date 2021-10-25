@@ -13,6 +13,10 @@ namespace Z0
 
     partial struct strings
     {
+        [MethodImpl(Inline), Op]
+        public static Word word(char[] src)
+            => new Word(src);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static WordRef<S> word<S>(in WordRefs<S> src, ulong index, ulong length)
             where S : unmanaged

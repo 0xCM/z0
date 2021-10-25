@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
 
+    using static Root;
+    using static core;
+
     partial struct Tables
     {
         /// <summary>
@@ -15,7 +18,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static RecordField[] fields<T>()
             where T : struct
-                => RecordFields.discover<T>();
+                => fields(typeof(T));
 
         /// <summary>
         /// Discerns a <see cref='RecordFields'/> for a specified record type
@@ -23,6 +26,17 @@ namespace Z0
         /// <param name="src">The record type</typeparam>
         [Op]
         public static RecordField[] fields(Type src)
-            => RecordFields.discover(src);
+        {
+            var fields = src.DeclaredPublicInstanceFields().ToReadOnlySpan();
+            var count = fields.Length;
+            var buffer = sys.alloc<RecordField>(count);
+            ref var dst = ref first(buffer);
+            for(var i=z16; i<count; i++)
+            {
+                ref readonly var f = ref skip(fields,i);
+                seek(dst, i) = new RecordField(i, f, f.Name);
+            }
+            return buffer;
+        }
     }
 }

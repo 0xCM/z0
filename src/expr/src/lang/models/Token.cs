@@ -9,21 +9,17 @@ namespace Z0.Lang
 
     using static Root;
 
-    /// <summary>
-    /// The textbook definition of a string - a finite sequence of letters from som alphabet
-    /// </summary>
-    public readonly struct Token<K> : IExpr
-        where K : unmanaged
+    public readonly struct Token : IExpr
     {
         public uint Key {get;}
 
-        readonly Index<Atom<K>> Data;
+        readonly Index<Atom> Data;
 
         [MethodImpl(Inline)]
-        public Token(uint key, Atom<K>[] value)
+        public Token(uint key, Atom[] src)
         {
             Key = key;
-            Data = value;
+            Data = src;
         }
 
         public int Length
@@ -50,13 +46,13 @@ namespace Z0.Lang
             get => Data.IsNonEmpty;
         }
 
-        public ref Atom<K> this[uint i]
+        public ref Atom this[uint i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];
         }
 
-        public ref Atom<K> this[int i]
+        public ref Atom this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];

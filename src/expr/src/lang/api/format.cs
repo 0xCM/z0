@@ -21,5 +21,34 @@ namespace Z0.Lang
         internal static string format(in StringLiteral src)
             => string.Format(XF.Definition, src.Name, RP.enquote(src.Value));
 
+        internal static string format(in Token src)
+        {
+            Span<char> buffer = stackalloc char[src.Length];
+            for(var i=0; i<src.Length; i++)
+                seek(buffer,i) = src[i];
+            return text.format(buffer);
+        }
+
+        internal static string format<K>(in Token<K> src)
+            where K : unmanaged
+        {
+            var dst = text.buffer();
+            for(var i=0; i<src.Length; i++)
+                dst.Append(src[i].Format());
+            return dst.Emit();
+        }
+
+        internal static string format<K>(in Alphabet<K> src)
+            where K : unmanaged
+        {
+            var dst = text.buffer();
+            var count = src.MemberCount;
+            dst.AppendFormat("{0}:{{", src.Name);
+            for(var i=0; i<count; i++)
+                dst.Append(src[i].Format());
+            dst.Append("}");
+            return dst.Emit();
+        }
+
     }
 }

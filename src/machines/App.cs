@@ -8,8 +8,6 @@ namespace Z0.Machines
     using System.Threading.Tasks;
 
     using X86;
-    using Expr;
-    using Flows;
 
     using static Root;
     using static core;
@@ -30,18 +28,6 @@ namespace Z0.Machines
         {
             TM = TestMachine.create(Wf);
             TM.Run();
-        }
-
-
-        void RunSorters()
-        {
-            var sorter = Networks.sorting<byte>();
-            byte x0 = 9, x1 = 5, x2 = 2, x3 = 6;
-            sorter.Send(x0,x1,x2,x3, out var y0, out var y1, out var y2, out var y3);
-            Write(string.Format("{0} -> {1}", x0, y0));
-            Write(string.Format("{0} -> {1}", x1, y1));
-            Write(string.Format("{0} -> {1}", x2, y2));
-            Write(string.Format("{0} -> {1}", x3, y3));
         }
 
 

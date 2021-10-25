@@ -14,6 +14,7 @@
     <PackageReference Include="z0.asm" Version="$(ZVer)" />
     <PackageReference Include="z0.pipes" Version="$(ZVer)" />
     <PackageReference Include="z0.calc" Version="$(ZVer)" />
+    <PackageReference Include="z0.bits" Version="$(ZVer)" />
   </ItemGroup>
 
   <ItemGroup>

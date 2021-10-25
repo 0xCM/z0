@@ -27,5 +27,8 @@ namespace Z0
 
         public string Format()
             => string.Format("[{0} {1}:{2}]", FieldIndex, FieldName, DataType);
+
+        public override string ToString()
+            => Format();
     }
 }

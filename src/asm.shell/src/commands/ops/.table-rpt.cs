@@ -4,16 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static core;
-
-    using static ProjectScriptNames;
-    using static WsAtoms;
-
     partial class AsmCmdService
     {
-        [CmdOp(".c-ast")]
-        Outcome DumpCAst(CmdArgs args)
-            => RunProjectScript(args, DumpAst, c);
-
+        [CmdOp(".table-rpt")]
+        Outcome EmitTableReport(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            EmitTableReport(Ws.Tables().Root + FS.file("tabledefs", "rpt"));
+            return result;
+        }
     }
 }

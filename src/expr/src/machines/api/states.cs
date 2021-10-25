@@ -11,8 +11,7 @@ namespace Z0.Expr
 
     using Lang;
 
-
-    partial struct api
+    partial struct Dfa
     {
         [Op]
         public static Index<DfaState<uint>> states(W32 w, uint count)

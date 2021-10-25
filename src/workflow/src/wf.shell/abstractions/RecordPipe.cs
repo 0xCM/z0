@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-    using static core;
 
     public abstract class RecordPipe<H,T> : AppService<H>
         where H : RecordPipe<H,T>, new()
@@ -21,7 +17,6 @@ namespace Z0
             Fields = Tables.fields<T>();
             FieldCount = Fields.Count;
             Formatter = Tables.formatter<T>();
-            Parser = Tables.parser<T>(ParseRow, (byte)FieldCount, FieldDelimiter);
         }
 
         protected char FieldDelimiter {get;}
@@ -34,19 +29,7 @@ namespace Z0
 
         protected IRecordFormatter<T> Formatter {get;}
 
-        protected IRecordParser<T> Parser {get;}
-
         public static T NewRecord() => new T();
-
-        [MethodImpl(Inline)]
-        protected ref readonly string NextCell(ReadOnlySpan<string> src, ref uint i)
-            => ref skip(src, i++);
-
-        protected virtual Outcome ParseRow(TextLine src, out T dst)
-        {
-            dst = default;
-            return false;
-        }
 
         public string Format(in T src)
             => Formatter.Format(src);

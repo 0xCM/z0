@@ -36,6 +36,12 @@ namespace Z0.Lang
             get => Data[key];
         }
 
+        public Atom<K> this[int key]
+        {
+            [MethodImpl(Inline)]
+            get => Data[(uint)key];
+        }
+
         /// <summary>
         /// The symbols that comprise the alpabet
         /// </summary>
@@ -50,5 +56,11 @@ namespace Z0.Lang
             [MethodImpl(Inline)]
             get => (uint)Data.Members.Length;
         }
+
+        public string Format()
+            => lang.format(this);
+
+        public override string ToString()
+            => Format();
     }
 }

@@ -11,7 +11,7 @@ namespace Z0.Expr
 
     using static Root;
 
-    partial struct api
+    partial struct Dfa
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static DfaState<T> state<T>(int order, Atom<T> src)

@@ -7,33 +7,34 @@ namespace Z0.Lang
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     /// <summary>
     /// A terminal atomic
     /// </summary>
-    public readonly struct Atom<K> : ISymbol<Atom<K>,K>, ITerminal<K>
-        where K : unmanaged
+    public readonly struct Atom : ISymbol<Atom,char>, ITerminal<char>
     {
-        public uint Key {get;}
-
-        public K Value {get;}
+        public char Value {get;}
 
         [MethodImpl(Inline)]
-        public Atom(uint key, K value)
+        public Atom(char value)
         {
-            Key = key;
             Value = value;
+        }
+
+        public uint Key
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Value;
         }
 
         [MethodImpl(Inline)]
 
-        public bool Equals(Atom<K> src)
-            => Key == src.Key && bw64(Value).Equals(bw64(src.Value));
+        public bool Equals(Atom src)
+            => src.Value == Value;
 
         [MethodImpl(Inline)]
-        public int CompareTo(Atom<K> src)
-            => bw64(Value).CompareTo(bw64(src.Value));
+        public int CompareTo(Atom src)
+            => Value.CompareTo(src.Value);
 
         public string Format()
             => Value.ToString();
@@ -45,20 +46,20 @@ namespace Z0.Lang
             => (int)Key;
 
         public override bool Equals(object src)
-            => src is Atom<K> s && Equals(s);
+            => src is Atom a && Equals(a);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(Atom<K> a, Atom<K> b)
+        public static bool operator ==(Atom a, Atom b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(Atom<K> a, Atom<K> b)
+        public static bool operator !=(Atom a, Atom b)
             => !a.Equals(b);
 
-        public static Atom<K> Empty => default;
+        public static Atom Empty => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator K(Atom<K> src)
+        public static implicit operator char(Atom src)
             => src.Value;
     }
 }

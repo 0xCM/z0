@@ -35,6 +35,8 @@ namespace Z0.Expr
 
         Token26 Token;
 
+        bool Accepted;
+
         // dog
         // cat
         // fox
@@ -51,26 +53,25 @@ namespace Z0.Expr
         // (0,'c'), (1,'h'), (2,'i'), (3,'c'), (4,'k'), (5,'e'), (6,'n')
 
         [Op]
-        public Token26 Process(ReadOnlySpan<char> src)
+        public Token26 Match(ReadOnlySpan<char> src)
         {
             Depth = 0;
             Token = 0;
+            Accepted = false;
             var count = src.Length;
             var accepted = false;
             for(var i=0; i<count; i++)
             {
-                ref readonly var a = ref skip(src,i);
-                accepted = Match((A)a);
-                if(!accepted)
+                Match((A)skip(src,i));
+                if(!Accepted)
                     break;
             }
             return Token;
         }
 
         [Op]
-        bool Match(A input)
+        void Match(A input)
         {
-            var accepted = false;
             switch(input)
             {
                 case a:
@@ -79,120 +80,102 @@ namespace Z0.Expr
                     {
                         // c(a)t
                         case 1:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case b:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case c:
                 {
                     switch(Depth)
                     {
                         // (c)at, (c)hicken
                         case 0:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
                         // chi(c)ken
                         case 3:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case d:
                 {
                     switch(Depth)
                     {
                         // (d)og
                         case 0:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
                         // houn(d)
                         case 4:
-                            accepted = true;
-                            Depth++;
                             Token = Token26.Hound;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case e:
                 {
                     switch(Depth)
                     {
                         // chick(e)n
                         case 5:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case f:
                 {
                     switch(Depth)
                     {
                         // (f)ox
                         case 0:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case g:
                 {
                     switch(Depth)
                     {
                         case 2:
-                            accepted = true;
-                            Depth++;
                             Token = Token26.Dog;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case h:
                 {
                     switch(Depth)
                     {
                         // (h)ound
                         case 0:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
                         // c(h)icken
                         case 1:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case i:
                 {
                     switch(Depth)
                     {
                         // ch(i)cken
                         case 2:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
                     }
                 }
                 break;
@@ -201,204 +184,173 @@ namespace Z0.Expr
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case k:
                 {
                     switch(Depth)
                     {
                         // chic(k)en
                         case 4:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case l:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case m:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case n:
                 {
                     switch(Depth)
                     {
                         // hou(n)d
                         case 3:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
                         // chicke(n)
                         case 6:
-                            accepted = true;
-                            Depth++;
                             Token = Token26.Chicken;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case o:
                 {
                     switch(Depth)
                     {
                         // d(o)g, f(o)x, ho(u)nd
                         case 1:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case p:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case q:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case r:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case s:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case t:
                 {
                     switch(Depth)
                     {
                         // ca(t)
                         case 2:
-                            accepted = true;
-                            Depth++;
                             Token = Token26.Cat;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case u:
                 {
                     switch(Depth)
                     {
                         // ho(u)nd
                         case 2:
-                            accepted = true;
-                            Depth++;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case v:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case w:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case x:
                 {
                     switch(Depth)
                     {
                         // fo(x)
                         case 2:
-                            accepted = true;
-                            Depth++;
                             Token = Token26.Fox;
-                        break;
+                            goto Next;
+                        default:
+                            goto Reject;
                     }
                 }
-                break;
                 case y:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
                 case z:
                 {
                     switch(Depth)
                     {
                         default:
-                            accepted = false;
-                            Depth = 0;
-                        break;
+                            goto Reject;
                     }
                 }
-                break;
+                default:
+                    goto Reject;
             }
-            return accepted;
+
+            Next:
+                Accepted = true;
+                Depth++;
+                return;
+            Reject:
+                Accepted = false;
+                Depth = 0;
+            return;
         }
     }
 }

@@ -35,5 +35,11 @@ namespace Z0.Expr
             [MethodImpl(Inline)]
             get => Symbol.Key;
         }
+
+        public string Format()
+            => Symbol.Format();
+
+        public override string ToString()
+            => Format();
     }
 }
