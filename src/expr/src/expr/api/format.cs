@@ -7,7 +7,20 @@ namespace Z0.Expr
     using XF = ExprFormats;
 
     partial struct expr
-    {        
+    {
+       public static string format<S,T>(in OpEvalCapture<S,T> src)
+            => string.Format(XF.Eval, src.Actor.OpName, src.Input, src.Output);
+
+        public static string format<S>(in OpEvalCapture<S> src)
+            => string.Format(XF.Eval, src.Actor.OpName, src.Input, src.Output);
+
+        public static string format<O,S,T>(in OpEvalCapture<O,S,T> src)
+            where O : IOp
+                => string.Format(XF.Eval, src.Actor.OpName, src.Input, src.Output);
+
+        public static string format(in OpEvalCapture src)
+            => string.Format(XF.Eval, src.Actor.OpName, src.Input, src.Output);
+
         public static string format(Scope src)
             => src.IsRoot ? src.Name.Format() : string.Format(XF.SourceToTarget, src.Name, src.Parent);
 
@@ -22,7 +35,7 @@ namespace Z0.Expr
 
         internal static string format(in BoundVar src)
             => string.Format(XF.Binding, src.Var.Name, src.Value);
-        
+
         internal static string format<F,K>(OpExpr1<F,K> src)
             where F : OpExpr1<F,K>
             where K : unmanaged

@@ -7,6 +7,8 @@ namespace Z0.llvm
     using System;
     using System.Collections.Generic;
 
+    using records;
+
     /// <summary>
     /// Collects the records produced by the etl process
     /// </summary>
@@ -29,7 +31,5 @@ namespace Z0.llvm
        public LineMap<Identifier> DefMap;
 
        public LineMap<Identifier> ClassMap;
-
-
    }
 }

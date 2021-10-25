@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Eval
+namespace Z0.Expr
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -11,26 +11,30 @@ namespace Z0.Eval
     using static Root;
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct OpEvalCapture<S,T> : IOpEvalCapture<S,T>
+    public readonly struct OpEvalCapture<S> : IOpEvalCapture<S>
     {
         public IOp Actor {get;}
-        
+
         public S Input {get;}
 
-        public T Output {get;}
+        public dynamic Output {get;}
 
         [MethodImpl(Inline)]
-        public OpEvalCapture(IOp actor, S src, T result)
+        public OpEvalCapture(IOp op, S src, dynamic result)
         {
-            Actor = actor;
+            Actor = op;
             Input = src;
             Output = result;
         }
 
         public string Format()
-            => api.format(this);
+            => expr.format(this);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator OpEvalCapture(OpEvalCapture<S> src)
+            => new OpEvalCapture(src.Actor, src.Input, src.Output);
     }
 }

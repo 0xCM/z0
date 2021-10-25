@@ -2,31 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.llvm
 {
-    using llvm;
     using static core;
 
-    partial class AsmCmdService
+    partial class LlvmCmd
     {
-        [CmdOp(".llvm-ocspecs")]
-        Outcome LlvmOcSpecs(CmdArgs args)
+        [CmdOp(".opcodes")]
+        Outcome EmitOpCodes(CmdArgs args)
         {
             var result = Outcome.Success;
             var src = llvm.MC.opcodes().View;
-            var formatter = Tables.formatter<OpCodeSpec>(OpCodeSpec.RenderWidths);
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var code = ref skip(src,i);
-                Write(formatter.Format(code));
-            }
-
+            var dst = LlvmData.TablePath<OpCodeSpec>();
+            TableEmit(src, OpCodeSpec.RenderWidths, dst);
             return result;
         }
 
-        [CmdOp(".llvm-ocstrings")]
-        public Outcome LlvmOcStrings(CmdArgs args)
+        [CmdOp(".asmid")]
+        public Outcome ShowAsmIdList(CmdArgs args)
         {
             var result = Outcome.Success;
             var strings = llvm.Strings.OpCodes;

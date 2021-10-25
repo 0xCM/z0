@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
+    using static core;
+
     partial class LlvmCmd
     {
         [CmdOp(".bitfields")]
@@ -26,5 +28,6 @@ namespace Z0.llvm
 
             Field3 = 2,
         }
+
     }
 }

@@ -6,6 +6,8 @@ namespace Z0.llvm
 {
     using System;
 
+    using records;
+
     using static core;
 
     partial class EtlWorkflow

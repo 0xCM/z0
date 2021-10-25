@@ -6,9 +6,11 @@ namespace Z0.llvm
 {
     using System;
 
+    using records;
+
     using static core;
 
-    using F = llvm.TableGenField;
+    using F = llvm.records.TableGenField;
 
     partial class EtlWorkflow
     {

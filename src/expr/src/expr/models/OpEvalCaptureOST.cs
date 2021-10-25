@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Eval
+namespace Z0.Expr
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,17 +10,23 @@ namespace Z0.Eval
 
     using static Root;
 
+    /// <summary>
+    /// Defines an evaulation which is, byt definition, the triple (O,S,T)
+    /// where O is an operation type, S is an input type and T is type of value produce
+    /// when an O value is applied to an S value
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct OpEvalCapture : IOpEvalCapture
+    public readonly struct OpEvalCapture<O,S,T> : IOpEvalCapture<O,S,T>
+        where O : IOp
     {
-        public IOp Actor {get;}
+        public O Actor {get;}
 
-        public dynamic Input {get;}
+        public S Input {get;}
 
-        public dynamic Output {get;}
+        public T Output {get;}
 
         [MethodImpl(Inline)]
-        public OpEvalCapture(IOp op, dynamic src, dynamic result)
+        public OpEvalCapture(O op, S src, T result)
         {
             Actor = op;
             Input = src;
@@ -28,7 +34,7 @@ namespace Z0.Eval
         }
 
         public string Format()
-            => api.format(this);
+            => expr.format(this);
 
         public override string ToString()
             => Format();

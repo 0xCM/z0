@@ -2,16 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Expr
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using Z0.Eval;
-
     [Free]
     public interface IOpEval
-    {        
-        Outcome<OpEvalCapture> Evaluate(IOp op);        
+    {
+        Outcome<OpEvalCapture> Evaluate(IOp op);
     }
 
     [Free]
@@ -28,7 +26,7 @@ namespace Z0
                 return new OpEvalCapture<S>(op, Body, output);
             else
                 return false;
-        }        
+        }
 
         Outcome<OpEvalCapture> IOpEval.Evaluate(IOp op)
         {
@@ -50,14 +48,14 @@ namespace Z0
             else
                 return false;
         }
-    
+
         Outcome<OpEvalCapture<S>> IOpEval<S>.Evaluate(IOp<S> op)
         {
             var outcome = Evaluate((IOp<S,T>)op);
             if(outcome)
             {
                 var data = outcome.Data;
-                return new Outcome<OpEvalCapture<S>>(true, 
+                return new Outcome<OpEvalCapture<S>>(true,
                     new OpEvalCapture<S>(data.Actor, data.Input, data.Output)
                     );
             }
@@ -68,7 +66,7 @@ namespace Z0
 
     public interface IExprEval<O,S,T> : IOpEval<S,T>
         where O : IOp<S,T>
-    {        
+    {
         Outcome<OpEvalCapture<O,S,T>> Evaluate(O op)
         {
             var success = OpSvc.Eval(Body, out var output);
@@ -84,7 +82,7 @@ namespace Z0
             if(outcome)
             {
                 var data = outcome.Data;
-                return new Outcome<OpEvalCapture<S,T>>(true, 
+                return new Outcome<OpEvalCapture<S,T>>(true,
                     new OpEvalCapture<S,T>(data.Actor, data.Input, data.Output)
                     );
             }

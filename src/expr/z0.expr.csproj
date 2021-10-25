@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <ZVer>0.0.38</ZVer>
+    <ZVer>0.0.39</ZVer>
   </PropertyGroup>
 
   <ItemGroup>

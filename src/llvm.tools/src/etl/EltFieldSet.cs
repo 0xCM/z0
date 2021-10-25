@@ -5,6 +5,7 @@
 namespace Z0.llvm
 {
     using System;
+    using records;
 
     public ref struct EltFieldSet
     {

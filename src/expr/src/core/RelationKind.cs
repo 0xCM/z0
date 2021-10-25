@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public enum RelationKind : byte
     {
         None,
@@ -21,5 +20,4 @@ namespace Z0
 
         Parametric
     }
-
 }

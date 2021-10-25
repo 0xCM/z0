@@ -60,7 +60,5 @@ namespace Z0.Machines
             var name = src.Name;
             return string.Format("{0} {1} {2}:{3}",name, (char)LogicSym.Def, tbl, val);
         }
-
-
     }
 }

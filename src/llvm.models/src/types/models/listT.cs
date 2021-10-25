@@ -9,9 +9,9 @@ namespace Z0.llvm
 
     using static Root;
 
-    partial struct Types
+    partial struct DataTypes
     {
-        public struct list<T> : ITerm
+        public class list<T> : ITerm
         {
             public const string Identifier = "list<{0}>";
 

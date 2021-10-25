@@ -6,6 +6,8 @@ namespace Z0.llvm
 {
     using System;
 
+    using records;
+
     partial class EtlWorkflow
     {
         ReadOnlySpan<DefRelations> ImportDefRelations(ReadOnlySpan<TextLine> src)

@@ -6,6 +6,8 @@ namespace Z0.llvm
 {
     using System;
 
+    using records;
+
     using static core;
 
     partial class LlvmCmd
@@ -13,21 +15,24 @@ namespace Z0.llvm
         [CmdOp(".relations")]
         Outcome RecordRelations(CmdArgs args)
         {
-            var result = Outcome.Success;
-            var src = LlvmEtl.LoadSourceRecords(EtlNames.Datasets.X86);
-            var distiller = new DefRelationDistiller();
-            var relations = distiller.DistillRelations(src);
-            var pathA = LlvmPaths.ImportTable("llvm.defs.relations.test");
-            TableEmit(relations, DefRelations.RenderWidths, pathA);
 
-            var hydrated = LoadDefRelations(pathA);
-            var pathB = LlvmPaths.ImportTable("llvm.defs.relations.test.loaded");
-            TableEmit(hydrated, DefRelations.RenderWidths, pathB);
+            var result = Outcome.Success;
+            var src = LlvmPaths.ImportTable<DefRelations>();
+            var records = LoadDefRelationNodes(src);
+            // var src = LlvmEtl.LoadSourceRecords(EtlNames.Datasets.X86);
+            // var distiller = new DefRelationDistiller();
+            // var relations = distiller.DistillRelations(src);
+            // var pathA = LlvmPaths.ImportTable("llvm.defs.relations.test");
+            // TableEmit(relations, DefRelations.RenderWidths, pathA);
+
+            // var hydrated = LoadDefRelations(pathA);
+            // var pathB = LlvmPaths.ImportTable("llvm.defs.relations.test.loaded");
+            // TableEmit(hydrated, DefRelations.RenderWidths, pathB);
 
             return result;
         }
 
-        ReadOnlySpan<DefRelations> LoadDefRelations(FS.FilePath src)
+        ReadOnlySpan<DefRelations> LoadDefRelationNodes(FS.FilePath src)
         {
             var dst = list<DefRelations>();
             var format = TextDocFormat.Structured();
@@ -54,12 +59,22 @@ namespace Z0.llvm
                     var j=0;
                     result += DataParser.parse(row[j++].Text, out record.SourceLine);
                     result += DataParser.parse(row[j++].Text, out record.Name);
-                    result += Lineage.parse(row[j++], out record.Ancestors);
-                    dst.Add(record);
-                    if(i !=0 && i % 10000 == 0)
+                    var ancestors = row[j++].Text;
+                    if(empty(ancestors))
                     {
-                        Write(string.Format("Loaded {0} records", i));
+
                     }
+                    else if(ancestors.Contains("->"))
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+
+                    // result += Lineage.parse(row[j++], out record.Ancestors);
+                    // dst.Add(record);
                 }
             }
             return dst.ViewDeposited();

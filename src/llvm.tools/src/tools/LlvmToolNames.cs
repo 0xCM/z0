@@ -7,7 +7,6 @@ namespace Z0
     [LiteralProvider]
     public readonly struct LlvmToolNames
     {
-
         public const string clang_query = "clang-query";
 
         public const string llvm_nm = "llvm-nm";

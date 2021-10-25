@@ -2,17 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.llvm
 {
     using System;
+    using System.Runtime.InteropServices;
 
-    public class EvaluatorAttribute : Attribute
+    public readonly partial struct DataTypes
     {
-        public EvaluatorAttribute(Type t)
-        {
-            SourceType = t;
-        }
+        const LayoutKind Layout = LayoutKind.Sequential;
 
-        public Type SourceType {get;}
+        const NumericKind Closure = NumericKind.UnsignedInts;
     }
 }

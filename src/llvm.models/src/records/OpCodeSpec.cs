@@ -18,7 +18,7 @@ namespace Z0.llvm
 
         public AsmId Id;
 
-        public CharBlock16 Mnemonic;
+        public CharBlock48 Mnemonic;
 
         public Hex64 OpCodeValue;
 
@@ -28,6 +28,6 @@ namespace Z0.llvm
             => Id.CompareTo(src.Id);
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{8,32,16,16,24};
+            => new byte[FieldCount]{8,32,48,16,24};
     }
 }

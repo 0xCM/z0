@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>machines</AssemblyName>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <ZVer>0.0.38</ZVer>
+    <ZVer>0.0.39</ZVer>
   </PropertyGroup>
 
   <ItemGroup>

@@ -36,8 +36,6 @@ namespace Z0
 
         const string LeftToRight = " -> ";
 
-        const string RightToLeft = " <- ";
-
         public static Outcome parse(string src, out Lineage dst)
         {
             if(src.Contains(LeftToRight))
