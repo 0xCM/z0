@@ -28,6 +28,5 @@ namespace Z0.llvm
 
             Field3 = 2,
         }
-
     }
 }

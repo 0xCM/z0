@@ -4,13 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
+    using System;
     using System.Collections.Generic;
 
     using Asm;
     using records;
 
     using static EtlNames;
-
+    using static Root;
     using static core;
 
     public partial class EtlWorkflow : AppService<EtlWorkflow>
@@ -55,12 +56,12 @@ namespace Z0.llvm
             var dst = new EtlDatasets();
             var records = LoadSourceRecords(Datasets.X86);
             dst.Records = records;
-            ImportRecordLines(records, Datasets.X86Lined);
-            var lists = ImportLists();
+            EmitLinedRecords(records, Datasets.X86Lined);
+            var lists = EmitListTables();
             dst.Lists = lists;
-            var classes = ImportClassRelations(records);
+            var classes = EmitClassRelations(records);
             dst.ClassRelations = classes;
-            var defs = ImportDefRelations(records);
+            var defs = EmitDefRelations(records);
             dst.DefRelations = defs;
             var defMap = EmitLineMap(defs, records, Datasets.X86Defs);
             dst.DefMap = defMap;
@@ -77,9 +78,33 @@ namespace Z0.llvm
             CollectProjectData();
 
             GenCode(dst);
-            GenDocs(dst);
+            //GenDocs(dst);
 
             return true;
+        }
+
+        void DistillEntityRelations(ReadOnlySpan<ClassRelations> src)
+        {
+            var distinct = hashset<string>();
+            iter(src, @class => distinct.Add(@class.Name));
+            using var buffer = strings.buffer(distinct.ToReadOnlySpan());
+            var view = buffer.View;
+            var hashmap = dict<uint,Label>();
+            var length = z8;
+            for(var i=0u; i<view.Length; i++)
+            {
+                ref readonly var c = ref skip(view,i);
+                if(c == AsciNull.Literal)
+                {
+
+                }
+                else
+                {
+                    length++;
+
+                }
+            }
+
         }
 
         void GenCode(in EtlDatasets src)

@@ -8,15 +8,14 @@ namespace Z0.llvm
 
     using records;
 
-    using static core;
     using static Root;
+    using static core;
 
-    public sealed class DefRelationDistiller : RelationDistiller<DefRelations>
+    partial class EtlWorkflow
     {
-        public override ReadOnlySpan<DefRelations> DistillRelations(ReadOnlySpan<TextLine> src)
+        ReadOnlySpan<DefRelations> EmitDefRelations(ReadOnlySpan<TextLine> src)
         {
             const string Marker = "def ";
-
             var dst = list<DefRelations>();
             var name = EmptyString;
             for(var i=0; i<src.Length; i++)
@@ -34,14 +33,15 @@ namespace Z0.llvm
                         if(empty(name) || text.member(name, ClassExclusions))
                             continue;
 
-                        record.Name = name;
-                        record.SourceLine = line.LineNumber;
-                        GetAncestors(content, out record.Ancestors);
+                        ParseLineage(content, out var a);
+                        record.Specify(line.LineNumber, name, a);
                         dst.Add(record);
                     }
                 }
             }
-            return dst.ViewDeposited();
+            var collected = dst.ViewDeposited();
+            TableEmit(collected, DefRelations.RenderWidths, LlvmPaths.Table<DefRelations>());
+            return collected;
         }
     }
 }

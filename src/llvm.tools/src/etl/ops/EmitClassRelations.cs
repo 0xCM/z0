@@ -16,7 +16,7 @@ namespace Z0.llvm
     partial class EtlWorkflow
     {
         // class AES8I<bits<8> AES8I:o = { ?, ?, ?, ?, ?, ?, ?, ? }, Format AES8I:F = ?, dag AES8I:outs = ?, dag AES8I:ins = ?, string AES8I:asm = ?, list<dag> AES8I:pattern = ?> {	// InstructionEncoding Instruction X86Inst I T8 T8PD Requires
-        ReadOnlySpan<ClassRelations> ImportClassRelations(ReadOnlySpan<TextLine> src)
+        ReadOnlySpan<ClassRelations> EmitClassRelations(ReadOnlySpan<TextLine> src)
         {
             const string Marker = "class ";
             var lines = list<TextLine>();
@@ -49,7 +49,7 @@ namespace Z0.llvm
                         var record = new ClassRelations();
                         record.SourceLine = line.LineNumber;
                         record.Name = name;
-                        ancestors(content, out record.Ancestors);
+                        ParseLineage(content, out record.Ancestors);
                         record.Parameters = parameters;
                         dst.Add(record);
                     }

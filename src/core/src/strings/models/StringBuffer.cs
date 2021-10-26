@@ -82,5 +82,17 @@ namespace Z0.Strings
         [MethodImpl(Inline)]
         public Label StoreLabel(ReadOnlySpan<char> src, uint offset)
             => Labels.label(src, offset, this);
+
+        public Span<char> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Buffer.Edit;
+        }
+
+        public ReadOnlySpan<char> View
+        {
+            [MethodImpl(Inline)]
+            get => Buffer.View;
+        }
     }
 }

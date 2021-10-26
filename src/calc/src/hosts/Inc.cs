@@ -10,9 +10,6 @@ namespace Z0
 
     using static Root;
     using static SFx;
-    using static SpanBlocks;
-
-    using K = ApiClasses;
 
     partial struct CalcHosts
     {
@@ -72,6 +69,5 @@ namespace Z0
             public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> src, in SpanBlock256<T> dst)
                 => ref map(src, dst, Calcs.vinc<T>(w256));
         }
-
     }
 }

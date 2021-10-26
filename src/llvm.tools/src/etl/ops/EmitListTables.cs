@@ -10,7 +10,7 @@ namespace Z0.llvm
 
     partial class EtlWorkflow
     {
-        public ReadOnlySpan<ItemList<string>> ImportLists()
+        public ReadOnlySpan<ItemList<string>> EmitListTables()
         {
             var svc = Wf.Assets();
             var input = LlvmPaths.ListSourceFiles().View;

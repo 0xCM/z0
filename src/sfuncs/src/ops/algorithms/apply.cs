@@ -46,7 +46,6 @@ namespace Z0
             where F : IBinaryOp<T>
                 => apply(f, a.ReadOnly(), b.ReadOnly());
 
-
         [MethodImpl(Inline)]
         public static Span<T3> apply<F,T0,T1,T2,T3>(F f, ReadOnlySpan<T0> A, ReadOnlySpan<T1> B, ReadOnlySpan<T2> C,  Span<T3> dst)
             where F : IFunc<T0,T1,T2,T3>

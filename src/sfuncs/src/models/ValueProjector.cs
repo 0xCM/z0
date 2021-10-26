@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
 
-
     partial struct SFx
     {
         public readonly struct ValueProjector : IValueProjector

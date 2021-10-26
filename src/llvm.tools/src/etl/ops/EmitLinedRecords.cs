@@ -8,7 +8,7 @@ namespace Z0.llvm
 
     partial class EtlWorkflow
     {
-        public Outcome ImportRecordLines(ReadOnlySpan<TextLine> src, string id)
+        public Outcome EmitLinedRecords(ReadOnlySpan<TextLine> src, string id)
         {
             var result = Outcome.Success;
             var dst = LlvmPaths.RecordImport(id, FS.Txt);

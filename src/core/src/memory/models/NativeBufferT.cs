@@ -73,6 +73,12 @@ namespace Z0
             get => api.span(this);
         }
 
+        public ReadOnlySpan<T> View
+        {
+            [MethodImpl(Inline)]
+            get => api.span(this);
+        }
+
         [MethodImpl(Inline)]
         public void Dispose()
             => api.release(this);

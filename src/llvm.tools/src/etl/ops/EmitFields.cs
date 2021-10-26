@@ -14,7 +14,7 @@ namespace Z0.llvm
 
     partial class EtlWorkflow
     {
-        public static ReadOnlySpan<TableGenFields> partition(ReadOnlySpan<TableGenField> src)
+        static ReadOnlySpan<TableGenFields> partition(ReadOnlySpan<TableGenField> src)
         {
             var count = src.Length;
             var dst = list<TableGenFields>();

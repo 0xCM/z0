@@ -10,7 +10,6 @@ namespace Z0
 
     using static Root;
     using static SFx;
-    using static SpanBlocks;
 
     partial struct CalcHosts
     {

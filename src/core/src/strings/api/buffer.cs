@@ -45,9 +45,7 @@ namespace Z0
                 ref readonly var s = ref skip(src,i);
                 var view = span(s);
                 for(var j=0; j<count; j++)
-                {
                     dst[counter++] = skip(view,j);
-                }
                 dst[counter++] = (char)0;
             }
             return dst;

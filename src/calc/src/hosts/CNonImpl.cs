@@ -41,14 +41,12 @@ namespace Z0
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
                 => gbits.cnonimpl(a,b);
-
         }
 
         [Closures(Integers), CNonImpl]
         public readonly struct VCNonImpl256<T> : IBinaryOp256D<T>
             where T : unmanaged
         {
-
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
                 => gcpu.vcnonimpl(x,y);

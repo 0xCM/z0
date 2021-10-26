@@ -22,12 +22,6 @@ namespace Z0.llvm
         {
             LlvmPaths.CodeGen().Clear(true);
             GenStringTables();
-            // var dst = LlvmPaths.ImportDir("docs") + FS.folder("instructions");
-            // dst.Clear();
-            // var running = Running(string.Format("Emitting instruction docs to {0}", dst));
-            // var docgen = EtlDocGen.create(Wf,src);
-            // var count = docgen.GenInsructionDocs(dst);
-            // Ran(running, string.Format("Emitted docs for {0} instructions", count));
         }
 
         Outcome GenStringTables()
