@@ -7,8 +7,9 @@ namespace Z0.llvm
     using System;
     using System.Runtime.CompilerServices;
 
+    using types;
+
     using static Root;
-    using static DataTypes;
 
     [ApiHost]
     public readonly partial struct Factory

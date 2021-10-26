@@ -10,7 +10,7 @@ namespace Z0.llvm
     {
         public ReadOnlySpan<TextLine> LoadSourceRecords(string id)
         {
-            using var reader = LlvmPaths.TableGenSource(id).Utf8LineReader();
+            using var reader = LlvmPaths.DataSourcePath(id).Utf8LineReader();
             return reader.ReadAll();
         }
     }

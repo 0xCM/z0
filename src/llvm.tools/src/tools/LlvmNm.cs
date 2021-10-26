@@ -15,11 +15,11 @@ namespace Z0.llvm
         public override ToolId Id
             => LlvmToolNames.llvm_nm;
 
-        public ReadOnlySpan<ObjSymRecord> Read(FS.FilePath path)
+        public ReadOnlySpan<ObjSymRow> Read(FS.FilePath path)
         {
             var result = Outcome.Success;
             var count = FS.linecount(path).Lines;
-            var buffer = span<ObjSymRecord>(count);
+            var buffer = span<ObjSymRow>(count);
             var counter = 0u;
             using var reader = path.Utf8LineReader();
             while(reader.Next(out var line))
@@ -30,7 +30,7 @@ namespace Z0.llvm
             return slice(buffer, 0,counter);
         }
 
-        static Outcome parse(TextLine src, out ObjSymRecord dst)
+        static Outcome parse(TextLine src, out ObjSymRow dst)
         {
             var result = Outcome.Success;
             var content = src.Content;
@@ -56,12 +56,12 @@ namespace Z0.llvm
             return result;
         }
 
-        public ReadOnlySpan<ObjSymRecord> Collect(ReadOnlySpan<FS.FilePath> src, FS.FilePath outpath)
+        public ReadOnlySpan<ObjSymRow> Collect(ReadOnlySpan<FS.FilePath> src, FS.FilePath outpath)
         {
             var result = Outcome.Success;
             var count = src.Length;
-            var formatter = Tables.formatter<ObjSymRecord>(ObjSymRecord.RenderWidths);
-            var buffer = list<ObjSymRecord>();
+            var formatter = Tables.formatter<ObjSymRow>(ObjSymRow.RenderWidths);
+            var buffer = list<ObjSymRow>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(src,i);
@@ -73,7 +73,7 @@ namespace Z0.llvm
                 }
             }
             var records = buffer.ViewDeposited();
-            TableEmit(records, ObjSymRecord.RenderWidths, outpath);
+            TableEmit(records, ObjSymRow.RenderWidths, outpath);
             return records;
         }
     }

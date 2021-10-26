@@ -150,6 +150,12 @@ namespace Z0
             return enclose ? RP.bracket(content) : content;
         }
 
+        public string Format(Fence<char> fence)
+        {
+            var content = HexFormatter.array(Data.View);
+            return string.Format("{0}{1}{2}", fence.Left, content, fence.Right);
+        }
+
         public string Format()
             => Format(true);
 

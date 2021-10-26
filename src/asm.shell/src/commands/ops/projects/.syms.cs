@@ -7,6 +7,7 @@ namespace Z0.Asm
     using static core;
 
     using llvm;
+    using llvm.records;
 
     partial class AsmCmdService
     {
@@ -16,7 +17,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var match = arg(args,0).Value;
             var files = ProjectOut().Files(FS.Sym,true);
-            var formatter = Tables.formatter<ObjSymRecord>(ObjSymRecord.RenderWidths);
+            var formatter = Tables.formatter<ObjSymRow>(ObjSymRow.RenderWidths);
             var counter = 0u;
             foreach(var f in files)
             {

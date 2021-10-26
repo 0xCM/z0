@@ -9,8 +9,8 @@ namespace Z0.Alg
 
     using static core;
 
-    [ApiHost("alg.api")]
-    public readonly partial struct api
+    [ApiHost("alg.intersections")]
+    public readonly partial struct Intersections
     {
         [Op]
         public static unsafe int intersect(ushort* rcx, int rdx,  ushort* r8, int r9, ushort* dst)

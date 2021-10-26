@@ -17,7 +17,7 @@ namespace Z0.llvm
         {
 
             var result = Outcome.Success;
-            var src = LlvmPaths.ImportTable<DefRelations>();
+            var src = LlvmPaths.Table<DefRelations>();
             var records = LoadDefRelationNodes(src);
             // var src = LlvmEtl.LoadSourceRecords(EtlNames.Datasets.X86);
             // var distiller = new DefRelationDistiller();

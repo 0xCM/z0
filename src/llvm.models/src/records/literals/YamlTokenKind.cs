@@ -3,7 +3,7 @@
 // License     : Apache-2.0 WITH LLVM-exceptions
 // Source      : llvm/lib/Support/YAMLParser.cpp
 //-----------------------------------------------------------------------------
-namespace Z0.llvm
+namespace Z0.llvm.records
 {
     using N = YamlTokenNames;
 

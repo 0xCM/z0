@@ -10,9 +10,9 @@ namespace Z0.llvm.records
 
     public class LlvmTableLoader
     {
-        public static Outcome load(FS.FilePath path, out Span<LlvmValueType> buffer)
+        public static Outcome load(FS.FilePath path, out Span<ValueTypeRow> buffer)
         {
-            const byte FieldCount = LlvmValueType.FieldCount;
+            const byte FieldCount = ValueTypeRow.FieldCount;
             var result = TextGrids.load(path, out var doc);
             buffer = default;
             if(result.Fail)
@@ -20,7 +20,7 @@ namespace Z0.llvm.records
 
             var rows = doc.Rows;
             var count = rows.Length;
-            buffer = span<LlvmValueType>(count);
+            buffer = span<ValueTypeRow>(count);
             var counter = 0u;
             for(var i=0; i<count; i++)
             {

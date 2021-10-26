@@ -74,10 +74,10 @@ namespace Z0.llvm
             EmitFields(classFields, Datasets.X86ClassMembers);
             IndexLists(ref dst);
 
-            ProjectCollect();
+            CollectProjectData();
 
             GenCode(dst);
-            //GenDocs(dst);
+            GenDocs(dst);
 
             return true;
         }
@@ -89,7 +89,7 @@ namespace Z0.llvm
 
         void GenDocs(in EtlDatasets src)
         {
-            var dst = LlvmPaths.ImportDir("docs") + FS.folder("instructions");
+            var dst = LlvmPaths.Docs("instructions");
             dst.Clear();
             var running = Running(string.Format("Emitting instruction docs to {0}", dst));
             var docgen = EtlDocGen.create(Wf,src);
@@ -97,13 +97,9 @@ namespace Z0.llvm
             Ran(running, string.Format("Emitted docs for {0} instructions", count));
         }
 
-        public void ProjectCollect()
+        public void CollectProjectData()
         {
             iter(Projects.ProjectNames, name => ProjectCollect(Ws.Project(name)));
-            // ProjectCollect(Ws.Project(Projects.LlvmModels));
-            // ProjectCollect(Ws.Project(Projects.ClangModels));
-            // ProjectCollect(Ws.Project(Projects.McModels));
-            // ProjectCollect(Ws.Project(Projects.Canonical));
         }
 
         Outcome ProjectCollect(IProjectWs ws)
@@ -149,7 +145,7 @@ namespace Z0.llvm
         {
             var result = Outcome.Success;
             var src = ws.OutFiles(FS.Sym).View;
-            var dst = ws.Table<ObjSymRecord>(ws.Project.Format());
+            var dst = ws.Table<ObjSymRow>(ws.Project.Format());
             Write(string.Format("Collecting symbols from {0} files", src.Length));
             var symbols = Nm.Collect(src, dst);
             return result;

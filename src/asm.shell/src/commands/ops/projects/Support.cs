@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Collections.Generic;
 
     using Z0.llvm;
+    using llvm.records;
 
     using static core;
     using static WsAtoms;
@@ -157,7 +158,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
             var src = ws.OutFiles(FS.Sym).View;
-            var dst = ws.Table<ObjSymRecord>(ws.Project.Format());
+            var dst = ws.Table<ObjSymRow>(ws.Project.Format());
             Write(string.Format("Collecting symbols from {0} files", src.Length));
             var symbols = LlvmNm.Collect(src, dst);
             return result;

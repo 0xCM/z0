@@ -57,7 +57,7 @@ namespace Z0.llvm
             }
 
             var collected = dst.ViewDeposited();
-            TableEmit(collected, ClassRelations.RenderWidths, LlvmPaths.ImportTable<ClassRelations>());
+            TableEmit(collected, ClassRelations.RenderWidths, LlvmPaths.Table<ClassRelations>());
             return collected;
         }
    }

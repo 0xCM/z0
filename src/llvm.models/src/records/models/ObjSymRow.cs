@@ -7,7 +7,7 @@ namespace Z0.llvm.records
     using System;
 
     [Record(TableId)]
-    public struct ObjSymRecord
+    public struct ObjSymRow
     {
         public const string TableId = "objsyms";
 

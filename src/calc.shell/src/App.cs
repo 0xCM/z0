@@ -9,6 +9,8 @@ namespace Z0
 
     using Masks = BitMaskLiterals;
 
+    using Alg;
+
     class App : WfApp<App>
     {
         public static void Main(params string[] args)
@@ -199,7 +201,6 @@ namespace Z0
             Wf.Row(fmt);
         }
 
-
         void Run(N20 n)
         {
             BitMaskChecker.create(Wf).Run(Source);
@@ -221,10 +222,14 @@ namespace Z0
             Fsm.example2();
         }
 
-
         void Run(N27 n)
         {
             Parts.BitPack.Resolved.Executor.Run();
+        }
+
+        void RunValidators()
+        {
+            Md5Validator.create(Wf).Run();
         }
 
         void Run(string spec)
@@ -295,8 +300,15 @@ namespace Z0
         protected override void Run(string[] args)
         {
             var count = args.Length;
-            for(var i=0; i<count; i++)
-                Run(skip(args,i));
+            if(count != 0)
+            {
+                for(var i=0; i<count; i++)
+                    Run(skip(args,i));
+            }
+            else
+            {
+                RunValidators();
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Z0.llvm.records
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential), Record(TableId)]
-    public struct LlvmValueType : IRecord<LlvmValueType>
+    public struct ValueTypeRow : IRecord<ValueTypeRow>
     {
         public const string TableId = "llvm.value-type";
 

@@ -9,7 +9,7 @@ namespace Z0.llvm
         [CmdOp(".collect")]
         Outcome Collect(CmdArgs args)
         {
-            LlvmEtl.ProjectCollect();
+            LlvmEtl.CollectProjectData();
             return true;
         }
     }

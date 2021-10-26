@@ -16,8 +16,6 @@ namespace Z0
 
         public const string bin = nameof(bin);
 
-        public const string include = nameof(include);
-
         public const string lib = nameof(lib);
     }
 

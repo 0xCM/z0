@@ -1,8 +1,10 @@
 # MC Terms
 
-From <https://lists.llvm.org/pipermail/llvm-dev/2018-March/122203.html>
+References:
+<https://lists.llvm.org/pipermail/llvm-dev/2018-March/122203.html>
+<https://github.com/llvm/llvm-project/blob/ce548aa236962f95ccaf59f8692ed0861f3769dd/llvm/lib/Target/X86/MCTargetDesc/X86BaseInfo.h>
 
-X86 instruction encoding
+## X86 instruction encoding
 
 LLVM uses a complex system of fields within the X86Inst class in tablegen to control instruction encoding and disassembling. These fields attempt to classify various aspects of the complicated X86 encoding system.
 
@@ -36,8 +38,7 @@ The X86Inst class should not be used directly to define any instruction. Instruc
 
 Forms
 -----
- Pseudo         - No encoding/disassembling information is present. These should be removed/replaced with other instructions before we reach the encoding phase of codegen.;
- RawFrm         - Instruction has no modrm byte. Operands are fixed registers. There may be an immediate present.
+ Pseudo         - No encoding/disassembling information is present. These should be removed/replaced with other instructions before we reach the encoding phase of codegen.RawFrm         - Instruction has no modrm byte. Operands are fixed registers. There may be an immediate present
  AddRegFrm      - Instruction encodes a register in bits 2:0 of the opcode. No modrm byte. Opcode should be a multiple of 8 for such an instruction.
  RawFrmMemOffs  - Instruction encodes a fixed constant address in the instruction without modrm byte. Basically opcodes 0xA0-0xA3
  RawFrmSrc      - Instruction uses SI/ESI/RSI as a source memory address. LODS and OUTS.
@@ -58,8 +59,6 @@ Forms
  MRMXr          - modrm.mod==0x3, with a value of 0 in modrm[5:3]. modrm[2:0] encodes a register. This is almost the same as MRM0r, but the disassembler ignores modrm[5:3]
  MRM0r-MRM7r    - modrm.mod==0x3, with a fixed value(0-7) in modrm[5:3]. modrm[2:0] encode a register
  MRMC0-MRM_FF   - Instruction encodes with a fixed value in the range 0xC0-0xFF in the modrm byte. e.g. VMCALL, MONITOR. No known instructions use a fixed value in 0x00-0xBF range.
-
-MRMSrcReg, MRMDestReg, MRMSrcMem, MRMDestMem are probably the most common formats in use.
 
 ImmT
 ----

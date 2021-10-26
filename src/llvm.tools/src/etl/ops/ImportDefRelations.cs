@@ -14,7 +14,7 @@ namespace Z0.llvm
         {
             const string Marker = "def ";
             var collected = DistillRelations<DefRelations>(src,Marker);
-            TableEmit(collected, DefRelations.RenderWidths, LlvmPaths.ImportTable<DefRelations>());
+            TableEmit(collected, DefRelations.RenderWidths, LlvmPaths.Table<DefRelations>());
             return collected;
         }
     }

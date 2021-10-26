@@ -15,32 +15,45 @@ namespace Z0.llvm
             LlvmData = Ws.Project("llvm.data");
         }
 
-        public FS.FolderPath ImportRoot()
-            => LlvmData.Subdir(imports);
+        public FS.FolderPath Tables()
+            => LlvmData.Tables();
 
-        public FS.FolderPath ImportTables()
-            => ImportRoot() + FS.folder(tables);
+        public FS.FolderPath Tables(string scope)
+            => Tables() + FS.folder(scope);
 
-        public FS.FolderPath ImportDir(string scope)
-            => ImportRoot() + FS.folder(scope);
+        public FS.FilePath Table<T>()
+            where T : struct
+                => Tables() + Z0.Tables.filename<T>();
 
-        public FS.FolderPath ImportTables(string scope)
-            => ImportTables() + FS.folder(scope);
+        public FS.FilePath Table(string id)
+            => Tables() + FS.file(id, FS.Csv);
 
-        public FS.FolderPath ListImportTables()
-            => ImportTables("lists");
+        public FS.FolderPath Docs()
+            => LlvmData.Subdir("docs");
 
-        public FS.Files ListImportFiles()
-            => ListImportTables().Files(FS.Csv);
+        public FS.FolderPath Docs(string scope)
+            => Docs() + FS.folder(scope);
+
+        public FS.FolderPath ListImports()
+            => Tables("lists");
 
         public FS.FilePath ListImportPath(string id)
-            => ListImportTables() + FS.file(id, FS.Csv);
+            => ListImports() + FS.file(id, FS.Csv);
 
-        public FS.FilePath TableGenSource(string id)
+        public FS.FilePath DataSourcePath(string id)
             => LlvmData.OutDir() + FS.file(id, FS.Txt);
 
-        public FS.FolderPath TableGenImports()
-            => ImportRoot() + FS.folder("tablegen");
+        public FS.FolderPath RecordImports()
+            => LlvmData.Subdir("records");
+
+        public FS.FilePath RecordImport(string id, FS.FileExt ext)
+            =>  RecordImports() + FS.file(id, ext);
+
+        public FS.FilePath ImportMap(string id)
+            => RecordImports() + FS.file(id, FS.ext("map"));
+
+        public FS.FolderPath CodeGen()
+            => LlvmData.Subdir("codegen");
 
         public FS.FolderPath ListSources()
             => LlvmData.OutDir() + FS.folder(lists);
@@ -48,23 +61,7 @@ namespace Z0.llvm
         public FS.Files ListSourceFiles()
             => ListSources().Files(FS.List);
 
-        public FS.FolderPath CodeGenRoot()
-            => LlvmData.Subdir("codegen");
-
         public FS.FilePath CodeGenPath(string id, FS.FileExt ext)
-            => CodeGenRoot() + FS.folder("stringtables") + FS.file(id,ext);
-
-        public FS.FilePath TableGenImport(string id, FS.FileExt ext)
-            =>  TableGenImports() + FS.file(id, ext);
-
-        public FS.FilePath ImportMap(string id)
-            => ImportRoot() + FS.file(id, FS.ext("map"));
-
-        public FS.FilePath ImportTable<T>()
-            where T : struct
-                => ImportTables() + Tables.filename<T>();
-
-        public FS.FilePath ImportTable(string id)
-            => ImportTables() + FS.file(id, FS.Csv);
+            => CodeGen() + FS.folder("stringtables") + FS.file(id,ext);
     }
 }

@@ -11,7 +11,7 @@ namespace Z0.llvm
         public Outcome ImportRecordLines(ReadOnlySpan<TextLine> src, string id)
         {
             var result = Outcome.Success;
-            var dst = LlvmPaths.TableGenImport(id, FS.Txt);
+            var dst = LlvmPaths.RecordImport(id, FS.Txt);
             EmitLines(src, dst, TextEncodingKind.Asci);
             return result;
         }

@@ -52,7 +52,9 @@ namespace Z0.llvm
                             writer.WriteLine(line.Content);
                         }
 
-                        if(counter != 0 && ++counter % 1000 == 0)
+                        counter++;
+
+                        if(i > 1 && counter % 1000 == 0)
                         {
                             Wf.Status(string.Format("Emitted {0}/{1} instruction documents", counter, icount));
                         }

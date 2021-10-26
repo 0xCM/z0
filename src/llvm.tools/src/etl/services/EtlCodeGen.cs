@@ -20,7 +20,7 @@ namespace Z0.llvm
 
         public void Run(in EtlDatasets src)
         {
-            LlvmPaths.CodeGenRoot().Clear(true);
+            LlvmPaths.CodeGen().Clear(true);
             GenStringTables();
             // var dst = LlvmPaths.ImportDir("docs") + FS.folder("instructions");
             // dst.Clear();

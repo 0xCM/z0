@@ -3,13 +3,8 @@
 // License     : Apache-2.0 WITH LLVM-exceptions
 // Source      : llvm/lib/Support/YAMLParser.cpp
 //-----------------------------------------------------------------------------
-namespace Z0.llvm
+namespace Z0.llvm.records
 {
-    public readonly struct YamlTokenFacets
-    {
-        public const byte MinTokenLength = 3;
-    }
-
     [LiteralProvider]
     public readonly struct YamlTokenNames
     {

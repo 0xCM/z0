@@ -46,7 +46,7 @@ namespace Z0.llvm
             var fields = src;
             var parts = partition(fields);
             var count = fields.Length;
-            var dst = LlvmPaths.ImportTable(dstid);
+            var dst = LlvmPaths.Table(dstid);
             var emitting = EmittingTable<TableGenField>(dst);
             using var writer = dst.AsciWriter();
             writer.WriteLine(F.RowHeader);
