@@ -22,12 +22,6 @@ namespace Z0.Asm
             OpCode = oc;
         }
 
-        public AsmId AsmId
-        {
-            [MethodImpl(Inline)]
-            get => OpCode.AsmId;
-        }
-
         public string Format()
             => string.Format("{0} = {1}", Sig, OpCode);
 

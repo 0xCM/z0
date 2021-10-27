@@ -3,7 +3,7 @@
 // License     : Apache-2.0 WITH LLVM-exceptions
 // Source      : Tablgen: X86GenInstrInfo.h
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.llvm
 {
     [SymSource(nameof(llvm))]
     public enum AsmId : ushort

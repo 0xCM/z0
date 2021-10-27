@@ -2,21 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Types
 {
-    using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using llvm;
+    using static Root;
 
-    [StructLayout(LayoutKind.Sequential, Pack=1)]
-    public struct AsmInfoRecord
+    [ApiHost]
+    public readonly partial struct types
     {
-        public AsmId Id;
 
-        public CharBlock32 OpCodeExpr;
 
-        public CharBlock32 SigExpr;
     }
+
 }

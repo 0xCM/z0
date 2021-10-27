@@ -6,6 +6,8 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using Expr;
+
     [Free]
     public interface IOpExpr : IExpr
     {

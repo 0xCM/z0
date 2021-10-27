@@ -21,4 +21,11 @@ namespace Z0.llvm
 
         R Right {get;}
     }
+
+    [Free]
+    public interface IDag<T> : IDag<T,T>
+        where T : ITerm
+    {
+
+    }
 }

@@ -8,6 +8,13 @@ namespace Z0.Expr
 
     using static Root;
 
+    public interface IExpr<K> : IExpr
+        where K : unmanaged
+    {
+        K Kind {get;}
+    }
+
+
     public abstract class Expr<F,K> : IExpr<K>
         where F : Expr<F,K>
         where K : unmanaged
@@ -17,10 +24,10 @@ namespace Z0.Expr
         public abstract string Format();
 
         public override string ToString()
-            => Format();            
+            => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator AnyExpr(Expr<F,K> src)    
+        public static implicit operator AnyExpr(Expr<F,K> src)
             => new AnyExpr(src);
     }
 }

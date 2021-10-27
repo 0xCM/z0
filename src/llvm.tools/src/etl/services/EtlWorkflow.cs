@@ -51,7 +51,7 @@ namespace Z0.llvm
             ds.ListIndex = index;
         }
 
-        public Outcome RunEtl()
+        public EtlDatasets RunEtl()
         {
             var dst = new EtlDatasets();
             var records = LoadSourceRecords(Datasets.X86);
@@ -75,12 +75,12 @@ namespace Z0.llvm
             EmitFields(classFields, Datasets.X86ClassMembers);
             IndexLists(ref dst);
 
-            CollectProjectData();
 
             GenCode(dst);
+            //CollectProjectData();
             //GenDocs(dst);
 
-            return true;
+            return dst;
         }
 
         void DistillEntityRelations(ReadOnlySpan<ClassRelations> src)

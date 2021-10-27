@@ -15,17 +15,5 @@ namespace Z0
         public static bit eq<T>(in BitVector<T> x, in BitVector<T> y)
             where T : unmanaged
                 => gmath.eq(x.State, y.State);
-
-        [MethodImpl(Inline)]
-        public static bit eq<N,T>(in BitVector<N,T> x, in BitVector<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.eq(x.State, y.State);
-
-        [MethodImpl(Inline)]
-        public static bit eq<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gcpu.vsame(x.State, y.State);
     }
 }

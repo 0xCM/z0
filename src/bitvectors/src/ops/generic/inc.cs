@@ -20,16 +20,5 @@ namespace Z0
         public static BitVector<T> inc<T>(BitVector<T> x)
             where T : unmanaged
                 => gmath.inc(x.State);
-
-        /// <summary>
-        /// Arithmetically increments the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> inc<N,T>(BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gmath.inc(x.State);
     }
 }

@@ -11,7 +11,6 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
         /// Creates a copy of the source vector
         /// </summary>

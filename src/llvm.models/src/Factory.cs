@@ -25,10 +25,5 @@ namespace Z0.llvm
             where L : ITerm
             where R : ITerm
                 => new dag<L,R>(left,right);
-
-        [MethodImpl(Inline)]
-        public static dag<L,EmptyTerm> dag<L>(L left)
-            where L : ITerm
-                => new dag<L,EmptyTerm>(left,default);
     }
 }

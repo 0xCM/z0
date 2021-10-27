@@ -2,34 +2,32 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0.Types
 {
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct OpCodeTable
+    public readonly struct TypeKind : IExpr
     {
-        public readonly byte Id;
+        string Data {get;}
 
         [MethodImpl(Inline)]
-        public OpCodeTable(byte id)
+        public TypeKind(string spec)
         {
-            Id = id;
+            Data = spec;
+        }
+
+        public string Spec
+        {
+            [MethodImpl(Inline)]
+            get => Data ?? EmptyString;
         }
 
         public string Format()
-            => Id.ToString();
+            => Spec;
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator OpCodeTable(byte id)
-            => new OpCodeTable(id);
-
-        [MethodImpl(Inline)]
-        public static explicit operator uint(OpCodeTable src)
-            => src.Id;
     }
 }

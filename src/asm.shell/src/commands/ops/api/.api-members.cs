@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.IO;
-    using llvm;
 
     using static core;
 
@@ -27,7 +26,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
             var dst = Ws.Tables().Subdir("tmp") + FS.file("symindex", FS.Cs);
             using var writer = dst.AsciWriter();
-            EmitSymIndex<AsmId>("AsmIdSymbols", writer);
+            EmitSymIndex<AsciLetterLoSym>("AsciLetterLoSym", writer);
             return result;
         }
 

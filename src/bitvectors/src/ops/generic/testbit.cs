@@ -20,16 +20,5 @@ namespace Z0
         public static bit testbit<T>(BitVector<T> x, byte index)
             where T : unmanaged
                 => gbits.testbit(x.State, index);
-
-        /// <summary>
-        /// Determines whether an index-identified bit is enabled
-        /// </summary>
-        /// <param name="first">The first bit position</param>
-        /// <param name="last">The last bit position</param>
-        [MethodImpl(Inline)]
-        public static bit testbit<N,T>(BitVector<N,T> x, byte index)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gbits.testbit(x.State, index);
     }
 }

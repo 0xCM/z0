@@ -2,39 +2,41 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0.Expr
 {
     using System.Runtime.CompilerServices;
 
     using static Root;
 
+    using api = OpCodes;
+
     public readonly struct OpCode
     {
         public readonly Label Name;
 
-        internal readonly uint Data;
+        internal readonly ulong Data;
 
         [MethodImpl(Inline)]
-        public OpCode(Label name, uint data)
+        public OpCode(Label name, ulong data)
         {
             Data = data;
             Name = name;
         }
 
-        public OpCodeTable Table
+        public Domain Domain
         {
             [MethodImpl(Inline)]
-            get => OpCodes.table(this);
+            get => api.domain(this);
         }
 
-        public Hex16 Value
+        public Hex64 Value
         {
             [MethodImpl(Inline)]
-            get => OpCodes.value(this);
+            get => api.value(this);
         }
 
         public string Format()
-            => OpCodes.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();

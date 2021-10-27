@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0.Expr
 {
     using System.Runtime.CompilerServices;
 
@@ -15,48 +15,47 @@ namespace Z0.Machines
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static OpCode<K> opcode<K>(Label name, OpCodeTable table, Hex16 op)
+        public static OpCode<K> opcode<K>(Label name, Domain table, Hex16 op)
             where K : unmanaged
         {
-            var encoded = (uint)table |(uint)op <<8;
-            return new OpCode<K>(name, @as<uint,K>(encoded));
+            var encoded = (ulong)table |(ulong)op <<16;
+            return new OpCode<K>(name, @as<ulong,K>(encoded));
         }
 
         [MethodImpl(Inline), Op]
-        public static OpCode opcode(Label name, OpCodeTable table, Hex16 op)
+        public static OpCode opcode(Label name, Domain table, Hex16 op)
         {
-            var encoded = (uint)table |(uint)op <<8;
+            var encoded = (ulong)table |(ulong)op <<16;
             return new OpCode(name, encoded);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Hex16 value<K>(OpCode<K> src)
+        public static Hex64 value<K>(OpCode<K> src)
             where K : unmanaged
-                => (ushort)(u32(src.Data) >> 8);
+                => (bw64(src.Data) >> 16);
 
         [MethodImpl(Inline), Op]
-        public static Hex16 value(OpCode src)
-            => (ushort)(u32(src.Data) >> 8);
-
+        public static Hex64 value(OpCode src)
+            => src.Data >> 16;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static OpCodeTable table<K>(OpCode<K> src)
+        public static Domain domain<K>(OpCode<K> src)
             where K : unmanaged
-                => u8(src.Data);
+                => bw16(src.Data);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static OpCode untype<K>(OpCode<K> src)
             where K : unmanaged
-                => new OpCode(src.Name, u32(src.Data));
+                => new OpCode(src.Name, bw64(src.Data));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static OpCodeTable table(OpCode src)
-            => u8(src.Data);
+        public static Domain domain(OpCode src)
+            => u16(src.Data);
 
         public static string format(OpCode src)
         {
             var val = value(src).Format();
-            var tbl = src.Table;
+            var tbl = src.Domain;
             var name = src.Name;
             return string.Format("{0} {1} {2}:{3}",name, (char)LogicSym.Def, tbl, val);
         }

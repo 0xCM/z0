@@ -11,18 +11,4 @@ namespace Z0
     {
 
     }
-
-    [Free]
-    public interface IExpr<K> : IExpr
-        where K : unmanaged
-    {
-        K Kind {get;}   
-    }
-
-    [Free]
-    public interface IExpr<K,T> : IExpr<K>
-        where K : unmanaged
-    {
-        
-    }
 }

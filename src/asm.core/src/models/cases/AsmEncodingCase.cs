@@ -7,35 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using llvm;
-
     using static Root;
-
-    public readonly partial struct AsmCases
-    {
-        public struct InstructionCase
-        {
-            public AsmForm Form;
-
-            public AsmId Id
-            {
-                [MethodImpl(Inline), Op]
-                get => Form.OpCode.AsmId;
-            }
-
-            public AsmSig Sig
-            {
-                [MethodImpl(Inline), Op]
-                get => Form.Sig;
-            }
-
-            public AsmOpCode OpCode
-            {
-                [MethodImpl(Inline), Op]
-                get => Form.OpCode;
-            }
-        }
-    }
 
     public readonly struct AsmEncodingCase : ITextual
     {

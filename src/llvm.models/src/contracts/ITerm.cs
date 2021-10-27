@@ -9,19 +9,16 @@ namespace Z0.llvm
     [Free]
     public interface ITerm : ITextual
     {
+        bool IsEmpty
+            => false;
 
+        bool IsNonEmpty
+            => !IsEmpty;
     }
 
     [Free]
     public interface ITerm<T> : ITerm
     {
         T Value {get;}
-    }
-
-    public readonly struct EmptyTerm : ITerm
-    {
-        public bool IsEmpty => true;
-        public string Format()
-            => string.Empty;
     }
 }

@@ -14,29 +14,19 @@ namespace Z0.Asm
 
     using api = AsmOpCodes;
 
-    [StructLayout(LayoutKind.Sequential, Pack=1, Size =(int)SZ), Blittable(SZ)]
+    [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct AsmOpCode
     {
-        public const uint SZ = 2*PrimalSizes.U16 + PrimalSizes.U32 + CharBlock48.SZ;
-
-        public AsmId AsmId;
+        public uint Key;
 
         public AsmOpCodeBits Bits;
 
         public CharBlock48 Expr;
 
         [MethodImpl(Inline)]
-        public AsmOpCode(AsmId asmid, AsmOpCodeBits bits, CharBlock48 expr)
-        {
-            AsmId = asmid;
-            Bits = bits;
-            Expr = expr;
-        }
-
-        [MethodImpl(Inline)]
         public AsmOpCode(uint key, AsmOpCodeBits bits, CharBlock48 expr)
         {
-            AsmId = 0;
+            Key = key;
             Bits = bits;
             Expr = expr;
         }
