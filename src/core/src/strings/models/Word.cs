@@ -10,6 +10,9 @@ namespace Z0.Strings
     using static Root;
     using static core;
 
+    /// <summary>
+    /// A mutable character sequence
+    /// </summary>
     public readonly struct Word
     {
         readonly Index<char> Data;

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Expr
 {
-    using XF = ExprFormats;
+    using XF = SyntaxPatterns;
 
     partial struct expr
     {

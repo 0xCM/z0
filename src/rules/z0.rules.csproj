@@ -11,12 +11,12 @@
     <ProjectReference Include="$(Containers)" />
     <ProjectReference Include="$(Bit)" />
     <ProjectReference Include="$(SymCore)" />
-    <ProjectReference Include="$(Hex)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Bits)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Cells)" />
     <ProjectReference Include="$(Resources)" />
+    <ProjectReference Include="$(BitNumbers)" />
   </ItemGroup>
 
 </Project>

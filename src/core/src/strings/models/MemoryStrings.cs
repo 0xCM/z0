@@ -42,11 +42,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Label Label(uint index)
-            => Labels.label(this[index]);
+            => strings.label(this[index]);
 
         [MethodImpl(Inline)]
         public Label Label(int index)
-            => Labels.label(this[index]);
+            => strings.label(this[index]);
 
         [MethodImpl(Inline)]
         public MemoryAddress Address(uint index)

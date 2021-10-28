@@ -26,6 +26,8 @@ namespace Z0.Graphs
         public static Vertex<V> node<V>(Label name, V value)
             where V : unmanaged, IEquatable<V>
                 => new Vertex<V>(name,value);
+
+        [MethodImpl(Inline)]
         public static DirectedGraph<V> graph<V>()
             where V : unmanaged, IVertex, IEquatable<V>
                 => new DirectedGraph<V>();

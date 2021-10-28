@@ -12,7 +12,6 @@
     <ProjectReference Include="$(Time)" />
     <ProjectReference Include="$(Hash)" />
     <ProjectReference Include="$(Bit)" />
-    <ProjectReference Include="$(Hex)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Resources)" />
     <ProjectReference Include="$(ApiCore)" />

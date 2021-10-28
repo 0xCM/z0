@@ -28,10 +28,6 @@ namespace Z0
 
         readonly Span<byte> Buffer;
 
-        bool ReadingArray;
-
-        bool ReadingObject;
-
         [MethodImpl(Inline)]
         internal JsonStream(StreamReader stream)
         {
@@ -39,8 +35,6 @@ namespace Z0
             BinaryStream = Stream.BinaryReader(Encoding.UTF8);
             State = new JsonReaderState(new JsonReaderOptions{AllowTrailingCommas = true, CommentHandling = JsonCommentHandling.Skip});
             Buffer = alloc<byte>(Pow2.T14);
-            ReadingArray=false;
-            ReadingObject=false;
         }
 
         [MethodImpl(Inline)]
@@ -52,46 +46,56 @@ namespace Z0
             Stream.Dispose();
         }
 
-        public void Read()
+        public void Read(IJsonSink dst)
         {
             var count = BinaryStream.Read(Buffer);
             while(count > 0)
             {
                 var reader = Reader(count < Buffer.Length);
-                while(reader.Read())
+                var success = true;
+                try
+                {
+                    reader.Read();
+                }
+                catch(Exception)
+                {
+                    success = false;
+                }
+
+                if(success)
                 {
                     switch(reader.TokenType)
                     {
                         case J.Comment:
-                            TakeComment(reader);
+                            dst.Comment(reader);
                         break;
                         case J.StartArray:
-                            BeginArrayRead(reader);
+                            dst.ArrayBegin(reader);
                         break;
                         case J.EndArray:
-                            EndArrayRead(reader);
+                            dst.ArrayEnd(reader);
                         break;
                         case J.StartObject:
-                            BeginObjectRead(reader);
+                            dst.ObjectBegin(reader);
                         break;
                         case J.EndObject:
-                            EndObjectRead(reader);
+                            dst.ObjectEnd(reader);
                         break;
                         case J.Null:
-                            TakeNull(reader);
+                            dst.Null(reader);
                         break;
                         case J.Number:
-                            TakeNumber(reader);
+                            dst.Number(reader);
                         break;
                         case J.PropertyName:
-                            TakePropName(reader);
+                            dst.PropertyName(reader);
                         break;
                         case J.String:
-                            TakeString(reader);
+                            dst.String(reader);
                         break;
                         case J.True:
                         case J.False:
-                            TakeBoolean(reader);
+                            dst.Bool(reader);
                         break;
                         default:
                             break;
@@ -101,57 +105,6 @@ namespace Z0
                 Buffer.Clear();
                 count = BinaryStream.Read(Buffer);
             }
-        }
-
-        void TakeNull(Utf8JsonReader reader)
-        {
-
-        }
-
-        void TakeComment(Utf8JsonReader reader)
-        {
-
-        }
-
-        void BeginArrayRead(Utf8JsonReader reader)
-        {
-            ReadingArray = true;
-
-        }
-
-        void EndArrayRead(Utf8JsonReader reader)
-        {
-            ReadingArray = false;
-        }
-
-        void BeginObjectRead(Utf8JsonReader reader)
-        {
-            ReadingObject = true;
-        }
-
-        void EndObjectRead(Utf8JsonReader reader)
-        {
-            ReadingObject = false;
-        }
-
-        void TakeNumber(Utf8JsonReader reader)
-        {
-
-        }
-
-        void TakePropName(Utf8JsonReader reader)
-        {
-
-        }
-
-        void TakeString(Utf8JsonReader reader)
-        {
-
-        }
-
-        void TakeBoolean(Utf8JsonReader reader)
-        {
-
         }
     }
 }

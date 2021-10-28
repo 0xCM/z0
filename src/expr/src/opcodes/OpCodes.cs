@@ -9,6 +9,8 @@ namespace Z0.Expr
     using static Root;
     using static core;
 
+    using Types;
+
     [ApiHost]
     public readonly struct OpCodes
     {

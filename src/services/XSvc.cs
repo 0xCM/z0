@@ -104,5 +104,8 @@ namespace Z0
         [Op]
         public static BitfieldServices Bitfields(this IWfRuntime wf)
             => Svc.BitfieldServices.create(wf);
+
+        public static ProjectScripts ProjectScripts(this IWfRuntime wf)
+            => Svc.ProjectScripts.create(wf);
     }
 }

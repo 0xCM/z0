@@ -7,6 +7,8 @@ namespace Z0.Expr
     using System;
     using System.Runtime.CompilerServices;
 
+    using Types;
+
     using static Root;
 
     partial struct expr

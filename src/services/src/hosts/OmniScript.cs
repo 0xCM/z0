@@ -43,21 +43,21 @@ namespace Z0
             return result;
         }
 
-        public Outcome RunProjectScript(ProjectId project, string src, Subject scope, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
+        public Outcome RunProjectScript(ProjectId project, string srcid, Subject scope, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
         {
             var path = Ws.Projects().Script(project, scope, script, FS.Cmd);
             var result = Outcome.Success;
             var vars = WsVars.create();
-            vars.SrcId = src;
+            vars.SrcId = srcid;
             return RunToolScript(path, vars.ToCmdVars(), quiet, out flows);
         }
 
-        public Outcome RunProjectScript(ProjectId project, string src, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
+        public Outcome RunProjectScript(ProjectId project, string srcid, ScriptId script, bool quiet, out ReadOnlySpan<ToolFlow> flows)
         {
             var path = Ws.Projects().Script(project, script, FS.Cmd);
             var result = Outcome.Success;
             var vars = WsVars.create();
-            vars.SrcId = src;
+            vars.SrcId = srcid;
             return RunToolScript(path, vars.ToCmdVars(), quiet, out flows);
         }
 

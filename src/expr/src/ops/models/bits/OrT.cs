@@ -24,7 +24,7 @@ namespace Z0.Ops
             B = b;
         }
 
-        public Label OpName => "or<a>";
+        public Label OpName => "or<{0}>";
 
         public BinaryBitLogicKind Kind
             => BinaryBitLogicKind.Or;
@@ -50,5 +50,5 @@ namespace Z0.Ops
         [MethodImpl(Inline)]
         public static implicit operator Or(Or<T> src)
             => src.Untyped();
-    }    
+    }
 }

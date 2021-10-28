@@ -369,5 +369,10 @@ namespace Z0
         /// The canonical eol marker
         /// </summary>
         public const string EOL = "\r\n";
+
+        /// <summary>
+        /// The '"' character represented as a string
+        /// </summary>
+        public const string Quote = "\"";
     }
 }

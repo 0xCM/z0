@@ -50,5 +50,24 @@ namespace Z0
             }
             return dst;
         }
+
+        [Op]
+        public static StringBuffer buffer(ReadOnlySpan<string> src, out Index<Label> index)
+        {
+            var count = src.Length;
+            var len = strings.length(src);
+            var dst = strings.buffer(len);
+            index = core.alloc<Label>(count);
+            var offset = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var s = ref skip(src,i);
+                index[i] = dst.StoreLabel(s,offset);
+                offset += (uint)s.Length;
+            }
+
+            return dst;
+        }
+
     }
 }

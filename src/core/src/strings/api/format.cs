@@ -10,7 +10,6 @@ namespace Z0
     using Strings;
 
     using static Root;
-    using static core;
 
     partial struct strings
     {

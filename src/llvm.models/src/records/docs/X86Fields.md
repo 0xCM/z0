@@ -33,6 +33,11 @@ Fields
  CD8_EltSize    - Element size for compressed displacement
  hasEVEX_RC     - Indicates that EVEX.L'L should be used for embedded rounding control
  hasNoTrackPrefix - Instruction has notrack prefix. Should only occur on indirect calls and jumps.
+ CD8_Scale -The scaling factor for AVX512's compressed displacement is either
+    - the size of a power-of-two number of elements or
+    - the size of a single element for broadcasts or
+    - the total vector size divided by a power-of-two number.
+    Possible values are: 0 (non-AVX512 inst), 1, 2, 4, 8, 16, 32 and 64.
 
 The X86Inst class should not be used directly to define any instruction. Instructions should use PseudoI, I, Ii8, Ii8Reg, Ii8PCRecl, Ii16, Ii32, Ii32S, FPI, FPI_, Iseg16, or Iseg32 classes. Or a subclass of one of those. These classes take care of setting the ImmT field correctly. All of the I* classes take Opcode and Form as an argument. The remaining fields have defaults that can be overridden via modifiers added to the end of your instruction definition.
 
@@ -62,7 +67,7 @@ Forms
 
 ImmT
 ----
- NoImm(default)
+ NoImm
  Imm8
  Imm8PCRel
  Imm8Reg    - 8-bits with a register encoded in bits 7:4
@@ -75,14 +80,14 @@ ImmT
 
 Opsize
 ------
- OpSizeFixed(default) - Operand size isn't mode dependent
+ OpSizeFixed          - Operand size isn't mode dependent
  OpSize16             - 0x66 prefix required in 32-bit mode
  OpSize32             - 0x66 prefix required in 16-bit mode
  OpSizeIgnored        - 0x66 prefix should be ignored if present.
 
 Adsize
 ------
-  AdSizeX(default) - Address size prefix determined from memory operand registers encoded in modrm byte
+  AdSizeX          - Address size prefix determined from memory operand registers encoded in modrm byte
   AdSize16         - Need a 0x67 prefix in 32-bit mode
   AdSize32         - Need a 0x67 prefix in 16-bit mode or 64-bit mode
   AdSize64         - Marks the 64-bit version of AdSize16/32 instructions.
@@ -163,3 +168,72 @@ EVEX_V512    - Sets has_EVEX_L2=1; hasVEX_L=0;
 EVEX_V256    - Sets has_EVEX_L2=0; hasVEX_L=1;
 EVEX_V128    - Sets has_EVEX_L2=0; hasVEX_L=0;
 NOTRACK      - Set hasNoTrackPrefix
+
+Intruction Classes
+==============================================================================
+MMXI   - MMX instructions with TB prefix.
+MMXI32 - MMX instructions with TB prefix valid only in 32 bit mode.
+MMXI64 - MMX instructions with TB prefix valid only in 64 bit mode.
+MMX2I  - MMX / SSE2 instructions with PD prefix.
+MMXIi8 - MMX instructions with ImmT == Imm8 and PS prefix.
+MMXIi8 - MMX instructions with ImmT == Imm8 and PS prefix.
+MMXID  - MMX instructions with XD prefix.
+MMXIS  - MMX instructions with XS prefix.
+
+FPI - Floating Point Instruction template.
+Iseg16 - 16-bit segment selector, 16-bit offset
+Iseg32 - 16-bit segment selector, 32-bit offset
+
+SI - SSE 1 & 2 scalar instructions
+SIi8 - SSE 1 & 2 scalar instructions - vex form available on AVX512
+PI - SSE 1 & 2 packed instructions
+MMXPI - SSE 1 & 2 packed instructions with MMX operands
+PIi8 - SSE 1 & 2 packed instructions with immediate
+SSI   - SSE1 instructions with XS prefix.
+PSI   - SSE1 instructions with PS prefix.
+PSIi8 - SSE1 instructions with ImmT == Imm8 and PS prefix.
+VSSI  - SSE1 instructions with XS prefix in AVX form.
+VPSI  - SSE1 instructions with PS prefix in AVX form, packed single.
+
+SDI    - SSE2 instructions with XD prefix.
+SDIi8  - SSE2 instructions with ImmT == Imm8 and XD prefix.
+S2SI   - SSE2 instructions with XS prefix.
+SSDIi8 - SSE2 instructions with ImmT == Imm8 and XS prefix.
+PDI    - SSE2 instructions with PD prefix, packed double domain.
+PDIi8  - SSE2 instructions with ImmT == Imm8 and PD prefix.
+VSDI   - SSE2 scalar instructions with XD prefix in AVX form.
+VPDI   - SSE2 vector instructions with PD prefix in AVX form, packed double domain.
+VS2I   - SSE2 scalar instructions with PD prefix in AVX form.
+S2I    - SSE2 scalar instructions with PD prefix.
+MMXSDIi8  - SSE2 instructions with ImmT == Imm8 and XD prefix as well as MMX operands.
+MMXSSDIi8 - SSE2 instructions with ImmT == Imm8 and XS prefix as well as MMX operands.
+
+SS38I - SSSE3 instructions with T8 prefix.
+SS3AI - SSSE3 instructions with TA prefix.
+MMXSS38I - SSSE3 instructions with T8 prefix and MMX operands.
+MMXSS3AI - SSSE3 instructions with TA prefix and MMX operands.
+S3I   - SSE3 instructions with PD prefixes.
+S3SI  - SSE3 instructions with XS prefix.
+S3DI  - SSE3 instructions with XD prefix.
+
+SS42FI - SSE 4.2 instructions with T8XD prefix.
+SS428I - SSE 4.2 instructions with T8 prefix.
+SS42AI = SSE 4.2 instructions with TA prefix
+SS48I - SSE 4.1 instructions with T8 prefix.
+SS41AIi8 - SSE 4.1 instructions with TA prefix and ImmT == Imm8.
+
+AVX28I - AVX2 instructions with T8PD prefix.
+AVX2AIi8 - AVX2 instructions with TAPD prefix and ImmT = Imm8.
+AVX8I - AVX instructions with T8PD prefix.
+AVXAIi8 - AVX instructions with TAPD prefix and ImmT = Imm8.
+
+AVX5128I - AVX-512 instructions with T8PD prefix.
+AVX512AIi8 - AVX-512 instructions with TAPD prefix and ImmT = Imm8.
+AVX512PDI  - AVX-512 instructions with PD, double packed.
+AVX512PSI  - AVX-512 instructions with PS, single packed.
+AVX512XS8I - AVX-512 instructions with T8 and XS prefixes.
+AVX512XSI  - AVX-512 instructions with XS prefix, generic domain.
+AVX512BI   - AVX-512 instructions with PD, int packed domain.
+AVX512SI   - AVX-512 scalar instructions with PD prefix.
+
+

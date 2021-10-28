@@ -12,7 +12,7 @@ namespace Z0.Asm
         Outcome BuildRunCpp(CmdArgs args)
         {
            var result = Outcome.Success;
-            var home = ProjectHome(State.Project());
+            var home = Ws.Project(State.Project()).Home();
             result = OmniScript.RunProjectScript(home, arg(args,0).Value, CppBuild, false, out var flows);
             if(result.Fail)
                 return result;

@@ -21,11 +21,11 @@ namespace Z0.Ops
             A = a;
         }
 
-        public Label OpName => "not<a>";
+        public Label OpName => "not<{0}>";
 
         public UnaryBitLogicKind Kind
             => UnaryBitLogicKind.Not;
-            
+
         [MethodImpl(Inline)]
         public Not<T> Make(T a0)
             => new Not<T>(a0);
@@ -47,5 +47,5 @@ namespace Z0.Ops
         [MethodImpl(Inline)]
         public static implicit operator Not(Not<T> src)
             => src.Untyped();
-    }    
+    }
 }

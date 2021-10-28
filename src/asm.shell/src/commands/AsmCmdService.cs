@@ -26,8 +26,6 @@ namespace Z0.Asm
 
         IApiPack ApiPack;
 
-        NasmCatalog NasmCatalog;
-
         IntelSdm Sdm;
 
         AsmRegSets RegSets;
@@ -62,8 +60,6 @@ namespace Z0.Asm
 
         IWorkspace DataSources;
 
-        llvm.EtlWorkflow LlvmEtl;
-
         OmniScript OmniScript;
 
         TableLoaders Loaders;
@@ -71,6 +67,8 @@ namespace Z0.Asm
         TableEmitters Emitters;
 
         llvm.LlvmNm LlvmNm;
+
+        ProjectScripts ProjectScripts;
 
         FS.FolderPath AsmRoot
         {
@@ -100,7 +98,6 @@ namespace Z0.Asm
             ApiPacks = Wf.ApiPacks();
             ApiPack = ApiPacks.Current();
             ApiArchive = ApiPack.Archive();
-            NasmCatalog = Wf.NasmCatalog();
             Sdm = Wf.IntelSdm();
             RegSets = Wf.AsmRegSets();
             Xed = Wf.IntelXed();
@@ -113,7 +110,6 @@ namespace Z0.Asm
             DataSources = Ws.Sources();
             ApiCatalogs = Wf.ApiCatalogs();
             AsmEtl = Wf.AsmEtl();
-            LlvmEtl = Wf.LlvmEtl();
             Loaders = Wf.TableLoaders();
             Emitters = Wf.TableEmitters();
             OmniScript = Wf.OmniScript();
@@ -121,6 +117,7 @@ namespace Z0.Asm
             LlvmNm = Wf.LlvmNm();
             State.Init(Wf,Ws);
             State.Project("cmodels");
+            ProjectScripts = Wf.ProjectScripts();
         }
 
         protected override void Disposing()
@@ -141,22 +138,11 @@ namespace Z0.Asm
             return ResPack;
         }
 
-
-        [MethodImpl(Inline)]
-        ref readonly NativeBufferSeq NativeBuffers()
-            => ref _NativeBuffers;
-
         FS.FolderPath OutDir(string id)
             => OutWs.Subdir(id);
 
         public FS.FolderPath OutRoot()
             => OutWs.Root;
-
-        FS.FilePath ToolScript(ToolId tool, string id)
-            => Ws.Tools().Script(tool, id);
-
-        FS.FolderPath ProjectHome(ProjectId id)
-            => ProjectWs.Home(id);
 
         FS.Files Files(FS.Files src, bool write = true)
         {
@@ -177,25 +163,5 @@ namespace Z0.Asm
             var cmd = Cmd.cmdline(script.Format(PathSeparator.BS));
             return OmniScript.Run(cmd, vars, out var response);
         }
-
-        // ReadOnlySpan<ProcessAsmRecord> GetProcessAsm()
-        // {
-        //     if(State.ProcessAsmCount != 0)
-        //         return State.ProcessAsm();
-
-        //     var path = ApiArchive.ProcessAsmPath();
-        //     var buffer = alloc<ProcessAsmRecord>(AsmEtl.ProcessAsmCount(path));
-        //     Write(string.Format("Loading process asm from {0}", path.ToUri()));
-        //     var result = AsmEtl.LoadProcessAsm(path, buffer);
-        //     if(result.Fail)
-        //     {
-        //         Error(result.Message);
-        //         return default;
-        //     }
-
-        //     var loaded = State.ProcessAsm(buffer);
-        //     Write(string.Format("Loaded {0} process asm records from {1}", loaded.Length, path.ToUri()));
-        //     return loaded;
-        // }
     }
 }

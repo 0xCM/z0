@@ -22,5 +22,15 @@ namespace Z0.llvm
             return result;
         }
 
+        [CmdOp(".test-logs")]
+        Outcome ReadJson(CmdArgs args)
+        {
+            var result = Outcome.Success;
+
+            var entries = LlvmTests.TestLog(FS.path(@"J:\llvm\toolset\logs\llvm-tests-detail.json"));
+            Write(string.Format("Parsed {0} entries", entries.Length));
+
+            return result;
+        }
     }
 }

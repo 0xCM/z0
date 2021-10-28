@@ -44,37 +44,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<eight> bits(N8 n)
              => recover<byte,eight>(W8);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<SymVal<BitSeq1>> symvals(N1 n)
-            => Bytes.cells<SymVal<BitSeq1>>(n2);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<SymVal<BitSeq2>> symvals(N2 n)
-            => Bytes.cells<SymVal<BitSeq2>>(n4);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<SymVal<BitSeq3>> symvals(N3 n)
-            => Bytes.cells<SymVal<BitSeq3>>(n8);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<SymVal<BitSeq4>> symvals(N4 n)
-            => Bytes.cells<SymVal<BitSeq4>>(n16);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<SymVal<BitSeq5>> symvals(N5 n)
-            => Bytes.cells<SymVal<BitSeq5>>(n32);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<SymVal<BitSeq6>> symvals(N6 n)
-            => Bytes.cells<SymVal<BitSeq6>>(n64);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<SymVal<BitSeq7>> symvals(N7 n)
-            => Bytes.cells<SymVal<BitSeq7>>(n128);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<SymVal<BitSeq8>> symvals(N8 n)
-            => Bytes.cells<SymVal<BitSeq8>>(n256);
     }
 }

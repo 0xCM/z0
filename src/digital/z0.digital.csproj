@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(Bits)" />
     <ProjectReference Include="$(BitNumbers)" />
+    <ProjectReference Include="$(SymCore)" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@ namespace Z0.Strings
     using static core;
 
     /// <summary>
-    /// Defines a reference to a mutable S-sequence
+    /// A mutable <typeparamref name='S'/> sequence
     /// </summary>
     public unsafe readonly struct Word<S>
         where S : unmanaged

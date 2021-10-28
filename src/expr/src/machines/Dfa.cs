@@ -52,7 +52,6 @@ namespace Z0.Expr
 
         }
 
-
         public static TableDfa<Hex5Seq,AsciLetterLoSym> recognizer(string src)
         {
             const AsciLetterLoSym Min = AsciLetterLoSym.a;

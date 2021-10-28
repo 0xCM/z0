@@ -12,7 +12,7 @@ namespace Z0.Flows
     {
         [MethodImpl(Inline), Op]
         public static Channel channel(uint cells, uint width, Mask mask = default)
-            => new Channel(cells,width,mask);
+            => new Channel(cells, width, mask);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Channel<T> channel<T>(uint cells, Mask mask = default)

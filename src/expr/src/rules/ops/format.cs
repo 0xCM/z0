@@ -5,9 +5,9 @@
 namespace Z0.Rules
 {
     using static core;
-    using static ExprFormats;
+    using static SyntaxPatterns;
 
-    using XF = ExprFormats;
+    using XF = SyntaxPatterns;
 
     partial struct rules
     {

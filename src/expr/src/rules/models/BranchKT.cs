@@ -7,7 +7,7 @@ namespace Z0.Rules
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Expr;
+    using Types;
 
     using static Root;
 
@@ -46,5 +46,5 @@ namespace Z0.Rules
 
         public override string ToString()
             => Format();
-    }    
+    }
 }

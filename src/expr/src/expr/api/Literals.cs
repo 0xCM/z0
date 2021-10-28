@@ -9,6 +9,7 @@ namespace Z0.Expr
 
     using static Root;
     using static core;
+    using Types;
 
     partial struct expr
     {

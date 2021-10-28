@@ -9,8 +9,6 @@
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(Bits)" />
     <ProjectReference Include="$(Cells)" />
-    <ProjectReference Include="$(Hex)" />
-    <ProjectReference Include="$(SymCore)" />
   </ItemGroup>
 
 </Project>

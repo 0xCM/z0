@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <ZVer>0.0.40</ZVer>
+    <ZVer>0.0.43</ZVer>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="z0.core" Version="$(ZVer)" />
-    <PackageReference Include="z0.hex" Version="$(ZVer)" />
     <PackageReference Include="z0.gmath" Version="$(ZVer)" />
     <PackageReference Include="z0.symcore" Version="$(ZVer)" />
+    <PackageReference Include="z0.bitnumbers" Version="$(ZVer)" />
   </ItemGroup>
 
 </Project>

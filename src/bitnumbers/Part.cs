@@ -22,4 +22,12 @@ namespace Z0
     {
 
     }
+
+
+    struct Msg
+    {
+        public static MsgPattern<string> UnevenNibbles
+            => "An even number of nibbles was not provided in the source text '{0}'";
+
+    }
 }

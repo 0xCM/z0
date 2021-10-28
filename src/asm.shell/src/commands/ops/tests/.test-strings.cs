@@ -50,7 +50,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 seek(input,i) = i.FormatBits();
 
-            using var buffer = Labels.alloc(input, out var index);
+            using var buffer = strings.buffer(input, out var index);
             for(var i=0; i<count; i++)
             {
                 ref readonly var label = ref index[i];
@@ -113,7 +113,7 @@ namespace Z0.Asm
             var count = 256u;
             var length = 8u;
             using var buffer = strings.buffer(count*length);
-            var allocator = LabelAllocator.create(buffer);
+            var allocator = buffer.LabelAllocator();
             var labels = core.alloc<Label>(count);
             for(uint i=0; i<256; i++)
             {
