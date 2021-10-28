@@ -14,9 +14,7 @@ namespace Z0
     [Free]
     public interface IIsomorhphic
     {
-        Type SourceType {get;}
-
-        Type TargetType {get;}
+        PairedTypes Pair {get;}
     }
 
     /// <summary>
@@ -27,9 +25,8 @@ namespace Z0
     [Free]
     public interface IIsomorhphic<S,T> : IIsomorhphic
     {
-        Type IIsomorhphic.SourceType => typeof(S);
-
-        Type IIsomorhphic.TargetType => typeof(T);
+        PairedTypes IIsomorhphic.Pair
+            =>  PairedTypes.define<S,T>();
     }
 
     [Free]

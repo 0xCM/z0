@@ -8,6 +8,9 @@ namespace Z0
         where T : unmanaged
     {
         string Format(T src, NumericBaseKind @base);
+
+        string ITextFormatter<T>.Format(T src)
+            => Format(src, NumericBaseKind.Base10);
     }
 
     public interface INumericFormatter<F,T> : INumericFormatter<T>

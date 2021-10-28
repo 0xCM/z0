@@ -16,11 +16,6 @@ namespace Z0
 
         }
 
-        public LiteralProviderAttribute(LiteralUsage usage)
-        {
-            Usage = usage;
-        }
-
         public LiteralUsage Usage {get;}
     }
 }

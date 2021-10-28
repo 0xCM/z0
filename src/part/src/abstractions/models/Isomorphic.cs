@@ -14,26 +14,24 @@ namespace Z0
     /// </summary>
     public readonly struct Isomorphic : IIsomorhphic
     {
-        public Type SourceType {get;}
-
-        public Type TargetType {get;}
+        public PairedTypes Pair {get;}
 
         [MethodImpl(Inline)]
-        public Isomorphic(Type src, Type dst)
+        public Isomorphic(Type a, Type b)
         {
-            SourceType = src;
-            TargetType = dst;
+            Pair = (a,b);
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => string.Format("{0} <-> {1}", Pair.TypeA.Name, Pair.TypeB.Name);
+
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator Isomorphic((Type src, Type dst) x)
             => new Isomorphic(x.src, x.dst);
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => string.Format("<->", SourceType.Name, TargetType.Name);
-
-        public override string ToString()
-            => Format();
     }
 }

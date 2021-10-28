@@ -4,16 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ITextFormatter
-    {
-        string Format(object src);
-    }
+    using System;
+    using System.Runtime.CompilerServices;
 
-    public interface ITextFormatter<T> : ITextFormatter
-    {
-        string Format(T src);
 
-        string ITextFormatter.Format(object src)
-            => Format((T)src);
+    public class RngStream
+    {
+
+
     }
 }

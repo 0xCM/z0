@@ -8,22 +8,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class)]
-    public class ParserAttribute : Attribute
-    {
-        public ParserAttribute(Type target)
-        {
-            TargetType = target;
-        }
-
-        public ParserAttribute()
-        {
-            TargetType = typeof(void);
-        }
-
-        public Type TargetType {get;}
-    }
-
     [Free]
     public interface IParser
     {

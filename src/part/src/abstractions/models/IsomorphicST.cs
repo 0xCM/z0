@@ -11,7 +11,11 @@ namespace Z0
 
     public readonly struct Isomorphic<S,T> : IIsomorphic<Isomorphic<S,T>,S,T>
     {
-        public static Isomorphic Untyped => new Isomorphic(typeof(S), typeof(T));
+        public static Isomorphic Untyped
+            => new Isomorphic(typeof(S), typeof(T));
+
+        public PairedTypes Pair
+            => PairedTypes.define<S,T>();
 
         public string Format()
             => Untyped.Format();

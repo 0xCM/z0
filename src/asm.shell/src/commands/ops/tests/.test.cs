@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.llvm;
+    using Types;
 
     using static core;
     using static Root;
@@ -19,9 +19,12 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
-            ShowLiterals(typeof(BitMaskLiterals), base2);
+            Write(types.cell(13,16, PrimalKind.UnsignedInt));
 
-            return result;
+            Write(types.ucell(13));
+
+            return CellTypeParser.Service.Validate();
+
         }
 
         Outcome TestBraceMatching(CmdArgs args)
