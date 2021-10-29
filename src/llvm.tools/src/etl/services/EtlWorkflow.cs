@@ -10,7 +10,7 @@ namespace Z0.llvm
     using Asm;
     using records;
 
-    using static EtlNames;
+    using static Names;
     using static Root;
     using static core;
 

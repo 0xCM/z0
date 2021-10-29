@@ -16,6 +16,7 @@
       <ProjectReference Include="$(Ws)" />
       <ProjectReference Include="$(Blittable)" />
       <ProjectReference Include="$(AsmLangG)" />
+      <ProjectReference Include="$(Types)" />
   </ItemGroup>
 
    <ItemGroup>

@@ -40,5 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator LineInterval<T>((T id, LineNumber min, LineNumber max) src)
             => new LineInterval<T>(src.id,src.min, src.max);
+
+        public static LineInterval<T> Empty => default;
     }
 }

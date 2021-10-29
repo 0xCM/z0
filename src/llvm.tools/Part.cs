@@ -35,7 +35,7 @@ namespace Z0
             => llvm.LlvmPaths.create(context);
 
         [Op]
-        public static LlvmDb LLvmDb(this IWfRuntime wf)
+        public static LlvmDb LlvmDb(this IWfRuntime wf)
             => llvm.LlvmDb.create(wf);
 
         [Op]

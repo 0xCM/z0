@@ -9,6 +9,8 @@ namespace Z0
 
     using static Root;
 
+    using static minicore;
+
     public readonly struct LineMap<T>
     {
         readonly LineInterval<T>[] _Intervals;
@@ -41,6 +43,18 @@ namespace Z0
                     k += src[i].LineCount;
                 return k;
             }
+        }
+
+        public ref LineInterval<T> this[uint i]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(_Intervals,i);
+        }
+
+        public ref LineInterval<T> this[int i]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(_Intervals,i);
         }
 
         public bool IsEmpty

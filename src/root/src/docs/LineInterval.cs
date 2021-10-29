@@ -11,6 +11,14 @@ namespace Z0
 
     public readonly struct LineInterval
     {
+        public static Fence<char> RangeFence => (Chars.LBracket, Chars.RBracket);
+
+        public const string RangeDelimiter = "..";
+
+        public const char IdentitySep = Chars.Colon;
+
+        public static Fence<char> CountFence => (Chars.LParen, Chars.RParen);
+
         public readonly uint Id;
 
         public readonly LineNumber MinLine;
@@ -36,6 +44,8 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static LineInterval Empty => default;
     }
 
 }

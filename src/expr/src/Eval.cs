@@ -9,14 +9,14 @@ namespace Z0.Eval
 
     using static Root;
     using static core;
-    
+
     using Z0.Rules;
 
-    public readonly partial struct api
+    public readonly partial struct eval
     {
         const NumericKind Closure = UnsignedInts;
 
-        public static uint eval<S,T>(ReadOnlySpan<S> src, Span<T> dst, IEvaluator<S,T> f)
+        public static uint apply<S,T>(ReadOnlySpan<S> src, Span<T> dst, IEvaluator<S,T> f)
         {
             var count = min(src.Length, dst.Length);
             var counter = 0u;
@@ -31,7 +31,7 @@ namespace Z0.Eval
         }
 
         [Op, Closures(Closure)]
-        public static uint eval<T>(Adjacent<T> rule, ReadOnlySpan<T> src, Span<uint> dst)
+        public static uint apply<T>(Adjacent<T> rule, ReadOnlySpan<T> src, Span<uint> dst)
             where T : unmanaged, IEquatable<T>
         {
             var terms = Math.Min(src.Length - 1, dst.Length);
@@ -44,6 +44,6 @@ namespace Z0.Eval
                     seek(dst, matched++) = i;
             }
             return matched;
-        }   
-    }    
+        }
+    }
 }

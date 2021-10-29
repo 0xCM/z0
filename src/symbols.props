@@ -73,7 +73,6 @@
     <Grids>$(Src)grids/z0.grids.csproj</Grids>
 
     <Hash>$(Src)hash/z0.hash.csproj</Hash>
-    <Hex>$(Src)hex/z0.hex.csproj</Hex>
 
     <Interop>$(Src)interop/z0.interop.csproj</Interop>
 
@@ -121,6 +120,7 @@
     <Time>$(Src)time/z0.time.csproj</Time>
     <Tools>$(Src)tools/z0.tools.csproj</Tools>
     <Tooling>$(Src)tooling/z0.tooling.csproj</Tooling>
+    <Types>$(Src)types/z0.types.csproj</Types>
 
     <Validity>$(Src)validity/z0.validity.csproj</Validity>
     <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>

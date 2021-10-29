@@ -12,11 +12,24 @@ namespace Z0.llvm
 
         LlvmPaths LlvmPaths;
 
+        new LlvmDb Db
+        {
+            get
+            {
+                if(_Db == null)
+                    _Db = Wf.LlvmDb();
+                return _Db;
+            }
+        }
+
+        LlvmDb _Db;
+
         protected override void Initialized()
         {
             LlvmEtl = Wf.LlvmEtl();
             Toolbase = Wf.LLvmToolbase();
             LlvmPaths = Wf.LlvmPaths();
+
         }
     }
 }

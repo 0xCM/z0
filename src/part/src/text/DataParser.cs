@@ -16,6 +16,38 @@ namespace Z0
     {
         public static MsgPattern<Name,string> ParseFailure => "Parse failure {0}:{1}";
 
+        public static Outcome parse(string src, out LineInterval<Identifier> dst)
+        {
+            var result = Outcome.Success;
+            dst = LineInterval<Identifier>.Empty;
+            var i = text.index(src,Chars.Colon);
+            if(i >= 0)
+            {
+                var id = text.left(src,i);
+                result = text.unfence(src, LineInterval.RangeFence, out var rs);
+                if(result.Fail)
+                    return result;
+
+                var parts = text.split(rs, LineInterval.RangeDelimiter);
+                if(parts.Length != 2)
+                {
+                    result = (false, string.Format("The range of {0} cannot be determined", src));
+                    return result;
+                }
+
+                result = parse(skip(parts,0), out LineNumber min);
+                if(result.Fail)
+                    return result;
+
+                result = parse(skip(parts,1), out LineNumber max);
+                if(result.Fail)
+                    return result;
+
+                dst = new LineInterval<Identifier>(id,min,max);
+            }
+            return result;
+        }
+
         public static Outcome parse(TextLine src, out SymLiteralRow dst)
         {
             var outcome = Outcome.Success;

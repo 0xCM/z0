@@ -8,6 +8,7 @@ namespace Z0.Rules
     using System.Collections.Generic;
 
     using Expr;
+    using Ops;
 
     using static Root;
 
@@ -20,12 +21,12 @@ namespace Z0.Rules
             var counter = 7u;
             var x = expr.var("x", () => expr.value(counter++));
             var y = expr.var("y", () => expr.value(counter+=2));
-            var a = and(x,y);
-            var b = or(a,x);
-            var c = xor(a,b);
+            var a = logic.and(x,y);
+            var b = logic.or(a,x);
+            var c = logic.xor(a,b);
             yield return c;
             yield return c;
-            yield return c;            
+            yield return c;
         }
     }
 }
