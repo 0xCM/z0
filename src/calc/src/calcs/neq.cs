@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static CalcHosts;
-    using static SFx;
 
     partial struct Calcs
     {
@@ -21,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), SpanOp, Closures(Closure)]
         public static Span<bit> neq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
             where T : unmanaged
-                => apply(Calcs.neq<T>(), a, b, dst);
+                => gcalc.apply(Calcs.neq<T>(), a, b, dst);
     }
 }

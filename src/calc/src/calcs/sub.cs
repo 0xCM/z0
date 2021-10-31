@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Sub, Closures(Closure)]
         public static Span<T> sub<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
-                => apply(sub<T>(), a, b, dst);
+                => gcalc.apply(sub<T>(), a, b, dst);
 
         [MethodImpl(Inline), Sub, Closures(Closure)]
         public static ref readonly SpanBlock128<T> sub<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static SFx;
 
     partial struct CalcHosts
     {
@@ -22,7 +21,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
-                => apply(this, src, dst);
+                => gcalc.apply(this, src, dst);
         }
     }
 }

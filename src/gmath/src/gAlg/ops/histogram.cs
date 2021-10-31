@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Creates a histogram over the T-domain and allocates a bin count commensurate with the number of points in T

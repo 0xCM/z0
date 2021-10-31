@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         [MethodImpl(Inline), Srl, Closures(Closure)]
         public static Span<T> srl<T>(ReadOnlySpan<T> src, byte count, Span<T> dst)

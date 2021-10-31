@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T length<T>(Interval<T> src)

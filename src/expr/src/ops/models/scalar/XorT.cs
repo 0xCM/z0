@@ -11,7 +11,7 @@ namespace Z0.Ops.Scalar
 
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct Xor<T> : IBinaryBitLogicOp<Xor<T>,T>
-        where T : IVar
+        where T : IExpr
     {
         public readonly T A;
 
@@ -24,7 +24,7 @@ namespace Z0.Ops.Scalar
             B = b;
         }
 
-        public Label OpName => "or<a>";
+        public Label OpName => "xor<{0}>";
 
         public BinaryBitLogicKind Kind
             => BinaryBitLogicKind.Xor;

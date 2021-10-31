@@ -41,7 +41,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Bin<T> Increment()
-            => gAlg.next(ref this);
+            => gcalc.next(ref this);
 
         public override string ToString()
             => Format();

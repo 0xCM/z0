@@ -11,6 +11,7 @@ namespace Z0
     using static core;
 
     using S = Surrogates;
+    using C = ScalarCalcs;
 
     public class t_arithmetic : t_mathsvc<t_arithmetic>
     {
@@ -18,7 +19,7 @@ namespace Z0
         void add_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = Calcs.add<T>();
+            var g = C.add<T>();
             var validator = this.BinaryOpMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
@@ -118,7 +119,7 @@ namespace Z0
         void abs_check<T>(S.UnaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = Calcs.abs<T>();
+            var g = C.abs<T>();
             var comparer = this.UnaryOpMatch(t);
             comparer.CheckMatch(f,g);
             comparer.CheckSpanMatch(f,g);
@@ -130,7 +131,7 @@ namespace Z0
             var count = Random.Next(21u, 256u);
             Span<T> data = new T[count];
             ref var src = ref core.first(data);
-            gAlg.increments(first, count, ref src);
+            gcalc.increments(first, count, ref src);
 
             for(var i=0; i < count; i++)
                 NumericClaims.eq(gmath.add(first, Numeric.force<T>(i)), data[i]);

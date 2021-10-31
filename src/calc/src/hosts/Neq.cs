@@ -9,9 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Root;
-    using static SFx;
-
-    using K = ApiClasses;
 
     partial struct CalcHosts
     {
@@ -20,11 +17,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T x, T y) => gmath.neq(x,y);
+            public readonly bit Invoke(T x, T y)
+                => gmath.neq(x,y);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-                => apply(this, lhs,rhs,dst);
+                => gcalc.apply(this, lhs,rhs,dst);
         }
     }
 }

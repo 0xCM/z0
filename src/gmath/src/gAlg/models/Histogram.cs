@@ -31,10 +31,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Deposit(ReadOnlySpan<T> points)
-            => gAlg.deposit(points, this);
+            => gcalc.deposit(points, this);
 
         [MethodImpl(Inline)]
         public uint BinCount(uint index)
-            => gAlg.count(this, index);
+            => gcalc.count(this, index);
     }
 }

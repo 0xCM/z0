@@ -11,8 +11,6 @@ namespace Z0
     using static Root;
     using static SFx;
 
-    using K = ApiClasses;
-
     partial struct CalcHosts
     {
         [Closures(AllNumeric), Min]
@@ -25,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => apply(this, lhs,rhs,dst);
+                => gcalc.apply(this, lhs,rhs,dst);
         }
 
         [Closures(AllNumeric), Min]

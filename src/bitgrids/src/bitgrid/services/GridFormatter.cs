@@ -12,8 +12,8 @@ namespace Z0
         {
             dst.AppendLine(Grids.statsheader());
             var points = (
-                from row in gAlg.stream(kMinSegs, mkMaxSgs)
-                from col in gAlg.stream(kMinSegs, mkMaxSgs)
+                from row in gcalc.stream(kMinSegs, mkMaxSgs)
+                from col in gcalc.stream(kMinSegs, mkMaxSgs)
                 let count = row*col
                 orderby count
                 select (row, col)).ToArray();

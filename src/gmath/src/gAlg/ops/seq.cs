@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         [Op, Closures(Closure)]
         public static Seq<T> seq<T>(params T[] src)

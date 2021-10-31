@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Presents an index-identifeid histogram bucket as an interval

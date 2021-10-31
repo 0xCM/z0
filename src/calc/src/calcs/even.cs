@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static CalcHosts;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -22,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Even, Closures(Closure)]
         public static Span<bit> even<T>(ReadOnlySpan<T> src, Span<bit> dst)
             where T : unmanaged
-                => apply(Calcs.even<T>(), src,dst);
+                => gcalc.apply(Calcs.even<T>(), src,dst);
     }
 }

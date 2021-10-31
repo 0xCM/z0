@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Computes the smallest/greatest bin counts

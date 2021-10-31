@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         [MethodImpl(Inline), Abs, Closures(Floats)]
         public static Span<T> fabs<T>(ReadOnlySpan<T> src, Span<T> dst)

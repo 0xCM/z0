@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         [MethodImpl(Inline), Op]
         public static void sort(ulong[] src)

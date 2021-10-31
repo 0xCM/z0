@@ -14,13 +14,4 @@ namespace Z0
         public static void run(params string[] args)
             => Run(args);
     }
-
-    readonly struct ApiNames
-    {
-        const string bitlogix = nameof(bitlogix);
-
-        const string checks = nameof(checks);
-
-        public const string BinaryBitLogixCheck = bitlogix + dot + checks + binary;
-    }
 }

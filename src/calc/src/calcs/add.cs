@@ -14,12 +14,7 @@ namespace Z0
 
     partial struct Calcs
     {
-        [MethodImpl(Inline), Factory(Add), Closures(AllNumeric)]
-        public static Add<T> add<T>()
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline), Factory(Add), Closures(UnsignedInts)]
+        [MethodImpl(Inline), Factory(Add), Closures(Closure)]
         public static BvAdd<T> bvadd<T>()
             where T : unmanaged
                 => sfunc<BvAdd<T>>();
@@ -43,11 +38,6 @@ namespace Z0
         public static VAdd256<T> vadd<T>(W256 w, T t = default)
             where T : unmanaged
                 => default(VAdd256<T>);
-
-        [MethodImpl(Inline), Add, Closures(Closure)]
-        public static Span<T> add<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
-            where T : unmanaged
-                => apply(add<T>(), a, b, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock256<T> add<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)

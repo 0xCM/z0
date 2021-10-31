@@ -15,10 +15,14 @@ namespace Z0
     [Free]
     public interface IBooleanAlgebra<T> : IAlgebra<T>
     {
-        T And(T a);
+        T True {get;}
 
-        T Or(T a);
+        T False {get;}
 
-        T Not();
+        T And(T a, T b);
+
+        T Or(T a, T b);
+
+        T Not(T a);
     }
 }

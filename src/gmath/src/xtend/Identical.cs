@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit Identical<T>(this Span<T> xs, Span<T> ys)
             where T : unmanaged
-                => gAlg.identical(xs,ys);
+                => gcalc.identical(xs,ys);
 
         /// <summary>
         /// Returns 1 if the left and right spans contain identical content and 0 otherwise
@@ -31,6 +31,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit Identical<T>(this ReadOnlySpan<T> xs, ReadOnlySpan<T> ys)
             where T : unmanaged
-                => gAlg.identical(xs,ys);
+                => gcalc.identical(xs,ys);
     }
 }

@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor, Closures(Closure)]
         public static Span<T> xnor<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
-                => apply(xnor<T>(), a, b, dst);
+                => gcalc.apply(xnor<T>(), a, b, dst);
 
         [MethodImpl(Inline), Xnor, Closures(Closure)]
         public static ref readonly SpanBlock128<T> xnor<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

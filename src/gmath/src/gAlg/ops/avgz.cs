@@ -10,8 +10,10 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
+
+
         [MethodImpl(Inline), Avg, Closures(AllNumeric)]
         public static T avgz<T>(ReadOnlySpan<T> src)
             where T : unmanaged

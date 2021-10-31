@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static core;
-    using static SFx;
     using static NumericClaims;
 
     public readonly struct Matches
@@ -75,7 +74,7 @@ namespace Z0
             clock.Start();
             try
             {
-                apply(g, lhs, dst);
+                gcalc.apply(g, lhs, dst);
                 for(var i=0u; i<count; i++)
                     eq(f.Invoke(skip(leftIn, i)), skip(target, i));
             }

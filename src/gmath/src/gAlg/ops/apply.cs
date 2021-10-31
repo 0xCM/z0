@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct SFx
+    partial struct gcalc
     {
         /// <summary>
         /// Computes z := y |> f x := f(x,y) for a binary operator f

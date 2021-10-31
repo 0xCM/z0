@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint filter(ReadOnlySpan<CodeSymbol> src, SymbolKind kind, Span<CodeSymbol> dst)
-            => SFx.filter(src, filter(kind), dst);
+            => gcalc.filter(src, filter(kind), dst);
 
         [MethodImpl(Inline), Op]
         public static MemberProducer producer()

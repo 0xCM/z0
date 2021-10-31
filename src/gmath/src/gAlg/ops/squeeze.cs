@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Evenly projects points from the interval [0,maxval[T]] onto the interval [0,max]

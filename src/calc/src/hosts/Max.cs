@@ -11,8 +11,6 @@ namespace Z0
     using static Root;
     using static SFx;
 
-    using K = ApiClasses;
-
     partial struct CalcHosts
     {
         [Closures(AllNumeric), Max]
@@ -25,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
-                => apply(this, a,b,dst);
+                => gcalc.apply(this, a,b,dst);
         }
 
         [Closures(AllNumeric), Max]
@@ -71,6 +69,5 @@ namespace Z0
             public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
                 => ref zip(a, b, dst, Calcs.vmax<T>(w256));
         }
-
     }
 }

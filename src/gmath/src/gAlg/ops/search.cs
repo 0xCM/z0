@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         public static bit search<T>(N4 n, in T src, T match, uint offset)

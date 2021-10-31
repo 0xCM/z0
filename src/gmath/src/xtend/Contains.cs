@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool Contains<T>(this ClosedInterval<T> src, T point)
             where T : unmanaged
-                => gAlg.contains(src, point);
+                => gcalc.contains(src, point);
 
         /// <summary>
         /// Determines whether an interval contains a specified point
@@ -25,6 +25,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool Contains<T>(this Interval<T> src, T point)
             where T : unmanaged
-                => gAlg.contains(src,point);
+                => gcalc.contains(src,point);
     }
 }

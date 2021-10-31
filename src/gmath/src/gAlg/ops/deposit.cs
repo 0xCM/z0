@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Deposits each source point, when possible, into some histogram bucket
@@ -27,7 +27,7 @@ namespace Z0
             for(var i=0u; i<src.Length; i++)
             {
                 ref readonly var point = ref skip(points,i);
-                var index = gAlg.index<T>(dst, point);
+                var index = gcalc.index<T>(dst, point);
                 if(index != uint.MaxValue)
                     ++seek(counts, index - 1);
             }

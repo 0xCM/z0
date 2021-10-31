@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct SFx
+    partial struct gcalc
     {
         /// <summary>
         /// Projects and transforms source elements that satisfy a specified predicate into a supplied target

@@ -36,7 +36,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(n256,lhs.BlockCount);
-            Calcs.and(lhs,rhs, dst.Storage);
+            ScalarCalcs.and(lhs,rhs, dst.Storage);
             return dst;
         }
 

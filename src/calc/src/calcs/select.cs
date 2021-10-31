@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static CalcHosts;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -42,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static Span<T> select<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
             where T : unmanaged
-                => apply(select<T>(), a, b, c, dst);
+                => gcalc.apply(select<T>(), a, b, c, dst);
 
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static ref readonly SpanBlock128<T> select<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> c, in SpanBlock128<T> dst)

@@ -88,7 +88,7 @@ namespace Z0
         static Span<T> integral<T>(Interval<T> src, T width)
             where T : unmanaged
         {
-            var len =  gAlg.length(src);
+            var len =  gcalc.length(src);
             var count = Numeric.force<T,int>(gmath.div(len, width));
             var dst = span<T>(count + 1);
             var point = src.Left;
@@ -115,7 +115,7 @@ namespace Z0
             where T : unmanaged
         {
             var scale = 4;
-            var len =  gfp.round(gAlg.length(src), scale);
+            var len =  gfp.round(gcalc.length(src), scale);
             var fcount = gfp.div(len, width);
             var count = Numeric.force<T,int>(gfp.ceil(fcount));
             var dst = core.span<T>(count + 1);

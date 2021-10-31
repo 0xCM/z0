@@ -38,11 +38,10 @@ namespace Z0
             where T : unmanaged
                 => default(Inc256<T>);
 
-
         [MethodImpl(Inline), Inc, Closures(Closure)]
         public static Span<T> inc<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => SFx.apply(inc<T>(), src, dst);
+                => gcalc.apply(inc<T>(), src, dst);
 
         [MethodImpl(Inline), Inc, Closures(Closure)]
         public static ref readonly SpanBlock128<T> inc<T>(in SpanBlock128<T> a, in SpanBlock128<T> dst)

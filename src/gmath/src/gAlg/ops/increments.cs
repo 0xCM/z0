@@ -12,7 +12,7 @@ namespace Z0
     using static core;
     using static Numeric;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Populates a span of length n with consecutive values 0,1,...n - 1

@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static CalcHosts;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -22,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), ModMul, Closures(Closure)]
         public static Span<T> modmul<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<T> dst)
             where T : unmanaged
-                => apply(Calcs.modmul<T>(), a,b,c, dst);
+                => gcalc.apply(Calcs.modmul<T>(), a,b,c, dst);
     }
 }

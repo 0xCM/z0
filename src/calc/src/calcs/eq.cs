@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static CalcHosts;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -42,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Eq, Closures(Integers)]
         public static Span<bit> eq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
             where T : unmanaged
-                => apply(eq<T>(), a, b, dst);
+                => gcalc.apply(eq<T>(), a, b, dst);
 
         [MethodImpl(Inline), Eq, Closures(Integers)]
         public static ref readonly SpanBlock128<T> eq<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

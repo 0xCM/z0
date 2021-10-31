@@ -93,7 +93,7 @@ namespace Z0
             Claim.eq(length, permA.Length);
             Claim.eq(length, permA.Terms.Length);
 
-            var terms = gAlg.stream(0, length-1).ToArray();
+            var terms = gcalc.stream(0, length-1).ToArray();
             Claim.eq(length, terms.Length);
 
             var permB = Permute.natural(n, terms);

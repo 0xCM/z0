@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         [MethodImpl(Inline), Avg, Closures(Floats)]
         public static T favg<T>(ReadOnlySpan<T> src, bool @checked)

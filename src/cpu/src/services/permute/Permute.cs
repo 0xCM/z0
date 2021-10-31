@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Identity<T>(T n)
             where T : unmanaged
-                => new Perm<T>(gAlg.stream(default, gmath.dec(n)));
+                => new Perm<T>(gcalc.stream(default, gmath.dec(n)));
 
         /// <summary>
         /// Distills a natural permutation on 4 symbols to its canonical literal specification

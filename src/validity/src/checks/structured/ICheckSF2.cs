@@ -72,7 +72,7 @@ namespace Z0
 
             try
             {
-                apply(g, lhs, rhs, dst);
+                gcalc.apply(g, lhs, rhs, dst);
                 for(var i=0u; i<count; i++)
                     eq(f.Invoke(skip(leftIn, i), skip(rightIn, i)), skip(target, i));
             }

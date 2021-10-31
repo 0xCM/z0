@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct SFx
+    partial struct gcalc
     {
         /// <summary>
         /// Branches an operator according to predicate evaluation outcome

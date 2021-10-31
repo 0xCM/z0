@@ -21,7 +21,7 @@ namespace Z0
             where T : unmanaged
         {
             var perm = Permute.identity(n);
-            var lengths = gAlg.stream(m,n);
+            var lengths = gcalc.stream(m,n);
             core.iter(lengths, i => {
                 var p = Permute.identity(i);
                 var cycle = p.Cycle(default(T));

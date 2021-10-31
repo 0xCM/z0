@@ -10,12 +10,14 @@ namespace Z0
     using static Root;
     using static core;
 
+    using C = ScalarCalcs;
+
     public class t_bm_and : t_bits<t_bm_and>
     {
         [MethodImpl(Inline), And, Closures(Integers)]
         public static Span<T> and<T>(Span<T> a, Span<T> b)
             where T : unmanaged
-                => SFx.apply(Calcs.and<T>(), a, b);
+                => gcalc.apply(C.and<T>(), a, b);
 
         void bm_and_g8x8x8()
             => bm_and_check<byte>();

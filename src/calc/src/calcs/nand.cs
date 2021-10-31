@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static Span<T> nand<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
-                => apply(nand<T>(), a, b,dst);
+                => gcalc.apply(nand<T>(), a, b,dst);
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static ref readonly SpanBlock128<T> nand<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

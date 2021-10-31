@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Searches for the bucket containing the point; if found, returns the bucket index; otherwise returns a failure code

@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Logix)"/>
     <ProjectReference Include="$(Bit)"/>
     <ProjectReference Include="$(Containers)"/>
-
   </ItemGroup>
 
 </Project>

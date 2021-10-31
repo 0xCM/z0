@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SeqSplitter<T> splitter<T>(T delimiter)

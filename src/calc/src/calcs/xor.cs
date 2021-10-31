@@ -47,6 +47,6 @@ namespace Z0
         [MethodImpl(Inline), Xor, Closures(Closure)]
         public static Span<T> xor<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
-                => apply(xor<T>(), a, b, dst);
+                => gcalc.apply(xor<T>(), a, b, dst);
     }
 }

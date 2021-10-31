@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Defines a scalar sequence {0,1,...,count-1}

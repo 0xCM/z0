@@ -68,9 +68,9 @@ namespace Z0
             for(var i=0; i<data.Length; i++)
                 c.Collect(skip(in src,i));
 
-            var avg = gAlg.avg(data);
-            var min = gAlg.min(data.ReadOnly());
-            var max = gAlg.max(data.ReadOnly());
+            var avg = gcalc.avg(data);
+            var min = gcalc.min(data.ReadOnly());
+            var max = gcalc.max(data.ReadOnly());
 
             Claim.almost(min, c.Min);
             Claim.almost(max, c.Max);
@@ -87,11 +87,11 @@ namespace Z0
             for(var i=0; i<data.Length; i++)
                 c.Collect(skip(in src,i));
 
-            var msAvg = gAlg.avg(data);
-            var min = gAlg.min(data.ReadOnly());
-            var max = gAlg.max(data.ReadOnly());
+            var msAvg = gcalc.avg(data);
+            var min = gcalc.min(data.ReadOnly());
+            var max = gcalc.max(data.ReadOnly());
 
-            var usAvg1 = gAlg.avgz(data);
+            var usAvg1 = gcalc.avgz(data);
             var usAvg2 = avg(data);
             Trace($"{usAvg1} vs {usAvg2}");
 
@@ -111,11 +111,11 @@ namespace Z0
             for(var i=0; i<data.Length; i++)
                 c.Collect(skip(in src,i));
 
-            var msAvg = gAlg.avg(data);
-            var min = gAlg.min(data.ReadOnly());
-            var max = gAlg.max(data.ReadOnly());
+            var msAvg = gcalc.avg(data);
+            var min = gcalc.min(data.ReadOnly());
+            var max = gcalc.max(data.ReadOnly());
 
-            var usAvg1 = gAlg.avgz(data);
+            var usAvg1 = gcalc.avgz(data);
             var usAvg2 = avg(data);
             Trace($"{usAvg1} vs {usAvg2}");
 
@@ -135,9 +135,9 @@ namespace Z0
             for(var i=0; i<data.Length; i++)
                 c.Collect(skip(in src,i));
 
-            var msAvg = gAlg.avg(data);
-            var min = gAlg.min(data.ReadOnly());
-            var max = gAlg.max(data.ReadOnly());
+            var msAvg = gcalc.avg(data);
+            var min = gcalc.min(data.ReadOnly());
+            var max = gcalc.max(data.ReadOnly());
 
             Claim.almost(min, c.Min);
             Claim.almost(max, c.Max);

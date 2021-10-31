@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Creates a bin over a closed interval partitioned into a specified number of segments

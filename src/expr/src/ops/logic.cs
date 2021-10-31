@@ -39,18 +39,12 @@ namespace Z0.Ops
             => new Or(a,b);
 
         [MethodImpl(Inline), Op]
-        public static Union<T> union<T>(T[] terms)
-            where T : IExpr
-                => new Union<T>(terms);
-
-        [MethodImpl(Inline), Op]
         public Product<IExpr> product(params IExpr[] src)
             => new Product<IExpr>(src);
 
         [MethodImpl(Inline), Op]
         public Sum<IExpr> sum(params IExpr[] src)
             => new Sum<IExpr>(src);
-
 
         [MethodImpl(Inline)]
         public static Test<C> test<C>(C condition)
@@ -71,17 +65,6 @@ namespace Z0.Ops
         public static Union untype<T>(Union<T> src)
             where T : IExpr
                 => new Union(src.Terms.MapArray(x => (IExpr)x));
-
-        internal static string format<T>(in Except<T> src)
-            where T : IExpr
-        {
-            var dst = text.buffer();
-            var terms = src.Terms;
-            var count = terms.Length;
-            dst.Append(Chars.Tilde);
-            dst.Append(Ops.logic.union(src.Storage).Format());
-            return dst.Emit();
-        }
 
         internal static string format(in Except src)
         {
@@ -202,6 +185,5 @@ namespace Z0.Ops
 
             return dst.Emit();
         }
-
     }
 }

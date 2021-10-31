@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Slices an interval into manageable pieces, disjoint even

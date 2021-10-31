@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Lt, Closures(Closure)]
         public static Span<bit> lt<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
             where T : unmanaged
-                => SFx.apply(Calcs.lt<T>(), a, b, dst);
+                => gcalc.apply(Calcs.lt<T>(), a, b, dst);
 
         [MethodImpl(Inline), Lt, Closures(Closure)]
         public static ref readonly SpanBlock128<T> lt<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

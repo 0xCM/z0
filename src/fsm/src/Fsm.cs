@@ -24,7 +24,7 @@ namespace Z0
             var spec1 = Fsm.primal<ushort>("Fsm2",750,750,100,120,Pow2.T15);
             var stats = Fsm.run(spec1, machineCount);
             var counts = stats.Select(x => x.ReceiptCount).ToArray().AsSpan().ReadOnly();
-            var count = gAlg.sum(counts);
+            var count = gcalc.sum(counts);
             term.inform($"A total of {count} events were processed");
         }
 
@@ -32,7 +32,7 @@ namespace Z0
         {
             var spec = new Fsm1Spec();
             var tasks = new Task[Pow2.T08];
-            var indices = gAlg.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(Pow2.T08).ToArray();
+            var indices = gcalc.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(Pow2.T08).ToArray();
             for(var i=0u; i<tasks.Length; i++)
             {
                 var random = Rng.pcg64(0,indices[i]);
@@ -125,7 +125,7 @@ namespace Z0
             where T : unmanaged
         {
             var seeds = Entropy.Values<ulong>(machineCount);
-            var indices = gAlg.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(machineCount).ToArray();
+            var indices = gcalc.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(machineCount).ToArray();
             if(sequential)
                 return Fsm.sequential(spec, seeds, indices).Array();
             else
@@ -180,7 +180,7 @@ namespace Z0
         static TransitionFunction<T,T> transition<T>(IFsmContext context, PrimalFsmSpec<T> spec)
             where T : unmanaged
         {
-            var sources = gAlg.stream<T>(spec.StateCount).ToArray();
+            var sources = gcalc.stream<T>(spec.StateCount).ToArray();
             var random = context.Random;
             var rules = new List<TransitionRule<T,T>>();
             foreach(var source in sources)
@@ -197,7 +197,7 @@ namespace Z0
         static TransitionFunction<T,T> transition<T>(IPolySource src, PrimalFsmSpec<T> spec)
             where T : unmanaged
         {
-            var sources = gAlg.stream<T>(spec.StateCount).ToArray();
+            var sources = gcalc.stream<T>(spec.StateCount).ToArray();
             var rules = new List<TransitionRule<T,T>>();
             foreach(var source in sources)
             {

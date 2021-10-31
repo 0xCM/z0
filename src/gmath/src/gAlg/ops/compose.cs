@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    partial struct SFx
+    partial struct gcalc
     {
         /// <summary>
         /// Computes y := f(x,g(x)) for a unary operator g, and binary operator f

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Computes the floating-point quotient of cells in the left and right operands,

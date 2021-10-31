@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Not, Closures(Closure)]
         public static Span<T> not<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => apply(not<T>(), src, dst);
+                => gcalc.apply(not<T>(), src, dst);
 
         [MethodImpl(Inline), Not, Closures(Closure)]
         public static ref readonly SpanBlock128<T> not<T>(in SpanBlock128<T> a, in SpanBlock128<T> dst)

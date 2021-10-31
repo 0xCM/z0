@@ -17,62 +17,62 @@ namespace Z0.Ops
 
         [MethodImpl(Inline)]
         public static Eq<T> eq<T>(T a, T b)
-            where T : IVar
+            where T : IExpr
                 => new Eq<T>(a,b);
 
         [MethodImpl(Inline)]
         public static Neq<T> neq<T>(T a, T b)
-            where T : IVar
+            where T : IExpr
                 => new Neq<T>(a,b);
 
         [MethodImpl(Inline)]
         public static Ge<T> ge<T>(T a, T b)
-            where T : IVar
+            where T : IExpr
                 => new Ge<T>(a,b);
 
         [MethodImpl(Inline)]
         public static Gt<T> gt<T>(T a, T b)
-            where T : IVar
+            where T : IExpr
                 => new Gt<T>(a,b);
 
         [MethodImpl(Inline)]
         public static Le<T> le<T>(T a, T b)
-            where T : IVar
+            where T : IExpr
                 => new Le<T>(a,b);
 
         [MethodImpl(Inline)]
         public static Lt<T> lt<T>(T a, T b)
-            where T : IVar
+            where T : IExpr
                 => new Lt<T>(a,b);
 
         [MethodImpl(Inline)]
-        public static Ngt ngt<T>(T a, T b)
-            where T : IVar
-                => new Ngt(a,b);
-
-        [MethodImpl(Inline)]
-        public static Nlt nlt<T>(T a, T b)
-            where T : IVar
-                => new Nlt(a,b);
-
-        [MethodImpl(Inline)]
-        public static And<T> and<T>(T a, T b)
+        public static Ngt<T> ngt<T>(T a, T b)
             where T : IExpr
-                => new And<T>(a,b);
+                => new Ngt<T>(a,b);
 
         [MethodImpl(Inline)]
-        public static Or or<T>(T a, T b)
+        public static Nlt<T> nlt<T>(T a, T b)
             where T : IExpr
-                => new Or(a,b);
+                => new Nlt<T>(a,b);
 
         [MethodImpl(Inline)]
-        public static Not not<T>(T a)
-            where T : IExpr
-                => new Not(a);
+        public static And<T> and<T>()
+            where T : unmanaged
+                => new And<T>();
 
         [MethodImpl(Inline)]
-        public static Xor xor<T>(T a, T b)
+        public static Or<T> or<T>(T a, T b)
             where T : IExpr
-                => new Xor(a,b);
+                => new Or<T>(a,b);
+
+        [MethodImpl(Inline)]
+        public static Not<T> not<T>(T a)
+            where T : IExpr
+                => new Not<T>(a);
+
+        [MethodImpl(Inline)]
+        public static Xor<T> xor<T>(T a, T b)
+            where T : IExpr
+                => new Xor<T>(a,b);
     }
 }

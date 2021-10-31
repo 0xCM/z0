@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static int[] AllocIdentity()
-            => gAlg.stream(0, n - 1).ToArray();
+            => gcalc.stream(0, n - 1).ToArray();
 
         /// <summary>
         /// Allocates an empty permutation

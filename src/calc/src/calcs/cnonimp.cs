@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static CalcHosts;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -42,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static Span<T> cnonimpl<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
-                => apply(cnonimpl<T>(), a, b, dst);
+                => gcalc.apply(cnonimpl<T>(), a, b, dst);
 
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static ref readonly SpanBlock128<T> cnonimpl<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

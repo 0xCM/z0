@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static CalcHosts;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -22,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Div, Closures(Closure)]
         public static Span<T> div<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => apply(Calcs.div<T>(), l, r, dst);
+                => gcalc.apply(Calcs.div<T>(), l, r, dst);
     }
 }

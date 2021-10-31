@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Or, Closures(Closure)]
         public static Span<T> or<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
             where T : unmanaged
-                => apply(or<T>(), a, b, dst);
+                => gcalc.apply(or<T>(), a, b, dst);
 
         [MethodImpl(Inline), Or, Closures(Closure)]
         public static ref readonly SpanBlock128<T> or<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)

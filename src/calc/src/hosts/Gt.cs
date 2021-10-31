@@ -49,7 +49,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
-                => apply(this, a,b,dst);
+                => gcalc.apply(this, a,b,dst);
         }
 
         [Closures(AllNumeric), Gt]

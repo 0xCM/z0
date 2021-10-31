@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static core;
-    using static SFx;
 
     public interface ICheckSF<T0,T1,T2,R> : ICheckSF
         where T0 : unmanaged
@@ -80,7 +79,7 @@ namespace Z0
 
             try
             {
-                apply(g, inA, inB, inC, dst);
+                gcalc.apply(g, inA, inB, inC, dst);
                 for(var i=0u; i<count; i++)
                     eq(f.Invoke(skip(inATarget, i), skip(inBTarget, i), skip(inCTarget, i)), skip(target, i));
             }

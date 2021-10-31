@@ -21,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), GtEq, Closures(Closure)]
         public static Span<bit> gteq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<bit> dst)
             where T : unmanaged
-                => SFx.apply(gteq<T>(), a, b, dst);
+                => gcalc.apply(gteq<T>(), a, b, dst);
     }
 }

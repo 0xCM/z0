@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static CalcHosts;
-    using static SFx;
     using static ApiClassKind;
 
     partial struct Calcs
@@ -22,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Clamp, Closures(Closure)]
         public static Span<T> clamp<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<T> dst)
             where T : unmanaged
-                => apply(clamp<T>(), l, r, dst);
+                => gcalc.apply(clamp<T>(), l, r, dst);
     }
 }

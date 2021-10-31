@@ -12,7 +12,7 @@ namespace Z0
     using static gmath;
     using static Typed;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         /// <summary>
         /// Determines whether an interval contains a specified point

@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline), Op]
         public static Permute identity(int n)
-            => new Permute(gAlg.stream(0, n-1));
+            => new Permute(gcalc.stream(0, n-1));
 
         /// <summary>
         /// Defines an untyped identity permutation
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline), Op]
         public static Permute identity(uint n)
-            => new Permute(gAlg.stream((int)n, (int)n-1));
+            => new Permute(gcalc.stream((int)n, (int)n-1));
 
         /// <summary>
         /// Defines an identity permutation on n symbols
@@ -78,6 +78,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> identity<T>(T n)
             where T : unmanaged
-                => init(gAlg.stream(default, gmath.dec(n)));
+                => init(gcalc.stream(default, gmath.dec(n)));
     }
 }

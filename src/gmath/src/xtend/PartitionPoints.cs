@@ -11,6 +11,6 @@ namespace Z0
     {
         public static IEnumerable<T> PartitionPoints<T>(this Interval<T> src, T width, int? precision = null)
             where T : unmanaged
-                => gAlg.partition(src,width,precision);
+                => gcalc.partition(src,width,precision);
     }
 }

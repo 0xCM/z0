@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
         [MethodImpl(Inline), Avg, Closures(AllNumeric)]
         public static T avg<T>(ReadOnlySpan<T> src, bool @checked)
@@ -61,7 +61,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(mspan.avg(int64(src), @checked));
             else
-                return gAlg.favg(src, @checked);
+                return gcalc.favg(src, @checked);
         }
     }
 }

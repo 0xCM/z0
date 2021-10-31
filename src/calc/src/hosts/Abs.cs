@@ -16,21 +16,6 @@ namespace Z0
     partial struct CalcHosts
     {
         [Closures(AllNumeric), Abs]
-        public readonly struct Abs<T> : IUnaryOp<T>, IUnarySpanOp<T>
-            where T : unmanaged
-        {
-            public K.Abs ApiClass => default;
-
-            [MethodImpl(Inline)]
-            public readonly T Invoke(T a)
-                => gmath.abs(a);
-
-            [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
-                => Calcs.inc(src,dst);
-        }
-
-        [Closures(AllNumeric), Abs]
         public readonly struct Abs128<T> : IBlockedUnaryOp128<T>
             where T : unmanaged
         {

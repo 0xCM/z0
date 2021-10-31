@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Negate, Closures(Closure)]
         public static Span<T> negate<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => apply(negate<T>(), src, dst);
+                => gcalc.apply(negate<T>(), src, dst);
 
         [MethodImpl(Inline), Negate, Closures(Closure)]
         public static ref readonly SpanBlock128<T> negate<T>(in SpanBlock128<T> a, in SpanBlock128<T> dst)

@@ -11,7 +11,7 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public readonly partial struct gAlg
+    public readonly partial struct gcalc
     {
         const NumericKind Closure = UnsignedInts;
 

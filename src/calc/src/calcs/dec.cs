@@ -9,7 +9,6 @@ namespace Z0
 
     using static Root;
     using static CalcHosts;
-    using static SFx;
 
     partial struct Calcs
     {
@@ -41,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline), Dec, Closures(Closure)]
         public static Span<T> dec<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
-                => apply(Calcs.dec<T>(), src, dst);
+                => gcalc.apply(Calcs.dec<T>(), src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock128<T> dec<T>(in SpanBlock128<T> a, in SpanBlock128<T> dst)

@@ -52,7 +52,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            Calcs.and(A.Content, B.Content, C.Content);
+            ScalarCalcs.and(A.Content, B.Content, C.Content);
             return ref C;
         }
 

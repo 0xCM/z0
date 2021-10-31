@@ -6,13 +6,14 @@ namespace Z0
 {
     using S = Surrogates;
     using BL = math;
+    using C = ScalarCalcs;
 
     public class t_bitlogic : t_mathsvc<t_bitlogic>
     {
         void and_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            var g = Calcs.and<T>();
+            var g = C.and<T>();
             var validator = this.BinaryOpMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial struct gAlg
+    partial struct gcalc
     {
          /// <summary>
         /// Returns 1 if the left and right spans contain identical content and 0 otherwise

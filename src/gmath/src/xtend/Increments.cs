@@ -10,6 +10,6 @@ namespace Z0
     {
         public static Span<T> Increments<T>(this Interval<T> src)
             where T : unmanaged
-                => gAlg.increments(src.ToClosed());
+                => gcalc.increments(src.ToClosed());
     }
 }
