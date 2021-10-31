@@ -24,11 +24,11 @@ namespace Z0
 
         public void lomask_case2()
         {
-            Claim.eq(4, Bits.pop(BitMasks.lo64(3)));
-            Claim.eq(7, Bits.pop(BitMasks.lo64(6)));
-            Claim.eq(13, Bits.pop(BitMasks.lo64(12)));
-            Claim.eq(25, Bits.pop(BitMasks.lo64(24)));
-            Claim.eq(59, Bits.pop(BitMasks.lo64(58)));
+            Claim.eq((byte)4, Bits.pop(BitMasks.lo64(3)));
+            Claim.eq((byte)7, Bits.pop(BitMasks.lo64(6)));
+            Claim.eq((byte)13, Bits.pop(BitMasks.lo64(12)));
+            Claim.eq((byte)25, Bits.pop(BitMasks.lo64(24)));
+            Claim.eq((byte)59, Bits.pop(BitMasks.lo64(58)));
         }
 
         public void lomask_case3()
@@ -37,8 +37,8 @@ namespace Z0
             var himask = BitMasks.hi<uint>(8);
             var src = uint.MaxValue;
             var dst = gmath.xor(gmath.xor(src,lomask), himask);
-            Claim.eq(7, Bits.ntz(dst));
-            Claim.eq(8, Bits.nlz(dst));
+            Claim.eq((byte)7, Bits.ntz(dst));
+            Claim.eq((byte)8, Bits.nlz(dst));
 
             Claim.eq(7, Bits.pop(BitMasks.lo<uint>(6)));
             Claim.eq(12, Bits.pop(BitMasks.lo<uint>(11)));

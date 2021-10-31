@@ -6,7 +6,6 @@ namespace Z0.Expr
 {
     using System.Runtime.CompilerServices;
 
-
     using Types;
 
     using static Root;

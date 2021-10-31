@@ -9,175 +9,186 @@ namespace Z0
 
     using static Root;
 
-    using prim = System.UInt16;
-    using analog = uint16_t;
+    using P = System.UInt16;
+    using D = uint16_t;
 
-    public struct uint16_t : IEquatable<analog>
+    public struct uint16_t : IEquatable<D>, IComparable<D>
     {
-        prim data;
-
-        public static readonly analog zero = 0;
-
-        public static readonly analog one = 1;
+        P Data;
 
         [MethodImpl(Inline)]
-        public uint16_t(prim x)
-            => data =x;
+        public uint16_t(P x)
+            => Data =x;
 
         [MethodImpl(Inline)]
-        public static analog @bool(bool x)
+        public bool Equals(D src)
+            => Data == src.Data;
+
+        [MethodImpl(Inline)]
+        public int CompareTo(D src)
+            => Data.CompareTo(src.Data);
+
+
+        public override int GetHashCode()
+            => Data;
+
+        public override bool Equals(object src)
+            => src is D a && Equals(a);
+
+        [MethodImpl(Inline)]
+        public static D @bool(bool x)
             => x ? one : zero;
 
         [MethodImpl(Inline)]
-        public static bool operator true(analog x)
-            => x.data != 0;
+        public static bool operator true(D src)
+            => src.Data != 0;
 
         [MethodImpl(Inline)]
-        public static bool operator false(analog x)
-            => x.data == 0;
+        public static bool operator false(D src)
+            => src.Data == 0;
 
         [MethodImpl(Inline)]
-        public static implicit operator analog(prim src)
-            => new analog(src);
+        public static implicit operator bool(D src)
+            => src.Data != 0;
 
         [MethodImpl(Inline)]
-        public static implicit operator prim(analog src)
-            => src.data;
+        public static implicit operator D(bool src)
+            => src ? one : zero;
 
         [MethodImpl(Inline)]
-        public static explicit operator sbyte(analog src)
-            => (sbyte)src.data;
+        public static implicit operator D(P src)
+            => new D(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator int8_t(analog src)
-            => (sbyte)src.data;
+        public static implicit operator P(D src)
+            => src.Data;
 
         [MethodImpl(Inline)]
-        public static explicit operator byte(analog src)
-            => (byte)src.data;
+        public static explicit operator sbyte(D src)
+            => (sbyte)src.Data;
 
         [MethodImpl(Inline)]
-        public static explicit operator uint8_t(analog src)
-            => (byte)src.data;
-
-
-        [MethodImpl(Inline)]
-        public static explicit operator short(analog src)
-            => (short)src.data;
+        public static explicit operator int8_t(D src)
+            => (sbyte)src.Data;
 
         [MethodImpl(Inline)]
-        public static explicit operator int(analog src)
-            => (int)src.data;
+        public static explicit operator byte(D src)
+            => (byte)src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(analog src)
-            => src.data;
+        public static explicit operator uint8_t(D src)
+            => (byte)src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ulong(analog src)
-            => src.data;
+        public static explicit operator short(D src)
+            => (short)src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator float(analog src)
-            => src.data;
+        public static explicit operator int(D src)
+            => (int)src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator double(analog src)
-            => src.data;
+        public static implicit operator uint(D src)
+            => src.Data;
 
         [MethodImpl(Inline)]
-        public static analog operator == (analog lhs, analog rhs)
-            => @bool(lhs.data == rhs.data);
+        public static implicit operator ulong(D src)
+            => src.Data;
 
         [MethodImpl(Inline)]
-        public static analog operator != (analog lhs, analog rhs)
-            => @bool(lhs.data != rhs.data);
+        public static implicit operator float(D src)
+            => src.Data;
 
         [MethodImpl(Inline)]
-        public static analog operator + (analog lhs, analog rhs)
-            => (analog)(lhs.data + rhs.data);
+        public static implicit operator double(D src)
+            => src.Data;
 
         [MethodImpl(Inline)]
-        public static analog operator - (analog lhs, analog rhs)
-            => (analog)(lhs.data - rhs.data);
+        public static D operator == (D a, D b)
+            => @bool(a.Data == b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator * (analog lhs, analog rhs)
-            => (analog)(lhs.data * rhs.data);
+        public static D operator != (D a, D b)
+            => @bool(a.Data != b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator / (analog lhs, analog rhs)
-            => (analog)(lhs.data / rhs.data);
+        public static D operator + (D a, D b)
+            => (D)(a.Data + b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator % (analog lhs, analog rhs)
-            => (analog)(lhs.data % rhs.data);
+        public static D operator - (D a, D b)
+            => (D)(a.Data - b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator < (analog lhs, analog rhs)
-            => @bool(lhs.data < rhs.data);
+        public static D operator * (D a, D b)
+            => (D)(a.Data * b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator <= (analog lhs, analog rhs)
-            => @bool(lhs.data <= rhs.data);
+        public static D operator / (D a, D b)
+            => (D)(a.Data / b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator > (analog lhs, analog rhs)
-            => @bool(lhs.data > rhs.data);
+        public static D operator % (D a, D b)
+            => (D)(a.Data % b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator >= (analog lhs, analog rhs)
-            => @bool(lhs.data >= rhs.data);
+        public static D operator < (D a, D b)
+            => @bool(a.Data < b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator & (analog lhs, analog rhs)
-            => (analog)(lhs.data & rhs.data);
+        public static D operator <= (D a, D b)
+            => @bool(a.Data <= b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator | (analog lhs, analog rhs)
-            => (analog)(lhs.data | rhs.data);
+        public static D operator > (D a, D b)
+            => @bool(a.Data > b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator ^ (analog lhs, analog rhs)
-            => (analog)(lhs.data ^ rhs.data);
+        public static D operator >= (D a, D b)
+            => @bool(a.Data >= b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator ^ (analog lhs, uint8_t rhs)
-            => (analog)(lhs.data ^ (uint16_t)rhs);
+        public static D operator & (D a, D b)
+            => (D)(a.Data & b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator ~ (analog x)
-            => (analog)~ x.data;
+        public static D operator | (D a, D b)
+            => (D)(a.Data | b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator - (analog src)
-            => (analog)(~src.data + 1);
+        public static D operator ^ (D a, D b)
+            => (D)(a.Data ^ b.Data);
 
         [MethodImpl(Inline)]
-        public static analog operator >> (analog lhs, int rhs)
-            => (analog)(lhs.data >> rhs);
+        public static D operator ^ (D a, uint8_t b)
+            => (D)(a.Data ^ (uint16_t)b);
 
         [MethodImpl(Inline)]
-        public static analog operator << (analog lhs, int rhs)
-            => (analog)(lhs.data << rhs);
+        public static D operator ~ (D x)
+            => (D)~ x.Data;
 
         [MethodImpl(Inline)]
-        public static analog operator -- (analog x)
-            =>  --x.data;
+        public static D operator - (D src)
+            => (D)(~src.Data + 1);
 
         [MethodImpl(Inline)]
-        public static analog operator ++ (analog x)
-            =>  ++x.data;
+        public static D operator >> (D a, int b)
+            => (D)(a.Data >> b);
 
         [MethodImpl(Inline)]
-        public bool Equals(analog rhs)
-            => data == rhs.data;
+        public static D operator << (D a, int b)
+            => (D)(a.Data << b);
 
-        public override int GetHashCode()
-            => throw new NotSupportedException();
+        [MethodImpl(Inline)]
+        public static D operator -- (D x)
+            =>  --x.Data;
 
-        public override bool Equals(object rhs)
-            => throw new NotSupportedException();
+        [MethodImpl(Inline)]
+        public static D operator ++ (D x)
+            =>  ++x.Data;
 
+        public static D zero => 0;
+
+        public static D one => 1;
     }
 }

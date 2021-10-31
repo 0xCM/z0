@@ -22,7 +22,7 @@ namespace Z0
             => (byte)(object)Value;
     }
 
-    public interface IHexNumber<F,K> : IHexNumber<K>, IByte<F>, IComparable<F>, IEquatable<F>, ITextual<F>
+    public interface IHexNumber<F,K> : IHexNumber<K>, IByte<F>, IComparable<F>, IEquatable<F>, ITextual
         where F : unmanaged, IHexNumber<F,K>
         where K : unmanaged
     {

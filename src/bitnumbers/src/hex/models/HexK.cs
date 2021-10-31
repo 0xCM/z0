@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     public readonly struct Hex<K> : IHexNumber<K>, IEquatable<Hex<K>>, IComparable<Hex<K>>
-        where K : unmanaged, IHexNumber<K>, IEquatable<K>, IComparable<K>, ITextual<K>
+        where K : unmanaged, IHexNumber<K>, IEquatable<K>, IComparable<K>, ITextual
     {
         public K Value {get;}
 

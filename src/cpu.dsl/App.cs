@@ -7,6 +7,8 @@ namespace Z0.Vdsl
     using static core;
     using static Intrinsics;
 
+    using Types;
+
     class App : WfApp<App>
     {
         public static void Main(params string[] args)
@@ -45,6 +47,14 @@ namespace Z0.Vdsl
         protected override void Run()
         {
 
+        }
+
+        unsafe Outcome Test(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            Write(types.cell(13,16, PrimalKind.UnsignedInt));
+            Write(types.ucell(13));
+            return CellTypeParser.Service.Validate();
         }
 
         void Run(string spec)

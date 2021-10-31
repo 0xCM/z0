@@ -46,7 +46,7 @@ namespace Z0
             where T : unmanaged
         {
             var data = Enums.scalar<E,T>(src);
-            var limit = (uint)gbits.effwidth(data);
+            var limit = gbits.effwidth(data);
             var config = BitFormat.limited(limit,zpad);
             var formatter = BitRender.formatter<T>(config);
             return string.Concat(name, Chars.Colon, formatter.Format(data));

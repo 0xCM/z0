@@ -8,19 +8,9 @@ namespace Z0
 
     using static core;
 
-    public interface IBitVector : ITextual<IBitVector,BitFormat>
+    public interface IBitVector : ITextual
     {
-        /// <summary>
-        /// Presents bitvector content as a bytespan
-        /// </summary>
-        Span<byte> Bytes {get;}
-
-        /// <summary>
-        /// Selects an index-identified mutable 8-bit segment from the source vector
-        /// </summary>
-        /// <param name="index">The byte-relative segment index</param>
-        ref byte Byte(uint index)
-            => ref seek(Bytes, index);
+        BitWidth Width {get;}
     }
 
     public interface IBitVector<T> : IBitVector
@@ -31,11 +21,8 @@ namespace Z0
         /// </summary>
         T State {get;}
 
-        Span<byte> IBitVector.Bytes
-            => bytes(State);
-
-        NativeTypeWidth Width
-            => (NativeTypeWidth)width<T>();
+        BitWidth IBitVector.Width
+            => width<T>();
     }
 
     public interface IBitVector<V,T> : IBitVector<T>, IEquatable<V>

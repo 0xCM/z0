@@ -15,35 +15,35 @@ namespace Z0
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline), Nlz]
-        public static int nlz(BitVector4 x)
-            => Bits.nlz(x.State) - x.Width;
+        public static byte nlz(BitVector4 x)
+            => (byte)(Bits.nlz(x.State) - (byte)x.Width);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline), Nlz]
-        public static int nlz(BitVector8 x)
-            => Bits.nlz(x.State);
+        public static byte nlz(BitVector8 x)
+            => (byte)Bits.nlz(x.State);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline), Nlz]
-        public static int nlz(BitVector16 x)
-            => Bits.nlz(x.State);
+        public static byte nlz(BitVector16 x)
+            => (byte)Bits.nlz(x.State);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline), Nlz]
-        public static int nlz(BitVector32 x)
-            => Bits.nlz(x.State);
+        public static byte nlz(BitVector32 x)
+            => (byte)Bits.nlz(x.State);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline), Nlz]
-        public static int nlz(BitVector64 x)
-            => Bits.nlz(x.State);
+        public static byte nlz(BitVector64 x)
+            => (byte)Bits.nlz(x.State);
     }
 }

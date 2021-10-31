@@ -69,7 +69,7 @@ namespace Z0
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly int Width
+        public readonly BitWidth Width
         {
             [MethodImpl(Inline)]
             get => 24;

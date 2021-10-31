@@ -12,7 +12,6 @@ namespace Z0
 
     }
 
-
     [Free]
     public interface IFloat<T> : IFloat, IBlittable<T>
         where T : unmanaged

@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Nlz, Closures(Closure)]
-        public static int nlz<T>(T src)
+        public static byte nlz<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

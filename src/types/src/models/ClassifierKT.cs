@@ -10,7 +10,7 @@ namespace Z0.Types
     using static Root;
 
     /// <summary>
-    /// Defines an indexed/labeled sequence that forms a partition over som domain
+    /// Defines an indexed/labeled sequence that forms a partition over some domain
     /// </summary>
     public class Classifier<K,T> : IClassifier
         where K : unmanaged

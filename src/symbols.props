@@ -106,7 +106,6 @@
 
     <Services>$(Src)services/z0.services.csproj</Services>
     <Seq>$(Src)seq/z0.seq.csproj</Seq>
-    <Settings>$(Src)settings/z0.settings.csproj</Settings>
     <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
     <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>
     <Sources>$(Src)sources/z0.sources.csproj</Sources>

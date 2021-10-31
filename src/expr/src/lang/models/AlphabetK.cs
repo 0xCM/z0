@@ -21,13 +21,13 @@ namespace Z0.Lang
         /// </summary>
         public Label Name {get;}
 
-        readonly Atoms<K> Data;
+        readonly KeyedAtomics<K> Data;
 
         [MethodImpl(Inline)]
         internal Alphabet(Label name, Atom<K>[] src)
         {
             Name = name;
-            Data = new Atoms<K>(src);
+            Data = new KeyedAtomics<K>(src);
         }
 
         public Atom<K> this[uint key]
@@ -45,10 +45,10 @@ namespace Z0.Lang
         /// <summary>
         /// The symbols that comprise the alpabet
         /// </summary>
-        public ReadOnlySpan<Atom<K>> Symbols
+        public ReadOnlySpan<Atom<K>> Members
         {
             [MethodImpl(Inline)]
-            get => Data.Storage;
+            get => Data.Members;
         }
 
         public uint MemberCount

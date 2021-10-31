@@ -9,7 +9,7 @@ namespace Z0
     [Free]
     public interface IConcatenable<T>
     {
-
+        T Concat(T lhs, T rhs);
     }
 
     /// <summary>
@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The reifying type</typeparam>
     [Free]
-    public interface IConcatenable<F,T> : IConcatenable<T>
+    public interface IConcatenable<F,T>
         where F : IConcatenable<F,T>, new()
     {
         /// <summary>

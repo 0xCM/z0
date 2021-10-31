@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <ZVer>0.0.44</ZVer>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="z0.core" Version="$(ZVer)" />
-    <PackageReference Include="z0.gmath" Version="$(ZVer)" />
-    <PackageReference Include="z0.symcore" Version="$(ZVer)" />
-    <PackageReference Include="z0.bitnumbers" Version="$(ZVer)" />
-    <PackageReference Include="z0.types" Version="$(ZVer)" />
+      <ProjectReference Include="$(Core)" />
+      <ProjectReference Include="$(Nats)" />
+      <ProjectReference Include="$(Bit)" />
+      <ProjectReference Include="$(SymCore)" />
+      <ProjectReference Include="$(Types)" />
+      <ProjectReference Include="$(BitNumbers)" />
   </ItemGroup>
 
 </Project>

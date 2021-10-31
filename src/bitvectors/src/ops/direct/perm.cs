@@ -19,8 +19,8 @@ namespace Z0
         public static BitVector4 perm(BitVector4 src, in Permute spec)
         {
             var dst = src.Replicate();
-            var width = src.Width;
-            for(byte i=0; i<width; i++)
+            var w = (byte)src.Width;
+            for(byte i=0; i<w; i++)
                 dst[i] = src[(byte)spec[i]];
             return dst;
         }
@@ -33,7 +33,7 @@ namespace Z0
         public static BitVector8 perm(BitVector8 src, in Permute p)
         {
             var dst = src.Replicate();
-            var width = src.Width;
+            var width = (byte)src.Width;
             for(var i=0; i<width; i++)
                 dst[i] = src[p[i]];
             return dst;
@@ -48,8 +48,8 @@ namespace Z0
         public static BitVector16 perm(BitVector16 src, in Permute spec)
         {
             var dst = src.Replicate();
-            var width = src.Width;
-            for(var i=0; i<width; i++)
+            var w = (byte)src.Width;
+            for(var i=0; i<w; i++)
             {
                 ref readonly var j = ref spec[i];
                 if(j != i)
@@ -67,8 +67,8 @@ namespace Z0
         public static BitVector32 perm(BitVector32 src, in Permute spec)
         {
             var dst = src.Replicate();
-            var width = src.Width;
-            for(var i=0; i<width; i++)
+            var w = (byte)src.Width;
+            for(var i=0; i<w; i++)
             {
                 ref readonly var j = ref spec[i];
                 if(j != i)
@@ -86,8 +86,8 @@ namespace Z0
         public static BitVector64 perm(BitVector64 src, in Permute spec)
         {
             var dst = src.Replicate();
-            var width = src.Width;
-            for(var i=0; i<width; i++)
+            var w = (byte)src.Width;
+            for(var i=0; i<w; i++)
             {
                 ref readonly var j = ref spec[i];
                 if(j != i)

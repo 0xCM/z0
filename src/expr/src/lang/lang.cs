@@ -19,6 +19,22 @@ namespace Z0.Lang
             where K : unmanaged
                 => new Atom<K>(key, value);
 
+        [Op, Closures(Closure)]
+        public static AtomicSeq<K> concat<K>(AtomicSeq<K> a, AtomicSeq<K> b)
+            where K : unmanaged
+        {
+            var ka = a.Count;
+            var kb = b.Count;
+            var k=0u;
+            var length = a.Count + b.Count;
+            var dst = alloc<K>(length);
+            for(var i=0; i<ka; i++)
+                seek(dst,k++) = a[i];
+            for(var i=0; i<kb; i++)
+                seek(dst,k++) = b[i];
+            return default;
+        }
+
         [MethodImpl(Inline), Op]
         public static Atom atom(char value)
             => new Atom(value);

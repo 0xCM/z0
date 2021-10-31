@@ -279,7 +279,7 @@ namespace Z0
                 dst.Check1 = dst.PopCount != dst.Count;
                 dst.Check1 = eq(dst.Count, gbits.pop(dst.Mask));
                 dst.Lowered = gmath.srl(dst.Mask, (byte)(width<T>() -  dst.Count));
-                dst.EffectiveWidth = (byte)gbits.effwidth(dst.Lowered);
+                dst.EffectiveWidth = gbits.effwidth(dst.Lowered);
                 dst.Check3 = dst.Count == dst.EffectiveWidth;
             }
         }

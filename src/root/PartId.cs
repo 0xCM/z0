@@ -288,6 +288,9 @@ public enum PartId : byte
     [Symbol("bitnumbers")]
     BitNumbers = 96,
 
+    [Symbol("expr")]
+    Expr = 97,
+
     [Symbol("workers")]
     Workers = 99,
 

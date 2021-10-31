@@ -12,7 +12,7 @@ namespace Z0
     public interface INumber<S> :
             ISubtractive<S>,
             IAbsolitive<S>,
-            IAddtiveGroup<S>,
+            IAdditiveGroup<S>,
             IMultiplicativeSemigroup<S>,
             ISemiring<S>,
             IDivisive<S>,

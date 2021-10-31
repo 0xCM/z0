@@ -184,7 +184,6 @@ namespace Z0
         public static explicit operator ushort(BitWidth src)
             => (ushort)src.Content;
 
-
         [MethodImpl(Inline)]
         public static explicit operator double(BitWidth src)
             => src.Content;

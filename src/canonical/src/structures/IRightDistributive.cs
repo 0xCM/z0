@@ -16,6 +16,4 @@ namespace Z0
 
     public interface IRightDistributive<S,T>  : IRightDistributive<S>, IMultiplicative<S,T>, IAdditive<S>
         where S : IRightDistributive<S,T>, new() { }
-
-
 }

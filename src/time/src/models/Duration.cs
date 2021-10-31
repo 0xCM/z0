@@ -13,7 +13,7 @@ namespace Z0
     /// Captures a duration
     /// </summary>
     [DataType]
-    public readonly struct Duration : ITextual<Duration>, IEquatable<Duration>, IComparable<Duration>
+    public readonly struct Duration : ITextual, IEquatable<Duration>, IComparable<Duration>
     {
         /// <summary>
         /// The number of elapsed timer ticks that determines the period length

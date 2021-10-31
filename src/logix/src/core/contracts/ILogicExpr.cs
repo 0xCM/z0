@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    /// <summary>
-    /// Characterizes a logical expression over a bit
-    /// </summary>
     public interface ILogicExpr : IExpr
     {
 

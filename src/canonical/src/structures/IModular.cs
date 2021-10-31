@@ -8,6 +8,5 @@ namespace Z0
         where S : IModular<S>
     {
         S Mod(S rhs);
-
     }
 }

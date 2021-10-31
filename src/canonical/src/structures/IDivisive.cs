@@ -11,10 +11,4 @@ namespace Z0
 
         S Gcd(S rhs);
     }
-
-    public interface IDivisive<S,T> : IDivisive<S>
-        where S : IDivisive<S,T>, new()
-    {
-
-    }
 }

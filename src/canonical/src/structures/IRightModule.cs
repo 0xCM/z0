@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IRightModule<G,R>  : IAddtiveGroup<G>
+    public interface IRightModule<G,R>  : IAdditiveGroup<G>
         where R : IRing<R>, new()
-        where G : IAddtiveGroup<G>, new()
+        where G : IAdditiveGroup<G>, new()
     {
         /// <summary>
         /// Effects scalar multiplication from the right
@@ -19,7 +19,7 @@ namespace Z0
     public interface IRightModule<S,G,R> : IRightModule<G,R>
         where S : IRightModule<S,G,R>, new()
         where R : ICommutativeRing<R>, new()
-        where G : unmanaged, IAddtiveGroup<G>
+        where G : unmanaged, IAdditiveGroup<G>
     {
 
     }

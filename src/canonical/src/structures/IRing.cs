@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IRing<T> : IAddtiveGroup<T>, IMultiplicativeMonoid<T>, IDistributive<T>
+    public interface IRing<T> : IAdditiveGroup<T>, IMultiplicativeMonoid<T>, IDistributive<T>
         where T : new()
 
     {

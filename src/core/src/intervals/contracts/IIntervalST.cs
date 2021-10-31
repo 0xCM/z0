@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IInterval<S,T> : IInterval<T>, ITextual<S>, IPair<S,T>
+    public interface IInterval<S,T> : IInterval<T>, ITextual, IPair<S,T>
         where S : struct, IInterval<S,T>
         where T : unmanaged
     {
@@ -14,7 +14,7 @@ namespace Z0
         /// Creates an open interval with endpoints from the existing interval
         /// </summary>
         S ToOpen();
-            
+
         /// <summary>
         /// Creates a left-open/right-closed interval with endpoints from the existing interval
         /// </summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// Creates a left-open/right-closed interval with endpoints from the existing interval
         /// </summary>
         S ToRightOpen();
-        
+
         /// <summary>
         /// Creates a left-closed interval with endpoints from the existing interval
         /// </summary>
@@ -38,6 +38,6 @@ namespace Z0
         /// <summary>
         /// Creates a closed interval with endpoints from the existing interval
         /// </summary>
-        S ToClosed();         
+        S ToClosed();
     }
 }

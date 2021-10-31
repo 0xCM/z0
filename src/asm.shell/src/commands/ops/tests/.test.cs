@@ -7,26 +7,11 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Types;
-
     using static core;
     using static Root;
 
     partial class AsmCmdService
     {
-        [CmdOp(".test")]
-        unsafe Outcome Test(CmdArgs args)
-        {
-            var result = Outcome.Success;
-
-            Write(types.cell(13,16, PrimalKind.UnsignedInt));
-
-            Write(types.ucell(13));
-
-            return CellTypeParser.Service.Validate();
-
-        }
-
         Outcome TestBraceMatching(CmdArgs args)
         {
             var result = Outcome.Success;

@@ -10,7 +10,6 @@ namespace Z0.Vdsl
     using Vec;
 
     using static core;
-    using static BitFlow;
     using static Root;
 
     partial struct Intrinsics

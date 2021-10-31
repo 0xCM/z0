@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), EffWidth, Closures(Closure)]
-        public static int effwidth<T>(T src)
+        public static byte effwidth<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

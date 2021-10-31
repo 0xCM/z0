@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>machines</AssemblyName>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <ZVer>0.0.44</ZVer>
+    <ZVer>0.0.47</ZVer>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,10 +15,9 @@
     <PackageReference Include="z0.pipes" Version="$(ZVer)" />
     <PackageReference Include="z0.calc" Version="$(ZVer)" />
     <PackageReference Include="z0.bits" Version="$(ZVer)" />
+    <PackageReference Include="z0.expr" Version="$(ZVer)" />
+    <PackageReference Include="z0.types" Version="$(ZVer)" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="$(Expr)" />
-  </ItemGroup>
 
 </Project>

@@ -10,7 +10,6 @@ namespace Z0.Expr
 
     using static Root;
 
-
     using api = OpCodes;
 
     public readonly struct OpCode

@@ -6,15 +6,10 @@ namespace Z0
 {
     using System;
 
-    public interface IFreeGroup<S> : IAddtiveGroup<S>, IFreeMonoid<S>
+    public interface IFreeGroup<S> : IAdditiveGroup<S>, IFreeMonoid<S>
         where S : IFreeGroup<S>, new()
     {
 
     }
 
-    public interface IFreeGroup<S,T> : IFreeGroup<S>
-        where S : IFreeGroup<S,T>, new()
-    {
-
-    }
 }

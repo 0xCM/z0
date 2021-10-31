@@ -13,8 +13,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IMonoidal<T> : ISemigroup<T>
-        where T : struct
+    public interface IMonoidal<T> : IMonoid<T>
     {
         T Identity {get;}
 
@@ -28,8 +27,7 @@ namespace Z0
     /// <typeparam name="T">The underlying type</typeparam>
     [Free]
     public interface IMonoid<H,T> : IMonoidal<T>, ISemigroup<H,T>
-        where H : struct, IMonoid<H,T>
-        where T : struct
+        where H : IMonoid<H,T>, new()
     {
 
     }

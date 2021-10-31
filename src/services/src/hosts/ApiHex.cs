@@ -107,12 +107,12 @@ namespace Z0
                 return (false, $"Line {src} segement specifier does not have the required 2 components");
 
             var segLeft = skip(segparts,0);
-            NumericParser.parse(segLeft, out ushort segidx);
+            DataParser.parse(segLeft, out ushort segidx);
             if(segidx != index)
                 return (false, $"Line {line} number does not correspond to the segement index {segidx}");
 
             var segRight = skip(segparts,1);
-            result = Sizes.parse(segRight, out ByteSize segsize);
+            result = DataParser.parse(segRight, out ByteSize segsize);
             if(result.Fail)
                 return (false, $"{result.Message} | Could not parse segment size from {segRight}");
 

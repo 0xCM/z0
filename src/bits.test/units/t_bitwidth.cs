@@ -15,20 +15,19 @@ namespace Z0
         {
             var x = (byte)0b0;
             var w = gbits.effwidth(x);
-            Claim.eq(w,0);
+            Claim.eq(w,z8);
 
             x = (byte)0b00010000;
             w = gbits.effwidth(x);
-            Claim.eq(w,5);
+            Claim.eq(w,(byte)5);
 
             x = (byte)0b00000001;
             w = gbits.effwidth(x);
-            Claim.eq(w,1);
+            Claim.eq(w,(byte)1);
 
             x = (byte)0b10000000;
             w = gbits.effwidth(x);
-            Claim.eq(w,8);
-
+            Claim.eq(w,(byte)8);
         }
 
         public void bitwidth_8u()
