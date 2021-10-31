@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static WsAtoms;
     using static core;
 
     partial class Tooling
@@ -18,7 +17,7 @@ namespace Z0
             if(lines.Length < ToolConfig.FieldCount)
                 return (false, Tables.FieldCountMismatch.Format(ToolConfig.FieldCount, lines.Length));
 
-            var settings = Settings.parse(slice(lines,1));
+            var settings = Settings.parse(slice(lines,1)).View;
             var i=0;
 
             DataParser.parse(skip(settings, i++).Value, out dst.Toolbase);

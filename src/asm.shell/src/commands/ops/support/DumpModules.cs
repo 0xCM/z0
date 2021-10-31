@@ -35,7 +35,7 @@ namespace Z0.Asm
                 vars.DstDir = outdir;
                 vars.SrcDir = path.FolderPath;
                 vars.SrcFile = path.FileName;
-                result = ScriptRunner.RunCmd(cmd, vars.ToCmdVars(), out _);
+                result = OmniScript.RunCmd(cmd, vars.ToCmdVars(), out _);
             }
             return result;
         }

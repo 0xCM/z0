@@ -5,21 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Root;
     using static core;
 
     using SQ = SymbolicQuery;
 
     partial struct Settings
     {
-        [MethodImpl(Inline), Op]
-        public static Setting setting(string name, dynamic value)
-            => new Setting(name,value);
-
         [Op]
-        public static ReadOnlySpan<Setting> parse(ReadOnlySpan<TextLine> src)
+        public static Settings parse(ReadOnlySpan<TextLine> src)
         {
             var count = src.Length;
             var buffer = span<Setting>(count);
@@ -37,7 +31,7 @@ namespace Z0
                     seek(dst, counter++) = Settings.setting(name,value);
                 }
             }
-            return slice(buffer,0,counter);
+            return slice(buffer,0,counter).ToArray();
         }
     }
 }

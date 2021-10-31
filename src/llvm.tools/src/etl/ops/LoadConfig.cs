@@ -11,7 +11,7 @@ namespace Z0.llvm
 
     using K = llvm.LlvmConfigKind;
 
-    partial class EtlWorkflow
+    partial class LlvmEtlServices
     {
         public LlvmConfig LoadConfig()
         {

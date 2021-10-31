@@ -14,6 +14,8 @@ namespace Z0
 
         ReadOnlySpan<ToolConfig> Configured {get;}
 
+        FS.FolderPath Toolbase {get;}
+
         FS.FilePath Inventory()
             => Root + FS.folder(admin) + FS.file(inventory, FS.Txt);
     }

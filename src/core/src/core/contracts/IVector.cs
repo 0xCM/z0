@@ -31,8 +31,5 @@ namespace Z0.Vec
         ref T this[uint i] {get;}
 
         Span<T> Cells {get;}
-
-        DataKind IBlittable.TypeKind
-            => DataKind.Vector;
     }
 }

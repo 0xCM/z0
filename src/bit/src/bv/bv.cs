@@ -14,8 +14,7 @@ namespace Z0
     [Free]
     public interface IBv : IBlittable
     {
-        DataKind IBlittable.TypeKind
-            => DataKind.BitVector;
+
     }
 
     [Free]

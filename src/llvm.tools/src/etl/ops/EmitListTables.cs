@@ -8,7 +8,7 @@ namespace Z0.llvm
 
     using static core;
 
-    partial class EtlWorkflow
+    partial class LlvmEtlServices
     {
         public ReadOnlySpan<ItemList<string>> EmitListTables()
         {

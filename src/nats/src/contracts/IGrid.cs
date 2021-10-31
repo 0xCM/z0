@@ -19,9 +19,6 @@ namespace Z0
             => (M,N);
 
         GridSpec Spec {get;}
-
-        DataKind IBlittable.TypeKind
-            => DataKind.Grid;
     }
 
     [Free]

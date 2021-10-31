@@ -13,7 +13,7 @@ namespace Z0.llvm
 
     using SQ = SymbolicQuery;
 
-    partial class EtlWorkflow
+    partial class LlvmEtlServices
     {
         // class AES8I<bits<8> AES8I:o = { ?, ?, ?, ?, ?, ?, ?, ? }, Format AES8I:F = ?, dag AES8I:outs = ?, dag AES8I:ins = ?, string AES8I:asm = ?, list<dag> AES8I:pattern = ?> {	// InstructionEncoding Instruction X86Inst I T8 T8PD Requires
         ReadOnlySpan<ClassRelations> EmitClassRelations(ReadOnlySpan<TextLine> src)

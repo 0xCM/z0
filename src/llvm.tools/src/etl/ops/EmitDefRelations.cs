@@ -11,7 +11,7 @@ namespace Z0.llvm
     using static Root;
     using static core;
 
-    partial class EtlWorkflow
+    partial class LlvmEtlServices
     {
         ReadOnlySpan<DefRelations> EmitDefRelations(ReadOnlySpan<TextLine> src)
         {

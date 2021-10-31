@@ -58,5 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Setting[](Settings src)
             => src.Storage;
+
+        public static Settings Empty => new Settings(sys.empty<Setting>());
     }
 }

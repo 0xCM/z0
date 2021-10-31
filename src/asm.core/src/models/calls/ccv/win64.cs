@@ -60,21 +60,21 @@ namespace Z0.Asm
             public static ref readonly Gp64Reg reg(W64 w, byte index)
                 => ref skip(regs(w), index);
 
-            [MethodImpl(Inline), Op]
-            public static ref readonly v4<Gp8Reg> slots(W8 w)
-                => ref first(recover<v4<Gp8Reg>>(bytes(regs(w))));
+            // [MethodImpl(Inline), Op]
+            // public static ref readonly v4<Gp8Reg> slots(W8 w)
+            //     => ref first(recover<v4<Gp8Reg>>(bytes(regs(w))));
 
-            [MethodImpl(Inline), Op]
-            public static ref readonly v4<Gp16Reg> slots(W16 w)
-                => ref first(recover<v4<Gp16Reg>>(bytes(regs(w))));
+            // [MethodImpl(Inline), Op]
+            // public static ref readonly v4<Gp16Reg> slots(W16 w)
+            //     => ref first(recover<v4<Gp16Reg>>(bytes(regs(w))));
 
-            [MethodImpl(Inline), Op]
-            public static ref readonly v4<Gp32Reg> slots(W32 w)
-                => ref first(recover<v4<Gp32Reg>>(bytes(regs(w))));
+            // [MethodImpl(Inline), Op]
+            // public static ref readonly v4<Gp32Reg> slots(W32 w)
+            //     => ref first(recover<v4<Gp32Reg>>(bytes(regs(w))));
 
-            [MethodImpl(Inline), Op]
-            public static ref readonly v4<Gp64Reg> slots(W64 w)
-                => ref first(recover<v4<Gp64Reg>>(bytes(regs(w))));
+            // [MethodImpl(Inline), Op]
+            // public static ref readonly v4<Gp64Reg> slots(W64 w)
+            //     => ref first(recover<v4<Gp64Reg>>(bytes(regs(w))));
 
             [MethodImpl(Inline), Op]
             public static bit slot(Win64 cc, byte index, out Gp8Reg dst)

@@ -4,18 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [Free]
-    public interface ISigned : IBlittable
+    using static Root;
+
+    partial struct Settings
     {
-
+        [MethodImpl(Inline), Op]
+        public static Setting setting(string name, dynamic value)
+            => new Setting(name,value);
     }
-
-    [Free]
-    public interface ISigned<T> : ISigned, IBlittable<T>
-        where T : unmanaged
-    {
-    }
-
 }

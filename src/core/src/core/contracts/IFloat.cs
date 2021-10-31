@@ -9,8 +9,7 @@ namespace Z0
     [Free]
     public interface IFloat : IBlittable
     {
-        DataKind IBlittable.TypeKind
-            => DataKind.Float;
+
     }
 
 

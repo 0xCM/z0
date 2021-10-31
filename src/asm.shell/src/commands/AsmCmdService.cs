@@ -20,8 +20,6 @@ namespace Z0.Asm
 
         IWorkspace AsmWs;
 
-        ScriptRunner ScriptRunner;
-
         AsmShellState State;
 
         IApiPack ApiPack;
@@ -31,8 +29,6 @@ namespace Z0.Asm
         AsmRegSets RegSets;
 
         IntelXed Xed;
-
-        AsmToolchain AsmToolchain;
 
         IntelIntrinsics IntelIntrinsics;
 
@@ -60,13 +56,9 @@ namespace Z0.Asm
 
         IWorkspace DataSources;
 
-        OmniScript OmniScript;
-
         TableLoaders Loaders;
 
         TableEmitters Emitters;
-
-        llvm.LlvmNm LlvmNm;
 
         ProjectScripts ProjectScripts;
 
@@ -101,7 +93,6 @@ namespace Z0.Asm
             Sdm = Wf.IntelSdm();
             RegSets = Wf.AsmRegSets();
             Xed = Wf.IntelXed();
-            AsmToolchain = Wf.AsmToolchain();
             AsmTables = Wf.AsmTables();
             Random = Rng.wyhash64();
             ApiHexPacks = Wf.ApiHexPacks();
@@ -112,9 +103,7 @@ namespace Z0.Asm
             AsmEtl = Wf.AsmEtl();
             Loaders = Wf.TableLoaders();
             Emitters = Wf.TableEmitters();
-            OmniScript = Wf.OmniScript();
             IntelIntrinsics = Wf.IntelIntrinsics();
-            LlvmNm = Wf.LlvmNm();
             State.Init(Wf,Ws);
             State.Project("cmodels");
             ProjectScripts = Wf.ProjectScripts();

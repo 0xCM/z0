@@ -39,5 +39,18 @@ namespace Z0.Asm
 
             return result;
         }
+
+        [CmdOp(".test-bitsparser")]
+        Outcome TestBitsBarser(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var input = "{0,1,1,0,0,1}";
+            var parser = new BitsParser<byte>();
+            result = parser.Parse(input, out var dst);
+            if(result)
+                Write(dst.Format());
+
+            return result;
+        }
     }
 }

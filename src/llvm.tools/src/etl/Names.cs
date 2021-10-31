@@ -18,7 +18,7 @@ namespace Z0.llvm
 
             public const string X86Classes = "X86.records.classes";
 
-            public const string X86ClassMembers = "X86.records.classes.members";
+            public const string X86ClassFields = "X86.records.classes.fields";
         }
 
         public readonly struct Lists

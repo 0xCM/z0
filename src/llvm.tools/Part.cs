@@ -27,8 +27,8 @@ namespace Z0
             => llvm.LlvmNm.create(wf);
 
         [Op]
-        public static EtlWorkflow LlvmEtl(this IWfRuntime wf)
-            => llvm.EtlWorkflow.create(wf);
+        public static LlvmEtlServices LlvmEtl(this IWfRuntime wf)
+            => llvm.LlvmEtlServices.create(wf);
 
         [Op]
         public static LlvmPaths LlvmPaths(this IServiceContext context)

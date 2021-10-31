@@ -9,8 +9,6 @@ namespace Z0
     [Free]
     public interface IUnsigned : IBlittable
     {
-        DataKind IBlittable.TypeKind
-            => DataKind.Unsigned;
     }
 
     [Free]

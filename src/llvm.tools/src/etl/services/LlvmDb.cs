@@ -4,7 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System.Collections.Generic;
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using records;
 
     using static Root;
     using static Names;
@@ -22,19 +25,102 @@ namespace Z0.llvm
 
         IdentityMap<uint> DefLookup;
 
+        Index<TableGenField> DefFields;
+
+        IdentityMap<Interval<uint>> FieldMap;
+
         public LlvmDb()
         {
             X86Records = Index<TextLine>.Empty;
             ClassMap = LineMap<Identifier>.Empty;
             DefMap = LineMap<Identifier>.Empty;
             DefLookup = new();
-
+            FieldMap = new();
         }
 
         protected override void Initialized()
         {
             Paths = Wf.LlvmPaths();
             LoadRecords();
+        }
+
+        uint RecordCount
+        {
+            [MethodImpl(Inline)]
+            get => X86Records.Count;
+        }
+
+        static Outcome parse(in TextLine src, out TableGenField dst)
+        {
+            var result = Outcome.Success;
+            dst = default;
+            var parts = src.Split(Chars.Pipe);
+            var count = parts.Length;
+            if(count < 4)
+                return (false,Tables.FieldCountMismatch.Format(4,count));
+
+            dst.Id = skip(parts,0);
+            dst.FieldContent.DataType = skip(parts,1);
+            dst.FieldContent.Name = skip(parts,2);
+            dst.FieldContent.Value = skip(parts,3);
+            return result;
+        }
+
+        public ReadOnlySpan<TableGenField> Fields(uint offset, uint length)
+            => slice(DefFields.View,offset,length);
+
+
+        public ReadOnlySpan<TableGenField> Fields(Identifier id)
+        {
+            if(FieldMap.Mapped(id, out var interval))
+            {
+                var i = interval.Left;
+                var j = interval.Right;
+                return slice(DefFields.View,i, j - i);
+            }
+            else
+                return default;
+        }
+
+        void LoadDefFields()
+        {
+            var result = Outcome.Success;
+            var src = Paths.Table(Datasets.X86DefFields);
+            var count = FS.linecount(src);
+            DefFields = alloc<TableGenField>(count.Lines);
+            var counter = 0u;
+            using var reader = src.Utf8LineReader();
+            var id = Identifier.Empty;
+            var i = 0u;
+            var j = 0u;
+            while(reader.Next(out var line))
+            {
+                result = parse(line, out var fields);
+                if(result.Fail)
+                {
+                    Error(result.Message);
+
+                    break;
+                }
+
+                DefFields[counter++] = fields;
+
+                // if(i==0)
+                // {
+                //     id = fields.Id;
+                // }
+                // else if(fields.Id != id)
+                // {
+                //     FieldMap.Map(id, (j,i));
+                //     i++;
+                //     j=i;
+                // }
+                // else
+                // {
+                //     i++;
+                //     j++;
+                // }
+            }
         }
 
         public void Classes()
@@ -83,7 +169,7 @@ namespace Z0.llvm
             ClassMap = LoadLineMap(Paths.ImportMap(Datasets.X86Classes));
             DefMap = LoadLineMap(Paths.ImportMap(Datasets.X86Defs));
             iteri(DefMap.Intervals, (i,entry) => DefLookup.Map(entry.Id, (uint)i));
-
+            LoadDefFields();
         }
 
         LineMap<Identifier> LoadLineMap(FS.FilePath src)

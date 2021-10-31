@@ -53,6 +53,7 @@ namespace Z0
             dst.CpuCount = number(N.CpuCount);
             dst.DevWs = dir(N.DevWs);
             dst.LlvmRoot = dir(N.LlvmRoot);
+            dst.Toolbase = dir(N.Toolbase);
         }
 
         public EnvDirVar ZDev;
@@ -66,6 +67,8 @@ namespace Z0
         public EnvDirVar Packages;
 
         public EnvDirVar Tools;
+
+        public EnvDirVar Toolbase;
 
         public EnvDirVar Archives;
 

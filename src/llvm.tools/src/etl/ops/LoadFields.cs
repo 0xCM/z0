@@ -10,7 +10,7 @@ namespace Z0.llvm
 
     using static core;
 
-    partial class EtlWorkflow
+    partial class LlvmEtlServices
     {
         void LoadFields(ReadOnlySpan<TextLine> src, in LineInterval<Identifier> interval, ref int k, Span<TableGenField> dst)
         {
@@ -26,7 +26,8 @@ namespace Z0.llvm
                 field.Id = interval.Id;
                 if(text.index(content, Chars.Space, out var i0))
                 {
-                    field.FieldContent.DataType = text.left(content,i0);
+                    field.FieldContent.DataType = text.trim(text.left(content,i0));
+                    //var dt = LlvmDataType.parse(field.FieldContent.DataType);
                     var namedValue = text.right(content,i0);
                     if(text.index(namedValue, Chars.Space, out var i1))
                     {

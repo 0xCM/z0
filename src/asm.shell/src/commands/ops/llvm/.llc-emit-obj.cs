@@ -27,7 +27,7 @@ namespace Z0.Asm
                         );
 
                     var cmd = Cmd.cmdline(Ws.Tools().Script(LlvmToolNames.llc, "emit-obj").Format(PathSeparator.BS));
-                    var response = ScriptRunner.RunCmd(cmd, vars);
+                    var response = OmniScript.RunCmd(cmd, vars);
                     var outfile = Lines.prop(response,"DstPath");
                     if(text.nonempty(outfile))
                     {

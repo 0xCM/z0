@@ -12,8 +12,6 @@ namespace Z0
         BitWidth ContentWidth {get;}
 
         BitWidth StorageWidth {get;}
-
-        DataKind TypeKind {get;}
     }
 
     [Free]

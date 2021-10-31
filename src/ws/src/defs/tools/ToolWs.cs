@@ -26,6 +26,8 @@ namespace Z0
         {
             ConfigLookup = dict<ToolId,ToolConfig>();
             Configs = array<ToolConfig>();
+            Toolbase = Env.load().Toolbase;
+
         }
 
         public IToolWs Configure(ToolConfig[] src)
@@ -39,6 +41,8 @@ namespace Z0
         {
             get => Configs;
         }
+
+        public FS.FolderPath Toolbase {get;}
 
         public bool Settings(ToolId id, out ToolConfig dst)
             => ConfigLookup.TryGetValue(id, out dst);

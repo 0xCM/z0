@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
+    using static core;
     partial class LlvmCmd
     {
         [CmdOp(".classes")]
@@ -30,5 +31,28 @@ namespace Z0.llvm
             return result;
         }
 
+        [CmdOp(".fields")]
+        Outcome Fields(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            DataParser.parse(arg(args,0).Value, out uint offset);
+            DataParser.parse(arg(args,1).Value, out uint length);
+
+            var fields = Db.Fields(offset,length);
+            for(var i=0; i < fields.Length; i++)
+            {
+                ref readonly var field = ref skip(fields,i);
+                var dt = LlvmDataType.parse(field.DataType);
+                if(dt.IsBits)
+                {
+                    dt.TypeArgs(out var bitarray);
+
+                }
+
+
+            }
+
+            return result;
+        }
     }
 }

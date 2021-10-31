@@ -14,7 +14,7 @@ namespace Z0.llvm
     using static Root;
     using static core;
 
-    public partial class EtlWorkflow : AppService<EtlWorkflow>
+    public partial class LlvmEtlServices : AppService<LlvmEtlServices>
     {
         LlvmPaths LlvmPaths;
 
@@ -27,7 +27,7 @@ namespace Z0.llvm
         HashSet<string> ClassExclusions {get;}
             = hashset<string>("Hexagon", "Neon", "PowerPC", "RISCV", "SystemZ", "Hexagom", "AMDGPU");
 
-        public EtlWorkflow()
+        public LlvmEtlServices()
         {
         }
 
@@ -72,7 +72,7 @@ namespace Z0.llvm
             dst.ClassMap = classMap;
             var classFields = LoadFields(records, classMap);
             dst.Classes = classFields;
-            EmitFields(classFields, Datasets.X86ClassMembers);
+            EmitFields(classFields, Datasets.X86ClassFields);
             IndexLists(ref dst);
 
 

@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    public class AsmShellState : ShellState
+    public class AsmShellState : CmdShellState
     {
         Index<SdmOpCodeDetail> _SdmOpCodeDetails;
 

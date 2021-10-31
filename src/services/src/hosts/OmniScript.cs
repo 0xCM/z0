@@ -141,6 +141,55 @@ namespace Z0
         public Outcome Run(CmdLine cmd, CmdVars vars, FS.FilePath log, Receiver<string> status, Receiver<string> error, out ReadOnlySpan<TextLine> dst)
             => ScriptProcess.run(cmd, vars, log, status, error, out dst);
 
+        public ReadOnlySpan<TextLine> RunCmd(CmdLine cmd, Action<Exception> error = null)
+        {
+            try
+            {
+                var process = ScriptProcess.create(cmd);
+                process.Wait();
+                return Lines.read(process.Output);
+            }
+            catch(Exception e)
+            {
+                if(error != null)
+                    error(e);
+                else
+                    Error(e);
+                return default;
+            }
+        }
+
+        public ReadOnlySpan<TextLine> RunCmd(CmdLine cmd, CmdVars vars)
+        {
+            try
+            {
+                var process = ScriptProcess.create(cmd, vars);
+                process.Wait();
+                return Lines.read(process.Output);
+            }
+            catch(Exception e)
+            {
+                Error(e);
+                return default;
+            }
+        }
+
+        public Outcome RunCmd(CmdLine cmd, CmdVars vars, out ReadOnlySpan<TextLine> dst)
+        {
+            dst = default;
+            try
+            {
+                var process = ScriptProcess.create(cmd, vars);
+                process.Wait();
+                dst = Lines.read(process.Output);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+        }
+
         public Outcome RunProjectScript(ProjectId project, string src, Subject scope, ScriptId script)
             => RunProjectScript(project, src, scope, script, out _);
 

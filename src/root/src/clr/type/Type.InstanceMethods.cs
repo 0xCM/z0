@@ -20,6 +20,6 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static MethodInfo[] InstanceMethods(this Type src)
-            => src.GetMethods(F.Public | F.NonPublic | F.Instance);
+            => src.GetMethods(F.Public | F.NonPublic | F.Instance | F.FlattenHierarchy);
     }
 }

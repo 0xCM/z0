@@ -6,7 +6,7 @@ namespace Z0.llvm
 {
     public sealed partial class LlvmCmd : AppCmdService<LlvmCmd>
     {
-        EtlWorkflow LlvmEtl;
+        LlvmEtlServices LlvmEtl;
 
         LlvmToolbase Toolbase;
 
@@ -29,7 +29,6 @@ namespace Z0.llvm
             LlvmEtl = Wf.LlvmEtl();
             Toolbase = Wf.LLvmToolbase();
             LlvmPaths = Wf.LlvmPaths();
-
         }
     }
 }

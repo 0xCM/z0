@@ -9,8 +9,7 @@ namespace Z0
     [Free]
     public interface IChar : IBlittable
     {
-        DataKind IBlittable.TypeKind
-            => DataKind.Char;
+
     }
 
     [Free]

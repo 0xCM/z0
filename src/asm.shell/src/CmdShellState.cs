@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     [ApiComplete]
-    public class ShellState
+    public class CmdShellState
     {
         FS.FolderPath _CurrentDir;
 
@@ -142,7 +142,7 @@ namespace Z0
             return Files();
         }
 
-        public ShellState()
+        public CmdShellState()
         {
             _CurrentDir = FS.FolderPath.Empty;
             _Tool = default;

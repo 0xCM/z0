@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static core;
 
     /// <summary>
     /// An extremely naive prime enumerator
@@ -31,10 +30,7 @@ namespace Z0
         public ulong Next()
         {
             var next = Prior;
-            while(!IsPrime(++next))
-            {
-
-            }
+            while(!IsPrime(++next)){}
             Prior = next;
             return next;
         }

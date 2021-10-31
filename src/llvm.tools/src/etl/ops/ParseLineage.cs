@@ -6,7 +6,7 @@ namespace Z0.llvm
 {
     using SQ = SymbolicQuery;
 
-    partial class EtlWorkflow
+    partial class LlvmEtlServices
     {
         static bool ParseLineage(string content, out Lineage dst)
         {

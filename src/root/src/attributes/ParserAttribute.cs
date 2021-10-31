@@ -9,16 +9,16 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class)]
     public class ParserAttribute : Attribute
     {
-        public ParserAttribute(Type target)
+        public ParserAttribute(params Type[] supported)
         {
-            TargetType = target;
+            SupportedTypes = supported;
         }
 
         public ParserAttribute()
         {
-            TargetType = typeof(void);
+            SupportedTypes = new Type[]{typeof(void)};
         }
 
-        public Type TargetType {get;}
+        public Type[] SupportedTypes {get;}
     }
 }

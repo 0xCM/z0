@@ -48,5 +48,7 @@ namespace Z0
         public const string DevWs = "DevWs";
 
         public const string LlvmRoot = "LlvmRoot";
+
+        public const string Toolbase = "Toolbase";
     }
 }

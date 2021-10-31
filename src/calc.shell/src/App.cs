@@ -227,6 +227,17 @@ namespace Z0
             Parts.BitPack.Resolved.Executor.Run();
         }
 
+        void Run(N28 n)
+        {
+            for(byte i = 120; i<148; i++)
+            for(byte j = 120; j<148; j++)
+            {
+                var cin = math.odd(i + j);
+                var y = math.adc(i,j, cin,out var cout);
+                Write(string.Format("adc({0},{1}) carry {2} = {3} carry {4}", i,j,cin, y, (uint)cout));
+            }
+        }
+
         void RunValidators()
         {
             Md5Validator.create(Wf).Run();
@@ -285,6 +296,9 @@ namespace Z0
                     break;
                     case 27:
                         Run(n27);
+                    break;
+                    case 28:
+                        Run(n28);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

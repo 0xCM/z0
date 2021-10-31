@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct gAlg
     {
-
         [MethodImpl(Inline), Srl, Closures(Closure)]
         public static Span<T> srl<T>(ReadOnlySpan<T> src, byte count, Span<T> dst)
             where T : unmanaged

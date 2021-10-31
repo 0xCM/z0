@@ -12,7 +12,7 @@ namespace Z0.llvm
 
     using F = llvm.records.TableGenField;
 
-    partial class EtlWorkflow
+    partial class LlvmEtlServices
     {
         static ReadOnlySpan<TableGenFields> partition(ReadOnlySpan<TableGenField> src)
         {
@@ -53,7 +53,12 @@ namespace Z0.llvm
             for(var i=0; i<count; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                writer.WriteLine(string.Format(F.RowFormat, field.Id, field.DataType, field.Name, field.Value));
+                var fv = field.Value;
+                if(nonempty(fv))
+                {
+                    fv = fv.Replace(Chars.Pipe, Chars.Caret);
+                }
+                writer.WriteLine(string.Format(F.RowFormat, field.Id, field.DataType, field.Name, fv));
             }
 
             EmittedTable(emitting, count);

@@ -15,6 +15,8 @@ namespace Z0
 
         Option<IToolCmdShell> Shell;
 
+        protected OmniScript OmniScript;
+
         protected AppCmdService()
         {
             PromptTitle = "cmd";
@@ -24,6 +26,7 @@ namespace Z0
         {
             Dispatcher = Cmd.dispatcher(this, Dispatch);
             Witness = Loggers.worker(controller().Id(), Db.ControlRoot());
+            OmniScript = Wf.OmniScript();
         }
 
         public T With(IToolCmdShell shell)
@@ -65,6 +68,39 @@ namespace Z0
         {
             var input = term.prompt(Prompt());
             return Cmd.cmdspec(input);
+        }
+
+
+        protected Outcome ToolEnv(out Settings dst)
+        {
+            var path = Ws.Tools().Toolbase + FS.file("show-env-config", FS.Cmd);
+            dst = Settings.Empty;
+            if(!path.Exists)
+                return (false, FS.missing(path));
+            var cmd = Cmd.cmdline(path.Format(PathSeparator.BS));
+            var response = OmniScript.RunCmd(cmd);
+            dst = Settings.parse(response);
+            return true;
+        }
+
+        [CmdOp(".tool-env")]
+        protected Outcome ShowToolEnv(CmdArgs args)
+        {
+            var result = ToolEnv(out var settings);
+            if(result.Fail)
+                return result;
+
+            iter(settings, s => Write(s));
+
+            return true;
+            // var path = Ws.Tools().Toolbase + FS.file("show-env-config", FS.Cmd);
+            // if(!path.Exists)
+            //     return (false, FS.missing(path));
+            // var cmd = Cmd.cmdline(path.Format(PathSeparator.BS));
+            // var response = OmniScript.RunCmd(cmd);
+            // var settings = Settings.parse(response);
+            // iter(settings, s => Write(s));
+            // return true;
         }
 
         public void Run()

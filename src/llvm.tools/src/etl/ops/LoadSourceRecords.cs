@@ -6,7 +6,7 @@ namespace Z0.llvm
 {
     using System;
 
-    partial class EtlWorkflow
+    partial class LlvmEtlServices
     {
         public ReadOnlySpan<TextLine> LoadSourceRecords(string id)
         {

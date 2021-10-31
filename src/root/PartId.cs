@@ -231,8 +231,8 @@ public enum PartId : byte
     [Symbol("bitpack")]
     BitPack = 75,
 
-    [Symbol("bitmatrix")]
-    BitMatrix = 78,
+    [Symbol("settings")]
+    Settings = 78,
 
     [Symbol("logix")]
     Logix = 79,
