@@ -5,6 +5,7 @@
 namespace Z0.llvm
 {
     using System;
+
     using static core;
 
     partial class LlvmCmd
@@ -36,12 +37,9 @@ namespace Z0.llvm
                 var defs = list<Identifier>();
                 Db.Fields(provider => {
                     defs.Add(provider.EntityName);
-
                 });
 
                 iter(defs, d => Write(d));
-                // var sorted = types.Sort().Array();
-                // iter(sorted, t => Write(t));
             }
             return result;
         }

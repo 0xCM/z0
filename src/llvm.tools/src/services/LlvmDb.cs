@@ -165,6 +165,42 @@ namespace Z0.llvm
             Ran(running, string.Format("Loaded {0} fields from {1} records", DefFields.Count, DefFields.Count));
         }
 
+        public ReadOnlySpan<DefRelations> LoadDefRelations()
+        {
+            var src = Paths.Table<DefRelations>();
+            var dst = list<DefRelations>();
+            var format = TextDocFormat.Structured();
+            format.SplitClean = false;
+            var result = TextGrids.load(src, format, out var grid);
+            if(result.Fail)
+            {
+                Error(result.Message);
+            }
+            else
+            {
+                var rows = grid.Rows;
+                var count = grid.RowCount;
+                for(var i=0; i<count; i++)
+                {
+                    var record = new DefRelations();
+                    ref readonly var row = ref rows[i];
+                    if(row.CellCount != DefRelations.FieldCount)
+                    {
+                        Error(Tables.FieldCountMismatch.Format(DefRelations.FieldCount, row.CellCount));
+                        Write(row);
+                        break;
+                    }
+                    var j=0;
+                    result += DataParser.parse(row[j++].Text, out record.SourceLine);
+                    result += DataParser.parse(row[j++].Text, out record.Name);
+                    record.Ancestors = Lineage.parse(row[j++].Text);
+                    dst.Add(record);
+                    Write(string.Format("{0} -> {1}", record.Name, record.Ancestors));
+                }
+            }
+            return dst.ViewDeposited();
+        }
+
         LineMap<Identifier> LoadLineMap(FS.FilePath src)
         {
             using var reader = src.Utf8LineReader();

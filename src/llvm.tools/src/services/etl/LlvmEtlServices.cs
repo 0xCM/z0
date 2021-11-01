@@ -75,7 +75,6 @@ namespace Z0.llvm
             EmitFields(classFields, Datasets.X86ClassFields);
             IndexLists(ref dst);
 
-
             GenCode(dst);
             //CollectProjectData();
             //GenDocs(dst);

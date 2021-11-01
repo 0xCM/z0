@@ -55,9 +55,7 @@ namespace Z0.llvm
                         counter++;
 
                         if(i > 1 && counter % 1000 == 0)
-                        {
                             Wf.Status(string.Format("Emitted {0}/{1} instruction documents", counter, icount));
-                        }
                     }
                 }
             }

@@ -12,6 +12,31 @@ namespace Z0
 
     public class Lineage
     {
+        [MethodImpl(Inline)]
+        public static Lineage root(string name)
+            => new Lineage(name);
+
+        public static Lineage parse(string src)
+        {
+            var input = text.trim(src);
+            if(empty(input))
+                return Lineage.Empty;
+            else if(input.Contains("->"))
+            {
+                var parts = @readonly(input.Split("->").Select(x => x.Trim()));
+                var count = parts.Length;
+                if(count == 0)
+                    return Lineage.Empty;
+
+                if(count == 1)
+                    return new Lineage(first(parts));
+                else
+                    return new Lineage(first(parts), slice(parts,1).ToArray());
+            }
+            else
+                return new Lineage(input);
+        }
+
         public static Lineage path(ReadOnlySpan<string> src)
         {
             var count = src.Length;

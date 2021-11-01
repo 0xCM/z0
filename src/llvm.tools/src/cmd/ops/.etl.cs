@@ -48,9 +48,7 @@ namespace Z0.llvm
                 if(ancestors.TryGetValue(child, out var a))
                 {
                     if(classes.Find(a, out var parent))
-                    {
                         members.Add(new ClassMember(parent, child.ClassId, child.ClassName));
-                    }
                 }
             }
 
