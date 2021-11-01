@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="minlen">The minimum bitspan length</param>
         /// <param name="maxlen">The maximum bitspan length</param>
         [Op]
-        public static BitSpan BitSpan(this IDomainSource source, int minlen, int maxlen)
+        public static BitSpan BitSpan(this IRangeSource source, int minlen, int maxlen)
             => create(source).Next(source.Next<int>(minlen, maxlen + 1));
 
         /// <summary>

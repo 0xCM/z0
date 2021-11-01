@@ -27,7 +27,6 @@ namespace Z0.llvm
                 if(text.index(content, Chars.Space, out var i0))
                 {
                     field.FieldContent.DataType = text.trim(text.left(content,i0));
-                    //var dt = LlvmDataType.parse(field.FieldContent.DataType);
                     var namedValue = text.right(content,i0);
                     if(text.index(namedValue, Chars.Space, out var i1))
                     {

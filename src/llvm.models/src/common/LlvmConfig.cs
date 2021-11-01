@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
+    using System;
     using System.Collections.Generic;
 
     using K = llvm.LlvmConfigKind;
 
     public class LlvmConfig
     {
+
         readonly Dictionary<K,dynamic> Data;
 
         public LlvmConfig()
@@ -17,31 +19,37 @@ namespace Z0.llvm
             Data = new();
         }
 
-        public void Set(K key, dynamic value)
+        public void Set<T>(K key, T value)
         {
             Data[key] = value;
         }
 
-        public bool BinDir(out FS.FolderPath dst)
+        public bool Get<T>(K key, out T value)
         {
-            if(Data.TryGetValue(K.BinDir, out var x))
+            var result = false;
+            value = default;
+            try
             {
-                dst = (FS.FolderPath)x;
-                return true;
+                if(Data.TryGetValue(key, out var v))
+                {
+                    value = (T)v;
+                    result = true;
+                }
             }
-            dst = FS.FolderPath.Empty;
-            return false;
+            catch(Exception)
+            {
+            }
+            return result;
         }
 
+
+        public bool BinDir(out FS.FolderPath dst)
+            => Get(K.BinDir, out dst);
+
         public bool LibDir(out FS.FolderPath dst)
-        {
-            if(Data.TryGetValue(K.LibDir, out var x))
-            {
-                dst = (FS.FolderPath)x;
-                return true;
-            }
-            dst = FS.FolderPath.Empty;
-            return false;
-        }
+            => Get(K.LibDir, out dst);
+
+        public IReadOnlyCollection<KeyValuePair<K, dynamic>> Items
+            => Data;
     }
 }

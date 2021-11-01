@@ -17,12 +17,6 @@ namespace Z0
     public readonly struct PoissonSpec<T> : IDistributionSpec<T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public PoissonSpec(double rate)
-        {
-            this.Rate = rate;
-        }
-
         /// <summary>
         /// Specifies the event frequency
         /// </summary>
@@ -35,12 +29,17 @@ namespace Z0
             => DistributionKind.Poisson;
 
         [MethodImpl(Inline)]
-        public static implicit operator PoissonSpec<T>(double rate)
-            => new PoissonSpec<T>(rate);
+        public PoissonSpec(double src)
+        {
+            Rate = src;
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator double(PoissonSpec<T> spec)
-            => spec.Rate;
+        public static implicit operator PoissonSpec<T>(double src)
+            => new PoissonSpec<T>(src);
 
+        [MethodImpl(Inline)]
+        public static implicit operator double(PoissonSpec<T> src)
+            => src.Rate;
    }
 }

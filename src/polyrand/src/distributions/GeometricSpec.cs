@@ -16,21 +16,9 @@ namespace Z0
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public static GeometricSpec<T> Define(double p)
-            => new GeometricSpec<T>(p);
-
-        [MethodImpl(Inline)]
-        public static implicit operator GeometricSpec<T>(double p)
-            => Define(p);
-
-        [MethodImpl(Inline)]
-        public static implicit operator double(GeometricSpec<T> p)
-            => p.Success;
-
-        [MethodImpl(Inline)]
         public GeometricSpec(double p)
         {
-            this.Success = p;
+            Success = p;
         }
 
         /// <summary>
@@ -40,5 +28,13 @@ namespace Z0
 
         public DistributionKind DistKind
             => DistributionKind.Geometric;
+
+        [MethodImpl(Inline)]
+        public static implicit operator GeometricSpec<T>(double p)
+            => new GeometricSpec<T>(p);
+
+        [MethodImpl(Inline)]
+        public static implicit operator double(GeometricSpec<T> p)
+            => p.Success;
     }
 }

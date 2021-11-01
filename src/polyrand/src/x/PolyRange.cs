@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="min">The inclusive minimum left endpoint value</param>
         /// <param name="max">The exclusive maximum right endpoint value</param>
         /// <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
-        public static Interval<T> Interval<T>(this IDomainSource src, T min, T max)
+        public static Interval<T> Interval<T>(this IRangeSource src, T min, T max)
             where T : unmanaged
         {
             var cut = src.Next(min,max);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="min">The inclusive minimum left endpoint value</param>
         /// <param name="max">The exclusive maximum right endpoint value</param>
         /// <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
-        public static IEnumerable<Interval<T>> Intervals<T>(this IDomainSource src, T min, T max)
+        public static IEnumerable<Interval<T>> Intervals<T>(this IRangeSource src, T min, T max)
             where T : unmanaged
         {
             while(true)

@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="target">The input/output span</param>
         /// <typeparam name="T">The primal type</typeparam>
         [Op, Closures(Closure)]
-        public static Span<T> shuffle<T>(IDomainSource src, Span<T> target)
+        public static Span<T> shuffle<T>(IRangeSource src, Span<T> target)
         {
             for (var i = 0u; i<target.Length; i++)
                 Swaps.swap(ref seek(target,i), ref seek(target,(uint)(i + src.Next(0, target.Length - i))));

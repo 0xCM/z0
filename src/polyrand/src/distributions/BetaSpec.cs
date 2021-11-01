@@ -21,22 +21,6 @@ namespace Z0
         public readonly T Beta;
 
         [MethodImpl(Inline)]
-        public static BetaSpec<T> From(IDistributionSpec<T> src)
-            => (BetaSpec<T>)src;
-
-        [MethodImpl(Inline)]
-        public static implicit operator (T alpha, T beta)(BetaSpec<T> spec)
-            => (spec.Alpha, spec.Beta);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BetaSpec<T>((T alpha, T beta) x )
-            => Define(x.alpha, x.beta);
-
-        [MethodImpl(Inline)]
-        public static BetaSpec<T> Define(T alpha, T beta)
-            => new BetaSpec<T>(alpha,beta);
-
-        [MethodImpl(Inline)]
         public BetaSpec(T alpha, T beta)
         {
             Alpha = alpha;
@@ -48,5 +32,13 @@ namespace Z0
         /// </summary>
         public DistributionKind DistKind
             => DistributionKind.Beta;
+
+        [MethodImpl(Inline)]
+        public static implicit operator (T alpha, T beta)(BetaSpec<T> spec)
+            => (spec.Alpha, spec.Beta);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BetaSpec<T>((T alpha, T beta) x )
+            => new BetaSpec<T>(x.alpha, x.beta);
     }
 }

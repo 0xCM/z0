@@ -15,7 +15,7 @@ namespace Z0
     /// Implements a 64-bit PCG generator
     /// </summary>
     [Rng(nameof(Pcg64))]
-    public struct Pcg64 : IRngNav<ulong>, IDomainRng<Pcg64,ulong>
+    public struct Pcg64 : IRngNav<ulong>, IRangeRng<Pcg64,ulong>
     {
         internal const ulong Multiplier = Pcg.DefaultMultiplier;
 

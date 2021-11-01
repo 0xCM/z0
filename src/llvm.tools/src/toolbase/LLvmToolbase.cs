@@ -46,7 +46,6 @@ namespace Z0.llvm
             var final = profiles.ViewDeposited();
             TableEmit(final, ToolProfile.RenderWidths, dst);
             return result;
-
         }
 
         public Outcome Create(FS.FolderPath spec, FS.FolderPath toolbase)
@@ -59,12 +58,9 @@ namespace Z0.llvm
 
             var profilepath = spec + Tables.filename<ToolProfile>();
             if(!profilepath.Exists)
-            {
                 InitializeProfiles(spec,config, "llvm");
-            }
 
-            var profiles = LoadProfiles(profilepath);
-            return Load(profiles, toolbase);
+            return Load(LoadProfiles(profilepath), toolbase);
         }
 
         ReadOnlySpan<ToolProfile> LoadProfiles(FS.FilePath src)
@@ -101,9 +97,7 @@ namespace Z0.llvm
             var result = Outcome.Success;
             dst = default;
             if(src.CellCount != ToolProfile.FieldCount)
-            {
                 result = (false,Tables.FieldCountMismatch.Format(ToolProfile.FieldCount, src.CellCount));
-            }
             else
             {
                 var i=0;
@@ -140,7 +134,7 @@ namespace Z0.llvm
                 using var writer = path.UnicodeWriter();
                 for(var j=0; j<length; j++)
                 {
-                    writer.WriteLine(skip(response,j).Content);
+                    writer.WriteLine(skip(response, j).Content);
                 }
                 EmittedFile(emitting,length);
             }
@@ -155,7 +149,6 @@ namespace Z0.llvm
             dst = Toolset.Empty;
             if(!config.Exists)
                 return (false, FS.missing(config));
-
 
             using var reader = config.Utf8LineReader();
             while(reader.Next(out var line))
@@ -189,5 +182,4 @@ namespace Z0.llvm
             return dst.IsNonEmpty;
         }
     }
-
 }

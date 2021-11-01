@@ -16,12 +16,12 @@ namespace Z0
     /// </summary>
     public class Polyrand : IPolyrand
     {
-        readonly IDomainRng<ulong> Points;
+        readonly IRangeRng<ulong> Points;
 
         public Option<IRngNav> Navigator {get;}
 
         [MethodImpl(Inline)]
-        internal Polyrand(IDomainRng<ulong> points)
+        internal Polyrand(IRangeRng<ulong> points)
         {
             Points = points;
             Navigator = default;
@@ -174,61 +174,61 @@ namespace Z0
                 yield return Next<T>();
         }
 
-        IDomainSource<sbyte> Int8Source
+        IRangeSource<sbyte> Int8Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IDomainSource<byte> UInt8Source
+        IRangeSource<byte> UInt8Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IDomainSource<short> Int16Source
+        IRangeSource<short> Int16Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IDomainSource<ushort> UInt16Source
+        IRangeSource<ushort> UInt16Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IDomainSource<int> Int32Source
+        IRangeSource<int> Int32Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IDomainSource<uint> UInt32Source
+        IRangeSource<uint> UInt32Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IDomainSource<long> Int64Source
+        IRangeSource<long> Int64Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IDomainSource<ulong> UInt64Source
+        IRangeSource<ulong> UInt64Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IDomainSource<float> Float32Source
+        IRangeSource<float> Float32Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IDomainSource<double> Float64Source
+        IRangeSource<double> Float64Source
         {
             [MethodImpl(Inline)]
             get => this;
@@ -239,14 +239,14 @@ namespace Z0
              => (sbyte) (Points.Next((ulong)sbyte.MaxValue*2) - (ulong)SByte.MaxValue);
 
         [MethodImpl(Inline)]
-        sbyte IDomainSource<sbyte>.Next(sbyte max)
+        sbyte IRangeSource<sbyte>.Next(sbyte max)
         {
             var amax = (ulong)math.abs(max);
             return (sbyte) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
-        sbyte IDomainSource<sbyte>.Next(sbyte min, sbyte max)
+        sbyte IRangeSource<sbyte>.Next(sbyte min, sbyte max)
         {
             var delta = math.sub(max, min);
             return delta > 0
@@ -255,11 +255,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        byte IDomainSource<byte>.Next(byte min, byte max)
+        byte IRangeSource<byte>.Next(byte min, byte max)
             => (byte)Points.Next((ulong)min, (ulong)max);
 
         [MethodImpl(Inline)]
-        byte IDomainSource<byte>.Next(byte max)
+        byte IRangeSource<byte>.Next(byte max)
             => (byte)Points.Next((ulong)max);
 
         [MethodImpl(Inline)]
@@ -271,14 +271,14 @@ namespace Z0
             => (short) (Points.Next((ulong)short.MaxValue*2) - (ulong)Int16.MaxValue);
 
         [MethodImpl(Inline)]
-        short IDomainSource<short>.Next(short max)
+        short IRangeSource<short>.Next(short max)
         {
             var amax = (ulong)math.abs(max);
             return (short) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
-        short IDomainSource<short>.Next(short min, short max)
+        short IRangeSource<short>.Next(short min, short max)
         {
             var delta = math.sub(max, min);
             return delta > 0
@@ -295,11 +295,11 @@ namespace Z0
             => (ushort)Points.Next((ushort)ushort.MaxValue);
 
         [MethodImpl(Inline)]
-        ushort IDomainSource<ushort>.Next(ushort max)
+        ushort IRangeSource<ushort>.Next(ushort max)
             => (ushort)Points.Next((ulong)max);
 
         [MethodImpl(Inline)]
-        ushort IDomainSource<ushort>.Next(ushort min, ushort max)
+        ushort IRangeSource<ushort>.Next(ushort min, ushort max)
             => (ushort)Points.Next((ulong)min, (ulong)max);
 
         [MethodImpl(Inline)]
@@ -307,14 +307,14 @@ namespace Z0
             => (int) (Points.Next((ulong)int.MaxValue*2) - Int32.MaxValue);
 
         [MethodImpl(Inline)]
-        int IDomainSource<int>.Next(int max)
+        int IRangeSource<int>.Next(int max)
         {
             var amax = (ulong)math.abs(max);
             return (int) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
-        int IDomainSource<int>.Next(int min, int max)
+        int IRangeSource<int>.Next(int min, int max)
         {
             var delta = math.sub(max, min);
             return delta > 0
@@ -331,11 +331,11 @@ namespace Z0
             =>(uint)Points.Next((ulong)uint.MaxValue);
 
         [MethodImpl(Inline)]
-        uint IDomainSource<uint>.Next(uint max)
+        uint IRangeSource<uint>.Next(uint max)
             => (uint)Points.Next((ulong)max);
 
         [MethodImpl(Inline)]
-        uint IDomainSource<uint>.Next(uint min, uint max)
+        uint IRangeSource<uint>.Next(uint min, uint max)
             => (uint)Points.Next((ulong)min, (ulong)max);
 
         [MethodImpl(Inline)]
@@ -361,14 +361,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        long IDomainSource<long>.Next(long max)
+        long IRangeSource<long>.Next(long max)
         {
             var amax = (ulong)math.abs(max);
             return (long) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
-        long IDomainSource<long>.Next(long min, long max)
+        long IRangeSource<long>.Next(long min, long max)
         {
             var delta = math.sub(max, min);
             return delta > 0
@@ -381,11 +381,11 @@ namespace Z0
             => Points.Next();
 
         [MethodImpl(Inline)]
-        ulong IDomainSource<ulong>.Next(ulong max)
+        ulong IRangeSource<ulong>.Next(ulong max)
             => Points.Next(max);
 
         [MethodImpl(Inline)]
-        ulong IDomainSource<ulong>.Next(ulong min, ulong max)
+        ulong IRangeSource<ulong>.Next(ulong min, ulong max)
             => Points.Next(min, max);
 
         [MethodImpl(Inline)]
@@ -393,14 +393,14 @@ namespace Z0
             => NextF32();
 
         [MethodImpl(Inline)]
-        float IDomainSource<float>.Next(float max)
+        float IRangeSource<float>.Next(float max)
         {
             var whole = (float)Int32Source.Next((int)max);
             return whole + NextF32();
         }
 
         [MethodImpl(Inline)]
-        float IDomainSource<float>.Next(float min, float max)
+        float IRangeSource<float>.Next(float min, float max)
         {
             var whole = (float)Int32Source.Next((int)min, (int)max);
             return whole + NextF32();
@@ -411,14 +411,14 @@ namespace Z0
             => NextF64();
 
         [MethodImpl(Inline)]
-        double IDomainSource<double>.Next(double min, double max)
+        double IRangeSource<double>.Next(double min, double max)
         {
             var whole = (double)Int64Source.Next((long)min, (long)max);
             return whole + NextF64();
         }
 
         [MethodImpl(Inline)]
-        double IDomainSource<double>.Next(double max)
+        double IRangeSource<double>.Next(double max)
         {
             var whole = (double)Int64Source.Next((long)max);
             return whole + NextF64();

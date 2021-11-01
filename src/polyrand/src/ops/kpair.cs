@@ -17,7 +17,7 @@ namespace Z0
                 => (next<T>(source), next<T>(source));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ConstPair<T> kpair<T>(IDomainSource source, T min, T max)
+        public static ConstPair<T> kpair<T>(IRangeSource source, T min, T max)
             where T : unmanaged
                 => (next(source, min, max), next(source, min, max));
     }

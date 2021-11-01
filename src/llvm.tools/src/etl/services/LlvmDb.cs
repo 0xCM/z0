@@ -6,6 +6,7 @@ namespace Z0.llvm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using records;
 
@@ -57,7 +58,7 @@ namespace Z0.llvm
             var parts = src.Split(Chars.Pipe);
             var count = parts.Length;
             if(count < 4)
-                return (false,Tables.FieldCountMismatch.Format(4,count));
+                return (false, Tables.FieldCountMismatch.Format(4,count));
 
             dst.Id = skip(parts,0);
             dst.FieldContent.DataType = skip(parts,1);
@@ -67,8 +68,7 @@ namespace Z0.llvm
         }
 
         public ReadOnlySpan<TableGenField> Fields(uint offset, uint length)
-            => slice(DefFields.View,offset,length);
-
+            => slice(DefFields.View, offset,length);
 
         public ReadOnlySpan<TableGenField> Fields(Identifier id)
         {
@@ -80,6 +80,13 @@ namespace Z0.llvm
             }
             else
                 return default;
+        }
+
+        public void Fields(Action<IFieldProvider> receiver)
+        {
+            var defcount = DefMap.IntervalCount;
+            for(var i=0; i<defcount; i++)
+                receiver(new FieldProvider(DefMap[i].Id,this));
         }
 
         void LoadDefFields()
@@ -104,42 +111,26 @@ namespace Z0.llvm
                 }
 
                 DefFields[counter++] = fields;
-
-                // if(i==0)
-                // {
-                //     id = fields.Id;
-                // }
-                // else if(fields.Id != id)
-                // {
-                //     FieldMap.Map(id, (j,i));
-                //     i++;
-                //     j=i;
-                // }
-                // else
-                // {
-                //     i++;
-                //     j++;
-                // }
             }
         }
 
-        public void Classes()
+        public void Classes(StreamWriter dst)
         {
             var count = ClassMap.IntervalCount;
             for(var i=0; i<count; i++)
             {
                 ref readonly var entry = ref ClassMap[i];
-                Write(entry.Format());
+                dst.WriteLine(entry.Format());
             }
         }
 
-        public void Defs()
+        public void Defs(StreamWriter dst)
         {
             var count = DefMap.IntervalCount;
             for(var i=0; i<count; i++)
             {
                 ref readonly var entry = ref DefMap[i];
-                Write(entry.Format());
+                dst.WriteLine(entry.Format());
             }
         }
 
@@ -164,12 +155,14 @@ namespace Z0.llvm
 
         void LoadRecords()
         {
+            var running = Running("Loading data");
             using var r0 = Paths.RecordImport(Datasets.X86Lined, FS.Txt).Utf8LineReader();
             X86Records = r0.ReadAll().ToArray();
             ClassMap = LoadLineMap(Paths.ImportMap(Datasets.X86Classes));
             DefMap = LoadLineMap(Paths.ImportMap(Datasets.X86Defs));
             iteri(DefMap.Intervals, (i,entry) => DefLookup.Map(entry.Id, (uint)i));
             LoadDefFields();
+            Ran(running, string.Format("Loaded {0} fields from {1} records", DefFields.Count, DefFields.Count));
         }
 
         LineMap<Identifier> LoadLineMap(FS.FilePath src)

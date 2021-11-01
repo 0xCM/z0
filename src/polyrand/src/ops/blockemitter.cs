@@ -12,11 +12,11 @@ namespace Z0
     partial struct Sources
     {
         [MethodImpl(Inline), Op]
-        public static SpanBlockEmitter blockemitter(IDomainSource src, Pow2x64 bufferSize = Pow2x64.P2ᐞ14)
+        public static SpanBlockEmitter blockemitter(IRangeSource src, Pow2x64 bufferSize = Pow2x64.P2ᐞ14)
             => new SpanBlockEmitter(src, bufferSize);
 
         [MethodImpl(Inline), Op]
-        public static SpanBlockEmitter blockemitter(IDomainSource src, Index<Cell256> buffer)
+        public static SpanBlockEmitter blockemitter(IRangeSource src, Index<Cell256> buffer)
             => new SpanBlockEmitter(src, buffer);
     }
 }

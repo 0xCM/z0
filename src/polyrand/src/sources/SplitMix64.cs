@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     /// <remarks>Algorithms take from https://github.com/lemire/testingRNG/blob/master/source/splitmix64.h</remarks>
     [ApiHost, Rng(nameof(SplitMix64))]
-    public struct SplitMix64 : IDomainRng<SplitMix64,ulong>
+    public struct SplitMix64 : IRangeRng<SplitMix64,ulong>
     {
         ulong State;
 

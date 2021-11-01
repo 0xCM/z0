@@ -16,19 +16,19 @@ namespace Z0
     public readonly struct GammaSpec<T> : IDistributionSpec<T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        internal GammaSpec(T alpha, T dx, T beta)
-        {
-            Alpha = alpha;
-            Dx = dx;
-            Beta = beta;
-        }
-
         public readonly T Alpha;
 
         public readonly T Dx;
 
         public readonly T Beta;
+
+        [MethodImpl(Inline)]
+        public GammaSpec(T alpha, T dx, T beta)
+        {
+            Alpha = alpha;
+            Dx = dx;
+            Beta = beta;
+        }
 
         /// <summary>
         /// Classifies the distribution spec

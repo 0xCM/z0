@@ -12,50 +12,30 @@ namespace Z0
 
     public class Lineage
     {
-        public static Lineage node(string name)
-            => new Lineage(name);
-
         public static Lineage path(ReadOnlySpan<string> src)
         {
             var count = src.Length;
             if(count == 0)
                 return Lineage.Empty;
-
-            var dst = alloc<Lineage>(count);
-            ref readonly var input = ref first(src);
-            var start = node(input);
-            first(dst) = start;
-            var current = start;
-            for(var i=1; i<count; i++)
-            {
-                current = current.CreateChild(skip(input,i));
-                seek(dst,i) = current;
-            }
-            return current;
+            else if(count == 1)
+                return new Lineage(first(src));
+            else
+                return new Lineage(first(src), slice(src,1).ToArray());
         }
 
         const string LeftToRight = " -> ";
 
-        public static Outcome parse(string src, out Lineage dst)
-        {
-            if(src.Contains(LeftToRight))
-                dst = path(src.SplitClean(LeftToRight));
-            else
-                dst = Empty;
-            return true;
-        }
-
-        Lineage(string name, Lineage ancestor)
+        Lineage(string name, string[] ancestors)
         {
             Name = name;
-            Ancestor = ancestor;
+            Ancestors = ancestors;
             IsEmpty = false;
         }
 
         Lineage(string name)
         {
             Name = name;
-            Ancestor = Empty;
+            Ancestors = Index<string>.Empty;
             IsEmpty = false;
         }
 
@@ -65,7 +45,7 @@ namespace Z0
             IsEmpty = true;
         }
 
-        public Lineage Ancestor {get;}
+        public Index<string> Ancestors {get;}
 
         public string Name {get;}
 
@@ -80,37 +60,22 @@ namespace Z0
         public bool HasAncestor
         {
             [MethodImpl(Inline)]
-            get => Ancestor != null && Ancestor.IsNonEmpty;
-        }
-
-        public Lineage CreateChild(string name)
-            => new Lineage(name, this);
-
-        void Render(ITextBuffer dst)
-        {
-            if(IsNonEmpty && nonempty(Name))
-            {
-                dst.Append(Name);
-                if(HasAncestor)
-                {
-                    dst.Append(LeftToRight);
-                    Ancestor.Render(dst);
-                }
-            }
-        }
-
-        public Option<Lineage> Antecedant(string name)
-        {
-            if(HasAncestor)
-                return Ancestor.Antecedant(name);
-            else
-                return Option.none<Lineage>();
+            get => Ancestors.IsNonEmpty;
         }
 
         public string Format()
         {
             var dst = TextTools.buffer();
-            Render(dst);
+            if(IsNonEmpty && nonempty(Name))
+            {
+                dst.Append(Name);
+                var count = Ancestors.Count;
+                for(var i=0; i<count; i++)
+                {
+                    dst.Append(LeftToRight);
+                    dst.Append(Ancestors[i]);
+                }
+            }
             return dst.Emit();
         }
 

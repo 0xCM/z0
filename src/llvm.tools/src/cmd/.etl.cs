@@ -4,10 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using types;
-
     using static Root;
     using static core;
+    using static Equivalence;
 
     partial class LlvmCmd
     {
@@ -17,13 +16,13 @@ namespace Z0.llvm
             var data = LlvmEtl.RunEtl();
             var relations = data.ClassRelations;
             var count = (uint)relations.Length;
-            var classes = new EqClassLookup();
-            var ancestors = dict<EqClass,string>();
+            var classes = Equivalence.lookup();
+            var ancestors = dict<Class,string>();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var relation = ref skip(relations,i);
                 ref readonly var heritage = ref relation.Ancestors;
-                var @class = new EqClass(i, relation.Name);
+                var @class = new Class(i, relation.Name);
 
                 if(classes.Include(@class))
                 {
@@ -41,7 +40,7 @@ namespace Z0.llvm
                 }
             }
 
-            var members = list<EqClassMember>();
+            var members = list<ClassMember>();
             var indexed = classes.Seal();
             for(var i=0u; i<indexed.Length; i++)
             {
@@ -50,7 +49,7 @@ namespace Z0.llvm
                 {
                     if(classes.Find(a, out var parent))
                     {
-                        members.Add(new EqClassMember(parent, child.ClassId, child.ClassName));
+                        members.Add(new ClassMember(parent, child.ClassId, child.ClassName));
                     }
                 }
             }

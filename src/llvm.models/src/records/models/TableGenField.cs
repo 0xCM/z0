@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm.records
 {
-    using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 

@@ -28,6 +28,13 @@ namespace Z0
         /// </summary>
         public readonly T Scale;
 
+        [MethodImpl(Inline)]
+        public LaplaceSpec(T loc, T scale)
+        {
+            Location = loc;
+            Scale = scale;
+        }
+
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
@@ -35,22 +42,11 @@ namespace Z0
             => DistributionKind.Laplace;
 
         [MethodImpl(Inline)]
-        public static LaplaceSpec<T> Define(T loc, T scale)
-            => new LaplaceSpec<T>(loc, scale);
-
-        [MethodImpl(Inline)]
         public static implicit operator (T loc, T scale)(LaplaceSpec<T> spec)
             => (spec.Location, spec.Scale);
 
         [MethodImpl(Inline)]
         public static implicit operator LaplaceSpec<T>((T loc, T scale) x)
-            => Define(x.loc,x.scale);
-
-        [MethodImpl(Inline)]
-        public LaplaceSpec(T loc, T scale)
-        {
-            Location = loc;
-            Scale = scale;
-        }
+            => new LaplaceSpec<T>(x.loc,x.scale);
     }
 }

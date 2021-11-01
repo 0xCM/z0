@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="dst">A reference to the target location</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static void Fill<T>(this IDomainSource src, Interval<T> domain, int count, ref T dst, Func<T,bool> filter = null)
+        public static void Fill<T>(this IRangeSource src, Interval<T> domain, int count, ref T dst, Func<T,bool> filter = null)
             where T : unmanaged
         {
             var counter = 0;
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="source">The data source</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource source, Span<T> dst)
+        public static void Fill<T>(this IRangeSource source, Span<T> dst)
             where T : unmanaged
                 => source.Fill(ClosedInterval<T>.Full, dst.Length, ref first(dst));
 
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Fill<T>(this IDomainSource source, T min, T max, Span<T> dst, Func<T,bool> filter = null)
+        public static Span<T> Fill<T>(this IRangeSource source, T min, T max, Span<T> dst, Func<T,bool> filter = null)
             where T : unmanaged
         {
             source.Fill((min,max), dst.Length, ref first(dst), filter);
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Fill<T>(this IDomainSource random, Interval<T> domain, Span<T> dst, Func<T,bool> filter = null)
+        public static Span<T> Fill<T>(this IRangeSource random, Interval<T> domain, Span<T> dst, Func<T,bool> filter = null)
             where T : unmanaged
         {
             random.Fill(domain, dst.Length, ref first(dst), filter);
@@ -120,7 +120,7 @@ namespace Z0
         /// Fills a caller-supplied target with random bits
         /// </summary>
         /// <param name="source">The data source</param>
-        public static void Fill(this IDomainSource source, Span<bit> dst)
+        public static void Fill(this IRangeSource source, Span<bit> dst)
         {
             const int w = 64;
             var pos = -1;
@@ -214,7 +214,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource src, T min, T max, in SpanBlock16<T> dst)
+        public static void Fill<T>(this IRangeSource src, T min, T max, in SpanBlock16<T> dst)
             where T : unmanaged
                 => src.Fill(min,max,dst.Storage);
 
@@ -226,7 +226,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource src, T min, T max, in SpanBlock32<T> dst)
+        public static void Fill<T>(this IRangeSource src, T min, T max, in SpanBlock32<T> dst)
             where T : unmanaged
                 => src.Fill(min, max, dst.Storage);
 
@@ -238,7 +238,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource src, T min, T max, in SpanBlock64<T> dst)
+        public static void Fill<T>(this IRangeSource src, T min, T max, in SpanBlock64<T> dst)
             where T : unmanaged
                 => src.Fill(min,max,dst.Storage);
 
@@ -250,7 +250,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource src, T min, T max, in SpanBlock128<T> dst)
+        public static void Fill<T>(this IRangeSource src, T min, T max, in SpanBlock128<T> dst)
             where T : unmanaged
                 => src.Fill(min,max,dst.Storage);
 
@@ -262,7 +262,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource src, T min, T max, in SpanBlock256<T> dst)
+        public static void Fill<T>(this IRangeSource src, T min, T max, in SpanBlock256<T> dst)
             where T : unmanaged
                 => src.Fill(min,max,dst.Storage);
 
@@ -274,7 +274,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource src,T min, T max, in SpanBlock512<T> dst)
+        public static void Fill<T>(this IRangeSource src,T min, T max, in SpanBlock512<T> dst)
             where T : unmanaged
                 => src.Fill(min,max,dst.Storage);
 
@@ -284,7 +284,7 @@ namespace Z0
         /// <param name="source">The data source</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDomainSource source, Index<T> dst)
+        public static void Fill<T>(this IRangeSource source, Index<T> dst)
             where T : unmanaged
                 => source.Fill(ClosedInterval<T>.Full, dst.Length, ref dst.First);
 
@@ -296,7 +296,7 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Index<T> Fill<T>(this IDomainSource source, T min, T max, Index<T> dst, Func<T,bool> filter = null)
+        public static Index<T> Fill<T>(this IRangeSource source, T min, T max, Index<T> dst, Func<T,bool> filter = null)
             where T : unmanaged
         {
             source.Fill((min,max), dst.Length, ref dst.First, filter);

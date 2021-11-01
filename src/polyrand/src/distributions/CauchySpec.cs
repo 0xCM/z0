@@ -33,8 +33,11 @@ namespace Z0
             => DistributionKind.Cauchy;
 
         [MethodImpl(Inline)]
-        public static CauchySpec<T> Define(T loc, T scale)
-            => new CauchySpec<T>(loc, scale);
+        public CauchySpec(T loc, T scale)
+        {
+            Location = loc;
+            Scale = scale;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator (T loc, T scale)(CauchySpec<T> spec)
@@ -42,13 +45,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CauchySpec<T>((T loc, T scale) x)
-            => Define(x.loc,x.scale);
-
-        [MethodImpl(Inline)]
-        public CauchySpec(T loc, T scale)
-        {
-            Location = loc;
-            Scale = scale;
-        }
+            => new CauchySpec<T>(x.loc,x.scale);
     }
 }

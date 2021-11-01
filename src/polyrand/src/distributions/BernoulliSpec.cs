@@ -25,15 +25,15 @@ namespace Z0
             => DistributionKind.Bernoulli;
 
         [MethodImpl(Inline)]
+        public BernoulliSpec(double p)
+            => Success = p;
+
+        [MethodImpl(Inline)]
         public static implicit operator BernoulliSpec<T>(double p)
             => new BernoulliSpec<T>(p);
 
         [MethodImpl(Inline)]
         public static implicit operator double(BernoulliSpec<T> p)
             => p.Success;
-
-        [MethodImpl(Inline)]
-        public BernoulliSpec(double p)
-            => Success = p;
     }
 }

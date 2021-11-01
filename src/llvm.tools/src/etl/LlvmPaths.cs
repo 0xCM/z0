@@ -18,6 +18,12 @@ namespace Z0.llvm
         public FS.FolderPath Tables()
             => LlvmData.Tables();
 
+        public FS.FolderPath TmpDir()
+            => LlvmData.Home() + FS.folder(".tmp");
+
+        public FS.FilePath TmpFile(string id, FS.FileExt ext)
+            => TmpDir() + FS.file(id,ext);
+
         public FS.FolderPath Tables(string scope)
             => Tables() + FS.folder(scope);
 

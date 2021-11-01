@@ -2,16 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.llvm
+namespace Z0.llvm.records
 {
-    partial class LlvmCmd
-    {
-        [CmdOp(".config")]
-        Outcome LlvmConfig(CmdArgs args)
-        {
-           var config = LlvmEtl.ComputeConfig();
+    using System;
 
-           return true;
-        }
+    public interface IFieldProvider
+    {
+        Identifier EntityName {get;}
+
+        ReadOnlySpan<TableGenField> Fields {get;}
     }
 }

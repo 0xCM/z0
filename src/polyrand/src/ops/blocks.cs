@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock8<T> blocks<T>(IDomainSource src, W8 w, int count, Interval<T> domain, Func<T,bool> filter)
+        public static SpanBlock8<T> blocks<T>(IRangeSource src, W8 w, int count, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => src.Stream(domain, filter).ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock8<T> blocks<T>(IDomainSource src, W8 w, int count, T min, T max)
+        public static SpanBlock8<T> blocks<T>(IRangeSource src, W8 w, int count, T min, T max)
             where T : unmanaged
                 => src.Stream<T>((min,max)).ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock16<T> blocks<T>(IDomainSource src, W16 w, int count, Interval<T> domain, Func<T,bool> filter)
+        public static SpanBlock16<T> blocks<T>(IRangeSource src, W16 w, int count, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => src.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock16<T> blocks<T>(IDomainSource src, W16 w, int count, T min, T max)
+        public static SpanBlock16<T> blocks<T>(IRangeSource src, W16 w, int count, T min, T max)
             where T : unmanaged
                 => src.Stream<T>((min,max)).ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock32<T> blocks<T>(IDomainSource src, W32 w, Interval<T> domain, int count = 1, Func<T,bool> filter = null)
+        public static SpanBlock32<T> blocks<T>(IRangeSource src, W32 w, Interval<T> domain, int count = 1, Func<T,bool> filter = null)
             where T : unmanaged
                 => src.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock32<T> blocks<T>(IDomainSource src, W32 w, T min, T max, int count = 1, Func<T,bool> filter = null)
+        public static SpanBlock32<T> blocks<T>(IRangeSource src, W32 w, T min, T max, int count = 1, Func<T,bool> filter = null)
             where T : unmanaged
                 => blocks<T>(src, w, (min,max), count, filter);
 
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock32<T> blocks<T>(IDomainSource src, W32 w, int count, T t)
+        public static SpanBlock32<T> blocks<T>(IRangeSource src, W32 w, int count, T t)
             where T : unmanaged
                 => blocks<T>(src, w, count);
 
@@ -168,7 +168,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock64<T> blocks<T>(IDomainSource src, W64 w, Interval<T> domain, int count = 1, Func<T,bool> filter = null)
+        public static SpanBlock64<T> blocks<T>(IRangeSource src, W64 w, Interval<T> domain, int count = 1, Func<T,bool> filter = null)
             where T : unmanaged
                 => src.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -181,7 +181,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock64<T> blocks<T>(IDomainSource src, W64 w, T min, T max, int count = 1, Func<T,bool> filter = null)
+        public static SpanBlock64<T> blocks<T>(IRangeSource src, W64 w, T min, T max, int count = 1, Func<T,bool> filter = null)
             where T : unmanaged
                 => blocks<T>(src, w, (min,max), count, filter);
 
@@ -222,7 +222,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock128<T> blocks<T>(IDomainSource src, W128 w, Interval<T> domain, int count = 1, Func<T,bool> filter = null)
+        public static SpanBlock128<T> blocks<T>(IRangeSource src, W128 w, Interval<T> domain, int count = 1, Func<T,bool> filter = null)
             where T : unmanaged
                 => src.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -235,7 +235,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock128<T> blocks<T>(IDomainSource src, W128 w, T min, T max, int count = 1, Func<T,bool> filter = null)
+        public static SpanBlock128<T> blocks<T>(IRangeSource src, W128 w, T min, T max, int count = 1, Func<T,bool> filter = null)
             where T : unmanaged
                 => blocks<T>(src, w, (min,max), count, filter);
 
@@ -276,7 +276,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock256<T> blocks<T>(IDomainSource src, W256 w, Interval<T> domain, int count = 1, Func<T,bool> filter = null)
+        public static SpanBlock256<T> blocks<T>(IRangeSource src, W256 w, Interval<T> domain, int count = 1, Func<T,bool> filter = null)
             where T : unmanaged
                 => src.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -289,7 +289,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock256<T> blocks<T>(IDomainSource src, W256 w, T min, T max, int count = 1, Func<T,bool> filter = null)
+        public static SpanBlock256<T> blocks<T>(IRangeSource src, W256 w, T min, T max, int count = 1, Func<T,bool> filter = null)
             where T : unmanaged
                 => blocks<T>(src, w, (min,max), count, filter);
 
@@ -330,7 +330,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock512<T> blocks<T>(IDomainSource src, W512 w, Interval<T> domain, int count = 1, Func<T,bool> filter = null)
+        public static SpanBlock512<T> blocks<T>(IRangeSource src, W512 w, Interval<T> domain, int count = 1, Func<T,bool> filter = null)
             where T : unmanaged
                 => src.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -343,7 +343,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [Op, Closures(Closure)]
-        public static SpanBlock512<T> blocks<T>(IDomainSource src, W512 w, T min, T max, int count = 1, Func<T,bool> filter = null)
+        public static SpanBlock512<T> blocks<T>(IRangeSource src, W512 w, T min, T max, int count = 1, Func<T,bool> filter = null)
             where T : unmanaged
                 => blocks<T>(src, w, (min,max), count, filter);
 

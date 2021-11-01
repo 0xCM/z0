@@ -10,6 +10,7 @@
       <ProjectReference Include="$(Resources)" />
       <ProjectReference Include="$(Events)" />
       <ProjectReference Include="$(Ws)" />
+      <ProjectReference Include="$(Types)" />
   </ItemGroup>
 
   <ItemGroup>

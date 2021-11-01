@@ -28,13 +28,13 @@ namespace Z0
 
         static long LastSeriesId;
 
-        static readonly ConcurrentDictionary<long, IDomainSource> States
-            = new ConcurrentDictionary<long, IDomainSource>();
+        static readonly ConcurrentDictionary<long, IRangeSource> States
+            = new ConcurrentDictionary<long, IRangeSource>();
 
         public static SeriesTerm<T> next<T>(TimeSeries<T> series)
             where T : unmanaged
         {
-            if(States.TryGetValue(series.Id, out IDomainSource source))
+            if(States.TryGetValue(series.Id, out IRangeSource source))
             {
                 var _term = term(series.Observed.Index + 1, source.Next<T>(series.Domain));
                 series.Witnessed(_term);
@@ -47,7 +47,7 @@ namespace Z0
         internal static IEnumerable<SeriesTerm<T>> evolve<T>(TimeSeries<T> series)
             where T : unmanaged
         {
-            if(States.TryGetValue(series.Id, out IDomainSource source))
+            if(States.TryGetValue(series.Id, out IRangeSource source))
             {
                 while(true)
                 {

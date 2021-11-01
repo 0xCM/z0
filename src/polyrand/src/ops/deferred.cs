@@ -16,7 +16,7 @@ namespace Z0
             => core.defer(stream<T>(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Deferred<T> deferred<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
+        public static Deferred<T> deferred<T>(IRangeSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
                 => core.defer(stream<T>(src, domain, filter));
     }

@@ -13,7 +13,7 @@ namespace Z0
     /// Core algorithms taken from the paper: https://arxiv.org/pdf/1402.6246.pdf
     /// </remarks>
     [Rng(nameof(XorShift256))]
-    public class XorShift1024 : IDomainRng<ulong>
+    public class XorShift1024 : IRangeRng<ulong>
     {
         readonly ulong[] State;
 

@@ -15,24 +15,14 @@ namespace Z0.llvm
         [CmdOp(".relations")]
         Outcome RecordRelations(CmdArgs args)
         {
-
             var result = Outcome.Success;
             var src = LlvmPaths.Table<DefRelations>();
-            var records = LoadDefRelationNodes(src);
-            // var src = LlvmEtl.LoadSourceRecords(EtlNames.Datasets.X86);
-            // var distiller = new DefRelationDistiller();
-            // var relations = distiller.DistillRelations(src);
-            // var pathA = LlvmPaths.ImportTable("llvm.defs.relations.test");
-            // TableEmit(relations, DefRelations.RenderWidths, pathA);
-
-            // var hydrated = LoadDefRelations(pathA);
-            // var pathB = LlvmPaths.ImportTable("llvm.defs.relations.test.loaded");
-            // TableEmit(hydrated, DefRelations.RenderWidths, pathB);
+            var records = LoadDefRelations(src);
 
             return result;
         }
 
-        ReadOnlySpan<DefRelations> LoadDefRelationNodes(FS.FilePath src)
+        ReadOnlySpan<DefRelations> LoadDefRelations(FS.FilePath src)
         {
             var dst = list<DefRelations>();
             var format = TextDocFormat.Structured();
@@ -59,22 +49,22 @@ namespace Z0.llvm
                     var j=0;
                     result += DataParser.parse(row[j++].Text, out record.SourceLine);
                     result += DataParser.parse(row[j++].Text, out record.Name);
-                    var ancestors = row[j++].Text;
-                    if(empty(ancestors))
-                    {
+                    // var ancestors = row[j++].Text;
+                    // if(empty(ancestors))
+                    // {
+                    //     record.Ancestors = Lineage.Empty;
+                    // }
+                    // else if(ancestors.Contains("->"))
+                    // {
+                    //     Lineage.parse(ancestors, out record.Ancestors);
+                    // }
+                    // else
+                    // {
+                    //     record.Ancestors = Lineage.node(ancestors);
+                    // }
 
-                    }
-                    else if(ancestors.Contains("->"))
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
-
-                    // result += Lineage.parse(row[j++], out record.Ancestors);
                     // dst.Add(record);
+                    // Write(string.Format("{0} -> {1}", record.Name, record.Ancestors));
                 }
             }
             return dst.ViewDeposited();

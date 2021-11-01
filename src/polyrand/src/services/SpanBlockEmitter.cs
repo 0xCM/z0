@@ -12,13 +12,13 @@ namespace Z0
 
     public class SpanBlockEmitter
     {
-        readonly IDomainSource Source;
+        readonly IRangeSource Source;
 
         Index<Cell256> _Buffer;
 
         ByteSize BufferSize {get;}
 
-        public SpanBlockEmitter(IDomainSource source, Pow2x64 bufferSize)
+        public SpanBlockEmitter(IRangeSource source, Pow2x64 bufferSize)
         {
             Source = source;
             BufferSize = (ulong)(bufferSize)/32;
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SpanBlockEmitter(IDomainSource source, Index<Cell256> buffer)
+        public SpanBlockEmitter(IRangeSource source, Index<Cell256> buffer)
         {
             Source = source;
             BufferSize = buffer.Length * 32;

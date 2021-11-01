@@ -18,18 +18,6 @@ namespace Z0
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public static ExponentialSpec<T> Define(T a, T b)
-            => new ExponentialSpec<T>(a,b);
-
-        [MethodImpl(Inline)]
-        public static implicit operator (T a, T b)(ExponentialSpec<T> spec)
-            => (spec.a, spec.b);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ExponentialSpec<T>((T a, T b) x )
-            => Define(x.a, x.b);
-
-        [MethodImpl(Inline)]
         public ExponentialSpec(T a, T b)
         {
             this.a = a;
@@ -45,5 +33,13 @@ namespace Z0
         /// </summary>
         public DistributionKind DistKind
             => DistributionKind.Exponential;
+
+        [MethodImpl(Inline)]
+        public static implicit operator (T a, T b)(ExponentialSpec<T> spec)
+            => (spec.a, spec.b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ExponentialSpec<T>((T a, T b) x )
+            => new ExponentialSpec<T>(x.a, x.b);
     }
 }

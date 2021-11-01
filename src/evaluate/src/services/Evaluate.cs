@@ -14,11 +14,11 @@ namespace Z0
     public readonly partial struct Evaluate
     {
         [MethodImpl(Inline), Op]
-        public static IEvalDispatcher dispatcher(IWfRuntime wf, IDomainSource source, uint bufferSize)
+        public static IEvalDispatcher dispatcher(IWfRuntime wf, IRangeSource source, uint bufferSize)
             => new EvalDispatcher(wf, source, bufferSize);
 
         [MethodImpl(Inline), Op]
-        public static IEvalExecutor executor(IWfRuntime wf, IDomainSource source)
+        public static IEvalExecutor executor(IWfRuntime wf, IRangeSource source)
             => new EvalExecutor(wf, source);
 
         public static ref readonly UnaryEvaluations<T> compute<T>(in UnaryEvalContext<T> exchange, Action<Exception> error)
@@ -108,7 +108,7 @@ namespace Z0
 
     public static partial class XTend
     {
-        public static IEvalDispatcher EvalDispatcher(this IWfRuntime wf, IDomainSource source = null, uint? buffersize = null)
+        public static IEvalDispatcher EvalDispatcher(this IWfRuntime wf, IRangeSource source = null, uint? buffersize = null)
             => Evaluate.dispatcher(wf, source ?? Rng.@default(), buffersize ?? Pow2.T14);
     }
 }

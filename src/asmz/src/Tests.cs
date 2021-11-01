@@ -130,7 +130,7 @@ namespace Z0.Asm
             Wf.Ran(flow, $"Created method table with {table.View.Length} entries");
         }
 
-        void CheckMullo(IDomainSource Source)
+        void CheckMullo(IRangeSource Source)
         {
             var @class = ApiClassKind.MulLo;
             var count = 12;

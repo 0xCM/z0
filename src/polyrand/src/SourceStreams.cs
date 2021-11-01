@@ -30,17 +30,17 @@ namespace Z0
         /// <param name="src">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
         [Op, Closures(Closure)]
-        public static ISourceStream<T> create<T>(IDomainSource src)
+        public static ISourceStream<T> create<T>(IRangeSource src)
             where T : unmanaged
                 => create(forever<T>(src));
 
         [Op, Closures(Closure)]
-        public static ISourceStream<T> create<T>(IDomainSource src, T min, T max)
+        public static ISourceStream<T> create<T>(IRangeSource src, T min, T max)
             where T : unmanaged
                 => create(forever(src,min,max));
 
         [Op, Closures(Closure)]
-        public static ISourceStream<T> create<T>(IDomainSource src, ClosedInterval<T> domain, Func<T,bool> filter = null)
+        public static ISourceStream<T> create<T>(IRangeSource src, ClosedInterval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
                 => create(forever(src, domain, filter));
 
@@ -52,26 +52,26 @@ namespace Z0
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
         [Op, Closures(Closure)]
-        public static ISourceStream<T> create<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
+        public static ISourceStream<T> create<T>(IRangeSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
                 => create(forever(src, domain, filter));
 
         [Op, Closures(Closure)]
-        static IEnumerable<T> forever<T>(IDomainSource src, ClosedInterval<T> domain, Func<T,bool> filter)
+        static IEnumerable<T> forever<T>(IRangeSource src, ClosedInterval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => filter != null
                 ? some(src, Intervals.closed(domain.Min, domain.Max), filter)
                 : forever(src, domain);
 
         [Op, Closures(Closure)]
-        static IEnumerable<T> forever<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter)
+        static IEnumerable<T> forever<T>(IRangeSource src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => filter != null
                 ? some(src, domain, filter)
                 : forever(src, domain);
 
         [Op, Closures(Closure)]
-        static IEnumerable<T> forever<T>(IDomainSource src, T min, T max)
+        static IEnumerable<T> forever<T>(IRangeSource src, T min, T max)
             where T : unmanaged
         {
             while(true)
@@ -79,7 +79,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        static IEnumerable<T> forever<T>(IDomainSource src)
+        static IEnumerable<T> forever<T>(IRangeSource src)
             where T : unmanaged
         {
             while(true)
@@ -87,12 +87,12 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        static IEnumerable<T> forever<T>(IDomainSource src, Interval<T> domain)
+        static IEnumerable<T> forever<T>(IRangeSource src, Interval<T> domain)
             where T : unmanaged
                 => domain.IsEmpty ? forever<T>(src) : forever(src, domain.Left, domain.Right);
 
         [Op, Closures(Closure)]
-        static IEnumerable<T> forever<T>(IDomainSource src, ClosedInterval<T> domain)
+        static IEnumerable<T> forever<T>(IRangeSource src, ClosedInterval<T> domain)
             where T : unmanaged
                 => domain.IsEmpty ? forever<T>(src) : forever(src, domain.Min, domain.Max);
 
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="filter">The filter predicate</param>
         /// <typeparam name="T">The production type</typeparam>
         [Op, Closures(Closure)]
-        static IEnumerable<T> some<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter)
+        static IEnumerable<T> some<T>(IRangeSource src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
         {
             var next = default(T);

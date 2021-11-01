@@ -13,13 +13,13 @@ namespace Z0.llvm
 
     partial class LlvmEtlServices
     {
-        public LlvmConfig LoadConfig()
+        public LlvmConfig ComputeConfig()
         {
             const string Pattern = "llvm-config --{0}";
             var result = Outcome.Success;
             var options = Symbols.index<K>().View;
             var count = options.Length;
-            var config = new LlvmConfig();
+            var dst = new LlvmConfig();
             for(var i=0; i<count; i++)
             {
                 ref readonly var option = ref skip(options,i);
@@ -31,13 +31,13 @@ namespace Z0.llvm
                 }
 
                 if(response.Length != 0)
-                    LoadConfig(option, first(response), config);
+                    StoreConfigValue(option, first(response), dst);
             }
 
-            return config;
+            return dst;
         }
 
-        void LoadConfig(Sym<K> sym, TextLine src, LlvmConfig dst)
+        void StoreConfigValue(Sym<LlvmConfigKind> sym, TextLine src, LlvmConfig dst)
         {
             var content = text.trim(src.Content);
             if(empty(content))
@@ -54,7 +54,7 @@ namespace Z0.llvm
                 case K.IncludeDir:
                 {
                     var data = FS.dir(content);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     Write(data);
                 }
                 break;
@@ -68,7 +68,7 @@ namespace Z0.llvm
                 case K.TargetsBuilt:
                 {
                     var data = content.Split(Chars.Space);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     iter(data, c => Write(c));
                 }
                 break;
@@ -81,14 +81,14 @@ namespace Z0.llvm
                 case K.ObjRoot:
                 {
                     var data = FS.dir(content);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     Write(data);
                 }
                 break;
                 case K.BinDir:
                 {
                     var data = FS.dir(content);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     Write(data);
                 }
                 break;
@@ -101,14 +101,14 @@ namespace Z0.llvm
                 case K.CFlags:
                 {
                     var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     iter(data, c => Write(c));
                 }
                 break;
                 case K.CxxFlags:
                 {
                     var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     iter(data, c => Write(c));
                 }
                 break;
@@ -122,7 +122,7 @@ namespace Z0.llvm
                 case K.LibNames:
                 {
                     var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty).Select(FS.file);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     iter(data, c => Write(c));
                 }
                 break;
@@ -136,14 +136,14 @@ namespace Z0.llvm
                 case K.LinkerFlags:
                 {
                     var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     iter(data, c => Write(c));
                 }
                 break;
                 case K.LinkStatic:
                 {
                     var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     iter(data, c => Write(c));
                 }
                 break;
@@ -158,13 +158,13 @@ namespace Z0.llvm
                 {
                     var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty).Select(FS.path);
                     dst.Set(kind,data);
-                    iter(data,p =>  Write(p.ToUri()));
+                    iter(data,p => Write(p.ToUri()));
                 }
                 break;
                 case K.LibFiles:
                 {
                     var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty).Select(FS.path);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     iter(data,p =>  Write(p.ToUri()));
                 }
                 break;
