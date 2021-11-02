@@ -12,43 +12,45 @@ namespace Z0
     partial struct FS
     {
         [Op]
-        public static Outcome symlink(FS.FolderPath link, FS.FolderPath target, bool deleteExising = false)
+        public static Outcome symlink(FS.FolderPath link, FS.FolderPath dst, bool deleteExising = false)
         {
             try
             {
                 if(deleteExising)
                     link.Delete();
 
-                var outcome = Kernel32.CreateSymLink(link.Name, target.Name, SymLinkKind.Directory);
+                var outcome = Kernel32.CreateSymLink(link.Name, dst.Name, SymLinkKind.Directory);
                 if(outcome)
                     return true;
                 else
-                    return (false, DirectoryLinkCreationFailed.Format(link, target, EmptyString));
+                    return (false, DirectoryLinkCreationFailed.Format(link, dst, EmptyString));
             }
             catch(Exception e)
             {
-                return (false, DirectoryLinkCreationFailed.Format(link, target, e.ToString()));
+                return (false, DirectoryLinkCreationFailed.Format(link, dst, e.ToString()));
             }
         }
 
         [Op]
-        public static Outcome symlink(FS.FilePath link, FS.FilePath target, bool deleteExising = false)
+        public static Outcome<Arrow<FS.FilePath>> symlink(FS.FilePath link, FS.FilePath dst, bool deleteExising = false)
         {
             try
             {
                 if(deleteExising)
                     link.Delete();
 
-                var outcome = Kernel32.CreateSymLink(link.Name, target.Name, SymLinkKind.File);
+                link.FolderPath.Create();
+
+                var outcome = Kernel32.CreateSymLink(link.Name, dst.Name, SymLinkKind.File);
                 if(outcome)
-                    return true;
+                    return (true,(link,dst));
                 else
-                    return (false, FileLinkCreationFailed.Format(link, target, EmptyString));
+                    return (false, FileLinkCreationFailed.Format(link, dst, EmptyString));
 
             }
             catch(Exception e)
             {
-                return (false, FileLinkCreationFailed.Format(link, target, e.ToString()));
+                return (false, FileLinkCreationFailed.Format(link, dst, e.ToString()));
             }
         }
 

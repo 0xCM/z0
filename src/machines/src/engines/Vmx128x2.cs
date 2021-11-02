@@ -28,7 +28,7 @@ namespace Z0.Machines
 
         uint Cycle;
 
-        public Vmx128x2(uint cells, IDomainSource source)
+        public Vmx128x2(uint cells, IRangeSource source)
         {
             Source = source;
             CellCount = cells;

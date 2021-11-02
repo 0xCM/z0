@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using static core;
 
+     using llvm;
+
     partial class AsmCmdService
     {
         [CmdOp(".llc-obj", "llc -> obj")]

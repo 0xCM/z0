@@ -11,7 +11,6 @@ namespace Z0.llvm
 
     public class LlvmConfig
     {
-
         readonly Dictionary<K,dynamic> Data;
 
         public LlvmConfig()

@@ -92,6 +92,5 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl]
         public static sbyte cnonimpl(sbyte a, sbyte b)
             => (sbyte)AndNot((uint)b,(uint)a);
-
     }
 }

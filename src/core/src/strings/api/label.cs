@@ -7,10 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Strings;
-
     using static Root;
-    using static core;
 
     partial struct strings
     {
@@ -66,6 +63,5 @@ namespace Z0
             else
                 return Label.Empty;
         }
-
     }
 }

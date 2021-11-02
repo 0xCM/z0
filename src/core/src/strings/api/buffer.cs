@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using Strings;
-
     using static core;
 
     partial struct strings
@@ -62,12 +60,10 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var s = ref skip(src,i);
-                index[i] = dst.StoreLabel(s,offset);
+                index[i] = dst.StoreLabel(s, offset);
                 offset += (uint)s.Length;
             }
-
             return dst;
         }
-
     }
 }

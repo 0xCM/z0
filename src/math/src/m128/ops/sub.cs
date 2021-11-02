@@ -15,26 +15,26 @@ namespace Z0
         /// <summary>
         /// Subtraction mod 2^128.
         /// </summary>
-        /// <remarks>Taken from IntUtils.cs / Microsoft Machine Learning repository</remarks>
+        /// <remarks>Adapted from IntUtils.cs / Microsoft Machine Learning repository</remarks>
         [MethodImpl(Inline), Sub]
-        public static void sub(ref ulong dstHi, ref ulong dstLo, ulong src)
+        public static void sub(ref Pair<ulong> dst, ulong src)
         {
-            if (dstLo < src)
-                dstHi--;
-            dstLo -= src;
+            if (dst.Left < src)
+                dst.Right--;
+            dst.Left -= src;
         }
 
         /// <summary>
         /// Subtraction mod 2^128.
         /// </summary>
-        /// <remarks>Taken from IntUtils.cs / Microsoft Machine Learning repository</remarks>
+        /// <remarks>Adapted from IntUtils.cs / Microsoft Machine Learning repository</remarks>
         [MethodImpl(Inline), Sub]
-        public static void sub(ulong srcLo, ulong srcHi, ref ulong dstLo, ref ulong dstHi)
+        public static void sub(in Pair<ulong> src, ref Pair<ulong> dst)
         {
-            dstHi -= srcHi;
-            if (dstLo < srcLo)
-                dstHi--;
-            dstLo -= srcLo;
+            dst.Right -= src.Right;
+            if (dst.Left < src.Left)
+                dst.Right--;
+            dst.Left -= src.Left;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="a">A reference to the left 128-bits</param>
         /// <param name="b">A reference to the right 128-bits</param>
         /// <param name="c">A reference to the target 128-bits</param>
-        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        /// <remarks>Adapted from https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline), Sub]
         public static void sub(in ulong a, in ulong b, ref ulong c)
         {
@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The first integer, represented via paired hi/lo components</param>
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
-        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        /// <remarks>Adapted from https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline), Sub]
         public static ConstPair<ulong> sub(in ConstPair<ulong> x, in ConstPair<ulong> y)
         {

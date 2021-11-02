@@ -46,7 +46,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)Storage;
+            get => alg.hash.calc(Data);
         }
 
         public bool IsEmpty

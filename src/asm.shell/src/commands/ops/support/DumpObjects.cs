@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using llvm;
+
     partial class AsmCmdService
     {
         [CmdOp(".dump-objects")]

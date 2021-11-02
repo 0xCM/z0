@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static LlvmAtoms;
 
     public readonly struct LlvmAtoms
     {
@@ -17,23 +16,6 @@ namespace Z0
         public const string bin = nameof(bin);
 
         public const string lib = nameof(lib);
-    }
-
-    public interface ILlvmWorkspace : IWorkspace
-    {
-        FS.FolderPath BuildRoot {get;}
-
-        FS.FolderPath LibDir()
-            => BuildRoot + FS.folder(lib);
-
-        FS.FolderPath IWorkspace.Bin()
-            => BuildRoot + FS.folder(bin);
-
-        FS.Files ExeBuilds()
-            => Bin().Files(FS.Exe);
-
-        FS.Files LibBuilds()
-            => LibDir().Files(FS.Lib);
     }
 
     public sealed class LlvmWs : Workspace<LlvmWs>, ILlvmWorkspace

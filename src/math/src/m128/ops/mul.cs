@@ -187,5 +187,29 @@ namespace Z0
             var hi = t3 + (u2 >> 32) + (u1 >> 32);
             return (lo,hi);
         }
+
+        [MethodImpl(Inline), MulHi]
+        public static ulong mulhi(uint x, uint y)
+            => MultiplyNoFlags(x,y);
+
+        [MethodImpl(Inline), MulHi]
+        public static ulong mulhi(ulong x, ulong y)
+            => MultiplyNoFlags(x,y);
+
+        [MethodImpl(Inline), MulLo]
+        public static unsafe uint mullo(uint x, uint y)
+        {
+            var lo = 0u;
+            MultiplyNoFlags(x, y, gptr(lo));
+            return lo;
+        }
+
+        [MethodImpl(Inline), MulLo]
+        public static unsafe ulong mullo(ulong x, ulong y)
+        {
+            var lo = 0ul;
+            MultiplyNoFlags(x, y, &lo);
+            return lo;
+        }
     }
 }

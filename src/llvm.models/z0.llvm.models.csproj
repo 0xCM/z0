@@ -11,6 +11,7 @@
       <ProjectReference Include="$(Events)" />
       <ProjectReference Include="$(Ws)" />
       <ProjectReference Include="$(Types)" />
+      <ProjectReference Include="$(Graphs)" />
   </ItemGroup>
 
   <ItemGroup>

@@ -89,10 +89,10 @@ namespace Z0.Machines
     {
         public uint BlockCount {get;}
 
-        readonly IDomainSource PolySource;
+        readonly IRangeSource PolySource;
 
         [MethodImpl(Inline)]
-        public BlockSource01(IDomainSource source, uint count)
+        public BlockSource01(IRangeSource source, uint count)
         {
             PolySource = source;
             BlockCount = count;

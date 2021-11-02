@@ -8,6 +8,8 @@ namespace Z0.llvm
     using System.Runtime.CompilerServices;
     using System.IO;
 
+    using Z0.Strings;
+
     using records;
 
     using static Root;
@@ -30,6 +32,10 @@ namespace Z0.llvm
 
         IdentityMap<Interval<uint>> FieldMap;
 
+        BufferedLabels ClassNameBuffer;
+
+        BufferedLabels DefNameBuffer;
+
         public LlvmDb()
         {
             X86Records = Index<TextLine>.Empty;
@@ -45,28 +51,11 @@ namespace Z0.llvm
             LoadRecords();
         }
 
-        uint RecordCount
+        protected override void Disposing()
         {
-            [MethodImpl(Inline)]
-            get => X86Records.Count;
+            ClassNameBuffer.Dispose();
+            DefNameBuffer.Dispose();
         }
-
-        static Outcome parse(in TextLine src, out TableGenField dst)
-        {
-            var result = Outcome.Success;
-            dst = default;
-            var parts = src.Split(Chars.Pipe);
-            var count = parts.Length;
-            if(count < 4)
-                return (false, Tables.FieldCountMismatch.Format(4,count));
-
-            dst.Id = skip(parts,0);
-            dst.FieldContent.DataType = skip(parts,1);
-            dst.FieldContent.Name = skip(parts,2);
-            dst.FieldContent.Value = skip(parts,3);
-            return result;
-        }
-
         public ReadOnlySpan<TableGenField> Fields(uint offset, uint length)
             => slice(DefFields.View, offset,length);
 
@@ -82,6 +71,14 @@ namespace Z0.llvm
                 return default;
         }
 
+
+
+        public ReadOnlySpan<Label> ClassNames()
+            => ClassNameBuffer.Labels;
+
+        public ReadOnlySpan<Label> DefNames()
+            => DefNameBuffer.Labels;
+
         public void Fields(Action<IFieldProvider> receiver)
         {
             var defcount = DefMap.IntervalCount;
@@ -89,49 +86,20 @@ namespace Z0.llvm
                 receiver(new FieldProvider(DefMap[i].Id,this));
         }
 
-        void LoadDefFields()
-        {
-            var result = Outcome.Success;
-            var src = Paths.Table(Datasets.X86DefFields);
-            var count = FS.linecount(src);
-            DefFields = alloc<TableGenField>(count.Lines);
-            var counter = 0u;
-            using var reader = src.Utf8LineReader();
-            var id = Identifier.Empty;
-            var i = 0u;
-            var j = 0u;
-            while(reader.Next(out var line))
-            {
-                result = parse(line, out var fields);
-                if(result.Fail)
-                {
-                    Error(result.Message);
-
-                    break;
-                }
-
-                DefFields[counter++] = fields;
-            }
-        }
-
         public void Classes(StreamWriter dst)
         {
             var count = ClassMap.IntervalCount;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var entry = ref ClassMap[i];
-                dst.WriteLine(entry.Format());
-            }
+                dst.WriteLine(ClassMap[i].Format());
         }
+
+
 
         public void Defs(StreamWriter dst)
         {
             var count = DefMap.IntervalCount;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var entry = ref DefMap[i];
-                dst.WriteLine(entry.Format());
-            }
+                dst.WriteLine(DefMap[i].Format());
         }
 
         public void Def(Identifier name)
@@ -153,50 +121,39 @@ namespace Z0.llvm
             }
         }
 
-        void LoadRecords()
-        {
-            var running = Running("Loading data");
-            using var r0 = Paths.RecordImport(Datasets.X86Lined, FS.Txt).Utf8LineReader();
-            X86Records = r0.ReadAll().ToArray();
-            ClassMap = LoadLineMap(Paths.ImportMap(Datasets.X86Classes));
-            DefMap = LoadLineMap(Paths.ImportMap(Datasets.X86Defs));
-            iteri(DefMap.Intervals, (i,entry) => DefLookup.Map(entry.Id, (uint)i));
-            LoadDefFields();
-            Ran(running, string.Format("Loaded {0} fields from {1} records", DefFields.Count, DefFields.Count));
-        }
-
         public ReadOnlySpan<DefRelations> LoadDefRelations()
         {
             var src = Paths.Table<DefRelations>();
             var dst = list<DefRelations>();
-            var format = TextDocFormat.Structured();
-            format.SplitClean = false;
-            var result = TextGrids.load(src, format, out var grid);
-            if(result.Fail)
+            var rows = src.ReadLines();
+            var count = rows.Length;
+            var result = Outcome.Success;
+            for(var i=1; i<count; i++)
             {
-                Error(result.Message);
-            }
-            else
-            {
-                var rows = grid.Rows;
-                var count = grid.RowCount;
-                for(var i=0; i<count; i++)
+                var record = new DefRelations();
+                ref readonly var row = ref rows[i];
+                var cells = @readonly(row.Split(Chars.Pipe).Select(x => x.Trim()));
+                if(cells.Length != DefRelations.FieldCount)
                 {
-                    var record = new DefRelations();
-                    ref readonly var row = ref rows[i];
-                    if(row.CellCount != DefRelations.FieldCount)
-                    {
-                        Error(Tables.FieldCountMismatch.Format(DefRelations.FieldCount, row.CellCount));
-                        Write(row);
-                        break;
-                    }
-                    var j=0;
-                    result += DataParser.parse(row[j++].Text, out record.SourceLine);
-                    result += DataParser.parse(row[j++].Text, out record.Name);
-                    record.Ancestors = Lineage.parse(row[j++].Text);
-                    dst.Add(record);
-                    Write(string.Format("{0} -> {1}", record.Name, record.Ancestors));
+                    Error(Tables.FieldCountMismatch.Format(DefRelations.FieldCount, cells.Length));
+                    Write(row);
+                    break;
                 }
+                var j=0;
+                result = DataParser.parse(skip(cells,j++), out record.SourceLine);
+                if(result.Fail)
+                {
+                    Error(result.Message);
+                    break;
+                }
+                result = DataParser.parse(skip(cells,j++), out record.Name);
+                if(result.Fail)
+                {
+                    Error(result.Message);
+                    break;
+                }
+                record.Ancestors = Lineage.parse(skip(cells, j++));
+                dst.Add(record);
             }
             return dst.ViewDeposited();
         }
@@ -224,6 +181,61 @@ namespace Z0.llvm
                 return new LineMap<Identifier>(intervals);
             else
                 return new LineMap<Identifier>(sys.empty<LineInterval<Identifier>>());
+        }
+
+        void LoadDefFields()
+        {
+            var result = Outcome.Success;
+            var src = Paths.Table(Datasets.X86DefFields);
+            var count = FS.linecount(src);
+            DefFields = alloc<TableGenField>(count.Lines);
+            var counter = 0u;
+            using var reader = src.Utf8LineReader();
+            var id = Identifier.Empty;
+            var i = 0u;
+            var j = 0u;
+            while(reader.Next(out var line))
+            {
+                result = parse(line, out var fields);
+                if(result.Fail)
+                {
+                    Error(result.Message);
+
+                    break;
+                }
+
+                DefFields[counter++] = fields;
+            }
+        }
+
+        void LoadRecords()
+        {
+            var running = Running("Loading data");
+            using var r0 = Paths.RecordImport(Datasets.X86Lined, FS.Txt).Utf8LineReader();
+            X86Records = r0.ReadAll().ToArray();
+            ClassMap = LoadLineMap(Paths.ImportMap(Datasets.X86Classes));
+            DefMap = LoadLineMap(Paths.ImportMap(Datasets.X86Defs));
+            ClassNameBuffer = strings.labels(ClassMap.Intervals.Select(x => x.Id.Content));
+            DefNameBuffer = strings.labels(DefMap.Intervals.Select(x => x.Id.Content));
+            iteri(DefMap.Intervals, (i,entry) => DefLookup.Map(entry.Id, (uint)i));
+            LoadDefFields();
+            Ran(running, string.Format("Loaded {0} fields from {1} records", DefFields.Count, X86Records.Count));
+        }
+
+        static Outcome parse(in TextLine src, out TableGenField dst)
+        {
+            var result = Outcome.Success;
+            dst = default;
+            var parts = src.Split(Chars.Pipe);
+            var count = parts.Length;
+            if(count < 4)
+                return (false, Tables.FieldCountMismatch.Format(4,count));
+
+            dst.Id = skip(parts,0);
+            dst.FieldContent.DataType = skip(parts,1);
+            dst.FieldContent.Name = skip(parts,2);
+            dst.FieldContent.Value = skip(parts,3);
+            return result;
         }
     }
 }

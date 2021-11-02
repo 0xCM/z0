@@ -15,8 +15,20 @@ namespace Z0.llvm
             LlvmData = Ws.Project("llvm.data");
         }
 
+        public FS.FolderPath Views()
+            => LlvmData.Home() + FS.folder("views");
+
+        public FS.FolderPath View(string id)
+            => Views() + FS.folder(id);
+
+        public FS.FolderPath LlvmSourceView()
+            => View("llvm");
+
         public FS.FolderPath Tables()
             => LlvmData.Tables();
+
+        public FS.FolderPath LlvmRoot
+            => Env.LlvmRoot;
 
         public FS.FolderPath TmpDir()
             => LlvmData.Home() + FS.folder(".tmp");

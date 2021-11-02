@@ -211,7 +211,6 @@ namespace Z0.Machines.X86
             var spec = Match3x8.specify(n,src);
             var machine = Match3x8.create(spec);
             Write(spec.Format());
-
             var i = machine.Run(input);
             var matched = i>=0;
             var msg = matched ? string.Format("Matched: i={0}",i) : "Unmatched";
@@ -325,6 +324,11 @@ namespace Z0.Machines.X86
             VPipeTests.test(Wf);
         }
 
+        void Run(N21 n)
+        {
+            BlitMachine.create(Wf).Run();
+        }
+
         void Run(N26 n)
         {
             void receive(uint i, uint j)
@@ -361,7 +365,6 @@ namespace Z0.Machines.X86
 
         void Run(N29 n)
         {
-
             var inputs = BinaryBitLogicOps.inputs(w1);
             var eval = BinaryBitLogicOps.canonical(w1,inputs);
             var count = inputs.Length;
@@ -399,10 +402,17 @@ namespace Z0.Machines.X86
             }
         }
 
-        void Run(N21 n)
+        void Run(N32 n)
         {
-            BlitMachine.create(Wf).Run();
+            var evals = BinaryBitLogicOps.canonical(w1);
+            var count = evals.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var eval = ref skip(evals,i);
+                Write(eval.Format());
+            }
         }
+
 
         [CmdOp(".run")]
         Outcome Run(CmdArgs args)
@@ -440,6 +450,9 @@ namespace Z0.Machines.X86
                     break;
                     case 30:
                         Run(n30);
+                    break;
+                    case 32:
+                        Run(n32);
                     break;
 
                }

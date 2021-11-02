@@ -45,7 +45,7 @@ namespace Z0
                     for(var k=0; k<2; k++)
                     {
                         var b = (bit)k;
-                        seek(dst,m++) = input(op,a,b);
+                        seek(dst, m++) = input(op, a, b);
                     }
                 }
             }

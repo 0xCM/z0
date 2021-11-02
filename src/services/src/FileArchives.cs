@@ -45,7 +45,7 @@ namespace Z0
         [Op]
         public static FS.Files match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
         {
-            var files = filtered(root, ext).Enumerate().Take(max).Array();
+            var files = filtered(root, ext).Files().Take(max).Array();
             Array.Sort(files);
             return files;
         }
@@ -53,7 +53,7 @@ namespace Z0
         [Op]
         public static FS.Files match(FS.FolderPath root, params FS.FileExt[] ext)
         {
-            var files = filtered(root, ext).Enumerate().Array();
+            var files = filtered(root, ext).Files().Array();
             Array.Sort(files);
             return files;
         }

@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFilteredArchive
-    {
-        Index<FS.FolderPath> Directories();
+    using System;
+    using System.IO;
 
-        Deferred<FS.FilePath> Files();
+    partial class XFs
+    {
+        public static Outcome<Arrow<FS.FilePath>> LinkTo(this FS.FilePath link, FS.FilePath dst, bool deleteExising = false)
+            => FS.symlink(link,dst,deleteExising);
     }
 }

@@ -74,14 +74,6 @@ namespace Z0
                 get => FS.folder(Info.Name);
             }
 
-            [MethodImpl(Inline)]
-            public static FolderPath operator +(FolderPath a, FolderName b)
-                => new FolderPath(string.Format(FolderJoinPattern, a.Name, b.Name));
-
-            [MethodImpl(Inline)]
-            public static FilePath operator +(FolderPath a, FileName b)
-                => new FilePath(string.Format(FileJoinPattern, a.Name, b.Name));
-
             public FilePath[] Match(string pattern = null)
                 => Directory.EnumerateFiles(Name, pattern ?? SearchAll).Array().Select(x => FS.path(x));
 
@@ -261,6 +253,18 @@ namespace Z0
                     foreach(var file in Directory.EnumerateFiles(src.Name, SearchAll, option(recurse)))
                         yield return path(file);
             }
+
+            [MethodImpl(Inline)]
+            public static FolderPath operator +(FolderPath a, FolderName b)
+                => new FolderPath(string.Format(FolderJoinPattern, a.Name, b.Name));
+
+            [MethodImpl(Inline)]
+            public static FilePath operator +(FolderPath a, FileName b)
+                => new FilePath(string.Format(FileJoinPattern, a.Name, b.Name));
+
+            [MethodImpl(Inline)]
+            public static FilePath operator +(FolderPath a, RelativeFilePath b)
+                => new FilePath(string.Format(FileJoinPattern, a.Name, b.Name));
         }
     }
 }

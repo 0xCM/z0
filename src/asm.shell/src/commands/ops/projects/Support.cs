@@ -35,9 +35,6 @@ namespace Z0.Asm
                 return Ws.Project(id).SrcFiles();
         }
 
-        FS.FolderPath ProjectOut()
-            => Ws.Projects().Out(State.Project());
-
         Outcome HexDecode(string srcid)
             => OmniScript.RunProjectScript(AsmRoot, srcid, McDisasm, false, out var flows);
 

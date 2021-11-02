@@ -90,7 +90,7 @@ namespace Z0
 
         public string Format()
         {
-            var dst = TextTools.buffer();
+            var dst = text.buffer();
             if(IsNonEmpty && nonempty(Name))
             {
                 dst.Append(Name);

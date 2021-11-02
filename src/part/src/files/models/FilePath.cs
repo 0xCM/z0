@@ -171,6 +171,9 @@ namespace Z0
             public FilePath Timestamped()
                 => timestamped(this);
 
+            public RelativeFilePath RelativeTo(FS.FolderPath src)
+                => relative(src, this);
+
             [MethodImpl(Inline)]
             public FilePath Replace(char src, char dst)
                 => new FilePath(Name.Replace(src,dst));

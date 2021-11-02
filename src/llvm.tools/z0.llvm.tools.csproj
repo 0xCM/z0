@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Tooling)" />
     <ProjectReference Include="$(Digital)" />
     <ProjectReference Include="$(Types)" />
+    <ProjectReference Include="$(Graphs)" />
   </ItemGroup>
 
   <ItemGroup>

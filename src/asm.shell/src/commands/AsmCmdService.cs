@@ -20,8 +20,6 @@ namespace Z0.Asm
 
         IWorkspace AsmWs;
 
-        AsmShellState State;
-
         IApiPack ApiPack;
 
         IntelSdm Sdm;
@@ -52,7 +50,7 @@ namespace Z0.Asm
 
         IWorkspace OutWs;
 
-        IProjectSet ProjectWs;
+        //IProjectSet ProjectWs;
 
         IWorkspace DataSources;
 
@@ -61,6 +59,8 @@ namespace Z0.Asm
         TableEmitters Emitters;
 
         ProjectScripts ProjectScripts;
+
+        AsmShellState State;
 
         FS.FolderPath AsmRoot
         {
@@ -75,13 +75,13 @@ namespace Z0.Asm
 
         public AsmCmdService()
         {
-            State = new AsmShellState();
             CodeBuffer = memory.native(_NativeBufferSize);
             _NativeBuffers = memory.native(new ByteSize[_NativeBufferCount]{_NativeBufferSize,_NativeBufferSize,_NativeBufferSize,_NativeBufferSize});
             RoutineName = Identifier.Empty;
             CodeSize = 0;
             _Assembled = array<byte>();
             ResPack = CliMemoryMap.Empty;
+            State = new();
         }
 
         protected override void Initialized()
@@ -97,14 +97,13 @@ namespace Z0.Asm
             Random = Rng.wyhash64();
             ApiHexPacks = Wf.ApiHexPacks();
             OutWs = Ws.Output();
-            ProjectWs = Ws.Projects();
             DataSources = Ws.Sources();
             ApiCatalogs = Wf.ApiCatalogs();
             AsmEtl = Wf.AsmEtl();
             Loaders = Wf.TableLoaders();
             Emitters = Wf.TableEmitters();
             IntelIntrinsics = Wf.IntelIntrinsics();
-            State.Init(Wf,Ws);
+            State.Init(Wf, Ws);
             State.Project("cmodels");
             ProjectScripts = Wf.ProjectScripts();
         }
@@ -120,6 +119,14 @@ namespace Z0.Asm
             Write(content, FlairKind.Error);
         }
 
+        FS.Files Files(FS.Files src, bool write = true)
+        {
+            State.Files(src);
+            if(write)
+                iter(src.View, f => Write(f.ToUri()));
+            return src;
+        }
+
         CliMemoryMap OpenResPack()
         {
             if(ResPack.IsEmpty)
@@ -133,13 +140,6 @@ namespace Z0.Asm
         public FS.FolderPath OutRoot()
             => OutWs.Root;
 
-        FS.Files Files(FS.Files src, bool write = true)
-        {
-            State.Files(src);
-            if(write)
-                iter(src.View, f => Write(f.ToUri()));
-            return src;
-        }
 
         Outcome BuildAsmExe(string id)
         {

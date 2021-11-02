@@ -23,7 +23,11 @@ namespace Z0
                 => string.Format("file:///{0}", Source.Format());
 
             public string FormatMarkdown(string label = null)
-                => string.Format("{0}: <{1}>", label ?? Source.FileName.Format(), Format());
+                => string.Format("[{0}]({1})", label ?? Source.FileName.Format(), Format());
+
+            public string MarkdownBullet(string label = null)
+                => string.Format("* {0}", Source.ToUri().FormatMarkdown(label));
+
 
             public override string ToString()
                 => Format();

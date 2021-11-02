@@ -13,7 +13,7 @@ namespace Z0.Machines.X86
     using Asm;
 
     [ApiHost]
-    public unsafe partial class RegMachine : IDisposable
+    public unsafe class RegMachine : IDisposable
     {
         RegBank Regs;
 
