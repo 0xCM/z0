@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Loop<K,T>
+    public readonly struct RangeLoop<K,T>
         where K : unmanaged
     {
         public readonly K Min;
@@ -21,7 +21,7 @@ namespace Z0
         public readonly Action<K,T> Receiver;
 
         [MethodImpl(Inline)]
-        public Loop(K min, K max, K step, Action<K,T> receiver)
+        public RangeLoop(K min, K max, K step, Action<K,T> receiver)
         {
             Min = min;
             Max = max;

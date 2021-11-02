@@ -43,15 +43,7 @@ namespace Z0
 
         void Delimit<F,T>(F label, T content, int pad = 0, char delimiter = FieldDelimiter);
 
-        void Delimit<F>(F label, object content, int pad = 0, char delimiter = FieldDelimiter);
-
         void AppendSpace()
             => Append(Space);
-    }
-
-    public interface ITextBuffer<H> : ITextBuffer
-        where H : ITextBuffer<H>
-    {
-
     }
 }

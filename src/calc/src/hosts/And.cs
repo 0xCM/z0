@@ -18,6 +18,19 @@ namespace Z0
 
     partial struct CalcHosts
     {
+        [Closures(Integers), And]
+        public readonly struct And<T> : IBinaryOp<T>, IBinarySpanOp<T>
+            where T : unmanaged
+        {
+            public T Invoke(T a, T b)
+                => gmath.and(a,b);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+                => gcalc.apply(Calcs.and<T>(), a, b, dst);
+        }
+
+
         [Closures(UnsignedInts), And]
         public readonly struct BvAnd<T> : IBvBinaryOp<T>
             where T : unmanaged

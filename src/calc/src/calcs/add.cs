@@ -15,6 +15,16 @@ namespace Z0
     partial struct Calcs
     {
         [MethodImpl(Inline), Factory(Add), Closures(Closure)]
+        public static Add<T> add<T>()
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline), Add, Closures(Closure)]
+        public static Span<T> add<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+            where T : unmanaged
+                => gcalc.apply(add<T>(), a, b, dst);
+
+        [MethodImpl(Inline), Factory(Add), Closures(Closure)]
         public static BvAdd<T> bvadd<T>()
             where T : unmanaged
                 => sfunc<BvAdd<T>>();

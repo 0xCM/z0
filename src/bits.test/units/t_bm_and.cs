@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    using C = ScalarCalcs;
+    using C = Calcs;
 
     public class t_bm_and : t_bits<t_bm_and>
     {

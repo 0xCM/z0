@@ -8,7 +8,6 @@ namespace Z0.Expr.Circuits
 
     using static Root;
 
-
     public readonly struct GateInfo
     {
         public readonly GateKind Kind;

@@ -13,7 +13,6 @@ namespace Z0
     partial struct gcalc
     {
 
-
         [MethodImpl(Inline), Avg, Closures(AllNumeric)]
         public static T avgz<T>(ReadOnlySpan<T> src)
             where T : unmanaged

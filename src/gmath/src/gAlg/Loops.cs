@@ -16,7 +16,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void run<T>(in Loop<uint,T> loop, ReadOnlySpan<T> src)
+        public static void run<T>(in RangeLoop<uint,T> loop, ReadOnlySpan<T> src)
         {
             for(var i=loop.Min; i<loop.Max; i+= loop.Step)
                 loop.Receiver(i, skip(src,i));
@@ -39,12 +39,12 @@ namespace Z0
                 dst(i, skip(src,i));
         }
 
-        public static Loop<K,T> define<T,K>(K min, K max, K step, Action<K,T> receiver)
+        public static RangeLoop<K,T> define<T,K>(K min, K max, K step, Action<K,T> receiver)
             where K : unmanaged
-                => new Loop<K,T>(min, max, step, receiver);
+                => new RangeLoop<K,T>(min, max, step, receiver);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Accrue<I> run<I>(Loop<I> loop, ref Accrue<I> dst)
+        public static ref Accrue<I> run<I>(RangeLoop<I> loop, ref Accrue<I> dst)
             where I : unmanaged, IComparable<I>
         {
             var min = int64(loop.LowerBound) + (loop.LowerInclusive ? 0 : -1);
@@ -55,10 +55,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Loop<I> define<I>(Interval<I> bounds, I? step = null)
+        public static RangeLoop<I> define<I>(Interval<I> bounds, I? step = null)
             where I : unmanaged, IComparable<I>
        {
-            var dst = new Loop<I>();
+            var dst = new RangeLoop<I>();
             dst.LowerBound = bounds.Left;
             dst.UpperBound = bounds.Right;
             dst.LowerInclusive = bounds.LeftClosed;

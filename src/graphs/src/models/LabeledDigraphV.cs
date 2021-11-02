@@ -6,14 +6,14 @@ namespace Z0.Graphs
 {
     using System;
 
-    public class DirectedGraph<V>
+    public class LabeledDigraph<V>
         where V : unmanaged, IVertex, IEquatable<V>
     {
         MutableSet<V> _Vertices;
 
-        MutableSet<Edge<V>> _Edges;
+        MutableSet<LabeledEdge<V>> _Edges;
 
-        public DirectedGraph()
+        public LabeledDigraph()
         {
             _Vertices = new();
             _Edges = new();
@@ -22,7 +22,7 @@ namespace Z0.Graphs
         public void Connect(Label label, V src, V dst)
         {
             _Vertices.Union(src,dst);
-            _Edges.Union(new Edge<V>(label, src,dst));
+            _Edges.Union(new LabeledEdge<V>(label, src,dst));
         }
 
         public void Trace(EdgeReader<V> f)

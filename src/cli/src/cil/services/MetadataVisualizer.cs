@@ -67,7 +67,6 @@ namespace System.Reflection.Metadata
         {
         }
 
-
         public void VisualizeAllGenerations()
         {
             for (int i = 0; i<_readers.Count; i++)

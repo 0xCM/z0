@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct emath
     {
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static @enum<E,T> srl<E,T>(@enum<E,T> a, byte count)
             where E : unmanaged, Enum
             where T : unmanaged

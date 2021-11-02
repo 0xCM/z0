@@ -11,9 +11,7 @@ namespace Z0
     using static Root;
     using static SFx;
 
-    using K = ApiClasses;
-
-    partial struct CalcHosts
+   partial struct CalcHosts
     {
         [Closures(AllNumeric), Dec]
         public readonly struct Dec<T> : IUnaryOp<T>, IUnarySpanOp<T>

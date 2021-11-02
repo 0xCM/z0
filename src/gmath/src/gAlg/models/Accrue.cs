@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public struct Accrue<I> : ILoop<Accrue<I>,I>
+    public struct Accrue<I>
         where I : unmanaged
     {
         I Total;

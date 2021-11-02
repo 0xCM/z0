@@ -402,6 +402,11 @@ namespace Z0.Machines.X86
             }
         }
 
+        void Run(N31 n)
+        {
+            GraphTests.create(Wf).Run();
+        }
+
         void Run(N32 n)
         {
             var evals = BinaryBitLogicOps.canonical(w1);
@@ -412,7 +417,6 @@ namespace Z0.Machines.X86
                 Write(eval.Format());
             }
         }
-
 
         [CmdOp(".run")]
         Outcome Run(CmdArgs args)
@@ -450,6 +454,9 @@ namespace Z0.Machines.X86
                     break;
                     case 30:
                         Run(n30);
+                    break;
+                    case 31:
+                        Run(n31);
                     break;
                     case 32:
                         Run(n32);

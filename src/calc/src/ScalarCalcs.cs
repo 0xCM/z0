@@ -14,25 +14,26 @@ namespace Z0
     {
         const NumericKind Closure = Integers;
 
-        [MethodImpl(Inline), Factory(Add), Closures(Closure)]
-        public static Add<T> add<T>()
-            where T : unmanaged
-                => default;
 
-        [MethodImpl(Inline), Add, Closures(Closure)]
-        public static Span<T> add<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
-            where T : unmanaged
-                => gcalc.apply(add<T>(), a, b, dst);
+        // [MethodImpl(Inline), Factory(Add), Closures(Closure)]
+        // public static Add<T> add<T>()
+        //     where T : unmanaged
+        //         => default;
 
-        [MethodImpl(Inline), Factory(Abs), Closures(SignedInts)]
-        public static Abs<T> abs<T>()
-            where T : unmanaged
-                => default;
+        // [MethodImpl(Inline), Add, Closures(Closure)]
+        // public static Span<T> add<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+        //     where T : unmanaged
+        //         => gcalc.apply(add<T>(), a, b, dst);
 
-        [MethodImpl(Inline), Abs, Closures(SignedInts)]
-        public static Span<T> abs<T>(ReadOnlySpan<T> src, Span<T> dst)
-            where T : unmanaged
-                => gcalc.apply(abs<T>(), src, dst);
+        // [MethodImpl(Inline), Factory(Abs), Closures(SignedInts)]
+        // public static Abs<T> abs<T>()
+        //     where T : unmanaged
+        //         => default;
+
+        // [MethodImpl(Inline), Abs, Closures(SignedInts)]
+        // public static Span<T> abs<T>(ReadOnlySpan<T> src, Span<T> dst)
+        //     where T : unmanaged
+        //         => gcalc.apply(abs<T>(), src, dst);
 
         [MethodImpl(Inline), Factory(And), Closures(Closure)]
         public static And<T> and<T>()
@@ -44,31 +45,31 @@ namespace Z0
             where T : unmanaged
                 => gcalc.apply(and<T>(), a,b,dst);
 
-        [Closures(AllNumeric), Add]
-        public readonly struct Add<T> : IBinaryOp<T>, IBinarySpanOp<T>
-            where T : unmanaged
-        {
-            [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b)
-                => gmath.add(a, b);
+        // [Closures(AllNumeric), Add]
+        // public readonly struct Add<T> : IBinaryOp<T>, IBinarySpanOp<T>
+        //     where T : unmanaged
+        // {
+        //     [MethodImpl(Inline)]
+        //     public readonly T Invoke(T a, T b)
+        //         => gmath.add(a, b);
 
-            [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
-                => add(a, b, dst);
-        }
+        //     [MethodImpl(Inline)]
+        //     public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+        //         => add(a, b, dst);
+        // }
 
-        [Closures(AllNumeric), Abs]
-        public readonly struct Abs<T> : IUnaryOp<T>, IUnarySpanOp<T>
-            where T : unmanaged
-        {
-            [MethodImpl(Inline)]
-            public readonly T Invoke(T a)
-                => gmath.abs(a);
+        // [Closures(AllNumeric), Abs]
+        // public readonly struct Abs<T> : IUnaryOp<T>, IUnarySpanOp<T>
+        //     where T : unmanaged
+        // {
+        //     [MethodImpl(Inline)]
+        //     public readonly T Invoke(T a)
+        //         => gmath.abs(a);
 
-            [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
-                => abs(src,dst);
-        }
+        //     [MethodImpl(Inline)]
+        //     public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)
+        //         => abs(src,dst);
+        // }
 
         [Closures(Integers), And]
         public readonly struct And<T> : IBinaryOp<T>, IBinarySpanOp<T>

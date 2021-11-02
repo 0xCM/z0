@@ -13,6 +13,23 @@ namespace Z0
 
     partial struct Calcs
     {
+        [MethodImpl(Inline), Factory, Closures(Integers)]
+        public static BitLogic<T> bitlogic<T>()
+            where T : unmanaged
+                => default(BitLogic<T>);
+
+
+        [MethodImpl(Inline), Factory(Abs), Closures(SignedInts)]
+        public static Abs<T> abs<T>()
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline), Abs, Closures(SignedInts)]
+        public static Span<T> abs<T>(ReadOnlySpan<T> src, Span<T> dst)
+            where T : unmanaged
+                => gcalc.apply(abs<T>(), src, dst);
+
+
         [MethodImpl(Inline), Factory(Abs), Closures(SignedInts)]
         public static Abs128<T> abs<T>(W128 w)
             where T : unmanaged

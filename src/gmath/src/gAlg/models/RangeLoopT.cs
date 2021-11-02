@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public struct Loop<T> : ITextual
+    public struct RangeLoop<T> : ITextual
         where T : unmanaged, IComparable<T>
     {
         public T LowerBound;

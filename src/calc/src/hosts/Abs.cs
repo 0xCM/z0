@@ -16,6 +16,19 @@ namespace Z0
     partial struct CalcHosts
     {
         [Closures(AllNumeric), Abs]
+        public readonly struct Abs<T> : IUnaryOp<T>, IUnarySpanOp<T>
+            where T : unmanaged
+        {
+            [MethodImpl(Inline)]
+            public readonly T Invoke(T a)
+                => gmath.abs(a);
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke(ReadOnlySpan<T> a, Span<T> dst)
+                => gcalc.apply(Calcs.abs<T>(), a, dst);
+        }
+
+        [Closures(AllNumeric), Abs]
         public readonly struct Abs128<T> : IBlockedUnaryOp128<T>
             where T : unmanaged
         {

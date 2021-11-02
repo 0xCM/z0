@@ -21,15 +21,13 @@ namespace Z0
         {
             public K.CImpl ApiClass => default;
 
-            public const BinaryBitLogicKind OpKind = BinaryBitLogicKind.CImpl;
-
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
                 => gmath.cimpl(a,b);
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => Calcs.cimpl(lhs,rhs,dst);
+            public Span<T> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, Span<T> dst)
+                => Calcs.cimpl(a,b,dst);
         }
 
         [Closures(Integers), CImpl]

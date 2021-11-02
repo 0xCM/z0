@@ -12,7 +12,6 @@ namespace Z0
     using System.Text;
 
     using static Root;
-    using static core;
 
     partial class CliReader
     {
@@ -37,8 +36,7 @@ namespace Z0
         {
             const string InvariantCultureDisplay = "neutral";
 
-            var pooledBuilder = TextTools.buffer();
-            var sb = pooledBuilder.ToStringBuilder();
+            var sb = new StringBuilder();
             EscapeName(sb, name);
 
             sb.Append(", Version=");

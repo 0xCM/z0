@@ -9,9 +9,9 @@ namespace Z0
     using System.Text;
 
     using static Root;
-    using static core;
+    using static minicore;
 
-    class TextBuffer : ITextBuffer<TextBuffer>
+    public class TextBuffer : ITextBuffer
     {
         readonly StringBuilder Target;
 
@@ -72,10 +72,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void AppendLine<T>(T src)
-        {
-            if(src != null)
-                AppendLine(src.ToString());
-        }
+            => Target.AppendLine(src?.ToString() ?? RP.Null);
 
         [MethodImpl(Inline)]
         public void Append(char[] src)
@@ -83,7 +80,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void AppendItem<T>(T src)
-            => Append(src?.ToString() ?? "!<null>!");
+            => Append(src?.ToString() ?? RP.Null);
 
         [MethodImpl(Inline)]
         public void IndentLine<T>(uint margin, T src)
@@ -118,12 +115,6 @@ namespace Z0
             Target.Append(content);
         }
 
-        public void Delimit<F>(F label, object content, int pad = 0, char delimiter = FieldDelimiter)
-        {
-            Target.Append(RP.rspace(delimiter));
-            Target.AppendFormat(RP.pad(pad), label);
-            Target.Append(content);
-        }
 
         public override string ToString()
             => Target.ToString();

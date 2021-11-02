@@ -6,7 +6,7 @@ namespace Z0
 {
     using S = Surrogates;
     using BL = math;
-    using C = ScalarCalcs;
+    using C = Calcs;
 
     public class t_bitlogic : t_mathsvc<t_bitlogic>
     {

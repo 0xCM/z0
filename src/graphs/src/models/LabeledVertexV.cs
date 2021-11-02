@@ -9,28 +9,28 @@ namespace Z0.Graphs
 
     using static Root;
 
-    public readonly struct Vertex<V> : IVertex<V>, IEquatable<Vertex<V>>
+    public readonly struct LabeledVertex<V> : IVertex<V>, IEquatable<LabeledVertex<V>>
     {
         public Label Name {get;}
 
         public V Value {get;}
 
         [MethodImpl(Inline)]
-        public Vertex(Label name, V value)
+        public LabeledVertex(Label name, V value)
         {
             Name = name;
             Value = value;
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(Vertex<V> src)
+        public bool Equals(LabeledVertex<V> src)
             => Name.Equals(src.Name);
 
         public override int GetHashCode()
             => (int)graphs.hash(Value);
 
         public override bool Equals(object obj)
-            => obj is Vertex<V> v && Equals(v);
+            => obj is LabeledVertex<V> v && Equals(v);
 
         public string Format()
             => string.Format("{0}({1})", Name, Value);

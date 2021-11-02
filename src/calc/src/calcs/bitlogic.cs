@@ -13,11 +13,6 @@ namespace Z0
     partial struct Calcs
     {
         [MethodImpl(Inline), Factory, Closures(Integers)]
-        public static BitLogic<T> bitlogic<T>()
-            where T : unmanaged
-                => default(BitLogic<T>);
-
-        [MethodImpl(Inline), Factory, Closures(Integers)]
         public static VBitLogic128<T> vbitlogic<T>(N128 w)
             where T : unmanaged
                 => default(VBitLogic128<T>);

@@ -193,7 +193,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitBlock<N,T> operator &(in BitBlock<N,T> x, in BitBlock<N,T> y)
-            => new BitBlock<N,T>(ScalarCalcs.and(x.data, y.data, x.data.Replicate()));
+            => new BitBlock<N,T>(Calcs.and(x.data, y.data, x.data.Replicate()));
 
         [MethodImpl(Inline)]
         public static BitBlock<N,T> operator |(in BitBlock<N,T> x, in BitBlock<N,T> y)

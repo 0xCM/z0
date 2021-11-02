@@ -26,7 +26,6 @@ namespace Z0
         public abstract void Validate();
     }
 
-
     public abstract class ApiValidator<V,C> : AppService<V>
         where V : ApiValidator<V,C>,new()
     {

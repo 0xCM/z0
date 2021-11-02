@@ -9,7 +9,7 @@ namespace Z0.Graphs
 
     using static Root;
 
-    public readonly struct Edge<V> : IEdge<V>, IEquatable<Edge<V>>
+    public readonly struct LabeledEdge<V> : IEdge<V>, IEquatable<LabeledEdge<V>>
         where V : unmanaged, IVertex, IEquatable<V>
     {
         public Label Name {get;}
@@ -19,7 +19,7 @@ namespace Z0.Graphs
         public V Target {get;}
 
         [MethodImpl(Inline)]
-        public Edge(Label label, V src, V dst)
+        public LabeledEdge(Label label, V src, V dst)
         {
             Name = label;
             Source = src;
@@ -27,7 +27,7 @@ namespace Z0.Graphs
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(Edge<V> src)
+        public bool Equals(LabeledEdge<V> src)
             => Source.Equals(src.Source) && Target.Equals(src.Target) && Name.Equals(src.Name);
 
         public string Format()

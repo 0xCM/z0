@@ -87,7 +87,6 @@ namespace Z0.Expr
             return new LiteralSeq<E>(typeof(E).Name, dst);
         }
 
-
         [MethodImpl(Inline), Op]
         public static Literal<bit> literal(in Label name, bit value)
             => literal<bit>(name, value);
