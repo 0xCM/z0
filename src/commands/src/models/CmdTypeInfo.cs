@@ -16,7 +16,7 @@ namespace Z0
     {
         public CmdId CmdId {get;}
 
-        public Type DataType {get;}
+        public Type SourceType {get;}
 
         public Index<FieldInfo> Fields {get;}
 
@@ -24,7 +24,7 @@ namespace Z0
         public CmdTypeInfo(Type type, FieldInfo[] fields)
         {
             CmdId = CmdId.from(type);
-            DataType = type;
+            SourceType = type;
             Fields = fields;
         }
 
@@ -51,7 +51,7 @@ namespace Z0
         [Op]
         static void render(CmdTypeInfo src, ITextBuffer dst)
         {
-            dst.Append(src.DataType.Name);
+            dst.Append(src.SourceType.Name);
             var fields = src.Fields.View;;
             var count = fields.Length;
             for(var i=0; i<count; i++)

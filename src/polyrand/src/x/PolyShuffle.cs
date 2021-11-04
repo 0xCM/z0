@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="target">The input/output span</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static Span<T> Shuffle<T>(this IRangeSource src, Span<T> target)
+        public static Span<T> Shuffle<T>(this IBoundSource src, Span<T> target)
             => Sources.shuffle(src,target);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<T> Shuffle<T>(this IRangeSource random, ReadOnlySpan<T> src)
+        public static Span<T> Shuffle<T>(this IBoundSource random, ReadOnlySpan<T> src)
             => random.Shuffle(src.Replicate());
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The random source</param>
         [MethodImpl(Inline)]
-        public static ref readonly Perm<T> Shuffle<T>(this IRangeSource source, in Perm<T> src)
+        public static ref readonly Perm<T> Shuffle<T>(this IBoundSource source, in Perm<T> src)
             where T : unmanaged
         {
             Sources.shuffle(source, src.Terms);

@@ -8,15 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static core;
 
-    public readonly struct RngContext : IRngContext<RngContext>
-    {
-        public IPolyrand Random {get;}
 
-        [MethodImpl(Inline)]
-        public RngContext(IPolyrand random)
-        {
-            Random = random;
-        }
-    }
 }

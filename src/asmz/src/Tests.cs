@@ -130,7 +130,7 @@ namespace Z0.Asm
             Wf.Ran(flow, $"Created method table with {table.View.Length} entries");
         }
 
-        void CheckMullo(IRangeSource Source)
+        void CheckMullo(IBoundSource Source)
         {
             var @class = ApiClassKind.MulLo;
             var count = 12;
@@ -272,7 +272,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var model = ref skip(models,i);
-                Wf.Row(string.Format("{0,-3} {1}", i, model.DataType.Name));
+                Wf.Row(string.Format("{0,-3} {1}", i, model.SourceType.Name));
             }
         }
 

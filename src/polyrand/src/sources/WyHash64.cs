@@ -18,7 +18,7 @@ namespace Z0
     /// <remarks>Core algorithm taken from https://github.com/lemire/testingRNG/blob/master/source/wyhash.h</remarks>
     [ApiHost]
     [Rng(nameof(WyHash64))]
-    public struct WyHash64 : IRangeRng<WyHash64,ulong>
+    public struct WyHash64 : IRandomSource<WyHash64,ulong>
     {
         [MethodImpl(Inline), Op]
         public static ulong next(ref G g)

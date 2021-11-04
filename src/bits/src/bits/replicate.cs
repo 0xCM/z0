@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Replicates an index-identified segment [from..to] a target a specified number of times

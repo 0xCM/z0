@@ -11,13 +11,13 @@ namespace Z0
 
     public readonly struct EvalExecutorContext
     {
-        public IRangeSource DataSource {get;}
+        public IBoundSource DataSource {get;}
 
         public uint PointCount {get;}
 
         public uint Sequence {get;}
 
-        internal EvalExecutorContext(IRangeSource src, uint count, uint seq)
+        internal EvalExecutorContext(IBoundSource src, uint count, uint seq)
         {
             DataSource = src;
             PointCount = count;

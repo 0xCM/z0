@@ -12,8 +12,8 @@ namespace Z0
 
     using api = PolyOps;
 
-    public struct PolyG<G> : IRngAdapter, IRangeSource
-        where G : struct, IRng, IRangeRng<G,ulong>
+    public struct PolyG<G> : IRngAdapter, IBoundSource
+        where G : struct, IRng, IRandomSource<G,ulong>
     {
         internal G Source;
 

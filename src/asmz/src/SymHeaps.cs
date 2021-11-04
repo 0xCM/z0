@@ -60,7 +60,7 @@ namespace Z0
             var dst = new SymHeapSpec();
 
             var kSym = (uint)src.Length;
-            var kEntry = (uint)Bits.next((Pow2x16)Bits.xmsb(kSym));
+            var kEntry = (uint)bits.next((Pow2x16)bits.xmsb(kSym));
             dst.SymbolCount = kSym;
             dst.EntryCount = kEntry;
             dst.Widths = alloc<ushort>(kEntry);

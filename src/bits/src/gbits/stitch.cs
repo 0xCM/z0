@@ -31,13 +31,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.stitch(uint8(a), i, uint8(b), j));
+                return generic<T>(bits.stitch(uint8(a), i, uint8(b), j));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.stitch(uint16(a), i, uint16(b), j));
+                return generic<T>(bits.stitch(uint16(a), i, uint16(b), j));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.stitch(uint32(a), i, uint32(b), j));
+                return generic<T>(bits.stitch(uint32(a), i, uint32(b), j));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.stitch(uint64(a), i, uint64(b), j));
+                return generic<T>(bits.stitch(uint64(a), i, uint64(b), j));
             else
                 throw no<T>();
         }

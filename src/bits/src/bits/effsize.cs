@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static LimitValues;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Computes the minimum number of bytes required to represent the source value

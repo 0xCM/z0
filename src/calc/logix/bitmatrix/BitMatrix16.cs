@@ -125,7 +125,7 @@ namespace Z0
         {
             ushort col = 0;
             for(byte r = 0; r<N; r++)
-                col = Bits.setif(skip(Content,r), (byte)index, col, r);
+                col = bits.setif(skip(Content,r), (byte)index, col, r);
             return col;
         }
 

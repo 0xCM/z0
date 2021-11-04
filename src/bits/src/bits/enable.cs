@@ -11,7 +11,7 @@ namespace Z0
     using static LimitValues;
     using static BitMasks;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Enables a specified source bit

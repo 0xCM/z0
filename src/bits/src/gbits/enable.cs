@@ -23,13 +23,13 @@ namespace Z0
             where T : unmanaged
         {
             if(size<T>() == 1)
-                 return generic<T>(Bits.enable(uint8(src), pos));
+                 return generic<T>(bits.enable(uint8(src), pos));
             else if (size<T>() == 2)
-                 return generic<T>(Bits.enable(uint16(src), pos));
+                 return generic<T>(bits.enable(uint16(src), pos));
             else if (size<T>() == 4)
-                 return generic<T>(Bits.enable(uint32(src), pos));
+                 return generic<T>(bits.enable(uint32(src), pos));
             else
-                 return generic<T>(Bits.enable(uint64(src), pos));
+                 return generic<T>(bits.enable(uint64(src), pos));
         }
 
         /// <summary>
@@ -43,13 +43,13 @@ namespace Z0
             where T : unmanaged
         {
             if(size<T>() == 1)
-                return generic<T>(Bits.enable(uint8(src), index, count));
+                return generic<T>(bits.enable(uint8(src), index, count));
             else if (size<T>() == 2)
-                return generic<T>(Bits.enable(uint16(src), index, count));
+                return generic<T>(bits.enable(uint16(src), index, count));
             else if (size<T>() == 4)
-                return generic<T>(Bits.enable(uint32(src), index, count));
+                return generic<T>(bits.enable(uint32(src), index, count));
             else
-                return generic<T>(Bits.enable(uint64(src), index, count));
+                return generic<T>(bits.enable(uint64(src), index, count));
         }
     }
 }

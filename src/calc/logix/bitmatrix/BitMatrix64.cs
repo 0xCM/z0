@@ -99,7 +99,7 @@ namespace Z0
         {
             var col = 0ul;
             for(byte r = 0; r<N; r++)
-                col = Bits.setif(skip(Data,r), (byte)index, col, r);
+                col = bits.setif(skip(Data,r), (byte)index, col, r);
             return col;
         }
 

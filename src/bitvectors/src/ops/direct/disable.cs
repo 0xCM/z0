@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), Op]
         public static BitVector4 disable(BitVector4 x, int index)
-            => Bits.disable(x.State, index);
+            => bits.disable(x.State, index);
 
         /// <summary>
         /// Disables a bit if it is enabled
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="index">The bit position</param>
         [MethodImpl(Inline), Op]
         public static BitVector8 disable(BitVector8 x, int index)
-            => Bits.disable(x.State, index);
+            => bits.disable(x.State, index);
 
         /// <summary>
         /// Disables a bit if it is enabled
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="index">The bit position</param>
         [MethodImpl(Inline), Op]
         public static BitVector16 disable(BitVector16 x, int index)
-            => Bits.disable(x.State, index);
+            => bits.disable(x.State, index);
 
         /// <summary>
         /// Disables a bit if it is enabled
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="index">The bit position</param>
         [MethodImpl(Inline), Op]
         public static BitVector32 disable(BitVector32 x, int index)
-            => Bits.disable(x.State, index);
+            => bits.disable(x.State, index);
 
         /// <summary>
         /// Disables a bit if it is enabled
@@ -49,6 +49,6 @@ namespace Z0
         /// <param name="index">The bit position</param>
         [MethodImpl(Inline), Op]
         public static BitVector64 disable(BitVector64 x, int index)
-            => Bits.disable(x.State, index);
+            => bits.disable(x.State, index);
     }
 }

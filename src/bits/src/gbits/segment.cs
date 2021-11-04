@@ -97,13 +97,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(Bits.segment(int8(src), i0, i1));
+                 return generic<T>(bits.segment(int8(src), i0, i1));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(Bits.segment(int16(src), i0, i1));
+                 return generic<T>(bits.segment(int16(src), i0, i1));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(Bits.segment(int32(src), i0, i1));
+                 return generic<T>(bits.segment(int32(src), i0, i1));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(Bits.segment(int64(src), i0, i1));
+                 return generic<T>(bits.segment(int64(src), i0, i1));
             else
                 return segment_f(src,i0,i1);
         }
@@ -113,13 +113,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(Bits.segment(uint8(src), i0, i1));
+                 return generic<T>(bits.segment(uint8(src), i0, i1));
             else if(typeof(T) == typeof(ushort))
-                 return generic<T>(Bits.segment(uint16(src), i0, i1));
+                 return generic<T>(bits.segment(uint16(src), i0, i1));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(Bits.segment(uint32(src), i0, i1));
+                 return generic<T>(bits.segment(uint32(src), i0, i1));
             else if(typeof(T) == typeof(ulong))
-                 return generic<T>(Bits.segment(uint64(src), i0, i1));
+                 return generic<T>(bits.segment(uint64(src), i0, i1));
             else
                 return segment_i(src,i0,i1);
         }
@@ -129,9 +129,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return generic<T>(Bits.segment(float32(src), i0, i1));
+                 return generic<T>(bits.segment(float32(src), i0, i1));
             else if(typeof(T) == typeof(double))
-                 return generic<T>(Bits.segment(float64(src),  i0, i1));
+                 return generic<T>(bits.segment(float64(src),  i0, i1));
             else
                 throw no<T>();
         }

@@ -24,13 +24,13 @@ namespace Z0
             where T : unmanaged
         {
             if(size<T>() == 1)
-                return generic<T>(Bits.trim(uint8(src), index, count));
+                return generic<T>(bits.trim(uint8(src), index, count));
             else if (size<T>() == 2)
-                return generic<T>(Bits.trim(uint16(src), index, count));
+                return generic<T>(bits.trim(uint16(src), index, count));
             else if (size<T>() == 4)
-                return generic<T>(Bits.trim(uint32(src), index, count));
+                return generic<T>(bits.trim(uint32(src), index, count));
             else
-                return generic<T>(Bits.trim(uint64(src), index, count));
+                return generic<T>(bits.trim(uint64(src), index, count));
         }
     }
 }

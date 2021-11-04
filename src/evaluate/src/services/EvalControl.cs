@@ -10,7 +10,7 @@ namespace Z0
 
     public class EvalControl
     {
-        public static EvalControl create(IWfRuntime wf, IRangeSource source, FS.FolderPath root, uint bufferSize)
+        public static EvalControl create(IWfRuntime wf, IBoundSource source, FS.FolderPath root, uint bufferSize)
             => new EvalControl(wf, source, root, bufferSize);
 
         readonly IWfRuntime Wf;
@@ -23,7 +23,7 @@ namespace Z0
 
         readonly IApiCatalog ApiGlobal;
 
-        internal EvalControl(IWfRuntime wf, IRangeSource source, FS.FolderPath root, uint buffersize)
+        internal EvalControl(IWfRuntime wf, IBoundSource source, FS.FolderPath root, uint buffersize)
         {
             Wf = wf;
             BufferCount = 3;

@@ -17,7 +17,7 @@ namespace Z0
                 => (next<T>(source), next<T>(source), next<T>(source));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ConstTriple<T> ktriple<T>(IRangeSource source, T min, T max)
+        public static ConstTriple<T> ktriple<T>(IBoundSource source, T min, T max)
             where T : unmanaged
                 => (next(source,min,max), next(source,min,max), next(source,min,max));
     }

@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T Power<T>(this IRangeSource src, T t = default)
+        public static T Power<T>(this IBoundSource src, T t = default)
             where T : unmanaged
                 => Numeric.force<ulong,T>(Pow2.pow((byte)src.Log2(t)));
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="maxexp">The max exponent value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T Power<T>(this IRangeSource src, int minexp, int maxexp)
+        public static T Power<T>(this IBoundSource src, int minexp, int maxexp)
             where T : unmanaged
         {
             var exp = src.Next((byte)minexp, (byte)(maxexp + 1));
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static int Log2<T>(this IRangeSource src, T t = default)
+        public static int Log2<T>(this IBoundSource src, T t = default)
             where T : unmanaged
                 => src.Next(0, (int)width<T>());
     }

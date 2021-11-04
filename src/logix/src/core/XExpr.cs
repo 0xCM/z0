@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="source">The data source</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T Set<T>(this IVarExpr<T> v, IRangeSource source)
+        public static T Set<T>(this IVarExpr<T> v, IBoundSource source)
             where T : unmanaged
         {
             var x = source.Next<T>();
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="max">The exclusive max value to assign</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T Set<T>(this IVarExpr<T> v, IRangeSource source, T min, T max)
+        public static T Set<T>(this IVarExpr<T> v, IBoundSource source, T min, T max)
             where T : unmanaged
         {
             var x = source.Next<T>(min,max);
@@ -266,7 +266,7 @@ namespace Z0
         /// <param name="current"></param>
         /// <typeparam name="T">The primal value over which the variable is defined</typeparam>
         [MethodImpl(Inline)]
-        public static T SetNext<T>(this IRangeSource random, VariableExpr<T> current)
+        public static T SetNext<T>(this IBoundSource random, VariableExpr<T> current)
             where T : unmanaged
         {
             var a = random.Next<T>();

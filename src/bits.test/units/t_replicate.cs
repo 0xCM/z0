@@ -11,7 +11,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var pattern = Random.Next<byte>();
-                (var x0, var x1, var x2, var x3) = Bits.split(gbits.replicate<uint>(pattern),n4);
+                (var x0, var x1, var x2, var x3) = bits.split(gbits.replicate<uint>(pattern),n4);
                 Claim.eq(x0, pattern);
                 Claim.eq(x1, pattern);
                 Claim.eq(x2, pattern);

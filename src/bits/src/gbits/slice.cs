@@ -28,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.slice(uint8(lhs), start, length));
+                return generic<T>(bits.slice(uint8(lhs), start, length));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.slice(uint16(lhs), start, length));
+                return generic<T>(bits.slice(uint16(lhs), start, length));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.slice(uint32(lhs), start, length));
+                return generic<T>(bits.slice(uint32(lhs), start, length));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.slice(uint64(lhs), start, length));
+                return generic<T>(bits.slice(uint64(lhs), start, length));
             else
                 return bitslice_i(lhs,start,length);
         }
@@ -44,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(Bits.slice(int8(lhs), start, length));
+                return generic<T>(bits.slice(int8(lhs), start, length));
             else if(typeof(T) == typeof(short))
-                return generic<T>(Bits.slice(int16(lhs), start, length));
+                return generic<T>(bits.slice(int16(lhs), start, length));
             else if(typeof(T) == typeof(int))
-                return generic<T>(Bits.slice(int32(lhs), start, length));
+                return generic<T>(bits.slice(int32(lhs), start, length));
             else if(typeof(T) == typeof(long))
-                return generic<T>(Bits.slice(int64(lhs), start, length));
+                return generic<T>(bits.slice(int64(lhs), start, length));
             else
                 throw no<T>();
         }

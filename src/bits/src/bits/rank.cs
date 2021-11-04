@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Calculates the number of bits set up to and including the specified position

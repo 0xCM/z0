@@ -381,7 +381,7 @@ namespace Z0
         /// <param name="domain">An interval to which component values are constrained</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> CpuVector<T>(this IRangeSource src, N128 w, Interval<T> domain)
+        public static Vector128<T> CpuVector<T>(this IBoundSource src, N128 w, Interval<T> domain)
             where T : unmanaged
                 => src.SpanBlocks<T>(w,domain,1).LoadVector();
 
@@ -393,7 +393,7 @@ namespace Z0
         /// <param name="domain">An interval to which component values are constrained</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<Vector128<T>> CpuVectors<T>(this IRangeSource src, N128 w, Interval<T> domain)
+        public static IEnumerable<Vector128<T>> CpuVectors<T>(this IBoundSource src, N128 w, Interval<T> domain)
             where T : unmanaged
         {
             while(true)
@@ -409,7 +409,7 @@ namespace Z0
         /// <param name="filter">A domain refinement filter</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> CpuVector<T>(this IRangeSource src, N128 w, Interval<T> domain, Func<T,bool> filter)
+        public static Vector128<T> CpuVector<T>(this IBoundSource src, N128 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => src.SpanBlocks<T>(w, domain, 1, filter).LoadVector();
 
@@ -421,7 +421,7 @@ namespace Z0
         /// <param name="domain">An interval to which component values are constrained</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> CpuVector<T>(this IRangeSource src, N256 w, Interval<T> domain)
+        public static Vector256<T> CpuVector<T>(this IBoundSource src, N256 w, Interval<T> domain)
             where T : unmanaged
                 => src.SpanBlocks<T>(w, domain, 1).LoadVector();
 
@@ -433,7 +433,7 @@ namespace Z0
         /// <param name="domain">An interval to which component values are constrained</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<Vector256<T>> CpuVectors<T>(this IRangeSource source, N256 w, Interval<T> domain)
+        public static IEnumerable<Vector256<T>> CpuVectors<T>(this IBoundSource source, N256 w, Interval<T> domain)
             where T : unmanaged
         {
             while(true)
@@ -449,7 +449,7 @@ namespace Z0
         /// <param name="filter">A domain refinement filter</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> CpuVector<T>(this IRangeSource src, N256 w, Interval<T> domain, Func<T,bool> filter)
+        public static Vector256<T> CpuVector<T>(this IBoundSource src, N256 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => src.SpanBlocks<T>(w, domain, 1, filter).LoadVector();
 
@@ -462,7 +462,7 @@ namespace Z0
         /// <param name="filter">A domain refinement filter</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector512<T> CpuVector<T>(this IRangeSource src, N512 w, Interval<T> domain, Func<T,bool> filter)
+        public static Vector512<T> CpuVector<T>(this IBoundSource src, N512 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => src.SpanBlocks(w, domain, 1, filter).LoadVector();
 
@@ -474,7 +474,7 @@ namespace Z0
         /// <param name="domain">An interval to which vector component values are constrained</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector512<T> CpuVector<T>(this IRangeSource src, N512 w, Interval<T> domain)
+        public static Vector512<T> CpuVector<T>(this IBoundSource src, N512 w, Interval<T> domain)
             where T : unmanaged
                 => src.CpuVector(w,domain,null);
 

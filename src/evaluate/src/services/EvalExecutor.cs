@@ -15,14 +15,14 @@ namespace Z0
     {
         readonly IWfRuntime Wf;
 
-        readonly IRangeSource Source;
+        readonly IBoundSource Source;
 
         readonly int RepCount;
 
         EvalExecutorContext Context;
 
         [MethodImpl(Inline)]
-        internal EvalExecutor(IWfRuntime wf, IRangeSource source)
+        internal EvalExecutor(IWfRuntime wf, IBoundSource source)
         {
             Wf = wf;
             RepCount = 128;

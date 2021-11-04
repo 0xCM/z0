@@ -18,12 +18,12 @@ namespace Z0
     {
         readonly IWfRuntime Wf;
 
-        readonly IRangeSource DataSource;
+        readonly IBoundSource DataSource;
 
         readonly uint BufferSize;
 
         [MethodImpl(Inline)]
-        public EvalDispatcher(IWfRuntime wf, IRangeSource source, uint bufferSize)
+        public EvalDispatcher(IWfRuntime wf, IBoundSource source, uint bufferSize)
         {
             Wf = wf;
             DataSource = source;

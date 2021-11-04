@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline), BitSeg]
         public static BitVector4 bitseg(BitVector4 x, byte first, byte last)
-            => Bits.segment(x.State, first, last);
+            => bits.segment(x.State, first, last);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline), BitSeg]
         public static BitVector8 bitseg(BitVector8 x, byte first, byte last)
-            => Bits.segment(x.State, first, last);
+            => bits.segment(x.State, first, last);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline), BitSeg]
         public static BitVector16 bitseg(BitVector16 x, byte first, byte last)
-            => Bits.segment(x.State, first, last);
+            => bits.segment(x.State, first, last);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline), BitSeg]
         public static BitVector32 bitseg(BitVector32 x, byte first, byte last)
-            => Bits.segment(x.State, first, last);
+            => bits.segment(x.State, first, last);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -54,6 +54,6 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline), BitSeg]
         public static BitVector64 bitseg(BitVector64 x, byte first, byte last)
-            => Bits.segment(x.State, first, last);
+            => bits.segment(x.State, first, last);
     }
 }

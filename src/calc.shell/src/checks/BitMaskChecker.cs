@@ -170,11 +170,11 @@ namespace Z0
         [Op]
         public static void CheckLoMask(N1 @case, ref byte index, ref ulong log)
         {
-            eq(4u, Bits.pop(lo64(3)), ref index, ref log);
-            eq(7u, Bits.pop(lo64(6)), ref index, ref log);
-            eq(13u, Bits.pop(lo64(12)), ref index, ref log);
-            eq(25u, Bits.pop(lo64(24)), ref index, ref log);
-            eq(59u, Bits.pop(lo64(58)), ref index, ref log);
+            eq(4u, bits.pop(lo64(3)), ref index, ref log);
+            eq(7u, bits.pop(lo64(6)), ref index, ref log);
+            eq(13u, bits.pop(lo64(12)), ref index, ref log);
+            eq(25u, bits.pop(lo64(24)), ref index, ref log);
+            eq(59u, bits.pop(lo64(58)), ref index, ref log);
         }
 
         [Op]
@@ -184,10 +184,10 @@ namespace Z0
             var himask = BitMasks.hi<uint>(8);
             var src = uint.MaxValue;
             var dst = gmath.xor(gmath.xor(src,lomask), himask);
-            eq(7u, Bits.ntz(dst), ref index, ref log);
-            eq(8u, (uint)Bits.nlz(dst), ref index, ref log);
-            eq(7u, Bits.pop(BitMasks.lo<uint>(6)), ref index, ref log);
-            eq(12u, Bits.pop(BitMasks.lo<uint>(11)), ref index, ref log);
+            eq(7u, bits.ntz(dst), ref index, ref log);
+            eq(8u, (uint)bits.nlz(dst), ref index, ref log);
+            eq(7u, bits.pop(BitMasks.lo<uint>(6)), ref index, ref log);
+            eq(12u, bits.pop(BitMasks.lo<uint>(11)), ref index, ref log);
         }
 
         [Op]

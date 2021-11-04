@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-     partial class Bits
+     partial class bits
      {
           [MethodImpl(Inline), Toggle]
           public static sbyte toggle(sbyte src, int pos)

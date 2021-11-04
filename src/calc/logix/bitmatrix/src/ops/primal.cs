@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="hi">The lower row data</param>
         [MethodImpl(Inline), Op]
         public static BitMatrix8 primal(N8 n, uint lo, uint hi)
-            => new BitMatrix8(Z0.Bits.join(lo, hi));
+            => new BitMatrix8(Z0.bits.join(lo, hi));
 
         [MethodImpl(Inline), Op]
         public static BitMatrix8 primal(N8 n, ulong src)

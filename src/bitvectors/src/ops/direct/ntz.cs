@@ -16,27 +16,27 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Ntz]
         public static byte ntz(BitVector8 x)
-            => Bits.ntz(x.State);
+            => bits.ntz(x.State);
 
         /// <summary>
         /// Counts the number of trailing zero bits
         /// </summary>
         [MethodImpl(Inline), Ntz]
         public static ushort ntz(BitVector16 x)
-            => Bits.ntz(x.State);
+            => bits.ntz(x.State);
 
         /// <summary>
         /// Counts the number of trailing zero bits
         /// </summary>
         [MethodImpl(Inline), Ntz]
         public static uint ntz(BitVector32 x)
-            => Bits.ntz(x.State);
+            => bits.ntz(x.State);
 
         /// <summary>
         /// Counts the number of trailing zero bits
         /// </summary>
         [MethodImpl(Inline), Ntz]
         public static ulong ntz(BitVector64 x)
-            => Bits.ntz(x.State);
+            => bits.ntz(x.State);
     }
 }

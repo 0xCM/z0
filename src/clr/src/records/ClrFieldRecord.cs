@@ -15,7 +15,7 @@ namespace Z0
 
         public CliToken DeclaringType;
 
-        public CliToken DataType;
+        public CliToken CilType;
 
         public FieldAttributes Attributes;
 

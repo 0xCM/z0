@@ -18,7 +18,7 @@ namespace Z0
     /// <remarks> Core algorithm taken from http://xoshiro.di.unimi.it/xoshiro256starstar.c</remarks>
     [ApiHost]
     [Rng(nameof(XorShift256))]
-    public struct XorShift256 : IRangeRng<XorShift256,ulong>
+    public struct XorShift256 : IRandomSource<XorShift256,ulong>
     {
         ulong S0;
 

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static BitMaskLiterals;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Blends alternating even operand bits

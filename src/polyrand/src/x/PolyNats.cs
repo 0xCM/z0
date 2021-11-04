@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<N,T> NatSpan<N,T>(this IRangeSource src, Interval<T> domain, N n = default, Func<T,bool> filter = null)
+        public static NatSpan<N,T> NatSpan<N,T>(this IBoundSource src, Interval<T> domain, N n = default, Func<T,bool> filter = null)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => TypeNats.span(src.Span<T>((int)Typed.value(n), domain, filter), n);
@@ -37,7 +37,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static TableSpan<M,N,T> TableSpan<M,N,T>(this IRangeSource src, M rows = default, N cols = default)
+        public static TableSpan<M,N,T> TableSpan<M,N,T>(this IBoundSource src, M rows = default, N cols = default)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -55,7 +55,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static TableSpan<M,N,T> TableSpan<M,N,T>(this IRangeSource src, M rows, N cols, Interval<T> domain)
+        public static TableSpan<M,N,T> TableSpan<M,N,T>(this IBoundSource src, M rows, N cols, Interval<T> domain)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="random">The data source</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Span<N,T>(this IRangeSource src, N n = default, T t = default)
+        public static Span<T> Span<N,T>(this IBoundSource src, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => Sources.polyspan<T>(src, (int)Typed.nat64u(n), Z0.Interval<T>.Full);
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="random">The data source</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Span<N,T>(this IRangeSource src, T min, T max, N n = default)
+        public static Span<T> Span<N,T>(this IBoundSource src, T min, T max, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => Sources.polyspan<T>(src, (int)Typed.nat64u(n), (min, max));
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="random">The data source</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Span<N,T>(this IRangeSource src, Interval<T> domain, N n = default)
+        public static Span<T> Span<N,T>(this IBoundSource src, Interval<T> domain, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => Sources.polyspan<T>(src, (int)Typed.nat64u(n), domain);

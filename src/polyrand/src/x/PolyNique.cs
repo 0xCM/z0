@@ -20,10 +20,10 @@ namespace Z0
         /// <param name="values">The data source</param>
         /// <param name="count">The number of values to sample</param>
         /// <typeparam name="T">The value type</typeparam>
-        public static HashSet<T> Distinct<T>(this IRangeSource source, T[] values, int count)
+        public static HashSet<T> Distinct<T>(this IBoundSource source, T[] values, int count)
             => source.Distinct(values.Length, count).Select(i => values[i]).ToHashSet();
 
-        public static HashSet<T> Distinct<T>(this IRangeSource source, T pool, int count)
+        public static HashSet<T> Distinct<T>(this IBoundSource source, T pool, int count)
             where T : unmanaged
         {
             var src = source.DataStream(default(T), pool);
@@ -33,7 +33,7 @@ namespace Z0
             return set;
         }
 
-        public static HashSet<T> Distinct<T>(this IRangeSource source, T pool, T count)
+        public static HashSet<T> Distinct<T>(this IBoundSource source, T pool, T count)
             where T : unmanaged
         {
             var src = source.DataStream(default(T), pool);

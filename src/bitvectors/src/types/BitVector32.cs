@@ -46,13 +46,13 @@ namespace Z0
         public BitVector16 Lo
         {
             [MethodImpl(Inline)]
-            get => (ushort)Bits.lo(Data);
+            get => (ushort)bits.lo(Data);
         }
 
         public BitVector16 Hi
         {
             [MethodImpl(Inline)]
-            get => (ushort)Bits.hi(Data);
+            get => (ushort)bits.hi(Data);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         public BitVector32 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get =>  Bits.segment(Data, first, last);
+            get =>  bits.segment(Data, first, last);
         }
 
         [MethodImpl(Inline)]

@@ -238,7 +238,7 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline), Op]
         public static BitVector32 create(N32 n, byte x0, byte x1, byte x2, byte x3)
-            => new BitVector32(Bits.join(x0,x1,x2,x3));
+            => new BitVector32(bits.join(x0,x1,x2,x3));
 
         /// <summary>
         /// Creates a vector from two unsigned 16-bit integers
@@ -254,7 +254,7 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline), Op]
         public static BitVector64 create(N64 n, ushort x0, ushort x1, ushort x2, ushort x3)
-            => Bits.join(x0,x1,x2,x3);
+            => bits.join(x0,x1,x2,x3);
 
         /// <summary>
         /// Creates a 64-bit bitvector where the first 8 bits a populated with a specified value and

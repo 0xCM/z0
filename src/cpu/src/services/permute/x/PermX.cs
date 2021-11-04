@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        static ref readonly Permute shuffle(in Permute src, IRangeSource random)
+        static ref readonly Permute shuffle(in Permute src, IBoundSource random)
         {
             random.Shuffle(src.Terms);
             return ref src;
@@ -30,7 +30,7 @@ namespace Z0
         /// Shuffles the permutation in-place using a provided random source.
         /// </summary>
         /// <param name="random">The random source</param>
-        static NatPerm<N> Shuffle22<N>(NatPerm<N> perm, IRangeSource random)
+        static NatPerm<N> Shuffle22<N>(NatPerm<N> perm, IBoundSource random)
             where N : unmanaged, ITypeNat
         {
             shuffle(perm, random);
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="rep">A primal type representative</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal symbol type</typeparam>
-        public static IEnumerable<NatPerm<N>> Perms<N>(this IRangeSource random, N n = default)
+        public static IEnumerable<NatPerm<N>> Perms<N>(this IBoundSource random, N n = default)
             where N : unmanaged, ITypeNat
         {
             while(true)
@@ -70,7 +70,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal symbol type</typeparam>
         [MethodImpl(Inline)]
-        public static NatPerm<N> Perm<N>(this IRangeSource random, N n = default)
+        public static NatPerm<N> Perm<N>(this IBoundSource random, N n = default)
             where N : unmanaged, ITypeNat
                 => Shuffle22(api.natural(n), random);
 

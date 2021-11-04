@@ -39,7 +39,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<uint>();
-                Bits.split(x,out var x0, out var x1);
+                bits.split(x,out var x0, out var x1);
 
                 var y0 = gbits.segment(x, 0, 15);
                 var y1 = gbits.segment(x, 16, 31);
@@ -53,7 +53,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<ulong>();
-                Bits.split(x, out var x0, out var x1);
+                bits.split(x, out var x0, out var x1);
                 var y0 = gbits.segment(x, 0, 31);
                 var y1 = gbits.segment(x, 32, 63);
 

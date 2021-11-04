@@ -77,7 +77,7 @@ namespace Z0
         public readonly BitVector4 Hi
         {
             [MethodImpl(Inline)]
-            get => Bits.hi(Data);
+            get => bits.hi(Data);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
         public readonly BitVector4 Lo
         {
             [MethodImpl(Inline)]
-            get => Bits.lo(Data);
+            get => bits.lo(Data);
         }
 
         /// <summary>

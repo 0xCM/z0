@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Reverses the bits in a byte

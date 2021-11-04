@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Counts the number of leading zero bits in the source

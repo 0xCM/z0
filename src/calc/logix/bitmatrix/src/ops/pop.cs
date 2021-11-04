@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static uint pop(in BitMatrix8 A)
-            => Bits.pop((ulong)A);
+            => bits.pop((ulong)A);
 
         /// <summary>
         /// Counts the number of enabled bits in the matrix
@@ -27,10 +27,10 @@ namespace Z0
         {
             ref readonly var src = ref first(A.Content.AsUInt64());
             var count = 0u;
-            count += Bits.pop(skip(in src, 0));
-            count += Bits.pop(skip(in src, 1));
-            count += Bits.pop(skip(in src, 2));
-            count += Bits.pop(skip(in src, 3));
+            count += bits.pop(skip(in src, 0));
+            count += bits.pop(skip(in src, 1));
+            count += bits.pop(skip(in src, 2));
+            count += bits.pop(skip(in src, 3));
             return count;
         }
 
@@ -57,7 +57,7 @@ namespace Z0
             var count = 0u;
             ref var src = ref A.Head;
             for(var i=0; i < N; i++)
-                count += Bits.pop(skip(in src, i));
+                count += bits.pop(skip(in src, i));
             return count;
         }
     }

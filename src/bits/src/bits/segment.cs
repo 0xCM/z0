@@ -10,7 +10,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions

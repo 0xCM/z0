@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
     using static Root;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// unsigned int _blsr_u32 (unsigned int a) BLSR reg, reg/m32

@@ -19,7 +19,7 @@ namespace Z0
             var dst = new ClrFieldRecord();
             dst.Key = ClrArtifacts.reference(src);
             dst.DeclaringType = data.DeclaringType.Token;
-            dst.DataType = data.FieldType.Token;
+            dst.CilType = data.FieldType.Token;
             dst.Attributes = data.Attributes;
             dst.Address = data.Address;
             dst.IsStatic = data.IsStatic;

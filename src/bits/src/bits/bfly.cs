@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static BitMaskLiterals;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.

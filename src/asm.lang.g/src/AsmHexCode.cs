@@ -145,7 +145,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmHexCode load(ulong src)
         {
-            var size = Bits.effsize(src);
+            var size = bits.effsize(src);
             var data = slice(bytes(src), 0, size);
             var storage = 0ul;
             var buffer = bytes(storage);

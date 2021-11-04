@@ -18,19 +18,17 @@ namespace Z0
     {
         public uint StorageWidth {get;}
 
-        public Type ContainerType {get;}
+        public Type CoverType {get;}
 
         public Type ContentType {get;}
 
         public Func<string> Formatter {get;}
 
-        public bool IsFixedWidth => StorageWidth != 0;
-
         [MethodImpl(Inline)]
         public ApiDataType(IDataType rep, uint width = 0)
         {
             StorageWidth = width;
-            ContainerType = rep.ContainerType;
+            CoverType = rep.CoverType;
             ContentType = rep.ContentType;
             Formatter = rep.Format;
         }
@@ -39,13 +37,16 @@ namespace Z0
         public ApiDataType(uint width, Type container, Type content, Func<string> formatter = null)
         {
             StorageWidth = width;
-            ContainerType = container;
+            CoverType = container;
             ContentType = content;
             Formatter = formatter  ?? new Func<string>(() => container.Name);
         }
 
+        public bool IsFixedWidth
+            => StorageWidth != 0;
+
         public bool IsEmpty
-            => ContainerType == null || ContainerType == typeof(void);
+            => CoverType == null || CoverType == typeof(void);
 
         public bool IsNonEmpty
             => !IsEmpty;
@@ -60,7 +61,7 @@ namespace Z0
 
         public Type ContentType => typeof(void);
 
-        public Type ContainerType => typeof(void);
+        public Type CoverType => typeof(void);
 
         public ushort Width => 0;
 
@@ -69,7 +70,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(IDataType other)
-            => other.ContentType == ContentType && other.ContainerType == ContainerType;
+            => other.ContentType == ContentType && other.CoverType == CoverType;
 
         public static bool eq(ApiDataType other)
             => Instance.Equals(other);

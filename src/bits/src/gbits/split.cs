@@ -26,25 +26,25 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
             {
-                Bits.split(uint8(src), index, out var y0, out var y1);
+                bits.split(uint8(src), index, out var y0, out var y1);
                 x0 = generic<T>(y0);
                 x1 = generic<T>(y1);
             }
             else if(typeof(T) == typeof(ushort))
             {
-                Bits.split(uint16(src), index, out var y0, out var y1);
+                bits.split(uint16(src), index, out var y0, out var y1);
                 x0 = generic<T>(y0);
                 x1 = generic<T>(y1);
             }
             else if(typeof(T) == typeof(uint))
             {
-                Bits.split(uint32(src), index, out var y0, out var y1);
+                bits.split(uint32(src), index, out var y0, out var y1);
                 x0 = generic<T>(y0);
                 x1 = generic<T>(y1);
             }
             else if(typeof(T) == typeof(ulong))
             {
-                Bits.split(uint64(src), index, out var y0, out var y1);
+                bits.split(uint64(src), index, out var y0, out var y1);
                 x0 = generic<T>(y0);
                 x1 = generic<T>(y1);
             }

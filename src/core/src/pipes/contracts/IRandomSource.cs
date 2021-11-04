@@ -11,15 +11,15 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal type</typeparam>
     [Free]
-    public interface IRangeRng<T> : IRng, IRangeSource<T>
+    public interface IRandomSource<T> : IRng, IBoundSource<T>
         where T : unmanaged
     {
     }
 
     [Free]
-    public interface IRangeRng<G,T> : IRangeRng<T>
+    public interface IRandomSource<G,T> : IRandomSource<T>
         where T : unmanaged
-        where G : IRangeRng<G,T>
+        where G : IRandomSource<G,T>
     {
 
     }

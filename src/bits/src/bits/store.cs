@@ -11,7 +11,7 @@ namespace Z0
     using static core;
     using static math;
 
-    partial class Bits
+    partial class bits
     {
         [MethodImpl(Inline), Op]
         public static ref byte store(byte i0, byte i1, in byte src, ref byte dst)

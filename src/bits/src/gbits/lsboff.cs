@@ -21,13 +21,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.lsboff(uint8(src)));
+                return generic<T>(bits.lsboff(uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.lsboff(uint16(src)));
+                return generic<T>(bits.lsboff(uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.lsboff(uint32(src)));
+                return generic<T>(bits.lsboff(uint32(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.lsboff(uint64(src)));
+                return generic<T>(bits.lsboff(uint64(src)));
             else
                 throw no<T>();
         }

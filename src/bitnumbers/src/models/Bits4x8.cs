@@ -17,7 +17,7 @@ namespace Z0
         public static ref Bits4x8 write(uint4 src, byte offset, ref Bits4x8 dst)
         {
             ref var target = ref u32(dst);
-            target = Bits.bitcopy((uint)src << offset, offset, uint4.Width, target);
+            target = bits.bitcopy((uint)src << offset, offset, uint4.Width, target);
             return ref dst;
         }
 

@@ -42,13 +42,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.bfly(n, uint8(x)));
+                return generic<T>(bits.bfly(n, uint8(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.bfly(n, uint16(x)));
+                return generic<T>(bits.bfly(n, uint16(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.bfly(n, uint32(x)));
+                return generic<T>(bits.bfly(n, uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.bfly(n, uint64(x)));
+                return generic<T>(bits.bfly(n, uint64(x)));
             else
                 throw no<T>();
         }
@@ -63,13 +63,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.bfly(n, uint8(x)));
+                return generic<T>(bits.bfly(n, uint8(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.bfly(n, uint16(x)));
+                return generic<T>(bits.bfly(n, uint16(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.bfly(n, uint32(x)));
+                return generic<T>(bits.bfly(n, uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.bfly(n, uint64(x)));
+                return generic<T>(bits.bfly(n, uint64(x)));
             else
                 throw no<T>();
         }
@@ -87,11 +87,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.bfly(n,uint16(x)));
+                return generic<T>(bits.bfly(n,uint16(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.bfly(n,uint32(x)));
+                return generic<T>(bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.bfly(n,uint64(x)));
+                return generic<T>(bits.bfly(n,uint64(x)));
             else
                 throw no<T>();
         }
@@ -109,9 +109,9 @@ namespace Z0
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort))
                 return x;
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.bfly(n,uint32(x)));
+                return generic<T>(bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.bfly(n, uint64(x)));
+                return generic<T>(bits.bfly(n, uint64(x)));
             else
                 throw no<T>();
         }
@@ -128,7 +128,7 @@ namespace Z0
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint))
                 return x;
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.bfly(n,uint64(x)));
+                return generic<T>(bits.bfly(n,uint64(x)));
             else
                 throw no<T>();
         }

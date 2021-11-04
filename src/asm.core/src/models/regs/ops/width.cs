@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static NativeSizeCode width(RegKind src)
-            => (NativeSizeCode)Bits.slice((uint)src, (byte)RegFieldIndex.W, (byte)RegFieldWidth.RegWidth);
+            => (NativeSizeCode)bits.slice((uint)src, (byte)RegFieldIndex.W, (byte)RegFieldWidth.RegWidth);
 
         /// <summary>
         /// Determines the width of a specified operand

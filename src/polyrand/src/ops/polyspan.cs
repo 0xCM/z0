@@ -12,7 +12,7 @@ namespace Z0
     partial struct Sources
     {
         [Op, Closures(Closure)]
-        public static Span<T> polyspan<T>(IRangeSource src, int length, Interval<T> domain, Func<T,bool> filter = null)
+        public static Span<T> polyspan<T>(IBoundSource src, int length, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
         {
             var dst = span<T>(length);

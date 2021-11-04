@@ -41,13 +41,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(Bits.toggle(int8(src), pos));
+                 return generic<T>(bits.toggle(int8(src), pos));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(Bits.toggle(int16(src), pos));
+                 return generic<T>(bits.toggle(int16(src), pos));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(Bits.toggle(int32(src), pos));
+                 return generic<T>(bits.toggle(int32(src), pos));
             else
-                 return generic<T>(Bits.toggle(int64(src), pos));
+                 return generic<T>(bits.toggle(int64(src), pos));
         }
 
         [MethodImpl(Inline)]
@@ -55,13 +55,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(Bits.toggle(uint8(src), pos));
+                 return generic<T>(bits.toggle(uint8(src), pos));
             else if(typeof(T) == typeof(ushort))
-                 return generic<T>(Bits.toggle(uint16(src), pos));
+                 return generic<T>(bits.toggle(uint16(src), pos));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(Bits.toggle(uint32(src), pos));
+                 return generic<T>(bits.toggle(uint32(src), pos));
             else
-                 return generic<T>(Bits.toggle(uint64(src), pos));
+                 return generic<T>(bits.toggle(uint64(src), pos));
         }
 
         [MethodImpl(Inline)]
@@ -69,9 +69,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return generic<T>(Bits.toggle(float32(src), pos));
+                 return generic<T>(bits.toggle(float32(src), pos));
             else if(typeof(T) == typeof(double))
-                 return generic<T>(Bits.toggle(float64(src), pos));
+                 return generic<T>(bits.toggle(float64(src), pos));
             else
                 throw no<T>();
         }

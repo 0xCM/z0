@@ -26,36 +26,36 @@ namespace Z0.Asm
         /// </summary>
         [MethodImpl(Inline)]
         public byte Rm()
-            => Bits.segment(Data, 0, 2);
+            => bits.segment(Data, 0, 2);
 
         [MethodImpl(Inline)]
         public void Rm(byte rm)
-            => Data = Bits.replace(Data, 0, 2, rm);
+            => Data = bits.replace(Data, 0, 2, rm);
 
         /// <summary>
         /// Reads bits [5:3], which specifies a register operand or extends the operation encoding
         /// </summary>
         [MethodImpl(Inline)]
         public byte Reg()
-            => Bits.segment(Data, 3, 5);
+            => bits.segment(Data, 3, 5);
 
         /// <summary>
         /// Specifies bits [5:3], which specifies a register operand or extends the operation encoding
         /// </summary>
         [MethodImpl(Inline)]
         public void Reg(byte reg)
-            => Data = Bits.replace(Data, 3, 5, reg);
+            => Data = bits.replace(Data, 3, 5, reg);
 
         /// <summary>
         /// Reads bits [7:6] of the modrm byte that, together with the r/m field, specifies an operand addressing mode
         /// </summary>
         [MethodImpl(Inline)]
         public byte Mod()
-            => Bits.segment(Data, 6, 7);
+            => bits.segment(Data, 6, 7);
 
         [MethodImpl(Inline)]
         public void Mod(byte mod)
-            => Data = Bits.replace(Data, 6, 7, mod);
+            => Data = bits.replace(Data, 6, 7, mod);
 
         /// <summary>
         /// The encoded bitfield value

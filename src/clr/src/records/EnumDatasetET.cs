@@ -22,7 +22,7 @@ namespace Z0
 
         public string Description {get;}
 
-        public ClrEnumKind DataType {get;}
+        public ClrEnumKind EnumKind {get;}
 
         public int EntryCount {get;}
 
@@ -53,7 +53,7 @@ namespace Z0
             uint[] indices, string[] names, E[] literals, T[] scalars, string[] descriptions)
         {
             Token = token;
-            DataType = type;
+            EnumKind = type;
             EntryCount = tokens.Length;
             Description = description;
             Tokens = tokens;

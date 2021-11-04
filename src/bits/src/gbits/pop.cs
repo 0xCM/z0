@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Pop, Closures(Integers)]
         public static uint pop<T>(T x0, T x1, T x2)
             where T : unmanaged
-                => Bits.pop(force<T,ulong>(x0), force<T,ulong>(x1), force<T,ulong>(x2));
+                => bits.pop(force<T,ulong>(x0), force<T,ulong>(x1), force<T,ulong>(x2));
 
         /// <summary>
         /// Counts the number of enabled primal operand bits
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Pop, Closures(Integers)]
         public static uint pop<T>(T x0, T x1, T x2, T x3)
             where T : unmanaged
-                => Bits.pop(force<T,ulong>(x0), force<T,ulong>(x1), force<T,ulong>(x2), force<T,ulong>(x3));
+                => bits.pop(force<T,ulong>(x0), force<T,ulong>(x1), force<T,ulong>(x2), force<T,ulong>(x3));
 
         /// <summary>
         /// Counts the number of enabled primal operand bits
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Pop, Closures(Integers)]
         public static uint pop<T>(T x0, T x1, T x2, T x3,T x4, T x5, T x6, T x7)
             where T : unmanaged
-                => Bits.pop(
+                => bits.pop(
                     force<T,ulong>(x0),force<T,ulong>(x1), force<T,ulong>(x2), force<T,ulong>(x3),
                     force<T,ulong>(x4),force<T,ulong>(x5), force<T,ulong>(x6), force<T,ulong>(x7)
                     );
@@ -69,13 +69,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return Bits.pop(uint8(src));
+                 return bits.pop(uint8(src));
             else if(typeof(T) == typeof(ushort))
-                 return Bits.pop(uint16(src));
+                 return bits.pop(uint16(src));
             else if(typeof(T) == typeof(uint))
-                 return Bits.pop(uint32(src));
+                 return bits.pop(uint32(src));
             else if(typeof(T) == typeof(ulong))
-                 return Bits.pop(uint64(src));
+                 return bits.pop(uint64(src));
             else
                 return  pop_i(src);
         }
@@ -85,13 +85,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return Bits.pop(int8(src));
+                 return bits.pop(int8(src));
             else if(typeof(T) == typeof(short))
-                 return Bits.pop(int16(src));
+                 return bits.pop(int16(src));
             else if(typeof(T) == typeof(int))
-                 return Bits.pop(int32(src));
+                 return bits.pop(int32(src));
             else if(typeof(T) == typeof(long))
-                 return Bits.pop(int64(src));
+                 return bits.pop(int64(src));
              else
                 throw no<T>();
        }

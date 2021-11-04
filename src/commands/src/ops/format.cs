@@ -19,7 +19,7 @@ namespace Z0
         [Op]
         public static string format(in CmdScript src)
         {
-            var dst = TextTools.buffer();
+            var dst = text.buffer();
             render(src, dst);
             return dst.Emit();
         }
@@ -151,7 +151,7 @@ namespace Z0
         [Op]
         public static void render(CmdTypeInfo src, ITextBuffer dst)
         {
-            dst.Append(src.DataType.Name);
+            dst.Append(src.SourceType.Name);
             var fields = src.Fields.View;;
             var count = fields.Length;
             for(var i=0; i<count; i++)

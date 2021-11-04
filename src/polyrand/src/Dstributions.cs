@@ -23,7 +23,7 @@ namespace Z0
                 => new BinomialSpec<T>(n,p);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static RVar<T> rvar<T>(IRangeSource src, Interval<T> domain)
+        public static RVar<T> rvar<T>(IBoundSource src, Interval<T> domain)
             where T : unmanaged
                 => new RVar<T>(domain,src);
 

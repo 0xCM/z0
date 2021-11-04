@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static math;
 
-     partial class Bits
+     partial class bits
      {
         /// <summary>
         /// Overwrites a target bit segment dst[index..(start + count)] with the corresponding source segment src[index..(start + count)]

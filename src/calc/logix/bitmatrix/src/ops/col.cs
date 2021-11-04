@@ -28,7 +28,7 @@ namespace Z0
         {
             uint col = 0;
             for(byte r = 0; r<A.Order; r++)
-                col = Bits.setif(A[r], (byte)index, col, r);
+                col = bits.setif(A[r], (byte)index, col, r);
             return col;
         }
     }

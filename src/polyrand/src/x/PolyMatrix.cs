@@ -42,7 +42,7 @@ namespace Z0
         /// <typeparam name="N">The column Type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Matrix<M,N,T> Matrix<M,N,T>(this IRangeSource random, Interval<T> domain, M m = default, N n = default)
+        public static Matrix<M,N,T> Matrix<M,N,T>(this IBoundSource random, Interval<T> domain, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -58,7 +58,7 @@ namespace Z0
         /// <typeparam name="N">The dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Matrix<N,T> Matrix<N,T>(this IRangeSource random, N n, T min, T max)
+        public static Matrix<N,T> Matrix<N,T>(this IBoundSource random, N n, T min, T max)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Z0.Matrix.load(n, random.Array<T>(Z0.Matrix<N,T>.Cells, (min,max)));
@@ -88,7 +88,7 @@ namespace Z0
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The column Type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static Matrix256<M,N,T> MatrixBlock<M,N,T>(this IRangeSource random, Interval<T> domain, M m = default, N n = default)
+        public static Matrix256<M,N,T> MatrixBlock<M,N,T>(this IBoundSource random, Interval<T> domain, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <typeparam name="N">The dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-         public static Matrix256<N,T> MatrixBlock<N,T>(this IRangeSource random, Interval<T>? domain = null)
+         public static Matrix256<N,T> MatrixBlock<N,T>(this IBoundSource random, Interval<T>? domain = null)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Z0.Matrix.blockload<N,T>(random.SpanBlocks(n256, domain.ValueOrElse(() => ClosedInterval<T>.Full), CellCalcs.blockcount<N,N,T>(n256)));
@@ -125,7 +125,7 @@ namespace Z0
             where S : unmanaged
                 => random.MatrixBlock<M,N,S>().Convert<T>();
 
-          static Matrix256<N,T> MatrixBlock<N,S,T>(this IRangeSource random, Interval<S>? domain = null, N n = default,  T rep = default)
+          static Matrix256<N,T> MatrixBlock<N,S,T>(this IBoundSource random, Interval<S>? domain = null, N n = default,  T rep = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
             where S : unmanaged
@@ -142,7 +142,7 @@ namespace Z0
          /// <typeparam name="S">The sample type</typeparam>
          /// <typeparam name="T">The matrix element type</typeparam>
          [MethodImpl(Inline)]
-         public static Matrix256<N,float> MatrixBlockF32<N,S,T>(this IRangeSource random, int? min = null, int? max = null, N n = default)
+         public static Matrix256<N,float> MatrixBlockF32<N,S,T>(this IBoundSource random, int? min = null, int? max = null, N n = default)
             where T : unmanaged
             where S : unmanaged
             where N : unmanaged, ITypeNat
@@ -159,7 +159,7 @@ namespace Z0
         /// <typeparam name="S">The sample type</typeparam>
         /// <typeparam name="T">The matrix element type</typeparam>
         [MethodImpl(Inline)]
-        public static  Matrix256<N,double> MatrixBlockF64<N,S,T>(this IRangeSource random, long? min = null, long? max = null, N n = default)
+        public static  Matrix256<N,double> MatrixBlockF64<N,S,T>(this IBoundSource random, long? min = null, long? max = null, N n = default)
             where T : unmanaged
             where S : unmanaged
             where N : unmanaged, ITypeNat

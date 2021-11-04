@@ -14,7 +14,7 @@ namespace Z0
     {
         CmdId CmdId {get;}
 
-        Type DataType {get;}
+        Type SourceType {get;}
 
         Index<FieldInfo> Fields {get;}
     }
@@ -26,7 +26,7 @@ namespace Z0
         CmdId ICmdTypeInfo.CmdId
             => CmdId.from<T>();
 
-        Type ICmdTypeInfo.DataType
+        Type ICmdTypeInfo.SourceType
             => typeof(T);
 
         Index<FieldInfo> ICmdTypeInfo.Fields

@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Rotl, Closures(UInt8x16k)]
         public static BitGrid16<T> rotl<T>(BitGrid16<T> g, byte shift)
             where T : unmanaged
-                => init16<T>(Bits.rotl(g, shift));
+                => init16<T>(bits.rotl(g, shift));
 
         /// <summary>
         /// Circulates grid content clockwise
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Rotl, Closures(UInt8x16x32k)]
         public static BitGrid32<T> rotl<T>(BitGrid32<T> g, byte shift)
             where T : unmanaged
-                => init32<T>(Bits.rotl(g, shift));
+                => init32<T>(bits.rotl(g, shift));
 
         /// <summary>
         /// Circulates grid content clockwise
@@ -42,28 +42,28 @@ namespace Z0
         [MethodImpl(Inline), Rotl, Closures(UnsignedInts)]
         public static BitGrid64<T> rotl<T>(BitGrid64<T> g, byte shift)
             where T : unmanaged
-                => init64<T>(Bits.rotl(g, shift));
+                => init64<T>(bits.rotl(g, shift));
 
         [MethodImpl(Inline)]
         public static BitGrid16<M,N,T> rotl<M,N,T>(BitGrid16<M,N,T> g, byte shift)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Bits.rotl(g.Content,shift);
+                => bits.rotl(g.Content,shift);
 
         [MethodImpl(Inline)]
         public static BitGrid32<M,N,T> rotl<M,N,T>(BitGrid32<M,N,T> g, byte shift)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Bits.rotl(g.Content,shift);
+                => bits.rotl(g.Content,shift);
 
         [MethodImpl(Inline)]
         public static BitGrid64<M,N,T> rotl<M,N,T>(BitGrid64<M,N,T> g, byte shift)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Bits.rotl(g.Content,shift);
+                => bits.rotl(g.Content,shift);
 
         [MethodImpl(Inline)]
         public static BitGrid128<M,N,T> rotl<M,N,T>(in BitGrid128<M,N,T> g, byte shift)

@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Computes the position of the highest enabled source bit, a number between 0 and 7

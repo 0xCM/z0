@@ -72,7 +72,7 @@ namespace Z0
                 Random.Fill(RepCount, ref first(samples));
                 counter.Start();
                 for(var i=0; i<RepCount; i++)
-                    total += Bits.pop(skip(first(samples), i));
+                    total += bits.pop(skip(first(samples), i));
                 counter.Stop();
                 opcount += RepCount;
             }

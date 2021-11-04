@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Bits
+    partial class bits
     {
         [MethodImpl(Inline), Stitch]
         public static byte stitch(byte left, int ldx, byte right, int rdx)

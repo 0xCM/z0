@@ -39,7 +39,7 @@ namespace Z0
         public GfPoly16(ushort src)
         {
             Data = src;
-            Degree = (byte)(15 - Bits.nlz(src));
+            Degree = (byte)(15 - bits.nlz(src));
         }
 
         /// <summary>

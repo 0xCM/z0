@@ -20,21 +20,21 @@ namespace Z0
         public static ref byte pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7, byte pos, ref byte dst)
         {
             if(bit.test(x0, pos))
-                dst = Bits.enable(dst, 0);
+                dst = bits.enable(dst, 0);
             if(bit.test(x1, pos))
-                dst = Bits.enable(dst, 1);
+                dst = bits.enable(dst, 1);
             if(bit.test(x2, pos))
-                dst = Bits.enable(dst, 2);
+                dst = bits.enable(dst, 2);
             if(bit.test(x3, pos))
-                dst = Bits.enable(dst, 3);
+                dst = bits.enable(dst, 3);
             if(bit.test(x4, pos))
-                dst = Bits.enable(dst, 4);
+                dst = bits.enable(dst, 4);
             if(bit.test(x5, pos))
-                dst = Bits.enable(dst, 5);
+                dst = bits.enable(dst, 5);
             if(bit.test(x6, pos))
-                dst = Bits.enable(dst, 6);
+                dst = bits.enable(dst, 6);
             if(bit.test(x7, pos))
-                dst = Bits.enable(dst, 7);
+                dst = bits.enable(dst, 7);
             return ref dst;
         }
 

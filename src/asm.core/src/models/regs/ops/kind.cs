@@ -23,7 +23,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegClassCode @class(RegKind src)
-            => (RegClassCode)Bits.slice((uint)src, (byte)RegFieldIndex.K, (byte)RegFieldWidth.RegClass);
+            => (RegClassCode)bits.slice((uint)src, (byte)RegFieldIndex.K, (byte)RegFieldWidth.RegClass);
 
         /// <summary>
         /// Determines the register class from the operand
@@ -31,6 +31,6 @@ namespace Z0.Asm
         /// <param name="src">The register operand</param>
         [MethodImpl(Inline), Op]
         public static RegClassCode @class(RegOp src)
-            => (RegClassCode)Bits.segment(src.Bitfield, 5, 9);
+            => (RegClassCode)bits.segment(src.Bitfield, 5, 9);
     }
 }

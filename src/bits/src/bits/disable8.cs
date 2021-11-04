@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-     partial class Bits
+     partial class bits
      {
           /// <summary>
           /// Disables a sequence of 8 source bits starting at a specified index

@@ -18,7 +18,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static bit test<T>(in AsmDomain<T> src, uint index)
             where T : unmanaged
-                => Bits.testbit(skip(bytes(src.Bits), index/8), (byte)(index % 8));
+                => bits.testbit(skip(bytes(src.Bits), index/8), (byte)(index % 8));
 
         [Op, Closures(Closure)]
         public static ReadOnlySpan<char> render<T>(in AsmDomain<T> src)
@@ -68,7 +68,7 @@ namespace Z0.Asm
             var content = slice(bytes(src.Bits), 0, size);
             ref var b = ref seek(content, size - 1);
             if(unaligned)
-                b = Bits.trim(b, 0, r);
+                b = bits.trim(b, 0, r);
             return content;
         }
 

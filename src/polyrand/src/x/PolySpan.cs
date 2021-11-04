@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="length">The length of the produced data</param>
         /// <param name="domain">The interval domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static Span<T> Span<T>(this IRangeSource src, int length, T min, T max, Func<T,bool> filter = null)
+        public static Span<T> Span<T>(this IBoundSource src, int length, T min, T max, Func<T,bool> filter = null)
             where T : unmanaged
                 => polyspan<T>(src, length, (min, max), filter);
 
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static Span<T> Span<T>(this IRangeSource src, int length, Interval<T> domain)
+        public static Span<T> Span<T>(this IBoundSource src, int length, Interval<T> domain)
             where T : unmanaged
         {
             var dst = span<T>(length);
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="length">The length of the produced data</param>
         /// <param name="domain">The interval domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static Span<T> Span<T>(this IRangeSource src, int length, Interval<T> domain, Func<T,bool> filter)
+        public static Span<T> Span<T>(this IBoundSource src, int length, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
         {
             var dst = span<T>(length);
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static Span<T> NonZeroSpan<T>(this IRangeSource src, int length, Interval<T> domain)
+        public static Span<T> NonZeroSpan<T>(this IBoundSource src, int length, Interval<T> domain)
             where T : unmanaged
                 => src.Span<T>(length, domain, x => Rng.nonz(x));
 
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static Span<T> NonZeroSpan<T>(this IRangeSource source, int length)
+        public static Span<T> NonZeroSpan<T>(this IBoundSource source, int length)
             where T : unmanaged
                 => source.Span<T>(length, ClosedInterval<T>.Full, x => Rng.nonz(x));
     }

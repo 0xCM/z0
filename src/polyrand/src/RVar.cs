@@ -21,7 +21,7 @@ namespace Z0
 
         public readonly Interval<T> Domain;
 
-        public RVar(Interval<T> domain, IRangeSource source)
+        public RVar(Interval<T> domain, IBoundSource source)
         {
             Domain = domain;
             stream = source.Stream<T>(domain);

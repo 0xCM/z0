@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="max">The exclusive cell value upper bound</param>
         /// <param name="block">The target block index</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static ref readonly SpanBlock16<T> SpanBlock<T>(this IRangeSource src, T min, T max, in SpanBlock16<T> dst, int block)
+        public static ref readonly SpanBlock16<T> SpanBlock<T>(this IBoundSource src, T min, T max, in SpanBlock16<T> dst, int block)
             where T : unmanaged
         {
             src.Fill(min,max,dst.CellBlock(block));
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The target block index</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static ref readonly SpanBlock32<T> SpanBlock<T>(this IRangeSource src, T min, T max, in SpanBlock32<T> dst, int block)
+        public static ref readonly SpanBlock32<T> SpanBlock<T>(this IBoundSource src, T min, T max, in SpanBlock32<T> dst, int block)
             where T : unmanaged
         {
             src.Fill(min,max,dst.CellBlock(block));
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The target block index</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static ref readonly SpanBlock64<T> SpanBlock<T>(this IRangeSource random, T min, T max, in SpanBlock64<T> dst, int block)
+        public static ref readonly SpanBlock64<T> SpanBlock<T>(this IBoundSource random, T min, T max, in SpanBlock64<T> dst, int block)
             where T : unmanaged
         {
             random.Fill(min,max,dst.CellBlock(block));
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The target block index</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static ref readonly SpanBlock128<T> SpanBlock<T>(this IRangeSource random, T min, T max, in SpanBlock128<T> dst, int block)
+        public static ref readonly SpanBlock128<T> SpanBlock<T>(this IBoundSource random, T min, T max, in SpanBlock128<T> dst, int block)
             where T : unmanaged
         {
             random.Fill(min,max,dst.CellBlock(block));
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The target block index</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static ref readonly SpanBlock256<T> SpanBlock<T>(this IRangeSource random, T min, T max, in SpanBlock256<T> dst, int block)
+        public static ref readonly SpanBlock256<T> SpanBlock<T>(this IBoundSource random, T min, T max, in SpanBlock256<T> dst, int block)
             where T : unmanaged
         {
             random.Fill(min,max,dst.CellBlock(block));
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The target block index</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static ref readonly SpanBlock512<T> SpanBlock<T>(this IRangeSource random, T min, T max, in SpanBlock512<T> dst, int block)
+        public static ref readonly SpanBlock512<T> SpanBlock<T>(this IBoundSource random, T min, T max, in SpanBlock512<T> dst, int block)
             where T : unmanaged
         {
             random.Fill(min,max,dst.CellBlock(block));
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock8<T> SpanBlock<T>(this IRangeSource source, W8 w)
+        public static SpanBlock8<T> SpanBlock<T>(this IBoundSource source, W8 w)
             where T : unmanaged
                 => source.Stream<T>().ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock16<T> SpanBlock<T>(this IRangeSource source, W16 w)
+        public static SpanBlock16<T> SpanBlock<T>(this IBoundSource source, W16 w)
             where T : unmanaged
                 => source.Stream<T>().ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -190,7 +190,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock16<T> SpanBlock<T>(this IRangeSource source, W16 w, T min, T max)
+        public static SpanBlock16<T> SpanBlock<T>(this IBoundSource source, W16 w, T min, T max)
             where T : unmanaged
                 => source.Stream<T>((min,max)).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -202,7 +202,7 @@ namespace Z0
         /// <param name="min">The inclusive cell value lower bound</param>
         /// <param name="max">The inclusive cell value upper bound</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock32<T> SpanBlock<T>(this IRangeSource source, W32 w, T min, T max)
+        public static SpanBlock32<T> SpanBlock<T>(this IBoundSource source, W32 w, T min, T max)
             where T : unmanaged
                 => source.SpanBlocks<T>(w,min,max,1);
 
@@ -214,7 +214,7 @@ namespace Z0
         /// <param name="min">The inclusive cell value lower bound</param>
         /// <param name="max">The inclusive cell value upper bound</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock64<T> SpanBlock<T>(this IRangeSource source, W64 w, T min, T max)
+        public static SpanBlock64<T> SpanBlock<T>(this IBoundSource source, W64 w, T min, T max)
             where T : unmanaged
                 => source.SpanBlocks<T>(w,min,max,1);
 
@@ -226,7 +226,7 @@ namespace Z0
         /// <param name="min">The inclusive cell value lower bound</param>
         /// <param name="max">The inclusive cell value upper bound</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock128<T> SpanBlock<T>(this IRangeSource source, W128 w, T min, T max)
+        public static SpanBlock128<T> SpanBlock<T>(this IBoundSource source, W128 w, T min, T max)
             where T : unmanaged
                 => source.SpanBlocks<T>(w,min,max,1);
 
@@ -238,7 +238,7 @@ namespace Z0
         /// <param name="min">The inclusive cell value lower bound</param>
         /// <param name="max">The inclusive cell value upper bound</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock256<T> SpanBlock<T>(this IRangeSource source, W256 w, T min, T max)
+        public static SpanBlock256<T> SpanBlock<T>(this IBoundSource source, W256 w, T min, T max)
             where T : unmanaged
                 => source.SpanBlocks<T>(w,min,max,1);
 
@@ -250,7 +250,7 @@ namespace Z0
         /// <param name="min">The inclusive cell value lower bound</param>
         /// <param name="max">The inclusive cell value upper bound</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock512<T> SpanBlock<T>(this IRangeSource source, W512 w, T min, T max)
+        public static SpanBlock512<T> SpanBlock<T>(this IBoundSource source, W512 w, T min, T max)
             where T : unmanaged
                 => source.SpanBlocks<T>(w,min,max,1);
 
@@ -347,7 +347,7 @@ namespace Z0
         /// <param name="domain">A domain to which values are constrained</param>
         /// <param name="filter">An domain refinement filter</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock16<T> SpanBlock<T>(this IRangeSource random, W16 w, Interval<T> domain, Func<T,bool> filter)
+        public static SpanBlock16<T> SpanBlock<T>(this IBoundSource random, W16 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => random.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -359,7 +359,7 @@ namespace Z0
         /// <param name="domain">A domain to which values are constrained</param>
         /// <param name="filter">An domain refinement filter</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock32<T> SpanBlock<T>(this IRangeSource random, W32 w, Interval<T> domain, Func<T,bool> filter)
+        public static SpanBlock32<T> SpanBlock<T>(this IBoundSource random, W32 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => random.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -371,7 +371,7 @@ namespace Z0
         /// <param name="domain">A domain to which values are constrained</param>
         /// <param name="filter">An domain refinement filter</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock64<T> SpanBlock<T>(this IRangeSource random, W64 w, Interval<T> domain, Func<T,bool> filter)
+        public static SpanBlock64<T> SpanBlock<T>(this IBoundSource random, W64 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => random.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -383,7 +383,7 @@ namespace Z0
         /// <param name="domain">A domain to which values are constrained</param>
         /// <param name="filter">An domain refinement filter</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock128<T> SpanBlock<T>(this IRangeSource random, W128 w, Interval<T> domain, Func<T,bool> filter)
+        public static SpanBlock128<T> SpanBlock<T>(this IBoundSource random, W128 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => random.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -395,7 +395,7 @@ namespace Z0
         /// <param name="domain">A domain to which values are constrained</param>
         /// <param name="filter">An domain refinement filter</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock256<T> SpanBlock<T>(this IRangeSource random, W256 w, Interval<T> domain, Func<T,bool> filter)
+        public static SpanBlock256<T> SpanBlock<T>(this IBoundSource random, W256 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => random.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -407,7 +407,7 @@ namespace Z0
         /// <param name="domain">A domain to which values are constrained</param>
         /// <param name="filter">An domain refinement filter</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock512<T> SpanBlock<T>(this IRangeSource source, W512 w, Interval<T> domain, Func<T,bool> filter)
+        public static SpanBlock512<T> SpanBlock<T>(this IBoundSource source, W512 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => source.Stream(domain,filter).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -418,7 +418,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="domain">A domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock16<T> SpanBlock<T>(this IRangeSource source, W16 w, Interval<T> domain)
+        public static SpanBlock16<T> SpanBlock<T>(this IBoundSource source, W16 w, Interval<T> domain)
             where T : unmanaged
                 => source.Stream(domain).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -429,7 +429,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="domain">A domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock32<T> SpanBlock<T>(this IRangeSource random, W32 w, Interval<T> domain)
+        public static SpanBlock32<T> SpanBlock<T>(this IBoundSource random, W32 w, Interval<T> domain)
             where T : unmanaged
                 => random.Stream(domain).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -440,7 +440,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="domain">A domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock64<T> SpanBlock<T>(this IRangeSource random, W64 w, Interval<T> domain)
+        public static SpanBlock64<T> SpanBlock<T>(this IBoundSource random, W64 w, Interval<T> domain)
             where T : unmanaged
                 => random.Stream(domain).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -451,7 +451,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="domain">A domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock128<T> SpanBlock<T>(this IRangeSource random, W128 w, Interval<T> domain)
+        public static SpanBlock128<T> SpanBlock<T>(this IBoundSource random, W128 w, Interval<T> domain)
             where T : unmanaged
                 => random.Stream(domain).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -462,7 +462,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="domain">A domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock256<T> SpanBlock<T>(this IRangeSource random, W256 w, Interval<T> domain)
+        public static SpanBlock256<T> SpanBlock<T>(this IBoundSource random, W256 w, Interval<T> domain)
             where T : unmanaged
                 => random.Stream(domain).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
 
@@ -473,7 +473,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <param name="domain">A domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock512<T> SpanBlock<T>(this IRangeSource random, W512 w, Interval<T> domain)
+        public static SpanBlock512<T> SpanBlock<T>(this IBoundSource random, W512 w, Interval<T> domain)
             where T : unmanaged
                 => random.Stream(domain).ToSpan(B.cellblocks<T>(w,1)).Blocked(w);
     }

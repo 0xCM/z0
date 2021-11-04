@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
     using static Root;
 
-    partial class Bits
+    partial class bits
     {
         /// <summary>
         /// Extracts a contiguous range of bits from the source

@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T replicate<T>(T src, byte i0, byte i1, byte count)
             where T : unmanaged
-                => force<T>(Bits.replicate(force<T,ulong>(src), i0, i1, count));
+                => force<T>(bits.replicate(force<T,ulong>(src), i0, i1, count));
 
         /// <summary>
         /// [000...000101] -> [101101...101101]
@@ -38,7 +38,7 @@ namespace Z0
         {
             var index = msb(src);
             var count = (byte)((int)width<T>() / (index + 1) +  1);
-            var replicated = Bits.replicate(force<T,ulong>(src), 0, index, count);
+            var replicated = bits.replicate(force<T,ulong>(src), 0, index, count);
             return force<T>(replicated);
         }
 
@@ -51,6 +51,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T replicate<T>(byte src)
             where T : unmanaged
-                => force<T>(Bits.replicate((ulong)src, 0, 7, (byte)(width<T>()/8)));
+                => force<T>(bits.replicate((ulong)src, 0, 7, (byte)(width<T>()/8)));
     }
 }

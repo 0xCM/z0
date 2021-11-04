@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class Bits
+    partial class bits
     {
         [MethodImpl(Inline), Op]
         public static ushort join(byte a, byte b)

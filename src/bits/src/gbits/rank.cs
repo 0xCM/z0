@@ -22,13 +22,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Bits.rank(uint8(src), pos);
+                return bits.rank(uint8(src), pos);
             else if(typeof(T) == typeof(ushort))
-                return Bits.rank(uint16(src), pos);
+                return bits.rank(uint16(src), pos);
             else if(typeof(T) == typeof(uint))
-                return Bits.rank(uint32(src), pos);
+                return bits.rank(uint32(src), pos);
             else if(typeof(T) == typeof(ulong))
-                return Bits.rank(uint64(src), pos);
+                return bits.rank(uint64(src), pos);
             else
                 throw no<T>();
         }

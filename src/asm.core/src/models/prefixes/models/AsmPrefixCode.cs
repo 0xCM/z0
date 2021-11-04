@@ -25,19 +25,19 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public readonly AsmPrefixKind Kind()
-            => (AsmPrefixKind)Bits.segment(Data, 24, 27);
+            => (AsmPrefixKind)bits.segment(Data, 24, 27);
 
         [MethodImpl(Inline)]
         public void Kind(AsmPrefixKind kind)
-            => Bits.replace(Data, 24, 27, (uint)kind);
+            => bits.replace(Data, 24, 27, (uint)kind);
 
         [MethodImpl(Inline)]
         public uint Content()
-            => Bits.segment(Data,0,23);
+            => bits.segment(Data,0,23);
 
         [MethodImpl(Inline)]
         public void Content(uint src)
-            => Bits.replace(Data,0,23,src);
+            => bits.replace(Data,0,23,src);
 
         public uint Encoded
         {

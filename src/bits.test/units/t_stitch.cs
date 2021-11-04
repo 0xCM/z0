@@ -34,7 +34,7 @@ namespace Z0
         public void split_basecases()
         {
             var src = 0b11111111_10101010_11111111_11111111_10101010_11111111_11100111_11111111;
-            Bits.split(src, 24, out var x0, out var x1);
+            bits.split(src, 24, out var x0, out var x1);
             var y0 = 0b11111111_11100111_11111111ul;
             var y1 = 0b11111111_10101010_11111111_11111111_10101010ul;
 

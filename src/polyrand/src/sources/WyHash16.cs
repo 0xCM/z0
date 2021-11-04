@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     /// <remarks>Algorithms take from https://lemire.me/blog/2019/07/03/a-fast-16-bit-random-number-generator/</remarks>
     [Rng(nameof(WyHash16))]
-    public struct WyHash16 : IRangeRng<WyHash16,ushort>
+    public struct WyHash16 : IRandomSource<WyHash16,ushort>
     {
         [MethodImpl(Inline), Op]
         public static ushort hash16(uint input, uint key)

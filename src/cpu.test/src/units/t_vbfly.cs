@@ -13,8 +13,8 @@ namespace Z0
             {
                 var x = Random.Next<ulong>();
                 var y = gbits.bfly(n16, x);
-                Bits.split(x, out var x0, out var x1, out var x2, out var x3);
-                Bits.split(y, out var y0, out var y1, out var y2, out var y3);
+                bits.split(x, out var x0, out var x1, out var x2, out var x3);
+                bits.split(y, out var y0, out var y1, out var y2, out var y3);
                 Claim.eq(x0,y0);
                 Claim.eq(x1,y2);
                 Claim.eq(x2,y1);
@@ -29,8 +29,8 @@ namespace Z0
             {
                 var x = Random.Next<uint>();
                 var y = gbits.bfly(n8, x);
-                Bits.split(x, out var x0, out var x1, out var x2, out var x3);
-                Bits.split(y, out var y0, out var y1, out var y2, out var y3);
+                bits.split(x, out var x0, out var x1, out var x2, out var x3);
+                bits.split(y, out var y0, out var y1, out var y2, out var y3);
                 Claim.eq(x0,y0);
                 Claim.eq(x1,y2);
                 Claim.eq(x2,y1);
@@ -49,7 +49,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<uint>();
-                var b = BitStrings.scalar(Bits.bfly(n4, a));
+                var b = BitStrings.scalar(bits.bfly(n4, a));
                 var c = BitStrings.scalar(a);
 
                 Claim.eq(BitStrings.scalar<byte>(c[0..3]), BitStrings.scalar<byte>(b[0..3]));

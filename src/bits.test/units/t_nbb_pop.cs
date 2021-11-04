@@ -18,7 +18,7 @@ namespace Z0
                 var expect = 0ul;
                 var bcbytes = bc.Bytes;
                 for(var j=0; j< bcbytes.Length; j++)
-                    expect += Bits.pop(bcbytes[j]);
+                    expect += bits.pop(bcbytes[j]);
                 Claim.eq(expect, bcpop);
             }
 

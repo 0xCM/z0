@@ -16,7 +16,7 @@ namespace Z0
     {
         public CmdId CmdId => CmdId.from<T>();
 
-        public Type DataType => typeof(T);
+        public Type SourceType => typeof(T);
 
         public string Format()
             => CmdId.Format();
@@ -27,11 +27,11 @@ namespace Z0
         public Index<FieldInfo> Fields
         {
             [MethodImpl(Inline)]
-            get => DataType.DeclaredInstanceFields();
+            get => SourceType.DeclaredInstanceFields();
         }
 
         [MethodImpl(Inline)]
         public static implicit operator CmdTypeInfo(CmdTypeInfo<T> src)
-            => new CmdTypeInfo(src.DataType, src.Fields);
+            => new CmdTypeInfo(src.SourceType, src.Fields);
     }
 }

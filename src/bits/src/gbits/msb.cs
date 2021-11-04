@@ -21,13 +21,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Bits.msb(uint8(src));
+                return bits.msb(uint8(src));
             else if(typeof(T) == typeof(ushort))
-                return Bits.msb(uint16(src));
+                return bits.msb(uint16(src));
             else if(typeof(T) == typeof(uint))
-                return Bits.msb(uint32(src));
+                return bits.msb(uint32(src));
             else if(typeof(T) == typeof(ulong))
-                return Bits.msb(uint64(src));
+                return bits.msb(uint64(src));
             else
                 throw no<T>();
         }

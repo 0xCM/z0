@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="min">The inclusive minimum value</param>
         /// <param name="max">The exclusive maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static ConstPair<T> ConstPair<T>(this IRangeSource src, T min, T max)
+        public static ConstPair<T> ConstPair<T>(this IBoundSource src, T min, T max)
             where T : unmanaged
                 => Sources.kpair(src, min, max);
 
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="min">The inclusive minimum value</param>
         /// <param name="max">The exclusive maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static ConstTriple<T> ConstTriple<T>(this IRangeSource src, T min, T max)
+        public static ConstTriple<T> ConstTriple<T>(this IBoundSource src, T min, T max)
             where T : unmanaged
                 => Sources.ktriple<T>(src, min, max);
 

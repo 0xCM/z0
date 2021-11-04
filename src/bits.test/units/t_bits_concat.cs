@@ -17,7 +17,7 @@ namespace Z0
             {
                 ref readonly var lo = ref skip(s0,i);
                 ref readonly var hi = ref skip(s1,i);
-                var c = Bits.join(lo,hi);
+                var c = bits.join(lo,hi);
                 var c0 = (byte)c;
                 var c1 = (byte)(c >> 8);
                 Claim.eq(lo,c0);
@@ -39,7 +39,7 @@ namespace Z0
                 ref readonly var a2 = ref skip(s2,i);
                 ref readonly var a3 = ref skip(s3,i);
 
-                var b = Bits.join(a0,a1,a2,a3);
+                var b = bits.join(a0,a1,a2,a3);
                 var b0 = (byte)b;
                 var b1 = (byte)(b >> 8);
                 var b2 = (byte)(b >> 16);

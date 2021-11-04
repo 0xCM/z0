@@ -33,7 +33,7 @@ namespace Z0.Asm
         public BitWidth OffsetWidth
         {
             [MethodImpl(Inline)]
-            get => Bits.effsize(Offset)*8;
+            get => bits.effsize(Offset)*8;
         }
     }
 }

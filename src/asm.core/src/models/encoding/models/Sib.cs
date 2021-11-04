@@ -23,27 +23,27 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public byte Base()
-            => Bits.segment(Data, 0, 2);
+            => bits.segment(Data, 0, 2);
 
         [MethodImpl(Inline)]
         public void Base(byte b)
-            => Data = Bits.replace(Data, 0, 2, b);
+            => Data = bits.replace(Data, 0, 2, b);
 
         [MethodImpl(Inline)]
         public byte Index()
-            => Bits.segment(Data, 3, 5);
+            => bits.segment(Data, 3, 5);
 
         [MethodImpl(Inline)]
         public void Index(byte i)
-            => Data = Bits.replace(Data, 3, 5, i);
+            => Data = bits.replace(Data, 3, 5, i);
 
         [MethodImpl(Inline)]
         public byte Scale()
-            => Bits.segment(Data, 6, 7);
+            => bits.segment(Data, 6, 7);
 
         [MethodImpl(Inline)]
         public void Scale(byte s)
-            => Data = Bits.replace(Data, 6, 7, s);
+            => Data = bits.replace(Data, 6, 7, s);
 
         public MemoryScale ScaleFactor
         {

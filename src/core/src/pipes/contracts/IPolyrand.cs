@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// Retrieves the random stream navigator, if supported
         /// </summary>
-        Option<IRngNav> Navigator {get;}
+        Option<IRandomNav> Navigator {get;}
 
         Label IRng.Name
             => "Polyrand";

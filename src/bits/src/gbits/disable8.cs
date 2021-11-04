@@ -25,11 +25,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return default;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.disable8(uint16(src), index));
+                return generic<T>(bits.disable8(uint16(src), index));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.disable8(uint32(src), index));
+                return generic<T>(bits.disable8(uint32(src), index));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.disable8(uint64(src), index));
+                return generic<T>(bits.disable8(uint64(src), index));
             else
                 throw no<T>();
         }

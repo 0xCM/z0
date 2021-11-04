@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public partial class Bits
+    public partial class bits
     {
         const NumericKind Closure = UnsignedInts;
 

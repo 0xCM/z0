@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] Array<T>(this IRangeSource src, int length, Interval<T> domain)
+        public static T[] Array<T>(this IBoundSource src, int length, Interval<T> domain)
             where T : unmanaged
                 => src.Stream(domain).TakeArray(length);
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] Array<T>(this IRangeSource src, int length, T min, T max, Func<T,bool> filter)
+        public static T[] Array<T>(this IBoundSource src, int length, T min, T max, Func<T,bool> filter)
             where T : unmanaged
                 => src.Stream((min,max),filter).TakeArray(length);
 
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] Array<T>(this IRangeSource src, int length, T min, T max)
+        public static T[] Array<T>(this IBoundSource src, int length, T min, T max)
             where T : unmanaged
                 => src.Array<T>(length, (min, max));
     }

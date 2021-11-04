@@ -10,7 +10,7 @@ namespace Z0
     /// Characterizes a random stream navigator
     /// </summary>
     [Free]
-    public interface IRngNav
+    public interface IRandomNav
     {
         /// <summary>
         /// Moves the stream a specified number of steps forward
@@ -30,7 +30,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal element type</typeparam>
     [Free]
-    public interface IRngNav<T> : IRngNav, IRangeRng<T>
+    public interface IRandomNav<T> : IRandomNav, IRandomSource<T>
         where T : unmanaged
     {
 

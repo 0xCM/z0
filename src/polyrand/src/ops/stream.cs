@@ -10,7 +10,7 @@ namespace Z0
     partial struct Sources
     {
         [Op, Closures(Closure)]
-        public static IEnumerable<T> stream<T>(IRangeSource src, Interval<T> domain, Func<T,bool> filter = null)
+        public static IEnumerable<T> stream<T>(IBoundSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
         {
             while(true)

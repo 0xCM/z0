@@ -107,7 +107,7 @@ namespace Z0
             return dst;
         }
 
-        public static QuestionResponse<T> response<T>(in Question<T> question, IRangeSource random)
+        public static QuestionResponse<T> response<T>(in Question<T> question, IBoundSource random)
             where T : unmanaged
         {
             var count = question.Choices.Length;
@@ -116,7 +116,7 @@ namespace Z0
             return response(question.QuestionId, chosen);
         }
 
-        public static SurveyResponse<T> response<T>(in Survey<T> survey, IRangeSource random)
+        public static SurveyResponse<T> response<T>(in Survey<T> survey, IBoundSource random)
             where T : unmanaged
         {
             var answered = new QuestionResponse<T>[survey.Questions.Length];

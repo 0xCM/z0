@@ -53,7 +53,7 @@ namespace Z0
             dst.TypeName = field.DeclaringType.Name;
             dst.FieldId = field.MetadataToken;
             dst.FieldName = field.Name;
-            dst.DataType = field.DeclaringType.EnumScalarKind();
+            dst.EnumKind = field.DeclaringType.EnumScalarKind();
             dst.LiteralValue = (ulong)NumericBox.rebox(field.GetRawConstantValue(), UInt64k);
             dst.Position = index;
             return ref dst;

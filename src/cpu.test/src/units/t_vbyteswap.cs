@@ -27,7 +27,7 @@ namespace Z0
 
             Claim.veq(y16,z16);
             for(var i=0; i<z16s.Length; i+= 2)
-                Claim.eq(Bits.byteswap(z16s[i]), z16s[i+1]);
+                Claim.eq(bits.byteswap(z16s[i]), z16s[i+1]);
 
             var x32 = cpu.vparts(n128,
                 0xFFFF0000, 0x0000FFFF,

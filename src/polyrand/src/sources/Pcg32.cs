@@ -12,7 +12,7 @@ namespace Z0
     using api = Pcg;
 
     [Rng(nameof(Pcg32))]
-    public struct Pcg32 : IRngNav<uint>, IRangeRng<Pcg32,ulong>
+    public struct Pcg32 : IRandomNav<uint>, IRandomSource<Pcg32,ulong>
     {
         [MethodImpl(Inline)]
         internal Pcg32(ulong s0, ulong? index = null)

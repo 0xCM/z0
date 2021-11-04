@@ -11,10 +11,10 @@ namespace Z0
     {
         public void ntz_outline()
         {
-            Claim.eq((byte)3, Bits.ntz((byte)0b111000));
-            Claim.eq(2u, Bits.ntz(0b0001011000100u));
-            Claim.eq(5u, Bits.ntz(0b000101100000u));
-            Claim.eq(3ul, Bits.ntz(Pow2.pow(3)));
+            Claim.eq((byte)3, bits.ntz((byte)0b111000));
+            Claim.eq(2u, bits.ntz(0b0001011000100u));
+            Claim.eq(5u, bits.ntz(0b000101100000u));
+            Claim.eq(3ul, bits.ntz(Pow2.pow(3)));
         }
 
         public void ntz_8()

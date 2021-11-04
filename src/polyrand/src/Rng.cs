@@ -114,11 +114,11 @@ namespace Z0
             => create(new XorShift1024(seed ?? PolySeed1024.Default));
 
         [MethodImpl(Inline), Op]
-        public static IPolyrand create(IRangeRng<ulong> src)
+        public static IPolyrand create(IRandomSource<ulong> src)
             => new Polyrand(src);
 
         [MethodImpl(Inline), Op]
-        public static IPolyrand create(IRngNav<ulong> src)
+        public static IPolyrand create(IRandomNav<ulong> src)
             => new Polyrand(src);
     }
 }
