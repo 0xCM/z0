@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static CmdFlag enable(in CmdFlagSpec flag)
-            => new CmdFlag(flag.Index, bit.On);
+            => new CmdFlag(flag.Name, bit.On);
     }
 }

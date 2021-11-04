@@ -33,7 +33,7 @@ namespace Z0.Asm
 
             }
 
-            RunProjectScript(project.Project, path, McBuild);
+            RunProjectScript(project, path, McBuild);
 
             return result;
         }

@@ -40,7 +40,7 @@ namespace Z0
                 var i = SQ.index(content, AsciCode.Colon);
                 var name = text.trim(text.format(SQ.left(content,i)));
                 var desc = text.trim(text.format(SQ.right(content,i)));
-                var flag = Cmd.flagspec(k++, name, desc);
+                var flag = Cmd.flagspec(name, desc);
                 dst.Add(flag);
             }
             return dst.ViewDeposited();

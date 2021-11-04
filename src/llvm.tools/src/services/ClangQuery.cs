@@ -7,7 +7,7 @@ namespace Z0.llvm.clang
     using System;
     using System.IO;
 
-    [Tool(LlvmToolNames.clang_query)]
+    [Tool(LlvmNames.Tools.clang_query)]
     public sealed class ClangQuery : LlvmTool<ClangQuery>
     {
         Interpreter Controller;

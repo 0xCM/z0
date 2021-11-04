@@ -7,6 +7,7 @@ namespace Z0.llvm
     using static Root;
     using static core;
     using static Equivalence;
+    using static ProjectScriptNames;
 
     partial class LlvmCmd
     {

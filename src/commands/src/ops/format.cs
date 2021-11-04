@@ -98,7 +98,7 @@ namespace Z0
 
         [Op]
         public static string format(in CmdFlagSpec src)
-            => string.Format("{0:D3} {1,-34} {2}", src.Index, src.Name, src.Description);
+            => string.Format("{1,-34} {2}", src.Name, src.Description);
 
         public static string format(ArgPrefix src)
         {

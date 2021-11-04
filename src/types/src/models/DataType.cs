@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Types
 {
     using N = DataKindNames;
 
@@ -204,6 +204,5 @@ namespace Z0
         public const string Cell = "cell";
 
         public const string Block = "block";
-
     }
 }

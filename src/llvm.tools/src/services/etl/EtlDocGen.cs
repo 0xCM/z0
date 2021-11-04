@@ -8,7 +8,7 @@ namespace Z0.llvm
 
     using static Root;
     using static core;
-    using static Names;
+    using static LlvmNames;
 
     public ref struct EtlDocGen
     {

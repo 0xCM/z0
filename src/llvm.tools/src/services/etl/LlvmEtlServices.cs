@@ -10,7 +10,7 @@ namespace Z0.llvm
     using Asm;
     using records;
 
-    using static Names;
+    using static LlvmNames;
     using static Root;
     using static core;
 
@@ -129,7 +129,7 @@ namespace Z0.llvm
         Outcome ProjectCollect(IProjectWs ws)
         {
             var result = Outcome.Success;
-            result = ObjDump.Consolidate(ws.Project);
+            result = ObjDump.Consolidate(ws);
             if(result.Fail)
                 return result;
 
@@ -170,7 +170,6 @@ namespace Z0.llvm
             var result = Outcome.Success;
             var src = ws.OutFiles(FS.Sym).View;
             var dst = ws.Table<ObjSymRow>(ws.Project.Format());
-            Write(string.Format("Collecting symbols from {0} files", src.Length));
             var symbols = Nm.Collect(src, dst);
             return result;
         }

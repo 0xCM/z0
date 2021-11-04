@@ -13,7 +13,6 @@ namespace Z0
 
     using A = AsciBlock24;
     using B = ByteBlock24;
-
     using api = AsciBlocks;
 
     /// <summary>

@@ -90,7 +90,7 @@ namespace Z0.Asm
             var result = Outcome.Success;
 
             var tool = Wf.LlvmObjDump();
-            var rows = tool.Consolidated(State.Project()).View;
+            var rows = tool.Consolidated(State.ProjectId()).View;
             var count = rows.Length;
             for(var i=0; i<count; i++)
             {

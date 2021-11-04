@@ -195,19 +195,6 @@ namespace Z0.Asm
             var count = producer.Produce(FS.FolderPath.Empty, Toolspace.nasm, hosts);
         }
 
-        void ShowOptions()
-        {
-            var protocol = Cmd.protocol(Cmd.prefix('-','-'), ' ');
-            const string @case = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
-            var result = Cmd.parse(@case, protocol, out var spec);
-            if(result.Ok)
-            {
-                Wf.Status(spec.Format());
-            }
-            else
-                Wf.Error(result.Message);
-        }
-
         void ShowCases2()
         {
             const string LogName = "CoreCLR_Windows_NT__x64__Debug.log";

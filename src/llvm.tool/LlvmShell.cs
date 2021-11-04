@@ -34,7 +34,7 @@ namespace Z0.llvm
             var next = default(IAppCmdService);
             switch(tool)
             {
-                case LlvmToolNames.clang_query:
+                case LlvmNames.Tools.clang_query:
                     next = ClangQuery.create(Wf).With(this);
                     break;
             }

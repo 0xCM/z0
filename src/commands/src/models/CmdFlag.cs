@@ -11,15 +11,19 @@ namespace Z0
 
     public readonly struct CmdFlag
     {
-        public ushort Index {get;}
+        public string Name {get;}
 
         public bit State {get;}
 
         [MethodImpl(Inline)]
-        public CmdFlag(ushort index, bit state)
+        public CmdFlag(string name, bit state)
         {
-            Index = index;
+            Name = name;
             State = state;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArg(CmdFlag src)
+            => src.State ? new CmdArg(src.Name) : CmdArg.Empty;
     }
 }

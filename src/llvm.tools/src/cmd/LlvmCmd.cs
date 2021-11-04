@@ -4,7 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    public sealed partial class LlvmCmd : AppCmdService<LlvmCmd>
+    using System;
+
+    using static core;
+
+    public sealed partial class LlvmCmd : AppCmdService<LlvmCmd,CmdShellState>
     {
         LlvmEtlServices LlvmEtl;
 
@@ -24,23 +28,43 @@ namespace Z0.llvm
 
         LlvmDb _Db;
 
-        IProjectWs _Project;
+        IProjectWs Data;
+
+        // IProjectWs Project(string id)
+        // {
+        //     var ws = State.Project(id);
+        //     LoadProjectSources(ws);
+        //     return ws;
+        // }
 
         IProjectWs Project()
-            => _Project;
-
-        IProjectWs Project(string id)
-        {
-            _Project = Ws.Project(id);
-            return Project();
-        }
+            => State.Project();
 
         protected override void Initialized()
         {
             LlvmEtl = Wf.LlvmEtl();
             Toolbase = Wf.LLvmToolbase();
             LlvmPaths = Wf.LlvmPaths();
-            _Project = Ws.Project("llvm.data");
+            Data = Ws.Project("llvm.data");
+            State.Init(Wf, Ws);
+            State.Project(Data);
+        }
+
+        Outcome ObjDump(FS.FilePath src, FS.FolderPath dst)
+        {
+            var tool = LlvmNames.Tools.llvm_objdump;
+            var cmd = Cmd.cmdline(Ws.Tools().Script(tool, "run").Format(PathSeparator.BS));
+            var vars = WsVars.create();
+            vars.DstDir = dst;
+            vars.SrcDir = src.FolderPath;
+            vars.SrcFile = src.FileName;
+            var result = OmniScript.Run(cmd, vars.ToCmdVars(), out var response);
+            if(result)
+            {
+               var items = ParseCmdResponse(response);
+               iter(items, item => Write(item));
+            }
+            return result;
         }
     }
 }

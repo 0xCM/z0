@@ -14,19 +14,15 @@ namespace Z0
     {
         FS.FolderPath _CurrentDir;
 
-        ToolId _Tool;
-
-        ProjectId _Project;
+        ProjectId _ProjectId;
 
         FS.Files _Files;
 
-        FS.FolderPath _DataSource;
-
         ApiPath _Api;
 
-        Arrow<Subject> _Channel;
-
         IWorkspace _Workspace;
+
+        IProjectWs _Project;
 
         protected DevWs Ws;
 
@@ -41,28 +37,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Arrow<Subject> Channel()
-            => _Channel;
-
-        [MethodImpl(Inline)]
         public IWorkspace Workspace()
             => _Workspace;
 
         [MethodImpl(Inline)]
         public Outcome Workspace(string name)
             => Ws.Select(name, out _Workspace);
-
-        public Arrow<Subject> Channel(Arrow<Subject> channel)
-        {
-            _Channel = channel;
-            return Channel();
-        }
-
-        public Arrow<Subject> Channel(Subject src, Subject dst)
-        {
-            _Channel = (src,dst);
-            return Channel();
-        }
 
         [MethodImpl(Inline)]
         public ApiPath Api()
@@ -76,35 +56,26 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ToolId Tool()
-            => _Tool;
+        public ProjectId ProjectId()
+            => _ProjectId;
 
         [MethodImpl(Inline)]
-        public ToolId Tool(ToolId id)
-        {
-            _Tool = id;
-            return Tool();
-        }
-
-        [MethodImpl(Inline)]
-        public FS.FolderPath DataSource()
-            => _DataSource;
-
-        [MethodImpl(Inline)]
-        public FS.FolderPath DataSource(FS.FolderPath dir)
-        {
-            _DataSource = dir;
-            return DataSource();
-        }
-
-        [MethodImpl(Inline)]
-        public ProjectId Project()
+        public IProjectWs Project()
             => _Project;
 
         [MethodImpl(Inline)]
-        public ProjectId Project(ProjectId id)
+        public IProjectWs Project(ProjectId id)
         {
-            _Project = id;
+            _ProjectId = id;
+            _Project = Ws.Project(id);
+            return Project();
+        }
+
+        [MethodImpl(Inline)]
+        public IProjectWs Project(IProjectWs ws)
+        {
+            _ProjectId = ws.Project;
+            _Project = ws;
             return Project();
         }
 
@@ -145,11 +116,8 @@ namespace Z0
         public CmdShellState()
         {
             _CurrentDir = FS.FolderPath.Empty;
-            _Tool = default;
-            _DataSource = FS.FolderPath.Empty;
             _Files = array<FS.FilePath>();
             _Api = ApiPath.Empty;
-            _Channel = (Subject.Empty,Subject.Empty);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Z0.Asm
             if(empty(script))
                 return (false, string.Format("{0} not supported", kind));
 
-            var project = State.Project();
+            var project = State.ProjectId();
             var outdir = Ws.Projects().DataOut(project);
             var cmd = Cmd.cmdline(Ws.Tools().Script(Toolspace.dumpbin, script).Format(PathSeparator.BS));
             var input = State.Files().View;

@@ -49,7 +49,6 @@ namespace Z0
             return paths.ToArray();
         }
 
-
         FS.FilePath EmitScript(CmdId cmd, FileModule[] src, FS.FileExt ext, FS.FolderPath dst)
         {
             var sid = ScriptId(cmd, ext);
@@ -78,13 +77,6 @@ namespace Z0
             Args =  alloc<ToolCmdArg<Flag,object>>(MaxVarCount);
             ArgIndex = 0;
             CmdSymbols = Symbols.index<CmdId>();
-        }
-
-        public DumpBin With<T>(Flag option, T value)
-        {
-            if(ArgIndex < MaxVarIndex)
-                Args[ArgIndex++] = Cmd.toolarg(option, (object)value);
-            return this;
         }
     }
 }

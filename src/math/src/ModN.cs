@@ -27,9 +27,61 @@ namespace Z0
             _M = (ulong.MaxValue / _N) + 1;
         }
 
-        [MethodImpl(Inline), Op]
-        public static ModN create(uint n)
-            => new ModN(n);
+        /// <summary>
+        /// Computes a % N
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        [MethodImpl(Inline)]
+        public uint mod(uint a)
+            => (uint) Math128.mulhi(_M * a, _N);
+
+        /// <summary>
+        /// Computes the quotient a / N
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        [MethodImpl(Inline)]
+        public uint div(uint a)
+            => (uint)Math128.mulhi(_M, a);
+
+        /// <summary>
+        /// Computes whether a % n == 0
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        [MethodImpl(Inline)]
+        public bool divisible(uint a)
+            => a * _M <= _M - 1;
+
+        /// <summary>
+        /// Computes both the quotient and remainder
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        [MethodImpl(Inline)]
+        public void divrem(uint a, out uint q, out uint r)
+        {
+            q = div(a);
+            r = mod(a);
+        }
+
+        [MethodImpl(Inline)]
+        public ref readonly ConstPair<uint> divrem(in ModN n, uint a, out ConstPair<uint> dst)
+        {
+            dst = new ConstPair<uint>(div(a), mod(a));
+            return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        public uint add(uint a, uint b)
+            => mod(a + b);
+
+        [MethodImpl(Inline)]
+        public uint mul(uint a, uint b)
+            => mod(a * b);
+
+        public uint N
+        {
+            [MethodImpl(Inline)]
+            get => (uint)_N;
+        }
 
         /// <summary>
         /// Computes whether a % n == 0
@@ -67,60 +119,8 @@ namespace Z0
         public static uint div(in ModN n, uint a)
             => n.div(a);
 
-        /// <summary>
-        /// Computes a % N
-        /// </summary>
-        /// <param name="a">The dividend</param>
-        [MethodImpl(Inline)]
-        public uint mod(uint a)
-            => (uint) Math128.mulhi(_M * a, _N);
-
-        /// <summary>
-        /// Computes the quotient a / N
-        /// </summary>
-        /// <param name="a">The dividend</param>
-        [MethodImpl(Inline)]
-        public uint div(uint a)
-            => (uint) Math128.mulhi(_M, a);
-
-        /// <summary>
-        /// Computes whether a % n == 0
-        /// </summary>
-        /// <param name="a">The dividend</param>
-        [MethodImpl(Inline)]
-        public bool divisible(uint a)
-            => a * _M <= _M - 1;
-
-        /// <summary>
-        /// Computes both the quotient and remainder
-        /// </summary>
-        /// <param name="a">The dividend</param>
-        [MethodImpl(Inline)]
-        public void divrem(uint a, out uint q, out uint r)
-        {
-            q = div(a);
-            r = mod(a);
-        }
-
-        [MethodImpl(Inline)]
-        public ref readonly ConstPair<uint> divrem(in ModN n, uint a, out ConstPair<uint> dst)
-        {
-            dst = new ConstPair<uint>(div(a),mod(a));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public uint add(uint a, uint b)
-            => mod(a + b);
-
-        [MethodImpl(Inline)]
-        public uint mul(uint a, uint b)
-            => mod(a * b);
-
-        public uint N
-        {
-            [MethodImpl(Inline)]
-            get => (uint)_N;
-        }
+        [MethodImpl(Inline), Op]
+        public static ModN create(uint n)
+            => new ModN(n);
     }
 }

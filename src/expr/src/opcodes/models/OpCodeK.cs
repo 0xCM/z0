@@ -12,17 +12,18 @@ namespace Z0.Expr
 
     using api = OpCodes;
 
-    public readonly struct OpCode
+    public readonly struct OpCode<K>
+        where K : unmanaged
     {
         public readonly Label Name;
 
-        internal readonly ulong Data;
+        internal readonly K Data;
 
         [MethodImpl(Inline)]
-        public OpCode(Label name, ulong data)
+        public OpCode(Label name, K data)
         {
-            Data = data;
             Name = name;
+            Data = data;
         }
 
         public Domain Domain
@@ -31,10 +32,10 @@ namespace Z0.Expr
             get => api.domain(this);
         }
 
-        public Hex64 Value
+        public Hex32 Code
         {
             [MethodImpl(Inline)]
-            get => api.value(this);
+            get => api.code(this);
         }
 
         public string Format()
@@ -42,5 +43,9 @@ namespace Z0.Expr
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator OpCode(OpCode<K> src)
+            => api.untype(src);
     }
 }

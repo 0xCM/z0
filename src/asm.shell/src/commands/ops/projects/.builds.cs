@@ -5,51 +5,44 @@
 namespace Z0.Asm
 {
     using static ProjectScriptNames;
+    using static WsAtoms;
+    using static Root;
 
     partial class AsmCmdService
     {
-        [CmdOp(".mc-build")]
-        Outcome BuildMc(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), arg(args,0).Value, McBuild, "asm");
+        [CmdOp(".build")]
+        Outcome BuildProject(CmdArgs args)
+            => RunProjectScript(State.Project(), Build);
 
-        [CmdOp(".c-build")]
-        Outcome BuildCProj(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), arg(args,0).Value, CBuild, "c");
+        [CmdOp(".c-ast")]
+        Outcome DumpCAst(CmdArgs args)
+            => RunProjectScript(args, DumpAst, c);
 
-        [CmdOp(".cpp-build")]
-        Outcome BuildCpp(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), arg(args,0).Value, CppBuild, "cpp");
+        [CmdOp(".c-layouts")]
+        Outcome CLayoutDump(CmdArgs args)
+            => RunProjectScript(args, DumpLayouts, c);
 
-        [CmdOp(".llc-sse")]
-        Outcome LlcSse(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), string.Empty, LlcBuildSse);
+        [CmdOp(".cpp-build-run")]
+        Outcome BuildRunCpp(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var home = State.Project().Home();
+            result = OmniScript.RunProjectScript(home, arg(args,0).Value, CppBuild, false, out var flows);
+            if(result.Fail)
+                return result;
+            return RunExe(flows);
+         }
 
-        [CmdOp(".llc-sse2")]
-        Outcome LlcSse2(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), string.Empty, LlcBuildSse2);
+        [CmdOp(".c-build-run")]
+        Outcome BuildRunC(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var home = State.Project().Home();
+            result = OmniScript.RunProjectScript(home, arg(args,0).Value, CBuild, false, out var flows);
+            if(result.Fail)
+                return result;
 
-        [CmdOp(".llc-sse3")]
-        Outcome LlcSse3(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), string.Empty, LlcBuildSse3);
-
-        [CmdOp(".llc-sse41")]
-        Outcome LlcSse41(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), string.Empty, LlcBuildSse41);
-
-        [CmdOp(".llc-sse42")]
-        Outcome LlcSse42(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), string.Empty, LlcBuildSse42);
-
-        [CmdOp(".llc-avx")]
-        Outcome LlcAvx(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), string.Empty, LlcBuildAvx);
-
-        [CmdOp(".llc-avx2")]
-        Outcome LlcAvx2(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), string.Empty, LlcBuildAvx2);
-
-        [CmdOp(".llc-avx512")]
-        Outcome LlcAvx512(CmdArgs args)
-            => ProjectScripts.RunScript(State.Project(), string.Empty, LlcBuildAvx512);
+            return RunExe(flows);
+        }
     }
 }

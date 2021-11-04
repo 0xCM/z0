@@ -13,7 +13,7 @@ namespace Z0.llvm
     using records;
 
     using static Root;
-    using static Names;
+    using static LlvmNames;
     using static core;
 
     public sealed class LlvmDb : AppService<LlvmDb>

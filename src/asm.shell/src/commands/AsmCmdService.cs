@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Root;
     using static core;
 
-    public sealed partial class AsmCmdService : AppCmdService<AsmCmdService>
+    public sealed partial class AsmCmdService : AppCmdService<AsmCmdService,AsmShellState>
     {
         NativeBuffer CodeBuffer;
 
@@ -50,17 +50,12 @@ namespace Z0.Asm
 
         IWorkspace OutWs;
 
-        //IProjectSet ProjectWs;
-
         IWorkspace DataSources;
 
         TableLoaders Loaders;
 
         TableEmitters Emitters;
 
-        ProjectScripts ProjectScripts;
-
-        AsmShellState State;
 
         FS.FolderPath AsmRoot
         {
@@ -81,7 +76,6 @@ namespace Z0.Asm
             CodeSize = 0;
             _Assembled = array<byte>();
             ResPack = CliMemoryMap.Empty;
-            State = new();
         }
 
         protected override void Initialized()
@@ -104,8 +98,6 @@ namespace Z0.Asm
             Emitters = Wf.TableEmitters();
             IntelIntrinsics = Wf.IntelIntrinsics();
             State.Init(Wf, Ws);
-            State.Project("cmodels");
-            ProjectScripts = Wf.ProjectScripts();
         }
 
         protected override void Disposing()
@@ -117,14 +109,6 @@ namespace Z0.Asm
         protected override void Error<T>(T content)
         {
             Write(content, FlairKind.Error);
-        }
-
-        FS.Files Files(FS.Files src, bool write = true)
-        {
-            State.Files(src);
-            if(write)
-                iter(src.View, f => Write(f.ToUri()));
-            return src;
         }
 
         CliMemoryMap OpenResPack()
@@ -139,7 +123,6 @@ namespace Z0.Asm
 
         public FS.FolderPath OutRoot()
             => OutWs.Root;
-
 
         Outcome BuildAsmExe(string id)
         {

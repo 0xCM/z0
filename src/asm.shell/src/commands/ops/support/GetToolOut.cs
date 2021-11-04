@@ -19,8 +19,5 @@ namespace Z0.Asm
 
         FS.FolderPath GetToolOut(ToolId tool)
             => Ws.Output().Subdir(tool.Format());
-
-        FS.FolderPath GetToolOut(CmdArgs args, ToolId tool)
-            => args.Length > 0 ? OutRoot() + FS.folder(arg(args,0).Value) : GetToolOut(tool);
     }
 }

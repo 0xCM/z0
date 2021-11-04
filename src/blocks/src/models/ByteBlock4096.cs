@@ -12,6 +12,7 @@ namespace Z0
     using static core;
 
     using B = ByteBlock4096;
+    using api = ByteBlocks;
 
     [StructLayout(LayoutKind.Sequential, Size = Size, Pack=1)]
     public struct ByteBlock4096 : IDataBlock<B>

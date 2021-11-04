@@ -15,24 +15,18 @@ namespace Z0
     public readonly struct CmdFlagSpec
     {
         /// <summary>
-        /// The index of this flag relative to other flags in a collection
-        /// </summary>
-        public readonly ushort Index;
-
-        /// <summary>
         /// The flag name
         /// </summary>
-        public readonly string Name;
+        public string Name {get;}
 
         /// <summary>
         /// The flag description
         /// </summary>
-        public readonly string Description;
+        public string Description {get;}
 
         [MethodImpl(Inline)]
-        public CmdFlagSpec(ushort index, string name, string desc)
+        public CmdFlagSpec(string name, string desc)
         {
-            Index = index;
             Name = name;
             Description = desc;
         }

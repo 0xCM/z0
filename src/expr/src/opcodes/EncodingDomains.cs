@@ -2,12 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Expr
 {
-    partial class AsmCmdService
+    using Types;
+
+    public readonly struct EncodingDomains
     {
-        [CmdOp(".mc-disasm")]
-        Outcome HexDecode(CmdArgs args)
-            => HexDecode(arg(args,0).Value);
+        public static Domain Api => 1;
+
+        public static Domain Asm => 2;
     }
 }

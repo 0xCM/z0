@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static CmdFlag disable(in CmdFlagSpec flag)
-            => new CmdFlag(flag.Index, bit.Off);
+            => new CmdFlag(flag.Name, bit.Off);
     }
 }

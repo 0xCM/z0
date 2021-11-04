@@ -21,7 +21,7 @@ namespace Z0.llvm
         const string FormatMarker = "file format ";
 
         public override ToolId Id
-            => LlvmToolNames.llvm_objdump;
+            => LlvmNames.Tools.llvm_objdump;
 
         static bool DefinesBlockLabel(ReadOnlySpan<char> src)
         {
@@ -51,9 +51,6 @@ namespace Z0.llvm
             }
             return result;
         }
-
-        FS.Files OutFiles(ProjectId project, FileKind kind)
-            => Ws.Projects().OutFiles(project, kind);
 
         public Index<ObjDumpRow> Consolidated(FS.FilePath src)
         {
@@ -91,10 +88,10 @@ namespace Z0.llvm
             return Consolidated(src);
         }
 
-        public Outcome Consolidate(ProjectId project)
+        public Outcome Consolidate(IProjectWs ws)
         {
-            var src = OutFiles(project, FileKind.ObjAsm).View;
-            var dst = Ws.Project(project).Table<ObjDumpRow>(project.Format());
+            var src = ws.OutFiles(FileKind.ObjAsm).View;
+            var dst = ws.Table<ObjDumpRow>(ws.Project.Format());
             var result = Outcome.Success;
             var count = src.Length;
             var formatter = Tables.formatter<ObjDumpRow>(ObjDumpRow.RenderWidths);
@@ -218,7 +215,6 @@ namespace Z0.llvm
                         var y = text.index(asm, Chars.Tab);
                         if(y > 0)
                         {
-
                             DataParser.parse(text.trim(text.left(asm,y)), out row.Encoding);
                             row.Asm = text.trim(text.right(asm,y)).Replace(Chars.Tab, Chars.Space);
                         }
@@ -236,7 +232,7 @@ namespace Z0.llvm
         public Outcome DumpObjects(ReadOnlySpan<FS.FilePath> src, FS.FolderPath outdir, Action<CmdResponse> handler)
         {
             var count = src.Length;
-            var tool = LlvmToolNames.llvm_objdump;
+            var tool = LlvmNames.Tools.llvm_objdump;
 
             var cmd = Cmd.cmdline(Ws.Tools().Script(tool, "run").Format(PathSeparator.BS));
             var result = Outcome.Success;

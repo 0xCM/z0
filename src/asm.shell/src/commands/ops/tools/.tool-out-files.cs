@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".tool-out-files", "Tool-specific Output Files -> State")]
+        [CmdOp(".tool-out-files")]
         public Outcome ToolOutFiles(CmdArgs args)
         {
             var result = GetToolOut(args, out var dir);

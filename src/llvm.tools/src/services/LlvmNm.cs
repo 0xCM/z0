@@ -13,7 +13,7 @@ namespace Z0.llvm
     public sealed class LlvmNm : ToolService<LlvmNm>
     {
         public override ToolId Id
-            => LlvmToolNames.llvm_nm;
+            => LlvmNames.Tools.llvm_nm;
 
         public ReadOnlySpan<ObjSymRow> Read(FS.FilePath path)
         {

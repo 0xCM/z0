@@ -15,7 +15,7 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
-            LoadProjectSources("asm", "hex");
+            LoadProjectSources(State.Project(), "hex");
             var src = State.Files().View;
             var count = src.Length;
             var files = alloc<FS.FilePath>(count);

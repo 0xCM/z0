@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines scalar shift operator classifiers
     /// </summary>
-    public enum ScalarShiftKind : byte
+    public enum LogicalShiftKind : byte
     {
         /// <summary>
         /// Shift left logical

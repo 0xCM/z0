@@ -20,10 +20,9 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static ConstPair<ulong> srl(in ConstPair<ulong> x, byte offset)
             => offset < 64
-              ?  Tuples.@const((x.Right >> offset), (x.Left >> offset) | ((x.Right << 1) << 63 - offset))
+              ? Tuples.@const((x.Right >> offset), (x.Left >> offset) | ((x.Right << 1) << 63 - offset))
               : offset < 128
               ? Tuples.@const(z64, x.Left >> (offset - 64))
               : ConstPair.zero(z64);
-
     }
 }

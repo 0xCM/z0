@@ -11,16 +11,13 @@ namespace Z0
 
     public readonly struct CmdArg<T>
     {
-        public ushort Index {get;}
-
         public string Name {get;}
 
         public T Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdArg(ushort index, T value)
+        public CmdArg(ushort pos, T value)
         {
-            Index = index;
             Value = value;
             Name = EmptyString;
         }
@@ -28,7 +25,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public CmdArg(ushort index, string name, T value)
         {
-            Index = index;
             Value = value;
             Name = name;
         }
@@ -39,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdArg(CmdArg<T> src)
-            => new CmdArg(src.Index, src.Name, src.Value.ToString());
+            => new CmdArg(src.Name, src.Value.ToString());
 
         public static CmdArg<T> Empty
             => new CmdArg<T>(0, default(T));

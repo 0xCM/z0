@@ -16,29 +16,31 @@ namespace Z0.Expr
     {
         const NumericKind Closure = UnsignedInts;
 
+        const byte DomainWidth = 16;
+
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static OpCode<K> opcode<K>(Label name, Domain table, Hex16 op)
+        public static OpCode<K> encode<K>(Label name, Domain d, Hex32 code)
             where K : unmanaged
         {
-            var encoded = (ulong)table |(ulong)op <<16;
+            var encoded = (ulong)d | (ulong)code << DomainWidth;
             return new OpCode<K>(name, @as<ulong,K>(encoded));
         }
 
         [MethodImpl(Inline), Op]
-        public static OpCode opcode(Label name, Domain table, Hex16 op)
+        public static OpCode encode(Label name, Domain d, Hex32 code)
         {
-            var encoded = (ulong)table |(ulong)op <<16;
+            var encoded = (ulong)d | (ulong)code << DomainWidth;
             return new OpCode(name, encoded);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Hex64 value<K>(OpCode<K> src)
+        public static Hex32 code<K>(OpCode<K> src)
             where K : unmanaged
-                => (bw64(src.Data) >> 16);
+                => (uint)(bw64(src.Data) >> DomainWidth);
 
         [MethodImpl(Inline), Op]
-        public static Hex64 value(OpCode src)
-            => src.Data >> 16;
+        public static Hex32 code(OpCode src)
+            => (uint)(src.Data >> DomainWidth);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Domain domain<K>(OpCode<K> src)
@@ -56,7 +58,7 @@ namespace Z0.Expr
 
         public static string format(OpCode src)
         {
-            var val = value(src).Format();
+            var val = code(src).Format();
             var tbl = src.Domain;
             var name = src.Name;
             return string.Format("{0} {1} {2}:{3}",name, (char)LogicSym.Def, tbl, val);

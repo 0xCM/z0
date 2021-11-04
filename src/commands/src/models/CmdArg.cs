@@ -11,32 +11,20 @@ namespace Z0
 
     public readonly struct CmdArg
     {
-        public readonly uint Index;
+        public string Name {get;}
 
-        public readonly string Name;
-
-        public readonly string Value;
+        public string Value {get;}
 
         [MethodImpl(Inline)]
         public CmdArg(string value)
         {
-            Index = 0;
             Value = value;
             Name = EmptyString;
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(uint index, string value)
+        public CmdArg(string name, string value)
         {
-            Index = index;
-            Value = value;
-            Name = EmptyString;
-        }
-
-        [MethodImpl(Inline)]
-        public CmdArg(uint index, string name, string value)
-        {
-            Index = index;
             Value = value;
             Name = name;
         }
@@ -61,12 +49,8 @@ namespace Z0
             => arg.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArg((int index, string value) src)
-            => new CmdArg((ushort)src.index, src.value);
-
-        [MethodImpl(Inline)]
         public static implicit operator CmdArg(string value)
-            => new CmdArg(0, value);
+            => new CmdArg(value);
 
         public static CmdArg Empty
             => new CmdArg(EmptyString);

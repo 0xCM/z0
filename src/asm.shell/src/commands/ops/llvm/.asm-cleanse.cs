@@ -17,10 +17,10 @@ namespace Z0.Asm
         Outcome CleanseAsm()
         {
             var result = Outcome.Success;
-            var cmd = Cmd.cmdline(Ws.Tools().Script(LlvmToolNames.llvm_mc, "cleanse").Format(PathSeparator.BS));
+            var cmd = Cmd.cmdline(Ws.Tools().Script(LlvmNames.Tools.llvm_mc, "cleanse").Format(PathSeparator.BS));
             var src = State.Files(FS.S).View;
             var count = src.Length;
-            var outdir = (Ws.Projects().OutDir(State.Project().Id) + FS.folder("cleansed")).Create();
+            var outdir = (Ws.Projects().OutDir(State.ProjectId().Id) + FS.folder("cleansed")).Create();
 
             for(var i=0; i<count; i++)
             {

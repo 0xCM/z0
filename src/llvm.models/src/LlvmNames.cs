@@ -4,21 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    [LiteralProvider]
-    public readonly struct LlvmToolNames
-    {
-        public const string clang_query = "clang-query";
-
-        public const string llvm_nm = "llvm-nm";
-
-        public const string llvm_mc = "llvm-mc";
-
-        public const string llc = "llc";
-
-        public const string llvm_objdump ="llvm-objdump";
-    }
-
-    public readonly struct Names
+    public readonly struct LlvmNames
     {
         public readonly struct Datasets
         {
@@ -68,6 +54,8 @@ namespace Z0.llvm
             public const string llc = "llc";
 
             public const string llvm_objdump ="llvm-objdump";
+
+            public const string llvm_readobj = "llvm-readobj";
         }
     }
 }
