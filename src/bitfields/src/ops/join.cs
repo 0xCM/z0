@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class math
+    using static Root;
+
+    partial struct Bitfields
     {
         [MethodImpl(Inline), Op]
         public static ushort join(byte a0, byte a2)

@@ -9,14 +9,14 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmFormExpr : ISyntaxPart<AsmFormExpr>
+    public readonly struct AsmFormInfo : ISyntaxPart<AsmFormInfo>
     {
-        public AsmOpCodeExpr OpCode {get;}
+        public AsmOpCodeString OpCode {get;}
 
-        public AsmSigExpr Sig {get;}
+        public AsmSigInfo Sig {get;}
 
         [MethodImpl(Inline)]
-        public AsmFormExpr(AsmOpCodeExpr opcode, AsmSigExpr sig)
+        public AsmFormInfo(AsmOpCodeString opcode, AsmSigInfo sig)
         {
             OpCode = opcode;
             Sig = sig;
@@ -41,11 +41,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmFormExpr src)
+        public bool Equals(AsmFormInfo src)
             => OpCode == src.OpCode && Sig == src.Sig;
 
         public override bool Equals(object src)
-            => src is AsmFormExpr x && Equals(x);
+            => src is AsmFormInfo x && Equals(x);
 
         public override int GetHashCode()
             => (int)FastHash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
@@ -57,10 +57,10 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmFormExpr((AsmOpCodeExpr oc, AsmSigExpr sig) src)
-            => new AsmFormExpr(src.oc, src.sig);
+        public static implicit operator AsmFormInfo((AsmOpCodeString oc, AsmSigInfo sig) src)
+            => new AsmFormInfo(src.oc, src.sig);
 
-        public static AsmFormExpr Empty
-            => new AsmFormExpr(AsmOpCodeExpr.Empty, AsmSigExpr.Empty);
+        public static AsmFormInfo Empty
+            => new AsmFormInfo(AsmOpCodeString.Empty, AsmSigInfo.Empty);
     }
 }

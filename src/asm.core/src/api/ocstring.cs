@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmOpCodeExpr ocexpr(string src)
-            => new AsmOpCodeExpr(src);
+        public static AsmOpCodeString ocstring(string src)
+            => new AsmOpCodeString(src);
     }
 }

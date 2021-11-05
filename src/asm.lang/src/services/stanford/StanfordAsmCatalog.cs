@@ -53,21 +53,21 @@ namespace Z0.Asm
         /// <summary>
         /// Retrieves the forms present in the catalog
         /// </summary>
-        public ReadOnlySpan<AsmFormExpr> DeriveFormExprssions()
+        public ReadOnlySpan<AsmFormInfo> DeriveFormExprssions()
         {
             var imported = LoadAsset();
             var count = imported.Length;
-            var buffer = span<AsmFormExpr>(count);
+            var buffer = span<AsmFormInfo>(count);
             var j=0u;
             var k=0u;
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(imported, i);
                 if(AsmParser.sigxpr(row.Instruction, out var sig))
-                    seek(buffer, k++) = (asm.ocexpr(row.OpCode), sig);
+                    seek(buffer, k++) = (asm.ocstring(row.OpCode), sig);
                 else
                 {
-                    seek(buffer, k++) = AsmFormExpr.Empty;
+                    seek(buffer, k++) = AsmFormInfo.Empty;
                     Wf.Warn($"The opcode row {row.OpCode} could not be parsed");
                 }
             }
@@ -145,7 +145,7 @@ namespace Z0.Asm
             return imports;
         }
 
-        public void EmitForms(ReadOnlySpan<AsmFormExpr> src)
+        public void EmitForms(ReadOnlySpan<AsmFormInfo> src)
             => Wf.AsmFormPipe().Emit(src, Db.Table<AsmFormRecord>(TargetFolder));
 
         Outcome parse(ushort seq, in TextLine src, ref StokeAsmAssetRow dst)

@@ -251,7 +251,7 @@ namespace Z0.Asm
             => string.Format("{0} {1}", src.Statement.FormatPadded(), comment(src));
 
         [Op]
-        public static string format(in AsmOffsetLabel label, in AsmFormExpr src, byte[] encoded)
+        public static string format(in AsmOffsetLabel label, in AsmFormInfo src, byte[] encoded)
             => string.Format(InstInfoPattern,
                 label,
                 encoded.Length,
@@ -287,7 +287,7 @@ namespace Z0.Asm
             => string.Format("{0}:{1}", src.Caller, src.LocalOffset);
 
         [Op]
-        public static string format(AsmFormExpr src)
+        public static string format(AsmFormInfo src)
             => string.Format("({0})<{1}>", src.Sig, src.OpCode);
         [Op]
         public static string format(in AsmCaller src)

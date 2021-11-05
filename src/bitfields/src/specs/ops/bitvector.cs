@@ -21,7 +21,7 @@ namespace Z0
         public static BitfieldModel bitvector(string name, ReadOnlySpan<ListItem> src)
         {
             var count = src.Length;
-            var segs = alloc<BitfieldSeg>(count);
+            var segs = alloc<BitfieldSegModel>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var item = ref skip(src,i);

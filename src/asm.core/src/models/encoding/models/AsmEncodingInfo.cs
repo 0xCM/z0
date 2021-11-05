@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// The form used to produce the encoded bits from the statement
         /// </summary>
-        public AsmFormExpr Form {get;}
+        public AsmFormInfo Form {get;}
 
         /// <summary>
         /// The encoded statement
@@ -32,7 +32,7 @@ namespace Z0.Asm
         public AsmBitstring Bits {get;}
 
         [MethodImpl(Inline)]
-        public AsmEncodingInfo(AsmFormExpr form, AsmExpr statement, AsmHexCode hex, AsmBitstring bits)
+        public AsmEncodingInfo(AsmFormInfo form, AsmExpr statement, AsmHexCode hex, AsmBitstring bits)
         {
             Form = form;
             Statement = statement;
@@ -43,7 +43,7 @@ namespace Z0.Asm
         /// <summary>
         /// The signature to which the statement conforms
         /// </summary>
-		public AsmSigExpr Sig
+		public AsmSigInfo Sig
         {
             [MethodImpl(Inline)]
             get => Form.Sig;
@@ -52,7 +52,7 @@ namespace Z0.Asm
         /// <summary>
         /// The op code that deterimines the encoding
         /// </summary>
-        public AsmOpCodeExpr OpCode
+        public AsmOpCodeString OpCode
         {
             [MethodImpl(Inline)]
             get => Form.OpCode;

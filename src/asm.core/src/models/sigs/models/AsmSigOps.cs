@@ -4,18 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential, Pack=1)]
-    public struct SdmOpCode
+    public struct AsmSigOps
     {
-        public uint OpCodeKey;
+        public byte OpCount;
 
-        public CharBlock16 Mnemonic;
+        public AsmSigOp Op1;
 
-        public CharBlock64 Operands;
+        public AsmSigOp Op2;
 
-        public CharBlock48 Expr;
+        public AsmSigOp Op3;
+
+        public AsmSigOp Op4;
     }
 }

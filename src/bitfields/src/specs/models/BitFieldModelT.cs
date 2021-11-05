@@ -25,10 +25,10 @@ namespace Z0
         /// </summary>
         public readonly uint TotalWidth;
 
-        readonly Index<BitfieldSeg<T>> Data;
+        readonly Index<BitfieldSegModel<T>> Data;
 
         [MethodImpl(Inline)]
-        public BitFieldModel(Identifier name, Index<BitfieldSeg<T>> segments, uint width)
+        public BitFieldModel(Identifier name, Index<BitfieldSegModel<T>> segments, uint width)
         {
             Name = name;
             SegCount = segments.Count;
@@ -36,13 +36,13 @@ namespace Z0
             TotalWidth = width;
         }
 
-        public ref BitfieldSeg<T> this[uint i]
+        public ref BitfieldSegModel<T> this[uint i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];
         }
 
-        public Span<BitfieldSeg<T>> Segments
+        public Span<BitfieldSegModel<T>> Segments
         {
             [MethodImpl(Inline)]
             get => Data.Edit;
@@ -57,7 +57,7 @@ namespace Z0
             => bw32(Seg(index).Offset);
 
         [MethodImpl(Inline)]
-        public ref BitfieldSeg<T> Seg(int index)
+        public ref BitfieldSegModel<T> Seg(int index)
             => ref Data[index];
     }
 }

@@ -7,9 +7,9 @@ namespace Z0.Asm
     partial struct AsmParser
     {
         [Op]
-        public static Outcome formxpr(string src, out AsmFormExpr dst)
+        public static Outcome formxpr(string src, out AsmFormInfo dst)
         {
-            dst = AsmFormExpr.Empty;
+            dst = AsmFormInfo.Empty;
             var result = Outcome.Success;
 
             result = text.unfence(src, SigFence, out var sigexpr);
@@ -24,7 +24,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return (false, FenceNotFound.Format(OpCodeFence, src));
 
-            dst = new AsmFormExpr(asm.ocexpr(opcode), _sig);
+            dst = new AsmFormInfo(asm.ocstring(opcode), _sig);
             return true;
         }
 

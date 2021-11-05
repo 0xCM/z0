@@ -22,7 +22,7 @@ namespace Z0.Asm
         const byte MaxRexCode = 0x4F;
 
         [MethodImpl(Inline), Op]
-        public static bit rex(in AsmOpCodeExpr src)
+        public static bit rex(in AsmOpCodeString src)
             => src.Data.Contains("REX", StringComparison.InvariantCultureIgnoreCase);
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace Z0
             => width(src.Segments);
 
         [MethodImpl(Inline), Op]
-        public static uint width(ReadOnlySpan<BitfieldSeg> src)
+        public static uint width(ReadOnlySpan<BitfieldSegModel> src)
         {
             var count = src.Length;
             var w = 0u;

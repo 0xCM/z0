@@ -16,7 +16,7 @@ namespace Z0
         public static bool bitvector(in BitfieldModel src)
             => src.SegCount == src.TotalWidth;
 
-        public static string format<K>(in BitfieldSeg<K> src)
+        public static string format<K>(in BitfieldSegModel<K> src)
             where K : unmanaged
         {
             var i = endpos(src.Offset,src.Width);
@@ -30,7 +30,7 @@ namespace Z0
         public static string typename(in BitfieldModel src)
             => src.IsBitvector ? "bitvector" : "bitfield";
 
-        public static string typename(in BitfieldSeg src)
+        public static string typename(in BitfieldSegModel src)
             => src.Width == 1 ? nameof(bit) : string.Format("bits<{0}>", src.Width);
 
         static string decl(in BitfieldModel src)
@@ -53,7 +53,7 @@ namespace Z0
             return dst.Emit();
         }
 
-        public static string format(in BitfieldSeg src)
+        public static string format(in BitfieldSegModel src)
         {
             const string P1 = "{0:D2} {1}[{2}]:{3}";
             const string P2 = "{0:D2} {1}[{2}:{3}]:{4}";

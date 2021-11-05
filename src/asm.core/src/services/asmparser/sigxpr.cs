@@ -9,7 +9,7 @@ namespace Z0.Asm
     partial struct AsmParser
     {
         [Op]
-        public static Outcome sigxpr(string src, out AsmSigExpr dst)
+        public static Outcome sigxpr(string src, out AsmSigInfo dst)
         {
             if(text.empty(src))
                 return true;

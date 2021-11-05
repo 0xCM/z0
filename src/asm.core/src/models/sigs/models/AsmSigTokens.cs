@@ -322,7 +322,7 @@ namespace Z0.Asm
         [SymSource(tokens)]
         public enum MoffsToken : byte
         {
-            [Symbol("moffs8", "A segbase-relative address of width 32")]
+            [Symbol("moffs8", "A segbase-relative address of width 8")]
             moffs8,
 
             [Symbol("moffs16", "A segbase-relative address of width 16")]
@@ -347,7 +347,6 @@ namespace Z0.Asm
             [Symbol("rel32", "A relative address within the same code segment as the instruction assembled. and applicable to instructions with an operand-size attribute of 32 bits")]
             rel32,
         }
-
 
         [SymSource(tokens)]
         public enum PtrToken : byte

@@ -31,7 +31,7 @@ namespace Z0
 
 		public AsmMnemonic Mnemonic;
 
-		public AsmOpCodeExpr OpCode;
+		public AsmOpCodeString OpCode;
 
         public string Instruction;
 

@@ -31,7 +31,7 @@ namespace Z0.Asm
             => () => access(src);
 
         [Op]
-        public static AsmFormExpr formxpr(Iced.Instruction src)
+        public static AsmFormInfo formxpr(Iced.Instruction src)
         {
             var ocinfo = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
             return (
@@ -41,8 +41,8 @@ namespace Z0.Asm
                 );
         }
 
-        static AsmOpCodeExpr ocxpr(string src)
-            => asm.ocexpr(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
+        static AsmOpCodeString ocxpr(string src)
+            => asm.ocstring(src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +"));
 
         [MethodImpl(Inline), Op]
         public static IceOpAccess[] access(Iced.InstructionInfo src)

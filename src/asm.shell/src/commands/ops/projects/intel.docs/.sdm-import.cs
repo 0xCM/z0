@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".sdm-import")]
+        [CmdOp(".sdm-opcodes")]
         Outcome SdmImport(CmdArgs args)
         {
             var result = Outcome.Success;

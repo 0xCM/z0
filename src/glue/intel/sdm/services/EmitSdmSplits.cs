@@ -7,6 +7,6 @@ namespace Z0.Asm
     partial class IntelSdm
     {
         public Outcome EmitSdmSplits()
-            => DocServices.Split(SplitSpecs());
+            => DocServices.Split(SdmPaths.SplitSpecs());
     }
 }

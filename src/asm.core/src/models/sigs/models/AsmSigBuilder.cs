@@ -4,14 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
     using static AsmSigs;
 
     [ApiHost]
-    public readonly struct AsmMetamodel
+    public readonly struct AsmSigBuilder
     {
         [MethodImpl(Inline), Op]
         public static r8 r8()
@@ -60,6 +59,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static imm64 imm64()
             => default;
-
     }
 }

@@ -11,6 +11,8 @@ namespace Z0
 
     partial struct Bitfields
     {
+
+
         [MethodImpl(Inline), Op]
         public static Bitfield8 create(byte state)
             => new Bitfield8(state);
@@ -48,12 +50,12 @@ namespace Z0
                 => new Bitfield64<T>(state);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bitfield<T> create<T>(BitfieldSeg[] segs, T state)
+        public static Bitfield<T> create<T>(BitfieldSegModel[] segs, T state)
             where T : unmanaged
                 => new Bitfield<T>(segs,state);
 
         [MethodImpl(Inline)]
-        public static Bitfield<T,K> create<T,K>(BitfieldSeg<K>[] segs, T state)
+        public static Bitfield<T,K> create<T,K>(BitfieldSegModel<K>[] segs, T state)
             where T : unmanaged
             where K : unmanaged
                 => new Bitfield<T,K>(segs,state);

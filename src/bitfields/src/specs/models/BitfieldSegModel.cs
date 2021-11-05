@@ -16,7 +16,7 @@ namespace Z0
     /// Defines an identified, contiguous bitsequence, represented symbolically as {Identifier}:[Min,Max]
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct BitfieldSeg
+    public readonly struct BitfieldSegModel
     {
         /// <summary>
         /// The segment name
@@ -39,7 +39,7 @@ namespace Z0
         public readonly uint Width;
 
         [MethodImpl(Inline)]
-        public BitfieldSeg(Identifier name, uint pos,  uint offset, uint width)
+        public BitfieldSegModel(Identifier name, uint pos,  uint offset, uint width)
         {
             Name = name;
             Index = pos;

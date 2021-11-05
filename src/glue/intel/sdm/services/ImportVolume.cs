@@ -9,8 +9,8 @@ namespace Z0.Asm
         public Outcome ImportVolume(byte vol)
         {
             var result = Outcome.Success;
-            var src = SdmSrcPath(vol);
-            var dst = SdmDstPath(vol);
+            var src = SdmPaths.SdmSrcPath(vol);
+            var dst = SdmPaths.SdmDstPath(vol);
             var emitting = EmittingFile(dst);
             var counter = 0u;
             using var reader = src.UnicodeLineReader();

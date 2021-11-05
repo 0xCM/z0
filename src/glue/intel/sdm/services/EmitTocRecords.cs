@@ -12,23 +12,12 @@ namespace Z0.Asm
 
     partial class IntelSdm
     {
-        string VolumeMarker(byte vol)
-            => string.Format("Vol. {0}", vol);
-
-        HashSet<string> VolumeMarkers(byte min, byte max)
-        {
-            var dst = hashset<string>();
-            for(var i=min; i<=max; i++)
-                dst.Add(VolumeMarker(i));
-            return dst;
-        }
-
         public Outcome EmitTocRecords()
         {
             var result = Outcome.Success;
             var flow = Wf.Running();
             var vols = VolumeMarkers(1,4);
-            var src = TocImportPath();
+            var src = SdmPaths.TocImportPath();
             if(!src.Exists)
             {
                 result = (false,FS.missing(src));
@@ -39,7 +28,7 @@ namespace Z0.Asm
             var encoding = TextEncodingKind.Unicode;
             using var reader = src.LineReader(encoding);
             var buffer = text.buffer();
-            var dst = ProcessLog("toc.combined");
+            var dst = SdmPaths.ProcessLog("toc.combined");
             using var writer = dst.Writer(encoding);
             var cn = ChapterNumber.Empty;
             var tn = TableNumber.Empty;
@@ -91,9 +80,21 @@ namespace Z0.Asm
                 }
             }
 
-            var rowcount = TableEmit(entries.ViewDeposited(), TocEntryTable());
+            var rowcount = TableEmit(entries.ViewDeposited(), SdmPaths.TocEntryTable());
             Wf.Ran(flow, string.Format("Collected {0} toc entries", rowcount));
             return result;
+        }
+
+
+        string VolumeMarker(byte vol)
+            => string.Format("Vol. {0}", vol);
+
+        HashSet<string> VolumeMarkers(byte min, byte max)
+        {
+            var dst = hashset<string>();
+            for(var i=min; i<=max; i++)
+                dst.Add(VolumeMarker(i));
+            return dst;
         }
     }
 }

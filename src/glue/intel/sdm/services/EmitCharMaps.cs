@@ -9,8 +9,8 @@ namespace Z0.Asm
         public Outcome EmitCharMaps()
         {
             var map = CharMaps.create(TextEncodings.Unicode, TextEncodings.Asci);
-            CharMapper.Emit(map, CharMapPath());
-            CharMapper.LogUnmapped(map, SdmSrcPath(), UnmappedCharLog());
+            CharMapper.Emit(map, SdmPaths.CharMapPath());
+            CharMapper.LogUnmapped(map, SdmPaths.SdmSrcPath(), SdmPaths.UnmappedCharLog());
             return true;
         }
     }

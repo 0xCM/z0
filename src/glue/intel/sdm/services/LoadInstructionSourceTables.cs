@@ -4,16 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
     using static Root;
 
-    [ApiHost]
-    public partial class AsmSigs : Service<AsmSigs>
+    partial class IntelSdm
     {
-        public AsmSigs()
-        {
-
-        }
-
-        const NumericKind Closure = UnsignedInts;
+        public ReadOnlySpan<Table> LoadInstructionSourceTables()
+            => LoadCsvTables((SdmPaths.Sources() + FS.folder("sdm.instructions")).Files(FS.Csv).ToReadOnlySpan());
     }
 }

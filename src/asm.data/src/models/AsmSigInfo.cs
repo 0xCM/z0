@@ -12,13 +12,13 @@ namespace Z0.Asm
     /// <summary>
     /// Represents an expression that identifies an instruction
     /// </summary>
-    public readonly struct AsmSigExpr : ITextExpr<AsmSigExpr>, IComparable<AsmSigExpr>
+    public readonly struct AsmSigInfo : ITextExpr<AsmSigInfo>, IComparable<AsmSigInfo>
     {
         public AsmMnemonic Mnemonic {get;}
 
         public TextBlock Content {get;}
 
-        public AsmSigExpr(AsmMnemonic mnemonic, TextBlock content)
+        public AsmSigInfo(AsmMnemonic mnemonic, TextBlock content)
         {
             Mnemonic = mnemonic;
             Content = content;
@@ -54,28 +54,28 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmSigExpr src)
+        public bool Equals(AsmSigInfo src)
             => Content.Equals(src.Content);
 
         public override bool Equals(object src)
-            => src is AsmSigExpr x && Equals(x);
+            => src is AsmSigInfo x && Equals(x);
 
-        public int CompareTo(AsmSigExpr src)
+        public int CompareTo(AsmSigInfo src)
             => Content.CompareTo(src.Content);
 
         [MethodImpl(Inline)]
-        public static implicit operator TextBlock(AsmSigExpr src)
+        public static implicit operator TextBlock(AsmSigInfo src)
             => new TextBlock(src.Content);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(AsmSigExpr a, AsmSigExpr b)
+        public static bool operator ==(AsmSigInfo a, AsmSigInfo b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(AsmSigExpr a, AsmSigExpr b)
+        public static bool operator !=(AsmSigInfo a, AsmSigInfo b)
             => !a.Equals(b);
 
-        public static AsmSigExpr Empty
-            => new AsmSigExpr(AsmMnemonic.Empty, TextBlock.Empty);
+        public static AsmSigInfo Empty
+            => new AsmSigInfo(AsmMnemonic.Empty, TextBlock.Empty);
     }
 }

@@ -17,15 +17,21 @@ namespace Z0.Asm
 
         CharMapper CharMapper;
 
+        IntelSdmPaths SdmPaths;
+
+        StringTableGen StringTableGen;
+
         protected override void OnInit()
         {
             DocServices = Wf.DocServices();
             CharMapper = Wf.CharMapper();
+            SdmPaths = IntelSdmPaths.create(Wf);
+            StringTableGen = Wf.Generators().StringTable();
         }
 
         public void ClearTargets()
         {
-            ImportDir().Clear();
+            SdmPaths.Imports().Clear();
         }
 
         public Outcome Process()

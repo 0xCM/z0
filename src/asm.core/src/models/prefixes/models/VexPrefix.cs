@@ -45,13 +45,13 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal VexPrefix(K k, byte b1)
         {
-            Data = math.join((byte)k,b1,0,2);
+            Data = Bitfields.join((byte)k,b1,0,2);
         }
 
         [MethodImpl(Inline)]
         internal VexPrefix(K k, byte b1, byte b2)
         {
-            Data = math.join((byte)k, b1, b2,3);
+            Data = Bitfields.join((byte)k, b1, b2,3);
         }
 
         public byte Size

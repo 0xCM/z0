@@ -9,30 +9,25 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static SdmModels;
     using static SdmCsvLiterals;
 
     partial class IntelSdm
     {
-        public static Index<TableColumn> columns(ReadOnlySpan<string> src)
-            => Tables.columns<SdmColumnKind>(src);
-
-        public ReadOnlySpan<Table> ReadCsvTables(ReadOnlySpan<FS.FilePath> src)
+        public ReadOnlySpan<Table> LoadCsvTables(ReadOnlySpan<FS.FilePath> src)
         {
             var filecount = src.Length;
             var dst = list<Table>();
             for(var i=0; i<filecount; i++)
-                dst.AddRange(ReadCsvTables(skip(src,i)).ToArray());
+                dst.AddRange(LoadCsvTables(skip(src,i)).ToArray());
 
             return dst.ViewDeposited();
         }
 
-        public ReadOnlySpan<Table> ReadCsvTables(FS.FilePath src)
+        public ReadOnlySpan<Table> LoadCsvTables(FS.FilePath src)
         {
             var result = Outcome.Success;
             var foundtable = false;
             var parsingrows = false;
-            var tablekind = SdmTableKind.None;
             var rowcount = 0;
             var cols = Index<TableColumn>.Empty;
             var rows = list<TableRow>();
@@ -94,9 +89,8 @@ namespace Z0.Asm
 
                 if(content.StartsWith(TableMarker))
                 {
-                    tablekind = IntelSdm.tablekind(content.Remove(TableMarker).Trim());
                     table.Clear();
-                    table.WithKind((uint)tablekind);
+                    table.WithKind((uint)tablekind(content.Remove(TableMarker).Trim()));
                     foundtable = true;
                 }
             }

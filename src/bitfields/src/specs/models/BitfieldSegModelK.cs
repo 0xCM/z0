@@ -13,7 +13,7 @@ namespace Z0
     using api = BitfieldSpecs;
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct BitfieldSeg<K>
+    public readonly struct BitfieldSegModel<K>
         where K : unmanaged
     {
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         public readonly uint Width;
 
         [MethodImpl(Inline)]
-        public BitfieldSeg(K id, uint pos, uint offset, uint width)
+        public BitfieldSegModel(K id, uint pos, uint offset, uint width)
         {
             SegPos = pos;
             SegName = id.ToString();

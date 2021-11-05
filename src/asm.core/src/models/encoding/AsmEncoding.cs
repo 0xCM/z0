@@ -24,11 +24,11 @@ namespace Z0.Asm
             => new AsmEncodingInfo((src.OpCode, src.Sig), src.Statement, src.Encoded, AsmBits.bitstring(src.Encoded));
 
         [Op]
-        public static AsmEncodingInfo describe(in AsmFormExpr form, in AsmExpr statement, in AsmHexCode encoded)
+        public static AsmEncodingInfo describe(in AsmFormInfo form, in AsmExpr statement, in AsmHexCode encoded)
             => new AsmEncodingInfo(form, statement, encoded, AsmBits.bitstring(encoded));
 
         [MethodImpl(Inline), Op]
-        public static AsmEncodingInfo describe(in AsmFormExpr form, in AsmExpr statement, in AsmHexCode encoded, in AsmBitstring bitstring)
+        public static AsmEncodingInfo describe(in AsmFormInfo form, in AsmExpr statement, in AsmHexCode encoded, in AsmBitstring bitstring)
             => new AsmEncodingInfo(form, statement, encoded, bitstring);
 
         [MethodImpl(Inline), Op]

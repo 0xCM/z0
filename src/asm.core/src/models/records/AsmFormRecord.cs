@@ -15,10 +15,10 @@ namespace Z0
 
         public uint Seq;
 
-        public AsmOpCodeExpr OpCode;
+        public AsmOpCodeString OpCode;
 
-        public AsmSigExpr Sig;
+        public AsmSigInfo Sig;
 
-        public AsmFormExpr FormExpr;
+        public AsmFormInfo FormExpr;
     }
 }

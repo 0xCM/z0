@@ -86,10 +86,10 @@ namespace Z0.Asm
             return counter;
         }
 
-        static AsmSigExpr sigxpr(in ApiInstruction src)
+        static AsmSigInfo sigxpr(in ApiInstruction src)
             => asm.sigxpr(src.Instruction.OpCode.InstructionString);
 
-        static AsmFormExpr formxpr(in ApiInstruction src)
+        static AsmFormInfo formxpr(in ApiInstruction src)
             => (src.OpCode, sigxpr(src));
 
         static AsmThumbprint thumbprint(in ApiInstruction src)

@@ -13,14 +13,14 @@ namespace Z0
     partial struct BitfieldSpecs
     {
         [MethodImpl(Inline), Op]
-        public static BitfieldModel bitfield(Identifier name, Index<BitfieldSeg> segs)
+        public static BitfieldModel bitfield(Identifier name, Index<BitfieldSegModel> segs)
             => new BitfieldModel(name, segs, width(segs));
 
         public static BitfieldModel bitfield<K>(Identifier name, Symbols<K> symbols)
             where K : unmanaged
         {
             var count = symbols.Count;
-            var segs = alloc<BitfieldSeg>(count);
+            var segs = alloc<BitfieldSegModel>(count);
             var syms = symbols.View;
             var offset = 0u;
             for(var i=0u; i<count; i++)

@@ -22,7 +22,7 @@ namespace Z0.Asm
         ref readonly string NextCell(ReadOnlySpan<string> src, ref uint i)
             => ref skip(src, i++);
 
-        public ReadOnlySpan<AsmFormExpr> LoadFormExpressions()
+        public ReadOnlySpan<AsmFormInfo> LoadFormExpressions()
         {
             var catalog = Wf.StanfordCatalog();
             catalog.EmitForms(catalog.DeriveFormExprssions());
@@ -30,7 +30,7 @@ namespace Z0.Asm
             var src = Db.AsmCatalogTable<AsmFormRecord>();
             var records = LoadForms(src);
             var count = records.Length;
-            var buffer = alloc<AsmFormExpr>(count);
+            var buffer = alloc<AsmFormInfo>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
                 seek(dst, i) = skip(records,i).FormExpr;
@@ -42,8 +42,8 @@ namespace Z0.Asm
             var pipe = Wf.AsmFormPipe();
             var expressions = pipe.LoadFormExpressions();
             var count = expressions.Length;
-            var unique = dict<string,AsmFormExpr>();
-            var duplicates = dict<string,AsmFormExpr>();
+            var unique = dict<string,AsmFormInfo>();
+            var duplicates = dict<string,AsmFormInfo>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var e = ref skip(expressions, i);
@@ -60,7 +60,7 @@ namespace Z0.Asm
             return HashPerfect(unique.Values.Array());
         }
 
-        public void Emit(ReadOnlySpan<AsmFormExpr> src, FS.FilePath dst)
+        public void Emit(ReadOnlySpan<AsmFormInfo> src, FS.FilePath dst)
         {
             var count = src.Length;
             if(count == 0)
@@ -80,7 +80,7 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, count);
         }
 
-        ReadOnlySpan<HashEntry> HashPerfect(ReadOnlySpan<AsmFormExpr> src)
+        ReadOnlySpan<HashEntry> HashPerfect(ReadOnlySpan<AsmFormInfo> src)
         {
             Wf.Status($"Attempting to find perfect hashes for {src.Length} expressions");
             var perfect = HashFunctions.perfect(src, x => x.Format(), HashFunctions.strings()).Codes;
@@ -106,7 +106,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        ref AsmFormRecord Fill(ushort seq, AsmFormExpr src, ref AsmFormRecord dst)
+        ref AsmFormRecord Fill(ushort seq, AsmFormInfo src, ref AsmFormRecord dst)
         {
             dst.Seq = seq;
             dst.OpCode = src.OpCode;
@@ -169,9 +169,9 @@ namespace Z0.Asm
             {
                 var i = 0u;
                 DataParser.parse(NextCell(parts, ref i), out dst.Seq);
-                dst.OpCode = asm.ocexpr(NextCell(parts, ref i));
+                dst.OpCode = asm.ocstring(NextCell(parts, ref i));
                 AsmParser.sigxpr(NextCell(parts, ref i), out dst.Sig);
-                dst.FormExpr = new AsmFormExpr(dst.OpCode, dst.Sig);
+                dst.FormExpr = new AsmFormInfo(dst.OpCode, dst.Sig);
                 return true;
             }
             else

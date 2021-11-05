@@ -28,10 +28,10 @@ namespace Z0
         /// </summary>
         public readonly uint TotalWidth;
 
-        readonly Index<BitfieldSeg> Data;
+        readonly Index<BitfieldSegModel> Data;
 
         [MethodImpl(Inline)]
-        public BitfieldModel(Identifier name, Index<BitfieldSeg> segs, uint width)
+        public BitfieldModel(Identifier name, Index<BitfieldSegModel> segs, uint width)
         {
             Name = name;
             SegCount = segs.Count;
@@ -45,17 +45,17 @@ namespace Z0
             get => api.bitvector(this);
         }
 
-        public Span<BitfieldSeg> Segments
+        public Span<BitfieldSegModel> Segments
         {
             [MethodImpl(Inline)]
             get => Data.Edit;
         }
 
         [MethodImpl(Inline)]
-        public ref BitfieldSeg Seg(uint i)
+        public ref BitfieldSegModel Seg(uint i)
             => ref Data[i];
 
-        public ref BitfieldSeg this[uint i]
+        public ref BitfieldSegModel this[uint i]
         {
             [MethodImpl(Inline)]
             get => ref Seg(i);

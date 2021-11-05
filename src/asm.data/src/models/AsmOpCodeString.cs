@@ -9,12 +9,12 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmOpCodeExpr : IComparable<AsmOpCodeExpr>, ITextual
+    public readonly struct AsmOpCodeString : IComparable<AsmOpCodeString>, ITextual
     {
         readonly TextBlock _Data;
 
         [MethodImpl(Inline)]
-        public AsmOpCodeExpr(string src)
+        public AsmOpCodeString(string src)
             => _Data = src;
 
         public TextBlock Content
@@ -64,24 +64,24 @@ namespace Z0.Asm
             => Format();
 
         public override bool Equals(object src)
-            => src is AsmOpCodeExpr x && Equals(x);
+            => src is AsmOpCodeString x && Equals(x);
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmOpCodeExpr src)
+        public bool Equals(AsmOpCodeString src)
             => _Data.Equals(src._Data);
 
-        public int CompareTo(AsmOpCodeExpr src)
+        public int CompareTo(AsmOpCodeString src)
             => _Data.CompareTo(src._Data);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(AsmOpCodeExpr a, AsmOpCodeExpr b)
+        public static bool operator ==(AsmOpCodeString a, AsmOpCodeString b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(AsmOpCodeExpr a, AsmOpCodeExpr b)
+        public static bool operator !=(AsmOpCodeString a, AsmOpCodeString b)
             => !a.Equals(b);
 
-        public static AsmOpCodeExpr Empty
-            => new AsmOpCodeExpr(EmptyString);
+        public static AsmOpCodeString Empty
+            => new AsmOpCodeString(EmptyString);
     }
 }

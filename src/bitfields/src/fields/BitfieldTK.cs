@@ -17,25 +17,25 @@ namespace Z0
         where T : unmanaged
         where K : unmanaged
     {
-        readonly Index<BitfieldSeg<K>> _Segs;
+        readonly Index<BitfieldSegModel<K>> _Segs;
 
         public T State;
 
         [MethodImpl(Inline)]
-        public Bitfield(BitfieldSeg<K>[] segs, T state)
+        public Bitfield(BitfieldSegModel<K>[] segs, T state)
         {
             State = state;
             _Segs = segs;
         }
 
-        public ReadOnlySpan<BitfieldSeg<K>> SegSpecs
+        public ReadOnlySpan<BitfieldSegModel<K>> SegSpecs
         {
             [MethodImpl(Inline)]
             get => _Segs.View;
         }
 
         [MethodImpl(Inline)]
-        public ref readonly BitfieldSeg<K> SegSpec(byte index)
+        public ref readonly BitfieldSegModel<K> SegSpec(byte index)
             => ref _Segs[index];
 
         [MethodImpl(Inline)]

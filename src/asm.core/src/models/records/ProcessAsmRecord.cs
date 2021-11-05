@@ -50,9 +50,9 @@ namespace Z0
 
         public AsmHexCode Encoded;
 
-		public AsmSigExpr Sig;
+		public AsmSigInfo Sig;
 
-        public AsmOpCodeExpr OpCode;
+        public AsmOpCodeString OpCode;
 
         public AsmBitstring Bitstring;
 

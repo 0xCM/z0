@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
         /// </summary>
-        public AsmFormExpr Specifier {get;set;}
+        public AsmFormInfo Specifier {get;set;}
 
         /// <summary>
         /// Captures the formatted view of the instruction

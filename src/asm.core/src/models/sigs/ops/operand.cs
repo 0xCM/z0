@@ -71,7 +71,7 @@ namespace Z0.Asm
         public static SrcOp src(SrcOpToken src)
             => src;
 
-       [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op]
         public static VecRm src(VecRmToken src)
             => src;
 

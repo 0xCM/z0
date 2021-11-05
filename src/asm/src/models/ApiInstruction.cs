@@ -76,13 +76,13 @@ namespace Z0.Asm
             get => Instruction.FormattedInstruction;
         }
 
-        public AsmFormExpr AsmForm
+        public AsmFormInfo AsmForm
         {
             [MethodImpl(Inline)]
             get => Instruction.Specifier;
         }
 
-        public AsmSigExpr AsmSig
+        public AsmSigInfo AsmSig
         {
             [MethodImpl(Inline)]
             get => AsmForm.Sig;
@@ -112,7 +112,7 @@ namespace Z0.Asm
             get => Mnemonic.ToString();
         }
 
-       public AsmOpCodeExpr OpCode
+       public AsmOpCodeString OpCode
        {
             [MethodImpl(Inline)]
             get => AsmForm.OpCode;

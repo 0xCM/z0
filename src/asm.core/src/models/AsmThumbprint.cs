@@ -13,14 +13,14 @@ namespace Z0.Asm
     {
         public AsmExpr Statement {get;}
 
-        public AsmSigExpr Sig {get;}
+        public AsmSigInfo Sig {get;}
 
-        public AsmOpCodeExpr OpCode {get;}
+        public AsmOpCodeString OpCode {get;}
 
         public AsmHexCode Encoded {get;}
 
         [MethodImpl(Inline), Op]
-        public AsmThumbprint(AsmExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
+        public AsmThumbprint(AsmExpr statement, AsmSigInfo sig, AsmOpCodeString opcode, AsmHexCode encoded)
         {
             Statement = statement;
             Sig = sig;
@@ -51,7 +51,7 @@ namespace Z0.Asm
         public static AsmThumbprint Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmThumbprint(AsmExpr.Empty, AsmSigExpr.Empty, AsmOpCodeExpr.Empty, AsmHexCode.Empty);
+            get => new AsmThumbprint(AsmExpr.Empty, AsmSigInfo.Empty, AsmOpCodeString.Empty, AsmHexCode.Empty);
         }
 
         [Op]

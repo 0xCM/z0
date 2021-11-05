@@ -58,7 +58,7 @@ namespace Z0.Asm
         {
             var i = 0;
             DataParser.parse(src[i++], out dst.Seq);
-            ocxpr(src[i++], out dst.OpCode);
+            ocstring(src[i++], out dst.OpCode);
             sigxpr(src[i++], out dst.Sig);
             formxpr(src[i++], out dst.FormExpr);
             return ref dst;
@@ -167,7 +167,7 @@ namespace Z0.Asm
             if(outcome.Fail)
                 return (false, string.Format(ErrorPattern, nameof(dst.Sig), src.LineNumber));
 
-            dst.OpCode = asm.ocexpr(skip(parts, i++));
+            dst.OpCode = asm.ocstring(skip(parts, i++));
 
             var bitstring = skip(parts,i++);
             dst.Bitstring = dst.Encoded;
@@ -208,7 +208,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return result;
 
-            dst.OpCode = asm.ocexpr(skip(cells, i++));
+            dst.OpCode = asm.ocstring(skip(cells, i++));
             dst.Bitstring = dst.Encoded;
 
             result = DataParser.parse(skip(cells, i++), out dst.OpUri);

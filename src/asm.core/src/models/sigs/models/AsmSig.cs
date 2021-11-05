@@ -12,17 +12,6 @@ namespace Z0.Asm
 
     using api = AsmSigs;
 
-    public struct AsmSigOp
-    {
-
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct AsmSigOps
-    {
-
-
-    }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct AsmSig

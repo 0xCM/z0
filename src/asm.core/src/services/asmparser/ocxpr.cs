@@ -7,15 +7,15 @@ namespace Z0.Asm
     partial struct AsmParser
     {
         [Op]
-        public static Outcome ocxpr(string src, out AsmOpCodeExpr dst)
+        public static Outcome ocstring(string src, out AsmOpCodeString dst)
         {
-            dst = new AsmOpCodeExpr(src);
+            dst = new AsmOpCodeString(src);
             return true;
         }
 
-        public static Outcome parse(string src, out AsmOpCodeExpr dst)
+        public static Outcome parse(string src, out AsmOpCodeString dst)
         {
-            dst = asm.ocexpr(src);
+            dst = asm.ocstring(src);
             return true;
         }
     }
