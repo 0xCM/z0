@@ -7,6 +7,9 @@ namespace Z0
     using static Root;
     using static core;
 
+    using System.Reflection;
+    using System.IO;
+
     using Masks = BitMaskLiterals;
 
     using Alg;
@@ -20,6 +23,10 @@ namespace Z0
 
         EventQueue Queue;
 
+        IProjectWs Project;
+
+        TextWriter Log;
+
         void EventRaised(IWfEvent e)
         {
 
@@ -29,14 +36,22 @@ namespace Z0
         {
             Queue = EventQueue.allocate(GetType(), EventRaised);
             Source = Rng.@default();
+            Project = Ws.Project("calcs");
+            Log = Project.Log("calcs").AsciWriter();
         }
 
         protected override void Disposing()
         {
             EmptyQueue();
             Queue.Dispose();
+            Log.Dispose();
         }
 
+        void LogHeader<N>(MethodBase src, N n)
+            where N : unmanaged, ITypeNat
+        {
+            Log.WriteLine(string.Format("{0} {1} ", src.Name, n).PadRight(80,Chars.Dash));
+        }
 
         void EmptyQueue()
         {
@@ -44,73 +59,34 @@ namespace Z0
                 Wf.Raise(e);
         }
 
-
-        void Run(N9 n)
+        void Run(N1 n)
         {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
+
             var checker = BitLogicChecker.create(Wf, Rng.@default());
             checker.Validate();
         }
 
-        void Run(N8 n)
+        void Run(N2 n)
         {
-            var buffer = PageBank16x4x4.allocated();
-            var block = buffer.Block(n0);
-            var segsize = size<Cell256>();
-            uint count = block.Size/segsize;
-            ref var src = ref block.Segment<Cell256>(0);
-            for(var i=0u; i<count; i++)
-                seek(src,i) = i;
-
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
+            using var table = SymbolStores.table(Pow2.T14);
+            table.Deposit("abc");
+            table.Deposit("def");
+            table.Deposit("ghi");
+            var src = table.Symbols;
+            var count = src.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var j = ref first(recover<uint>(skip(src,i).Bytes));
-                Wf.Row(string.Format("{0:D4}:{1}",i, j.FormatHex()));
+                ref readonly var entry = ref skip(src,i);
+                Log.WriteLine(entry.Format());
             }
-
-            Wf.Row(block.Describe());
         }
 
-
-        void Run(N13 n)
+        void Run(N3 n)
         {
-            ApiKeyChecks.create(Wf).Run();
-        }
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
 
-        void Run(N7 n)
-        {
-            var buffer = span<char>(Pow2.T12);
-            var src = (uint)Masks.Hi32x16;
-            var dst = ByteBlock32.Empty.Bytes;
-            BitPack.unpack1x32(src, dst);
-            var count = Hex.render(UpperCase, dst, buffer);
-            var hex = text.format(slice(buffer,0,count));
-            Wf.Row(hex);
-
-            buffer.Clear();
-            var k=0;
-            for(var i=0; i<32; i++)
-            {
-                ref readonly var a = ref skip(dst,i);
-                for(byte j=0; j<7; j++)
-                {
-                    seek(buffer,k++) = bit.test(a,j).ToChar();
-                }
-                seek(buffer,k++) = Chars.Space;
-            }
-
-            // count = BitRender.render(dst, buffer);
-            var bitstring = text.format(slice(buffer,0,k));
-            Wf.Row(bitstring);
-        }
-
-        void Run(N4 n)
-        {
-            var checker = BitLogicChecker.create(Wf, Rng.@default());
-            checker.Validate();
-        }
-
-        void Run(N6 n)
-        {
             var provider = PageBank16x4x4.allocated();
             var block = provider.Block(n0);
             var segsize = 32;
@@ -122,49 +98,98 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var j = ref first(recover<uint>(skip(src,i).Bytes));
-                Wf.Row(string.Format("{0:D4}:{1}",i, j.FormatHex()));
+                Log.WriteLine(string.Format("{0:D4}:{1}",i, j.FormatHex()));
             }
 
-            Wf.Row(block.Describe());
+            Log.WriteLine(block.Describe());
         }
 
-        // void Run(N14 x)
-        // {
-        //     var n = n2;
-        //     var t = z32;
-        //     var m = CaseMethods.BinaryAdd_Method;
-        //     var id = m.Identify();
-        //     var factory = Dynamic.Factory(OperatorClasses.binary(t));
-        //     var fx = factory.Create(m);
-        //     Wf.Row(fx(3,4).ToString());
-        // }
+        void Run(N4 n)
+        {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
+
+            var buffer = span<char>(Pow2.T12);
+            var src = (uint)Masks.Hi32x16;
+            var dst = ByteBlock32.Empty.Bytes;
+            BitPack.unpack1x32(src, dst);
+            var count = Hex.render(UpperCase, dst, buffer);
+            var hex = text.format(slice(buffer,0,count));
+
+            Log.WriteLine(hex);
+
+            buffer.Clear();
+            var k=0;
+            for(var i=0; i<32; i++)
+            {
+                ref readonly var a = ref skip(dst,i);
+                for(byte j=0; j<7; j++)
+                    seek(buffer,k++) = bit.test(a,j).ToChar();
+                seek(buffer,k++) = Chars.Space;
+            }
+
+            var bitstring = text.format(slice(buffer,0,k));
+            Log.WriteLine(bitstring);
+        }
+
+        void Run(N8 n)
+        {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
+            var buffer = PageBank16x4x4.allocated();
+            var block = buffer.Block(n0);
+            var segsize = size<Cell256>();
+            uint count = block.Size/segsize;
+            ref var src = ref block.Segment<Cell256>(0);
+            for(var i=0u; i<count; i++)
+                seek(src,i) = i;
+
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var j = ref first(recover<uint>(skip(src,i).Bytes));
+                Log.WriteLine(string.Format("{0:D4}:{1}",i, j.FormatHex()));
+            }
+
+
+            Log.WriteLine(block.Describe());
+        }
+
+        void Run(N9 n)
+        {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
+            var checker = BitLogicChecker.create(Wf, Rng.@default());
+            checker.Validate();
+        }
+
+        void Run(N13 n)
+        {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
+            ApiKeyChecks.create(Wf).Run();
+        }
 
 
         void Run(N15 n)
         {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
+
             Size<byte> a = 31;
             var b = a.Align(4);
-            Wf.Row(a.Measure);
-            Wf.Row(a.Untyped);
-            Wf.Row(b.Measure);
+            Log.WriteLine(a.Measure);
+            Log.WriteLine(a.Untyped);
+            Log.WriteLine(b.Measure);
 
-            Wf.Row(string.Format("Align({0}) = {1}", a, b));
+            Log.WriteLine(string.Format("Align({0}) = {1}", a, b));
         }
 
         void Run(N16 n)
         {
-            Test6(PartId.Cpu);
-        }
-
-        void Test6(PartId part)
-        {
-            Reader(part, out var reader);
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
+            Reader(PartId.Cpu, out var reader);
             var strings = reader.ReadStrings(CliStringKind.User);
             var count = strings.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var s = ref skip(strings,i);
-                Wf.Row(string.Format("{0:D5}:{1}", i, s));
+                Log.WriteLine(string.Format("{0:D5}:{1}", i, s));
             }
         }
 
@@ -184,11 +209,13 @@ namespace Z0
 
         void Run(N17 n)
         {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
             BitfieldChecks.create(Wf).Run();
         }
 
         void Run(N18 n)
         {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
             var m0 = BitMaskLiterals.b00001111x32;
             var m1 = BitMaskLiterals.Even32;
             var m = (ulong)m0 | ((ulong)m1 << 32);
@@ -198,49 +225,79 @@ namespace Z0
             var count = BitRender.render4x4(bytes, buffer.Data);
             var chars = slice(buffer.Data,0,count);
             var fmt = text.format(chars);
-            Wf.Row(fmt);
+            Log.WriteLine(fmt);
         }
 
         void Run(N20 n)
         {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
             BitMaskChecker.create(Wf).Run(Source);
         }
 
         void Run(N23 n)
         {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
             BitFormatChecks.create(Wf).Run(Rng.wyhash64());
         }
 
         void Run(N24 n)
         {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
             CalcBuilder.create(Wf).Calc(w128);
         }
 
         void Run(N25 n)
         {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
             Fsm.example1();
             Fsm.example2();
         }
 
         void Run(N27 n)
         {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
             Parts.BitPack.Resolved.Executor.Run();
         }
 
         void Run(N28 n)
         {
+            LogHeader(MethodInfo.GetCurrentMethod(), n);
             for(byte i = 120; i<148; i++)
             for(byte j = 120; j<148; j++)
             {
                 var cin = math.odd(i + j);
-                var y = math.adc(i,j, cin,out var cout);
-                Write(string.Format("adc({0},{1}) carry {2} = {3} carry {4}", i,j,cin, y, (uint)cout));
+                var y = math.adc(i, j, cin, out var cout);
+                Log.WriteLine(string.Format("adc({0},{1}) carry {2} = {3} carry {4}", i,j,cin, y, (uint)cout));
             }
+        }
+
+        void Run(N30 n)
+        {
+
+
         }
 
         void RunValidators()
         {
             Md5Validator.create(Wf).Run();
+            Run("1");
+            Run("2");
+            Run("3");
+            Run("4");
+            Run("8");
+            Run("9");
+            Run("13");
+            Run("15");
+            Run("16");
+            Run("17");
+            Run("18");
+            Run("20");
+            Run("23");
+            Run("24");
+            Run("25");
+            Run("27");
+            Run("28");
+            Run("30");
         }
 
         void Run(string spec)
@@ -249,14 +306,17 @@ namespace Z0
             {
                 switch(n)
                 {
+                    case 1:
+                        Run(n1);
+                    break;
+                    case 2:
+                        Run(n2);
+                    break;
+                    case 3:
+                        Run(n3);
+                    break;
                     case 4:
                         Run(n4);
-                    break;
-                    case 6:
-                        Run(n6);
-                    break;
-                    case 7:
-                        Run(n7);
                     break;
                     case 8:
                         Run(n8);
@@ -267,9 +327,6 @@ namespace Z0
                     case 13:
                         Run(n13);
                     break;
-                    // case 14:
-                    //     Run(n14);
-                    // break;
                     case 15:
                         Run(n15);
                     break;
@@ -299,6 +356,9 @@ namespace Z0
                     break;
                     case 28:
                         Run(n28);
+                    break;
+                    case 30:
+                        Run(n30);
                     break;
                     default:
                      Error(string.Format("Command '{0}' unrecognized", spec));

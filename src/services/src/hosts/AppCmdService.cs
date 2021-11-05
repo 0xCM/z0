@@ -166,6 +166,14 @@ namespace Z0
             return true;
         }
 
+        [CmdOp(".commands")]
+        protected Outcome Commands(CmdArgs args)
+        {
+            var commands = Cmd.cmdops(GetType());
+            iter(commands, cmd => Write(cmd.Format()));
+            return true;
+        }
+
         public void Run()
         {
             var input = Next();

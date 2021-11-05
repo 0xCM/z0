@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public unsafe interface IPtr
     {
         void* Target {get;}
@@ -12,6 +15,7 @@ namespace Z0
             => Target;
     }
 
+    [Free]
     public unsafe interface IPtr<T> : IPtr
         where T : unmanaged
     {

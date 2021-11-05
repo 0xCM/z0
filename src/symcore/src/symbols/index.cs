@@ -11,6 +11,9 @@ namespace Z0
 
     partial struct Symbols
     {
+        public static SymIndex symindex(Type src)
+            => SymIndexBuilder.create(src);
+
         [MethodImpl(Inline)]
         public static Symbols<E> index<E>()
             where E : unmanaged, Enum

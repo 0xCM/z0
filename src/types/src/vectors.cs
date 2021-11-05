@@ -2,16 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Vec
+namespace Z0.Types
 {
     using System;
     using System.Runtime.CompilerServices;
+
 
     using static Root;
     using static core;
 
     [ApiHost]
-    public readonly partial struct vectors
+    public readonly struct vectors
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -629,5 +630,45 @@ namespace Z0.Vec
         [MethodImpl(Inline), Op]
         public static vNx64<MemoryAddress> v(N64 n, MemoryAddress[] src)
             => new vNx64<MemoryAddress>(src);
+
+       [MethodImpl(Inline), Op]
+        public static vNx32<uint> v(N32 n,  uint[] src)
+            => new vNx32<uint>(src);
+
+        [MethodImpl(Inline)]
+        public static vector<N,T> v<N,T>(N n, T[] src)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            if(Typed.nat32i<N>() != src.Length)
+                return vector<N,T>.Empty;
+            else
+                return new vector<N,T>(src);
+        }
+
+        public static string format<N,T>(in vector<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var cells = src.Cells;
+            var count = cells.Length;
+            var buffer = text.buffer();
+            var last = cells.Length - 1;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var cell = ref skip(cells,i);
+                var fmt = string.Format("{0}", cell).Trim();
+                if(nonempty(fmt))
+                {
+                    buffer.Append(fmt);
+                    if(i != last)
+                        buffer.Append(Chars.Comma);
+
+                }
+                else
+                    break;
+            }
+            return buffer.Emit();
+        }
     }
 }

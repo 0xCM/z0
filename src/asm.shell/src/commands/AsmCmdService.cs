@@ -56,12 +56,6 @@ namespace Z0.Asm
 
         TableEmitters Emitters;
 
-
-        FS.FolderPath AsmRoot
-        {
-            get => AsmWs.Root;
-        }
-
         byte[] _Assembled;
 
         const ushort _NativeBufferSize = Pow2.T14;

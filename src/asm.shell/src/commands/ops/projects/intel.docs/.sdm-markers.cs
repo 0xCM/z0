@@ -33,10 +33,7 @@ namespace Z0.Asm
         void DisplayMatches(ReadOnlySpan<UnicodeLine> src, TextMarker marker,  ReadOnlySpan<TextMatch> matches)
         {
             foreach(var m in matches)
-            {
-                ref readonly var line = ref skip(src, m.Match.Line.Value - 1);
-                Write(line);
-            }
+                Write(skip(src, m.Match.Line.Value - 1));
             Write(string.Format("Matched {0} {1} markers", matches.Length, marker.Name));
         }
 

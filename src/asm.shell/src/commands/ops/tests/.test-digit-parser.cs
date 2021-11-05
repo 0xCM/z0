@@ -11,7 +11,7 @@ namespace Z0.Asm
         [CmdOp(".test-digit-parser")]
         public Outcome TestDigitParser(CmdArgs args)
         {
-            var cases = DigitParserCases.positive();
+            var cases = DigitParserCases.create();
             var results = DigitParserCases.run(cases).View;
             var count = results.Length;
             for(var i=0; i<count; i++)

@@ -101,7 +101,8 @@ namespace Z0.Asm
 
         void Split(in DocSplitSpec spec, IReceiver<LineRange> dst)
         {
-            var src = Ws.Sources().Datasets("intel.pubs") + FS.file(spec.DocId, FS.Txt);
+            var project = Ws.Project("intel.docs");
+            var src = project.Subdir("sources") + FS.file(spec.DocId, FS.Txt);
             if(!src.Exists)
             {
                 Error(FS.missing(src));
@@ -122,7 +123,7 @@ namespace Z0.Asm
                     seek(lines, i++) = Lines.line(counter, line);
             }
 
-            var path = Ws.Imports().Subdir("intel.sdm") +  FS.file(string.Format("{0}-{1}", spec.DocId, spec.Unit), FS.Txt);
+            var path = project.Subdir("imports") +  FS.file(string.Format("{0}-{1}", spec.DocId, spec.Unit), FS.Txt);
             Emit(range, path);
             dst.Deposit(range);
         }

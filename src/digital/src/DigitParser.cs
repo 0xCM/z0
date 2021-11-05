@@ -47,8 +47,7 @@ namespace Z0
             var outcome = true;
             for(var i=count-1; i>=0; i--)
             {
-                ref readonly var c = ref skip(input,i);
-                if(Digital.digit(@base16, c, out var d))
+                if(Digital.digit(@base16, skip(input,i), out var d))
                     seek(output, j++) = d;
                 else
                     return false;

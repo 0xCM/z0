@@ -16,8 +16,11 @@ namespace Z0
 
         const NumericKind Closure = UnsignedInts;
 
+        public static SymbolTable table(ByteSize capacity)
+            => new SymbolTable(1024, capacity);
+
         [Op, Closures(UInt64k)]
-        public static SymStore<T> create<T>(ushort capacity)
+        public static SymStore<T> symstore<T>(ushort capacity)
             => new SymStore<T>((ushort)inc(ref SegCount), alloc<T>(capacity));
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]

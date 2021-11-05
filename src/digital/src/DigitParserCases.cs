@@ -29,7 +29,7 @@ namespace Z0
         }
 
         [Op]
-        public static Index<DigitParserCase> positive()
+        public static Index<DigitParserCase> create()
         {
             const byte b2d = 2;
             const byte b8d = 8;
@@ -42,19 +42,19 @@ namespace Z0
             var j=0;
 
             for(byte i=0; i<b2d; i++)
-                seek(dst,j++) = new DigitParserCase(base2, Digital.@char((BinaryDigitValue)i), i);
+                seek(dst, j++) = new DigitParserCase(base2, Digital.@char((BinaryDigitValue)i), i);
 
             for(byte i=0; i<b8d; i++)
-                seek(dst,j++) = new DigitParserCase(base8, Digital.@char((OctalDigitValue)i), i);
+                seek(dst, j++) = new DigitParserCase(base8, Digital.@char((OctalDigitValue)i), i);
 
             for(byte i=0; i<b10d; i++)
-                seek(dst,j++) = new DigitParserCase(base10, Digital.@char((DecimalDigitValue)i), i);
+                seek(dst, j++) = new DigitParserCase(base10, Digital.@char((DecimalDigitValue)i), i);
 
             for(byte i=0; i<b16d; i++)
-                seek(dst,j++) = new DigitParserCase(base16, Digital.@char(LowerCase, (HexDigitValue)i), i);
+                seek(dst, j++) = new DigitParserCase(base16, Digital.@char(LowerCase, (HexDigitValue)i), i);
 
             for(byte i=0; i<b16d; i++)
-                seek(dst,j++) = new DigitParserCase(base16, Digital.@char(UpperCase, (HexDigitValue)i), i);
+                seek(dst, j++) = new DigitParserCase(base16, Digital.@char(UpperCase, (HexDigitValue)i), i);
 
             return buffer;
         }

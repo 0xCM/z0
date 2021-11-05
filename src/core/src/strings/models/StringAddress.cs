@@ -12,8 +12,6 @@ namespace Z0
 
     public unsafe readonly struct StringAddress : IAddressable
     {
-        public const uint SZ = MemoryAddress.SZ;
-
         [MethodImpl(Inline)]
         public static StringAddress<N> natural<N>(string src)
             where N : unmanaged, ITypeNat
@@ -29,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public StringAddress(MemoryAddress location)
         {
-            Address = location;
+            Address = location == 0 ? strings.address(EmptyString) : location;
         }
 
         public ReadOnlySpan<char> Chars
@@ -88,5 +86,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator StringAddress(Name src)
             => strings.address(src.Content);
+
+        public static StringAddress Zero
+        {
+            [MethodImpl(Inline)]
+            get => new StringAddress(0);
+        }
     }
 }

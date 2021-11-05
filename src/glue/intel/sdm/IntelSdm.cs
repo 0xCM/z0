@@ -11,8 +11,6 @@ namespace Z0.Asm
     {
         const string lined = nameof(lined);
 
-        const string unicode = nameof(unicode);
-
         const string toc = nameof(toc);
 
         DocServices DocServices;

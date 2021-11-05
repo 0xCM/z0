@@ -7,13 +7,12 @@ namespace Z0.Asm
     using System;
 
     using static Root;
-    using static core;
 
     partial class IntelSdm
     {
         public ReadOnlySpan<Table> ReadSourceTables()
         {
-            var src = Ws.Sources().Datasets(AsmTableScopes.SdmInstructions).Files(FS.Csv).ToReadOnlySpan();
+            var src = (Sources() + FS.folder("sdm.instructions")).Files(FS.Csv).ToReadOnlySpan();
             var svc = Wf.IntelSdm();
             return svc.ReadCsvTables(src);
         }

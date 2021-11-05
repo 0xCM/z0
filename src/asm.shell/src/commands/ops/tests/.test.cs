@@ -5,10 +5,8 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static core;
-    using static Root;
 
     partial class AsmCmdService
     {
@@ -44,13 +42,11 @@ namespace Z0.Asm
             for(var i=0u; i<count; i++)
             {
                 var offset = i*length;
-                native.Content(i) = new string(slice(bits,offset,length));
+                native.Content(i) = new string(slice(bits, offset, length));
             }
 
             for(var i=0u; i<count; i++)
-            {
                 Write(native.Content(i));
-            }
 
             return result;
         }
@@ -64,9 +60,7 @@ namespace Z0.Asm
             {
                 ref var c = ref seek(buffer,i*8);
                 for(byte j=0; j<8; j++)
-                {
                     seek(c,7-j) = bit.test(i,(byte)j).ToChar();
-                }
             }
             return buffer;
         }
@@ -109,8 +103,7 @@ namespace Z0.Asm
             var count = resources.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var res = ref skip(resources,i);
-                Write(res);
+                Write(skip(resources,i));
             }
             return true;
         }

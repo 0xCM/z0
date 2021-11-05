@@ -29,7 +29,7 @@ namespace Z0
             var chars = address.Chars;
             dst.Key = key;
             dst.Address = address;
-            dst.HashCode = StringHasher.compute(chars);
+            dst.HashCode = strings.hash(chars);
             dst.Size = chars.Length*2;
             dst.Expr = text.format(chars);
             return dst;

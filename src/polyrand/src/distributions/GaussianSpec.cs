@@ -63,7 +63,7 @@ namespace Z0
             {
                 var sig = force<T,double>(StdDev);
                 Require.invariant(sig != 0, () => $"The invariant k := (sigma == 0) failed");
-                return force<T>(RngMath.recip(sig*sig));
+                return force<T>(gmath.recip(sig*sig));
             }
         }
 

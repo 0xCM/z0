@@ -8,7 +8,6 @@ namespace Z0.Expr
     using System;
 
     using Z0.Lang;
-    using Strings;
 
     using static Root;
     using static core;
@@ -43,14 +42,6 @@ namespace Z0.Expr
         const NumericKind Closure = UnsignedInts;
 
         static ReadOnlySpan<char> AsciLo => new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-
-        public static void dfa26()
-        {
-            var alphabet = lang.alphabet("asci-lo", AsciLo);
-            var words = alloc<Word>(5);
-
-
-        }
 
         public static TableDfa<Hex5Seq,AsciLetterLoSym> recognizer(string src)
         {

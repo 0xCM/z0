@@ -32,6 +32,12 @@ namespace Z0
             Buffer.Dispose();
         }
 
+        public MemoryAddress BaseAddress
+        {
+            [MethodImpl(Inline)]
+            get => Buffer.Address;
+        }
+
         /// <summary>
         /// The maximum number of symbols in the string
         /// </summary>
@@ -77,7 +83,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Store(ReadOnlySpan<char> src, uint offset)
-            => strings.store(src, offset,this);
+            => strings.store(src, offset, this);
 
         [MethodImpl(Inline)]
         public Label StoreLabel(ReadOnlySpan<char> src, uint offset)

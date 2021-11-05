@@ -195,7 +195,6 @@ namespace Z0.Asm
         {
             [Symbol("/r", "The ModR/M byte of the instruction contains a register operand and an r/m operand")]
             r,
-
         }
 
         /// <summary>

@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Types;
+
     using static Root;
     using static core;
 
-    using Grid;
 
     public readonly struct grids
     {

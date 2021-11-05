@@ -8,8 +8,6 @@ namespace Z0.llvm
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using Z0.Strings;
-
     using records;
 
     using static Root;
@@ -226,7 +224,7 @@ namespace Z0.llvm
         {
             var result = Outcome.Success;
             dst = default;
-            var parts = src.Split(Chars.Pipe);
+            var parts = src.Split(Z0.Chars.Pipe);
             var count = parts.Length;
             if(count < 4)
                 return (false, Tables.FieldCountMismatch.Format(4,count));

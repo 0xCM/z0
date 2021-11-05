@@ -9,7 +9,7 @@ namespace Z0.Asm
         [CmdOp(".symstore")]
         Outcome SymStore(CmdArgs args)
         {
-            var store = SymbolStores.create<string>(24);
+            var store = SymbolStores.symstore<string>(24);
             store.Deposit("abc", out var s1);
             Write(s1);
             store.Deposit("def", out var s2);

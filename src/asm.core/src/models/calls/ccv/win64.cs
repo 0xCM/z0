@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Vec;
-
     using static Root;
     using static core;
     using static AsmRegTokens;

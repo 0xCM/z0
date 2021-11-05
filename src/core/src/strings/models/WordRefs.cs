@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Strings
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -13,7 +13,7 @@ namespace Z0.Strings
     /// <summary>
     /// Defines a character string over an embedded resource
     /// </summary>
-    public unsafe struct WordRefs
+    public unsafe struct StringRefs
     {
         readonly MemoryAddress BaseAddress;
 
@@ -23,7 +23,7 @@ namespace Z0.Strings
         public uint Length {get;}
 
         [MethodImpl(Inline)]
-        public WordRefs(ReadOnlySpan<char> src)
+        public StringRefs(ReadOnlySpan<char> src)
         {
             BaseAddress = address(first(src));
             Length = (uint)src.Length;
@@ -58,11 +58,11 @@ namespace Z0.Strings
             => ref skip(View,index);
 
         [MethodImpl(Inline)]
-        public WordRef Word(ulong index, ulong length)
+        public StringRef Word(ulong index, ulong length)
             => strings.word(this, index, length);
 
         [MethodImpl(Inline)]
-        public WordRef Word(long index, long length)
+        public StringRef Word(long index, long length)
             => strings.word(this, index, length);
 
         public ref readonly char this[ulong index]
@@ -77,13 +77,13 @@ namespace Z0.Strings
             get => ref Symbol(index);
         }
 
-        public WordRef this[long offset, long length]
+        public StringRef this[long offset, long length]
         {
             [MethodImpl(Inline)]
             get => strings.word(this, offset, length);
         }
 
-        public WordRef this[ulong offset, ulong length]
+        public StringRef this[ulong offset, ulong length]
         {
             [MethodImpl(Inline)]
             get => strings.word(this, offset, length);
@@ -97,11 +97,11 @@ namespace Z0.Strings
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator WordRefs(ReadOnlySpan<char> src)
-            => new WordRefs(src);
+        public static implicit operator StringRefs(ReadOnlySpan<char> src)
+            => new StringRefs(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator WordRefs(string src)
-            => new WordRefs(src);
+        public static implicit operator StringRefs(string src)
+            => new StringRefs(src);
     }
 }

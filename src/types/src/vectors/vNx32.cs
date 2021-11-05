@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Vec
+namespace Z0.Types
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -50,12 +50,5 @@ namespace Z0.Vec
 
         BitWidth IBlittable.ContentWidth
             => Data.Length*32;
-    }
-
-    partial struct vectors
-    {
-        [MethodImpl(Inline), Op]
-        public static vNx32<uint> v(N32 n,  uint[] src)
-            => new vNx32<uint>(src);
     }
 }

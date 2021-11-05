@@ -12,7 +12,6 @@ namespace Z0.Asm
             const ulong FunctionBase = 0x7ffc56862280;
             const ushort InstructionOffset = 0x25;
             const uint Displacement = 0xfc632176;
-
             var result = Outcome.Success;
 
             MemoryAddress client = FunctionBase + InstructionOffset;

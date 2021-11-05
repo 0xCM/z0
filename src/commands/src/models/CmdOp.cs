@@ -41,7 +41,7 @@ namespace Z0
         }
 
         public string Format()
-            => string.Format("{0}:{1}", MethodId, text.format(Name));
+            => text.format(Name);
 
         public override string ToString()
             => Format();

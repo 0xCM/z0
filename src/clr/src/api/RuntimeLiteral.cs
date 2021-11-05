@@ -18,12 +18,10 @@ namespace Z0
     /// <remarks>
     /// The <see cref='decimal'/> type is not supported; the <see cref='string'/> type is supported via addressing
     /// </remarks>
-    [StructLayout(LayoutKind.Sequential,Pack=1,Size=(int)SZ), Blittable(SZ), Record(TableName)]
+    [StructLayout(LayoutKind.Sequential,Pack=1), Record(TableName)]
     public readonly struct RuntimeLiteral : ITextual, IRuntimeLiteral, IComparableRecord<RuntimeLiteral>
     {
         public const string TableName = "literals.runtime";
-
-        public const uint SZ = 2*StringAddress.SZ + PrimalSizes.U64 + PrimalSizes.U8;
 
         public StringAddress Source {get;}
 

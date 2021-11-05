@@ -7,23 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Strings;
-
     using static Root;
 
     partial struct strings
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static WordRefs<S> embedded<S>(ReadOnlySpan<S> src)
+        public static StringRefs<S> embedded<S>(ReadOnlySpan<S> src)
             where S : unmanaged
-                => new WordRefs<S>(src);
+                => new StringRefs<S>(src);
 
         [MethodImpl(Inline), Op]
-        public static WordRefs<char> embedded(string src)
-            => new WordRefs<char>(src);
+        public static StringRefs<char> embedded(string src)
+            => new StringRefs<char>(src);
 
         [MethodImpl(Inline), Op]
-        public static WordRefs<char> embedded(ReadOnlySpan<char> src)
-            => new WordRefs<char>(src);
+        public static StringRefs<char> embedded(ReadOnlySpan<char> src)
+            => new StringRefs<char>(src);
     }
 }

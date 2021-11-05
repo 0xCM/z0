@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Next(uint max)
-            => RngMath.contract(Next(), max);
+            => math.contract(Next(), max);
 
         [MethodImpl(Inline)]
         public uint Next(uint min, uint max)

@@ -24,9 +24,7 @@ namespace Z0.Asm
                 ref readonly var symbol = ref skip(symview,i);
                 ref readonly var entry = ref map[symbol.Kind];
                 ref readonly var index = ref skip(data,i);
-                var bitstring = BitRender.format16(skip(bits,i));
-                var expr = string.Format("{0} => {1}", entry, bitstring);
-                Write(expr);
+                Write(string.Format("{0} => {1}", entry, BitRender.format16(skip(bits,i))));
             }
 
             return result;

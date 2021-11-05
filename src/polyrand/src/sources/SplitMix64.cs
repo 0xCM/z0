@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static RngMath;
 
     using G = SplitMix64;
 
@@ -52,11 +51,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         static ulong next(ref G g, ulong max)
-            => contract(next(ref g), max);
+            => math.contract(next(ref g), max);
 
         [MethodImpl(Inline), Op]
         static ulong next(ref G g, ulong min, ulong max)
-            => min + contract(next(ref g), max - min);
+            => min + math.contract(next(ref g), max - min);
 
         const ulong X1 = 0x9E3779B97F4A7C15;
 

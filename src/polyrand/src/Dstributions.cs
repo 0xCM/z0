@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static GammaSpec<T> gamma<T>(T alpha, T dx, T beta)
             where T : unmanaged
-                => new GammaSpec<T>(alpha : alpha, dx : RngMath.recip(beta), beta : beta);
+                => new GammaSpec<T>(alpha : alpha, dx : gmath.recip(beta), beta : beta);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static BinomialSpec<T> binomial<T>(T n, double p)

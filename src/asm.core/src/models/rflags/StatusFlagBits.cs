@@ -8,28 +8,25 @@ namespace Z0.Asm
 
     using RF = RFlags.RFlagBits;
 
-    partial struct RFlags
+    [Flags,SymSource]
+    public enum StatusFlagBits : ushort
     {
-        [Flags,SymSource]
-        public enum StatusFlagBits : ulong
-        {
-            [Symbol("cf", "Carry Flag")]
-            CF = RF.CF,
+        [Symbol("cf", "Carry Flag")]
+        CF = (ushort)RF.CF,
 
-            [Symbol("pf", "Parity Flag")]
-            PF = RF.PF,
+        [Symbol("pf", "Parity Flag")]
+        PF = (ushort)RF.PF,
 
-            [Symbol("af", "Adjust/Carry Flag")]
-            AF = RF.AF,
+        [Symbol("af", "Aux Carry Flag")]
+        AF = (ushort)RF.AF,
 
-            [Symbol("zf", "Zero Flag")]
-            ZF = RF.ZF,
+        [Symbol("zf", "Zero Flag")]
+        ZF = (ushort)RF.ZF,
 
-            [Symbol("sf", "Sign Flag")]
-            SF = RF.SF,
+        [Symbol("sf", "Sign Flag")]
+        SF = (ushort)RF.SF,
 
-            [Symbol("of", "Overflow Flag")]
-            OF = RF.OF,
-        }
+        [Symbol("of", "Overflow Flag")]
+        OF = (ushort)RF.OF,
     }
 }

@@ -2,18 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Scalars
+namespace Z0.Types
 {
     using System;
     using System.Runtime.CompilerServices;
 
+    using Types;
+
     using static Root;
 
     [ApiHost]
-    public readonly partial struct scalars
+    public readonly struct scalars
     {
         [MethodImpl(Inline), Op]
-        public static ScalarType type(ScalarKind kind, ByteSize storage, BitWidth data)
+        public static ScalarType type(IndicatorKind kind, ByteSize storage, BitWidth data)
             => new ScalarType(kind, storage,data);
 
         [MethodImpl(Inline), Op]

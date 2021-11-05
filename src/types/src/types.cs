@@ -10,8 +10,10 @@ namespace Z0.Types
     using static Root;
     using static core;
 
+    using static Types.PrimalKind;
+
     [ApiHost]
-    public readonly partial struct types
+    public readonly struct types
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -108,6 +110,33 @@ namespace Z0.Types
             where K : unmanaged, Enum
             where T : unmanaged
                 => ClassCache.classifier<K,T>();
+
+
+        internal static string format(PrimalKind src)
+            => src switch{
+                UnsignedInt => "u",
+                SignedInt => "i",
+                Float => "f",
+                _ => EmptyString
+            };
+
+        internal static Outcome parse(char src, out PrimalKind dst)
+        {
+            dst = PrimalKind.None;
+            switch(src)
+            {
+                case 'i':
+                    dst = PrimalKind.SignedInt;
+                break;
+                case 'u':
+                    dst = PrimalKind.UnsignedInt;
+                break;
+                case 'f':
+                    dst = PrimalKind.Float;
+                break;
+            }
+            return dst != 0;
+        }
 
         [MethodImpl(Inline)]
         static Sym unkind<K>(Sym<K> src)

@@ -39,16 +39,16 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <typeparam name="T">The content type</typeparam>
         [Op, Closures(Closure)]
-        public static StatusEvent<T> status<T>(WfStepId step, T content, CorrelationToken ct = default)
+        public static StatusEvent<T> status<T>(WfStepId step, T content)
             => new StatusEvent<T>(step, content);
 
         [Op, Closures(Closure)]
-        public static StatusEvent<T> status<T>(Type host, T content, CorrelationToken ct = default)
+        public static StatusEvent<T> status<T>(Type host, T content)
             => new StatusEvent<T>(host, content);
 
         [Op, Closures(Closure)]
-        public static WarnEvent<T> warn<T>(WfStepId step, T body, CorrelationToken ct = default)
-            => new WarnEvent<T>(step, body, ct);
+        public static WarnEvent<T> warn<T>(WfStepId step, T body)
+            => new WarnEvent<T>(step, body);
 
         [Op, Closures(Closure)]
         public static ErrorEvent<T> error<T>(string label, T data, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

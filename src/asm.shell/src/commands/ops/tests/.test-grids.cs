@@ -41,13 +41,9 @@ namespace Z0.Asm
                         msg = string.Format("{0}x{1} = [{0},{1}] = {2} != {3}", i,j, actual, expect);
 
                     if(ok)
-                    {
                         Write(msg, FlairKind.Status);
-                    }
                     else
-                    {
                         Write(msg, FlairKind.Error);
-                    }
                 }
             }
 

@@ -15,6 +15,7 @@ namespace Z0
         public const string EventName = GlobalEvents.Warning;
 
         public LogLevel EventLevel => LogLevel.Warning;
+
         public const EventKind Kind = EventKind.Warn;
 
         public EventId EventId {get;}
@@ -26,7 +27,7 @@ namespace Z0
         public FlairKind Flair => FlairKind.Warning;
 
         [MethodImpl(Inline)]
-        public WarnEvent(WfStepId step, T content, CorrelationToken ct)
+        public WarnEvent(WfStepId step, T content)
         {
             EventId = EventId.define(EventName, step);
             Payload = content;

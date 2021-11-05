@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Vec
+namespace Z0.Types
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -56,45 +56,5 @@ namespace Z0.Vec
             => Typed.nat32u<N>();
 
         public static vector<N,T> Empty => default;
-    }
-
-    partial struct vectors
-    {
-        [MethodImpl(Inline)]
-        public static vector<N,T> v<N,T>(N n, T[] src)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            if(Typed.nat32i<N>() != src.Length)
-                return vector<N,T>.Empty;
-            else
-                return new vector<N,T>(src);
-        }
-
-        public static string format<N,T>(in vector<N,T> src)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            var cells = src.Cells;
-            var count = cells.Length;
-            var buffer = TextTools.buffer();
-            var last = cells.Length - 1;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var cell = ref skip(cells,i);
-                var fmt = string.Format("{0}", cell).Trim();
-                if(nonempty(fmt))
-                {
-                    buffer.Append(fmt);
-                    if(i != last)
-                        buffer.Append(Chars.Comma);
-
-                }
-                else
-                    break;
-            }
-            return buffer.Emit();
-        }
-
     }
 }

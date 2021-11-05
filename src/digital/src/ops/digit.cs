@@ -481,7 +481,6 @@ namespace Z0
         public static HDV digit(HUS src)
             => Hex.digit(src);
 
-
         /// <summary>
         /// Extracts two encoded digits
         /// </summary>
@@ -641,6 +640,5 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         public static NatSpan<N4,byte> digits(Perm4L src)
             => digits(src, NatSpans.alloc<N4,byte>());
-
     }
 }

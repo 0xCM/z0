@@ -87,7 +87,13 @@ namespace Z0
             => (Out() + subdir).Files(ext,true);
 
         FS.FolderPath Logs()
-            => Home() + FS.folder(logs);
+            => Out() + FS.folder(logs);
+
+        FS.FilePath Log(string id, FS.FileExt ext)
+            => Logs() + FS.file(id,ext);
+
+        FS.FilePath Log(string id)
+            => Log(id, FS.Log);
 
         FS.FolderPath Src()
             => Home() + FS.folder(src);

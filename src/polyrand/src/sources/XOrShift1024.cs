@@ -63,7 +63,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => RngMath.contract(Next(), max);
+            => math.contract(Next(), max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)

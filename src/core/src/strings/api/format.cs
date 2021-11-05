@@ -7,25 +7,23 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Strings;
-
     using static Root;
 
     partial struct strings
     {
         [Op]
-        public static string format(in WordRef src)
+        public static string format(in StringRef src)
             => new string(src.View);
 
-        public static string format<S>(in WordRef<S> src)
+        public static string format<S>(in StringRef<S> src)
             where S : unmanaged
                 => new string(core.recover<S,char>(src.View));
 
         [Op]
-        public static string format(in WordRefs src)
+        public static string format(in StringRefs src)
             => new string(src.View);
 
-        public static string format<S>(in WordRefs<S> src)
+        public static string format<S>(in StringRefs<S> src)
             where S : unmanaged
                 => new string(core.recover<S,char>(src.View));
 

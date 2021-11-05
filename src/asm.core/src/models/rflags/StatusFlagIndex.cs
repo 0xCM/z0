@@ -6,24 +6,21 @@ namespace Z0.Asm
 {
     using I = RFlags.RFlagIndex;
 
-    partial struct RFlags
+    /// <summary>
+    /// Defines indices into the <see cref='StatusFlagBits'/>
+    /// </summary>
+    public enum StatusFlagIndex : byte
     {
-        /// <summary>
-        /// Defines indices into the <see cref='StatusFlagBits'/>
-        /// </summary>
-        public enum StatusFlagIndex : byte
-        {
-            CF = I.CF,
+        CF = I.CF,
 
-            PF = I.PF,
+        PF = I.PF,
 
-            AF = I.AF,
+        AF = I.AF,
 
-            ZF = I.ZF,
+        ZF = I.ZF,
 
-            SF = I.SF,
+        SF = I.SF,
 
-            OF = I.OF,
-        }
+        OF = I.OF,
     }
 }
