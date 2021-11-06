@@ -25,7 +25,7 @@ namespace Z0
             {
                 ref var row = ref seek(dst,j);
                 ref readonly var entry = ref skip(entries,j);
-                row.EntryIndex = entry.Index;
+                row.EntryIndex = entry.Id;
                 row.EntryName = entry.Content;
                 row.TableName = src.TableName;
             }

@@ -16,6 +16,11 @@ namespace Z0
 
         }
 
-        public LiteralUsage Usage {get;}
+        public LiteralProviderAttribute(string name)
+        {
+            Name = name;
+        }
+
+        public string Name {get;}
     }
 }

@@ -16,6 +16,29 @@ namespace Z0
     /// </summary>
     public static class Matrix
     {
+        public static Matrix256<M,N,T> read<M,N,T>(FS.FilePath src, M m = default, N n = default, T t = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var dst = Matrix.blockread<M,N,T>(src);
+            if(NumericKinds.floating<T>())
+                dst.Apply(x => gfp.round<T>(x,4));
+            return dst;
+        }
+
+        public static Matrix256<M,N,T> write<M,N,T>(in Matrix256<M,N,T> src, FS.FilePath dst, M m = default, N n = default, T t = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            using var writer = dst.Writer();
+            if(NumericKinds.floating<T>())
+                src.Apply(x => gfp.round<T>(x,4));
+            Matrix.write(src,writer);
+            return src;
+        }
+
         /// <summary>
         /// Loads a natural block from blocked storage
         /// </summary>

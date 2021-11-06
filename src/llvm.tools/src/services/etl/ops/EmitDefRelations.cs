@@ -33,7 +33,7 @@ namespace Z0.llvm
                         if(empty(name) || text.member(name, ClassExclusions))
                             continue;
 
-                        ParseLineage(content, out var a);
+                        DeriveLineage(content, out var a);
                         record.Specify(line.LineNumber, name, a);
                         dst.Add(record);
                     }

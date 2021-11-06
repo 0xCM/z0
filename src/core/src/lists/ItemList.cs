@@ -13,12 +13,9 @@ namespace Z0
     {
         readonly Index<ListItem> Data;
 
-        public Identifier ListName {get;}
-
         [MethodImpl(Inline)]
-        public ItemList(Identifier name, ListItem[] src)
+        public ItemList(ListItem[] src)
         {
-            ListName = name;
             Data = src;
         }
 
@@ -65,7 +62,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ItemList((string name, ListItem[] items) src)
-            => new ItemList(src.name, src.items);
+        public static implicit operator ItemList(ListItem[] src)
+            => new ItemList(src);
+
+        public static ItemList Empty => new ItemList(sys.empty<ListItem>());
     }
 }

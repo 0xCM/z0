@@ -13,7 +13,11 @@ namespace Z0
     {
         readonly Index<ListItem<T>> Data;
 
-        public Identifier ListName {get;}
+        [MethodImpl(Inline)]
+        public ItemList(ListItem<T>[] src)
+        {
+            Data = src;
+        }
 
         public ref ListItem<T> this[int index]
         {
@@ -45,13 +49,6 @@ namespace Z0
             get => Data.Storage;
         }
 
-        [MethodImpl(Inline)]
-        public ItemList(Identifier name, ListItem<T>[] src)
-        {
-            ListName = name;
-            Data = src;
-        }
-
         public int Length
         {
             [MethodImpl(Inline)]
@@ -71,9 +68,9 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator ItemList<T>((string name, ListItem<T>[] items) src)
-            => new ItemList<T>(src.name, src.items);
+        public static implicit operator ItemList<T>(ListItem<T>[] src)
+            => new ItemList<T>(src);
 
-        public static ItemList<T> Empty => new ItemList<T>(Identifier.Empty, sys.empty<ListItem<T>>());
+        public static ItemList<T> Empty => new ItemList<T>(sys.empty<ListItem<T>>());
     }
 }

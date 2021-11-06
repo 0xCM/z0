@@ -14,16 +14,16 @@ namespace Z0.llvm.records
     {
         public Identifier Id {get;}
 
-        readonly Index<TableGenField> Data;
+        readonly Index<RecordField> Data;
 
         [MethodImpl(Inline)]
-        public TableGenFields(Identifier id, TableGenField[] src)
+        public TableGenFields(Identifier id, RecordField[] src)
         {
             Id = id;
             Data = src;
         }
 
-        public ReadOnlySpan<TableGenField> View
+        public ReadOnlySpan<RecordField> View
         {
             [MethodImpl(Inline)]
             get => Data.View;

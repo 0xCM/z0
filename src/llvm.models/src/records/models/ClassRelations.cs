@@ -6,6 +6,9 @@ namespace Z0.llvm.records
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     [Record(TableId), StructLayout(LayoutKind.Sequential)]
     public struct ClassRelations : ILineRelations<ClassRelations>
@@ -21,6 +24,12 @@ namespace Z0.llvm.records
         public Lineage Ancestors;
 
         public string Parameters;
+
+        public bool HasAncestor
+        {
+            [MethodImpl(Inline)]
+            get => Ancestors.HasAncestor;
+        }
 
         LineNumber ILineRelations.SourceLine
             => SourceLine;

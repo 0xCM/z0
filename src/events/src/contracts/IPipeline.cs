@@ -13,29 +13,4 @@ namespace Z0
 
         EventSignal Signal {get;}
     }
-
-    [Free]
-    public interface IPipeline<S,T> : IPipeline
-    {
-        IEmitter<S> Emitter {get;}
-
-        IProjector<S,T> Projector {get;}
-
-        IReceiver<T> Receiver {get;}
-
-        bool Connected {get;}
-    }
-
-    [Free]
-    public interface IPipeline<C,S,T> : IPipeline<S,T>
-        where C : IPipeline<C,S,T>
-    {
-
-    }
-
-    [Free]
-    public interface IPipelinePart
-    {
-        void Init(IPipeline pipes);
-    }
 }

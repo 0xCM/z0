@@ -11,8 +11,8 @@ namespace Z0
 
     public readonly struct ListItems
     {
-        public static ItemList<T> list<T>(Identifier name, ListItem<T>[] items)
-            => new ItemList<T>(name, items);
+        public static ItemList<T> list<T>(ListItem<T>[] items)
+            => new ItemList<T>(items);
 
         public static string format<T>(ItemList<T> src, char delimiter)
         {
@@ -32,9 +32,9 @@ namespace Z0
         public static ListItem record<T>(ListItem<T> src, string type)
         {
             var dst = new ListItem();
-            dst.Id = src.Index;
-            dst.Type = type;
-            dst.Value = src.Content?.ToString() ?? RP.Empty;
+            dst.Id = src.Id;
+            dst.Type = type?.Trim() ?? EmptyString;
+            dst.Value = (src.Content?.ToString() ?? RP.Empty).Trim();
             return dst;
         }
 
@@ -50,8 +50,8 @@ namespace Z0
             if(result.Fail)
                 return (false, "Parsing item id failed");
 
-            dst.Type = skip(parts, 1);
-            dst.Value = skip(parts, 2);
+            dst.Type = skip(parts, 1).Trim();
+            dst.Value = skip(parts, 2).Trim();
             return result;
         }
     }

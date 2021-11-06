@@ -11,9 +11,9 @@ namespace Z0.llvm
     {
        public readonly Identifier EntityName;
 
-       public readonly ReadOnlySpan<TableGenField> Items;
+       public readonly ReadOnlySpan<RecordField> Items;
 
-       public EltFieldSet(Identifier name, ReadOnlySpan<TableGenField> items)
+       public EltFieldSet(Identifier name, ReadOnlySpan<RecordField> items)
        {
            EntityName = name;
            Items = items;

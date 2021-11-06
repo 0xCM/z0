@@ -10,20 +10,20 @@ namespace Z0.llvm
 
     using static core;
 
-    using F = llvm.records.TableGenField;
+    using F = llvm.records.RecordField;
 
     partial class LlvmEtlServices
     {
-        static ReadOnlySpan<TableGenFields> partition(ReadOnlySpan<TableGenField> src)
+        static ReadOnlySpan<TableGenFields> partition(ReadOnlySpan<RecordField> src)
         {
             var count = src.Length;
             var dst = list<TableGenFields>();
-            var subset = list<TableGenField>();
+            var subset = list<RecordField>();
             var current = Identifier.Empty;
             for(var i=0; i<count; i++)
             {
                 ref readonly var f = ref skip(src,i);
-                ref readonly var id = ref f.Id;
+                ref readonly var id = ref f.RecordName;
                 if(id != current)
                 {
                     if(subset.Count != 0)
@@ -41,24 +41,19 @@ namespace Z0.llvm
             return dst.ViewDeposited();
         }
 
-        Outcome EmitFields(ReadOnlySpan<TableGenField> src, string dstid)
+        Outcome EmitFields(ReadOnlySpan<RecordField> src, string dstid)
         {
             var fields = src;
             var parts = partition(fields);
             var count = fields.Length;
             var dst = LlvmPaths.Table(dstid);
-            var emitting = EmittingTable<TableGenField>(dst);
+            var emitting = EmittingTable<RecordField>(dst);
             using var writer = dst.AsciWriter();
             writer.WriteLine(F.RowHeader);
             for(var i=0; i<count; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                var fv = field.Value;
-                if(nonempty(fv))
-                {
-                    fv = fv.Replace(Chars.Pipe, Chars.Caret);
-                }
-                writer.WriteLine(string.Format(F.RowFormat, field.Id, field.DataType, field.Name, fv));
+                writer.WriteLine(string.Format(F.RowFormat, field.RecordName, field.DataType, field.Name, field.Value));
             }
 
             EmittedTable(emitting, count);

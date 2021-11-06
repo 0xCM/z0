@@ -22,9 +22,9 @@ namespace Z0.llvm
 
        public ReadOnlySpan<DefRelations> DefRelations;
 
-       public ReadOnlySpan<TableGenField> Classes;
+       public ReadOnlySpan<RecordField> Classes;
 
-       public ReadOnlySpan<TableGenField> Defs;
+       public ReadOnlySpan<RecordField> Defs;
 
        public Dictionary<Identifier, uint> ListIndex;
 

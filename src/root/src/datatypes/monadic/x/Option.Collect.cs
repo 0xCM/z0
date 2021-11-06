@@ -142,13 +142,6 @@ namespace Z0
         public static Option<T> TryGetFirst<T>(this T[] src)
             => src.Length != 0 ? src[0] : Option.none<T>();
 
-        /// <summary>
-        /// Removes an element from the queue if one exists
-        /// </summary>
-        /// <typeparam name="T">The element type</typeparam>
-        /// <param name="q">the queue</param>
-        public static Option<T> TryPop<T>(this Queue<T> q)
-            => q.Count == 0 ? Option.none<T>() : some(q.Dequeue());
 
         /// Extracts the encapsulated values from a sequence of optional values (where Some)
         /// </summary>

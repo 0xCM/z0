@@ -60,8 +60,8 @@ namespace Z0.Test
             {
                 var path = Paths.CasePath(filename<M,N,T>(i));
                 var matrix = Random.MatrixBlock<M,N,T>();
-                var A = MatrixWriter.write(matrix, path, m, n, t);
-                var B = MatrixReader.read(path, m, n, t);
+                var A = Matrix.write(matrix, path, m, n, t);
+                var B = Matrix.read(path, m, n, t);
                 Claim.require(A == B);
             }
         }

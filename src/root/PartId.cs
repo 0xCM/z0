@@ -31,8 +31,8 @@ public enum PartId : byte
     [Symbol("bit")]
     Bit = 7,
 
-    [Symbol("hex")]
-    Hex = 8,
+    [Symbol("files")]
+    Files = 8,
 
     [Symbol("api")]
     Api = 9,

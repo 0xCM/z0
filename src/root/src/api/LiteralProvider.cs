@@ -11,21 +11,15 @@ namespace Z0
 
     public readonly struct LiteralProvider
     {
+        public string Name {get;}
+
         public Type Definition {get;}
 
-        public LiteralUsage Usage {get;}
-
         [MethodImpl(Inline)]
-        public LiteralProvider(Type src, LiteralUsage usage = default)
+        public LiteralProvider(string name, Type src)
         {
             Definition = src;
-            Usage = usage;
-        }
-
-        public string Name
-        {
-            [MethodImpl(Inline)]
-            get => Definition.Name;
+            Name = name;
         }
     }
 }

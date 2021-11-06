@@ -10,19 +10,19 @@ namespace Z0
 
     public readonly struct ListItem<T>
     {
-        public readonly uint Index;
+        public readonly uint Id;
 
         public readonly T Content;
 
         [MethodImpl(Inline)]
         public ListItem(uint index, T content)
         {
-            Index = index;
+            Id = index;
             Content = content;
         }
 
         public string Format()
-            => string.Format("{0:D6}:{1}", Index, Content);
+            => string.Format("{0:D6}:{1}", Id, Content);
 
         public override string ToString()
             => Format();

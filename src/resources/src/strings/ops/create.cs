@@ -71,7 +71,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var entry = ref skip(src,i);
-                seek(strings, entry.Index) = entry.Content;
+                seek(strings, entry.Id) = entry.Content;
             }
             return create(name,strings, src.Map(x => new Identifier(x.Content)).ToArray());
         }

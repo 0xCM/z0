@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static core;
-    using static Root;
 
     [ApiHost]
     public sealed class AssetServices : AppService<AssetServices>

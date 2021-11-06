@@ -38,7 +38,7 @@ namespace Z0.llvm
                         {
                             name = text.trim(text.inside(content, j + Marker.Length - 1, lt));
                             var bounds = SQ.enclosed(content,0, (Chars.Lt, Chars.Gt));
-                            parameters = text.inside(content, bounds.Min - 1, bounds.Max + 1);
+                            parameters = text.inside(content, bounds.Min - 1, bounds.Max + 1).Replace(Chars.Pipe,Chars.Caret);
                         }
                         else
                             name = text.trim(text.inside(content, j + Marker.Length - 1, k));
@@ -49,7 +49,7 @@ namespace Z0.llvm
                         var record = new ClassRelations();
                         record.SourceLine = line.LineNumber;
                         record.Name = name;
-                        ParseLineage(content, out record.Ancestors);
+                        DeriveLineage(content, out record.Ancestors);
                         record.Parameters = parameters;
                         dst.Add(record);
                     }

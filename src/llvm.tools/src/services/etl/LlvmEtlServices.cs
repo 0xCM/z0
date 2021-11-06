@@ -11,7 +11,6 @@ namespace Z0.llvm
     using records;
 
     using static LlvmNames;
-    using static Root;
     using static core;
 
     public partial class LlvmEtlServices : AppService<LlvmEtlServices>
@@ -39,25 +38,13 @@ namespace Z0.llvm
             ObjDump = Wf.LlvmObjDump();
         }
 
-        void IndexLists(ref EtlDatasets ds)
-        {
-            var index = dict<Identifier,uint>();
-            var count = ds.Lists.Length;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var list = ref skip(ds.Lists,i);
-                index[list.ListName] = i;
-            }
-            ds.ListIndex = index;
-        }
-
         public EtlDatasets RunEtl()
         {
             var dst = new EtlDatasets();
             var records = LoadSourceRecords(Datasets.X86);
             dst.Records = records;
             EmitLinedRecords(records, Datasets.X86Lined);
-            var lists = EmitListTables();
+            var lists = ImportLists();
             dst.Lists = lists;
             var classes = EmitClassRelations(records);
             dst.ClassRelations = classes;
@@ -73,37 +60,11 @@ namespace Z0.llvm
             var classFields = LoadFields(records, classMap);
             dst.Classes = classFields;
             EmitFields(classFields, Datasets.X86ClassFields);
-            IndexLists(ref dst);
-
             GenCode(dst);
             //CollectProjectData();
             //GenDocs(dst);
 
             return dst;
-        }
-
-        void DistillEntityRelations(ReadOnlySpan<ClassRelations> src)
-        {
-            var distinct = hashset<string>();
-            iter(src, @class => distinct.Add(@class.Name));
-            using var buffer = strings.buffer(distinct.ToReadOnlySpan());
-            var view = buffer.View;
-            var hashmap = dict<uint,Label>();
-            var length = z8;
-            for(var i=0u; i<view.Length; i++)
-            {
-                ref readonly var c = ref skip(view,i);
-                if(c == AsciNull.Literal)
-                {
-
-                }
-                else
-                {
-                    length++;
-
-                }
-            }
-
         }
 
         void GenCode(in EtlDatasets src)

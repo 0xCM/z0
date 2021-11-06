@@ -9,7 +9,7 @@ namespace Z0.llvm
         [CmdOp(".import-lists")]
         Outcome ImportLists(CmdArgs args)
         {
-            LlvmEtl.EmitListTables();
+            LlvmEtl.ImportLists();
             return true;
         }
     }

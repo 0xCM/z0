@@ -24,7 +24,7 @@ namespace Z0.llvm
             EntityName = name;
         }
 
-        public ReadOnlySpan<TableGenField> Fields
+        public ReadOnlySpan<RecordField> Fields
         {
             [MethodImpl(Inline)]
             get => Db.Fields(EntityName);

@@ -19,6 +19,12 @@ namespace Z0
 
         public TextBlock Value;
 
+        public string Format()
+            => string.Format("{0}[{1:D5}] = {2}", Type, Id, Value);
+
+        public override string ToString()
+            => Format();
+
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[FieldCount]{12,42,2};
     }

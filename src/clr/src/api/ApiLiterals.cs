@@ -15,8 +15,8 @@ namespace Z0
     public readonly struct ApiLiterals
     {
         [MethodImpl(Inline), Op]
-        public static LiteralProvider provider(Type src, LiteralUsage usage)
-            => new LiteralProvider(src,usage);
+        public static LiteralProvider provider(string name, Type def)
+            => new LiteralProvider(name, def);
 
         [Op]
         public static string format<T>(in RuntimeLiteralValue<T> src)
@@ -75,19 +75,27 @@ namespace Z0
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
-                ref readonly var type = ref skip(types,i);
-                seek(dst,i) = provider(type.Type, type.Tag.Usage);
+                ref readonly var tagged = ref skip(types,i);
+                var type = tagged.Type;
+                var name = tagged.Tag.Name;
+                if(empty(name))
+                    name = tagged.Type.Name;
+
+                seek(dst,i) = provider(name,type);
             }
             return buffer;
         }
 
-        public static Index<RuntimeLiteral> provided(Type src)
+        public static Index<RuntimeLiteral> provided(Type def)
         {
-            var tag = src.Tag<LiteralProviderAttribute>();
+            var tag = def.Tag<LiteralProviderAttribute>();
             if(tag)
             {
-                var usage = tag.Value.Usage;
-                return provided(provider(src, usage));
+                var name = tag.Value.Name;
+                if(empty(name))
+                    name = def.Name;
+
+                return provided(provider(name, def));
             }
             else
                 return Index<RuntimeLiteral>.Empty;

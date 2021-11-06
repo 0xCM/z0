@@ -6,6 +6,7 @@ namespace Z0.llvm
 {
     public readonly struct LlvmNames
     {
+        [LiteralProvider("llvm.datasets")]
         public readonly struct Datasets
         {
             public const string X86 = "X86.records";
@@ -21,11 +22,27 @@ namespace Z0.llvm
             public const string X86ClassFields = "X86.records.classes.fields";
         }
 
+        [LiteralProvider("llvm.lists")]
         public readonly struct Lists
         {
+            public const string ComplexPattern = "ComplexPattern";
+
+            public const string GCCBuiltin = "GCCBuiltin";
+
+            public const string Instruction = "Instruction";
+
+            public const string LLVMType = "LLVMType";
+
+            public const string ProcResourceKind = "ProcResourceKind";
+
+            public const string Register = "Register";
+
+            public const string SchedMachineModel = "SchedMachineModel";
+
             public const string X86Inst = "X86Inst";
         }
 
+        [LiteralProvider("llvm.projects")]
         public readonly struct Projects
         {
             public const string Canonical = "canonical";
@@ -42,7 +59,7 @@ namespace Z0.llvm
                 = new string[]{Canonical,LlvmModels,ClangModels,McModels,ClangAlgs};
         }
 
-        [LiteralProvider]
+        [LiteralProvider("llvm.tools")]
         public readonly struct Tools
         {
             public const string clang_query = "clang-query";

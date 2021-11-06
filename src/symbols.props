@@ -64,6 +64,7 @@
     <Extract>$(Src)extract/z0.extract.csproj</Extract>
 
     <Fsm>$(Src)fsm/z0.fsm.csproj</Fsm>
+    <Files>$(Src)files/z0.files.csproj</Files>
 
     <Gen>$(Src)gen/z0.gen.csproj</Gen>
     <Glue>$(Src)glue/z0.glue.csproj</Glue>

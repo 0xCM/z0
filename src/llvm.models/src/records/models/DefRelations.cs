@@ -5,6 +5,9 @@
 namespace Z0.llvm.records
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     [Record(TableId)]
     public struct DefRelations : ILineRelations<DefRelations>
@@ -19,14 +22,17 @@ namespace Z0.llvm.records
 
         public Lineage Ancestors;
 
+        public bool HasAncestor
+        {
+            [MethodImpl(Inline)]
+            get => Ancestors.HasAncestor;
+        }
+
         LineNumber ILineRelations.SourceLine
             => SourceLine;
 
         Identifier ILineRelations.Name
             => Name;
-
-        public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{14,64,1};
 
         public void Specify(LineNumber line, Identifier name, Lineage ancestors)
         {
@@ -34,5 +40,8 @@ namespace Z0.llvm.records
             Name = name;
             Ancestors = ancestors;
         }
+
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{14,64,1};
     }
 }

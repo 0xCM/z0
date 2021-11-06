@@ -21,6 +21,7 @@
     <ProjectReference Include="$(SymCore)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Relations)" />
+    <ProjectReference Include="$(Files)" />
   </ItemGroup>
 
   <ItemGroup>

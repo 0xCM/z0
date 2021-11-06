@@ -75,14 +75,14 @@ namespace Z0.llvm
                     break;
                 }
 
-                if(def.Id != entity && counter != 0)
+                if(def.RecordName != entity && counter != 0)
                 {
                     dst = new EltFieldSet(entity, slice(src,offset,counter));
                     result = true;
                     break;
                 }
 
-                if(def.Id == entity)
+                if(def.RecordName == entity)
                 {
                     if(counter == 0)
                         offset = i;

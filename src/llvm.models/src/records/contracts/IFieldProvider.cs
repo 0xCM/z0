@@ -10,6 +10,6 @@ namespace Z0.llvm.records
     {
         Identifier EntityName {get;}
 
-        ReadOnlySpan<TableGenField> Fields {get;}
+        ReadOnlySpan<RecordField> Fields {get;}
     }
 }

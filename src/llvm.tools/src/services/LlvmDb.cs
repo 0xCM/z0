@@ -26,7 +26,7 @@ namespace Z0.llvm
 
         IdentityMap<uint> DefLookup;
 
-        Index<TableGenField> DefFields;
+        Index<RecordField> DefFields;
 
         IdentityMap<Interval<uint>> FieldMap;
 
@@ -54,10 +54,11 @@ namespace Z0.llvm
             ClassNameBuffer.Dispose();
             DefNameBuffer.Dispose();
         }
-        public ReadOnlySpan<TableGenField> Fields(uint offset, uint length)
+
+        public ReadOnlySpan<RecordField> Fields(uint offset, uint length)
             => slice(DefFields.View, offset,length);
 
-        public ReadOnlySpan<TableGenField> Fields(Identifier id)
+        public ReadOnlySpan<RecordField> Fields(Identifier id)
         {
             if(FieldMap.Mapped(id, out var interval))
             {
@@ -69,7 +70,17 @@ namespace Z0.llvm
                 return default;
         }
 
-
+        public ItemList List(string type)
+        {
+            var path = Paths.ListImportPath(type);
+            var result = Tables.list(path, out var items);
+            if(result.Fail)
+            {
+                Error(result.Message);
+                return ItemList.Empty;
+            }
+            return items;
+        }
 
         public ReadOnlySpan<Label> ClassNames()
             => ClassNameBuffer.Labels;
@@ -90,8 +101,6 @@ namespace Z0.llvm
             for(var i=0; i<count; i++)
                 dst.WriteLine(ClassMap[i].Format());
         }
-
-
 
         public void Defs(StreamWriter dst)
         {
@@ -117,6 +126,44 @@ namespace Z0.llvm
             {
                 Write(string.Format("{0} not found", name));
             }
+        }
+
+        public ReadOnlySpan<ClassRelations> LoadClassRelations()
+        {
+            var src = Paths.Table<ClassRelations>();
+            var dst = list<ClassRelations>();
+            var rows = src.ReadLines();
+            var count = rows.Length;
+            var result = Outcome.Success;
+            for(var i=1; i<count; i++)
+            {
+                var record = new ClassRelations();
+                ref readonly var row = ref rows[i];
+                var cells = @readonly(row.Split(Chars.Pipe).Select(x => x.Trim()));
+                if(cells.Length != ClassRelations.FieldCount)
+                {
+                    Error(Tables.FieldCountMismatch.Format(ClassRelations.FieldCount, cells.Length));
+                    Write(row);
+                    break;
+                }
+                var j=0;
+                result = DataParser.parse(skip(cells,j++), out record.SourceLine);
+                if(result.Fail)
+                {
+                    Error(result.Message);
+                    break;
+                }
+                result = DataParser.parse(skip(cells,j++), out record.Name);
+                if(result.Fail)
+                {
+                    Error(result.Message);
+                    break;
+                }
+                record.Ancestors = Lineage.parse(skip(cells, j++));
+                record.Parameters = skip(cells,j++);
+                dst.Add(record);
+            }
+            return dst.ViewDeposited();
         }
 
         public ReadOnlySpan<DefRelations> LoadDefRelations()
@@ -186,7 +233,7 @@ namespace Z0.llvm
             var result = Outcome.Success;
             var src = Paths.Table(Datasets.X86DefFields);
             var count = FS.linecount(src);
-            DefFields = alloc<TableGenField>(count.Lines);
+            DefFields = alloc<RecordField>(count.Lines);
             var counter = 0u;
             using var reader = src.Utf8LineReader();
             var id = Identifier.Empty;
@@ -194,7 +241,7 @@ namespace Z0.llvm
             var j = 0u;
             while(reader.Next(out var line))
             {
-                result = parse(line, out var fields);
+                result = parse(line, out var field);
                 if(result.Fail)
                 {
                     Error(result.Message);
@@ -202,7 +249,7 @@ namespace Z0.llvm
                     break;
                 }
 
-                DefFields[counter++] = fields;
+                DefFields[counter++] = field;
             }
         }
 
@@ -220,19 +267,19 @@ namespace Z0.llvm
             Ran(running, string.Format("Loaded {0} fields from {1} records", DefFields.Count, X86Records.Count));
         }
 
-        static Outcome parse(in TextLine src, out TableGenField dst)
+        static Outcome parse(in TextLine src, out RecordField dst)
         {
             var result = Outcome.Success;
             dst = default;
             var parts = src.Split(Z0.Chars.Pipe);
             var count = parts.Length;
             if(count < 4)
-                return (false, Tables.FieldCountMismatch.Format(4,count));
+                return (false, Tables.FieldCountMismatch.Format(4, count));
 
-            dst.Id = skip(parts,0);
-            dst.FieldContent.DataType = skip(parts,1);
-            dst.FieldContent.Name = skip(parts,2);
-            dst.FieldContent.Value = skip(parts,3);
+            dst.RecordName = skip(parts,0);
+            dst.DataType = skip(parts,1);
+            dst.Name = skip(parts,2);
+            dst.Value = skip(parts,3);
             return result;
         }
     }

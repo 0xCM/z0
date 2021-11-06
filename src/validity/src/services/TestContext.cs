@@ -58,11 +58,11 @@ namespace Z0
 
         protected readonly IMessageQueue Queue;
 
-        Queue<TestCaseRecord> TestResults {get;}
-            = new Queue<TestCaseRecord>();
+        System.Collections.Generic.Queue<TestCaseRecord> TestResults {get;}
+            = new System.Collections.Generic.Queue<TestCaseRecord>();
 
-        Queue<BenchmarkRecord> Benchmarks {get;}
-            = new Queue<BenchmarkRecord>();
+        System.Collections.Generic.Queue<BenchmarkRecord> Benchmarks {get;}
+            = new System.Collections.Generic.Queue<BenchmarkRecord>();
 
         protected TestContext()
         {

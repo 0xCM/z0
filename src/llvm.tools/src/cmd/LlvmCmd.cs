@@ -30,13 +30,6 @@ namespace Z0.llvm
 
         IProjectWs Data;
 
-        // IProjectWs Project(string id)
-        // {
-        //     var ws = State.Project(id);
-        //     LoadProjectSources(ws);
-        //     return ws;
-        // }
-
         IProjectWs Project()
             => State.Project();
 

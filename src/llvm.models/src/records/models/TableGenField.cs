@@ -4,47 +4,38 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm.records
 {
+    using System;
     using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
 
     [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
-    public struct TableGenField
+    public struct RecordField
     {
         public const string TableId = "llvm.fields";
+
+        public const byte FieldCount = 4;
 
         public const string RowFormat = "{0,-64} | {1,-32} | {2,-32} | {3}";
 
         public static string RowHeader
-            => string.Format(RowFormat, nameof(Id), nameof(DataType), nameof(Name), nameof(Value));
+            => string.Format(RowFormat, nameof(RecordName), nameof(DataType), nameof(Name), nameof(Value));
 
-        public Identifier Id;
+        /// <summary>
+        /// The name of the declaring record
+        /// </summary>
+        public Identifier RecordName;
 
-        public RecordField FieldContent;
+        public string DataType;
 
-        public string DataType
-        {
-            [MethodImpl(Inline)]
-            get => FieldContent.DataType;
-        }
+        public string Name;
 
-        public string Name
-        {
-            [MethodImpl(Inline)]
-            get => FieldContent.Name;
-        }
-
-        public string Value
-        {
-            [MethodImpl(Inline)]
-            get => FieldContent.Value;
-        }
+        public string Value;
 
         public string Format()
-            => string.Format("{0}.{1}:{2} = {3}", Id, Name, DataType, Value);
+            => string.Format("{0}.{1}:{2} = {3}", RecordName, Name, DataType, Value);
 
         public override string ToString()
             => Format();
+
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{64,32,32,3};
     }
 }
