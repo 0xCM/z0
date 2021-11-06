@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-
     partial class LlvmCmd
     {
         [CmdOp(".classes")]

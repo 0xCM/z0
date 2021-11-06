@@ -23,18 +23,18 @@ namespace Z0.llvm
                 ref readonly var line = ref skip(src,j);
                 var content = line.Content.Trim();
                 ref var field = ref seek(dst, k++);
-                field.RecordName = interval.Id;
+                field.RecordName = text.trim(interval.Id);
                 if(text.index(content, Chars.Space, out var i0))
                 {
                     field.DataType = text.trim(text.left(content,i0));
                     var namedValue = text.right(content,i0);
                     if(text.index(namedValue, Chars.Space, out var i1))
                     {
-                        field.Name = text.left(namedValue,i1);
+                        field.Name = text.trim(text.left(namedValue,i1));
                         if(text.index(namedValue, Chars.Eq, out var i2))
                         {
                             if(text.index(namedValue, Chars.Semicolon, out var i3))
-                                field.Value = text.inside(namedValue, i2, i3).Replace(Chars.Pipe,Chars.Caret);
+                                field.Value = text.trim(text.inside(namedValue, i2, i3).Replace(Chars.Pipe,Chars.Caret));
                         }
                     }
                 }

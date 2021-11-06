@@ -7,5 +7,5 @@ namespace Z0.Graphs
     using System;
 
     public delegate void EdgeReader<V>(in LabeledEdge<V> e)
-        where V : unmanaged, IVertex, IEquatable<V>;
+        where V : unmanaged, ILabeledVertex, IEquatable<V>;
 }

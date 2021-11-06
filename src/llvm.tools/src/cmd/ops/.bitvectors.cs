@@ -18,7 +18,7 @@ namespace Z0.llvm
             var dir = LlvmData.Tables(lists);
             var src = @readonly(dir.Files(FS.Csv));
             var dst = LlvmData.Subdir("bitvectors");
-            Wf.Bitfields().EmitBitVectors(src,dst);
+            Wf.Bitfields().EmitBitVectors(src, dst);
             return result;
         }
     }

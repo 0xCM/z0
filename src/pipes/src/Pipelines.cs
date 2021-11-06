@@ -91,7 +91,6 @@ namespace Z0
             where B : IBlockSink256<T>
                 => new BlockRelay256<A,S,B,T>(pipes, src,dst);
 
-
         [MethodImpl(Inline)]
         public static void project<P,S,T>(BlockRelay128<S,T> relay, P projector)
             where S : unmanaged

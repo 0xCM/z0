@@ -16,14 +16,14 @@ namespace Z0
         public static Lineage root(string name)
             => new Lineage(name);
 
-        public static Lineage parse(string src)
+        public static Lineage parse(string src, string sep = "->")
         {
             var input = text.trim(src);
             if(empty(input))
                 return Lineage.Empty;
-            else if(input.Contains("->"))
+            else if(input.Contains(sep))
             {
-                var parts = @readonly(input.Split("->").Select(x => x.Trim()));
+                var parts = @readonly(input.Split(sep).Select(x => x.Trim()));
                 var count = parts.Length;
                 if(count == 0)
                     return Lineage.Empty;
@@ -47,8 +47,6 @@ namespace Z0
             else
                 return new Lineage(first(src), slice(src,1).ToArray());
         }
-
-        const string LeftToRight = " -> ";
 
         Lineage(string name, string[] ancestors)
         {
@@ -89,6 +87,9 @@ namespace Z0
         }
 
         public string Format()
+            => Format(LeftToRight);
+
+        public string Format(string sep)
         {
             var dst = text.buffer();
             if(IsNonEmpty && nonempty(Name))
@@ -97,16 +98,19 @@ namespace Z0
                 var count = Ancestors.Count;
                 for(var i=0; i<count; i++)
                 {
-                    dst.Append(LeftToRight);
+                    dst.Append(sep);
                     dst.Append(Ancestors[i]);
                 }
             }
             return dst.Emit();
+
         }
 
         public override string ToString()
             => Format();
 
         public static Lineage Empty => new Lineage();
+
+        const string LeftToRight = " -> ";
     }
 }

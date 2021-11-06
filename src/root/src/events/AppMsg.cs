@@ -30,8 +30,8 @@ namespace Z0
         public static MsgPattern<string> UriParseFailure
             => "Coult not parse '{0}' as a uri";
 
-        public static MsgPattern<Identifier> WorkspaceSelected
-            => "{0} workspace selected";
+        public static MsgPattern<dynamic> NotFound
+            => "{0} not found";
 
         public static MsgPattern<ApiHostUri> HostNotFound
             => "Host {0} not found";

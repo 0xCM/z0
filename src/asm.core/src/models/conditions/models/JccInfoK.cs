@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Root;
     using static core;
-    using static BitFlow;
 
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public readonly struct JccInfo<K>

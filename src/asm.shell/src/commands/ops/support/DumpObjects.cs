@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {
     using llvm;
-    using static core;
 
     partial class AsmCmdService
     {

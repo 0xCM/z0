@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Machines.X86
 {
+    using Regs;
+
     [ApiComplete("regmodels.reglist")]
     public readonly partial struct RegList
     {

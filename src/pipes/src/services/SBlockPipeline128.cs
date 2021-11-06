@@ -35,15 +35,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Run()
+        public uint Run()
         {
             var count = Blocks.BlockCount;
+            var counter = 0u;
             for(var j=0u; j<count; j++)
             {
                 var dst = SpanBlocks.single<T>(W);
-                Projector.Map(Blocks.Emit(j),dst);
+                var src = Blocks.Emit(j);
+                counter += Projector.Map(src, dst);
                 Receiver.Deposit(dst);
             }
+            return counter;
         }
     }
 }

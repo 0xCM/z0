@@ -15,19 +15,5 @@ namespace Z0.llvm
             TableEmit(src, OpCodeSpec.RenderWidths, dst);
             return result;
         }
-
-        [CmdOp(".asmid")]
-        public Outcome ShowAsmIdList(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var strings = llvm.Strings.OpCodes;
-            var count = strings.EntryCount;
-            for(ushort i=0; i<count; i++)
-            {
-                Write(string.Format("{0:D5}: '{1}'", i, text.format(strings[i])));
-            }
-
-            return result;
-        }
     }
 }

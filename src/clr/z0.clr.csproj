@@ -8,8 +8,8 @@
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Sys)" />
-    <ProjectReference Include="$(Containers)" />
     <ProjectReference Include="$(Bit)" />
+    <ProjectReference Include="$(Seq)" />
   </ItemGroup>
 
 </Project>

@@ -15,13 +15,5 @@ namespace Z0.llvm
             Db.Defs(writer);
             return result;
         }
-
-        [CmdOp(".def")]
-        Outcome Def(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            Db.Def(arg(args,0).Value);
-            return result;
-        }
     }
 }

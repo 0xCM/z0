@@ -89,7 +89,7 @@ namespace Z0.Asm
                 => Produce<A,B,ulong>(a,b,c);
 
         [MethodImpl(Inline), Op]
-        AsmExpr Produce<A,B,T>(Sym<A> a, Sym<B> b, imm<T> c)
+        AsmExpr Produce<A,B,T>(Sym<A> a, Sym<B> b, ImmOp<T> c)
             where A : unmanaged
             where B : unmanaged
             where T : unmanaged
@@ -108,7 +108,7 @@ namespace Z0.Asm
             => slice(Buffer.Edit, 0, Position);
 
         [Op]
-        void Render<T>(imm<T> src)
+        void Render<T>(ImmOp<T> src)
             where T : unmanaged
                 => Render("0" + src.Format());
 

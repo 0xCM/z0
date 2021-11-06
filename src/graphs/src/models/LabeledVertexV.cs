@@ -9,7 +9,7 @@ namespace Z0.Graphs
 
     using static Root;
 
-    public readonly struct LabeledVertex<V> : IVertex<V>, IEquatable<LabeledVertex<V>>
+    public readonly struct LabeledVertex<V> : ILabeledVertex<V>, IEquatable<LabeledVertex<V>>
     {
         public Label Name {get;}
 

@@ -17,7 +17,6 @@
     <ProjectReference Include="$(ApiCore)" />
     <ProjectReference Include="$(Cells)" />
     <ProjectReference Include="$(Commands)" />
-    <ProjectReference Include="$(Containers)" />
     <ProjectReference Include="$(SymCore)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Relations)" />

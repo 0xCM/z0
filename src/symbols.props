@@ -45,11 +45,8 @@
     <Clr>$(Src)clr/z0.clr.csproj</Clr>
     <Core>$(Src)core/z0.core.csproj</Core>
     <Commands>$(Src)commands/z0.commands.csproj</Commands>
-    <Containers>$(Src)containers/z0.containers.csproj</Containers>
     <Cpu>$(Src)cpu/z0.cpu.csproj</Cpu>
     <CpuDsl>$(Src)cpu.dsl/z0.cpu.dsl.csproj</CpuDsl>
-    <CmdSpec>$(Src)cmdspec/z0.cmdspec.csproj</CmdSpec>
-    <CmdExec>$(Src)cmdexec/z0.cmdexec.csproj</CmdExec>
     <Checks>$(Src)checks/z0.checks.csproj</Checks>
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
 
@@ -70,8 +67,6 @@
     <Glue>$(Src)glue/z0.glue.csproj</Glue>
     <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
     <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
-
-    <Grids>$(Src)grids/z0.grids.csproj</Grids>
 
     <Hash>$(Src)hash/z0.hash.csproj</Hash>
 

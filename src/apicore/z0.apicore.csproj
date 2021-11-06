@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Interop)" />
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(Containers)" />
     <ProjectReference Include="$(Bit)" />
     <ProjectReference Include="$(Cells)" />
     <ProjectReference Include="$(Clr)" />

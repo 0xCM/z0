@@ -10,7 +10,7 @@ namespace Z0.Graphs
     using static Root;
 
     public readonly struct LabeledEdge<V> : IEdge<V>, IEquatable<LabeledEdge<V>>
-        where V : unmanaged, IVertex, IEquatable<V>
+        where V : unmanaged, ILabeledVertex, IEquatable<V>
     {
         public Label Name {get;}
 

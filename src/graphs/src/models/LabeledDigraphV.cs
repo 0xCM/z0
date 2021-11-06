@@ -7,7 +7,7 @@ namespace Z0.Graphs
     using System;
 
     public class LabeledDigraph<V>
-        where V : unmanaged, IVertex, IEquatable<V>
+        where V : unmanaged, ILabeledVertex, IEquatable<V>
     {
         MutableSet<V> _Vertices;
 

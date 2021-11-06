@@ -17,29 +17,17 @@ namespace Z0.Machines
         public static void test(IWfRuntime wf)
         {
             var flow = wf.Running();
-            (var count, var size)  = run(w128,blocks(Rng.@default(), Pow2.T08), mapper(), sink(signal(wf)));
-            wf.Ran(flow, string.Format("Processed {0} blocks covering {1} bytes", count, size));
+            var w = w128;
+            var blocks = Pow2.T08;
+            var random = Rng.@default();
+            var mapper = new VMap01();
+            var signal = EventSignals.signal(wf.EventSink, typeof(VPipeTests));
+            var src = new BlockSource01(random, blocks);
+            var dst = new BlockSink01(signal);
+            var pipeline = Pipelines.create(w, src, mapper, dst, z8, z8);
+            var processed = pipeline.Run();
+            wf.Ran(flow, string.Format("Processed {0} blocks", processed));
         }
-
-        [Op]
-        public static Paired<uint,ByteSize> run(W128 w, BlockSource01 source, VMap01 mapper, BlockSink01 sink)
-            => BlockPipes.vpipeline(w128, source, mapper, sink, z8, z8).Run();
-
-        [MethodImpl(Inline), Op]
-        static EventSignal signal(IWfRuntime wf)
-            => EventSignals.signal(wf.EventSink, typeof(VPipeTests));
-
-        [MethodImpl(Inline), Op]
-        static VMap01 mapper()
-            => new VMap01();
-
-        [MethodImpl(Inline), Op]
-        static BlockSink01 sink(EventSignal signal)
-            => new BlockSink01(signal);
-
-        [MethodImpl(Inline), Op]
-        static BlockSource01 blocks(IPolySource poly, uint blocks)
-            => new BlockSource01(poly, blocks);
     }
 
     public readonly struct VMap01 : IVMap128<VMap01,byte,byte>
@@ -55,7 +43,7 @@ namespace Z0.Machines
 
     public struct BlockSink01 : IBlockSink128<BlockSink01,byte>
     {
-        readonly EventSignal Wf;
+        readonly EventSignal Signal;
 
         uint Counter;
 
@@ -74,7 +62,7 @@ namespace Z0.Machines
         [MethodImpl(Inline)]
         public BlockSink01(EventSignal wf)
         {
-            Wf = wf;
+            Signal = wf;
             Counter = 0;
         }
 
@@ -89,10 +77,10 @@ namespace Z0.Machines
     {
         public uint BlockCount {get;}
 
-        readonly IRangeSource PolySource;
+        readonly IBoundSource PolySource;
 
         [MethodImpl(Inline)]
-        public BlockSource01(IRangeSource source, uint count)
+        public BlockSource01(IBoundSource source, uint count)
         {
             PolySource = source;
             BlockCount = count;

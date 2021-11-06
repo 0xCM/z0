@@ -10,7 +10,6 @@ namespace Z0.llvm
         Outcome LlvmConfig(CmdArgs args)
         {
            var config = LlvmEtl.ComputeConfig();
-
            return true;
         }
     }

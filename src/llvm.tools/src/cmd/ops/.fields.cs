@@ -4,9 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
-
     using static core;
+    using records;
 
     partial class LlvmCmd
     {
@@ -14,7 +13,12 @@ namespace Z0.llvm
         Outcome Fields(CmdArgs args)
         {
             var result = Outcome.Success;
-            if(args.Length == 2)
+            if(args.Length == 1)
+            {
+                var fields = Db.Fields(arg(args,0).Value);
+                iter(fields, f => Write(f.Format()));
+            }
+            else if(args.Length == 2)
             {
                 DataParser.parse(arg(args,0).Value, out uint offset);
                 DataParser.parse(arg(args,1).Value, out uint length);
@@ -23,13 +27,10 @@ namespace Z0.llvm
             }
             else
             {
-                var types = hashset<string>();
-                var defs = list<Identifier>();
+                var entities = list<Entity>();
                 Db.Fields(provider => {
-                    defs.Add(provider.EntityName);
+                    Write(provider.EntityName);
                 });
-
-                iter(defs, d => Write(d));
             }
             return result;
         }

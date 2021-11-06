@@ -36,6 +36,7 @@ namespace Z0.llvm.records
         public override string ToString()
             => Format();
 
-        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{64,32,32,3};
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{64,32,32,3};
     }
 }

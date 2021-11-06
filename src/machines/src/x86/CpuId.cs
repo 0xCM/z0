@@ -8,8 +8,11 @@ namespace Z0.Machines.X86
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
+    using Regs;
+
     using static Root;
     using static core;
+
 
     [StructLayout(LayoutKind.Sequential)]
     public struct CpuId : ITextual

@@ -6,9 +6,6 @@ namespace Z0.llvm
 {
     using types;
 
-    using static Root;
-    using static core;
-
     partial class LlvmCmd
     {
         [CmdOp(".test")]

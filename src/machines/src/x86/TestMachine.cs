@@ -103,7 +103,6 @@ namespace Z0.Machines.X86
             return result;
         }
 
-
         [CmdOp(".test-classes")]
         Outcome TestSymNames(CmdArgs args)
         {
@@ -300,9 +299,9 @@ namespace Z0.Machines.X86
 
         void Run(N11 n)
         {
-            const uint CellCount = 1024;
-            const uint JobCount = 128;
-            const uint CycleCount = 64;
+            const uint CellCount = 4096;
+            const uint JobCount = 256;
+            const uint CycleCount = 256;
 
             Task<uint> RunMachine(uint cycles)
                 => Task.Factory.StartNew(() => new Vmx128x2(CellCount, Rng.@default()).Run(cycles));

@@ -26,9 +26,13 @@ namespace Z0.llvm
 
         IdentityMap<uint> DefLookup;
 
-        Index<RecordField> DefFields;
+        IdentityMap<uint> ClassLookup;
 
-        IdentityMap<Interval<uint>> FieldMap;
+        Index<RecordField> _DefFields;
+
+        Index<RecordField> _ClassFields;
+
+        IdentityMap<Interval<uint>> FieldDefMap;
 
         BufferedLabels ClassNameBuffer;
 
@@ -40,13 +44,14 @@ namespace Z0.llvm
             ClassMap = LineMap<Identifier>.Empty;
             DefMap = LineMap<Identifier>.Empty;
             DefLookup = new();
-            FieldMap = new();
+            FieldDefMap = new();
+            ClassLookup = new();
         }
 
         protected override void Initialized()
         {
             Paths = Wf.LlvmPaths();
-            LoadRecords();
+            LoadData();
         }
 
         protected override void Disposing()
@@ -56,18 +61,21 @@ namespace Z0.llvm
         }
 
         public ReadOnlySpan<RecordField> Fields(uint offset, uint length)
-            => slice(DefFields.View, offset,length);
+            => slice(_DefFields.View, offset,length);
 
         public ReadOnlySpan<RecordField> Fields(Identifier id)
         {
-            if(FieldMap.Mapped(id, out var interval))
+            if(FieldDefMap.Mapped(id, out var interval))
             {
                 var i = interval.Left;
                 var j = interval.Right;
-                return slice(DefFields.View,i, j - i);
+                return slice(_DefFields.View, i, j - i);
             }
             else
+            {
+                Warn(string.Format("{0} not found", id));
                 return default;
+            }
         }
 
         public ItemList List(string type)
@@ -88,11 +96,17 @@ namespace Z0.llvm
         public ReadOnlySpan<Label> DefNames()
             => DefNameBuffer.Labels;
 
+        public ReadOnlySpan<RecordField> ClassFields()
+            => _ClassFields.View;
+
+        public ReadOnlySpan<RecordField> DefFields()
+            => _DefFields.View;
+
         public void Fields(Action<IFieldProvider> receiver)
         {
             var defcount = DefMap.IntervalCount;
             for(var i=0; i<defcount; i++)
-                receiver(new FieldProvider(DefMap[i].Id,this));
+                receiver(new FieldProvider(DefMap[i].Id, this));
         }
 
         public void Classes(StreamWriter dst)
@@ -109,8 +123,9 @@ namespace Z0.llvm
                 dst.WriteLine(DefMap[i].Format());
         }
 
-        public void Def(Identifier name)
+        public ReadOnlySpan<TextLine> DefLines(Identifier name)
         {
+            var lines = list<TextLine>();
             if(DefLookup.Mapped(name, out var i))
             {
                 ref readonly var entry = ref DefMap[i];
@@ -118,14 +133,28 @@ namespace Z0.llvm
                 var j1 = entry.MaxLine;
                 for(var k=j0; k<j1; k++)
                 {
-                    ref readonly var line = ref X86Records[k];
-                    Write(line.Format());
+                    lines.Add(X86Records[k]);
                 }
             }
             else
+                Write(AppMsg.NotFound.Format(name));
+            return lines.ViewDeposited();
+        }
+
+        public ReadOnlySpan<TextLine> ClassLines(Identifier name)
+        {
+            var lines = list<TextLine>();
+            if(ClassLookup.Mapped(name, out var i))
             {
-                Write(string.Format("{0} not found", name));
+                ref readonly var entry = ref DefMap[i];
+                var j0 = entry.MinLine - 1;
+                var j1 = entry.MaxLine;
+                for(var k=j0; k<j1; k++)
+                    lines.Add(X86Records[k]);
             }
+            else
+                Write(AppMsg.NotFound.Format(name));
+            return lines.ViewDeposited();
         }
 
         public ReadOnlySpan<ClassRelations> LoadClassRelations()
@@ -185,13 +214,13 @@ namespace Z0.llvm
                     break;
                 }
                 var j=0;
-                result = DataParser.parse(skip(cells,j++), out record.SourceLine);
+                result = DataParser.parse(skip(cells, j++), out record.SourceLine);
                 if(result.Fail)
                 {
                     Error(result.Message);
                     break;
                 }
-                result = DataParser.parse(skip(cells,j++), out record.Name);
+                result = DataParser.parse(skip(cells, j++), out record.Name);
                 if(result.Fail)
                 {
                     Error(result.Message);
@@ -201,6 +230,84 @@ namespace Z0.llvm
                 dst.Add(record);
             }
             return dst.ViewDeposited();
+        }
+
+        // void LoadDefFields()
+        // {
+        //     var src = Paths.Table(Datasets.X86DefFields);
+        //     var count = FS.linecount(src);
+        //     DefFields = alloc<RecordField>(count.Lines);
+        //     var counter = 0u;
+        //     using var reader = src.Utf8LineReader();
+        //     var id = Identifier.Empty;
+        //     var i = 0u;
+        //     var j = 0u;
+        //     while(reader.Next(out var line))
+        //     {
+        //         var result = parse(line, out var field);
+        //         if(result.Fail)
+        //         {
+        //             Error(result.Message);
+        //             break;
+        //         }
+
+        //         DefFields[counter++] = field;
+        //     }
+        // }
+
+        void LoadFields(string dataset, out Index<RecordField> dst)
+        {
+            var src = Paths.Table(dataset);
+            var count = FS.linecount(src);
+            dst = alloc<RecordField>(count.Lines);
+            var counter = 0u;
+            using var reader = src.Utf8LineReader();
+            var id = Identifier.Empty;
+            var i = 0u;
+            var j = 0u;
+            while(reader.Next(out var line))
+            {
+                var result = parse(line, out var field);
+                if(result.Fail)
+                {
+                    Error(result.Message);
+                    break;
+                }
+
+                dst[counter++] = field;
+            }
+        }
+
+        void LoadDefs()
+        {
+            DefMap = LoadLineMap(Paths.ImportMap(Datasets.X86Defs));
+            DefNameBuffer = strings.labels(DefMap.Intervals.Select(x => x.Id.Content));
+            iteri(DefMap.Intervals, (i,entry) => DefLookup.Map(entry.Id, (uint)i));
+            iteri(DefMap.Intervals, (i,entry) => FieldDefMap.Map(entry.Id, (entry.MinLine,entry.MaxLine)));
+            LoadFields(Datasets.X86DefFields, out _DefFields);
+        }
+
+        void LoadClasses()
+        {
+            ClassMap = LoadLineMap(Paths.ImportMap(Datasets.X86Classes));
+            ClassNameBuffer = strings.labels(ClassMap.Intervals.Select(x => x.Id.Content));
+            iteri(ClassMap.Intervals, (i,entry) => ClassLookup.Map(entry.Id, (uint)i));
+            LoadFields(Datasets.X86ClassFields, out _ClassFields);
+        }
+
+        void LoadRecordLines()
+        {
+            using var reader = Paths.RecordImport(Datasets.X86Lined, FS.Txt).Utf8LineReader();
+            X86Records = reader.ReadAll().ToArray();
+        }
+
+        void LoadData()
+        {
+            var flow = Running("Loading data");
+            LoadRecordLines();
+            LoadClasses();
+            LoadDefs();
+            Ran(flow, string.Format("Loaded {0} fields from {1} records", _DefFields.Count, X86Records.Count));
         }
 
         LineMap<Identifier> LoadLineMap(FS.FilePath src)
@@ -226,45 +333,6 @@ namespace Z0.llvm
                 return new LineMap<Identifier>(intervals);
             else
                 return new LineMap<Identifier>(sys.empty<LineInterval<Identifier>>());
-        }
-
-        void LoadDefFields()
-        {
-            var result = Outcome.Success;
-            var src = Paths.Table(Datasets.X86DefFields);
-            var count = FS.linecount(src);
-            DefFields = alloc<RecordField>(count.Lines);
-            var counter = 0u;
-            using var reader = src.Utf8LineReader();
-            var id = Identifier.Empty;
-            var i = 0u;
-            var j = 0u;
-            while(reader.Next(out var line))
-            {
-                result = parse(line, out var field);
-                if(result.Fail)
-                {
-                    Error(result.Message);
-
-                    break;
-                }
-
-                DefFields[counter++] = field;
-            }
-        }
-
-        void LoadRecords()
-        {
-            var running = Running("Loading data");
-            using var r0 = Paths.RecordImport(Datasets.X86Lined, FS.Txt).Utf8LineReader();
-            X86Records = r0.ReadAll().ToArray();
-            ClassMap = LoadLineMap(Paths.ImportMap(Datasets.X86Classes));
-            DefMap = LoadLineMap(Paths.ImportMap(Datasets.X86Defs));
-            ClassNameBuffer = strings.labels(ClassMap.Intervals.Select(x => x.Id.Content));
-            DefNameBuffer = strings.labels(DefMap.Intervals.Select(x => x.Id.Content));
-            iteri(DefMap.Intervals, (i,entry) => DefLookup.Map(entry.Id, (uint)i));
-            LoadDefFields();
-            Ran(running, string.Format("Loaded {0} fields from {1} records", DefFields.Count, X86Records.Count));
         }
 
         static Outcome parse(in TextLine src, out RecordField dst)

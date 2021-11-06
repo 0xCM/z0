@@ -4,17 +4,39 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Graphs
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IVertex : IExpr
     {
-        Label Name {get;}
+
     }
 
     [Free]
-    public interface IVertex<V> : IVertex
+    public interface IVertex<V,T> : IVertex, IEquatable<V>, IComparable<V>
+        where V : struct, IVertex<V,T>
+        where T : unmanaged
     {
-        V Value {get;}
+        T Key {get;}
+    }
+
+    [Free]
+    public interface IVertex<V,K,T> : IVertex<V,T>
+        where V : struct, IVertex<V,K,T>
+        where K : unmanaged
+        where T : unmanaged
+    {
+        K Kind {get;}
+    }
+
+    [Free]
+    public interface IVertex<V,P,K,T> : IVertex<V,K,T>
+        where V : struct, IVertex<V,P,K,T>
+        where K : unmanaged
+        where T : unmanaged
+    {
+        P Value {get;}
     }
 }

@@ -2,10 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Graphs
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
+    using Graphs;
 
     using static Root;
 
@@ -22,8 +24,12 @@ namespace Z0.Graphs
 
         [MethodImpl(Inline)]
         public static LabeledEdge<V> edge<V>(Label label, V src, V dst)
-            where V : unmanaged, IVertex, IEquatable<V>
+            where V : unmanaged, ILabeledVertex, IEquatable<V>
                 => new LabeledEdge<V>(label,src,dst);
+
+        [MethodImpl(Inline), Op]
+        public static Vertex16 vertex(ushort key)
+            => new Vertex16(key);
 
         [MethodImpl(Inline)]
         public static LabeledVertex<V> node<V>(Label name, V value)
@@ -32,7 +38,7 @@ namespace Z0.Graphs
 
         [MethodImpl(Inline)]
         public static LabeledDigraph<V> digraph<V>()
-            where V : unmanaged, IVertex, IEquatable<V>
+            where V : unmanaged, ILabeledVertex, IEquatable<V>
                 => new LabeledDigraph<V>();
     }
 }

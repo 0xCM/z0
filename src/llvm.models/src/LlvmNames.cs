@@ -25,21 +25,25 @@ namespace Z0.llvm
         [LiteralProvider("llvm.lists")]
         public readonly struct Lists
         {
-            public const string ComplexPattern = "ComplexPattern";
+            public const string AdSize16 = nameof(AdSize16);
 
-            public const string GCCBuiltin = "GCCBuiltin";
+            public const string ComplexPattern = nameof(ComplexPattern);
 
-            public const string Instruction = "Instruction";
+            public const string GCCBuiltin = nameof(GCCBuiltin);
 
-            public const string LLVMType = "LLVMType";
+            public const string Instruction = nameof(Instruction);
 
-            public const string ProcResourceKind = "ProcResourceKind";
+            public const string LLVMType = nameof(LLVMType);
 
-            public const string Register = "Register";
+            public const string ProcResourceKind = nameof(ProcResourceKind);
 
-            public const string SchedMachineModel = "SchedMachineModel";
+            public const string Register = nameof(Register);
 
-            public const string X86Inst = "X86Inst";
+            public const string SchedMachineModel = nameof(SchedMachineModel);
+
+            public const string RegisterClass = nameof(RegisterClass);
+
+            public const string X86Inst = nameof(X86Inst);
         }
 
         [LiteralProvider("llvm.projects")]

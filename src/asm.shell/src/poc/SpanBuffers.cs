@@ -6,9 +6,6 @@ namespace Z0
 {
     using Assert = PrimalClaims;
 
-    using static Root;
-    using static core;
-
     public class SpanBufferCases : AppService<SpanBufferCases>
     {
         static ICheckNumeric Claim = NumericClaims.Checker;
@@ -26,9 +23,8 @@ namespace Z0
             Claim.eq(c.CallerName, nameof(check_caller));
         }
 
-
         [Op]
-        public void stacked_basecase()
+        public void CheckStacks()
         {
             var stack = SpanBuffers.stack<uint>(3);
             stack.Push(1);
@@ -44,7 +40,7 @@ namespace Z0
         }
 
         [Op]
-        public void bitstack_basecase()
+        public void CheckBitCircles()
         {
             var stack = new BitCircles(0b101011);
             Claim.require(stack.Pop() == 1);
@@ -58,7 +54,7 @@ namespace Z0
         }
 
         [Op]
-        public void ringbuffer_32()
+        public void CheckRingBuffer()
         {
             var buffer = SpanBuffers.ring<uint>(Pow2.T08);
             var count = Random.Next<int>(20,Pow2.T07);
@@ -72,7 +68,7 @@ namespace Z0
         }
 
         [Op]
-        public void partring_basecase()
+        public void CheckPartRing()
         {
             var capacity = Pow2.T10;
             var partwidth = 4;

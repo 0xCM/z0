@@ -13,7 +13,7 @@ namespace Z0.Machines.X86
     using Asm;
 
     [ApiHost]
-    public unsafe class RegMachine : IDisposable
+    public unsafe partial class RegMachine : IDisposable
     {
         RegBank Regs;
 
@@ -35,7 +35,7 @@ namespace Z0.Machines.X86
 
         MemAlloc Ram;
 
-        MemoryAddress RamBase;
+        MemoryAddress CodeBase;
 
         internal RegMachine()
         {
@@ -49,9 +49,9 @@ namespace Z0.Machines.X86
             R8 = (byte*)R64;
             Stack = CpuModels.stack<ulong>(64);
             Ram = MemAlloc.alloc(256);
-            RamBase = AllocPage();
-            *RamBase.Pointer<ulong>() = 0xCC;
-            rip() = RamBase;
+            CodeBase = AllocPage();
+            *CodeBase.Pointer<ulong>() = 0xCC;
+            rip() = CodeBase;
         }
 
         internal RegBank Bank

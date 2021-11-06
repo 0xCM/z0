@@ -11,6 +11,8 @@ namespace Z0
     using static Root;
     using static core;
 
+    using SQ = SymbolicQuery;
+
     [ApiHost]
     public readonly struct DataParser
     {
@@ -92,7 +94,6 @@ namespace Z0
             outcome += parse(skip(cells,j++), out dst.Description);
             return outcome;
         }
-
 
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out SymKey dst)
@@ -439,7 +440,7 @@ namespace Z0
             where T : unmanaged, ICharBlock<T>
         {
             block = default;
-            CharBlocks.init(src,out block);
+            CharBlocks.init(src, out block);
             return true;
         }
 
@@ -451,7 +452,7 @@ namespace Z0
             {
                 var name = EmptyString;
                 var input = src;
-                if(SymbolicQuery.contains(src, delimiter))
+                if(SQ.contains(src, delimiter))
                 {
                     name = src.LeftOfFirst(delimiter);
                     input = src.RightOfFirst(delimiter);
@@ -464,7 +465,7 @@ namespace Z0
                 }
                 else if (typeof(T) == typeof(bool))
                 {
-                    if(DataParser.parse(input, out bool value))
+                    if(parse(input, out bool value))
                     {
                         dst = (name, generic<T>(value));
                         return true;
@@ -472,13 +473,13 @@ namespace Z0
                 }
                 else if(typeof(T) == typeof(bit))
                 {
-                    if(DataParser.parse(input, out bit u1))
+                    if(parse(input, out bit u1))
                     {
                         dst = (name, generic<T>((bool)u1));
                         return true;
                     }
                 }
-                else if(DataParser.numeric(input, out T g))
+                else if(numeric(input, out T g))
                 {
                     dst = (name, g);
                     return true;

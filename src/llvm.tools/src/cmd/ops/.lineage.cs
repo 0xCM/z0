@@ -46,7 +46,6 @@ namespace Z0.llvm
             return members.ViewDeposited();
         }
 
-
         [CmdOp(".lineage")]
         Outcome SummarizeLineage(CmdArgs args)
         {

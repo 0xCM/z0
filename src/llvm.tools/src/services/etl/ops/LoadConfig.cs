@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static core;
 
     using K = llvm.LlvmConfigKind;
@@ -23,8 +20,7 @@ namespace Z0.llvm
             for(var i=0; i<count; i++)
             {
                 ref readonly var option = ref skip(options,i);
-                var script = string.Format(Pattern, option.Expr);
-                result = OmniScript.Run(script, out var response);
+                result = OmniScript.Run(string.Format(Pattern, option.Expr), out var response);
                 if(result.Fail)
                 {
                     Write(result.Message);
@@ -49,7 +45,10 @@ namespace Z0.llvm
             switch(kind)
             {
                 case K.Version:
+                {
+                    dst.Set(kind, content);
                     Write(content);
+                }
                 break;
                 case K.IncludeDir:
                 {
@@ -75,6 +74,7 @@ namespace Z0.llvm
                 case K.SrcRoot:
                 {
                     var dir = FS.dir(content);
+                    dst.Set(kind, dir);
                     Write(dir);
                 }
                 break;
@@ -157,7 +157,7 @@ namespace Z0.llvm
                 case K.Libs:
                 {
                     var data = content.Split(Chars.Space).Select(x => x.Trim()).Where(nonempty).Select(FS.path);
-                    dst.Set(kind,data);
+                    dst.Set(kind, data);
                     iter(data,p => Write(p.ToUri()));
                 }
                 break;
