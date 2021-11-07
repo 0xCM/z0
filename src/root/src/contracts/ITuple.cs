@@ -12,18 +12,58 @@ namespace Z0
     /// Common non-parametric tuple contract
     /// </summary>
     [Free]
-    public interface ITuple
+    public interface ITuple : ITextual
     {
-        string Format(TupleFormatKind style);
+        /// <summary>
+        /// The tuple arity
+        /// </summary>
+        uint N {get;}
     }
 
-    /// <summary>
-    /// Common parametric tuple contract
-    /// </summary>
-    /// <typeparam name="K">The reifying type</typeparam>
     [Free]
-    public interface ITuple<K> : ITuple, IEquatable<K>, ITextual
-        where K : ITuple<K>
+    public interface ITuple<N> : ITuple
+        where N : unmanaged, ITypeNat
+    {
+        uint ITuple.N
+            => Typed.nat32u<N>();
+    }
+
+    [Free]
+    public interface ITuple<T,N> : ITuple<N>, IEquatable<T>
+        where T : ITuple<T,N>
+        where N : unmanaged, ITypeNat
+    {
+
+    }
+
+    [Free]
+    public interface ITuple<F,N,T0> : ITuple<F,N>
+        where N : unmanaged, ITypeNat
+        where F : ITuple<F,N,T0>
+    {
+
+    }
+
+    [Free]
+    public interface ITuple<F,N,T0,T1> : ITuple<F,N>
+        where N : unmanaged, ITypeNat
+        where F : ITuple<F,N,T0,T1>
+    {
+
+    }
+
+    [Free]
+    public interface ITuple<F,N,T0,T1,T2> : ITuple<F,N>
+        where N : unmanaged, ITypeNat
+        where F : ITuple<F,N,T0,T1,T2>
+    {
+
+    }
+
+    [Free]
+    public interface ITuple<F,N,T0,T1,T2,T3> : ITuple<F,N>
+        where N : unmanaged, ITypeNat
+        where F : ITuple<F,N,T0,T1,T2,T3>
     {
 
     }

@@ -27,10 +27,10 @@ namespace Z0.Flows
 
         public uint Capacity {get;}
 
-        public Mask Mask {get;}
+        public ChannelMask Mask {get;}
 
         [MethodImpl(Inline)]
-        internal NativeChannel(uint cells, Mask mask = default)
+        internal NativeChannel(uint cells, ChannelMask mask = default)
         {
             CellCount = cells;
             Capacity = cells*core.width<W>();

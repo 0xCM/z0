@@ -12,7 +12,7 @@ namespace Z0
     /// <typeparam name="K">The reifying type</typeparam>
     /// <typeparam name="T">The member type</typeparam>
     [Free]
-    public interface ITriple<K,T> : ITuple<K>, ITupled<K,T,T,T>
+    public interface ITriple<K,T> : ITuple<K,N3>, ITupled<K,T,T,T>
         where K : ITriple<K,T>
     {
         new T First {get;}
@@ -21,10 +21,13 @@ namespace Z0
 
         new T Third {get;}
 
-        T ITupled<K,T,T,T>.First => First;
+        T ITupled<K,T,T,T>.First
+            => First;
 
-        T ITupled<K,T,T,T>.Second => Second;
+        T ITupled<K,T,T,T>.Second
+            => Second;
 
-        T ITupled<K,T,T,T>.Third => Third;
+        T ITupled<K,T,T,T>.Third
+            => Third;
     }
 }

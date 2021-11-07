@@ -28,10 +28,10 @@ namespace Z0.Flows
         /// <summary>
         /// The mask applied to source data, if any
         /// </summary>
-        public Mask Mask {get;}
+        public ChannelMask Mask {get;}
 
         [MethodImpl(Inline)]
-        internal NativeChannel(uint cells, uint width, Mask mask = default)
+        internal NativeChannel(uint cells, uint width, ChannelMask mask = default)
         {
             CellCount = cells;
             CellWidth = width;

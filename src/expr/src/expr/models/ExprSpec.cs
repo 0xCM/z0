@@ -10,14 +10,14 @@ namespace Z0.Expr
 
     public readonly struct ExprSpec
     {
-        public Scope Scope {get;}
+        public ExprScope Scope {get;}
 
         public Index<IExpr> Operands {get;}
 
         public IExprComposer Composer {get;}
-        
+
         [MethodImpl(Inline)]
-        public ExprSpec(Scope scope, IExpr[] operands, IExprComposer composer)
+        public ExprSpec(ExprScope scope, IExpr[] operands, IExprComposer composer)
         {
             Scope = scope;
             Operands = operands;

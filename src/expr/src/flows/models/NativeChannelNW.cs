@@ -14,7 +14,7 @@ namespace Z0.Flows
     {
         public uint Capacity {get;}
 
-        public Mask Mask {get;}
+        public ChannelMask Mask {get;}
 
         /// <summary>
         /// The number of cells carried by the channel
@@ -35,7 +35,7 @@ namespace Z0.Flows
         }
 
         [MethodImpl(Inline)]
-        internal NativeChannel(Mask mask = default)
+        internal NativeChannel(ChannelMask mask = default)
         {
             Capacity = core.nat32u<N>()*core.width<W>();
             Mask = mask;

@@ -4,14 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
+    using static Root;
+    using static core;
     [ApiHost]
     public readonly partial struct BitFlow
     {
         const NumericKind Closure = UnsignedInts;
 
-        [ApiHost("blit.meta")]
+       [ApiHost("blit.meta")]
         public readonly partial struct Meta
         {
 

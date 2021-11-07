@@ -8,7 +8,7 @@ namespace Z0.Lang
 
     using static Root;
 
-    public readonly struct Keyword : ITerminal<Label>
+    public readonly struct Keyword : ITerminalExpr<Label>
     {
         public Label Value {get;}
 

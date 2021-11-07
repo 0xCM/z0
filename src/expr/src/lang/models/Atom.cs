@@ -11,7 +11,7 @@ namespace Z0.Lang
     /// <summary>
     /// A terminal atomic
     /// </summary>
-    public readonly struct Atom : ISymbol<Atom,char>, ITerminal<char>
+    public readonly struct Atom : ISymbol<Atom,char>, ITerminalExpr<char>
     {
         public char Value {get;}
 

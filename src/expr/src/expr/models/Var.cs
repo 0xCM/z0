@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Expr
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -15,7 +15,7 @@ namespace Z0.Expr
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public readonly struct Var : IVar
-    {        
+    {
         public Label Name {get;}
 
         readonly Func<dynamic> Resolver;

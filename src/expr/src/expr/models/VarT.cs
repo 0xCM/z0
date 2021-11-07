@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Expr
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,6 +10,7 @@ namespace Z0.Expr
 
     using static Root;
 
+    using Expr;
     /// <summary>
     /// Defines a variable
     /// </summary>
@@ -43,6 +44,6 @@ namespace Z0.Expr
 
         [MethodImpl(Inline)]
         public static implicit operator Var(Var<T> src)
-            => new Var(src.Name, typeof(T), () => src.Resolver());        
+            => new Var(src.Name, typeof(T), () => src.Resolver());
     }
 }

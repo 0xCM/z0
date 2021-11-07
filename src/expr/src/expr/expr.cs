@@ -2,12 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Expr
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using Types;
+    using Expr;
 
     using static Root;
     using static core;
@@ -18,11 +19,11 @@ namespace Z0.Expr
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op]
-        public static OpExprSpec spec(Scope scope, Label opname, IExpr[] operands)
+        public static OpExprSpec spec(ExprScope scope, Label opname, IExpr[] operands)
             => new OpExprSpec(scope,opname,operands);
 
         [MethodImpl(Inline), Op]
-        public static ExprSpec spec(Scope scope, IExpr[] operands, IExprComposer composer)
+        public static ExprSpec spec(ExprScope scope, IExpr[] operands, IExprComposer composer)
             => new ExprSpec(scope,operands,composer);
 
         [MethodImpl(Inline), Op]
@@ -48,16 +49,16 @@ namespace Z0.Expr
         /// </summary>
         /// <param name="name">The scope name</param>
         [MethodImpl(Inline), Op]
-        public static Scope scope(Label name)
-            => new Scope(Label.Empty, name);
+        public static ExprScope scope(Label name)
+            => new ExprScope(Label.Empty, name);
 
         /// <summary>
         /// Creates a child scope
         /// </summary>
         /// <param name="name">The scope name</param>
         [MethodImpl(Inline), Op]
-        public static Scope scope(Label parent, Label name)
-            => new Scope(parent,name);
+        public static ExprScope scope(Label parent, Label name)
+            => new ExprScope(parent,name);
 
         /// <summary>
         /// Creates a <see cref='Constant{T}'/>

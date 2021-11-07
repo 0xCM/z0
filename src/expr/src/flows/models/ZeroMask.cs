@@ -32,7 +32,7 @@ namespace Z0.Flows
             => new ZeroMask(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Mask(ZeroMask src)
-            => new Mask(MaskKind.Merge, src.Value);
+        public static implicit operator ChannelMask(ZeroMask src)
+            => new ChannelMask(MaskKind.Merge, src.Value);
     }
 }

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Expr
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -25,7 +25,7 @@ namespace Z0.Expr
 
         Value<dynamic> IVarResolver.Resolve(IVar var)
             => new Value<dynamic>(Emitter(var.Name));
-        
+
         [MethodImpl(Inline)]
         public static implicit operator VarResolver<T>(Func<Label,T> f)
             => new VarResolver<T>(f);

@@ -16,15 +16,26 @@ namespace Z0
             where T : struct
         {
             var props = @readonly(typeof(T).DeclaredInstanceProperties());
+            var fields = @readonly(typeof(T).DeclaredInstanceFields());
+
             var _ref = __makeref(src);
-            var count = props.Length;
+            var propcount = props.Length;
+            var fieldcount = fields.Length;
+            var count = propcount + fieldcount;
             var buffer = alloc<Operand>(count);
             ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
+            var j=0u;
+            for(var i=0; i<propcount; i++)
             {
                 ref readonly var prop = ref skip(props,i);
-                seek(dst,i) = new Operand(prop.Name, prop.GetValue(src));
+                seek(dst,j++) = new Operand(prop.Name, prop.GetValue(src));
             }
+            for(var i=0; i<fieldcount; i++)
+            {
+                ref readonly var field = ref skip(fields,i);
+                seek(dst,j++) = new Operand(field.Name, field.GetValue(src));
+            }
+
             return buffer;
         }
     }

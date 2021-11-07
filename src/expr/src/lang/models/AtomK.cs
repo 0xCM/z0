@@ -12,7 +12,7 @@ namespace Z0.Lang
     /// <summary>
     /// A terminal atomic
     /// </summary>
-    public readonly struct Atom<K> : ISymbol<Atom<K>,K>, ITerminal<K>
+    public readonly struct Atom<K> : ISymbol<Atom<K>,K>, ITerminalExpr<K>
         where K : unmanaged
     {
         public uint Key {get;}

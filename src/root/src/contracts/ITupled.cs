@@ -13,7 +13,7 @@ namespace Z0
     /// <typeparam name="T0">The first member type</typeparam>
     /// <typeparam name="T1">The second member type</typeparam>
     [Free]
-    public interface ITupled<K,T0,T1> : ITuple<K>
+    public interface ITupled<K,T0,T1> : ITuple<K,N2>
         where K : ITupled<K,T0,T1>
     {
         void Deconstruct(out T0 x0, out T1 x1);
@@ -37,7 +37,7 @@ namespace Z0
     /// <typeparam name="T1">The second member type</typeparam>
     /// <typeparam name="T2">The third member type</typeparam>
     [Free]
-    public interface ITupled<K,T0,T1,T2> : ITuple<K>
+    public interface ITupled<K,T0,T1,T2> : ITuple<K,N3>
         where K : ITupled<K,T0,T1,T2>
     {
         void Deconstruct(out T0 x0, out T1 x1, out T2 x2);
@@ -58,7 +58,7 @@ namespace Z0
     /// <typeparam name="T2">The third member type</typeparam>
     /// <typeparam name="T3">The fourth member type</typeparam>
     [Free]
-    public interface ITupled<K,T0,T1,T2,T3> : ITuple<K>
+    public interface ITupled<K,T0,T1,T2,T3> : ITuple<K,N4>
         where K : ITupled<K,T0,T1,T2,T3>
     {
         void Deconstruct(out T0 x0, out T1 x1, out T2 x2, out T3 x3);

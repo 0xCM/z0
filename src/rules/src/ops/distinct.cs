@@ -11,13 +11,5 @@ namespace Z0
 
     partial struct RuleModels
     {
-        [Op]
-        public static Distinct distinct()
-            => default;
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Distinct<T> distinct<T>()
-            where T : IEquatable<T>
-                => default;
     }
 }

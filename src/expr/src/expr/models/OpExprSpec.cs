@@ -10,14 +10,14 @@ namespace Z0.Expr
 
     public readonly struct OpExprSpec
     {
-        public Scope Scope {get;}
+        public ExprScope Scope {get;}
 
         public Label OpName {get;}
 
         public Index<IExpr> Operands {get;}
 
         [MethodImpl(Inline)]
-        public OpExprSpec(Scope scope, Label opname, IExpr[] operands)
+        public OpExprSpec(ExprScope scope, Label opname, IExpr[] operands)
         {
             Scope = scope;
             OpName = opname;

@@ -2,10 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Expr
+namespace Z0
 {
     using System.Runtime.CompilerServices;
-    
+
+    using Expr;
+
     using static Root;
 
     public abstract class OpExpr2<T,K> : OpExpr<T,K>
@@ -22,7 +24,7 @@ namespace Z0.Expr
             A = a;
             B = b;
         }
-        
+
         public override string Format()
             => expr.format(this);
 

@@ -2,13 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Expr
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
-    
+
+    using Expr;
+
     /// <summary>
     /// Binds a variable to a value
     /// </summary>
@@ -44,7 +46,7 @@ namespace Z0.Expr
         [MethodImpl(Inline)]
         public static implicit operator BoundVar(BoundVar<T> src)
             => new BoundVar(src.Var, src.Value);
-        
+
         [MethodImpl(Inline)]
         public static implicit operator T(BoundVar<T> src)
             => src.Value.Content;

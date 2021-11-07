@@ -12,14 +12,14 @@ namespace Z0.Expr
     /// <summary>
     /// Identifies a context-relative scope
     /// </summary>
-    public readonly struct Scope : IScope
+    public readonly struct ExprScope : IExprScope
     {
         public Label Parent {get;}
 
         public Label Name {get;}
 
         [MethodImpl(Inline)]
-        public Scope(Label parent, Label name)
+        public ExprScope(Label parent, Label name)
         {
             Parent = parent;
             Name = name;
@@ -33,7 +33,7 @@ namespace Z0.Expr
 
         [MethodImpl(Inline)]
 
-        public bool Equals(Scope src)
+        public bool Equals(ExprScope src)
             => Name.Equals(src.Name) && Parent.Equals(src.Parent);
 
         public string Format()

@@ -30,17 +30,17 @@ namespace Z0
             }
         }
 
-        public EvalResult Measure(in DynamicAction fx)
+        public ApiEvalResult Measure(in DynamicAction fx)
         {
             var clock = Time.counter(true);
             try
             {
                 fx.Invoke();
-                return Eval.result(seq, fx.Id, clock, true);
+                return ApiEval.result(seq, fx.Id, clock, true);
             }
             catch(Exception e)
             {
-                return Eval.result(seq, fx.Id, clock, e);
+                return ApiEval.result(seq, fx.Id, clock, e);
             }
         }
     }

@@ -22,8 +22,8 @@ namespace Z0.Flows
         uint Capacity
             => CellCount*CellWidth;
 
-        Mask Mask
-            => Mask.Empty;
+        ChannelMask Mask
+            => ChannelMask.Empty;
     }
 
     public interface INativeChannel<W> : INativeChannel

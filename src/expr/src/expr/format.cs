@@ -2,26 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Expr
+namespace Z0
 {
     using XF = ExprPatterns;
 
+    using Expr;
+
     partial struct expr
     {
-       public static string format<S,T>(in OpEvalCapture<S,T> src)
-            => string.Format(XF.Eval, src.Actor.OpName, src.Input, src.Output);
-
-        public static string format<S>(in OpEvalCapture<S> src)
-            => string.Format(XF.Eval, src.Actor.OpName, src.Input, src.Output);
-
-        public static string format<O,S,T>(in OpEvalCapture<O,S,T> src)
-            where O : IOp
-                => string.Format(XF.Eval, src.Actor.OpName, src.Input, src.Output);
-
-        public static string format(in OpEvalCapture src)
-            => string.Format(XF.Eval, src.Actor.OpName, src.Input, src.Output);
-
-        public static string format(Scope src)
+        public static string format(ExprScope src)
             => src.IsRoot ? src.Name.Format() : string.Format(XF.SourceToTarget, src.Name, src.Parent);
 
         internal static string format(in Var src, bool bind = true)

@@ -10,7 +10,7 @@
     <ProjectReference Include="$(BitNumbers)" />
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(SFuncs)" />
-    <ProjectReference Include="$(Tools)" />
+    <ProjectReference Include="$(Tooling)" />
     <ProjectReference Include="$(Cli)" />
     <ProjectReference Include="$(Roslyn)" />
     <ProjectReference Include="$(Polyrand)" />

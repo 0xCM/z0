@@ -18,7 +18,8 @@ namespace Z0
 
         public T Value {get;}
 
-        public VarSymbol Symbol => new VarSymbol(Name);
+        public VarSymbol Symbol
+            => new VarSymbol(Name);
 
         string IRuleVar.Value
             => Value?.ToString() ?? EmptyString;

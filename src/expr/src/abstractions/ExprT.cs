@@ -2,18 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Expr
+namespace Z0
 {
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public interface IExpr<K> : IExpr
-        where K : unmanaged
-    {
-        K Kind {get;}
-    }
-
+    using Expr;
 
     public abstract class Expr<F,K> : IExpr<K>
         where F : Expr<F,K>

@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Tools)" />
+    <ProjectReference Include="$(Tooling)" />
     <ProjectReference Include="$(Symbolic)" />
   </ItemGroup>
 

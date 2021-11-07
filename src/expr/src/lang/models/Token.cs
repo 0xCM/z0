@@ -63,6 +63,5 @@ namespace Z0.Lang
 
         public override string ToString()
             => Format();
-
     }
 }
