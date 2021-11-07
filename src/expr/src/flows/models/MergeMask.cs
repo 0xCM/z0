@@ -8,7 +8,7 @@ namespace Z0.Flows
 
     using static Root;
 
-    public readonly struct MergeMask : IMask<MergeMask>
+    public readonly struct MergeMask : IChannelMask<MergeMask>
     {
         public ulong Value {get;}
 
@@ -17,12 +17,12 @@ namespace Z0.Flows
         {
             Value = value;
         }
-        
-        public MaskKind Kind => MaskKind.Merge;
+
+        public MaskKind Kind
+            => MaskKind.Merge;
 
         public string Format()
             => flows.format(this);
-
 
         public override string ToString()
             => Format();

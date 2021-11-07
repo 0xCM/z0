@@ -22,6 +22,18 @@ namespace Z0
             public Files(FilePath[] src)
                 => Data = src;
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Data.IsEmpty;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Data.IsNonEmpty;
+            }
+
             public int Length
             {
                 [MethodImpl(Inline)]
@@ -112,6 +124,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Files(Index<FilePath> src)
                 => new Files(src.Storage);
+
+            [MethodImpl(Inline)]
+            public static implicit operator ReadOnlySpan<FS.FilePath>(FS.Files src)
+                => src.View;
 
             public static Files Empty
                 => new Files(sys.empty<FilePath>());

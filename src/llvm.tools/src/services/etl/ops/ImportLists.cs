@@ -8,7 +8,7 @@ namespace Z0.llvm
 
     using static core;
 
-    partial class LlvmEtlServices
+    partial class LlvmRecordEtl
     {
         public ReadOnlySpan<ItemList<string>> ImportLists()
         {

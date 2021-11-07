@@ -8,12 +8,12 @@ namespace Z0.Flows
 
     using static Root;
 
-    public struct Fiber : IFiber
+    public struct NativeFiber : INativeFiber
     {
         /// <summary>
         /// The channel over which the fiber is defined
         /// </summary>
-        public Channel Channel;
+        public NativeChannel Channel;
 
         /// <summary>
         /// The selected cell
@@ -24,14 +24,14 @@ namespace Z0.Flows
         /// The offset of the fiber within the cell
         /// </summary>
         public ushort Offset;
-        
+
         /// <summary>
         /// The fiber width
         /// </summary>
         public byte Width;
 
         [MethodImpl(Inline)]
-        public Fiber(Channel src, uint cell = 0, ushort offset = 0, byte width = 0)
+        public NativeFiber(NativeChannel src, uint cell = 0, ushort offset = 0, byte width = 0)
         {
             Cell = cell;
             Channel = src;
@@ -39,16 +39,16 @@ namespace Z0.Flows
             Width = width;
         }
 
-        IChannel IFiber.Source
+        INativeChannel INativeFiber.Source
             => Channel;
 
-        uint IFiber.Cell 
+        uint INativeFiber.Cell
             => Cell;
 
-        ushort IFiber.Offset 
+        ushort INativeFiber.Offset
             => Offset;
 
-        byte IFiber.Width 
+        byte INativeFiber.Width
             => Width;
     }
 }

@@ -7,10 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Text.Json;
+    using System.Text;
+    using System.Globalization;
     using System.Collections.Generic;
     using System.Reflection;
 
     using static Root;
+    using static core;
 
     [ApiHost]
     public readonly struct JsonData
@@ -18,12 +21,13 @@ namespace Z0
         const NumericKind Closure = UInt64k;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static JsonDataPacket<T> packet<T>(T src)
+        public static JsonPacket<T> packet<T>(T src)
             => src;
 
-        [Op]
-        public static string unescape(FS.FilePath src)
-            => JsonSerializer.Deserialize<string>(src.Format());
+        // [Op]
+        // public static string unescape(FS.FilePath src)
+        //     => JsonSerializer.Deserialize<string>(src.Format());
+
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static JsonSetting<T> setting<T>(string name, T value)
@@ -93,7 +97,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static T materialize<T>(JsonText src)
         {
-            var packet = JsonSerializer.Deserialize<JsonDataPacket<T>>(src);
+            var packet = JsonSerializer.Deserialize<JsonPacket<T>>(src);
             return packet.Content;
         }
 
@@ -114,11 +118,46 @@ namespace Z0
             => new Json<T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static JsonText text<T>(in Json<T> src)
+        public static JsonText jtext<T>(in Json<T> src)
             => json(format(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(in Json<T> src)
             => src.Content?.ToString() ?? EmptyString;
+
+        /// <summary>
+        /// Adapted from https://github.com/dotnet/runtime/blob/36697a52c89caedd014b255695eae2058a9b0546/src/libraries/System.Private.DataContractSerialization/src/System/Runtime/Serialization/Json/XmlJsonReader.cs
+        /// </summary>
+        static Outcome ParseChar(string src, NumberStyles style, out char dst)
+        {
+            var result = ParseInt(src, style, out var value);
+            try
+            {
+                dst = Convert.ToChar(value);
+                return true;
+            }
+            catch(Exception e)
+            {
+                dst = (char)0;
+                return e;
+            }
+        }
+
+        /// <summary>
+        /// Adapted from https://github.com/dotnet/runtime/blob/36697a52c89caedd014b255695eae2058a9b0546/src/libraries/System.Private.DataContractSerialization/src/System/Runtime/Serialization/Json/XmlJsonReader.cs
+        /// </summary>
+        static Outcome ParseInt(string value, NumberStyles style, out int dst)
+        {
+            dst = default;
+            try
+            {
+                dst = int.Parse(value, style, NumberFormatInfo.InvariantInfo);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+        }
     }
 }

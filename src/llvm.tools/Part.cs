@@ -27,8 +27,20 @@ namespace Z0
             => llvm.LlvmNm.create(wf);
 
         [Op]
-        public static LlvmEtlServices LlvmEtl(this IWfRuntime wf)
-            => llvm.LlvmEtlServices.create(wf);
+        public static LlvmRepo LlvmRepo(this IWfRuntime wf)
+            => llvm.LlvmRepo.create(wf);
+
+        [Op]
+        public static McSyntaxLogs McSyntaxLogs(this IWfRuntime wf)
+            => llvm.McSyntaxLogs.create(wf);
+
+        [Op]
+        public static LlvmRecordEtl LlvmRecordEtl(this IWfRuntime wf)
+            => llvm.LlvmRecordEtl.create(wf);
+
+        [Op]
+        public static LlvmProjectEtl LlvmProjectEtl(this IWfRuntime wf)
+            => llvm.LlvmProjectEtl.create(wf);
 
         [Op]
         public static LlvmPaths LlvmPaths(this IServiceContext context)
@@ -47,7 +59,7 @@ namespace Z0
             => llvm.LlvmToolbase.create(wf);
 
         [Op]
-        public static EtlCodeGen LlvmEtlCodeGen(this IWfRuntime wf)
-            => llvm.EtlCodeGen.create(wf);
+        public static LlvmCodeGen LlvmEtlCodeGen(this IWfRuntime wf)
+            => llvm.LlvmCodeGen.create(wf);
     }
 }

@@ -27,7 +27,7 @@ namespace Z0
             => Format();
 
         public JsonText ToJson()
-            => api.text(this);
+            => api.jtext(this);
 
         [MethodImpl(Inline)]
         public static implicit operator Json<T>(T[] src)

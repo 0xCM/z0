@@ -6,7 +6,7 @@ namespace Z0.llvm
 {
     using System;
 
-    partial class LlvmEtlServices
+    partial class LlvmRecordEtl
     {
         public ReadOnlySpan<TextLine> LoadSourceRecords(string id)
         {

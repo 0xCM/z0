@@ -397,5 +397,15 @@ namespace Z0
         /// Defines the 'bv' literal
         /// </summary>
         public const string bv = nameof(bv);
+
+        /// <summary>
+        /// Defines the 'inc' literal
+        /// </summary>
+        public const string inc = nameof(inc);
+
+        /// <summary>
+        /// Defines the 'td' literal
+        /// </summary>
+        public const string td = nameof(td);
     }
 }

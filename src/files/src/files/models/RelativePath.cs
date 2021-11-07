@@ -59,7 +59,7 @@ namespace Z0
             public override string ToString()
                 => Format();
 
-           [MethodImpl(Inline)]
+            [MethodImpl(Inline)]
             public string Format(PathSeparator sep, bool quote = false)
                 => quote ? text.enquote(Name.Format(sep)) : Name.Format(sep);
 
@@ -76,12 +76,12 @@ namespace Z0
                 => relative(Z0.text.format("{0}/{1}", a.Name, b.Name));
 
             [MethodImpl(Inline)]
-            public static RelativePath operator +(FolderPath a, RelativePath b)
-                => relative(Z0.text.format("{0}/{1}", a.Name, b.Name));
+            public static FS.FolderPath operator +(FolderPath a, RelativePath b)
+                => FS.dir(Z0.text.format("{0}/{1}", a.Name, b.Name));
 
             [MethodImpl(Inline)]
-            public static RelativePath operator +(RelativePath a, FileName b)
-                => relative(Z0.text.format("{0}/{1}", a.Name, b.Name));
+            public static RelativeFilePath operator +(RelativePath a, FileName b)
+                => new RelativeFilePath(relative(Z0.text.format("{0}/{1}", a.Name, b.Name)));
 
             public static RelativePath Empty
             {

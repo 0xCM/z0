@@ -31,6 +31,7 @@ namespace Z0
                         return Drive.Empty;
                 }
             }
+
             public uint PathLength
             {
                 [MethodImpl(Inline)]
@@ -148,7 +149,7 @@ namespace Z0
                 => !Is(x1,x2);
 
             public RelativeFilePath Relative(FS.FolderPath src)
-                => FS.relative(src,this);
+                => FS.relative(src, this);
 
             public FilePath WithoutExtension
                 => FolderPath + FileName.WithoutExtension;

@@ -20,6 +20,10 @@ namespace Z0
         internal static Outcome combine(Outcome a, Outcome b)
             => (a.Ok && b.Ok, string.Format("{0}\r\r{1}",a.Message, b.Message));
 
+        [MethodImpl(Inline)]
+        public static Outcome fail(string msg)
+            => (false,msg);
+
         public bool Ok {get;}
 
         public string Message {get;}

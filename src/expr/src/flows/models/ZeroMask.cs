@@ -8,7 +8,7 @@ namespace Z0.Flows
 
     using static Root;
 
-    public readonly struct ZeroMask : IMask<ZeroMask>
+    public readonly struct ZeroMask : IChannelMask<ZeroMask>
     {
         public ulong Value {get;}
 
@@ -17,8 +17,9 @@ namespace Z0.Flows
         {
             Value = value;
         }
-        
-        public MaskKind Kind => MaskKind.Zero;
+
+        public MaskKind Kind
+            => MaskKind.Zero;
 
         public string Format()
             => flows.format(this);

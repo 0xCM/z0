@@ -21,37 +21,37 @@ namespace Z0.Flows
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static Flow<S,T> flow<S,T>(in S src, in T dst)
-            where S : IChannel
-            where T : IChannel
+            where S : INativeChannel
+            where T : INativeChannel
                 => new Flow<S,T>(src,dst);
 
         [MethodImpl(Inline)]
         public static Flow<K,S,T> flow<K,S,T>(K kind, in S src, in T dst)
             where K : unmanaged
-            where S : IChannel
-            where T : IChannel
+            where S : INativeChannel
+            where T : INativeChannel
                 => new Flow<K,S,T>(kind,src,dst);
 
         [MethodImpl(Inline), Op]
-        public static Channel channel(uint cells, uint width, Mask mask = default)
-            => new Channel(cells, width, mask);
+        public static NativeChannel channel(uint cells, uint width, Mask mask = default)
+            => new NativeChannel(cells, width, mask);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Channel<T> channel<T>(uint cells, Mask mask = default)
+        public static NativeChannel<T> channel<T>(uint cells, Mask mask = default)
             where T : unmanaged, ITypeWidth
-                => new Channel<T>(cells,mask);
+                => new NativeChannel<T>(cells,mask);
 
         [MethodImpl(Inline)]
-        public static Channel<N,W> channel<N,W>(N n = default, W w = default)
+        public static NativeChannel<N,W> channel<N,W>(N n = default, W w = default)
             where W : unmanaged, ITypeWidth
             where N : unmanaged, ITypeNat
-                => new Channel<N,W>();
+                => new NativeChannel<N,W>();
 
         [MethodImpl(Inline)]
-        public static Channel<N,W> channel<N,W>(Mask mask, N n = default, W w = default)
+        public static NativeChannel<N,W> channel<N,W>(Mask mask, N n = default, W w = default)
             where W : unmanaged, ITypeWidth
             where N : unmanaged, ITypeNat
-                => new Channel<N,W>(mask);
+                => new NativeChannel<N,W>(mask);
 
         [MethodImpl(Inline), Op]
         public static MergeMask mmask(ulong value)
@@ -59,20 +59,20 @@ namespace Z0.Flows
 
         [MethodImpl(Inline)]
         public static Fiber<T> fiber<T>(T channel, uint cell = 0, ushort offset = 0, byte width = 0)
-            where T : unmanaged,IChannel
+            where T : unmanaged,INativeChannel
                 => new Fiber<T>(channel,cell,offset,width);
 
         [MethodImpl(Inline), Op]
-        public static Fiber fiber(Channel channel, uint cell = 0, ushort offset = 0, byte width = 0)
-            => new Fiber(channel,cell,offset,width);
+        public static NativeFiber fiber(NativeChannel channel, uint cell = 0, ushort offset = 0, byte width = 0)
+            => new NativeFiber(channel,cell,offset,width);
 
         [MethodImpl(Inline), Op]
         public static ZeroMask zmask(ulong value)
             => new ZeroMask(value);
 
          public static string syntax<S,T>(Flow<S,T> flow)
-            where S : IChannel
-            where T : IChannel
+            where S : INativeChannel
+            where T : INativeChannel
         {
             const string Pattern = "{0}:{1} -> {4}:{5}";
             return string.Format(Pattern, flow.Source, typeof(S).Name, flow.Target, typeof(T).Name);
@@ -80,8 +80,8 @@ namespace Z0.Flows
 
         public static string syntax<K,S,T>(Flow<K,S,T> flow)
             where K : unmanaged
-            where S : IChannel
-            where T : IChannel
+            where S : INativeChannel
+            where T : INativeChannel
         {
             const string Pattern = "{0}:{1} |{2}:{3}> {4}:{5}";
             return string.Format(Pattern, flow.Source, typeof(S).Name, flow.Kind, typeof(K).Name, flow.Target, typeof(T).Name);
@@ -106,7 +106,7 @@ namespace Z0.Flows
             }
         }
 
-        internal static string format(Channel src)
+        internal static string format(NativeChannel src)
         {
             if(src.Mask.IsEmpty)
                 return string.Format("{0}x{1}", src.CellCount, src.CellWidth);
@@ -116,8 +116,8 @@ namespace Z0.Flows
 
         internal static string format<K,S,T>(in Flow<K,S,T> flow)
             where K : unmanaged
-            where S : IChannel
-            where T : IChannel
+            where S : INativeChannel
+            where T : INativeChannel
                 => string.Format("{0} |{1}> {2}", flow.Source, flow.Kind, flow.Target);
 
         internal static RenderPattern<S,T> RenderFlow<S,T>() => "{0} -> {1}";
@@ -125,8 +125,8 @@ namespace Z0.Flows
         internal static RenderPattern<T,T> RenderFlow<T>() => RenderFlow<T,T>();
 
         internal static string format<S,T>(in Flow<S,T> flow)
-            where S : IChannel
-            where T : IChannel
+            where S : INativeChannel
+            where T : INativeChannel
                 => RenderFlow<S,T>().Format(flow.Source, flow.Target);
     }
 }

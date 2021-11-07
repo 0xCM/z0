@@ -8,10 +8,10 @@ namespace Z0.Flows
 
     using static Root;
 
-    public readonly struct Flow<K,S,T> : IFlow<K,S,T>
+    public readonly struct Flow<K,S,T> : INativeFlow<K,S,T>
         where K : unmanaged
-        where S : IChannel
-        where T : IChannel
+        where S : INativeChannel
+        where T : INativeChannel
     {
         public K Kind {get;}
 

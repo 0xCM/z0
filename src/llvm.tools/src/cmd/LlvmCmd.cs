@@ -8,13 +8,19 @@ namespace Z0.llvm
 
     using static core;
 
+    using static LlvmNames;
+
     public sealed partial class LlvmCmd : AppCmdService<LlvmCmd,CmdShellState>
     {
-        LlvmEtlServices LlvmEtl;
+        LlvmRecordEtl RecordEtl;
 
         LlvmToolbase Toolbase;
 
         LlvmPaths LlvmPaths;
+
+        LlvmProjectEtl ProjectEtl;
+
+        LlvmRepo LlvmRepo;
 
         new LlvmDb Db
         {
@@ -35,10 +41,12 @@ namespace Z0.llvm
 
         protected override void Initialized()
         {
-            LlvmEtl = Wf.LlvmEtl();
-            Toolbase = Wf.LLvmToolbase();
             LlvmPaths = Wf.LlvmPaths();
-            Data = Ws.Project("llvm.data");
+            RecordEtl = Wf.LlvmRecordEtl();
+            ProjectEtl = Wf.LlvmProjectEtl();
+            Toolbase = Wf.LLvmToolbase();
+            LlvmRepo = Wf.LlvmRepo();
+            Data = Ws.Project(Projects.LlvmData);
             State.Init(Wf, Ws);
             State.Project(Data);
         }
@@ -58,6 +66,18 @@ namespace Z0.llvm
                iter(items, item => Write(item));
             }
             return result;
+        }
+
+        Outcome Flow<T>(ReadOnlySpan<T> src)
+        {
+            iteri(src, (i,item) => Write(string.Format("{0:D5} {1}", i, item)));
+            return true;
+        }
+
+        Outcome Flow<T>(Span<T> src)
+        {
+            iteri(src, (i,item) => Write(string.Format("{0:D5} {1}", i, item)));
+            return true;
         }
     }
 }

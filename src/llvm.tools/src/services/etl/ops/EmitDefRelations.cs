@@ -11,7 +11,7 @@ namespace Z0.llvm
     using static Root;
     using static core;
 
-    partial class LlvmEtlServices
+    partial class LlvmRecordEtl
     {
         ReadOnlySpan<DefRelations> EmitDefRelations(ReadOnlySpan<TextLine> src)
         {
@@ -33,7 +33,7 @@ namespace Z0.llvm
                         if(empty(name) || text.member(name, ClassExclusions))
                             continue;
 
-                        DeriveLineage(content, out var a);
+                        etl.lineage(content, out var a);
                         record.Specify(line.LineNumber, name, a);
                         dst.Add(record);
                     }

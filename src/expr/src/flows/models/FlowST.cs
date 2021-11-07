@@ -9,9 +9,9 @@ namespace Z0.Flows
 
     using static Root;
 
-    public readonly struct Flow<S,T> : IFlow<S,T>
-        where S : IChannel
-        where T : IChannel
+    public readonly struct Flow<S,T> : INativeFlow<S,T>
+        where S : INativeChannel
+        where T : INativeChannel
     {
         public S Source {get;}
 
@@ -41,5 +41,5 @@ namespace Z0.Flows
         [MethodImpl(Inline)]
         public static implicit operator Flow<S,T>(Paired<S,T> x)
             => new Flow<S,T>(x.Left, x.Right);
-    }    
+    }
 }

@@ -12,39 +12,12 @@ namespace Z0.llvm
 
     using F = llvm.records.RecordField;
 
-    partial class LlvmEtlServices
+    partial class LlvmRecordEtl
     {
-        static ReadOnlySpan<TableGenFields> partition(ReadOnlySpan<RecordField> src)
-        {
-            var count = src.Length;
-            var dst = list<TableGenFields>();
-            var subset = list<RecordField>();
-            var current = Identifier.Empty;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var f = ref skip(src,i);
-                ref readonly var id = ref f.RecordName;
-                if(id != current)
-                {
-                    if(subset.Count != 0)
-                    {
-                        dst.Add(new TableGenFields(current, subset.ToArray()));
-                        subset.Clear();
-                        current = id;
-                    }
-                }
-                subset.Add(f);
-            }
-
-            if(subset.Count != 0)
-                dst.Add(new TableGenFields(current, subset.ToArray()));
-            return dst.ViewDeposited();
-        }
-
         Outcome EmitFields(ReadOnlySpan<RecordField> src, string dstid)
         {
             var fields = src;
-            var parts = partition(fields);
+            var parts = etl.partition(fields);
             var count = fields.Length;
             var dst = LlvmPaths.Table(dstid);
             var emitting = EmittingTable<RecordField>(dst);

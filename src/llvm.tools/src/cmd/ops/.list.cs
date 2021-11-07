@@ -13,7 +13,7 @@ namespace Z0.llvm
         {
             var result = Outcome.Success;
             var list = Db.List(arg(args,0));
-            iter(list, item => Write(item.Format()));
+            Flow(list.View);
             return result;
         }
     }

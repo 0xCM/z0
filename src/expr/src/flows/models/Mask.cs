@@ -8,10 +8,10 @@ namespace Z0.Flows
 
     using static Root;
 
-    public readonly struct Mask : IMask<Mask>
+    public readonly struct Mask : IChannelMask<Mask>
     {
         public ulong Value {get;}
-        
+
         public MaskKind Kind {get;}
 
         [MethodImpl(Inline)]

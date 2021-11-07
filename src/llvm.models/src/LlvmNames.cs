@@ -22,6 +22,12 @@ namespace Z0.llvm
             public const string X86ClassFields = "X86.records.classes.fields";
         }
 
+        [LiteralProvider("llvm.tables")]
+        public readonly struct TableNames
+        {
+            public const string OpCodes = "llvm.opcodes";
+        }
+
         [LiteralProvider("llvm.lists")]
         public readonly struct Lists
         {
@@ -59,6 +65,8 @@ namespace Z0.llvm
 
             public const string McModels = "mc.models";
 
+            public const string LlvmData = "llvm.data";
+
             public static string[] ProjectNames
                 = new string[]{Canonical,LlvmModels,ClangModels,McModels,ClangAlgs};
         }
@@ -77,6 +85,12 @@ namespace Z0.llvm
             public const string llvm_objdump ="llvm-objdump";
 
             public const string llvm_readobj = "llvm-readobj";
+        }
+
+        [LiteralProvider("llvm.repo")]
+        public readonly struct Repo
+        {
+            public const string build = nameof(build);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Z0.llvm
 
     using SQ = SymbolicQuery;
 
-    partial class LlvmEtlServices
+    partial class LlvmRecordEtl
     {
         // class AES8I<bits<8> AES8I:o = { ?, ?, ?, ?, ?, ?, ?, ? }, Format AES8I:F = ?, dag AES8I:outs = ?, dag AES8I:ins = ?, string AES8I:asm = ?, list<dag> AES8I:pattern = ?> {	// InstructionEncoding Instruction X86Inst I T8 T8PD Requires
         ReadOnlySpan<ClassRelations> EmitClassRelations(ReadOnlySpan<TextLine> src)
@@ -49,7 +49,7 @@ namespace Z0.llvm
                         var record = new ClassRelations();
                         record.SourceLine = line.LineNumber;
                         record.Name = name;
-                        DeriveLineage(content, out record.Ancestors);
+                        etl.lineage(content, out record.Ancestors);
                         record.Parameters = parameters;
                         dst.Add(record);
                     }

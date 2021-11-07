@@ -265,5 +265,14 @@ namespace Z0
         /// </summary>
         public static FileExt XArray => ext(xarray);
 
+        /// <summary>
+        /// Defines the <see cref='inc'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Inc => ext(inc);
+
+        /// <summary>
+        /// Defines the <see cref='td'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Td => ext(td);
     }
 }

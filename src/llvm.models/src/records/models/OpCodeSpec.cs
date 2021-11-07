@@ -7,10 +7,12 @@ namespace Z0.llvm
     using System;
     using System.Runtime.InteropServices;
 
+    using static LlvmNames;
+
     [StructLayout(LayoutKind.Sequential, Pack=1), Record(TableId)]
     public struct OpCodeSpec : IRecord<OpCodeSpec>, IComparable<OpCodeSpec>
     {
-        public const string TableId = LlvmTableNames.opcodes;
+        public const string TableId = TableNames.OpCodes;
 
         public const byte FieldCount = 5;
 

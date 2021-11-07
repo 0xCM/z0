@@ -8,8 +8,8 @@ namespace Z0.Flows
 
     using static Root;
 
-    public struct Fiber<C> : IFiber<C>
-        where C : unmanaged, IChannel
+    public struct Fiber<C> : INativeFiber<C>
+        where C : unmanaged, INativeChannel
     {
         /// <summary>
         /// The channel over which the fiber is defined
@@ -25,7 +25,7 @@ namespace Z0.Flows
         /// The offset of the fiber within the cell
         /// </summary>
         public ushort Offset;
-        
+
         /// <summary>
         /// The fiber width
         /// </summary>
@@ -40,20 +40,20 @@ namespace Z0.Flows
             Width = width;
         }
 
-        C IFiber<C>.Source
+        C INativeFiber<C>.Source
             => Channel;
 
-        uint IFiber.Cell 
+        uint INativeFiber.Cell
             => Cell;
 
-        ushort IFiber.Offset 
+        ushort INativeFiber.Offset
             => Offset;
 
-        byte IFiber.Width 
+        byte INativeFiber.Width
             => Width;
 
         [MethodImpl(Inline)]
-        public static implicit operator Fiber(Fiber<C> src)
-            => new Fiber(new Channel(src.Channel.CellCount, src.Channel.CellWidth, src.Channel.Mask), src.Cell, src.Offset, src.Width);
+        public static implicit operator NativeFiber(Fiber<C> src)
+            => new NativeFiber(new NativeChannel(src.Channel.CellCount, src.Channel.CellWidth, src.Channel.Mask), src.Cell, src.Offset, src.Width);
     }
 }

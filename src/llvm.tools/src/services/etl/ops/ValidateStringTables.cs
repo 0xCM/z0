@@ -8,7 +8,7 @@ namespace Z0.llvm
 
     using ST = llvm.stringtables;
 
-    partial class LlvmEtlServices
+    partial class LlvmRecordEtl
     {
         public Outcome ValidateStringTables()
         {
