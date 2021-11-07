@@ -28,32 +28,6 @@ namespace Z0
         /// </summary>
         public readonly int Dim;
 
-        public static Observations<T> Alloc(int dim, int count)
-            => new Observations<T>(new T[count * dim], dim);
-
-        [MethodImpl(Inline)]
-        public static Observations<T> Load(T[] src, int dim)
-            => new Observations<T>(src,dim);
-
-        [MethodImpl(Inline)]
-        public static Observations<T> Load(Span<T> src, int dim)
-            => new Observations<T>(src,dim);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Span<T>(Observations<T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T> (Observations<T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static bool operator == (Observations<T> lhs, Observations<T> rhs)
-            => lhs.Data == rhs.Data;
-
-        [MethodImpl(Inline)]
-        public static bool operator != (Observations<T> lhs, Observations<T> rhs)
-            => lhs.Data != rhs.Data;
 
         [MethodImpl(Inline)]
         public Observations(Span<T> src, int dim)
@@ -101,7 +75,7 @@ namespace Z0
         /// <param name="count">The observation count</param>
         [MethodImpl(Inline)]
         public Observations<T> Slice(int offset, int count)
-            => new Observations<T>(Data.Slice(offset * Dim, count * Dim), Dim);
+            => new Observations<T>(core.slice(Data, offset * Dim, count * Dim), Dim);
 
         /// <summary>
         /// The data length
@@ -144,5 +118,22 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Span<T>(Observations<T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<T> (Observations<T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static bool operator == (Observations<T> lhs, Observations<T> rhs)
+            => lhs.Data == rhs.Data;
+
+        [MethodImpl(Inline)]
+        public static bool operator != (Observations<T> lhs, Observations<T> rhs)
+            => lhs.Data != rhs.Data;
+
     }
 }

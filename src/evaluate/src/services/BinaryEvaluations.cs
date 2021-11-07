@@ -13,7 +13,7 @@ namespace Z0
     /// Captures the operands and outcome of binary operator evaluation
     /// </summary>
     /// <typeparam name="T">The evaluation result type</typeparam>
-    public readonly ref struct BinaryEvaluations<T>
+    public readonly struct BinaryEvaluations<T>
         where T : unmanaged
     {
         public Pairs<T> Source {get;}

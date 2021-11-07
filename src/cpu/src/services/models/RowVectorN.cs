@@ -97,7 +97,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector<N,U> Convert<U>()
             where U : unmanaged
-               => new RowVector<N,U>(NumericArrays.force<T,U>(Data));
+               => new RowVector<N,U>(Numeric.force<T,U>(Data));
 
         public bool Equals(RowVector<N,T> rhs)
         {

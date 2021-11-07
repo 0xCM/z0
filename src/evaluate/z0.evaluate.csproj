@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(DynamicLinq)" />
+
   </ItemGroup>
 
 </Project>

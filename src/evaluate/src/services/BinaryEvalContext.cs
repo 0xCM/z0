@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly ref struct BinaryEvalContext<T>
+    public readonly struct BinaryEvalContext<T>
         where T : unmanaged
     {
         public EvalContext Context {get;}

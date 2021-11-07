@@ -12,7 +12,8 @@ namespace Z0
 
     using SQ = SymbolicQuery;
 
-    partial struct SymbolicParse
+    [ApiHost]
+    public readonly struct SymbolicParse
     {
         [Op]
         public static int SkipWhitespace(ReadOnlySpan<AsciCode> src)

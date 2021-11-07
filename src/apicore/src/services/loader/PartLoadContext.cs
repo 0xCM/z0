@@ -9,15 +9,15 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    public class PartContext : AssemblyLoadContext, IDisposable
+    public class PartLoadContext : AssemblyLoadContext, IDisposable
     {
         [Op]
-        public static PartContext create(FS.FilePath src, bool collectible = true)
-            => new PartContext(src, collectible);
+        public static PartLoadContext create(FS.FilePath src, bool collectible = true)
+            => new PartLoadContext(src, collectible);
 
         [Op]
-        public static PartContext create(PartId part, bool collectible = true)
-            => new PartContext(part, collectible);
+        public static PartLoadContext create(PartId part, bool collectible = true)
+            => new PartLoadContext(part, collectible);
 
         IEnvPaths Paths;
 
@@ -29,7 +29,7 @@ namespace Z0
 
         public Index<Assembly> Dependencies {get;}
 
-        public PartContext(FS.FilePath src, bool collectible = true)
+        public PartLoadContext(FS.FilePath src, bool collectible = true)
             : base(collectible)
         {
             Paths = EnvPaths.create();
@@ -39,7 +39,7 @@ namespace Z0
             Dependencies = this.LoadPartDependencies(Component, LibDir).Distinct().Array();
         }
 
-        public PartContext(PartId src, bool collectible = true)
+        public PartLoadContext(PartId src, bool collectible = true)
             : base(src.Format(), collectible)
         {
             Paths = EnvPaths.create();

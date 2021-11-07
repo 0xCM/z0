@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
+    <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(Asci)" />
     <ProjectReference Include="$(Minidump)" />
     <ProjectReference Include="$(Interop)" />
@@ -13,7 +13,6 @@
     <ProjectReference Include="$(Tables)" />
     <ProjectReference Include="$(Services)" />
     <ProjectReference Include="$(External)" />
-
   </ItemGroup>
 
 </Project>

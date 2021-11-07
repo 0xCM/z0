@@ -70,7 +70,7 @@ namespace Z0
 
         public RowVector<U> Convert<U>()
             where U : unmanaged
-               => new RowVector<U>(NumericArrays.force<T,U>(Data));
+               => new RowVector<U>(Numeric.force<T,U>(Data));
 
 
         public bool Equals(RowVector<T> src)

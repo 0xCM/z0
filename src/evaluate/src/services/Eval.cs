@@ -50,7 +50,7 @@ namespace Z0
                 => new PairEvalResults<T>(labels, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryEvaluations<T> unary<T>(in Span<T> src, in PairEvalResults<T> dst)
+        public static UnaryEvaluations<T> unary<T>(T[] src, in PairEvalResults<T> dst)
             where T : unmanaged
                 => new UnaryEvaluations<T>(src, dst);
 

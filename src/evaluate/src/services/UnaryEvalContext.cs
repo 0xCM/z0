@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly ref struct UnaryEvalContext<T>
+    public readonly struct UnaryEvalContext<T>
         where T : unmanaged
     {
         public readonly EvalContext Context;

@@ -13,6 +13,43 @@ namespace Z0
     partial struct Numeric
     {
         /// <summary>
+        /// Unconditionally converts the source values to values of parametric numeric type
+        /// </summary>
+        /// <param name="src">The source values</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] force<S,T>(S[] src, T[] dst)
+            where T : unmanaged
+            where S : unmanaged
+        {
+            var input = span(src);
+            var count = input.Length;
+            var target = span(dst);
+            for(var i=0; i<count; i++)
+                seek(target,(uint)i) = force<S,T>(skip(input,(uint)i));
+            return dst;
+        }
+
+        /// <summary>
+        /// Unconditionally converts the source values to values of parametric numeric type
+        /// </summary>
+        /// <param name="src">The source values</param>
+        /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline)]
+        public static T[] force<S,T>(S[] src)
+            where T : unmanaged
+            where S : unmanaged
+        {
+            var input = span(src);
+            var count = input.Length;
+            var buffer = alloc<T>(count);
+            var dst = buffer.ToSpan();
+            for(var i=0; i<count; i++)
+                seek(dst,(uint)i) = force<S,T>(skip(input,(uint)i));
+            return buffer;
+        }
+
+        /// <summary>
         /// Unconditionally converts the source value to a value of parametric numeric type
         /// </summary>
         /// <param name="src">The source value</param>

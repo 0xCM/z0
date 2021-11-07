@@ -19,7 +19,7 @@ namespace Z0
         public static IApiCatalog catalog(FS.Files paths)
             => catalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
-        public static IApiCatalog catalog(PartContext context)
+        public static IApiCatalog catalog(PartLoadContext context)
             => catalog(FindParts(context));
 
         public static IApiCatalog catalog(Index<IPart> parts)

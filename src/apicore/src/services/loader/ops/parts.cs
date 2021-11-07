@@ -95,7 +95,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        static IPart[] FindParts(PartContext context)
+        static IPart[] FindParts(PartLoadContext context)
             => from component in context.Assemblies.Array().Where(x => x.Id() != 0)
                 let part = TryLoadPart(component)
                 where part.IsSome()

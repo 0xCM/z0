@@ -8,8 +8,9 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Clr)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(SymCore)" />
     <ProjectReference Include="$(Text)" />
+    <ProjectReference Include="$(SymCore)" />
+    <ProjectReference Include="$(Lang)" />
   </ItemGroup>
 
 </Project>

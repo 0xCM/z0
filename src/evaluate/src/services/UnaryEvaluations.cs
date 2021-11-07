@@ -13,13 +13,13 @@ namespace Z0
     /// Captures the operands and outcome unary pair evaluation
     /// </summary>
     /// <typeparam name="T">The evaluation result type</typeparam>
-    public readonly ref struct UnaryEvaluations<T>
+    public readonly struct UnaryEvaluations<T>
         where T : unmanaged
     {
         /// <summary>
         /// The source operand data
         /// </summary>
-        public readonly Span<T> Source;
+        public readonly Index<T> Source;
 
         /// <summary>
         /// The evaluation data
@@ -27,7 +27,7 @@ namespace Z0
         public readonly PairEvalResults<T> Target;
 
         [MethodImpl(Inline)]
-        public UnaryEvaluations(Span<T> src, in PairEvalResults<T> dst)
+        public UnaryEvaluations(T[] src, in PairEvalResults<T> dst)
         {
             Source = src;
             Target = dst;

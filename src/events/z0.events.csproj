@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(Term)" />
+    <ProjectReference Include="$(Files)" />
   </ItemGroup>
 
 </Project>

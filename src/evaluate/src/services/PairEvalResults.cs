@@ -13,7 +13,7 @@ namespace Z0
     /// Captures paired evaluations
     /// </summary>
     /// <typeparam name="T">The evaluation result type</typeparam>
-    public readonly ref struct PairEvalResults<T>
+    public readonly struct PairEvalResults<T>
         where T : unmanaged
     {
         readonly Pair<string> Labels;

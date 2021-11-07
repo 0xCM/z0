@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Blocks)" />
     <ProjectReference Include="$(Hash)" />
+    <ProjectReference Include="$(BitNumbers)" />
   </ItemGroup>
 
 </Project>
