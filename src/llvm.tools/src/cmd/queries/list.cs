@@ -4,19 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
-
-    using static core;
+    using static LlvmNames.Queries;
 
     partial class LlvmCmd
     {
-        [CmdOp(".class-names")]
-        Outcome ClassNames(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var names = Db.ClassNames();
-            iter(names, Write);
-            return result;
-        }
+        [CmdOp(list)]
+        Outcome ShowList(CmdArgs args)
+            => Flow(list, Db.SelectList(arg(args,0)).View);
     }
 }

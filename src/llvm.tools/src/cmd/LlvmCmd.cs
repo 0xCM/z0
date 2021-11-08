@@ -10,6 +10,7 @@ namespace Z0.llvm
 
     using static LlvmNames;
 
+
     public sealed partial class LlvmCmd : AppCmdService<LlvmCmd,CmdShellState>
     {
         LlvmRecordEtl RecordEtl;
@@ -73,6 +74,19 @@ namespace Z0.llvm
             iteri(src, (i,item) => Write(string.Format("{0:D5} {1}", i, item)));
             return true;
         }
+
+        Outcome Flow<T>(Label kind, ReadOnlySpan<T> src)
+        {
+            iteri(src, (i,item) => Write(string.Format("{0:D5} {1}", i, item)));
+            return true;
+        }
+
+        Outcome Flow<T>(Label kind, Span<T> src)
+        {
+            iteri(src, (i,item) => Write(string.Format("{0:D5} {1}", i, item)));
+            return true;
+        }
+
 
         Outcome Flow<T>(Span<T> src)
         {

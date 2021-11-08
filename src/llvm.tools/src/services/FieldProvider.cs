@@ -27,7 +27,7 @@ namespace Z0.llvm
         public ReadOnlySpan<RecordField> Fields
         {
             [MethodImpl(Inline)]
-            get => Db.Fields(EntityName);
+            get => Db.SelectFields(EntityName);
         }
     }
 }

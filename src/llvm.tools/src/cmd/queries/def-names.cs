@@ -4,17 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using static core;
+    using static LlvmNames.Queries;
 
     partial class LlvmCmd
     {
-        [CmdOp(".def")]
-        Outcome Def(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var lines = Db.DefLines(arg(args,0).Value);
-            iter(lines, line => Write(line));
-            return result;
-        }
+        [CmdOp(def_names)]
+        Outcome DefNames(CmdArgs args)
+            => Flow(def_names, Db.DefNames());
     }
 }

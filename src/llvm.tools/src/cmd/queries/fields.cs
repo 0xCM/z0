@@ -4,18 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
+    using static LlvmNames;
     using static core;
+
     using records;
 
     partial class LlvmCmd
     {
-        [CmdOp(".fields")]
+        [CmdOp(Queries.fields)]
         Outcome Fields(CmdArgs args)
         {
             var result = Outcome.Success;
             if(args.Length == 1)
             {
-                var fields = Db.Fields(arg(args,0).Value);
+                var fields = Db.SelectFields(arg(args,0).Value);
                 iter(fields, f => Write(f.Format()));
             }
             else if(args.Length == 2)
@@ -28,7 +30,7 @@ namespace Z0.llvm
             else
             {
                 var entities = list<Entity>();
-                Db.Fields(provider => {
+                Db.QueryFields(provider => {
                     Write(provider.EntityName);
                 });
             }

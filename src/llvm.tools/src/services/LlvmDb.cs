@@ -24,15 +24,19 @@ namespace Z0.llvm
 
         LineMap<Identifier> DefMap;
 
-        IdentityMap<uint> DefLookup;
+        IdentityMap<Interval<uint>> DefLookup;
 
-        IdentityMap<uint> ClassLookup;
+        IdentityMap<Interval<uint>> ClassLookup;
 
         Index<RecordField> _DefFields;
 
         Index<RecordField> _ClassFields;
 
         IdentityMap<Interval<uint>> FieldDefMap;
+
+        Index<DefRelations> _DefRelations;
+
+        Index<ClassRelations> _ClassRelations;
 
         BufferedLabels ClassNameBuffer;
 
@@ -63,7 +67,7 @@ namespace Z0.llvm
         public ReadOnlySpan<RecordField> Fields(uint offset, uint length)
             => slice(_DefFields.View, offset,length);
 
-        public ReadOnlySpan<RecordField> Fields(Identifier id)
+        public ReadOnlySpan<RecordField> SelectFields(Identifier id)
         {
             if(FieldDefMap.Mapped(id, out var interval))
             {
@@ -78,7 +82,7 @@ namespace Z0.llvm
             }
         }
 
-        public ItemList List(string type)
+        public ItemList SelectList(string type)
         {
             var path = Paths.ListImportPath(type);
             var result = Tables.list(path, out var items);
@@ -102,62 +106,53 @@ namespace Z0.llvm
         public ReadOnlySpan<RecordField> DefFields()
             => _DefFields.View;
 
-        public void Fields(Action<IFieldProvider> receiver)
+        public ReadOnlySpan<ClassRelations> ClassRelations()
+            => _ClassRelations;
+
+        public ReadOnlySpan<DefRelations> DefRelations()
+            => _DefRelations;
+
+        public void QueryFields(Action<IFieldProvider> receiver)
         {
             var defcount = DefMap.IntervalCount;
             for(var i=0; i<defcount; i++)
                 receiver(new FieldProvider(DefMap[i].Id, this));
         }
 
-        public void Classes(StreamWriter dst)
+        public void EmitClassInfo(StreamWriter dst)
         {
             var count = ClassMap.IntervalCount;
             for(var i=0; i<count; i++)
                 dst.WriteLine(ClassMap[i].Format());
         }
 
-        public void Defs(StreamWriter dst)
+        public void EmitDefInfo(StreamWriter dst)
         {
             var count = DefMap.IntervalCount;
             for(var i=0; i<count; i++)
                 dst.WriteLine(DefMap[i].Format());
         }
 
-        public ReadOnlySpan<TextLine> DefLines(Identifier name)
+        public ReadOnlySpan<TextLine> SelectDefLines(Identifier name)
+        {
+            if(DefLookup.Mapped(name, out var interval))
+                return X86RecordLines(interval);
+            else
+                Write(AppMsg.NotFound.Format(name));
+            return default;
+        }
+
+        public ReadOnlySpan<TextLine> SelectClassLines(Identifier name)
         {
             var lines = list<TextLine>();
-            if(DefLookup.Mapped(name, out var i))
-            {
-                ref readonly var entry = ref DefMap[i];
-                var j0 = entry.MinLine - 1;
-                var j1 = entry.MaxLine;
-                for(var k=j0; k<j1; k++)
-                {
-                    lines.Add(X86Records[k]);
-                }
-            }
+            if(ClassLookup.Mapped(name, out var interval))
+                return X86RecordLines(interval);
             else
                 Write(AppMsg.NotFound.Format(name));
             return lines.ViewDeposited();
         }
 
-        public ReadOnlySpan<TextLine> ClassLines(Identifier name)
-        {
-            var lines = list<TextLine>();
-            if(ClassLookup.Mapped(name, out var i))
-            {
-                ref readonly var entry = ref DefMap[i];
-                var j0 = entry.MinLine - 1;
-                var j1 = entry.MaxLine;
-                for(var k=j0; k<j1; k++)
-                    lines.Add(X86Records[k]);
-            }
-            else
-                Write(AppMsg.NotFound.Format(name));
-            return lines.ViewDeposited();
-        }
-
-        public ReadOnlySpan<ClassRelations> LoadClassRelations()
+        void LoadClassRelations()
         {
             var src = Paths.Table<ClassRelations>();
             var dst = list<ClassRelations>();
@@ -169,9 +164,9 @@ namespace Z0.llvm
                 var record = new ClassRelations();
                 ref readonly var row = ref rows[i];
                 var cells = @readonly(row.Split(Chars.Pipe).Select(x => x.Trim()));
-                if(cells.Length != ClassRelations.FieldCount)
+                if(cells.Length != records.ClassRelations.FieldCount)
                 {
-                    Error(Tables.FieldCountMismatch.Format(ClassRelations.FieldCount, cells.Length));
+                    Error(Tables.FieldCountMismatch.Format(records.ClassRelations.FieldCount, cells.Length));
                     Write(row);
                     break;
                 }
@@ -192,10 +187,10 @@ namespace Z0.llvm
                 record.Parameters = skip(cells,j++);
                 dst.Add(record);
             }
-            return dst.ViewDeposited();
+            _ClassRelations = dst.ToArray();
         }
 
-        public ReadOnlySpan<DefRelations> LoadDefRelations()
+        void LoadDefRelations()
         {
             var src = Paths.Table<DefRelations>();
             var dst = list<DefRelations>();
@@ -207,9 +202,9 @@ namespace Z0.llvm
                 var record = new DefRelations();
                 ref readonly var row = ref rows[i];
                 var cells = @readonly(row.Split(Chars.Pipe).Select(x => x.Trim()));
-                if(cells.Length != DefRelations.FieldCount)
+                if(cells.Length != records.DefRelations.FieldCount)
                 {
-                    Error(Tables.FieldCountMismatch.Format(DefRelations.FieldCount, cells.Length));
+                    Error(Tables.FieldCountMismatch.Format(records.DefRelations.FieldCount, cells.Length));
                     Write(row);
                     break;
                 }
@@ -229,31 +224,8 @@ namespace Z0.llvm
                 record.Ancestors = Lineage.parse(skip(cells, j++));
                 dst.Add(record);
             }
-            return dst.ViewDeposited();
+            _DefRelations = dst.ToArray();
         }
-
-        // void LoadDefFields()
-        // {
-        //     var src = Paths.Table(Datasets.X86DefFields);
-        //     var count = FS.linecount(src);
-        //     DefFields = alloc<RecordField>(count.Lines);
-        //     var counter = 0u;
-        //     using var reader = src.Utf8LineReader();
-        //     var id = Identifier.Empty;
-        //     var i = 0u;
-        //     var j = 0u;
-        //     while(reader.Next(out var line))
-        //     {
-        //         var result = parse(line, out var field);
-        //         if(result.Fail)
-        //         {
-        //             Error(result.Message);
-        //             break;
-        //         }
-
-        //         DefFields[counter++] = field;
-        //     }
-        // }
 
         void LoadFields(string dataset, out Index<RecordField> dst)
         {
@@ -282,17 +254,19 @@ namespace Z0.llvm
         {
             DefMap = LoadLineMap(Paths.ImportMap(Datasets.X86Defs));
             DefNameBuffer = strings.labels(DefMap.Intervals.Select(x => x.Id.Content));
-            iteri(DefMap.Intervals, (i,entry) => DefLookup.Map(entry.Id, (uint)i));
-            iteri(DefMap.Intervals, (i,entry) => FieldDefMap.Map(entry.Id, (entry.MinLine,entry.MaxLine)));
+            iteri(DefMap.Intervals, (i,entry) => DefLookup.Map(entry.Id, (entry.MinLine,entry.MaxLine)));
             LoadFields(Datasets.X86DefFields, out _DefFields);
+            iteri(DefMap.Intervals, (i,entry) => FieldDefMap.Map(entry.Id, (entry.MinLine,entry.MaxLine)));
+            LoadDefRelations();
         }
 
         void LoadClasses()
         {
             ClassMap = LoadLineMap(Paths.ImportMap(Datasets.X86Classes));
             ClassNameBuffer = strings.labels(ClassMap.Intervals.Select(x => x.Id.Content));
-            iteri(ClassMap.Intervals, (i,entry) => ClassLookup.Map(entry.Id, (uint)i));
+            iteri(ClassMap.Intervals, (i,entry) => ClassLookup.Map(entry.Id, (entry.MinLine,entry.MaxLine)));
             LoadFields(Datasets.X86ClassFields, out _ClassFields);
+            LoadClassRelations();
         }
 
         void LoadRecordLines()
@@ -334,6 +308,10 @@ namespace Z0.llvm
             else
                 return new LineMap<Identifier>(sys.empty<LineInterval<Identifier>>());
         }
+
+        [MethodImpl(Inline)]
+        ReadOnlySpan<TextLine> X86RecordLines(Interval<uint> range)
+            => slice(X86Records.View, range.Left - 1, range.Right - range.Left + 1);
 
         static Outcome parse(in TextLine src, out RecordField dst)
         {

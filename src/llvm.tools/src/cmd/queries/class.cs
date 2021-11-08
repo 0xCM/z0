@@ -5,16 +5,12 @@
 namespace Z0.llvm
 {
     using static core;
+    using static LlvmNames.Queries;
 
     partial class LlvmCmd
     {
-        [CmdOp(".class")]
+        [CmdOp(@class)]
         Outcome Class(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var lines = Db.ClassLines(arg(args,0).Value);
-            iter(lines, line => Write(line));
-            return result;
-        }
+            => Flow(@class, Db.SelectClassLines(arg(args,0).Value));
     }
 }

@@ -267,6 +267,26 @@ namespace Z0
         public static ulong combine(Type t1, Type t2, Type t3)
             => combine(t1,t2) ^ combine(t1, t3);
 
+        /// <summary>
+        /// Combines 3 32-bit hash codes into 1 32-hash code
+        /// </summary>
+        /// <param name="x">The first hash</param>
+        /// <param name="y">The second hash</param>
+        /// <param name="z">The third hash</param>
+        [MethodImpl(Inline), Op]
+        public static uint combine(uint x, uint y, uint z)
+            => combine(combine(x,y),z);
+
+        /// <summary>
+        /// Combines 3 64-bit hash codes into 1 64-hash code
+        /// </summary>
+        /// <param name="x">The first hash</param>
+        /// <param name="y">The second hash</param>
+        /// <param name="z">The third hash</param>
+        [MethodImpl(Inline), Op]
+        public static uint combine(ulong x, ulong y, ulong z)
+            => combine(combine(x,y),z);
+
         [MethodImpl(Inline)]
         static unsafe ulong u64(double src)
             => (*((ulong*)(&src)));

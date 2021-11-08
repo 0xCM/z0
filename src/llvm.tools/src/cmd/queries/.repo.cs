@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using System;
-
-    using static core;
-
     partial class LlvmCmd
     {
         [CmdOp(".repo/headers")]
@@ -49,6 +45,5 @@ namespace Z0.llvm
         [CmdOp(".repo/build/inc")]
         Outcome LLvmBuildInc(CmdArgs args)
             => Flow(LlvmRepo.BuildOutput(FS.Inc).ToUri());
-
     }
 }

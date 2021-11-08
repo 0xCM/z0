@@ -92,5 +92,38 @@ namespace Z0.llvm
         {
             public const string build = nameof(build);
         }
+
+
+        [LiteralProvider("llvm.queries")]
+        public readonly struct Queries
+        {
+            const string sep = "-";
+
+            const string names = nameof(names);
+
+            public const string @class = nameof(@class);
+
+            public const string classes = nameof(classes);
+
+            public const string list = nameof(list);
+
+            public const string def = nameof(def);
+
+            public const string defs = nameof(defs);
+
+            public const string lineage = nameof(lineage);
+
+            public const string fields = nameof(fields);
+
+            public const string class_fields = @class + sep + fields;
+
+            public const string class_names = @class + sep + names;
+
+            public const string def_fields = def + sep + fields;
+
+            public const string def_names = def + sep + names;
+
+        }
+
     }
 }
