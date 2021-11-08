@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Permute
+    partial struct perm
     {
         // <summary>
         /// Constructs a permutation of length four from four ordered symbols

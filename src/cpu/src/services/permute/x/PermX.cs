@@ -11,7 +11,7 @@ namespace Z0
 
     using static Root;
 
-    using api = Permute;
+    using api = perm;
 
     public static partial class XTend
     {
@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        static ref readonly Permute shuffle(in Permute src, IBoundSource random)
+        static ref readonly perm shuffle(in perm src, IBoundSource random)
         {
             random.Shuffle(src.Terms);
             return ref src;
@@ -98,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="p">The permutation to apply</param>
-        public static Span<T> Permute<T>(this ReadOnlySpan<T> src, Permute p)
+        public static Span<T> Permute<T>(this ReadOnlySpan<T> src, perm p)
         {
             Span<T> dst = new T[src.Length];
             for(var i=0; i<p.Length; i++)
@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="p">The permutation to apply</param>
         [MethodImpl(Inline)]
-        public static Span<T> Permute<T>(this Span<T> src, Permute p)
+        public static Span<T> Permute<T>(this Span<T> src, perm p)
             => src.ReadOnly().Permute(p);
 
         /// <summary>

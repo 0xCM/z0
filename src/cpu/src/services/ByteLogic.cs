@@ -14,6 +14,7 @@ namespace Z0
 
     using L = math;
 
+    [ApiHost]
     public readonly struct ByteLogic
     {
         [MethodImpl(Inline), Not]

@@ -36,8 +36,8 @@ namespace Z0.llvm
 
         IProjectWs Data;
 
-        IProjectWs Project()
-            => State.Project();
+        // IProjectWs Project()
+        //     => State.Project();
 
         protected override void Initialized()
         {

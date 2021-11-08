@@ -49,7 +49,7 @@ namespace Z0.Test
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Matrix.filename<M,N,T>((int)i);
+                => MatrixIO.filename<M,N,T>((int)i);
 
         void check_emission<M,N,T>(uint count, M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
@@ -60,8 +60,8 @@ namespace Z0.Test
             {
                 var path = Paths.CasePath(filename<M,N,T>(i));
                 var matrix = Random.MatrixBlock<M,N,T>();
-                var A = Matrix.write(matrix, path, m, n, t);
-                var B = Matrix.read(path, m, n, t);
+                var A = MatrixIO.write(matrix, path, m, n, t);
+                var B = MatrixIO.read(path, m, n, t);
                 Claim.require(A == B);
             }
         }

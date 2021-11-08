@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(Bits)" />
     <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(SymCore)" />
+    <ProjectReference Include="$(Files)" />
+    <ProjectReference Include="$(ApiCore)" />
     <ProjectReference Include="$(SpanBlocks)" />
   </ItemGroup>
 

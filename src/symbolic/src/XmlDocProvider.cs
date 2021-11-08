@@ -5,6 +5,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Reflection;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Threading;
@@ -13,7 +15,7 @@ namespace Z0
 
     public class XmlDocProvider : DocumentationProvider
     {
-       public static XmlDocProvider create(FS.FilePath src)
+        public static XmlDocProvider create(FS.FilePath src)
             => new XmlDocProvider(src.Name);
 
         readonly Dictionary<string, string> members = new Dictionary<string, string>();

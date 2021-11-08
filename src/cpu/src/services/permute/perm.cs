@@ -17,7 +17,7 @@ namespace Z0
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
     /// </summary>
     [ApiHost]
-    public readonly partial struct Permute
+    public readonly partial struct perm
     {
         const NumericKind Closure = UnsignedInts;
 
@@ -65,8 +65,8 @@ namespace Z0
         /// Allocates an empty permutation
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static Permute Alloc(int n)
-            => new Permute(new int[n]);
+        public static perm Alloc(int n)
+            => new perm(new int[n]);
 
         /// <summary>
         /// Allocates an empty permutation of specified length
@@ -134,14 +134,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Permute(int n, Swap[] src)
+        public perm(int n, Swap[] src)
         {
             terms = identity(n).terms;
             Apply(src);
         }
 
         [MethodImpl(Inline)]
-        public Permute(int[] src)
+        public perm(int[] src)
         {
             terms = src;
         }
@@ -156,19 +156,19 @@ namespace Z0
             for(var i=0; i<m; i++)
                 seek(dst, i) = skip(src,i);
 
-            var identity = Permute.identity(n);
+            var identity = perm.identity(n);
             for(var i=m; i<n; i++)
                 seek(dst, i) = identity[i - m];
         }
 
-        public Permute(int n, int[] src)
+        public perm(int n, int[] src)
         {
             terms = new int[n];
             Absorb(src);
         }
 
         [MethodImpl(Inline)]
-        public Permute(IEnumerable<int> src)
+        public perm(IEnumerable<int> src)
         {
             terms = src.ToArray();
         }
@@ -203,7 +203,7 @@ namespace Z0
         /// the transposition t is the function t(l) = g(f(l)) == l.
         /// </remarks>
         [MethodImpl(Inline)]
-        public Permute Swap(int i, int j)
+        public perm Swap(int i, int j)
         {
             Swaps.swap(ref terms[i], ref terms[j]);
             return this;
@@ -212,7 +212,7 @@ namespace Z0
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
-        public Permute Swap(params (int i, int j)[] specs)
+        public perm Swap(params (int i, int j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
                 Swaps.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
@@ -222,7 +222,7 @@ namespace Z0
         /// <summary>
         /// Effects a sequence of in-place transpositions
         /// </summary>
-        public Permute Apply(params Swap[] specs)
+        public perm Apply(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
                 Swaps.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
@@ -241,8 +241,8 @@ namespace Z0
         /// <summary>
         /// Clones the permutation
         /// </summary>
-        public Permute Replicate()
-            => new Permute(terms.Replicate());
+        public perm Replicate()
+            => new perm(terms.Replicate());
 
         /// <summary>
         /// Creates a new permutation p via composition, p[i] = g(f(i)) for i = 0, ... n
@@ -250,7 +250,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
-        public Permute Compose(Permute g)
+        public perm Compose(perm g)
         {
             var n = terms.Length;
             var dst = Alloc(n);
@@ -264,7 +264,7 @@ namespace Z0
         /// Reverses the permutation in-place
         /// </summary>
         [MethodImpl(Inline)]
-        public Permute Reverse()
+        public perm Reverse()
         {
             terms.Reverse();
             return this;
@@ -274,7 +274,7 @@ namespace Z0
         /// Computes the inverse permutation t of the current permutation p
         /// such that p*t = t*p = I where I denotes the identity permutation
         /// </summary>
-        public Permute Invert()
+        public perm Invert()
         {
             var dst = Alloc(Length);
             for(var i=0; i< Length; i++)
@@ -285,7 +285,7 @@ namespace Z0
         /// <summary>
         /// Applies a modular increment to the permutation in-place
         /// </summary>
-        public Permute Inc()
+        public perm Inc()
         {
             Span<int> src = Replicate().terms;
             var k = 1;
@@ -298,7 +298,7 @@ namespace Z0
         /// <summary>
         /// Applies a modular decrement to the permutation in-place
         /// </summary>
-        public Permute Dec()
+        public perm Dec()
         {
             Span<int> src = Replicate().terms;
             terms[0] = src[Length - 1];
@@ -381,7 +381,7 @@ namespace Z0
         public override int GetHashCode()
             => terms.GetHashCode();
 
-        public bool Equals(Permute rhs)
+        public bool Equals(perm rhs)
         {
             var len = rhs.Length;
             if(len != terms.Length)
@@ -395,14 +395,14 @@ namespace Z0
         }
 
         public override bool Equals(object o)
-            => o is Permute p  && Equals(p);
+            => o is perm p  && Equals(p);
 
         [MethodImpl(Inline)]
-        public static implicit operator Permute(Span<int> src)
-            => new Permute(src.ToArray());
+        public static implicit operator perm(Span<int> src)
+            => new perm(src.ToArray());
 
         [MethodImpl(Inline)]
-        public static implicit operator Permute(ReadOnlySpan<int> src)
+        public static implicit operator perm(ReadOnlySpan<int> src)
             => Init(src);
 
         /// <summary>
@@ -412,23 +412,23 @@ namespace Z0
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
         [MethodImpl(Inline)]
-        public static Permute operator *(Permute f, Permute g)
+        public static perm operator *(perm f, perm g)
             => f.Compose(g);
 
         [MethodImpl(Inline)]
-        public static Permute operator ++(in Permute src)
+        public static perm operator ++(in perm src)
             => src.Inc();
 
         [MethodImpl(Inline)]
-        public static Permute operator --(in Permute src)
+        public static perm operator --(in perm src)
             => src.Dec();
 
         [MethodImpl(Inline)]
-        public static bool operator ==(Permute a, Permute b)
+        public static bool operator ==(perm a, perm b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(Permute a, Permute b)
+        public static bool operator !=(perm a, perm b)
             => !(a == b);
     }
 }

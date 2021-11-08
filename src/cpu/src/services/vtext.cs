@@ -14,7 +14,7 @@ namespace Z0
     using static vpack;
 
     [ApiHost]
-    public readonly partial struct vtext
+    public readonly struct vtext
     {
         const NumericKind Closure = UInt64k;
 

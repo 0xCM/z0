@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
+    <ProjectReference Include="$(Core)" />
+    <ProjectReference Include="$(Bit)" />
+    <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(Term)" />
+    <ProjectReference Include="$(ApiCore)" />
   </ItemGroup>
 
 </Project>

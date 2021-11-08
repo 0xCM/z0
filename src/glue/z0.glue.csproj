@@ -13,7 +13,6 @@
       <ProjectReference Include="$(Hash)" />
       <ProjectReference Include="$(Events)"/>
       <ProjectReference Include="$(Workflow)"/>
-      <ProjectReference Include="$(Part)"/>
       <ProjectReference Include="$(AsmCore)"/>
       <ProjectReference Include="$(AsmData)"/>
       <ProjectReference Include="$(Resources)"/>

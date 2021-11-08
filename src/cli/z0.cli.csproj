@@ -13,6 +13,7 @@
     <ProjectReference Include="$(Tables)" />
     <ProjectReference Include="$(Services)" />
     <ProjectReference Include="$(External)" />
+    <ProjectReference Include="$(Xml)" />
   </ItemGroup>
 
 </Project>

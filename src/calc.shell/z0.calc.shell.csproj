@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Symbolic)" />

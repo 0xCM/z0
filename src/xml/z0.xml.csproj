@@ -6,9 +6,7 @@
 
   <ItemGroup>
       <ProjectReference Include="$(Core)" />
-      <ProjectReference Include="$(Cells)" />
-      <ProjectReference Include="$(Part)" />
-
+      <ProjectReference Include="$(Files)" />
   </ItemGroup>
 
 </Project>

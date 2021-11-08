@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public partial class FileTypes
+    public class FileTypes
     {
         public static FS.FileExt ext(FileKind src)
             => FS.ext(format(src));

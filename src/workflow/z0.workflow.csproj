@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Term)" />
     <ProjectReference Include="$(Events)" />
     <ProjectReference Include="$(Ws)" />
+    <ProjectReference Include="$(ApiCore)" />
   </ItemGroup>
 
 </Project>

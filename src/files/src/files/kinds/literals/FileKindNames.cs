@@ -407,5 +407,15 @@ namespace Z0
         /// Defines the 'td' literal
         /// </summary>
         public const string td = nameof(td);
+
+        /// <summary>
+        /// Defines the 'bits' literal
+        /// </summary>
+        public const string bits = nameof(bits);
+
+        /// <summary>
+        /// Defines the 'bc' literal
+        /// </summary>
+        public const string bc = nameof(bc);
     }
 }
