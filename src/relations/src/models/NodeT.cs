@@ -13,17 +13,17 @@ namespace Z0
     {
         public uint Index;
 
-        public T Content;
+        public T Payload;
 
         [MethodImpl(Inline)]
         public Node(uint id, T content)
         {
             Index = id;
-            Content = content;
+            Payload = content;
         }
 
-        T INode<T>.Content
-            => Content;
+        T INode<T>.Payload
+            => Payload;
 
         uint INode.Index
             => Index;

@@ -24,7 +24,7 @@ namespace Z0
     /// Floating-point scalar intrinsics
     /// </summary>
     [ApiHost]
-    public readonly partial struct fscpu
+    public readonly struct fscpu
     {
         const NumericKind Closure = Floats;
 
@@ -137,6 +137,26 @@ namespace Z0
             => ConvertToInt64(LoadScalarVector128(gptr(x)));
 
         /// <summary>
+        /// __m128 _mm_move_ss (__m128 a, __m128 b) MOVSS xmm, xmm
+        /// z[0] = y[0]
+        /// z[1] = x[1]
+        /// z[2] = x[2]
+        /// z[3] = x[3]
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static Vector128<float> vmovs(Vector128<float> x, Vector128<float> y)
+            => MoveScalar(y,x);
+
+        /// <summary>
+        /// __m128d _mm_move_sd (__m128d a, __m128d b) MOVSD xmm, xmm
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<double> vmovs(Vector128<double> x, Vector128<double> y)
+            => MoveScalar(y,x);
+
+        /// <summary>
         /// __m128 _mm_add_ss (__m128 a, __m128 b)ADDSS xmm, xmm/m32
         /// </summary>
         /// <param name="x"></param>
@@ -240,7 +260,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline), Op]
-        public static Vector128<float> div(Vector128<float> x, Vector128<float> y)
+        public static Vector128<float> vdivs(Vector128<float> x, Vector128<float> y)
             => DivideScalar(x, y);
 
         /// <summary>
@@ -249,7 +269,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline), Op]
-        public static Vector128<double> div(Vector128<double> x, Vector128<double> y)
+        public static Vector128<double> vdivs(Vector128<double> x, Vector128<double> y)
             => DivideScalar(x, y);
 
         /// <summary>

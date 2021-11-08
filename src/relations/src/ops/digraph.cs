@@ -9,14 +9,15 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct Leaf<T> : ILeaf<T>
+    partial struct relations
     {
-        public T Content {get;}
+        [MethodImpl(Inline)]
+        public static LabeledDigraph<V> digraph<V>()
+            where V : unmanaged, ILabeledVertex, IEquatable<V>
+                => new LabeledDigraph<V>();
 
         [MethodImpl(Inline)]
-        public Leaf(T content)
-        {
-            Content = content;
-        }
+        public static Digraph digraph(params Edge[] edges)
+            => new Digraph(edges);
     }
 }

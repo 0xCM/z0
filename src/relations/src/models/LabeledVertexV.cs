@@ -27,7 +27,7 @@ namespace Z0
             => Name.Equals(src.Name);
 
         public override int GetHashCode()
-            => (int)graphs.hash(Value);
+            => (int)Name.Hash;
 
         public override bool Equals(object obj)
             => obj is LabeledVertex<V> v && Equals(v);

@@ -25,23 +25,23 @@ namespace Z0
         /// <summary>
         /// The vertex payload
         /// </summary>
-        public T Content;
+        public T Payload;
 
         [MethodImpl(Inline)]
         public Node(K index, T content)
         {
             Index = index;
-            Content = content;
+            Payload = content;
         }
 
         K INode<K,T>.Index
             => Index;
 
-        T INode<T>.Content
-            => Content;
+        T INode<T>.Payload
+            => Payload;
 
         public string Format()
-            => string.Format("({0},{1})", Index, Content);
+            => string.Format("({0},{1})", Index, Payload);
 
         public override string ToString()
             => Format();
@@ -56,6 +56,6 @@ namespace Z0
         /// <param name="src">The source vertex</param>
         [MethodImpl(Inline)]
         public static implicit operator Node<T>(in Node<K,T> src)
-            => new Node<T>(core.bw32(src.Index), src.Content);
+            => new Node<T>(core.bw32(src.Index), src.Payload);
     }
 }

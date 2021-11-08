@@ -6,12 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Sse;
     using static Root;
 
-    partial struct cpu
+    partial struct relations
     {
+       [MethodImpl(Inline)]
+        public static LabeledEdge<V> edge<V>(Label label, V src, V dst)
+            where V : unmanaged, ILabeledVertex, IEquatable<V>
+                => new LabeledEdge<V>(label,src,dst);
     }
 }

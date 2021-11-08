@@ -15,7 +15,7 @@ namespace Z0
     /// <typeparam name="T">The value type</typeparam>
     public interface INode<T> : INode
     {
-        T Content {get;}
+        T Payload {get;}
     }
 
     public interface INode<K,T> : INode<T>
