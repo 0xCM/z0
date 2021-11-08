@@ -12,24 +12,9 @@ namespace Z0
     partial struct Math128
     {
         [MethodImpl(Inline), Dec]
-        public static ref ulong dec(ref ulong x)
+        public static ref uint128 dec(ref uint128 x)
         {
-            var o = Tuples.@const(1ul,0ul);
-            sub(in x, in o.Left, ref x);
-            return ref x;
-        }
-
-        [MethodImpl(Inline), Dec]
-        public static void dec(in ulong x, ref ulong y)
-        {
-            var o = Tuples.@const(1ul,0ul);
-            sub(in x, in o.Left, ref y);
-        }
-
-        [MethodImpl(Inline), Dec]
-        public static ref ConstPair<ulong> dec(ref ConstPair<ulong> x)
-        {
-            x = sub(x, Tuples.@const(1ul,0ul));
+            sub(ref x, (1ul,0ul));
             return ref x;
         }
     }

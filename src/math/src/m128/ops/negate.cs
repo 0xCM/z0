@@ -16,7 +16,11 @@ namespace Z0
         /// </summary>
         /// <param name="x">The integer, represented via paired hi/lo components</param>
         [MethodImpl(Inline), Negate]
-        public static ConstPair<ulong> negate(ConstPair<ulong> x)
-            => add(not(x), Tuples.@const(1ul,0ul));
+        public static ref uint128 negate(ref uint128 x)
+        {
+            var y = not(x);
+            x = add(ref y, (1ul,0ul));
+            return ref x;
+        }
     }
 }

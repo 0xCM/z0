@@ -17,25 +17,25 @@ namespace Z0
         /// </summary>
         /// <remarks>Adapted from IntUtils.cs / Microsoft Machine Learning repository</remarks>
         [MethodImpl(Inline), Sub]
-        public static void sub(ref Pair<ulong> dst, ulong src)
+        public static void sub(ref uint128 dst, ulong src)
         {
-            if (dst.Left < src)
-                dst.Right--;
-            dst.Left -= src;
+            if (dst.Lo < src)
+                dst.Hi--;
+            dst.Lo -= src;
         }
 
-        /// <summary>
-        /// Subtraction mod 2^128.
-        /// </summary>
-        /// <remarks>Adapted from IntUtils.cs / Microsoft Machine Learning repository</remarks>
-        [MethodImpl(Inline), Sub]
-        public static void sub(in Pair<ulong> src, ref Pair<ulong> dst)
-        {
-            dst.Right -= src.Right;
-            if (dst.Left < src.Left)
-                dst.Right--;
-            dst.Left -= src.Left;
-        }
+        // /// <summary>
+        // /// Subtraction mod 2^128.
+        // /// </summary>
+        // /// <remarks>Adapted from IntUtils.cs / Microsoft Machine Learning repository</remarks>
+        // [MethodImpl(Inline), Sub]
+        // public static void sub(in uint128 src, ref uint128 dst)
+        // {
+        //     dst.Hi -= src.Hi;
+        //     if (dst.Lo < src.Lo)
+        //         dst.Hi--;
+        //     dst.Lo -= src.Lo;
+        // }
 
         /// <summary>
         /// Computes the difference c := a - b between 128-bit unsigned integers a and b
@@ -59,12 +59,13 @@ namespace Z0
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         /// <remarks>Adapted from https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline), Sub]
-        public static ConstPair<ulong> sub(in ConstPair<ulong> x, in ConstPair<ulong> y)
+        public static ref uint128 sub(ref uint128 x, in uint128 y)
         {
-            var lo = x.Left - y.Left;
-            var borrow = x.Left < lo;
-            var hi = x.Right - y.Right - uint32(borrow);
-            return (lo, hi);
+            var lo = x.Lo - y.Lo;
+            var borrow = x.Lo < lo;
+            x.Hi = x.Hi - y.Hi - uint32(borrow);
+            x.Lo = lo;
+            return ref x;
         }
     }
 }

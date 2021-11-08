@@ -49,23 +49,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Mul]
-        public static unsafe ref Pair<uint> mul(in ConstPair<uint> src, ref Pair<uint> dst)
+        public static unsafe ref uint128 mul(ref uint128 dst, in uint128 src)
         {
-            dst.Right = MultiplyNoFlags(src.Left, src.Right, gptr(dst.Left));
+            dst.Hi = MultiplyNoFlags(src.Lo, src.Hi, gptr(dst.Lo));
             return ref dst;
         }
 
         [MethodImpl(Inline), Mul]
-        public static unsafe ref Pair<ulong> mul(in ConstPair<ulong> src, ref Pair<ulong> dst)
+        public static ref uint128 mul(ulong x, ulong y, out uint128 dst)
         {
-            dst.Right = MultiplyNoFlags(src.Left, src.Right, gptr(dst.Left));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Mul]
-        public static ref Pair<ulong> mul(ulong x, ulong y, out Pair<ulong> dst)
-        {
-            mul(x, y, out dst.Left, out dst.Right);
+            mul(x, y, out dst.Lo, out dst.Hi);
             return ref dst;
         }
 

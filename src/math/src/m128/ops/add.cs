@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <remarks>Taken from IntUtils.cs / Microsoft Machine Learning repository</remarks>
         [MethodImpl(Inline), Add]
-        public static void add(ref ulong dstHi, ref ulong dstLo, ulong src)
+        public static void add(ref ulong dstLo, ref ulong dstHi, ulong src)
         {
             if ((dstLo += src) < src)
                 dstHi++;
@@ -26,14 +26,21 @@ namespace Z0
         /// <summary>
         /// Addition mod 2^128.
         /// </summary>
-        /// <remarks>Taken from IntUtils.cs / Microsoft Machine Learning repository</remarks>
+        /// <remarks>Adapted from IntUtils.cs / Microsoft Machine Learning repository</remarks>
         [MethodImpl(Inline), Add]
-        public static void add(ref ulong dstHi, ref ulong dstLo, ulong srcHi, ulong srcLo)
+        public static void add(ref ulong dstLo, ref ulong dstHi, ulong srcLo, ulong srcHi)
         {
             if ((dstLo += srcLo) < srcLo)
                 dstHi++;
             dstHi += srcHi;
         }
+
+        // [MethodImpl(Inline), Add]
+        // public static ref uint128 add(ref uint128 dst, in uint128 src)
+        // {
+        //     add(ref dst.Lo, ref dst.Hi, src.Lo, src.Hi);
+        //     return ref dst;
+        // }
 
         /// <summary>
         /// Computes the sum of two 128-bit integers
@@ -42,12 +49,13 @@ namespace Z0
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline), Add]
-        public static ConstPair<ulong> add(in ConstPair<ulong> x, in ConstPair<ulong> y)
+        public static ref uint128 add(ref uint128 x, in uint128 y)
         {
-            var lo = x.Left + y.Left;
-            var carry = x.Left > lo;
-            var hi = x.Right + y.Right + uint32(carry);
-            return (lo,hi);
+            var lo = x.Lo + y.Lo;
+            var carry = x.Lo > lo;
+            x.Hi = x.Hi + y.Hi + uint32(carry);
+            x.Lo = lo;
+            return ref x;
         }
 
         /// <summary>

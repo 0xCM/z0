@@ -17,8 +17,8 @@ namespace Z0
         /// <param name="x">The first integer, represented via paired hi/lo components</param>
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         [MethodImpl(Inline), Eq]
-        public static bit eq(in ConstPair<ulong> x, in ConstPair<ulong> y)
-            => x.Left == y.Left && x.Right == y.Right;
+        public static bit eq(in uint128 x, in uint128 y)
+            => x.Lo == y.Lo && x.Hi == y.Hi;
 
         /// <summary>
         /// Determines whether the left operand is less than the right operand
@@ -27,8 +27,8 @@ namespace Z0
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline), Lt]
-        public static bit lt(in ConstPair<ulong> x, in ConstPair<ulong> y)
-            => x.Right < y.Right | ((x.Right == y.Right) && (x.Left < y.Left));
+        public static bit lt(in uint128 x, in uint128 y)
+            => x.Hi < y.Hi | ((x.Hi == y.Hi) && (x.Lo < y.Lo));
 
          /// <summary>
         /// Determines whether the left operand is less than or equal the right operand
@@ -37,8 +37,8 @@ namespace Z0
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline), LtEq]
-        public static bit lteq(in ConstPair<ulong> x, in ConstPair<ulong> y)
-            => x.Right < y.Right | ((x.Right == y.Right) && (x.Left <= y.Left));
+        public static bit lteq(in uint128 x, in uint128 y)
+            => x.Hi < y.Hi | ((x.Hi == y.Hi) && (x.Lo <= y.Lo));
 
         /// <summary>
         /// Determines whether the left operand is greater than the right operand
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline), Gt]
-        public static bit gt(in ConstPair<ulong> x, in ConstPair<ulong> y)
+        public static bit gt(in uint128 x, in uint128 y)
             => !lteq(x,y);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="y">The second integer, represented via paired hi/lo components</param>
         /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline), GtEq]
-        public static bit gteq(in ConstPair<ulong> x, in ConstPair<ulong> y)
+        public static bit gteq(in uint128 x, in uint128 y)
             => !lt(x,y);
     }
 }

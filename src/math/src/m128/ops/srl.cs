@@ -18,11 +18,11 @@ namespace Z0
         /// <param name="offset">The number of bits to shift letward</param>
         /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
         [MethodImpl(Inline), Srl]
-        public static ConstPair<ulong> srl(in ConstPair<ulong> x, byte offset)
+        public static uint128 srl(in uint128 x, byte offset)
             => offset < 64
-              ? Tuples.@const((x.Right >> offset), (x.Left >> offset) | ((x.Right << 1) << 63 - offset))
+              ? ((x.Hi >> offset), (x.Lo >> offset) | ((x.Hi << 1) << 63 - offset))
               : offset < 128
-              ? Tuples.@const(z64, x.Left >> (offset - 64))
-              : ConstPair.zero(z64);
+              ? (z64, x.Lo >> (offset - 64))
+              : default;
     }
 }
