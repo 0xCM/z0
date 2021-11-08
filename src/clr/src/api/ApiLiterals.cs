@@ -104,7 +104,7 @@ namespace Z0
         [Op]
         public static Index<RuntimeLiteral> provided(LiteralProvider src)
         {
-            var fields = src.Definition.PublicFields().ReadOnly();
+            var fields = src.Definition.LiteralFields().Public().ToReadOnlySpan();
             var count = fields.Length;
             var buffer = alloc<RuntimeLiteral>(count);
             ref var dst = ref first(buffer);

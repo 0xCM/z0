@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Relations
+    partial struct relations
     {
         /// <summary>
         /// Creates a graph from supplied vertices and edges

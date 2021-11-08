@@ -4,17 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static WsAtoms;
+    using static core;
 
     partial class AsmCmdService
     {
-        [CmdOp(".api-literals")]
-        Outcome EmitApiLiterals(CmdArgs args)
+        [CmdOp(".symsources")]
+        Outcome SymSources(CmdArgs args)
         {
             var result = Outcome.Success;
-            var literals = State.ApiLiterals(Loaders.ApiLiterals);
-            var path = Emitters.Emit(literals, Ws.Tables().Subdir(machine));
+            var src = Clr.symsources(ApiRuntimeLoader.assemblies()).View;
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var t = ref skip(src,i);
+                Write(t.Name);
+            }
+
             return result;
         }
-   }
+    }
 }

@@ -55,35 +55,35 @@ namespace Z0.Asm
         }
 
 
-        [CmdOp(".machine")]
-        Outcome EmitMachineTables(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var tables = Ws.Tables();
-            var tokens = Wf.AsmTokens();
+        // [CmdOp(".machine")]
+        // Outcome EmitMachineTables(CmdArgs args)
+        // {
+        //     var result = Outcome.Success;
+        //     var tables = Ws.Tables();
+        //     var tokens = Wf.AsmTokens();
 
-            var dir = Ws.Tables().Subdir(machine);
+        //     var dir = Ws.Tables().Subdir(machine);
 
-            Emitters.Emit(Loaders.ApiLiterals().View, dir);
-            result = GenModRmBits();
-            if(result.Fail)
-                return result;
+        //     TableEmitters.Emit(TableLoaders.ApiLiterals().View, dir);
+        //     result = GenModRmBits();
+        //     if(result.Fail)
+        //         return result;
 
-            result = GenSibBits();
-            if(result.Fail)
-                return result;
+        //     result = GenSibBits();
+        //     if(result.Fail)
+        //         return result;
 
-            result = AsmTables.ImportCpuIdSources();
-            if(result.Fail)
-                return result;
+        //     result = AsmTables.ImportCpuIdSources();
+        //     if(result.Fail)
+        //         return result;
 
-            Wf.IntelIntrinsics().Emit(dir);
+        //     Wf.IntelIntrinsics().Emit(dir);
 
-            EmitTokenSpecs();
-            EmitSymKinds(Symbols.index<AsmOpClass>(), tables.TablePath(machine,"classes.asm.operands"));
-            EmitSymIndex<RegClassCode>(tables.TablePath(machine, "classes.asm.regs"));
-            return result;
-        }
+        //     EmitTokenSpecs();
+        //     EmitSymKinds(Symbols.index<AsmOpClass>(), tables.TablePath(machine,"classes.asm.operands"));
+        //     EmitSymIndex<RegClassCode>(tables.TablePath(machine, "classes.asm.regs"));
+        //     return result;
+        // }
 
         Outcome GenSibBits()
         {
@@ -106,12 +106,5 @@ namespace Z0.Asm
             Wf.EmittedFile(flow,count);
             return true;
         }
-
-        ReadOnlySpan<SymLiteralRow> EmitSymLiterals<E>(FS.FilePath dst)
-            where E : unmanaged, Enum
-        {
-            var svc = Wf.Symbolism();
-            return svc.EmitLiterals<E>(dst);
-        }
-    }
+   }
 }

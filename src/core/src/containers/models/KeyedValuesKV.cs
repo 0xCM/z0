@@ -27,7 +27,7 @@ namespace Z0
             Pairs = dst;
             KeyFunction = kf;
             var edit = Edit;
-            var values = src.ReadOnly();
+            var values = src.ToReadOnlySpan();
             var count = src.Length;
             for(var i= 0u; i<count; i++)
             {

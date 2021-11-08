@@ -209,7 +209,7 @@ namespace Z0.Tools
             var comment = skip(parts,1);
             var bitstring = "<error>";
             var formatted = FormatBytes(comment, out var count);
-            if(HexByteParser.ParseData(formatted, out var parsed))
+            if(Hex.hexdata(formatted, out var parsed))
                 bitstring = AsmRender.format8x4(AsmHexCode.load(parsed));
 
             if(count != 0)

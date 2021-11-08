@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using api = Relations;
+    using api = relations;
 
     public readonly struct ArrowType<S,T>
     {

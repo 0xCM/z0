@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Relations
+    partial struct relations
     {
         /// <summary>
         /// Connects a source vertex to a target vertex

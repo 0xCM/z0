@@ -13,11 +13,11 @@ namespace Z0
 
     partial struct Clr
     {
-        public static SymTypes symtypes(Assembly[] src)
+        public static SymSourceTypes symsources(Assembly[] src)
         {
             var types = src.Enums().Tagged<SymSourceAttribute>().ToReadOnlySpan();
             var count = types.Length;
-            var buffer = alloc<SymType>(count);
+            var buffer = alloc<SymSourceType>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
@@ -25,11 +25,11 @@ namespace Z0
                 var attrib = type.Tag<SymSourceAttribute>().Require();
                 var alias = type.Tag<AliasAttribute>();
                 if(alias.Exists && alias.Value.AliasList.Length!=0)
-                    seek(dst,i) = new SymType(type, attrib.SymKind, alias.Value.AliasList);
+                    seek(dst,i) = new SymSourceType(type, attrib.SymKind, alias.Value.AliasList);
                 else
-                    seek(dst,i) = new SymType(type, attrib.SymKind);
+                    seek(dst,i) = new SymSourceType(type, attrib.SymKind);
             }
-            return new SymTypes(buffer);
+            return new SymSourceTypes(buffer);
         }
     }
 }

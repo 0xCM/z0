@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Relations
+    partial struct relations
     {
         [Op, Closures(Closure)]
         public static ArrowType<T> type<T>()

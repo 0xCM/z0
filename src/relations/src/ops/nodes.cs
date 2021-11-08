@@ -9,7 +9,7 @@ namespace Z0
 
     using static core;
 
-    partial struct Relations
+    partial struct relations
     {
         /// <summary>
         /// Defines a vertex with payload for each source item

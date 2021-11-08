@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct SymType
+    public readonly struct SymSourceType
     {
         readonly public Type Definition;
 
@@ -18,7 +18,7 @@ namespace Z0
         public string SymKind {get;}
 
         [MethodImpl(Inline)]
-        internal SymType(Type def, string kind, string[] alias)
+        internal SymSourceType(Type def, string kind, string[] alias)
         {
             Definition = def;
             SymKind = kind;
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal SymType(Type def, string kind)
+        internal SymSourceType(Type def, string kind)
         {
             Definition = def;
             SymKind = kind;

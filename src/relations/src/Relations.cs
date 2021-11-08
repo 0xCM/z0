@@ -7,7 +7,7 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public readonly partial struct Relations
+    public readonly partial struct relations
     {
         const NumericKind Closure = UnsignedInts;
     }

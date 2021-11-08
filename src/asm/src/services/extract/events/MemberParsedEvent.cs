@@ -14,14 +14,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public MemberParsedEvent()
         {
-            Payload = Relations.flow(ApiMemberExtract.Empty, ApiMemberCode.Empty);
+            Payload = relations.flow(ApiMemberExtract.Empty, ApiMemberCode.Empty);
 
         }
 
         [MethodImpl(Inline)]
         public MemberParsedEvent(in ApiMemberExtract src, in ApiMemberCode dst)
         {
-            Payload = Relations.flow(src,dst);
+            Payload = relations.flow(src,dst);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static core;
     using static Root;
 
-    partial struct Relations
+    partial struct relations
     {
         [MethodImpl(Inline)]
         public static Path<K,T> path<K,T>(params Node<K,T>[] nodes)

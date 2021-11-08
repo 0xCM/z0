@@ -10,7 +10,6 @@ namespace Z0.llvm
 
     using static LlvmNames;
 
-
     public sealed partial class LlvmCmd : AppCmdService<LlvmCmd,CmdShellState>
     {
         LlvmRecordEtl RecordEtl;

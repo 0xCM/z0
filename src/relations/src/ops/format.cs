@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Relations
+    partial struct relations
     {
         public static string format<S,T>(in DataFlow<S,T> flow)
             => RenderLink<S,T>().Format(flow.Source, flow.Target);

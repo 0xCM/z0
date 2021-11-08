@@ -2,12 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    partial struct asm
+    public interface IRelation
     {
-        [Op]
-        public static Outcome hexbytes(string src, out BinaryCode dst)
-            => HexByteParser.hexbytes(src, out dst);
+        Label Source {get;}
+
+        Label Target {get;}
+    }
+
+    public interface IRelation<K> : IRelation
+        where K : unmanaged
+    {
+        K Kind {get;}
     }
 }

@@ -56,7 +56,7 @@ namespace Z0.Tools
                         return (false, string.Format($"HexNumericParser failed on {part1}"));
 
                     var bytestring = text.intersperse(part2, Chars.Space, 2);
-                    if(HexByteParser.parse(bytestring, out var data))
+                    if(Hex.hexbytes(bytestring, out var data))
                         dst.Encoding = data;
                     else
                         return (false, string.Format($"HexByteParser failed on {bytestring}"));

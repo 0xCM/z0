@@ -12,7 +12,7 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public readonly partial struct graphs
+    public readonly struct graphs
     {
         [MethodImpl(Inline)]
         internal static uint hash<T>(T src)

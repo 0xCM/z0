@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using api = Relations;
+    using api = relations;
 
     /// <summary>
     /// Defines the type signature for a node-homogenous link

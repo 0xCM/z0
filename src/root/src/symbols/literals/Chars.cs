@@ -8,7 +8,7 @@ namespace Z0
     /// Defines an arbitrary collection of character literals
     /// </summary>
     [LiteralProvider]
-    public static class Chars
+    public readonly struct Chars
     {
         /// <summary>
         /// The '&' character

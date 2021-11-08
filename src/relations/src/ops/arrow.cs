@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Relations
+    partial struct relations
     {
         /// <summary>
         /// Defines an edge from a specified source to specified target

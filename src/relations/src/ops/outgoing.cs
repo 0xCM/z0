@@ -9,7 +9,7 @@ namespace Z0
 
     using static core;
 
-    partial struct Relations
+    partial struct relations
     {
         /// <summary>
         /// Finds the edges in a graph that emit from an identified vertex

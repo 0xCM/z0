@@ -8,7 +8,7 @@ namespace Z0
     /// Defines asci string literals
     /// </summary>
     [LiteralProvider]
-    public static class AsciText
+    public readonly struct AsciText
     {
         public const string D0 = "0";
 

@@ -8,7 +8,7 @@ namespace Z0
     /// Defines an arbitrary collection of text literals
     /// </summary>
     [LiteralProvider]
-    public static class CharText
+    public readonly struct CharText
     {
         /// <summary>
         /// The '=' character text

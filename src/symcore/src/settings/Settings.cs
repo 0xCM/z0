@@ -121,6 +121,30 @@ namespace Z0
         }
 
         [Op]
+        public static Settings parse(ReadOnlySpan<string> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<Setting>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+                seek(dst, i) = parse(skip(src,i));
+            return buffer;
+        }
+
+        public static Setting parse(string src)
+        {
+            var i = SQ.index(src, Chars.Colon);
+            var setting = Setting.Empty;
+            if(i > 0)
+            {
+                var name = SQ.left(src, i).Format().Trim();
+                var value = SQ.right(src, i).Format().Trim();
+                setting = new Setting(name, value);
+            }
+            return setting;
+        }
+
+        [Op]
         public static Settings parse(ReadOnlySpan<TextLine> src)
         {
             var count = src.Length;

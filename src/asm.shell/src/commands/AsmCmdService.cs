@@ -52,10 +52,6 @@ namespace Z0.Asm
 
         IWorkspace DataSources;
 
-        TableLoaders Loaders;
-
-        TableEmitters Emitters;
-
         byte[] _Assembled;
 
         const ushort _NativeBufferSize = Pow2.T14;
@@ -88,8 +84,6 @@ namespace Z0.Asm
             DataSources = Ws.Sources();
             ApiCatalogs = Wf.ApiCatalogs();
             AsmEtl = Wf.AsmEtl();
-            Loaders = Wf.TableLoaders();
-            Emitters = Wf.TableEmitters();
             IntelIntrinsics = Wf.IntelIntrinsics();
             State.Init(Wf, Ws);
         }

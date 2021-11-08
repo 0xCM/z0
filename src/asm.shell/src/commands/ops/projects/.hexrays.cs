@@ -13,14 +13,14 @@ namespace Z0.Asm
         {
             var result = Outcome.Success;
 
-            LoadProjectSources(State.Project(), "hex");
-            var src = State.Files().View;
+            LoadProjectSources(Project(), "hex");
+            var src = Files().View;
             var count = src.Length;
             var files = alloc<FS.FilePath>(count);
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(src,i);
-                result = asm.hexbytes(path.ReadAsci(), out var code);
+                result = Hex.hexbytes(path.ReadAsci(), out var code);
                 if(result.Fail)
                     return result;
 

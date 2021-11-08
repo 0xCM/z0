@@ -352,7 +352,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Outcome parse(string src, out BinaryCode dst)
         {
-            var result = HexByteParser.ParseData(src, out var data);
+            var result = Hex.hexdata(src, out var data);
             if(result)
             {
                 dst = data;

@@ -132,7 +132,6 @@ namespace Z0
             return segsize;
         }
 
-
         public FS.FolderPath HexRoot()
             => Db.ParsedExtractRoot();
 

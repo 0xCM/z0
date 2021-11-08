@@ -89,6 +89,10 @@ namespace Z0
         public Label StoreLabel(ReadOnlySpan<char> src, uint offset)
             => strings.label(src, offset, this);
 
+        [MethodImpl(Inline)]
+        public StringRef StoreString(ReadOnlySpan<char> src, uint offset)
+            => strings.@string(src, offset, this);
+
         public Span<char> Edit
         {
             [MethodImpl(Inline)]
@@ -100,6 +104,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Buffer.View;
         }
+
+        public StringAllocator Allocator()
+            => new StringAllocator(this);
 
         public LabelAllocator LabelAllocator()
             => new LabelAllocator(this);

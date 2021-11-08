@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct Relations
+    partial struct relations
     {
         [MethodImpl(Inline), Op]
         public static bool eq(ArrowType a, ArrowType b)

@@ -6,8 +6,10 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
 
     using static Root;
+    using static HexFormatSpecs;
     using static core;
 
     public class ApiExtractPipe : AppService<ApiExtractPipe>
@@ -15,19 +17,26 @@ namespace Z0
         public FS.Files RawExtractPaths()
             => Db.RawExtractPaths();
 
+        static byte parse8u(string src)
+        {
+            if(byte.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null, out var b))
+                return b;
+            else
+                return 0;
+        }
+
         public static Outcome parse(string src, out ApiExtractBlock dst)
         {
             dst = ApiExtractBlock.Empty;
             try
             {
                 var parts = src.SplitClean(FieldDelimiter);
-                var parser = HexByteParser.Service;
                 if(parts.Length != 3)
                     return (false, $"components = {parts.Length} != 3");
 
                 var address = HexNumericParser.parse64u(parts[(byte)ApiExtractField.Base]).ValueOrDefault();
                 var uri = ApiUri.parse(parts[(byte)ApiExtractField.Uri].Trim()).ValueOrDefault();
-                var bytes = parts[(byte)ApiExtractField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
+                var bytes = parts[(byte)ApiExtractField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parse8u);
                 dst = new ApiExtractBlock(address, uri.Format(), bytes);
                 return true;
             }

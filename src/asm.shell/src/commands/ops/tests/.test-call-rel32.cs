@@ -25,7 +25,7 @@ namespace Z0.Asm
         Outcome AsmCallRel32(CmdArgs args)
         {
             const string input = "e8 d1 d5 b3 59";
-            var result = asm.hexbytes(input, out var code);
+            var result = Hex.hexbytes(input, out var code);
             if(result.Fail)
                 return result;
 

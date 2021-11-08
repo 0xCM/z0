@@ -8,69 +8,7 @@ namespace Z0
 
     using static core;
 
-    public abstract class AppCmdService<T,S> : AppCmdService<T>
-        where T : AppCmdService<T,S>, new()
-        where S : CmdShellState, new()
-    {
-        protected S State {get;}
-
-        protected AppCmdService()
-        {
-            State = new S();
-        }
-
-        protected FS.Files Files(FS.Files src, bool write = true)
-        {
-            State.Files(src);
-            if(write)
-                iter(src.View, f => Write(f.ToUri()));
-            return src;
-        }
-
-        [CmdOp(".project")]
-        protected Outcome Project(CmdArgs args)
-        {
-            var outcome = Outcome.Success;
-            if(args.Length == 0)
-                return LoadProjectSources(State.Project());
-            else
-                return LoadProjectSources(State.Project(arg(args,0).Value));
-        }
-
-        [CmdOp(".files")]
-        protected Outcome ShowFiles(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            var files = State.Files();
-            iter(files, file => Write(file.ToUri()));
-            return result;
-        }
-
-        protected Outcome LoadProjectSources(IProjectWs ws)
-        {
-            var outcome = Outcome.Success;
-            var dir = ws.Home();
-            outcome = dir.Exists;
-            if(outcome)
-                Files(ws.SrcFiles());
-            else
-                outcome = (false, UndefinedProject.Format(ws.Project));
-            return outcome;
-        }
-
-        protected Outcome LoadProjectSources(IProjectWs ws, Subject? scope)
-        {
-            Files(ProjectFiles(ws,scope));
-            return true;
-        }
-
-        protected Outcome RunProjectScript(CmdArgs args, ScriptId script, Subject? scope = null)
-            => RunProjectScript(State.Project(), args, script, scope);
-
-        static MsgPattern<ProjectId> UndefinedProject
-            => "Undefined project:{0}";
-    }
-
+    using L = ApiLiterals;
 
     public abstract class AppCmdService<T> : AppService<T>, IAppCmdService
         where T : AppCmdService<T>, new()
@@ -87,6 +25,11 @@ namespace Z0
 
         protected ProjectScripts ProjectScripts;
 
+        protected AppSettings Settings;
+
+        protected TableEmitters TableEmitters;
+
+
         protected AppCmdService()
         {
             PromptTitle = "cmd";
@@ -99,6 +42,8 @@ namespace Z0
             OmniScript = Wf.OmniScript();
             ProjectWs = Ws.Projects();
             ProjectScripts = Wf.ProjectScripts();
+            Settings = Wf.AppSettings();
+            TableEmitters = Wf.TableEmitters();
         }
 
         public T With(IToolCmdShell shell)
@@ -128,6 +73,133 @@ namespace Z0
             Witness?.Dispose();
         }
 
+        protected void ToolEnv(out Settings dst)
+        {
+            var path = Ws.Tools().Toolbase + FS.file("show-env-config", FS.Cmd);
+            var cmd = Cmd.cmdline(path.Format(PathSeparator.BS));
+            dst = Settings.Load(OmniScript.RunCmd(cmd));
+        }
+
+        [CmdOp(".tool-env")]
+        protected Outcome ShowToolEnv(CmdArgs args)
+        {
+            ToolEnv(out var settings);
+            iter(settings, s => Write(s));
+            return true;
+        }
+
+        [CmdOp(".commands")]
+        protected Outcome Commands(CmdArgs args)
+        {
+            var commands = Cmd.cmdops(GetType());
+            iter(commands, cmd => Write(cmd.Format()));
+            return true;
+        }
+
+        [CmdOp(".project")]
+        protected Outcome Project(CmdArgs args)
+        {
+            var outcome = Outcome.Success;
+            if(args.Length == 0)
+                return LoadProjectSources(Project());
+            else
+                return LoadProjectSources(CommonState.Project(arg(args,0).Value));
+        }
+
+        [CmdOp(".srcfiles")]
+        protected Outcome ProjectSrcFiles(CmdArgs args)
+        {
+            if(args.Length == 0)
+                Files(Project().SrcFiles());
+            else
+                Files(Project().SrcFiles(arg(args,0)));
+            return true;
+        }
+
+        [CmdOp(".files")]
+        protected Outcome ShowFiles(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var files = CommonState.Files();
+            iter(files, file => Write(file.ToUri()));
+            return result;
+        }
+
+        /// <summary>
+        /// Loads files from a directory into the context
+        /// </summary>
+        /// <param name="args">The directory specifier, if any</param>
+        [CmdOp(".dir")]
+        protected Outcome Dir(CmdArgs args)
+        {
+            var result = Outcome.Success;
+
+            var spec = string.Empty;
+            if(args.Length == 0)
+                spec = string.Format("dir {0} /s/b", CommonState.CurrentDir().Format(PathSeparator.BS));
+            else
+                spec = string.Format("dir {0}\\{1} /s/b", CommonState.CurrentDir().Format(PathSeparator.BS), FS.dir(arg(args,0)).Format(PathSeparator.BS));
+
+            Write(spec);
+
+            result = OmniScript.Run(spec, out var response);
+            if(result.Fail)
+                return result;
+
+            var count = response.Length;
+            var paths = alloc<FS.FilePath>(count);
+            for(var i=0; i<count; i++)
+                seek(paths,i) = FS.path(skip(response,i).Content);
+
+            Files(paths);
+            return result;
+        }
+
+        [CmdOp(".api-catalog")]
+        protected Outcome ApiCatalog(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var catalog = CommonState.ApiCatalog(ApiRuntimeLoader.catalog);
+            var parts = catalog.PartIdentities;
+            var desc = string.Format("Parts:[{0}]", parts.Map(p => p.Format()).Delimit());
+            Write(desc);
+            return result;
+        }
+
+        [CmdOp(".emit-api-literals")]
+        protected Outcome EmitApiLiterals(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var literals = CommonState.ApiLiterals(ApiLiterals);
+            var path = TableEmitters.Emit(literals, Ws.Tables().Subdir(WsAtoms.machine));
+            return result;
+        }
+
+        Index<CompilationLiteral> ApiLiterals()
+        {
+            var result = Outcome.Success;
+            var components = ApiRuntimeLoader.assemblies();
+            var providers = L.providers(components).View;
+            var count = providers.Length;
+            var buffer = list<CompilationLiteral>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var provider = ref skip(providers,i);
+                var literals = L.provided(provider).View;
+                for(var j=0; j<literals.Length; j++)
+                    buffer.Add(skip(literals,j).Specify());
+            }
+
+            return buffer.ToArray();
+        }
+
+        protected ReadOnlySpan<SymLiteralRow> EmitSymLiterals<E>(FS.FilePath dst)
+            where E : unmanaged, Enum
+        {
+            var svc = Wf.Symbolism();
+            return svc.EmitLiterals<E>(dst);
+        }
+
         protected virtual string PromptTitle {get;}
 
         protected virtual Outcome Dispatch(string command, CmdArgs args)
@@ -142,38 +214,6 @@ namespace Z0
             return Cmd.cmdspec(input);
         }
 
-        protected Outcome ToolEnv(out Settings dst)
-        {
-            var path = Ws.Tools().Toolbase + FS.file("show-env-config", FS.Cmd);
-            dst = Settings.Empty;
-            if(!path.Exists)
-                return (false, FS.missing(path));
-            var cmd = Cmd.cmdline(path.Format(PathSeparator.BS));
-            var response = OmniScript.RunCmd(cmd);
-            dst = Settings.parse(response);
-            return true;
-        }
-
-        [CmdOp(".tool-env")]
-        protected Outcome ShowToolEnv(CmdArgs args)
-        {
-            var result = ToolEnv(out var settings);
-            if(result.Fail)
-                return result;
-
-            iter(settings, s => Write(s));
-
-            return true;
-        }
-
-        [CmdOp(".commands")]
-        protected Outcome Commands(CmdArgs args)
-        {
-            var commands = Cmd.cmdops(GetType());
-            iter(commands, cmd => Write(cmd.Format()));
-            return true;
-        }
-
         public void Run()
         {
             var input = Next();
@@ -185,9 +225,7 @@ namespace Z0
                     {
                         var result = SelectTool(arg(input.Args,0).Value);
                         if(result.Fail)
-                        {
                             Error(result.Message);
-                        }
                     }
                     else
                     {
@@ -204,7 +242,12 @@ namespace Z0
         {
             var outcome = Dispatcher.Dispatch(cmd.Name, cmd.Args);
             if(outcome.Fail)
-                Wf.Error(outcome.Message);
+                Error(outcome.Message);
+            else
+            {
+                if(nonempty(outcome.Message))
+                    Status(outcome.Message);
+            }
             return outcome;
         }
 
@@ -256,35 +299,6 @@ namespace Z0
                     Write(string.Format(Pattern2, key, name, expr));
             }
             return true;
-        }
-
-        protected ByteSize EmitHexArray(byte[] src, FS.FilePath dst)
-        {
-            var array = Hex.hexarray(src);
-            var size = src.Length;
-            var flow = EmittingFile(dst);
-            using var writer = dst.AsciWriter();
-            writer.WriteLine(array.Format(false));
-            EmittedFile(flow, size);
-            return size;
-        }
-
-        protected Outcome EmitHexArrays(ReadOnlySpan<FS.FilePath> src, FS.FolderPath dir)
-        {
-            var result = Outcome.Success;
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var path = ref skip(src,i);
-                var dst = dir + FS.file(path.FileName.Format(), FS.XArray);
-                var data = HexArray.cover(path.ReadBytes());
-                var size = data.Length;
-                using var writer = dst.AsciWriter();
-                writer.WriteLine(data.Format(true));
-                Write(string.Format("({0} bytes)[{1} -> {2}]", size, path.ToUri(), dst.ToUri()));
-            }
-
-            return result;
         }
 
         protected Index<SymKindRow> EmitSymKinds<K>(in Symbols<K> src, FS.FilePath dst)
@@ -377,8 +391,63 @@ namespace Z0
             return true;
         }
 
+        protected abstract CmdShellState CommonState {get;}
+
+        protected FS.Files Files()
+            => CommonState.Files();
+
+        protected IProjectWs Project()
+            => CommonState.Project();
+
+        protected FS.Files Files(FS.Files src, bool write = true)
+        {
+            CommonState.Files(src);
+            if(write)
+                iter(src.View, f => Write(f.ToUri()));
+            return src;
+        }
+
+        protected Outcome LoadProjectSources(IProjectWs ws)
+        {
+            var outcome = Outcome.Success;
+            var dir = ws.Home();
+            outcome = dir.Exists;
+            if(outcome)
+                Files(ws.SrcFiles());
+            else
+                outcome = (false, UndefinedProject.Format(ws.Project));
+            return outcome;
+        }
+
+        protected Outcome LoadProjectSources(IProjectWs ws, Subject? scope)
+        {
+            Files(ProjectFiles(ws,scope));
+            return true;
+        }
+
+        protected Outcome RunProjectScript(CmdArgs args, ScriptId script, Subject? scope = null)
+            => RunProjectScript(CommonState.Project(), args, script, scope);
+
+        static MsgPattern<ProjectId> UndefinedProject
+            => "Undefined project:{0}";
+
         static MsgPattern EmptyArgList => "No arguments specified";
 
         static MsgPattern ArgSpecError => "Argument specification error";
+    }
+
+    public abstract class AppCmdService<T,S> : AppCmdService<T>
+        where T : AppCmdService<T,S>, new()
+        where S : CmdShellState, new()
+    {
+        protected S State {get;}
+
+        protected AppCmdService()
+        {
+            State = new S();
+        }
+
+        protected override CmdShellState CommonState
+            => State;
     }
 }

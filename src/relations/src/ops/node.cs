@@ -10,7 +10,7 @@
         using static core;
         using static Root;
 
-        partial struct Relations
+        partial struct relations
         {
             /// <summary>
             /// Creates a vertex with payload

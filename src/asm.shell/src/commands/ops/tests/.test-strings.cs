@@ -8,124 +8,46 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        Outcome LabelTest1()
-        {
-            var result = Outcome.Success;
-            var data = strings.memory(llvm.stringtables.Instruction.Offsets, llvm.stringtables.Instruction.Data);
-            var count = data.EntryCount;
-
-            for(var i=0; i<count; i++)
-            {
-                var current = data[i];
-                var length = (uint)current.Length;
-                var address = data.Address(i);
-                var label = data.Label(i);
-                var a = text.format(current);
-                var b = label.Format();
-                if(!text.equals(a,b))
-                {
-                    result = (false, string.Format("{0} != {1}", a, b));
-                    break;
-                }
-            }
-
-            if(result)
-            {
-                Write(string.Format("Verified {0} stringtable lookups", count));
-            }
-
-            return result;
-        }
-
-        Outcome LabelTest2()
-        {
-            var result = Outcome.Success;
-            var count = Pow2.T12;
-            var input = alloc<string>(count);
-            for(var i=0; i<count; i++)
-                seek(input,i) = i.FormatBits();
-
-            using var buffer = strings.buffer(input, out var index);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var label = ref index[i];
-                var expect = i.FormatBits();
-                var actual = label.Format();
-                if(expect != actual)
-                {
-                    result = (false,string.Format("{0} != {1}", actual, expect));
-                    break;
-                }
-            }
-
-            if(result)
-            {
-                Write(string.Format("Verified {0} direct label allocations", count));
-            }
-
-            return result;
-
-        }
-
-        [CmdOp(".test-labels")]
-        Outcome TestLabels(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            result = LabelTest1();
-            if(result.Fail)
-                return result;
-            result = LabelTest2();
-
-            return result;
-        }
-
         [CmdOp(".test-strings")]
         Outcome TestStrings(CmdArgs args)
         {
             var result = Outcome.Success;
-            var count = 256u;
-            var length = 8u;
-            using var buffer = strings.buffer(count*length);
-            var labels = core.alloc<Label>(count);
-            for(uint i=0,j=0; i<256; i++,j+=length)
-            {
-                var s = BitRender.format8((byte)i);
-                seek(labels,i) = buffer.StoreLabel(s,j);
-            }
 
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var label = ref skip(labels,i);
-                Write(label.Format());
-            }
+            result = CheckStringAllocator();
             return result;
         }
 
-        [CmdOp(".test-alloc")]
-        Outcome TestAllocator(CmdArgs args)
+        Outcome CheckStringAllocator()
         {
             var result = Outcome.Success;
-            var count = 256u;
-            var length = 8u;
-            using var buffer = strings.buffer(count*length);
-            var allocator = buffer.LabelAllocator();
-            var labels = core.alloc<Label>(count);
-            for(uint i=0; i<256; i++)
-            {
-                var s = BitRender.format8((byte)i);
-                if(!allocator.Dispense(s, out seek(labels,i)))
-                {
-                    Error("eh?");
-                }
-            }
-
+            var count = Pow2.T16;
+            var inputlen = Pow2.T04;
+            var totallen = count*inputlen;
+            var size = totallen*core.size<char>();
+            using var buffer = strings.buffer(totallen);
+            var allocator = buffer.Allocator();
+            var refs = core.alloc<StringRef>(count);
             for(var i=0; i<count; i++)
             {
-                ref readonly var label = ref skip(labels,i);
-                Write(label.Format());
+                var input = BitRender.format16((ushort)i);
+                if(!allocator.Allocate(input, out seek(refs,i)))
+                {
+                    result = (false,"Capacity exceeded");
+                    break;
+                }
+
+                ref readonly var allocated = ref skip(refs,i);
+                var formatted = allocated.Format();
+                if(!input.Equals(formatted))
+                {
+                    result = (false, string.Format("input:{0} != output:{1}", input, formatted));
+                    break;
+                }
             }
+            if(result)
+                result = (true, string.Format("Verified string allocator for {0} inputs over a buffer of size {1}", count, size));
 
             return result;
         }
-   }
+    }
 }

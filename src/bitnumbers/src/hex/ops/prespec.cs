@@ -20,5 +20,8 @@ namespace Z0
             seek(dst,i++) = PreSpec1;
             return 2;
         }
+
+        public static bool prespec(string src)
+            => src.TrimStart().StartsWith(PreSpec);
     }
 }

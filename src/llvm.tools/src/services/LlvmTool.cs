@@ -6,7 +6,7 @@ namespace Z0.llvm
 {
     using System;
 
-    public abstract class LlvmTool<T> : AppCmdService<T>
+    public abstract class LlvmTool<T> : AppCmdService<T, CmdShellState>
         where T : LlvmTool<T>,new()
     {
         protected ILlvmWorkspace LlvmWs;

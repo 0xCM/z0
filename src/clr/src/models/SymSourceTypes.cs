@@ -11,13 +11,13 @@ namespace Z0
     using static Root;
     using static core;
 
-    public class SymTypes
+    public class SymSourceTypes
     {
-        readonly Index<SymType> Data;
+        readonly Index<SymSourceType> Data;
 
-        readonly Dictionary<string,SymType> Index;
+        readonly Dictionary<string,SymSourceType> Index;
 
-        internal SymTypes(SymType[] src)
+        internal SymSourceTypes(SymSourceType[] src)
         {
             Data = src;
             Index = new();
@@ -43,20 +43,20 @@ namespace Z0
             get => Data.IsNonEmpty;
         }
 
-        public Outcome Find(string name, out SymType dst)
+        public bool Find(string name, out SymSourceType dst)
             => Index.TryGetValue(name, out dst);
 
-        public ReadOnlySpan<SymType> View
+        public ReadOnlySpan<SymSourceType> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator SymType[](SymTypes src)
+        public static implicit operator SymSourceType[](SymSourceTypes src)
             => src.Data;
 
-        public static SymTypes Empty
-            => new SymTypes(sys.empty<SymType>());
+        public static SymSourceTypes Empty
+            => new SymSourceTypes(sys.empty<SymSourceType>());
     }
 }

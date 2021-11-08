@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Relations
+    partial struct relations
     {
         public static string specifier<S,T>(DataFlow<S,T> flow)
         {

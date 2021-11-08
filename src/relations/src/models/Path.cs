@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
 
 
-    partial struct Relations
+    partial struct relations
     {
         public struct Path<K,T>
             where K : unmanaged

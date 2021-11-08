@@ -79,6 +79,10 @@ namespace Z0
             => Svc.Symbolism.create(wf);
 
         [Op]
+        public static AppSettings AppSettings(this IWfRuntime wf)
+            => Svc.AppSettings.create(wf);
+
+        [Op]
         public static ApiHex ApiHex(this IWfRuntime wf)
             => Svc.ApiHex.create(wf);
 
@@ -102,10 +106,19 @@ namespace Z0
             => Svc.SymServices.create(wf);
 
         [Op]
+        public static HexEmitter HexEmitter(this IWfRuntime wf)
+            => Svc.HexEmitter.create(wf);
+
+        [Op]
         public static BitfieldServices Bitfields(this IWfRuntime wf)
             => Svc.BitfieldServices.create(wf);
 
+        [Op]
         public static ProjectScripts ProjectScripts(this IWfRuntime wf)
             => Svc.ProjectScripts.create(wf);
+
+        [Op]
+        public static TableEmitters TableEmitters(this IWfRuntime context)
+            => Svc.TableEmitters.create(context);
     }
 }

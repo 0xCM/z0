@@ -12,13 +12,5 @@ namespace Z0
         [Op]
         public static AsmCmdService AsmCmd(this IWfRuntime context)
             => AsmCmdService.create(context);
-
-        [Op]
-        public static TableLoaders TableLoaders(this IWfRuntime context)
-            => Asm.TableLoaders.create(context);
-
-        [Op]
-        public static TableEmitters TableEmitters(this IWfRuntime context)
-            => Asm.TableEmitters.create(context);
     }
 }
