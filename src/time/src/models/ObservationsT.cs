@@ -28,7 +28,6 @@ namespace Z0
         /// </summary>
         public readonly int Dim;
 
-
         [MethodImpl(Inline)]
         public Observations(Span<T> src, int dim)
         {

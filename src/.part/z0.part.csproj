@@ -6,21 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Core)" />
-    <ProjectReference Include="$(Interop)" />
-    <ProjectReference Include="$(Clr)" />
-    <ProjectReference Include="$(Rules)" />
-    <ProjectReference Include="$(Time)" />
-    <ProjectReference Include="$(Hash)" />
-    <ProjectReference Include="$(Bit)" />
-    <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(Resources)" />
-    <ProjectReference Include="$(ApiCore)" />
-    <ProjectReference Include="$(Cells)" />
-    <ProjectReference Include="$(Commands)" />
-    <ProjectReference Include="$(SymCore)" />
-    <ProjectReference Include="$(Text)" />
-    <ProjectReference Include="$(Relations)" />
-    <ProjectReference Include="$(Files)" />
   </ItemGroup>
 
 </Project>

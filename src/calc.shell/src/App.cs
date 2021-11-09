@@ -273,8 +273,17 @@ namespace Z0
 
         void Run(N30 n)
         {
-
-
+            var x0 = "0x3412a";
+            var x1 = uint128.Zero;
+            var result = Math128.parse(x0, out x1);
+            if(result)
+            {
+                var x2 = x1.Format();
+                if(x0 != x2)
+                    Error(string.Format("'{0}' != '{1}'", x2, x0));
+            }
+            else
+                Error(result.Message);
         }
 
         void RunValidators()

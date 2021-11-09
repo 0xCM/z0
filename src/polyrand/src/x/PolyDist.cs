@@ -4,13 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using static Root;
-
-    public static class StatX
+    public static class PolyDist
     {
         /// <summary>
         /// Constructs a Bernouli distribution given a specification and random source
@@ -30,14 +24,5 @@ namespace Z0
         public static BernoulliDist<T> Bernoulli<T>(this IPolyrand random, double p = 0.5)
             where T : unmanaged
                 => new BernoulliSpec<T>(p).Distribution(random);
-
-        public static IEnumerable<SeriesTerm<T>> Terms<T>(this TimeSeries<T> series)
-            where T : unmanaged
-                => TimeSeries.evolve(series);
-
-        [MethodImpl(Inline)]
-        public static SeriesTerm<T> NextTerm<T>(this TimeSeries<T> series)
-            where T : unmanaged
-                => TimeSeries.next(series);
     }
 }

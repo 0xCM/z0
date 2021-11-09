@@ -10,7 +10,6 @@
       <ProjectReference Include="$(Blocks)" />
       <ProjectReference Include="$(Rules)" />
       <ProjectReference Include="$(Bit)" />
-      <ProjectReference Include="$(Hash)" />
       <ProjectReference Include="$(Events)"/>
       <ProjectReference Include="$(Workflow)"/>
       <ProjectReference Include="$(AsmCore)"/>

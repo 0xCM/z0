@@ -12,18 +12,18 @@ namespace Z0
     public readonly struct SeriesEvolution<T>
         where T : unmanaged
     {
-        public ulong[] Seed {get;}
+        public readonly ulong[] Seed;
 
-        public Interval<T> Domain {get;}
+        public readonly Interval<T> Domain;
 
-        public SeriesTerm<T> FirstTerm {get;}
+        public readonly SeriesTerm<T> FirstTerm;
 
-        public SeriesTerm<T> FinalTerm {get;}
+        public readonly SeriesTerm<T> FinalTerm;
 
-        public Duration Time {get;}
+        public readonly Duration Time;
 
         [MethodImpl(Inline)]
-        public SeriesEvolution(ulong[] seed, in Interval<T> domain, in SeriesTerm<T> first, in SeriesTerm<T> final, in Duration time)
+        public SeriesEvolution(ulong[] seed, Interval<T> domain, SeriesTerm<T> first, SeriesTerm<T> final, Duration time)
         {
             Seed = seed;
             Domain = domain;

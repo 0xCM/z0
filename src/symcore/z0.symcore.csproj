@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Clr)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Blocks)" />
-    <ProjectReference Include="$(Hash)" />
     <ProjectReference Include="$(BitNumbers)" />
   </ItemGroup>
 

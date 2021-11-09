@@ -10,14 +10,14 @@ namespace Z0
     using static Root;
     using static core;
 
-    public static class Markovian
+    public static class PolyMarkov
     {
         /// <summary>
         /// Produces a stochastic vector of *unspecified* length
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="len">The result vector length</param>
-        [MethodImpl(Inline)]
+        [Op,Closures(Floats)]
         public static void MarkovSpan<T>(this IPolyrand random, Span<T> dst)
             where T : unmanaged
         {
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="len">The result vector length</param>
-        [MethodImpl(Inline)]
+        [Op,Closures(Floats)]
         public static RowVector256<T> MarkovBlock<T>(this IPolyrand random, int length)
             where T : unmanaged
         {
@@ -52,7 +52,6 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="len">The result vector length</param>
         /// <typeparam name="N">The length type</typeparam>
-        [MethodImpl(Inline)]
         public static Block256<N,T> MarkovBlock<N,T>(this IPolyrand random)
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -125,7 +124,7 @@ namespace Z0
             return true;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static void MarkovSpan(this IPolyrand random, Span<float> dst)
         {
             var length = dst.Length;
@@ -133,7 +132,7 @@ namespace Z0
             gcalc.fdiv(dst, dst.Avg()*length);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static void MarkovSpan(this IPolyrand random, Span<double> dst)
         {
             var length = dst.Length;
@@ -141,7 +140,7 @@ namespace Z0
             gcalc.fdiv(dst, dst.Avg()*length);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static RowVector256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
         {
             var dst = Z0.SpanBlocks.alloc<float>(n256, (uint)CellCalcs.blockcount<float>(n256, length));
@@ -150,7 +149,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static RowVector256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
         {
             var dst = Z0.SpanBlocks.alloc<double>(n256, (uint)CellCalcs.blockcount<double>(n256, length));

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static minicore;
 
     public static class HexFormatSpecs
     {
@@ -216,6 +217,7 @@ namespace Z0
         /// </summary>
         public static HexFormatOptions HexData
         {
+            [MethodImpl(Inline)]
             get => options(true, false, false, false, true, DataDelimiter);
         }
 
@@ -224,11 +226,13 @@ namespace Z0
         /// </summary>
         public static HexFormatOptions HexArray
         {
+            [MethodImpl(Inline)]
              get => options(zpad:true, specifier:true, uppercase:false, prespec:true, delimitsegs:true, segsep:ListDelimiter, valsep: ListDelimiter);
         }
 
         public static HexFormatOptions Compact
         {
+            [MethodImpl(Inline)]
             get => options(zpad:true, specifier:false, uppercase:true, prespec:false, delimitsegs:false, delimitblocks:false);
         }
 
@@ -244,9 +248,16 @@ namespace Z0
         /// Removes leading or trailing hex specifiers
         /// </summary>
         /// <param name="src">The source string</param>
-        [MethodImpl(Inline)]
         public static string ClearSpecs(string src)
             => src.Remove("0x").RemoveAny('h');
+
+        [MethodImpl(Inline)]
+        public static bool HasPrespec(ReadOnlySpan<char> src)
+            => src.Length > 2 && skip(src,0) == '0' && skip(src,1) == 'x';
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> ClearPrespec(ReadOnlySpan<char> src)
+            => HasPrespec(src) ? slice(src,2) : src;
 
         [MethodImpl(Inline)]
         public static HexFormatOptions options(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true,

@@ -4,9 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost]
-    public readonly partial struct Math128
-    {
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
+    using static Root;
+
+    public static class StatX
+    {
     }
 }
