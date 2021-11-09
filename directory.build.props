@@ -8,14 +8,14 @@
     <Deterministic>true</Deterministic>
     <Optimize>true</Optimize>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>preview</LangVersion>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <NullableReferenceTypes>true</NullableReferenceTypes>
     <NullableContextOptions>disable</NullableContextOptions>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
-
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
+    <LangVersion>preview</LangVersion>
     <TopDir>$(MSBuildThisFileDirectory)</TopDir>
     <BuildRootDir>$(TopDir).build\</BuildRootDir>
     <OutputPath>$(BuildRootDir)bin\$(Configuration)\$(MsBuildProjectName)\</OutputPath>

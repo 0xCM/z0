@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>asmrun</AssemblyName>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <TieredCompilation>false</TieredCompilation>
