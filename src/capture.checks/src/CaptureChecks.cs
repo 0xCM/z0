@@ -11,9 +11,6 @@ namespace Z0.Asm
 
     public readonly struct CaptureChecks : ICaptureChecks
     {
-        public static ICaptureChecks create(IWfRuntime wf)
-            => new CaptureChecks(wf);
-
         static IJsonSettings json(FS.FilePath src)
             => JsonSettings.Load(src);
 

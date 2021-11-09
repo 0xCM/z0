@@ -27,7 +27,7 @@ namespace Z0
         {
             var fields = @readonly(src.LiteralFields());
             var dst = alloc<SymLiteralRow>(fields.Length);
-            fill(src, ClrPrimitives.kind(src), fields, dst);
+            fill(src, PrimalBits.kind(src), fields, dst);
             return dst;
         }
 

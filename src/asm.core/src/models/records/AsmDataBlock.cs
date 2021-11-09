@@ -32,6 +32,7 @@ namespace Z0
 
         public CharBlock128 Bitstring;
 
-        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{16, 16, 16, 16, 64, 48, 64, 32, 128};
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{16, 16, 16, 16, 64, 48, 64, 32, 128};
     }
 }

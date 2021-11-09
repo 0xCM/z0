@@ -23,7 +23,7 @@ namespace Z0
         {
             var type = typeof(E);
             dst.Component = typeof(E).Assembly;
-            dst.DataType = ClrPrimitives.kind(type);
+            dst.DataType = PrimalBits.kind(type);
             dst.Class = src.Class;
             dst.Description = src.Description;
             dst.ScalarValue = src.Value;

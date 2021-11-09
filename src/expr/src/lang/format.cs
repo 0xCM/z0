@@ -10,8 +10,6 @@ namespace Z0.Lang
     using static Root;
     using static core;
 
-    using XF = ExprPatterns;
-
     partial struct lang
     {
         internal static string format<T>(in Production<T> src)

@@ -237,7 +237,8 @@ namespace Z0
         void Run(N23 n)
         {
             LogHeader(MethodInfo.GetCurrentMethod(), n);
-            BitFormatChecks.create(Wf).Run(Rng.wyhash64());
+            var log = BitFormatChecks.create().Run(Rng.wyhash64());
+            Write(log.Emit());
         }
 
         void Run(N24 n)

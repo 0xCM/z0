@@ -32,7 +32,7 @@ namespace Z0
 
             }
 
-            CheckAction(check, SFx.name(f));
+            CheckAction(check, SFxIdentity.name(f));
         }
     }
 }

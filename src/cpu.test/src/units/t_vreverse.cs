@@ -91,7 +91,7 @@ namespace Z0
             where F : IUnaryOp128<T>
         {
             var n = cpu.vcount(w,t);
-            var emitter = Sources.vemitter<T>(w,Random);
+            var emitter = PolyVector.vemitter<T>(w,Random);
 
             void check()
             {
@@ -112,7 +112,7 @@ namespace Z0
             where F : IUnaryOp256<T>
         {
             var n = cpu.vcount(w,t);
-            var emitter = Sources.vemitter<T>(w,Random);
+            var emitter = PolyVector.vemitter<T>(w,Random);
 
             void check()
             {

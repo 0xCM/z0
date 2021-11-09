@@ -318,6 +318,7 @@ namespace Z0
         {
             var formatter = Tables.formatter<R>(widths);
             var count = src.Length;
+            Write(formatter.FormatHeader());
             for(var i=0; i<count; i++)
                 Write(formatter.Format(skip(src,i)));
         }

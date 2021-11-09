@@ -32,6 +32,5 @@ namespace Z0
                 seek(target,i) = new FieldValue(f, f.GetValueDirect(tRef));
             }
         }
-
     }
 }

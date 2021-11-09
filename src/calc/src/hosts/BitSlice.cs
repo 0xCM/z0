@@ -24,7 +24,7 @@ namespace Z0
             public const string Name = "bitslice";
 
             public OpIdentity Id
-                => SFx.identity<T>(Name);
+                => SFxIdentity.identity<T>(Name);
 
             public T Invoke(T a, byte k1, byte k2)
                 => gbits.slice(a,k1,k2);

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public struct Seq16x2 : IDataTypeComparable<Seq16x2>
+    public struct Seq16x2 : IComparable<Seq16x2>, IEquatable<Seq16x2>
     {
         [MethodImpl(Inline), Op]
         public static Seq16x2 create(ushort lo, ushort hi)

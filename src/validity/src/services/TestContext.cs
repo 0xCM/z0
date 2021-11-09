@@ -189,7 +189,7 @@ namespace Z0
                 => Context.name<W,C>(label, generic);
 
         protected string CaseName(IFunc f)
-            => SFx.name(f);
+            => SFxIdentity.name(f);
 
         CasePaths GetCasePaths()
         {

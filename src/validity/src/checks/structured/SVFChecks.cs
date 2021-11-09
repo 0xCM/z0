@@ -71,7 +71,7 @@ namespace Z0
             var w = w128;
             var cells = vcount(w,t);
             var succeeded = bit.On;
-            var casename = SFx.name(f);
+            var casename = SFxIdentity.name(f);
             var clock = Time.counter(true);
             try
             {
@@ -140,7 +140,7 @@ namespace Z0
             var w = w128;
             var cells = vcount(w,t);
             var succeeded = bit.On;
-            var casename = SFx.name(f);
+            var casename = SFxIdentity.name(f);
             var clock = Time.counter(true);
             try
             {
@@ -171,7 +171,7 @@ namespace Z0
         public bit Run<W>(IFunc f, Func<bit> runner, W width, OperatorClass c)
             where W : unmanaged, ITypeWidth
         {
-            var casename = SFx.name<W,T>(typeof(T), f);
+            var casename = SFxIdentity.name<W,T>(typeof(T), f);
             var clock = Time.counter();
             var result = bit.Off;
             clock.Start();

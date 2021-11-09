@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XSource
+    public static class PolyStats
     {
         /// <summary>
         /// Counts the number of sample points that lie within a specified interval

@@ -21,7 +21,7 @@ namespace Z0.Asm
             using var writer = dst.Writer();
             for(var i=0u; i<count; i++)
             {
-                var content = AsmRender.thumbprint(SortedSpans.skip(src,i));
+                var content = AsmRender.thumbprint(src[i]);
                 writer.WriteLine(content);
                 seek(lines,i) = (i,content);
             }
@@ -37,6 +37,55 @@ namespace Z0.Asm
             var distinct = asm.thumbprints(src);
             asm.emit(distinct, dst);
             return distinct;
+        }
+
+        public ReadOnlySpan<AsmDataBlock> DistillBlocks(ReadOnlySpan<HostAsmRecord> records)
+        {
+            var count = records.Length;
+            var buffer = alloc<AsmDataBlock>(count);
+            ref var dst = ref first(buffer);
+            var block = MemoryAddress.Zero;
+            var skipping = false;
+            var key = 0u;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var record = ref skip(records,i);
+                ref readonly var BlockAddress = ref record.BlockAddress;
+                ref readonly var Expression = ref record.Expression;
+                var newblock = (block != BlockAddress);
+                if(!newblock && skipping)
+                    continue;
+
+                if(newblock)
+                {
+                    block = BlockAddress;
+                    skipping = false;
+                }
+
+                if(Expression.IsInvalid)
+                {
+                    skipping = true;
+                    continue;
+                }
+
+                ref var target = ref seek(dst, key++);
+                target.Key = key;
+                target.BlockAddress = BlockAddress;
+                target.IP = record.IP;
+                target.BlockOffset = record.BlockOffset;
+                target.Expression = Expression.Format();
+                target.Encoded = record.Encoded.Format();
+                target.Bitstring = record.Bitstring.Format();
+                target.Sig = record.Sig.Format();
+                target.OpCode = record.OpCode.Format();
+            }
+
+            return slice(@readonly(buffer), 0, key);
+        }
+
+        public void EmitBlocks(ReadOnlySpan<AsmDataBlock> src, FS.FilePath dst)
+        {
+            TableEmit(src, AsmDataBlock.RenderWidths, TextEncodingKind.Asci, dst);
         }
 
         public Index<HostAsmRecord> LoadHostAsmRows(FS.FolderPath src, bool pll = true, bool sort = true)

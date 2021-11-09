@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Root;
 
@@ -16,5 +15,11 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
                 => typeof(E).Fields().Select(f => ClrLiterals.value<T>(f));
+
+        [MethodImpl(Inline)]
+        public static unsafe V numeric<E,V>(E src)
+            where E : unmanaged, Enum
+            where V : unmanaged
+                => Unsafe.Read<V>((V*)(&src));
     }
 }

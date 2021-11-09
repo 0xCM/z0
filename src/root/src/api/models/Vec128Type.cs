@@ -27,13 +27,6 @@ namespace Z0
         public int BitWidth
             => W;
 
-        public Type TypeDefinition
-            => typeof(Vector128<>).GenericDefinition2();
-
-        [MethodImpl(Inline)]
-        public Type Close(Type cell)
-            => TypeDefinition.MakeGenericType(cell);
-
         [MethodImpl(Inline)]
         public static implicit operator NativeVectorWidth(Vec128Type src)
             => src.W;

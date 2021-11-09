@@ -38,7 +38,6 @@ namespace Z0.Asm
             return _AsmBlocks;
         }
 
-
         public ReadOnlySpan<HostAsmRecord> HostAsm(Func<Index<HostAsmRecord>> loader)
         {
             if(_HostAsm.IsEmpty)

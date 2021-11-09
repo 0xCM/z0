@@ -24,7 +24,7 @@ namespace Z0
             public const string Name = "popcount";
 
             public OpIdentity Id
-                => SFx.identity<T>(Name);
+                => SFxIdentity.identity<T>(Name);
 
             [MethodImpl(Inline)]
             public uint Invoke(T a)

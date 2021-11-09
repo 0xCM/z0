@@ -12,13 +12,4 @@ namespace Z0
 
         public T Result;
     }
-
-    public struct UnaryEval<K,T,R>
-    {
-        public K Kind;
-
-        public T A;
-
-        public R Result;
-    }
 }

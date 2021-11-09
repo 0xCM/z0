@@ -31,7 +31,7 @@ namespace Z0
             public Emitter(Z0.Emitter<T> f, string name)
             {
                 F = f;
-                Id = SFx.identity<T>(name);
+                Id = SFxIdentity.identity<T>(name);
             }
 
             [MethodImpl(Inline)]

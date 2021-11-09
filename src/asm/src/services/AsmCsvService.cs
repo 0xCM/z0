@@ -21,13 +21,13 @@ namespace Z0.Asm
             Decoder = Wf.AsmDecoder();
         }
 
-        public ReadOnlySpan<HostAsmRecord> EmitAsmCsv(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath root)
+        public ReadOnlySpan<HostAsmRecord> EmitStatements(ReadOnlySpan<ApiHostBlocks> src, FS.FolderPath root)
         {
             root.Delete();
 
             var count = src.Length;
             var flow = Wf.Running(string.Format("Emitting statements for {0} host block sets", count));
-            var dst = list<HostAsmRecord>();
+            var records = list<HostAsmRecord>();
             var buffer = list<HostAsmRecord>();
             var counter = 0u;
             for(var i=0; i<count; i++)
@@ -43,14 +43,14 @@ namespace Z0.Asm
                 var host = blocks.Host;
                 EmitHostAsmDoc(host, buffer.ViewDeposited());
                 EmitHostAsmRecords(host, buffer.ViewDeposited());
-                dst.AddRange(buffer);
+                records.AddRange(buffer);
             }
 
             Wf.Ran(flow, string.Format("Emitted {0} total statements", counter));
-            return dst.ViewDeposited();
+            return records.ViewDeposited();
         }
 
-        public ReadOnlySpan<HostAsmRecord> EmitAsmCsv(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
+        public ReadOnlySpan<HostAsmRecord> EmitStatements(ReadOnlySpan<ApiCodeBlock> src, FS.FolderPath dst)
         {
             var count = src.Length;
             var buffer = list<HostAsmRecord>();
@@ -59,11 +59,11 @@ namespace Z0.Asm
             buffer.Sort();
 
             var statements = buffer.ViewDeposited();
-            EmitAsmCsv(statements, dst);
+            EmitStatements(statements, dst);
             return statements;
         }
 
-        public void EmitAsmCsv(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
+        public void EmitStatements(ReadOnlySpan<AsmRoutine> src, ApiPackArchive dst)
         {
             var total = ApiInstructions.count(src);
             var running = Wf.Running(Msg.CreatingStatements.Format(total));
@@ -73,10 +73,10 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 offset += ApiInstructions.statements(skip(src,i), slice(buffer, offset));
             Wf.Ran(running, Msg.CreatedStatements.Format(total));
-            EmitAsmCsv(buffer, dst.RootDir());
+            EmitStatements(buffer, dst.RootDir());
         }
 
-        public void EmitAsmCsv(ReadOnlySpan<HostAsmRecord> src, FS.FolderPath root)
+        public void EmitStatements(ReadOnlySpan<HostAsmRecord> src, FS.FolderPath root)
         {
             ClearTarget();
 

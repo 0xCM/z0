@@ -71,7 +71,7 @@ namespace Z0
         {
             var count = cpu.vcount(w,t);
             var f = Calcs.vhi<T>(w);
-            var r = Sources.vemitter<T>(w,Random);
+            var r = PolyVector.vemitter<T>(w,Random);
             for(var rep=0; rep < RepCount; rep++)
             {
                 var x = r.Invoke();
@@ -86,7 +86,7 @@ namespace Z0
             where T : unmanaged
         {
             var f = Calcs.vhi<T>(w);
-            var r = Sources.vemitter<T>(w,Random);
+            var r = PolyVector.vemitter<T>(w,Random);
             for(var rep=0; rep <RepCount; rep++)
             {
                 var x = r.Invoke();

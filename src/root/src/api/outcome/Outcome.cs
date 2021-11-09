@@ -36,7 +36,7 @@ namespace Z0
         public Outcome(bool success)
         {
             Ok = success;
-            Message = success ? "Good" : "Bad";
+            Message = success ? EmptyString : "Bad";
             MessageCode = api.u8(Ok);
         }
 

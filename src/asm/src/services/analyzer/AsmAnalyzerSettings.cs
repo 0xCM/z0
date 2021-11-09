@@ -14,9 +14,7 @@ namespace Z0
 
         public bool EmitProcessAsm;
 
-        public bool EmitAsmCsv;
-
-        public bool EmitBitstringIndex;
+        public bool EmitStatements;
 
         public static ref AsmAnalyzerSettings @default(out AsmAnalyzerSettings dst)
         {
@@ -24,8 +22,7 @@ namespace Z0
             dst.EmitJumps = true;
             dst.EmitAsmDetails = true;
             dst.EmitProcessAsm = true;
-            dst.EmitAsmCsv = true;
-            dst.EmitBitstringIndex = true;
+            dst.EmitStatements = true;
             return ref dst;
         }
     }

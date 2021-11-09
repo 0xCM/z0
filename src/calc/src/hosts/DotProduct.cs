@@ -23,7 +23,7 @@ namespace Z0
             public const string Name = "dot";
 
             public OpIdentity Id
-                => SFx.identity<T>(Name);
+                => SFxIdentity.identity<T>(Name);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b)

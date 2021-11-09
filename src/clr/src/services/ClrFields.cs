@@ -105,14 +105,14 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ClrFieldAdapter> instance(Type src, bool declared = true)
-            => ClrModels.adapt(src.GetFields(declared ? BF_DeclaredInstance : BF_All));
+            => Clr.adapt(src.GetFields(declared ? BF_DeclaredInstance : BF_All));
 
         [Op]
         public unsafe static FieldRef primal(MemoryAddress @base, MemoryAddress offset, FieldInfo src)
         {
             var data = sys.constant(src);
             var type = src.FieldType;
-            var datatype = ClrPrimitives.kind(type);
+            var datatype = PrimalBits.kind(type);
             if(data is string s)
             {
                 var content = span(s);

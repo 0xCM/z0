@@ -7,10 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
     using static Root;
 
     partial struct core
     {
+        static uint _width<T>()
+            => (uint)SizeOf<T>()*8;
+
         /// <summary>
         /// Conforms a source value as needed to yield a value of bit-width 64
         /// </summary>
@@ -20,11 +24,11 @@ namespace Z0
         public static ulong bw64<T>(T src)
             where T : unmanaged
         {
-            if(width<T>() == 8)
+            if(_width<T>() == 8)
                 return uint8(src);
-            if(width<T>() == 16)
+            if(_width<T>() == 16)
                 return uint16(src);
-            else if(width<T>() == 32)
+            else if(_width<T>() == 32)
                 return uint32(src);
             else
                 return uint64(src);
@@ -34,11 +38,11 @@ namespace Z0
         public static long bw64i<T>(T src)
             where T : unmanaged
         {
-            if(width<T>() == 8)
+            if(_width<T>() == 8)
                 return int8(src);
-            if(width<T>() == 16)
+            if(_width<T>() == 16)
                 return int16(src);
-            else if(width<T>() == 32)
+            else if(_width<T>() == 32)
                 return int32(src);
             else
                 return int64(src);

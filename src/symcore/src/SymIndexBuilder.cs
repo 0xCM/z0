@@ -133,7 +133,7 @@ namespace Z0
             var fields = src.LiteralFields().ToReadOnlySpan();
             var count = fields.Length;
             var dst = span<SymLiteral<E>>(count);
-            var kind = ClrPrimitives.kind(src);
+            var kind = PrimalBits.kind(src);
             var klass = Symbols.@class(typeof(E));
             var counter = 0u;
             for(var i=z16; i<count; i++)
@@ -166,7 +166,7 @@ namespace Z0
             var fields = src.LiteralFields().ToReadOnlySpan();
             var count = fields.Length;
             var dst = span<SymLiteral>(count);
-            var kind = ClrPrimitives.kind(src);
+            var kind = PrimalBits.kind(src);
             var klass = Symbols.@class(src);
             var counter = 0u;
             for(var i=z16; i<count; i++)

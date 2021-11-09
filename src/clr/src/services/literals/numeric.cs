@@ -15,12 +15,6 @@ namespace Z0
 
     partial struct ClrLiterals
     {
-        [MethodImpl(Inline)]
-        public static unsafe V numeric<E,V>(E src)
-            where E : unmanaged, Enum
-            where V : unmanaged
-                => Unsafe.Read<V>((V*)(&src));
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static NumericLiteral<T> numeric<T>(string Name, T data, string Text, NBK @base)
             where T : unmanaged
@@ -35,6 +29,5 @@ namespace Z0
         public static T[] numeric<T>(Type src)
             where T : unmanaged
                 => map(search<T>(src),numeric<T>);
-
     }
 }

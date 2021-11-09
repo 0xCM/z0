@@ -17,7 +17,7 @@ namespace Z0
             where T : struct
         {
             var t = typeof(T);
-            var fields = ClrModels.fields(t);
+            var fields = Clr.fields(t);
             var count = fields.Length;
             var reflected = alloc<FieldValue>(count);
             ClrFields.values(spec, fields, reflected);

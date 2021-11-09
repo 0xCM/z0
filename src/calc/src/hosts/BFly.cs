@@ -20,7 +20,7 @@ namespace Z0
             public static Bfly<N,T> Op => default;
 
             public OpIdentity Id
-                => SFx.identity<N,T>(Name);
+                => SFxIdentity.identity<N,T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a)

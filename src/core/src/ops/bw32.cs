@@ -21,11 +21,11 @@ namespace Z0
         public static uint bw32<T>(T src)
             where T : unmanaged
         {
-            if(width<T>() == 8)
+            if(_width<T>() == 8)
                 return uint8(src);
-            if(width<T>() == 16)
+            if(_width<T>() == 16)
                 return uint16(src);
-            else if(width<T>() == 32)
+            else if(_width<T>() == 32)
                 return uint32(src);
             else
                 return (uint)uint64(src);

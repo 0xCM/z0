@@ -41,7 +41,7 @@ namespace Z0
             var w = w128;
             var cells = vcount(w,t);
             var succeeded = true;
-            var casename = SFx.name(f);
+            var casename = SFxIdentity.name(f);
             var clock = Time.counter(true);
 
             try
@@ -70,7 +70,7 @@ namespace Z0
             where W : unmanaged, ITypeWidth
         {
             var succeeded = true;
-            var casename = SFx.name<W,T>(Context.HostType, f);
+            var casename = SFxIdentity.name<W,T>(Context.HostType, f);
             var clock = Time.counter();
 
             clock.Start();

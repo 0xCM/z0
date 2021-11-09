@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="E">An enumeration type that refines the parametric numeric type</typeparam>
     /// <typeparam name="T">The numeric type refined by the enum</typeparam>
-    public struct RefinedLiteral<E,T> : IRefinement<RefinedLiteral<E,T>,E,T>
+    public struct RefinedLiteral<E,T>
         where E : unmanaged, Enum, IEquatable<E>
         where T : unmanaged, IEquatable<T>
     {
@@ -34,7 +34,7 @@ namespace Z0
         public ClrEnumKind ScalarKind
         {
             [MethodImpl(Inline)]
-            get => ClrPrimitives.ekind<E>();
+            get => Enums.kind<E>();
         }
 
 

@@ -28,7 +28,7 @@ namespace Z0
             internal UnaryOp(Z0.UnaryOp<T> f, string name)
             {
                 F = f;
-                Id = SFx.identity<T>(name);
+                Id = SFxIdentity.identity<T>(name);
             }
 
             [MethodImpl(Inline)]

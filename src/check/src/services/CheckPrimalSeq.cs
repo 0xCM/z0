@@ -89,7 +89,6 @@ namespace Z0
                     throw failed(ClaimKind.Eq, ItemsNotEqual(i, a[i], b[i], caller, file, line));
         }
 
-
         /// <summary>
         /// Asserts content equality for two character spans
         /// </summary>

@@ -36,15 +36,6 @@ namespace Z0
             => pcg64(seed);
 
         /// <summary>
-        /// Defines a non-valued option
-        /// </summary>
-        /// <typeparam name="T">The value type, if the value existed</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        internal static bool nonz<T>(T src)
-            where T : unmanaged
-                => !src.Equals(default(T));
-
-        /// <summary>
         /// Creates a 32-bit Pcg RNG
         /// </summary>
         /// <param name="seed">The initial rng state</param>

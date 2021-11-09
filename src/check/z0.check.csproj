@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(Term)" />
     <ProjectReference Include="$(ApiCore)" />
+    <ProjectReference Include="$(SpanBlocks)" />
   </ItemGroup>
 
 </Project>

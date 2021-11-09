@@ -48,7 +48,7 @@ namespace Z0
         {
             const int count = 16;
             var service = Calcs.vmovemask(w,t);
-            var emitter = Sources.vemitter<T>(w,Random);
+            var emitter = PolyVector.vemitter<T>(w,Random);
 
             void check()
             {
@@ -70,7 +70,7 @@ namespace Z0
         {
             const int count = 32;
             var service = Calcs.vmovemask(w,t);
-            var emitter = Sources.vemitter<T>(w,Random);
+            var emitter = PolyVector.vemitter<T>(w,Random);
 
             void check()
             {

@@ -21,7 +21,7 @@ namespace Z0
             public const string Name = "byteswap";
 
             public OpIdentity Id
-                => SFx.identity<T>(Name);
+                => SFxIdentity.identity<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a)

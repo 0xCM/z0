@@ -36,7 +36,7 @@ namespace Z0
         public Vec128Kind<T> VKind => default;
 
         public OpIdentity Id
-            => SFx.identity(Name,VKind);
+            => SFxIdentity.identity(Name,VKind);
 
         public bit Invoke(S a, Vector128<T> x)
         {
@@ -60,7 +60,7 @@ namespace Z0
         public const string Name = "vbroadcast_check";
 
         public OpIdentity Id
-            => SFx.identity(Name,VKind);
+            => SFxIdentity.identity(Name,VKind);
 
         public bit Invoke(S a, Vector256<T> x)
         {

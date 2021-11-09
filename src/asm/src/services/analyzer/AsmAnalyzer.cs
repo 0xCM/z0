@@ -41,8 +41,8 @@ namespace Z0
             if(Settings.EmitJumps)
                 EmitJumps(src, dst);
 
-            if(Settings.EmitAsmCsv)
-                asmcsv.EmitAsmCsv(src, dst);
+            if(Settings.EmitStatements)
+                asmcsv.EmitStatements(src, dst);
 
             if(Settings.EmitProcessAsm)
                 statements.EmitProcessAsm(src, dst.ProcessAsmPath());

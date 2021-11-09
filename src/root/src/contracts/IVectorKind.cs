@@ -12,20 +12,9 @@ namespace Z0
     public interface IVectorKind : IVectorWidth
     {
         /// <summary>
-        /// The vector's generic type definition
-        /// </summary>
-        Type TypeDefinition {get;}
-
-        /// <summary>
         /// The vector numeric cell kind
         /// </summary>
         NumericKind CellKind {get;}
-
-        /// <summary>
-        /// The reified vector type as determined by kind facets
-        /// </summary>
-        Type Close(Type cell)
-            => TypeDefinition.MakeGenericType(cell);
     }
 
     /// <summary>
@@ -52,11 +41,5 @@ namespace Z0
     {
         NumericKind IVectorKind.CellKind
             => NumericKinds.kind<T>();
-
-        /// <summary>
-        /// The reified vector type as determined by kind facets
-        /// </summary>
-        Type Close()
-            => TypeDefinition.MakeGenericType(CellKind.ToSystemType());
     }
 }

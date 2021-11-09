@@ -22,7 +22,7 @@ namespace Z0
         public static RefinedLiteral<E,T> refined<E,T>(T value)
             where E : unmanaged, Enum, IEquatable<E>
             where T : unmanaged, IEquatable<T>
-                => new RefinedLiteral<E,T>(ClrPrimitives.ekind<E,T>(value), value);
+                => new RefinedLiteral<E,T>(Enums.kind<E,T>(value), value);
 
         /// <summary>
         /// Creates a <see cref='RefinedLiteral{E}'/>
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RefinedLiteral<E> refined<E>(E e)
             where E : unmanaged, Enum, IEquatable<E>
-                => new RefinedLiteral<E>(e, ClrPrimitives.ebase<E>());
+                => new RefinedLiteral<E>(e, Enums.@base<E>());
 
         /// <summary>
         /// Creates a <see cref='RefinedLiteral{E,T}'/>
@@ -44,7 +44,7 @@ namespace Z0
         public static RefinedLiteral<E,T> define<E,T>(E e)
             where E : unmanaged, Enum, IEquatable<E>
             where T : unmanaged, IEquatable<T>
-                => new RefinedLiteral<E,T>(e, ClrPrimitives.escalar<E,T>(e));
+                => new RefinedLiteral<E,T>(e, Enums.scalar<E,T>(e));
 
         /// <summary>
         /// Creates a <see cref='RefinedLiteral{E,T}'/>
@@ -70,6 +70,6 @@ namespace Z0
         public static RefinedLiteral<E,T> define<E,T>(T value)
             where E : unmanaged, Enum, IEquatable<E>
             where T : unmanaged, IEquatable<T>
-                => new RefinedLiteral<E,T>(ClrPrimitives.ekind<E,T>(value), value);
+                => new RefinedLiteral<E,T>(Enums.kind<E,T>(value), value);
     }
 }

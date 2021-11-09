@@ -16,8 +16,8 @@ namespace Z0
             where E : unmanaged
                 => recover<E,char>(src);
 
-        // [MethodImpl(Inline), Op]
-        // public static unsafe ReadOnlySpan<char> chars(string src)
-        //     => cover(pchar(src), (uint)src.Length);
+        [MethodImpl(Inline), Op]
+        public static unsafe ReadOnlySpan<char> chars(string src)
+            => cover(pchar(src), (uint)src.Length);
     }
 }

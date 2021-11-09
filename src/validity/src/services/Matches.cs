@@ -62,7 +62,7 @@ namespace Z0
             where F : IFunc<T,R>
             where G : IFunc<T,R>
         {
-            var casename = SFx.name(context.HostType, g);
+            var casename = SFxIdentity.name(context.HostType, g);
             var succeeded = true;
             var count = context.RepCount;
             var clock = Time.counter(false);

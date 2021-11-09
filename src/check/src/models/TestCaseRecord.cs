@@ -11,21 +11,6 @@ namespace Z0
 
     using static FormatFunctions;
 
-    public enum TestCaseField : uint
-    {
-        CaseName = 0 | (60 << 16),
-
-        Passed =  1 | (14 << 16),
-
-        Duration = 2  | (14 << 16),
-
-        Started =  3 | (26 << 16),
-
-        Finished =  4 | (26 << 16),
-
-        Message = 5 | (32 << 16)
-    }
-
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>

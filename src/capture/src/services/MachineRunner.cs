@@ -24,7 +24,7 @@ namespace Z0
                 var sorted = blocks.ToSortedIndex();
 
                 if(options.EmitAsmStatements)
-                    Wf.AsmCsv().EmitAsmCsv(partitioned, Db.AsmStatementRoot());
+                    Wf.AsmCsv().EmitStatements(partitioned, Db.AsmStatementRoot());
 
                 if(options.EmitAsmRows)
                     Wf.AsmRowBuilder().Emit(blocks);

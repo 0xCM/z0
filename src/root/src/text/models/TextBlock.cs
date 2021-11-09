@@ -32,7 +32,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data?.Length ?? 0;
+            get => Text.Length;
         }
 
         public bool IsEmpty
@@ -62,7 +62,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)(Data?.GetHashCode() ?? 0);
+            get => (uint)Text.GetHashCode();
         }
 
         [MethodImpl(Inline)]
@@ -77,16 +77,24 @@ namespace Z0
             => Data?.ToLowerInvariant() ?? EmptyString;
 
         [MethodImpl(Inline)]
+        public bool Contains(string substring)
+            => Text.Contains(substring);
+
+        [MethodImpl(Inline)]
         public TextBlock Trim()
             => Data?.Trim() ?? EmptyString;
 
         [MethodImpl(Inline)]
         public TextBlock Replace(TextBlock match, TextBlock value)
-            => Data?.Replace(match,value) ?? EmptyString;
+            => Text.Replace(match,value);
 
         [MethodImpl(Inline)]
         public bool StartsWith(TextBlock match)
-            => Text.StartsWith(match);
+            => Text.StartsWith(match.Text);
+
+        [MethodImpl(Inline)]
+        public bool EndsWith(TextBlock match)
+            => Text.EndsWith(match.Text);
 
         public bool Equals(TextBlock src)
             => string.Equals(Data, src.Data);

@@ -14,11 +14,11 @@ namespace Z0.Asm
 
     partial struct AsmParser
     {
-        public static Outcome<uint> row(in TextGrid doc, Span<HostAsmRecord> dst)
+        public static Outcome<uint> row(in TextGrid doc, Span<R> dst)
         {
             var counter = 0u;
             if(doc.Header.Labels.Length != R.FieldCount)
-                return (false, AppMsg.FieldCountMismatch.Format(HostAsmRecord.FieldCount, doc.Header.Labels.Length));
+                return (false, AppMsg.FieldCountMismatch.Format(R.FieldCount, doc.Header.Labels.Length));
 
             var count = (uint)min(doc.RowCount, dst.Length);
             var rows = doc.RowData.View;
@@ -54,8 +54,7 @@ namespace Z0.Asm
             return (true,counter);
         }
 
-
-        public static Index<Outcome<uint>> rows(ReadOnlySpan<TextGrid> src, ConcurrentBag<HostAsmRecord> dst)
+        public static Index<Outcome<uint>> rows(ReadOnlySpan<TextGrid> src, ConcurrentBag<R> dst)
         {
             var results = bag<Outcome<uint>>();
             iter(src, doc => {

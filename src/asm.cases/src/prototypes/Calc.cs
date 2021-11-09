@@ -56,7 +56,6 @@ namespace Z0.Asm
             ulong Mul(ulong a, ulong b);
 
             ulong Mod(ulong a, ulong b);
-
         }
 
         [ApiHost(prototypes + calc8)]
