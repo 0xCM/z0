@@ -23,7 +23,6 @@ namespace Z0
         public Outcome RunScript(IProjectWs project, string srcid, ScriptId script, Subject? scope = null)
             => RunScript(project.Project, srcid, script, scope);
 
-
         public Outcome RunScript(ProjectId project, string srcid, ScriptId script, Subject? scope = null)
         {
             var result = Outcome.Success;

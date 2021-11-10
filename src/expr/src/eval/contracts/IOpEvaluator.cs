@@ -6,12 +6,10 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using Z0.Eval;
-
     [Free]
     public interface IOpEvaluator
-    {        
-        Outcome<OpEvaluation> Evaluate(IOperation op);        
+    {
+        Outcome<OpEvaluation> Evaluate(IOperation op);
     }
 
     [Free]
@@ -28,7 +26,7 @@ namespace Z0
                 return new OpEvaluation<S>(op, Body, output);
             else
                 return false;
-        }        
+        }
 
         Outcome<OpEvaluation> IOpEvaluator.Evaluate(IOperation op)
         {
@@ -50,14 +48,14 @@ namespace Z0
             else
                 return false;
         }
-    
+
         Outcome<OpEvaluation<S>> IOpEvaluator<S>.Evaluate(IOperation<S> op)
         {
             var outcome = Evaluate((IOperation<S,T>)op);
             if(outcome)
             {
                 var data = outcome.Data;
-                return new Outcome<OpEvaluation<S>>(true, 
+                return new Outcome<OpEvaluation<S>>(true,
                     new OpEvaluation<S>(data.Actor, data.Input, data.Output)
                     );
             }
@@ -68,7 +66,7 @@ namespace Z0
 
     public interface IOpEvaluator<O,S,T> : IOpEvaluator<S,T>
         where O : IOperation<S,T>
-    {        
+    {
         Outcome<OpEvaluation<O,S,T>> Evaluate(O op)
         {
             var success = OpSvc.Eval(Body, out var output);
@@ -84,7 +82,7 @@ namespace Z0
             if(outcome)
             {
                 var data = outcome.Data;
-                return new Outcome<OpEvaluation<S,T>>(true, 
+                return new Outcome<OpEvaluation<S,T>>(true,
                     new OpEvaluation<S,T>(data.Actor, data.Input, data.Output)
                     );
             }

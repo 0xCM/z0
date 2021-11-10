@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Eval
+namespace Z0
 {
     using System.Runtime.CompilerServices;
 
@@ -10,12 +10,12 @@ namespace Z0.Eval
 
     public struct Evaluation : IEvaluation
     {
-        public IExpr Input {get;}
+        public dynamic Input {get;}
 
-        public IExpr Output {get;}
+        public dynamic Output {get;}
 
         [MethodImpl(Inline)]
-        public Evaluation(IExpr input, IExpr output)
+        public Evaluation(dynamic input, dynamic output)
         {
             Input = input;
             Output = output;

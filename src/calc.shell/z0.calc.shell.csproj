@@ -18,6 +18,7 @@
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Check)" />
+    <ProjectReference Include="$(Expr)" />
 
   </ItemGroup>
 

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Eval
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,9 +10,8 @@ namespace Z0.Eval
 
     using static Root;
 
+    [StructLayout(LayoutKind.Sequential, Pack =1)]
     public struct Evaluation<S,T> : IEvaluation<S,T>
-        where S : IExpr
-        where T : IExpr
     {
         public S Input {get;}
 

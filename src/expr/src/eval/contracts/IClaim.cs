@@ -2,15 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Eval
+namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Root;
-    using static core;
-
-    using Z0.Rules;
-
-
+    [Free]
+    public interface IClaim : IExpr
+    {
+    }
 }

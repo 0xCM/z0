@@ -4,27 +4,28 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IEvaluation
+    public interface IClaimEvaluator : IEvaluator<IClaim,IClaim>
     {
-        dynamic Input {get;}
 
-        dynamic Output {get;}
     }
 
     [Free]
-    public interface IEvaluation<S,T> : IEvaluation
+    public interface IClaimEvaluator<C> : IEvaluator<C,bool>
+        where C : IClaim
     {
-        new S Input {get;}
 
-        new T Output {get;}
+    }
 
-        dynamic IEvaluation.Input
-            => Input;
+    [Free]
+    public interface IClaimEvaluator<S,T> : IEvaluator<S,T>
+        where S : IClaim
+        where T : IClaim
+    {
 
-        dynamic IEvaluation.Output
-            => Output;
     }
 }

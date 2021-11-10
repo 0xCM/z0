@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Eval
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -14,7 +14,7 @@ namespace Z0.Eval
     public readonly struct OpEvaluation<S,T> : IOpEvaluation<S,T>
     {
         public IOperation Actor {get;}
-        
+
         public S Input {get;}
 
         public T Output {get;}

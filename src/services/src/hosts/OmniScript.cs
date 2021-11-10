@@ -211,7 +211,7 @@ namespace Z0
 
         void ReceiveCmdError(in string src)
         {
-            Error(src);
+            Write(src, FlairKind.Error);
         }
     }
 }

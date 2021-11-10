@@ -131,6 +131,11 @@ namespace Z0
             Log.WriteLine(bitstring);
         }
 
+        void Run(N5 n)
+        {
+            LineageChecks.create(Wf).Run();
+        }
+
         void Run(N8 n)
         {
             LogHeader(MethodInfo.GetCurrentMethod(), n);
@@ -272,6 +277,7 @@ namespace Z0
             }
         }
 
+
         void Run(N30 n)
         {
             var x0 = "0x3412a";
@@ -287,6 +293,7 @@ namespace Z0
                 Error(result.Message);
         }
 
+
         void RunValidators()
         {
             Md5Validator.create(Wf).Run();
@@ -294,6 +301,7 @@ namespace Z0
             Run("2");
             Run("3");
             Run("4");
+            Run("5");
             Run("8");
             Run("9");
             Run("13");
@@ -327,6 +335,9 @@ namespace Z0
                     break;
                     case 4:
                         Run(n4);
+                    break;
+                    case 5:
+                        Run(n5);
                     break;
                     case 8:
                         Run(n8);

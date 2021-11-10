@@ -29,7 +29,6 @@ namespace Z0
 
         protected TableEmitters TableEmitters;
 
-
         protected AppCmdService()
         {
             PromptTitle = "cmd";
