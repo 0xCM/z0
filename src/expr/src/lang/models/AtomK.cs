@@ -60,5 +60,9 @@ namespace Z0.Lang
         [MethodImpl(Inline)]
         public static implicit operator K(Atom<K> src)
             => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Atom<K>((uint key, K value) src)
+            => new Atom<K>(src.key, src.value);
     }
 }

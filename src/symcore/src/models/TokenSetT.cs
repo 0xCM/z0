@@ -34,8 +34,9 @@ namespace Z0
             _Tokens = new();
         }
 
-        void Load()
+        protected void Load()
         {
+            _Tokens.Clear();
             var types = Types().ToReadOnlySpan();
             var count = types.Length;
             for(var i=0; i<count; i++)

@@ -9,15 +9,11 @@ namespace Z0.Lang
 
     using static Root;
 
-    [ApiHost]
-    public readonly partial struct lang
+    partial struct lang
     {
-        const NumericKind Closure = UnsignedInts;
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Atom<K> atom<K>(uint key, K value)
-            where K : unmanaged
-                => new Atom<K>(key, value);
-
+        [MethodImpl(Inline), Op]
+        public static Production<T> production<T>(Label name, T term)
+            where T : IExpr
+                => new Production<T>(name, term);
     }
 }

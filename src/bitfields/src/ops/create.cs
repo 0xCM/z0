@@ -11,8 +11,6 @@ namespace Z0
 
     partial struct Bitfields
     {
-
-
         [MethodImpl(Inline), Op]
         public static Bitfield8 create(byte state)
             => new Bitfield8(state);

@@ -10,7 +10,7 @@ namespace Z0.Lang
     using static Root;
 
     /// <summary>
-    /// The textbook definition of a string - a finite sequence of letters from som alphabet
+    /// The textbook definition of a string - a finite sequence of letters from some alphabet
     /// </summary>
     public readonly struct Token<K> : IExpr
         where K : unmanaged
@@ -67,6 +67,5 @@ namespace Z0.Lang
 
         public override string ToString()
             => Format();
-
     }
 }

@@ -74,6 +74,7 @@ namespace Z0
             where T : struct
                 => Tables() + FS.file(string.Format("{0}.{1}", subject, Z0.TableId.identify<T>().Format()), FS.Csv);
 
+
         FS.Files OutFiles(FS.FileExt ext)
             => Out().Files(ext, true);
 

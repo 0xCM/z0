@@ -22,6 +22,13 @@ namespace Z0.Lang
             Data = src;
         }
 
+
+        public Index<Atom> Value
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
         public int Length
         {
             [MethodImpl(Inline)]

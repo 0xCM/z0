@@ -27,6 +27,6 @@ namespace Z0
         public TextBlock Description;
 
         public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{24,8,16,18,18,64};
+            => new byte[FieldCount]{24,8,16,64,64,64};
     }
 }

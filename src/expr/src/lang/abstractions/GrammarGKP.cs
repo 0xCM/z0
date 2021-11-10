@@ -45,7 +45,7 @@ namespace Z0.Lang
         }
 
         [MethodImpl(Inline)]
-        public Atom<K> Symbol(uint index)
-            => Alphabet[index];
+        public ref readonly K Symbol(uint index)
+            => ref Alphabet[index];
     }
 }

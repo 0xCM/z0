@@ -40,7 +40,7 @@ namespace Z0.Lang
             var count = src.MemberCount;
             dst.AppendFormat("{0}:{{", src.Name);
             for(var i=0; i<count; i++)
-                dst.Append(src[i].Format());
+                dst.Append(src[i].ToString());
             dst.Append("}");
             return dst.Emit();
         }

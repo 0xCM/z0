@@ -9,15 +9,15 @@ namespace Z0.Lang
 
     using static Root;
 
-    [ApiHost]
-    public readonly partial struct lang
+    partial struct lang
     {
-        const NumericKind Closure = UnsignedInts;
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Token<S> token<S>(uint key, params Atom<S>[] src)
+            where S : unmanaged
+                => new Token<S>(key, src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Atom<K> atom<K>(uint key, K value)
-            where K : unmanaged
-                => new Atom<K>(key, value);
-
+        public static Token token(uint key, params Atom[] src)
+            => new Token(key, src);
     }
 }

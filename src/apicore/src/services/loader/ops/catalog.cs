@@ -13,6 +13,9 @@ namespace Z0
 
     partial struct ApiRuntimeLoader
     {
+        public static IApiCatalog catalog()
+            => catalog(location());
+
         public static IApiCatalog catalog(FS.FolderPath location, PartId[] parts)
             => catalog(LoadParts(location, parts));
 
@@ -40,9 +43,6 @@ namespace Z0
         [Op]
         public static ApiPartCatalog catalog(Assembly src)
             => new ApiPartCatalog(src.Id(), src, complete(src), apihosts(src), SvcHostTypes(src));
-
-        public static IApiCatalog catalog()
-            => catalog(location());
 
         public static IApiCatalog catalog(FS.FolderPath dir)
         {

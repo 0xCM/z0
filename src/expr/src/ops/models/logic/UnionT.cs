@@ -9,9 +9,6 @@ namespace Z0.Ops.Logic
 
     using static Root;
 
-    /// <summary>
-    /// Represents a sequence of parametrically-typed terms c0 | c1 | .. | cN-1
-    /// </summary>
     public readonly struct Union<T> : ISeqExpr<T>
         where T : IExpr
     {

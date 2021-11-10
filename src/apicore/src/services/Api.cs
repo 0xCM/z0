@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    [ApiHost]
-    public readonly partial struct SymbolicRender
+    using static Root;
+    using static core;
+
+    public readonly struct Api
     {
-        const NumericKind Closure = UnsignedInts;
+
     }
 }

@@ -11,49 +11,6 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
-        [CmdOp(".emit-tokens")]
-        Outcome EmitTokenSpecs(CmdArgs args)
-        {
-            var result = Outcome.Success;
-
-            var svc = Wf.Symbolism();
-            var output = svc.EmitTokenSpecs(typeof(AsmOpCodeTokens.VexToken));
-            var input = svc.LoadTokenSpecs(nameof(AsmOpCodeTokens.VexToken));
-            var formatter = Tables.formatter<SymInfo>(SymInfo.RenderWidths);
-            var count = input.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(input,i);
-                Write(formatter.Format(row));
-            }
-
-            return result;
-        }
-
-        void EmitTokenSpecs()
-        {
-            var tokens = Wf.AsmTokens();
-            EmitTokenSet(tokens.RegTokens());
-            EmitTokenSet(tokens.OpCodeTokens());
-            EmitTokenSet(tokens.SigTokens());
-            EmitTokenSet(tokens.ConditonTokens());
-            EmitTokenSet(tokens.PrefixTokens());
-        }
-
-        void EmitTokenSpecs(Type src)
-        {
-            var dst = Ws.Tables().TablePath<SymInfo>("tokens", src.Name);
-            var tokens = Symbols.syminfo(src);
-            TableEmit(tokens, SymInfo.RenderWidths, dst);
-        }
-
-        void EmitTokenSet(ITokenSet src)
-        {
-            var dst = Ws.Tables().TablePath<SymInfo>("tokens", src.Name);
-            var tokens = Symbols.syminfo(src.Types());
-            TableEmit(tokens, SymInfo.RenderWidths, dst);
-        }
-
 
         // [CmdOp(".machine")]
         // Outcome EmitMachineTables(CmdArgs args)

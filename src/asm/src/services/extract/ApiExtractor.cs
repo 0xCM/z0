@@ -39,6 +39,8 @@ namespace Z0
 
         AsmFormatConfig FormatConfig;
 
+        ApiCatalogs ApiCatalogs;
+
         public ApiExtractor()
         {
             Buffer = ApiExtracts.buffer();
@@ -55,6 +57,7 @@ namespace Z0
             HexPacks = Wf.ApiHexPacks();
             Channel = new ApiExtractChannel();
             DatasetReceiver = new();
+            ApiCatalogs = Wf.ApiCatalogs();
         }
 
         void ClearTargets(IApiPack pack)
@@ -101,7 +104,6 @@ namespace Z0
             var procparts = pipe.EmitPartitions(process, ts, dir);
             var regions = pipe.EmitRegions(process, ts, dir);
             pipe.EmitDump(process, pack.ProcDumpPath(process, ts));
-            EmitApiCatalog(ts);
             Wf.Ran(flow);
         }
 
@@ -124,6 +126,9 @@ namespace Z0
             SortedRoutines.Sort();
         }
 
+        ReadOnlySpan<ApiCatalogEntry> EmitApiCatalog(Timestamp ts)
+            => ApiCatalogs.EmitApiCatalog(ApiMembers.create(CollectedDatasets.SelectMany(x => x.Members)), PackArchive.ApiCatalogPath());
+
         internal ApiCollection Run(ApiExtractChannel receivers, IApiPack pack)
         {
             Channel = receivers;
@@ -133,12 +138,12 @@ namespace Z0
             ResolveParts(pack);
             ExtractParts(pack);
             CollectRoutines(pack);
+            EmitApiCatalog(pack.Timestamp);
             EmitContext(pack);
             EmitAnalyses(pack);
             var collection = new ApiCollection();
             collection._ResolvedParts = ResolvedParts;
             return collection;
-
         }
 
         FS.FolderPath SegDir

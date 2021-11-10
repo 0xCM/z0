@@ -143,7 +143,7 @@ namespace Z0
         public FS.FilePath ApiCatalogPath()
             => TableDir() + FS.file(TableId.identify<ApiCatalogEntry>().Format(), FS.Csv);
 
-        public FS.FilePath ApiCatalogPath(Timestamp ts)
-            => ContextRoot() + FS.file(string.Format("{0}.{1}", TableId.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);
+        // public FS.FilePath ApiCatalogPath(Timestamp ts)
+        //     => ContextRoot() + FS.file(string.Format("{0}.{1}", TableId.identify<ApiCatalogEntry>(), ts.Format()), FS.Csv);
     }
 }

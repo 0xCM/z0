@@ -13,18 +13,15 @@ namespace Z0.Lang
     /// </summary>
     public readonly struct Atom : ISymbol<Atom,char>, ITerminalExpr<char>
     {
+        public uint Key {get;}
+
         public char Value {get;}
 
         [MethodImpl(Inline)]
-        public Atom(char value)
+        public Atom(uint key, char value)
         {
+            Key = key;
             Value = value;
-        }
-
-        public uint Key
-        {
-            [MethodImpl(Inline)]
-            get => (uint)Value;
         }
 
         [MethodImpl(Inline)]
@@ -61,5 +58,13 @@ namespace Z0.Lang
         [MethodImpl(Inline)]
         public static implicit operator char(Atom src)
             => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Atom((uint key, char value) src)
+            => new Atom(src.key, src.value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Atom(Atom<char> src)
+            => new Atom(src.Key, src.Value);
     }
 }

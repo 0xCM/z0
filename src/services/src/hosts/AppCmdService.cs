@@ -5,6 +5,8 @@
 namespace Z0
 {
     using System;
+    using Windows;
+
 
     using static core;
 
@@ -87,6 +89,19 @@ namespace Z0
             return true;
         }
 
+        [CmdOp(".tool-settings")]
+        protected Outcome ToolSettings(CmdArgs args)
+        {
+            ToolId tool = arg(args,0).Value;
+            var src = Ws.Tools().Logs(tool) + FS.file("config", FS.Log);
+            if(!src.Exists)
+                return (false,FS.missing(src));
+
+            var settings = OptionReader.settings(src);
+            iter(settings, setting => Write(setting));
+            return true;
+        }
+
         [CmdOp(".commands")]
         protected Outcome Commands(CmdArgs args)
         {
@@ -121,6 +136,23 @@ namespace Z0
             var result = Outcome.Success;
             var files = CommonState.Files();
             iter(files, file => Write(file.ToUri()));
+            return result;
+        }
+
+        [CmdOp(".cd")]
+        protected Outcome ChangeDir(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            if(args.Count == 0)
+            {
+                Write(CommonState.CurrentDir());
+                return result;
+            }
+
+            var dst = FS.dir(arg(args,0).Value);
+            if(!dst.Exists)
+                return (false, FS.missing(dst));
+            Write(CommonState.CurrentDir(dst));
             return result;
         }
 
@@ -174,6 +206,13 @@ namespace Z0
             return result;
         }
 
+        [CmdOp(".cpucore")]
+        protected Outcome ShowCurrentCore(CmdArgs args)
+        {
+            Wf.Row(string.Format("Cpu:{0}", Kernel32.GetCurrentProcessorNumber()));
+            return true;
+        }
+
         Index<CompilationLiteral> ApiLiterals()
         {
             var result = Outcome.Success;
@@ -190,6 +229,68 @@ namespace Z0
             }
 
             return buffer.ToArray();
+        }
+
+        [CmdOp(".tools")]
+        protected Outcome CatalogTools(CmdArgs args)
+        {
+            var ws = Ws.Tools();
+            var subdirs = ws.Root.SubDirs();
+            var counter = 0u;
+            var formatter = Tables.formatter<ToolConfig>();
+            var dst = ws.Inventory();
+            using var writer = dst.AsciWriter();
+            foreach(var dir in subdirs)
+            {
+                var configCmd = dir + FS.file(WsAtoms.config, FS.Cmd);
+                if(configCmd.Exists)
+                {
+                    var config =  dir + FS.folder(WsAtoms.logs) + FS.file(WsAtoms.config, FS.Log);
+                    if(config.Exists)
+                    {
+                        var result = Tooling.parse(config.ReadText(), out var c);
+                        if(result.Fail)
+                        {
+                            Error(string.Format("{0}:{1}", config.ToUri(), result.Message));
+                            continue;
+                        }
+
+                        var settings = formatter.Format(c,RecordFormatKind.KeyValuePairs);
+                        var title = string.Format("# {0}", c.ToolId);
+                        var sep = string.Format("# {0}", RP.PageBreak80);
+
+                        Write(title, FlairKind.Status);
+                        Write(sep);
+                        Write(settings);
+                        writer.WriteLine(title);
+                        writer.WriteLine(sep);
+                        writer.WriteLine(settings);
+                        counter++;
+                    }
+                }
+            }
+
+            Write(string.Format("{0} tools cataloged: {1}", counter, dst.ToUri()));
+            return true;
+        }
+
+        [CmdOp(".tool-docs")]
+        protected Outcome ToolDocs(CmdArgs args)
+        {
+            var tool = (ToolId)arg(args,0).Value;
+            var path = FS.FilePath.Empty;
+            if(args.Length > 1)
+                path = Ws.Tools().ToolDocs(tool) + FS.file(arg(args,1));
+            else
+                path = Ws.Tools().ToolDocs(tool) + FS.file(tool.Format(), FS.Help);
+
+            if(path.Exists)
+            {
+                Write(path.ReadText());
+                return true;
+            }
+            else
+                return (false, FS.missing(path));
         }
 
         protected ReadOnlySpan<SymLiteralRow> EmitSymLiterals<E>(FS.FilePath dst)

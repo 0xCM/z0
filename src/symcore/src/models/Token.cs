@@ -10,22 +10,28 @@ namespace Z0
 
     public readonly struct Token
     {
-        public uint Key {get;}
+        public readonly SymKey Key;
 
-        public Sym Symbol {get;}
+        public readonly string Type;
 
-        public string Expr {get;}
+        public readonly string Name;
+
+        public readonly string Expr;
+
+        public readonly SymVal Value;
 
         [MethodImpl(Inline)]
-        public Token(uint key, Sym symbol, string expr)
+        public Token(uint key, string @class, string name, string expr, SymVal value)
         {
             Key = key;
-            Symbol = symbol;
+            Type = @class;
+            Name = name;
             Expr = expr;
+            Value = value;
         }
 
         public string Format()
-            => string.Format("{0,-24} | {1,-5} | {2,-16} | '{3}'", Symbol.Type, Key, Symbol.Name, Expr);
+            => string.Format("{0,-5} | {1,-36} | {2,-64} | {3,-64} | {4}", Key, Type, Name, RP.squote(Expr), Value);
 
         public override string ToString()
             => Format();
