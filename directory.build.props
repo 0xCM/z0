@@ -39,6 +39,4 @@
   <Import Project="$(Src)symbols.props"/>
   <Import Project="$(Native)symbols.props"/>
   <Import Project="$(TestDir)symbols.props"/>
-  <Import Project="$(Share)"/>
-
 </Project>
