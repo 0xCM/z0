@@ -8,6 +8,6 @@ namespace Z0.Asm
     {
         [Op]
         public static AsmBitstring bitstring(AsmHexCode src)
-            => AsmBits.bitstring(src);
+            => src;
     }
 }

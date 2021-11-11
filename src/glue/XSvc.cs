@@ -46,9 +46,6 @@ namespace Z0
         public static NDisasm NDisasm(this IWfRuntime wf)
             => Tools.NDisasm.create(wf);
 
-        public static DumpParser DumpParser(this IWfRuntime wf)
-            => Z0.DumpParser.create(wf);
-
         [Op]
         public static Robocopy Robocopy(this IWfRuntime wf)
             => Tools.Robocopy.create(wf);

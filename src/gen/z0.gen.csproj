@@ -6,11 +6,11 @@
 
   <ItemGroup>
     <ProjectReference Include="$(AsmCore)" />
-    <ProjectReference Include="$(Tooling)" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
+    <PackageReference Include="z0.tools" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

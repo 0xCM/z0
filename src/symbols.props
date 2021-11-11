@@ -11,7 +11,6 @@
 
     <Capture>$(Src)capture/z0.capture.csproj</Capture>
     <CaptureChecks>$(Src)capture.checks/z0.capture.checks.csproj</CaptureChecks>
-    <Cli>$(Src)cli/z0.cli.csproj</Cli>
     <CpuDsl>$(Src)cpu.dsl/z0.cpu.dsl.csproj</CpuDsl>
     <Checks>$(Src)checks/z0.checks.csproj</Checks>
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
@@ -36,10 +35,6 @@
     <ResPack>$(Src)respack/z0.respack.csproj</ResPack>
     <Res>$(Src)res/z0.res.csproj</Res>
 
-    <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
-
-    <Tools>$(Src)tools/z0.tools.csproj</Tools>
-    <Tooling>$(Src)tooling/z0.tooling.csproj</Tooling>
 
     <Validity>$(Src)validity/z0.validity.csproj</Validity>
 

@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static AsmOpCodeBits bits()
-            => new AsmOpCodeBits(0);
+            => default;
 
          [MethodImpl(Inline), Op, Closures(Closure)]
          public static AsmOcToken<K> token<K>(AsmOcTokenKind kind, K value)

@@ -9,12 +9,12 @@
 
   <ItemGroup>
     <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
+    <PackageReference Include="z0.tools" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 
   <ItemGroup>
     <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Tooling)" />
     <ProjectReference Include="$(Glue)" />
   </ItemGroup>
 </Project>

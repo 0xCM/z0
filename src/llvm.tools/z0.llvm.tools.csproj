@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
+    <PackageReference Include="z0.asmm" Version="$(ZLibVersion)" />
   </ItemGroup>
 
   <ItemGroup>

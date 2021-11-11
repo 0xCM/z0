@@ -7,7 +7,6 @@
   <ItemGroup>
       <ProjectReference Include="$(AsmCore)"/>
       <ProjectReference Include="$(AsmData)"/>
-      <ProjectReference Include="$(Tooling)"/>
       <ProjectReference Include="$(Gen)"/>
   </ItemGroup>
 
@@ -24,6 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
+    <PackageReference Include="z0.tools" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

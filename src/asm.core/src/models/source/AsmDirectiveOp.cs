@@ -9,33 +9,24 @@ namespace Z0.Asm
 
     using static Root;
 
-    public readonly struct AsmStatement
+    public readonly struct AsmDirectiveOp
     {
-        readonly text31 Data;
+        public string Value {get;}
 
         [MethodImpl(Inline)]
-        public AsmStatement(string src)
+        public AsmDirectiveOp(string value)
         {
-            Data = src;
+            Value = value;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator AsmStatement(string src)
-            => new AsmStatement(src);
-
         public string Format()
-            => Data.Format();
+            => Value ?? EmptyString;
 
         public override string ToString()
             => Format();
-    }
 
-    [ApiHost]
-    public readonly partial struct AsmStatements
-    {
-        const string RP1 = "{0} {1}";
-
-        const string RP2 = "{0} {1}, {2}";
-
+        [MethodImpl(Inline)]
+        public static implicit operator AsmDirectiveOp(string src)
+            => new AsmDirectiveOp(src);
     }
 }

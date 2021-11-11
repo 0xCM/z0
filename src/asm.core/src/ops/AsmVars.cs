@@ -8,8 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static AsmOperands;
-    using static core;
-    using static Root;
 
     public interface IAsmVar
     {
@@ -153,7 +151,6 @@ namespace Z0.Asm
         {
 
         }
-
     }
 
     public sealed class AsmMem64Var : AsmMemVar<m64>
@@ -302,6 +299,5 @@ namespace Z0.Asm
         {
 
         }
-
     }
 }

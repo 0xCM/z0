@@ -26,7 +26,7 @@ namespace Z0.Asm
 
         public string DocName {get;}
 
-        public AsmDocBuilder WithDirective(text15 name, params DirectiveOperand[] args)
+        public AsmDocBuilder WithDirective(text15 name, params AsmDirectiveOp[] args)
         {
             switch(args.Length)
             {
@@ -84,6 +84,6 @@ namespace Z0.Asm
         }
 
         static AsmDirective directive<T>(text15 name, T arg)
-            => asm.directive(name, new DirectiveOperand<T>(arg));
+            => asm.directive(name, new AsmDirectiveOp<T>(arg));
     }
 }

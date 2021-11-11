@@ -12,19 +12,19 @@ namespace Z0.Tools
 
     partial class Nasm
     {
-        public ref AsmAssembly Assembled(in NasmEncoding src, out AsmAssembly dst)
+        public ref AssembledAsm Assembled(in NasmEncoding src, out AssembledAsm dst)
         {
             dst.Bitstring = FormatBitstring(src.Encoded);
             dst.Encoding = src.Encoded;
-            dst.Statement = asm.expr(src.SourceText);
+            dst.Statement = AsmExpr.parse(src.SourceText);
             dst.SourceLine = src.LineNumber;
             dst.Offset = src.Offset;
             return ref dst;
         }
 
-        public Index<AsmAssembly> Assembled(ReadOnlySpan<NasmCodeBlock> blocks)
+        public Index<AssembledAsm> Assembled(ReadOnlySpan<NasmCodeBlock> blocks)
         {
-            var dst = list<AsmAssembly>();
+            var dst = list<AssembledAsm>();
             var count = blocks.Length;
             for(var i=0; i<count; i++)
             {

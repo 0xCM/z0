@@ -202,7 +202,7 @@ namespace Z0.Asm
             if(result.Fail)
                 return result;
 
-            dst.Expression = asm.expr(skip(cells, i++));
+            dst.Expression = AsmExpr.parse(skip(cells, i++));
             dst.Encoded = AsmHexCode.parse(skip(cells, i++));
             result = sigxpr(skip(cells, i++), out dst.Sig);
             if(result.Fail)

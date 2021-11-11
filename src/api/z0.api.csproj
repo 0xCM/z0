@@ -5,13 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Tooling)" />
-    <ProjectReference Include="$(Cli)" />
     <ProjectReference Include="$(Gen)" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
+    <PackageReference Include="z0.tools" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

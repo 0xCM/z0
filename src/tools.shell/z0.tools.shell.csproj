@@ -9,8 +9,11 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Tooling)" />
-    <ProjectReference Include="$(Symbolic)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.tools" Version="$(ZLibVersion)" />
+    <PackageReference Include="z0.tools" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

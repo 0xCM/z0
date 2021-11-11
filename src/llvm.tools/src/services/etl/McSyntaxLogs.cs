@@ -98,7 +98,7 @@ namespace Z0.llvm
                 counter++;
                 FS.point(locator, out var point);
                 record.Location = point.Location;
-                record.Expr = asm.expr(body);
+                record.Expr = AsmExpr.parse(body);
                 record.Syntax = syntax;
                 record.Source = point.Path;
                 dst.Add(record);

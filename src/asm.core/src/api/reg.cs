@@ -15,19 +15,19 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static RegOp reg(NativeSizeCode width, RegClassCode @class, RegIndexCode r)
-            => new RegOp(or((byte)width, sll((ushort)@class, 5), sll((ushort)r, 10)));
+            => AsmRegs.reg(width,@class,r);
 
-        [MethodImpl(Inline), Op]
-        public static RegOp reg(RegKind kind)
-            => new RegOp((ushort)kind);
+        // [MethodImpl(Inline), Op]
+        // public static RegOp reg(RegKind kind)
+        //     => new RegOp((ushort)kind);
 
-        [MethodImpl(Inline)]
-        public static RegOp<T> reg<T>(T src)
-            where T : unmanaged, IRegOp
-                => new RegOp<T>(src);
+        // [MethodImpl(Inline)]
+        // public static RegOp<T> reg<T>(T src)
+        //     where T : unmanaged, IRegOp
+        //         => new RegOp<T>(src);
 
         [MethodImpl(Inline), Op]
         public static RegOp reg(in AsmOperand src)
-            => new RegOp(first(span16u(src.Data)));
+            => AsmRegs.reg(src);
     }
 }

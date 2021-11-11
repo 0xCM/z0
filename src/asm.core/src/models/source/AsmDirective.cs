@@ -13,14 +13,14 @@ namespace Z0.Asm
     {
         public readonly text15 Name;
 
-        public readonly DirectiveOperand Op0;
+        public readonly AsmDirectiveOp Op0;
 
-        public readonly DirectiveOperand Op1;
+        public readonly AsmDirectiveOp Op1;
 
-        public readonly DirectiveOperand Op2;
+        public readonly AsmDirectiveOp Op2;
 
         [MethodImpl(Inline)]
-        public AsmDirective(text15 name, DirectiveOperand op0 = default, DirectiveOperand op1 = default, DirectiveOperand op2 = default)
+        public AsmDirective(text15 name, AsmDirectiveOp op0 = default, AsmDirectiveOp op1 = default, AsmDirectiveOp op2 = default)
         {
             Name = name;
             Op0 = op0;
