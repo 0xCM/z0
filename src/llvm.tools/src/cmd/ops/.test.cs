@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
-    using types;
-
     partial class LlvmCmd
     {
         [CmdOp(".test")]
@@ -14,7 +12,7 @@ namespace Z0.llvm
             var result = Outcome.Success;
 
             var input = "a -> b -> c -> d";
-            var output = dag.parse(input);
+            var output = LlvmTypes.dag(input);
             Write(output.Format());
             return result;
         }

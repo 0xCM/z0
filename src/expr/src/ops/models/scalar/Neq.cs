@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Scalar
 {
-    using Z0.Expr;
-
     public class Neq : OpExpr2<Neq,CmpPredKind>
     {
         public Neq(IExpr a, IExpr b)

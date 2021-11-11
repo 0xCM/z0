@@ -46,6 +46,18 @@ namespace Z0
             get => Terms.Length;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Terms.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Terms.IsNonEmpty;
+        }
+
         /// <summary>
         /// Returns a reference to an index-identified term
         /// </summary>

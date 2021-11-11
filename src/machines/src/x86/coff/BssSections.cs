@@ -11,7 +11,6 @@ namespace Z0.Machines.X86
     using static core;
     using static MemorySections;
 
-
     [ApiHost]
     public readonly partial struct BssSections : ISectionDispenser<BssSections>
     {
@@ -53,7 +52,7 @@ namespace Z0.Machines.X86
 
         [MethodImpl(Inline), Op]
         ref readonly Index<Section> Container()
-            => ref Z0.Index.from<Section>(ContainerAddress);
+            => ref _Container;
 
         [Op]
         static uint initialize(Span<Section> dst)

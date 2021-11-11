@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using Graphs;
 
     using static Root;
     using static core;
@@ -43,7 +42,7 @@ namespace Z0
 
         public static Digraph cycle(uint src, uint dst)
         {
-            var g = graphs.digraph();
+            var g = relations.digraph();
             for(var i=src; i<dst; i+=2)
                 g.Connect(i, i+1);
             g.Connect(dst,src);

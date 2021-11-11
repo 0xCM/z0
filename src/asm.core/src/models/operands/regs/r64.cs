@@ -16,9 +16,9 @@ namespace Z0.Asm
 
     partial struct AsmOperands
     {
-        public readonly struct r64 : IRegOp64<r64>
+        public readonly struct r64 : IRegOp64<G>
         {
-            public RegIndexCode Index {get;}
+            public I Index {get;}
 
             [MethodImpl(Inline)]
             public r64(I index)
@@ -81,6 +81,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator G(I src)
                 => new G(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator I(G src)
+                => src.Index;
 
             [MethodImpl(Inline)]
             public static explicit operator byte(G src)
@@ -168,7 +172,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(rbx src)
-                => new G(src.Index);
+                => new(src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(rbx src)
@@ -179,16 +183,15 @@ namespace Z0.Asm
         {
             public I Index => I.r4;
 
-
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get => new G(Index);
+                get => new(Index);
             }
 
             [MethodImpl(Inline)]
             public static implicit operator G(rsi src)
-                => new G(src.Index);
+                => new(src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(rsi src)

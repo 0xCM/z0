@@ -15,9 +15,9 @@ namespace Z0.Machines.X86
     using static core;
     using static Asm.RegClasses;
 
-    public class TestMachine : AppCmdService<TestMachine>
+    public class TestMachine : AppCmdService<TestMachine,CmdShellState>
     {
-        EngineSettings Settings;
+        //EngineSettings Settings;
 
         IPolyrand Random;
 
@@ -37,9 +37,9 @@ namespace Z0.Machines.X86
 
         protected override void Initialized()
         {
-            var config = new EngineSettings();
-            config.Affinity = BitMasks.lo<ulong>((byte)(Env.CpuCount - 1));
-            Settings = config;
+            //var config = new EngineSettings();
+            //config.Affinity = BitMasks.lo<ulong>((byte)(Env.CpuCount - 1));
+            //Settings = config;
             Queue = EventQueue.allocate(GetType(), EventRaised);
             Random = Rng.@default();
         }
@@ -183,7 +183,7 @@ namespace Z0.Machines.X86
         Outcome RunSorters(CmdArgs args)
         {
             var result = Outcome.Success;
-            var sorter = Networks.sorting<byte>();
+            var sorter = SortingNetworks.define<byte>();
             byte x0 = 9, x1 = 5, x2 = 2, x3 = 6;
             sorter.Send(x0,x1,x2,x3, out var y0, out var y1, out var y2, out var y3);
             Write(string.Format("{0} -> {1}", x0, y0));

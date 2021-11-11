@@ -37,8 +37,11 @@ namespace Z0.Machines.X86
 
         MemoryAddress CodeBase;
 
-        internal RegMachine()
+        EventSignal Signal;
+
+        internal RegMachine(EventSignal signal)
         {
+            Signal = signal;
             Regs = RegBanks.intel64();
             R64 = Regs[0].BaseAddress.Pointer<ulong>();
             R512 = Regs[1].BaseAddress.Pointer<Cell512>();
@@ -52,6 +55,12 @@ namespace Z0.Machines.X86
             CodeBase = AllocPage();
             *CodeBase.Pointer<ulong>() = 0xCC;
             rip() = CodeBase;
+        }
+
+
+        public void Run()
+        {
+
         }
 
         internal RegBank Bank
@@ -71,35 +80,35 @@ namespace Z0.Machines.X86
             => Ram.AllocPage();
 
         [MethodImpl(Inline), Op]
-        ref byte reg8(RegIndex index)
+        ref byte reg8(RegIndexCode index)
             => ref @ref(R8 + 8*(byte)(index));
 
         [MethodImpl(Inline), Op]
-        ref ushort reg16(RegIndex index)
+        ref ushort reg16(RegIndexCode index)
             => ref @ref(R16 + 4*(byte)(index));
 
         [MethodImpl(Inline), Op]
-        ref uint reg32(RegIndex index)
+        ref uint reg32(RegIndexCode index)
             => ref @ref(R32 + 2*(byte)(index));
 
         [MethodImpl(Inline), Op]
-        ref ulong reg64(RegIndex index)
+        ref ulong reg64(RegIndexCode index)
             => ref @ref(R64 + (byte)index);
 
         [MethodImpl(Inline), Op]
-        ref Cell512 reg512(RegIndex index)
+        ref Cell512 reg512(RegIndexCode index)
             => ref @ref(R512 + (byte)index);
 
         [MethodImpl(Inline), Op]
-        ref Cell256 reg256(RegIndex index)
+        ref Cell256 reg256(RegIndexCode index)
             => ref @as<Cell512,Cell256>(reg512(index));
 
         [MethodImpl(Inline), Op]
-        ref Cell128 reg128(RegIndex index)
+        ref Cell128 reg128(RegIndexCode index)
             => ref @as<Cell512,Cell128>(reg512(index));
 
         [MethodImpl(Inline), Op]
-        ref ulong mask(RegIndex index)
+        ref ulong mask(RegIndexCode index)
             => ref @ref(K + (byte)index);
 
         [MethodImpl(Inline), Op]

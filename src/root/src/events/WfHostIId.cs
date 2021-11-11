@@ -84,7 +84,7 @@ namespace Z0
         public override bool Equals(object src)
             => src is WfHostId t && Equals(t);
         public string Format()
-            => string.Format("{0}:{1} {2}", Kind.ToString(), Offset, Id.FormatAsmHex());
+            => string.Format("{0}:{1} {2}", Kind.ToString(), Offset, Id);
 
         public override int GetHashCode()
             => (int)Hash;

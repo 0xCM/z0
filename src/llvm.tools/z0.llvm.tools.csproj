@@ -10,6 +10,9 @@
     <ProjectReference Include="$(Digital)" />
     <ProjectReference Include="$(Types)" />
     <ProjectReference Include="$(Relations)" />
+    <ProjectReference Include="$(LlvmModels)" />
+    <ProjectReference Include="$(AsmCore)" />
+
   </ItemGroup>
 
   <ItemGroup>

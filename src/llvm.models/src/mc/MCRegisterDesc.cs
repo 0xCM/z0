@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.llvm
 {
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+
+    using static Root;
 
     /// <summary>
     /// Eponomyous replica from https://github.com/llvm/llvm-project/blob/53196387c201fd082d62f58459adb03267811a4c/llvm/include/llvm/MC/MCRegisterInfo.h
-    /// defined by a tabegen-produced array when invoked with the --gen-register-info action.
-    /// Each instance describes a specific register
+    /// defined by a tabegen-produced array when invoked with the --gen-register-info action. Each instance describes a specific register
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack=1)]
     public struct MCRegisterDesc
@@ -43,5 +45,20 @@ namespace Z0.llvm
         /// Index into list with lane mask sequences. The sequence contains a lanemask for every register unit
         /// </summary>
         public ushort RegUnitLaneMasks;
+
+        [MethodImpl(Inline)]
+        public MCRegisterDesc(uint name, uint subs, uint supers, uint subi, uint units, ushort masks)
+        {
+            Name = name;
+            SubRegs = subs;
+            SuperRegs = supers;
+            SubRegIndices = subi;
+            RegUnits = units;
+            RegUnitLaneMasks = masks;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator MCRegisterDesc((uint name, uint subs, uint supers, uint subi, uint units, ushort masks) src)
+            => new MCRegisterDesc(src.name, src.subs, src.supers, src.subi, src.units, src.masks);
     }
 }

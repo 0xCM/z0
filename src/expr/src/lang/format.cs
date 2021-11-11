@@ -16,22 +16,6 @@ namespace Z0.Lang
             where T : IExpr
                 => string.Format("<{0}> -> {1}", src.Name, src.Term.Format());
 
-        internal static string format(in Token src)
-        {
-            Span<char> buffer = stackalloc char[src.Length];
-            for(var i=0; i<src.Length; i++)
-                seek(buffer,i) = src[i];
-            return text.format(buffer);
-        }
-
-        internal static string format<K>(in Token<K> src)
-            where K : unmanaged
-        {
-            var dst = text.buffer();
-            for(var i=0; i<src.Length; i++)
-                dst.Append(src[i].Format());
-            return dst.Emit();
-        }
 
         internal static string format<K>(in Alphabet<K> src)
             where K : unmanaged

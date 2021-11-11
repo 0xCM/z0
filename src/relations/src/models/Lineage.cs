@@ -231,6 +231,5 @@ namespace Z0
             => Format();
 
         public static Lineage Empty => new Lineage();
-
     }
 }

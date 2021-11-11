@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Logic
 {
-    using Z0.Expr;
-
     public class And : OpExpr2<And,LogicExprKind>, ILogicOp
     {
         public And(IExpr a, IExpr b)

@@ -9,18 +9,18 @@ namespace Z0.Lang
 
     using static Root;
 
-    public readonly struct AtomicSeq<K>
+    public readonly struct Atoms<K>
         where K : unmanaged
     {
         readonly Index<Atom<K>> Data;
 
         [MethodImpl(Inline)]
-        public AtomicSeq(Atom<K>[] terms)
+        public Atoms(params Atom<K>[] terms)
         {
             Data = terms;
         }
 
-        public AtomicSeq<K> Concat(AtomicSeq<K> src)
+        public Atoms<K> Concat(Atoms<K> src)
             => lang.concat(this, src);
 
         public ReadOnlySpan<Atom<K>> Members
@@ -29,16 +29,22 @@ namespace Z0.Lang
             get => Data.View;
         }
 
-        public ref readonly Atom<K> this[uint index]
+        public ref Atom<K> this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
 
-        public ref readonly Atom<K> this[int index]
+        public ref Atom<K> this[int index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
+        }
+
+        public ref Atom<K> First
+        {
+            [MethodImpl(Inline)]
+            get => ref Data.First;
         }
 
         public uint Count
@@ -53,23 +59,29 @@ namespace Z0.Lang
             get => Data.Length;
         }
 
-        internal Atom<K>[] Storage
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data.Storage;
+            get => Data.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator AtomicSeq<K>(Atom<K>[] src)
-            => new AtomicSeq<K>(src);
+        public static implicit operator Atoms<K>(Atom<K>[] src)
+            => new Atoms<K>(src);
 
-        public static AtomicSeq<K> operator+(AtomicSeq<K> a, AtomicSeq<K> b)
+        public static Atoms<K> operator+(Atoms<K> a, Atoms<K> b)
             => a.Concat(b);
 
-        public static AtomicSeq<K> Empty
+        public static Atoms<K> Empty
         {
             [MethodImpl(Inline)]
-            get => new AtomicSeq<K>(sys.empty<Atom<K>>());
+            get => new Atoms<K>(sys.empty<Atom<K>>());
         }
     }
 }

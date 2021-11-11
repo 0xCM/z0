@@ -13,7 +13,6 @@ namespace Z0.Machines.X86
     using static Root;
     using static core;
 
-
     [StructLayout(LayoutKind.Sequential)]
     public struct CpuId : ITextual
     {

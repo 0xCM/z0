@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Scalar
 {
-    using Z0.Expr;
-
     public class Eq : OpExpr2<Eq,CmpPredKind>
     {
         public Eq(IExpr a, IExpr b)

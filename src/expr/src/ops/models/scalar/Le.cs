@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Scalar
 {
-    using Z0.Expr;
-
     public class Le : OpExpr2<Le,CmpPredKind>
     {
         public Le(IExpr a, IExpr b)

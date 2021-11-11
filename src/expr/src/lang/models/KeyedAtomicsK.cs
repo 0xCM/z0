@@ -13,7 +13,7 @@ namespace Z0.Lang
     public sealed class KeyedAtomics<K>
         where K : unmanaged
     {
-        readonly AtomicSeq<K> Data;
+        readonly Atoms<K> Data;
 
         readonly Dictionary<uint,uint> KeyToOrder;
 

@@ -37,7 +37,7 @@ namespace Z0.Expr
 
         public DfaState<K> CurrentState {get; private set;}
 
-        public void Process(Token<K> src)
+        public void Process(ReadOnlySpan<Atom<K>> src)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)

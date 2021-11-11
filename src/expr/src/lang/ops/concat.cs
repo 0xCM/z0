@@ -13,7 +13,7 @@ namespace Z0.Lang
     partial struct lang
     {
         [Op, Closures(Closure)]
-        public static AtomicSeq<K> concat<K>(AtomicSeq<K> a, AtomicSeq<K> b)
+        public static Atoms<K> concat<K>(Atoms<K> a, Atoms<K> b)
             where K : unmanaged
         {
             var ka = a.Count;

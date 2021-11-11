@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Logic
 {
-    using Z0.Expr;
-
     public class Not : OpExpr1<Not,LogicExprKind>, ILogicOp
     {
         public Not(IExpr a)

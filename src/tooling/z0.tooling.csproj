@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Workflow)" />
-    <ProjectReference Include="$(AsmCore)" />
     <ProjectReference Include="$(Cli)" />
     <ProjectReference Include="$(Commands)" />
     <ProjectReference Include="$(Rules)" />

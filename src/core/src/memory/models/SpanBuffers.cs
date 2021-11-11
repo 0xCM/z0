@@ -12,6 +12,8 @@ namespace Z0
     [ApiHost]
     public readonly struct SpanBuffers
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Allocates a span-predicated S/T ring buffer
         /// </summary>
@@ -30,7 +32,7 @@ namespace Z0
         /// <typeparam name="S">The segmented type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static PartRing<S,T> parts<S,T>(Span<S> src)
+        public static PartRing<S,T> parts<S,T>(S[] src)
             where S : unmanaged
             where T : unmanaged
                 => new PartRing<S,T>(src);
@@ -40,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="capacity">The T-cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static RingBuffer<T> ring<T>(int capacity)
             where T : unmanaged
                 => new RingBuffer<T>(new T[capacity]);
@@ -50,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static RingBuffer<T> ring<T>(Span<T> src)
             where T : unmanaged
                 => new RingBuffer<T>(src);
@@ -60,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="capacity">The T-cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static SpanStack<T> stack<T>(int capacity)
             where T : unmanaged
                 => new SpanStack<T>(new T[capacity]);
@@ -70,8 +72,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static SpanStack<T> stack<T>(Span<T> src)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static SpanStack<T> stack<T>(T[] src)
             where T : unmanaged
                 => new SpanStack<T>(src);
     }

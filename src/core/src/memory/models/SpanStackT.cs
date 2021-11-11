@@ -15,35 +15,61 @@ namespace Z0
     {
         readonly Span<T> Buffer;
 
-        readonly int Capacity;
+        readonly uint Capacity;
 
-        int Position;
+        uint Pos;
 
         [MethodImpl(Inline)]
-        internal SpanStack(Span<T> buffer)
+        internal SpanStack(T[] buffer)
         {
             Buffer = buffer;
-            Capacity = buffer.Length;
-            Position = 0;
+            Capacity = (uint)buffer.Length;
+            Pos = 0;
         }
 
         [MethodImpl(Inline)]
         public void Push(T src)
         {
-            if(Position > MaxPos)
-                --Position;
+            if(Pos > MaxPos)
+                --Pos;
 
-            seek(Head, Position++) = src;
+            seek(Head, Pos++) = src;
         }
 
         [MethodImpl(Inline)]
         public ref T Pop()
         {
-
-            if(Position < 0)
+            if(Pos < 0)
                 return ref seek(Head, 0);
             else
-                return ref seek(Head, --Position);
+                return ref seek(Head, --Pos);
+        }
+
+        [MethodImpl(Inline)]
+        public bool Pop(out T cell)
+        {
+            if(Pos < Capacity - 1)
+            {
+                cell = skip(Buffer,++Pos);
+                return true;
+            }
+            else
+            {
+                cell = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline)]
+        public bool Push(in T cell)
+        {
+            if(Pos > 0)
+            {
+                seek(Buffer, Pos--) = cell;
+                return true;
+            }
+            else
+                return false;
         }
 
         ref T Head
@@ -52,16 +78,16 @@ namespace Z0
             get => ref first(Buffer);
         }
 
-        int MaxPos
+        uint MaxPos
         {
             [MethodImpl(Inline)]
             get => Capacity - 1;
         }
 
-        public int Enqueued
+        public uint Enqueued
         {
             [MethodImpl(Inline)]
-            get => Position + 1;
+            get => Pos + 1;
         }
 
         [MethodImpl(Inline)]

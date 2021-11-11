@@ -16,9 +16,7 @@ namespace Z0
         public string HostName {get;}
 
         public string HostIdentifier
-            => HostName.Contains(Chars.Comma) && HostName.Contains(Chars.Dot) ?
-                HostName.LeftOfFirst(Chars.Comma).RightOfLast(Chars.Dot)
-                : HostName;
+            => HostName.Contains(Chars.Comma) && HostName.Contains(Chars.Dot) ? HostName.LeftOfFirst(Chars.Comma).RightOfLast(Chars.Dot) : HostName;
 
         [MethodImpl(Inline)]
         public WfStepId(Name name)
@@ -70,7 +68,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Token);
+            get => FastHash.calc(Token.Hash64);
         }
 
         public override int GetHashCode()

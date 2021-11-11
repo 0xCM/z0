@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Machines.X86
 {
-
     public interface IReg32<T> : IReg<W32,T>
         where T : unmanaged
     {

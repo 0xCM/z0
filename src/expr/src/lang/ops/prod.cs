@@ -1,17 +1,18 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) LLVM Project
-// License     :  Apache-2.0 WITH LLVM-exceptions
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.llvm.types
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Root;
 
-    public readonly struct PtrType<T>
+    partial struct lang
     {
-
-
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Product<K> prod<K>(K left, K right)
+            => new Product<K>(left,right);
     }
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Logic
 {
-    using Z0.Expr;
-
     public class Xor : OpExpr2<Xor,LogicExprKind>, ILogicOp
     {
         public Xor(IExpr a, IExpr b)

@@ -16,7 +16,7 @@ namespace Z0
             => new Heap<T>(segments, offsets);
 
         [MethodImpl(Inline)]
-        public static Heap<K,T> heap<K,T>(Index<T> segments, Index<K,uint> offsets)
+        public static Heap<K,T> heap<K,T>(T[] segments, Index<K,uint> offsets)
             where K : unmanaged
                 => new Heap<K,T>(segments, offsets);
 

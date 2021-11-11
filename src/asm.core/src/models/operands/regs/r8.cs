@@ -65,16 +65,20 @@ namespace Z0.Asm
                 => (K)src.Index;
 
             [MethodImpl(Inline)]
+            public static implicit operator I(G src)
+                => src.Index;
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(I src)
+                => new G(src);
+
+            [MethodImpl(Inline)]
             public static implicit operator G(K src)
                 => new G((I)src);
 
             [MethodImpl(Inline)]
             public static explicit operator byte(G src)
                 => (byte)src.Index;
-
-            [MethodImpl(Inline)]
-            public static implicit operator G(I src)
-                => new G(src);
 
             [MethodImpl(Inline)]
             public static implicit operator G(Sym<K> src)

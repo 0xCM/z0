@@ -16,18 +16,18 @@ namespace Z0.Asm
 
     partial struct AsmOperands
     {
-        public readonly struct xmm : IRegOp128<xmm>
+        public readonly struct xmm : IRegOp128<G>
         {
-            public RegIndexCode Index {get;}
+            public I Index {get;}
 
             [MethodImpl(Inline)]
-            public xmm(RegIndexCode index)
+            public xmm(I index)
             {
                 Index = index;
             }
 
             public AsmRegName Name
-                => AsmRegs.name(this);
+                => api.name(this);
 
             public string Format()
                 => Name.Format();
@@ -69,11 +69,15 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(K src)
-                => new G((I)src);
+                => new((I)src);
 
             [MethodImpl(Inline)]
             public static implicit operator G(I src)
-                => new G(src);
+                => new(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator I(G src)
+                => src.Index;
 
             [MethodImpl(Inline)]
             public static G operator ++(G src)

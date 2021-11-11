@@ -11,8 +11,8 @@ namespace Z0.Machines.X86
         public static RegStore8x64 regs(N8 n, W64 w)
             => default;
 
-        public static RegMachine intel64()
-            => new RegMachine();
+        public static RegMachine intel64(EventSignal signal)
+            => new RegMachine(signal);
 
         public static void state(RegMachine src, ITextBuffer dst)
         {

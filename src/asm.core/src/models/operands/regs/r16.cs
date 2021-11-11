@@ -16,12 +16,12 @@ namespace Z0.Asm
 
     partial struct AsmOperands
     {
-        public readonly struct r16 : IRegOp16<r16>
+        public readonly struct r16 : IRegOp16<G>
         {
-            public RegIndexCode Index {get;}
+            public I Index {get;}
 
             [MethodImpl(Inline)]
-            public r16(RegIndexCode index)
+            public r16(I index)
             {
                 Index = index;
             }
@@ -79,6 +79,10 @@ namespace Z0.Asm
                 => new G(src);
 
             [MethodImpl(Inline)]
+            public static implicit operator I(G src)
+                => src.Index;
+
+            [MethodImpl(Inline)]
             public static explicit operator byte(G src)
                 => (byte)src.Index;
 
@@ -100,8 +104,8 @@ namespace Z0.Asm
             public I Index => I.r0;
 
             [MethodImpl(Inline)]
-            public static implicit operator r16(ax src)
-                => new r16(src.Index);
+            public static implicit operator G(ax src)
+                => new G(src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(ax src)
@@ -140,7 +144,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(bx src)
-                => new G(src.Index);
+                => new(src.Index);
 
             [MethodImpl(Inline)]
             public static implicit operator K(bx src)
@@ -179,7 +183,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(sp src)
-                => new G(src.Index);
+                => new(src.Index);
         }
 
         public struct bp : IRegOp16<bp>
@@ -188,7 +192,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(bp src)
-                => new G(src.Index);
+                => new(src.Index);
         }
 
         public struct r8w : IRegOp16<r8w>
@@ -197,7 +201,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(r8w src)
-                => new G(src.Index);
+                => new(src.Index);
         }
 
         public struct r9w : IRegOp16<r9w>
@@ -206,7 +210,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(r9w src)
-                => new G(src.Index);
+                => new(src.Index);
         }
 
         public struct r10w : IRegOp16<r10w>
@@ -215,7 +219,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(r10w src)
-                => new G(src.Index);
+                => new(src.Index);
         }
 
         public struct r11w : IRegOp16<r11w>
@@ -224,7 +228,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(r11w src)
-                => new G(src.Index);
+                => new(src.Index);
         }
 
         public struct r12w : IRegOp16<r12w>
@@ -233,7 +237,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(r12w src)
-                => new G(src.Index);
+                => new (src.Index);
         }
 
         public struct r13w : IRegOp16<r13w>
@@ -242,7 +246,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(r13w src)
-                => new G(src.Index);
+                => new (src.Index);
         }
 
         public struct r14w : IRegOp16<r14w>
@@ -251,7 +255,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(r14w src)
-                => new G(src.Index);
+                => new (src.Index);
         }
 
         public struct r15w : IRegOp16<r15w>
@@ -260,7 +264,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(r15w src)
-                => new G(src.Index);
+                => new (src.Index);
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Z0
         uint Hashed
         {
             [MethodImpl(Inline)]
-            get => (uint)alg.hash.calc(typeof(H));
+            get => (uint)FastHash.calc(typeof(H));
         }
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ILineRelations : IRecord
+    public interface ILineRelations
     {
         LineNumber SourceLine {get;}
 

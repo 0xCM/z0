@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Scalar
 {
-    using Z0.Expr;
-
     public class Sll : OpExpr2<Sll,BinaryBitLogicKind>
     {
         public Sll(IExpr a, IExpr b)

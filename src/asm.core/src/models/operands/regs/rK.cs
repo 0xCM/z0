@@ -77,6 +77,10 @@ namespace Z0.Asm
                 => new G(src);
 
             [MethodImpl(Inline)]
+            public static implicit operator I(G src)
+                => src.Index;
+
+            [MethodImpl(Inline)]
             public static explicit operator byte(G src)
                 => (byte)src.Index;
 

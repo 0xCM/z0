@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Scalar
 {
-    using Z0.Expr;
-
     public class Or : OpExpr2<Or,BinaryBitLogicKind>
     {
         public Or(IExpr a, IExpr b)

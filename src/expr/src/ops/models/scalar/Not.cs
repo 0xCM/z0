@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Scalar
 {
-    using Z0.Expr;
-
     public class Not : OpExpr1<Not,UnaryBitLogicKind>
     {
         public Not(IExpr a)

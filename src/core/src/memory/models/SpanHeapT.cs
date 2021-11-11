@@ -42,6 +42,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (uint)Segments.Length;
         }
-
     }
 }

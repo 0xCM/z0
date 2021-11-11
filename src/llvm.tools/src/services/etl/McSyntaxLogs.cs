@@ -90,6 +90,10 @@ namespace Z0.llvm
                 var semfound = text.unfence(syntax, Brackets, out var semantic);
                 syntax = semfound ? RP.parenthetical(semantic) : syntax;
                 var body = b.Replace(Chars.Tab, Chars.Space);
+                var ci = text.index(body, Chars.Hash);
+                if (ci > 0)
+                    body = text.left(body, ci);
+
                 var record = new AsmSyntaxRow();
                 counter++;
                 FS.point(locator, out var point);

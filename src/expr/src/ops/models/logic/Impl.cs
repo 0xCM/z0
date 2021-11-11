@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Logic
 {
-    using Z0.Expr;
-
     public class Impl : OpExpr2<Impl,LogicExprKind>
     {
         public Impl(IExpr a, IExpr b)

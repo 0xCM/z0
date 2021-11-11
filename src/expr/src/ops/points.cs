@@ -89,6 +89,5 @@ namespace Z0.Ops
         public static Span<Replace<T>> replace<T>(Index<T> src, Index<T> dst)
             where T : IEquatable<T>
                 => replace(bijection<T>(src,dst));
-
     }
 }

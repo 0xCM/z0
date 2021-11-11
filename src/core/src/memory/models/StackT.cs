@@ -10,7 +10,7 @@ namespace Z0
 
     public struct Stack<T>
     {
-        readonly Index<T> Storage;
+        readonly Index<T> Buffer;
 
         uint Pos;
 
@@ -19,16 +19,16 @@ namespace Z0
         public Stack(uint capacity)
         {
             Capacity = capacity;
-            Storage = sys.alloc<T>(Capacity);
-            Pos = (uint)Storage.Length - 1;
+            Buffer = sys.alloc<T>(Capacity);
+            Pos = (uint)Buffer.Length - 1;
         }
 
         [MethodImpl(Inline)]
         public Stack(T[] buffer)
         {
             Capacity = (uint)buffer.Length;
-            Storage = buffer;
-            Pos = (uint)Storage.Length - 1;
+            Buffer = buffer;
+            Pos = (uint)Buffer.Length - 1;
         }
 
         [MethodImpl(Inline)]
@@ -36,7 +36,7 @@ namespace Z0
         {
             if(Pos < Capacity - 1)
             {
-                cell = Storage[++Pos];
+                cell = Buffer[++Pos];
                 return true;
             }
             else
@@ -51,7 +51,7 @@ namespace Z0
         {
             if(Pos > 0)
             {
-                Storage[Pos--] = cell;
+                Buffer[Pos--] = cell;
                 return true;
             }
             else

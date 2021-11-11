@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Ops.Logic
 {
-    using Z0.Expr;
-
     public class Or : OpExpr2<Or,LogicExprKind>, ILogicOp
     {
         public Or(IExpr a, IExpr b)
