@@ -68,7 +68,7 @@ namespace Z0
         }
 
         public Index<NamedValue<E>> NamedValues
-            => from i in Data select Names.value(i.Name, i.LiteralValue);
+            => from i in Data select new NamedValue<E>(i.Name, i.LiteralValue);
 
         [MethodImpl(Inline)]
         public static implicit operator EnumLiteralDetails<E>(EnumLiteralDetail<E>[] src)

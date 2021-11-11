@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static Root;
     using static core;
@@ -14,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
     /// </summary>
-    public readonly struct BinaryCode : IComparable<BinaryCode>, ITextual, IEncoded
+    public readonly partial struct BinaryCode : IComparable<BinaryCode>, ITextual
     {
         /// <summary>
         /// The encoded bytes
@@ -179,23 +178,5 @@ namespace Z0
         /// </summary>
         public static BinaryCode Empty
             => new BinaryCode(Array.Empty<byte>());
-
-
-        public readonly struct EncodedStream : IDisposable
-        {
-            readonly BinaryCode Store;
-
-            readonly MemoryStream Stream;
-
-            [MethodImpl(Inline)]
-            public EncodedStream(BinaryCode src)
-            {
-                Store = src;
-                Stream =  new MemoryStream(src.Storage);
-            }
-
-            public void Dispose()
-                => Stream?.Dispose();
-        }
     }
 }

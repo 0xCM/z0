@@ -6,18 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Root;
 
     partial class XApi
     {
         /// <summary>
-        /// Enumerates the distinct numeric kinds represented by the (bitfield) source kind
+        /// Returns the clr cell type of a vector of specified kind
         /// </summary>
-        /// <param name="k">The kind to evaluate</param>
+        /// <param name="kind">The vector kind</param>
         [MethodImpl(Inline), Op]
-        public static HashSet<NumericKind> DistinctKinds(this NumericKind k)
-            => ApiIdentityKinds.kindset(k);
+        public static Type CellType(this NativeVectorKind kind)
+            => VK.celltype(kind);
     }
 }

@@ -8,6 +8,8 @@
     <ProjectReference Include="$(Root)" />
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Bit)" />
+    <ProjectReference Include="$(Text)" />
+
     <ProjectReference Include="$(SymCore)" />
     <ProjectReference Include="$(Text)" />
     <ProjectReference Include="$(Bits)" />

@@ -29,7 +29,7 @@ namespace Z0.Asm
         unsafe Outcome FT(CmdArgs args)
         {
             var src = recover<C,byte>(Source);
-            ref var f = ref BitFlow.fx<AsciCode>(n8, src, Target, out _);
+            ref var f = ref PointFunctions.fx<AsciCode>(n8, src, Target, out _);
 
             byte x = 0;
 

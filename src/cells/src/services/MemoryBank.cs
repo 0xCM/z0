@@ -27,7 +27,6 @@ namespace Z0
         public ref SegRef Slot(uint index)
             => ref Segments[index];
 
-
         [MethodImpl(Inline), Closures(UnsignedInts)]
         public ref SegRef<T> Slot<T>(uint index)
             where T : unmanaged

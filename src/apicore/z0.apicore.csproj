@@ -17,6 +17,7 @@
     <ProjectReference Include="$(BitNumbers)" />
     <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(Time)" />
+    <ProjectReference Include="$(SpanBlocks)" />
   </ItemGroup>
 
 </Project>

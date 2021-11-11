@@ -10,15 +10,15 @@ namespace Z0
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>
-    public interface ICheckContext : IMessageQueue, IPolyrandProvider, IWfContext
+    public interface ICheckContext : IMessageQueue, IPolyrandProvider //, IWfContext
     {
         IMessageQueue MessageQueue {get;}
 
-        WfController IWfContext.Controller
-            => core.controller();
+        // WfController IWfContext.Controller
+        //     => core.controller();
 
-        string[] IWfContext.Args
-            => Environment.GetCommandLineArgs();
+        // string[] IWfContext.Args
+        //     => Environment.GetCommandLineArgs();
 
         Action<IAppMsg> MessageRelay
             => (e => term.print(e));

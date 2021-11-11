@@ -9,8 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Root;
-
-    using api = Names;
+    using static core;
 
     /// <summary>
     /// Defines the name of a member
@@ -53,7 +52,7 @@ namespace Z0
 
         [MethodImpl(Inline), Ignore]
         public int CompareTo(ClrMemberName src)
-            => api.compare(Name, src.Name);
+            => compare(Name, src.Name);
 
         [MethodImpl(Inline), Ignore]
         public bool Equals(ClrMemberName src)
@@ -123,5 +122,32 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(ClrMemberName x, ClrMemberName y)
             => !x.Equals(y);
+
+
+        [MethodImpl(Inline), Op]
+        public static int compare(Name a, Name b)
+            => compare(a.Content, b.Content);
+
+        [MethodImpl(Inline), Op]
+        public static int compare(string a, string b)
+        {
+            if(a == null || b == null)
+                return 0;
+
+            var result = 0;
+            ref readonly var x = ref first(a);
+            ref readonly var y = ref first(b);
+            var count = min(a.Length, b.Length);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var cx = ref skip(x, i);
+                ref readonly var cy = ref skip(y, i);
+                if(cx == cy)
+                    continue;
+                else
+                    return cx.CompareTo(cy);
+            }
+            return result;
+        }
     }
 }
