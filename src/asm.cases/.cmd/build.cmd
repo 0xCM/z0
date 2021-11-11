@@ -1,3 +1,3 @@
 @echo off
 set ProjectId=asm.cases
-call %ControlCommands%\build-lib.cmd
+call %ControlScripts%\build-lib.cmd

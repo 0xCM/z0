@@ -8,9 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(Agents)" />
-    <ProjectReference Include="$(BitGrids)" />
   </ItemGroup>
 
 </Project>

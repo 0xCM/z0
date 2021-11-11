@@ -38,34 +38,6 @@ namespace Z0.Asm
             public static implicit operator CcvKind(RegCall64 src)
                 => src.Kind;
 
-            // [MethodImpl(Inline), Op]
-            // public static ref readonly v12<Gp8Reg> slots(W8 w)
-            //     => ref first(recover<v12<Gp8Reg>>(bytes(regs(w))));
-
-            // [MethodImpl(Inline), Op]
-            // public static ref readonly v12<Gp16Reg> slots(W16 w)
-            //     => ref first(recover<v12<Gp16Reg>>(bytes(regs(w))));
-
-            // [MethodImpl(Inline), Op]
-            // public static ref readonly v12<Gp32Reg> slots(W32 w)
-            //     => ref first(recover<v12<Gp32Reg>>(bytes(regs(w))));
-
-            // [MethodImpl(Inline), Op]
-            // public static ref readonly v12<Gp64Reg> slots(W64 w)
-            //     => ref first(recover<v12<Gp64Reg>>(bytes(regs(w))));
-
-            // [MethodImpl(Inline), Op]
-            // public static ref readonly v16<XmmReg> slots(W128 w)
-            //     => ref first(recover<v16<XmmReg>>(bytes(regs(w))));
-
-            // [MethodImpl(Inline), Op]
-            // public static ref readonly v16<YmmReg> slots(W256 w)
-            //     => ref first(recover<v16<YmmReg>>(bytes(regs(w))));
-
-            // [MethodImpl(Inline), Op]
-            // public static ref readonly v16<ZmmReg> slots(W512 w)
-            //     => ref first(recover<v16<ZmmReg>>(bytes(regs(w))));
-
             [MethodImpl(Inline), Op]
             public static ReadOnlySpan<Gp8Reg> regs(W8 w)
                 => Gp8Data;

@@ -5,23 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(BitPack)" />
-    <ProjectReference Include="$(Extract)" />
-    <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Cli)" />
-    <ProjectReference Include="$(Gen)" />
-    <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(Check)" />
-    <ProjectReference Include="$(Evaluate)" />
-    <ProjectReference Include="$(Fsm)" />
     <ProjectReference Include="$(AsmLang)" />
     <ProjectReference Include="$(AsmCore)" />
-    <ProjectReference Include="$(Services)" />
     <ProjectReference Include="$(AsmLangG)"/>
+    <ProjectReference Include="$(Extract)" />
+
   </ItemGroup>
 
-   <ItemGroup>
-    <EmbeddedResource Include="src/asm.cases/**/*.asm" />
-   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
+  </ItemGroup>
 
 </Project>

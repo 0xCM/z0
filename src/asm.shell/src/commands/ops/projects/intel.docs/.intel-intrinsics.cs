@@ -6,13 +6,11 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".xed-pointers")]
-        Outcome XedPointers(CmdArgs args)
+        [CmdOp(".intel-intrinsics")]
+        Outcome EmitIntelIntrinsics(CmdArgs args)
         {
-            var result = Outcome.Success;
-            var src = Xed.PointerWidths();
-            ShowSyms(src);
-            return result;
+            IntelIntrinsics.Emit();
+            return true;
         }
     }
 }

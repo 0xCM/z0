@@ -22,4 +22,8 @@
     <ProjectReference Include="$(Cli)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
+  </ItemGroup>
+
 </Project>

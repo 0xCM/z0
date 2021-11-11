@@ -6,15 +6,12 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(CaptureChecks)" />
-    <ProjectReference Include="$(Bit)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

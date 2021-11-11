@@ -7,14 +7,14 @@
   <ItemGroup>
     <ProjectReference Include="$(AsmCore)"/>
     <ProjectReference Include="$(AsmData)"/>
-    <ProjectReference Include="$(SpanBlocks)"/>
-    <ProjectReference Include="$(Cpu)"/>
-    <ProjectReference Include="$(Cells)"/>
-    <ProjectReference Include="$(Rules)"/>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="assets/**/*.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

@@ -46,13 +46,6 @@ namespace Z0
             return true;
         }
 
-        [CmdOp("process-intel-sdm")]
-        public Outcome ProcessIntelSdm(CmdArgs args)
-        {
-            Wf.IntelSdm().Process();
-            return true;
-        }
-
         [CmdOp("emit-call-table")]
         public Outcome EmitCallTable(CmdArgs args)
         {

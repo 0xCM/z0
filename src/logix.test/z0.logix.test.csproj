@@ -7,8 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)"/>
-    <ProjectReference Include="$(Logix)"/>
-    <ProjectReference Include="$(Bit)"/>
   </ItemGroup>
 
 </Project>

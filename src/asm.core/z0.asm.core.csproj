@@ -5,21 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(Files)" />
-      <ProjectReference Include="$(BitNumbers)" />
-      <ProjectReference Include="$(BitFields)" />
       <ProjectReference Include="$(AsmData)" />
-      <ProjectReference Include="$(LlvmModels)" />
-      <ProjectReference Include="$(Commands)" />
-      <ProjectReference Include="$(Events)" />
-      <ProjectReference Include="$(Ws)" />
-      <ProjectReference Include="$(Blittable)" />
       <ProjectReference Include="$(AsmLangG)" />
-      <ProjectReference Include="$(Rules)" />
   </ItemGroup>
 
    <ItemGroup>
     <EmbeddedResource Include="assets/**/*.*" />
    </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
+  </ItemGroup>
 
 </Project>

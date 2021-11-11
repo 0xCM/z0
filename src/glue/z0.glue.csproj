@@ -5,22 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(Root)" />
-      <ProjectReference Include="$(Core)" />
-      <ProjectReference Include="$(Blocks)" />
-      <ProjectReference Include="$(Rules)" />
-      <ProjectReference Include="$(Bit)" />
-      <ProjectReference Include="$(Events)"/>
-      <ProjectReference Include="$(Workflow)"/>
       <ProjectReference Include="$(AsmCore)"/>
       <ProjectReference Include="$(AsmData)"/>
-      <ProjectReference Include="$(Resources)"/>
-      <ProjectReference Include="$(Commands)"/>
-      <ProjectReference Include="$(Tables)"/>
-      <ProjectReference Include="$(Clr)"/>
       <ProjectReference Include="$(Tooling)"/>
-      <ProjectReference Include="$(Services)"/>
-      <ProjectReference Include="$(Res)"/>
       <ProjectReference Include="$(Gen)"/>
   </ItemGroup>
 
@@ -33,6 +20,10 @@
 
   <ItemGroup>
     <EmbeddedResource Include="src/tooling/llvm/assets/**/*.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

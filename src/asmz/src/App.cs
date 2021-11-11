@@ -439,8 +439,8 @@ namespace Z0.Asm
 
         void GetMethodInfo()
         {
-            var path = Parts.Math.Assembly.Location;
-            var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Math).Single();
+            var path = Parts.Lib.Assembly.Location;
+            var catalog = Wf.ApiCatalog.PartCatalogs(PartId.Lib).Single();
             var methods = catalog.Methods;
             SOS.SymbolReader.InitializeSymbolReader("");
             foreach(var method in methods)

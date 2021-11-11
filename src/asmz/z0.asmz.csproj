@@ -7,15 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Services)" />
-    <ProjectReference Include="$(Pipes)" />
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(AsmCases)" />
     <ProjectReference Include="$(Symbolic)" />
-    <ProjectReference Include="$(SymCore)" />
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Xml)" />
-    <ProjectReference Include="$(BitGrids)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

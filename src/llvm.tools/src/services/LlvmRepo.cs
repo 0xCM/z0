@@ -5,13 +5,8 @@
 namespace Z0.llvm
 {
     using System;
-    using System.Collections.Generic;
-
-    using Asm;
-    using records;
 
     using static LlvmNames;
-    using static core;
 
     public class LlvmRepo : AppService<LlvmRepo>
     {
@@ -28,34 +23,30 @@ namespace Z0.llvm
         public FS.FolderPath Root()
             => Env.LlvmRoot;
 
-        public ReadOnlySpan<FS.FilePath> Files()
+        public FS.Files Files()
         {
             if(_AllFiles.IsEmpty)
-            {
                 _AllFiles = Root().AllFiles;
-            }
             return _AllFiles;
         }
 
-        public ReadOnlySpan<FS.FilePath> Files(FS.FileExt ext)
+        public FS.Files Files(FS.FileExt ext)
             => Files().Where(f => f.Is(ext));
 
-        public ReadOnlySpan<FS.FilePath> BuildOutput()
+        public FS.Files BuildOutput()
         {
             if(_BuildOutput.IsEmpty)
-            {
                 _BuildOutput = (BuildRoot()).AllFiles;
-            }
             return _BuildOutput;
         }
 
         public FS.FolderPath BuildRoot()
             => Root() + FS.folder(Repo.build);
 
-        public ReadOnlySpan<FS.FilePath> BuildOutput(FS.FileExt ext)
+        public FS.Files BuildOutput(FS.FileExt ext)
             =>  BuildOutput().Where(x => x.Is(ext));
 
-        public ReadOnlySpan<FS.FilePath> BuildOutput(FS.FileExt a, FS.FileExt b)
+        public FS.Files BuildOutput(FS.FileExt a, FS.FileExt b)
             =>  BuildOutput().Where(x => x.Is(a) || x.Is(b));
     }
 }

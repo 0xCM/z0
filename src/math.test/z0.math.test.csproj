@@ -6,11 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(BitNumbers)" />
     <ProjectReference Include="$(CpuDsl)" />
-    <ProjectReference Include="$(Text)" />
   </ItemGroup>
 
 </Project>

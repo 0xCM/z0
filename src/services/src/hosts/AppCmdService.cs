@@ -29,6 +29,8 @@ namespace Z0
 
         protected AppSettings Settings;
 
+        protected IToolWs Tools;
+
         protected TableEmitters TableEmitters;
 
         protected AppCmdService()
@@ -45,6 +47,7 @@ namespace Z0
             ProjectScripts = Wf.ProjectScripts();
             Settings = Wf.AppSettings();
             TableEmitters = Wf.TableEmitters();
+            Tools = Ws.Tools();
         }
 
         public T With(IToolCmdShell shell)
@@ -76,7 +79,7 @@ namespace Z0
 
         protected void ToolEnv(out Settings dst)
         {
-            var path = Ws.Tools().Toolbase + FS.file("show-env-config", FS.Cmd);
+            var path = Tools.Toolbase + FS.file("show-env-config", FS.Cmd);
             var cmd = Cmd.cmdline(path.Format(PathSeparator.BS));
             dst = Settings.Load(OmniScript.RunCmd(cmd));
         }
@@ -93,7 +96,7 @@ namespace Z0
         protected Outcome ToolSettings(CmdArgs args)
         {
             ToolId tool = arg(args,0).Value;
-            var src = Ws.Tools().Logs(tool) + FS.file("config", FS.Log);
+            var src = Tools.Logs(tool) + FS.file("config", FS.Log);
             if(!src.Exists)
                 return (false,FS.missing(src));
 
@@ -213,6 +216,52 @@ namespace Z0
             return true;
         }
 
+        [CmdOp(".tool-config")]
+        protected Outcome ConfigureTool(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            ToolId tool = arg(args,0).Value;
+            var script = Tools.ConfigScript(tool);
+            result = OmniScript.Run(script, out var _);
+            var logpath = Tools.ConfigLog(tool);
+            using var reader = logpath.AsciLineReader();
+            while(reader.Next(out var line))
+            {
+                Write(line.Format());
+            }
+
+            return result;
+        }
+
+        [CmdOp(".tool-help")]
+        protected Outcome ShowToolHelp(CmdArgs args)
+        {
+            var result = Outcome.Success;
+
+            var tool = (ToolId)arg(args,0).Value;
+            var docs = Tools.ToolDocs(tool);
+            var doc = docs + FS.file(tool.Format(),FS.Help);
+            if(doc.Exists)
+            {
+                using var reader = doc.Utf8LineReader();
+                while(reader.Next(out var line))
+                    Write(line.Content);
+            }
+
+            return result;
+        }
+
+        [CmdOp(".tool-script")]
+        protected Outcome ToolScript(CmdArgs args)
+        {
+            var tool = (ToolId)arg(args,0).Value;
+            var script = Tools.Script(tool, arg(args,1).Value);
+            if(!script.Exists)
+                return (false, FS.missing(script));
+            else
+                return OmniScript.Run(script, out var _);
+        }
+
         Index<CompilationLiteral> ApiLiterals()
         {
             var result = Outcome.Success;
@@ -234,11 +283,10 @@ namespace Z0
         [CmdOp(".tools")]
         protected Outcome CatalogTools(CmdArgs args)
         {
-            var ws = Ws.Tools();
-            var subdirs = ws.Root.SubDirs();
+            var subdirs = Tools.Root.SubDirs();
             var counter = 0u;
             var formatter = Tables.formatter<ToolConfig>();
-            var dst = ws.Inventory();
+            var dst = Tools.Inventory();
             using var writer = dst.AsciWriter();
             foreach(var dir in subdirs)
             {
@@ -280,9 +328,9 @@ namespace Z0
             var tool = (ToolId)arg(args,0).Value;
             var path = FS.FilePath.Empty;
             if(args.Length > 1)
-                path = Ws.Tools().ToolDocs(tool) + FS.file(arg(args,1));
+                path = Tools.ToolDocs(tool) + FS.file(arg(args,1));
             else
-                path = Ws.Tools().ToolDocs(tool) + FS.file(tool.Format(), FS.Help);
+                path = Tools.ToolDocs(tool) + FS.file(tool.Format(), FS.Help);
 
             if(path.Exists)
             {

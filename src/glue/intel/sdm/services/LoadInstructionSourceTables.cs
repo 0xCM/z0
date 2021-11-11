@@ -6,11 +6,10 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Root;
-
     partial class IntelSdm
     {
         public ReadOnlySpan<Table> LoadInstructionSourceTables()
             => LoadCsvTables((SdmPaths.Sources() + FS.folder("sdm.instructions")).Files(FS.Csv).ToReadOnlySpan());
+
     }
 }

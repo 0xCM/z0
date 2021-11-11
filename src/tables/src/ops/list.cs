@@ -13,8 +13,6 @@ namespace Z0
         {
             dst = array<ListItem>();
             var buffer = list<ListItem>();
-            //var count = FS.linecount(src);
-            //dst = alloc<ListItem>(count.Lines - 1);
             using var reader = src.Utf8LineReader();
             if(reader.Next(out var line))
             {

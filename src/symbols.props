@@ -1,130 +1,48 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <Share>$(Src)share/z0.share.projitems</Share>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <Agents>$(Src)agents/z0.agents.csproj</Agents>
     <Api>$(Src)api/z0.api.csproj</Api>
-    <ApiCore>$(Src)apicore/z0.apicore.csproj</ApiCore>
-    <Apps>$(Src)apps/z0.apps.csproj</Apps>
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
     <AsmLang>$(Src)asm.lang/z0.asm.lang.csproj</AsmLang>
     <AsmLangG>$(Src)asm.lang.g/z0.asm.lang.g.csproj</AsmLangG>
     <AsmCases>$(Src)asm.cases/z0.asm.cases.csproj</AsmCases>
     <AsmCore>$(Src)asm.core/z0.asm.core.csproj</AsmCore>
     <AsmData>$(Src)asm.data/z0.asm.data.csproj</AsmData>
-    <AsmEmu>$(Src)asm.emu/z0.asm.emu.csproj</AsmEmu>
-    <Asci>$(Src)asci/z0.asci.csproj</Asci>
 
-    <Bit>$(Src)bit/z0.bit.csproj</Bit>
-    <Bits>$(Src)bits/z0.bits.csproj</Bits>
-    <BitCore>$(Src)bitcore/z0.bitcore.csproj</BitCore>
-    <BitStrings>$(Src)bitstrings/z0.bitstrings.csproj</BitStrings>
-    <BitPack>$(Src)bitpack/z0.bitpack.csproj</BitPack>
-    <BitFields>$(Src)bitfields/z0.bitfields.csproj</BitFields>
-    <BitNumbers>$(Src)bitnumbers/z0.bitnumbers.csproj</BitNumbers>
-    <BitVectors>$(Src)bitvectors/z0.bitvectors.csproj</BitVectors>
-    <BitGrids>$(Src)bitgrids/z0.bitgrids.csproj</BitGrids>
-    <BitSpans>$(Src)bitspans/z0.bitspans.csproj</BitSpans>
-    <BitMatrix>$(Src)bitmatrix/z0.bitmatrix.csproj</BitMatrix>
-    <BitSvc>$(Src)bitsvc/z0.bitsvc.csproj</BitSvc>
-    <BitMasks>$(Src)bitmasks/z0.bitmasks.csproj</BitMasks>
-    <Blittable>$(Src)blittable/z0.blittable.csproj</Blittable>
-    <Blocked>$(Src)blocked/z0.blocked.csproj</Blocked>
-    <Blocks>$(Src)blocks/z0.blocks.csproj</Blocks>
-
-    <Calc>$(Src)calc/z0.calc.csproj</Calc>
     <Capture>$(Src)capture/z0.capture.csproj</Capture>
     <CaptureChecks>$(Src)capture.checks/z0.capture.checks.csproj</CaptureChecks>
-    <Cells>$(Src)cells/z0.cells.csproj</Cells>
-    <Check>$(Src)check/z0.check.csproj</Check>
-    <Circuits>$(Src)circuits/z0.circuits.csproj</Circuits>
     <Cli>$(Src)cli/z0.cli.csproj</Cli>
-    <Clr>$(Src)clr/z0.clr.csproj</Clr>
-    <Core>$(Src)core/z0.core.csproj</Core>
-    <Commands>$(Src)commands/z0.commands.csproj</Commands>
-    <Cpu>$(Src)cpu/z0.cpu.csproj</Cpu>
     <CpuDsl>$(Src)cpu.dsl/z0.cpu.dsl.csproj</CpuDsl>
     <Checks>$(Src)checks/z0.checks.csproj</Checks>
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
 
-    <Digital>$(Src)digital/z0.digital.csproj</Digital>
-    <Dynamic>$(Src)dynamic/z0.dynamic.csproj</Dynamic>
     <DynamicLinq>$(Src)dynamic.linq/z0.dynamic.linq.csproj</DynamicLinq>
 
-    <Expr>$(Src)expr/z0.expr.csproj</Expr>
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
     <Events>$(Src)events/z0.events.csproj</Events>
     <External>$(Src)external/z0.external.csproj</External>
     <Extract>$(Src)extract/z0.extract.csproj</Extract>
 
-    <Fsm>$(Src)fsm/z0.fsm.csproj</Fsm>
-    <Files>$(Src)files/z0.files.csproj</Files>
-
     <Gen>$(Src)gen/z0.gen.csproj</Gen>
     <Glue>$(Src)glue/z0.glue.csproj</Glue>
-    <GMath>$(Src)gmath/z0.gmath.csproj</GMath>
-    <Graphs>$(Src)graphs/z0.graphs.csproj</Graphs>
 
-    <Hash>$(Src)hash/z0.hash.csproj</Hash>
-
-    <Interop>$(Src)interop/z0.interop.csproj</Interop>
-
-    <Lang>$(Src)lang/z0.lang.csproj</Lang>
-    <Logix>$(Src)logix/z0.logix.csproj</Logix>
-
-    <Math>$(Src)math/z0.math.csproj</Math>
     <Machine>$(Src)machine/z0.machine.csproj</Machine>
     <Machines>$(Src)machines/z0.machines.csproj</Machines>
     <Minidump>$(Src)minidump/z0.minidump.csproj</Minidump>
-    <Models>$(Src)models/z0.models.csproj</Models>
-
-    <Nats>$(Src)nats/z0.nats.csproj</Nats>
 
     <LlvmTools>$(Src)llvm.tools/z0.llvm.tools.csproj</LlvmTools>
     <LlvmModels>$(Src)llvm.models/z0.llvm.models.csproj</LlvmModels>
 
-    <Part>$(Src)part/z0.part.csproj</Part>
-    <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
-    <Pipes>$(Src)pipes/z0.pipes.csproj</Pipes>
-    <Processors>$(Src)processors/z0.processors.csproj</Processors>
-
     <ResPack>$(Src)respack/z0.respack.csproj</ResPack>
-    <Refs>$(Src)refs/z0.refs.csproj</Refs>
     <Res>$(Src)res/z0.res.csproj</Res>
-    <Resources>$(Src)resources/z0.resources.csproj</Resources>
-    <Relations>$(Src)relations/z0.relations.csproj</Relations>
 
-    <Root>$(Src)root/z0.root.csproj</Root>
-    <Rules>$(Src)rules/z0.rules.csproj</Rules>
-
-    <Services>$(Src)services/z0.services.csproj</Services>
-    <Seq>$(Src)seq/z0.seq.csproj</Seq>
     <Symbolic>$(Src)symbolic/z0.symbolic.csproj</Symbolic>
-    <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>
-    <Sources>$(Src)sources/z0.sources.csproj</Sources>
-    <SpanBlocks>$(Src)spanblocks/z0.spanblocks.csproj</SpanBlocks>
-    <Stats>$(Src)stats/z0.stats.csproj</Stats>
-    <Sys>$(Src)sys/z0.sys.csproj</Sys>
-    <SymCore>$(Src)symcore/z0.symcore.csproj</SymCore>
 
-    <Tables>$(Src)tables/z0.tables.csproj</Tables>
-    <Term>$(Src)term/z0.term.csproj</Term>
-    <Text>$(Src)text/z0.text.csproj</Text>
-    <Time>$(Src)time/z0.time.csproj</Time>
     <Tools>$(Src)tools/z0.tools.csproj</Tools>
     <Tooling>$(Src)tooling/z0.tooling.csproj</Tooling>
-    <Types>$(Src)types/z0.types.csproj</Types>
 
     <Validity>$(Src)validity/z0.validity.csproj</Validity>
-    <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>
 
-    <Workflow>$(Src)workflow/z0.workflow.csproj</Workflow>
-    <Ws>$(Src)ws/z0.ws.csproj</Ws>
-
-    <Xml>$(Src)xml/z0.xml.csproj</Xml>
   </PropertyGroup>
 
 </Project>

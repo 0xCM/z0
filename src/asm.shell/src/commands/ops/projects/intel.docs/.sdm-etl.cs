@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     partial class AsmCmdService
     {
-        [CmdOp(".xed-cats")]
-        Outcome XedCategories(CmdArgs args)
-            => ShowSyms(Xed.Categories());
+        [CmdOp(".sdm-etl")]
+        Outcome ProcessSdm(CmdArgs args)
+            => Sdm.RunEtl();
     }
 }

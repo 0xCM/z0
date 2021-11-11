@@ -7,8 +7,6 @@ namespace Z0
     using Z0.Asm;
     using Z0.Tools;
 
-    using Z0.llvm;
-
     using static core;
 
     public static partial class XTend

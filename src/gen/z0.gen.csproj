@@ -6,10 +6,11 @@
 
   <ItemGroup>
     <ProjectReference Include="$(AsmCore)" />
-    <ProjectReference Include="$(Workflow)" />
     <ProjectReference Include="$(Tooling)" />
-    <ProjectReference Include="$(Rules)" />
-    <ProjectReference Include="$(Lang)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

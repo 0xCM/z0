@@ -6,23 +6,16 @@
 
   <ItemGroup>
     <ProjectReference Include="$(AsmLangG)"/>
-    <ProjectReference Include="$(Workflow)" />
-    <ProjectReference Include="$(BitPack)" />
-    <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(Gen)" />
     <ProjectReference Include="$(Glue)" />
-    <ProjectReference Include="$(Digital)" />
     <ProjectReference Include="$(AsmCore)" />
     <ProjectReference Include="$(Tooling)" />
-    <ProjectReference Include="$(Resources)" />
-    <ProjectReference Include="$(SymCore)" />
-    <ProjectReference Include="$(Services)" />
     <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Dynamic)" />
   </ItemGroup>
 
-   <ItemGroup>
-    <EmbeddedResource Include="assets/**/*.*" />
-   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
+  </ItemGroup>
+
 
 </Project>

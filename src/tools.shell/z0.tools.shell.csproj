@@ -13,7 +13,4 @@
     <ProjectReference Include="$(Symbolic)" />
   </ItemGroup>
 
-  <ItemGroup>
-  </ItemGroup>
-
 </Project>

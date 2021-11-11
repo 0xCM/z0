@@ -34,7 +34,7 @@ namespace Z0.Asm
             SdmPaths.Imports().Clear();
         }
 
-        public Outcome Process()
+        public Outcome RunEtl()
         {
             var result = Outcome.Success;
 

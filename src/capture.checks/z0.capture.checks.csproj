@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(Bit)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

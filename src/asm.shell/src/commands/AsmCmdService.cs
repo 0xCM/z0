@@ -40,8 +40,6 @@ namespace Z0.Asm
 
         ApiCatalogs ApiCatalogs;
 
-        NativeBufferSeq _NativeBuffers;
-
         CliMemoryMap ResPack;
 
         IPolyrand Random;
@@ -50,18 +48,11 @@ namespace Z0.Asm
 
         IWorkspace OutWs;
 
-        IWorkspace DataSources;
-
         byte[] _Assembled;
-
-        const ushort _NativeBufferSize = Pow2.T14;
-
-        const byte _NativeBufferCount = 4;
 
         public AsmCmdService()
         {
-            CodeBuffer = memory.native(_NativeBufferSize);
-            _NativeBuffers = memory.native(new ByteSize[_NativeBufferCount]{_NativeBufferSize,_NativeBufferSize,_NativeBufferSize,_NativeBufferSize});
+            CodeBuffer = memory.native(Pow2.T14);
             RoutineName = Identifier.Empty;
             CodeSize = 0;
             _Assembled = array<byte>();
@@ -81,7 +72,6 @@ namespace Z0.Asm
             Random = Rng.wyhash64();
             ApiHexPacks = Wf.ApiHexPacks();
             OutWs = Ws.Output();
-            DataSources = Ws.Sources();
             ApiCatalogs = Wf.ApiCatalogs();
             AsmEtl = Wf.AsmEtl();
             IntelIntrinsics = Wf.IntelIntrinsics();

@@ -5,13 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(BitPack)" />
-    <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(Cpu)" />
-    <ProjectReference Include="$(BitGrids)" />
-    <ProjectReference Include="$(Calc)" />
-    <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Bit)" />
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

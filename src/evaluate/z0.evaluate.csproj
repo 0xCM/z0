@@ -6,9 +6,12 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Api)" />
-    <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(AsmLang)" />
     <ProjectReference Include="$(DynamicLinq)" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

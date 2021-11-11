@@ -5,11 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(Root)" />
-      <ProjectReference Include="$(Core)" />
-      <ProjectReference Include="$(Resources)" />
-      <ProjectReference Include="$(Events)" />
-      <ProjectReference Include="$(Ws)" />
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,14 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Workflow)" />
-    <ProjectReference Include="$(Tooling)" />
-    <ProjectReference Include="$(Digital)" />
-    <ProjectReference Include="$(Types)" />
-    <ProjectReference Include="$(Relations)" />
     <ProjectReference Include="$(LlvmModels)" />
     <ProjectReference Include="$(AsmCore)" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
   <ItemGroup>

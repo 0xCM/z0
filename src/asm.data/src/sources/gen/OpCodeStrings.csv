@@ -622,8 +622,8 @@ OpCodeStrings            | 619          | 66 0F 3A 42 /r ib
 OpCodeStrings            | 620          | F7 /4   
 OpCodeStrings            | 621          | F7 /4   
 OpCodeStrings            | 622          | REX.W + F7 /4
-OpCodeStrings            | 623          | F6 /4   
-OpCodeStrings            | 624          | REX + F6 /4
+OpCodeStrings            | 623          | REX + F6 /4
+OpCodeStrings            | 624          | F6 /4   
 OpCodeStrings            | 625          | F7 /3   
 OpCodeStrings            | 626          | F7 /3   
 OpCodeStrings            | 627          | REX.W + F7 /3
@@ -632,8 +632,8 @@ OpCodeStrings            | 629          | F6 /3
 OpCodeStrings            | 630          | F7 /2   
 OpCodeStrings            | 631          | F7 /2   
 OpCodeStrings            | 632          | REX.W + F7 /2
-OpCodeStrings            | 633          | F6 /2   
-OpCodeStrings            | 634          | REX + F6 /2
+OpCodeStrings            | 633          | REX + F6 /2
+OpCodeStrings            | 634          | F6 /2   
 OpCodeStrings            | 635          | 0C ib   
 OpCodeStrings            | 636          | 0D iw   
 OpCodeStrings            | 637          | 0D id   

@@ -10,8 +10,6 @@ namespace Z0
     {
         Index<ResEmission> EmitAssetContent();
 
-        Index<DocLibEntry> EmitAssetIndex();
-
         Index<ResEmission> EmitEmbedded(Assembly src, FS.FolderPath root, utf8 match = default,  bool clear = true);
 
         ResEmission Emit(in Asset src, FS.FolderPath root);

@@ -10,6 +10,50 @@ namespace Z0.Asm
 
     partial class AsmCmdService
     {
+        [CmdOp(".xed-attribs")]
+        Outcome XedAttribs(CmdArgs args)
+            => ShowSyms(Xed.Attributes());
+
+        [CmdOp(".xed-cats")]
+        Outcome XedCategories(CmdArgs args)
+            => ShowSyms(Xed.Categories());
+
+        [CmdOp(".xed-chips")]
+        Outcome XedChips(CmdArgs args)
+            => ShowSyms(Xed.ChipCodes());
+
+        [CmdOp(".xed-isaext")]
+        Outcome XedIsaExt(CmdArgs args)
+            => ShowSyms(Xed.IsaExtensions());
+
+        [CmdOp(".xed-pointers")]
+        Outcome XedPointers(CmdArgs args)
+            => ShowSyms(Xed.PointerWidths());
+
+        [CmdOp(".xed-opkinds")]
+        Outcome XedOpKinds(CmdArgs args)
+            => ShowSyms(Xed.OperandKinds());
+
+        [CmdOp(".xed-regs")]
+        Outcome XedRegs(CmdArgs args)
+            => ShowSyms(Xed.Registers());
+
+        [CmdOp(".xed-datasets")]
+        Outcome XedDatasets(CmdArgs args)
+        {
+            const string RenderPattern = "{0,-32} | {1}";
+            var result = Outcome.Success;
+            var datasets = IntelXed.datasets();
+            var count = datasets.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var ds = ref skip(datasets,i);
+                Write(string.Format(RenderPattern, ds.Identifier, ds.Name));
+            }
+
+            return result;
+        }
+
         [CmdOp(".xed-query")]
         Outcome XedForms(CmdArgs args)
         {
@@ -32,8 +76,7 @@ namespace Z0.Asm
                 ref readonly var cat = ref cats[form.Category];
                 if(@class.Expr.Format().StartsWith(monic, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    string fmt = string.Format(RenderPattern, @class.Expr, type.Expr, cat.Expr, isa.Expr, ext.Expr, form.Attributes);
-                    Write(fmt);
+                    Write(string.Format(RenderPattern, @class.Expr, type.Expr, cat.Expr, isa.Expr, ext.Expr, form.Attributes));
                 }
             }
             return true;

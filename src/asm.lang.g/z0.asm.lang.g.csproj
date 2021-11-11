@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(Core)" />
-      <ProjectReference Include="$(BitNumbers)" />
-      <ProjectReference Include="$(Bits)" />
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
+
 
 </Project>

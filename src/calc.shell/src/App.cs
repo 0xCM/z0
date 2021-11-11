@@ -259,11 +259,11 @@ namespace Z0
             Fsm.example2();
         }
 
-        void Run(N27 n)
-        {
-            LogHeader(MethodInfo.GetCurrentMethod(), n);
-            Parts.BitPack.Resolved.Executor.Run();
-        }
+        // void Run(N27 n)
+        // {
+        //     LogHeader(MethodInfo.GetCurrentMethod(), n);
+        //     Parts.BitPack.Resolved.Executor.Run();
+        // }
 
         void Run(N28 n)
         {
@@ -313,7 +313,7 @@ namespace Z0
             Run("23");
             Run("24");
             Run("25");
-            Run("27");
+            //Run("27");
             Run("28");
             Run("30");
         }
@@ -372,9 +372,9 @@ namespace Z0
                     case 25:
                         Run(n25);
                     break;
-                    case 27:
-                        Run(n27);
-                    break;
+                    // case 27:
+                    //     Run(n27);
+                    // break;
                     case 28:
                         Run(n28);
                     break;

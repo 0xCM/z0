@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using llvm;
-
     using static Root;
     using static AsmSigs;
 

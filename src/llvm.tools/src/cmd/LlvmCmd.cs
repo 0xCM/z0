@@ -36,9 +36,6 @@ namespace Z0.llvm
 
         IProjectWs Data;
 
-        // IProjectWs Project()
-        //     => State.Project();
-
         protected override void Initialized()
         {
             LlvmPaths = Wf.LlvmPaths();
@@ -66,6 +63,13 @@ namespace Z0.llvm
                iter(items, item => Write(item));
             }
             return result;
+        }
+
+
+        Outcome Flow(FS.Files src)
+        {
+            Files(src);
+            return true;
         }
 
         Outcome Flow<T>(ReadOnlySpan<T> src)

@@ -5,10 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Workflow)" />
-    <ProjectReference Include="$(SFuncs)" />
-    <ProjectReference Include="$(Xml)" />
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.9.0" />

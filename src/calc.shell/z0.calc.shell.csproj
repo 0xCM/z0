@@ -7,19 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Calc)" />
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Symbolic)" />
-    <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(AsmCore)" />
-    <ProjectReference Include="$(Pipes)" />
-    <ProjectReference Include="$(Fsm)" />
-    <ProjectReference Include="$(Seq)" />
-    <ProjectReference Include="$(BitGrids)" />
-    <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(Check)" />
-    <ProjectReference Include="$(Expr)" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

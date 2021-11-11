@@ -5,15 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Files)" />
-    <ProjectReference Include="$(Asci)" />
     <ProjectReference Include="$(Minidump)" />
-    <ProjectReference Include="$(Interop)" />
-    <ProjectReference Include="$(BitNumbers)" />
-    <ProjectReference Include="$(Tables)" />
-    <ProjectReference Include="$(Services)" />
     <ProjectReference Include="$(External)" />
-    <ProjectReference Include="$(Xml)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

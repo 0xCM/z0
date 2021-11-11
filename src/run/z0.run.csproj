@@ -7,12 +7,14 @@
     <!-- <BaseAddress>0x11110000</BaseAddress> -->
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Tooling)" />
-    <ProjectReference Include="$(Term)" />
-    <ProjectReference Include="$(Service)" />
     <ProjectReference Include="$(Glue)" />
   </ItemGroup>
 </Project>
