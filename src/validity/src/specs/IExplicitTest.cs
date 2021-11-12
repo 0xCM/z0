@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_identity<U> : UnitTest<U,CheckVectorsHost,ICheckVectors>
-        where U : t_identity<U>
+    public interface IExplicitTest : IUnitTest, IExecutable
     {
 
     }

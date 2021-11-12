@@ -8,9 +8,8 @@ namespace Z0
     using System.Linq;
 
     using static Root;
-    using static core;
 
-    public sealed class t_perm_ops : t_permute<t_perm_ops>
+    public sealed class t_perm_ops : t_inx<t_perm_ops>
     {
         public void perm_inc()
         {

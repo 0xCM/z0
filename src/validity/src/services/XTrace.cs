@@ -10,7 +10,6 @@ namespace Z0
 
     static class XTrace
     {
-
         public static string TracePrefix(object title, Type host, string caller)
             => string.Concat(PartResolution.Executing.Format(), Chars.FSlash, host.Name, Chars.FSlash, caller, Chars.LBrace, title, Chars.RBrace).PadRight(60);
 

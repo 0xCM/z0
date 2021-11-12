@@ -61,9 +61,9 @@ namespace Z0.Machines
             R8 = (byte*)R64;
             Stack = CpuModels.stack<ulong>(64);
             Ram = MemAlloc.alloc(256);
-            CodeBase = AllocPage();
-            //*CodeBase.Pointer<ulong>() = 0xCC;
-            //rip() = CodeBase;
+            CodeBase = Ram.AllocPage();
+            *CodeBase.Pointer<ulong>() = 0xCC;
+            rip() = CodeBase;
         }
 
         public void Dispatch(string asm)
@@ -90,9 +90,7 @@ namespace Z0.Machines
 
         public IDispatcher Run()
         {
-            Spin();
-            // if(Dispatcher != null)
-            //     Dispatcher = run(Spin);
+            Dispatcher = run(Spin);
             return this;
         }
 

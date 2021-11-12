@@ -2,13 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Gen.Projects
 {
-    using System;
-
-    public static partial class XSvc
+    public interface IProjectItem : IProjectElement
     {
 
     }
-
 }

@@ -13,7 +13,7 @@ namespace Z0
     using static cpu;
     using static core;
 
-    public class t_vperm : t_permute<t_vperm>
+    public class t_vperm : t_inx<t_vperm>
     {
         VClaims VClaims => default;
 

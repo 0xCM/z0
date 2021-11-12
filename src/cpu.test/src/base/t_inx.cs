@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.Intrinsics;
-
     using static Root;
     using static core;
 
@@ -40,7 +37,7 @@ namespace Z0
             var blockcount = RepCount/blocklen;
             var ops = 0;
 
-            for(var cycle = 0; cycle < CycleCount; cycle++)
+            for(var cycle = 0; cycle<CycleCount; cycle++)
             {
                 var lData = Random.SpanBlocks<T>(w,blockcount);
                 var rData = Random.SpanBlocks<T>(w,blockcount);
@@ -63,7 +60,7 @@ namespace Z0
             var blockcount = RepCount/blocklen;
             var ops = 0;
 
-            for(var cycle = 0; cycle < CycleCount; cycle++)
+            for(var cycle = 0; cycle<CycleCount; cycle++)
             {
                 var lData = Random.SpanBlocks<T>(w,blockcount);
                 var rData = Random.SpanBlocks<T>(w,blockcount);
@@ -87,7 +84,7 @@ namespace Z0
             var bitlen = width<T>(w8);
             var ops = 0;
 
-            for(var cycle = 0; cycle < CycleCount; cycle++)
+            for(var cycle = 0; cycle<CycleCount; cycle++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
                 var data = Random.SpanBlocks<T>(w,blockcount);
@@ -111,7 +108,7 @@ namespace Z0
             var bitlen = width<T>(w8);
             var ops = 0;
 
-            for(var cycle = 0; cycle < CycleCount; cycle++)
+            for(var cycle = 0; cycle<CycleCount; cycle++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
                 var data = Random.SpanBlocks<T>(w,blockcount);

@@ -4,51 +4,39 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    sealed class ToolShell : AppService<ToolShell>
+    sealed partial class AppCommands : AppCmdService<AppCommands,CmdShellState>
     {
-        public void Run()
+        protected override void Initialized()
         {
-
+            State.Init(Wf, Ws);
         }
     }
 
-    class App
+    [Free]
+    sealed class App : WfApp<App>
     {
-        public static void run(string[] args)
-            => app(shell(args)).Run();
+        AppCommands Commands;
 
-        static App app(IWfRuntime wf)
-            => new App(wf);
-
-        static IWfRuntime shell(string[] args)
-            => WfAppLoader.load(args).WithSource(Rng.@default());
-
-        IWfRuntime Wf;
-
-        App(IWfRuntime wf)
+        protected override void Initialized()
         {
-            Wf = wf;
+            Commands = AppCommands.create(Wf);
         }
 
-        void Run()
+        protected override void Disposing()
         {
-            try
-            {
-                using var shell = ToolShell.create(Wf);
-                shell.Run();
-
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
+            Commands.Dispose();
         }
+
+        protected override void Run()
+            => Commands.Run();
 
         public static void Main(params string[] args)
-            => run(args);
+        {
+            using var wf = WfAppLoader.load();
+            using var shell = create(wf);
+            shell.Run();
+        }
     }
-
-    public static partial class XTend {}
 }

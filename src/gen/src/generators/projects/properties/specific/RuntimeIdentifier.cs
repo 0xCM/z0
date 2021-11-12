@@ -2,11 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Gen.Projects
 {
-    public abstract class t_permute<U> : UnitTest<U,CheckVectorsHost,ICheckVectors>
-        where U : t_permute<U>,new()
+    public sealed class RuntimeIdentifier : ProjectProperty
     {
+        public RuntimeIdentifier(string value)
+            :base(nameof(RuntimeIdentifier), value)
+        {
 
+        }
     }
 }

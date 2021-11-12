@@ -16,7 +16,7 @@ namespace Z0
     {
         const string HeaderLine1 = "//-----------------------------------------------------------------------------";
 
-        const string HeaderLine2 = "// Copyright   :  (c) Chris Moore, 2020";
+        const string HeaderLine2 = "// Copyright   :  (c) Chris Moore, 2021";
 
         const string HeaderLine3 = "// License     :  MIT";
 

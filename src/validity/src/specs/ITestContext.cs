@@ -28,9 +28,4 @@ namespace Z0
         Type IClaimValidator.HostType
             => typeof(U);
     }
-
-    public interface IExplicitTest : IUnitTest, IExecutable
-    {
-
-    }
 }

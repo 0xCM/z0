@@ -2,6 +2,5 @@
 "msbuild": {
     "enabled": true,
     "Configuration": "Release"
-
  }
 }

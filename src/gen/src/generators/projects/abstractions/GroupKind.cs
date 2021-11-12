@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Gen.Projects
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    [ApiHost]
-    public readonly struct Validity
+    public enum GroupKind
     {
+        None,
 
+        PropertyGroup,
+
+        ItemGroup,
     }
 }

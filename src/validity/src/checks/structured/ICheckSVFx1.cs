@@ -9,6 +9,7 @@ namespace Z0
 
     using static Root;
     using static cpu;
+    using static core;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -37,9 +38,8 @@ namespace Z0
 
         void ICheckBinarySVFD<W128,IBinaryOp128D<T>,T>.CheckSVF(IBinaryOp128D<T> f)
         {
-            var t = default(T);
             var w = w128;
-            var cells = vcount(w,t);
+            var cells = vcount<T>(w);
             var succeeded = true;
             var casename = SFxIdentity.name(f);
             var clock = Time.counter(true);
@@ -48,8 +48,8 @@ namespace Z0
             {
                 for(var i=0; i<RepCount; i++)
                 {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
+                    var x = Random.CpuVector<T>(w);
+                    var y = Random.CpuVector<T>(w);
                     var z = f.Invoke(x,y);
                     for(byte j=0; j< cells; j++)
                         eq(f.Invoke(vcell(x,j), vcell(y,j)), vcell(z,j));
@@ -99,14 +99,12 @@ namespace Z0
         void CheckSVF<F>(F f, UnaryOperatorClass op, W128 w)
             where F : IUnaryOp128D<T>
         {
-            var t = default(T);
-
             void run()
             {
                 var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
-                    var x = Random.CpuVector(w,t);
+                    var x = Random.CpuVector<T>(w);
                     var z = f.Invoke(x);
                     for(byte j=0; j< cells; j++)
                         eq(f.Invoke(vcell(x,j)), vcell(z,j));
@@ -126,15 +124,12 @@ namespace Z0
         void CheckSVF<F>(F f, UnaryOperatorClass op, W256 w)
             where F : IUnaryOp256D<T>
         {
-
-            var t = default(T);
-
             void run()
             {
                 var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
-                    var x = Random.CpuVector(w,t);
+                    var x = Random.CpuVector<T>(w);
                     var z = f.Invoke(x);
                     for(byte j=0; j< cells; j++)
                         eq(f.Invoke(vcell(x,j)), vcell(z,j));
@@ -154,15 +149,13 @@ namespace Z0
         void CheckSVF<F>(F f, BinaryOperatorClass op, W128 w)
             where F : IBinaryOp128D<T>
         {
-            var t = default(T);
-
             void run()
             {
                 var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
+                    var x = Random.CpuVector<T>(w);
+                    var y = Random.CpuVector<T>(w);
                     var z = f.Invoke(x,y);
                     for(byte j=0; j< cells; j++)
                         eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
@@ -182,15 +175,13 @@ namespace Z0
         void CheckSVF<F>(F f, BinaryOperatorClass k, W256 w)
             where F : IBinaryOp256D<T>
         {
-            var t = default(T);
-
             void run()
             {
                 var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
-                    var x = Random.CpuVector(w,t);
-                    var y = Random.CpuVector(w,t);
+                    var x = Random.CpuVector<T>(w);
+                    var y = Random.CpuVector<T>(w);
                     var z = f.Invoke(x,y);
                     for(byte j=0; j< cells; j++)
                         eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
@@ -210,16 +201,14 @@ namespace Z0
         void CheckSVF<F>(F f,TernaryOperatorClass op, W128 w)
             where F : ITernaryOp128D<T>
         {
-            var t = default(T);
-
             void run()
             {
                 var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
-                    var a = Random.CpuVector(w,t);
-                    var b = Random.CpuVector(w,t);
-                    var c = Random.CpuVector(w,t);
+                    var a = Random.CpuVector<T>(w);
+                    var b = Random.CpuVector<T>(w);
+                    var c = Random.CpuVector<T>(w);
 
                     var z = f.Invoke(a,b,c);
                     for(byte j=0; j< cells; j++)
@@ -240,16 +229,14 @@ namespace Z0
         void CheckSVF<F>(F f, TernaryOperatorClass op, W256 w)
             where F : ITernaryOp256D<T>
         {
-            var t = default(T);
-
             void run()
             {
                 var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
-                    var a = Random.CpuVector(w,t);
-                    var b = Random.CpuVector(w,t);
-                    var c = Random.CpuVector(w,t);
+                    var a = Random.CpuVector<T>(w);
+                    var b = Random.CpuVector<T>(w);
+                    var c = Random.CpuVector<T>(w);
 
                     var z = f.Invoke(a,b,c);
                     for(byte j=0; j< cells; j++)
@@ -263,15 +250,14 @@ namespace Z0
         void CheckSVF<F>(F f, ShiftOperatorClass k, W128 w)
             where F : IShiftOp128D<T>
         {
-            var t = default(T);
-            ClosedInterval<byte> bounds = ((byte)0, (byte)(BitWidth.measure<T>() - 1));
+            ClosedInterval<byte> bounds = ((byte)0, (byte)(width<T>() - 1));
 
             void run()
             {
                 var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
-                    var x = Random.CpuVector(w,t);
+                    var x = Random.CpuVector<T>(w);
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(byte j=0; j< cells; j++)
@@ -285,15 +271,14 @@ namespace Z0
         void CheckSVF<F>(F f, ShiftOperatorClass k, W256 w)
             where F : IShiftOp256D<T>
         {
-            var t = default(T);
-            ClosedInterval<byte> bounds = ((byte)0, (byte)(BitWidth.measure<T>() - 1));
+            ClosedInterval<byte> bounds = ((byte)0, (byte)(width<T>() - 1));
 
             void run()
             {
                 var cells = CellCount(w);
                 for(var i=0; i<RepCount; i++)
                 {
-                    var x = Random.CpuVector(w,t);
+                    var x = Random.CpuVector<T>(w);
                     var offset = Random.Next<byte>(bounds);
                     var z = f.Invoke(x,offset);
                     for(byte j=0; j< cells; j++)

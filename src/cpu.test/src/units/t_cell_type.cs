@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static core;
 
-    public class t_cell_type : t_vectors<t_cell_type>
+    public class t_cell_type : t_inx<t_cell_type>
     {
         public void check_cell_types()
         {

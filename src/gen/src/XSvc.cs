@@ -4,8 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ICheckVectorBits : ICheckBitVectors, ICheckNumeric, ICheckVectors
-    {
+    using Gen;
 
+    public static class XSvc
+    {
+        public static Generators Generators(this IWfRuntime wf)
+            => Z0.Generators.create(wf);
+
+        public static ShellGen ShellGen(this IWfRuntime wf)
+            => Gen.ShellGen.create(wf);
     }
 }

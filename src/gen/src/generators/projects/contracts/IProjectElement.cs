@@ -2,11 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Gen.Projects
 {
-    public abstract class t_vectors<U> : UnitTest<U,CheckVectorsHost,ICheckVectors>
-        where U : t_vectors<U>,new()
+    public interface IProjectElement : ITextual
     {
-
+        string Name {get;}
     }
 }

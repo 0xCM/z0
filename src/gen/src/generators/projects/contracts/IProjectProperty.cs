@@ -2,11 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Gen.Projects
 {
-    public static class XSvc
+    public interface IProjectProperty : IProjectElement
     {
-        public static Generators Generators(this IWfRuntime wf)
-            => Z0.Generators.create(wf);
+        string Value {get;}
     }
 }

@@ -4,8 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static core;
+
     partial class AsmCmdService
     {
+        [CmdOp(".env")]
+        Outcome ShowEnv(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var db = Ws.EnvDb();
+            var settings = args.Count == 0 ? db.Globals() : db.Settings(arg(args,0));
+            iter(settings, s => Write(s.Format()));
+            return result;
+        }
+
         [CmdOp(".env-logs")]
         Outcome EnvLogs(CmdArgs args)
         {

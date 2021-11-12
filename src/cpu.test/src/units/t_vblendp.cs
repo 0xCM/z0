@@ -13,7 +13,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public class t_vblendp : t_permute<t_vblendp>
+    public class t_vblendp : t_inx<t_vblendp>
     {
         public override bool Enabled => true;
 

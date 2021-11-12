@@ -4,8 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ICheckVectorBits : ICheckBitVectors, ICheckNumeric, ICheckVectors
+    public interface IProjectGenerator
     {
 
     }
+
 }

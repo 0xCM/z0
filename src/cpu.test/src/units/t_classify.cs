@@ -11,7 +11,7 @@ namespace Z0
 
     using static core;
 
-    public sealed class t_classify : t_identity<t_classify>
+    public sealed class t_classify : t_inx<t_classify>
     {
         static string FormatList(IEnumerable<NumericKind> src, char? sep = null)
             => src.Select(k => k.ToString()).Join(sep ?? Chars.Comma);

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class t_vtestz : t_inx<t_vtestz>
     {
         public void vtestz_128x8i()

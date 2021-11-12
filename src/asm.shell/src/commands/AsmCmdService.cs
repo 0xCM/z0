@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
     using static core;
 
     public sealed partial class AsmCmdService : AppCmdService<AsmCmdService,AsmShellState>

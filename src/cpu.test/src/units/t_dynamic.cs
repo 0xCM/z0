@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
-
     using static Root;
-    using static core;
 
     public class t_dynamic : t_inx<t_dynamic>
     {

@@ -4,7 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ICheckVectorBits : ICheckBitVectors, ICheckNumeric, ICheckVectors
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.IO;
+
+    using static Root;
+    using static core;
+
+    public class ProjectGenerator : Generator, IProjectGenerator
     {
 
     }
