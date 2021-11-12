@@ -82,9 +82,9 @@ namespace Z0.llvm
             }
         }
 
-        public ItemList SelectList(string type)
+        public ItemList SelectList(string id)
         {
-            var path = Paths.ListImportPath(type);
+            var path = Paths.ListImportPath(id);
             var result = Tables.list(path, out var items);
             if(result.Fail)
             {
@@ -93,6 +93,7 @@ namespace Z0.llvm
             }
             return items;
         }
+
 
         public ReadOnlySpan<Label> ClassNames()
             => ClassNameBuffer.Labels;

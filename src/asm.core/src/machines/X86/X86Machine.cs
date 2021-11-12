@@ -2,18 +2,25 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines.X86
+namespace Z0.Machines
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
 
     using static Root;
     using static core;
 
     using Asm;
+    using X86;
+
+    public interface IDispatcher
+    {
+        void Dispatch(string asm);
+    }
 
     [ApiHost]
-    public unsafe partial class RegMachine : IDisposable
+    public unsafe partial class X86Machine : IDisposable, IDispatcher
     {
         RegBank Regs;
 
@@ -39,7 +46,9 @@ namespace Z0.Machines.X86
 
         EventSignal Signal;
 
-        internal RegMachine(EventSignal signal)
+        Task Dispatcher;
+
+        internal X86Machine(EventSignal signal)
         {
             Signal = signal;
             Regs = RegBanks.intel64();
@@ -53,14 +62,38 @@ namespace Z0.Machines.X86
             Stack = CpuModels.stack<ulong>(64);
             Ram = MemAlloc.alloc(256);
             CodeBase = AllocPage();
-            *CodeBase.Pointer<ulong>() = 0xCC;
-            rip() = CodeBase;
+            //*CodeBase.Pointer<ulong>() = 0xCC;
+            //rip() = CodeBase;
         }
 
-
-        public void Run()
+        public void Dispatch(string asm)
         {
 
+        }
+
+        void Spin()
+        {
+            var counter = 0u;
+            var ticks = 0L;
+            var host = GetType();
+
+            void Receiver(long t)
+            {
+                counter++;
+                ticks += t;
+                Signal.Babble(host,string.Format("{0:D4}:{1:D12}", counter, ticks));
+            }
+
+            var spinner = new Spinner(TimeSpan.FromSeconds(1), Receiver);
+            spinner.Spin();
+        }
+
+        public IDispatcher Run()
+        {
+            Spin();
+            // if(Dispatcher != null)
+            //     Dispatcher = run(Spin);
+            return this;
         }
 
         internal RegBank Bank

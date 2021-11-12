@@ -15,6 +15,37 @@ namespace Z0.Asm
         static ReadOnlySpan<byte> min64u_64u_64u
             => new byte[18]{0x0f,0x1f,0x44,0x00,0x00,0x48,0x3b,0xca,0x72,0x04,0x48,0x8b,0xc2,0xc3,0x48,0x8b,0xc1,0xc3};
 
+        [CmdOp(".load-code")]
+        Outcome LoadCode(CmdArgs args)
+        {
+            var result = Outcome.Success;
+            var id = arg(args,0).Value;
+            var path = AsmWs.BinPath(id);
+            var data = path.ReadBytes().ToReadOnlySpan();
+            var size = data.Length;
+            var msg = string.Format("Read {0} bytes from {1}", size, path.ToUri());
+            Status(msg);
+            result = LoadCodeBuffer(id, data);
+            if(result)
+                Write(string.Format("Injected data into execution buffer: {0}", data.FormatHex()));
+            return result;
+        }
+
+        Outcome LoadCodeBuffer(string name, ReadOnlySpan<byte> src)
+        {
+            RoutineName = name;
+            CodeBuffer.Clear();
+            var size = src.Length;
+            if(size > CodeBuffer.Size)
+                return (false, CapacityExceeded.Format());
+
+            var buffer = CodeBuffer.Edit;
+            for(var i=0; i<size; i++)
+                seek(buffer,i) = skip(src,i);
+            CodeSize = size;
+            return true;
+        }
+
         [CmdOp(".exec")]
         unsafe Outcome Exec(CmdArgs args)
         {
@@ -30,7 +61,7 @@ namespace Z0.Asm
         }
 
 
-       [CmdOp(".slots")]
+        [CmdOp(".slots")]
         unsafe Outcome Slots(CmdArgs args)
         {
             var result = Outcome.Success;

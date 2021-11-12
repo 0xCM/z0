@@ -17,17 +17,16 @@ namespace Z0.Machines.X86
 
     public class TestMachine : AppCmdService<TestMachine,CmdShellState>
     {
-        //EngineSettings Settings;
-
         IPolyrand Random;
 
         EventQueue Queue;
 
-        RegMachine RM;
+        X86Machine RM;
+
+        EventSignal Signal;
 
         public TestMachine()
         {
-            RM = Control.intel64();
         }
 
         void EventRaised(IWfEvent e)
@@ -37,23 +36,34 @@ namespace Z0.Machines.X86
 
         protected override void Initialized()
         {
-            //var config = new EngineSettings();
-            //config.Affinity = BitMasks.lo<ulong>((byte)(Env.CpuCount - 1));
-            //Settings = config;
-            Queue = EventQueue.allocate(GetType(), EventRaised);
             Random = Rng.@default();
+            Queue = EventQueue.allocate(typeof(TestMachine), EventRaised);
+            Signal = EventSignals.signal(Queue, GetType());
         }
 
         protected override void Disposing()
         {
             EmptyQueue();
             Queue.Dispose();
+            if(RM != null)
+                RM.Dispose();
         }
 
         void EmptyQueue()
         {
             while(Queue.Emit(out var e))
                 Wf.Raise(e);
+        }
+
+        [CmdOp(".x86")]
+        Outcome RunX86Machine(CmdArgs args)
+        {
+            if(RM == null)
+            {
+                RM = X86Control.intel64(Signal);
+                RM.Run();
+            }
+            return true;
         }
 
         [CmdOp(".regdump")]
@@ -63,7 +73,7 @@ namespace Z0.Machines.X86
 
             var machine = RM;
             var buffer = text.buffer();
-            Control.state(machine,buffer);
+            X86Control.state(machine,buffer);
             Write(buffer.Emit());
 
             return result;
@@ -74,7 +84,7 @@ namespace Z0.Machines.X86
         {
             var result = Outcome.Success;
             var grid = default(RegGrid8x64);
-            var regs = Control.regs(n8,w64);
+            var regs = X86Control.regs(n8,w64);
             var names = recover<AsmRegName>(ByteBlock64.Empty.Bytes);
             var pairs = recover<AsmRegValue<ulong>>(ByteBlock128.Empty.Bytes);
 
@@ -174,6 +184,7 @@ namespace Z0.Machines.X86
             }
             return result;
         }
+
 
         [CmdOp(".test-mm")]
         Outcome TestMatchMachine(CmdArgs args)

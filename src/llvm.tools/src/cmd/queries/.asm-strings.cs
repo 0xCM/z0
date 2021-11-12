@@ -2,18 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.llvm
 {
-    using static core;
-
-    partial class AsmCmdService
+    partial class LlvmCmd
     {
-        [CmdOp(".global-env")]
-        Outcome ShowEnvVars(CmdArgs args)
+
+        [CmdOp(".asm-strings")]
+        Outcome AsmStrings(CmdArgs args)
         {
-            var vars = Z0.Env.vars();
-            iter(vars, v => Write(v));
+
+
             return true;
         }
+
     }
 }

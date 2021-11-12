@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.llvm
 {
-    using static core;
-
-    using llvm;
     using llvm.records;
 
-    partial class AsmCmdService
+    using static core;
+    using static LlvmNames.Tools;
+
+    partial class LlvmCmd
     {
         [CmdOp(".syms")]
         Outcome Syms(CmdArgs args)

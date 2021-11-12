@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines.X86
+namespace Z0.Machines
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,7 +10,7 @@ namespace Z0.Machines.X86
     using static Root;
     using static Asm.AsmOperands;
 
-    partial class RegMachine
+    partial class X86Machine
     {
         [MethodImpl(Inline), Op]
         public void mov(r8 a, r8 b)

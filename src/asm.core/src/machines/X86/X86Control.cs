@@ -2,19 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines.X86
+namespace Z0.Machines
 {
     using static core;
 
-    public readonly struct Control
+    using X86;
+
+    public readonly struct X86Control
     {
         public static RegStore8x64 regs(N8 n, W64 w)
             => default;
 
-        public static RegMachine intel64(EventSignal signal)
-            => new RegMachine(signal);
+        public static X86Machine intel64(EventSignal signal)
+            => new X86Machine(signal);
 
-        public static void state(RegMachine src, ITextBuffer dst)
+        public static void state(X86Machine src, ITextBuffer dst)
         {
             var allocations = src.Bank.Allocations;
             var count = allocations.Length;
