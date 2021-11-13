@@ -50,12 +50,12 @@ namespace Z0
             try
             {
                 action();
-                var outcome =  ApiEval.result(context.Sequence, (f,g), clock, true );
+                var outcome =  TimedEval.result(context.Sequence, (f,g), clock, true );
                 return (outcome, context);
             }
             catch(Exception e)
             {
-                var outcome = ApiEval.result(context.Sequence, (f,g), clock, e);
+                var outcome = TimedEval.result(context.Sequence, (f,g), clock, e);
                 return (outcome, context);
             }
         }

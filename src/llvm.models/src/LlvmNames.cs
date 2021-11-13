@@ -74,7 +74,11 @@ namespace Z0.llvm
         [LiteralProvider("llvm.tools")]
         public readonly struct Tools
         {
+            public const string clang = "clang";
+
             public const string clang_query = "clang-query";
+
+            public const string llvm_dis = "llvm-dis";
 
             public const string llvm_nm = "llvm-nm";
 
@@ -85,6 +89,8 @@ namespace Z0.llvm
             public const string llvm_objdump ="llvm-objdump";
 
             public const string llvm_readobj = "llvm-readobj";
+
+            public const string llvm_tblgen = "llvm-tblgen";
         }
 
         [LiteralProvider("llvm.repo")]
@@ -92,7 +98,6 @@ namespace Z0.llvm
         {
             public const string build = nameof(build);
         }
-
 
         [LiteralProvider("llvm.queries")]
         public readonly struct Queries
@@ -122,8 +127,6 @@ namespace Z0.llvm
             public const string def_fields = def + sep + fields;
 
             public const string def_names = def + sep + names;
-
         }
-
     }
 }

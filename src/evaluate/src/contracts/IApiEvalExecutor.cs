@@ -8,6 +8,6 @@ namespace Z0
 
     public interface IApiEvalExecutor
     {
-        ApiEvalResult ExecAction(Action action, OpUri f, OpUri g);
+        TimedEval ExecAction(Action action, OpUri f, OpUri g);
     }
 }

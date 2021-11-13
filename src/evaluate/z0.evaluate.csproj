@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(AsmLang)" />
-    <ProjectReference Include="$(DynamicLinq)" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,23 +14,23 @@ namespace Z0
     /// </summary>
     public readonly struct ApiEvalResult<T>
     {
-        public ApiEvalResult Outcome {get;}
+        public TimedEval Outcome {get;}
 
         public T Transition {get;}
 
         [MethodImpl(Inline)]
-        public ApiEvalResult(ApiEvalResult outcome, T transition)
+        public ApiEvalResult(TimedEval outcome, T transition)
         {
             Transition = transition;
             Outcome = outcome;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiEvalResult(ApiEvalResult<T> src)
+        public static implicit operator TimedEval(ApiEvalResult<T> src)
             => src.Outcome;
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiEvalResult<T>((ApiEvalResult outcome, T transition) src)
+        public static implicit operator ApiEvalResult<T>((TimedEval outcome, T transition) src)
             => new ApiEvalResult<T>(src.outcome, src.transition);
     }
 }

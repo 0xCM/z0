@@ -30,7 +30,7 @@ namespace Z0
             Context = new ApiEvalExecutorContext(source, 128, 0);
         }
 
-        public ApiEvalResult MatchBinaryOps(in NativeBuffers buffers, CpuCellWidth w, in ConstPair<ApiMemberCode> paired)
+        public TimedEval MatchBinaryOps(in NativeBuffers buffers, CpuCellWidth w, in ConstPair<ApiMemberCode> paired)
         {
             var clock = Time.counter();
             try
@@ -56,51 +56,51 @@ namespace Z0
                         return MatchBinaryOps(buffers, n256, paired);
 
                     default:
-                        return ApiEval.result(seq, (paired.Left.Uri, paired.Right.Uri), clock, AppMsg.error($"Handler not found"));
+                        return TimedEval.result(seq, (paired.Left.Uri, paired.Right.Uri), clock, AppMsg.error($"Handler not found"));
                 }
             }
             catch(Exception error)
             {
-                return ApiEval.result(seq, (paired.Left.Uri, paired.Right.Uri), clock, error);
+                return TimedEval.result(seq, (paired.Left.Uri, paired.Right.Uri), clock, error);
             }
         }
 
-        ApiEvalResult MatchBinaryOps(in NativeBuffers buffers, N8 w, in ConstPair<ApiMemberCode> pair)
+        TimedEval MatchBinaryOps(in NativeBuffers buffers, N8 w, in ConstPair<ApiMemberCode> pair)
         {
             var f = buffers[Left].EmitBinaryCellOp(w, pair.Left.Encoded);
             var g = buffers[Right].EmitBinaryCellOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);
         }
 
-        ApiEvalResult MatchBinaryOps(in NativeBuffers buffers, N16 w, in ConstPair<ApiMemberCode> pair)
+        TimedEval MatchBinaryOps(in NativeBuffers buffers, N16 w, in ConstPair<ApiMemberCode> pair)
         {
             var f = buffers[Left].EmitBinaryCellOp(w, pair.Left.Encoded);
             var g = buffers[Right].EmitBinaryCellOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);
         }
 
-        ApiEvalResult MatchBinaryOps(in NativeBuffers buffers, N32 w, in ConstPair<ApiMemberCode> pair)
+        TimedEval MatchBinaryOps(in NativeBuffers buffers, N32 w, in ConstPair<ApiMemberCode> pair)
         {
             var f = buffers[Left].EmitBinaryCellOp(w, pair.Left.Encoded);
             var g = buffers[Right].EmitBinaryCellOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);
         }
 
-        ApiEvalResult MatchBinaryOps(in NativeBuffers buffers, N64 w, in ConstPair<ApiMemberCode> pair)
+        TimedEval MatchBinaryOps(in NativeBuffers buffers, N64 w, in ConstPair<ApiMemberCode> pair)
         {
             var f = buffers[Left].EmitBinaryCellOp(w, pair.Left.Encoded);
             var g = buffers[Right].EmitBinaryCellOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);
         }
 
-        ApiEvalResult MatchBinaryOps(in NativeBuffers buffers, N128 w, in ConstPair<ApiMemberCode> pair)
+        TimedEval MatchBinaryOps(in NativeBuffers buffers, N128 w, in ConstPair<ApiMemberCode> pair)
         {
             var f = buffers[Left].EmitBinaryCellOp(w, pair.Left.Encoded);
             var g = buffers[Right].EmitBinaryCellOp(w, pair.Right.Encoded);
             return CheckMatch(f, pair.Left.Uri, g, pair.Right.Uri);
         }
 
-        ApiEvalResult MatchBinaryOps(in NativeBuffers buffers, N256 w, in ConstPair<ApiMemberCode> pair)
+        TimedEval MatchBinaryOps(in NativeBuffers buffers, N256 w, in ConstPair<ApiMemberCode> pair)
         {
             var f = buffers[Left].EmitBinaryCellOp(w, pair.Left.Encoded);
             var g = buffers[Right].EmitBinaryCellOp(w, pair.Right.Encoded);
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        public ApiEvalResult CheckMatch(BinaryOp8 f, OpUri fUri, BinaryOp8 g, OpUri gUri)
+        public TimedEval CheckMatch(BinaryOp8 f, OpUri fUri, BinaryOp8 g, OpUri gUri)
             => ApiEvaluate.validate(Context, f, fUri, g, gUri);
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        public ApiEvalResult CheckMatch(BinaryOp16 f, OpUri fUri, BinaryOp16 g, OpUri gUri)
+        public TimedEval CheckMatch(BinaryOp16 f, OpUri fUri, BinaryOp16 g, OpUri gUri)
         {
             var w = n16;
             void check()
@@ -147,7 +147,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        public ApiEvalResult CheckMatch(BinaryOp32 f, OpUri fUri, BinaryOp32 g, OpUri gUri)
+        public TimedEval CheckMatch(BinaryOp32 f, OpUri fUri, BinaryOp32 g, OpUri gUri)
         {
             var w = n32;
             void check()
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        public ApiEvalResult CheckMatch(BinaryOp64 f, OpUri fUri, BinaryOp64 g, OpUri gUri)
+        public TimedEval CheckMatch(BinaryOp64 f, OpUri fUri, BinaryOp64 g, OpUri gUri)
         {
             var w = n64;
             void check()
@@ -193,7 +193,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        public ApiEvalResult CheckMatch(BinaryOp128 f, OpUri fUri, BinaryOp128 g, OpUri gUri)
+        public TimedEval CheckMatch(BinaryOp128 f, OpUri fUri, BinaryOp128 g, OpUri gUri)
         {
             var w = n128;
             void check()
@@ -216,7 +216,7 @@ namespace Z0
         /// <param name="fId">The identity of the first operator</param>
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
-        public ApiEvalResult CheckMatch(BinaryOp256 f, OpUri fUri, BinaryOp256 g, OpUri gUri)
+        public TimedEval CheckMatch(BinaryOp256 f, OpUri fUri, BinaryOp256 g, OpUri gUri)
         {
             var w = n256;
 
@@ -233,18 +233,18 @@ namespace Z0
             return ExecAction(check, fUri, gUri);
         }
 
-        public ApiEvalResult ExecAction(Action action, OpUri f, OpUri g)
+        public TimedEval ExecAction(Action action, OpUri f, OpUri g)
         {
 
             var clock = Time.counter(true);
             try
             {
                 action();
-                return ApiEval.result(seq, (f,g), clock, true );
+                return TimedEval.result(seq, (f,g), clock, true );
             }
             catch(Exception e)
             {
-                return ApiEval.result(seq, (f,g), clock, e);
+                return TimedEval.result(seq, (f,g), clock, e);
             }
         }
 
