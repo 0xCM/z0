@@ -4,12 +4,6 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
-
-  <ItemGroup>
-    <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Capture)" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
   </ItemGroup>

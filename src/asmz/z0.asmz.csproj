@@ -9,12 +9,12 @@
   <ItemGroup>
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(AsmCases)" />
-    <ProjectReference Include="$(Validity)" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="z0.lib" Version="$(ZLibVersion)" />
     <PackageReference Include="z0.tools" Version="$(ZLibVersion)" />
+    <PackageReference Include="z0.validity" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>

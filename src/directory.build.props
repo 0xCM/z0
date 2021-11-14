@@ -3,6 +3,6 @@
 
   <PropertyGroup>
     <Version>0.0.59</Version>
-    <ZLibVersion>0.0.24</ZLibVersion>
+    <ZLibVersion>0.0.27</ZLibVersion>
   </PropertyGroup>
 </Project>

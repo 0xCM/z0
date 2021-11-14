@@ -49,13 +49,6 @@ namespace Z0.Vdsl
 
         }
 
-        unsafe Outcome Test(CmdArgs args)
-        {
-            var result = Outcome.Success;
-            Write(types.cell(13,16, PrimalKind.UnsignedInt));
-            Write(types.ucell(13));
-            return CellTypeParser.Service.Validate();
-        }
 
         void Run(string spec)
         {

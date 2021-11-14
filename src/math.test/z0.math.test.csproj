@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(CpuDsl)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z0.validity" Version="$(ZLibVersion)" />
   </ItemGroup>
 
 </Project>
