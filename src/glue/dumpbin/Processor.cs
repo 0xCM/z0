@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Text;
@@ -13,7 +13,9 @@ namespace Z0.Asm
     using SQ = SymbolicQuery;
     using C = AsciCode;
 
-    partial struct AsmProcessors
+    using Asm;
+
+    partial class DumpBin
     {
         public class DumpBinProcessor : AppService<DumpBinProcessor>
         {
@@ -32,6 +34,8 @@ namespace Z0.Asm
 
             Span<char> StatementBuffer()
                 => _LineBuffer.Clear().Edit;
+
+            public static MsgPattern<C> MarkerCodeNotFound => "Markier '{0}' not found";
 
             Outcome ProcessLine(ref AsciLine src, out AsmDisassembly dst)
             {
@@ -94,7 +98,7 @@ namespace Z0.Asm
                             break;
                         }
                         buffer.Clear();
-                        writer.WriteLine(AsmRender.format(content,buffer));
+                        writer.WriteLine(AsmDisassembly.format(content,buffer));
                         pos++;
                         length = 0;
                         counter = pos;

@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(CaptureChecks)" />
+    <ProjectReference Include="$(Capture)" />
   </ItemGroup>
 
   <ItemGroup>

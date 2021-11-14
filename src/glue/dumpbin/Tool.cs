@@ -16,6 +16,9 @@ namespace Z0
         public Identifier ScriptId(CmdId cmd, FS.FileExt ext)
             => string.Format("{0}.{1}.{2}", Id, ext.Name, CmdSymbols[cmd].Expr);
 
+        public DumpBinProcessor AsmProcessor()
+            => DumpBinProcessor.create(Wf);
+
         public Index<FS.FilePath> EmitScripts(FS.FolderPath src, FS.FolderPath dst)
         {
             var paths = list<FS.FilePath>();

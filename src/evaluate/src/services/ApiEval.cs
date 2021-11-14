@@ -9,8 +9,6 @@ namespace Z0
 
     using static Root;
 
-    using R = TimedEval;
-
     [ApiHost]
     public readonly struct ApiEval
     {

@@ -15,19 +15,14 @@ namespace Z0.llvm
         Outcome Fields(CmdArgs args)
         {
             var result = Outcome.Success;
-            if(args.Length == 1)
-            {
-                var fields = Db.SelectFields(arg(args,0).Value);
-                iter(fields, f => Write(f.Format()));
-            }
-            else if(args.Length == 2)
+            if(args.Length == 2)
             {
                 DataParser.parse(arg(args,0).Value, out uint offset);
                 DataParser.parse(arg(args,1).Value, out uint length);
                 var fields = Db.Fields(offset,length);
                 iter(fields, f => Write(f.Format()));
             }
-            else
+            else if(args.Length == 0)
             {
                 var entities = list<Entity>();
                 Db.QueryFields(provider => {
@@ -42,12 +37,11 @@ namespace Z0.llvm
                     if(index.TryGetValue(inst.Value.Text, out var i))
                     {
                         Write(string.Format("{0:D5} {1:D5} {2}", counter++, inst.Id, i.EntityName));
+
                     }
                 }
             }
             return result;
         }
-
-
     }
 }

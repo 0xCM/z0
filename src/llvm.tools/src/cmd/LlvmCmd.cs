@@ -22,6 +22,8 @@ namespace Z0.llvm
 
         LlvmRepo LlvmRepo;
 
+        ToolId SelectedTool;
+
         new LlvmDb Db
         {
             get
@@ -36,6 +38,11 @@ namespace Z0.llvm
 
         IProjectWs Data;
 
+        public LlvmCmd()
+        {
+            SelectedTool = ToolId.Empty;
+        }
+
         protected override void Initialized()
         {
             LlvmPaths = Wf.LlvmPaths();
@@ -46,6 +53,7 @@ namespace Z0.llvm
             Data = Ws.Project(Projects.LlvmData);
             State.Init(Wf, Ws);
             State.Project(Data);
+
         }
 
         Outcome ObjDump(FS.FilePath src, FS.FolderPath dst)
@@ -89,7 +97,6 @@ namespace Z0.llvm
             iteri(src, (i,item) => Write(string.Format("{0:D5} {1}", i, item)));
             return true;
         }
-
 
         Outcome Flow<T>(Span<T> src)
         {

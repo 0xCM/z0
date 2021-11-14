@@ -12,13 +12,9 @@
     <Capture>$(Src)capture/z0.capture.csproj</Capture>
     <CaptureChecks>$(Src)capture.checks/z0.capture.checks.csproj</CaptureChecks>
     <CpuDsl>$(Src)cpu.dsl/z0.cpu.dsl.csproj</CpuDsl>
-    <Checks>$(Src)checks/z0.checks.csproj</Checks>
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
 
-    <DynamicLinq>$(Src)dynamic.linq/z0.dynamic.linq.csproj</DynamicLinq>
-
     <Evaluate>$(Src)evaluate/z0.evaluate.csproj</Evaluate>
-    <Events>$(Src)events/z0.events.csproj</Events>
     <External>$(Src)external/z0.external.csproj</External>
     <Extract>$(Src)extract/z0.extract.csproj</Extract>
 
@@ -34,7 +30,6 @@
 
     <ResPack>$(Src)respack/z0.respack.csproj</ResPack>
     <Res>$(Src)res/z0.res.csproj</Res>
-
 
     <Validity>$(Src)validity/z0.validity.csproj</Validity>
 

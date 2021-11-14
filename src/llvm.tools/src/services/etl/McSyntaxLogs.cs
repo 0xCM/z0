@@ -8,6 +8,7 @@ namespace Z0.llvm
     using System.Collections.Generic;
 
     using Asm;
+    using records;
 
     using static core;
 

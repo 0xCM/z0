@@ -10,22 +10,6 @@ namespace Z0
     using static Root;
     using static core;
 
-    public struct GraphSymbols
-    {
-        /// <summary>
-        /// The symbol used to depict an edge between two nodes
-        /// </summary>
-        public text15 Connector;
-
-        [MethodImpl(Inline)]
-        public GraphSymbols(text15 connector)
-        {
-            Connector = connector;
-        }
-
-        public static GraphSymbols Default => new GraphSymbols(" -> ");
-    }
-
     public class GraphTests : AppService<GraphTests>
     {
         public void Run()
@@ -33,10 +17,9 @@ namespace Z0
             var labels = Letters;
             var g = cycle(0u, (uint)labels.Length - 1).Seal();
             var dst = text.buffer();
-            var symbols = GraphSymbols.Default;
             render(g, dst);
             Write(dst.Emit());
-            render(g, symbols, labels, dst);
+            render(g, " -> ", labels, dst);
             Write(dst.Emit());
         }
 
@@ -55,19 +38,17 @@ namespace Z0
         public static void render(Digraph src, ITextBuffer dst)
         {
             var counter = 0u;
-            var symbols = GraphSymbols.Default;
-            var connector = symbols.Connector;
+            var connector = " -> ";
             dst.AppendLine("digraph G {");
             src.Walk(e => dst.AppendLineFormat("  \"{0}\"{1}\"{2}\"", e.Source.Key, connector, e.Target.Key));
             dst.AppendLine("}");
         }
 
-        public static void render(Digraph src, GraphSymbols symbols, ReadOnlySpan<Label> labels, ITextBuffer dst)
+        public static void render(Digraph src, string connector, ReadOnlySpan<Label> labels, ITextBuffer dst)
         {
             var count = src.EdgeCount;
             var edges = src.Edges;
             dst.AppendLine("digraph G {");
-            var connector = symbols.Connector.Format();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var edge = ref skip(edges,i);

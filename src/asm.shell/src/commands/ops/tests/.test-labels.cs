@@ -118,9 +118,7 @@ namespace Z0.Asm
             }
 
             return result;
-
         }
-
 
         [CmdOp(".test-labels")]
         Outcome TestLabels(CmdArgs args)

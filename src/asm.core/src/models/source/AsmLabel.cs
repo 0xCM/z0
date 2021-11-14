@@ -26,7 +26,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => AsmRender.format(this);
+            => string.Format("{0}:", Name);
 
         public override string ToString()
             => Format();

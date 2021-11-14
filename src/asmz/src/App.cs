@@ -360,9 +360,9 @@ namespace Z0.Asm
         {
             var src = FS.path(@"C:\Data\zdb\tools\dumpbin\output\xxhsum.exe.disasm.asm");
             var dir = Db.AppLogRoot();
-            var parser = Wf.DumpBinProcesor();
+            var processor = Wf.DumpBin().AsmProcessor();
             var dst = dir + FS.file("xxhsum", FS.Asm);
-            parser.ParseDisassembly(src,dst);
+            processor.ParseDisassembly(src,dst);
         }
 
 

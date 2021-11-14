@@ -8,8 +8,6 @@ namespace Z0
 
     using Svc = Z0.Asm;
 
-    using P = Z0.Asm.AsmProcessors;
-
     [ApiHost]
     public static class XSvc
     {
@@ -36,17 +34,5 @@ namespace Z0
         [Op]
         public static Svc.AsmModelGen AsmModelGen(this IWfRuntime wf)
             => Svc.AsmModelGen.create(wf);
-
-        [Op]
-        public static BdDisasmProcessor DbDiasmProcessor(this IWfRuntime wf)
-            => Svc.BdDisasmProcessor.create(wf);
-
-        [Op]
-        public static P.DumpBinProcessor DumpBinProcesor(this IWfRuntime wf)
-            => P.DumpBinProcessor.create(wf);
-
-        [Op]
-        public static AsmToolchain AsmToolchain(this IWfRuntime context)
-            => Svc.AsmToolchain.create(context);
     }
 }

@@ -14,6 +14,9 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmBlockLabel
     {
+        public static string format(AsmBlockLabel src)
+            => src.Name.IsEmpty ? EmptyString : string.Format("{0}:", src.Name);
+
         public Identifier Name {get;}
 
         [MethodImpl(Inline)]
@@ -39,7 +42,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => AsmRender.format(this);
+            => format(this);
 
         public override string ToString()
             => Format();

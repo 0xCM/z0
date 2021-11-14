@@ -8,12 +8,40 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Root;
+    using static AsmRenderPatterns;
 
     /// <summary>
     /// Represents an line offset label
     /// </summary>
     public readonly struct AsmOffsetLabel
     {
+        [Op]
+        public static string format(AsmOffsetLabel src)
+        {
+            const string LabelPattern = "{0}h ";
+            var width = src.OffsetWidth;
+            var value = src.OffsetValue;
+            var f = EmptyString;
+            if(width <= 16)
+                f = HexFormatter.format(w16,(ushort)value);
+            else if(width <= 32)
+                f = HexFormatter.format(w32,(uint)value);
+            else
+                f = HexFormatter.format(w64,(ulong)value);
+
+            return string.Format(LabelPattern, f);
+        }
+
+        [Op]
+        public static string format(in AsmOffsetLabel label, in AsmFormInfo src, byte[] encoded)
+            => string.Format(InstInfoPattern,
+                label,
+                encoded.Length,
+                encoded.FormatHex(),
+                src.Sig,
+                src.OpCode
+                );
+
         const ulong OffsetMask = 0xFF_FF_FF_FF_FF_FF_FF;
 
         const byte Cut = 56;
@@ -42,7 +70,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => AsmRender.format(this);
+            => format(this);
 
         public override string ToString()
             => Format();

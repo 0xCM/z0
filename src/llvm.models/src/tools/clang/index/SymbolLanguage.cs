@@ -10,8 +10,11 @@ namespace Z0.llvm.clang.index
     public enum SymbolLanguage : byte
     {
         C,
+
         ObjC,
+
         CXX,
+
         Swift,
     }
 }

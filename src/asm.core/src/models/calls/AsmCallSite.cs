@@ -24,5 +24,12 @@ namespace Z0.Asm
             LocalOffset = offset;
             InstructionSize = size;
         }
+
+        public string Format()
+            => string.Format("{0}:{1}", Caller, LocalOffset);
+
+        public override string ToString()
+            => Format();
+
     }
 }
